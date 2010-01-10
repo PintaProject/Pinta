@@ -67,8 +67,10 @@ namespace Pinta.Core
 
 		private BaseTool FindTool (string name)
 		{
+			name = name.ToLowerInvariant ();
+			
 			foreach (BaseTool tool in Tools) {
-				if (tool.Name == name) {
+				if (tool.Name.ToLowerInvariant () == name) {
 					return tool;
 				}
 			}
@@ -105,6 +107,14 @@ namespace Pinta.Core
 			tool.ToolItem.Active = true;
 			
 			PintaCore.Chrome.SetStatusBarText (string.Format (" {0}: {1}", tool.Name, tool.StatusBarText));
+		}
+
+		public void SetCurrentTool (string tool)
+		{
+			BaseTool t = FindTool (tool);
+			
+			if (t != null)
+				SetCurrentTool (t);
 		}
 		
 		#region IEnumerable<BaseTool> implementation

@@ -67,7 +67,7 @@ namespace Pinta.Core
 			Inches = new Gtk.Action ("Inches", Mono.Unix.Catalog.GetString ("Inches"), null, null);
 			Centimeters = new Gtk.Action ("Centimeters", Mono.Unix.Catalog.GetString ("Centimeters"), null, null);
 	
-			ZoomComboBox = new ToolBarComboBox (75, 11, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
+			ZoomComboBox = new ToolBarComboBox (75, 11, false, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
 
 			ZoomToWindow.Sensitive = false;
 			ZoomToSelection.Sensitive = false;

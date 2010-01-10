@@ -31,11 +31,15 @@ namespace Pinta.Core
 {
 	public class ToolBarComboBox : ToolItem
 	{
-		public ComboBoxEntry ComboBox { get; private set; }
+		public ComboBox ComboBox { get; private set; }
 		
-		public ToolBarComboBox (int width, int activeIndex, params string[] contents)
+		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
-			ComboBox = new ComboBoxEntry (contents);
+			if (allowEntry)
+				ComboBox = new ComboBoxEntry (contents);
+			else
+				ComboBox = new ComboBox (contents);
+			
 			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
 			
