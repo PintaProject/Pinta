@@ -1,0 +1,82 @@
+// 
+// SelectTool.cs
+//  
+// Author:
+//       Jonathan Pobst <monkey@jpobst.com>
+// 
+// Copyright (c) 2010 Jonathan Pobst
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+using System;
+using Cairo;
+using Pinta.Core;
+
+namespace Pinta
+{
+	public abstract class SelectTool : ShapeTool
+	{
+		#region ToolBar
+		// We don't want the ShapeTool's toolbar
+		protected override void BuildToolBar (Gtk.Toolbar tb)
+		{
+		}
+		#endregion
+		
+		#region Mouse Handlers
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		{
+			shape_origin = point;
+			is_drawing = true;
+		}
+
+		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		{
+			double x = point.X;
+			double y = point.Y;
+
+			// If the user didn't move the mouse, they want to deselect
+			int tolerance = 2;
+
+			if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance)
+				PintaCore.Actions.Edit.Deselect.Activate ();
+
+			is_drawing = false;
+		}
+		
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		{
+			if (!is_drawing)
+				return;
+
+			double x = point.X;
+			double y = point.Y;
+
+			PintaCore.Layers.ShowSelection = true;
+
+			Rectangle dirty = DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.SelectionLayer);
+
+			PintaCore.Workspace.InvalidateRect (last_dirty.ToGdkRectangle (), false);
+			PintaCore.Workspace.InvalidateRect (dirty.ToGdkRectangle (), false);
+
+			last_dirty = dirty;
+		}
+		#endregion
+	}
+}

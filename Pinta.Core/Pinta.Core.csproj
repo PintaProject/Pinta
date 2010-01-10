@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Pinta.Core</RootNamespace>
+    <AssemblyName>Pinta.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Cairo" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Managers\ChromeManager.cs" />
+    <Compile Include="Managers\LayerManager.cs" />
+    <Compile Include="Managers\PaletteManager.cs" />
+    <Compile Include="Managers\ToolManager.cs" />
+    <Compile Include="PintaCore.cs" />
+    <Compile Include="Extensions\CairoExtensions.cs" />
+    <Compile Include="Extensions\GdkExtensions.cs" />
+    <Compile Include="Extensions\GtkExtensions.cs" />
+    <Compile Include="Classes\Layer.cs" />
+    <Compile Include="Classes\BaseTool.cs" />
+    <Compile Include="Extensions\ToolBarButton.cs" />
+    <Compile Include="Extensions\ToolBarComboBox.cs" />
+    <Compile Include="Extensions\ToolBarImage.cs" />
+    <Compile Include="Extensions\ToolBarLabel.cs" />
+    <Compile Include="Managers\ActionManager.cs" />
+    <Compile Include="Actions\LayerActions.cs" />
+    <Compile Include="Actions\FileActions.cs" />
+    <Compile Include="Actions\EditActions.cs" />
+    <Compile Include="Actions\ViewActions.cs" />
+    <Compile Include="Actions\ImageActions.cs" />
+    <Compile Include="Actions\AdjustmentsActions.cs" />
+    <Compile Include="Actions\HelpActions.cs" />
+    <Compile Include="Managers\ViewportManager.cs" />
+    <Compile Include="Effects\ColorBgra.cs" />
+    <Compile Include="Effects\UnaryPixelOps.cs" />
+    <Compile Include="Effects\UnaryPixelOp.cs" />
+    <Compile Include="Effects\PixelOp.cs" />
+    <Compile Include="Effects\Utility.cs" />
+    <Compile Include="Effects\HsvColor.cs" />
+    <Compile Include="Effects\RgbColor.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
+      <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
+      <Name>Pinta.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Pinta.Resources</RootNamespace>
+    <AssemblyName>Pinta.Resources</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ResourceManager.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Tools.CloneStamp.png">
+      <LogicalName>Tools.CloneStamp.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.FreeformShape.png">
+      <LogicalName>Tools.FreeformShape.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Line.png">
+      <LogicalName>Tools.Line.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Rectangle.png">
+      <LogicalName>Tools.Rectangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.RoundedRectangle.png">
+      <LogicalName>Tools.RoundedRectangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Text.png">
+      <LogicalName>Tools.Text.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.LassoSelect.png">
+      <LogicalName>Tools.LassoSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.MagicWand.png">
+      <LogicalName>Tools.MagicWand.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.MoveSelection.png">
+      <LogicalName>Tools.MoveSelection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Move.png">
+      <LogicalName>Tools.Move.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.PaintBucket.png">
+      <LogicalName>Tools.PaintBucket.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Pan.png">
+      <LogicalName>Tools.Pan.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Pencil.png">
+      <LogicalName>Tools.Pencil.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Recolor.png">
+      <LogicalName>Tools.Recolor.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.RectangleSelect.png">
+      <LogicalName>Tools.RectangleSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Zoom.png">
+      <LogicalName>Tools.Zoom.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.EllipseSelect.png">
+      <LogicalName>Tools.EllipseSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Eraser.png">
+      <LogicalName>Tools.Eraser.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Gradient.png">
+      <LogicalName>Tools.Gradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.ColorPicker.png">
+      <LogicalName>Tools.ColorPicker.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Ellipse.png">
+      <LogicalName>Tools.Ellipse.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LayersWidget.Visible.png">
+      <LogicalName>LayersWidget.Visible.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LayersWidget.Hidden.png">
+      <LogicalName>LayersWidget.Hidden.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.MinusButton.png">
+      <LogicalName>Toolbar.MinusButton.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.PlusButton.png">
+      <LogicalName>Toolbar.PlusButton.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ColorPalette.SwapIcon.png">
+      <LogicalName>ColorPalette.SwapIcon.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.Paintbrush.png">
+      <LogicalName>Tools.Paintbrush.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StatusBar.CursorXY.png">
+      <LogicalName>StatusBar.CursorXY.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.AddNewLayer.png">
+      <LogicalName>Menu.Layers.AddNewLayer.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.DeleteLayer.png">
+      <LogicalName>Menu.Layers.DeleteLayer.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.DuplicateLayer.png">
+      <LogicalName>Menu.Layers.DuplicateLayer.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.MergeLayerDown.png">
+      <LogicalName>Menu.Layers.MergeLayerDown.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.MoveLayerDown.png">
+      <LogicalName>Menu.Layers.MoveLayerDown.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.MoveLayerUp.png">
+      <LogicalName>Menu.Layers.MoveLayerUp.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta.png">
+      <DeployService-UseProjectRelativePath>true</DeployService-UseProjectRelativePath>
+      <LogicalName>Pinta.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Edit.Deselect.png">
+      <LogicalName>Menu.Edit.Deselect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.FlipHorizontal.png">
+      <LogicalName>Menu.Layers.FlipHorizontal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.FlipVertical.png">
+      <LogicalName>Menu.Layers.FlipVertical.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.ImportFromFile.png">
+      <LogicalName>Menu.Layers.ImportFromFile.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Edit.EraseSelection.png">
+      <LogicalName>Menu.Edit.EraseSelection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Edit.FillSelection.png">
+      <LogicalName>Menu.Edit.FillSelection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Edit.InvertSelection.png">
+      <LogicalName>Menu.Edit.InvertSelection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Edit.SelectAll.png">
+      <LogicalName>Menu.Edit.SelectAll.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.ActualSize.png">
+      <LogicalName>Menu.View.ActualSize.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.Grid.png">
+      <LogicalName>Menu.View.Grid.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.Rulers.png">
+      <LogicalName>Menu.View.Rulers.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.ZoomIn.png">
+      <LogicalName>Menu.View.ZoomIn.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.ZoomOut.png">
+      <LogicalName>Menu.View.ZoomOut.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.ZoomToSelection.png">
+      <LogicalName>Menu.View.ZoomToSelection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.View.ZoomToWindow.png">
+      <LogicalName>Menu.View.ZoomToWindow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.CanvasSize.png">
+      <LogicalName>Menu.Image.CanvasSize.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.Crop.png">
+      <LogicalName>Menu.Image.Crop.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.Flatten.png">
+      <LogicalName>Menu.Image.Flatten.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.FlipHorizontal.png">
+      <LogicalName>Menu.Image.FlipHorizontal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.FlipVertical.png">
+      <LogicalName>Menu.Image.FlipVertical.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.Resize.png">
+      <LogicalName>Menu.Image.Resize.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.Rotate180CW.png">
+      <LogicalName>Menu.Image.Rotate180CW.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.Rotate90CCW.png">
+      <LogicalName>Menu.Image.Rotate90CCW.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Image.Rotate90CW.png">
+      <LogicalName>Menu.Image.Rotate90CW.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.LayerProperties.png">
+      <LogicalName>Menu.Layers.LayerProperties.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Layers.RotateZoom.png">
+      <LogicalName>Menu.Layers.RotateZoom.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
+      <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.BlackAndWhite.png">
+      <LogicalName>Menu.Adjustments.BlackAndWhite.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.BrightnessAndContrast.png">
+      <LogicalName>Menu.Adjustments.BrightnessAndContrast.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.Curves.png">
+      <LogicalName>Menu.Adjustments.Curves.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.HueAndSaturation.png">
+      <LogicalName>Menu.Adjustments.HueAndSaturation.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.InvertColors.png">
+      <LogicalName>Menu.Adjustments.InvertColors.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.Levels.png">
+      <LogicalName>Menu.Adjustments.Levels.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.Sepia.png">
+      <LogicalName>Menu.Adjustments.Sepia.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Help.Bug.png">
+      <LogicalName>Menu.Help.Bug.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Help.Website.png">
+      <LogicalName>Menu.Help.Website.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

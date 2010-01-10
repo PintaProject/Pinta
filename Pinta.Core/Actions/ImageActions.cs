@@ -1,0 +1,134 @@
+// 
+// ImageActions.cs
+//  
+// Author:
+//       Jonathan Pobst <monkey@jpobst.com>
+// 
+// Copyright (c) 2010 Jonathan Pobst
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+using System;
+
+namespace Pinta.Core
+{
+	public class ImageActions
+	{
+		public Gtk.Action CropToSelection { get; private set; }
+		public Gtk.Action Resize { get; private set; }
+		public Gtk.Action CanvasSize { get; private set; }
+		public Gtk.Action FlipHorizontal { get; private set; }
+		public Gtk.Action FlipVertical { get; private set; }
+		public Gtk.Action RotateCW { get; private set; }
+		public Gtk.Action RotateCCW { get; private set; }
+		public Gtk.Action Rotate180 { get; private set; }
+		public Gtk.Action Flatten { get; private set; }
+
+		public ImageActions ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Menu.Image.CanvasSize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png")));
+			fact.Add ("Menu.Image.Crop.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Crop.png")));
+			fact.Add ("Menu.Image.Flatten.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Flatten.png")));
+			fact.Add ("Menu.Image.FlipHorizontal.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipHorizontal.png")));
+			fact.Add ("Menu.Image.FlipVertical.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipVertical.png")));
+			fact.Add ("Menu.Image.Resize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Resize.png")));
+			fact.Add ("Menu.Image.Rotate180CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate180CW.png")));
+			fact.Add ("Menu.Image.Rotate90CCW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CCW.png")));
+			fact.Add ("Menu.Image.Rotate90CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CW.png")));
+			fact.AddDefault ();
+			
+			CropToSelection = new Gtk.Action ("CropToSelection", Mono.Unix.Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
+			Resize = new Gtk.Action ("Resize", Mono.Unix.Catalog.GetString ("Resize"), null, "Menu.Image.Resize.png");
+			CanvasSize = new Gtk.Action ("CanvasSize", Mono.Unix.Catalog.GetString ("Canvas Size"), null, "Menu.Image.CanvasSize.png");
+			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Mono.Unix.Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
+			FlipVertical = new Gtk.Action ("FlipVertical", Mono.Unix.Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
+			RotateCW = new Gtk.Action ("RotateCW", Mono.Unix.Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
+			RotateCCW = new Gtk.Action ("RotateCCW", Mono.Unix.Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
+			Rotate180 = new Gtk.Action ("Rotate180", Mono.Unix.Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
+			Flatten = new Gtk.Action ("Flatten", Mono.Unix.Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
+			
+			CropToSelection.Sensitive = false;
+			Resize.Sensitive = false;
+			CanvasSize.Sensitive = false;
+		}
+
+		#region Initialization
+		public void CreateMainMenu (Gtk.Menu menu)
+		{
+			menu.Remove (menu.Children[1]);
+			
+			menu.Append (CropToSelection.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (Resize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask));
+			menu.Append (CanvasSize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.AppendSeparator ();
+			menu.Append (FlipHorizontal.CreateMenuItem ());
+			menu.Append (FlipVertical.CreateMenuItem ());
+			menu.AppendSeparator ();
+			menu.Append (RotateCW.CreateAcceleratedMenuItem (Gdk.Key.H, Gdk.ModifierType.ControlMask));
+			menu.Append (RotateCCW.CreateAcceleratedMenuItem (Gdk.Key.G, Gdk.ModifierType.ControlMask));
+			menu.Append (Rotate180.CreateAcceleratedMenuItem (Gdk.Key.J, Gdk.ModifierType.ControlMask));
+			menu.AppendSeparator ();
+			menu.Append (Flatten.CreateAcceleratedMenuItem (Gdk.Key.F, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+		}
+				
+		public void RegisterHandlers ()
+		{
+			FlipHorizontal.Activated += HandlePintaCoreActionsImageFlipHorizontalActivated;
+			FlipVertical.Activated += HandlePintaCoreActionsImageFlipVerticalActivated;
+			Rotate180.Activated += HandlePintaCoreActionsImageRotate180Activated;
+			Flatten.Activated += HandlePintaCoreActionsImageFlattenActivated;
+			RotateCW.Activated += HandlePintaCoreActionsImageRotateCWActivated;
+			RotateCCW.Activated += HandlePintaCoreActionsImageRotateCCWActivated;
+		}
+		#endregion
+
+		#region Action Handlers
+		private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.RotateImageCCW ();
+		}
+
+		private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.RotateImageCW ();
+		}
+
+		private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FlattenImage ();
+		}
+
+		private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.RotateImage180 ();
+		}
+
+		private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FlipImageVertical ();
+		}
+
+		private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FlipImageHorizontal ();
+		}
+		#endregion
+	}
+}
