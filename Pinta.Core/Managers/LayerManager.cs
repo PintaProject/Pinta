@@ -393,6 +393,20 @@ namespace Pinta.Core
 			
 			ShowSelection = false;
 		}
+
+		public ImageSurface GetFlattenedImage ()
+		{
+			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, (int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y);
+
+			using (Cairo.Context g = new Cairo.Context (surf)) {
+				foreach (var layer in PintaCore.Layers.GetLayersToPaint ()) {
+					g.SetSource (layer.Surface);
+					g.Paint ();
+				}
+			}
+			
+			return surf;
+		}
 		#endregion
 
 		#region Protected Methods

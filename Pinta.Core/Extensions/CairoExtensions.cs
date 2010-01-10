@@ -338,5 +338,20 @@ namespace Pinta.Core
 			
 			return true;
 		}
+		
+		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surf)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+			int len = surf.Data.Length / 4;
+
+			for (int i = 0; i < len; i++) {
+				if (dstPtr->A != 0)
+					*dstPtr = (ColorBgra.FromBgra (dstPtr->R, dstPtr->G, dstPtr->B, dstPtr->A));
+				dstPtr++;
+			}
+
+			Gdk.Pixbuf pb = new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
+			return pb;
+		}
 	}
 }

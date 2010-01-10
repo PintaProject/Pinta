@@ -140,18 +140,17 @@ namespace Pinta.Core
 			if (response == (int)Gtk.ResponseType.Ok) {
 				
 				string file = fcd.Filename;
+
+				Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
 				
-				Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Rgb24, (int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y);
+				Pixbuf pb = surf.ToPixbuf ();
 				
-				using (Cairo.Context g = new Cairo.Context (surf)) {
-					foreach (var layer in PintaCore.Layers.GetLayersToPaint ()) {
-						g.SetSource (layer.Surface);
-						g.Paint ();
-						
-					}
-				}
+				if (System.IO.Path.GetExtension (file) == ".jpeg" || System.IO.Path.GetExtension (file) == ".jpg")
+					pb.Save (file, "jpeg");
+				else
+					pb.Save (file, "png");
 				
-				surf.WriteToPng (file);
+				(pb as IDisposable).Dispose ();
 				(surf as IDisposable).Dispose ();
 			}
 			
