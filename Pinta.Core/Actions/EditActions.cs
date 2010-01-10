@@ -71,8 +71,6 @@ namespace Pinta.Core
 			Redo.Sensitive = false;
 			Cut.Sensitive = false;
 			Copy.Sensitive = false;
-			Paste.Sensitive = false;
-			PasteIntoNewLayer.Sensitive = false;
 			PasteIntoNewImage.Sensitive = false;
 			InvertSelection.Sensitive = false;
 		}
@@ -104,6 +102,9 @@ namespace Pinta.Core
 			EraseSelection.Activated += HandlePintaCoreActionsEditEraseSelectionActivated;
 			SelectAll.Activated += HandlePintaCoreActionsEditSelectAllActivated;
 			FillSelection.Activated += HandlePintaCoreActionsEditFillSelectionActivated;
+			PasteIntoNewLayer.Activated += HandlerPintaCoreActionsEditPasteIntoNewLayerActivated;
+			Paste.Activated += HandlerPintaCoreActionsEditPasteActivated;
+			Copy.Activated += HandlerPintaCoreActionsEditCopyActivated;
 		}
 		#endregion
 
@@ -143,6 +144,53 @@ namespace Pinta.Core
 			PintaCore.Layers.ResetSelectionPath ();
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+
+		private void HandlerPintaCoreActionsEditPasteIntoNewLayerActivated (object sender, EventArgs e)
+		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			Gdk.Pixbuf image = cb.WaitForImage ();
+
+			if (image == null)
+				return;
+
+			Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+
+			using (Cairo.Context g = new Cairo.Context (l.Surface))
+				g.DrawPixbuf (image, new Cairo.Point (0, 0));
+
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+
+		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)
+		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			Gdk.Pixbuf image = cb.WaitForImage ();
+
+			if (image == null)
+				return;
+
+			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface))
+				g.DrawPixbuf (image, new Cairo.Point (0, 0));
+
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+
+		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
+		{
+			//Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
+			
+			//Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			//cb.Image = surf.ToPixbuf ();
+			
+
+			//if (image == null)
+			//        return;
+
+			//using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface))
+			//        g.DrawPixbuf (image, new Cairo.Point (0, 0));
+
+			//PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 		#endregion
 	}
