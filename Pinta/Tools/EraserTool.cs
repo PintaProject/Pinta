@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class EraserTool : BaseTool
 	{
-		private static Point point_empty = new Point (-100, -100);
+		private static Point point_empty = new Point (-500, -500);
 		
 		private Point last_point = point_empty;
 				
@@ -105,6 +105,13 @@ namespace Pinta
 		#region Mouse Handlers
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			if ((args.Event.State & Gdk.ModifierType.Button1Mask) != Gdk.ModifierType.Button1Mask
+				&& (args.Event.State & Gdk.ModifierType.Button3Mask) != Gdk.ModifierType.Button3Mask
+			) {
+				last_point = point_empty;
+				return;
+			}
+
 			DrawingArea drawingarea1 = (DrawingArea)o;
 			
 			int x = (int)point.X;
