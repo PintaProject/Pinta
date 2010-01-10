@@ -353,5 +353,19 @@ namespace Pinta.Core
 			Gdk.Pixbuf pb = new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
 			return pb;
 		}
+		
+		public unsafe static Color GetPixel (this Cairo.ImageSurface surf, int x, int y)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+			
+			dstPtr += (x) + (y * surf.Width);
+
+			return new Color (dstPtr->R / 255f, dstPtr->G / 255f, dstPtr->B / 255f, dstPtr->A / 255f);
+		}
+		
+		public static string ToString2 (this Cairo.Color c)
+		{
+			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);
+		}
 	}
 }

@@ -47,7 +47,8 @@ namespace Pinta
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
 			
 			PintaCore.Initialize (tooltoolbar, label5, drawingarea1);
-			      
+			colorpalettewidget1.Initialize ();
+			
 			CreateToolBox ();
 					
 			PintaCore.Actions.CreateMainMenu (menubar1);

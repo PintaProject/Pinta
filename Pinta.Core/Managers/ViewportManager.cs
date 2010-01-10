@@ -90,7 +90,7 @@ namespace Pinta.Core
 			if (point.X < 0 || point.Y < 0)
 				return false;
 
-			if (point.X > PintaCore.Workspace.ImageSize.X || point.Y > PintaCore.Workspace.ImageSize.Y)
+			if (point.X >= PintaCore.Workspace.ImageSize.X || point.Y >= PintaCore.Workspace.ImageSize.Y)
 				return false;
 
 			return true;

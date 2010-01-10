@@ -31,13 +31,52 @@ namespace Pinta.Core
 {
 	public class PaletteManager
 	{
-		public Color PrimaryColor { get; set; }
-		public Color SecondaryColor { get; set; }
+		private Color primary;
+		private Color secondary;
+
+		public Color PrimaryColor {
+			get { return primary; }
+			set {
+				if (!primary.Equals (value)) {
+					primary = value;
+					OnPrimaryColorChanged ();
+				}
+			}
+		}
+
+		public Color SecondaryColor {
+			get { return secondary; }
+			set {
+				if (!secondary.Equals (value)) {
+					secondary = value;
+					OnSecondaryColorChanged ();
+				}
+			}
+		}
 		
 		public PaletteManager ()
 		{
 			PrimaryColor = new Color (255, 0, 0);
 			SecondaryColor = new Color (0, 0, 255);
 		}
+
+		#region Protected Methods
+		protected void OnPrimaryColorChanged ()
+		{
+			if (PrimaryColorChanged != null)
+				PrimaryColorChanged.Invoke (this, EventArgs.Empty);
+		}
+
+		protected void OnSecondaryColorChanged ()
+		{
+			if (SecondaryColorChanged != null)
+				SecondaryColorChanged.Invoke (this, EventArgs.Empty);
+		}
+		#endregion
+		
+		#region Events
+		public event EventHandler PrimaryColorChanged;
+		public event EventHandler SecondaryColorChanged;
+		#endregion
 	}
 }

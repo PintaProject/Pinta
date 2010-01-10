@@ -99,8 +99,18 @@ namespace Pinta
 			palette.Add (new Color (161 / 255f, 127 / 255f, 255 / 255f));			
 			palette.Add (new Color (214 / 255f, 127 / 255f, 255 / 255f));			
 			palette.Add (new Color (255 / 255f, 127 / 255f, 237 / 255f));			
-			palette.Add (new Color (255 / 255f, 127 / 255f, 182 / 255f));	
+			palette.Add (new Color (255 / 255f, 127 / 255f, 182 / 255f));
+		}
 
+		public void Initialize ()
+		{
+			PintaCore.Palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
+			PintaCore.Palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
+		}
+		
+		private void Palette_ColorChanged (object sender, EventArgs e)
+		{
+			GdkWindow.Invalidate ();
 		}
 
 		protected override bool OnButtonPressEvent (Gdk.EventButton ev)

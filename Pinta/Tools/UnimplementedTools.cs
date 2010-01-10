@@ -101,16 +101,6 @@ namespace Pinta
 		}
 	}
 			
-	public class ColorPickerTool : BaseTool
-	{
-		public override string Name {
-			get { return "Color Picker"; }
-		}
-		public override string Icon {
-			get { return "Tools.ColorPicker.png"; }
-		}
-	}
-			
 	public class CloneStampTool : BaseTool
 	{
 		public override string Name {
