@@ -54,6 +54,7 @@ namespace Pinta
 			PintaCore.Actions.CreateMainMenu (menubar1);
 			PintaCore.Actions.CreateToolBar (toolbar1);
 			PintaCore.Actions.Layers.CreateLayerWindowToolBar (toolbar4);
+			PintaCore.Actions.Edit.CreateHistoryWindowToolBar (toolbar2);
 
 			Gtk.Image i = new Gtk.Image (PintaCore.Resources.GetIcon ("StatusBar.CursorXY.png"));
 			i.Show ();

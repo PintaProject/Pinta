@@ -175,19 +175,52 @@ namespace Pinta.Core
 			OnLayerAdded ();
 			return layer;
 		}
+		
+		// Adds a new layer above the current one
+		public void Insert (Layer layer, int index)
+		{
+			layers.Insert (index, layer);
+
+			if (layers.Count == 1)
+				current_layer = 0;
+
+			OnLayerAdded ();
+		}
+
+		public int IndexOf (Layer layer)
+		{
+			return layers.IndexOf (layer);
+		}
 
 		// Delete the current layer
 		public void DeleteCurrentLayer ()
 		{
 			Layer layer = CurrentLayer;
-			
+
 			layers.RemoveAt (current_layer);
 			(layer.Surface as IDisposable).Dispose ();
-			
+
 			// Only change this if this wasn't already the bottom layer
 			if (current_layer > 0)
 				current_layer--;
+
+			OnLayerRemoved ();
+		}
+
+		// Delete the layer
+		public void DeleteLayer (int index, bool dispose)
+		{
+			Layer layer = layers[index];
+
+			layers.RemoveAt (index);
 			
+			if (dispose)
+				(layer.Surface as IDisposable).Dispose ();
+
+			// Only change this if this wasn't already the bottom layer
+			if (current_layer > 0)
+				current_layer--;
+
 			OnLayerRemoved ();
 		}
 

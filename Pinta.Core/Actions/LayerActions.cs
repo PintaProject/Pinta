@@ -173,7 +173,10 @@ namespace Pinta.Core
 				bg.Dispose ();
 				
 				PintaCore.Layers.SetCurrentLayer (layer);
-				
+
+				AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.ImportFromFile.png", Mono.Unix.Catalog.GetString ("Import From File"), PintaCore.Layers.IndexOf (layer));
+				PintaCore.History.PushNewItem (hist);
+
 				PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 			}
 			
@@ -209,17 +212,33 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.DuplicateCurrentLayer ();
+			Layer l = PintaCore.Layers.DuplicateCurrentLayer ();
+			
+			// Make new layer the current layer
+			PintaCore.Layers.SetCurrentLayer (l);
+
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.DuplicateLayer.png", Mono.Unix.Catalog.GetString ("Duplicate Layer"), PintaCore.Layers.IndexOf (l));
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersDeleteLayerActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.DeleteCurrentLayer ();
+			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Mono.Unix.Catalog.GetString ("Delete Layer"), PintaCore.Layers.CurrentLayer, PintaCore.Layers.CurrentLayerIndex);
+
+			PintaCore.Layers.DeleteLayer (PintaCore.Layers.CurrentLayerIndex, false);
+
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersAddNewLayerActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.AddNewLayer (string.Empty);
+			Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+
+			// Make new layer the current layer
+			PintaCore.Layers.SetCurrentLayer (l);
+
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Mono.Unix.Catalog.GetString ("Add New Layer"), PintaCore.Layers.IndexOf (l));
+			PintaCore.History.PushNewItem (hist);
 		}
 		#endregion
 	}

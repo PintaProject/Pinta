@@ -95,7 +95,13 @@ namespace Pinta.Core
 			menu.Append (SelectAll.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask));
 			menu.Append (Deselect.CreateAcceleratedMenuItem (Gdk.Key.D, Gdk.ModifierType.ControlMask));
 		}
-	
+
+		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)
+		{
+			toolbar.AppendItem (Undo.CreateToolBarItem ());
+			toolbar.AppendItem (Redo.CreateToolBarItem ());
+		}
+
 		public void RegisterHandlers ()
 		{
 			Deselect.Activated += HandlePintaCoreActionsEditDeselectActivated;
@@ -159,6 +165,7 @@ namespace Pinta.Core
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			Gdk.Pixbuf image = cb.WaitForImage ();
 
+			// TODO: Message window saying no image on clipboard
 			if (image == null)
 				return;
 
@@ -167,7 +174,14 @@ namespace Pinta.Core
 			using (Cairo.Context g = new Cairo.Context (l.Surface))
 				g.DrawPixbuf (image, new Cairo.Point (0, 0));
 
+			// Make new layer the current layer
+			PintaCore.Layers.SetCurrentLayer (l);
+			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+
+			// TODO: Need paste icon
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)

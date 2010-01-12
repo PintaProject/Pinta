@@ -286,7 +286,19 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder />
+                      <widget class="Gtk.Toolbar" id="toolbar2">
+                        <property name="MemberName" />
+                        <property name="ShowArrow">False</property>
+                        <property name="ButtonStyle">Icons</property>
+                        <property name="IconSize">Menu</property>
+                        <node name="__gtksharp_66_Stetic_Editor_ActionToolbar" type="Toolbar" />
+                      </widget>
+                      <packing>
+                        <property name="Position">4</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
                     </child>
                   </widget>
                   <packing>
