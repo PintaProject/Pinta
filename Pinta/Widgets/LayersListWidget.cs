@@ -77,17 +77,23 @@ namespace Pinta
 				}
 			}	
 			
-			
-			
 			PintaCore.Layers.LayerAdded += HandlePintaCoreLayersLayerAddedOrRemoved;
 			PintaCore.Layers.LayerRemoved += HandlePintaCoreLayersLayerAddedOrRemoved;
 			PintaCore.Layers.SelectedLayerChanged += HandlePintaCoreLayersLayerAddedOrRemoved;
+			PintaCore.History.HistoryItemAdded += HandlePintaCoreHistoryHistoryItemAdded;
+			PintaCore.History.ActionRedone += HandlePintaCoreHistoryHistoryItemAdded;
+			PintaCore.History.ActionUndone += HandlePintaCoreHistoryHistoryItemAdded;
+		}
+
+		private void HandlePintaCoreHistoryHistoryItemAdded (object sender, EventArgs e)
+		{
+			this.GdkWindow.Invalidate ();
 		}
 
 		private void HandlePintaCoreLayersLayerAddedOrRemoved (object sender, EventArgs e)
 		{
 			this.GdkWindow.Invalidate ();
-			
+
 			// TODO: this should be handled elsewhere
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}

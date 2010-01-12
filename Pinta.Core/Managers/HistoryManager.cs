@@ -54,6 +54,7 @@ namespace Pinta.Core
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			
 			(PintaCore.Chrome.HistoryStack.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (item.Icon), item.Text);
+			OnHistoryItemAdded ();
 		}
 		
 		public void Undo ()
@@ -68,6 +69,7 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.Undo.Sensitive = false;
 			
 			PintaCore.Actions.Edit.Redo.Sensitive = true;
+			OnActionUndone ();
 		}
 		
 		public void Redo ()
@@ -82,6 +84,7 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
+			OnActionUndone ();
 		}
 		
 		public void Clear ()
@@ -94,8 +97,36 @@ namespace Pinta.Core
 				// TODO: Delete from ListStore
 			}
 			
+			stack_pointer = -1;
+			
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			PintaCore.Actions.Edit.Undo.Sensitive = false;
-		}			
+		}
+
+		#region Protected Methods
+		protected void OnHistoryItemAdded ()
+		{
+			if (HistoryItemAdded != null)
+				HistoryItemAdded.Invoke (this, EventArgs.Empty);
+		}
+
+		protected void OnActionUndone ()
+		{
+			if (ActionUndone != null)
+				ActionUndone.Invoke (this, EventArgs.Empty);
+		}
+
+		protected void OnActionRedone ()
+		{
+			if (ActionRedone != null)
+				ActionRedone.Invoke (this, EventArgs.Empty);
+		}
+		#endregion
+
+		#region Events
+		public event EventHandler HistoryItemAdded;
+		public event EventHandler ActionUndone;
+		public event EventHandler ActionRedone;
+		#endregion
 	}
 }
