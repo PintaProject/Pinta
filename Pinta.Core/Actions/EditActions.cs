@@ -172,6 +172,8 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)
 		{
+			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			Gdk.Pixbuf image = cb.WaitForImage ();
 
@@ -182,6 +184,9 @@ namespace Pinta.Core
 				g.DrawPixbuf (image, new Cairo.Point (0, 0));
 
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			
+			// TODO: Need paste icon
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
