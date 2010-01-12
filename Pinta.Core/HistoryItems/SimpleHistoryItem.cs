@@ -1,5 +1,5 @@
-// 
-// ChromeManager.cs
+﻿// 
+// SimpleHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,36 +25,53 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
+using Cairo;
 
 namespace Pinta.Core
 {
-	public class ChromeManager
+	public class SimpleHistoryItem : BaseHistoryItem
 	{
-		private Toolbar tool_toolbar;
-		private Label status_bar_text;
-		private DrawingArea drawing_area;
-		private TreeView history_stack;
+		ImageSurface old_surface;
+		int layer_index;
 		
-		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public DrawingArea DrawingArea { get { return drawing_area; } }
-		public TreeView HistoryStack { get { return history_stack; } }
-		
-		public ChromeManager ()
+		public SimpleHistoryItem (string icon, string text, ImageSurface oldSurface, int layerIndex) : base (icon, text)
 		{
+			old_surface = oldSurface;
+			layer_index = layerIndex;
 		}
-		
-		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack)
+
+		public override void Undo ()
 		{
-			tool_toolbar = toolToolBar;
-			status_bar_text = statusBarText;
-			drawing_area = drawingArea;
-			history_stack = historyStack;
+			// Grab the original surface
+			ImageSurface surf = PintaCore.Layers[layer_index].Surface;
+			
+			// Undo to the "old" surface
+			PintaCore.Layers[layer_index].Surface = old_surface;
+			
+			// Store the original surface for Redo
+			old_surface = surf;
+			
+			PintaCore.Workspace.Invalidate ();
 		}
-		
-		public void SetStatusBarText (string text)
+
+		public override void Redo ()
 		{
-			status_bar_text.Text = text;
+			// Grab the original surface
+			ImageSurface surf = PintaCore.Layers[layer_index].Surface;
+
+			// Undo to the "old" surface
+			PintaCore.Layers[layer_index].Surface = old_surface;
+
+			// Store the original surface for Redo
+			old_surface = surf;
+
+			PintaCore.Workspace.Invalidate ();
+		}
+
+		public override void Dispose ()
+		{
+			// Free up native surface
+			(old_surface as IDisposable).Dispose ();
 		}
 	}
 }

@@ -1,5 +1,5 @@
-// 
-// ChromeManager.cs
+﻿// 
+// BaseHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,36 +25,32 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 
 namespace Pinta.Core
 {
-	public class ChromeManager
+	public class BaseHistoryItem : IDisposable
 	{
-		private Toolbar tool_toolbar;
-		private Label status_bar_text;
-		private DrawingArea drawing_area;
-		private TreeView history_stack;
+		public string Icon { get; set; }
+		public string Text { get; set; }
 		
-		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public DrawingArea DrawingArea { get { return drawing_area; } }
-		public TreeView HistoryStack { get { return history_stack; } }
-		
-		public ChromeManager ()
+		public BaseHistoryItem (string icon, string text)
+		{
+			Icon = icon;
+			Text = text;
+		}
+
+		public virtual void Undo ()
 		{
 		}
-		
-		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack)
+
+		public virtual void Redo ()
 		{
-			tool_toolbar = toolToolBar;
-			status_bar_text = statusBarText;
-			drawing_area = drawingArea;
-			history_stack = historyStack;
 		}
-		
-		public void SetStatusBarText (string text)
+
+		#region IDisposable Members
+		public virtual void Dispose ()
 		{
-			status_bar_text.Text = text;
 		}
+		#endregion
 	}
 }

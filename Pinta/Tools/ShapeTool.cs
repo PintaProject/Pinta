@@ -43,6 +43,7 @@ namespace Pinta
 		protected ToolBarButton brush_width_plus;
 
 		protected Rectangle last_dirty;
+		protected ImageSurface undo_surface;
 		
 		public ShapeTool ()
 		{
@@ -122,6 +123,8 @@ namespace Pinta
 			
 			PintaCore.Layers.ToolLayer.Clear ();
 			PintaCore.Layers.ToolLayer.Hidden = false;
+			
+			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -137,6 +140,8 @@ namespace Pinta
 			PintaCore.Workspace.InvalidateRect (last_dirty.ToGdkRectangle (), false);
 			
 			is_drawing = false;
+			
+			PintaCore.History.PushNewItem (CreateHistoryItem ());
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
@@ -163,6 +168,11 @@ namespace Pinta
 		protected virtual Rectangle DrawShape (Rectangle r, Layer l)
 		{
 			return r;
+		}
+		
+		protected virtual BaseHistoryItem CreateHistoryItem ()
+		{
+			return new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex);
 		}
 		#endregion
 

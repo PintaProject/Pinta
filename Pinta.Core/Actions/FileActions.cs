@@ -89,6 +89,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.Clear ();
+			PintaCore.History.Clear ();
 			
 			// Start with an empty white layer
 			Layer background = PintaCore.Layers.AddNewLayer ("Background");

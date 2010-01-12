@@ -105,6 +105,8 @@ namespace Pinta.Core
 			PasteIntoNewLayer.Activated += HandlerPintaCoreActionsEditPasteIntoNewLayerActivated;
 			Paste.Activated += HandlerPintaCoreActionsEditPasteActivated;
 			Copy.Activated += HandlerPintaCoreActionsEditCopyActivated;
+			Undo.Activated += HandlerPintaCoreActionsEditUndoActivated;
+			Redo.Activated += HandlerPintaCoreActionsEditRedoActivated;
 		}
 		#endregion
 
@@ -191,6 +193,16 @@ namespace Pinta.Core
 			//        g.DrawPixbuf (image, new Cairo.Point (0, 0));
 
 			//PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+
+		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
+		{
+			PintaCore.History.Undo ();
+		}
+
+		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
+		{
+			PintaCore.History.Redo ();
 		}
 		#endregion
 	}

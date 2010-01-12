@@ -39,6 +39,7 @@ namespace Pinta.Core
 		public static ResourceManager Resources { get; private set; }
 		public static ActionManager Actions { get; private set; }
 		public static ViewportManager Workspace { get; private set; }
+		public static HistoryManager History { get; private set; }
 		
 		static PintaCore ()
 		{
@@ -47,12 +48,13 @@ namespace Pinta.Core
 			Workspace = new ViewportManager ();
 			Layers = new LayerManager ();
 			Tools = new ToolManager ();
+			History = new HistoryManager ();
 		}
 		
-		public static void Initialize (Toolbar toolToolBar, Label statusTextLabel, DrawingArea drawingArea)
+		public static void Initialize (Toolbar toolToolBar, Label statusTextLabel, DrawingArea drawingArea, TreeView historyStack)
 		{
 			Chrome = new ChromeManager ();
-			Chrome.Initialize (toolToolBar, statusTextLabel, drawingArea);
+			Chrome.Initialize (toolToolBar, statusTextLabel, drawingArea, historyStack);
 			
 			Palette = new PaletteManager ();
 			

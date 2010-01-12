@@ -44,7 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="HistoryItems\BaseHistoryItem.cs" />
+    <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
+    <Compile Include="Managers\HistoryManager.cs" />
     <Compile Include="Managers\LayerManager.cs" />
     <Compile Include="Managers\PaletteManager.cs" />
     <Compile Include="Managers\ToolManager.cs" />

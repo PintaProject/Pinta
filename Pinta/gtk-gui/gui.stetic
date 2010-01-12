@@ -269,6 +269,23 @@
                       </packing>
                     </child>
                     <child>
+                      <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow1">
+                        <property name="MemberName" />
+                        <property name="ShadowType">In</property>
+                        <child>
+                          <widget class="Gtk.TreeView" id="treeview1">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="ShowScrollbars">True</property>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">3</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                    <child>
                       <placeholder />
                     </child>
                   </widget>

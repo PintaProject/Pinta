@@ -35,39 +35,54 @@ namespace Pinta
 	{
 		public MainWindow () : base (Gtk.WindowType.Toplevel)
 		{
-			Build ();	
-			
+			Build ();
+
 			Requisition req = new Requisition ();
 			req.Height = 600;
 			req.Width = 800;
 			drawingarea1.Requisition = req;
-			
+
 			// Initialize interface things
 			PintaCore.Actions.AccelGroup = new AccelGroup ();
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
-			
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1);
+
+			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, treeview1);
 			colorpalettewidget1.Initialize ();
-			
+
 			CreateToolBox ();
-					
+
 			PintaCore.Actions.CreateMainMenu (menubar1);
 			PintaCore.Actions.CreateToolBar (toolbar1);
 			PintaCore.Actions.Layers.CreateLayerWindowToolBar (toolbar4);
-			
+
 			Gtk.Image i = new Gtk.Image (PintaCore.Resources.GetIcon ("StatusBar.CursorXY.png"));
-			i.Show ();			
-			
+			i.Show ();
+
 			statusbar1.Add (i);
 			Gtk.Box.BoxChild box = (Gtk.Box.BoxChild)statusbar1[i];
 			box.Position = 2;
 			box.Fill = false;
 			box.Expand = false;
-			
+
 			this.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
-						
+
 			// Create a blank document
-			PintaCore.Actions.File.New.Activate ();	
+			PintaCore.Actions.File.New.Activate ();
+
+			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
+			treeview1.HeadersVisible = false;
+			AddColumns (treeview1);
+		}
+
+		void AddColumns (TreeView treeView)
+		{
+			CellRendererPixbuf pix = new CellRendererPixbuf ();
+			TreeViewColumn col1 = new TreeViewColumn (string.Empty, pix, "pixbuf", 0);
+			treeView.AppendColumn (col1);
+
+			CellRendererText rendererText = new CellRendererText ();
+			TreeViewColumn column = new TreeViewColumn (string.Empty, rendererText, "text", 1);
+			treeView.AppendColumn (column);
 		}
 
 		private void CreateToolBox ()
@@ -83,12 +98,12 @@ namespace Pinta
 			PintaCore.Tools.AddTool (new PanTool ());
 			PintaCore.Tools.AddTool (new PaintBucketTool ());
 			PintaCore.Tools.AddTool (new GradientTool ());
-			
+
 			BaseTool pb = new PaintBrushTool ();
 			PintaCore.Tools.AddTool (pb);
 			PintaCore.Tools.AddTool (new EraserTool ());
 			PintaCore.Tools.SetCurrentTool (pb);
-			
+
 			PintaCore.Tools.AddTool (new PencilTool ());
 			PintaCore.Tools.AddTool (new ColorPickerTool ());
 			PintaCore.Tools.AddTool (new CloneStampTool ());
@@ -99,15 +114,15 @@ namespace Pinta
 			PintaCore.Tools.AddTool (new RoundedRectangleTool ());
 			PintaCore.Tools.AddTool (new EllipseTool ());
 			PintaCore.Tools.AddTool (new FreeformShapeTool ());
-			
+
 			bool even = true;
-			
+
 			foreach (var tool in PintaCore.Tools) {
 				if (even)
 					toolbox1.Insert (tool.ToolItem, toolbox1.NItems);
 				else
 					toolbox2.Insert (tool.ToolItem, toolbox2.NItems);
-				
+
 				even = !even;
 			}
 		}
@@ -119,43 +134,43 @@ namespace Pinta
 
 			double x = PintaCore.Workspace.Offset.X;
 			double y = PintaCore.Workspace.Offset.Y;
-			
+
 			using (Cairo.Context g = CairoHelper.Create (drawingarea1.GdkWindow)) {
 				// Black 1px border around image
 				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X + 1, PintaCore.Workspace.CanvasSize.Y + 1), new Cairo.Color (0, 0, 0), 1);
-				
+
 				// Transparent checkerboard pattern
 				using (Cairo.SurfacePattern sp = new Cairo.SurfacePattern (PintaCore.Layers.TransparentLayer.Surface)) {
 					sp.Extend = Cairo.Extend.Repeat;
-					
+
 					g.FillRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y), sp);
 				}
-				
+
 				// User's layers
 				g.Save ();
 				g.Translate (x, y);
 				g.Scale (scale, scale);
-				
+
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
 					g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
 					g.PaintWithAlpha (layer.Opacity);
 				}
-				
+
 				g.Restore ();
-				
+
 				// Selection outline
 				if (PintaCore.Layers.ShowSelection) {
 					g.Save ();
 					g.Translate (x, y);
 					g.Translate (0.5, 0.5);
 					g.Scale (scale, scale);
-					
+
 					g.AppendPath (PintaCore.Layers.SelectionPath);
-					
+
 					g.SetDash (new double[] { 2, 4 }, 0);
 					g.LineWidth = 1;
 					g.Color = new Cairo.Color (0, 0, 0);
-					
+
 					g.Stroke ();
 					g.Restore ();
 				}
@@ -165,10 +180,10 @@ namespace Pinta
 		private void OnDrawingarea1MotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
 			Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
-			
+
 			if (PintaCore.Workspace.PointInCanvas (point))
 				CursorPositionLabel.Text = string.Format ("{0}, {1}", point.X, point.Y);
-			
+
 			PintaCore.Tools.CurrentTool.DoMouseMove (o, args, point);
 		}
 
