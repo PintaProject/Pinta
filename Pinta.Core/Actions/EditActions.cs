@@ -113,6 +113,8 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)
 		{
+			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.Color = PintaCore.Palette.PrimaryColor;
@@ -120,6 +122,7 @@ namespace Pinta.Core
 			}
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Mono.Unix.Catalog.GetString ("Fill Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -132,6 +135,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsEditEraseSelectionActivated (object sender, EventArgs e)
 		{
+			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.Operator = Cairo.Operator.Clear;
@@ -139,6 +144,7 @@ namespace Pinta.Core
 			}
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
