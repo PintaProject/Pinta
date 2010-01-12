@@ -258,7 +258,7 @@ namespace Pinta.Core
 		public void FlipCurrentLayerHorizontal ()
 		{
 			CurrentLayer.FlipHorizontal ();
-			
+
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 
@@ -266,7 +266,23 @@ namespace Pinta.Core
 		public void FlipCurrentLayerVertical ()
 		{
 			CurrentLayer.FlipVertical ();
-			
+
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+
+		// Flip layer horizontally
+		public void FlipLayerHorizontal (int layerIndex)
+		{
+			layers[layerIndex].FlipHorizontal ();
+
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+
+		// Flip layer vertically
+		public void FlipLayerVertical (int layerIndex)
+		{
+			layers[layerIndex].FlipVertical ();
+
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 

@@ -183,11 +183,13 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.FlipCurrentLayerVertical ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsLayersFlipHorizontalActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.FlipCurrentLayerHorizontal ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)

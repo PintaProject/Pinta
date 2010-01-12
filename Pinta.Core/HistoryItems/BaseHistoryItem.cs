@@ -33,6 +33,10 @@ namespace Pinta.Core
 		public string Icon { get; set; }
 		public string Text { get; set; }
 		
+		public BaseHistoryItem ()
+		{
+		}
+		
 		public BaseHistoryItem (string icon, string text)
 		{
 			Icon = icon;

@@ -104,6 +104,7 @@ namespace Pinta.Core
 		private void HandleInvertColorsActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.Invert ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.InvertColors));
 		}
 
 		private void HandleSepiaActivated (object sender, EventArgs e)

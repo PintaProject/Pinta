@@ -44,7 +44,8 @@ namespace Pinta.Core
 				BaseHistoryItem bhi = items[items.Count - 1];
 				items.RemoveAt (items.Count - 1);
 				bhi.Dispose ();
-				
+
+				PintaCore.Actions.Edit.Redo.Sensitive = false;
 				// TODO: Delete from ListStore
 			}
 			

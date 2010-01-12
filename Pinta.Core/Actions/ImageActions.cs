@@ -103,11 +103,13 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.RotateImageCCW ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 		}
 
 		private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.RotateImageCW ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 		}
 
 		private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
@@ -118,16 +120,19 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.RotateImage180 ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 		}
 
 		private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.FlipImageVertical ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
 		}
 
 		private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.FlipImageHorizontal ();
+			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
 		}
 		#endregion
 	}

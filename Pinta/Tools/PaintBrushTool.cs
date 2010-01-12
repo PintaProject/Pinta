@@ -42,6 +42,8 @@ namespace Pinta
 		private ToolBarButton brush_width_minus;
 		private ToolBarButton brush_width_plus;
 		
+		private ImageSurface undo_surface;
+
 		public PaintBrushTool ()
 		{
 		}
@@ -103,6 +105,11 @@ namespace Pinta
 		#endregion
 
 		#region Mouse Handlers
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		{
+			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+		}
+
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
 			Color tool_color;
@@ -147,6 +154,11 @@ namespace Pinta
 			PintaCore.Workspace.InvalidateRect (r, true);
 			
 			last_point = new Point (x, y);
+		}
+		
+		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		{
+			PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
 		}
 		#endregion
 
