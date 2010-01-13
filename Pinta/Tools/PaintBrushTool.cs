@@ -43,7 +43,8 @@ namespace Pinta
 		private ToolBarButton brush_width_plus;
 		
 		private ImageSurface undo_surface;
-
+		private bool surface_modified;
+		
 		public PaintBrushTool ()
 		{
 		}
@@ -107,6 +108,7 @@ namespace Pinta
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			surface_modified = false;
 			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 		}
 
@@ -122,7 +124,7 @@ namespace Pinta
 				last_point = point_empty;
 				return;
 			}
-			
+				
 			DrawingArea drawingarea1 = (DrawingArea)o;
 			
 			int x = (int)point.X;
@@ -132,6 +134,9 @@ namespace Pinta
 				last_point = new Point (x, y);
 				return;
 			}
+			
+			if (PintaCore.Workspace.PointInCanvas (point))
+				surface_modified = true;
 
 			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
 			
@@ -158,7 +163,12 @@ namespace Pinta
 		
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-			PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+			if (surface_modified)
+				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+			else if (undo_surface != null)
+				(undo_surface as IDisposable).Dispose ();
+
+			surface_modified = false;
 		}
 		#endregion
 

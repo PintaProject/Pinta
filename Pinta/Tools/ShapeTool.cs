@@ -44,7 +44,8 @@ namespace Pinta
 
 		protected Rectangle last_dirty;
 		protected ImageSurface undo_surface;
-		
+		protected bool surface_modified;
+
 		public ShapeTool ()
 		{
 		}
@@ -123,7 +124,8 @@ namespace Pinta
 			
 			PintaCore.Layers.ToolLayer.Clear ();
 			PintaCore.Layers.ToolLayer.Hidden = false;
-			
+
+			surface_modified = false;
 			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 		}
 
@@ -140,8 +142,13 @@ namespace Pinta
 			PintaCore.Workspace.InvalidateRect (last_dirty.ToGdkRectangle (), false);
 			
 			is_drawing = false;
-			
-			PintaCore.History.PushNewItem (CreateHistoryItem ());
+
+			if (surface_modified)
+				PintaCore.History.PushNewItem (CreateHistoryItem ());
+			else if (undo_surface != null)
+				(undo_surface as IDisposable).Dispose ();
+
+			surface_modified = false;
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
@@ -161,6 +168,9 @@ namespace Pinta
 			PintaCore.Workspace.InvalidateRect (dirty.ToGdkRectangle (), false);
 			
 			last_dirty = dirty;
+
+			if (PintaCore.Workspace.PointInCanvas (point))
+				surface_modified = true;
 		}
 		#endregion
 
