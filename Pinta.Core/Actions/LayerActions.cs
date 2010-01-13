@@ -197,17 +197,32 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)
 		{
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Mono.Unix.Catalog.GetString ("Move Layer Up"), PintaCore.Layers.CurrentLayerIndex, PintaCore.Layers.CurrentLayerIndex + 1);
+			
 			PintaCore.Layers.MoveCurrentLayerUp ();
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersMoveLayerDownActivated (object sender, EventArgs e)
 		{
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Mono.Unix.Catalog.GetString ("Move Layer Down"), PintaCore.Layers.CurrentLayerIndex, PintaCore.Layers.CurrentLayerIndex - 1);
+
 			PintaCore.Layers.MoveCurrentLayerDown ();
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersMergeLayerDownActivated (object sender, EventArgs e)
 		{
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Mono.Unix.Catalog.GetString ("Merge Layer Down"));
+			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, PintaCore.Layers.CurrentLayer, PintaCore.Layers.CurrentLayerIndex);
+			SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[PintaCore.Layers.CurrentLayerIndex - 1].Surface.Clone (), PintaCore.Layers.CurrentLayerIndex - 1);
+			
+			hist.Push (h1);
+			hist.Push (h2);
+			
 			PintaCore.Layers.MergeCurrentLayerDown ();
+			
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)

@@ -1,5 +1,5 @@
 ﻿// 
-// DeleteLayerHistoryItem.cs
+// SwapLayersHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -28,39 +28,46 @@ using System;
 
 namespace Pinta.Core
 {
-	public class DeleteLayerHistoryItem : BaseHistoryItem
+	// These are actions that can be undone by simply repeating
+	// the action: invert colors, rotate 180 degrees, etc
+	public class SwapLayersHistoryItem : BaseHistoryItem
 	{
-		private int layer_index;
-		private Layer layer;
+		private int layer_index_1;
+		private int layer_index_2;
 
-		public DeleteLayerHistoryItem (string icon, string text, Layer layer, int layerIndex) : base (icon, text)
+		public SwapLayersHistoryItem (string icon, string text, int layer1, int layer2) : base (icon, text)
 		{
-			layer_index = layerIndex;
-			this.layer = layer;
+			layer_index_1 = layer1;
+			layer_index_2 = layer2;
 		}
-
+		
 		public override void Undo ()
 		{
-			PintaCore.Layers.Insert (layer, layer_index);
-
-			// Make new layer the current layer
-			PintaCore.Layers.SetCurrentLayer (layer);
-
-			layer = null;
+			Swap ();
 		}
 
 		public override void Redo ()
 		{
-			// Store the layer for "undo"
-			layer = PintaCore.Layers[layer_index];
-			
-			PintaCore.Layers.DeleteLayer (layer_index, false);
+			Swap ();
 		}
 
-		public override void Dispose ()
+		private void Swap ()
 		{
-			if (layer != null)
-				(layer.Surface as IDisposable).Dispose ();
+			int selected = PintaCore.Layers.CurrentLayerIndex;
+			
+			int l1 = Math.Min (layer_index_1, layer_index_2);
+			int l2 = Math.Max (layer_index_1, layer_index_2);
+
+			Layer layer1 = PintaCore.Layers[l1];
+			Layer layer2 = PintaCore.Layers[l2];
+
+			PintaCore.Layers.DeleteLayer (l1, false);
+			PintaCore.Layers.DeleteLayer (l2 - 1, false);
+
+			PintaCore.Layers.Insert (layer2, l1);
+			PintaCore.Layers.Insert (layer1, l2);
+			
+			PintaCore.Layers.SetCurrentLayer (selected);
 		}
 	}
 }

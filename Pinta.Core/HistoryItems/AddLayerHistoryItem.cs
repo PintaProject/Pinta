@@ -55,5 +55,11 @@ namespace Pinta.Core
 
 			layer = null;
 		}
+
+		public override void Dispose ()
+		{
+			if (layer != null)
+				(layer.Surface as IDisposable).Dispose ();
+		}
 	}
 }

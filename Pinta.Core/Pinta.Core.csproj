@@ -46,6 +46,8 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="HistoryItems\AddLayerHistoryItem.cs" />
     <Compile Include="HistoryItems\BaseHistoryItem.cs" />
+    <Compile Include="HistoryItems\CompoundHistoryItem.cs" />
+    <Compile Include="HistoryItems\SwapLayersHistoryItem.cs" />
     <Compile Include="HistoryItems\DeleteLayerHistoryItem.cs" />
     <Compile Include="HistoryItems\InvertHistoryItem.cs" />
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />

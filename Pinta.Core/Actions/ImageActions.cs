@@ -114,7 +114,16 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
 		{
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Mono.Unix.Catalog.GetString ("Flatten"));
+			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[0].Surface.Clone (), 0);
+			hist.Push (h1);
+
+			for (int i = 1; i < PintaCore.Layers.Count; i++)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, PintaCore.Layers[i], i));
+
 			PintaCore.Layers.FlattenImage ();
+
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)

@@ -98,7 +98,11 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandleBlackAndWhiteActivated (object sender, EventArgs e)
 		{
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Adjustments.BlackAndWhite.png", Mono.Unix.Catalog.GetString ("Black and White"));
+			hist.TakeSnapshotOfImage ();
+			
 			PintaCore.Layers.Desaturate ();
+			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandleInvertColorsActivated (object sender, EventArgs e)
@@ -109,7 +113,11 @@ namespace Pinta.Core
 
 		private void HandleSepiaActivated (object sender, EventArgs e)
 		{
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Adjustments.Sepia.png", Mono.Unix.Catalog.GetString ("Sepia"));
+			hist.TakeSnapshotOfImage ();
+
 			PintaCore.Layers.Sepia ();
+			PintaCore.History.PushNewItem (hist);
 		}
 		#endregion
 	}

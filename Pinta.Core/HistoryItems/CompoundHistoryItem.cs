@@ -1,5 +1,5 @@
 ﻿// 
-// DeleteLayerHistoryItem.cs
+// CompoundHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,42 +25,47 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	public class DeleteLayerHistoryItem : BaseHistoryItem
+	public class CompoundHistoryItem : BaseHistoryItem
 	{
-		private int layer_index;
-		private Layer layer;
+		List<BaseHistoryItem> history_stack = new List<BaseHistoryItem> ();
 
-		public DeleteLayerHistoryItem (string icon, string text, Layer layer, int layerIndex) : base (icon, text)
+		public CompoundHistoryItem (string icon, string text) : base (icon, text)
 		{
-			layer_index = layerIndex;
-			this.layer = layer;
 		}
-
+		
+		public void Push (BaseHistoryItem item)
+		{
+			history_stack.Add (item);
+		}
+		
 		public override void Undo ()
 		{
-			PintaCore.Layers.Insert (layer, layer_index);
-
-			// Make new layer the current layer
-			PintaCore.Layers.SetCurrentLayer (layer);
-
-			layer = null;
+			foreach (var item in history_stack)
+				item.Undo ();
 		}
 
 		public override void Redo ()
 		{
-			// Store the layer for "undo"
-			layer = PintaCore.Layers[layer_index];
-			
-			PintaCore.Layers.DeleteLayer (layer_index, false);
+			// We want to redo the actions in the
+			// opposite order than the undo order
+			for (int i = history_stack.Count - 1; i >= 0; i--)
+				history_stack[i].Redo ();
 		}
 
 		public override void Dispose ()
 		{
-			if (layer != null)
-				(layer.Surface as IDisposable).Dispose ();
+			foreach (var item in history_stack)
+				item.Dispose ();
+		}
+		
+		public void TakeSnapshotOfImage ()
+		{
+			foreach (Layer item in PintaCore.Layers)
+				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, item.Surface.Clone (), PintaCore.Layers.IndexOf (item)));
 		}
 	}
 }

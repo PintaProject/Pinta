@@ -58,7 +58,6 @@ namespace Pinta.Core
 			selection_layer.Hidden = true;
 			
 			ResetSelectionPath ();
-			//selection_layer.Opacity = .5;
 			
 			transparent_layer = CreateLayer ("Transparent", 16, 16);
 			transparent_layer.Tiled = true;
@@ -198,7 +197,6 @@ namespace Pinta.Core
 			Layer layer = CurrentLayer;
 
 			layers.RemoveAt (current_layer);
-			(layer.Surface as IDisposable).Dispose ();
 
 			// Only change this if this wasn't already the bottom layer
 			if (current_layer > 0)
@@ -415,7 +413,6 @@ namespace Pinta.Core
 				Layer l = layers[1];
 				
 				layers.RemoveAt (1);
-				(l.Surface as IDisposable).Dispose ();
 			}
 			
 			OnLayerRemoved ();
