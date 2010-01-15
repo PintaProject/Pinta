@@ -135,7 +135,7 @@ namespace Pinta
 
 				csd.Destroy ();
 			} else if (secondary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Primary Color");
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Secondary Color");
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 
