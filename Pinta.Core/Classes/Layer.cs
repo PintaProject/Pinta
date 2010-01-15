@@ -164,27 +164,53 @@ namespace Pinta.Core
 				ColorBgra.Black,
 				ColorBgra.White);
 
-			ColorBgra *dstPtr = (ColorBgra*)Surface.DataPtr;
+			ImageSurface dest = Surface.Clone ();
+
+			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
 			int len = Surface.Data.Length / 4;
 			
-			op.Apply (dstPtr, len);		
+			op.Apply (dstPtr, len);
+
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
 		}
 		
 		public unsafe void Invert ()
 		{
-			ColorBgra *dstPtr = (ColorBgra*)Surface.DataPtr;
+			ImageSurface dest = Surface.Clone ();
+
+			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
 			int len = Surface.Data.Length / 4;
 			
 			for (int i = 0; i < len; i++) {
 				if (dstPtr->A != 0)
 				*dstPtr = (ColorBgra.FromBgra((byte)(255 - dstPtr->B), (byte)(255 - dstPtr->G), (byte)(255 - dstPtr->R), dstPtr->A));
 				dstPtr++;
-			}	
+			}
+
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
 		}
 		
 		public unsafe void Desaturate ()
 		{
-			ColorBgra *dstPtr = (ColorBgra*)Surface.DataPtr;
+			ImageSurface dest = Surface.Clone ();
+
+			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
 			int len = Surface.Data.Length / 4;
 			
 			for (int i = 0; i < len; i++) {
@@ -194,7 +220,17 @@ namespace Pinta.Core
 				dstPtr->G = ib;
 				dstPtr->B = ib;
 				dstPtr++;
-			}	
+			}
+
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+			
+			(dest as IDisposable).Dispose ();
 		}
 	}
 }
