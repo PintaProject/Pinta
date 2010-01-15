@@ -1,6 +1,6 @@
 Pinta
 Simple Gtk# Paint Program
-Copyright (C) 2010 Jonathan Pobst <monkey@jpobst.com>
+Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
 
 Pinta is a Gtk# clone of Paint.Net 3.0: http://www.getpaint.net/.
 
