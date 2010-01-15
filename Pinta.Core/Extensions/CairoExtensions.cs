@@ -367,7 +367,7 @@ namespace Pinta.Core
 		{
 			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);
 		}
-		
+
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
 			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
@@ -376,9 +376,30 @@ namespace Pinta.Core
 				g.SetSource (surf);
 				g.Paint ();
 			}
-			
+
 			return newsurf;
+		}
+
+		public static Path Clone (this Path path)
+		{
+			Path newpath;
 			
+			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				newpath = g.CopyPath ();
+			}
+
+			return newpath;
+		}
+
+		public static Gdk.Color ToGdkColor (this Cairo.Color color)
+		{
+			Gdk.Color c = new Gdk.Color ();
+			c.Blue = (ushort)(color.B * ushort.MaxValue);
+			c.Red = (ushort)(color.R * ushort.MaxValue);
+			c.Green = (ushort)(color.G * ushort.MaxValue);
+			
+			return c;
 		}
 	}
 }

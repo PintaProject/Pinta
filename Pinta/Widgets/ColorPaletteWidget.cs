@@ -121,6 +121,32 @@ namespace Pinta
 				PintaCore.Palette.SecondaryColor = temp;
 				GdkWindow.Invalidate ();
 			}
+
+			if (primary_rect.ContainsPoint (ev.X, ev.Y)) {
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Primary Color");
+				csd.ColorSelection.PreviousColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
+				csd.ColorSelection.CurrentColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
+
+				int response = csd.Run ();
+
+				if (response == (int)Gtk.ResponseType.Ok) {
+					PintaCore.Palette.PrimaryColor = csd.ColorSelection.CurrentColor.ToCairoColor ();
+				}
+
+				csd.Destroy ();
+			} else if (secondary_rect.ContainsPoint (ev.X, ev.Y)) {
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Primary Color");
+				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
+				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
+
+				int response = csd.Run ();
+
+				if (response == (int)Gtk.ResponseType.Ok) {
+					PintaCore.Palette.SecondaryColor = csd.ColorSelection.CurrentColor.ToCairoColor ();
+				}
+
+				csd.Destroy ();
+			}
 			
 			int pal = PointToPalette ((int)ev.X, (int)ev.Y);
 			
