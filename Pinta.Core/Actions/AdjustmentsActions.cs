@@ -98,8 +98,8 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandleBlackAndWhiteActivated (object sender, EventArgs e)
 		{
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Adjustments.BlackAndWhite.png", Mono.Unix.Catalog.GetString ("Black and White"));
-			hist.TakeSnapshotOfImage ();
+			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.BlackAndWhite.png", Mono.Unix.Catalog.GetString ("Black and White"));
+			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 			
 			PintaCore.Layers.Desaturate ();
 			PintaCore.History.PushNewItem (hist);
@@ -113,8 +113,8 @@ namespace Pinta.Core
 
 		private void HandleSepiaActivated (object sender, EventArgs e)
 		{
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Adjustments.Sepia.png", Mono.Unix.Catalog.GetString ("Sepia"));
-			hist.TakeSnapshotOfImage ();
+			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.Sepia.png", Mono.Unix.Catalog.GetString ("Sepia"));
+			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 
 			PintaCore.Layers.Sepia ();
 			PintaCore.History.PushNewItem (hist);

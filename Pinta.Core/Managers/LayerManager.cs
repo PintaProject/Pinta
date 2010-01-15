@@ -343,24 +343,21 @@ namespace Pinta.Core
 
 		public void Invert ()
 		{
-			foreach (var layer in layers)
-				layer.Invert ();
+			CurrentLayer.Invert ();
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 
 		public void Sepia ()
 		{
-			foreach (var layer in layers)
-				layer.Sepia ();
+			CurrentLayer.Sepia ();
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 	
 		public void Desaturate ()
 		{
-			foreach (var layer in layers)
-				layer.Desaturate ();
+			CurrentLayer.Desaturate ();
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}	

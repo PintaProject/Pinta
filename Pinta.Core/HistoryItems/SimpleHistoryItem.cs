@@ -33,11 +33,15 @@ namespace Pinta.Core
 	{
 		ImageSurface old_surface;
 		int layer_index;
-		
+
 		public SimpleHistoryItem (string icon, string text, ImageSurface oldSurface, int layerIndex) : base (icon, text)
 		{
 			old_surface = oldSurface;
 			layer_index = layerIndex;
+		}
+
+		public SimpleHistoryItem (string icon, string text) : base (icon, text)
+		{
 		}
 
 		public override void Undo ()
@@ -72,6 +76,18 @@ namespace Pinta.Core
 		{
 			// Free up native surface
 			(old_surface as IDisposable).Dispose ();
+		}
+
+		public void TakeSnapshotOfLayer (int layerIndex)
+		{
+			layer_index = layerIndex;
+			old_surface = PintaCore.Layers[layerIndex].Surface.Clone ();
+		}
+
+		public void TakeSnapshotOfLayer (Layer layer)
+		{
+			layer_index = PintaCore.Layers.IndexOf (layer);;
+			old_surface = layer.Surface.Clone ();
 		}
 	}
 }
