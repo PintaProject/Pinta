@@ -141,6 +141,9 @@ namespace Pinta
 			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
 			
 			using (Context g = new Context (surf)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+
 				g.Antialias = Antialias.Subpixel;
 				
 				g.MoveTo (last_point.X, last_point.Y);

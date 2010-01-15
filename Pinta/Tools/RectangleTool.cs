@@ -50,6 +50,9 @@ namespace Pinta
 			Rectangle dirty;
 			
 			using (Context g = new Context (l.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+					
 				g.Antialias = Antialias.Subpixel;
 				dirty = g.FillStrokedRectangle (rect, fill_color, outline_color, BrushWidth);
 			}
