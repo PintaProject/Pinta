@@ -1,5 +1,5 @@
-// 
-// RectangleSelectTool.cs
+﻿// 
+// SelectionHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,36 +26,52 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	public  class RectangleSelectTool : SelectTool
+	public class SelectionHistoryItem : BaseHistoryItem
 	{
-		public override string Name {
-			get { return "Rectangle Select"; }
-		}
-		public override string Icon {
-			get { return "Tools.RectangleSelect.png"; }
-		}
-		public override string StatusBarText {
-			get { return "Click and drag to draw a rectangular selection. Hold shift to constrain to a square."; }
-		}
-		public override bool Enabled {
-			get { return true; }
+		private Path old_path;
+		private bool show_selection;
+
+		public SelectionHistoryItem (string icon, string text) : base (icon, text)
+		{
 		}
 
-		protected override Rectangle DrawShape (Rectangle r, Layer l)
+		public override void Undo ()
 		{
-			Path path = PintaCore.Layers.SelectionPath;
+			Swap ();
+		}
+
+		public override void Redo ()
+		{
+			Swap ();
+		}
+
+		public override void Dispose ()
+		{
+			if (old_path != null)
+				(old_path as IDisposable).Dispose ();
+		}
+
+		private void Swap ()
+		{
+			Path swap_path = PintaCore.Layers.SelectionPath;//.Clone ();
+			bool swap_show = PintaCore.Layers.ShowSelection;
+
+			PintaCore.Layers.SelectionPath = old_path;
+			PintaCore.Layers.ShowSelection = show_selection;
+
+			old_path = swap_path;
+			show_selection = swap_show;
 			
-			using (Context g = new Context (l.Surface))
-				PintaCore.Layers.SelectionPath = g.CreateRectanglePath (r);
-			
-			(path as IDisposable).Dispose ();
-			
-			// Add some padding for invalidation
-			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+		
+		public void  TakeSnapshot ()
+		{
+			old_path = PintaCore.Layers.SelectionPath.Clone ();
+			show_selection = PintaCore.Layers.ShowSelection;
 		}
 	}
 }

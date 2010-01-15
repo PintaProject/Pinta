@@ -106,9 +106,6 @@ namespace Pinta.Core
 				if (selection_path == value)
 					return;
 				
-				if (selection_path != null)
-					(selection_path as IDisposable).Dispose ();
-				
 				selection_path = value;
 			}
 		}
@@ -433,10 +430,15 @@ namespace Pinta.Core
 
 		public void ResetSelectionPath ()
 		{
+			Path old = SelectionPath;
+			
 			// Create checkerboard background	
 			using (Cairo.Context g = new Cairo.Context (selection_layer.Surface))
 				SelectionPath = g.CreateRectanglePath (new Rectangle (0, 0, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y));
 			
+			if (old != null)
+				(old as IDisposable).Dispose ();
+				
 			ShowSelection = false;
 		}
 

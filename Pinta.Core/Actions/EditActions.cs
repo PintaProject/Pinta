@@ -133,9 +133,13 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
 		{
+			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.SelectAll.png", Mono.Unix.Catalog.GetString ("Select All"));
+			hist.TakeSnapshot ();
+
 			PintaCore.Layers.ResetSelectionPath ();
 			PintaCore.Layers.ShowSelection = true;
-			
+
+			PintaCore.History.PushNewItem (hist);
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 
@@ -155,8 +159,12 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
 		{
+			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Mono.Unix.Catalog.GetString ("Deselect"));
+			hist.TakeSnapshot ();
+			
 			PintaCore.Layers.ResetSelectionPath ();
 			
+			PintaCore.History.PushNewItem (hist);
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
 

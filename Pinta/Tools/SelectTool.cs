@@ -32,6 +32,8 @@ namespace Pinta
 {
 	public abstract class SelectTool : ShapeTool
 	{
+		protected SelectionHistoryItem hist;
+		
 		#region ToolBar
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Gtk.Toolbar tb)
@@ -44,6 +46,9 @@ namespace Pinta
 		{
 			shape_origin = point;
 			is_drawing = true;
+			
+			hist = new SelectionHistoryItem (Icon, Name);
+			hist.TakeSnapshot ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -54,8 +59,14 @@ namespace Pinta
 			// If the user didn't move the mouse, they want to deselect
 			int tolerance = 2;
 
-			if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance)
+			if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
 				PintaCore.Actions.Edit.Deselect.Activate ();
+				hist.Dispose ();
+				hist = null;
+			} else {
+				if (hist != null)
+					PintaCore.History.PushNewItem (hist);
+			}
 
 			is_drawing = false;
 		}
@@ -72,9 +83,8 @@ namespace Pinta
 
 			Rectangle dirty = DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.SelectionLayer);
 
-			PintaCore.Workspace.InvalidateRect (last_dirty.ToGdkRectangle (), false);
-			PintaCore.Workspace.InvalidateRect (dirty.ToGdkRectangle (), false);
-
+			PintaCore.Workspace.Invalidate ();
+			
 			last_dirty = dirty;
 		}
 		#endregion

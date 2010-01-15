@@ -160,6 +160,7 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsFileExitActivated (object sender, EventArgs e)
 		{
+			PintaCore.History.Clear ();
 			(PintaCore.Layers.SelectionPath as IDisposable).Dispose ();
 			Application.Quit ();
 		}

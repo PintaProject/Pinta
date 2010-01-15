@@ -168,8 +168,8 @@ namespace Pinta
 
 					g.AppendPath (PintaCore.Layers.SelectionPath);
 
-					g.SetDash (new double[] { 2, 4 }, 0);
-					g.LineWidth = 1;
+					g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
+					g.LineWidth = 1 / scale;
 					g.Color = new Cairo.Color (0, 0, 0);
 
 					g.Stroke ();

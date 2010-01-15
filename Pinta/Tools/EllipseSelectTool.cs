@@ -47,8 +47,12 @@ namespace Pinta
 
 		protected override Rectangle DrawShape (Rectangle r, Layer l)
 		{
+			Path path = PintaCore.Layers.SelectionPath;
+
 			using (Context g = new Context (l.Surface))
 				PintaCore.Layers.SelectionPath = g.CreateEllipsePath (r);
+
+			(path as IDisposable).Dispose ();
 			
 			return r;
 		}
