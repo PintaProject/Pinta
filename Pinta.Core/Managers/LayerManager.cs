@@ -153,6 +153,27 @@ namespace Pinta.Core
 			OnSelectedLayerChanged ();
 		}
 
+		public void FinishSelection ()
+		{
+			// We don't have an uncommitted layer, abort
+			if (!ShowSelectionLayer)
+				return;
+				
+			Layer layer = PintaCore.Layers.SelectionLayer;
+
+			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.Save ();
+
+				g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+				g.PaintWithAlpha (layer.Opacity);
+
+				g.Restore ();
+			}
+
+			PintaCore.Layers.DestroySelectionLayer ();
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+		}
+		
 		// Adds a new layer above the current one
 		public Layer AddNewLayer (string name)
 		{

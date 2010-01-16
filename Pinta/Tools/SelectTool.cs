@@ -66,6 +66,8 @@ namespace Pinta
 			} else {
 				if (hist != null)
 					PintaCore.History.PushNewItem (hist);
+					
+				hist = null;
 			}
 
 			is_drawing = false;

@@ -34,7 +34,7 @@ namespace Pinta
 	{
 		private PointD origin_offset;
 		private bool is_dragging;
-		private bool has_uncommitted;
+		private MovePixelsHistoryItem hist;
 		
 		public override string Name {
 			get { return "Move Selected Pixels"; }
@@ -54,8 +54,11 @@ namespace Pinta
 		{
 			origin_offset = point;
 			is_dragging = true;
+
+			hist = new MovePixelsHistoryItem (Icon, Name);
+			hist.TakeSnapshot ();
 			
-			if (!has_uncommitted) {
+			if (!PintaCore.Layers.ShowSelectionLayer) {
 				// Copy the selection to the temp layer
 				PintaCore.Layers.CreateSelectionLayer ();
 				PintaCore.Layers.ShowSelectionLayer = true;
@@ -76,8 +79,6 @@ namespace Pinta
 				}
 			}
 			
-			has_uncommitted = true;
-			
 			canvas.GdkWindow.Invalidate ();
 		}
 
@@ -90,12 +91,16 @@ namespace Pinta
 			
 			double dx = origin_offset.X - new_offset.X;
 			double dy = origin_offset.Y - new_offset.Y;
+
+			Path path = PintaCore.Layers.SelectionPath;
 			
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (path);
 				g.Translate (dx, dy);
 				PintaCore.Layers.SelectionPath = g.CopyPath ();
 			}
+
+			(path as IDisposable).Dispose ();
 
 			PintaCore.Layers.SelectionLayer.Offset = new PointD (PintaCore.Layers.SelectionLayer.Offset.X - dx, PintaCore.Layers.SelectionLayer.Offset.Y - dy);
 			
@@ -107,29 +112,19 @@ namespace Pinta
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			is_dragging = false;
+
+			if (hist != null)
+				PintaCore.History.PushNewItem (hist);
+
+			hist = null;
 		}
 		#endregion
 
 		protected override void OnDeactivated ()
 		{
-			
 			base.OnDeactivated ();
 			
-			Layer layer = PintaCore.Layers.SelectionLayer;
-			
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.Save ();
-
-				g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				g.PaintWithAlpha (layer.Opacity);
-					
-				g.Restore ();
-			}
-			
-			PintaCore.Layers.DestroySelectionLayer ();
-
-			has_uncommitted = false;
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Layers.FinishSelection ();
 		}
 	}
 }

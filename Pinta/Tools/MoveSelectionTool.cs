@@ -34,6 +34,7 @@ namespace Pinta
 	{
 		private PointD origin_offset;
 		private bool is_dragging;
+		private SelectionHistoryItem hist;
 		
 		public override string Name {
 			get { return "Move Selection"; }
@@ -53,6 +54,9 @@ namespace Pinta
 		{
 			origin_offset = point;
 			is_dragging = true;
+
+			hist = new SelectionHistoryItem (Icon, Name);
+			hist.TakeSnapshot ();
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
@@ -66,9 +70,11 @@ namespace Pinta
 			double dy = origin_offset.Y - new_offset.Y;
 			
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				Path old = PintaCore.Layers.SelectionPath;
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.Translate (dx, dy);
 				PintaCore.Layers.SelectionPath = g.CopyPath ();
+				(old as IDisposable).Dispose ();
 			}
 
 			origin_offset = new_offset;
@@ -80,6 +86,11 @@ namespace Pinta
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			is_dragging = false;
+
+			if (hist != null)
+				PintaCore.History.PushNewItem (hist);
+
+			hist = null;
 		}
 		#endregion
 	}

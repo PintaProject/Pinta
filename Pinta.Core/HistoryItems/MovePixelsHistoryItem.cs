@@ -1,5 +1,5 @@
 ﻿// 
-// SelectionHistoryItem.cs
+// MovePixelsHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -29,12 +29,12 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class SelectionHistoryItem : BaseHistoryItem
+	public class MovePixelsHistoryItem : BaseHistoryItem
 	{
 		private Path old_path;
-		private bool show_selection;
+		private PointD old_offset;
 
-		public SelectionHistoryItem (string icon, string text) : base (icon, text)
+		public MovePixelsHistoryItem (string icon, string text) : base (icon, text)
 		{
 		}
 
@@ -57,13 +57,13 @@ namespace Pinta.Core
 		private void Swap ()
 		{
 			Path swap_path = PintaCore.Layers.SelectionPath;
-			bool swap_show = PintaCore.Layers.ShowSelection;
+			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
 
 			PintaCore.Layers.SelectionPath = old_path;
-			PintaCore.Layers.ShowSelection = show_selection;
+			PintaCore.Layers.SelectionLayer.Offset = old_offset;
 
 			old_path = swap_path;
-			show_selection = swap_show;
+			old_offset = swap_offset;
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
@@ -71,7 +71,7 @@ namespace Pinta.Core
 		public void TakeSnapshot ()
 		{
 			old_path = PintaCore.Layers.SelectionPath.Clone ();
-			show_selection = PintaCore.Layers.ShowSelection;
+			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 		}
 	}
 }
