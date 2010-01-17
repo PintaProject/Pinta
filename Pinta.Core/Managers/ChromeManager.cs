@@ -35,21 +35,24 @@ namespace Pinta.Core
 		private Label status_bar_text;
 		private DrawingArea drawing_area;
 		private TreeView history_stack;
+		private Window main_window;
 		
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public DrawingArea DrawingArea { get { return drawing_area; } }
 		public TreeView HistoryStack { get { return history_stack; } }
+		public Window MainWindow { get { return main_window; } }
 		
 		public ChromeManager ()
 		{
 		}
 		
-		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack)
+		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)
 		{
 			tool_toolbar = toolToolBar;
 			status_bar_text = statusBarText;
 			drawing_area = drawingArea;
 			history_stack = historyStack;
+			main_window = mainWindow;
 		}
 		
 		public void SetStatusBarText (string text)

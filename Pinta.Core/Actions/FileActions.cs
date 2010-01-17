@@ -104,7 +104,7 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsFileOpenActivated (object sender, EventArgs e)
 		{
-			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Open Image File", null, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
+			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Open Image File", PintaCore.Chrome.MainWindow, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
 			
 			int response = fcd.Run ();
 			
@@ -113,6 +113,7 @@ namespace Pinta.Core
 				string file = fcd.Filename;
 				
 				PintaCore.Layers.Clear ();
+				PintaCore.History.Clear ();
 				
 				// Open the image and add it to the layers
 				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
@@ -134,7 +135,7 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsFileSaveAsActivated (object sender, EventArgs e)
 		{
-			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Save Image File", null, FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Save, Gtk.ResponseType.Ok);
+			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Save Image File", PintaCore.Chrome.MainWindow, FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Save, Gtk.ResponseType.Ok);
 			
 			int response = fcd.Run ();
 			

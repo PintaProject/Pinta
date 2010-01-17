@@ -46,7 +46,7 @@ namespace Pinta
 			PintaCore.Actions.AccelGroup = new AccelGroup ();
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
 
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, treeview1);
+			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, treeview1, this);
 			colorpalettewidget1.Initialize ();
 
 			CreateToolBox ();
@@ -183,7 +183,7 @@ namespace Pinta
 			Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
 
 			if (PintaCore.Workspace.PointInCanvas (point))
-				CursorPositionLabel.Text = string.Format ("{0}, {1}", point.X, point.Y);
+				CursorPositionLabel.Text = string.Format ("{0}, {1}", (int)point.X, (int)point.Y);
 
 			PintaCore.Tools.CurrentTool.DoMouseMove (o, args, point);
 		}

@@ -51,10 +51,10 @@ namespace Pinta.Core
 			History = new HistoryManager ();
 		}
 		
-		public static void Initialize (Toolbar toolToolBar, Label statusTextLabel, DrawingArea drawingArea, TreeView historyStack)
+		public static void Initialize (Toolbar toolToolBar, Label statusTextLabel, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)
 		{
 			Chrome = new ChromeManager ();
-			Chrome.Initialize (toolToolBar, statusTextLabel, drawingArea, historyStack);
+			Chrome.Initialize (toolToolBar, statusTextLabel, drawingArea, historyStack, mainWindow);
 			
 			Palette = new PaletteManager ();
 			
