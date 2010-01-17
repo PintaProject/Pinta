@@ -90,6 +90,8 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.Clear ();
 			PintaCore.History.Clear ();
+			PintaCore.Layers.DestroySelectionLayer ();
+			PintaCore.Layers.ResetSelectionPath ();
 			
 			// Start with an empty white layer
 			Layer background = PintaCore.Layers.AddNewLayer ("Background");
@@ -114,6 +116,8 @@ namespace Pinta.Core
 				
 				PintaCore.Layers.Clear ();
 				PintaCore.History.Clear ();
+				PintaCore.Layers.DestroySelectionLayer ();
+				PintaCore.Layers.ResetSelectionPath ();
 				
 				// Open the image and add it to the layers
 				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
