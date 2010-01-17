@@ -159,6 +159,9 @@ namespace Pinta.Core
 			if (!ShowSelectionLayer)
 				return;
 				
+			FinishPixelsHistoryItem hist = new FinishPixelsHistoryItem ();
+			hist.TakeSnapshot ();
+			
 			Layer layer = PintaCore.Layers.SelectionLayer;
 
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
@@ -172,6 +175,8 @@ namespace Pinta.Core
 
 			PintaCore.Layers.DestroySelectionLayer ();
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			
+			PintaCore.History.PushNewItem (hist);
 		}
 		
 		// Adds a new layer above the current one
@@ -444,6 +449,7 @@ namespace Pinta.Core
 		{
 			ShowSelectionLayer = false;
 			SelectionLayer.Clear ();
+			SelectionLayer.Offset = new PointD (0, 0);
 		}
 
 		public void ResetSelectionPath ()
