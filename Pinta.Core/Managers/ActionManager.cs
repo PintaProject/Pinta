@@ -87,7 +87,7 @@ namespace Pinta.Core
 		{
 			toolbar.AppendItem (File.New.CreateToolBarItem ());
 			toolbar.AppendItem (File.Open.CreateToolBarItem ());
-			toolbar.AppendItem (File.SaveAs.CreateToolBarItem ());
+			toolbar.AppendItem (File.Save.CreateToolBarItem ());
 			toolbar.AppendItem (File.Print.CreateToolBarItem ());
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());

@@ -52,6 +52,7 @@ namespace Pinta.Core
 			items.Add (item);
 			stack_pointer++;
 
+			PintaCore.Workspace.IsDirty = true;
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			
 			(PintaCore.Chrome.HistoryStack.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (item.Icon), item.Text);

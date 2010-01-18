@@ -34,6 +34,9 @@ namespace Pinta.Core
 
 	public class ViewportManager
 	{
+		private string filename;
+		private bool is_dirty;
+		
 		public PointD ImageSize { get; set; }
 		public PointD CanvasSize { get; set; }
 		
@@ -96,5 +99,29 @@ namespace Pinta.Core
 			return true;
 		}
 
+		public string Filename {
+			get { return filename; }
+			set {
+				if (filename != value) {
+					filename = value;
+					ResetTitle ();
+				}
+			}
+		}
+		
+		public bool IsDirty {
+			get { return is_dirty; }
+			set {
+				if (is_dirty != value) {
+					is_dirty = value;
+					ResetTitle ();
+				}
+			}
+		}
+		
+		private void ResetTitle ()
+		{
+			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", filename, is_dirty ? "*" : "");
+		}
 	}
 }

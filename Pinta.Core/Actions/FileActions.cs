@@ -53,7 +53,6 @@ namespace Pinta.Core
 			Exit = new Gtk.Action ("Exit", Mono.Unix.Catalog.GetString ("Exit"), null, "gtk-quit");
 			
 			OpenRecent.Sensitive = false;
-			Save.Sensitive = false;
 			Close.Sensitive = false;
 			Print.Sensitive = false;
 		}
@@ -80,6 +79,7 @@ namespace Pinta.Core
 		{
 			New.Activated += HandlePintaCoreActionsFileNewActivated;
 			Open.Activated += HandlePintaCoreActionsFileOpenActivated;
+			Save.Activated += HandlePintaCoreActionsFileSaveActivated;
 			SaveAs.Activated += HandlePintaCoreActionsFileSaveAsActivated;
 			Exit.Activated += HandlePintaCoreActionsFileExitActivated;
 		}
@@ -100,6 +100,9 @@ namespace Pinta.Core
 				g.SetSourceRGB (255, 255, 255);
 				g.Paint ();
 			}
+			
+			PintaCore.Workspace.Filename = "Untitled1";
+			PintaCore.Workspace.IsDirty = false;
 			
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 		}
@@ -130,35 +133,32 @@ namespace Pinta.Core
 				}
 				
 				bg.Dispose ();
-				
+
+				PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
+				PintaCore.Workspace.IsDirty = false;
+
 				PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
 			}
 			
 			fcd.Destroy ();
 		}
-
+		
+		private void HandlePintaCoreActionsFileSaveActivated (object sender, EventArgs e)
+		{
+			if (PintaCore.Workspace.Filename != "Untitled1")
+				SaveFile (PintaCore.Workspace.Filename);			
+			else
+				HandlePintaCoreActionsFileSaveAsActivated (null, EventArgs.Empty);
+		}
+		
 		private void HandlePintaCoreActionsFileSaveAsActivated (object sender, EventArgs e)
 		{
 			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Save Image File", PintaCore.Chrome.MainWindow, FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Save, Gtk.ResponseType.Ok);
 			
 			int response = fcd.Run ();
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				
-				string file = fcd.Filename;
-
-				Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
-				
-				Pixbuf pb = surf.ToPixbuf ();
-				
-				if (System.IO.Path.GetExtension (file) == ".jpeg" || System.IO.Path.GetExtension (file) == ".jpg")
-					pb.Save (file, "jpeg");
-				else
-					pb.Save (file, "png");
-				
-				(pb as IDisposable).Dispose ();
-				(surf as IDisposable).Dispose ();
-			}
+			if (response == (int)Gtk.ResponseType.Ok)
+				SaveFile (fcd.Filename);
 			
 			fcd.Destroy ();
 		}
@@ -168,6 +168,26 @@ namespace Pinta.Core
 			PintaCore.History.Clear ();
 			(PintaCore.Layers.SelectionPath as IDisposable).Dispose ();
 			Application.Quit ();
+		}
+		#endregion
+
+		#region Private Methods
+		private void SaveFile (string file)
+		{
+			Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
+
+			Pixbuf pb = surf.ToPixbuf ();
+
+			if (System.IO.Path.GetExtension (file) == ".jpeg" || System.IO.Path.GetExtension (file) == ".jpg")
+				pb.Save (file, "jpeg");
+			else
+				pb.Save (file, "png");
+
+			(pb as IDisposable).Dispose ();
+			(surf as IDisposable).Dispose ();
+			
+			PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
+			PintaCore.Workspace.IsDirty = false;
 		}
 		#endregion
 	}
