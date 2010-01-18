@@ -152,6 +152,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Open Image File", null, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
 			
 			int response = fcd.Run ();
@@ -185,18 +187,24 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.FlipCurrentLayerVertical ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsLayersFlipHorizontalActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.FlipCurrentLayerHorizontal ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Mono.Unix.Catalog.GetString ("Move Layer Up"), PintaCore.Layers.CurrentLayerIndex, PintaCore.Layers.CurrentLayerIndex + 1);
 			
 			PintaCore.Layers.MoveCurrentLayerUp ();
@@ -205,6 +213,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersMoveLayerDownActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Mono.Unix.Catalog.GetString ("Move Layer Down"), PintaCore.Layers.CurrentLayerIndex, PintaCore.Layers.CurrentLayerIndex - 1);
 
 			PintaCore.Layers.MoveCurrentLayerDown ();
@@ -213,6 +223,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersMergeLayerDownActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Mono.Unix.Catalog.GetString ("Merge Layer Down"));
 			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, PintaCore.Layers.CurrentLayer, PintaCore.Layers.CurrentLayerIndex);
 			SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[PintaCore.Layers.CurrentLayerIndex - 1].Surface.Clone (), PintaCore.Layers.CurrentLayerIndex - 1);
@@ -227,6 +239,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			Layer l = PintaCore.Layers.DuplicateCurrentLayer ();
 			
 			// Make new layer the current layer
@@ -238,6 +252,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersDeleteLayerActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Mono.Unix.Catalog.GetString ("Delete Layer"), PintaCore.Layers.CurrentLayer, PintaCore.Layers.CurrentLayerIndex);
 
 			PintaCore.Layers.DeleteLayer (PintaCore.Layers.CurrentLayerIndex, false);
@@ -247,6 +263,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersAddNewLayerActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
 
 			// Make new layer the current layer

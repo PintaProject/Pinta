@@ -119,6 +119,8 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+			
 			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 			
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
@@ -133,6 +135,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.SelectAll.png", Mono.Unix.Catalog.GetString ("Select All"));
 			hist.TakeSnapshot ();
 
@@ -145,6 +149,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsEditEraseSelectionActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
@@ -159,6 +165,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Mono.Unix.Catalog.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 			
@@ -170,6 +178,8 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditPasteIntoNewLayerActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			Gdk.Pixbuf image = cb.WaitForImage ();
 
@@ -194,6 +204,8 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));

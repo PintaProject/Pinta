@@ -102,18 +102,24 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.RotateImageCCW ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 		}
 
 		private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.RotateImageCW ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 		}
 
 		private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Mono.Unix.Catalog.GetString ("Flatten"));
 			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[0].Surface.Clone (), 0);
 			hist.Push (h1);
@@ -128,18 +134,24 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.RotateImage180 ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 		}
 
 		private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.FlipImageVertical ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
 		}
 
 		private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.FlipImageHorizontal ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
 		}

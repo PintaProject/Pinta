@@ -98,6 +98,8 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandleBlackAndWhiteActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.BlackAndWhite.png", Mono.Unix.Catalog.GetString ("Black and White"));
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 			
@@ -107,12 +109,16 @@ namespace Pinta.Core
 
 		private void HandleInvertColorsActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			PintaCore.Layers.Invert ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.InvertColors));
 		}
 
 		private void HandleSepiaActivated (object sender, EventArgs e)
 		{
+			PintaCore.Layers.FinishSelection ();
+
 			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.Sepia.png", Mono.Unix.Catalog.GetString ("Sepia"));
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 

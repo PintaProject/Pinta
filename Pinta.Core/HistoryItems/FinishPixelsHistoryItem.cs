@@ -58,6 +58,7 @@ namespace Pinta.Core
 			old_selection_layer = swap_sel;
 
 			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Tools.SetCurrentTool ("Move Selected Pixels");
 		}
 
 		public override void Redo ()
