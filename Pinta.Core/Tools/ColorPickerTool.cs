@@ -26,11 +26,10 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	class ColorPickerTool : BaseTool
+	public class ColorPickerTool : BaseTool
 	{
 		private int button_down = 0;
 

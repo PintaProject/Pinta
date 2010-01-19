@@ -25,9 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
 	// This is just to get them to show up in the toolbox
 	// until they get implemented

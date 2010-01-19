@@ -26,9 +26,8 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
 	public abstract class ShapeTool : BaseTool
 	{

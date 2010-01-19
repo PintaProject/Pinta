@@ -85,6 +85,20 @@
     <Compile Include="Effects\Utility.cs" />
     <Compile Include="Effects\HsvColor.cs" />
     <Compile Include="Effects\RgbColor.cs" />
+    <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Tools\EllipseSelectTool.cs" />
+    <Compile Include="Tools\EllipseTool.cs" />
+    <Compile Include="Tools\EraserTool.cs" />
+    <Compile Include="Tools\FreeformShapeTool.cs" />
+    <Compile Include="Tools\MoveSelectedTool.cs" />
+    <Compile Include="Tools\MoveSelectionTool.cs" />
+    <Compile Include="Tools\PaintBrushTool.cs" />
+    <Compile Include="Tools\RectangleSelectTool.cs" />
+    <Compile Include="Tools\RectangleTool.cs" />
+    <Compile Include="Tools\RoundedRectangleTool.cs" />
+    <Compile Include="Tools\SelectTool.cs" />
+    <Compile Include="Tools\ShapeTool.cs" />
+    <Compile Include="Tools\UnimplementedTools.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

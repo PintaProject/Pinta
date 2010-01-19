@@ -1,5 +1,5 @@
 // 
-// EllipseTool.cs
+// EllipseSelectTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,42 +26,34 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	public class EllipseTool : ShapeTool
+	public class EllipseSelectTool : SelectTool
 	{
 		public override string Name {
-			get { return "Ellipse"; }
+			get { return "Ellipse Select"; }
 		}
 		public override string Icon {
-			get { return "Tools.Ellipse.png"; }
+			get { return "Tools.EllipseSelect.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."; }
+			get { return "Click and drag to draw an elliptical selection. Hold shift to constrain to a circle."; }
 		}
 		public override bool Enabled {
 			get { return true; }
 		}
-		
-		public EllipseTool ()
-		{
-		}
-		
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
-		{
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.Clip ();
 
-				g.Antialias = Antialias.Subpixel;
-				dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
-			}
+		protected override Rectangle DrawShape (Rectangle r, Layer l)
+		{
+			Path path = PintaCore.Layers.SelectionPath;
+
+			using (Context g = new Context (l.Surface))
+				PintaCore.Layers.SelectionPath = g.CreateEllipsePath (r);
+
+			(path as IDisposable).Dispose ();
 			
-			return dirty;
+			return r;
 		}
 	}
 }

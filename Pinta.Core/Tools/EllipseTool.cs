@@ -1,5 +1,5 @@
 // 
-// RectangleSelectTool.cs
+// EllipseTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,36 +26,41 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	public  class RectangleSelectTool : SelectTool
+	public class EllipseTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Rectangle Select"; }
+			get { return "Ellipse"; }
 		}
 		public override string Icon {
-			get { return "Tools.RectangleSelect.png"; }
+			get { return "Tools.Ellipse.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw a rectangular selection. Hold shift to constrain to a square."; }
+			get { return "Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."; }
 		}
 		public override bool Enabled {
 			get { return true; }
 		}
-
-		protected override Rectangle DrawShape (Rectangle r, Layer l)
+		
+		public EllipseTool ()
 		{
-			Path path = PintaCore.Layers.SelectionPath;
+		}
+		
+		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		{
+			Rectangle dirty;
 			
-			using (Context g = new Context (l.Surface))
-				PintaCore.Layers.SelectionPath = g.CreateRectanglePath (r);
+			using (Context g = new Context (l.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+
+				g.Antialias = Antialias.Subpixel;
+				dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
+			}
 			
-			(path as IDisposable).Dispose ();
-			
-			// Add some padding for invalidation
-			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);
+			return dirty;
 		}
 	}
 }

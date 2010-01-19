@@ -27,9 +27,8 @@
 using System;
 using Cairo;
 using Gtk;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
 	public class EraserTool : BaseTool
 	{

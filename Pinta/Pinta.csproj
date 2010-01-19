@@ -53,22 +53,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
-    <Compile Include="Tools\ColorPickerTool.cs" />
-    <Compile Include="Tools\FreeformShapeTool.cs" />
-    <Compile Include="Tools\PaintBrushTool.cs" />
-    <Compile Include="Tools\EraserTool.cs" />
-    <Compile Include="Tools\UnimplementedTools.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\LayersListWidget.cs" />
-    <Compile Include="Tools\RectangleTool.cs" />
-    <Compile Include="Tools\ShapeTool.cs" />
-    <Compile Include="Tools\EllipseTool.cs" />
-    <Compile Include="Tools\RoundedRectangleTool.cs" />
-    <Compile Include="Tools\RectangleSelectTool.cs" />
-    <Compile Include="Tools\MoveSelectedTool.cs" />
-    <Compile Include="Tools\MoveSelectionTool.cs" />
-    <Compile Include="Tools\SelectTool.cs" />
-    <Compile Include="Tools\EllipseSelectTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinta.pkgxml" />

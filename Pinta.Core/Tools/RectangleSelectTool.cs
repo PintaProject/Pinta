@@ -1,5 +1,5 @@
 // 
-// RectangleTool.cs
+// RectangleSelectTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,38 +26,35 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	public class RectangleTool : ShapeTool
+	public class RectangleSelectTool : SelectTool
 	{
 		public override string Name {
-			get { return "Rectangle"; }
+			get { return "Rectangle Select"; }
 		}
 		public override string Icon {
-			get { return "Tools.Rectangle.png"; }
+			get { return "Tools.RectangleSelect.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw a rectangle (right click for secondary color). Hold shift to constrain to a square."; }
+			get { return "Click and drag to draw a rectangular selection. Hold shift to constrain to a square."; }
 		}
 		public override bool Enabled {
 			get { return true; }
 		}
-		
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+
+		protected override Rectangle DrawShape (Rectangle r, Layer l)
 		{
-			Rectangle dirty;
+			Path path = PintaCore.Layers.SelectionPath;
 			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.Clip ();
-					
-				g.Antialias = Antialias.Subpixel;
-				dirty = g.FillStrokedRectangle (rect, fill_color, outline_color, BrushWidth);
-			}
+			using (Context g = new Context (l.Surface))
+				PintaCore.Layers.SelectionPath = g.CreateRectanglePath (r);
 			
-			return dirty;
+			(path as IDisposable).Dispose ();
+			
+			// Add some padding for invalidation
+			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);
 		}
 	}
 }
