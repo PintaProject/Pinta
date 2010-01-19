@@ -54,6 +54,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Tools\FreeformShapeTool.cs" />
     <Compile Include="Tools\PaintBrushTool.cs" />
     <Compile Include="Tools\EraserTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />

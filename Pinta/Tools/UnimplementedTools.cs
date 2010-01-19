@@ -140,14 +140,4 @@ namespace Pinta
 			get { return "Tools.Line.png"; }
 		}
 	}
-			
-	public class FreeformShapeTool : BaseTool
-	{
-		public override string Name {
-			get { return "Freeform Shape"; }
-		}
-		public override string Icon {
-			get { return "Tools.FreeformShape.png"; }
-		}
-	}
 }
