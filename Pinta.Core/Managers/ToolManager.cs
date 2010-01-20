@@ -106,6 +106,7 @@ namespace Pinta.Core
 			tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
 			tool.ToolItem.Active = true;
 			
+			PintaCore.Workspace.Invalidate ();
 			PintaCore.Chrome.SetStatusBarText (string.Format (" {0}: {1}", tool.Name, tool.StatusBarText));
 		}
 

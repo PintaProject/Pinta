@@ -189,6 +189,11 @@ namespace Pinta
 
 					g.AppendPath (PintaCore.Layers.SelectionPath);
 
+					if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
+						g.Color = new Cairo.Color (0, 0, 1, .1);
+						g.FillPreserve ();
+					}
+					
 					g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
 					g.LineWidth = 1 / scale;
 					g.Color = new Cairo.Color (0, 0, 0);
