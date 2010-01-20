@@ -174,7 +174,7 @@ namespace Pinta.Core
 			}
 
 			PintaCore.Layers.DestroySelectionLayer ();
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 			
 			PintaCore.History.PushNewItem (hist);
 		}
@@ -313,7 +313,7 @@ namespace Pinta.Core
 		{
 			CurrentLayer.FlipHorizontal ();
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Flip current layer vertically
@@ -321,7 +321,7 @@ namespace Pinta.Core
 		{
 			CurrentLayer.FlipVertical ();
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Flip layer horizontally
@@ -329,7 +329,7 @@ namespace Pinta.Core
 		{
 			layers[layerIndex].FlipHorizontal ();
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Flip layer vertically
@@ -337,7 +337,7 @@ namespace Pinta.Core
 		{
 			layers[layerIndex].FlipVertical ();
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Flip image horizontally
@@ -346,7 +346,7 @@ namespace Pinta.Core
 			foreach (var layer in layers)
 				layer.FlipHorizontal ();
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Flip image vertically
@@ -355,7 +355,7 @@ namespace Pinta.Core
 			foreach (var layer in layers)
 				layer.FlipVertical ();
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Rotate image 180 degrees (flip H+V)
@@ -364,28 +364,28 @@ namespace Pinta.Core
 			foreach (var layer in layers)
 				layer.Rotate180 ();
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		public void Invert ()
 		{
 			CurrentLayer.Invert ();
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		public void Sepia ()
 		{
 			CurrentLayer.Sepia ();
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 	
 		public void Desaturate ()
 		{
 			CurrentLayer.Desaturate ();
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}	
 		
 		public void RotateImageCW ()
@@ -396,7 +396,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.ImageSize = new PointD (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
 			PintaCore.Workspace.CanvasSize = new PointD (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 	
 		public void RotateImageCCW ()
@@ -407,7 +407,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.ImageSize = new PointD (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
 			PintaCore.Workspace.CanvasSize = new PointD (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 
 		}
 			
@@ -436,7 +436,7 @@ namespace Pinta.Core
 			}
 			
 			OnLayerRemoved ();
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 		
 		public void CreateSelectionLayer ()

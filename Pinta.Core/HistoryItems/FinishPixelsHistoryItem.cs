@@ -57,7 +57,7 @@ namespace Pinta.Core
 			old_surface = swap_surf;
 			old_selection_layer = swap_sel;
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 			PintaCore.Tools.SetCurrentTool ("Move Selected Pixels");
 		}
 
@@ -76,7 +76,7 @@ namespace Pinta.Core
 			old_offset = swap_offset;
 
 			PintaCore.Layers.DestroySelectionLayer ();
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		public override void Dispose ()

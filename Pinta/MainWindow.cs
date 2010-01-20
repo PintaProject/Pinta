@@ -49,6 +49,9 @@ namespace Pinta
 			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, treeview1, this);
 			colorpalettewidget1.Initialize ();
 
+			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
+			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (History_HistoryItemAdded);
+			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
 			CreateToolBox ();
 
 			PintaCore.Actions.CreateMainMenu (menubar1);
@@ -73,6 +76,24 @@ namespace Pinta
 			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
 			treeview1.HeadersVisible = false;
 			AddColumns (treeview1);
+		}
+
+		void Workspace_CanvasInvalidated (object sender, CanvasInvalidatedEventArgs e)
+		{
+			if (e.EntireSurface)
+				drawingarea1.GdkWindow.Invalidate ();
+			else
+				drawingarea1.GdkWindow.InvalidateRect (e.Rectangle, false);
+		}
+
+		void History_HistoryItemAdded (object sender, HistoryItemAddedEventArgs e)
+		{
+			(treeview1.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (e.Item.Icon), e.Item.Text);
+		}
+
+		private void Chrome_StatusBarTextChanged (object sender, TextChangedEventArgs e)
+		{
+			label5.Text = e.Text;
 		}
 
 		void AddColumns (TreeView treeView)

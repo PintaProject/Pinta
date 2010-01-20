@@ -129,7 +129,7 @@ namespace Pinta.Core
 				g.Fill ();
 			}
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Mono.Unix.Catalog.GetString ("Fill Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
@@ -144,7 +144,7 @@ namespace Pinta.Core
 			PintaCore.Layers.ShowSelection = true;
 
 			PintaCore.History.PushNewItem (hist);
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		private void HandlePintaCoreActionsEditEraseSelectionActivated (object sender, EventArgs e)
@@ -159,7 +159,7 @@ namespace Pinta.Core
 				g.Fill ();
 			}
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
@@ -173,7 +173,7 @@ namespace Pinta.Core
 			PintaCore.Layers.ResetSelectionPath ();
 			
 			PintaCore.History.PushNewItem (hist);
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		private void HandlerPintaCoreActionsEditPasteIntoNewLayerActivated (object sender, EventArgs e)
@@ -195,7 +195,7 @@ namespace Pinta.Core
 			// Make new layer the current layer
 			PintaCore.Layers.SetCurrentLayer (l);
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 
 			// TODO: Need paste icon
 			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
@@ -217,7 +217,7 @@ namespace Pinta.Core
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface))
 				g.DrawPixbuf (image, new Cairo.Point (0, 0));
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 			
 			// TODO: Need paste icon
 			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
@@ -237,7 +237,7 @@ namespace Pinta.Core
 			//using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface))
 			//        g.DrawPixbuf (image, new Cairo.Point (0, 0));
 
-			//PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			//PintaCore.Workspace.Invalidate ();
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)

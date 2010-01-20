@@ -65,7 +65,7 @@ namespace Pinta.Core
 			old_path = swap_path;
 			show_selection = swap_show;
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 		
 		public void TakeSnapshot ()

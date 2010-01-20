@@ -138,7 +138,7 @@ namespace Pinta.Core
 			DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.CurrentLayer);
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (shape_origin, new PointD (x, y));
-			PintaCore.Workspace.InvalidateRect (last_dirty.ToGdkRectangle (), false);
+			PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			
 			is_drawing = false;
 
@@ -163,8 +163,8 @@ namespace Pinta.Core
 			Rectangle dirty = DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.ToolLayer);
 			dirty = dirty.Clamp ();
 			
-			PintaCore.Workspace.InvalidateRect (last_dirty.ToGdkRectangle (), false);
-			PintaCore.Workspace.InvalidateRect (dirty.ToGdkRectangle (), false);
+			PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
+			PintaCore.Workspace.Invalidate (dirty.ToGdkRectangle ());
 			
 			last_dirty = dirty;
 

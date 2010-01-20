@@ -179,7 +179,7 @@ namespace Pinta.Core
 				AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.ImportFromFile.png", Mono.Unix.Catalog.GetString ("Import From File"), PintaCore.Layers.IndexOf (layer));
 				PintaCore.History.PushNewItem (hist);
 
-				PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+				PintaCore.Workspace.Invalidate ();
 			}
 			
 			fcd.Destroy ();

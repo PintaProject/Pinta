@@ -104,7 +104,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.Filename = "Untitled1";
 			PintaCore.Workspace.IsDirty = false;
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		private void HandlePintaCoreActionsFileOpenActivated (object sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace Pinta.Core
 				PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
 				PintaCore.Workspace.IsDirty = false;
 
-				PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+				PintaCore.Workspace.Invalidate ();
 			}
 			
 			fcd.Destroy ();

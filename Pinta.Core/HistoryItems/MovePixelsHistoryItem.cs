@@ -65,7 +65,7 @@ namespace Pinta.Core
 			old_path = swap_path;
 			old_offset = swap_offset;
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 		
 		public void TakeSnapshot ()

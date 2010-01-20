@@ -1,5 +1,5 @@
-// 
-// ChromeManager.cs
+﻿// 
+// TextChangedEventArgs.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,48 +25,16 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 
 namespace Pinta.Core
 {
-	public class ChromeManager
+	public class TextChangedEventArgs : EventArgs
 	{
-		private Toolbar tool_toolbar;
-		private DrawingArea drawing_area;
-		private Window main_window;
+		public string Text { get; set; }
 		
-		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public DrawingArea DrawingArea { get { return drawing_area; } }
-		public Window MainWindow { get { return main_window; } }
-		
-		public ChromeManager ()
+		public TextChangedEventArgs (string text)
 		{
+			Text = text;
 		}
-		
-		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)
-		{
-			tool_toolbar = toolToolBar;
-			drawing_area = drawingArea;
-			main_window = mainWindow;
-		}
-
-		#region Public Methods
-		public void SetStatusBarText (string text)
-		{
-			OnStatusBarTextChanged (text);
-		}
-		#endregion
-
-		#region Protected Methods
-		protected void OnStatusBarTextChanged (string text)
-		{
-			if (StatusBarTextChanged != null)
-				StatusBarTextChanged (this, new TextChangedEventArgs (text));
-		}
-		#endregion
-		
-		#region Public Events
-		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
-		#endregion
 	}
 }

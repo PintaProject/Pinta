@@ -95,7 +95,7 @@ namespace Pinta
 			this.GdkWindow.Invalidate ();
 
 			// TODO: this should be handled elsewhere
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		protected override bool OnButtonPressEvent (Gdk.EventButton ev)
@@ -109,7 +109,7 @@ namespace Pinta
 				PintaCore.Layers.SetCurrentLayer (clicked);
 			
 			GdkWindow.Invalidate ();
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 			
 			// Insert button press handling code here.
 			return base.OnButtonPressEvent (ev);

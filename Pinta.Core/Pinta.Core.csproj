@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
+    <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
+    <Compile Include="EventArgs\TextChangedEventArgs.cs" />
     <Compile Include="HistoryItems\FinishPixelsHistoryItem.cs" />
     <Compile Include="HistoryItems\MovePixelsHistoryItem.cs" />
     <Compile Include="HistoryItems\SelectionHistoryItem.cs" />
@@ -77,7 +80,7 @@
     <Compile Include="Actions\ImageActions.cs" />
     <Compile Include="Actions\AdjustmentsActions.cs" />
     <Compile Include="Actions\HelpActions.cs" />
-    <Compile Include="Managers\ViewportManager.cs" />
+    <Compile Include="Managers\WorkspaceManager.cs" />
     <Compile Include="Effects\ColorBgra.cs" />
     <Compile Include="Effects\UnaryPixelOps.cs" />
     <Compile Include="Effects\UnaryPixelOp.cs" />

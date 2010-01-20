@@ -55,8 +55,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.IsDirty = true;
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			
-			(PintaCore.Chrome.HistoryStack.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (item.Icon), item.Text);
-			OnHistoryItemAdded ();
+			OnHistoryItemAdded (item);
 		}
 		
 		public void Undo ()
@@ -106,27 +105,27 @@ namespace Pinta.Core
 		}
 
 		#region Protected Methods
-		protected void OnHistoryItemAdded ()
+		protected void OnHistoryItemAdded (BaseHistoryItem item)
 		{
 			if (HistoryItemAdded != null)
-				HistoryItemAdded.Invoke (this, EventArgs.Empty);
+				HistoryItemAdded (this, new HistoryItemAddedEventArgs (item));
 		}
 
 		protected void OnActionUndone ()
 		{
 			if (ActionUndone != null)
-				ActionUndone.Invoke (this, EventArgs.Empty);
+				ActionUndone (this, EventArgs.Empty);
 		}
 
 		protected void OnActionRedone ()
 		{
 			if (ActionRedone != null)
-				ActionRedone.Invoke (this, EventArgs.Empty);
+				ActionRedone (this, EventArgs.Empty);
 		}
 		#endregion
 
 		#region Events
-		public event EventHandler HistoryItemAdded;
+		public event EventHandler<HistoryItemAddedEventArgs> HistoryItemAdded;
 		public event EventHandler ActionUndone;
 		public event EventHandler ActionRedone;
 		#endregion

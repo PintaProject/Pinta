@@ -38,14 +38,14 @@ namespace Pinta.Core
 		public static PaletteManager Palette { get; private set; }
 		public static ResourceManager Resources { get; private set; }
 		public static ActionManager Actions { get; private set; }
-		public static ViewportManager Workspace { get; private set; }
+		public static WorkspaceManager Workspace { get; private set; }
 		public static HistoryManager History { get; private set; }
 		
 		static PintaCore ()
 		{
 			Resources = new ResourceManager ();
 			Actions = new ActionManager ();
-			Workspace = new ViewportManager ();
+			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
 			Tools = new ToolManager ();
 			History = new HistoryManager ();

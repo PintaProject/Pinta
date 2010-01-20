@@ -158,7 +158,7 @@ namespace Pinta.Core
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
 
-			PintaCore.Workspace.InvalidateRect (r, true);
+			PintaCore.Workspace.Invalidate (r);
 			
 			last_point = new Point (x, y);
 		}

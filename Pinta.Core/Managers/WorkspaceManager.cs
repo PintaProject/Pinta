@@ -1,5 +1,5 @@
 // 
-// ViewportManager.cs
+// WorkspaceManager.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -27,12 +27,9 @@
 using System;
 using Cairo;
 
-
 namespace Pinta.Core
 {
-
-
-	public class ViewportManager
+	public class WorkspaceManager
 	{
 		private string filename;
 		private bool is_dirty;
@@ -44,7 +41,7 @@ namespace Pinta.Core
 			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - CanvasSize.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
 		}
 
-		public ViewportManager ()
+		public WorkspaceManager ()
 		{
 			CanvasSize = new PointD (800, 600);
 			ImageSize = new PointD (800, 600);
@@ -62,13 +59,13 @@ namespace Pinta.Core
 		
 		public void Invalidate ()
 		{
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate ();
+			OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
 		}
 			
-		public void InvalidateRect (Gdk.Rectangle rect, bool invalidateChildren)
+		public void Invalidate (Gdk.Rectangle rect)
 		{
 			rect = new Gdk.Rectangle ((int)((rect.X) * Scale + Offset.X), (int)((rect.Y) * Scale + Offset.Y), (int)(rect.Width * Scale), (int)(rect.Height * Scale));
-			PintaCore.Chrome.DrawingArea.GdkWindow.InvalidateRect (rect, invalidateChildren);
+			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (rect));
 		}
 		
 		public void ZoomIn ()
@@ -123,5 +120,17 @@ namespace Pinta.Core
 		{
 			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", filename, is_dirty ? "*" : "");
 		}
+
+		#region Protected Methods
+		protected void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
+		{
+			if (CanvasInvalidated != null)
+				CanvasInvalidated (this, e);
+		}
+		#endregion
+
+		#region Public Events
+		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
+		#endregion
 	}
 }
