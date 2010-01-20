@@ -64,6 +64,7 @@ namespace Pinta.Core
 				
 				using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.SelectionLayer.Surface)) {
 					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.FillRule = FillRule.EvenOdd;
 					g.SetSource (PintaCore.Layers.CurrentLayer.Surface);
 					g.Clip ();
 					g.Paint ();
@@ -73,6 +74,7 @@ namespace Pinta.Core
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
 					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.FillRule = FillRule.EvenOdd;
 					g.Operator = Cairo.Operator.Clear;
 					g.Fill ();
 				}

@@ -125,6 +125,7 @@ namespace Pinta.Core
 			
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Color = PintaCore.Palette.PrimaryColor;
 				g.Fill ();
 			}
@@ -155,6 +156,7 @@ namespace Pinta.Core
 
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Operator = Cairo.Operator.Clear;
 				g.Fill ();
 			}

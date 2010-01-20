@@ -173,6 +173,7 @@ namespace Pinta.Core
 
 			using (Context g = new Context (Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
 				g.SetSource (dest);
@@ -197,6 +198,7 @@ namespace Pinta.Core
 
 			using (Context g = new Context (Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
 				g.SetSource (dest);
@@ -224,6 +226,7 @@ namespace Pinta.Core
 
 			using (Context g = new Context (Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
 				g.SetSource (dest);

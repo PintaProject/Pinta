@@ -191,6 +191,7 @@ namespace Pinta
 
 					if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
 						g.Color = new Cairo.Color (0, 0, 1, .1);
+						g.FillRule = Cairo.FillRule.EvenOdd;
 						g.FillPreserve ();
 					}
 					

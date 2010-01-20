@@ -50,6 +50,7 @@ namespace Pinta.Core
 			
 			using (Context g = new Context (l.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
 				g.Antialias = Antialias.Subpixel;

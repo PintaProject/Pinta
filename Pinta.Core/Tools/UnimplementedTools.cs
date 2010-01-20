@@ -30,16 +30,6 @@ namespace Pinta.Core
 {
 	// This is just to get them to show up in the toolbox
 	// until they get implemented
-	public class LassoSelectTool : BaseTool
-	{
-		public override string Name {
-			get { return "Lasso Select"; }
-		}
-		public override string Icon {
-			get { return "Tools.LassoSelect.png"; }
-		}
-	}
-	
 	public class ZoomTool : BaseTool
 	{
 		public override string Name {

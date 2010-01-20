@@ -1,5 +1,5 @@
 // 
-// MoveSelectionTool.cs
+// LassoSelectTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,71 +26,86 @@
 
 using System;
 using Cairo;
+using Gtk;
 
 namespace Pinta.Core
 {
-	public class MoveSelectionTool : BaseTool
+	public class LassoSelectTool : SelectTool
 	{
-		private PointD origin_offset;
-		private bool is_dragging;
-		private SelectionHistoryItem hist;
-		
-		public override string Name {
-			get { return "Move Selection"; }
+		private Path path;
+
+		public LassoSelectTool ()
+		{
 		}
-		public override string Icon {
-			get { return "Tools.MoveSelection.png"; }
-		}
-		public override string StatusBarText {
-			get { return "Drag the selection to move. Drag the nubs to scale. Drag with right mouse button to rotate."; }
-		}
-		public override bool Enabled {
-			get { return true; }
-		}
+
+		#region Properties
+		public override string Name { get { return "Lasso Select"; } }
+		public override string Icon { get { return "Tools.LassoSelect.png"; } }
+		public override string StatusBarText { get { return "Click and drag to draw the outline for a selection area"; } }
+		public override bool Enabled { get { return true; } }
+		#endregion
 
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
-			origin_offset = point;
-			is_dragging = true;
-
-			hist = new SelectionHistoryItem (Icon, Name);
-			hist.TakeSnapshot ();
+			base.OnMouseDown (canvas, args, point);
+			
+			path = null;
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			if (!is_dragging)
+			if (!is_drawing)
 				return;
-			
-			PointD new_offset = point;
-			
-			double dx = origin_offset.X - new_offset.X;
-			double dy = origin_offset.Y - new_offset.Y;
-			
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				Path old = PintaCore.Layers.SelectionPath;
+
+			double x = point.X;
+			double y = point.Y;
+
+			PintaCore.Layers.ShowSelection = true;
+
+			ImageSurface surf = PintaCore.Layers.ToolLayer.Surface;
+
+			using (Context g = new Context (surf)) {
+				g.Antialias = Antialias.Subpixel;
+
+				if (path != null) {
+					g.AppendPath (path);
+					(path as IDisposable).Dispose ();
+				}
+					
+				g.LineTo (x, y);
+
+				path = g.CopyPath ();
+				
 				g.FillRule = FillRule.EvenOdd;
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.Translate (dx, dy);
-				PintaCore.Layers.SelectionPath = g.CopyPath ();
-				(old as IDisposable).Dispose ();
+				g.ClosePath ();
+				
+				PintaCore.Layers.SelectionPath = g.CopyPath (); 
 			}
 
-			origin_offset = new_offset;
-			PintaCore.Layers.ShowSelection = true;
-			
-			(o as Gtk.DrawingArea).GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-			is_dragging = false;
+			base.OnMouseUp (canvas, args, point);
 
-			if (hist != null)
-				PintaCore.History.PushNewItem (hist);
+			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
 
-			hist = null;
+			using (Context g = new Context (surf)) {
+				if (path != null) {
+					g.AppendPath (path);
+					(path as IDisposable).Dispose ();
+					path = null;
+				}
+
+				g.FillRule = FillRule.EvenOdd;
+				g.ClosePath ();
+				
+				PintaCore.Layers.SelectionPath = g.CopyPath ();
+			}
+
+			PintaCore.Workspace.Invalidate ();
 		}
 		#endregion
 	}
