@@ -90,16 +90,6 @@ namespace Pinta.Core
 		}
 	}
 			
-	public class PencilTool : BaseTool
-	{
-		public override string Name {
-			get { return "Pencil"; }
-		}
-		public override string Icon {
-			get { return "Tools.Pencil.png"; }
-		}
-	}
-			
 	public class CloneStampTool : BaseTool
 	{
 		public override string Name {
