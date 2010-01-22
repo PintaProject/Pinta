@@ -235,5 +235,34 @@ namespace Pinta.Core
 			
 			(dest as IDisposable).Dispose ();
 		}
+		
+		public unsafe void AutoLevel ()
+		{
+			ImageSurface dest = Surface.Clone ();
+			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
+			ColorBgra* srcPtr = (ColorBgra*)Surface.DataPtr;
+			
+			int len = Surface.Data.Length / 4;
+
+			UnaryPixelOps.Level levels = null;
+		        
+			HistogramRgb histogram = new HistogramRgb();
+			histogram.UpdateHistogram (Surface, new Rectangle (0, 0, Surface.Width, Surface.Height));
+			levels = histogram.MakeLevelsAuto();
+
+			if (levels.isValid)
+				levels.Apply (dstPtr, srcPtr, len);
+				
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
+		}
 	}
 }

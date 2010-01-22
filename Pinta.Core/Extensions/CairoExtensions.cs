@@ -401,5 +401,24 @@ namespace Pinta.Core
 			
 			return c;
 		}
+
+		public static double GetBottom (this Rectangle rect)
+		{
+			return rect.Y + rect.Height;
+		}
+
+		public static double GetRight (this Rectangle rect)
+		{
+			return rect.X + rect.Width;
+		}
+		
+		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, int x, int y)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+
+			dstPtr += (x) + (y * surf.Width);
+
+			return dstPtr;
+		}
 	}
 }

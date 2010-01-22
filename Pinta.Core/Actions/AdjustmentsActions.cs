@@ -63,7 +63,6 @@ namespace Pinta.Core
 			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize"), null, null);
 			Sepia = new Gtk.Action ("Sepia", Mono.Unix.Catalog.GetString ("Sepia"), null, "Menu.Adjustments.Sepia.png");
 			
-			AutoLevel.Sensitive = false;
 			BrightnessContrast.Sensitive = false;
 			Curves.Sensitive = false;
 			HueSaturation.Sensitive = false;
@@ -92,6 +91,7 @@ namespace Pinta.Core
 			Sepia.Activated += HandleSepiaActivated;
 			InvertColors.Activated += HandleInvertColorsActivated;
 			BlackAndWhite.Activated += HandleBlackAndWhiteActivated;
+			AutoLevel.Activated += HandleAutoLevelActivated;
 		}
 		#endregion
 
@@ -123,6 +123,19 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 
 			PintaCore.Layers.Sepia ();
+			PintaCore.History.PushNewItem (hist);
+		}
+		
+		private void HandleAutoLevelActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FinishSelection ();
+
+			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.AutoLevel.png", Mono.Unix.Catalog.GetString ("Auto Level"));
+			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
+
+			PintaCore.Layers.CurrentLayer.AutoLevel ();
+			PintaCore.Workspace.Invalidate ();
+
 			PintaCore.History.PushNewItem (hist);
 		}
 		#endregion
