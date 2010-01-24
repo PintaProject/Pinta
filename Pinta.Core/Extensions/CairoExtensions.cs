@@ -75,7 +75,7 @@ namespace Pinta.Core
 			return path;
 		}
 
-		public static void FillRectangle (this Context g, Rectangle r, Color color)
+		public static Rectangle FillRectangle (this Context g, Rectangle r, Color color)
 		{
 			g.Save ();
 			
@@ -86,12 +86,16 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y);
 			
 			g.Color = color;
-			g.Fill ();
 			
+			Rectangle dirty = g.StrokeExtents ();
+
+			g.Fill ();
 			g.Restore ();
+
+			return dirty;
 		}
 
-		public static void FillRectangle (this Context g, Rectangle r, Pattern pattern)
+		public static Rectangle FillRectangle (this Context g, Rectangle r, Pattern pattern)
 		{
 			g.Save ();
 			
@@ -102,9 +106,13 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y);
 			
 			g.Pattern = pattern;
-			g.Fill ();
-			
+			g.FillPreserve ();
+
+			Rectangle dirty = g.StrokeExtents ();
+
 			g.Restore ();
+
+			return dirty;
 		}
 		
 		public static Rectangle FillStrokedRectangle (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
@@ -142,7 +150,7 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static void DrawEllipse (this Context g, Rectangle r, Color color, int lineWidth)
+		public static Rectangle DrawEllipse (this Context g, Rectangle r, Color color, int lineWidth)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
@@ -164,12 +172,15 @@ namespace Pinta.Core
 			g.Color = color;
 			g.LineWidth = lineWidth;
 			
-			g.Stroke ();
-			
+			g.StrokePreserve ();
+
+			Rectangle dirty = g.StrokeExtents ();
 			g.Restore ();
+
+			return dirty;
 		}
 
-		public static void FillEllipse (this Context g, Rectangle r, Color color)
+		public static Rectangle FillEllipse (this Context g, Rectangle r, Color color)
 		{
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
@@ -189,9 +200,12 @@ namespace Pinta.Core
 			g.ClosePath ();
 			
 			g.Color = color;
-			g.Fill ();
+			g.FillPreserve ();
 			
+			Rectangle dirty = g.StrokeExtents ();
 			g.Restore ();
+			
+			return dirty;
 		}
 
 		public static Path CreateEllipsePath (this Context g, Rectangle r)
@@ -256,10 +270,10 @@ namespace Pinta.Core
 		public static Rectangle FillStrokedRoundedRectangle (this Context g, Rectangle r, double radius, Color fill, Color stroke, int lineWidth)
 		{
 			g.Save ();
-			
+
 			if ((radius > r.Height / 2) || (radius > r.Width / 2))
 				radius = Math.Min (r.Height / 2, r.Width / 2);
-			
+
 			g.MoveTo (r.X, r.Y + radius);
 			g.Arc (r.X + radius, r.Y + radius, radius, Math.PI, -Math.PI / 2);
 			g.LineTo (r.X + r.Width - radius, r.Y);
@@ -269,6 +283,8 @@ namespace Pinta.Core
 			g.LineTo (r.X + radius, r.Y + r.Height);
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
+
+			g.Restore ();
 			
 			g.Color = fill;
 			g.FillPreserve ();
@@ -284,6 +300,78 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+		public static Rectangle FillRoundedRectangle (this Context g, Rectangle r, double radius, Color fill)
+		{
+			g.Save ();
+
+			if ((radius > r.Height / 2) || (radius > r.Width / 2))
+				radius = Math.Min (r.Height / 2, r.Width / 2);
+
+			g.MoveTo (r.X, r.Y + radius);
+			g.Arc (r.X + radius, r.Y + radius, radius, Math.PI, -Math.PI / 2);
+			g.LineTo (r.X + r.Width - radius, r.Y);
+			g.Arc (r.X + r.Width - radius, r.Y + radius, radius, -Math.PI / 2, 0);
+			g.LineTo (r.X + r.Width, r.Y + r.Height - radius);
+			g.Arc (r.X + r.Width - radius, r.Y + r.Height - radius, radius, 0, Math.PI / 2);
+			g.LineTo (r.X + radius, r.Y + r.Height);
+			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
+			g.ClosePath ();
+			
+			g.Restore ();
+
+			g.Color = fill;
+			g.FillPreserve ();
+
+			Rectangle dirty = g.StrokeExtents ();
+			g.Restore ();
+
+			return dirty;
+		}
+		
+		public static Rectangle DrawRoundedRectangle (this Context g, Rectangle r, double radius, Color stroke, int lineWidth)
+		{
+			g.Save ();
+			
+			Path p = g.CreateRoundedRectanglePath (r, radius);
+			
+			g.AppendPath (p);
+			
+			g.Color = stroke;
+			g.LineWidth = lineWidth;
+			
+			g.StrokePreserve ();
+
+			Rectangle dirty = g.StrokeExtents ();
+			g.Restore ();
+
+			(p as IDisposable).Dispose ();
+			
+			return dirty;
+		}
+		
+		public static Path CreateRoundedRectanglePath (this Context g, Rectangle r, double radius)
+		{
+			g.Save ();
+
+			if ((radius > r.Height / 2) || (radius > r.Width / 2))
+				radius = Math.Min (r.Height / 2, r.Width / 2);
+
+			g.MoveTo (r.X, r.Y + radius);
+			g.Arc (r.X + radius, r.Y + radius, radius, Math.PI, -Math.PI / 2);
+			g.LineTo (r.X + r.Width - radius, r.Y);
+			g.Arc (r.X + r.Width - radius, r.Y + radius, radius, -Math.PI / 2, 0);
+			g.LineTo (r.X + r.Width, r.Y + r.Height - radius);
+			g.Arc (r.X + r.Width - radius, r.Y + r.Height - radius, radius, 0, Math.PI / 2);
+			g.LineTo (r.X + radius, r.Y + r.Height);
+			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
+			g.ClosePath ();
+		
+			Path p = g.CopyPath ();
+			g.Restore ();
+			
+			return p;
+		}
+		
 		public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, Point dest)
 		{
 			g.Save ();

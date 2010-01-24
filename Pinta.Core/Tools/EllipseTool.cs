@@ -58,7 +58,15 @@ namespace Pinta.Core
 				g.Clip ();
 
 				g.Antialias = Antialias.Subpixel;
-				dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
+				
+				dirty = rect;
+				
+				if (FillShape && StrokeShape)
+					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
+				else if (FillShape)
+					dirty = g.FillEllipse (rect, outline_color);
+				else
+					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
 			}
 			
 			return dirty;

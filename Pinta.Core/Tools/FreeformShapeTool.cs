@@ -40,11 +40,16 @@ namespace Pinta.Core
 		private ToolBarLabel brush_width_label;
 		private ToolBarButton brush_width_minus;
 		private ToolBarButton brush_width_plus;
+		protected ToolBarImage fill_outline_image;
+		protected ToolBarComboBox fill_outline;
+		protected ToolBarLabel spacer_label;
+		protected ToolBarLabel fill_outline_label;
 
 		private ImageSurface undo_surface;
 		private bool surface_modified;
 		private Path path;
-		private Color tool_color;
+		private Color fill_color;
+		private Color outline_color;
 
 		public FreeformShapeTool ()
 		{
@@ -93,6 +98,26 @@ namespace Pinta.Core
 			}
 
 			tb.AppendItem (brush_width_plus);
+
+			if (spacer_label == null)
+				spacer_label = new ToolBarLabel ("  ");
+
+			tb.AppendItem (spacer_label);
+
+			if (fill_outline_image == null)
+				fill_outline_image = new ToolBarImage ("ShapeTool.OutlineFill.png");
+
+			tb.AppendItem (fill_outline_image);
+
+			if (fill_outline_label == null)
+				fill_outline_label = new ToolBarLabel (" : ");
+
+			tb.AppendItem (fill_outline_label);
+
+			if (fill_outline == null)
+				fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
+
+			tb.AppendItem (fill_outline);
 		}
 
 		private void MinusButtonClickedEvent (object o, EventArgs args)
@@ -120,11 +145,13 @@ namespace Pinta.Core
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask)
-				tool_color = PintaCore.Palette.PrimaryColor;
-			else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask)
-				tool_color = PintaCore.Palette.SecondaryColor;
-			else {
+			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask) {
+				outline_color = PintaCore.Palette.PrimaryColor;
+				fill_color = PintaCore.Palette.SecondaryColor;
+			} else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask) {
+				outline_color = PintaCore.Palette.SecondaryColor;
+				fill_color = PintaCore.Palette.PrimaryColor;
+			} else {
 				last_point = point_empty;
 				return;
 			}
@@ -162,13 +189,23 @@ namespace Pinta.Core
 				path = g.CopyPath ();
 				
 				g.ClosePath ();
-				g.Color = tool_color;
 				g.LineWidth = BrushWidth;
 				g.LineJoin = LineJoin.Round;
 				g.LineCap = LineCap.Round;
 				g.FillRule = FillRule.EvenOdd;
 
-				g.Fill ();
+				if (FillShape && StrokeShape) {
+					g.Color = fill_color;
+					g.FillPreserve ();
+					g.Color = outline_color;
+					g.StrokePreserve ();
+				} else if (FillShape) {
+					g.Color = outline_color;
+					g.FillPreserve ();
+				} else {
+					g.Color = outline_color;
+					g.StrokePreserve ();
+				}
 			}
 
 			PintaCore.Workspace.Invalidate ();
@@ -202,17 +239,32 @@ namespace Pinta.Core
 				}
 
 				g.ClosePath ();
-				g.Color = tool_color;
 				g.LineWidth = BrushWidth;
 				g.LineJoin = LineJoin.Round;
 				g.LineCap = LineCap.Round;
 				g.FillRule = FillRule.EvenOdd;
-				
-				g.Fill ();
+
+				if (FillShape && StrokeShape) {
+					g.Color = fill_color;
+					g.FillPreserve ();
+					g.Color = outline_color;
+					g.StrokePreserve ();
+				} else if (FillShape) {
+					g.Color = outline_color;
+					g.FillPreserve ();
+				} else {
+					g.Color = outline_color;
+					g.StrokePreserve ();
+				}
 			}
 
 			PintaCore.Workspace.Invalidate ();
 		}
+		#endregion
+
+		#region Private Methods
+		private bool StrokeShape { get { return fill_outline.ComboBox.Active % 2 == 0; } }
+		private bool FillShape { get { return fill_outline.ComboBox.Active >= 1; } }
 		#endregion
 	}
 }

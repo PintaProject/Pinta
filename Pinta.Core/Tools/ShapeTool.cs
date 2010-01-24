@@ -40,6 +40,10 @@ namespace Pinta.Core
 		protected ToolBarLabel brush_width_label;
 		protected ToolBarButton brush_width_minus;
 		protected ToolBarButton brush_width_plus;
+		protected ToolBarImage fill_outline_image;
+		protected ToolBarComboBox fill_outline;
+		protected ToolBarLabel spacer_label;
+		protected ToolBarLabel fill_outline_label;
 
 		protected Rectangle last_dirty;
 		protected ImageSurface undo_surface;
@@ -93,6 +97,26 @@ namespace Pinta.Core
 			}
 			
 			tb.AppendItem (brush_width_plus);
+			
+			if (spacer_label == null)
+				spacer_label = new ToolBarLabel ("  ");
+
+			tb.AppendItem (spacer_label);
+			
+			if (fill_outline_image == null)
+				fill_outline_image = new ToolBarImage ("ShapeTool.OutlineFill.png");
+
+			tb.AppendItem (fill_outline_image);
+			
+			if (fill_outline_label == null)
+				fill_outline_label = new ToolBarLabel (" : ");
+
+			tb.AppendItem (fill_outline_label);
+
+			if (fill_outline == null)
+				fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
+				
+			tb.AppendItem (fill_outline);
 		}
 		
 		private void MinusButtonClickedEvent (object o, EventArgs args)
@@ -228,6 +252,9 @@ namespace Pinta.Core
 
 			return new Rectangle (x, y, w, h);
 		}
+		
+		protected bool StrokeShape { get { return fill_outline.ComboBox.Active % 2 == 0; } }
+		protected bool FillShape { get { return fill_outline.ComboBox.Active >= 1; } }
 		#endregion
 	}
 }

@@ -54,7 +54,13 @@ namespace Pinta.Core
 				g.Clip ();
 
 				g.Antialias = Antialias.Subpixel;
-				dirty = g.FillStrokedRoundedRectangle (rect, BrushWidth, fill_color, outline_color, BrushWidth);
+
+				if (FillShape && StrokeShape)
+					dirty = g.FillStrokedRoundedRectangle (rect, BrushWidth, fill_color, outline_color, BrushWidth);
+				else if (FillShape)
+					dirty = g.FillRoundedRectangle (rect, BrushWidth, outline_color);
+				else
+					dirty = g.DrawRoundedRectangle (rect, BrushWidth, outline_color, BrushWidth);
 			}
 			
 			return dirty;
