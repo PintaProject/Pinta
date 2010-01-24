@@ -106,9 +106,9 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y);
 			
 			g.Pattern = pattern;
-			g.FillPreserve ();
 
 			Rectangle dirty = g.StrokeExtents ();
+			g.Fill ();
 
 			g.Restore ();
 
