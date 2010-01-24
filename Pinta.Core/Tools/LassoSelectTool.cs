@@ -80,7 +80,10 @@ namespace Pinta.Core
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 				
+				Path old = PintaCore.Layers.SelectionPath;
+				
 				PintaCore.Layers.SelectionPath = g.CopyPath (); 
+				(old as IDisposable).Dispose ();
 			}
 
 			PintaCore.Workspace.Invalidate ();
@@ -101,8 +104,11 @@ namespace Pinta.Core
 
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
-				
+
+				Path old = PintaCore.Layers.SelectionPath;
+
 				PintaCore.Layers.SelectionPath = g.CopyPath ();
+				(old as IDisposable).Dispose ();
 			}
 
 			PintaCore.Workspace.Invalidate ();
