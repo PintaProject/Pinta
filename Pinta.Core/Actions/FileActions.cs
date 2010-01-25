@@ -77,7 +77,6 @@ namespace Pinta.Core
 		
 		public void RegisterHandlers ()
 		{
-			New.Activated += HandlePintaCoreActionsFileNewActivated;
 			Open.Activated += HandlePintaCoreActionsFileOpenActivated;
 			Save.Activated += HandlePintaCoreActionsFileSaveActivated;
 			SaveAs.Activated += HandlePintaCoreActionsFileSaveAsActivated;
@@ -86,27 +85,6 @@ namespace Pinta.Core
 		#endregion
 
 		#region Action Handlers
-		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
-		{
-			PintaCore.Layers.Clear ();
-			PintaCore.History.Clear ();
-			PintaCore.Layers.DestroySelectionLayer ();
-			PintaCore.Layers.ResetSelectionPath ();
-			
-			// Start with an empty white layer
-			Layer background = PintaCore.Layers.AddNewLayer ("Background");
-			
-			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-				g.SetSourceRGB (255, 255, 255);
-				g.Paint ();
-			}
-			
-			PintaCore.Workspace.Filename = "Untitled1";
-			PintaCore.Workspace.IsDirty = false;
-			
-			PintaCore.Workspace.Invalidate ();
-		}
-
 		private void HandlePintaCoreActionsFileOpenActivated (object sender, EventArgs e)
 		{
 			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Open Image File", PintaCore.Chrome.MainWindow, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);

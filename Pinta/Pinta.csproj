@@ -55,6 +55,11 @@
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\LayersListWidget.cs" />
+    <Compile Include="Dialogs\NewImageDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
+    <Compile Include="DialogHandlers.cs" />
+    <Compile Include="Dialogs\LayerPropertiesDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.LayerPropertiesDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinta.pkgxml" />

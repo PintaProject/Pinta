@@ -33,6 +33,8 @@ namespace Pinta
 {
 	public partial class MainWindow : Gtk.Window
 	{
+		DialogHandlers dialog_handler;
+		
 		public MainWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			Build ();
@@ -70,8 +72,20 @@ namespace Pinta
 
 			this.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 
+			dialog_handler = new DialogHandlers (this);
+			
 			// Create a blank document
-			PintaCore.Actions.File.New.Activate ();
+			Layer background = PintaCore.Layers.AddNewLayer ("Background");
+			
+			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
+				g.SetSourceRGB (255, 255, 255);
+				g.Paint ();
+			}
+			
+			PintaCore.Workspace.Filename = "Untitled1";
+			PintaCore.Workspace.IsDirty = false;
+			
+			PintaCore.Workspace.Invalidate ();
 
 			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
 			treeview1.HeadersVisible = false;

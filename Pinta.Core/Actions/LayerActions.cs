@@ -73,7 +73,6 @@ namespace Pinta.Core
 			Properties = new Gtk.Action ("Properties", Mono.Unix.Catalog.GetString ("Layer Properties"), null, "Menu.Layers.LayerProperties.png");
 
 			RotateZoom.Sensitive = false;
-			Properties.Sensitive = false;
 		}
 
 		#region Initialization
