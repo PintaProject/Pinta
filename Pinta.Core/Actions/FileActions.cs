@@ -98,12 +98,16 @@ namespace Pinta.Core
 				PintaCore.Layers.Clear ();
 				PintaCore.History.Clear ();
 				PintaCore.Layers.DestroySelectionLayer ();
-				PintaCore.Layers.ResetSelectionPath ();
 				
 				// Open the image and add it to the layers
-				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
+				Pixbuf bg = new Pixbuf (file);
 				
-				Pixbuf bg = new Pixbuf (file, (int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y, true);
+				PintaCore.Workspace.ImageSize = new Cairo.PointD (bg.Width, bg.Height);
+				PintaCore.Workspace.CanvasSize = new Cairo.PointD (bg.Width, bg.Height);
+				
+				PintaCore.Layers.ResetSelectionPath ();
+				
+				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
 				
 				using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 					CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
