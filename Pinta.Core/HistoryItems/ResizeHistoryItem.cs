@@ -1,5 +1,5 @@
 ﻿// 
-// CompoundHistoryItem.cs
+// ResizeHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -29,47 +29,52 @@ using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	public class CompoundHistoryItem : BaseHistoryItem
+	public class ResizeHistoryItem : CompoundHistoryItem
 	{
-		protected List<BaseHistoryItem> history_stack = new List<BaseHistoryItem> ();
+		private int old_width;
+		private int old_height;
+		
+		public ResizeHistoryItem (int oldWidth, int oldHeight) : base ()
+		{
+			old_width = oldWidth;
+			old_height = oldHeight;
 
-		public CompoundHistoryItem () : base ()
-		{
-		}
-		
-		public CompoundHistoryItem (string icon, string text) : base (icon, text)
-		{
-		}
-		
-		public void Push (BaseHistoryItem item)
-		{
-			history_stack.Add (item);
+			Icon = "Menu.Image.Resize.png";
+			Text = "Resize Image";
 		}
 		
 		public override void Undo ()
 		{
-			foreach (var item in history_stack)
-				item.Undo ();
+			int swap_width = (int)PintaCore.Workspace.ImageSize.X;
+			int swap_height = (int)PintaCore.Workspace.ImageSize.Y;
+
+			PintaCore.Workspace.ImageSize = new Cairo.PointD (old_width, old_height);
+			PintaCore.Workspace.CanvasSize = new Cairo.PointD (old_width, old_height);
+			
+			old_width = swap_width;
+			old_height = swap_height;
+			
+			base.Undo ();
+			
+			PintaCore.Layers.ResetSelectionPath ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		public override void Redo ()
 		{
-			// We want to redo the actions in the
-			// opposite order than the undo order
-			for (int i = history_stack.Count - 1; i >= 0; i--)
-				history_stack[i].Redo ();
-		}
+			int swap_width = (int)PintaCore.Workspace.ImageSize.X;
+			int swap_height = (int)PintaCore.Workspace.ImageSize.Y;
 
-		public override void Dispose ()
-		{
-			foreach (var item in history_stack)
-				item.Dispose ();
-		}
-		
-		public void TakeSnapshotOfImage ()
-		{
-			foreach (Layer item in PintaCore.Layers)
-				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, item.Surface.Clone (), PintaCore.Layers.IndexOf (item)));
+			PintaCore.Workspace.ImageSize = new Cairo.PointD (old_width, old_height);
+			PintaCore.Workspace.CanvasSize = new Cairo.PointD (old_width, old_height);
+
+			old_width = swap_width;
+			old_height = swap_height;
+
+			base.Redo ();
+
+			PintaCore.Layers.ResetSelectionPath ();
+			PintaCore.Workspace.Invalidate ();
 		}
 	}
 }

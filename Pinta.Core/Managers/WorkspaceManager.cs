@@ -80,6 +80,28 @@ namespace Pinta.Core
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active++;
 		}
 
+		public void ResizeImage (int width, int height)
+		{
+			if (ImageSize.X == width && ImageSize.Y == height)
+				return;
+				
+			PintaCore.Layers.FinishSelection ();
+			
+			ResizeHistoryItem hist = new ResizeHistoryItem ((int)ImageSize.X, (int)ImageSize.Y);
+			hist.TakeSnapshotOfImage ();
+			
+			ImageSize = new PointD (width, height);
+			CanvasSize = new PointD (width, height);
+			
+			foreach (var layer in PintaCore.Layers)
+				layer.Resize (width, height);
+			
+			PintaCore.History.PushNewItem (hist);
+			
+			PintaCore.Layers.ResetSelectionPath ();
+			PintaCore.Workspace.Invalidate ();
+		}
+		
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
 			return new Cairo.PointD ((x - Offset.X) / PintaCore.Workspace.Scale, (y - Offset.Y) / PintaCore.Workspace.Scale);

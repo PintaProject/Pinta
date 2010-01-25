@@ -65,7 +65,6 @@ namespace Pinta.Core
 			Flatten = new Gtk.Action ("Flatten", Mono.Unix.Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
 			
 			CropToSelection.Sensitive = false;
-			Resize.Sensitive = false;
 			CanvasSize.Sensitive = false;
 		}
 

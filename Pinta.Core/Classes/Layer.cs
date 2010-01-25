@@ -264,5 +264,19 @@ namespace Pinta.Core
 
 			(dest as IDisposable).Dispose ();
 		}
+		
+		public void Resize (int width, int height)
+		{
+			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+			
+			using (Context g = new Context (dest)) {
+				g.Scale ((double)width / (double)Surface.Width, (double)height / (double)Surface.Height);
+				g.SetSourceSurface (Surface, 0, 0);
+				g.Paint ();			
+			}
+			
+			(Surface as IDisposable).Dispose ();
+			Surface = dest;
+		}
 	}
 }

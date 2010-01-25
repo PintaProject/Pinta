@@ -38,6 +38,7 @@ namespace Pinta
 			main_window = window;
 			
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
+			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 		}
 
@@ -71,6 +72,21 @@ namespace Pinta
 				PintaCore.Workspace.Filename = "Untitled1";
 				PintaCore.Workspace.IsDirty = false;
 			}
+
+			dialog.Destroy ();
+		}
+
+		private void HandlePintaCoreActionsImageResizeActivated (object sender, EventArgs e)
+		{
+			ResizeImageDialog dialog = new ResizeImageDialog ();
+
+			dialog.ParentWindow = main_window.GdkWindow;
+			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
+
+			int response = dialog.Run ();
+
+			if (response == (int)Gtk.ResponseType.Ok)
+				dialog.SaveChanges ();
 
 			dialog.Destroy ();
 		}
