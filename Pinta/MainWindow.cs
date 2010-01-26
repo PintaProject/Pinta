@@ -204,7 +204,7 @@ namespace Pinta
 					g.AppendPath (PintaCore.Layers.SelectionPath);
 
 					if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
-						g.Color = new Cairo.Color (0, 0, 1, .1);
+						g.Color = new Cairo.Color (.7, .8, .9, .2);
 						g.FillRule = Cairo.FillRule.EvenOdd;
 						g.FillPreserve ();
 					}
