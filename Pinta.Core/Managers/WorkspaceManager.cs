@@ -102,6 +102,30 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 		}
 		
+		public void ResizeCanvas (int width, int height, Anchor anchor)
+		{
+			if (ImageSize.X == width && ImageSize.Y == height)
+				return;
+
+			PintaCore.Layers.FinishSelection ();
+
+			ResizeHistoryItem hist = new ResizeHistoryItem ((int)ImageSize.X, (int)ImageSize.Y);
+			hist.Icon = "Menu.Image.CanvasSize.png";
+			hist.Text = "Resize Canvas";
+			hist.TakeSnapshotOfImage ();
+
+			ImageSize = new PointD (width, height);
+			CanvasSize = new PointD (width, height);
+
+			foreach (var layer in PintaCore.Layers)
+				layer.ResizeCanvas (width, height, anchor);
+
+			PintaCore.History.PushNewItem (hist);
+
+			PintaCore.Layers.ResetSelectionPath ();
+			PintaCore.Workspace.Invalidate ();
+		}
+		
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
 			return new Cairo.PointD ((x - Offset.X) / PintaCore.Workspace.Scale, (y - Offset.Y) / PintaCore.Workspace.Scale);

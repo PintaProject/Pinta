@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Effects\Histogram.cs" />
     <Compile Include="Effects\HistogramRGB.cs">
       <SubType>Code</SubType>

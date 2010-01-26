@@ -10,8 +10,6 @@
     <RootNamespace>Pinta</RootNamespace>
     <AssemblyName>Pinta</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +60,8 @@
     <Compile Include="gtk-gui\Pinta.LayerPropertiesDialog.cs" />
     <Compile Include="Dialogs\ResizeImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
+    <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinta.pkgxml" />

@@ -253,6 +253,33 @@
     <EmbeddedResource Include="Resources\Menu.Help.Website.png">
       <LogicalName>Menu.Help.Website.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.Image.png">
+      <LogicalName>ResizeCanvas.Image.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.DownArrow.png">
+      <LogicalName>ResizeCanvas.DownArrow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.LeftArrow.png">
+      <LogicalName>ResizeCanvas.LeftArrow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.RightArrow.png">
+      <LogicalName>ResizeCanvas.RightArrow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.UpArrow.png">
+      <LogicalName>ResizeCanvas.UpArrow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.NorthEast.png">
+      <LogicalName>ResizeCanvas.NorthEast.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.NorthWest.png">
+      <LogicalName>ResizeCanvas.NorthWest.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.SouthEast.png">
+      <LogicalName>ResizeCanvas.SouthEast.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResizeCanvas.SouthWest.png">
+      <LogicalName>ResizeCanvas.SouthWest.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">

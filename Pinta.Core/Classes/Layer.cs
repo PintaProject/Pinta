@@ -264,17 +264,62 @@ namespace Pinta.Core
 
 			(dest as IDisposable).Dispose ();
 		}
-		
+
 		public void Resize (int width, int height)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
-			
+
 			using (Context g = new Context (dest)) {
 				g.Scale ((double)width / (double)Surface.Width, (double)height / (double)Surface.Height);
 				g.SetSourceSurface (Surface, 0, 0);
-				g.Paint ();			
+				g.Paint ();
 			}
+
+			(Surface as IDisposable).Dispose ();
+			Surface = dest;
+		}
+
+		public void ResizeCanvas (int width, int height, Anchor anchor)
+		{
+			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+
+			int delta_x = Surface.Width - width;
+			int delta_y = Surface.Height - height;
 			
+			using (Context g = new Context (dest)) {
+				switch (anchor) {
+					case Anchor.NW:
+						g.SetSourceSurface (Surface, 0, 0);
+						break;
+					case Anchor.N:
+						g.SetSourceSurface (Surface, -delta_x / 2, 0);
+						break;
+					case Anchor.NE:
+						g.SetSourceSurface (Surface, -delta_x, 0);
+						break;
+					case Anchor.E:
+						g.SetSourceSurface (Surface, -delta_x, -delta_y / 2);
+						break;
+					case Anchor.SE:
+						g.SetSourceSurface (Surface, -delta_x, -delta_y);
+						break;
+					case Anchor.S:
+						g.SetSourceSurface (Surface, -delta_x / 2, -delta_y);
+						break;
+					case Anchor.SW:
+						g.SetSourceSurface (Surface, 0, -delta_y);
+						break;
+					case Anchor.W:
+						g.SetSourceSurface (Surface, 0, -delta_y / 2);
+						break;
+					case Anchor.Center:
+						g.SetSourceSurface (Surface, -delta_x / 2, -delta_y / 2);
+						break;
+				}
+				
+				g.Paint ();
+			}
+
 			(Surface as IDisposable).Dispose ();
 			Surface = dest;
 		}

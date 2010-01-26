@@ -39,6 +39,7 @@ namespace Pinta
 			
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
+			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 		}
 
@@ -79,6 +80,21 @@ namespace Pinta
 		private void HandlePintaCoreActionsImageResizeActivated (object sender, EventArgs e)
 		{
 			ResizeImageDialog dialog = new ResizeImageDialog ();
+
+			dialog.ParentWindow = main_window.GdkWindow;
+			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
+
+			int response = dialog.Run ();
+
+			if (response == (int)Gtk.ResponseType.Ok)
+				dialog.SaveChanges ();
+
+			dialog.Destroy ();
+		}
+		
+		private void HandlePintaCoreActionsImageCanvasSizeActivated (object sender, EventArgs e)
+		{
+			ResizeCanvasDialog dialog = new ResizeCanvasDialog ();
 
 			dialog.ParentWindow = main_window.GdkWindow;
 			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
