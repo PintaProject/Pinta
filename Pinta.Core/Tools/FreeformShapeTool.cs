@@ -198,13 +198,13 @@ namespace Pinta.Core
 					g.Color = fill_color;
 					g.FillPreserve ();
 					g.Color = outline_color;
-					g.StrokePreserve ();
+					g.Stroke ();
 				} else if (FillShape) {
 					g.Color = outline_color;
-					g.FillPreserve ();
+					g.Fill ();
 				} else {
 					g.Color = outline_color;
-					g.StrokePreserve ();
+					g.Stroke ();
 				}
 			}
 
@@ -248,13 +248,13 @@ namespace Pinta.Core
 					g.Color = fill_color;
 					g.FillPreserve ();
 					g.Color = outline_color;
-					g.StrokePreserve ();
+					g.Stroke ();
 				} else if (FillShape) {
 					g.Color = outline_color;
-					g.FillPreserve ();
+					g.Fill ();
 				} else {
 					g.Color = outline_color;
-					g.StrokePreserve ();
+					g.Stroke ();
 				}
 			}
 

@@ -323,5 +323,18 @@ namespace Pinta.Core
 			(Surface as IDisposable).Dispose ();
 			Surface = dest;
 		}
+
+		public void Crop (Rectangle rect)
+		{
+			ImageSurface dest = new ImageSurface (Format.Argb32, (int)rect.Width, (int)rect.Height);
+
+			using (Context g = new Context (dest)) {
+				g.SetSourceSurface (Surface, -(int)rect.X, -(int)rect.Y);
+				g.Paint ();
+			}
+
+			(Surface as IDisposable).Dispose ();
+			Surface = dest;
+		}
 	}
 }

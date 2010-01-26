@@ -46,7 +46,8 @@ namespace Pinta.Core
 		private Layer selection_layer;
 		private int selection_layer_index;
 		private Path selection_path;
-
+		private bool show_selection;
+		
 		public LayerManager ()
 		{
 			layers = new List<Layer> ();
@@ -110,7 +111,15 @@ namespace Pinta.Core
 			}
 		}
 
-		public bool ShowSelection { get; set; }
+		public bool ShowSelection { 
+			get { return show_selection; }
+			set {
+				show_selection = value;
+				PintaCore.Actions.Edit.Deselect.Sensitive = show_selection;
+				PintaCore.Actions.Image.CropToSelection.Sensitive = show_selection;
+			}
+		}
+		
 		public bool ShowSelectionLayer { get; set; }
 		#endregion
 
@@ -456,7 +465,6 @@ namespace Pinta.Core
 		{
 			Path old = SelectionPath;
 			
-			// Create checkerboard background	
 			using (Cairo.Context g = new Cairo.Context (selection_layer.Surface))
 				SelectionPath = g.CreateRectanglePath (new Rectangle (0, 0, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y));
 			

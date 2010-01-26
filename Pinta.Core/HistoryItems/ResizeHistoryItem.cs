@@ -43,6 +43,8 @@ namespace Pinta.Core
 			Text = "Resize Image";
 		}
 		
+		public Cairo.Path RestorePath { get; set; }
+		
 		public override void Undo ()
 		{
 			int swap_width = (int)PintaCore.Workspace.ImageSize.X;
@@ -56,7 +58,19 @@ namespace Pinta.Core
 			
 			base.Undo ();
 			
-			PintaCore.Layers.ResetSelectionPath ();
+			if (RestorePath != null) {
+				Cairo.Path old = PintaCore.Layers.SelectionPath;
+
+				PintaCore.Layers.SelectionPath = RestorePath.Clone ();
+				
+				if (old != null)
+					(old as IDisposable).Dispose ();
+					
+				PintaCore.Layers.ShowSelection = true;
+			} else {
+				PintaCore.Layers.ResetSelectionPath ();
+			}
+			
 			PintaCore.Workspace.Invalidate ();
 		}
 
@@ -75,6 +89,16 @@ namespace Pinta.Core
 
 			PintaCore.Layers.ResetSelectionPath ();
 			PintaCore.Workspace.Invalidate ();
+		}
+
+		public override void Dispose ()
+		{
+			base.Dispose ();
+
+			if (RestorePath != null) {
+				(RestorePath as IDisposable).Dispose ();
+				RestorePath = null;
+			}
 		}
 	}
 }

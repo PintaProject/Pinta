@@ -73,6 +73,7 @@ namespace Pinta.Core
 			Copy.Sensitive = false;
 			PasteIntoNewImage.Sensitive = false;
 			InvertSelection.Sensitive = false;
+			Deselect.Sensitive = false;
 		}
 
 		#region Initialization

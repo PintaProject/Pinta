@@ -141,10 +141,9 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 			
-			g.StrokePreserve ();
-			
 			Rectangle dirty = g.StrokeExtents ();
 			
+			g.Stroke ();
 			g.Restore ();
 			
 			return dirty;
@@ -172,9 +171,9 @@ namespace Pinta.Core
 			g.Color = color;
 			g.LineWidth = lineWidth;
 			
-			g.StrokePreserve ();
-
 			Rectangle dirty = g.StrokeExtents ();
+
+			g.Stroke ();
 			g.Restore ();
 
 			return dirty;
@@ -200,9 +199,10 @@ namespace Pinta.Core
 			g.ClosePath ();
 			
 			g.Color = color;
-			g.FillPreserve ();
 			
 			Rectangle dirty = g.StrokeExtents ();
+			
+			g.Fill ();
 			g.Restore ();
 			
 			return dirty;
@@ -259,9 +259,9 @@ namespace Pinta.Core
 			g.Color = stroke;
 			g.LineWidth = lineWidth;
 			
-			g.StrokePreserve ();
-			
 			Rectangle dirty = g.StrokeExtents ();
+			
+			g.Stroke ();
 			g.Restore ();
 			
 			return dirty;
@@ -292,9 +292,9 @@ namespace Pinta.Core
 			g.Color = stroke;
 			g.LineWidth = lineWidth;
 			
-			g.StrokePreserve ();
-			
 			Rectangle dirty = g.StrokeExtents ();
+			
+			g.Stroke ();
 			g.Restore ();
 			
 			return dirty;
@@ -320,9 +320,10 @@ namespace Pinta.Core
 			g.Restore ();
 
 			g.Color = fill;
-			g.FillPreserve ();
-
+			
 			Rectangle dirty = g.StrokeExtents ();
+
+			g.Fill ();
 			g.Restore ();
 
 			return dirty;
@@ -339,9 +340,9 @@ namespace Pinta.Core
 			g.Color = stroke;
 			g.LineWidth = lineWidth;
 			
-			g.StrokePreserve ();
-
 			Rectangle dirty = g.StrokeExtents ();
+
+			g.Stroke ();
 			g.Restore ();
 
 			(p as IDisposable).Dispose ();
@@ -473,13 +474,25 @@ namespace Pinta.Core
 			Path newpath;
 			
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (path);
 				newpath = g.CopyPath ();
 			}
 
 			return newpath;
 		}
+		
+		public static Rectangle GetBounds (this Path path)
+		{
+			Rectangle rect;
 
+			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				rect = g.StrokeExtents ();
+			}
+
+			return new Rectangle (rect.X, rect.Y, rect.Width - rect.X, rect.Height - rect.Y);
+		}
+		
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)
 		{
 			Gdk.Color c = new Gdk.Color ();

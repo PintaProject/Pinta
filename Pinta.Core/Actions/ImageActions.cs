@@ -94,6 +94,7 @@ namespace Pinta.Core
 			Flatten.Activated += HandlePintaCoreActionsImageFlattenActivated;
 			RotateCW.Activated += HandlePintaCoreActionsImageRotateCWActivated;
 			RotateCCW.Activated += HandlePintaCoreActionsImageRotateCCWActivated;
+			CropToSelection.Activated += HandlePintaCoreActionsImageCropToSelectionActivated;
 		}
 		#endregion
 
@@ -152,6 +153,33 @@ namespace Pinta.Core
 
 			PintaCore.Layers.FlipImageHorizontal ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
+		}
+
+		private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FinishSelection ();
+
+			Cairo.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
+
+			int width = (int)rect.Width;
+			int height = (int)rect.Height;
+			
+			ResizeHistoryItem hist = new ResizeHistoryItem ((int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y);
+			hist.Icon = "Menu.Image.Crop.png";
+			hist.Text = "Crop to Selection";
+			hist.TakeSnapshotOfImage ();
+			hist.RestorePath = PintaCore.Layers.SelectionPath.Clone ();
+
+			PintaCore.Workspace.ImageSize = new Cairo.PointD (width, height);
+			PintaCore.Workspace.CanvasSize = new Cairo.PointD (width, height);
+
+			foreach (var layer in PintaCore.Layers)
+				layer.Crop (rect);
+
+			PintaCore.History.PushNewItem (hist);
+
+			PintaCore.Layers.ResetSelectionPath ();
+			PintaCore.Workspace.Invalidate ();
 		}
 		#endregion
 	}
