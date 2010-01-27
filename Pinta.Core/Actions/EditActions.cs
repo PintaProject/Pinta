@@ -26,6 +26,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -69,8 +70,6 @@ namespace Pinta.Core
 			
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
-			Cut.Sensitive = false;
-			Copy.Sensitive = false;
 			PasteIntoNewImage.Sensitive = false;
 			InvertSelection.Sensitive = false;
 			Deselect.Sensitive = false;
@@ -114,6 +113,7 @@ namespace Pinta.Core
 			Copy.Activated += HandlerPintaCoreActionsEditCopyActivated;
 			Undo.Activated += HandlerPintaCoreActionsEditUndoActivated;
 			Redo.Activated += HandlerPintaCoreActionsEditRedoActivated;
+			Cut.Activated += HandlerPintaCoreActionsEditCutActivated;
 		}
 		#endregion
 
@@ -217,9 +217,16 @@ namespace Pinta.Core
 			if (image == null)
 				return;
 
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface))
+			Path p;
+			
+			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.DrawPixbuf (image, new Cairo.Point (0, 0));
+				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
+			}
 
+			PintaCore.Layers.SelectionPath = p;
+			PintaCore.Layers.ShowSelection = true;
+			
 			PintaCore.Workspace.Invalidate ();
 			
 			// TODO: Need paste icon
@@ -228,19 +235,45 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
-			//Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
+			PintaCore.Layers.FinishSelection ();
+
+			ImageSurface src = PintaCore.Layers.GetClippedLayer (PintaCore.Layers.CurrentLayerIndex);
 			
-			//Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			//cb.Image = surf.ToPixbuf ();
+			Cairo.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
 			
+			ImageSurface dest = new ImageSurface (Format.Argb32, (int)rect.Width, (int)rect.Height);
 
-			//if (image == null)
-			//        return;
+			using (Context g = new Context (dest)) {
+				g.SetSourceSurface (src, -(int)rect.X, -(int)rect.Y);
+				g.Paint ();
+			}
+			
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			cb.Image = dest.ToPixbuf ();
 
-			//using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface))
-			//        g.DrawPixbuf (image, new Cairo.Point (0, 0));
+			(src as IDisposable).Dispose ();
+			(dest as IDisposable).Dispose ();
+		}
+		
+		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FinishSelection ();
+			
+			// Copy selection
+			HandlerPintaCoreActionsEditCopyActivated (sender, e);
 
-			//PintaCore.Workspace.Invalidate ();
+			// Erase selection
+			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+
+			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = Cairo.FillRule.EvenOdd;
+				g.Operator = Cairo.Operator.Clear;
+				g.Fill ();
+			}
+
+			PintaCore.Workspace.Invalidate ();
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Cut"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
