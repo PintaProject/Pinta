@@ -33,9 +33,18 @@ namespace Pinta.Core
 	{
 		private string filename;
 		private bool is_dirty;
+		private PointD canvas_size;
 		
 		public PointD ImageSize { get; set; }
-		public PointD CanvasSize { get; set; }
+		public PointD CanvasSize {
+			get { return canvas_size; }
+			set {
+				if (canvas_size.X != value.X || canvas_size.Y != value.Y) {
+					canvas_size = value;
+					OnCanvasSizeChanged ();
+				}
+			}
+		}
 		
 		public PointD Offset {
 			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - CanvasSize.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
@@ -173,10 +182,17 @@ namespace Pinta.Core
 			if (CanvasInvalidated != null)
 				CanvasInvalidated (this, e);
 		}
+
+		protected void OnCanvasSizeChanged ()
+		{
+			if (CanvasSizeChanged != null)
+				CanvasSizeChanged (this, EventArgs.Empty);
+		}
 		#endregion
 
 		#region Public Events
 		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
+		public event EventHandler CanvasSizeChanged;
 		#endregion
 	}
 }

@@ -120,6 +120,7 @@ namespace Pinta.Core
 				PintaCore.Workspace.IsDirty = false;
 
 				PintaCore.Workspace.Invalidate ();
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
 			}
 			
 			fcd.Destroy ();

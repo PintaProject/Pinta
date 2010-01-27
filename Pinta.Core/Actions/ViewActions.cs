@@ -69,7 +69,6 @@ namespace Pinta.Core
 	
 			ZoomComboBox = new ToolBarComboBox (75, 11, false, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
 
-			ZoomToWindow.Sensitive = false;
 			ZoomToSelection.Sensitive = false;
 			PixelGrid.Sensitive = false;
 			Rulers.Sensitive = false;
@@ -124,8 +123,10 @@ namespace Pinta.Core
 		{
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
 			
-			if (text == "Window")
-				PintaCore.Workspace.Scale = 1.0;
+			if (text == "Window") {
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
+				return;
+			}
 			
 			text = text.Trim ('%');
 			

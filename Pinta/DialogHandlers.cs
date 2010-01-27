@@ -72,6 +72,7 @@ namespace Pinta
 
 				PintaCore.Workspace.Filename = "Untitled1";
 				PintaCore.Workspace.IsDirty = false;
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
 			}
 
 			dialog.Destroy ();

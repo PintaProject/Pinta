@@ -54,6 +54,7 @@ namespace Pinta
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (History_HistoryItemAdded);
 			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
+			PintaCore.Workspace.CanvasSizeChanged += new EventHandler (Workspace_CanvasSizeChanged);
 			CreateToolBox ();
 
 			PintaCore.Actions.CreateMainMenu (menubar1);
@@ -90,6 +91,42 @@ namespace Pinta
 			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
 			treeview1.HeadersVisible = false;
 			AddColumns (treeview1);
+
+			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
+		}
+
+		private void Workspace_CanvasSizeChanged (object sender, EventArgs e)
+		{
+			Requisition req = new Requisition ();
+			req.Height = (int)PintaCore.Workspace.CanvasSize.Y;
+			req.Width = (int)PintaCore.Workspace.CanvasSize.X;
+			drawingarea1.Requisition = req;
+
+			drawingarea1.QueueResize ();
+		}
+
+		private void ZoomToWindow_Activated (object sender, EventArgs e)
+		{
+			int image_x = (int)PintaCore.Workspace.ImageSize.X;
+			int image_y = (int)PintaCore.Workspace.ImageSize.Y;
+
+			int window_x = GtkScrolledWindow.Children[0].Allocation.Width;
+			int window_y = GtkScrolledWindow.Children[0].Allocation.Height;
+			
+			// The image is small enough to fit in the window
+			if (image_x <= window_x && image_y <= window_y) {
+				PintaCore.Actions.View.ActualSize.Activate ();
+				return;
+			}
+			
+			// The image is more constrained by width than height
+			if ((double)image_x / (double)window_x >= (double)image_y / (double)window_y) {
+				double ratio = (double)(window_x - 20) / (double)image_x;
+				PintaCore.Workspace.Scale = ratio;
+			} else {
+				double ratio2 = (double)(window_y - 20) / (double)image_y;
+				PintaCore.Workspace.Scale = ratio2;
+			}
 		}
 
 		void Workspace_CanvasInvalidated (object sender, CanvasInvalidatedEventArgs e)
