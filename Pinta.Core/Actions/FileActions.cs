@@ -148,6 +148,15 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsFileExitActivated (object sender, EventArgs e)
 		{
+			MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.YesNo, "{0} has unsaved changes.\n\nDo you want to save?", System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+			md.Title = "Save before exit?";
+			
+			ResponseType response = (ResponseType)md.Run ();
+			md.Destroy ();
+			
+			if (response == ResponseType.Yes)
+				Save.Activate ();
+			
 			PintaCore.History.Clear ();
 			(PintaCore.Layers.SelectionPath as IDisposable).Dispose ();
 			Application.Quit ();
