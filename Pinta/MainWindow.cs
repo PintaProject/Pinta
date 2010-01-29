@@ -93,6 +93,12 @@ namespace Pinta
 			AddColumns (treeview1);
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
+			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
+		}
+
+		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
+		{
+			PintaCore.Actions.File.Exit.Activate ();
 		}
 
 		private void Workspace_CanvasSizeChanged (object sender, EventArgs e)
