@@ -94,6 +94,8 @@ namespace Pinta
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
+
+			EffectsAction.Visible = false;
 		}
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)

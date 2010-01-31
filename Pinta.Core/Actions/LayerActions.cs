@@ -88,7 +88,7 @@ namespace Pinta.Core
 			menu.AppendSeparator ();
 			menu.Append (FlipHorizontal.CreateMenuItem ());
 			menu.Append (FlipVertical.CreateMenuItem ());
-			menu.Append (RotateZoom.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			//menu.Append (RotateZoom.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
 			menu.Append (Properties.CreateAcceleratedMenuItem (Gdk.Key.F4, Gdk.ModifierType.None));
 		}

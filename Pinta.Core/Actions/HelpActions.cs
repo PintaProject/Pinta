@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Pinta.Core
 {
@@ -44,10 +46,6 @@ namespace Pinta.Core
 			Website = new Gtk.Action ("Website", Mono.Unix.Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
 			Bugs = new Gtk.Action ("Bugs", Mono.Unix.Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
 			About = new Gtk.Action ("About", Mono.Unix.Catalog.GetString ("About Pinta"), null, "gtk-about");
-			
-			Website.Sensitive = false;
-			Bugs.Sensitive = false;
-			About.Sensitive = false;
 		}
 
 		#region Initialization
@@ -59,6 +57,40 @@ namespace Pinta.Core
 			menu.Append (Bugs.CreateMenuItem ());
 			menu.AppendSeparator ();
 			menu.Append (About.CreateMenuItem ());
+		}
+		
+		public void RegisterHandlers ()
+		{
+			Website.Activated += new EventHandler (Website_Activated);
+			Bugs.Activated += new EventHandler (Bugs_Activated);
+			About.Activated += new EventHandler (About_Activated);
+		}
+
+		private void About_Activated (object sender, EventArgs e)
+		{
+			Gtk.AboutDialog dialog = new Gtk.AboutDialog ();
+
+			dialog.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
+			dialog.Version = "Pinta 0.1";
+			dialog.ProgramName = "Pinta";
+			dialog.Website = "http://www.pinta-project.com";
+			dialog.WebsiteLabel = "Visit Homepage";
+			dialog.Copyright = "Copyright \xa9 2010 Jonathan Pobst";
+			dialog.Authors = new string[] { "Jonathan Pobst" };
+			dialog.Documenters = null;
+			dialog.TranslatorCredits = null;
+			dialog.Run ();
+			dialog.Destroy ();
+		}
+
+		private void Bugs_Activated (object sender, EventArgs e)
+		{
+			Process.Start ("http://www.pinta-project.com/Contribute");
+		}
+
+		private void Website_Activated (object sender, EventArgs e)
+		{
+			Process.Start ("http://www.pinta-project.com");
 		}
 		#endregion
 	}

@@ -88,7 +88,7 @@ namespace Pinta.Core
 			toolbar.AppendItem (File.New.CreateToolBarItem ());
 			toolbar.AppendItem (File.Open.CreateToolBarItem ());
 			toolbar.AppendItem (File.Save.CreateToolBarItem ());
-			toolbar.AppendItem (File.Print.CreateToolBarItem ());
+			//toolbar.AppendItem (File.Print.CreateToolBarItem ());
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
@@ -109,6 +109,7 @@ namespace Pinta.Core
 			Layers.RegisterHandlers ();
 			View.RegisterHandlers ();
 			Adjustments.RegisterHandlers ();
+			Help.RegisterHandlers ();
 		}
 	}
 }

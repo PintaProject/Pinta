@@ -85,15 +85,15 @@ namespace Pinta.Core
 			menu.Append (ZoomIn.CreateAcceleratedMenuItem (Gdk.Key.plus, Gdk.ModifierType.ControlMask));
 			menu.Append (ZoomOut.CreateAcceleratedMenuItem (Gdk.Key.minus, Gdk.ModifierType.ControlMask));
 			menu.Append (ZoomToWindow.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask));
-			menu.Append (ZoomToSelection.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			//menu.Append (ZoomToSelection.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (ActualSize.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.AppendSeparator ();
-			menu.Append (PixelGrid.CreateMenuItem ());
-			menu.Append (Rulers.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (Pixels.CreateMenuItem ());
-			menu.Append (Inches.CreateMenuItem ());
-			menu.Append (Centimeters.CreateMenuItem ());
+			//menu.AppendSeparator ();
+			//menu.Append (PixelGrid.CreateMenuItem ());
+			//menu.Append (Rulers.CreateMenuItem ());
+			//menu.AppendSeparator ();
+			//menu.Append (Pixels.CreateMenuItem ());
+			//menu.Append (Inches.CreateMenuItem ());
+			//menu.Append (Centimeters.CreateMenuItem ());
 		}
 		
 		public void CreateToolBar (Gtk.Toolbar toolbar)
