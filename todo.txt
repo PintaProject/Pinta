@@ -1,0 +1,39 @@
+GUI Improvements
+- A layer widget
+- A new history widget, or making the TreeView better
+- General pretty-ing
+
+Unimplemented Tools
+- Zoom
+- Magic Wand
+- Pan
+- Paint Bucket
+- Gradient
+- Clone Stamp
+- Recolor
+- Text
+- Line/Curve
+
+Unimplemented Adjustments
+- Brightness/Contrast
+- Curves
+- Hue/Saturation
+- Levels
+- Posterize
+
+(Note that the adjustments are pretty easy to implement by reusing
+Paint.NET's code.  The bigger job is writing the Gtk dialogs.)
+
+Port Paint.NET's Effects
+- None have been ported yet.
+
+History
+- Persist some history to disk
+- Don't store entire surfaces when not needed
+- Preferences dialog to control how much history to keep,
+  and where (memory/disk)
+
+Performance
+- For ease of implementing, we almost always Invalidate the entire
+  canvas.  We need to track what we actually change and only invalidate
+  the dirty area.
