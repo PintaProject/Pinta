@@ -5,8 +5,8 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="..\..\Pinta.Core\bin\Debug\Pinta.Core.dll" />
-    <widget-library name="..\bin\Pinta.exe" internal="true" />
+    <widget-library name="../../Pinta.Core/bin/Debug/Pinta.Core.dll" />
+    <widget-library name="../bin/Pinta.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="Pinta.MainWindow" design-size="886 680">
     <action-group name="Default">
@@ -735,6 +735,7 @@
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="IsEditable">True</property>
+                    <property name="InvisibleChar">●</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -913,6 +914,7 @@
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Label" translatable="yes">By percentage:</property>
+                    <property name="Active">True</property>
                     <property name="DrawIndicator">True</property>
                     <property name="HasLabel">True</property>
                     <property name="UseUnderline">True</property>

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HistoryManager.cs
 //  
 // Author:
@@ -62,7 +62,7 @@ namespace Pinta.Core
 		{
 			if (stack_pointer < 0)
 				throw new InvalidOperationException ("Undo stack is empty");
-				
+			
 			BaseHistoryItem item = items[stack_pointer--];
 			item.Undo ();
 			
@@ -71,6 +71,7 @@ namespace Pinta.Core
 			
 			PintaCore.Actions.Edit.Redo.Sensitive = true;
 			OnActionUndone ();
+			OnHistoryItemRemoved (item);
 		}
 		
 		public void Redo ()
@@ -86,6 +87,7 @@ namespace Pinta.Core
 
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			OnActionUndone ();
+			OnHistoryItemAdded (item);
 		}
 		
 		public void Clear ()
@@ -110,6 +112,14 @@ namespace Pinta.Core
 			if (HistoryItemAdded != null)
 				HistoryItemAdded (this, new HistoryItemAddedEventArgs (item));
 		}
+		
+		protected void OnHistoryItemRemoved (BaseHistoryItem item)
+		{
+			if (HistoryItemRemoved != null)
+			{
+				HistoryItemRemoved (this, new HistoryItemRemovedEventArgs (item));
+			}
+		}
 
 		protected void OnActionUndone ()
 		{
@@ -126,6 +136,7 @@ namespace Pinta.Core
 
 		#region Events
 		public event EventHandler<HistoryItemAddedEventArgs> HistoryItemAdded;
+		public event EventHandler<HistoryItemRemovedEventArgs> HistoryItemRemoved;
 		public event EventHandler ActionUndone;
 		public event EventHandler ActionRedone;
 		#endregion

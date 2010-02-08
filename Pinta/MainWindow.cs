@@ -53,6 +53,7 @@ namespace Pinta
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (History_HistoryItemAdded);
+			PintaCore.History.HistoryItemRemoved += new EventHandler<HistoryItemRemovedEventArgs>(History_HistoryItemRemoved);
 			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
 			PintaCore.Workspace.CanvasSizeChanged += new EventHandler (Workspace_CanvasSizeChanged);
 			CreateToolBox ();
@@ -90,6 +91,7 @@ namespace Pinta
 
 			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
 			treeview1.HeadersVisible = false;
+			treeview1.RowActivated += HandleTreeview1RowActivated;
 			AddColumns (treeview1);
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
@@ -98,6 +100,30 @@ namespace Pinta
 			EffectsAction.Visible = false;
 			WindowAction.Visible = false;
 		}
+
+		/// <summary>
+		/// Undo all the events until the selected row
+		/// </summary>
+		/// <param name="o">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		/// <param name="args">
+		/// A <see cref="RowActivatedArgs"/>
+		/// </param>
+		void HandleTreeview1RowActivated (object o, RowActivatedArgs args)
+		{
+			int rowIndex = args.Path.Indices[0];
+			
+			// Determine the number of times to undo. If there are 10 items (0-9)
+			// and the one with index 9 was clicked(last), there'll be no undo. If the 0th is clicked
+			// there will be 9 undoes, and only the one which was clicked will remain
+			int nUndoes = (treeview1.Model as ListStore).IterNChildren() - rowIndex - 1;
+			for(int i = 0; i< nUndoes; i++)
+			{
+				PintaCore.History.Undo();
+			}
+		}
+
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
@@ -146,6 +172,19 @@ namespace Pinta
 				drawingarea1.GdkWindow.InvalidateRect (e.Rectangle, false);
 		}
 
+		void History_HistoryItemRemoved (object sender, HistoryItemRemovedEventArgs e)
+		{
+			// Hack: Instead of looking for the correct item to remove, blindly remove
+			// the last item from the tree
+			ListStore historyModel = (treeview1.Model as ListStore);
+			int nChildren = historyModel.IterNChildren();
+			
+			TreeIter lastChild = new TreeIter();
+			historyModel.IterNthChild(out lastChild, nChildren-1);
+			
+			historyModel.Remove(ref lastChild);
+		}
+		
 		void History_HistoryItemAdded (object sender, HistoryItemAddedEventArgs e)
 		{
 			(treeview1.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (e.Item.Icon), e.Item.Text);
