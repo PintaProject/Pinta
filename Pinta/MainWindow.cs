@@ -91,6 +91,7 @@ namespace Pinta
 
 			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
 			treeview1.HeadersVisible = false;
+			treeview1.RowActivated += HandleTreeview1RowActivated;
 			AddColumns (treeview1);
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
@@ -98,6 +99,29 @@ namespace Pinta
 
 			EffectsAction.Visible = false;
 			WindowAction.Visible = false;
+		}
+
+		/// <summary>
+		/// Undo all the events until the selected row
+		/// </summary>
+		/// <param name="o">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		/// <param name="args">
+		/// A <see cref="RowActivatedArgs"/>
+		/// </param>
+		void HandleTreeview1RowActivated (object o, RowActivatedArgs args)
+		{
+			int rowIndex = args.Path.Indices[0];
+			
+			// Determine the number of times to undo. If there are 10 items (0-9)
+			// and the one with index 9 was clicked(last), there'll be no undo. If the 0th is clicked
+			// there will be 9 undoes, and only the one which was clicked will remain
+			int nUndoes = (treeview1.Model as ListStore).IterNChildren() - rowIndex - 1;
+			for(int i = 0; i< nUndoes; i++)
+			{
+				PintaCore.History.Undo();
+			}
 		}
 
 
