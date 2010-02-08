@@ -45,7 +45,7 @@ namespace Pinta.Core
 			
 			Website = new Gtk.Action ("Website", Mono.Unix.Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
 			Bugs = new Gtk.Action ("Bugs", Mono.Unix.Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
-			About = new Gtk.Action ("About", Mono.Unix.Catalog.GetString ("About Pinta"), null, "gtk-about");
+			About = new Gtk.Action ("About", Mono.Unix.Catalog.GetString ("About"), null, "gtk-about");
 		}
 
 		#region Initialization
@@ -71,7 +71,7 @@ namespace Pinta.Core
 			Gtk.AboutDialog dialog = new Gtk.AboutDialog ();
 
 			dialog.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
-			dialog.Version = "Pinta 0.1";
+			dialog.Version = "0.1";
 			dialog.ProgramName = "Pinta";
 			dialog.Website = "http://www.pinta-project.com";
 			dialog.WebsiteLabel = "Visit Homepage";

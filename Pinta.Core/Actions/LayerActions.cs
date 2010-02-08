@@ -64,7 +64,7 @@ namespace Pinta.Core
 			DeleteLayer = new Gtk.Action ("DeleteLayer", Mono.Unix.Catalog.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
 			DuplicateLayer = new Gtk.Action ("DuplicateLayer", Mono.Unix.Catalog.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
 			MergeLayerDown = new Gtk.Action ("MergeLayerDown", Mono.Unix.Catalog.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
-			ImportFromFile = new Gtk.Action ("ImportFromFile", Mono.Unix.Catalog.GetString ("Import From File"), null, "Menu.Layers.ImportFromFile.png");
+			ImportFromFile = new Gtk.Action ("ImportFromFile", Mono.Unix.Catalog.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
 			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Mono.Unix.Catalog.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
 			FlipVertical = new Gtk.Action ("FlipVertical", Mono.Unix.Catalog.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
 			RotateZoom = new Gtk.Action ("RotateZoom", Mono.Unix.Catalog.GetString ("Rotate / Zoom"), null, "Menu.Layers.RotateZoom.png");

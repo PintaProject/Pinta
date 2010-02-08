@@ -43,14 +43,14 @@ namespace Pinta.Core
 		
 		public FileActions ()
 		{
-			New = new Gtk.Action ("New", Mono.Unix.Catalog.GetString ("New"), null, "gtk-new");
-			Open = new Gtk.Action ("Open", Mono.Unix.Catalog.GetString ("Open"), null, "gtk-open");
+			New = new Gtk.Action ("New", Mono.Unix.Catalog.GetString ("New..."), null, "gtk-new");
+			Open = new Gtk.Action ("Open", Mono.Unix.Catalog.GetString ("Open..."), null, "gtk-open");
 			OpenRecent = new Gtk.Action ("OpenRecent", Mono.Unix.Catalog.GetString ("Open Recent"), null, "gtk-open");
 			Close = new Gtk.Action ("Close", Mono.Unix.Catalog.GetString ("Close"), null, "gtk-close");
 			Save = new Gtk.Action ("Save", Mono.Unix.Catalog.GetString ("Save"), null, "gtk-save");
-			SaveAs = new Gtk.Action ("SaveAs", Mono.Unix.Catalog.GetString ("Save As"), null, "gtk-save-as");
+			SaveAs = new Gtk.Action ("SaveAs", Mono.Unix.Catalog.GetString ("Save As..."), null, "gtk-save-as");
 			Print = new Gtk.Action ("Print", Mono.Unix.Catalog.GetString ("Print"), null, "gtk-print");
-			Exit = new Gtk.Action ("Exit", Mono.Unix.Catalog.GetString ("Exit"), null, "gtk-quit");
+			Exit = new Gtk.Action ("Exit", Mono.Unix.Catalog.GetString ("Quit"), null, "gtk-quit");
 			
 			OpenRecent.Sensitive = false;
 			Close.Sensitive = false;
