@@ -53,6 +53,7 @@ namespace Pinta
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (History_HistoryItemAdded);
+			PintaCore.History.HistoryItemRemoved += new EventHandler<HistoryItemRemovedEventArgs>(History_HistoryItemRemoved);
 			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
 			PintaCore.Workspace.CanvasSizeChanged += new EventHandler (Workspace_CanvasSizeChanged);
 			CreateToolBox ();
@@ -98,6 +99,7 @@ namespace Pinta
 			EffectsAction.Visible = false;
 			WindowAction.Visible = false;
 		}
+
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
@@ -146,6 +148,19 @@ namespace Pinta
 				drawingarea1.GdkWindow.InvalidateRect (e.Rectangle, false);
 		}
 
+		void History_HistoryItemRemoved (object sender, HistoryItemRemovedEventArgs e)
+		{
+			// Hack: Instead of looking for the correct item to remove, blindly remove
+			// the last item from the tree
+			ListStore historyModel = (treeview1.Model as ListStore);
+			int nChildren = historyModel.IterNChildren();
+			
+			TreeIter lastChild = new TreeIter();
+			historyModel.IterNthChild(out lastChild, nChildren-1);
+			
+			historyModel.Remove(ref lastChild);
+		}
+		
 		void History_HistoryItemAdded (object sender, HistoryItemAddedEventArgs e)
 		{
 			(treeview1.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (e.Item.Icon), e.Item.Text);
