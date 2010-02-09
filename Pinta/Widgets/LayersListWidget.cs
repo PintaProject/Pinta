@@ -3,6 +3,7 @@
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
+//       Greg Lowe <greg@vis.net.nz>
 // 
 // Copyright (c) 2010 Jonathan Pobst
 // 
@@ -27,204 +28,160 @@
 using System;
 using System.Linq;
 using Pinta.Core;
+using Gtk;
 
 namespace Pinta
 {
-	// TODO: This needs to be completely redone properly
-	// ie: more than 3 layers, scrolling, etc.
-	// is probably supposed to be a treeview?
 	[System.ComponentModel.ToolboxItem (true)]
-	public class LayersListWidget : Gtk.DrawingArea
+	public class LayersListWidget : ScrolledWindow
 	{
-		private int thumb_width = 56;
-		private int thumb_height = 42;
+		private TreeView tree;
+		private TreeStore store;
+				
+		private const int store_index_thumbnail = 0;
+		private const int store_index_name = 1;
+		private const int store_index_visibility = 2;		
+		private const int store_index_layer = 3;
 		
-		private Cairo.Rectangle layer1_bounds = new Cairo.Rectangle (0, 2, 175, 47);
-		private Cairo.Rectangle layer2_bounds = new Cairo.Rectangle (0, 49, 175, 47);
-		private Cairo.Rectangle layer3_bounds = new Cairo.Rectangle (0, 96, 175, 47);
-
-		private Cairo.Rectangle layer1_toggle = new Cairo.Rectangle (155, 8, 16, 16);
-		private Cairo.Rectangle layer2_toggle = new Cairo.Rectangle (155, 55, 16, 16);
-		private Cairo.Rectangle layer3_toggle = new Cairo.Rectangle (155, 102, 16, 16);
+		private const int thumbnail_width = 60;
+		private const int thumbnail_height = 40;
+		private const int thumbnail_column_width = 70;
 		
-		private Gdk.Pixbuf layer_visible;
-		private Gdk.Pixbuf layer_invisible;
+		private const int name_column_min_width = 100;
+		private const int name_column_max_width = 300;
 		
-		private Cairo.Surface transparent;
+		private const int visibility_column_width = 30;
 		
 		public LayersListWidget ()
 		{
-			this.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
+			SetSizeRequest (200, 300);
 			
-			// Insert initialization code here.
-			layer_visible = PintaCore.Resources.GetIcon ("LayersWidget.Visible.png");
-			layer_invisible = PintaCore.Resources.GetIcon ("LayersWidget.Hidden.png");
+			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 			
-			transparent = new Cairo.ImageSurface (Cairo.Format.ARGB32, thumb_width, thumb_height);
-			Cairo.Color gray = new Cairo.Color (.75, .75, .75);
+			tree = new TreeView ();
 			
-			// Create checkerboard background	
-			int grid_width = 4;
+			tree.HeadersVisible = false;
+			tree.FixedHeightMode = true;
+			tree.Reorderable = false;
+			tree.EnableGridLines = TreeViewGridLines.None;
+			tree.EnableTreeLines = false;
+			tree.ShowExpanders = false;
 			
-			using (Cairo.Context g = new Cairo.Context (transparent)) {
-				g.Color = new Cairo.Color (1, 1, 1);
-				g.Paint ();
+			var crs = new CellRendererSurface (thumbnail_width, thumbnail_height);
+			var col = new TreeViewColumn ("Thumbnail", crs, "surface", store_index_thumbnail);
+			col.Sizing = TreeViewColumnSizing.Fixed;
+			col.FixedWidth = thumbnail_column_width;
+			tree.AppendColumn (col);
+			
+			col = new TreeViewColumn ("Name", new CellRendererText (), "text", store_index_name);
+			col.Sizing = TreeViewColumnSizing.Fixed;			
+			col.Expand = true;
+			col.MinWidth = name_column_min_width;
+			col.MaxWidth = name_column_max_width;
+			tree.AppendColumn (col);
+			
+			var crt = new CellRendererToggle ();
+			crt.Activatable = true;
+			crt.Toggled += LayerVisibilityToggled;
+			
+			col = new TreeViewColumn ("Visible", crt, "active", store_index_visibility);
+			col.Sizing = TreeViewColumnSizing.Fixed;
+			col.FixedWidth = visibility_column_width;
+			tree.AppendColumn (col);
+			
+			store = new TreeStore (typeof (Cairo.ImageSurface), typeof (string), typeof (bool), typeof (Layer));
+			
+			tree.Model = store;
+			
+			Add (tree);
+			
+			PintaCore.Layers.LayerAdded += HandleLayerAddedOrRemoved;
+			PintaCore.Layers.LayerRemoved += HandleLayerAddedOrRemoved;
+			PintaCore.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+			PintaCore.History.HistoryItemAdded += HandleHistoryItemAdded;
+			PintaCore.History.ActionRedone += HandleHistoryItemAdded;
+			PintaCore.History.ActionUndone += HandleHistoryItemAdded;			
+			
+			tree.CursorChanged += HandleLayerSelected;
+			
+			ShowAll ();
+		}
+		
+		private Layer GetSelectedLayerInTreeView ()
+		{
+			Layer layer = null;
+			TreeIter iter;
+			
+			var paths = tree.Selection.GetSelectedRows ();
 				
-				for (int y = 0; y < thumb_height; y += grid_width)		
-					for (int x = 0; x < thumb_width; x += grid_width) {
-						if ((x / grid_width % 2) + (y / grid_width % 2) == 1)
-							g.FillRectangle (new Cairo.Rectangle (x, y, grid_width, grid_width), gray);
-				}
-			}	
+			if (paths != null && paths.Length > 0 && store.GetIter (out iter, paths[0])) {
+				layer = store.GetValue (iter, store_index_layer) as Layer;
+			}
 			
-			PintaCore.Layers.LayerAdded += HandlePintaCoreLayersLayerAddedOrRemoved;
-			PintaCore.Layers.LayerRemoved += HandlePintaCoreLayersLayerAddedOrRemoved;
-			PintaCore.Layers.SelectedLayerChanged += HandlePintaCoreLayersLayerAddedOrRemoved;
-			PintaCore.History.HistoryItemAdded += HandlePintaCoreHistoryHistoryItemAdded;
-			PintaCore.History.ActionRedone += HandlePintaCoreHistoryHistoryItemAdded;
-			PintaCore.History.ActionUndone += HandlePintaCoreHistoryHistoryItemAdded;
+			return layer;
 		}
-
-		private void HandlePintaCoreHistoryHistoryItemAdded (object sender, EventArgs e)
-		{
-			this.GdkWindow.Invalidate ();
+		
+		private void SelectLayerInTreeView (int layerIndex)
+		{									
+			var path = new TreePath (new int[] { layerIndex });
+			tree.Selection.SelectPath (path);
 		}
-
-		private void HandlePintaCoreLayersLayerAddedOrRemoved (object sender, EventArgs e)
+		
+		private void HandleLayerSelected (object o, EventArgs e)
 		{
-			this.GdkWindow.Invalidate ();
+			PintaCore.Layers.SetCurrentLayer (GetSelectedLayerInTreeView ());
+		}
+		
+		private void LayerVisibilityToggled (object o, ToggledArgs args)
+		{
+			TreeIter iter;		
+			if (store.GetIter (out iter, new TreePath (args.Path))) {
+				bool b = (bool) store.GetValue (iter, store_index_visibility);				
+				store.SetValue(iter, store_index_visibility, !b);
+				
+				var layer = (Layer) store.GetValue (iter, store_index_layer);
+				SetLayerVisibility (layer, !b);
+			}
+		}
+		
+		private void HandleHistoryItemAdded (object sender, EventArgs e)
+		{	
+			// TODO: Handle this more efficiently.
+			Reset ();
+		}
+		
+		private void HandleSelectedLayerChanged (object sender, EventArgs e)
+		{
+			// TODO: Handle this more efficiently.
+			Reset ();
+		}		
 
+		private void HandleLayerAddedOrRemoved(object sender, EventArgs e)
+		{
+			// TODO: Handle this more efficiently.
+			Reset ();
+			
 			// TODO: this should be handled elsewhere
 			PintaCore.Workspace.Invalidate ();
 		}
-
-		protected override bool OnButtonPressEvent (Gdk.EventButton ev)
-		{
-			Layer toggled = GetClickedLayerVisibleToggle (ev.X, ev.Y);
-			Layer clicked = GetClickedLayer (ev.X, ev.Y);
-			
-			if (toggled != null)
-				toggled.Hidden = !toggled.Hidden;
-			else if (clicked != null)
-				PintaCore.Layers.SetCurrentLayer (clicked);
-			
-			GdkWindow.Invalidate ();
-			PintaCore.Workspace.Invalidate ();
-			
-			// Insert button press handling code here.
-			return base.OnButtonPressEvent (ev);
-		}
-
-		private Layer GetClickedLayer (double x, double y)
-		{
-			int count = PintaCore.Layers.Count;
-			
-			if (count == 1) {
-				if (layer1_bounds.ContainsPoint (x, y))
-					return PintaCore.Layers[0];
-			} else if (count == 2) {
-				if (layer1_bounds.ContainsPoint (x, y))
-					return PintaCore.Layers[1]; 
-				else if (layer2_bounds.ContainsPoint (x, y))
-					return PintaCore.Layers[0];
-			} else {
-				if (layer1_bounds.ContainsPoint (x, y))
-					return PintaCore.Layers[2]; 
-				else if (layer2_bounds.ContainsPoint (x, y))
-					return PintaCore.Layers[1]; 
-				else if (layer3_bounds.ContainsPoint (x, y))
-					return PintaCore.Layers[0];
-			}
-			
-			return null;
-		}
-
-		private Layer GetClickedLayerVisibleToggle (double x, double y)
-		{
-			int count = PintaCore.Layers.Count;
-			
-			if (count == 1) {
-				if (layer1_toggle.ContainsPoint (x, y))
-					return PintaCore.Layers[0];
-			} else if (count == 2) {
-				if (layer1_toggle.ContainsPoint (x, y))
-					return PintaCore.Layers[1]; 
-				else if (layer2_toggle.ContainsPoint (x, y))
-					return PintaCore.Layers[0];
-			} else {
-				if (layer1_toggle.ContainsPoint (x, y))
-					return PintaCore.Layers[2]; 
-				else if (layer2_toggle.ContainsPoint (x, y))
-					return PintaCore.Layers[1]; 
-				else if (layer3_toggle.ContainsPoint (x, y))
-					return PintaCore.Layers[0];
-			}
-			
-			return null;
-		}		
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
-		{
-			base.OnExposeEvent (ev);
-			
-			
-			int y = 6;
-			
-			foreach (var item in PintaCore.Layers.Reverse ()) {
-				DrawLayer (item, 5, y, item.Name, item == PintaCore.Layers.CurrentLayer);
-				y += 47;
-			}
-			
-			// Insert drawing code here.
-			return true;
-		}
-
-		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
-		{
-			base.OnSizeAllocated (allocation);
-			// Insert layout code here.
-		}
-
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			// Calculate desired size here.
-			requisition.Height = 145;
-			requisition.Width = 175;
-		}
 		
-		private void DrawLayer (Layer l, int x, int y, string name, bool selected)
+		private void Reset()
 		{
-			using (Cairo.Context g = Gdk.CairoHelper.Create (GdkWindow)) {
-			
-			if (selected) {
-				g.FillRectangle (new Cairo.Rectangle (0, y - 3, 300, 47), new Cairo.Color (0, 0, 1));
-
+			store.Clear();
+			foreach (var layer in PintaCore.Layers.Reverse ()) {
+				store.AppendValues (layer.Surface, layer.Name, !layer.Hidden, layer);
 			}
+						
+			SelectLayerInTreeView (PintaCore.Layers.Count - PintaCore.Layers.CurrentLayerIndex - 1);
+		}		
+		
+		private void SetLayerVisibility (Layer layer, bool visibility)
+		{
+			if (layer != null)
+				layer.Hidden = !visibility;
 			
-			g.Save ();
-			g.Translate (x, y);
-			g.SetSource (transparent);
-			g.Paint ();
-
-			g.Scale (56 / PintaCore.Workspace.ImageSize.X, 42 / PintaCore.Workspace.ImageSize.Y);
-			
-			g.SetSource (l.Surface);
-			g.Paint ();
-			g.Restore ();
-			
-			g.DrawRectangle (new Cairo.Rectangle (x, y, 56, 42), new Cairo.Color (0, 0, 0), 1);
-			g.MoveTo (x + 70, y + 26);
-			g.TextPath (name);
-			g.Fill ();
-			
-			if (!l.Hidden)
-				Gdk.CairoHelper.SetSourcePixbuf (g, layer_visible, 155, y + 3);
-			else
-				Gdk.CairoHelper.SetSourcePixbuf (g, layer_invisible, 155, y + 3);
-			
-			g.Paint ();
-			
-			}
-			
+			// TODO: this should be handled elsewhere
+			PintaCore.Workspace.Invalidate ();
 		}
 	}
 }
