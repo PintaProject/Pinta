@@ -53,7 +53,7 @@ namespace Pinta
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (History_HistoryItemAdded);
-			PintaCore.History.HistoryItemRemoved += new EventHandler<HistoryItemRemovedEventArgs>(History_HistoryItemRemoved);
+			PintaCore.History.HistoryItemRemoved += new EventHandler<HistoryItemRemovedEventArgs> (History_HistoryItemRemoved);
 			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
 			PintaCore.Workspace.CanvasSizeChanged += new EventHandler (Workspace_CanvasSizeChanged);
 			CreateToolBox ();
@@ -101,16 +101,7 @@ namespace Pinta
 			WindowAction.Visible = false;
 		}
 
-		/// <summary>
-		/// Undo all the events until the selected row
-		/// </summary>
-		/// <param name="o">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="args">
-		/// A <see cref="RowActivatedArgs"/>
-		/// </param>
-		void HandleTreeview1RowActivated (object o, RowActivatedArgs args)
+		private void HandleTreeview1RowActivated (object o, RowActivatedArgs args)
 		{
 			int rowIndex = args.Path.Indices[0];
 			
@@ -118,10 +109,9 @@ namespace Pinta
 			// and the one with index 9 was clicked(last), there'll be no undo. If the 0th is clicked
 			// there will be 9 undoes, and only the one which was clicked will remain
 			int nUndoes = (treeview1.Model as ListStore).IterNChildren() - rowIndex - 1;
-			for(int i = 0; i< nUndoes; i++)
-			{
+			
+			for (int i = 0; i < nUndoes; i++)
 				PintaCore.History.Undo();
-			}
 		}
 
 
