@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -35,13 +36,13 @@ namespace Pinta.Core
 		
 		#region ToolBar
 		// We don't want the ShapeTool's toolbar
-		protected override void BuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Toolbar tb)
 		{
 		}
 		#endregion
 		
 		#region Mouse Handlers
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			shape_origin = point;
 			is_drawing = true;
@@ -50,7 +51,7 @@ namespace Pinta.Core
 			hist.TakeSnapshot ();
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			double x = point.X;
 			double y = point.Y;
@@ -72,7 +73,7 @@ namespace Pinta.Core
 			is_drawing = false;
 		}
 		
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
 			if (!is_drawing)
 				return;

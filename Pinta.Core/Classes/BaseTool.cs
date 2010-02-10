@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 using Gtk;
 using System.IO;
 
@@ -32,6 +33,10 @@ namespace Pinta.Core
 {
 	public abstract class BaseTool
 	{
+	    protected const int DEFAULT_BRUSH_WIDTH = 2;
+	    
+	    protected static Point point_empty = new Point (-500, -500);
+	    
 		protected ToggleToolButton tool_item;
 		protected ToolItem tool_label;
 		protected ToolItem tool_image;
@@ -133,7 +138,7 @@ namespace Pinta.Core
 			tool_item.TooltipText = Name;
 			
 			return tool_item;
-		}		
+		}
 		#endregion
 	}
 }

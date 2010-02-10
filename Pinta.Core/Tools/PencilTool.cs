@@ -31,9 +31,7 @@ using Gtk;
 namespace Pinta.Core
 {
 	public class PencilTool : BaseTool
-	{
-		private static Point point_empty = new Point (-500, -500);
-		
+	{		
 		private Point last_point = point_empty;
 		
 		private ImageSurface undo_surface;
