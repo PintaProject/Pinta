@@ -843,38 +843,39 @@ namespace Pinta.Core
                 }
             }
             
-            public override ColorBgra Apply (ColorBgra color)
+			public override ColorBgra Apply (ColorBgra color)
             {
             	//adjust saturation
-            	//                byte intensity = color.GetIntensityByte();
-            	//                color.R = Utility.ClampToByte((intensity * 1024 + (color.R - intensity) * satFactor) >> 10);
-            	//                color.G = Utility.ClampToByte((intensity * 1024 + (color.G - intensity) * satFactor) >> 10);
-            	//                color.B = Utility.ClampToByte((intensity * 1024 + (color.B - intensity) * satFactor) >> 10);
-            	//
-            	//                HsvColor hsvColor = HsvColor.FromColor(color.ToColor());
-            	//                int hue = hsvColor.Hue;
-            	//
-            	//                hue += hueDelta;
-            	//
-            	//                while (hue < 0)
-            	//                {
-            	//                    hue += 360;
-            	//                }
-            	//                        
-            	//                while (hue > 360)
-            	//                {
-            	//                    hue -= 360;
-            	//                }
-            	//
-            	//                hsvColor.Hue = hue;
-            	//
-            	//                ColorBgra newColor = ColorBgra.FromColor(hsvColor.ToColor());
-            	//                newColor = blendOp.Apply(newColor);
-            	//                newColor.A = color.A;
-            	//                
-            	//                return newColor;
-            	return color;
+	            byte intensity = color.GetIntensityByte();
+	            color.R = Utility.ClampToByte((intensity * 1024 + (color.R - intensity) * satFactor) >> 10);
+	            color.G = Utility.ClampToByte((intensity * 1024 + (color.G - intensity) * satFactor) >> 10);
+	            color.B = Utility.ClampToByte((intensity * 1024 + (color.B - intensity) * satFactor) >> 10);
+	
+	            HsvColor  hsvColor = (new RgbColor(color.R, color.G, color.B)).ToHsv();
+				int hue = hsvColor.Hue;
+	
+	            hue += hueDelta;
+	
+	            while (hue < 0)
+                {
+                	hue += 360;
+                }
+                       
+                while (hue > 360)
+                {
+                	hue -= 360;
+                }
+	
+	            hsvColor.Hue = hue;
+	
+				RgbColor rgbColor=hsvColor.ToRgb();
+				ColorBgra newColor = ColorBgra.FromBgr((byte)rgbColor.Blue, (byte)rgbColor.Green, (byte)rgbColor.Red);
+	            newColor = blendOp.Apply(newColor);
+	            newColor.A = color.A;
+	              
+	            return newColor;
             }
+            
         }
     }
 }

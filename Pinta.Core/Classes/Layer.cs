@@ -264,6 +264,28 @@ namespace Pinta.Core
 
 			(dest as IDisposable).Dispose ();
 		}
+		
+		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
+		{
+			ImageSurface dest = Surface.Clone ();
+			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
+			
+			int len = Surface.Data.Length / 4;
+			
+			UnaryPixelOp op=new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
+			op.Apply (dstPtr, len);
+			
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
+		}
 
 		public void Resize (int width, int height)
 		{
