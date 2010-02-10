@@ -41,6 +41,7 @@ namespace Pinta
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
+			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 		}
 
 		#region Handlers
@@ -119,6 +120,27 @@ namespace Pinta
 				PintaCore.Workspace.Invalidate ();
 			}
 				
+			dialog.Destroy ();
+		}
+		
+		private void HandleAdjustmentsHueSaturationActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FinishSelection ();
+
+			HueSaturationDialog dialog=new HueSaturationDialog();
+			int response = dialog.Run();
+			
+			if (response == (int)Gtk.ResponseType.Ok) {
+				
+				SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.HueAndSaturation.png", Mono.Unix.Catalog.GetString ("Hue / Saturation"));
+				hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
+
+				PintaCore.Layers.CurrentLayer.HueSaturation (dialog.HueLevel, dialog.SaturationLevel, dialog.LightnessLevel);
+				PintaCore.Workspace.Invalidate ();
+			
+				PintaCore.History.PushNewItem (hist);
+			}
+			
 			dialog.Destroy ();
 		}
 		#endregion

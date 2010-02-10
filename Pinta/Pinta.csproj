@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,8 +37,8 @@
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Core">
     </Reference>
-    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -63,6 +63,8 @@
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
+    <Compile Include="Dialogs\HueSaturationDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinta.pkgxml" />
