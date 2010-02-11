@@ -30,23 +30,16 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class FreeformShapeTool : BaseTool
+	public class FreeformShapeTool : BaseBrushTool
 	{
-		private static Point point_empty = new Point (-500, -500);
 
 		private Point last_point = point_empty;
 
-		private ToolBarComboBox brush_width;
-		private ToolBarLabel brush_width_label;
-		private ToolBarButton brush_width_minus;
-		private ToolBarButton brush_width_plus;
 		protected ToolBarImage fill_outline_image;
 		protected ToolBarComboBox fill_outline;
 		protected ToolBarLabel spacer_label;
 		protected ToolBarLabel fill_outline_label;
 
-		private ImageSurface undo_surface;
-		private bool surface_modified;
 		private Path path;
 		private Color fill_color;
 		private Color outline_color;
@@ -60,44 +53,12 @@ namespace Pinta.Core
 		public override string Icon { get { return "Tools.FreeformShape.png"; } }
 		public override string StatusBarText { get { return "Left click to draw with primary color, right click to draw with secondary color"; } }
 		public override bool Enabled { get { return true; } }
-
-		private int BrushWidth
-		{
-			get { return int.Parse (brush_width.ComboBox.ActiveText); }
-			set { (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
-		}
 		#endregion
 
 		#region ToolBar
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
-			base.OnBuildToolBar (tb);
-
-			if (brush_width_label == null)
-				brush_width_label = new ToolBarLabel (" Brush width: ");
-
-			tb.AppendItem (brush_width_label);
-
-			if (brush_width_minus == null) {
-				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", "Decrease brush size");
-				brush_width_minus.Clicked += MinusButtonClickedEvent;
-			}
-
-			tb.AppendItem (brush_width_minus);
-
-			if (brush_width == null)
-				brush_width = new ToolBarComboBox (50, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
-				"40", "45", "50", "55");
-
-			tb.AppendItem (brush_width);
-
-			if (brush_width_plus == null) {
-				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", "Increase brush size");
-				brush_width_plus.Clicked += PlusButtonClickedEvent;
-			}
-
-			tb.AppendItem (brush_width_plus);
+			base.OnBuildToolBar(tb);
 
 			if (spacer_label == null)
 				spacer_label = new ToolBarLabel ("  ");
@@ -118,17 +79,6 @@ namespace Pinta.Core
 				fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
 
 			tb.AppendItem (fill_outline);
-		}
-
-		private void MinusButtonClickedEvent (object o, EventArgs args)
-		{
-			if (BrushWidth > 1)
-				BrushWidth--;
-		}
-
-		private void PlusButtonClickedEvent (object o, EventArgs args)
-		{
-			BrushWidth++;
 		}
 		#endregion
 

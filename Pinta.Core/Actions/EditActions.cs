@@ -73,6 +73,8 @@ namespace Pinta.Core
 			PasteIntoNewImage.Sensitive = false;
 			InvertSelection.Sensitive = false;
 			Deselect.Sensitive = false;
+			EraseSelection.Sensitive = false;
+			FillSelection.Sensitive = false;
 		}
 
 		#region Initialization

@@ -55,7 +55,15 @@ namespace Pinta.Core
 
 		#region Properties
 		protected int BrushWidth {
-			get { return int.Parse (brush_width.ComboBox.ActiveText); }
+            get {
+			    int width;
+		        if (Int32.TryParse (brush_width.ComboBox.ActiveText, out width) )
+		            return width;
+		        else {
+		            (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString();
+		            return DEFAULT_BRUSH_WIDTH;
+		        }
+		    }
 			set { (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
 		}
 		#endregion
