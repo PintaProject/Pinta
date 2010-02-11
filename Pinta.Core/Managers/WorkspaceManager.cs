@@ -34,7 +34,8 @@ namespace Pinta.Core
 		private string filename;
 		private bool is_dirty;
 		private PointD canvas_size;
-		
+		private PointD center_position;
+				
 		public PointD ImageSize { get; set; }
 		public PointD CanvasSize {
 			get { return canvas_size; }
@@ -47,13 +48,25 @@ namespace Pinta.Core
 		}
 		
 		public PointD Offset {
-			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - CanvasSize.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
+			get { return new PointD (center_position.X - PintaCore.Chrome.DrawingArea.Allocation.Width / 2, center_position.Y - PintaCore.Chrome.DrawingArea.Allocation.Height / 2); }
+		}
+		
+		public PointD CenterPosition {
+			get { return center_position;}
+			set { 
+				if (center_position.X != value.X || center_position.Y != value.Y) {
+						center_position = value;
+						Invalidate ();
+				}
+				
+			}
 		}
 
 		public WorkspaceManager ()
 		{
 			CanvasSize = new PointD (800, 600);
 			ImageSize = new PointD (800, 600);
+			center_position = new PointD (400, 300);
 		}
 		
 		public double Scale {
@@ -89,6 +102,20 @@ namespace Pinta.Core
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active++;
 		}
 
+		public void ZoomToRectangle (Rectangle zoomTo)
+		{
+			Scale = canvas_size.X / zoomTo.Width;
+			//TODO update combobox
+			//PintaCore.Actions.View.ZoomComboBox.ComboBox. = String.Format("{0}%",Scale * 100.0);
+			RecenterView(new PointD(zoomTo.X+zoomTo.Width/2, zoomTo.Y+zoomTo.Height/2));
+		}
+		
+		public void RecenterView (Cairo.PointD point)
+		{
+			CenterPosition = new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - point.X)/Scale, (PintaCore.Chrome.DrawingArea.Allocation.Height - point.Y)/Scale);
+			//Console.WriteLine("({0}, {1})", point.X, point.Y);
+		}
+		
 		public void ResizeImage (int width, int height)
 		{
 			if (ImageSize.X == width && ImageSize.Y == height)
@@ -194,5 +221,6 @@ namespace Pinta.Core
 		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
 		public event EventHandler CanvasSizeChanged;
 		#endregion
+		
 	}
 }

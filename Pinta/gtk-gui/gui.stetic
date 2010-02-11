@@ -5,8 +5,8 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../Pinta.Core/bin/Debug/Pinta.Core.dll" />
-    <widget-library name="../bin/Pinta.exe" internal="true" />
+    <widget-library name="../../bin/Pinta.Core.dll" />
+    <widget-library name="../../bin/Pinta.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="Pinta.MainWindow" design-size="886 680">
     <action-group name="Default">

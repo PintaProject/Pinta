@@ -30,16 +30,7 @@ namespace Pinta.Core
 {
 	// This is just to get them to show up in the toolbox
 	// until they get implemented
-	public class ZoomTool : BaseTool
-	{
-		public override string Name {
-			get { return "Zoom"; }
-		}
-		public override string Icon {
-			get { return "Tools.Zoom.png"; }
-		}
-	}
-		
+			
 	public class MagicWandTool : BaseTool
 	{
 		public override string Name {
@@ -47,16 +38,6 @@ namespace Pinta.Core
 		}
 		public override string Icon {
 			get { return "Tools.MagicWand.png"; }
-		}
-	}
-		
-	public class PanTool : BaseTool
-	{
-		public override string Name {
-			get { return "Pan"; }
-		}
-		public override string Icon {
-			get { return "Tools.Pan.png"; }
 		}
 	}
 		
