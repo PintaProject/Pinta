@@ -31,9 +31,9 @@ namespace Pinta
 {
 	public partial class HueSaturationDialog : Gtk.Dialog
 	{
-		private static double hueLevel=0;
-		private static double saturationLevel=100;
-		private static double lightnessLevel=0;
+		private double hueLevel = 0;
+		private double saturationLevel = 100;
+		private double lightnessLevel = 0;
 		
 		public int HueLevel {
 			get { return (int)hueLevel; }
