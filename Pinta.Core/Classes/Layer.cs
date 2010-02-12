@@ -297,6 +297,25 @@ namespace Pinta.Core
 
 			(dest as IDisposable).Dispose ();
 		}
+		
+		public unsafe void BrightnessContrast (int brightness, int contrast)
+		{
+			ImageSurface dest = Surface.Clone ();
+			BrightnessContrastAdjustment adjustment = new BrightnessContrastAdjustment (brightness, contrast);
+			
+			adjustment.Render (Surface, dest);
+			
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
+		}
 
 		public void Resize (int width, int height)
 		{

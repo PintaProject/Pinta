@@ -63,7 +63,6 @@ namespace Pinta.Core
 			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize"), null, null);
 			Sepia = new Gtk.Action ("Sepia", Mono.Unix.Catalog.GetString ("Sepia"), null, "Menu.Adjustments.Sepia.png");
 			
-			BrightnessContrast.Sensitive = false;
 			Curves.Sensitive = false;
 			Levels.Sensitive = false;
 			Posterize.Sensitive = false;
@@ -76,7 +75,7 @@ namespace Pinta.Core
 			
 			menu.Append (AutoLevel.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (BlackAndWhite.CreateAcceleratedMenuItem (Gdk.Key.G, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			//menu.Append (BrightnessContrast.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (BrightnessContrast.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			//menu.Append (Curves.CreateAcceleratedMenuItem (Gdk.Key.M, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (HueSaturation.CreateAcceleratedMenuItem (Gdk.Key.U, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (InvertColors.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));

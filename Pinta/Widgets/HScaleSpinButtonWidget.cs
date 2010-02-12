@@ -65,7 +65,7 @@ namespace Pinta
 			}
 		}
 		
-		public int CurrentValue {
+		public int Value {
 			get { return spin.ValueAsInt; }
 			set { spin.Value = value; }
 		}
@@ -77,6 +77,8 @@ namespace Pinta
 			hscale.ValueChanged += HandleHscaleValueChanged;
 			spin.ValueChanged +=  HandleSpinValueChanged;
 			button.Clicked +=  HandleButtonClicked;
+			
+			Value = DefaultValue;
 		}
 
 		private void HandleHscaleValueChanged (object sender, EventArgs e)
@@ -91,7 +93,7 @@ namespace Pinta
 		
 		private void HandleButtonClicked (object sender, EventArgs e)
 		{
-			CurrentValue = DefaultValue;
+			Value = DefaultValue;
 		}
 	}
 }

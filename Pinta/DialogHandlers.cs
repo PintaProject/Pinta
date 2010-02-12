@@ -41,6 +41,7 @@ namespace Pinta
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
+			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleAdjustmentsBrightnessContrastActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 		}
 
@@ -138,6 +139,27 @@ namespace Pinta
 				PintaCore.Layers.CurrentLayer.HueSaturation (dialog.HueLevel, dialog.SaturationLevel, dialog.LightnessLevel);
 				PintaCore.Workspace.Invalidate ();
 			
+				PintaCore.History.PushNewItem (hist);
+			}
+			
+			dialog.Destroy ();
+		}
+		
+		private void HandleAdjustmentsBrightnessContrastActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FinishSelection ();
+			
+			BrightnessContrastDialog dialog = new BrightnessContrastDialog ();
+			int response = dialog.Run ();
+			
+			if (response == (int)Gtk.ResponseType.Ok) {
+				
+				SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.BrightnessAndContrast.png", Mono.Unix.Catalog.GetString ("Brightness / Contrast"));
+				hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
+
+				PintaCore.Layers.CurrentLayer.BrightnessContrast (dialog.Brightness, dialog.Contrast);
+				PintaCore.Workspace.Invalidate ();
+				
 				PintaCore.History.PushNewItem (hist);
 			}
 			

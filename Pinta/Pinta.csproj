@@ -65,6 +65,10 @@
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs\HueSaturationDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
+    <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
+    <Compile Include="Dialogs\BrightnessContrastDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.BrightnessContrastDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinta.pkgxml" />
