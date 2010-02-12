@@ -127,8 +127,8 @@ namespace Pinta
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			HueSaturationDialog dialog=new HueSaturationDialog();
-			int response = dialog.Run();
+			HueSaturationDialog dialog = new HueSaturationDialog ();
+			int response = dialog.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
 				
