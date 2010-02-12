@@ -31,20 +31,20 @@ namespace Pinta
 {
 	public partial class HueSaturationDialog : Gtk.Dialog
 	{
-		private static double hueLevel=0;
-		private static double saturationLevel=100;
-		private static double lightnessLevel=0;
+		private int hueLevel = 0;
+		private int saturationLevel = 100;
+		private int lightnessLevel = 0;
 		
 		public int HueLevel {
-			get { return (int)hueLevel; }
+			get { return hueLevel; }
 		}
 		
 		public int SaturationLevel {
-			get { return (int)saturationLevel; }
+			get { return saturationLevel; }
 		}
 		
 		public int LightnessLevel {
-			get { return (int)lightnessLevel; }
+			get { return lightnessLevel; }
 		}
 		
 		public HueSaturationDialog ()
@@ -89,19 +89,19 @@ namespace Pinta
 		void spinHue_ValueChanged (object o, EventArgs args)
 		{
 			hscaleHue.Value = spinHue.Value;
-			hueLevel = spinHue.Value;
+			hueLevel = spinHue.ValueAsInt;
 		}
 		
 		void spinSaturation_ValueChanged (object o, EventArgs args)
 		{
 			hscaleSaturation.Value = spinSaturation.Value;
-			saturationLevel = spinSaturation.Value;
+			saturationLevel = spinSaturation.ValueAsInt;
 		}
 		
 		void spinLightness_ValueChanged (object o, EventArgs args)
 		{
 			hscaleLightness.Value = spinLightness.Value;
-			lightnessLevel = spinLightness.Value;
+			lightnessLevel = spinLightness.ValueAsInt;
 		}
 		
 		void buttonHue_Clicked (object o, EventArgs args)

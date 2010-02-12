@@ -404,7 +404,7 @@ namespace Pinta.Core
 			foreach (var layer in layers)
 				layer.Rotate90CW ();
 			
-			PintaCore.Workspace.ImageSize = new PointD (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
+			PintaCore.Workspace.ImageSize = new Point (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
 			PintaCore.Workspace.CanvasSize = new PointD (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 
 			PintaCore.Workspace.Invalidate ();
@@ -415,7 +415,7 @@ namespace Pinta.Core
 			foreach (var layer in layers)
 				layer.Rotate90CCW ();
 			
-			PintaCore.Workspace.ImageSize = new PointD (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
+			PintaCore.Workspace.ImageSize = new Point (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
 			PintaCore.Workspace.CanvasSize = new PointD (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 			
 			PintaCore.Workspace.Invalidate ();
@@ -478,7 +478,7 @@ namespace Pinta.Core
 
 		public ImageSurface GetFlattenedImage ()
 		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, (int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y);
+			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
 				foreach (var layer in PintaCore.Layers.GetLayersToPaint ()) {
@@ -492,7 +492,7 @@ namespace Pinta.Core
 		
 		public ImageSurface GetClippedLayer (int index)
 		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, (int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y);
+			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
@@ -534,7 +534,7 @@ namespace Pinta.Core
 
 		private Layer CreateLayer (string name)
 		{
-			return CreateLayer (name, (int)PintaCore.Workspace.ImageSize.X, (int)PintaCore.Workspace.ImageSize.Y);
+			return CreateLayer (name, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
 		}
 
 		public Layer CreateLayer (string name, int width, int height)

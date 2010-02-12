@@ -30,11 +30,10 @@ using Gtk;
 
 namespace Pinta.Core
 {
-    //This is a base class for similar
+	// This is a base class for brush type tools (paintbrush, eraser, etc)
 	public class BaseBrushTool : BaseTool
 	{
-	    
-	    protected ToolBarComboBox brush_width;
+		protected ToolBarComboBox brush_width;
 		protected ToolBarLabel brush_width_label;
 		protected ToolBarButton brush_width_minus;
 		protected ToolBarButton brush_width_plus;
@@ -42,16 +41,18 @@ namespace Pinta.Core
 		protected ImageSurface undo_surface;
 		protected bool surface_modified;
 	    
-	    protected virtual int BrushWidth { 
+		protected virtual int BrushWidth { 
 			get { 
-			    int width;
-		        if (Int32.TryParse (brush_width.ComboBox.ActiveText, out width) )
-		            return width;
-		        else {
-		            (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString();
-		            return DEFAULT_BRUSH_WIDTH;
-		        }
-		    }
+				int width;
+				
+				if (Int32.TryParse (brush_width.ComboBox.ActiveText, out width))
+					return width;
+				else {
+					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString ();
+					
+					return DEFAULT_BRUSH_WIDTH;
+				}
+			}
 			set { (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
 		}
 		
