@@ -35,8 +35,9 @@ namespace Pinta.Core
 		private bool is_dirty;
 		private PointD canvas_size;
 		private PointD center_position;
-				
-		public PointD ImageSize { get; set; }
+		
+		public Point ImageSize { get; set; }
+		
 		public PointD CanvasSize {
 			get { return canvas_size; }
 			set {
@@ -65,8 +66,8 @@ namespace Pinta.Core
 		public WorkspaceManager ()
 		{
 			CanvasSize = new PointD (800, 600);
-			ImageSize = new PointD (800, 600);
 			center_position = new PointD (400, 300);
+			ImageSize = new Point (800, 600);
 		}
 		
 		public double Scale {
@@ -123,10 +124,10 @@ namespace Pinta.Core
 				
 			PintaCore.Layers.FinishSelection ();
 			
-			ResizeHistoryItem hist = new ResizeHistoryItem ((int)ImageSize.X, (int)ImageSize.Y);
+			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.X, ImageSize.Y);
 			hist.TakeSnapshotOfImage ();
 			
-			ImageSize = new PointD (width, height);
+			ImageSize = new Point (width, height);
 			CanvasSize = new PointD (width, height);
 			
 			foreach (var layer in PintaCore.Layers)
@@ -145,12 +146,12 @@ namespace Pinta.Core
 
 			PintaCore.Layers.FinishSelection ();
 
-			ResizeHistoryItem hist = new ResizeHistoryItem ((int)ImageSize.X, (int)ImageSize.Y);
+			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.X, ImageSize.Y);
 			hist.Icon = "Menu.Image.CanvasSize.png";
 			hist.Text = "Resize Canvas";
 			hist.TakeSnapshotOfImage ();
 
-			ImageSize = new PointD (width, height);
+			ImageSize = new Point (width, height);
 			CanvasSize = new PointD (width, height);
 
 			foreach (var layer in PintaCore.Layers)

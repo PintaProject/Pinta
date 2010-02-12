@@ -36,6 +36,10 @@ namespace Pinta
 			Application.Init ();
 			MainWindow win = new MainWindow ();
 			win.Show ();
+			
+			if (args.Length > 0)
+				Pinta.Core.PintaCore.Actions.File.OpenFile (args[0]);
+				
 			Application.Run ();
 		}
 	}

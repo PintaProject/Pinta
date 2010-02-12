@@ -55,7 +55,7 @@ namespace Pinta
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.ImageSize = new Cairo.PointD (dialog.NewImageWidth, dialog.NewImageHeight);
+				PintaCore.Workspace.ImageSize = new Cairo.Point (dialog.NewImageWidth, dialog.NewImageHeight);
 				PintaCore.Workspace.CanvasSize = new Cairo.PointD (dialog.NewImageWidth, dialog.NewImageHeight);
 				
 				PintaCore.Layers.Clear ();
@@ -127,8 +127,8 @@ namespace Pinta
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			HueSaturationDialog dialog=new HueSaturationDialog();
-			int response = dialog.Run();
+			HueSaturationDialog dialog = new HueSaturationDialog ();
+			int response = dialog.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
 				
