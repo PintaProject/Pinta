@@ -84,6 +84,46 @@ namespace Pinta.Core
 		}
 		#endregion
 
+		#region Public Methods
+		public void OpenFile (string file)
+		{
+			try {
+				// Open the image and add it to the layers
+				Pixbuf bg = new Pixbuf (file);
+
+				PintaCore.Layers.Clear ();
+				PintaCore.History.Clear ();
+				PintaCore.Layers.DestroySelectionLayer ();
+
+				PintaCore.Workspace.ImageSize = new Cairo.PointD (bg.Width, bg.Height);
+				PintaCore.Workspace.CanvasSize = new Cairo.PointD (bg.Width, bg.Height);
+
+				PintaCore.Layers.ResetSelectionPath ();
+
+				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
+
+				using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
+					CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
+					g.Paint ();
+				}
+
+				bg.Dispose ();
+
+				PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
+				PintaCore.Workspace.IsDirty = false;
+
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
+				PintaCore.Workspace.Invalidate ();
+			} catch {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not open file: {0}", file);
+				md.Title = "Error";
+				
+				md.Run ();
+				md.Destroy ();
+			}
+		}
+		#endregion
+		
 		#region Action Handlers
 		private void HandlePintaCoreActionsFileOpenActivated (object sender, EventArgs e)
 		{
@@ -91,37 +131,8 @@ namespace Pinta.Core
 			
 			int response = fcd.Run ();
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				
-				string file = fcd.Filename;
-				
-				PintaCore.Layers.Clear ();
-				PintaCore.History.Clear ();
-				PintaCore.Layers.DestroySelectionLayer ();
-				
-				// Open the image and add it to the layers
-				Pixbuf bg = new Pixbuf (file);
-				
-				PintaCore.Workspace.ImageSize = new Cairo.PointD (bg.Width, bg.Height);
-				PintaCore.Workspace.CanvasSize = new Cairo.PointD (bg.Width, bg.Height);
-				
-				PintaCore.Layers.ResetSelectionPath ();
-				
-				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
-				
-				using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-					CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-					g.Paint ();
-				}
-				
-				bg.Dispose ();
-
-				PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
-				PintaCore.Workspace.IsDirty = false;
-
-				PintaCore.Workspace.Invalidate ();
-				PintaCore.Actions.View.ZoomToWindow.Activate ();
-			}
+			if (response == (int)Gtk.ResponseType.Ok)
+				OpenFile (fcd.Filename);
 			
 			fcd.Destroy ();
 		}
