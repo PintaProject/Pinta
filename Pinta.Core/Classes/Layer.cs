@@ -113,15 +113,15 @@ namespace Pinta.Core
 		
 		public void Rotate90CW ()
 		{
-			double w = PintaCore.Workspace.ImageSize.X;
-			double h = PintaCore.Workspace.ImageSize.Y;
+			int w = PintaCore.Workspace.ImageSize.X;
+			int h = PintaCore.Workspace.ImageSize.Y;
 			
-			Layer dest = PintaCore.Layers.CreateLayer ("", (int)h, (int)w);
+			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
 			
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Translate (h / 2, w / 2);
+				g.Translate (h / 2d, w / 2d);
 				g.Rotate (Math.PI / 2);
-				g.Translate (-w / 2, -h / 2);
+				g.Translate (-w / 2d, -h / 2d);
 				g.SetSource (Surface);
 				
 				g.Paint ();
@@ -134,10 +134,10 @@ namespace Pinta.Core
 		
 		public void Rotate90CCW ()
 		{
-			double w = PintaCore.Workspace.ImageSize.X;
-			double h = PintaCore.Workspace.ImageSize.Y;
+			int w = PintaCore.Workspace.ImageSize.X;
+			int h = PintaCore.Workspace.ImageSize.Y;
 			
-			Layer dest = PintaCore.Layers.CreateLayer ("", (int)h, (int)w);
+			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
 			
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
 				g.Translate (h / 2, w / 2);

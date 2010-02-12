@@ -132,8 +132,8 @@ namespace Pinta
 
 		private void ZoomToWindow_Activated (object sender, EventArgs e)
 		{
-			int image_x = (int)PintaCore.Workspace.ImageSize.X;
-			int image_y = (int)PintaCore.Workspace.ImageSize.Y;
+			int image_x = PintaCore.Workspace.ImageSize.X;
+			int image_y = PintaCore.Workspace.ImageSize.Y;
 
 			int window_x = GtkScrolledWindow.Children[0].Allocation.Width;
 			int window_y = GtkScrolledWindow.Children[0].Allocation.Height;

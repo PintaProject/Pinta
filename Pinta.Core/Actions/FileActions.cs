@@ -95,7 +95,7 @@ namespace Pinta.Core
 				PintaCore.History.Clear ();
 				PintaCore.Layers.DestroySelectionLayer ();
 
-				PintaCore.Workspace.ImageSize = new Cairo.PointD (bg.Width, bg.Height);
+				PintaCore.Workspace.ImageSize = new Cairo.Point (bg.Width, bg.Height);
 				PintaCore.Workspace.CanvasSize = new Cairo.PointD (bg.Width, bg.Height);
 
 				PintaCore.Layers.ResetSelectionPath ();
