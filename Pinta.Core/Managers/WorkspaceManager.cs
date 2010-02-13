@@ -55,6 +55,16 @@ namespace Pinta.Core
 		public PointD CenterPosition {
 			get { return center_position;}
 			set { 
+				if (value.X * Scale < -PintaCore.Chrome.DrawingArea.Allocation.Width / 2)
+					value.X = -PintaCore.Chrome.DrawingArea.Allocation.Width / (2 * Scale);
+				else if (value.X * Scale > CanvasSize.X + PintaCore.Chrome.DrawingArea.Allocation.Width / 2)
+					value.X = (CanvasSize.X + PintaCore.Chrome.DrawingArea.Allocation.Width / 2) / Scale;
+				
+				if (value.Y * Scale < -PintaCore.Chrome.DrawingArea.Allocation.Height / 2)
+					value.Y = -PintaCore.Chrome.DrawingArea.Allocation.Height / (2 * Scale);
+				else if (value.Y * Scale > CanvasSize.Y + PintaCore.Chrome.DrawingArea.Allocation.Height / 2)
+					value.Y = (CanvasSize.Y + PintaCore.Chrome.DrawingArea.Allocation.Height / 2) / Scale;
+				
 				if (center_position.X != value.X || center_position.Y != value.Y) {
 						center_position = value;
 						Invalidate ();
@@ -126,10 +136,7 @@ namespace Pinta.Core
 		
 		public void RecenterView (Cairo.PointD point)
 		{
-			((Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent).Hadjustment.Value = 1;
 			CenterPosition = new PointD (point.X, point.Y);
-			
-			//Console.WriteLine("({0}, {1})", point.X, point.Y);
 		}
 		
 		public void ResizeImage (int width, int height)
