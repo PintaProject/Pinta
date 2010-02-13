@@ -194,6 +194,16 @@ namespace Pinta.Core
 			return true;
 		}
 
+		public Rectangle ClampToImageSize (Rectangle r)
+		{
+			double x = Utility.Clamp (r.X, 0, ImageSize.X);
+			double y = Utility.Clamp (r.Y, 0, ImageSize.Y);
+			double width = Math.Min (r.X + r.Width, ImageSize.X);
+			double height = Math.Min (r.Y + r.Height, ImageSize.Y);
+			
+			return new Rectangle (x, y, width, height);
+		}
+		
 		public string Filename {
 			get { return filename; }
 			set {

@@ -40,10 +40,11 @@ namespace Pinta.Core
 			this.type = type;
 
 			switch (type) {
-				case InvertType.InvertColors:
-					Text = Mono.Unix.Catalog.GetString ("Invert Colors");
-					Icon = "Menu.Adjustments.InvertColors.png";
-					break;
+				// Invert is disabled because it creates a new history item
+				//case InvertType.InvertColors:
+				//        Text = Mono.Unix.Catalog.GetString ("Invert Colors");
+				//        Icon = "Menu.Adjustments.InvertColors.png";
+				//        break;
 				case InvertType.Rotate180:
 					Text = Mono.Unix.Catalog.GetString ("Rotate 180°");
 					Icon = "Menu.Image.Rotate180CW.png";
@@ -87,9 +88,9 @@ namespace Pinta.Core
 		public override void Undo ()
 		{
 			switch (type) {
-				case InvertType.InvertColors:
-					PintaCore.Layers.Invert ();
-					break;
+				//case InvertType.InvertColors:
+				//        PintaCore.Actions.Adjustments.InvertColors.Activate ();
+				//        break;
 				case InvertType.Rotate180:
 					PintaCore.Layers.RotateImage180 ();
 					break;
@@ -117,9 +118,9 @@ namespace Pinta.Core
 		public override void Redo ()
 		{
 			switch (type) {
-				case InvertType.InvertColors:
-					PintaCore.Layers.Invert ();
-					break;
+				//case InvertType.InvertColors:
+				//        PintaCore.Actions.Adjustments.InvertColors.Activate ();
+				//        break;
 				case InvertType.Rotate180:
 					PintaCore.Layers.RotateImage180 ();
 					break;

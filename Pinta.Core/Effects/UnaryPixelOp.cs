@@ -126,15 +126,21 @@ namespace Pinta.Core
 //            Apply(dst.GetPointAddress(dstOffset), src.GetPointAddress(srcOffset), scanLength);
 //        }
 //
-//        public void Apply(Surface dst, Surface src, Rectangle roi)
-//        {
-//            for (int y = roi.Top; y < roi.Bottom; ++y)
-//            {
-//                ColorBgra *dstPtr = dst.GetPointAddress(roi.Left, y);
-//                ColorBgra *srcPtr = src.GetPointAddress(roi.Left, y);
-//                Apply(dstPtr, srcPtr, roi.Width);
-//            }
-//        }
+	public void Apply (Cairo.ImageSurface dst, Cairo.ImageSurface src, Cairo.Rectangle roi)
+	{
+		for (int y = (int)roi.Y; y < roi.GetBottom (); ++y) {
+			ColorBgra* dstPtr = dst.GetPointAddressUnchecked ((int)roi.X, y);
+			ColorBgra* srcPtr = src.GetPointAddressUnchecked ((int)roi.X, y);
+			Apply (dstPtr, srcPtr, (int)roi.Width);
+		}
+	}
+	
+	public void Apply (Cairo.ImageSurface dst, Cairo.ImageSurface src, Cairo.Rectangle[] rois)
+	{
+		foreach (Cairo.Rectangle roi in rois)
+			Apply (dst, src, roi);
+
+	}
 //
 //        public void Apply(Surface surface, PdnRegion roi)
 //        {
