@@ -133,11 +133,7 @@ namespace Pinta.Core
 			double percent = double.Parse (text) / 100.0;
 			
 			PintaCore.Workspace.Scale = percent;
-
-			
-			//((Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent).Hadjustment.Value = 1;
-			//((Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent).Vadjustment.Value = 2;
-			
+	
 		}
 
 		private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)
