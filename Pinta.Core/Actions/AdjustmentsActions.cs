@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -97,45 +98,62 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandleBlackAndWhiteActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
-
-			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.BlackAndWhite.png", Mono.Unix.Catalog.GetString ("Black and White"));
-			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
-			
-			PintaCore.Layers.Desaturate ();
-			PintaCore.History.PushNewItem (hist);
+			PerformEffect (new BlackAndWhiteEffect ());
 		}
 
 		private void HandleInvertColorsActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
-
-			PintaCore.Layers.Invert ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.InvertColors));
+			PerformEffect (new InvertColorsEffect ());
 		}
 
 		private void HandleSepiaActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
-
-			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.Sepia.png", Mono.Unix.Catalog.GetString ("Sepia"));
-			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
-
-			PintaCore.Layers.Sepia ();
-			PintaCore.History.PushNewItem (hist);
+			PerformEffect (new SepiaEffect ());
 		}
 		
 		private void HandleAutoLevelActivated (object sender, EventArgs e)
 		{
+			PerformEffect (new AutoLevelEffect ());
+		}
+		#endregion
+
+		#region Public Methods
+		public bool PerformEffect (BaseEffect effect)
+		{
 			PintaCore.Layers.FinishSelection ();
 
-			SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.AutoLevel.png", Mono.Unix.Catalog.GetString ("Auto Level"));
+			if (effect.IsConfigurable) {
+				bool result = effect.LaunchConfiguration ();
+				
+				if (!result)
+					return false;
+			}
+			
+			SimpleHistoryItem hist = new SimpleHistoryItem (effect.Icon, effect.Text);
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
+			
+			ImageSurface dest = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			
+			Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ();
+			roi = PintaCore.Workspace.ClampToImageSize (roi);
+			
+			effect.RenderEffect (PintaCore.Layers.CurrentLayer.Surface, dest, new Rectangle[] { roi });
 
-			PintaCore.Layers.CurrentLayer.AutoLevel ();
+			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
+			
 			PintaCore.Workspace.Invalidate ();
-
 			PintaCore.History.PushNewItem (hist);
+			
+			return true;
 		}
 		#endregion
 	}
