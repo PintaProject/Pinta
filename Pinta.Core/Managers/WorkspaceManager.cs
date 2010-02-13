@@ -182,6 +182,34 @@ namespace Pinta.Core
 			}
 		}
 		
+		public bool CanvasFitsInWindow {
+			get {
+				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+				int window_x = view.Allocation.Width;
+				int window_y = view.Children[0].Allocation.Height;
+
+				if (CanvasSize.X <= window_x && CanvasSize.Y <= window_y)
+					return true;
+
+				return false;
+			}
+		}
+
+		public bool ImageFitsInWindow {
+			get {
+				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+				int window_x = view.Allocation.Width;
+				int window_y = view.Children[0].Allocation.Height;
+
+				if (ImageSize.X <= window_x && ImageSize.Y <= window_y)
+					return true;
+
+				return false;
+			}
+		}
+		
 		private void ResetTitle ()
 		{
 			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", filename, is_dirty ? "*" : "");
