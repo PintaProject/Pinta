@@ -58,6 +58,11 @@ namespace Pinta.Core
 				if (center_position.X != value.X || center_position.Y != value.Y) {
 						center_position = value;
 						Invalidate ();
+					if (Scale > 1.0) {
+						Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+						view.Hadjustment.Value = center_position.X * view.Hadjustment.Upper / CanvasSize.X;
+						view.Vadjustment.Value = center_position.Y * view.Vadjustment.Upper / CanvasSize.Y;
+					}
 				}
 				
 			}
@@ -73,9 +78,14 @@ namespace Pinta.Core
 		public double Scale {
 			get { return CanvasSize.X / ImageSize.X; }
 			set {
-					if (Scale != value) {
-						CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
-						Invalidate ();
+				if (Scale != value) {
+					CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
+					Invalidate ();
+					if (Scale > 1.0) {
+						Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+						view.Hadjustment.Value = center_position.X * view.Hadjustment.Upper / CanvasSize.X;
+						view.Vadjustment.Value = center_position.Y * view.Vadjustment.Upper / CanvasSize.Y;
+					}
 				}
 			}
 		}
@@ -105,16 +115,20 @@ namespace Pinta.Core
 
 		public void ZoomToRectangle (Rectangle zoomTo)
 		{
-			//PintaCore.Actions.View.ZoomToSelection
-			Scale = canvas_size.X / zoomTo.Width;
-			//TODO update combobox
-			//PintaCore.Actions.View.ZoomComboBox.ComboBox. = String.Format("{0}%",Scale * 100.0);
+			if (canvas_size.X / zoomTo.Width <= canvas_size.Y / zoomTo.Height) {
+				Scale = canvas_size.X / zoomTo.Width;
+			} else {
+				Scale = canvas_size.Y / zoomTo.Height;
+			}
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", Scale * 100.0);
 			RecenterView(new PointD(zoomTo.X+zoomTo.Width/2, zoomTo.Y+zoomTo.Height/2));
 		}
 		
 		public void RecenterView (Cairo.PointD point)
 		{
+			((Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent).Hadjustment.Value = 1;
 			CenterPosition = new PointD (point.X, point.Y);
+			
 			//Console.WriteLine("({0}, {1})", point.X, point.Y);
 		}
 		

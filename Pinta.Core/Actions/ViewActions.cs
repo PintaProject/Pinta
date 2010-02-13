@@ -67,7 +67,7 @@ namespace Pinta.Core
 			Inches = new Gtk.Action ("Inches", Mono.Unix.Catalog.GetString ("Inches"), null, null);
 			Centimeters = new Gtk.Action ("Centimeters", Mono.Unix.Catalog.GetString ("Centimeters"), null, null);
 	
-			ZoomComboBox = new ToolBarComboBox (75, 11, false, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
+			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
 
 			ZoomToSelection.Sensitive = false;
 			PixelGrid.Sensitive = false;
@@ -133,17 +133,11 @@ namespace Pinta.Core
 			double percent = double.Parse (text) / 100.0;
 			
 			PintaCore.Workspace.Scale = percent;
+
 			
-			/*int dx = 0;
-			int dy = 0;
-			if (PintaCore.Workspace.CanvasSize.X > PintaCore.Chrome.DrawingArea.Allocation.Width)
-				dx = (int) (PintaCore.Workspace.CanvasSize.X - PintaCore.Chrome.DrawingArea.Allocation.Width)/2;
-			if (PintaCore.Workspace.CanvasSize.Y > PintaCore.Chrome.DrawingArea.Allocation.Height)
-				dy = (int) (PintaCore.Workspace.CanvasSize.Y - PintaCore.Chrome.DrawingArea.Allocation.Height)/2;
-			if (dx != 0 || dy != 0)
-				PintaCore.Chrome.DrawingArea.GdkWindow.Scroll (dx, dy);
-				PintaCore.Chrome.DrawingArea.SetScrollAdjustments(new Gtk.Adjustment(
-			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate();*/
+			//((Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent).Hadjustment.Value = 1;
+			//((Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent).Vadjustment.Value = 2;
+			
 		}
 
 		private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)
