@@ -138,8 +138,8 @@ namespace Pinta.Core
             else if (mouseDown == 2)
             {
                 PointD lastScrollPosition = PintaCore.Workspace.CenterPosition;
-                lastScrollPosition.X += (point.X - shape_origin.X) * PintaCore.Workspace.Scale;
-                lastScrollPosition.Y += (point.Y - shape_origin.Y) * PintaCore.Workspace.Scale;
+                lastScrollPosition.X -= (point.X - shape_origin.X) ;
+                lastScrollPosition.Y -= (point.Y - shape_origin.Y) ;
                 PintaCore.Workspace.CenterPosition = lastScrollPosition;
             }
 
@@ -169,7 +169,7 @@ namespace Pinta.Core
                     if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) 
                     {
 						PintaCore.Workspace.RecenterView(point);
-						PintaCore.Workspace.ZoomIn();
+						//PintaCore.Workspace.ZoomIn();
                     } 
                     else
                     {
@@ -179,7 +179,7 @@ namespace Pinta.Core
                 else
                 {
 					PintaCore.Workspace.RecenterView(point);
-					PintaCore.Workspace.ZoomOut();
+					//PintaCore.Workspace.ZoomOut();
                 }
 
                 //this.outline.Reset();

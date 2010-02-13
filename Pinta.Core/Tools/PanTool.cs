@@ -68,8 +68,8 @@ namespace Pinta.Core
 			{
 				PointD lastScrollPosition = PintaCore.Workspace.CenterPosition;
 				
-                lastScrollPosition.X += (point.X - lastPt.X)*PintaCore.Workspace.Scale;
-                lastScrollPosition.Y += (point.Y - lastPt.Y)*PintaCore.Workspace.Scale;
+                lastScrollPosition.X -= (point.X - lastPt.X);
+                lastScrollPosition.Y -= (point.Y - lastPt.Y);
                 PintaCore.Workspace.CenterPosition = lastScrollPosition;
 			}
 		}

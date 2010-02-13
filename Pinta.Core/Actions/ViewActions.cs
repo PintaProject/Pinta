@@ -133,6 +133,17 @@ namespace Pinta.Core
 			double percent = double.Parse (text) / 100.0;
 			
 			PintaCore.Workspace.Scale = percent;
+			
+			/*int dx = 0;
+			int dy = 0;
+			if (PintaCore.Workspace.CanvasSize.X > PintaCore.Chrome.DrawingArea.Allocation.Width)
+				dx = (int) (PintaCore.Workspace.CanvasSize.X - PintaCore.Chrome.DrawingArea.Allocation.Width)/2;
+			if (PintaCore.Workspace.CanvasSize.Y > PintaCore.Chrome.DrawingArea.Allocation.Height)
+				dy = (int) (PintaCore.Workspace.CanvasSize.Y - PintaCore.Chrome.DrawingArea.Allocation.Height)/2;
+			if (dx != 0 || dy != 0)
+				PintaCore.Chrome.DrawingArea.GdkWindow.Scroll (dx, dy);
+				PintaCore.Chrome.DrawingArea.SetScrollAdjustments(new Gtk.Adjustment(
+			PintaCore.Chrome.DrawingArea.GdkWindow.Invalidate();*/
 		}
 
 		private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)

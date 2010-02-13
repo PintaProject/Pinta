@@ -49,7 +49,7 @@ namespace Pinta.Core
 		}
 		
 		public PointD Offset {
-			get { return new PointD (center_position.X - PintaCore.Chrome.DrawingArea.Allocation.Width / 2, center_position.Y - PintaCore.Chrome.DrawingArea.Allocation.Height / 2); }
+			get { return new PointD (PintaCore.Chrome.DrawingArea.Allocation.Width / 2 - center_position.X *Scale, PintaCore.Chrome.DrawingArea.Allocation.Height / 2 - center_position.Y * Scale); }
 		}
 		
 		public PointD CenterPosition {
@@ -105,6 +105,7 @@ namespace Pinta.Core
 
 		public void ZoomToRectangle (Rectangle zoomTo)
 		{
+			//PintaCore.Actions.View.ZoomToSelection
 			Scale = canvas_size.X / zoomTo.Width;
 			//TODO update combobox
 			//PintaCore.Actions.View.ZoomComboBox.ComboBox. = String.Format("{0}%",Scale * 100.0);
@@ -113,7 +114,7 @@ namespace Pinta.Core
 		
 		public void RecenterView (Cairo.PointD point)
 		{
-			CenterPosition = new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - point.X)/Scale, (PintaCore.Chrome.DrawingArea.Allocation.Height - point.Y)/Scale);
+			CenterPosition = new PointD (point.X, point.Y);
 			//Console.WriteLine("({0}, {1})", point.X, point.Y);
 		}
 		
