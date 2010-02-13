@@ -50,6 +50,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Adjustments.HueAndSaturation.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Adjustments.HueAndSaturation.png")));
 			fact.Add ("Menu.Adjustments.InvertColors.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Adjustments.InvertColors.png")));
 			fact.Add ("Menu.Adjustments.Levels.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Adjustments.Levels.png")));
+			fact.Add ("Menu.Adjustments.Posterize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Adjustments.Posterize.png")));
 			fact.Add ("Menu.Adjustments.Sepia.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Adjustments.Sepia.png")));
 			fact.AddDefault ();
 			
@@ -60,12 +61,11 @@ namespace Pinta.Core
 			HueSaturation = new Gtk.Action ("HueSaturation", Mono.Unix.Catalog.GetString ("Hue / Saturation"), null, "Menu.Adjustments.HueAndSaturation.png");
 			InvertColors = new Gtk.Action ("InvertColors", Mono.Unix.Catalog.GetString ("Invert Colors"), null, "Menu.Adjustments.InvertColors.png");
 			Levels = new Gtk.Action ("Levels", Mono.Unix.Catalog.GetString ("Levels"), null, "Menu.Adjustments.Levels.png");
-			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize"), null, null);
+			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize"), null, "Menu.Adjustments.Posterize.png");
 			Sepia = new Gtk.Action ("Sepia", Mono.Unix.Catalog.GetString ("Sepia"), null, "Menu.Adjustments.Sepia.png");
 			
 			Curves.Sensitive = false;
 			Levels.Sensitive = false;
-			Posterize.Sensitive = false;
 		}
 
 		#region Initialization
@@ -80,7 +80,7 @@ namespace Pinta.Core
 			menu.Append (HueSaturation.CreateAcceleratedMenuItem (Gdk.Key.U, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (InvertColors.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			//menu.Append (Levels.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask));
-			//menu.Append (Posterize.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (Posterize.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (Sepia.CreateAcceleratedMenuItem (Gdk.Key.E, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 		}
 

@@ -316,6 +316,31 @@ namespace Pinta.Core
 
 			(dest as IDisposable).Dispose ();
 		}
+		
+		public unsafe void Posterize (int red, int green, int blue)
+		{
+			Desaturate ();
+			
+			UnaryPixelOp op = new UnaryPixelOps.PosterizePixel(red, green, blue);
+
+			ImageSurface dest = Surface.Clone ();
+
+			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
+			int len = Surface.Data.Length / 4;
+			
+			op.Apply (dstPtr, len);
+
+			using (Context g = new Context (Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (dest);
+				g.Paint ();
+			}
+
+			(dest as IDisposable).Dispose ();
+		}
 
 		public void Resize (int width, int height)
 		{

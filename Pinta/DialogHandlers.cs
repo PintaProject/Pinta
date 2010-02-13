@@ -42,6 +42,7 @@ namespace Pinta
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleAdjustmentsBrightnessContrastActivated;
+			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 		}
 
@@ -158,6 +159,27 @@ namespace Pinta
 				hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 
 				PintaCore.Layers.CurrentLayer.BrightnessContrast (dialog.Brightness, dialog.Contrast);
+				PintaCore.Workspace.Invalidate ();
+				
+				PintaCore.History.PushNewItem (hist);
+			}
+			
+			dialog.Destroy ();
+		}
+		
+		private void HandleAdjustmentsPosterizeActivated (object sender, EventArgs e)
+		{
+			PintaCore.Layers.FinishSelection ();
+			
+			PosterizeDialog dialog = new PosterizeDialog ();
+			int response = dialog.Run ();
+			
+			if (response == (int)Gtk.ResponseType.Ok) {
+				
+				SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.Posterize.png", Mono.Unix.Catalog.GetString ("Posterize"));
+				hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
+
+				PintaCore.Layers.CurrentLayer.Posterize (dialog.Red, dialog.Green, dialog.Blue);
 				PintaCore.Workspace.Invalidate ();
 				
 				PintaCore.History.PushNewItem (hist);

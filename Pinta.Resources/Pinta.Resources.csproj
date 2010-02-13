@@ -280,6 +280,9 @@
     <EmbeddedResource Include="Resources\ResizeCanvas.SouthWest.png">
       <LogicalName>ResizeCanvas.SouthWest.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
+      <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
