@@ -272,7 +272,17 @@ namespace Pinta.Core
 			
 			int len = Surface.Data.Length / 4;
 			
-			UnaryPixelOp op=new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
+			// map the range [0,100] -> [0,100] and the range [101,200] -> [103,400]
+			if (satDelta > 100) 
+				satDelta = ((satDelta - 100) * 3) + 100;
+			
+			UnaryPixelOp op;
+			
+			if (hueDelta == 0 && satDelta == 100 && lightness == 0)
+				op = new UnaryPixelOps.Identity ();
+			else
+				op = new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
+			
 			op.Apply (dstPtr, len);
 			
 			using (Context g = new Context (Surface)) {
