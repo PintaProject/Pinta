@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 
 
-	public class ZoomTool : ShapeTool
+	public class ZoomTool : BaseTool
 	{
 		/*private Cursor cursorZoomIn;
         private Cursor cursorZoomOut;
@@ -39,10 +39,12 @@ namespace Pinta.Core
         private Cursor cursorZoomPan;
         */
 		private uint mouseDown;
+		private bool is_drawing;
+		protected PointD shape_origin;
+		private Rectangle last_dirty;
 		//private bool moveOffsetMode;
 		//private PointD downPt;
         //private PointD lastPt;
-		//private Rectangle rect = new Rectangle(0,0,0,0);
 		
 		public override string Name {
 			get { return "Zoom"; }
@@ -57,22 +59,32 @@ namespace Pinta.Core
 			get { return true; }
 		}
 		
-		// We don't want the ShapeTool's toolbar
-		protected override void BuildToolBar (Gtk.Toolbar tb)
+		protected void UpdateRectangle (PointD point)
 		{
-		}
-		
-		protected override Rectangle DrawShape (Rectangle r, Layer l)
-		{
-			Path path = PintaCore.Layers.SelectionPath;
+			if (!is_drawing)
+				return;
 			
-			using (Context g = new Context (l.Surface))
-				PintaCore.Layers.SelectionPath = g.CreateRectanglePath (r);
+			Rectangle r = PointsToRectangle (shape_origin, point);
+			Rectangle dirty;
 			
-			(path as IDisposable).Dispose ();
+			PintaCore.Layers.ToolLayer.Clear ();
+			PintaCore.Layers.ToolLayer.Hidden = false;
 			
-			// Add some padding for invalidation
-			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);
+			using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+					
+				g.Antialias = Antialias.Subpixel;
+
+				dirty = g.FillStrokedRectangle (r, new Color(0, 0.4, 0.8, 0.1), new Color(0, 0, 0.9), 1);
+				dirty = dirty.Clamp ();
+
+				PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
+				PintaCore.Workspace.Invalidate (dirty.ToGdkRectangle ());
+				
+				last_dirty = dirty;
+			}
 		}
 		
 		//TODO change cursor
@@ -81,25 +93,6 @@ namespace Pinta.Core
 		{
 			this.mouseDown = 0;
 		}
-		
-		
-        /*protected override void OnActivate()
-        {
-            base.OnActivate();
-            
-            this.outline = new Selection();
-            this.outlineRenderer = new SelectionRenderer(this.RendererList, this.outline, this.PintaCore.Workspace);
-            this.outlineRenderer.InvertedTinting = true;
-            this.outlineRenderer.TintColor = Color.FromArgb(128, 255, 255, 255);
-            this.outlineRenderer.ResetOutlineWhiteOpacity();
-            this.RendererList.Add(this.outlineRenderer, true);
-        }
-        */
-
-        protected override void OnDeactivated ()
-        {
-        	base.OnDeactivated();
-        }
 
         protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
         {
@@ -130,11 +123,12 @@ namespace Pinta.Core
 			base.OnMouseMove (o, args, point);
 
 
-            if ((mouseDown == 1 && 
-                 Math.Sqrt(Math.Pow(point.X - shape_origin.X, 2)+Math.Pow(point.Y - shape_origin.Y, 2)) > 10))  // if they've moved the mouse more than 10 pixels since they clicked
-            {
-                is_drawing = true;
-            } 
+            if (mouseDown == 1) {
+				if (Math.Sqrt(Math.Pow(point.X - shape_origin.X, 2)+Math.Pow(point.Y - shape_origin.Y, 2)) > 10)  // if they've moved the mouse more than 10 pixels since they clicked
+                	is_drawing = true;
+				//still draw rectangle after we have draw it one time...
+				UpdateRectangle(point);
+			}
             else if (mouseDown == 2)
             {
                 PointD lastScrollPosition = PintaCore.Workspace.CenterPosition;
@@ -162,24 +156,22 @@ namespace Pinta.Core
 
             if (mouseDown == 1 || mouseDown == 3) //left or right
             {
-                Rectangle zoomTo = PointsToRectangle(shape_origin, point, false);
-
                 if (args.Event.Button == 1) //left
                 {
                     if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) 
                     {
 						PintaCore.Workspace.RecenterView(point);
-						//PintaCore.Workspace.ZoomIn();
+						PintaCore.Workspace.ZoomIn();
                     } 
                     else
                     {
-						PintaCore.Workspace.ZoomToRectangle(zoomTo);
+						PintaCore.Workspace.ZoomToRectangle(PointsToRectangle(shape_origin, point));
                     }
                 }
                 else
                 {
 					PintaCore.Workspace.RecenterView(point);
-					//PintaCore.Workspace.ZoomOut();
+					PintaCore.Workspace.ZoomOut();
                 }
 
                 //this.outline.Reset();
@@ -189,22 +181,32 @@ namespace Pinta.Core
             {
                 mouseDown = 0;
             }
-			
+			PintaCore.Layers.ToolLayer.Hidden = true;
 			is_drawing = false;
         }
 
-        /*private void UpdateDrawnRect() 
-        {
-            if (!rect.IsEmpty)
-            {
-                this.outline.PerformChanging();
-                this.outline.Reset();
-                this.outline.SetContinuation(rect, CombineMode.Replace);
-                this.outlineRenderer.ResetOutlineWhiteOpacity();
-                this.outline.CommitContinuation();
-                this.outline.PerformChanged();
-                Update();
-            }
-        }*/
+		Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)
+		{
+			double x, y, w, h;
+			
+			if (p1.Y <= p2.Y) {
+				y = p1.Y;
+				h = p2.Y - y;
+			} else {
+				y = p2.Y;
+				h = p1.Y - y;
+			}
+			
+			if (p1.X <= p2.X) {
+				x = p1.X;
+				w = p2.X - x;
+			} else {
+				x = p2.X;
+				w = p1.X - x;
+			}
+
+			return new Rectangle (x, y, w, h);
+		}
+
 	}
 }
