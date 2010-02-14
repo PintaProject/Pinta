@@ -43,7 +43,7 @@ namespace Pinta.Core
 				
 			return false;
 		}
-		
-		public abstract void RenderEffect (ImageSurface src, ImageSurface dest, Rectangle[] rois);
+
+		public abstract void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois);
 	}
 }

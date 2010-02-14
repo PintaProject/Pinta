@@ -40,8 +40,8 @@ namespace Pinta.Core
 		public override string Text {
 			get { return Mono.Unix.Catalog.GetString ("Invert Colors"); }
 		}
-		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Rectangle[] rois)
+
+		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

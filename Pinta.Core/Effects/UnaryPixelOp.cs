@@ -7,148 +7,96 @@
 
 using System;
 using System.Threading;
+using Cairo;
 
 namespace Pinta.Core
 {
-    /// <summary>
-    /// Defines a way to operate on a pixel, or a region of pixels, in a unary fashion.
-    /// That is, it is a simple function F that takes one parameter and returns a
-    /// result of the form: d = F(c)
-    /// </summary>
-    [Serializable]
-    public unsafe abstract class UnaryPixelOp
-        : PixelOp
-    {
-        public abstract ColorBgra Apply(ColorBgra color);
-
-        public unsafe override void Apply(ColorBgra *dst, ColorBgra *src, int length)
-        {
-            unsafe
-            {
-                while (length > 0)
-                {
-                    *dst = Apply(*src);
-                    ++dst;
-                    ++src;
-                    --length;
-                }
-            }
-        }
-
-        public unsafe virtual void Apply(ColorBgra* ptr, int length)
-        {
-            unsafe
-            {
-                while (length > 0)
-                {
-                    *ptr = Apply(*ptr);
-                    ++ptr;
-                    --length;
-                }
-            }
-        }
-
-//        private unsafe void ApplyRectangle(Surface surface, Rectangle rect)
-//        {
-//            for (int y = rect.Top; y < rect.Bottom; ++y)
-//            {
-//                ColorBgra *ptr = surface.GetPointAddress(rect.Left, y);
-//                Apply(ptr, rect.Width);
-//            }
-//        }
-//
-//        public void Apply(Surface surface, Rectangle[] roi, int startIndex, int length)
-//        {
-//            Rectangle regionBounds = Utility.GetRegionBounds(roi, startIndex, length);
-//
-//            if (regionBounds != Rectangle.Intersect(surface.Bounds, regionBounds))
-//            {
-//                throw new ArgumentOutOfRangeException("roi", "Region is out of bounds");
-//            }
-//
-//            unsafe
-//            {
-//                for (int x = startIndex; x < startIndex + length; ++x)
-//                {
-//                    ApplyRectangle(surface, roi[x]);
-//                }
-//            }
-//        }
-//
-//        public void Apply(Surface surface, Rectangle[] roi)
-//        {
-//            Apply(surface, roi, 0, roi.Length);
-//        }
-//
-//        public void Apply(Surface surface, RectangleF[] roiF, int startIndex, int length)
-//        {
-//            Rectangle regionBounds = Rectangle.Truncate(Utility.GetRegionBounds(roiF, startIndex, length));
-//
-//            if (regionBounds != Rectangle.Intersect(surface.Bounds, regionBounds))
-//            {
-//                throw new ArgumentOutOfRangeException("roiF", "Region is out of bounds");
-//            }
-//
-//            unsafe
-//            {
-//                for (int x = startIndex; x < startIndex + length; ++x)
-//                {
-//                    ApplyRectangle(surface, Rectangle.Truncate(roiF[x]));
-//                }
-//            }
-//        }
-//
-//        public void Apply(Surface surface, RectangleF[] roiF)
-//        {
-//            Apply(surface, roiF, 0, roiF.Length);
-//        }
-//
-//        public unsafe void Apply(Surface surface, Rectangle roi)
-//        {
-//            ApplyRectangle(surface, roi);
-//        }
-//
-//        public void Apply(Surface surface, Scanline scan)
-//        {
-//            Apply(surface.GetPointAddress(scan.X, scan.Y), scan.Length);
-//        }
-//
-//        public void Apply(Surface surface, Scanline[] scans)
-//        {
-//            foreach (Scanline scan in scans)
-//            {
-//                Apply(surface, scan);
-//            }
-//        }
-//
-//        public override void Apply(Surface dst, Point dstOffset, Surface src, Point srcOffset, int scanLength)
-//        {
-//            Apply(dst.GetPointAddress(dstOffset), src.GetPointAddress(srcOffset), scanLength);
-//        }
-//
-	public void Apply (Cairo.ImageSurface dst, Cairo.ImageSurface src, Cairo.Rectangle roi)
+	/// <summary>
+	/// Defines a way to operate on a pixel, or a region of pixels, in a unary fashion.
+	/// That is, it is a simple function F that takes one parameter and returns a
+	/// result of the form: d = F(c)
+	/// </summary>
+	[Serializable]
+	public unsafe abstract class UnaryPixelOp : PixelOp
 	{
-		for (int y = (int)roi.Y; y < roi.GetBottom (); ++y) {
-			ColorBgra* dstPtr = dst.GetPointAddressUnchecked ((int)roi.X, y);
-			ColorBgra* srcPtr = src.GetPointAddressUnchecked ((int)roi.X, y);
-			Apply (dstPtr, srcPtr, (int)roi.Width);
+		public UnaryPixelOp ()
+		{
+		}
+
+		public abstract ColorBgra Apply (ColorBgra color);
+
+		public unsafe override void Apply (ColorBgra* dst, ColorBgra* src, int length)
+		{
+			unsafe {
+				while (length > 0) {
+					*dst = Apply (*src);
+					++dst;
+					++src;
+					--length;
+				}
+			}
+		}
+
+		public unsafe virtual void Apply (ColorBgra* ptr, int length)
+		{
+			unsafe {
+				while (length > 0) {
+					*ptr = Apply (*ptr);
+					++ptr;
+					--length;
+				}
+			}
+		}
+
+		private unsafe void ApplyRectangle (ImageSurface surface, Gdk.Rectangle rect)
+		{
+			for (int y = rect.Left; y < rect.Bottom; ++y) {
+				ColorBgra* ptr = surface.GetPointAddress (rect.Left, y);
+				Apply (ptr, rect.Width);
+			}
+		}
+
+		public void Apply (ImageSurface surface, Gdk.Rectangle[] roi, int startIndex, int length)
+		{
+			Gdk.Rectangle regionBounds = Utility.GetRegionBounds (roi, startIndex, length);
+
+			if (regionBounds != Gdk.Rectangle.Intersect (surface.GetBounds (), regionBounds))
+				throw new ArgumentOutOfRangeException ("roi", "Region is out of bounds");
+
+			unsafe {
+				for (int x = startIndex; x < startIndex + length; ++x)
+					ApplyRectangle (surface, roi[x]);
+			}
+		}
+
+		public void Apply (ImageSurface surface, Gdk.Rectangle[] roi)
+		{
+			Apply (surface, roi, 0, roi.Length);
+		}
+
+		public unsafe void Apply (ImageSurface surface, Gdk.Rectangle roi)
+		{
+			ApplyRectangle (surface, roi);
+		}
+
+		public override void Apply (ImageSurface dst, Gdk.Point dstOffset, ImageSurface src, Gdk.Point srcOffset, int scanLength)
+		{
+			Apply (dst.GetPointAddress (dstOffset), src.GetPointAddress (srcOffset), scanLength);
+		}
+		
+		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle roi)
+		{
+			for (int y = roi.Y; y < roi.Bottom; ++y) {
+				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (roi.X, y);
+				ColorBgra* srcPtr = src.GetPointAddressUnchecked (roi.X, y);
+				Apply (dstPtr, srcPtr, roi.Width);
+			}
+		}
+
+		public void Apply (ImageSurface dst, ImageSurface src, Gdk.Rectangle[] rois)
+		{
+			foreach (Gdk.Rectangle roi in rois)
+				Apply (dst, src, roi);
 		}
 	}
-	
-	public void Apply (Cairo.ImageSurface dst, Cairo.ImageSurface src, Cairo.Rectangle[] rois)
-	{
-		foreach (Cairo.Rectangle roi in rois)
-			Apply (dst, src, roi);
-
-	}
-//
-//        public void Apply(Surface surface, PdnRegion roi)
-//        {
-//            Apply(surface, roi.GetRegionScansReadOnlyInt());
-//        }
-
-        public UnaryPixelOp()
-        {
-        }
-    }
 }
