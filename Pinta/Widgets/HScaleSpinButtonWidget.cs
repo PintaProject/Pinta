@@ -33,7 +33,6 @@ namespace Pinta
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class HScaleSpinButtonWidget : Gtk.Bin
 	{
-
 		[Category("Custom Properties")]
 		public string Label {
 			get { return label.Text; }
@@ -65,9 +64,15 @@ namespace Pinta
 			}
 		}
 		
-		public int CurrentValue {
+		[Category("Custom Properties")]
+		public int Value {
 			get { return spin.ValueAsInt; }
-			set { spin.Value = value; }
+			set { 
+				if (spin.Value != value) {
+					spin.Value = value;
+					OnValueChanged ();
+				}
+			}
 		}
 		
 		public HScaleSpinButtonWidget ()
@@ -79,19 +84,44 @@ namespace Pinta
 			button.Clicked +=  HandleButtonClicked;
 		}
 
+		protected override void OnShown ()
+		{
+			base.OnShown ();
+			
+			Value = DefaultValue;
+		}
+
 		private void HandleHscaleValueChanged (object sender, EventArgs e)
 		{
-			spin.Value = hscale.Value;
+			if (spin.Value != hscale.Value) {
+				spin.Value = hscale.Value;
+				OnValueChanged ();
+			}
 		}
 		
 		private void HandleSpinValueChanged (object sender, EventArgs e)
 		{
-			hscale.Value = spin.Value;
+			if (hscale.Value != spin.Value) {
+				hscale.Value = spin.Value;
+				OnValueChanged ();
+			}
 		}
 		
 		private void HandleButtonClicked (object sender, EventArgs e)
 		{
-			CurrentValue = DefaultValue;
+			Value = DefaultValue;
 		}
+		
+		#region Protected Methods
+		protected void OnValueChanged()
+		{
+			if (ValueChanged != null)
+				ValueChanged (this, EventArgs.Empty);
+		}
+		#endregion
+
+		#region Public Events
+		public event EventHandler ValueChanged;
+		#endregion
 	}
 }
