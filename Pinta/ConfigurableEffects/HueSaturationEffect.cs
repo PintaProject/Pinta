@@ -68,8 +68,8 @@ namespace Pinta.Core
 
 			return false;
 		}
-		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Rectangle[] rois)
+
+		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
 				op = new UnaryPixelOps.Identity ();

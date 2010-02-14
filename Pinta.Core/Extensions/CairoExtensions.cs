@@ -521,5 +521,23 @@ namespace Pinta.Core
 
 			return dstPtr;
 		}
+
+		public static unsafe ColorBgra *GetPointAddress (this ImageSurface surf, int x, int y)
+		{
+			if (x < 0 || x >= surf.Width)
+				throw new ArgumentOutOfRangeException ("x", "Out of bounds: x=" + x.ToString ());
+
+			return surf.GetPointAddressUnchecked (x, y);
+		}
+
+		public static unsafe ColorBgra* GetPointAddress (this ImageSurface surf, Gdk.Point point)
+		{
+			return surf.GetPointAddress (point.X, point.Y);
+		}
+
+		public static Gdk.Rectangle GetBounds (this ImageSurface surf)
+		{
+			return new Gdk.Rectangle (0, 0, surf.Width, surf.Height);
+		}
 	}
 }

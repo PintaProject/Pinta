@@ -2,9 +2,9 @@
 // PanTool.cs
 //  
 // Author:
-//       dufoli <>
+//       Olivier Dufour
 // 
-// Copyright (c) 2010 dufoli
+// Copyright (c) 2010 Olivier Dufour
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,6 @@ using Cairo;
 
 namespace Pinta.Core
 {
-
-
 	public class PanTool : BaseTool
 	{
 		public override string Name {
@@ -40,37 +38,34 @@ namespace Pinta.Core
 			get { return "Tools.Pan.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to move in the image."; }
+			get { return "When zoomed in close, click and drag to navigate image."; }
 		}
 		public override bool Enabled {
 			get { return true; }
 		}
 		
 		private bool active;
-		private PointD lastPt;
+		private PointD last_point;
 		
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
-			active = true;
-			lastPt = point;
-			base.OnMouseDown (canvas, args, point);
+			// Don't scroll if the whole canvas fits (no scrollbars)
+			if (!PintaCore.Workspace.CanvasFitsInWindow)
+				active = true;
+				
+			last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
 		}
 		
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
 		{
 			active = false;
-			base.OnMouseUp (canvas, args, point);
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
 		{
-			if (active) 
-			{
-				PointD lastScrollPosition = PintaCore.Workspace.CenterPosition;
-				
-                lastScrollPosition.X -= (point.X - lastPt.X);
-                lastScrollPosition.Y -= (point.Y - lastPt.Y);
-                PintaCore.Workspace.CenterPosition = lastScrollPosition;
+			if (active) {
+				PintaCore.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
+				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
 			}
 		}
 	}

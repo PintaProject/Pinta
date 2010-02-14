@@ -133,11 +133,11 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
 			
 			ImageSurface dest = PintaCore.Layers.CurrentLayer.Surface.Clone ();
-			
-			Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ();
+
+			Gdk.Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ().ToGdkRectangle ();
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
-			
-			effect.RenderEffect (PintaCore.Layers.CurrentLayer.Surface, dest, new Rectangle[] { roi });
+
+			effect.RenderEffect (PintaCore.Layers.CurrentLayer.Surface, dest, new Gdk.Rectangle[] { roi });
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);

@@ -132,17 +132,17 @@ namespace Pinta
 
 		private void ZoomToWindow_Activated (object sender, EventArgs e)
 		{
+			// The image is small enough to fit in the window
+			if (PintaCore.Workspace.ImageFitsInWindow) {
+				PintaCore.Actions.View.ActualSize.Activate ();
+				return;
+			}
+			
 			int image_x = PintaCore.Workspace.ImageSize.X;
 			int image_y = PintaCore.Workspace.ImageSize.Y;
 
 			int window_x = GtkScrolledWindow.Children[0].Allocation.Width;
 			int window_y = GtkScrolledWindow.Children[0].Allocation.Height;
-			
-			// The image is small enough to fit in the window
-			if (image_x <= window_x && image_y <= window_y) {
-				PintaCore.Actions.View.ActualSize.Activate ();
-				return;
-			}
 			
 			// The image is more constrained by width than height
 			if ((double)image_x / (double)window_x >= (double)image_y / (double)window_y) {
@@ -167,10 +167,10 @@ namespace Pinta
 			// Hack: Instead of looking for the correct item to remove, blindly remove
 			// the last item from the tree
 			ListStore historyModel = (treeview1.Model as ListStore);
-			int nChildren = historyModel.IterNChildren();
+			int nChildren = historyModel.IterNChildren ();
 			
 			TreeIter lastChild = new TreeIter();
-			historyModel.IterNthChild(out lastChild, nChildren-1);
+			historyModel.IterNthChild(out lastChild, nChildren - 1);
 			
 			historyModel.Remove(ref lastChild);
 		}

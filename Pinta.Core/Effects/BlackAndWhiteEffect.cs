@@ -41,7 +41,7 @@ namespace Pinta.Core
 			get { return Mono.Unix.Catalog.GetString ("Black and White"); }
 		}
 		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Rectangle[] rois)
+		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

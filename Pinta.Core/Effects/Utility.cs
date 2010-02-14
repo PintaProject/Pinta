@@ -86,5 +86,46 @@ namespace Pinta.Core
 		{
 			return (from + frac * (to - from));
 		}
+
+		/// <summary>
+		/// Allows you to find the bounding box for a "region" that is described as an
+		/// array of bounding boxes.
+		/// </summary>
+		/// <param name="rectsF">The "region" you want to find a bounding box for.</param>
+		/// <returns>A RectangleF structure that surrounds the Region.</returns>
+		public static Gdk.Rectangle GetRegionBounds (Gdk.Rectangle[] rects, int startIndex, int length)
+		{
+			if (rects.Length == 0) {
+				return Gdk.Rectangle.Zero;
+			}
+
+			int left = rects[startIndex].Left;
+			int top = rects[startIndex].Top;
+			int right = rects[startIndex].Right;
+			int bottom = rects[startIndex].Bottom;
+
+			for (int i = startIndex + 1; i < startIndex + length; ++i) {
+				Gdk.Rectangle rect = rects[i];
+
+				if (rect.Left < left) {
+					left = rect.Left;
+				}
+
+				if (rect.Top < top) {
+					top = rect.Top;
+				}
+
+				if (rect.Right > right) {
+					right = rect.Right;
+				}
+
+				if (rect.Bottom > bottom) {
+					bottom = rect.Bottom;
+				}
+			}
+
+			return Gdk.Rectangle.FromLTRB (left, top, right, bottom);
+		}
+
 	}
 }

@@ -102,6 +102,7 @@
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />
     <Compile Include="Tools\LassoSelectTool.cs" />
+    <Compile Include="Tools\PanTool.cs" />
     <Compile Include="Tools\PencilTool.cs" />
     <Compile Include="Tools\EllipseSelectTool.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
