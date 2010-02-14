@@ -42,9 +42,7 @@ namespace Pinta.Core
 		private bool is_drawing;
 		protected PointD shape_origin;
 		private Rectangle last_dirty;
-		//private bool moveOffsetMode;
-		//private PointD downPt;
-        //private PointD lastPt;
+		private static readonly int tolerance = 10;
 		
 		public override string Name {
 			get { return "Zoom"; }
@@ -94,12 +92,11 @@ namespace Pinta.Core
 			this.mouseDown = 0;
 		}
 
-        protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+        protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
         {
 			shape_origin = point;
             
-            switch (args.Event.Button) 
-            {
+			switch (args.Event.Button) {
                 case 1://left
                     //Cursor = cursorZoomIn;
                     break;
@@ -114,73 +111,48 @@ namespace Pinta.Core
             }
 
             mouseDown = args.Event.Button;
-            //OnMouseMove(null, args, point);
-
         }
 		
-		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
         {
 			base.OnMouseMove (o, args, point);
 
-
             if (mouseDown == 1) {
-				if (Math.Sqrt(Math.Pow(point.X - shape_origin.X, 2)+Math.Pow(point.Y - shape_origin.Y, 2)) > 10)  // if they've moved the mouse more than 10 pixels since they clicked
+				if (Math.Abs (shape_origin.X - point.X) <= tolerance && Math.Abs (shape_origin.Y - point.Y) <= tolerance)  // if they've moved the mouse more than 10 pixels since they clicked
                 	is_drawing = true;
 				//still draw rectangle after we have draw it one time...
 				UpdateRectangle(point);
 			}
-            else if (mouseDown == 2)
-            {
-                PointD lastScrollPosition = PintaCore.Workspace.CenterPosition;
-                lastScrollPosition.X -= (point.X - shape_origin.X) ;
-                lastScrollPosition.Y -= (point.Y - shape_origin.Y) ;
-                PintaCore.Workspace.CenterPosition = lastScrollPosition;
+            else if (mouseDown == 2) {
+				PintaCore.Workspace.ScrollCanvas ((int)((shape_origin.X - point.X) * PintaCore.Workspace.Scale), (int)((shape_origin.Y - point.Y)* PintaCore.Workspace.Scale));
             }
-
-            //lastPt = point;
         }
 
-        protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+        protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
         {
 			double x = point.X;
 			double y = point.Y;
-
-			// If the user didn't move the mouse, they want to deselect
-			int tolerance = 10;
-
 			
-            //OnMouseMove(e);
-            bool resetMouseDown = true;
-
             //Cursor = cursorZoom;
 
-            if (mouseDown == 1 || mouseDown == 3) //left or right
-            {
-                if (args.Event.Button == 1) //left
-                {
-                    if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) 
-                    {
-						PintaCore.Workspace.RecenterView(point);
-						PintaCore.Workspace.ZoomIn();
+            if (mouseDown == 1 || mouseDown == 3) {//left or right
+                if (args.Event.Button == 1) {//left
+                    if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
+						PintaCore.Workspace.ZoomIn ();
+						//PintaCore.Workspace.Invalidate();							
+						PintaCore.Workspace.RecenterView (x, y);
                     } 
-                    else
-                    {
-						PintaCore.Workspace.ZoomToRectangle(PointsToRectangle(shape_origin, point));
+                    else {
+						PintaCore.Workspace.ZoomToRectangle (PointsToRectangle(shape_origin, point));
                     }
                 }
-                else
-                {
-					PintaCore.Workspace.RecenterView(point);
-					PintaCore.Workspace.ZoomOut();
+                else {
+					PintaCore.Workspace.ZoomOut ();
+					PintaCore.Workspace.RecenterView (x, y);
                 }
-
-                //this.outline.Reset();
             }
 
-            if (resetMouseDown)
-            {
-                mouseDown = 0;
-            }
+			mouseDown = 0;
 			PintaCore.Layers.ToolLayer.Hidden = true;
 			is_drawing = false;
         }

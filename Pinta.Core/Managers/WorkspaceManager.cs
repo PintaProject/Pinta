@@ -34,7 +34,6 @@ namespace Pinta.Core
 		private string filename;
 		private bool is_dirty;
 		private PointD canvas_size;
-		private PointD center_position;
 		
 		public Point ImageSize { get; set; }
 		
@@ -49,39 +48,12 @@ namespace Pinta.Core
 		}
 		
 		public PointD Offset {
-			get { return new PointD (PintaCore.Chrome.DrawingArea.Allocation.Width / 2 - center_position.X *Scale, PintaCore.Chrome.DrawingArea.Allocation.Height / 2 - center_position.Y * Scale); }
+			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - canvas_size.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
 		}
 		
-		public PointD CenterPosition {
-			get { return center_position;}
-			set { 
-				if (value.X * Scale < -PintaCore.Chrome.DrawingArea.Allocation.Width / 2)
-					value.X = -PintaCore.Chrome.DrawingArea.Allocation.Width / (2 * Scale);
-				else if (value.X * Scale > CanvasSize.X + PintaCore.Chrome.DrawingArea.Allocation.Width / 2)
-					value.X = (CanvasSize.X + PintaCore.Chrome.DrawingArea.Allocation.Width / 2) / Scale;
-				
-				if (value.Y * Scale < -PintaCore.Chrome.DrawingArea.Allocation.Height / 2)
-					value.Y = -PintaCore.Chrome.DrawingArea.Allocation.Height / (2 * Scale);
-				else if (value.Y * Scale > CanvasSize.Y + PintaCore.Chrome.DrawingArea.Allocation.Height / 2)
-					value.Y = (CanvasSize.Y + PintaCore.Chrome.DrawingArea.Allocation.Height / 2) / Scale;
-				
-				if (center_position.X != value.X || center_position.Y != value.Y) {
-						center_position = value;
-						Invalidate ();
-					if (Scale > 1.0) {
-						Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-						view.Hadjustment.Value = center_position.X * view.Hadjustment.Upper / CanvasSize.X;
-						view.Vadjustment.Value = center_position.Y * view.Vadjustment.Upper / CanvasSize.Y;
-					}
-				}
-				
-			}
-		}
-
 		public WorkspaceManager ()
 		{
 			CanvasSize = new PointD (800, 600);
-			center_position = new PointD (400, 300);
 			ImageSize = new Point (800, 600);
 		}
 		
@@ -91,11 +63,6 @@ namespace Pinta.Core
 				if (Scale != value) {
 					CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
 					Invalidate ();
-					if (Scale > 1.0) {
-						Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-						view.Hadjustment.Value = center_position.X * view.Hadjustment.Upper / CanvasSize.X;
-						view.Vadjustment.Value = center_position.Y * view.Vadjustment.Upper / CanvasSize.Y;
-					}
 				}
 			}
 		}
@@ -125,18 +92,23 @@ namespace Pinta.Core
 
 		public void ZoomToRectangle (Rectangle zoomTo)
 		{
+			double ratio;
 			if (canvas_size.X / zoomTo.Width <= canvas_size.Y / zoomTo.Height) {
-				Scale = canvas_size.X / zoomTo.Width;
+				ratio = canvas_size.X / zoomTo.Width;
 			} else {
-				Scale = canvas_size.Y / zoomTo.Height;
+				ratio = canvas_size.Y / zoomTo.Height;
 			}
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", Scale * 100.0);
-			RecenterView(new PointD(zoomTo.X+zoomTo.Width/2, zoomTo.Y+zoomTo.Height/2));
+			
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", ratio * 100.0);
+			RecenterView (zoomTo.X + zoomTo.Width / 2, zoomTo.Y + zoomTo.Height / 2);
 		}
 		
-		public void RecenterView (Cairo.PointD point)
+		public void RecenterView (double x, double y)
 		{
-			CenterPosition = new PointD (point.X, point.Y);
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+			view.Hadjustment.Value = Utility.Clamp (x - PintaCore.Chrome.DrawingArea.Screen.Width / (2 * Scale) , view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
+			view.Vadjustment.Value = Utility.Clamp (y - PintaCore.Chrome.DrawingArea.Screen.Height / (2 * Scale) , view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
 		}
 		
 		public void ResizeImage (int width, int height)

@@ -41,16 +41,6 @@ namespace Pinta.Core
 		}
 	}
 		
-	public class PaintBucketTool : BaseTool
-	{
-		public override string Name {
-			get { return "Paint Bucket"; }
-		}
-		public override string Icon {
-			get { return "Tools.PaintBucket.png"; }
-		}
-	}
-		
 	public class GradientTool : BaseTool
 	{
 		public override string Name {
@@ -78,16 +68,6 @@ namespace Pinta.Core
 		}
 		public override string Icon {
 			get { return "Tools.Recolor.png"; }
-		}
-	}
-			
-	public class TextTool : BaseTool
-	{
-		public override string Name {
-			get { return "Text"; }
-		}
-		public override string Icon {
-			get { return "Tools.Text.png"; }
 		}
 	}
 			

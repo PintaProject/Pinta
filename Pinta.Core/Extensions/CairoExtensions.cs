@@ -457,6 +457,11 @@ namespace Pinta.Core
 			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);
 		}
 
+		public static uint ToUint (this Cairo.Color c)
+		{
+			return Pinta.Core.ColorBgra.BgraToUInt32( (int)(c.B * 255), (int)(c.R * 255), (int)(c.G * 255), (int)(c.A * 255));
+		}
+		
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
 			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
