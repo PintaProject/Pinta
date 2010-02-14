@@ -153,118 +153,6 @@ namespace Pinta.Core
 			(old as IDisposable).Dispose ();
 		}
 		
-		public unsafe void Sepia ()
-		{
-			Desaturate ();
-			
-			UnaryPixelOp op = new UnaryPixelOps.Level(
-				ColorBgra.Black, 
-				ColorBgra.White,
-				new float[] { 1.2f, 1.0f, 0.8f },
-				ColorBgra.Black,
-				ColorBgra.White);
-
-			ImageSurface dest = Surface.Clone ();
-
-			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
-			int len = Surface.Data.Length / 4;
-			
-			op.Apply (dstPtr, len);
-
-			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.SetSource (dest);
-				g.Paint ();
-			}
-
-			(dest as IDisposable).Dispose ();
-		}
-		
-		public unsafe void Invert ()
-		{
-			ImageSurface dest = Surface.Clone ();
-
-			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
-			int len = Surface.Data.Length / 4;
-			
-			for (int i = 0; i < len; i++) {
-				if (dstPtr->A != 0)
-				*dstPtr = (ColorBgra.FromBgra((byte)(255 - dstPtr->B), (byte)(255 - dstPtr->G), (byte)(255 - dstPtr->R), dstPtr->A));
-				dstPtr++;
-			}
-
-			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.SetSource (dest);
-				g.Paint ();
-			}
-
-			(dest as IDisposable).Dispose ();
-		}
-		
-		public unsafe void Desaturate ()
-		{
-			ImageSurface dest = Surface.Clone ();
-
-			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
-			int len = Surface.Data.Length / 4;
-			
-			for (int i = 0; i < len; i++) {
-				byte ib = dstPtr->GetIntensityByte();
-
-				dstPtr->R = ib;
-				dstPtr->G = ib;
-				dstPtr->B = ib;
-				dstPtr++;
-			}
-
-			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.SetSource (dest);
-				g.Paint ();
-			}
-			
-			(dest as IDisposable).Dispose ();
-		}
-		
-		public unsafe void AutoLevel ()
-		{
-			ImageSurface dest = Surface.Clone ();
-			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
-			ColorBgra* srcPtr = (ColorBgra*)Surface.DataPtr;
-			
-			int len = Surface.Data.Length / 4;
-
-			UnaryPixelOps.Level levels = null;
-		        
-			HistogramRgb histogram = new HistogramRgb();
-			histogram.UpdateHistogram (Surface, new Rectangle (0, 0, Surface.Width, Surface.Height));
-			levels = histogram.MakeLevelsAuto();
-
-			if (levels.isValid)
-				levels.Apply (dstPtr, srcPtr, len);
-				
-			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.SetSource (dest);
-				g.Paint ();
-			}
-
-			(dest as IDisposable).Dispose ();
-		}
-		
 		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
 		{
 			ImageSurface dest = Surface.Clone ();
@@ -273,16 +161,15 @@ namespace Pinta.Core
 			int len = Surface.Data.Length / 4;
 			
 			// map the range [0,100] -> [0,100] and the range [101,200] -> [103,400]
-            if (satDelta > 100) 
-                satDelta = ((satDelta - 100) * 3) + 100;
+			if (satDelta > 100) 
+				satDelta = ((satDelta - 100) * 3) + 100;
 			
 			UnaryPixelOp op;
 			
-			if (hueDelta == 0 && satDelta == 100 && lightness == 0) {
-                op = new UnaryPixelOps.Identity();
-            } else {
-                op = new UnaryPixelOps.HueSaturationLightness(hueDelta, satDelta, lightness);
-            }
+			if (hueDelta == 0 && satDelta == 100 && lightness == 0)
+				op = new UnaryPixelOps.Identity ();
+			else
+				op = new UnaryPixelOps.HueSaturationLightness (hueDelta, satDelta, lightness);
 			
 			op.Apply (dstPtr, len);
 			
@@ -318,9 +205,7 @@ namespace Pinta.Core
 		}
 		
 		public unsafe void Posterize (int red, int green, int blue)
-		{
-			Desaturate ();
-			
+		{	
 			UnaryPixelOp op = new UnaryPixelOps.PosterizePixel(red, green, blue);
 
 			ImageSurface dest = Surface.Clone ();

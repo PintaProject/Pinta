@@ -152,6 +152,16 @@ namespace Pinta.Core
 			return true;
 		}
 
+		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
+		{
+			int x = Utility.Clamp (r.X, 0, ImageSize.X);
+			int y = Utility.Clamp (r.Y, 0, ImageSize.Y);
+			int width = Math.Min (r.X + r.Width, ImageSize.X);
+			int height = Math.Min (r.Y + r.Height, ImageSize.Y);
+
+			return new Gdk.Rectangle (x, y, width, height);
+		}
+		
 		public string Filename {
 			get { return filename; }
 			set {
@@ -170,6 +180,42 @@ namespace Pinta.Core
 					ResetTitle ();
 				}
 			}
+		}
+		
+		public bool CanvasFitsInWindow {
+			get {
+				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+				int window_x = view.Allocation.Width;
+				int window_y = view.Children[0].Allocation.Height;
+
+				if (CanvasSize.X <= window_x && CanvasSize.Y <= window_y)
+					return true;
+
+				return false;
+			}
+		}
+
+		public bool ImageFitsInWindow {
+			get {
+				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+				int window_x = view.Allocation.Width;
+				int window_y = view.Children[0].Allocation.Height;
+
+				if (ImageSize.X <= window_x && ImageSize.Y <= window_y)
+					return true;
+
+				return false;
+			}
+		}
+		
+		public void ScrollCanvas (int dx, int dy)
+		{
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+			view.Hadjustment.Value = Utility.Clamp (dx + view.Hadjustment.Value, view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
+			view.Vadjustment.Value = Utility.Clamp (dy + view.Vadjustment.Value, view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
 		}
 		
 		private void ResetTitle ()

@@ -50,16 +50,6 @@ namespace Pinta.Core
 		}
 	}
 		
-	public class PanTool : BaseTool
-	{
-		public override string Name {
-			get { return "Pan"; }
-		}
-		public override string Icon {
-			get { return "Tools.Pan.png"; }
-		}
-	}
-		
 	public class PaintBucketTool : BaseTool
 	{
 		public override string Name {

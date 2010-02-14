@@ -377,27 +377,6 @@ namespace Pinta.Core
 			
 			PintaCore.Workspace.Invalidate ();
 		}
-
-		public void Invert ()
-		{
-			CurrentLayer.Invert ();
-			
-			PintaCore.Workspace.Invalidate ();
-		}
-
-		public void Sepia ()
-		{
-			CurrentLayer.Sepia ();
-			
-			PintaCore.Workspace.Invalidate ();
-		}
-	
-		public void Desaturate ()
-		{
-			CurrentLayer.Desaturate ();
-			
-			PintaCore.Workspace.Invalidate ();
-		}	
 		
 		public void RotateImageCW ()
 		{
