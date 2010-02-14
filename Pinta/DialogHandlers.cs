@@ -132,44 +132,12 @@ namespace Pinta
 		
 		private void HandleAdjustmentsBrightnessContrastActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
-			
-			BrightnessContrastDialog dialog = new BrightnessContrastDialog ();
-			int response = dialog.Run ();
-			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				
-				SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.BrightnessAndContrast.png", Mono.Unix.Catalog.GetString ("Brightness / Contrast"));
-				hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
-
-				PintaCore.Layers.CurrentLayer.BrightnessContrast (dialog.Brightness, dialog.Contrast);
-				PintaCore.Workspace.Invalidate ();
-				
-				PintaCore.History.PushNewItem (hist);
-			}
-			
-			dialog.Destroy ();
+			PintaCore.Actions.Adjustments.PerformEffect (new BrightnessContrastEffect());
 		}
 		
 		private void HandleAdjustmentsPosterizeActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
-			
-			PosterizeDialog dialog = new PosterizeDialog ();
-			int response = dialog.Run ();
-			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				
-				SimpleHistoryItem hist = new SimpleHistoryItem ("Menu.Adjustments.Posterize.png", Mono.Unix.Catalog.GetString ("Posterize"));
-				hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
-
-				PintaCore.Layers.CurrentLayer.Posterize (dialog.Red, dialog.Green, dialog.Blue);
-				PintaCore.Workspace.Invalidate ();
-				
-				PintaCore.History.PushNewItem (hist);
-			}
-			
-			dialog.Destroy ();
+			PintaCore.Actions.Adjustments.PerformEffect (new PosterizeEffect());
 		}
 		#endregion
 	}

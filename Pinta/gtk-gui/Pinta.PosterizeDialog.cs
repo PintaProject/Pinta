@@ -33,7 +33,6 @@ namespace Pinta {
             this.Name = "Pinta.PosterizeDialog";
             this.Title = Mono.Unix.Catalog.GetString("Posterize");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
-            this.AllowShrink = true;
             // Internal child Pinta.PosterizeDialog.VBox
             Gtk.VBox w1 = this.VBox;
             w1.Name = "dialog1_VBox";
@@ -94,6 +93,7 @@ namespace Pinta {
             this.checkLinked.CanFocus = true;
             this.checkLinked.Name = "checkLinked";
             this.checkLinked.Label = Mono.Unix.Catalog.GetString("Linked");
+            this.checkLinked.Active = true;
             this.checkLinked.DrawIndicator = true;
             this.checkLinked.UseUnderline = true;
             w1.Add(this.checkLinked);
