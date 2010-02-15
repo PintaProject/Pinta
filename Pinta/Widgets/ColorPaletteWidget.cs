@@ -131,7 +131,7 @@ namespace Pinta
 				int response = csd.Run ();
 
 				if (response == (int)Gtk.ResponseType.Ok) {
-					PintaCore.Palette.PrimaryColor = csd.ColorSelection.CurrentColor.ToCairoColor ();
+					PintaCore.Palette.PrimaryColor = GdkExtensions.GDKToCairoColor (csd.ColorSelection.CurrentColor, csd.ColorSelection.CurrentAlpha);
 				}
 
 				csd.Destroy ();
@@ -144,7 +144,7 @@ namespace Pinta
 				int response = csd.Run ();
 
 				if (response == (int)Gtk.ResponseType.Ok) {
-					PintaCore.Palette.SecondaryColor = csd.ColorSelection.CurrentColor.ToCairoColor ();
+					PintaCore.Palette.SecondaryColor = GdkExtensions.GDKToCairoColor (csd.ColorSelection.CurrentColor, csd.ColorSelection.CurrentAlpha);
 				}
 
 				csd.Destroy ();
