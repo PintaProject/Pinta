@@ -33,23 +33,23 @@ namespace Pinta.Core
 {
 	public class HistoryManager
 	{
-		List<BaseHistoryItem> items = new List<BaseHistoryItem> ();
+		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
 		int stack_pointer = -1;
 		
 		public void PushNewItem (BaseHistoryItem item)
 		{
-			// If we have un-did items on the stack, they
+			// If we have un-did items on the history stack, they
 			// all get destroyed before we add a new item
-			while (items.Count - 1 > stack_pointer) {
-				BaseHistoryItem bhi = items[items.Count - 1];
-				items.RemoveAt (items.Count - 1);
-				bhi.Dispose ();
+			while (history.Count - 1 > stack_pointer) {
+				BaseHistoryItem base_item = history[history.Count - 1];
+				history.RemoveAt (history.Count - 1);
+				base_item.Dispose ();
 
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 				// TODO: Delete from ListStore
 			}
 			
-			items.Add (item);
+			history.Add (item);
 			stack_pointer++;
 
 			PintaCore.Workspace.IsDirty = true;
@@ -63,7 +63,7 @@ namespace Pinta.Core
 			if (stack_pointer < 0)
 				throw new InvalidOperationException ("Undo stack is empty");
 			
-			BaseHistoryItem item = items[stack_pointer--];
+			BaseHistoryItem item = history[stack_pointer--];
 			item.Undo ();
 			
 			if (stack_pointer == -1)
@@ -76,13 +76,13 @@ namespace Pinta.Core
 		
 		public void Redo ()
 		{
-			if (stack_pointer == items.Count - 1)
+			if (stack_pointer == history.Count - 1)
 				throw new InvalidOperationException ("Redo stack is empty");
 
-			BaseHistoryItem item = items[++stack_pointer];
+			BaseHistoryItem item = history[++stack_pointer];
 			item.Redo ();
 
-			if (stack_pointer == items.Count - 1)
+			if (stack_pointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
@@ -92,10 +92,10 @@ namespace Pinta.Core
 		
 		public void Clear ()
 		{
-			while (items.Count > 0) {
-				BaseHistoryItem bhi = items[items.Count - 1];
-				items.RemoveAt (items.Count - 1);
-				bhi.Dispose ();
+			while (history.Count > 0) {
+				BaseHistoryItem base_item = history[history.Count - 1];
+				history.RemoveAt (history.Count - 1);
+				base_item.Dispose ();
 
 				// TODO: Delete from ListStore
 			}

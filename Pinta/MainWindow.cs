@@ -216,12 +216,12 @@ namespace Pinta
 		void AddColumns (TreeView treeView)
 		{
 			CellRendererPixbuf pix = new CellRendererPixbuf ();
-			TreeViewColumn col1 = new TreeViewColumn (string.Empty, pix, "pixbuf", 0);
-			treeView.AppendColumn (col1);
+			TreeViewColumn icon_column = new TreeViewColumn (string.Empty, pix, "pixbuf", 0);
+			treeView.AppendColumn (icon_column);
 
 			CellRendererText rendererText = new CellRendererText ();
-			TreeViewColumn column = new TreeViewColumn (string.Empty, rendererText, "text", 1);
-			treeView.AppendColumn (column);
+			TreeViewColumn text_column = new TreeViewColumn (string.Empty, rendererText, "text", 1);
+			treeView.AppendColumn (text_column);
 		}
 
 		private void CreateToolBox ()
