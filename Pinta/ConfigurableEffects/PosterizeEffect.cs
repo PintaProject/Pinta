@@ -29,14 +29,12 @@ using Cairo;
 
 namespace Pinta.Core
 {
-
-
 	public class PosterizeEffect : BaseEffect
 	{
 		private int red;
 		private int green;
 		private int blue;
-		
+
 		UnaryPixelOp op;
 
 		public override string Icon {
@@ -54,14 +52,14 @@ namespace Pinta.Core
 		public override bool LaunchConfiguration ()
 		{
 			PosterizeDialog dialog = new PosterizeDialog ();
-			
+
 			int response = dialog.Run ();
-			
+
 			if (response == (int)Gtk.ResponseType.Ok) {
 				red = dialog.Red;
 				green = dialog.Green;
 				blue = dialog.Blue;
-				
+
 				dialog.Destroy ();
 
 				return true;
@@ -74,8 +72,8 @@ namespace Pinta.Core
 
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op = new UnaryPixelOps.PosterizePixel(red, green, blue);
-
+			op = new UnaryPixelOps.PosterizePixel (red, green, blue);
+			
 			op.Apply (dest, src, rois);
 		}
 	}

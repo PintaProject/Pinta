@@ -28,10 +28,8 @@ using System;
 
 namespace Pinta
 {
-
 	public partial class BrightnessContrastDialog : Gtk.Dialog
 	{
-
 		public int Brightness {
 			get { return hscalespinBrightness.Value; }
 		}

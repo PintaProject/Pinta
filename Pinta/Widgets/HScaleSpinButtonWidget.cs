@@ -67,8 +67,7 @@ namespace Pinta
 		[Category("Custom Properties")]
 		public int Value {
 			get { return spin.ValueAsInt; }
-			set 
-			{ 
+			set { 
 				if (spin.Value != value) {
 					spin.Value = value;
 					OnValueChanged ();

@@ -92,6 +92,7 @@ namespace Pinta
 			store = new TreeStore (typeof (Cairo.ImageSurface), typeof (string), typeof (bool), typeof (Layer));
 			
 			tree.Model = store;
+			tree.RowActivated += HandleRowActivated;
 			
 			Add (tree);
 			
@@ -128,8 +129,10 @@ namespace Pinta
 		}
 		
 		private void HandleLayerSelected (object o, EventArgs e)
-		{
-			PintaCore.Layers.SetCurrentLayer (GetSelectedLayerInTreeView ());
+		{			
+			var layer = GetSelectedLayerInTreeView ();			
+			if (PintaCore.Layers.CurrentLayer != layer)
+				PintaCore.Layers.SetCurrentLayer (GetSelectedLayerInTreeView ());
 		}
 		
 		private void LayerVisibilityToggled (object o, ToggledArgs args)
@@ -163,6 +166,12 @@ namespace Pinta
 			
 			// TODO: this should be handled elsewhere
 			PintaCore.Workspace.Invalidate ();
+		}
+		
+		private void HandleRowActivated(object o, RowActivatedArgs args)
+		{
+			// The double click to activate will have already selected the layer.
+			PintaCore.Actions.Layers.Properties.Activate ();
 		}
 		
 		private void Reset()

@@ -48,14 +48,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
     <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
+    <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
+    <Compile Include="Dialogs\BrightnessContrastDialog.cs" />
+    <Compile Include="Dialogs\PosterizeDialog.cs" />
     <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="gtk-gui\Pinta.BrightnessContrastDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.PosterizeDialog.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
     <Compile Include="Widgets\CellRendererSurface.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
+    <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
     <Compile Include="Widgets\LayersListWidget.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
@@ -68,14 +76,6 @@
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs\HueSaturationDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
-    <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
-    <Compile Include="Dialogs\BrightnessContrastDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.BrightnessContrastDialog.cs" />
-    <Compile Include="Dialogs\PosterizeDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.PosterizeDialog.cs" />
-    <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
-    <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
     <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
     <Compile Include="Dialogs\CurvesDialog.cs" />
     <Compile Include="ConfigurableEffects\CurvesEffect.cs" />

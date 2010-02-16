@@ -133,17 +133,17 @@ namespace Pinta
 		
 		private void HandleAdjustmentsBrightnessContrastActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new BrightnessContrastEffect());
+			PintaCore.Actions.Adjustments.PerformEffect (new BrightnessContrastEffect ());
 		}
 		
 		private void HandleAdjustmentsPosterizeActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new PosterizeEffect());
+			PintaCore.Actions.Adjustments.PerformEffect (new PosterizeEffect ());
 		}
 		
 		private void HandleAdjustmentsCurvesActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect());	
+			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect ());	
 		}
 		#endregion
 	}

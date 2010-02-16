@@ -28,8 +28,6 @@ using System;
 
 namespace Pinta
 {
-
-
 	public partial class PosterizeDialog : Gtk.Dialog
 	{
 		public int Red {
@@ -51,7 +49,6 @@ namespace Pinta
 			this.hscalespinRed.ValueChanged += HandleHscalespinRedValueChanged;
 			this.hscalespinGreen.ValueChanged += HandleHscalespinGreenValueChanged;
 			this.hscalespinBlue.ValueChanged += HandleHscalespinBlueValueChanged;
-			
 		}
 
 		private void HandleHscalespinRedValueChanged (object sender, EventArgs e)

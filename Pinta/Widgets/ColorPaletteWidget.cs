@@ -126,11 +126,12 @@ namespace Pinta
 				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Primary Color");
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
+				csd.ColorSelection.HasOpacityControl = true;
 
 				int response = csd.Run ();
 
 				if (response == (int)Gtk.ResponseType.Ok) {
-					PintaCore.Palette.PrimaryColor = csd.ColorSelection.CurrentColor.ToCairoColor ();
+					PintaCore.Palette.PrimaryColor = csd.ColorSelection.GetCairoColor ();
 				}
 
 				csd.Destroy ();
@@ -138,11 +139,12 @@ namespace Pinta
 				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Secondary Color");
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
+				csd.ColorSelection.HasOpacityControl = true;
 
 				int response = csd.Run ();
 
 				if (response == (int)Gtk.ResponseType.Ok) {
-					PintaCore.Palette.SecondaryColor = csd.ColorSelection.CurrentColor.ToCairoColor ();
+					PintaCore.Palette.SecondaryColor = csd.ColorSelection.GetCairoColor ();
 				}
 
 				csd.Destroy ();
