@@ -46,5 +46,11 @@ namespace Pinta.Core
 		{
 			return new Cairo.Color ((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);
 		}
+		
+		public static Cairo.Color GetCairoColor (this Gtk.ColorSelection selection) 
+		{
+			Cairo.Color cairo_color = selection.CurrentColor.ToCairoColor ();
+			return new Cairo.Color (cairo_color.R, cairo_color.G, cairo_color.B, (double)selection.CurrentAlpha / ushort.MaxValue);
+		}
 	}
 }

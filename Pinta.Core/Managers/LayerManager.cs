@@ -305,6 +305,8 @@ namespace Pinta.Core
 			layers.Insert (++current_layer, layer);
 			
 			OnSelectedLayerChanged ();
+			
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Move current layer down
@@ -317,6 +319,8 @@ namespace Pinta.Core
 			layers.Insert (--current_layer, layer);
 			
 			OnSelectedLayerChanged ();
+			
+			PintaCore.Workspace.Invalidate ();
 		}
 
 		// Flip current layer horizontally
