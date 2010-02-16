@@ -118,6 +118,8 @@
     <Compile Include="Tools\ShapeTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
+    <Compile Include="Effects\ColorTransferMode.cs" />
+    <Compile Include="Effects\SplineInterpolator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

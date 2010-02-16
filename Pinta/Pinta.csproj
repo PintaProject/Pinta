@@ -76,6 +76,9 @@
     <Compile Include="gtk-gui\Pinta.PosterizeDialog.cs" />
     <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
+    <Compile Include="Dialogs\CurvesDialog.cs" />
+    <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
