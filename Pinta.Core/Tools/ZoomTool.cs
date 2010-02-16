@@ -180,6 +180,13 @@ namespace Pinta.Core
 
 			return new Rectangle (x, y, w, h);
 		}
+		
+		protected override void OnDeactivated ()
+		{
+			Cursor = null;
+			base.OnDeactivated ();
+		}
+
 
 	}
 }
