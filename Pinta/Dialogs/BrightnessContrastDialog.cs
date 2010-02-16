@@ -1,10 +1,10 @@
 // 
-// PaletteManager.cs
+// BrightnessContrastDialog.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Krzysztof Marecki
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,58 +25,22 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 
-namespace Pinta.Core
+namespace Pinta
 {
-	public class PaletteManager
+	public partial class BrightnessContrastDialog : Gtk.Dialog
 	{
-		private Color primary;
-		private Color secondary;
-
-		public Color PrimaryColor {
-			get { return primary; }
-			set {
-				if (!primary.Equals (value)) {
-					primary = value;
-					OnPrimaryColorChanged ();
-				}
-			}
-		}
-
-		public Color SecondaryColor {
-			get { return secondary; }
-			set {
-				if (!secondary.Equals (value)) {
-					secondary = value;
-					OnSecondaryColorChanged ();
-				}
-			}
+		public int Brightness {
+			get { return hscalespinBrightness.Value; }
 		}
 		
-		public PaletteManager ()
-		{
-			PrimaryColor = new Color (1, 0, 0);
-			SecondaryColor = new Color (0, 0, 1);
+		public int Contrast {
+			get { return hscalespinContrast.Value; }
 		}
-
-		#region Protected Methods
-		protected void OnPrimaryColorChanged ()
-		{
-			if (PrimaryColorChanged != null)
-				PrimaryColorChanged.Invoke (this, EventArgs.Empty);
-		}
-
-		protected void OnSecondaryColorChanged ()
-		{
-			if (SecondaryColorChanged != null)
-				SecondaryColorChanged.Invoke (this, EventArgs.Empty);
-		}
-		#endregion
 		
-		#region Events
-		public event EventHandler PrimaryColorChanged;
-		public event EventHandler SecondaryColorChanged;
-		#endregion
+		public BrightnessContrastDialog ()
+		{
+			this.Build ();
+		}
 	}
 }

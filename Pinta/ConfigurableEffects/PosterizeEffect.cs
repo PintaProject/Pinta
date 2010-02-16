@@ -1,8 +1,8 @@
 // 
-// PaletteManager.cs
+// PosterizeEffect.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
 // Copyright (c) 2010 Jonathan Pobst
 // 
@@ -29,54 +29,52 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class PaletteManager
+	public class PosterizeEffect : BaseEffect
 	{
-		private Color primary;
-		private Color secondary;
+		private int red;
+		private int green;
+		private int blue;
 
-		public Color PrimaryColor {
-			get { return primary; }
-			set {
-				if (!primary.Equals (value)) {
-					primary = value;
-					OnPrimaryColorChanged ();
-				}
+		UnaryPixelOp op;
+
+		public override string Icon {
+			get { return "Menu.Adjustments.Posterize.png"; }
+		}
+
+		public override string Text {
+			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
+		}
+
+		public override bool IsConfigurable {
+			get { return true; }
+		}
+
+		public override bool LaunchConfiguration ()
+		{
+			PosterizeDialog dialog = new PosterizeDialog ();
+
+			int response = dialog.Run ();
+
+			if (response == (int)Gtk.ResponseType.Ok) {
+				red = dialog.Red;
+				green = dialog.Green;
+				blue = dialog.Blue;
+
+				dialog.Destroy ();
+
+				return true;
 			}
+
+			dialog.Destroy ();
+
+			return false;
 		}
 
-		public Color SecondaryColor {
-			get { return secondary; }
-			set {
-				if (!secondary.Equals (value)) {
-					secondary = value;
-					OnSecondaryColorChanged ();
-				}
-			}
-		}
-		
-		public PaletteManager ()
+		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			PrimaryColor = new Color (1, 0, 0);
-			SecondaryColor = new Color (0, 0, 1);
-		}
+			op = new UnaryPixelOps.PosterizePixel (red, green, blue);
 
-		#region Protected Methods
-		protected void OnPrimaryColorChanged ()
-		{
-			if (PrimaryColorChanged != null)
-				PrimaryColorChanged.Invoke (this, EventArgs.Empty);
+			op.Apply (dest, src, rois);
 		}
-
-		protected void OnSecondaryColorChanged ()
-		{
-			if (SecondaryColorChanged != null)
-				SecondaryColorChanged.Invoke (this, EventArgs.Empty);
-		}
-		#endregion
-		
-		#region Events
-		public event EventHandler PrimaryColorChanged;
-		public event EventHandler SecondaryColorChanged;
-		#endregion
 	}
 }
