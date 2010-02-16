@@ -33,11 +33,11 @@ namespace Pinta.Core
 
 	public class ZoomTool : BaseTool
 	{
-		/*private Cursor cursorZoomIn;
-        private Cursor cursorZoomOut;
-        private Cursor cursorZoom;
-        private Cursor cursorZoomPan;
-        */
+		private Gdk.Cursor cursorZoomIn;
+        private Gdk.Cursor cursorZoomOut;
+        private Gdk.Cursor cursorZoom;
+        private Gdk.Cursor cursorZoomPan;
+        
 		private uint mouseDown;
 		private bool is_drawing;
 		protected PointD shape_origin;
@@ -85,11 +85,13 @@ namespace Pinta.Core
 			}
 		}
 		
-		//TODO change cursor
-		
 		public ZoomTool () : base ()
 		{
 			this.mouseDown = 0;
+			cursorZoomIn = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Menu.View.ZoomIn.png") ,0, 0);
+	        cursorZoomOut = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Menu.View.ZoomOut.png") ,0, 0);
+	        cursorZoom = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Tools.Zoom.png") ,0, 0);
+	        cursorZoomPan = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Tools.Pan.png") ,0, 0);
 		}
 
         protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
@@ -98,15 +100,15 @@ namespace Pinta.Core
             
 			switch (args.Event.Button) {
                 case 1://left
-                    //Cursor = cursorZoomIn;
+                    Cursor = cursorZoomIn;
                     break;
 
                 case 2://midle
-                    //Cursor = cursorZoomPan;
+                    Cursor = cursorZoomPan;
                     break;
 
                 case 3://right
-                    //Cursor = cursorZoomOut;
+                    Cursor = cursorZoomOut;
                     break;
             }
 
@@ -133,13 +135,11 @@ namespace Pinta.Core
 			double x = point.X;
 			double y = point.Y;
 			
-            //Cursor = cursorZoom;
-
             if (mouseDown == 1 || mouseDown == 3) {//left or right
                 if (args.Event.Button == 1) {//left
                     if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
 						PintaCore.Workspace.ZoomIn ();
-						//PintaCore.Workspace.Invalidate();							
+						//PintaCore.Workspace.Invalidate();	//Test TODO remove						
 						PintaCore.Workspace.RecenterView (x, y);
                     } 
                     else {
@@ -155,6 +155,7 @@ namespace Pinta.Core
 			mouseDown = 0;
 			PintaCore.Layers.ToolLayer.Hidden = true;
 			is_drawing = false;
+			Cursor = cursorZoom;//restore regular cursor
         }
 
 		Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)

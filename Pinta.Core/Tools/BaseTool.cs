@@ -53,6 +53,8 @@ namespace Pinta.Core
 		public virtual ToggleToolButton ToolItem { get { if (tool_item == null) tool_item = CreateToolButton (); return tool_item; } }
 		public virtual bool Enabled { get { return false; } }
 		
+		public Gdk.Cursor Cursor { set { PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = value; } }
+		
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
