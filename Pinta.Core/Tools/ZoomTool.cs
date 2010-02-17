@@ -54,6 +54,9 @@ namespace Pinta.Core
 		public override bool Enabled {
 			get { return true; }
 		}
+		public override Gdk.Cursor DefaultCursor {
+			get { return cursorZoom; }
+		}
 
 		public ZoomTool ()
 		{
@@ -99,15 +102,15 @@ namespace Pinta.Core
 
 			switch (args.Event.Button) {
 				case 1://left
-					Cursor = cursorZoomIn;
+					SetCursor (cursorZoomIn);
 					break;
 
 				case 2://midle
-					Cursor = cursorZoomPan;
+					SetCursor (cursorZoomPan);
 					break;
 
 				case 3://right
-					Cursor = cursorZoomOut;
+					SetCursor (cursorZoomOut);
 					break;
 			}
 
@@ -151,7 +154,7 @@ namespace Pinta.Core
 			mouseDown = 0;
 			PintaCore.Layers.ToolLayer.Hidden = true;
 			is_drawing = false;
-			Cursor = cursorZoom;	//restore regular cursor
+			SetCursor (cursorZoom);		//restore regular cursor
 		}
 
 		Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)
@@ -175,17 +178,6 @@ namespace Pinta.Core
 			}
 
 			return new Rectangle (x, y, w, h);
-		}
-
-		protected override void OnDeactivated ()
-		{
-			Cursor = null;
-			base.OnDeactivated ();
-		}
-
-		protected override void OnActivated ()
-		{
-			Cursor = cursorZoom;
 		}
 	}
 }
