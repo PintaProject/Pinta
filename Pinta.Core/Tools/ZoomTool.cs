@@ -139,7 +139,6 @@ namespace Pinta.Core
                 if (args.Event.Button == 1) {//left
                     if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
 						PintaCore.Workspace.ZoomIn ();
-						//PintaCore.Workspace.Invalidate();	//Test TODO remove						
 						PintaCore.Workspace.RecenterView (x, y);
                     } 
                     else {
@@ -186,7 +185,12 @@ namespace Pinta.Core
 			Cursor = null;
 			base.OnDeactivated ();
 		}
-
+		
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		{
+			Cursor = cursorZoom;
+			base.OnBuildToolBar (tb);
+		}
 
 	}
 }

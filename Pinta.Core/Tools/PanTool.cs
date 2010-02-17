@@ -46,7 +46,13 @@ namespace Pinta.Core
 		
 		private bool active;
 		private PointD last_point;
+		private Gdk.Cursor cursorPan;
 		
+		public PanTool () : base ()
+		{
+			cursorPan = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Tools.Pan.png") ,0, 0);
+		}
+		//TODO Pan cursor when button down
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
 			// Don't scroll if the whole canvas fits (no scrollbars)
@@ -67,6 +73,18 @@ namespace Pinta.Core
 				PintaCore.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
 				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
 			}
+		}
+		
+		protected override void OnDeactivated ()
+		{
+			Cursor = null;
+			base.OnDeactivated ();
+		}
+		
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		{
+			Cursor = cursorPan;
+			base.OnBuildToolBar (tb);
 		}
 	}
 }

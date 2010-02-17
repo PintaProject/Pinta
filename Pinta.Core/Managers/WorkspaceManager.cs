@@ -107,8 +107,8 @@ namespace Pinta.Core
 		{
 			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
 
-			view.Hadjustment.Value = Utility.Clamp (x - PintaCore.Chrome.DrawingArea.Allocation.Width / (2 * Scale) , view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
-			view.Vadjustment.Value = Utility.Clamp (y - PintaCore.Chrome.DrawingArea.Allocation.Height / (2 * Scale) , view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
+			view.Hadjustment.Value = Utility.Clamp (x * Scale - PintaCore.Chrome.DrawingArea.Allocation.Width / (2 *Scale) , view.Hadjustment.Lower, view.Hadjustment.Upper);
+			view.Vadjustment.Value = Utility.Clamp (y * Scale - PintaCore.Chrome.DrawingArea.Allocation.Height / (2 *Scale) , view.Vadjustment.Lower, view.Vadjustment.Upper);
 		}
 		
 		public void ResizeImage (int width, int height)
