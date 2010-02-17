@@ -60,9 +60,9 @@ namespace Pinta.Core
 		public double Scale {
 			get { return CanvasSize.X / ImageSize.X; }
 			set {
-					if (Scale != value) {
-						CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
-						Invalidate ();
+				if (Scale != value) {
+					CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
+					Invalidate ();
 				}
 			}
 		}
@@ -90,6 +90,27 @@ namespace Pinta.Core
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active++;
 		}
 
+		public void ZoomToRectangle (Rectangle rect)
+		{
+			double ratio;
+			
+			if (canvas_size.X / rect.Width <= canvas_size.Y / rect.Height)
+				ratio = canvas_size.X / rect.Width;
+			else
+				ratio = canvas_size.Y / rect.Height;
+			
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", ratio * 100.0);
+			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+		}
+		
+		public void RecenterView (double x, double y)
+		{
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+			view.Hadjustment.Value = Utility.Clamp (x * Scale - PintaCore.Chrome.DrawingArea.Allocation.Width / (2 *Scale) , view.Hadjustment.Lower, view.Hadjustment.Upper);
+			view.Vadjustment.Value = Utility.Clamp (y * Scale - PintaCore.Chrome.DrawingArea.Allocation.Height / (2 *Scale) , view.Vadjustment.Lower, view.Vadjustment.Upper);
+		}
+		
 		public void ResizeImage (int width, int height)
 		{
 			if (ImageSize.X == width && ImageSize.Y == height)
