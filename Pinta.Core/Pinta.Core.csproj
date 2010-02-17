@@ -117,6 +117,7 @@
     <Compile Include="Tools\SelectTool.cs" />
     <Compile Include="Tools\ShapeTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />
+    <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
