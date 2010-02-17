@@ -67,7 +67,7 @@ namespace Pinta.Core
 			Inches = new Gtk.Action ("Inches", Mono.Unix.Catalog.GetString ("Inches"), null, null);
 			Centimeters = new Gtk.Action ("Centimeters", Mono.Unix.Catalog.GetString ("Centimeters"), null, null);
 	
-			ZoomComboBox = new ToolBarComboBox (75, 11, false, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
+			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
 
 			ZoomToSelection.Sensitive = false;
 			PixelGrid.Sensitive = false;
@@ -109,7 +109,27 @@ namespace Pinta.Core
 			ZoomIn.Activated += HandlePintaCoreActionsViewZoomInActivated;
 			ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
 			ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
+			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
+			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
+		}
+
+		private string temp_zoom;
+		
+		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
+		{
+			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+		}
+
+		private void ComboBox_FocusOutEvent (object o, Gtk.FocusOutEventArgs args)
+		{
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			double percent;
+
+			if (!double.TryParse (text, out percent)) {
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_zoom;
+				return;
+			}
 		}
 		#endregion
 
@@ -117,21 +137,27 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 		{
 			PintaCore.Workspace.Scale = 1.0;
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 11;
 		}
 
 		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
 		{
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
-			
+
 			if (text == "Window") {
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				return;
 			}
-			
+
 			text = text.Trim ('%');
-			
-			double percent = double.Parse (text) / 100.0;
-			
+
+			double percent;
+
+			if (!double.TryParse (text, out percent))
+				return;
+
+			percent = percent / 100.0;
+
 			PintaCore.Workspace.Scale = percent;
 		}
 
