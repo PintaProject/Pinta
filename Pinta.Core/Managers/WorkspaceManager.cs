@@ -33,11 +33,11 @@ namespace Pinta.Core
 	{
 		private string filename;
 		private bool is_dirty;
-		private PointD canvas_size;
+		private Point canvas_size;
 		
 		public Point ImageSize { get; set; }
 		
-		public PointD CanvasSize {
+		public Point CanvasSize {
 			get { return canvas_size; }
 			set {
 				if (canvas_size.X != value.X || canvas_size.Y != value.Y) {
@@ -53,16 +53,18 @@ namespace Pinta.Core
 
 		public WorkspaceManager ()
 		{
-			CanvasSize = new PointD (800, 600);
+			CanvasSize = new Point (800, 600);
 			ImageSize = new Point (800, 600);
 		}
 		
 		public double Scale {
-			get { return CanvasSize.X / ImageSize.X; }
+			get { return (double)CanvasSize.X / (double)ImageSize.X; }
 			set {
 				if (Scale != value) {
-					CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
-					(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(Scale * 100)); 
+					int new_x = (int)(ImageSize.X * value);
+					int new_y = (int)((new_x * ImageSize.Y) / ImageSize.X);
+
+					CanvasSize = new Point (new_x, new_y);
 					Invalidate ();
 				}
 			}
@@ -144,7 +146,7 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 			
 			ImageSize = new Point (width, height);
-			CanvasSize = new PointD (width, height);
+			CanvasSize = new Point (width, height);
 			
 			foreach (var layer in PintaCore.Layers)
 				layer.Resize (width, height);
@@ -168,7 +170,7 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 
 			ImageSize = new Point (width, height);
-			CanvasSize = new PointD (width, height);
+			CanvasSize = new Point (width, height);
 
 			foreach (var layer in PintaCore.Layers)
 				layer.ResizeCanvas (width, height, anchor);

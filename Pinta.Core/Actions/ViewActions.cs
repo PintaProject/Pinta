@@ -115,6 +115,7 @@ namespace Pinta.Core
 		}
 
 		private string temp_zoom;
+		private bool suspend_zoom_change;
 		
 		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
 		{
@@ -133,15 +134,27 @@ namespace Pinta.Core
 		}
 		#endregion
 
+		public void SuspendZoomUpdate ()
+		{
+			suspend_zoom_change = true;
+		}
+
+		public void ResumeZoomUpdate ()
+		{
+			suspend_zoom_change = false;
+		}
+		
 		#region Action Handlers
 		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 		{
-			PintaCore.Workspace.Scale = 1.0;
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 11;
 		}
 
 		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
 		{
+			if (suspend_zoom_change)
+				return;
+				
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
 
 			if (text == "Window") {

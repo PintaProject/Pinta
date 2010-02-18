@@ -388,7 +388,7 @@ namespace Pinta.Core
 				layer.Rotate90CW ();
 			
 			PintaCore.Workspace.ImageSize = new Point (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
-			PintaCore.Workspace.CanvasSize = new PointD (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
+			PintaCore.Workspace.CanvasSize = new Point (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 
 			PintaCore.Workspace.Invalidate ();
 		}
@@ -399,7 +399,7 @@ namespace Pinta.Core
 				layer.Rotate90CCW ();
 			
 			PintaCore.Workspace.ImageSize = new Point (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
-			PintaCore.Workspace.CanvasSize = new PointD (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
+			PintaCore.Workspace.CanvasSize = new Point (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 			
 			PintaCore.Workspace.Invalidate ();
 
