@@ -35,17 +35,37 @@ namespace Pinta
 
 	public partial class CurvesDialog : Gtk.Dialog
 	{
+		private class ControlPointDrawingInfo 
+		{
+			public Color Color { get; set; }
+			public bool IsActive { get; set; }
+		}
+		
 		//drawing area width and height
 		private const int size = 256;
 		//control point radius
-		private const int radius = 8;
+		private const int radius = 6;
 		
-		private List<Point> points;
 		private int channels;
 		//last added control point x;
 		private int last_cpx;
 		
-		public SortedList<int, int>[] ControlPoints { get; private set; }
+		//control points for luminosity transfer mode
+		private SortedList<int, int>[] luminosity_cps;
+		//control points for rg transfer mode
+		private SortedList<int, int>[] rgb_cps;
+		
+		public SortedList<int, int>[] ControlPoints { 
+			get { 
+				return (Mode == ColorTransferMode.Luminosity) ? luminosity_cps : rgb_cps;
+			}
+			set {
+				if (Mode == ColorTransferMode.Luminosity)
+					luminosity_cps = value;
+				else
+					rgb_cps = value;
+			}
+		}
 		
 		public ColorTransferMode Mode {
 			get { 
@@ -58,25 +78,30 @@ namespace Pinta
 		{
 			this.Build ();
 		
-			points = new List<Point> ();
-			points.Add (new Point (0, size));
-			points.Add (new Point (size, 0));
-				
 			drawing.DoubleBuffered = true;
 			
 			comboMap.Changed += HandleComboMapChanged;
 			buttonReset.Clicked += HandleButtonResetClicked;
+			checkRed.Toggled += HandleCheckToggled;
+			checkGreen.Toggled += HandleCheckToggled;
+			checkBlue.Toggled += HandleCheckToggled;
 			drawing.ExposeEvent += HandleDrawingExposeEvent;
 			drawing.MotionNotifyEvent += HandleDrawingMotionNotifyEvent;
 			drawing.LeaveNotifyEvent += HandleDrawingLeaveNotifyEvent;
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
 			
-			ResetControlPoints();
+			ResetControlPoints ();
+		}
+
+		private void HandleCheckToggled (object o, EventArgs args)
+		{
+			InvalidateDrawing ();
 		}
 
 		void HandleButtonResetClicked (object sender, EventArgs e)
 		{
-			ResetControlPoints();
+			ResetControlPoints ();
+			InvalidateDrawing ();
 		}
 
 		private void ResetControlPoints()
@@ -85,22 +110,26 @@ namespace Pinta
 			ControlPoints = new SortedList<int, int>[channels];
 			
 			for (int i = 0; i < channels; i++) {
-				SortedList<int, int> list = new SortedList<int, int>();
+				SortedList<int, int> list = new SortedList<int, int> ();
 				
 				list.Add (0, 0);
 				list.Add (size - 1, size - 1);
 				ControlPoints [i] = list;
 			}
-			
-			InvalidateDrawing ();
 		}
 		
 		private void HandleComboMapChanged (object sender, EventArgs e)
 		{
-			ResetControlPoints ();
+			if (ControlPoints == null)
+				ResetControlPoints ();
+			
+			bool visible = (Mode == ColorTransferMode.Rgb);
+			checkRed.Visible = checkGreen.Visible = checkBlue.Visible = visible;
+			
+			InvalidateDrawing ();
 		}
 		
-		private void InvalidateDrawing()
+		private void InvalidateDrawing ()
 		{
 			//to invalidate whole drawing area
 			drawing.GdkWindow.InvalidateRect 
@@ -112,12 +141,28 @@ namespace Pinta
 			InvalidateDrawing ();
 		}
 		
+		private IEnumerable<SortedList<int,int>> GetActiveControlPoints ()
+		{
+			if (Mode == ColorTransferMode.Luminosity)
+				yield return ControlPoints [0];
+			else {
+				if (checkRed.Active)
+					yield return ControlPoints [0];
+				
+				if (checkGreen.Active)
+					yield return ControlPoints [1];
+				
+				if (checkBlue.Active)
+					yield return ControlPoints [2];
+			}
+		}
+				
 		private void AddControlPoint (int x, int y)
 		{
-			SortedList<int, int> controlPoints = ControlPoints [0];
-			
-			if (!controlPoints.ContainsKey (x))
-				controlPoints.Add (x, size - 1 - y);
+			foreach (var controlPoints in GetActiveControlPoints ()) {
+				if (!controlPoints.ContainsKey (x))
+					controlPoints.Add (x, size - 1 - y);
+			}
 			
 			last_cpx = x;
 		}
@@ -126,14 +171,14 @@ namespace Pinta
 		{	
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer(out x, out y, out mask); 
+			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
 			
 			if (args.Event.State == Gdk.ModifierType.Button1Mask) {
-				SortedList<int, int> controlPoints = ControlPoints [0];
+				foreach (var controlPoints in GetActiveControlPoints ()) {
+					if (controlPoints.ContainsKey (last_cpx))
+						controlPoints.Remove (last_cpx);
+				}
 				
-				if (controlPoints.ContainsKey (last_cpx))
-					controlPoints.Remove (last_cpx);
-						
 				AddControlPoint (x, y);
 			}
 			
@@ -144,21 +189,22 @@ namespace Pinta
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer(out x, out y, out mask); 
-			SortedList<int, int> controlPoints = ControlPoints [0];
+			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
 			
 			if (args.Event.Button == 1) {
 				AddControlPoint (x, y);
 			} 
 			
 			if (args.Event.Button == 3) {
-				for (int i = 0; i < controlPoints.Count; i++) {
-					int cpx = controlPoints.Keys [i];
-					int cpy = size - 1 - (int)controlPoints.Values [i];
+				foreach (var controlPoints in GetActiveControlPoints ()) {
+					for (int i = 0; i < controlPoints.Count; i++) {
+						int cpx = controlPoints.Keys [i];
+						int cpy = size - 1 - (int)controlPoints.Values [i];
 					
-					if (CheckControlPointProximity (cpx, cpy, x, y)) {
-						controlPoints.RemoveAt (i);
-						break;
+						if (CheckControlPointProximity (cpx, cpy, x, y)) {
+							controlPoints.RemoveAt (i);
+							break;
+						}
 					}
 				}
 			}
@@ -177,7 +223,7 @@ namespace Pinta
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer(out x, out y, out mask); 
+			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
 			
 			if (x >= 0 && x < size && y >= 0 && y < size) {
 				context.LineWidth = 0.5;
@@ -207,80 +253,118 @@ namespace Pinta
 			
 			context.MoveTo (0, size - 1);
 			context.LineTo (size - 1, 0);
-			context.Stroke();
+			context.Stroke ();
 			
 			context.SetDash (new double[] {}, 0);
 		}
 		
 		//cpx, cpyx - control point's x and y coordinates
-		private bool CheckControlPointProximity(int cpx, int cpy, int x, int y)
+		private bool CheckControlPointProximity (int cpx, int cpy, int x, int y)
 		{
 			return (Math.Sqrt (Math.Pow (cpx - x, 2) + Math.Pow (cpy - y, 2)) < radius);
 		}
+		
+		private IEnumerator<ControlPointDrawingInfo> GetDrawingInfos ()
+		{
+			if (Mode == ColorTransferMode.Luminosity)
+				yield return new ControlPointDrawingInfo () { 
+					Color = new Color (0.4, 0.4, 0.4), IsActive = true 
+				};
 			
+			else {
+				yield return new ControlPointDrawingInfo () {
+					Color = new Color (0.9, 0, 0), IsActive = checkRed.Active
+				};
+				yield return new ControlPointDrawingInfo () {
+					Color = new Color (0, 0.9, 0), IsActive = checkGreen.Active
+				};
+				yield return new ControlPointDrawingInfo () {
+					Color = new Color(0, 0, 0.9), IsActive = checkBlue.Active
+				};
+			}
+		}
+		
 		private void DrawControlPoints (Context context)
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer(out x, out y, out mask); 
+			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
 			
-			for (int i = 0; i < ControlPoints[0].Count; i++) {
-				int cpx = ControlPoints[0].Keys[i];
-				int cpy = size - 1 - (int)ControlPoints[0].Values[i];
+			var infos = GetDrawingInfos ();
+			
+			foreach (var controlPoints in ControlPoints) {
 				
-				Rectangle rect;
+				infos.MoveNext ();
+				var info = infos.Current;
 				
-				if (CheckControlPointProximity (cpx, cpy, x, y)) {
-					rect = new Rectangle (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
-					context.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
-					rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
-					context.FillEllipse (rect, new Color (0.9, 0.9, 0.9));
-				} else {
-					rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
-					context.DrawEllipse (rect, new Color (0.3, 0.3, 0.3), 2);
-				
-					rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius -2);
-					context.FillEllipse (rect, new Color (0.4, 0.4, 0.4));
+				for (int i = 0; i < controlPoints.Count; i++) {
+					int cpx = controlPoints.Keys [i];
+					int cpy = size - 1 - (int)controlPoints.Values [i];			
+					Rectangle rect;
+	
+					if (CheckControlPointProximity (cpx, cpy, x, y) && info.IsActive ) {
+						rect = new Rectangle (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
+						context.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
+						rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
+						context.FillEllipse (rect, new Color (0.9, 0.9, 0.9));
+					} else {
+						if (info.IsActive) {
+							rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
+							context.DrawEllipse (rect, info.Color, 2);
+						}
+					
+						rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius -2);
+						context.FillEllipse (rect, info.Color);
+					}
 				}
+				
+				context.Stroke ();
 			}
-			
-			context.Stroke();
 		}
-		
+			
 		private void DrawSpline (Context context)
 		{
-			int points = ControlPoints[0].Count;
-			SplineInterpolator interpolator = new SplineInterpolator();
-			IList<int> xa = ControlPoints[0].Keys;
-			IList<int> ya = ControlPoints[0].Values;
-			PointD[] line = new PointD[size];
+			var infos = GetDrawingInfos ();
 			
-			for (int i = 0; i < points; i++) {
-				interpolator.Add (xa [i], ya [i]);
-			}
+			foreach (var controlPoints in ControlPoints) {
 			
-			for (int i = 0; i < line.Length; i++) {
-                line[i].X = (float)i;
-                line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate(i), 0, size - 1));
+				int points = controlPoints.Count;
+				SplineInterpolator interpolator = new SplineInterpolator ();
+				IList<int> xa = controlPoints.Keys;
+				IList<int> ya = controlPoints.Values;
+				PointD[] line = new PointD [size];
 				
-				//hack to draw line inside drawing area when y is 0
-				line[i].Y = (line[i].Y != 0) ? line[i].Y : 1;
-            }
-			
-			context.LineWidth = 2;
-			context.LineJoin = LineJoin.Round;
-			
-			context.MoveTo (line [0]);		
-			for (int i = 1; i < line.Length; i++)
-				context.LineTo (line [i]);
-	
-			context.Color = new Color(0.4, 0.4, 0.4);
-			context.Stroke();
+				for (int i = 0; i < points; i++) {
+					interpolator.Add (xa [i], ya [i]);
+				}
+				
+				for (int i = 0; i < line.Length; i++) {
+	                line[i].X = (float)i;
+	                line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate(i), 0, size - 1));
+					
+					//hack to draw line inside drawing area when y is 0
+					line[i].Y = (line[i].Y != 0) ? line[i].Y : 1;
+	            }
+				
+				context.LineWidth = 2;
+				context.LineJoin = LineJoin.Round;
+				
+				context.MoveTo (line [0]);		
+				for (int i = 1; i < line.Length; i++)
+					context.LineTo (line [i]);
+				
+				infos.MoveNext ();
+				var info = infos.Current;
+					
+				context.Color = info.Color;
+				context.LineWidth = info.IsActive ? 2 : 1;
+				context.Stroke ();
+			}
 		}
 		
 		private void HandleDrawingExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{	
-			using (Context context = Gdk.CairoHelper.Create(drawing.GdkWindow)) {
+			using (Context context = Gdk.CairoHelper.Create (drawing.GdkWindow)) {
 				
 				DrawBorder (context);
 				DrawPointerCross (context);

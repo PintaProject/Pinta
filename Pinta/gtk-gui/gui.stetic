@@ -2468,7 +2468,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Pinta.CurvesDialog" design-size="424 427">
+  <widget class="Gtk.Dialog" id="Pinta.CurvesDialog" design-size="269 418">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Curves</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -2584,12 +2584,12 @@ Luminosity</property>
         <child>
           <widget class="Gtk.HBox" id="hbox3">
             <property name="MemberName" />
-            <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.CheckButton" id="checkLuminosity">
+              <widget class="Gtk.CheckButton" id="checkRed">
                 <property name="MemberName" />
+                <property name="Visible">False</property>
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Luminosity</property>
+                <property name="Label" translatable="yes">Red  </property>
                 <property name="Active">True</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
@@ -2601,12 +2601,53 @@ Luminosity</property>
               </packing>
             </child>
             <child>
-              <placeholder />
+              <widget class="Gtk.CheckButton" id="checkGreen">
+                <property name="MemberName" />
+                <property name="Visible">False</property>
+                <property name="CanFocus">True</property>
+                <property name="Label" translatable="yes">Green</property>
+                <property name="Active">True</property>
+                <property name="DrawIndicator">True</property>
+                <property name="HasLabel">True</property>
+                <property name="UseUnderline">True</property>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.CheckButton" id="checkBlue">
+                <property name="MemberName" />
+                <property name="Visible">False</property>
+                <property name="CanFocus">True</property>
+                <property name="Label" translatable="yes">Blue </property>
+                <property name="Active">True</property>
+                <property name="DrawIndicator">True</property>
+                <property name="HasLabel">True</property>
+                <property name="UseUnderline">True</property>
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Alignment" id="alignment1">
+                <property name="MemberName" />
+                <child>
+                  <placeholder />
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">3</property>
+                <property name="AutoSize">True</property>
+              </packing>
             </child>
             <child>
               <widget class="Gtk.Button" id="buttonReset">
                 <property name="MemberName" />
-                <property name="WidthRequest">85</property>
+                <property name="WidthRequest">81</property>
                 <property name="HeightRequest">30</property>
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -2614,8 +2655,8 @@ Luminosity</property>
                 <property name="UseUnderline">True</property>
               </widget>
               <packing>
-                <property name="Position">2</property>
-                <property name="AutoSize">True</property>
+                <property name="Position">4</property>
+                <property name="AutoSize">False</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
               </packing>

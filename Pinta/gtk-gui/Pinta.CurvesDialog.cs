@@ -31,7 +31,13 @@ namespace Pinta {
         
         private Gtk.HBox hbox3;
         
-        private Gtk.CheckButton checkLuminosity;
+        private Gtk.CheckButton checkRed;
+        
+        private Gtk.CheckButton checkGreen;
+        
+        private Gtk.CheckButton checkBlue;
+        
+        private Gtk.Alignment alignment1;
         
         private Gtk.Button buttonReset;
         
@@ -125,50 +131,77 @@ namespace Pinta {
             // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.hbox3 = new Gtk.HBox();
             this.hbox3.Name = "hbox3";
-            this.hbox3.Spacing = 6;
             // Container child hbox3.Gtk.Box+BoxChild
-            this.checkLuminosity = new Gtk.CheckButton();
-            this.checkLuminosity.CanFocus = true;
-            this.checkLuminosity.Name = "checkLuminosity";
-            this.checkLuminosity.Label = Mono.Unix.Catalog.GetString("Luminosity");
-            this.checkLuminosity.Active = true;
-            this.checkLuminosity.DrawIndicator = true;
-            this.checkLuminosity.UseUnderline = true;
-            this.hbox3.Add(this.checkLuminosity);
-            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.hbox3[this.checkLuminosity]));
+            this.checkRed = new Gtk.CheckButton();
+            this.checkRed.CanFocus = true;
+            this.checkRed.Name = "checkRed";
+            this.checkRed.Label = Mono.Unix.Catalog.GetString("Red  ");
+            this.checkRed.Active = true;
+            this.checkRed.DrawIndicator = true;
+            this.checkRed.UseUnderline = true;
+            this.hbox3.Add(this.checkRed);
+            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.hbox3[this.checkRed]));
             w10.Position = 0;
             // Container child hbox3.Gtk.Box+BoxChild
+            this.checkGreen = new Gtk.CheckButton();
+            this.checkGreen.CanFocus = true;
+            this.checkGreen.Name = "checkGreen";
+            this.checkGreen.Label = Mono.Unix.Catalog.GetString("Green");
+            this.checkGreen.Active = true;
+            this.checkGreen.DrawIndicator = true;
+            this.checkGreen.UseUnderline = true;
+            this.hbox3.Add(this.checkGreen);
+            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.hbox3[this.checkGreen]));
+            w11.Position = 1;
+            // Container child hbox3.Gtk.Box+BoxChild
+            this.checkBlue = new Gtk.CheckButton();
+            this.checkBlue.CanFocus = true;
+            this.checkBlue.Name = "checkBlue";
+            this.checkBlue.Label = Mono.Unix.Catalog.GetString("Blue ");
+            this.checkBlue.Active = true;
+            this.checkBlue.DrawIndicator = true;
+            this.checkBlue.UseUnderline = true;
+            this.hbox3.Add(this.checkBlue);
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.hbox3[this.checkBlue]));
+            w12.Position = 2;
+            // Container child hbox3.Gtk.Box+BoxChild
+            this.alignment1 = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
+            this.alignment1.Name = "alignment1";
+            this.hbox3.Add(this.alignment1);
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.hbox3[this.alignment1]));
+            w13.Position = 3;
+            // Container child hbox3.Gtk.Box+BoxChild
             this.buttonReset = new Gtk.Button();
-            this.buttonReset.WidthRequest = 85;
+            this.buttonReset.WidthRequest = 81;
             this.buttonReset.HeightRequest = 30;
             this.buttonReset.CanFocus = true;
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.UseUnderline = true;
             this.buttonReset.Label = Mono.Unix.Catalog.GetString("Reset");
             this.hbox3.Add(this.buttonReset);
-            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.hbox3[this.buttonReset]));
-            w11.Position = 2;
-            w11.Expand = false;
-            w11.Fill = false;
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox3[this.buttonReset]));
+            w14.Position = 4;
+            w14.Expand = false;
+            w14.Fill = false;
             w1.Add(this.hbox3);
-            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(w1[this.hbox3]));
-            w12.Position = 3;
-            w12.Expand = false;
-            w12.Fill = false;
+            Gtk.Box.BoxChild w15 = ((Gtk.Box.BoxChild)(w1[this.hbox3]));
+            w15.Position = 3;
+            w15.Expand = false;
+            w15.Fill = false;
             // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.labelTip = new Gtk.Label();
             this.labelTip.Name = "labelTip";
             this.labelTip.LabelProp = Mono.Unix.Catalog.GetString("Tip : Right-click to remove control points.");
             w1.Add(this.labelTip);
-            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(w1[this.labelTip]));
-            w13.Position = 4;
-            w13.Expand = false;
-            w13.Fill = false;
+            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(w1[this.labelTip]));
+            w16.Position = 4;
+            w16.Expand = false;
+            w16.Fill = false;
             // Internal child Pinta.CurvesDialog.ActionArea
-            Gtk.HButtonBox w14 = this.ActionArea;
-            w14.Name = "dialog1_ActionArea";
-            w14.Spacing = 10;
-            w14.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+            Gtk.HButtonBox w17 = this.ActionArea;
+            w17.Name = "dialog1_ActionArea";
+            w17.Spacing = 10;
+            w17.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
             // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
             this.buttonCancel = new Gtk.Button();
             this.buttonCancel.CanDefault = true;
@@ -178,9 +211,9 @@ namespace Pinta {
             this.buttonCancel.UseUnderline = true;
             this.buttonCancel.Label = "gtk-cancel";
             this.AddActionWidget(this.buttonCancel, -6);
-            Gtk.ButtonBox.ButtonBoxChild w15 = ((Gtk.ButtonBox.ButtonBoxChild)(w14[this.buttonCancel]));
-            w15.Expand = false;
-            w15.Fill = false;
+            Gtk.ButtonBox.ButtonBoxChild w18 = ((Gtk.ButtonBox.ButtonBoxChild)(w17[this.buttonCancel]));
+            w18.Expand = false;
+            w18.Fill = false;
             // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
             this.buttonOk = new Gtk.Button();
             this.buttonOk.CanDefault = true;
@@ -190,15 +223,18 @@ namespace Pinta {
             this.buttonOk.UseUnderline = true;
             this.buttonOk.Label = "gtk-ok";
             this.AddActionWidget(this.buttonOk, -5);
-            Gtk.ButtonBox.ButtonBoxChild w16 = ((Gtk.ButtonBox.ButtonBoxChild)(w14[this.buttonOk]));
-            w16.Position = 1;
-            w16.Expand = false;
-            w16.Fill = false;
+            Gtk.ButtonBox.ButtonBoxChild w19 = ((Gtk.ButtonBox.ButtonBoxChild)(w17[this.buttonOk]));
+            w19.Position = 1;
+            w19.Expand = false;
+            w19.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 424;
-            this.DefaultHeight = 427;
+            this.DefaultWidth = 269;
+            this.DefaultHeight = 418;
+            this.checkRed.Hide();
+            this.checkGreen.Hide();
+            this.checkBlue.Hide();
             this.Show();
         }
     }
