@@ -171,7 +171,7 @@ namespace Pinta.Core
 			hist.RestorePath = PintaCore.Layers.SelectionPath.Clone ();
 
 			PintaCore.Workspace.ImageSize = new Cairo.Point (width, height);
-			PintaCore.Workspace.CanvasSize = new Cairo.PointD (width, height);
+			PintaCore.Workspace.CanvasSize = new Cairo.Point (width, height);
 
 			foreach (var layer in PintaCore.Layers)
 				layer.Crop (rect);
