@@ -83,11 +83,17 @@ namespace Pinta.Core
 		
 		public void ZoomIn ()
 		{
-			int current = (int)double.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
+			double zoom;
+
+			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
+				zoom = Scale * 100;
+
+			zoom = Math.Min (zoom, 3600);
+
 			int i = 0;
-			
+
 			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == "Window" || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= current) {
+				if (((object[])item)[0].ToString () == "Window" || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= zoom) {
 					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 					return;
 				}
@@ -98,14 +104,20 @@ namespace Pinta.Core
 		
 		public void ZoomOut ()
 		{
-			int current = (int)double.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
+			double zoom;
+			
+			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
+				zoom = Scale * 100;
+				
+			zoom = Math.Min (zoom, 3600);
+			
 			int i = 0;
 
 			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
 				if (((object[])item)[0].ToString () == "Window")
 					return;
-					
-				if (int.Parse (((object[])item)[0].ToString ().Trim ('%')) < current) {
+
+				if (int.Parse (((object[])item)[0].ToString ().Trim ('%')) < zoom) {
 					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
 					return;
 				}
