@@ -83,7 +83,7 @@ namespace Pinta.Core
 		
 		public void ZoomIn ()
 		{
-			int current = int.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
+			int current = (int)double.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
 			int i = 0;
 			
 			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
@@ -98,7 +98,7 @@ namespace Pinta.Core
 		
 		public void ZoomOut ()
 		{
-			int current = int.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
+			int current = (int)double.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
 			int i = 0;
 
 			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
