@@ -33,11 +33,11 @@ namespace Pinta.Core
 	{
 		private string filename;
 		private bool is_dirty;
-		private PointD canvas_size;
+		private Point canvas_size;
 		
 		public Point ImageSize { get; set; }
 		
-		public PointD CanvasSize {
+		public Point CanvasSize {
 			get { return canvas_size; }
 			set {
 				if (canvas_size.X != value.X || canvas_size.Y != value.Y) {
@@ -53,15 +53,18 @@ namespace Pinta.Core
 		
 		public WorkspaceManager ()
 		{
-			CanvasSize = new PointD (800, 600);
+			CanvasSize = new Point (800, 600);
 			ImageSize = new Point (800, 600);
 		}
 		
 		public double Scale {
-			get { return CanvasSize.X / ImageSize.X; }
+			get { return (double)CanvasSize.X / (double)ImageSize.X; }
 			set {
 				if (Scale != value) {
-					CanvasSize = new PointD (ImageSize.X * value, ImageSize.Y * value);
+					int new_x = (int)(ImageSize.X * value);
+					int new_y = (int)((new_x * ImageSize.Y) / ImageSize.X);
+
+					CanvasSize = new Point (new_x, new_y);
 					Invalidate ();
 				}
 			}
@@ -80,27 +83,48 @@ namespace Pinta.Core
 		
 		public void ZoomIn ()
 		{
-			if (PintaCore.Actions.View.ZoomComboBox.ComboBox.Active > 1)
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active--;
+			int current = (int)double.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
+			int i = 0;
+			
+			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
+				if (((object[])item)[0].ToString () == "Window" || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= current) {
+					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
+					return;
+				}
+				
+				i++;
+			}
 		}
 		
 		public void ZoomOut ()
 		{
-			if (PintaCore.Actions.View.ZoomComboBox.ComboBox.Active < 19)
-				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active++;
+			int current = (int)double.Parse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'));
+			int i = 0;
+
+			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
+				if (((object[])item)[0].ToString () == "Window")
+					return;
+					
+				if (int.Parse (((object[])item)[0].ToString ().Trim ('%')) < current) {
+					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
+					return;
+				}
+
+				i++;
+			}
 		}
 
-		public void ZoomToRectangle (Rectangle zoomTo)
+		public void ZoomToRectangle (Rectangle rect)
 		{
 			double ratio;
-			if (canvas_size.X / zoomTo.Width <= canvas_size.Y / zoomTo.Height) {
-				ratio = canvas_size.X / zoomTo.Width;
-			} else {
-				ratio = canvas_size.Y / zoomTo.Height;
-			}
+			
+			if (canvas_size.X / rect.Width <= canvas_size.Y / rect.Height)
+				ratio = canvas_size.X / rect.Width;
+			else
+				ratio = canvas_size.Y / rect.Height;
 			
 			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", ratio * 100.0);
-			RecenterView (zoomTo.X + zoomTo.Width / 2, zoomTo.Y + zoomTo.Height / 2);
+			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 		
 		public void RecenterView (double x, double y)
@@ -122,7 +146,7 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 			
 			ImageSize = new Point (width, height);
-			CanvasSize = new PointD (width, height);
+			CanvasSize = new Point (width, height);
 			
 			foreach (var layer in PintaCore.Layers)
 				layer.Resize (width, height);
@@ -146,7 +170,7 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 
 			ImageSize = new Point (width, height);
-			CanvasSize = new PointD (width, height);
+			CanvasSize = new Point (width, height);
 
 			foreach (var layer in PintaCore.Layers)
 				layer.ResizeCanvas (width, height, anchor);

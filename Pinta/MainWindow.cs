@@ -123,8 +123,8 @@ namespace Pinta
 		private void Workspace_CanvasSizeChanged (object sender, EventArgs e)
 		{
 			Requisition req = new Requisition ();
-			req.Height = (int)PintaCore.Workspace.CanvasSize.Y;
-			req.Width = (int)PintaCore.Workspace.CanvasSize.X;
+			req.Height = PintaCore.Workspace.CanvasSize.Y;
+			req.Width = PintaCore.Workspace.CanvasSize.X;
 			drawingarea1.Requisition = req;
 
 			drawingarea1.QueueResize ();
@@ -148,9 +148,15 @@ namespace Pinta
 			if ((double)image_x / (double)window_x >= (double)image_y / (double)window_y) {
 				double ratio = (double)(window_x - 20) / (double)image_x;
 				PintaCore.Workspace.Scale = ratio;
+				PintaCore.Actions.View.SuspendZoomUpdate ();
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
+				PintaCore.Actions.View.ResumeZoomUpdate ();
 			} else {
 				double ratio2 = (double)(window_y - 20) / (double)image_y;
 				PintaCore.Workspace.Scale = ratio2;
+				PintaCore.Actions.View.SuspendZoomUpdate ();
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
+				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
 		}
 

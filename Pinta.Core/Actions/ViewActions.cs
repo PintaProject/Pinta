@@ -109,29 +109,68 @@ namespace Pinta.Core
 			ZoomIn.Activated += HandlePintaCoreActionsViewZoomInActivated;
 			ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
 			ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
+			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
+			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
+		}
+
+		private string temp_zoom;
+		private bool suspend_zoom_change;
+		
+		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
+		{
+			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+		}
+
+		private void ComboBox_FocusOutEvent (object o, Gtk.FocusOutEventArgs args)
+		{
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			double percent;
+
+			if (!double.TryParse (text, out percent)) {
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_zoom;
+				return;
+			}
 		}
 		#endregion
 
+		public void SuspendZoomUpdate ()
+		{
+			suspend_zoom_change = true;
+		}
+
+		public void ResumeZoomUpdate ()
+		{
+			suspend_zoom_change = false;
+		}
+		
 		#region Action Handlers
 		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 		{
-			PintaCore.Workspace.Scale = 1.0;
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 11;
 		}
 
 		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
 		{
+			if (suspend_zoom_change)
+				return;
+				
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
-			
+
 			if (text == "Window") {
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				return;
 			}
-			
+
 			text = text.Trim ('%');
-			
-			double percent = double.Parse (text) / 100.0;
-			
+
+			double percent;
+
+			if (!double.TryParse (text, out percent))
+				return;
+
+			percent = percent / 100.0;
+
 			PintaCore.Workspace.Scale = percent;
 	
 		}

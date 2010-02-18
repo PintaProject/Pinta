@@ -29,21 +29,19 @@ using Cairo;
 
 namespace Pinta.Core
 {
-
-
 	public class ZoomTool : BaseTool
 	{
 		private Gdk.Cursor cursorZoomIn;
-        private Gdk.Cursor cursorZoomOut;
-        private Gdk.Cursor cursorZoom;
-        private Gdk.Cursor cursorZoomPan;
-        
+		private Gdk.Cursor cursorZoomOut;
+		private Gdk.Cursor cursorZoom;
+		private Gdk.Cursor cursorZoomPan;
+
 		private uint mouseDown;
 		private bool is_drawing;
 		protected PointD shape_origin;
 		private Rectangle last_dirty;
 		private static readonly int tolerance = 10;
-		
+
 		public override string Name {
 			get { return "Zoom"; }
 		}
@@ -56,26 +54,40 @@ namespace Pinta.Core
 		public override bool Enabled {
 			get { return true; }
 		}
-		
+
+		public override Gdk.Cursor DefaultCursor {
+			get { return cursorZoom; }
+		}
+
+		public ZoomTool ()
+		{
+			this.mouseDown = 0;
+
+			cursorZoomIn = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Menu.View.ZoomIn.png"), 0, 0);
+			cursorZoomOut = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Menu.View.ZoomOut.png"), 0, 0);
+			cursorZoom = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Zoom.png"), 0, 0);
+			cursorZoomPan = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+		}
+
 		protected void UpdateRectangle (PointD point)
 		{
 			if (!is_drawing)
 				return;
-			
+
 			Rectangle r = PointsToRectangle (shape_origin, point);
 			Rectangle dirty;
-			
+
 			PintaCore.Layers.ToolLayer.Clear ();
 			PintaCore.Layers.ToolLayer.Hidden = false;
-			
+
 			using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
-					
+
 				g.Antialias = Antialias.Subpixel;
 
-				dirty = g.FillStrokedRectangle (r, new Color(0, 0.4, 0.8, 0.1), new Color(0, 0, 0.9), 1);
+				dirty = g.FillStrokedRectangle (r, new Color (0, 0.4, 0.8, 0.1), new Color (0, 0, 0.9), 1);
 				dirty = dirty.Clamp ();
 
 				PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
@@ -84,83 +96,72 @@ namespace Pinta.Core
 				last_dirty = dirty;
 			}
 		}
-		
-		public ZoomTool () : base ()
+
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
-			this.mouseDown = 0;
-			cursorZoomIn = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Menu.View.ZoomIn.png") ,0, 0);
-	        cursorZoomOut = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Menu.View.ZoomOut.png") ,0, 0);
-	        cursorZoom = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Tools.Zoom.png") ,0, 0);
-	        cursorZoomPan = new Gdk.Cursor(PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon("Tools.Pan.png") ,0, 0);
+			shape_origin = point;
+
+			switch (args.Event.Button) {
+				case 1://left
+					SetCursor (cursorZoomIn);
+					break;
+
+				case 2://midle
+					SetCursor (cursorZoomPan);
+					break;
+
+				case 3://right
+					SetCursor (cursorZoomOut);
+					break;
+			}
+
+			mouseDown = args.Event.Button;
 		}
 
-        protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-        {
-			shape_origin = point;
-            
-			switch (args.Event.Button) {
-                case 1://left
-                    Cursor = cursorZoomIn;
-                    break;
-
-                case 2://midle
-                    Cursor = cursorZoomPan;
-                    break;
-
-                case 3://right
-                    Cursor = cursorZoomOut;
-                    break;
-            }
-
-            mouseDown = args.Event.Button;
-        }
-		
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
-        {
+		{
 			base.OnMouseMove (o, args, point);
 
-            if (mouseDown == 1) {
+			if (mouseDown == 1) {
 				if (Math.Abs (shape_origin.X - point.X) <= tolerance && Math.Abs (shape_origin.Y - point.Y) <= tolerance)  // if they've moved the mouse more than 10 pixels since they clicked
-                	is_drawing = true;
+					is_drawing = true;
+					
 				//still draw rectangle after we have draw it one time...
-				UpdateRectangle(point);
+				UpdateRectangle (point);
+			} else if (mouseDown == 2) {
+				PintaCore.Workspace.ScrollCanvas ((int)((shape_origin.X - point.X) * PintaCore.Workspace.Scale), (int)((shape_origin.Y - point.Y) * PintaCore.Workspace.Scale));
 			}
-            else if (mouseDown == 2) {
-				PintaCore.Workspace.ScrollCanvas ((int)((shape_origin.X - point.X) * PintaCore.Workspace.Scale), (int)((shape_origin.Y - point.Y)* PintaCore.Workspace.Scale));
-            }
-        }
+		}
 
-        protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
-        {
+		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		{
 			double x = point.X;
 			double y = point.Y;
-			
-            if (mouseDown == 1 || mouseDown == 3) {//left or right
-                if (args.Event.Button == 1) {//left
-                    if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
+
+			if (mouseDown == 1 || mouseDown == 3) {	//left or right
+				if (args.Event.Button == 1) {	//left
+					if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
 						PintaCore.Workspace.ZoomIn ();
 						PintaCore.Workspace.RecenterView (x, y);
-                    } 
-                    else {
-						PintaCore.Workspace.ZoomToRectangle (PointsToRectangle(shape_origin, point));
-                    }
-                }
-                else {
+					} else {
+						PintaCore.Workspace.ZoomToRectangle (PointsToRectangle (shape_origin, point));
+					}
+				} else {
 					PintaCore.Workspace.ZoomOut ();
 					PintaCore.Workspace.RecenterView (x, y);
-                }
-            }
+				}
+			}
 
 			mouseDown = 0;
 			PintaCore.Layers.ToolLayer.Hidden = true;
 			is_drawing = false;
-			Cursor = cursorZoom;//restore regular cursor
-        }
+			SetCursor (cursorZoom);		//restore regular cursor
+		}
 
 		Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)
 		{
 			double x, y, w, h;
-			
+
 			if (p1.Y <= p2.Y) {
 				y = p1.Y;
 				h = p2.Y - y;
@@ -168,7 +169,7 @@ namespace Pinta.Core
 				y = p2.Y;
 				h = p1.Y - y;
 			}
-			
+
 			if (p1.X <= p2.X) {
 				x = p1.X;
 				w = p2.X - x;
@@ -179,18 +180,5 @@ namespace Pinta.Core
 
 			return new Rectangle (x, y, w, h);
 		}
-		
-		protected override void OnDeactivated ()
-		{
-			Cursor = null;
-			base.OnDeactivated ();
-		}
-		
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
-		{
-			Cursor = cursorZoom;
-			base.OnBuildToolBar (tb);
-		}
-
 	}
 }

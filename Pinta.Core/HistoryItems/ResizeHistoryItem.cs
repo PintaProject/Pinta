@@ -51,7 +51,7 @@ namespace Pinta.Core
 			int swap_height = PintaCore.Workspace.ImageSize.Y;
 
 			PintaCore.Workspace.ImageSize = new Cairo.Point (old_width, old_height);
-			PintaCore.Workspace.CanvasSize = new Cairo.PointD (old_width, old_height);
+			PintaCore.Workspace.CanvasSize = new Cairo.Point (old_width, old_height);
 			
 			old_width = swap_width;
 			old_height = swap_height;
@@ -80,7 +80,7 @@ namespace Pinta.Core
 			int swap_height = PintaCore.Workspace.ImageSize.Y;
 
 			PintaCore.Workspace.ImageSize = new Cairo.Point (old_width, old_height);
-			PintaCore.Workspace.CanvasSize = new Cairo.PointD (old_width, old_height);
+			PintaCore.Workspace.CanvasSize = new Cairo.Point (old_width, old_height);
 
 			old_width = swap_width;
 			old_height = swap_height;
