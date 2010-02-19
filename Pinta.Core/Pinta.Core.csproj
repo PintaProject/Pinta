@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,16 +47,20 @@
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Effects\AutoLevelEffect.cs" />
     <Compile Include="Effects\BaseEffect.cs" />
+    <Compile Include="Effects\BitVector2DSurfaceAdapter.cs" />
     <Compile Include="Effects\BlackAndWhiteEffect.cs" />
     <Compile Include="Effects\Histogram.cs" />
     <Compile Include="Effects\HistogramRGB.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Effects\IBitVector2D.cs" />
     <Compile Include="Effects\InvertColorsEffect.cs" />
+    <Compile Include="Effects\Scanline.cs" />
     <Compile Include="Effects\SepiaEffect.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs\TextChangedEventArgs.cs" />
+    <Compile Include="Extensions\ToolBarSlider.cs" />
     <Compile Include="HistoryItems\ResizeHistoryItem.cs" />
     <Compile Include="HistoryItems\FinishPixelsHistoryItem.cs" />
     <Compile Include="HistoryItems\MovePixelsHistoryItem.cs" />
@@ -101,7 +105,9 @@
     <Compile Include="Tools\BaseTool.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Tools\FloodTool.cs" />
     <Compile Include="Tools\LassoSelectTool.cs" />
+    <Compile Include="Tools\PaintBucketTool.cs" />
     <Compile Include="Tools\PanTool.cs" />
     <Compile Include="Tools\PencilTool.cs" />
     <Compile Include="Tools\EllipseSelectTool.cs" />

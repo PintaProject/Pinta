@@ -452,6 +452,27 @@ namespace Pinta.Core
 			return new Color (dstPtr->R / 255f, dstPtr->G / 255f, dstPtr->B / 255f, dstPtr->A / 255f);
 		}
 		
+		public unsafe static void SetPixel (this Cairo.ImageSurface surf, int x, int y, Color color)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+
+			dstPtr += (x) + (y * surf.Width);
+
+			dstPtr->R = (byte)(color.R * 255);
+			dstPtr->G = (byte)(color.G * 255);
+			dstPtr->B = (byte)(color.B * 255);
+			dstPtr->A = (byte)(color.A * 255);
+		}
+
+		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, int x, int y)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+
+			dstPtr += (x) + (y * surf.Width);
+
+			return *dstPtr;
+		}
+		
 		public static string ToString2 (this Cairo.Color c)
 		{
 			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);
@@ -518,6 +539,15 @@ namespace Pinta.Core
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
+
+			return dstPtr;
+		}
+
+		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, int y)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+
+			dstPtr += y * surf.Width;
 
 			return dstPtr;
 		}

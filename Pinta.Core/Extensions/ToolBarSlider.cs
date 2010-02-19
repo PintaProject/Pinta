@@ -1,5 +1,5 @@
 // 
-// UnimplementedTools.cs
+// ToolBarLabel.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,69 +25,27 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
 
 namespace Pinta.Core
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class MagicWandTool : BaseTool
+	public class ToolBarSlider : ToolItem
 	{
-		public override string Name {
-			get { return "Magic Wand"; }
-		}
-		public override string Icon {
-			get { return "Tools.MagicWand.png"; }
-		}
-	}
+		private HScale hscale;
 		
-	public class GradientTool : BaseTool
-	{
-		public override string Name {
-			get { return "Gradient"; }
+		public ToolBarSlider (int min, int max, int step, int value)
+		{
+			hscale = new HScale (min, max, step);
+			hscale.WidthRequest = 150;
+			hscale.Value = value;
+			hscale.ValuePos = PositionType.Left;
+
+			hscale.Show ();
+
+			Add (hscale);
+			Show ();
 		}
-		public override string Icon {
-			get { return "Tools.Gradient.png"; }
-		}
-	}
-			
-	public class CloneStampTool : BaseTool
-	{
-		public override string Name {
-			get { return "Clone Stamp"; }
-		}
-		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
-		}
-	}
-			
-	public class RecolorTool : BaseTool
-	{
-		public override string Name {
-			get { return "Recolor"; }
-		}
-		public override string Icon {
-			get { return "Tools.Recolor.png"; }
-		}
-	}
-			
-	public class TextTool : BaseTool
-	{
-		public override string Name {
-			get { return "Text"; }
-		}
-		public override string Icon {
-			get { return "Tools.Text.png"; }
-		}
-	}
-			
-	public class LineCurveTool : BaseTool
-	{
-		public override string Name {
-			get { return "Line / Curve"; }
-		}
-		public override string Icon {
-			get { return "Tools.Line.png"; }
-		}
+		
+		public HScale Slider { get { return hscale; } }
 	}
 }
