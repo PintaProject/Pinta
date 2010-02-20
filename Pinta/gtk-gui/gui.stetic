@@ -217,6 +217,8 @@
                             <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />
                             <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
                             <signal name="ExposeEvent" handler="OnDrawingarea1ExposeEvent" />
+                            <signal name="KeyPressEvent" handler="OnDrawingarea1KeyPressEvent" />
+                            <signal name="KeyReleaseEvent" handler="OnDrawingarea1KeyReleaseEvent" />
                           </widget>
                         </child>
                       </widget>

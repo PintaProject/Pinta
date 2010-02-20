@@ -131,6 +131,9 @@ namespace Pinta.Core
 				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_zoom;
 				return;
 			}
+			
+			if (percent > 3600)
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 0;
 		}
 		#endregion
 
@@ -169,6 +172,7 @@ namespace Pinta.Core
 			if (!double.TryParse (text, out percent))
 				return;
 
+			percent = Math.Min (percent, 3600);
 			percent = percent / 100.0;
 
 			PintaCore.Workspace.Scale = percent;

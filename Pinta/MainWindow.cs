@@ -320,5 +320,17 @@ namespace Pinta
 			PintaCore.Tools.CurrentTool.DoMouseDown (drawingarea1, args, PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y));
 		}
 		#endregion
+		protected virtual void OnDrawingarea1KeyPressEvent (object o, Gtk.KeyPressEventArgs args)
+		{
+			PintaCore.Tools.CurrentTool.DoKeyPress (drawingarea1, args, PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y));
+		}
+		
+		protected virtual void OnDrawingarea1KeyReleaseEvent (object o, Gtk.KeyReleaseEventArgs args)
+		{
+			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args, PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y));
+		}
+		
+		
+		
 	}
 }

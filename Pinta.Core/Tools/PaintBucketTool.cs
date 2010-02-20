@@ -2,9 +2,9 @@
 // PaintBucketTool.cs
 //  
 // Author:
-//       dufoli <>
+//       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 dufoli
+// Copyright (c) 2010 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,101 +26,62 @@
 
 using System;
 using Cairo;
-using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-
-	public class PaintBucketTool : BaseTool
+	public class PaintBucketTool : FloodTool
 	{
+		private Color fill_color;
+		
 		public override string Name {
 			get { return "Paint Bucket"; }
 		}
 		public override string Icon {
 			get { return "Tools.PaintBucket.png"; }
 		}
-		/*
 		public override string StatusBarText {
-			get { return "Fill stencil by color."; }
+			get { return "Left click to fill a region with the primary color, right click to fill with the secondary color."; }
 		}
 		public override bool Enabled {
 			get { return true; }
 		}
-		
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
-			if (!PintaCore.Workspace.PointInCanvas (point)) 
-				return;
-			
-			Path path = PintaCore.Layers.SelectionPath;
-			//TODO check if point is in selection
-			
 			if (args.Event.Button == 1)
-				color = PintaCore.Palette.PrimaryColor.ToUint();
-			else if (args.Event.Button == 3)
-				color = PintaCore.Palette.SecondaryColor.ToUint();
+				fill_color = PintaCore.Palette.PrimaryColor;
+			else
+				fill_color = PintaCore.Palette.SecondaryColor;
 			
-			//if ((args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) //continuous
-			    FillStencilFromPoint (point);
-            //else
-            //    FillStencilByColor ();
-				
-		}
-
-		void FillStencilByColor ()
-		{
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
-
-			using (Context g = new Context (surf)) {
-				g.FillPreserve();
-			}
-			
-			throw new System.NotImplementedException ();
-		}
-
-
-		unsafe void FillStencilFromPoint (PointD point)
-		{
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
-			checkedPoints = new List<Point> ();
-			
-			ColorBgra* ptr = surf.GetPointAddress ((int)point.X, (int)point.Y);
-			
-			oldColor = ptr->Bgra;
-			using (Context g = new Context (surf)) {
-				CheckPoint (g, (int)point.X, (int)point.Y);
-			}
-			PintaCore.Workspace.Invalidate();
+			base.OnMouseDown (canvas, args, point);
 		}
 		
-		private List<Point> checkedPoints;
-		uint oldColor;
-		uint color;
-		
-		unsafe void CheckPoint (Context g, int x, int y)
+		protected override void OnFillRegionComputed (Point[][] polygonSet)
 		{
-			if (checkedPoints.Contains(new Point(x, y)))
-				return;
+			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
+			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayer);
 			
-			if (!PintaCore.Workspace.PointInCanvas(new PointD(x, y)))
-				return;
+			PintaCore.Layers.ToolLayer.Clear ();
+			ImageSurface surface = PintaCore.Layers.ToolLayer.Surface;
 			
-			checkedPoints.Add (new Point (x, y));
-			
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
-			
-			ColorBgra* ptr = surf.GetPointAddress (x, y);
-			if (ptr->Bgra == oldColor)
-			{
-				ptr->Bgra = color;
-				//TODO check if outside of selectionPath
-				
-				CheckPoint (g, x - 1, y);
-				CheckPoint (g, x + 1, y);
-				CheckPoint (g, x, y - 1);
-				CheckPoint (g, x, y + 1);
+			for (int x = 0; x < stencil.Width; x++)
+				for (int y = 0; y < stencil.Height; y++)
+					if (stencil.GetUnchecked (x, y))
+						surface.SetPixel (x, y, fill_color);
+
+			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.Antialias = Antialias.Subpixel;
+
+				g.SetSource (surface);
+				g.Paint ();
 			}
+			
+			PintaCore.History.PushNewItem (hist);
+			PintaCore.Workspace.Invalidate ();
 		}
-		*/
 	}
 }
