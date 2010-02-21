@@ -92,14 +92,14 @@ namespace Pinta.Core
 			OnDeactivated ();
 		}		
 		
-		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args, Cairo.PointD point)
+		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
 		{
-			OnKeyDown (canvas, args, point);
+			OnKeyDown (canvas, args);
 		}
 
-		public void DoKeyRelease (DrawingArea canvas, KeyReleaseEventArgs args, Cairo.PointD point)
+		public void DoKeyRelease (DrawingArea canvas, KeyReleaseEventArgs args)
 		{
-			OnKeyUp (canvas, args, point);
+			OnKeyUp (canvas, args);
 		}
 		#endregion
 
@@ -140,11 +140,11 @@ namespace Pinta.Core
 		{
 		}
 		
-		protected virtual void OnKeyDown (DrawingArea canvas, Gtk.KeyPressEventArgs args, Cairo.PointD point)
+		protected virtual void OnKeyDown (DrawingArea canvas, Gtk.KeyPressEventArgs args)
 		{
 		}
 
-		protected virtual void OnKeyUp (DrawingArea canvas, Gtk.KeyReleaseEventArgs args, Cairo.PointD point)
+		protected virtual void OnKeyUp (DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
 		{
 		}
 		

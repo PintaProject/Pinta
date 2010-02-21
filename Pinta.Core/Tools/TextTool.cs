@@ -57,19 +57,19 @@ namespace Pinta.Core
 		}
 
 
-        private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
+        //private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
         private Cairo.PointD startMouseXY;
         private Cairo.PointD startClickPoint;
         private bool tracking;
 
         //private MoveNubRenderer moveNub;
         private int ignoreRedraw;
-        //private RenderArgs ra;
+        //private Cairo.Context context;
         private EditingMode mode;
         private List<string> lines;
         private int linePos;
         private int textPos;
-        private Point clickPoint;
+        private Cairo.PointD clickPoint;
         //private Font font;
         //private TextAlignment alignment;
         //private IrregularSurface saved;
@@ -77,7 +77,7 @@ namespace Pinta.Core
         private bool pulseEnabled;
         private System.DateTime startTime;
         private bool lastPulseCursorState;
-        //private PaintDotNet.Threading.ThreadPool threadPool;
+        //private System.Threading.ThreadPool threadPool;
         private bool enableNub = true;
 
         //private CompoundHistoryMemento currentHA;
@@ -85,7 +85,7 @@ namespace Pinta.Core
         private bool controlKeyDown = false;
         private DateTime controlKeyDownTime = DateTime.MinValue;
         private readonly TimeSpan controlKeyDownThreshold = new TimeSpan(0, 0, 0, 0, 400);
-
+		/*
         private void AlphaBlendingChangedHandler(object sender, EventArgs e)
         {
             if (mode != EditingMode.NotEditing)
@@ -162,11 +162,11 @@ namespace Pinta.Core
             }
         }
 
-        private bool OnBackspaceTyped(Keys keys)
+        private bool OnBackspaceTyped(KeyPressEventArgs args)
         {
             if (this.mode != EditingMode.NotEditing)
             {
-                OnKeyPress(Keys.Back);
+                OnKeyPress(Gdk.Key.BackSpace);
                 return true;
             }
             else
@@ -174,7 +174,7 @@ namespace Pinta.Core
                 return false;
             }
         }
-
+		 */
 		/*public override Gdk.Cursor DefaultCursor {
 			get {
 				return new Gdk.Cursor(;
@@ -183,51 +183,101 @@ namespace Pinta.Core
 
         protected override void OnActivated()
         {
-            PdnBaseForm.RegisterFormHotKey(Keys.Back, OnBackspaceTyped);
+            //PdnBaseForm.RegisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
 
-            base.OnActivate();
+            base.OnActivated();
 
             //this.textToolCursor = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Text.png"), 0, 0);
 					
             //this.Cursor = this.textToolCursor;
 
-            fontChangedDelegate = new EventHandler(FontChangedHandler);
+            /*fontChangedDelegate = new EventHandler(FontChangedHandler);
             fontSmoothingChangedDelegate = new EventHandler(FontSmoothingChangedHandler);
             alignmentChangedDelegate = new EventHandler(AlignmentChangedHandler);
             brushChangedDelegate = new EventHandler(BrushChangedHandler);
             antiAliasChangedDelegate = new EventHandler(AntiAliasChangedHandler);
             foreColorChangedDelegate = new EventHandler(ForeColorChangedHandler);
-
-            ra = new RenderArgs(((BitmapLayer)ActiveLayer).Surface);
+			 */
+            //context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface);
             mode = EditingMode.NotEditing;
             
-            font = AppEnvironment.FontInfo.CreateFont();
-            alignment = AppEnvironment.TextAlignment;
+            //font = AppEnvironment.FontInfo.CreateFont();
+            //alignment = AppEnvironment.TextAlignment;
 
-            AppEnvironment.BrushInfoChanged += brushChangedDelegate;
-            AppEnvironment.FontInfoChanged += fontChangedDelegate;
+            //AppEnvironment.BrushInfoChanged += brushChangedDelegate;
+            /*AppEnvironment.FontInfoChanged += fontChangedDelegate;
             AppEnvironment.FontSmoothingChanged += fontSmoothingChangedDelegate;
             AppEnvironment.TextAlignmentChanged += alignmentChangedDelegate;
             AppEnvironment.AntiAliasingChanged += antiAliasChangedDelegate;
             AppEnvironment.PrimaryColorChanged += foreColorChangedDelegate;
             AppEnvironment.SecondaryColorChanged += new EventHandler(BackColorChangedHandler);
             AppEnvironment.AlphaBlendingChanged += new EventHandler(AlphaBlendingChangedHandler);
-            
-            this.threadPool = new PaintDotNet.Threading.ThreadPool();
+            */
+            //this.threadPool = new System.Threading.ThreadPool ();
 
-            this.moveNub = new MoveNubRenderer(this.RendererList);
+            /*this.moveNub = new MoveNubRenderer(this.RendererList);
             this.moveNub.Shape = MoveNubShape.Compass;
             this.moveNub.Size = new SizeF(10, 10);
             this.moveNub.Visible = false;
             this.RendererList.Add(this.moveNub, false);
+            */
         }
 
+		#region ToolBar
+		
+		private ToolBarLabel font_label;
+		private ToolBarComboBox font_combo;
+		private ToolBarComboBox size_combo;
+		
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		{
+			//Font
+			//size
+			//bold
+			//italic
+			//underscore
+			//alignment
+			//fontSmoothing
+			//color or use primary color?
+			
+			base.OnBuildToolBar (tb);
+
+			if (font_label == null)
+				font_label = new ToolBarLabel (" Font: ");
+
+			tb.AppendItem (font_label);
+			
+			List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (PintaCore.Chrome.DrawingArea.PangoContext.Families);
+			List<string> entries = new List<string> ();
+			fonts.ForEach( f => entries.Add(f.Name));
+
+			if (font_combo == null)
+				font_combo = new ToolBarComboBox (100, 0, false, entries.ToArray());
+			
+
+			tb.AppendItem (font_combo);
+			
+			//size depend on font and modifier (italic, bold,...)
+			int sizes;
+			int nsizes;
+			fonts.Find(f => f.Name == font_combo.ComboBox.ActiveText ).Faces[0].ListSizes(out sizes, out nsizes);
+			entries.Clear ();
+			for (int i = sizes; i< nsizes ; i++) //TODO find the good use of nsize
+				entries.Add (i.ToString());
+			
+			if (size_combo == null)
+				size_combo = new ToolBarComboBox (20, 0, false, entries.ToArray());
+				
+			tb.AppendItem (size_combo);
+		}
+		#endregion
+		
         protected override void OnDeactivated()
         {
-            PdnBaseForm.UnregisterFormHotKey(Keys.Back, OnBackspaceTyped);
+            //PdnBaseForm.UnregisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
 
-            base.OnDeactivate();
-
+            base.OnDeactivated();
+			/*
             switch (mode)
             {
                 case EditingMode.Editing: 
@@ -242,13 +292,13 @@ namespace Pinta.Core
                     break;
 
                 default: 
-                    throw new InvalidEnumArgumentException("Invalid Editing Mode");
+                    throw new System.ComponentModel.InvalidEnumArgumentException("Invalid Editing Mode");
             }
 
-            if (ra != null)
+            if (context != null)
             {
-                ra.Dispose();
-                ra = null;
+                context.Dispose();//TODO or true?
+                context = null;
             }
 
             if (saved != null)
@@ -267,7 +317,7 @@ namespace Pinta.Core
             AppEnvironment.AlphaBlendingChanged -= new EventHandler(AlphaBlendingChangedHandler);
 
             StopEditing();
-            this.threadPool = null;
+            //this.threadPool = null;
 
             this.RendererList.Remove(this.moveNub);
             this.moveNub.Dispose();
@@ -278,8 +328,9 @@ namespace Pinta.Core
                 this.textToolCursor.Dispose();
                 this.textToolCursor = null;
             }
+            */
         }
-
+		/*
         private void StopEditing()
         {
             mode = EditingMode.NotEditing;
@@ -756,7 +807,7 @@ namespace Pinta.Core
             }
         }
 
-        private void DrawText(Surface dst, Font textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Brush brush)
+        private void DrawText(Cairo.ImageSurface dst, Font textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.Color color)
         {
             Rectangle dstRect = new Rectangle(pt, measuredSize);
             Rectangle dstRectClipped = Rectangle.Intersect(dstRect, ScratchSurface.Bounds);
@@ -766,18 +817,18 @@ namespace Pinta.Core
                 return;
             }
 
-            using (Surface surface = new Surface(8, 8))
+            using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32, 8, 8))
             {
-                using (RenderArgs renderArgs = new RenderArgs(surface))
+                using (Cairo.Context context = new Cairo.Context(surface))
                 {
-                    renderArgs.Graphics.FillRectangle(brush, 0, 0, surface.Width, surface.Height);
+                    context.FillRectangle (new Rectangle(0, 0, surface.Width, surface.Height), color);
                 }
 
                 DrawText(dst, textFont, text, pt, measuredSize, antiAliasing, surface);
             }
         }
 
-        private unsafe void DrawText(Surface dst, Font textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Surface brush8x8)
+        private unsafe void DrawText(Cairo.ImageSurface dst, Font textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.ImageSurface brush8x8)
         {
             Point pt2 = pt;
             Size measuredSize2 = measuredSize;
@@ -793,7 +844,7 @@ namespace Pinta.Core
             }
 
             // We only use the first 8,8 of brush
-            using (RenderArgs renderArgs = new RenderArgs(this.ScratchSurface))
+            using (Cairo.Context ctx = new Cairo.Context(this.ScratchSurface))
             {
                 renderArgs.Graphics.FillRectangle(Brushes.White, pt.X, pt.Y, measuredSize.Width, measuredSize.Height);
 
@@ -801,7 +852,7 @@ namespace Pinta.Core
                 {
                     using (Surface s2 = renderArgs.Surface.CreateWindow(dstRectClipped))
                     {
-                        using (RenderArgs renderArgs2 = new RenderArgs(s2))
+                        using (Cairo.Context ctx2 = new Cairo.Context(s2))
                         {
                             SystemLayer.Fonts.DrawText(
                                 renderArgs2.Graphics, 
@@ -810,6 +861,16 @@ namespace Pinta.Core
                                 new Point(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
                                 AppEnvironment.AntiAliasing,
                                 AppEnvironment.FontSmoothing);
+//ctx.SelectFontFace ("serif", FontSlant.Normal, FontWeight.Bold);
+//ctx.SetFontSize (32.0);
+
+//// Select a color (blue)
+//ctx.SetSourceRGB (0, 0, 1);
+
+//// Draw
+//ctx.MoveTo (10, 50);
+//ctx.ShowText ("Hello, World");
+
                         }
                     }
                 }
@@ -898,7 +959,7 @@ namespace Pinta.Core
 
             if (saved != null)
             {
-                saved.Draw(ra.Surface); 
+                saved.Draw(context.Surface); 
                 ActiveLayer.Invalidate(saved.Region);
                 saved.Dispose();
                 saved = null;
@@ -921,11 +982,11 @@ namespace Pinta.Core
             {
                 for (int i = 0; i < lines.Count; ++i)
                 {
-                    this.threadPool.QueueUserWorkItem(new System.Threading.WaitCallback(this.MeasureText), 
+                    System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(this.MeasureText), 
                         BoxedConstants.GetInt32(i));
                 }
 
-                this.threadPool.Drain();
+                System.Threading.ThreadPool.Drain();
             }
 
             for (int i = 0; i < lines.Count; ++i)
@@ -979,7 +1040,7 @@ namespace Pinta.Core
             // Set the saved region
             using (PdnRegion reg = Utility.RectanglesToRegion(Utility.InflateRectangles(rects, 3)))
             {
-                saved = new IrregularSurface(ra.Surface, reg);
+                saved = new IrregularSurface(context.Surface, reg);
             }
 
             // Draw the Lines
@@ -987,24 +1048,34 @@ namespace Pinta.Core
 
             for (int i = 0; i < lines.Count; i++)
             {
-                threadPool.QueueUserWorkItem(new System.Threading.WaitCallback(this.RenderText), BoxedConstants.GetInt32(i));
+                System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(this.RenderText), BoxedConstants.GetInt32(i));
             }
 
-            threadPool.Drain();
+            System.Threading.ThreadPool.Drain();
 
             // Draw the Cursor
             if (cursorOn)
             {           
-                using (Pen cursorPen = new Pen(Color.FromArgb(255, AppEnvironment.PrimaryColor.ToColor()), 2))
+                if (emptyCursorLineFlag)
                 {
-                    if (emptyCursorLineFlag)
-                    {
-                        ra.Graphics.FillRectangle(cursorPen.Brush, cursorRect);
-                    }
-                    else
-                    {
-                        ra.Graphics.DrawLine(cursorPen, new Point(cursorRect.Right, cursorRect.Top), new Point(cursorRect.Right, cursorRect.Bottom));
-                    }
+                    context.FillRectangle(cursorRect, PintaCore.Palette.PrimaryColor);
+                }
+                else
+                {
+					context.AppendPath (PintaCore.Layers.SelectionPath);
+					context.FillRule = FillRule.EvenOdd;
+					context.Clip ();
+					
+					context.Antialias = Antialias.None;
+					
+					context.MoveTo (cursorRect.Right, cursorRect.Top);
+					context.LineTo (cursorRect.Right, cursorRect.Bottom);
+	
+					context.Color = PintaCore.Palette.PrimaryColor;
+					context.LineWidth = 2;
+					context.LineCap = LineCap.Square;
+					
+					context.Stroke ();
                 }
             }
 
@@ -1040,16 +1111,16 @@ namespace Pinta.Core
         }
 
         // Only used when rendering via background threads
-        private Point[] uls;
+        private Cairo.PointD[] uls;
         private Size[] sizes;
 
         private void RenderText(object lineNumberObj)
         {
             int lineNumber = (int)lineNumberObj;
 
-            using (Brush brush = AppEnvironment.CreateBrush(false))
+            using (Cairo.Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
             {
-                DrawText(ra.Surface, this.font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], AppEnvironment.AntiAliasing, brush);
+                DrawText(ra.Surface, this.font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], AppEnvironment.AntiAliasing, g);
             }
         }
 
@@ -1074,9 +1145,9 @@ namespace Pinta.Core
 
         protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args, Cairo.PointD point)
         {
-            switch (e.KeyCode)
+            switch (args.Event.Key)
             {
-                case Keys.Space:
+                case Gdk.Key.space:
                     if (mode != EditingMode.NotEditing)
                     {
                         // Prevent pan cursor from flicking to 'hand w/ the X' whenever use types a space in their text
@@ -1084,7 +1155,8 @@ namespace Pinta.Core
                     }
                     break;
 
-                case Keys.ControlKey:
+                case Gdk.Key.Control_L:
+				case Gdk.Key.Control_R:
                     if (!this.controlKeyDown)
                     {
                         this.controlKeyDown = true;
@@ -1093,34 +1165,34 @@ namespace Pinta.Core
                     break;
 
                 // Make sure these are not used to scroll the document around
-                case Keys.Home | Keys.Shift:
-                case Keys.Home:
-                case Keys.End:
-                case Keys.End | Keys.Shift:
-                case Keys.Next | Keys.Shift:
-                case Keys.Next:
-                case Keys.Prior | Keys.Shift:
-                case Keys.Prior:
+                case Gdk.Key.Home | Gdk.Key.Shift:
+                case Gdk.Key.Home:
+                case Gdk.Key.End:
+                case Gdk.Key.End | Gdk.Key.Shift:
+                case Gdk.Key.Next | Gdk.Key.Shift:
+                case Gdk.Key.Next:
+                case Gdk.Key.Prior | Gdk.Key.Shift:
+                case Gdk.Key.Prior:
                     if (this.mode != EditingMode.NotEditing)
                     {
-                        OnKeyPress(e.KeyCode);
+                        OnKeyPress(args.Event.Key, args.Event.State);
                         e.Handled = true;
                     }
                     break;
 
-                case Keys.Tab:
-                    if ((e.Modifiers & Keys.Control) == 0)
+                case Gdk.Key.Tab:
+                    if ((args.Event.State & Gdk.ModifierType.ControlMask) == 0)
                     {
                         if (this.mode != EditingMode.NotEditing)
                         {
-                            OnKeyPress(e.KeyCode);
+                            OnKeyPress(args.Event.Key, args.Event.State);
                             e.Handled = true;
                         }
                     }
                     break;
 
-                case Keys.Back:
-                case Keys.Delete:
+                case Gdk.Key.Back:
+                case Gdk.Key.Delete:
                     if (this.mode != EditingMode.NotEditing)
                     {
                         OnKeyPress(e.KeyCode);
@@ -1163,7 +1235,7 @@ namespace Pinta.Core
         {
             switch (e.KeyCode)
             {
-                case Keys.ControlKey:
+                case Gdk.Key.ControlKey:
                     TimeSpan heldDuration = (DateTime.Now - this.controlKeyDownTime);
 
                     // If the user taps Ctrl, then we should toggle the visiblity of the moveNub
@@ -1181,7 +1253,7 @@ namespace Pinta.Core
 
         protected void OnKeyPress(DrawingArea canvas, KeyPressEventArgs args, Cairo.PointD point)
         {
-            switch (e.KeyChar)
+            switch (args.Event.Key)
             {
                 case (char)13: // Enter
                     if (tracking)
@@ -1236,20 +1308,18 @@ namespace Pinta.Core
                 }
             }
 
-            base.OnKeyPress (e);
+            base.OnKeyPress (args.Event.Key, args.Event.State);
         }
 
-        protected override void OnKeyPress(Keys keyData)
+        protected void OnKeyPress(Gdk.Key key, Gdk.ModifierType modifier)
         {
             bool keyHandled = true;
-            Keys key = keyData & Keys.KeyCode;
-            Keys modifier = keyData & Keys.Modifiers;
 
             if (tracking)
             {
                 keyHandled = false;
             }
-            else if (modifier == Keys.Alt)
+            else if (modifier == Gdk.Key.Alt)
             {
                 // ignore so they can use Alt+#### to type special characters
             }
@@ -1257,8 +1327,8 @@ namespace Pinta.Core
             {
                 switch (key)
                 {
-                    case Keys.Back:
-                        if (modifier == Keys.Control)
+                    case Gdk.Key.Back:
+                        if (modifier == Gdk.Key.Control)
                         {
                             PerformControlBackspace();
                         }
@@ -1269,8 +1339,8 @@ namespace Pinta.Core
 
                         break;
 
-                    case Keys.Delete:
-                        if (modifier == Keys.Control)
+                    case Gdk.Key.Delete:
+                        if (modifier == Gdk.Key.Control)
                         {
                             PerformControlDelete();
                         }
@@ -1281,12 +1351,12 @@ namespace Pinta.Core
 
                         break;
 
-                    case Keys.Enter:
+                    case Gdk.Key.Enter:
                         PerformEnter();
                         break;
 
-                    case Keys.Left:
-                        if (modifier == Keys.Control)
+                    case Gdk.Key.Left:
+                        if (modifier == Gdk.Key.Control)
                         {
                             PerformControlLeft();
                         }
@@ -1297,8 +1367,8 @@ namespace Pinta.Core
 
                         break;
 
-                    case Keys.Right:
-                        if (modifier == Keys.Control)
+                    case Gdk.Key.Right:
+                        if (modifier == Gdk.Key.Control)
                         {
                             PerformControlRight();
                         }
@@ -1309,16 +1379,16 @@ namespace Pinta.Core
 
                         break;
 
-                    case Keys.Up:
+                    case Gdk.Key.Up:
                         PerformUp();
                         break;
 
-                    case Keys.Down:
+                    case Gdk.Key.Down:
                         PerformDown();
                         break;
 
-                    case Keys.Home:
-                        if (modifier == Keys.Control)
+                    case Gdk.Key.Home:
+                        if (modifier == Gdk.Key.Control)
                         {
                             linePos = 0;
                         }
@@ -1326,8 +1396,8 @@ namespace Pinta.Core
                         textPos = 0;
                         break;
 
-                    case Keys.End:
-                        if (modifier == Keys.Control)
+                    case Gdk.Key.End:
+                        if (modifier == Gdk.Key.Control)
                         {
                             linePos = lines.Count - 1;
                         }
@@ -1354,7 +1424,7 @@ namespace Pinta.Core
             }
         }
 
-        private PointD TextPositionToPoint(Position p)
+        private Cairo.PointD TextPositionToPoint(Position p)
         {
             PointD pf = new PointD(0,0);
 
@@ -1398,7 +1468,7 @@ namespace Pinta.Core
             return line.Length;
         }
 
-        private Position PointToTextPosition(PointF pf)
+        private Position PointToTextPosition(Cairo.PointD pf)
         {
             float dx = pf.X - clickPoint.X;
             float dy = pf.Y - clickPoint.Y;
@@ -1513,7 +1583,7 @@ namespace Pinta.Core
             }
         }
     
-        protected override void OnPulse()
+        /*protected override void OnPulse()
         {
             base.OnPulse();
 
@@ -1540,7 +1610,7 @@ namespace Pinta.Core
 
             if (IsFormActive)
             {
-                pulseCursorState &= ((ModifierKeys & Keys.Control) == 0);
+                pulseCursorState &= ((ModifierKeys & Gdk.Key.Control) == 0);
             }
 
             if (pulseCursorState != lastPulseCursorState)
@@ -1549,7 +1619,7 @@ namespace Pinta.Core
                 lastPulseCursorState = pulseCursorState;
             }
 
-            if (IsFormActive && (ModifierKeys & Keys.Control) != 0) 
+            if (IsFormActive && (ModifierKeys & Gdk.Key.Control) != 0) 
             {
                 // hide the nub while Ctrl is held down
                 this.moveNub.Visible = false;
@@ -1603,9 +1673,9 @@ namespace Pinta.Core
             {
                 canHandle = true;
             }
-        }
-
-        protected override void OnPaste(IDataObject data, out bool handled)
+        }*/
+		/*
+        /*protected override void OnPaste(IDataObject data, out bool handled)
         {
             base.OnPaste (data, out handled);
 
@@ -1633,14 +1703,14 @@ namespace Pinta.Core
 
                 this.RedrawText(false);
             }
-        }
-
+        }*/
+		/*
         private void InsertCharIntoString(char c)
         {
             lines[linePos] = ((string)lines[linePos]).Insert(textPos, c.ToString());
             this.sizes = null;
         }
-
+		*/
         /*public TextTool(DocumentWorkspace documentWorkspace)
             : base(documentWorkspace,
                    ImageResource.Get("Icons.TextToolIcon.png"),
