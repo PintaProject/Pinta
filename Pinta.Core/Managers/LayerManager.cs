@@ -26,6 +26,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Collections.Specialized;
 using System.Linq;
 using Cairo;
 
@@ -213,6 +215,8 @@ namespace Pinta.Core
 			if (layers.Count == 1)
 				current_layer = 0;
 			
+			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
+			
 			OnLayerAdded ();
 			return layer;
 		}
@@ -225,6 +229,8 @@ namespace Pinta.Core
 			if (layers.Count == 1)
 				current_layer = 0;
 
+			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
+			
 			OnLayerAdded ();
 		}
 
@@ -244,6 +250,8 @@ namespace Pinta.Core
 			if (current_layer > 0)
 				current_layer--;
 
+			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
+			
 			OnLayerRemoved ();
 		}
 
@@ -261,6 +269,8 @@ namespace Pinta.Core
 			if (current_layer > 0)
 				current_layer--;
 
+			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
+			
 			OnLayerRemoved ();
 		}
 
@@ -280,6 +290,9 @@ namespace Pinta.Core
 			layer.Tiled = source.Tiled;
 			
 			layers.Insert (++current_layer, layer);
+			
+			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
+			
 			OnLayerAdded ();
 			
 			return layer;
@@ -535,12 +548,22 @@ namespace Pinta.Core
 			
 			return layer;
 		}
+		
+		private void RaiseLayerPropertyChangedEvent (object sender, PropertyChangedEventArgs e)
+		{
+			if (LayerPropertyChanged != null)
+				LayerPropertyChanged (sender, e);
+			
+			//TODO Get the workspace to subscribe to this event, and invalidate itself.
+			PintaCore.Workspace.Invalidate ();
+		}
 		#endregion
 
 		#region Events
 		public event EventHandler LayerAdded;
 		public event EventHandler LayerRemoved;
 		public event EventHandler SelectedLayerChanged;
+		public event PropertyChangedEventHandler LayerPropertyChanged;
 		#endregion
 
 		#region IEnumerable<Layer> implementation

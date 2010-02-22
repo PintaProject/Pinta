@@ -110,20 +110,61 @@ namespace Pinta
 
 			dialog.Destroy ();
 		}
-
+				
 		private void HandlePintaCoreActionsLayersPropertiesActivated (object sender, EventArgs e)
 		{
-			LayerPropertiesDialog dialog = new LayerPropertiesDialog ();
+			var dialog = new LayerPropertiesDialog ();
 			
-			int response = dialog.Run ();
+			dialog.Run ();			
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.SaveChanges ();
+			if (dialog.AreLayerPropertiesUpdated) {
+				
+				var historyMessage = GetLayerPropertyUpdateMessage(
+						dialog.InitialLayerProperties,
+						dialog.UpdatedLayerProperties);				
+				
+				var historyItem = new UpdateLayerPropertiesHistoryItem(
+					"Menu.Layers.LayerProperties.png",
+					historyMessage,
+					PintaCore.Layers.CurrentLayerIndex,
+					dialog.InitialLayerProperties,
+					dialog.UpdatedLayerProperties);
+				
+				PintaCore.History.PushNewItem (historyItem);
+				
 				PintaCore.Workspace.Invalidate ();
 			}
 				
 			dialog.Destroy ();
 		}
+		
+		private string GetLayerPropertyUpdateMessage (
+			LayerProperties initial,
+			LayerProperties updated)
+		{
+			string ret = null;
+			int count = 0;
+			
+			if (updated.Opacity != initial.Opacity) {
+				ret = "Layer Opacity";
+				count++;
+			}
+				
+			if (updated.Name != initial.Name) {
+				ret = "Layer Renamed";
+				count++;
+			}
+			
+			if (updated.Hidden != initial.Hidden) {
+				ret = (updated.Hidden) ? "Layer Hidden" : "Layer Shown";
+				count++;
+			}
+			
+			if (ret == null || count > 1)
+				ret = "Layer Properties";
+			
+			return ret;
+		}		
 		
 		private void HandleAdjustmentsHueSaturationActivated (object sender, EventArgs e)
 		{

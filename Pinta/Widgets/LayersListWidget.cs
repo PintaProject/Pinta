@@ -99,6 +99,8 @@ namespace Pinta
 			PintaCore.Layers.LayerAdded += HandleLayerAddedOrRemoved;
 			PintaCore.Layers.LayerRemoved += HandleLayerAddedOrRemoved;
 			PintaCore.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+			PintaCore.Layers.LayerPropertyChanged += HandlePintaCoreLayersLayerPropertyChanged;
+			
 			PintaCore.History.HistoryItemAdded += HandleHistoryItemAdded;
 			PintaCore.History.ActionRedone += HandleHistoryItemAdded;
 			PintaCore.History.ActionUndone += HandleHistoryItemAdded;			
@@ -159,6 +161,12 @@ namespace Pinta
 			Reset ();
 		}		
 
+		void HandlePintaCoreLayersLayerPropertyChanged (object sender, PropertyChangedEventArgs e)
+		{
+			// TODO: Handle this more efficiently.
+			Reset ();
+		}		
+		
 		private void HandleLayerAddedOrRemoved(object sender, EventArgs e)
 		{
 			// TODO: Handle this more efficiently.
@@ -189,8 +197,20 @@ namespace Pinta
 			if (layer != null)
 				layer.Hidden = !visibility;
 			
-			// TODO: this should be handled elsewhere
-			PintaCore.Workspace.Invalidate ();
+			var initial = new LayerProperties(layer.Name, visibility, layer.Opacity);
+			var updated = new LayerProperties(layer.Name, !visibility, layer.Opacity);
+			
+			var historyItem = new UpdateLayerPropertiesHistoryItem (
+				"Menu.Layers.LayerProperties.png",
+				(visibility) ? "Layer Shown" : "Layer Hidden",
+				PintaCore.Layers.IndexOf (layer),
+				initial,
+				updated);
+			
+			PintaCore.History.PushNewItem (historyItem);
+			
+			//TODO Call this automatically when the layer visibility changes.
+			PintaCore.Workspace.Invalidate ();			
 		}
 	}
 }
