@@ -1,10 +1,10 @@
 // 
-// PanTool.cs
+// LineCurveTool.cs
 //  
 // Author:
-//       Olivier Dufour
+//       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Olivier Dufour
+// Copyright (c) 2010 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,41 +29,36 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class PanTool : BaseTool
+	public class LineCurveTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Pan"; }
+			get { return "Line"; }
 		}
 		public override string Icon {
-			get { return "Tools.Pan.png"; }
+			get { return "Tools.Line.png"; }
 		}
 		public override string StatusBarText {
-			get { return "When zoomed in close, click and drag to navigate image."; }
+			get { return "Left click to draw with primary color, right click for secondary color"; }
+		}
+		protected override bool ShowStrokeComboBox {
+			get { return false; }
 		}
 		
-		private bool active;
-		private PointD last_point;
-		
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
+		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
-			// Don't scroll if the whole canvas fits (no scrollbars)
-			if (!PintaCore.Workspace.CanvasFitsInWindow)
-				active = true;
-				
-			last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
-		}
-		
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
-		{
-			active = false;
-		}
+			Rectangle dirty;
+			
+			using (Context g = new Context (l.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+					
+				g.Antialias = Antialias.Subpixel;
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
-		{
-			if (active) {
-				PintaCore.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
-				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
+				dirty = g.DrawLine (shape_origin, current_point , outline_color, BrushWidth);
 			}
+			
+			return dirty;
 		}
 	}
 }

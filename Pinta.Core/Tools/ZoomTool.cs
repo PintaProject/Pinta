@@ -51,9 +51,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Click left to zoom in. Click right to zoom out. Click and drag to zoom in selection."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return cursorZoom; }
 		}

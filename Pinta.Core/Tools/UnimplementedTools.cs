@@ -39,15 +39,8 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.MagicWand.png"; }
 		}
-	}
-		
-	public class PaintBucketTool : BaseTool
-	{
-		public override string Name {
-			get { return "Paint Bucket"; }
-		}
-		public override string Icon {
-			get { return "Tools.PaintBucket.png"; }
+		public override bool Enabled {
+			get { return false; }
 		}
 	}
 		
@@ -59,6 +52,9 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.Gradient.png"; }
 		}
+		public override bool Enabled {
+			get { return false; }
+		}
 	}
 			
 	public class CloneStampTool : BaseTool
@@ -68,6 +64,9 @@ namespace Pinta.Core
 		}
 		public override string Icon {
 			get { return "Tools.CloneStamp.png"; }
+		}
+		public override bool Enabled {
+			get { return false; }
 		}
 	}
 			
@@ -79,6 +78,9 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.Recolor.png"; }
 		}
+		public override bool Enabled {
+			get { return false; }
+		}
 	}
 			
 	public class TextTool : BaseTool
@@ -89,15 +91,8 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.Text.png"; }
 		}
-	}
-			
-	public class LineCurveTool : BaseTool
-	{
-		public override string Name {
-			get { return "Line / Curve"; }
-		}
-		public override string Icon {
-			get { return "Tools.Line.png"; }
+		public override bool Enabled {
+			get { return false; }
 		}
 	}
 }

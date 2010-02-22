@@ -40,9 +40,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Click and drag to draw an elliptical selection. Hold shift to constrain to a circle."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 
 		protected override Rectangle DrawShape (Rectangle r, Layer l)
 		{

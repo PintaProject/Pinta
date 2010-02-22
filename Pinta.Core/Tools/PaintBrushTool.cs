@@ -43,7 +43,6 @@ namespace Pinta.Core
 		public override string Name { get { return "Paintbrush"; } }
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
 		public override string StatusBarText { get { return "Left click to draw with primary color, right click to draw with secondary color"; } }
-		public override bool Enabled { get { return true; } }
 		#endregion
 
 		#region Mouse Handlers

@@ -42,7 +42,6 @@ namespace Pinta.Core
 		public override string Name { get { return "Eraser"; } }
 		public override string Icon { get { return "Tools.Eraser.png"; } }
 		public override string StatusBarText { get { return "Click and drag to erase a portion of the image"; } }
-		public override bool Enabled { get { return true; } }
 		#endregion
 
 		#region Mouse Handlers

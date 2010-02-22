@@ -1,10 +1,10 @@
 // 
-// PanTool.cs
+// PaintBucketTool.cs
 //  
 // Author:
-//       Olivier Dufour
+//       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Olivier Dufour
+// Copyright (c) 2010 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,41 +29,56 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class PanTool : BaseTool
+	public class PaintBucketTool : FloodTool
 	{
+		private Color fill_color;
+		
 		public override string Name {
-			get { return "Pan"; }
+			get { return "Paint Bucket"; }
 		}
 		public override string Icon {
-			get { return "Tools.Pan.png"; }
+			get { return "Tools.PaintBucket.png"; }
 		}
 		public override string StatusBarText {
-			get { return "When zoomed in close, click and drag to navigate image."; }
-		}
-		
-		private bool active;
-		private PointD last_point;
-		
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
-		{
-			// Don't scroll if the whole canvas fits (no scrollbars)
-			if (!PintaCore.Workspace.CanvasFitsInWindow)
-				active = true;
-				
-			last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
-		}
-		
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
-		{
-			active = false;
+			get { return "Left click to fill a region with the primary color, right click to fill with the secondary color."; }
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
-			if (active) {
-				PintaCore.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
-				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
+			if (args.Event.Button == 1)
+				fill_color = PintaCore.Palette.PrimaryColor;
+			else
+				fill_color = PintaCore.Palette.SecondaryColor;
+			
+			base.OnMouseDown (canvas, args, point);
+		}
+		
+		protected override void OnFillRegionComputed (Point[][] polygonSet)
+		{
+			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
+			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayer);
+			
+			PintaCore.Layers.ToolLayer.Clear ();
+			ImageSurface surface = PintaCore.Layers.ToolLayer.Surface;
+			
+			for (int x = 0; x < stencil.Width; x++)
+				for (int y = 0; y < stencil.Height; y++)
+					if (stencil.GetUnchecked (x, y))
+						surface.SetPixel (x, y, fill_color);
+
+			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+
+				g.Antialias = Antialias.Subpixel;
+
+				g.SetSource (surface);
+				g.Paint ();
 			}
+			
+			PintaCore.History.PushNewItem (hist);
+			PintaCore.Workspace.Invalidate ();
 		}
 	}
 }

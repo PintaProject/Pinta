@@ -45,7 +45,6 @@ namespace Pinta.Core
 		public override string Name { get { return "Pencil"; } }
 		public override string Icon { get { return "Tools.Pencil.png"; } }
 		public override string StatusBarText { get { return "Left click to draw freeform, one-pixel wide lines with the primary color, right click to use the secondary color"; } }
-		public override bool Enabled { get { return true; } }
 		#endregion
 
 		#region Mouse Handlers

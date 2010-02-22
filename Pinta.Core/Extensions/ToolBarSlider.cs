@@ -1,5 +1,5 @@
 // 
-// RoundedRectangleTool.cs
+// ToolBarLabel.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,42 +25,27 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
+using Gtk;
 
 namespace Pinta.Core
 {
-	public class RoundedRectangleTool : ShapeTool
+	public class ToolBarSlider : ToolItem
 	{
-		public override string Name {
-			get { return "Rounded Rectangle"; }
-		}
-		public override string Icon {
-			get { return "Tools.RoundedRectangle.png"; }
-		}
-		public override string StatusBarText {
-			get { return "Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain."; }
-		}
-
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		private HScale hscale;
+		
+		public ToolBarSlider (int min, int max, int step, int value)
 		{
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+			hscale = new HScale (min, max, step);
+			hscale.WidthRequest = 150;
+			hscale.Value = value;
+			hscale.ValuePos = PositionType.Left;
 
-				g.Antialias = Antialias.Subpixel;
+			hscale.Show ();
 
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedRoundedRectangle (rect, BrushWidth, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillRoundedRectangle (rect, BrushWidth, outline_color);
-				else
-					dirty = g.DrawRoundedRectangle (rect, BrushWidth, outline_color, BrushWidth);
-			}
-			
-			return dirty;
+			Add (hscale);
+			Show ();
 		}
+		
+		public HScale Slider { get { return hscale; } }
 	}
 }
