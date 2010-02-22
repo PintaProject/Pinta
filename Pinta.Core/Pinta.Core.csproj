@@ -106,6 +106,7 @@
     <Compile Include="Tools\BaseTool.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Tools\LineCurveTool.cs" />
     <Compile Include="Tools\FloodTool.cs" />
     <Compile Include="Tools\LassoSelectTool.cs" />
     <Compile Include="Tools\PaintBucketTool.cs" />

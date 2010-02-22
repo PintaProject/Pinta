@@ -1,5 +1,5 @@
 // 
-// RoundedRectangleTool.cs
+// LineCurveTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -29,18 +29,21 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class RoundedRectangleTool : ShapeTool
+	public class LineCurveTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Rounded Rectangle"; }
+			get { return "Line"; }
 		}
 		public override string Icon {
-			get { return "Tools.RoundedRectangle.png"; }
+			get { return "Tools.Line.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain."; }
+			get { return "Left click to draw with primary color, right click for secondary color"; }
 		}
-
+		protected override bool ShowStrokeComboBox {
+			get { return false; }
+		}
+		
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
 			Rectangle dirty;
@@ -49,15 +52,10 @@ namespace Pinta.Core
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
-
+					
 				g.Antialias = Antialias.Subpixel;
 
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedRoundedRectangle (rect, BrushWidth, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillRoundedRectangle (rect, BrushWidth, outline_color);
-				else
-					dirty = g.DrawRoundedRectangle (rect, BrushWidth, outline_color, BrushWidth);
+				dirty = g.DrawLine (shape_origin, current_point , outline_color, BrushWidth);
 			}
 			
 			return dirty;

@@ -40,9 +40,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 		
 		public EllipseTool ()
 		{

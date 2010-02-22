@@ -40,9 +40,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "When zoomed in close, click and drag to navigate image."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 		
 		private bool active;
 		private PointD last_point;

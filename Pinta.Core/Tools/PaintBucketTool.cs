@@ -42,9 +42,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Left click to fill a region with the primary color, right click to fill with the secondary color."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{

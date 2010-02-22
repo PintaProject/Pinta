@@ -48,10 +48,6 @@ namespace Pinta.Core
 			get { return "Tools.Text.png"; }
 		}
 		
-		public override bool Enabled {
-			get { return true; }
-		}
-		
 		public override string StatusBarText {
 			get { return "Write text.";}
 		}
