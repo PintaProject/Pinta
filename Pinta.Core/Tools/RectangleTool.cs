@@ -40,9 +40,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Click and drag to draw a rectangle (right click for secondary color). Hold shift to constrain to a square."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 		
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{

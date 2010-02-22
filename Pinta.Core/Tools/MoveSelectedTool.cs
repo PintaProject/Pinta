@@ -44,9 +44,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Drag the selection to move. Drag the nubs to scale. Drag with right mouse button to rotate."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)

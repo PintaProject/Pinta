@@ -51,7 +51,7 @@ namespace Pinta.Core
 		public virtual string ToolTip { get { throw new ApplicationException ("Tool didn't override ToolTip"); } }
 		public virtual string StatusBarText { get { return string.Empty; } }
 		public virtual ToggleToolButton ToolItem { get { if (tool_item == null) tool_item = CreateToolButton (); return tool_item; } }
-		public virtual bool Enabled { get { return false; } }
+		public virtual bool Enabled { get { return true; } }
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		
 		#region Public Methods

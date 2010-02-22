@@ -40,9 +40,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Left click to draw with primary color, right click for secondary color"; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 		protected override bool ShowStrokeComboBox {
 			get { return false; }
 		}

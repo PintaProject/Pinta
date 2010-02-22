@@ -39,6 +39,9 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.MagicWand.png"; }
 		}
+		public override bool Enabled {
+			get { return false; }
+		}
 	}
 		
 	public class GradientTool : BaseTool
@@ -48,6 +51,9 @@ namespace Pinta.Core
 		}
 		public override string Icon {
 			get { return "Tools.Gradient.png"; }
+		}
+		public override bool Enabled {
+			get { return false; }
 		}
 	}
 			
@@ -59,6 +65,9 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.CloneStamp.png"; }
 		}
+		public override bool Enabled {
+			get { return false; }
+		}
 	}
 			
 	public class RecolorTool : BaseTool
@@ -69,6 +78,9 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.Recolor.png"; }
 		}
+		public override bool Enabled {
+			get { return false; }
+		}
 	}
 			
 	public class TextTool : BaseTool
@@ -78,6 +90,9 @@ namespace Pinta.Core
 		}
 		public override string Icon {
 			get { return "Tools.Text.png"; }
+		}
+		public override bool Enabled {
+			get { return false; }
 		}
 	}
 }

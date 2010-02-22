@@ -46,9 +46,6 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Left click to set primary color. Right click to set secondary color."; }
 		}
-		public override bool Enabled {
-			get { return true; }
-		}
 		#endregion
 
 		#region ToolBar
