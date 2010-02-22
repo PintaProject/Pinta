@@ -1,5 +1,5 @@
 // 
-// UnimplementedTools.cs
+// LineCurveTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,59 +25,43 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 
 namespace Pinta.Core
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class MagicWandTool : BaseTool
+	public class LineCurveTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Magic Wand"; }
+			get { return "Line"; }
 		}
 		public override string Icon {
-			get { return "Tools.MagicWand.png"; }
+			get { return "Tools.Line.png"; }
 		}
-	}
+		public override string StatusBarText {
+			get { return "Left click to draw with primary color, right click for secondary color"; }
+		}
+		public override bool Enabled {
+			get { return true; }
+		}
+		protected override bool ShowStrokeComboBox {
+			get { return false; }
+		}
 		
-	public class GradientTool : BaseTool
-	{
-		public override string Name {
-			get { return "Gradient"; }
-		}
-		public override string Icon {
-			get { return "Tools.Gradient.png"; }
-		}
-	}
+		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		{
+			Rectangle dirty;
 			
-	public class CloneStampTool : BaseTool
-	{
-		public override string Name {
-			get { return "Clone Stamp"; }
-		}
-		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
-		}
-	}
+			using (Context g = new Context (l.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+					
+				g.Antialias = Antialias.Subpixel;
+
+				dirty = g.DrawLine (shape_origin, current_point , outline_color, BrushWidth);
+			}
 			
-	public class RecolorTool : BaseTool
-	{
-		public override string Name {
-			get { return "Recolor"; }
-		}
-		public override string Icon {
-			get { return "Tools.Recolor.png"; }
-		}
-	}
-			
-	public class TextTool : BaseTool
-	{
-		public override string Name {
-			get { return "Text"; }
-		}
-		public override string Icon {
-			get { return "Tools.Text.png"; }
+			return dirty;
 		}
 	}
 }

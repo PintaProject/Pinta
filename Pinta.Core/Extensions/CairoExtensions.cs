@@ -372,7 +372,30 @@ namespace Pinta.Core
 			
 			return p;
 		}
-		
+
+		public static Rectangle DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
+		{
+			// Put it on a pixel line
+			if (lineWidth == 1)
+				p1 = new PointD (p1.X - 0.5, p1.Y - 0.5);
+
+			g.Save ();
+
+			g.MoveTo (p1.X, p1.Y);
+			g.LineTo (p2.X, p2.Y);
+
+			g.Color = color;
+			g.LineWidth = lineWidth;
+			g.LineCap = LineCap.Square;
+
+			Rectangle dirty = g.StrokeExtents ();
+			g.Stroke ();
+
+			g.Restore ();
+
+			return dirty;
+		}
+
 		public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, Point dest)
 		{
 			g.Save ();

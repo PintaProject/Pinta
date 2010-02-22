@@ -33,6 +33,7 @@ namespace Pinta.Core
 	{
 		protected bool is_drawing = false;
 		protected PointD shape_origin;
+		protected PointD current_point;
 		protected Color outline_color;
 		protected Color fill_color;
 
@@ -107,25 +108,27 @@ namespace Pinta.Core
 			
 			tb.AppendItem (brush_width_plus);
 			
-			if (spacer_label == null)
-				spacer_label = new ToolBarLabel ("  ");
+			if (ShowStrokeComboBox) {
+				if (spacer_label == null)
+					spacer_label = new ToolBarLabel ("  ");
 
-			tb.AppendItem (spacer_label);
-			
-			if (fill_outline_image == null)
-				fill_outline_image = new ToolBarImage ("ShapeTool.OutlineFill.png");
-
-			tb.AppendItem (fill_outline_image);
-			
-			if (fill_outline_label == null)
-				fill_outline_label = new ToolBarLabel (" : ");
-
-			tb.AppendItem (fill_outline_label);
-
-			if (fill_outline == null)
-				fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
+				tb.AppendItem (spacer_label);
 				
-			tb.AppendItem (fill_outline);
+				if (fill_outline_image == null)
+					fill_outline_image = new ToolBarImage ("ShapeTool.OutlineFill.png");
+
+				tb.AppendItem (fill_outline_image);
+				
+				if (fill_outline_label == null)
+					fill_outline_label = new ToolBarLabel (" : ");
+
+				tb.AppendItem (fill_outline_label);
+
+				if (fill_outline == null)
+					fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
+					
+				tb.AppendItem (fill_outline);
+			}
 		}
 		
 		private void MinusButtonClickedEvent (object o, EventArgs args)
@@ -144,6 +147,8 @@ namespace Pinta.Core
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			shape_origin = point;
+			current_point = point;
+			
 			is_drawing = true;
 			
 			if (args.Event.Button == 1) {
@@ -165,7 +170,8 @@ namespace Pinta.Core
 		{
 			double x = point.X;
 			double y = point.Y;
-			
+
+			current_point = point;
 			PintaCore.Layers.ToolLayer.Hidden = true;
 			
 			DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.CurrentLayer);
@@ -187,7 +193,8 @@ namespace Pinta.Core
 		{
 			if (!is_drawing)
 				return;
-			
+
+			current_point = point;
 			double x = point.X;
 			double y = point.Y;
 			
@@ -264,6 +271,7 @@ namespace Pinta.Core
 		
 		protected bool StrokeShape { get { return fill_outline.ComboBox.Active % 2 == 0; } }
 		protected bool FillShape { get { return fill_outline.ComboBox.Active >= 1; } }
+		protected virtual bool ShowStrokeComboBox { get { return true; } }
 		#endregion
 	}
 }
