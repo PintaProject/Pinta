@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
@@ -75,6 +76,9 @@
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs\HueSaturationDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
+    <Compile Include="Dialogs\CurvesDialog.cs" />
+    <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

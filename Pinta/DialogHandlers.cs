@@ -42,6 +42,7 @@ namespace Pinta
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleAdjustmentsBrightnessContrastActivated;
+			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 		}
@@ -179,6 +180,11 @@ namespace Pinta
 		private void HandleAdjustmentsPosterizeActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new PosterizeEffect ());
+		}
+		
+		private void HandleAdjustmentsCurvesActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect ());	
 		}
 		#endregion
 	}
