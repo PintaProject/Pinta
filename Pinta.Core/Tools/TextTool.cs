@@ -34,53 +34,53 @@ namespace Pinta.Core
 {
 	public class TextTool : BaseTool
 	{
-        private enum EditingMode
-        {
-            NotEditing,
-            EmptyEdit,
-            Editing
-        }
-		
+		private enum EditingMode
+		{
+			NotEditing,
+			EmptyEdit,
+			Editing
+		}
+
 		public override string Name {
 			get { return "Text"; }
 		}
 		public override string Icon {
 			get { return "Tools.Text.png"; }
 		}
-		
+
 		public override string StatusBarText {
-			get { return "Write text.";}
+			get { return "Write text."; }
 		}
 
 
-        //private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
-        private Cairo.PointD startMouseXY;
-        private Cairo.PointD startClickPoint;
-        private bool tracking;
+		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
+		private Cairo.PointD startMouseXY;
+		private Cairo.PointD startClickPoint;
+		private bool tracking;
 
-        //private MoveNubRenderer moveNub;
-        private int ignoreRedraw;
-        //private Cairo.Context context;
-        private EditingMode mode;
-        private List<string> lines;
-        private int linePos;
-        private int textPos;
-        private Cairo.PointD clickPoint;
-        //private Font font;
-        //private TextAlignment alignment;
-        //private IrregularSurface saved;
-        private const int cursorInterval = 300;
-        private bool pulseEnabled;
-        private System.DateTime startTime;
-        private bool lastPulseCursorState;
-        //private System.Threading.ThreadPool threadPool;
-        private bool enableNub = true;
+		//private MoveNubRenderer moveNub;
+		private int ignoreRedraw;
+		//private Cairo.Context context;
+		private EditingMode mode;
+		private List<string> lines;
+		private int linePos;
+		private int textPos;
+		private Cairo.PointD clickPoint;
+		//private Font font;
+		//private TextAlignment alignment;
+		//private IrregularSurface saved;
+		private const int cursorInterval = 300;
+		private bool pulseEnabled;
+		private System.DateTime startTime;
+		private bool lastPulseCursorState;
+		//private System.Threading.ThreadPool threadPool;
+		private bool enableNub = true;
 
-        //private CompoundHistoryMemento currentHA;
+		//private CompoundHistoryMemento currentHA;
 
-        private bool controlKeyDown = false;
-        private DateTime controlKeyDownTime = DateTime.MinValue;
-        private readonly TimeSpan controlKeyDownThreshold = new TimeSpan(0, 0, 0, 0, 400);
+		private bool controlKeyDown = false;
+		private DateTime controlKeyDownTime = DateTime.MinValue;
+		private readonly TimeSpan controlKeyDownThreshold = new TimeSpan (0, 0, 0, 0, 400);
 		/*
         private void AlphaBlendingChangedHandler(object sender, EventArgs e)
         {
@@ -177,127 +177,208 @@ namespace Pinta.Core
 			}
 		}*/
 
-        protected override void OnActivated()
-        {
-            //PdnBaseForm.RegisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
-
-            base.OnActivated();
-
-            //this.textToolCursor = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Text.png"), 0, 0);
-					
-            //this.Cursor = this.textToolCursor;
-
-            /*fontChangedDelegate = new EventHandler(FontChangedHandler);
+		protected override void OnActivated ()
+		{
+			//PdnBaseForm.RegisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
+			
+			base.OnActivated ();
+			
+			//this.textToolCursor = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Text.png"), 0, 0);
+			
+			//this.Cursor = this.textToolCursor;
+			
+						/*fontChangedDelegate = new EventHandler(FontChangedHandler);
             fontSmoothingChangedDelegate = new EventHandler(FontSmoothingChangedHandler);
             alignmentChangedDelegate = new EventHandler(AlignmentChangedHandler);
             brushChangedDelegate = new EventHandler(BrushChangedHandler);
             antiAliasChangedDelegate = new EventHandler(AntiAliasChangedHandler);
             foreColorChangedDelegate = new EventHandler(ForeColorChangedHandler);
 			 */
-            //context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface);
-            mode = EditingMode.NotEditing;
-            
-            //font = AppEnvironment.FontInfo.CreateFont();
-            //alignment = AppEnvironment.TextAlignment;
-
-            //AppEnvironment.BrushInfoChanged += brushChangedDelegate;
-            /*AppEnvironment.FontInfoChanged += fontChangedDelegate;
+			//context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface);
+mode = EditingMode.NotEditing;
+			
+			//font = AppEnvironment.FontInfo.CreateFont();
+			//alignment = AppEnvironment.TextAlignment;
+			
+			//AppEnvironment.BrushInfoChanged += brushChangedDelegate;
+		}
+			/*AppEnvironment.FontInfoChanged += fontChangedDelegate;
             AppEnvironment.FontSmoothingChanged += fontSmoothingChangedDelegate;
             AppEnvironment.TextAlignmentChanged += alignmentChangedDelegate;
             AppEnvironment.AntiAliasingChanged += antiAliasChangedDelegate;
             AppEnvironment.PrimaryColorChanged += foreColorChangedDelegate;
             AppEnvironment.SecondaryColorChanged += new EventHandler(BackColorChangedHandler);
             AppEnvironment.AlphaBlendingChanged += new EventHandler(AlphaBlendingChangedHandler);
-            */
-            //this.threadPool = new System.Threading.ThreadPool ();
-
-            /*this.moveNub = new MoveNubRenderer(this.RendererList);
+            */			
+			//this.threadPool = new System.Threading.ThreadPool ();
+			
+			/*this.moveNub = new MoveNubRenderer(this.RendererList);
             this.moveNub.Shape = MoveNubShape.Compass;
             this.moveNub.Size = new SizeF(10, 10);
             this.moveNub.Visible = false;
             this.RendererList.Add(this.moveNub, false);
-            */
-        }
-
+            */			
+		
 		#region ToolBar
 		
-		private ToolBarLabel font_label = null;
-		private ToolBarComboBox font_combo = null;
-		private ToolBarComboBox size_combo = null;
-		
+		private ToolBarLabel font_label;
+		private ToolBarComboBox font_combo;
+		private ToolBarComboBox size_combo;
+		private ToolBarButton bold_btn;
+		private ToolBarButton italic_btn;
+		private ToolBarButton underscore_btn;
+		private ToolBarButton left_alignment_btn;
+		private ToolBarButton center_alignment_btn;
+		private ToolBarButton Right_alignment_btn;
+
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
-			//Font
-			//size
-			//bold
-			//italic
-			//underscore
-			//alignment
+			//TODO
 			//fontSmoothing
-			//color or use primary color?
 			
 			base.OnBuildToolBar (tb);
-
+			
 			if (font_label == null)
 				font_label = new ToolBarLabel (" Font: ");
-
+			
 			tb.AppendItem (font_label);
 			
 			List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (PintaCore.Chrome.DrawingArea.PangoContext.Families);
 			List<string> entries = new List<string> ();
-			fonts.ForEach( f => entries.Add(f.Name));
+			fonts.ForEach (f => entries.Add (f.Name));
+			
 			//by default Arial!
-			int index = entries.IndexOf("Arial");
+			int index = entries.IndexOf ("Arial");
 			if (index < 0)
 				index = 0;
-			if (font_combo == null)
-				font_combo = new ToolBarComboBox (100, index, false, entries.ToArray());
 			
-
+			if (font_combo == null)
+				font_combo = new ToolBarComboBox (100, index, false, entries.ToArray ());
+						
 			tb.AppendItem (font_combo);
 			
 			//size depend on font and modifier (italic, bold,...)
-			Pango.FontFamily fam = fonts.Find(f => f.Name == font_combo.ComboBox.ActiveText);
-						
-			entries.Clear ();
-			foreach (int i in GetSizeList(fam.Faces[0])) {
-				entries.Add (i.ToString());
+			Pango.FontFamily fam = fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
+			
+			entries = new List<string> ();
+			foreach (int i in GetSizeList (fam.Faces[0])) {
+				entries.Add (i.ToString ());
 			}
 			//by default 11!
-			index = entries.IndexOf("11");
+			index = entries.IndexOf ("11");
 			if (index < 0)
 				index = 0;
-			
-			//TODO combobox editable if font is scalable
+
 			if (size_combo == null)
-				size_combo = new ToolBarComboBox (30, index, true, entries.ToArray());
-				
+				size_combo = new ToolBarComboBox (50, index, true, entries.ToArray ());
+			
 			tb.AppendItem (size_combo);
+			
+			tb.AppendItem (new SeparatorToolItem ());
+			
+			if (bold_btn == null) {
+				bold_btn = new ToolBarButton ("Toolbar.Bold.png", "Bold", "Bold the text");
+				bold_btn.Clicked += HandleBoldButtonClicked;
+			}
+			
+			tb.AppendItem (bold_btn);
+			
+			if (italic_btn == null) {
+				italic_btn = new ToolBarButton ("Toolbar.Italic.png", "Italic", "Italic the text");
+				italic_btn.Clicked += HandleItalicButtonClicked;;
+			}
+			
+			tb.AppendItem (italic_btn);
+			
+			if (underscore_btn == null) {
+				underscore_btn = new ToolBarButton ("Toolbar.Underscore.png", "Uncerscore", "Underscore the text");
+				underscore_btn.Clicked += HandleUnderscoreButtonClicked;
+			}
+			
+			tb.AppendItem (underscore_btn);
+			
+			tb.AppendItem (new SeparatorToolItem ());
+			
+			if (left_alignment_btn == null) {
+				left_alignment_btn = new ToolBarButton ("Toolbar.LeftAlignment.png", "Align left", "Align left the text");
+				left_alignment_btn.Clicked += HandleLeftAlignmentButtonClicked;;
+			}
+			
+			tb.AppendItem (left_alignment_btn);
+			
+			if (center_alignment_btn == null) {
+				center_alignment_btn = new ToolBarButton ("Toolbar.CenterAlignment.png", "Align center", "Align center the text");
+				center_alignment_btn.Clicked += HandleCenterAlignmentButtonClicked;;
+			}
+			
+			tb.AppendItem (center_alignment_btn);
+			
+			if (Right_alignment_btn == null) {
+				Right_alignment_btn = new ToolBarButton ("Toolbar.RightAlignment.png", "Align right", "Align right the text");
+				Right_alignment_btn.Clicked += HandleRightAlignmentButtonClicked;;
+			}
+			
+			tb.AppendItem (Right_alignment_btn);
+			
 		}
 
-		private unsafe List<int> GetSizeList (Pango.FontFace fontFace)
+		void HandleLeftAlignmentButtonClicked (object sender, EventArgs e)
+		{
+			
+		}
+		
+		void HandleCenterAlignmentButtonClicked (object sender, EventArgs e)
+		{
+			
+		}
+
+		void HandleRightAlignmentButtonClicked (object sender, EventArgs e)
+		{
+			
+		}
+
+
+		void HandleUnderscoreButtonClicked (object sender, EventArgs e)
+		{
+			
+		}
+
+		void HandleItalicButtonClicked (object sender, EventArgs e)
+		{
+			
+		}
+
+		void HandleBoldButtonClicked (object sender, EventArgs e)
+		{
+			
+		}
+		
+		unsafe private List<int> GetSizeList (Pango.FontFace fontFace)
 		{
 			List<int> result = new List<int> ();
 			int sizes;
 			int nsizes;
-			fontFace.ListSizes(out sizes, out nsizes);
+			fontFace.ListSizes (out sizes, out nsizes);
 			if (nsizes == 0)
-				result.AddRange(new int[]{6,7,8,9,10,11,12,14,15, 16,18,20,22,24,26,28,32,36,40,44,48,54,60,66,72,80,88,96});
+				result.AddRange (new int[] { 6, 7, 8, 9, 10, 11, 12, 14, 15, 16,
+				18, 20, 22, 24, 26, 28, 32, 36, 40, 44,
+				48, 54, 60, 66, 72, 80, 88, 96 });
 			else {
 				for (int i = 0; i < nsizes; i++) {
-					result.Add(* (& sizes + 4 * i));
+					result.Add (*(&sizes + 4 * i));
 				}
 			}
 			return result;
 		}
 
 		#endregion
-		
-        protected override void OnDeactivated()
-        {
-            //PdnBaseForm.UnregisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
 
-            base.OnDeactivated();
+		protected override void OnDeactivated ()
+		{
+			//PdnBaseForm.UnregisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
+			
+			base.OnDeactivated ();
+		}
 			/*
             switch (mode)
             {
@@ -349,8 +430,8 @@ namespace Pinta.Core
                 this.textToolCursor.Dispose();
                 this.textToolCursor = null;
             }
-            */
-        }
+            */			
+			}
 		/*
         private void StopEditing()
         {
@@ -1694,7 +1775,7 @@ namespace Pinta.Core
             {
                 canHandle = true;
             }
-        }*/
+        }*/		
 		/*
         /*protected override void OnPaste(IDataObject data, out bool handled)
         {
@@ -1724,15 +1805,15 @@ namespace Pinta.Core
 
                 this.RedrawText(false);
             }
-        }*/
+        }*/		
 		/*
         private void InsertCharIntoString(char c)
         {
             lines[linePos] = ((string)lines[linePos]).Insert(textPos, c.ToString());
             this.sizes = null;
         }
-		*/
-        /*public TextTool(DocumentWorkspace documentWorkspace)
+		*/		
+		/*public TextTool(DocumentWorkspace documentWorkspace)
             : base(documentWorkspace,
                    ImageResource.Get("Icons.TextToolIcon.png"),
                    PdnResources.GetString("TextTool.Name"),
@@ -1741,6 +1822,5 @@ namespace Pinta.Core
                    false,
                    ToolBarConfigItems.Brush | ToolBarConfigItems.Text | ToolBarConfigItems.AlphaBlending | ToolBarConfigItems.Antialiasing)
         {
-        }*/
-    }
-}
+        }*/		
+				}
