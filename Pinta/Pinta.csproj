@@ -75,8 +75,6 @@
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs\HueSaturationDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
-    <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

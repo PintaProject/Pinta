@@ -183,25 +183,22 @@ namespace Pinta.Core
 			
 			base.OnActivated ();
 			
+			PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
+			
 			//this.textToolCursor = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Text.png"), 0, 0);
 			
 			//this.Cursor = this.textToolCursor;
 			
-						/*fontChangedDelegate = new EventHandler(FontChangedHandler);
-            fontSmoothingChangedDelegate = new EventHandler(FontSmoothingChangedHandler);
-            alignmentChangedDelegate = new EventHandler(AlignmentChangedHandler);
-            brushChangedDelegate = new EventHandler(BrushChangedHandler);
-            antiAliasChangedDelegate = new EventHandler(AntiAliasChangedHandler);
-            foreColorChangedDelegate = new EventHandler(ForeColorChangedHandler);
-			 */
+			
 			//context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface);
 mode = EditingMode.NotEditing;
 			
 			//font = AppEnvironment.FontInfo.CreateFont();
 			//alignment = AppEnvironment.TextAlignment;
 			
-			//AppEnvironment.BrushInfoChanged += brushChangedDelegate;
+			
 		}
+
 			/*AppEnvironment.FontInfoChanged += fontChangedDelegate;
             AppEnvironment.FontSmoothingChanged += fontSmoothingChangedDelegate;
             AppEnvironment.TextAlignmentChanged += alignmentChangedDelegate;
@@ -224,12 +221,12 @@ mode = EditingMode.NotEditing;
 		private ToolBarLabel font_label;
 		private ToolBarComboBox font_combo;
 		private ToolBarComboBox size_combo;
-		private ToolBarButton bold_btn;
-		private ToolBarButton italic_btn;
-		private ToolBarButton underscore_btn;
-		private ToolBarButton left_alignment_btn;
-		private ToolBarButton center_alignment_btn;
-		private ToolBarButton Right_alignment_btn;
+		private ToolBarToggleButton bold_btn;
+		private ToolBarToggleButton italic_btn;
+		private ToolBarToggleButton underscore_btn;
+		private ToolBarToggleButton left_alignment_btn;
+		private ToolBarToggleButton center_alignment_btn;
+		private ToolBarToggleButton Right_alignment_btn;
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -277,22 +274,22 @@ mode = EditingMode.NotEditing;
 			tb.AppendItem (new SeparatorToolItem ());
 			
 			if (bold_btn == null) {
-				bold_btn = new ToolBarButton ("Toolbar.Bold.png", "Bold", "Bold the text");
-				bold_btn.Clicked += HandleBoldButtonClicked;
+				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", "Bold", "Bold the text");
+				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
 			
 			tb.AppendItem (bold_btn);
 			
 			if (italic_btn == null) {
-				italic_btn = new ToolBarButton ("Toolbar.Italic.png", "Italic", "Italic the text");
-				italic_btn.Clicked += HandleItalicButtonClicked;;
+				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", "Italic", "Italic the text");
+				italic_btn.Toggled += HandleItalicButtonToggled;;
 			}
 			
 			tb.AppendItem (italic_btn);
 			
 			if (underscore_btn == null) {
-				underscore_btn = new ToolBarButton ("Toolbar.Underscore.png", "Uncerscore", "Underscore the text");
-				underscore_btn.Clicked += HandleUnderscoreButtonClicked;
+				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", "Uncerline", "Underline the text");
+				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
 			
 			tb.AppendItem (underscore_btn);
@@ -300,57 +297,82 @@ mode = EditingMode.NotEditing;
 			tb.AppendItem (new SeparatorToolItem ());
 			
 			if (left_alignment_btn == null) {
-				left_alignment_btn = new ToolBarButton ("Toolbar.LeftAlignment.png", "Align left", "Align left the text");
-				left_alignment_btn.Clicked += HandleLeftAlignmentButtonClicked;;
+				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", "Align left", "Align text to left");
+				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;;
 			}
 			
 			tb.AppendItem (left_alignment_btn);
 			
 			if (center_alignment_btn == null) {
-				center_alignment_btn = new ToolBarButton ("Toolbar.CenterAlignment.png", "Align center", "Align center the text");
-				center_alignment_btn.Clicked += HandleCenterAlignmentButtonClicked;;
+				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", "Align center", "Align text to center");
+				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;;
 			}
 			
 			tb.AppendItem (center_alignment_btn);
 			
 			if (Right_alignment_btn == null) {
-				Right_alignment_btn = new ToolBarButton ("Toolbar.RightAlignment.png", "Align right", "Align right the text");
-				Right_alignment_btn.Clicked += HandleRightAlignmentButtonClicked;;
+				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", "Align right", "Align text to right");
+				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;;
 			}
 			
 			tb.AppendItem (Right_alignment_btn);
-			
 		}
 
-		void HandleLeftAlignmentButtonClicked (object sender, EventArgs e)
+		void HandlePintaCorePalettePrimaryColorChanged (object sender, EventArgs e)
 		{
-			
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
 		}
 		
-		void HandleCenterAlignmentButtonClicked (object sender, EventArgs e)
+		void HandleLeftAlignmentButtonToggled (object sender, EventArgs e)
 		{
-			
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
+		}
+		
+		void HandleCenterAlignmentButtonToggled (object sender, EventArgs e)
+		{
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
 		}
 
-		void HandleRightAlignmentButtonClicked (object sender, EventArgs e)
+		void HandleRightAlignmentButtonToggled (object sender, EventArgs e)
 		{
-			
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
 		}
 
 
-		void HandleUnderscoreButtonClicked (object sender, EventArgs e)
+		void HandleUnderscoreButtonToggled (object sender, EventArgs e)
 		{
-			
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
 		}
 
-		void HandleItalicButtonClicked (object sender, EventArgs e)
+		void HandleItalicButtonToggled (object sender, EventArgs e)
 		{
-			
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
 		}
 
-		void HandleBoldButtonClicked (object sender, EventArgs e)
+		void HandleBoldButtonToggled (object sender, EventArgs e)
 		{
-			
+			if (mode != EditingMode.NotEditing)
+            {
+                RedrawText(true);
+            }
 		}
 		
 		unsafe private List<int> GetSizeList (Pango.FontFace fontFace)
@@ -378,7 +400,7 @@ mode = EditingMode.NotEditing;
 			//PdnBaseForm.UnregisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
 			
 			base.OnDeactivated ();
-		}
+		
 			/*
             switch (mode)
             {
@@ -1044,7 +1066,7 @@ mode = EditingMode.NotEditing;
                 }
             }
         }
-
+	 */
         /// <summary>
         /// Redraws the Text on the screen
         /// </summary>
@@ -1140,10 +1162,7 @@ mode = EditingMode.NotEditing;
             }
 
             // Set the saved region
-            using (PdnRegion reg = Utility.RectanglesToRegion(Utility.InflateRectangles(rects, 3)))
-            {
-                saved = new IrregularSurface(context.Surface, reg);
-            }
+            saved = new IrregularSurface(context.Surface, Utility.InflateRectangles(rects, 3));
 
             // Draw the Lines
             this.uls = localUls;
@@ -1164,6 +1183,10 @@ mode = EditingMode.NotEditing;
                 }
                 else
                 {
+					context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface);
+					
+					context.DrawLine(cursorRect, 2);
+					/*
 					context.AppendPath (PintaCore.Layers.SelectionPath);
 					context.FillRule = FillRule.EvenOdd;
 					context.Clip ();
@@ -1178,6 +1201,7 @@ mode = EditingMode.NotEditing;
 					context.LineCap = LineCap.Square;
 					
 					context.Stroke ();
+					*/
                 }
             }
 
@@ -1186,7 +1210,7 @@ mode = EditingMode.NotEditing;
             ActiveLayer.Invalidate(saved.Region);
             Update();
         }
-
+/*
         private string GetStatusBarXYText()
         {
             string unitsAbbreviationXY;
@@ -1823,4 +1847,5 @@ mode = EditingMode.NotEditing;
                    ToolBarConfigItems.Brush | ToolBarConfigItems.Text | ToolBarConfigItems.AlphaBlending | ToolBarConfigItems.Antialiasing)
         {
         }*/		
-				}
+	}
+}

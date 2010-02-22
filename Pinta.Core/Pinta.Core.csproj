@@ -73,11 +73,13 @@
     <Compile Include="HistoryItems\DeleteLayerHistoryItem.cs" />
     <Compile Include="HistoryItems\InvertHistoryItem.cs" />
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
+    <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
     <Compile Include="Managers\HistoryManager.cs" />
     <Compile Include="Managers\LayerManager.cs" />
     <Compile Include="Managers\PaletteManager.cs" />
     <Compile Include="Managers\ToolManager.cs" />
+    <Compile Include="Managers\WorkspaceManager.cs" />
     <Compile Include="PintaCore.cs" />
     <Compile Include="Extensions\CairoExtensions.cs" />
     <Compile Include="Extensions\GdkExtensions.cs" />
@@ -87,7 +89,6 @@
     <Compile Include="Extensions\ToolBarComboBox.cs" />
     <Compile Include="Extensions\ToolBarImage.cs" />
     <Compile Include="Extensions\ToolBarLabel.cs" />
-    <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Actions\LayerActions.cs" />
     <Compile Include="Actions\FileActions.cs" />
     <Compile Include="Actions\EditActions.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Actions\ImageActions.cs" />
     <Compile Include="Actions\AdjustmentsActions.cs" />
     <Compile Include="Actions\HelpActions.cs" />
-    <Compile Include="Managers\WorkspaceManager.cs" />
     <Compile Include="Effects\ColorBgra.cs" />
     <Compile Include="Effects\UnaryPixelOps.cs" />
     <Compile Include="Effects\UnaryPixelOp.cs" />
@@ -124,12 +124,11 @@
     <Compile Include="Tools\RoundedRectangleTool.cs" />
     <Compile Include="Tools\SelectTool.cs" />
     <Compile Include="Tools\ShapeTool.cs" />
+    <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />
     <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
-    <Compile Include="Tools\PaintBucketTool.cs" />
-    <Compile Include="Tools\TextTool.cs" />
-    <Compile Include="Tools\PaintBucketTool.cs" />
+    <Compile Include="Extensions\ToolBarToggleButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
