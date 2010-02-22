@@ -225,9 +225,9 @@ namespace Pinta.Core
 
 		#region ToolBar
 		
-		private ToolBarLabel font_label;
-		private ToolBarComboBox font_combo;
-		private ToolBarComboBox size_combo;
+		private ToolBarLabel font_label = null;
+		private ToolBarComboBox font_combo = null;
+		private ToolBarComboBox size_combo = null;
 		
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -250,26 +250,51 @@ namespace Pinta.Core
 			List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (PintaCore.Chrome.DrawingArea.PangoContext.Families);
 			List<string> entries = new List<string> ();
 			fonts.ForEach( f => entries.Add(f.Name));
-
+			//by default Arial!
+			int index = entries.IndexOf("Arial");
+			if (index < 0)
+				index = 0;
 			if (font_combo == null)
-				font_combo = new ToolBarComboBox (100, 0, false, entries.ToArray());
+				font_combo = new ToolBarComboBox (100, index, false, entries.ToArray());
 			
 
 			tb.AppendItem (font_combo);
 			
 			//size depend on font and modifier (italic, bold,...)
-			int sizes;
-			int nsizes;
-			fonts.Find(f => f.Name == font_combo.ComboBox.ActiveText ).Faces[0].ListSizes(out sizes, out nsizes);
+			Pango.FontFamily fam = fonts.Find(f => f.Name == font_combo.ComboBox.ActiveText);
+						
 			entries.Clear ();
-			for (int i = sizes; i< nsizes ; i++) //TODO find the good use of nsize
+			foreach (int i in GetSizeList(fam.Faces[0])) {
 				entries.Add (i.ToString());
+			}
+			//by default 11!
+			index = entries.IndexOf("11");
+			if (index < 0)
+				index = 0;
 			
+			//TODO combobox editable if font is scalable
 			if (size_combo == null)
-				size_combo = new ToolBarComboBox (20, 0, false, entries.ToArray());
+				size_combo = new ToolBarComboBox (30, index, true, entries.ToArray());
 				
 			tb.AppendItem (size_combo);
 		}
+
+		private unsafe List<int> GetSizeList (Pango.FontFace fontFace)
+		{
+			List<int> result = new List<int> ();
+			int sizes;
+			int nsizes;
+			fontFace.ListSizes(out sizes, out nsizes);
+			if (nsizes == 0)
+				result.AddRange(new int[]{6,7,8,9,10,11,12,14,15, 16,18,20,22,24,26,28,32,36,40,44,48,54,60,66,72,80,88,96});
+			else {
+				for (int i = 0; i < nsizes; i++) {
+					result.Add(* (& sizes + 4 * i));
+				}
+			}
+			return result;
+		}
+
 		#endregion
 		
         protected override void OnDeactivated()
