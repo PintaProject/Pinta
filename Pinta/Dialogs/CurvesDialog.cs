@@ -160,8 +160,7 @@ namespace Pinta
 		private void AddControlPoint (int x, int y)
 		{
 			foreach (var controlPoints in GetActiveControlPoints ()) {
-				if (!controlPoints.ContainsKey (x))
-					controlPoints.Add (x, size - 1 - y);
+				controlPoints [x] = size - 1 - y;
 			}
 			
 			last_cpx = x;
@@ -173,11 +172,18 @@ namespace Pinta
 			Gdk.ModifierType mask;
 			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
 			
+			
+			if (x < 0 || x >= size || y < 0 || y >=size)
+				return;
+			
 			if (args.Event.State == Gdk.ModifierType.Button1Mask) {
-				foreach (var controlPoints in GetActiveControlPoints ()) {
-					if (controlPoints.ContainsKey (last_cpx))
-						controlPoints.Remove (last_cpx);
-				}
+				// first and last control point cannot be removed
+				if (last_cpx != 0 && last_cpx != size - 1) {
+					foreach (var controlPoints in GetActiveControlPoints ()) {
+						if (controlPoints.ContainsKey (last_cpx))
+							controlPoints.Remove (last_cpx);
+					}
+				}	
 				
 				AddControlPoint (x, y);
 			}
@@ -195,12 +201,19 @@ namespace Pinta
 				AddControlPoint (x, y);
 			} 
 			
+			// user pressed right button
 			if (args.Event.Button == 3) {
 				foreach (var controlPoints in GetActiveControlPoints ()) {
 					for (int i = 0; i < controlPoints.Count; i++) {
 						int cpx = controlPoints.Keys [i];
 						int cpy = size - 1 - (int)controlPoints.Values [i];
 					
+						//we cannot allow user to remove first or last control point
+						if (cpx == 0 && cpy == size - 1)
+							continue;	
+						if (cpx == size -1 && cpy == 0)
+							continue;
+						    
 						if (CheckControlPointProximity (cpx, cpy, x, y)) {
 							controlPoints.RemoveAt (i);
 							break;
@@ -302,24 +315,24 @@ namespace Pinta
 					int cpy = size - 1 - (int)controlPoints.Values [i];			
 					Rectangle rect;
 	
-					if (CheckControlPointProximity (cpx, cpy, x, y) && info.IsActive ) {
-						rect = new Rectangle (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
-						context.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
-						rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
-						context.FillEllipse (rect, new Color (0.9, 0.9, 0.9));
-					} else {
-						if (info.IsActive) {
+					if (info.IsActive)  {
+						if (CheckControlPointProximity (cpx, cpy, x, y)) {
+							rect = new Rectangle (cpx - (radius + 2) / 2, cpy - (radius + 2) / 2, radius + 2, radius + 2);
+							context.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
+							rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
+							context.FillEllipse (rect, new Color (0.9, 0.9, 0.9));
+						} else {
 							rect = new Rectangle (cpx - radius / 2, cpy - radius / 2, radius, radius);
 							context.DrawEllipse (rect, info.Color, 2);
 						}
-					
-						rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius -2);
-						context.FillEllipse (rect, info.Color);
 					}
+					
+					rect = new Rectangle (cpx - (radius - 2) / 2, cpy - (radius - 2) / 2, radius - 2, radius -2);
+					context.FillEllipse (rect, info.Color);
 				}
-				
-				context.Stroke ();
 			}
+				
+			context.Stroke ();
 		}
 			
 		private void DrawSpline (Context context)
@@ -340,10 +353,8 @@ namespace Pinta
 				
 				for (int i = 0; i < line.Length; i++) {
 	                line[i].X = (float)i;
-	                line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate(i), 0, size - 1));
+	                line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate (i), 0, size - 1));
 					
-					//hack to draw line inside drawing area when y is 0
-					line[i].Y = (line[i].Y != 0) ? line[i].Y : 1;
 	            }
 				
 				context.LineWidth = 2;
