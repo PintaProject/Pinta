@@ -119,7 +119,7 @@ namespace Pinta.Core
 			base.OnMouseMove (o, args, point);
 
 			if (mouseDown == 1) {
-				if (Math.Abs (shape_origin.X - point.X) <= tolerance && Math.Abs (shape_origin.Y - point.Y) <= tolerance)  // if they've moved the mouse more than 10 pixels since they clicked
+				if (Math.Abs (shape_origin.X - point.X) > tolerance || Math.Abs (shape_origin.Y - point.Y) > tolerance)  // if they've moved the mouse more than 10 pixels since they clicked
 					is_drawing = true;
 					
 				//still draw rectangle after we have draw it one time...
@@ -133,7 +133,8 @@ namespace Pinta.Core
 		{
 			double x = point.X;
 			double y = point.Y;
-
+			PintaCore.Layers.ToolLayer.Hidden = true;
+			
 			if (mouseDown == 1 || mouseDown == 3) {	//left or right
 				if (args.Event.Button == 1) {	//left
 					if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
@@ -149,9 +150,9 @@ namespace Pinta.Core
 			}
 
 			mouseDown = 0;
-			PintaCore.Layers.ToolLayer.Hidden = true;
+			
 			is_drawing = false;
-			SetCursor (cursorZoom);		//restore regular cursor
+			SetCursor (cursorZoom);//restore regular cursor
 		}
 
 		Rectangle PointsToRectangle (Cairo.PointD p1, Cairo.PointD p2)

@@ -1076,6 +1076,7 @@ mode = EditingMode.NotEditing;
         /// <param name="cursorOn"></param>
         private void RedrawText(bool cursorOn)
         {
+			/*
             if (this.ignoreRedraw > 0)
             {
                 return;
@@ -1194,6 +1195,7 @@ mode = EditingMode.NotEditing;
             UpdateStatusText();
             ActiveLayer.Invalidate(saved.Region);
             Update();
+            */
         }
 /*
         private string GetStatusBarXYText()

@@ -33,9 +33,7 @@ namespace Pinta {
         
         private Gtk.HScale hscale1;
         
-        private Gtk.Button buttonCancel;
-        
-        private Gtk.Button buttonOk;
+        private Gtk.Button buttonClose;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -154,30 +152,17 @@ namespace Pinta {
             w12.BorderWidth = ((uint)(5));
             w12.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
             // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.buttonCancel = new Gtk.Button();
-            this.buttonCancel.CanDefault = true;
-            this.buttonCancel.CanFocus = true;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseStock = true;
-            this.buttonCancel.UseUnderline = true;
-            this.buttonCancel.Label = "gtk-cancel";
-            this.AddActionWidget(this.buttonCancel, -6);
-            Gtk.ButtonBox.ButtonBoxChild w13 = ((Gtk.ButtonBox.ButtonBoxChild)(w12[this.buttonCancel]));
+            this.buttonClose = new Gtk.Button();
+            this.buttonClose.CanDefault = true;
+            this.buttonClose.CanFocus = true;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.UseStock = true;
+            this.buttonClose.UseUnderline = true;
+            this.buttonClose.Label = "gtk-close";
+            this.AddActionWidget(this.buttonClose, -7);
+            Gtk.ButtonBox.ButtonBoxChild w13 = ((Gtk.ButtonBox.ButtonBoxChild)(w12[this.buttonClose]));
             w13.Expand = false;
             w13.Fill = false;
-            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.buttonOk = new Gtk.Button();
-            this.buttonOk.CanDefault = true;
-            this.buttonOk.CanFocus = true;
-            this.buttonOk.Name = "buttonOk";
-            this.buttonOk.UseStock = true;
-            this.buttonOk.UseUnderline = true;
-            this.buttonOk.Label = "gtk-ok";
-            this.AddActionWidget(this.buttonOk, -5);
-            Gtk.ButtonBox.ButtonBoxChild w14 = ((Gtk.ButtonBox.ButtonBoxChild)(w12[this.buttonOk]));
-            w14.Position = 1;
-            w14.Expand = false;
-            w14.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
