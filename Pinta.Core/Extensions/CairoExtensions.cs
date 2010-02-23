@@ -495,7 +495,31 @@ namespace Pinta.Core
 
 			return *dstPtr;
 		}
-		
+
+		public static ColorBgra ToColorBgra (this Cairo.Color color)
+		{
+			ColorBgra c = new ColorBgra ();
+
+			c.R = (byte)(color.R * 255);
+			c.G = (byte)(color.G * 255);
+			c.B = (byte)(color.B * 255);
+			c.A = (byte)(color.A * 255);
+
+			return c;
+		}
+
+		public static Cairo.Color ToCairoColor (this ColorBgra color)
+		{
+			Cairo.Color c = new Cairo.Color ();
+
+			c.R = color.R / 255d;
+			c.G = color.G / 255d;
+			c.B = color.B / 255d;
+			c.A = color.A / 255d;
+
+			return c;
+		}
+
 		public static string ToString2 (this Cairo.Color c)
 		{
 			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);

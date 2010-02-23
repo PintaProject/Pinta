@@ -1,10 +1,10 @@
 // 
-// UnimplementedTools.cs
+// ObservableObject.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Greg Lowe <greg@vis.net.nz>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Greg Lowe
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,46 +28,21 @@ using System;
 
 namespace Pinta.Core
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class MagicWandTool : BaseTool
+
+	public class ObservableObject
 	{
-		public override string Name {
-			get { return "Magic Wand"; }
+		public ObservableObject ()
+		{
 		}
-		public override string Icon {
-			get { return "Tools.MagicWand.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
-		
-	public class GradientTool : BaseTool
-	{
-		public override string Name {
-			get { return "Gradient"; }
-		}
-		public override string Icon {
-			get { return "Tools.Gradient.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
+				
+		public event PropertyChangedEventHandler PropertyChanged;
+				
+		protected void SetValue<T> (string propertyName, ref T member, T value)
+		{
+			member = value;
 			
-	public class CloneStampTool : BaseTool
-	{
-		public override string Name {
-			get { return "Clone Stamp"; }
-		}
-		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}		
 	}
-			
 }

@@ -30,40 +30,89 @@ using Pinta.Core;
 namespace Pinta
 {
 	public partial class LayerPropertiesDialog : Gtk.Dialog
-	{
+	{		
+		private LayerProperties initial_properties;
+		
+		private double opacity;
+		private bool hidden;
+		private string name;
+		
 		public LayerPropertiesDialog ()
 		{
 			this.Build ();
 
 			this.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.LayerProperties.png");
 			
-			entry1.Text = PintaCore.Layers.CurrentLayer.Name;
-			checkbutton1.Active = !PintaCore.Layers.CurrentLayer.Hidden;
-			spinbutton1.Value = (int)(PintaCore.Layers.CurrentLayer.Opacity * 100);
-			hscale1.Value = (int)(PintaCore.Layers.CurrentLayer.Opacity * 100);
+			name = PintaCore.Layers.CurrentLayer.Name;
+			hidden = PintaCore.Layers.CurrentLayer.Hidden;
+			opacity = PintaCore.Layers.CurrentLayer.Opacity;
+			
+			initial_properties = new LayerProperties(
+				name,				
+				hidden,
+				opacity);
+			
+			entry1.Text = initial_properties.Name;
+			checkbutton1.Active = !initial_properties.Hidden;
+			spinbutton1.Value = (int)(initial_properties.Opacity * 100);
+			hscale1.Value = (int)(initial_properties.Opacity * 100);
 
+			entry1.Changed += entry1_Changed;
+			checkbutton1.Toggled += checkbutton1_Toggled;
 			spinbutton1.ValueChanged += new EventHandler (spinbutton1_ValueChanged);
-			hscale1.ValueChanged += new EventHandler (hscale1_ValueChanged);
+			hscale1.ValueChanged += new EventHandler (hscale1_ValueChanged);			
+		}		
+		
+		public bool AreLayerPropertiesUpdated {
+			get {
+				return initial_properties.Opacity != opacity
+					|| initial_properties.Hidden != hidden
+					|| initial_properties.Name != name;
+			}
 		}
-
-		#region Public Methods
-		public void SaveChanges ()
-		{
-			PintaCore.Layers.CurrentLayer.Name = entry1.Text;
-			PintaCore.Layers.CurrentLayer.Hidden = !checkbutton1.Active;
-			PintaCore.Layers.CurrentLayer.Opacity = hscale1.Value / 100d;
+		
+		public LayerProperties InitialLayerProperties { 
+			get {
+				return initial_properties;
+			}
+		}		
+		
+		public LayerProperties UpdatedLayerProperties { 
+			get {
+				return new LayerProperties (name, hidden, opacity);
+			}
 		}
-		#endregion
-
+		
 		#region Private Methods
+		private void entry1_Changed (object sender, EventArgs e)
+		{
+			name = entry1.Text;
+			PintaCore.Layers.CurrentLayer.Name = name;
+		}
+		
+		private void checkbutton1_Toggled (object sender, EventArgs e)
+		{
+			hidden = !checkbutton1.Active;
+			PintaCore.Layers.CurrentLayer.Hidden = hidden;
+		}
+		
 		private void hscale1_ValueChanged (object sender, EventArgs e)
 		{
 			spinbutton1.Value = hscale1.Value;
+			UpdateOpacity ();
 		}
 
 		private void spinbutton1_ValueChanged (object sender, EventArgs e)
 		{
-			hscale1.Value = spinbutton1.Value;
+			hscale1.Value = spinbutton1.Value;			
+			UpdateOpacity ();
+		}
+		
+		private void UpdateOpacity ()
+		{
+			//TODO check redraws are being throttled.
+			opacity = spinbutton1.Value / 100d;
+			PintaCore.Layers.CurrentLayer.Opacity = opacity;
 		}
 		#endregion
 	}

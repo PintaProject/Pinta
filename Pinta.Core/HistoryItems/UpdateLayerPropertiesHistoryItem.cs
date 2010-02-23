@@ -1,10 +1,10 @@
 // 
-// UnimplementedTools.cs
+// UpdateLayerPropertiesHistoryItem.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Greg Lowe <greg@vis.net.nz>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Greg Lowe
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,46 +28,43 @@ using System;
 
 namespace Pinta.Core
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class MagicWandTool : BaseTool
+	public class UpdateLayerPropertiesHistoryItem : BaseHistoryItem
 	{
-		public override string Name {
-			get { return "Magic Wand"; }
+		int layer_index;
+		LayerProperties initial_properties;
+		LayerProperties updated_properties;
+
+		public UpdateLayerPropertiesHistoryItem (
+				 string icon,
+				 string text,
+				 int layerIndex,
+				 LayerProperties initialProperties,
+				 LayerProperties updatedProperties)
+			: base (icon, text)
+		{
+			layer_index = layerIndex;
+			initial_properties = initialProperties;
+			updated_properties = updatedProperties;
 		}
-		public override string Icon {
-			get { return "Tools.MagicWand.png"; }
+
+		public override void Undo ()
+		{			
+			var layer = PintaCore.Layers[layer_index];
+			layer.Opacity = initial_properties.Opacity;
+			layer.Hidden = initial_properties.Hidden;
+			layer.Name = initial_properties.Name;
 		}
-		public override bool Enabled {
-			get { return false; }
+
+		public override void Redo ()
+		{
+			var layer = PintaCore.Layers[layer_index];
+			layer.Opacity = updated_properties.Opacity;
+			layer.Hidden = updated_properties.Hidden;
+			layer.Name = updated_properties.Name;
+		}
+
+		public override void Dispose ()
+		{
 		}
 	}
-		
-	public class GradientTool : BaseTool
-	{
-		public override string Name {
-			get { return "Gradient"; }
-		}
-		public override string Icon {
-			get { return "Tools.Gradient.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
-			
-	public class CloneStampTool : BaseTool
-	{
-		public override string Name {
-			get { return "Clone Stamp"; }
-		}
-		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
-			
 }

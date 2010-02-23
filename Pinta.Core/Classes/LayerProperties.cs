@@ -1,10 +1,10 @@
 // 
-// UnimplementedTools.cs
+// LayerProperties.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       greg <${AuthorEmail}>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 greg
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,46 +28,20 @@ using System;
 
 namespace Pinta.Core
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class MagicWandTool : BaseTool
+
+	public class LayerProperties
 	{
-		public override string Name {
-			get { return "Magic Wand"; }
-		}
-		public override string Icon {
-			get { return "Tools.MagicWand.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
 		
-	public class GradientTool : BaseTool
-	{
-		public override string Name {
-			get { return "Gradient"; }
+		public LayerProperties (string name, bool hidden, double opacity)
+		{
+			this.Opacity = opacity;			
+			this.Hidden = hidden;
+			this.Name = name;
 		}
-		public override string Icon {
-			get { return "Tools.Gradient.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
+				
+		public string Name { get; private set; }				
+		public bool Hidden { get; private set; }				
+		public double Opacity { get; private set; }
+		
 	}
-			
-	public class CloneStampTool : BaseTool
-	{
-		public override string Name {
-			get { return "Clone Stamp"; }
-		}
-		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
-			
 }

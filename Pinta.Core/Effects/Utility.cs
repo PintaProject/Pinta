@@ -127,5 +127,23 @@ namespace Pinta.Core
 			return Gdk.Rectangle.FromLTRB (left, top, right, bottom);
 		}
 
+		public static int ColorDifference (ColorBgra a, ColorBgra b)
+		{
+			return (int)Math.Ceiling (Math.Sqrt (ColorDifferenceSquared (a, b)));
+		}
+
+		public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
+		{
+			int diffSq = 0, tmp;
+
+			tmp = a.R - b.R;
+			diffSq += tmp * tmp;
+			tmp = a.G - b.G;
+			diffSq += tmp * tmp;
+			tmp = a.B - b.B;
+			diffSq += tmp * tmp;
+
+			return diffSq / 3;
+		}
 	}
 }

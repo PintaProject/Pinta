@@ -25,18 +25,19 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
+using System.Collections.Specialized;
 using Cairo;
 
 namespace Pinta.Core
 {
-	public class Layer
-	{
-		public ImageSurface Surface { get; set; }
-		public double Opacity { get; set; }
-		public bool Hidden { get; set; }
-		public string Name { get; set; }
-		public bool Tiled { get; set; }
-		public PointD Offset { get; set; }
+	public class Layer : ObservableObject
+	{	
+		private double opacity;
+		private bool hidden;
+		private string name;
+		private bool tiled;
+		private PointD offset;
 		
 		public Layer () : this (null)
 		{
@@ -49,12 +50,36 @@ namespace Pinta.Core
 		public Layer (ImageSurface surface, bool hidden, double opacity, string name)
 		{
 			Surface = surface;
-			Hidden = hidden;
-			Opacity = opacity;
-			Name = name;
 			Offset = new PointD (0, 0);
-		}	
+			
+			this.hidden = hidden;
+			this.opacity = opacity;
+			this.name = name;			
+		}
 		
+		public ImageSurface Surface { get; set; }
+		public bool Tiled { get; set; }	
+		public PointD Offset { get; set; }		
+		
+		public static readonly string OpacityProperty = "Opacity";
+		public static readonly string HiddenProperty = "Hidden";
+		public static readonly string NameProperty = "Name";		
+		
+		public double Opacity {
+			get { return opacity; }
+			set { if (opacity != value) SetValue (OpacityProperty, ref opacity, value); }
+		}
+		
+		public bool Hidden {
+			get { return hidden; }
+			set { if (hidden != value) SetValue (HiddenProperty, ref hidden, value); }
+		}
+		
+		public string Name {
+			get { return name; }
+			set { if (name != value) SetValue (NameProperty, ref name, value); }
+		}				
+			
 		public void Clear ()
 		{
 			using (Context g = new Context (Surface)) {
