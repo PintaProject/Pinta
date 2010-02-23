@@ -76,9 +76,10 @@
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs\HueSaturationDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
     <Compile Include="Dialogs\CurvesDialog.cs" />
     <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
+    <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
+    <Compile Include="ConfigurableEffects\LevelsEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
