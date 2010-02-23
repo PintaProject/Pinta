@@ -70,19 +70,6 @@ namespace Pinta.Core
 		}
 	}
 			
-	public class RecolorTool : BaseTool
-	{
-		public override string Name {
-			get { return "Recolor"; }
-		}
-		public override string Icon {
-			get { return "Tools.Recolor.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
-			
 	public class TextTool : BaseTool
 	{
 		public override string Name {

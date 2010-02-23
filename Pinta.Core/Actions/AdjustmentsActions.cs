@@ -127,8 +127,12 @@ namespace Pinta.Core
 			
 			SimpleHistoryItem hist = new SimpleHistoryItem (effect.Icon, effect.Text);
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);
+
+			// Use the existing ToolLayer instead of creating a new temp layer
+			Layer tmp_layer = PintaCore.Layers.ToolLayer;
+			tmp_layer.Clear ();
 			
-			ImageSurface dest = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			ImageSurface dest = tmp_layer.Surface;
 
 			Gdk.Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ().ToGdkRectangle ();
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
@@ -144,8 +148,6 @@ namespace Pinta.Core
 				g.Paint ();
 			}
 
-			(dest as IDisposable).Dispose ();
-			
 			PintaCore.Workspace.Invalidate ();
 			PintaCore.History.PushNewItem (hist);
 			

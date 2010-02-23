@@ -213,8 +213,8 @@ namespace Pinta.Core
 		{
 			int x = Utility.Clamp (r.X, 0, ImageSize.X);
 			int y = Utility.Clamp (r.Y, 0, ImageSize.Y);
-			int width = Math.Min (r.X + r.Width, ImageSize.X);
-			int height = Math.Min (r.Y + r.Height, ImageSize.Y);
+			int width = Math.Min (r.Width, ImageSize.X - x);
+			int height = Math.Min (r.Height, ImageSize.Y - y);
 
 			return new Gdk.Rectangle (x, y, width, height);
 		}
