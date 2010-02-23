@@ -570,6 +570,11 @@ namespace Pinta.Core
 			
 			return c;
 		}
+		
+		public static ushort GdkColorAlpha (this Cairo.Color color)
+		{
+			return (ushort)(color.A * ushort.MaxValue);
+		}
 
 		public static double GetBottom (this Rectangle rect)
 		{
