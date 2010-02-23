@@ -1084,7 +1084,7 @@ mode = EditingMode.NotEditing;
             if (saved != null)
             {
                 saved.Draw(context.Surface); 
-                ActiveLayer.Invalidate(saved.Region);
+                PintaCore.Workspace.Invalidate(saved.Region);
                 saved.Dispose();
                 saved = null;
             }
@@ -1183,25 +1183,10 @@ mode = EditingMode.NotEditing;
                 }
                 else
                 {
-					context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface);
-					
-					context.DrawLine(cursorRect, 2);
-					/*
-					context.AppendPath (PintaCore.Layers.SelectionPath);
-					context.FillRule = FillRule.EvenOdd;
-					context.Clip ();
-					
-					context.Antialias = Antialias.None;
-					
-					context.MoveTo (cursorRect.Right, cursorRect.Top);
-					context.LineTo (cursorRect.Right, cursorRect.Bottom);
-	
-					context.Color = PintaCore.Palette.PrimaryColor;
-					context.LineWidth = 2;
-					context.LineCap = LineCap.Square;
-					
-					context.Stroke ();
-					*/
+					using (context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface))
+					{
+						context.DrawLine (context, new PointD(cursorRect.Right, cursorRect.Top), new PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 2);
+					}
                 }
             }
 
