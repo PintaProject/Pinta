@@ -57,12 +57,12 @@ namespace Pinta.Core
 			
 			AutoLevel = new Gtk.Action ("AutoLevel", Mono.Unix.Catalog.GetString ("Auto Level"), null, "Menu.Adjustments.AutoLevel.png");
 			BlackAndWhite = new Gtk.Action ("BlackAndWhite", Mono.Unix.Catalog.GetString ("Black and White"), null, "Menu.Adjustments.BlackAndWhite.png");
-			BrightnessContrast = new Gtk.Action ("BrightnessContrast", Mono.Unix.Catalog.GetString ("Brightness / Contrast"), null, "Menu.Adjustments.BrightnessAndContrast.png");
-			Curves = new Gtk.Action ("Curves", Mono.Unix.Catalog.GetString ("Curves"), null, "Menu.Adjustments.Curves.png");
-			HueSaturation = new Gtk.Action ("HueSaturation", Mono.Unix.Catalog.GetString ("Hue / Saturation"), null, "Menu.Adjustments.HueAndSaturation.png");
+			BrightnessContrast = new Gtk.Action ("BrightnessContrast", Mono.Unix.Catalog.GetString ("Brightness / Contrast..."), null, "Menu.Adjustments.BrightnessAndContrast.png");
+			Curves = new Gtk.Action ("Curves", Mono.Unix.Catalog.GetString ("Curves..."), null, "Menu.Adjustments.Curves.png");
+			HueSaturation = new Gtk.Action ("HueSaturation", Mono.Unix.Catalog.GetString ("Hue / Saturation..."), null, "Menu.Adjustments.HueAndSaturation.png");
 			InvertColors = new Gtk.Action ("InvertColors", Mono.Unix.Catalog.GetString ("Invert Colors"), null, "Menu.Adjustments.InvertColors.png");
-			Levels = new Gtk.Action ("Levels", Mono.Unix.Catalog.GetString ("Levels"), null, "Menu.Adjustments.Levels.png");
-			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize"), null, "Menu.Adjustments.Posterize.png");
+			Levels = new Gtk.Action ("Levels", Mono.Unix.Catalog.GetString ("Levels..."), null, "Menu.Adjustments.Levels.png");
+			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize..."), null, "Menu.Adjustments.Posterize.png");
 			Sepia = new Gtk.Action ("Sepia", Mono.Unix.Catalog.GetString ("Sepia"), null, "Menu.Adjustments.Sepia.png");
 			
 			Levels.Sensitive = false;
