@@ -137,6 +137,8 @@
     <Compile Include="Classes\LayerProperties.cs" />
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
+    <Compile Include="Effects\IrregularSurface.cs" />
+    <Compile Include="Effects\ISurfaceDraw.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

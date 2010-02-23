@@ -145,5 +145,15 @@ namespace Pinta.Core
 
 			return diffSq / 3;
 		}
+
+		public static Gdk.Rectangle[] InflateRectangles (Gdk.Rectangle[] rects, int len)
+		{
+			Gdk.Rectangle[] inflated = new Gdk.Rectangle[rects.Length];
+
+            for (int i = 0; i < rects.Length; ++i)
+                inflated[i] = new Gdk.Rectangle(rects[i].X-len, rects[i].Y-len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
+
+            return inflated;
+		}
 	}
 }

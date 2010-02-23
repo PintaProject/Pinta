@@ -40,6 +40,13 @@ namespace Pinta.Core
 			EmptyEdit,
 			Editing
 		}
+		
+		private enum TextAlignment
+		{
+			Right,
+			Center,
+			Left
+		}
 
 		public override string Name {
 			get { return "Text"; }
@@ -60,20 +67,17 @@ namespace Pinta.Core
 
 		//private MoveNubRenderer moveNub;
 		private int ignoreRedraw;
-		//private Cairo.Context context;
 		private EditingMode mode;
 		private List<string> lines;
 		private int linePos;
 		private int textPos;
-		private Cairo.PointD clickPoint;
-		//private Font font;
-		//private TextAlignment alignment;
-		//private IrregularSurface saved;
+		private Point clickPoint;
+		private TextAlignment alignment;
+		private IrregularSurface saved;
 		private const int cursorInterval = 300;
 		private bool pulseEnabled;
 		private System.DateTime startTime;
 		private bool lastPulseCursorState;
-		//private System.Threading.ThreadPool threadPool;
 		private bool enableNub = true;
 
 		//private CompoundHistoryMemento currentHA;
@@ -267,7 +271,7 @@ mode = EditingMode.NotEditing;
 				index = 0;
 
 			if (size_combo == null)
-				size_combo = new ToolBarComboBox (50, index, true, entries.ToArray ());
+				size_combo = new ToolBarComboBox (50, index, false, entries.ToArray ());
 			
 			tb.AppendItem (size_combo);
 			
@@ -317,6 +321,59 @@ mode = EditingMode.NotEditing;
 			
 			tb.AppendItem (Right_alignment_btn);
 		}
+		
+		private Pango.FontFamily FontFamily
+		{
+			get {
+				List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (PintaCore.Chrome.DrawingArea.PangoContext.Families);
+				return fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
+			}
+		}
+		
+		
+		private int FontSize
+		{
+			get {
+				return int.Parse(size_combo.ComboBox.ActiveText);
+			}
+		}
+		
+		private Cairo.FontSlant FontSlant
+		{
+			get {
+				if (italic_btn.Active)
+					return Cairo.FontSlant.Italic;
+				else
+					return Cairo.FontSlant.Normal;
+			}
+		}
+		
+		private Cairo.FontWeight FontWeight
+		{
+			get {
+				if (bold_btn.Active)
+					return Cairo.FontWeight.Bold;
+				else
+					return Cairo.FontWeight.Normal;
+			}
+		}
+		
+		private string Font
+		{
+			get {
+				return font_combo.ComboBox.ActiveText;
+			}
+		}
+		
+		private Cairo.TextExtents TextExtents (Cairo.Context g, string str)
+		{
+			g.SelectFontFace (font_combo.ComboBox.ActiveText, FontSlant, FontWeight);
+			g.SetFontSize (FontSize);
+			
+			return g.TextExtents(str);
+		}
+		
+		
 
 		void HandlePintaCorePalettePrimaryColorChanged (object sender, EventArgs e)
 		{
@@ -332,6 +389,10 @@ mode = EditingMode.NotEditing;
             {
                 RedrawText(true);
             }
+			if (left_alignment_btn.Active) {
+				Right_alignment_btn.Active = false;
+				center_alignment_btn.Active = false;
+			}
 		}
 		
 		void HandleCenterAlignmentButtonToggled (object sender, EventArgs e)
@@ -340,6 +401,10 @@ mode = EditingMode.NotEditing;
             {
                 RedrawText(true);
             }
+			if (center_alignment_btn.Active) {
+				Right_alignment_btn.Active = false;
+				left_alignment_btn.Active = false;
+			}
 		}
 
 		void HandleRightAlignmentButtonToggled (object sender, EventArgs e)
@@ -348,6 +413,10 @@ mode = EditingMode.NotEditing;
             {
                 RedrawText(true);
             }
+			if (Right_alignment_btn.Active) {
+				center_alignment_btn.Active = false;
+				left_alignment_btn.Active = false;
+			}
 		}
 
 
@@ -811,7 +880,7 @@ mode = EditingMode.NotEditing;
                 textPos = np.Offset;
             }
         }
-
+		 */
         private Point GetUpperLeft(Size sz, int line)
         {
             Point p = clickPoint;
@@ -830,24 +899,19 @@ mode = EditingMode.NotEditing;
 
             return p;
         }
-
+		
         private Size StringSize(string s)
         {
             // We measure using a 1x1 device context to avoid performance problems that arise otherwise with large images.
-            using (Surface window = ScratchSurface.CreateWindow(new Rectangle(0, 0, 1, 1)))
+            Cairo.ImageSurface surf = PintaCore.Layers.ToolLayer.Surface;
+            Cairo.TextExtents te;
+            using (Cairo.Context g = new Cairo.Context(surf))
             {
-                using (RenderArgs ra2 = new RenderArgs(window))
-                {
-                    return SystemLayer.Fonts.MeasureString(
-                        ra2.Graphics, 
-                        this.font, 
-                        s, 
-                        AppEnvironment.AntiAliasing,
-                        AppEnvironment.FontSmoothing);
-                }
+                te = TextExtents(g, s);
             }
+			return new Size ((int)te.Width, (int)te.Height);
         }
-
+		/*
         private sealed class Position
         {
             private int line;
@@ -906,7 +970,7 @@ mode = EditingMode.NotEditing;
 
             if (saved != null)
             {
-                PdnRegion hitTest = Selection.CreateRegion();
+                Region hitTest = Selection.CreateRegion();
                 hitTest.Intersect(saved.Region);
 
                 if (!hitTest.IsEmpty())
@@ -930,33 +994,35 @@ mode = EditingMode.NotEditing;
                 saved = null;
             }
         }
-
-        private void DrawText(Cairo.ImageSurface dst, Font textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.Color color)
+		 */
+        private void DrawText(Cairo.ImageSurface dst, string textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.Color color)
         {
             Rectangle dstRect = new Rectangle(pt, measuredSize);
-            Rectangle dstRectClipped = Rectangle.Intersect(dstRect, ScratchSurface.Bounds);
-
+            //Rectangle dstRectClipped = Rectangle.Intersect(dstRect, ScratchSurface.Bounds);
+			/*
             if (dstRectClipped.Width == 0 || dstRectClipped.Height == 0)
             {
                 return;
             }
-
+			 */
             using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32, 8, 8))
             {
                 using (Cairo.Context context = new Cairo.Context(surface))
                 {
-                    context.FillRectangle (new Rectangle(0, 0, surface.Width, surface.Height), color);
+                    context.FillRectangle (new Cairo.Rectangle(0, 0, surface.Width, surface.Height), color);
                 }
 
                 DrawText(dst, textFont, text, pt, measuredSize, antiAliasing, surface);
             }
         }
-
-        private unsafe void DrawText(Cairo.ImageSurface dst, Font textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.ImageSurface brush8x8)
+		
+        private unsafe void DrawText(Cairo.ImageSurface dst, string textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.ImageSurface brush8x8)
         {
             Point pt2 = pt;
             Size measuredSize2 = measuredSize;
-            int offset = (int)textFont.Height;
+			using (Cairo.Context g = new Cairo.Context (dst)) {
+            	int offset = (int)TextExtents(g, "").Height;
+			}
             pt.X -= offset;
             measuredSize.Width += 2 * offset;
             Rectangle dstRect = new Rectangle(pt, measuredSize);
@@ -970,21 +1036,20 @@ mode = EditingMode.NotEditing;
             // We only use the first 8,8 of brush
             using (Cairo.Context ctx = new Cairo.Context(this.ScratchSurface))
             {
-                renderArgs.Graphics.FillRectangle(Brushes.White, pt.X, pt.Y, measuredSize.Width, measuredSize.Height);
+                ctx.FillRectangle (new Cairo.Rectangle(pt.X, pt.Y, measuredSize.Width, measuredSize.Height), new Cairo.Color (1, 1, 1));
 
                 if (measuredSize.Width > 0 && measuredSize.Height > 0)
                 {
-                    using (Surface s2 = renderArgs.Surface.CreateWindow(dstRectClipped))
+                    Cairo.ImageSurface s2 = PintaCore.Layers.CurrentLayer.Surface; //dstRectClipped
+                    using (Cairo.Context ctx2 = new Cairo.Context(s2))
                     {
-                        using (Cairo.Context ctx2 = new Cairo.Context(s2))
-                        {
-                            SystemLayer.Fonts.DrawText(
-                                renderArgs2.Graphics, 
-                                this.font, 
-                                text, 
-                                new Point(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
-                                AppEnvironment.AntiAliasing,
-                                AppEnvironment.FontSmoothing);
+                        SystemLayer.Fonts.DrawText(
+                            renderArgs2.Graphics, 
+                            this.font, 
+                            text, 
+                            new Point(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
+                            AppEnvironment.AntiAliasing,
+                            AppEnvironment.FontSmoothing);
 //ctx.SelectFontFace ("serif", FontSlant.Normal, FontWeight.Bold);
 //ctx.SetFontSize (32.0);
 
@@ -995,12 +1060,11 @@ mode = EditingMode.NotEditing;
 //ctx.MoveTo (10, 50);
 //ctx.ShowText ("Hello, World");
 
-                        }
                     }
                 }
 
                 // Mask out anything that isn't within the user's clip region (selected region)
-                using (PdnRegion clip = Selection.CreateRegion())
+                using (Region clip = Selection.CreateRegion())
                 {
                     clip.Xor(renderArgs.Surface.Bounds); // invert
                     clip.Intersect(new Rectangle(pt, measuredSize));
@@ -1066,7 +1130,7 @@ mode = EditingMode.NotEditing;
                 }
             }
         }
-	 */
+	 
         /// <summary>
         /// Redraws the Text on the screen
         /// </summary>
@@ -1076,126 +1140,117 @@ mode = EditingMode.NotEditing;
         /// <param name="cursorOn"></param>
         private void RedrawText(bool cursorOn)
         {
-			/*
-            if (this.ignoreRedraw > 0)
-            {
-                return;
-            }
-
-            if (saved != null)
-            {
-                saved.Draw(context.Surface); 
-                PintaCore.Workspace.Invalidate(saved.Region);
-                saved.Dispose();
-                saved = null;
-            }
-
-            // Save the Space behind the lines
-            Rectangle[] rects = new Rectangle[lines.Count + 1];
-            Point[] localUls = new Point[lines.Count];
-
-            // All Lines
-            bool recalcSizes = false;
-
-            if (this.sizes == null)
-            {
-                recalcSizes = true;
-                this.sizes = new Size[lines.Count + 1];
-            }
-
-            if (recalcSizes)
-            {
-                for (int i = 0; i < lines.Count; ++i)
-                {
-                    System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(this.MeasureText), 
-                        BoxedConstants.GetInt32(i));
-                }
-
-                System.Threading.ThreadPool.Drain();
-            }
-
-            for (int i = 0; i < lines.Count; ++i)
-            {
-                Point upperLeft = GetUpperLeft(sizes[i], i);
-                localUls[i] = upperLeft;
-                Rectangle rect = new Rectangle(upperLeft, sizes[i]);
-                rects[i] = rect;
-            }
-
-            // The Cursor Line
-            string cursorLine = ((string)lines[linePos]).Substring(0, textPos);
-            Size cursorLineSize;
-            Point cursorUL;
-            Rectangle cursorRect;
-            bool emptyCursorLineFlag;
-
-            if (cursorLine.Length == 0)
-            {
-                emptyCursorLineFlag = true;
-                Size fullLineSize = sizes[linePos];
-                cursorLineSize = new Size(2, (int)(Math.Ceiling(font.GetHeight())));
-                cursorUL = GetUpperLeft(fullLineSize, linePos);
-                cursorRect = new Rectangle(cursorUL, cursorLineSize);
-            }
-            else if (cursorLine.Length == ((string)lines[linePos]).Length)
-            {
-                emptyCursorLineFlag = false;
-                cursorLineSize = sizes[linePos];
-                cursorUL = localUls[linePos];
-                cursorRect = new Rectangle(cursorUL, cursorLineSize);
-            }
-            else
-            {
-                emptyCursorLineFlag = false;
-                cursorLineSize = StringSize(cursorLine);
-                cursorUL = localUls[linePos];
-                cursorRect = new Rectangle(cursorUL, cursorLineSize);
-            }
-
-            rects[lines.Count] = cursorRect;
-
-            // Account for overhang on italic or fancy fonts
-            int offset = (int)this.font.Height;
-            for (int i = 0; i < rects.Length; ++i)
-            {
-                rects[i].X -= offset;
-                rects[i].Width += 2 * offset;
-            }
-
-            // Set the saved region
-            saved = new IrregularSurface(context.Surface, Utility.InflateRectangles(rects, 3));
-
-            // Draw the Lines
-            this.uls = localUls;
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(this.RenderText), BoxedConstants.GetInt32(i));
-            }
-
-            System.Threading.ThreadPool.Drain();
-
-            // Draw the Cursor
-            if (cursorOn)
-            {           
-                if (emptyCursorLineFlag)
-                {
-                    context.FillRectangle(cursorRect, PintaCore.Palette.PrimaryColor);
-                }
-                else
-                {
-					using (context = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface))
-					{
-						context.DrawLine (context, new PointD(cursorRect.Right, cursorRect.Top), new PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 2);
-					}
-                }
-            }
-
-            PlaceMoveNub();
-            UpdateStatusText();
-            ActiveLayer.Invalidate(saved.Region);
-            Update();
-            */
+			Cairo.ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+			using (Cairo.Context context = new Cairo.Context(surf)) {
+	            if (this.ignoreRedraw > 0)
+	            {
+	                return;
+	            }
+	
+	            if (saved != null)
+	            {
+	                saved.Draw(surf); 
+	                PintaCore.Workspace.Invalidate(saved.Region.Clipbox);
+	                saved.Dispose();
+	                saved = null;
+	            }
+	
+	            // Save the Space behind the lines
+	            Rectangle[] rects = new Rectangle[lines.Count + 1];
+	            Point[] localUls = new Point[lines.Count];
+	
+	            // All Lines
+	            bool recalcSizes = false;
+	
+	            if (this.sizes == null)
+	            {
+	                recalcSizes = true;
+	                this.sizes = new Size[lines.Count + 1];
+	            }
+	
+	            if (recalcSizes)
+	            {
+	                for (int i = 0; i < lines.Count; ++i)
+	                {
+	                    this.MeasureText (i);
+	                }
+	            }
+	
+	            for (int i = 0; i < lines.Count; ++i)
+	            {
+	                Point upperLeft = GetUpperLeft(sizes[i], i);
+	                localUls[i] = upperLeft;
+	                Rectangle rect = new Rectangle(upperLeft, sizes[i]);
+	                rects[i] = rect;
+	            }
+	
+	            // The Cursor Line
+	            string cursorLine = ((string)lines[linePos]).Substring(0, textPos);
+	            Size cursorLineSize;
+	            Point cursorUL;
+	            Rectangle cursorRect;
+	            bool emptyCursorLineFlag;
+	
+	            if (cursorLine.Length == 0)
+	            {
+	                emptyCursorLineFlag = true;
+	                Size fullLineSize = sizes[linePos];
+	                cursorLineSize = new Size(2, (int)(Math.Ceiling(TextExtents(context, "").Height)));
+	                cursorUL = GetUpperLeft(fullLineSize, linePos);
+	                cursorRect = new Rectangle(cursorUL, cursorLineSize);
+	            }
+	            else if (cursorLine.Length == ((string)lines[linePos]).Length)
+	            {
+	                emptyCursorLineFlag = false;
+	                cursorLineSize = sizes[linePos];
+	                cursorUL = localUls[linePos];
+	                cursorRect = new Rectangle(cursorUL, cursorLineSize);
+	            }
+	            else
+	            {
+	                emptyCursorLineFlag = false;
+	                cursorLineSize = StringSize(cursorLine);
+	                cursorUL = localUls[linePos];
+	                cursorRect = new Rectangle(cursorUL, cursorLineSize);
+	            }
+	
+	            rects[lines.Count] = cursorRect;
+	
+	            // Account for overhang on italic or fancy fonts
+	            int offset = (int)TextExtents(context, "").Height;
+	            for (int i = 0; i < rects.Length; ++i)
+	            {
+	                rects[i].X -= offset;
+	                rects[i].Width += 2 * offset;
+	            }
+	
+	            // Set the saved region
+	            saved = new IrregularSurface (surf, Utility.InflateRectangles(rects, 3));
+	
+	            // Draw the Lines
+	            this.uls = localUls;
+	
+	            for (int i = 0; i < lines.Count; i++)
+	                this.RenderText (context, surf, i);
+	
+	            // Draw the Cursor
+	            if (cursorOn)
+	            {           
+	                if (emptyCursorLineFlag)
+	                {
+	                    context.FillRectangle (cursorRect.ToCairoRectangle(), PintaCore.Palette.PrimaryColor);
+	                }
+	                else
+	                {
+						context.DrawLine (new Cairo.PointD(cursorRect.Right, cursorRect.Top), new Cairo.PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 2);
+	                }
+	            }
+	
+	            //PlaceMoveNub();
+	            //UpdateStatusText();
+	            PintaCore.Workspace.Invalidate(saved.Region.Clipbox);
+	            //Update();
+			}
         }
 /*
         private string GetStatusBarXYText()
@@ -1215,28 +1270,23 @@ mode = EditingMode.NotEditing;
 
             return statusBarText;
         }
-
+		*/
         // Only used when measuring via background threads
-        private void MeasureText(object lineNumberObj)
+        private void MeasureText(int lineNumber)
         {
-            int lineNumber = (int)lineNumberObj;
             this.sizes[lineNumber] = StringSize((string)lines[lineNumber]);
         }
 
         // Only used when rendering via background threads
-        private Cairo.PointD[] uls;
+        private Point[] uls;
+        
         private Size[] sizes;
-
-        private void RenderText(object lineNumberObj)
+		
+        private void RenderText(Cairo.Context context, Cairo.ImageSurface surf, int lineNumber)
         {
-            int lineNumber = (int)lineNumberObj;
-
-            using (Cairo.Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
-            {
-                DrawText(ra.Surface, this.font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], AppEnvironment.AntiAliasing, g);
-            }
+            DrawText(context, surf, this.font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], AppEnvironment.AntiAliasing);
         }
-
+		 /*
         private void PlaceMoveNub()
         {
             if (this.uls != null && this.uls.Length > 0)
