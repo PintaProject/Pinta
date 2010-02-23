@@ -48,7 +48,7 @@ namespace Pinta
 			PintaCore.Actions.AccelGroup = new AccelGroup ();
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
 
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, treeview1, this);
+			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this);
 			colorpalettewidget1.Initialize ();
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
@@ -89,10 +89,10 @@ namespace Pinta
 			
 			PintaCore.Workspace.Invalidate ();
 
-			treeview1.Model = new ListStore (typeof (Pixbuf), typeof (string));
-			treeview1.HeadersVisible = false;
-			treeview1.RowActivated += HandleTreeview1RowActivated;
-			AddColumns (treeview1);
+			history_treeview.Model = new ListStore (typeof (Pixbuf), typeof (string));
+			history_treeview.HeadersVisible = false;
+			history_treeview.RowActivated += HandleHistoryTreeviewRowActivated;
+			AddColumns (history_treeview);
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
@@ -123,14 +123,14 @@ namespace Pinta
 			}
 		}
 
-		private void HandleTreeview1RowActivated (object o, RowActivatedArgs args)
+		private void HandleHistoryTreeviewRowActivated (object o, RowActivatedArgs args)
 		{
 			int rowIndex = args.Path.Indices[0];
 			
 			// Determine the number of times to undo. If there are 10 items (0-9)
 			// and the one with index 9 was clicked(last), there'll be no undo. If the 0th is clicked
 			// there will be 9 undoes, and only the one which was clicked will remain
-			int nUndoes = (treeview1.Model as ListStore).IterNChildren() - rowIndex - 1;
+			int nUndoes = (history_treeview.Model as ListStore).IterNChildren() - rowIndex - 1;
 			
 			for (int i = 0; i < nUndoes; i++)
 				PintaCore.History.Undo();
@@ -194,7 +194,7 @@ namespace Pinta
 		{
 			// Hack: Instead of looking for the correct item to remove, blindly remove
 			// the last item from the tree
-			ListStore historyModel = (treeview1.Model as ListStore);
+			ListStore historyModel = (history_treeview.Model as ListStore);
 			int nChildren = historyModel.IterNChildren ();
 			
 			TreeIter lastChild = new TreeIter();
@@ -205,7 +205,7 @@ namespace Pinta
 		
 		void History_HistoryItemAdded (object sender, HistoryItemAddedEventArgs e)
 		{
-			(treeview1.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (e.Item.Icon), e.Item.Text);
+			(history_treeview.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (e.Item.Icon), e.Item.Text);
 		}
 
 		private void Chrome_StatusBarTextChanged (object sender, TextChangedEventArgs e)
