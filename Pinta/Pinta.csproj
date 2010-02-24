@@ -76,6 +76,7 @@
     <Compile Include="Dialogs\CurvesDialog.cs" />
     <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
     <Compile Include="Platform.cs" />
+    <Compile Include="IgeMacMenu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

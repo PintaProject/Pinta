@@ -38,8 +38,24 @@ namespace Pinta
 			win.Show ();
 			
 			if (args.Length > 0)
-				Pinta.Core.PintaCore.Actions.File.OpenFile (args[0]);
-				
+			{
+				string arg = args[0];
+				if (Platform.GetOS() == Platform.OS.Mac) 
+				{
+					if (args[0].StartsWith("-psn_"))
+					{
+						if (args.Length > 1)
+							arg = args[1];
+						else
+							arg = null;
+					}
+				}
+				if (arg != null && arg != "")
+				{
+					Pinta.Core.PintaCore.Actions.File.OpenFile (arg);
+				}
+			}
+			
 			Application.Run ();
 		}
 	}
