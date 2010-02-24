@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Core", "Pinta.Core\Pi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Resources", "Pinta.Resources\Pinta.Resources.csproj", "{50AFF341-655E-45EF-83CA-58F8254E4C8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Gui.Widgets", "Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj", "{83F0C0AD-D587-457C-B72A-1A184D6D76B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -15,6 +17,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|x86.ActiveCfg = Debug|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|x86.Build.0 = Debug|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|x86.ActiveCfg = Release|x86
+		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|x86.Build.0 = Release|x86
 		{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -31,22 +41,22 @@ Global
 		{50AFF341-655E-45EF-83CA-58F8254E4C8B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{50AFF341-655E-45EF-83CA-58F8254E4C8B}.Release|x86.ActiveCfg = Release|Any CPU
 		{50AFF341-655E-45EF-83CA-58F8254E4C8B}.Release|x86.Build.0 = Release|Any CPU
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|x86.ActiveCfg = Debug|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Debug|x86.Build.0 = Debug|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|Mixed Platforms.Build.0 = Release|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|x86.ActiveCfg = Release|x86
-		{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}.Release|x86.Build.0 = Release|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Debug|x86.ActiveCfg = Debug|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Debug|x86.Build.0 = Debug|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Release|Mixed Platforms.Build.0 = Release|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Release|x86.ActiveCfg = Release|x86
+		{83F0C0AD-D587-457C-B72A-1A184D6D76B3}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Pinta\Pinta.csproj
 		Policies = $0
 		$0.StandardHeader = $1
 		$1.inheritsSet = MITX11License
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

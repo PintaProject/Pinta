@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
@@ -51,17 +52,20 @@ namespace Pinta.Core
 
 		public override bool LaunchConfiguration ()
 		{
-			BrightnessContrastDialog dialog = new BrightnessContrastDialog ();
-
+			BrightnessContrastData data = new BrightnessContrastData ();
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), data);
+			
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				brightness = dialog.Brightness;
-				contrast = dialog.Contrast;
 
+				brightness = data.Brightness;
+				contrast = data.Contrast;
+	
 				dialog.Destroy ();
-
-				return true;
+				
+				// Don't trigger anything if no options were changed
+				return !data.IsDefault;
 			}
 
 			dialog.Destroy ();
@@ -147,6 +151,17 @@ namespace Pinta.Core
 						rgbTable[index] = Utility.ClampToByte (col + shift);
 					}
 				}
+			}
+		}
+		
+		private class BrightnessContrastData
+		{
+			public int Brightness = 0;
+			public int Contrast = 0;
+			
+			[Skip]
+			public bool IsDefault {
+				get { return Brightness == 0 && Contrast == 0; }
 			}
 		}
 	}

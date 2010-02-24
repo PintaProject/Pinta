@@ -51,10 +51,8 @@
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
     <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
     <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
-    <Compile Include="Dialogs\BrightnessContrastDialog.cs" />
     <Compile Include="Dialogs\PosterizeDialog.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.BrightnessContrastDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
     <Compile Include="gtk-gui\Pinta.PosterizeDialog.cs" />
     <Compile Include="MainWindow.cs" />
@@ -89,6 +87,10 @@
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
       <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
       <Name>Pinta.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj">
+      <Project>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</Project>
+      <Name>Pinta.Gui.Widgets</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
