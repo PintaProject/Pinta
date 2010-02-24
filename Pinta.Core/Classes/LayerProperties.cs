@@ -43,5 +43,11 @@ namespace Pinta.Core
 		public bool Hidden { get; private set; }				
 		public double Opacity { get; private set; }
 		
+		public void SetProperties (Layer layer)
+		{
+			layer.Name = Name;
+			layer.Opacity = Opacity;
+			layer.Hidden = Hidden;
+		}
 	}
 }
