@@ -28,10 +28,27 @@ using System;
 
 namespace Pinta.Core
 {
+	public enum HistoryItemState { Undo, Redo }
+
+	public static class HistoryID {
+	
+		private static int id = 0;
+		
+		public static int ID {
+			get {
+				return id++;
+			}
+			set {
+				id = value;
+			}
+		}
+	}
 	public class BaseHistoryItem : IDisposable
 	{
+		public int ID { get; set; }
 		public string Icon { get; set; }
 		public string Text { get; set; }
+		public HistoryItemState State { get; set; }
 		
 		public BaseHistoryItem ()
 		{
@@ -39,8 +56,18 @@ namespace Pinta.Core
 		
 		public BaseHistoryItem (string icon, string text)
 		{
+			this.ID = HistoryID.ID;
 			Icon = icon;
 			Text = text;
+			State = HistoryItemState.Undo;
+		}
+		
+		public BaseHistoryItem (string icon, string text, HistoryItemState state)
+		{
+			this.ID = HistoryID.ID;
+			Icon = icon;
+			Text = text;
+			State = state;
 		}
 
 		public virtual void Undo ()
