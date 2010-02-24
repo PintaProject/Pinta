@@ -1,10 +1,11 @@
 // 
-// LevelsEffect.cs
+// ColorPanelWidget.cs
 //  
 // Author:
-//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Krzysztof Marecki
+//
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,43 +28,31 @@
 using System;
 using Cairo;
 
-namespace Pinta.Core
+using Pinta.Core;
+
+namespace Pinta
 {
-	public class LevelsEffect : BaseEffect
+
+
+	[System.ComponentModel.ToolboxItem(true)]
+	public partial class ColorPanelWidget : Gtk.Bin
 	{
-		private UnaryPixelOps.Level levels;
-		
-		public override string Icon {
-			get { return "Menu.Adjustments.Levels.png"; }
-		}
 
-		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Levels"); }
-		}
-
-		public override bool IsConfigurable {
-			get { return true; }
-		}
-		
-		public override bool LaunchConfiguration ()
+		public ColorPanelWidget ()
 		{
-			LevelsDialog dialog = new LevelsDialog ();
-			int response = dialog.Run ();
+			this.Build ();
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				levels = dialog.Levels;
-				
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-			return false;
+			ExposeEvent += HandleExposeEvent;
 		}
-		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+
+		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
-			levels.Apply (dest, src, rois);
+			using (Context context = Gdk.CairoHelper.Create (this.GdkWindow)) {
+				
+				context.Color = new Color (0.1, 0.1, 0.1);
+				context.Rectangle (Allocation.ToCairoRectangle ());
+				context.Fill();
+			}
 		}
 	}
 }

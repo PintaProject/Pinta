@@ -1,10 +1,10 @@
 // 
-// LevelsEffect.cs
+// HistogramWidget.cs
 //  
 // Author:
-//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Krzysztof Marecki
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,45 +25,18 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 
-namespace Pinta.Core
+namespace Pinta
 {
-	public class LevelsEffect : BaseEffect
+
+
+	[System.ComponentModel.ToolboxItem(true)]
+	public partial class HistogramWidget : Gtk.Bin
 	{
-		private UnaryPixelOps.Level levels;
-		
-		public override string Icon {
-			get { return "Menu.Adjustments.Levels.png"; }
-		}
 
-		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Levels"); }
-		}
-
-		public override bool IsConfigurable {
-			get { return true; }
-		}
-		
-		public override bool LaunchConfiguration ()
+		public HistogramWidget ()
 		{
-			LevelsDialog dialog = new LevelsDialog ();
-			int response = dialog.Run ();
-			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				levels = dialog.Levels;
-				
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-			return false;
-		}
-		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
-		{
-			levels.Apply (dest, src, rois);
+			this.Build ();
 		}
 	}
 }

@@ -1,10 +1,10 @@
 // 
-// LevelsEffect.cs
+// LevelsDialog.cs
 //  
 // Author:
-//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Krzysztof Marecki
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,45 +25,38 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
+using Gtk;
 
-namespace Pinta.Core
+using Pinta.Core;
+
+namespace Pinta
 {
-	public class LevelsEffect : BaseEffect
-	{
-		private UnaryPixelOps.Level levels;
+	public partial class LevelsDialog : Gtk.Dialog
+	{	
+		public UnaryPixelOps.Level Levels { get; private set; }
 		
-		public override string Icon {
-			get { return "Menu.Adjustments.Levels.png"; }
-		}
-
-		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Levels"); }
-		}
-
-		public override bool IsConfigurable {
-			get { return true; }
-		}
-		
-		public override bool LaunchConfiguration ()
+		public LevelsDialog ()
 		{
-			LevelsDialog dialog = new LevelsDialog ();
-			int response = dialog.Run ();
+			this.Build ();
+			this.Levels = new UnaryPixelOps.Level ();
+		
+			this.HasSeparator = false;
+			//hack allowing adding hbox with rgb checkboxes into dialog action area
+			VBox.Remove(hboxBottom);
+			AddActionWidget(hboxBottom,ResponseType.None);
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				levels = dialog.Levels;
-				
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-			return false;
+			buttonCancel.Clicked += HandleButtonCancelClicked;
+			buttonOk.Clicked += HandleButtonOkClicked;
 		}
-		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+
+		private void HandleButtonOkClicked (object sender, EventArgs e)
 		{
-			levels.Apply (dest, src, rois);
+			Respond (ResponseType.Ok);
+		}
+
+		private void HandleButtonCancelClicked (object sender, EventArgs e)
+		{
+			Respond (ResponseType.Cancel);
 		}
 	}
 }

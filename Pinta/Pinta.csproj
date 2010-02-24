@@ -41,6 +41,10 @@
     </Reference>
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
+    <Reference Include="libstetic, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\opt\mono\lib\monodevelop\AddIns\MonoDevelop.GtkCore\libstetic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -80,6 +84,14 @@
     <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
     <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
     <Compile Include="ConfigurableEffects\LevelsEffect.cs" />
+    <Compile Include="gtk-gui\Pinta.LevelsDialog.cs" />
+    <Compile Include="Widgets\ColorGradientWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.ColorGradientWidget.cs" />
+    <Compile Include="Widgets\HistogramWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.HistogramWidget.cs" />
+    <Compile Include="Dialogs\LevelsDialog.cs" />
+    <Compile Include="Widgets\ColorPanelWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.ColorPanelWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
