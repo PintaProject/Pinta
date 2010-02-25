@@ -35,7 +35,7 @@ namespace Pinta.Core
 		private int radius;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.Posterize.png"; }
+			get { return "Menu.Effects.Blurs.GaussianBlur.png"; }
 		}
 
 		public override string Text {
@@ -59,7 +59,7 @@ namespace Pinta.Core
 
 				dialog.Destroy ();
 
-				return true;
+				return !data.IsEmpty;
 			}
 
 			dialog.Destroy ();
@@ -276,6 +276,9 @@ namespace Pinta.Core
 		{
 			[MinimumValue (0), MaximumValue (200)]
 			public int radius = 2;
+			
+			[Skip]
+			public bool IsEmpty { get { return radius == 0; } }
 		}
 	}
 }
