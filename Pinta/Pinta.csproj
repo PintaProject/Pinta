@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\GaussianBlurEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
     <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
     <Compile Include="Dialogs\PosterizeDialog.cs" />

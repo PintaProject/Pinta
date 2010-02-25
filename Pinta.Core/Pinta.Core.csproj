@@ -43,6 +43,7 @@
     <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Effects\AutoLevelEffect.cs" />

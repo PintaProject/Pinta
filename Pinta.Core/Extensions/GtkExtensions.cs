@@ -52,6 +52,12 @@ namespace Pinta.Core
 			smi.Show ();
 			menu.Append (smi);
 		}
+
+		public static MenuItem AppendItem (this Menu menu, MenuItem item)
+		{
+			menu.Append (item);
+			return item;
+		}
 		
 		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
 		{
@@ -66,7 +72,17 @@ namespace Pinta.Core
 			
 			(item.Child as AccelLabel).AccelWidget = item;
 			item.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (key, mods, AccelFlags.Visible));
+
+			return item;
+		}
+
+		public static Gtk.MenuItem CreateSubMenuItem (this Gtk.Action action)
+		{
+			MenuItem item = (MenuItem)action.CreateMenuItem ();
 			
+			Menu sub_menu = new Menu ();
+			item.Submenu = sub_menu;
+
 			return item;
 		}
 	}

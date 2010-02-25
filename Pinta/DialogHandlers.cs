@@ -45,6 +45,7 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
+			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 		}
 
 		#region Handlers
@@ -195,6 +196,11 @@ namespace Pinta
 		private void HandleAdjustmentsCurvesActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect ());	
+		}
+
+		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new GaussianBlurEffect ());
 		}
 		#endregion
 	}

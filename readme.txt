@@ -12,7 +12,14 @@ original headers on source files.
 
 See license-pd.txt for Paint.Net's original license.
 
-Icons are from Paint.Net 3.0 or silk icon set:
-http://www.famfamfam.com/lab/icons/silk/
 
-Silk used under Creative Commons Attribution 3.0 License
+Icons are from:
+
+- Paint.Net 3.0 - http://www.getpaint.net/
+Used under MIT License
+
+- Silk icon set - http://www.famfamfam.com/lab/icons/silk/
+Used under Creative Commons Attribution 3.0 License
+
+- Fugue icon set - http://pinvoke.com/
+Used under Creative Commons Attribution 3.0 License
