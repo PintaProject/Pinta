@@ -1,10 +1,10 @@
 // 
-// LayerProperties.cs
+// AssemblyInfo.cs
 //  
 // Author:
-//       greg <${AuthorEmail}>
+//       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 greg
+// Copyright (c) 2010 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,31 +23,29 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
-using System;
+// Information about this assembly is defined by the following attributes. 
+// Change them to the values specific to your project.
 
-namespace Pinta.Core
-{
+[assembly: AssemblyTitle("Pinta.Gui.Widgets")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
-	public class LayerProperties
-	{
-		
-		public LayerProperties (string name, bool hidden, double opacity)
-		{
-			this.Opacity = opacity;			
-			this.Hidden = hidden;
-			this.Name = name;
-		}
-				
-		public string Name { get; private set; }				
-		public bool Hidden { get; private set; }				
-		public double Opacity { get; private set; }
-		
-		public void SetProperties (Layer layer)
-		{
-			layer.Name = Name;
-			layer.Opacity = Opacity;
-			layer.Hidden = Hidden;
-		}
-	}
-}
+// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
+// The form "{Major}.{Minor}.*" will automatically update the build and revision,
+// and "{Major}.{Minor}.{Build}.*" will update just the revision.
+
+[assembly: AssemblyVersion("1.0.*")]
+
+// The following attributes are used to specify the signing key for the assembly, 
+// if desired. See the Mono documentation for more information about signing.
+
+//[assembly: AssemblyDelaySign(false)]
+//[assembly: AssemblyKeyFile("")]

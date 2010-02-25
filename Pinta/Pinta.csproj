@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -49,12 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\GaussianBlurEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
     <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
-    <Compile Include="Dialogs\BrightnessContrastDialog.cs" />
     <Compile Include="Dialogs\PosterizeDialog.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.BrightnessContrastDialog.cs" />
     <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
     <Compile Include="gtk-gui\Pinta.PosterizeDialog.cs" />
     <Compile Include="MainWindow.cs" />
@@ -74,11 +75,11 @@
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
-    <Compile Include="Dialogs\HueSaturationDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.HueSaturationDialog.cs" />
     <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
     <Compile Include="Dialogs\CurvesDialog.cs" />
     <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="IgeMacMenu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -89,6 +90,10 @@
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
       <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
       <Name>Pinta.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj">
+      <Project>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</Project>
+      <Name>Pinta.Gui.Widgets</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -45,6 +45,7 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
+			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 		}
 
 		#region Handlers
@@ -116,9 +117,10 @@ namespace Pinta
 		{
 			var dialog = new LayerPropertiesDialog ();
 			
-			dialog.Run ();			
+			int response = dialog.Run ();		
 			
-			if (dialog.AreLayerPropertiesUpdated) {
+			if (response == (int)Gtk.ResponseType.Ok
+			    && dialog.AreLayerPropertiesUpdated) {
 				
 				var historyMessage = GetLayerPropertyUpdateMessage(
 						dialog.InitialLayerProperties,
@@ -134,6 +136,15 @@ namespace Pinta
 				PintaCore.History.PushNewItem (historyItem);
 				
 				PintaCore.Workspace.Invalidate ();
+				
+			} else {
+				
+				var layer = PintaCore.Layers.CurrentLayer;
+				var initial = dialog.InitialLayerProperties;
+				initial.SetProperties (layer);
+				
+				if (layer.Opacity != initial.Opacity)
+					PintaCore.Workspace.Invalidate ();
 			}
 				
 			dialog.Destroy ();
@@ -185,6 +196,11 @@ namespace Pinta
 		private void HandleAdjustmentsCurvesActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect ());	
+		}
+
+		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new GaussianBlurEffect ());
 		}
 		#endregion
 	}

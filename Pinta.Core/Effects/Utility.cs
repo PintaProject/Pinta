@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Reflection;
 
 namespace Pinta.Core
 {
@@ -150,10 +151,16 @@ namespace Pinta.Core
 		{
 			Gdk.Rectangle[] inflated = new Gdk.Rectangle[rects.Length];
 
-            for (int i = 0; i < rects.Length; ++i)
-                inflated[i] = new Gdk.Rectangle(rects[i].X-len, rects[i].Y-len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
+			for (int i = 0; i < rects.Length; ++i)
+				inflated[i] = new Gdk.Rectangle(rects[i].X-len, rects[i].Y-len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
 
-            return inflated;
+			return inflated;
+		}
+
+		public static string GetStaticName (Type type)
+		{
+			PropertyInfo pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
+			return (string)pi.GetValue (null, null);
 		}
 	}
 }

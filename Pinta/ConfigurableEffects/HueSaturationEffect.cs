@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
@@ -51,17 +52,20 @@ namespace Pinta.Core
 
 		public override bool LaunchConfiguration ()
 		{
-			HueSaturationDialog dialog = new HueSaturationDialog ();
+			HueSaturationData data = new HueSaturationData ();
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), data);
+	
 			int response = dialog.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
-				hue_delta = dialog.HueLevel;
-				sat_delta = dialog.SaturationLevel;
-				lightness = dialog.LightnessLevel;
+				hue_delta = data.Hue;
+				sat_delta = data.Saturation;
+				lightness = data.Lightness;
 				
 				dialog.Destroy ();
 
-				return true;
+				// Don't trigger anything if no options were changed
+				return !data.IsDefault;
 			}
 
 			dialog.Destroy ();
@@ -77,6 +81,22 @@ namespace Pinta.Core
 				op = new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
 
 			op.Apply (dest, src, rois);
+		}
+
+		private class HueSaturationData
+		{
+			[MinimumValue (-180), MaximumValue (180)]
+			public int Hue = 0;
+			
+			[MinimumValue (0), MaximumValue (200)]
+			public int Saturation = 100;
+
+			public int Lightness = 0;
+			
+			[Skip]
+			public bool IsDefault {
+				get { return Hue == 0 && Saturation == 100 && Lightness == 0; }
+			}
 		}
 	}
 }

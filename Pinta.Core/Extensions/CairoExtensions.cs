@@ -603,6 +603,11 @@ namespace Pinta.Core
 			
 			return c;
 		}
+		
+		public static ushort GdkColorAlpha (this Cairo.Color color)
+		{
+			return (ushort)(color.A * ushort.MaxValue);
+		}
 
 		public static double GetBottom (this Rectangle rect)
 		{
@@ -621,6 +626,15 @@ namespace Pinta.Core
 			dstPtr += (x) + (y * surf.Width);
 
 			return dstPtr;
+		}
+
+		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, int x, int y)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+
+			dstPtr += (x) + (y * surf.Width);
+
+			return *dstPtr;
 		}
 
 		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, int y)
@@ -648,6 +662,11 @@ namespace Pinta.Core
 		public static Gdk.Rectangle GetBounds (this ImageSurface surf)
 		{
 			return new Gdk.Rectangle (0, 0, surf.Width, surf.Height);
+		}
+
+		public static Gdk.Size GetSize (this ImageSurface surf)
+		{
+			return new Gdk.Size (surf.Width, surf.Height);
 		}
 	}
 }
