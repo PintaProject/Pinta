@@ -300,6 +300,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Toolbar.Underline.png">
       <LogicalName>Toolbar.Underline.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Artistic.InkSketch.png">
       <LogicalName>Menu.Effects.Artistic.InkSketch.png</LogicalName>
     </EmbeddedResource>

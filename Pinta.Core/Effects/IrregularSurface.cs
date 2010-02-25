@@ -53,10 +53,10 @@ namespace Pinta.Core
         /// </summary>
         /// <param name="source">The Surface to copy pixels from.</param>
         /// <param name="roi">Defines the Region from which to copy pixels from the Image.</param>
-        public IrregularSurface (Cairo.Surface source, Region roi)
+        public IrregularSurface (Cairo.ImageSurface source, Region roi)
         {   
             Region roiClipped = (Region)roi.Copy();
-            roiClipped.Intersect(source.Bounds);
+            roiClipped.Intersect(source.GetBounds());
 
             Rectangle[] rects = roiClipped.GetRectangles();
             this.placedSurfaces = new ArrayList(rects.Length);
@@ -69,13 +69,13 @@ namespace Pinta.Core
             this.region = roiClipped;
         }
 
-        public IrregularSurface(Cairo.Surface source, Rectangle[] roi)
+        public IrregularSurface(Cairo.ImageSurface source, Rectangle[] roi)
         {
             this.placedSurfaces = new ArrayList(roi.Length);
 
             foreach (Rectangle rect in roi)
             {
-                Rectangle ri = Rectangle.Intersect(source.Bounds, rect);
+                Rectangle ri = Rectangle.Intersect(source.GetBounds(), rect);
 
                 if (!ri.IsEmpty)
                 {
@@ -84,7 +84,7 @@ namespace Pinta.Core
             }
 
             this.region = Utility.RectanglesToRegion(roi);
-            this.region.Intersect(source.Bounds);
+            this.region.Intersect(source.GetBounds());
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Pinta.Core
         /// </summary>
         /// <param name="source">The Surface to copy pixels from.</param>
         /// <param name="roi">Defines the Rectangle from which to copy pixels from the Image.</param>
-        public IrregularSurface (Cairo.Surface source, Rectangle roi)
+        public IrregularSurface (Cairo.ImageSurface source, Rectangle roi)
         {
             this.placedSurfaces = new ArrayList();
             this.placedSurfaces.Add(new PlacedSurface(source, roi));
@@ -120,7 +120,7 @@ namespace Pinta.Core
         /// Draws the IrregularSurface on to the given Surface.
         /// </summary>
         /// <param name="dst">The Surface to draw to.</param>
-        public void Draw(Cairo.Surface dst)
+        public void Draw(Cairo.ImageSurface dst)
         {
             if (disposed)
             {
@@ -133,7 +133,7 @@ namespace Pinta.Core
             }
         }
 
-        public void Draw(Cairo.Surface dst, PixelOp pixelOp)
+        public void Draw(Cairo.ImageSurface dst, PixelOp pixelOp)
         {
             if (this.disposed)
             {
@@ -152,7 +152,7 @@ namespace Pinta.Core
         /// <param name="g">The Surface to draw to.</param>
         /// <param name="transformX">The value to be added to every X coordinate that is used for drawing.</param>
         /// <param name="transformY">The value to be added to every Y coordinate that is used for drawing.</param>
-        public void Draw(Cairo.Surface dst, int tX, int tY)
+        public void Draw(Cairo.ImageSurface dst, int tX, int tY)
         {
             if (this.disposed)
             {
@@ -165,7 +165,7 @@ namespace Pinta.Core
             }
         }
 
-        public void Draw(Cairo.Surface dst, int tX, int tY, PixelOp pixelOp)
+        public void Draw(Cairo.ImageSurface dst, int tX, int tY, PixelOp pixelOp)
         {
             if (this.disposed)
             {
