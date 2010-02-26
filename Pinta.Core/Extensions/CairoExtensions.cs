@@ -329,6 +329,30 @@ namespace Pinta.Core
 			return dirty;
 		}
 		
+		public static void FillRegion (this Context g, Gdk.Region region, Color color)
+		{
+			g.Save ();
+			
+			g.Color = color;
+			
+			foreach (Gdk.Rectangle r in region.GetRectangles())
+			{
+				g.MoveTo (r.X, r.Y);
+				g.LineTo (r.X + r.Width, r.Y);
+				g.LineTo (r.X + r.Width, r.Y + r.Height);
+				g.LineTo (r.X, r.Y + r.Height);
+				g.LineTo (r.X, r.Y);
+				
+				g.Color = color;
+
+				g.StrokeExtents ();
+				g.Fill ();
+			}
+			
+			g.Restore ();
+		}
+		
+		
 		public static Rectangle DrawRoundedRectangle (this Context g, Rectangle r, double radius, Color stroke, int lineWidth)
 		{
 			g.Save ();

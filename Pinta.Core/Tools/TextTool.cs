@@ -85,96 +85,7 @@ namespace Pinta.Core
 		private bool controlKeyDown = false;
 		private DateTime controlKeyDownTime = DateTime.MinValue;
 		private readonly TimeSpan controlKeyDownThreshold = new TimeSpan (0, 0, 0, 0, 400);
-		/*
-        private void AlphaBlendingChangedHandler(object sender, EventArgs e)
-        {
-            if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
-        }
-
-        private EventHandler fontChangedDelegate;
-        private void FontChangedHandler(object sender, EventArgs a)
-        {
-            font = AppEnvironment.FontInfo.CreateFont();
-            if (mode != EditingMode.NotEditing)
-            {
-                this.sizes = null;
-                RedrawText(true);
-            }
-        }
-
-        private EventHandler fontSmoothingChangedDelegate;
-        private void FontSmoothingChangedHandler(object sender, EventArgs e)
-        {
-            if (mode != EditingMode.NotEditing)
-            {
-                this.sizes = null;
-                RedrawText(true);
-            }
-        }
-
-        private EventHandler alignmentChangedDelegate;
-        private void AlignmentChangedHandler(object sender, EventArgs a)
-        {
-            alignment = AppEnvironment.TextAlignment;
-            if (mode != EditingMode.NotEditing)
-            {
-                this.sizes = null;
-                RedrawText(true);
-            }
-        }
-
-        private EventHandler brushChangedDelegate;
-        private void BrushChangedHandler(object sender, EventArgs a)
-        {
-            if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
-        }
-
-        private EventHandler antiAliasChangedDelegate;
-        private void AntiAliasChangedHandler(object sender, EventArgs a)
-        {
-            if (mode != EditingMode.NotEditing)
-            {
-                this.sizes = null;
-                RedrawText(true);
-            }
-        }
-
-        private EventHandler foreColorChangedDelegate;
-        private void ForeColorChangedHandler(object sender, EventArgs e)
-        {
-            if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
-        }
-
-        private void BackColorChangedHandler(object sender, EventArgs e)
-        {
-            if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
-        }
-
-        private bool OnBackspaceTyped(KeyPressEventArgs args)
-        {
-            if (this.mode != EditingMode.NotEditing)
-            {
-                OnKeyPress(Gdk.Key.BackSpace);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-		 */
+		
 		/*public override Gdk.Cursor DefaultCursor {
 			get {
 				return new Gdk.Cursor(;
@@ -469,7 +380,7 @@ mode = EditingMode.NotEditing;
 			//PdnBaseForm.UnregisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
 			
 			base.OnDeactivated ();
-		
+			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 			/*
             switch (mode)
             {
@@ -911,7 +822,7 @@ mode = EditingMode.NotEditing;
             }
 			return new Size ((int)te.Width, (int)te.Height);
         }
-		/*
+		
         private sealed class Position
         {
             private int line;
@@ -962,7 +873,7 @@ mode = EditingMode.NotEditing;
                 this.offset = offset;
             }
         }
-
+		/*
         private void SaveHistoryMemento()
         {
             pulseEnabled = false;
@@ -1020,13 +931,14 @@ mode = EditingMode.NotEditing;
         {
             Point pt2 = pt;
             Size measuredSize2 = measuredSize;
+			int offset;
 			using (Cairo.Context g = new Cairo.Context (dst)) {
-            	int offset = (int)TextExtents(g, "").Height;
+            	offset = (int)TextExtents(g, "").Height;
 			}
             pt.X -= offset;
             measuredSize.Width += 2 * offset;
             Rectangle dstRect = new Rectangle(pt, measuredSize);
-            Rectangle dstRectClipped = Rectangle.Intersect(dstRect, ScratchSurface.Bounds);
+            Rectangle dstRectClipped = Rectangle.Intersect(dstRect, PintaCore.Layers.ToolLayer.Surface.GetBounds());
 
             if (dstRectClipped.Width == 0 || dstRectClipped.Height == 0)
             {
@@ -1034,41 +946,32 @@ mode = EditingMode.NotEditing;
             }
 
             // We only use the first 8,8 of brush
-            using (Cairo.Context ctx = new Cairo.Context(this.ScratchSurface))
+            using (Cairo.Context toolctx = new Cairo.Context(PintaCore.Layers.ToolLayer.Surface))
             {
-                ctx.FillRectangle (new Cairo.Rectangle(pt.X, pt.Y, measuredSize.Width, measuredSize.Height), new Cairo.Color (1, 1, 1));
-
+                toolctx.FillRectangle (new Cairo.Rectangle(pt.X, pt.Y, measuredSize.Width, measuredSize.Height), new Cairo.Color (1, 1, 1));
+				Cairo.ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
                 if (measuredSize.Width > 0 && measuredSize.Height > 0)
                 {
-                    Cairo.ImageSurface s2 = PintaCore.Layers.CurrentLayer.Surface; //dstRectClipped
-                    using (Cairo.Context ctx2 = new Cairo.Context(s2))
+                    //dstRectClipped
+                    using (Cairo.Context ctx = new Cairo.Context(surf))
                     {
-                        SystemLayer.Fonts.DrawText(
-                            renderArgs2.Graphics, 
-                            this.font, 
-                            text, 
-                            new Point(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
-                            AppEnvironment.AntiAliasing,
-                            AppEnvironment.FontSmoothing);
-//ctx.SelectFontFace ("serif", FontSlant.Normal, FontWeight.Bold);
-//ctx.SetFontSize (32.0);
-
-//// Select a color (blue)
-//ctx.SetSourceRGB (0, 0, 1);
-
-//// Draw
-//ctx.MoveTo (10, 50);
-//ctx.ShowText ("Hello, World");
-
+                        ctx.DrawText(
+                            new Cairo.PointD(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
+                            textFont,
+						    FontSlant,
+						    FontWeight,
+						    FontSize,
+						    PintaCore.Palette.PrimaryColor,
+                            text);
                     }
                 }
 
                 // Mask out anything that isn't within the user's clip region (selected region)
-                using (Region clip = Selection.CreateRegion())
+                using (Region clip = Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds().ToGdkRectangle()))
                 {
-                    clip.Xor(renderArgs.Surface.Bounds); // invert
-                    clip.Intersect(new Rectangle(pt, measuredSize));
-                    renderArgs.Graphics.FillRegion(Brushes.White, clip.GetRegionReadOnly());
+                    clip.Xor(Region.Rectangle(surf.GetBounds())); // invert
+                    clip.Intersect(Region.Rectangle(new Rectangle(pt, measuredSize)));
+                    toolctx.FillRegion(clip, new Cairo.Color(1,1,1,1));
                 }
 
                 int skipX;
@@ -1084,19 +987,19 @@ mode = EditingMode.NotEditing;
 
                 int xEnd = Math.Min(dst.Width, pt.X + measuredSize.Width);
 
-                bool blending = AppEnvironment.AlphaBlending;
+                bool blending = true;//AppEnvironment.AlphaBlending;
 
-                if (dst.IsColumnVisible(pt.X + skipX))
-                {
+                //if (dst.IsColumnVisible(pt.X + skipX))
+                //{
                     for (int y = pt.Y; y < pt.Y + measuredSize.Height; ++y)
                     {
-                        if (!dst.IsRowVisible(y))
+                        /*if (!dst.IsRowVisible(y))
                         {
                             continue;
-                        }
+                        }*/
 
                         ColorBgra *dstPtr = dst.GetPointAddressUnchecked(pt.X + skipX, y);
-                        ColorBgra *srcPtr = ScratchSurface.GetPointAddress(pt.X + skipX, y);
+                        ColorBgra *srcPtr = PintaCore.Layers.ToolLayer.Surface.GetPointAddress(pt.X + skipX, y);
                         ColorBgra *brushPtr = brush8x8.GetRowAddressUnchecked(y & 7);
 
                         for (int x = pt.X + skipX; x < xEnd; ++x)
@@ -1127,7 +1030,7 @@ mode = EditingMode.NotEditing;
                             ++srcPtr;
                         }
                     }
-                }
+                //}
             }
         }
 	 
@@ -1231,7 +1134,7 @@ mode = EditingMode.NotEditing;
 	            this.uls = localUls;
 	
 	            for (int i = 0; i < lines.Count; i++)
-	                this.RenderText (context, surf, i);
+	                this.RenderText (surf, i);
 	
 	            // Draw the Cursor
 	            if (cursorOn)
@@ -1282,9 +1185,9 @@ mode = EditingMode.NotEditing;
         
         private Size[] sizes;
 		
-        private void RenderText(Cairo.Context context, Cairo.ImageSurface surf, int lineNumber)
+        private void RenderText(Cairo.ImageSurface surf, int lineNumber)
         {
-            DrawText(context, surf, this.font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], AppEnvironment.AntiAliasing);
+            DrawText (surf, this.Font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber],false, PintaCore.Palette.PrimaryColor);//antialiasing hardcoded for moment
         }
 		 /*
         private void PlaceMoveNub()

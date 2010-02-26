@@ -21,7 +21,7 @@ namespace Pinta.Core
         /// Draws the object on to the given Surface.
         /// </summary>
         /// <param name="dst">The Surface to draw to.</param>
-        void Draw(Surface dst);
+        void Draw(ImageSurface dst);
 
         /// <summary>
         /// Draws the object on to the given Surface after passing each pixel through
@@ -29,7 +29,7 @@ namespace Pinta.Core
         /// </summary>
         /// <param name="dst">The Surface to draw to.</param>
         /// <param name="pixelOp">The pixelOp to use for rendering.</param>
-        void Draw(Surface dst, PixelOp pixelOp);
+        void Draw(ImageSurface dst, PixelOp pixelOp);
 
         /// <summary>
         /// Draws the object on to the given Surface starting at the given (x,y) offset.
@@ -37,7 +37,7 @@ namespace Pinta.Core
         /// <param name="g">The Surface to draw to.</param>
         /// <param name="transformX">The value to be added to every X coordinate that is used for drawing.</param>
         /// <param name="transformY">The value to be added to every Y coordinate that is used for drawing.</param>
-        void Draw(Surface dst, int tX, int tY);
+        void Draw(ImageSurface dst, int tX, int tY);
 
 
         /// <summary>
@@ -47,6 +47,6 @@ namespace Pinta.Core
         /// <param name="g">The Surface to draw to.</param>
         /// <param name="transformX">The value to be added to every X coordinate that is used for drawing.</param>
         /// <param name="transformY">The value to be added to every Y coordinate that is used for drawing.</param>
-        void Draw(Surface dst, int tX, int tY, PixelOp pixelOp);
+        void Draw(ImageSurface dst, int tX, int tY, PixelOp pixelOp);
     }
 }

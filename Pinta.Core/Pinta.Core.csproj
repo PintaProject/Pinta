@@ -144,6 +144,7 @@
     <Compile Include="Effects\SplineInterpolator.cs" />
     <Compile Include="Effects\IrregularSurface.cs" />
     <Compile Include="Effects\ISurfaceDraw.cs" />
+    <Compile Include="Effects\PlacedSurface.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

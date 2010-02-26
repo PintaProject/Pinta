@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Runtime.Serialization;
 using Gdk;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
@@ -27,7 +28,7 @@ namespace Pinta.Core
           ICloneable,
           IDeserializationCallback
     {
-        private ArrayList placedSurfaces;
+        private List<PlacedSurface> placedSurfaces;
 
         [NonSerialized]
         private Region region;
@@ -56,10 +57,10 @@ namespace Pinta.Core
         public IrregularSurface (Cairo.ImageSurface source, Region roi)
         {   
             Region roiClipped = (Region)roi.Copy();
-            roiClipped.Intersect(source.GetBounds());
+            roiClipped.Intersect(Region.Rectangle(source.GetBounds()));
 
             Rectangle[] rects = roiClipped.GetRectangles();
-            this.placedSurfaces = new ArrayList(rects.Length);
+            this.placedSurfaces = new List<PlacedSurface>(rects.Length);
 
             foreach (Rectangle rect in rects)
             {
@@ -71,7 +72,7 @@ namespace Pinta.Core
 
         public IrregularSurface(Cairo.ImageSurface source, Rectangle[] roi)
         {
-            this.placedSurfaces = new ArrayList(roi.Length);
+            this.placedSurfaces = new List<PlacedSurface>(roi.Length);
 
             foreach (Rectangle rect in roi)
             {
@@ -84,7 +85,7 @@ namespace Pinta.Core
             }
 
             this.region = Utility.RectanglesToRegion(roi);
-            this.region.Intersect(source.GetBounds());
+            this.region.Intersect(Region.Rectangle(source.GetBounds()));
         }
 
         /// <summary>
@@ -94,21 +95,21 @@ namespace Pinta.Core
         /// <param name="roi">Defines the Rectangle from which to copy pixels from the Image.</param>
         public IrregularSurface (Cairo.ImageSurface source, Rectangle roi)
         {
-            this.placedSurfaces = new ArrayList();
+            this.placedSurfaces = new List<PlacedSurface>();
             this.placedSurfaces.Add(new PlacedSurface(source, roi));
-            this.region = new Region(roi);
+            this.region = Region.Rectangle(roi);
         }
 
         private IrregularSurface (IrregularSurface cloneMe)
         {
-            this.placedSurfaces = new ArrayList(cloneMe.placedSurfaces.Count);
+            this.placedSurfaces = new List<PlacedSurface>(cloneMe.placedSurfaces.Count);
 
             foreach (PlacedSurface ps in cloneMe.placedSurfaces)
             {
-                this.placedSurfaces.Add(ps.Clone());
+                this.placedSurfaces.Add((PlacedSurface)ps.Clone());
             }
 
-            this.region = (Region)cloneMe.Region.Clone();
+            this.region = cloneMe.Region.Copy();
         }
 
         ~IrregularSurface()
@@ -184,7 +185,7 @@ namespace Pinta.Core
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
+            System.GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)
@@ -197,11 +198,6 @@ namespace Pinta.Core
 
                 if (disposing)
                 {
-                    foreach (PlacedSurface ps in this.placedSurfaces)
-                    {
-                        ps.Dispose();
-                    }
-
                     this.placedSurfaces.Clear();
                     this.placedSurfaces = null;
                 }
@@ -230,13 +226,13 @@ namespace Pinta.Core
 
         public void OnDeserialization(object sender)
         {
-            region = Region.CreateEmpty();
+            region = Region.Rectangle(Rectangle.Zero);
 
             Rectangle[] rects = new Rectangle[placedSurfaces.Count];
 
             for (int i = 0; i < placedSurfaces.Count; ++i)
             {
-                rects[i] = ((PlacedSurface)placedSurfaces[i]).Bounds;
+                rects[i] = placedSurfaces[i].Bounds;
             }
 
             region = Utility.RectanglesToRegion(rects);
