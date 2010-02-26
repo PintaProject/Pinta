@@ -2711,13 +2711,15 @@ Luminosity</property>
   </widget>
   <widget class="Gtk.Bin" id="Pinta.ColorGradientWidget" design-size="300 300">
     <property name="MemberName" />
-    <property name="Visible">False</property>
+    <property name="CanFocus">True</property>
+    <property name="Events">ExposureMask, PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask, KeyPressMask</property>
     <child>
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Pinta.LevelsDialog" design-size="546 326">
+  <widget class="Gtk.Dialog" id="Pinta.LevelsDialog" design-size="522 326">
     <property name="MemberName" />
+    <property name="Events">PointerMotionMask, ButtonPressMask</property>
     <property name="Title" translatable="yes">Levels Adjustment</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Resizable">False</property>
@@ -2727,10 +2729,12 @@ Luminosity</property>
     <child internal-child="VBox">
       <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />
+        <property name="Events">ExposureMask, PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask, KeyPressMask</property>
         <property name="BorderWidth">2</property>
         <child>
           <widget class="Gtk.HBox" id="hbox1">
             <property name="MemberName" />
+            <property name="Events">PointerMotionMask, ButtonPressMask</property>
             <property name="Spacing">6</property>
             <child>
               <widget class="Gtk.VBox" id="vbox2">
@@ -2775,6 +2779,7 @@ Luminosity</property>
                 <child>
                   <widget class="Pinta.HistogramWidget" id="histogramInput">
                     <property name="MemberName" />
+                    <property name="WidthRequest">130</property>
                     <property name="Events">ButtonPressMask</property>
                   </widget>
                   <packing>
@@ -2798,6 +2803,7 @@ Luminosity</property>
             <child>
               <widget class="Gtk.VBox" id="vbox3">
                 <property name="MemberName" />
+                <property name="Events">PointerMotionMask, Button1MotionMask</property>
                 <property name="Spacing">6</property>
                 <child>
                   <widget class="Gtk.HBox" id="hbox3">
@@ -2838,6 +2844,7 @@ Luminosity</property>
                 <child>
                   <widget class="Gtk.HBox" id="hbox8">
                     <property name="MemberName" />
+                    <property name="Events">PointerMotionMask, ButtonPressMask</property>
                     <property name="Spacing">6</property>
                     <child>
                       <widget class="Gtk.VBox" id="vboxInputSpin">
@@ -2847,7 +2854,8 @@ Luminosity</property>
                           <widget class="Gtk.SpinButton" id="spinInHigh">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Upper">100</property>
+                            <property name="Lower">1</property>
+                            <property name="Upper">255</property>
                             <property name="PageIncrement">10</property>
                             <property name="StepIncrement">1</property>
                             <property name="ClimbRate">1</property>
@@ -2902,7 +2910,7 @@ Luminosity</property>
                           <widget class="Gtk.SpinButton" id="spinbuttonInLow">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Upper">100</property>
+                            <property name="Upper">254</property>
                             <property name="PageIncrement">10</property>
                             <property name="StepIncrement">1</property>
                             <property name="ClimbRate">1</property>
@@ -2926,12 +2934,14 @@ Luminosity</property>
                     <child>
                       <widget class="Pinta.ColorGradientWidget" id="colorgradientInput">
                         <property name="MemberName" />
-                        <property name="Events">ButtonPressMask</property>
+                        <property name="CanFocus">True</property>
+                        <property name="Events">ExposureMask, PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask</property>
+                        <property name="ExtensionEvents">All</property>
+                        <property name="Count">2</property>
                       </widget>
                       <packing>
                         <property name="Position">1</property>
                         <property name="AutoSize">False</property>
-                        <property name="Fill">False</property>
                       </packing>
                     </child>
                     <child>
@@ -3002,12 +3012,13 @@ Luminosity</property>
                     <child>
                       <widget class="Pinta.ColorGradientWidget" id="colorgradientOutput">
                         <property name="MemberName" />
+                        <property name="WidthRequest">0</property>
                         <property name="Events">ButtonPressMask</property>
+                        <property name="Count">3</property>
                       </widget>
                       <packing>
                         <property name="Position">1</property>
                         <property name="AutoSize">False</property>
-                        <property name="Fill">False</property>
                       </packing>
                     </child>
                     <child>
@@ -3018,7 +3029,7 @@ Luminosity</property>
                           <widget class="Gtk.SpinButton" id="spinOutHigh">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Upper">100</property>
+                            <property name="Upper">255</property>
                             <property name="PageIncrement">10</property>
                             <property name="StepIncrement">1</property>
                             <property name="ClimbRate">1</property>
@@ -3091,7 +3102,7 @@ Luminosity</property>
                           <widget class="Gtk.SpinButton" id="spinOutLow">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Upper">100</property>
+                            <property name="Upper">252</property>
                             <property name="PageIncrement">10</property>
                             <property name="StepIncrement">1</property>
                             <property name="ClimbRate">1</property>
@@ -3115,9 +3126,7 @@ Luminosity</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
+                    <property name="AutoSize">False</property>
                   </packing>
                 </child>
                 <child>
@@ -3172,6 +3181,7 @@ Luminosity</property>
                 <child>
                   <widget class="Pinta.HistogramWidget" id="histogramOutput">
                     <property name="MemberName" />
+                    <property name="WidthRequest">130</property>
                     <property name="Events">ButtonPressMask</property>
                   </widget>
                   <packing>
@@ -3208,7 +3218,7 @@ Luminosity</property>
             <child>
               <widget class="Gtk.Button" id="buttonAuto">
                 <property name="MemberName" />
-                <property name="WidthRequest">85</property>
+                <property name="WidthRequest">80</property>
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
                 <property name="Label" translatable="yes">Auto</property>
@@ -3224,7 +3234,7 @@ Luminosity</property>
             <child>
               <widget class="Gtk.Button" id="buttonReset">
                 <property name="MemberName" />
-                <property name="WidthRequest">85</property>
+                <property name="WidthRequest">80</property>
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
                 <property name="Label" translatable="yes">Reset</property>
@@ -3238,10 +3248,11 @@ Luminosity</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.CheckButton" id="checkRed1">
+              <widget class="Gtk.CheckButton" id="checkRed">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Red</property>
+                <property name="Active">True</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -3252,10 +3263,11 @@ Luminosity</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.CheckButton" id="checkGreen1">
+              <widget class="Gtk.CheckButton" id="checkGreen">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Green</property>
+                <property name="Active">True</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -3268,7 +3280,7 @@ Luminosity</property>
             <child>
               <widget class="Gtk.Button" id="buttonOk">
                 <property name="MemberName" />
-                <property name="WidthRequest">85</property>
+                <property name="WidthRequest">80</property>
                 <property name="CanFocus">True</property>
                 <property name="UseStock">True</property>
                 <property name="Type">StockItem</property>
@@ -3286,7 +3298,7 @@ Luminosity</property>
             <child>
               <widget class="Gtk.Button" id="buttonCancel">
                 <property name="MemberName" />
-                <property name="WidthRequest">85</property>
+                <property name="WidthRequest">80</property>
                 <property name="CanFocus">True</property>
                 <property name="UseStock">True</property>
                 <property name="Type">StockItem</property>
@@ -3302,10 +3314,11 @@ Luminosity</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.CheckButton" id="checkBlue1">
+              <widget class="Gtk.CheckButton" id="checkBlue">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Blue</property>
+                <property name="Active">True</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>

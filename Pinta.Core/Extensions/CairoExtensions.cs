@@ -115,6 +115,24 @@ namespace Pinta.Core
 			return dirty;
 		}
 		
+		public static Rectangle FillPolygonal (this Context g, PointD[] points, Color color)
+		{
+			g.Save ();
+			
+			g.MoveTo (points [0]);
+			foreach (var point in points)
+				g.LineTo (point);
+			
+			g.Color = color;
+			
+			Rectangle dirty = g.StrokeExtents ();
+			g.Fill ();
+
+			g.Restore ();
+
+			return dirty;
+		}
+		
 		public static Rectangle FillStrokedRectangle (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
 		{
 			double x = r.X;

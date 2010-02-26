@@ -26,6 +26,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 
 using Pinta.Core;
 
@@ -33,22 +34,86 @@ namespace Pinta
 {
 	public partial class LevelsDialog : Gtk.Dialog
 	{	
+		private bool[] mask;
+		
 		public UnaryPixelOps.Level Levels { get; private set; }
 		
 		public LevelsDialog ()
 		{
 			this.Build ();
 			this.Levels = new UnaryPixelOps.Level ();
+			mask = new bool[] {true, true, true};
 		
 			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
 			VBox.Remove(hboxBottom);
 			AddActionWidget(hboxBottom,ResponseType.None);
 			
+			checkRed.Toggled += HandleCheckRedToggled;
+			checkGreen.Toggled += HandleCheckGreenToggled;
+			checkBlue.Toggled += HandleCheckBlueToggled;
 			buttonCancel.Clicked += HandleButtonCancelClicked;
 			buttonOk.Clicked += HandleButtonOkClicked;
+			colorgradientInput.ValueChanged +=	HandleColorgradientInputValueChanged;
+			colorgradientOutput.ValueChanged += HandleColorgradientOutputValueChanged;
+			
+			MotionNotifyEvent += HandleMotionNotifyEvent;
 		}
 
+		private void HandleColorgradientInputValueChanged (object sender, IndexEventArgs e)
+		{
+			int val = colorgradientInput.GetValue (e.Index);
+			
+			if (e.Index == 0)
+				spinbuttonInLow.Value = val;
+			else
+				spinInHigh.Value = val;
+		}
+		
+		private void HandleColorgradientOutputValueChanged (object sender, IndexEventArgs e)
+		{
+			
+		}
+		
+		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
+		{
+			colorgradientInput.MotionNotify ();
+			colorgradientOutput.MotionNotify ();
+		}
+
+		private void MaskChanged ()
+		{
+			ColorBgra max = ColorBgra.Black;
+
+            max.Bgra |= mask[0] ? (uint)0xFF0000 : 0;
+            max.Bgra |= mask[1] ? (uint)0xFF00 : 0;
+            max.Bgra |= mask[2] ? (uint)0xFF : 0;
+			
+			Color maxcolor = max.ToCairoColor();
+			colorgradientInput.MaxColor = maxcolor;
+			colorgradientOutput.MaxColor = maxcolor;
+			
+			GdkWindow.Invalidate ();
+		}
+		
+		private void HandleCheckRedToggled (object sender, EventArgs e)
+		{
+			mask [0] = checkRed.Active;
+			MaskChanged();
+		}
+		
+		private void HandleCheckGreenToggled (object sender, EventArgs e)
+		{
+			mask [1] = checkGreen.Active;
+			MaskChanged ();
+		}
+
+		private void HandleCheckBlueToggled (object sender, EventArgs e)
+		{
+			mask [2] = checkBlue.Active;
+			MaskChanged ();
+		}
+		
 		private void HandleButtonOkClicked (object sender, EventArgs e)
 		{
 			Respond (ResponseType.Ok);
