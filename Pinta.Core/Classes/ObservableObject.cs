@@ -29,7 +29,7 @@ using System;
 namespace Pinta.Core
 {
 
-	public class ObservableObject
+	public abstract class ObservableObject
 	{
 		public ObservableObject ()
 		{

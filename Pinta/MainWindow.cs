@@ -97,8 +97,26 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 
-			EffectsAction.Visible = false;
 			WindowAction.Visible = false;
+
+			if (Platform.GetOS () == Platform.OS.Mac)
+			{
+				//enable the global key handler for keyboard shortcuts
+				IgeMacMenu.GlobalKeyHandlerEnabled = true;
+				
+				//Tell the IGE library to use your GTK menu as the Mac main menu
+				IgeMacMenu.MenuBar = menubar1;
+				/*
+				//tell IGE which menu item should be used for the app menu's quit item
+				IgeMacMenu.QuitMenuItem = yourQuitMenuItem;
+				*/
+				//add a new group to the app menu, and add some items to it
+				var appGroup = IgeMacMenu.AddAppMenuGroup();
+				MenuItem aboutItem = (MenuItem) PintaCore.Actions.Help.About.CreateMenuItem();
+				appGroup.AddMenuItem(aboutItem, Mono.Unix.Catalog.GetString ("About"));
+				
+				menubar1.Hide();
+			}
 		}
 
 		private void HandleTreeview1RowActivated (object o, RowActivatedArgs args)

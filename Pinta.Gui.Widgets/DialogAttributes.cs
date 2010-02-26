@@ -1,10 +1,10 @@
-// 
-// BrightnessContrastDialog.cs
+﻿// 
+// DialogAttributes.cs
 //  
 // Author:
-//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Krzysztof Marecki
+// Copyright (c) 2010 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,21 +26,43 @@
 
 using System;
 
-namespace Pinta
+namespace Pinta.Gui.Widgets
 {
-	public partial class BrightnessContrastDialog : Gtk.Dialog
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	public class SkipAttribute : Attribute
 	{
-		public int Brightness {
-			get { return hscalespinBrightness.Value; }
-		}
-		
-		public int Contrast {
-			get { return hscalespinContrast.Value; }
-		}
-		
-		public BrightnessContrastDialog ()
+	}
+
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	public class CaptionAttribute : Attribute
+	{
+		public CaptionAttribute (string caption)
 		{
-			this.Build ();
+			Caption = caption;
 		}
+
+		public string Caption;
+	}
+
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	public class MinimumValueAttribute : Attribute
+	{
+		public MinimumValueAttribute (int value)
+		{
+			Value = value;
+		}
+
+		public int Value;
+	}
+
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	public class MaximumValueAttribute : Attribute
+	{
+		public MaximumValueAttribute (int value)
+		{
+			Value = value;
+		}
+
+		public int Value;
 	}
 }

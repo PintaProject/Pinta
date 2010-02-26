@@ -283,6 +283,36 @@
     <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
       <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.InkSketch.png">
+      <LogicalName>Menu.Effects.Artistic.InkSketch.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.OilPainting.png">
+      <LogicalName>Menu.Effects.Artistic.OilPainting.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Artistic.PencilSketch.png">
+      <LogicalName>Menu.Effects.Artistic.PencilSketch.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.Fragment.png">
+      <LogicalName>Menu.Effects.Blurs.Fragment.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.GaussianBlur.png">
+      <LogicalName>Menu.Effects.Blurs.GaussianBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.MotionBlur.png">
+      <LogicalName>Menu.Effects.Blurs.MotionBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.RadialBlur.png">
+      <LogicalName>Menu.Effects.Blurs.RadialBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.SurfaceBlur.png">
+      <LogicalName>Menu.Effects.Blurs.SurfaceBlur.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.Unfocus.png">
+      <LogicalName>Menu.Effects.Blurs.Unfocus.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Blurs.ZoomBlur.png">
+      <LogicalName>Menu.Effects.Blurs.ZoomBlur.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">

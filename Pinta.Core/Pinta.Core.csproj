@@ -43,10 +43,12 @@
     <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Effects\AutoLevelEffect.cs" />
     <Compile Include="Effects\BaseEffect.cs" />
+    <Compile Include="Effects\BinaryPixelOp.cs" />
     <Compile Include="Effects\BitVector2DSurfaceAdapter.cs" />
     <Compile Include="Effects\BlackAndWhiteEffect.cs" />
     <Compile Include="Effects\Histogram.cs" />
@@ -57,6 +59,9 @@
     <Compile Include="Effects\InvertColorsEffect.cs" />
     <Compile Include="Effects\Scanline.cs" />
     <Compile Include="Effects\SepiaEffect.cs" />
+    <Compile Include="Effects\UserBlendOp.cs" />
+    <Compile Include="Effects\UserBlendOps.cs" />
+    <Compile Include="Effects\UserBlendOps.Generated.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs\TextChangedEventArgs.cs" />
