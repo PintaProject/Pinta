@@ -52,5 +52,10 @@ namespace Pinta.Core
 			Cairo.Color cairo_color = selection.CurrentColor.ToCairoColor ();
 			return new Cairo.Color (cairo_color.R, cairo_color.G, cairo_color.B, (double)selection.CurrentAlpha / ushort.MaxValue);
 		}
+		
+		public static Gdk.Point Center (this Gdk.Rectangle rect)
+		{
+			return new Gdk.Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+		}
 	}
 }

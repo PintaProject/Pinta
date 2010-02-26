@@ -434,13 +434,13 @@ mode = EditingMode.NotEditing;
             }
             */			
 			}
-		/*
+		
         private void StopEditing()
         {
             mode = EditingMode.NotEditing;
             pulseEnabled = false;
             lines = null;
-            this.moveNub.Visible = false;
+            //this.moveNub.Visible = false;
         }
 
         private void StartEditing()
@@ -453,9 +453,9 @@ mode = EditingMode.NotEditing;
             this.startTime = DateTime.Now;
             this.mode = EditingMode.EmptyEdit;
             this.pulseEnabled = true;
-            UpdateStatusText();
+            //UpdateStatusText();
         }
-
+		/*
         private void UpdateStatusText()
         {
             string text;
@@ -474,7 +474,7 @@ mode = EditingMode.NotEditing;
 
             SetStatus(image, text);
         }
-
+		 */
         private void PerformEnter()
         {
             string currentLine = (string)this.lines[this.linePos];
@@ -495,7 +495,7 @@ mode = EditingMode.NotEditing;
             this.sizes = null;
 
         }
-
+		
         private void PerformBackspace()
         {   
             if (textPos == 0 && linePos > 0)
@@ -538,23 +538,23 @@ mode = EditingMode.NotEditing;
                 string currentLine = (string)lines[linePos];
                 int ntp = textPos;
 
-                if (Char.IsLetterOrDigit(currentLine[ntp - 1]))
+                if (System.Char.IsLetterOrDigit(currentLine[ntp - 1]))
                 {
-                    while (ntp > 0 && (Char.IsLetterOrDigit(currentLine[ntp - 1])))
+                    while (ntp > 0 && (System.Char.IsLetterOrDigit(currentLine[ntp - 1])))
                     {
                         ntp--;
                     }
                 }
-                else if (Char.IsWhiteSpace(currentLine[ntp - 1]))
+                else if (System.Char.IsWhiteSpace(currentLine[ntp - 1]))
                 {
-                    while (ntp > 0 && (Char.IsWhiteSpace(currentLine[ntp - 1])))
+                    while (ntp > 0 && (System.Char.IsWhiteSpace(currentLine[ntp - 1])))
                     {
                         ntp--;
                     }
                 }
-                else if (Char.IsPunctuation(currentLine[ntp - 1]))
+                else if (System.Char.IsPunctuation(currentLine[ntp - 1]))
                 {
-                    while (ntp > 0 && (Char.IsPunctuation(currentLine[ntp - 1])))
+                    while (ntp > 0 && (System.Char.IsPunctuation(currentLine[ntp - 1])))
                     {
                         ntp--;
                     }
@@ -619,23 +619,23 @@ mode = EditingMode.NotEditing;
                 int ntp = textPos;
                 string currentLine = (string)lines[linePos];
 
-                if (Char.IsLetterOrDigit(currentLine[ntp]))
+                if (System.Char.IsLetterOrDigit(currentLine[ntp]))
                 {
-                    while (ntp < currentLine.Length && (Char.IsLetterOrDigit(currentLine[ntp])))
+                    while (ntp < currentLine.Length && (System.Char.IsLetterOrDigit(currentLine[ntp])))
                     {
                         currentLine = currentLine.Remove(ntp, 1);
                     }
                 }
-                else if (Char.IsWhiteSpace(currentLine[ntp]))
+                else if (System.Char.IsWhiteSpace(currentLine[ntp]))
                 {
-                    while (ntp < currentLine.Length && (Char.IsWhiteSpace(currentLine[ntp])))
+                    while (ntp < currentLine.Length && (System.Char.IsWhiteSpace(currentLine[ntp])))
                     {
                         currentLine = currentLine.Remove(ntp, 1);
                     }
                 }
-                else if (Char.IsPunctuation(currentLine[ntp]))
+                else if (System.Char.IsPunctuation(currentLine[ntp]))
                 {
-                    while (ntp < currentLine.Length && (Char.IsPunctuation(currentLine[ntp])))
+                    while (ntp < currentLine.Length && (System.Char.IsPunctuation(currentLine[ntp])))
                     {
                         currentLine = currentLine.Remove(ntp, 1);
                     }
@@ -677,23 +677,23 @@ mode = EditingMode.NotEditing;
                 int ntp = textPos;
                 string currentLine = (string)lines[linePos];
 
-                if (Char.IsLetterOrDigit(currentLine[ntp - 1]))
+                if (System.Char.IsLetterOrDigit(currentLine[ntp - 1]))
                 {
-                    while (ntp > 0 && (Char.IsLetterOrDigit(currentLine[ntp - 1])))
+                    while (ntp > 0 && (System.Char.IsLetterOrDigit(currentLine[ntp - 1])))
                     {
                         ntp--;
                     }
                 }
-                else if (Char.IsWhiteSpace(currentLine[ntp - 1]))
+                else if (System.Char.IsWhiteSpace(currentLine[ntp - 1]))
                 {
-                    while (ntp > 0 && (Char.IsWhiteSpace(currentLine[ntp - 1])))
+                    while (ntp > 0 && (System.Char.IsWhiteSpace(currentLine[ntp - 1])))
                     {
                         ntp--;
                     }
                 }
-                else if (ntp > 0 && Char.IsPunctuation(currentLine[ntp - 1]))
+                else if (ntp > 0 && System.Char.IsPunctuation(currentLine[ntp - 1]))
                 {
-                    while (ntp > 0 && Char.IsPunctuation(currentLine[ntp - 1]))
+                    while (ntp > 0 && System.Char.IsPunctuation(currentLine[ntp - 1]))
                     {
                         ntp--;
                     }
@@ -732,23 +732,23 @@ mode = EditingMode.NotEditing;
                 int ntp = textPos;
                 string currentLine = (string)lines[linePos];
 
-                if (Char.IsLetterOrDigit(currentLine[ntp]))
+                if (System.Char.IsLetterOrDigit(currentLine[ntp]))
                 {
-                    while (ntp < currentLine.Length && (Char.IsLetterOrDigit(currentLine[ntp])))
+                    while (ntp < currentLine.Length && (System.Char.IsLetterOrDigit(currentLine[ntp])))
                     {
                         ntp++;
                     }
                 }
-                else if (Char.IsWhiteSpace(currentLine[ntp]))
+                else if (System.Char.IsWhiteSpace(currentLine[ntp]))
                 {
-                    while (ntp < currentLine.Length && (Char.IsWhiteSpace(currentLine[ntp])))
+                    while (ntp < currentLine.Length && (System.Char.IsWhiteSpace(currentLine[ntp])))
                     {
                         ntp++;
                     }
                 }
-                else if (ntp > 0 && Char.IsPunctuation(currentLine[ntp]))
+                else if (ntp > 0 && System.Char.IsPunctuation(currentLine[ntp]))
                 {
-                    while (ntp < currentLine.Length && Char.IsPunctuation(currentLine[ntp]))
+                    while (ntp < currentLine.Length && System.Char.IsPunctuation(currentLine[ntp]))
                     {
                         ntp++;
                     }
@@ -769,7 +769,7 @@ mode = EditingMode.NotEditing;
 
         private void PerformUp()
         {
-            PointF p = TextPositionToPoint(new Position(linePos, textPos));
+            Point p = TextPositionToPoint(new Position(linePos, textPos));
             p.Y -= this.sizes[0].Height; //font.Height;
             Position np = PointToTextPosition(p);
             linePos = np.Line;
@@ -784,14 +784,14 @@ mode = EditingMode.NotEditing;
             }
             else
             {
-                PointF p = TextPositionToPoint(new Position(linePos, textPos));
+                Point p = TextPositionToPoint(new Position(linePos, textPos));
                 p.Y += this.sizes[0].Height; //font.Height;
                 Position np = PointToTextPosition(p);
                 linePos = np.Line;
                 textPos = np.Offset;
             }
         }
-		 */
+		 
         private Point GetUpperLeft(Size sz, int line)
         {
             Point p = clickPoint;
@@ -1208,8 +1208,9 @@ mode = EditingMode.NotEditing;
                 this.moveNub.Location = pt;
             }
         }
-
-        protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args, Cairo.PointD point)
+		 */
+		
+        protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
         {
             switch (args.Event.Key)
             {
@@ -1217,7 +1218,7 @@ mode = EditingMode.NotEditing;
                     if (mode != EditingMode.NotEditing)
                     {
                         // Prevent pan cursor from flicking to 'hand w/ the X' whenever use types a space in their text
-                        e.Handled = true;
+                        args.RetVal = true;
                     }
                     break;
 
@@ -1231,18 +1232,14 @@ mode = EditingMode.NotEditing;
                     break;
 
                 // Make sure these are not used to scroll the document around
-                case Gdk.Key.Home | Gdk.Key.Shift:
                 case Gdk.Key.Home:
                 case Gdk.Key.End:
-                case Gdk.Key.End | Gdk.Key.Shift:
-                case Gdk.Key.Next | Gdk.Key.Shift:
                 case Gdk.Key.Next:
-                case Gdk.Key.Prior | Gdk.Key.Shift:
                 case Gdk.Key.Prior:
                     if (this.mode != EditingMode.NotEditing)
                     {
                         OnKeyPress(args.Event.Key, args.Event.State);
-                        e.Handled = true;
+                        args.RetVal = true;
                     }
                     break;
 
@@ -1252,31 +1249,32 @@ mode = EditingMode.NotEditing;
                         if (this.mode != EditingMode.NotEditing)
                         {
                             OnKeyPress(args.Event.Key, args.Event.State);
-                            e.Handled = true;
+                            args.RetVal = true;
                         }
                     }
                     break;
 
-                case Gdk.Key.Back:
+                case Gdk.Key.BackSpace:
                 case Gdk.Key.Delete:
                     if (this.mode != EditingMode.NotEditing)
                     {
-                        OnKeyPress(e.KeyCode);
-                        e.Handled = true;
+                        OnKeyPress(args.Event.Key, args.Event.State);
+                        args.RetVal = true;
                     }
                     break;
             }
 
             // Ensure text is on screen when they are typing
+			/*
             if (this.mode != EditingMode.NotEditing)
             {
-                Point p = Point.Truncate(TextPositionToPoint(new Position(linePos, textPos)));
+                Point p = TextPositionToPoint(new Position(linePos, textPos));
                 Rectangle bounds = Utility.RoundRectangle(DocumentWorkspace.VisibleDocumentRectangleF);
                 bounds.Inflate(-(int)font.Height, -(int)font.Height);
 
                 if (!bounds.Contains(p))
                 {
-                    PointF newCenterPt = Utility.GetRectangleCenter((RectangleF)bounds);
+                    Cairo.PointD newCenterPt = bounds.Center();
 
                     // horizontally off
                     if (p.X > bounds.Right || p.Y < bounds.Left)
@@ -1290,13 +1288,13 @@ mode = EditingMode.NotEditing;
                         newCenterPt.Y = p.Y;
                     }
 
-                    DocumentWorkspace.DocumentCenterPointF = newCenterPt;
+                    PintaCore.Workspace.RecenterView(newCenterPt.X, newCenterPt.Y);
                 }
             }
-
-            base.OnKeyDown (e);
+			 */
+            //base.OnKeyDown (e);
         }
-
+		/*
         protected override void OnKeyUp(DrawingArea canvas, KeyReleaseEventArgs args, Cairo.PointD point)
         {
             switch (e.KeyCode)
@@ -1316,28 +1314,29 @@ mode = EditingMode.NotEditing;
 
             base.OnKeyUp(e);
         }
-
-        protected void OnKeyPress(DrawingArea canvas, KeyPressEventArgs args, Cairo.PointD point)
+		 */
+        protected void OnKeyPress(DrawingArea canvas, KeyPressEventArgs args)
         {
             switch (args.Event.Key)
             {
-                case (char)13: // Enter
+				case Gdk.Key.KP_Enter:
+                case Gdk.Key.Return:
                     if (tracking)
                     {
-                        e.Handled = true;
+                        args.RetVal = true;
                     }
                     break;
 
-                case (char)27: // Escape
+                case Gdk.Key.Escape:
                     if (tracking)
                     {
-                        e.Handled = true;
+                        args.RetVal = true;
                     }
                     else
                     {
                         if (mode == EditingMode.Editing)
                         {
-                            SaveHistoryMemento();
+                            //SaveHistoryMemento();
                         }
                         else if (mode == EditingMode.EmptyEdit)
                         {
@@ -1346,7 +1345,7 @@ mode = EditingMode.NotEditing;
 
                         if (mode != EditingMode.NotEditing)
                         {
-                            e.Handled = true;
+                            args.RetVal = true;
                             StopEditing();
                         }
                     }
@@ -1354,30 +1353,32 @@ mode = EditingMode.NotEditing;
                     break;
             }
 
-            if (!e.Handled && mode != EditingMode.NotEditing && !tracking)
+            if (!(bool)args.RetVal && mode != EditingMode.NotEditing && !tracking)
             {
-                e.Handled = true;
+                args.RetVal = true;
 
                 if (mode == EditingMode.EmptyEdit)
                 {
                     mode = EditingMode.Editing;
-                    CompoundHistoryMemento cha = new CompoundHistoryMemento(Name, Image, new List<HistoryMemento>());
-                    this.currentHA = cha;
-                    HistoryStack.PushNewMemento(cha);
+                    //CompoundHistoryMemento cha = new CompoundHistoryMemento(Name, Image, new List<HistoryMemento>());
+                    //this.currentHA = cha;
+                    //HistoryStack.PushNewMemento(cha);
                 }
 
-                if (!char.IsControl(e.KeyChar)) 
+                if ((args.Event.State & ModifierType.ControlMask) == 0) 
                 {
-                    InsertCharIntoString(e.KeyChar);
+					char ch = (char)Gdk.Keyval.ToUnicode(args.Event.KeyValue);
+					//(char)args.Event.Key
+					InsertCharIntoString(ch);
                     textPos++;
                     RedrawText(true);
                 }
             }
 
-            base.OnKeyPress (args.Event.Key, args.Event.State);
+            //base.OnKeyPress (args.Event.Key, args.Event.State);
         }
 
-        protected void OnKeyPress(Gdk.Key key, Gdk.ModifierType modifier)
+        protected bool OnKeyPress(Gdk.Key key, Gdk.ModifierType modifier)
         {
             bool keyHandled = true;
 
@@ -1385,7 +1386,7 @@ mode = EditingMode.NotEditing;
             {
                 keyHandled = false;
             }
-            else if (modifier == Gdk.Key.Alt)
+            else if ((modifier & Gdk.ModifierType.Mod1Mask) != 0)
             {
                 // ignore so they can use Alt+#### to type special characters
             }
@@ -1393,8 +1394,8 @@ mode = EditingMode.NotEditing;
             {
                 switch (key)
                 {
-                    case Gdk.Key.Back:
-                        if (modifier == Gdk.Key.Control)
+                    case Gdk.Key.BackSpace:
+                        if ((modifier & Gdk.ModifierType.ControlMask) != 0)
                         {
                             PerformControlBackspace();
                         }
@@ -1406,7 +1407,7 @@ mode = EditingMode.NotEditing;
                         break;
 
                     case Gdk.Key.Delete:
-                        if (modifier == Gdk.Key.Control)
+                        if ((modifier & Gdk.ModifierType.ControlMask) != 0)
                         {
                             PerformControlDelete();
                         }
@@ -1417,12 +1418,12 @@ mode = EditingMode.NotEditing;
 
                         break;
 
-                    case Gdk.Key.Enter:
+                    case Gdk.Key.Return:
                         PerformEnter();
                         break;
 
                     case Gdk.Key.Left:
-                        if (modifier == Gdk.Key.Control)
+                        if ((modifier & Gdk.ModifierType.ControlMask) != 0)
                         {
                             PerformControlLeft();
                         }
@@ -1434,7 +1435,7 @@ mode = EditingMode.NotEditing;
                         break;
 
                     case Gdk.Key.Right:
-                        if (modifier == Gdk.Key.Control)
+                        if ((modifier & Gdk.ModifierType.ControlMask) != 0)
                         {
                             PerformControlRight();
                         }
@@ -1454,7 +1455,7 @@ mode = EditingMode.NotEditing;
                         break;
 
                     case Gdk.Key.Home:
-                        if (modifier == Gdk.Key.Control)
+                        if ((modifier & Gdk.ModifierType.ControlMask) != 0)
                         {
                             linePos = 0;
                         }
@@ -1463,7 +1464,7 @@ mode = EditingMode.NotEditing;
                         break;
 
                     case Gdk.Key.End:
-                        if (modifier == Gdk.Key.Control)
+                        if ((modifier & Gdk.ModifierType.ControlMask) != 0)
                         {
                             linePos = lines.Count - 1;
                         }
@@ -1484,15 +1485,12 @@ mode = EditingMode.NotEditing;
                 }
             }
 
-            if (!keyHandled) 
-            {
-                base.OnKeyPress(keyData);
-            }
+            return keyHandled;
         }
-
-        private Cairo.PointD TextPositionToPoint(Position p)
+		 
+        private Point TextPositionToPoint(Position p)
         {
-            PointD pf = new PointD(0,0);
+            Point pf = new Point(0,0);
 
             Size sz = StringSize(((string)lines[p.Line]).Substring(0, p.Offset));
             Size fullSz = StringSize((string)lines[p.Line]);
@@ -1500,29 +1498,29 @@ mode = EditingMode.NotEditing;
             switch (alignment)
             {
                 case TextAlignment.Left: 
-                    pf = new PointD(clickPoint.X + sz.Width, clickPoint.Y + (sz.Height * p.Line));
+                    pf = new Point(clickPoint.X + sz.Width, clickPoint.Y + (sz.Height * p.Line));
                     break;
 
                 case TextAlignment.Center: 
-                    pf = new PointD(clickPoint.X + (sz.Width - (fullSz.Width/2)), clickPoint.Y + (sz.Height * p.Line));
+                    pf = new Point(clickPoint.X + (sz.Width - (fullSz.Width/2)), clickPoint.Y + (sz.Height * p.Line));
                     break;
 
                 case TextAlignment.Right: 
-                    pf = new PointD(clickPoint.X + (sz.Width - fullSz.Width), clickPoint.Y + (sz.Height * p.Line));
+                    pf = new Point(clickPoint.X + (sz.Width - fullSz.Width), clickPoint.Y + (sz.Height * p.Line));
                     break;
                     
                 default: 
-                    throw new InvalidEnumArgumentException("Invalid Alignment");
+                    throw new System.ComponentModel.InvalidEnumArgumentException("Invalid Alignment");
             }
 
             return pf;
         }
-
+		
         private int FindOffsetPosition(float offset, string line, int lno)
         {
             for (int i = 0; i < line.Length; i++)
             {
-                PointF pf = TextPositionToPoint(new Position(lno, i));
+                Point pf = TextPositionToPoint(new Position(lno, i));
                 float dx = pf.X - clickPoint.X;
 
                 if (dx >= offset)
@@ -1534,10 +1532,10 @@ mode = EditingMode.NotEditing;
             return line.Length;
         }
 
-        private Position PointToTextPosition(Cairo.PointD pf)
+        private Position PointToTextPosition(Point pf)
         {
-            float dx = pf.X - clickPoint.X;
-            float dy = pf.Y - clickPoint.Y;
+            int dx = pf.X - clickPoint.X;
+            int dy = pf.Y - clickPoint.Y;
             int line = (int)Math.Floor(dy / (float)this.sizes[0].Height);
 
             if (line < 0)
@@ -1559,7 +1557,7 @@ mode = EditingMode.NotEditing;
 
             return p;
         }
-
+		/*
         protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
         {
             if (tracking)
@@ -1770,13 +1768,13 @@ mode = EditingMode.NotEditing;
                 this.RedrawText(false);
             }
         }*/		
-		/*
+		
         private void InsertCharIntoString(char c)
         {
             lines[linePos] = ((string)lines[linePos]).Insert(textPos, c.ToString());
             this.sizes = null;
         }
-		*/		
+			
 		/*public TextTool(DocumentWorkspace documentWorkspace)
             : base(documentWorkspace,
                    ImageResource.Get("Icons.TextToolIcon.png"),

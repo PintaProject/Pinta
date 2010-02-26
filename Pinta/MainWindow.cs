@@ -339,11 +339,13 @@ namespace Pinta
 		}
 		#endregion
 		
+		[GLib.ConnectBefore]
 		protected virtual void OnDrawingarea1KeyPressEvent (object o, Gtk.KeyPressEventArgs args)
 		{
 			PintaCore.Tools.CurrentTool.DoKeyPress (drawingarea1, args);
 		}
 		
+		[GLib.ConnectBefore]
 		protected virtual void OnDrawingarea1KeyReleaseEvent (object o, Gtk.KeyReleaseEventArgs args)
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args);
