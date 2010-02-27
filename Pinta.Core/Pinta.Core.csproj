@@ -81,6 +81,7 @@
     <Compile Include="Managers\HistoryManager.cs" />
     <Compile Include="Managers\LayerManager.cs" />
     <Compile Include="Managers\PaletteManager.cs" />
+    <Compile Include="Managers\SystemManager.cs" />
     <Compile Include="Managers\ToolManager.cs" />
     <Compile Include="PintaCore.cs" />
     <Compile Include="Extensions\CairoExtensions.cs" />

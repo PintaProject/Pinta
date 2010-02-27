@@ -62,6 +62,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Widgets\CellRendererSurface.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
