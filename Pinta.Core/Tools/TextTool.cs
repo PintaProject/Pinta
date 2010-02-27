@@ -438,6 +438,7 @@ mode = EditingMode.NotEditing;
 		
         private void StopEditing()
         {
+			PintaCore.Layers.ToolLayer.Hidden = true;
             mode = EditingMode.NotEditing;
             pulseEnabled = false;
             lines = null;
@@ -454,6 +455,7 @@ mode = EditingMode.NotEditing;
             this.startTime = DateTime.Now;
             this.mode = EditingMode.EmptyEdit;
             this.pulseEnabled = true;
+			PintaCore.Layers.ToolLayer.Hidden = false;
             //UpdateStatusText();
         }
 		/*
@@ -1210,7 +1212,6 @@ mode = EditingMode.NotEditing;
 		
         protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
         {
-			Console.WriteLine("key down!");
             switch (args.Event.Key)
             {
                 case Gdk.Key.space:
@@ -1237,8 +1238,7 @@ mode = EditingMode.NotEditing;
                 case Gdk.Key.Prior:
                     if (this.mode != EditingMode.NotEditing)
                     {
-                        OnKeyPress(args.Event.Key, args.Event.State);
-                        args.RetVal = true;
+                        args.RetVal = OnKeyPress(args.Event.Key, args.Event.State);
                     }
                     break;
 
@@ -1247,8 +1247,7 @@ mode = EditingMode.NotEditing;
                     {
                         if (this.mode != EditingMode.NotEditing)
                         {
-                            OnKeyPress(args.Event.Key, args.Event.State);
-                            args.RetVal = true;
+                            args.RetVal = OnKeyPress(args.Event.Key, args.Event.State);
                         }
                     }
                     break;
@@ -1257,8 +1256,7 @@ mode = EditingMode.NotEditing;
                 case Gdk.Key.Delete:
                     if (this.mode != EditingMode.NotEditing)
                     {
-                        OnKeyPress(args.Event.Key, args.Event.State);
-                        args.RetVal = true;
+                        args.RetVal = OnKeyPress(args.Event.Key, args.Event.State);
                     }
                     break;
             }
@@ -1292,6 +1290,8 @@ mode = EditingMode.NotEditing;
             }
 			 */
             //base.OnKeyDown (e);
+			//replace with:
+			this.OnKeyPress(canvas, args);
         }
 		/*
         protected override void OnKeyUp(DrawingArea canvas, KeyReleaseEventArgs args, Cairo.PointD point)
@@ -1316,7 +1316,6 @@ mode = EditingMode.NotEditing;
 		 */
         protected void OnKeyPress(DrawingArea canvas, KeyPressEventArgs args)
         {
-			Console.WriteLine("key press!");
             switch (args.Event.Key)
             {
 				case Gdk.Key.KP_Enter:
@@ -1352,8 +1351,11 @@ mode = EditingMode.NotEditing;
 
                     break;
             }
-
-            if (!(bool)args.RetVal && mode != EditingMode.NotEditing && !tracking)
+			bool handled = false;
+			if (args.RetVal != null && args.RetVal is bool)
+					handled = (bool)args.RetVal;
+			
+            if (!handled && mode != EditingMode.NotEditing && !tracking)
             {
                 args.RetVal = true;
 

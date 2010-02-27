@@ -212,7 +212,8 @@
                         <child>
                           <widget class="Gtk.DrawingArea" id="drawingarea1">
                             <property name="MemberName" />
-                            <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
+                            <property name="CanFocus">True</property>
+                            <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
                             <property name="ShowScrollbars">True</property>
                             <signal name="ButtonPressEvent" handler="OnDrawingarea1ButtonPressEvent" />
                             <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />

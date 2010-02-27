@@ -231,7 +231,8 @@ namespace Pinta {
             w10.ShadowType = ((Gtk.ShadowType)(0));
             // Container child GtkViewport.Gtk.Container+ContainerChild
             this.drawingarea1 = new Gtk.DrawingArea();
-            this.drawingarea1.Events = ((Gdk.EventMask)(13062));
+            this.drawingarea1.CanFocus = true;
+            this.drawingarea1.Events = ((Gdk.EventMask)(16134));
             this.drawingarea1.Name = "drawingarea1";
             w10.Add(this.drawingarea1);
             this.GtkScrolledWindow.Add(w10);
