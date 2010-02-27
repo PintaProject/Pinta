@@ -67,6 +67,7 @@ namespace Pinta.Core
 			return false;
 		}
 
+		#region Algorithm Code Ported From PDN
 		public static int[] CreateGaussianBlurRow (int amount)
 		{
 			int size = 1 + (amount * 2);
@@ -116,6 +117,11 @@ namespace Pinta.Core
 
 			ulong arraysLength = (ulong)(sizeof (long) * wlen);
 
+			// Cache these for a massive performance boost
+			int src_width = src.Width;
+			int src_height = src.Height;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			
 			foreach (Gdk.Rectangle rect in rois) {
 				if (rect.Height >= 1 && rect.Width >= 1) {
 					for (int y = rect.Top; y < rect.Bottom; ++y) {
@@ -139,11 +145,11 @@ namespace Pinta.Core
 							gSums[wx] = 0;
 							rSums[wx] = 0;
 
-							if (srcX >= 0 && srcX < src.Width) {
+							if (srcX >= 0 && srcX < src_width) {
 								for (int wy = 0; wy < wlen; ++wy) {
 									int srcY = y + wy - r;
 
-									if (srcY >= 0 && srcY < src.Height) {
+									if (srcY >= 0 && srcY < src_height) {
 										ColorBgra c = src.GetPointUnchecked (srcX, srcY);
 										int wp = w[wy];
 
@@ -223,12 +229,12 @@ namespace Pinta.Core
 
 							int srcX = x + wx - r;
 
-							if (srcX >= 0 && srcX < src.Width) {
+							if (srcX >= 0 && srcX < src_width) {
 								for (int wy = 0; wy < wlen; ++wy) {
 									int srcY = y + wy - r;
 
-									if (srcY >= 0 && srcY < src.Height) {
-										ColorBgra c = src.GetPointUnchecked (srcX, srcY);
+									if (srcY >= 0 && srcY < src_height) {
+										ColorBgra c = src.GetPointUnchecked (src_data_ptr, src_width, srcX, srcY);
 										int wp = w[wy];
 
 										waSums[wx] += wp;
@@ -271,6 +277,7 @@ namespace Pinta.Core
 				}
 			}
 		}
+		#endregion
 
 		private class GaussianBlurData
 		{
