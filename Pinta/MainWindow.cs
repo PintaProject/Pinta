@@ -350,8 +350,6 @@ namespace Pinta
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args);
 		}
-		
-		
-		
+				
 	}
 }

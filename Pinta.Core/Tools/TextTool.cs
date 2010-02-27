@@ -62,7 +62,7 @@ namespace Pinta.Core
 
 		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
 		private Cairo.PointD startMouseXY;
-		private Cairo.PointD startClickPoint;
+		private Point startClickPoint;
 		private bool tracking;
 
 		//private MoveNubRenderer moveNub;
@@ -284,6 +284,7 @@ mode = EditingMode.NotEditing;
 			return g.TextExtents(str);
 		}
 		
+		private int FontHeight { get { return StringSize("a").Height;} }
 		
 
 		void HandlePintaCorePalettePrimaryColorChanged (object sender, EventArgs e)
@@ -931,11 +932,8 @@ mode = EditingMode.NotEditing;
         {
             Point pt2 = pt;
             Size measuredSize2 = measuredSize;
-			int offset;
-			using (Cairo.Context g = new Cairo.Context (dst)) {
-            	offset = (int)TextExtents(g, "").Height;
-			}
-            pt.X -= offset;
+			int offset = FontHeight;
+			pt.X -= offset;
             measuredSize.Width += 2 * offset;
             Rectangle dstRect = new Rectangle(pt, measuredSize);
             Rectangle dstRectClipped = Rectangle.Intersect(dstRect, PintaCore.Layers.ToolLayer.Surface.GetBounds());
@@ -1098,7 +1096,7 @@ mode = EditingMode.NotEditing;
 	            {
 	                emptyCursorLineFlag = true;
 	                Size fullLineSize = sizes[linePos];
-	                cursorLineSize = new Size(2, (int)(Math.Ceiling(TextExtents(context, "").Height)));
+	                cursorLineSize = new Size(2, FontHeight);
 	                cursorUL = GetUpperLeft(fullLineSize, linePos);
 	                cursorRect = new Rectangle(cursorUL, cursorLineSize);
 	            }
@@ -1120,7 +1118,7 @@ mode = EditingMode.NotEditing;
 	            rects[lines.Count] = cursorRect;
 	
 	            // Account for overhang on italic or fancy fonts
-	            int offset = (int)TextExtents(context, "").Height;
+	            int offset = FontHeight;
 	            for (int i = 0; i < rects.Length; ++i)
 	            {
 	                rects[i].X -= offset;
@@ -1212,6 +1210,7 @@ mode = EditingMode.NotEditing;
 		
         protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
         {
+			Console.WriteLine("key down!");
             switch (args.Event.Key)
             {
                 case Gdk.Key.space:
@@ -1317,6 +1316,7 @@ mode = EditingMode.NotEditing;
 		 */
         protected void OnKeyPress(DrawingArea canvas, KeyPressEventArgs args)
         {
+			Console.WriteLine("key press!");
             switch (args.Event.Key)
             {
 				case Gdk.Key.KP_Enter:
@@ -1557,20 +1557,19 @@ mode = EditingMode.NotEditing;
 
             return p;
         }
-		/*
+		
         protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
         {
             if (tracking)
             {
-                Point newMouseXY = new Point(e.X, e.Y);
-                Size delta = new Size(newMouseXY.X - startMouseXY.X, newMouseXY.Y - startMouseXY.Y);
-                this.clickPoint = new Point(this.startClickPoint.X + delta.Width, this.startClickPoint.Y + delta.Height);
+                Cairo.PointD delta = new Cairo.PointD(point.X - startMouseXY.X, point.Y - startMouseXY.Y);
+                this.clickPoint = new Point((int)(this.startClickPoint.X + delta.X), (int)(this.startClickPoint.Y + delta.Y));
                 RedrawText(false);
-                UpdateStatusText();
+                //UpdateStatusText();
             }
             else
             {
-                bool touchingNub = this.moveNub.IsPointTouching(new Point(e.X, e.Y), false);
+                /*bool touchingNub = this.moveNub.IsPointTouching(new Point(e.X, e.Y), false);
 
                 if (touchingNub && this.moveNub.Visible)
                 {
@@ -1579,7 +1578,7 @@ mode = EditingMode.NotEditing;
                 else
                 {
                     this.Cursor = this.textToolCursor;
-                }
+                }*/
             }
 
             base.OnMouseMove (o, args, point);
@@ -1589,38 +1588,41 @@ mode = EditingMode.NotEditing;
         {
             if (tracking)
             {
-                OnMouseMove(e);
+                Cairo.PointD delta = new Cairo.PointD(point.X - startMouseXY.X, point.Y - startMouseXY.Y);
+                this.clickPoint = new Point((int)(this.startClickPoint.X + delta.X), (int)(this.startClickPoint.Y + delta.Y));
+                RedrawText(false);
                 tracking = false;
-                UpdateStatusText();
+                //UpdateStatusText();
             }
 
-            base.OnMouseUp (e);
+            //base.OnMouseUp (e);
         }
 
         protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
         {
         	base.OnMouseDown (canvas, args, point);
 
-            bool touchingMoveNub = this.moveNub.IsPointTouching(new Point(e.X, e.Y), false);
+            //bool touchingMoveNub = this.moveNub.IsPointTouching(new Point(e.X, e.Y), false);
 
-            if (this.mode != EditingMode.NotEditing && (e.Button == MouseButtons.Right || touchingMoveNub))
+            if (this.mode != EditingMode.NotEditing && (args.Event.Button == 3 ))//|| touchingMoveNub)) // = right click
             {
                 this.tracking = true;
-                this.startMouseXY = new Point(e.X, e.Y);
+                this.startMouseXY = point;
                 this.startClickPoint = this.clickPoint;
-                this.Cursor = this.handCursorMouseDown;
-                UpdateStatusText();
+                //this.Cursor = this.handCursorMouseDown;
+                //UpdateStatusText();
             }
-            else if (e.Button == MouseButtons.Left)
+            else if (args.Event.Button == 1)
             {
                 if (saved != null)
                 {
-                    Rectangle bounds = Utility.GetRegionBounds(saved.Region);
-                    bounds.Inflate(font.Height, font.Height);
+					Rectangle[] rects = saved.Region.GetRectangles();
+                    Rectangle bounds = Utility.GetRegionBounds(rects, 0, rects.Length);
+                    bounds.Inflate(FontHeight, FontHeight);
 
-                    if (lines != null && bounds.Contains(e.X, e.Y))
+                    if (lines != null && bounds.Contains((int)point.X, (int)point.Y))
                     {
-                        Position p = PointToTextPosition(new PointF(e.X, e.Y + (font.Height / 2)));
+                        Position p = PointToTextPosition(new Point((int)point.X, (int)(point.Y + (FontHeight / 2))));
                         linePos = p.Line;
                         textPos = p.Offset;
                         RedrawText(true);
@@ -1631,7 +1633,7 @@ mode = EditingMode.NotEditing;
                 switch (mode)
                 {
                     case EditingMode.Editing:
-                        SaveHistoryMemento();
+                        //SaveHistoryMemento();
                         StopEditing();
                         break;
 
@@ -1641,7 +1643,7 @@ mode = EditingMode.NotEditing;
                         break;
                 }
 
-                clickPoint = new Point(e.X, e.Y);
+                clickPoint = new Point((int)point.X, (int)point.Y);
                 StartEditing();
                 RedrawText(true);
             }
@@ -1737,9 +1739,9 @@ mode = EditingMode.NotEditing;
             {
                 canHandle = true;
             }
-        }*/		
-		/*
-        /*protected override void OnPaste(IDataObject data, out bool handled)
+        }	
+		
+        protected override void OnPaste(IDataObject data, out bool handled)
         {
             base.OnPaste (data, out handled);
 

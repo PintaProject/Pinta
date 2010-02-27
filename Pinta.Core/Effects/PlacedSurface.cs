@@ -1,4 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 // Paint.NET                                                                   //
 // Copyright (C) Rick Brewster, Tom Jackson, and past contributors.            //
 // Portions Copyright (C) Microsoft Corporation. All Rights Reserved.          //
@@ -155,7 +155,12 @@ namespace Pinta.Core
         public PlacedSurface(ImageSurface source, Gdk.Rectangle roi)
         {
             where = roi.Location;
-            what = (ImageSurface)source.CreateSimilar(source.Content, roi.Width, roi.Height);
+			what = new ImageSurface(Format.Argb32, roi.Width, roi.Height);
+			
+			using (Context g = new Context (what)) {
+				g.SetSourceSurface (source, -roi.X, -roi.Y);
+				g.Paint ();
+			}
         }
 
         private PlacedSurface(PlacedSurface ps)
