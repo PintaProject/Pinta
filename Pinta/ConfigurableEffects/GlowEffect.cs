@@ -80,10 +80,10 @@ namespace Pinta.Core
 		{
 			contrastEffect.Data.Brightness = Data.Brightness;
 			contrastEffect.Data.Contrast = Data.Contrast;
-			contrastEffect.RenderEffect (dest, dest, rois);
+			contrastEffect.RenderEffect (src, dest, rois);
 
 			blurEffect.Data.Radius = Data.Radius;
-			blurEffect.RenderEffect (src, dest, rois);
+			blurEffect.RenderEffect (dest, dest, rois);
 
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y < roi.Bottom; ++y) {
