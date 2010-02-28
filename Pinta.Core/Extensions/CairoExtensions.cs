@@ -661,11 +661,33 @@ namespace Pinta.Core
 			return *dstPtr;
 		}
 
+		// This isn't really an extension method, since it doesn't use
+		// the passed in argument, but it's nice to have the same calling
+		// convention as the uncached version.  If you can use this one
+		// over the other, it is much faster in tight loops (like effects).
+		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		{
+			ColorBgra* dstPtr = srcDataPtr;
+
+			dstPtr += (x) + (y * srcWidth);
+
+			return *dstPtr;
+		}
+
 		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += y * surf.Width;
+
+			return dstPtr;
+		}
+
+		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int y)
+		{
+			ColorBgra* dstPtr = srcDataPtr;
+
+			dstPtr += y * srcWidth;
 
 			return dstPtr;
 		}

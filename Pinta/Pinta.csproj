@@ -49,10 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\GlowEffect.cs" />
     <Compile Include="ConfigurableEffects\GaussianBlurEffect.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
+    <Compile Include="ConfigurableEffects\InkSketchEffect.cs" />
     <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
     <Compile Include="Dialogs\PosterizeDialog.cs" />
     <Compile Include="gtk-gui\generated.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Widgets\CellRendererSurface.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />

@@ -40,6 +40,7 @@ namespace Pinta.Core
 		public static ActionManager Actions { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
 		public static HistoryManager History { get; private set; }
+		public static SystemManager System { get; private set; }
 		
 		static PintaCore ()
 		{
@@ -49,6 +50,7 @@ namespace Pinta.Core
 			Layers = new LayerManager ();
 			Tools = new ToolManager ();
 			History = new HistoryManager ();
+			System = new SystemManager ();
 		}
 		
 		public static void Initialize (Toolbar toolToolBar, Label statusTextLabel, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)

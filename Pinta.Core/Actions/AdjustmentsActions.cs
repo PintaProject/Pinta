@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using Cairo;
 
 namespace Pinta.Core
@@ -139,7 +141,20 @@ namespace Pinta.Core
 			Gdk.Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ().ToGdkRectangle ();
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
 
-			effect.RenderEffect (PintaCore.Layers.CurrentLayer.Surface, dest, new Gdk.Rectangle[] { roi });
+			if (PintaCore.System.RenderThreads <= 1) {
+				effect.RenderEffect (PintaCore.Layers.CurrentLayer.Surface, dest, new Gdk.Rectangle[] { roi });
+			} else {
+				List<Thread> threads = new List<Thread> ();
+
+				foreach (Gdk.Rectangle rect in SplitRectangle (roi, PintaCore.System.RenderThreads)) {
+					Thread t = new Thread (new ParameterizedThreadStart (ParallelRender));
+					t.Start (new StateInfo (PintaCore.Layers.CurrentLayer.Surface, dest, effect, rect));
+					threads.Add (t);
+				}
+
+				foreach (Thread t in threads)
+					t.Join ();
+			}
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
@@ -154,6 +169,54 @@ namespace Pinta.Core
 			PintaCore.History.PushNewItem (hist);
 			
 			return true;
+		}
+		#endregion
+
+		#region Private Methods
+		private void ParallelRender (object stateInfo)
+		{
+			StateInfo si = (StateInfo)stateInfo;
+			si.Effect.RenderEffect (si.Source, si.Destination, new Gdk.Rectangle[] { si.Area });
+		}
+		
+		// Split region of interest rectangle into multiple rectangles
+		// to facilitate multi-threaded effects.  We use horizontal rectangles
+		// for linear memory access
+		private Gdk.Rectangle[] SplitRectangle (Gdk.Rectangle roi, int num)
+		{
+			if (num < 2)
+				return new Gdk.Rectangle[] { roi };
+				
+			List<Gdk.Rectangle> rects = new List<Gdk.Rectangle> ();
+			
+			int height = roi.Height / num;
+			int total_height = roi.Height;
+			
+			for (int i = 0; i < num - 1; i++) {
+				rects.Add (new Gdk.Rectangle (roi.X, i * height, roi.Width, height));
+				total_height -= height;
+			}
+			
+			// Add any remaining height to the last rectangle
+			rects.Add (new Gdk.Rectangle (roi.X, (num - 1) * height, roi.Width, total_height));
+			
+			return rects.ToArray ();
+		}
+
+		private class StateInfo
+		{
+			public ImageSurface Source { get; set; }
+			public ImageSurface Destination { get; set; }
+			public BaseEffect Effect { get; set; }
+			public Gdk.Rectangle Area { get; set; }
+
+			public StateInfo (ImageSurface src, ImageSurface dest, BaseEffect effect, Gdk.Rectangle roi)
+			{
+				Source = src;
+				Destination = dest;
+				Effect = effect;
+				Area = roi;
+			}
 		}
 		#endregion
 	}

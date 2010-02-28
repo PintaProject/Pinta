@@ -1,5 +1,5 @@
-// 
-// Main.cs
+﻿// 
+// SystemManager.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,59 +25,19 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
-using Mono.Options;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	class MainClass
+	public class SystemManager
 	{
-		public static void Main (string[] args)
+		public int RenderThreads { get; set; }
+		
+		public SystemManager ()
 		{
-			int threads = -1;
-			
-			var p = new OptionSet () {
-				{ "rt|render-threads=", "number of threads to use for rendering", (int v) => threads = v }
-			};
-
-			List<string> extra;
-			
-			try {
-				extra = p.Parse (args);
-			} catch (OptionException e) {
-				Console.Write ("Pinta: ");
-				Console.WriteLine (e.Message);
-				return;
-			}
-			
-			Application.Init ();
-			MainWindow win = new MainWindow ();
-			win.Show ();
-			
-			if (threads != -1)
-				Pinta.Core.PintaCore.System.RenderThreads = threads;
-				
-			if (extra.Count > 0) {
-				// Not sure what this does for Mac, so I'm not touching it
-				if (Platform.GetOS () == Platform.OS.Mac) {
-					string arg = args[0];
-
-					if (args[0].StartsWith ("-psn_")) {
-						if (args.Length > 1)
-							arg = args[1];
-						else
-							arg = null;
-					}
-				
-					if (arg != null && arg != "")
-						Pinta.Core.PintaCore.Actions.File.OpenFile (arg);
-				} else {
-					Pinta.Core.PintaCore.Actions.File.OpenFile (extra[0]);
-				}				
-			}
-			
-			Application.Run ();
+			RenderThreads = Environment.ProcessorCount;
 		}
 	}
 }
