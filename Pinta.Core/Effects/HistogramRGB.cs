@@ -41,16 +41,18 @@ namespace Pinta.Core
             return ColorBgra.FromBgr((byte)(perc[0]), (byte)(perc[1]), (byte)(perc[2]));
         }
 
-        protected override unsafe void AddSurfaceRectangleToHistogram(ImageSurface surface, Rectangle rect)
+        protected override unsafe void AddSurfaceRectangleToHistogram(ImageSurface surface, Gdk.Rectangle rect)
         {
             long[] histogramB = histogram[0];
             long[] histogramG = histogram[1];
             long[] histogramR = histogram[2];
-
-            for (int y = (int)rect.Y; y < rect.GetBottom (); ++y)
+            
+            int rect_right = rect.Right;
+            
+            for (int y = rect.Y; y < rect.Bottom; ++y)
             {
-                ColorBgra* ptr = surface.GetPointAddressUnchecked((int)rect.X, y);
-                for (int x = (int)rect.X; x < rect.GetRight (); ++x)
+                ColorBgra* ptr = surface.GetPointAddressUnchecked(rect.X, y);
+		for (int x = rect.X; x < rect_right; ++x)
                 {
                     ++histogramB[ptr->B];
                     ++histogramG[ptr->G];
