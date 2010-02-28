@@ -38,8 +38,12 @@ namespace Pinta.Core
 		public Gtk.Action Photo { get; private set; }
 		public Gtk.Action Render { get; private set; }
 		public Gtk.Action Stylize { get; private set; }
-		
+
+		public Gtk.Action InkSketch { get; private set; }
+		public Gtk.Action OilPainting { get; private set; }
+		public Gtk.Action PencilSketch { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
+		public Gtk.Action Glow { get; private set; }
 
 		public EffectsActions ()
 		{
@@ -54,6 +58,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
+			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.AddDefault ();
 
 			// Submenus
@@ -65,15 +70,17 @@ namespace Pinta.Core
 			Render = new Gtk.Action ("Render", Mono.Unix.Catalog.GetString ("Render"), null, null);
 			Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
 
-			Artistic.Visible = false;
 			Distort.Visible = false;
 			Noise.Visible = false;
-			Photo.Visible = false;
 			Render.Visible = false;
 			Stylize.Visible = false;
 			
 			// Menu items
+			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
+			OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
+			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
+			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 
 		}
 
@@ -92,7 +99,13 @@ namespace Pinta.Core
 			Menu stylize_sub_menu = (Menu)menu.AppendItem (Stylize.CreateSubMenuItem ()).Submenu;
 			
 			// Create menu items
+			artistic_sub_menu.Append (InkSketch.CreateMenuItem ());
+			artistic_sub_menu.Append (OilPainting.CreateMenuItem ());
+			artistic_sub_menu.Append (PencilSketch.CreateMenuItem ());
+			
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
+			
+			photo_sub_menu.Append (Glow.CreateMenuItem ());
 		}
 		#endregion
 	}

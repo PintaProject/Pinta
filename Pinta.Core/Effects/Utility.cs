@@ -122,14 +122,7 @@ namespace Pinta.Core
 
             return ColorBgra.FromBgra((byte)b, (byte)g, (byte)r, (byte)cbAT);
         }
-		
-		public static byte FastScaleByteByByte(byte a, byte b)
-        {
-            int r1 = a * b + 0x80;
-            int r2 = ((r1 >> 8) + r1) >> 8;
-            return (byte)r2;
-        }
-		
+	
 		/// <summary>
 		/// Allows you to find the bounding box for a "region" that is described as an
 		/// array of bounding boxes.
@@ -193,6 +186,13 @@ namespace Pinta.Core
 		{
 			PropertyInfo pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
 			return (string)pi.GetValue (null, null);
+		}
+
+		public static byte FastScaleByteByByte (byte a, byte b)
+		{
+			int r1 = a * b + 0x80;
+			int r2 = ((r1 >> 8) + r1) >> 8;
+			return (byte)r2;
 		}
 	}
 }

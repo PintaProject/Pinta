@@ -46,7 +46,11 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.Levels.Activated += HandleAdjustmentsLevelsActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
+			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectInkSketchActivated;
+			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectOilPaintingActivated;
+			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectPencilSketchActivated;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
+			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
 		}
 
 		#region Handlers
@@ -203,10 +207,30 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
 		}
+		
+		private void HandleEffectInkSketchActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new InkSketchEffect ());
+		}
+
+		private void HandleEffectOilPaintingActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new OilPaintingEffect ());
+		}
+
+		private void HandleEffectPencilSketchActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new PencilSketchEffect ());
+		}
 
 		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new GaussianBlurEffect ());
+		}
+
+		private void HandleEffectGlowActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new GlowEffect ());
 		}
 		#endregion
 	}

@@ -313,6 +313,9 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Blurs.ZoomBlur.png">
       <LogicalName>Menu.Effects.Blurs.ZoomBlur.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.Glow.png">
+      <LogicalName>Menu.Effects.Photo.Glow.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
