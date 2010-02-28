@@ -36,6 +36,10 @@ namespace Pinta
 	{	
 		private bool[] mask;
 		
+		//public Surface EffectSourceSurface { get; set; }
+		
+		//public Rectangle  
+			
 		public UnaryPixelOps.Level Levels { get; private set; }
 		
 		public LevelsDialog ()
@@ -52,33 +56,190 @@ namespace Pinta
 			checkRed.Toggled += HandleCheckRedToggled;
 			checkGreen.Toggled += HandleCheckGreenToggled;
 			checkBlue.Toggled += HandleCheckBlueToggled;
+			buttonReset.Clicked += HandleButtonResetClicked;
 			buttonCancel.Clicked += HandleButtonCancelClicked;
 			buttonOk.Clicked += HandleButtonOkClicked;
-			colorgradientInput.ValueChanged +=	HandleColorgradientInputValueChanged;
-			colorgradientOutput.ValueChanged += HandleColorgradientOutputValueChanged;
+			spinInLow.ValueChanged += HandleSpinInLowValueChanged;
+			spinInHigh.ValueChanged +=  HandleSpinInHighValueChanged;
+			spinOutLow.ValueChanged += HandleSpinOutLowValueChanged;
+			spinOutGamma.ValueChanged += HandleSpinOutGammaValueChanged;
+			spinOutHigh.ValueChanged += HandleSpinOutHighValueChanged;
+			gradientInput.ValueChanged += HandleGradientInputValueChanged;
+			gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
 			
 			MotionNotifyEvent += HandleMotionNotifyEvent;
+			Shown += HandleShown;
+		
+			Reset ();
 		}
 
-		private void HandleColorgradientInputValueChanged (object sender, IndexEventArgs e)
+		private void HandleShown (object sender, EventArgs e)
 		{
-			int val = colorgradientInput.GetValue (e.Index);
-			
-			if (e.Index == 0)
-				spinbuttonInLow.Value = val;
-			else
-				spinInHigh.Value = val;
 		}
 		
-		private void HandleColorgradientOutputValueChanged (object sender, IndexEventArgs e)
+		private void Reset ()
 		{
+			spinInLow.Value = 0;
+			spinInHigh.Value = 255;
+			spinOutLow.Value = 0;
+			spinOutGamma.Value = 1.0;
+			spinOutHigh.Value = 255;
+		}
+
+		private void HandleButtonResetClicked (object sender, EventArgs e)
+		{
+			Reset ();
+		}
+
+		private void HandleSpinInLowValueChanged (object sender, EventArgs e)
+		{
+			gradientInput.SetValue (0, spinInLow.ValueAsInt);
+		}
+
+		private void HandleSpinInHighValueChanged (object sender, EventArgs e)
+		{
+			gradientInput.SetValue (1, spinInHigh.ValueAsInt);
+		}
+
+		private void HandleSpinOutLowValueChanged (object sender, EventArgs e)
+		{
+			gradientOutput.SetValue (0, spinOutLow.ValueAsInt);
+		}
+		
+		private int FromGammaValue ()
+		{
+			int lo = gradientOutput.GetValue (0);
+			int hi = gradientOutput.GetValue (2);
+			int med = (int)(lo + (hi - lo) * Math.Pow(0.5, spinOutGamma.Value));
 			
+			return med;
+		}
+
+		private void HandleSpinOutGammaValueChanged (object sender, EventArgs e)
+		{
+			gradientOutput.SetValue (1, FromGammaValue ());
+		}
+
+		private void HandleSpinOutHighValueChanged (object sender, EventArgs e)
+		{
+			gradientOutput.SetValue (2, spinOutHigh.ValueAsInt);
+		}
+		
+		private int MaskAvg(ColorBgra before) 
+		{
+            int count = 0, total = 0;   
+
+            for (int c = 0; c < 3; c++) {
+                if (mask [c])
+                {
+                    total += before [c];
+                    count++;
+                }
+            }
+
+            if (count > 0) {
+                return total / count;
+            } 
+            else {
+                return 0;
+            }
+        }
+		
+		private ColorBgra UpdateByMask (ColorBgra before, byte val) 
+        {
+            ColorBgra after = before;
+            int average = -1, oldaverage = -1;
+
+            if (!(mask [0] || mask [1] || mask [2])) {
+                return before;
+            }
+
+            do {
+                float factor;
+
+                oldaverage = average;
+                average = MaskAvg (after);
+
+                if (average == 0) {
+                    break;
+                }
+                factor = (float)val / average;
+
+                for (int c = 0; c < 3; c++) {
+                    if (mask [c]) {
+                        after [c] = (byte)Utility.ClampToByte (after [c] * factor);
+                    }
+                }
+            } while (average != val && oldaverage != average);
+
+            while (average != val) {
+                average = MaskAvg (after);
+                int diff = val - average;
+
+                for (int c = 0; c < 3; c++) {
+                    if (mask [c]) {
+                        after [c] = (byte)Utility.ClampToByte(after [c] + diff);
+                    }
+                }
+            }
+
+            after.A = 255;
+            return after;           
+        }
+		
+		private void UpdateLevels ()
+		{
+			Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte)spinOutHigh.Value);
+            Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte)spinOutLow.Value);
+
+            Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
+            Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
+		}
+		
+		private void HandleGradientInputValueChanged (object sender, IndexEventArgs e)
+		{
+			int val = gradientInput.GetValue (e.Index);
+			
+			Console.WriteLine (val);
+			if (e.Index == 0)
+				spinInLow.Value = val;
+			else
+				spinInHigh.Value = val;
+			
+			UpdateLevels ();
+		}
+		
+		private void HandleGradientOutputValueChanged (object sender, IndexEventArgs e)
+		{
+			int val = gradientOutput.GetValue (e.Index);
+			int hi = gradientOutput.GetValue (2);
+			int lo = gradientOutput.GetValue (0);
+			int med = FromGammaValue ();
+			
+			switch (e.Index) {
+			case 0 : 
+				spinOutLow.Value = val;
+				break;
+				
+			case 1 :
+				med = gradientOutput.GetValue (1);
+				spinOutGamma.Value = Utility.Clamp(1 / Math.Log(0.5, (float)(med - lo) / (float)(hi - lo)), 0.1, 10.0);;
+				break;
+			
+			case 2 :
+				spinOutHigh.Value = val;
+				break;
+			}
+			
+			gradientOutput.SetValue (1, med);
+			
+			UpdateLevels ();
 		}
 		
 		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
-			colorgradientInput.MotionNotify ();
-			colorgradientOutput.MotionNotify ();
+			gradientInput.MotionNotify ();
+			gradientOutput.MotionNotify ();
 		}
 
 		private void MaskChanged ()
@@ -90,8 +251,8 @@ namespace Pinta
             max.Bgra |= mask[2] ? (uint)0xFF : 0;
 			
 			Color maxcolor = max.ToCairoColor();
-			colorgradientInput.MaxColor = maxcolor;
-			colorgradientOutput.MaxColor = maxcolor;
+			gradientInput.MaxColor = maxcolor;
+			gradientOutput.MaxColor = maxcolor;
 			
 			GdkWindow.Invalidate ();
 		}

@@ -2332,6 +2332,8 @@ Luminosity</property>
                     <property name="MemberName" />
                     <property name="WidthRequest">130</property>
                     <property name="Events">ButtonPressMask</property>
+                    <property name="FlipHorizontal">False</property>
+                    <property name="FlipVertical">False</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -2411,6 +2413,7 @@ Luminosity</property>
                             <property name="StepIncrement">1</property>
                             <property name="ClimbRate">1</property>
                             <property name="Numeric">True</property>
+                            <property name="Value">255</property>
                           </widget>
                           <packing>
                             <property name="Position">0</property>
@@ -2458,7 +2461,7 @@ Luminosity</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.SpinButton" id="spinbuttonInLow">
+                          <widget class="Gtk.SpinButton" id="spinInLow">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="Upper">254</property>
@@ -2483,7 +2486,7 @@ Luminosity</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="Pinta.ColorGradientWidget" id="colorgradientInput">
+                      <widget class="Pinta.ColorGradientWidget" id="gradientInput">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Events">ExposureMask, PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask</property>
@@ -2561,7 +2564,7 @@ Luminosity</property>
                       <placeholder />
                     </child>
                     <child>
-                      <widget class="Pinta.ColorGradientWidget" id="colorgradientOutput">
+                      <widget class="Pinta.ColorGradientWidget" id="gradientOutput">
                         <property name="MemberName" />
                         <property name="WidthRequest">0</property>
                         <property name="Events">ButtonPressMask</property>
@@ -2580,11 +2583,13 @@ Luminosity</property>
                           <widget class="Gtk.SpinButton" id="spinOutHigh">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
+                            <property name="Lower">2</property>
                             <property name="Upper">255</property>
                             <property name="PageIncrement">10</property>
                             <property name="StepIncrement">1</property>
                             <property name="ClimbRate">1</property>
                             <property name="Numeric">True</property>
+                            <property name="Value">255</property>
                           </widget>
                           <packing>
                             <property name="Position">0</property>
@@ -2607,14 +2612,16 @@ Luminosity</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.SpinButton" id="spinOutMed">
+                          <widget class="Gtk.SpinButton" id="spinOutGamma">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Upper">100</property>
+                            <property name="Lower">0.1</property>
+                            <property name="Upper">7.99</property>
                             <property name="PageIncrement">10</property>
-                            <property name="StepIncrement">1</property>
+                            <property name="StepIncrement">0.1</property>
                             <property name="ClimbRate">1</property>
                             <property name="Numeric">True</property>
+                            <property name="Value">1</property>
                           </widget>
                           <packing>
                             <property name="Position">2</property>
@@ -2734,6 +2741,8 @@ Luminosity</property>
                     <property name="MemberName" />
                     <property name="WidthRequest">130</property>
                     <property name="Events">ButtonPressMask</property>
+                    <property name="FlipHorizontal">False</property>
+                    <property name="FlipVertical">False</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>

@@ -86,7 +86,16 @@ namespace Pinta
 
 		public int GetValue (int i)
 		{
-			return (int)vals [i];
+			return (int) vals [i];
+		}
+		
+		public void SetValue (int i, int val)
+		{
+			if (vals [i] != val) { 
+				vals [i] = val;
+				GdkWindow.Invalidate ();
+				OnValueChanged (i);
+			}
 		}
 		
 		private double GetYValue (double val)
@@ -205,11 +214,17 @@ namespace Pinta
 		}
 		
 		#region Protected Methods
+		bool running;
 		protected void OnValueChanged(int index) 
 		{
+			if (running)
+				return;
+			
+			running=true;
             if (ValueChanged != null) {
                 ValueChanged(this, new IndexEventArgs (index));
             }
+			running=false;
         }
 		#endregion
 		

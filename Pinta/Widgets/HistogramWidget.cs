@@ -1,3 +1,10 @@
+/////////////////////////////////////////////////////////////////////////////////
+// Paint.NET                                                                   //
+// Copyright (C) Rick Brewster, Tom Jackson, and past contributors.            //
+// Portions Copyright (C) Microsoft Corporation. All Rights Reserved.          //
+// See license-pdn.txt for full licensing and attribution details.             //
+/////////////////////////////////////////////////////////////////////////////////
+
 // 
 // HistogramWidget.cs
 //  
@@ -25,18 +32,105 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
+
+using Pinta.Core;
 
 namespace Pinta
 {
-
-
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class HistogramWidget : Gtk.Bin
 	{
+		private bool[] selected;
 
+		public bool FlipHorizontal { get; set; }
+		
+		public bool FlipVertical { get; set; }
+		
+		public HistogramRgb Histogram { get; private set; }
+		
+		
 		public HistogramWidget ()
 		{
 			this.Build ();
+			
+//			ExposeEvent += HandleExposeEvent;
+		}
+		
+		private void DrawChannel(Context g, ColorBgra color, int channel, long max, float mean)
+        {
+			Rectangle rect = Allocation.ToCairoRectangle ();
+			Histogram histogram = Histogram;
+			
+            int l = (int)rect.X;
+            int t = (int)rect.Y;
+			int r = (int)(rect.X + rect.Width);
+            int b = (int)(rect.Y + rect.Height);
+            int channels = histogram.Channels;
+            int entries = histogram.Entries;
+            long[] hist = Histogram.HistogramValues [channel];
+
+            ++max;
+
+            if (FlipHorizontal) {
+                Utility.Swap(ref l, ref r);
+            }
+
+            if (!FlipVertical) {
+                Utility.Swap(ref t, ref b);
+            }
+
+            PointD[] points = new PointD[entries + 2];
+
+            points[entries] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (t, b, 20));
+            points[entries + 1] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (b, t, 20));
+
+            for (int i = 0; i < entries; i += entries - 1) {
+                points[i] = new PointD (
+                    Utility.Lerp (l, r, (float)hist[i] / (float)max),
+                    Utility.Lerp (t, b, (float)i / (float)entries));
+            }
+
+            long sum3 = hist[0] + hist[1];
+            
+            for (int i = 1; i < entries - 1; ++i) {
+                sum3 += hist[i + 1];
+
+                points[i] = new PointD(
+                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 3.1f)),
+                    Utility.Lerp(t, b, (float)i / (float)entries));
+
+                sum3 -= hist[i - 1];
+            }
+
+            byte intensity = selected[channel] ? (byte)96 : (byte)32;
+            ColorBgra pen_color = ColorBgra.Blend (ColorBgra.Black, color, intensity);
+            ColorBgra brush_color = color;
+           	brush_color.A = intensity;
+			
+			g.DrawPolygonal (points, pen_color.ToCairoColor ());
+			g.FillPolygonal (points, brush_color.ToCairoColor ());
+        }
+
+        private void DrawHistogram(Context g)
+        {
+			Histogram histogram = Histogram;
+            long max = histogram.GetMax ();
+            float[] mean = histogram.GetMean ();
+
+            //g.SmoothingMode = SmoothingMode.AntiAlias;
+            //g.Clear(BackColor);
+            int channels = histogram.Channels;
+
+            for (int i = 0; i < channels; ++i) {
+                DrawChannel(g, histogram.GetVisualColor(i), i, max, mean[i]);
+            }
+        }
+
+		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
+		{
+			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) 
+				DrawHistogram (g);
 		}
 	}
 }

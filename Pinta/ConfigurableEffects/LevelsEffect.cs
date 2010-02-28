@@ -47,6 +47,7 @@ namespace Pinta.Core
 		
 		public override bool LaunchConfiguration ()
 		{
+			
 			LevelsDialog dialog = new LevelsDialog ();
 			int response = dialog.Run ();
 			

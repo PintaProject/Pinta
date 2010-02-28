@@ -87,7 +87,49 @@ namespace Pinta.Core
 		{
 			return (from + frac * (to - from));
 		}
+		
+		public static void Swap(ref int a, ref int b)
+        {
+            int t;
 
+            t = a;
+            a = b;
+            b = t;
+        }
+
+		 /// <summary>
+        /// Smoothly blends between two colors.
+        /// </summary>
+        public static ColorBgra Blend(ColorBgra ca, ColorBgra cb, byte cbAlpha)
+        {
+            uint caA = (uint)Utility.FastScaleByteByByte((byte)(255 - cbAlpha), ca.A);
+            uint cbA = (uint)Utility.FastScaleByteByByte(cbAlpha, cb.A);
+            uint cbAT = caA + cbA;
+
+            uint r;
+            uint g;
+            uint b;
+
+            if (cbAT == 0) {
+                r = 0;
+                g = 0;
+                b = 0;
+            } else {
+                r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
+                g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
+                b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
+            }
+
+            return ColorBgra.FromBgra((byte)b, (byte)g, (byte)r, (byte)cbAT);
+        }
+		
+		public static byte FastScaleByteByByte(byte a, byte b)
+        {
+            int r1 = a * b + 0x80;
+            int r2 = ((r1 >> 8) + r1) >> 8;
+            return (byte)r2;
+        }
+		
 		/// <summary>
 		/// Allows you to find the bounding box for a "region" that is described as an
 		/// array of bounding boxes.
