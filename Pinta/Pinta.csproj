@@ -54,6 +54,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
+    <Compile Include="ConfigurableEffects\InkSketchEffect.cs" />
     <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
     <Compile Include="Dialogs\PosterizeDialog.cs" />
     <Compile Include="gtk-gui\generated.cs" />

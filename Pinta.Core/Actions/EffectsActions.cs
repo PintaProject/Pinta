@@ -39,6 +39,7 @@ namespace Pinta.Core
 		public Gtk.Action Render { get; private set; }
 		public Gtk.Action Stylize { get; private set; }
 		
+		public Gtk.Action InkSketch { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action Glow { get; private set; }
 
@@ -67,13 +68,13 @@ namespace Pinta.Core
 			Render = new Gtk.Action ("Render", Mono.Unix.Catalog.GetString ("Render"), null, null);
 			Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
 
-			Artistic.Visible = false;
 			Distort.Visible = false;
 			Noise.Visible = false;
 			Render.Visible = false;
 			Stylize.Visible = false;
 			
 			// Menu items
+			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 
@@ -94,6 +95,8 @@ namespace Pinta.Core
 			Menu stylize_sub_menu = (Menu)menu.AppendItem (Stylize.CreateSubMenuItem ()).Submenu;
 			
 			// Create menu items
+			artistic_sub_menu.Append (InkSketch.CreateMenuItem ());
+			
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
