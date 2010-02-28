@@ -32,8 +32,6 @@ namespace Pinta.Core
 {
 	public class BrightnessContrastEffect : BaseEffect
 	{
-		private int brightness;
-		private int contrast;
 		private int multiply;
 		private int divide;
 		private byte[] rgbTable;
@@ -50,22 +48,25 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
+		public BrightnessContrastData Data { get; private set; }
+		
+		public BrightnessContrastEffect ()
+		{
+			Data = new BrightnessContrastData ();
+		}
+		
 		public override bool LaunchConfiguration ()
 		{
-			BrightnessContrastData data = new BrightnessContrastData ();
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), data);
+			Data = new BrightnessContrastData ();
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
 			
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-
-				brightness = data.Brightness;
-				contrast = data.Contrast;
-	
 				dialog.Destroy ();
 				
 				// Don't trigger anything if no options were changed
-				return !data.IsDefault;
+				return !Data.IsDefault;
 			}
 
 			dialog.Destroy ();
@@ -112,12 +113,12 @@ namespace Pinta.Core
 
 		private void Calculate ()
 		{
-			if (contrast < 0) {
-				multiply = contrast + 100;
+			if (Data.Contrast < 0) {
+				multiply = Data.Contrast + 100;
 				divide = 100;
-			} else if (contrast > 0) {
+			} else if (Data.Contrast > 0) {
 				multiply = 100;
-				divide = 100 - contrast;
+				divide = 100 - Data.Contrast;
 			} else {
 				multiply = 1;
 				divide = 1;
@@ -128,14 +129,14 @@ namespace Pinta.Core
 
 			if (divide == 0) {
 				for (int intensity = 0; intensity < 256; intensity++) {
-					if (intensity + brightness < 128)
+					if (intensity + Data.Brightness < 128)
 						rgbTable[intensity] = 0;
 					else
 						rgbTable[intensity] = 255;
 				}
 			} else if (divide == 100) {
 				for (int intensity = 0; intensity < 256; intensity++) {
-					int shift = (intensity - 127) * multiply / divide + 127 - intensity + brightness;
+					int shift = (intensity - 127) * multiply / divide + 127 - intensity + Data.Brightness;
 
 					for (int col = 0; col < 256; ++col) {
 						int index = (intensity * 256) + col;
@@ -144,7 +145,7 @@ namespace Pinta.Core
 				}
 			} else {
 				for (int intensity = 0; intensity < 256; ++intensity) {
-					int shift = (intensity - 127 + brightness) * multiply / divide + 127 - intensity;
+					int shift = (intensity - 127 + Data.Brightness) * multiply / divide + 127 - intensity;
 
 					for (int col = 0; col < 256; ++col) {
 						int index = (intensity * 256) + col;
@@ -154,7 +155,7 @@ namespace Pinta.Core
 			}
 		}
 		
-		private class BrightnessContrastData
+		public class BrightnessContrastData
 		{
 			public int Brightness = 0;
 			public int Contrast = 0;

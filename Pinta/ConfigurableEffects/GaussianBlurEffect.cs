@@ -32,8 +32,6 @@ namespace Pinta.Core
 {
 	public class GaussianBlurEffect : BaseEffect
 	{
-		private int radius;
-
 		public override string Icon {
 			get { return "Menu.Effects.Blurs.GaussianBlur.png"; }
 		}
@@ -46,20 +44,22 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
+		public GaussianBlurData Data { get; private set; }
+		
+		public GaussianBlurEffect ()
+		{
+			Data = new GaussianBlurData ();
+		}
+		
 		public override bool LaunchConfiguration ()
 		{
-			GaussianBlurData data = new GaussianBlurData ();
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), data);
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
 
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-
-				radius = data.radius;
-
 				dialog.Destroy ();
-
-				return !data.IsEmpty;
+				return !Data.IsEmpty;
 			}
 
 			dialog.Destroy ();
@@ -84,12 +84,12 @@ namespace Pinta.Core
 
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			if (this.radius == 0) {
+			if (Data.Radius == 0) {
 				// Copy src to dest
 				return;
 			}
 
-			int r = this.radius;
+			int r = Data.Radius;
 			int[] w = CreateGaussianBlurRow (r);
 			int wlen = w.Length;
 
@@ -279,13 +279,13 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		private class GaussianBlurData
+		public class GaussianBlurData
 		{
 			[MinimumValue (0), MaximumValue (200)]
-			public int radius = 2;
+			public int Radius = 2;
 			
 			[Skip]
-			public bool IsEmpty { get { return radius == 0; } }
+			public bool IsEmpty { get { return Radius == 0; } }
 		}
 	}
 }
