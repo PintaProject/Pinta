@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\PencilSketchEffect.cs" />
     <Compile Include="ConfigurableEffects\OilPaintingEffect.cs" />
     <Compile Include="ConfigurableEffects\GlowEffect.cs" />
     <Compile Include="ConfigurableEffects\GaussianBlurEffect.cs">
