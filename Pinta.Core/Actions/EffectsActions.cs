@@ -38,8 +38,9 @@ namespace Pinta.Core
 		public Gtk.Action Photo { get; private set; }
 		public Gtk.Action Render { get; private set; }
 		public Gtk.Action Stylize { get; private set; }
-		
+
 		public Gtk.Action InkSketch { get; private set; }
+		public Gtk.Action OilPainting { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action Glow { get; private set; }
 
@@ -75,6 +76,7 @@ namespace Pinta.Core
 			
 			// Menu items
 			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
+			OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 
@@ -96,6 +98,7 @@ namespace Pinta.Core
 			
 			// Create menu items
 			artistic_sub_menu.Append (InkSketch.CreateMenuItem ());
+			artistic_sub_menu.Append (OilPainting.CreateMenuItem ());
 			
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 			

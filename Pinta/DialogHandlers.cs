@@ -46,6 +46,7 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectInkSketchActivated;
+			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectOilPaintingActivated;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
 		}
@@ -203,6 +204,11 @@ namespace Pinta
 		private void HandleEffectInkSketchActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new InkSketchEffect ());
+		}
+
+		private void HandleEffectOilPaintingActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new OilPaintingEffect ());
 		}
 
 		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)

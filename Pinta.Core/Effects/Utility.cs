@@ -152,5 +152,12 @@ namespace Pinta.Core
 			PropertyInfo pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
 			return (string)pi.GetValue (null, null);
 		}
+
+		public static byte FastScaleByteByByte (byte a, byte b)
+		{
+			int r1 = a * b + 0x80;
+			int r2 = ((r1 >> 8) + r1) >> 8;
+			return (byte)r2;
+		}
 	}
 }
