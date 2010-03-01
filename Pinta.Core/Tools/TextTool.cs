@@ -72,7 +72,6 @@ namespace Pinta.Core
 		private int linePos;
 		private int textPos;
 		private Point clickPoint;
-		private TextAlignment alignment;
 		private IrregularSurface saved;
 		private const int cursorInterval = 300;
 		private bool pulseEnabled;
@@ -213,6 +212,7 @@ mode = EditingMode.NotEditing;
 			
 			if (left_alignment_btn == null) {
 				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", "Align left", "Align text to left");
+				left_alignment_btn.Active = true;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;;
 			}
 			
@@ -246,6 +246,18 @@ mode = EditingMode.NotEditing;
 		{
 			get {
 				return int.Parse(size_combo.ComboBox.ActiveText);
+			}
+		}
+		
+		private TextAlignment Alignment
+		{
+			get {
+				if (Right_alignment_btn.Active)
+					return TextAlignment.Right;
+				else if (center_alignment_btn.Active)
+					return TextAlignment.Center;
+				else 
+					return TextAlignment.Left;
 			}
 		}
 		
@@ -297,38 +309,41 @@ mode = EditingMode.NotEditing;
 		
 		void HandleLeftAlignmentButtonToggled (object sender, EventArgs e)
 		{
-			if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
 			if (left_alignment_btn.Active) {
 				Right_alignment_btn.Active = false;
 				center_alignment_btn.Active = false;
 			}
+			if (mode != EditingMode.NotEditing)
+            {
+                this.sizes = null;
+                RedrawText(true);
+            }			
 		}
 		
 		void HandleCenterAlignmentButtonToggled (object sender, EventArgs e)
 		{
-			if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
 			if (center_alignment_btn.Active) {
 				Right_alignment_btn.Active = false;
 				left_alignment_btn.Active = false;
 			}
+			if (mode != EditingMode.NotEditing)
+            {
+				this.sizes = null;
+                RedrawText(true);
+            }
 		}
 
 		void HandleRightAlignmentButtonToggled (object sender, EventArgs e)
 		{
-			if (mode != EditingMode.NotEditing)
-            {
-                RedrawText(true);
-            }
 			if (Right_alignment_btn.Active) {
 				center_alignment_btn.Active = false;
 				left_alignment_btn.Active = false;
 			}
+			if (mode != EditingMode.NotEditing)
+            {
+				this.sizes = null;
+                RedrawText(true);
+            }
 		}
 
 
@@ -438,6 +453,7 @@ mode = EditingMode.NotEditing;
 		
         private void StopEditing()
         {
+			PintaCore.Layers.ToolLayer.Clear();
 			PintaCore.Layers.ToolLayer.Hidden = true;
             mode = EditingMode.NotEditing;
             pulseEnabled = false;
@@ -800,7 +816,7 @@ mode = EditingMode.NotEditing;
             Point p = clickPoint;
             p.Y = (int)(p.Y - (0.5 * sz.Height) + (line * sz.Height));
 
-            switch (alignment)
+            switch (Alignment)
             {
                 case TextAlignment.Center:
                     p.X = (int)(p.X - (0.5) * sz.Width); 
@@ -939,7 +955,8 @@ mode = EditingMode.NotEditing;
             measuredSize.Width += 2 * offset;
             Rectangle dstRect = new Rectangle(pt, measuredSize);
             Rectangle dstRectClipped = Rectangle.Intersect(dstRect, PintaCore.Layers.ToolLayer.Surface.GetBounds());
-
+			PintaCore.Layers.ToolLayer.Clear();
+			
             if (dstRectClipped.Width == 0 || dstRectClipped.Height == 0)
             {
                 return;
@@ -948,15 +965,18 @@ mode = EditingMode.NotEditing;
             // We only use the first 8,8 of brush
             using (Cairo.Context toolctx = new Cairo.Context(PintaCore.Layers.ToolLayer.Surface))
             {
-                toolctx.FillRectangle (new Cairo.Rectangle(pt.X, pt.Y, measuredSize.Width, measuredSize.Height), new Cairo.Color (1, 1, 1));
-				Cairo.ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+                toolctx.FillRectangle (dstRect.ToCairoRectangle(), new Cairo.Color (1, 1, 1));
+				Cairo.ImageSurface surf = PintaCore.Layers.ToolLayer.Surface;
+				//TODO find how create a surface a of a particular area of a bigger surface!
+				//for moment work with the whole surface!
                 if (measuredSize.Width > 0 && measuredSize.Height > 0)
                 {
                     //dstRectClipped
-                    using (Cairo.Context ctx = new Cairo.Context(surf))
+                    using (Cairo.Context ctx = new Cairo.Context(PintaCore.Layers.ToolLayer.Surface))
                     {
                         ctx.DrawText(
-                            new Cairo.PointD(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
+                            //new Cairo.PointD(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
+						    new Cairo.PointD(dstRect.X + offset, dstRect.Y+ measuredSize.Height),
                             textFont,
 						    FontSlant,
 						    FontWeight,
@@ -964,12 +984,13 @@ mode = EditingMode.NotEditing;
 						    PintaCore.Palette.PrimaryColor,
                             text);
                     }
+					PintaCore.Workspace.Invalidate(dstRectClipped);
                 }
 
                 // Mask out anything that isn't within the user's clip region (selected region)
                 using (Region clip = Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds().ToGdkRectangle()))
                 {
-                    clip.Xor(Region.Rectangle(surf.GetBounds())); // invert
+                    clip.Xor(Region.Rectangle(dstRectClipped)); // invert
                     clip.Intersect(Region.Rectangle(new Rectangle(pt, measuredSize)));
                     toolctx.FillRegion(clip, new Cairo.Color(1,1,1,1));
                 }
@@ -1145,7 +1166,7 @@ mode = EditingMode.NotEditing;
 	                }
 	                else
 	                {
-						context.DrawLine (new Cairo.PointD(cursorRect.Right, cursorRect.Top), new Cairo.PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 2);
+						context.DrawLine (new Cairo.PointD(cursorRect.Right, cursorRect.Top), new Cairo.PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 1);
 	                }
 	            }
 	
@@ -1497,7 +1518,7 @@ mode = EditingMode.NotEditing;
             Size sz = StringSize(((string)lines[p.Line]).Substring(0, p.Offset));
             Size fullSz = StringSize((string)lines[p.Line]);
 
-            switch (alignment)
+            switch (Alignment)
             {
                 case TextAlignment.Left: 
                     pf = new Point(clickPoint.X + sz.Width, clickPoint.Y + (sz.Height * p.Line));
@@ -1616,6 +1637,10 @@ mode = EditingMode.NotEditing;
             }
             else if (args.Event.Button == 1)
             {
+				/*using (Cairo.Context g = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface)) {
+					g.DrawText(point, "Arial", Cairo.FontSlant.Normal, Cairo.FontWeight.Normal, 11, new Cairo.Color(0, 0, 0), "Hello Word!");
+				}*/
+				
                 if (saved != null)
                 {
 					Rectangle[] rects = saved.Region.GetRectangles();
