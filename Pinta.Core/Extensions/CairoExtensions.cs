@@ -652,6 +652,15 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
+		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		{
+			ColorBgra* dstPtr = srcDataPtr;
+
+			dstPtr += (x) + (y * srcWidth);
+
+			return dstPtr;
+		}
+
 		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, int x, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
