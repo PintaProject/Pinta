@@ -555,6 +555,11 @@ namespace Pinta.Core
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				
+				// We don't want the bounding box to include a stroke width 
+				// of 1, but setting it to 0 returns an empty rectangle.  Set
+				// it to a sufficiently small width and rounding takes care of it
+				g.LineWidth = .001;
 				rect = g.StrokeExtents ();
 			}
 
