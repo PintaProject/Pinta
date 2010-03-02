@@ -70,9 +70,10 @@ namespace Pinta.Core
 		#region Mouse Handlers
 		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
 		{
-			base.OnMouseDown (canvas, args, point);
 			PintaCore.Layers.ToolLayer.Clear ();
 			stencil = new bool[PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y];
+
+			base.OnMouseDown (canvas, args, point);
 		}
 		
 		protected unsafe override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
@@ -80,10 +81,10 @@ namespace Pinta.Core
 			ColorBgra old_color;
 			ColorBgra new_color;
 			
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask) {
+			if (mouse_button == 1) {
 				old_color = PintaCore.Palette.PrimaryColor.ToColorBgra ();
 				new_color = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-			} else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask) {
+			} else if (mouse_button == 3) {
 				old_color = PintaCore.Palette.SecondaryColor.ToColorBgra ();
 				new_color = PintaCore.Palette.PrimaryColor.ToColorBgra ();
 			} else {
@@ -94,10 +95,8 @@ namespace Pinta.Core
 			int x = (int)point.X;
 			int y = (int)point.Y;
 			
-			if (last_point.Equals (point_empty)) {
+			if (last_point.Equals (point_empty))
 				last_point = new Point (x, y);
-				return;
-			}
 			
 			if (PintaCore.Workspace.PointInCanvas (point))
 				surface_modified = true;

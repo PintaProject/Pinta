@@ -50,9 +50,9 @@ namespace Pinta.Core
 		{
 			Color tool_color;
 			
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask)
+			if (mouse_button == 1)
 				tool_color = PintaCore.Palette.PrimaryColor;
-			else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask)
+			else if (mouse_button == 3)
 				tool_color = PintaCore.Palette.SecondaryColor;
 			else {
 				last_point = point_empty;
@@ -64,10 +64,8 @@ namespace Pinta.Core
 			int x = (int)point.X;
 			int y = (int)point.Y;
 			
-			if (last_point.Equals (point_empty)) {
+			if (last_point.Equals (point_empty))
 				last_point = new Point (x, y);
-				return;
-			}
 			
 			if (PintaCore.Workspace.PointInCanvas (point))
 				surface_modified = true;

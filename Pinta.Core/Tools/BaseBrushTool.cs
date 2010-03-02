@@ -40,6 +40,7 @@ namespace Pinta.Core
 		
 		protected ImageSurface undo_surface;
 		protected bool surface_modified;
+		protected uint mouse_button;
 	    
 		protected virtual int BrushWidth { 
 			get { 
@@ -109,12 +110,16 @@ namespace Pinta.Core
 				(undo_surface as IDisposable).Dispose ();
 
 			surface_modified = false;
+			mouse_button = 0;
 		}
 		
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			surface_modified = false;
 			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			mouse_button = args.Event.Button;
+			
+			OnMouseMove (canvas, null, point);
 		}
 		#endregion
 		
