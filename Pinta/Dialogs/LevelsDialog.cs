@@ -35,10 +35,6 @@ namespace Pinta
 	public partial class LevelsDialog : Gtk.Dialog
 	{	
 		private bool[] mask;
-		
-		//public Surface EffectSourceSurface { get; set; }
-		
-		//public Rectangle  
 			
 		public UnaryPixelOps.Level Levels { get; private set; }
 		
@@ -70,11 +66,30 @@ namespace Pinta
 			MotionNotifyEvent += HandleMotionNotifyEvent;
 			Shown += HandleShown;
 		
+		
 			Reset ();
+		}
+
+		protected override void OnShown ()
+		{
+			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
+			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds();
+			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
+			rect = new Gdk.Rectangle(0, 0, rect.Width, rect.Height);
+			histogramInput.Histogram.UpdateHistogram (surface, rect);
+			histogramOutput.Histogram.SetFromLeveledHistogram(histogramInput.Histogram, Levels);
+            //histogramOutput.GdkWindow.Invalidate ();
+			
+			base.OnShown ();
 		}
 
 		private void HandleShown (object sender, EventArgs e)
 		{
+//			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
+//			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds();
+//			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
+//			histogramInput.Histogram.UpdateHistogram (surface, rect);
+//			GdkWindow.Invalidate ();
 		}
 		
 		private void Reset ()
@@ -84,6 +99,14 @@ namespace Pinta
 			spinOutLow.Value = 0;
 			spinOutGamma.Value = 1.0;
 			spinOutHigh.Value = 255;
+			
+			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
+			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds();
+			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
+			rect = new Gdk.Rectangle(0, 0, rect.Width, rect.Height);
+			histogramInput.Histogram.UpdateHistogram (surface, rect);
+			histogramOutput.Histogram.SetFromLeveledHistogram(histogramInput.Histogram, Levels);
+            //histogramOutput.GdkWindow.Invalidate ();
 		}
 
 		private void HandleButtonResetClicked (object sender, EventArgs e)
@@ -110,7 +133,7 @@ namespace Pinta
 		{
 			int lo = gradientOutput.GetValue (0);
 			int hi = gradientOutput.GetValue (2);
-			int med = (int)(lo + (hi - lo) * Math.Pow(0.5, spinOutGamma.Value));
+			int med = (int)(lo + (hi - lo) * Math.Pow (0.5, spinOutGamma.Value));
 			
 			return med;
 		}
@@ -130,8 +153,7 @@ namespace Pinta
             int count = 0, total = 0;   
 
             for (int c = 0; c < 3; c++) {
-                if (mask [c])
-                {
+                if (mask [c]) {
                     total += before [c];
                     count++;
                 }
@@ -199,8 +221,7 @@ namespace Pinta
 		private void HandleGradientInputValueChanged (object sender, IndexEventArgs e)
 		{
 			int val = gradientInput.GetValue (e.Index);
-			
-			Console.WriteLine (val);
+		
 			if (e.Index == 0)
 				spinInLow.Value = val;
 			else
@@ -250,9 +271,14 @@ namespace Pinta
             max.Bgra |= mask[1] ? (uint)0xFF00 : 0;
             max.Bgra |= mask[2] ? (uint)0xFF : 0;
 			
-			Color maxcolor = max.ToCairoColor();
+			Color maxcolor = max.ToCairoColor ();
 			gradientInput.MaxColor = maxcolor;
 			gradientOutput.MaxColor = maxcolor;
+			
+			for (int i = 0; i < 3; i++) {
+                histogramInput.SetSelected (i, mask[i]);
+                histogramOutput.SetSelected (i, mask[i]);
+            }
 			
 			GdkWindow.Invalidate ();
 		}

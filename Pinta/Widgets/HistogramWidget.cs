@@ -32,6 +32,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 using Cairo;
 
 using Pinta.Core;
@@ -43,8 +44,10 @@ namespace Pinta
 	{
 		private bool[] selected;
 
+		[Category("Custom Properties")]
 		public bool FlipHorizontal { get; set; }
 		
+		[Category("Custom Properties")]
 		public bool FlipVertical { get; set; }
 		
 		public HistogramRgb Histogram { get; private set; }
@@ -54,9 +57,32 @@ namespace Pinta
 		{
 			this.Build ();
 			
-//			ExposeEvent += HandleExposeEvent;
+			Histogram = new HistogramRgb ();
+			selected = new bool[] {true, true, true};
+			
+			ExposeEvent += HandleExposeEvent;
 		}
 		
+		public void SetSelected(int channel, bool val)
+        {
+            selected[channel] = val;
+        }
+		
+		private void CheckPoint (Rectangle rect, PointD point)
+		{	
+			if (point.X < rect.X) {
+				point.X = rect.X;
+			} else if (point.X > rect.X + rect.Width) {
+				point.X = rect.X + rect.Width;
+			}
+			
+			if (point.Y < rect.Y) {
+				point.Y = rect.Y;
+			} else if (point.Y > rect.Y + rect.Height) {
+				point.Y = rect.Y + rect.Height;
+			}
+		}	
+			
 		private void DrawChannel(Context g, ColorBgra color, int channel, long max, float mean)
         {
 			Rectangle rect = Allocation.ToCairoRectangle ();
@@ -66,10 +92,11 @@ namespace Pinta
             int t = (int)rect.Y;
 			int r = (int)(rect.X + rect.Width);
             int b = (int)(rect.Y + rect.Height);
+			
             int channels = histogram.Channels;
             int entries = histogram.Entries;
-            long[] hist = Histogram.HistogramValues [channel];
-
+            long[] hist = histogram.HistogramValues [channel];
+			
             ++max;
 
             if (FlipHorizontal) {
@@ -84,11 +111,13 @@ namespace Pinta
 
             points[entries] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (t, b, 20));
             points[entries + 1] = new PointD (Utility.Lerp (l, r, -1), Utility.Lerp (b, t, 20));
-
+			
             for (int i = 0; i < entries; i += entries - 1) {
                 points[i] = new PointD (
                     Utility.Lerp (l, r, (float)hist[i] / (float)max),
                     Utility.Lerp (t, b, (float)i / (float)entries));
+				
+				CheckPoint (rect, points [i]);
             }
 
             long sum3 = hist[0] + hist[1];
@@ -99,7 +128,8 @@ namespace Pinta
                 points[i] = new PointD(
                     Utility.Lerp(l, r, (float)(sum3) / (float)(max * 3.1f)),
                     Utility.Lerp(t, b, (float)i / (float)entries));
-
+			
+				CheckPoint (rect, points [i]);
                 sum3 -= hist[i - 1];
             }
 
@@ -108,6 +138,10 @@ namespace Pinta
             ColorBgra brush_color = color;
            	brush_color.A = intensity;
 			
+			g.LineWidth = 0.1;
+			g.Antialias = Antialias.Subpixel;
+			g.Rectangle (rect);
+			g.Clip ();
 			g.DrawPolygonal (points, pen_color.ToCairoColor ());
 			g.FillPolygonal (points, brush_color.ToCairoColor ());
         }

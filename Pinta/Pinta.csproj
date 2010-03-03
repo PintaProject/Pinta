@@ -26,6 +26,7 @@
         <Variable name="GDK_NATIVE_WINDOWS" value="1" />
       </EnvironmentVariables>
     </EnvironmentVariables>
+    <Commandlineparameters>Koala.jpg</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>

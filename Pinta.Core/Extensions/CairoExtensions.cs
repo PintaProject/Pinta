@@ -592,10 +592,12 @@ namespace Pinta.Core
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				
+				g.LineWidth = 0.01;
 				rect = g.StrokeExtents ();
 			}
 
-			return new Rectangle (rect.X, rect.Y, rect.Width - rect.X, rect.Height - rect.Y);
+			return new Rectangle (Math.Round(rect.X), Math.Round(rect.Y), rect.Width - rect.X, rect.Height - rect.Y);
 		}
 		
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)
@@ -628,7 +630,7 @@ namespace Pinta.Core
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
-
+			
 			return dstPtr;
 		}
 

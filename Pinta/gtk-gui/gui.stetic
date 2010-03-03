@@ -2332,14 +2332,12 @@ Luminosity</property>
                     <property name="MemberName" />
                     <property name="WidthRequest">130</property>
                     <property name="Events">ButtonPressMask</property>
-                    <property name="FlipHorizontal">False</property>
+                    <property name="FlipHorizontal">True</property>
                     <property name="FlipVertical">False</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
+                    <property name="AutoSize">False</property>
                   </packing>
                 </child>
                 <child>
@@ -2746,9 +2744,7 @@ Luminosity</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
+                    <property name="AutoSize">False</property>
                   </packing>
                 </child>
                 <child>
