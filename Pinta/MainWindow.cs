@@ -222,7 +222,7 @@ namespace Pinta
 				(cell as Gtk.CellRendererText).Text = item.Text;		
 			} else if (item.State == HistoryItemState.Redo) {
 				(cell as Gtk.CellRendererText).Style = Pango.Style.Oblique;
-				(cell as Gtk.CellRendererText).Foreground = "blue";
+				(cell as Gtk.CellRendererText).Foreground = "gray";
 				(cell as Gtk.CellRendererText).Text = item.Text;
 			}
 		
