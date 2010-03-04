@@ -43,7 +43,12 @@ namespace Pinta.Core
 		}
 		
 		public BaseHistoryItem Current {
-			get { return history[historyPointer]; }
+			get { 
+				if (historyPointer > -1 && historyPointer < history.Count)
+					return history[historyPointer]; 
+				else
+					return null;
+			}
 		}
 		
 		public void PushNewItem (BaseHistoryItem new_item)
@@ -112,7 +117,7 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
-			OnActionUndone ();
+			OnActionRedone ();
 		}
 		
 		public void Clear ()

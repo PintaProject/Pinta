@@ -90,6 +90,7 @@ namespace Pinta
 			//History
 			history_treeview.Model = PintaCore.HistoryListStore;
 			history_treeview.HeadersVisible = false;
+			history_treeview.Selection.Mode = SelectionMode.Single;
 			history_treeview.Selection.SelectFunction = HistoryItemSelected;
 			
 			Gtk.TreeViewColumn icon_column = new Gtk.TreeViewColumn ();
@@ -105,6 +106,10 @@ namespace Pinta
 			
 			history_treeview.AppendColumn (icon_column);
 			history_treeview.AppendColumn (text_column);
+			
+			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
+			PintaCore.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
+			PintaCore.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
@@ -205,7 +210,7 @@ namespace Pinta
 					PintaCore.History.Undo ();
 				}
 			}
-			return false;
+			return true;
 		}
 		
 		private void HistoryRenderText (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
@@ -227,6 +232,14 @@ namespace Pinta
 		{
 			BaseHistoryItem item = (BaseHistoryItem) model.GetValue (iter, 0);
 			(cell as Gtk.CellRendererPixbuf).Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
+		}
+		
+		private void OnHistoryItemsChanged (object o, EventArgs args) {
+			if (PintaCore.History.Current != null) {
+				history_treeview.Selection.SelectIter (PintaCore.History.Current.Id);
+				history_treeview.ScrollToCell (history_treeview.Model.GetPath (PintaCore.History.Current.Id), history_treeview.Columns[1], true, (float)0.9, 0);
+			} 
+				
 		}
 		#endregion
 		
