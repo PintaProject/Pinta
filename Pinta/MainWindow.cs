@@ -52,8 +52,6 @@ namespace Pinta
 			colorpalettewidget1.Initialize ();
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
-			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (History_HistoryItemAdded);
-			PintaCore.History.HistoryItemRemoved += new EventHandler<HistoryItemRemovedEventArgs> (History_HistoryItemRemoved);
 			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
 			PintaCore.Workspace.CanvasSizeChanged += new EventHandler (Workspace_CanvasSizeChanged);
 			CreateToolBox ();
@@ -89,10 +87,24 @@ namespace Pinta
 			
 			PintaCore.Workspace.Invalidate ();
 
-			history_treeview.Model = new ListStore (typeof (Pixbuf), typeof (string));
+			//History
+			history_treeview.Model = PintaCore.HistoryListStore;
 			history_treeview.HeadersVisible = false;
-			history_treeview.RowActivated += HandleHistoryTreeviewRowActivated;
-			AddColumns (history_treeview);
+			history_treeview.Selection.SelectFunction = HistoryItemSelected;
+			
+			Gtk.TreeViewColumn icon_column = new Gtk.TreeViewColumn ();
+			Gtk.CellRendererPixbuf icon_cell = new Gtk.CellRendererPixbuf ();
+			icon_column.PackStart (icon_cell, true);
+	 
+			Gtk.TreeViewColumn text_column = new Gtk.TreeViewColumn ();
+			Gtk.CellRendererText text_cell = new Gtk.CellRendererText ();
+			text_column.PackStart (text_cell, true);
+		
+			text_column.SetCellDataFunc (text_cell, new Gtk.TreeCellDataFunc (HistoryRenderText));
+			icon_column.SetCellDataFunc (icon_cell, new Gtk.TreeCellDataFunc (HistoryRenderIcon));
+			
+			history_treeview.AppendColumn (icon_column);
+			history_treeview.AppendColumn (text_column);
 
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
@@ -122,20 +134,6 @@ namespace Pinta
 				}
 			}
 		}
-
-		private void HandleHistoryTreeviewRowActivated (object o, RowActivatedArgs args)
-		{
-			int rowIndex = args.Path.Indices[0];
-			
-			// Determine the number of times to undo. If there are 10 items (0-9)
-			// and the one with index 9 was clicked(last), there'll be no undo. If the 0th is clicked
-			// there will be 9 undoes, and only the one which was clicked will remain
-			int nUndoes = (history_treeview.Model as ListStore).IterNChildren() - rowIndex - 1;
-			
-			for (int i = 0; i < nUndoes; i++)
-				PintaCore.History.Undo();
-		}
-
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
@@ -190,40 +188,48 @@ namespace Pinta
 				drawingarea1.GdkWindow.InvalidateRect (e.Rectangle, false);
 		}
 
-		void History_HistoryItemRemoved (object sender, HistoryItemRemovedEventArgs e)
-		{
-			// Hack: Instead of looking for the correct item to remove, blindly remove
-			// the last item from the tree
-			ListStore historyModel = (history_treeview.Model as ListStore);
-			int nChildren = historyModel.IterNChildren ();
-			
-			TreeIter lastChild = new TreeIter();
-			historyModel.IterNthChild(out lastChild, nChildren - 1);
-			
-			historyModel.Remove(ref lastChild);
-		}
-		
-		void History_HistoryItemAdded (object sender, HistoryItemAddedEventArgs e)
-		{
-			(history_treeview.Model as Gtk.ListStore).AppendValues (PintaCore.Resources.GetIcon (e.Item.Icon), e.Item.Text);
-		}
-
 		private void Chrome_StatusBarTextChanged (object sender, TextChangedEventArgs e)
 		{
 			label5.Text = e.Text;
 		}
-
-		void AddColumns (TreeView treeView)
+		
+		#region History
+		public bool HistoryItemSelected (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
 		{
-			CellRendererPixbuf pix = new CellRendererPixbuf ();
-			TreeViewColumn icon_column = new TreeViewColumn (string.Empty, pix, "pixbuf", 0);
-			treeView.AppendColumn (icon_column);
-
-			CellRendererText rendererText = new CellRendererText ();
-			TreeViewColumn text_column = new TreeViewColumn (string.Empty, rendererText, "text", 1);
-			treeView.AppendColumn (text_column);
+			int current = path.Indices[0];
+			if (!path_currently_selected) {
+				while (PintaCore.History.Pointer < current) {
+					PintaCore.History.Redo ();
+				}
+				while (PintaCore.History.Pointer > current) {
+					PintaCore.History.Undo ();
+				}
+			}
+			return false;
 		}
-
+		
+		private void HistoryRenderText (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			BaseHistoryItem item = (BaseHistoryItem) model.GetValue (iter, 0);
+			if (item.State == HistoryItemState.Undo) {
+				(cell as Gtk.CellRendererText).Style = Pango.Style.Normal;
+				(cell as Gtk.CellRendererText).Foreground = "black";
+				(cell as Gtk.CellRendererText).Text = item.Text;		
+			} else if (item.State == HistoryItemState.Redo) {
+				(cell as Gtk.CellRendererText).Style = Pango.Style.Oblique;
+				(cell as Gtk.CellRendererText).Foreground = "blue";
+				(cell as Gtk.CellRendererText).Text = item.Text;
+			}
+		
+		}
+	 
+		private void HistoryRenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			BaseHistoryItem item = (BaseHistoryItem) model.GetValue (iter, 0);
+			(cell as Gtk.CellRendererPixbuf).Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
+		}
+		#endregion
+		
 		private void CreateToolBox ()
 		{
 			// Create our tools

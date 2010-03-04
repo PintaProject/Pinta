@@ -1,8 +1,9 @@
 // 
 // HistoryManager.cs
 //  
-// Author:
+// Authors:
 //       Jonathan Pobst <monkey@jpobst.com>
+//       Joe Hillenbrand <joehillen@gmail.com>
 // 
 // Copyright (c) 2010 Jonathan Pobst
 // 
@@ -28,112 +29,129 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gtk;
 
 namespace Pinta.Core
 {
 	public class HistoryManager
 	{
 		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
-		int stack_pointer = -1;
+		int historyPointer = -1;
 		
-		public void PushNewItem (BaseHistoryItem item)
+		public int Pointer {
+			get { return historyPointer; }
+		}
+		
+		public BaseHistoryItem Current {
+			get { return history[historyPointer]; }
+		}
+		
+		public void PushNewItem (BaseHistoryItem new_item)
 		{
-			// If we have un-did items on the history stack, they
-			// all get destroyed before we add a new item
-			while (history.Count - 1 > stack_pointer) {
-				BaseHistoryItem base_item = history[history.Count - 1];
-				history.RemoveAt (history.Count - 1);
-				base_item.Dispose ();
-
-				PintaCore.Actions.Edit.Redo.Sensitive = false;
-				// TODO: Delete from ListStore
+			
+			//Remove all old redos starting from the end of the list
+			for (int i = history.Count - 1; i >= 0; i--) {
+			
+				BaseHistoryItem item = history[i];
+				
+				if (item.State == HistoryItemState.Redo) {
+					history.RemoveAt(i);
+					item.Dispose();
+					//Remove from ListStore
+					PintaCore.HistoryListStore.Remove (ref item.Id);
+					
+				} else if (item.State == HistoryItemState.Undo) {
+					break;
+				}
 			}
+		
+			//Add new undo to ListStore
+			new_item.Id = PintaCore.HistoryListStore.AppendValues (new_item);
+			history.Add (new_item);
+			historyPointer = history.Count - 1;
 			
-			history.Add (item);
-			stack_pointer++;
-
-			PintaCore.Workspace.IsDirty = true;
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
-			
-			OnHistoryItemAdded (item);
+			PintaCore.Actions.Edit.Redo.Sensitive = false;
+			OnHistoryItemAdded (new_item);
 		}
 		
 		public void Undo ()
 		{
-			if (stack_pointer < 0)
+			if (historyPointer < 0) {
 				throw new InvalidOperationException ("Undo stack is empty");
+			} else {
+				BaseHistoryItem item = history[historyPointer];
+				item.Undo ();
+				item.State = HistoryItemState.Redo;
+				PintaCore.HistoryListStore.SetValue (item.Id, 0, item);
+				history[historyPointer] = item;
+				historyPointer--;
+			}	
 			
-			BaseHistoryItem item = history[stack_pointer--];
-			item.Undo ();
-			
-			if (stack_pointer == -1)
+			if (historyPointer == -1)
 				PintaCore.Actions.Edit.Undo.Sensitive = false;
 			
 			PintaCore.Actions.Edit.Redo.Sensitive = true;
 			OnActionUndone ();
-			OnHistoryItemRemoved (item);
 		}
 		
 		public void Redo ()
 		{
-			if (stack_pointer == history.Count - 1)
+			if (historyPointer >= history.Count - 1) {
 				throw new InvalidOperationException ("Redo stack is empty");
+			} else {
+				historyPointer++;
+				BaseHistoryItem item = history[historyPointer];
+				item.Redo ();
+				item.State = HistoryItemState.Undo;
+				PintaCore.HistoryListStore.SetValue (item.Id, 0, item);
+				history[historyPointer] = item;
+			}
 
-			BaseHistoryItem item = history[++stack_pointer];
-			item.Redo ();
-
-			if (stack_pointer == history.Count - 1)
+			if (historyPointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			OnActionUndone ();
-			OnHistoryItemAdded (item);
 		}
 		
 		public void Clear ()
 		{
-			while (history.Count > 0) {
-				BaseHistoryItem base_item = history[history.Count - 1];
-				history.RemoveAt (history.Count - 1);
-				base_item.Dispose ();
-
-				// TODO: Delete from ListStore
-			}
-			
-			stack_pointer = -1;
+			history.ForEach (delegate(BaseHistoryItem item) { item.Dispose (); } );
+			history.Clear();	
+			PintaCore.HistoryListStore.Clear ();	
+			historyPointer = -1;
 			
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			PintaCore.Actions.Edit.Undo.Sensitive = false;
 		}
-
+		
 		#region Protected Methods
 		protected void OnHistoryItemAdded (BaseHistoryItem item)
 		{
 			if (HistoryItemAdded != null)
 				HistoryItemAdded (this, new HistoryItemAddedEventArgs (item));
 		}
-		
+		 
 		protected void OnHistoryItemRemoved (BaseHistoryItem item)
 		{
 			if (HistoryItemRemoved != null)
-			{
 				HistoryItemRemoved (this, new HistoryItemRemovedEventArgs (item));
-			}
 		}
-
+		 
 		protected void OnActionUndone ()
 		{
 			if (ActionUndone != null)
 				ActionUndone (this, EventArgs.Empty);
 		}
-
+		 
 		protected void OnActionRedone ()
 		{
 			if (ActionRedone != null)
 				ActionRedone (this, EventArgs.Empty);
 		}
 		#endregion
-
+		 
 		#region Events
 		public event EventHandler<HistoryItemAddedEventArgs> HistoryItemAdded;
 		public event EventHandler<HistoryItemRemovedEventArgs> HistoryItemRemoved;
