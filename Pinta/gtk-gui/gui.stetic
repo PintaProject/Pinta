@@ -275,7 +275,7 @@
                         <property name="MemberName" />
                         <property name="ShadowType">In</property>
                         <child>
-                          <widget class="Gtk.TreeView" id="treeview1">
+                          <widget class="Gtk.TreeView" id="history_treeview">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="ShowScrollbars">True</property>

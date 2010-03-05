@@ -72,9 +72,7 @@ namespace Pinta
 		private void UpdateInputHistogram ()
 		{
 			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
-			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds ();
-			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
-			rect = new Gdk.Rectangle(0, 0, rect.Width, rect.Height);
+			Gdk.Rectangle rect =  PintaCore.Layers.SelectionPath.GetBounds ();
 			histogramInput.Histogram.UpdateHistogram (surface, rect);
 			UpdateOutputHistogram ();
 		}

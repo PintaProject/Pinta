@@ -136,7 +136,7 @@ namespace Pinta.Core
 			
 			ImageSurface dest = tmp_layer.Surface;
 
-			Gdk.Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ().ToGdkRectangle ();
+			Gdk.Rectangle roi = PintaCore.Layers.SelectionPath.GetBounds ();
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
 
 			if (PintaCore.System.RenderThreads <= 1) {

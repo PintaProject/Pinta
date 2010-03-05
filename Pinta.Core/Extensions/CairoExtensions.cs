@@ -586,7 +586,7 @@ namespace Pinta.Core
 			return newpath;
 		}
 		
-		public static Rectangle GetBounds (this Path path)
+		public static Gdk.Rectangle GetBounds (this Path path)
 		{
 			Rectangle rect;
 
@@ -600,7 +600,7 @@ namespace Pinta.Core
 				rect = g.StrokeExtents ();
 			}
 
-			return new Rectangle (Math.Round(rect.X), Math.Round(rect.Y), rect.Width - rect.X, rect.Height - rect.Y);
+			return new Gdk.Rectangle ((int)rect.X, (int)rect.Y, (int)rect.Width - (int)rect.X, (int)rect.Height - (int)rect.Y);
 		}
 		
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)

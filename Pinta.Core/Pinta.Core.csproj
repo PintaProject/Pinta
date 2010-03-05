@@ -64,6 +64,7 @@
     <Compile Include="Effects\UserBlendOps.Generated.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
+    <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="EventArgs\TextChangedEventArgs.cs" />
     <Compile Include="Extensions\ToolBarSlider.cs" />
     <Compile Include="HistoryItems\ResizeHistoryItem.cs" />
@@ -132,7 +133,6 @@
     <Compile Include="Tools\ShapeTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />
     <Compile Include="Tools\ZoomTool.cs" />
-    <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
     <Compile Include="Classes\ObservableObject.cs" />
     <Compile Include="Classes\PropertyChangedEventArgs.cs" />
