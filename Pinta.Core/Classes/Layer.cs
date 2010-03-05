@@ -269,12 +269,12 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public void Crop (Rectangle rect)
+		public void Crop (Gdk.Rectangle rect)
 		{
-			ImageSurface dest = new ImageSurface (Format.Argb32, (int)rect.Width, (int)rect.Height);
+			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
 			using (Context g = new Context (dest)) {
-				g.SetSourceSurface (Surface, -(int)rect.X, -(int)rect.Y);
+				g.SetSourceSurface (Surface, -rect.X, -rect.Y);
 				g.Paint ();
 			}
 

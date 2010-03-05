@@ -25,13 +25,18 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
 
 namespace Pinta.Core
 {
+	public enum HistoryItemState { Undo, Redo }
+
 	public class BaseHistoryItem : IDisposable
 	{
 		public string Icon { get; set; }
 		public string Text { get; set; }
+		public HistoryItemState State { get; set; }
+		public TreeIter Id;
 		
 		public BaseHistoryItem ()
 		{
@@ -41,6 +46,14 @@ namespace Pinta.Core
 		{
 			Icon = icon;
 			Text = text;
+			State = HistoryItemState.Undo;
+		}
+		
+		public BaseHistoryItem (string icon, string text, HistoryItemState state)
+		{
+			Icon = icon;
+			Text = text;
+			State = state;
 		}
 
 		public virtual void Undo ()

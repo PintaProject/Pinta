@@ -65,7 +65,7 @@ namespace Pinta.Core
 			tb.AppendItem (tolerance_label);
 
 			if (tolerance_slider == null)
-				tolerance_slider = new ToolBarSlider (0, 100, 1, 50);
+				tolerance_slider = new ToolBarSlider (0, 100, 1, 0);
 				
 			tb.AppendItem (tolerance_slider);
 		}

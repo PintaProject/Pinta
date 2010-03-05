@@ -159,10 +159,10 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			Cairo.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
+			Gdk.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
 
-			int width = (int)rect.Width;
-			int height = (int)rect.Height;
+			int width = rect.Width;
+			int height = rect.Height;
 			
 			ResizeHistoryItem hist = new ResizeHistoryItem (PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
 			hist.Icon = "Menu.Image.Crop.png";

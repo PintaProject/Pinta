@@ -2,9 +2,10 @@
 // IgeMacMenu.cs
 //  
 // Author:
-//       jurgenobernolte <${AuthorEmail}>
+//	 Eoin Hennessy <eoin@randomrules.org> 
+//       jurgenobernolte
 // 
-// Copyright (c) 2010 jurgenobernolte
+// Copyright (c) 2010 Eoin Hennessy
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +24,18 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+//
+// Ported by jurgenobernolte from:
+// http://github.com/eoin/ige-mac-integration-sharp/tree/master/bindings/ige-mac-integration-sharp
 
 using System;
 using System.Runtime.InteropServices;
 
 namespace Pinta
 {
-
-
 	public class IgeMacMenu
 	{
-		[DllImport("libigemacintegration.dylib")]
+		[DllImport ("libigemacintegration.dylib")]
 		static extern void ige_mac_menu_connect_window_key_handler (IntPtr window);
 
 		public static void ConnectWindowKeyHandler (Gtk.Window window)
@@ -41,28 +43,28 @@ namespace Pinta
 			ige_mac_menu_connect_window_key_handler (window.Handle);
 		}
 
-		[DllImport("libigemacintegration.dylib")]
+		[DllImport ("libigemacintegration.dylib")]
 		static extern void ige_mac_menu_set_global_key_handler_enabled (bool enabled);
 
 		public static bool GlobalKeyHandlerEnabled {
 			set { ige_mac_menu_set_global_key_handler_enabled (value); }
 		}
 
-		[DllImport("libigemacintegration.dylib")]
+		[DllImport ("libigemacintegration.dylib")]
 		static extern void ige_mac_menu_set_menu_bar (IntPtr menu_shell);
 
 		public static Gtk.MenuShell MenuBar {
 			set { ige_mac_menu_set_menu_bar (value == null ? IntPtr.Zero : value.Handle); }
 		}
 
-		[DllImport("libigemacintegration.dylib")]
+		[DllImport ("libigemacintegration.dylib")]
 		static extern void ige_mac_menu_set_quit_menu_item (IntPtr quit_item);
 
 		public static Gtk.MenuItem QuitMenuItem {
 			set { ige_mac_menu_set_quit_menu_item (value == null ? IntPtr.Zero : value.Handle); }
 		}
 
-		[DllImport("libigemacintegration.dylib")]
+		[DllImport ("libigemacintegration.dylib")]
 		static extern IntPtr ige_mac_menu_add_app_menu_group ();
 
 		public static Pinta.IgeMacMenuGroup AddAppMenuGroup ()
@@ -71,13 +73,11 @@ namespace Pinta
 			Pinta.IgeMacMenuGroup ret = raw_ret == IntPtr.Zero ? null : (Pinta.IgeMacMenuGroup)GLib.Opaque.GetOpaque (raw_ret, typeof(Pinta.IgeMacMenuGroup), false);
 			return ret;
 		}
-		
 	}
 	
 	public class IgeMacMenuGroup : GLib.Opaque
 	{
-
-		[DllImport("libigemacintegration.dylib")]
+		[DllImport ("libigemacintegration.dylib")]
 		static extern void ige_mac_menu_add_app_menu_item (IntPtr raw, IntPtr menu_item, IntPtr label);
 
 		public void AddMenuItem (Gtk.MenuItem menu_item, string label)

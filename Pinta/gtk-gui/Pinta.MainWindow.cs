@@ -69,7 +69,7 @@ namespace Pinta {
         
         private Gtk.ScrolledWindow GtkScrolledWindow1;
         
-        private Gtk.TreeView treeview1;
+        private Gtk.TreeView history_treeview;
         
         private Gtk.Toolbar toolbar2;
         
@@ -276,10 +276,10 @@ namespace Pinta {
             this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
             this.GtkScrolledWindow1.ShadowType = ((Gtk.ShadowType)(1));
             // Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
-            this.treeview1 = new Gtk.TreeView();
-            this.treeview1.CanFocus = true;
-            this.treeview1.Name = "treeview1";
-            this.GtkScrolledWindow1.Add(this.treeview1);
+            this.history_treeview = new Gtk.TreeView();
+            this.history_treeview.CanFocus = true;
+            this.history_treeview.Name = "history_treeview";
+            this.GtkScrolledWindow1.Add(this.history_treeview);
             this.vbox2.Add(this.GtkScrolledWindow1);
             Gtk.Box.BoxChild w18 = ((Gtk.Box.BoxChild)(this.vbox2[this.GtkScrolledWindow1]));
             w18.Position = 3;

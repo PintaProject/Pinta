@@ -606,16 +606,21 @@ namespace Pinta.Core
 			return newpath;
 		}
 		
-		public static Rectangle GetBounds (this Path path)
+		public static Gdk.Rectangle GetBounds (this Path path)
 		{
 			Rectangle rect;
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
+				
+				// We don't want the bounding box to include a stroke width 
+				// of 1, but setting it to 0 returns an empty rectangle.  Set
+				// it to a sufficiently small width and rounding takes care of it
+				g.LineWidth = .01;
 				rect = g.StrokeExtents ();
 			}
 
-			return new Rectangle (rect.X, rect.Y, rect.Width - rect.X, rect.Height - rect.Y);
+			return new Gdk.Rectangle ((int)rect.X, (int)rect.Y, (int)rect.Width - (int)rect.X, (int)rect.Height - (int)rect.Y);
 		}
 		
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)

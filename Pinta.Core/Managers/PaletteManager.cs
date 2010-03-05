@@ -56,8 +56,8 @@ namespace Pinta.Core
 		
 		public PaletteManager ()
 		{
-			PrimaryColor = new Color (1, 0, 0);
-			SecondaryColor = new Color (0, 0, 1);
+			PrimaryColor = new Color (0, 0, 0);
+			SecondaryColor = new Color (1, 1, 1);
 		}
 
 		#region Protected Methods

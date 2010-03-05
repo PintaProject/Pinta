@@ -241,12 +241,12 @@ namespace Pinta.Core
 
 			ImageSurface src = PintaCore.Layers.GetClippedLayer (PintaCore.Layers.CurrentLayerIndex);
 			
-			Cairo.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
+			Gdk.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
 			
-			ImageSurface dest = new ImageSurface (Format.Argb32, (int)rect.Width, (int)rect.Height);
+			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
 			using (Context g = new Context (dest)) {
-				g.SetSourceSurface (src, -(int)rect.X, -(int)rect.Y);
+				g.SetSourceSurface (src, -rect.X, -rect.Y);
 				g.Paint ();
 			}
 			
