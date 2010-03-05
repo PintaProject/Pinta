@@ -47,7 +47,7 @@ namespace Pinta
 			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
 			VBox.Remove(hboxBottom);
-			AddActionWidget(hboxBottom,ResponseType.None);
+			AddActionWidget(hboxBottom, ResponseType.None);
 			
 			checkRed.Toggled += HandleCheckRedToggled;
 			checkGreen.Toggled += HandleCheckGreenToggled;
@@ -64,32 +64,24 @@ namespace Pinta
 			gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
 			
 			MotionNotifyEvent += HandleMotionNotifyEvent;
-			Shown += HandleShown;
-		
-		
+			
+			UpdateInputHistogram ();
 			Reset ();
 		}
-
-		protected override void OnShown ()
+		
+		private void UpdateInputHistogram ()
 		{
 			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
-			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds();
+			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds ();
 			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
 			rect = new Gdk.Rectangle(0, 0, rect.Width, rect.Height);
 			histogramInput.Histogram.UpdateHistogram (surface, rect);
-			histogramOutput.Histogram.SetFromLeveledHistogram(histogramInput.Histogram, Levels);
-            //histogramOutput.GdkWindow.Invalidate ();
-			
-			base.OnShown ();
+			UpdateOutputHistogram ();
 		}
 
-		private void HandleShown (object sender, EventArgs e)
+		private void UpdateOutputHistogram()
 		{
-//			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
-//			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds();
-//			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
-//			histogramInput.Histogram.UpdateHistogram (surface, rect);
-//			GdkWindow.Invalidate ();
+			histogramOutput.Histogram.SetFromLeveledHistogram(histogramInput.Histogram, Levels);
 		}
 		
 		private void Reset ()
@@ -100,13 +92,6 @@ namespace Pinta
 			spinOutGamma.Value = 1.0;
 			spinOutHigh.Value = 255;
 			
-			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
-			Rectangle cairo_rect =  PintaCore.Layers.SelectionPath.GetBounds();
-			Gdk.Rectangle rect = cairo_rect.ToGdkRectangle ();
-			rect = new Gdk.Rectangle(0, 0, rect.Width, rect.Height);
-			histogramInput.Histogram.UpdateHistogram (surface, rect);
-			histogramOutput.Histogram.SetFromLeveledHistogram(histogramInput.Histogram, Levels);
-            //histogramOutput.GdkWindow.Invalidate ();
 		}
 
 		private void HandleButtonResetClicked (object sender, EventArgs e)
@@ -216,6 +201,8 @@ namespace Pinta
 
             Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
             Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
+			
+			UpdateOutputHistogram ();
 		}
 		
 		private void HandleGradientInputValueChanged (object sender, IndexEventArgs e)
@@ -259,8 +246,8 @@ namespace Pinta
 		
 		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
-			gradientInput.MotionNotify ();
-			gradientOutput.MotionNotify ();
+			//gradientInput.MotionNotify ();
+			//gradientOutput.MotionNotify ();
 		}
 
 		private void MaskChanged ()

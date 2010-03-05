@@ -78,8 +78,7 @@ namespace Pinta
 		{
 			this.Build ();
 			
-//			how to enable receiving MotionNotifyEvent ?
-//			MotionNotifyEvent += HandleMotionNotifyEvent;
+			eventbox.MotionNotifyEvent += HandleMotionNotifyEvent;
 			
 			ExposeEvent += HandleExposeEvent;
 		}
@@ -118,22 +117,35 @@ namespace Pinta
 		private int FindValueIndex(int y)
 		{
 			var yvals = (from val in vals select GetYValue (val)).ToArray();
+			int count = Count - 1;
 			
-			for (int i=0; i < Count - 1; i++) {
+			for (int i = 0; i < count; i++) {
 				double y1 = yvals [i];
 				double y2 = yvals [i + 1];
 				double h = (y1 - y2) / 2;
 				
+				// pointer is below the lowest value triangle
+				if (i == 0 && y1 < y)
+					return i;
+				
+				// pointer is above the highest value triangle
+				if (i == (count - 1) && y2 > y)
+					return i + 1;
+				
+				// pointer is outside i and i + 1 value triangles
+				if (!(y1 >= y && y >= y2))
+					continue;
+				
+				// pointer is closer to lower value triangle
 				if (y1 - y <= h) return i;
+				// pointer is closer to higher value triangle
 				if (y - y2 <= h) return i + 1;
 			}
 			
 			return -1;
 		}
 		
-//		instead of
-//		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
-		public void MotionNotify ()
+		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
 			int px, py;
 			Gdk.ModifierType mask;
@@ -142,8 +154,7 @@ namespace Pinta
 			if (mask == Gdk.ModifierType.Button1Mask) {
 			
 				int i = FindValueIndex (py);
-				if (i != -1)
-				{
+				if (i != -1) {
 					Rectangle rect = GradientRectangle;
 					double y = GetValueFromY (py);
 					

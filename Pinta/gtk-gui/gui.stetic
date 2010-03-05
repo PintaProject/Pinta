@@ -2265,7 +2265,14 @@ Luminosity</property>
     <property name="CanFocus">True</property>
     <property name="Events">ExposureMask, PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask, KeyPressMask</property>
     <child>
-      <placeholder />
+      <widget class="Gtk.EventBox" id="eventbox">
+        <property name="MemberName" />
+        <property name="Events">PointerMotionMask, ButtonMotionMask, ButtonPressMask</property>
+        <property name="VisibleWindow">False</property>
+        <child>
+          <placeholder />
+        </child>
+      </widget>
     </child>
   </widget>
   <widget class="Gtk.Dialog" id="Pinta.LevelsDialog" design-size="522 326">
