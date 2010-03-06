@@ -154,37 +154,49 @@ mode = EditingMode.NotEditing;
 			
 			tb.AppendItem (font_label);
 			
-			List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (PintaCore.Chrome.DrawingArea.PangoContext.Families);
-			List<string> entries = new List<string> ();
-			fonts.ForEach (f => entries.Add (f.Name));
+			using(Pango.Context c =  PangoHelper.ContextGet ()) {
+				List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (c.Families);
 			
-			//by default Arial!
-			int index = entries.IndexOf ("Arial");
-			if (index < 0)
-				index = 0;
 			
-			if (font_combo == null)
-				font_combo = new ToolBarComboBox (100, index, false, entries.ToArray ());
-						
-			tb.AppendItem (font_combo);
-			
-			//size depend on font and modifier (italic, bold,...)
-			Pango.FontFamily fam = fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
-			
-			entries = new List<string> ();
-			foreach (int i in GetSizeList (fam.Faces[0])) {
-				entries.Add (i.ToString ());
+				List<string> entries = new List<string> ();
+				fonts.ForEach (f => entries.Add (f.Name));
+				
+				//by default Arial!
+				int index = entries.IndexOf ("Arial");
+				if (index < 0)
+					index = 0;
+				//FIXME: I put a try to handle a bug when I am debugging on monodevelop there is a an exception
+				//this exception do not occure when I put a try catch ;(
+				try
+				{
+					if (font_combo == null)
+						font_combo = new ToolBarComboBox (100, index, false, entries.ToArray ());
+								
+					tb.AppendItem (font_combo);
+					
+					//size depend on font and modifier (italic, bold,...)
+					Pango.FontFamily fam = fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
+					
+					entries = new List<string> ();
+					foreach (int i in GetSizeList (fam.Faces[0])) {
+						entries.Add (i.ToString ());
+					}
+				
+					//by default 11!
+					index = entries.IndexOf ("11");
+					if (index < 0)
+						index = 0;
+		
+					if (size_combo == null)
+					size_combo = new ToolBarComboBox (50, index, false, entries.ToArray ());
+				
+				tb.AppendItem (size_combo);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.ToString());
+				}
 			}
-			//by default 11!
-			index = entries.IndexOf ("11");
-			if (index < 0)
-				index = 0;
-
-			if (size_combo == null)
-				size_combo = new ToolBarComboBox (50, index, false, entries.ToArray ());
-			
-			tb.AppendItem (size_combo);
-			
 			tb.AppendItem (new SeparatorToolItem ());
 			
 			if (bold_btn == null) {
