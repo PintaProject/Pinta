@@ -86,7 +86,7 @@ namespace Pinta.Core
             }
 
             using (Cairo.Context g = new Cairo.Context(dst))
-                g.DrawPixbuf(what.ToPixbuf(), new Cairo.Point(0, 0));
+                g.DrawPixbuf(what.ToPixbuf(), new Cairo.Point(where.X, where.Y));
         }
 
         public void Draw(ImageSurface dst, PixelOp pixelOp)

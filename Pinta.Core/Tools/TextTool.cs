@@ -79,7 +79,7 @@ namespace Pinta.Core
 		private bool lastPulseCursorState;
 		private bool enableNub = true;
 
-		//private CompoundHistoryMemento currentHA;
+		private CompoundHistoryItem currentHA;
 
 		private bool controlKeyDown = false;
 		private DateTime controlKeyDownTime = DateTime.MinValue;
@@ -313,6 +313,10 @@ mode = EditingMode.NotEditing;
 				Right_alignment_btn.Active = false;
 				center_alignment_btn.Active = false;
 			}
+			else if (!Right_alignment_btn.Active && !center_alignment_btn.Active)
+			{
+				left_alignment_btn.Active = true;
+			}
 			if (mode != EditingMode.NotEditing)
             {
                 this.sizes = null;
@@ -326,6 +330,10 @@ mode = EditingMode.NotEditing;
 				Right_alignment_btn.Active = false;
 				left_alignment_btn.Active = false;
 			}
+			else if (!Right_alignment_btn.Active && !left_alignment_btn.Active)
+			{
+				center_alignment_btn.Active = true;
+			}
 			if (mode != EditingMode.NotEditing)
             {
 				this.sizes = null;
@@ -338,6 +346,10 @@ mode = EditingMode.NotEditing;
 			if (Right_alignment_btn.Active) {
 				center_alignment_btn.Active = false;
 				left_alignment_btn.Active = false;
+			}
+			else if (!center_alignment_btn.Active && !left_alignment_btn.Active)
+			{
+				Right_alignment_btn.Active = true;
 			}
 			if (mode != EditingMode.NotEditing)
             {
@@ -397,7 +409,7 @@ mode = EditingMode.NotEditing;
 			
 			base.OnDeactivated ();
 			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
-			/*
+			
             switch (mode)
             {
                 case EditingMode.Editing: 
@@ -414,19 +426,19 @@ mode = EditingMode.NotEditing;
                 default: 
                     throw new System.ComponentModel.InvalidEnumArgumentException("Invalid Editing Mode");
             }
-
+			/*
             if (context != null)
             {
                 context.Dispose();//TODO or true?
                 context = null;
             }
-
+			 */
             if (saved != null)
             {
                 saved.Dispose();
                 saved = null;
             }
-
+			/*
             AppEnvironment.BrushInfoChanged -= brushChangedDelegate;
             AppEnvironment.FontInfoChanged -= fontChangedDelegate;
             AppEnvironment.FontSmoothingChanged -= fontSmoothingChangedDelegate;
@@ -435,10 +447,10 @@ mode = EditingMode.NotEditing;
             AppEnvironment.PrimaryColorChanged -= foreColorChangedDelegate;
             AppEnvironment.SecondaryColorChanged -= new EventHandler(BackColorChangedHandler);
             AppEnvironment.AlphaBlendingChanged -= new EventHandler(AlphaBlendingChangedHandler);
-
+			 */
             StopEditing();
             //this.threadPool = null;
-
+			/*
             this.RendererList.Remove(this.moveNub);
             this.moveNub.Dispose();
             this.moveNub = null;
@@ -892,7 +904,7 @@ mode = EditingMode.NotEditing;
                 this.offset = offset;
             }
         }
-		/*
+		
         private void SaveHistoryMemento()
         {
             pulseEnabled = false;
@@ -900,21 +912,20 @@ mode = EditingMode.NotEditing;
 
             if (saved != null)
             {
-                Region hitTest = Selection.CreateRegion();
+                Region hitTest = Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds());
                 hitTest.Intersect(saved.Region);
 
-                if (!hitTest.IsEmpty())
+                if (hitTest.Clipbox.Width != 0 && hitTest.Clipbox.Height != 0)
                 {
-                    BitmapHistoryMemento bha = new BitmapHistoryMemento(Name, Image, DocumentWorkspace, 
-                        ActiveLayerIndex, saved);
+                    ClippedSurfaceHistoryItem bha = new ClippedSurfaceHistoryItem(Icon, Name, saved, PintaCore.Layers.CurrentLayerIndex);
 
                     if (this.currentHA == null)
                     {
-                        HistoryStack.PushNewMemento(bha);
+                        PintaCore.History.PushNewItem (bha);
                     }
                     else
                     {
-                        this.currentHA.PushNewAction(bha);
+                        this.currentHA.Push(bha);
                         this.currentHA = null;
                     }
                 }
@@ -924,7 +935,7 @@ mode = EditingMode.NotEditing;
                 saved = null;
             }
         }
-		 */
+		 
         private void DrawText(Cairo.ImageSurface dst, string textFont, string text, Point pt, Size measuredSize, bool antiAliasing, Cairo.Color color)
         {
             Rectangle dstRect = new Rectangle(pt, measuredSize);
@@ -965,6 +976,7 @@ mode = EditingMode.NotEditing;
             // We only use the first 8,8 of brush
             using (Cairo.Context toolctx = new Cairo.Context(PintaCore.Layers.ToolLayer.Surface))
             {
+				//toolctx.FillRectangle (new Cairo.Rectangle(0, 0, 800, 600), new Cairo.Color (0, 0, 0));
                 toolctx.FillRectangle (dstRect.ToCairoRectangle(), new Cairo.Color (1, 1, 1));
 				Cairo.ImageSurface surf = PintaCore.Layers.ToolLayer.Surface;
 				//TODO find how create a surface a of a particular area of a bigger surface!
@@ -986,15 +998,15 @@ mode = EditingMode.NotEditing;
                     }
 					PintaCore.Workspace.Invalidate(dstRectClipped);
                 }
-
+				
                 // Mask out anything that isn't within the user's clip region (selected region)
-                using (Region clip = Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds().ToGdkRectangle()))
+                using (Region clip = Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds()))
                 {
                     clip.Xor(Region.Rectangle(dstRectClipped)); // invert
                     clip.Intersect(Region.Rectangle(new Rectangle(pt, measuredSize)));
                     toolctx.FillRegion(clip, new Cairo.Color(1,1,1,1));
                 }
-
+				
                 int skipX;
 
                 if (pt.X < 0)
@@ -1008,24 +1020,24 @@ mode = EditingMode.NotEditing;
 
                 int xEnd = Math.Min(dst.Width, pt.X + measuredSize.Width);
 
-                bool blending = true;//AppEnvironment.AlphaBlending;
+                bool blending = false;//AppEnvironment.AlphaBlending;
 
                 //if (dst.IsColumnVisible(pt.X + skipX))
                 //{
                     for (int y = pt.Y; y < pt.Y + measuredSize.Height; ++y)
                     {
-                        /*if (!dst.IsRowVisible(y))
-                        {
-                            continue;
-                        }*/
+                        //if (!dst.IsRowVisible(y))
+                        //{
+                        //    continue;
+                        //}
 
                         ColorBgra *dstPtr = dst.GetPointAddressUnchecked(pt.X + skipX, y);
                         ColorBgra *srcPtr = PintaCore.Layers.ToolLayer.Surface.GetPointAddress(pt.X + skipX, y);
                         ColorBgra *brushPtr = brush8x8.GetRowAddressUnchecked(y & 7);
-
+						
                         for (int x = pt.X + skipX; x < xEnd; ++x)
                         {
-                            ColorBgra srcPixel = *srcPtr;
+							ColorBgra srcPixel = *srcPtr;
                             ColorBgra dstPixel = *dstPtr;
                             ColorBgra brushPixel = brushPtr[x & 7];
 
@@ -1052,6 +1064,7 @@ mode = EditingMode.NotEditing;
                         }
                     }
                 //}
+                
             }
         }
 	 
@@ -1149,9 +1162,9 @@ mode = EditingMode.NotEditing;
 	            }
 	
 	            // Set the saved region
-	            saved = new IrregularSurface (surf, Utility.InflateRectangles(rects, 3));
-	
-	            // Draw the Lines
+				saved = new IrregularSurface (surf, Utility.InflateRectangles(rects, 3));
+				
+				// Draw the Lines
 	            this.uls = localUls;
 	
 	            for (int i = 0; i < lines.Count; i++)
@@ -1159,15 +1172,17 @@ mode = EditingMode.NotEditing;
 	
 	            // Draw the Cursor
 	            if (cursorOn)
-	            {           
-	                if (emptyCursorLineFlag)
-	                {
-	                    context.FillRectangle (cursorRect.ToCairoRectangle(), PintaCore.Palette.PrimaryColor);
-	                }
-	                else
-	                {
-						context.DrawLine (new Cairo.PointD(cursorRect.Right, cursorRect.Top), new Cairo.PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 1);
-	                }
+	            {         
+					using (Cairo.Context toolctx = new Cairo.Context(PintaCore.Layers.ToolLayer.Surface)) {
+		                if (emptyCursorLineFlag)
+		                {
+		                    toolctx.FillRectangle (cursorRect.ToCairoRectangle(), PintaCore.Palette.PrimaryColor);
+		                }
+		                else
+		                {
+							toolctx.DrawLine (new Cairo.PointD(cursorRect.Right, cursorRect.Top), new Cairo.PointD(cursorRect.Right, cursorRect.Bottom), PintaCore.Palette.PrimaryColor, 1);
+		                }
+					}
 	            }
 	
 	            //PlaceMoveNub();
@@ -1356,7 +1371,7 @@ mode = EditingMode.NotEditing;
                     {
                         if (mode == EditingMode.Editing)
                         {
-                            //SaveHistoryMemento();
+                            SaveHistoryMemento();
                         }
                         else if (mode == EditingMode.EmptyEdit)
                         {
@@ -1383,15 +1398,14 @@ mode = EditingMode.NotEditing;
                 if (mode == EditingMode.EmptyEdit)
                 {
                     mode = EditingMode.Editing;
-                    //CompoundHistoryMemento cha = new CompoundHistoryMemento(Name, Image, new List<HistoryMemento>());
-                    //this.currentHA = cha;
-                    //HistoryStack.PushNewMemento(cha);
+                    CompoundHistoryItem cha = new CompoundHistoryItem(Icon, Name);
+                    this.currentHA = cha;
+                    PintaCore.History.PushNewItem (cha);
                 }
 
                 if ((args.Event.State & ModifierType.ControlMask) == 0) 
                 {
 					char ch = (char)Gdk.Keyval.ToUnicode(args.Event.KeyValue);
-					//(char)args.Event.Key
 					InsertCharIntoString(ch);
                     textPos++;
                     RedrawText(true);
@@ -1637,10 +1651,6 @@ mode = EditingMode.NotEditing;
             }
             else if (args.Event.Button == 1)
             {
-				/*using (Cairo.Context g = new Cairo.Context(PintaCore.Layers.CurrentLayer.Surface)) {
-					g.DrawText(point, "Arial", Cairo.FontSlant.Normal, Cairo.FontWeight.Normal, 11, new Cairo.Color(0, 0, 0), "Hello Word!");
-				}*/
-				
                 if (saved != null)
                 {
 					Rectangle[] rects = saved.Region.GetRectangles();
@@ -1660,7 +1670,7 @@ mode = EditingMode.NotEditing;
                 switch (mode)
                 {
                     case EditingMode.Editing:
-                        //SaveHistoryMemento();
+                        SaveHistoryMemento();
                         StopEditing();
                         break;
 

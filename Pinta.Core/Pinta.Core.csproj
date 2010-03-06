@@ -147,6 +147,8 @@
     <Compile Include="Effects\IrregularSurface.cs" />
     <Compile Include="Effects\ISurfaceDraw.cs" />
     <Compile Include="Effects\PlacedSurface.cs" />
+    <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
+    <Compile Include="HistoryItems\ClippedSurfaceHistoryItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
