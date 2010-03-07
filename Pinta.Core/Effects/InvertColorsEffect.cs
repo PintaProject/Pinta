@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Mono.Simd;
 
 namespace Pinta.Core
 {
@@ -41,9 +42,25 @@ namespace Pinta.Core
 			get { return Mono.Unix.Catalog.GetString ("Invert Colors"); }
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op.Apply (dest, src, rois);
+			if (!SimdRuntime.IsMethodAccelerated (typeof (Vector16b), "op_Subtraction")) {
+				op.Apply (dest, src, rois);
+			} else {
+				Vector16b invert = new Vector16b (255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0);
+				Vector16b alpha_mask = new Vector16b (0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255);
+
+				Vector16b* srcPtr = (Vector16b*)src.DataPtr;
+				Vector16b* dstPtr = (Vector16b*)dest.DataPtr;
+
+				for (int row = 0; row < (src.Width * src.Height) / 4; row++) {
+					Vector16b srcVal = *srcPtr;
+					*dstPtr = ((invert - srcVal) & invert) | (srcVal & alpha_mask);
+
+					srcPtr++;
+					dstPtr++;
+				}
+			}
 		}
 	}
 }
