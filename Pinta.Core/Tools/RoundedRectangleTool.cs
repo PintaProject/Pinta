@@ -70,7 +70,7 @@ namespace Pinta.Core
 			base.BuildToolBar (tb);
 			
 			if (radius_label == null)
-				radius_label = new ToolBarLabel (" Radius: ");
+				radius_label = new ToolBarLabel ("  Radius: ");
 			
 			tb.AppendItem (radius_label);
 			
