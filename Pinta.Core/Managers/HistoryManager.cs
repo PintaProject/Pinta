@@ -75,7 +75,9 @@ namespace Pinta.Core
 			history.Add (new_item);
 			historyPointer = history.Count - 1;
 			
-			PintaCore.Workspace.IsDirty = true;
+			if (new_item.CausesDirty)
+				PintaCore.Workspace.IsDirty = true;
+				
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			OnHistoryItemAdded (new_item);
@@ -105,21 +107,22 @@ namespace Pinta.Core
 		
 		public void Redo ()
 		{
-			if (historyPointer >= history.Count - 1) {
+			if (historyPointer >= history.Count - 1)
 				throw new InvalidOperationException ("Redo stack is empty");
-			} else {
-				historyPointer++;
-				BaseHistoryItem item = history[historyPointer];
-				item.Redo ();
-				item.State = HistoryItemState.Undo;
-				PintaCore.HistoryListStore.SetValue (item.Id, 0, item);
-				history[historyPointer] = item;
-			}
+
+			historyPointer++;
+			BaseHistoryItem item = history[historyPointer];
+			item.Redo ();
+			item.State = HistoryItemState.Undo;
+			PintaCore.HistoryListStore.SetValue (item.Id, 0, item);
+			history[historyPointer] = item;
 
 			if (historyPointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 				
-			PintaCore.Workspace.IsDirty = true;
+			if (item.CausesDirty)
+				PintaCore.Workspace.IsDirty = true;
+				
 			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			OnActionRedone ();
 		}
