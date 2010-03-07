@@ -131,13 +131,13 @@ namespace Pinta.Core
 			}
 		}
 		
-		private void MinusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
 		{
 			if (BrushWidth > 1)
 				BrushWidth--;
 		}
 
-		private void PlusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void PlusButtonClickedEvent (object o, EventArgs args)
 		{
 			BrushWidth++;
 		}
