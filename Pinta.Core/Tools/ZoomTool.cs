@@ -77,10 +77,6 @@ namespace Pinta.Core
 			PintaCore.Layers.ToolLayer.Hidden = false;
 
 			using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
 				g.Antialias = Antialias.Subpixel;
 
 				dirty = g.FillStrokedRectangle (r, new Color (0, 0.4, 0.8, 0.1), new Color (0, 0, 0.9), 1);
