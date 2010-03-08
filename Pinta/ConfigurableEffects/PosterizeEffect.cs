@@ -52,6 +52,7 @@ namespace Pinta.Core
 		public override bool LaunchConfiguration ()
 		{
 			PosterizeDialog dialog = new PosterizeDialog ();
+			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 
 			int response = dialog.Run ();
 

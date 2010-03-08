@@ -63,6 +63,11 @@ namespace Pinta
 			ExposeEvent += HandleExposeEvent;
 		}
 		
+		public void ResetHistogram ()
+		{
+			Histogram = new HistogramRgb();
+		}
+		
 		public void SetSelected(int channel, bool val)
         {
             selected[channel] = val;
@@ -126,7 +131,7 @@ namespace Pinta
                 sum3 += hist[i + 1];
 
                 points[i] = new PointD(
-                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 3.1f)),
+                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 2.6f)),
                     Utility.Lerp(t, b, (float)i / (float)entries));
 			
 				CheckPoint (rect, points [i]);
@@ -138,8 +143,8 @@ namespace Pinta
             ColorBgra brush_color = color;
            	brush_color.A = intensity;
 			
-			g.LineWidth = 0.1;
-			g.Antialias = Antialias.Subpixel;
+			g.LineWidth = 1;
+			
 			g.Rectangle (rect);
 			g.Clip ();
 			g.DrawPolygonal (points, pen_color.ToCairoColor ());
@@ -152,8 +157,6 @@ namespace Pinta
             long max = histogram.GetMax ();
             float[] mean = histogram.GetMean ();
 
-            //g.SmoothingMode = SmoothingMode.AntiAlias;
-            //g.Clear(BackColor);
             int channels = histogram.Channels;
 
             for (int i = 0; i < channels; ++i) {

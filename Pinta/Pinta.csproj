@@ -21,12 +21,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <EnvironmentVariables>
-      <EnvironmentVariables>
-        <Variable name="GDK_NATIVE_WINDOWS" value="1" />
-      </EnvironmentVariables>
-    </EnvironmentVariables>
-    <Commandlineparameters>Koala.jpg</Commandlineparameters>
+    <Commandlineparameters>"/home/hari/Pictures/irenka i krzys/sierpien 2009/24082009799.jpg"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>

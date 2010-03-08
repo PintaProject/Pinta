@@ -2267,7 +2267,7 @@ Luminosity</property>
     <child>
       <widget class="Gtk.EventBox" id="eventbox">
         <property name="MemberName" />
-        <property name="Events">PointerMotionMask, ButtonMotionMask, ButtonPressMask</property>
+        <property name="Events">ExposureMask, PointerMotionMask, ButtonMotionMask, ButtonPressMask</property>
         <property name="VisibleWindow">False</property>
         <child>
           <placeholder />
@@ -2353,9 +2353,7 @@ Luminosity</property>
               </widget>
               <packing>
                 <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
             <child>
@@ -2430,7 +2428,7 @@ Luminosity</property>
                         <child>
                           <widget class="Pinta.ColorPanelWidget" id="colorpanelInHigh">
                             <property name="MemberName" />
-                            <property name="HeightRequest">30</property>
+                            <property name="HeightRequest">24</property>
                             <property name="Events">ButtonPressMask</property>
                           </widget>
                           <packing>
@@ -2453,9 +2451,9 @@ Luminosity</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Pinta.ColorPanelWidget" id="colorpanelwidget1">
+                          <widget class="Pinta.ColorPanelWidget" id="colorpanelInLow">
                             <property name="MemberName" />
-                            <property name="HeightRequest">30</property>
+                            <property name="HeightRequest">24</property>
                             <property name="Events">ButtonPressMask</property>
                           </widget>
                           <packing>
@@ -2493,6 +2491,7 @@ Luminosity</property>
                     <child>
                       <widget class="Pinta.ColorGradientWidget" id="gradientInput">
                         <property name="MemberName" />
+                        <property name="WidthRequest">40</property>
                         <property name="CanFocus">True</property>
                         <property name="Events">ExposureMask, PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask</property>
                         <property name="ExtensionEvents">All</property>
@@ -2500,7 +2499,9 @@ Luminosity</property>
                       </widget>
                       <packing>
                         <property name="Position">1</property>
-                        <property name="AutoSize">False</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
                       </packing>
                     </child>
                     <child>
@@ -2518,7 +2519,8 @@ Luminosity</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
-                <property name="AutoSize">True</property>
+                <property name="AutoSize">False</property>
+                <property name="Expand">False</property>
               </packing>
             </child>
             <child>
@@ -2571,13 +2573,15 @@ Luminosity</property>
                     <child>
                       <widget class="Pinta.ColorGradientWidget" id="gradientOutput">
                         <property name="MemberName" />
-                        <property name="WidthRequest">0</property>
+                        <property name="WidthRequest">40</property>
                         <property name="Events">ButtonPressMask</property>
                         <property name="Count">3</property>
                       </widget>
                       <packing>
                         <property name="Position">1</property>
-                        <property name="AutoSize">False</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
                       </packing>
                     </child>
                     <child>
@@ -2606,7 +2610,7 @@ Luminosity</property>
                         <child>
                           <widget class="Pinta.ColorPanelWidget" id="colorpanelOutHigh">
                             <property name="MemberName" />
-                            <property name="HeightRequest">30</property>
+                            <property name="HeightRequest">24</property>
                             <property name="Events">ButtonPressMask</property>
                           </widget>
                           <packing>
@@ -2636,9 +2640,9 @@ Luminosity</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Pinta.ColorPanelWidget" id="colorpanelwidget3">
+                          <widget class="Pinta.ColorPanelWidget" id="colorpanelOutMid">
                             <property name="MemberName" />
-                            <property name="HeightRequest">30</property>
+                            <property name="HeightRequest">24</property>
                             <property name="Events">ButtonPressMask</property>
                           </widget>
                           <packing>
@@ -2651,7 +2655,7 @@ Luminosity</property>
                         <child>
                           <widget class="Pinta.ColorPanelWidget" id="colorpanelOutLow">
                             <property name="MemberName" />
-                            <property name="HeightRequest">30</property>
+                            <property name="HeightRequest">24</property>
                             <property name="Events">ButtonPressMask</property>
                           </widget>
                           <packing>
@@ -2698,7 +2702,9 @@ Luminosity</property>
               </widget>
               <packing>
                 <property name="Position">2</property>
-                <property name="AutoSize">True</property>
+                <property name="AutoSize">False</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
               </packing>
             </child>
             <child>
@@ -2760,9 +2766,7 @@ Luminosity</property>
               </widget>
               <packing>
                 <property name="Position">3</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
           </widget>
@@ -2837,7 +2841,7 @@ Luminosity</property>
               </widget>
               <packing>
                 <property name="Position">3</property>
-                <property name="AutoSize">True</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
             <child>
@@ -2936,7 +2940,7 @@ Luminosity</property>
   </widget>
   <widget class="Gtk.Bin" id="Pinta.ColorPanelWidget" design-size="300 300">
     <property name="MemberName" />
-    <property name="HeightRequest">28</property>
+    <property name="HeightRequest">24</property>
     <property name="Visible">False</property>
     <child>
       <placeholder />

@@ -37,7 +37,7 @@ namespace Pinta
 	public partial class ColorGradientWidget : Gtk.Bin
 	{
 		//gradient horizontal padding
-		private const double xpad = 0.1;
+		private const double xpad = 0.15;
 		//gradient vertical padding
 		private const double ypad = 0.03;
 		
@@ -79,9 +79,11 @@ namespace Pinta
 			this.Build ();
 			
 			eventbox.MotionNotifyEvent += HandleMotionNotifyEvent;
+			eventbox.LeaveNotifyEvent += HandleLeaveNotifyEvent;
 			
 			ExposeEvent += HandleExposeEvent;
 		}
+
 
 		public int GetValue (int i)
 		{
@@ -90,9 +92,8 @@ namespace Pinta
 		
 		public void SetValue (int i, int val)
 		{
-			if (vals [i] != val) { 
+			if ((int)vals [i] != val) { 
 				vals [i] = val;
-				GdkWindow.Invalidate ();
 				OnValueChanged (i);
 			}
 		}
@@ -100,7 +101,7 @@ namespace Pinta
 		private double GetYValue (double val)
 		{
 			Rectangle rect = GradientRectangle;
-			Rectangle all = Allocation.ToCairoRectangle();
+			Rectangle all = Allocation.ToCairoRectangle ();
 			
 			return all.Y + ypad * all.Height + rect.Height * (255 - val) / 255; 
 		}
@@ -116,7 +117,7 @@ namespace Pinta
 		
 		private int FindValueIndex(int y)
 		{
-			var yvals = (from val in vals select GetYValue (val)).ToArray();
+			var yvals = (from val in vals select GetYValue (val)).ToArray ();
 			int count = Count - 1;
 			
 			for (int i = 0; i < count; i++) {
@@ -145,15 +146,16 @@ namespace Pinta
 			return -1;
 		}
 		
+		private int last_value_index = -1;
 		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
 			int px, py;
 			Gdk.ModifierType mask;
 			GdkWindow.GetPointer (out px, out py, out mask); 
 			
-			if (mask == Gdk.ModifierType.Button1Mask) {
+			int i = FindValueIndex (py);
 			
-				int i = FindValueIndex (py);
+			if (mask == Gdk.ModifierType.Button1Mask) {
 				if (i != -1) {
 					Rectangle rect = GradientRectangle;
 					double y = GetValueFromY (py);
@@ -165,6 +167,16 @@ namespace Pinta
 				}
 			}
 			
+			//to avoid unnessesary costly redrawing
+			if (i != last_value_index) {
+				GdkWindow.Invalidate ();
+				last_value_index = i;
+			}
+		}
+		
+		private void HandleLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
+		{
+			last_value_index = -1;
 			GdkWindow.Invalidate ();
 		}
 		
@@ -197,8 +209,9 @@ namespace Pinta
 				
 				double val = vals [i];
 				double y = GetYValue (val);
-				Color color = (index == i && all.ContainsPoint (px, py)) ?
-								new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
+				bool hoover = ((index == i) && all.ContainsPoint (px, py));
+				Color color = hoover ? new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
+				
 				
 				//left triangle
 				PointD[] points = new PointD[] { new PointD (rect.X, y),
@@ -209,8 +222,8 @@ namespace Pinta
 				double x = rect.X + rect.Width;
 				//right triangle
 				PointD[] points2 = new PointD[] { new PointD (x , y),
-												 new PointD (x + xpad * rect.Width, y + ypad * rect.Height),
-												 new PointD (x + xpad * rect.Width, y - ypad * rect.Height) };
+												  new PointD (x + xpad * rect.Width, y + ypad * rect.Height),
+												  new PointD (x + xpad * rect.Width, y - ypad * rect.Height) };
 				g.FillPolygonal (points2, color);
 			}
 		}
@@ -225,17 +238,11 @@ namespace Pinta
 		}
 		
 		#region Protected Methods
-		bool running;
 		protected void OnValueChanged(int index) 
 		{
-			if (running)
-				return;
-			
-			running=true;
             if (ValueChanged != null) {
                 ValueChanged(this, new IndexEventArgs (index));
             }
-			running=false;
         }
 		#endregion
 		

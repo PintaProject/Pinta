@@ -43,7 +43,7 @@ namespace Pinta
 			this.Build ();
 			this.Levels = new UnaryPixelOps.Level ();
 			mask = new bool[] {true, true, true};
-		
+
 			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
 			VBox.Remove(hboxBottom);
@@ -53,6 +53,7 @@ namespace Pinta
 			checkGreen.Toggled += HandleCheckGreenToggled;
 			checkBlue.Toggled += HandleCheckBlueToggled;
 			buttonReset.Clicked += HandleButtonResetClicked;
+			buttonAuto.Clicked += HandleButtonAutoClicked;
 			buttonCancel.Clicked += HandleButtonCancelClicked;
 			buttonOk.Clicked += HandleButtonOkClicked;
 			spinInLow.ValueChanged += HandleSpinInLowValueChanged;
@@ -63,10 +64,9 @@ namespace Pinta
 			gradientInput.ValueChanged += HandleGradientInputValueChanged;
 			gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
 			
-			MotionNotifyEvent += HandleMotionNotifyEvent;
-			
 			UpdateInputHistogram ();
 			Reset ();
+			UpdateLevels ();
 		}
 		
 		private void UpdateInputHistogram ()
@@ -84,17 +84,39 @@ namespace Pinta
 		
 		private void Reset ()
 		{
+			histogramOutput.ResetHistogram ();
+			
 			spinInLow.Value = 0;
 			spinInHigh.Value = 255;
 			spinOutLow.Value = 0;
 			spinOutGamma.Value = 1.0;
 			spinOutHigh.Value = 255;
-			
 		}
 
 		private void HandleButtonResetClicked (object sender, EventArgs e)
 		{
 			Reset ();
+		}
+		
+		private void UpdateFromLevelsOp ()
+		{
+			float gamma = MaskGamma ();
+            int lo = MaskAvg (Levels.ColorOutLow);
+            int hi = MaskAvg (Levels.ColorOutHigh);
+
+            spinOutHigh.Value = hi;
+            spinOutGamma.Value = gamma;
+            spinOutLow.Value = lo;
+            spinInHigh.Value = MaskAvg (Levels.ColorInHigh);
+            spinInLow.Value = MaskAvg (Levels.ColorInLow);
+		}
+		
+		private void HandleButtonAutoClicked (object sender, EventArgs e)
+		{
+			Levels = histogramInput.Histogram.MakeLevelsAuto ();
+			
+			UpdateOutputHistogram ();
+			UpdateFromLevelsOp ();
 		}
 
 		private void HandleSpinInLowValueChanged (object sender, EventArgs e)
@@ -192,19 +214,82 @@ namespace Pinta
             return after;           
         }
 		
+		private float MaskGamma() 
+        {
+            int count = 0;
+            float total = 0;
+
+            for (int c = 0; c < 3; c++) {
+                if (mask [c]) {
+                    total += Levels.GetGamma (c);
+                    count++;
+                }
+            }
+
+            if (count > 0) {
+                return total / count;
+            } else {
+                return 1;
+            }
+    
+        }
+		
+		private void UpdateGammaByMask(float val) 
+        {
+            float average = -1;
+
+            if (!(mask [0] || mask [1] || mask [2]))
+                return;
+
+            do {
+                average = MaskGamma ();
+                float factor = val / average;
+
+                for (int c = 0; c < 3; c++) {
+                    if (mask [c]) {
+                        Levels.SetGamma (c, factor * Levels.GetGamma (c));
+                    }
+                }
+            } while (Math.Abs (val - average) > 0.001);
+        }
+		
+		private Color GetOutMidColor ()
+		{
+			return  Levels.Apply (histogramInput.Histogram.GetMeanColor ()).ToCairoColor ();
+		}
+		
+		//hack to avoid reccurent invocation of UpdateLevels
+		private bool running;
 		private void UpdateLevels ()
 		{
+			if(running)
+				return;
+			
+			running=true;
+			
 			Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte)spinOutHigh.Value);
             Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte)spinOutLow.Value);
-
+			UpdateGammaByMask ((float) spinOutGamma.Value);
+			
             Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
             Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
 			
+			
+			colorpanelInLow.SetCairoColor (Levels.ColorInLow.ToCairoColor ());
+			colorpanelInHigh.SetCairoColor (Levels.ColorInHigh.ToCairoColor ());
+			
+			colorpanelOutLow.SetCairoColor (Levels.ColorOutLow.ToCairoColor ());
+			colorpanelOutMid.SetCairoColor (GetOutMidColor ());
+			colorpanelOutHigh.SetCairoColor (Levels.ColorOutHigh.ToCairoColor ());
+			
 			UpdateOutputHistogram ();
+			GdkWindow.Invalidate();
+			
+			running=false;
 		}
 		
 		private void HandleGradientInputValueChanged (object sender, IndexEventArgs e)
-		{
+		{	
 			int val = gradientInput.GetValue (e.Index);
 		
 			if (e.Index == 0)
@@ -225,27 +310,21 @@ namespace Pinta
 			switch (e.Index) {
 			case 0 : 
 				spinOutLow.Value = val;
+				gradientOutput.SetValue (1, med);
 				break;
 				
 			case 1 :
 				med = gradientOutput.GetValue (1);
-				spinOutGamma.Value = Utility.Clamp(1 / Math.Log(0.5, (float)(med - lo) / (float)(hi - lo)), 0.1, 10.0);;
+				spinOutGamma.Value = Utility.Clamp(1 / Math.Log (0.5, (float)(med - lo) / (float)(hi - lo)), 0.1, 10.0);;
 				break;
 			
 			case 2 :
 				spinOutHigh.Value = val;
+				gradientOutput.SetValue (1, med);
 				break;
 			}
 			
-			gradientOutput.SetValue (1, med);
-			
 			UpdateLevels ();
-		}
-		
-		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
-		{
-			//gradientInput.MotionNotify ();
-			//gradientOutput.MotionNotify ();
 		}
 
 		private void MaskChanged ()
@@ -266,6 +345,7 @@ namespace Pinta
             }
 			
 			GdkWindow.Invalidate ();
+			Console.WriteLine("{0}.GdkWindow {1}", Name, GdkWindow.Handle);
 		}
 		
 		private void HandleCheckRedToggled (object sender, EventArgs e)

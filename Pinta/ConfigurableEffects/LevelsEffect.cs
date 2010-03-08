@@ -49,6 +49,7 @@ namespace Pinta.Core
 		{
 			
 			LevelsDialog dialog = new LevelsDialog ();
+			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 			int response = dialog.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {

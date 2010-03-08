@@ -117,11 +117,14 @@ namespace Pinta.Core
 		
 		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
 		{
-			g.Save ();
+			Random rand=new Random();
 			
+			g.Save ();
 			g.MoveTo (points [0]);
-			foreach (var point in points)
-				g.LineTo (point);
+			foreach (var point in points) {
+				g.LineTo (point.X - rand.NextDouble()*0, point.Y);
+				//g.Stroke();
+			}
 			
 			g.Color = color;
 			
@@ -554,6 +557,13 @@ namespace Pinta.Core
 			c.B = color.B / 255d;
 			c.A = color.A / 255d;
 
+			return c;
+		}
+		
+		public static Gdk.Color ToGdkColor (this ColorBgra color)
+		{
+			Gdk.Color c = new Gdk.Color (color.R, color.G, color.B);
+			
 			return c;
 		}
 
