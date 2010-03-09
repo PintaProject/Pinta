@@ -78,7 +78,9 @@ namespace Pinta.Core
 			if (new_item.CausesDirty)
 				PintaCore.Workspace.IsDirty = true;
 				
-			PintaCore.Actions.Edit.Undo.Sensitive = true;
+			if (history.Count > 1)
+				PintaCore.Actions.Edit.Undo.Sensitive = true;
+				
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			OnHistoryItemAdded (new_item);
 		}
@@ -96,7 +98,7 @@ namespace Pinta.Core
 				historyPointer--;
 			}	
 			
-			if (historyPointer == -1) {
+			if (historyPointer == 0) {
 				PintaCore.Workspace.IsDirty = false;
 				PintaCore.Actions.Edit.Undo.Sensitive = false;
 			}
@@ -122,8 +124,10 @@ namespace Pinta.Core
 				
 			if (item.CausesDirty)
 				PintaCore.Workspace.IsDirty = true;
+
+			if (history.Count > 1)
+				PintaCore.Actions.Edit.Undo.Sensitive = true;
 				
-			PintaCore.Actions.Edit.Undo.Sensitive = true;
 			OnActionRedone ();
 		}
 		

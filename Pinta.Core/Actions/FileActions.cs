@@ -111,7 +111,7 @@ namespace Pinta.Core
 
 				PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
 				PintaCore.Workspace.IsDirty = false;
-
+				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-open", "Open Image"));
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				PintaCore.Workspace.Invalidate ();
 			} catch {

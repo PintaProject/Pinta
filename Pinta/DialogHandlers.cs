@@ -81,6 +81,7 @@ namespace Pinta
 
 				PintaCore.Workspace.Filename = "Untitled1";
 				PintaCore.Workspace.IsDirty = false;
+				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 			}
 
