@@ -168,12 +168,12 @@ namespace Pinta
 			}
 				
 			if (updated.Name != initial.Name) {
-				ret = "Layer Renamed";
+				ret = "Rename Layer";
 				count++;
 			}
 			
 			if (updated.Hidden != initial.Hidden) {
-				ret = (updated.Hidden) ? "Layer Hidden" : "Layer Shown";
+				ret = (updated.Hidden) ? "Hide Layer" : "Show Layer";
 				count++;
 			}
 			
