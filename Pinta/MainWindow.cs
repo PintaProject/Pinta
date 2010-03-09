@@ -88,7 +88,7 @@ namespace Pinta
 			PintaCore.Workspace.Invalidate ();
 
 			//History
-			history_treeview.Model = PintaCore.HistoryListStore;
+			history_treeview.Model = PintaCore.History.ListStore;
 			history_treeview.HeadersVisible = false;
 			history_treeview.Selection.Mode = SelectionMode.Single;
 			history_treeview.Selection.SelectFunction = HistoryItemSelected;
