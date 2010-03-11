@@ -34,6 +34,8 @@ namespace Pinta.Core
 		private Path old_path;
 		private bool show_selection;
 
+		public override bool CausesDirty { get { return false; } }
+
 		public SelectionHistoryItem (string icon, string text) : base (icon, text)
 		{
 		}

@@ -81,6 +81,7 @@ namespace Pinta
 				}
 
 				PintaCore.Workspace.Filename = "Untitled1";
+				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
 				PintaCore.Workspace.IsDirty = false;
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 			}
@@ -168,12 +169,12 @@ namespace Pinta
 			}
 				
 			if (updated.Name != initial.Name) {
-				ret = "Layer Renamed";
+				ret = "Rename Layer";
 				count++;
 			}
 			
 			if (updated.Hidden != initial.Hidden) {
-				ret = (updated.Hidden) ? "Layer Hidden" : "Layer Shown";
+				ret = (updated.Hidden) ? "Hide Layer" : "Show Layer";
 				count++;
 			}
 			
