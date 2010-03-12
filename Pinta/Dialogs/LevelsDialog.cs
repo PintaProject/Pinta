@@ -63,6 +63,10 @@ namespace Pinta
 			spinOutHigh.ValueChanged += HandleSpinOutHighValueChanged;
 			gradientInput.ValueChanged += HandleGradientInputValueChanged;
 			gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
+			gradientInput.ButtonReleaseEvent += HandleGradientButtonReleaseEvent;
+			gradientOutput.ButtonReleaseEvent += HandleGradientButtonReleaseEvent;
+			gradientInput.ButtonPressEvent += HandleGradientButtonPressEvent;
+			gradientOutput.ButtonPressEvent += HandleGradientButtonPressEvent;
 			
 			UpdateInputHistogram ();
 			Reset ();
@@ -260,6 +264,14 @@ namespace Pinta
 		
 		//hack to avoid reccurent invocation of UpdateLevels
 		private bool running;
+		//when user moves triangles inside gradient widget,
+		//we don't want to redraw histogram each time Levels values change.
+		//maximum number of skipped updates
+		private const int max_skip = 4;
+		//skipped updates counter
+		private int skip_counter = max_skip;
+		private bool button_down = false;
+		
 		private void UpdateLevels ()
 		{
 			if(running)
@@ -282,10 +294,27 @@ namespace Pinta
 			colorpanelOutMid.SetCairoColor (GetOutMidColor ());
 			colorpanelOutHigh.SetCairoColor (Levels.ColorOutHigh.ToCairoColor ());
 			
-			UpdateOutputHistogram ();
-			GdkWindow.Invalidate();
+			if(skip_counter == max_skip || !button_down) {
+				UpdateOutputHistogram ();
+				GdkWindow.Invalidate ();
+				skip_counter = 0;
+			} else
+				skip_counter++;
+				
+			running = false;
+		}
+		
+		private void HandleGradientButtonPressEvent (object o, ButtonPressEventArgs args)
+		{
+			button_down = true;	
+		}
+		
+		private void HandleGradientButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
+		{
+			button_down = false;
 			
-			running=false;
+			if (skip_counter != 0)
+				UpdateLevels ();
 		}
 		
 		private void HandleGradientInputValueChanged (object sender, IndexEventArgs e)
@@ -315,7 +344,7 @@ namespace Pinta
 				
 			case 1 :
 				med = gradientOutput.GetValue (1);
-				spinOutGamma.Value = Utility.Clamp(1 / Math.Log (0.5, (float)(med - lo) / (float)(hi - lo)), 0.1, 10.0);;
+				spinOutGamma.Value = Utility.Clamp(1 / Math.Log (0.5, (float)(med - lo) / (float)(hi - lo)), 0.1, 10.0);
 				break;
 			
 			case 2 :

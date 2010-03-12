@@ -53,32 +53,12 @@ namespace Pinta
 
 		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
-			using (Context context = Gdk.CairoHelper.Create (this.GdkWindow)) {
+			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
 				
 				int rad = 4;
 				Rectangle rect = Allocation.ToCairoRectangle ();
 				
-				//clipping rounded rectangle
-				context.MoveTo(rect.X, rect.Y + rad);
-				context.Arc (rect.X + rad, rect.Y + rad, rad, 180, 225);
-				//due rounding error, arc ends on rect.Y + rad + 1
-				context.LineTo (rect.X + rad, rect.Y);
-				context.LineTo (rect.X + rect.Width - rad, rect.Y);
-				context.Arc (rect.X + rect.Width - rad, rect.Y + rad, rad, 225, 270);
-				context.LineTo (rect.X + rect.Width, rect.Y + rad);
-				context.LineTo (rect.X + rect.Width, rect.Y + rect.Height - rad);
-				context.Arc (rect.X + rect.Width - rad, rect.Y + rect.Height - rad, rad, 270, 315);
-				//due rounding error, arc ends on rect.Y + rect.Height - 1
-				context.LineTo (rect.X + rect.Width - rad, rect.Y + rect.Height);
-				context.LineTo (rect.X + rad, rect.Y + rect.Height);
-				context.Arc (rect.X + rad, rect.Y + rect.Height - rad, rad, 315, 360);
-				context.LineTo (rect.X, rect.Y + rect.Height - rad);
-				context.LineTo (rect.X, rect.Y + rad);
-				context.Clip();
-				
-				context.Color = CairoColor;
-				context.Rectangle (Allocation.ToCairoRectangle ());
-				context.Fill();
+				g.FillRoundedRectangle (rect, rad, CairoColor);
 			}
 		}
 	}

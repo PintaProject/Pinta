@@ -33,6 +33,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Threading;
 using Cairo;
 
 using Pinta.Core;
@@ -131,7 +132,7 @@ namespace Pinta
                 sum3 += hist[i + 1];
 
                 points[i] = new PointD(
-                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 2.6f)),
+                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 2.8f)),
                     Utility.Lerp(t, b, (float)i / (float)entries));
 			
 				CheckPoint (rect, points [i]);
@@ -143,7 +144,7 @@ namespace Pinta
             ColorBgra brush_color = color;
            	brush_color.A = intensity;
 			
-			g.LineWidth = 1;
+			g.LineWidth = 0;
 			
 			g.Rectangle (rect);
 			g.Clip ();

@@ -160,10 +160,15 @@ namespace Pinta
 					Rectangle rect = GradientRectangle;
 					double y = GetValueFromY (py);
 					
-					if (rect.ContainsPoint (rect.X, py)) {
-						vals[i] = y;
-						OnValueChanged (i);
+					//cannot change triangles while left mouse button is pressed
+					if (i == last_value_index) {
+						if (rect.ContainsPoint (rect.X, py)) {
+							vals[i] = y;
+							OnValueChanged (i);
+						}
 					}
+					else 
+						return;
 				}
 			}
 			
@@ -176,7 +181,9 @@ namespace Pinta
 		
 		private void HandleLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
 		{
-			last_value_index = -1;
+			if (args.Event.State != Gdk.ModifierType.Button1Mask)
+				last_value_index = -1;
+			
 			GdkWindow.Invalidate ();
 		}
 		
@@ -203,13 +210,13 @@ namespace Pinta
 			Rectangle rect = GradientRectangle;
 			Rectangle all = Allocation.ToCairoRectangle();
 			
-			int index = FindValueIndex (py);
+			int index = (last_value_index != -1) ? last_value_index : FindValueIndex (py);
 			
 			for (int i = 0; i < Count; i++) {
 				
 				double val = vals [i];
 				double y = GetYValue (val);
-				bool hoover = ((index == i) && all.ContainsPoint (px, py));
+				bool hoover = ((index == i)) && (all.ContainsPoint (px, py) || last_value_index != -1);
 				Color color = hoover ? new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
 				
 				
