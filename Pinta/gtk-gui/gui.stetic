@@ -2010,6 +2010,7 @@
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Resizable">False</property>
     <property name="AllowGrow">False</property>
+    <property name="SkipTaskbarHint">True</property>
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
@@ -2268,7 +2269,7 @@ Luminosity</property>
     <child>
       <widget class="Gtk.EventBox" id="eventbox">
         <property name="MemberName" />
-        <property name="Events">ExposureMask, PointerMotionMask, ButtonMotionMask, ButtonPressMask</property>
+        <property name="Events">ExposureMask, PointerMotionMask, ButtonMotionMask, ButtonPressMask, ButtonReleaseMask</property>
         <property name="VisibleWindow">False</property>
         <child>
           <placeholder />
@@ -2280,9 +2281,11 @@ Luminosity</property>
     <property name="MemberName" />
     <property name="Events">PointerMotionMask, ButtonPressMask</property>
     <property name="Title" translatable="yes">Levels Adjustment</property>
+    <property name="TypeHint">Dialog</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Resizable">False</property>
     <property name="AllowGrow">False</property>
+    <property name="SkipTaskbarHint">True</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">

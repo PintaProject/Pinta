@@ -67,23 +67,27 @@ namespace Pinta
 				double step = 256 / (value - 1);
 				
 				for (int i = 0; i < value ; i++) {
-					vals [i] = i * step - 1;
+					vals [i] = i * step - ((i != 0) ? 1 : 0);
 				}
 			}
 		}
 		
 		public Color MaxColor { get; set; }
+		
+		public int ValueIndex { get; private set; }
 
 		public ColorGradientWidget ()
 		{
 			this.Build ();
+			ValueIndex = -1;
 			
 			eventbox.MotionNotifyEvent += HandleMotionNotifyEvent;
 			eventbox.LeaveNotifyEvent += HandleLeaveNotifyEvent;
+			eventbox.ButtonPressEvent += HandleButtonPressEvent;
+			eventbox.ButtonReleaseEvent += HandleButtonReleaseEvent;
 			
 			ExposeEvent += HandleExposeEvent;
 		}
-
 
 		public int GetValue (int i)
 		{
@@ -98,7 +102,7 @@ namespace Pinta
 			}
 		}
 		
-		private double GetYValue (double val)
+		private double GetYFromValue (double val)
 		{
 			Rectangle rect = GradientRectangle;
 			Rectangle all = Allocation.ToCairoRectangle ();
@@ -106,85 +110,114 @@ namespace Pinta
 			return all.Y + ypad * all.Height + rect.Height * (255 - val) / 255; 
 		}
 		
-		private int GetValueFromY (double yval)
+		private double NormalizeY (int index, double py) 
+		{
+			Rectangle rect = GradientRectangle;
+			var yvals = (from val in vals select GetYFromValue (val)).Concat(
+			              new double[] {rect.Y, rect.Y + rect.Height}).OrderByDescending (
+			              v => v).ToArray();
+			index++;
+			
+			if (py >= yvals [index - 1]) {
+				py = yvals [index - 1];
+			} else if (py < yvals [index + 1]) {
+				py = yvals [index + 1];
+			}
+			
+			return py;
+		}
+		
+		private int GetValueFromY (double py)
 		{
 			Rectangle rect = GradientRectangle;
 			Rectangle all = Allocation.ToCairoRectangle ();
 			
-			yval -= all.Y + ypad * all.Height;
-			return ((int)(255 * (rect.Height - yval) / rect.Height));
+			py -= all.Y + ypad * all.Height;
+			return ((int)(255 * (rect.Height - py) / rect.Height));
 		}
 		
 		private int FindValueIndex(int y)
 		{
-			var yvals = (from val in vals select GetYValue (val)).ToArray ();
-			int count = Count - 1;
-			
-			for (int i = 0; i < count; i++) {
-				double y1 = yvals [i];
-				double y2 = yvals [i + 1];
-				double h = (y1 - y2) / 2;
+			if (ValueIndex == -1) {
+				var yvals = (from val in vals select GetYFromValue (val)).ToArray ();
+				int count = Count - 1;
 				
-				// pointer is below the lowest value triangle
-				if (i == 0 && y1 < y)
-					return i;
+				for (int i = 0; i < count; i++) {
+					double y1 = yvals [i];
+					double y2 = yvals [i + 1];
+					double h = (y1 - y2) / 2;
+					
+					// pointer is below the lowest value triangle
+					if (i == 0 && y1 < y)
+						return i;
+					
+					// pointer is above the highest value triangle
+					if (i == (count - 1) && y2 > y)
+						return i + 1;
+					
+					// pointer is outside i and i + 1 value triangles
+					if (!(y1 >= y && y >= y2))
+						continue;
+					
+					// pointer is closer to lower value triangle
+					if (y1 - y <= h) return i;
+					// pointer is closer to higher value triangle
+					if (y - y2 <= h) return i + 1;
+				}
 				
-				// pointer is above the highest value triangle
-				if (i == (count - 1) && y2 > y)
-					return i + 1;
-				
-				// pointer is outside i and i + 1 value triangles
-				if (!(y1 >= y && y >= y2))
-					continue;
-				
-				// pointer is closer to lower value triangle
-				if (y1 - y <= h) return i;
-				// pointer is closer to higher value triangle
-				if (y - y2 <= h) return i + 1;
+				return -1;
+			} else {
+				return ValueIndex;
 			}
-			
-			return -1;
 		}
 		
-		private int last_value_index = -1;
 		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
 			int px, py;
 			Gdk.ModifierType mask;
 			GdkWindow.GetPointer (out px, out py, out mask); 
 			
-			int i = FindValueIndex (py);
+			int index = FindValueIndex (py);
+			py = (int)NormalizeY (index, py);
 			
 			if (mask == Gdk.ModifierType.Button1Mask) {
-				if (i != -1) {
-					Rectangle rect = GradientRectangle;
+				if (index != -1) {
 					double y = GetValueFromY (py);
 					
-					//cannot change triangles while left mouse button is pressed
-					if (i == last_value_index) {
-						if (rect.ContainsPoint (rect.X, py)) {
-							vals[i] = y;
-							OnValueChanged (i);
-						}
-					}
-					else 
-						return;
+					vals[index] = y;
+					OnValueChanged (index);
 				}
 			}
 			
 			//to avoid unnessesary costly redrawing
-			if (i != last_value_index) {
+			if (index != -1)
 				GdkWindow.Invalidate ();
-				last_value_index = i;
-			}
 		}
 		
 		private void HandleLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
 		{
 			if (args.Event.State != Gdk.ModifierType.Button1Mask)
-				last_value_index = -1;
+				ValueIndex = -1;
 			
 			GdkWindow.Invalidate ();
+		}
+		
+	
+		void HandleButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
+		{
+			int px, py;
+			Gdk.ModifierType mask;
+			GdkWindow.GetPointer (out px, out py, out mask); 
+			
+			int index = FindValueIndex ((int)py);
+			
+			if (index != -1)
+				ValueIndex = index;
+		}
+	
+		void HandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
+		{
+			ValueIndex = -1;	
 		}
 		
 		private void DrawGradient (Context g)
@@ -210,13 +243,13 @@ namespace Pinta
 			Rectangle rect = GradientRectangle;
 			Rectangle all = Allocation.ToCairoRectangle();
 			
-			int index = (last_value_index != -1) ? last_value_index : FindValueIndex (py);
+			int index = FindValueIndex (py);
 			
 			for (int i = 0; i < Count; i++) {
 				
 				double val = vals [i];
-				double y = GetYValue (val);
-				bool hoover = ((index == i)) && (all.ContainsPoint (px, py) || last_value_index != -1);
+				double y = GetYFromValue (val);
+				bool hoover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
 				Color color = hoover ? new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
 				
 				

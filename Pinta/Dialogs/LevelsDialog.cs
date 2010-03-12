@@ -49,6 +49,11 @@ namespace Pinta
 			VBox.Remove(hboxBottom);
 			AddActionWidget(hboxBottom, ResponseType.None);
 			
+			//UpdateInputHistogram ();
+			Reset ();
+			UpdateLevels ();
+			UpdateInputHistogram ();
+			
 			checkRed.Toggled += HandleCheckRedToggled;
 			checkGreen.Toggled += HandleCheckGreenToggled;
 			checkBlue.Toggled += HandleCheckBlueToggled;
@@ -67,10 +72,6 @@ namespace Pinta
 			gradientOutput.ButtonReleaseEvent += HandleGradientButtonReleaseEvent;
 			gradientInput.ButtonPressEvent += HandleGradientButtonPressEvent;
 			gradientOutput.ButtonPressEvent += HandleGradientButtonPressEvent;
-			
-			UpdateInputHistogram ();
-			Reset ();
-			UpdateLevels ();
 		}
 		
 		private void UpdateInputHistogram ()
@@ -81,7 +82,7 @@ namespace Pinta
 			UpdateOutputHistogram ();
 		}
 
-		private void UpdateOutputHistogram()
+		private void UpdateOutputHistogram ()
 		{
 			histogramOutput.Histogram.SetFromLeveledHistogram(histogramInput.Histogram, Levels);
 		}
@@ -277,30 +278,30 @@ namespace Pinta
 			if(running)
 				return;
 			
-			running=true;
-			
-			Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte)spinOutHigh.Value);
-            Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte)spinOutLow.Value);
-			UpdateGammaByMask ((float) spinOutGamma.Value);
-			
-            Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
-            Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
-			
-			
-			colorpanelInLow.SetCairoColor (Levels.ColorInLow.ToCairoColor ());
-			colorpanelInHigh.SetCairoColor (Levels.ColorInHigh.ToCairoColor ());
-			
-			colorpanelOutLow.SetCairoColor (Levels.ColorOutLow.ToCairoColor ());
-			colorpanelOutMid.SetCairoColor (GetOutMidColor ());
-			colorpanelOutHigh.SetCairoColor (Levels.ColorOutHigh.ToCairoColor ());
+			running = true;
 			
 			if(skip_counter == max_skip || !button_down) {
+				
+				Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte)spinOutHigh.Value);
+	            Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte)spinOutLow.Value);
+				UpdateGammaByMask ((float) spinOutGamma.Value);
+				
+	            Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
+	            Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
+				
+				colorpanelInLow.SetCairoColor (Levels.ColorInLow.ToCairoColor ());
+				colorpanelInHigh.SetCairoColor (Levels.ColorInHigh.ToCairoColor ());
+				
+				colorpanelOutLow.SetCairoColor (Levels.ColorOutLow.ToCairoColor ());
+				colorpanelOutMid.SetCairoColor (GetOutMidColor ());
+				colorpanelOutHigh.SetCairoColor (Levels.ColorOutHigh.ToCairoColor ());
+				
 				UpdateOutputHistogram ();
-				GdkWindow.Invalidate ();
 				skip_counter = 0;
 			} else
 				skip_counter++;
 				
+			GdkWindow.Invalidate ();
 			running = false;
 		}
 		
@@ -331,6 +332,9 @@ namespace Pinta
 		
 		private void HandleGradientOutputValueChanged (object sender, IndexEventArgs e)
 		{
+			if (gradientOutput.ValueIndex != -1 && gradientOutput.ValueIndex != e.Index)
+				return;
+			
 			int val = gradientOutput.GetValue (e.Index);
 			int hi = gradientOutput.GetValue (2);
 			int lo = gradientOutput.GetValue (0);
@@ -374,7 +378,6 @@ namespace Pinta
             }
 			
 			GdkWindow.Invalidate ();
-			Console.WriteLine("{0}.GdkWindow {1}", Name, GdkWindow.Handle);
 		}
 		
 		private void HandleCheckRedToggled (object sender, EventArgs e)

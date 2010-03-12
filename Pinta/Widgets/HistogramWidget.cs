@@ -99,7 +99,6 @@ namespace Pinta
 			int r = (int)(rect.X + rect.Width);
             int b = (int)(rect.Y + rect.Height);
 			
-            int channels = histogram.Channels;
             int entries = histogram.Entries;
             long[] hist = histogram.HistogramValues [channel];
 			
