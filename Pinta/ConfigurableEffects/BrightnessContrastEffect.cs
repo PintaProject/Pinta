@@ -80,8 +80,8 @@ namespace Pinta.Core
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; y++) {
-					ColorBgra* srcRowPtr = src.GetPointAddressUnchecked (0, y);
-					ColorBgra* dstRowPtr = dest.GetPointAddressUnchecked (0, y);
+					ColorBgra* srcRowPtr = src.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* dstRowPtr = dest.GetPointAddressUnchecked (rect.Left, y);
 					ColorBgra* dstRowEndPtr = dstRowPtr + rect.Width;
 
 					if (divide == 0) {
