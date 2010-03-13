@@ -75,6 +75,7 @@ namespace Pinta {
             this.percentageRadio = new Gtk.RadioButton(Mono.Unix.Catalog.GetString("By percentage:"));
             this.percentageRadio.CanFocus = true;
             this.percentageRadio.Name = "percentageRadio";
+            this.percentageRadio.Active = true;
             this.percentageRadio.DrawIndicator = true;
             this.percentageRadio.UseUnderline = true;
             this.percentageRadio.Group = new GLib.SList(System.IntPtr.Zero);
