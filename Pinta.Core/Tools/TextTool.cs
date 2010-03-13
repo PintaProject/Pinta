@@ -169,8 +169,10 @@ mode = EditingMode.NotEditing;
 				//this exception do not occure when I put a try catch ;(
 				try
 				{
-					if (font_combo == null)
+					if (font_combo == null) {
 						font_combo = new ToolBarComboBox (100, index, false, entries.ToArray ());
+						font_combo.ComboBox.Changed += HandleChanged;
+					}
 								
 					tb.AppendItem (font_combo);
 					
@@ -187,8 +189,10 @@ mode = EditingMode.NotEditing;
 					if (index < 0)
 						index = 0;
 		
-					if (size_combo == null)
-					size_combo = new ToolBarComboBox (50, index, false, entries.ToArray ());
+					if (size_combo == null) {
+						size_combo = new ToolBarComboBox (50, index, false, entries.ToArray ());
+						size_combo.ComboBox.Changed += HandleChanged;
+					}
 				
 				tb.AppendItem (size_combo);
 				}
@@ -243,6 +247,15 @@ mode = EditingMode.NotEditing;
 			}
 			
 			tb.AppendItem (Right_alignment_btn);
+		}
+
+		void HandleChanged(object sender, EventArgs e)
+		{
+			PintaCore.Chrome.DrawingArea.GrabFocus ();
+			if (mode != EditingMode.NotEditing)
+            {
+				RedrawText(true);
+            }
 		}
 		
 		private Pango.FontFamily FontFamily

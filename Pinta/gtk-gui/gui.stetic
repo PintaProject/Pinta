@@ -212,6 +212,8 @@
                         <child>
                           <widget class="Gtk.DrawingArea" id="drawingarea1">
                             <property name="MemberName" />
+                            <property name="CanDefault">True</property>
+                            <property name="HasDefault">True</property>
                             <property name="CanFocus">True</property>
                             <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
                             <property name="ShowScrollbars">True</property>

@@ -358,6 +358,7 @@ namespace Pinta
 
 		private void OnDrawingarea1ButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
 		{
+			//this.drawingarea1.GrabFocus ();
 			PintaCore.Tools.CurrentTool.DoMouseDown (drawingarea1, args, PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y));
 		}
 		#endregion
@@ -373,6 +374,5 @@ namespace Pinta
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args);
 		}
-				
 	}
 }

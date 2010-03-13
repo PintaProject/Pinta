@@ -231,6 +231,7 @@ namespace Pinta {
             w10.ShadowType = ((Gtk.ShadowType)(0));
             // Container child GtkViewport.Gtk.Container+ContainerChild
             this.drawingarea1 = new Gtk.DrawingArea();
+            this.drawingarea1.CanDefault = true;
             this.drawingarea1.CanFocus = true;
             this.drawingarea1.Events = ((Gdk.EventMask)(16134));
             this.drawingarea1.Name = "drawingarea1";
@@ -339,6 +340,7 @@ namespace Pinta {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
+            this.drawingarea1.HasDefault = true;
             this.Show();
             this.drawingarea1.ButtonPressEvent += new Gtk.ButtonPressEventHandler(this.OnDrawingarea1ButtonPressEvent);
             this.drawingarea1.ButtonReleaseEvent += new Gtk.ButtonReleaseEventHandler(this.OnDrawingarea1ButtonReleaseEvent);
