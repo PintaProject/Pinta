@@ -131,7 +131,7 @@ namespace Pinta
                 sum3 += hist[i + 1];
 
                 points[i] = new PointD(
-                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 2.8f)),
+                    Utility.Lerp(l, r, (float)(sum3) / (float)(max * 3.1f)),
                     Utility.Lerp(t, b, (float)i / (float)entries));
 			
 				CheckPoint (rect, points [i]);
@@ -143,7 +143,7 @@ namespace Pinta
             ColorBgra brush_color = color;
            	brush_color.A = intensity;
 			
-			g.LineWidth = 0;
+			g.LineWidth = 1;
 			
 			g.Rectangle (rect);
 			g.Clip ();

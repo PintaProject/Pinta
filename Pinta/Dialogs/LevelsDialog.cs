@@ -46,13 +46,12 @@ namespace Pinta
 
 			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
-			VBox.Remove(hboxBottom);
-			AddActionWidget(hboxBottom, ResponseType.None);
+			VBox.Remove (hboxBottom);
+			AddActionWidget (hboxBottom, ResponseType.None);
 			
-			//UpdateInputHistogram ();
+			UpdateInputHistogram ();
 			Reset ();
 			UpdateLevels ();
-			UpdateInputHistogram ();
 			
 			checkRed.Toggled += HandleCheckRedToggled;
 			checkGreen.Toggled += HandleCheckGreenToggled;
@@ -72,6 +71,10 @@ namespace Pinta
 			gradientOutput.ButtonReleaseEvent += HandleGradientButtonReleaseEvent;
 			gradientInput.ButtonPressEvent += HandleGradientButtonPressEvent;
 			gradientOutput.ButtonPressEvent += HandleGradientButtonPressEvent;
+			colorpanelInLow.ButtonPressEvent += HandleColorPanelButtonPressEvent;
+			colorpanelInHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
+			colorpanelOutLow.ButtonPressEvent += HandleColorPanelButtonPressEvent;
+			colorpanelOutHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
 		}
 		
 		private void UpdateInputHistogram ()
@@ -105,23 +108,28 @@ namespace Pinta
 		
 		private void UpdateFromLevelsOp ()
 		{
+			disable_updating = true;
+			
+			spinInHigh.Value = MaskAvg (Levels.ColorInHigh);
+            spinInLow.Value = MaskAvg (Levels.ColorInLow);
+			
 			float gamma = MaskGamma ();
             int lo = MaskAvg (Levels.ColorOutLow);
             int hi = MaskAvg (Levels.ColorOutHigh);
-
+			
             spinOutHigh.Value = hi;
             spinOutGamma.Value = gamma;
             spinOutLow.Value = lo;
-            spinInHigh.Value = MaskAvg (Levels.ColorInHigh);
-            spinInLow.Value = MaskAvg (Levels.ColorInLow);
+			
+			disable_updating = false;
 		}
 		
 		private void HandleButtonAutoClicked (object sender, EventArgs e)
 		{
 			Levels = histogramInput.Histogram.MakeLevelsAuto ();
 			
-			UpdateOutputHistogram ();
 			UpdateFromLevelsOp ();
+			UpdateLevels ();
 		}
 
 		private void HandleSpinInLowValueChanged (object sender, EventArgs e)
@@ -219,7 +227,7 @@ namespace Pinta
             return after;           
         }
 		
-		private float MaskGamma() 
+		private float MaskGamma () 
         {
             int count = 0;
             float total = 0;
@@ -239,7 +247,7 @@ namespace Pinta
     
         }
 		
-		private void UpdateGammaByMask(float val) 
+		private void UpdateGammaByMask (float val) 
         {
             float average = -1;
 
@@ -264,21 +272,21 @@ namespace Pinta
 		}
 		
 		//hack to avoid reccurent invocation of UpdateLevels
-		private bool running;
+		private bool disable_updating;
 		//when user moves triangles inside gradient widget,
 		//we don't want to redraw histogram each time Levels values change.
 		//maximum number of skipped updates
-		private const int max_skip = 4;
+		private const int max_skip = 5;
 		//skipped updates counter
 		private int skip_counter = max_skip;
 		private bool button_down = false;
 		
 		private void UpdateLevels ()
 		{
-			if(running)
+			if(disable_updating)
 				return;
 			
-			running = true;
+			disable_updating = true;
 			
 			if(skip_counter == max_skip || !button_down) {
 				
@@ -302,7 +310,7 @@ namespace Pinta
 				skip_counter++;
 				
 			GdkWindow.Invalidate ();
-			running = false;
+			disable_updating = false;
 		}
 		
 		private void HandleGradientButtonPressEvent (object o, ButtonPressEventArgs args)
@@ -406,6 +414,54 @@ namespace Pinta
 		private void HandleButtonCancelClicked (object sender, EventArgs e)
 		{
 			Respond (ResponseType.Cancel);
+		}
+		
+		private void HandleColorPanelButtonPressEvent (object sender, ButtonPressEventArgs args)
+		{
+			if (args.Event.Type != Gdk.EventType.TwoButtonPress)
+				return;
+			
+			Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Color");
+            
+           	ColorPanelWidget panel = (ColorPanelWidget)sender;
+			csd.ColorSelection.PreviousColor = panel.CairoColor.ToGdkColor ();
+			csd.ColorSelection.CurrentColor = panel.CairoColor.ToGdkColor ();
+			csd.ColorSelection.CurrentAlpha = panel.CairoColor.GdkColorAlpha ();	
+                   
+			int response = csd.Run ();
+
+			if (response == (int)Gtk.ResponseType.Ok) {
+                    
+                ColorBgra col = csd.ColorSelection.CurrentColor.ToBgraColor ();
+
+                if (panel == colorpanelInLow)	{
+                    Levels.ColorInLow = col;
+                } else if (panel == colorpanelInHigh) {
+                    Levels.ColorInHigh = col;
+                } else if (panel == colorpanelOutLow) {
+                    Levels.ColorOutLow = col;
+//                } else if (panel == colorpanelOutMid) {
+//                    ColorBgra lo = Levels.ColorInLow;
+//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
+//                    ColorBgra hi = Levels.ColorInHigh;
+//                    ColorBgra out_lo = Levels.ColorOutLow;
+//                    ColorBgra out_hi = Levels.ColorOutHigh;
+//
+//                    for (int i = 0; i < 3; i++) {
+//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
+//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
+//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
+//
+//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
+//                    }
+                } else if (panel == colorpanelOutHigh) {
+                    Levels.ColorOutHigh = col;
+                } 
+            }
+			
+			csd.Destroy ();
+			UpdateFromLevelsOp ();
+			UpdateLevels ();
 		}
 	}
 }

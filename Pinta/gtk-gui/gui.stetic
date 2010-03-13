@@ -515,10 +515,6 @@
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Upper">10000</property>
-                <property name="PageIncrement">10</property>
-                <property name="StepIncrement">1</property>
-                <property name="ClimbRate">1</property>
-                <property name="Numeric">True</property>
                 <property name="Value">600</property>
               </widget>
               <packing>
@@ -629,10 +625,6 @@
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Upper">10000</property>
-                <property name="PageIncrement">10</property>
-                <property name="StepIncrement">1</property>
-                <property name="ClimbRate">1</property>
-                <property name="Numeric">True</property>
                 <property name="Value">800</property>
               </widget>
               <packing>
@@ -800,11 +792,6 @@
                   <widget class="Gtk.SpinButton" id="spinbutton1">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="Upper">100</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -934,10 +921,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">1000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                     <property name="Value">100</property>
                   </widget>
                   <packing>
@@ -1017,10 +1000,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1072,10 +1051,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1218,10 +1193,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">1000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                     <property name="Value">100</property>
                   </widget>
                   <packing>
@@ -1301,10 +1272,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1356,10 +1323,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1826,11 +1789,6 @@
               <widget class="Gtk.SpinButton" id="spin">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
-                <property name="PageIncrement">10</property>
-                <property name="StepIncrement">1</property>
-                <property name="ClimbRate">1</property>
-                <property name="Numeric">True</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2631,7 +2589,7 @@ Luminosity</property>
                             <property name="Lower">0.1</property>
                             <property name="Upper">7.99</property>
                             <property name="PageIncrement">10</property>
-                            <property name="StepIncrement">0.1</property>
+                            <property name="StepIncrement">0.01</property>
                             <property name="ClimbRate">1</property>
                             <property name="Numeric">True</property>
                             <property name="Value">1</property>
@@ -2947,7 +2905,14 @@ Luminosity</property>
     <property name="HeightRequest">24</property>
     <property name="Visible">False</property>
     <child>
-      <placeholder />
+      <widget class="Gtk.EventBox" id="eventbox">
+        <property name="MemberName" />
+        <property name="Events">ButtonPressMask</property>
+        <property name="VisibleWindow">False</property>
+        <child>
+          <placeholder />
+        </child>
+      </widget>
     </child>
   </widget>
 </stetic-interface>
