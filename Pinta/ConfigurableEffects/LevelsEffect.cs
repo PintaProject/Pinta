@@ -1,5 +1,5 @@
 // 
-// PosterizeEffect.cs
+// LevelsEffect.cs
 //  
 // Author:
 //       Krzysztof Marecki <marecki.krzysztof@gmail.com>
@@ -29,53 +29,43 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class PosterizeEffect : BaseEffect
+	public class LevelsEffect : BaseEffect
 	{
-		private int red;
-		private int green;
-		private int blue;
-
-		UnaryPixelOp op;
-
+		private UnaryPixelOps.Level levels;
+		
 		public override string Icon {
-			get { return "Menu.Adjustments.Posterize.png"; }
+			get { return "Menu.Adjustments.Levels.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
+			get { return Mono.Unix.Catalog.GetString ("Levels"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
-
+		
 		public override bool LaunchConfiguration ()
 		{
-			PosterizeDialog dialog = new PosterizeDialog ();
+			
+			LevelsDialog dialog = new LevelsDialog ();
 			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-
 			int response = dialog.Run ();
-
+			
 			if (response == (int)Gtk.ResponseType.Ok) {
-				red = dialog.Red;
-				green = dialog.Green;
-				blue = dialog.Blue;
-
+				levels = dialog.Levels;
+				
 				dialog.Destroy ();
-
 				return true;
 			}
 
 			dialog.Destroy ();
-
 			return false;
 		}
-
+		
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op = new UnaryPixelOps.PosterizePixel (red, green, blue);
-
-			op.Apply (dest, src, rois);
+			levels.Apply (dest, src, rois);
 		}
 	}
 }

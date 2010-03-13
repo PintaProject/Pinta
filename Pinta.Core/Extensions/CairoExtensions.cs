@@ -115,6 +115,46 @@ namespace Pinta.Core
 			return dirty;
 		}
 		
+		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
+		{
+			Random rand=new Random();
+			
+			g.Save ();
+			g.MoveTo (points [0]);
+			foreach (var point in points) {
+				g.LineTo (point.X - rand.NextDouble()*0, point.Y);
+				//g.Stroke();
+			}
+			
+			g.Color = color;
+			
+			Rectangle dirty = g.StrokeExtents ();
+			g.Stroke ();
+
+			g.Restore ();
+
+			return dirty;
+		}
+		
+		
+		public static Rectangle FillPolygonal (this Context g, PointD[] points, Color color)
+		{
+			g.Save ();
+			
+			g.MoveTo (points [0]);
+			foreach (var point in points)
+				g.LineTo (point);
+			
+			g.Color = color;
+			
+			Rectangle dirty = g.StrokeExtents ();
+			g.Fill ();
+
+			g.Restore ();
+
+			return dirty;
+		}
+		
 		public static Rectangle FillStrokedRectangle (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
 		{
 			double x = r.X;
@@ -519,6 +559,13 @@ namespace Pinta.Core
 
 			return c;
 		}
+		
+		public static Gdk.Color ToGdkColor (this ColorBgra color)
+		{
+			Gdk.Color c = new Gdk.Color (color.R, color.G, color.B);
+			
+			return c;
+		}
 
 		public static string ToString2 (this Cairo.Color c)
 		{
@@ -555,7 +602,7 @@ namespace Pinta.Core
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
-				
+
 				// We don't want the bounding box to include a stroke width 
 				// of 1, but setting it to 0 returns an empty rectangle.  Set
 				// it to a sufficiently small width and rounding takes care of it
@@ -596,7 +643,7 @@ namespace Pinta.Core
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
-
+			
 			return dstPtr;
 		}
 
