@@ -671,5 +671,243 @@ namespace Pinta.Core
 		{
 			return new Gdk.Size (surf.Width, surf.Height);
 		}
+		
+		private struct Edge
+        {
+            public int miny;   // int
+            public int maxy;   // int
+            public int x;      // fixed point: 24.8
+            public int dxdy;   // fixed point: 24.8
+
+            public Edge(int miny, int maxy, int x, int dxdy)
+            {
+                this.miny = miny;
+                this.maxy = maxy;
+                this.x = x;
+                this.dxdy = dxdy;
+            }
+        }
+		
+		public static void TranslatePointsInPlace (this Point[] Points, int dx, int dy)
+		{
+			for (int i = 0; i < Points.Length; ++i)
+            {
+                Points[i].X += dx;
+                Points[i].Y += dy;
+            }
+		}
+		
+		public static Scanline[] GetScans (this Point[] points)
+		{
+            int ymax = 0;
+
+            // Build edge table
+            Edge[] edgeTable = new Edge[points.Length];
+            int edgeCount = 0;
+
+            for (int i = 0; i < points.Length; ++i)
+            {
+                Point top = points[i];
+                Point bottom = points[(i + 1) % points.Length];
+                int dy;
+
+                if (top.Y > bottom.Y)
+                {
+                    Point temp = top;
+                    top = bottom;
+                    bottom = temp;
+                }
+                
+                dy = bottom.Y - top.Y;
+
+                if (dy != 0)
+                {
+                    edgeTable[edgeCount] = new Edge(top.Y, bottom.Y, top.X << 8, (((bottom.X - top.X) << 8) / dy));
+                    ymax = Math.Max(ymax, bottom.Y);
+                    ++edgeCount;
+                }
+            }
+
+            // Sort edge table by miny
+            for (int i = 0; i < edgeCount - 1; ++i)
+            {
+                int min = i;
+
+                for (int j = i + 1; j < edgeCount; ++j)
+                {
+                    if (edgeTable[j].miny < edgeTable[min].miny)
+                    {
+                        min = j;
+                    }
+                }
+
+                if (min != i)
+                {
+                    Edge temp = edgeTable[min];
+                    edgeTable[min] = edgeTable[i];
+                    edgeTable[i] = temp;
+                }
+            }
+
+            // Compute how many scanlines we will be emitting
+            int scanCount = 0;
+            int activeLow = 0;
+            int activeHigh = 0;
+            int yscan1 = edgeTable[0].miny;
+
+            // we assume that edgeTable[0].miny == yscan
+            while (activeHigh < edgeCount - 1 && 
+                   edgeTable[activeHigh + 1].miny == yscan1)
+            {
+                ++activeHigh;
+            }
+
+            while (yscan1 <= ymax)
+            {
+                // Find new edges where yscan == miny
+                while (activeHigh < edgeCount - 1 &&
+                       edgeTable[activeHigh + 1].miny == yscan1)
+                {
+                    ++activeHigh;
+                }
+
+                int count = 0;
+                for (int i = activeLow; i <= activeHigh; ++i)
+                {
+                    if (edgeTable[i].maxy > yscan1)
+                    {
+                        ++count;
+                    }
+                }
+
+                scanCount += count / 2;
+                ++yscan1;
+
+                // Remove edges where yscan == maxy
+                while (activeLow < edgeCount - 1 &&
+                       edgeTable[activeLow].maxy <= yscan1)
+                {
+                    ++activeLow;
+                }
+
+                if (activeLow > activeHigh)
+                {
+                    activeHigh = activeLow;
+                }
+            }
+
+            // Allocate scanlines that we'll return
+            Scanline[] scans = new Scanline[scanCount];
+
+            // Active Edge Table (AET): it is indices into the Edge Table (ET)
+            int[] active = new int[edgeCount];
+            int activeCount = 0;
+            int yscan2 = edgeTable[0].miny;
+            int scansIndex = 0;
+            
+            // Repeat until both the ET and AET are empty
+            while (yscan2 <= ymax)
+            {
+                // Move any edges from the ET to the AET where yscan == miny
+                for (int i = 0; i < edgeCount; ++i)
+                {
+                    if (edgeTable[i].miny == yscan2)
+                    {
+                        active[activeCount] = i;
+                        ++activeCount;
+                    }
+                }
+
+                // Sort the AET on x
+                for (int i = 0; i < activeCount - 1; ++i)
+                {
+                    int min = i;
+
+                    for (int j = i + 1; j < activeCount; ++j)
+                    {
+                        if (edgeTable[active[j]].x < edgeTable[active[min]].x)
+                        {
+                            min = j;
+                        }
+                    }
+
+                    if (min != i)
+                    {
+                        int temp = active[min];
+                        active[min] = active[i];
+                        active[i] = temp;
+                    }
+                }
+
+                // For each pair of entries in the AET, fill in pixels between their info
+                for (int i = 0; i < activeCount; i += 2)
+                {
+                    Edge el = edgeTable[active[i]];
+                    Edge er = edgeTable[active[i + 1]];
+                    int startx = (el.x + 0xff) >> 8; // ceil(x)
+                    int endx = er.x >> 8;      // floor(x)
+
+                    scans[scansIndex] = new Scanline(startx, yscan2, endx - startx);
+                    ++scansIndex;
+                }
+
+                ++yscan2;
+
+                // Remove from the AET any edge where yscan == maxy
+                int k = 0;
+                while (k < activeCount && activeCount > 0)
+                {
+                    if (edgeTable[active[k]].maxy == yscan2)
+                    {
+                        // remove by shifting everything down one
+                        for (int j =  k + 1; j < activeCount; ++j)
+                        {
+                            active[j - 1] = active[j];
+                        }
+
+                        --activeCount;
+                    }
+                    else
+                    {
+                        ++k;
+                    }
+                }
+
+                // Update x for each entry in AET
+                for (int i = 0; i < activeCount; ++i)
+                {
+                    edgeTable[active[i]].x += edgeTable[active[i]].dxdy;
+                }
+            }
+
+            return scans;
+		}
+		
+		public static Path CreatePolygonPath (this Context g, Point[][] polygonSet)
+		{
+			g.Save ();
+			Point p;
+			for (int i =0; i < polygonSet.Length; i++)
+			{
+				if (polygonSet[i].Length == 0)
+					continue;
+				
+				p = polygonSet[i][0];
+				g.MoveTo (p.X, p.Y);
+				
+				for (int j =1; j < polygonSet[i].Length; j++)
+				{
+					p = polygonSet[i][j];
+					g.LineTo (p.X, p.Y);	
+				}
+				g.ClosePath ();
+			}
+			
+			Path path = g.CopyPath ();
+			
+			g.Restore ();
+			
+			return path;
+		}
 	}
 }

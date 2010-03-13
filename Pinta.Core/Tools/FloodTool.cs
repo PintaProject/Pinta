@@ -97,7 +97,8 @@ namespace Pinta.Core
 				FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox);
 				
 			stencil = stencilBuffer;
-			OnFillRegionComputed (null);
+			Point[][] polygonSet = PathManager.PolygonSetFromStencil (stencilBuffer, boundingBox, 0, 0);
+			OnFillRegionComputed (polygonSet);
 		}
 		#endregion
 
