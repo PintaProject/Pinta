@@ -135,8 +135,8 @@ namespace Pinta.Core
 			else
 				ratio = ImageSize.Y / rect.Height;
 			
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", ratio * 100.0);
-			Gtk.Main.Iteration();//Force update of scrollbar upper before recenter
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
+			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 		

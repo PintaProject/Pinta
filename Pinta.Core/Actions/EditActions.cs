@@ -202,8 +202,7 @@ namespace Pinta.Core
 			
 			PintaCore.Workspace.Invalidate ();
 
-			// TODO: Need paste icon
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("gtk-paste", Mono.Unix.Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
 			PintaCore.History.PushNewItem (hist);
 		}
 
@@ -231,8 +230,7 @@ namespace Pinta.Core
 			
 			PintaCore.Workspace.Invalidate ();
 			
-			// TODO: Need paste icon
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("gtk-paste", Mono.Unix.Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)

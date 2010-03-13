@@ -40,6 +40,9 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "When zoomed in close, click and drag to navigate image."; }
 		}
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0); }
+		}
 		
 		private bool active;
 		private PointD last_point;

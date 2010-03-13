@@ -193,12 +193,12 @@ namespace Pinta.Core
 			int total_height = roi.Height;
 			
 			for (int i = 0; i < num - 1; i++) {
-				rects.Add (new Gdk.Rectangle (roi.X, i * height, roi.Width, height));
+				rects.Add (new Gdk.Rectangle (roi.X, i * height + roi.Top, roi.Width, height));
 				total_height -= height;
 			}
 			
 			// Add any remaining height to the last rectangle
-			rects.Add (new Gdk.Rectangle (roi.X, (num - 1) * height, roi.Width, total_height));
+			rects.Add (new Gdk.Rectangle (roi.X, (num - 1) * height + roi.Top, roi.Width, total_height));
 			
 			return rects.ToArray ();
 		}
