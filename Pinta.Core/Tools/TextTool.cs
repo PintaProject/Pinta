@@ -254,6 +254,7 @@ mode = EditingMode.NotEditing;
 			PintaCore.Chrome.DrawingArea.GrabFocus ();
 			if (mode != EditingMode.NotEditing)
             {
+				this.sizes = null;
 				RedrawText(true);
             }
 		}
@@ -1273,6 +1274,12 @@ mode = EditingMode.NotEditing;
 		
         protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
         {
+			bool flag = OnKeyPress(args.Event.Key, args.Event.State);
+			if(flag) {
+				args.RetVal = flag;
+				return;
+			}
+				
             switch (args.Event.Key)
             {
                 case Gdk.Key.space:
@@ -1323,16 +1330,16 @@ mode = EditingMode.NotEditing;
             }
 
             // Ensure text is on screen when they are typing
-			/*
+			
             if (this.mode != EditingMode.NotEditing)
             {
                 Point p = TextPositionToPoint(new Position(linePos, textPos));
-                Rectangle bounds = Utility.RoundRectangle(DocumentWorkspace.VisibleDocumentRectangleF);
-                bounds.Inflate(-(int)font.Height, -(int)font.Height);
+                Rectangle bounds = new Rectangle (0, 0, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y);//Utility.RoundRectangle(DocumentWorkspace.VisibleDocumentRectangleF);
+                bounds.Inflate (-FontHeight, -FontHeight);
 
                 if (!bounds.Contains(p))
                 {
-                    Cairo.PointD newCenterPt = bounds.Center();
+                    Point newCenterPt = bounds.Center();
 
                     // horizontally off
                     if (p.X > bounds.Right || p.Y < bounds.Left)
@@ -1349,7 +1356,7 @@ mode = EditingMode.NotEditing;
                     PintaCore.Workspace.RecenterView(newCenterPt.X, newCenterPt.Y);
                 }
             }
-			 */
+			
             //base.OnKeyDown (e);
 			//replace with:
 			this.OnKeyPress(canvas, args);

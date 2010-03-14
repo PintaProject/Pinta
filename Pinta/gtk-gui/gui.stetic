@@ -6,6 +6,7 @@
   </configuration>
   <import>
     <widget-library name="../../bin/Pinta.Core.dll" />
+    <widget-library name="../../bin/Pinta.Resources.dll" />
     <widget-library name="../../Pinta.Gui.Widgets/bin/Debug/Pinta.Gtk.Widgets.dll" />
     <widget-library name="../../bin/Pinta.exe" internal="true" />
   </import>
