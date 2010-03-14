@@ -1021,6 +1021,9 @@ mode = EditingMode.NotEditing;
 						    FontSize,
 						    PintaCore.Palette.PrimaryColor,
                             text);
+						
+						if(underscore_btn.Active)
+							ctx.DrawLine(new Cairo.PointD (pt2.X, dstRect.Bottom), new Cairo.PointD (dstRect.Right - offset, dstRect.Bottom), PintaCore.Palette.PrimaryColor, 1); 
                     }
 					PintaCore.Workspace.Invalidate(dstRectClipped);
                 }
@@ -1282,14 +1285,14 @@ mode = EditingMode.NotEditing;
 				
             switch (args.Event.Key)
             {
-                case Gdk.Key.space:
+                /*case Gdk.Key.space:
                     if (mode != EditingMode.NotEditing)
                     {
                         // Prevent pan cursor from flicking to 'hand w/ the X' whenever use types a space in their text
                         args.RetVal = true;
                     }
                     break;
-
+				*/
                 case Gdk.Key.Control_L:
 				case Gdk.Key.Control_R:
                     if (!this.controlKeyDown)
@@ -1361,12 +1364,13 @@ mode = EditingMode.NotEditing;
 			//replace with:
 			this.OnKeyPress(canvas, args);
         }
-		/*
-        protected override void OnKeyUp(DrawingArea canvas, KeyReleaseEventArgs args, Cairo.PointD point)
+		
+        protected override  void OnKeyUp (DrawingArea canvas, KeyReleaseEventArgs args)
         {
-            switch (e.KeyCode)
+            switch (args.Event.Key)
             {
-                case Gdk.Key.ControlKey:
+                case Gdk.Key.Control_L:
+				case Gdk.Key.Control_R:
                     TimeSpan heldDuration = (DateTime.Now - this.controlKeyDownTime);
 
                     // If the user taps Ctrl, then we should toggle the visiblity of the moveNub
@@ -1379,9 +1383,9 @@ mode = EditingMode.NotEditing;
                     break;
             }
 
-            base.OnKeyUp(e);
+            base.OnKeyUp (canvas, args);
         }
-		 */
+		
         protected void OnKeyPress(DrawingArea canvas, KeyPressEventArgs args)
         {
             switch (args.Event.Key)
@@ -1435,7 +1439,7 @@ mode = EditingMode.NotEditing;
                     PintaCore.History.PushNewItem (cha);
                 }
 
-                if ((args.Event.State & ModifierType.ControlMask) == 0) 
+                if ((args.Event.State & ModifierType.ControlMask) == 0 && args.Event.Key != Gdk.Key.Control_L && args.Event.Key != Gdk.Key.Control_R) 
                 {
 					char ch = (char)Gdk.Keyval.ToUnicode(args.Event.KeyValue);
 					InsertCharIntoString(ch);
