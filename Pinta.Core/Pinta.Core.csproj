@@ -142,6 +142,10 @@
     <Compile Include="Effects\SplineInterpolator.cs" />
     <Compile Include="Classes\IndexEventHandler.cs" />
     <Compile Include="Classes\IndexEventArgs.cs" />
+    <Compile Include="Managers\LivePreviewManager.cs" />
+    <Compile Include="EventArgs\LivePreviewEndedEventArgs.cs" />
+    <Compile Include="EventArgs\LivePreviewRenderUpdatedEventArgs.cs" />
+    <Compile Include="EventArgs\LivePreviewStartedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
