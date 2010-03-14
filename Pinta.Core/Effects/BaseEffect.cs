@@ -1,4 +1,4 @@
-﻿// 
+// 
 // BaseEffect.cs
 //  
 // Author:
@@ -45,5 +45,27 @@ namespace Pinta.Core
 		}
 
 		public abstract void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois);
+	}
+	
+	public abstract class EffectData : ObservableObject
+	{
+		public abstract EffectData Clone ();
+	}
+	
+	// Temporary hack - until some other changes are made.
+	public interface IBaseEffectLivePreviewHack
+	{
+		string Icon { get; }
+		string Text { get; }
+		
+		// Null for non-configurable effects.
+		EffectData EffectData { get; }
+		
+		bool IsConfigurable { get; }
+		
+		// Return true to perform effect, false to cancel effect
+		bool LaunchConfiguration ();
+		
+		void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois, EffectData effectData);
 	}
 }

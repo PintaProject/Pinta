@@ -30,7 +30,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-	public class GaussianBlurEffect : BaseEffect
+	public class GaussianBlurEffect : BaseEffect, IBaseEffectLivePreviewHack
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Blurs.GaussianBlur.png"; }
@@ -44,11 +44,13 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public GaussianBlurData Data { get; private set; }
+		public GaussianBlurData Data { get { return EffectData as GaussianBlurData; } }
+		
+		public EffectData EffectData { get; private set; }
 		
 		public GaussianBlurEffect ()
 		{
-			Data = new GaussianBlurData ();
+			EffectData = new GaussianBlurData ();
 		}
 		
 		public override bool LaunchConfiguration ()
@@ -84,12 +86,19 @@ namespace Pinta.Core
 
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			if (Data.Radius == 0) {
+			RenderEffect (src, dest, rois, Data);
+		}
+		
+		public unsafe void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois, EffectData effectData)
+		{
+			var data = effectData as GaussianBlurData;
+						
+			if (data == null || data.Radius == 0) {
 				// Copy src to dest
 				return;
 			}
-
-			int r = Data.Radius;
+			
+			int r = data.Radius;
 			int[] w = CreateGaussianBlurRow (r);
 			int wlen = w.Length;
 
@@ -279,13 +288,33 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class GaussianBlurData
+		public class GaussianBlurData : EffectData
 		{
+			[Skip]
+			int radius;
+			
+			public GaussianBlurData ()
+			{
+				radius = 2;
+			}
+			
+			public static string RadiusProperty = "Radius";
+			
 			[MinimumValue (0), MaximumValue (200)]
-			public int Radius = 2;
+			public int Radius {
+				get { return radius; }
+				set { SetValue (RadiusProperty, ref radius, value); }
+			}
 			
 			[Skip]
 			public bool IsEmpty { get { return Radius == 0; } }
+			
+			public override EffectData Clone ()
+			{
+				var data = new GaussianBlurData ();
+				data.Radius = radius;
+				return data;
+			}
 		}
 	}
 }

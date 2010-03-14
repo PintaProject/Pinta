@@ -41,6 +41,7 @@ namespace Pinta.Core
 		public static WorkspaceManager Workspace { get; private set; }
 		public static HistoryManager History { get; private set; }
 		public static SystemManager System { get; private set; }
+		public static LivePreviewManager LivePreview { get; private set; }
 		
 		static PintaCore ()
 		{
@@ -51,6 +52,7 @@ namespace Pinta.Core
 			Tools = new ToolManager ();
 			History = new HistoryManager ();
 			System = new SystemManager ();
+			LivePreview = new LivePreviewManager ();
 		}
 		
 		public static void Initialize (Toolbar toolToolBar, Label statusTextLabel, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)

@@ -28,12 +28,17 @@ using System;
 using Gdk;
 using Gtk;
 using Pinta.Core;
+using Debug = System.Diagnostics.Debug;
 
 namespace Pinta
 {
 	public partial class MainWindow : Gtk.Window
 	{
 		DialogHandlers dialog_handler;
+		
+		Layer live_preview_layer;
+		IBaseEffectLivePreviewHack live_preview_effect;
+		Cairo.ImageSurface live_preview_surface;
 		
 		public MainWindow () : base (Gtk.WindowType.Toplevel)
 		{
@@ -114,6 +119,10 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 
+			PintaCore.LivePreview.Started += LivePreview_Started;
+			PintaCore.LivePreview.RenderUpdated += LivePreview_RenderUpdated;
+			PintaCore.LivePreview.Ended += LivePreview_Ended;			
+			
 			WindowAction.Visible = false;
 
 			if (Platform.GetOS () == Platform.OS.Mac)
@@ -285,6 +294,31 @@ namespace Pinta
 			}
 		}
 
+		void LivePreview_Started (object o, LivePreviewStartedEventArgs args)
+		{
+			Debug.WriteLine("LivePreview_Started()");
+			live_preview_layer = args.Layer;
+			live_preview_effect = args.Effect;
+			live_preview_surface = args.Surface;
+		}
+		
+		void LivePreview_RenderUpdated (object o, LivePreviewRenderUpdatedEventArgs args)
+		{			
+			//TODO figure out bounds
+			//drawingarea1.QueueDrawArea (GetWorkspaceBounds(args.bounds));
+			
+			//For now just redraw everything.
+			drawingarea1.QueueDraw ();			
+		}
+		
+		void LivePreview_Ended (object o, LivePreviewEndedEventArgs args)
+		{
+			Debug.WriteLine("LivePreview_Ended()");
+			live_preview_layer = null;
+			live_preview_effect = null;
+			live_preview_surface = null;
+		}		
+		
 		#region Drawing Area
 		private void OnDrawingarea1ExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
@@ -310,9 +344,10 @@ namespace Pinta
 				g.Scale (scale, scale);
 
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-					g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+					var surface = (live_preview_layer != null && layer == live_preview_layer) ? live_preview_surface : layer.Surface;
+					g.SetSourceSurface (surface, (int)layer.Offset.X, (int)layer.Offset.Y);
 					g.PaintWithAlpha (layer.Opacity);
-				}
+				}	
 
 				g.Restore ();
 

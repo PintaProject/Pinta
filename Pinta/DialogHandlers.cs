@@ -226,7 +226,7 @@ namespace Pinta
 
 		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new GaussianBlurEffect ());
+			PintaCore.LivePreview.Start (new GaussianBlurEffect ());
 		}
 
 		private void HandleEffectGlowActivated (object sender, EventArgs e)
