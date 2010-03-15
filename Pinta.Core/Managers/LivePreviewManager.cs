@@ -133,7 +133,7 @@ namespace Pinta.Core
 		// is not actually complete until the LivePreviewRenderCompleted event is fired.
 		void Cancel ()
 		{
-			Console.WriteLine ("LivePreviewManager.Cancel()");
+			Debug.WriteLine ("LivePreviewManager.Cancel()");
 			
 			cancel_live_preview_flag = true;
 			cancel_render_flag = true;
@@ -147,7 +147,7 @@ namespace Pinta.Core
 		
 		void HandleCancel ()
 		{
-			Console.WriteLine ("LivePreviewManager.HandleCancel()");
+			Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 			
 			FireLivePreviewEndedEvent(RenderStatus.Cancelled, null);
 			live_preview_enabled = false;
@@ -165,7 +165,7 @@ namespace Pinta.Core
 		
 		void Apply ()
 		{
-			Console.WriteLine ("LivePreviewManager.Apply()");
+			Debug.WriteLine ("LivePreviewManager.Apply()");
 			apply_live_preview_flag = true;
 			
 			if (AllThreadsAreStopped ())
@@ -176,7 +176,7 @@ namespace Pinta.Core
 		
 		void HandleApply ()
 		{
-			Console.WriteLine ("LivePreviewManager.HandleApply()");
+			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
 			var item = new SimpleHistoryItem (effect.Icon, effect.Text);
 			item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);			
@@ -247,7 +247,7 @@ namespace Pinta.Core
 			
 			render_exceptions.Clear ();
 			
-			Console.WriteLine ("StartRender() Render " + render_id + " starting.");
+			Debug.WriteLine ("StartRender() Render " + render_id + " starting.");
 			
 			for (int i = 0; i < render_thread_count; i++)
 				StartRenderThread (i);
@@ -258,18 +258,18 @@ namespace Pinta.Core
 			var thread = new Thread(() => {
 				Interlocked.Increment(ref running_render_threads);
 				
-				Console.WriteLine ("LivePreviewManager render thread started. " + threadIndex);
+				Debug.WriteLine ("LivePreviewManager render thread started. " + threadIndex);
 				
 				for (int tileIndex = threadIndex; tileIndex < total_tiles; tileIndex += render_thread_count) {					
 					if (cancel_render_flag) {
-						Console.WriteLine ("LivePreviewManager render thread cancelled. "  + threadIndex);
+						Debug.WriteLine ("LivePreviewManager render thread cancelled. "  + threadIndex);
 						break;
 					}
 					
 					RenderTile (render_id, tileIndex);
 				}
 				
-				Console.WriteLine ("LivePreviewManager render thread ended. "  + threadIndex);
+				Debug.WriteLine ("LivePreviewManager render thread ended. "  + threadIndex);
 				
 				Interlocked.Decrement(ref running_render_threads);
 				
@@ -314,7 +314,7 @@ namespace Pinta.Core
 			} catch (Exception ex) {		
 				exception = ex;
 				//cancel_render_flag = true; //TODO could cancel render on first error detected.
-				Console.WriteLine ("LivePreview Error: " + ex.Message + "\n" + ex.StackTrace);
+				Debug.WriteLine ("LivePreview Error: " + ex.Message + "\n" + ex.StackTrace);
 			}
 			
 			// When this is running multithread, we need to marshall this code back onto the
@@ -338,7 +338,7 @@ namespace Pinta.Core
 			float progress = (float)rendered_tiles / (float)total_tiles;
 			
 			if (!cancelled && exception == null && RenderUpdated != null) {
-				Console.Write ("*");
+				Debug.Write ("*");
 				var args = new LivePreviewRenderUpdatedEventArgs(progress, bounds);
 				RenderUpdated (this, args);
 			}
@@ -367,7 +367,7 @@ namespace Pinta.Core
 		                             bool cancelled,
 		                             Exception[] exceptions)
 		{
-			Console.WriteLine ("HandleRenderCompletion() renderId: " + renderId + " cancelled: " + cancelled);
+			Debug.WriteLine ("HandleRenderCompletion() renderId: " + renderId + " cancelled: " + cancelled);
 			
 			if (running_render_threads > 0)
 				throw new ApplicationException ("HandleRenderCompletion() called while render threads are running.");
