@@ -168,10 +168,26 @@ namespace Pinta.Core
 			Debug.WriteLine ("LivePreviewManager.Apply()");
 			apply_live_preview_flag = true;
 			
-			if (AllThreadsAreStopped ())
+			if (AllThreadsAreStopped ()) {
 				HandleApply ();
-			//else
-			//TODO Show progress dialog, allow cancel.
+			} else  {
+				var dialog = PintaCore.Chrome.ProgressDialog;
+				dialog.Title = "Render effect progress";
+				dialog.Text = effect.Text;
+				dialog.Canceled += HandleProgressDialogCancel;
+				RenderUpdated += UpdateProgressDialog;
+				dialog.Show ();				
+			}
+		}
+		
+		void HandleProgressDialogCancel (object o, EventArgs e)
+		{
+			Cancel();
+		}
+		
+		void UpdateProgressDialog (object o, LivePreviewRenderUpdatedEventArgs e)
+		{
+			PintaCore.Chrome.ProgressDialog.Progress = e.Progress;
 		}
 		
 		void HandleApply ()
@@ -190,14 +206,14 @@ namespace Pinta.Core
 				ctx.Paint ();
 			}
 			
-			PintaCore.History.PushNewItem (item);		
+			PintaCore.History.PushNewItem (item);
 			
 			FireLivePreviewEndedEvent(RenderStatus.Completed, null);
 			
 			live_preview_enabled = false;
 			PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
 			CleanUp ();
-		}		
+		}
 		
 		// Clean up resources when live preview is disabled.
 		void CleanUp ()
@@ -211,6 +227,13 @@ namespace Pinta.Core
 			}
 							
 			surface = null;
+			
+			// Hide progress dialog and clean up events.
+			var dialog = PintaCore.Chrome.ProgressDialog;
+			dialog.Hide ();
+			dialog.Canceled -= HandleProgressDialogCancel;
+			
+			RenderUpdated += UpdateProgressDialog;
 		}
 		
 		void EffectData_PropertyChanged (object sender, PropertyChangedEventArgs e)

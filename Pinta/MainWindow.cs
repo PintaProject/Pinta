@@ -36,6 +36,8 @@ namespace Pinta
 	{
 		DialogHandlers dialog_handler;
 		
+		ProgressDialog progress_dialog;
+		
 		Layer live_preview_layer;
 		IBaseEffectLivePreviewHack live_preview_effect;
 		Cairo.ImageSurface live_preview_surface;
@@ -53,7 +55,9 @@ namespace Pinta
 			PintaCore.Actions.AccelGroup = new AccelGroup ();
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
 
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this);
+			progress_dialog = new ProgressDialog ();
+			
+			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this, progress_dialog);
 			colorpalettewidget1.Initialize ();
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
