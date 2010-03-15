@@ -2,3 +2,4 @@ bin
 *.pidb
 *.suo
 *.userprefs
+Pinta/gtk-gui/*.cs
