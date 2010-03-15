@@ -90,6 +90,10 @@ namespace Pinta.Core
 			layer = PintaCore.Layers.CurrentLayer;
 			this.effect = effect;
 			
+			// Show a busy cursor, and make the main window insensitive,
+			// until the cancel has completed.
+			PintaCore.Chrome.MainWindowBusy = true;			
+			
 			// Set render bounds to selection.
 			PintaCore.Layers.FinishSelection ();
 			render_bounds = PintaCore.Layers.SelectionPath.GetBounds ();
@@ -139,7 +143,9 @@ namespace Pinta.Core
 			cancel_render_flag = true;
 			restart_render_flag = false;
 			
-			//TODO Show hour-glass cursor.
+			// Show a busy cursor, and make the main window insensitive,
+			// until the cancel has completed.
+			PintaCore.Chrome.MainWindowBusy = true;
 			
 			if (AllThreadsAreStopped ())
 				HandleCancel ();
@@ -159,8 +165,6 @@ namespace Pinta.Core
 			
 			PintaCore.Workspace.Invalidate ();
 			CleanUp ();
-			
-			//TODO Hide hour-glass cursor.
 		}
 		
 		void Apply ()
@@ -234,6 +238,8 @@ namespace Pinta.Core
 			dialog.Canceled -= HandleProgressDialogCancel;
 			
 			RenderUpdated += UpdateProgressDialog;
+			
+			PintaCore.Chrome.MainWindowBusy = false;
 		}
 		
 		void EffectData_PropertyChanged (object sender, PropertyChangedEventArgs e)

@@ -35,6 +35,7 @@ namespace Pinta.Core
 		private DrawingArea drawing_area;
 		private Window main_window;
 		private IProgressDialog progress_dialog;
+		private bool main_window_busy;
 		
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public DrawingArea DrawingArea { get { return drawing_area; } }
@@ -78,7 +79,23 @@ namespace Pinta.Core
 		
 		#region Public Events
 		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
-		#endregion		
+		#endregion
+		
+		public bool MainWindowBusy {
+			get { return main_window_busy; }
+			set {
+				main_window_busy = value;
+				
+				if (main_window_busy) {
+					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+					main_window.Sensitive = false;
+				} else {
+					//TODO change it back to the correct cursor rather than the default.
+					main_window.GdkWindow.Cursor = null;
+					main_window.Sensitive = true;
+				}
+			}
+		}
 	}
 		
 	public interface IProgressDialog
