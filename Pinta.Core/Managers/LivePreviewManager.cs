@@ -40,32 +40,15 @@ namespace Pinta.Core
 		
 		bool apply_live_preview_flag;
 		bool cancel_live_preview_flag;
-		bool cancel_render_flag;
-		bool restart_render_flag;
-			
-		int render_id;
+		
 		Cairo.ImageSurface surface;
 		Gdk.Rectangle render_bounds;
-		BaseEffect render_effect_copy;
-		int total_tiles;
-		int rendered_tiles;
-		List<Exception> render_exceptions;
 		
-		bool is_starting; //TODO yuk - clean this up.
-		int running_render_threads;
-		
-		const int render_thread_count = 1;
-		const uint render_completion_wait_millis = 50;
-		const int render_tile_width = 128;
-		const int render_tile_height = 128;
-
-		delegate void Task ();
+		AsyncEffectRenderer renderer;
 		
 		internal LivePreviewManager ()
 		{
-			live_preview_enabled = false;			
-			render_id = 0;
-			render_exceptions = new List<Exception> ();
+			live_preview_enabled = false;
 		}
 		
 		public bool IsEnabled { get { return live_preview_enabled; } }
@@ -92,7 +75,7 @@ namespace Pinta.Core
 			
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
-			PintaCore.Chrome.MainWindowBusy = true;			
+			PintaCore.Chrome.MainWindowBusy = true;
 			
 			// Set render bounds to selection.
 			PintaCore.Layers.FinishSelection ();
@@ -119,9 +102,16 @@ namespace Pinta.Core
 			
 			if (Started != null) {
 				Started (this, new LivePreviewStartedEventArgs());
-			}			
+			}
 			
-			StartRender ();
+			var settings = new AsyncEffectRenderer.Settings () {
+				ThreadCount = PintaCore.System.RenderThreads,
+				TileWidth = 128,
+				TileHeight = 128
+			};
+			
+			renderer = new Renderer (this, settings);
+			renderer.Start (effect, layer.Surface, surface, render_bounds);
 			
 			if (effect.IsConfigurable) {		
 				if (!effect.LaunchConfiguration ())
@@ -170,22 +160,24 @@ namespace Pinta.Core
 			Debug.WriteLine ("LivePreviewManager.Cancel()");
 			
 			cancel_live_preview_flag = true;
-			cancel_render_flag = true;
-			restart_render_flag = false;
+			
+			if (renderer != null)
+				renderer.Cancel ();
 			
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
 			PintaCore.Chrome.MainWindowBusy = true;
 			
-			if (AllThreadsAreStopped ())
+			if (renderer == null || !renderer.IsRendering)
 				HandleCancel ();
 		}
 		
+		// Called from asynchronously from Renderer.OnCompletion ()
 		void HandleCancel ()
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 			
-			FireLivePreviewEndedEvent(RenderStatus.Cancelled, null);
+			FireLivePreviewEndedEvent(RenderStatus.Canceled, null);
 			live_preview_enabled = false;
 			
 			if (surface != null) {
@@ -202,15 +194,14 @@ namespace Pinta.Core
 			Debug.WriteLine ("LivePreviewManager.Apply()");
 			apply_live_preview_flag = true;
 			
-			if (AllThreadsAreStopped () && !is_starting) {
+			if (!renderer.IsRendering) {
 				HandleApply ();
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
 				dialog.Title = "Rendering Effect";
 				dialog.Text = effect.Text;
-				dialog.Progress = (total_tiles == 0) ? 0 : rendered_tiles / total_tiles;
+				dialog.Progress = renderer.Progress;
 				dialog.Canceled += HandleProgressDialogCancel;
-				RenderUpdated += UpdateProgressDialog;
 				dialog.Show ();				
 			}
 		}
@@ -220,11 +211,7 @@ namespace Pinta.Core
 			Cancel();
 		}
 		
-		void UpdateProgressDialog (object o, LivePreviewRenderUpdatedEventArgs e)
-		{
-			PintaCore.Chrome.ProgressDialog.Progress = e.Progress;
-		}
-		
+		// Called from asynchronously from Renderer.OnCompletion ()
 		void HandleApply ()
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleApply()");
@@ -241,6 +228,7 @@ namespace Pinta.Core
 			FireLivePreviewEndedEvent(RenderStatus.Completed, null);
 			
 			live_preview_enabled = false;
+			
 			PintaCore.Workspace.Invalidate (); //TODO keep track of dirty bounds.
 			CleanUp ();
 		}
@@ -248,6 +236,8 @@ namespace Pinta.Core
 		// Clean up resources when live preview is disabled.
 		void CleanUp ()
 		{
+			Debug.WriteLine ("LivePreviewManager.CleanUp()");
+			
 			live_preview_enabled = false;
 			
 			if (effect != null) {
@@ -257,192 +247,51 @@ namespace Pinta.Core
 			}
 							
 			surface = null;
+			renderer = null;
 			
 			// Hide progress dialog and clean up events.
 			var dialog = PintaCore.Chrome.ProgressDialog;
 			dialog.Hide ();
 			dialog.Canceled -= HandleProgressDialogCancel;
 			
-			RenderUpdated += UpdateProgressDialog;
-			
 			PintaCore.Chrome.MainWindowBusy = false;
 		}
 		
 		void EffectData_PropertyChanged (object sender, PropertyChangedEventArgs e)
 		{
-			//TODO calculate bounds.						
-			StartRender ();
-		}		
+			//TODO calculate bounds.
+			renderer.Start (effect, layer.Surface, surface, render_bounds);
+		}
 		
-		void StartRender ()
-		{							
-			if (!live_preview_enabled || cancel_live_preview_flag)
-				return;
+		class Renderer : AsyncEffectRenderer
+		{
+			LivePreviewManager manager;
 			
-			// If a render is already in progress, then cancel it,
-			// and start a new render.
-			if (!AllThreadsAreStopped ()) {
-				cancel_render_flag = true;
-				restart_render_flag = true;
-				return;
+			internal Renderer (LivePreviewManager manager, AsyncEffectRenderer.Settings settings)
+				: base (settings)
+			{
+				this.manager = manager;
 			}
 			
-			cancel_render_flag = false;
-			restart_render_flag = false;
+			protected override void OnUpdate (double progress, Gdk.Rectangle updatedBounds)
+			{
+				Debug.WriteLine ("LivePreviewManager.HandleRenderCompletion() progress: " + progress);				
+				PintaCore.Chrome.ProgressDialog.Progress = progress;
+				manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
+			}	
 			
-			render_id++;
-			rendered_tiles = 0;			
-			total_tiles = (int)(Math.Ceiling((float)render_bounds.Width / (float)render_tile_width)
-                                * Math.Ceiling((float)render_bounds.Height / (float)render_tile_height));
-			
-			for (int i=0; i < total_tiles; i++)
-				GetTileBounds (i);
-			
-			// It is important the effect's properties don't change during rendering.
-			// So a copy is made for the render.
-			render_effect_copy = effect.Clone ();
-			
-			render_exceptions.Clear ();
-			
-			Debug.WriteLine ("StartRender() Render " + render_id + " starting.");
-			
-			//TODO yuk - clean this up.
-			is_starting = true;
-			
-			for (int i = 0; i < render_thread_count; i++)
-				StartRenderThread (i);
-		}	
-		
-		Thread StartRenderThread (int threadIndex)
-		{
-			var thread = new Thread(() => {
-				Interlocked.Increment(ref running_render_threads);
+			protected override void OnCompletion (bool cancelled, Exception[] exceptions)
+			{
+				Debug.WriteLine ("LivePreviewManager.HandleRenderCompletion() cancelled: " + cancelled);			
 				
-				is_starting = false;
+				if (!manager.live_preview_enabled)
+					return;
 				
-				Debug.WriteLine ("LivePreviewManager render thread started. " + threadIndex);
-				
-				for (int tileIndex = threadIndex; tileIndex < total_tiles; tileIndex += render_thread_count) {					
-					if (cancel_render_flag) {
-						Debug.WriteLine ("LivePreviewManager render thread cancelled. "  + threadIndex);
-						break;
-					}
-					
-					RenderTile (render_id, tileIndex);
-				}
-				
-				Debug.WriteLine ("LivePreviewManager render thread ended. "  + threadIndex);
-				
-				Interlocked.Decrement(ref running_render_threads);
-				
-				CheckRenderCompletion (render_id, threadIndex, cancel_render_flag);
-			});
-			
-			thread.Start ();
-			
-			//TODO Perhaps set thread priority below that of the UI thread, to make sure
-			// that the UI remains responsive on single core computers.
-			
-			return thread;
-		}
-		
-		// Can be called on any thread.
-		Gdk.Rectangle GetTileBounds (int tileIndex)
-		{
-			int horizTileCount = (int)Math.Ceiling((float)render_bounds.Width 
-			                                       / (float)render_tile_width);
-			
-            int x = ((tileIndex % horizTileCount) * render_tile_width) + render_bounds.X;
-            int y = ((tileIndex / horizTileCount) * render_tile_height) + render_bounds.Y;
-            int w = Math.Min(render_tile_width, render_bounds.Right - x);
-            int h = Math.Min(render_tile_height, render_bounds.Bottom - y);
-			
-			return new Gdk.Rectangle (x, y, w, h);			
-		}
-		
-		// Can be called on any thread.
-		void RenderTile (int renderId, int tileIndex)
-		{			
-			Exception exception = null;
-			Gdk.Rectangle bounds = new Gdk.Rectangle ();
-			
-			try {
-				
-				bounds = GetTileBounds (tileIndex);
-				
-				if (!cancel_render_flag)
-					render_effect_copy.RenderEffect (layer.Surface, surface, new [] { bounds });
-				
-			} catch (Exception ex) {		
-				exception = ex;
-				//cancel_render_flag = true; //TODO could cancel render on first error detected.
-				Debug.WriteLine ("LivePreview Error: " + ex.Message + "\n" + ex.StackTrace);
+				if (manager.cancel_live_preview_flag)
+					manager.HandleCancel ();
+				else if (manager.apply_live_preview_flag)
+					manager.HandleApply ();
 			}
-			
-			// When this is running multithread, we need to marshall this code back onto the
-			// UI thread.
-			Gtk.Application.Invoke ((o, e) => {				
-				HandleTileCompletion (renderId, tileIndex, bounds, cancel_render_flag, exception);
-			});			
-		}
-		
-		void HandleTileCompletion (int renderId,
-		                           int tileIndex,
-		                           Gdk.Rectangle bounds,
-		                           bool cancelled,
-		                           Exception exception)
-		{
-			if (renderId != render_id)
-				return;
-			
-			rendered_tiles++;
-					
-			float progress = (float)rendered_tiles / (float)total_tiles;
-			
-			if (!cancelled && exception == null && RenderUpdated != null) {
-				Debug.Write ("*");
-				var args = new LivePreviewRenderUpdatedEventArgs(progress, bounds);
-				RenderUpdated (this, args);
-			}
-			
-			if (exception != null) {
-				lock (render_exceptions) {
-					render_exceptions.Add (exception);
-				}
-			}
-		}
-		
-		void CheckRenderCompletion (int renderId, int threadId, bool cancelled)
-		{			
-			Gtk.Application.Invoke ((o,e) => {
-				if (AllThreadsAreStopped())
-					HandleRenderCompletion (render_id, cancel_render_flag, render_exceptions.ToArray());
-			});
-		}
-		
-		bool AllThreadsAreStopped ()
-		{
-			return running_render_threads == 0;
-		}		
-		
-		void HandleRenderCompletion (int renderId,
-		                             bool cancelled,
-		                             Exception[] exceptions)
-		{
-			Debug.WriteLine ("HandleRenderCompletion() renderId: " + renderId + " cancelled: " + cancelled);
-			
-			if (running_render_threads > 0)
-				throw new ApplicationException ("HandleRenderCompletion() called while render threads are running.");
-			
-			if (!live_preview_enabled)
-				return;
-			
-			if (cancel_live_preview_flag)
-				HandleCancel ();
-			else if (apply_live_preview_flag)
-				HandleApply ();
-			else if (restart_render_flag)
-				StartRender ();
 		}
 		
 		void FireLivePreviewEndedEvent (RenderStatus status, Exception ex)
@@ -450,6 +299,13 @@ namespace Pinta.Core
 			if (Ended != null) {
 				var args = new LivePreviewEndedEventArgs (status, ex);
 				Ended (this, args);
+			}			
+		}
+		
+		void FireLivePreviewRenderUpdatedEvent (double progress, Gdk.Rectangle bounds)
+		{
+			if (RenderUpdated != null) {
+				RenderUpdated (this, new LivePreviewRenderUpdatedEventArgs(progress, bounds));
 			}			
 		}		
 	}

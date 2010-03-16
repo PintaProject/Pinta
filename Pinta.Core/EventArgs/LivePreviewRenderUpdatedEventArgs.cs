@@ -30,14 +30,14 @@ namespace Pinta.Core
 {
 	public class LivePreviewRenderUpdatedEventArgs : EventArgs
 	{
-		public LivePreviewRenderUpdatedEventArgs (float progress,
+		public LivePreviewRenderUpdatedEventArgs (double progress,
 		                                           Gdk.Rectangle bounds)
 		{			
 			this.Progress = progress;
 			this.Bounds = bounds;
 		}
 		
-		public float Progress { get; private set; }
+		public double Progress { get; private set; }
 		public Gdk.Rectangle Bounds { get; private set; }
 	}
 }

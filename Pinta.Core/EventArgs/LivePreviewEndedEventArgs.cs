@@ -30,7 +30,7 @@ namespace Pinta.Core
 {
 	public enum RenderStatus {
 		Completed,
-		Cancelled,
+		Canceled,
 		Faulted
 	}	
 	
