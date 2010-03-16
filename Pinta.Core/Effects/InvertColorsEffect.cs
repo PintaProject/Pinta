@@ -1,4 +1,4 @@
-﻿// 
+// 
 // InvertColorsEffect.cs
 //  
 // Author:
@@ -40,6 +40,11 @@ namespace Pinta.Core
 		public override string Text {
 			get { return Mono.Unix.Catalog.GetString ("Invert Colors"); }
 		}
+		
+		public override BaseEffect Clone ()
+		{
+			return DoClone <InvertColorsEffect> ();
+		}		
 
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{

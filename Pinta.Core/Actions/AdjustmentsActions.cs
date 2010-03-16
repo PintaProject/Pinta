@@ -101,7 +101,7 @@ namespace Pinta.Core
 
 		private void HandleInvertColorsActivated (object sender, EventArgs e)
 		{
-			PerformEffect (new InvertColorsEffect ());
+			PintaCore.LivePreview.Start (new InvertColorsEffect ());
 		}
 
 		private void HandleSepiaActivated (object sender, EventArgs e)

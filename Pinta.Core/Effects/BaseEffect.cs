@@ -47,13 +47,25 @@ namespace Pinta.Core
 		}
 
 		public abstract void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois);
+				
+		// TODO Make this method abstract once all effects have implemented it.
+		// I assume that all configurable objects should keep all of their mutable
+		// state the EffectData property.
+		// (This is needed for the effect to work with LivePreview.)		
 		
 		// Effects must override this method.
-		// TODO Make this method abstract once all effects have implemented it.
-		// (This is needed for the effect to work with LivePreview.)		
 		public virtual BaseEffect Clone ()
 		{
 			throw new NotImplementedException ();
+		}
+		
+		protected T DoClone<T> ()
+			where T : BaseEffect, new ()
+		{
+			var effect = new T ();
+			if (EffectData != null)
+				effect.EffectData = EffectData.Clone ();
+			return effect;		
 		}
 	}
 	

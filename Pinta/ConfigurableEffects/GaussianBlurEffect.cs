@@ -69,9 +69,7 @@ namespace Pinta.Core
 
 		public override BaseEffect Clone ()
 		{
-			var effect = new GaussianBlurEffect ();
-			effect.EffectData = EffectData.Clone ();
-			return effect;
+			return DoClone <GaussianBlurEffect> ();
 		}
 		
 		#region Algorithm Code Ported From PDN

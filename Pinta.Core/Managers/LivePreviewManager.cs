@@ -51,6 +51,7 @@ namespace Pinta.Core
 		int rendered_tiles;
 		List<Exception> render_exceptions;
 		
+		bool is_starting; //TODO yuk - clean this up.
 		int running_render_threads;
 		
 		const int render_thread_count = 1;
@@ -75,8 +76,6 @@ namespace Pinta.Core
 		
 		public void Start (BaseEffect effect)
 		{			
-			Console.WriteLine ("effect.EffectData: " + effect.EffectData);
-			
 			if (live_preview_enabled)
 				throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 			
@@ -129,6 +128,8 @@ namespace Pinta.Core
 					Cancel ();
 				else
 					Apply ();
+			} else {
+				Apply ();
 			}
 		}
 		
@@ -201,7 +202,7 @@ namespace Pinta.Core
 			Debug.WriteLine ("LivePreviewManager.Apply()");
 			apply_live_preview_flag = true;
 			
-			if (AllThreadsAreStopped ()) {
+			if (AllThreadsAreStopped () && !is_starting) {
 				HandleApply ();
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
@@ -305,6 +306,9 @@ namespace Pinta.Core
 			
 			Debug.WriteLine ("StartRender() Render " + render_id + " starting.");
 			
+			//TODO yuk - clean this up.
+			is_starting = true;
+			
 			for (int i = 0; i < render_thread_count; i++)
 				StartRenderThread (i);
 		}	
@@ -313,6 +317,8 @@ namespace Pinta.Core
 		{
 			var thread = new Thread(() => {
 				Interlocked.Increment(ref running_render_threads);
+				
+				is_starting = false;
 				
 				Debug.WriteLine ("LivePreviewManager render thread started. " + threadIndex);
 				
