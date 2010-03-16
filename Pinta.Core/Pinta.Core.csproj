@@ -10,6 +10,7 @@
     <RootNamespace>Pinta.Core</RootNamespace>
     <AssemblyName>Pinta.Core</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -149,6 +150,8 @@
     <Compile Include="Effects\PlacedSurface.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="HistoryItems\ClippedSurfaceHistoryItem.cs" />
+    <Compile Include="Classes\IndexEventHandler.cs" />
+    <Compile Include="Classes\IndexEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,8 +8,9 @@
     <ProjectGuid>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Pinta.Gui.Widgets</RootNamespace>
-    <AssemblyName>Pinta.Gtk.Widgets</AssemblyName>
+    <AssemblyName>Pinta.Gui.Widgets</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
