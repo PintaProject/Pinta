@@ -60,7 +60,7 @@ namespace Pinta.Core
 
 		delegate void Task ();
 		
-		public LivePreviewManager ()
+		internal LivePreviewManager ()
 		{
 			live_preview_enabled = false;			
 			render_id = 0;
@@ -73,7 +73,6 @@ namespace Pinta.Core
 		public event EventHandler<LivePreviewRenderUpdatedEventArgs> RenderUpdated;
 		public event EventHandler<LivePreviewEndedEventArgs> Ended;
 		
-		//TODO use current selection when applying effect.
 		public void Start (IBaseEffectLivePreviewHack effect)
 		{			
 			if (live_preview_enabled)
@@ -99,7 +98,7 @@ namespace Pinta.Core
 			render_bounds = PintaCore.Layers.SelectionPath.GetBounds ();
 			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);			
 									
-			//TODO use current tool layer.
+			//TODO Use the current tool layer instead.
 			surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 			                                  PintaCore.Workspace.CanvasSize.X,
 			                                  PintaCore.Workspace.CanvasSize.Y);
@@ -131,6 +130,36 @@ namespace Pinta.Core
 				else
 					Apply ();
 			}
+		}
+		
+		// Used by the workspace drawing area expose render loop.
+		// Takes care of the clipping.
+		public void RenderLivePreviewLayer (Cairo.Context ctx, double opacity)
+		{
+			if (!IsEnabled)
+				throw new InvalidOperationException ("Tried to render a live preview after live preview has ended.");
+			
+			// TODO skip first paint if there is currently no selection.
+			//   i.e. the effect is applied to the entire layer.
+			
+			// TODO remove seam around selection during live preview.
+			
+			ctx.Save ();			
+			ctx.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+			ctx.PaintWithAlpha (opacity);
+			ctx.Restore ();
+						
+			ctx.AppendPath (PintaCore.Layers.SelectionPath);
+			ctx.FillRule = Cairo.FillRule.EvenOdd;
+			ctx.Clip ();
+			
+			ctx.Operator = Cairo.Operator.Clear;
+			ctx.Paint ();
+			ctx.Operator = Cairo.Operator.Over;
+			
+			ctx.SetSourceSurface (surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+			ctx.PaintWithAlpha (opacity);
+			ctx.Restore ();
 		}
 		
 		// Method asks render task to complete, and then returns immediately. The cancel 
@@ -176,8 +205,9 @@ namespace Pinta.Core
 				HandleApply ();
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
-				dialog.Title = "Render effect progress";
+				dialog.Title = "Rendering Effect";
 				dialog.Text = effect.Text;
+				dialog.Progress = (total_tiles == 0) ? 0 : rendered_tiles / total_tiles;
 				dialog.Canceled += HandleProgressDialogCancel;
 				RenderUpdated += UpdateProgressDialog;
 				dialog.Show ();				
@@ -202,12 +232,7 @@ namespace Pinta.Core
 			item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);			
 			
 			using (var ctx = new Cairo.Context (layer.Surface)) {
-				ctx.AppendPath (PintaCore.Layers.SelectionPath);
-				ctx.FillRule = Cairo.FillRule.EvenOdd;
-				ctx.Clip ();
-
-				ctx.SetSource (surface);
-				ctx.Paint ();
+				RenderLivePreviewLayer (ctx, 1.0);
 			}
 			
 			PintaCore.History.PushNewItem (item);

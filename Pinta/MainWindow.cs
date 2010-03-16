@@ -38,10 +38,6 @@ namespace Pinta
 		
 		ProgressDialog progress_dialog;
 		
-		Layer live_preview_layer;
-		IBaseEffectLivePreviewHack live_preview_effect;
-		Cairo.ImageSurface live_preview_surface;
-		
 		public MainWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			Build ();
@@ -123,9 +119,7 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 
-			PintaCore.LivePreview.Started += LivePreview_Started;
 			PintaCore.LivePreview.RenderUpdated += LivePreview_RenderUpdated;
-			PintaCore.LivePreview.Ended += LivePreview_Ended;			
 			
 			WindowAction.Visible = false;
 
@@ -297,31 +291,15 @@ namespace Pinta
 				even = !even;
 			}
 		}
-
-		void LivePreview_Started (object o, LivePreviewStartedEventArgs args)
-		{
-			Debug.WriteLine("LivePreview_Started()");
-			live_preview_layer = args.Layer;
-			live_preview_effect = args.Effect;
-			live_preview_surface = args.Surface;
-		}
 		
 		void LivePreview_RenderUpdated (object o, LivePreviewRenderUpdatedEventArgs args)
 		{			
-			//TODO figure out bounds
+			//TODO figure out the updated area's bounds from the workspace args.
 			//drawingarea1.QueueDrawArea (GetWorkspaceBounds(args.bounds));
 			
 			//For now just redraw everything.
 			drawingarea1.QueueDraw ();			
 		}
-		
-		void LivePreview_Ended (object o, LivePreviewEndedEventArgs args)
-		{
-			Debug.WriteLine("LivePreview_Ended()");
-			live_preview_layer = null;
-			live_preview_effect = null;
-			live_preview_surface = null;
-		}		
 		
 		#region Drawing Area
 		private void OnDrawingarea1ExposeEvent (object o, Gtk.ExposeEventArgs args)
@@ -348,10 +326,13 @@ namespace Pinta
 				g.Scale (scale, scale);
 
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-					var surface = (live_preview_layer != null && layer == live_preview_layer) ? live_preview_surface : layer.Surface;
-					g.SetSourceSurface (surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-					g.PaintWithAlpha (layer.Opacity);
-				}	
+					if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
+						PintaCore.LivePreview.RenderLivePreviewLayer (g, layer.Opacity);
+					} else {
+						g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+						g.PaintWithAlpha (layer.Opacity);
+					}
+				}
 
 				g.Restore ();
 
