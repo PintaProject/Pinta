@@ -29,43 +29,36 @@ using Cairo;
 
 namespace Pinta.Core
 {
+	// TODO consider spliting base effect into BaseEffect and ConfigurationBaseEffectClasses.
 	public abstract class BaseEffect
 	{
 		public abstract string Icon { get; }
 		public abstract string Text { get; }
 		public virtual bool IsConfigurable { get { return false; } }
+		public EffectData EffectData { get; protected set; }
 		
 		// Return true to perform effect, false to cancel effect
 		public virtual bool LaunchConfiguration ()
 		{
 			if (IsConfigurable)
-				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented a LaunchConfiguration", this.GetType ()));
-				
+				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented a LaunchConfiguration", this.GetType ()));			
+			
 			return false;
 		}
 
 		public abstract void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois);
+		
+		// Effects must override this method.
+		// TODO Make this method abstract once all effects have implemented it.
+		// (This is needed for the effect to work with LivePreview.)		
+		public virtual BaseEffect Clone ()
+		{
+			throw new NotImplementedException ();
+		}
 	}
 	
 	public abstract class EffectData : ObservableObject
 	{
 		public abstract EffectData Clone ();
-	}
-	
-	// Temporary hack - until some other changes are made.
-	public interface IBaseEffectLivePreviewHack
-	{
-		string Icon { get; }
-		string Text { get; }
-		
-		// Null for non-configurable effects.
-		EffectData EffectData { get; }
-		
-		bool IsConfigurable { get; }
-		
-		// Return true to perform effect, false to cancel effect
-		bool LaunchConfiguration ();
-		
-		void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois, EffectData effectData);
 	}
 }

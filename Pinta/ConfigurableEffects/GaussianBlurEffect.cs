@@ -30,7 +30,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-	public class GaussianBlurEffect : BaseEffect, IBaseEffectLivePreviewHack
+	public class GaussianBlurEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Blurs.GaussianBlur.png"; }
@@ -45,8 +45,6 @@ namespace Pinta.Core
 		}
 
 		public GaussianBlurData Data { get { return EffectData as GaussianBlurData; } }
-		
-		public EffectData EffectData { get; private set; }
 		
 		public GaussianBlurEffect ()
 		{
@@ -69,6 +67,13 @@ namespace Pinta.Core
 			return false;
 		}
 
+		public override BaseEffect Clone ()
+		{
+			var effect = new GaussianBlurEffect ();
+			effect.EffectData = EffectData.Clone ();
+			return effect;
+		}
+		
 		#region Algorithm Code Ported From PDN
 		public static int[] CreateGaussianBlurRow (int amount)
 		{
@@ -86,12 +91,7 @@ namespace Pinta.Core
 
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			RenderEffect (src, dest, rois, Data);
-		}
-		
-		public unsafe void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois, EffectData effectData)
-		{
-			var data = effectData as GaussianBlurData;
+			var data = EffectData as GaussianBlurData;
 						
 			if (data == null || data.Radius == 0) {
 				// Copy src to dest
@@ -285,6 +285,7 @@ namespace Pinta.Core
 					}
 				}
 			}
+			
 		}
 		#endregion
 

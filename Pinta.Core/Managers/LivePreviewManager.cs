@@ -36,7 +36,7 @@ namespace Pinta.Core
 	{
 		bool live_preview_enabled;		
 		Layer layer;
-		IBaseEffectLivePreviewHack effect; //TODO change this back to BaseEffect.	
+		BaseEffect effect;
 		
 		bool apply_live_preview_flag;
 		bool cancel_live_preview_flag;
@@ -44,9 +44,9 @@ namespace Pinta.Core
 		bool restart_render_flag;
 			
 		int render_id;
-		EffectData effect_data;
 		Cairo.ImageSurface surface;
-		Gdk.Rectangle render_bounds;		
+		Gdk.Rectangle render_bounds;
+		BaseEffect render_effect_copy;
 		int total_tiles;
 		int rendered_tiles;
 		List<Exception> render_exceptions;
@@ -73,10 +73,12 @@ namespace Pinta.Core
 		public event EventHandler<LivePreviewRenderUpdatedEventArgs> RenderUpdated;
 		public event EventHandler<LivePreviewEndedEventArgs> Ended;
 		
-		public void Start (IBaseEffectLivePreviewHack effect)
+		public void Start (BaseEffect effect)
 		{			
+			Console.WriteLine ("effect.EffectData: " + effect.EffectData);
+			
 			if (live_preview_enabled)
-				throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");	
+				throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 			
 			// Create live preview surface.
 			// Start rendering.
@@ -113,13 +115,11 @@ namespace Pinta.Core
 				ctx.Paint ();
 			}
 			
-			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
+			if (effect.EffectData != null)
+				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 			
 			if (Started != null) {
-				var args = new LivePreviewStartedEventArgs(layer,
-				                                           effect,
-				                                           surface);				                                                 
-				Started (this, args);
+				Started (this, new LivePreviewStartedEventArgs());
 			}			
 			
 			StartRender ();
@@ -250,9 +250,9 @@ namespace Pinta.Core
 			live_preview_enabled = false;
 			
 			if (effect != null) {
-				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
+				if (effect.EffectData != null)
+					effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
 				effect = null;
-				effect_data = null;
 			}
 							
 			surface = null;
@@ -297,7 +297,9 @@ namespace Pinta.Core
 			for (int i=0; i < total_tiles; i++)
 				GetTileBounds (i);
 			
-			effect_data = effect.EffectData.Clone ();				
+			// It is important the effect's properties don't change during rendering.
+			// So a copy is made for the render.
+			render_effect_copy = effect.Clone ();
 			
 			render_exceptions.Clear ();
 			
@@ -363,7 +365,7 @@ namespace Pinta.Core
 				bounds = GetTileBounds (tileIndex);
 				
 				if (!cancel_render_flag)
-					effect.RenderEffect (layer.Surface, surface, new [] { bounds }, effect_data);
+					render_effect_copy.RenderEffect (layer.Surface, surface, new [] { bounds });
 				
 			} catch (Exception ex) {		
 				exception = ex;

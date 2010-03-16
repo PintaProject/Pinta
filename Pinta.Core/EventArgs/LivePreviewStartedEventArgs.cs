@@ -27,30 +27,11 @@
 using System;
 
 namespace Pinta.Core
-{
-	
+{	
 	public class LivePreviewStartedEventArgs : EventArgs
 	{
-		public LivePreviewStartedEventArgs (Layer layer,
-		                                          IBaseEffectLivePreviewHack effect,
-		                                          Cairo.ImageSurface surface)
+		public LivePreviewStartedEventArgs ()
 		{
-			if (layer == null)
-				throw new ArgumentNullException ("layer");
-			
-			if (effect == null)
-				throw new ArgumentNullException ("effect");
-			
-			if (surface == null)
-				throw new ArgumentNullException ("surface");
-			
-			this.Layer = layer;
-			this.Effect = effect;
-			this.Surface = surface;
 		}
-		
-		public Layer Layer { get; private set; }
-		public IBaseEffectLivePreviewHack Effect { get; private set; }
-		public Cairo.ImageSurface Surface { get; private set; }
 	}	
 }
