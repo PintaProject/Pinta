@@ -146,6 +146,7 @@
     <Compile Include="EventArgs\LivePreviewEndedEventArgs.cs" />
     <Compile Include="EventArgs\LivePreviewRenderUpdatedEventArgs.cs" />
     <Compile Include="EventArgs\LivePreviewStartedEventArgs.cs" />
+    <Compile Include="Classes\AsyncEffectRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
