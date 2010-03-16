@@ -322,6 +322,14 @@ mode = EditingMode.NotEditing;
 			return g.TextExtents(str);
 		}
 		
+		private Cairo.FontExtents FontExtents (Cairo.Context g, string str)
+		{
+			g.SelectFontFace (font_combo.ComboBox.ActiveText, FontSlant, FontWeight);
+			g.SetFontSize (FontSize);
+			
+			return g.FontExtents;
+		}
+		
 		private int FontHeight { get { return StringSize("a").Height;} }
 		
 
@@ -1022,8 +1030,11 @@ mode = EditingMode.NotEditing;
 						    PintaCore.Palette.PrimaryColor,
                             text);
 						
-						if(underscore_btn.Active)
-							ctx.DrawLine(new Cairo.PointD (pt2.X, dstRect.Bottom), new Cairo.PointD (dstRect.Right - offset, dstRect.Bottom), PintaCore.Palette.PrimaryColor, 1); 
+						if(underscore_btn.Active) {
+							int lineSize = 1;
+							Cairo.FontExtents fe = FontExtents (ctx, text);
+							ctx.DrawLine (new Cairo.PointD (pt2.X, dstRect.Bottom + fe.Descent), new Cairo.PointD (dstRect.Right - offset, dstRect.Bottom + fe.Descent), PintaCore.Palette.PrimaryColor, lineSize); 
+						}
                     }
 					PintaCore.Workspace.Invalidate(dstRectClipped);
                 }

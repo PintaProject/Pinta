@@ -275,13 +275,13 @@ namespace Pinta {
             this.CenterButton.UseUnderline = true;
             // Container child CenterButton.Gtk.Container+ContainerChild
             Gtk.Alignment w18 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment8.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w19 = new Gtk.HBox();
             w19.Spacing = 2;
-            // Container child GtkHBox8.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w20 = new Gtk.Image();
             w19.Add(w20);
-            // Container child GtkHBox8.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w22 = new Gtk.Label();
             w19.Add(w22);
             w18.Add(w19);
@@ -303,13 +303,13 @@ namespace Pinta {
             this.EButton.UseUnderline = true;
             // Container child EButton.Gtk.Container+ContainerChild
             Gtk.Alignment w27 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment7.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w28 = new Gtk.HBox();
             w28.Spacing = 2;
-            // Container child GtkHBox7.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w29 = new Gtk.Image();
             w28.Add(w29);
-            // Container child GtkHBox7.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w31 = new Gtk.Label();
             w28.Add(w31);
             w27.Add(w28);
@@ -331,13 +331,13 @@ namespace Pinta {
             this.NButton.UseUnderline = true;
             // Container child NButton.Gtk.Container+ContainerChild
             Gtk.Alignment w36 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment6.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w37 = new Gtk.HBox();
             w37.Spacing = 2;
-            // Container child GtkHBox6.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w38 = new Gtk.Image();
             w37.Add(w38);
-            // Container child GtkHBox6.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w40 = new Gtk.Label();
             w37.Add(w40);
             w36.Add(w37);
@@ -357,13 +357,13 @@ namespace Pinta {
             this.NEButton.UseUnderline = true;
             // Container child NEButton.Gtk.Container+ContainerChild
             Gtk.Alignment w45 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment5.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w46 = new Gtk.HBox();
             w46.Spacing = 2;
-            // Container child GtkHBox5.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w47 = new Gtk.Image();
             w46.Add(w47);
-            // Container child GtkHBox5.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w49 = new Gtk.Label();
             w46.Add(w49);
             w45.Add(w46);
@@ -383,13 +383,13 @@ namespace Pinta {
             this.NWButton.UseUnderline = true;
             // Container child NWButton.Gtk.Container+ContainerChild
             Gtk.Alignment w54 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment4.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w55 = new Gtk.HBox();
             w55.Spacing = 2;
-            // Container child GtkHBox4.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w56 = new Gtk.Image();
             w55.Add(w56);
-            // Container child GtkHBox4.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w58 = new Gtk.Label();
             w55.Add(w58);
             w54.Add(w55);
@@ -407,13 +407,13 @@ namespace Pinta {
             this.SButton.UseUnderline = true;
             // Container child SButton.Gtk.Container+ContainerChild
             Gtk.Alignment w63 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment3.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w64 = new Gtk.HBox();
             w64.Spacing = 2;
-            // Container child GtkHBox3.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w65 = new Gtk.Image();
             w64.Add(w65);
-            // Container child GtkHBox3.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w67 = new Gtk.Label();
             w64.Add(w67);
             w63.Add(w64);
@@ -435,13 +435,13 @@ namespace Pinta {
             this.SEButton.UseUnderline = true;
             // Container child SEButton.Gtk.Container+ContainerChild
             Gtk.Alignment w72 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment2.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w73 = new Gtk.HBox();
             w73.Spacing = 2;
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w74 = new Gtk.Image();
             w73.Add(w74);
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w76 = new Gtk.Label();
             w73.Add(w76);
             w72.Add(w73);
@@ -463,13 +463,13 @@ namespace Pinta {
             this.SWButton.UseUnderline = true;
             // Container child SWButton.Gtk.Container+ContainerChild
             Gtk.Alignment w81 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment1.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w82 = new Gtk.HBox();
             w82.Spacing = 2;
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w83 = new Gtk.Image();
             w82.Add(w83);
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w85 = new Gtk.Label();
             w82.Add(w85);
             w81.Add(w82);
