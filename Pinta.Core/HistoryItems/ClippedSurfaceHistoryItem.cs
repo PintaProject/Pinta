@@ -36,7 +36,7 @@ namespace Pinta.Core
 
 		public ClippedSurfaceHistoryItem (string icon, string text, IrregularSurface oldSurface, int layerIndex) : base (icon, text)
 		{
-			old_surface = oldSurface;
+			old_surface = (IrregularSurface)oldSurface.Clone();
 			layer_index = layerIndex;
 		}
 
