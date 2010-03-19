@@ -7,7 +7,7 @@
   <import>
     <widget-library name="../../bin/Pinta.Core.dll" />
     <widget-library name="../../bin/Pinta.Resources.dll" />
-    <widget-library name="../../Pinta.Gui.Widgets/bin/Debug/Pinta.Gtk.Widgets.dll" />
+    <widget-library name="../../Pinta.Gui.Widgets/bin/Debug/Pinta.Gui.Widgets.dll" />
     <widget-library name="../../bin/Pinta.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="Pinta.MainWindow" design-size="886 680">
@@ -519,10 +519,6 @@
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Upper">10000</property>
-                <property name="PageIncrement">10</property>
-                <property name="StepIncrement">1</property>
-                <property name="ClimbRate">1</property>
-                <property name="Numeric">True</property>
                 <property name="Value">600</property>
               </widget>
               <packing>
@@ -633,10 +629,6 @@
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Upper">10000</property>
-                <property name="PageIncrement">10</property>
-                <property name="StepIncrement">1</property>
-                <property name="ClimbRate">1</property>
-                <property name="Numeric">True</property>
                 <property name="Value">800</property>
               </widget>
               <packing>
@@ -804,11 +796,6 @@
                   <widget class="Gtk.SpinButton" id="spinbutton1">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="Upper">100</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -938,10 +925,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">1000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                     <property name="Value">100</property>
                   </widget>
                   <packing>
@@ -1021,10 +1004,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1076,10 +1055,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1222,10 +1197,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">1000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                     <property name="Value">100</property>
                   </widget>
                   <packing>
@@ -1305,10 +1276,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1360,10 +1327,6 @@
                     <property name="CanFocus">True</property>
                     <property name="Lower">1</property>
                     <property name="Upper">10000</property>
-                    <property name="PageIncrement">10</property>
-                    <property name="StepIncrement">1</property>
-                    <property name="ClimbRate">1</property>
-                    <property name="Numeric">True</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1830,11 +1793,6 @@
               <widget class="Gtk.SpinButton" id="spin">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
-                <property name="PageIncrement">10</property>
-                <property name="StepIncrement">1</property>
-                <property name="ClimbRate">1</property>
-                <property name="Numeric">True</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2014,6 +1972,7 @@
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Resizable">False</property>
     <property name="AllowGrow">False</property>
+    <property name="SkipTaskbarHint">True</property>
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">

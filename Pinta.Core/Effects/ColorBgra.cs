@@ -346,31 +346,31 @@ namespace Pinta.Core
         /// <summary>
         /// Smoothly blends between two colors.
         /// </summary>
-//        public static ColorBgra Blend(ColorBgra ca, ColorBgra cb, byte cbAlpha)
-//        {
-//            uint caA = (uint)Utility.FastScaleByteByByte((byte)(255 - cbAlpha), ca.A);
-//            uint cbA = (uint)Utility.FastScaleByteByByte(cbAlpha, cb.A);
-//            uint cbAT = caA + cbA;
-//
-//            uint r;
-//            uint g;
-//            uint b;
-//
-//            if (cbAT == 0)
-//            {
-//                r = 0;
-//                g = 0;
-//                b = 0;
-//            }
-//            else
-//            {
-//                r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
-//                g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
-//                b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
-//            }
-//
-//            return ColorBgra.FromBgra((byte)b, (byte)g, (byte)r, (byte)cbAT);
-//        }
+        public static ColorBgra Blend(ColorBgra ca, ColorBgra cb, byte cbAlpha)
+        {
+            uint caA = (uint)Utility.FastScaleByteByByte((byte)(255 - cbAlpha), ca.A);
+            uint cbA = (uint)Utility.FastScaleByteByByte(cbAlpha, cb.A);
+            uint cbAT = caA + cbA;
+
+            uint r;
+            uint g;
+            uint b;
+
+            if (cbAT == 0)
+            {
+                r = 0;
+                g = 0;
+                b = 0;
+            }
+            else
+            {
+                r = ((ca.R * caA) + (cb.R * cbA)) / cbAT;
+                g = ((ca.G * caA) + (cb.G * cbA)) / cbAT;
+                b = ((ca.B * caA) + (cb.B * cbA)) / cbAT;
+            }
+
+            return ColorBgra.FromBgra((byte)b, (byte)g, (byte)r, (byte)cbAT);
+        }
 
         /// <summary>
         /// Linearly interpolates between two color values.

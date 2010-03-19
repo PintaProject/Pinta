@@ -52,6 +52,7 @@ namespace Pinta.Core
 		public override bool LaunchConfiguration ()
 		{
 			CurvesDialog dialog = new CurvesDialog ();
+			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 			int response = dialog.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {

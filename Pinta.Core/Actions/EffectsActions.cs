@@ -44,6 +44,7 @@ namespace Pinta.Core
 		public Gtk.Action PencilSketch { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action Glow { get; private set; }
+		public Gtk.Action RedEyeRemove { get; private set; }
 
 		public EffectsActions ()
 		{
@@ -59,6 +60,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
+			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
 			fact.AddDefault ();
 
 			// Submenus
@@ -81,7 +83,7 @@ namespace Pinta.Core
 			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
-
+			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 		}
 
 		#region Initialization
@@ -106,6 +108,7 @@ namespace Pinta.Core
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
+			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
 		}
 		#endregion
 	}

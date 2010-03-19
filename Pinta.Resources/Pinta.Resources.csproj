@@ -10,6 +10,7 @@
     <RootNamespace>Pinta.Resources</RootNamespace>
     <AssemblyName>Pinta.Resources</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -335,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Photo.Glow.png">
       <LogicalName>Menu.Effects.Photo.Glow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.RedEyeRemove.png">
+      <LogicalName>Menu.Effects.Photo.RedEyeRemove.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

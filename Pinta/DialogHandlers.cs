@@ -43,6 +43,7 @@ namespace Pinta
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleAdjustmentsBrightnessContrastActivated;
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
+			PintaCore.Actions.Adjustments.Levels.Activated += HandleAdjustmentsLevelsActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectInkSketchActivated;
@@ -50,6 +51,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectPencilSketchActivated;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
+			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 		}
 
 		#region Handlers
@@ -203,6 +205,11 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect ());	
 		}
 
+		private void HandleAdjustmentsLevelsActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
+		}
+		
 		private void HandleEffectInkSketchActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new InkSketchEffect ());
@@ -226,6 +233,11 @@ namespace Pinta
 		private void HandleEffectGlowActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new GlowEffect ());
+		}
+		
+		private void HandleEffectsRedEyeRemoveActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());	
 		}
 		#endregion
 	}

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -10,6 +10,7 @@
     <RootNamespace>Pinta</RootNamespace>
     <AssemblyName>Pinta</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Commandlineparameters>"/home/hari/Pictures/irenka i krzys/sierpien 2009/24082009799.jpg"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -82,10 +84,20 @@
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
+    <Compile Include="ConfigurableEffects\LevelsEffect.cs" />
+    <Compile Include="gtk-gui\Pinta.LevelsDialog.cs" />
+    <Compile Include="Widgets\ColorGradientWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.ColorGradientWidget.cs" />
+    <Compile Include="Widgets\HistogramWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.HistogramWidget.cs" />
+    <Compile Include="Dialogs\LevelsDialog.cs" />
+    <Compile Include="Widgets\ColorPanelWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.ColorPanelWidget.cs" />
     <Compile Include="Dialogs\CurvesDialog.cs" />
     <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="IgeMacMenu.cs" />
+    <Compile Include="ConfigurableEffects\RedEyeRemoveEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

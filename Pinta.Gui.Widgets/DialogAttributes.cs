@@ -65,4 +65,15 @@ namespace Pinta.Gui.Widgets
 
 		public int Value;
 	}
+	
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	public class HintAttribute : Attribute
+	{
+		public HintAttribute (string caption)
+		{
+			Hint = caption;
+		}
+		
+		public string Hint;
+	}
 }
