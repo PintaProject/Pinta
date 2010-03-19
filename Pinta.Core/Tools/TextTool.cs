@@ -123,7 +123,7 @@ namespace Pinta.Core
 		
 		#region ToolBar
 		
-				private ToolBarLabel font_label;
+		private ToolBarLabel font_label;
 		private ToolBarComboBox font_combo;
 		private ToolBarComboBox size_combo;
 		private ToolBarToggleButton bold_btn;
@@ -181,8 +181,11 @@ namespace Pinta.Core
 						index = 0;
 					
 					if (size_combo == null) {
-						size_combo = new ToolBarComboBox (50, index, false, entries.ToArray ());
-						size_combo.ComboBox.Changed += HandleChanged;
+						size_combo = new ToolBarComboBox (50, index, true, entries.ToArray ());
+						
+						size_combo.ComboBox.Changed += HandleSizeChanged;
+						(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
+						(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
 					}
 					
 					tb.AppendItem (size_combo);
@@ -242,10 +245,34 @@ namespace Pinta.Core
 			tb.AppendItem (Right_alignment_btn);
 		}
 
+		string temp_size;
+		void HandleFontSizeFocusIn (object o, FocusInEventArgs args)
+		{
+			size_combo.ComboBox.Changed -= HandleSizeChanged;
+			temp_size = size_combo.ComboBox.ActiveText;
+		}
+
+		void HandleFontSizeFocusOut (object o, FocusOutEventArgs args)
+		{
+			string text = size_combo.ComboBox.ActiveText;
+			int size;
+
+			if (!int.TryParse (text, out size)) {
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_size;
+				return;
+			}
+			
+			PintaCore.Chrome.DrawingArea.GrabFocus ();
+			if (mode != EditingMode.NotEditing) {
+				this.sizes = null;
+				RedrawText (true);
+			}
+			size_combo.ComboBox.Changed += HandleSizeChanged;
+		}
+
 		void HandleFontChanged (object sender, EventArgs e)
 		{
 			PintaCore.Chrome.DrawingArea.GrabFocus ();
-			//update font size list
 			UpdateFontSizes ();
 			if (mode != EditingMode.NotEditing) {
 				this.sizes = null;
@@ -274,7 +301,7 @@ namespace Pinta.Core
 			size_combo.ComboBox.Active = index;
 		}
 
-		void HandleChanged (object sender, EventArgs e)
+		void HandleSizeChanged (object sender, EventArgs e)
 		{
 			PintaCore.Chrome.DrawingArea.GrabFocus ();
 			if (mode != EditingMode.NotEditing) {
@@ -470,7 +497,7 @@ namespace Pinta.Core
 			StopEditing ();
 			//this.threadPool = null;
 		}
-			/*
+		/*
             this.RendererList.Remove(this.moveNub);
             this.moveNub.Dispose();
             this.moveNub = null;
@@ -480,9 +507,9 @@ namespace Pinta.Core
                 this.textToolCursor.Dispose();
                 this.textToolCursor = null;
             }
-            */			
-		
-				private void StopEditing ()
+            */
+
+		private void StopEditing ()
 		{
 			PintaCore.Layers.ToolLayer.Clear ();
 			PintaCore.Layers.ToolLayer.Hidden = true;
@@ -1152,8 +1179,7 @@ using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
                         args.RetVal = true;
                     }
                     break;
-				*/
-Gdk.Key.Control_L:
+				*/Gdk.Key.Control_L:
 			case Gdk.Key.Control_R:
 				if (!this.controlKeyDown) {
 					this.controlKeyDown = true;
@@ -1663,7 +1689,7 @@ this.OnKeyPress (canvas, args);
 		}
 		
 	}
-		/*public TextTool(DocumentWorkspace documentWorkspace)
+	/*public TextTool(DocumentWorkspace documentWorkspace)
             : base(documentWorkspace,
                    ImageResource.Get("Icons.TextToolIcon.png"),
                    PdnResources.GetString("TextTool.Name"),
@@ -1672,5 +1698,5 @@ this.OnKeyPress (canvas, args);
                    false,
                    ToolBarConfigItems.Brush | ToolBarConfigItems.Text | ToolBarConfigItems.AlphaBlending | ToolBarConfigItems.Antialiasing)
         {
-        }*/		
-	}
+        }*/	
+}
