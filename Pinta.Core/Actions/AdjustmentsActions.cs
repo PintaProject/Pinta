@@ -66,8 +66,6 @@ namespace Pinta.Core
 			Levels = new Gtk.Action ("Levels", Mono.Unix.Catalog.GetString ("Levels..."), null, "Menu.Adjustments.Levels.png");
 			Posterize = new Gtk.Action ("Posterize", Mono.Unix.Catalog.GetString ("Posterize..."), null, "Menu.Adjustments.Posterize.png");
 			Sepia = new Gtk.Action ("Sepia", Mono.Unix.Catalog.GetString ("Sepia"), null, "Menu.Adjustments.Sepia.png");
-			
-			Levels.Sensitive = false;
 		}
 
 		#region Initialization
@@ -81,7 +79,7 @@ namespace Pinta.Core
 			menu.Append (Curves.CreateAcceleratedMenuItem (Gdk.Key.M, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (HueSaturation.CreateAcceleratedMenuItem (Gdk.Key.U, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (InvertColors.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			//menu.Append (Levels.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask));
+			menu.Append (Levels.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask));
 			menu.Append (Posterize.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (Sepia.CreateAcceleratedMenuItem (Gdk.Key.E, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 		}
@@ -193,12 +191,12 @@ namespace Pinta.Core
 			int total_height = roi.Height;
 			
 			for (int i = 0; i < num - 1; i++) {
-				rects.Add (new Gdk.Rectangle (roi.X, i * height, roi.Width, height));
+				rects.Add (new Gdk.Rectangle (roi.X, i * height + roi.Top, roi.Width, height));
 				total_height -= height;
 			}
 			
 			// Add any remaining height to the last rectangle
-			rects.Add (new Gdk.Rectangle (roi.X, (num - 1) * height, roi.Width, total_height));
+			rects.Add (new Gdk.Rectangle (roi.X, (num - 1) * height + roi.Top, roi.Width, total_height));
 			
 			return rects.ToArray ();
 		}

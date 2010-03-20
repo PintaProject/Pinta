@@ -1,10 +1,11 @@
 // 
-// PosterizeEffect.cs
+// ColorPanelWidget.cs
 //  
 // Author:
-//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Krzysztof Marecki
+//
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,55 +28,38 @@
 using System;
 using Cairo;
 
-namespace Pinta.Core
+using Pinta.Core;
+
+namespace Pinta
 {
-	public class PosterizeEffect : BaseEffect
+
+
+	[System.ComponentModel.ToolboxItem(true)]
+	public partial class ColorPanelWidget : Gtk.Bin
 	{
-		private int red;
-		private int green;
-		private int blue;
+		public Color CairoColor { get; private set; }
 
-		UnaryPixelOp op;
-
-		public override string Icon {
-			get { return "Menu.Adjustments.Posterize.png"; }
-		}
-
-		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
-		}
-
-		public override bool IsConfigurable {
-			get { return true; }
-		}
-
-		public override bool LaunchConfiguration ()
+		public ColorPanelWidget ()
 		{
-			PosterizeDialog dialog = new PosterizeDialog ();
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			this.Build ();
+			
+			ExposeEvent += HandleExposeEvent;
+		}
+		
+		public void SetCairoColor (Color color)
+		{
+			CairoColor = color;
+		}
 
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				red = dialog.Red;
-				green = dialog.Green;
-				blue = dialog.Blue;
-
-				dialog.Destroy ();
-
-				return true;
+		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
+		{
+			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
+				
+				int rad = 4;
+				Rectangle rect = Allocation.ToCairoRectangle ();
+				
+				g.FillRoundedRectangle (rect, rad, CairoColor);
 			}
-
-			dialog.Destroy ();
-
-			return false;
-		}
-
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
-		{
-			op = new UnaryPixelOps.PosterizePixel (red, green, blue);
-
-			op.Apply (dest, src, rois);
 		}
 	}
 }

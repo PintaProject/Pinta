@@ -35,6 +35,8 @@ namespace Pinta.Core
 		private PointD old_offset;
 		private ImageSurface old_surface;
 
+		public override bool CausesDirty { get { return false; } }
+		
 		public FinishPixelsHistoryItem ()
 		{
 			Text = "Finish Pixels";

@@ -1,5 +1,5 @@
-Pinta
-Simple Gtk# Paint Program
+Pinta - Simple Gtk# Paint Program
+http://pinta-project.com/
 Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
 
 Pinta is a Gtk# clone of Paint.Net 3.0: http://www.getpaint.net/.
@@ -10,7 +10,7 @@ http://www.opensource.org/licenses/mit-license.php
 Code from Paint.Net 3.0 is used under the MIT License and retains the
 original headers on source files.
 
-See license-pd.txt for Paint.Net's original license.
+See license-pdn.txt for Paint.Net's original license.
 
 
 Icons are from:

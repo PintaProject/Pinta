@@ -1,8 +1,8 @@
-﻿// 
-// DialogAttributes.cs
+// 
+// LevelsEffect.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
 // Copyright (c) 2010 Jonathan Pobst
 // 
@@ -25,55 +25,47 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 
-namespace Pinta.Gui.Widgets
+namespace Pinta.Core
 {
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-	public class SkipAttribute : Attribute
+	public class LevelsEffect : BaseEffect
 	{
-	}
-
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-	public class CaptionAttribute : Attribute
-	{
-		public CaptionAttribute (string caption)
-		{
-			Caption = caption;
+		private UnaryPixelOps.Level levels;
+		
+		public override string Icon {
+			get { return "Menu.Adjustments.Levels.png"; }
 		}
 
-		public string Caption;
-	}
-
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-	public class MinimumValueAttribute : Attribute
-	{
-		public MinimumValueAttribute (int value)
-		{
-			Value = value;
+		public override string Text {
+			get { return Mono.Unix.Catalog.GetString ("Levels"); }
 		}
 
-		public int Value;
-	}
-
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-	public class MaximumValueAttribute : Attribute
-	{
-		public MaximumValueAttribute (int value)
-		{
-			Value = value;
-		}
-
-		public int Value;
-	}
-	
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
-	public class HintAttribute : Attribute
-	{
-		public HintAttribute (string caption)
-		{
-			Hint = caption;
+		public override bool IsConfigurable {
+			get { return true; }
 		}
 		
-		public string Hint;
+		public override bool LaunchConfiguration ()
+		{
+			
+			LevelsDialog dialog = new LevelsDialog ();
+			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			int response = dialog.Run ();
+			
+			if (response == (int)Gtk.ResponseType.Ok) {
+				levels = dialog.Levels;
+				
+				dialog.Destroy ();
+				return true;
+			}
+
+			dialog.Destroy ();
+			return false;
+		}
+		
+		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		{
+			levels.Apply (dest, src, rois);
+		}
 	}
 }

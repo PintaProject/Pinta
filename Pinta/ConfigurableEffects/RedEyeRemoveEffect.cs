@@ -1,10 +1,10 @@
 // 
-// PosterizeEffect.cs
+// RedEyeRemoveEffect.cs
 //  
 // Author:
 //       Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Krzysztof Marecki
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,59 +23,66 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
 using Cairo;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-	public class PosterizeEffect : BaseEffect
+	public class RedEyeRemoveEffect : BaseEffect
 	{
-		private int red;
-		private int green;
-		private int blue;
-
-		UnaryPixelOp op;
-
+		private UnaryPixelOp op;
+		
 		public override string Icon {
-			get { return "Menu.Adjustments.Posterize.png"; }
+			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
+			get { return Mono.Unix.Catalog.GetString ("Red Eye Removal"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
+		public RedEyeRemoveData Data { get; private set; }
+		
+		public RedEyeRemoveEffect ()
+		{
+			Data = new  RedEyeRemoveData ();
+		}
+		
 		public override bool LaunchConfiguration ()
 		{
-			PosterizeDialog dialog = new PosterizeDialog ();
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
 
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				red = dialog.Red;
-				green = dialog.Green;
-				blue = dialog.Blue;
-
+				op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
 				dialog.Destroy ();
-
 				return true;
 			}
 
 			dialog.Destroy ();
-
 			return false;
 		}
-
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		
+		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op = new UnaryPixelOps.PosterizePixel (red, green, blue);
-
 			op.Apply (dest, src, rois);
 		}
 	}
+	
+	public class RedEyeRemoveData
+	{
+		[MinimumValue (0), MaximumValue (100)]
+		public int Tolerance = 70;
+		
+		[MinimumValue (0), MaximumValue (100)]
+		[Caption ("Saturation percentage")]
+		[Hint ("Hint : For best results, first use selection tools to select each eye")]
+		public int Saturation = 90;
+	}
 }
+

@@ -48,7 +48,7 @@ namespace Pinta.Core
 		}
 		
 		public PointD Offset {
-			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - CanvasSize.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
+			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - canvas_size.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
 		}
 
 		public WorkspaceManager ()
@@ -130,12 +130,13 @@ namespace Pinta.Core
 		{
 			double ratio;
 			
-			if (canvas_size.X / rect.Width <= canvas_size.Y / rect.Height)
-				ratio = canvas_size.X / rect.Width;
+			if (ImageSize.X / rect.Width <= ImageSize.Y / rect.Height)
+				ratio = ImageSize.X / rect.Width;
 			else
-				ratio = canvas_size.Y / rect.Height;
+				ratio = ImageSize.Y / rect.Height;
 			
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format("{0:F}%", ratio * 100.0);
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
+			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 		
@@ -143,8 +144,8 @@ namespace Pinta.Core
 		{
 			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
 
-			view.Hadjustment.Value = Utility.Clamp (x * Scale - PintaCore.Chrome.DrawingArea.Allocation.Width / (2 *Scale) , view.Hadjustment.Lower, view.Hadjustment.Upper);
-			view.Vadjustment.Value = Utility.Clamp (y * Scale - PintaCore.Chrome.DrawingArea.Allocation.Height / (2 *Scale) , view.Vadjustment.Lower, view.Vadjustment.Upper);
+			view.Hadjustment.Value = Utility.Clamp (x * Scale - view.Hadjustment.PageSize / 2 , view.Hadjustment.Lower, view.Hadjustment.Upper);
+			view.Vadjustment.Value = Utility.Clamp (y * Scale - view.Vadjustment.PageSize / 2  , view.Vadjustment.Lower, view.Vadjustment.Upper);
 		}
 		
 		public void ResizeImage (int width, int height)

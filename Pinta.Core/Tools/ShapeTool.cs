@@ -58,13 +58,14 @@ namespace Pinta.Core
 		protected int BrushWidth {
 			get {
 				int width;
-				
-				if (Int32.TryParse (brush_width.ComboBox.ActiveText, out width))
-					return width;
-				else {
-					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString ();
-					return DEFAULT_BRUSH_WIDTH;
+				if (Int32.TryParse (brush_width.ComboBox.ActiveText, out width)) {
+					if (width > 0) {
+						(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString ();
+						return width;
+					}
 				}
+				(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString ();
+				return DEFAULT_BRUSH_WIDTH;
 			}
 			set { (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
 		}
@@ -131,13 +132,13 @@ namespace Pinta.Core
 			}
 		}
 		
-		private void MinusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
 		{
 			if (BrushWidth > 1)
 				BrushWidth--;
 		}
 
-		private void PlusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void PlusButtonClickedEvent (object o, EventArgs args)
 		{
 			BrushWidth++;
 		}

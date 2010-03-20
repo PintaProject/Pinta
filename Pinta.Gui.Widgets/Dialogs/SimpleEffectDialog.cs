@@ -64,6 +64,7 @@ namespace Pinta.Gui.Widgets
 					continue;
 			
 				string caption = null;
+				string hint = null;
 				bool skip = false;
 				
 				object[] attrs = mi.GetCustomAttributes (false);
@@ -73,6 +74,8 @@ namespace Pinta.Gui.Widgets
 						skip = true;
 					else if (attr is CaptionAttribute)
 						caption = ((CaptionAttribute)attr).Caption;
+					else if (attr is HintAttribute)
+						hint = ((HintAttribute)attr).Hint;
 				}
 
 				if (skip)
@@ -85,6 +88,9 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
+				
+				if (hint != null)
+					AddWidget (CreateHintLabel (hint));
 			}
 		}
 
@@ -135,6 +141,12 @@ namespace Pinta.Gui.Widgets
 			};
 
 			return widget;
+		}
+		
+		private Gtk.Label CreateHintLabel (string hint)
+		{
+			Gtk.Label label = new Gtk.Label (hint);
+			return label;
 		}
 		#endregion
 

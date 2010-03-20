@@ -110,8 +110,8 @@ namespace Pinta.Core
 				bg.Dispose ();
 
 				PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
+				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-open", "Open Image"));
 				PintaCore.Workspace.IsDirty = false;
-
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				PintaCore.Workspace.Invalidate ();
 			} catch {

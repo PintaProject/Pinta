@@ -78,34 +78,36 @@ namespace Pinta.Core
 		{
 			Calculate ();
 
-			for (int y = 0; y < src.Height; y++) {
-				ColorBgra* srcRowPtr = src.GetPointAddressUnchecked (0, y);
-				ColorBgra* dstRowPtr = dest.GetPointAddressUnchecked (0, y);
-				ColorBgra* dstRowEndPtr = dstRowPtr + dest.Width;
+			foreach (Gdk.Rectangle rect in rois) {
+				for (int y = rect.Top; y < rect.Bottom; y++) {
+					ColorBgra* srcRowPtr = src.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* dstRowPtr = dest.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* dstRowEndPtr = dstRowPtr + rect.Width;
 
-				if (divide == 0) {
-					while (dstRowPtr < dstRowEndPtr) {
-						ColorBgra col = *srcRowPtr;
-						int i = col.GetIntensityByte ();
-						uint c = rgbTable[i];
-						dstRowPtr->Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
+					if (divide == 0) {
+						while (dstRowPtr < dstRowEndPtr) {
+							ColorBgra col = *srcRowPtr;
+							int i = col.GetIntensityByte ();
+							uint c = rgbTable[i];
+							dstRowPtr->Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
 
-						++dstRowPtr;
-						++srcRowPtr;
-					}
-				} else {
-					while (dstRowPtr < dstRowEndPtr) {
-						ColorBgra col = *srcRowPtr;
-						int i = col.GetIntensityByte ();
-						int shiftIndex = i * 256;
+							++dstRowPtr;
+							++srcRowPtr;
+						}
+					} else {
+						while (dstRowPtr < dstRowEndPtr) {
+							ColorBgra col = *srcRowPtr;
+							int i = col.GetIntensityByte ();
+							int shiftIndex = i * 256;
 
-						col.R = rgbTable[shiftIndex + col.R];
-						col.G = rgbTable[shiftIndex + col.G];
-						col.B = rgbTable[shiftIndex + col.B];
+							col.R = rgbTable[shiftIndex + col.R];
+							col.G = rgbTable[shiftIndex + col.G];
+							col.B = rgbTable[shiftIndex + col.B];
 
-						*dstRowPtr = col;
-						++dstRowPtr;
-						++srcRowPtr;
+							*dstRowPtr = col;
+							++dstRowPtr;
+							++srcRowPtr;
+						}
 					}
 				}
 			}

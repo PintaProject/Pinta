@@ -10,6 +10,7 @@
     <RootNamespace>Pinta.Resources</RootNamespace>
     <AssemblyName>Pinta.Resources</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
@@ -315,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Photo.Glow.png">
       <LogicalName>Menu.Effects.Photo.Glow.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.RedEyeRemove.png">
+      <LogicalName>Menu.Effects.Photo.RedEyeRemove.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

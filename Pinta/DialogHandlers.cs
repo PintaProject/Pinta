@@ -43,6 +43,7 @@ namespace Pinta
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleAdjustmentsBrightnessContrastActivated;
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
+			PintaCore.Actions.Adjustments.Levels.Activated += HandleAdjustmentsLevelsActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
 			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectInkSketchActivated;
@@ -50,6 +51,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectPencilSketchActivated;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
+			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 		}
 
 		#region Handlers
@@ -80,6 +82,7 @@ namespace Pinta
 				}
 
 				PintaCore.Workspace.Filename = "Untitled1";
+				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
 				PintaCore.Workspace.IsDirty = false;
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 			}
@@ -167,12 +170,12 @@ namespace Pinta
 			}
 				
 			if (updated.Name != initial.Name) {
-				ret = "Layer Renamed";
+				ret = "Rename Layer";
 				count++;
 			}
 			
 			if (updated.Hidden != initial.Hidden) {
-				ret = (updated.Hidden) ? "Layer Hidden" : "Layer Shown";
+				ret = (updated.Hidden) ? "Hide Layer" : "Show Layer";
 				count++;
 			}
 			
@@ -202,6 +205,11 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.PerformEffect (new CurvesEffect ());	
 		}
 
+		private void HandleAdjustmentsLevelsActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
+		}
+		
 		private void HandleEffectInkSketchActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new InkSketchEffect ());
@@ -225,6 +233,11 @@ namespace Pinta
 		private void HandleEffectGlowActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new GlowEffect ());
+		}
+		
+		private void HandleEffectsRedEyeRemoveActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());	
 		}
 		#endregion
 	}
