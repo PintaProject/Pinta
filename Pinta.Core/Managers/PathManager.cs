@@ -131,7 +131,7 @@ namespace Pinta.Core
                             break;
                         }
                     }
-
+				
                     Point[] points = pts.ToArray();
                     Scanline[] scans = points.GetScans ();
 

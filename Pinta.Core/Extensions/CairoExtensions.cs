@@ -442,10 +442,10 @@ namespace Pinta.Core
 
 		public static bool ContainsPoint (this Cairo.Rectangle r, double x, double y)
 		{
-			if (x < r.X || x > r.X + r.Width)
+			if (x < r.X || x >= r.X + r.Width)
 				return false;
 			
-			if (y < r.Y || y > r.Y + r.Height)
+			if (y < r.Y || y >= r.Y + r.Height)
 				return false;
 			
 			return true;
