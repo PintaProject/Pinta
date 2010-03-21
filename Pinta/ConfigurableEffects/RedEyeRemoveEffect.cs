@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using Cairo;
+
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Core

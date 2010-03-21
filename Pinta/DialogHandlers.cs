@@ -52,6 +52,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
+			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectsSharpenActivated;
 		}
 
 		#region Handlers
@@ -238,6 +239,11 @@ namespace Pinta
 		private void HandleEffectsRedEyeRemoveActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());	
+		}
+		
+		private void HandleEffectsSharpenActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new SharpenEffect ());
 		}
 		#endregion
 	}

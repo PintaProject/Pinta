@@ -143,6 +143,7 @@
     <Compile Include="Effects\SplineInterpolator.cs" />
     <Compile Include="Classes\IndexEventHandler.cs" />
     <Compile Include="Classes\IndexEventArgs.cs" />
+    <Compile Include="Effects\LocalHistogramEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
