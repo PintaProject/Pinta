@@ -182,6 +182,24 @@ namespace Pinta.Core
 			return diffSq / 3;
 		}
 
+		public static Gdk.Rectangle[] InflateRectangles (Gdk.Rectangle[] rects, int len)
+		{
+			Gdk.Rectangle[] inflated = new Gdk.Rectangle[rects.Length];
+
+			for (int i = 0; i < rects.Length; ++i)
+				inflated[i] = new Gdk.Rectangle(rects[i].X-len, rects[i].Y-len, rects[i].Width + 2 * len, rects[i].Height + 2 * len);
+
+			return inflated;
+		}
+		
+		public static Gdk.Region RectanglesToRegion(Gdk.Rectangle[] rects)
+        {
+            Gdk.Region reg = Gdk.Region.Rectangle(Gdk.Rectangle.Zero);
+            foreach (Gdk.Rectangle r in rects)
+                reg.UnionWithRect(r);
+            return reg;
+        }
+		
 		public static string GetStaticName (Type type)
 		{
 			PropertyInfo pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);

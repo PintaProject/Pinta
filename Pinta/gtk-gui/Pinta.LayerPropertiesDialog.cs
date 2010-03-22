@@ -70,6 +70,7 @@ namespace Pinta {
             this.entry1.CanFocus = true;
             this.entry1.Name = "entry1";
             this.entry1.IsEditable = true;
+            this.entry1.InvisibleChar = '●';
             this.hbox1.Add(this.entry1);
             Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.hbox1[this.entry1]));
             w3.Position = 1;

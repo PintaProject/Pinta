@@ -42,6 +42,7 @@
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\EffectsActions.cs" />
@@ -79,12 +80,14 @@
     <Compile Include="HistoryItems\DeleteLayerHistoryItem.cs" />
     <Compile Include="HistoryItems\InvertHistoryItem.cs" />
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
+    <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
     <Compile Include="Managers\HistoryManager.cs" />
     <Compile Include="Managers\LayerManager.cs" />
     <Compile Include="Managers\PaletteManager.cs" />
     <Compile Include="Managers\SystemManager.cs" />
     <Compile Include="Managers\ToolManager.cs" />
+    <Compile Include="Managers\WorkspaceManager.cs" />
     <Compile Include="PintaCore.cs" />
     <Compile Include="Extensions\CairoExtensions.cs" />
     <Compile Include="Extensions\GdkExtensions.cs" />
@@ -94,7 +97,6 @@
     <Compile Include="Extensions\ToolBarComboBox.cs" />
     <Compile Include="Extensions\ToolBarImage.cs" />
     <Compile Include="Extensions\ToolBarLabel.cs" />
-    <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Actions\LayerActions.cs" />
     <Compile Include="Actions\FileActions.cs" />
     <Compile Include="Actions\EditActions.cs" />
@@ -102,7 +104,6 @@
     <Compile Include="Actions\ImageActions.cs" />
     <Compile Include="Actions\AdjustmentsActions.cs" />
     <Compile Include="Actions\HelpActions.cs" />
-    <Compile Include="Managers\WorkspaceManager.cs" />
     <Compile Include="Effects\ColorBgra.cs" />
     <Compile Include="Effects\UnaryPixelOps.cs" />
     <Compile Include="Effects\UnaryPixelOp.cs" />
@@ -132,8 +133,10 @@
     <Compile Include="Tools\RoundedRectangleTool.cs" />
     <Compile Include="Tools\SelectTool.cs" />
     <Compile Include="Tools\ShapeTool.cs" />
+    <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />
     <Compile Include="Tools\ZoomTool.cs" />
+    <Compile Include="Extensions\ToolBarToggleButton.cs" />
     <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
     <Compile Include="Classes\ObservableObject.cs" />
     <Compile Include="Classes\PropertyChangedEventArgs.cs" />
@@ -141,6 +144,10 @@
     <Compile Include="Classes\LayerProperties.cs" />
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
+    <Compile Include="Effects\IrregularSurface.cs" />
+    <Compile Include="Effects\ISurfaceDraw.cs" />
+    <Compile Include="Effects\PlacedSurface.cs" />
+    <Compile Include="HistoryItems\ClippedSurfaceHistoryItem.cs" />
     <Compile Include="Classes\IndexEventHandler.cs" />
     <Compile Include="Classes\IndexEventArgs.cs" />
     <Compile Include="Effects\LocalHistogramEffect.cs" />
