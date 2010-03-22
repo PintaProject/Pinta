@@ -140,16 +140,14 @@ namespace Pinta.Core
 
             for (int y = (int)rect.Y; y < rect.Y + rect.Height; y++)
             {
-//                Memory.SetToZero(hb, hSize);
-//                Memory.SetToZero(hg, hSize);
-//                Memory.SetToZero(hr, hSize);
-//                Memory.SetToZero(ha, hSize);
+				MemorySetToZero (hb, hLength);
+				MemorySetToZero (hg, hLength);
+				MemorySetToZero (hr, hLength);
+				MemorySetToZero (ha, hLength);
 
                 int area = 0;
 
-//              ColorBgra* ps = src.GetPointAddressUnchecked(rect.Left, y);
 				ColorBgra* ps = src.GetPointAddressUnchecked((int)rect.X, y);
-//              ColorBgra* pd = dst.GetPointAddressUnchecked(rect.Left, y);
 				ColorBgra* pd = dst.GetPointAddressUnchecked((int)rect.X, y);
                 // assert: v + y >= 0
                 int top = -Math.Min(rad, y);
@@ -158,16 +156,13 @@ namespace Pinta.Core
                 int bottom = Math.Min(rad, height - 1 - y);
 
                 // assert: u + x >= 0
-//                int left = -Math.Min(rad, rect.Left);
 				int left = -Math.Min(rad, (int)rect.X);
 
                 // assert: u + x <= width - 1
-//                int right = Math.Min(rad, width - 1 - rect.Left);
 				int right = Math.Min(rad, width - 1 - (int)rect.X);
 
                 for (int v = top; v <= bottom; ++v)
                 {
-//                    ColorBgra* psamp = src.GetPointAddressUnchecked(rect.Left + left, y + v);
 					ColorBgra* psamp = src.GetPointAddressUnchecked((int)rect.X + left, y + v);
 
                     for (int u = left; u <= right; ++u)
@@ -185,7 +180,6 @@ namespace Pinta.Core
                     }
                 }
 
-//                for (int x = rect.Left; x < rect.Right; x++)
 				for (int x = (int)rect.X; x < rect.X + rect.Width; x++)
                 {
                     *pd = Apply(*ps, area, hb, hg, hr, ha);
@@ -351,12 +345,11 @@ namespace Pinta.Core
             int* hr = stackalloc int[hLength];
             uint hSize = (uint)(sizeof(int) * hLength);
 
-//            for (int y = rect.Top; y < rect.Bottom; y++)
 			for (int y = (int)rect.Y; y < rect.Y + rect.Height; y++)
             {
-//                Memory.SetToZero(hb, hSize);
-//                Memory.SetToZero(hg, hSize);
-//                Memory.SetToZero(hr, hSize);
+				MemorySetToZero (hb, hLength);
+				MemorySetToZero (hg, hLength);
+				MemorySetToZero (hr, hLength);
 
                 int area = 0;
                 int sum = 0;
@@ -371,16 +364,13 @@ namespace Pinta.Core
                 int bottom = Math.Min(rad, height - 1 - y);
 
                 // assert: u + x >= 0
-//                int left = -Math.Min(rad, rect.Left);
 				int left = -Math.Min(rad, (int)rect.X);
 
                 // assert: u + x <= width - 1
-//                int right = Math.Min(rad, width - 1 - rect.Left);
 				int right = Math.Min(rad, width - 1 - (int)rect.Y);
 
                 for (int v = top; v <= bottom; ++v)
                 {
-//                    ColorBgra* psamp = src.GetPointAddressUnchecked(rect.Left + left, y + v);
 					ColorBgra* psamp = src.GetPointAddressUnchecked((int)rect.Y + left, y + v);
 
                     for (int u = left; u <= right; ++u)
@@ -532,7 +522,14 @@ namespace Pinta.Core
                     ++pd;
                 }
             }
-        }
+		}
+	
+		//must be more efficient way to zero memory array
+		private unsafe void MemorySetToZero(int* ptr, int size)
+		{
+			for (int i = 0; i < size; i++) 
+				ptr [i] = 0;
+		}
 	}
 }
 
