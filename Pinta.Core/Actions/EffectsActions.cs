@@ -43,6 +43,7 @@ namespace Pinta.Core
 		public Gtk.Action OilPainting { get; private set; }
 		public Gtk.Action PencilSketch { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
+		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action Glow { get; private set; }
 		public Gtk.Action RedEyeRemove { get; private set; }
 
@@ -82,6 +83,7 @@ namespace Pinta.Core
 			OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
 			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
+			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 		}
@@ -106,6 +108,7 @@ namespace Pinta.Core
 			artistic_sub_menu.Append (PencilSketch.CreateMenuItem ());
 			
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
+			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
