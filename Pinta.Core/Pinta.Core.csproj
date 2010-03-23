@@ -41,8 +41,8 @@
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix" />
-    <Reference Include="Mono.Cairo" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\EffectsActions.cs" />
@@ -136,7 +136,6 @@
     <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Tools\UnimplementedTools.cs" />
     <Compile Include="Tools\ZoomTool.cs" />
-    <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="Extensions\ToolBarToggleButton.cs" />
     <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
     <Compile Include="Classes\ObservableObject.cs" />
@@ -148,7 +147,6 @@
     <Compile Include="Effects\IrregularSurface.cs" />
     <Compile Include="Effects\ISurfaceDraw.cs" />
     <Compile Include="Effects\PlacedSurface.cs" />
-    <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="HistoryItems\ClippedSurfaceHistoryItem.cs" />
     <Compile Include="Classes\IndexEventHandler.cs" />
     <Compile Include="Classes\IndexEventArgs.cs" />

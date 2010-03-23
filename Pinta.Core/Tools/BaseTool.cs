@@ -54,8 +54,6 @@ namespace Pinta.Core
 		public virtual bool Enabled { get { return true; } }
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		
-		public Gdk.Cursor Cursor { set { PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = value; } }
-		
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{

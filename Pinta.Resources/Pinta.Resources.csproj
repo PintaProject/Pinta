@@ -337,6 +337,9 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Photo.Glow.png">
       <LogicalName>Menu.Effects.Photo.Glow.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.RedEyeRemove.png">
+      <LogicalName>Menu.Effects.Photo.RedEyeRemove.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
