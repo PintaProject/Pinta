@@ -5,10 +5,10 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../bin/Pinta.Core.dll" />
-    <widget-library name="../../bin/Pinta.Resources.dll" />
-    <widget-library name="../../Pinta.Gui.Widgets/bin/Debug/Pinta.Gui.Widgets.dll" />
-    <widget-library name="../../bin/Pinta.exe" internal="true" />
+    <widget-library name="..\..\bin\Pinta.Core.dll" />
+    <widget-library name="..\..\bin\Pinta.Resources.dll" />
+    <widget-library name="..\..\Pinta.Gui.Widgets\bin\Debug\Pinta.Gui.Widgets.dll" />
+    <widget-library name="..\..\bin\Pinta.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="Pinta.MainWindow" design-size="886 680">
     <action-group name="Default">

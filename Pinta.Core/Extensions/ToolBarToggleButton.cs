@@ -1,5 +1,5 @@
 // 
-// GdkExtensions.cs
+// ToolBarButton.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,42 +25,21 @@
 // THE SOFTWARE.
 
 using System;
-using Gdk;
+using Gtk;
 
 namespace Pinta.Core
 {
-	public static class GdkExtensions
+	public class ToolBarToggleButton : ToggleToolButton
 	{
-		// Invalidate the whole thing
-		public static void Invalidate (this Window w)
+		public ToolBarToggleButton (string image, string label, string tooltip) : base ()
 		{
-			int width;
-			int height;
+			Image i = new Image (PintaCore.Resources.GetIcon (image));
+			i.Show ();
+			this.IconWidget = i;			
 			
-			w.GetSize (out width, out height);
+			TooltipText = tooltip;
 			
-			w.InvalidateRect (new Rectangle (0, 0, width, height), true);
-		}
-		
-		public static Cairo.Color ToCairoColor (this Gdk.Color color)
-		{
-			return new Cairo.Color ((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);
-		}
-		
-		public static Cairo.Color GetCairoColor (this Gtk.ColorSelection selection) 
-		{
-			Cairo.Color cairo_color = selection.CurrentColor.ToCairoColor ();
-			return new Cairo.Color (cairo_color.R, cairo_color.G, cairo_color.B, (double)selection.CurrentAlpha / ushort.MaxValue);
-		}
-		
-		public static Gdk.Point Center (this Gdk.Rectangle rect)
-		{
-			return new Gdk.Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-		}
-
-		public static ColorBgra ToBgraColor (this Gdk.Color color)
-		{
-			return ColorBgra.FromBgr ((byte)(color.Blue * 255 / ushort.MaxValue),  (byte)(color.Green * 255 / ushort.MaxValue), (byte)(color.Red * 255 / ushort.MaxValue));
+			Show ();
 		}
 	}
 }

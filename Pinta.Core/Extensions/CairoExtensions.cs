@@ -369,6 +369,30 @@ namespace Pinta.Core
 			return dirty;
 		}
 		
+		public static void FillRegion (this Context g, Gdk.Region region, Color color)
+		{
+			g.Save ();
+			
+			g.Color = color;
+			
+			foreach (Gdk.Rectangle r in region.GetRectangles())
+			{
+				g.MoveTo (r.X, r.Y);
+				g.LineTo (r.X + r.Width, r.Y);
+				g.LineTo (r.X + r.Width, r.Y + r.Height);
+				g.LineTo (r.X, r.Y + r.Height);
+				g.LineTo (r.X, r.Y);
+				
+				g.Color = color;
+
+				g.StrokeExtents ();
+				g.Fill ();
+			}
+			
+			g.Restore ();
+		}
+		
+		
 		public static Rectangle DrawRoundedRectangle (this Context g, Rectangle r, double radius, Color stroke, int lineWidth)
 		{
 			g.Save ();
@@ -436,6 +460,34 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+		public static Rectangle DrawText (this Context g, PointD p, string family, FontSlant slant, FontWeight weight, double size, Color color, string text)
+		{
+			g.Save ();
+
+			g.MoveTo (p.X, p.Y);
+			g.SelectFontFace (family, slant, weight);
+			g.SetFontSize (size);
+			g.Color = color;
+			
+			TextExtents te = g.TextExtents(text);
+			//TODO alignment
+			
+			// Center text on bottom
+			/*// TODO cut the string in char array and for each center on bottom
+			 * TextExtents te = g.TextExtents("a");
+				cr.MoveTo(0.5 - te.Width  / 2 - te.XBearing, 0.5 - te.Height / 2 - te.YBearing);
+*/
+			//// Draw
+			g.ShowText (text);
+			//or
+			//g.TextPath(text);
+			//g.Fill();
+			
+			g.Restore ();
+
+			return new Rectangle(te.XBearing, te.YBearing, te.Width, te.Height);
+		}
+		
 		public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, Point dest)
 		{
 			g.Save ();
@@ -572,6 +624,11 @@ namespace Pinta.Core
 			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);
 		}
 
+		public static uint ToUint (this Cairo.Color c)
+		{
+			return Pinta.Core.ColorBgra.BgraToUInt32( (int)(c.B * 255), (int)(c.R * 255), (int)(c.G * 255), (int)(c.A * 255));
+		}
+		
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
 			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);

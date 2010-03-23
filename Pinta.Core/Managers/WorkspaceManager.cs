@@ -50,7 +50,7 @@ namespace Pinta.Core
 		public PointD Offset {
 			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - canvas_size.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
 		}
-
+		
 		public WorkspaceManager ()
 		{
 			CanvasSize = new Point (800, 600);
@@ -299,5 +299,6 @@ namespace Pinta.Core
 		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
 		public event EventHandler CanvasSizeChanged;
 		#endregion
+		
 	}
 }

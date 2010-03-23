@@ -57,16 +57,4 @@ namespace Pinta.Core
 		}
 	}
 			
-	public class TextTool : BaseTool
-	{
-		public override string Name {
-			get { return "Text"; }
-		}
-		public override string Icon {
-			get { return "Tools.Text.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
 }

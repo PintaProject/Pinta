@@ -176,6 +176,7 @@ namespace Pinta.Core
 			percent = percent / 100.0;
 
 			PintaCore.Workspace.Scale = percent;
+	
 		}
 
 		private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)

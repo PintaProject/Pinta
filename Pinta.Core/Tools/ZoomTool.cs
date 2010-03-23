@@ -84,7 +84,7 @@ namespace Pinta.Core
 
 				PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 				PintaCore.Workspace.Invalidate (dirty.ToGdkRectangle ());
-
+				
 				last_dirty = dirty;
 			}
 		}
