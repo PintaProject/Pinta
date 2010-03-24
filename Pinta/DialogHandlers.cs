@@ -51,6 +51,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectPencilSketchActivated;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
 			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
+			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectMotionBlurActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 		}
@@ -234,6 +235,11 @@ namespace Pinta
 		private void HandleEffectRadialBlurActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new RadialBlurEffect ());
+		}
+		
+		private void HandleEffectMotionBlurActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new MotionBlurEffect ());
 		}
 		
 		private void HandleEffectGlowActivated (object sender, EventArgs e)
