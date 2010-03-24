@@ -1,15 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////////
-// Original Source from Paint.NET                                              //
-//                                                                             //
-//                                                                             //
-/////////////////////////////////////////////////////////////////////////////////
-
-
+// Original Source from PDN                                             
 // 
 // LocalHistogramEffect.cs
 //  
 // Author:
-//       Hanh Pham <joel.nohnn@gmail.com>
+//       Hanh Pham <hanh.pham@gmx.com>
 // 
 // Copyright (c) 2010 Hanh Pham
 // 
