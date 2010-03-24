@@ -99,6 +99,7 @@
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="ConfigurableEffects\RedEyeRemoveEffect.cs" />
     <Compile Include="ConfigurableEffects\SharpenEffect.cs" />
+    <Compile Include="ConfigurableEffects\SoftenPortraitEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public Gtk.Action Glow { get; private set; }
 		public Gtk.Action RedEyeRemove { get; private set; }
 		public Gtk.Action Sharpen { get; private set; }
+		public Gtk.Action SoftenPortrait { get; private set; }
 
 		public EffectsActions ()
 		{
@@ -63,6 +64,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
 			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
+			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
 
 			fact.AddDefault ();
 
@@ -88,6 +90,7 @@ namespace Pinta.Core
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 			Sharpen = new Gtk.Action ("Sharpen", Mono.Unix.Catalog.GetString ("Sharpen..."), null, "Menu.Effects.Photo.Sharpen.png");
+			SoftenPortrait = new Gtk.Action ("Soften Portrait", Mono.Unix.Catalog.GetString ("Soften Portrait..."), null, "Menu.Effects.Photo.SoftenPortrait.png");
 		}
 
 		#region Initialization
@@ -114,6 +117,7 @@ namespace Pinta.Core
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem ());
 			photo_sub_menu.Append (Sharpen.CreateMenuItem ());
+			photo_sub_menu.Append (SoftenPortrait.CreateMenuItem ());
 		}
 		#endregion
 	}

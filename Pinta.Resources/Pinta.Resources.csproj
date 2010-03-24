@@ -343,6 +343,7 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Photo.Sharpen.png">
       <LogicalName>Menu.Effects.Photo.Sharpen.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.SoftenPortrait.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
