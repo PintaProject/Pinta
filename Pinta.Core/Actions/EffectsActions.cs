@@ -51,6 +51,9 @@ namespace Pinta.Core
         // Noice Action
         public Gtk.Action Median { get; private set; }
 
+        // Stylize Action
+        public Gtk.Action Outline { get; private set; }
+
 		public EffectsActions ()
 		{
 			IconFactory fact = new IconFactory ();
@@ -67,6 +70,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
             fact.Add("Menu.Effects.Noise.Median.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.Median.png")));
+            fact.Add("Menu.Effects.Stylize.Outline.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Stylize.Outline.png")));
             fact.AddDefault ();
 
 			// Submenus
@@ -80,7 +84,6 @@ namespace Pinta.Core
 
 			Distort.Visible = false;
 			Render.Visible = false;
-			Stylize.Visible = false;
 			
 			// Menu items
 			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
@@ -92,8 +95,11 @@ namespace Pinta.Core
             Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 
-            //Add Median Icon
+            //Noice Action
             Median = new Gtk.Action("Median", Mono.Unix.Catalog.GetString("Median..."), null, "Menu.Effects.Noise.Median.png");
+
+            //Stylize Action
+            Outline = new Gtk.Action("Outline", Mono.Unix.Catalog.GetString("Outline..."), null, "Menu.Effects.Stylize.Outline.png");
 		}
 
 		#region Initialization
@@ -121,8 +127,10 @@ namespace Pinta.Core
 
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
-
+            
             noise_sub_menu.Append(Median.CreateMenuItem());
+
+            stylize_sub_menu.Append(Outline.CreateMenuItem());
 		}
 		#endregion
 	}
