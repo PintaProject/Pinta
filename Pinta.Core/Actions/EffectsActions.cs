@@ -42,6 +42,7 @@ namespace Pinta.Core
 		public Gtk.Action InkSketch { get; private set; }
 		public Gtk.Action OilPainting { get; private set; }
 		public Gtk.Action PencilSketch { get; private set; }
+		public Gtk.Action Fragment { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action MotionBlur { get; private set; }
@@ -83,6 +84,7 @@ namespace Pinta.Core
 			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
 			OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
 			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
+			Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
 			MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
@@ -109,6 +111,7 @@ namespace Pinta.Core
 			artistic_sub_menu.Append (OilPainting.CreateMenuItem ());
 			artistic_sub_menu.Append (PencilSketch.CreateMenuItem ());
 			
+			blur_sub_menu.Append (Fragment.CreateMenuItem ());
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
 			blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
