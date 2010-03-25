@@ -48,6 +48,9 @@ namespace Pinta.Core
 		public Gtk.Action Glow { get; private set; }
 		public Gtk.Action RedEyeRemove { get; private set; }
 
+        // Noice Action
+        public Gtk.Action Median { get; private set; }
+
 		public EffectsActions ()
 		{
 			IconFactory fact = new IconFactory ();
@@ -63,7 +66,8 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
-			fact.AddDefault ();
+            fact.Add("Menu.Effects.Noise.Median.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.Median.png")));
+            fact.AddDefault ();
 
 			// Submenus
 			Artistic = new Gtk.Action ("Artistic", Mono.Unix.Catalog.GetString ("Artistic"), null, null);
@@ -75,7 +79,6 @@ namespace Pinta.Core
 			Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
 
 			Distort.Visible = false;
-			Noise.Visible = false;
 			Render.Visible = false;
 			Stylize.Visible = false;
 			
@@ -88,6 +91,9 @@ namespace Pinta.Core
             Unfocus = new Gtk.Action("Unfocus", Mono.Unix.Catalog.GetString("Unfocus..."), null, "Menu.Effects.Blurs.Unfocus.png");
             Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
+
+            //Add Median Icon
+            Median = new Gtk.Action("Median", Mono.Unix.Catalog.GetString("Median..."), null, "Menu.Effects.Noise.Median.png");
 		}
 
 		#region Initialization
@@ -115,6 +121,8 @@ namespace Pinta.Core
 
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
+
+            noise_sub_menu.Append(Median.CreateMenuItem());
 		}
 		#endregion
 	}

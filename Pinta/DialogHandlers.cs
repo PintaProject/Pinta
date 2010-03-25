@@ -54,6 +54,8 @@ namespace Pinta
             PintaCore.Actions.Effects.Unfocus.Activated += HandleEffectUnfocusActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
+
+            PintaCore.Actions.Effects.Median.Activated += HandleEffectMedianActivated;
 		}
 
 		#region Handlers
@@ -251,6 +253,14 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());	
 		}
+
+        
+        // Noice Handler
+
+        private void HandleEffectMedianActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new MedianEffect());
+        }
 		#endregion
 	}
 }
