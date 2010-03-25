@@ -130,10 +130,10 @@ namespace Pinta.Core
 			public int Fragments = 4;
 
 			[MinimumValue (0), MaximumValue (100)]
-			public int Rotation = 8;
+			public int Distance = 8;
 
 			[MinimumValue (0), MaximumValue (360)]
-			public int Distance = 0;
+			public int Rotation = 0;
 		}
 	}
 }
