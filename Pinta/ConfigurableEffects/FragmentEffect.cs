@@ -99,6 +99,11 @@ namespace Pinta.Core
 
 			ColorBgra* samples = stackalloc ColorBgra[poLength];
 
+			// Cache these for a massive performance boost
+			int src_width = src.Width;
+			int src_height = src.Height;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; y++) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
@@ -110,8 +115,8 @@ namespace Pinta.Core
 							int u = x - pointOffsetsPtr[i].X;
 							int v = y - pointOffsetsPtr[i].Y;
 
-							if (u >= 0 && u < src.GetBounds ().Width && v >= 0 && v < src.GetBounds ().Height) {
-								samples[sampleCount] = src.GetPointUnchecked (u, v);
+							if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
+								samples[sampleCount] = src.GetPointUnchecked (src_data_ptr, src_width, u, v);
 								++sampleCount;
 							}
 						}
