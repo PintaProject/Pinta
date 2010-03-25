@@ -123,6 +123,9 @@ namespace Pinta.Core
 						int oy1 = fy;
 						int oy2 = fy;
 
+						ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
+						int src_width = src.Width;
+
 						for (int i = 0; i < n; ++i) {
 							Rotate (ref ox1, ref oy1, fsr);
 							Rotate (ref ox2, ref oy2, -fsr);
@@ -131,7 +134,7 @@ namespace Pinta.Core
 							int v1 = oy1 + fcy + 32768 >> 16;
 
 							if (u1 > 0 && v1 > 0 && u1 < w && v1 < h) {
-								ColorBgra* sample = src.GetPointAddressUnchecked (u1, v1);
+								ColorBgra* sample = src.GetPointAddressUnchecked (src_dataptr, src_width, u1, v1);
 
 								sr += sample->R * sample->A;
 								sg += sample->G * sample->A;
@@ -144,7 +147,7 @@ namespace Pinta.Core
 							int v2 = oy2 + fcy + 32768 >> 16;
 
 							if (u2 > 0 && v2 > 0 && u2 < w && v2 < h) {
-								ColorBgra* sample = src.GetPointAddressUnchecked (u2, v2);
+								ColorBgra* sample = src.GetPointAddressUnchecked (src_dataptr, src_width, u2, v2);
 
 								sr += sample->R * sample->A;
 								sg += sample->G * sample->A;
