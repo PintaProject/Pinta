@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\UnfocusEffect.cs" />
     <Compile Include="ConfigurableEffects\LocalHistogramEffect.cs" />
     <Compile Include="ConfigurableEffects\SurfaceBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\PencilSketchEffect.cs" />
