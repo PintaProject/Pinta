@@ -231,7 +231,9 @@ namespace Pinta {
             w10.ShadowType = ((Gtk.ShadowType)(0));
             // Container child GtkViewport.Gtk.Container+ContainerChild
             this.drawingarea1 = new Gtk.DrawingArea();
-            this.drawingarea1.Events = ((Gdk.EventMask)(13062));
+            this.drawingarea1.CanDefault = true;
+            this.drawingarea1.CanFocus = true;
+            this.drawingarea1.Events = ((Gdk.EventMask)(16134));
             this.drawingarea1.Name = "drawingarea1";
             w10.Add(this.drawingarea1);
             this.GtkScrolledWindow.Add(w10);
@@ -338,11 +340,14 @@ namespace Pinta {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
+            this.drawingarea1.HasDefault = true;
             this.Show();
             this.drawingarea1.ButtonPressEvent += new Gtk.ButtonPressEventHandler(this.OnDrawingarea1ButtonPressEvent);
             this.drawingarea1.ButtonReleaseEvent += new Gtk.ButtonReleaseEventHandler(this.OnDrawingarea1ButtonReleaseEvent);
             this.drawingarea1.MotionNotifyEvent += new Gtk.MotionNotifyEventHandler(this.OnDrawingarea1MotionNotifyEvent);
             this.drawingarea1.ExposeEvent += new Gtk.ExposeEventHandler(this.OnDrawingarea1ExposeEvent);
+            this.drawingarea1.KeyPressEvent += new Gtk.KeyPressEventHandler(this.OnDrawingarea1KeyPressEvent);
+            this.drawingarea1.KeyReleaseEvent += new Gtk.KeyReleaseEventHandler(this.OnDrawingarea1KeyReleaseEvent);
         }
     }
 }

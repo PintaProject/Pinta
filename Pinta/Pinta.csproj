@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -43,7 +43,7 @@
     <Reference Include="System.Core">
     </Reference>
     <Reference Include="Mono.Posix" />
-    <Reference Include="Mono.Cairo" />
+    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -98,6 +98,8 @@
     <Compile Include="Platform.cs" />
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="ConfigurableEffects\RedEyeRemoveEffect.cs" />
+    <Compile Include="ConfigurableEffects\RadialBlurEffect.cs" />
+    <Compile Include="ConfigurableEffects\MotionBlurEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
