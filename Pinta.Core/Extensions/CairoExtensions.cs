@@ -775,5 +775,25 @@ namespace Pinta.Core
 		{
 			return new Gdk.Size (surf.Width, surf.Height);
 		}
+
+		/// <summary>
+		/// There was a bug in gdk-sharp where this returns incorrect values.
+		/// We will probably have to use this for a long time until every distro
+		/// has an updated gdk.
+		/// </summary>
+		public static bool ContainsCorrect (this Gdk.Rectangle r, int x, int y)
+		{
+			return ((((x >= r.Left) && (x < r.Right)) && (y >= r.Top)) && (y < r.Bottom));
+		}
+
+		/// <summary>
+		/// There was a bug in gdk-sharp where this returns incorrect values.
+		/// We will probably have to use this for a long time until every distro
+		/// has an updated gdk.
+		/// </summary>
+		public static bool ContainsCorrect (this Gdk.Rectangle r, Gdk.Point pt)
+		{
+			return r.ContainsCorrect (pt.X, pt.Y);
+		}
 	}
 }

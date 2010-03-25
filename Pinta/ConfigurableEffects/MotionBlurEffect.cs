@@ -80,7 +80,7 @@ namespace Pinta.Core
 			foreach (Gdk.Point p in points) {
 				Gdk.Point srcPoint = new Gdk.Point (x + p.X, y + p.Y);
 
-				if (src.GetBounds ().Contains (srcPoint)) {
+				if (src.GetBounds ().ContainsCorrect (srcPoint)) {
 					ColorBgra c = src.GetPointUnchecked (srcPoint.X, srcPoint.Y);
 
 					bSum += c.B * c.A;
@@ -172,7 +172,7 @@ namespace Pinta.Core
 						Gdk.Point b = new Gdk.Point (x + points[points.Length - 1].X, y + points[points.Length - 1].Y);
 
 						// If both ends of this line are in bounds, we don't need to do silly clipping
-						if (src.GetBounds ().Contains (a) && src.GetBounds ().Contains (b))
+						if (src.GetBounds ().ContainsCorrect (a) && src.GetBounds ().ContainsCorrect (b))
 							*dstPtr = DoLineAverageUnclipped (points, x, y, dst, src);
 						else
 							*dstPtr = DoLineAverage (points, x, y, dst, src);
