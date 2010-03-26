@@ -79,34 +79,33 @@ namespace Pinta.Core
             fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
         }
 		
-		public unsafe override void RenderEffect (ImageSurface imageSource, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
-			if (Data.Radius == 0) {
+			if (Data.Angle == 0) {
 				// Copy src to dest
 				return;
 			}
 
-            int w = dest.GetBounds().Width;
-            int h = dest.GetBounds().Height;
-            int fcx = w << 15;
-            int fcy = h << 15;
-            int fr = (int)((double)Data.Radius * Math.PI * 65536.0 / 181.0);
-            int strideSrc = imageSource.Stride;
-            int strideDst = imageSource.Stride;
-            ColorBgra* srcPtr = imageSource.GetRowAddressUnchecked(0);
-            ColorBgra* dstPtr = imageSource.GetRowAddressUnchecked(0);
-            
-            foreach (Gdk.Rectangle rect in rois) {
+            int w = dst.Width;
+            int h = dst.Height;
+            int fcx = (w << 15) + (int)(Data.Offset.X * (w << 15));
+            int fcy = (h << 15) + (int)(Data.Offset.Y * (h << 15));
 
+			int n = (Data.Quality * Data.Quality) * (30 + Data.Quality * Data.Quality);
+
+            int fr = (int)(Data.Angle * Math.PI * 65536.0 / 181.0);
+
+            foreach (Gdk.Rectangle rect in rois)
+            {
                 for (int y = rect.Top; y < rect.Bottom; ++y)
                 {
-                    ColorBgra *dstRow = (ColorBgra *)(strideDst * y + (byte *)dstPtr);
+                    ColorBgra* dstPtr = dst.GetPointAddressUnchecked(rect.Left, y);
+                    ColorBgra* srcPtr = src.GetPointAddressUnchecked(rect.Left, y);
 
                     for (int x = rect.Left; x < rect.Right; ++x)
                     {
                         int fx = (x << 16) - fcx;
                         int fy = (y << 16) - fcy;
-                        const int n = 64;
 
                         int fsr = fr / n;
 
@@ -116,12 +115,10 @@ namespace Pinta.Core
                         int sa = 0;
                         int sc = 0;
 
-                        ColorBgra *src = x + (ColorBgra *)((byte *)srcPtr + strideSrc * y);
-
-                        sr += src->R * src->A;
-                        sg += src->G * src->A;
-                        sb += src->B * src->A;
-                        sa += src->A;
+                        sr += srcPtr->R * srcPtr->A;
+                        sg += srcPtr->G * srcPtr->A;
+                        sb += srcPtr->B * srcPtr->A;
+                        sa += srcPtr->A;
                         ++sc;
 
                         int ox1 = fx;
@@ -131,54 +128,53 @@ namespace Pinta.Core
 
                         for (int i = 0; i < n; ++i)
                         {
-                            int u;
-                            int v;
-
                             Rotate(ref ox1, ref oy1, fsr);
                             Rotate(ref ox2, ref oy2, -fsr);
-                            
-                            u = ox1 + fcx + 32768 >> 16;
-                            v = oy1 + fcy + 32768 >> 16;
 
-                            if (u > 0 && v > 0 && u < w && v < h)
+                            int u1 = ox1 + fcx + 32768 >> 16;
+                            int v1 = oy1 + fcy + 32768 >> 16;
+
+                            if (u1 > 0 && v1 > 0 && u1 < w && v1 < h)
                             {
-                                src = u + (ColorBgra *)((byte *)srcPtr + strideSrc * v);
+                                ColorBgra *sample = src.GetPointAddressUnchecked(u1, v1);
 
-                                sr += src->R * src->A;
-                                sg += src->G * src->A;
-                                sb += src->B * src->A;
-                                sa += src->A;
+                                sr += sample->R * sample->A;
+                                sg += sample->G * sample->A;
+                                sb += sample->B * sample->A;
+                                sa += sample->A;
                                 ++sc;
                             }
 
-                            u = ox2 + fcx + 32768 >> 16;
-                            v = oy2 + fcy + 32768 >> 16;
+                            int u2 = ox2 + fcx + 32768 >> 16;
+                            int v2 = oy2 + fcy + 32768 >> 16;
 
-                            if (u > 0 && v > 0 && u < w&& v < h)
+                            if (u2 > 0 && v2 > 0 && u2 < w && v2 < h)
                             {
-                                src = u + (ColorBgra *)((byte *)srcPtr + strideSrc * v);
+                                ColorBgra* sample = src.GetPointAddressUnchecked(u2, v2);
 
-                                sr += src->R * src->A;
-                                sg += src->G * src->A;
-                                sb += src->B * src->A;
-                                sa += src->A;
+                                sr += sample->R * sample->A;
+                                sg += sample->G * sample->A;
+                                sb += sample->B * sample->A;
+                                sa += sample->A;
                                 ++sc;
                             }
                         }
-                 
+
                         if (sa > 0)
                         {
-                            dstRow[x] = ColorBgra.FromBgra(
+                            *dstPtr = ColorBgra.FromBgra(
                                 Utility.ClampToByte(sb / sa),
                                 Utility.ClampToByte(sg / sa),
                                 Utility.ClampToByte(sr / sa),
-                                Utility.ClampToByte(sa / sc)
-                                );
+                                Utility.ClampToByte(sa / sc));
                         }
                         else
                         {
-                            dstRow[x].Bgra = 0;
+                            dstPtr->Bgra = 0;
                         }
+
+                        ++dstPtr;
+                        ++srcPtr;
                     }
                 }
             }
@@ -188,10 +184,16 @@ namespace Pinta.Core
 		public class RadialBlurData
 		{
 			[MinimumValue (0), MaximumValue (360)]
-			public int Radius = 2;
+			public int Angle = 2;
 			
 			[Skip]
-			public bool IsEmpty { get { return Radius == 0; } }
+			public bool IsEmpty { get { return Angle == 0; } }
+
+			[Skip]
+			public Cairo.PointD Offset = new Cairo.PointD (0.0, 0.0);
+			
+			[MinimumValue (1), MaximumValue (5)]
+			public int Quality = 2;
 		}
 	}
 }

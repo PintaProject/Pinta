@@ -11,6 +11,7 @@
     <AssemblyName>Pinta</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <CodePage>65001</CodePage>
+    <StartupObject>Pinta.MainClass</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,10 +41,11 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System.Core">
-    </Reference>
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -106,6 +108,9 @@
     <Compile Include="Platform.cs" />
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="ConfigurableEffects\RedEyeRemoveEffect.cs" />
+    <Compile Include="ConfigurableEffects\RadialBlurEffect.cs" />
+    <Compile Include="ConfigurableEffects\MotionBlurEffect.cs" />
+    <Compile Include="ConfigurableEffects\FragmentEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
