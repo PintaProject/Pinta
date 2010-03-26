@@ -27,6 +27,7 @@
 using System;
 using System.Reflection;
 using System.Text;
+using System.Collections.Generic; 
 
 namespace Pinta.Gui.Widgets
 {
@@ -84,7 +85,7 @@ namespace Pinta.Gui.Widgets
 				if (caption == null)
 					caption = MakeCaption (mi.Name);
 
-				if (mType == typeof (int))
+                if ((mType == typeof(int)) || (mType == typeof(double)))
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
@@ -104,22 +105,30 @@ namespace Pinta.Gui.Widgets
 		#region Control Builders
 		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
+            HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget();
 			
 			int min_value = -100;
-			int max_value = 100;
+            int max_value = 100;
+            double inc_value = 1.0;
+            int digits_value = 0;
 
 			foreach (var attr in attributes) {
 				if (attr is MinimumValueAttribute)
 					min_value = ((MinimumValueAttribute)attr).Value;
 				else if (attr is MaximumValueAttribute)
 					max_value = ((MaximumValueAttribute)attr).Value;
+                else if (attr is IncrementValueAttribute)
+                    inc_value = ((IncrementValueAttribute)attr).Value;
+                else if (attr is DigitsValueAttribute)
+                    digits_value = ((DigitsValueAttribute)attr).Value;
 			}
 			
 			widget.Label = caption;
 			widget.MinimumValue = min_value;
 			widget.MaximumValue = max_value;
-			widget.DefaultValue = (int)GetValue (member, o);
+            widget.IncrementValue = inc_value;
+            widget.DigitsValue = digits_value;
+			widget.DefaultValue = Convert.ToDouble(GetValue (member, o));
 			
 			widget.ValueChanged += delegate (object sender, EventArgs e) {
 				SetValue (member, o, widget.Value);
@@ -166,7 +175,10 @@ namespace Pinta.Gui.Widgets
 		{
 			var fi = mi as FieldInfo;
 			if (fi != null) {
-				fi.SetValue (o, val);
+				if (fi.FieldType == typeof(int))
+                    fi.SetValue (o, Convert.ToInt32(val));
+                else if (fi.FieldType == typeof(double))
+                    fi.SetValue(o, Convert.ToDouble(val));
 				return;
 			}
 			var pi = mi as PropertyInfo;

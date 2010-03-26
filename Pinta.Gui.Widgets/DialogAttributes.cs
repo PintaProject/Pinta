@@ -44,6 +44,28 @@ namespace Pinta.Gui.Widgets
 		public string Caption;
 	}
 
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+    public class DigitsValueAttribute : Attribute
+    {
+        public DigitsValueAttribute(int value)
+        {
+            Value = value;
+        }
+
+        public int Value;
+    }
+
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+    public class IncrementValueAttribute : Attribute
+    {
+        public IncrementValueAttribute(double value)
+        {
+            Value = value;
+        }
+
+        public double Value;
+    }
+
 	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class MinimumValueAttribute : Attribute
 	{
