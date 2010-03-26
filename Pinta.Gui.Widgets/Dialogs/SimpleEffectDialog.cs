@@ -183,6 +183,11 @@ namespace Pinta.Gui.Widgets
 			}
 			var pi = mi as PropertyInfo;
 			var setMethod = pi.GetSetMethod ();
+            if (pi.PropertyType == typeof(int))
+                val = Convert.ToInt32(val);
+            else if (pi.PropertyType == typeof(double))
+                val = Convert.ToDouble(val);
+
 			setMethod.Invoke (o, new object[] { val });
 		}
 
