@@ -54,6 +54,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectsSharpenActivated;
 			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectsSoftenPortraitActivated;
+			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectsEdgeDetectActivated;
 		}
 
 		#region Handlers
@@ -250,6 +251,11 @@ namespace Pinta
 		private void HandleEffectsSoftenPortraitActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new SoftenPortraitEffect ());	
+		}
+		
+		private void HandleEffectsEdgeDetectActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new EdgeDetectEffect ());
 		}
 		#endregion
 	}
