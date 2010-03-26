@@ -150,7 +150,7 @@ namespace Pinta.Core
 									int srcY = y + wy - r;
 
 									if (srcY >= 0 && srcY < src_height) {
-										ColorBgra c = src.GetPointUnchecked (srcX, srcY);
+										ColorBgra c = src.GetPointUnchecked (src_data_ptr, src_width, srcX, srcY);
 										int wp = w[wy];
 
 										waSums[wx] += wp;

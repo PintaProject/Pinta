@@ -704,11 +704,11 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
-		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += (x) + (y * srcWidth);
+			dstPtr += (x) + (y * surfWidth);
 
 			return dstPtr;
 		}
@@ -726,11 +726,11 @@ namespace Pinta.Core
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += (x) + (y * srcWidth);
+			dstPtr += (x) + (y * surfWidth);
 
 			return *dstPtr;
 		}
@@ -744,11 +744,11 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
-		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int y)
+		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += y * srcWidth;
+			dstPtr += y * surfWidth;
 
 			return dstPtr;
 		}
