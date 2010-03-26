@@ -162,6 +162,8 @@ namespace Pinta.Gui.Widgets
 		private Gtk.Label CreateHintLabel (string hint)
 		{
 			Gtk.Label label = new Gtk.Label (hint);
+			label.LineWrap = true;
+			
 			return label;
 		}
 		#endregion
