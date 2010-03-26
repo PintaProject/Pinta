@@ -77,7 +77,24 @@ namespace Pinta.Gui.Widgets
 		#region Mouse Handlers
 		private void HandleHandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
-			lastMouseXY = new Point ((int)args.Event.X, (int)args.Event.Y);
+			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
+		}
+
+		private void HandleHandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
+		{
+			tracking = false;
+		}
+
+		private void HandleHandleButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
+		{
+			tracking = true;
+
+			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
+		}
+		
+		private void ProcessMouseEvent (Point pt, bool constrainAngle)
+		{
+			lastMouseXY = pt;
 
 			if (tracking) {
 				Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -2, -2);
@@ -89,11 +106,11 @@ namespace Pinta.Gui.Widgets
 				double theta = Math.Atan2 (-dy, dx);
 
 				double newAngle = (theta * 360) / (2 * Math.PI);
-				
+
 				if (newAngle < 0)
 					newAngle = newAngle + 360;
 
-				if ((args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask) {
+				if (constrainAngle) {
 					const double constraintAngle = 15.0;
 
 					double multiple = newAngle / constraintAngle;
@@ -116,16 +133,6 @@ namespace Pinta.Gui.Widgets
 
 				GdkWindow.Invalidate ();
 			}
-		}
-
-		private void HandleHandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
-		{
-			tracking = false;
-		}
-
-		private void HandleHandleButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
-		{
-			tracking = true;
 		}
 		#endregion
 
