@@ -34,8 +34,8 @@ namespace Pinta.Gui.Widgets
 	public class PointPickerGraphic : Gtk.DrawingArea
 	{
 		private bool tracking = false;
-		private Cairo.PointD lastMouseXY;
-		
+		private Cairo.ImageSurface thumbnail;
+			
 		public PointPickerGraphic ()
 		{
 			Events = ((Gdk.EventMask)(16134));
@@ -44,6 +44,24 @@ namespace Pinta.Gui.Widgets
 			ButtonReleaseEvent += HandleHandleButtonReleaseEvent;
 			MotionNotifyEvent += HandleHandleMotionNotifyEvent;
 		}
+
+		void UpdateThumbnail ()
+		{
+			Rectangle ClientRectangle = GdkWindow.GetBounds ();
+			double scalex = ClientRectangle.X / PintaCore.Workspace.ImageSize.X;
+			double scaley = ClientRectangle.Y / PintaCore.Workspace.ImageSize.Y;
+				
+			thumbnail = new Cairo.ImageSurface (Cairo.Format.Argb32, ClientRectangle.X, ClientRectangle.Y);
+
+			using (Cairo.Context g = new Cairo.Context (thumbnail)) {
+				g.Scale (scalex, scaley);
+				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
+					g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+					g.PaintWithAlpha (layer.Opacity);
+				}
+			}
+		}
+
 
 		#region Public Properties
 		private Point position;
@@ -54,7 +72,7 @@ namespace Pinta.Gui.Widgets
 				if (position != value) {
 					position = value;
 					OnPositionChange ();
-					this.GdkWindow.Invalidate ();
+					GdkWindow.Invalidate ();
 				}
 			}
 		}
@@ -63,11 +81,8 @@ namespace Pinta.Gui.Widgets
 		#region Mouse Handlers
 		private void HandleHandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
-			lastMouseXY = new Cairo.PointD (args.Event.X, args.Event.Y);
-
 			if (tracking) {
-                Position = MousePtToPosition(lastMouseXY);
-				GdkWindow.Invalidate ();
+                Position = MousePtToPosition(new Cairo.PointD (args.Event.X, args.Event.Y));
 			}
 		}
 
@@ -88,7 +103,6 @@ namespace Pinta.Gui.Widgets
 			if (args.Event.Button == 1)//Left
             {
                 tracking = true;
-                lastMouseXY = new Cairo.PointD(args.Event.X, args.Event.Y);
             }
 		}
 		#endregion
@@ -97,13 +111,26 @@ namespace Pinta.Gui.Widgets
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
 		{
 			base.OnExposeEvent (ev);
-
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				Cairo.Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -1, -1).ToCairoRectangle ();
-				g.DrawRectangle(outrect, new Cairo.Color (0, 0, 0), 1);
-				//TODO Drawn position point
-			}
 			
+			if (thumbnail == null)
+				UpdateThumbnail ();
+			
+			Rectangle rect = GdkWindow.GetBounds ();
+			Cairo.PointD pos = PositionToClientPt(Position);
+			Cairo.Color black = new Cairo.Color(0, 0, 0);
+			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
+				Cairo.Rectangle outRect = Rectangle.Inflate (GdkWindow.GetBounds (), -1, -1).ToCairoRectangle ();
+				g.DrawRectangle(outRect, new Cairo.Color (0, 0, 0), 1);
+				g.SetSource (thumbnail);
+				g.Paint ();
+				// Draw the center -> end point arrow
+				g.Color = new Cairo.Color(0, 0, 0);
+				//cursor
+				g.DrawLine (new Cairo.PointD(pos.X, rect.Top), new Cairo.PointD(pos.X, rect.Bottom), black, 1);
+				g.DrawLine (new Cairo.PointD(rect.Left, pos.Y), new Cairo.PointD(rect.Right, pos.Y), black, 1);
+				//point
+			    g.DrawEllipse (new Cairo.Rectangle(pos.X -1, pos.Y -1, 2, 2), black , 2);
+			}
 			return true;
 		}
 
@@ -112,6 +139,7 @@ namespace Pinta.Gui.Widgets
 			// Calculate desired size here.
 			requisition.Height = 50;
 			requisition.Width = 50;
+			thumbnail = null;
 		}
 		#endregion
 		
@@ -130,11 +158,11 @@ namespace Pinta.Gui.Widgets
 		private Point MousePtToPosition(Cairo.PointD clientMousePt)
         {
 			Rectangle ClientRectangle = GdkWindow.GetBounds ();
-            double centerX = ClientRectangle.Left + ((ClientRectangle.Right - ClientRectangle.Left) / 2.0d);
-            double centerY = ClientRectangle.Top + ((ClientRectangle.Bottom - ClientRectangle.Top) / 2.0d);
-
-            double deltaX = clientMousePt.X - centerX;
-            double deltaY = clientMousePt.Y - centerY;
+			
+			Point center =  ClientRectangle.Center ();
+			
+            double deltaX = clientMousePt.X - center.X;
+            double deltaY = clientMousePt.Y - center.Y;
 
             int posX = (int) (deltaX * (PintaCore.Workspace.ImageSize.X / ClientRectangle.Width));
             int posY = (int) (deltaY * (PintaCore.Workspace.ImageSize.Y / ClientRectangle.Height));
@@ -145,14 +173,14 @@ namespace Pinta.Gui.Widgets
         private Cairo.PointD PositionToClientPt(Point pos)
         {
 			Rectangle ClientRectangle = GdkWindow.GetBounds ();
-            double centerX = ClientRectangle.Left + ((ClientRectangle.Right - ClientRectangle.Left) / 2.0d);
-            double centerY = ClientRectangle.Top + ((ClientRectangle.Bottom - ClientRectangle.Top) / 2.0d);
 
+			Point center =  ClientRectangle.Center ();
+			
             double halfWidth = PintaCore.Workspace.ImageSize.X / ClientRectangle.Width;
             double halfHeight = PintaCore.Workspace.ImageSize.Y / ClientRectangle.Height;
 
-            double ptX = centerX + pos.X / halfWidth;
-            double ptY = centerY + pos.Y / halfHeight;
+            double ptX = center.X + pos.X / halfWidth;
+            double ptY = center.Y + pos.Y / halfHeight;
 
             return new Cairo.PointD(ptX, ptY);
         }

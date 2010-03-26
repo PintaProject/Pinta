@@ -26,6 +26,7 @@
 
 using System;
 using System.ComponentModel;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
@@ -53,41 +54,39 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 		}
-		
-		//[Category("Custom Properties")]
-		//public Gdk.Rectangle Bound  { get; set; }
-		
+
 		public PointPicker ()
 		{
 			this.Build ();
+			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.X / 2.0;
+			spinY.Adjustment.Upper = PintaCore.Workspace.ImageSize.Y / 2.0;
+			spinX.Adjustment.Lower = -PintaCore.Workspace.ImageSize.X / 2.0;
+			spinY.Adjustment.Lower = -PintaCore.Workspace.ImageSize.Y / 2.0;
+			
 			spinX.ValueChanged += HandleSpinXValueChanged;
 			spinY.ValueChanged += HandleSpinYValueChanged;
-			//TODO : made a surface area with a thundmnail of the full image and place a cursor to show the point position
-			//drawingarea1.
+			pointpickergraphic1.PositionChanged += HandlePointpickergraphic1PositionChanged;
+		}
+
+		void HandlePointpickergraphic1PositionChanged (object sender, EventArgs e)
+		{
+			if (Point != pointpickergraphic1.Position) {
+				spinX.Value = pointpickergraphic1.Position.X;
+				spinY.Value = pointpickergraphic1.Position.Y;
+				OnPointPicked ();
+			}
 		}
 		
 		private void HandleSpinXValueChanged (object sender, EventArgs e)
 		{
-			/*if (spinX.Value < Bound.Left)
-				spinX.Value = Bound.Left;
-			else if (spinX.Value > Bound.Right)
-				spinX.Value = Bound.Right;
-			else {*/
-				//TODO Update drawingArea
-				OnPointPicked ();
-			//}
+			pointpickergraphic1.Position = Point; 
+			OnPointPicked ();
 		}
 		
 		private void HandleSpinYValueChanged (object sender, EventArgs e)
 		{
-			/*if (spinY.Value < Bound.Top)
-				spinY.Value = Bound.Top;
-			else if (spinY.Value > Bound.Bottom)
-				spinY.Value = Bound.Bottom;
-			else {*/
-				//TODO Update drawingArea
-				OnPointPicked ();
-			//}
+			pointpickergraphic1.Position = Point;
+			OnPointPicked ();
 		}
 		
 		protected override void OnShown ()

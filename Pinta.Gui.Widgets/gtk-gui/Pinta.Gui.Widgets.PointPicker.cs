@@ -23,7 +23,7 @@ namespace Pinta.Gui.Widgets {
         
         private Gtk.HBox hbox2;
         
-        private Gtk.DrawingArea drawingarea1;
+        private Pinta.Gui.Widgets.PointPickerGraphic pointpickergraphic1;
         
         private Gtk.Table table1;
         
@@ -77,11 +77,13 @@ namespace Pinta.Gui.Widgets {
             this.hbox2.Name = "hbox2";
             this.hbox2.Spacing = 6;
             // Container child hbox2.Gtk.Box+BoxChild
-            this.drawingarea1 = new Gtk.DrawingArea();
-            this.drawingarea1.Name = "drawingarea1";
-            this.hbox2.Add(this.drawingarea1);
-            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox2[this.drawingarea1]));
+            this.pointpickergraphic1 = new Pinta.Gui.Widgets.PointPickerGraphic();
+            this.pointpickergraphic1.Name = "pointpickergraphic1";
+            this.hbox2.Add(this.pointpickergraphic1);
+            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox2[this.pointpickergraphic1]));
             w4.Position = 0;
+            w4.Expand = false;
+            w4.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
             this.table1 = new Gtk.Table(((uint)(2)), ((uint)(3)), false);
             this.table1.Name = "table1";
