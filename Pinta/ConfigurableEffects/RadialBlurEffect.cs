@@ -177,8 +177,7 @@ namespace Pinta.Core
 
 		public class RadialBlurData
 		{
-			[MinimumValue (0), MaximumValue (360)]
-			public int Angle = 2;
+			public Double Angle = 2;
 
 			[Skip]
 			public bool IsEmpty { get { return Angle == 0; } }

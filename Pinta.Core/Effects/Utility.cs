@@ -12,6 +12,11 @@ namespace Pinta.Core
 {
 	public static class Utility
 	{
+		internal static bool IsNumber (float x)
+		{
+			return x >= float.MinValue && x <= float.MaxValue;
+		}
+
 		public static double Clamp (double x, double min, double max)
 		{
 			if (x < min) {
@@ -87,7 +92,12 @@ namespace Pinta.Core
 		{
 			return (from + frac * (to - from));
 		}
-		
+
+		public static Cairo.PointD Lerp (Cairo.PointD from, Cairo.PointD to, float frac)
+		{
+			return new Cairo.PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
+		}
+
 		public static void Swap(ref int a, ref int b)
         {
             int t;
