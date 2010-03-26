@@ -60,9 +60,9 @@
     <Compile Include="Widgets\AnglePickerGraphic.cs" />
     <Compile Include="Widgets\AnglePickerWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.AnglePickerWidget.cs" />
-    <Compile Include="Widgets\PointPicker.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPicker.cs" />
     <Compile Include="Widgets\PointPickerGraphic.cs" />
+    <Compile Include="Widgets\PointPickerWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPickerWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

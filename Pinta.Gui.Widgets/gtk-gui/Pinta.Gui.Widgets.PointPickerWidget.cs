@@ -11,7 +11,7 @@
 namespace Pinta.Gui.Widgets {
     
     
-    public partial class PointPicker {
+    public partial class PointPickerWidget {
         
         private Gtk.VBox vbox1;
         
@@ -41,10 +41,10 @@ namespace Pinta.Gui.Widgets {
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
-            // Widget Pinta.Gui.Widgets.PointPicker
+            // Widget Pinta.Gui.Widgets.PointPickerWidget
             Stetic.BinContainer.Attach(this);
-            this.Name = "Pinta.Gui.Widgets.PointPicker";
-            // Container child Pinta.Gui.Widgets.PointPicker.Gtk.Container+ContainerChild
+            this.Name = "Pinta.Gui.Widgets.PointPickerWidget";
+            // Container child Pinta.Gui.Widgets.PointPickerWidget.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
             this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;

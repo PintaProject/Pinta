@@ -31,7 +31,7 @@ using Pinta.Core;
 namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class PointPicker : Gtk.Bin
+	public partial class PointPickerWidget : Gtk.Bin
 	{
 
 		[Category("Custom Properties")]
@@ -55,7 +55,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		public PointPicker ()
+		public PointPickerWidget ()
 		{
 			this.Build ();
 			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.X / 2.0;

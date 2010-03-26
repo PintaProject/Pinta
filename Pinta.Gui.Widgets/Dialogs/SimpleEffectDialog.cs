@@ -147,9 +147,9 @@ namespace Pinta.Gui.Widgets
 		}
 
 
-		private PointPicker CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
+		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
-			PointPicker widget = new PointPicker ();
+			PointPickerWidget widget = new PointPickerWidget ();
 						
 			widget.Label = caption;
 			widget.DefaultPoint = (Gdk.Point)GetValue (member, o);

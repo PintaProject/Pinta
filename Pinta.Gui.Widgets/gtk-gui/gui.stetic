@@ -225,7 +225,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Pinta.Gui.Widgets.PointPicker" design-size="300 300">
+  <widget class="Gtk.Bin" id="Pinta.Gui.Widgets.PointPickerWidget" design-size="300 300">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
