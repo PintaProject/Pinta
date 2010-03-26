@@ -50,6 +50,7 @@ namespace Pinta.Core
 
         // Noice Action
         public Gtk.Action Median { get; private set; }
+        public Gtk.Action ReduceNoise { get; private set; }
 
         // Stylize Action
         public Gtk.Action Outline { get; private set; }
@@ -70,6 +71,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
             fact.Add("Menu.Effects.Noise.Median.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.Median.png")));
+            fact.Add("Menu.Effects.Noise.ReduceNoise.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.ReduceNoise.png")));
             fact.Add("Menu.Effects.Stylize.Outline.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Stylize.Outline.png")));
             fact.AddDefault ();
 
@@ -97,6 +99,7 @@ namespace Pinta.Core
 
             //Noice Action
             Median = new Gtk.Action("Median", Mono.Unix.Catalog.GetString("Median..."), null, "Menu.Effects.Noise.Median.png");
+            ReduceNoise = new Gtk.Action("ReduceNoise", Mono.Unix.Catalog.GetString("Reduce Noise..."), null, "Menu.Effects.Noise.ReduceNoise.png");
 
             //Stylize Action
             Outline = new Gtk.Action("Outline", Mono.Unix.Catalog.GetString("Outline..."), null, "Menu.Effects.Stylize.Outline.png");
@@ -129,6 +132,7 @@ namespace Pinta.Core
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
             
             noise_sub_menu.Append(Median.CreateMenuItem());
+            noise_sub_menu.Append(ReduceNoise.CreateMenuItem());
 
             stylize_sub_menu.Append(Outline.CreateMenuItem());
 		}

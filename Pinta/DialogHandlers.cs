@@ -57,6 +57,7 @@ namespace Pinta
 
             //Noice Handler
             PintaCore.Actions.Effects.Median.Activated += HandleEffectMedianActivated;
+            PintaCore.Actions.Effects.ReduceNoise.Activated += HandleEffectReduceNoiseActivated;
 
             //Stylize Handler
             PintaCore.Actions.Effects.Outline.Activated += HandleEffectOutlineActivated;
@@ -255,15 +256,23 @@ namespace Pinta
 		
 		private void HandleEffectsRedEyeRemoveActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());	
-		}
+			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());
+        }
 
-        
-        // Noice Handler
+
+        #region Noice Handler
+
         private void HandleEffectMedianActivated(object sender, EventArgs e)
         {
             PintaCore.Actions.Adjustments.PerformEffect(new MedianEffect());
         }
+
+        private void HandleEffectReduceNoiseActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new ReduceNoiseEffect());
+        }
+
+        #endregion
 
         // Stylize Handler
         private void HandleEffectOutlineActivated(object sender, EventArgs e)
