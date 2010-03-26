@@ -88,6 +88,8 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
+				else if (mType == typeof (Gdk.Point))
+					AddWidget (CreatePointPicker (caption, EffectData, mi, attrs));
 				
 				if (hint != null)
 					AddWidget (CreateHintLabel (hint));
@@ -132,12 +134,28 @@ namespace Pinta.Gui.Widgets
 		{
 			Gtk.CheckButton widget = new Gtk.CheckButton ();
 
-
 			widget.Label = caption;
 			widget.Active = (bool)GetValue (member, o);
 
 			widget.Toggled += delegate (object sender, EventArgs e) {
 				SetValue (member, o, widget.Active);
+			};
+
+			return widget;
+		}
+		
+		
+		private PointPicker CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			PointPicker widget = new PointPicker ();
+						
+			widget.Label = caption;
+			widget.DefaultPoint = (Gdk.Point)GetValue (member, o);
+			//TODO limit to canvas ?
+			//widget.Bound = pinta
+
+			widget.PointPicked += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.Point);
 			};
 
 			return widget;
