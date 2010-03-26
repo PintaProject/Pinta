@@ -566,7 +566,7 @@ namespace Pinta.Core
 
 			return new Color (dstPtr->R / 255f, dstPtr->G / 255f, dstPtr->B / 255f, dstPtr->A / 255f);
 		}
-		
+
 		public unsafe static void SetPixel (this Cairo.ImageSurface surf, int x, int y, Color color)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
@@ -579,11 +579,32 @@ namespace Pinta.Core
 			dstPtr->A = (byte)(color.A * 255);
 		}
 
+		public unsafe static void SetPixel (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y, Color color)
+		{
+			ColorBgra* dstPtr = surfDataPtr;
+
+			dstPtr += (x) + (y * surfWidth);
+
+			dstPtr->R = (byte)(color.R * 255);
+			dstPtr->G = (byte)(color.G * 255);
+			dstPtr->B = (byte)(color.B * 255);
+			dstPtr->A = (byte)(color.A * 255);
+		}
+
 		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, int x, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
+
+			return *dstPtr;
+		}
+
+		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
+		{
+			ColorBgra* dstPtr = surfDataPtr;
+
+			dstPtr += (x) + (y * surfWidth);
 
 			return *dstPtr;
 		}
