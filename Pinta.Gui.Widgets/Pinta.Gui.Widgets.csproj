@@ -41,7 +41,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Posix" />
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -55,6 +57,9 @@
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
     <Compile Include="Dialogs\SimpleEffectDialog.cs" />
+    <Compile Include="Widgets\AnglePickerGraphic.cs" />
+    <Compile Include="Widgets\AnglePickerWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.AnglePickerWidget.cs" />
     <Compile Include="Widgets\PointPicker.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPicker.cs" />
     <Compile Include="Widgets\PointPickerGraphic.cs" />

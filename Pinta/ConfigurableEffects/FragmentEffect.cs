@@ -45,12 +45,12 @@ namespace Pinta.Core
 		}
 
 		public FragmentData Data { get; private set; }
-		
+
 		public FragmentEffect ()
 		{
 			Data = new FragmentData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
@@ -68,82 +68,76 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
-		
-		private Gdk.Point[] RecalcPointOffsets(int fragments, double rotationAngle, int distance)
-        {
-            double pointStep = 2 * Math.PI / (double)fragments;
-            double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
-            double offsetAngle = pointStep;
+		private Gdk.Point[] RecalcPointOffsets (int fragments, double rotationAngle, int distance)
+		{
+			double pointStep = 2 * Math.PI / (double)fragments;
+			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
+			double offsetAngle = pointStep;
 
-            Gdk.Point[] pointOffsets = new Gdk.Point[fragments];
+			Gdk.Point[] pointOffsets = new Gdk.Point[fragments];
 
-            for (int i = 0; i < fragments; i++)
-            {
-                double currentRadians = rotationRadians + (pointStep * i);
+			for (int i = 0; i < fragments; i++) {
+				double currentRadians = rotationRadians + (pointStep * i);
 
-                pointOffsets[i] = new Gdk.Point(
-                    (int)Math.Round(distance * -Math.Sin(currentRadians), MidpointRounding.AwayFromZero),
-                    (int)Math.Round(distance * -Math.Cos(currentRadians), MidpointRounding.AwayFromZero));
-            }
+				pointOffsets[i] = new Gdk.Point (
+				    (int)Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
+				    (int)Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
+			}
+			
 			return pointOffsets;
-        }
-		
+		}
+
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			Gdk.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
-			
-			
+
 			int poLength = pointOffsets.Length;
-            Gdk.Point *pointOffsetsPtr = stackalloc Gdk.Point[poLength];
-            for (int i = 0; i < poLength; ++i)
-            {
-                pointOffsetsPtr[i] = pointOffsets[i];
-            }
+			Gdk.Point* pointOffsetsPtr = stackalloc Gdk.Point[poLength];
+			
+			for (int i = 0; i < poLength; ++i)
+				pointOffsetsPtr[i] = pointOffsets[i];
 
-            ColorBgra* samples = stackalloc ColorBgra[poLength];
+			ColorBgra* samples = stackalloc ColorBgra[poLength];
 
-            foreach (Gdk.Rectangle rect in rois)
-            {
-                for (int y = rect.Top; y < rect.Bottom; y++)
-                {
-                    ColorBgra* dstPtr = dst.GetPointAddressUnchecked(rect.Left, y);
+			// Cache these for a massive performance boost
+			int src_width = src.Width;
+			int src_height = src.Height;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 
-                    for (int x = rect.Left; x < rect.Right; x++)
-                    {
-                        int sampleCount = 0;
+			foreach (Gdk.Rectangle rect in rois) {
+				for (int y = rect.Top; y < rect.Bottom; y++) {
+					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 
-                        for (int i = 0; i < poLength; ++i)
-                        {
-                            int u = x - pointOffsetsPtr[i].X;
-                            int v = y - pointOffsetsPtr[i].Y;
+					for (int x = rect.Left; x < rect.Right; x++) {
+						int sampleCount = 0;
 
-                            if (u >= 0 && u < src.GetBounds().Width && v >= 0 && v < src.GetBounds().Height)
-                            {
-                                samples[sampleCount] = src.GetPointUnchecked(u, v);
-                                ++sampleCount;
-                            }
-                        }
+						for (int i = 0; i < poLength; ++i) {
+							int u = x - pointOffsetsPtr[i].X;
+							int v = y - pointOffsetsPtr[i].Y;
 
-                        *dstPtr = ColorBgra.Blend(samples, sampleCount);
-                        ++dstPtr;
-                    }
-                }
-            }
-            
+							if (u >= 0 && u < src_width && v >= 0 && v < src_height) {
+								samples[sampleCount] = src.GetPointUnchecked (src_data_ptr, src_width, u, v);
+								++sampleCount;
+							}
+						}
+
+						*dstPtr = ColorBgra.Blend (samples, sampleCount);
+						++dstPtr;
+					}
+				}
+			}
 		}
 		#endregion
 
 		public class FragmentData
 		{
 			[MinimumValue (2), MaximumValue (50)]
-	        public int Fragments = 4;
-			
+			public int Fragments = 4;
+
 			[MinimumValue (0), MaximumValue (100)]
-	        public int Rotation = 8;
-			
-			[MinimumValue (0), MaximumValue (360)]
-	        public int Distance = 0;
-			
+			public int Distance = 8;
+
+			public double Rotation = 0;
 		}
 	}
 }

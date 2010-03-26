@@ -90,6 +90,8 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
 				else if (mType == typeof (Gdk.Point))
 					AddWidget (CreatePointPicker (caption, EffectData, mi, attrs));
+				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
+					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				
 				if (hint != null)
 					AddWidget (CreateHintLabel (hint));
@@ -143,19 +145,31 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
-		
-		
+
+
 		private PointPicker CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			PointPicker widget = new PointPicker ();
 						
 			widget.Label = caption;
 			widget.DefaultPoint = (Gdk.Point)GetValue (member, o);
-			//TODO limit to canvas ?
-			//widget.Bound = pinta
 
 			widget.PointPicked += delegate (object sender, EventArgs e) {
 				SetValue (member, o, widget.Point);
+			};
+
+			return widget;
+		}
+
+		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			AnglePickerWidget widget = new AnglePickerWidget ();
+
+			widget.Label = caption;
+			widget.DefaultValue = (double)GetValue (member, o);
+			
+			widget.ValueChanged += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.Value);
 			};
 
 			return widget;

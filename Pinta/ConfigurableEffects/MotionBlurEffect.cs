@@ -68,115 +68,59 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
-		private unsafe ColorBgra DoLineAverage (Gdk.Point[] points, int x, int y, ImageSurface dst, ImageSurface src)
+		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
-			long bSum = 0;
-			long gSum = 0;
-			long rSum = 0;
-			long aSum = 0;
-			int cDiv = 0;
-			int aDiv = 0;
+			PointD start = new PointD (0, 0);
+			double theta = ((double)(Data.Angle + 180) * 2 * Math.PI) / 360.0;
+			double alpha = (double)Data.Distance;
+			PointD end = new PointD ((float)alpha * Math.Cos (theta), (float)(-alpha * Math.Sin (theta)));
 
-			foreach (Gdk.Point p in points) {
-				Gdk.Point srcPoint = new Gdk.Point (x + p.X, y + p.Y);
+			if (Data.Centered) {
+				start.X = -end.X / 2.0f;
+				start.Y = -end.Y / 2.0f;
 
-				if (src.GetBounds ().Contains (srcPoint)) {
-					ColorBgra c = src.GetPointUnchecked (srcPoint.X, srcPoint.Y);
+				end.X /= 2.0f;
+				end.Y /= 2.0f;
+			}
 
-					bSum += c.B * c.A;
-					gSum += c.G * c.A;
-					rSum += c.R * c.A;
-					aSum += c.A;
+			PointD[] points = new PointD[((1 + Data.Distance) * 3) / 2];
 
-					aDiv++;
-					cDiv += c.A;
+			if (points.Length == 1) {
+				points[0] = new PointD (0, 0);
+			} else {
+				for (int i = 0; i < points.Length; ++i) {
+					float frac = (float)i / (float)(points.Length - 1);
+					points[i] = Utility.Lerp (start, end, frac);
 				}
 			}
 
-			int b;
-			int g;
-			int r;
-			int a;
+			ColorBgra* samples = stackalloc ColorBgra[points.Length];
 
-			if (cDiv == 0) {
-				b = 0;
-				g = 0;
-				r = 0;
-				a = 0;
-			} else {
-				b = (int)(bSum /= cDiv);
-				g = (int)(gSum /= cDiv);
-				r = (int)(rSum /= cDiv);
-				a = (int)(aSum /= aDiv);
-			}
-
-			return ColorBgra.FromBgra ((byte)b, (byte)g, (byte)r, (byte)a);
-		}
-
-		private unsafe ColorBgra DoLineAverageUnclipped (Gdk.Point[] points, int x, int y, ImageSurface dst, ImageSurface src)
-		{
-			long bSum = 0;
-			long gSum = 0;
-			long rSum = 0;
-			long aSum = 0;
-			int cDiv = 0;
-			int aDiv = 0;
-
-			foreach (Gdk.Point p in points) {
-				Point srcPoint = new Point (x + p.X, y + p.Y);
-				ColorBgra c = src.GetPointUnchecked (srcPoint.X, srcPoint.Y);
-
-				bSum += c.B * c.A;
-				gSum += c.G * c.A;
-				rSum += c.R * c.A;
-				aSum += c.A;
-
-				aDiv++;
-				cDiv += c.A;
-			}
-
-			int b;
-			int g;
-			int r;
-			int a;
-
-			if (cDiv == 0) {
-				b = 0;
-				g = 0;
-				r = 0;
-				a = 0;
-			} else {
-				b = (int)(bSum /= cDiv);
-				g = (int)(gSum /= cDiv);
-				r = (int)(rSum /= cDiv);
-				a = (int)(aSum /= aDiv);
-			}
-
-			return ColorBgra.FromBgra ((byte)b, (byte)g, (byte)r, (byte)a);
-		}
-
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
-		{
-			if (Data.IsEmpty) {
-				// Copy src to dest
-				return;
-			}
-			Gdk.Point[] points = Data.LinePoints;
+			ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
+			int src_width = src.Width;
+			int src_height = src.Height;
 
 			foreach (Gdk.Rectangle rect in rois) {
+
 				for (int y = rect.Top; y < rect.Bottom; ++y) {
-					ColorBgra* dstPtr = dst.GetPointAddress (rect.Left, y);
+					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 
 					for (int x = rect.Left; x < rect.Right; ++x) {
-						Gdk.Point a = new Gdk.Point (x + points[0].X, y + points[0].Y);
-						Gdk.Point b = new Gdk.Point (x + points[points.Length - 1].X, y + points[points.Length - 1].Y);
+						int sampleCount = 0;
 
-						// If both ends of this line are in bounds, we don't need to do silly clipping
-						if (src.GetBounds ().Contains (a) && src.GetBounds ().Contains (b))
-							*dstPtr = DoLineAverageUnclipped (points, x, y, dst, src);
-						else
-							*dstPtr = DoLineAverage (points, x, y, dst, src);
+						PointD a = new PointD ((float)x + points[0].X, (float)y + points[0].Y);
+						PointD b = new PointD ((float)x + points[points.Length - 1].X, (float)y + points[points.Length - 1].Y);
 
+						for (int j = 0; j < points.Length; ++j) {
+							PointD pt = new PointD (points[j].X + (float)x, points[j].Y + (float)y);
+
+							if (pt.X >= 0 && pt.Y >= 0 && pt.X <= (src_width - 1) && pt.Y <= (src_height - 1)) {
+								samples[sampleCount] = src.GetBilinearSample (src_dataptr, src_width, src_height, (float)pt.X, (float)pt.Y);
+								++sampleCount;
+							}
+						}
+
+						*dstPtr = ColorBgra.Blend (samples, sampleCount);
 						++dstPtr;
 					}
 				}
@@ -187,76 +131,14 @@ namespace Pinta.Core
 		public class MotionBlurData
 		{
 			[Skip]
-			public bool IsEmpty { get { return (angle == 0) && (distance == 0); } }
+			public bool IsEmpty { get { return Distance == 0; } }
 
-			//TODO move angle to double and made a slider for double
-			[Skip]
-			private int angle = 25;
-
-			[MinimumValue (-180), MaximumValue (180)]
-			public int Angle {
-				get { return angle; }
-				set {
-					this.angle = value;
-					linePoints = null;
-				}
-			}
-
-			[Skip]
-			private int distance = 10;
+			public double Angle = 25;
 
 			[MinimumValue (1), MaximumValue (200)]
-			public int Distance
-			{
-				get { return distance; }
-				set {
-					this.distance = value;
-					linePoints = null;
-				}
-			}
+			public int Distance = 10;
 
-			[Skip]
-			private bool centered = true;
-
-			public bool Centered
-			{
-				get { return centered; }
-				set {
-					centered = value;
-					linePoints = null;
-				}
-			}
-
-			[Skip]
-			private Gdk.Point[] linePoints = null;
-			
-			[Skip]
-			public Gdk.Point[] LinePoints {
-				get {
-					Gdk.Point[] returnPoints = linePoints;
-
-					if (linePoints == null) {
-						Gdk.Point start = new Gdk.Point (0, 0);
-						double theta = ((double)(angle + 180) * 2 * Math.PI) / 360.0;
-						double alpha = (double)distance;
-						double x = alpha * Math.Cos (theta);
-						double y = alpha * Math.Sin (theta);
-						Gdk.Point end = new Gdk.Point ((int)x, -(int)y);
-
-						if (centered) {
-							start.X = -end.X / 2;
-							start.Y = -end.Y / 2;
-							end.X /= 2;
-							end.Y /= 2;
-						}
-
-						returnPoints = Utility.GetLinePoints (start, end);
-						linePoints = returnPoints;
-					}
-
-					return returnPoints;
-				}
-			}
+			public bool Centered = true;
 		}
 	}
 }
