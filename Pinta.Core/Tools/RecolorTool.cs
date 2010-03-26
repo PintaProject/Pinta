@@ -108,6 +108,9 @@ namespace Pinta.Core
 			
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
 			myTolerance = (int)(Tolerance * 256);
+
+			ColorBgra* tmp_data_ptr = (ColorBgra*)tmp_layer.DataPtr;
+			int tmp_width = tmp_layer.Width;
 			
 			// The stencil lets us know if we've already checked this
 			// pixel, providing a nice perf boost
@@ -118,7 +121,7 @@ namespace Pinta.Core
 						continue;
 						
 					if (IsColorInTolerance (new_color, surf.GetColorBgra (i, j)))
-						*tmp_layer.GetPointAddressUnchecked (i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgra (i, j));
+						*tmp_layer.GetPointAddressUnchecked (tmp_data_ptr, tmp_width, i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgra (i, j));
 
 					stencil[i, j] = true;
 				}
