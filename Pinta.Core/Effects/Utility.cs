@@ -12,6 +12,11 @@ namespace Pinta.Core
 {
 	public static class Utility
 	{
+		internal static bool IsNumber (float x)
+		{
+			return x >= float.MinValue && x <= float.MaxValue;
+		}
+
 		public static double Clamp (double x, double min, double max)
 		{
 			if (x < min) {
@@ -87,7 +92,12 @@ namespace Pinta.Core
 		{
 			return (from + frac * (to - from));
 		}
-		
+
+		public static Cairo.PointD Lerp (Cairo.PointD from, Cairo.PointD to, float frac)
+		{
+			return new Cairo.PointD (Lerp (from.X, to.X, frac), Lerp (from.Y, to.Y, frac));
+		}
+
 		public static void Swap(ref int a, ref int b)
         {
             int t;
@@ -212,5 +222,77 @@ namespace Pinta.Core
 			int r2 = ((r1 >> 8) + r1) >> 8;
 			return (byte)r2;
 		}
+
+		public static Gdk.Point[] GetLinePoints(Gdk.Point first, Gdk.Point second)
+        {
+            Gdk.Point[] coords = null;
+
+            int x1 = first.X;
+            int y1 = first.Y;
+            int x2 = second.X;
+            int y2 = second.Y;
+            int dx = x2 - x1;
+            int dy = y2 - y1;
+            int dxabs = Math.Abs(dx);
+            int dyabs = Math.Abs(dy);
+            int px = x1;
+            int py = y1;
+            int sdx = Math.Sign(dx);
+            int sdy = Math.Sign(dy);
+            int x = 0;
+            int y = 0;
+
+            if (dxabs > dyabs)
+            {
+                coords = new Gdk.Point[dxabs + 1];
+
+                for (int i = 0; i <= dxabs; i++)
+                {
+                    y += dyabs;
+
+                    if (y >= dxabs)
+                    {
+                        y -= dxabs;
+                        py += sdy;
+                    }
+
+                    coords[i] = new Gdk.Point(px, py);
+                    px += sdx;
+                }
+            }
+            else 
+                // had to add in this cludge for slopes of 1 ... wasn't drawing half the line
+                if (dxabs == dyabs)
+            {
+                coords = new Gdk.Point[dxabs + 1];
+
+                for (int i = 0; i <= dxabs; i++)
+                {
+                    coords[i] = new Gdk.Point(px, py);
+                    px += sdx;
+                    py += sdy;
+                }
+            }
+            else
+            {
+                coords = new Gdk.Point[dyabs + 1];
+
+                for (int i = 0; i <= dyabs; i++)
+                {
+                    x += dxabs;
+
+                    if (x >= dyabs)
+                    {
+                        x -= dyabs;
+                        px += sdx;
+                    }
+
+                    coords[i] = new Gdk.Point(px, py);
+                    py += sdy;
+                }
+            }
+
+            return coords;
+        }
 	}
 }

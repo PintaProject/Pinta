@@ -88,6 +88,8 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
+				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
+					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				
 				if (hint != null)
 					AddWidget (CreateHintLabel (hint));
@@ -138,6 +140,20 @@ namespace Pinta.Gui.Widgets
 
 			widget.Toggled += delegate (object sender, EventArgs e) {
 				SetValue (member, o, widget.Active);
+			};
+
+			return widget;
+		}
+		
+		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			AnglePickerWidget widget = new AnglePickerWidget ();
+
+			widget.Label = caption;
+			widget.DefaultValue = (double)GetValue (member, o);
+			
+			widget.ValueChanged += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.Value);
 			};
 
 			return widget;

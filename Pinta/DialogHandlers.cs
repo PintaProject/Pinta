@@ -49,7 +49,10 @@ namespace Pinta
 			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectInkSketchActivated;
 			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectOilPaintingActivated;
 			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectPencilSketchActivated;
+			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectFragmentActivated;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
+			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
+			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectMotionBlurActivated;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectsSharpenActivated;
@@ -228,11 +231,26 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.PerformEffect (new PencilSketchEffect ());
 		}
 
+		private void HandleEffectFragmentActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new FragmentEffect ());
+		}
+
 		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new GaussianBlurEffect ());
 		}
 
+		private void HandleEffectRadialBlurActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new RadialBlurEffect ());
+		}
+		
+		private void HandleEffectMotionBlurActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new MotionBlurEffect ());
+		}
+		
 		private void HandleEffectGlowActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new GlowEffect ());
