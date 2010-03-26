@@ -133,9 +133,7 @@ namespace Pinta.Core
 			[Skip]
 			public bool IsEmpty { get { return Distance == 0; } }
 
-			//TODO move angle to double and made a slider for double
-			[MinimumValue (-180), MaximumValue (180)]
-			public int Angle = 25;
+			public double Angle = 25;
 
 			[MinimumValue (1), MaximumValue (200)]
 			public int Distance = 10;

@@ -137,8 +137,7 @@ namespace Pinta.Core
 			[MinimumValue (0), MaximumValue (100)]
 			public int Distance = 8;
 
-			[MinimumValue (0), MaximumValue (360)]
-			public int Rotation = 0;
+			public double Rotation = 0;
 		}
 	}
 }

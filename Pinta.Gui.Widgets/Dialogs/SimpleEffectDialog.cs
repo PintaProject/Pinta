@@ -88,7 +88,7 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
-				else if (mType == typeof (double) && caption == "Angle")
+				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
 					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				
 				if (hint != null)
