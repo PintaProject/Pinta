@@ -210,6 +210,8 @@
                 <child>
                   <widget class="Gtk.Button" id="button">
                     <property name="MemberName" />
+                    <property name="WidthRequest">28</property>
+                    <property name="HeightRequest">24</property>
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
                     <property name="Icon">stock:gtk-go-back Menu</property>
