@@ -57,6 +57,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 
             //Noice Handler
+            PintaCore.Actions.Effects.AddNoise.Activated += HandleEffectAddNoiseActivated;
             PintaCore.Actions.Effects.Median.Activated += HandleEffectMedianActivated;
             PintaCore.Actions.Effects.ReduceNoise.Activated += HandleEffectReduceNoiseActivated;
 
@@ -266,6 +267,11 @@ namespace Pinta
 
 
         #region Noice Handler
+
+        private void HandleEffectAddNoiseActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new AddNoiseEffect());
+        }
 
         private void HandleEffectMedianActivated(object sender, EventArgs e)
         {

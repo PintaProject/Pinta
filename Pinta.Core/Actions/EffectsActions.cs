@@ -50,6 +50,7 @@ namespace Pinta.Core
 		public Gtk.Action RedEyeRemove { get; private set; }
 
         // Noice Action
+        public Gtk.Action AddNoise { get; private set; }
         public Gtk.Action Median { get; private set; }
         public Gtk.Action ReduceNoise { get; private set; }
 
@@ -71,6 +72,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
+            fact.Add("Menu.Effects.Noise.AddNoise.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.AddNoise.png")));
             fact.Add("Menu.Effects.Noise.Median.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.Median.png")));
             fact.Add("Menu.Effects.Noise.ReduceNoise.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.ReduceNoise.png")));
             fact.Add("Menu.Effects.Stylize.Outline.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Stylize.Outline.png")));
@@ -100,6 +102,7 @@ namespace Pinta.Core
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 
             //Noice Action
+            AddNoise = new Gtk.Action("AddNoise", Mono.Unix.Catalog.GetString("Add Noise..."), null, "Menu.Effects.Noise.AddNoise.png");
             Median = new Gtk.Action("Median", Mono.Unix.Catalog.GetString("Median..."), null, "Menu.Effects.Noise.Median.png");
             ReduceNoise = new Gtk.Action("ReduceNoise", Mono.Unix.Catalog.GetString("Reduce Noise..."), null, "Menu.Effects.Noise.ReduceNoise.png");
 
@@ -133,7 +136,8 @@ namespace Pinta.Core
 
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
-            
+
+            noise_sub_menu.Append(AddNoise.CreateMenuItem());
             noise_sub_menu.Append(Median.CreateMenuItem());
             noise_sub_menu.Append(ReduceNoise.CreateMenuItem());
 
