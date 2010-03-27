@@ -96,7 +96,7 @@ namespace Pinta.Gui.Widgets {
             w6.Expand = false;
             w6.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
-            this.alignment2 = new Gtk.Alignment(0.5F, 0F, 1F, 0.1F);
+            this.alignment2 = new Gtk.Alignment(0.5F, 0F, 1F, 1F);
             this.alignment2.Name = "alignment2";
             // Container child alignment2.Gtk.Container+ContainerChild
             this.button = new Gtk.Button();

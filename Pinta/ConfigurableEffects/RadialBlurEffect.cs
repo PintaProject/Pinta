@@ -182,7 +182,7 @@ namespace Pinta.Core
 			[Skip]
 			public bool IsEmpty { get { return Angle == 0; } }
 
-			public Gdk.Point Offset = new Gdk.Point (0, 0);
+			public Cairo.PointD Offset = new Cairo.PointD (0.0, 0.0);
 
 			[MinimumValue (1), MaximumValue (5)]
 			[Hint ("\nUse low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]

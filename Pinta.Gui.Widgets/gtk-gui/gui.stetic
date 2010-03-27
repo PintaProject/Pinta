@@ -205,7 +205,6 @@
             <child>
               <widget class="Gtk.Alignment" id="alignment2">
                 <property name="MemberName" />
-                <property name="Yscale">0.1</property>
                 <property name="Yalign">0</property>
                 <child>
                   <widget class="Gtk.Button" id="button">

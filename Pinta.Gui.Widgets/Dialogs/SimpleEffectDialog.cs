@@ -90,6 +90,8 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
 				else if (mType == typeof (Gdk.Point))
 					AddWidget (CreatePointPicker (caption, EffectData, mi, attrs));
+				else if (mType == typeof (Cairo.PointD))
+					AddWidget (CreateOffsetPicker (caption, EffectData, mi, attrs));
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
 					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				
@@ -146,6 +148,19 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
+		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			PointPickerWidget widget = new PointPickerWidget ();
+						
+			widget.Label = caption;
+			widget.DefaultOffset = (Cairo.PointD)GetValue (member, o);
+
+			widget.PointPicked += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.Offset);
+			};
+
+			return widget;
+		}
 
 		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
 		{

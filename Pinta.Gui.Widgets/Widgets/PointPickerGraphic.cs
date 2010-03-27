@@ -67,6 +67,10 @@ namespace Pinta.Gui.Widgets
 			UpdateThumbnail ();
 		}
 
+		public void Init(Point position)
+		{
+			this.position = position;
+		}
 
 		#region Public Properties
 		private Point position;
@@ -162,13 +166,8 @@ namespace Pinta.Gui.Widgets
 		#region private methods
 		private Point MousePtToPosition (Cairo.PointD clientMousePt)
 		{
-			Point center = Allocation.Center ();
-			
-			double deltaX = clientMousePt.X - center.X;
-			double deltaY = clientMousePt.Y - center.Y;
-			
-			int posX = (int)(deltaX * (PintaCore.Workspace.ImageSize.X / Allocation.Width));
-			int posY = (int)(deltaY * (PintaCore.Workspace.ImageSize.Y / Allocation.Height));
+			int posX = (int)(clientMousePt.X * (PintaCore.Workspace.ImageSize.X / Allocation.Width));
+			int posY = (int)(clientMousePt.Y * (PintaCore.Workspace.ImageSize.Y / Allocation.Height));
 			
 			return new Point (posX, posY);
 		}
@@ -180,8 +179,8 @@ namespace Pinta.Gui.Widgets
 			double halfWidth = PintaCore.Workspace.ImageSize.X / Allocation.Width;
 			double halfHeight = PintaCore.Workspace.ImageSize.Y / Allocation.Height;
 			
-			double ptX = center.X + pos.X / halfWidth;
-			double ptY = center.Y + pos.Y / halfHeight;
+			double ptX = pos.X / halfWidth;
+			double ptY = pos.Y / halfHeight;
 			
 			return new Cairo.PointD (ptX, ptY);
 		}

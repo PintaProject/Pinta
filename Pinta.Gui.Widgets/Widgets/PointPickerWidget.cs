@@ -33,7 +33,8 @@ namespace Pinta.Gui.Widgets
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class PointPickerWidget : Gtk.Bin
 	{
-
+		bool active = true; 
+			
 		[Category("Custom Properties")]
 		public string Label {
 			get { return label.Text; }
@@ -45,7 +46,7 @@ namespace Pinta.Gui.Widgets
 
 		[Category("Custom Properties")]
 		public Gdk.Point Point {
-			get { return new Gdk.Point(spinX.ValueAsInt, spinY.ValueAsInt); }
+			get { return new Gdk.Point (spinX.ValueAsInt, spinY.ValueAsInt); }
 			set {
 				if (value.X != spinX.ValueAsInt || value.Y != spinY.ValueAsInt) {
 					spinX.Value = value.X;
@@ -55,44 +56,65 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
+		[Category("Custom Properties")]
+		public Cairo.PointD DefaultOffset { 
+			get { return new Cairo.PointD ( (DefaultPoint.X * 2.0 /PintaCore.Workspace.ImageSize.X) - 1.0,
+											(DefaultPoint.Y * 2.0 / PintaCore.Workspace.ImageSize.Y) - 1.0);}
+			set {DefaultPoint = new Gdk.Point ( (int) ((value.X + 1.0) * PintaCore.Workspace.ImageSize.X / 2.0 ),
+				                                (int) ((value.Y + 1.0) * PintaCore.Workspace.ImageSize.Y / 2.0 ) );} 
+		}
+
+		public Cairo.PointD Offset {
+			get { return new Cairo.PointD ((spinX.Value * 2.0 / PintaCore.Workspace.ImageSize.X) - 1.0, (spinY.Value * 2.0 / PintaCore.Workspace.ImageSize.Y) - 1.0); }
+		}
+
 		public PointPickerWidget ()
 		{
 			this.Build ();
-			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.X / 2.0;
-			spinY.Adjustment.Upper = PintaCore.Workspace.ImageSize.Y / 2.0;
-			spinX.Adjustment.Lower = -PintaCore.Workspace.ImageSize.X / 2.0;
-			spinY.Adjustment.Lower = -PintaCore.Workspace.ImageSize.Y / 2.0;
-			
-			spinX.ValueChanged += HandleSpinXValueChanged;
-			spinY.ValueChanged += HandleSpinYValueChanged;
-			pointpickergraphic1.PositionChanged += HandlePointpickergraphic1PositionChanged;
+			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.X;
+			spinY.Adjustment.Upper = PintaCore.Workspace.ImageSize.Y;
+			spinX.Adjustment.Lower = 0;
+			spinY.Adjustment.Lower = 0;
+
 		}
 
 		void HandlePointpickergraphic1PositionChanged (object sender, EventArgs e)
 		{
 			if (Point != pointpickergraphic1.Position) {
+				active = false;
 				spinX.Value = pointpickergraphic1.Position.X;
 				spinY.Value = pointpickergraphic1.Position.Y;
+				active = true;
 				OnPointPicked ();
 			}
 		}
 		
 		private void HandleSpinXValueChanged (object sender, EventArgs e)
 		{
-			pointpickergraphic1.Position = Point; 
-			OnPointPicked ();
+			if (active) {
+				pointpickergraphic1.Position = Point; 
+				OnPointPicked ();
+			}
 		}
 		
 		private void HandleSpinYValueChanged (object sender, EventArgs e)
 		{
-			pointpickergraphic1.Position = Point;
-			OnPointPicked ();
+			if (active) {
+				pointpickergraphic1.Position = Point;
+				OnPointPicked ();
+			}
 		}
 		
 		protected override void OnShown ()
 		{
 			base.OnShown ();
 			Point = DefaultPoint;
+			
+			spinX.ValueChanged += HandleSpinXValueChanged;
+			spinY.ValueChanged += HandleSpinYValueChanged;
+			pointpickergraphic1.PositionChanged += HandlePointpickergraphic1PositionChanged;
+			
+			pointpickergraphic1.Init (DefaultPoint);
 		}
 		
 		#region Protected Methods
