@@ -44,6 +44,41 @@ namespace Pinta.Core
 			return false;
 		}
 
-		public abstract void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois);
+		#region Overrideable Render Methods
+		public virtual void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		{
+			foreach (var rect in rois)
+				RenderEffect (src, dst, rect);
+		}
+
+		protected unsafe virtual void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		{
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			int src_width = src.Width;
+			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
+			int dst_width = dst.Width;
+
+			for (int y = roi.Y; y < roi.Bottom; ++y) {
+				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
+				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
+				RenderLine (srcPtr, dstPtr, roi.Width);
+			}
+		}
+
+		protected unsafe virtual void RenderLine (ColorBgra* src, ColorBgra* dst, int length)
+		{
+			while (length > 0) {
+				*dst = RenderPixel (*src);
+				++dst;
+				++src;
+				--length;
+			}
+		}
+
+		protected virtual ColorBgra RenderPixel (ColorBgra color)
+		{
+			return color;
+		}
+		#endregion
 	}
 }

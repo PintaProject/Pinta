@@ -1,5 +1,5 @@
 // 
-// RedEyeRemoveEffect.cs
+// Sharpen Effect.cs
 //  
 // Author:
 //       Krzysztof Marecki <marecki.krzysztof@gmail.com>
@@ -30,27 +30,25 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-	public class RedEyeRemoveEffect : BaseEffect
+	public class SharpenEffect : LocalHistogramEffect
 	{
-		private UnaryPixelOp op;
-		
 		public override string Icon {
-			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
+			get { return "Menu.Effects.Photo.Sharpen.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Red Eye Removal"); }
+			get { return Mono.Unix.Catalog.GetString ("Sharpen"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
-
-		public RedEyeRemoveData Data { get; private set; }
 		
-		public RedEyeRemoveEffect ()
+		public SharpenData Data { get; private set; }
+		
+		public SharpenEffect ()
 		{
-			Data = new  RedEyeRemoveData ();
+			Data = new SharpenData ();
 		}
 		
 		public override bool LaunchConfiguration ()
@@ -60,7 +58,6 @@ namespace Pinta.Core
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
 				dialog.Destroy ();
 				return true;
 			}
@@ -71,19 +68,21 @@ namespace Pinta.Core
 		
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op.Apply (dest, src, rois);
+			foreach (Gdk.Rectangle rect in rois)
+				RenderRect (Data.Amount, src, dest, rect.ToCairoRectangle ());
+		}
+		
+		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		{
+			ColorBgra median = GetPercentile(50, area, hb, hg, hr, ha);
+			return ColorBgra.Lerp(src, median, -0.5f);
 		}
 	}
 	
-	public class RedEyeRemoveData
+	public class SharpenData
 	{
-		[MinimumValue (0), MaximumValue (100)]
-		public int Tolerance = 70;
-		
-		[MinimumValue (0), MaximumValue (100)]
-		[Caption ("Saturation percentage")]
-		[Hint ("Hint : For best results, first use selection tools to select each eye")]
-		public int Saturation = 90;
+		[MinimumValue (1), MaximumValue (20)]
+		public int Amount = 2;
 	}
 }
 

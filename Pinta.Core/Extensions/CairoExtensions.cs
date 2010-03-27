@@ -566,7 +566,7 @@ namespace Pinta.Core
 
 			return new Color (dstPtr->R / 255f, dstPtr->G / 255f, dstPtr->B / 255f, dstPtr->A / 255f);
 		}
-		
+
 		public unsafe static void SetPixel (this Cairo.ImageSurface surf, int x, int y, Color color)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
@@ -579,11 +579,32 @@ namespace Pinta.Core
 			dstPtr->A = (byte)(color.A * 255);
 		}
 
+		public unsafe static void SetPixel (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y, Color color)
+		{
+			ColorBgra* dstPtr = surfDataPtr;
+
+			dstPtr += (x) + (y * surfWidth);
+
+			dstPtr->R = (byte)(color.R * 255);
+			dstPtr->G = (byte)(color.G * 255);
+			dstPtr->B = (byte)(color.B * 255);
+			dstPtr->A = (byte)(color.A * 255);
+		}
+
 		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, int x, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
+
+			return *dstPtr;
+		}
+
+		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
+		{
+			ColorBgra* dstPtr = surfDataPtr;
+
+			dstPtr += (x) + (y * surfWidth);
 
 			return *dstPtr;
 		}
@@ -704,11 +725,11 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
-		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += (x) + (y * srcWidth);
+			dstPtr += (x) + (y * surfWidth);
 
 			return dstPtr;
 		}
@@ -726,11 +747,11 @@ namespace Pinta.Core
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += (x) + (y * srcWidth);
+			dstPtr += (x) + (y * surfWidth);
 
 			return *dstPtr;
 		}
@@ -744,11 +765,11 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
-		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int y)
+		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += y * srcWidth;
+			dstPtr += y * surfWidth;
 
 			return dstPtr;
 		}

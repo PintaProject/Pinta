@@ -1,5 +1,5 @@
 // 
-// RedEyeRemoveEffect.cs
+// EdgeDetectEffect.cs
 //  
 // Author:
 //       Krzysztof Marecki <marecki.krzysztof@gmail.com>
@@ -30,27 +30,27 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-	public class RedEyeRemoveEffect : BaseEffect
+	public class EdgeDetectEffect : ColorDifferenceEffect
 	{
-		private UnaryPixelOp op;
+		private double[][] weights;
 		
 		public override string Icon {
-			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
+			get { return "Menu.Effects.Stylize.EdgeDetect.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Red Eye Removal"); }
+			get { return Mono.Unix.Catalog.GetString ("Edge Detect"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public RedEyeRemoveData Data { get; private set; }
+		public EdgeDetectData Data { get; private set; }
 		
-		public RedEyeRemoveEffect ()
+		public EdgeDetectEffect ()
 		{
-			Data = new  RedEyeRemoveData ();
+			Data = new EdgeDetectData ();
 		}
 		
 		public override bool LaunchConfiguration ()
@@ -60,7 +60,6 @@ namespace Pinta.Core
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
 				dialog.Destroy ();
 				return true;
 			}
@@ -71,19 +70,41 @@ namespace Pinta.Core
 		
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op.Apply (dest, src, rois);
+			SetWeights ();
+			base.RenderColorDifferenceEffect (weights, src, dest, rois);
+		}
+		
+		private void SetWeights ()
+		{
+			weights = new double[3][];
+            for (int i = 0; i < this.weights.Length; ++i) {
+                this.weights[i] = new double[3];
+            }
+
+            // adjust and convert angle to radians
+            double r = (double)Data.Angle * 2.0 * Math.PI / 360.0;
+
+            // angle delta for each weight
+            double dr = Math.PI / 4.0;
+
+            // for r = 0 this builds an edge detect filter pointing straight left
+
+            this.weights[0][0] = Math.Cos(r + dr);
+            this.weights[0][1] = Math.Cos(r + 2.0 * dr);
+            this.weights[0][2] = Math.Cos(r + 3.0 * dr);
+
+            this.weights[1][0] = Math.Cos(r);
+            this.weights[1][1] = 0;
+            this.weights[1][2] = Math.Cos(r + 4.0 * dr);
+
+            this.weights[2][0] = Math.Cos(r - dr);
+            this.weights[2][1] = Math.Cos(r - 2.0 * dr);
+            this.weights[2][2] = Math.Cos(r - 3.0 * dr);
 		}
 	}
 	
-	public class RedEyeRemoveData
+	public class EdgeDetectData
 	{
-		[MinimumValue (0), MaximumValue (100)]
-		public int Tolerance = 70;
-		
-		[MinimumValue (0), MaximumValue (100)]
-		[Caption ("Saturation percentage")]
-		[Hint ("Hint : For best results, first use selection tools to select each eye")]
-		public int Saturation = 90;
+		public double Angle = 45;
 	}
 }
-

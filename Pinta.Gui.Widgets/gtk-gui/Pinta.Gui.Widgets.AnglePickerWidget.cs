@@ -25,7 +25,11 @@ namespace Pinta.Gui.Widgets {
         
         private Pinta.Gui.Widgets.AnglePickerGraphic anglepickergraphic1;
         
+        private Gtk.Alignment alignment1;
+        
         private Gtk.SpinButton spin;
+        
+        private Gtk.Alignment alignment2;
         
         private Gtk.Button button;
         
@@ -76,46 +80,56 @@ namespace Pinta.Gui.Widgets {
             w4.Position = 0;
             w4.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
+            this.alignment1 = new Gtk.Alignment(0.5F, 0F, 1F, 0F);
+            this.alignment1.Name = "alignment1";
+            // Container child alignment1.Gtk.Container+ContainerChild
             this.spin = new Gtk.SpinButton(0, 360, 1);
             this.spin.CanFocus = true;
             this.spin.Name = "spin";
             this.spin.Adjustment.PageIncrement = 10;
             this.spin.ClimbRate = 1;
             this.spin.Numeric = true;
-            this.hbox2.Add(this.spin);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.hbox2[this.spin]));
-            w5.Position = 1;
-            w5.Expand = false;
-            w5.Fill = false;
+            this.alignment1.Add(this.spin);
+            this.hbox2.Add(this.alignment1);
+            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.hbox2[this.alignment1]));
+            w6.Position = 1;
+            w6.Expand = false;
+            w6.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
+            this.alignment2 = new Gtk.Alignment(0.5F, 0F, 1F, 0.1F);
+            this.alignment2.Name = "alignment2";
+            // Container child alignment2.Gtk.Container+ContainerChild
             this.button = new Gtk.Button();
+            this.button.WidthRequest = 28;
+            this.button.HeightRequest = 24;
             this.button.CanFocus = true;
             this.button.Name = "button";
             this.button.UseUnderline = true;
             // Container child button.Gtk.Container+ContainerChild
-            Gtk.Alignment w6 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w7 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w7 = new Gtk.HBox();
-            w7.Spacing = 2;
+            Gtk.HBox w8 = new Gtk.HBox();
+            w8.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w8 = new Gtk.Image();
-            w8.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-go-back", Gtk.IconSize.Menu, 16);
+            Gtk.Image w9 = new Gtk.Image();
+            w9.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-go-back", Gtk.IconSize.Menu, 16);
+            w8.Add(w9);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w11 = new Gtk.Label();
+            w8.Add(w11);
             w7.Add(w8);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w10 = new Gtk.Label();
-            w7.Add(w10);
-            w6.Add(w7);
-            this.button.Add(w6);
-            this.hbox2.Add(this.button);
-            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox2[this.button]));
-            w14.Position = 2;
-            w14.Expand = false;
-            w14.Fill = false;
+            this.button.Add(w7);
+            this.alignment2.Add(this.button);
+            this.hbox2.Add(this.alignment2);
+            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(this.hbox2[this.alignment2]));
+            w16.Position = 2;
+            w16.Expand = false;
+            w16.Fill = false;
             this.vbox.Add(this.hbox2);
-            Gtk.Box.BoxChild w15 = ((Gtk.Box.BoxChild)(this.vbox[this.hbox2]));
-            w15.Position = 1;
-            w15.Expand = false;
-            w15.Fill = false;
+            Gtk.Box.BoxChild w17 = ((Gtk.Box.BoxChild)(this.vbox[this.hbox2]));
+            w17.Position = 1;
+            w17.Expand = false;
+            w17.Fill = false;
             this.Add(this.vbox);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

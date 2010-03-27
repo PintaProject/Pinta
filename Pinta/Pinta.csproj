@@ -43,7 +43,7 @@
     <Reference Include="System.Core">
     </Reference>
     <Reference Include="Mono.Posix" />
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -98,6 +98,9 @@
     <Compile Include="Platform.cs" />
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="ConfigurableEffects\RedEyeRemoveEffect.cs" />
+    <Compile Include="ConfigurableEffects\SharpenEffect.cs" />
+    <Compile Include="ConfigurableEffects\SoftenPortraitEffect.cs" />
+    <Compile Include="ConfigurableEffects\EdgeDetectEffect.cs" />
     <Compile Include="ConfigurableEffects\RadialBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\MotionBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\FragmentEffect.cs" />
