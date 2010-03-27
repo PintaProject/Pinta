@@ -126,28 +126,32 @@ namespace Pinta.Gui.Widgets
 			Rectangle rect = GdkWindow.GetBounds ();
 			Cairo.PointD pos = PositionToClientPt (Position);
 			Cairo.Color black = new Cairo.Color (0, 0, 0);
+			
 			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				Cairo.Rectangle outRect = Rectangle.Inflate (rect, -1, -1).ToCairoRectangle ();
 				//background
 				g.SetSource (thumbnail, 0.0, 0.0);
 				g.Paint ();
+
+				g.DrawRectangle (new Cairo.Rectangle (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1), new Cairo.Color (.75, .75, .75), 1);
+				g.DrawRectangle (new Cairo.Rectangle (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3), black, 1);
 				
-				g.Color = new Cairo.Color (0, 0, 0);
-				g.DrawRectangle (outRect, new Cairo.Color (0, 0, 0), 1);
 				//cursor
-				g.DrawLine (new Cairo.PointD (pos.X, rect.Top), new Cairo.PointD (pos.X, rect.Bottom), black, 1);
-				g.DrawLine (new Cairo.PointD (rect.Left, pos.Y), new Cairo.PointD (rect.Right, pos.Y), black, 1);
+				g.DrawLine (new Cairo.PointD (pos.X + 1, rect.Top + 2), new Cairo.PointD (pos.X + 1, rect.Bottom - 2), black, 1);
+				g.DrawLine (new Cairo.PointD (rect.Left + 2, pos.Y + 1), new Cairo.PointD (rect.Right - 2, pos.Y + 1), black, 1);
+				
 				//point
-				g.DrawEllipse (new Cairo.Rectangle (pos.X - 1, pos.Y - 1, 2, 2), black, 2);
+				g.DrawEllipse (new Cairo.Rectangle (pos.X - 1, pos.Y - 1, 3, 3), black, 2);
 			}
 			return true;
 		}
 
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
-			// Calculate desired size here.
-			requisition.Height = 50;
-			requisition.Width = 50;
+			// Always be X pixels tall, but maintain aspect ratio
+			Cairo.Point imagesize = PintaCore.Workspace.ImageSize;
+			
+			requisition.Height = 65;
+			requisition.Width = (imagesize.X * requisition.Height) / imagesize.Y;
 			thumbnail = null;
 		}
 		#endregion
