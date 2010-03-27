@@ -82,7 +82,6 @@ namespace Pinta.Gui.Widgets {
             this.hbox2.Add(this.pointpickergraphic1);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox2[this.pointpickergraphic1]));
             w4.Position = 0;
-            w4.Expand = false;
             w4.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
             this.table1 = new Gtk.Table(((uint)(2)), ((uint)(3)), false);
