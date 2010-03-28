@@ -62,6 +62,8 @@
     <Compile Include="Widgets\PointPickerGraphic.cs" />
     <Compile Include="Widgets\PointPickerWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPickerWidget.cs" />
+    <Compile Include="Widgets\ComboBoxWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ComboBoxWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -27,6 +27,7 @@
 using System;
 using System.Reflection;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Pinta.Gui.Widgets
 {
@@ -66,6 +67,7 @@ namespace Pinta.Gui.Widgets
 				string caption = null;
 				string hint = null;
 				bool skip = false;
+				bool combo = false;
 				
 				object[] attrs = mi.GetCustomAttributes (false);
 
@@ -76,6 +78,9 @@ namespace Pinta.Gui.Widgets
 						caption = ((CaptionAttribute)attr).Caption;
 					else if (attr is HintAttribute)
 						hint = ((HintAttribute)attr).Hint;
+					else if (attr is StaticListAttribute)
+						combo = true;
+					
 				}
 
 				if (skip)
@@ -86,6 +91,8 @@ namespace Pinta.Gui.Widgets
 
 				if (mType == typeof (int))
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
+				else if (combo && mType == typeof (string))
+					AddWidget (CreateComboBox (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
 				else if (mType == typeof (Gdk.Point))
@@ -108,6 +115,33 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Control Builders
+
+		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
+		{
+			Dictionary<string, object> dict = null;;
+			string dictName;
+			foreach (var attr in attributes) {
+				if (attr is StaticListAttribute)
+					dict = (Dictionary<string, object>)GetValue (((StaticListAttribute)attr).dictionaryName, o);
+			}
+
+			List<string> entries = new List<string> ();
+			foreach (string str in dict.Keys)
+				entries.Add (str);
+				
+			ComboBoxWidget widget = new ComboBoxWidget (entries.ToArray ());
+
+			widget.Label = caption;
+			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
+			widget.Active = entries.IndexOf( (string)GetValue (member, o));
+			
+			widget.Changed += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.ActiveText);
+			};
+			
+			return widget;
+		}
+
 		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
@@ -256,6 +290,18 @@ namespace Pinta.Gui.Widgets
 			}
 			
 			return sb.ToString ();
+		}
+		
+		private object GetValue(string name, object o)
+		{
+			var fi = o.GetType ().GetField (name);
+			if (fi != null)
+				return fi.GetValue (o);
+			var pi = o.GetType ().GetProperty (name);
+			if (pi ==  null)
+				return null;
+			var getMethod = pi.GetGetMethod ();
+			return getMethod.Invoke (o, new object[0]);
 		}
 		#endregion
 	}

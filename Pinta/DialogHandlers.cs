@@ -58,6 +58,8 @@ namespace Pinta
 			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectsSharpenActivated;
 			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectsSoftenPortraitActivated;
 			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectsEdgeDetectActivated;
+			PintaCore.Actions.Effects.Clouds.Activated += HandleEffectCloudsActivated;
+			
 		}
 
 		#region Handlers
@@ -270,7 +272,12 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new SoftenPortraitEffect ());	
 		}
-		
+
+		private void HandleEffectCloudsActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new CloudsEffect ());	
+		}
+
 		private void HandleEffectsEdgeDetectActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new EdgeDetectEffect ());

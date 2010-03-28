@@ -50,6 +50,7 @@ namespace Pinta.Core
 		public Gtk.Action RedEyeRemove { get; private set; }
 		public Gtk.Action Sharpen { get; private set; }
 		public Gtk.Action SoftenPortrait { get; private set; }
+		public Gtk.Action Clouds { get; private set; }
 		public Gtk.Action EdgeDetect { get; private set; }
 		
 
@@ -70,6 +71,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
 			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
 			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
+			fact.Add ("Menu.Effects.Render.Clouds.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.Clouds.png")));
 			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
 			
 			fact.AddDefault ();
@@ -85,7 +87,6 @@ namespace Pinta.Core
 
 			Distort.Visible = false;
 			Noise.Visible = false;
-			Render.Visible = false;
 			
 			// Menu items
 			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
@@ -99,6 +100,7 @@ namespace Pinta.Core
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 			Sharpen = new Gtk.Action ("Sharpen", Mono.Unix.Catalog.GetString ("Sharpen..."), null, "Menu.Effects.Photo.Sharpen.png");
 			SoftenPortrait = new Gtk.Action ("Soften Portrait", Mono.Unix.Catalog.GetString ("Soften Portrait..."), null, "Menu.Effects.Photo.SoftenPortrait.png");
+			Clouds = new Gtk.Action ("Clouds", Mono.Unix.Catalog.GetString ("Clouds..."), null, "Menu.Effects.Render.Clouds.png");
 			EdgeDetect = new Gtk.Action ("EdgeDetect", Mono.Unix.Catalog.GetString ("Edge Detect..."), null, "Menu.Effects.Stylize.EdgeDetect.png");
 		}
 
@@ -130,6 +132,8 @@ namespace Pinta.Core
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem ());
 			photo_sub_menu.Append (Sharpen.CreateMenuItem ());
 			photo_sub_menu.Append (SoftenPortrait.CreateMenuItem ());
+			
+			render_sub_menu.Append (Clouds.CreateMenuItem ());
 			
 			stylize_sub_menu.Append (EdgeDetect.CreateMenuItem ());
 		}

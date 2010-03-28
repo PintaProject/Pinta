@@ -105,6 +105,7 @@
     <Compile Include="ConfigurableEffects\MotionBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\FragmentEffect.cs" />
     <Compile Include="ConfigurableEffects\ZoomBlurEffect.cs" />
+    <Compile Include="ConfigurableEffects\CloudsEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
