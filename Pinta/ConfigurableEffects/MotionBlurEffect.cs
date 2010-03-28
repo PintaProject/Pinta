@@ -44,27 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public MotionBlurData Data { get; private set; }
+		public MotionBlurData Data { get { return EffectData as MotionBlurData; } }
 
 		public MotionBlurEffect ()
 		{
-			Data = new MotionBlurData ();
+			EffectData = new MotionBlurData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -128,7 +117,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class MotionBlurData
+		public class MotionBlurData : EffectData
 		{
 			[Skip]
 			public bool IsEmpty { get { return Distance == 0; } }

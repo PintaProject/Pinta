@@ -59,11 +59,11 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public SoftenPortraitData Data { get; private set; }
+		public SoftenPortraitData Data { get { return EffectData as SoftenPortraitData; } }
 		
 		public SoftenPortraitEffect ()
 		{
-			Data = new SoftenPortraitData ();
+			EffectData = new SoftenPortraitData ();
 			
 			blurEffect = new GaussianBlurEffect ();
 			bacAdjustment = new BrightnessContrastEffect ();
@@ -73,17 +73,7 @@ namespace Pinta.Core
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 		
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
@@ -117,7 +107,7 @@ namespace Pinta.Core
 		}
 	}
 	
-	public class SoftenPortraitData
+	public class SoftenPortraitData : EffectData
 	{
 		[MinimumValue (0), MaximumValue (10)]
 		public int Softness = 5;

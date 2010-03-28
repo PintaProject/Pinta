@@ -43,18 +43,18 @@ namespace Pinta.Core
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Ink Sketch"); }
+			get { return Mono.Unix.Catalog.GetString ("Pencil Sketch"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
 
-		public PencilSketchData Data { get; private set; }
+		public PencilSketchData Data { get { return EffectData as PencilSketchData; } }
 		
 		public PencilSketchEffect ()
 		{
-			Data = new PencilSketchData ();
+			EffectData = new PencilSketchData ();
 
 			blurEffect = new GaussianBlurEffect ();
 			desaturateOp = new UnaryPixelOps.Desaturate ();
@@ -65,18 +65,7 @@ namespace Pinta.Core
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -115,7 +104,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class PencilSketchData
+		public class PencilSketchData : EffectData
 		{
 			[Caption ("Pencil Tip Size"), MinimumValue (1), MaximumValue (20)]
 			public int PencilTipSize = 2;

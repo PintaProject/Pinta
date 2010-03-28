@@ -48,11 +48,11 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public GlowData Data { get; private set; }
+		public GlowData Data { get { return EffectData as GlowData; } }
 		
 		public GlowEffect ()
 		{
-			Data = new GlowData ();
+			EffectData = new GlowData ();
 			
 			blurEffect = new GaussianBlurEffect ();
 			contrastEffect = new BrightnessContrastEffect ();
@@ -61,18 +61,7 @@ namespace Pinta.Core
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -96,7 +85,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class GlowData
+		public class GlowData : EffectData
 		{
 			[MinimumValue (1), MaximumValue (20)]
 			public int Radius = 6;

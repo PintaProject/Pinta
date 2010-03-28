@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HueSaturationEffect.cs
 //  
 // Author:
@@ -31,11 +31,7 @@ using Pinta.Gui.Widgets;
 namespace Pinta.Core
 {
 	public class HueSaturationEffect : BaseEffect
-	{
-		private int hue_delta;
-		private int sat_delta;
-		private int lightness;
-		
+	{		
 		UnaryPixelOp op;
 
 		public override string Icon {
@@ -48,33 +44,24 @@ namespace Pinta.Core
 
 		public override bool IsConfigurable {
 			get { return true; }
-		}
-
+		}		
+		
+		public HueSaturationEffect ()
+		{
+			EffectData = new HueSaturationData ();
+		}		
+		
 		public override bool LaunchConfiguration ()
 		{
-			HueSaturationData data = new HueSaturationData ();
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), data);
-	
-			int response = dialog.Run ();
-			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				hue_delta = data.Hue;
-				sat_delta = data.Saturation;
-				lightness = data.Lightness;
-				
-				dialog.Destroy ();
-
-				// Don't trigger anything if no options were changed
-				return !data.IsDefault;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
+			int hue_delta = Data.Hue;
+			int sat_delta =  Data.Saturation;
+			int lightness = Data.Lightness;
+			
 			if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
 				op = new UnaryPixelOps.Identity ();
 			else
@@ -83,7 +70,9 @@ namespace Pinta.Core
 			op.Apply (dest, src, rois);
 		}
 
-		private class HueSaturationData
+		private HueSaturationData Data { get { return EffectData as HueSaturationData; } }
+		
+		private class HueSaturationData : EffectData
 		{
 			[MinimumValue (-180), MaximumValue (180)]
 			public int Hue = 0;
@@ -94,7 +83,7 @@ namespace Pinta.Core
 			public int Lightness = 0;
 			
 			[Skip]
-			public bool IsDefault {
+			public override bool IsDefault {
 				get { return Hue == 0 && Saturation == 100 && Lightness == 0; }
 			}
 		}

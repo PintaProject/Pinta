@@ -44,27 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public GaussianBlurData Data { get; private set; }
+		public GaussianBlurData Data { get { return EffectData as GaussianBlurData; } }
 		
 		public GaussianBlurEffect ()
 		{
-			Data = new GaussianBlurData ();
+			EffectData = new GaussianBlurData ();
 		}
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -279,13 +268,13 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class GaussianBlurData
+		public class GaussianBlurData : EffectData
 		{
 			[MinimumValue (0), MaximumValue (200)]
 			public int Radius = 2;
 			
 			[Skip]
-			public bool IsEmpty { get { return Radius == 0; } }
+			public override bool IsDefault { get { return Radius == 0; } }
 		}
 	}
 }

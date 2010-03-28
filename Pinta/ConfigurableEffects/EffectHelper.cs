@@ -1,5 +1,5 @@
 // 
-// ObservableObject.cs
+// ConfigurableEffectHelper.cs
 //  
 // Author:
 //       Greg Lowe <greg@vis.net.nz>
@@ -25,29 +25,42 @@
 // THE SOFTWARE.
 
 using System;
+using Pinta.Core;
+using Pinta.Gui.Widgets;
 using System.ComponentModel;
 
-namespace Pinta.Core
+namespace Pinta
 {
 
-	public abstract class ObservableObject
+	public static class EffectHelper
 	{
-		public ObservableObject ()
+		public static bool LaunchSimpleEffectDialog (BaseEffect effect)
 		{
-		}
-				
-		public event PropertyChangedEventHandler PropertyChanged;
-				
-		protected void SetValue<T> (string propertyName, ref T member, T value)
-		{
-			member = value;			
-			FirePropertyChanged (propertyName);
-		}
-		
-		protected void FirePropertyChanged (string propertyName)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));			
+			if (effect == null)
+				throw new ArgumentNullException ("effect");
+			
+			if (effect.EffectData == null)
+				throw new ArgumentException ("effect.EffectData is null.");
+			
+			var dialog = new SimpleEffectDialog (effect.Text,
+			                                     PintaCore.Resources.GetIcon (effect.Icon),
+			                                     effect.EffectData);
+			
+			// Hookup event handling for live preview.
+			dialog.EffectDataChanged += (o, e) => {
+				if (effect.EffectData != null)
+					effect.EffectData.FirePropertyChanged (e.PropertyName);
+			};
+			
+			int response = dialog.Run ();
+
+			bool ret = false;
+			if (response == (int)Gtk.ResponseType.Ok && effect.EffectData != null)
+				ret = !effect.EffectData.IsDefault;
+
+			dialog.Destroy ();
+
+			return ret;
 		}
 	}
 }

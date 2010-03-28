@@ -46,27 +46,30 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public RedEyeRemoveData Data { get; private set; }
+		public RedEyeRemoveData Data { get { return EffectData as RedEyeRemoveData; } }
 		
 		public RedEyeRemoveEffect ()
 		{
-			Data = new  RedEyeRemoveData ();
+			EffectData = new RedEyeRemoveData ();
 		}
 		
 		public override bool LaunchConfiguration ()
 		{
 			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
 
+			// Hookup event handling for live preview.
+			dialog.EffectDataChanged += (o, e) => {
+				if (EffectData != null) {
+					op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
+					EffectData.FirePropertyChanged (e.PropertyName);
+				}
+			};
+			
 			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-				dialog.Destroy ();
-				return true;
-			}
-
+			bool ret = (response == (int)Gtk.ResponseType.Ok);
 			dialog.Destroy ();
-			return false;
+			
+			return ret;
 		}
 		
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
@@ -75,7 +78,7 @@ namespace Pinta.Core
 		}
 	}
 	
-	public class RedEyeRemoveData
+	public class RedEyeRemoveData : EffectData
 	{
 		[MinimumValue (0), MaximumValue (100)]
 		public int Tolerance = 70;

@@ -52,11 +52,11 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public InkSketchData Data { get; private set; }
+		public InkSketchData Data { get { return EffectData as InkSketchData; } }
 		
 		public InkSketchEffect ()
 		{
-			Data = new InkSketchData ();
+			EffectData = new InkSketchData ();
 
 			glowEffect = new GlowEffect ();
 			desaturateOp = new UnaryPixelOps.Desaturate ();
@@ -79,18 +79,7 @@ namespace Pinta.Core
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -182,7 +171,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class InkSketchData
+		public class InkSketchData : EffectData
 		{
 			[Caption ("Ink Outline"), MinimumValue (0), MaximumValue (99)]
 			public int InkOutline = 50;

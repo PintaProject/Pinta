@@ -1,5 +1,5 @@
 // 
-// ObservableObject.cs
+// ProgressDialog.cs
 //  
 // Author:
 //       Greg Lowe <greg@vis.net.nz>
@@ -25,29 +25,55 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel;
+using Pinta.Core;
+using Debug = System.Diagnostics.Debug;
 
-namespace Pinta.Core
+namespace Pinta
 {
 
-	public abstract class ObservableObject
+
+	public partial class ProgressDialog : Gtk.Dialog, IProgressDialog
 	{
-		public ObservableObject ()
+		uint timeout_id;
+		
+		public ProgressDialog ()
 		{
-		}
-				
-		public event PropertyChangedEventHandler PropertyChanged;
-				
-		protected void SetValue<T> (string propertyName, ref T member, T value)
-		{
-			member = value;			
-			FirePropertyChanged (propertyName);
+			this.Build ();
+			timeout_id = 0;
+			Modal = true;
+			Hide ();
 		}
 		
-		protected void FirePropertyChanged (string propertyName)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));			
+		public string Text {
+			get { return label.Text; }
+			set { label.Text = value; }
 		}
+		
+		public double Progress {
+			get { return progress_bar.Fraction; }
+			set { progress_bar.Fraction = value; }
+		}
+		
+		public event EventHandler<EventArgs> Canceled;
+		
+		void IProgressDialog.Show () {
+			timeout_id = GLib.Timeout.Add (500, () => {
+				this.Show ();
+				timeout_id = 0;
+				return false;
+			});
+		}
+		
+		void IProgressDialog.Hide () {
+			if (timeout_id != 0)
+				GLib.Source.Remove (timeout_id);
+			this.Hide ();
+		}
+		
+		protected override void OnResponse (Gtk.ResponseType response_id){
+			Debug.WriteLine ("Cancel dialog repsonse.");
+			if (Canceled != null)
+				Canceled (this, EventArgs.Empty);
+		}		
 	}
 }

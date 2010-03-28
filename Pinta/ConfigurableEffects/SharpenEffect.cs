@@ -44,26 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 		
-		public SharpenData Data { get; private set; }
+		public SharpenData Data { get { return EffectData as SharpenData; } }
 		
 		public SharpenEffect ()
 		{
-			Data = new SharpenData ();
+			EffectData = new SharpenData ();
 		}
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 		
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
@@ -79,7 +69,7 @@ namespace Pinta.Core
 		}
 	}
 	
-	public class SharpenData
+	public class SharpenData : EffectData
 	{
 		[MinimumValue (1), MaximumValue (20)]
 		public int Amount = 2;
