@@ -108,6 +108,9 @@
     <Compile Include="ConfigurableEffects\CloudsEffect.cs" />
     <Compile Include="ConfigurableEffects\JuliaFractalEffect.cs" />
     <Compile Include="ConfigurableEffects\MandelbrotFractalEffect.cs" />
+    <Compile Include="ConfigurableEffects\EffectHelper.cs" />
+    <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
+    <Compile Include="Dialogs\ProgressDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

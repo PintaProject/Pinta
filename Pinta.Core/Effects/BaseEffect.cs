@@ -34,6 +34,7 @@ namespace Pinta.Core
 		public abstract string Icon { get; }
 		public abstract string Text { get; }
 		public virtual bool IsConfigurable { get { return false; } }
+		public EffectData EffectData { get; protected set; }
 		
 		// Return true to perform effect, false to cancel effect
 		public virtual bool LaunchConfiguration ()
@@ -80,5 +81,35 @@ namespace Pinta.Core
 			return color;
 		}
 		#endregion
+				
+		// Effects that have any configuration state which is changed
+		// during live preview, and this this state is stored in
+		// non-value-type fields should override this method.
+		// Generally this state should be stored in the effect data
+        // class, not in the effect.
+		public virtual BaseEffect Clone ()
+		{
+			var effect = (BaseEffect) this.MemberwiseClone ();
+			if (effect.EffectData != null)
+				effect.EffectData = EffectData.Clone ();
+			return effect;
+		}		
+	}
+	
+	public abstract class EffectData : ObservableObject
+	{
+		// EffectData classes that have any state stored in non-value-type
+		// fields must override this method, and clone those members.
+		public virtual EffectData Clone ()
+		{
+			return (EffectData) this.MemberwiseClone ();
+		}
+		
+		public new void FirePropertyChanged (string propertyName)
+		{
+			base.FirePropertyChanged (propertyName);
+		}
+		
+		public virtual bool IsDefault { get { return false; } }
 	}
 }

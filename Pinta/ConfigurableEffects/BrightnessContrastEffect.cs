@@ -48,30 +48,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public BrightnessContrastData Data { get; private set; }
+		public BrightnessContrastData Data { get { return EffectData as BrightnessContrastData; } }
 		
 		public BrightnessContrastEffect ()
 		{
-			Data = new BrightnessContrastData ();
+			EffectData = new BrightnessContrastData ();
 		}
 		
 		public override bool LaunchConfiguration ()
 		{
-			Data = new BrightnessContrastData ();
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-			
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				
-				// Don't trigger anything if no options were changed
-				return !Data.IsDefault;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
@@ -157,13 +143,13 @@ namespace Pinta.Core
 			}
 		}
 		
-		public class BrightnessContrastData
+		public class BrightnessContrastData : EffectData
 		{
 			public int Brightness = 0;
 			public int Contrast = 0;
 			
 			[Skip]
-			public bool IsDefault {
+			public override bool IsDefault {
 				get { return Brightness == 0 && Contrast == 0; }
 			}
 		}

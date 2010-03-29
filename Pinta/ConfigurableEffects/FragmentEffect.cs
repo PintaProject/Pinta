@@ -44,27 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public FragmentData Data { get; private set; }
+		public FragmentData Data { get { return EffectData as FragmentData; } }
 
 		public FragmentEffect ()
 		{
-			Data = new FragmentData ();
+			EffectData = new FragmentData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -129,7 +118,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class FragmentData
+		public class FragmentData : EffectData
 		{
 			[MinimumValue (2), MaximumValue (50)]
 			public int Fragments = 4;

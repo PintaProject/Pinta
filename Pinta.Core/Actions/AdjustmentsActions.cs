@@ -86,32 +86,19 @@ namespace Pinta.Core
 
 		public void RegisterHandlers ()
 		{
-			Sepia.Activated += HandleSepiaActivated;
-			InvertColors.Activated += HandleInvertColorsActivated;
-			BlackAndWhite.Activated += HandleBlackAndWhiteActivated;
-			AutoLevel.Activated += HandleAutoLevelActivated;
+			Sepia.Activated += HandleAdjustmentActivated <SepiaEffect>;
+			InvertColors.Activated += HandleAdjustmentActivated <InvertColorsEffect>;
+			BlackAndWhite.Activated += HandleAdjustmentActivated <BlackAndWhiteEffect>;
+			AutoLevel.Activated += HandleAdjustmentActivated <AutoLevelEffect>;
 		}
 		#endregion
 
 		#region Action Handlers
-		private void HandleBlackAndWhiteActivated (object sender, EventArgs e)
+		private void HandleAdjustmentActivated<T> (object sender, EventArgs e)
+			where T : BaseEffect, new ()
 		{
-			PerformEffect (new BlackAndWhiteEffect ());
-		}
-
-		private void HandleInvertColorsActivated (object sender, EventArgs e)
-		{
-			PerformEffect (new InvertColorsEffect ());
-		}
-
-		private void HandleSepiaActivated (object sender, EventArgs e)
-		{
-			PerformEffect (new SepiaEffect ());
-		}
-		
-		private void HandleAutoLevelActivated (object sender, EventArgs e)
-		{
-			PerformEffect (new AutoLevelEffect ());
+			var effect = new T ();
+			PintaCore.LivePreview.Start (effect);
 		}
 		#endregion
 

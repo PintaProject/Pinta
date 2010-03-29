@@ -139,8 +139,6 @@
     <Compile Include="Extensions\ToolBarToggleButton.cs" />
     <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
     <Compile Include="Classes\ObservableObject.cs" />
-    <Compile Include="Classes\PropertyChangedEventArgs.cs" />
-    <Compile Include="Classes\PropertyChangedEventHandler.cs" />
     <Compile Include="Classes\LayerProperties.cs" />
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
@@ -152,6 +150,11 @@
     <Compile Include="Classes\IndexEventArgs.cs" />
     <Compile Include="Effects\LocalHistogramEffect.cs" />
     <Compile Include="Effects\ColorDifferenceEffect.cs" />
+    <Compile Include="EventArgs\LivePreviewEndedEventArgs.cs" />
+    <Compile Include="EventArgs\LivePreviewRenderUpdatedEventArgs.cs" />
+    <Compile Include="EventArgs\LivePreviewStartedEventArgs.cs" />
+    <Compile Include="Managers\LivePreviewManager.cs" />
+    <Compile Include="Classes\AsyncEffectRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

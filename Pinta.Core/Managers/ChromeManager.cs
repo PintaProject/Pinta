@@ -34,20 +34,32 @@ namespace Pinta.Core
 		private Toolbar tool_toolbar;
 		private DrawingArea drawing_area;
 		private Window main_window;
+		private IProgressDialog progress_dialog;
+		private bool main_window_busy;
 		
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public DrawingArea DrawingArea { get { return drawing_area; } }
 		public Window MainWindow { get { return main_window; } }
+		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		
 		public ChromeManager ()
 		{
 		}
 		
-		public void Initialize (Toolbar toolToolBar, Label statusBarText, DrawingArea drawingArea, TreeView historyStack, Window mainWindow)
+		public void Initialize (Toolbar toolToolBar,
+		                        Label statusBarText,
+		                        DrawingArea drawingArea,
+		                        TreeView historyStack,
+		                        Window mainWindow,
+		                        IProgressDialog progressDialog)
 		{
+			if (progressDialog == null)
+				throw new ArgumentNullException ("progressDialog");
+			
 			tool_toolbar = toolToolBar;
 			drawing_area = drawingArea;
 			main_window = mainWindow;
+			progress_dialog = progressDialog;
 		}
 
 		#region Public Methods
@@ -68,5 +80,28 @@ namespace Pinta.Core
 		#region Public Events
 		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
 		#endregion
+		
+		public bool MainWindowBusy {
+			get { return main_window_busy; }
+			set {
+				main_window_busy = value;
+				
+				if (main_window_busy) {
+					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+				} else {
+					main_window.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.DefaultCursor;
+				}
+			}
+		}
+	}
+		
+	public interface IProgressDialog
+	{
+		void Show ();
+		void Hide ();
+		string Title { get; set; }
+		string Text { get; set; }
+		double Progress { get; set; }
+		event EventHandler<EventArgs> Canceled;
 	}
 }

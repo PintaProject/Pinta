@@ -46,26 +46,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public EdgeDetectData Data { get; private set; }
+		public EdgeDetectData Data { get { return EffectData as EdgeDetectData; } }
 		
 		public EdgeDetectEffect ()
 		{
-			Data = new EdgeDetectData ();
+			EffectData = new EdgeDetectData ();
 		}
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 		
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
@@ -103,7 +93,7 @@ namespace Pinta.Core
 		}
 	}
 	
-	public class EdgeDetectData
+	public class EdgeDetectData : EffectData
 	{
 		public double Angle = 45;
 	}

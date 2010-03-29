@@ -44,27 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public OilPaintingData Data { get; private set; }
+		public OilPaintingData Data { get { return EffectData as OilPaintingData; } }
 
 		public OilPaintingEffect ()
 		{
-			Data = new OilPaintingData ();
+			EffectData = new OilPaintingData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -193,7 +182,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class OilPaintingData
+		public class OilPaintingData : EffectData
 		{
 			[Caption ("Brush Size"), MinimumValue (1), MaximumValue (8)]
 			public int BrushSize = 3;

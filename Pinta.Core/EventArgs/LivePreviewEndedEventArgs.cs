@@ -1,5 +1,5 @@
 // 
-// ObservableObject.cs
+// LivePreviewEndedEventArgs.cs
 //  
 // Author:
 //       Greg Lowe <greg@vis.net.nz>
@@ -25,29 +25,25 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel;
 
 namespace Pinta.Core
 {
-
-	public abstract class ObservableObject
+	public enum RenderStatus {
+		Completed,
+		Canceled,
+		Faulted
+	}	
+	
+	public class LivePreviewEndedEventArgs : EventArgs
 	{
-		public ObservableObject ()
+		public LivePreviewEndedEventArgs (RenderStatus status, Exception exception)
 		{
-		}
-				
-		public event PropertyChangedEventHandler PropertyChanged;
-				
-		protected void SetValue<T> (string propertyName, ref T member, T value)
-		{
-			member = value;			
-			FirePropertyChanged (propertyName);
+			this.Status = status;
+			this.Exception = exception;
 		}
 		
-		protected void FirePropertyChanged (string propertyName)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));			
-		}
-	}
+		public RenderStatus Status { get; private set; }
+		
+		public Exception Exception { get; private set; }
+	}	
 }
