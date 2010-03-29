@@ -106,6 +106,8 @@
     <Compile Include="ConfigurableEffects\FragmentEffect.cs" />
     <Compile Include="ConfigurableEffects\ZoomBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\CloudsEffect.cs" />
+    <Compile Include="ConfigurableEffects\JuliaFractalEffect.cs" />
+    <Compile Include="ConfigurableEffects\MandelbrotFractalEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

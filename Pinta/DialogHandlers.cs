@@ -57,9 +57,10 @@ namespace Pinta
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
 			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectsSharpenActivated;
 			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectsSoftenPortraitActivated;
-			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectsEdgeDetectActivated;
 			PintaCore.Actions.Effects.Clouds.Activated += HandleEffectCloudsActivated;
-			
+			PintaCore.Actions.Effects.JuliaFractal.Activated += HandleEffectJuliaFractalActivated;
+			PintaCore.Actions.Effects.MandelbrotFractal.Activated += HandleEffectMandelbrotFractalActivated;
+			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectsEdgeDetectActivated;
 		}
 
 		#region Handlers
@@ -276,6 +277,16 @@ namespace Pinta
 		private void HandleEffectCloudsActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new CloudsEffect ());	
+		}
+
+		private void HandleEffectMandelbrotFractalActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new MandelbrotFractalEffect ());	
+		}
+
+		private void HandleEffectJuliaFractalActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.Adjustments.PerformEffect (new JuliaFractalEffect ());	
 		}
 
 		private void HandleEffectsEdgeDetectActivated (object sender, EventArgs e)

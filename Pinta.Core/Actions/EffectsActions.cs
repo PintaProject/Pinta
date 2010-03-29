@@ -51,6 +51,8 @@ namespace Pinta.Core
 		public Gtk.Action Sharpen { get; private set; }
 		public Gtk.Action SoftenPortrait { get; private set; }
 		public Gtk.Action Clouds { get; private set; }
+		public Gtk.Action JuliaFractal { get; private set; }
+		public Gtk.Action MandelbrotFractal { get; private set; }
 		public Gtk.Action EdgeDetect { get; private set; }
 		
 
@@ -72,6 +74,8 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
 			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
 			fact.Add ("Menu.Effects.Render.Clouds.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.Clouds.png")));
+			fact.Add ("Menu.Effects.Render.JuliaFractal.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.JuliaFractal.png")));
+			fact.Add ("Menu.Effects.Render.MandelbrotFractal.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.MandelbrotFractal.png")));
 			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
 			
 			fact.AddDefault ();
@@ -101,6 +105,8 @@ namespace Pinta.Core
 			Sharpen = new Gtk.Action ("Sharpen", Mono.Unix.Catalog.GetString ("Sharpen..."), null, "Menu.Effects.Photo.Sharpen.png");
 			SoftenPortrait = new Gtk.Action ("Soften Portrait", Mono.Unix.Catalog.GetString ("Soften Portrait..."), null, "Menu.Effects.Photo.SoftenPortrait.png");
 			Clouds = new Gtk.Action ("Clouds", Mono.Unix.Catalog.GetString ("Clouds..."), null, "Menu.Effects.Render.Clouds.png");
+			JuliaFractal = new Gtk.Action ("Julia Fractal", Mono.Unix.Catalog.GetString ("Julia Fractal..."), null, "Menu.Effects.Render.JuliaFractal.png");
+			MandelbrotFractal = new Gtk.Action ("Mandelbrot Fractal", Mono.Unix.Catalog.GetString ("Mandelbrot Factal..."), null, "Menu.Effects.Render.MandelbrotFractal.png");
 			EdgeDetect = new Gtk.Action ("EdgeDetect", Mono.Unix.Catalog.GetString ("Edge Detect..."), null, "Menu.Effects.Stylize.EdgeDetect.png");
 		}
 
@@ -134,6 +140,8 @@ namespace Pinta.Core
 			photo_sub_menu.Append (SoftenPortrait.CreateMenuItem ());
 			
 			render_sub_menu.Append (Clouds.CreateMenuItem ());
+			render_sub_menu.Append (JuliaFractal.CreateMenuItem ());
+			render_sub_menu.Append (MandelbrotFractal.CreateMenuItem ());
 			
 			stylize_sub_menu.Append (EdgeDetect.CreateMenuItem ());
 		}
