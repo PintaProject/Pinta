@@ -105,9 +105,12 @@ namespace Pinta.Core
 		
 		internal double Progress {
 			get {
-				return (total_tiles == 0 || current_tile == -1)
-				        ? 0
-				        : (double)current_tile / (double)total_tiles;
+				if (total_tiles == 0 || current_tile < 0)
+					return 0;
+				else if (current_tile < total_tiles)
+					return (double)current_tile / (double)total_tiles;
+				else
+					return 1;
 			}
 		}
 		
@@ -232,15 +235,13 @@ namespace Pinta.Core
 		{
 			// Fetch the next tile index and render it.
 			for (;;) {
-				if (current_tile >= total_tiles || cancel_render_flag)
-					return;				
 				
-				int tileId = Interlocked.Increment (ref current_tile);
+				int tileIndex = Interlocked.Increment (ref current_tile);
 				
-				if (tileId >= total_tiles || cancel_render_flag)
-					return;				
+				if (tileIndex >= total_tiles || cancel_render_flag)
+					return;
 				
-				RenderTile (renderId, threadId, tileId);
+				RenderTile (renderId, threadId, tileIndex);
  			}
 		}
 		
@@ -266,6 +267,7 @@ namespace Pinta.Core
 			if (!IsRendering || renderId != render_id)
 				return;
 			
+			// Update bounds to be shown on next expose.
 			lock (updated_lock) {
 				if (is_updated) {				
 					updated_x1 = Math.Min (bounds.X, updated_x1);
