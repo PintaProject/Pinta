@@ -24,6 +24,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#if (!LIVE_PREVIEW_DEBUG && DEBUG)
+#undef DEBUG
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -300,7 +304,7 @@ namespace Pinta.Core
 				this.manager = manager;
 			}
 			
-			protected override void OnUpdate (double progress, Gdk.Rectangle[] updatedBounds)
+			protected override void OnUpdate (double progress, Gdk.Rectangle updatedBounds)
 			{
 				Debug.WriteLine (DateTime.Now.ToString("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
 				PintaCore.Chrome.ProgressDialog.Progress = progress;
@@ -329,7 +333,7 @@ namespace Pinta.Core
 			}			
 		}
 		
-		void FireLivePreviewRenderUpdatedEvent (double progress, Gdk.Rectangle[] bounds)
+		void FireLivePreviewRenderUpdatedEvent (double progress, Gdk.Rectangle bounds)
 		{
 			if (RenderUpdated != null) {
 				RenderUpdated (this, new LivePreviewRenderUpdatedEventArgs(progress, bounds));

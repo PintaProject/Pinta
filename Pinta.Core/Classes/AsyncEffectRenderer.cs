@@ -2,9 +2,9 @@
 // AsyncEffectRenderer.cs
 //  
 // Author:
-//       greg <${AuthorEmail}>
+//       Greg Lowe <greg@vis.net.nz>
 // 
-// Copyright (c) 2010 greg
+// Copyright (c) 2010 Greg Lowe
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
+#if (!LIVE_PREVIEW_DEBUG && DEBUG)
+#undef DEBUG
+#endif
 
 using System;
 using System.Collections.Generic;
@@ -54,13 +58,18 @@ namespace Pinta.Core
 		bool cancel_render_flag;
 		bool restart_render_flag;
 		int render_id;
-		int rendered_tiles;
-		int total_tiles;
+		int current_tile;
+		int total_tiles;		
 		List<Exception> render_exceptions;
 		
-		bool stop_timer_flag;
-		GLib.Timeout timer;
-		List<Gdk.Rectangle> updated_rectangles;
+		uint timer_tick_id;
+		
+		object updated_lock;
+		bool is_updated;
+		int updated_x1;
+		int updated_y1;
+		int updated_x2;
+		int updated_y2;
 		
 		internal AsyncEffectRenderer (Settings settings)
 		{
@@ -83,7 +92,11 @@ namespace Pinta.Core
 			
 			is_rendering = false;
 			render_id = 0;
-			render_exceptions = new List<Exception> ();		
+			updated_lock = new object ();
+			is_updated = false;
+			render_exceptions = new List<Exception> ();	
+			
+			timer_tick_id = 0;
 		}		
 		
 		internal bool IsRendering {
@@ -91,7 +104,11 @@ namespace Pinta.Core
 		}
 		
 		internal double Progress {
-			get { return (total_tiles == 0) ? 0 : rendered_tiles / total_tiles; }
+			get {
+				return (total_tiles == 0 || current_tile == -1)
+				        ? 0
+				        : (double)current_tile / (double)total_tiles;
+			}
 		}
 		
 		internal void Start (BaseEffect effect,
@@ -127,9 +144,7 @@ namespace Pinta.Core
 				cancel_render_flag = true;
 				restart_render_flag = true;
 				return;
-			}			
-			
-			GLib.Timeout.Add((uint) settings.UpdateMillis, HandleTimerTick);
+			}
 			
 			StartRender ();
 		}
@@ -144,25 +159,27 @@ namespace Pinta.Core
 				HandleRenderCompletion ();
 		}
 		
-		protected abstract void OnUpdate (double progress, Gdk.Rectangle[] updatedBounds);
+		protected abstract void OnUpdate (double progress, Gdk.Rectangle updatedBounds);
 		
 		protected abstract void OnCompletion (bool canceled, Exception[] exceptions);
 		
 		internal void Dispose ()
 		{
-			stop_timer_flag = true;
+			if (timer_tick_id > 0)
+				GLib.Source.Remove (timer_tick_id);
 		}
 		
 		void StartRender ()
 		{
-			is_rendering = true;
+			is_rendering = true;			
 			cancel_render_flag = false;			
 			restart_render_flag = false;
+			is_updated = false;
 			
 			render_id++;
 			render_exceptions.Clear ();
 			
-			rendered_tiles = 0;
+			current_tile = -1;
 			
 			total_tiles = CalculateTotalTiles ();
 			
@@ -194,9 +211,8 @@ namespace Pinta.Core
 			master.Priority = settings.ThreadPriority;
 			master.Start ();
 			
-			// Start timer used to throttle update events.
-			stop_timer_flag = false;
-			updated_rectangles = new List<Gdk.Rectangle> ();			
+			// Start timer used to periodically fire update events on the UI thread.
+			timer_tick_id = GLib.Timeout.Add((uint) settings.UpdateMillis, HandleTimerTick);			
 		}
 		
 		Thread StartSlaveThread (int renderId, int threadId)
@@ -213,14 +229,19 @@ namespace Pinta.Core
 		
 		// Runs on a background thread.
 		void Render (int renderId, int threadId)
-		{			
-			for (int tileIndex = threadId; tileIndex < total_tiles; tileIndex += settings.ThreadCount) {
+		{
+			// Fetch the next tile index and render it.
+			for (;;) {
+				if (current_tile >= total_tiles || cancel_render_flag)
+					return;				
 				
-				if (cancel_render_flag)
-					break;
+				int tileId = Interlocked.Increment (ref current_tile);
 				
-				RenderTile (renderId, threadId, tileIndex);
-			}
+				if (tileId >= total_tiles || cancel_render_flag)
+					return;				
+				
+				RenderTile (renderId, threadId, tileId);
+ 			}
 		}
 		
 		// Runs on a background thread.
@@ -238,15 +259,33 @@ namespace Pinta.Core
 				
 			} catch (Exception ex) {		
 				exception = ex;
-				//cancel_render_flag = true; //TODO could cancel render on first error detected.
 				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect.Text + " exception: " + ex.Message + "\n" + ex.StackTrace);
 			}
 			
-			// Notify the UI thread that a tile has been rendered (or of a failure/cancellation)/
-			bool cancelFlag = cancel_render_flag;
-			Gtk.Application.Invoke ((o, e) => {				
-				HandleTileRenderCompletion (renderId, threadId, tileIndex, bounds, cancelFlag, exception);
-			});			
+			// Ignore completions of tiles after a cancel or from a previous render.
+			if (!IsRendering || renderId != render_id)
+				return;
+			
+			lock (updated_lock) {
+				if (is_updated) {				
+					updated_x1 = Math.Min (bounds.X, updated_x1);
+					updated_y1 = Math.Min (bounds.Y, updated_y1);
+					updated_x2 = Math.Max (bounds.X + bounds.Width, updated_x2);
+					updated_y2 = Math.Max (bounds.Y + bounds.Height, updated_y2);
+				} else {
+					is_updated = true;
+					updated_x1 = bounds.X;
+					updated_y1 = bounds.Y;
+					updated_x2 = bounds.X + bounds.Width;
+					updated_y2 = bounds.Y + bounds.Height;
+				}
+			}
+			
+			if (exception != null) {
+				lock (render_exceptions) {
+					render_exceptions.Add (exception);
+				}
+			}
 		}
 		
 		// Runs on a background thread.
@@ -269,56 +308,42 @@ namespace Pinta.Core
                                 * Math.Ceiling((float)render_bounds.Height / (float)settings.TileHeight));
 		}
 		
-		void HandleTileRenderCompletion (int renderId,
-		                           int threadId,
-		                           int tileIndex,
-		                           Gdk.Rectangle tileBounds,
-		                           bool canceled,
-		                           Exception exception)
-		{
-			// Ignore completions of tiles after a cancel or from a previous render;
-			if (!IsRendering && renderId != render_id)
-				return;
-			
-			rendered_tiles++;
-			
-			//TODO perhaps combine bounds instead.
-			if (!cancel_render_flag && exception == null)
-				updated_rectangles.Add (tileBounds);
-			
-			if (exception != null)
-				render_exceptions.Add (exception);
-		}
-		
+		// Called on the UI thread.
 		bool HandleTimerTick ()
-		{
-			if (stop_timer_flag) {
-				Debug.WriteLine (DateTime.Now.ToString("HH:mm:ss:ffff") + " Stop timer.");
-				return false;
-			}
-			
+		{			
 			Debug.WriteLine (DateTime.Now.ToString("HH:mm:ss:ffff") + " Timer tick.");
 			
-			if (updated_rectangles.Count == 0)
-				return true;
+			Gdk.Rectangle bounds;
 			
-			double progress = (double)rendered_tiles / (double)total_tiles;
+			lock (updated_lock) {
+				
+				if (!is_updated)
+					return true;
 			
-			if (!cancel_render_flag)
-				OnUpdate (progress, updated_rectangles.ToArray());
+				is_updated = false;
+				
+				bounds = new Gdk.Rectangle (updated_x1,
+			    	                        updated_y1,
+				    	                    updated_x2 - updated_x1,
+				        	                updated_y2 - updated_y1);
+			}
 			
-			updated_rectangles.Clear ();
+			if (IsRendering && !cancel_render_flag)
+				OnUpdate (Progress, bounds);
 			
 			return true;
 		}
 		
 		void HandleRenderCompletion ()
 		{
-			var exceptions = (render_exceptions == null) ? null : render_exceptions.ToArray ();
-		
+			var exceptions = (render_exceptions == null || render_exceptions.Count == 0)
+			                  ? null
+			                  : render_exceptions.ToArray ();
+			
 			HandleTimerTick ();
 			
-			stop_timer_flag = true;
+			if (timer_tick_id > 0)
+				GLib.Source.Remove (timer_tick_id);
 			
 			OnCompletion (cancel_render_flag, exceptions);
 			

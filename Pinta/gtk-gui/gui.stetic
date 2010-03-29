@@ -2963,6 +2963,7 @@ Luminosity</property>
   </widget>
   <widget class="Gtk.Dialog" id="Pinta.ProgressDialog" design-size="400 114">
     <property name="MemberName" />
+    <property name="Visible">False</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
