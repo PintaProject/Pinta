@@ -25,48 +25,44 @@
 // THE SOFTWARE.
 
 using System;
+using Pinta.Core;
 
 namespace Pinta
 {
 	public partial class PosterizeDialog : Gtk.Dialog
 	{
-		public int Red {
-			get { return hscalespinRed.Value; }
-		}
-		
-		public int Green { 
-			get { return hscalespinGreen.Value; }
-		}
-		
-		public int Blue {
-			get { return hscalespinBlue.Value; }
-		}
-
 		public PosterizeDialog ()
 		{
-			this.Build ();
+			Build ();
 			
-			this.hscalespinRed.ValueChanged += HandleHscalespinRedValueChanged;
-			this.hscalespinGreen.ValueChanged += HandleHscalespinGreenValueChanged;
-			this.hscalespinBlue.ValueChanged += HandleHscalespinBlueValueChanged;
-		}
-
-		private void HandleHscalespinRedValueChanged (object sender, EventArgs e)
-		{
-			if (checkLinked.Active) 
-				hscalespinGreen.Value = hscalespinBlue.Value = hscalespinRed.Value;
+			hscalespinRed.ValueChanged += HandleValueChanged;
+			hscalespinGreen.ValueChanged += HandleValueChanged;
+			hscalespinBlue.ValueChanged += HandleValueChanged;
 		}
 		
-		private void HandleHscalespinGreenValueChanged (object sender, EventArgs e)
+		public PosterizeData EffectData { get; set; }
+		
+		void HandleValueChanged (object sender, EventArgs e)
 		{
+			var widget = sender as HScaleSpinButtonWidget;
+			
 			if (checkLinked.Active)
-				hscalespinBlue.Value = hscalespinRed.Value = hscalespinGreen.Value;
+				hscalespinGreen.Value = hscalespinBlue.Value = hscalespinRed.Value = widget.Value;
+			
+			UpdateEffectData ();
 		}
 		
-		private void HandleHscalespinBlueValueChanged (object sender, EventArgs e)
+		void UpdateEffectData ()
 		{
-			if (checkLinked.Active)
-				hscalespinRed.Value = hscalespinGreen.Value = hscalespinBlue.Value;
+			if (EffectData == null)
+				return;
+			
+			EffectData.Red = hscalespinRed.Value;
+			EffectData.Green = hscalespinGreen.Value;
+			EffectData.Blue = hscalespinBlue.Value;
+			
+			// Only fire event once, even if all properties have changed.
+			EffectData.FirePropertyChanged ("_all_");
 		}
 	}
 }
