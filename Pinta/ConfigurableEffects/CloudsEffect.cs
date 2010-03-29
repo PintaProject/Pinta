@@ -33,6 +33,9 @@ namespace Pinta.Core
 {
 	public class CloudsEffect : BaseEffect
 	{
+        // This is so that repetition of the effect with CTRL+F actually shows up differently.
+        private byte instanceSeed = unchecked((byte)DateTime.Now.Ticks); 
+
 		public override string Icon {
 			get { return "Menu.Effects.Render.Clouds.png"; }
 		}
@@ -191,8 +194,8 @@ namespace Pinta.Core
 		
 		protected override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
 		{
-			RenderClouds(dst, roi, Data.Scale, (byte)Data.Seed, 
-				Data.Power, PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
+			RenderClouds(dst, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), 
+				Data.Power/100.0, PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
 			Type blendOpType = (Type)CloudsData.BlendOps[Data.BlendOp];
 			var blendOp = UserBlendOps.CreateBlendOp(blendOpType);
 			if (blendOp != null)
@@ -205,14 +208,13 @@ namespace Pinta.Core
 		public class CloudsData
 		{
 			[Skip]
-			public bool IsEmpty { get { return Power == 0.0; } }
+			public bool IsEmpty { get { return Power == 0; } }
 
 			[MinimumValue (2), MaximumValue (1000)]
 			public int Scale = 250;
-			
-			//TODO double widget
-			[Skip]
-			public double Power = 0.5;
+
+			[MinimumValue (0), MaximumValue (100)]
+			public int Power = 50;
 			
 			[Skip]
 			public static Dictionary <string, object> BlendOps;
