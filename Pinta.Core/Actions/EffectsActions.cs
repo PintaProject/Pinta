@@ -45,6 +45,7 @@ namespace Pinta.Core
 		public Gtk.Action Fragment { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
+		public Gtk.Action Bulge { get; private set; }
 		public Gtk.Action MotionBlur { get; private set; }
 		public Gtk.Action Glow { get; private set; }
 		public Gtk.Action RedEyeRemove { get; private set; }
@@ -66,6 +67,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.GaussianBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.GaussianBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.MotionBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.MotionBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.RadialBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.RadialBlur.png")));
+			fact.Add ("Menu.Effects.Distort.Bulge.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Bulge.png")));
 			fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
@@ -89,7 +91,6 @@ namespace Pinta.Core
 			Render = new Gtk.Action ("Render", Mono.Unix.Catalog.GetString ("Render"), null, null);
 			Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
 
-			Distort.Visible = false;
 			Noise.Visible = false;
 			
 			// Menu items
@@ -99,6 +100,7 @@ namespace Pinta.Core
 			Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
+			Bulge = new Gtk.Action ("Bulge", Mono.Unix.Catalog.GetString ("Bulge..."), null, "Menu.Effects.Distort.Bulge.png");
 			MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
@@ -133,6 +135,8 @@ namespace Pinta.Core
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
 			blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
+			
+			distort_sub_menu.Append (Bulge.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem ());

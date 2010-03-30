@@ -358,6 +358,9 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Render.MandelbrotFractal.png">
       <LogicalName>Menu.Effects.Render.MandelbrotFractal.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Bulge.png">
+      <LogicalName>Menu.Effects.Distort.Bulge.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
