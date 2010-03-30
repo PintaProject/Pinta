@@ -112,6 +112,10 @@
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="ConfigurableEffects\BulgeEffect.cs" />
+    <Compile Include="ConfigurableEffects\DentsEffect.cs" />
+    <Compile Include="ConfigurableEffects\WarpEffect.cs" />
+    <Compile Include="ConfigurableEffects\PolarInversionEffect.cs" />
+    <Compile Include="ConfigurableEffects\PerlinNoise2D.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

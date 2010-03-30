@@ -963,6 +963,91 @@ namespace Pinta.Core
             }
         }
 
+		public static unsafe ColorBgra GetBilinearSampleWrapped (this ImageSurface src, float x, float y)
+		{
+			return GetBilinearSampleWrapped (src, (ColorBgra*)src.DataPtr, src.Width, src.Height, x, y);
+		}
+
+		public static unsafe ColorBgra GetBilinearSampleWrapped (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+        {
+            if (!Utility.IsNumber(x) || !Utility.IsNumber(y))
+            {
+                return ColorBgra.Transparent;
+            }
+
+            float u = x;
+            float v = y;
+
+            unchecked
+            {
+                int iu = (int)Math.Floor(u);
+                uint sxfrac = (uint)(256 * (u - (float)iu));
+                uint sxfracinv = 256 - sxfrac;
+
+                int iv = (int)Math.Floor(v);
+                uint syfrac = (uint)(256 * (v - (float)iv));
+                uint syfracinv = 256 - syfrac;
+
+                uint wul = (uint)(sxfracinv * syfracinv);
+                uint wur = (uint)(sxfrac * syfracinv);
+                uint wll = (uint)(sxfracinv * syfrac);
+                uint wlr = (uint)(sxfrac * syfrac);
+
+                int sx = iu;
+                if (sx < 0)
+                {
+                    sx = (srcWidth - 1) + ((sx + 1) % srcWidth);
+                }
+                else if (sx > (srcWidth - 1))
+                {
+                    sx = sx % srcWidth;
+                }
+
+                int sy = iv;
+                if (sy < 0)
+                {
+                    sy = (srcHeight - 1) + ((sy + 1) % srcHeight);
+                }
+                else if (sy > (srcHeight - 1))
+                {
+                    sy = sy % srcHeight;
+                }
+
+                int sleft = sx;
+                int sright;
+
+                if (sleft == (srcWidth - 1))
+                {
+                    sright = 0;
+                }
+                else
+                {
+                    sright = sleft + 1;
+                }
+
+                int stop = sy;
+                int sbottom;
+
+                if (stop == (srcHeight - 1))
+                {
+                    sbottom = 0;
+                }
+                else
+                {
+                    sbottom = stop + 1;
+                }
+                               
+                ColorBgra cul = src.GetPointUnchecked (srcDataPtr, srcWidth, sleft, stop);
+                ColorBgra cur = src.GetPointUnchecked (srcDataPtr, srcWidth, sright, stop);
+                ColorBgra cll = src.GetPointUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
+                ColorBgra clr = src.GetPointUnchecked (srcDataPtr, srcWidth, sright, sbottom);
+
+                ColorBgra c = ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
+
+                return c;
+            }
+        }
+
 
 	}
 }
