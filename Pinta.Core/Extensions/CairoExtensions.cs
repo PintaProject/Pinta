@@ -715,6 +715,18 @@ namespace Pinta.Core
 		{
 			return rect.X + rect.Width;
 		}
+
+        /// <summary>
+        /// Determines if the requested pixel coordinate is within bounds.
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <returns>true if (x,y) is in bounds, false if it's not.</returns>
+        public static bool IsVisible(this ImageSurface surf, int x, int y)
+        {
+            return x >= 0 && x < surf.Width && y >= 0 && y < surf.Height;
+        }
+
 		
 		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, int x, int y)
 		{

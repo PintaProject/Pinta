@@ -31,15 +31,15 @@ namespace Pinta
 	public partial class PosterizeDialog : Gtk.Dialog
 	{
 		public int Red {
-			get { return hscalespinRed.Value; }
+			get { return hscalespinRed.ValueAsInt; }
 		}
 		
 		public int Green { 
-			get { return hscalespinGreen.Value; }
+			get { return hscalespinGreen.ValueAsInt; }
 		}
 		
 		public int Blue {
-			get { return hscalespinBlue.Value; }
+            get { return hscalespinBlue.ValueAsInt; }
 		}
 
 		public PosterizeDialog ()

@@ -40,8 +40,7 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System.Core">
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
   </ItemGroup>
@@ -52,6 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\AddNoiseEffect.cs" />
+    <Compile Include="ConfigurableEffects\ZoomBlurEffect.cs" />
+    <Compile Include="ConfigurableEffects\ReduceNoiseEffect.cs" />
+    <Compile Include="ConfigurableEffects\OutlineEffect.cs" />
+    <Compile Include="ConfigurableEffects\MedianEffect.cs" />
+    <Compile Include="ConfigurableEffects\UnfocusEffect.cs" />
+    <Compile Include="ConfigurableEffects\LocalHistogramEffect.cs" />
+    <Compile Include="ConfigurableEffects\SurfaceBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\PencilSketchEffect.cs" />
     <Compile Include="ConfigurableEffects\OilPaintingEffect.cs" />
     <Compile Include="ConfigurableEffects\GlowEffect.cs" />

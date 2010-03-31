@@ -360,6 +360,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.Bulge.png">
       <LogicalName>Menu.Effects.Distort.Bulge.png</LogicalName>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.Median.png">
+      <LogicalName>Menu.Effects.Noise.Median.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.ReduceNoise.png">
+      <LogicalName>Menu.Effects.Noise.ReduceNoise.png</LogicalName>
+    </EmbeddedResource>
+     <EmbeddedResource Include="Resources\Menu.Effects.Noise.AddNoise.png">
+      <LogicalName>Menu.Effects.Noise.AddNoise.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Outline.png">
+      <LogicalName>Menu.Effects.Stylize.Outline.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

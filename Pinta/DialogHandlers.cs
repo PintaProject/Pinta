@@ -51,6 +51,9 @@ namespace Pinta
 			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectActivated <PencilSketchEffect>;
 			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectActivated <FragmentEffect>;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated <GaussianBlurEffect>;
+            PintaCore.Actions.Effects.SurfaceBlur.Activated += HandleEffectSurfaceBlurActivated;
+            PintaCore.Actions.Effects.ZoomBlur.Activated += HandleEffectZoomBlurActivated;
+            PintaCore.Actions.Effects.Unfocus.Activated += HandleEffectUnfocusActivated;
 			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
 			PintaCore.Actions.Effects.Bulge.Activated += HandleEffectActivated <BulgeEffect>;
 			PintaCore.Actions.Effects.Dents.Activated += HandleEffectActivated <DentsEffect>;
@@ -64,6 +67,11 @@ namespace Pinta
 			PintaCore.Actions.Effects.JuliaFractal.Activated += HandleEffectJuliaFractalActivated;
 			PintaCore.Actions.Effects.MandelbrotFractal.Activated += HandleEffectMandelbrotFractalActivated;
 			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated <EdgeDetectEffect>;
+            PintaCore.Actions.Effects.AddNoise.Activated += HandleEffectAddNoiseActivated;
+            PintaCore.Actions.Effects.Median.Activated += HandleEffectMedianActivated;
+            PintaCore.Actions.Effects.ReduceNoise.Activated += HandleEffectReduceNoiseActivated;
+			PintaCore.Actions.Effects.Outline.Activated += HandleEffectOutlineActivated;
+
 		}
 
 		#region Handlers
@@ -218,6 +226,11 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
 		}
+		
+		private void HandleEffectUnfocusActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new UnfocusEffect());
+        }
 
 		private void HandleEffectRadialBlurActivated (object sender, EventArgs e)
 		{
@@ -239,6 +252,25 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.PerformEffect (new JuliaFractalEffect ());	
 		}
 
+        private void HandleEffectAddNoiseActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new AddNoiseEffect());
+        }
+
+        private void HandleEffectMedianActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new MedianEffect());
+        }
+
+        private void HandleEffectReduceNoiseActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new ReduceNoiseEffect());
+        }
+
+		private void HandleEffectOutlineActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new OutlineEffect());
+        }
 		#endregion
 	}
 }
