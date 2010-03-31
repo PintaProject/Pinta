@@ -77,8 +77,8 @@ namespace Pinta.Core
 
 			int w = dst.Width;
 			int h = dst.Height;
-			int fcx = (w << 15) + (int)(Data.OffsetX * (w << 15));
-			int fcy = (h << 15) + (int)(Data.OffsetY * (h << 15));
+			int fcx = (w << 15) + (int)(Data.Offset.X * (w << 15));
+			int fcy = (h << 15) + (int)(Data.Offset.Y * (h << 15));
 
 			int n = (Data.Quality * Data.Quality) * (30 + Data.Quality * Data.Quality);
 
@@ -167,16 +167,15 @@ namespace Pinta.Core
 		public class RadialBlurData : EffectData
 		{
 			public Double Angle = 2;
-
-			[Skip]
-			public override bool IsDefault { get { return Angle == 0; } }
 			
-			public double OffsetX = 0;
-			public double OffsetY = 0;
+			public PointD Offset = new PointD (0, 0);
 
 			[MinimumValue (1), MaximumValue (5)]
 			[Hint ("\nUse low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
 			public int Quality = 2;
+			
+			[Skip]
+			public override bool IsDefault { get { return Angle == 0; } }
 		}
 	}
 }
