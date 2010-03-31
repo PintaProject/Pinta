@@ -226,7 +226,17 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
 		}
-		
+
+		private void HandleEffectSurfaceBlurActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new SurfaceBlurEffect());
+        }
+
+		private void HandleEffectZoomBlurActivated(object sender, EventArgs e)
+        {
+            PintaCore.Actions.Adjustments.PerformEffect(new ZoomBlurEffect());
+        }
+
 		private void HandleEffectUnfocusActivated(object sender, EventArgs e)
         {
             PintaCore.Actions.Adjustments.PerformEffect(new UnfocusEffect());

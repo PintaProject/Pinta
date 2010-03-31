@@ -59,7 +59,7 @@ namespace Pinta.Core
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			foreach (Gdk.Rectangle rect in rois)
-				RenderRect (Data.Amount, src, dest, rect.ToCairoRectangle ());
+				RenderRect (Data.Amount, src, dest, rect);
 		}
 		
 		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)

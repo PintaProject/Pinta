@@ -63,7 +63,7 @@ namespace Pinta.Core
 					this.scaleR = (400.0 / base.DefaultRadius) / Data.Scale;
 		            this.refractionScale = (Data.Refraction / 100.0) / scaleR;
 		            this.theta = Math.PI * 2.0 * Data.Tension / 10.0;
-		            Data.Roughness = Data.Roughness / 100.0;
+		            //Data.Roughness = Data.Roughness / 100.0;
 				}; 
 				return true;
 			}

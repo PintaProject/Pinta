@@ -29,6 +29,7 @@ using System.Reflection;
 using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Collections;
 
 namespace Pinta.Gui.Widgets
 {
@@ -62,7 +63,7 @@ namespace Pinta.Gui.Widgets
 		#region EffectData Parser
 		private void BuildDialog ()
 		{
-			var members = EffectData.GetType ().GetMembers (BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			var members = EffectData.GetType ().GetMembers ();
 
 			foreach (var mi in members) {
 				Type mType = GetTypeForMember (mi);
@@ -95,8 +96,10 @@ namespace Pinta.Gui.Widgets
 				if (caption == null)
 					caption = MakeCaption (mi.Name);
 
-                if ((mType == typeof(int)) || (mType == typeof(double)))
+                if (mType == typeof(int))
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
+				else if (mType == typeof(double))
+					AddWidget (CreateDoubleSlider (caption, EffectData, mi, attrs));
 				else if (combo && mType == typeof (string))
 					AddWidget (CreateComboBox (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
@@ -107,6 +110,8 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreateOffsetPicker (caption, EffectData, mi, attrs));
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
 					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
+				else if (mType.IsEnum)
+					AddWidget (CreateEnumComboBox (caption, EffectData, mi, attrs));
 				
 				if (hint != null)
 					AddWidget (CreateHintLabel (hint));
@@ -121,6 +126,25 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Control Builders
+
+		
+		private ComboBoxWidget CreateEnumComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
+		{
+			Type myType = GetTypeForMember (member);
+			string[] entries = Enum.GetNames(myType);
+
+			ComboBoxWidget widget = new ComboBoxWidget (entries);
+
+			widget.Label = caption;
+			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
+			widget.Active = ((IList)entries).IndexOf (GetValue (member, o).ToString());
+			
+			widget.Changed += delegate (object sender, EventArgs e) {
+				SetValue (member, o, Enum.Parse(myType, widget.ActiveText));
+			};
+			
+			return widget;
+		}
 
 		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
 		{
@@ -147,7 +171,49 @@ namespace Pinta.Gui.Widgets
 			
 			return widget;
 		}
-//TODO create 2 method one for double and one for int
+
+		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
+			
+			int min_value = -100;
+            int max_value = 100;
+            double inc_value = 0.01;
+            int digits_value = 2;
+
+			foreach (var attr in attributes) {
+				if (attr is MinimumValueAttribute)
+					min_value = ((MinimumValueAttribute)attr).Value;
+				else if (attr is MaximumValueAttribute)
+					max_value = ((MaximumValueAttribute)attr).Value;
+                else if (attr is IncrementValueAttribute)
+                    inc_value = ((IncrementValueAttribute)attr).Value;
+                else if (attr is DigitsValueAttribute)
+                    digits_value = ((DigitsValueAttribute)attr).Value;
+			}
+			
+			widget.Label = caption;
+			widget.MinimumValue = min_value;
+			widget.MaximumValue = max_value;
+            widget.IncrementValue = inc_value;
+            widget.DigitsValue = digits_value;
+			widget.DefaultValue = (double)GetValue (member, o);
+			
+			widget.ValueChanged += delegate (object sender, EventArgs e) {
+				
+				if (event_delay_timeout_id != 0)
+					GLib.Source.Remove (event_delay_timeout_id);
+				
+				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
+					event_delay_timeout_id = 0;
+					SetValue (member, o, widget.Value);
+					return false;
+				});
+			};
+			
+			return widget;
+		}
+
 		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
@@ -173,7 +239,7 @@ namespace Pinta.Gui.Widgets
 			widget.MaximumValue = max_value;
             widget.IncrementValue = inc_value;
             widget.DigitsValue = digits_value;
-			widget.DefaultValue = Convert.ToDouble(GetValue (member, o));
+			widget.DefaultValue = (int)GetValue (member, o);
 			
 			widget.ValueChanged += delegate (object sender, EventArgs e) {
 				
@@ -182,7 +248,7 @@ namespace Pinta.Gui.Widgets
 				
 				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
 					event_delay_timeout_id = 0;
-					SetValue (member, o, widget.Value);
+					SetValue (member, o, widget.ValueAsInt);
 					return false;
 				});
 			};

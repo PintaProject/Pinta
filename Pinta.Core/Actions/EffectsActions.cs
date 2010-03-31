@@ -119,7 +119,7 @@ namespace Pinta.Core
 			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
 			Bulge = new Gtk.Action ("Bulge", Mono.Unix.Catalog.GetString ("Bulge..."), null, "Menu.Effects.Distort.Bulge.png");
 			Dents = new Gtk.Action ("Dents", Mono.Unix.Catalog.GetString ("Dents..."), null, "Menu.Effects.Distort.Dents.png");
-			Dents = new Gtk.Action ("PolarInversion", Mono.Unix.Catalog.GetString ("Polar Inversion..."), null, "Menu.Effects.Distort.PolarInversion.png");
+			PolarInversion = new Gtk.Action ("PolarInversion", Mono.Unix.Catalog.GetString ("Polar Inversion..."), null, "Menu.Effects.Distort.PolarInversion.png");
 			MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
@@ -129,13 +129,9 @@ namespace Pinta.Core
 			JuliaFractal = new Gtk.Action ("Julia Fractal", Mono.Unix.Catalog.GetString ("Julia Fractal..."), null, "Menu.Effects.Render.JuliaFractal.png");
 			MandelbrotFractal = new Gtk.Action ("Mandelbrot Fractal", Mono.Unix.Catalog.GetString ("Mandelbrot Factal..."), null, "Menu.Effects.Render.MandelbrotFractal.png");
 			EdgeDetect = new Gtk.Action ("EdgeDetect", Mono.Unix.Catalog.GetString ("Edge Detect..."), null, "Menu.Effects.Stylize.EdgeDetect.png");
-
-            //Noice Action
             AddNoise = new Gtk.Action("AddNoise", Mono.Unix.Catalog.GetString("Add Noise..."), null, "Menu.Effects.Noise.AddNoise.png");
             Median = new Gtk.Action("Median", Mono.Unix.Catalog.GetString("Median..."), null, "Menu.Effects.Noise.Median.png");
             ReduceNoise = new Gtk.Action("ReduceNoise", Mono.Unix.Catalog.GetString("Reduce Noise..."), null, "Menu.Effects.Noise.ReduceNoise.png");
-
-            //Stylize Action
             Outline = new Gtk.Action("Outline", Mono.Unix.Catalog.GetString("Outline..."), null, "Menu.Effects.Stylize.Outline.png");
 		}
 

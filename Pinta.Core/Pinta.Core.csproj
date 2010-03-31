@@ -139,8 +139,6 @@
     <Compile Include="Extensions\ToolBarToggleButton.cs" />
     <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
     <Compile Include="Classes\ObservableObject.cs" />
-    <Compile Include="Classes\PropertyChangedEventArgs.cs" />
-    <Compile Include="Classes\PropertyChangedEventHandler.cs" />
     <Compile Include="Classes\LayerProperties.cs" />
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
