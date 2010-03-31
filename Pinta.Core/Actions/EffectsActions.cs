@@ -44,9 +44,9 @@ namespace Pinta.Core
 		public Gtk.Action PencilSketch { get; private set; }
 		public Gtk.Action Fragment { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
-        public Gtk.Action SurfaceBlur { get; private set; }
-        public Gtk.Action ZoomBlur { get; private set; }
-        public Gtk.Action Unfocus { get; private set; }
+		public Gtk.Action SurfaceBlur { get; private set; }
+		public Gtk.Action ZoomBlur { get; private set; }
+		public Gtk.Action Unfocus { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action Bulge { get; private set; }
 		public Gtk.Action Dents { get; private set; }
@@ -60,10 +60,10 @@ namespace Pinta.Core
 		public Gtk.Action JuliaFractal { get; private set; }
 		public Gtk.Action MandelbrotFractal { get; private set; }
 		public Gtk.Action EdgeDetect { get; private set; }
-        public Gtk.Action AddNoise { get; private set; }
-        public Gtk.Action Median { get; private set; }
-        public Gtk.Action ReduceNoise { get; private set; }
-        public Gtk.Action Outline { get; private set; }
+		public Gtk.Action AddNoise { get; private set; }
+		public Gtk.Action Median { get; private set; }
+		public Gtk.Action ReduceNoise { get; private set; }
+		public Gtk.Action Outline { get; private set; }
 
 		public EffectsActions ()
 		{
@@ -89,13 +89,13 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Render.JuliaFractal.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.JuliaFractal.png")));
 			fact.Add ("Menu.Effects.Render.MandelbrotFractal.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.MandelbrotFractal.png")));
 			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
-            fact.Add("Menu.Effects.Noise.AddNoise.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.AddNoise.png")));
-            fact.Add("Menu.Effects.Noise.Median.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.Median.png")));
-            fact.Add("Menu.Effects.Noise.ReduceNoise.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Noise.ReduceNoise.png")));
-            fact.Add("Menu.Effects.Stylize.Outline.png", new IconSet(PintaCore.Resources.GetIcon("Menu.Effects.Stylize.Outline.png")));
+			fact.Add ("Menu.Effects.Noise.AddNoise.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Noise.AddNoise.png")));
+			fact.Add ("Menu.Effects.Noise.Median.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Noise.Median.png")));
+			fact.Add ("Menu.Effects.Noise.ReduceNoise.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Noise.ReduceNoise.png")));
+			fact.Add ("Menu.Effects.Stylize.Outline.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.Outline.png")));
 			
-            fact.AddDefault ();
-
+			fact.AddDefault ();
+			
 			// Submenus
 			Artistic = new Gtk.Action ("Artistic", Mono.Unix.Catalog.GetString ("Artistic"), null, null);
 			Blurs = new Gtk.Action ("Blurs", Mono.Unix.Catalog.GetString ("Blurs"), null, null);
@@ -104,7 +104,7 @@ namespace Pinta.Core
 			Photo = new Gtk.Action ("Photo", Mono.Unix.Catalog.GetString ("Photo"), null, null);
 			Render = new Gtk.Action ("Render", Mono.Unix.Catalog.GetString ("Render"), null, null);
 			Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
-
+			
 			
 			// Menu items
 			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
@@ -112,10 +112,10 @@ namespace Pinta.Core
 			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
 			Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
-            SurfaceBlur = new Gtk.Action("SurfaceBlur", Mono.Unix.Catalog.GetString("Surface Blur..."), null, "Menu.Effects.Blurs.SurfaceBlur.png");
-            ZoomBlur = new Gtk.Action("ZoomBlur", Mono.Unix.Catalog.GetString("Zoom Blur..."), null, "Menu.Effects.Blurs.ZoomBlur.png");
-            Unfocus = new Gtk.Action("Unfocus", Mono.Unix.Catalog.GetString("Unfocus..."), null, "Menu.Effects.Blurs.Unfocus.png");
-            Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
+			SurfaceBlur = new Gtk.Action ("SurfaceBlur", Mono.Unix.Catalog.GetString ("Surface Blur..."), null, "Menu.Effects.Blurs.SurfaceBlur.png");
+			ZoomBlur = new Gtk.Action ("ZoomBlur", Mono.Unix.Catalog.GetString ("Zoom Blur..."), null, "Menu.Effects.Blurs.ZoomBlur.png");
+			Unfocus = new Gtk.Action ("Unfocus", Mono.Unix.Catalog.GetString ("Unfocus..."), null, "Menu.Effects.Blurs.Unfocus.png");
+			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
 			Bulge = new Gtk.Action ("Bulge", Mono.Unix.Catalog.GetString ("Bulge..."), null, "Menu.Effects.Distort.Bulge.png");
 			Dents = new Gtk.Action ("Dents", Mono.Unix.Catalog.GetString ("Dents..."), null, "Menu.Effects.Distort.Dents.png");
@@ -129,17 +129,17 @@ namespace Pinta.Core
 			JuliaFractal = new Gtk.Action ("Julia Fractal", Mono.Unix.Catalog.GetString ("Julia Fractal..."), null, "Menu.Effects.Render.JuliaFractal.png");
 			MandelbrotFractal = new Gtk.Action ("Mandelbrot Fractal", Mono.Unix.Catalog.GetString ("Mandelbrot Factal..."), null, "Menu.Effects.Render.MandelbrotFractal.png");
 			EdgeDetect = new Gtk.Action ("EdgeDetect", Mono.Unix.Catalog.GetString ("Edge Detect..."), null, "Menu.Effects.Stylize.EdgeDetect.png");
-            AddNoise = new Gtk.Action("AddNoise", Mono.Unix.Catalog.GetString("Add Noise..."), null, "Menu.Effects.Noise.AddNoise.png");
-            Median = new Gtk.Action("Median", Mono.Unix.Catalog.GetString("Median..."), null, "Menu.Effects.Noise.Median.png");
-            ReduceNoise = new Gtk.Action("ReduceNoise", Mono.Unix.Catalog.GetString("Reduce Noise..."), null, "Menu.Effects.Noise.ReduceNoise.png");
-            Outline = new Gtk.Action("Outline", Mono.Unix.Catalog.GetString("Outline..."), null, "Menu.Effects.Stylize.Outline.png");
+			AddNoise = new Gtk.Action ("AddNoise", Mono.Unix.Catalog.GetString ("Add Noise..."), null, "Menu.Effects.Noise.AddNoise.png");
+			Median = new Gtk.Action ("Median", Mono.Unix.Catalog.GetString ("Median..."), null, "Menu.Effects.Noise.Median.png");
+			ReduceNoise = new Gtk.Action ("ReduceNoise", Mono.Unix.Catalog.GetString ("Reduce Noise..."), null, "Menu.Effects.Noise.ReduceNoise.png");
+			Outline = new Gtk.Action ("Outline", Mono.Unix.Catalog.GetString ("Outline..."), null, "Menu.Effects.Stylize.Outline.png");
 		}
 
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
 			menu.Remove (menu.Children[1]);
-
+			
 			// Create Submenus
 			Menu artistic_sub_menu = (Menu)menu.AppendItem (Artistic.CreateSubMenuItem ()).Submenu;
 			Menu blur_sub_menu = (Menu)menu.AppendItem (Blurs.CreateSubMenuItem ()).Submenu;
@@ -156,11 +156,11 @@ namespace Pinta.Core
 			
 			blur_sub_menu.Append (Fragment.CreateMenuItem ());
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
-
-            blur_sub_menu.Append(SurfaceBlur.CreateMenuItem());
-            blur_sub_menu.Append(Unfocus.CreateMenuItem());
-            blur_sub_menu.Append(ZoomBlur.CreateMenuItem());
-
+			
+			blur_sub_menu.Append (SurfaceBlur.CreateMenuItem ());
+			blur_sub_menu.Append (Unfocus.CreateMenuItem ());
+			blur_sub_menu.Append (ZoomBlur.CreateMenuItem ());
+			
 			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
 			blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
 			
@@ -178,12 +178,12 @@ namespace Pinta.Core
 			render_sub_menu.Append (MandelbrotFractal.CreateMenuItem ());
 			
 			stylize_sub_menu.Append (EdgeDetect.CreateMenuItem ());
-
-            noise_sub_menu.Append(AddNoise.CreateMenuItem());
-            noise_sub_menu.Append(Median.CreateMenuItem());
-            noise_sub_menu.Append(ReduceNoise.CreateMenuItem());
-
-            stylize_sub_menu.Append(Outline.CreateMenuItem());
+			
+			noise_sub_menu.Append (AddNoise.CreateMenuItem ());
+			noise_sub_menu.Append (Median.CreateMenuItem ());
+			noise_sub_menu.Append (ReduceNoise.CreateMenuItem ());
+			
+			stylize_sub_menu.Append (Outline.CreateMenuItem ());
 		}
 		#endregion
 	}
