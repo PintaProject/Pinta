@@ -269,7 +269,7 @@ namespace Pinta.Core
                 stencil.Set(rect.ToCairoRectangle(), false);
             }
 			
-			boundingBox = new Rectangle (left, top, right + 1, bottom + 1);
+			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
 
 		public unsafe static void FillStencilByColor (ImageSurface surface, IBitVector2D stencil, ColorBgra cmp, int tolerance, 
@@ -339,7 +339,7 @@ namespace Pinta.Core
                 stencil.Set(rect.ToCairoRectangle (), false);
             }
 
-			boundingBox = new Rectangle (left, top, right + 1, bottom + 1);
+			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
 
 		protected abstract void OnFillRegionComputed (Point[][] polygonSet);
