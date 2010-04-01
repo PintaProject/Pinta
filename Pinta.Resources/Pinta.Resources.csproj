@@ -340,6 +340,24 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Photo.RedEyeRemove.png">
       <LogicalName>Menu.Effects.Photo.RedEyeRemove.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.Sharpen.png">
+      <LogicalName>Menu.Effects.Photo.Sharpen.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Photo.SoftenPortrait.png">
+      <LogicalName>Menu.Effects.Photo.SoftenPortrait.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.EdgeDetect.png">
+      <LogicalName>Menu.Effects.Stylize.EdgeDetect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Render.Clouds.png">
+      <LogicalName>Menu.Effects.Render.Clouds.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Render.JuliaFractal.png">
+      <LogicalName>Menu.Effects.Render.JuliaFractal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Render.MandelbrotFractal.png">
+      <LogicalName>Menu.Effects.Render.MandelbrotFractal.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">

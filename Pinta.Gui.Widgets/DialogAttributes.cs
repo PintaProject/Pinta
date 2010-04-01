@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DialogAttributes.cs
 //  
 // Author:
@@ -25,15 +25,16 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 
 namespace Pinta.Gui.Widgets
 {
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class SkipAttribute : Attribute
 	{
 	}
 
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class CaptionAttribute : Attribute
 	{
 		public CaptionAttribute (string caption)
@@ -44,7 +45,7 @@ namespace Pinta.Gui.Widgets
 		public string Caption;
 	}
 
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class MinimumValueAttribute : Attribute
 	{
 		public MinimumValueAttribute (int value)
@@ -55,7 +56,7 @@ namespace Pinta.Gui.Widgets
 		public int Value;
 	}
 
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class MaximumValueAttribute : Attribute
 	{
 		public MaximumValueAttribute (int value)
@@ -65,15 +66,27 @@ namespace Pinta.Gui.Widgets
 
 		public int Value;
 	}
-	
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class HintAttribute : Attribute
 	{
 		public HintAttribute (string caption)
 		{
 			Hint = caption;
 		}
-		
+
 		public string Hint;
 	}
+
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	public class StaticListAttribute : Attribute
+	{
+		public StaticListAttribute (string dict)
+		{
+			this.dictionaryName = dict;
+		}
+
+		public string dictionaryName;
+	}
+	
 }

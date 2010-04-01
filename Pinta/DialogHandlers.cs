@@ -41,19 +41,26 @@ namespace Pinta
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
-			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleAdjustmentsBrightnessContrastActivated;
+			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleEffectActivated <BrightnessContrastEffect>;
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
 			PintaCore.Actions.Adjustments.Levels.Activated += HandleAdjustmentsLevelsActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
-			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleAdjustmentsHueSaturationActivated;
-			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectInkSketchActivated;
-			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectOilPaintingActivated;
-			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectPencilSketchActivated;
-			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectGaussianBlurActivated;
+			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleEffectActivated <HueSaturationEffect>;
+			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectActivated <InkSketchEffect>;
+			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectActivated <OilPaintingEffect>;
+			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectActivated <PencilSketchEffect>;
+			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectActivated <FragmentEffect>;
+			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated <GaussianBlurEffect>;
 			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
-			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectMotionBlurActivated;
-			PintaCore.Actions.Effects.Glow.Activated += HandleEffectGlowActivated;
-			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectsRedEyeRemoveActivated;
+			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated <MotionBlurEffect>;
+			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated <GlowEffect>;
+			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated <RedEyeRemoveEffect>;
+			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated <SharpenEffect>;
+			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectActivated <SoftenPortraitEffect>;
+			PintaCore.Actions.Effects.Clouds.Activated += HandleEffectCloudsActivated;
+			PintaCore.Actions.Effects.JuliaFractal.Activated += HandleEffectJuliaFractalActivated;
+			PintaCore.Actions.Effects.MandelbrotFractal.Activated += HandleEffectMandelbrotFractalActivated;
+			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated <EdgeDetectEffect>;
 		}
 
 		#region Handlers
@@ -187,16 +194,13 @@ namespace Pinta
 			return ret;
 		}		
 		
-		private void HandleAdjustmentsHueSaturationActivated (object sender, EventArgs e)
+		private void HandleEffectActivated<T> (object sender, EventArgs e)
+			where T : BaseEffect, new ()
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new HueSaturationEffect ());
+			var effect = new T ();
+			PintaCore.LivePreview.Start (effect);
 		}
-		
-		private void HandleAdjustmentsBrightnessContrastActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new BrightnessContrastEffect ());
-		}
-		
+				
 		private void HandleAdjustmentsPosterizeActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new PosterizeEffect ());
@@ -211,46 +215,27 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
 		}
-		
-		private void HandleEffectInkSketchActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new InkSketchEffect ());
-		}
-
-		private void HandleEffectOilPaintingActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new OilPaintingEffect ());
-		}
-
-		private void HandleEffectPencilSketchActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new PencilSketchEffect ());
-		}
-
-		private void HandleEffectGaussianBlurActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new GaussianBlurEffect ());
-		}
 
 		private void HandleEffectRadialBlurActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new RadialBlurEffect ());
 		}
-		
-		private void HandleEffectMotionBlurActivated (object sender, EventArgs e)
+
+		private void HandleEffectCloudsActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new MotionBlurEffect ());
+			PintaCore.Actions.Adjustments.PerformEffect (new CloudsEffect ());	
 		}
-		
-		private void HandleEffectGlowActivated (object sender, EventArgs e)
+
+		private void HandleEffectMandelbrotFractalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new GlowEffect ());
+			PintaCore.Actions.Adjustments.PerformEffect (new MandelbrotFractalEffect ());	
 		}
-		
-		private void HandleEffectsRedEyeRemoveActivated (object sender, EventArgs e)
+
+		private void HandleEffectJuliaFractalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.Adjustments.PerformEffect (new RedEyeRemoveEffect ());	
+			PintaCore.Actions.Adjustments.PerformEffect (new JuliaFractalEffect ());	
 		}
+
 		#endregion
 	}
 }

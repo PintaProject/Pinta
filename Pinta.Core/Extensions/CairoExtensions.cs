@@ -566,7 +566,7 @@ namespace Pinta.Core
 
 			return new Color (dstPtr->R / 255f, dstPtr->G / 255f, dstPtr->B / 255f, dstPtr->A / 255f);
 		}
-		
+
 		public unsafe static void SetPixel (this Cairo.ImageSurface surf, int x, int y, Color color)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
@@ -579,11 +579,32 @@ namespace Pinta.Core
 			dstPtr->A = (byte)(color.A * 255);
 		}
 
+		public unsafe static void SetPixel (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y, Color color)
+		{
+			ColorBgra* dstPtr = surfDataPtr;
+
+			dstPtr += (x) + (y * surfWidth);
+
+			dstPtr->R = (byte)(color.R * 255);
+			dstPtr->G = (byte)(color.G * 255);
+			dstPtr->B = (byte)(color.B * 255);
+			dstPtr->A = (byte)(color.A * 255);
+		}
+
 		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, int x, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
+
+			return *dstPtr;
+		}
+
+		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
+		{
+			ColorBgra* dstPtr = surfDataPtr;
+
+			dstPtr += (x) + (y * surfWidth);
 
 			return *dstPtr;
 		}
@@ -704,11 +725,11 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
-		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += (x) + (y * srcWidth);
+			dstPtr += (x) + (y * surfWidth);
 
 			return dstPtr;
 		}
@@ -726,11 +747,11 @@ namespace Pinta.Core
 		// the passed in argument, but it's nice to have the same calling
 		// convention as the uncached version.  If you can use this one
 		// over the other, it is much faster in tight loops (like effects).
-		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int x, int y)
+		public static unsafe ColorBgra GetPointUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += (x) + (y * srcWidth);
+			dstPtr += (x) + (y * surfWidth);
 
 			return *dstPtr;
 		}
@@ -744,11 +765,11 @@ namespace Pinta.Core
 			return dstPtr;
 		}
 
-		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* srcDataPtr, int srcWidth, int y)
+		public static unsafe ColorBgra* GetRowAddressUnchecked (this ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int y)
 		{
-			ColorBgra* dstPtr = srcDataPtr;
+			ColorBgra* dstPtr = surfDataPtr;
 
-			dstPtr += y * srcWidth;
+			dstPtr += y * surfWidth;
 
 			return dstPtr;
 		}
@@ -775,6 +796,90 @@ namespace Pinta.Core
 		{
 			return new Gdk.Size (surf.Width, surf.Height);
 		}
+
+
+		/// <summary>
+		/// There was a bug in gdk-sharp where this returns incorrect values.
+		/// We will probably have to use this for a long time until every distro
+		/// has an updated gdk.
+		/// </summary>
+		public static bool ContainsCorrect (this Gdk.Rectangle r, int x, int y)
+		{
+			return ((((x >= r.Left) && (x < r.Right)) && (y >= r.Top)) && (y < r.Bottom));
+		}
+
+		/// <summary>
+		/// There was a bug in gdk-sharp where this returns incorrect values.
+		/// We will probably have to use this for a long time until every distro
+		/// has an updated gdk.
+		/// </summary>
+		public static bool ContainsCorrect (this Gdk.Rectangle r, Gdk.Point pt)
+		{
+			return r.ContainsCorrect (pt.X, pt.Y);
+		}
+
+		public static unsafe ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
+		{
+			return GetBilinearSample (src, (ColorBgra*)src.DataPtr, src.Width, src.Height, x, y);
+		}
+
+		public static unsafe ColorBgra GetBilinearSample (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+		{
+			if (!Utility.IsNumber (x) || !Utility.IsNumber (y)) {
+				return ColorBgra.Transparent;
+			}
+
+			float u = x;
+			float v = y;
+
+			if (u >= 0 && v >= 0 && u < srcWidth && v < srcHeight) {
+				unchecked {
+					int iu = (int)Math.Floor (u);
+					uint sxfrac = (uint)(256 * (u - (float)iu));
+					uint sxfracinv = 256 - sxfrac;
+
+					int iv = (int)Math.Floor (v);
+					uint syfrac = (uint)(256 * (v - (float)iv));
+					uint syfracinv = 256 - syfrac;
+
+					uint wul = (uint)(sxfracinv * syfracinv);
+					uint wur = (uint)(sxfrac * syfracinv);
+					uint wll = (uint)(sxfracinv * syfrac);
+					uint wlr = (uint)(sxfrac * syfrac);
+
+					int sx = iu;
+					int sy = iv;
+					int sleft = sx;
+					int sright;
+
+					if (sleft == (srcWidth - 1)) {
+						sright = sleft;
+					} else {
+						sright = sleft + 1;
+					}
+
+					int stop = sy;
+					int sbottom;
+
+					if (stop == (srcHeight - 1)) {
+						sbottom = stop;
+					} else {
+						sbottom = stop + 1;
+					}
+
+					ColorBgra* cul = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, stop);
+					ColorBgra* cur = cul + (sright - sleft);
+					ColorBgra* cll = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
+					ColorBgra* clr = cll + (sright - sleft);
+
+					ColorBgra c = ColorBgra.BlendColors4W16IP (*cul, wul, *cur, wur, *cll, wll, *clr, wlr);
+					return c;
+				}
+			} else {
+				return ColorBgra.FromUInt32 (0);
+			}
+		}
+
 		
 		private struct Edge
         {

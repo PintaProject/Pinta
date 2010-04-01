@@ -42,11 +42,19 @@ namespace Pinta.Core
 		public Gtk.Action InkSketch { get; private set; }
 		public Gtk.Action OilPainting { get; private set; }
 		public Gtk.Action PencilSketch { get; private set; }
+		public Gtk.Action Fragment { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action MotionBlur { get; private set; }
 		public Gtk.Action Glow { get; private set; }
 		public Gtk.Action RedEyeRemove { get; private set; }
+		public Gtk.Action Sharpen { get; private set; }
+		public Gtk.Action SoftenPortrait { get; private set; }
+		public Gtk.Action Clouds { get; private set; }
+		public Gtk.Action JuliaFractal { get; private set; }
+		public Gtk.Action MandelbrotFractal { get; private set; }
+		public Gtk.Action EdgeDetect { get; private set; }
+		
 
 		public EffectsActions ()
 		{
@@ -63,6 +71,13 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
 			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
 			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
+			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
+			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
+			fact.Add ("Menu.Effects.Render.Clouds.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.Clouds.png")));
+			fact.Add ("Menu.Effects.Render.JuliaFractal.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.JuliaFractal.png")));
+			fact.Add ("Menu.Effects.Render.MandelbrotFractal.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Render.MandelbrotFractal.png")));
+			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
+			
 			fact.AddDefault ();
 
 			// Submenus
@@ -76,18 +91,23 @@ namespace Pinta.Core
 
 			Distort.Visible = false;
 			Noise.Visible = false;
-			Render.Visible = false;
-			Stylize.Visible = false;
 			
 			// Menu items
 			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
 			OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
 			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
+			Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
 			MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
+			Sharpen = new Gtk.Action ("Sharpen", Mono.Unix.Catalog.GetString ("Sharpen..."), null, "Menu.Effects.Photo.Sharpen.png");
+			SoftenPortrait = new Gtk.Action ("Soften Portrait", Mono.Unix.Catalog.GetString ("Soften Portrait..."), null, "Menu.Effects.Photo.SoftenPortrait.png");
+			Clouds = new Gtk.Action ("Clouds", Mono.Unix.Catalog.GetString ("Clouds..."), null, "Menu.Effects.Render.Clouds.png");
+			JuliaFractal = new Gtk.Action ("Julia Fractal", Mono.Unix.Catalog.GetString ("Julia Fractal..."), null, "Menu.Effects.Render.JuliaFractal.png");
+			MandelbrotFractal = new Gtk.Action ("Mandelbrot Fractal", Mono.Unix.Catalog.GetString ("Mandelbrot Factal..."), null, "Menu.Effects.Render.MandelbrotFractal.png");
+			EdgeDetect = new Gtk.Action ("EdgeDetect", Mono.Unix.Catalog.GetString ("Edge Detect..."), null, "Menu.Effects.Stylize.EdgeDetect.png");
 		}
 
 		#region Initialization
@@ -109,12 +129,21 @@ namespace Pinta.Core
 			artistic_sub_menu.Append (OilPainting.CreateMenuItem ());
 			artistic_sub_menu.Append (PencilSketch.CreateMenuItem ());
 			
+			blur_sub_menu.Append (Fragment.CreateMenuItem ());
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
 			blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
-			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem());
+			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem ());
+			photo_sub_menu.Append (Sharpen.CreateMenuItem ());
+			photo_sub_menu.Append (SoftenPortrait.CreateMenuItem ());
+			
+			render_sub_menu.Append (Clouds.CreateMenuItem ());
+			render_sub_menu.Append (JuliaFractal.CreateMenuItem ());
+			render_sub_menu.Append (MandelbrotFractal.CreateMenuItem ());
+			
+			stylize_sub_menu.Append (EdgeDetect.CreateMenuItem ());
 		}
 		#endregion
 	}

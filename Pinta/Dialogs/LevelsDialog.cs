@@ -43,7 +43,7 @@ namespace Pinta
 			this.Build ();
 			spinOutGamma.Adjustment.Lower = 0.01;
 			spinOutGamma.Adjustment.Upper = 7.99;
-			spinOutGamma.Adjustment.StepIncrement = 0.01;
+			spinOutGamma.Adjustment.StepIncrement =	0.01;
 			this.Levels = new UnaryPixelOps.Level ();
 			mask = new bool[] {true, true, true};
 

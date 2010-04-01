@@ -42,6 +42,16 @@ namespace Pinta.Core
 			w.InvalidateRect (new Rectangle (0, 0, width, height), true);
 		}
 		
+		public static Rectangle GetBounds (this Window w)
+		{
+			int width;
+			int height;
+			
+			w.GetSize (out width, out height);
+			
+			return new Rectangle (0, 0, width, height);
+		}
+		
 		public static Cairo.Color ToCairoColor (this Gdk.Color color)
 		{
 			return new Cairo.Color ((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);

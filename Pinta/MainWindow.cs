@@ -35,6 +35,8 @@ namespace Pinta
 	{
 		DialogHandlers dialog_handler;
 		
+		ProgressDialog progress_dialog;
+		
 		public MainWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			Build ();
@@ -48,7 +50,9 @@ namespace Pinta
 			PintaCore.Actions.AccelGroup = new AccelGroup ();
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
 
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this);
+			progress_dialog = new ProgressDialog ();
+			
+			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this, progress_dialog);
 			colorpalettewidget1.Initialize ();
 
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
@@ -114,6 +118,8 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 
+			PintaCore.LivePreview.RenderUpdated += LivePreview_RenderUpdated;
+			
 			WindowAction.Visible = false;
 
 			if (Platform.GetOS () == Platform.OS.Mac)
@@ -284,7 +290,50 @@ namespace Pinta
 				even = !even;
 			}
 		}
+		
+		void LivePreview_RenderUpdated (object o,
+		                                LivePreviewRenderUpdatedEventArgs args)
+		{			
+			double scale = PintaCore.Workspace.Scale;
+			var offset = PintaCore.Workspace.Offset;
+			
+			var bounds = args.Bounds;
 
+			// Transform bounds (Image -> Canvas -> Window)
+			
+			// Calculate canvas bounds.
+			double x1 = bounds.Left * scale;
+			double y1 = bounds.Top * scale;
+			double x2 = bounds.Right * scale;
+			double y2 = bounds.Bottom * scale;
+			
+			// TODO Figure out why when scale > 1 that I need add on an
+			// extra pixel of padding.
+			// I must being doing something wrong here.
+			if (scale > 1.0) {
+				//x1 = (bounds.Left-1) * scale;
+				y1 = (bounds.Top-1) * scale;
+				//x2 = (bounds.Right+1) * scale;
+				//y2 = (bounds.Bottom+1) * scale;
+			}			
+			
+			// Calculate window bounds.
+			x1 += offset.X;
+			y1 += offset.Y;
+			x2 += offset.X;	
+			y2 += offset.Y;			
+			
+			// Convert to integer, carefull not to miss paritally covered
+			// pixels by rounding incorrectly.
+			int x = (int)Math.Floor(x1);
+			int y = (int)Math.Floor(y1);
+			int width = (int)Math.Ceiling(x2) - x;
+			int height = (int)Math.Ceiling(y2) - y;
+			
+			// Tell GTK to expose the drawing area.			
+			drawingarea1.QueueDrawArea (x, y, width, height);
+		}
+		
 		#region Drawing Area
 		private void OnDrawingarea1ExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
@@ -310,8 +359,12 @@ namespace Pinta
 				g.Scale (scale, scale);
 
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-					g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-					g.PaintWithAlpha (layer.Opacity);
+					if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
+						PintaCore.LivePreview.RenderLivePreviewLayer (g, layer.Opacity);
+					} else {
+						g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+						g.PaintWithAlpha (layer.Opacity);
+					}
 				}
 
 				g.Restore ();

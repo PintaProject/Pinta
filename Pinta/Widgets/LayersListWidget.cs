@@ -29,6 +29,7 @@ using System;
 using System.Linq;
 using Pinta.Core;
 using Gtk;
+using System.ComponentModel;
 
 namespace Pinta
 {

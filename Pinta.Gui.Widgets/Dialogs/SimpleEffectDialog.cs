@@ -27,11 +27,16 @@
 using System;
 using System.Reflection;
 using System.Text;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Pinta.Gui.Widgets
 {
 	public class SimpleEffectDialog : Gtk.Dialog
 	{
+		const uint event_delay_millis = 100;
+		uint event_delay_timeout_id;
+		
 		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData)
 		{
 			Title = title;
@@ -52,6 +57,8 @@ namespace Pinta.Gui.Widgets
 
 		public object EffectData { get; private set; }
 
+		public event PropertyChangedEventHandler EffectDataChanged;
+		
 		#region EffectData Parser
 		private void BuildDialog ()
 		{
@@ -66,6 +73,7 @@ namespace Pinta.Gui.Widgets
 				string caption = null;
 				string hint = null;
 				bool skip = false;
+				bool combo = false;
 				
 				object[] attrs = mi.GetCustomAttributes (false);
 
@@ -76,6 +84,9 @@ namespace Pinta.Gui.Widgets
 						caption = ((CaptionAttribute)attr).Caption;
 					else if (attr is HintAttribute)
 						hint = ((HintAttribute)attr).Hint;
+					else if (attr is StaticListAttribute)
+						combo = true;
+					
 				}
 
 				if (skip)
@@ -86,8 +97,16 @@ namespace Pinta.Gui.Widgets
 
 				if (mType == typeof (int))
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
+				else if (combo && mType == typeof (string))
+					AddWidget (CreateComboBox (caption, EffectData, mi, attrs));
 				else if (mType == typeof (bool))
 					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
+				else if (mType == typeof (Gdk.Point))
+					AddWidget (CreatePointPicker (caption, EffectData, mi, attrs));
+				else if (mType == typeof (Cairo.PointD))
+					AddWidget (CreateOffsetPicker (caption, EffectData, mi, attrs));
+				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
+					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				
 				if (hint != null)
 					AddWidget (CreateHintLabel (hint));
@@ -102,6 +121,33 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Control Builders
+
+		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
+		{
+			Dictionary<string, object> dict = null;;
+			string dictName;
+			foreach (var attr in attributes) {
+				if (attr is StaticListAttribute)
+					dict = (Dictionary<string, object>)GetValue (((StaticListAttribute)attr).dictionaryName, o);
+			}
+
+			List<string> entries = new List<string> ();
+			foreach (string str in dict.Keys)
+				entries.Add (str);
+				
+			ComboBoxWidget widget = new ComboBoxWidget (entries.ToArray ());
+
+			widget.Label = caption;
+			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
+			widget.Active = entries.IndexOf( (string)GetValue (member, o));
+			
+			widget.Changed += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.ActiveText);
+			};
+			
+			return widget;
+		}
+
 		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
@@ -122,7 +168,15 @@ namespace Pinta.Gui.Widgets
 			widget.DefaultValue = (int)GetValue (member, o);
 			
 			widget.ValueChanged += delegate (object sender, EventArgs e) {
-				SetValue (member, o, widget.Value);
+				
+				if (event_delay_timeout_id != 0)
+					GLib.Source.Remove (event_delay_timeout_id);
+				
+				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
+					event_delay_timeout_id = 0;
+					SetValue (member, o, widget.Value);
+					return false;
+				});
 			};
 			
 			return widget;
@@ -131,7 +185,6 @@ namespace Pinta.Gui.Widgets
 		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
 		{
 			Gtk.CheckButton widget = new Gtk.CheckButton ();
-
 
 			widget.Label = caption;
 			widget.Active = (bool)GetValue (member, o);
@@ -142,10 +195,61 @@ namespace Pinta.Gui.Widgets
 
 			return widget;
 		}
+
+		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			PointPickerWidget widget = new PointPickerWidget ();
+						
+			widget.Label = caption;
+			widget.DefaultOffset = (Cairo.PointD)GetValue (member, o);
+
+			widget.PointPicked += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.Offset);
+			};
+
+			return widget;
+		}
+
+		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			PointPickerWidget widget = new PointPickerWidget ();
+						
+			widget.Label = caption;
+			widget.DefaultPoint = (Gdk.Point)GetValue (member, o);
+
+			widget.PointPicked += delegate (object sender, EventArgs e) {
+				SetValue (member, o, widget.Point);
+			};
+
+			return widget;
+		}
+
+		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			AnglePickerWidget widget = new AnglePickerWidget ();
+
+			widget.Label = caption;
+			widget.DefaultValue = (double)GetValue (member, o);
+			
+			widget.ValueChanged += delegate (object sender, EventArgs e) {				
+				if (event_delay_timeout_id != 0)
+					GLib.Source.Remove (event_delay_timeout_id);
+				
+				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
+					event_delay_timeout_id = 0;
+					SetValue (member, o, widget.Value);
+					return false;
+				});
+			};
+
+			return widget;
+		}
 		
 		private Gtk.Label CreateHintLabel (string hint)
 		{
 			Gtk.Label label = new Gtk.Label (hint);
+			label.LineWrap = true;
+			
 			return label;
 		}
 		#endregion
@@ -162,16 +266,23 @@ namespace Pinta.Gui.Widgets
 			return getMethod.Invoke (o, new object[0]);
 		}
 
-		private static void SetValue (MemberInfo mi, object o, object val)
-		{
+		private void SetValue (MemberInfo mi, object o, object val)
+		{			
 			var fi = mi as FieldInfo;
+			var pi = mi as PropertyInfo;
+			string fieldName = null;
+			
 			if (fi != null) {
 				fi.SetValue (o, val);
-				return;
+				fieldName = fi.Name;
+			} else if (pi != null) {
+				var setMethod = pi.GetSetMethod ();
+				setMethod.Invoke (o, new object[] { val });
+				fieldName = pi.Name;
 			}
-			var pi = mi as PropertyInfo;
-			var setMethod = pi.GetSetMethod ();
-			setMethod.Invoke (o, new object[] { val });
+						
+			if (EffectDataChanged != null)
+				EffectDataChanged (this, new PropertyChangedEventArgs(fieldName));
 		}
 
 		// Returns the type for fields and properties and null for everything else
@@ -207,6 +318,18 @@ namespace Pinta.Gui.Widgets
 			}
 			
 			return sb.ToString ();
+		}
+		
+		private object GetValue(string name, object o)
+		{
+			var fi = o.GetType ().GetField (name);
+			if (fi != null)
+				return fi.GetValue (o);
+			var pi = o.GetType ().GetProperty (name);
+			if (pi ==  null)
+				return null;
+			var getMethod = pi.GetGetMethod ();
+			return getMethod.Invoke (o, new object[0]);
 		}
 		#endregion
 	}
