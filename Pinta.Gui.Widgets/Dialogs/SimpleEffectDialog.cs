@@ -96,8 +96,10 @@ namespace Pinta.Gui.Widgets
 				if (caption == null)
 					caption = MakeCaption (mi.Name);
 
-                if (mType == typeof(int))
+				if (mType == typeof(int))
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
+				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
+					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				else if (mType == typeof(double))
 					AddWidget (CreateDoubleSlider (caption, EffectData, mi, attrs));
 				else if (combo && mType == typeof (string))
@@ -108,8 +110,6 @@ namespace Pinta.Gui.Widgets
 					AddWidget (CreatePointPicker (caption, EffectData, mi, attrs));
 				else if (mType == typeof (Cairo.PointD))
 					AddWidget (CreateOffsetPicker (caption, EffectData, mi, attrs));
-				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
-					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
 				else if (mType.IsEnum)
 					AddWidget (CreateEnumComboBox (caption, EffectData, mi, attrs));
 				
