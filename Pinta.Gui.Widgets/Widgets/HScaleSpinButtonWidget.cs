@@ -39,11 +39,12 @@ namespace Pinta.Gui.Widgets
 		}
 
 		[Category("Custom Properties")]
-		public int DefaultValue { get; set; }
+		public double DefaultValue { get; set; }
 
-		private int max_value;
+        private int max_value;
 		[Category("Custom Properties")]
-		public int MaximumValue {
+        public int MaximumValue
+        {
 			get { return max_value; }
 			set {
 				max_value = value;
@@ -52,7 +53,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private int min_value;
+        private int min_value;
 		[Category("Custom Properties")]
 		public int MinimumValue {
 			get { return min_value; }
@@ -62,10 +63,45 @@ namespace Pinta.Gui.Widgets
 				spin.Adjustment.Lower = value;
 			}
 		}
+        private int digits_value;
+        [Category("Custom Properties")]
+        public int DigitsValue
+        {
+            get { return digits_value; }
+            set
+            {
+                if (value > 0)
+                {
+                    
+                    digits_value = value;
+                    hscale.Digits = value;
+                    spin.Digits = Convert.ToUInt32(value);
+                }
+            }
+        }
+
+        private double inc_value;
+        [Category("Custom Properties")]
+        public double IncrementValue
+        {
+            get { return inc_value; }
+            set
+            {
+                inc_value = value;
+                hscale.Adjustment.StepIncrement = value;
+                spin.Adjustment.StepIncrement = value;
+            }
+        }
+        
+        [Category("Custom Properties")]
+        public int ValueAsInt
+        {
+            get { return spin.ValueAsInt; }
+        }
 
 		[Category("Custom Properties")]
-		public int Value {
-			get { return spin.ValueAsInt; }
+		public double Value {
+			get { return spin.Value; }
 			set {
 				if (spin.Value != value) {
 					spin.Value = value;

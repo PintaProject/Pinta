@@ -49,6 +49,8 @@ namespace Pinta {
             this.hscalespinRed.DefaultValue = 16;
             this.hscalespinRed.MaximumValue = 64;
             this.hscalespinRed.MinimumValue = 2;
+            this.hscalespinRed.DigitsValue = 0;
+            this.hscalespinRed.IncrementValue = 0;
             this.hscalespinRed.Value = 0;
             this.vbox2.Add(this.hscalespinRed);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox2[this.hscalespinRed]));
@@ -63,6 +65,8 @@ namespace Pinta {
             this.hscalespinGreen.DefaultValue = 16;
             this.hscalespinGreen.MaximumValue = 64;
             this.hscalespinGreen.MinimumValue = 2;
+            this.hscalespinGreen.DigitsValue = 0;
+            this.hscalespinGreen.IncrementValue = 0;
             this.hscalespinGreen.Value = 0;
             this.vbox2.Add(this.hscalespinGreen);
             Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox2[this.hscalespinGreen]));
@@ -77,6 +81,8 @@ namespace Pinta {
             this.hscalespinBlue.DefaultValue = 16;
             this.hscalespinBlue.MaximumValue = 64;
             this.hscalespinBlue.MinimumValue = 2;
+            this.hscalespinBlue.DigitsValue = 0;
+            this.hscalespinBlue.IncrementValue = 0;
             this.hscalespinBlue.Value = 0;
             this.vbox2.Add(this.hscalespinBlue);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.hscalespinBlue]));

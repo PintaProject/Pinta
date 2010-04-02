@@ -715,6 +715,18 @@ namespace Pinta.Core
 		{
 			return rect.X + rect.Width;
 		}
+
+        /// <summary>
+        /// Determines if the requested pixel coordinate is within bounds.
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <returns>true if (x,y) is in bounds, false if it's not.</returns>
+        public static bool IsVisible(this ImageSurface surf, int x, int y)
+        {
+            return x >= 0 && x < surf.Width && y >= 0 && y < surf.Height;
+        }
+
 		
 		public static unsafe ColorBgra* GetPointAddressUnchecked (this ImageSurface surf, int x, int y)
 		{
@@ -878,6 +890,176 @@ namespace Pinta.Core
 				return ColorBgra.FromUInt32 (0);
 			}
 		}
+
+		public static unsafe ColorBgra GetBilinearSampleClamped (this ImageSurface src, float x, float y)
+		{
+			return GetBilinearSampleClamped (src, (ColorBgra*)src.DataPtr, src.Width, src.Height, x, y);
+		}
+
+		public static unsafe ColorBgra GetBilinearSampleClamped (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+        {
+            if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
+            {
+                return ColorBgra.Transparent;
+            }
+
+            float u = x;
+            float v = y;
+
+            if (u < 0)
+            {
+                u = 0;
+            }
+            else if (u > srcWidth - 1)
+            {
+                u = srcWidth - 1;
+            }
+
+            if (v < 0)
+            {
+                v = 0;
+            }
+            else if (v > srcHeight - 1)
+            {
+                v = srcHeight - 1;
+            }
+
+            unchecked
+            {
+                int iu = (int)Math.Floor(u);
+                uint sxfrac = (uint)(256 * (u - (float)iu));
+                uint sxfracinv = 256 - sxfrac;
+
+                int iv = (int)Math.Floor(v);
+                uint syfrac = (uint)(256 * (v - (float)iv));
+                uint syfracinv = 256 - syfrac;
+
+                uint wul = (uint)(sxfracinv * syfracinv);
+                uint wur = (uint)(sxfrac * syfracinv);
+                uint wll = (uint)(sxfracinv * syfrac);
+                uint wlr = (uint)(sxfrac * syfrac);
+
+                int sx = iu;
+                int sy = iv;
+                int sleft = sx;
+                int sright;
+
+                if (sleft == (srcWidth - 1))
+                {
+                    sright = sleft;
+                }
+                else
+                {
+                    sright = sleft + 1;
+                }
+
+                int stop = sy;
+                int sbottom;
+
+                if (stop == (srcHeight - 1))
+                {
+                    sbottom = stop;
+                }
+                else
+                {
+                    sbottom = stop + 1;
+                }
+                               
+                ColorBgra *cul = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, stop);
+                ColorBgra *cur = cul + (sright - sleft);
+                ColorBgra *cll = src.GetPointAddressUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
+                ColorBgra *clr = cll + (sright - sleft);
+
+                ColorBgra c = ColorBgra.BlendColors4W16IP (*cul, wul, *cur, wur, *cll, wll, *clr, wlr);
+                return c;
+            }
+        }
+
+		public static unsafe ColorBgra GetBilinearSampleWrapped (this ImageSurface src, float x, float y)
+		{
+			return GetBilinearSampleWrapped (src, (ColorBgra*)src.DataPtr, src.Width, src.Height, x, y);
+		}
+
+		public static unsafe ColorBgra GetBilinearSampleWrapped (this ImageSurface src, ColorBgra* srcDataPtr, int srcWidth, int srcHeight, float x, float y)
+        {
+            if (!Utility.IsNumber(x) || !Utility.IsNumber(y))
+            {
+                return ColorBgra.Transparent;
+            }
+
+            float u = x;
+            float v = y;
+
+            unchecked
+            {
+                int iu = (int)Math.Floor(u);
+                uint sxfrac = (uint)(256 * (u - (float)iu));
+                uint sxfracinv = 256 - sxfrac;
+
+                int iv = (int)Math.Floor(v);
+                uint syfrac = (uint)(256 * (v - (float)iv));
+                uint syfracinv = 256 - syfrac;
+
+                uint wul = (uint)(sxfracinv * syfracinv);
+                uint wur = (uint)(sxfrac * syfracinv);
+                uint wll = (uint)(sxfracinv * syfrac);
+                uint wlr = (uint)(sxfrac * syfrac);
+
+                int sx = iu;
+                if (sx < 0)
+                {
+                    sx = (srcWidth - 1) + ((sx + 1) % srcWidth);
+                }
+                else if (sx > (srcWidth - 1))
+                {
+                    sx = sx % srcWidth;
+                }
+
+                int sy = iv;
+                if (sy < 0)
+                {
+                    sy = (srcHeight - 1) + ((sy + 1) % srcHeight);
+                }
+                else if (sy > (srcHeight - 1))
+                {
+                    sy = sy % srcHeight;
+                }
+
+                int sleft = sx;
+                int sright;
+
+                if (sleft == (srcWidth - 1))
+                {
+                    sright = 0;
+                }
+                else
+                {
+                    sright = sleft + 1;
+                }
+
+                int stop = sy;
+                int sbottom;
+
+                if (stop == (srcHeight - 1))
+                {
+                    sbottom = 0;
+                }
+                else
+                {
+                    sbottom = stop + 1;
+                }
+                               
+                ColorBgra cul = src.GetPointUnchecked (srcDataPtr, srcWidth, sleft, stop);
+                ColorBgra cur = src.GetPointUnchecked (srcDataPtr, srcWidth, sright, stop);
+                ColorBgra cll = src.GetPointUnchecked (srcDataPtr, srcWidth, sleft, sbottom);
+                ColorBgra clr = src.GetPointUnchecked (srcDataPtr, srcWidth, sright, sbottom);
+
+                ColorBgra c = ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
+
+                return c;
+            }
+        }
+
 
 	}
 }

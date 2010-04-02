@@ -1,10 +1,10 @@
 // 
-// Sharpen Effect.cs
+// PolarInversionEffect.cs
 //  
 // Author:
-//       Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//       dufoli <${AuthorEmail}>
 // 
-// Copyright (c) 2010 Krzysztof Marecki
+// Copyright (c) 2010 dufoli
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,56 +23,60 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using System;
 using Cairo;
-
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-	public class SharpenEffect : LocalHistogramEffect
+	public class PolarInversionEffect : WarpEffect
 	{
 		public override string Icon {
-			get { return "Menu.Effects.Photo.Sharpen.png"; }
+			get { return "Menu.Effects.Distort.PolarInversion.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Sharpen"); }
+			get { return Mono.Unix.Catalog.GetString ("Polar Inversion"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
-		
-		public SharpenData Data { get { return EffectData as SharpenData; } }
-		
-		public SharpenEffect ()
-		{
-			EffectData = new SharpenData ();
+
+		public PolarInversionData Data {
+			get { return EffectData as PolarInversionData; }
 		}
-		
-		public override bool LaunchConfiguration ()
+
+		public PolarInversionEffect ()
 		{
-			return EffectHelper.LaunchSimpleEffectDialog (this);
+			EffectData = new PolarInversionData ();
 		}
-		
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+
+		#region Algorithm Code Ported From PDN
+		protected override void InverseTransform (ref TransformData transData)
 		{
-			foreach (Gdk.Rectangle rect in rois)
-				RenderRect (Data.Amount, src, dest, rect);
+			double x = transData.X;
+			double y = transData.Y;
+			
+			// NOTE: when x and y are zero, this will divide by zero and return NaN
+			double invertDistance = Utility.Lerp (1.0, DefaultRadius2 / ((x * x) + (y * y)), Data.Amount);
+			
+			transData.X = x * invertDistance;
+			transData.Y = y * invertDistance;
 		}
-		
-		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		#endregion
+
+		public class PolarInversionData : WarpEffect.WarpData
 		{
-			ColorBgra median = GetPercentile(50, area, hb, hg, hr, ha);
-			return ColorBgra.Lerp(src, median, -0.5f);
+			[MinimumValue(-4), MaximumValue(4)]
+			public double Amount = 0;
+
+			public PolarInversionData () : base()
+			{
+				EdgeBehavior = WarpEdgeBehavior.Reflect;
+			}
+			
 		}
-	}
-	
-	public class SharpenData : EffectData
-	{
-		[MinimumValue (1), MaximumValue (20)]
-		public int Amount = 2;
 	}
 }
-

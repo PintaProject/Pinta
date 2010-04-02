@@ -113,8 +113,20 @@ namespace Pinta.Gui.Widgets
 			spinX.ValueChanged += HandleSpinXValueChanged;
 			spinY.ValueChanged += HandleSpinYValueChanged;
 			pointpickergraphic1.PositionChanged += HandlePointpickergraphic1PositionChanged;
+			button1.Pressed += HandleButton1Pressed;
+			button2.Pressed += HandleButton2Pressed;
 			
 			pointpickergraphic1.Init (DefaultPoint);
+		}
+
+		void HandleButton1Pressed (object sender, EventArgs e)
+		{
+			spinX.Value = DefaultPoint.X;
+		}
+
+		void HandleButton2Pressed (object sender, EventArgs e)
+		{
+			spinY.Value = DefaultPoint.Y;
 		}
 		
 		#region Protected Methods

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -22,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Commandlineparameters>"/home/hari/Pictures/irenka i krzys/sierpien 2009/24082009799.jpg"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -40,8 +39,7 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System.Core">
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
   </ItemGroup>
@@ -52,6 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
+    <Compile Include="ConfigurableEffects\AddNoiseEffect.cs" />
+    <Compile Include="ConfigurableEffects\ZoomBlurEffect.cs" />
+    <Compile Include="ConfigurableEffects\ReduceNoiseEffect.cs" />
+    <Compile Include="ConfigurableEffects\OutlineEffect.cs" />
+    <Compile Include="ConfigurableEffects\MedianEffect.cs" />
+    <Compile Include="ConfigurableEffects\UnfocusEffect.cs" />
+    <Compile Include="ConfigurableEffects\LocalHistogramEffect.cs" />
+    <Compile Include="ConfigurableEffects\SurfaceBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\PencilSketchEffect.cs" />
     <Compile Include="ConfigurableEffects\OilPaintingEffect.cs" />
     <Compile Include="ConfigurableEffects\GlowEffect.cs" />
@@ -104,13 +110,17 @@
     <Compile Include="ConfigurableEffects\RadialBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\MotionBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\FragmentEffect.cs" />
-    <Compile Include="ConfigurableEffects\ZoomBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\CloudsEffect.cs" />
     <Compile Include="ConfigurableEffects\JuliaFractalEffect.cs" />
     <Compile Include="ConfigurableEffects\MandelbrotFractalEffect.cs" />
     <Compile Include="ConfigurableEffects\EffectHelper.cs" />
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
+    <Compile Include="ConfigurableEffects\BulgeEffect.cs" />
+    <Compile Include="ConfigurableEffects\DentsEffect.cs" />
+    <Compile Include="ConfigurableEffects\WarpEffect.cs" />
+    <Compile Include="ConfigurableEffects\PolarInversionEffect.cs" />
+    <Compile Include="ConfigurableEffects\PerlinNoise2D.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

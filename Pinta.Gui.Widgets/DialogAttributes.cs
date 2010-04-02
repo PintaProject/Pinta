@@ -29,12 +29,12 @@ using System.Collections.Generic;
 
 namespace Pinta.Gui.Widgets
 {
-	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class SkipAttribute : Attribute
 	{
 	}
 
-	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class CaptionAttribute : Attribute
 	{
 		public CaptionAttribute (string caption)
@@ -45,7 +45,29 @@ namespace Pinta.Gui.Widgets
 		public string Caption;
 	}
 
-	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+    public class DigitsValueAttribute : Attribute
+    {
+        public DigitsValueAttribute(int value)
+        {
+            Value = value;
+        }
+
+        public int Value;
+    }
+
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+    public class IncrementValueAttribute : Attribute
+    {
+        public IncrementValueAttribute(double value)
+        {
+            Value = value;
+        }
+
+        public double Value;
+    }
+
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class MinimumValueAttribute : Attribute
 	{
 		public MinimumValueAttribute (int value)
@@ -56,7 +78,7 @@ namespace Pinta.Gui.Widgets
 		public int Value;
 	}
 
-	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class MaximumValueAttribute : Attribute
 	{
 		public MaximumValueAttribute (int value)
@@ -66,8 +88,8 @@ namespace Pinta.Gui.Widgets
 
 		public int Value;
 	}
-
-	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
+	
+	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 	public class HintAttribute : Attribute
 	{
 		public HintAttribute (string caption)

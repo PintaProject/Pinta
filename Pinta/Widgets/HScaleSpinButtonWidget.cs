@@ -33,47 +33,90 @@ namespace Pinta
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class HScaleSpinButtonWidget : Gtk.Bin
 	{
-		[Category("Custom Properties")]
-		public string Label {
-			get { return label.Text; }
-			set { label.Text = value; }
-		}
-		
-		[Category("Custom Properties")]
-		public int DefaultValue { get; set; }
-		
-		private int max_value;
-		[Category("Custom Properties")]
-		public int MaximumValue {
-			get { return max_value; }
-			set {
-				max_value = value;
-				hscale.Adjustment.Upper = value;
-				spin.Adjustment.Upper = value;
-			}
-		}
-	
-		private int min_value;
-		[Category("Custom Properties")]
-		public int MinimumValue {
-			get { return min_value; }
-			set {
-				min_value = value;
-				hscale.Adjustment.Lower = value;
-				spin.Adjustment.Lower = value;
-			}
-		}
-		
-		[Category("Custom Properties")]
-		public int Value {
-			get { return spin.ValueAsInt; }
-			set { 
-				if (spin.Value != value) {
-					spin.Value = value;
-					OnValueChanged ();
-				}
-			}
-		}
+        [Category("Custom Properties")]
+        public string Label
+        {
+            get { return label.Text; }
+            set { label.Text = value; }
+        }
+
+        [Category("Custom Properties")]
+        public double DefaultValue { get; set; }
+
+        private int max_value;
+        [Category("Custom Properties")]
+        public int MaximumValue
+        {
+            get { return max_value; }
+            set
+            {
+                max_value = value;
+                hscale.Adjustment.Upper = value;
+                spin.Adjustment.Upper = value;
+            }
+        }
+
+        private int min_value;
+        [Category("Custom Properties")]
+        public int MinimumValue
+        {
+            get { return min_value; }
+            set
+            {
+                min_value = value;
+                hscale.Adjustment.Lower = value;
+                spin.Adjustment.Lower = value;
+            }
+        }
+        private int digits_value;
+        [Category("Custom Properties")]
+        public int DigitsValue
+        {
+            get { return digits_value; }
+            set
+            {
+                if (value > 0)
+                {
+
+                    digits_value = value;
+                    hscale.Digits = value;
+                    spin.Digits = Convert.ToUInt32(value);
+                }
+            }
+        }
+
+        private double inc_value;
+        [Category("Custom Properties")]
+        public double IncrementValue
+        {
+            get { return inc_value; }
+            set
+            {
+                inc_value = value;
+                hscale.Adjustment.StepIncrement = value;
+                spin.Adjustment.StepIncrement = value;
+            }
+        }
+
+        [Category("Custom Properties")]
+        public int ValueAsInt
+        {
+            get { return spin.ValueAsInt; }
+        }
+
+        [Category("Custom Properties")]
+        public double Value
+        {
+            get { return spin.Value; }
+            set
+            {
+                if (spin.Value != value)
+                {
+                    spin.Value = value;
+                    OnValueChanged();
+                }
+            }
+        }
 		
 		public HScaleSpinButtonWidget ()
 		{

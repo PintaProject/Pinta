@@ -358,6 +358,27 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Render.MandelbrotFractal.png">
       <LogicalName>Menu.Effects.Render.MandelbrotFractal.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Bulge.png">
+      <LogicalName>Menu.Effects.Distort.Bulge.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.Median.png">
+      <LogicalName>Menu.Effects.Noise.Median.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.ReduceNoise.png">
+      <LogicalName>Menu.Effects.Noise.ReduceNoise.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Noise.AddNoise.png">
+      <LogicalName>Menu.Effects.Noise.AddNoise.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Outline.png">
+      <LogicalName>Menu.Effects.Stylize.Outline.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Dents.png">
+      <LogicalName>Menu.Effects.Distort.Dents.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.PolarInversion.png">
+      <LogicalName>Menu.Effects.Distort.PolarInversion.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">

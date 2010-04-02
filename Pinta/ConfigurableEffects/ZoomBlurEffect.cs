@@ -128,7 +128,7 @@ namespace Pinta.Core
                                 ++sc;
                             }
                         }
-                 
+
                         if (sa != 0)
                         {
                             *dstPtr = ColorBgra.FromBgra(

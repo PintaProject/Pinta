@@ -31,6 +31,18 @@ namespace Pinta
 {
 	public partial class PosterizeDialog : Gtk.Dialog
 	{
+		public int Red {
+			get { return hscalespinRed.ValueAsInt; }
+		}
+		
+		public int Green { 
+			get { return hscalespinGreen.ValueAsInt; }
+		}
+		
+		public int Blue {
+            get { return hscalespinBlue.ValueAsInt; }
+		}
+
 		public PosterizeDialog ()
 		{
 			Build ();
@@ -57,9 +69,9 @@ namespace Pinta
 			if (EffectData == null)
 				return;
 			
-			EffectData.Red = hscalespinRed.Value;
-			EffectData.Green = hscalespinGreen.Value;
-			EffectData.Blue = hscalespinBlue.Value;
+			EffectData.Red = hscalespinRed.ValueAsInt;
+			EffectData.Green = hscalespinGreen.ValueAsInt;
+			EffectData.Blue = hscalespinBlue.ValueAsInt;
 			
 			// Only fire event once, even if all properties have changed.
 			EffectData.FirePropertyChanged ("_all_");
