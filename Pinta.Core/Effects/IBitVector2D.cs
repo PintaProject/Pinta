@@ -43,7 +43,7 @@ namespace Pinta.Core
 		void Set (int x, int y, bool newValue);
 		void Set (Point pt, bool newValue);
 		void Set (Rectangle rect, bool newValue);
-		//void Set (Scanline scan, bool newValue);
+		void Set (Scanline scan, bool newValue);
 		//void Set (PdnRegion region, bool newValue);
 		void SetUnchecked (int x, int y, bool newValue);
 		bool Get (int x, int y);
@@ -51,7 +51,7 @@ namespace Pinta.Core
 		void Invert (int x, int y);
 		void Invert (Point pt);
 		void Invert (Rectangle rect);
-		//void Invert (Scanline scan);
+		void Invert (Scanline scan);
 		//void Invert (PdnRegion region);
 	}
 }

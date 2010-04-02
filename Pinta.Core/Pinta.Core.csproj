@@ -142,6 +142,8 @@
     <Compile Include="Classes\LayerProperties.cs" />
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
+    <Compile Include="Tools\MagicWandTool.cs" />
+    <Compile Include="Managers\PathManager.cs" />
     <Compile Include="Effects\IrregularSurface.cs" />
     <Compile Include="Effects\ISurfaceDraw.cs" />
     <Compile Include="Effects\PlacedSurface.cs" />

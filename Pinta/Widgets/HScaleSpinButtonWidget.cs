@@ -118,6 +118,7 @@ namespace Pinta
             }
         }
 		
+		
 		public HScaleSpinButtonWidget ()
 		{
 			this.Build ();

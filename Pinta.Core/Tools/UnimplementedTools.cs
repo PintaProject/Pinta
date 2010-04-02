@@ -31,19 +31,6 @@ namespace Pinta.Core
 	// This is just to get them to show up in the toolbox
 	// until they get implemented
 			
-	public class MagicWandTool : BaseTool
-	{
-		public override string Name {
-			get { return "Magic Wand"; }
-		}
-		public override string Icon {
-			get { return "Tools.MagicWand.png"; }
-		}
-		public override bool Enabled {
-			get { return false; }
-		}
-	}
-		
 	public class GradientTool : BaseTool
 	{
 		public override string Name {
