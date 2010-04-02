@@ -90,7 +90,7 @@ namespace Pinta.Gui.Widgets
 					
 				}
 
-				if (skip)
+				if (skip || string.Compare (mi.Name, "IsDefault", true) == 0)
 					continue;
 
 				if (caption == null)
