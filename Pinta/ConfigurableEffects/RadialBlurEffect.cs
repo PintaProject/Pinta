@@ -44,27 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public RadialBlurData Data { get; private set; }
+		public RadialBlurData Data { get { return EffectData as RadialBlurData; } }
 
 		public RadialBlurEffect ()
 		{
-			Data = new RadialBlurData ();
+			EffectData = new RadialBlurData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -175,18 +164,18 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class RadialBlurData
+		public class RadialBlurData : EffectData
 		{
 			public Double Angle = 2;
-
-			[Skip]
-			public bool IsEmpty { get { return Angle == 0; } }
-
-			public Cairo.PointD Offset = new Cairo.PointD (0.0, 0.0);
+			
+			public PointD Offset = new PointD (0, 0);
 
 			[MinimumValue (1), MaximumValue (5)]
 			[Hint ("\nUse low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
 			public int Quality = 2;
+			
+			[Skip]
+			public override bool IsDefault { get { return Angle == 0; } }
 		}
 	}
 }

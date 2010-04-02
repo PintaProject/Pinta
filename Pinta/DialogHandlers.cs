@@ -44,14 +44,14 @@ namespace Pinta
 			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleEffectActivated <BrightnessContrastEffect>;
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
 			PintaCore.Actions.Adjustments.Levels.Activated += HandleAdjustmentsLevelsActivated;
-			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
+			PintaCore.Actions.Adjustments.Posterize.Activated += HandleEffectActivated <PosterizeEffect>;
 			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleEffectActivated <HueSaturationEffect>;
 			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectActivated <InkSketchEffect>;
 			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectActivated <OilPaintingEffect>;
 			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectActivated <PencilSketchEffect>;
 			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectActivated <FragmentEffect>;
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated <GaussianBlurEffect>;
-			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
+			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectActivated <RadialBlurEffect>;
 			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated <MotionBlurEffect>;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated <GlowEffect>;
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated <RedEyeRemoveEffect>;
@@ -200,11 +200,6 @@ namespace Pinta
 			var effect = new T ();
 			PintaCore.LivePreview.Start (effect);
 		}
-				
-		private void HandleAdjustmentsPosterizeActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new PosterizeEffect ());
-		}
 		
 		private void HandleAdjustmentsCurvesActivated (object sender, EventArgs e)
 		{
@@ -214,11 +209,6 @@ namespace Pinta
 		private void HandleAdjustmentsLevelsActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
-		}
-
-		private void HandleEffectRadialBlurActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.Adjustments.PerformEffect (new RadialBlurEffect ());
 		}
 
 		private void HandleEffectCloudsActivated (object sender, EventArgs e)
