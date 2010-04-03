@@ -61,7 +61,6 @@ namespace Pinta.Core
 		#region Algorithm Code Ported From PDN
 		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
-			
 			float bulge = (float)Data.Amount;
 			
 			float hw = dst.Width / 2f;
@@ -72,13 +71,17 @@ namespace Pinta.Core
 			
 			hh = hh + (float)Data.Offset.Y * hh;
 			hw = hw + (float)Data.Offset.X * hw;
+
+			int src_width = src.Width;
+			int src_height = src.Height;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 			
 			foreach (Gdk.Rectangle rect in rois) {
 				
 				for (int y = rect.Top; y < rect.Bottom; y++) {
 					
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 					float v = y - hh;
 					
 					for (int x = rect.Left; x < rect.Right; x++) {
@@ -92,7 +95,7 @@ namespace Pinta.Core
 							float xp = u * rscale2;
 							float yp = v * rscale2;
 							
-							*dstPtr = src.GetBilinearSampleClamped (xp + hw, yp + hh);
+							*dstPtr = src.GetBilinearSampleClamped (src_data_ptr, src_width, src_height, xp + hw, yp + hh);
 						} else {
 							*dstPtr = *srcPtr;
 						}
