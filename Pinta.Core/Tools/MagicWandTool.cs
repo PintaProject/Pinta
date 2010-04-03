@@ -71,7 +71,6 @@ namespace Pinta.Core
 
         protected override void OnActivated()
         {
-            PintaCore.Layers.ShowSelection = true;
             this.cursorMouseUp = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.MagicWand.png"), 0, 0);
             base.OnActivated();
         }
@@ -83,7 +82,7 @@ namespace Pinta.Core
                 cursorMouseUp.Dispose();
                 cursorMouseUp = null;
             }
-			PintaCore.Layers.ShowSelection = false;
+
             base.OnDeactivated();
         }
 
@@ -115,12 +114,15 @@ namespace Pinta.Core
             }
 
             base.OnMouseDown (canvas, args, point);
+
+	    PintaCore.Layers.ShowSelection = true;
         }
 
         protected override void OnFillRegionComputed(Point[][] polygonSet)
         {
             SelectionHistoryItem undoAction = new SelectionHistoryItem (this.Icon, this.Name);
-
+		undoAction.TakeSnapshot ();
+		
 			Path path = PintaCore.Layers.SelectionPath;
 			
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
