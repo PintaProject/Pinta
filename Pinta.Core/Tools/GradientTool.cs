@@ -47,6 +47,7 @@ namespace Pinta.Core
 	public class GradientTool : BaseTool
 	{
 		Cairo.PointD startpoint;
+		bool tracking;
 		
 		public override string Name {
 			get { return "Gradient"; }
@@ -61,6 +62,7 @@ namespace Pinta.Core
 		{
 			base.OnMouseDown (canvas, args, point);
 			startpoint = point;
+			tracking = true;
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -68,12 +70,16 @@ namespace Pinta.Core
 			base.OnMouseUp (canvas, args, point);
 			PintaCore.Layers.ToolLayer.Clear ();
 			PintaCore.Layers.ToolLayer.Hidden = true;
+			tracking = false;
 			
 			//TODO switch type and add mode to params of g.Draw...
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.Antialias = Antialias.Subpixel;
-
-				g.DrawLinearGradient (PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+				//g.Antialias = Antialias.Subpixel;
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+				
+				g.DrawLinearGradient (GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
 					
 				PintaCore.Workspace.Invalidate ();
 			}
@@ -81,16 +87,18 @@ namespace Pinta.Core
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			base.OnMouseMove (o, args, point);
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = false;
-			
-			using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
-				g.Antialias = Antialias.Subpixel;
-
-				g.DrawLinearGradient (PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
-					
-				PintaCore.Workspace.Invalidate ();
+			if (tracking) {
+				base.OnMouseMove (o, args, point);
+				PintaCore.Layers.ToolLayer.Clear ();
+				PintaCore.Layers.ToolLayer.Hidden = false;
+				
+				using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
+					//g.Antialias = Antialias.Subpixel;
+	
+					g.DrawLinearGradient (GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+	
+					PintaCore.Workspace.Invalidate ();
+				}
 			}
 		}
 		#endregion
@@ -216,8 +224,10 @@ namespace Pinta.Core
 			get {
 				if (color_mode_gradient_btn.Active)
 					return eGradientColorMode.Color;
-				else 
+				else if (transparency_mode_gradient_btn.Active)
 					return eGradientColorMode.Transparency;
+				else
+					return eGradientColorMode.Color;
 			}
 		}
 		#endregion

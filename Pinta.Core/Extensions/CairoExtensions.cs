@@ -497,20 +497,28 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void DrawLinearGradient (this Context g, Color c1, Color c2, PointD p1, PointD p2)
+		public static void DrawLinearGradient (this Context g, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2)
 		{
 			g.Save ();
 			
 			Gradient gradient = new Cairo.LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
 			
-			gradient.AddColorStop (0, c1);
-			gradient.AddColorStop (1, c2);
-			g.Pattern = gradient;
+			if (mode == eGradientColorMode.Color) {
+				gradient.AddColorStop (0, c1);
+				gradient.AddColorStop (1, c2);
+				g.Source = gradient;
+				g.Paint ();
+			}
+			else if (mode == eGradientColorMode.Transparency) {
+				gradient.AddColorStop (1, new Color (0, 0, 0, 1));
+				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
+				g.Mask (gradient);
+			}
 			
 			g.Restore ();
 		}
 
-		public static void DrawRadialGradient (this Context g, Color c1, Color c2, PointD p1, PointD p2, double r1, double r2)
+		public static void DrawRadialGradient (this Context g, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2, double r1, double r2)
 		{
 			g.Save ();
 			
@@ -518,7 +526,13 @@ namespace Pinta.Core
 			
 			gradient.AddColorStop (0, new Cairo.Color (0,0,0));
 			gradient.AddColorStop (1, new Cairo.Color (1,1,1));
-			g.Pattern = gradient;
+
+			if (mode == eGradientColorMode.Color) {
+				g.Source = gradient;
+				g.Paint ();
+			}
+			else if (mode == eGradientColorMode.Transparency)
+				g.Mask (gradient);
 			
 			g.Restore ();
 		}
