@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Pinta.Gui.Widgets;
 using Cairo;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
@@ -68,85 +68,77 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
-
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			if (Data.Amount == 0) {
 				// Copy src to dest
 				return;
 			}
-			
+
 			long w = dst.Width;
-            long h = dst.Height;
-            long fox = (long)(dst.Width * Data.Offset.X * 32768.0);
-            long foy = (long)(dst.Height * Data.Offset.Y * 32768.0);
-            long fcx = fox + (w << 15);
-            long fcy = foy + (h << 15);
-            long fz = Data.Amount;
+			long h = dst.Height;
+			long fox = (long)(dst.Width * Data.Offset.X * 32768.0);
+			long foy = (long)(dst.Height * Data.Offset.Y * 32768.0);
+			long fcx = fox + (w << 15);
+			long fcy = foy + (h << 15);
+			long fz = Data.Amount;
 
-            const int n = 64;
-            foreach (Gdk.Rectangle rect in rois)
-            {
-                for (int y = rect.Top; y < rect.Bottom; ++y)
-                {
-                    ColorBgra *dstPtr = dst.GetPointAddressUnchecked(rect.Left, y);
-                    ColorBgra *srcPtr = src.GetPointAddressUnchecked(rect.Left, y);
+			const int n = 64;
+			
+			foreach (Gdk.Rectangle rect in rois) {
+				for (int y = rect.Top; y < rect.Bottom; ++y) {
+					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
 
-                    for (int x = rect.Left; x < rect.Right; ++x)
-                    {
-                        long fx = (x << 16) - fcx;
-                        long fy = (y << 16) - fcy;
+					for (int x = rect.Left; x < rect.Right; ++x) {
+						long fx = (x << 16) - fcx;
+						long fy = (y << 16) - fcy;
 
-                        int sr = 0;
-                        int sg = 0;
-                        int sb = 0;
-                        int sa = 0;
-                        int sc = 0;
+						int sr = 0;
+						int sg = 0;
+						int sb = 0;
+						int sa = 0;
+						int sc = 0;
 
-                        sr += srcPtr->R * srcPtr->A;
-                        sg += srcPtr->G * srcPtr->A;
-                        sb += srcPtr->B * srcPtr->A;
-                        sa += srcPtr->A;
-                        ++sc;
+						sr += srcPtr->R * srcPtr->A;
+						sg += srcPtr->G * srcPtr->A;
+						sb += srcPtr->B * srcPtr->A;
+						sa += srcPtr->A;
+						++sc;
 
-                        for (int i = 0; i < n; ++i)
-                        {
-                            fx -= ((fx >> 4) * fz) >> 10;
-                            fy -= ((fy >> 4) * fz) >> 10;
+						for (int i = 0; i < n; ++i) {
+							fx -= ((fx >> 4) * fz) >> 10;
+							fy -= ((fy >> 4) * fz) >> 10;
 
-                            int u = (int)(fx + fcx + 32768 >> 16);
-                            int v = (int)(fy + fcy + 32768 >> 16);
+							int u = (int)(fx + fcx + 32768 >> 16);
+							int v = (int)(fy + fcy + 32768 >> 16);
 
-                            if (src.GetBounds().Contains (u, v))
-                            {
-                                ColorBgra* srcPtr2 = src.GetPointAddressUnchecked(u, v);
+							if (src.GetBounds ().Contains (u, v)) {
+								ColorBgra* srcPtr2 = src.GetPointAddressUnchecked (u, v);
 
-                                sr += srcPtr2->R * srcPtr2->A;
-                                sg += srcPtr2->G * srcPtr2->A;
-                                sb += srcPtr2->B * srcPtr2->A;
-                                sa += srcPtr2->A;
-                                ++sc;
-                            }
-                        }
+								sr += srcPtr2->R * srcPtr2->A;
+								sg += srcPtr2->G * srcPtr2->A;
+								sb += srcPtr2->B * srcPtr2->A;
+								sa += srcPtr2->A;
+								++sc;
+							}
+						}
 
-                        if (sa != 0)
-                        {
-                            *dstPtr = ColorBgra.FromBgra(
-                                Utility.ClampToByte(sb / sa),
-                                Utility.ClampToByte(sg / sa),
-                                Utility.ClampToByte(sr / sa),
-                                Utility.ClampToByte(sa / sc));
-                        }
-                        else
-                        {
-                            dstPtr->Bgra = 0;
-                        }
+						if (sa != 0) {
+							*dstPtr = ColorBgra.FromBgra (
+							    Utility.ClampToByte (sb / sa),
+							    Utility.ClampToByte (sg / sa),
+							    Utility.ClampToByte (sr / sa),
+							    Utility.ClampToByte (sa / sc));
+						} else {
+							dstPtr->Bgra = 0;
+						}
 
-                        ++srcPtr;
-                        ++dstPtr;
-                    }
-                }
-            } 
+						++srcPtr;
+						++dstPtr;
+					}
+				}
+			}
 		}
 		#endregion
 
@@ -156,7 +148,7 @@ namespace Pinta.Core
 			public int Amount = 10;
 
 			public Gdk.Point Offset = new Gdk.Point (0, 0);
-				
+
 			[Skip]
 			public bool IsEmpty { get { return (Amount == 0); } }
 		}
