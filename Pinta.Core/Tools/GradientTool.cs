@@ -1,10 +1,10 @@
 // 
-// UnimplementedTools.cs
+// GradientTool.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       dufoli <${AuthorEmail}>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 dufoli
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,20 +28,58 @@ using System;
 
 namespace Pinta.Core
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class CloneStampTool : BaseTool
+	public enum eGradientType
 	{
+		Linear,
+		LinearReflected,
+		Diamond,
+		Radial,
+		Conical
+	}
+	
+	public enum eGradientColorMode
+	{
+		Color,
+		Transparency
+	}
+
+	public class GradientTool : BaseTool
+	{
+		Cairo.PointD startpoint;
+		
 		public override string Name {
-			get { return "Clone Stamp"; }
+			get { return "Gradient"; }
 		}
+
 		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
+			get { return "Tools.Gradient.png"; }
 		}
-		public override bool Enabled {
-			get { return false; }
+
+		#region mouse
+		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		{
+			base.OnMouseDown (canvas, args, point);
+			startpoint = point;
+		}
+
+		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		{
+			base.OnMouseUp (canvas, args, point);
+			//draw on current layer
+		}
+
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		{
+			base.OnMouseMove (o, args, point);
+			//draw on tool layer
+		}
+		#endregion
+
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar (tb);
+			//TODO add gradient button
+			//comobobox : type of gradient linear or radial for moment
 		}
 	}
-			
 }

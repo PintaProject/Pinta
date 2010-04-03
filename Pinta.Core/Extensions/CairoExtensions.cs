@@ -33,6 +33,8 @@ namespace Pinta.Core
 	{
 		// Most of these functions return an affected area
 		// This can be ignored if you don't need it
+		
+		#region context
 		public static Rectangle DrawRectangle (this Context g, Rectangle r, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
@@ -114,7 +116,7 @@ namespace Pinta.Core
 
 			return dirty;
 		}
-		
+
 		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
 		{
 			Random rand=new Random();
@@ -135,8 +137,7 @@ namespace Pinta.Core
 
 			return dirty;
 		}
-		
-		
+
 		public static Rectangle FillPolygonal (this Context g, PointD[] points, Color color)
 		{
 			g.Save ();
@@ -154,7 +155,7 @@ namespace Pinta.Core
 
 			return dirty;
 		}
-		
+
 		public static Rectangle FillStrokedRectangle (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
 		{
 			double x = r.X;
@@ -273,7 +274,7 @@ namespace Pinta.Core
 			
 			return path;
 		}
-		
+
 		public static Rectangle FillStrokedEllipse (this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
 		{
 			double rx = r.Width / 2;
@@ -368,7 +369,7 @@ namespace Pinta.Core
 
 			return dirty;
 		}
-		
+
 		public static void FillRegion (this Context g, Gdk.Region region, Color color)
 		{
 			g.Save ();
@@ -391,8 +392,7 @@ namespace Pinta.Core
 			
 			g.Restore ();
 		}
-		
-		
+
 		public static Rectangle DrawRoundedRectangle (this Context g, Rectangle r, double radius, Color stroke, int lineWidth)
 		{
 			g.Save ();
@@ -413,7 +413,7 @@ namespace Pinta.Core
 			
 			return dirty;
 		}
-		
+
 		public static Path CreateRoundedRectanglePath (this Context g, Rectangle r, double radius)
 		{
 			g.Save ();
@@ -487,7 +487,7 @@ namespace Pinta.Core
 
 			return new Rectangle(te.XBearing, te.YBearing, te.Width, te.Height);
 		}
-		
+
 		public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, Point dest)
 		{
 			g.Save ();
@@ -497,6 +497,32 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
+		public static Rectangle DrawLinearGradient (this Context g, eGradientType type, Color c1, Color c2, PointD p1, PointD p2)
+		{
+			g.Save ();
+			
+			Gradient gradient = new Cairo.LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
+			
+			gradient.AddColorStop (0, c1);
+			gradient.AddColorStop (1, c2);
+			gr.Pattern = gradient;
+			
+			g.Restore ();
+		}
+
+		public static Rectangle DrawRadialGradient (this Context g, eGradientType type, Color c1, Color c2, PointD p1, PointD p2)
+		{
+			g.Save ();
+			
+			Gradient gradient = new Cairo.RadialGradient (p1.X, p1.Y, 1, p2.X, p2.Y, 1);
+			
+			gradient.AddColorStop (0, new Cairo.Color (0,0,0));
+			gradient.AddColorStop (1, new Cairo.Color (1,1,1));
+			gr.Pattern = gradient;
+			
+			g.Restore ();
+		}
+		#endregion
 		public static Cairo.Rectangle ToCairoRectangle (this Gdk.Rectangle r)
 		{
 			return new Cairo.Rectangle (r.X, r.Y, r.Width, r.Height);
