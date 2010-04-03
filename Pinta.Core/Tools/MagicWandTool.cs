@@ -35,6 +35,7 @@ namespace Pinta.Core
 
 		public MagicWandTool ()
 		{
+			LimitToSelection = false;
 		}
 
 		public override string Name {
