@@ -31,25 +31,27 @@ namespace Pinta.Core
 {
 	public class MagicWandTool : FloodTool
 	{
+		private CombineMode combineMode;
+
 		public MagicWandTool ()
 		{
-			//LimitToSelection = false;
 		}
-		
+
 		public override string Name {
 			get { return "Magic Wand Select"; }
 		}
-		
+
 		public override string Icon {
 			get { return "Tools.MagicWand.png"; }
 		}
-		
+
 		public override string StatusBarText {
 			get { return "Click to select region of similar color."; }
 		}
-
-		private Gdk.Cursor cursorMouseUp;
-        private CombineMode combineMode;
+		
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.MagicWand.png"), 0, 0); }
+		}
 
 		private enum CombineMode
 		{
@@ -58,103 +60,65 @@ namespace Pinta.Core
 			Exclude,
 			Replace
 		}
-        // nothing = replace
-        // Ctrl = union
-        // RMB = exclude
-        // Ctrl+RMB = xor
-
-		public override Gdk.Cursor DefaultCursor {
-			get {
-				return cursorMouseUp;
-			}
-		}
-
-        protected override void OnActivated()
-        {
-            this.cursorMouseUp = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.MagicWand.png"), 0, 0);
-            base.OnActivated();
-        }
-
-        protected override void OnDeactivated()
-        {
-            if (cursorMouseUp != null)
-            {
-                cursorMouseUp.Dispose();
-                cursorMouseUp = null;
-            }
-
-            base.OnDeactivated();
-        }
-
-        protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
-        {
-			SetCursor (DefaultCursor);
-        	base.OnMouseUp (canvas, args, point);
-        }
+		// nothing = replace
+		// Ctrl = union
+		// RMB = exclude
+		// Ctrl+RMB = xor
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
-            //SetCursor (Cursors.WaitCursor);
-			
-            if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 1)
-            {
-                this.combineMode = CombineMode.Union;
-            }
-            else if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 3)
-            {
-                this.combineMode = CombineMode.Xor;
-            }
-            else if (args.Event.Button == 3)
-            {
-                this.combineMode = CombineMode.Exclude;
-            }
-            else
-            {
-                this.combineMode = CombineMode.Replace;
-            }
+			//SetCursor (Cursors.WaitCursor);
 
-            base.OnMouseDown (canvas, args, point);
+			if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 1)
+				this.combineMode = CombineMode.Union;
+			else if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 3)
+				this.combineMode = CombineMode.Xor;
+			else if (args.Event.Button == 3)
+				this.combineMode = CombineMode.Exclude;
+			else
+				this.combineMode = CombineMode.Replace;
 
-	    PintaCore.Layers.ShowSelection = true;
-        }
+			base.OnMouseDown (canvas, args, point);
 
-        protected override void OnFillRegionComputed(Point[][] polygonSet)
-        {
-            SelectionHistoryItem undoAction = new SelectionHistoryItem (this.Icon, this.Name);
-		undoAction.TakeSnapshot ();
-		
+			PintaCore.Layers.ShowSelection = true;
+		}
+
+		protected override void OnFillRegionComputed (Point[][] polygonSet)
+		{
+			SelectionHistoryItem undoAction = new SelectionHistoryItem (this.Icon, this.Name);
+			undoAction.TakeSnapshot ();
+
 			Path path = PintaCore.Layers.SelectionPath;
-			
+
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				PintaCore.Layers.SelectionPath = g.CreatePolygonPath (polygonSet);
-				switch(combineMode)
-				{
+
+				switch (combineMode) {
 					case CombineMode.Union:
-						g.AppendPath(path);
-					break;
+						g.AppendPath (path);
+						break;
 					case CombineMode.Xor:
 						//not supported
-					break;
+						break;
 					case CombineMode.Exclude:
 						//not supported
-					break;
+						break;
 					case CombineMode.Replace:
 						//do nothing
-					break;
+						break;
 				}
-				
-			}
-				
-			
-			(path as IDisposable).Dispose ();
-			
-            //Selection.PerformChanging();
-            //Selection.SetContinuation(polygonSet, this.combineMode);
-            //Selection.CommitContinuation();
-            //Selection.PerformChanged();
 
-            PintaCore.History.PushNewItem (undoAction);
-			PintaCore.Workspace.Invalidate();
-        }
+			}
+
+			(path as IDisposable).Dispose ();
+
+			//Selection.PerformChanging();
+			//Selection.SetContinuation(polygonSet, this.combineMode);
+			//Selection.CommitContinuation();
+			//Selection.PerformChanged();
+
+			PintaCore.History.PushNewItem (undoAction);
+			PintaCore.Workspace.Invalidate ();
+		}
 	}
 }

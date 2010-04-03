@@ -43,13 +43,11 @@ namespace Pinta.Core
 		#region Protected Properties
 		protected bool IsContinguousMode { get { return mode_combo.ComboBox.Active == 0; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
-		
-        protected bool LimitToSelection
-        {
-            get {return limitToSelection;}
-            set {limitToSelection = value;}
-        }
-		
+
+		protected bool LimitToSelection {
+			get { return limitToSelection; }
+			set { limitToSelection = value; }
+		}		
 		#endregion
 		
 		#region ToolBar
@@ -94,13 +92,12 @@ namespace Pinta.Core
 
 			Gdk.Region currentRegion = Gdk.Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds());
 
-            // See if the mouse click is valid
-            if (!currentRegion.PointIn (pos.X, pos.Y) && limitToSelection)
-            {
-                currentRegion.Dispose();
-                currentRegion = null;
-                return;
-            }
+			// See if the mouse click is valid
+			if (!currentRegion.PointIn (pos.X, pos.Y) && limitToSelection) {
+				currentRegion.Dispose ();
+				currentRegion = null;
+				return;
+			}
 			
 			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
 			ImageSurface stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height);
@@ -115,6 +112,7 @@ namespace Pinta.Core
 				FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 				
 			stencil = stencilBuffer;
+			
 			Point[][] polygonSet = PathManager.PolygonSetFromStencil (stencilBuffer, boundingBox, 0, 0);
 			OnFillRegionComputed (polygonSet);
 		}
@@ -154,23 +152,18 @@ namespace Pinta.Core
 
 			stencil.Clear (false);
 
-			if (limitToSelection)
-            {
-                using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle(0, 0, stencil.Width, stencil.Height)))
-                {
-                    excluded.Xor(limitRegion);
-                    scans = excluded.GetRectangles();
-                }
-            }
-            else
-            {
-                scans = new Gdk.Rectangle[0];
-            }
+			if (limitToSelection) {
+				using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle (0, 0, stencil.Width, stencil.Height))) {
+					excluded.Xor (limitRegion);
+					scans = excluded.GetRectangles ();
+				}
+			} else {
+				scans = new Gdk.Rectangle[0];
+			}
 
-            foreach (Gdk.Rectangle rect in scans)
-            {
-                stencil.Set(rect, true);
-            }
+			foreach (Gdk.Rectangle rect in scans) {
+				stencil.Set (rect, true);
+			}
 
 			Queue<Point> queue = new Queue<Point> (16);
 			queue.Enqueue (start);
@@ -265,9 +258,7 @@ namespace Pinta.Core
 			}
 
 			foreach (Gdk.Rectangle rect in scans)
-            {
-                stencil.Set(rect, false);
-            }
+				stencil.Set (rect, false);
 			
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
@@ -283,23 +274,17 @@ namespace Pinta.Core
 
 			stencil.Clear (false);
 
-			if (limitToSelection)
-            {
-                using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle(0, 0, stencil.Width, stencil.Height)))
-                {
-                    excluded.Xor(limitRegion);
-                    scans = excluded.GetRectangles ();
-                }
-            }
-            else
-            {
-                scans = new Gdk.Rectangle[0];
-            }
+			if (limitToSelection) {
+				using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle (0, 0, stencil.Width, stencil.Height))) {
+					excluded.Xor (limitRegion);
+					scans = excluded.GetRectangles ();
+				}
+			} else {
+				scans = new Gdk.Rectangle[0];
+			}
 
-            foreach (Gdk.Rectangle rect in scans)
-            {
-                stencil.Set(rect, true);
-            }
+			foreach (Gdk.Rectangle rect in scans)
+				stencil.Set (rect, true);
 			
 			for (int y = 0; y < surface.Height; ++y) {
 				bool foundPixelInRow = false;
@@ -333,11 +318,9 @@ namespace Pinta.Core
 					}
 				}
 			}
-			
+
 			foreach (Gdk.Rectangle rect in scans)
-            {
-                stencil.Set(rect, false);
-            }
+				stencil.Set (rect, false);
 
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
