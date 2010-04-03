@@ -169,7 +169,7 @@ namespace Pinta.Core
 
             foreach (Gdk.Rectangle rect in scans)
             {
-                stencil.Set(rect.ToCairoRectangle(), true);
+                stencil.Set(rect, true);
             }
 
 			Queue<Point> queue = new Queue<Point> (16);
@@ -266,7 +266,7 @@ namespace Pinta.Core
 
 			foreach (Gdk.Rectangle rect in scans)
             {
-                stencil.Set(rect.ToCairoRectangle(), false);
+                stencil.Set(rect, false);
             }
 			
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
@@ -298,7 +298,7 @@ namespace Pinta.Core
 
             foreach (Gdk.Rectangle rect in scans)
             {
-                stencil.Set(rect.ToCairoRectangle (), true);
+                stencil.Set(rect, true);
             }
 			
 			for (int y = 0; y < surface.Height; ++y) {
@@ -336,7 +336,7 @@ namespace Pinta.Core
 			
 			foreach (Gdk.Rectangle rect in scans)
             {
-                stencil.Set(rect.ToCairoRectangle (), false);
+                stencil.Set(rect, false);
             }
 
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);

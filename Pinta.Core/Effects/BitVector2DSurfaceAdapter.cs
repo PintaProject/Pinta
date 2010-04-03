@@ -110,10 +110,10 @@ namespace Pinta.Core
 			Set (pt.X, pt.Y, newValue);
 		}
 
-		public void Set (Rectangle rect, bool newValue)
+		public void Set (Gdk.Rectangle rect, bool newValue)
 		{
-			for (int y = (int)rect.Y; y < rect.GetBottom (); ++y) {
-				for (int x = (int)rect.X; x < rect.GetRight (); ++x) {
+			for (int y = rect.Y; y < rect.Bottom; ++y) {
+				for (int x = rect.X; x < rect.Right; ++x) {
 					Set (x, y, newValue);
 				}
 			}
@@ -165,10 +165,10 @@ namespace Pinta.Core
 			Invert (pt.X, pt.Y);
 		}
 
-		public void Invert (Rectangle rect)
+		public void Invert (Gdk.Rectangle rect)
 		{
-			for (int y = (int)rect.Y; y < rect.GetBottom (); ++y) {
-				for (int x = (int)rect.X; x < rect.GetRight (); ++x) {
+			for (int y = rect.Y; y < rect.Bottom; ++y) {
+				for (int x = rect.X; x < rect.Right; ++x) {
 					Invert (x, y);
 				}
 			}

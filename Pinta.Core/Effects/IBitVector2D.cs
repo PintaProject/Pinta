@@ -42,7 +42,7 @@ namespace Pinta.Core
 		void Clear (bool newValue);
 		void Set (int x, int y, bool newValue);
 		void Set (Point pt, bool newValue);
-		void Set (Rectangle rect, bool newValue);
+		void Set (Gdk.Rectangle rect, bool newValue);
 		void Set (Scanline scan, bool newValue);
 		//void Set (PdnRegion region, bool newValue);
 		void SetUnchecked (int x, int y, bool newValue);
@@ -50,7 +50,7 @@ namespace Pinta.Core
 		bool GetUnchecked (int x, int y);
 		void Invert (int x, int y);
 		void Invert (Point pt);
-		void Invert (Rectangle rect);
+		void Invert (Gdk.Rectangle rect);
 		void Invert (Scanline scan);
 		//void Invert (PdnRegion region);
 	}
