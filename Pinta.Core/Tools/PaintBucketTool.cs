@@ -57,27 +57,14 @@ namespace Pinta.Core
 		{
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
 			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayer);
-			
-			PintaCore.Layers.ToolLayer.Clear ();
-			ImageSurface surface = PintaCore.Layers.ToolLayer.Surface;
-
-			ColorBgra* surf_data_ptr = (ColorBgra*)surface.DataPtr;
-			int surf_width = surface.Width;
-
-			for (int x = 0; x < stencil.Width; x++)
-				for (int y = 0; y < stencil.Height; y++)
-					if (stencil.GetUnchecked (x, y))
-						surface.SetPixel (surf_data_ptr, surf_width, x, y, fill_color);
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+				g.AppendPath (g.CreatePolygonPath (polygonSet));
 
 				g.Antialias = Antialias.Subpixel;
 
-				g.SetSource (surface);
-				g.Paint ();
+				g.Color = fill_color;
+				g.Fill ();
 			}
 			
 			PintaCore.History.PushNewItem (hist);
