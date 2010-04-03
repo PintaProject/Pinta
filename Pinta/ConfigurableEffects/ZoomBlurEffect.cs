@@ -75,6 +75,12 @@ namespace Pinta.Core
 				return;
 			}
 
+			int src_width = src.Width;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			int dst_width = dst.Width;
+			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
+			Gdk.Rectangle src_bounds = src.GetBounds ();
+			
 			long w = dst.Width;
 			long h = dst.Height;
 			long fox = (long)(dst.Width * Data.Offset.X * 32768.0);
@@ -87,8 +93,8 @@ namespace Pinta.Core
 			
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; ++y) {
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, rect.Left, y);
+					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 
 					for (int x = rect.Left; x < rect.Right; ++x) {
 						long fx = (x << 16) - fcx;
@@ -113,8 +119,8 @@ namespace Pinta.Core
 							int u = (int)(fx + fcx + 32768 >> 16);
 							int v = (int)(fy + fcy + 32768 >> 16);
 
-							if (src.GetBounds ().Contains (u, v)) {
-								ColorBgra* srcPtr2 = src.GetPointAddressUnchecked (u, v);
+							if (src_bounds.Contains (u, v)) {
+								ColorBgra* srcPtr2 = src.GetPointAddressUnchecked (src_data_ptr, src_width, u, v);
 
 								sr += srcPtr2->R * srcPtr2->A;
 								sg += srcPtr2->G * srcPtr2->A;
