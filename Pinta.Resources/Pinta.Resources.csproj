@@ -379,6 +379,21 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.PolarInversion.png">
       <LogicalName>Menu.Effects.Distort.PolarInversion.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.ConicalGradient.png">
+      <LogicalName>Toolbar.ConicalGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.DiamondGradient.png">
+      <LogicalName>Toolbar.DiamondGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.LinearGradient.png">
+      <LogicalName>Toolbar.LinearGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.LinearReflectedGradient.png">
+      <LogicalName>Toolbar.LinearReflectedGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.RadialGradient.png">
+      <LogicalName>Toolbar.RadialGradient.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">

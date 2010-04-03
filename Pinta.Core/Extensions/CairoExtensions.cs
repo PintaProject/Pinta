@@ -497,7 +497,7 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static Rectangle DrawLinearGradient (this Context g, eGradientType type, Color c1, Color c2, PointD p1, PointD p2)
+		public static void DrawLinearGradient (this Context g, Color c1, Color c2, PointD p1, PointD p2)
 		{
 			g.Save ();
 			
@@ -505,12 +505,12 @@ namespace Pinta.Core
 			
 			gradient.AddColorStop (0, c1);
 			gradient.AddColorStop (1, c2);
-			gr.Pattern = gradient;
+			g.Pattern = gradient;
 			
 			g.Restore ();
 		}
 
-		public static Rectangle DrawRadialGradient (this Context g, eGradientType type, Color c1, Color c2, PointD p1, PointD p2)
+		public static void DrawRadialGradient (this Context g, Color c1, Color c2, PointD p1, PointD p2, double r1, double r2)
 		{
 			g.Save ();
 			
@@ -518,7 +518,7 @@ namespace Pinta.Core
 			
 			gradient.AddColorStop (0, new Cairo.Color (0,0,0));
 			gradient.AddColorStop (1, new Cairo.Color (1,1,1));
-			gr.Pattern = gradient;
+			g.Pattern = gradient;
 			
 			g.Restore ();
 		}
