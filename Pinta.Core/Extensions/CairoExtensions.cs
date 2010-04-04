@@ -519,25 +519,58 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void DrawRadialGradient (this Context g, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2, double r1, double r2)
+		public static void DrawLinearReflectedGradient (this Context g, Surface oldsurface, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2)
 		{
 			g.Save ();
 			
-			Gradient gradient = new Cairo.RadialGradient (p1.X, p1.Y, 1, p2.X, p2.Y, 1);
+			Gradient gradient = new Cairo.LinearGradient (p1.X, p1.Y, p2.X, p2.Y);
 			
-			gradient.AddColorStop (0, new Cairo.Color (0,0,0));
-			gradient.AddColorStop (1, new Cairo.Color (1,1,1));
-
 			if (mode == eGradientColorMode.Color) {
+				gradient.AddColorStop (0, c1);
+				gradient.AddColorStop (0.5, c2);
+				gradient.AddColorStop (1, c1);
 				g.Source = gradient;
 				g.Paint ();
 			}
-			else if (mode == eGradientColorMode.Transparency)
+			else if (mode == eGradientColorMode.Transparency) {
+				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
+				gradient.AddColorStop (0.5, new Color (0, 0, 0, 0));
+				gradient.AddColorStop (1, new Color (0, 0, 0, 1));
+				g.Source = new SurfacePattern (oldsurface);
 				g.Mask (gradient);
+			}
+			
+			g.Restore ();
+		}
+
+		public static void DrawRadialGradient (this Context g, Surface oldsurface, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2, double r1, double r2)
+		{
+			g.Save ();
+			
+			Gradient gradient = new Cairo.RadialGradient (p1.X, p1.Y, r1, p2.X, p2.Y, r2);
+			
+			if (mode == eGradientColorMode.Color) {
+				gradient.AddColorStop (0, c1);
+				gradient.AddColorStop (1, c2);
+				g.Source = gradient;
+				g.Paint ();
+			}
+			else if (mode == eGradientColorMode.Transparency) {
+				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
+				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
+				g.Source = new SurfacePattern (oldsurface);
+				g.Mask (gradient);
+			}
 			
 			g.Restore ();
 		}
 		#endregion
+		
+		public static double Distance (this PointD s, PointD e)
+		{
+			return Math.Sqrt ((e.X - s.X) * (e.X - s.X) + (e.Y - s.Y) * (e.Y - s.Y));
+		}
+
 		public static Cairo.Rectangle ToCairoRectangle (this Gdk.Rectangle r)
 		{
 			return new Cairo.Rectangle (r.X, r.Y, r.Width, r.Height);

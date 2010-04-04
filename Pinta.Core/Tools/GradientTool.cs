@@ -80,7 +80,24 @@ namespace Pinta.Core
 			if (tracking) {
 				PintaCore.Layers.CurrentLayer.Clear ();
 				using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-					g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+					switch (GradientType) {
+						case eGradientType.Linear:
+							g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+						break;
+						case eGradientType.LinearReflected:
+							g.DrawLinearReflectedGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+						break;
+						case eGradientType.Radial:
+							double radius = startpoint.Distance (point);
+							g.DrawRadialGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, startpoint, 0.1 * radius, radius);
+						break;
+					case eGradientType.Diamond:
+						//TODO maybe can be done with 4 selections and linear gradient for each part
+						break;
+					case eGradientType.Conical:
+						//TODO do not know howdone that with regular cairo radient
+						break;
+					}
 				}
 				PintaCore.Workspace.Invalidate ();
 			}
