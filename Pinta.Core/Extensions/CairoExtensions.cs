@@ -497,7 +497,7 @@ namespace Pinta.Core
 			g.Restore ();
 		}
 
-		public static void DrawLinearGradient (this Context g, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2)
+		public static void DrawLinearGradient (this Context g, Surface oldsurface, eGradientColorMode mode, Color c1, Color c2, PointD p1, PointD p2)
 		{
 			g.Save ();
 			
@@ -510,8 +510,9 @@ namespace Pinta.Core
 				g.Paint ();
 			}
 			else if (mode == eGradientColorMode.Transparency) {
-				gradient.AddColorStop (1, new Color (0, 0, 0, 1));
+				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
+				g.Source = new SurfacePattern (oldsurface);
 				g.Mask (gradient);
 			}
 			

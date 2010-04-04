@@ -48,6 +48,7 @@ namespace Pinta.Core
 	{
 		Cairo.PointD startpoint;
 		bool tracking;
+		protected ImageSurface undo_surface;
 		
 		public override string Name {
 			get { return "Gradient"; }
@@ -63,42 +64,25 @@ namespace Pinta.Core
 			base.OnMouseDown (canvas, args, point);
 			startpoint = point;
 			tracking = true;
+			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			base.OnMouseUp (canvas, args, point);
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = true;
 			tracking = false;
-			
-			//TODO switch type and add mode to params of g.Draw...
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				//g.Antialias = Antialias.Subpixel;
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-				
-				g.DrawLinearGradient (GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
-					
-				PintaCore.Workspace.Invalidate ();
-			}
+			PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			base.OnMouseMove (o, args, point);
 			if (tracking) {
-				base.OnMouseMove (o, args, point);
-				PintaCore.Layers.ToolLayer.Clear ();
-				PintaCore.Layers.ToolLayer.Hidden = false;
-				
-				using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
-					//g.Antialias = Antialias.Subpixel;
-	
-					g.DrawLinearGradient (GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
-	
-					PintaCore.Workspace.Invalidate ();
+				PintaCore.Layers.CurrentLayer.Clear ();
+				using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+					g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
 				}
+				PintaCore.Workspace.Invalidate ();
 			}
 		}
 		#endregion
