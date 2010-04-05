@@ -650,6 +650,11 @@ namespace Pinta.Core
 			return Pinta.Core.ColorBgra.BgraToUInt32( (int)(c.B * 255), (int)(c.R * 255), (int)(c.G * 255), (int)(c.A * 255));
 		}
 		
+		public static Gdk.Size ToSize (this Cairo.Point point)
+		{
+			return new Gdk.Size (point.X, point.Y);
+		}
+		
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
 			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
