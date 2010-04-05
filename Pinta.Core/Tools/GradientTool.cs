@@ -49,6 +49,7 @@ namespace Pinta.Core
 		Cairo.PointD startpoint;
 		bool tracking;
 		protected ImageSurface undo_surface;
+		uint button;
 		
 		public override string Name {
 			get { return "Gradient"; }
@@ -64,6 +65,7 @@ namespace Pinta.Core
 			base.OnMouseDown (canvas, args, point);
 			startpoint = point;
 			tracking = true;
+			button = args.Event.Button;
 			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 		}
 
@@ -103,6 +105,20 @@ namespace Pinta.Core
 							gr = new GradientRenderers.Conical (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 						break;
 					}
+					if (button == 3) {//right
+						gr.StartColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
+		            	gr.EndColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
+					}
+					else {//1 left
+						gr.StartColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
+		            	gr.EndColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
+					}
+							
+		            gr.StartPoint = startpoint;
+		            gr.EndPoint = point;
+					gr.AlphaBlending = AlphaBlending;
+            
+					gr.BeforeRender ();
 					gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
 				}
 				PintaCore.Workspace.Invalidate ();

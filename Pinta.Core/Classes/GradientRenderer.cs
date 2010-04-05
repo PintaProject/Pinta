@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////////////
 // Paint.NET                                                                   //
 // Copyright (C) dotPDN LLC, Rick Brewster, Tom Jackson, and contributors.     //
 // Portions Copyright (C) Microsoft Corporation. All Rights Reserved.          //
@@ -171,6 +171,9 @@ namespace Pinta.Core
                 endAlpha = this.endColor.A;
             }
 
+			ColorBgra* src_data_ptr = (ColorBgra*)surface.DataPtr;
+			int src_width = surface.Width;
+			
             for (int ri = 0; ri < rois.Length; ++ri)
             {
                 Gdk.Rectangle rect = rois[ri];
@@ -180,7 +183,7 @@ namespace Pinta.Core
                     // Start and End point are the same ... fill with solid color.
                     for (int y = rect.Top; y < rect.Bottom; ++y)
                     {
-                        ColorBgra* pixelPtr = surface.GetPointAddress(rect.Left, y);
+                        ColorBgra* pixelPtr = surface.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 
                         for (int x = rect.Left; x < rect.Right; ++x)
                         {
@@ -215,7 +218,7 @@ namespace Pinta.Core
                 {
                     for (int y = rect.Top; y < rect.Bottom; ++y)
                     {
-                        ColorBgra* pixelPtr = surface.GetPointAddress(rect.Left, y);
+                        ColorBgra* pixelPtr = surface.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 
                         if (this.alphaOnly && this.alphaBlending)
                         {
