@@ -58,6 +58,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated <SharpenEffect>;
 			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectActivated <SoftenPortraitEffect>;
 			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated <EdgeDetectEffect>;
+			PintaCore.Actions.Effects.Relief.Activated += HandleEffectActivated <ReliefEffect>;
 		}
 
 		#region Handlers

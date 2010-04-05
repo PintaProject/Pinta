@@ -51,7 +51,7 @@ namespace Pinta.Core
 		public Gtk.Action Sharpen { get; private set; }
 		public Gtk.Action SoftenPortrait { get; private set; }
 		public Gtk.Action EdgeDetect { get; private set; }
-		
+		public Gtk.Action Relief { get; private set; }
 
 		public EffectsActions ()
 		{
@@ -71,7 +71,9 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
 			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
 			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
-			
+			fact.Add ("Menu.Effects.Stylize.Relief.png",
+				new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.Relief.png")));
+
 			fact.AddDefault ();
 
 			// Submenus
@@ -100,6 +102,7 @@ namespace Pinta.Core
 			Sharpen = new Gtk.Action ("Sharpen", Mono.Unix.Catalog.GetString ("Sharpen..."), null, "Menu.Effects.Photo.Sharpen.png");
 			SoftenPortrait = new Gtk.Action ("Soften Portrait", Mono.Unix.Catalog.GetString ("Soften Portrait..."), null, "Menu.Effects.Photo.SoftenPortrait.png");
 			EdgeDetect = new Gtk.Action ("EdgeDetect", Mono.Unix.Catalog.GetString ("Edge Detect..."), null, "Menu.Effects.Stylize.EdgeDetect.png");
+			Relief = new Gtk.Action ("Relief", Mono.Unix.Catalog.GetString ("Relief..."), null, "Menu.Effects.Stylize.Relief.png");
 		}
 
 		#region Initialization
@@ -132,6 +135,7 @@ namespace Pinta.Core
 			photo_sub_menu.Append (SoftenPortrait.CreateMenuItem ());
 			
 			stylize_sub_menu.Append (EdgeDetect.CreateMenuItem ());
+			stylize_sub_menu.Append (Relief.CreateMenuItem ());
 		}
 		#endregion
 	}
