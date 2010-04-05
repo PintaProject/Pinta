@@ -79,25 +79,31 @@ namespace Pinta.Core
 			base.OnMouseMove (o, args, point);
 			if (tracking) {
 				PintaCore.Layers.CurrentLayer.Clear ();
+				UserBlendOps.NormalBlendOp normalBlendOp = new UserBlendOps.NormalBlendOp();
+				GradientRenderer gr = null;
 				using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 					switch (GradientType) {
 						case eGradientType.Linear:
-							g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+							//g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+							gr = new GradientRenderers.LinearClamped (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 						break;
 						case eGradientType.LinearReflected:
-							g.DrawLinearReflectedGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+							//g.DrawLinearReflectedGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+							gr = new GradientRenderers.LinearReflected (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 						break;
 						case eGradientType.Radial:
-							double radius = startpoint.Distance (point);
-							g.DrawRadialGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, startpoint, 0.1 * radius, radius);
+							//double radius = startpoint.Distance (point);
+							//g.DrawRadialGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, startpoint, 0.1 * radius, radius);
+							gr = new GradientRenderers.Radial (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 						break;
-					case eGradientType.Diamond:
-						//TODO maybe can be done with 4 selections and linear gradient for each part
+						case eGradientType.Diamond:
+							gr = new GradientRenderers.LinearDiamond (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 						break;
-					case eGradientType.Conical:
-						//TODO do not know howdone that with regular cairo radient
+						case eGradientType.Conical:
+							gr = new GradientRenderers.Conical (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 						break;
 					}
+					gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
 				}
 				PintaCore.Workspace.Invalidate ();
 			}

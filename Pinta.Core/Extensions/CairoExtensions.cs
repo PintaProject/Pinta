@@ -568,8 +568,13 @@ namespace Pinta.Core
 		
 		public static double Distance (this PointD s, PointD e)
 		{
-			return Math.Sqrt ((e.X - s.X) * (e.X - s.X) + (e.Y - s.Y) * (e.Y - s.Y));
+			return Magnitude (new PointD (s.X - e.X, s.Y - e.Y));
 		}
+		
+		public static double Magnitude(this PointD p)
+        {
+            return Math.Sqrt(p.X * p.X + p.Y * p.Y);
+        }
 
 		public static Cairo.Rectangle ToCairoRectangle (this Gdk.Rectangle r)
 		{

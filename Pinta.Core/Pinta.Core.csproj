@@ -158,6 +158,8 @@
     <Compile Include="Managers\LivePreviewManager.cs" />
     <Compile Include="Classes\AsyncEffectRenderer.cs" />
     <Compile Include="Tools\GradientTool.cs" />
+    <Compile Include="Classes\GradientRenderer.cs" />
+    <Compile Include="Classes\GradientRenderers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
