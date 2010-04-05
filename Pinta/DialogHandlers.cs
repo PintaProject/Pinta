@@ -41,23 +41,24 @@ namespace Pinta
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
-			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleEffectActivated <BrightnessContrastEffect>;
+			PintaCore.Actions.Adjustments.BrightnessContrast.Activated += HandleEffectActivated<BrightnessContrastEffect>;
 			PintaCore.Actions.Adjustments.Curves.Activated += HandleAdjustmentsCurvesActivated;
 			PintaCore.Actions.Adjustments.Levels.Activated += HandleAdjustmentsLevelsActivated;
 			PintaCore.Actions.Adjustments.Posterize.Activated += HandleAdjustmentsPosterizeActivated;
-			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleEffectActivated <HueSaturationEffect>;
-			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectActivated <InkSketchEffect>;
-			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectActivated <OilPaintingEffect>;
-			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectActivated <PencilSketchEffect>;
-			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectActivated <FragmentEffect>;
-			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated <GaussianBlurEffect>;
+			PintaCore.Actions.Adjustments.HueSaturation.Activated += HandleEffectActivated<HueSaturationEffect>;
+			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectActivated<InkSketchEffect>;
+			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectActivated<OilPaintingEffect>;
+			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectActivated<PencilSketchEffect>;
+			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectActivated<FragmentEffect>;
+			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated<GaussianBlurEffect>;
 			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
-			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated <MotionBlurEffect>;
-			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated <GlowEffect>;
-			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated <RedEyeRemoveEffect>;
-			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated <SharpenEffect>;
-			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectActivated <SoftenPortraitEffect>;
-			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated <EdgeDetectEffect>;
+			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated<MotionBlurEffect>;
+			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated<GlowEffect>;
+			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated<RedEyeRemoveEffect>;
+			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated<SharpenEffect>;
+			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectActivated<SoftenPortraitEffect>;
+			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated<EdgeDetectEffect>;
+			PintaCore.Actions.Effects.Emboss.Activated += HandleEffectActivated<EmbossEffect>;
 		}
 
 		#region Handlers
