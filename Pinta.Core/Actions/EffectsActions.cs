@@ -60,29 +60,28 @@ namespace Pinta.Core
 
 		public EffectsActions ()
 		{
-		    IconFactory fact = new IconFactory ();
-		    fact.Add ("Menu.Effects.Artistic.InkSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.InkSketch.png")));
-		    fact.Add ("Menu.Effects.Artistic.OilPainting.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png")));
-		    fact.Add ("Menu.Effects.Artistic.PencilSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.PencilSketch.png")));
-		    fact.Add ("Menu.Effects.Blurs.Fragment.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Fragment.png")));
-		    fact.Add ("Menu.Effects.Blurs.GaussianBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.GaussianBlur.png")));
-		    fact.Add ("Menu.Effects.Blurs.MotionBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.MotionBlur.png")));
-		    fact.Add ("Menu.Effects.Blurs.RadialBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.RadialBlur.png")));
-		    fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
-		    fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
-		    fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
+			IconFactory fact = new IconFactory ();
+			fact.Add ("Menu.Effects.Artistic.InkSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.InkSketch.png")));
+			fact.Add ("Menu.Effects.Artistic.OilPainting.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png")));
+			fact.Add ("Menu.Effects.Artistic.PencilSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.PencilSketch.png")));
+			fact.Add ("Menu.Effects.Blurs.Fragment.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Fragment.png")));
+			fact.Add ("Menu.Effects.Blurs.GaussianBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.GaussianBlur.png")));
+			fact.Add ("Menu.Effects.Blurs.MotionBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.MotionBlur.png")));
+			fact.Add ("Menu.Effects.Blurs.RadialBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.RadialBlur.png")));
+			fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
+			fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
+			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
 			fact.Add ("Menu.Effects.Distort.Twist.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Twist.png")));
-		    fact.Add ("Menu.Effects.Distort.Tile.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Tile.png")));
-		    fact.Add ("Menu.Effects.Distort.FrostedGlass.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.FrostedGlass.png")));
-		    fact.Add ("Menu.Effects.Distort.Pixelate.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Pixelate.png")));
-		    fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
-		    fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
-		    fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
-		    fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
-		    fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
-			fact.Add ("Menu.Effects.Stylize.Relief.png",
+			fact.Add ("Menu.Effects.Distort.Tile.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Tile.png")));
+			fact.Add ("Menu.Effects.Distort.FrostedGlass.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.FrostedGlass.png")));
+			fact.Add ("Menu.Effects.Distort.Pixelate.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Pixelate.png")));
+			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
+			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
+			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
+			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
+			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
+			fact.Add ("Menu.Effects.Stylize.Relief.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.Relief.png")));
 			fact.Add ("Menu.Effects.Stylize.Emboss.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.Emboss.png")));
-				new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.Relief.png")));
 
 			fact.AddDefault ();
 

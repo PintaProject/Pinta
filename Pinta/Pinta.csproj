@@ -109,6 +109,10 @@
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="ConfigurableEffects\TwistEffect.cs" />
     <Compile Include="ConfigurableEffects\FrostedGlassEffect.cs" />
+    <Compile Include="ConfigurableEffects\TileEffect.cs" />
+    <Compile Include="ConfigurableEffects\EmbossEffect.cs" />
+    <Compile Include="ConfigurableEffects\PixelateEffect.cs" />
+    <Compile Include="ConfigurableEffects\ReliefEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

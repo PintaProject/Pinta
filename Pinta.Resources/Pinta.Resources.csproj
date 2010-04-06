@@ -351,13 +351,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.Twist.png">
       <LogicalName>Menu.Effects.Distort.Twist.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.Tile.png">
       <LogicalName>Menu.Effects.Distort.Tile.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.Pixelate.png">
       <LogicalName>Menu.Effects.Distort.Pixelate.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.FrostedGlass.png">
       <LogicalName>Menu.Effects.Distort.FrostedGlass.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Relief.png">
+      <LogicalName>Menu.Effects.Stylize.Relief.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Emboss.png">
+      <LogicalName>Menu.Effects.Stylize.Emboss.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
