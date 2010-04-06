@@ -53,6 +53,7 @@ namespace Pinta
 			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated<GaussianBlurEffect>;
 			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectRadialBlurActivated;
 			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated<MotionBlurEffect>;
+			PintaCore.Actions.Effects.FrostedGlass.Activated += HandleEffectActivated<FrostedGlassEffect>;
 			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated<GlowEffect>;
 			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated<RedEyeRemoveEffect>;
 			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated<SharpenEffect>;

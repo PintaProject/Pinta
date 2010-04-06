@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action MotionBlur { get; private set; }
+		public Gtk.Action FrostedGlass { get; private set; }
 		public Gtk.Action Glow { get; private set; }
 		public Gtk.Action RedEyeRemove { get; private set; }
 		public Gtk.Action Sharpen { get; private set; }
@@ -56,47 +57,48 @@ namespace Pinta.Core
 
 		public EffectsActions ()
 		{
-			IconFactory fact = new IconFactory ();
-			fact.Add ("Menu.Effects.Artistic.InkSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.InkSketch.png")));
-			fact.Add ("Menu.Effects.Artistic.OilPainting.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png")));
-			fact.Add ("Menu.Effects.Artistic.PencilSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.PencilSketch.png")));
-			fact.Add ("Menu.Effects.Blurs.Fragment.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Fragment.png")));
-			fact.Add ("Menu.Effects.Blurs.GaussianBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.GaussianBlur.png")));
-			fact.Add ("Menu.Effects.Blurs.MotionBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.MotionBlur.png")));
-			fact.Add ("Menu.Effects.Blurs.RadialBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.RadialBlur.png")));
-			fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
-			fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
-			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
-			fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
-			fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
-			fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
-			fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
-			fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
+		    IconFactory fact = new IconFactory ();
+		    fact.Add ("Menu.Effects.Artistic.InkSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.InkSketch.png")));
+		    fact.Add ("Menu.Effects.Artistic.OilPainting.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png")));
+		    fact.Add ("Menu.Effects.Artistic.PencilSketch.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.PencilSketch.png")));
+		    fact.Add ("Menu.Effects.Blurs.Fragment.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Fragment.png")));
+		    fact.Add ("Menu.Effects.Blurs.GaussianBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.GaussianBlur.png")));
+		    fact.Add ("Menu.Effects.Blurs.MotionBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.MotionBlur.png")));
+		    fact.Add ("Menu.Effects.Blurs.RadialBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.RadialBlur.png")));
+		    fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
+		    fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
+		    fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
+		    fact.Add ("Menu.Effects.Distort.FrostedGlass.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.FrostedGlass.png")));
+		    fact.Add ("Menu.Effects.Photo.Glow.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Glow.png")));
+		    fact.Add ("Menu.Effects.Photo.RedEyeRemove.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.RedEyeRemove.png")));
+		    fact.Add ("Menu.Effects.Photo.Sharpen.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.Sharpen.png")));
+		    fact.Add ("Menu.Effects.Photo.SoftenPortrait.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Photo.SoftenPortrait.png")));
+		    fact.Add ("Menu.Effects.Stylize.EdgeDetect.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.EdgeDetect.png")));
 			fact.Add ("Menu.Effects.Stylize.Emboss.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Stylize.Emboss.png")));
 
 			fact.AddDefault ();
 
 			// Submenus
-			Artistic = new Gtk.Action ("Artistic", Mono.Unix.Catalog.GetString ("Artistic"), null, null);
-			Blurs = new Gtk.Action ("Blurs", Mono.Unix.Catalog.GetString ("Blurs"), null, null);
-			Distort = new Gtk.Action ("Distort", Mono.Unix.Catalog.GetString ("Distort"), null, null);
-			Noise = new Gtk.Action ("Noise", Mono.Unix.Catalog.GetString ("Noise"), null, null);
-			Photo = new Gtk.Action ("Photo", Mono.Unix.Catalog.GetString ("Photo"), null, null);
-			Render = new Gtk.Action ("Render", Mono.Unix.Catalog.GetString ("Render"), null, null);
-			Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
+		    Artistic = new Gtk.Action ("Artistic", Mono.Unix.Catalog.GetString ("Artistic"), null, null);
+		    Blurs = new Gtk.Action ("Blurs", Mono.Unix.Catalog.GetString ("Blurs"), null, null);
+		    Distort = new Gtk.Action ("Distort", Mono.Unix.Catalog.GetString ("Distort"), null, null);
+		    Noise = new Gtk.Action ("Noise", Mono.Unix.Catalog.GetString ("Noise"), null, null);
+		    Photo = new Gtk.Action ("Photo", Mono.Unix.Catalog.GetString ("Photo"), null, null);
+		    Render = new Gtk.Action ("Render", Mono.Unix.Catalog.GetString ("Render"), null, null);
+		    Stylize = new Gtk.Action ("Stylize", Mono.Unix.Catalog.GetString ("Stylize"), null, null);
 
-			Distort.Visible = false;
 			Noise.Visible = false;
-			Render.Visible = false;
-			
+		    Render.Visible = false;
+
 			// Menu items
-			InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
-			OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
-			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
-			Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
-			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
-			RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
-			MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
+		    InkSketch = new Gtk.Action ("InkSketch", Mono.Unix.Catalog.GetString ("Ink Sketch..."), null, "Menu.Effects.Artistic.InkSketch.png");
+		    OilPainting = new Gtk.Action ("OilPainting", Mono.Unix.Catalog.GetString ("Oil Painting..."), null, "Menu.Effects.Artistic.OilPainting.png");
+		    PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
+		    Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
+		    GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
+		    RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
+		    MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
+			FrostedGlass = new Gtk.Action ("FrostedGlass", Mono.Unix.Catalog.GetString ("Frosted Glass..."), null, "Menu.Effects.Distort.FrostedGlass.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
 			RedEyeRemove = new Gtk.Action ("RedEyeRemove", Mono.Unix.Catalog.GetString ("Red Eye Removal..."), null, "Menu.Effects.Photo.RedEyeRemove.png");
 			Sharpen = new Gtk.Action ("Sharpen", Mono.Unix.Catalog.GetString ("Sharpen..."), null, "Menu.Effects.Photo.Sharpen.png");
@@ -108,27 +110,29 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
-			menu.Remove (menu.Children[1]);
+		    menu.Remove (menu.Children[1]);
 
 			// Create Submenus
-			Menu artistic_sub_menu = (Menu)menu.AppendItem (Artistic.CreateSubMenuItem ()).Submenu;
-			Menu blur_sub_menu = (Menu)menu.AppendItem (Blurs.CreateSubMenuItem ()).Submenu;
-			Menu distort_sub_menu = (Menu)menu.AppendItem (Distort.CreateSubMenuItem ()).Submenu;
-			Menu noise_sub_menu = (Menu)menu.AppendItem (Noise.CreateSubMenuItem ()).Submenu;
-			Menu photo_sub_menu = (Menu)menu.AppendItem (Photo.CreateSubMenuItem ()).Submenu;
-			Menu render_sub_menu = (Menu)menu.AppendItem (Render.CreateSubMenuItem ()).Submenu;
-			Menu stylize_sub_menu = (Menu)menu.AppendItem (Stylize.CreateSubMenuItem ()).Submenu;
-			
+		    Menu artistic_sub_menu = (Menu)menu.AppendItem (Artistic.CreateSubMenuItem ()).Submenu;
+		    Menu blur_sub_menu = (Menu)menu.AppendItem (Blurs.CreateSubMenuItem ()).Submenu;
+		    Menu distort_sub_menu = (Menu)menu.AppendItem (Distort.CreateSubMenuItem ()).Submenu;
+		    Menu noise_sub_menu = (Menu)menu.AppendItem (Noise.CreateSubMenuItem ()).Submenu;
+		    Menu photo_sub_menu = (Menu)menu.AppendItem (Photo.CreateSubMenuItem ()).Submenu;
+		    Menu render_sub_menu = (Menu)menu.AppendItem (Render.CreateSubMenuItem ()).Submenu;
+		    Menu stylize_sub_menu = (Menu)menu.AppendItem (Stylize.CreateSubMenuItem ()).Submenu;
+		 
 			// Create menu items
-			artistic_sub_menu.Append (InkSketch.CreateMenuItem ());
-			artistic_sub_menu.Append (OilPainting.CreateMenuItem ());
-			artistic_sub_menu.Append (PencilSketch.CreateMenuItem ());
-			
+		    artistic_sub_menu.Append (InkSketch.CreateMenuItem ());
+		    artistic_sub_menu.Append (OilPainting.CreateMenuItem ());
+		    artistic_sub_menu.Append (PencilSketch.CreateMenuItem ());
+		 
 			blur_sub_menu.Append (Fragment.CreateMenuItem ());
-			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
-			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
-			blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
-			
+		    blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
+		    blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
+		    blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
+
+            distort_sub_menu.Append (FrostedGlass.CreateMenuItem ());
+
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
 			photo_sub_menu.Append (RedEyeRemove.CreateMenuItem ());
 			photo_sub_menu.Append (Sharpen.CreateMenuItem ());
