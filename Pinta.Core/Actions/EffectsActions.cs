@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public Gtk.Action GaussianBlur { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action MotionBlur { get; private set; }
+		public Gtk.Action Twist { get; private set; }
 		public Gtk.Action Tile { get; private set; }
 		public Gtk.Action FrostedGlass { get; private set; }
 		public Gtk.Action Pixelate { get; private set; }
@@ -70,6 +71,7 @@ namespace Pinta.Core
 		    fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
 		    fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
 		    fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
+			fact.Add ("Menu.Effects.Distort.Twist.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Twist.png")));
 		    fact.Add ("Menu.Effects.Distort.Tile.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Tile.png")));
 		    fact.Add ("Menu.Effects.Distort.FrostedGlass.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.FrostedGlass.png")));
 		    fact.Add ("Menu.Effects.Distort.Pixelate.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Pixelate.png")));
@@ -104,6 +106,7 @@ namespace Pinta.Core
 		    GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
 		    RadialBlur = new Gtk.Action ("RadialBlur", Mono.Unix.Catalog.GetString ("Radial Blur..."), null, "Menu.Effects.Blurs.RadialBlur.png");
 		    MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
+			Twist = new Gtk.Action ("Twist", Mono.Unix.Catalog.GetString ("Twist..."), null, "Menu.Effects.Distort.Twist.png");
 			Tile = new Gtk.Action ("Tile", Mono.Unix.Catalog.GetString ("Tile Reflection..."), null, "Menu.Effects.Distort.Tile.png");
 			FrostedGlass = new Gtk.Action ("FrostedGlass", Mono.Unix.Catalog.GetString ("Frosted Glass..."), null, "Menu.Effects.Distort.FrostedGlass.png");
 			Pixelate = new Gtk.Action ("Pixelate", Mono.Unix.Catalog.GetString ("Pixelate..."), null, "Menu.Effects.Distort.Pixelate.png");
@@ -139,6 +142,8 @@ namespace Pinta.Core
 		    blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
 		    blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
 		    blur_sub_menu.Append (MotionBlur.CreateMenuItem ());
+
+			distort_sub_menu.Append (Twist.CreateMenuItem ());
 
             distort_sub_menu.Append (Tile.CreateMenuItem ());
 

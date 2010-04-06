@@ -107,6 +107,7 @@
     <Compile Include="ConfigurableEffects\EffectHelper.cs" />
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
+    <Compile Include="ConfigurableEffects\TwistEffect.cs" />
     <Compile Include="ConfigurableEffects\FrostedGlassEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
