@@ -349,6 +349,8 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Stylize.EdgeDetect.png">
       <LogicalName>Menu.Effects.Stylize.EdgeDetect.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Pixelate.png">
+      <LogicalName>Menu.Effects.Distort.Pixelate.png</LogicalName>
     <EmbeddedResource Include="Resources\Menu.Effects.Distort.FrostedGlass.png">
       <LogicalName>Menu.Effects.Distort.FrostedGlass.png</LogicalName>
     </EmbeddedResource>
