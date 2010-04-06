@@ -111,28 +111,17 @@ namespace Pinta.Core
 		{
 		}
 
-		protected void BuildRasterizationToolItems (Toolbar tb)
+		//TODO override to filter on inherited tools
+		protected virtual void BuildRasterizationToolItems (Toolbar tb)
 		{
 			tb.AppendItem (new SeparatorToolItem ());
 			
-			Image antialiasing_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png"));
-			antialiasing_on_icon.Show ();
-			Image antialiasing_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png"));
-			antialiasing_off_icon.Show ();
-			
-			antialiasing_btn = new ToggleToolButton ();
-			antialiasing_btn.IconWidget = antialiasing_off_icon;
-			antialiasing_btn.Show ();
-			antialiasing_btn.Label = "Antialiasing";
-			antialiasing_btn.TooltipText = "Antialiasing";
-			antialiasing_btn.Toggled += delegate {
-				if (antialiasing_btn.Active)
-					antialiasing_btn.IconWidget = antialiasing_on_icon;
-				else
-					antialiasing_btn.IconWidget = antialiasing_off_icon;
-			};
-			tb.AppendItem (antialiasing_btn);
-			
+			BuildAntialiasingTool (tb);
+			BuildAlphaBlending (tb);			
+		}
+		
+		protected void BuildAlphaBlending (Toolbar tb)
+		{
 			Image blending_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png"));
 			blending_on_icon.Show ();
 			Image blending_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png"));
@@ -150,7 +139,27 @@ namespace Pinta.Core
 					alphablending_btn.IconWidget = blending_off_icon;
 			};
 			tb.AppendItem (alphablending_btn);
+		}
+		
+		protected void BuildAntialiasingTool (Toolbar tb)
+		{
+			Image antialiasing_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png"));
+			antialiasing_on_icon.Show ();
+			Image antialiasing_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png"));
+			antialiasing_off_icon.Show ();
 			
+			antialiasing_btn = new ToggleToolButton ();
+			antialiasing_btn.IconWidget = antialiasing_off_icon;
+			antialiasing_btn.Show ();
+			antialiasing_btn.Label = "Antialiasing";
+			antialiasing_btn.TooltipText = "Antialiasing";
+			antialiasing_btn.Toggled += delegate {
+				if (antialiasing_btn.Active)
+					antialiasing_btn.IconWidget = antialiasing_on_icon;
+				else
+					antialiasing_btn.IconWidget = antialiasing_off_icon;
+			};
+			tb.AppendItem (antialiasing_btn);
 		}
 
 		protected virtual void OnBuildToolBar (Toolbar tb)

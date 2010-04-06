@@ -50,6 +50,7 @@ namespace Pinta.Core
 		bool tracking;
 		protected ImageSurface undo_surface;
 		uint button;
+		bool rendering;
 		
 		public override string Name {
 			get { return "Gradient"; }
@@ -79,7 +80,8 @@ namespace Pinta.Core
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
 			base.OnMouseMove (o, args, point);
-			if (tracking) {
+			if (tracking && !rendering) {
+				rendering = true;
 				PintaCore.Layers.CurrentLayer.Clear ();
 				UserBlendOps.NormalBlendOp normalBlendOp = new UserBlendOps.NormalBlendOp();
 				GradientRenderer gr = null;
@@ -122,6 +124,7 @@ namespace Pinta.Core
 					gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
 				}
 				PintaCore.Workspace.Invalidate ();
+				rendering = false;
 			}
 		}
 		#endregion
