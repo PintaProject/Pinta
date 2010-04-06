@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -121,6 +121,12 @@
     <Compile Include="ConfigurableEffects\WarpEffect.cs" />
     <Compile Include="ConfigurableEffects\PolarInversionEffect.cs" />
     <Compile Include="ConfigurableEffects\PerlinNoise2D.cs" />
+    <Compile Include="ConfigurableEffects\TwistEffect.cs" />
+    <Compile Include="ConfigurableEffects\FrostedGlassEffect.cs" />
+    <Compile Include="ConfigurableEffects\TileEffect.cs" />
+    <Compile Include="ConfigurableEffects\EmbossEffect.cs" />
+    <Compile Include="ConfigurableEffects\PixelateEffect.cs" />
+    <Compile Include="ConfigurableEffects\ReliefEffect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
