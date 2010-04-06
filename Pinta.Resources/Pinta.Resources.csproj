@@ -349,6 +349,9 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Stylize.EdgeDetect.png">
       <LogicalName>Menu.Effects.Stylize.EdgeDetect.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Distort.Tile.png">
+      <LogicalName>Menu.Effects.Distort.Tile.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
