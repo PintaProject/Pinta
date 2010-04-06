@@ -335,62 +335,94 @@ namespace Pinta
 		}
 		
 		#region Drawing Area
+		Cairo.ImageSurface canvas;
+		Cairo.ImageSurface composite;
+		CanvasRenderer cr = new CanvasRenderer ();
+
 		private void OnDrawingarea1ExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
 			double scale = PintaCore.Workspace.Scale;
 
-			double x = PintaCore.Workspace.Offset.X;
-			double y = PintaCore.Workspace.Offset.Y;
+			int x = (int)PintaCore.Workspace.Offset.X;
+			int y = (int)PintaCore.Workspace.Offset.Y;
+
+			// Translate our expose area for the whole drawingarea to just our canvas
+			Rectangle canvas_bounds = new Rectangle (x, y, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y);
+			canvas_bounds.Intersect (args.Event.Area);
+
+			if (canvas_bounds.IsEmpty)
+				return;
+				
+			canvas_bounds.X -= x;
+			canvas_bounds.Y -= y;
+			
+			// Resize our offscreen surface to a surface the size of our drawing area
+			if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
+				if (canvas != null)
+					(canvas as IDisposable).Dispose ();
+					
+				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
+			}
+
+			cr.Initialize (PintaCore.Workspace.ImageSize.ToSize (), PintaCore.Workspace.CanvasSize.ToSize ());
 
 			using (Cairo.Context g = CairoHelper.Create (drawingarea1.GdkWindow)) {
-				// Black 1px border around image
+				// Draw our 1 px black border
 				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X + 1, PintaCore.Workspace.CanvasSize.Y + 1), new Cairo.Color (0, 0, 0), 1);
+				
+				// Set up our clip rectangle
+				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y));
+				g.Clip ();
 
-				// Transparent checkerboard pattern
-				using (Cairo.SurfacePattern sp = new Cairo.SurfacePattern (PintaCore.Layers.TransparentLayer.Surface)) {
-					sp.Extend = Cairo.Extend.Repeat;
-
-					g.FillRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y), sp);
-				}
-
-				// User's layers
-				g.Save ();
 				g.Translate (x, y);
-				g.Scale (scale, scale);
-
+				
+				bool checker = true;
+				
+				// Resize each layer and paint it to the screen
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
+					cr.Render (layer.Surface, canvas, canvas_bounds.Location, checker);
+					g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
+					g.PaintWithAlpha (layer.Opacity);
+					
 					if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
-						PintaCore.LivePreview.RenderLivePreviewLayer (g, layer.Opacity);
-					} else {
-						g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
+						cr.Render (PintaCore.LivePreview.LivePreviewSurface, canvas, canvas_bounds.Location, checker);
+
+						g.Save ();
+						g.Scale (scale, scale);
+						g.AppendPath (PintaCore.Layers.SelectionPath);
+						g.Clip ();
+
+						g.Scale (1 / scale, 1 / scale);
+						g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
 						g.PaintWithAlpha (layer.Opacity);
+
+						g.Restore ();
 					}
+					
+					checker = false;
 				}
 
-				g.Restore ();
-
-				// Selection outline
-				if (PintaCore.Layers.ShowSelection) {
-					g.Save ();
-					g.Translate (x, y);
-					g.Translate (0.5, 0.5);
-					g.Scale (scale, scale);
+			        // Selection outline
+			        if (PintaCore.Layers.ShowSelection) {
+			                g.Save ();
+			                g.Translate (0.5, 0.5);
+			                g.Scale (scale, scale);
 
 					g.AppendPath (PintaCore.Layers.SelectionPath);
 
-					if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
-						g.Color = new Cairo.Color (.7, .8, .9, .2);
-						g.FillRule = Cairo.FillRule.EvenOdd;
-						g.FillPreserve ();
-					}
-					
-					g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
-					g.LineWidth = 1 / scale;
-					g.Color = new Cairo.Color (0, 0, 0);
+			                if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
+			                        g.Color = new Cairo.Color (.7, .8, .9, .2);
+			                        g.FillRule = Cairo.FillRule.EvenOdd;
+			                        g.FillPreserve ();
+			                }
 
-					g.Stroke ();
-					g.Restore ();
-				}
+			                g.SetDash (new double[] { 2 / scale, 4 /scale }, 0);
+			                g.LineWidth = 1 / scale;
+			                g.Color = new Cairo.Color (0, 0, 0);
+
+			                g.Stroke ();
+			                g.Restore ();
+			        }
 			}
 		}
 

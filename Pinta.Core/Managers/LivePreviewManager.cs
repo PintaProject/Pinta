@@ -58,6 +58,7 @@ namespace Pinta.Core
 		}
 		
 		public bool IsEnabled { get { return live_preview_enabled; } }
+		public Cairo.ImageSurface LivePreviewSurface { get { return live_preview_surface; } }
 		
 		public event EventHandler<LivePreviewStartedEventArgs> Started;
 		public event EventHandler<LivePreviewRenderUpdatedEventArgs> RenderUpdated;
