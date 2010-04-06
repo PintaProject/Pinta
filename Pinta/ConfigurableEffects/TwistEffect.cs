@@ -85,11 +85,14 @@ namespace Pinta.Core
 				aaPoints[i] = pt;
 			}
 
+			int src_width = src.Width;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; y++) {
 					float j = y - hh;
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 
 					for (int x = rect.Left; x < rect.Right; x++) {
 						float i = x - hw;
@@ -114,7 +117,7 @@ namespace Pinta.Core
 
 								theta += (t * twist) / 100;
 
-								ColorBgra sample = src.GetPointUnchecked (
+								ColorBgra sample = src.GetPointUnchecked (src_data_ptr, src_width, 
 								    (int)(hw + (float)(rad * Math.Cos (theta))),
 								    (int)(hh + (float)(rad * Math.Sin (theta))));
 

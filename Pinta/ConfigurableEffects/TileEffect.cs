@@ -83,6 +83,9 @@ namespace Pinta.Core
 				// RGSS + rotation to maximize AA quality
 				aaPoints[i] = new PointD ((double)(cos * x + sin * y), (double)(cos * y - sin * x));
 			}
+			
+			int src_width = src.Width;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; y++) {
@@ -125,7 +128,7 @@ namespace Pinta.Core
 								ySample = (ySample + height) % height;
 							}
 							
-							ColorBgra sample = *src.GetPointAddressUnchecked (xSample, ySample);
+							ColorBgra sample = *src.GetPointAddressUnchecked (src_data_ptr, src_width, xSample, ySample);
 							
 							b += sample.B;
 							g += sample.G;

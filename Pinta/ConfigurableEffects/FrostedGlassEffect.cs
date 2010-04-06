@@ -76,6 +76,9 @@ namespace Pinta.Core
 			uint* avgBlue = stackalloc uint[256];
 			uint* avgAlpha = stackalloc uint[256];
 			byte* intensityChoices = stackalloc byte[(1 + (r * 2)) * (1 + (r * 2))];
+
+			int src_width = src.Width;
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 			
 			foreach (var rect in rois) {
 				int rectTop = rect.Top;
@@ -124,7 +127,7 @@ namespace Pinta.Core
 								continue;
 							}
 							
-							ColorBgra* srcPtr = src.GetPointAddressUnchecked (left, j);
+							ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, left, j);
 							
 							for (int i = left; i < right; ++i) {
 								byte intensity = srcPtr->GetIntensityByte ();

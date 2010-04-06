@@ -64,6 +64,8 @@ namespace Pinta.Core
 			var srcWidth = src.Width;
 			var srcHeight = src.Height;
 
+			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
+			
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle
 				for (int y = rect.Top; y < rect.Bottom; ++y) {
@@ -95,7 +97,7 @@ namespace Pinta.Core
 						for (int fy = fyStart; fy < fyEnd; ++fy) {
 							for (int fx = fxStart; fx < fxEnd; ++fx) {
 								double weight = weights[fy, fx];
-								ColorBgra c = src.GetPointUnchecked (x - 1 + fx, y - 1 + fy);
+								ColorBgra c = src.GetPointUnchecked (src_data_ptr, srcWidth, x - 1 + fx, y - 1 + fy);
 								double intensity = (double)c.GetIntensityByte ();
 								sum += weight * intensity;
 							}

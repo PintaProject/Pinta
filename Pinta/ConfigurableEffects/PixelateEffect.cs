@@ -59,9 +59,9 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
-		private ColorBgra ComputeCellColor (int x, int y, ImageSurface src, int cellSize) {
+		private ColorBgra ComputeCellColor (int x, int y, ImageSurface src, int cellSize, Gdk.Rectangle srcBounds) {
 			Gdk.Rectangle cell = GetCellBox (x, y, cellSize);
-			cell.Intersect (src.GetBounds ());
+			cell.Intersect (srcBounds);
 			
 			int left = cell.Left;
 			int right = cell.Right - 1;
@@ -92,14 +92,17 @@ namespace Pinta.Core
 		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois) {
 			var cellSize = Data.CellSize;
 			
+			Gdk.Rectangle src_bounds = src.GetBounds ();
+			Gdk.Rectangle dest_bounds = dest.GetBounds ();
+			
 			foreach (var rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; ++y) {
 					int yEnd = y + 1;
 					
 					for (int x = rect.Left; x < rect.Right; ++x) {
 						var cellRect = GetCellBox (x, y, cellSize);
-						cellRect.Intersect (dest.GetBounds ());
-						var color = ComputeCellColor (x, y, src, cellSize);
+						cellRect.Intersect (dest_bounds);
+						var color = ComputeCellColor (x, y, src, cellSize, src_bounds);
 						
 						int xEnd = Math.Min (rect.Right, cellRect.Right);
 						yEnd = Math.Min (rect.Bottom, cellRect.Bottom);
