@@ -36,7 +36,7 @@ namespace Pinta.Core
 		private GaussianBlurEffect blurEffect;
 		private BrightnessContrastEffect contrastEffect;
 		private UserBlendOps.ScreenBlendOp screenBlendOp;
-		
+
 		public override string Icon {
 			get { return "Menu.Effects.Distort.Twist.png"; }
 		}
@@ -55,7 +55,7 @@ namespace Pinta.Core
 		{
 			EffectData = new TwistData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			return EffectHelper.LaunchSimpleEffectDialog (this);
@@ -64,85 +64,78 @@ namespace Pinta.Core
 		#region Algorithm Code Ported From PDN
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
-            float twist = Data.Amount;
+			float twist = Data.Amount;
 
-            float hw = dst.Width / 2.0f;
-            float hh = dst.Height / 2.0f;
-            float maxrad = Math.Min(hw, hh);
+			float hw = dst.Width / 2.0f;
+			float hh = dst.Height / 2.0f;
+			float maxrad = Math.Min (hw, hh);
 
-            twist = twist * twist * Math.Sign(twist);
+			twist = twist * twist * Math.Sign (twist);
 
-            int aaLevel = Data.Antialias;
-            int aaSamples = aaLevel * aaLevel + 1;
-            PointD* aaPoints = stackalloc PointD[aaSamples];
+			int aaLevel = Data.Antialias;
+			int aaSamples = aaLevel * aaLevel + 1;
+			PointD* aaPoints = stackalloc PointD[aaSamples];
 
-            for (int i = 0; i < aaSamples; ++i)
-            {
-                PointD pt = new PointD(
-                    ((i * aaLevel) / (float)aaSamples),
-                    i / (float)aaSamples);
+			for (int i = 0; i < aaSamples; ++i) {
+				PointD pt = new PointD (
+				    ((i * aaLevel) / (float)aaSamples),
+				    i / (float)aaSamples);
 
-                pt.X -= (int)pt.X;
-                aaPoints[i] = pt;
-            }
+				pt.X -= (int)pt.X;
+				aaPoints[i] = pt;
+			}
 
 			foreach (var rect in rois) {
-                for (int y = rect.Top; y < rect.Bottom; y++)
-                {
-                    float j = y - hh;
-                    ColorBgra* dstPtr = dst.GetPointAddressUnchecked(rect.Left, y);
-                    ColorBgra* srcPtr = src.GetPointAddressUnchecked(rect.Left, y);
+				for (int y = rect.Top; y < rect.Bottom; y++) {
+					float j = y - hh;
+					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
+					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
 
-                    for (int x = rect.Left; x < rect.Right; x++)
-                    {
-                        float i = x - hw;
+					for (int x = rect.Left; x < rect.Right; x++) {
+						float i = x - hw;
 
-                        if (i * i + j * j > (maxrad + 1) * (maxrad + 1))
-                        {
-                            *dstPtr = *srcPtr;
-                        }
-                        else
-                        {
-                            int b = 0;
-                            int g = 0;
-                            int r = 0;
-                            int a = 0;
+						if (i * i + j * j > (maxrad + 1) * (maxrad + 1)) {
+							*dstPtr = *srcPtr;
+						} else {
+							int b = 0;
+							int g = 0;
+							int r = 0;
+							int a = 0;
 
-                            for (int p = 0; p < aaSamples; ++p)
-                            {
-                                float u = i + (float)aaPoints[p].X;
-                                float v = j + (float)aaPoints[p].Y;
-                                double rad = Math.Sqrt(u * u + v * v);
-                                double theta = Math.Atan2(v, u);
+							for (int p = 0; p < aaSamples; ++p) {
+								float u = i + (float)aaPoints[p].X;
+								float v = j + (float)aaPoints[p].Y;
+								double rad = Math.Sqrt (u * u + v * v);
+								double theta = Math.Atan2 (v, u);
 
-                                double t = 1 - rad / maxrad;
+								double t = 1 - rad / maxrad;
 
-                                t = (t < 0) ? 0 : (t * t * t);
+								t = (t < 0) ? 0 : (t * t * t);
 
-                                theta += (t * twist) / 100;
+								theta += (t * twist) / 100;
 
-                                ColorBgra sample = src.GetPointUnchecked(
-                                    (int)(hw + (float)(rad * Math.Cos(theta))),
-                                    (int)(hh + (float)(rad * Math.Sin(theta))));
+								ColorBgra sample = src.GetPointUnchecked (
+								    (int)(hw + (float)(rad * Math.Cos (theta))),
+								    (int)(hh + (float)(rad * Math.Sin (theta))));
 
-                                b += sample.B;
-                                g += sample.G;
-                                r += sample.R;
-                                a += sample.A;
-                            }
+								b += sample.B;
+								g += sample.G;
+								r += sample.R;
+								a += sample.A;
+							}
 
-                            *dstPtr = ColorBgra.FromBgra(
-                                (byte)(b / aaSamples),
-                                (byte)(g / aaSamples),
-                                (byte)(r / aaSamples),
-                                (byte)(a / aaSamples));
-                        }
+							*dstPtr = ColorBgra.FromBgra (
+							    (byte)(b / aaSamples),
+							    (byte)(g / aaSamples),
+							    (byte)(r / aaSamples),
+							    (byte)(a / aaSamples));
+						}
 
-                        ++dstPtr;
-                        ++srcPtr;
-                    }
-                }
-            }
+						++dstPtr;
+						++srcPtr;
+					}
+				}
+			}
 		}
 		#endregion
 
