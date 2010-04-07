@@ -26,6 +26,9 @@
 
 using System;
 using Pinta.Core;
+using Gtk;
+using Mono.Unix;
+
 
 namespace Pinta
 {
@@ -83,6 +86,41 @@ namespace Pinta
 		#region Handlers
 		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
 		{
+			bool canceled = false;
+
+			if (PintaCore.Workspace.IsDirty) {
+				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before creating a new one?");
+				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+				markup = string.Format (markup, primary, secondary);
+
+				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+				                            MessageType.Question, ButtonsType.None, true,
+				                            markup,
+				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+
+				md.AddButton (Catalog.GetString ("Continue without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Yes);
+
+				md.DefaultResponse = ResponseType.Cancel;
+
+				ResponseType saveResponse = (ResponseType)md.Run ();
+				md.Destroy ();
+
+				if (saveResponse == ResponseType.Yes) {
+					PintaCore.Actions.File.Save.Activate ();
+				}
+				else {
+					canceled = saveResponse == ResponseType.Cancel;
+				}
+			}
+
+			if (canceled) {
+				return;
+			}
+
+
 			NewImageDialog dialog = new NewImageDialog ();
 
 			dialog.ParentWindow = main_window.GdkWindow;

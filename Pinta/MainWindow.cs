@@ -148,6 +148,9 @@ namespace Pinta
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
+			// leave window open so user can cancel quitting
+			args.RetVal = true;
+
 			PintaCore.Actions.File.Exit.Activate ();
 		}
 

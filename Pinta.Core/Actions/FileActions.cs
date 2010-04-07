@@ -27,6 +27,8 @@
 using System;
 using Gtk;
 using Gdk;
+using Mono.Unix;
+
 
 namespace Pinta.Core
 {
@@ -51,7 +53,6 @@ namespace Pinta.Core
 			SaveAs = new Gtk.Action ("SaveAs", Mono.Unix.Catalog.GetString ("Save As..."), null, "gtk-save-as");
 			Print = new Gtk.Action ("Print", Mono.Unix.Catalog.GetString ("Print"), null, "gtk-print");
 			Exit = new Gtk.Action ("Exit", Mono.Unix.Catalog.GetString ("Quit"), null, "gtk-quit");
-			
 			OpenRecent.Sensitive = false;
 			Close.Sensitive = false;
 			Print.Sensitive = false;
@@ -82,6 +83,7 @@ namespace Pinta.Core
 			SaveAs.Activated += HandlePintaCoreActionsFileSaveAsActivated;
 			Exit.Activated += HandlePintaCoreActionsFileExitActivated;
 		}
+		
 		#endregion
 
 		#region Public Methods
@@ -127,14 +129,48 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsFileOpenActivated (object sender, EventArgs e)
 		{
-			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Open Image File", PintaCore.Chrome.MainWindow, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
-			
-			int response = fcd.Run ();
-			
-			if (response == (int)Gtk.ResponseType.Ok)
-				OpenFile (fcd.Filename);
-			
-			fcd.Destroy ();
+			bool canceled = false;
+
+			if (PintaCore.Workspace.IsDirty) {
+				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before opening a new image?");
+				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+				markup = string.Format (markup, primary, secondary);
+
+				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+				                            MessageType.Question, ButtonsType.None, true,
+				                            markup,
+				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+
+				md.AddButton (Catalog.GetString ("Continue without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Yes);
+
+				md.DefaultResponse = ResponseType.Cancel;
+
+				ResponseType response = (ResponseType)md.Run ();
+				md.Destroy ();
+
+				if (response == ResponseType.Yes) {
+					Save.Activate ();
+				}
+				else {
+					canceled = response == ResponseType.Cancel;
+				}
+			}
+
+			if (!canceled) {
+				var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
+														FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
+														Gtk.Stock.Open, Gtk.ResponseType.Ok);
+
+				int response = fcd.Run ();
+
+				if (response == (int)Gtk.ResponseType.Ok)
+					OpenFile (fcd.Filename);
+	
+				fcd.Destroy ();
+			}
 		}
 		
 		private void HandlePintaCoreActionsFileSaveActivated (object sender, EventArgs e)
@@ -147,32 +183,61 @@ namespace Pinta.Core
 		
 		private void HandlePintaCoreActionsFileSaveAsActivated (object sender, EventArgs e)
 		{
-			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog ("Save Image File", PintaCore.Chrome.MainWindow, FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Save, Gtk.ResponseType.Ok);
+			var fcd = new Gtk.FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
+			                                                       PintaCore.Chrome.MainWindow,
+			                                                       FileChooserAction.Save,
+			                                                       Gtk.Stock.Cancel,
+			                                                       Gtk.ResponseType.Cancel,
+			                                                       Gtk.Stock.Save, Gtk.ResponseType.Ok);
+			
+			fcd.DoOverwriteConfirmation = true;
 			
 			int response = fcd.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok)
 				SaveFile (fcd.Filename);
-			
+
 			fcd.Destroy ();
 		}
 
 		private void HandlePintaCoreActionsFileExitActivated (object sender, EventArgs e)
 		{
+			bool canceled = false;
+
 			if (PintaCore.Workspace.IsDirty) {
-				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.YesNo, "{0} has unsaved changes.\n\nDo you want to save?", System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
-				md.Title = "Save before exit?";
-				
+				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before closing?");
+				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+				markup = string.Format (markup, primary, secondary);
+
+				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+				                            MessageType.Question, ButtonsType.None, true,
+				                            markup,
+				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+
+				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Yes);
+
+				// so that user won't accidentally overwrite
+				md.DefaultResponse = ResponseType.Cancel;
+
 				ResponseType response = (ResponseType)md.Run ();
 				md.Destroy ();
 				
-				if (response == ResponseType.Yes)
+				if (response == ResponseType.Yes) {
 					Save.Activate ();
+				}
+				else {
+					canceled = response == ResponseType.Cancel;
+				}
 			}
-			
-			PintaCore.History.Clear ();
-			(PintaCore.Layers.SelectionPath as IDisposable).Dispose ();
-			Application.Quit ();
+
+			if (!canceled) {
+				PintaCore.History.Clear ();
+				(PintaCore.Layers.SelectionPath as IDisposable).Dispose ();
+				Application.Quit ();
+			}
 		}
 		#endregion
 
