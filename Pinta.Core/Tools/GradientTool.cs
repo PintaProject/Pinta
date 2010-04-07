@@ -85,44 +85,42 @@ namespace Pinta.Core
 				PintaCore.Layers.CurrentLayer.Clear ();
 				UserBlendOps.NormalBlendOp normalBlendOp = new UserBlendOps.NormalBlendOp();
 				GradientRenderer gr = null;
-				using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-					switch (GradientType) {
-						case eGradientType.Linear:
-							//g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
-							gr = new GradientRenderers.LinearClamped (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
-						break;
-						case eGradientType.LinearReflected:
-							//g.DrawLinearReflectedGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
-							gr = new GradientRenderers.LinearReflected (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
-						break;
-						case eGradientType.Radial:
-							//double radius = startpoint.Distance (point);
-							//g.DrawRadialGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, startpoint, 0.1 * radius, radius);
-							gr = new GradientRenderers.Radial (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
-						break;
-						case eGradientType.Diamond:
-							gr = new GradientRenderers.LinearDiamond (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
-						break;
-						case eGradientType.Conical:
-							gr = new GradientRenderers.Conical (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
-						break;
-					}
-					if (button == 3) {//right
-						gr.StartColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-		            	gr.EndColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
-					}
-					else {//1 left
-						gr.StartColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
-		            	gr.EndColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-					}
-							
-		            gr.StartPoint = startpoint;
-		            gr.EndPoint = point;
-					gr.AlphaBlending = AlphaBlending;
-            
-					gr.BeforeRender ();
-					gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
+				switch (GradientType) {
+					case eGradientType.Linear:
+						//g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+						gr = new GradientRenderers.LinearClamped (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+					break;
+					case eGradientType.LinearReflected:
+						//g.DrawLinearReflectedGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
+						gr = new GradientRenderers.LinearReflected (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+					break;
+					case eGradientType.Radial:
+						//double radius = startpoint.Distance (point);
+						//g.DrawRadialGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, startpoint, 0.1 * radius, radius);
+						gr = new GradientRenderers.Radial (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+					break;
+					case eGradientType.Diamond:
+						gr = new GradientRenderers.LinearDiamond (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+					break;
+					case eGradientType.Conical:
+						gr = new GradientRenderers.Conical (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+					break;
 				}
+				if (button == 3) {//right
+					gr.StartColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
+	            	gr.EndColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
+				}
+				else {//1 left
+					gr.StartColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
+	            	gr.EndColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
+				}
+						
+	            gr.StartPoint = startpoint;
+	            gr.EndPoint = point;
+				gr.AlphaBlending = AlphaBlending;
+        
+				gr.BeforeRender ();
+				gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
 				PintaCore.Workspace.Invalidate ();
 				rendering = false;
 			}

@@ -132,7 +132,7 @@ namespace Pinta.Core
 				if (this.startPoint.X == this.endPoint.X && this.startPoint.Y == this.endPoint.Y) {
 					// Start and End point are the same ... fill with solid color.
 					for (int y = rect.Top; y < rect.Bottom; ++y) {
-						ColorBgra* pixelPtr = surface.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
+						ColorBgra* pixelPtr = surface.GetPointAddress(rect.Left, y);
 						
 						for (int x = rect.Left; x < rect.Right; ++x) {
 							ColorBgra result;
@@ -157,7 +157,7 @@ namespace Pinta.Core
 					}
 				} else {
 					for (int y = rect.Top; y < rect.Bottom; ++y) {
-						ColorBgra* pixelPtr = surface.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
+						ColorBgra* pixelPtr = surface.GetPointAddress(rect.Left, y);
 						
 						if (this.alphaOnly && this.alphaBlending) {
 							for (int x = rect.Left; x < rect.Right; ++x) {
@@ -207,7 +207,7 @@ namespace Pinta.Core
 			AfterRender ();
 		}
 
-		GradientRenderer (bool alphaOnly, BinaryPixelOp normalBlendOp)
+		protected internal GradientRenderer (bool alphaOnly, BinaryPixelOp normalBlendOp)
 		{
 			this.normalBlendOp = normalBlendOp;
 			this.alphaOnly = alphaOnly;

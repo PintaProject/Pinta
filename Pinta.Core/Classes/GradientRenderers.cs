@@ -39,7 +39,7 @@ namespace Pinta.Core
 				base.BeforeRender ();
 			}
 
-			LinearBase (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			protected internal LinearBase (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
 			{
 			}
 		}
@@ -56,7 +56,7 @@ namespace Pinta.Core
 				return lerp;
 			}
 
-			LinearStraight (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			protected internal LinearStraight (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
 			{
 			}
 		}
