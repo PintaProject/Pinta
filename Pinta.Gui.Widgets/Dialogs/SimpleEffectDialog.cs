@@ -39,21 +39,18 @@ namespace Pinta.Gui.Widgets
 		uint event_delay_timeout_id;
 		
 		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData)
+			: base (title, Pinta.Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal,
+			        Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
 		{
-			Title = title;
 			Icon = icon;
 			EffectData = effectData;
 
+			BorderWidth = 6;
+			VBox.Spacing = 12;
 			WidthRequest = 400;
-			
-			AddButton ("_Cancel", Gtk.ResponseType.Cancel);
-			AddButton ("_OK", Gtk.ResponseType.Ok);
 			DefaultResponse = Gtk.ResponseType.Ok;
 			
 			BuildDialog ();
-			
-			// This is just for padding, it should probably be done better
-			AddWidget (new Gtk.Label ());
 		}
 
 		public object EffectData { get; private set; }
