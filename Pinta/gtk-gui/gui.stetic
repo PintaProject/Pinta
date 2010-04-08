@@ -203,30 +203,67 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+                  <widget class="Gtk.Table" id="table1">
                     <property name="MemberName" />
-                    <property name="ShadowType">In</property>
+                    <property name="NRows">3</property>
+                    <property name="NColumns">2</property>
+                    <property name="RowSpacing">6</property>
+                    <property name="ColumnSpacing">6</property>
                     <child>
-                      <widget class="Gtk.Viewport" id="GtkViewport">
+                      <placeholder />
+                    </child>
+                    <child>
+                      <placeholder />
+                    </child>
+                    <child>
+                      <placeholder />
+                    </child>
+                    <child>
+                      <placeholder />
+                    </child>
+                    <child>
+                      <placeholder />
+                    </child>
+                    <child>
+                      <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
                         <property name="MemberName" />
-                        <property name="ShadowType">None</property>
+                        <property name="ShadowType">In</property>
                         <child>
-                          <widget class="Gtk.DrawingArea" id="drawingarea1">
+                          <widget class="Gtk.Viewport" id="GtkViewport1">
                             <property name="MemberName" />
-                            <property name="CanDefault">True</property>
-                            <property name="HasDefault">True</property>
-                            <property name="CanFocus">True</property>
-                            <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
-                            <property name="ShowScrollbars">True</property>
-                            <signal name="ButtonPressEvent" handler="OnDrawingarea1ButtonPressEvent" />
-                            <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />
-                            <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
-                            <signal name="ExposeEvent" handler="OnDrawingarea1ExposeEvent" />
-                            <signal name="KeyPressEvent" handler="OnDrawingarea1KeyPressEvent" />
-                            <signal name="KeyReleaseEvent" handler="OnDrawingarea1KeyReleaseEvent" />
+                            <property name="ShadowType">None</property>
+                            <child>
+                              <widget class="Gtk.DrawingArea" id="drawingarea1">
+                                <property name="MemberName" />
+                                <property name="CanDefault">True</property>
+                                <property name="HasDefault">True</property>
+                                <property name="CanFocus">True</property>
+                                <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
+                                <property name="ShowScrollbars">True</property>
+                                <signal name="ButtonPressEvent" handler="OnDrawingarea1ButtonPressEvent" />
+                                <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />
+                                <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
+                                <signal name="ExposeEvent" handler="OnDrawingarea1ExposeEvent" />
+                                <signal name="KeyPressEvent" handler="OnDrawingarea1KeyPressEvent" />
+                                <signal name="KeyReleaseEvent" handler="OnDrawingarea1KeyReleaseEvent" />
+                              </widget>
+                            </child>
                           </widget>
                         </child>
                       </widget>
+                      <packing>
+                        <property name="TopAttach">1</property>
+                        <property name="BottomAttach">2</property>
+                        <property name="LeftAttach">1</property>
+                        <property name="RightAttach">2</property>
+                        <property name="AutoSize">True</property>
+                        <property name="XExpand">True</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">True</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
                     </child>
                   </widget>
                   <packing>
@@ -1895,6 +1932,8 @@
                 <property name="DefaultValue">16</property>
                 <property name="MaximumValue">64</property>
                 <property name="MinimumValue">2</property>
+                <property name="DigitsValue">0</property>
+                <property name="IncrementValue">0</property>
                 <property name="Value">0</property>
               </widget>
               <packing>
@@ -1912,6 +1951,8 @@
                 <property name="DefaultValue">16</property>
                 <property name="MaximumValue">64</property>
                 <property name="MinimumValue">2</property>
+                <property name="DigitsValue">0</property>
+                <property name="IncrementValue">0</property>
                 <property name="Value">0</property>
               </widget>
               <packing>
@@ -1929,6 +1970,8 @@
                 <property name="DefaultValue">16</property>
                 <property name="MaximumValue">64</property>
                 <property name="MinimumValue">2</property>
+                <property name="DigitsValue">0</property>
+                <property name="IncrementValue">0</property>
                 <property name="Value">0</property>
               </widget>
               <packing>

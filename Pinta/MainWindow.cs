@@ -122,6 +122,22 @@ namespace Pinta
 			
 			WindowAction.Visible = false;
 
+			hruler = new HRuler ();
+			hruler.Metric = MetricType.Pixels;
+			hruler.SetRange (0, PintaCore.Workspace.ImageSize.X, 0, PintaCore.Workspace.ImageSize.X);
+			drawingarea1.MotionNotifyEvent += delegate(object o, MotionNotifyEventArgs args) {
+				hruler.Position = args.Event.X;
+			};  
+			table1.Attach (hruler, 1, 2, 0, 1);
+			
+			vruler = new VRuler ();
+			vruler.Metric = MetricType.Pixels;
+			vruler.SetRange (0, PintaCore.Workspace.ImageSize.Y, 0, PintaCore.Workspace.ImageSize.Y);
+			drawingarea1.MotionNotifyEvent += delegate(object o, MotionNotifyEventArgs args) {
+				vruler.Position = args.Event.Y;
+			};  
+			table1.Attach (vruler, 0, 1, 1, 2);
+			
 			if (Platform.GetOS () == Platform.OS.Mac)
 			{
 				try {
@@ -460,6 +476,20 @@ namespace Pinta
 		protected virtual void OnDrawingarea1KeyReleaseEvent (object o, Gtk.KeyReleaseEventArgs args)
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args);
+		}
+		private HRuler hruler;
+		private VRuler vruler;
+		
+		public void ShowRulers ()
+		{
+			hruler.Show ();
+			vruler.Show ();	
+		}
+		
+		public void HideRulers ()
+		{
+			hruler.Hide ();
+			vruler.Hide ();
 		}
 	}
 }

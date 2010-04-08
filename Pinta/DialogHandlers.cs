@@ -80,7 +80,15 @@ namespace Pinta
             PintaCore.Actions.Effects.Median.Activated += HandleEffectMedianActivated;
             PintaCore.Actions.Effects.ReduceNoise.Activated += HandleEffectReduceNoiseActivated;
 			PintaCore.Actions.Effects.Outline.Activated += HandleEffectOutlineActivated;
+			PintaCore.Actions.View.Rulers.Toggled += HandlePintaCoreActionsViewRulersToggled;
+		}
 
+		void HandlePintaCoreActionsViewRulersToggled (object sender, EventArgs e)
+		{
+			if (((ToggleAction)sender).Active)
+				main_window.ShowRulers ();
+			else
+				main_window.HideRulers ();
 		}
 
 		#region Handlers
