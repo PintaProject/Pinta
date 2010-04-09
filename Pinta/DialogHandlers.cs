@@ -129,6 +129,7 @@ namespace Pinta
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
+				PintaCore.Workspace.ActiveDocument.HasFile = false;
 				PintaCore.Workspace.ImageSize = new Cairo.Point (dialog.NewImageWidth, dialog.NewImageHeight);
 				PintaCore.Workspace.CanvasSize = new Cairo.Point (dialog.NewImageWidth, dialog.NewImageHeight);
 				

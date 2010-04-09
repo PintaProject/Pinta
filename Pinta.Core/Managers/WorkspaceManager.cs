@@ -29,12 +29,44 @@ using Cairo;
 
 namespace Pinta.Core
 {
+	public class Document
+	{
+		public Document () {
+			IsDirty = false;
+			HasFile = false;
+		}
+
+		public bool HasFile { get; set; }
+
+		private string pathname;
+
+		public string Pathname {
+			get { return (pathname != null) ? pathname : string.Empty; }
+			set { pathname = value; }
+		}
+
+		public string Filename {
+			get {
+				return System.IO.Path.GetFileName (Pathname);
+			}
+
+			set {
+				if (value != null) {
+					Pathname = System.IO.Path.Combine (Pathname, value);
+				}
+			}
+		}
+
+		public bool IsDirty { get; set; }
+	}
+
+
 	public class WorkspaceManager
 	{
-		private string filename;
-		private bool is_dirty;
 		private Point canvas_size;
-		
+
+		private Document Document { get; set; }
+
 		public Point ImageSize { get; set; }
 		
 		public Point CanvasSize {
@@ -53,6 +85,7 @@ namespace Pinta.Core
 		
 		public WorkspaceManager ()
 		{
+			ActiveDocument = Document = new Document ();
 			CanvasSize = new Point (800, 600);
 			ImageSize = new Point (800, 600);
 		}
@@ -219,22 +252,29 @@ namespace Pinta.Core
 
 			return new Gdk.Rectangle (x, y, width, height);
 		}
-		
+
+		public Document ActiveDocument { get; set; }
+
+		public string DocumentPath {
+			get { return Document.Pathname; }
+			set { Document.Pathname = value; }
+		}
+
 		public string Filename {
-			get { return filename; }
+			get { return Document.Filename; }
 			set {
-				if (filename != value) {
-					filename = value;
+				if (Document.Filename != value) {
+					Document.Filename = value;
 					ResetTitle ();
 				}
 			}
 		}
 		
 		public bool IsDirty {
-			get { return is_dirty; }
+			get { return Document.IsDirty; }
 			set {
-				if (is_dirty != value) {
-					is_dirty = value;
+				if (Document.IsDirty != value) {
+					Document.IsDirty = value;
 					ResetTitle ();
 				}
 			}
@@ -278,7 +318,7 @@ namespace Pinta.Core
 		
 		private void ResetTitle ()
 		{
-			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", filename, is_dirty ? "*" : "");
+			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", Filename, IsDirty ? "*" : "");
 		}
 
 		#region Protected Methods
