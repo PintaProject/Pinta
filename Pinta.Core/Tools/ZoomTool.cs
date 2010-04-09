@@ -54,6 +54,7 @@ namespace Pinta.Core
 		public override Gdk.Cursor DefaultCursor {
 			get { return cursorZoom; }
 		}
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.Z; } }
 
 		public ZoomTool ()
 		{

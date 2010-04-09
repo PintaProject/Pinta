@@ -53,6 +53,7 @@ namespace Pinta.Core
 		public virtual ToggleToolButton ToolItem { get { if (tool_item == null) tool_item = CreateToolButton (); return tool_item; } }
 		public virtual bool Enabled { get { return true; } }
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
+		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 		
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
@@ -90,6 +91,7 @@ namespace Pinta.Core
 			OnDeactivated ();
 		}		
 		
+		// Return true if the key was consumed.
 		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
 		{
 			OnKeyDown (canvas, args);
@@ -165,7 +167,11 @@ namespace Pinta.Core
 			tool_item.IconWidget = i2;
 			tool_item.Show ();
 			tool_item.Label = Name;
-			tool_item.TooltipText = Name;
+			
+			if (ShortcutKey != (Gdk.Key)0)
+				tool_item.TooltipText = string.Format ("{0}\nShortcut key: {1}", Name, ShortcutKey.ToString ().ToUpperInvariant ());
+			else
+				tool_item.TooltipText = Name;
 			
 			return tool_item;
 		}

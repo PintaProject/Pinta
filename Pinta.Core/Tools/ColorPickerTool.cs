@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Left click to set primary color. Right click to set secondary color."; }
 		}
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.K; } }
 		#endregion
 
 		#region ToolBar
