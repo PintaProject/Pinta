@@ -52,6 +52,7 @@ namespace Pinta.Core
 		public override string Name { get { return "Freeform Shape"; } }
 		public override string Icon { get { return "Tools.FreeformShape.png"; } }
 		public override string StatusBarText { get { return "Left click to draw with primary color, right click to draw with secondary color"; } }
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
 		#endregion
 
 		#region ToolBar

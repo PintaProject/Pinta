@@ -26,6 +26,9 @@
 
 using System;
 using Pinta.Core;
+using Gtk;
+using Mono.Unix;
+
 
 namespace Pinta
 {
@@ -67,16 +70,10 @@ namespace Pinta
 			PintaCore.Actions.Effects.JuliaFractal.Activated += HandleEffectJuliaFractalActivated;
 			PintaCore.Actions.Effects.MandelbrotFractal.Activated += HandleEffectMandelbrotFractalActivated;
 			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated <EdgeDetectEffect>;
-			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated<MotionBlurEffect>;
 			PintaCore.Actions.Effects.Twist.Activated += HandleEffectActivated<TwistEffect>;
 			PintaCore.Actions.Effects.Tile.Activated += HandleEffectActivated<TileEffect>;
 			PintaCore.Actions.Effects.Pixelate.Activated += HandleEffectActivated<PixelateEffect>;
 			PintaCore.Actions.Effects.FrostedGlass.Activated += HandleEffectActivated<FrostedGlassEffect>;
-			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated<GlowEffect>;
-			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated<RedEyeRemoveEffect>;
-			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated<SharpenEffect>;
-			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectActivated<SoftenPortraitEffect>;
-			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated<EdgeDetectEffect>;
 			PintaCore.Actions.Effects.Relief.Activated += HandleEffectActivated <ReliefEffect>;
 			PintaCore.Actions.Effects.Emboss.Activated += HandleEffectActivated<EmbossEffect>;
             PintaCore.Actions.Effects.AddNoise.Activated += HandleEffectAddNoiseActivated;
@@ -89,6 +86,41 @@ namespace Pinta
 		#region Handlers
 		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
 		{
+			bool canceled = false;
+
+			if (PintaCore.Workspace.IsDirty) {
+				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before creating a new one?");
+				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+				markup = string.Format (markup, primary, secondary);
+
+				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+				                            MessageType.Question, ButtonsType.None, true,
+				                            markup,
+				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+
+				md.AddButton (Catalog.GetString ("Continue without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Yes);
+
+				md.DefaultResponse = ResponseType.Cancel;
+
+				ResponseType saveResponse = (ResponseType)md.Run ();
+				md.Destroy ();
+
+				if (saveResponse == ResponseType.Yes) {
+					PintaCore.Actions.File.Save.Activate ();
+				}
+				else {
+					canceled = saveResponse == ResponseType.Cancel;
+				}
+			}
+
+			if (canceled) {
+				return;
+			}
+
+
 			NewImageDialog dialog = new NewImageDialog ();
 
 			dialog.ParentWindow = main_window.GdkWindow;

@@ -148,6 +148,9 @@ namespace Pinta
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
+			// leave window open so user can cancel quitting
+			args.RetVal = true;
+
 			PintaCore.Actions.File.Exit.Activate ();
 		}
 
@@ -450,7 +453,13 @@ namespace Pinta
 		[GLib.ConnectBefore]
 		protected virtual void OnDrawingarea1KeyPressEvent (object o, Gtk.KeyPressEventArgs args)
 		{
+			// Give the current tool a chance to handle the key press
 			PintaCore.Tools.CurrentTool.DoKeyPress (drawingarea1, args);
+			
+			// If the tool didn't consume it, see if its a toolbox shortcut
+			if (args.RetVal == null || !(bool)args.RetVal)
+				if (args.Event.State == ModifierType.None)
+					PintaCore.Tools.SetCurrentTool (args.Event.Key);
 		}
 		
 		[GLib.ConnectBefore]

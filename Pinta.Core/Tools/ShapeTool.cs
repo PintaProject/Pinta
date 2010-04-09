@@ -69,6 +69,8 @@ namespace Pinta.Core
 			}
 			set { (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
 		}
+		
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
 		#endregion
 		
 		#region ToolBar

@@ -33,10 +33,6 @@ namespace Pinta.Core
 {
 	public class FrostedGlassEffect : BaseEffect
 	{
-		private GaussianBlurEffect blurEffect;
-		private BrightnessContrastEffect contrastEffect;
-		private UserBlendOps.ScreenBlendOp screenBlendOp;
-
 		public override string Icon {
 			get { return "Menu.Effects.Distort.FrostedGlass.png"; }
 		}

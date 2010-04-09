@@ -47,6 +47,7 @@ namespace Pinta.Core
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }
 		}
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
 
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
