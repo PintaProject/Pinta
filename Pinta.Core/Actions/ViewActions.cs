@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Unix;
 
 
 namespace Pinta.Core
@@ -41,6 +42,7 @@ namespace Pinta.Core
 		public Gtk.Action Pixels { get; private set; }
 		public Gtk.Action Inches { get; private set; }
 		public Gtk.Action Centimeters { get; private set; }
+		public Gtk.Action Fullscreen { get; private set; }
 
 		public ToolBarComboBox ZoomComboBox { get; private set; }
 		
@@ -66,7 +68,8 @@ namespace Pinta.Core
 			Pixels = new Gtk.Action ("Pixels", Mono.Unix.Catalog.GetString ("Pixels"), null, null);
 			Inches = new Gtk.Action ("Inches", Mono.Unix.Catalog.GetString ("Inches"), null, null);
 			Centimeters = new Gtk.Action ("Centimeters", Mono.Unix.Catalog.GetString ("Centimeters"), null, null);
-	
+			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Gtk.Stock.Fullscreen);
+
 			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
 
 			ZoomToSelection.Sensitive = false;
@@ -87,6 +90,8 @@ namespace Pinta.Core
 			menu.Append (ZoomToWindow.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask));
 			//menu.Append (ZoomToSelection.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (ActualSize.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (Fullscreen.CreateAcceleratedMenuItem (Gdk.Key.F11, Gdk.ModifierType.None));
+
 			//menu.AppendSeparator ();
 			//menu.Append (PixelGrid.CreateMenuItem ());
 			//menu.Append (Rulers.CreateMenuItem ());
@@ -112,6 +117,19 @@ namespace Pinta.Core
 			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
 			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
+
+			var isFullscreen = false;
+
+			Fullscreen.Activated += (foo, bar) => {
+				if (!isFullscreen) {
+					PintaCore.Chrome.MainWindow.Fullscreen ();
+				}
+				else {
+					PintaCore.Chrome.MainWindow.Unfullscreen ();
+				}
+
+				isFullscreen = !isFullscreen;
+			};
 		}
 
 		private string temp_zoom;
