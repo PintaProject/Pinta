@@ -77,15 +77,15 @@ namespace Pinta
 			this.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 
 			dialog_handler = new DialogHandlers (this);
-			
+
 			// Create a blank document
 			Layer background = PintaCore.Layers.AddNewLayer ("Background");
-			
+
 			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
 				g.SetSourceRGB (255, 255, 255);
 				g.Paint ();
 			}
-			
+
 			PintaCore.Workspace.Filename = "Untitled1";
 			PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
 			PintaCore.Workspace.IsDirty = false;
@@ -96,21 +96,21 @@ namespace Pinta
 			history_treeview.HeadersVisible = false;
 			history_treeview.Selection.Mode = SelectionMode.Single;
 			history_treeview.Selection.SelectFunction = HistoryItemSelected;
-			
+
 			Gtk.TreeViewColumn icon_column = new Gtk.TreeViewColumn ();
 			Gtk.CellRendererPixbuf icon_cell = new Gtk.CellRendererPixbuf ();
 			icon_column.PackStart (icon_cell, true);
-	 
+
 			Gtk.TreeViewColumn text_column = new Gtk.TreeViewColumn ();
 			Gtk.CellRendererText text_cell = new Gtk.CellRendererText ();
 			text_column.PackStart (text_cell, true);
-		
+
 			text_column.SetCellDataFunc (text_cell, new Gtk.TreeCellDataFunc (HistoryRenderText));
 			icon_column.SetCellDataFunc (icon_cell, new Gtk.TreeCellDataFunc (HistoryRenderIcon));
-			
+
 			history_treeview.AppendColumn (icon_column);
 			history_treeview.AppendColumn (text_column);
-			
+
 			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
 			PintaCore.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
 			PintaCore.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
@@ -119,32 +119,24 @@ namespace Pinta
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 
 			PintaCore.LivePreview.RenderUpdated += LivePreview_RenderUpdated;
-			
+
 			WindowAction.Visible = false;
 
 			hruler = new HRuler ();
 			hruler.Metric = MetricType.Pixels;
-			hruler.SetRange (0, PintaCore.Workspace.ImageSize.X, 0, PintaCore.Workspace.ImageSize.X);
-			drawingarea1.MotionNotifyEvent += delegate(object o, MotionNotifyEventArgs args) {
-				hruler.Position = args.Event.X;
-			};
 			table1.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-			
+
 			vruler = new VRuler ();
 			vruler.Metric = MetricType.Pixels;
-			vruler.SetRange (0, PintaCore.Workspace.ImageSize.Y, 0, PintaCore.Workspace.ImageSize.Y);
-			drawingarea1.MotionNotifyEvent += delegate(object o, MotionNotifyEventArgs args) {
-				vruler.Position = args.Event.Y;
-			};
 			table1.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-			
+
+			UpdateRulerRange ();
+
 			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-			
-			
+
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
 			PintaCore.Chrome.DrawingArea.ScrollEvent += HandleViewScrollEvent;
-			view.Hadjustment.Changed += HandleViewScrollAdjustmentsSet;
-			view.Vadjustment.Changed += HandleViewScrollAdjustmentsSet;
-			
+
 			if (Platform.GetOS () == Platform.OS.Mac)
 			{
 				try {
@@ -459,6 +451,9 @@ namespace Pinta
 			if (PintaCore.Workspace.PointInCanvas (point))
 				CursorPositionLabel.Text = string.Format ("{0}, {1}", (int)point.X, (int)point.Y);
 
+			hruler.Position = point.X;
+			vruler.Position = point.Y;
+			
 			PintaCore.Tools.CurrentTool.DoMouseMove (o, args, point);
 		}
 
@@ -528,7 +523,8 @@ namespace Pinta
 			}
 		}
 
-		void HandleViewScrollAdjustmentsSet (object o, EventArgs args)
+		
+		void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
 		{
 			UpdateRulerRange ();
 		}
@@ -540,11 +536,10 @@ namespace Pinta
 
 		void UpdateRulerRange ()
 		{
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-			//FIXME: find what is good event and good value to update ruler adjustment
-			hruler.SetRange (view.Hadjustment.Value, view.Hadjustment.Value + view.Hadjustment.PageSize, view.Hadjustment.Value, view.Hadjustment.Value + view.Hadjustment.PageSize);
-			vruler.SetRange (view.Vadjustment.Value, view.Vadjustment.Value + view.Vadjustment.PageSize, view.Vadjustment.Value, view.Vadjustment.Value + view.Vadjustment.PageSize);
-		}
+			Cairo.PointD p = PintaCore.Workspace.WindowPointToCanvas (PintaCore.Chrome.DrawingArea.Allocation.Width, PintaCore.Chrome.DrawingArea.Allocation.Height);
+			hruler.SetRange (-PintaCore.Workspace.Offset.X/PintaCore.Workspace.Scale, p.X, 0, p.X);
+			vruler.SetRange (-PintaCore.Workspace.Offset.Y/PintaCore.Workspace.Scale, p.Y, 0, p.Y);
+		}			
 		#endregion
 	}
 }
