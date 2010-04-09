@@ -119,6 +119,33 @@ namespace Pinta.Core
 				SetCurrentTool (t);
 		}
 		
+		public void SetCurrentTool (Gdk.Key shortcut)
+		{
+			BaseTool tool = FindNextTool (shortcut);
+			
+			if (tool != null)
+				SetCurrentTool (tool);
+		}
+		
+		private BaseTool FindNextTool (Gdk.Key shortcut)
+		{
+			string key = shortcut.ToString ().ToUpperInvariant ();
+			
+			// Begin looking at the tool after the current one
+			for (int i = index + 1; i < Tools.Count; i++) {
+				if (Tools[i].ShortcutKey.ToString ().ToUpperInvariant () == key)
+					return Tools[i];
+			}
+				
+			// Begin at the beginning and look up to the current tool
+			for (int i = 0; i < index; i++) {
+				if (Tools[i].ShortcutKey.ToString ().ToUpperInvariant () == key)
+					return Tools[i];
+			}
+			
+			return null;
+		}
+		
 		#region IEnumerable<BaseTool> implementation
 		public IEnumerator<BaseTool> GetEnumerator ()
 		{

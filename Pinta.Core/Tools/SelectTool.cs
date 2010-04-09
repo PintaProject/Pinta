@@ -33,6 +33,7 @@ namespace Pinta.Core
 	public abstract class SelectTool : ShapeTool
 	{
 		protected SelectionHistoryItem hist;
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		
 		#region ToolBar
 		// We don't want the ShapeTool's toolbar

@@ -47,6 +47,7 @@ namespace Pinta.Core
 		public override string Name { get { return "Recolor"; } }
 		public override string Icon { get { return "Tools.Recolor.png"; } }
 		public override string StatusBarText { get { return "Left click to replace the secondary color with the primary color."; } }
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.R; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
 		#endregion
 

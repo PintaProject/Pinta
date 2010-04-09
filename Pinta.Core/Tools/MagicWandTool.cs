@@ -32,6 +32,7 @@ namespace Pinta.Core
 	public class MagicWandTool : FloodTool
 	{
 		private CombineMode combineMode;
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 
 		public MagicWandTool ()
 		{

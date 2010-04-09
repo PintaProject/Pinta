@@ -58,6 +58,7 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Write text."; }
 		}
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 
 
 		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");

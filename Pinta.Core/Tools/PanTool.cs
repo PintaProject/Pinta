@@ -43,6 +43,7 @@ namespace Pinta.Core
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0); }
 		}
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.H; } }
 		
 		private bool active;
 		private PointD last_point;
