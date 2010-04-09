@@ -69,7 +69,7 @@ namespace Pinta.Core
 			Centimeters = new Gtk.Action ("Centimeters", Mono.Unix.Catalog.GetString ("Centimeters"), null, null);
 	
 			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
-			UnitComboBox = new ToolBarComboBox (75, 1, false, "Pixel", "Inches", "Centimeters");
+			UnitComboBox = new ToolBarComboBox (75, 0, false, "Pixel", "Inches", "Centimeters");
 
 			PixelGrid.Sensitive = false;
 		}
@@ -114,10 +114,6 @@ namespace Pinta.Core
 			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
 			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
-			Pixels.Activated += HandlePixelsActivated;
-			Inches.Activated += HandleInchesActivated;
-			Centimeters.Activated += HandleCentimetersActivated;
-			UnitComboBox.ComboBox.Changed += HandleUnitComboBoxComboBoxChanged;
 		}
 		
 		private string temp_zoom;
@@ -194,30 +190,6 @@ namespace Pinta.Core
 		{
 			PintaCore.Workspace.ZoomIn ();
 		}
-		
-		#region ruler and units
-		void HandleUnitComboBoxComboBoxChanged (object sender, EventArgs e)
-		{
-			//UnitComboBox.ComboBox.ActiveText;
-		}
-
-		void HandleCentimetersActivated (object sender, EventArgs e)
-		{
-			
-		}
-
-		void HandleInchesActivated (object sender, EventArgs e)
-		{
-			
-		}
-
-		void HandlePixelsActivated (object sender, EventArgs e)
-		{
-			
-		}
-
-		#endregion
-		
 		#endregion
 	}
 }

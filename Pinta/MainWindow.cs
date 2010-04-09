@@ -127,16 +127,16 @@ namespace Pinta
 			hruler.SetRange (0, PintaCore.Workspace.ImageSize.X, 0, PintaCore.Workspace.ImageSize.X);
 			drawingarea1.MotionNotifyEvent += delegate(object o, MotionNotifyEventArgs args) {
 				hruler.Position = args.Event.X;
-			};  
-			table1.Attach (hruler, 1, 2, 0, 1);
+			};
+			table1.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 			
 			vruler = new VRuler ();
 			vruler.Metric = MetricType.Pixels;
 			vruler.SetRange (0, PintaCore.Workspace.ImageSize.Y, 0, PintaCore.Workspace.ImageSize.Y);
 			drawingarea1.MotionNotifyEvent += delegate(object o, MotionNotifyEventArgs args) {
 				vruler.Position = args.Event.Y;
-			};  
-			table1.Attach (vruler, 0, 1, 1, 2);
+			};
+			table1.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 			
 			if (Platform.GetOS () == Platform.OS.Mac)
 			{
@@ -477,9 +477,11 @@ namespace Pinta
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args);
 		}
+
+		#region rulers
 		private HRuler hruler;
 		private VRuler vruler;
-		
+
 		public void ShowRulers ()
 		{
 			hruler.Show ();
@@ -491,5 +493,27 @@ namespace Pinta
 			hruler.Hide ();
 			vruler.Hide ();
 		}
+
+		public void ChangeRulersUnit (Gtk.MetricType metric)
+		{
+			hruler.Metric = metric;
+			vruler.Metric = metric;
+			switch (metric) {
+				case Gtk.MetricType.Pixels:
+					if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 0)
+						PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 0;
+				break;
+				case Gtk.MetricType.Inches:
+					if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 1)
+						PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 1;
+				break;
+				case Gtk.MetricType.Centimeters:
+					if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 2)
+						PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 2;
+				break;
+				
+			}
+		}
+		#endregion
 	}
 }
