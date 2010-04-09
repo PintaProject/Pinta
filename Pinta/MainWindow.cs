@@ -138,6 +138,13 @@ namespace Pinta
 			};
 			table1.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 			
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			
+			
+			PintaCore.Chrome.DrawingArea.ScrollEvent += HandleViewScrollEvent;
+			view.Hadjustment.Changed += HandleViewScrollAdjustmentsSet;
+			view.Vadjustment.Changed += HandleViewScrollAdjustmentsSet;
+			
 			if (Platform.GetOS () == Platform.OS.Mac)
 			{
 				try {
@@ -513,6 +520,24 @@ namespace Pinta
 				break;
 				
 			}
+		}
+
+		void HandleViewScrollAdjustmentsSet (object o, EventArgs args)
+		{
+			UpdateRulerRange ();
+		}
+
+		void HandleViewScrollEvent (object o, ScrollEventArgs args)
+		{
+			UpdateRulerRange ();
+		}
+
+		void UpdateRulerRange ()
+		{
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			//FIXME: find what is good event and good value to update ruler adjustment
+			hruler.SetRange (view.Hadjustment.Value, view.Hadjustment.Value + view.Hadjustment.PageSize, view.Hadjustment.Value, view.Hadjustment.Value + view.Hadjustment.PageSize);
+			vruler.SetRange (view.Vadjustment.Value, view.Vadjustment.Value + view.Vadjustment.PageSize, view.Vadjustment.Value, view.Vadjustment.Value + view.Vadjustment.PageSize);
 		}
 		#endregion
 	}
