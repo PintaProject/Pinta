@@ -50,8 +50,7 @@ namespace Pinta.Core
 		bool tracking;
 		protected ImageSurface undo_surface;
 		uint button;
-		bool rendering;
-		
+
 		public override string Name {
 			get { return "Gradient"; }
 		}
@@ -80,23 +79,18 @@ namespace Pinta.Core
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
 			base.OnMouseMove (o, args, point);
-			if (tracking && !rendering) {
-				rendering = true;
-				PintaCore.Layers.CurrentLayer.Clear ();
+			if (tracking) {
+				
 				UserBlendOps.NormalBlendOp normalBlendOp = new UserBlendOps.NormalBlendOp();
 				GradientRenderer gr = null;
 				switch (GradientType) {
 					case eGradientType.Linear:
-						//g.DrawLinearGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
 						gr = new GradientRenderers.LinearClamped (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.LinearReflected:
-						//g.DrawLinearReflectedGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, point);
 						gr = new GradientRenderers.LinearReflected (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.Radial:
-						//double radius = startpoint.Distance (point);
-						//g.DrawRadialGradient (undo_surface , GradientColorMode, PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor, startpoint, startpoint, 0.1 * radius, radius);
 						gr = new GradientRenderers.Radial (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.Diamond:
@@ -122,7 +116,6 @@ namespace Pinta.Core
 				gr.BeforeRender ();
 				gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
 				PintaCore.Workspace.Invalidate ();
-				rendering = false;
 			}
 		}
 		#endregion
