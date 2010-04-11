@@ -46,6 +46,7 @@ namespace Pinta.Core
 		private Layer tool_layer;
 		// The layer used for selections
 		private Layer selection_layer;
+		
 		private int selection_layer_index;
 		private Path selection_path;
 		private bool show_selection;
@@ -105,7 +106,7 @@ namespace Pinta.Core
 		public Layer SelectionLayer {
 			get { return selection_layer; }
 		}
-		
+
 		public int CurrentLayerIndex {
 			get { return current_layer; }
 		}

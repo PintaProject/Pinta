@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CanvasRenderer.cs
 //  
 // Author:
@@ -38,6 +38,14 @@ namespace Pinta.Core
 		private bool generated;
 		private int[] d2sLookupX;
 		private int[] d2sLookupY;
+		private int[] s2dLookupX;
+		private int[] s2dLookupY;
+
+		public ScaleFactor ScaleFactor { get {return scale_factor;}}
+		public int[] Dst2SrcLookupX { get {return d2sLookupX;}}
+		public int[] Dst2SrcLookupY { get {return d2sLookupY;}}
+		public int[] Src2DstLookupX { get {return s2dLookupX;}}
+		public int[] Src2DstLookupY { get {return s2dLookupY;}}
 
 		public void Initialize (Size sourceSize, Size destinationSize)
 		{
@@ -122,6 +130,8 @@ namespace Pinta.Core
 			if (!generated) {
 				d2sLookupX = CreateLookupX (src_width, destination_size.Width, scale_factor);
 				d2sLookupY = CreateLookupY (src.Height, destination_size.Height, scale_factor);
+				s2dLookupX = CreateS2DLookupX (src_width, destination_size.Width, scale_factor);
+				s2dLookupY = CreateS2DLookupY (src.Height, destination_size.Height, scale_factor);
 
 				generated = true;
 			}
@@ -263,6 +273,41 @@ namespace Pinta.Core
 
 			return lookup;
 		}
+		
+		private int[] CreateS2DLookupX(int srcWidth, int dstWidth, ScaleFactor scaleFactor)
+        {
+			var lookup = new int[srcWidth + 1];
+
+			for (int x = 0; x < lookup.Length; ++x) {
+				Gdk.Point pt = new Gdk.Point (x, 0);
+				Gdk.Point clientPt = scaleFactor.UnscalePoint (pt);
+
+				// Sometimes the scale factor is slightly different on one axis than
+				// on another, simply due to accuracy. So we have to clamp this value to
+				// be within bounds.
+				lookup[x] = Utility.Clamp (clientPt.X, 0, dstWidth - 1);
+			}
+
+			return lookup;
+        }
+
+		private int[] CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
+		{
+			var lookup = new int[srcHeight + 1];
+
+			for (int y = 0; y < lookup.Length; ++y) {
+				Gdk.Point pt = new Gdk.Point (0, y);
+				Gdk.Point clientPt = scaleFactor.UnscalePoint (pt);
+
+				// Sometimes the scale factor is slightly different on one axis than
+				// on another, simply due to accuracy. So we have to clamp this value to
+				// be within bounds.
+				lookup[y] = Utility.Clamp (clientPt.Y, 0, dstHeight - 1);
+			}
+
+			return lookup;
+		}
+
 		#endregion
 	}
 }
