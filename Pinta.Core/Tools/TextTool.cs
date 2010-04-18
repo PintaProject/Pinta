@@ -326,7 +326,8 @@ namespace Pinta.Core
 		private TextAlignment Alignment {
 			get {
 				if (Right_alignment_btn.Active)
-					return TextAlignment.Right; else if (center_alignment_btn.Active)
+					return TextAlignment.Right; 
+				else if (center_alignment_btn.Active)
 					return TextAlignment.Center;
 				else
 					return TextAlignment.Left;

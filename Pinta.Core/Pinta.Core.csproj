@@ -42,7 +42,7 @@
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Cairo" />
+    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\EffectsActions.cs" />
@@ -159,6 +159,9 @@
     <Compile Include="EventArgs\LivePreviewStartedEventArgs.cs" />
     <Compile Include="Managers\LivePreviewManager.cs" />
     <Compile Include="Classes\AsyncEffectRenderer.cs" />
+    <Compile Include="Tools\GradientTool.cs" />
+    <Compile Include="Classes\GradientRenderer.cs" />
+    <Compile Include="Classes\GradientRenderers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
