@@ -60,7 +60,8 @@ namespace Pinta.Core
 		                               DrawingArea drawingArea,
 		                               TreeView historyStack,
 		                               Window mainWindow,
-		                               IProgressDialog progressDialog)
+		                               IProgressDialog progressDialog,
+		                               Viewport viewport)
 		{
 			Chrome = new ChromeManager ();
 			Chrome.Initialize (toolToolBar,
@@ -71,6 +72,8 @@ namespace Pinta.Core
 			                   progressDialog);
 			
 			Palette = new PaletteManager ();
+			
+			Workspace.Initialize (viewport);
 			
 			Actions.RegisterHandlers ();
 		}
