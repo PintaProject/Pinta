@@ -30,13 +30,12 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-    public class ReduceNoiseEffect : LocalHistogramEffect
+	public class ReduceNoiseEffect : LocalHistogramEffect
 	{
+		private int radius;
+		private double strength;
 
-        private int radius;
-        private double strength;
-        
-        public override string Icon {
+		public override string Icon {
 			get { return "Menu.Effects.Noise.ReduceNoise.png"; }
 		}
 
@@ -48,13 +47,13 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-        public ReduceNoiseData Data { get; private set; }
+		public ReduceNoiseData Data { get; private set; }
 
-        public ReduceNoiseEffect()
+		public ReduceNoiseEffect ()
 		{
-            Data = new ReduceNoiseData();
+			Data = new ReduceNoiseData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
@@ -63,7 +62,7 @@ namespace Pinta.Core
 
 			if (response == (int)Gtk.ResponseType.Ok) {
 				dialog.Destroy ();
-                return true;
+				return true;
 			}
 
 			dialog.Destroy ();
@@ -72,67 +71,53 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
+		public override unsafe ColorBgra Apply (ColorBgra color, int area, int* hb, int* hg, int* hr, int* ha)
+		{
+			ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr, ha);
+			double lerp = strength * (1 - 0.75 * color.GetIntensity ());
 
-        public override unsafe ColorBgra Apply(ColorBgra color, int area, int* hb, int* hg, int* hr, int* ha)
-        {
-            ColorBgra normalized = GetPercentileOfColor(color, area, hb, hg, hr, ha);
-            double lerp = strength * (1 - 0.75 * color.GetIntensity());
+			return ColorBgra.Lerp (color, normalized, lerp);
+		}
 
-            return ColorBgra.Lerp(color, normalized, lerp);
-        }
+		private static unsafe ColorBgra GetPercentileOfColor (ColorBgra color, int area, int* hb, int* hg, int* hr, int* ha)
+		{
+			int rc = 0;
+			int gc = 0;
+			int bc = 0;
 
-        private static unsafe ColorBgra GetPercentileOfColor(ColorBgra color, int area, int* hb, int* hg, int* hr, int* ha)
-        {
-            int rc = 0;
-            int gc = 0;
-            int bc = 0;
+			for (int i = 0; i < color.R; ++i)
+				rc += hr[i];
 
-            for (int i = 0; i < color.R; ++i)
-            {
-                rc += hr[i];
-            }
+			for (int i = 0; i < color.G; ++i)
+				gc += hg[i];
 
-            for (int i = 0; i < color.G; ++i)
-            {
-                gc += hg[i];
-            }
+			for (int i = 0; i < color.B; ++i)
+				bc += hb[i];
 
-            for (int i = 0; i < color.B; ++i)
-            {
-                bc += hb[i];
-            }
+			rc = (rc * 255) / area;
+			gc = (gc * 255) / area;
+			bc = (bc * 255) / area;
 
-            rc = (rc * 255) / area;
-            gc = (gc * 255) / area;
-            bc = (bc * 255) / area;
-
-            return ColorBgra.FromBgr((byte)bc, (byte)gc, (byte)rc);
-        }
+			return ColorBgra.FromBgr ((byte)bc, (byte)gc, (byte)rc);
+		}
 
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
- 
-            this.radius = Data.Radius;
-            this.strength = -0.2 * Data.Strength;
-            
-            foreach (Gdk.Rectangle rect in rois)
-            {
-                RenderRect(this.radius, src, dest, rect);
-            }
+			this.radius = Data.Radius;
+			this.strength = -0.2 * Data.Strength;
 
+			foreach (Gdk.Rectangle rect in rois)
+				RenderRect (this.radius, src, dest, rect);
 		}
-
 		#endregion
 
-        public class ReduceNoiseData
+		public class ReduceNoiseData
 		{
+			[MinimumValue (1), MaximumValue (200)]
+			public int Radius = 6;
 
-            [MinimumValue(1), MaximumValue(200)]
-            public int Radius = 6;
-
-            [MinimumValue(0), IncrementValue(0.01), DigitsValue(2), MaximumValue(1)]
-            public double Strength = 0.4;
-			
+			[MinimumValue (0), IncrementValue (0.01), DigitsValue (2), MaximumValue (1)]
+			public double Strength = 0.4;
 		}
 	}
 }

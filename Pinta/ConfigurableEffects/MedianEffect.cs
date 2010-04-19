@@ -30,13 +30,12 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-    public class MedianEffect : LocalHistogramEffect
+	public class MedianEffect : LocalHistogramEffect
 	{
+		private int radius;
+		private int percentile;
 
-        private int radius;
-        private int percentile;
-            
-        public override string Icon {
+		public override string Icon {
 			get { return "Menu.Effects.Noise.Median.png"; }
 		}
 
@@ -48,13 +47,13 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-        public MedianData Data { get; private set; }
+		public MedianData Data { get; private set; }
 
-        public MedianEffect()
+		public MedianEffect ()
 		{
-            Data = new MedianData();
+			Data = new MedianData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
@@ -72,37 +71,30 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
-
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
- 
-            this.radius = Data.Radius;
-            this.percentile = Data.Percentile;
+			this.radius = Data.Radius;
+			this.percentile = Data.Percentile;
 
-            foreach (Gdk.Rectangle rect in rois)
-            {
-                RenderRect(this.radius, src, dest, rect);
-            }
-
+			foreach (Gdk.Rectangle rect in rois)
+				RenderRect (this.radius, src, dest, rect);
 		}
 
-        public unsafe override ColorBgra Apply(ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
-        {
-            ColorBgra c = GetPercentile(this.percentile, area, hb, hg, hr, ha);
-            return c;
-        }
-
+		public unsafe override ColorBgra Apply (ColorBgra src, int area, int* hb, int* hg, int* hr, int* ha)
+		{
+			ColorBgra c = GetPercentile (this.percentile, area, hb, hg, hr, ha);
+			return c;
+		}
 		#endregion
 
-        public class MedianData
+		public class MedianData
 		{
+			[MinimumValue (1), MaximumValue (200)]
+			public int Radius = 10;
 
-            [MinimumValue(1), MaximumValue(200)]
-            public int Radius = 10;
+			[MinimumValue (0), MaximumValue (100)]
+			public int Percentile = 50;
 
-            [MinimumValue(0), MaximumValue(100)]
-            public int Percentile = 50;
-			
 			[Skip]
 			public bool IsEmpty { get { return Radius == 0; } }
 		}
