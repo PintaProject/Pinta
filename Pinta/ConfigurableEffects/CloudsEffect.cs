@@ -185,7 +185,7 @@ namespace Pinta.Core
 		{
 			RenderClouds(dst, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), 
 				Data.Power/100.0, PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
-			Type blendOpType = (Type)CloudsData.BlendOps[Data.BlendOp];
+			Type blendOpType = (Type)CloudsData.BlendOps[Data.BlendMode];
 			var blendOp = UserBlendOps.CreateBlendOp(blendOpType);
 			if (blendOp != null)
 			{
@@ -225,7 +225,7 @@ namespace Pinta.Core
 			}
 			
 			[StaticList ("BlendOps")]
-			public string BlendOp = defaultBlendOp;
+			public string BlendMode = defaultBlendOp;
 			
 			[MinimumValue (0), MaximumValue (255)]
 			public int Seed = 0;
