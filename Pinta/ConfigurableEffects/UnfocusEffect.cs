@@ -46,27 +46,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public UnfocusData Data { get; private set; }
+		public UnfocusData Data { get { return EffectData as UnfocusData; } }
 
 		public UnfocusEffect ()
 		{
-			Data = new UnfocusData ();
+			EffectData = new UnfocusData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -115,13 +104,13 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class UnfocusData
+		public class UnfocusData : EffectData
 		{
 			[MinimumValue (1), MaximumValue (200)]
 			public int Radius = 4;
 
 			[Skip]
-			public bool IsEmpty { get { return Radius == 0; } }
+			public override bool IsDefault { get { return Radius == 0; } }
 		}
 	}
 }

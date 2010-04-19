@@ -47,27 +47,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public MedianData Data { get; private set; }
+		public MedianData Data { get { return EffectData as MedianData; } }
 
 		public MedianEffect ()
 		{
-			Data = new MedianData ();
+			EffectData = new MedianData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -87,7 +76,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class MedianData
+		public class MedianData : EffectData
 		{
 			[MinimumValue (1), MaximumValue (200)]
 			public int Radius = 10;
@@ -96,7 +85,7 @@ namespace Pinta.Core
 			public int Percentile = 50;
 
 			[Skip]
-			public bool IsEmpty { get { return Radius == 0; } }
+			public override bool IsDefault { get { return Radius == 0; } }
 		}
 	}
 }

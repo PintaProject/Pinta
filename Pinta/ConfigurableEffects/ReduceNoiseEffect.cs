@@ -47,27 +47,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public ReduceNoiseData Data { get; private set; }
+		public ReduceNoiseData Data { get { return EffectData as ReduceNoiseData; } }
 
 		public ReduceNoiseEffect ()
 		{
-			Data = new ReduceNoiseData ();
+			EffectData = new ReduceNoiseData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -111,7 +100,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class ReduceNoiseData
+		public class ReduceNoiseData : EffectData
 		{
 			[MinimumValue (1), MaximumValue (200)]
 			public int Radius = 6;

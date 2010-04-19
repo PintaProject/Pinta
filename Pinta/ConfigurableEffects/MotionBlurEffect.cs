@@ -120,7 +120,7 @@ namespace Pinta.Core
 		public class MotionBlurData : EffectData
 		{
 			[Skip]
-			public bool IsEmpty { get { return Distance == 0; } }
+			public override bool IsDefault { get { return Distance == 0; } }
 
 			public double Angle = 25;
 

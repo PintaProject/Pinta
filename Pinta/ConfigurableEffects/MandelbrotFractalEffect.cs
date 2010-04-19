@@ -44,27 +44,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public MandelbrotFractalData Data { get; private set; }
+		public MandelbrotFractalData Data { get { return EffectData as MandelbrotFractalData; } }
 
 		public MandelbrotFractalEffect ()
 		{
-			Data = new MandelbrotFractalData ();
+			EffectData = new MandelbrotFractalData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-			
-			int response = dialog.Run ();
-			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true;
-			}
-			
-			dialog.Destroy ();
-			
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -174,7 +163,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class MandelbrotFractalData
+		public class MandelbrotFractalData : EffectData
 		{
 			[MinimumValue(1), MaximumValue(10)]
 			public int Factor = 1;

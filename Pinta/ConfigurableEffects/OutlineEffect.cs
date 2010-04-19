@@ -47,27 +47,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public OutlineData Data { get; private set; }
+		public OutlineData Data { get { return EffectData as OutlineData; } }
 
 		public OutlineEffect ()
 		{
-			Data = new OutlineData ();
+			EffectData = new OutlineData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -159,7 +148,7 @@ namespace Pinta.Core
 
 		#endregion
 
-		public class OutlineData
+		public class OutlineData : EffectData
 		{
 			[MinimumValue (1), MaximumValue (200)]
 			public int Thickness = 3;
@@ -168,7 +157,7 @@ namespace Pinta.Core
 			public int Intensity = 50;
 
 			[Skip]
-			public bool IsEmpty { get { return Thickness == 0; } }
+			public override bool IsDefault { get { return Thickness == 0; } }
 		}
 	}
 }

@@ -47,8 +47,8 @@ namespace Pinta.Core
 		public override bool IsConfigurable {
 			get { return true; }
 		}
-		
-		public NoiseData Data { get; private set; }
+
+		public NoiseData Data { get { return EffectData as NoiseData; } }
 
 		static AddNoiseEffect ()
 		{
@@ -57,23 +57,12 @@ namespace Pinta.Core
 
 		public AddNoiseEffect ()
 		{
-			Data = new NoiseData ();
+			EffectData = new NoiseData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return true; //!Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -189,7 +178,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class NoiseData
+		public class NoiseData : EffectData
 		{
 			[MinimumValue (0), MaximumValue (100)]
 			public int Intensity = 64;

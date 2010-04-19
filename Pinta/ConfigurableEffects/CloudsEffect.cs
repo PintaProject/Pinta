@@ -48,27 +48,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public CloudsData Data { get; private set; }
+		public CloudsData Data { get { return EffectData as CloudsData; } }
 
 		public CloudsEffect ()
 		{
-			Data = new CloudsData ();
+			EffectData = new CloudsData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -205,10 +194,10 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class CloudsData
+		public class CloudsData : EffectData
 		{
 			[Skip]
-			public bool IsEmpty { get { return Power == 0; } }
+			public override bool IsDefault { get { return Power == 0; } }
 
 			[MinimumValue (2), MaximumValue (1000)]
 			public int Scale = 250;

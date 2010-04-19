@@ -48,27 +48,16 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-		public SurfaceBlurData Data { get; private set; }
+		public SurfaceBlurData Data { get { return EffectData as SurfaceBlurData; } }
 
 		public SurfaceBlurEffect ()
 		{
-			Data = new SurfaceBlurData ();
+			EffectData = new SurfaceBlurData ();
 		}
 
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
-
-			int response = dialog.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
-				dialog.Destroy ();
-				return !Data.IsEmpty;
-			}
-
-			dialog.Destroy ();
-
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
 		#region Algorithm Code Ported From PDN
@@ -156,7 +145,7 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		public class SurfaceBlurData
+		public class SurfaceBlurData : EffectData
 		{
 			[MinimumValue (1), MaximumValue (100)]
 			public int Radius = 6;
@@ -165,7 +154,7 @@ namespace Pinta.Core
 			public int Threshold = 15;
 
 			[Skip]
-			public bool IsEmpty { get { return Radius == 0; } }
+			public override bool IsDefault { get { return Radius == 0; } }
 		}
 	}
 }
