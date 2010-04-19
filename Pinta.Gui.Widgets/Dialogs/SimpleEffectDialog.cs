@@ -35,6 +35,9 @@ namespace Pinta.Gui.Widgets
 {
 	public class SimpleEffectDialog : Gtk.Dialog
 	{
+		[ThreadStatic]
+		Random random = new Random ();
+		
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
 		
@@ -93,7 +96,9 @@ namespace Pinta.Gui.Widgets
 				if (caption == null)
 					caption = MakeCaption (mi.Name);
 
-				if (mType == typeof(int))
+				if (mType == typeof (int) && (caption == "Seed"))
+					AddWidget (CreateSeed (caption, EffectData, mi, attrs));
+				else if (mType == typeof (int))
 					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
 					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
@@ -322,6 +327,17 @@ namespace Pinta.Gui.Widgets
 			label.LineWrap = true;
 			
 			return label;
+		}
+
+		private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
+		{
+			ReseedButtonWidget widget = new ReseedButtonWidget ();
+			
+			widget.Clicked += delegate (object sender, EventArgs e) {
+				SetValue (member, o, random.Next ());
+			};
+
+			return widget;
 		}
 		#endregion
 
