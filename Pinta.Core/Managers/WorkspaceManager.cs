@@ -63,15 +63,15 @@ namespace Pinta.Core
 
 	public class WorkspaceManager
 	{
-		private Point canvas_size;
+		private Gdk.Size canvas_size;
 		private Gtk.Viewport viewport;
 		
 		public Gdk.Size ImageSize { get; set; }
-		
-		public Point CanvasSize {
+
+		public Gdk.Size CanvasSize {
 			get { return canvas_size; }
 			set {
-				if (canvas_size.X != value.X || canvas_size.Y != value.Y) {
+				if (canvas_size.Width != value.Width || canvas_size.Height != value.Height) {
 					canvas_size = value;
 					OnCanvasSizeChanged ();
 				}
@@ -79,7 +79,7 @@ namespace Pinta.Core
 		}
 		
 		public PointD Offset {
-			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - canvas_size.X) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Y) / 2); }
+			get { return new PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - canvas_size.Width) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - CanvasSize.Height) / 2); }
 		}
 		
 		public Document Document { get; set; }
@@ -87,7 +87,7 @@ namespace Pinta.Core
 		public WorkspaceManager ()
 		{
 			ActiveDocument = Document = new Document ();
-			CanvasSize = new Point (800, 600);
+			CanvasSize = new Gdk.Size (800, 600);
 			ImageSize = new Gdk.Size (800, 600);
 		}
 
@@ -97,13 +97,13 @@ namespace Pinta.Core
 		}
 
 		public double Scale {
-			get { return (double)CanvasSize.X / (double)ImageSize.Width; }
+			get { return (double)CanvasSize.Width / (double)ImageSize.Width; }
 			set {
 				if (Scale != value) {
 					int new_x = (int)(ImageSize.Width * value);
 					int new_y = (int)((new_x * ImageSize.Height) / ImageSize.Width);
 
-					CanvasSize = new Point (new_x, new_y);
+					CanvasSize = new Gdk.Size (new_x, new_y);
 					Invalidate ();
 				}
 			}
@@ -196,7 +196,7 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 
 			ImageSize = new Gdk.Size (width, height);
-			CanvasSize = new Point (width, height);
+			CanvasSize = new Gdk.Size (width, height);
 			
 			foreach (var layer in PintaCore.Layers)
 				layer.Resize (width, height);
@@ -220,7 +220,7 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 
 			ImageSize = new Gdk.Size (width, height);
-			CanvasSize = new Point (width, height);
+			CanvasSize = new Gdk.Size (width, height);
 
 			foreach (var layer in PintaCore.Layers)
 				layer.ResizeCanvas (width, height, anchor);
@@ -289,7 +289,7 @@ namespace Pinta.Core
 				int window_x = PintaCore.Chrome.DrawingArea.Allocation.Width;
 				int window_y = PintaCore.Chrome.DrawingArea.Allocation.Height;
 
-				if (CanvasSize.X <= window_x && CanvasSize.Y <= window_y)
+				if (CanvasSize.Width <= window_x && CanvasSize.Height <= window_y)
 					return true;
 
 				return false;

@@ -170,8 +170,8 @@ namespace Pinta
 		private void Workspace_CanvasSizeChanged (object sender, EventArgs e)
 		{
 			Requisition req = new Requisition ();
-			req.Height = PintaCore.Workspace.CanvasSize.Y;
-			req.Width = PintaCore.Workspace.CanvasSize.X;
+			req.Height = PintaCore.Workspace.CanvasSize.Height;
+			req.Width = PintaCore.Workspace.CanvasSize.Width;
 			drawingarea1.Requisition = req;
 			
 			drawingarea1.QueueResize ();
@@ -364,7 +364,7 @@ namespace Pinta
 			int y = (int)PintaCore.Workspace.Offset.Y;
 			
 			// Translate our expose area for the whole drawingarea to just our canvas
-			Rectangle canvas_bounds = new Rectangle (x, y, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y);
+			Rectangle canvas_bounds = new Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height);
 			canvas_bounds.Intersect (args.Event.Area);
 			
 			if (canvas_bounds.IsEmpty)
@@ -381,14 +381,14 @@ namespace Pinta
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 			
-			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize.ToSize ());
+			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
 			
 			using (Cairo.Context g = CairoHelper.Create (drawingarea1.GdkWindow)) {
 				// Draw our 1 px black border
-				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X + 1, PintaCore.Workspace.CanvasSize.Y + 1), new Cairo.Color (0, 0, 0), 1);
+				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width + 1, PintaCore.Workspace.CanvasSize.Height + 1), new Cairo.Color (0, 0, 0), 1);
 				
 				// Set up our clip rectangle
-				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.X, PintaCore.Workspace.CanvasSize.Y));
+				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height));
 				g.Clip ();
 				
 				g.Translate (x, y);
