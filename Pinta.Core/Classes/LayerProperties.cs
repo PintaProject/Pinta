@@ -2,9 +2,9 @@
 // LayerProperties.cs
 //  
 // Author:
-//       greg <${AuthorEmail}>
+//       Greg Lowe <greg.lowe@gmail.com>
 // 
-// Copyright (c) 2010 greg
+// Copyright (c) 2010 Greg Lowe
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
