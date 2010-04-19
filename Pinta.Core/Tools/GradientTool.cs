@@ -58,6 +58,8 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.Gradient.png"; }
 		}
+		
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
 
 		#region mouse
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
