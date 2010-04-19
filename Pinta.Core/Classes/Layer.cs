@@ -138,8 +138,8 @@ namespace Pinta.Core
 		
 		public void Rotate90CW ()
 		{
-			int w = PintaCore.Workspace.ImageSize.X;
-			int h = PintaCore.Workspace.ImageSize.Y;
+			int w = PintaCore.Workspace.ImageSize.Width;
+			int h = PintaCore.Workspace.ImageSize.Height;
 			
 			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
 			
@@ -159,8 +159,8 @@ namespace Pinta.Core
 		
 		public void Rotate90CCW ()
 		{
-			int w = PintaCore.Workspace.ImageSize.X;
-			int h = PintaCore.Workspace.ImageSize.Y;
+			int w = PintaCore.Workspace.ImageSize.Width;
+			int h = PintaCore.Workspace.ImageSize.Height;
 			
 			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
 			

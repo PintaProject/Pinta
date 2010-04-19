@@ -58,21 +58,21 @@ namespace Pinta.Gui.Widgets
 
 		[Category("Custom Properties")]
 		public Cairo.PointD DefaultOffset { 
-			get { return new Cairo.PointD ( (DefaultPoint.X * 2.0 /PintaCore.Workspace.ImageSize.X) - 1.0,
-											(DefaultPoint.Y * 2.0 / PintaCore.Workspace.ImageSize.Y) - 1.0);}
-			set {DefaultPoint = new Gdk.Point ( (int) ((value.X + 1.0) * PintaCore.Workspace.ImageSize.X / 2.0 ),
-				                                (int) ((value.Y + 1.0) * PintaCore.Workspace.ImageSize.Y / 2.0 ) );} 
+			get { return new Cairo.PointD ( (DefaultPoint.X * 2.0 /PintaCore.Workspace.ImageSize.Width) - 1.0,
+											(DefaultPoint.Y * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0);}
+			set {DefaultPoint = new Gdk.Point ( (int) ((value.X + 1.0) * PintaCore.Workspace.ImageSize.Width / 2.0 ),
+				                                (int) ((value.Y + 1.0) * PintaCore.Workspace.ImageSize.Height / 2.0 ) );} 
 		}
 
 		public Cairo.PointD Offset {
-			get { return new Cairo.PointD ((spinX.Value * 2.0 / PintaCore.Workspace.ImageSize.X) - 1.0, (spinY.Value * 2.0 / PintaCore.Workspace.ImageSize.Y) - 1.0); }
+			get { return new Cairo.PointD ((spinX.Value * 2.0 / PintaCore.Workspace.ImageSize.Width) - 1.0, (spinY.Value * 2.0 / PintaCore.Workspace.ImageSize.Height) - 1.0); }
 		}
 
 		public PointPickerWidget ()
 		{
 			this.Build ();
-			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.X;
-			spinY.Adjustment.Upper = PintaCore.Workspace.ImageSize.Y;
+			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.Width;
+			spinY.Adjustment.Upper = PintaCore.Workspace.ImageSize.Height;
 			spinX.Adjustment.Lower = 0;
 			spinY.Adjustment.Lower = 0;
 

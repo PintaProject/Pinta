@@ -83,9 +83,9 @@ namespace Pinta.Core
 			Point pos = new Point ((int)point.X, (int)point.Y);
 
 			// Don't do anything if we're outside the canvas
-			if (pos.X < 0 || pos.X >= PintaCore.Workspace.ImageSize.X)
+			if (pos.X < 0 || pos.X >= PintaCore.Workspace.ImageSize.Width)
 				return;
-			if (pos.Y < 0 || pos.Y >= PintaCore.Workspace.ImageSize.Y)
+			if (pos.Y < 0 || pos.Y >= PintaCore.Workspace.ImageSize.Height)
 				return;
 				
 			base.OnMouseDown (canvas, args, point);

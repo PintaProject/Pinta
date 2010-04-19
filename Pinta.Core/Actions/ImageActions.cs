@@ -164,13 +164,13 @@ namespace Pinta.Core
 			int width = rect.Width;
 			int height = rect.Height;
 			
-			ResizeHistoryItem hist = new ResizeHistoryItem (PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
+			ResizeHistoryItem hist = new ResizeHistoryItem (PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height);
 			hist.Icon = "Menu.Image.Crop.png";
 			hist.Text = "Crop to Selection";
 			hist.TakeSnapshotOfImage ();
 			hist.RestorePath = PintaCore.Layers.SelectionPath.Clone ();
 
-			PintaCore.Workspace.ImageSize = new Cairo.Point (width, height);
+			PintaCore.Workspace.ImageSize = new Gdk.Size (width, height);
 			PintaCore.Workspace.CanvasSize = new Cairo.Point (width, height);
 
 			foreach (var layer in PintaCore.Layers)

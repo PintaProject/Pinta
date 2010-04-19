@@ -47,8 +47,8 @@ namespace Pinta.Gui.Widgets
 
 		private void UpdateThumbnail ()
 		{
-			double scalex = (double)Allocation.Width / (double)PintaCore.Workspace.ImageSize.X;
-			double scaley = (double)Allocation.Height / (double)PintaCore.Workspace.ImageSize.Y;
+			double scalex = (double)Allocation.Width / (double)PintaCore.Workspace.ImageSize.Width;
+			double scaley = (double)Allocation.Height / (double)PintaCore.Workspace.ImageSize.Height;
 			
 			thumbnail = new Cairo.ImageSurface (Cairo.Format.Argb32, Allocation.Width, Allocation.Height);
 			
@@ -148,10 +148,10 @@ namespace Pinta.Gui.Widgets
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
 			// Always be X pixels tall, but maintain aspect ratio
-			Cairo.Point imagesize = PintaCore.Workspace.ImageSize;
+			Size imagesize = PintaCore.Workspace.ImageSize;
 			
 			requisition.Height = 65;
-			requisition.Width = (imagesize.X * requisition.Height) / imagesize.Y;
+			requisition.Width = (imagesize.Width * requisition.Height) / imagesize.Height;
 			thumbnail = null;
 		}
 		#endregion
@@ -170,8 +170,8 @@ namespace Pinta.Gui.Widgets
 		#region private methods
 		private Point MousePtToPosition (Cairo.PointD clientMousePt)
 		{
-			int posX = (int)(clientMousePt.X * (PintaCore.Workspace.ImageSize.X / Allocation.Width));
-			int posY = (int)(clientMousePt.Y * (PintaCore.Workspace.ImageSize.Y / Allocation.Height));
+			int posX = (int)(clientMousePt.X * (PintaCore.Workspace.ImageSize.Width / Allocation.Width));
+			int posY = (int)(clientMousePt.Y * (PintaCore.Workspace.ImageSize.Height / Allocation.Height));
 			
 			return new Point (posX, posY);
 		}
@@ -180,8 +180,8 @@ namespace Pinta.Gui.Widgets
 		{
 			Point center = Allocation.Center ();
 			
-			double halfWidth = PintaCore.Workspace.ImageSize.X / Allocation.Width;
-			double halfHeight = PintaCore.Workspace.ImageSize.Y / Allocation.Height;
+			double halfWidth = PintaCore.Workspace.ImageSize.Width / Allocation.Width;
+			double halfHeight = PintaCore.Workspace.ImageSize.Height / Allocation.Height;
 			
 			double ptX = pos.X / halfWidth;
 			double ptY = pos.Y / halfHeight;

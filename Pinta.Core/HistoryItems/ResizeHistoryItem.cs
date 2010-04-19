@@ -47,10 +47,10 @@ namespace Pinta.Core
 		
 		public override void Undo ()
 		{
-			int swap_width = PintaCore.Workspace.ImageSize.X;
-			int swap_height = PintaCore.Workspace.ImageSize.Y;
+			int swap_width = PintaCore.Workspace.ImageSize.Width;
+			int swap_height = PintaCore.Workspace.ImageSize.Height;
 
-			PintaCore.Workspace.ImageSize = new Cairo.Point (old_width, old_height);
+			PintaCore.Workspace.ImageSize = new Gdk.Size (old_width, old_height);
 			PintaCore.Workspace.CanvasSize = new Cairo.Point (old_width, old_height);
 			
 			old_width = swap_width;
@@ -76,10 +76,10 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
-			int swap_width = PintaCore.Workspace.ImageSize.X;
-			int swap_height = PintaCore.Workspace.ImageSize.Y;
+			int swap_width = PintaCore.Workspace.ImageSize.Width;
+			int swap_height = PintaCore.Workspace.ImageSize.Height;
 
-			PintaCore.Workspace.ImageSize = new Cairo.Point (old_width, old_height);
+			PintaCore.Workspace.ImageSize = new Gdk.Size (old_width, old_height);
 			PintaCore.Workspace.CanvasSize = new Cairo.Point (old_width, old_height);
 
 			old_width = swap_width;

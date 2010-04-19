@@ -72,7 +72,7 @@ namespace Pinta.Core
 		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
 		{
 			PintaCore.Layers.ToolLayer.Clear ();
-			stencil = new bool[PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y];
+			stencil = new bool[PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height];
 
 			base.OnMouseDown (canvas, args, point);
 		}

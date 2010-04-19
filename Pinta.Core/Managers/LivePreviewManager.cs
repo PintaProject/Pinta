@@ -88,8 +88,8 @@ namespace Pinta.Core
 									
 			//TODO Use the current tool layer instead.
 			live_preview_surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
-			                                  PintaCore.Workspace.ImageSize.X,
-			                                  PintaCore.Workspace.ImageSize.Y);
+			                                  PintaCore.Workspace.ImageSize.Width,
+			                                  PintaCore.Workspace.ImageSize.Height);
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {
@@ -144,7 +144,7 @@ namespace Pinta.Core
 				
 				// Paint area outsize of the selection path, with the pre-effect image.
 				var imageSize = PintaCore.Workspace.ImageSize;
-				ctx.Rectangle (0, 0, imageSize.X, imageSize.Y);
+				ctx.Rectangle (0, 0, imageSize.Width, imageSize.Height);
 				ctx.AppendPath (selection_path);
 				ctx.Clip ();
 				ctx.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);

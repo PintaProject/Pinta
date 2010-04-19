@@ -164,7 +164,7 @@ namespace Pinta.Core
 				// Open the image and add it to the layers
 				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
 				
-				Pixbuf bg = new Pixbuf (file, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y, true);
+				Pixbuf bg = new Pixbuf (file, PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height, true);
 				
 				using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 					CairoHelper.SetSourcePixbuf (g, bg, 0, 0);

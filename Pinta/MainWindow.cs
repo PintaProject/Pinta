@@ -185,8 +185,8 @@ namespace Pinta
 				return;
 			}
 			
-			int image_x = PintaCore.Workspace.ImageSize.X;
-			int image_y = PintaCore.Workspace.ImageSize.Y;
+			int image_x = PintaCore.Workspace.ImageSize.Width;
+			int image_y = PintaCore.Workspace.ImageSize.Height;
 			
 			int window_x = GtkScrolledWindow.Children[0].Allocation.Width;
 			int window_y = GtkScrolledWindow.Children[0].Allocation.Height;
@@ -381,7 +381,7 @@ namespace Pinta
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 			
-			cr.Initialize (PintaCore.Workspace.ImageSize.ToSize (), PintaCore.Workspace.CanvasSize.ToSize ());
+			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize.ToSize ());
 			
 			using (Cairo.Context g = CairoHelper.Create (drawingarea1.GdkWindow)) {
 				// Draw our 1 px black border
@@ -542,8 +542,8 @@ namespace Pinta
 			if (PintaCore.Workspace.Offset.Y > 0)
 				p.Y = PintaCore.Workspace.Offset.Y;
 			
-			hruler.SetRange (-p.X, PintaCore.Workspace.ImageSize.X + p.X, 0, PintaCore.Workspace.ImageSize.X + p.X);
-			vruler.SetRange (-p.Y, PintaCore.Workspace.ImageSize.Y + p.Y, 0, PintaCore.Workspace.ImageSize.Y + p.Y);
+			hruler.SetRange (-p.X, PintaCore.Workspace.ImageSize.Width + p.X, 0, PintaCore.Workspace.ImageSize.Width + p.X);
+			vruler.SetRange (-p.Y, PintaCore.Workspace.ImageSize.Height + p.Y, 0, PintaCore.Workspace.ImageSize.Height + p.Y);
 		}
 		#endregion
 	}

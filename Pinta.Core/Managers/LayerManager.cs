@@ -89,7 +89,7 @@ namespace Pinta.Core
 
 		public Layer ToolLayer {
 			get {
-				if (tool_layer.Surface.Width != PintaCore.Workspace.ImageSize.X || tool_layer.Surface.Height != PintaCore.Workspace.ImageSize.Y) {
+				if (tool_layer.Surface.Width != PintaCore.Workspace.ImageSize.Width || tool_layer.Surface.Height != PintaCore.Workspace.ImageSize.Height) {
 					(tool_layer.Surface as IDisposable).Dispose ();
 					tool_layer = CreateLayer ("Tool Layer");
 					tool_layer.Hidden = true;
@@ -408,8 +408,8 @@ namespace Pinta.Core
 		{
 			foreach (var layer in layers)
 				layer.Rotate90CW ();
-			
-			PintaCore.Workspace.ImageSize = new Point (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
+
+			PintaCore.Workspace.ImageSize = new Gdk.Size (PintaCore.Workspace.ImageSize.Height, PintaCore.Workspace.ImageSize.Width);
 			PintaCore.Workspace.CanvasSize = new Point (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 
 			PintaCore.Workspace.Invalidate ();
@@ -419,8 +419,8 @@ namespace Pinta.Core
 		{
 			foreach (var layer in layers)
 				layer.Rotate90CCW ();
-			
-			PintaCore.Workspace.ImageSize = new Point (PintaCore.Workspace.ImageSize.Y, PintaCore.Workspace.ImageSize.X);
+
+			PintaCore.Workspace.ImageSize = new Gdk.Size (PintaCore.Workspace.ImageSize.Height, PintaCore.Workspace.ImageSize.Width);
 			PintaCore.Workspace.CanvasSize = new Point (PintaCore.Workspace.CanvasSize.Y, PintaCore.Workspace.CanvasSize.X);
 			
 			PintaCore.Workspace.Invalidate ();
@@ -473,7 +473,7 @@ namespace Pinta.Core
 			Path old = SelectionPath;
 			
 			using (Cairo.Context g = new Cairo.Context (selection_layer.Surface))
-				SelectionPath = g.CreateRectanglePath (new Rectangle (0, 0, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y));
+				SelectionPath = g.CreateRectanglePath (new Rectangle (0, 0, PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height));
 			
 			if (old != null)
 				(old as IDisposable).Dispose ();
@@ -483,7 +483,7 @@ namespace Pinta.Core
 
 		public ImageSurface GetFlattenedImage ()
 		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
+			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
 				foreach (var layer in PintaCore.Layers.GetLayersToPaint ()) {
@@ -497,7 +497,7 @@ namespace Pinta.Core
 		
 		public ImageSurface GetClippedLayer (int index)
 		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
+			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
@@ -539,7 +539,7 @@ namespace Pinta.Core
 
 		private Layer CreateLayer (string name)
 		{
-			return CreateLayer (name, PintaCore.Workspace.ImageSize.X, PintaCore.Workspace.ImageSize.Y);
+			return CreateLayer (name, PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height);
 		}
 
 		public Layer CreateLayer (string name, int width, int height)

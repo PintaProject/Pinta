@@ -57,8 +57,8 @@ namespace Pinta.Core
 			if (!is_drawing)
 				return;
 
-			double x = Utility.Clamp (point.X, 0, PintaCore.Workspace.ImageSize.X - 1);
-			double y = Utility.Clamp (point.Y, 0, PintaCore.Workspace.ImageSize.Y - 1);
+			double x = Utility.Clamp (point.X, 0, PintaCore.Workspace.ImageSize.Width - 1);
+			double y = Utility.Clamp (point.Y, 0, PintaCore.Workspace.ImageSize.Height - 1);
 
 			PintaCore.Layers.ShowSelection = true;
 
