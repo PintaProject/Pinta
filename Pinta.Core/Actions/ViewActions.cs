@@ -72,7 +72,7 @@ namespace Pinta.Core
 			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Gtk.Stock.Fullscreen);
 
 			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
-			UnitComboBox = new ToolBarComboBox (75, 0, false, "Pixel", "Inches", "Centimeters");
+			UnitComboBox = new ToolBarComboBox (100, 0, false, "Pixels", "Inches", "Centimeters");
 		}
 
 		#region Initialization
