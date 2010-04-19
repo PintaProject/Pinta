@@ -37,7 +37,7 @@ namespace Pinta.Core
 		
 		#region ToolBar
 		// We don't want the ShapeTool's toolbar
-		protected override void OnBuildToolBar (Toolbar tb)
+		protected override void BuildToolBar (Toolbar tb)
 		{
 		}
 		#endregion
