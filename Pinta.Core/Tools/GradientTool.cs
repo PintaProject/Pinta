@@ -60,7 +60,8 @@ namespace Pinta.Core
 		}
 		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
-
+		protected override bool ShowAlphaBlendingButton { get { return true; } }
+		
 		#region mouse
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
@@ -113,7 +114,7 @@ namespace Pinta.Core
 						
 	            gr.StartPoint = startpoint;
 	            gr.EndPoint = point;
-				gr.AlphaBlending = AlphaBlending;
+				gr.AlphaBlending = UseAlphaBlending;
         
 				gr.BeforeRender ();
 				gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});

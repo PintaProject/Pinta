@@ -56,8 +56,11 @@ namespace Pinta.Core
 		public virtual bool Enabled { get { return true; } }
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
-		public virtual bool Antialiasing { get { return antialiasing_btn.Active; } }
-		public virtual bool AlphaBlending { get { return alphablending_btn.Active; } }
+		public virtual bool UseAntialiasing { get { return ShowAntialiasingButton && antialiasing_btn.Active; } }
+		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && alphablending_btn.Active; } }
+
+		protected virtual bool ShowAntialiasingButton { get { return false; } }
+		protected virtual bool ShowAlphaBlendingButton { get { return false; } }
 		
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
@@ -113,55 +116,15 @@ namespace Pinta.Core
 		{
 		}
 
-		//TODO override to filter on inherited tools
 		protected virtual void BuildRasterizationToolItems (Toolbar tb)
 		{
-			tb.AppendItem (new SeparatorToolItem ());
+			if (ShowAlphaBlendingButton || ShowAntialiasingButton)
+				tb.AppendItem (new SeparatorToolItem ());
 			
-			BuildAntialiasingTool (tb);
-			BuildAlphaBlending (tb);			
-		}
-		
-		protected void BuildAlphaBlending (Toolbar tb)
-		{
-			Image blending_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png"));
-			blending_on_icon.Show ();
-			Image blending_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png"));
-			blending_off_icon.Show ();
-			
-			alphablending_btn = new ToggleToolButton ();
-			alphablending_btn.IconWidget = blending_off_icon;
-			alphablending_btn.Show ();
-			alphablending_btn.Label = "Antialiasing";
-			alphablending_btn.TooltipText = "Normal blending / Overwrite blending";
-			alphablending_btn.Toggled += delegate {
-				if (alphablending_btn.Active)
-					alphablending_btn.IconWidget = blending_on_icon;
-				else
-					alphablending_btn.IconWidget = blending_off_icon;
-			};
-			tb.AppendItem (alphablending_btn);
-		}
-		
-		protected void BuildAntialiasingTool (Toolbar tb)
-		{
-			Image antialiasing_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png"));
-			antialiasing_on_icon.Show ();
-			Image antialiasing_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png"));
-			antialiasing_off_icon.Show ();
-			
-			antialiasing_btn = new ToggleToolButton ();
-			antialiasing_btn.IconWidget = antialiasing_off_icon;
-			antialiasing_btn.Show ();
-			antialiasing_btn.Label = "Antialiasing";
-			antialiasing_btn.TooltipText = "Antialiasing";
-			antialiasing_btn.Toggled += delegate {
-				if (antialiasing_btn.Active)
-					antialiasing_btn.IconWidget = antialiasing_on_icon;
-				else
-					antialiasing_btn.IconWidget = antialiasing_off_icon;
-			};
-			tb.AppendItem (antialiasing_btn);
+			if (ShowAntialiasingButton)
+				BuildAntialiasingTool (tb);
+			if (ShowAlphaBlendingButton)
+				BuildAlphaBlending (tb);			
 		}
 
 		protected virtual void OnBuildToolBar (Toolbar tb)
@@ -235,6 +198,50 @@ namespace Pinta.Core
 		protected void SetCursor (Gdk.Cursor cursor)
 		{
 			PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = cursor;
+		}
+		#endregion
+
+		#region Private Methods
+		private void BuildAlphaBlending (Toolbar tb)
+		{
+			Image blending_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png"));
+			blending_on_icon.Show ();
+			Image blending_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png"));
+			blending_off_icon.Show ();
+
+			alphablending_btn = new ToggleToolButton ();
+			alphablending_btn.IconWidget = blending_off_icon;
+			alphablending_btn.Show ();
+			alphablending_btn.Label = "Antialiasing";
+			alphablending_btn.TooltipText = "Normal blending / Overwrite blending";
+			alphablending_btn.Toggled += delegate {
+				if (alphablending_btn.Active)
+					alphablending_btn.IconWidget = blending_on_icon;
+				else
+					alphablending_btn.IconWidget = blending_off_icon;
+			};
+			tb.AppendItem (alphablending_btn);
+		}
+
+		private void BuildAntialiasingTool (Toolbar tb)
+		{
+			Image antialiasing_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png"));
+			antialiasing_on_icon.Show ();
+			Image antialiasing_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png"));
+			antialiasing_off_icon.Show ();
+
+			antialiasing_btn = new ToggleToolButton ();
+			antialiasing_btn.IconWidget = antialiasing_off_icon;
+			antialiasing_btn.Show ();
+			antialiasing_btn.Label = "Antialiasing";
+			antialiasing_btn.TooltipText = "Antialiasing";
+			antialiasing_btn.Toggled += delegate {
+				if (antialiasing_btn.Active)
+					antialiasing_btn.IconWidget = antialiasing_on_icon;
+				else
+					antialiasing_btn.IconWidget = antialiasing_off_icon;
+			};
+			tb.AppendItem (antialiasing_btn);
 		}
 		#endregion
 	}
