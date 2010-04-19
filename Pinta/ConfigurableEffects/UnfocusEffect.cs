@@ -30,12 +30,11 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Core
 {
-    public class UnfocusEffect : LocalHistogramEffect
+	public class UnfocusEffect : LocalHistogramEffect
 	{
+		private int radius;
 
-        private int radius;
-
-        public override string Icon {
+		public override string Icon {
 			get { return "Menu.Effects.Blurs.Unfocus.png"; }
 		}
 
@@ -47,13 +46,13 @@ namespace Pinta.Core
 			get { return true; }
 		}
 
-        public UnfocusData Data { get; private set; }
+		public UnfocusData Data { get; private set; }
 
-        public UnfocusEffect()
+		public UnfocusEffect ()
 		{
-            Data = new UnfocusData();
+			Data = new UnfocusData ();
 		}
-		
+
 		public override bool LaunchConfiguration ()
 		{
 			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
@@ -71,70 +70,56 @@ namespace Pinta.Core
 		}
 
 		#region Algorithm Code Ported From PDN
-
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
- 
-            this.radius = Data.Radius;
+			this.radius = Data.Radius;
 
-            foreach (Gdk.Rectangle rect in rois)
-            {
-                RenderRectWithAlpha(this.radius, src, dest, rect);
-            }
-
+			foreach (Gdk.Rectangle rect in rois)
+				RenderRectWithAlpha (this.radius, src, dest, rect);
 		}
-        
-        public unsafe override ColorBgra ApplyWithAlpha(ColorBgra src, int area, int sum, int* hb, int* hg, int* hr)
-        {
-            //each slot of the histgram can contain up to area * 255. This will overflow an int when area > 32k
-            if (area < 32768)
-            {
-                int b = 0;
-                int g = 0;
-                int r = 0;
 
-                for (int i = 1; i < 256; ++i)
-                {
-                    b += i * hb[i];
-                    g += i * hg[i];
-                    r += i * hr[i];
-                }
+		public unsafe override ColorBgra ApplyWithAlpha (ColorBgra src, int area, int sum, int* hb, int* hg, int* hr)
+		{
+			//each slot of the histgram can contain up to area * 255. This will overflow an int when area > 32k
+			if (area < 32768) {
+				int b = 0;
+				int g = 0;
+				int r = 0;
 
-                int alpha = sum / area;
-                int div = area * 255;
+				for (int i = 1; i < 256; ++i) {
+					b += i * hb[i];
+					g += i * hg[i];
+					r += i * hr[i];
+				}
 
-                return ColorBgra.FromBgraClamped(b / div, g / div, r / div, alpha);
-            }
-            else //use a long if an int will overflow.
-            {
-                long b = 0;
-                long g = 0;
-                long r = 0;
+				int alpha = sum / area;
+				int div = area * 255;
 
-                for (long i = 1; i < 256; ++i)
-                {
-                    b += i * hb[i];
-                    g += i * hg[i];
-                    r += i * hr[i];
-                }
+				return ColorBgra.FromBgraClamped (b / div, g / div, r / div, alpha);
+			} else {	//use a long if an int will overflow.
+				long b = 0;
+				long g = 0;
+				long r = 0;
 
-                int alpha = sum / area;
-                int div = area * 255;
+				for (long i = 1; i < 256; ++i) {
+					b += i * hb[i];
+					g += i * hg[i];
+					r += i * hr[i];
+				}
 
-                return ColorBgra.FromBgraClamped(b / div, g / div, r / div, alpha);
-            }
-        }
+				int alpha = sum / area;
+				int div = area * 255;
 
-
-
+				return ColorBgra.FromBgraClamped (b / div, g / div, r / div, alpha);
+			}
+		}
 		#endregion
 
-        public class UnfocusData
+		public class UnfocusData
 		{
+			[MinimumValue (1), MaximumValue (200)]
+			public int Radius = 4;
 
-            [MinimumValue(1), MaximumValue(200)]
-            public int Radius = 4;
-			
 			[Skip]
 			public bool IsEmpty { get { return Radius == 0; } }
 		}
