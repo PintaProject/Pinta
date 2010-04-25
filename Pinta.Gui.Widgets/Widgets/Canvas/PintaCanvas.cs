@@ -31,6 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
+	[System.ComponentModel.ToolboxItem (true)]
 	public class PintaCanvas : DrawingArea
 	{
 		Cairo.ImageSurface canvas;
