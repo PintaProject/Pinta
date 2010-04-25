@@ -358,7 +358,6 @@ namespace Pinta {
             this.drawingarea1.ButtonPressEvent += new Gtk.ButtonPressEventHandler(this.OnDrawingarea1ButtonPressEvent);
             this.drawingarea1.ButtonReleaseEvent += new Gtk.ButtonReleaseEventHandler(this.OnDrawingarea1ButtonReleaseEvent);
             this.drawingarea1.MotionNotifyEvent += new Gtk.MotionNotifyEventHandler(this.OnDrawingarea1MotionNotifyEvent);
-            this.drawingarea1.ExposeEvent += new Gtk.ExposeEventHandler(this.OnDrawingarea1ExposeEvent);
             this.drawingarea1.KeyPressEvent += new Gtk.KeyPressEventHandler(this.OnDrawingarea1KeyPressEvent);
             this.drawingarea1.KeyReleaseEvent += new Gtk.KeyReleaseEventHandler(this.OnDrawingarea1KeyReleaseEvent);
         }
