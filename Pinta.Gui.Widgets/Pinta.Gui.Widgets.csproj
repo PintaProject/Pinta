@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,12 +15,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -54,11 +55,14 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs" />
+    <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
+    <Compile Include="Widgets\Canvas\GridRenderer.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
     <Compile Include="Dialogs\SimpleEffectDialog.cs" />
     <Compile Include="Widgets\AnglePickerGraphic.cs" />
     <Compile Include="Widgets\AnglePickerWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.AnglePickerWidget.cs" />
+    <Compile Include="Widgets\Canvas\PintaCanvas.cs" />
     <Compile Include="Widgets\PointPickerGraphic.cs" />
     <Compile Include="Widgets\PointPickerWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPickerWidget.cs" />

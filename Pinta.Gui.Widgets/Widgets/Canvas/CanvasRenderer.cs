@@ -26,10 +26,11 @@
 
 using System;
 using Gdk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Gui.Widgets
 {
-	public class CanvasRenderer
+	class CanvasRenderer
 	{
 		private Size source_size;
 		private Size destination_size;

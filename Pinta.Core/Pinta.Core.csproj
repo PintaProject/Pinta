@@ -48,7 +48,6 @@
     <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
-    <Compile Include="Classes\CanvasRenderer.cs" />
     <Compile Include="Classes\ScaleFactor.cs" />
     <Compile Include="Effects\AutoLevelEffect.cs" />
     <Compile Include="Effects\BaseEffect.cs" />
@@ -162,7 +161,6 @@
     <Compile Include="Tools\GradientTool.cs" />
     <Compile Include="Classes\GradientRenderer.cs" />
     <Compile Include="Classes\GradientRenderers.cs" />
-    <Compile Include="Classes\GridRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
