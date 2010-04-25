@@ -58,5 +58,21 @@ Global
 		Policies = $0
 		$0.StandardHeader = $1
 		$1.inheritsSet = MITX11License
+		$0.TextStylePolicy = $2
+		$2.FileWidth = 120
+		$2.TabWidth = 4
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/plain
+		$2.scope = text/plain
+		$0.TextStylePolicy = $3
+		$3.RemoveTrailingWhitespace = True
+		$3.EolMarker = Windows
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/plain
+		$3.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $4
+		$4.inheritsSet = Mono
+		$4.inheritsScope = text/x-csharp
+		$4.scope = text/x-csharp
 	EndGlobalSection
 EndGlobal
