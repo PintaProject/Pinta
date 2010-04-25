@@ -116,6 +116,10 @@ namespace Pinta.Core
 			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
 
+			PixelGrid.Toggled += delegate (object sender, EventArgs e) {
+				PintaCore.Workspace.Invalidate ();
+			};
+
 			var isFullscreen = false;
 
 			Fullscreen.Activated += (foo, bar) => {
