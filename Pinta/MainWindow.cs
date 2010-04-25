@@ -51,8 +51,6 @@ namespace Pinta
 			colorpalettewidget1.Initialize ();
 			
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
-			PintaCore.Workspace.CanvasInvalidated += new EventHandler<CanvasInvalidatedEventArgs> (Workspace_CanvasInvalidated);
-			PintaCore.Workspace.CanvasSizeChanged += new EventHandler (Workspace_CanvasSizeChanged);
 			CreateToolBox ();
 			
 			PintaCore.Actions.CreateMainMenu (menubar1);
@@ -160,10 +158,6 @@ namespace Pinta
 			PintaCore.Actions.File.Exit.Activate ();
 		}
 
-		private void Workspace_CanvasSizeChanged (object sender, EventArgs e)
-		{
-		}
-
 		private void ZoomToWindow_Activated (object sender, EventArgs e)
 		{
 			// The image is small enough to fit in the window
@@ -192,10 +186,6 @@ namespace Pinta
 				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
-		}
-
-		void Workspace_CanvasInvalidated (object sender, CanvasInvalidatedEventArgs e)
-		{
 		}
 
 		private void Chrome_StatusBarTextChanged (object sender, TextChangedEventArgs e)
@@ -334,10 +324,6 @@ namespace Pinta
 		}
 
 		#region Drawing Area
-		private void OnDrawingarea1ExposeEvent (object o, Gtk.ExposeEventArgs args)
-		{
-		}
-
 		private void OnDrawingarea1MotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
 			Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
