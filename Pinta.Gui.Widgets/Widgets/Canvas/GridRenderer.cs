@@ -51,18 +51,19 @@ namespace Pinta.Gui.Widgets
 			ColorBgra[] blackAndWhite = new ColorBgra[2] { ColorBgra.White, ColorBgra.Black };
 
 			// draw horizontal lines
-			int sTop = d2SLookupY[offset.Y];
-			int sBottom = d2SLookupY[offset.Y + dst.Height];
 			int dstHeight = dst.Height;
 			int dstWidth = dst.Width;
+			int dstStride = dst.Stride;
+			int sTop = d2SLookupY[offset.Y];
+			int sBottom = d2SLookupY[offset.Y + dstHeight];
 
 			for (int srcY = sTop; srcY <= sBottom; ++srcY) {
 				int dstY = s2DLookupY[srcY];
 				int dstRow = dstY - offset.Y;
 
-				if (dstRow < dstHeight) {
+				if (dstRow >= 0 && dstRow < dstHeight) {
 					ColorBgra* dstRowPtr = dst.GetRowAddressUnchecked (dstRow);
-					ColorBgra* dstRowEndPtr = dstRowPtr + dst.Width;
+					ColorBgra* dstRowEndPtr = dstRowPtr + dstWidth;
 
 					dstRowPtr += offset.X & 1;
 
@@ -75,21 +76,21 @@ namespace Pinta.Gui.Widgets
 
 			// draw vertical lines
 			int sLeft = d2SLookupX[offset.X];
-			int sRight = d2SLookupX[offset.X + dst.Width];
+			int sRight = d2SLookupX[offset.X + dstWidth];
 
 			for (int srcX = sLeft; srcX <= sRight; ++srcX) {
 				int dstX = s2DLookupX[srcX];
 				int dstCol = dstX - offset.X;
 
-				if (dstCol < dstWidth) {
+				if (dstCol >= 0 && dstCol < dstWidth) {
 					byte* dstColPtr = (byte*)dst.GetPointAddress (dstCol, 0);
-					byte* dstColEndPtr = dstColPtr + dst.Stride * dst.Height;
+					byte* dstColEndPtr = dstColPtr + dstStride * dstHeight;
 
-					dstColPtr += (offset.Y & 1) * dst.Stride;
+					dstColPtr += (offset.Y & 1) * dstStride;
 
 					while (dstColPtr < dstColEndPtr) {
 						*((ColorBgra*)dstColPtr) = ColorBgra.Black;
-						dstColPtr += 2 * dst.Stride;
+						dstColPtr += 2 * dstStride;
 					}
 				}
 			}
