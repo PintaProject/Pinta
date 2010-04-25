@@ -234,7 +234,7 @@
                               <placeholder />
                             </child>
                             <child>
-                              <widget class="Gtk.DrawingArea" id="drawingarea1">
+                              <widget class="Pinta.Gui.Widgets.PintaCanvas" id="drawingarea1">
                                 <property name="MemberName" />
                                 <property name="CanDefault">True</property>
                                 <property name="HasDefault">True</property>
@@ -243,7 +243,6 @@
                                 <signal name="ButtonPressEvent" handler="OnDrawingarea1ButtonPressEvent" />
                                 <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />
                                 <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
-                                <signal name="ExposeEvent" handler="OnDrawingarea1ExposeEvent" />
                                 <signal name="KeyPressEvent" handler="OnDrawingarea1KeyPressEvent" />
                                 <signal name="KeyReleaseEvent" handler="OnDrawingarea1KeyReleaseEvent" />
                               </widget>
@@ -252,7 +251,7 @@
                                 <property name="BottomAttach">2</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
-                                <property name="AutoSize">True</property>
+                                <property name="AutoSize">False</property>
                                 <property name="XExpand">True</property>
                                 <property name="XFill">True</property>
                                 <property name="XShrink">False</property>
@@ -779,7 +778,7 @@
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="IsEditable">True</property>
-                    <property name="InvisibleChar">●</property>
+                    <property name="InvisibleChar">?</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
