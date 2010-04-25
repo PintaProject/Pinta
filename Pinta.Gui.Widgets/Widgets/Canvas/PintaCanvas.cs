@@ -55,18 +55,29 @@ namespace Pinta.Gui.Widgets
 				else
 					GdkWindow.InvalidateRect (e.Rectangle, false);
 			};
-		}
-		
-		private void SetRequisition (Size size)
-		{
-			Requisition req = new Requisition ();
-			req.Width = size.Width;
-			req.Height = size.Height;
-			Requisition = req;
 
-			QueueResize ();
+			// Give mouse press events to the current tool
+			ButtonPressEvent += delegate (object sender, ButtonPressEventArgs e) {
+				PintaCore.Tools.CurrentTool.DoMouseDown (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+			};
+
+			// Give mouse release events to the current tool
+			ButtonReleaseEvent += delegate (object sender, ButtonReleaseEventArgs e) {
+				PintaCore.Tools.CurrentTool.DoMouseUp (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+			};
+
+			// Give mouse move events to the current tool
+			MotionNotifyEvent += delegate (object sender, MotionNotifyEventArgs e) {
+				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
+				PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
+			};
+
+			// Handle key press/release events
+			KeyPressEvent += new KeyPressEventHandler (PintaCanvas_KeyPressEvent);
+			KeyReleaseEvent += new KeyReleaseEventHandler (PintaCanvas_KeyReleaseEvent);
 		}
 
+		#region Protected Methods
 		protected override bool OnExposeEvent (EventExpose e)
 		{
 			base.OnExposeEvent (e);
@@ -160,9 +171,40 @@ namespace Pinta.Gui.Widgets
 					g.Stroke ();
 					g.Restore ();
 				}
-			}			
-			
+			}
+
 			return true;
 		}
+		#endregion
+
+		#region Private Methods
+		private void SetRequisition (Size size)
+		{
+			Requisition req = new Requisition ();
+			req.Width = size.Width;
+			req.Height = size.Height;
+			Requisition = req;
+
+			QueueResize ();
+		}
+
+		[GLib.ConnectBefore]
+		private void PintaCanvas_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		{
+			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
+		}
+
+		[GLib.ConnectBefore]
+		private void PintaCanvas_KeyPressEvent (object o, KeyPressEventArgs e)
+		{
+			// Give the current tool a chance to handle the key press
+			PintaCore.Tools.CurrentTool.DoKeyPress (this, e);
+
+			// If the tool didn't consume it, see if its a toolbox shortcut
+			if (e.RetVal == null || !(bool)e.RetVal)
+				if (e.Event.State == ModifierType.None)
+					PintaCore.Tools.SetCurrentTool (e.Event.Key);
+		}
+		#endregion
 	}
 }

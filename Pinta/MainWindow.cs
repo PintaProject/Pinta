@@ -333,38 +333,8 @@ namespace Pinta
 			
 			hruler.Position = point.X;
 			vruler.Position = point.Y;
-			
-			PintaCore.Tools.CurrentTool.DoMouseMove (o, args, point);
-		}
-
-		private void OnDrawingarea1ButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
-		{
-			PintaCore.Tools.CurrentTool.DoMouseUp (drawingarea1, args, PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y));
-		}
-
-		private void OnDrawingarea1ButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
-		{
-			PintaCore.Tools.CurrentTool.DoMouseDown (drawingarea1, args, PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y));
 		}
 		#endregion
-
-		[GLib.ConnectBefore]
-		protected virtual void OnDrawingarea1KeyPressEvent (object o, Gtk.KeyPressEventArgs args)
-		{
-			// Give the current tool a chance to handle the key press
-			PintaCore.Tools.CurrentTool.DoKeyPress (drawingarea1, args);
-			
-			// If the tool didn't consume it, see if its a toolbox shortcut
-			if (args.RetVal == null || !(bool)args.RetVal)
-				if (args.Event.State == ModifierType.None)
-					PintaCore.Tools.SetCurrentTool (args.Event.Key);
-		}
-
-		[GLib.ConnectBefore]
-		protected virtual void OnDrawingarea1KeyReleaseEvent (object o, Gtk.KeyReleaseEventArgs args)
-		{
-			PintaCore.Tools.CurrentTool.DoKeyRelease (drawingarea1, args);
-		}
 
 		#region rulers
 		private HRuler hruler;

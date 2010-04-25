@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
@@ -240,11 +240,7 @@
                                 <property name="HasDefault">True</property>
                                 <property name="CanFocus">True</property>
                                 <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
-                                <signal name="ButtonPressEvent" handler="OnDrawingarea1ButtonPressEvent" />
-                                <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />
                                 <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
-                                <signal name="KeyPressEvent" handler="OnDrawingarea1KeyPressEvent" />
-                                <signal name="KeyReleaseEvent" handler="OnDrawingarea1KeyReleaseEvent" />
                               </widget>
                               <packing>
                                 <property name="TopAttach">1</property>
