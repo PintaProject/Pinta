@@ -47,7 +47,7 @@ namespace Pinta
 			
 			progress_dialog = new ProgressDialog ();
 			
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this, progress_dialog, (Gtk.Viewport)table1.Parent);
+			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this, progress_dialog);
 			colorpalettewidget1.Initialize ();
 			
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
@@ -125,7 +125,10 @@ namespace Pinta
 			
 			UpdateRulerRange ();
 			
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
+			PintaCore.Chrome.DrawingArea.ScrollEvent += HandleViewScrollEvent;
 			
 			if (Platform.GetOS () == Platform.OS.Mac) {
 				try {
@@ -373,23 +376,22 @@ namespace Pinta
 			}
 		}
 
+
 		void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
 		{
-			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
+			UpdateRulerRange ();
+		}
+
+		void HandleViewScrollEvent (object o, ScrollEventArgs args)
+		{
 			UpdateRulerRange ();
 		}
 
 		void UpdateRulerRange ()
 		{
-			Cairo.PointD p = new Cairo.PointD (0, 0);
-			if (PintaCore.Workspace.Offset.X > 0)
-				p.X = PintaCore.Workspace.Offset.X /PintaCore.Workspace.Scale;
-			
-			if (PintaCore.Workspace.Offset.Y > 0)
-				p.Y = PintaCore.Workspace.Offset.Y;
-			
-			hruler.SetRange (-p.X, PintaCore.Workspace.ImageSize.Width + p.X, 0, PintaCore.Workspace.ImageSize.Width + p.X);
-			vruler.SetRange (-p.Y, PintaCore.Workspace.ImageSize.Height + p.Y, 0, PintaCore.Workspace.ImageSize.Height + p.Y);
+			Cairo.PointD p = PintaCore.Workspace.WindowPointToCanvas (PintaCore.Chrome.DrawingArea.Allocation.Width, PintaCore.Chrome.DrawingArea.Allocation.Height);
+			hruler.SetRange (-PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale, p.X, 0, p.X);
+			vruler.SetRange (-PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale, p.Y, 0, p.Y);
 		}
 		#endregion
 	}

@@ -55,9 +55,9 @@ namespace Pinta {
         
         private Gtk.Toolbar toolbox2;
         
-        private Gtk.ScrolledWindow GtkScrolledWindow;
-        
         private Gtk.Table table1;
+        
+        private Gtk.ScrolledWindow GtkScrolledWindow;
         
         private Gtk.DrawingArea drawingarea1;
         
@@ -225,6 +225,11 @@ namespace Pinta {
             w9.Expand = false;
             w9.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
+            this.table1 = new Gtk.Table(((uint)(3)), ((uint)(2)), false);
+            this.table1.Name = "table1";
+            this.table1.RowSpacing = ((uint)(2));
+            this.table1.ColumnSpacing = ((uint)(2));
+            // Container child table1.Gtk.Table+TableChild
             this.GtkScrolledWindow = new Gtk.ScrolledWindow();
             this.GtkScrolledWindow.Name = "GtkScrolledWindow";
             this.GtkScrolledWindow.ShadowType = ((Gtk.ShadowType)(1));
@@ -232,26 +237,21 @@ namespace Pinta {
             Gtk.Viewport w10 = new Gtk.Viewport();
             w10.ShadowType = ((Gtk.ShadowType)(0));
             // Container child GtkViewport1.Gtk.Container+ContainerChild
-            this.table1 = new Gtk.Table(((uint)(3)), ((uint)(2)), false);
-            this.table1.Name = "table1";
-            this.table1.RowSpacing = ((uint)(2));
-            this.table1.ColumnSpacing = ((uint)(2));
-            // Container child table1.Gtk.Table+TableChild
 	    this.drawingarea1 = new Pinta.Gui.Widgets.PintaCanvas ();
 	    this.drawingarea1.CanDefault = true;
             this.drawingarea1.CanFocus = true;
             this.drawingarea1.Events = ((Gdk.EventMask)(16134));
             this.drawingarea1.Name = "drawingarea1";
-            this.table1.Add(this.drawingarea1);
-            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table1[this.drawingarea1]));
-            w11.TopAttach = ((uint)(1));
-            w11.BottomAttach = ((uint)(2));
-            w11.LeftAttach = ((uint)(1));
-            w11.RightAttach = ((uint)(2));
-            w10.Add(this.table1);
+            w10.Add(this.drawingarea1);
             this.GtkScrolledWindow.Add(w10);
-            this.hbox2.Add(this.GtkScrolledWindow);
-            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox2[this.GtkScrolledWindow]));
+            this.table1.Add(this.GtkScrolledWindow);
+            Gtk.Table.TableChild w13 = ((Gtk.Table.TableChild)(this.table1[this.GtkScrolledWindow]));
+            w13.TopAttach = ((uint)(1));
+            w13.BottomAttach = ((uint)(2));
+            w13.LeftAttach = ((uint)(1));
+            w13.RightAttach = ((uint)(2));
+            this.hbox2.Add(this.table1);
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox2[this.table1]));
             w14.Position = 1;
             // Container child hbox2.Gtk.Box+BoxChild
             this.vbox2 = new Gtk.VBox();
