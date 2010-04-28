@@ -1,4 +1,4 @@
-// 
+//
 // CurvesDialog.cs
 //  
 // Author:
@@ -71,12 +71,17 @@ namespace Pinta
 			get { 
 				return (comboMap.Active == 0) ? 
 						ColorTransferMode.Rgb : 
-						ColorTransferMode.Luminosity; }
+						ColorTransferMode.Luminosity;
+			}
 		}
-				
-		public CurvesDialog ()
+
+		public CurvesData EffectData { get; private set; }
+		
+		public CurvesDialog (CurvesData effectData)
 		{
 			this.Build ();
+			
+			EffectData = effectData;
 		
 			drawing.DoubleBuffered = true;
 			
@@ -92,7 +97,16 @@ namespace Pinta
 			
 			ResetControlPoints ();
 		}
-
+		
+		private void UpdateLivePreview (string propertyName)
+		{
+			if (EffectData != null) {
+				EffectData.ControlPoints = ControlPoints;
+				EffectData.Mode = Mode;
+				EffectData.FirePropertyChanged (propertyName);
+			}
+		}		
+		
 		private void HandleCheckToggled (object o, EventArgs args)
 		{
 			InvalidateDrawing ();
@@ -116,12 +130,16 @@ namespace Pinta
 				list.Add (size - 1, size - 1);
 				ControlPoints [i] = list;
 			}
+			
+			UpdateLivePreview ("ControlPoints");
 		}
 		
 		private void HandleComboMapChanged (object sender, EventArgs e)
 		{
 			if (ControlPoints == null)
 				ResetControlPoints ();
+			else
+				UpdateLivePreview ("Mode");
 			
 			bool visible = (Mode == ColorTransferMode.Rgb);
 			checkRed.Visible = checkGreen.Visible = checkBlue.Visible = visible;
@@ -163,6 +181,8 @@ namespace Pinta
 			}
 			
 			last_cpx = x;
+			
+			UpdateLivePreview ("ControlPoints");
 		}
 		
 		private void HandleDrawingMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
@@ -351,10 +371,10 @@ namespace Pinta
 				}
 				
 				for (int i = 0; i < line.Length; i++) {
-	                line[i].X = (float)i;
-	                line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate (i), 0, size - 1));
+	               			line[i].X = (float)i;
+	                		line[i].Y = (float)(Utility.Clamp(size - 1 - interpolator.Interpolate (i), 0, size - 1));
 					
-	            }
+	            		}
 				
 				g.LineWidth = 2;
 				g.LineJoin = LineJoin.Round;

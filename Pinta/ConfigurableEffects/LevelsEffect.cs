@@ -1,4 +1,4 @@
-// 
+//
 // LevelsEffect.cs
 //  
 // Author:
@@ -30,9 +30,7 @@ using Cairo;
 namespace Pinta.Core
 {
 	public class LevelsEffect : BaseEffect
-	{
-		private UnaryPixelOps.Level levels;
-		
+	{		
 		public override string Icon {
 			get { return "Menu.Adjustments.Levels.png"; }
 		}
@@ -45,27 +43,44 @@ namespace Pinta.Core
 			get { return true; }
 		}
 		
-		public override bool LaunchConfiguration ()
+		public LevelsData Data { get { return EffectData as LevelsData; } }
+		
+		public LevelsEffect ()
 		{
-			
-			LevelsDialog dialog = new LevelsDialog ();
+			EffectData = new LevelsData ();
+		}
+		
+		public override bool LaunchConfiguration ()
+		{			
+			var dialog = new LevelsDialog (Data);
+			dialog.Title = Text;
 			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-			int response = dialog.Run ();
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
-				levels = dialog.Levels;
-				
-				dialog.Destroy ();
-				return true;
-			}
+			int response = dialog.Run ();
 
 			dialog.Destroy ();
-			return false;
+			
+			return (response == (int)Gtk.ResponseType.Ok);
 		}
 		
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			levels.Apply (dest, src, rois);
+			Data.Levels.Apply (dest, src, rois);
+		}
+	}
+	
+	public class LevelsData : EffectData
+	{
+		public UnaryPixelOps.Level Levels { get; set; }
+		
+		public LevelsData ()
+		{
+			Levels = new UnaryPixelOps.Level ();
+		}
+		
+		public override EffectData Clone ()
+		{
+			return new LevelsData () { Levels = (UnaryPixelOps.Level) Levels.Clone () };
 		}
 	}
 }

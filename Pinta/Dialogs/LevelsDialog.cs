@@ -1,4 +1,4 @@
-// 
+//
 // LevelsDialog.cs
 //  
 // Author:
@@ -35,16 +35,14 @@ namespace Pinta
 	public partial class LevelsDialog : Gtk.Dialog
 	{	
 		private bool[] mask;
-			
-		public UnaryPixelOps.Level Levels { get; private set; }
 		
-		public LevelsDialog ()
-		{
+		public LevelsData EffectData { get; private set; }
+		
+		public LevelsDialog (LevelsData effectData)
+		{			
 			this.Build ();
-			spinOutGamma.Adjustment.Lower = 0.01;
-			spinOutGamma.Adjustment.Upper = 7.99;
-			spinOutGamma.Adjustment.StepIncrement =	0.01;
-			this.Levels = new UnaryPixelOps.Level ();
+			
+			EffectData = effectData;			
 			mask = new bool[] {true, true, true};
 
 			this.HasSeparator = false;
@@ -78,6 +76,28 @@ namespace Pinta
 			colorpanelInHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
 			colorpanelOutLow.ButtonPressEvent += HandleColorPanelButtonPressEvent;
 			colorpanelOutHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
+		}
+		
+		private UnaryPixelOps.Level Levels {
+			get {
+				if (EffectData == null)
+					throw new InvalidOperationException ("Effect data not set on levels dialog.");
+				
+				return EffectData.Levels;
+			}
+			
+			set {
+				if (value == null)
+					throw new ArgumentNullException ();
+				
+				EffectData.Levels = value;
+			}
+		}		
+		
+		private void UpdateLivePreview ()
+		{
+			if (EffectData != null)
+				EffectData.FirePropertyChanged ("Levels");
 		}
 		
 		private void UpdateInputHistogram ()
@@ -114,15 +134,15 @@ namespace Pinta
 			disable_updating = true;
 			
 			spinInHigh.Value = MaskAvg (Levels.ColorInHigh);
-            spinInLow.Value = MaskAvg (Levels.ColorInLow);
+            		spinInLow.Value = MaskAvg (Levels.ColorInLow);
 			
 			float gamma = MaskGamma ();
-            int lo = MaskAvg (Levels.ColorOutLow);
-            int hi = MaskAvg (Levels.ColorOutHigh);
+            		int lo = MaskAvg (Levels.ColorOutLow);
+            		int hi = MaskAvg (Levels.ColorOutHigh);
 			
-            spinOutHigh.Value = hi;
-            spinOutGamma.Value = gamma;
-            spinOutLow.Value = lo;
+	            	spinOutHigh.Value = hi;
+	            	spinOutGamma.Value = gamma;
+	            	spinOutLow.Value = lo;
 			
 			disable_updating = false;
 		}
@@ -137,7 +157,7 @@ namespace Pinta
 
 		private void HandleSpinInLowValueChanged (object sender, EventArgs e)
 		{
-			gradientInput.SetValue (0, spinInLow.ValueAsInt);
+			gradientInput.SetValue (0, spinInLow.ValueAsInt);			
 		}
 
 		private void HandleSpinInHighValueChanged (object sender, EventArgs e)
@@ -171,103 +191,103 @@ namespace Pinta
 		
 		private int MaskAvg(ColorBgra before) 
 		{
-            int count = 0, total = 0;   
-
-            for (int c = 0; c < 3; c++) {
-                if (mask [c]) {
-                    total += before [c];
-                    count++;
-                }
-            }
-
-            if (count > 0) {
-                return total / count;
-            } 
-            else {
-                return 0;
-            }
-        }
+	            int count = 0, total = 0;   
+	
+	            for (int c = 0; c < 3; c++) {
+	                if (mask [c]) {
+	                    total += before [c];
+	                    count++;
+	                }
+	            }
+	
+	            if (count > 0) {
+	                return total / count;
+	            } 
+	            else {
+	                return 0;
+	            }
+	        }
 		
 		private ColorBgra UpdateByMask (ColorBgra before, byte val) 
-        {
-            ColorBgra after = before;
-            int average = -1, oldaverage = -1;
+	        {
+	            ColorBgra after = before;
+	            int average = -1, oldaverage = -1;
 
-            if (!(mask [0] || mask [1] || mask [2])) {
-                return before;
-            }
+	            if (!(mask [0] || mask [1] || mask [2])) {
+	                return before;
+	            }
 
-            do {
-                float factor;
+	            do {
+	                float factor;
 
-                oldaverage = average;
-                average = MaskAvg (after);
-
-                if (average == 0) {
-                    break;
-                }
-                factor = (float)val / average;
-
-                for (int c = 0; c < 3; c++) {
-                    if (mask [c]) {
-                        after [c] = (byte)Utility.ClampToByte (after [c] * factor);
-                    }
-                }
-            } while (average != val && oldaverage != average);
-
-            while (average != val) {
-                average = MaskAvg (after);
-                int diff = val - average;
-
-                for (int c = 0; c < 3; c++) {
-                    if (mask [c]) {
-                        after [c] = (byte)Utility.ClampToByte(after [c] + diff);
-                    }
-                }
-            }
-
-            after.A = 255;
-            return after;           
-        }
+	                oldaverage = average;
+	                average = MaskAvg (after);
+	
+	                if (average == 0) {
+	                    break;
+	                }
+	                factor = (float)val / average;
+	
+	                for (int c = 0; c < 3; c++) {
+	                    if (mask [c]) {
+	                        after [c] = (byte)Utility.ClampToByte (after [c] * factor);
+	                    }
+	                }
+	            } while (average != val && oldaverage != average);
+	
+	            while (average != val) {
+	                average = MaskAvg (after);
+	                int diff = val - average;
+	
+	                for (int c = 0; c < 3; c++) {
+	                    if (mask [c]) {
+	                        after [c] = (byte)Utility.ClampToByte(after [c] + diff);
+	                    }
+	                }
+	            }
+	
+	            after.A = 255;
+	            return after;
+        	}
 		
 		private float MaskGamma () 
-        {
-            int count = 0;
-            float total = 0;
+	        {
+	            int count = 0;
+	            float total = 0;
 
-            for (int c = 0; c < 3; c++) {
-                if (mask [c]) {
-                    total += Levels.GetGamma (c);
-                    count++;
-                }
-            }
-
-            if (count > 0) {
-                return total / count;
-            } else {
-                return 1;
-            }
-    
-        }
+	            for (int c = 0; c < 3; c++) {
+	                if (mask [c]) {
+	                    total += Levels.GetGamma (c);
+	                    count++;
+	                }
+	            }
+	
+	            if (count > 0) {
+	                return total / count;
+	            } else {
+	                return 1;
+	            }
+	    
+	        }
 		
 		private void UpdateGammaByMask (float val) 
-        {
-            float average = -1;
+		{
+		    float average = -1;
 
-            if (!(mask [0] || mask [1] || mask [2]))
-                return;
+		    if (!(mask [0] || mask [1] || mask [2]))
+		        return;
 
-            do {
-                average = MaskGamma ();
-                float factor = val / average;
-
-                for (int c = 0; c < 3; c++) {
-                    if (mask [c]) {
-                        Levels.SetGamma (c, factor * Levels.GetGamma (c));
-                    }
-                }
-            } while (Math.Abs (val - average) > 0.001);
-        }
+		    do {
+		        average = MaskGamma ();
+		        float factor = val / average;
+		
+		        for (int c = 0; c < 3; c++) {
+		            if (mask [c]) {
+		                Levels.SetGamma (c, factor * Levels.GetGamma (c));
+		            }
+		        }
+		    } while (Math.Abs (val - average) > 0.001);
+		}
 		
 		private Color GetOutMidColor ()
 		{
@@ -294,11 +314,11 @@ namespace Pinta
 			if(skip_counter == max_skip || !button_down) {
 				
 				Levels.ColorOutHigh = UpdateByMask (Levels.ColorOutHigh, (byte)spinOutHigh.Value);
-	            Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte)spinOutLow.Value);
+	            		Levels.ColorOutLow = UpdateByMask (Levels.ColorOutLow, (byte)spinOutLow.Value);
 				UpdateGammaByMask ((float) spinOutGamma.Value);
 				
-	            Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
-	            Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
+	           		Levels.ColorInHigh = UpdateByMask (Levels.ColorInHigh, (byte)spinInHigh.Value);
+	           		Levels.ColorInLow = UpdateByMask (Levels.ColorInLow, (byte)spinInLow.Value);
 				
 				colorpanelInLow.SetCairoColor (Levels.ColorInLow.ToCairoColor ());
 				colorpanelInHigh.SetCairoColor (Levels.ColorInHigh.ToCairoColor ());
@@ -314,6 +334,8 @@ namespace Pinta
 				
 			GdkWindow.Invalidate ();
 			disable_updating = false;
+			
+			UpdateLivePreview ();
 		}
 		
 		private void HandleGradientButtonPressEvent (object o, ButtonPressEventArgs args)
@@ -375,17 +397,17 @@ namespace Pinta
 		{
 			ColorBgra max = ColorBgra.Black;
 
-            max.Bgra |= mask[0] ? (uint)0xFF0000 : 0;
-            max.Bgra |= mask[1] ? (uint)0xFF00 : 0;
-            max.Bgra |= mask[2] ? (uint)0xFF : 0;
+			max.Bgra |= mask[0] ? (uint)0xFF0000 : 0;
+			max.Bgra |= mask[1] ? (uint)0xFF00 : 0;
+			max.Bgra |= mask[2] ? (uint)0xFF : 0;
 			
 			Color maxcolor = max.ToCairoColor ();
 			gradientInput.MaxColor = maxcolor;
 			gradientOutput.MaxColor = maxcolor;
 			
 			for (int i = 0; i < 3; i++) {
-                histogramInput.SetSelected (i, mask[i]);
-                histogramOutput.SetSelected (i, mask[i]);
+                	histogramInput.SetSelected (i, mask[i]);
+                	histogramOutput.SetSelected (i, mask[i]);
             }
 			
 			GdkWindow.Invalidate ();
@@ -426,7 +448,7 @@ namespace Pinta
 			
 			Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Color");
             
-           	ColorPanelWidget panel = (ColorPanelWidget)sender;
+           		ColorPanelWidget panel = (ColorPanelWidget)sender;
 			csd.ColorSelection.PreviousColor = panel.CairoColor.ToGdkColor ();
 			csd.ColorSelection.CurrentColor = panel.CairoColor.ToGdkColor ();
 			csd.ColorSelection.CurrentAlpha = panel.CairoColor.GdkColorAlpha ();	
