@@ -56,7 +56,7 @@ namespace Pinta.Core
 		}
 
 		public override string StatusBarText {
-			get { return "Write text."; }
+			get { return "Left click to place cursor, then type desired text. Text color is primary color."; }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 

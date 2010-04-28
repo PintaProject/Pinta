@@ -58,6 +58,10 @@ namespace Pinta.Core
 		public override string Icon {
 			get { return "Tools.Gradient.png"; }
 		}
+
+		public override string StatusBarText {
+			get { return "Click and drag to draw gradient from primary to secondary color.  Right click to reverse."; }
+		}
 		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
 		protected override bool ShowAlphaBlendingButton { get { return true; } }
