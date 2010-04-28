@@ -184,7 +184,7 @@ namespace Pinta.Core
 			distort_sub_menu.Append (Pixelate.CreateMenuItem ());
 			distort_sub_menu.Append (FrostedGlass.CreateMenuItem ());
 			distort_sub_menu.Append (Bulge.CreateMenuItem ());
-			distort_sub_menu.Append (Dents.CreateMenuItem ());
+			//distort_sub_menu.Append (Dents.CreateMenuItem ());
 			distort_sub_menu.Append (PolarInversion.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());
