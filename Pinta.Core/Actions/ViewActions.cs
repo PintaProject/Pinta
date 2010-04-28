@@ -87,11 +87,11 @@ namespace Pinta.Core
 			menu.Append (ActualSize.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
 			menu.Append (PixelGrid.CreateMenuItem ());
-			menu.Append (Rulers.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (Pixels.CreateMenuItem ());
-			menu.Append (Inches.CreateMenuItem ());
-			menu.Append (Centimeters.CreateMenuItem ());
+			//menu.Append (Rulers.CreateMenuItem ());
+			//menu.AppendSeparator ();
+			//menu.Append (Pixels.CreateMenuItem ());
+			//menu.Append (Inches.CreateMenuItem ());
+			//menu.Append (Centimeters.CreateMenuItem ());
 		}
 		
 		public void CreateToolBar (Gtk.Toolbar toolbar)
@@ -102,9 +102,9 @@ namespace Pinta.Core
 			toolbar.AppendItem (ZoomIn.CreateToolBarItem ());
 			toolbar.AppendItem (new Gtk.SeparatorToolItem ());
 			toolbar.AppendItem (PixelGrid.CreateToolBarItem ());
-			toolbar.AppendItem (Rulers.CreateToolBarItem ());
-			toolbar.AppendItem (new ToolBarLabel (" Units:  "));
-			toolbar.AppendItem (UnitComboBox);
+			//toolbar.AppendItem (Rulers.CreateToolBarItem ());
+			//toolbar.AppendItem (new ToolBarLabel (" Units:  "));
+			//toolbar.AppendItem (UnitComboBox);
 		}
 		
 		public void RegisterHandlers ()
