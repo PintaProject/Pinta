@@ -203,64 +203,25 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Table" id="table1">
+                  <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
                     <property name="MemberName" />
-                    <property name="NRows">3</property>
-                    <property name="NColumns">2</property>
-                    <property name="RowSpacing">2</property>
-                    <property name="ColumnSpacing">2</property>
+                    <property name="ShadowType">EtchedIn</property>
                     <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+                      <widget class="Gtk.Viewport" id="GtkViewport1">
                         <property name="MemberName" />
-                        <property name="ShadowType">In</property>
+                        <property name="ShadowType">None</property>
                         <child>
-                          <widget class="Gtk.Viewport" id="GtkViewport1">
+                          <widget class="Pinta.Gui.Widgets.PintaCanvas" id="drawingarea1">
                             <property name="MemberName" />
-                            <property name="ShadowType">None</property>
-                            <child>
-                              <widget class="Pinta.Gui.Widgets.PintaCanvas" id="drawingarea1">
-                                <property name="MemberName" />
-                                <property name="CanDefault">True</property>
-                                <property name="HasDefault">True</property>
-                                <property name="CanFocus">True</property>
-                                <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
-                                <property name="ShowScrollbars">True</property>
-                                <signal name="ButtonPressEvent" handler="OnDrawingarea1ButtonPressEvent" />
-                                <signal name="ButtonReleaseEvent" handler="OnDrawingarea1ButtonReleaseEvent" />
-                                <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
-                              </widget>
-                            </child>
+                            <property name="CanDefault">True</property>
+                            <property name="HasDefault">True</property>
+                            <property name="CanFocus">True</property>
+                            <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
+                            <property name="ShowScrollbars">True</property>
+                            <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
                           </widget>
                         </child>
                       </widget>
-                      <packing>
-                        <property name="TopAttach">1</property>
-                        <property name="BottomAttach">2</property>
-                        <property name="LeftAttach">1</property>
-                        <property name="RightAttach">2</property>
-                        <property name="AutoSize">True</property>
-                        <property name="XExpand">True</property>
-                        <property name="XFill">True</property>
-                        <property name="XShrink">False</property>
-                        <property name="YExpand">True</property>
-                        <property name="YFill">True</property>
-                        <property name="YShrink">False</property>
-                      </packing>
                     </child>
                   </widget>
                   <packing>

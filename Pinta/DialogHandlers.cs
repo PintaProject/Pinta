@@ -84,12 +84,6 @@ namespace Pinta
 			PintaCore.Actions.Effects.Median.Activated += HandleEffectActivated<MedianEffect>;
 			PintaCore.Actions.Effects.ReduceNoise.Activated += HandleEffectActivated<ReduceNoiseEffect>;
 			PintaCore.Actions.Effects.Outline.Activated += HandleEffectActivated<OutlineEffect>;
-			
-			PintaCore.Actions.View.Rulers.Toggled += HandlePintaCoreActionsViewRulersToggled;
-			PintaCore.Actions.View.Pixels.Activated += HandlePixelsActivated;
-			PintaCore.Actions.View.Inches.Activated += HandleInchesActivated;
-			PintaCore.Actions.View.Centimeters.Activated += HandleCentimetersActivated;
-			PintaCore.Actions.View.UnitComboBox.ComboBox.Changed += HandleUnitComboBoxComboBoxChanged;
 		}
 
 		#region Handlers
@@ -276,46 +270,6 @@ namespace Pinta
 		{
 			PintaCore.Actions.Adjustments.PerformEffect (new LevelsEffect ());
 		}
-
-		private void HandlePintaCoreActionsViewRulersToggled (object sender, EventArgs e)
-		{
-			if (((ToggleAction)sender).Active)
-				main_window.ShowRulers ();
-			else
-				main_window.HideRulers ();
-		}
-
-		private void HandleUnitComboBoxComboBoxChanged (object sender, EventArgs e)
-		{
-			switch (PintaCore.Actions.View.UnitComboBox.ComboBox.Active) {
-				case 0://pixels
-					main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
-				break;
-				case 1://inches
-					main_window.ChangeRulersUnit (Gtk.MetricType.Inches);
-				break;
-				case 2://centimeters
-					main_window.ChangeRulersUnit (Gtk.MetricType.Centimeters);
-				break;
-				
-			}
-		}
-
-		private void HandleCentimetersActivated (object sender, EventArgs e)
-		{
-			main_window.ChangeRulersUnit (Gtk.MetricType.Centimeters);
-		}
-
-		private void HandleInchesActivated (object sender, EventArgs e)
-		{
-			main_window.ChangeRulersUnit (Gtk.MetricType.Inches);
-		}
-
-		private void HandlePixelsActivated (object sender, EventArgs e)
-		{
-			main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
-		}
-
 		#endregion
 	}
 }

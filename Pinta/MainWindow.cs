@@ -115,21 +115,6 @@ namespace Pinta
 			
 			WindowAction.Visible = false;
 			
-			hruler = new HRuler ();
-			hruler.Metric = MetricType.Pixels;
-			table1.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-			
-			vruler = new VRuler ();
-			vruler.Metric = MetricType.Pixels;
-			table1.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-			
-			UpdateRulerRange ();
-			
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
-			
-			PintaCore.Actions.View.ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
-			PintaCore.Chrome.DrawingArea.ScrollEvent += HandleViewScrollEvent;
-			
 			if (Platform.GetOS () == Platform.OS.Mac) {
 				try {
 					//enable the global key handler for keyboard shortcuts
@@ -333,65 +318,6 @@ namespace Pinta
 			
 			if (PintaCore.Workspace.PointInCanvas (point))
 				CursorPositionLabel.Text = string.Format ("{0}, {1}", (int)point.X, (int)point.Y);
-			
-			hruler.Position = point.X;
-			vruler.Position = point.Y;
-		}
-		#endregion
-
-		#region rulers
-		private HRuler hruler;
-		private VRuler vruler;
-
-		public void ShowRulers ()
-		{
-			hruler.Show ();
-			vruler.Show ();
-		}
-
-		public void HideRulers ()
-		{
-			hruler.Hide ();
-			vruler.Hide ();
-		}
-
-		public void ChangeRulersUnit (Gtk.MetricType metric)
-		{
-			hruler.Metric = metric;
-			vruler.Metric = metric;
-			switch (metric) {
-			case Gtk.MetricType.Pixels:
-				if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 0)
-					PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 0;
-				break;
-			case Gtk.MetricType.Inches:
-				if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 1)
-					PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 1;
-				break;
-			case Gtk.MetricType.Centimeters:
-				if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 2)
-					PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 2;
-				break;
-				
-			}
-		}
-
-
-		void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
-		{
-			UpdateRulerRange ();
-		}
-
-		void HandleViewScrollEvent (object o, ScrollEventArgs args)
-		{
-			UpdateRulerRange ();
-		}
-
-		void UpdateRulerRange ()
-		{
-			Cairo.PointD p = PintaCore.Workspace.WindowPointToCanvas (PintaCore.Chrome.DrawingArea.Allocation.Width, PintaCore.Chrome.DrawingArea.Allocation.Height);
-			hruler.SetRange (-PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale, p.X, 0, p.X);
-			vruler.SetRange (-PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale, p.Y, 0, p.Y);
 		}
 		#endregion
 	}
