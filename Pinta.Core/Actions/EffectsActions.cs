@@ -44,12 +44,10 @@ namespace Pinta.Core
 		public Gtk.Action PencilSketch { get; private set; }
 		public Gtk.Action Fragment { get; private set; }
 		public Gtk.Action GaussianBlur { get; private set; }
-		public Gtk.Action SurfaceBlur { get; private set; }
 		public Gtk.Action ZoomBlur { get; private set; }
 		public Gtk.Action Unfocus { get; private set; }
 		public Gtk.Action RadialBlur { get; private set; }
 		public Gtk.Action Bulge { get; private set; }
-		public Gtk.Action Dents { get; private set; }
 		public Gtk.Action PolarInversion { get; private set; }
 		public Gtk.Action MotionBlur { get; private set; }
 		public Gtk.Action Twist { get; private set; }
@@ -81,11 +79,9 @@ namespace Pinta.Core
 			fact.Add ("Menu.Effects.Blurs.GaussianBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.GaussianBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.MotionBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.MotionBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.RadialBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.RadialBlur.png")));
-			fact.Add ("Menu.Effects.Blurs.SurfaceBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.SurfaceBlur.png")));
 			fact.Add ("Menu.Effects.Blurs.Unfocus.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.Unfocus.png")));
 			fact.Add ("Menu.Effects.Blurs.ZoomBlur.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Blurs.ZoomBlur.png")));
 			fact.Add ("Menu.Effects.Distort.Bulge.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Bulge.png")));
-			fact.Add ("Menu.Effects.Distort.Dents.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Dents.png")));
 			fact.Add ("Menu.Effects.Distort.PolarInversion.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.PolarInversion.png")));
 			fact.Add ("Menu.Effects.Distort.Twist.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Twist.png")));
 			fact.Add ("Menu.Effects.Distort.Tile.png", new IconSet (PintaCore.Resources.GetIcon ("Menu.Effects.Distort.Tile.png")));
@@ -123,7 +119,6 @@ namespace Pinta.Core
 			PencilSketch = new Gtk.Action ("PencilSketch", Mono.Unix.Catalog.GetString ("Pencil Sketch..."), null, "Menu.Effects.Artistic.PencilSketch.png");
 			Fragment = new Gtk.Action ("Fragment", Mono.Unix.Catalog.GetString ("Fragment..."), null, "Menu.Effects.Blurs.Fragment.png");
 			GaussianBlur = new Gtk.Action ("GaussianBlur", Mono.Unix.Catalog.GetString ("Gaussian Blur..."), null, "Menu.Effects.Blurs.GaussianBlur.png");
-			SurfaceBlur = new Gtk.Action ("SurfaceBlur", Mono.Unix.Catalog.GetString ("Surface Blur..."), null, "Menu.Effects.Blurs.SurfaceBlur.png");
 			ZoomBlur = new Gtk.Action ("ZoomBlur", Mono.Unix.Catalog.GetString ("Zoom Blur..."), null, "Menu.Effects.Blurs.ZoomBlur.png");
 			Unfocus = new Gtk.Action ("Unfocus", Mono.Unix.Catalog.GetString ("Unfocus..."), null, "Menu.Effects.Blurs.Unfocus.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
@@ -133,7 +128,6 @@ namespace Pinta.Core
 			Tile = new Gtk.Action ("Tile", Mono.Unix.Catalog.GetString ("Tile Reflection..."), null, "Menu.Effects.Distort.Tile.png");
 			FrostedGlass = new Gtk.Action ("FrostedGlass", Mono.Unix.Catalog.GetString ("Frosted Glass..."), null, "Menu.Effects.Distort.FrostedGlass.png");
 			Pixelate = new Gtk.Action ("Pixelate", Mono.Unix.Catalog.GetString ("Pixelate..."), null, "Menu.Effects.Distort.Pixelate.png");
-			Dents = new Gtk.Action ("Dents", Mono.Unix.Catalog.GetString ("Dents..."), null, "Menu.Effects.Distort.Dents.png");
 			PolarInversion = new Gtk.Action ("PolarInversion", Mono.Unix.Catalog.GetString ("Polar Inversion..."), null, "Menu.Effects.Distort.PolarInversion.png");
 			MotionBlur = new Gtk.Action ("MotionBlur", Mono.Unix.Catalog.GetString ("Motion Blur..."), null, "Menu.Effects.Blurs.MotionBlur.png");
 			Glow = new Gtk.Action ("Glow", Mono.Unix.Catalog.GetString ("Glow..."), null, "Menu.Effects.Photo.Glow.png");
@@ -173,7 +167,6 @@ namespace Pinta.Core
 		 
 			blur_sub_menu.Append (Fragment.CreateMenuItem ());
 			blur_sub_menu.Append (GaussianBlur.CreateMenuItem ());
-			blur_sub_menu.Append (SurfaceBlur.CreateMenuItem ());
 			blur_sub_menu.Append (Unfocus.CreateMenuItem ());
 			blur_sub_menu.Append (ZoomBlur.CreateMenuItem ());
 			blur_sub_menu.Append (RadialBlur.CreateMenuItem ());
@@ -184,7 +177,6 @@ namespace Pinta.Core
 			distort_sub_menu.Append (Pixelate.CreateMenuItem ());
 			distort_sub_menu.Append (FrostedGlass.CreateMenuItem ());
 			distort_sub_menu.Append (Bulge.CreateMenuItem ());
-			//distort_sub_menu.Append (Dents.CreateMenuItem ());
 			distort_sub_menu.Append (PolarInversion.CreateMenuItem ());
 			
 			photo_sub_menu.Append (Glow.CreateMenuItem ());

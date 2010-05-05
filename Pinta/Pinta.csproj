@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -57,7 +57,6 @@
     <Compile Include="ConfigurableEffects\MedianEffect.cs" />
     <Compile Include="ConfigurableEffects\UnfocusEffect.cs" />
     <Compile Include="ConfigurableEffects\LocalHistogramEffect.cs" />
-    <Compile Include="ConfigurableEffects\SurfaceBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\PencilSketchEffect.cs" />
     <Compile Include="ConfigurableEffects\OilPaintingEffect.cs" />
     <Compile Include="ConfigurableEffects\GlowEffect.cs" />
@@ -117,7 +116,6 @@
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="ConfigurableEffects\BulgeEffect.cs" />
-    <Compile Include="ConfigurableEffects\DentsEffect.cs" />
     <Compile Include="ConfigurableEffects\WarpEffect.cs" />
     <Compile Include="ConfigurableEffects\PolarInversionEffect.cs" />
     <Compile Include="ConfigurableEffects\PerlinNoise2D.cs" />
