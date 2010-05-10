@@ -36,9 +36,11 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class RecolorTool : BaseBrushTool
 	{
 		protected ToolBarLabel tolerance_label;
@@ -58,6 +60,7 @@ namespace Pinta.Core
 		public override string StatusBarText { get { return "Left click to replace the secondary color with the primary color."; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.R; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
+		public override int Priority { get { return 35; } }
 		#endregion
 
 		#region ToolBar

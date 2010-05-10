@@ -28,6 +28,10 @@ using System;
 using Gdk;
 using Gtk;
 using Pinta.Core;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pinta
 {
@@ -37,8 +41,12 @@ namespace Pinta
 
 		ProgressDialog progress_dialog;
 
+		[ImportMany]
+		public IEnumerable<BaseTool> Tools { get; set; }
+
 		public MainWindow () : base(Gtk.WindowType.Toplevel)
 		{
+			DateTime start = DateTime.Now;
 			Build ();
 			
 			// Initialize interface things
@@ -49,6 +57,8 @@ namespace Pinta
 			
 			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this, progress_dialog);
 			colorpalettewidget1.Initialize ();
+			
+			Compose ();
 			
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			CreateToolBox ();
@@ -136,6 +146,18 @@ namespace Pinta
 					// If things don't work out, just use a normal menu.
 				}
 			}
+			
+			Console.WriteLine ("Total: {0}", DateTime.Now - start);
+		}
+
+		private void Compose ()
+		{
+			DateTime start = DateTime.Now;
+			string ext_dir = System.IO.Path.Combine (System.IO.Path.GetDirectoryName (System.Reflection.Assembly.GetEntryAssembly ().Location), "Extensions");
+			var catalog = new DirectoryCatalog (ext_dir);
+			var container = new CompositionContainer (catalog);
+			container.ComposeParts (this);
+			Console.WriteLine ("Compose: {0}", DateTime.Now - start);
 		}
 
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
@@ -230,32 +252,13 @@ namespace Pinta
 		private void CreateToolBox ()
 		{
 			// Create our tools
-			PintaCore.Tools.AddTool (new RectangleSelectTool ());
-			PintaCore.Tools.AddTool (new MoveSelectedTool ());
-			PintaCore.Tools.AddTool (new LassoSelectTool ());
-			PintaCore.Tools.AddTool (new MoveSelectionTool ());
-			PintaCore.Tools.AddTool (new EllipseSelectTool ());
-			PintaCore.Tools.AddTool (new ZoomTool ());
-			PintaCore.Tools.AddTool (new MagicWandTool ());
-			PintaCore.Tools.AddTool (new PanTool ());
-			PintaCore.Tools.AddTool (new PaintBucketTool ());
-			PintaCore.Tools.AddTool (new GradientTool ());
+			foreach (BaseTool tool in Tools.OrderBy (t => t.Priority))
+				PintaCore.Tools.AddTool (tool);
 			
-			BaseTool pb = new PaintBrushTool ();
-			PintaCore.Tools.AddTool (pb);
-			PintaCore.Tools.AddTool (new EraserTool ());
-			PintaCore.Tools.SetCurrentTool (pb);
-			
-			PintaCore.Tools.AddTool (new PencilTool ());
-			PintaCore.Tools.AddTool (new ColorPickerTool ());
-			PintaCore.Tools.AddTool (new CloneStampTool ());
-			PintaCore.Tools.AddTool (new RecolorTool ());
-			PintaCore.Tools.AddTool (new TextTool ());
-			PintaCore.Tools.AddTool (new LineCurveTool ());
-			PintaCore.Tools.AddTool (new RectangleTool ());
-			PintaCore.Tools.AddTool (new RoundedRectangleTool ());
-			PintaCore.Tools.AddTool (new EllipseTool ());
-			PintaCore.Tools.AddTool (new FreeformShapeTool ());
+			// Try to set the paint brush as the default tool, if that
+			// fails, set the first thing we can find.
+			if (!PintaCore.Tools.SetCurrentTool ("PaintBrush"))
+				PintaCore.Tools.SetCurrentTool (Tools.First ());
 			
 			bool even = true;
 			

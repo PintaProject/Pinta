@@ -26,8 +26,9 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	public enum eGradientType
 	{
@@ -37,13 +38,8 @@ namespace Pinta.Core
 		Radial,
 		Conical
 	}
-	
-	public enum eGradientColorMode
-	{
-		Color,
-		Transparency
-	}
 
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class GradientTool : BaseTool
 	{
 		Cairo.PointD startpoint;
@@ -65,7 +61,8 @@ namespace Pinta.Core
 		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
 		protected override bool ShowAlphaBlendingButton { get { return true; } }
-		
+		public override int Priority { get { return 23; } }
+
 		#region mouse
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
@@ -92,19 +89,19 @@ namespace Pinta.Core
 				GradientRenderer gr = null;
 				switch (GradientType) {
 					case eGradientType.Linear:
-						gr = new GradientRenderers.LinearClamped (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+						gr = new GradientRenderers.LinearClamped (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.LinearReflected:
-						gr = new GradientRenderers.LinearReflected (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+						gr = new GradientRenderers.LinearReflected (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.Radial:
-						gr = new GradientRenderers.Radial (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+						gr = new GradientRenderers.Radial (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.Diamond:
-						gr = new GradientRenderers.LinearDiamond (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+						gr = new GradientRenderers.LinearDiamond (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
 					break;
 					case eGradientType.Conical:
-						gr = new GradientRenderers.Conical (GradientColorMode  == eGradientColorMode.Transparency, normalBlendOp);
+						gr = new GradientRenderers.Conical (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
 					break;
 				}
 				if (button == 3) {//right
@@ -244,14 +241,14 @@ namespace Pinta.Core
 			}
 		}
 	
-		public eGradientColorMode GradientColorMode {
+		public GradientColorMode GradientColorMode {
 			get {
 				if (color_mode_gradient_btn.Active)
-					return eGradientColorMode.Color;
+					return GradientColorMode.Color;
 				else if (transparency_mode_gradient_btn.Active)
-					return eGradientColorMode.Transparency;
+					return GradientColorMode.Transparency;
 				else
-					return eGradientColorMode.Color;
+					return GradientColorMode.Color;
 			}
 		}
 		#endregion

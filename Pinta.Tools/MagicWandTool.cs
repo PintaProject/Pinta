@@ -26,9 +26,11 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class MagicWandTool : FloodTool
 	{
 		private CombineMode combineMode;
@@ -54,6 +56,7 @@ namespace Pinta.Core
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.MagicWand.png"), 0, 0); }
 		}
+		public override int Priority { get { return 17; } }
 
 		private enum CombineMode
 		{

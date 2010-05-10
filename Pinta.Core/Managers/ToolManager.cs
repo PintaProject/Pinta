@@ -111,12 +111,16 @@ namespace Pinta.Core
 			PintaCore.Chrome.SetStatusBarText (string.Format (" {0}: {1}", tool.Name, tool.StatusBarText));
 		}
 
-		public void SetCurrentTool (string tool)
+		public bool SetCurrentTool (string tool)
 		{
 			BaseTool t = FindTool (tool);
 			
-			if (t != null)
+			if (t != null) {
 				SetCurrentTool (t);
+				return true;
+			}
+			
+			return false;
 		}
 		
 		public void SetCurrentTool (Gdk.Key shortcut)

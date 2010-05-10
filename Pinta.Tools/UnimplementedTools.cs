@@ -1,5 +1,5 @@
 // 
-// EllipseTool.cs
+// UnimplementedTools.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,48 +25,26 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
-	public class EllipseTool : ShapeTool
+	// This is just to get them to show up in the toolbox
+	// until they get implemented
+
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	public class CloneStampTool : BaseTool
 	{
 		public override string Name {
-			get { return "Ellipse"; }
+			get { return "Clone Stamp"; }
 		}
 		public override string Icon {
-			get { return "Tools.Ellipse.png"; }
+			get { return "Tools.CloneStamp.png"; }
 		}
-		public override string StatusBarText {
-			get { return "Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."; }
+		public override bool Enabled {
+			get { return false; }
 		}
-		
-		public EllipseTool ()
-		{
-		}
-		
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
-		{
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.Antialias = Antialias.Subpixel;
-				
-				dirty = rect;
-				
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillEllipse (rect, outline_color);
-				else
-					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
-			}
-			
-			return dirty;
-		}
+		public override int Priority { get { return 33; } }
 	}
+			
 }

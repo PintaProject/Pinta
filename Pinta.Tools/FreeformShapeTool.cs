@@ -27,12 +27,13 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class FreeformShapeTool : BaseBrushTool
 	{
-
 		private Point last_point = point_empty;
 
 		protected ToolBarImage fill_outline_image;
@@ -53,6 +54,7 @@ namespace Pinta.Core
 		public override string Icon { get { return "Tools.FreeformShape.png"; } }
 		public override string StatusBarText { get { return "Left click to draw with primary color, right click to draw with secondary color"; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
+		public override int Priority { get { return 47; } }
 		#endregion
 
 		#region ToolBar

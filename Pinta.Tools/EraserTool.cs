@@ -27,9 +27,11 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class EraserTool : BaseBrushTool
 	{		
 		private Point last_point = point_empty;
@@ -43,6 +45,7 @@ namespace Pinta.Core
 		public override string Icon { get { return "Tools.Eraser.png"; } }
 		public override string StatusBarText { get { return "Click and drag to erase a portion of the image"; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
+		public override int Priority { get { return 27; } }
 		#endregion
 
 		#region Mouse Handlers

@@ -26,9 +26,11 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class RoundedRectangleTool : ShapeTool
 	{		
 		protected ToolBarComboBox radius;
@@ -45,7 +47,8 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain."; }
 		}
-		
+		public override int Priority { get { return 43; } }
+
 		public double Radius {
 			get {
 				double rad;

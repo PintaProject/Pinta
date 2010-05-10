@@ -37,8 +37,9 @@
 using System;
 using Cairo;
 using System.Collections.Generic;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	public abstract class FloodTool : BaseTool
 	{

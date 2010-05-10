@@ -58,6 +58,7 @@ namespace Pinta.Core
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 		public virtual bool UseAntialiasing { get { return ShowAntialiasingButton && antialiasing_btn.Active; } }
 		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && alphablending_btn.Active; } }
+		public virtual int Priority { get { return 75; } }
 
 		protected virtual bool ShowAntialiasingButton { get { return false; } }
 		protected virtual bool ShowAlphaBlendingButton { get { return false; } }

@@ -27,8 +27,9 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	public abstract class SelectTool : ShapeTool
 	{

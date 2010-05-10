@@ -26,9 +26,11 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class ColorPickerTool : BaseTool
 	{
 		private int button_down = 0;
@@ -47,6 +49,7 @@ namespace Pinta.Core
 			get { return "Left click to set primary color. Right click to set secondary color."; }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.K; } }
+		public override int Priority { get { return 31; } }
 		#endregion
 
 		#region ToolBar

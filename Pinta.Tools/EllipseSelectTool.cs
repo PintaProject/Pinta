@@ -26,9 +26,11 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class EllipseSelectTool : SelectTool
 	{
 		public override string Name {
@@ -40,6 +42,7 @@ namespace Pinta.Core
 		public override string StatusBarText {
 			get { return "Click and drag to draw an elliptical selection. Hold shift to constrain to a circle."; }
 		}
+		public override int Priority { get { return 13; } }
 
 		protected override Rectangle DrawShape (Rectangle r, Layer l)
 		{

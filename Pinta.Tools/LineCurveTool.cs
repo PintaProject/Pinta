@@ -1,5 +1,5 @@
 // 
-// UnimplementedTools.cs
+// LineCurveTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,23 +25,43 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
-	// This is just to get them to show up in the toolbox
-	// until they get implemented
-			
-	public class CloneStampTool : BaseTool
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	public class LineCurveTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Clone Stamp"; }
+			get { return "Line"; }
 		}
 		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
+			get { return "Tools.Line.png"; }
 		}
-		public override bool Enabled {
+		public override string StatusBarText {
+			get { return "Left click to draw with primary color, right click for secondary color"; }
+		}
+		protected override bool ShowStrokeComboBox {
 			get { return false; }
 		}
-	}
+		public override int Priority { get { return 39; } }
+
+		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		{
+			Rectangle dirty;
 			
+			using (Context g = new Context (l.Surface)) {
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
+					
+				g.Antialias = Antialias.Subpixel;
+
+				dirty = g.DrawLine (shape_origin, current_point , outline_color, BrushWidth);
+			}
+			
+			return dirty;
+		}
+	}
 }

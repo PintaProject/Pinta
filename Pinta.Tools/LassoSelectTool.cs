@@ -27,9 +27,11 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class LassoSelectTool : SelectTool
 	{
 		private Path path;
@@ -42,6 +44,7 @@ namespace Pinta.Core
 		public override string Name { get { return "Lasso Select"; } }
 		public override string Icon { get { return "Tools.LassoSelect.png"; } }
 		public override string StatusBarText { get { return "Click and drag to draw the outline for a selection area"; } }
+		public override int Priority { get { return 9; } }
 		#endregion
 
 		#region Mouse Handlers

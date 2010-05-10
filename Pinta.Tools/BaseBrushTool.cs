@@ -27,8 +27,9 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	// This is a base class for brush type tools (paintbrush, eraser, etc)
 	public class BaseBrushTool : BaseTool

@@ -27,9 +27,11 @@
 using System;
 using Cairo;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class PencilTool : BaseTool
 	{		
 		private Point last_point = point_empty;
@@ -46,6 +48,7 @@ namespace Pinta.Core
 		public override string Icon { get { return "Tools.Pencil.png"; } }
 		public override string StatusBarText { get { return "Left click to draw freeform, one-pixel wide lines with the primary color, right click to use the secondary color"; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.P; } }
+		public override int Priority { get { return 29; } }
 		#endregion
 
 		#region Mouse Handlers

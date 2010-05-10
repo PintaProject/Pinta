@@ -1,10 +1,10 @@
 // 
-// PaintBucketTool.cs
+// PanTool.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Olivier Dufour
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Olivier Dufour
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,56 +26,51 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
-	public class PaintBucketTool : FloodTool
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	public class PanTool : BaseTool
 	{
-		private Color fill_color;
-		
 		public override string Name {
-			get { return "Paint Bucket"; }
+			get { return "Pan"; }
 		}
 		public override string Icon {
-			get { return "Tools.PaintBucket.png"; }
+			get { return "Tools.Pan.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Left click to fill a region with the primary color, right click to fill with the secondary color."; }
+			get { return "When zoomed in close, click and drag to navigate image."; }
 		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.F; } }
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0); }
+		}
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.H; } }
+		public override int Priority { get { return 19; } }
 
+		private bool active;
+		private PointD last_point;
+		
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
-			if (args.Event.Button == 1)
-				fill_color = PintaCore.Palette.PrimaryColor;
-			else
-				fill_color = PintaCore.Palette.SecondaryColor;
-			
-			base.OnMouseDown (canvas, args, point);
+			// Don't scroll if the whole canvas fits (no scrollbars)
+			if (!PintaCore.Workspace.CanvasFitsInWindow)
+				active = true;
+				
+			last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
 		}
 		
-		protected unsafe override void OnFillRegionComputed (Point[][] polygonSet)
+		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
 		{
-			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayer);
+			active = false;
+		}
 
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				// Reset FillRule to the default
-				g.FillRule = FillRule.Winding;
-				g.AppendPath (g.CreatePolygonPath (polygonSet));
-
-				g.Antialias = Antialias.Subpixel;
-
-				g.Color = fill_color;
-				g.Fill ();
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
+		{
+			if (active) {
+				PintaCore.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
+				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
 			}
-			
-			PintaCore.History.PushNewItem (hist);
-			PintaCore.Workspace.Invalidate ();
 		}
 	}
 }

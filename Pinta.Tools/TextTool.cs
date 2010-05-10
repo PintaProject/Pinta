@@ -8,13 +8,14 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-//using Cairo;
 using System.Collections.Generic;
 using Gdk;
 using Gtk;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class TextTool : BaseTool
 	{
 		private enum EditingMode
@@ -42,6 +43,7 @@ namespace Pinta.Core
 			get { return "Left click to place cursor, then type desired text. Text color is primary color."; }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
+		public override int Priority { get { return 37; } }
 
 
 		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");

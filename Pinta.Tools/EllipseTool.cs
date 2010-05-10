@@ -1,5 +1,5 @@
 // 
-// LineCurveTool.cs
+// EllipseTool.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,22 +26,26 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
-	public class LineCurveTool : ShapeTool
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	public class EllipseTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Line"; }
+			get { return "Ellipse"; }
 		}
 		public override string Icon {
-			get { return "Tools.Line.png"; }
+			get { return "Tools.Ellipse.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Left click to draw with primary color, right click for secondary color"; }
+			get { return "Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."; }
 		}
-		protected override bool ShowStrokeComboBox {
-			get { return false; }
+		public override int Priority { get { return 45; } }
+
+		public EllipseTool ()
+		{
 		}
 		
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
@@ -52,10 +56,17 @@ namespace Pinta.Core
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
-					
-				g.Antialias = Antialias.Subpixel;
 
-				dirty = g.DrawLine (shape_origin, current_point , outline_color, BrushWidth);
+				g.Antialias = Antialias.Subpixel;
+				
+				dirty = rect;
+				
+				if (FillShape && StrokeShape)
+					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
+				else if (FillShape)
+					dirty = g.FillEllipse (rect, outline_color);
+				else
+					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
 			}
 			
 			return dirty;
