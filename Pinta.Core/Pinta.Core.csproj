@@ -113,7 +113,7 @@
     <Compile Include="Effects\Utility.cs" />
     <Compile Include="Effects\HsvColor.cs" />
     <Compile Include="Effects\RgbColor.cs" />
-    <Compile Include="Tools\BaseTool.cs" />
+    <Compile Include="Classes\BaseTool.cs" />
     <Compile Include="Extensions\ToolBarToggleButton.cs" />
     <Compile Include="HistoryItems\UpdateLayerPropertiesHistoryItem.cs" />
     <Compile Include="Classes\ObservableObject.cs" />
