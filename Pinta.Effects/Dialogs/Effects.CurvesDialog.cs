@@ -30,7 +30,7 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Effects
 {
 
 	public partial class CurvesDialog : Gtk.Dialog

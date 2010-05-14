@@ -37,6 +37,7 @@ using System;
 using Cairo;
 
 using Pinta.Gui.Widgets;
+using Pinta.Effects;
 
 namespace Pinta.Core
 {

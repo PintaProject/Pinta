@@ -9,30 +9,38 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Effects
 {
-	public class AutoLevelEffect : BaseEffect
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	public class InvertColorsEffect : BaseEffect
 	{
-		UnaryPixelOps.Level op;
+		UnaryPixelOp op = new UnaryPixelOps.Invert ();
 
 		public override string Icon {
-			get { return "Menu.Adjustments.AutoLevel.png"; }
+			get { return "Menu.Adjustments.InvertColors.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Auto Level"); }
+			get { return Mono.Unix.Catalog.GetString ("Invert Colors"); }
 		}
 
+		public override EffectAdjustment EffectOrAdjustment {
+			get { return EffectAdjustment.Adjustment; }
+		}
+		
+		public override int Priority {
+			get { return 30; }
+		}
+
+		public override Gdk.Key AdjustmentMenuKey {
+			get { return Gdk.Key.I; }
+		}
+		
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			HistogramRgb histogram = new HistogramRgb ();
-			histogram.UpdateHistogram (src, new Gdk.Rectangle (0, 0, src.Width, src.Height));
-			
-			op = histogram.MakeLevelsAuto ();
-
-			if (op.isValid)
-				op.Apply (dest, src, rois);
+			op.Apply (dest, src, rois);
 		}
 	}
 }

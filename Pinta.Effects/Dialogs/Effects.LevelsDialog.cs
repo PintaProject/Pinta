@@ -39,8 +39,9 @@ using Gtk;
 using Cairo;
 
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
-namespace Pinta
+namespace Pinta.Effects
 {
 	public partial class LevelsDialog : Gtk.Dialog
 	{	

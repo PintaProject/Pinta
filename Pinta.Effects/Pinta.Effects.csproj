@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{71A1C3E0-7343-48FE-BD9A-508929136E92}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pinta.Effects</RootNamespace>
+    <AssemblyName>Pinta.Effects</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Extensions\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Extensions\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition, Version=2010.2.11.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialogs\Effects.LevelsDialog.cs" />
+    <Compile Include="Dialogs\Effects.PosterizeDialog.cs" />
+    <Compile Include="Adjustments\AutoLevelEffect.cs" />
+    <Compile Include="Adjustments\BlackAndWhiteEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Adjustments\BrightnessContrastEffect.cs" />
+    <Compile Include="Adjustments\CurvesEffect.cs" />
+    <Compile Include="Adjustments\HueSaturationEffect.cs" />
+    <Compile Include="Adjustments\InvertColorsEffect.cs" />
+    <Compile Include="Adjustments\LevelsEffect.cs" />
+    <Compile Include="Adjustments\PosterizeEffect.cs" />
+    <Compile Include="Adjustments\SepiaEffect.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="gtk-gui\Pinta.Effects.PosterizeDialog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\EffectHelper.cs" />
+    <Compile Include="gtk-gui\Pinta.Effects.CurvesDialog.cs" />
+    <Compile Include="Dialogs\Effects.CurvesDialog.cs" />
+    <Compile Include="gtk-gui\Pinta.Effects.LevelsDialog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
+      <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
+      <Name>Pinta.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj">
+      <Project>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</Project>
+      <Name>Pinta.Gui.Widgets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
+      <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
+      <Name>Pinta.Resources</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

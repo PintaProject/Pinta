@@ -35,6 +35,10 @@ namespace Pinta.Core
 		public abstract string Text { get; }
 		public virtual bool IsConfigurable { get { return false; } }
 		public EffectData EffectData { get; protected set; }
+		public virtual EffectAdjustment EffectOrAdjustment { get { return EffectAdjustment.Effect; } }
+		public virtual int Priority { get { return 50; } }
+		public virtual Gdk.Key AdjustmentMenuKey { get { return Gdk.Key.Escape; } }
+		public virtual Gdk.ModifierType AdjustmentMenuKeyModifiers { get { return Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask; } }
 		
 		// Return true to perform effect, false to cancel effect
 		public virtual bool LaunchConfiguration ()

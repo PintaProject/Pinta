@@ -9,61 +9,69 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Effects
 {
-	public class LevelsEffect : BaseEffect
-	{		
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	public class PosterizeEffect : BaseEffect
+	{
 		public override string Icon {
-			get { return "Menu.Adjustments.Levels.png"; }
+			get { return "Menu.Adjustments.Posterize.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Levels"); }
+			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
 		}
-		
-		public LevelsData Data { get { return EffectData as LevelsData; } }
-		
-		public LevelsEffect ()
-		{
-			EffectData = new LevelsData ();
+
+		public override EffectAdjustment EffectOrAdjustment {
+			get { return EffectAdjustment.Adjustment; }
 		}
+
+		public override int Priority {
+			get { return 40; }
+		}
+
+		public override Gdk.Key AdjustmentMenuKey {
+			get { return Gdk.Key.P; }
+		}
+
+		public PosterizeData Data { get { return EffectData as PosterizeData; } }
 		
+		public PosterizeEffect ()
+		{
+			EffectData = new PosterizeData ();
+		}
+
 		public override bool LaunchConfiguration ()
-		{			
-			var dialog = new LevelsDialog (Data);
+		{
+			var dialog = new PosterizeDialog ();
 			dialog.Title = Text;
 			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
+			dialog.EffectData = Data;
 			
 			int response = dialog.Run ();
-
-			dialog.Destroy ();
 			
+			dialog.Destroy ();
+
 			return (response == (int)Gtk.ResponseType.Ok);
 		}
-		
+
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			Data.Levels.Apply (dest, src, rois);
-		}
+			var op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
+			op.Apply (dest, src, rois);
+		}		
 	}
 	
-	public class LevelsData : EffectData
+	public class PosterizeData : EffectData
 	{
-		public UnaryPixelOps.Level Levels { get; set; }
-		
-		public LevelsData ()
-		{
-			Levels = new UnaryPixelOps.Level ();
-		}
-		
-		public override EffectData Clone ()
-		{
-			return new LevelsData () { Levels = (UnaryPixelOps.Level) Levels.Clone () };
-		}
+		public int Red = 16;
+		public int Green = 16;
+		public int Blue = 16;
 	}
 }

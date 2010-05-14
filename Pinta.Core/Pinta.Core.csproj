@@ -49,22 +49,19 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Classes\ScaleFactor.cs" />
-    <Compile Include="Effects\AutoLevelEffect.cs" />
     <Compile Include="Effects\BaseEffect.cs" />
     <Compile Include="Effects\BinaryPixelOp.cs" />
     <Compile Include="Effects\BitVector2DSurfaceAdapter.cs" />
-    <Compile Include="Effects\BlackAndWhiteEffect.cs" />
     <Compile Include="Effects\Histogram.cs" />
     <Compile Include="Effects\HistogramRGB.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Effects\IBitVector2D.cs" />
-    <Compile Include="Effects\InvertColorsEffect.cs" />
     <Compile Include="Effects\Scanline.cs" />
-    <Compile Include="Effects\SepiaEffect.cs" />
     <Compile Include="Effects\UserBlendOp.cs" />
     <Compile Include="Effects\UserBlendOps.cs" />
     <Compile Include="Effects\UserBlendOps.Generated.cs" />
+    <Compile Include="Enumerations\EffectAdjustment.cs" />
     <Compile Include="Enumerations\GradientColorMode.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />

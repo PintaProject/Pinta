@@ -43,6 +43,8 @@ namespace Pinta
 
 		[ImportMany]
 		public IEnumerable<BaseTool> Tools { get; set; }
+		[ImportMany]
+		public IEnumerable<BaseEffect> Effects { get; set; }
 
 		public MainWindow () : base(Gtk.WindowType.Toplevel)
 		{
@@ -62,6 +64,7 @@ namespace Pinta
 			
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			CreateToolBox ();
+			LoadEffects ();
 			
 			PintaCore.Actions.CreateMainMenu (menubar1);
 			PintaCore.Actions.CreateToolBar (toolbar1);
@@ -272,6 +275,25 @@ namespace Pinta
 			}
 		}
 
+		private void LoadEffects ()
+		{
+			// Load our adjustments
+			foreach (BaseEffect effect in Effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Adjustment).OrderBy (t => t.Priority)) {
+				// Add icon to IconFactory
+				Gtk.IconFactory fact = new Gtk.IconFactory ();
+				fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
+				fact.AddDefault ();
+
+				// Create a gtk action for each adjustment
+				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text, string.Empty, effect.Icon);
+				PintaCore.Actions.Adjustments.Actions.Add (act);
+				act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (Effects.Where (t => t.GetType ().Name == (sender as Gtk.Action).Name).First ()); };
+				
+				// Create a menu item for each adjustment
+				((Menu)((ImageMenuItem)menubar1.Children[5]).Submenu).Append (act.CreateAcceleratedMenuItem (effect.AdjustmentMenuKey, effect.AdjustmentMenuKeyModifiers));
+			}
+		}
+		
 		void LivePreview_RenderUpdated (object o, LivePreviewRenderUpdatedEventArgs args)
 		{
 			double scale = PintaCore.Workspace.Scale;

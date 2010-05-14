@@ -9,9 +9,11 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Effects
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class SepiaEffect : BaseEffect
 	{
 		UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
@@ -25,6 +27,18 @@ namespace Pinta.Core
 			get { return Mono.Unix.Catalog.GetString ("Sepia"); }
 		}
 		
+		public override EffectAdjustment EffectOrAdjustment {
+			get { return EffectAdjustment.Adjustment; }
+		}
+
+		public override int Priority {
+			get { return 45; }
+		}
+
+		public override Gdk.Key AdjustmentMenuKey {
+			get { return Gdk.Key.E; }
+		}
+
 		public SepiaEffect ()
 		{
 			desat = new UnaryPixelOps.Desaturate ();

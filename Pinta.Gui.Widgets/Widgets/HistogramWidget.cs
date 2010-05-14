@@ -41,7 +41,7 @@ using Cairo;
 
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class HistogramWidget : Gtk.Bin

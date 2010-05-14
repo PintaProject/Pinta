@@ -114,7 +114,6 @@ namespace Pinta.Core
 			Image.RegisterHandlers ();
 			Layers.RegisterHandlers ();
 			View.RegisterHandlers ();
-			Adjustments.RegisterHandlers ();
 			Help.RegisterHandlers ();
 		}
 	}

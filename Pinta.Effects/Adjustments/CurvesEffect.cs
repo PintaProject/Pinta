@@ -11,10 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Effects
 {
-
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class CurvesEffect : BaseEffect
 	{			
 		public override string Icon {
@@ -29,6 +30,18 @@ namespace Pinta.Core
 			get { return true; }
 		}
 		
+		public override EffectAdjustment EffectOrAdjustment {
+			get { return EffectAdjustment.Adjustment; }
+		}
+
+		public override int Priority {
+			get { return 20; }
+		}
+
+		public override Gdk.Key AdjustmentMenuKey {
+			get { return Gdk.Key.M; }
+		}
+
 		public CurvesData Data { get { return EffectData as CurvesData; } }
 		
 		public CurvesEffect ()
@@ -51,6 +64,9 @@ namespace Pinta.Core
 		
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
+			if (Data.ControlPoints == null)
+				return;
+
 			UnaryPixelOp op = MakeUop ();
 			
 			op.Apply (dest, src, rois);

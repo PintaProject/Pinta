@@ -9,24 +9,44 @@
 
 using System;
 using Cairo;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Effects
 {
-	public class BlackAndWhiteEffect : BaseEffect
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	public class AutoLevelEffect : BaseEffect
 	{
-		UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
+		UnaryPixelOps.Level op;
 
 		public override string Icon {
-			get { return "Menu.Adjustments.BlackAndWhite.png"; }
+			get { return "Menu.Adjustments.AutoLevel.png"; }
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Black and White"); }
+			get { return Mono.Unix.Catalog.GetString ("Auto Level"); }
 		}
-		
+
+		public override EffectAdjustment EffectOrAdjustment {
+			get { return EffectAdjustment.Adjustment; }
+		}
+
+		public override int Priority {
+			get { return 5; }
+		}
+
+		public override Gdk.Key AdjustmentMenuKey {
+			get { return Gdk.Key.L; }
+		}
+
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op.Apply (dest, src, rois);
+			HistogramRgb histogram = new HistogramRgb ();
+			histogram.UpdateHistogram (src, new Gdk.Rectangle (0, 0, src.Width, src.Height));
+			
+			op = histogram.MakeLevelsAuto ();
+
+			if (op.isValid)
+				op.Apply (dest, src, rois);
 		}
 	}
 }

@@ -10,9 +10,11 @@
 using System;
 using Cairo;
 using Pinta.Gui.Widgets;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta.Effects
 {
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class BrightnessContrastEffect : BaseEffect
 	{
 		private int multiply;
@@ -29,6 +31,18 @@ namespace Pinta.Core
 
 		public override bool IsConfigurable {
 			get { return true; }
+		}
+
+		public override EffectAdjustment EffectOrAdjustment {
+			get { return EffectAdjustment.Adjustment; }
+		}
+
+		public override int Priority {
+			get { return 15; }
+		}
+
+		public override Gdk.Key AdjustmentMenuKey {
+			get { return Gdk.Key.C; }
 		}
 
 		public BrightnessContrastData Data { get { return EffectData as BrightnessContrastData; } }

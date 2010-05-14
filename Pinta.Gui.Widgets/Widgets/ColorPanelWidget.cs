@@ -1,11 +1,12 @@
 // 
-// PosterizeDialog.cs
+// ColorPanelWidget.cs
 //  
 // Author:
 //      Krzysztof Marecki <marecki.krzysztof@gmail.com>
 // 
-// Copyright (c) 2010 Krzysztof Marecki 
+// Copyright (c) 2010 Krzysztof Marecki
 //
+// 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -25,56 +26,40 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
+
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Gui.Widgets
 {
-	public partial class PosterizeDialog : Gtk.Dialog
+
+
+	[System.ComponentModel.ToolboxItem(true)]
+	public partial class ColorPanelWidget : Gtk.Bin
 	{
-		public int Red {
-			get { return hscalespinRed.ValueAsInt; }
+		public Color CairoColor { get; private set; }
+
+		public ColorPanelWidget ()
+		{
+			this.Build ();
+			
+			ExposeEvent += HandleExposeEvent;
 		}
 		
-		public int Green { 
-			get { return hscalespinGreen.ValueAsInt; }
-		}
-		
-		public int Blue {
-            get { return hscalespinBlue.ValueAsInt; }
+		public void SetCairoColor (Color color)
+		{
+			CairoColor = color;
 		}
 
-		public PosterizeDialog ()
+		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
-			Build ();
-			
-			hscalespinRed.ValueChanged += HandleValueChanged;
-			hscalespinGreen.ValueChanged += HandleValueChanged;
-			hscalespinBlue.ValueChanged += HandleValueChanged;
-		}
-		
-		public PosterizeData EffectData { get; set; }
-		
-		void HandleValueChanged (object sender, EventArgs e)
-		{
-			var widget = sender as HScaleSpinButtonWidget;
-			
-			if (checkLinked.Active)
-				hscalespinGreen.Value = hscalespinBlue.Value = hscalespinRed.Value = widget.Value;
-			
-			UpdateEffectData ();
-		}
-		
-		void UpdateEffectData ()
-		{
-			if (EffectData == null)
-				return;
-			
-			EffectData.Red = hscalespinRed.ValueAsInt;
-			EffectData.Green = hscalespinGreen.ValueAsInt;
-			EffectData.Blue = hscalespinBlue.ValueAsInt;
-			
-			// Only fire event once, even if all properties have changed.
-			EffectData.FirePropertyChanged ("_all_");
+			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
+				
+				int rad = 4;
+				Rectangle rect = Allocation.ToCairoRectangle ();
+				
+				g.FillRoundedRectangle (rect, rad, CairoColor);
+			}
 		}
 	}
 }

@@ -22,6 +22,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -39,13 +40,14 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System.ComponentModel.Composition, Version=2010.2.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="System.ComponentModel.Composition, Version=2010.2.11.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\System.ComponentModel.Composition.dll</HintPath>
     </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -53,7 +55,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurableEffects\BrightnessContrastEffect.cs" />
     <Compile Include="ConfigurableEffects\AddNoiseEffect.cs" />
     <Compile Include="ConfigurableEffects\ZoomBlurEffect.cs" />
     <Compile Include="ConfigurableEffects\ReduceNoiseEffect.cs" />
@@ -67,21 +68,17 @@
     <Compile Include="ConfigurableEffects\GaussianBlurEffect.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConfigurableEffects\HueSaturationEffect.cs" />
     <Compile Include="ConfigurableEffects\InkSketchEffect.cs" />
-    <Compile Include="ConfigurableEffects\PosterizeEffect.cs" />
-    <Compile Include="Dialogs\PosterizeDialog.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.HScaleSpinButtonWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.PosterizeDialog.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Widgets\CellRendererSurface.cs" />
-    <Compile Include="Widgets\ColorPaletteWidget.cs" />
-    <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
+    <Compile Include="Widgets\ColorPaletteWidget.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Widgets\LayersListWidget.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
@@ -92,18 +89,6 @@
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.CurvesDialog.cs" />
-    <Compile Include="ConfigurableEffects\LevelsEffect.cs" />
-    <Compile Include="gtk-gui\Pinta.LevelsDialog.cs" />
-    <Compile Include="Widgets\ColorGradientWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.ColorGradientWidget.cs" />
-    <Compile Include="Widgets\HistogramWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.HistogramWidget.cs" />
-    <Compile Include="Dialogs\LevelsDialog.cs" />
-    <Compile Include="Widgets\ColorPanelWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.ColorPanelWidget.cs" />
-    <Compile Include="Dialogs\CurvesDialog.cs" />
-    <Compile Include="ConfigurableEffects\CurvesEffect.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="ConfigurableEffects\RedEyeRemoveEffect.cs" />
@@ -116,7 +101,6 @@
     <Compile Include="ConfigurableEffects\CloudsEffect.cs" />
     <Compile Include="ConfigurableEffects\JuliaFractalEffect.cs" />
     <Compile Include="ConfigurableEffects\MandelbrotFractalEffect.cs" />
-    <Compile Include="ConfigurableEffects\EffectHelper.cs" />
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="ConfigurableEffects\BulgeEffect.cs" />
@@ -135,6 +119,10 @@
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
       <Name>Pinta.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj">
+      <Project>{71A1C3E0-7343-48FE-BD9A-508929136E92}</Project>
+      <Name>Pinta.Effects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
       <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
