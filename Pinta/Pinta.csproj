@@ -123,6 +123,7 @@
     <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj">
       <Project>{71A1C3E0-7343-48FE-BD9A-508929136E92}</Project>
       <Name>Pinta.Effects</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
       <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
