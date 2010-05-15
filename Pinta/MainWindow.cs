@@ -63,13 +63,14 @@ namespace Pinta
 			Compose ();
 			
 			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
-			CreateToolBox ();
-			LoadEffects ();
 			
 			PintaCore.Actions.CreateMainMenu (menubar1);
 			PintaCore.Actions.CreateToolBar (toolbar1);
 			PintaCore.Actions.Layers.CreateLayerWindowToolBar (toolbar4);
 			PintaCore.Actions.Edit.CreateHistoryWindowToolBar (toolbar2);
+			
+			CreateToolBox ();
+			LoadEffects ();
 			
 			Gtk.Image i = new Gtk.Image (PintaCore.Resources.GetIcon ("StatusBar.CursorXY.png"));
 			i.Show ();
@@ -291,6 +292,19 @@ namespace Pinta
 				
 				// Create a menu item for each adjustment
 				((Menu)((ImageMenuItem)menubar1.Children[5]).Submenu).Append (act.CreateAcceleratedMenuItem (effect.AdjustmentMenuKey, effect.AdjustmentMenuKeyModifiers));
+			}
+
+			// Load our effects
+			foreach (BaseEffect effect in Effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Effect).OrderBy (t => string.Format ("{0}|{1}", t.EffectMenuCategory, t.Text))) {
+				// Add icon to IconFactory
+				Gtk.IconFactory fact = new Gtk.IconFactory ();
+				fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
+				fact.AddDefault ();
+
+				// Create a gtk action and menu item for each effect
+				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text, string.Empty, effect.Icon);
+				PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
+				act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (Effects.Where (t => t.GetType ().Name == (sender as Gtk.Action).Name).First ()); };
 			}
 		}
 		

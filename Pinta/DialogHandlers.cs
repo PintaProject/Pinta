@@ -46,36 +46,6 @@ namespace Pinta
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
-			
-			PintaCore.Actions.Effects.InkSketch.Activated += HandleEffectActivated<InkSketchEffect>;
-			PintaCore.Actions.Effects.OilPainting.Activated += HandleEffectActivated<OilPaintingEffect>;
-			PintaCore.Actions.Effects.PencilSketch.Activated += HandleEffectActivated<PencilSketchEffect>;
-			PintaCore.Actions.Effects.Fragment.Activated += HandleEffectActivated<FragmentEffect>;
-			PintaCore.Actions.Effects.GaussianBlur.Activated += HandleEffectActivated<GaussianBlurEffect>;
-			PintaCore.Actions.Effects.ZoomBlur.Activated += HandleEffectActivated<ZoomBlurEffect>;
-			PintaCore.Actions.Effects.Unfocus.Activated += HandleEffectActivated<UnfocusEffect>;
-			PintaCore.Actions.Effects.RadialBlur.Activated += HandleEffectActivated<RadialBlurEffect>;
-			PintaCore.Actions.Effects.Bulge.Activated += HandleEffectActivated <BulgeEffect>;
-			PintaCore.Actions.Effects.PolarInversion.Activated += HandleEffectActivated <PolarInversionEffect>;
-			PintaCore.Actions.Effects.MotionBlur.Activated += HandleEffectActivated <MotionBlurEffect>;
-			PintaCore.Actions.Effects.Glow.Activated += HandleEffectActivated <GlowEffect>;
-			PintaCore.Actions.Effects.RedEyeRemove.Activated += HandleEffectActivated <RedEyeRemoveEffect>;
-			PintaCore.Actions.Effects.Sharpen.Activated += HandleEffectActivated <SharpenEffect>;
-			PintaCore.Actions.Effects.SoftenPortrait.Activated += HandleEffectActivated <SoftenPortraitEffect>;
-			PintaCore.Actions.Effects.Clouds.Activated += HandleEffectActivated<CloudsEffect>;
-			PintaCore.Actions.Effects.JuliaFractal.Activated += HandleEffectActivated<JuliaFractalEffect>;
-			PintaCore.Actions.Effects.MandelbrotFractal.Activated += HandleEffectActivated<MandelbrotFractalEffect>;
-			PintaCore.Actions.Effects.EdgeDetect.Activated += HandleEffectActivated <EdgeDetectEffect>;
-			PintaCore.Actions.Effects.Twist.Activated += HandleEffectActivated<TwistEffect>;
-			PintaCore.Actions.Effects.Tile.Activated += HandleEffectActivated<TileEffect>;
-			PintaCore.Actions.Effects.Pixelate.Activated += HandleEffectActivated<PixelateEffect>;
-			PintaCore.Actions.Effects.FrostedGlass.Activated += HandleEffectActivated<FrostedGlassEffect>;
-			PintaCore.Actions.Effects.Relief.Activated += HandleEffectActivated <ReliefEffect>;
-			PintaCore.Actions.Effects.Emboss.Activated += HandleEffectActivated<EmbossEffect>;
-			PintaCore.Actions.Effects.AddNoise.Activated += HandleEffectActivated<AddNoiseEffect>;
-			PintaCore.Actions.Effects.Median.Activated += HandleEffectActivated<MedianEffect>;
-			PintaCore.Actions.Effects.ReduceNoise.Activated += HandleEffectActivated<ReduceNoiseEffect>;
-			PintaCore.Actions.Effects.Outline.Activated += HandleEffectActivated<OutlineEffect>;
 		}
 
 		#region Handlers
@@ -245,13 +215,6 @@ namespace Pinta
 			
 			return ret;
 		}		
-		
-		private void HandleEffectActivated<T> (object sender, EventArgs e)
-			where T : BaseEffect, new ()
-		{
-			var effect = new T ();
-			PintaCore.LivePreview.Start (effect);
-		}
 		#endregion
 	}
 }
