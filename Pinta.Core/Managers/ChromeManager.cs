@@ -47,9 +47,7 @@ namespace Pinta.Core
 		}
 		
 		public void Initialize (Toolbar toolToolBar,
-		                        Label statusBarText,
 		                        DrawingArea drawingArea,
-		                        TreeView historyStack,
 		                        Window mainWindow,
 		                        IProgressDialog progressDialog)
 		{

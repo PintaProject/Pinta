@@ -103,6 +103,31 @@ namespace Pinta.Core
 		#endregion
 
 		#region Public Methods
+		public void NewFile (Size imageSize)
+		{
+			PintaCore.Workspace.ActiveDocument.HasFile = false;
+			PintaCore.Workspace.ImageSize = imageSize;
+			PintaCore.Workspace.CanvasSize = imageSize;
+
+			PintaCore.Layers.Clear ();
+			PintaCore.History.Clear ();
+			PintaCore.Layers.DestroySelectionLayer ();
+			PintaCore.Layers.ResetSelectionPath ();
+
+			// Start with an empty white layer
+			Layer background = PintaCore.Layers.AddNewLayer ("Background");
+
+			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
+				g.SetSourceRGB (255, 255, 255);
+				g.Paint ();
+			}
+
+			PintaCore.Workspace.Filename = "Untitled1";
+			PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
+			PintaCore.Workspace.IsDirty = false;
+			PintaCore.Actions.View.ZoomToWindow.Activate ();
+		}
+		
 		public bool OpenFile (string file)
 		{
 			bool fileOpened = false;

@@ -56,17 +56,13 @@ namespace Pinta.Core
 		}
 		
 		public static void Initialize (Toolbar toolToolBar,
-		                               Label statusTextLabel,
 		                               DrawingArea drawingArea,
-		                               TreeView historyStack,
 		                               Window mainWindow,
 		                               IProgressDialog progressDialog)
 		{
 			Chrome = new ChromeManager ();
 			Chrome.Initialize (toolToolBar,
-			                   statusTextLabel,
 			                   drawingArea,
-			                   historyStack,
 			                   mainWindow,
 			                   progressDialog);
 			

@@ -52,17 +52,14 @@ namespace Pinta
 			Build ();
 			
 			// Initialize interface things
-			PintaCore.Actions.AccelGroup = new AccelGroup ();
 			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
 			
 			progress_dialog = new ProgressDialog ();
 			
-			PintaCore.Initialize (tooltoolbar, label5, drawingarea1, history_treeview, this, progress_dialog);
+			PintaCore.Initialize (tooltoolbar, drawingarea1, this, progress_dialog);
 			colorpalettewidget1.Initialize ();
 			
 			Compose ();
-			
-			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
 			
 			PintaCore.Actions.CreateMainMenu (menubar1);
 			PintaCore.Actions.CreateToolBar (toolbar1);
@@ -71,34 +68,16 @@ namespace Pinta
 			
 			CreateToolBox ();
 			LoadEffects ();
-			
-			Gtk.Image i = new Gtk.Image (PintaCore.Resources.GetIcon ("StatusBar.CursorXY.png"));
-			i.Show ();
-			
-			statusbar1.Add (i);
-			Gtk.Box.BoxChild box = (Gtk.Box.BoxChild)statusbar1[i];
-			box.Position = 2;
-			box.Fill = false;
-			box.Expand = false;
+			CreateStatusBar ();
 			
 			this.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 			
 			dialog_handler = new DialogHandlers (this);
+			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			
 			// Create a blank document
-			Layer background = PintaCore.Layers.AddNewLayer ("Background");
+			PintaCore.Actions.File.NewFile (new Size (800, 600));
 			
-			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-				g.SetSourceRGB (255, 255, 255);
-				g.Paint ();
-			}
-			
-			PintaCore.Workspace.Filename = "Untitled1";
-			PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
-			PintaCore.Workspace.IsDirty = false;
-			PintaCore.Workspace.Invalidate ();
-			
-			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 			
 			WindowAction.Visible = false;
@@ -236,7 +215,19 @@ namespace Pinta
 			}
 		}
 		
+		private void CreateStatusBar ()
+		{
+			Gtk.Image i = new Gtk.Image (PintaCore.Resources.GetIcon ("StatusBar.CursorXY.png"));
+			i.Show ();
 
+			statusbar1.Add (i);
+			Gtk.Box.BoxChild box = (Gtk.Box.BoxChild)statusbar1[i];
+			box.Position = 2;
+			box.Fill = false;
+			box.Expand = false;
+
+			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
+		}
 
 		#region Drawing Area
 		private void OnDrawingarea1MotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)

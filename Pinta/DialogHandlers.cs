@@ -93,29 +93,8 @@ namespace Pinta
 
 			int response = dialog.Run ();
 
-			if (response == (int)Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.ActiveDocument.HasFile = false;
-				PintaCore.Workspace.ImageSize = new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight);
-				PintaCore.Workspace.CanvasSize = new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight);
-				
-				PintaCore.Layers.Clear ();
-				PintaCore.History.Clear ();
-				PintaCore.Layers.DestroySelectionLayer ();
-				PintaCore.Layers.ResetSelectionPath ();
-
-				// Start with an empty white layer
-				Layer background = PintaCore.Layers.AddNewLayer ("Background");
-
-				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-					g.SetSourceRGB (255, 255, 255);
-					g.Paint ();
-				}
-
-				PintaCore.Workspace.Filename = "Untitled1";
-				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-new", "New Image"));
-				PintaCore.Workspace.IsDirty = false;
-				PintaCore.Actions.View.ZoomToWindow.Activate ();
-			}
+			if (response == (int)Gtk.ResponseType.Ok)
+				PintaCore.Actions.File.NewFile (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight));
 
 			dialog.Destroy ();
 		}
