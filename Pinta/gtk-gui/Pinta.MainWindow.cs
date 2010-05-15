@@ -333,7 +333,6 @@ namespace Pinta
 			}
 			this.drawingarea1.HasDefault = true;
 			this.Show ();
-			this.drawingarea1.MotionNotifyEvent += new global::Gtk.MotionNotifyEventHandler (this.OnDrawingarea1MotionNotifyEvent);
 		}
 	}
 }

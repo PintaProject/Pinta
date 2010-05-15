@@ -36,6 +36,7 @@ namespace Pinta.Core
 		private Window main_window;
 		private IProgressDialog progress_dialog;
 		private bool main_window_busy;
+		private Gdk.Point last_canvas_cursor_point;
 		
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public DrawingArea DrawingArea { get { return drawing_area; } }
@@ -60,6 +61,30 @@ namespace Pinta.Core
 			progress_dialog = progressDialog;
 		}
 
+		#region Public Properties
+		public Gdk.Point LastCanvasCursorPoint {
+			get { return last_canvas_cursor_point; }
+			set {
+				if (last_canvas_cursor_point != value) {
+					last_canvas_cursor_point = value;
+					OnLastCanvasCursorPointChanged ();				
+				}
+			}
+		}
+		
+		public bool MainWindowBusy {
+			get { return main_window_busy; }
+			set {
+				main_window_busy = value;
+				
+				if (main_window_busy)
+					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+				else
+					main_window.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.DefaultCursor;
+			}
+		}
+		#endregion
+
 		#region Public Methods
 		public void SetStatusBarText (string text)
 		{
@@ -68,6 +93,12 @@ namespace Pinta.Core
 		#endregion
 
 		#region Protected Methods
+		protected void OnLastCanvasCursorPointChanged ()
+		{
+			if (LastCanvasCursorPointChanged != null)
+				LastCanvasCursorPointChanged (this, EventArgs.Empty);
+		}
+
 		protected void OnStatusBarTextChanged (string text)
 		{
 			if (StatusBarTextChanged != null)
@@ -76,21 +107,9 @@ namespace Pinta.Core
 		#endregion
 		
 		#region Public Events
+		public event EventHandler LastCanvasCursorPointChanged;
 		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
 		#endregion
-		
-		public bool MainWindowBusy {
-			get { return main_window_busy; }
-			set {
-				main_window_busy = value;
-				
-				if (main_window_busy) {
-					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
-				} else {
-					main_window.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.DefaultCursor;
-				}
-			}
-		}
 	}
 		
 	public interface IProgressDialog

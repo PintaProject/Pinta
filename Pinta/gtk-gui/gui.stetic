@@ -219,7 +219,6 @@
                             <property name="CanFocus">True</property>
                             <property name="Events">ExposureMask, PointerMotionMask, ButtonPressMask, ButtonReleaseMask, KeyPressMask, KeyReleaseMask, EnterNotifyMask, LeaveNotifyMask</property>
                             <property name="ShowScrollbars">True</property>
-                            <signal name="MotionNotifyEvent" handler="OnDrawingarea1MotionNotifyEvent" />
                           </widget>
                         </child>
                       </widget>

@@ -1393,5 +1393,10 @@ namespace Pinta.Core
 			
 			return path;
 		}
+		
+		public static Gdk.Point ToGdkPoint (this PointD point)
+		{
+			return new Gdk.Point ((int)point.X, (int)point.Y);
+		}
 	}
 }

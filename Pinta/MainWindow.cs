@@ -155,11 +155,6 @@ namespace Pinta
 			}
 		}
 
-		private void Chrome_StatusBarTextChanged (object sender, TextChangedEventArgs e)
-		{
-			label5.Text = e.Text;
-		}
-
 		private void CreateToolBox ()
 		{
 			// Create our tools
@@ -226,17 +221,12 @@ namespace Pinta
 			box.Fill = false;
 			box.Expand = false;
 
-			PintaCore.Chrome.StatusBarTextChanged += new EventHandler<TextChangedEventArgs> (Chrome_StatusBarTextChanged);
-		}
+			PintaCore.Chrome.StatusBarTextChanged += delegate (object sender, TextChangedEventArgs e) { label5.Text = e.Text; };
 
-		#region Drawing Area
-		private void OnDrawingarea1MotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
-		{
-			Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
-			
-			if (PintaCore.Workspace.PointInCanvas (point))
-				CursorPositionLabel.Text = string.Format ("{0}, {1}", (int)point.X, (int)point.Y);
+			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
+				Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
+				CursorPositionLabel.Text = string.Format ("{0}, {1}", pt.X, pt.Y);
+			};
 		}
-		#endregion
 	}
 }

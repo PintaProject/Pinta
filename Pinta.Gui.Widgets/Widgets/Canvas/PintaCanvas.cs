@@ -69,6 +69,10 @@ namespace Pinta.Gui.Widgets
 			// Give mouse move events to the current tool
 			MotionNotifyEvent += delegate (object sender, MotionNotifyEventArgs e) {
 				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
+				
+				if (PintaCore.Workspace.PointInCanvas (point))
+					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
+					
 				PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
 			};
 
