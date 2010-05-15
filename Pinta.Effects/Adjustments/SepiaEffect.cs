@@ -31,10 +31,6 @@ namespace Pinta.Effects
 			get { return EffectAdjustment.Adjustment; }
 		}
 
-		public override int Priority {
-			get { return 45; }
-		}
-
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.E; }
 		}

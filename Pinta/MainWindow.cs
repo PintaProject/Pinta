@@ -186,7 +186,7 @@ namespace Pinta
 		private void LoadEffects ()
 		{
 			// Load our adjustments
-			foreach (BaseEffect effect in Effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Adjustment).OrderBy (t => t.Priority)) {
+			foreach (BaseEffect effect in Effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Adjustment).OrderBy (t => t.Text)) {
 				// Add icon to IconFactory
 				Gtk.IconFactory fact = new Gtk.IconFactory ();
 				fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));

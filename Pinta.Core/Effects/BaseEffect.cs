@@ -36,7 +36,6 @@ namespace Pinta.Core
 		public virtual bool IsConfigurable { get { return false; } }
 		public EffectData EffectData { get; protected set; }
 		public virtual EffectAdjustment EffectOrAdjustment { get { return EffectAdjustment.Effect; } }
-		public virtual int Priority { get { return 50; } }
 		public virtual Gdk.Key AdjustmentMenuKey { get { throw new NotImplementedException ("Adjustments must override AdjustmentMenuKey"); } }
 		public virtual Gdk.ModifierType AdjustmentMenuKeyModifiers { get { return Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask; } }
 		public virtual string EffectMenuCategory { get { return "General"; } }
