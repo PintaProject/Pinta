@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem (true)]
 	public class ColorPaletteWidget : Gtk.DrawingArea

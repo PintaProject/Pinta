@@ -56,6 +56,7 @@
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorPanelWidget.cs" />
     <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
     <Compile Include="Widgets\Canvas\GridRenderer.cs" />
+    <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\ColorPanelWidget.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
     <Compile Include="Dialogs\SimpleEffectDialog.cs" />
@@ -81,6 +82,11 @@
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
       <Name>Pinta.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
+      <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
+      <Name>Pinta.Resources</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

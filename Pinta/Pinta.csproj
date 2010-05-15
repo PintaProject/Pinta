@@ -62,9 +62,6 @@
     <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Widgets\CellRendererSurface.cs" />
-    <Compile Include="Widgets\ColorPaletteWidget.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Widgets\LayersListWidget.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />

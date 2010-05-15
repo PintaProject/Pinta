@@ -38,7 +38,7 @@ namespace Pinta
 
 		private global::Gtk.VBox vbox3;
 
-		private global::Pinta.ColorPaletteWidget colorpalettewidget1;
+		private global::Pinta.Gui.Widgets.ColorPaletteWidget colorpalettewidget1;
 
 		private global::Gtk.HBox hbox3;
 
@@ -168,7 +168,7 @@ namespace Pinta
 			this.vbox3 = new global::Gtk.VBox ();
 			this.vbox3.Name = "vbox3";
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.colorpalettewidget1 = new global::Pinta.ColorPaletteWidget ();
+			this.colorpalettewidget1 = new global::Pinta.Gui.Widgets.ColorPaletteWidget ();
 			this.colorpalettewidget1.Name = "colorpalettewidget1";
 			this.vbox3.Add (this.colorpalettewidget1);
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.colorpalettewidget1]));
