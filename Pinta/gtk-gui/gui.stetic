@@ -142,7 +142,7 @@
                   <widget class="Gtk.VBox" id="vbox3">
                     <property name="MemberName" />
                     <child>
-                      <widget class="Pinta.ColorPaletteWidget" id="colorpalettewidget1">
+                      <widget class="Pinta.Gui.Widgets.ColorPaletteWidget" id="colorpalettewidget1">
                         <property name="MemberName" />
                       </widget>
                       <packing>
