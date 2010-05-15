@@ -55,6 +55,8 @@ namespace Pinta.Core
 		internal LivePreviewManager ()
 		{
 			live_preview_enabled = false;
+
+			RenderUpdated += LivePreview_RenderUpdated;
 		}
 		
 		public bool IsEnabled { get { return live_preview_enabled; } }
@@ -336,9 +338,52 @@ namespace Pinta.Core
 		
 		void FireLivePreviewRenderUpdatedEvent (double progress, Gdk.Rectangle bounds)
 		{
+			
 			if (RenderUpdated != null) {
 				RenderUpdated (this, new LivePreviewRenderUpdatedEventArgs(progress, bounds));
 			}			
-		}		
+		}
+
+		private void LivePreview_RenderUpdated (object o, LivePreviewRenderUpdatedEventArgs args)
+		{
+			double scale = PintaCore.Workspace.Scale;
+			var offset = PintaCore.Workspace.Offset;
+
+			var bounds = args.Bounds;
+
+			// Transform bounds (Image -> Canvas -> Window)
+
+			// Calculate canvas bounds.
+			double x1 = bounds.Left * scale;
+			double y1 = bounds.Top * scale;
+			double x2 = bounds.Right * scale;
+			double y2 = bounds.Bottom * scale;
+
+			// TODO Figure out why when scale > 1 that I need add on an
+			// extra pixel of padding.
+			// I must being doing something wrong here.
+			if (scale > 1.0) {
+				//x1 = (bounds.Left-1) * scale;
+				y1 = (bounds.Top - 1) * scale;
+				//x2 = (bounds.Right+1) * scale;
+				//y2 = (bounds.Bottom+1) * scale;
+			}
+
+			// Calculate window bounds.
+			x1 += offset.X;
+			y1 += offset.Y;
+			x2 += offset.X;
+			y2 += offset.Y;
+
+			// Convert to integer, carefull not to miss paritally covered
+			// pixels by rounding incorrectly.
+			int x = (int)Math.Floor (x1);
+			int y = (int)Math.Floor (y1);
+			int width = (int)Math.Ceiling (x2) - x;
+			int height = (int)Math.Ceiling (y2) - y;
+
+			// Tell GTK to expose the drawing area.			
+			PintaCore.Chrome.DrawingArea.QueueDrawArea (x, y, width, height);
+		}	
 	}
 }
