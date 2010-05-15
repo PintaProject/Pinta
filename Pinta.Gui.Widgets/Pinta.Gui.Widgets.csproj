@@ -89,10 +89,5 @@
       <Name>Pinta.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj">
-      <Project>{50AFF341-655E-45EF-83CA-58F8254E4C8B}</Project>
-      <Name>Pinta.Resources</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
 </Project>
