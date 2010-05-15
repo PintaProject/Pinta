@@ -43,6 +43,8 @@
     <Reference Include="System.Core">
     </Reference>
     <Reference Include="Mono.Cairo" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -58,6 +60,7 @@
     <Compile Include="Widgets\Canvas\GridRenderer.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\ColorPanelWidget.cs" />
+    <Compile Include="Widgets\History\HistoryTreeView.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
     <Compile Include="Dialogs\SimpleEffectDialog.cs" />
     <Compile Include="Widgets\AnglePickerGraphic.cs" />
