@@ -64,6 +64,8 @@
     <Compile Include="Widgets\AnglePickerWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.AnglePickerWidget.cs" />
     <Compile Include="Widgets\Canvas\PintaCanvas.cs" />
+    <Compile Include="Widgets\Layers\CellRendererSurface.cs" />
+    <Compile Include="Widgets\Layers\LayersListWidget.cs" />
     <Compile Include="Widgets\PointPickerGraphic.cs" />
     <Compile Include="Widgets\PointPickerWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPickerWidget.cs" />

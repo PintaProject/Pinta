@@ -54,7 +54,7 @@ namespace Pinta
 
 		private global::Gtk.Label label1;
 
-		private global::Pinta.LayersListWidget layerslistwidget1;
+		private global::Pinta.Gui.Widgets.LayersListWidget layerslistwidget1;
 
 		private global::Gtk.Toolbar toolbar4;
 
@@ -245,7 +245,7 @@ namespace Pinta
 			w14.Expand = false;
 			w14.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.layerslistwidget1 = new global::Pinta.LayersListWidget ();
+			this.layerslistwidget1 = new global::Pinta.Gui.Widgets.LayersListWidget ();
 			this.layerslistwidget1.Name = "layerslistwidget1";
 			this.vbox2.Add (this.layerslistwidget1);
 			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.layerslistwidget1]));

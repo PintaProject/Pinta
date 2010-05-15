@@ -246,7 +246,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Pinta.LayersListWidget" id="layerslistwidget1">
+                      <widget class="Pinta.Gui.Widgets.LayersListWidget" id="layerslistwidget1">
                         <property name="MemberName" />
                       </widget>
                       <packing>

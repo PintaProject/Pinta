@@ -31,7 +31,7 @@ using Pinta.Core;
 using Gtk;
 using System.ComponentModel;
 
-namespace Pinta
+namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem (true)]
 	public class LayersListWidget : ScrolledWindow

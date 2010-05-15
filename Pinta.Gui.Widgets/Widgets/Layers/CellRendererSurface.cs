@@ -29,7 +29,7 @@ using Gtk;
 using Cairo;
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Gui.Widgets
 {
 	public class CellRendererSurface : CellRenderer
 	{
