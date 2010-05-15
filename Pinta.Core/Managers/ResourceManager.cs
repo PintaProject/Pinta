@@ -1,5 +1,5 @@
 // 
-// ResourceLoader.cs
+// ResourceManager.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,20 +25,15 @@
 // THE SOFTWARE.
 
 using System;
-using Gdk;
+using Pinta.Resources;
 
-namespace Pinta.Resources
+namespace Pinta
 {
-	public static class ResourceLoader
+	public class ResourceManager
 	{
-		public static Pixbuf GetIcon (string name)
+		public Gdk.Pixbuf GetIcon (string name)
 		{
-			// First see if it's a built-in gtk icon, like gtk-new
-			if (Gtk.IconTheme.Default.HasIcon (name))
-				return Gtk.IconTheme.Default.LoadIcon (name, 16, Gtk.IconLookupFlags.UseBuiltin);
-			
-			// Get it from our embedded resources
-			return Gdk.Pixbuf.LoadFromResource (name);
+			return ResourceLoader.GetIcon (name);
 		}
 	}
 }
