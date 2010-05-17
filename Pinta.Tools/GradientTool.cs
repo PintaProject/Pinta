@@ -118,8 +118,23 @@ namespace Pinta.Tools
 				gr.AlphaBlending = UseAlphaBlending;
         
 				gr.BeforeRender ();
-				gr.Render (PintaCore.Layers.CurrentLayer.Surface, new Gdk.Rectangle[] {PintaCore.Layers.SelectionPath.GetBounds ()});
-				PintaCore.Workspace.Invalidate ();
+				
+				Gdk.Rectangle selection_bounds = PintaCore.Layers.SelectionPath.GetBounds ();
+				ImageSurface scratch_layer = PintaCore.Layers.ToolLayer.Surface;
+
+				gr.Render (scratch_layer, new Gdk.Rectangle[] { selection_bounds });
+				
+				using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.FillRule = FillRule.EvenOdd;
+					g.Clip ();
+					
+					g.SetSource (scratch_layer);
+					g.Paint ();
+				}
+
+				selection_bounds.Inflate (5, 5);
+				PintaCore.Workspace.Invalidate (selection_bounds);
 			}
 		}
 		#endregion
