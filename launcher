@@ -1,0 +1,2 @@
+#!/bin/sh 
+exec mono /usr/lib/pinta/Pinta.exe "$@"
