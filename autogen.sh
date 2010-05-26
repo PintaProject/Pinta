@@ -138,4 +138,4 @@ echo "Running $AUTOCONF ..."
 $AUTOCONF
 
 echo Running $srcdir/configure $conf_flags "$@" ...
-$srcdir/configure $conf_flags "$@" \
+$srcdir/configure $conf_flags "$@"

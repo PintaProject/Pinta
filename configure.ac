@@ -42,8 +42,10 @@ cat <<EOF
 ${PACKAGE}-${VERSION}
 
   Build Environment
-    Install Prefix:     ${prefix}
-    XBuild Path:	${XBUILD}
-    Mono Runtime:       ${MONO}
+    Install Prefix:     	${prefix}
+    XBuild Path:		${XBUILD}
+    Mono Runtime:       	${MONO}
+    Launch Script:		${prefix}/bin/${PACKAGE}
+    Installation Directory: 	${prefix}/lib/${PACKAGE}/
 
 EOF
