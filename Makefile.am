@@ -1,6 +1,3 @@
-PACKAGE	= pinta
-PREFIX 	= /usr
-VERSION	= 0.4
 BINFILES = \
 	bin/Pinta.exe \
 	bin/Pinta.Core.dll \
@@ -23,7 +20,7 @@ help:
 
 # target: build - Build Pinta.
 build: Pinta.sln
-	xbuild Pinta.sln
+	$(XBUILD) Pinta.sln
 
 # target: list - List source files.
 list:
@@ -38,8 +35,7 @@ list:
 clean: cleanobj
 
 # target: cleanall - Removes build files. 
-cleanall: cleanobj cleanbin
-	rm -v $(PACKAGE)
+cleanall: distclean cleanobj cleanbin
 
 # target: cleanbin - Removes built files. 
 cleanbin: 
@@ -50,18 +46,18 @@ cleanobj:
 	find . -type d -name obj | xargs rm -rvf
 	
 # target: install - Installs Pinta. 
-install: launcher $(BINFILES) $(EXTENSIONS)
-	mkdir -p $(PREFIX)/bin
-	mkdir -p $(PREFIX)/lib/$(PACKAGE)
-	mkdir -p $(PREFIX)/lib/$(PACKAGE)/Extensions
-	install -v -m 555 -t $(PREFIX)/lib/$(PACKAGE)/ $(BINFILES)
-	install -v -m 555 -t $(PREFIX)/lib/$(PACKAGE)/Extensions/ $(EXTENSIONS)
-	install -v -m 555 launcher $(PREFIX)/bin/$(PACKAGE)
+install: pinta $(BINFILES) $(EXTENSIONS)
+	mkdir -p $(prefix)/bin
+	mkdir -p $(prefix)/lib/$(PACKAGE)
+	mkdir -p $(prefix)/lib/$(PACKAGE)/Extensions
+	install -v -m 555 -t $(prefix)/lib/$(PACKAGE)/ $(BINFILES)
+	install -v -m 555 -t $(prefix)/lib/$(PACKAGE)/Extensions/ $(EXTENSIONS)
+	install -v -m 555 pinta $(prefix)/bin/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
 uninstall: 
-	rm -vf $(PREFIX)/bin/$(PACKAGE)
-	rm -rvf $(PREFIX)/lib/$(PACKAGE)
+	rm -vf $(prefix)/bin/$(PACKAGE)
+	rm -rvf $(prefix)/lib/$(PACKAGE)
 
 # target: dist - Default distribution type: disttar
 dist: disttar
