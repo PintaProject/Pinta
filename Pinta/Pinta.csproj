@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -62,6 +62,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\System.ComponentModel.Composition.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -69,11 +70,32 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DockLibrary\AutoHideBox.cs" />
+    <Compile Include="DockLibrary\DockBar.cs" />
+    <Compile Include="DockLibrary\DockBarItem.cs" />
+    <Compile Include="DockLibrary\DockContainer.cs" />
+    <Compile Include="DockLibrary\DockFrame.cs" />
+    <Compile Include="DockLibrary\DockFrameTopLevel.cs" />
+    <Compile Include="DockLibrary\DockGroup.cs" />
+    <Compile Include="DockLibrary\DockGroupItem.cs" />
+    <Compile Include="DockLibrary\DockGroupType.cs" />
+    <Compile Include="DockLibrary\DockItem.cs" />
+    <Compile Include="DockLibrary\DockItemBehavior.cs" />
+    <Compile Include="DockLibrary\DockItemContainer.cs" />
+    <Compile Include="DockLibrary\DockItemStatus.cs" />
+    <Compile Include="DockLibrary\DockItemToolbar.cs" />
+    <Compile Include="DockLibrary\DockLayout.cs" />
+    <Compile Include="DockLibrary\DockObject.cs" />
+    <Compile Include="DockLibrary\DockPosition.cs" />
+    <Compile Include="DockLibrary\HslColor.cs" />
+    <Compile Include="DockLibrary\PlaceholderWindow.cs" />
+    <Compile Include="DockLibrary\ShadedContainer.cs" />
+    <Compile Include="DockLibrary\TabStrip.cs" />
+    <Compile Include="ExtensionPoints.cs" />
+    <Compile Include="Extensions\GtkExtensions.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="gtk-gui\Pinta.MainWindow.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
@@ -88,6 +110,24 @@
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
+    <Compile Include="MainWindow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
+      <LogicalName>stock-auto-hide.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\stock-close-12.png">
+      <LogicalName>stock-close-12.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\stock-dock.png">
+      <LogicalName>stock-dock.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\stock-menu-left-12.png">
+      <LogicalName>stock-menu-left-12.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\stock-menu-right-12.png">
+      <LogicalName>stock-menu-right-12.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

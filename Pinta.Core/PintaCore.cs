@@ -53,6 +53,7 @@ namespace Pinta.Core
 			History = new HistoryManager ();
 			System = new SystemManager ();
 			LivePreview = new LivePreviewManager ();
+			Palette = new PaletteManager ();
 		}
 		
 		public static void Initialize (Toolbar toolToolBar,
@@ -66,7 +67,6 @@ namespace Pinta.Core
 			                   mainWindow,
 			                   progressDialog);
 			
-			Palette = new PaletteManager ();
 			
 			Actions.RegisterHandlers ();
 		}

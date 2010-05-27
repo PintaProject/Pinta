@@ -1,5 +1,5 @@
 // 
-// EffectsActions.cs
+// GtkExtensions.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -26,42 +26,23 @@
 
 using System;
 using Gtk;
-using System.Collections.Generic;
+using MonoDevelop.Components.Docking;
 
-namespace Pinta.Core
+namespace Pinta
 {
-	public class EffectsActions
+	public static class GtkExtensions
 	{
-		private Menu effects_menu;
-		
-		public Dictionary<string, Gtk.Menu> Menus { get; private set; }
-		public List<Gtk.Action> Actions { get; private set; }
-
-		public EffectsActions ()
+		public static DockToolButton CreateDockToolBarItem (this Gtk.Action action)
 		{
-			Actions = new List<Gtk.Action> ();
-			Menus = new Dictionary<string,Menu> ();
-		}
-		
-		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
-		{
-			effects_menu = menu;
-		}
-
-		public void AddEffect (string category, Gtk.Action action)
-		{
-			if (!Menus.ContainsKey (category)) {
-				Gtk.Action menu_action = new Gtk.Action (category, Mono.Unix.Catalog.GetString (category), null, null);
-				Menu category_menu = (Menu)effects_menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
-				
-				Menus.Add (category, category_menu);
-			}
+			DockToolButton item = new DockToolButton (action.StockId);
+			action.ConnectProxy (item);
 			
-			Menu m = Menus[category];
+			item.Show ();
+			item.TooltipText = action.Label;
+			item.Label = string.Empty;
+			item.Image.Show ();
 			
-			m.Append (action.CreateMenuItem ());
+			return item;
 		}
-		#endregion
 	}
 }

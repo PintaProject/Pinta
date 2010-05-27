@@ -95,6 +95,7 @@
     <Compile Include="Widgets\ColorGradientWidget.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.HistogramWidget.cs" />
     <Compile Include="Widgets\HistogramWidget.cs" />
+    <Compile Include="Widgets\ToolBoxWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -34,9 +34,9 @@ namespace Pinta
 {
 	public class DialogHandlers
 	{
-		private MainWindow main_window;
+		private Window main_window;
 
-		public DialogHandlers (MainWindow window)
+		public DialogHandlers (Window window)
 		{
 			main_window = window;
 			

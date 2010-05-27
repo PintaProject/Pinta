@@ -1,5 +1,5 @@
-// 
-// EffectsActions.cs
+﻿// 
+// ExtensionPoints.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,43 +25,17 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using Pinta.Core;
 
-namespace Pinta.Core
+namespace Pinta
 {
-	public class EffectsActions
+	class ExtensionPoints
 	{
-		private Menu effects_menu;
-		
-		public Dictionary<string, Gtk.Menu> Menus { get; private set; }
-		public List<Gtk.Action> Actions { get; private set; }
-
-		public EffectsActions ()
-		{
-			Actions = new List<Gtk.Action> ();
-			Menus = new Dictionary<string,Menu> ();
-		}
-		
-		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
-		{
-			effects_menu = menu;
-		}
-
-		public void AddEffect (string category, Gtk.Action action)
-		{
-			if (!Menus.ContainsKey (category)) {
-				Gtk.Action menu_action = new Gtk.Action (category, Mono.Unix.Catalog.GetString (category), null, null);
-				Menu category_menu = (Menu)effects_menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
-				
-				Menus.Add (category, category_menu);
-			}
-			
-			Menu m = Menus[category];
-			
-			m.Append (action.CreateMenuItem ());
-		}
-		#endregion
+		[ImportMany]
+		public IEnumerable<BaseTool> Tools { get; set; }
+		[ImportMany]
+		public IEnumerable<BaseEffect> Effects { get; set; }
 	}
 }
