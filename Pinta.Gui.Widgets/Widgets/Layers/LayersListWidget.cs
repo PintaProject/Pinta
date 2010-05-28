@@ -55,7 +55,7 @@ namespace Pinta.Gui.Widgets
 		
 		public LayersListWidget ()
 		{
-			SetSizeRequest (200, 300);
+			SetSizeRequest (200, 200);
 			
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 			

@@ -35,6 +35,8 @@ namespace Pinta.Gui.Widgets
 			};
 
 			PackStart (tb2, false, false, 0);
+			
+			ShowAll ();
 		}
 		
 		public void AddItem (ToolButton item)

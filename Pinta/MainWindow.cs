@@ -287,33 +287,9 @@ namespace Pinta
 				Name = "panel_container"
 			};
 
-			CreateToolBoxAndColorPalettePanel (panel_container);
 			CreateDockAndPads (panel_container);
 			
 			shell.PackStart (panel_container, true, true, 0);
-		}
-		
-		private void CreateToolBoxAndColorPalettePanel (HBox container)
-		{
-			VBox toolbox_panel = new VBox () {
-				Name = "toolbox_panel"
-			};
-			
-			container.PackStart (toolbox_panel, false, false, 0);
-		
-			// Toolbox
-			toolbox = new ToolBoxWidget () {
-				Name = "toolbox"
-			};
-
-			toolbox_panel.PackStart (toolbox, false, false, 0);
-						
-			// Color palette
-			color = new ColorPaletteWidget () {
-				Name = "color"
-			};
-
-			toolbox_panel.PackStart (color, true, true, 0);
 		}
 		
 		private void CreateDockAndPads (HBox container)
@@ -335,24 +311,45 @@ namespace Pinta
 				Events = (Gdk.EventMask)16134
 			};
 			
-			sw.Add (vp);
-			vp.Add (canvas);
-			
-			canvas.Show ();
-			vp.Show ();
-			
 			// Dock widget
 			DockFrame dock = new DockFrame ();
 			dock.CompactGuiLevel = 5;
+
+			// Toolbox pad
+			DockItem toolbox_item = dock.AddItem ("Toolbox");
+			toolbox = new ToolBoxWidget () { Name = "toolbox" };
+			
+			toolbox_item.Label = "Tools";
+			toolbox_item.Content = toolbox;
+			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
+			toolbox_item.Behavior |= DockItemBehavior.CantClose;
+			toolbox_item.DefaultWidth = 65;
+		
+			// Palette pad
+			DockItem palette_item = dock.AddItem ("Palette");
+			color = new ColorPaletteWidget () { Name = "color" };
+
+			palette_item.Label = "Palette";
+			palette_item.Content = color;
+			palette_item.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
+			palette_item.DefaultLocation = "Toolbox/Bottom";
+			palette_item.Behavior |= DockItemBehavior.CantClose;
+			palette_item.DefaultWidth = 65;
 		
 			// Canvas pad
 			DockItem documentDockItem = dock.AddItem ("Canvas");
 			documentDockItem.Behavior = DockItemBehavior.Locked;
 			documentDockItem.Expand = true;
-			
+
 			documentDockItem.DrawFrame = false;
 			documentDockItem.Label = "Documents";
 			documentDockItem.Content = sw;
+			
+			sw.Add (vp);
+			vp.Add (canvas);
+
+			canvas.Show ();
+			vp.Show ();
 
 			// Layer pad
 			LayersListWidget layers = new LayersListWidget ();
