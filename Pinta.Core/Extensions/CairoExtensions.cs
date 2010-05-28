@@ -333,8 +333,6 @@ namespace Pinta.Core
 			g.LineTo (r.X + radius, r.Y + r.Height);
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
-
-			g.Restore ();
 			
 			g.Color = fill;
 			g.FillPreserve ();
@@ -366,8 +364,6 @@ namespace Pinta.Core
 			g.LineTo (r.X + radius, r.Y + r.Height);
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
-			
-			g.Restore ();
 
 			g.Color = fill;
 			
@@ -624,11 +620,16 @@ namespace Pinta.Core
 		{
 			if (x < r.X || x >= r.X + r.Width)
 				return false;
-			
+
 			if (y < r.Y || y >= r.Y + r.Height)
 				return false;
-			
+
 			return true;
+		}
+
+		public static bool ContainsPoint (this Cairo.Rectangle r, Cairo.PointD point)
+		{
+			return ContainsPoint (r, point.X, point.Y);
 		}
 		
 		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surf)
@@ -731,6 +732,11 @@ namespace Pinta.Core
 		public static string ToString2 (this Cairo.Color c)
 		{
 			return string.Format ("R: {0} G: {1} B: {2} A: {3}", c.R, c.G, c.B, c.A);
+		}
+
+		public static string ToString2 (this Cairo.PointD c)
+		{
+			return string.Format ("{0}, {1}", c.X, c.Y);
 		}
 
 		public static uint ToUint (this Cairo.Color c)
