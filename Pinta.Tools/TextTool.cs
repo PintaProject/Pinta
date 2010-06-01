@@ -923,7 +923,7 @@ using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 							ctx.DrawLine (new Cairo.PointD (pt2.X, dstRect.Bottom + fe.Descent), new Cairo.PointD (dstRect.Right - offset, dstRect.Bottom + fe.Descent), PintaCore.Palette.PrimaryColor, lineSize);
 						}
 					}
-					PintaCore.Workspace.Invalidate (dstRectClipped);
+					PintaCore.Workspace.Invalidate ();
 				}
 				
 				// Mask out anything that isn't within the user's clip region (selected region)
@@ -1303,10 +1303,13 @@ this.OnKeyPress (canvas, args);
 				}
 				
 				if ((args.Event.State & ModifierType.ControlMask) == 0 && args.Event.Key != Gdk.Key.Control_L && args.Event.Key != Gdk.Key.Control_R) {
-					char ch = (char)args.Event.Key;
-					InsertCharIntoString (ch);
-					textPos++;
-					RedrawText (true);
+					uint ch = Gdk.Keyval.ToUnicode(args.Event.KeyValue);
+					
+					if (ch != 0) {
+					    InsertCharIntoString (ch);
+					    textPos++;
+					    RedrawText (true);
+					}
 				}
 			}
 			
@@ -1341,6 +1344,7 @@ this.OnKeyPress (canvas, args);
 					
 					break;
 				
+				case Gdk.Key.KP_Enter:
 				case Gdk.Key.Return:
 					PerformEnter ();
 					break;
@@ -1669,9 +1673,12 @@ this.OnKeyPress (canvas, args);
             }
         }*/
 
-		private void InsertCharIntoString (char c)
+		private void InsertCharIntoString (uint c)
 		{
-			lines[linePos] = ((string)lines[linePos]).Insert (textPos, c.ToString ());
+			byte[] bytes = { (byte) c, (byte) (c >> 8), (byte) (c >> 16), (byte) (c >> 24) };
+			string unicodeChar = System.Text.Encoding.UTF32.GetString (bytes);
+		
+			lines[linePos] = ((string)lines[linePos]).Insert (textPos, ((char)c).ToString ());
 			this.sizes = null;
 		}
 		
