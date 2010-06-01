@@ -79,7 +79,7 @@ namespace Pinta.Tools
 			
 			if (radius_minus == null) {
 				radius_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", "Decrease rectangle's corner radius");
-				radius_minus.Clicked += MinusButtonClickedEvent;
+				radius_minus.Clicked += RadiusMinusButtonClickedEvent;
 			}
 			
 			tb.AppendItem (radius_minus);
@@ -93,7 +93,7 @@ namespace Pinta.Tools
 			
 			if (radius_plus == null) {
 				radius_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", "Increase rectangle's corner radius");
-				radius_plus.Clicked += PlusButtonClickedEvent;
+				radius_plus.Clicked += RadiusPlusButtonClickedEvent;
 			}
 			
 			tb.AppendItem (radius_plus);
@@ -121,13 +121,13 @@ namespace Pinta.Tools
 			return dirty;
 		}
 		
-		protected override void MinusButtonClickedEvent (object o, EventArgs args)
+		private void RadiusMinusButtonClickedEvent (object o, EventArgs args)
 		{
 			if (Math.Truncate(Radius) > 0)
 				Radius = Math.Truncate(Radius) - 1;
 		}
 
-		protected override void PlusButtonClickedEvent (object o, EventArgs args)
+		private void RadiusPlusButtonClickedEvent (object o, EventArgs args)
 		{
 			Radius = Math.Truncate(Radius) + 1;
 		}
