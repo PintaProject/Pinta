@@ -1306,9 +1306,9 @@ this.OnKeyPress (canvas, args);
 					uint ch = Gdk.Keyval.ToUnicode(args.Event.KeyValue);
 					
 					if (ch != 0) {
-					    InsertCharIntoString (ch);
-					    textPos++;
-					    RedrawText (true);
+						InsertCharIntoString (ch);
+						textPos++;
+						RedrawText (true);
 					}
 				}
 			}
