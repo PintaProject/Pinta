@@ -68,6 +68,7 @@ namespace Pinta
 			//CreateStatusBar ();
 
 			this.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
+			canvas.IsFocus = true;
 
 			dialog_handler = new DialogHandlers (this);
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
