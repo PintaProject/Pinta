@@ -28,6 +28,7 @@ using System;
 using Gtk;
 using Mono.Options;
 using System.Collections.Generic;
+using Pinta.Core;
 
 namespace Pinta
 {
@@ -70,10 +71,13 @@ namespace Pinta
 							arg = null;
 					}
 				
-					if (arg != null && arg != "")
+					if (!string.IsNullOrEmpty (arg)) {
 						Pinta.Core.PintaCore.Actions.File.OpenFile (arg);
+						PintaCore.Workspace.ActiveDocument.HasFile = true;
+					}
 				} else {
 					Pinta.Core.PintaCore.Actions.File.OpenFile (extra[0]);
+					PintaCore.Workspace.ActiveDocument.HasFile = true;
 				}				
 			}
 			
