@@ -179,6 +179,25 @@ namespace Pinta.Gui.Widgets
 
 			return true;
 		}
+
+		protected override bool OnScrollEvent (EventScroll evnt)
+		{
+			// Allow the user to zoom in/out with Ctrl-Mousewheel
+			if (evnt.State  == ModifierType.ControlMask) {
+				switch (evnt.Direction) {
+					case ScrollDirection.Down:
+					case ScrollDirection.Right:
+						PintaCore.Actions.View.ZoomOut.Activate ();
+						return true;
+					case ScrollDirection.Left:
+					case ScrollDirection.Up:
+						PintaCore.Actions.View.ZoomIn.Activate ();
+						return true;
+				}
+			}
+			
+			return base.OnScrollEvent (evnt);
+		}
 		#endregion
 
 		#region Private Methods
