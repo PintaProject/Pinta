@@ -649,8 +649,9 @@ namespace Pinta.Core
 			return ContainsPoint (r, point.X, point.Y);
 		}
 		
-		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surf)
+		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
 		{
+			Cairo.ImageSurface surf = surfSource.Clone ();
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 			int len = surf.Data.Length / 4;
 
@@ -661,6 +662,7 @@ namespace Pinta.Core
 			}
 
 			Gdk.Pixbuf pb = new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
+			(surf as IDisposable).Dispose ();
 			return pb;
 		}
 		
