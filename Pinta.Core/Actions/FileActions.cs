@@ -134,25 +134,30 @@ namespace Pinta.Core
 			
 			try {
 				// Open the image and add it to the layers
-				Pixbuf bg = new Pixbuf (file);
-
-				PintaCore.Layers.Clear ();
-				PintaCore.History.Clear ();
-				PintaCore.Layers.DestroySelectionLayer ();
-
-				PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-				PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-
-				PintaCore.Layers.ResetSelectionPath ();
-
-				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
-
-				using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-					CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-					g.Paint ();
+				if (System.IO.Path.GetExtension (file) == ".ora") {
+					new OraFormat ().Import (PintaCore.Layers, file);
 				}
+				else {
+					Pixbuf bg = new Pixbuf (file);
 
-				bg.Dispose ();
+					PintaCore.Layers.Clear ();
+					PintaCore.History.Clear ();
+					PintaCore.Layers.DestroySelectionLayer ();
+
+					PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
+					PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
+
+					PintaCore.Layers.ResetSelectionPath ();
+
+					Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
+
+					using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
+						CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
+						g.Paint ();
+					}
+
+					bg.Dispose ();
+				}
 
 				PintaCore.Workspace.DocumentPath = System.IO.Path.GetFullPath (file);
 				PintaCore.History.PushNewItem (new BaseHistoryItem ("gtk-open", "Open Image"));

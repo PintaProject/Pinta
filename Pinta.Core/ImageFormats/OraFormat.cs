@@ -26,21 +26,79 @@
 
 using System;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
+using System.Xml;
+
+using Gtk;
 using Gdk;
 using Cairo;
-using System.Xml;
-using System.Globalization;
+
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace Pinta.Core
 {
 	public class OraFormat: IImageImporter, IImageExporter
 	{
 		private const int ThumbMaxSize = 256;
-
+		
 		public void Import (LayerManager layers, string fileName) {
-			// TODO: Implement ORA reading
-			throw new NotImplementedException ();
+			ZipFile file = new ZipFile (fileName);
+			XmlDocument stackXml = new XmlDocument ();
+			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
+			
+			XmlElement imageElement = stackXml.DocumentElement;
+			int width = int.Parse (imageElement.GetAttribute ("w"));
+			int height = int.Parse (imageElement.GetAttribute ("h"));
+			
+			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0];
+			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
+			
+			if (layerElements.Count == 0)
+				throw new XmlException ("No layers found in OpenRaster file");
+
+			layers.Clear ();
+			PintaCore.History.Clear ();
+			layers.DestroySelectionLayer ();
+			PintaCore.Workspace.ImageSize = new Size (width, height);
+			PintaCore.Workspace.CanvasSize = new Gdk.Size (width, height);
+
+			for (int i = 0; i < layerElements.Count; i++) {
+				XmlElement layerElement = (XmlElement) layerElements[i];
+				int x = int.Parse (GetAttribute (layerElement, "x", "0"));
+				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
+				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));
+				
+				Layer layer = layers.CreateLayer (name, width, height);
+				layers.Insert (layer, 0);
+				layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
+				Pixbuf pb = null;
+				
+				try {
+					pb = new Pixbuf (file.GetInputStream (file.GetEntry (layerElement.GetAttribute ("src"))));
+					
+					using (Context g = new Context (layer.Surface)) {
+						CairoHelper.SetSourcePixbuf (g, pb, x, y);
+						g.Paint ();
+					}
+				} catch {
+					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", layer.Name, file);
+					md.Title = "Error";
+				
+					md.Run ();
+					md.Destroy ();
+				} finally {
+					if (pb != null)
+						(pb as IDisposable).Dispose ();
+				}
+			}
+		}
+		
+		private static IFormatProvider GetFormat () {
+			return System.Globalization.CultureInfo.CreateSpecificCulture ("en");
+		}
+
+		private static string GetAttribute (XmlElement element, string attribute, string defValue) {
+			string ret = element.GetAttribute (attribute);
+			return string.IsNullOrEmpty (ret) ? defValue : ret;
 		}
 
 		private Size GetThumbDimensions (int width, int height) {
@@ -54,8 +112,6 @@ namespace Pinta.Core
 		}
 
 		private byte[] GetLayerXmlData (LayerManager layers) {
-			CultureInfo culture = CultureInfo.CreateSpecificCulture ("en");
-
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
 			writer.Formatting = Formatting.Indented;
@@ -71,7 +127,7 @@ namespace Pinta.Core
 			// ORA stores layers top to bottom
 			for (int i = layers.Count - 1; i >= 0; i--) {
 				writer.WriteStartElement ("layer");
-				writer.WriteAttributeString ("opacity", layers[i].Hidden ? "0" : string.Format (culture, "{0:0.00}", layers[i].Opacity));
+				writer.WriteAttributeString ("opacity", layers[i].Hidden ? "0" : string.Format (GetFormat (), "{0:0.00}", layers[i].Opacity));
 				writer.WriteAttributeString ("name", layers[i].Name);
 				writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
 				writer.WriteEndElement ();
