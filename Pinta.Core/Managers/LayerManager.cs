@@ -488,7 +488,7 @@ namespace Pinta.Core
 			using (Cairo.Context g = new Cairo.Context (surf)) {
 				foreach (var layer in PintaCore.Layers.GetLayersToPaint ()) {
 					g.SetSource (layer.Surface);
-					g.Paint ();
+					g.PaintWithAlpha (layer.Opacity);
 				}
 			}
 			
