@@ -354,17 +354,22 @@ namespace Pinta.Core
 		#region Private Methods
 		private void SaveFile (string file)
 		{
-			Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
-
-			Pixbuf pb = surf.ToPixbuf ();
-
-			if (System.IO.Path.GetExtension (file) == ".jpeg" || System.IO.Path.GetExtension (file) == ".jpg")
-				pb.Save (file, "jpeg");
-			else
-				pb.Save (file, "png");
-
-			(pb as IDisposable).Dispose ();
-			(surf as IDisposable).Dispose ();
+			if (System.IO.Path.GetExtension (file) == ".ora") {
+				new OraFormat ().Export (PintaCore.Layers, file);
+			}
+			else {
+				Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
+	
+				Pixbuf pb = surf.ToPixbuf ();
+	
+				if (System.IO.Path.GetExtension (file) == ".jpeg" || System.IO.Path.GetExtension (file) == ".jpg")
+					pb.Save (file, "jpeg");
+				else
+					pb.Save (file, "png");
+	
+				(pb as IDisposable).Dispose ();
+				(surf as IDisposable).Dispose ();
+			}
 			
 			PintaCore.Workspace.Filename = System.IO.Path.GetFileName (file);
 			PintaCore.Workspace.IsDirty = false;
