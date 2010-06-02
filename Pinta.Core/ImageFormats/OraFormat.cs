@@ -68,7 +68,7 @@ namespace Pinta.Core
 			writer.WriteAttributeString ("opacity", "1");
 			writer.WriteAttributeString ("name", "root");
 
-			// ORA stores layers bottom to top
+			// ORA stores layers top to bottom
 			for (int i = layers.Count - 1; i >= 0; i--) {
 				writer.WriteStartElement ("layer");
 				writer.WriteAttributeString ("opacity", layers[i].Hidden ? "0" : string.Format (culture, "{0:0.00}", layers[i].Opacity));
