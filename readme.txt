@@ -7,7 +7,7 @@ Pinta is a Gtk# clone of Paint.Net 3.0: http://www.getpaint.net/.
 Original Pinta code is licensed under the MIT License:
 http://www.opensource.org/licenses/mit-license.php
 
-Code from Paint.Net 3.0 is used under the MIT License and retains the
+Code from Paint.Net 3.36 is used under the MIT License and retains the
 original headers on source files.
 
 See license-pdn.txt for Paint.Net's original license.
