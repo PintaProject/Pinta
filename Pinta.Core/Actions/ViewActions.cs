@@ -26,6 +26,7 @@
 
 using System;
 using Mono.Unix;
+using Gtk;
 
 
 namespace Pinta.Core
@@ -78,8 +79,16 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
-			menu.Append (ZoomIn.CreateAcceleratedMenuItem (Gdk.Key.plus, Gdk.ModifierType.ControlMask));
-			menu.Append (ZoomOut.CreateAcceleratedMenuItem (Gdk.Key.minus, Gdk.ModifierType.ControlMask));
+			ImageMenuItem zoomin = ZoomIn.CreateAcceleratedMenuItem (Gdk.Key.plus, Gdk.ModifierType.ControlMask);
+			zoomin.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.equal, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
+			zoomin.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.KP_Add, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
+			menu.Append (zoomin);
+			
+			ImageMenuItem zoomout = ZoomOut.CreateAcceleratedMenuItem (Gdk.Key.minus, Gdk.ModifierType.ControlMask);
+			zoomout.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.underscore, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
+			zoomout.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.KP_Subtract, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
+			menu.Append (zoomout);
+			
 			menu.Append (ZoomToWindow.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask));
 			menu.Append (ZoomToSelection.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (ActualSize.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
