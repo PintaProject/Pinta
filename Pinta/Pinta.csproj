@@ -70,6 +70,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\ErrorDialog.cs" />
     <Compile Include="DockLibrary\AutoHideBox.cs" />
     <Compile Include="DockLibrary\DockBar.cs" />
     <Compile Include="DockLibrary\DockBarItem.cs" />

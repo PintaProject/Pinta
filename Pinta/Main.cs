@@ -51,6 +51,8 @@ namespace Pinta
 				Console.WriteLine (e.Message);
 				return;
 			}
+
+			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
 			
 			Application.Init ();
 			MainWindow win = new MainWindow ();
@@ -82,6 +84,21 @@ namespace Pinta
 			}
 			
 			Application.Run ();
+		}
+
+		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
+		{
+			ErrorDialog errorDialog = new ErrorDialog (null);
+			
+			Exception ex = (Exception)args.ExceptionObject;
+			
+			try {
+				errorDialog.Message = string.Format ("Unhandled exception:\n{0}", ex.Message);
+				errorDialog.AddDetails (ex.ToString (), false);
+				errorDialog.Run ();
+			} finally {
+				errorDialog.Destroy ();
+			}
 		}
 	}
 }
