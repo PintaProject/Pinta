@@ -82,6 +82,8 @@ namespace Pinta
 			PintaCore.Actions.File.BeforeQuit += delegate {
 				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
 			};
+
+			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
 			
 			if (Platform.GetOS () == Platform.OS.Mac) {
 				try {
@@ -142,6 +144,17 @@ namespace Pinta
 				PintaCore.Actions.View.SuspendZoomUpdate ();
 				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
 				PintaCore.Actions.View.ResumeZoomUpdate ();
+			}
+		}
+
+		private void About_Activated (object sender, EventArgs e)
+		{
+			AboutDialog dlg = new AboutDialog ();
+
+			try {
+				dlg.Run ();
+			} finally {
+				dlg.Destroy ();
 			}
 		}
 		#endregion

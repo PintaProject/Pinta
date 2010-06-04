@@ -61,7 +61,6 @@ namespace Pinta.Core
 		{
 			Website.Activated += new EventHandler (Website_Activated);
 			Bugs.Activated += new EventHandler (Bugs_Activated);
-			About.Activated += new EventHandler (About_Activated);
 		}
 
 		private void About_Activated (object sender, EventArgs e)

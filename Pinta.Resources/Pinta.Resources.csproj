@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -397,7 +397,7 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Emboss.png">
       <LogicalName>Menu.Effects.Stylize.Emboss.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Toolbar.ConicalGradient.png">
+    <EmbeddedResource Include="Resources\Toolbar.ConicalGradient.png">
       <LogicalName>Toolbar.ConicalGradient.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Toolbar.DiamondGradient.png">
@@ -424,10 +424,20 @@
     <EmbeddedResource Include="Resources\Toolbar.BlendingOverwriteIcon.png">
       <LogicalName>Toolbar.BlendingOverwriteIcon.png</LogicalName>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
       <LogicalName>ShapeTool.OutlineFill.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.Image.png">
+      <LogicalName>About.Image.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.ImageSep.png">
+      <LogicalName>About.ImageSep.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.MonoPowered.png">
+      <LogicalName>About.MonoPowered.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.ImageTop.png">
+      <LogicalName>About.ImageTop.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
