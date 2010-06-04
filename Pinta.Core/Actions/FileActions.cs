@@ -45,6 +45,8 @@ namespace Pinta.Core
 		
 		private RecentData recentData;
 		
+		public event EventHandler BeforeQuit;
+		
 		public FileActions ()
 		{
 			New = new Gtk.Action ("New", Mono.Unix.Catalog.GetString ("New..."), null, "gtk-new");
@@ -344,6 +346,9 @@ namespace Pinta.Core
 			}
 
 			if (!canceled) {
+				if (BeforeQuit != null)
+					BeforeQuit (this, EventArgs.Empty);
+					
 				PintaCore.History.Clear ();
 				(PintaCore.Layers.SelectionPath as IDisposable).Dispose ();
 				Application.Quit ();

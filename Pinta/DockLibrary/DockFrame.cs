@@ -309,6 +309,9 @@ namespace MonoDevelop.Components.Docking
 		
 		public void SaveLayouts (string file)
 		{
+			if (!System.IO.Directory.Exists (System.IO.Path.GetDirectoryName (file)))
+				System.IO.Directory.CreateDirectory (System.IO.Path.GetDirectoryName (file));
+				
 			using (XmlTextWriter w = new XmlTextWriter (file, System.Text.Encoding.UTF8)) {
 				w.Formatting = Formatting.Indented;
 				SaveLayouts (w);

@@ -42,6 +42,7 @@ namespace Pinta.Core
 		public static HistoryManager History { get; private set; }
 		public static SystemManager System { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
+		public static SettingsManager Settings { get; private set; }
 		
 		static PintaCore ()
 		{
@@ -54,6 +55,7 @@ namespace Pinta.Core
 			System = new SystemManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
+			Settings = new SettingsManager ();
 		}
 		
 		public static void Initialize (Toolbar toolToolBar,

@@ -48,7 +48,8 @@ namespace Pinta
 		ColorPaletteWidget color;
 		MenuBar main_menu;
 		ScrolledWindow sw;
-
+		DockFrame dock;
+		
 		public MainWindow () : base (WindowType.Toplevel)
 		{
 			CreateWindow ();
@@ -77,6 +78,10 @@ namespace Pinta
 			PintaCore.Actions.File.NewFile (new Gdk.Size (800, 600));
 			
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
+			
+			PintaCore.Actions.File.BeforeQuit += delegate {
+				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
+			};
 			
 			if (Platform.GetOS () == Platform.OS.Mac) {
 				try {
@@ -313,7 +318,7 @@ namespace Pinta
 			};
 			
 			// Dock widget
-			DockFrame dock = new DockFrame ();
+			dock = new DockFrame ();
 			dock.CompactGuiLevel = 5;
 
 			// Toolbox pad
@@ -383,7 +388,14 @@ namespace Pinta
 
 			container.PackStart (dock, true, true, 0);
 			
-			dock.CreateLayout ("Default", false);
+			string layout_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
+			
+			if (System.IO.File.Exists (layout_file))
+				dock.LoadLayouts (layout_file);
+			
+			if (!dock.HasLayout ("Default"))
+				dock.CreateLayout ("Default", false);
+				
 			dock.CurrentLayout = "Default";
 		}
 		
