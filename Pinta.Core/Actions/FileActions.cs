@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public Gtk.Action Exit { get; private set; }
 		
 		private RecentData recentData;
+		private string lastDialogDir;
 		
 		public event EventHandler BeforeQuit;
 		
@@ -65,6 +66,8 @@ namespace Pinta.Core
 			recentData.AppName = "Pinta";
 			recentData.AppExec = GetExecutablePathname ();
 			recentData.MimeType = "image/*";
+			
+			lastDialogDir = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
 
 			Close = new Gtk.Action ("Close", Mono.Unix.Catalog.GetString ("Close"), null, "gtk-close");
 			Save = new Gtk.Action ("Save", Mono.Unix.Catalog.GetString ("Save"), null, "gtk-save");
@@ -283,10 +286,14 @@ namespace Pinta.Core
 				ff2.Name = Catalog.GetString ("All files");
 				ff2.AddPattern ("*.*");
 				fcd.AddFilter (ff2);
+				
+				fcd.SetCurrentFolder (lastDialogDir);
 
 				int response = fcd.Run ();
 			
 				if (response == (int)Gtk.ResponseType.Ok) {
+					lastDialogDir = fcd.CurrentFolder;
+
 					if (OpenFile (fcd.Filename)) {
 						AddRecentFileUri (fcd.Uri);
 
@@ -316,6 +323,14 @@ namespace Pinta.Core
 			                                                       Gtk.Stock.Save, Gtk.ResponseType.Ok);
 			
 			fcd.DoOverwriteConfirmation = true;
+			fcd.SetCurrentFolder (lastDialogDir);
+			bool hasFile = PintaCore.Workspace.ActiveDocument.HasFile;
+			string currentExt = null;
+			
+			if (hasFile) {
+				fcd.CurrentName = PintaCore.Workspace.Filename;
+				currentExt = Path.GetExtension(PintaCore.Workspace.Filename.ToLowerInvariant ());
+			}
 			
 			Dictionary<string, string> filetypes = new Dictionary<string, string> ();
 						
@@ -336,10 +351,11 @@ namespace Pinta.Core
 					fcd.AddFilter (ff);
 
 					filetypes[ff.Name] = format.Name;
+					string formatName = format.Name.ToLowerInvariant ();
 					
-					if (format.Name.ToLowerInvariant () == "jpeg")
-						fcd.Filter = ff;					
-			        }			
+					if ((hasFile && currentExt == "." + formatName) || (formatName == "jpeg" && (!hasFile || currentExt == ".jpg")))
+						fcd.Filter = ff;
+					}
 			}
 			
 			// Add the OpenRaster file format
@@ -348,10 +364,15 @@ namespace Pinta.Core
 			ora.AddPattern ("*.ora");
 			filetypes[ora.Name] = "ora";
 			fcd.AddFilter (ora);
-						
+			
+			if (hasFile && currentExt == ".ora") {
+				fcd.Filter = ora;
+			}
+			
 			int response = fcd.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
+				lastDialogDir = fcd.CurrentFolder;
 				SaveFile (fcd.Filename, filetypes[fcd.Filter.Name]);
 				AddRecentFileUri (fcd.Uri);
 
