@@ -174,17 +174,22 @@ namespace Pinta.Gui.Widgets
 			int dx = (fDstRight - fDstLeft) / dst.Width;
 			int dy = (fDstBottom - fDstTop) / dst.Height;
 
+			ColorBgra* src_ptr = (ColorBgra*)src.DataPtr;
+			ColorBgra* dst_ptr = (ColorBgra*)dst.DataPtr;
+			int src_width = src.Width;
+			int dst_width = dst.Width;
+			
 			for (int dstRow = 0, fDstY = fDstTop; dstRow < dst.Height && fDstY < fDstBottom; ++dstRow, fDstY += dy) {
 				int srcY1 = fDstY >> fpShift;                            // y
 				int srcY2 = (fDstY + (dy >> 2)) >> fpShift;              // y + 0.25
 				int srcY3 = (fDstY + (dy >> 1)) >> fpShift;              // y + 0.50
 				int srcY4 = (fDstY + (dy >> 1) + (dy >> 2)) >> fpShift;  // y + 0.75
 
-				ColorBgra* src1 = src.GetRowAddressUnchecked (srcY1);
-				ColorBgra* src2 = src.GetRowAddressUnchecked (srcY2);
-				ColorBgra* src3 = src.GetRowAddressUnchecked (srcY3);
-				ColorBgra* src4 = src.GetRowAddressUnchecked (srcY4);
-				ColorBgra* dstPtr = dst.GetRowAddressUnchecked (dstRow);
+				ColorBgra* src1 = src.GetRowAddressUnchecked (src_ptr, src_width, srcY1);
+				ColorBgra* src2 = src.GetRowAddressUnchecked (src_ptr, src_width, srcY2);
+				ColorBgra* src3 = src.GetRowAddressUnchecked (src_ptr, src_width, srcY3);
+				ColorBgra* src4 = src.GetRowAddressUnchecked (src_ptr, src_width, srcY4);
+				ColorBgra* dstPtr = dst.GetRowAddressUnchecked (dst_ptr, dst_width, dstRow);
 				int checkerY = dstRow + offset.Y;
 				int checkerX = offset.X;
 				int maxCheckerX = checkerX + dst.Width;
