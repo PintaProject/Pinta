@@ -229,7 +229,7 @@ namespace Pinta.Core
 		
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
-			return new Cairo.PointD ((x - Offset.X) / PintaCore.Workspace.Scale, (y - Offset.Y) / PintaCore.Workspace.Scale);
+			return new Cairo.PointD (Math.Round ((x - Offset.X) / PintaCore.Workspace.Scale), Math.Round ((y - Offset.Y) / PintaCore.Workspace.Scale));
 		}
 
 		public bool PointInCanvas (Cairo.PointD point)
