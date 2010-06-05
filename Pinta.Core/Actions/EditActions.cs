@@ -68,6 +68,7 @@ namespace Pinta.Core
 			SelectAll = new Gtk.Action ("SelectAll", Mono.Unix.Catalog.GetString ("Select All"), null, "Menu.Edit.SelectAll.png");
 			Deselect = new Gtk.Action ("Deselect", Mono.Unix.Catalog.GetString ("Deselect"), null, "Menu.Edit.Deselect.png");
 			
+			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
 			PasteIntoNewImage.Sensitive = false;

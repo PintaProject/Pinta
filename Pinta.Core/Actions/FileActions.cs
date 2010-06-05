@@ -76,6 +76,11 @@ namespace Pinta.Core
 			Exit = new Gtk.Action ("Exit", Mono.Unix.Catalog.GetString ("Quit"), null, "gtk-quit");
 
 //			OpenRecent.Sensitive = false;
+			New.ShortLabel = "New";
+			Open.ShortLabel = "Open";
+			Open.IsImportant = true;
+			Save.IsImportant = true;
+			
 			Close.Sensitive = false;
 			Print.Sensitive = false;
 		}
