@@ -277,10 +277,13 @@ namespace Pinta
 			Toolbar main_toolbar = new Toolbar () {
 				Name = "main_toolbar",
 				ShowArrow = false,
-				ToolbarStyle = ToolbarStyle.Icons,
-				IconSize = IconSize.SmallToolbar
 			};
-
+			
+			if (Platform.GetOS () == Platform.OS.Windows) {
+				main_toolbar.ToolbarStyle = ToolbarStyle.Icons;
+				main_toolbar.IconSize = IconSize.SmallToolbar;
+			}
+			
 			PintaCore.Actions.CreateToolBar (main_toolbar);
 
 			shell.PackStart (main_toolbar, false, false, 0);
