@@ -297,8 +297,10 @@ namespace Pinta
 				ShowArrow = false,
 				ToolbarStyle = ToolbarStyle.Icons,
 				IconSize = IconSize.SmallToolbar,
-				HeightRequest = 28
 			};
+			
+			if (Platform.GetOS () == Platform.OS.Windows)
+				tool_toolbar.HeightRequest = 28;
 
 			shell.PackStart (tool_toolbar, false, false, 0);
 		}
