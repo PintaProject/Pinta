@@ -1678,7 +1678,7 @@ this.OnKeyPress (canvas, args);
 			byte[] bytes = { (byte) c, (byte) (c >> 8), (byte) (c >> 16), (byte) (c >> 24) };
 			string unicodeChar = System.Text.Encoding.UTF32.GetString (bytes);
 		
-			lines[linePos] = ((string)lines[linePos]).Insert (textPos, ((char)c).ToString ());
+			lines[linePos] = ((string)lines[linePos]).Insert (textPos, unicodeChar);
 			this.sizes = null;
 		}
 		
