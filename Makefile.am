@@ -49,17 +49,12 @@ cleanobj:
 	
 # target: install - Installs Pinta. 
 install: pinta $(BINFILES) $(EXTENSIONS)
-	mkdir -p $(prefix)/bin
-	mkdir -p $(prefix)/lib/$(PACKAGE)
-	mkdir -p $(prefix)/lib/$(PACKAGE)/Extensions
-	$(INSTALL_DATA) -t $(prefix)/lib/$(PACKAGE)/ $(BINFILES)
-	$(INSTALL_DATA) -t $(prefix)/lib/$(PACKAGE)/Extensions/ $(EXTENSIONS)
-	$(INSTALL_SCRIPT) pinta $(prefix)/bin/$(PACKAGE)
+	$(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta/Pinta.csproj
+	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(prefix)/bin/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
 uninstall: 
-	rm -vf $(prefix)/bin/$(PACKAGE)
-	rm -rvf $(prefix)/lib/$(PACKAGE)
+	$(XBUILD) /target:Uninstall /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta/Pinta.csproj
 
 # target: release - Default release type: releasetar
 release: releasetar
