@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -40,7 +41,7 @@ namespace Pinta.Core
 			old_height = oldHeight;
 
 			Icon = "Menu.Image.Resize.png";
-			Text = "Resize Image";
+			Text = Catalog.GetString ("Resize Image");
 		}
 		
 		public Cairo.Path RestorePath { get; set; }

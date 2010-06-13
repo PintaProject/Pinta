@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -39,7 +40,7 @@ namespace Pinta.Core
 		
 		public FinishPixelsHistoryItem ()
 		{
-			Text = "Finish Pixels";
+			Text = Catalog.GetString ("Finish Pixels");
 			Icon = "Tools.Move.png";
 		}
 

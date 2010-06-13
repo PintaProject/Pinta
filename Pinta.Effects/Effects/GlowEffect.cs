@@ -12,6 +12,7 @@ using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Effects;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -27,7 +28,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Glow"); }
+			get { return Catalog.GetString ("Glow"); }
 		}
 
 		public override bool IsConfigurable {
@@ -35,7 +36,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return "Photo"; }
+			get { return Catalog.GetString ("Photo"); }
 		}
 
 		public GlowData Data { get { return EffectData as GlowData; } }

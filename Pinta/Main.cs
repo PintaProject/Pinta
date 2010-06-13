@@ -29,6 +29,7 @@ using Gtk;
 using Mono.Options;
 using System.Collections.Generic;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta
 {
@@ -39,7 +40,7 @@ namespace Pinta
 			int threads = -1;
 			
 			var p = new OptionSet () {
-				{ "rt|render-threads=", "number of threads to use for rendering", (int v) => threads = v }
+				{ "rt|render-threads=", Catalog.GetString ("number of threads to use for rendering"), (int v) => threads = v }
 			};
 
 			List<string> extra;
@@ -93,7 +94,7 @@ namespace Pinta
 			Exception ex = (Exception)args.ExceptionObject;
 			
 			try {
-				errorDialog.Message = string.Format ("Unhandled exception:\n{0}", ex.Message);
+				errorDialog.Message = string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message);
 				errorDialog.AddDetails (ex.ToString (), false);
 				errorDialog.Run ();
 			} finally {

@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Gtk;
 using System.IO;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -131,7 +132,7 @@ namespace Pinta.Core
 		protected virtual void OnBuildToolBar (Toolbar tb)
 		{
 			if (tool_label == null)
-				tool_label = new ToolBarLabel (" Tool:  ");
+				tool_label = new ToolBarLabel (string.Format (" {0}:  ", Catalog.GetString ("Tool")));
 			
 			tb.AppendItem (tool_label);
 			
@@ -189,7 +190,7 @@ namespace Pinta.Core
 			tool_item.Label = Name;
 			
 			if (ShortcutKey != (Gdk.Key)0)
-				tool_item.TooltipText = string.Format ("{0}\nShortcut key: {1}", Name, ShortcutKey.ToString ().ToUpperInvariant ());
+				tool_item.TooltipText = string.Format ("{0}\n{2}: {1}", Name, ShortcutKey.ToString ().ToUpperInvariant (), Catalog.GetString ("Shortcut key"));
 			else
 				tool_item.TooltipText = Name;
 			
@@ -213,8 +214,8 @@ namespace Pinta.Core
 			alphablending_btn = new ToggleToolButton ();
 			alphablending_btn.IconWidget = blending_off_icon;
 			alphablending_btn.Show ();
-			alphablending_btn.Label = "Antialiasing";
-			alphablending_btn.TooltipText = "Normal blending / Overwrite blending";
+			alphablending_btn.Label = Catalog.GetString ("Antialiasing");
+			alphablending_btn.TooltipText = Catalog.GetString ("Normal blending / Overwrite blending");
 			alphablending_btn.Toggled += delegate {
 				if (alphablending_btn.Active)
 					alphablending_btn.IconWidget = blending_on_icon;
@@ -234,8 +235,8 @@ namespace Pinta.Core
 			antialiasing_btn = new ToggleToolButton ();
 			antialiasing_btn.IconWidget = antialiasing_off_icon;
 			antialiasing_btn.Show ();
-			antialiasing_btn.Label = "Antialiasing";
-			antialiasing_btn.TooltipText = "Antialiasing";
+			antialiasing_btn.Label = Catalog.GetString ("Antialiasing");
+			antialiasing_btn.TooltipText = Catalog.GetString ("Antialiasing");
 			antialiasing_btn.Toggled += delegate {
 				if (antialiasing_btn.Active)
 					antialiasing_btn.IconWidget = antialiasing_on_icon;

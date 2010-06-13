@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -46,23 +47,23 @@ namespace Pinta.Core
 				//        Icon = "Menu.Adjustments.InvertColors.png";
 				//        break;
 				case InvertType.Rotate180:
-					Text = Mono.Unix.Catalog.GetString ("Rotate 180°");
+					Text = Catalog.GetString ("Rotate 180°");
 					Icon = "Menu.Image.Rotate180CW.png";
 					break;
 				case InvertType.FlipHorizontal:
-					Text = Mono.Unix.Catalog.GetString ("Flip Image Horizontal");
+					Text = Catalog.GetString ("Flip Image Horizontal");
 					Icon = "Menu.Image.FlipHorizontal.png";
 					break;
 				case InvertType.FlipVertical:
-					Text = Mono.Unix.Catalog.GetString ("Flip Image Vertical");
+					Text = Catalog.GetString ("Flip Image Vertical");
 					Icon = "Menu.Image.FlipVertical.png";
 					break;
 				case InvertType.Rotate90CW:
-					Text = Mono.Unix.Catalog.GetString ("Rotate 90° Clockwise");
+					Text = Catalog.GetString ("Rotate 90° Clockwise");
 					Icon = "Menu.Image.Rotate90CW.png";
 					break;
 				case InvertType.Rotate90CCW:
-					Text = Mono.Unix.Catalog.GetString ("Rotate 90° Counter-Clockwise");
+					Text = Catalog.GetString ("Rotate 90° Counter-Clockwise");
 					Icon = "Menu.Image.Rotate90CCW.png";
 					break;
 			}
@@ -75,11 +76,11 @@ namespace Pinta.Core
 
 			switch (type) {
 				case InvertType.FlipLayerHorizontal:
-					Text = Mono.Unix.Catalog.GetString ("Flip Layer Horizontal");
+					Text = Catalog.GetString ("Flip Layer Horizontal");
 					Icon = "Menu.Image.FlipHorizontal.png";
 					break;
 				case InvertType.FlipLayerVertical:
-					Text = Mono.Unix.Catalog.GetString ("Flip Layer Vertical");
+					Text = Catalog.GetString ("Flip Layer Vertical");
 					Icon = "Menu.Image.FlipVertical.png";
 					break;
 			}

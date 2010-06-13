@@ -27,6 +27,8 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using Gtk;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -43,9 +45,9 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Website.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Website.png")));
 			fact.AddDefault ();
 			
-			Website = new Gtk.Action ("Website", Mono.Unix.Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
-			Bugs = new Gtk.Action ("Bugs", Mono.Unix.Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
-			About = new Gtk.Action ("About", Mono.Unix.Catalog.GetString ("About"), null, "gtk-about");
+			Website = new Gtk.Action ("Website", Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
+			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
+			About = new Gtk.Action ("About", Catalog.GetString ("About"), null, Stock.About);
 		}
 
 		#region Initialization
@@ -61,23 +63,6 @@ namespace Pinta.Core
 		{
 			Website.Activated += new EventHandler (Website_Activated);
 			Bugs.Activated += new EventHandler (Bugs_Activated);
-		}
-
-		private void About_Activated (object sender, EventArgs e)
-		{
-			Gtk.AboutDialog dialog = new Gtk.AboutDialog ();
-
-			dialog.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
-			dialog.Version = "0.3";
-			dialog.ProgramName = "Pinta";
-			dialog.Website = "http://www.pinta-project.com";
-			dialog.WebsiteLabel = "Visit Homepage";
-			dialog.Copyright = "Copyright \xa9 2010 Jonathan Pobst";
-			dialog.Authors = new string[] { "Jonathan Pobst" };
-			dialog.Documenters = null;
-			dialog.TranslatorCredits = null;
-			dialog.Run ();
-			dialog.Destroy ();
 		}
 
 		private void Bugs_Activated (object sender, EventArgs e)

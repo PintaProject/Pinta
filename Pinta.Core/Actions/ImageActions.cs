@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -54,15 +55,15 @@ namespace Pinta.Core
 			fact.Add ("Menu.Image.Rotate90CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CW.png")));
 			fact.AddDefault ();
 			
-			CropToSelection = new Gtk.Action ("CropToSelection", Mono.Unix.Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			Resize = new Gtk.Action ("Resize", Mono.Unix.Catalog.GetString ("Resize..."), null, "Menu.Image.Resize.png");
-			CanvasSize = new Gtk.Action ("CanvasSize", Mono.Unix.Catalog.GetString ("Canvas Size..."), null, "Menu.Image.CanvasSize.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Mono.Unix.Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Mono.Unix.Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
-			RotateCW = new Gtk.Action ("RotateCW", Mono.Unix.Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
-			RotateCCW = new Gtk.Action ("RotateCCW", Mono.Unix.Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
-			Rotate180 = new Gtk.Action ("Rotate180", Mono.Unix.Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
-			Flatten = new Gtk.Action ("Flatten", Mono.Unix.Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
+			CropToSelection = new Gtk.Action ("CropToSelection", Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
+			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize..."), null, "Menu.Image.Resize.png");
+			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Canvas Size..."), null, "Menu.Image.CanvasSize.png");
+			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
+			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
+			RotateCW = new Gtk.Action ("RotateCW", Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
+			RotateCCW = new Gtk.Action ("RotateCCW", Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
+			Rotate180 = new Gtk.Action ("Rotate180", Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
+			Flatten = new Gtk.Action ("Flatten", Catalog.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
 			
 			CropToSelection.Sensitive = false;
 		}
@@ -117,7 +118,7 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Mono.Unix.Catalog.GetString ("Flatten"));
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
 			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[0].Surface.Clone (), 0);
 			hist.Push (h1);
 
@@ -164,7 +165,7 @@ namespace Pinta.Core
 			
 			ResizeHistoryItem hist = new ResizeHistoryItem (PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height);
 			hist.Icon = "Menu.Image.Crop.png";
-			hist.Text = "Crop to Selection";
+			hist.Text = Catalog.GetString ("Crop to Selection");
 			hist.TakeSnapshotOfImage ();
 			hist.RestorePath = PintaCore.Layers.SelectionPath.Clone ();
 

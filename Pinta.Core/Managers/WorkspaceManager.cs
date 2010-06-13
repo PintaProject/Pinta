@@ -26,6 +26,7 @@
 
 using System;
 using Cairo;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -126,7 +127,7 @@ namespace Pinta.Core
 			int i = 0;
 
 			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == "Window" || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= zoom) {
+				if (((object[])item)[0].ToString () == Catalog.GetString ("Window") || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= zoom) {
 					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 					return;
 				}
@@ -147,7 +148,7 @@ namespace Pinta.Core
 			int i = 0;
 
 			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == "Window")
+				if (((object[])item)[0].ToString () == Catalog.GetString ("Window"))
 					return;
 
 				if (int.Parse (((object[])item)[0].ToString ().Trim ('%')) < zoom) {
@@ -212,7 +213,7 @@ namespace Pinta.Core
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.Width, ImageSize.Height);
 			hist.Icon = "Menu.Image.CanvasSize.png";
-			hist.Text = "Resize Canvas";
+			hist.Text = Catalog.GetString ("Resize Canvas");
 			hist.TakeSnapshotOfImage ();
 
 			ImageSize = new Gdk.Size (width, height);

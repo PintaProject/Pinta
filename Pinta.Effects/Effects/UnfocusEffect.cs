@@ -11,6 +11,7 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -24,7 +25,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Unfocus"); }
+			get { return Catalog.GetString ("Unfocus"); }
 		}
 
 		public override bool IsConfigurable {
@@ -32,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return "Blurs"; }
+			get { return Catalog.GetString ("Blurs"); }
 		}
 
 		public UnfocusData Data { get { return EffectData as UnfocusData; } }
