@@ -149,4 +149,41 @@
       <Name>Pinta.Gui.Widgets</Name>
     </ProjectReference>
   </ItemGroup>
+  <PropertyGroup>
+    <InstallPrefix>/usr/local</InstallPrefix>
+  </PropertyGroup>
+  <ItemGroup>
+    <BinFiles Include="$(OutputPath)/Pinta.exe" />
+    <BinFiles Include="$(OutputPath)/Pinta.*.dll" />
+    <ExtensionFiles Include="$(OutputPath)/Extensions/*.dll" />
+  </ItemGroup>
+  <Target Name="Install">
+    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta" />
+    <Copy SourceFiles="@(ExtensionFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta/Extensions" />
+    <MakeDir Directories="$(InstallPrefix)/bin" />
+    <Copy SourceFiles="../xdg/pinta.1" DestinationFolder="$(InstallPrefix)/share/man/man1" />
+    <Copy SourceFiles="../xdg/pinta.desktop" DestinationFolder="$(InstallPrefix)/share/applications" />
+    <Copy SourceFiles="../xdg/pinta.xpm" DestinationFolder="$(InstallPrefix)/share/pixmaps" />
+    <Copy SourceFiles="../xdg/16x16/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/16x16/apps" />
+    <Copy SourceFiles="../xdg/22x22/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/22x22/apps" />
+    <Copy SourceFiles="../xdg/24x24/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/24x24/apps" />
+    <Copy SourceFiles="../xdg/32x32/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/32x32/apps" />
+    <Copy SourceFiles="../xdg/96x96/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/96x96/apps" />
+    <Copy SourceFiles="../xdg/scalable/pinta.svg" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/scalable/apps" />
+    <Exec Command='gzip -f "$(InstallPrefix)/share/man/man1/pinta.1"' />
+  </Target>
+  <Target Name="Uninstall">
+    <Exec Command='rm -rf "$(InstallPrefix)/lib/pinta"' />
+    <Delete Files="$(InstallPrefix)/bin/pinta" />
+    <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1" />
+    <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1.gz" />
+    <Delete Files="$(InstallPrefix)/share/applications/pinta.desktop" />
+    <Delete Files="$(InstallPrefix)/share/pixmaps/pinta.xpm" />
+    <Delete Files="$(InstallPrefix)/share/icons/hicolor/16x16/apps/pinta.png" />
+    <Delete Files="$(InstallPrefix)/share/icons/hicolor/22x22/apps/pinta.png" />
+    <Delete Files="$(InstallPrefix)/share/icons/hicolor/24x24/apps/pinta.png" />
+    <Delete Files="$(InstallPrefix)/share/icons/hicolor/32x32/apps/pinta.png" />
+    <Delete Files="$(InstallPrefix)/share/icons/hicolor/96x96/apps/pinta.png" />
+    <Delete Files="$(InstallPrefix)/share/icons/hicolor/scalable/apps/pinta.svg" />
+  </Target>
 </Project>
