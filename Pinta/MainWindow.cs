@@ -32,6 +32,7 @@ using Gtk;
 using MonoDevelop.Components.Docking;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
+using Mono.Unix;
 
 namespace Pinta
 {
@@ -99,7 +100,7 @@ namespace Pinta
 					//add a new group to the app menu, and add some items to it
 					var appGroup = IgeMacMenu.AddAppMenuGroup ();
 					MenuItem aboutItem = (MenuItem)PintaCore.Actions.Help.About.CreateMenuItem ();
-					appGroup.AddMenuItem (aboutItem, Mono.Unix.Catalog.GetString ("About"));
+					appGroup.AddMenuItem (aboutItem, Catalog.GetString ("About"));
 
 					main_menu.Hide ();
 				} catch {
@@ -225,7 +226,7 @@ namespace Pinta
 		{
 			// Window
 			Name = "Pinta.MainWindow";
-			Title = Mono.Unix.Catalog.GetString ("Pinta!");
+			Title = "Pinta";
 			WindowPosition = WindowPosition.Center;
 			AllowShrink = true;
 			DefaultWidth = 1100;
@@ -257,15 +258,15 @@ namespace Pinta
 				Name = "main_menu"
 			};
 
-			main_menu.Append (new Gtk.Action ("file", "File").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("edit", "Edit").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("view", "View").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("image", "Image").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("layers", "Layers").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("adjustments", "Adjustments").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("effects", "Effects").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("window", "Window").CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("help", "Help").CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("File")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("Edit")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("view", Catalog.GetString ("View")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("Image")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("Layers")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("Adjustments")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effects")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("window", Catalog.GetString ("Window")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("Help")).CreateMenuItem ());
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
 			shell.PackStart (main_menu, false, false, 0);
@@ -343,7 +344,7 @@ namespace Pinta
 			DockItem toolbox_item = dock.AddItem ("Toolbox");
 			toolbox = new ToolBoxWidget () { Name = "toolbox" };
 			
-			toolbox_item.Label = "Tools";
+			toolbox_item.Label = Catalog.GetString ("Tools");
 			toolbox_item.Content = toolbox;
 			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
@@ -353,7 +354,7 @@ namespace Pinta
 			DockItem palette_item = dock.AddItem ("Palette");
 			color = new ColorPaletteWidget () { Name = "color" };
 
-			palette_item.Label = "Palette";
+			palette_item.Label = Catalog.GetString ("Palette");
 			palette_item.Content = color;
 			palette_item.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 			palette_item.DefaultLocation = "Toolbox/Bottom";
@@ -366,7 +367,7 @@ namespace Pinta
 			documentDockItem.Expand = true;
 
 			documentDockItem.DrawFrame = false;
-			documentDockItem.Label = "Documents";
+			documentDockItem.Label = Catalog.GetString ("Documents");
 			documentDockItem.Content = sw;
 			
 			sw.Add (vp);
@@ -380,7 +381,7 @@ namespace Pinta
 			DockItem layers_item = dock.AddItem ("Layers");
 			DockItemToolbar layers_tb = layers_item.GetToolbar (PositionType.Bottom);
 			
-			layers_item.Label = "Layers";
+			layers_item.Label = Catalog.GetString ("Layers");
 			layers_item.Content = layers;
 			layers_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.MergeLayerDown.png");
 
@@ -396,7 +397,7 @@ namespace Pinta
 			DockItem history_item = dock.AddItem ("History");
 			DockItemToolbar history_tb = history_item.GetToolbar (PositionType.Bottom);
 			
-			history_item.Label = "History";
+			history_item.Label = Catalog.GetString ("History");
 			history_item.DefaultLocation = "Layers/Bottom";
 			history_item.Content = history;
 			history_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png");

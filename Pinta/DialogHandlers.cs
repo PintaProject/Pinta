@@ -175,22 +175,22 @@ namespace Pinta
 			int count = 0;
 			
 			if (updated.Opacity != initial.Opacity) {
-				ret = "Layer Opacity";
+				ret = Catalog.GetString ("Layer Opacity");
 				count++;
 			}
 				
 			if (updated.Name != initial.Name) {
-				ret = "Rename Layer";
+				ret = Catalog.GetString ("Rename Layer");
 				count++;
 			}
 			
 			if (updated.Hidden != initial.Hidden) {
-				ret = (updated.Hidden) ? "Hide Layer" : "Show Layer";
+				ret = (updated.Hidden) ? Catalog.GetString ("Hide Layer") : Catalog.GetString ("Show Layer");
 				count++;
 			}
 			
 			if (ret == null || count > 1)
-				ret = "Layer Properties";
+				ret = Catalog.GetString ("Layer Properties");
 			
 			return ret;
 		}		
