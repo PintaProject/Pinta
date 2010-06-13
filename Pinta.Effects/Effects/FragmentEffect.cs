@@ -11,6 +11,7 @@ using System;
 using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -22,7 +23,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Fragment"); }
+			get { return Catalog.GetString ("Fragment"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +31,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return "Blurs"; }
+			get { return Catalog.GetString ("Blurs"); }
 		}
 
 		public FragmentData Data { get { return EffectData as FragmentData; } }

@@ -11,6 +11,7 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -22,7 +23,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Oil Painting"); }
+			get { return Catalog.GetString ("Oil Painting"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +31,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return "Artistic"; }
+			get { return Catalog.GetString ("Artistic"); }
 		}
 
 		public OilPaintingData Data { get { return EffectData as OilPaintingData; } }

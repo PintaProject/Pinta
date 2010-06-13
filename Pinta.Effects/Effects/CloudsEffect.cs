@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Pinta.Gui.Widgets;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -26,7 +27,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Clouds"); }
+			get { return Catalog.GetString ("Clouds"); }
 		}
 
 		public override bool IsConfigurable {
@@ -34,7 +35,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return "Render"; }
+			get { return Catalog.GetString ("Render"); }
 		}
 
 		public CloudsData Data { get { return EffectData as CloudsData; } }

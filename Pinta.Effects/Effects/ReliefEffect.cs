@@ -10,6 +10,7 @@
 using System;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -29,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return "Stylize"; }
+			get { return Catalog.GetString ("Stylize"); }
 		}
 
 		public override bool LaunchConfiguration () {
@@ -41,7 +42,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Text {
-			get { return Mono.Unix.Catalog.GetString ("Relief"); }
+			get { return Catalog.GetString ("Relief"); }
 		}
 
 		#region Algorithm Code Ported From PDN
