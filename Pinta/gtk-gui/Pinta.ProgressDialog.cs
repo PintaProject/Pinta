@@ -31,7 +31,7 @@ namespace Pinta {
             // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.label = new Gtk.Label();
             this.label.Name = "label";
-            this.label.LabelProp = Mono.Unix.Catalog.GetString("label2");
+            this.label.LabelProp = "label2";
             w1.Add(this.label);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(w1[this.label]));
             w2.Position = 0;

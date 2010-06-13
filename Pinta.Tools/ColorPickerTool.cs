@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -40,13 +41,13 @@ namespace Pinta.Tools
 
 		#region Properties
 		public override string Name {
-			get { return "Color Picker"; }
+			get { return Catalog.GetString ("Color Picker"); }
 		}
 		public override string Icon {
 			get { return "Tools.ColorPicker.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Left click to set primary color. Right click to set secondary color."; }
+			get { return Catalog.GetString ("Left click to set primary color. Right click to set secondary color."); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.K; } }
 		public override int Priority { get { return 31; } }
