@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Pinta Translatable Strings
+# Copyright (C) 2010 Pinta Contributors
+# This file is distributed under the same license as the Pinta package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -157,8 +157,7 @@ msgstr "Site Web de Pinta"
 msgid "File a Bug"
 msgstr "Rapporter un Bug"
 
-#: Pinta.Core/Actions/HelpActions.cs:48 Pinta/MainWindow.cs:102
-#: Pinta.Core/Actions/HelpActions.cs:48 Pinta/MainWindow.cs:102
+#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:50
 msgid "About"
 msgstr "A propos"
 

@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Pinta Translatable Strings
+# Copyright (C) 2010 Pinta Contributors
+# This file is distributed under the same license as the Pinta package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -103,6 +103,8 @@ msgstr ""
 msgid "Previous Contributors"
 msgstr ""
 
+# Do not translate this string verbatim, instead,
+# add your name here so it appears in the About dialog
 #: Pinta/Dialogs/AboutDialog.cs:116
 msgid "translator-credits"
 msgstr ""
