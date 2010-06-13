@@ -30,6 +30,7 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Cairo;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -279,7 +280,7 @@ namespace Pinta.Core
 		public Layer DuplicateCurrentLayer ()
 		{
 			Layer source = CurrentLayer;
-			Layer layer = CreateLayer (source.Name + " copy");
+			Layer layer = CreateLayer (string.Format ("{0} {1}", source.Name, Catalog.GetString ("copy")));
 			
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				g.SetSource (source.Surface);
@@ -534,7 +535,7 @@ namespace Pinta.Core
 		#region Private Methods
 		public Layer CreateLayer ()
 		{
-			return CreateLayer (string.Format ("Layer {0}", layer_name_int++));
+			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++));
 		}
 
 		private Layer CreateLayer (string name)

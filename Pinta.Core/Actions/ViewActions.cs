@@ -28,7 +28,6 @@ using System;
 using Mono.Unix;
 using Gtk;
 
-
 namespace Pinta.Core
 {
 	public class ViewActions
@@ -60,20 +59,20 @@ namespace Pinta.Core
 			fact.Add ("Menu.View.ZoomToWindow.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomToWindow.png")));
 			fact.AddDefault ();
 			
-			ZoomIn = new Gtk.Action ("ZoomIn", Mono.Unix.Catalog.GetString ("Zoom In"), null, "Menu.View.ZoomIn.png");
-			ZoomOut = new Gtk.Action ("ZoomOut", Mono.Unix.Catalog.GetString ("Zoom Out"), null, "Menu.View.ZoomOut.png");
-			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Mono.Unix.Catalog.GetString ("Zoom to Window"), null, "Menu.View.ZoomToWindow.png");
-			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Mono.Unix.Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
-			ActualSize = new Gtk.Action ("ActualSize", Mono.Unix.Catalog.GetString ("Actual Size"), null, "Menu.View.ActualSize.png");
-			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Mono.Unix.Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
-			Rulers = new Gtk.ToggleAction ("Rulers", Mono.Unix.Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
-			Pixels = new Gtk.Action ("Pixels", Mono.Unix.Catalog.GetString ("Pixels"), null, null);
-			Inches = new Gtk.Action ("Inches", Mono.Unix.Catalog.GetString ("Inches"), null, null);
-			Centimeters = new Gtk.Action ("Centimeters", Mono.Unix.Catalog.GetString ("Centimeters"), null, null);
-			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Gtk.Stock.Fullscreen);
+			ZoomIn = new Gtk.Action ("ZoomIn", Catalog.GetString ("Zoom In"), null, "Menu.View.ZoomIn.png");
+			ZoomOut = new Gtk.Action ("ZoomOut", Catalog.GetString ("Zoom Out"), null, "Menu.View.ZoomOut.png");
+			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Zoom to Window"), null, "Menu.View.ZoomToWindow.png");
+			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
+			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Actual Size"), null, "Menu.View.ActualSize.png");
+			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
+			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
+			Pixels = new Gtk.Action ("Pixels", Catalog.GetString ("Pixels"), null, null);
+			Inches = new Gtk.Action ("Inches", Catalog.GetString ("Inches"), null, null);
+			Centimeters = new Gtk.Action ("Centimeters", Catalog.GetString ("Centimeters"), null, null);
+			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
 
 			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
-			UnitComboBox = new ToolBarComboBox (100, 0, false, "Pixels", "Inches", "Centimeters");
+			UnitComboBox = new ToolBarComboBox (100, 0, false, Catalog.GetString ("Pixels"), Catalog.GetString ("Inches"), Catalog.GetString ("Centimeters"));
 		}
 
 		#region Initialization
@@ -188,7 +187,7 @@ namespace Pinta.Core
 				
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
 
-			if (text == "Window") {
+			if (text == Catalog.GetString ("Window")) {
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				return;
 			}

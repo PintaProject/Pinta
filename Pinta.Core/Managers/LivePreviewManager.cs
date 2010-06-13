@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.ComponentModel;
 using Debug = System.Diagnostics.Debug;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -216,7 +217,7 @@ namespace Pinta.Core
 				HandleApply ();
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
-				dialog.Title = "Rendering Effect";
+				dialog.Title = Catalog.GetString ("Rendering Effect");
 				dialog.Text = effect.Text;
 				dialog.Progress = renderer.Progress;
 				dialog.Canceled += HandleProgressDialogCancel;

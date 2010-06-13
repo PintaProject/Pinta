@@ -27,6 +27,7 @@
 using System;
 using Gtk;
 using Cairo;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -55,18 +56,18 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.SelectAll.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.SelectAll.png")));
 			fact.AddDefault ();
 			
-			Undo = new Gtk.Action ("Undo", Mono.Unix.Catalog.GetString ("Undo"), null, "gtk-undo");
-			Redo = new Gtk.Action ("Redo", Mono.Unix.Catalog.GetString ("Redo"), null, "gtk-redo");
-			Cut = new Gtk.Action ("Cut", Mono.Unix.Catalog.GetString ("Cut"), null, "gtk-cut");
-			Copy = new Gtk.Action ("Copy", Mono.Unix.Catalog.GetString ("Copy"), null, "gtk-copy");
-			Paste = new Gtk.Action ("Paste", Mono.Unix.Catalog.GetString ("Paste"), null, "gtk-paste");
-			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Mono.Unix.Catalog.GetString ("Paste Into New Layer"), null, "gtk-paste");
-			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Mono.Unix.Catalog.GetString ("Paste Into New Image"), null, "gtk-paste");
-			EraseSelection = new Gtk.Action ("EraseSelection", Mono.Unix.Catalog.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
-			FillSelection = new Gtk.Action ("FillSelection", Mono.Unix.Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
-			InvertSelection = new Gtk.Action ("InvertSelection", Mono.Unix.Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Gtk.Action ("SelectAll", Mono.Unix.Catalog.GetString ("Select All"), null, "Menu.Edit.SelectAll.png");
-			Deselect = new Gtk.Action ("Deselect", Mono.Unix.Catalog.GetString ("Deselect"), null, "Menu.Edit.Deselect.png");
+			Undo = new Gtk.Action ("Undo", Catalog.GetString ("Undo"), null, Stock.Undo);
+			Redo = new Gtk.Action ("Redo", Catalog.GetString ("Redo"), null, Stock.Redo);
+			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cut"), null, Stock.Cut);
+			Copy = new Gtk.Action ("Copy", Catalog.GetString ("Copy"), null, Stock.Copy);
+			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
+			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
+			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
+			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
+			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
+			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
+			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
+			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("Deselect"), null, "Menu.Edit.Deselect.png");
 			
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
@@ -133,14 +134,14 @@ namespace Pinta.Core
 			}
 			
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Mono.Unix.Catalog.GetString ("Fill Selection"), old, PintaCore.Layers.CurrentLayerIndex));
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.SelectAll.png", Mono.Unix.Catalog.GetString ("Select All"));
+			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Catalog.GetString ("Select All"));
 			hist.TakeSnapshot ();
 
 			PintaCore.Layers.ResetSelectionPath ();
@@ -164,14 +165,14 @@ namespace Pinta.Core
 			}
 			
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Mono.Unix.Catalog.GetString ("Deselect"));
+			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 			
 			PintaCore.Layers.ResetSelectionPath ();
@@ -201,7 +202,7 @@ namespace Pinta.Core
 			
 			PintaCore.Workspace.Invalidate ();
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("gtk-paste", Mono.Unix.Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
+			AddLayerHistoryItem hist = new AddLayerHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
 			PintaCore.History.PushNewItem (hist);
 		}
 
@@ -229,7 +230,7 @@ namespace Pinta.Core
 			
 			PintaCore.Workspace.Invalidate ();
 			
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("gtk-paste", Mono.Unix.Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
+			PintaCore.History.PushNewItem (new SimpleHistoryItem (Stock.Paste, Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
@@ -272,7 +273,7 @@ namespace Pinta.Core
 			}
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Mono.Unix.Catalog.GetString ("Cut"), old, PintaCore.Layers.CurrentLayerIndex));
+			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
