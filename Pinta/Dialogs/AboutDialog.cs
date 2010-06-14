@@ -94,7 +94,7 @@ namespace Pinta
 		string CreditText {
 			get {
 				StringBuilder sb = new StringBuilder ();
-				sb.Append (Catalog.GetString ("<b>Contributors to this Release</b>\n\n"));
+				sb.AppendFormat ("<b>{0}</b>\n\n", Catalog.GetString ("Contributors to this Release"));
 
 				for (int n = 0; n < authors.Length; n++) {
 					sb.Append (authors[n]);
@@ -116,21 +116,21 @@ namespace Pinta
 				string trans = Catalog.GetString ("translator-credits");
 
 				if (trans != "translator-credits") {
-					sb.Append (Catalog.GetString ("\n\n<b>Translated by:</b>\n\n"));
+					sb.AppendFormat ("\n\n<b>{0}</b>\n\n", Catalog.GetString ("Translated by:"));
 					sb.Append (trans);
 				}
 
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendLine (Catalog.GetString ("<b>Based on the work of Paint.NET:</b>"));
+				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Based on the work of Paint.NET:"));
 				sb.AppendLine ();
 				sb.Append ("http://www.getpaint.net/");
 
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendLine (Catalog.GetString ("<b>Using some icons from:</b>"));
+				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Using some icons from:"));
 				sb.AppendLine ();
 				sb.AppendLine ("Silk - http://www.famfamfam.com/lab/icons/silk");
 				sb.Append ("Fugue - http://pinvoke.com/");
