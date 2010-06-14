@@ -30,6 +30,8 @@ using Mono.Options;
 using System.Collections.Generic;
 using Pinta.Core;
 using Mono.Unix;
+using System.IO;
+using System.Reflection;
 
 namespace Pinta
 {
@@ -37,6 +39,28 @@ namespace Pinta
 	{
 		public static void Main (string[] args)
 		{
+			string app_dir = Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location);
+			string locale_dir;
+			
+			if (Platform.GetOS () == Platform.OS.Windows)
+				locale_dir = Path.Combine (app_dir, "locale");	
+			else {
+				// From MonoDevelop:
+				// Pinta is located at $prefix/lib/pinta/bin
+				// adding "../../.." should give us $prefix
+				string prefix = Path.Combine (Path.Combine (Path.Combine (app_dir, ".."), ".."), "..");
+				//normalise it
+				prefix = Path.GetFullPath (prefix);
+				//catalogue is installed to "$prefix/share/locale" by default
+				locale_dir = Path.Combine (Path.Combine (prefix, "share"), "locale");
+			}
+
+			try {
+				Catalog.Init ("messages", locale_dir);
+			} catch (Exception ex) {
+				Console.WriteLine (ex);
+			}
+
 			int threads = -1;
 			
 			var p = new OptionSet () {
