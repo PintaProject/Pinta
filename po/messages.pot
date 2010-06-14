@@ -554,10 +554,6 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:552
-msgid "In stetic action button box cannot be empty"
-msgstr ""
-
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
 msgstr ""
