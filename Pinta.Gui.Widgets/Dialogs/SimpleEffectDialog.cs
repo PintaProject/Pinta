@@ -33,6 +33,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
+using Mono.Unix;
 
 namespace Pinta.Gui.Widgets
 {
@@ -100,26 +101,26 @@ namespace Pinta.Gui.Widgets
 					caption = MakeCaption (mi.Name);
 
 				if (mType == typeof (int) && (caption == "Seed"))
-					AddWidget (CreateSeed (caption, EffectData, mi, attrs));
+					AddWidget (CreateSeed (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (int))
-					AddWidget (CreateSlider (caption, EffectData, mi, attrs));
+					AddWidget (CreateSlider (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
-					AddWidget (CreateAnglePicker (caption, EffectData, mi, attrs));
+					AddWidget (CreateAnglePicker (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof(double))
-					AddWidget (CreateDoubleSlider (caption, EffectData, mi, attrs));
+					AddWidget (CreateDoubleSlider (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (combo && mType == typeof (string))
-					AddWidget (CreateComboBox (caption, EffectData, mi, attrs));
+					AddWidget (CreateComboBox (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (bool))
-					AddWidget (CreateCheckBox (caption, EffectData, mi, attrs));
+					AddWidget (CreateCheckBox (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (Gdk.Point))
-					AddWidget (CreatePointPicker (caption, EffectData, mi, attrs));
+					AddWidget (CreatePointPicker (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (Cairo.PointD))
-					AddWidget (CreateOffsetPicker (caption, EffectData, mi, attrs));
+					AddWidget (CreateOffsetPicker (Catalog.GetString (caption), EffectData, mi, attrs));
 				else if (mType.IsEnum)
-					AddWidget (CreateEnumComboBox (caption, EffectData, mi, attrs));
+					AddWidget (CreateEnumComboBox (Catalog.GetString (caption), EffectData, mi, attrs));
 				
 				if (hint != null)
-					AddWidget (CreateHintLabel (hint));
+					AddWidget (CreateHintLabel (Catalog.GetString (hint)));
 			}
 		}
 

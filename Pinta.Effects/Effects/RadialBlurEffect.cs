@@ -161,7 +161,7 @@ namespace Pinta.Effects
 			public PointD Offset = new PointD (0, 0);
 
 			[MinimumValue (1), MaximumValue (5)]
-			[Hint ("\nUse low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
+			[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
 			public int Quality = 2;
 			
 			[Skip]

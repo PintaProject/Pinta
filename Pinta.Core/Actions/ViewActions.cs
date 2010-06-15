@@ -59,11 +59,11 @@ namespace Pinta.Core
 			fact.Add ("Menu.View.ZoomToWindow.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomToWindow.png")));
 			fact.AddDefault ();
 			
-			ZoomIn = new Gtk.Action ("ZoomIn", Catalog.GetString ("Zoom In"), null, "Menu.View.ZoomIn.png");
-			ZoomOut = new Gtk.Action ("ZoomOut", Catalog.GetString ("Zoom Out"), null, "Menu.View.ZoomOut.png");
-			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Zoom to Window"), null, "Menu.View.ZoomToWindow.png");
+			ZoomIn = new Gtk.Action ("ZoomIn", Catalog.GetString ("Zoom In"), null, Stock.ZoomIn);
+			ZoomOut = new Gtk.Action ("ZoomOut", Catalog.GetString ("Zoom Out"), null, Stock.ZoomOut);
+			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Zoom to Window"), null, Stock.ZoomFit);
 			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
-			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Actual Size"), null, "Menu.View.ActualSize.png");
+			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Actual Size"), null, Stock.Zoom100);
 			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
 			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
 			Pixels = new Gtk.Action ("Pixels", Catalog.GetString ("Pixels"), null, null);

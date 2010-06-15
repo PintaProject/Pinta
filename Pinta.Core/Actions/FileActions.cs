@@ -439,6 +439,9 @@ namespace Pinta.Core
 					filetype = "png";
 					
 				filetype = filetype.TrimStart ('.');
+			
+				if (filetype == "jpg")
+					filetype = "jpeg";
 			}
 
 			if (filetype == "ora") {

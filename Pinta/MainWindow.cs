@@ -163,8 +163,6 @@ namespace Pinta
 		#region Extension Handlers
 		private void Compose ()
 		{
-			Gtk.StatusIcon s = new StatusIcon ();
-
 			string ext_dir = System.IO.Path.Combine (System.IO.Path.GetDirectoryName (System.Reflection.Assembly.GetEntryAssembly ().Location), "Extensions");
 
 			var catalog = new DirectoryCatalog (ext_dir, "*.dll");

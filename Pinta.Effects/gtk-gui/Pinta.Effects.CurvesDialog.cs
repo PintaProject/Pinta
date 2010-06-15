@@ -82,7 +82,7 @@ namespace Pinta.Effects
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
 			this.comboMap = global::Gtk.ComboBox.NewText ();
-			this.comboMap.AppendText (global::Mono.Unix.Catalog.GetString ("RGB\r"));
+			this.comboMap.AppendText (global::Mono.Unix.Catalog.GetString ("RGB"));
 			this.comboMap.AppendText (global::Mono.Unix.Catalog.GetString ("Luminosity"));
 			this.comboMap.Name = "comboMap";
 			this.comboMap.Active = 1;
