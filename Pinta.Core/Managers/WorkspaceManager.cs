@@ -95,7 +95,7 @@ namespace Pinta.Core
 			get { return (double)CanvasSize.Width / (double)ImageSize.Width; }
 			set {
 				if (Scale != value) {
-                    SetScale(value);
+					SetScale(value);
 				}
 			}
 		}
@@ -180,7 +180,7 @@ namespace Pinta.Core
 		
 		public void ResizeImage (int width, int height)
 		{
-            double scale;
+			double scale;
 
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
@@ -190,7 +190,7 @@ namespace Pinta.Core
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.Width, ImageSize.Height);
 			hist.TakeSnapshotOfImage ();
 
-            scale = Scale;
+			scale = Scale;
 
 			ImageSize = new Gdk.Size (width, height);
 			
@@ -201,12 +201,12 @@ namespace Pinta.Core
 			
 			PintaCore.Layers.ResetSelectionPath ();
 
-            Scale = scale;
+			Scale = scale;
 		}
 		
 		public void ResizeCanvas (int width, int height, Anchor anchor)
 		{
-            double scale;
+			double scale;
 
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
@@ -220,7 +220,7 @@ namespace Pinta.Core
 
 			ImageSize = new Gdk.Size (width, height);
 
-            scale = Scale;
+			scale = Scale;
 
 			foreach (var layer in PintaCore.Layers)
 				layer.ResizeCanvas (width, height, anchor);
@@ -229,7 +229,7 @@ namespace Pinta.Core
 
 			PintaCore.Layers.ResetSelectionPath ();
 
-            Scale = scale;
+			Scale = scale;
 		}
 		
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
@@ -326,14 +326,14 @@ namespace Pinta.Core
 			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", Filename, IsDirty ? "*" : "");
 		}
 
-        private void SetScale(double scale)
-        {
-            int new_x = (int)(ImageSize.Width * scale);
-            int new_y = (int)((new_x * ImageSize.Height) / ImageSize.Width);
+		private void SetScale(double scale)
+		{
+			int new_x = (int)(ImageSize.Width * scale);
+			int new_y = (int)((new_x * ImageSize.Height) / ImageSize.Width);
 
-            CanvasSize = new Gdk.Size(new_x, new_y);
-            Invalidate();
-        }
+			CanvasSize = new Gdk.Size(new_x, new_y);
+			Invalidate();
+		}
 
 		#region Protected Methods
 		protected void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
