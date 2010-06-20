@@ -190,7 +190,7 @@ namespace Pinta.Core
 			tool_item.Label = Name;
 			
 			if (ShortcutKey != (Gdk.Key)0)
-				tool_item.TooltipText = string.Format ("{0}\n{2}: {1}", Name, ShortcutKey.ToString ().ToUpperInvariant (), Catalog.GetString ("Shortcut key"));
+				tool_item.TooltipText = string.Format ("{0}\n{2}: {1}\n\n{3}", Name, ShortcutKey.ToString ().ToUpperInvariant (), Catalog.GetString ("Shortcut key"), StatusBarText);
 			else
 				tool_item.TooltipText = Name;
 			
