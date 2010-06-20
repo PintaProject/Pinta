@@ -211,7 +211,7 @@ namespace Pinta
 
 			// Try to set the paint brush as the default tool, if that
 			// fails, set the first thing we can find.
-			if (!PintaCore.Tools.SetCurrentTool ("PaintBrush"))
+			if (!PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Paintbrush")))
 				PintaCore.Tools.SetCurrentTool (extensions.Tools.First ());
 
 			foreach (var tool in PintaCore.Tools)

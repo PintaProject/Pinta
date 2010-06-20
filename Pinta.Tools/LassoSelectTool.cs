@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -41,9 +42,9 @@ namespace Pinta.Tools
 		}
 
 		#region Properties
-		public override string Name { get { return "Lasso Select"; } }
+		public override string Name { get { return Catalog.GetString ("Lasso Select"); } }
 		public override string Icon { get { return "Tools.LassoSelect.png"; } }
-		public override string StatusBarText { get { return "Click and drag to draw the outline for a selection area"; } }
+		public override string StatusBarText { get { return Catalog.GetString ("Click and drag to draw the outline for a selection area."); } }
 		public override int Priority { get { return 9; } }
 		#endregion
 

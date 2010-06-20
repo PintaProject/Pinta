@@ -26,6 +26,7 @@
 
 using System;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -36,7 +37,7 @@ namespace Pinta.Tools
 	public class CloneStampTool : BaseTool
 	{
 		public override string Name {
-			get { return "Clone Stamp"; }
+			get { return Catalog.GetString ("Clone Stamp"); }
 		}
 		public override string Icon {
 			get { return "Tools.CloneStamp.png"; }

@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -38,13 +39,13 @@ namespace Pinta.Tools
 		private SelectionHistoryItem hist;
 		
 		public override string Name {
-			get { return "Move Selection"; }
+			get { return Catalog.GetString ("Move Selection"); }
 		}
 		public override string Icon {
 			get { return "Tools.MoveSelection.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Drag the selection to move. Drag the nubs to scale. Drag with right mouse button to rotate."; }
+			get { return Catalog.GetString ("Drag the selection to move selection outline."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }

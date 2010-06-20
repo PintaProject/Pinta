@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Gdk;
 using Gtk;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -33,14 +34,14 @@ namespace Pinta.Tools
 		}
 
 		public override string Name {
-			get { return "Text"; }
+			get { return Catalog.GetString ("Text"); }
 		}
 		public override string Icon {
 			get { return "Tools.Text.png"; }
 		}
 
 		public override string StatusBarText {
-			get { return "Left click to place cursor, then type desired text. Text color is primary color."; }
+			get { return Catalog.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
@@ -127,7 +128,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 			
 			if (font_label == null)
-				font_label = new ToolBarLabel (" Font: ");
+				font_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Font")));
 			
 			tb.AppendItem (font_label);
 			
@@ -182,14 +183,14 @@ namespace Pinta.Tools
 			tb.AppendItem (new SeparatorToolItem ());
 			
 			if (bold_btn == null) {
-				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", "Bold", "Bold the text");
+				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Catalog.GetString ("Bold"), Catalog.GetString ("Bold"));
 				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
 			
 			tb.AppendItem (bold_btn);
 			
 			if (italic_btn == null) {
-				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", "Italic", "Italic the text");
+				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Catalog.GetString ("Italic"), Catalog.GetString ("Italic"));
 				italic_btn.Toggled += HandleItalicButtonToggled;
 				;
 			}
@@ -197,7 +198,7 @@ namespace Pinta.Tools
 			tb.AppendItem (italic_btn);
 			
 			if (underscore_btn == null) {
-				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", "Uncerline", "Underline the text");
+				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Catalog.GetString ("Underline"), Catalog.GetString ("Underline"));
 				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
 			
@@ -206,7 +207,7 @@ namespace Pinta.Tools
 			tb.AppendItem (new SeparatorToolItem ());
 			
 			if (left_alignment_btn == null) {
-				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", "Align left", "Align text to left");
+				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Catalog.GetString ("Left Align"), Catalog.GetString ("Left Align"));
 				left_alignment_btn.Active = true;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
 				;
@@ -215,7 +216,7 @@ namespace Pinta.Tools
 			tb.AppendItem (left_alignment_btn);
 			
 			if (center_alignment_btn == null) {
-				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", "Align center", "Align text to center");
+				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Catalog.GetString ("Center Align"), Catalog.GetString ("Center Align"));
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
 				;
 			}
@@ -223,7 +224,7 @@ namespace Pinta.Tools
 			tb.AppendItem (center_alignment_btn);
 			
 			if (Right_alignment_btn == null) {
-				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", "Align right", "Align text to right");
+				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Catalog.GetString ("Right Align"), Catalog.GetString ("Right Align"));
 				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
 				;
 			}

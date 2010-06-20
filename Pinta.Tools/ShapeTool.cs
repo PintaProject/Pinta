@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -87,12 +88,12 @@ namespace Pinta.Tools
 		protected virtual void BuildToolBar (Gtk.Toolbar tb)
 		{
 			if (brush_width_label == null)
-				brush_width_label = new ToolBarLabel (" Brush width: ");
+				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Brush width")));
 			
 			tb.AppendItem (brush_width_label);
 			
 			if (brush_width_minus == null) {
-				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", "Decrease brush size");
+				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease brush size"));
 				brush_width_minus.Clicked += MinusButtonClickedEvent;
 			}
 			
@@ -106,7 +107,7 @@ namespace Pinta.Tools
 			tb.AppendItem (brush_width);
 			
 			if (brush_width_plus == null) {
-				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", "Increase brush size");
+				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase brush size"));
 				brush_width_plus.Clicked += PlusButtonClickedEvent;
 			}
 			
@@ -129,7 +130,7 @@ namespace Pinta.Tools
 				tb.AppendItem (fill_outline_label);
 
 				if (fill_outline == null)
-					fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
+					fill_outline = new ToolBarComboBox (150, 0, false, Catalog.GetString ("Outline Shape"), Catalog.GetString ("Fill Shape"), Catalog.GetString ("Fill and Outline Shape"));
 					
 				tb.AppendItem (fill_outline);
 			}

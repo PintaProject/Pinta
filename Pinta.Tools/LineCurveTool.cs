@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -34,13 +35,13 @@ namespace Pinta.Tools
 	public class LineCurveTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Line"; }
+			get { return Catalog.GetString ("Line"); }
 		}
 		public override string Icon {
 			get { return "Tools.Line.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Left click to draw with primary color, right click for secondary color"; }
+			get { return Catalog.GetString ("Left click to draw with primary color, right click for secondary color."); }
 		}
 		protected override bool ShowStrokeComboBox {
 			get { return false; }

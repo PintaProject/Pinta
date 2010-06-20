@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -48,7 +49,7 @@ namespace Pinta.Tools
 		uint button;
 
 		public override string Name {
-			get { return "Gradient"; }
+			get { return Catalog.GetString ("Gradient"); }
 		}
 
 		public override string Icon {
@@ -56,7 +57,7 @@ namespace Pinta.Tools
 		}
 
 		public override string StatusBarText {
-			get { return "Click and drag to draw gradient from primary to secondary color.  Right click to reverse."; }
+			get { return Catalog.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse."); }
 		}
 		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
@@ -154,7 +155,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 			
 			if (linear_gradient_btn == null) {
-				linear_gradient_btn = new ToolBarToggleButton ("Toolbar.LinearGradient.png", "Linear Gradient", "Linear gradient");
+				linear_gradient_btn = new ToolBarToggleButton ("Toolbar.LinearGradient.png", Catalog.GetString ("Linear Gradient"), Catalog.GetString ("Linear Gradient"));
 				linear_gradient_btn.Active = true;
 				linear_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
 			}
@@ -162,28 +163,28 @@ namespace Pinta.Tools
 			tb.AppendItem (linear_gradient_btn);
 			
 			if (linear_reflected_gradient_btn == null) {
-				linear_reflected_gradient_btn = new ToolBarToggleButton ("Toolbar.LinearReflectedGradient.png", "Linear Reflected Gradient", "Linear reflected gradient");
+				linear_reflected_gradient_btn = new ToolBarToggleButton ("Toolbar.LinearReflectedGradient.png", Catalog.GetString ("Linear Reflected Gradient"), Catalog.GetString ("Linear Reflected Gradient"));
 				linear_reflected_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
 			}
 			
 			tb.AppendItem (linear_reflected_gradient_btn);
 			
 			if (diamond_gradient_btn == null) {
-				diamond_gradient_btn = new ToolBarToggleButton ("Toolbar.DiamondGradient.png", "Linear Diamond Gradient", "Linear diamond gradient");
+				diamond_gradient_btn = new ToolBarToggleButton ("Toolbar.DiamondGradient.png", Catalog.GetString ("Linear Diamond Gradient"), Catalog.GetString ("Linear Diamond Gradient"));
 				diamond_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
 			}
 			
 			tb.AppendItem (diamond_gradient_btn);
 			
 			if (radial_gradient_btn == null) {
-				radial_gradient_btn = new ToolBarToggleButton ("Toolbar.RadialGradient.png", "Radial Gradient", "Radial gradient");
+				radial_gradient_btn = new ToolBarToggleButton ("Toolbar.RadialGradient.png", Catalog.GetString ("Radial Gradient"), Catalog.GetString ("Radial Gradient"));
 				radial_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
 			}
 			
 			tb.AppendItem (radial_gradient_btn);
 			
 			if (conical_gradient_btn == null) {
-				conical_gradient_btn = new ToolBarToggleButton ("Toolbar.ConicalGradient.png", "Conical Gradient", "Conical gradient");
+				conical_gradient_btn = new ToolBarToggleButton ("Toolbar.ConicalGradient.png", Catalog.GetString ("Conical Gradient"), Catalog.GetString ("Conical Gradient"));
 				conical_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
 			}
 			
@@ -194,7 +195,7 @@ namespace Pinta.Tools
 			/***** ColorBgra mode *****/
 			//TODO icons!
 			if (color_mode_gradient_btn == null) {
-				color_mode_gradient_btn = new ToolBarToggleButton ("ColorPalette.SwapIcon.png", "Color Mode", "Color mode");
+				color_mode_gradient_btn = new ToolBarToggleButton ("ColorPalette.SwapIcon.png", Catalog.GetString ("Color Mode"), Catalog.GetString ("Color Mode"));
 				color_mode_gradient_btn.Active = true;
 				color_mode_gradient_btn.Toggled += HandleGradientColorModeButtonToggled;;
 			}
@@ -202,7 +203,7 @@ namespace Pinta.Tools
 			tb.AppendItem (color_mode_gradient_btn);
 			
 			if (transparency_mode_gradient_btn == null) {
-				transparency_mode_gradient_btn = new ToolBarToggleButton ("ColorPalette.SwapIcon.png", "Transparency Mode", "Transparency mode");
+				transparency_mode_gradient_btn = new ToolBarToggleButton ("ColorPalette.SwapIcon.png", Catalog.GetString ("Transparency Mode"), Catalog.GetString ("Transparency Mode"));
 				transparency_mode_gradient_btn.Toggled += HandleGradientColorModeButtonToggled;;
 			}
 			

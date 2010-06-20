@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -34,13 +35,13 @@ namespace Pinta.Tools
 	public class EllipseTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Ellipse"; }
+			get { return Catalog.GetString ("Ellipse"); }
 		}
 		public override string Icon {
 			get { return "Tools.Ellipse.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."; }
+			get { return Catalog.GetString ("Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."); }
 		}
 		public override int Priority { get { return 45; } }
 

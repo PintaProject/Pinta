@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -39,13 +40,13 @@ namespace Pinta.Tools
 		protected ToolBarButton radius_plus;
 		
 		public override string Name {
-			get { return "Rounded Rectangle"; }
+			get { return Catalog.GetString ("Rounded Rectangle"); }
 		}
 		public override string Icon {
 			get { return "Tools.RoundedRectangle.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain."; }
+			get { return Catalog.GetString ("Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain."); }
 		}
 		public override int Priority { get { return 43; } }
 
@@ -73,12 +74,12 @@ namespace Pinta.Tools
 			base.BuildToolBar (tb);
 			
 			if (radius_label == null)
-				radius_label = new ToolBarLabel ("  Radius: ");
+				radius_label = new ToolBarLabel (string.Format ("  {0}: ", Catalog.GetString ("Radius")));
 			
 			tb.AppendItem (radius_label);
 			
 			if (radius_minus == null) {
-				radius_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", "Decrease rectangle's corner radius");
+				radius_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease rectangle's corner radius"));
 				radius_minus.Clicked += RadiusMinusButtonClickedEvent;
 			}
 			
@@ -92,7 +93,7 @@ namespace Pinta.Tools
 			tb.AppendItem (radius);
 			
 			if (radius_plus == null) {
-				radius_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", "Increase rectangle's corner radius");
+				radius_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase rectangle's corner radius"));
 				radius_plus.Clicked += RadiusPlusButtonClickedEvent;
 			}
 			

@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -34,13 +35,13 @@ namespace Pinta.Tools
 	public class RectangleTool : ShapeTool
 	{
 		public override string Name {
-			get { return "Rectangle"; }
+			get { return Catalog.GetString ("Rectangle"); }
 		}
 		public override string Icon {
 			get { return "Tools.Rectangle.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Click and drag to draw a rectangle (right click for secondary color). Hold shift to constrain to a square."; }
+			get { return Catalog.GetString ("Click and drag to draw a rectangle (right click for secondary color). Hold shift to constrain to a square."); }
 		}
 		public override int Priority { get { return 41; } }
 
