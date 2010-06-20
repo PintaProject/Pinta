@@ -256,15 +256,15 @@ namespace Pinta
 				Name = "main_menu"
 			};
 
-			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("File")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("Edit")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("view", Catalog.GetString ("View")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("Image")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("Layers")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("Adjustments")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effects")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("window", Catalog.GetString ("Window")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("Help")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("_File")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("_Edit")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("view", Catalog.GetString ("_View")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("_Image")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
 			shell.PackStart (main_menu, false, false, 0);
