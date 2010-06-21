@@ -67,29 +67,50 @@ namespace Pinta.Core
 				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
 				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));
 				
-				Layer layer = layers.CreateLayer (name, width, height);
-				layers.Insert (layer, 0);
-				layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
-				Pixbuf pb = null;
-				
 				try {
-					pb = new Pixbuf (file.GetInputStream (file.GetEntry (layerElement.GetAttribute ("src"))));
+					// Write the file to a temporary file first
+					// Fixes a bug when running on .Net
+					ZipEntry zf = file.GetEntry (layerElement.GetAttribute ("src"));
+					Stream s = file.GetInputStream (zf);
+					string tmp_file = System.IO.Path.GetTempFileName ();
 					
-					using (Context g = new Context (layer.Surface)) {
-						CairoHelper.SetSourcePixbuf (g, pb, x, y);
-						g.Paint ();
+					using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) {
+						byte[] buffer = new byte[2048];
+						
+						while (true) {
+							int len = s.Read (buffer, 0, buffer.Length);
+							
+							if (len > 0)
+								stream_out.Write (buffer, 0, len);
+							else
+								break;					
+						}
 					}
+
+					Layer layer = layers.CreateLayer (name, width, height);
+					layers.Insert (layer, 0);
+					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
+					
+					using (Pixbuf pb = new Pixbuf (tmp_file)) {
+						using (Context g = new Context (layer.Surface)) {
+							CairoHelper.SetSourcePixbuf (g, pb, x, y);
+							g.Paint ();
+						}
+					}
+					
+					try {
+						File.Delete (tmp_file);
+					} catch { }
 				} catch {
-					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", layer.Name, file);
+					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
 					md.Title = "Error";
 				
 					md.Run ();
 					md.Destroy ();
-				} finally {
-					if (pb != null)
-						(pb as IDisposable).Dispose ();
 				}
 			}
+			
+			file.Close ();
 		}
 		
 		private static IFormatProvider GetFormat () {
