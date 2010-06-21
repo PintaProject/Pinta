@@ -343,6 +343,8 @@ msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
 #: Pinta.Tools/ZoomTool.cs:49
+#: MandelbrotFractalEffect dialog
+#: FragmentEffect dialog
 msgid "Zoom"
 msgstr ""
 
@@ -1408,11 +1410,6 @@ msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
-
-#: MandelbrotFractalEffect dialog
-#: FragmentEffect dialog
-msgid "Zoom"
 msgstr ""
 
 #: RadialBlurEffect dialog
