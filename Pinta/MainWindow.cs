@@ -51,6 +51,8 @@ namespace Pinta
 		ScrolledWindow sw;
 		DockFrame dock;
 		
+		Menu show_pad;
+		
 		public MainWindow () : base (WindowType.Toplevel)
 		{
 			CreateWindow ();
@@ -263,7 +265,14 @@ namespace Pinta
 			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ());
+
+			MenuItem window = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
+			main_menu.Append (window);
+
+			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Show Pad"), null, null);
+			window.Submenu = new Menu ();
+			show_pad = (Menu)((Menu)(window.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
+
 			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
@@ -338,6 +347,11 @@ namespace Pinta
 			dock = new DockFrame ();
 			dock.CompactGuiLevel = 5;
 
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Tools.Pencil.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Pencil.png")));
+			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
+			fact.AddDefault ();
+			
 			// Toolbox pad
 			DockItem toolbox_item = dock.AddItem ("Toolbox");
 			toolbox = new ToolBoxWidget () { Name = "toolbox" };
@@ -347,6 +361,9 @@ namespace Pinta
 			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
 			toolbox_item.DefaultWidth = 65;
+			
+			Gtk.Action show_toolbox = show_pad.AppendAction ("Tools", Catalog.GetString ("Tools"), null, "Tools.Pencil.png");
+			show_toolbox.Activated += delegate { toolbox_item.Visible = true; };
 		
 			// Palette pad
 			DockItem palette_item = dock.AddItem ("Palette");
@@ -358,6 +375,9 @@ namespace Pinta
 			palette_item.DefaultLocation = "Toolbox/Bottom";
 			palette_item.Behavior |= DockItemBehavior.CantClose;
 			palette_item.DefaultWidth = 65;
+
+			Gtk.Action show_palette = show_pad.AppendAction ("Palette", Catalog.GetString ("Palette"), null, "Pinta.png");
+			show_palette.Activated += delegate { palette_item.Visible = true; };
 		
 			// Canvas pad
 			DockItem documentDockItem = dock.AddItem ("Canvas");
@@ -390,6 +410,9 @@ namespace Pinta
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
+			Gtk.Action show_layers = show_pad.AppendAction ("Layers", Catalog.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
+			show_layers.Activated += delegate { layers_item.Visible = true; };
+
 			// History pad
 			HistoryTreeView history = new HistoryTreeView ();
 			DockItem history_item = dock.AddItem ("History");
@@ -402,6 +425,9 @@ namespace Pinta
 
 			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
 			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
+
+			Gtk.Action show_history = show_pad.AppendAction ("History", Catalog.GetString ("History"), null, "Menu.Layers.DuplicateLayer.png");
+			show_history.Activated += delegate { history_item.Visible = true; };
 
 			container.PackStart (dock, true, true, 0);
 			
