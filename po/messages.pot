@@ -457,6 +457,11 @@ msgid ""
 msgstr ""
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
+#: UnfocusEffect dialog
+#: MedianEffect dialog
+#: ReduceNoiseEffect dialog
+#: GlowEffect dialog
+#: FragmentEffect dialog
 msgid "Radius"
 msgstr ""
 
@@ -1365,14 +1370,6 @@ msgstr ""
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
-
-#: UnfocusEffect dialog
-#: MedianEffect dialog
-#: ReduceNoiseEffect dialog
-#: GlowEffect dialog
-#: FragmentEffect dialog
-msgid "Radius"
 msgstr ""
 
 #: TileEffect dialog
