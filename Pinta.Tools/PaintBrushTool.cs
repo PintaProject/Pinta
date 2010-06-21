@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -41,9 +42,9 @@ namespace Pinta.Tools
 		}
 
 		#region Properties
-		public override string Name { get { return "Paintbrush"; } }
+		public override string Name { get { return Catalog.GetString ("Paintbrush"); } }
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
-		public override string StatusBarText { get { return "Left click to draw with primary color, right click to draw with secondary color"; } }
+		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
 		public override int Priority { get { return 25; } }
 		#endregion

@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -50,9 +51,9 @@ namespace Pinta.Tools
 		}
 
 		#region Properties
-		public override string Name { get { return "Freeform Shape"; } }
+		public override string Name { get { return Catalog.GetString ("Freeform Shape"); } }
 		public override string Icon { get { return "Tools.FreeformShape.png"; } }
-		public override string StatusBarText { get { return "Left click to draw with primary color, right click to draw with secondary color"; } }
+		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
 		public override int Priority { get { return 47; } }
 		#endregion
@@ -78,7 +79,7 @@ namespace Pinta.Tools
 			tb.AppendItem (fill_outline_label);
 
 			if (fill_outline == null)
-				fill_outline = new ToolBarComboBox (150, 0, false, "Outline Shape", "Fill Shape", "Fill and Outline Shape");
+				fill_outline = new ToolBarComboBox (150, 0, false, Catalog.GetString ("Outline Shape"), Catalog.GetString ("Fill Shape"), Catalog.GetString ("Fill and Outline Shape"));
 
 			tb.AppendItem (fill_outline);
 		}

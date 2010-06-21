@@ -59,6 +59,13 @@ namespace Pinta.Core
 			return item;
 		}
 		
+		public static Gtk.Action AppendAction (this Menu menu, string actionName, string actionLabel, string actionTooltip, string actionIcon)
+		{
+			Gtk.Action action = new Gtk.Action (actionName, actionLabel, actionTooltip, actionIcon);
+			menu.AppendItem ((MenuItem)action.CreateMenuItem ());
+			return action;
+		}
+		
 		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
 		{
 			Gtk.ToolItem item = (Gtk.ToolItem)action.CreateToolItem ();

@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -36,13 +37,13 @@ namespace Pinta.Tools
 		private Color fill_color;
 		
 		public override string Name {
-			get { return "Paint Bucket"; }
+			get { return Catalog.GetString ("Paint Bucket"); }
 		}
 		public override string Icon {
 			get { return "Tools.PaintBucket.png"; }
 		}
 		public override string StatusBarText {
-			get { return "Left click to fill a region with the primary color, right click to fill with the secondary color."; }
+			get { return Catalog.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color."); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.F; } }
 		public override int Priority { get { return 21; } }

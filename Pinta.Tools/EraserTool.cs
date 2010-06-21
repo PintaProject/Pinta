@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -41,9 +42,9 @@ namespace Pinta.Tools
 		}
 
 		#region Properties
-		public override string Name { get { return "Eraser"; } }
+		public override string Name { get { return Catalog.GetString ("Eraser"); } }
 		public override string Icon { get { return "Tools.Eraser.png"; } }
-		public override string StatusBarText { get { return "Click and drag to erase a portion of the image"; } }
+		public override string StatusBarText { get { return Catalog.GetString ("Click and drag to erase a portion of the image."); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
 		public override int Priority { get { return 27; } }
 		#endregion

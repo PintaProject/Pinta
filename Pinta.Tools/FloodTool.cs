@@ -38,6 +38,7 @@ using System;
 using Cairo;
 using System.Collections.Generic;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -67,17 +68,17 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (mode_label == null)
-				mode_label = new ToolBarLabel (" Fill mode: ");
+				mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Fill mode")));
 
 			tb.AppendItem (mode_label);
 
 			if (mode_combo == null)
-				mode_combo = new ToolBarComboBox (100, 0, false, "Contiguous", "Global");
+				mode_combo = new ToolBarComboBox (100, 0, false, Catalog.GetString ("Contiguous"), Catalog.GetString ("Global"));
 
 			tb.AppendItem (mode_combo);
 					
 			if (tolerance_label == null)
-				tolerance_label = new ToolBarLabel ("    Tolerance: ");
+				tolerance_label = new ToolBarLabel (string.Format ("    {0}: ", Catalog.GetString ("Tolerance")));
 
 			tb.AppendItem (tolerance_label);
 

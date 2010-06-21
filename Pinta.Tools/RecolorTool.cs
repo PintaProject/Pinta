@@ -37,6 +37,7 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -55,9 +56,9 @@ namespace Pinta.Tools
 		}
 
 		#region Properties
-		public override string Name { get { return "Recolor"; } }
+		public override string Name { get { return Catalog.GetString ("Recolor"); } }
 		public override string Icon { get { return "Tools.Recolor.png"; } }
-		public override string StatusBarText { get { return "Left click to replace the secondary color with the primary color."; } }
+		public override string StatusBarText { get { return Catalog.GetString ("Left click to replace the secondary color with the primary color."); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.R; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
 		public override int Priority { get { return 35; } }
@@ -69,7 +70,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (tolerance_label == null)
-				tolerance_label = new ToolBarLabel ("    Tolerance: ");
+				tolerance_label = new ToolBarLabel (string.Format ("    {0}: ", Catalog.GetString ("Tolerance")));
 
 			tb.AppendItem (tolerance_label);
 
