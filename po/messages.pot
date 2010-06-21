@@ -528,6 +528,7 @@ msgid "Global"
 msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
+#: SoftenPortraitData dialog
 msgid "Tolerance"
 msgstr ""
 
@@ -1403,10 +1404,6 @@ msgstr ""
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr ""
-
-#: SoftenPortraitData dialog
-msgid "Tolerance"
 msgstr ""
 
 #: JuliaFractalEffect dialog
