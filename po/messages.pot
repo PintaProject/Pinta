@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-13 15:58-0500\n"
+"POT-Creation-Date: 2010-06-20 21:05-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,61 +16,67 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:50
+#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
 msgstr ""
 
+#: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
+msgid "Paintbrush"
+msgstr ""
+
+#: Pinta/MainWindow.cs:259
+msgid "_File"
+msgstr ""
+
+#: Pinta/MainWindow.cs:260
+msgid "_Edit"
+msgstr ""
+
 #: Pinta/MainWindow.cs:261
-msgid "File"
+msgid "_View"
 msgstr ""
 
 #: Pinta/MainWindow.cs:262
-msgid "Edit"
+msgid "_Image"
 msgstr ""
 
 #: Pinta/MainWindow.cs:263
-msgid "View"
+msgid "_Layers"
 msgstr ""
 
 #: Pinta/MainWindow.cs:264
-msgid "Image"
+msgid "_Adjustments"
 msgstr ""
 
-#: Pinta/MainWindow.cs:265 Pinta/MainWindow.cs:384
-msgid "Layers"
+#: Pinta/MainWindow.cs:265
+msgid "Effe_cts"
 msgstr ""
 
 #: Pinta/MainWindow.cs:266
-msgid "Adjustments"
+msgid "_Window"
 msgstr ""
 
 #: Pinta/MainWindow.cs:267
-msgid "Effects"
+msgid "_Help"
 msgstr ""
 
-#: Pinta/MainWindow.cs:268 Pinta.Core/Actions/ViewActions.cs:190
-#: Pinta.Core/Managers/WorkspaceManager.cs:130
-#: Pinta.Core/Managers/WorkspaceManager.cs:151
-msgid "Window"
-msgstr ""
-
-#: Pinta/MainWindow.cs:269
-msgid "Help"
-msgstr ""
-
-#: Pinta/MainWindow.cs:347
+#: Pinta/MainWindow.cs:345
 msgid "Tools"
 msgstr ""
 
-#: Pinta/MainWindow.cs:357
+#: Pinta/MainWindow.cs:355
 msgid "Palette"
 msgstr ""
 
-#: Pinta/MainWindow.cs:370
+#: Pinta/MainWindow.cs:368
 msgid "Documents"
 msgstr ""
 
-#: Pinta/MainWindow.cs:400
+#: Pinta/MainWindow.cs:382
+msgid "Layers"
+msgstr ""
+
+#: Pinta/MainWindow.cs:398
 msgid "History"
 msgstr ""
 
@@ -158,7 +164,7 @@ msgstr ""
 msgid "by Pinta contributors"
 msgstr ""
 
-#: Pinta/Main.cs:43
+#: Pinta/Main.cs:67
 msgid "number of threads to use for rendering"
 msgstr ""
 
@@ -226,7 +232,7 @@ msgid "Opacity:"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Managers/WorkspaceManager.cs:216
+#: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
 msgstr ""
 
@@ -306,6 +312,308 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:62
+msgid "After select"
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Do not switch tool"
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to previous tool"
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to Pencil tool"
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
+msgid "Pencil"
+msgstr ""
+
+#: Pinta.Tools/LassoSelectTool.cs:45
+msgid "Lasso Select"
+msgstr ""
+
+#: Pinta.Tools/LassoSelectTool.cs:47
+msgid "Click and drag to draw the outline for a selection area."
+msgstr ""
+
+#: Pinta.Tools/ZoomTool.cs:49
+msgid "Zoom"
+msgstr ""
+
+#: Pinta.Tools/ZoomTool.cs:55
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
+msgid "Brush width"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
+msgid "Decrease brush size"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
+msgid "Increase brush size"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
+msgid "Outline Shape"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
+msgid "Fill Shape"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
+msgid "Fill and Outline Shape"
+msgstr ""
+
+#: Pinta.Tools/MoveSelectedTool.cs:42
+msgid "Move Selected Pixels"
+msgstr ""
+
+#: Pinta.Tools/MoveSelectedTool.cs:48
+msgid "Drag the selection to move selected content."
+msgstr ""
+
+#: Pinta.Tools/PanTool.cs:38
+msgid "Pan"
+msgstr ""
+
+#: Pinta.Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr ""
+
+#: Pinta.Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
+msgstr ""
+
+#: Pinta.Tools/EllipseSelectTool.cs:38
+msgid "Ellipse Select"
+msgstr ""
+
+#: Pinta.Tools/EllipseSelectTool.cs:44
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:52
+msgid "Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:60
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:158
+msgid "Linear Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:166
+msgid "Linear Reflected Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:173
+msgid "Linear Diamond Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:180
+msgid "Radial Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:187
+msgid "Conical Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:198
+msgid "Color Mode"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:206
+msgid "Transparency Mode"
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:43
+msgid "Rounded Rectangle"
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:49
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain."
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:77
+msgid "Radius"
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:82
+msgid "Decrease rectangle's corner radius"
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:96
+msgid "Increase rectangle's corner radius"
+msgstr ""
+
+#: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+
+#: Pinta.Tools/RectangleSelectTool.cs:38
+msgid "Rectangle Select"
+msgstr ""
+
+#: Pinta.Tools/RectangleSelectTool.cs:44
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+
+#: Pinta.Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr ""
+
+#: Pinta.Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+
+#: Pinta.Tools/UnimplementedTools.cs:40
+msgid "Clone Stamp"
+msgstr ""
+
+#: Pinta.Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr ""
+
+#: Pinta.Tools/MoveSelectionTool.cs:48
+msgid "Drag the selection to move selection outline."
+msgstr ""
+
+#: Pinta.Tools/FreeformShapeTool.cs:54
+msgid "Freeform Shape"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:71
+msgid "Fill mode"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:76
+msgid "Contiguous"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:76
+msgid "Global"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr ""
+
+#: Pinta.Tools/EllipseTool.cs:38
+msgid "Ellipse"
+msgstr ""
+
+#: Pinta.Tools/EllipseTool.cs:44
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:37
+msgid "Text"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:44
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:131
+msgid "Font"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:186
+msgid "Bold"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:193
+msgid "Italic"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:201
+msgid "Underline"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:210
+msgid "Left Align"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:219
+msgid "Center Align"
+msgstr ""
+
+#: Pinta.Tools/TextTool.cs:227
+msgid "Right Align"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:46
+msgid "Magic Wand Select"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Click to select region of similar color."
+msgstr ""
+
+#: Pinta.Tools/RectangleTool.cs:38
+msgid "Rectangle"
+msgstr ""
+
+#: Pinta.Tools/RectangleTool.cs:44
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+
+#: Pinta.Tools/LineCurveTool.cs:38
+msgid "Line"
+msgstr ""
+
+#: Pinta.Tools/LineCurveTool.cs:44
+msgid "Left click to draw with primary color, right click for secondary color."
+msgstr ""
+
+#: Pinta.Tools/RecolorTool.cs:59
+msgid "Recolor"
+msgstr ""
+
+#: Pinta.Tools/RecolorTool.cs:61
+msgid "Left click to replace the secondary color with the primary color."
+msgstr ""
+
+#: Pinta.Tools/EraserTool.cs:45
+msgid "Eraser"
+msgstr ""
+
+#: Pinta.Tools/EraserTool.cs:47
+msgid "Click and drag to erase a portion of the image."
 msgstr ""
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
@@ -564,7 +872,7 @@ msgid "Transfer Map"
 msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
-msgid "RGB\r"
+msgid "RGB"
 msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
@@ -860,12 +1168,22 @@ msgstr ""
 msgid "Fullscreen"
 msgstr ""
 
-#: Pinta.Core/Actions/HelpActions.cs:48
+#: Pinta.Core/Actions/ViewActions.cs:190
+#: Pinta.Core/Managers/WorkspaceManager.cs:126
+#: Pinta.Core/Managers/WorkspaceManager.cs:147
+msgid "Window"
+msgstr ""
+
+#: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
 msgstr ""
 
-#: Pinta.Core/Actions/HelpActions.cs:49
+#: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
+msgstr ""
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
 msgstr ""
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
