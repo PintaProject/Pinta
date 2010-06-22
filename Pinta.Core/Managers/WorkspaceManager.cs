@@ -94,8 +94,12 @@ namespace Pinta.Core
 		public double Scale {
 			get { return (double)CanvasSize.Width / (double)ImageSize.Width; }
 			set {
-				if (Scale != value) {
-					SetScale(value);
+				if (value != (double)CanvasSize.Width / (double)ImageSize.Width || value != (double)CanvasSize.Height / (double)ImageSize.Height) {
+					int new_x = (int)(ImageSize.Width * value);
+					int new_y = (int)((new_x * ImageSize.Height) / ImageSize.Width);
+
+					CanvasSize = new Gdk.Size(new_x, new_y);
+					Invalidate();
 				}
 			}
 		}
@@ -324,15 +328,6 @@ namespace Pinta.Core
 		private void ResetTitle ()
 		{
 			PintaCore.Chrome.MainWindow.Title = string.Format ("{0}{1} - Pinta", Filename, IsDirty ? "*" : "");
-		}
-
-		private void SetScale(double scale)
-		{
-			int new_x = (int)(ImageSize.Width * scale);
-			int new_y = (int)((new_x * ImageSize.Height) / ImageSize.Width);
-
-			CanvasSize = new Gdk.Size(new_x, new_y);
-			Invalidate();
 		}
 
 		#region Protected Methods
