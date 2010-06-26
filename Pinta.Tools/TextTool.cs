@@ -119,6 +119,16 @@ namespace Pinta.Tools
 		private ToolBarToggleButton left_alignment_btn;
 		private ToolBarToggleButton center_alignment_btn;
 		private ToolBarToggleButton Right_alignment_btn;
+		private ToolBarLabel spacer_label;
+
+		protected void RenderFont (Gtk.CellLayout layout, Gtk.CellRenderer renderer, Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			string fontName = (string)model.GetValue (iter, 0);
+			Gtk.CellRendererText cell = renderer as Gtk.CellRendererText;
+			cell.Text = fontName;
+			cell.Font = string.Format ("{0} 10", fontName);
+			cell.Family = fontName;
+		}
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -148,12 +158,18 @@ namespace Pinta.Tools
 				//this exception do not occure when I put a try catch ;(
 				try {
 					if (font_combo == null) {
-						font_combo = new ToolBarComboBox (100, index, false, entries.ToArray ());
+						font_combo = new ToolBarComboBox (150, index, false, entries.ToArray ());
 						font_combo.ComboBox.Changed += HandleFontChanged;
+						font_combo.ComboBox.SetCellDataFunc (font_combo.CellRendererText, new CellLayoutDataFunc (RenderFont));
 					}
 					
 					tb.AppendItem (font_combo);
-					
+
+					if (spacer_label == null)
+						spacer_label = new ToolBarLabel (" ");
+
+					tb.AppendItem (spacer_label);
+				
 					//size depend on font and modifier (italic, bold,...)
 					Pango.FontFamily fam = fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
 					
