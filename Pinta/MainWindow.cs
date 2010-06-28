@@ -84,6 +84,9 @@ namespace Pinta
 			
 			PintaCore.Actions.File.BeforeQuit += delegate {
 				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
+				PintaCore.Settings.PutSetting ("window-size-width", this.GdkWindow.GetSize ().Width);
+				PintaCore.Settings.PutSetting ("window-size-height", this.GdkWindow.GetSize ().Height);
+				PintaCore.Settings.SaveSettings ();
 			};
 
 			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
@@ -229,8 +232,8 @@ namespace Pinta
 			Title = "Pinta";
 			WindowPosition = WindowPosition.Center;
 			AllowShrink = true;
-			DefaultWidth = 1100;
-			DefaultHeight = 750;
+			DefaultWidth = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
+			DefaultHeight = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
 
 			// shell - contains mainmenu, 2 toolbars, hbox
 			VBox shell = new VBox () {
