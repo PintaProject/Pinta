@@ -29,14 +29,90 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Pinta.Core
 {
 	public class SettingsManager
 	{
+		private Dictionary<string, object> settings;
+		
+		public SettingsManager ()
+		{
+			LoadSettings ();
+		}
+		
 		public string GetUserSettingsDirectory ()
 		{
 			return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "Pinta");
+		}
+		
+		public T GetSetting<T> (string key, T defaultValue)
+		{
+			if (!settings.ContainsKey (key))
+				return defaultValue;
+				
+			return (T)settings[key];
+		}
+		
+		public void PutSetting (string key, object value)
+		{
+			settings[key] = value;
+		}
+
+		private static Dictionary<string, object> Deserialize (string filename)
+		{
+			Dictionary<string, object> properties = new Dictionary<string,object> ();
+
+			if (!File.Exists (filename))
+				return properties;
+				
+			XmlDocument doc = new XmlDocument ();
+			doc.Load (filename);
+			
+			// Kinda cheating for now because I know there is only one thing stored in here
+			foreach (XmlElement setting in doc.DocumentElement.ChildNodes) {
+				switch (setting.GetAttribute ("type")) {
+					case "System.Int32":
+						properties[setting.GetAttribute ("name")] = int.Parse (setting.InnerText);
+						break;
+				}
+			
+			}
+
+			return properties;
+		}
+
+		private static void Serialize (string filename, Dictionary<string, object> settings)
+		{
+			using (XmlWriter xw = XmlWriter.Create (filename)) {
+				xw.WriteStartElement ("settings");
+				
+				foreach (var item in settings) {
+					xw.WriteStartElement ("setting");
+					xw.WriteAttributeString ("name", item.Key);
+					xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
+					xw.WriteValue (item.Value.ToString ());
+					xw.WriteEndElement ();
+				}
+				
+				xw.WriteEndElement ();
+			}
+		}
+		
+		private void LoadSettings ()
+		{
+			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
+			
+			settings = Deserialize (settings_file);
+		}
+		
+		public void SaveSettings ()
+		{
+			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
+
+			Serialize (settings_file, settings);
 		}
 	}
 }

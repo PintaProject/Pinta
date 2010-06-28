@@ -51,6 +51,16 @@ namespace Pinta.Core
 			
 			return new Rectangle (0, 0, width, height);
 		}
+
+		public static Size GetSize (this Window w)
+		{
+			int width;
+			int height;
+
+			w.GetSize (out width, out height);
+
+			return new Size (width, height);
+		}
 		
 		public static Cairo.Color ToCairoColor (this Gdk.Color color)
 		{
