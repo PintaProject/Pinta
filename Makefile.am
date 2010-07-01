@@ -31,11 +31,15 @@ list:
 		git ls-files | grep '\.cs' ;\
 	fi
 
-# target: clean - Default clean command: cleanobj and distclean
-clean: distclean cleanobj
+# target: clean - Default clean command: cleanobj and cleanbin
+clean: cleanobj cleanbin
+
+# target: distclean - Removes configure files. 
+distclean: clean
+	rm -f Makefile pinta config.status config.cache config.log configure.lineno config.status.lineno
 
 # target: cleanall - Removes build files. 
-cleanall: distclean cleanobj cleanbin
+cleanall: distclean
 	rm -rf autom4te.cache
 	rm -f configure aclocal.m4 missing install-sh Makefile.in
 
