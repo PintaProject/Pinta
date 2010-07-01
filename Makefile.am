@@ -3,11 +3,8 @@ BINFILES = \
 	bin/Pinta.Core.dll \
 	bin/Pinta.Gui.Widgets.dll \
 	bin/Pinta.Resources.dll \
-	bin/System.ComponentModel.Composition.dll
-	
-EXTENSIONS = \
-	bin/Extensions/Pinta.Effects.dll \
-	bin/Extensions/Pinta.Tools.dll
+	bin/Pinta.Effects.dll \
+	bin/Pinta.Tools.dll
 
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
@@ -49,7 +46,7 @@ cleanobj:
 	find . -type d -name obj | xargs rm -rvf
 	
 # target: install - Installs Pinta. 
-install: pinta $(BINFILES) $(EXTENSIONS)
+install: pinta $(BINFILES)
 	$(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta/Pinta.csproj
 	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(prefix)/bin/$(PACKAGE)
 
@@ -61,11 +58,11 @@ uninstall:
 release: releasetar
 
 # target: releasetar - Make a release tarball.
-releasetar: $(BINFILES) $(EXTENSIONS)
+releasetar: $(BINFILES)
 	cd bin && tar -czf ../$(RELEASE_FILE).tgz --exclude=*mdb *
 
 # target: releasezip - Make a release zip file.
-releasezip: $(BINFILES) $(EXTENSIONS)
+releasezip: $(BINFILES)
 	cd bin && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
 .PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip

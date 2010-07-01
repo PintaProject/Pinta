@@ -216,11 +216,9 @@
   <ItemGroup>
     <BinFiles Include="$(OutputPath)/Pinta.exe" />
     <BinFiles Include="$(OutputPath)/Pinta.*.dll" />
-    <ExtensionFiles Include="$(OutputPath)/Extensions/*.dll" />
   </ItemGroup>
   <Target Name="Install">
     <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta" />
-    <Copy SourceFiles="@(ExtensionFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta/Extensions" />
     <MakeDir Directories="$(InstallPrefix)/bin" />
     <Copy SourceFiles="$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(InstallPrefix)/share/locale/%(LocalePo.Code)/LC_MESSAGES" />
     <Copy SourceFiles="../xdg/pinta.1" DestinationFolder="$(InstallPrefix)/share/man/man1" />
