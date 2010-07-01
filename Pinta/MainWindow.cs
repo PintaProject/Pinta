@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-//using System.ComponentModel.Composition;
-//using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using Gtk;
 using MonoDevelop.Components.Docking;
@@ -41,7 +41,7 @@ namespace Pinta
 		DialogHandlers dialog_handler;
 
 		ProgressDialog progress_dialog;
-		ExtensionPoints extensions;
+		ExtensionPoints extensions = new ExtensionPoints ();
 		
 		Toolbar tool_toolbar;
 		PintaCanvas canvas;
@@ -168,13 +168,12 @@ namespace Pinta
 		#region Extension Handlers
 		private void Compose ()
 		{
-			extensions = new ExtensionPoints ();
-			//string ext_dir = System.IO.Path.Combine (System.IO.Path.GetDirectoryName (System.Reflection.Assembly.GetEntryAssembly ().Location), "Extensions");
+			string ext_dir = System.IO.Path.Combine (System.IO.Path.GetDirectoryName (System.Reflection.Assembly.GetEntryAssembly ().Location), "Extensions");
 
-			//var catalog = new DirectoryCatalog (ext_dir, "*.dll");
-			//var container = new CompositionContainer (catalog);
+			var catalog = new DirectoryCatalog (ext_dir, "*.dll");
+			var container = new CompositionContainer (catalog);
 
-			//container.ComposeParts (extensions);
+			container.ComposeParts (extensions);
 		}
 
 		private void LoadEffects ()

@@ -13,7 +13,7 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	//[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class BlackAndWhiteEffect : BaseEffect
 	{
 		UnaryPixelOp op = new UnaryPixelOps.Desaturate ();

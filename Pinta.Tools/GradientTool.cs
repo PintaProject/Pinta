@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		Conical
 	}
 
-	//[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class GradientTool : BaseTool
 	{
 		Cairo.PointD startpoint;
