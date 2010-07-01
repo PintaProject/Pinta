@@ -21,6 +21,7 @@ help:
 # target: build - Build Pinta.
 build: Pinta.sln
 	$(XBUILD) Pinta.sln
+	$(XBUILD) Pinta/Pinta.csproj /target:Msgfmt
 
 # target: list - List source files.
 list:

@@ -1,5 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <ItemGroup>
+    <LocalePo Include="../po/messages-ca.po">
+      <Code>ca</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-cs.po">
+      <Code>cs</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-de.po">
+      <Code>de</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-el.po">
+      <Code>el</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-es.po">
+      <Code>es</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-fr.po">
+      <Code>fr</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-he.po">
+      <Code>he</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-hr.po">
+      <Code>hr</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-it.po">
+      <Code>it</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-ja.po">
+      <Code>ja</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-ko.po">
+      <Code>ko</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-ru.po">
+      <Code>ru</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-sk.po">
+      <Code>sk</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-uk.po">
+      <Code>uk</Code>
+    </LocalePo>
+  </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -153,6 +197,10 @@
       <Name>Pinta.Tools</Name>
     </ProjectReference>
   </ItemGroup>
+  <Target Name="Msgfmt">
+    <MakeDir Directories="$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES" />
+    <Exec Command='msgfmt "../po/messages-%(LocalePo.Code).po" -o "$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo"' />
+  </Target>
   <PropertyGroup>
     <InstallPrefix>/usr/local</InstallPrefix>
   </PropertyGroup>
@@ -165,6 +213,7 @@
     <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta" />
     <Copy SourceFiles="@(ExtensionFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta/Extensions" />
     <MakeDir Directories="$(InstallPrefix)/bin" />
+    <Copy SourceFiles="$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(InstallPrefix)/share/locale/%(LocalePo.Code)/LC_MESSAGES" />
     <Copy SourceFiles="../xdg/pinta.1" DestinationFolder="$(InstallPrefix)/share/man/man1" />
     <Copy SourceFiles="../xdg/pinta.desktop" DestinationFolder="$(InstallPrefix)/share/applications" />
     <Copy SourceFiles="../xdg/pinta.xpm" DestinationFolder="$(InstallPrefix)/share/pixmaps" />
@@ -174,11 +223,12 @@
     <Copy SourceFiles="../xdg/32x32/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/32x32/apps" />
     <Copy SourceFiles="../xdg/96x96/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/96x96/apps" />
     <Copy SourceFiles="../xdg/scalable/pinta.svg" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/scalable/apps" />
-    <Exec Command="gzip -f &quot;$(InstallPrefix)/share/man/man1/pinta.1&quot;" />
+    <Exec Command='gzip -f "$(InstallPrefix)/share/man/man1/pinta.1"' />
   </Target>
   <Target Name="Uninstall">
-    <Exec Command="rm -rf &quot;$(InstallPrefix)/lib/pinta&quot;" />
+    <Exec Command='rm -rf "$(InstallPrefix)/lib/pinta"' />
     <Delete Files="$(InstallPrefix)/bin/pinta" />
+    <Delete Files="$(InstallPrefix)/share/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo" />
     <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1" />
     <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1.gz" />
     <Delete Files="$(InstallPrefix)/share/applications/pinta.desktop" />
