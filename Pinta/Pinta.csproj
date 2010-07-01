@@ -16,6 +16,9 @@
     <LocalePo Include="../po/messages-es.po">
       <Code>es</Code>
     </LocalePo>
+    <LocalePo Include="../po/messages-fi.po">
+      <Code>fi</Code>
+    </LocalePo>
     <LocalePo Include="../po/messages-fr.po">
       <Code>fr</Code>
     </LocalePo>
@@ -39,6 +42,12 @@
     </LocalePo>
     <LocalePo Include="../po/messages-sk.po">
       <Code>sk</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-th.po">
+      <Code>th</Code>
+    </LocalePo>
+    <LocalePo Include="../po/messages-tr.po">
+      <Code>tr</Code>
     </LocalePo>
     <LocalePo Include="../po/messages-uk.po">
       <Code>uk</Code>
