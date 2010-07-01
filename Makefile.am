@@ -66,6 +66,6 @@ releasezip: $(BINFILES)
 	cd bin && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Tools po Tarball xdg buildlocales.bat \
-	license-mit.txt license-pdn.txt readme.txt todo.txt
+	license-mit.txt license-pdn.txt readme.txt todo.txt Pinta.sln
 
 .PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip
