@@ -1,10 +1,12 @@
+BINDIR = $(srcdir)/bin
+
 BINFILES = \
-	bin/Pinta.exe \
-	bin/Pinta.Core.dll \
-	bin/Pinta.Gui.Widgets.dll \
-	bin/Pinta.Resources.dll \
-	bin/Pinta.Effects.dll \
-	bin/Pinta.Tools.dll
+	$(BINDIR)/Pinta.exe \
+	$(BINDIR)/Pinta.Core.dll \
+	$(BINDIR)/Pinta.Gui.Widgets.dll \
+	$(BINDIR)/Pinta.Resources.dll \
+	$(BINDIR)/Pinta.Effects.dll \
+	$(BINDIR)/Pinta.Tools.dll
 
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
@@ -17,8 +19,8 @@ help:
 
 # target: build - Build Pinta.
 build: Pinta.sln
-	$(XBUILD) Pinta.sln
-	$(XBUILD) Pinta/Pinta.csproj /target:Msgfmt
+	cd $(srcdir) && $(XBUILD) Pinta.sln
+	cd $(srcdir) && $(XBUILD) Pinta/Pinta.csproj /target:Msgfmt
 
 # target: list - List source files.
 list:
@@ -39,15 +41,15 @@ cleanall: distclean cleanobj cleanbin
 
 # target: cleanbin - Removes built files. 
 cleanbin: 
-	rm -rvf bin/*
+	rm -rvf $(BINDIR)/*
 
 # target: cleanobj - Removes temporary build files. 
 cleanobj:
-	find . -type d -name obj | xargs rm -rvf
+	find $(srcdir)/ -type d -name obj | xargs rm -rvf
 	
 # target: install - Installs Pinta. 
 install: pinta $(BINFILES)
-	$(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta/Pinta.csproj
+	cd $(srcdir) && $(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta/Pinta.csproj
 	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(prefix)/bin/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
@@ -59,13 +61,13 @@ release: releasetar
 
 # target: releasetar - Make a release tarball.
 releasetar: $(BINFILES)
-	cd bin && tar -czf ../$(RELEASE_FILE).tgz --exclude=*mdb *
+	cd $(BINDIR) && tar -czf ../$(RELEASE_FILE).tgz --exclude=*mdb *
 
 # target: releasezip - Make a release zip file.
 releasezip: $(BINFILES)
-	cd bin && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
+	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Tools po Tarball xdg buildlocales.bat \
+EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po Tarball xdg buildlocales.bat \
 	license-mit.txt license-pdn.txt readme.txt todo.txt Pinta.sln
 
 .PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip
