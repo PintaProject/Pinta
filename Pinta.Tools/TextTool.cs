@@ -16,7 +16,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	//[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class TextTool : BaseTool
 	{
 		private enum EditingMode
