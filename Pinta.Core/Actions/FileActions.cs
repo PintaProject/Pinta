@@ -418,6 +418,15 @@ namespace Pinta.Core
 				format = formatsByExt[string.IsNullOrEmpty (ext) ? ".png" : ext];
 			}
 			
+			if (format == null || format.IsReadOnly ()) {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
+				md.Title = Catalog.GetString ("Error");
+				
+				md.Run ();
+				md.Destroy ();
+				return;
+			}
+			
 			format.Exporter.Export (PintaCore.Layers, file);
 
 			PintaCore.Workspace.Filename = Path.GetFileName (file);
