@@ -44,6 +44,8 @@ namespace Pinta.Core
 		public Gtk.Action Print { get; private set; }
 		public Gtk.Action Exit { get; private set; }
 		
+		private IList<FormatDescriptor> formats;
+		private IDictionary<string, FormatDescriptor> formatsByExt;
 		private RecentData recentData;
 		private string lastDialogDir;
 		
@@ -64,6 +66,10 @@ namespace Pinta.Core
 			recentData.AppName = "Pinta";
 			recentData.AppExec = GetExecutablePathname ();
 			recentData.MimeType = "image/*";
+			
+			formats = new List<FormatDescriptor> ();
+			formatsByExt = new SortedDictionary<string, FormatDescriptor> ();
+			FillFormats ();
 			
 			lastDialogDir = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
 
@@ -107,6 +113,26 @@ namespace Pinta.Core
 			Exit.Activated += HandlePintaCoreActionsFileExitActivated;
 		}
 		
+		private void FillFormats ()
+		{
+			foreach (var format in Pixbuf.Formats) {
+				string formatName = format.Name.ToLowerInvariant ();
+				GdkPixbufFormat handler = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
+				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
+			
+				formats.Add (new FormatDescriptor (formatName, extensions, handler, format.IsWritable ? handler : null));
+			}
+			
+			OraFormat oraHandler = new OraFormat ();
+			formats.Add (new FormatDescriptor ("ora", new string[] { "ora" }, oraHandler, oraHandler));
+			
+			foreach (var fd in formats) {
+				foreach (var ext in fd.Extensions) {
+					formatsByExt.Add (string.Format (".{0}", ext), fd);
+				}
+			}
+		}
+		
 		#endregion
 
 		#region Public Methods
@@ -141,9 +167,7 @@ namespace Pinta.Core
 			
 			try {
 				// Open the image and add it to the layers
-				IImageImporter importer = (System.IO.Path.GetExtension (file) == ".ora") ?
-					(IImageImporter) new OraFormat () : new GdkPixbufFormat (null);
-					
+				IImageImporter importer = formatsByExt[System.IO.Path.GetExtension (file)].Importer;
 				importer.Import (PintaCore.Layers, file);
 
 				PintaCore.Workspace.DocumentPath = System.IO.Path.GetFullPath (file);

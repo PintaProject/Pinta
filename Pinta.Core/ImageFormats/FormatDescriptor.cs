@@ -25,29 +25,46 @@
 // THE SOFTWARE.
 
 using System;
+using System.Text;
+
+using Gtk;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
 	public sealed class FormatDescriptor: IComparable<FormatDescriptor>
 	{
 		public string Name { get; private set; }
-		public string DisplayName { get; private set; }
 		public string[] Extensions { get; private set; }
 		public IImageImporter Importer { get; private set; }
 		public IImageExporter Exporter { get; private set; }
+		public FileFilter Filter { get; private set; }
 		
-		public FormatDescriptor (string name, string displayName, string[] extensions,
-		                           IImageImporter importer, IImageExporter exporter)
+		public FormatDescriptor (string name, string[] extensions, IImageImporter importer, IImageExporter exporter)
 		{
-			if (name == null || displayName == null || extensions == null || importer == null) {
+			if (name == null || extensions == null || importer == null) {
 				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
 			}
 		
 			this.Name = name;
-			this.DisplayName = displayName;
 			this.Extensions = extensions;
 			this.Importer = importer;
 			this.Exporter = exporter;
+			
+			FileFilter ff = new FileFilter ();
+			StringBuilder formatNames = new StringBuilder ();
+			
+			foreach (string ext in extensions) {
+				if (formatNames.Length > 0)
+					formatNames.Append (", ");
+				
+				string wildcard = string.Format ("*.{0}", ext);
+				ff.AddPattern (wildcard);
+				formatNames.Append (wildcard);
+			}
+
+			ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), name.ToUpperInvariant (), formatNames);
+			this.Filter = ff;
 		}
 		
 		public bool IsReadOnly ()
