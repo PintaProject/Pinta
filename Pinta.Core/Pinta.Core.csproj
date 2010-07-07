@@ -154,6 +154,7 @@
     <Compile Include="ImageFormats\GdkPixbufFormat.cs" />
     <Compile Include="ImageFormats\IImageExporter.cs" />
     <Compile Include="ImageFormats\IImageImporter.cs" />
+    <Compile Include="ImageFormats\FormatDescriptor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

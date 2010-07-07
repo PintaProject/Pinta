@@ -1,5 +1,5 @@
 // 
-// GdkPixbufFormat.cs
+// FormatDescriptor.cs
 //  
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
@@ -25,57 +25,40 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
-
-using Gdk;
 
 namespace Pinta.Core
 {
-	public class GdkPixbufFormat: IImageImporter, IImageExporter
+	public sealed class FormatDescriptor: IComparable<FormatDescriptor>
 	{
-		private string filetype;
-
-		public GdkPixbufFormat(string filetype)
+		public string Name { get; private set; }
+		public string DisplayName { get; private set; }
+		public string[] Extensions { get; private set; }
+		public IImageImporter Importer { get; private set; }
+		public IImageExporter Exporter { get; private set; }
+		
+		public FormatDescriptor (string name, string displayName, string[] extensions,
+		                           IImageImporter importer, IImageExporter exporter)
 		{
-			this.filetype = filetype;
-		}
-	
-		public void Import (LayerManager layers, string fileName)
-		{
-			Pixbuf bg = new Pixbuf (fileName);
-
-			layers.Clear ();
-			PintaCore.History.Clear ();
-			layers.DestroySelectionLayer ();
-
-			PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-			layers.ResetSelectionPath ();
-
-			Layer layer = layers.AddNewLayer (Path.GetFileName (fileName));
-
-			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-				g.Paint ();
+			if (name == null || displayName == null || extensions == null || importer == null) {
+				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
 			}
-
-			bg.Dispose ();
+		
+			this.Name = name;
+			this.DisplayName = displayName;
+			this.Extensions = extensions;
+			this.Importer = importer;
+			this.Exporter = exporter;
 		}
 		
-		protected void DoSave (Pixbuf pb, string fileName, string fileType)
+		public bool IsReadOnly ()
 		{
-			pb.Save (fileName, fileType);
+			return Exporter == null;
 		}
 		
-		public void Export (LayerManager layers, string fileName)
+		public int CompareTo (FormatDescriptor other)
 		{
-			Cairo.ImageSurface surf = layers.GetFlattenedImage ();
-	
-			Pixbuf pb = surf.ToPixbuf ();
-			DoSave(pb, fileName, filetype);
-
-			(pb as IDisposable).Dispose ();
-			(surf as IDisposable).Dispose ();
+			// Ordering by format name (such as "jpeg")
+			return Name.CompareTo (other.Name);
 		}
 	}
 }
