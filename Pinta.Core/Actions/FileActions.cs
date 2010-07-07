@@ -141,30 +141,10 @@ namespace Pinta.Core
 			
 			try {
 				// Open the image and add it to the layers
-				if (System.IO.Path.GetExtension (file) == ".ora") {
-					new OraFormat ().Import (PintaCore.Layers, file);
-				}
-				else {
-					Pixbuf bg = new Pixbuf (file);
-
-					PintaCore.Layers.Clear ();
-					PintaCore.History.Clear ();
-					PintaCore.Layers.DestroySelectionLayer ();
-
-					PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-					PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-
-					PintaCore.Layers.ResetSelectionPath ();
-
-					Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
-
-					using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-						CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-						g.Paint ();
-					}
-
-					bg.Dispose ();
-				}
+				IImageImporter importer = (System.IO.Path.GetExtension (file) == ".ora") ?
+					(IImageImporter) new OraFormat () : new GdkPixbufFormat (null);
+					
+				importer.Import (PintaCore.Layers, file);
 
 				PintaCore.Workspace.DocumentPath = System.IO.Path.GetFullPath (file);
 				PintaCore.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
@@ -443,19 +423,10 @@ namespace Pinta.Core
 				if (filetype == "jpg")
 					filetype = "jpeg";
 			}
-
-			if (filetype == "ora") {
-				new OraFormat ().Export (PintaCore.Layers, file);
-			} else {
-				Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
-	
-				Pixbuf pb = surf.ToPixbuf ();
-				pb.Save (file, filetype);
-	
-				(pb as IDisposable).Dispose ();
-				(surf as IDisposable).Dispose ();
-			}
 			
+			IImageExporter exporter = (filetype == "ora") ? (IImageExporter) new OraFormat () : new GdkPixbufFormat (filetype);
+			exporter.Export (PintaCore.Layers, file);
+
 			PintaCore.Workspace.Filename = Path.GetFileName (file);
 			PintaCore.Workspace.IsDirty = false;
 		}
