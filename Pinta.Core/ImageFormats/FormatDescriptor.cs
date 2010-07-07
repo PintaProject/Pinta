@@ -40,7 +40,8 @@ namespace Pinta.Core
 		public IImageExporter Exporter { get; private set; }
 		public FileFilter Filter { get; private set; }
 		
-		public FormatDescriptor (string name, string[] extensions, IImageImporter importer, IImageExporter exporter)
+		public FormatDescriptor (string name, string displayPrefix, string[] extensions,
+			IImageImporter importer, IImageExporter exporter)
 		{
 			if (name == null || extensions == null || importer == null) {
 				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");
@@ -63,7 +64,7 @@ namespace Pinta.Core
 				formatNames.Append (wildcard);
 			}
 
-			ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), name.ToUpperInvariant (), formatNames);
+			ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), displayPrefix, formatNames);
 			this.Filter = ff;
 		}
 		

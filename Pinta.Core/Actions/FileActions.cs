@@ -120,11 +120,11 @@ namespace Pinta.Core
 				GdkPixbufFormat handler = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
 				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
 			
-				formats.Add (new FormatDescriptor (formatName, extensions, handler, format.IsWritable ? handler : null));
+				formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant(), extensions, handler, format.IsWritable ? handler : null));
 			}
 			
 			OraFormat oraHandler = new OraFormat ();
-			formats.Add (new FormatDescriptor ("ora", new string[] { "ora" }, oraHandler, oraHandler));
+			formats.Add (new FormatDescriptor ("ora", "OpenRaster", new string[] { "ora" }, oraHandler, oraHandler));
 			
 			foreach (var fd in formats) {
 				foreach (var ext in fd.Extensions) {
@@ -338,48 +338,25 @@ namespace Pinta.Core
 				currentExt = Path.GetExtension(PintaCore.Workspace.Filename.ToLowerInvariant ());
 			}
 			
-			Dictionary<string, string> filetypes = new Dictionary<string, string> ();
+			Dictionary<FileFilter, FormatDescriptor> filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 						
 			// Add all the formats we support to the save dialog
-			foreach (var format in Pixbuf.Formats) {
-			        if (format.IsWritable) {
-			                FileFilter ff = new FileFilter ();
-
-			                if (format.Name.ToLowerInvariant () == "jpeg") {
-						ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), format.Name.ToUpperInvariant (), "*.jpg, *.jpeg");
-						ff.AddPattern (string.Format ("*.{0}", format.Name));
-						ff.AddPattern ("*.jpg");
-					} else {
-						ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), format.Name.ToUpperInvariant (), string.Format ("*.{0}", format.Name));
-						ff.AddPattern (string.Format ("*.{0}", format.Name));
-					}
+			foreach (var format in formats) {
+				if (!format.IsReadOnly ()) {
+					fcd.AddFilter (format.Filter);
+					filetypes.Add (format.Filter, format);
 					
-					fcd.AddFilter (ff);
-
-					filetypes[ff.Name] = format.Name;
-					string formatName = format.Name.ToLowerInvariant ();
-					
-					if ((hasFile && currentExt == "." + formatName) || (formatName == "jpeg" && (!hasFile || currentExt == ".jpg")))
-						fcd.Filter = ff;
+					if ((hasFile && formatsByExt[currentExt] == format) || (!hasFile && format.Name == "jpeg")) {
+						fcd.Filter = format.Filter;
 					}
-			}
-			
-			// Add the OpenRaster file format
-			FileFilter ora = new FileFilter ();
-			ora.Name = Catalog.GetString ("OpenRaster image (*.ora)");
-			ora.AddPattern ("*.ora");
-			filetypes[ora.Name] = "ora";
-			fcd.AddFilter (ora);
-			
-			if (hasFile && currentExt == ".ora") {
-				fcd.Filter = ora;
+				}
 			}
 			
 			int response = fcd.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
 				lastDialogDir = fcd.CurrentFolder;
-				SaveFile (fcd.Filename, filetypes[fcd.Filter.Name]);
+				SaveFile (fcd.Filename, filetypes[fcd.Filter]);
 				AddRecentFileUri (fcd.Uri);
 
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
@@ -433,23 +410,15 @@ namespace Pinta.Core
 		#endregion
 		
 		#region Private Methods
-		private void SaveFile (string file, string filetype)
+		private void SaveFile (string file, FormatDescriptor format)
 		{
-			// Try to guess from the extension
-			if (string.IsNullOrEmpty (filetype)) {
-				filetype = Path.GetExtension (file);
-			
-				if (string.IsNullOrEmpty (filetype))
-					filetype = "png";
-					
-				filetype = filetype.TrimStart ('.');
-			
-				if (filetype == "jpg")
-					filetype = "jpeg";
+			if (format == null) {
+				string ext = System.IO.Path.GetExtension (file);
+				// Is the fallback to PNG even necessary?
+				format = formatsByExt[string.IsNullOrEmpty (ext) ? ".png" : ext];
 			}
 			
-			IImageExporter exporter = (filetype == "ora") ? (IImageExporter) new OraFormat () : new GdkPixbufFormat (filetype);
-			exporter.Export (PintaCore.Layers, file);
+			format.Exporter.Export (PintaCore.Layers, file);
 
 			PintaCore.Workspace.Filename = Path.GetFileName (file);
 			PintaCore.Workspace.IsDirty = false;
