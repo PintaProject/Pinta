@@ -43,6 +43,7 @@ namespace Pinta
 		ProgressDialog progress_dialog;
 		ExtensionPoints extensions = new ExtensionPoints ();
 		
+		Toolbar main_toolbar;
 		Toolbar tool_toolbar;
 		PintaCanvas canvas;
 		ToolBoxWidget toolbox;
@@ -252,6 +253,15 @@ namespace Pinta
 				Child.ShowAll ();
 
 			Show ();
+
+			// On non-Windows systems, we cannot have a one-for-all fixed size
+			// for the tool toolbar, so we set it to the height that the main
+			// toolbar now has. It guarantees that both buttons and comboboxes
+			// will fit without ugly clipping.
+			if (Platform.GetOS () == Platform.OS.Windows)
+				tool_toolbar.HeightRequest = 28;
+			else
+				tool_toolbar.HeightRequest = main_toolbar.Allocation.Height;
 		}
 
 		private void CreateMainMenu (VBox shell)
@@ -285,7 +295,7 @@ namespace Pinta
 		private void CreateMainToolBar (VBox shell)
 		{
 			// Main toolbar
-			Toolbar main_toolbar = new Toolbar () {
+			main_toolbar = new Toolbar () {
 				Name = "main_toolbar",
 				ShowArrow = false,
 			};
@@ -310,9 +320,6 @@ namespace Pinta
 				IconSize = IconSize.SmallToolbar,
 			};
 			
-			if (Platform.GetOS () == Platform.OS.Windows)
-				tool_toolbar.HeightRequest = 28;
-
 			shell.PackStart (tool_toolbar, false, false, 0);
 		}
 		
