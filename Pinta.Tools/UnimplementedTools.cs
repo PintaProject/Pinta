@@ -33,7 +33,7 @@ namespace Pinta.Tools
 	// This is just to get them to show up in the toolbox
 	// until they get implemented
 
-	//[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class CloneStampTool : BaseTool
 	{
 		public override string Name {

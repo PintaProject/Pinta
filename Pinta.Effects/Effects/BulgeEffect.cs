@@ -15,7 +15,7 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	//[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class BulgeEffect : BaseEffect
 	{
 		public override string Icon {
