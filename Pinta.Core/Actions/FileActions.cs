@@ -44,6 +44,8 @@ namespace Pinta.Core
 		public Gtk.Action Print { get; private set; }
 		public Gtk.Action Exit { get; private set; }
 		
+		private IList<FormatDescriptor> formats;
+		private IDictionary<string, FormatDescriptor> formatsByExt;
 		private RecentData recentData;
 		private string lastDialogDir;
 		
@@ -64,6 +66,10 @@ namespace Pinta.Core
 			recentData.AppName = "Pinta";
 			recentData.AppExec = GetExecutablePathname ();
 			recentData.MimeType = "image/*";
+			
+			formats = new List<FormatDescriptor> ();
+			formatsByExt = new SortedDictionary<string, FormatDescriptor> ();
+			FillFormats ();
 			
 			lastDialogDir = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
 
@@ -107,6 +113,26 @@ namespace Pinta.Core
 			Exit.Activated += HandlePintaCoreActionsFileExitActivated;
 		}
 		
+		private void FillFormats ()
+		{
+			foreach (var format in Pixbuf.Formats) {
+				string formatName = format.Name.ToLowerInvariant ();
+				GdkPixbufFormat handler = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
+				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
+			
+				formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant(), extensions, handler, format.IsWritable ? handler : null));
+			}
+			
+			OraFormat oraHandler = new OraFormat ();
+			formats.Add (new FormatDescriptor ("ora", "OpenRaster", new string[] { "ora" }, oraHandler, oraHandler));
+			
+			foreach (var fd in formats) {
+				foreach (var ext in fd.Extensions) {
+					formatsByExt.Add (string.Format (".{0}", ext), fd);
+				}
+			}
+		}
+		
 		#endregion
 
 		#region Public Methods
@@ -141,30 +167,8 @@ namespace Pinta.Core
 			
 			try {
 				// Open the image and add it to the layers
-				if (System.IO.Path.GetExtension (file) == ".ora") {
-					new OraFormat ().Import (PintaCore.Layers, file);
-				}
-				else {
-					Pixbuf bg = new Pixbuf (file);
-
-					PintaCore.Layers.Clear ();
-					PintaCore.History.Clear ();
-					PintaCore.Layers.DestroySelectionLayer ();
-
-					PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-					PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-
-					PintaCore.Layers.ResetSelectionPath ();
-
-					Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
-
-					using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-						CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-						g.Paint ();
-					}
-
-					bg.Dispose ();
-				}
+				IImageImporter importer = formatsByExt[System.IO.Path.GetExtension (file)].Importer;
+				importer.Import (PintaCore.Layers, file);
 
 				PintaCore.Workspace.DocumentPath = System.IO.Path.GetFullPath (file);
 				PintaCore.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
@@ -334,48 +338,25 @@ namespace Pinta.Core
 				currentExt = Path.GetExtension(PintaCore.Workspace.Filename.ToLowerInvariant ());
 			}
 			
-			Dictionary<string, string> filetypes = new Dictionary<string, string> ();
+			Dictionary<FileFilter, FormatDescriptor> filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 						
 			// Add all the formats we support to the save dialog
-			foreach (var format in Pixbuf.Formats) {
-			        if (format.IsWritable) {
-			                FileFilter ff = new FileFilter ();
-
-			                if (format.Name.ToLowerInvariant () == "jpeg") {
-						ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), format.Name.ToUpperInvariant (), "*.jpg, *.jpeg");
-						ff.AddPattern (string.Format ("*.{0}", format.Name));
-						ff.AddPattern ("*.jpg");
-					} else {
-						ff.Name = string.Format (Catalog.GetString ("{0} image ({1})"), format.Name.ToUpperInvariant (), string.Format ("*.{0}", format.Name));
-						ff.AddPattern (string.Format ("*.{0}", format.Name));
-					}
+			foreach (var format in formats) {
+				if (!format.IsReadOnly ()) {
+					fcd.AddFilter (format.Filter);
+					filetypes.Add (format.Filter, format);
 					
-					fcd.AddFilter (ff);
-
-					filetypes[ff.Name] = format.Name;
-					string formatName = format.Name.ToLowerInvariant ();
-					
-					if ((hasFile && currentExt == "." + formatName) || (formatName == "jpeg" && (!hasFile || currentExt == ".jpg")))
-						fcd.Filter = ff;
+					if ((hasFile && formatsByExt[currentExt] == format) || (!hasFile && format.Name == "jpeg")) {
+						fcd.Filter = format.Filter;
 					}
-			}
-			
-			// Add the OpenRaster file format
-			FileFilter ora = new FileFilter ();
-			ora.Name = Catalog.GetString ("OpenRaster image (*.ora)");
-			ora.AddPattern ("*.ora");
-			filetypes[ora.Name] = "ora";
-			fcd.AddFilter (ora);
-			
-			if (hasFile && currentExt == ".ora") {
-				fcd.Filter = ora;
+				}
 			}
 			
 			int response = fcd.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
 				lastDialogDir = fcd.CurrentFolder;
-				SaveFile (fcd.Filename, filetypes[fcd.Filter.Name]);
+				SaveFile (fcd.Filename, filetypes[fcd.Filter]);
 				AddRecentFileUri (fcd.Uri);
 
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
@@ -429,33 +410,25 @@ namespace Pinta.Core
 		#endregion
 		
 		#region Private Methods
-		private void SaveFile (string file, string filetype)
+		private void SaveFile (string file, FormatDescriptor format)
 		{
-			// Try to guess from the extension
-			if (string.IsNullOrEmpty (filetype)) {
-				filetype = Path.GetExtension (file);
-			
-				if (string.IsNullOrEmpty (filetype))
-					filetype = "png";
-					
-				filetype = filetype.TrimStart ('.');
-			
-				if (filetype == "jpg")
-					filetype = "jpeg";
+			if (format == null) {
+				string ext = System.IO.Path.GetExtension (file);
+				// Is the fallback to PNG even necessary?
+				format = formatsByExt[string.IsNullOrEmpty (ext) ? ".png" : ext];
 			}
+			
+			if (format == null || format.IsReadOnly ()) {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
+				md.Title = Catalog.GetString ("Error");
+				
+				md.Run ();
+				md.Destroy ();
+				return;
+			}
+			
+			format.Exporter.Export (PintaCore.Layers, file);
 
-			if (filetype == "ora") {
-				new OraFormat ().Export (PintaCore.Layers, file);
-			} else {
-				Cairo.ImageSurface surf = PintaCore.Layers.GetFlattenedImage ();
-	
-				Pixbuf pb = surf.ToPixbuf ();
-				pb.Save (file, filetype);
-	
-				(pb as IDisposable).Dispose ();
-				(surf as IDisposable).Dispose ();
-			}
-			
 			PintaCore.Workspace.Filename = Path.GetFileName (file);
 			PintaCore.Workspace.IsDirty = false;
 		}
