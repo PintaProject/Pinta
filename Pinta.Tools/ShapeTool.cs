@@ -179,7 +179,7 @@ namespace Pinta.Tools
 			current_point = point;
 			PintaCore.Layers.ToolLayer.Hidden = true;
 			
-			DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.CurrentLayer);
+			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.CurrentLayer);
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (shape_origin, new PointD (x, y));
 			PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
@@ -205,7 +205,7 @@ namespace Pinta.Tools
 			
 			PintaCore.Layers.ToolLayer.Clear ();
 			
-			Rectangle dirty = DrawShape (PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.ToolLayer);
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.ToolLayer);
 			dirty = dirty.Clamp ();
 			
 			PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
@@ -226,7 +226,7 @@ namespace Pinta.Tools
 		
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
-			return new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex);
+			return new ClippedSurfaceHistoryItem (Icon, Name, new IrregularSurface (undo_surface, Gdk.Region.Rectangle(last_dirty.ToGdkRectangle())), PintaCore.Layers.CurrentLayerIndex);
 		}
 		#endregion
 
@@ -241,39 +241,6 @@ namespace Pinta.Tools
 			return new Gdk.Rectangle (x, y, w, h);
 		}
 
-		protected Rectangle PointsToRectangle (PointD p1, PointD p2, bool constrain)
-		{
-			// We want to create a rectangle that always has positive width/height
-			double x, y, w, h;
-			
-			if (p1.Y <= p2.Y) {
-				y = p1.Y;
-				h = p2.Y - y;
-			} else {
-				y = p2.Y;
-				h = p1.Y - y;
-			}
-			
-			if (p1.X <= p2.X) {
-				x = p1.X;
-				
-				if (constrain)
-					w = h;
-				else
-					w = p2.X - x;
-			} else {
-				x = p2.X;
-				
-				if (constrain) {
-					w = h;
-					x = p1.X - w;
-				} else
-					w = p1.X - x;
-			}
-
-			return new Rectangle (x, y, w, h);
-		}
-		
 		protected bool StrokeShape { get { return fill_outline.ComboBox.Active % 2 == 0; } }
 		protected bool FillShape { get { return fill_outline.ComboBox.Active >= 1; } }
 		protected virtual bool ShowStrokeComboBox { get { return true; } }

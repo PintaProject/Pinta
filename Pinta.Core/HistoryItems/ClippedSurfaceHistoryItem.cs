@@ -1,8 +1,8 @@
 // 
-// SimpleHistoryItem.cs
+// ClippedSurfaceHistoryItem.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Olivier Dufour <Olivier (dot) duff [at] gmail (dot) com>
 // 
 // Copyright (c) 2010 Jonathan Pobst
 // 
