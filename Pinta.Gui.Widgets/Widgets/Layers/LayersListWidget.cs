@@ -67,6 +67,7 @@ namespace Pinta.Gui.Widgets
 			tree.EnableGridLines = TreeViewGridLines.None;
 			tree.EnableTreeLines = false;
 			tree.ShowExpanders = false;
+			tree.CanFocus = false;
 			
 			var crs = new CellRendererSurface (thumbnail_width, thumbnail_height);
 			var col = new TreeViewColumn ("Thumbnail", crs, "surface", store_index_thumbnail);
@@ -107,7 +108,8 @@ namespace Pinta.Gui.Widgets
 			PintaCore.History.ActionUndone += HandleHistoryItemAdded;			
 			
 			tree.CursorChanged += HandleLayerSelected;
-			
+
+
 			ShowAll ();
 		}
 		
