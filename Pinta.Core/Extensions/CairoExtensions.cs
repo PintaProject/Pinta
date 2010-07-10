@@ -482,13 +482,14 @@ namespace Pinta.Core
 			return (weight == FontWeight.Bold) ? Pango.Weight.Bold : Pango.Weight.Normal;
 		}
 
-		public static Rectangle DrawText (this Context g, PointD p, string family, FontSlant slant, FontWeight weight, double size, Color color, string text)
+		public static Rectangle DrawText (this Context g, PointD p, string family, FontSlant slant, FontWeight weight, double size, Color color, string text, bool antiAliasing)
 		{
 			g.Save ();
 
 			g.MoveTo (p.X, p.Y);
 			g.Color = color;
-			
+			g.Antialias =  antiAliasing? Antialias.Subpixel: Antialias.None;
+
 			Pango.Layout layout = Pango.CairoHelper.CreateLayout (g);
 			Pango.FontDescription fd = new Pango.FontDescription ();
 			fd.Family = family;

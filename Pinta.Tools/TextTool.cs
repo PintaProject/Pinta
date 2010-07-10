@@ -46,6 +46,13 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
 
+		protected override bool ShowAlphaBlendingButton {
+			get { return true; }
+		}
+
+		protected override bool ShowAntialiasingButton {
+			get { return true; }
+		}
 
 		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
 		private Cairo.PointD startMouseXY;
@@ -891,12 +898,12 @@ namespace Pinta.Tools
 			Rectangle dstRect = new Rectangle (pt, measuredSize);
 			//Rectangle dstRectClipped = Rectangle.Intersect(dstRect, ScratchSurface.Bounds);
 						/*
-            if (dstRectClipped.Width == 0 || dstRectClipped.Height == 0)
-            {
-                return;
-            }
+			if (dstRectClipped.Width == 0 || dstRectClipped.Height == 0)
+			{
+				return;
+			}
 			 */
-using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32, 8, 8)) {
+			using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32, 8, 8)) {
 				using (Cairo.Context context = new Cairo.Context (surface)) {
 					context.FillRectangle (new Cairo.Rectangle (0, 0, surface.Width, surface.Height), color);
 				}
@@ -932,7 +939,7 @@ using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 					using (Cairo.Context ctx = new Cairo.Context (PintaCore.Layers.ToolLayer.Surface)) {
 						Cairo.TextExtents te = TextExtents (ctx, text);
 						//new Cairo.PointD(dstRect.X - dstRectClipped.X + offset, dstRect.Y - dstRectClipped.Y),
-						ctx.DrawText (new Cairo.PointD (dstRect.X + offset - te.XBearing, dstRect.Y - te.YBearing), textFont, FontSlant, FontWeight, FontSize, PintaCore.Palette.PrimaryColor, text);
+						ctx.DrawText (new Cairo.PointD (dstRect.X + offset - te.XBearing, dstRect.Y - te.YBearing), textFont, FontSlant, FontWeight, FontSize, PintaCore.Palette.PrimaryColor, text, antiAliasing);
 						
 						if (underscore_btn.Active) {
 							int lineSize = 1;
@@ -961,8 +968,7 @@ using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 				
 				int xEnd = Math.Min (dst.Width, pt.X + measuredSize.Width);
 				
-				bool blending = false;
-				//AppEnvironment.AlphaBlending;
+				bool blending = alphablending_btn.Active;
 				//if (dst.IsColumnVisible(pt.X + skipX))
 				//{
 				for (int y = pt.Y; y < pt.Y + measuredSize.Height; ++y) {
@@ -1143,8 +1149,7 @@ using (Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 
 		private void RenderText (Cairo.ImageSurface surf, int lineNumber)
 		{
-			DrawText (surf, this.Font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], false, PintaCore.Palette.PrimaryColor);
-			//antialiasing hardcoded for moment
+			DrawText (surf, this.Font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], antialiasing_btn.Active, PintaCore.Palette.PrimaryColor);
 		}
 		/*
         private void PlaceMoveNub()
