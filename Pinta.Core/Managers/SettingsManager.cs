@@ -104,15 +104,24 @@ namespace Pinta.Core
 		private void LoadSettings ()
 		{
 			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
-			
 			settings = Deserialize (settings_file);
+			
+			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
+			
+			try {
+				PintaCore.Palette.CurrentPalette.Load (palette_file);
+			} catch (Exception e) {
+				// Retain the default palette
+			}
 		}
 		
 		public void SaveSettings ()
 		{
 			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
-
 			Serialize (settings_file, settings);
+			
+			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
+			PintaCore.Palette.CurrentPalette.Save (palette_file, Palette.FileFormat.PDN);
 		}
 	}
 }

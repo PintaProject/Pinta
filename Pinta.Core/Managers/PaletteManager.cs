@@ -33,6 +33,7 @@ namespace Pinta.Core
 	{
 		private Color primary;
 		private Color secondary;
+		private Palette palette;
 
 		public Color PrimaryColor {
 			get { return primary; }
@@ -51,6 +52,16 @@ namespace Pinta.Core
 					secondary = value;
 					OnSecondaryColorChanged ();
 				}
+			}
+		}
+		
+		public Palette CurrentPalette {
+			get {
+				if (palette == null) {
+					palette = Palette.GetDefault ();
+				}
+				
+				return palette;
 			}
 		}
 		

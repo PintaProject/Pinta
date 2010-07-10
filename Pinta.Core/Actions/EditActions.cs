@@ -45,6 +45,12 @@ namespace Pinta.Core
 		public Gtk.Action InvertSelection { get; private set; }
 		public Gtk.Action SelectAll { get; private set; }
 		public Gtk.Action Deselect { get; private set; }
+		public Gtk.Action LoadPalette { get; private set; }
+		public Gtk.Action SavePalette { get; private set; }
+		public Gtk.Action ResetPalette { get; private set; }
+		public Gtk.Action ResizePalette { get; private set; }
+		
+		private string lastPaletteDir = null;
 		
 		public EditActions ()
 		{
@@ -69,6 +75,11 @@ namespace Pinta.Core
 			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
 			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("Deselect"), null, "Menu.Edit.Deselect.png");
 			
+			LoadPalette = new Gtk.Action ("LoadPalette", Catalog.GetString ("Open..."), null, Stock.Open);
+			SavePalette = new Gtk.Action ("SavePalette", Catalog.GetString ("Save As..."), null, Stock.Save);
+			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("Reset to Default"), null, Stock.RevertToSaved);
+			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+			
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
@@ -90,6 +101,15 @@ namespace Pinta.Core
 			menu.Append (Paste.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ControlMask));
 			menu.Append (PasteIntoNewLayer.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ShiftMask));
 			//menu.Append (PasteIntoNewImage.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.Mod1Mask));
+			menu.AppendSeparator ();
+			
+			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Palette"), null, null);
+			Menu palette_menu = (Menu) menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
+			palette_menu.Append (LoadPalette.CreateMenuItem ());
+			palette_menu.Append (SavePalette.CreateMenuItem ());
+			palette_menu.Append (ResetPalette.CreateMenuItem ());
+			palette_menu.Append (ResizePalette.CreateMenuItem ());
+			
 			menu.AppendSeparator ();
 			menu.Append (EraseSelection.CreateAcceleratedMenuItem (Gdk.Key.Delete, Gdk.ModifierType.None));
 			menu.Append (FillSelection.CreateAcceleratedMenuItem (Gdk.Key.BackSpace, Gdk.ModifierType.None));
@@ -116,6 +136,9 @@ namespace Pinta.Core
 			Undo.Activated += HandlerPintaCoreActionsEditUndoActivated;
 			Redo.Activated += HandlerPintaCoreActionsEditRedoActivated;
 			Cut.Activated += HandlerPintaCoreActionsEditCutActivated;
+			LoadPalette.Activated += HandlerPintaCoreActionsEditLoadPaletteActivated;
+			SavePalette.Activated += HandlerPintaCoreActionsEditSavePaletteActivated;
+			ResetPalette.Activated += HandlerPintaCoreActionsEditResetPaletteActivated;
 		}
 		#endregion
 
@@ -284,6 +307,78 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 		{
 			PintaCore.History.Redo ();
+		}
+
+		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
+		{
+			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Palette File"), PintaCore.Chrome.MainWindow,
+													FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
+													Gtk.Stock.Open, Gtk.ResponseType.Ok);
+
+			FileFilter ff = new FileFilter ();
+			ff.AddPattern ("*.txt");
+			ff.AddPattern ("*.gpl");
+			ff.Name = Catalog.GetString ("Palette files (*.txt, *.gpl)");
+			fcd.AddFilter (ff);
+			
+			FileFilter ff2 = new FileFilter ();
+			ff2.Name = Catalog.GetString ("All files");
+			ff2.AddPattern ("*.*");
+			fcd.AddFilter (ff2);
+			
+			if (lastPaletteDir != null)
+				fcd.SetCurrentFolder (lastPaletteDir);
+			
+			int response = fcd.Run ();
+		
+			if (response == (int) Gtk.ResponseType.Ok) {
+				try {
+					lastPaletteDir = fcd.CurrentFolder;
+					PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
+				} catch {
+					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Could not open palette file: {0}.\nPlease verify that you are trying to open a valid GIMP or Paint.NET palette."), fcd.Filename);
+					md.Title = Catalog.GetString ("Error");
+					
+					md.Run ();
+					md.Destroy ();
+				}
+			}
+
+			fcd.Destroy ();
+		}
+
+		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
+		{
+			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Save Palette File"), PintaCore.Chrome.MainWindow,
+													FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
+													Gtk.Stock.Save, Gtk.ResponseType.Ok);
+
+			FileFilter ffPDN = new FileFilter ();
+			ffPDN.AddPattern ("*.txt");
+			ffPDN.Name = Catalog.GetString ("Paint.NET palette (*.txt)");
+			fcd.AddFilter (ffPDN);
+			
+			FileFilter ffGIMP = new FileFilter ();
+			ffGIMP.AddPattern ("*.gpl");
+			ffGIMP.Name = Catalog.GetString ("GIMP palette (*.gpl)");
+			fcd.AddFilter (ffGIMP);
+			
+			if (lastPaletteDir != null)
+				fcd.SetCurrentFolder (lastPaletteDir);
+			
+			int response = fcd.Run ();
+		
+			if (response == (int) Gtk.ResponseType.Ok) {
+				Palette.FileFormat format = (fcd.Filter == ffPDN) ? Palette.FileFormat.PDN : Palette.FileFormat.GIMP;
+				PintaCore.Palette.CurrentPalette.Save (fcd.Filename, format);
+			}
+
+			fcd.Destroy ();
+		}
+
+		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
+		{
+			PintaCore.Palette.CurrentPalette.LoadDefault ();
 		}
 		#endregion
 	}

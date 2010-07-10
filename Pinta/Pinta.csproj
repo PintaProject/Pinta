@@ -163,6 +163,7 @@
     <Compile Include="IgeMacMenu.cs" />
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
+    <Compile Include="Dialogs\SpinButtonEntryDialog.cs" />
     <Compile Include="MainWindow.cs" />
   </ItemGroup>
   <ItemGroup>

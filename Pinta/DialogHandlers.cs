@@ -42,6 +42,8 @@ namespace Pinta
 			
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
 			
+			PintaCore.Actions.Edit.ResizePalette.Activated += HandlePintaCoreActionsEditResizePaletteActivated;
+			
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
 			PintaCore.Actions.Image.CanvasSize.Activated += HandlePintaCoreActionsImageCanvasSizeActivated;
 			
@@ -102,6 +104,19 @@ namespace Pinta
 			if (response == (int)Gtk.ResponseType.Ok)
 				PintaCore.Actions.File.NewFile (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight));
 
+			dialog.Destroy ();
+		}
+
+		private void HandlePintaCoreActionsEditResizePaletteActivated (object sender, EventArgs e)
+		{
+			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Catalog.GetString ("Resize Palette"),
+					PintaCore.Chrome.MainWindow, Catalog.GetString ("New palette size:"), 1, 96,
+					PintaCore.Palette.CurrentPalette.Count);
+			
+			if (dialog.Run () == (int) ResponseType.Ok) {
+				PintaCore.Palette.CurrentPalette.Resize (dialog.GetValue ());
+			}
+			
 			dialog.Destroy ();
 		}
 
