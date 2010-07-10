@@ -1,5 +1,5 @@
 // 
-// GdkPixbufFormat.cs
+// ModifyCompressionEventArgs.cs
 //  
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
@@ -25,58 +25,18 @@
 // THE SOFTWARE.
 
 using System;
-using System.IO;
-
-using Gdk;
 
 namespace Pinta.Core
 {
-	public class GdkPixbufFormat: IImageImporter, IImageExporter
+	public class ModifyCompressionEventArgs: EventArgs
 	{
-		private string filetype;
-
-		public GdkPixbufFormat(string filetype)
-		{
-			this.filetype = filetype;
-		}
-	
-		public void Import (LayerManager layers, string fileName)
-		{
-			Pixbuf bg = new Pixbuf (fileName);
-
-			layers.Clear ();
-			PintaCore.History.Clear ();
-			layers.DestroySelectionLayer ();
-
-			PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-			layers.ResetSelectionPath ();
-
-			Layer layer = layers.AddNewLayer (Path.GetFileName (fileName));
-
-			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-				g.Paint ();
-			}
-
-			bg.Dispose ();
-		}
+		public int Quality { get; set; }
+		public bool Cancel { get; set; }
 		
-		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType)
+		public ModifyCompressionEventArgs (int quality)
 		{
-			PintaCore.Actions.File.PromptJpegCompressionLevel ();
-			pb.Save (fileName, fileType);
-		}
-		
-		public void Export (LayerManager layers, string fileName)
-		{
-			Cairo.ImageSurface surf = layers.GetFlattenedImage ();
-	
-			Pixbuf pb = surf.ToPixbuf ();
-			DoSave(pb, fileName, filetype);
-
-			(pb as IDisposable).Dispose ();
-			(surf as IDisposable).Dispose ();
+			this.Quality = quality;
+			this.Cancel = false;
 		}
 	}
 }

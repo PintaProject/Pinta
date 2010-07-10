@@ -147,12 +147,14 @@
     <Compile Include="EventArgs\LivePreviewEndedEventArgs.cs" />
     <Compile Include="EventArgs\LivePreviewRenderUpdatedEventArgs.cs" />
     <Compile Include="EventArgs\LivePreviewStartedEventArgs.cs" />
+    <Compile Include="EventArgs\ModifyCompressionEventArgs.cs" />
     <Compile Include="Managers\LivePreviewManager.cs" />
     <Compile Include="Classes\AsyncEffectRenderer.cs" />
     <Compile Include="Classes\GradientRenderer.cs" />
     <Compile Include="Classes\GradientRenderers.cs" />
     <Compile Include="ImageFormats\OraFormat.cs" />
     <Compile Include="ImageFormats\GdkPixbufFormat.cs" />
+    <Compile Include="ImageFormats\JpegFormat.cs" />
     <Compile Include="ImageFormats\IImageExporter.cs" />
     <Compile Include="ImageFormats\IImageImporter.cs" />
     <Compile Include="ImageFormats\FormatDescriptor.cs" />

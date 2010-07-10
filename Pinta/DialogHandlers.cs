@@ -41,6 +41,7 @@ namespace Pinta
 			main_window = window;
 			
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
+			PintaCore.Actions.File.ModifyCompression += new EventHandler<ModifyCompressionEventArgs> (FileActions_ModifyCompression);
 			
 			PintaCore.Actions.Edit.ResizePalette.Activated += HandlePintaCoreActionsEditResizePaletteActivated;
 			
@@ -253,6 +254,20 @@ namespace Pinta
 		private void HandlePixelsActivated (object sender, EventArgs e)
 		{
 			main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
+		}
+
+		private void FileActions_ModifyCompression (object sender, ModifyCompressionEventArgs e)
+		{
+			JpegCompressionDialog dlg = new JpegCompressionDialog (e.Quality);
+
+			try {
+				if (dlg.Run () == (int)Gtk.ResponseType.Ok)
+					e.Quality = dlg.GetCompressionLevel ();
+				else
+					e.Cancel = true;
+			} finally {
+				dlg.Destroy ();
+			}
 		}
 		#endregion
 	}

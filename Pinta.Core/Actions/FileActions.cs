@@ -50,6 +50,7 @@ namespace Pinta.Core
 		private string lastDialogDir;
 		
 		public event EventHandler BeforeQuit;
+		public event EventHandler<ModifyCompressionEventArgs> ModifyCompression;
 		
 		public FileActions ()
 		{
@@ -117,7 +118,7 @@ namespace Pinta.Core
 		{
 			foreach (var format in Pixbuf.Formats) {
 				string formatName = format.Name.ToLowerInvariant ();
-				GdkPixbufFormat handler = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
+				GdkPixbufFormat handler = (formatName == "jpeg") ? new JpegFormat () : new GdkPixbufFormat (format.Name.ToLowerInvariant ());
 				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
 			
 				formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant(), extensions, handler, format.IsWritable ? handler : null));
@@ -200,6 +201,16 @@ namespace Pinta.Core
 		void AddRecentFileUri (string uri)
 		{
 			RecentManager.Default.AddFull (uri, recentData);
+		}
+		
+		internal int PromptJpegCompressionLevel ()
+		{
+			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (85);
+			
+			if (ModifyCompression != null)
+				ModifyCompression (this, e);
+				
+			return e.Cancel ? -1 : e.Quality;
 		}
 		
 		#region Action Handlers

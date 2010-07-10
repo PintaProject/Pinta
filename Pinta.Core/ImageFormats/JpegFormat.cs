@@ -31,52 +31,19 @@ using Gdk;
 
 namespace Pinta.Core
 {
-	public class GdkPixbufFormat: IImageImporter, IImageExporter
+	public class JpegFormat: GdkPixbufFormat
 	{
-		private string filetype;
-
-		public GdkPixbufFormat(string filetype)
+		public JpegFormat()
+			: base ("jpeg")
 		{
-			this.filetype = filetype;
-		}
-	
-		public void Import (LayerManager layers, string fileName)
-		{
-			Pixbuf bg = new Pixbuf (fileName);
-
-			layers.Clear ();
-			PintaCore.History.Clear ();
-			layers.DestroySelectionLayer ();
-
-			PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-			layers.ResetSelectionPath ();
-
-			Layer layer = layers.AddNewLayer (Path.GetFileName (fileName));
-
-			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
-				g.Paint ();
-			}
-
-			bg.Dispose ();
 		}
 		
-		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType)
+		protected override void DoSave (Pixbuf pb, string fileName, string fileType)
 		{
-			PintaCore.Actions.File.PromptJpegCompressionLevel ();
-			pb.Save (fileName, fileType);
-		}
-		
-		public void Export (LayerManager layers, string fileName)
-		{
-			Cairo.ImageSurface surf = layers.GetFlattenedImage ();
-	
-			Pixbuf pb = surf.ToPixbuf ();
-			DoSave(pb, fileName, filetype);
-
-			(pb as IDisposable).Dispose ();
-			(surf as IDisposable).Dispose ();
+			int level = PintaCore.Actions.File.PromptJpegCompressionLevel ();
+			
+			if (level != -1)
+				pb.Savev (fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
 		}
 	}
 }
