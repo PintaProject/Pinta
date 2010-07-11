@@ -256,14 +256,12 @@ namespace Pinta
 
 			Show ();
 
-			// On non-Windows systems, we cannot have a one-for-all fixed size
-			// for the tool toolbar, so we set it to the height that the main
-			// toolbar now has. It guarantees that both buttons and comboboxes
-			// will fit without ugly clipping.
+			// On non-Windows systems, we clip to sufficient size for
+			// "both-horiz" mode.
 			if (Platform.GetOS () == Platform.OS.Windows)
 				tool_toolbar.HeightRequest = 28;
 			else
-				tool_toolbar.HeightRequest = main_toolbar.Allocation.Height;
+				tool_toolbar.HeightRequest = 42;
 		}
 
 		private void CreateMainMenu (VBox shell)
