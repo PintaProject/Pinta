@@ -64,7 +64,6 @@ namespace Pinta.Core
 		
 		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType)
 		{
-			PintaCore.Actions.File.PromptJpegCompressionLevel ();
 			pb.Save (fileName, fileType);
 		}
 		
