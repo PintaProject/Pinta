@@ -132,6 +132,7 @@
     <Compile Include="Dialogs\AboutDialog.cs" />
     <Compile Include="Dialogs\ErrorDialog.cs" />
     <Compile Include="Dialogs\JpegCompressionDialog.cs" />
+    <Compile Include="Dialogs\SpinButtonEntryDialog.cs" />
     <Compile Include="Dialogs\VersionInformationTabPage.cs" />
     <Compile Include="DockLibrary\AutoHideBox.cs" />
     <Compile Include="DockLibrary\DockBar.cs" />
