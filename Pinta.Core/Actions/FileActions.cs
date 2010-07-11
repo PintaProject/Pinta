@@ -371,6 +371,7 @@ namespace Pinta.Core
 				AddRecentFileUri (fcd.Uri);
 
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
+				PintaCore.Workspace.ActiveDocument.Pathname = fcd.Filename;
 			}
 
 			fcd.Destroy ();
