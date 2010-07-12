@@ -118,10 +118,20 @@ namespace Pinta.Core
 		{
 			foreach (var format in Pixbuf.Formats) {
 				string formatName = format.Name.ToLowerInvariant ();
-				GdkPixbufFormat handler = (formatName == "jpeg") ? new JpegFormat () : new GdkPixbufFormat (format.Name.ToLowerInvariant ());
 				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
+				GdkPixbufFormat importer = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
+				IImageExporter exporter;
 			
-				formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant(), extensions, handler, format.IsWritable ? handler : null));
+				if (formatName == "jpeg")
+					exporter = importer = new JpegFormat ();
+				else if (formatName == "tga")
+					exporter = new TgaExporter ();
+				else if (format.IsWritable)
+					exporter = importer;
+				else
+					exporter = null;
+			
+				formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant(), extensions, importer, exporter));
 			}
 			
 			OraFormat oraHandler = new OraFormat ();

@@ -1,5 +1,5 @@
 // 
-// GdkPixbufFormat.cs
+// JpegFormat.cs
 //  
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
