@@ -36,6 +36,7 @@ namespace Pinta.Core
 	public class FileActions
 	{
 		public Gtk.Action New { get; private set; }
+		public Gtk.Action NewScreenshot { get; private set; }
 		public Gtk.Action Open { get; private set; }
 		public Gtk.Action OpenRecent { get; private set; }
 		public Gtk.Action Close { get; private set; }
@@ -55,6 +56,7 @@ namespace Pinta.Core
 		public FileActions ()
 		{
 			New = new Gtk.Action ("New", Catalog.GetString ("New..."), null, Stock.New);
+			NewScreenshot = new Gtk.Action ("NewScreenshot", Catalog.GetString ("New Screenshot..."), null, Stock.Fullscreen);
 			Open = new Gtk.Action ("Open", Catalog.GetString ("Open..."), null, Stock.Open);
 			OpenRecent = new RecentAction ("OpenRecent", Catalog.GetString ("Open Recent"), null, Stock.Open, RecentManager.Default);
 			
@@ -93,6 +95,7 @@ namespace Pinta.Core
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
 			menu.Append (New.CreateAcceleratedMenuItem (Gdk.Key.N, Gdk.ModifierType.ControlMask));
+			menu.Append (NewScreenshot.CreateMenuItem ());
 			menu.Append (Open.CreateAcceleratedMenuItem (Gdk.Key.O, Gdk.ModifierType.ControlMask));
 			menu.Append (OpenRecent.CreateMenuItem ());
 			//menu.Append (Close.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask));
@@ -160,9 +163,9 @@ namespace Pinta.Core
 
 			// Start with an empty white layer
 			Layer background = PintaCore.Layers.AddNewLayer (Catalog.GetString ("Background"));
-
+			
 			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-				g.SetSourceRGB (255, 255, 255);
+				g.SetSourceRGB (1, 1, 1);
 				g.Paint ();
 			}
 
@@ -170,6 +173,21 @@ namespace Pinta.Core
 			PintaCore.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
 			PintaCore.Workspace.IsDirty = false;
 			PintaCore.Actions.View.ZoomToWindow.Activate ();
+		}
+		
+		public void NewFileWithScreenshot ()
+		{
+			Screen screen = Screen.Default;
+			Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.DefaultColormap, 0, 0, 0, 0, screen.Width, screen.Height);
+			NewFile (new Size (screen.Width, screen.Height));
+
+			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers[0].Surface)) {
+				CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
+				g.Paint ();
+			}
+
+			(pb as IDisposable).Dispose ();
+			PintaCore.Workspace.IsDirty = true;
 		}
 		
 		public bool OpenFile (string file)

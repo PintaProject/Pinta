@@ -41,6 +41,7 @@ namespace Pinta
 			main_window = window;
 			
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
+			PintaCore.Actions.File.NewScreenshot.Activated += HandlePintaCoreActionsFileNewScreenshotActivated;
 			PintaCore.Actions.File.ModifyCompression += new EventHandler<ModifyCompressionEventArgs> (FileActions_ModifyCompression);
 			
 			PintaCore.Actions.Edit.ResizePalette.Activated += HandlePintaCoreActionsEditResizePaletteActivated;
@@ -58,7 +59,7 @@ namespace Pinta
 		}
 
 		#region Handlers
-		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
+		private bool ConfirmReplaceImage ()
 		{
 			bool canceled = false;
 
@@ -90,10 +91,13 @@ namespace Pinta
 				}
 			}
 
-			if (canceled) {
+			return !canceled;
+		}
+		
+		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
+		{
+			if (!ConfirmReplaceImage ())
 				return;
-			}
-
 
 			NewImageDialog dialog = new NewImageDialog ();
 
@@ -104,6 +108,30 @@ namespace Pinta
 
 			if (response == (int)Gtk.ResponseType.Ok)
 				PintaCore.Actions.File.NewFile (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight));
+
+			dialog.Destroy ();
+		}
+
+		private void HandlePintaCoreActionsFileNewScreenshotActivated (object sender, EventArgs e)
+		{
+			if (!ConfirmReplaceImage ())
+				return;
+
+			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Catalog.GetString ("Take Screenshot"),
+					PintaCore.Chrome.MainWindow, Catalog.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, 0);
+
+			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
+
+			if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
+				GLib.Timeout.Add ((uint) dialog.GetValue () * 1000, () => {
+					PintaCore.Actions.File.NewFileWithScreenshot ();
+					
+					if (!PintaCore.Chrome.MainWindow.IsActive)
+						PintaCore.Chrome.MainWindow.UrgencyHint = true;
+					
+					return false;
+				});
+			}
 
 			dialog.Destroy ();
 		}
