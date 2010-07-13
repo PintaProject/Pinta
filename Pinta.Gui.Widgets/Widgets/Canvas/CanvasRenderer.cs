@@ -45,12 +45,16 @@ namespace Pinta.Gui.Widgets
 
 		public void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
 		{
+			dst.Flush ();
+		
 			if (scale_factor.Ratio == 1)
 				RenderOneToOne (src, dst, offset, checker);
 			else if (scale_factor.Ratio < 1)
 				RenderZoomIn (src, dst, offset, checker);
 			else
 				RenderZoomOut (src, dst, offset, destination_size, checker);
+			
+			dst.MarkDirty ();
 		}
 
 		#region Algorithms ported from PDN
