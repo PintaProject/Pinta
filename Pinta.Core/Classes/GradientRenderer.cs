@@ -121,6 +121,8 @@ namespace Pinta.Core
 				endAlpha = this.endColor.A;
 			}
 			
+			surface.Flush ();
+			
 			ColorBgra* src_data_ptr = (ColorBgra*)surface.DataPtr;
 			int src_width = surface.Width;
 			
@@ -202,6 +204,7 @@ namespace Pinta.Core
 				}
 			}
 			
+			surface.MarkDirty ();
 			AfterRender ();
 		}
 

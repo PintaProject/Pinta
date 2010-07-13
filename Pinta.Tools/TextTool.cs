@@ -969,6 +969,7 @@ namespace Pinta.Tools
 				int xEnd = Math.Min (dst.Width, pt.X + measuredSize.Width);
 				
 				bool blending = alphablending_btn.Active;
+				dst.Flush ();
 				//if (dst.IsColumnVisible(pt.X + skipX))
 				//{
 				for (int y = pt.Y; y < pt.Y + measuredSize.Height; ++y) {
@@ -1006,7 +1007,7 @@ namespace Pinta.Tools
 					}
 				}
 				//}
-				
+				dst.MarkDirty ();
 			}
 		}
 

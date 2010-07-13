@@ -118,11 +118,14 @@ namespace Pinta.Tools
 			int tol = (int)(Tolerance * Tolerance * 256);
 			Rectangle boundingBox;
 
+			surface.Flush ();
+
 			if (IsContinguousMode)
 				FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
 			else
 				FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
-				
+			
+			surface.MarkDirty ();
 			stencil = stencilBuffer;
 			
 			Point[][] polygonSet = PathManager.PolygonSetFromStencil (stencilBuffer, boundingBox, 0, 0);

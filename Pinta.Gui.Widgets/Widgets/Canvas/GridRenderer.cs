@@ -40,6 +40,8 @@ namespace Pinta.Gui.Widgets
 			int sTop = d2SLookupY[offset.Y];
 			int sBottom = d2SLookupY[offset.Y + dstHeight];
 
+			dst.Flush ();
+
 			for (int srcY = sTop; srcY <= sBottom; ++srcY) {
 				int dstY = s2DLookupY[srcY];
 				int dstRow = dstY - offset.Y;
@@ -77,6 +79,8 @@ namespace Pinta.Gui.Widgets
 					}
 				}
 			}
+			
+			dst.MarkDirty ();
 		}
 	}
 }

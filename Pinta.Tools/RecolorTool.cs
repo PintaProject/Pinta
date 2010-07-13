@@ -122,6 +122,8 @@ namespace Pinta.Tools
 			
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
 			myTolerance = (int)(Tolerance * 256);
+			
+			tmp_layer.Flush ();
 
 			ColorBgra* tmp_data_ptr = (ColorBgra*)tmp_layer.DataPtr;
 			int tmp_width = tmp_layer.Width;
@@ -141,8 +143,9 @@ namespace Pinta.Tools
 
 					stencil[i, j] = true;
 				}
-
 			
+			tmp_layer.MarkDirty ();
+
 			using (Context g = new Context (surf)) {
 				g.AppendPath (PintaCore.Layers.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
