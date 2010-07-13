@@ -653,6 +653,8 @@ namespace Pinta.Core
 		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
 		{
 			Cairo.ImageSurface surf = surfSource.Clone ();
+			surf.Flush ();
+			
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 			int len = surf.Data.Length / 4;
 
