@@ -255,8 +255,11 @@ namespace Pinta.Core
 				
 				bounds = GetTileBounds (tileIndex);
 				
-				if (!cancel_render_flag)
+				if (!cancel_render_flag) {
+					dest_surface.Flush ();
 					effect.RenderEffect (source_surface, dest_surface, new [] { bounds });
+					dest_surface.MarkDirty (bounds.ToCairoRectangle ());
+				}
 				
 			} catch (Exception ex) {		
 				exception = ex;
