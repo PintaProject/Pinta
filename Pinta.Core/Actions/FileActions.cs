@@ -35,6 +35,8 @@ namespace Pinta.Core
 {
 	public class FileActions
 	{
+		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+	
 		public Gtk.Action New { get; private set; }
 		public Gtk.Action NewScreenshot { get; private set; }
 		public Gtk.Action Open { get; private set; }
@@ -249,11 +251,10 @@ namespace Pinta.Core
 			if (PintaCore.Workspace.IsDirty) {
 				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before opening a new image?");
 				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
-				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
-				markup = string.Format (markup, primary, secondary);
+				var message = string.Format (markup, primary, secondary);
 
 				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-											MessageType.Question, ButtonsType.None, true,markup,
+											MessageType.Question, ButtonsType.None, true, message,
 											System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
 
 				md.AddButton (Catalog.GetString ("Continue without saving"), ResponseType.No);
@@ -290,13 +291,11 @@ namespace Pinta.Core
 			if (PintaCore.Workspace.IsDirty) {
 				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before opening a new image?");
 				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
-				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
-				markup = string.Format (markup, primary, secondary);
+				var message = string.Format (markup, primary, secondary);
 
 				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
 				                            MessageType.Question, ButtonsType.None, true,
-				                            markup,
-				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+				                            message, System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
 
 				md.AddButton (Catalog.GetString ("Continue without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
@@ -358,9 +357,28 @@ namespace Pinta.Core
 				HandlePintaCoreActionsFileSaveAsActivated (null, EventArgs.Empty);
 		}
 		
+		private bool ConfirmOverwrite (FileChooserDialog fcd, string file) {
+			string primary = Catalog.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
+			string secondary = Catalog.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
+			string message = string.Format (markup, primary, secondary);
+
+			MessageDialog md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+				MessageType.Question, ButtonsType.None,
+				true, message, System.IO.Path.GetFileName (file), fcd.CurrentFolder);
+
+			md.AddButton (Stock.Cancel, ResponseType.Cancel);
+			md.AddButton (Stock.Save, ResponseType.Ok);
+			md.DefaultResponse = ResponseType.Cancel;
+
+			int response = md.Run ();
+			md.Destroy ();
+			
+			return response == (int) ResponseType.Ok;
+		}
+		
 		private void HandlePintaCoreActionsFileSaveAsActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
+			var fcd = new FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
 			                                                       PintaCore.Chrome.MainWindow,
 			                                                       FileChooserAction.Save,
 			                                                       Gtk.Stock.Cancel,
@@ -373,7 +391,7 @@ namespace Pinta.Core
 			string currentExt = null;
 			
 			if (hasFile) {
-				fcd.CurrentName = PintaCore.Workspace.Filename;
+				fcd.SetFilename (PintaCore.Workspace.ActiveDocument.Pathname);
 				currentExt = Path.GetExtension(PintaCore.Workspace.Filename.ToLowerInvariant ());
 			}
 			
@@ -391,15 +409,38 @@ namespace Pinta.Core
 				}
 			}
 			
-			int response = fcd.Run ();
+			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
+			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
+				if (this.ConfirmOverwrite (fcd, fcd.Filename)) {
+					eventArgs.RetVal = FileChooserConfirmation.AcceptFilename;
+				} else {
+					eventArgs.RetVal = FileChooserConfirmation.SelectAgain;
+				}
+			};
 			
-			if (response == (int)Gtk.ResponseType.Ok) {
+			while (fcd.Run () == (int) Gtk.ResponseType.Ok) {
+				FormatDescriptor format = filetypes[fcd.Filter];
+				string file = fcd.Filename;
+				
+				if (string.IsNullOrEmpty (System.IO.Path.GetExtension (file))) {
+					// No extension; add one from the format descriptor.
+					file = string.Format ("{0}.{1}", file, format.Extensions[0]);
+					fcd.CurrentName = System.IO.Path.GetFileName (file);
+					
+					// We also need to display an overwrite confirmation message manually,
+					// because MessageDialog won't do this for us in this case.
+					if (File.Exists (file) && !ConfirmOverwrite (fcd, file)) {
+						continue;
+					}
+				}
+				
 				lastDialogDir = fcd.CurrentFolder;
-				SaveFile (fcd.Filename, filetypes[fcd.Filter]);
+				SaveFile (file, format);
 				AddRecentFileUri (fcd.Uri);
 
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
-				PintaCore.Workspace.ActiveDocument.Pathname = fcd.Filename;
+				PintaCore.Workspace.ActiveDocument.Pathname = file;
+				break;
 			}
 
 			fcd.Destroy ();
@@ -412,13 +453,11 @@ namespace Pinta.Core
 			if (PintaCore.Workspace.IsDirty) {
 				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before closing?");
 				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
-				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
-				markup = string.Format (markup, primary, secondary);
+				var message = string.Format (markup, primary, secondary);
 
 				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
 				                            MessageType.Question, ButtonsType.None, true,
-				                            markup,
-				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+				                            message, System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
 
 				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
