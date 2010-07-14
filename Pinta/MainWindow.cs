@@ -89,7 +89,7 @@ namespace Pinta
 				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
 				PintaCore.Settings.PutSetting ("window-size-width", this.GdkWindow.GetSize ().Width);
 				PintaCore.Settings.PutSetting ("window-size-height", this.GdkWindow.GetSize ().Height);
-				PintaCore.Settings.PutSetting ("window-maximized", (this.GdkWindow.State | Gdk.WindowState.Maximized) != 0);
+				PintaCore.Settings.PutSetting ("window-maximized", (this.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
 				PintaCore.Settings.PutSetting ("ruler-metric", (int) hruler.Metric);
 				PintaCore.Settings.PutSetting ("ruler-show", PintaCore.Actions.View.Rulers.Active);
 				PintaCore.Settings.SaveSettings ();
