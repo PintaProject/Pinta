@@ -55,31 +55,51 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			if (surface_modified)
+				return;
+		
 			surface_modified = false;
 			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
-		}
-
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
-		{
 			Color tool_color;
-			
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask)
+
+			if (args.Event.Button == 1) // left
 				tool_color = PintaCore.Palette.PrimaryColor;
-			else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask)
+			else if (args.Event.Button == 3) // right
 				tool_color = PintaCore.Palette.SecondaryColor;
 			else {
 				last_point = point_empty;
 				return;
 			}
-				
-			DrawingArea drawingarea1 = (DrawingArea)o;
+
+			Draw (canvas, tool_color, point, true);
+		}
+
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		{
+			Color tool_color;
+		
+			if ((args.Event.State & Gdk.ModifierType.Button1Mask) != 0)
+				tool_color = PintaCore.Palette.PrimaryColor;
+			else if ((args.Event.State & Gdk.ModifierType.Button3Mask) != 0)
+				tool_color = PintaCore.Palette.SecondaryColor;
+			else {
+				last_point = point_empty;
+				return;
+			}
 			
-			int x = (int)point.X;
-			int y = (int)point.Y;
+			Draw ((DrawingArea) o, tool_color, point, false);
+		}
+		
+		private void Draw (DrawingArea drawingarea1, Color tool_color, Cairo.PointD point, bool first_pixel)
+		{
+			int x = (int) point.X;
+			int y = (int) point.Y;
 			
 			if (last_point.Equals (point_empty)) {
 				last_point = new Point (x, y);
-				return;
+				
+				if (!first_pixel)
+					return;
 			}
 			
 			if (PintaCore.Workspace.PointInCanvas (point))
@@ -87,21 +107,32 @@ namespace Pinta.Tools
 
 			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
 			
-			using (Context g = new Context (surf)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+			if (first_pixel) {
+				// Does Cairo really not support a single-pixel-long single-pixel-wide line?
+				surf.Flush ();
+				int shiftedX = (int) (point.X - 0.5);
+				int shiftedY = (int) (point.Y - 0.5);
+				ColorBgra source = surf.GetColorBgra (shiftedX, shiftedY);
+				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, tool_color.ToColorBgra ());
+				surf.SetColorBgra (source, shiftedX, shiftedY);
+				surf.MarkDirty ();
+			} else {
+				using (Context g = new Context (surf)) {
+					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.FillRule = FillRule.EvenOdd;
+					g.Clip ();
 				
-				g.Antialias = Antialias.None;
+					g.Antialias = Antialias.None;
 				
-				g.MoveTo (last_point.X, last_point.Y);
-				g.LineTo (x, y);
+					g.MoveTo (last_point.X, last_point.Y);
+					g.LineTo (x, y);
 
-				g.Color = tool_color;
-				g.LineWidth = 1;
-				g.LineCap = LineCap.Square;
+					g.Color = tool_color;
+					g.LineWidth = 1;
+					g.LineCap = LineCap.Square;
 				
-				g.Stroke ();
+					g.Stroke ();
+				}
 			}
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));

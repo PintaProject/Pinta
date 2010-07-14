@@ -711,6 +711,15 @@ namespace Pinta.Core
 			return *dstPtr;
 		}
 
+		public unsafe static void SetColorBgra (this Cairo.ImageSurface surf, ColorBgra color, int x, int y)
+		{
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+
+			dstPtr += (x) + (y * surf.Width);
+
+			*dstPtr = color;
+		}
+
 		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
 			ColorBgra* dstPtr = surfDataPtr;
