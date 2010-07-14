@@ -67,6 +67,10 @@ namespace Pinta.Tools
 		#region mouse
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			// Protect against history corruption
+			if (tracking)
+				return;
+		
 			base.OnMouseDown (canvas, args, point);
 			startpoint = point;
 			tracking = true;
@@ -76,6 +80,9 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			if (!tracking || args.Event.Button != button)
+				return;
+		
 			base.OnMouseUp (canvas, args, point);
 			tracking = false;
 			PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
