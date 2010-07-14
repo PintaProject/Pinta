@@ -245,6 +245,11 @@ namespace Pinta
 			return ret;
 		}
 
+		internal void UpdateRulerVisibility ()
+		{
+			HandlePintaCoreActionsViewRulersToggled (PintaCore.Actions.View.Rulers, EventArgs.Empty);
+		}
+
 		private void HandlePintaCoreActionsViewRulersToggled (object sender, EventArgs e)
 		{
 			if (((ToggleAction)sender).Active)

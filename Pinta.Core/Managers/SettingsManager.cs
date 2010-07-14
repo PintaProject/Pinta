@@ -77,6 +77,9 @@ namespace Pinta.Core
 					case "System.Int32":
 						properties[setting.GetAttribute ("name")] = int.Parse (setting.InnerText);
 						break;
+					case "System.Boolean":
+						properties[setting.GetAttribute ("name")] = bool.Parse (setting.InnerText);
+						break;
 				}
 			
 			}
@@ -86,7 +89,8 @@ namespace Pinta.Core
 
 		private static void Serialize (string filename, Dictionary<string, object> settings)
 		{
-			using (XmlWriter xw = XmlWriter.Create (filename)) {
+			using (XmlTextWriter xw = new XmlTextWriter (filename, System.Text.Encoding.UTF8)) {
+				xw.Formatting = Formatting.Indented;
 				xw.WriteStartElement ("settings");
 				
 				foreach (var item in settings) {
