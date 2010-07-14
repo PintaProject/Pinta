@@ -36,6 +36,7 @@ namespace Pinta
 			this.Build ();
 
 			this.Icon = Gtk.IconTheme.Default.LoadIcon ("gtk-new", 16, Gtk.IconLookupFlags.UseBuiltin);
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 		}
 
 		public int NewImageWidth { get { return this.widthSpinner.ValueAsInt; } }

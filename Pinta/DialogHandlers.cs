@@ -79,6 +79,7 @@ namespace Pinta
 				md.AddButton (Stock.Save, ResponseType.Yes);
 
 				md.DefaultResponse = ResponseType.Cancel;
+				md.AlternativeButtonOrder = new int[] { (int) ResponseType.Yes, (int) ResponseType.No, (int) ResponseType.Cancel };
 
 				ResponseType saveResponse = (ResponseType)md.Run ();
 				md.Destroy ();

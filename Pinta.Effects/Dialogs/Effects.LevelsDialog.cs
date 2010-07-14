@@ -87,6 +87,10 @@ namespace Pinta.Effects
 			colorpanelInHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
 			colorpanelOutLow.ButtonPressEvent += HandleColorPanelButtonPressEvent;
 			colorpanelOutHigh.ButtonPressEvent += HandleColorPanelButtonPressEvent;
+
+			if (Gtk.Global.AlternativeDialogButtonOrder (this.Screen)) {
+				hboxBottom.ReorderChild (buttonCancel, 0);
+			}
 		}
 		
 		private UnaryPixelOps.Level Levels {

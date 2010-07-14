@@ -261,6 +261,7 @@ namespace Pinta.Core
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 
+				md.AlternativeButtonOrder = new int[] { (int) ResponseType.Yes, (int) ResponseType.No, (int) ResponseType.Cancel };
 				md.DefaultResponse = ResponseType.Cancel;
 
 				var response = (ResponseType)md.Run ();
@@ -301,6 +302,7 @@ namespace Pinta.Core
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 
+				md.AlternativeButtonOrder = new int[] { (int) ResponseType.Yes, (int) ResponseType.No, (int) ResponseType.Cancel };
 				md.DefaultResponse = ResponseType.Cancel;
 
 				ResponseType response = (ResponseType)md.Run ();
@@ -331,6 +333,7 @@ namespace Pinta.Core
 				ff2.AddPattern ("*.*");
 				fcd.AddFilter (ff2);
 				
+				fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 				fcd.SetCurrentFolder (lastDialogDir);
 
 				int response = fcd.Run ();
@@ -369,6 +372,7 @@ namespace Pinta.Core
 			md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			md.AddButton (Stock.Save, ResponseType.Ok);
 			md.DefaultResponse = ResponseType.Cancel;
+			md.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 
 			int response = md.Run ();
 			md.Destroy ();
@@ -387,9 +391,10 @@ namespace Pinta.Core
 			
 			fcd.DoOverwriteConfirmation = true;
 			fcd.SetCurrentFolder (lastDialogDir);
+			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 			bool hasFile = PintaCore.Workspace.ActiveDocument.HasFile;
 			string currentExt = null;
-			
+
 			if (hasFile) {
 				fcd.SetFilename (PintaCore.Workspace.ActiveDocument.Pathname);
 				currentExt = Path.GetExtension(PintaCore.Workspace.Filename.ToLowerInvariant ());
