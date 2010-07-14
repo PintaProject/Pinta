@@ -180,7 +180,7 @@ namespace Pinta.Core
 		public void NewFileWithScreenshot ()
 		{
 			Screen screen = Screen.Default;
-			Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.DefaultColormap, 0, 0, 0, 0, screen.Width, screen.Height);
+			Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height);
 			NewFile (new Size (screen.Width, screen.Height));
 
 			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers[0].Surface)) {
