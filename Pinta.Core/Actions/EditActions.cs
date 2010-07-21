@@ -83,7 +83,6 @@ namespace Pinta.Core
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
-			PasteIntoNewImage.Sensitive = false;
 			InvertSelection.Sensitive = false;
 			Deselect.Sensitive = false;
 			EraseSelection.Sensitive = false;
@@ -100,7 +99,7 @@ namespace Pinta.Core
 			menu.Append (Copy.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask));
 			menu.Append (Paste.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ControlMask));
 			menu.Append (PasteIntoNewLayer.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ShiftMask));
-			//menu.Append (PasteIntoNewImage.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.Mod1Mask));
+			menu.Append (PasteIntoNewImage.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.Mod1Mask));
 			menu.AppendSeparator ();
 			
 			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Palette"), null, null);

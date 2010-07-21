@@ -43,7 +43,8 @@ namespace Pinta
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
 			PintaCore.Actions.File.NewScreenshot.Activated += HandlePintaCoreActionsFileNewScreenshotActivated;
 			PintaCore.Actions.File.ModifyCompression += new EventHandler<ModifyCompressionEventArgs> (FileActions_ModifyCompression);
-			
+
+			PintaCore.Actions.Edit.PasteIntoNewImage.Activated += HandlerPintaCoreActionsEditPasteIntoNewImageActivated;
 			PintaCore.Actions.Edit.ResizePalette.Activated += HandlePintaCoreActionsEditResizePaletteActivated;
 			
 			PintaCore.Actions.Image.Resize.Activated += HandlePintaCoreActionsImageResizeActivated;
@@ -147,6 +148,26 @@ namespace Pinta
 			}
 			
 			dialog.Destroy ();
+		}
+
+		private void HandlerPintaCoreActionsEditPasteIntoNewImageActivated (object sender, EventArgs e)
+		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+
+			if (cb.WaitIsImageAvailable ()) {
+				if (PintaCore.Workspace.IsDirty) {
+					if (!ConfirmReplaceImage ())
+						return;
+				}
+
+				Gdk.Pixbuf image = cb.WaitForImage ();
+				Gdk.Size size = new Gdk.Size (image.Width, image.Height);
+				
+				PintaCore.Actions.File.NewFile (size);
+				PintaCore.Actions.Edit.Paste.Activate ();
+			} else {
+				ClipboardEmptyError ();
+			}
 		}
 
 		private void HandlePintaCoreActionsImageResizeActivated (object sender, EventArgs e)
@@ -296,6 +317,26 @@ namespace Pinta
 			} finally {
 				dlg.Destroy ();
 			}
+		}
+		#endregion
+
+		#region Private Methods
+		public void ClipboardEmptyError ()
+		{
+			var primary = Catalog.GetString ("Paste cancelled");
+			var secondary = Catalog.GetString ("The clipboard does not contain an image");
+			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+			markup = string.Format (markup, primary, secondary);
+
+			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+						    MessageType.Error, ButtonsType.None, true,
+						    markup,
+						    System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+
+			md.AddButton (Stock.Ok, ResponseType.Yes);
+
+			ResponseType response = (ResponseType)md.Run ();
+			md.Destroy ();
 		}
 		#endregion
 	}
