@@ -129,7 +129,6 @@ namespace Pinta.Core
 			EraseSelection.Activated += HandlePintaCoreActionsEditEraseSelectionActivated;
 			SelectAll.Activated += HandlePintaCoreActionsEditSelectAllActivated;
 			FillSelection.Activated += HandlePintaCoreActionsEditFillSelectionActivated;
-			PasteIntoNewLayer.Activated += HandlerPintaCoreActionsEditPasteIntoNewLayerActivated;
 			Paste.Activated += HandlerPintaCoreActionsEditPasteActivated;
 			Copy.Activated += HandlerPintaCoreActionsEditCopyActivated;
 			Undo.Activated += HandlerPintaCoreActionsEditUndoActivated;
@@ -201,31 +200,6 @@ namespace Pinta.Core
 			
 			PintaCore.History.PushNewItem (hist);
 			PintaCore.Workspace.Invalidate ();
-		}
-
-		private void HandlerPintaCoreActionsEditPasteIntoNewLayerActivated (object sender, EventArgs e)
-		{
-			PintaCore.Layers.FinishSelection ();
-
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			Gdk.Pixbuf image = cb.WaitForImage ();
-
-			// TODO: Message window saying no image on clipboard
-			if (image == null)
-				return;
-
-			Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
-
-			using (Cairo.Context g = new Cairo.Context (l.Surface))
-				g.DrawPixbuf (image, new Cairo.Point (0, 0));
-
-			// Make new layer the current layer
-			PintaCore.Layers.SetCurrentLayer (l);
-			
-			PintaCore.Workspace.Invalidate ();
-
-			AddLayerHistoryItem hist = new AddLayerHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
-			PintaCore.History.PushNewItem (hist);
 		}
 
 		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)

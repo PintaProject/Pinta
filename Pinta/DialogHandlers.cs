@@ -44,6 +44,7 @@ namespace Pinta
 			PintaCore.Actions.File.NewScreenshot.Activated += HandlePintaCoreActionsFileNewScreenshotActivated;
 			PintaCore.Actions.File.ModifyCompression += new EventHandler<ModifyCompressionEventArgs> (FileActions_ModifyCompression);
 
+			PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += HandlerPintaCoreActionsEditPasteIntoNewLayerActivated;
 			PintaCore.Actions.Edit.PasteIntoNewImage.Activated += HandlerPintaCoreActionsEditPasteIntoNewImageActivated;
 			PintaCore.Actions.Edit.ResizePalette.Activated += HandlePintaCoreActionsEditResizePaletteActivated;
 			
@@ -151,6 +152,31 @@ namespace Pinta
 			dialog.Destroy ();
 		}
 
+		private void HandlerPintaCoreActionsEditPasteIntoNewLayerActivated (object sender, EventArgs e)
+		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+
+			if (cb.WaitIsImageAvailable ()) {
+				PintaCore.Layers.FinishSelection ();
+
+				Gdk.Pixbuf image = cb.WaitForImage ();
+
+				Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+
+				using (Cairo.Context g = new Cairo.Context (l.Surface))
+					g.DrawPixbuf (image, new Cairo.Point (0, 0));
+
+				// Make new layer the current layer
+				PintaCore.Layers.SetCurrentLayer (l);
+
+				PintaCore.Workspace.Invalidate ();
+
+				AddLayerHistoryItem hist = new AddLayerHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
+				PintaCore.History.PushNewItem (hist);
+			} else {
+				ClipboardEmptyError ();
+			}
+		}
 		private void HandlerPintaCoreActionsEditPasteIntoNewImageActivated (object sender, EventArgs e)
 		{
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
