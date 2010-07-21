@@ -51,6 +51,8 @@ namespace Pinta.Effects
 			hscalespinRed.ValueChanged += HandleValueChanged;
 			hscalespinGreen.ValueChanged += HandleValueChanged;
 			hscalespinBlue.ValueChanged += HandleValueChanged;
+
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 		}
 		
 		public PosterizeData EffectData { get; set; }

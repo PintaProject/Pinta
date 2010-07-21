@@ -89,9 +89,16 @@ namespace Pinta
 				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
 				PintaCore.Settings.PutSetting ("window-size-width", this.GdkWindow.GetSize ().Width);
 				PintaCore.Settings.PutSetting ("window-size-height", this.GdkWindow.GetSize ().Height);
+				PintaCore.Settings.PutSetting ("window-maximized", (this.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
+				PintaCore.Settings.PutSetting ("ruler-metric", (int) hruler.Metric);
+				PintaCore.Settings.PutSetting ("ruler-show", PintaCore.Actions.View.Rulers.Active);
 				PintaCore.Settings.SaveSettings ();
 			};
 
+			ChangeRulersUnit ((MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels));
+			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-show", false);
+			dialog_handler.UpdateRulerVisibility ();
+			
 			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
 			
 			if (Platform.GetOS () == Platform.OS.Mac) {
@@ -237,6 +244,9 @@ namespace Pinta
 			AllowShrink = true;
 			DefaultWidth = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
 			DefaultHeight = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
+			
+			if (PintaCore.Settings.GetSetting<bool> ("window-maximized", false))
+				Maximize ();
 
 			// shell - contains mainmenu, 2 toolbars, hbox
 			VBox shell = new VBox () {

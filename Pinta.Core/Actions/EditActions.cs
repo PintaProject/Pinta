@@ -325,6 +325,8 @@ namespace Pinta.Core
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 			
+			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
+
 			if (lastPaletteDir != null)
 				fcd.SetCurrentFolder (lastPaletteDir);
 			
@@ -362,6 +364,8 @@ namespace Pinta.Core
 			ffGIMP.Name = Catalog.GetString ("GIMP palette (*.gpl)");
 			fcd.AddFilter (ffGIMP);
 			
+			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
+
 			if (lastPaletteDir != null)
 				fcd.SetCurrentFolder (lastPaletteDir);
 			

@@ -56,7 +56,8 @@ namespace Pinta.Gui.Widgets
 			VBox.Spacing = 12;
 			WidthRequest = 400;
 			DefaultResponse = Gtk.ResponseType.Ok;
-			
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+
 			BuildDialog ();
 		}
 

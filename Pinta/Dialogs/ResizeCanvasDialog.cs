@@ -62,6 +62,7 @@ namespace Pinta
 			SEButton.Clicked += HandleSEButtonClicked;
 			
 			SetAnchor (Anchor.Center);
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 		}
 
 		#region Public Methods

@@ -60,8 +60,10 @@ namespace Pinta
 			entry1.Changed += entry1_Changed;
 			checkbutton1.Toggled += checkbutton1_Toggled;
 			spinbutton1.ValueChanged += new EventHandler (spinbutton1_ValueChanged);
-			hscale1.ValueChanged += new EventHandler (hscale1_ValueChanged);			
-		}		
+			hscale1.ValueChanged += new EventHandler (hscale1_ValueChanged);
+			
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+		}
 		
 		public bool AreLayerPropertiesUpdated {
 			get {

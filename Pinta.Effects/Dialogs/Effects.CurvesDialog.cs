@@ -96,6 +96,7 @@ namespace Pinta.Effects
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
 			
 			ResetControlPoints ();
+			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 		}
 		
 		private void UpdateLivePreview (string propertyName)

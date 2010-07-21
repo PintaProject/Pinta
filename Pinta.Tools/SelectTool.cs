@@ -46,6 +46,10 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			// Ignore extra button clicks while drawing
+			if (is_drawing)
+				return;
+		
 			shape_origin = point;
 			is_drawing = true;
 			

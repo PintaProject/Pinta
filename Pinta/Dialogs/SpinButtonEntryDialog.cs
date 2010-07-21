@@ -33,7 +33,7 @@ namespace Pinta
 		private SpinButton spinButton;
 	
 		public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
-			: base (title, parent, Gtk.DialogFlags.Modal, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+			: base (title, parent, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
 		{
 			BorderWidth = 6;
 			VBox.Spacing = 3;
@@ -50,7 +50,8 @@ namespace Pinta
 			
 			hbox.ShowAll ();
 			VBox.Add (hbox);
-			DefaultResponse = Gtk.ResponseType.Ok;
+			DefaultResponse = ResponseType.Ok;
+			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 		}
 		
 		public int GetValue ()

@@ -80,6 +80,7 @@ namespace Pinta
 				md.AddButton (Stock.Save, ResponseType.Yes);
 
 				md.DefaultResponse = ResponseType.Cancel;
+				md.AlternativeButtonOrder = new int[] { (int) ResponseType.Yes, (int) ResponseType.No, (int) ResponseType.Cancel };
 
 				ResponseType saveResponse = (ResponseType)md.Run ();
 				md.Destroy ();
@@ -264,6 +265,11 @@ namespace Pinta
 				ret = Catalog.GetString ("Layer Properties");
 			
 			return ret;
+		}
+
+		internal void UpdateRulerVisibility ()
+		{
+			HandlePintaCoreActionsViewRulersToggled (PintaCore.Actions.View.Rulers, EventArgs.Empty);
 		}
 
 		private void HandlePintaCoreActionsViewRulersToggled (object sender, EventArgs e)

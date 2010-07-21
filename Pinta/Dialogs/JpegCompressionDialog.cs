@@ -23,9 +23,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
-// Inspiration and reflection code is from Miguel de Icaza's MIT Licensed MonoTouch.Dialog:
-// http://github.com/migueldeicaza/MonoTouch.Dialog
 
 using Gtk;
 using Mono.Unix;
@@ -56,6 +53,7 @@ namespace Pinta
 
 			content.ShowAll ();
 			this.VBox.Add (content);
+			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 		}
 		
 		public int GetCompressionLevel ()
