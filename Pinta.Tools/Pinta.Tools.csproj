@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,7 +33,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -50,6 +49,7 @@
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBrushTool.cs" />
@@ -79,6 +79,11 @@
     <Compile Include="TextTool.cs" />
     <Compile Include="UnimplementedTools.cs" />
     <Compile Include="ZoomTool.cs" />
+    <Compile Include="Brushes\PaintBrush.cs" />
+    <Compile Include="Brushes\GridBrush.cs" />
+    <Compile Include="Brushes\SquaresBrush.cs" />
+    <Compile Include="Brushes\PlainBrush.cs" />
+    <Compile Include="Brushes\CircleBrush.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
@@ -96,4 +101,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Brushes\" />
+  </ItemGroup>
 </Project>

@@ -1,10 +1,10 @@
-﻿// 
-// ExtensionPoints.cs
-//  
+//
+// SquaresBrush.cs
+//
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Aaron Bockover <abockover@novell.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Novell, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,37 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using Cairo;
+
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Tools.Brushes
 {
-	class ExtensionPoints
+	[System.ComponentModel.Composition.Export (typeof (BasePaintBrush))]
+	public class SquaresBrush : PaintBrush
 	{
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		private static double theta = Math.PI / 2;
+
+		public override string Name {
+			get { return Mono.Unix.Catalog.GetString ("Squares"); }
+		}
+
+		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		{
+			int dx = x - lastX;
+			int dy = y - lastY;
+			double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
+			double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
+
+			G.MoveTo (lastX - px, lastY - py);
+			G.LineTo (lastX + px, lastY + py);
+			G.LineTo (x + px, y + py);
+			G.LineTo (x - px, y - py);
+			G.LineTo (lastX - px, lastY - py);
+
+			G.Stroke ();
+
+			return Gdk.Rectangle.Zero;
+		}
 	}
 }

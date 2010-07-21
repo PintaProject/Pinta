@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		protected bool surface_modified;
 		protected uint mouse_button;
 	    
-		protected virtual int BrushWidth { 
+		public virtual int BrushWidth { 
 			get { 
 				int width;
 				if (Int32.TryParse (brush_width.ComboBox.ActiveText, out width)) {

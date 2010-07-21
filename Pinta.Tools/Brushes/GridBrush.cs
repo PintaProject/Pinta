@@ -1,10 +1,10 @@
-﻿// 
-// ExtensionPoints.cs
+// 
+// GridBrush.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Aaron Bockover <abockover@novell.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Novell, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,41 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using Cairo;
+
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Tools.Brushes
 {
-	class ExtensionPoints
+	[System.ComponentModel.Composition.Export (typeof (BasePaintBrush))]
+	public class GridBrush : PaintBrush
 	{
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		public override string Name {
+			get { return Mono.Unix.Catalog.GetString ("Grid"); }
+		}
+
+		public override double StrokeAlphaMultiplier {
+			get { return 0.05; }
+		}
+
+		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		{
+			double cx = Math.Round (x / 100.0) * 100.0;
+			double cy = Math.Round (y / 100.0) * 100.0;
+			double dx = (cx - x) * 10.0;
+			double dy = (cy - y) * 10.0;
+
+			for (int i = 0; i < 50; i++) {
+				G.MoveTo (cx, cy);
+				G.QuadraticCurveTo (
+					x + Random.NextDouble () * dx,
+					y + Random.NextDouble () * dy,
+					cx,
+					cy);
+				G.Stroke ();
+			}
+
+			return Gdk.Rectangle.Zero;
+		}
 	}
 }

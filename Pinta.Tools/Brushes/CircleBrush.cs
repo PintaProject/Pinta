@@ -1,10 +1,10 @@
-﻿// 
-// ExtensionPoints.cs
+//
+// CircleBrush.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Aaron Bockover <abockover@novell.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Novell, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,41 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using Cairo;
+
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Tools.Brushes
 {
-	class ExtensionPoints
+	[System.ComponentModel.Composition.Export (typeof (BasePaintBrush))]
+	public class CircleBrush : PaintBrush
 	{
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		public override string Name {
+			get { return Mono.Unix.Catalog.GetString ("Circles"); }
+		}
+
+		public override double StrokeAlphaMultiplier {
+			get { return 0.05; }
+		}
+
+		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		{
+			int dx = x - lastX;
+			int dy = y - lastY;
+			double d = Math.Sqrt (dx * dx + dy * dy) * 2.0;
+
+			double cx = Math.Floor (x / 100.0) * 100 + 50;
+			double cy = Math.Floor (y / 100.0) * 100 + 50;
+
+			int steps = Random.Next (1, 10);
+			double step_delta = d / steps;
+
+			for (int i = 0; i < steps; i++) {
+				G.Arc (cx, cy, (steps - i) * step_delta, 0, Math.PI * 2);
+				G.Stroke ();
+			}
+
+			return Gdk.Rectangle.Zero;
+		}
 	}
 }

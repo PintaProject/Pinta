@@ -1,11 +1,11 @@
-﻿// 
-// ExtensionPoints.cs
-//  
+//
+// PlainBrush.cs
+//
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Aaron Bockover <abockover@novell.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
-// 
+// Copyright (c) 2010 Novell, Inc.
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -25,19 +25,29 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using Cairo;
+
 using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Tools.Brushes
 {
-	class ExtensionPoints
+	[System.ComponentModel.Composition.Export (typeof (BasePaintBrush))]
+	public class PlainBrush : PaintBrush
 	{
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		public override string Name {
+			get { return Mono.Unix.Catalog.GetString ("Plain"); }
+		}
+
+		public override int Priority {
+			get { return -100; }
+		}
+
+		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		{
+			G.MoveTo (lastX, lastY);
+			G.LineTo (x, y);
+			G.Stroke ();
+			return Gdk.Rectangle.Zero;
+		}
 	}
 }

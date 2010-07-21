@@ -68,6 +68,7 @@ namespace Pinta
 
 			Compose ();
 
+			LoadPaintBrushes ();
 			LoadToolBox ();
 			LoadEffects ();
 			//CreateStatusBar ();
@@ -184,6 +185,20 @@ namespace Pinta
 			var container = new CompositionContainer (catalog);
 
 			container.ComposeParts (extensions);
+		}
+
+		private void LoadPaintBrushes ()
+		{
+			foreach (var brush in extensions.PaintBrushes.OrderBy (b => {
+				// This is a bit lame, but let's just hope brush
+				// names will never start with a number...
+				if (b.Priority == 0) {
+					return b.Name;
+				} else {
+					return b.Priority.ToString ();
+				}
+			}))
+				PintaCore.PaintBrushes.AddPaintBrush (brush);
 		}
 
 		private void LoadEffects ()

@@ -442,6 +442,17 @@ namespace Pinta.Core
 			return p;
 		}
 
+		public static void QuadraticCurveTo (this Context g, double x1, double y1, double x2, double y2)
+		{
+			var c_x = g.CurrentPoint.X;
+			var c_y = g.CurrentPoint.Y;
+			var cp1x = c_x + 2.0 / 3.0 * (x1 - c_x);
+			var cp1y = c_y + 2.0 / 3.0 * (y1 - c_y);
+			var cp2x = cp1x + (x2 - c_x) / 3.0;
+			var cp2y = cp1y + (y2 - c_y) / 3.0;
+			g.CurveTo (cp1x, cp1y, cp2x, cp2y, x2, y2);
+		}
+
 		public static Rectangle DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
 		{
 			// Put it on a pixel line

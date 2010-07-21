@@ -32,6 +32,7 @@ namespace Pinta.Core
 	public class ToolBarComboBox : ToolItem
 	{
 		public ComboBox ComboBox { get; private set; }
+		public ListStore Model { get; private set; }
 		public CellRendererText CellRendererText { get; private set;}
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
@@ -39,12 +40,14 @@ namespace Pinta.Core
 			if (allowEntry)
 				ComboBox = new ComboBoxEntry (contents);
 			else {
-				ListStore model = new ListStore (typeof(string));
-				foreach (string entry in contents) {
-					model.AppendValues (entry);
+				Model = new ListStore (typeof(string), typeof (object));
+				if (contents != null) {
+					foreach (string entry in contents) {
+						Model.AppendValues (entry, null);
+					}
 				}
 				ComboBox = new ComboBox ();
-				ComboBox.Model = model;
+				ComboBox.Model = Model;
 				CellRendererText = new CellRendererText();
 				ComboBox.PackStart(CellRendererText, false);
 				ComboBox.AddAttribute(CellRendererText,"text",0);

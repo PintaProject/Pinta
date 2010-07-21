@@ -30,75 +30,141 @@ using Gtk;
 using Pinta.Core;
 using Mono.Unix;
 
+using Pinta.Tools.Brushes;
+
 namespace Pinta.Tools
 {
 	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class PaintBrushTool : BaseBrushTool
 	{
-		private Point last_point = point_empty;
-		
-		public PaintBrushTool ()
-		{
-		}
-
 		#region Properties
 		public override string Name { get { return Catalog.GetString ("Paintbrush"); } }
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
 		public override int Priority { get { return 25; } }
+
+		public Color StrokeColor { get; private set; }
+		public Color FillColor { get; private set; }
+		public Point LastPoint { get; private set; }
+		public Cairo.Context Drawable { get; private set; }
 		#endregion
 
+		private PaintBrush default_brush;
+		private PaintBrush active_brush;
+		private ToolBarLabel brush_label;
+		private ToolBarComboBox brush_combo_box;
+
+		protected override void OnBuildToolBar (Toolbar tb)
+		{
+			base.OnBuildToolBar (tb);
+
+			if (brush_label == null)
+				brush_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Type")));
+
+			if (brush_combo_box == null) {
+				brush_combo_box = new ToolBarComboBox (100, 0, false);
+				brush_combo_box.ComboBox.Changed += (o, e) => {
+					Gtk.TreeIter iter;
+					if (brush_combo_box.ComboBox.GetActiveIter (out iter)) {
+						active_brush = (PaintBrush)brush_combo_box.Model.GetValue (iter, 1);
+					} else {
+						active_brush = default_brush;
+					}
+				};
+				foreach (var brush in PintaCore.PaintBrushes) {
+					if (default_brush == null)
+						default_brush = (PaintBrush)brush;
+					brush_combo_box.Model.AppendValues (brush.Name, brush);
+				}
+				brush_combo_box.ComboBox.Active = 0;
+			}
+
+			tb.AppendItem (brush_label);
+			tb.AppendItem (brush_combo_box);
+		}
+
+		protected override void OnClearToolBar (Toolbar tb)
+		{
+			base.OnClearToolBar (tb);
+
+			if (brush_label != null)
+				tb.Remove (brush_label);
+
+			if (brush_combo_box != null)
+				tb.Remove (brush_combo_box);
+		}
+
 		#region Mouse Handlers
+		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
+		{
+			base.OnMouseDown (canvas, args, point);
+			active_brush.DoMouseDown ();
+		}
+
+		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, PointD point)
+		{
+			base.OnMouseUp (canvas, args, point);
+			active_brush.DoMouseUp ();
+		}
+
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			Color tool_color;
-			
-			if (mouse_button == 1)
-				tool_color = PintaCore.Palette.PrimaryColor;
-			else if (mouse_button == 3)
-				tool_color = PintaCore.Palette.SecondaryColor;
-			else {
-				last_point = point_empty;
+			if (mouse_button == 1) {
+				StrokeColor = PintaCore.Palette.PrimaryColor;
+				FillColor = PintaCore.Palette.SecondaryColor;
+			} else if (mouse_button == 3) {
+				StrokeColor = PintaCore.Palette.SecondaryColor;
+				FillColor = PintaCore.Palette.PrimaryColor;
+			} else {
+				LastPoint = point_empty;
 				return;
 			}
-				
-			DrawingArea drawingarea1 = (DrawingArea)o;
-			
+
+			// TODO: also multiply by pressure
+			StrokeColor = new Color (StrokeColor.R, StrokeColor.G, StrokeColor.B,
+				StrokeColor.A * active_brush.StrokeAlphaMultiplier);
+
 			int x = (int)point.X;
 			int y = (int)point.Y;
 			
-			if (last_point.Equals (point_empty))
-				last_point = new Point (x, y);
+			if (LastPoint.Equals (point_empty))
+				LastPoint = new Point (x, y);
 			
 			if (PintaCore.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
-			
-			using (Context g = new Context (surf)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+			var surf = PintaCore.Layers.CurrentLayer.Surface;
+			var invalidate_rect = Gdk.Rectangle.Zero;
+			var brush_width = BrushWidth;
 
-				g.Antialias = Antialias.Subpixel;
-				
-				g.MoveTo (last_point.X, last_point.Y);
-				g.LineTo (x, y);
+			using (Drawable = new Context (surf)) {
+				Drawable.AppendPath (PintaCore.Layers.SelectionPath);
+				Drawable.FillRule = FillRule.EvenOdd;
+				Drawable.Clip ();
 
-				g.Color = tool_color;
-				g.LineWidth = BrushWidth;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = LineCap.Round;
-				
-				g.Stroke ();
+				Drawable.Antialias = Antialias.Subpixel;
+				Drawable.LineWidth = brush_width;
+				Drawable.LineJoin = LineJoin.Round;
+				Drawable.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
+				Drawable.Color = StrokeColor;
+
+				Drawable.Translate (brush_width / 2.0, brush_width / 2.0);
+
+				active_brush.Tool = this;
+				invalidate_rect = active_brush.DoMouseMove (x, y, LastPoint.X, LastPoint.Y);
+				active_brush.Tool = null;
 			}
-			
-			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
 
-			PintaCore.Workspace.Invalidate (r);
-			
-			last_point = new Point (x, y);
+			Drawable = null;
+
+			if (invalidate_rect.IsEmpty) {
+				PintaCore.Workspace.Invalidate ();
+			} else {
+				PintaCore.Workspace.Invalidate (invalidate_rect);
+			}
+
+			LastPoint = new Point (x, y);
 		}
 		#endregion
 	}

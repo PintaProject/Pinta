@@ -1,10 +1,10 @@
-﻿// 
-// ExtensionPoints.cs
+//
+// PaintBrush.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Aaron Bockover <abockover@novell.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Novell, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,59 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using Pinta.Core;
 
-namespace Pinta
+using Cairo;
+using Gtk;
+
+using Pinta.Core;
+using Pinta.Tools;
+
+namespace Pinta.Tools.Brushes
 {
-	class ExtensionPoints
+	public abstract class PaintBrush : BasePaintBrush
 	{
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		private static Random random = new Random ();
+		public Random Random {
+			get { return random; }
+		}
+
+		public virtual double StrokeAlphaMultiplier {
+			get { return 1; }
+		}
+
+		public PaintBrushTool Tool { get; set; }
+
+		protected Cairo.Context G {
+			get { return Tool.Drawable; }
+		}
+
+		public virtual void DoMouseUp ()
+		{
+			OnMouseUp ();
+		}
+
+		public virtual void DoMouseDown ()
+		{
+			OnMouseDown ();
+		}
+
+		public virtual Gdk.Rectangle DoMouseMove (int x, int y, int lastX, int lastY)
+		{
+			return OnMouseMove (x, y, lastX, lastY);
+		}
+
+		protected virtual void OnMouseUp ()
+		{
+		}
+
+		protected virtual void OnMouseDown ()
+		{
+		}
+
+		protected virtual Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		{
+			return Gdk.Rectangle.Zero;
+		}
 	}
 }
+

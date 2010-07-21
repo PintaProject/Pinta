@@ -33,6 +33,7 @@ namespace Pinta.Core
 	public static class PintaCore
 	{
 		public static LayerManager Layers { get; private set; }
+		public static PaintBrushManager PaintBrushes { get; private set; }
 		public static ToolManager Tools { get; private set; }
 		public static ChromeManager Chrome { get; private set; }
 		public static PaletteManager Palette { get; private set; }
@@ -50,6 +51,7 @@ namespace Pinta.Core
 			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
+			PaintBrushes = new PaintBrushManager ();
 			Tools = new ToolManager ();
 			History = new HistoryManager ();
 			System = new SystemManager ();

@@ -1,10 +1,10 @@
-﻿// 
-// ExtensionPoints.cs
+// 
+// PaintBrushManager.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Aaron Bockover <abockover@novell.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2010 Novell, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,18 +26,31 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using Pinta.Core;
 
-namespace Pinta
+namespace Pinta.Core
 {
-	class ExtensionPoints
+	public class PaintBrushManager : IEnumerable<BasePaintBrush>
 	{
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		private List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
+
+		public void AddPaintBrush (BasePaintBrush paintBrush)
+		{
+			paint_brushes.Add (paintBrush);
+		}
+
+		#region IEnumerable<BasePaintBrush> implementation
+		public IEnumerator<BasePaintBrush> GetEnumerator ()
+		{
+			return paint_brushes.GetEnumerator ();
+		}
+		#endregion
+
+		#region IEnumerable implementation
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+		{
+			return paint_brushes.GetEnumerator ();
+		}
+		#endregion
 	}
 }
+
