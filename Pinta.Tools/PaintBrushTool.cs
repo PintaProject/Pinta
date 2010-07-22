@@ -60,7 +60,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (brush_label == null)
-				brush_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Type")));
+				brush_label = new ToolBarLabel (string.Format (" {0}:  ", Catalog.GetString ("Type")));
 
 			if (brush_combo_box == null) {
 				brush_combo_box = new ToolBarComboBox (100, 0, false);
