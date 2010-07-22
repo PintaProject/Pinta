@@ -30,38 +30,6 @@ using Mono.Unix;
 
 namespace Pinta.Core
 {
-	public class Document
-	{
-		public Document () {
-			IsDirty = false;
-			HasFile = false;
-		}
-
-		public bool HasFile { get; set; }
-
-		private string pathname;
-
-		public string Pathname {
-			get { return (pathname != null) ? pathname : string.Empty; }
-			set { pathname = value; }
-		}
-
-		public string Filename {
-			get {
-				return System.IO.Path.GetFileName (Pathname);
-			}
-
-			set {
-				if (value != null) {
-					Pathname = System.IO.Path.Combine (Pathname, value);
-				}
-			}
-		}
-
-		public bool IsDirty { get; set; }
-	}
-
-
 	public class WorkspaceManager
 	{
 		private Gdk.Size canvas_size;
