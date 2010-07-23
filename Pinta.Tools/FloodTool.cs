@@ -128,7 +128,7 @@ namespace Pinta.Tools
 			surface.MarkDirty ();
 			stencil = stencilBuffer;
 			
-			Point[][] polygonSet = PathManager.PolygonSetFromStencil (stencilBuffer, boundingBox, 0, 0);
+			Point[][] polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
 			OnFillRegionComputed (polygonSet);
 		}
 		#endregion
