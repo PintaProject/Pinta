@@ -60,6 +60,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Classes\Document.cs" />
+    <Compile Include="Classes\DocumentWorkspace.cs" />
     <Compile Include="Classes\ScaleFactor.cs" />
     <Compile Include="Classes\Palette.cs" />
     <Compile Include="Effects\BaseEffect.cs" />
