@@ -36,11 +36,13 @@ namespace Pinta.Effects
 
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			HistogramRgb histogram = new HistogramRgb ();
-			histogram.UpdateHistogram (src, new Gdk.Rectangle (0, 0, src.Width, src.Height));
+			if (op == null) {
+				HistogramRgb histogram = new HistogramRgb ();
+				histogram.UpdateHistogram (src, new Gdk.Rectangle (0, 0, src.Width, src.Height));
+				
+				op = histogram.MakeLevelsAuto ();
+			}
 			
-			op = histogram.MakeLevelsAuto ();
-
 			if (op.isValid)
 				op.Apply (dest, src, rois);
 		}
