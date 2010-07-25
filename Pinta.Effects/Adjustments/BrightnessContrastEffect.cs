@@ -20,7 +20,8 @@ namespace Pinta.Effects
 		private int multiply;
 		private int divide;
 		private byte[] rgbTable;
-
+		private bool table_calculated;
+		
 		public override string Icon {
 			get { return "Menu.Adjustments.BrightnessAndContrast.png"; }
 		}
@@ -55,7 +56,8 @@ namespace Pinta.Effects
 
 		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			Calculate ();
+			if (!table_calculated)
+				Calculate ();
 
 			foreach (Gdk.Rectangle rect in rois) {
 				for (int y = rect.Top; y < rect.Bottom; y++) {
@@ -134,6 +136,8 @@ namespace Pinta.Effects
 					}
 				}
 			}
+			
+			table_calculated = true;
 		}
 		
 		public class BrightnessContrastData : EffectData
