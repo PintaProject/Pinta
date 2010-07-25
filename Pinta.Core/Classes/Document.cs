@@ -1,5 +1,5 @@
 ﻿// 
-// WorkspaceManager.cs
+// Document.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>

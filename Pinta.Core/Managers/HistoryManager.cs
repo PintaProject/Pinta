@@ -35,141 +35,58 @@ namespace Pinta.Core
 {
 	public class HistoryManager
 	{
-		public Gtk.ListStore ListStore { get; private set; }
-		
-		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
-		int historyPointer = -1;
-		
-		public HistoryManager ()
-		{
-			ListStore = new ListStore (typeof (BaseHistoryItem));
+		public Gtk.ListStore ListStore {
+			get { return PintaCore.Workspace.ActiveWorkspace.History.ListStore; }
 		}
 		
 		public int Pointer {
-			get { return historyPointer; }
+			get { return PintaCore.Workspace.ActiveWorkspace.History.Pointer; }
 		}
 		
 		public BaseHistoryItem Current {
-			get { 
-				if (historyPointer > -1 && historyPointer < history.Count)
-					return history[historyPointer]; 
-				else
-					return null;
-			}
+			get { return PintaCore.Workspace.ActiveWorkspace.History.Current; }
 		}
 		
-		public void PushNewItem (BaseHistoryItem new_item)
+		public void PushNewItem (BaseHistoryItem newItem)
 		{
-			
-			//Remove all old redos starting from the end of the list
-			for (int i = history.Count - 1; i >= 0; i--) {
-			
-				BaseHistoryItem item = history[i];
-				
-				if (item.State == HistoryItemState.Redo) {
-					history.RemoveAt(i);
-					item.Dispose();
-					//Remove from ListStore
-					ListStore.Remove (ref item.Id);
-					
-				} else if (item.State == HistoryItemState.Undo) {
-					break;
-				}
-			}
-		
-			//Add new undo to ListStore
-			new_item.Id = ListStore.AppendValues (new_item);
-			history.Add (new_item);
-			historyPointer = history.Count - 1;
-			
-			if (new_item.CausesDirty)
-				PintaCore.Workspace.IsDirty = true;
-				
-			if (history.Count > 1)
-				PintaCore.Actions.Edit.Undo.Sensitive = true;
-				
-			PintaCore.Actions.Edit.Redo.Sensitive = false;
-			OnHistoryItemAdded (new_item);
+			PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (newItem);
 		}
 		
 		public void Undo ()
 		{
-			if (historyPointer < 0) {
-				throw new InvalidOperationException ("Undo stack is empty");
-			} else {
-				BaseHistoryItem item = history[historyPointer];
-				item.Undo ();
-				item.State = HistoryItemState.Redo;
-				ListStore.SetValue (item.Id, 0, item);
-				history[historyPointer] = item;
-				historyPointer--;
-			}	
-			
-			if (historyPointer == 0) {
-				PintaCore.Workspace.IsDirty = false;
-				PintaCore.Actions.Edit.Undo.Sensitive = false;
-			}
-			
-			PintaCore.Actions.Edit.Redo.Sensitive = true;
-			OnActionUndone ();
+			PintaCore.Workspace.ActiveWorkspace.History.Undo ();
 		}
 		
 		public void Redo ()
 		{
-			if (historyPointer >= history.Count - 1)
-				throw new InvalidOperationException ("Redo stack is empty");
-
-			historyPointer++;
-			BaseHistoryItem item = history[historyPointer];
-			item.Redo ();
-			item.State = HistoryItemState.Undo;
-			ListStore.SetValue (item.Id, 0, item);
-			history[historyPointer] = item;
-
-			if (historyPointer == history.Count - 1)
-				PintaCore.Actions.Edit.Redo.Sensitive = false;
-				
-			if (item.CausesDirty)
-				PintaCore.Workspace.IsDirty = true;
-
-			if (history.Count > 1)
-				PintaCore.Actions.Edit.Undo.Sensitive = true;
-				
-			OnActionRedone ();
+			PintaCore.Workspace.ActiveWorkspace.History.Redo ();
 		}
 		
 		public void Clear ()
 		{
-			history.ForEach (delegate(BaseHistoryItem item) { item.Dispose (); } );
-			history.Clear();	
-			ListStore.Clear ();	
-			historyPointer = -1;
-			
-			PintaCore.Workspace.IsDirty = false;
-			PintaCore.Actions.Edit.Redo.Sensitive = false;
-			PintaCore.Actions.Edit.Undo.Sensitive = false;
+			PintaCore.Workspace.ActiveWorkspace.History.Clear ();
 		}
 		
 		#region Protected Methods
-		protected void OnHistoryItemAdded (BaseHistoryItem item)
+		protected internal void OnHistoryItemAdded (BaseHistoryItem item)
 		{
 			if (HistoryItemAdded != null)
 				HistoryItemAdded (this, new HistoryItemAddedEventArgs (item));
 		}
-		 
-		protected void OnHistoryItemRemoved (BaseHistoryItem item)
+
+		protected internal void OnHistoryItemRemoved (BaseHistoryItem item)
 		{
 			if (HistoryItemRemoved != null)
 				HistoryItemRemoved (this, new HistoryItemRemovedEventArgs (item));
 		}
-		 
-		protected void OnActionUndone ()
+
+		protected internal void OnActionUndone ()
 		{
 			if (ActionUndone != null)
 				ActionUndone (this, EventArgs.Empty);
 		}
-		 
-		protected void OnActionRedone ()
+
+		protected internal void OnActionRedone ()
 		{
 			if (ActionRedone != null)
 				ActionRedone (this, EventArgs.Empty);
