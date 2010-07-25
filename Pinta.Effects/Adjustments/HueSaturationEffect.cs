@@ -55,11 +55,13 @@ namespace Pinta.Effects
 			int sat_delta =  Data.Saturation;
 			int lightness = Data.Lightness;
 			
-			if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
-				op = new UnaryPixelOps.Identity ();
-			else
-				op = new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
-
+			if (op == null) {
+				if (hue_delta == 0 && sat_delta == 100 && lightness == 0)
+					op = new UnaryPixelOps.Identity ();
+				else
+					op = new UnaryPixelOps.HueSaturationLightness (hue_delta, sat_delta, lightness);
+			}
+			
 			op.Apply (dest, src, rois);
 		}
 

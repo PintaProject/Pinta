@@ -16,6 +16,8 @@ namespace Pinta.Effects
 	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class PosterizeEffect : BaseEffect
 	{
+		UnaryPixelOps.PosterizePixel op = null;
+		
 		public override string Icon {
 			get { return "Menu.Adjustments.Posterize.png"; }
 		}
@@ -59,7 +61,9 @@ namespace Pinta.Effects
 
 		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			var op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
+			if (op == null)
+				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);
+				
 			op.Apply (dest, src, rois);
 		}		
 	}
