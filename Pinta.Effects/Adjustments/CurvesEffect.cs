@@ -17,7 +17,9 @@ namespace Pinta.Effects
 {
 	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class CurvesEffect : BaseEffect
-	{			
+	{
+		UnaryPixelOp op = null;
+		
 		public override string Icon {
 			get { return "Menu.Adjustments.Curves.png"; }
 		}
@@ -63,7 +65,8 @@ namespace Pinta.Effects
 			if (Data.ControlPoints == null)
 				return;
 
-			UnaryPixelOp op = MakeUop ();
+			if (op == null)
+				op = MakeUop ();
 			
 			op.Apply (dest, src, rois);
 		}
