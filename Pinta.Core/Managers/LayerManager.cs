@@ -41,8 +41,6 @@ namespace Pinta.Core
 
 		private List<Layer> layers;
 
-		// The checkerboard layer that represents transparent
-		private Layer transparent_layer;
 		// The layer for tools to use until their output is committed
 		private Layer tool_layer;
 		// The layer used for selections
@@ -63,16 +61,6 @@ namespace Pinta.Core
 			selection_layer.Hidden = true;
 			
 			ResetSelectionPath ();
-			
-			transparent_layer = CreateLayer ("Transparent", 16, 16);
-			transparent_layer.Tiled = true;
-			
-			// Create checkerboard background	
-			using (Cairo.Context g = new Cairo.Context (transparent_layer.Surface)) {
-				g.FillRectangle (new Rectangle (0, 0, 16, 16), new Color (1, 1, 1));
-				g.FillRectangle (new Rectangle (8, 0, 8, 8), new Color (0.75, 0.75, 0.75));
-				g.FillRectangle (new Rectangle (0, 8, 8, 8), new Color (0.75, 0.75, 0.75));
-			}
 		}
 
 		#region Public Properties
@@ -98,10 +86,6 @@ namespace Pinta.Core
 				
 				return tool_layer;
 			}
-		}
-
-		public Layer TransparentLayer {
-			get { return transparent_layer; }
 		}
 
 		public Layer SelectionLayer {
