@@ -68,7 +68,7 @@ namespace Pinta.Core
 		
 		public void TakeSnapshotOfImage ()
 		{
-			foreach (Layer item in PintaCore.Layers)
+			foreach (Layer item in PintaCore.Workspace.ActiveDocument.Layers)
 				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, item.Surface.Clone (), PintaCore.Layers.IndexOf (item)));
 		}
 	}

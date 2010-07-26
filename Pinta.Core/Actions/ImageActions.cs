@@ -172,7 +172,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.ImageSize = new Gdk.Size (width, height);
 			PintaCore.Workspace.CanvasSize = new Gdk.Size (width, height);
 
-			foreach (var layer in PintaCore.Layers)
+			foreach (var layer in PintaCore.Workspace.ActiveDocument.Layers)
 				layer.Crop (rect);
 
 			PintaCore.History.PushNewItem (hist);

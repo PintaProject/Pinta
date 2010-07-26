@@ -188,7 +188,8 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			PintaCore.Layers.FlipCurrentLayerVertical ();
+			PintaCore.Workspace.ActiveDocument.CurrentLayer.FlipVertical ();
+			PintaCore.Workspace.Invalidate ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, PintaCore.Layers.CurrentLayerIndex));
 		}
 
@@ -196,7 +197,8 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.FinishSelection ();
 
-			PintaCore.Layers.FlipCurrentLayerHorizontal ();
+			PintaCore.Workspace.ActiveDocument.CurrentLayer.FlipHorizontal ();
+			PintaCore.Workspace.Invalidate ();
 			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, PintaCore.Layers.CurrentLayerIndex));
 		}
 

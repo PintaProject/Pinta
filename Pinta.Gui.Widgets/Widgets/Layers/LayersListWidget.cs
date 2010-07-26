@@ -30,6 +30,7 @@ using System.Linq;
 using Pinta.Core;
 using Gtk;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Pinta.Gui.Widgets
 {
@@ -187,10 +188,10 @@ namespace Pinta.Gui.Widgets
 		
 		private void Reset()
 		{
-			store.Clear();
-			foreach (var layer in PintaCore.Layers.Reverse ()) {
+			store.Clear ();
+			
+			foreach (var layer in (PintaCore.Workspace.ActiveDocument.Layers as IEnumerable<Layer>).Reverse ())
 				store.AppendValues (layer.Surface, layer.Name, !layer.Hidden, layer);
-			}
 						
 			SelectLayerInTreeView (PintaCore.Layers.Count - PintaCore.Layers.CurrentLayerIndex - 1);
 		}		
