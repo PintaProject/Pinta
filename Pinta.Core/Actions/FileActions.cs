@@ -198,7 +198,7 @@ namespace Pinta.Core
 			
 			try {
 				// Open the image and add it to the layers
-				IImageImporter importer = formatsByExt[System.IO.Path.GetExtension (file)].Importer;
+				IImageImporter importer = formatsByExt[System.IO.Path.GetExtension (file).ToLowerInvariant ()].Importer;
 				importer.Import (PintaCore.Layers, file);
 
 				PintaCore.Workspace.DocumentPath = System.IO.Path.GetFullPath (file);
