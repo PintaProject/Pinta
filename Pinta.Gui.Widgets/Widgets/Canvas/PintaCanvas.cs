@@ -58,19 +58,24 @@ namespace Pinta.Gui.Widgets
 
 			// Give mouse press events to the current tool
 			ButtonPressEvent += delegate (object sender, ButtonPressEventArgs e) {
-				PintaCore.Tools.CurrentTool.DoMouseDown (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+				if (PintaCore.Workspace.HasOpenDocuments)
+					PintaCore.Tools.CurrentTool.DoMouseDown (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
 			};
 
 			// Give mouse release events to the current tool
 			ButtonReleaseEvent += delegate (object sender, ButtonReleaseEventArgs e) {
-				PintaCore.Tools.CurrentTool.DoMouseUp (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+				if (PintaCore.Workspace.HasOpenDocuments)
+					PintaCore.Tools.CurrentTool.DoMouseUp (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
 			};
 
 			// Give mouse move events to the current tool
 			MotionNotifyEvent += delegate (object sender, MotionNotifyEventArgs e) {
-				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
-				
-				if (PintaCore.Workspace.PointInCanvas (point))
+				if (!PintaCore.Workspace.HasOpenDocuments)
+					return;
+					
+				Cairo.PointD point = PintaCore.Workspace.ActiveWorkspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
+
+				if (PintaCore.Workspace.ActiveWorkspace.PointInCanvas (point))
 					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
 					
 				PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
@@ -86,6 +91,9 @@ namespace Pinta.Gui.Widgets
 		{
 			base.OnExposeEvent (e);
 
+			if (!PintaCore.Workspace.HasOpenDocuments)
+				return true;
+				
 			double scale = PintaCore.Workspace.Scale;
 
 			int x = (int)PintaCore.Workspace.Offset.X;

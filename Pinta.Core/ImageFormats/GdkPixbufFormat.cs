@@ -43,14 +43,12 @@ namespace Pinta.Core
 		public void Import (LayerManager layers, string fileName)
 		{
 			Pixbuf bg = new Pixbuf (fileName);
+			Size imagesize = new Size (bg.Width, bg.Height);
 
-			layers.Clear ();
-			PintaCore.History.Clear ();
-			layers.DestroySelectionLayer ();
-
-			PintaCore.Workspace.ImageSize = new Size (bg.Width, bg.Height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (bg.Width, bg.Height);
-			layers.ResetSelectionPath ();
+			PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
+			PintaCore.Workspace.ActiveDocument.HasFile = true;
+			PintaCore.Workspace.ActiveDocument.ImageSize = imagesize;
+			PintaCore.Workspace.ActiveWorkspace.CanvasSize = imagesize;
 
 			Layer layer = layers.AddNewLayer (Path.GetFileName (fileName));
 

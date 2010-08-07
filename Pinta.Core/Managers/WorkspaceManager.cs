@@ -34,11 +34,11 @@ namespace Pinta.Core
 	public class WorkspaceManager
 	{
 		private int active_document_index = -1;
+		private int new_file_name = 1;
 		
 		public WorkspaceManager ()
 		{
 			OpenDocuments = new List<Document> ();
-			CreateAndActivateDocument ();
 		}
 		
 		public Document ActiveDocument {
@@ -94,17 +94,59 @@ namespace Pinta.Core
 		}
 		
 		public List<Document> OpenDocuments { get; private set; }
-		public bool HasOpenDocuments { get { return active_document_index >= 0; } }
+		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 		
-		public void CreateAndActivateDocument ()
+		public Document CreateAndActivateDocument (string filename, Gdk.Size size)
 		{
-			OpenDocuments.Add (new Document ());
+			Document doc = new Document (size);
+			
+			if (string.IsNullOrEmpty (filename))
+				doc.Filename = string.Format ("Untitled{0}", new_file_name++);
+			else
+				doc.Filename = filename;
+			
+			OpenDocuments.Add (doc);
 			active_document_index = OpenDocuments.Count - 1;
+			
+			OnDocumentCreated (new DocumentEventArgs (doc));
+			
+			return doc;
 		}
 
+		public void CloseActiveDocument ()
+		{
+			CloseDocument (ActiveDocument);
+		}
+		
+		public void CloseDocument (Document document)
+		{
+			int index = OpenDocuments.IndexOf (document);
+			OpenDocuments.Remove (document);
+			
+			if (index == active_document_index) {
+				// If there's other documents open, switch to one of them
+				if (HasOpenDocuments) {
+					if (index > 0)
+						SetActiveDocument (index - 1);
+					else
+						SetActiveDocument (index);
+				} else {
+					active_document_index = -1;
+					OnActiveDocumentChanged (EventArgs.Empty);
+				}
+			}
+
+			document.Close ();
+			
+			OnDocumentClosed (new DocumentEventArgs (document));
+		}
+		
 		public void Invalidate ()
 		{
-			ActiveWorkspace.Invalidate ();
+			if (PintaCore.Workspace.HasOpenDocuments)
+				ActiveWorkspace.Invalidate ();
+			else
+				OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
 		}
 		
 		public void Invalidate (Gdk.Rectangle rect)
@@ -193,6 +235,8 @@ namespace Pinta.Core
 		public void SetActiveDocument (Document document)
 		{
 			int index = OpenDocuments.IndexOf (document);
+			
+			SetActiveDocument (index);
 		}
 		
 		#region Protected Methods
@@ -200,6 +244,8 @@ namespace Pinta.Core
 		{
 			if (ActiveDocumentChanged != null)
 				ActiveDocumentChanged (this, EventArgs.Empty);
+				
+			ResetTitle ();
 		}
 		
 		protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
@@ -213,12 +259,33 @@ namespace Pinta.Core
 			if (CanvasSizeChanged != null)
 				CanvasSizeChanged (this, EventArgs.Empty);
 		}
+
+		protected internal void OnDocumentCreated (DocumentEventArgs e)
+		{
+			if (DocumentCreated != null)
+				DocumentCreated (this, e);
+		}
+
+		protected internal void OnDocumentOpened (DocumentEventArgs e)
+		{
+			if (DocumentOpened != null)
+				DocumentOpened (this, e);
+		}
+
+		protected internal void OnDocumentClosed (DocumentEventArgs e)
+		{
+			if (DocumentClosed != null)
+				DocumentClosed (this, e);
+		}
 		#endregion
 
 		#region Public Events
 		public event EventHandler ActiveDocumentChanged;
 		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
 		public event EventHandler CanvasSizeChanged;
+		public event EventHandler<DocumentEventArgs> DocumentCreated;
+		public event EventHandler<DocumentEventArgs> DocumentOpened;
+		public event EventHandler<DocumentEventArgs> DocumentClosed;
 		#endregion
 		
 	}

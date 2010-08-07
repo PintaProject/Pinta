@@ -51,6 +51,8 @@ namespace Pinta
 		MenuBar main_menu;
 		ScrolledWindow sw;
 		DockFrame dock;
+		MenuItem window_menu;
+		LayersListWidget layers;
 		
 		Menu show_pad;
 		
@@ -81,9 +83,6 @@ namespace Pinta
 			dialog_handler = new DialogHandlers (this);
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 
-			// Create a blank document
-			PintaCore.Actions.File.NewFile (new Gdk.Size (800, 600));
-			
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 			
 			PintaCore.Actions.File.BeforeQuit += delegate {
@@ -101,6 +100,9 @@ namespace Pinta
 			dialog_handler.UpdateRulerVisibility ();
 			
 			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
+			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
+			PintaCore.Workspace.DocumentCreated += new EventHandler<DocumentEventArgs> (Workspace_DocumentCreated);
+			PintaCore.Workspace.DocumentClosed += new EventHandler<DocumentEventArgs> (Workspace_DocumentClosed);
 			
 			if (Platform.GetOS () == Platform.OS.Mac) {
 				try {
@@ -173,6 +175,104 @@ namespace Pinta
 			} finally {
 				dlg.Destroy ();
 			}
+		}
+		
+		private void ActiveDocumentChanged (object sender, EventArgs e)
+		{
+			PintaCore.Workspace.Invalidate ();
+			
+			layers.Reset ();
+		}
+
+		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
+		{
+			foreach (MenuItem item in ((Menu)window_menu.Submenu))
+				if (item.Name == e.Document.Guid.ToString ()) {
+					((Menu)window_menu.Submenu).Remove (item);
+					break;
+				}
+
+			if (!PintaCore.Workspace.HasOpenDocuments) {
+				PintaCore.Actions.File.Close.Sensitive = false;
+				PintaCore.Actions.File.Save.Sensitive = false;
+				PintaCore.Actions.File.SaveAs.Sensitive = false;
+				PintaCore.Actions.Edit.Copy.Sensitive = false;
+				PintaCore.Actions.Edit.Cut.Sensitive = false;
+				PintaCore.Actions.Edit.Paste.Sensitive = false;
+				PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = false;
+				PintaCore.Actions.Edit.SelectAll.Sensitive = false;
+
+				PintaCore.Actions.View.ActualSize.Sensitive = false;
+				PintaCore.Actions.View.ZoomIn.Sensitive = false;
+				PintaCore.Actions.View.ZoomOut.Sensitive = false;
+				PintaCore.Actions.View.ZoomToSelection.Sensitive = false;
+				PintaCore.Actions.View.ZoomToWindow.Sensitive = false;
+				PintaCore.Actions.View.ZoomComboBox.Sensitive = false;
+
+				PintaCore.Actions.Image.CanvasSize.Sensitive = false;
+				PintaCore.Actions.Image.Resize.Sensitive = false;
+				PintaCore.Actions.Image.FlipHorizontal.Sensitive = false;
+				PintaCore.Actions.Image.FlipVertical.Sensitive = false;
+				PintaCore.Actions.Image.Rotate180.Sensitive = false;
+				PintaCore.Actions.Image.RotateCCW.Sensitive = false;
+				PintaCore.Actions.Image.RotateCW.Sensitive = false;
+
+				PintaCore.Actions.Layers.AddNewLayer.Sensitive = false;
+				PintaCore.Actions.Layers.DuplicateLayer.Sensitive = false;
+				PintaCore.Actions.Layers.FlipHorizontal.Sensitive = false;
+				PintaCore.Actions.Layers.FlipVertical.Sensitive = false;
+				PintaCore.Actions.Layers.ImportFromFile.Sensitive = false;
+				PintaCore.Actions.Layers.Properties.Sensitive = false;
+				PintaCore.Actions.Layers.RotateZoom.Sensitive = false;
+
+				PintaCore.Actions.Adjustments.ToggleActionsSensitive (false);
+				PintaCore.Actions.Effects.ToggleActionsSensitive (false);
+			}
+		}
+
+		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
+		{
+			MenuItem mi = (MenuItem)new Gtk.Action ("effects", e.Document.Filename).CreateMenuItem ();
+			mi.Name = e.Document.Guid.ToString ();
+
+			mi.Activated += delegate { PintaCore.Workspace.SetActiveDocument (e.Document); };
+
+			((Menu)window_menu.Submenu).AppendItem (mi);
+
+			PintaCore.Actions.File.Close.Sensitive = true;
+			PintaCore.Actions.File.Save.Sensitive = true;
+			PintaCore.Actions.File.SaveAs.Sensitive = true;
+			PintaCore.Actions.Edit.Copy.Sensitive = true;
+			PintaCore.Actions.Edit.Cut.Sensitive = true;
+			PintaCore.Actions.Edit.Paste.Sensitive = true;
+			PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = true;
+			PintaCore.Actions.Edit.SelectAll.Sensitive = true;
+
+			PintaCore.Actions.View.ActualSize.Sensitive = true;
+			PintaCore.Actions.View.ZoomIn.Sensitive = true;
+			PintaCore.Actions.View.ZoomOut.Sensitive = true;
+			PintaCore.Actions.View.ZoomToSelection.Sensitive = true;
+			PintaCore.Actions.View.ZoomToWindow.Sensitive = true;
+			PintaCore.Actions.View.ZoomComboBox.Sensitive = true;
+
+			PintaCore.Actions.Image.CanvasSize.Sensitive = true;
+			PintaCore.Actions.Image.Resize.Sensitive = true;
+			PintaCore.Actions.Image.FlipHorizontal.Sensitive = true;
+			PintaCore.Actions.Image.FlipVertical.Sensitive = true;
+			PintaCore.Actions.Image.Rotate180.Sensitive = true;
+			PintaCore.Actions.Image.RotateCCW.Sensitive = true;
+			PintaCore.Actions.Image.RotateCW.Sensitive = true;
+
+			PintaCore.Actions.Layers.AddNewLayer.Sensitive = true;
+			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = true;
+			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = true;
+			PintaCore.Actions.Layers.FlipVertical.Sensitive = true;
+			PintaCore.Actions.Layers.ImportFromFile.Sensitive = true;
+			PintaCore.Actions.Layers.Properties.Sensitive = true;
+			PintaCore.Actions.Layers.RotateZoom.Sensitive = true;
+
+			PintaCore.Actions.Adjustments.ToggleActionsSensitive (true);
+			PintaCore.Actions.Effects.ToggleActionsSensitive (true);
 		}
 		#endregion
 
@@ -304,19 +404,19 @@ namespace Pinta
 			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
 
-			MenuItem window = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
-			main_menu.Append (window);
+			window_menu = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
+			main_menu.Append (window_menu);
 
 			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Show Pad"), null, null);
-			window.Submenu = new Menu ();
-			show_pad = (Menu)((Menu)(window.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
+			window_menu.Submenu = new Menu ();
+			show_pad = (Menu)((Menu)(window_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 
 			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
 			shell.PackStart (main_menu, false, false, 0);
 		}
-		
+
 		private void CreateMainToolBar (VBox shell)
 		{
 			// Main toolbar
@@ -447,6 +547,8 @@ namespace Pinta
 			};
 
 			canvas.MotionNotifyEvent += delegate (object o, MotionNotifyEventArgs args) {
+				if (!PintaCore.Workspace.HasOpenDocuments)
+					return;
 
 				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
 	
@@ -466,7 +568,7 @@ namespace Pinta
 			HideRulers();
 
 			// Layer pad
-			LayersListWidget layers = new LayersListWidget ();
+			layers = new LayersListWidget ();
 			DockItem layers_item = dock.AddItem ("Layers");
 			DockItemToolbar layers_tb = layers_item.GetToolbar (PositionType.Bottom);
 			
@@ -576,21 +678,23 @@ namespace Pinta
 			Cairo.PointD lower = new Cairo.PointD (0, 0);
 			Cairo.PointD upper = new Cairo.PointD (0, 0);
 
-			if (PintaCore.Workspace.Offset.X > 0) {
-				lower.X = - PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-				upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
-			}
-			else {
-				lower.X = sw.Hadjustment.Value / PintaCore.Workspace.Scale;
-				upper.X = (sw.Hadjustment.Value + sw.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
-			}
-			if (PintaCore.Workspace.Offset.Y > 0) {
-				lower.Y = - PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-				upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
-			}
-			else {
-				lower.Y = sw.Vadjustment.Value / PintaCore.Workspace.Scale;
-				upper.Y = (sw.Vadjustment.Value + sw.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				if (PintaCore.Workspace.Offset.X > 0) {
+					lower.X = - PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
+					upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
+				}
+				else {
+					lower.X = sw.Hadjustment.Value / PintaCore.Workspace.Scale;
+					upper.X = (sw.Hadjustment.Value + sw.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
+				}
+				if (PintaCore.Workspace.Offset.Y > 0) {
+					lower.Y = - PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
+					upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
+				}
+				else {
+					lower.Y = sw.Vadjustment.Value / PintaCore.Workspace.Scale;
+					upper.Y = (sw.Vadjustment.Value + sw.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+				}
 			}
 
 			hruler.SetRange (lower.X, upper.X, 0, upper.X);

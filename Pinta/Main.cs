@@ -107,6 +107,9 @@ namespace Pinta
 					Pinta.Core.PintaCore.Actions.File.OpenFile (extra[0]);
 					PintaCore.Workspace.ActiveDocument.HasFile = true;
 				}				
+			} else {
+				// Create a blank document
+				PintaCore.Actions.File.NewFile (new Gdk.Size (800, 600));
 			}
 			
 			Application.Run ();

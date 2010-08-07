@@ -79,6 +79,7 @@
     <Compile Include="Enumerations\EffectAdjustment.cs" />
     <Compile Include="Enumerations\GradientColorMode.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
+    <Compile Include="EventArgs\DocumentEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="EventArgs\TextChangedEventArgs.cs" />

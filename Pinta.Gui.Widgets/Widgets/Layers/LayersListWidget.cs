@@ -186,10 +186,13 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Actions.Layers.Properties.Activate ();
 		}
 		
-		private void Reset()
+		public void Reset ()
 		{
 			store.Clear ();
-			
+
+			if (!PintaCore.Workspace.HasOpenDocuments)
+				return;
+				
 			foreach (var layer in (PintaCore.Workspace.ActiveDocument.Layers as IEnumerable<Layer>).Reverse ())
 				store.AppendValues (layer.Surface, layer.Name, !layer.Hidden, layer);
 						

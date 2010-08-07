@@ -126,23 +126,23 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void EnableOrDisableLayerActions (object sender, EventArgs e)
 		{
-			if (PintaCore.Layers.Count > 1) {
+			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Layers.Count > 1) {
 				PintaCore.Actions.Layers.DeleteLayer.Sensitive = true;
 				PintaCore.Actions.Image.Flatten.Sensitive = true;
 			} else {
 				PintaCore.Actions.Layers.DeleteLayer.Sensitive = false;
 				PintaCore.Actions.Image.Flatten.Sensitive = false;
 			}
-			
-			if (PintaCore.Layers.CurrentLayerIndex > 0) {
+
+			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Layers.CurrentLayerIndex > 0) {
 				PintaCore.Actions.Layers.MergeLayerDown.Sensitive = true;
 				PintaCore.Actions.Layers.MoveLayerDown.Sensitive = true;
 			} else {
 				PintaCore.Actions.Layers.MergeLayerDown.Sensitive = false;
 				PintaCore.Actions.Layers.MoveLayerDown.Sensitive = false;
 			}
-			
-			if (PintaCore.Layers.CurrentLayerIndex < PintaCore.Layers.Count - 1)
+
+			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Layers.CurrentLayerIndex < PintaCore.Layers.Count - 1)
 				PintaCore.Actions.Layers.MoveLayerUp.Sensitive = true;
 			else
 				PintaCore.Actions.Layers.MoveLayerUp.Sensitive = false;

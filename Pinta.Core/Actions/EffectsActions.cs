@@ -60,7 +60,16 @@ namespace Pinta.Core
 			
 			Menu m = Menus[category];
 			
+			Actions.Add (action);
 			m.Append (action.CreateMenuItem ());
+		}
+		#endregion
+
+		#region Public Methods
+		public void ToggleActionsSensitive (bool sensitive)
+		{
+			foreach (Gtk.Action a in Actions)
+				a.Sensitive = sensitive;
 		}
 		#endregion
 	}

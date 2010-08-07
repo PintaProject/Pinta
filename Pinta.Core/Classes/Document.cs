@@ -54,12 +54,15 @@ namespace Pinta.Core
 		private Path selection_path;
 		private bool show_selection;
 
-		public Document ()
+		public Document (Gdk.Size size)
 		{
+			Guid = Guid.NewGuid ();
+			
 			Workspace = new DocumentWorkspace (this);
 			IsDirty = false;
 			HasFile = false;
-
+			ImageSize = size;
+			
 			Layers = new List<Layer> ();
 
 			tool_layer = CreateLayer ("Tool Layer");
@@ -87,6 +90,8 @@ namespace Pinta.Core
 					Pathname = System.IO.Path.Combine (Pathname, value);
 			}
 		}
+		
+		public Guid Guid { get; private set; }
 		
 		public bool HasFile { get; set; }
 		
@@ -193,6 +198,28 @@ namespace Pinta.Core
 
 			current_layer = -1;
 			PintaCore.Layers.OnLayerRemoved ();
+		}
+		
+		// Clean up any native resources we had
+		public void Close ()
+		{
+			// Dispose all of our layers
+			while (Layers.Count > 0) {
+				Layer l = Layers[Layers.Count - 1];
+				Layers.RemoveAt (Layers.Count - 1);
+				(l.Surface as IDisposable).Dispose ();
+			}
+
+			current_layer = -1;
+
+			if (tool_layer != null)
+				(tool_layer.Surface as IDisposable).Dispose ();
+
+			if (selection_layer != null)
+				(selection_layer.Surface as IDisposable).Dispose ();
+
+			if (selection_path != null)
+				(selection_path as IDisposable).Dispose ();
 		}
 		
 		public Layer CreateLayer ()

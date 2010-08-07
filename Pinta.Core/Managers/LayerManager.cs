@@ -212,7 +212,7 @@ namespace Pinta.Core
 		
 		public ImageSurface GetClippedLayer (int index)
 		{
-			return GetClippedLayer (index);
+			return PintaCore.Workspace.ActiveDocument.GetClippedLayer (index);
 		}
 		#endregion
 

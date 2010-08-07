@@ -36,6 +36,8 @@ namespace Pinta
 	{
 		private MainWindow main_window;
 
+		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+
 		public DialogHandlers (MainWindow window)
 		{
 			main_window = window;
@@ -43,7 +45,8 @@ namespace Pinta
 			PintaCore.Actions.File.New.Activated += HandlePintaCoreActionsFileNewActivated;
 			PintaCore.Actions.File.NewScreenshot.Activated += HandlePintaCoreActionsFileNewScreenshotActivated;
 			PintaCore.Actions.File.ModifyCompression += new EventHandler<ModifyCompressionEventArgs> (FileActions_ModifyCompression);
-
+			PintaCore.Actions.File.Close.Activated += HandlePintaCoreActionsFileCloseActivated;
+			
 			PintaCore.Actions.Edit.PasteIntoNewLayer.Activated += HandlerPintaCoreActionsEditPasteIntoNewLayerActivated;
 			PintaCore.Actions.Edit.PasteIntoNewImage.Activated += HandlerPintaCoreActionsEditPasteIntoNewImageActivated;
 			PintaCore.Actions.Edit.ResizePalette.Activated += HandlePintaCoreActionsEditResizePaletteActivated;
@@ -61,47 +64,8 @@ namespace Pinta
 		}
 
 		#region Handlers
-		private bool ConfirmReplaceImage ()
-		{
-			bool canceled = false;
-
-			if (PintaCore.Workspace.IsDirty) {
-				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before creating a new one?");
-				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
-				var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
-				markup = string.Format (markup, primary, secondary);
-
-				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-				                            MessageType.Question, ButtonsType.None, true,
-				                            markup,
-				                            System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
-
-				md.AddButton (Catalog.GetString ("Continue without saving"), ResponseType.No);
-				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-				md.AddButton (Stock.Save, ResponseType.Yes);
-
-				md.DefaultResponse = ResponseType.Cancel;
-				md.AlternativeButtonOrder = new int[] { (int) ResponseType.Yes, (int) ResponseType.No, (int) ResponseType.Cancel };
-
-				ResponseType saveResponse = (ResponseType)md.Run ();
-				md.Destroy ();
-
-				if (saveResponse == ResponseType.Yes) {
-					PintaCore.Actions.File.Save.Activate ();
-				}
-				else {
-					canceled = saveResponse == ResponseType.Cancel;
-				}
-			}
-
-			return !canceled;
-		}
-		
 		private void HandlePintaCoreActionsFileNewActivated (object sender, EventArgs e)
 		{
-			if (!ConfirmReplaceImage ())
-				return;
-
 			NewImageDialog dialog = new NewImageDialog ();
 
 			dialog.ParentWindow = main_window.GdkWindow;
@@ -117,9 +81,6 @@ namespace Pinta
 
 		private void HandlePintaCoreActionsFileNewScreenshotActivated (object sender, EventArgs e)
 		{
-			if (!ConfirmReplaceImage ())
-				return;
-
 			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Catalog.GetString ("Take Screenshot"),
 					PintaCore.Chrome.MainWindow, Catalog.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, 0);
 
@@ -137,6 +98,42 @@ namespace Pinta
 			}
 
 			dialog.Destroy ();
+		}
+
+		private void HandlePintaCoreActionsFileCloseActivated (object sender, EventArgs e)
+		{
+			if (PintaCore.Workspace.ActiveDocument.IsDirty) {
+				var primary = Catalog.GetString ("Save the changes to image \"{0}\" before closing?");
+				var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+				var message = string.Format (markup, primary, secondary);
+
+				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+							    MessageType.Question, ButtonsType.None, true,
+							    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
+
+				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Yes);
+
+				// so that user won't accidentally overwrite
+				md.DefaultResponse = ResponseType.Cancel;
+
+				ResponseType response = (ResponseType)md.Run ();
+				md.Destroy ();
+
+				if (response == ResponseType.Yes) {
+					PintaCore.Actions.File.Save.Activate ();
+					
+					// If the image is still dirty, the user
+					// must have cancelled the Save dialog
+					if (!PintaCore.Workspace.ActiveDocument.IsDirty)
+						PintaCore.Workspace.CloseActiveDocument ();
+				} else if (response == ResponseType.No) {
+					PintaCore.Workspace.CloseActiveDocument ();
+				}
+			} else {
+				PintaCore.Workspace.CloseActiveDocument ();
+			}
 		}
 
 		private void HandlePintaCoreActionsEditResizePaletteActivated (object sender, EventArgs e)
@@ -182,11 +179,6 @@ namespace Pinta
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 
 			if (cb.WaitIsImageAvailable ()) {
-				if (PintaCore.Workspace.IsDirty) {
-					if (!ConfirmReplaceImage ())
-						return;
-				}
-
 				Gdk.Pixbuf image = cb.WaitForImage ();
 				Gdk.Size size = new Gdk.Size (image.Width, image.Height);
 				
@@ -247,18 +239,18 @@ namespace Pinta
 					dialog.InitialLayerProperties,
 					dialog.UpdatedLayerProperties);
 				
-				PintaCore.History.PushNewItem (historyItem);
+				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (historyItem);
 				
-				PintaCore.Workspace.Invalidate ();
+				PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 				
 			} else {
 				
-				var layer = PintaCore.Layers.CurrentLayer;
+				var layer = PintaCore.Workspace.ActiveDocument.CurrentLayer;
 				var initial = dialog.InitialLayerProperties;
 				initial.SetProperties (layer);
 				
 				if (layer.Opacity != initial.Opacity)
-					PintaCore.Workspace.Invalidate ();
+					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 			}
 				
 			dialog.Destroy ();

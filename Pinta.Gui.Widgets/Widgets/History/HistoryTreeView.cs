@@ -40,28 +40,28 @@ namespace Pinta.Gui.Widgets
 		{
 			CanFocus = true;
 
-			Model = PintaCore.History.ListStore;
-			HeadersVisible = false;
-			Selection.Mode = SelectionMode.Single;
-			Selection.SelectFunction = HistoryItemSelected;
+			//Model = PintaCore.History.ListStore;
+			//HeadersVisible = false;
+			//Selection.Mode = SelectionMode.Single;
+			//Selection.SelectFunction = HistoryItemSelected;
 
-			Gtk.TreeViewColumn icon_column = new Gtk.TreeViewColumn ();
-			Gtk.CellRendererPixbuf icon_cell = new Gtk.CellRendererPixbuf ();
-			icon_column.PackStart (icon_cell, true);
+			//Gtk.TreeViewColumn icon_column = new Gtk.TreeViewColumn ();
+			//Gtk.CellRendererPixbuf icon_cell = new Gtk.CellRendererPixbuf ();
+			//icon_column.PackStart (icon_cell, true);
 
-			Gtk.TreeViewColumn text_column = new Gtk.TreeViewColumn ();
-			Gtk.CellRendererText text_cell = new Gtk.CellRendererText ();
-			text_column.PackStart (text_cell, true);
+			//Gtk.TreeViewColumn text_column = new Gtk.TreeViewColumn ();
+			//Gtk.CellRendererText text_cell = new Gtk.CellRendererText ();
+			//text_column.PackStart (text_cell, true);
 
-			text_column.SetCellDataFunc (text_cell, new Gtk.TreeCellDataFunc (HistoryRenderText));
-			icon_column.SetCellDataFunc (icon_cell, new Gtk.TreeCellDataFunc (HistoryRenderIcon));
+			//text_column.SetCellDataFunc (text_cell, new Gtk.TreeCellDataFunc (HistoryRenderText));
+			//icon_column.SetCellDataFunc (icon_cell, new Gtk.TreeCellDataFunc (HistoryRenderIcon));
 
-			AppendColumn (icon_column);
-			AppendColumn (text_column);
+			//AppendColumn (icon_column);
+			//AppendColumn (text_column);
 
-			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
-			PintaCore.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
-			PintaCore.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
+			//PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
+			//PintaCore.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
+			//PintaCore.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
 		}
 
 		#region History
