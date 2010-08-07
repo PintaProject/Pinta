@@ -38,7 +38,7 @@ namespace Pinta.Gui.Widgets
 	{
 		public HistoryTreeView ()
 		{
-			CanFocus = true;
+			CanFocus = false;
 
 			HeadersVisible = false;
 			EnableGridLines = TreeViewGridLines.None;
