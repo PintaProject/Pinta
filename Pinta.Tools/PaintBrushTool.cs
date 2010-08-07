@@ -84,17 +84,6 @@ namespace Pinta.Tools
 			tb.AppendItem (brush_combo_box);
 		}
 
-		protected override void OnClearToolBar (Toolbar tb)
-		{
-			base.OnClearToolBar (tb);
-
-			if (brush_label != null)
-				tb.Remove (brush_label);
-
-			if (brush_combo_box != null)
-				tb.Remove (brush_combo_box);
-		}
-
 		#region Mouse Handlers
 		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
 		{
@@ -139,7 +128,7 @@ namespace Pinta.Tools
 			var brush_width = BrushWidth;
 
 			using (Drawable = new Context (surf)) {
-				Drawable.AppendPath (PintaCore.Layers.SelectionPath);
+				Drawable.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
 				Drawable.FillRule = FillRule.EvenOdd;
 				Drawable.Clip ();
 
