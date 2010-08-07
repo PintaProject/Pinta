@@ -109,6 +109,7 @@ namespace Pinta.Core
 			active_document_index = OpenDocuments.Count - 1;
 			
 			OnDocumentCreated (new DocumentEventArgs (doc));
+			OnActiveDocumentChanged (EventArgs.Empty);
 			
 			return doc;
 		}

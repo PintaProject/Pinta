@@ -137,6 +137,8 @@ namespace Pinta.Core
 			LoadPalette.Activated += HandlerPintaCoreActionsEditLoadPaletteActivated;
 			SavePalette.Activated += HandlerPintaCoreActionsEditSavePaletteActivated;
 			ResetPalette.Activated += HandlerPintaCoreActionsEditResetPaletteActivated;
+
+			PintaCore.Workspace.ActiveDocumentChanged += WorkspaceActiveDocumentChanged;
 		}
 		#endregion
 
@@ -356,6 +358,18 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
 		{
 			PintaCore.Palette.CurrentPalette.LoadDefault ();
+		}
+
+		private void WorkspaceActiveDocumentChanged (object sender, EventArgs e)
+		{
+			if (!PintaCore.Workspace.HasOpenDocuments) {
+				Undo.Sensitive = false;
+				Redo.Sensitive = false;
+				return;
+			}
+
+			Redo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanRedo;
+			Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
 		}
 		#endregion
 	}
