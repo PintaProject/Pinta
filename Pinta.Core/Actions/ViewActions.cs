@@ -78,6 +78,9 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
+			MenuItem show_pad = (MenuItem)menu.Children[0];
+			menu.Remove (show_pad);
+			
 			ImageMenuItem zoomin = ZoomIn.CreateAcceleratedMenuItem (Gdk.Key.plus, Gdk.ModifierType.ControlMask);
 			zoomin.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.equal, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
 			zoomin.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.KP_Add, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
@@ -99,6 +102,9 @@ namespace Pinta.Core
 			menu.Append (Pixels.CreateMenuItem ());
 			menu.Append (Inches.CreateMenuItem ());
 			menu.Append (Centimeters.CreateMenuItem ());
+
+			menu.AppendSeparator ();
+			menu.Append (show_pad);
 		}
 		
 		public void CreateToolBar (Gtk.Toolbar toolbar)

@@ -52,6 +52,7 @@ namespace Pinta
 		ScrolledWindow sw;
 		DockFrame dock;
 		MenuItem window_menu;
+		MenuItem view_menu;
 		LayersListWidget layers;
 		
 		Menu show_pad;
@@ -398,18 +399,22 @@ namespace Pinta
 
 			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("_File")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("_Edit")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("view", Catalog.GetString ("_View")).CreateMenuItem ());
+
+			view_menu = (MenuItem)new Gtk.Action ("view", Catalog.GetString ("_View")).CreateMenuItem ();
+			main_menu.Append (view_menu);
+			
 			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("_Image")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
 
 			window_menu = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
+			window_menu.Submenu = new Menu ();
 			main_menu.Append (window_menu);
 
 			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Show Pad"), null, null);
-			window_menu.Submenu = new Menu ();
-			show_pad = (Menu)((Menu)(window_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
+			view_menu.Submenu = new Menu ();
+			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 
 			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
 

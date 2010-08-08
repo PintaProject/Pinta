@@ -70,7 +70,6 @@ namespace Pinta.Core
 			
 			// View menu
 			ImageMenuItem view = (ImageMenuItem)menu.Children[2];
-			view.Submenu = new Menu ();
 			View.CreateMainMenu ((Menu)view.Submenu);
 			
 			// Image menu
