@@ -106,12 +106,15 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
-			else if (undo_surface != null)
-				(undo_surface as IDisposable).Dispose ();
-
+			if (undo_surface != null) {
+				if (surface_modified)
+					PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+				else if (undo_surface != null)
+					(undo_surface as IDisposable).Dispose ();
+			}
+			
 			surface_modified = false;
+			undo_surface = null;
 			mouse_button = 0;
 		}
 		
@@ -134,6 +137,18 @@ namespace Pinta.Tools
 			int h = Math.Max (a.Y, b.Y) - y + (BrushWidth * 2) + 4;
 			
 			return new Gdk.Rectangle (x, y, w, h);
+		}
+
+		protected Gdk.Rectangle GetRectangleFromPoints (Gdk.Point a, Gdk.Point b)
+		{
+			int x = Math.Min (a.X, b.X);
+			int y = Math.Min (a.Y, b.Y);
+			int w = Math.Max (a.X, b.X);
+			int h = Math.Max (a.Y, b.Y);
+			
+			var rect = new Gdk.Rectangle (x, y, w, h);
+			rect.Inflate (BrushWidth, BrushWidth);
+			return rect;
 		}
 		#endregion
 	}

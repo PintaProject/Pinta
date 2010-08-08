@@ -82,5 +82,10 @@ namespace Pinta.Core
 		{
 			return ColorBgra.FromBgr ((byte)(color.Blue * 255 / ushort.MaxValue),  (byte)(color.Green * 255 / ushort.MaxValue), (byte)(color.Red * 255 / ushort.MaxValue));
 		}
+		
+		public static bool IsNotSet (this Point p)
+		{
+			return p.X == int.MinValue && p.Y == int.MinValue;
+		}
 	}
 }
