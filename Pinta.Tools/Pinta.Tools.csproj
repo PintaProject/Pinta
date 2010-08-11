@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBrushTool.cs" />
+    <Compile Include="Brushes\SplatterBrush.cs" />
     <Compile Include="ColorPickerTool.cs" />
     <Compile Include="EllipseSelectTool.cs" />
     <Compile Include="EllipseTool.cs" />
