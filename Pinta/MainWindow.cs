@@ -83,6 +83,7 @@ namespace Pinta
 
 			dialog_handler = new DialogHandlers (this);
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
+			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
 
 			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
 			
@@ -137,6 +138,11 @@ namespace Pinta
 			PintaCore.Actions.File.Exit.Activate ();
 		}
 
+		private void ZoomToSelection_Activated (object sender, EventArgs e)
+		{
+			PintaCore.Workspace.ActiveWorkspace.ZoomToRectangle (PintaCore.Workspace.ActiveDocument.SelectionPath.GetBounds ().ToCairoRectangle ());
+		}
+		
 		private void ZoomToWindow_Activated (object sender, EventArgs e)
 		{
 			// The image is small enough to fit in the window
