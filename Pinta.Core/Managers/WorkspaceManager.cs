@@ -255,7 +255,7 @@ namespace Pinta.Core
 				CanvasInvalidated (this, e);
 		}
 
-		protected internal void OnCanvasSizeChanged ()
+		public void OnCanvasSizeChanged ()
 		{
 			if (CanvasSizeChanged != null)
 				CanvasSizeChanged (this, EventArgs.Empty);

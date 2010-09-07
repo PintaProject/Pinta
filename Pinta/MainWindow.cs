@@ -180,6 +180,16 @@ namespace Pinta
 		
 		private void ActiveDocumentChanged (object sender, EventArgs e)
 		{
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				int zoom = (int)(PintaCore.Workspace.ActiveWorkspace.Scale * 100);
+			
+				PintaCore.Actions.View.SuspendZoomUpdate ();
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = string.Format ("{0}%", zoom);
+				PintaCore.Actions.View.ResumeZoomUpdate ();
+
+				PintaCore.Workspace.OnCanvasSizeChanged ();
+			}
+			
 			PintaCore.Workspace.Invalidate ();
 			
 			layers.Reset ();
