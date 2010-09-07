@@ -1,4 +1,4 @@
-# Korean translation for pinta
+# Norwegian Bokmal translation for pinta
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pinta package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:17+0000\n"
-"Last-Translator: Jeongkyu Kim <jeongkyu.kim@gmail.com>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2010-07-06 15:47+0000\n"
+"Last-Translator: Hender <simsalabimladen@gmail.com>\n"
+"Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,47 +19,47 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
-msgstr "프로그램 정보"
+msgstr "Om"
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
-msgstr ""
+msgstr "Malerpensel"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "_Fil"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "R_ediger"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "_Vis"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "_Bilde"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "_Lag"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "Justeringer"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "_Effekter"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "_Vindu"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "_Hjelp"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
@@ -67,44 +67,44 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
-msgstr "도구"
+msgstr "Verktøy"
 
 #: Pinta/MainWindow.cs:355
 msgid "Palette"
-msgstr "팔레트"
+msgstr "Palett"
 
 #: Pinta/MainWindow.cs:368
 msgid "Documents"
-msgstr "문서"
+msgstr "Dokumenter"
 
 #: Pinta/MainWindow.cs:382
 msgid "Layers"
-msgstr "레이어"
+msgstr "Lag"
 
 #: Pinta/MainWindow.cs:398
 msgid "History"
-msgstr "사용 기록"
+msgstr "Logg"
 
 #: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
 msgid "Hide"
-msgstr "숨기기"
+msgstr "Skjul"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr ""
+msgstr "Kan festes til hovedvinduet"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr ""
+msgstr "Flytende"
 
 #: Pinta/DockLibrary/DockItem.cs:502
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 msgid "Auto Hide"
-msgstr "자동 숨기기"
+msgstr "Skjul automatisk"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr ""
+msgstr "Feste/løsne"
 
 #: Pinta/Dialogs/AboutDialog.cs:97
 msgid "Contributors to this Release"
@@ -118,52 +118,52 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim"
+"  Hender https://launchpad.net/~simsalabimladen"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
 msgid "Translated by:"
-msgstr "번역 :"
+msgstr "Oversatt av:"
 
 #: Pinta/Dialogs/AboutDialog.cs:126
 msgid "Based on the work of Paint.NET:"
-msgstr ""
+msgstr "Basert på Paint.NET:"
 
 #: Pinta/Dialogs/AboutDialog.cs:133
 msgid "Using some icons from:"
-msgstr ""
+msgstr "Bruker noen av ikonene fra:"
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
-msgstr ""
+msgstr "Om Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:263
 msgid "Version Info"
-msgstr "버전 정보"
+msgstr "Versjonsinformasjon"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "제목"
+msgstr "Tittel"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
-msgstr "버전"
+msgstr "Versjon"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "경로"
+msgstr "Sti"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr "라이선스"
+msgstr "Lisensavtale"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "Utgitt under MIT X11-lisensen."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr "저작권"
+msgstr "Opphavsrett"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
@@ -176,12 +176,12 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
 msgid "Resize Image"
-msgstr "이미지 크기 변경"
+msgstr "Endre størrelse på bilde"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
-msgstr ""
+msgstr "Prosentvis:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
@@ -191,13 +191,13 @@ msgstr "%"
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 msgid "By absolute size:"
-msgstr ""
+msgstr "Etter absolutt størrelse:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 msgid "Width:"
-msgstr "너비:"
+msgstr "Bredde:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
@@ -206,102 +206,102 @@ msgstr "너비:"
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr "픽셀"
+msgstr "piksler"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 msgid "Height:"
-msgstr "높이:"
+msgstr "Høyde:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 msgid "Maintain aspect ratio"
-msgstr "비율 유지"
+msgstr "Behold høyde/bredde-forhold"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties"
-msgstr "레이어 속성"
+msgstr "Laginnstillinger"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr "이름:"
+msgstr "Navn:"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr ""
+msgstr "Synlig"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr "투명도:"
+msgstr "Tetthet:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
-msgstr "캔버스 크기 변경"
+msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "저자:"
+msgstr ""
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Actions/FileActions.cs:133
 msgid "New Image"
-msgstr "새 이미지"
+msgstr ""
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "새 이미지 크기          "
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:57
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr "새 이미지를 만들기 전에 \"{0}\"에 대한 변경 사항을 저장하시겠습니까?"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
 #: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "저장하지 않으면 모든 변경 사항을 잃어버리게 됩니다."
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
 #: Pinta.Core/Actions/FileActions.cs:258
 msgid "Continue without saving"
-msgstr "저장하지 않고 계속하기"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:178
 msgid "Layer Opacity"
-msgstr "레이어 투명도"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:183
 msgid "Rename Layer"
-msgstr "레이어 이름 바꾸기"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:188
 msgid "Hide Layer"
-msgstr "레이어 숨김"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:188
 msgid "Show Layer"
-msgstr "레이어 표시"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
-msgstr "레이블1"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
-msgstr "레이블"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
 msgid "X :"
-msgstr "X :"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
 msgid "Y :"
-msgstr "Y :"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -1186,7 +1186,7 @@ msgstr ""
 #: Pinta.Core/Managers/WorkspaceManager.cs:126
 #: Pinta.Core/Managers/WorkspaceManager.cs:147
 msgid "Window"
-msgstr "창"
+msgstr ""
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"

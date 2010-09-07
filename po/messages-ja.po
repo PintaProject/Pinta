@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:23+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2010-08-25 14:27+0000\n"
+"Last-Translator: Kiyotaka NISHIBORI <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-28 02:32+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -23,47 +23,47 @@ msgstr "このソフトウェアについて"
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
-msgstr ""
+msgstr "ブラシで描画"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "ファイル(_F)"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "編集(_E)"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "表示(_V)"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "画像(_I)"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "レイヤ(_L)"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "調整(_A)"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "エフェクト(_C)"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "ウィンドウ(_W)"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "ヘルプ(_H)"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "パッドを表示"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -119,6 +119,8 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Kiyotaka NISHIBORI https://launchpad.net/~ml-nishibori-kiyotaka\n"
+"  YannUbuntu https://launchpad.net/~yannubuntu\n"
 "  Yuki Kodama https://launchpad.net/~kuy"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
@@ -172,7 +174,7 @@ msgstr "Pinta 貢献者"
 
 #: Pinta/Main.cs:67
 msgid "number of threads to use for rendering"
-msgstr "レンダリングに使用するスレット数"
+msgstr "レンダリングに使用するスレッド数"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
@@ -330,15 +332,15 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "以前のツールに切り替える"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "鉛筆ツールに切り替える"
 
 #: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "鉛筆"
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
@@ -346,7 +348,7 @@ msgstr ""
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "クリック - ドラッグで境界線を描いて選択範囲を作成します。"
 
 #: Pinta.Tools/ZoomTool.cs:49
 #: MandelbrotFractalEffect dialog
@@ -358,31 +360,31 @@ msgstr "ズーム"
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr ""
+msgstr "左クリックのときはズームイン、右クリックのときはズームアウトします。クリック - ドラッグで選択した範囲にズームインします。"
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
-msgstr ""
+msgstr "ブラシサイズ"
 
 #: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
 msgid "Decrease brush size"
-msgstr ""
+msgstr "ブラシサイズを小さくします"
 
 #: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
 msgid "Increase brush size"
-msgstr ""
+msgstr "ブラシサイズを大きくします"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
-msgstr ""
+msgstr "輪郭を描く"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill Shape"
-msgstr ""
+msgstr "塗りつぶす"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "塗りつぶして輪郭を描く"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
@@ -390,7 +392,7 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "ドラッグで選択範囲のピクセルを移動します。"
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -414,11 +416,11 @@ msgstr ""
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
-msgstr ""
+msgstr "クリック - ドラッグで楕円の選択範囲を作成します。Shift を押しながらドラッグすると正円になります。"
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr ""
+msgstr "グラデーション"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
@@ -428,31 +430,31 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
-msgstr ""
+msgstr "線形グラデーション"
 
 #: Pinta.Tools/GradientTool.cs:166
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "反射形グラデーション"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "菱形グラデーション"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
-msgstr ""
+msgstr "放射状グラデーション"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "円錐形グラデーション"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
-msgstr ""
+msgstr "色モード"
 
 #: Pinta.Tools/GradientTool.cs:206
 msgid "Transparency Mode"
-msgstr ""
+msgstr "透過モード"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -463,6 +465,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"クリック - ドラッグで面取り四角形を描きます。左クリックのときは前景色で、右クリックのときは背景色で描きます。Shift "
+"を押しながらドラッグすると面取り正方形になります。"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog

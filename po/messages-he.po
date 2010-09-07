@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:18+0000\n"
+"PO-Revision-Date: 2010-07-06 16:25+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-28 02:32+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -23,47 +23,47 @@ msgstr "על אודות"
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
-msgstr ""
+msgstr "מברשת"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "_קובץ"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "ע_ריכה"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "ת_צוגה"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "ת_מונה"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "שכ_בות"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "הת_אמות"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "_אפקטים"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "_חלון"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "ע_זרה"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "הצגת הלוח"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -322,147 +322,154 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "לאחר הבחירה"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr ""
+msgstr "לא להחליף כלי"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "חזרה לכלי הקודם"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "מעבר לכלי העיפרון"
 
 #: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "עיפרון"
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "בחירת פלצור"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "יש ללחוץ ולגרור כדי לצייר קו מתאר לאזור הבחירה."
 
 #: Pinta.Tools/ZoomTool.cs:49
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Zoom"
-msgstr ""
+msgstr "תקריב"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
+"לחיצה שמאלית להתקרבות. לחצן ימני להתרחקות. לחיצה וגרירה כדי להתקרב לבחירה."
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
-msgstr ""
+msgstr "עובי המברשת"
 
 #: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
 msgid "Decrease brush size"
-msgstr ""
+msgstr "הקטנת גודל המברשת"
 
 #: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
 msgid "Increase brush size"
-msgstr ""
+msgstr "הגדלת גודל המברשת"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
-msgstr ""
+msgstr "קו המתאר של הצורה"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill Shape"
-msgstr ""
+msgstr "מילוי הצורה"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "מילוי וקו המתאר של הצורה"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "הזזת הפיקסלים הנבחרים"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "יש לגרור את הבחירה כדי להזיז את התוכן הנבחר."
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "ניווט"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "יש ללחוץ ולגרור כדי לנווט ברחבי התמונה."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"לחיצה שמאלית כדי לצייר ביד חופשית, שורות ברוחב פיקסל אחד בצבע העיקרי, לחצן "
+"ימני כדי להשתמש בצבע המשני."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr ""
+msgstr "בחירת אליפסה"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"יש ללחוץ ולגרור כדי לצייר בחירה אליפטית. יש להחזיק shift כדי לקבע את העיגול."
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr ""
+msgstr "מדרג"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"יש ללחוץ ולגרור כדי לצייר מדרג מהצבע העיקרי לצבע המשני. לחיצה ימנית להיפוך."
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
-msgstr ""
+msgstr "מדרג קווי"
 
 #: Pinta.Tools/GradientTool.cs:166
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "מדרג קווי משתקף"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "מדרג קווי בצורת מעוין"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
-msgstr ""
+msgstr "מדרג מעגלי"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "מדרג חרוטי"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
-msgstr ""
+msgstr "מצב צבע"
 
 #: Pinta.Tools/GradientTool.cs:206
 msgid "Transparency Mode"
-msgstr ""
+msgstr "מצב שקיפות"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "מלבן מעוגל"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"יש ללחוץ ולגרור כדי לצייר ריבוע מעוגל (לחיצה ימנית לצבע משני). יש להחזיק "
+"shift כדי לקבע יחס."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog
@@ -471,165 +478,174 @@ msgstr ""
 #: GlowEffect dialog
 #: FragmentEffect dialog
 msgid "Radius"
-msgstr ""
+msgstr "רדיוס"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:82
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "הקטנת רדיוס הפינה של המרובע"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:96
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "הגדלת רדיוס הפינה של המרובע"
 
 #: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr ""
+msgstr "לחיצה שמאלית כדי לצייר בצבע הראשי, לחיצה ימנית כדי לצייר בצבע המשני."
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "בחירה ריבועית"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
+"יש ללחוץ ולגרור גדי לצייר בחירה ריבועית. יש להחזיק shift כדי לקבע את יחס "
+"הריבוע."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "דלי צבע"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"לחיצה שמאלית כדי למלא אזור בצבע העיקרי, לחיצה ימנית כדי למלא בצבע המשני."
 
 #: Pinta.Tools/UnimplementedTools.cs:40
 msgid "Clone Stamp"
-msgstr ""
+msgstr "חותמת העתקים"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "הזזת האזור נבחר"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr ""
+msgstr "יש לגרור את הבחירה כדי להזיז את קווי המתאר של הבחירה."
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
-msgstr ""
+msgstr "צורה ביד חופשית"
 
 #: Pinta.Tools/FloodTool.cs:71
 msgid "Fill mode"
-msgstr ""
+msgstr "מצב מילוי"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Contiguous"
-msgstr ""
+msgstr "המשכי"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Global"
-msgstr ""
+msgstr "גלובלי"
 
 #: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
 #: SoftenPortraitData dialog
 msgid "Tolerance"
-msgstr ""
+msgstr "טולרנטיות"
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "אליפסה"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"יש ללחוץ ולגרור כדי לצייר אליפסה (לחצן ימני לצבע המשני). יש להחזיק shift כדי "
+"לקבע יחס לעיגול."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
-msgstr ""
+msgstr "טקסט"
 
 #: Pinta.Tools/TextTool.cs:44
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"לחיצה שמאלית כדי להציב את הסמן, ואז להקליד את הטקסט הרצוי. צבע הטקסט הוא "
+"הצבע העיקרי."
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr ""
+msgstr "גופן"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
-msgstr ""
+msgstr "מודגש"
 
 #: Pinta.Tools/TextTool.cs:193
 msgid "Italic"
-msgstr ""
+msgstr "נטוי"
 
 #: Pinta.Tools/TextTool.cs:201
 msgid "Underline"
-msgstr ""
+msgstr "קו תחתי"
 
 #: Pinta.Tools/TextTool.cs:210
 msgid "Left Align"
-msgstr ""
+msgstr "יישור לשמאל"
 
 #: Pinta.Tools/TextTool.cs:219
 msgid "Center Align"
-msgstr ""
+msgstr "יישור למרכז"
 
 #: Pinta.Tools/TextTool.cs:227
 msgid "Right Align"
-msgstr ""
+msgstr "יישור לימין"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr ""
+msgstr "בחירה עם שרביט קסם"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "יש ללחוץ כדי לבחור אזור בעל אותו הצבע."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "מלבן"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
+"יש ללחוץ ולגרור כדי לצייר מלבן (לחיצה ימנית לצבע משני). יש להחזיק shift כדי "
+"לקבע יחס לריבוע."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr ""
+msgstr "קו"
 
 #: Pinta.Tools/LineCurveTool.cs:44
 msgid ""
 "Left click to draw with primary color, right click for secondary color."
-msgstr ""
+msgstr "לחיצה שמאלית כדי לצייר עם הצבע העיקרי, ימנית עם הצבע המשני."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "החלפת צבעים"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "לחיצה שמאלית כדי להחליף את המשני בעיקרי."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "מוחק"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr ""
+msgstr "יש ללחוץ ולגרור כדי למחוק חלק מהתמונה."
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
@@ -888,7 +904,7 @@ msgstr "מרחב צבעים להמרה"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
@@ -1199,7 +1215,7 @@ msgstr "דיווח על באג"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr ""
+msgstr "תרגום יישום זה"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
@@ -1261,7 +1277,7 @@ msgstr "שכבה"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "כמות"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1271,160 +1287,164 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "זווית"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "החלקת קצוות"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr ""
+msgstr "מצב ערבול"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "בהירות"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "גודל המברשת"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr ""
+msgstr "גודל התא"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "היסט מהמרכז"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr ""
+msgstr "ממורכז"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "חוזק"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr ""
+msgstr "טווח צבעים"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "רווית הצבע"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "צביעה"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr ""
+msgstr "ניגודיות"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "כיסוי"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "מרחק"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "התנהגות הקצוות"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr ""
+msgstr "מקדם"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "שברים"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr ""
+msgstr "קווי המתאר בדיו"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr ""
+msgstr "עצמה"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "תאורה"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "היסט"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "גודל חוד העפרון"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "באחוזים"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr ""
+msgstr "חוזק"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
+msgstr "איכות"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "סיבוב"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "אחוז הרוויה"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "קנה מידה"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "זרע"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "רכות"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "עצמה"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "עובי"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr ""
+msgstr "גודל האריח"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "חום"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"כדאי להשתמש באיכות נמוכה עבור תצוגות מקדימות, תמונות קטנות וזוויות קטנות. "
+"באיכות גבוהה כדאי להשתמש לאיכות גימור, תמונות גדולות וזוויות גדולות."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"עצה: לקבלת התוצאות המיטביות כדאי תחילה לסמן כל אחת מהעיניים באמצעות כלי "
+"הבחירה."

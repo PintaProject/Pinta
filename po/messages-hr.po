@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:16+0000\n"
-"Last-Translator: zekopeko <zekopeko@gmail.com>\n"
+"PO-Revision-Date: 2010-08-28 19:25+0000\n"
+"Last-Translator: boki24 <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-28 02:32+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -27,39 +27,39 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "_Datoteka"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "_Uredi"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "_Prikaz"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "_Slika"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "_Slojevi"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "_Podešenja"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "Efek_ti"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "_Prozor"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "_Pomoć"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
@@ -118,6 +118,7 @@ msgstr "Prijašnji suradnici"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  nafterburner https://launchpad.net/~nafterburner\n"
 "  zekopeko https://launchpad.net/~zekopeko"
 
 #: Pinta/Dialogs/AboutDialog.cs:119

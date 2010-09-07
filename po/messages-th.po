@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-07-01 03:19+0000\n"
-"Last-Translator: Saruch Srisawadpong <Unknown>\n"
+"PO-Revision-Date: 2010-08-21 05:41+0000\n"
+"Last-Translator: Srun Werakool <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-01 04:24+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
-msgstr ""
+msgstr "เกี่ยวกับ"
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
@@ -27,39 +27,39 @@ msgstr "พู่กัน"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr "แฟ้ม"
+msgstr "แ_ฟ้ม"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr "แก้ไข"
+msgstr "แ_ก้ไข"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr "มุมมอง"
+msgstr "มุ_มมอง"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr "รูปภาพ"
+msgstr "รูป_ภาพ"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "_ชั้นงาน"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "_การปรับเปลี่ยน"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "_ลูกเล่น"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr "หน้าต่าง"
+msgstr "ห_น้าต่าง"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "_วิธีใช้"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
-msgstr ""
+msgstr "เครื่องมือ"
 
 #: Pinta/MainWindow.cs:355
 msgid "Palette"
@@ -75,11 +75,11 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:368
 msgid "Documents"
-msgstr ""
+msgstr "เอกสาร"
 
 #: Pinta/MainWindow.cs:382
 msgid "Layers"
-msgstr ""
+msgstr "ชั้นงาน"
 
 #: Pinta/MainWindow.cs:398
 msgid "History"
@@ -87,24 +87,24 @@ msgstr ""
 
 #: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
 msgid "Hide"
-msgstr ""
+msgstr "ซ่อน"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr ""
+msgstr "จัดใส่สำรับงานได้"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr ""
+msgstr "ลอย"
 
 #: Pinta/DockLibrary/DockItem.cs:502
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 msgid "Auto Hide"
-msgstr ""
+msgstr "ซ่อนอัตโนมัติ"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr ""
+msgstr "สำรับงาน"
 
 #: Pinta/Dialogs/AboutDialog.cs:97
 msgid "Contributors to this Release"
@@ -118,11 +118,14 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Saruch Srisawadpong https://launchpad.net/~schemer-of-darkness"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Saruch Srisawadpong https://launchpad.net/~schemer-of-darkness\n"
+"  SiraNokyoongtong https://launchpad.net/~gumara\n"
+"  Srun Werakool https://launchpad.net/~panx0008"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
 msgid "Translated by:"
-msgstr ""
+msgstr "แปลโดย:"
 
 #: Pinta/Dialogs/AboutDialog.cs:126
 msgid "Based on the work of Paint.NET:"
@@ -134,11 +137,11 @@ msgstr ""
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
-msgstr ""
+msgstr "เกี่ยวกับ Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:263
 msgid "Version Info"
-msgstr ""
+msgstr "เวอร์ชัน"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -147,7 +150,7 @@ msgstr ""
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
-msgstr ""
+msgstr "เวอร์ชัน"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
@@ -155,7 +158,7 @@ msgstr ""
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr ""
+msgstr "ลิขสิทธิ์"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
@@ -163,7 +166,7 @@ msgstr ""
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr ""
+msgstr "สงวนลิขสิทธิ์"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
@@ -176,7 +179,7 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
 msgid "Resize Image"
-msgstr ""
+msgstr "ปรับขนาดภาพ"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
@@ -186,7 +189,7 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -197,7 +200,7 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 msgid "Width:"
-msgstr ""
+msgstr "ความกว้าง:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
@@ -206,13 +209,13 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr ""
+msgstr "พิกเซล"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 msgid "Height:"
-msgstr ""
+msgstr "ความสูง:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
@@ -222,24 +225,24 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties"
-msgstr ""
+msgstr "คุณสมบัติชั้นงาน"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr ""
+msgstr "ชื่อ:"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr ""
+msgstr "ปรากฏ"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr ""
+msgstr "ความทึบแสง:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
-msgstr ""
+msgstr "ปรับขนาดหน้ากระดาษ"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
@@ -248,42 +251,43 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Actions/FileActions.cs:133
 msgid "New Image"
-msgstr ""
+msgstr "ภาพใหม่"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr ""
+msgstr "ขนาดของภาพใหม่          "
 
 #: Pinta/DialogHandlers.cs:57
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before creating a new one?"
 msgstr ""
+"บันทึนการเปลี่ยนแปลงต่าง ๆ ที่กระทำต่อภาพ \"{0}\" ก่อนที่จะสร้างภาพใหม่"
 
 #: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
 #: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
 msgid "If you don't save, all changes will be permanently lost."
-msgstr ""
+msgstr "ถ้าคุณไม่บันทึกงาน การแก้ไขทั้งหมดจะสูญหายอย่างถาวร"
 
 #: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
 #: Pinta.Core/Actions/FileActions.cs:258
 msgid "Continue without saving"
-msgstr ""
+msgstr "ทำต่อไปโดยไม่บันทึกงาน"
 
 #: Pinta/DialogHandlers.cs:178
 msgid "Layer Opacity"
-msgstr ""
+msgstr "ความทึบแสงของชั้นงาน"
 
 #: Pinta/DialogHandlers.cs:183
 msgid "Rename Layer"
-msgstr ""
+msgstr "เปลี่ยนชื่อชั้นงาน"
 
 #: Pinta/DialogHandlers.cs:188
 msgid "Hide Layer"
-msgstr ""
+msgstr "ซ่อนชั้นงาน"
 
 #: Pinta/DialogHandlers.cs:188
 msgid "Show Layer"
-msgstr ""
+msgstr "แสดงชั้นงาน"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
@@ -297,11 +301,11 @@ msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
 msgid "X :"
-msgstr ""
+msgstr "X :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
 msgid "Y :"
-msgstr ""
+msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -337,7 +341,7 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "ดินสอ"
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
@@ -351,7 +355,7 @@ msgstr ""
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Zoom"
-msgstr ""
+msgstr "ย่อ/ขยาย"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
@@ -361,15 +365,15 @@ msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
-msgstr ""
+msgstr "ขนาดพู่กัน"
 
 #: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
 msgid "Decrease brush size"
-msgstr ""
+msgstr "ลดขนาดพู่กัน"
 
 #: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
 msgid "Increase brush size"
-msgstr ""
+msgstr "เพิ่มขนาดพู่กัน"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
@@ -417,7 +421,7 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr ""
+msgstr "ไล่ระดับสี"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
@@ -470,7 +474,7 @@ msgstr ""
 #: GlowEffect dialog
 #: FragmentEffect dialog
 msgid "Radius"
-msgstr ""
+msgstr "รัศมี"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:82
 msgid "Decrease rectangle's corner radius"
@@ -561,7 +565,7 @@ msgstr ""
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr ""
+msgstr "แบบอักษร"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
@@ -597,7 +601,7 @@ msgstr ""
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "สี่เหลี่ยมผืนผ้า"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
@@ -624,7 +628,7 @@ msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "ยางลบ"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
@@ -652,7 +656,7 @@ msgstr ""
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 msgid "Photo"
-msgstr ""
+msgstr "ภาพถ่าย"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
@@ -665,7 +669,7 @@ msgstr ""
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
 msgid "Blurs"
-msgstr ""
+msgstr "มัว"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
@@ -917,7 +921,7 @@ msgstr ""
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:255
 msgid "Delete Layer"
-msgstr ""
+msgstr "ลบชั้นงาน"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:247
@@ -958,7 +962,7 @@ msgstr ""
 #: Pinta.Core/Actions/LayerActions.cs:155
 #: Pinta.Core/Actions/FileActions.cs:276
 msgid "Open Image File"
-msgstr ""
+msgstr "เปิดแฟ้มรูปภาพ"
 
 #: Pinta.Core/Actions/LayerActions.cs:177
 msgid "Import From File"
@@ -966,51 +970,51 @@ msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr ""
+msgstr "ใหม่..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "Open..."
-msgstr ""
+msgstr "เปิด..."
 
 #: Pinta.Core/Actions/FileActions.cs:56
 msgid "Open Recent"
-msgstr ""
+msgstr "แฟ้มล่าสุด"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "Close"
-msgstr ""
+msgstr "ปิด"
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Save"
-msgstr ""
+msgstr "บันทึก"
 
 #: Pinta.Core/Actions/FileActions.cs:72
 msgid "Save As..."
-msgstr ""
+msgstr "บันทึกเป็น..."
 
 #: Pinta.Core/Actions/FileActions.cs:73
 msgid "Print"
-msgstr ""
+msgstr "พิมพ์"
 
 #: Pinta.Core/Actions/FileActions.cs:74
 msgid "Quit"
-msgstr ""
+msgstr "ออก"
 
 #: Pinta.Core/Actions/FileActions.cs:76
 msgid "New"
-msgstr ""
+msgstr "ใหม่"
 
 #: Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
-msgstr ""
+msgstr "เปิด"
 
 #: Pinta.Core/Actions/FileActions.cs:125
 msgid "Background"
-msgstr ""
+msgstr "พื้นหลัง"
 
 #: Pinta.Core/Actions/FileActions.cs:170
 msgid "Open Image"
-msgstr ""
+msgstr "เปิดรูปภาพ"
 
 #: Pinta.Core/Actions/FileActions.cs:177
 #, csharp-format
@@ -1028,7 +1032,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:284
 msgid "Image files"
-msgstr ""
+msgstr "แฟ้มรูปภาพ"
 
 #: Pinta.Core/Actions/FileActions.cs:288
 msgid "All files"
@@ -1036,7 +1040,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:320
 msgid "Save Image File"
-msgstr ""
+msgstr "บันทึกแฟ้มรูปภาพ"
 
 #: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
 #, csharp-format
@@ -1054,7 +1058,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:402
 msgid "Close without saving"
-msgstr ""
+msgstr "ปิดโดยไม่บันทึก"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:168
@@ -1063,7 +1067,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize..."
-msgstr ""
+msgstr "ปรับขนาด..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Canvas Size..."
@@ -1072,17 +1076,17 @@ msgstr ""
 #: Pinta.Core/Actions/ImageActions.cs:63
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr ""
+msgstr "หมุน 90° ตามเข็มนาฬิกา"
 
 #: Pinta.Core/Actions/ImageActions.cs:64
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr ""
+msgstr "หมุน 90° ทวนเข็มนาฬิกา"
 
 #: Pinta.Core/Actions/ImageActions.cs:65
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr ""
+msgstr "หมุน 180°"
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:121
@@ -1091,31 +1095,31 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
-msgstr ""
+msgstr "เรียกคืน"
 
 #: Pinta.Core/Actions/EditActions.cs:60
 msgid "Redo"
-msgstr ""
+msgstr "ทำซ้ำ"
 
 #: Pinta.Core/Actions/EditActions.cs:61
 msgid "Cut"
-msgstr ""
+msgstr "ตัด"
 
 #: Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
-msgstr ""
+msgstr "คัดลอก"
 
 #: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
 msgid "Paste"
-msgstr ""
+msgstr "แปะ"
 
 #: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
 msgid "Paste Into New Layer"
-msgstr ""
+msgstr "แปะในชั้นงานใหม่"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Image"
-msgstr ""
+msgstr "แปะในรูปภาพใหม่"
 
 #: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
 #: Pinta.Core/Actions/EditActions.cs:276
@@ -1140,15 +1144,15 @@ msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:62
 msgid "Zoom In"
-msgstr ""
+msgstr "ขยาย"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom Out"
-msgstr ""
+msgstr "ย่อ"
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom to Window"
-msgstr ""
+msgstr "ขนาดพอดี"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Zoom to Selection"
@@ -1156,7 +1160,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Actual Size"
-msgstr ""
+msgstr "ขนาดปกติ"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Pixel Grid"
@@ -1180,7 +1184,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Fullscreen"
-msgstr ""
+msgstr "เต็มจอ"
 
 #: Pinta.Core/Actions/ViewActions.cs:190
 #: Pinta.Core/Managers/WorkspaceManager.cs:126
@@ -1231,11 +1235,11 @@ msgstr ""
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr ""
+msgstr "พลิกชั้นงานในแนวตั้ง"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr ""
+msgstr "พลิกชั้นงานในแนวนอน"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -1247,11 +1251,11 @@ msgstr ""
 
 #: Pinta.Core/Managers/LayerManager.cs:283
 msgid "copy"
-msgstr ""
+msgstr "คัดลอก"
 
 #: Pinta.Core/Managers/LayerManager.cs:538
 msgid "Layer"
-msgstr ""
+msgstr "ชั้นงาน"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1282,7 +1286,7 @@ msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "ความสว่าง"
 
 #: PixelateData dialog
 msgid "Brush Size"

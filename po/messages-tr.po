@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-29 15:55+0000\n"
+"PO-Revision-Date: 2010-08-17 09:18+0000\n"
 "Last-Translator: Yalçın Can <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-01 04:24+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -118,6 +118,7 @@ msgstr "Önceden Katkıda Bulunmuş Olanlar"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Yalçın Can https://launchpad.net/~echza"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
@@ -167,11 +168,11 @@ msgstr "Telif Hakkı"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr ""
+msgstr "Pinta katılımcıları tarafından"
 
 #: Pinta/Main.cs:67
 msgid "number of threads to use for rendering"
-msgstr ""
+msgstr "oluşturulma için için kullanılan işlem parçacıkları"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
@@ -307,7 +308,7 @@ msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr ""
+msgstr "Rastgele Parazit"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
@@ -325,7 +326,7 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "Seçimden sonra"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
@@ -1067,11 +1068,11 @@ msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize..."
-msgstr ""
+msgstr "Resmi Ölçeklendir..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Canvas Size..."
-msgstr ""
+msgstr "Tuvali Kırp..."
 
 #: Pinta.Core/Actions/ImageActions.cs:63
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62

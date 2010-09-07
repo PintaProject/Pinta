@@ -1,4 +1,4 @@
-# Korean translation for pinta
+# Chinese (Traditional) translation for pinta
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pinta package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:17+0000\n"
-"Last-Translator: Jeongkyu Kim <jeongkyu.kim@gmail.com>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2010-07-19 04:22+0000\n"
+"Last-Translator: taijuin lee <Unknown>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,169 +19,170 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
-msgstr "프로그램 정보"
+msgstr "關於"
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
-msgstr ""
+msgstr "畫筆"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "檔案(_F)"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "編輯(_E)"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "檢視(_V)"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "圖片(_I)"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "圖層(_L)"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "調整(_A)"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "效果(_C)"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "視窗(_W)"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "說明(_H)"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "顯示板"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
-msgstr "도구"
+msgstr "工具"
 
 #: Pinta/MainWindow.cs:355
 msgid "Palette"
-msgstr "팔레트"
+msgstr "色盤"
 
 #: Pinta/MainWindow.cs:368
 msgid "Documents"
-msgstr "문서"
+msgstr "文件"
 
 #: Pinta/MainWindow.cs:382
 msgid "Layers"
-msgstr "레이어"
+msgstr "圖層"
 
 #: Pinta/MainWindow.cs:398
 msgid "History"
-msgstr "사용 기록"
+msgstr "歷史"
 
 #: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
 msgid "Hide"
-msgstr "숨기기"
+msgstr "隱藏"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr ""
+msgstr "停駐式欄位"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr ""
+msgstr "浮動的"
 
 #: Pinta/DockLibrary/DockItem.cs:502
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 msgid "Auto Hide"
-msgstr "자동 숨기기"
+msgstr "自動隱藏"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr ""
+msgstr "停駐"
 
 #: Pinta/Dialogs/AboutDialog.cs:97
 msgid "Contributors to this Release"
-msgstr ""
+msgstr "本軟體的貢獻人員"
 
 #: Pinta/Dialogs/AboutDialog.cs:107
 msgid "Previous Contributors"
-msgstr ""
+msgstr "過去版本的貢獻人員"
 
 #: Pinta/Dialogs/AboutDialog.cs:116
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim"
+"  Eddie https://launchpad.net/~zx4636313\n"
+"  taijuin lee https://launchpad.net/~taijuin"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
 msgid "Translated by:"
-msgstr "번역 :"
+msgstr "翻譯者："
 
 #: Pinta/Dialogs/AboutDialog.cs:126
 msgid "Based on the work of Paint.NET:"
-msgstr ""
+msgstr "基於Paint.NET專案："
 
 #: Pinta/Dialogs/AboutDialog.cs:133
 msgid "Using some icons from:"
-msgstr ""
+msgstr "由此取用一些圖示："
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
-msgstr ""
+msgstr "關於Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:263
 msgid "Version Info"
-msgstr "버전 정보"
+msgstr "版本信息"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "제목"
+msgstr "標題"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
-msgstr "버전"
+msgstr "版本"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "경로"
+msgstr "路徑"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr "라이선스"
+msgstr "授權許可"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "以 MIT X11 許可證發行"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr "저작권"
+msgstr "版權所有"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr ""
+msgstr "屬於開發Pinta程式的貢獻者"
 
 #: Pinta/Main.cs:67
 msgid "number of threads to use for rendering"
-msgstr ""
+msgstr "用於渲染的線程數"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
 msgid "Resize Image"
-msgstr "이미지 크기 변경"
+msgstr "縮放圖片"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
-msgstr ""
+msgstr "按百分比："
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
@@ -191,13 +192,13 @@ msgstr "%"
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 msgid "By absolute size:"
-msgstr ""
+msgstr "按絕對大小："
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 msgid "Width:"
-msgstr "너비:"
+msgstr "寬度："
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
@@ -206,262 +207,262 @@ msgstr "너비:"
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr "픽셀"
+msgstr "像素"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 msgid "Height:"
-msgstr "높이:"
+msgstr "高度："
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 msgid "Maintain aspect ratio"
-msgstr "비율 유지"
+msgstr "保持長寬比"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties"
-msgstr "레이어 속성"
+msgstr "圖層屬性"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr "이름:"
+msgstr "名稱："
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr ""
+msgstr "顯示的"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr "투명도:"
+msgstr "不透明度："
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
-msgstr "캔버스 크기 변경"
+msgstr "調整畫布尺寸"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "저자:"
+msgstr "定位點："
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Actions/FileActions.cs:133
 msgid "New Image"
-msgstr "새 이미지"
+msgstr "新增圖像"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "새 이미지 크기          "
+msgstr "新的圖片尺寸          "
 
 #: Pinta/DialogHandlers.cs:57
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr "새 이미지를 만들기 전에 \"{0}\"에 대한 변경 사항을 저장하시겠습니까?"
+msgstr "在開啟新檔案前，儲存變更到圖片檔 \"{0}\" 中？"
 
 #: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
 #: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "저장하지 않으면 모든 변경 사항을 잃어버리게 됩니다."
+msgstr "如果不儲存，所有的變更將會永久地遺失。"
 
 #: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
 #: Pinta.Core/Actions/FileActions.cs:258
 msgid "Continue without saving"
-msgstr "저장하지 않고 계속하기"
+msgstr "繼續而不儲存"
 
 #: Pinta/DialogHandlers.cs:178
 msgid "Layer Opacity"
-msgstr "레이어 투명도"
+msgstr "圖層不透明度"
 
 #: Pinta/DialogHandlers.cs:183
 msgid "Rename Layer"
-msgstr "레이어 이름 바꾸기"
+msgstr "更改圖層名稱"
 
 #: Pinta/DialogHandlers.cs:188
 msgid "Hide Layer"
-msgstr "레이어 숨김"
+msgstr "隱藏圖層"
 
 #: Pinta/DialogHandlers.cs:188
 msgid "Show Layer"
-msgstr "레이어 표시"
+msgstr "顯示圖層"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
-msgstr "레이블1"
+msgstr "標籤1"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
-msgstr "레이블"
+msgstr "標籤"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
 msgid "X :"
-msgstr "X :"
+msgstr "X："
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
 msgid "Y :"
-msgstr "Y :"
+msgstr "Y："
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr ""
+msgstr "不規則雜色"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr ""
+msgstr "變換"
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr ""
+msgstr "顏色挑選器"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
+msgstr "按滑鼠左鍵設置主要顏色，按滑鼠右鍵設置第二顏色。"
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "選色之後"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr ""
+msgstr "不要切換工具"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "切換到上一個工具"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "切換到鉛筆工具"
 
 #: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "鉛筆"
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "自由選取工具"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "按住滑鼠並拖動畫出選取區域的邊框"
 
 #: Pinta.Tools/ZoomTool.cs:49
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Zoom"
-msgstr ""
+msgstr "縮放"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr ""
+msgstr "按滑鼠左鍵以放大，按滑鼠右鍵以縮小。另外，可以用滑鼠左鍵選取一個區域來放大。"
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
-msgstr ""
+msgstr "筆刷寬度"
 
 #: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
 msgid "Decrease brush size"
-msgstr ""
+msgstr "減小筆刷大小"
 
 #: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
 msgid "Increase brush size"
-msgstr ""
+msgstr "增大筆刷"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
-msgstr ""
+msgstr "邊框"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill Shape"
-msgstr ""
+msgstr "填充"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "填充和邊框"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "移動選擇的像素"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "拖動選取區域，以移動選定內容。"
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "平移"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "按住滑鼠並拖動以瀏覽圖片"
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
-msgstr ""
+msgstr "按滑鼠左鍵畫出任意形狀，線條寬為1像素而顏色為主要顏色，按滑鼠右鍵使用第二顏色。"
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr ""
+msgstr "橢圓形選取工具"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
-msgstr ""
+msgstr "按住滑鼠並拖動畫出一個橢圓選取區域。另外，按住\"Shift\"鍵以限制畫出來的是圓形。"
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr ""
+msgstr "漸層"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
-msgstr ""
+msgstr "按住滑鼠左鍵並拖動畫出從主要顏色到第二顏色的漸層顏色，按住滑鼠右鍵則相反。"
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
-msgstr ""
+msgstr "線性漸變填充"
 
 #: Pinta.Tools/GradientTool.cs:166
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "雙線性漸變填充"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "鑽石形漸變填充"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
-msgstr ""
+msgstr "放射漸變填充"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "圓錐形漸變填充"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
-msgstr ""
+msgstr "色彩模式"
 
 #: Pinta.Tools/GradientTool.cs:206
 msgid "Transparency Mode"
-msgstr ""
+msgstr "透明模式"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "圓角矩形"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
-msgstr ""
+msgstr "按住滑鼠左鍵並拖動畫出一圓角矩形(若用滑鼠右鍵則使用的是第二顏色)。按住\"Shift\"鍵以限制畫出來的是正圓角矩形。"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog
@@ -470,169 +471,169 @@ msgstr ""
 #: GlowEffect dialog
 #: FragmentEffect dialog
 msgid "Radius"
-msgstr ""
+msgstr "半徑"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:82
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "減少矩形的圓角半徑"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:96
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "增加矩形的圓角半徑"
 
 #: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr ""
+msgstr "畫圖時，按滑鼠左鍵畫出來的顏色是主要顏色，按滑鼠右鍵畫出來的顏色是第二顏色。"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "矩形選取工具"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
-msgstr ""
+msgstr "點選並拖動畫出一個矩形選取區域。按住\"Shift\"鍵以限制畫出來的是正方形。"
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "油漆桶"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
-msgstr ""
+msgstr "點擊滑鼠左鍵，用主要顏色填滿一區域。點擊滑鼠右鍵，則用的是第二顏色。"
 
 #: Pinta.Tools/UnimplementedTools.cs:40
 msgid "Clone Stamp"
-msgstr ""
+msgstr "橡皮圖章"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "移動選擇區域"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr ""
+msgstr "拖動選擇區域，以移動選取區域的邊框。"
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
-msgstr ""
+msgstr "自由形態形狀"
 
 #: Pinta.Tools/FloodTool.cs:71
 msgid "Fill mode"
-msgstr ""
+msgstr "填充模式"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Contiguous"
-msgstr ""
+msgstr "相似顏色的連續區域"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Global"
-msgstr ""
+msgstr "整個選取區域"
 
 #: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
 #: SoftenPortraitData dialog
 msgid "Tolerance"
-msgstr ""
+msgstr "容許偏差量"
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "橢圓形"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
-msgstr ""
+msgstr "按住滑鼠左鍵並拖動畫出一橢圓(若用滑鼠右鍵則使用的是第二顏色)。按住\"Shift\"鍵以限制畫出來的是圓形。"
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
-msgstr ""
+msgstr "文字"
 
 #: Pinta.Tools/TextTool.cs:44
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
-msgstr ""
+msgstr "點擊滑鼠左鍵，輸入想要的文字。(文字顏色是主要顏色！)"
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr ""
+msgstr "字型"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
-msgstr ""
+msgstr "粗體"
 
 #: Pinta.Tools/TextTool.cs:193
 msgid "Italic"
-msgstr ""
+msgstr "斜體"
 
 #: Pinta.Tools/TextTool.cs:201
 msgid "Underline"
-msgstr ""
+msgstr "底線"
 
 #: Pinta.Tools/TextTool.cs:210
 msgid "Left Align"
-msgstr ""
+msgstr "置左"
 
 #: Pinta.Tools/TextTool.cs:219
 msgid "Center Align"
-msgstr ""
+msgstr "置中"
 
 #: Pinta.Tools/TextTool.cs:227
 msgid "Right Align"
-msgstr ""
+msgstr "置右"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr ""
+msgstr "魔術棒選取工具"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "點擊以選取一相同顏色的區域。"
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "矩形"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
-msgstr ""
+msgstr "按住滑鼠左鍵並拖動畫出一矩形(若用滑鼠右鍵則使用的是第二顏色)。按住\"Shift\"鍵以限制畫出來的是正方形。"
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr ""
+msgstr "直線"
 
 #: Pinta.Tools/LineCurveTool.cs:44
 msgid ""
 "Left click to draw with primary color, right click for secondary color."
-msgstr ""
+msgstr "按滑鼠左鍵繪圖用的是主要顏色，按滑鼠右鍵則是使用第二顏色。"
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "重新著色"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "按滑鼠左鍵,用主要顏色取代第二顏色。"
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "橡皮擦"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr ""
+msgstr "按住並拖動滑鼠以擦掉一部分的圖片顏色。"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
-msgstr ""
+msgstr "像素化"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:38
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
@@ -641,22 +642,22 @@ msgstr ""
 #: Pinta.Effects/Effects/BulgeEffect.cs:34
 #: Pinta.Effects/Effects/TwistEffect.cs:34
 msgid "Distort"
-msgstr ""
+msgstr "扭曲"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
-msgstr ""
+msgstr "去除紅眼"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
 #: Pinta.Effects/Effects/GlowEffect.cs:39
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 msgid "Photo"
-msgstr ""
+msgstr "照片"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
-msgstr ""
+msgstr "動感模糊"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:34
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:34
@@ -665,593 +666,593 @@ msgstr ""
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
 msgid "Blurs"
-msgstr ""
+msgstr "模糊"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr ""
+msgstr "水墨素描"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:41
 msgid "Artistic"
-msgstr ""
+msgstr "藝術效果"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr ""
+msgstr "放射狀模糊"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr ""
+msgstr "失去聚焦"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr ""
+msgstr "邊緣偵測"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 msgid "Stylize"
-msgstr ""
+msgstr "樣式化"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr ""
+msgstr "磨砂玻璃"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
-msgstr ""
+msgstr "油畫"
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
-msgstr ""
+msgstr "變焦模糊"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr ""
+msgstr "極性反轉"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr ""
+msgstr "雲"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:38
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr ""
+msgstr "粉刷"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr ""
+msgstr "色彩鮮豔"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr ""
+msgstr "增加雜色"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 msgid "Noise"
-msgstr ""
+msgstr "雜色"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
-msgstr ""
+msgstr "碎片"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
-msgstr ""
+msgstr "銳利化"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
-msgstr ""
+msgstr "鉛筆素描"
 
 #: Pinta.Effects/Effects/OutlineEffect.cs:29
 msgid "Outline"
-msgstr ""
+msgstr "邊框"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "高斯模糊"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
-msgstr ""
+msgstr "瓷磚效果"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
-msgstr ""
+msgstr "醒目效果"
 
 #: Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
-msgstr ""
+msgstr "浮雕"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr ""
+msgstr "曼德勃羅不規則碎片形"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
-msgstr ""
+msgstr "凸起"
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr ""
+msgstr "旋轉"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr ""
+msgstr "軟化肖像"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr ""
+msgstr "減少雜色"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr ""
+msgstr "茱莉亞不規則碎片形"
 
 #: Pinta.Effects/Effects/MedianEffect.cs:29
 msgid "Median"
-msgstr ""
+msgstr "中間值"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr ""
+msgstr "曲線"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr ""
+msgstr "層級"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr ""
+msgstr "自動調整色階"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 #: SoftenPortraitData dialog
 msgid "Invert Colors"
-msgstr ""
+msgstr "反轉顏色"
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr ""
+msgstr "色調分離"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr ""
+msgstr "黑白化"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "色調 / 飽和度"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
-msgstr ""
+msgstr "變成復古褐色"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "亮度／對比"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr ""
+msgstr "色階調整"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr ""
+msgstr "輸入直方圖"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr ""
+msgstr "輸入"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr ""
+msgstr "輸出"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr ""
+msgstr "輸出直方圖"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr ""
+msgstr "自動"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr ""
+msgstr "重新設定"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr ""
+msgstr "紅色"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
-msgstr ""
+msgstr "綠色"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr ""
+msgstr "藍色"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr ""
+msgstr "連鎖變更"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr ""
+msgstr "轉換圖"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr ""
+msgstr "亮度"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
-msgstr ""
+msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr ""
+msgstr "紅色  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr ""
+msgstr "藍色 "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip : Right-click to remove control points."
-msgstr ""
+msgstr "提示：按滑鼠右鍵刪除控制點。"
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
 msgid "Add New Layer"
-msgstr ""
+msgstr "新增圖層"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:255
 msgid "Delete Layer"
-msgstr ""
+msgstr "刪除圖層"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:247
 msgid "Duplicate Layer"
-msgstr ""
+msgstr "複製圖層"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:226
 msgid "Merge Layer Down"
-msgstr ""
+msgstr "將目前所選圖層及它下一層圖層合併"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr ""
+msgstr "匯入圖片檔..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "水平翻轉"
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
-msgstr ""
+msgstr "垂直翻轉"
 
 #: Pinta.Core/Actions/LayerActions.cs:71
 msgid "Rotate / Zoom"
-msgstr ""
+msgstr "旋轉 /縮放"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:206
 msgid "Move Layer Up"
-msgstr ""
+msgstr "圖層上移"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:216
 msgid "Move Layer Down"
-msgstr ""
+msgstr "圖層下移"
 
 #: Pinta.Core/Actions/LayerActions.cs:155
 #: Pinta.Core/Actions/FileActions.cs:276
 msgid "Open Image File"
-msgstr ""
+msgstr "開啟圖片檔"
 
 #: Pinta.Core/Actions/LayerActions.cs:177
 msgid "Import From File"
-msgstr ""
+msgstr "匯入圖片檔"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr ""
+msgstr "新增..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "Open..."
-msgstr ""
+msgstr "開啟..."
 
 #: Pinta.Core/Actions/FileActions.cs:56
 msgid "Open Recent"
-msgstr ""
+msgstr "開啟最近的"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "Close"
-msgstr ""
+msgstr "關閉"
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Save"
-msgstr ""
+msgstr "儲存"
 
 #: Pinta.Core/Actions/FileActions.cs:72
 msgid "Save As..."
-msgstr ""
+msgstr "另存新檔..."
 
 #: Pinta.Core/Actions/FileActions.cs:73
 msgid "Print"
-msgstr ""
+msgstr "列印"
 
 #: Pinta.Core/Actions/FileActions.cs:74
 msgid "Quit"
-msgstr ""
+msgstr "結束"
 
 #: Pinta.Core/Actions/FileActions.cs:76
 msgid "New"
-msgstr ""
+msgstr "新增"
 
 #: Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
-msgstr ""
+msgstr "開啟"
 
 #: Pinta.Core/Actions/FileActions.cs:125
 msgid "Background"
-msgstr ""
+msgstr "背景圖"
 
 #: Pinta.Core/Actions/FileActions.cs:170
 msgid "Open Image"
-msgstr ""
+msgstr "開啟圖片"
 
 #: Pinta.Core/Actions/FileActions.cs:177
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr ""
+msgstr "不能開啟檔案：{0}"
 
 #: Pinta.Core/Actions/FileActions.cs:178
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 #: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr ""
+msgstr "在開啟新圖片檔前，儲存變更到圖片檔 \"{0}\" 中?"
 
 #: Pinta.Core/Actions/FileActions.cs:284
 msgid "Image files"
-msgstr ""
+msgstr "圖片檔案"
 
 #: Pinta.Core/Actions/FileActions.cs:288
 msgid "All files"
-msgstr ""
+msgstr "所有檔案"
 
 #: Pinta.Core/Actions/FileActions.cs:320
 msgid "Save Image File"
-msgstr ""
+msgstr "儲存圖片檔"
 
 #: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr ""
+msgstr "{0} 圖片 ({1})"
 
 #: Pinta.Core/Actions/FileActions.cs:365
 msgid "OpenRaster image (*.ora)"
-msgstr ""
+msgstr "OpenRaster格式的圖片 (*.ora)"
 
 #: Pinta.Core/Actions/FileActions.cs:392
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "在關閉之前，儲存變更到圖片檔 \"{0}\" 中？"
 
 #: Pinta.Core/Actions/FileActions.cs:402
 msgid "Close without saving"
-msgstr ""
+msgstr "關閉而不儲存"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:168
 msgid "Crop to Selection"
-msgstr ""
+msgstr "剪裁出選取區域"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize..."
-msgstr ""
+msgstr "縮放圖片..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Canvas Size..."
-msgstr ""
+msgstr "調整畫布尺寸..."
 
 #: Pinta.Core/Actions/ImageActions.cs:63
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr ""
+msgstr "順時針旋轉90°"
 
 #: Pinta.Core/Actions/ImageActions.cs:64
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr ""
+msgstr "逆時針旋轉90°"
 
 #: Pinta.Core/Actions/ImageActions.cs:65
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr ""
+msgstr "旋轉 180°"
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:121
 msgid "Flatten"
-msgstr ""
+msgstr "影像平面化"
 
 #: Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
-msgstr ""
+msgstr "復原"
 
 #: Pinta.Core/Actions/EditActions.cs:60
 msgid "Redo"
-msgstr ""
+msgstr "取消復原"
 
 #: Pinta.Core/Actions/EditActions.cs:61
 msgid "Cut"
-msgstr ""
+msgstr "剪下"
 
 #: Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
-msgstr ""
+msgstr "複製"
 
 #: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
 msgid "Paste"
-msgstr ""
+msgstr "貼上"
 
 #: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
 msgid "Paste Into New Layer"
-msgstr ""
+msgstr "貼到新圖層"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Image"
-msgstr ""
+msgstr "貼到新圖片"
 
 #: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
 #: Pinta.Core/Actions/EditActions.cs:276
 msgid "Erase Selection"
-msgstr ""
+msgstr "刪除選擇區域"
 
 #: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
 msgid "Fill Selection"
-msgstr ""
+msgstr "填充選擇區域"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Invert Selection"
-msgstr ""
+msgstr "反向選取"
 
 #: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
 msgid "Select All"
-msgstr ""
+msgstr "選擇全部"
 
 #: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
 msgid "Deselect"
-msgstr ""
+msgstr "取消選取"
 
 #: Pinta.Core/Actions/ViewActions.cs:62
 msgid "Zoom In"
-msgstr ""
+msgstr "放大"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom Out"
-msgstr ""
+msgstr "縮小"
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom to Window"
-msgstr ""
+msgstr "符合視窗大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Zoom to Selection"
-msgstr ""
+msgstr "放大成自選區域"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Actual Size"
-msgstr ""
+msgstr "實際大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Pixel Grid"
-msgstr ""
+msgstr "像素格子"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Rulers"
-msgstr ""
+msgstr "尺規"
 
 #: Pinta.Core/Actions/ViewActions.cs:69 Pinta.Core/Actions/ViewActions.cs:75
 msgid "Pixels"
-msgstr ""
+msgstr "像素"
 
 #: Pinta.Core/Actions/ViewActions.cs:70 Pinta.Core/Actions/ViewActions.cs:75
 msgid "Inches"
-msgstr ""
+msgstr "英吋"
 
 #: Pinta.Core/Actions/ViewActions.cs:71 Pinta.Core/Actions/ViewActions.cs:75
 msgid "Centimeters"
-msgstr ""
+msgstr "公分"
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Fullscreen"
-msgstr ""
+msgstr "全螢幕"
 
 #: Pinta.Core/Actions/ViewActions.cs:190
 #: Pinta.Core/Managers/WorkspaceManager.cs:126
 #: Pinta.Core/Managers/WorkspaceManager.cs:147
 msgid "Window"
-msgstr "창"
+msgstr "視窗"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr ""
+msgstr "Pinta的官方網站"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr ""
+msgstr "瑕疵報告"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr ""
+msgstr "翻譯本軟體"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
-msgstr ""
+msgstr "一般的"
 
 #: Pinta.Core/Classes/BaseTool.cs:135
 msgid "Tool"
-msgstr ""
+msgstr "工具"
 
 #: Pinta.Core/Classes/BaseTool.cs:193
 msgid "Shortcut key"
-msgstr ""
+msgstr "快速鍵"
 
 #: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
 #: Pinta.Core/Classes/BaseTool.cs:239
 msgid "Antialiasing"
-msgstr ""
+msgstr "反鋸齒"
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Normal blending / Overwrite blending"
-msgstr ""
+msgstr "正常混合/覆蓋混合"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr ""
+msgstr "水平翻轉圖片"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr ""
+msgstr "垂直翻轉圖片"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr ""
+msgstr "水平翻轉圖層"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr ""
+msgstr "垂直翻轉圖層"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr ""
+msgstr "完成像素"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr ""
+msgstr "渲染效果"
 
 #: Pinta.Core/Managers/LayerManager.cs:283
 msgid "copy"
-msgstr ""
+msgstr "複製"
 
 #: Pinta.Core/Managers/LayerManager.cs:538
 msgid "Layer"
-msgstr ""
+msgstr "圖層"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1260,7 +1261,7 @@ msgstr ""
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "總量"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1270,160 +1271,160 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "角度"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "消除鋸齒"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr ""
+msgstr "混合模式"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "亮度"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "筆刷尺寸"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr ""
+msgstr "格子大小"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "中心偏移"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr ""
+msgstr "居中"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "粗糙度"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr ""
+msgstr "顏色範圍"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "顏色飽和度"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "染色"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr ""
+msgstr "對比"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "覆蓋率"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "距離"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "邊緣行為"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr ""
+msgstr "因素"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "碎片"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr ""
+msgstr "輪廓的油墨量"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr ""
+msgstr "強度"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "照明"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "偏移"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "鉛筆頭大小"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "百分位數值"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr ""
+msgstr "強度"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
+msgstr "品質"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "旋轉"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "飽和度百分比"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "伸縮"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "種子"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "柔和"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "強度"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "厚度"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr ""
+msgstr "磁磚大小"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "溫暖"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
-msgstr ""
+msgstr "使用低質量預覽小圖像，小角度。使用高品質的最終質量，大圖片和大角度。"
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr ""
+msgstr "提示：要獲得最佳效果，首先使用選取工具選取每隻眼睛。"

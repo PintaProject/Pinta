@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:18+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2010-07-07 15:20+0000\n"
+"Last-Translator: schunka <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-28 02:32+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -23,47 +23,47 @@ msgstr "O aplikaci"
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
-msgstr ""
+msgstr "Štětec"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "_Soubor"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "_Upravit"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "_Zobrazit"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "_Obrázek"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "_Vrstvy"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "_Přizpůsobení"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "Efe_kty"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "_Okno"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "_Nápověda"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "Zobrazit podložku"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -324,147 +324,155 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "Po výběru"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr ""
+msgstr "Nepřepínat nástroj"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "Přepnout na předchozí nástroj"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "Přepnout na tužku"
 
 #: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "Tužka"
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "Výběr lasem"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "Klikněte a obtáhněte vybranou oblast."
 
 #: Pinta.Tools/ZoomTool.cs:49
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Zoom"
-msgstr ""
+msgstr "Lupa"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
+"Levý klik přiblíží. Pravý klik oddálí. Klik a obtažení přiblíží výběr."
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
-msgstr ""
+msgstr "Šířka štětce"
 
 #: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
 msgid "Decrease brush size"
-msgstr ""
+msgstr "Zmenšit štětec"
 
 #: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
 msgid "Increase brush size"
-msgstr ""
+msgstr "Zvětšit štětec"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
-msgstr ""
+msgstr "Obtáhnout tvar"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill Shape"
-msgstr ""
+msgstr "Vyplnit tvar"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "Vyplnit a Obtáhnout tvar"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "Posunout vybrané pixely"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "Táhněte výběrem abyste posunuli obsah"
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "Posun"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "Klik a táhnutí navedou obrazék."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Levý klik kreslí neupravenou, jednopixelovou čáru primární barvy, pravý klik "
+"kreslí sekundární barvou."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr ""
+msgstr "Elipsový výběr"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"Klik a tažení nakreslí elliptický výběr. Pro kruhový výběr držte shift."
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr ""
+msgstr "Přechod"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Klik a tažení nakreslé přechod od primární k sekundární barvě. Pravý klik "
+"kreslí obráceně."
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
-msgstr ""
+msgstr "Lineární přechod"
 
 #: Pinta.Tools/GradientTool.cs:166
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "Lineární odražeý přechod"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Lineární kosočtvercový přechod"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Radiální přechod"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Kónický přechod"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
-msgstr ""
+msgstr "Barevný režim"
 
 #: Pinta.Tools/GradientTool.cs:206
 msgid "Transparency Mode"
-msgstr ""
+msgstr "Průhledný režim"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "Zakulacený obdélník"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"Klik a težení nakreslí zaoblený obdélník (pravý klik v sekundární barvě). "
+"Pro čtverec držte shift."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog
@@ -473,165 +481,175 @@ msgstr ""
 #: GlowEffect dialog
 #: FragmentEffect dialog
 msgid "Radius"
-msgstr ""
+msgstr "Poloměr"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:82
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "Snížit poloměr rohů obdélníku"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:96
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "Zvýšit poloměr rohů obdélníku"
 
 #: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Levý klik kreslí primarní barvou, pravý klik kreslí sekundární barvou."
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "Obdélníkový výběr"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
+"Klik a tažení nakreslí obdélníkový výběr. Pro čtvercový výběr držte shift."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Plechovka barvy"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"Levý klik vyplní oblast primární barvou, pravý klik vyplní oblast sekundární "
+"barvou."
 
 #: Pinta.Tools/UnimplementedTools.cs:40
 msgid "Clone Stamp"
-msgstr ""
+msgstr "Klonovací razítko"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "Přesunout výběr"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr ""
+msgstr "Pro posunutí obrysu táhnout vyběrem ."
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Volný tvar"
 
 #: Pinta.Tools/FloodTool.cs:71
 msgid "Fill mode"
-msgstr ""
+msgstr "Vyplňovací režim"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Contiguous"
-msgstr ""
+msgstr "Spojité"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Global"
-msgstr ""
+msgstr "Globální"
 
 #: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
 #: SoftenPortraitData dialog
 msgid "Tolerance"
-msgstr ""
+msgstr "Tolerance"
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipsa"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"Klik a tažení nakreslí elipsu (pravý klik sekundární barvou). Pro nakreslení "
+"kruhu držte shift."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: Pinta.Tools/TextTool.cs:44
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Levý klik umístí kurzor, pak můžete psát text. Primární barva je barva textu."
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr ""
+msgstr "Písmo"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
-msgstr ""
+msgstr "Tučně"
 
 #: Pinta.Tools/TextTool.cs:193
 msgid "Italic"
-msgstr ""
+msgstr "Kurzíva"
 
 #: Pinta.Tools/TextTool.cs:201
 msgid "Underline"
-msgstr ""
+msgstr "Podtržené"
 
 #: Pinta.Tools/TextTool.cs:210
 msgid "Left Align"
-msgstr ""
+msgstr "Zarovnat doleva"
 
 #: Pinta.Tools/TextTool.cs:219
 msgid "Center Align"
-msgstr ""
+msgstr "Zarovnat na střed"
 
 #: Pinta.Tools/TextTool.cs:227
 msgid "Right Align"
-msgstr ""
+msgstr "Zarovnat doprava"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr ""
+msgstr "Výběr kouzelnou hůlkou"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Klik vybere oblast s podobnou barvou."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "Obdélník"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
+"Klik a tažení nakreslí obdélník (pravý klik sekundární barvou). Pro kreslení "
+"čtverce držte shift."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr ""
+msgstr "Čára"
 
 #: Pinta.Tools/LineCurveTool.cs:44
 msgid ""
 "Left click to draw with primary color, right click for secondary color."
 msgstr ""
+"Levý klik kreslí primární barvou, pravý klik kreslí sekundární barvou."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Přebarvit"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "Levý klik přebarví sekundární barvu na primární."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "Guma"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr ""
+msgstr "Klik a tažení smaže kus obrázku"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
@@ -890,7 +908,7 @@ msgstr "Přenosová mapa"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB barvy"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
@@ -1201,7 +1219,7 @@ msgstr "Nahlásit chybu"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr ""
+msgstr "Přeložit tuto aplikaci"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
@@ -1263,7 +1281,7 @@ msgstr "Vrstva"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "Množství"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1273,160 +1291,164 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "Úhel"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "Vyhlazování"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr ""
+msgstr "Režim míchání"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "Jas"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "Velikost štetce"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr ""
+msgstr "Velikost buňky"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "Středové odsazení"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr ""
+msgstr "Vystředěné"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "Hrubost"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr ""
+msgstr "Rozsah barev"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "Sytost barev"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "Barevnost"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrast"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "Pokrytí"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "Vzdálenost"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "Chování hran"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr ""
+msgstr "Faktor"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "Úlomky"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr ""
+msgstr "Obtažení iknoustem"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr ""
+msgstr "Intenzita"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "Nasvícení"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "Odstup"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "Velikost hrotu tužky"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "Percentil"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr ""
+msgstr "Síla"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
+msgstr "Kvalita"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "Rotace"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "Procentualní sytost"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "Měřítko"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "Odzrnit"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "Jemnost"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "Síla"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "Tloušťka"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr ""
+msgstr "Velikost dlaždic"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "Teplota"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"Použivejte nízkou kvalitu pro náhledy, malé obrázky a nízké úhly. Vysokou "
+"kvalitu pro finální kvalitu, velké obrázky a úhly."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"Rada: Pro lepší vysledky nejprve použijte výběrové nástroje k označení "
+"každého oka."

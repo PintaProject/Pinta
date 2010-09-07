@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-22 09:22+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2010-07-08 08:07+0000\n"
+"Last-Translator: Psychorat <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-28 02:32+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -23,27 +23,27 @@ msgstr "Σχετικά με..."
 
 #: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
 msgid "Paintbrush"
-msgstr ""
+msgstr "Πινέλο"
 
 #: Pinta/MainWindow.cs:259
 msgid "_File"
-msgstr ""
+msgstr "_Αρχείο"
 
 #: Pinta/MainWindow.cs:260
 msgid "_Edit"
-msgstr ""
+msgstr "_Επεξεργασία"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr ""
+msgstr "_Προβολή"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
-msgstr ""
+msgstr "Ει_κόνα"
 
 #: Pinta/MainWindow.cs:263
 msgid "_Layers"
-msgstr ""
+msgstr "Επίπε_δα"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
@@ -51,15 +51,15 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr ""
+msgstr "Ε_φέ"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
-msgstr ""
+msgstr "Παρά_θυρα"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr ""
+msgstr "_Βοήθεια"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
@@ -79,7 +79,7 @@ msgstr "Έγγραφα"
 
 #: Pinta/MainWindow.cs:382
 msgid "Layers"
-msgstr "Στρώσεις"
+msgstr "Επίπεδα"
 
 #: Pinta/MainWindow.cs:398
 msgid "History"
@@ -119,6 +119,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Psychorat https://launchpad.net/~dougy-giro1\n"
 "  spiros anthis https://launchpad.net/~sugaraddicted"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
@@ -335,15 +336,15 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "Αλλαγή σε μολύβι"
 
 #: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "Μολύβι"
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "Επιλογή με λάσο"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
@@ -363,7 +364,7 @@ msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
-msgstr ""
+msgstr "Μήκος βούρτσας"
 
 #: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
 msgid "Decrease brush size"
@@ -409,7 +410,7 @@ msgstr ""
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr ""
+msgstr "Ελλειψοειδής επιλογή"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
@@ -419,7 +420,7 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr ""
+msgstr "Διαβάθμιση χρώματος"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
@@ -449,7 +450,7 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
-msgstr ""
+msgstr "Τύπος χρώματος"
 
 #: Pinta.Tools/GradientTool.cs:206
 msgid "Transparency Mode"
@@ -457,7 +458,7 @@ msgstr ""
 
 #: Pinta.Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "Στρογγυλεμένο ορθογώνιο"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:49
 msgid ""
@@ -490,7 +491,7 @@ msgstr ""
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "Ορθογώνια επιλογή"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
@@ -514,7 +515,7 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "Μετακίνηση επιλογής"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
@@ -553,7 +554,7 @@ msgstr ""
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
-msgstr ""
+msgstr "Κείμενο"
 
 #: Pinta.Tools/TextTool.cs:44
 msgid ""
@@ -563,23 +564,23 @@ msgstr ""
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr ""
+msgstr "Γραμματοσειρά"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
-msgstr ""
+msgstr "Έντονα"
 
 #: Pinta.Tools/TextTool.cs:193
 msgid "Italic"
-msgstr ""
+msgstr "Πλάγια"
 
 #: Pinta.Tools/TextTool.cs:201
 msgid "Underline"
-msgstr ""
+msgstr "Υπογράμμιση"
 
 #: Pinta.Tools/TextTool.cs:210
 msgid "Left Align"
-msgstr ""
+msgstr "Αριστερή στοίχιση"
 
 #: Pinta.Tools/TextTool.cs:219
 msgid "Center Align"
@@ -587,7 +588,7 @@ msgstr ""
 
 #: Pinta.Tools/TextTool.cs:227
 msgid "Right Align"
-msgstr ""
+msgstr "Δεξιά στοίχιση"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -599,7 +600,7 @@ msgstr ""
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "Ορθογώνιο"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
@@ -609,7 +610,7 @@ msgstr ""
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr ""
+msgstr "Γραμμή"
 
 #: Pinta.Tools/LineCurveTool.cs:44
 msgid ""
@@ -626,7 +627,7 @@ msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "Γόμα"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
@@ -700,7 +701,7 @@ msgstr "Πρόσδοση Ύφους"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr ""
+msgstr "Παγωμένο Γυαλί"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
@@ -889,7 +890,7 @@ msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
@@ -1316,7 +1317,7 @@ msgstr ""
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "Χρωματισμός"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"

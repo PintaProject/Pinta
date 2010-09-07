@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-30 18:19+0000\n"
+"PO-Revision-Date: 2010-08-08 16:04+0000\n"
 "Last-Translator: Jarno Ruokamo <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-01 04:24+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -47,11 +47,11 @@ msgstr "T_asot"
 
 #: Pinta/MainWindow.cs:264
 msgid "_Adjustments"
-msgstr ""
+msgstr "_Säädöt"
 
 #: Pinta/MainWindow.cs:265
 msgid "Effe_cts"
-msgstr "_Efektit"
+msgstr "T_ehosteet"
 
 #: Pinta/MainWindow.cs:266
 msgid "_Window"
@@ -63,7 +63,7 @@ msgstr "_Ohje"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "Näytä valikko"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -75,7 +75,7 @@ msgstr "Paletti"
 
 #: Pinta/MainWindow.cs:368
 msgid "Documents"
-msgstr ""
+msgstr "Dokumentit"
 
 #: Pinta/MainWindow.cs:382
 msgid "Layers"
@@ -91,11 +91,11 @@ msgstr "Piilota"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr ""
+msgstr "Telakoitava"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr ""
+msgstr "Kelluva"
 
 #: Pinta/DockLibrary/DockItem.cs:502
 #: Pinta/DockLibrary/DockItemContainer.cs:194
@@ -104,21 +104,24 @@ msgstr "Automaattinen piilotus"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr ""
+msgstr "Telakka"
 
 #: Pinta/Dialogs/AboutDialog.cs:97
 msgid "Contributors to this Release"
-msgstr ""
+msgstr "Tämän julkaisun tekijät"
 
 #: Pinta/Dialogs/AboutDialog.cs:107
 msgid "Previous Contributors"
-msgstr ""
+msgstr "Aiemmat tekijät"
 
 #: Pinta/Dialogs/AboutDialog.cs:116
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Jarno Ruokamo https://launchpad.net/~jarno-ruokamo"
+"  Jarno Ruokamo https://launchpad.net/~jarno-ruokamo\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Tommi Saira https://launchpad.net/~tommisaira\n"
+"  Urmas https://launchpad.net/~urmas-2006"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
 msgid "Translated by:"
@@ -126,23 +129,23 @@ msgstr "Käännöksen tehnyt:"
 
 #: Pinta/Dialogs/AboutDialog.cs:126
 msgid "Based on the work of Paint.NET:"
-msgstr ""
+msgstr "Perustuu ohjelmaan Paint.NET:"
 
 #: Pinta/Dialogs/AboutDialog.cs:133
 msgid "Using some icons from:"
-msgstr ""
+msgstr "Käyttää ikoneita kokoelmista:"
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
-msgstr ""
+msgstr "Tietoja Pintasta"
 
 #: Pinta/Dialogs/AboutDialog.cs:263
 msgid "Version Info"
-msgstr ""
+msgstr "Versiotiedot"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr ""
+msgstr "Nimi"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
@@ -159,7 +162,7 @@ msgstr "Lisenssi"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "Julkaistaan MIT X11 lisenssin alaisena."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
@@ -167,11 +170,11 @@ msgstr "Tekijänoikeus"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr ""
+msgstr "Pinta tekijöiden"
 
 #: Pinta/Main.cs:67
 msgid "number of threads to use for rendering"
-msgstr "renderöintiin käytettävät säikeet"
+msgstr "renderointiin käytettävät säikeet"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
@@ -288,28 +291,28 @@ msgstr "Näytä taso"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
-msgstr ""
+msgstr "label1"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
 msgid "X :"
-msgstr ""
+msgstr "X :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
 msgid "Y :"
-msgstr ""
+msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr ""
+msgstr "Satunnainen kohina"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr ""
+msgstr "Uusi siemen"
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
@@ -360,6 +363,8 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
+"Vasemmalla napilla suurennat, oikealla pienennät. Klikkaa ja siirrä "
+"luodaksesi valinnan."
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
 msgid "Brush width"
@@ -375,37 +380,39 @@ msgstr "Suurenna sivellintä"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
-msgstr ""
+msgstr "Reunan muoto"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill Shape"
-msgstr ""
+msgstr "Täytön muoto"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "Täytön ja reunan muoto"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "Siirrä valittuja pikseleitä"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "Siirrä valintaa siirtääksesi kohdetta."
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "Pan"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "Klikkaa ja siirrä hiirtä liikkuaksesi kuvalla."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Vasemmalla napilla piirrät vapaita, pikselin leveitä viivoja edustavärillä, "
+"oikealla napilla taustavärillä."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
@@ -416,6 +423,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"Klikkaa ja siirrä piirtääksesi elliptisen valinnan. Paina shiftiä "
+"pakottaaksesi ympyrään."
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
@@ -426,26 +435,28 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Klikkaa ja siirrä piirtääksesi liukuman edustaväristä taustaväriin. Oikealla "
+"napilla käänteinen suunta."
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
-msgstr ""
+msgstr "Lineaari"
 
 #: Pinta.Tools/GradientTool.cs:166
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "Lineaari (Peilattu)"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Timantti"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Säteittäinen"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Kartio"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
@@ -453,17 +464,19 @@ msgstr "Väritila"
 
 #: Pinta.Tools/GradientTool.cs:206
 msgid "Transparency Mode"
-msgstr ""
+msgstr "Läpinäkyvyystila"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "Pyöristetty suorakulmio"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"Klikkaa ja siirrä piirtääksesi pyöristetyn suorakulmion (oikealla napilla "
+"taustaväri). Pakota neliöksi shift-napilla."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog
@@ -472,169 +485,180 @@ msgstr ""
 #: GlowEffect dialog
 #: FragmentEffect dialog
 msgid "Radius"
-msgstr ""
+msgstr "Säde"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:82
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "Vähennä pyöristetyn kulman sädettä"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:96
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "Lisää pyöristetyn kulman sädettä"
 
 #: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Vasemmalla napilla piirrät edustavärillä, oikealla napilla taustavärillä."
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "Suorakulmainen valinta"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
+"Klikkaa ja siirrä piirtääksesi suorakulmaisen valinnan. Pakota neliöksi "
+"shift-napilla."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Täyttö"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"Vasemmalla napilla täytät alueen edustavärillä, oikealla napilla täytät "
+"taustavärillä."
 
 #: Pinta.Tools/UnimplementedTools.cs:40
 msgid "Clone Stamp"
-msgstr ""
+msgstr "Kloonaus"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "Siirrä valintaa"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr ""
+msgstr "Vedä valintaa siirtääksesi valinnan reunaa."
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Vapaa muoto"
 
 #: Pinta.Tools/FloodTool.cs:71
 msgid "Fill mode"
-msgstr ""
+msgstr "Tulvatila"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Contiguous"
-msgstr ""
+msgstr "Jatkuva"
 
 #: Pinta.Tools/FloodTool.cs:76
 msgid "Global"
-msgstr ""
+msgstr "Globaali"
 
 #: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
 #: SoftenPortraitData dialog
 msgid "Tolerance"
-msgstr ""
+msgstr "Toleranssi"
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipsi"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"Klikkaa ja siirrä piirtääksesi ellipsin (oikealla napilla taustavärillä). "
+"Pakota ympyräksi shift-napilla."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
-msgstr ""
+msgstr "Teksti"
 
 #: Pinta.Tools/TextTool.cs:44
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Klikkaa vasemmalla sijoittaaksesi kursorin, ja kirjoita teksti. Väri on "
+"edustaväri."
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr ""
+msgstr "Fontti"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
-msgstr ""
+msgstr "Lihavoitu"
 
 #: Pinta.Tools/TextTool.cs:193
 msgid "Italic"
-msgstr ""
+msgstr "Kursivoitu"
 
 #: Pinta.Tools/TextTool.cs:201
 msgid "Underline"
-msgstr ""
+msgstr "Alleviivattu"
 
 #: Pinta.Tools/TextTool.cs:210
 msgid "Left Align"
-msgstr ""
+msgstr "Tasaa vasemmalle"
 
 #: Pinta.Tools/TextTool.cs:219
 msgid "Center Align"
-msgstr ""
+msgstr "Keskitä"
 
 #: Pinta.Tools/TextTool.cs:227
 msgid "Right Align"
-msgstr ""
+msgstr "Tasaa oikealle"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr ""
+msgstr "Taikasauva"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Klikkaa valitaksesi samanvärisen alueen."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "Suorakulmio"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
+"Klikkaa ja siirrä piirtääksesi suorakulmion (oikealla napilla "
+"taustavärillä). Pakota neliöksi shift-napilla."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr ""
+msgstr "Viiva"
 
 #: Pinta.Tools/LineCurveTool.cs:44
 msgid ""
 "Left click to draw with primary color, right click for secondary color."
-msgstr ""
+msgstr "Vasemmalla piirrät edustavärillä, oikealla napilla taustavärillä."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Uudelleen väritä"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "Vasemmalla napilla korvaa taustaväri edustavärillä."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "Pyyhin"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr ""
+msgstr "Klikkaa ja siirrä poistaaksesi osan kuvasta."
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
-msgstr ""
+msgstr "Pikselöi"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:38
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
@@ -643,22 +667,22 @@ msgstr ""
 #: Pinta.Effects/Effects/BulgeEffect.cs:34
 #: Pinta.Effects/Effects/TwistEffect.cs:34
 msgid "Distort"
-msgstr ""
+msgstr "Vääristä"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
-msgstr ""
+msgstr "Punasilmän poistaja"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
 #: Pinta.Effects/Effects/GlowEffect.cs:39
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 msgid "Photo"
-msgstr ""
+msgstr "Valokuva"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
-msgstr ""
+msgstr "Liike-epäterävyys"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:34
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:34
@@ -667,593 +691,593 @@ msgstr ""
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
 msgid "Blurs"
-msgstr ""
+msgstr "Sumennus"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr ""
+msgstr "Musteluonnos"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:41
 msgid "Artistic"
-msgstr ""
+msgstr "Artistinen"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr ""
+msgstr "Säteittäinen sumennus"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr ""
+msgstr "Epäkohdistus"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr ""
+msgstr "Reunan tunnistus"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 msgid "Stylize"
-msgstr ""
+msgstr "Tyyli"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr ""
+msgstr "Jäätynyt lasi"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
-msgstr ""
+msgstr "Öljymaalaus"
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
-msgstr ""
+msgstr "Zoom-sumennus"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr ""
+msgstr "Käänteismuunnos"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr ""
+msgstr "Pilviä"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:38
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr ""
+msgstr "Renderointi"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr ""
+msgstr "Hehku"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr ""
+msgstr "Lisää kohinaa"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 msgid "Noise"
-msgstr ""
+msgstr "Kohina"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
-msgstr ""
+msgstr "Pirstaloi"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
-msgstr ""
+msgstr "Terävöitä"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
-msgstr ""
+msgstr "Kynäluonnos"
 
 #: Pinta.Effects/Effects/OutlineEffect.cs:29
 msgid "Outline"
-msgstr ""
+msgstr "Ääriviiva"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Gauss-sumennus"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
-msgstr ""
+msgstr "Tiiliheijastus"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
-msgstr ""
+msgstr "Reliefi"
 
 #: Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
-msgstr ""
+msgstr "Korkokuva"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr ""
+msgstr "Mandelbrotin joukko"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
-msgstr ""
+msgstr "Pullistuma"
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr ""
+msgstr "Kierre"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr ""
+msgstr "Pehmennä"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr ""
+msgstr "Vähennä kohinaa"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr ""
+msgstr "Julian joukko"
 
 #: Pinta.Effects/Effects/MedianEffect.cs:29
 msgid "Median"
-msgstr ""
+msgstr "Mediaani"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr ""
+msgstr "Käyrät"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr ""
+msgstr "Sävyala"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr ""
+msgstr "Automaattinen taso"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 #: SoftenPortraitData dialog
 msgid "Invert Colors"
-msgstr ""
+msgstr "Käännä värit"
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr ""
+msgstr "Porrasta"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr ""
+msgstr "Mustavalkoinen"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Sävy / Värikylläisyys"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
-msgstr ""
+msgstr "Seepia"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Kirkkaus / Kontrasti"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr ""
+msgstr "Sävyjen säädöt"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr ""
+msgstr "Sisääntulon histrogrammi"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr ""
+msgstr "Sisääntulo"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr ""
+msgstr "Ulostulo"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr ""
+msgstr "Ulostulon histogrammi"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr ""
+msgstr "Palauta"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr ""
+msgstr "Punainen"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
-msgstr ""
+msgstr "Vihreä"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr ""
+msgstr "Sininen"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr ""
+msgstr "Kytketty"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr ""
+msgstr "Siirtokartta"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr ""
+msgstr "Värin kirkkaus"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
-msgstr ""
+msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr ""
+msgstr "Punainen  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr ""
+msgstr "Sininen "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip : Right-click to remove control points."
-msgstr ""
+msgstr "Vihje: Oikealla napilla voit poistaa pisteitä."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
 msgid "Add New Layer"
-msgstr ""
+msgstr "Uusi taso"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:255
 msgid "Delete Layer"
-msgstr ""
+msgstr "Poista taso"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:247
 msgid "Duplicate Layer"
-msgstr ""
+msgstr "Monista taso"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:226
 msgid "Merge Layer Down"
-msgstr ""
+msgstr "Yhdistä taso alas"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr ""
+msgstr "Tuo tiedostosta..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Käännä vaakatasossa"
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Käännä pystytasossa"
 
 #: Pinta.Core/Actions/LayerActions.cs:71
 msgid "Rotate / Zoom"
-msgstr ""
+msgstr "Pyöritä / Zoomaa"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:206
 msgid "Move Layer Up"
-msgstr ""
+msgstr "Siirrä tasoa ylös"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:216
 msgid "Move Layer Down"
-msgstr ""
+msgstr "Siirrä tasoa alas"
 
 #: Pinta.Core/Actions/LayerActions.cs:155
 #: Pinta.Core/Actions/FileActions.cs:276
 msgid "Open Image File"
-msgstr ""
+msgstr "Avaa kuvatiedosto"
 
 #: Pinta.Core/Actions/LayerActions.cs:177
 msgid "Import From File"
-msgstr ""
+msgstr "Tuo tiedostosta"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr ""
+msgstr "Uusi..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "Open..."
-msgstr ""
+msgstr "Avaa..."
 
 #: Pinta.Core/Actions/FileActions.cs:56
 msgid "Open Recent"
-msgstr ""
+msgstr "Avaa viimeisin"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
 #: Pinta.Core/Actions/FileActions.cs:72
 msgid "Save As..."
-msgstr ""
+msgstr "Tallenna nimellä..."
 
 #: Pinta.Core/Actions/FileActions.cs:73
 msgid "Print"
-msgstr ""
+msgstr "Tulosta"
 
 #: Pinta.Core/Actions/FileActions.cs:74
 msgid "Quit"
-msgstr ""
+msgstr "Poistu"
 
 #: Pinta.Core/Actions/FileActions.cs:76
 msgid "New"
-msgstr ""
+msgstr "Uusi"
 
 #: Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
-msgstr ""
+msgstr "Avaa"
 
 #: Pinta.Core/Actions/FileActions.cs:125
 msgid "Background"
-msgstr ""
+msgstr "Tausta"
 
 #: Pinta.Core/Actions/FileActions.cs:170
 msgid "Open Image"
-msgstr ""
+msgstr "Avaa kuva"
 
 #: Pinta.Core/Actions/FileActions.cs:177
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr ""
+msgstr "Tiedostoa ei voinut avata: {0}"
 
 #: Pinta.Core/Actions/FileActions.cs:178
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr ""
+msgstr "Tallenna muutokset kuvaan \"{0}\" ennen kuin avaat uuden kuvan?"
 
 #: Pinta.Core/Actions/FileActions.cs:284
 msgid "Image files"
-msgstr ""
+msgstr "Kuvatiedostot"
 
 #: Pinta.Core/Actions/FileActions.cs:288
 msgid "All files"
-msgstr ""
+msgstr "Kaikki tiedostot"
 
 #: Pinta.Core/Actions/FileActions.cs:320
 msgid "Save Image File"
-msgstr ""
+msgstr "Tallenna kuva"
 
 #: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr ""
+msgstr "{0} kuva ({1})"
 
 #: Pinta.Core/Actions/FileActions.cs:365
 msgid "OpenRaster image (*.ora)"
-msgstr ""
+msgstr "OpenRaster kuva (*.ora)"
 
 #: Pinta.Core/Actions/FileActions.cs:392
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Tallenna muutokseen kuvaan \"{0}\" ennen kuin suljet?"
 
 #: Pinta.Core/Actions/FileActions.cs:402
 msgid "Close without saving"
-msgstr ""
+msgstr "Sulje tallentamatta"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:168
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Rajaa valintaan"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize..."
-msgstr ""
+msgstr "Muuta kokoa..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Canvas Size..."
-msgstr ""
+msgstr "Pohjan koko..."
 
 #: Pinta.Core/Actions/ImageActions.cs:63
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr ""
+msgstr "Pyöritä 90° myötäpäivään"
 
 #: Pinta.Core/Actions/ImageActions.cs:64
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr ""
+msgstr "Pyöritä 90° vastapäivään"
 
 #: Pinta.Core/Actions/ImageActions.cs:65
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr ""
+msgstr "Pyöritä 180°"
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:121
 msgid "Flatten"
-msgstr ""
+msgstr "Yhdistä tasot"
 
 #: Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
-msgstr ""
+msgstr "Kumoa"
 
 #: Pinta.Core/Actions/EditActions.cs:60
 msgid "Redo"
-msgstr ""
+msgstr "Tee uudelleen"
 
 #: Pinta.Core/Actions/EditActions.cs:61
 msgid "Cut"
-msgstr ""
+msgstr "Leikkaa"
 
 #: Pinta.Core/Actions/EditActions.cs:62
 msgid "Copy"
-msgstr ""
+msgstr "Kopioi"
 
 #: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
 msgid "Paste"
-msgstr ""
+msgstr "Liitä"
 
 #: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
 msgid "Paste Into New Layer"
-msgstr ""
+msgstr "Liitä uuteen tasoon"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Paste Into New Image"
-msgstr ""
+msgstr "Liitä uuteen kuvaan"
 
 #: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
 #: Pinta.Core/Actions/EditActions.cs:276
 msgid "Erase Selection"
-msgstr ""
+msgstr "Poista valinta"
 
 #: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
 msgid "Fill Selection"
-msgstr ""
+msgstr "Täytä valinta"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Invert Selection"
-msgstr ""
+msgstr "Käännä valinta"
 
 #: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
 msgid "Select All"
-msgstr ""
+msgstr "Valitse kaikki"
 
 #: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
 msgid "Deselect"
-msgstr ""
+msgstr "Poista valinta"
 
 #: Pinta.Core/Actions/ViewActions.cs:62
 msgid "Zoom In"
-msgstr ""
+msgstr "Suurenna"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom Out"
-msgstr ""
+msgstr "Pienennä"
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom to Window"
-msgstr ""
+msgstr "Tarkenna ikkunaan"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Zoom to Selection"
-msgstr ""
+msgstr "Tarkenna valintaan"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Actual Size"
-msgstr ""
+msgstr "Oikea koko"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Pikseliristikko"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Rulers"
-msgstr ""
+msgstr "Viivoitin"
 
 #: Pinta.Core/Actions/ViewActions.cs:69 Pinta.Core/Actions/ViewActions.cs:75
 msgid "Pixels"
-msgstr ""
+msgstr "Pikseliä"
 
 #: Pinta.Core/Actions/ViewActions.cs:70 Pinta.Core/Actions/ViewActions.cs:75
 msgid "Inches"
-msgstr ""
+msgstr "Tuumaa"
 
 #: Pinta.Core/Actions/ViewActions.cs:71 Pinta.Core/Actions/ViewActions.cs:75
 msgid "Centimeters"
-msgstr ""
+msgstr "Senttimetriä"
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Fullscreen"
-msgstr ""
+msgstr "Koko näyttö"
 
 #: Pinta.Core/Actions/ViewActions.cs:190
 #: Pinta.Core/Managers/WorkspaceManager.cs:126
 #: Pinta.Core/Managers/WorkspaceManager.cs:147
 msgid "Window"
-msgstr ""
+msgstr "Ikkuna"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr ""
+msgstr "Pinta kotisivu"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr ""
+msgstr "Ilmoita virheestä"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr ""
+msgstr "Käännä tämä ohjelma"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
-msgstr ""
+msgstr "Yleiset"
 
 #: Pinta.Core/Classes/BaseTool.cs:135
 msgid "Tool"
-msgstr ""
+msgstr "Työkalu"
 
 #: Pinta.Core/Classes/BaseTool.cs:193
 msgid "Shortcut key"
-msgstr ""
+msgstr "Pikanäppäin"
 
 #: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
 #: Pinta.Core/Classes/BaseTool.cs:239
 msgid "Antialiasing"
-msgstr ""
+msgstr "Ylinäytteistys"
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Normal blending / Overwrite blending"
-msgstr ""
+msgstr "Normaali sekoitus / Ylikirjoitus"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr ""
+msgstr "Käännä kuva vaakatasossa"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr ""
+msgstr "Käännä kuva pystytasossa"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr ""
+msgstr "Käännä taso vaakatasossa"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr ""
+msgstr "Käännä taso pystytasossa"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr ""
+msgstr "Viimeistele pikselit"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr ""
+msgstr "Renderointi"
 
 #: Pinta.Core/Managers/LayerManager.cs:283
 msgid "copy"
-msgstr ""
+msgstr "kopioi"
 
 #: Pinta.Core/Managers/LayerManager.cs:538
 msgid "Layer"
-msgstr ""
+msgstr "Taso"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1262,7 +1286,7 @@ msgstr ""
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "Määrä"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1272,160 +1296,164 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "Kulma"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "Reunanpehmennys"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr ""
+msgstr "Sekoitustila"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "Kirkkaus"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "Siveltimen koko"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr ""
+msgstr "Solun koko"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "Keskusta"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr ""
+msgstr "Keskitetty"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "Karheus"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr ""
+msgstr "Värialue"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "Värikylläisyys"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "Väritys"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrasti"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "Kattavuus"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "Etäisyys"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "Reunan käyttäytyminen"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr ""
+msgstr "Kerroin"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "Pirstaleet"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr ""
+msgstr "Mustereunus"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr ""
+msgstr "Voimakkuus"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "Valaistus"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "Siirtymä"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "Kynän kärjen koko"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "Prosenttipiste"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr ""
+msgstr "Voima"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
+msgstr "Laatu"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "Kierto"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "Värikylläisyyden määrä"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "Skaala"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "Siemen"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "Pehmeys"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "Voimakkuus"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "Paksuus"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr ""
+msgstr "Tiilin koko"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "Lämpö"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"Käytä pientä laatua tarkastamiseen, pieniin kuviin ja pieniin kulmiin. Käytä "
+"suurta laatua lopullisiin kuviin, isoihin kuviin ja suuriin kulmiin."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"Vihje: Parhaan tuloksen saamiseksi, käytä valintatyökalua ja valitse "
+"kummatkin silmät ennen käyttöä."

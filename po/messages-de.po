@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-30 14:01+0000\n"
+"PO-Revision-Date: 2010-07-27 23:23+0000\n"
 "Last-Translator: Johannes Rössel <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-01 04:24+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -63,7 +63,7 @@ msgstr "_Hilfe"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "zeige Leiste"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -123,7 +123,8 @@ msgstr ""
 "  Hanh Pham https://launchpad.net/~joel-nohnn\n"
 "  Johannes Rössel https://launchpad.net/~joey-muhkuhsaft\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Marco Rolappe https://launchpad.net/~mrolappe"
+"  Marco Rolappe https://launchpad.net/~mrolappe\n"
+"  Matthias Mailänder https://launchpad.net/~mailaender"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
 msgid "Translated by:"
@@ -384,15 +385,15 @@ msgstr "Pinsel Breite vergrößern"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Outline Shape"
-msgstr ""
+msgstr "Nur Umrandung"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill Shape"
-msgstr ""
+msgstr "Nur Füllung"
 
 #: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "Umrandung und Füllung"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
@@ -400,7 +401,7 @@ msgstr "Ausgewählte Pixels bewegen"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "Ausgewählten Bereich verschieben"
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -408,13 +409,15 @@ msgstr "Ausschnitt verschieben"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "Klicken und ziehen um den sichtbaren Bildbereich zu verschieben."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Linksklick um Freiform zu zeichnen, 1-Pixel breite Linien mit der "
+"Vordergrundfarbe, Rechtsklick um die Hintergrundfarbe zu verwenden."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
@@ -425,6 +428,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"Klicken und ziehen um eine elliptische Auswahl aufzuziehen. Shift gedrückt "
+"halten, um daraus einen Kreis zu machen."
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
@@ -435,6 +440,8 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Klicken und Ziehen, um einen Farbverlauf von der Primär- zur Sekundärfarbe "
+"zu zeichnen. Rechtsklick um die Farben zu vertauschen."
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
@@ -442,19 +449,19 @@ msgstr "Linearer Gradient"
 
 #: Pinta.Tools/GradientTool.cs:166
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "Linearer gespiegelter Verlauf"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Linearer rautenförmiger Verlauf"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Kreisförmiger Verlauf"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Kegelförmiger Verlauf"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
@@ -473,6 +480,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"Klicken und ziehen um ein abgerundetes Rechteck zu zeichnen (Rechtsklick für "
+"Sekundärfarbe). Shift gedrückt halten, um daraus ein Quadrat zu machen."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog
@@ -496,6 +505,8 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Linksklick um mit Primärfarbe zu zeichnen, Rechtsklick um mit Sekundärfarbe "
+"zu zeichnen."
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -506,6 +517,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
+"Klicken und ziehen um eine rechteckige Auswahl aufzuziehen. Shift gedrückt "
+"halten, um daraus ein Quadrat zu machen."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -516,10 +529,12 @@ msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"Linksklick um eine Region mit der Primärfarbe zu füllen. Rechtsklick um eine "
+"Region mit der Sekundärfarbe zu füllen."
 
 #: Pinta.Tools/UnimplementedTools.cs:40
 msgid "Clone Stamp"
-msgstr ""
+msgstr "Stempel Klonen"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -531,7 +546,7 @@ msgstr "Auswahl ziehen, um die Auswahl zu verschieben."
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Freiform-Gestaltung"
 
 #: Pinta.Tools/FloodTool.cs:71
 msgid "Fill mode"
@@ -559,6 +574,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"Klicken und ziehen um eine Ellipse zu zeichnen (Rechtsklick für "
+"Sekundärfarbe). Shift gedrückthalten um daraus einen Kreis zu machen."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
@@ -569,6 +586,8 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Linksklick um den Cursor zu platzieren, dann den gewünschten Text eintippen. "
+"Textfarbe ist Vordergrundfarbe."
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
@@ -630,7 +649,7 @@ msgstr ""
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Einfärben"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
@@ -642,7 +661,7 @@ msgstr "Radiergummi"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr ""
+msgstr "Klicken und gedrückt lassen um einen Teil des Bildes zu löschen."
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
@@ -683,7 +702,7 @@ msgstr "Unschärfe"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr ""
+msgstr "Tintenskizze"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
@@ -697,7 +716,7 @@ msgstr "Radiale Unschärfe"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr ""
+msgstr "Defokussieren"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
@@ -817,11 +836,11 @@ msgstr "Farbkurven"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr ""
+msgstr "Ebenen"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr ""
+msgstr "Automatische Tonwertkorrektur"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 #: SoftenPortraitData dialog
@@ -851,7 +870,7 @@ msgstr "Helligkeit/Kontrast"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr ""
+msgstr "Ebenenabgleich"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
@@ -893,7 +912,7 @@ msgstr "Blau"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr ""
+msgstr "Verknüpft"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
@@ -976,7 +995,7 @@ msgstr "Bilddatei öffnen"
 
 #: Pinta.Core/Actions/LayerActions.cs:177
 msgid "Import From File"
-msgstr ""
+msgstr "Aus Datei importieren"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -1103,7 +1122,7 @@ msgstr "Um 180° drehen"
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:121
 msgid "Flatten"
-msgstr ""
+msgstr "Auf eine Ebene reduzieren"
 
 #: Pinta.Core/Actions/EditActions.cs:59
 msgid "Undo"
@@ -1214,7 +1233,7 @@ msgstr "Einen Fehler melden"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr ""
+msgstr "Diese Anwendung übersetzen"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
@@ -1276,7 +1295,7 @@ msgstr "Ebene"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "Menge"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1286,15 +1305,15 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "Winkel"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "Kantenglättung"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr ""
+msgstr "Mischmodus"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
@@ -1302,7 +1321,7 @@ msgstr "Helligkeit"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "Pinselgröße"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
@@ -1310,7 +1329,7 @@ msgstr "Zellgröße"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "Mittelpunkt"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
@@ -1318,7 +1337,7 @@ msgstr "Zentriert"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "Grobkörnigkeit"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
@@ -1326,11 +1345,11 @@ msgstr "Farbbereich"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "Farbsättigung"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "Färbung"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
@@ -1338,16 +1357,16 @@ msgstr "Kontrast"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "Deckkraft"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "Abstand"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "Kantenverhalten"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
@@ -1356,7 +1375,7 @@ msgstr "Faktor"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "Fragmente"
 
 #: TileEffect dialog
 msgid "Ink Outline"
@@ -1376,15 +1395,15 @@ msgstr "Beleuchtung"
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "Versatz"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "Stiftdicke"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "Perzentil"
 
 #: RadialBlurEffect dialog
 msgid "Power"
@@ -1400,15 +1419,15 @@ msgstr "Qualität"
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "Drehung"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "Sättigungsprozentwert"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "Skalieren"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
@@ -1416,7 +1435,7 @@ msgstr "Startwert"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "Weichheit"
 
 #: OutlineEffect dialog
 msgid "Strength"
@@ -1432,13 +1451,16 @@ msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "Wärme"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"Niedrige Qualität ist für eine schnelle Vorschau, kleine Bilder und kleine "
+"Winkel gedacht. Hohe Qualität für endgültige Ergebnisse, große Bilder und "
+"große Winkel."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."

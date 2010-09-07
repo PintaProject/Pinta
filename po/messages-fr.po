@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-25 05:48+0000\n"
-"Last-Translator: Kwentin <Unknown>\n"
+"PO-Revision-Date: 2010-07-07 13:03+0000\n"
+"Last-Translator: Simon Leblanc <contact@leblanc-simon.eu>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-28 02:32+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -63,7 +63,7 @@ msgstr "_Aide"
 
 #: Pinta/MainWindow.cs:272
 msgid "Show Pad"
-msgstr ""
+msgstr "Afficher la fenêtre"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -112,7 +112,7 @@ msgstr "Contributeurs à cette version"
 
 #: Pinta/Dialogs/AboutDialog.cs:107
 msgid "Previous Contributors"
-msgstr "Conributeurs précédents"
+msgstr "Contributeurs précédents"
 
 #: Pinta/Dialogs/AboutDialog.cs:116
 msgid "translator-credits"
@@ -134,7 +134,7 @@ msgstr "Basé sur le travail de Paint.NET"
 
 #: Pinta/Dialogs/AboutDialog.cs:133
 msgid "Using some icons from:"
-msgstr "Utiliser les icônes provenant de :"
+msgstr "Utilisation d'icônes provenant de :"
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
@@ -329,7 +329,7 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "Après la sélection"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
@@ -353,7 +353,7 @@ msgstr "Sélection Lasso"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Cliquez et déposez pour définir la zone de selection"
+msgstr "Cliquer et déposer pour définir la zone de selection"
 
 #: Pinta.Tools/ZoomTool.cs:49
 #: MandelbrotFractalEffect dialog
@@ -366,7 +366,7 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Clique gauche pour agrandir. Clique droit pour réduire. Clique et déposer "
+"Clic gauche pour agrandir. Clique droit pour réduire. Cliquer et déposer "
 "pour agrandir la sélection."
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
@@ -407,13 +407,15 @@ msgstr "Déplacement"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Cliquer et déplacer pour naviguer au seing des images."
+msgstr "Cliquer et déplacer pour naviguer dans l'image."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Clic gauche pour dessiner une forme libre,d'une largeur d'un pixel avec la "
+"couleur principale, clic droit pour utiliser la couleur secondaire"
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
@@ -501,7 +503,7 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Clique gauche pour dessiner avec une première couleur, clique droit pour une "
+"Clic gauche pour dessiner avec une première couleur, clic droit pour une "
 "deuxième couleur."
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
@@ -513,8 +515,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
-"Cliquer et glisser pour faire une sélection rectangulaire. Maintenir Shift "
-"pour contraindre la sélection à  un carré."
+"Cliquer et glisser pour faire une sélection rectangulaire. Maintenir la "
+"touche Majuscule pour contraindre la sélection à un carré."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -571,7 +573,7 @@ msgid ""
 "shift to constrain to a circle."
 msgstr ""
 "Cliquer et glisser pour dessiner une ellipse (clic droit pour la couleur "
-"secondaire). Maintenez Shift pour forcer uncercle."
+"secondaire). Maintenez la touche Majuscule pour forcer un cercle."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
@@ -619,7 +621,7 @@ msgstr "Sélection Baguette Magique"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr "Cliquer pôur sélectionner une région de couleur similaire"
+msgstr "Cliquer pour sélectionner une région de couleur similaire"
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -630,8 +632,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
-"Cliquer et glisser pour dessiner un rectangle (clic gacuhe pour la couleur "
-"secondaire). Maintenir Shift pour faire un carré."
+"Cliquer et glisser pour dessiner un rectangle (clic gauche pour la couleur "
+"secondaire). Maintenir la touche Majuscule pour faire un carré."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
@@ -641,7 +643,7 @@ msgstr "Ligne"
 msgid ""
 "Left click to draw with primary color, right click for secondary color."
 msgstr ""
-"Clique gauche pour dessiner avec une première couleur, clique droit avec une "
+"Clic gauche pour dessiner avec une première couleur, clic droit avec une "
 "deuxième couleur."
 
 #: Pinta.Tools/RecolorTool.cs:59
@@ -659,7 +661,7 @@ msgstr "Gomme"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr "Cliquer et déplacer pour effacer une portion d'image."
+msgstr "Cliquer et déplacer pour effacer une portion de l'image."
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
@@ -1231,7 +1233,7 @@ msgstr "Rapporter un bug"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr "Traduir ce logiciel"
+msgstr "Traduire ce logiciel"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
