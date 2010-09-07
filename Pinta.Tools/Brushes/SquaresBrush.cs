@@ -53,9 +53,9 @@ namespace Pinta.Tools.Brushes
 			G.LineTo (x - px, y - py);
 			G.LineTo (lastX - px, lastY - py);
 
-			G.Stroke ();
+			G.StrokePreserve ();
 
-			return Gdk.Rectangle.Zero;
+			return G.StrokeExtents ().ToGdkRectangle ();
 		}
 	}
 }

@@ -46,8 +46,10 @@ namespace Pinta.Tools.Brushes
 		{
 			G.MoveTo (lastX, lastY);
 			G.LineTo (x, y);
-			G.Stroke ();
-			return Gdk.Rectangle.Zero;
+			G.StrokePreserve ();
+			
+			
+			return G.StrokeExtents ().ToGdkRectangle ();
 		}
 	}
 }
