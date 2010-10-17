@@ -114,6 +114,18 @@ namespace Pinta.Core
 			toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
 			View.CreateToolBar (toolbar);
+
+			toolbar.AppendItem (new SeparatorToolItem ());
+			toolbar.AppendItem (new ToolBarImage ("StatusBar.CursorXY.png"));
+
+			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
+
+			toolbar.AppendItem (cursor);
+
+			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
+				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
+				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
+			};
 		}
 		
 		public void RegisterHandlers ()

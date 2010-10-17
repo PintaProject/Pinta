@@ -58,6 +58,7 @@ namespace Pinta.Core
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
 			Settings = new SettingsManager ();
+			Chrome = new ChromeManager ();
 		}
 		
 		public static void Initialize (Toolbar toolToolBar,
@@ -65,7 +66,6 @@ namespace Pinta.Core
 		                               Window mainWindow,
 		                               IProgressDialog progressDialog)
 		{
-			Chrome = new ChromeManager ();
 			Chrome.Initialize (toolToolBar,
 			                   drawingArea,
 			                   mainWindow,

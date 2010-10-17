@@ -635,26 +635,8 @@ namespace Pinta
 				
 			dock.CurrentLayout = "Default";
 		}
-		
-		//private void CreateStatusBar ()
-		//{
-		//        Gtk.Image i = new Gtk.Image (PintaCore.Resources.GetIcon ("StatusBar.CursorXY.png"));
-		//        i.Show ();
-
-		//        statusbar1.Add (i);
-		//        Gtk.Box.BoxChild box = (Gtk.Box.BoxChild)statusbar1[i];
-		//        box.Position = 2;
-		//        box.Fill = false;
-		//        box.Expand = false;
-
-		//        PintaCore.Chrome.StatusBarTextChanged += delegate (object sender, TextChangedEventArgs e) { label5.Text = e.Text; };
-
-		//        PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-		//                Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
-		//                CursorPositionLabel.Text = string.Format ("{0}, {1}", pt.X, pt.Y);
-		//        };
-		//}
 		#endregion
+
 		#region rulers
 		private HRuler hruler;
 		private VRuler vruler;

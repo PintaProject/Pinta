@@ -39,5 +39,10 @@ namespace Pinta.Core
 			Add (l);
 			Show ();
 		}
+
+		public string Text {
+			get { return (Child as Label).Text; }
+			set { (Child as Label).Text = value; }
+		}
 	}
 }
