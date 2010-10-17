@@ -872,7 +872,7 @@ Luminosity</property>
         <child>
           <widget class="Gtk.Label" id="labelTip">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Tip : Right-click to remove control points.</property>
+            <property name="LabelProp" translatable="yes">Tip: Right-click to remove control points.</property>
           </widget>
           <packing>
             <property name="Position">4</property>
