@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Pinta.Gui.Widgets</RootNamespace>
+    <AssemblyName>Pinta.Gui.Widgets</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <CodePage>65001</CodePage>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DialogAttributes.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorPanelWidget.cs" />
+    <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
+    <Compile Include="Widgets\Canvas\GridRenderer.cs" />
+    <Compile Include="Widgets\ColorPaletteWidget.cs" />
+    <Compile Include="Widgets\ColorPanelWidget.cs" />
+    <Compile Include="Widgets\History\HistoryTreeView.cs" />
+    <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
+    <Compile Include="Dialogs\SimpleEffectDialog.cs" />
+    <Compile Include="Widgets\AnglePickerGraphic.cs" />
+    <Compile Include="Widgets\AnglePickerWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.AnglePickerWidget.cs" />
+    <Compile Include="Widgets\Canvas\PintaCanvas.cs" />
+    <Compile Include="Widgets\Layers\CellRendererSurface.cs" />
+    <Compile Include="Widgets\Layers\LayersListWidget.cs" />
+    <Compile Include="Widgets\PointPickerGraphic.cs" />
+    <Compile Include="Widgets\PointPickerWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPickerWidget.cs" />
+    <Compile Include="Widgets\ComboBoxWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ComboBoxWidget.cs" />
+    <Compile Include="Widgets\ReseedButtonWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ReseedButtonWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorGradientWidget.cs" />
+    <Compile Include="Widgets\ColorGradientWidget.cs" />
+    <Compile Include="gtk-gui\Pinta.Gui.Widgets.HistogramWidget.cs" />
+    <Compile Include="Widgets\HistogramWidget.cs" />
+    <Compile Include="Widgets\ToolBoxWidget.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
+      <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
+      <Name>Pinta.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+</Project>
