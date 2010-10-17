@@ -70,7 +70,9 @@ namespace Pinta.Tools
 
 				// Reset FillRule to the default
 				g.FillRule = FillRule.Winding;
-				g.AppendPath (g.CreatePolygonPath (polygonSet));
+
+				using (Path poly = g.CreatePolygonPath (polygonSet))
+					g.AppendPath (poly);
 
 				g.Antialias = Antialias.Subpixel;
 
