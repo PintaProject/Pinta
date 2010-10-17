@@ -127,7 +127,7 @@ namespace Pinta {
             // Container child hbox1.Gtk.Box+BoxChild
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("%");
+            this.label1.LabelProp = "%";
             this.hbox1.Add(this.label1);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox1[this.label1]));
             w4.Position = 2;

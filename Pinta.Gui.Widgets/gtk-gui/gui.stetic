@@ -283,7 +283,7 @@
                 <child>
                   <widget class="Gtk.Label" id="label2">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">X :</property>
+                    <property name="LabelProp" translatable="no">X:</property>
                   </widget>
                   <packing>
                     <property name="AutoSize">True</property>
@@ -300,7 +300,7 @@
                 <child>
                   <widget class="Gtk.Label" id="label3">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">Y :</property>
+                    <property name="LabelProp" translatable="no">Y:</property>
                   </widget>
                   <packing>
                     <property name="TopAttach">1</property>

@@ -594,7 +594,7 @@
                 <child>
                   <widget class="Gtk.Label" id="label1">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">%</property>
+                    <property name="LabelProp" translatable="no">%</property>
                   </widget>
                   <packing>
                     <property name="Position">2</property>
@@ -878,7 +878,7 @@
                 <child>
                   <widget class="Gtk.Label" id="label1">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">%</property>
+                    <property name="LabelProp" translatable="no">%</property>
                   </widget>
                   <packing>
                     <property name="Position">2</property>
