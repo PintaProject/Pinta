@@ -107,9 +107,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.2010.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
-      <Name>Pinta.Core</Name>
+      <Name>Pinta.Core.2010</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
