@@ -1,58 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-  <ItemGroup>
-    <LocalePo Include="../po/messages-ca.po">
-      <Code>ca</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-cs.po">
-      <Code>cs</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-de.po">
-      <Code>de</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-el.po">
-      <Code>el</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-es.po">
-      <Code>es</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-fi.po">
-      <Code>fi</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-fr.po">
-      <Code>fr</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-he.po">
-      <Code>he</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-hr.po">
-      <Code>hr</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-it.po">
-      <Code>it</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-ja.po">
-      <Code>ja</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-ko.po">
-      <Code>ko</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-ru.po">
-      <Code>ru</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-sk.po">
-      <Code>sk</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-th.po">
-      <Code>th</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-tr.po">
-      <Code>tr</Code>
-    </LocalePo>
-    <LocalePo Include="../po/messages-uk.po">
-      <Code>uk</Code>
-    </LocalePo>
-  </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -143,10 +90,6 @@
     </Reference>
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
-    <Reference Include="System.ComponentModel.Composition, Version=2010.2.11.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.ComponentModel.Composition.dll</HintPath>
-    </Reference>
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -222,71 +165,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.2010.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
-      <Name>Pinta.Core</Name>
+      <Name>Pinta.Core.2010</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj">
+    <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.2010.csproj">
       <Project>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</Project>
-      <Name>Pinta.Gui.Widgets</Name>
+      <Name>Pinta.Gui.Widgets.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Composition.ComponentModel\System.ComponentModel.Composition.2010.csproj">
+      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
+      <Name>System.ComponentModel.Composition.2010</Name>
     </ProjectReference>
   </ItemGroup>
-  <Target Name="Msgfmt">
-    <MakeDir Directories="$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES" />
-    <Exec Command="msgfmt &quot;../po/messages-%(LocalePo.Code).po&quot; -o &quot;$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo&quot;" />
-  </Target>
-  <PropertyGroup>
-    <InstallPrefix>/usr/local</InstallPrefix>
-  </PropertyGroup>
-  <ItemGroup>
-    <BinFiles Include="$(OutputPath)/Pinta.exe" />
-    <BinFiles Include="$(OutputPath)/Pinta.*.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <Target Name="Install">
-    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(InstallPrefix)/lib/pinta" />
-    <MakeDir Directories="$(InstallPrefix)/bin" />
-    <Copy SourceFiles="$(OutputPath)/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(InstallPrefix)/share/locale/%(LocalePo.Code)/LC_MESSAGES" />
-    <Copy SourceFiles="../xdg/pinta.1" DestinationFolder="$(InstallPrefix)/share/man/man1" />
-    <Copy SourceFiles="../xdg/pinta.desktop" DestinationFolder="$(InstallPrefix)/share/applications" />
-    <Copy SourceFiles="../xdg/pinta.xpm" DestinationFolder="$(InstallPrefix)/share/pixmaps" />
-    <Copy SourceFiles="../xdg/16x16/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/16x16/apps" />
-    <Copy SourceFiles="../xdg/22x22/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/22x22/apps" />
-    <Copy SourceFiles="../xdg/24x24/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/24x24/apps" />
-    <Copy SourceFiles="../xdg/32x32/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/32x32/apps" />
-    <Copy SourceFiles="../xdg/96x96/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/96x96/apps" />
-    <Copy SourceFiles="../xdg/scalable/pinta.svg" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/scalable/apps" />
-    <Exec Command="gzip -f &quot;$(InstallPrefix)/share/man/man1/pinta.1&quot;" />
-  </Target>
-  <Target Name="Uninstall">
-    <Exec Command="rm -rf &quot;$(InstallPrefix)/lib/pinta&quot;" />
-    <Delete Files="$(InstallPrefix)/bin/pinta" />
-    <Delete Files="$(InstallPrefix)/share/locale/%(LocalePo.Code)/LC_MESSAGES/pinta.mo" />
-    <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1" />
-    <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1.gz" />
-    <Delete Files="$(InstallPrefix)/share/applications/pinta.desktop" />
-    <Delete Files="$(InstallPrefix)/share/pixmaps/pinta.xpm" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/16x16/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/22x22/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/24x24/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/32x32/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/96x96/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/scalable/apps/pinta.svg" />
-  </Target>
 </Project>

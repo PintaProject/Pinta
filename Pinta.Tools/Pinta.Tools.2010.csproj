@@ -59,11 +59,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="System.ComponentModel.Composition, Version=2010.2.11.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.ComponentModel.Composition.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Cairo" />
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
@@ -108,10 +103,14 @@
     <Compile Include="Brushes\CircleBrush.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.2010.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
-      <Name>Pinta.Core</Name>
+      <Name>Pinta.Core.2010</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Composition.ComponentModel\System.ComponentModel.Composition.2010.csproj">
+      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
+      <Name>System.ComponentModel.Composition.2010</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
