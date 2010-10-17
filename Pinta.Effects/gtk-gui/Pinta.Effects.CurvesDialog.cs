@@ -184,7 +184,7 @@ namespace Pinta.Effects
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
 			this.labelTip = new global::Gtk.Label ();
 			this.labelTip.Name = "labelTip";
-			this.labelTip.LabelProp = global::Mono.Unix.Catalog.GetString ("Tip : Right-click to remove control points.");
+			this.labelTip.LabelProp = global::Mono.Unix.Catalog.GetString ("Tip: Right-click to remove control points.");
 			w1.Add (this.labelTip);
 			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(w1[this.labelTip]));
 			w16.Position = 4;

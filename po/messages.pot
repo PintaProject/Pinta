@@ -904,7 +904,7 @@ msgid "Blue "
 msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
+msgid "Tip: Right-click to remove control points."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:64
