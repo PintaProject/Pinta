@@ -44,8 +44,8 @@ namespace Pinta.Tools.Brushes
 		
 		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
 		{
-			int size = Random.Next (2, 20);
-			Rectangle r = new Rectangle (x + Random.Next (-15, 15), y + Random.Next (-15, 15), size, size);
+			int size = Random.Next (2, (int)G.LineWidth);
+			Rectangle r = new Rectangle (x - (int)G.LineWidth + Random.Next (-15, 15), y - (int)G.LineWidth + Random.Next (-15, 15), size, size);
 
 			double rx = r.Width / 2;
 			double ry = r.Height / 2;
