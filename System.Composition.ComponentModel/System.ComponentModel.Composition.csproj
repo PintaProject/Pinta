@@ -38,8 +38,6 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{35E8FC5B-D026-4D49-A1F7-ED0A0265FF7B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>System.ComponentModel.Composition.</RootNamespace>
-    <AssemblyName>System.ComponentModel.Composition.2010</AssemblyName>
   </PropertyGroup>
   <PropertyGroup>
     <ProductVersion>10.0.20729</ProductVersion>
