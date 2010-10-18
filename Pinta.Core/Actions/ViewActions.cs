@@ -133,15 +133,13 @@ namespace Pinta.Core
 				PintaCore.Workspace.Invalidate ();
 			};
 
-			var isFullscreen = true;
+			var isFullscreen = false;
 
 			Fullscreen.Activated += (foo, bar) => {
-				if (!isFullscreen) {
+				if (!isFullscreen)
 					PintaCore.Chrome.MainWindow.Fullscreen ();
-				}
-				else {
+				else
 					PintaCore.Chrome.MainWindow.Unfullscreen ();
-				}
 
 				isFullscreen = !isFullscreen;
 			};
