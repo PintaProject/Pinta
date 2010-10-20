@@ -1,0 +1,217 @@
+
+EXTRA_DIST =  
+
+# Warning: This is an automatically generated file, do not edit!
+
+if ENABLE_DEBUG
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize-
+ASSEMBLY = bin/Debug/System.ComponentModel.Composition.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
+
+
+endif
+
+if ENABLE_RELEASE
+ASSEMBLY_COMPILER_COMMAND = gmcs
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize-
+ASSEMBLY = bin/Debug/System.ComponentModel.Composition.dll
+ASSEMBLY_MDB = 
+COMPILE_TARGET = library
+PROJECT_REFERENCES = 
+BUILD_DIR = bin/Debug
+
+
+endif
+
+AL=al2
+SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
+
+
+RESGEN=resgen2
+	
+all: $(ASSEMBLY) 
+
+FILES = \
+	AssemblyInfo.cs \
+	Microsoft/Internal/Assumes.cs \
+	Microsoft/Internal/AttributeServices.cs \
+	Microsoft/Internal/Collections/CollectionServices.cs \
+	Microsoft/Internal/Collections/ConditionalWeakTable.cs \
+	Microsoft/Internal/Collections/CollectionServices.CollectionOfObject.cs \
+	Microsoft/Internal/Collections/EnumerableCardinality.cs \
+	Microsoft/Internal/Collections/ReadOnlyDictionary.cs \
+	Microsoft/Internal/Collections/ReadOnlyDictionaryDebuggerProxy.cs \
+	Microsoft/Internal/Collections/WeakReferenceCollection.cs \
+	Microsoft/Internal/ContractServices.cs \
+	Microsoft/Internal/Assumes.InternalErrorException.cs \
+	Microsoft/Internal/SilverlightReflectionInvoke.cs \
+	Microsoft/Internal/GenerationServices.cs \
+	Microsoft/Internal/LazyServices.cs \
+	Microsoft/Internal/Lock.cs \
+	Microsoft/Internal/Lock.Reader.cs \
+	Microsoft/Internal/Lock.Writer.cs \
+	Microsoft/Internal/Requires.cs \
+	Microsoft/Internal/Runtime/Serialization/SerializationServices.cs \
+	Microsoft/Internal/StringComparers.cs \
+	Microsoft/Internal/ReflectionServices.cs \
+	Strings.Designer.cs \
+	SuppressMessages.cs \
+	SuppressMessagesBaselined.cs \
+	System/ComponentModel/Composition/AttributedModelServices.cs \
+	System/ComponentModel/Composition/AttributedModel/AttributedModelDiscovery.cs \
+	System/ComponentModel/Composition/AttributedModel/AttributedPartCreationInfo.cs \
+	System/ComponentModel/Composition/AttributedModel/AttributedExportDefinition.cs \
+	System/ComponentModel/Composition/Diagnostics/CompositionTrace.cs \
+	System/ComponentModel/Composition/Diagnostics/CompositionTraceId.cs \
+	System/ComponentModel/Composition/ConstraintServices.cs \
+	System/ComponentModel/Composition/CompositionContractMismatchException.cs \
+	System/ComponentModel/Composition/CompositionError.cs \
+	System/ComponentModel/Composition/CompositionResultOfT.cs \
+	System/ComponentModel/Composition/Hosting/CatalogExportProvider.PartCreatorExport.cs \
+	System/ComponentModel/Composition/Hosting/CompositionLock.cs \
+	System/ComponentModel/Composition/Diagnostics/CompositionTraceSource.cs \
+	System/ComponentModel/Composition/Diagnostics/TraceWriter.cs \
+	System/ComponentModel/Composition/Diagnostics/TraceSourceTraceWriter.cs \
+	System/ComponentModel/Composition/Diagnostics/SilverlightTraceWriter.cs \
+	System/ComponentModel/Composition/InheritedExportAttribute.cs \
+	System/ComponentModel/Composition/ExportServices.DisposableLazy.cs \
+	System/ComponentModel/Composition/Hosting/AtomicComposition.cs \
+	System/ComponentModel/Composition/Hosting/AtomicCompositionExtensions.cs \
+	System/ComponentModel/Composition/Hosting/CompositionConstants.cs \
+	System/ComponentModel/Composition/Hosting/CatalogExportProvider.CatalogChangeProxy.cs \
+	System/ComponentModel/Composition/Primitives/IPartCreatorImportDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/PartCreatorExportDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/PartCreatorParameterImportDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/PartCreatorMemberImportDefinition.cs \
+	System/ComponentModel/Composition/IAttributedImport.cs \
+	System/ComponentModel/Composition/ImportCardinalityMismatchException.cs \
+	System/ComponentModel/Composition/ImportManyAttribute.cs \
+	System/ComponentModel/Composition/ErrorBuilder.cs \
+	System/ComponentModel/Composition/CompositionErrorDebuggerProxy.cs \
+	System/ComponentModel/Composition/ExceptionBuilder.cs \
+	System/ComponentModel/Composition/ExportCardinalityCheckResult.cs \
+	System/ComponentModel/Composition/ExportServices.cs \
+	System/ComponentModel/Composition/Hosting/AggregateCatalog.cs \
+	System/ComponentModel/Composition/Hosting/AggregateExportProvider.cs \
+	System/ComponentModel/Composition/Hosting/AssemblyCatalog.cs \
+	System/ComponentModel/Composition/Hosting/AssemblyCatalogDebuggerProxy.cs \
+	System/ComponentModel/Composition/Hosting/CatalogExportProvider.CatalogExport.cs \
+	System/ComponentModel/Composition/Hosting/CatalogExportProvider.cs \
+	System/ComponentModel/Composition/Hosting/ComposablePartCatalogChangeEventArgs.cs \
+	System/ComponentModel/Composition/Hosting/ComposablePartCatalogCollection.cs \
+	System/ComponentModel/Composition/Hosting/ComposablePartExportProvider.cs \
+	System/ComponentModel/Composition/Hosting/CompositionBatch.cs \
+	System/ComponentModel/Composition/Hosting/CompositionBatch.SingleExportComposablePart.cs \
+	System/ComponentModel/Composition/Hosting/CompositionContainer.cs \
+	System/ComponentModel/Composition/Hosting/CompositionServices.cs \
+	System/ComponentModel/Composition/Hosting/ExportProvider.cs \
+	System/ComponentModel/Composition/Hosting/ExportProvider.GetExportOverrides.cs \
+	System/ComponentModel/Composition/Hosting/ExportsChangeEventArgs.cs \
+	System/ComponentModel/Composition/Hosting/ImportEngine.RecompositionManager.cs \
+	System/ComponentModel/Composition/Hosting/ImportEngine.EngineContext.cs \
+	System/ComponentModel/Composition/Hosting/ImportEngine.PartManager.cs \
+	System/ComponentModel/Composition/Hosting/ImportEngine.cs \
+	System/ComponentModel/Composition/Hosting/INotifyComposablePartCatalogChanged.cs \
+	System/ComponentModel/Composition/Hosting/TypeCatalog.cs \
+	System/ComponentModel/Composition/ICompositionError.cs \
+	System/ComponentModel/Composition/ImportingConstructorAttribute.cs \
+	System/ComponentModel/Composition/IPartImportsSatisfiedNotification.cs \
+	System/ComponentModel/Composition/MetadataServices.cs \
+	System/ComponentModel/Composition/Primitives/ComposablePart.cs \
+	System/ComponentModel/Composition/Primitives/ComposablePartCatalog.cs \
+	System/ComponentModel/Composition/Primitives/ComposablePartCatalogDebuggerProxy.cs \
+	System/ComponentModel/Composition/Primitives/ComposablePartDefinition.cs \
+	System/ComponentModel/Composition/Primitives/ComposablePartException.cs \
+	System/ComponentModel/Composition/Primitives/CompositionElement.cs \
+	System/ComponentModel/Composition/Primitives/CompositionElementDebuggerProxy.cs \
+	System/ComponentModel/Composition/Primitives/CompositionElementExtensions.cs \
+	System/ComponentModel/Composition/Primitives/ContractBasedImportDefinition.cs \
+	System/ComponentModel/Composition/Primitives/Export.cs \
+	System/ComponentModel/Composition/Primitives/ExportDefinition.cs \
+	System/ComponentModel/Composition/Primitives/ExportedDelegate.cs \
+	System/ComponentModel/Composition/Primitives/ICompositionElement.cs \
+	System/ComponentModel/Composition/Primitives/ImportCardinality.cs \
+	System/ComponentModel/Composition/Primitives/ImportDefinition.cs \
+	System/ComponentModel/Composition/Primitives/SerializableCompositionElement.cs \
+	System/ComponentModel/Composition/ReflectionModel/DisposableReflectionComposablePart.cs \
+	System/ComponentModel/Composition/ReflectionModel/IReflectionPartCreationInfo.cs \
+	System/ComponentModel/Composition/ReflectionModel/LazyMemberInfo.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionImportDefinition.cs \
+	Microsoft/Internal/ReflectionInvoke.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionItemType.cs \
+	System/ComponentModel/Composition/MetadataViewProvider.cs \
+	System/ComponentModel/Composition/PartCreationPolicyAttribute.cs \
+	System/ComponentModel/Composition/PartMetadataAttribute.cs \
+	System/ComponentModel/Composition/PartNotDiscoverableAttribute.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionExtensions.cs \
+	System/ComponentModel/Composition/ReflectionModel/ImportingParameter.cs \
+	System/ComponentModel/Composition/ReflectionModel/ImportingItem.cs \
+	System/ComponentModel/Composition/ReflectionModel/ExportingMember.cs \
+	System/ComponentModel/Composition/ReflectionModel/ImportingMember.cs \
+	System/ComponentModel/Composition/ReflectionModel/ImportType.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionComposablePart.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionComposablePartDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionMemberExportDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionMemberImportDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionModelServices.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionParameterImportDefinition.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionWritableMember.cs \
+	System/ComponentModel/Composition/MetadataViewGenerator.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionField.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionMember.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionParameter.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionProperty.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionType.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionItem.cs \
+	System/ComponentModel/Composition/ReflectionModel/ReflectionMethod.cs \
+	System/ComponentModel/Composition/ChangeRejectedException.cs \
+	System/ComponentModel/Composition/CompositionException.cs \
+	System/ComponentModel/Composition/CompositionErrorId.cs \
+	System/ComponentModel/Composition/CompositionResult.cs \
+	System/ComponentModel/Composition/ContractNameServices.cs \
+	System/ComponentModel/Composition/CreationPolicy.cs \
+	System/ComponentModel/Composition/ExportAttribute.cs \
+	System/ComponentModel/Composition/ExportMetadataAttribute.cs \
+	System/ComponentModel/Composition/ICompositionService.cs \
+	System/ComponentModel/Composition/ImportAttribute.cs \
+	System/ComponentModel/Composition/MetadataAttributeAttribute.cs \
+	System/Lazy.cs \
+	System/LazyOfTTMetadata.cs \
+	System/Tuple.cs \
+	System/ComponentModel/Composition/Hosting/DirectoryCatalog.cs \
+	System/ComponentModel/Composition/Hosting/DirectoryCatalog.DirectoryCatalogDebuggerProxy.cs 
+
+DATA_FILES = 
+
+RESOURCES = \
+	Strings.resx,System.ComponentModel.Composition.Strings.resources 
+
+EXTRAS = 
+
+REFERENCES =  \
+	mscorlib \
+	System \
+	System.Core
+
+DLL_REFERENCES = 
+
+CLEANFILES = 
+
+include $(top_srcdir)/Makefile.include
+
+
+
+
+$(eval $(call emit_resgen_targets))
+$(build_xamlg_list): %.xaml.g.cs: %.xaml
+	xamlg '$<'
+
+$(ASSEMBLY_MDB): $(ASSEMBLY)
+
+$(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+	mkdir -p $(shell dirname $(ASSEMBLY))
+	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
