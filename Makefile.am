@@ -11,3 +11,8 @@ EXTRA_DIST = \
 	expansions.m4 \
 	lib/ICSharpCode.SharpZipLib.dll
 
+
+# Targets
+
+run: 
+	(cd bin; mono --debug Pinta.exe)
