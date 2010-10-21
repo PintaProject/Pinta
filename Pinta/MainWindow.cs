@@ -94,12 +94,16 @@ namespace Pinta
 				PintaCore.Settings.PutSetting ("window-maximized", (this.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
 				PintaCore.Settings.PutSetting ("ruler-metric", (int) hruler.Metric);
 				PintaCore.Settings.PutSetting ("ruler-show", PintaCore.Actions.View.Rulers.Active);
+				PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
 				PintaCore.Settings.SaveSettings ();
 			};
 
 			ChangeRulersUnit ((MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels));
 			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-show", false);
 			dialog_handler.UpdateRulerVisibility ();
+
+			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+			ToggleToolbar (PintaCore.Actions.View.ToolBar.Active);
 			
 			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
@@ -128,6 +132,13 @@ namespace Pinta
 				}
 			}
 		}
+
+		#region Public Methods
+		public void ToggleToolbar (bool visible)
+		{
+			main_toolbar.Visible = visible;
+		}
+		#endregion
 
 		#region Action Handlers
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)

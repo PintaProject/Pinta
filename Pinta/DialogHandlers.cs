@@ -56,6 +56,7 @@ namespace Pinta
 			
 			PintaCore.Actions.Layers.Properties.Activated += HandlePintaCoreActionsLayersPropertiesActivated;
 
+			PintaCore.Actions.View.ToolBar.Toggled += HandlePintaCoreActionsViewToolbarToggled;
 			PintaCore.Actions.View.Rulers.Toggled += HandlePintaCoreActionsViewRulersToggled;
 			PintaCore.Actions.View.Pixels.Activated += HandlePixelsActivated;
 			PintaCore.Actions.View.Inches.Activated += HandleInchesActivated;
@@ -287,6 +288,11 @@ namespace Pinta
 		internal void UpdateRulerVisibility ()
 		{
 			HandlePintaCoreActionsViewRulersToggled (PintaCore.Actions.View.Rulers, EventArgs.Empty);
+		}
+
+		private void HandlePintaCoreActionsViewToolbarToggled (object sender, EventArgs e)
+		{
+			main_window.ToggleToolbar (((ToggleAction)sender).Active);
 		}
 
 		private void HandlePintaCoreActionsViewRulersToggled (object sender, EventArgs e)

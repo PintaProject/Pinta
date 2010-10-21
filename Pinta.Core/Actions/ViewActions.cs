@@ -37,6 +37,7 @@ namespace Pinta.Core
 		public Gtk.Action ZoomToWindow { get; private set; }
 		public Gtk.Action ZoomToSelection { get; private set; }
 		public Gtk.Action ActualSize { get; private set; }
+		public Gtk.ToggleAction ToolBar { get; private set; }
 		public Gtk.ToggleAction PixelGrid { get; private set; }
 		public Gtk.ToggleAction Rulers { get; private set; }
 		public Gtk.RadioAction Pixels { get; private set; }
@@ -63,6 +64,7 @@ namespace Pinta.Core
 			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Zoom to Window"), null, Stock.ZoomFit);
 			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
 			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Actual Size"), null, Stock.Zoom100);
+			ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("Toolbar"), null, null);
 			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
 			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
 			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("Pixels"), null, null, 0);
@@ -97,6 +99,7 @@ namespace Pinta.Core
 			//menu.Append (ZoomToSelection.CreateAcceleratedMenuItem (Gdk.Key.B, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (ActualSize.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
+			menu.Append (ToolBar.CreateMenuItem ());
 			menu.Append (PixelGrid.CreateMenuItem ());
 			menu.Append (Rulers.CreateMenuItem ());
 			menu.Append (Fullscreen.CreateAcceleratedMenuItem (Gdk.Key.F11, Gdk.ModifierType.None));
