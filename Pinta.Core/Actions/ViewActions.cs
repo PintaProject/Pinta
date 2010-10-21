@@ -39,13 +39,12 @@ namespace Pinta.Core
 		public Gtk.Action ActualSize { get; private set; }
 		public Gtk.ToggleAction PixelGrid { get; private set; }
 		public Gtk.ToggleAction Rulers { get; private set; }
-		public Gtk.Action Pixels { get; private set; }
-		public Gtk.Action Inches { get; private set; }
-		public Gtk.Action Centimeters { get; private set; }
+		public Gtk.RadioAction Pixels { get; private set; }
+		public Gtk.RadioAction Inches { get; private set; }
+		public Gtk.RadioAction Centimeters { get; private set; }
 		public Gtk.Action Fullscreen { get; private set; }
 
 		public ToolBarComboBox ZoomComboBox { get; private set; }
-		public ToolBarComboBox UnitComboBox { get; private set; }
 		
 		public ViewActions ()
 		{
@@ -66,13 +65,16 @@ namespace Pinta.Core
 			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Actual Size"), null, Stock.Zoom100);
 			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
 			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
-			Pixels = new Gtk.Action ("Pixels", Catalog.GetString ("Pixels"), null, null);
-			Inches = new Gtk.Action ("Inches", Catalog.GetString ("Inches"), null, null);
-			Centimeters = new Gtk.Action ("Centimeters", Catalog.GetString ("Centimeters"), null, null);
+			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("Pixels"), null, null, 0);
+			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("Inches"), null, null, 1);
+			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
 			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
-
+			
 			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
-			UnitComboBox = new ToolBarComboBox (100, 0, false, Catalog.GetString ("Pixels"), Catalog.GetString ("Inches"), Catalog.GetString ("Centimeters"));
+
+			// Make sure these are the same group so only one will be selected at a time
+			Inches.Group = Pixels.Group;
+			Centimeters.Group = Pixels.Group;
 		}
 
 		#region Initialization
@@ -99,9 +101,12 @@ namespace Pinta.Core
 			menu.Append (Rulers.CreateMenuItem ());
 			menu.Append (Fullscreen.CreateAcceleratedMenuItem (Gdk.Key.F11, Gdk.ModifierType.None));
 			menu.AppendSeparator ();
-			menu.Append (Pixels.CreateMenuItem ());
-			menu.Append (Inches.CreateMenuItem ());
-			menu.Append (Centimeters.CreateMenuItem ());
+
+			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Mono.Unix.Catalog.GetString ("Ruler Units"), null, null);
+			Menu unit_menu = (Menu)menu.AppendItem (unit_action.CreateSubMenuItem ()).Submenu;
+			unit_menu.Append (Pixels.CreateMenuItem ());
+			unit_menu.Append (Inches.CreateMenuItem ());
+			unit_menu.Append (Centimeters.CreateMenuItem ());
 
 			menu.AppendSeparator ();
 			menu.Append (show_pad);
@@ -116,8 +121,6 @@ namespace Pinta.Core
 			toolbar.AppendItem (new Gtk.SeparatorToolItem ());
 			toolbar.AppendItem (PixelGrid.CreateToolBarItem ());
 			toolbar.AppendItem (Rulers.CreateToolBarItem ());
-			toolbar.AppendItem (new ToolBarLabel (string.Format (" {0}:  ", Catalog.GetString ("Units"))));
-			toolbar.AppendItem (UnitComboBox);
 		}
 		
 		public void RegisterHandlers ()

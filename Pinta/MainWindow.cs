@@ -638,7 +638,7 @@ namespace Pinta
 		#endregion
 
 		#region rulers
-		private HRuler hruler;
+		public HRuler hruler;
 		private VRuler vruler;
 
 		public void ShowRulers ()
@@ -657,20 +657,23 @@ namespace Pinta
 		{
 			hruler.Metric = metric;
 			vruler.Metric = metric;
+
 			switch (metric) {
-			case Gtk.MetricType.Pixels:
-				if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 0)
-					PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 0;
-				break;
-			case Gtk.MetricType.Inches:
-				if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 1)
-					PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 1;
-				break;
-			case Gtk.MetricType.Centimeters:
-				if (PintaCore.Actions.View.UnitComboBox.ComboBox.Active != 2)
-					PintaCore.Actions.View.UnitComboBox.ComboBox.Active = 2;
-				break;
-				
+				case Gtk.MetricType.Pixels:
+					if (!PintaCore.Actions.View.Pixels.Active)
+						PintaCore.Actions.View.Pixels.Active = true;
+
+					break;
+				case Gtk.MetricType.Inches:
+					if (!PintaCore.Actions.View.Inches.Active)
+						PintaCore.Actions.View.Inches.Active = true;
+
+					break;
+				case Gtk.MetricType.Centimeters:
+					if (!PintaCore.Actions.View.Centimeters.Active)
+						PintaCore.Actions.View.Centimeters.Active = true;
+
+					break;
 			}
 		}
 

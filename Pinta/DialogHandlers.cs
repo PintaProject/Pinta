@@ -60,7 +60,6 @@ namespace Pinta
 			PintaCore.Actions.View.Pixels.Activated += HandlePixelsActivated;
 			PintaCore.Actions.View.Inches.Activated += HandleInchesActivated;
 			PintaCore.Actions.View.Centimeters.Activated += HandleCentimetersActivated;
-			PintaCore.Actions.View.UnitComboBox.ComboBox.Changed += HandleUnitComboBoxComboBoxChanged;
 		}
 
 		#region Handlers
@@ -298,35 +297,22 @@ namespace Pinta
 				main_window.HideRulers ();
 		}
 
-		private void HandleUnitComboBoxComboBoxChanged (object sender, EventArgs e)
-		{
-			switch (PintaCore.Actions.View.UnitComboBox.ComboBox.Active) {
-				case 0://pixels
-					main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
-				break;
-				case 1://inches
-					main_window.ChangeRulersUnit (Gtk.MetricType.Inches);
-				break;
-				case 2://centimeters
-					main_window.ChangeRulersUnit (Gtk.MetricType.Centimeters);
-				break;
-
-			}
-		}
-
 		private void HandleCentimetersActivated (object sender, EventArgs e)
 		{
-			main_window.ChangeRulersUnit (Gtk.MetricType.Centimeters);
+			if (main_window.hruler.Metric != MetricType.Centimeters)
+				main_window.ChangeRulersUnit (Gtk.MetricType.Centimeters);
 		}
 
 		private void HandleInchesActivated (object sender, EventArgs e)
 		{
-			main_window.ChangeRulersUnit (Gtk.MetricType.Inches);
+			if (main_window.hruler.Metric != MetricType.Inches)
+				main_window.ChangeRulersUnit (Gtk.MetricType.Inches);
 		}
 
 		private void HandlePixelsActivated (object sender, EventArgs e)
 		{
-			main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
+			if (main_window.hruler.Metric != MetricType.Pixels)
+				main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
 		}
 
 		private void FileActions_ModifyCompression (object sender, ModifyCompressionEventArgs e)
