@@ -61,7 +61,7 @@ msgid "_Help"
 msgstr ""
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
+msgid "Tool Windows"
 msgstr ""
 
 #: Pinta/MainWindow.cs:345
