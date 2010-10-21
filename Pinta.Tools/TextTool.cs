@@ -46,10 +46,6 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
 
-		protected override bool ShowAlphaBlendingButton {
-			get { return true; }
-		}
-
 		protected override bool ShowAntialiasingButton {
 			get { return true; }
 		}
@@ -968,7 +964,7 @@ namespace Pinta.Tools
 				
 				int xEnd = Math.Min (dst.Width, pt.X + measuredSize.Width);
 				
-				bool blending = alphablending_btn.Active;
+				bool blending = true;
 				dst.Flush ();
 				//if (dst.IsColumnVisible(pt.X + skipX))
 				//{
