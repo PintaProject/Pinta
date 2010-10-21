@@ -1,16 +1,15 @@
 SUBDIRS = \
-	Pinta \
-	Pinta.Core \
-	Pinta.Effects \
-	Pinta.Gui.Widgets \
 	Pinta.Resources \
+	Pinta.Core \
+	Pinta.Gui.Widgets \
+	System.Composition.ComponentModel \
+	Pinta.Effects \
 	Pinta.Tools \
-	System.Composition.ComponentModel
+	Pinta
 
 EXTRA_DIST = \
 	expansions.m4 \
 	lib/ICSharpCode.SharpZipLib.dll
-
 
 # Targets
 

@@ -1,59 +1,22 @@
+include $(top_srcdir)/Makefile.include
 
-EXTRA_DIST =  
+ASSEMBLY = Pinta.Core
+TARGET = library
+ASSEMBLY_BUILD_FLAGS = -unsafe
 
-# Warning: This is an automatically generated file, do not edit!
+REFERENCES = \
+	-r:Mono.Posix \
+	-r:System \
+	-r:System.Core \
+	-r:System.Data \
+	-r:System.Xml \
+	$(GTK_SHARP_20_LIBS) \
+	$(GLIB_SHARP_20_LIBS) \
+	$(MONO_CAIRO_LIBS) \
+	-r:../lib/ICSharpCode.SharpZipLib.dll \
+	-r:../bin/Pinta.Resources.dll
 
-if ENABLE_DEBUG
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -unsafe -warn:4 -optimize- -debug "-define:DEBUG"
-ASSEMBLY = ../bin/Pinta.Core.dll
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = library
-PROJECT_REFERENCES =  \
-	../bin/Pinta.Resources.dll
-BUILD_DIR = ../bin
-
-ICSHARPCODE_SHARPZIPLIB_DLL_SOURCE=../lib/ICSharpCode.SharpZipLib.dll
-PINTA_RESOURCES_DLL_SOURCE=../bin/Pinta.Resources.dll
-PINTA_RESOURCES_DLL_MDB_SOURCE=../bin/Pinta.Resources.dll.mdb
-PINTA_RESOURCES_DLL_MDB=$(BUILD_DIR)/Pinta.Resources.dll.mdb
-PINTA_CORE_DLL_MDB_SOURCE=../bin/Pinta.Core.dll.mdb
-PINTA_CORE_DLL_MDB=$(BUILD_DIR)/Pinta.Core.dll.mdb
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = gmcs
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -unsafe -warn:4 -optimize-
-ASSEMBLY = ../bin/Pinta.Core.dll
-ASSEMBLY_MDB = 
-COMPILE_TARGET = library
-PROJECT_REFERENCES =  \
-	../bin/Pinta.Resources.dll
-BUILD_DIR = ../bin
-
-ICSHARPCODE_SHARPZIPLIB_DLL_SOURCE=../lib/ICSharpCode.SharpZipLib.dll
-PINTA_RESOURCES_DLL_SOURCE=../bin/Pinta.Resources.dll
-PINTA_RESOURCES_DLL_MDB=
-PINTA_CORE_DLL_MDB=
-
-endif
-
-AL=al2
-SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
-
-PROGRAMFILES = \
-	$(ICSHARPCODE_SHARPZIPLIB_DLL) \
-	$(PINTA_RESOURCES_DLL) \
-	$(PINTA_RESOURCES_DLL_MDB) \
-	$(PINTA_CORE_DLL_MDB)  
-
-
-RESGEN=resgen2
-	
-all: $(ASSEMBLY) $(PROGRAMFILES) 
-
-FILES = \
+SOURCES =  \
 	Actions/EffectsActions.cs \
 	AssemblyInfo.cs \
 	Classes/Anchor.cs \
@@ -158,41 +121,3 @@ FILES = \
 	Classes/BasePaintBrush.cs \
 	Managers/PaintBrushManager.cs 
 
-DATA_FILES = 
-
-RESOURCES = 
-
-EXTRAS = 
-
-REFERENCES =  \
-	System \
-	$(GTK_SHARP_20_LIBS) \
-	System.Core \
-	$(GLIB_SHARP_20_LIBS) \
-	Mono.Posix \
-	System.Data \
-	System.Xml \
-	$(MONO_CAIRO_LIBS)
-
-DLL_REFERENCES =  \
-	../lib/ICSharpCode.SharpZipLib.dll
-
-CLEANFILES = $(PROGRAMFILES) 
-
-include $(top_srcdir)/Makefile.include
-
-ICSHARPCODE_SHARPZIPLIB_DLL = $(BUILD_DIR)/ICSharpCode.SharpZipLib.dll
-PINTA_RESOURCES_DLL = $(BUILD_DIR)/Pinta.Resources.dll
-
-$(eval $(call emit-deploy-target,ICSHARPCODE_SHARPZIPLIB_DLL))
-
-
-$(eval $(call emit_resgen_targets))
-$(build_xamlg_list): %.xaml.g.cs: %.xaml
-	xamlg '$<'
-
-$(ASSEMBLY_MDB): $(ASSEMBLY)
-
-$(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
-	mkdir -p $(shell dirname $(ASSEMBLY))
-	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
