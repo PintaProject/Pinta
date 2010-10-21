@@ -108,11 +108,12 @@ namespace Pinta.Core
 			toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
-			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+			toolbar.AppendItem (new SeparatorToolItem ());
+			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
+			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
 			View.CreateToolBar (toolbar);
 
 			toolbar.AppendItem (new SeparatorToolItem ());

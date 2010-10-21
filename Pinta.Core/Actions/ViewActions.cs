@@ -118,9 +118,6 @@ namespace Pinta.Core
 			toolbar.AppendItem (ZoomOut.CreateToolBarItem ());
 			toolbar.AppendItem (ZoomComboBox);
 			toolbar.AppendItem (ZoomIn.CreateToolBarItem ());
-			toolbar.AppendItem (new Gtk.SeparatorToolItem ());
-			toolbar.AppendItem (PixelGrid.CreateToolBarItem ());
-			toolbar.AppendItem (Rulers.CreateToolBarItem ());
 		}
 		
 		public void RegisterHandlers ()
