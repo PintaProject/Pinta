@@ -89,8 +89,13 @@ namespace Pinta
 			
 			PintaCore.Actions.File.BeforeQuit += delegate {
 				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
-				PintaCore.Settings.PutSetting ("window-size-width", this.GdkWindow.GetSize ().Width);
-				PintaCore.Settings.PutSetting ("window-size-height", this.GdkWindow.GetSize ().Height);
+
+				// Don't store the maximized height if the window is maximized
+				if ((this.GdkWindow.State & Gdk.WindowState.Maximized) == 0) {
+					PintaCore.Settings.PutSetting ("window-size-width", this.GdkWindow.GetSize ().Width);
+					PintaCore.Settings.PutSetting ("window-size-height", this.GdkWindow.GetSize ().Height);
+				}
+
 				PintaCore.Settings.PutSetting ("window-maximized", (this.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
 				PintaCore.Settings.PutSetting ("ruler-metric", (int) hruler.Metric);
 				PintaCore.Settings.PutSetting ("ruler-show", PintaCore.Actions.View.Rulers.Active);
@@ -101,6 +106,9 @@ namespace Pinta
 			ChangeRulersUnit ((MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels));
 			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-show", false);
 			dialog_handler.UpdateRulerVisibility ();
+			
+			if (PintaCore.Settings.GetSetting <bool> ("window-maximized", false))
+				this.GdkWindow.Maximize ();
 
 			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
 			ToggleToolbar (PintaCore.Actions.View.ToolBar.Active);
