@@ -100,85 +100,98 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.RotateImageCCW ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
+			doc.FinishSelection ();
+			doc.RotateImageCCW ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 		}
 
 		private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.RotateImageCW ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
+			doc.FinishSelection ();
+			doc.RotateImageCW ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 		}
 
 		private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.FinishSelection ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
-			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[0].Surface.Clone (), 0);
+			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[0].Surface.Clone (), 0);
+
 			hist.Push (h1);
 
-			for (int i = 1; i < PintaCore.Layers.Count; i++)
-				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, PintaCore.Layers[i], i));
+			for (int i = 1; i < doc.Layers.Count; i++)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers[i], i));
 
-			PintaCore.Layers.FlattenImage ();
+			doc.FlattenImage ();
 
-			PintaCore.History.PushNewItem (hist);
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.RotateImage180 ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
+			doc.FinishSelection ();
+			doc.RotateImage180 ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 		}
 
 		private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.FlipImageVertical ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
+			doc.FinishSelection ();
+			doc.FlipImageVertical ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
 		}
 
 		private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.FlipImageHorizontal ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
+			doc.FinishSelection ();
+			doc.FlipImageHorizontal ();
+
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
 		}
 
 		private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Gdk.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
+			doc.FinishSelection ();
 
-			int width = rect.Width;
-			int height = rect.Height;
-			
-			ResizeHistoryItem hist = new ResizeHistoryItem (PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height);
+			Gdk.Rectangle rect = doc.SelectionPath.GetBounds ();
+
+			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
+
 			hist.Icon = "Menu.Image.Crop.png";
 			hist.Text = Catalog.GetString ("Crop to Selection");
 			hist.TakeSnapshotOfImage ();
-			hist.RestorePath = PintaCore.Layers.SelectionPath.Clone ();
+			hist.RestorePath = doc.SelectionPath.Clone ();
 
-			PintaCore.Workspace.ImageSize = new Gdk.Size (width, height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (width, height);
+			doc.ImageSize = rect.Size;
+			doc.Workspace.CanvasSize = rect.Size;
 
-			foreach (var layer in PintaCore.Workspace.ActiveDocument.Layers)
+			foreach (var layer in doc.Layers)
 				layer.Crop (rect);
 
-			PintaCore.History.PushNewItem (hist);
+			doc.History.PushNewItem (hist);
+			doc.ResetSelectionPath ();
 
-			PintaCore.Layers.ResetSelectionPath ();
-			PintaCore.Workspace.Invalidate ();
+			doc.Workspace.Invalidate ();
 		}
 		#endregion
 	}

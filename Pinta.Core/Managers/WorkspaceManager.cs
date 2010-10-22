@@ -60,11 +60,6 @@ namespace Pinta.Core
 			}
 		}
 
-		public string DocumentPath {
-			get { return ActiveDocument.Pathname; }
-			set { ActiveDocument.Pathname = value; }
-		}
-		
 		public Gdk.Size ImageSize {
 			get { return ActiveDocument.ImageSize; }
 			set { ActiveDocument.ImageSize = value; }

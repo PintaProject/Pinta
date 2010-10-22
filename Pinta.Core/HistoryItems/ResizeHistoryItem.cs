@@ -27,18 +27,17 @@
 using System;
 using System.Collections.Generic;
 using Mono.Unix;
+using Gdk;
 
 namespace Pinta.Core
 {
 	public class ResizeHistoryItem : CompoundHistoryItem
 	{
-		private int old_width;
-		private int old_height;
-		
-		public ResizeHistoryItem (int oldWidth, int oldHeight) : base ()
+		private Size old_size;
+
+		public ResizeHistoryItem (Size oldSize) : base ()
 		{
-			old_width = oldWidth;
-			old_height = oldHeight;
+			old_size = oldSize;
 
 			Icon = "Menu.Image.Resize.png";
 			Text = Catalog.GetString ("Resize Image");
@@ -48,14 +47,12 @@ namespace Pinta.Core
 		
 		public override void Undo ()
 		{
-			int swap_width = PintaCore.Workspace.ImageSize.Width;
-			int swap_height = PintaCore.Workspace.ImageSize.Height;
+			Size swap = PintaCore.Workspace.ImageSize;
 
-			PintaCore.Workspace.ImageSize = new Gdk.Size (old_width, old_height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (old_width, old_height);
+			PintaCore.Workspace.ImageSize = old_size;
+			PintaCore.Workspace.CanvasSize = old_size;
 			
-			old_width = swap_width;
-			old_height = swap_height;
+			old_size = swap;
 			
 			base.Undo ();
 			
@@ -77,14 +74,12 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
-			int swap_width = PintaCore.Workspace.ImageSize.Width;
-			int swap_height = PintaCore.Workspace.ImageSize.Height;
+			Size swap = PintaCore.Workspace.ImageSize;
 
-			PintaCore.Workspace.ImageSize = new Gdk.Size (old_width, old_height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (old_width, old_height);
+			PintaCore.Workspace.ImageSize = old_size;
+			PintaCore.Workspace.CanvasSize = old_size;
 
-			old_width = swap_width;
-			old_height = swap_height;
+			old_size = swap;
 
 			base.Redo ();
 

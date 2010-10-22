@@ -91,6 +91,8 @@ namespace Pinta.Core
 		
 		public bool HasFile { get; set; }
 		
+		public DocumentWorkspaceHistory History { get { return Workspace.History; } }
+
 		public Gdk.Size ImageSize { get; set; }
 		
 		public bool IsDirty {
@@ -524,7 +526,7 @@ namespace Pinta.Core
 
 			FinishSelection ();
 
-			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.Width, ImageSize.Height);
+			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.Icon = "Menu.Image.CanvasSize.png";
 			hist.Text = Catalog.GetString ("Resize Canvas");
 			hist.TakeSnapshotOfImage ();
@@ -552,7 +554,7 @@ namespace Pinta.Core
 
 			FinishSelection ();
 
-			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize.Width, ImageSize.Height);
+			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.TakeSnapshotOfImage ();
 
 			scale = Workspace.Scale;

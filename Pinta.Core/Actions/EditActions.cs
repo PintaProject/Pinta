@@ -145,70 +145,80 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
-			
-			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
-			
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.FinishSelection ();
+
+			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
+
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Color = PintaCore.Palette.PrimaryColor;
 				g.Fill ();
 			}
-			
-			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, PintaCore.Layers.CurrentLayerIndex));
+
+			doc.Workspace.Invalidate ();
+			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, doc.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.FinishSelection ();
 
 			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Catalog.GetString ("Select All"));
 			hist.TakeSnapshot ();
 
-			PintaCore.Layers.ResetSelectionPath ();
-			PintaCore.Layers.ShowSelection = true;
+			doc.ResetSelectionPath ();
+			doc.ShowSelection = true;
 
-			PintaCore.History.PushNewItem (hist);
-			PintaCore.Workspace.Invalidate ();
+			doc.History.PushNewItem (hist);
+			doc.Workspace.Invalidate ();
 		}
 
 		private void HandlePintaCoreActionsEditEraseSelectionActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			doc.FinishSelection ();
 
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
+
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Operator = Cairo.Operator.Clear;
 				g.Fill ();
 			}
-			
-			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
+
+			doc.Workspace.Invalidate ();
+			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.FinishSelection ();
 
 			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));
 			hist.TakeSnapshot ();
-			
-			PintaCore.Layers.ResetSelectionPath ();
-			
-			PintaCore.History.PushNewItem (hist);
-			PintaCore.Workspace.Invalidate ();
+
+			doc.ResetSelectionPath ();
+
+			doc.History.PushNewItem (hist);
+			doc.Workspace.Invalidate ();
 		}
 
 		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			doc.FinishSelection ();
+
+			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			Gdk.Pixbuf image = cb.WaitForImage ();
@@ -217,27 +227,29 @@ namespace Pinta.Core
 				return;
 
 			Path p;
-			
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
+
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
 				g.DrawPixbuf (image, new Cairo.Point (0, 0));
 				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
 			}
 
-			PintaCore.Layers.SelectionPath = p;
-			PintaCore.Layers.ShowSelection = true;
-			
-			PintaCore.Workspace.Invalidate ();
-			
-			PintaCore.History.PushNewItem (new SimpleHistoryItem (Stock.Paste, Catalog.GetString ("Paste"), old, PintaCore.Layers.CurrentLayerIndex));
+			doc.SelectionPath = p;
+			doc.ShowSelection = true;
+
+			doc.Workspace.Invalidate ();
+
+			doc.History.PushNewItem (new SimpleHistoryItem (Stock.Paste, Catalog.GetString ("Paste"), old, doc.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ImageSurface src = PintaCore.Layers.GetClippedLayer (PintaCore.Layers.CurrentLayerIndex);
-			
-			Gdk.Rectangle rect = PintaCore.Layers.SelectionPath.GetBounds ();
+			doc.FinishSelection ();
+
+			ImageSurface src = doc.GetClippedLayer (doc.CurrentLayerIndex);
+
+			Gdk.Rectangle rect = doc.SelectionPath.GetBounds ();
 			
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
@@ -255,33 +267,37 @@ namespace Pinta.Core
 		
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.FinishSelection ();
 			
 			// Copy selection
 			HandlerPintaCoreActionsEditCopyActivated (sender, e);
 
 			// Erase selection
-			Cairo.ImageSurface old = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Operator = Cairo.Operator.Clear;
 				g.Fill ();
 			}
 
-			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
+			doc.Workspace.Invalidate ();
+			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 		{
-			PintaCore.History.Undo ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.History.Undo ();
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 		{
-			PintaCore.History.Redo ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.History.Redo ();
 		}
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
