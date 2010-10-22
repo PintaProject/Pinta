@@ -112,9 +112,9 @@ namespace Pinta.Core
 			return !e.Cancel;
 		}
 
-		internal int RaiseModifyCompression ()
+		internal int RaiseModifyCompression (int defaultCompression)
 		{
-			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (85);
+			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression);
 			
 			if (ModifyCompression != null)
 				ModifyCompression (this, e);
