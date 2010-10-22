@@ -77,6 +77,7 @@
     <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Enumerations\EffectAdjustment.cs" />
     <Compile Include="Enumerations\GradientColorMode.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
+    <Compile Include="EventArgs\DocumentCancelEventArgs.cs" />
     <Compile Include="EventArgs\DocumentEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
     <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
+    <Compile Include="Managers\ImageConverterManager.cs" />
     <Compile Include="Managers\HistoryManager.cs" />
     <Compile Include="Managers\LayerManager.cs" />
     <Compile Include="Managers\PaletteManager.cs" />

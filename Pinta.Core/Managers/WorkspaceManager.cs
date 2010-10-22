@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Mono.Unix;
 using System.Collections.Generic;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -103,7 +104,7 @@ namespace Pinta.Core
 			if (string.IsNullOrEmpty (filename))
 				doc.Filename = string.Format ("Unsaved Image {0}", new_file_name++);
 			else
-				doc.Filename = filename;
+				doc.PathAndFileName = filename;
 			
 			OpenDocuments.Add (doc);
 			active_document_index = OpenDocuments.Count - 1;
@@ -154,7 +155,34 @@ namespace Pinta.Core
 		{
 			ActiveWorkspace.Invalidate (rect);
 		}
-		
+
+		public bool OpenFile (string file)
+		{
+			bool fileOpened = false;
+
+			try {
+				// Open the image and add it to the layers
+				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
+				importer.Import (PintaCore.Layers, file);
+
+				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
+				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
+				PintaCore.Workspace.ActiveDocument.IsDirty = false;
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
+				PintaCore.Workspace.Invalidate ();
+
+				fileOpened = true;
+			} catch {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Could not open file: {0}"), file);
+				md.Title = Catalog.GetString ("Error");
+
+				md.Run ();
+				md.Destroy ();
+			}
+
+			return fileOpened;
+		}
+
 		public void ZoomIn ()
 		{
 			ActiveWorkspace.ZoomIn ();

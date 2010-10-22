@@ -100,11 +100,11 @@ namespace Pinta
 					}
 				
 					if (!string.IsNullOrEmpty (arg)) {
-						Pinta.Core.PintaCore.Actions.File.OpenFile (arg);
+						PintaCore.Workspace.OpenFile (arg);
 						PintaCore.Workspace.ActiveDocument.HasFile = true;
 					}
 				} else {
-					Pinta.Core.PintaCore.Actions.File.OpenFile (extra[0]);
+					PintaCore.Workspace.OpenFile (extra[0]);
 					PintaCore.Workspace.ActiveDocument.HasFile = true;
 				}				
 			} else {

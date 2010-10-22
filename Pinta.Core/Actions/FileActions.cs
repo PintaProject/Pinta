@@ -35,8 +35,6 @@ namespace Pinta.Core
 {
 	public class FileActions
 	{
-		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-	
 		public Gtk.Action New { get; private set; }
 		public Gtk.Action NewScreenshot { get; private set; }
 		public Gtk.Action Open { get; private set; }
@@ -47,13 +45,9 @@ namespace Pinta.Core
 		public Gtk.Action Print { get; private set; }
 		public Gtk.Action Exit { get; private set; }
 		
-		private IList<FormatDescriptor> formats;
-		private IDictionary<string, FormatDescriptor> formatsByExt;
-		private RecentData recentData;
-		private string lastDialogDir;
-		
 		public event EventHandler BeforeQuit;
 		public event EventHandler<ModifyCompressionEventArgs> ModifyCompression;
+		public event EventHandler<DocumentCancelEventArgs> SaveDocument;
 		
 		public FileActions ()
 		{
@@ -67,17 +61,6 @@ namespace Pinta.Core
 			
 			(OpenRecent as RecentAction).AddFilter (recentFilter);
 			
-			recentData = new RecentData ();
-			recentData.AppName = "Pinta";
-			recentData.AppExec = GetExecutablePathname ();
-			recentData.MimeType = "image/*";
-			
-			formats = new List<FormatDescriptor> ();
-			formatsByExt = new SortedDictionary<string, FormatDescriptor> ();
-			FillFormats ();
-			
-			lastDialogDir = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
-
 			Close = new Gtk.Action ("Close", Catalog.GetString ("Close"), null, Stock.Close);
 			Save = new Gtk.Action ("Save", Catalog.GetString ("Save"), null, Stock.Save);
 			SaveAs = new Gtk.Action ("SaveAs", Catalog.GetString ("Save As..."), null, Stock.SaveAs);
@@ -112,43 +95,8 @@ namespace Pinta.Core
 		
 		public void RegisterHandlers ()
 		{
-			Open.Activated += HandlePintaCoreActionsFileOpenActivated;
-			(OpenRecent as RecentAction).ItemActivated += HandleOpenRecentItemActivated;
-			Save.Activated += HandlePintaCoreActionsFileSaveActivated;
-			SaveAs.Activated += HandlePintaCoreActionsFileSaveAsActivated;
 			Exit.Activated += HandlePintaCoreActionsFileExitActivated;
 		}
-		
-		private void FillFormats ()
-		{
-			foreach (var format in Pixbuf.Formats) {
-				string formatName = format.Name.ToLowerInvariant ();
-				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
-				GdkPixbufFormat importer = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
-				IImageExporter exporter;
-			
-				if (formatName == "jpeg")
-					exporter = importer = new JpegFormat ();
-				else if (formatName == "tga")
-					exporter = new TgaExporter ();
-				else if (format.IsWritable)
-					exporter = importer;
-				else
-					exporter = null;
-			
-				formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant(), extensions, importer, exporter));
-			}
-			
-			OraFormat oraHandler = new OraFormat ();
-			formats.Add (new FormatDescriptor ("ora", "OpenRaster", new string[] { "ora" }, oraHandler, oraHandler));
-			
-			foreach (var fd in formats) {
-				foreach (var ext in fd.Extensions) {
-					formatsByExt.Add (string.Format (".{0}", ext), fd);
-				}
-			}
-		}
-		
 		#endregion
 
 		#region Public Methods
@@ -185,48 +133,21 @@ namespace Pinta.Core
 			(pb as IDisposable).Dispose ();
 			PintaCore.Workspace.ActiveDocument.IsDirty = true;
 		}
-		
-		public bool OpenFile (string file)
-		{
-			bool fileOpened = false;
-			
-			try {
-				// Open the image and add it to the layers
-				IImageImporter importer = formatsByExt[System.IO.Path.GetExtension (file).ToLowerInvariant ()].Importer;
-				importer.Import (PintaCore.Layers, file);
-
-				PintaCore.Workspace.ActiveDocument.Pathname = System.IO.Path.GetFullPath (file);
-				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
-				PintaCore.Workspace.ActiveDocument.IsDirty = false;
-				PintaCore.Actions.View.ZoomToWindow.Activate ();
-				PintaCore.Workspace.Invalidate ();
-				
-				fileOpened = true;
-			} catch {
-				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Could not open file: {0}"), file);
-				md.Title = Catalog.GetString ("Error");
-				
-				md.Run ();
-				md.Destroy ();
-			}
-			
-			return fileOpened;
-		}
 		#endregion
-		
-		static string GetExecutablePathname()
+
+		#region Event Invokers
+		internal bool RaiseSaveDocument (Document document)
 		{
-			string executablePathName = System.Environment.GetCommandLineArgs ()[0];
-			executablePathName = System.IO.Path.GetFullPath (executablePathName);
-			
-			return executablePathName;
+			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document);
+
+			if (SaveDocument == null)
+				throw new InvalidOperationException ("GUI is not handling PintaCore.Workspace.SaveDocument");
+			else
+				SaveDocument (this, e);
+
+			return !e.Cancel;
 		}
-		
-		void AddRecentFileUri (string uri)
-		{
-			RecentManager.Default.AddFull (uri, recentData);
-		}
-		
+
 		internal int PromptJpegCompressionLevel ()
 		{
 			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (85);
@@ -236,152 +157,9 @@ namespace Pinta.Core
 				
 			return e.Cancel ? -1 : e.Quality;
 		}
+		#endregion
 		
 		#region Action Handlers
-		private void HandleOpenRecentItemActivated (object sender, EventArgs e)
-		{
-			string fileUri = (sender as RecentAction).CurrentUri;
-
-			OpenFile (new Uri (fileUri).LocalPath);
-
-			PintaCore.Workspace.ActiveDocument.HasFile = true;
-		}
-
-		private void HandlePintaCoreActionsFileOpenActivated (object sender, EventArgs e)
-		{
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
-							    FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-							    Gtk.Stock.Open, Gtk.ResponseType.Ok);
-
-			// Add image files filter
-			FileFilter ff = new FileFilter ();
-			ff.AddPixbufFormats ();
-			ff.AddPattern ("*.ora");
-			ff.Name = Catalog.GetString ("Image files");
-			fcd.AddFilter (ff);
-			
-			FileFilter ff2 = new FileFilter ();
-			ff2.Name = Catalog.GetString ("All files");
-			ff2.AddPattern ("*.*");
-			fcd.AddFilter (ff2);
-			
-			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-			fcd.SetCurrentFolder (lastDialogDir);
-
-			int response = fcd.Run ();
-		
-			if (response == (int)Gtk.ResponseType.Ok) {
-				lastDialogDir = fcd.CurrentFolder;
-
-				if (OpenFile (fcd.Filename)) {
-					AddRecentFileUri (fcd.Uri);
-
-					PintaCore.Workspace.ActiveDocument.HasFile = true;
-				}
-			}
-
-			fcd.Destroy ();
-		}
-		
-		private void HandlePintaCoreActionsFileSaveActivated (object sender, EventArgs e)
-		{
-			if (PintaCore.Workspace.ActiveDocument.HasFile)
-				SaveFile (PintaCore.Workspace.ActiveDocument.Pathname, null);
-			else
-				HandlePintaCoreActionsFileSaveAsActivated (null, EventArgs.Empty);
-		}
-		
-		private bool ConfirmOverwrite (FileChooserDialog fcd, string file) {
-			string primary = Catalog.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
-			string secondary = Catalog.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
-			string message = string.Format (markup, primary, secondary);
-
-			MessageDialog md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,
-				MessageType.Question, ButtonsType.None,
-				true, message, System.IO.Path.GetFileName (file), fcd.CurrentFolder);
-
-			md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			md.AddButton (Stock.Save, ResponseType.Ok);
-			md.DefaultResponse = ResponseType.Cancel;
-			md.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-
-			int response = md.Run ();
-			md.Destroy ();
-			
-			return response == (int) ResponseType.Ok;
-		}
-		
-		private void HandlePintaCoreActionsFileSaveAsActivated (object sender, EventArgs e)
-		{
-			var fcd = new FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
-			                                                       PintaCore.Chrome.MainWindow,
-			                                                       FileChooserAction.Save,
-			                                                       Gtk.Stock.Cancel,
-			                                                       Gtk.ResponseType.Cancel,
-			                                                       Gtk.Stock.Save, Gtk.ResponseType.Ok);
-			
-			fcd.DoOverwriteConfirmation = true;
-			fcd.SetCurrentFolder (lastDialogDir);
-			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-			bool hasFile = PintaCore.Workspace.ActiveDocument.HasFile;
-			string currentExt = null;
-
-			if (hasFile) {
-				fcd.SetFilename (PintaCore.Workspace.ActiveDocument.Pathname);
-				currentExt = Path.GetExtension(PintaCore.Workspace.Filename.ToLowerInvariant ());
-			}
-			
-			Dictionary<FileFilter, FormatDescriptor> filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
-						
-			// Add all the formats we support to the save dialog
-			foreach (var format in formats) {
-				if (!format.IsReadOnly ()) {
-					fcd.AddFilter (format.Filter);
-					filetypes.Add (format.Filter, format);
-					
-					if ((hasFile && formatsByExt[currentExt] == format) || (!hasFile && format.Name == "jpeg")) {
-						fcd.Filter = format.Filter;
-					}
-				}
-			}
-			
-			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
-			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
-				if (this.ConfirmOverwrite (fcd, fcd.Filename)) {
-					eventArgs.RetVal = FileChooserConfirmation.AcceptFilename;
-				} else {
-					eventArgs.RetVal = FileChooserConfirmation.SelectAgain;
-				}
-			};
-			
-			while (fcd.Run () == (int) Gtk.ResponseType.Ok) {
-				FormatDescriptor format = filetypes[fcd.Filter];
-				string file = fcd.Filename;
-				
-				if (string.IsNullOrEmpty (System.IO.Path.GetExtension (file))) {
-					// No extension; add one from the format descriptor.
-					file = string.Format ("{0}.{1}", file, format.Extensions[0]);
-					fcd.CurrentName = System.IO.Path.GetFileName (file);
-					
-					// We also need to display an overwrite confirmation message manually,
-					// because MessageDialog won't do this for us in this case.
-					if (File.Exists (file) && !ConfirmOverwrite (fcd, file)) {
-						continue;
-					}
-				}
-				
-				lastDialogDir = fcd.CurrentFolder;
-				SaveFile (file, format);
-				AddRecentFileUri (fcd.Uri);
-
-				PintaCore.Workspace.ActiveDocument.HasFile = true;
-				PintaCore.Workspace.ActiveDocument.Pathname = file;
-				break;
-			}
-
-			fcd.Destroy ();
-		}
-
 		private void HandlePintaCoreActionsFileExitActivated (object sender, EventArgs e)
 		{
 			while (PintaCore.Workspace.HasOpenDocuments) {
@@ -399,31 +177,6 @@ namespace Pinta.Core
 				BeforeQuit (this, EventArgs.Empty);
 				
 			Application.Quit ();
-		}
-		#endregion
-		
-		#region Private Methods
-		private void SaveFile (string file, FormatDescriptor format)
-		{
-			if (format == null) {
-				string ext = System.IO.Path.GetExtension (file);
-				// Is the fallback to PNG even necessary?
-				format = formatsByExt[string.IsNullOrEmpty (ext) ? ".png" : ext];
-			}
-			
-			if (format == null || format.IsReadOnly ()) {
-				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
-				md.Title = Catalog.GetString ("Error");
-				
-				md.Run ();
-				md.Destroy ();
-				return;
-			}
-			
-			format.Exporter.Export (PintaCore.Layers, file);
-
-			PintaCore.Workspace.Filename = Path.GetFileName (file);
-			PintaCore.Workspace.IsDirty = false;
 		}
 		#endregion
 	}

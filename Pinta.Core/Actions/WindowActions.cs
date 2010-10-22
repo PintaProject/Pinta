@@ -1,5 +1,5 @@
-﻿// 
-// SystemManager.cs
+// 
+// WindowActions.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,29 +25,29 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Gtk;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
-	public class SystemManager
+	public class WindowActions
 	{
-		public ImageConverterManager ImageFormats { get; private set; }
-		public int RenderThreads { get; set; }
-		
-		public SystemManager ()
+		public Gtk.Action SaveAll { get; private set; }
+		public Gtk.Action CloseAll { get; private set; }
+
+		public WindowActions ()
 		{
-			ImageFormats = new ImageConverterManager ();
-			RenderThreads = Environment.ProcessorCount;
+			SaveAll = new Gtk.Action ("SaveAll", Catalog.GetString ("Save All"), null, Stock.Save);
+			CloseAll = new Gtk.Action ("CloseAll", Catalog.GetString ("Close All"), null, Stock.Close);
 		}
 
-		public string GetExecutablePathName ()
+		#region Initialization
+		public void CreateMainMenu (Gtk.Menu menu)
 		{
-			string executablePathName = System.Environment.GetCommandLineArgs ()[0];
-			executablePathName = System.IO.Path.GetFullPath (executablePathName);
-
-			return executablePathName;
+			//menu.Append (SaveAll.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			//menu.Append (CloseAll.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			//menu.AppendSeparator ();
 		}
+		#endregion
 	}
 }

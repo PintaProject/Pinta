@@ -41,7 +41,6 @@ namespace Pinta.Core
 	public class Document
 	{
 		private bool is_dirty;
-		private string pathname;
 		private int layer_name_int = 2;
 		private int current_layer = -1;
 
@@ -83,13 +82,10 @@ namespace Pinta.Core
 			get { return current_layer; }
 		}
 		
-		public string Filename {
-			get { return System.IO.Path.GetFileName (Pathname); }
-			set { 
-				if (value != null)
-					Pathname = System.IO.Path.Combine (Pathname, value);
-			}
-		}
+		/// <summary>
+		/// Just the file name, like "dog.jpg".
+		/// </summary>
+		public string Filename { get; set; }
 		
 		public Guid Guid { get; private set; }
 		
@@ -109,11 +105,27 @@ namespace Pinta.Core
 		
 		public List<Layer> Layers { get; private set; }
 
-		public string Pathname {
-			get { return (pathname != null) ? pathname : string.Empty; }
-			set { pathname = value; }
+		/// <summary>
+		/// Just the directory name, like "C:\MyPictures".
+		/// </summary>
+		public string Pathname { get; set; }
+
+		/// <summary>
+		/// Directory and file name, like "C:\MyPictures\dog.jpg".
+		/// </summary>
+		public string PathAndFileName {
+			get { return System.IO.Path.Combine (Pathname, Filename); }
+			set {
+				if (string.IsNullOrEmpty (value)) {
+					Pathname = string.Empty;
+					Filename = string.Empty;
+				} else {
+					Pathname = System.IO.Path.GetDirectoryName (value);
+					Filename = System.IO.Path.GetFileName (value);
+				}
+			}
 		}
-		
+
 		public Layer SelectionLayer {
 			get { return selection_layer; }
 		}
@@ -587,6 +599,12 @@ namespace Pinta.Core
 
 			Workspace.Invalidate ();
 
+		}
+
+		// Returns true if successful, false if canceled
+		public bool Save ()
+		{
+			return PintaCore.Actions.File.RaiseSaveDocument (this);
 		}
 
 		public void SetCurrentLayer (int i)

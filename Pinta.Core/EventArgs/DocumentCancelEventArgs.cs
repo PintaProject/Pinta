@@ -1,5 +1,5 @@
 ﻿// 
-// SystemManager.cs
+// DocumentCancelEventArgs.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,29 +25,17 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
 
 namespace Pinta.Core
 {
-	public class SystemManager
+	public class DocumentCancelEventArgs : CancelEventArgs
 	{
-		public ImageConverterManager ImageFormats { get; private set; }
-		public int RenderThreads { get; set; }
-		
-		public SystemManager ()
-		{
-			ImageFormats = new ImageConverterManager ();
-			RenderThreads = Environment.ProcessorCount;
-		}
+		public Document Document { get; set; }
 
-		public string GetExecutablePathName ()
+		public DocumentCancelEventArgs (Document document)
 		{
-			string executablePathName = System.Environment.GetCommandLineArgs ()[0];
-			executablePathName = System.IO.Path.GetFullPath (executablePathName);
-
-			return executablePathName;
+			Document = document;
 		}
 	}
 }
