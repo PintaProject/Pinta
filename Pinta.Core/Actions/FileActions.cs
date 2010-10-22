@@ -99,42 +99,6 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		#region Public Methods
-		public void NewFile (Size imageSize)
-		{
-			PintaCore.Workspace.CreateAndActivateDocument (null, imageSize);
-			PintaCore.Workspace.ActiveDocument.HasFile = false;
-			PintaCore.Workspace.ActiveWorkspace.CanvasSize = imageSize;
-
-			// Start with an empty white layer
-			Layer background = PintaCore.Workspace.ActiveDocument.AddNewLayer (Catalog.GetString ("Background"));
-			
-			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-				g.SetSourceRGB (1, 1, 1);
-				g.Paint ();
-			}
-
-			PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
-			PintaCore.Workspace.ActiveDocument.IsDirty = false;
-			PintaCore.Actions.View.ZoomToWindow.Activate ();
-		}
-		
-		public void NewFileWithScreenshot ()
-		{
-			Screen screen = Screen.Default;
-			Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height);
-			NewFile (new Size (screen.Width, screen.Height));
-
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers[0].Surface)) {
-				CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
-				g.Paint ();
-			}
-
-			(pb as IDisposable).Dispose ();
-			PintaCore.Workspace.ActiveDocument.IsDirty = true;
-		}
-		#endregion
-
 		#region Event Invokers
 		internal bool RaiseSaveDocument (Document document)
 		{

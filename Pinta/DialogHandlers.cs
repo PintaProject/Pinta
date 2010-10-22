@@ -30,6 +30,7 @@ using Gtk;
 using Mono.Unix;
 using System.Collections.Generic;
 using System.IO;
+using Gdk;
 
 
 namespace Pinta
@@ -88,7 +89,7 @@ namespace Pinta
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok)
-				PintaCore.Actions.File.NewFile (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight));
+				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight));
 
 			dialog.Destroy ();
 		}
@@ -98,12 +99,20 @@ namespace Pinta
 			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Catalog.GetString ("Take Screenshot"),
 					PintaCore.Chrome.MainWindow, Catalog.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, 0);
 
-			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
+			if (dialog.Run () == (int)Gtk.ResponseType.Ok) {
+				GLib.Timeout.Add ((uint)dialog.GetValue () * 1000, () => {
+					Screen screen = Screen.Default;
+					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height));
 
-			if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
-				GLib.Timeout.Add ((uint) dialog.GetValue () * 1000, () => {
-					PintaCore.Actions.File.NewFileWithScreenshot ();
-					
+					using (Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height)) {
+						using (Cairo.Context g = new Cairo.Context (doc.Layers[0].Surface)) {
+							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
+							g.Paint ();
+						}
+					}
+
+					doc.IsDirty = true;
+
 					if (!PintaCore.Chrome.MainWindow.IsActive)
 						PintaCore.Chrome.MainWindow.UrgencyHint = true;
 					
@@ -205,8 +214,8 @@ namespace Pinta
 			if (cb.WaitIsImageAvailable ()) {
 				Gdk.Pixbuf image = cb.WaitForImage ();
 				Gdk.Size size = new Gdk.Size (image.Width, image.Height);
-				
-				PintaCore.Actions.File.NewFile (size);
+
+				PintaCore.Workspace.NewDocument (size);
 				PintaCore.Actions.Edit.Paste.Activate ();
 			} else {
 				ClipboardEmptyError ();

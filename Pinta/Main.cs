@@ -109,7 +109,7 @@ namespace Pinta
 				}				
 			} else {
 				// Create a blank document
-				PintaCore.Actions.File.NewFile (new Gdk.Size (800, 600));
+				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600));
 			}
 			
 			Application.Run ();
