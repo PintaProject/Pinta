@@ -112,7 +112,7 @@ namespace Pinta.Core
 			return !e.Cancel;
 		}
 
-		internal int PromptJpegCompressionLevel ()
+		internal int RaiseModifyCompression ()
 		{
 			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (85);
 			

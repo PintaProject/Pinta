@@ -40,7 +40,7 @@ namespace Pinta.Core
 		
 		protected override void DoSave (Pixbuf pb, string fileName, string fileType)
 		{
-			int level = PintaCore.Actions.File.PromptJpegCompressionLevel ();
+			int level = PintaCore.Actions.File.RaiseModifyCompression ();
 			
 			if (level != -1)
 				pb.Savev (fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
