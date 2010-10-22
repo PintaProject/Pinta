@@ -339,7 +339,7 @@ namespace Pinta
 				fact.AddDefault ();
 
 				// Create a gtk action for each adjustment
-				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text, string.Empty, effect.Icon);
+				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text + (effect.IsConfigurable ? "..." : ""), string.Empty, effect.Icon);
 				PintaCore.Actions.Adjustments.Actions.Add (act);
 				act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (extensions.Effects.Where (t => t.GetType ().Name == (sender as Gtk.Action).Name).First ()); };
 
@@ -355,7 +355,7 @@ namespace Pinta
 				fact.AddDefault ();
 
 				// Create a gtk action and menu item for each effect
-				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text, string.Empty, effect.Icon);
+				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text + (effect.IsConfigurable ? "..." : ""), string.Empty, effect.Icon);
 				PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
 				act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (extensions.Effects.Where (t => t.GetType ().Name == (sender as Gtk.Action).Name).First ()); };
 			}
