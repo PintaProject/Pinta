@@ -84,7 +84,7 @@ namespace Pinta.Core
 			historyPointer = history.Count - 1;
 			
 			if (newItem.CausesDirty)
-				PintaCore.Workspace.IsDirty = true;
+				document.IsDirty = true;
 				
 			if (history.Count > 1) {
 				PintaCore.Actions.Edit.Undo.Sensitive = true;
@@ -110,7 +110,7 @@ namespace Pinta.Core
 			}	
 			
 			if (historyPointer == 0) {
-				PintaCore.Workspace.IsDirty = false;
+				document.IsDirty = false;
 				PintaCore.Actions.Edit.Undo.Sensitive = false;
 				CanUndo = false;
 			}
@@ -138,7 +138,7 @@ namespace Pinta.Core
 			}
 				
 			if (item.CausesDirty)
-				PintaCore.Workspace.IsDirty = true;
+				document.IsDirty = true;
 
 			if (history.Count > 1) {
 				PintaCore.Actions.Edit.Undo.Sensitive = true;
@@ -154,8 +154,8 @@ namespace Pinta.Core
 			history.Clear();	
 			ListStore.Clear ();	
 			historyPointer = -1;
-			
-			PintaCore.Workspace.IsDirty = false;
+
+			document.IsDirty = false;
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			PintaCore.Actions.Edit.Undo.Sensitive = false;
 			

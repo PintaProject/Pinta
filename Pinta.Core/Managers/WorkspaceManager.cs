@@ -65,11 +65,6 @@ namespace Pinta.Core
 			set { ActiveDocument.Pathname = value; }
 		}
 		
-		public string Filename {
-			get { return ActiveDocument.Filename; }
-			set { ActiveDocument.Filename = value; }
-		}
-		
 		public Gdk.Size ImageSize {
 			get { return ActiveDocument.ImageSize; }
 			set { ActiveDocument.ImageSize = value; }
@@ -78,11 +73,6 @@ namespace Pinta.Core
 		public Gdk.Size CanvasSize {
 			get { return ActiveWorkspace.CanvasSize; }
 			set { ActiveWorkspace.CanvasSize = value; }
-		}
-		
-		public bool IsDirty {
-			get { return ActiveDocument.IsDirty; }
-			set { ActiveDocument.IsDirty = value; }
 		}
 		
 		public PointD Offset {

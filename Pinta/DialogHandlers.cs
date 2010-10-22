@@ -450,12 +450,11 @@ namespace Pinta
 
 			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
 						    MessageType.Error, ButtonsType.None, true,
-						    markup,
-						    System.IO.Path.GetFileName (PintaCore.Workspace.Filename));
+						    markup);
 
 			md.AddButton (Stock.Ok, ResponseType.Yes);
 
-			ResponseType response = (ResponseType)md.Run ();
+			md.Run ();
 			md.Destroy ();
 		}
 		#endregion
