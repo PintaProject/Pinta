@@ -218,23 +218,31 @@ namespace Pinta.Core
 
 			doc.FinishSelection ();
 
-			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
-
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			Gdk.Pixbuf image = cb.WaitForImage ();
-
-			if (image == null)
-				return;
-
+			
 			Path p;
+			Cairo.ImageSurface old;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				g.DrawPixbuf (image, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
+			using (Gdk.Pixbuf image = cb.WaitForImage ()) {
+
+				if (image == null)
+					return;
+
+				old = doc.CurrentLayer.Surface.Clone ();
+
+				using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+					g.DrawPixbuf (image, new Cairo.Point (0, 0));
+					p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
+				}
 			}
+
+			Path old_path = doc.SelectionPath;
 
 			doc.SelectionPath = p;
 			doc.ShowSelection = true;
+
+			if (old_path != null)
+				(old_path as IDisposable).Dispose ();
 
 			doc.Workspace.Invalidate ();
 
