@@ -65,11 +65,7 @@ namespace Pinta.Tools
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
 			hist.TakeSnapshotOfLayer (doc.CurrentLayer);
 
-			using (Context g = new Context (doc.CurrentLayer.Surface)) {
-				g.AppendPath (doc.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
+			using (var g = doc.CreateClippedContext ()) {
 				// Reset FillRule to the default
 				g.FillRule = FillRule.Winding;
 

@@ -92,11 +92,7 @@ namespace Pinta.Tools
 				return;
 			}
 
-			using (Cairo.Context g = new Cairo.Context (doc.ToolLayer.Surface)) {
-				g.AppendPath (doc.SelectionPath);
-				g.FillRule = Cairo.FillRule.EvenOdd;
-				g.Clip ();
-
+			using (var g = doc.CreateClippedToolContext ()) {
 				g.Antialias = Cairo.Antialias.Subpixel;
 
 				g.MoveTo (last_point.X, last_point.Y);

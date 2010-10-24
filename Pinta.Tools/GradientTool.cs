@@ -138,11 +138,7 @@ namespace Pinta.Tools
 
 				gr.Render (scratch_layer, new Gdk.Rectangle[] { selection_bounds });
 
-				using (Context g = new Context (doc.CurrentLayer.Surface)) {
-					g.AppendPath (doc.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
-					g.Clip ();
-					
+				using (var g = doc.CreateClippedContext ()) {
 					g.SetSource (scratch_layer);
 					g.Paint ();
 				}

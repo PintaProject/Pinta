@@ -235,7 +235,55 @@ namespace Pinta.Core
 			if (selection_path != null)
 				(selection_path as IDisposable).Dispose ();
 		}
-		
+
+		public Context CreateClippedContext ()
+		{
+			Context g = new Context (CurrentLayer.Surface);
+
+			g.AppendPath (SelectionPath);
+			g.FillRule = Cairo.FillRule.EvenOdd;
+			g.Clip ();
+
+			return g;
+		}
+
+		public Context CreateClippedContext (bool antialias)
+		{
+			Context g = new Context (CurrentLayer.Surface);
+
+			g.AppendPath (SelectionPath);
+			g.FillRule = Cairo.FillRule.EvenOdd;
+			g.Clip ();
+
+			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
+
+			return g;
+		}
+
+		public Context CreateClippedToolContext ()
+		{
+			Context g = new Context (ToolLayer.Surface);
+
+			g.AppendPath (SelectionPath);
+			g.FillRule = Cairo.FillRule.EvenOdd;
+			g.Clip ();
+
+			return g;
+		}
+
+		public Context CreateClippedToolContext (bool antialias)
+		{
+			Context g = new Context (ToolLayer.Surface);
+
+			g.AppendPath (SelectionPath);
+			g.FillRule = Cairo.FillRule.EvenOdd;
+			g.Clip ();
+
+			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
+
+			return g;
+		}
+
 		public Layer CreateLayer ()
 		{
 			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++));
