@@ -183,7 +183,7 @@ namespace Pinta.Tools
 			current_point = point;
 			doc.ToolLayer.Hidden = true;
 
-			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), doc.CurrentLayer);
+			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentLayer);
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (shape_origin, new PointD (x, y));
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());

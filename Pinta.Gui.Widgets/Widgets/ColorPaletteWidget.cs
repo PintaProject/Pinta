@@ -107,14 +107,7 @@ namespace Pinta.Gui.Widgets
 					PintaCore.Palette.SecondaryColor = palette[pal];
 				else if (ev.Button == 1)
 					PintaCore.Palette.PrimaryColor = palette[pal];
-				else if ((ev.State & Gdk.ModifierType.ShiftMask) != 0) {
-					string message = "<span weight='bold' size='larger'>Maia</span>\n\nHello sweetie!";
-					Gtk.MessageDialog md = new Gtk.MessageDialog (PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal,
-						Gtk.MessageType.Info, Gtk.ButtonsType.Close, true, message);
-					
-					md.Run ();
-					md.Destroy ();
-				} else {
+				else {
 					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Palette Color");
 					csd.ColorSelection.PreviousColor = palette[pal].ToGdkColor ();
 					csd.ColorSelection.CurrentColor = palette[pal].ToGdkColor ();

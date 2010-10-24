@@ -87,5 +87,15 @@ namespace Pinta.Core
 		{
 			return p.X == int.MinValue && p.Y == int.MinValue;
 		}
+
+		public static bool IsShiftPressed (this EventButton ev)
+		{
+			return (ev.State & ModifierType.ShiftMask) == ModifierType.ShiftMask;
+		}
+
+		public static bool IsControlPressed (this EventButton ev)
+		{
+			return (ev.State & ModifierType.ControlMask) == ModifierType.ControlMask;
+		}
 	}
 }

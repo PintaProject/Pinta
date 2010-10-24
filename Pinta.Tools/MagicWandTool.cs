@@ -77,9 +77,9 @@ namespace Pinta.Tools
 
 			//SetCursor (Cursors.WaitCursor);
 
-			if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 1)
+			if (args.Event.IsControlPressed () && args.Event.Button == 1)
 				this.combineMode = CombineMode.Union;
-			else if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 3)
+			else if (args.Event.IsControlPressed () && args.Event.Button == 3)
 				this.combineMode = CombineMode.Xor;
 			else if (args.Event.Button == 3)
 				this.combineMode = CombineMode.Exclude;

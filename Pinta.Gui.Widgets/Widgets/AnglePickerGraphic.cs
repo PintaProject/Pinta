@@ -72,7 +72,7 @@ namespace Pinta.Gui.Widgets
 		{
 			tracking = true;
 
-			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
+			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), args.Event.IsShiftPressed ());
 		}
 		
 		private void ProcessMouseEvent (Point pt, bool constrainAngle)

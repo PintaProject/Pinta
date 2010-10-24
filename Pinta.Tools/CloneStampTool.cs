@@ -58,7 +58,7 @@ namespace Pinta.Tools
 				return;
 				
 			// Ctrl click is set origin, regular click is begin drawing
-			if ((args.Event.State & Gdk.ModifierType.ControlMask) == 0) {
+			if (!args.Event.IsControlPressed ()) {
 				if (origin.IsNotSet ())
 					return;
 					
