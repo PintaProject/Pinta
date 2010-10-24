@@ -58,15 +58,17 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (!is_drawing)
 				return;
 
-			double x = Utility.Clamp (point.X, 0, PintaCore.Workspace.ImageSize.Width - 1);
-			double y = Utility.Clamp (point.Y, 0, PintaCore.Workspace.ImageSize.Height - 1);
+			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
+			double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
 
-			PintaCore.Layers.ShowSelection = true;
+			doc.ShowSelection = true;
 
-			ImageSurface surf = PintaCore.Layers.ToolLayer.Surface;
+			ImageSurface surf = doc.ToolLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				g.Antialias = Antialias.Subpixel;
@@ -82,21 +84,23 @@ namespace Pinta.Tools
 				
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
-				
-				Path old = PintaCore.Layers.SelectionPath;
-				
-				PintaCore.Layers.SelectionPath = g.CopyPath (); 
+
+				Path old = doc.SelectionPath;
+
+				doc.SelectionPath = g.CopyPath (); 
 				(old as IDisposable).Dispose ();
 			}
 
-			PintaCore.Workspace.Invalidate ();
+			doc.Workspace.Invalidate ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			base.OnMouseUp (canvas, args, point);
 
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				if (path != null) {
@@ -108,13 +112,13 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 
-				Path old = PintaCore.Layers.SelectionPath;
+				Path old = doc.SelectionPath;
 
-				PintaCore.Layers.SelectionPath = g.CopyPath ();
+				doc.SelectionPath = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
 
-			PintaCore.Workspace.Invalidate ();
+			doc.Workspace.Invalidate ();
 		}
 		#endregion
 	}

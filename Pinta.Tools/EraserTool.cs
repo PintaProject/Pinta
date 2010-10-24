@@ -52,6 +52,8 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (mouse_button <= 0) {
 				last_point = point_empty;
 				return;
@@ -65,13 +67,13 @@ namespace Pinta.Tools
 			if (last_point.Equals (point_empty))
 				last_point = new Point (x, y);
 
-			if (PintaCore.Workspace.PointInCanvas (point))
+			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentLayer.Surface;
 			
 			using (Context g = new Context (surf)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
@@ -90,7 +92,7 @@ namespace Pinta.Tools
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
 
-			PintaCore.Workspace.Invalidate (r);
+			doc.Workspace.Invalidate (r);
 			
 			last_point = new Point (x, y);
 		}

@@ -74,15 +74,17 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (args.Event.Button == 1)
 				button_down = 1;
 			else if (args.Event.Button == 3)
 				button_down = 3;
 
-			if (!PintaCore.Workspace.PointInCanvas (point))
+			if (!doc.Workspace.PointInCanvas (point))
 				return;
-							
-			Color color = PintaCore.Layers.CurrentLayer.Surface.GetPixel ((int)point.X, (int)point.Y);
+
+			Color color = doc.CurrentLayer.Surface.GetPixel ((int)point.X, (int)point.Y);
 
 			if (button_down == 1)
 				PintaCore.Palette.PrimaryColor = color;
@@ -92,13 +94,15 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (button_down == 0)
 				return;
-				
-			if (!PintaCore.Workspace.PointInCanvas (point))
+
+			if (!doc.Workspace.PointInCanvas (point))
 				return;
 
-			Color color = PintaCore.Layers.CurrentLayer.Surface.GetPixel ((int)point.X, (int)point.Y);
+			Color color = doc.CurrentLayer.Surface.GetPixel ((int)point.X, (int)point.Y);
 
 			if (button_down == 1)
 				PintaCore.Palette.PrimaryColor = color;

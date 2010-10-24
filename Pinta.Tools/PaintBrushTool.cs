@@ -99,6 +99,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (mouse_button == 1) {
 				StrokeColor = PintaCore.Palette.PrimaryColor;
 				FillColor = PintaCore.Palette.SecondaryColor;
@@ -119,16 +121,16 @@ namespace Pinta.Tools
 			
 			if (LastPoint.Equals (point_empty))
 				LastPoint = new Point (x, y);
-			
-			if (PintaCore.Workspace.PointInCanvas (point))
+
+			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			var surf = PintaCore.Layers.CurrentLayer.Surface;
+			var surf = doc.CurrentLayer.Surface;
 			var invalidate_rect = Gdk.Rectangle.Zero;
 			var brush_width = BrushWidth;
 
 			using (Drawable = new Context (surf)) {
-				Drawable.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
+				Drawable.AppendPath (doc.SelectionPath);
 				Drawable.FillRule = FillRule.EvenOdd;
 				Drawable.Clip ();
 
@@ -148,9 +150,9 @@ namespace Pinta.Tools
 			Drawable = null;
 
 			if (invalidate_rect.IsEmpty) {
-				PintaCore.Workspace.Invalidate ();
+				doc.Workspace.Invalidate ();
 			} else {
-				PintaCore.Workspace.Invalidate (invalidate_rect);
+				doc.Workspace.Invalidate (invalidate_rect);
 			}
 
 			LastPoint = new Point (x, y);

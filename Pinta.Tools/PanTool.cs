@@ -54,8 +54,10 @@ namespace Pinta.Tools
 		
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			// Don't scroll if the whole canvas fits (no scrollbars)
-			if (!PintaCore.Workspace.CanvasFitsInWindow)
+			if (!doc.Workspace.CanvasFitsInWindow)
 				active = true;
 				
 			last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
@@ -69,7 +71,9 @@ namespace Pinta.Tools
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
 		{
 			if (active) {
-				PintaCore.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
+				Document doc = PintaCore.Workspace.ActiveDocument;
+
+				doc.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
 				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
 			}
 		}

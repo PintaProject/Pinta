@@ -84,14 +84,18 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
 		{
-			PintaCore.Layers.ToolLayer.Clear ();
-			stencil = new bool[PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height];
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.ToolLayer.Clear ();
+			stencil = new bool[doc.ImageSize.Width, doc.ImageSize.Height];
 
 			base.OnMouseDown (canvas, args, point);
 		}
 		
 		protected unsafe override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			ColorBgra old_color;
 			ColorBgra new_color;
 			
@@ -111,15 +115,15 @@ namespace Pinta.Tools
 			
 			if (last_point.Equals (point_empty))
 				last_point = new Point (x, y);
-			
-			if (PintaCore.Workspace.PointInCanvas (point))
+
+			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
-			ImageSurface tmp_layer = PintaCore.Layers.ToolLayer.Surface;
+			ImageSurface surf = doc.CurrentLayer.Surface;
+			ImageSurface tmp_layer = doc.ToolLayer.Surface;
 
 			Gdk.Rectangle roi = GetRectangleFromPoints (last_point, new Point (x, y));
-			
+
 			roi = PintaCore.Workspace.ClampToImageSize (roi);
 			myTolerance = (int)(Tolerance * 256);
 			
@@ -147,7 +151,7 @@ namespace Pinta.Tools
 			tmp_layer.MarkDirty ();
 
 			using (Context g = new Context (surf)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
@@ -164,8 +168,8 @@ namespace Pinta.Tools
 				
 				g.Stroke ();
 			}
-			
-			PintaCore.Workspace.Invalidate (roi);
+
+			doc.Workspace.Invalidate (roi);
 			
 			last_point = new Point (x, y);
 		}

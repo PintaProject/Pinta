@@ -67,23 +67,25 @@ namespace Pinta.Tools
 		{
 			if (!is_dragging)
 				return;
-			
+
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			PointD new_offset = point;
 			
 			double dx = origin_offset.X - new_offset.X;
 			double dy = origin_offset.Y - new_offset.Y;
-			
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				Path old = PintaCore.Layers.SelectionPath;
+
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				Path old = doc.SelectionPath;
 				g.FillRule = FillRule.EvenOdd;
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (doc.SelectionPath);
 				g.Translate (dx, dy);
-				PintaCore.Layers.SelectionPath = g.CopyPath ();
+				doc.SelectionPath = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
 
 			origin_offset = new_offset;
-			PintaCore.Layers.ShowSelection = true;
+			doc.ShowSelection = true;
 			
 			(o as Gtk.DrawingArea).GdkWindow.Invalidate ();
 		}
@@ -93,7 +95,7 @@ namespace Pinta.Tools
 			is_dragging = false;
 
 			if (hist != null)
-				PintaCore.History.PushNewItem (hist);
+				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
 
 			hist = null;
 		}

@@ -50,10 +50,12 @@ namespace Pinta.Tools
 
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			Rectangle dirty;
 			
 			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 					

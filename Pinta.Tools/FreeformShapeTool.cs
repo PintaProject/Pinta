@@ -88,16 +88,20 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			surface_modified = false;
-			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentLayer.Surface.Clone ();
 			path = null;
 
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = false;
+			doc.ToolLayer.Clear ();
+			doc.ToolLayer.Hidden = false;
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask) {
 				outline_color = PintaCore.Palette.PrimaryColor;
 				fill_color = PintaCore.Palette.SecondaryColor;
@@ -119,14 +123,14 @@ namespace Pinta.Tools
 				return;
 			}
 
-			if (PintaCore.Workspace.PointInCanvas (point))
+			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			PintaCore.Layers.ToolLayer.Clear ();
-			ImageSurface surf = PintaCore.Layers.ToolLayer.Surface;
+			doc.ToolLayer.Clear ();
+			ImageSurface surf = doc.ToolLayer.Surface;
 
 			using (Context g = new Context (surf)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
@@ -161,25 +165,27 @@ namespace Pinta.Tools
 				}
 			}
 
-			PintaCore.Workspace.Invalidate ();
+			doc.Workspace.Invalidate ();
 
 			last_point = new Point (x, y);
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-			PintaCore.Layers.ToolLayer.Hidden = true;
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.ToolLayer.Hidden = true;
 
 			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 
 			surface_modified = false;
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentLayer.Surface;
 
 			using (Context g = new Context (surf)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
@@ -211,7 +217,7 @@ namespace Pinta.Tools
 				}
 			}
 
-			PintaCore.Workspace.Invalidate ();
+			doc.Workspace.Invalidate ();
 		}
 		#endregion
 

@@ -92,17 +92,19 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			Point pos = new Point ((int)point.X, (int)point.Y);
 
 			// Don't do anything if we're outside the canvas
-			if (pos.X < 0 || pos.X >= PintaCore.Workspace.ImageSize.Width)
+			if (pos.X < 0 || pos.X >= doc.ImageSize.Width)
 				return;
-			if (pos.Y < 0 || pos.Y >= PintaCore.Workspace.ImageSize.Height)
+			if (pos.Y < 0 || pos.Y >= doc.ImageSize.Height)
 				return;
 				
 			base.OnMouseDown (canvas, args, point);
 
-			Gdk.Region currentRegion = Gdk.Region.Rectangle(PintaCore.Layers.SelectionPath.GetBounds());
+			Gdk.Region currentRegion = Gdk.Region.Rectangle (doc.SelectionPath.GetBounds ());
 
 			// See if the mouse click is valid
 			if (!currentRegion.PointIn (pos.X, pos.Y) && limitToSelection) {
@@ -110,8 +112,8 @@ namespace Pinta.Tools
 				currentRegion = null;
 				return;
 			}
-			
-			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
+
+			ImageSurface surface = doc.CurrentLayer.Surface;
 			ImageSurface stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height);
 
 			IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter (stencil_surface);

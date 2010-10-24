@@ -56,29 +56,31 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			origin_offset = point;
 			is_dragging = true;
 
 			hist = new MovePixelsHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
-			
-			if (!PintaCore.Layers.ShowSelectionLayer) {
+
+			if (!doc.ShowSelectionLayer) {
 				// Copy the selection to the temp layer
-				PintaCore.Layers.CreateSelectionLayer ();
-				PintaCore.Layers.ShowSelectionLayer = true;
-				
-				using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.SelectionLayer.Surface)) {
-					g.AppendPath (PintaCore.Layers.SelectionPath);
+				doc.CreateSelectionLayer ();
+				doc.ShowSelectionLayer = true;
+
+				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
+					g.AppendPath (doc.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
-					g.SetSource (PintaCore.Layers.CurrentLayer.Surface);
+					g.SetSource (doc.CurrentLayer.Surface);
 					g.Clip ();
 					g.Paint ();
-				}			
-				
-				Cairo.ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+				}
+
+				Cairo.ImageSurface surf = doc.CurrentLayer.Surface;
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
-					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.AppendPath (doc.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.Operator = Cairo.Operator.Clear;
 					g.Fill ();
@@ -92,23 +94,25 @@ namespace Pinta.Tools
 		{
 			if (!is_dragging)
 				return;
-			
+
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			PointD new_offset = new PointD (point.X, point.Y);
 			
 			double dx = origin_offset.X - new_offset.X;
 			double dy = origin_offset.Y - new_offset.Y;
 
-			Path path = PintaCore.Layers.SelectionPath;
-			
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.CurrentLayer.Surface)) {
+			Path path = doc.SelectionPath;
+
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
 				g.AppendPath (path);
 				g.Translate (dx, dy);
-				PintaCore.Layers.SelectionPath = g.CopyPath ();
+				doc.SelectionPath = g.CopyPath ();
 			}
 
 			(path as IDisposable).Dispose ();
 
-			PintaCore.Layers.SelectionLayer.Offset = new PointD (PintaCore.Layers.SelectionLayer.Offset.X - dx, PintaCore.Layers.SelectionLayer.Offset.Y - dy);
+			doc.SelectionLayer.Offset = new PointD (doc.SelectionLayer.Offset.X - dx, doc.SelectionLayer.Offset.Y - dy);
 			
 			origin_offset = new_offset;
 			
@@ -129,8 +133,8 @@ namespace Pinta.Tools
 		protected override void OnDeactivated ()
 		{
 			base.OnDeactivated ();
-			
-			PintaCore.Layers.FinishSelection ();
+
+			PintaCore.Workspace.ActiveDocument.FinishSelection ();
 		}
 	}
 }

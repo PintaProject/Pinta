@@ -67,6 +67,8 @@ namespace Pinta.Tools
 		#region mouse
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			// Protect against history corruption
 			if (tracking)
 				return;
@@ -75,21 +77,25 @@ namespace Pinta.Tools
 			startpoint = point;
 			tracking = true;
 			button = args.Event.Button;
-			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (!tracking || args.Event.Button != button)
 				return;
 		
 			base.OnMouseUp (canvas, args, point);
 			tracking = false;
-			PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			base.OnMouseMove (o, args, point);
 			if (tracking) {
 				
@@ -126,14 +132,14 @@ namespace Pinta.Tools
 				gr.AlphaBlending = UseAlphaBlending;
         
 				gr.BeforeRender ();
-				
-				Gdk.Rectangle selection_bounds = PintaCore.Layers.SelectionPath.GetBounds ();
-				ImageSurface scratch_layer = PintaCore.Layers.ToolLayer.Surface;
+
+				Gdk.Rectangle selection_bounds = doc.SelectionPath.GetBounds ();
+				ImageSurface scratch_layer = doc.ToolLayer.Surface;
 
 				gr.Render (scratch_layer, new Gdk.Rectangle[] { selection_bounds });
-				
-				using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-					g.AppendPath (PintaCore.Layers.SelectionPath);
+
+				using (Context g = new Context (doc.CurrentLayer.Surface)) {
+					g.AppendPath (doc.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.Clip ();
 					
@@ -142,7 +148,7 @@ namespace Pinta.Tools
 				}
 
 				selection_bounds.Inflate (5, 5);
-				PintaCore.Workspace.Invalidate (selection_bounds);
+				doc.Workspace.Invalidate (selection_bounds);
 			}
 		}
 		#endregion

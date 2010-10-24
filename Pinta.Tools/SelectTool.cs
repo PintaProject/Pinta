@@ -71,7 +71,7 @@ namespace Pinta.Tools
 				hist = null;
 			} else {
 				if (hist != null)
-					PintaCore.History.PushNewItem (hist);
+					PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
 					
 				hist = null;
 			}
@@ -84,14 +84,16 @@ namespace Pinta.Tools
 			if (!is_drawing)
 				return;
 
-			double x = Utility.Clamp (point.X, 0, PintaCore.Workspace.ImageSize.Width - 1);
-			double y = Utility.Clamp (point.Y, 0, PintaCore.Workspace.ImageSize.Height - 1);
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PintaCore.Layers.ShowSelection = true;
+			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
+			double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
 
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.SelectionLayer);
+			doc.ShowSelection = true;
 
-			PintaCore.Workspace.Invalidate ();
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), doc.SelectionLayer);
+
+			doc.Workspace.Invalidate ();
 			
 			last_dirty = dirty;
 		}

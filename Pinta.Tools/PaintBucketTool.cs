@@ -60,11 +60,13 @@ namespace Pinta.Tools
 		
 		protected unsafe override void OnFillRegionComputed (Point[][] polygonSet)
 		{
-			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-			hist.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayer);
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
+			hist.TakeSnapshotOfLayer (doc.CurrentLayer);
+
+			using (Context g = new Context (doc.CurrentLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
@@ -79,9 +81,9 @@ namespace Pinta.Tools
 				g.Color = fill_color;
 				g.Fill ();
 			}
-			
-			PintaCore.History.PushNewItem (hist);
-			PintaCore.Workspace.Invalidate ();
+
+			doc.History.PushNewItem (hist);
+			doc.Workspace.Invalidate ();
 		}
 	}
 }

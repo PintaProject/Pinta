@@ -51,6 +51,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			// We only do stuff with the left mouse button
 			if (args.Event.Button != 1)
 				return;
@@ -69,7 +71,7 @@ namespace Pinta.Tools
 				PintaCore.Layers.ToolLayer.Hidden = false;
 
 				surface_modified = false;
-				undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+				undo_surface = doc.CurrentLayer.Surface.Clone ();
 			} else {
 				origin = point.ToGdkPoint ();
 			}
@@ -77,6 +79,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (!painting || offset.IsNotSet ())
 				return;
 				
@@ -88,8 +92,8 @@ namespace Pinta.Tools
 				return;
 			}
 
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Layers.ToolLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+			using (Cairo.Context g = new Cairo.Context (doc.ToolLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 
@@ -98,7 +102,7 @@ namespace Pinta.Tools
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
 
-				g.SetSource (PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface, offset.X, offset.Y);
+				g.SetSource (doc.CurrentLayer.Surface, offset.X, offset.Y);
 				g.LineWidth = BrushWidth;
 				g.LineCap = Cairo.LineCap.Round;
 
@@ -109,15 +113,17 @@ namespace Pinta.Tools
 			
 			last_point = new Point (x, y);
 			surface_modified = true;
-			PintaCore.Workspace.Invalidate (dirty_rect);
+			doc.Workspace.Invalidate (dirty_rect);
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			painting = false;
 
-			using (Cairo.Context g = new Cairo.Context (PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface)) {
-				g.SetSource (PintaCore.Layers.ToolLayer.Surface);
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				g.SetSource (doc.ToolLayer.Surface);
 				g.Paint ();
 			}
 			
@@ -125,10 +131,10 @@ namespace Pinta.Tools
 			
 			offset = new Point (int.MinValue, int.MinValue);
 			last_point = new Point (int.MinValue, int.MinValue);
-			
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = true;
-			PintaCore.Workspace.Invalidate ();
+
+			doc.ToolLayer.Clear ();
+			doc.ToolLayer.Hidden = true;
+			doc.Workspace.Invalidate ();
 		}
 
 		protected override void OnDeactivated ()

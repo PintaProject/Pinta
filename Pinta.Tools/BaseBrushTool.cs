@@ -106,9 +106,11 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (undo_surface != null) {
 				if (surface_modified)
-					PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+					doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
 				else if (undo_surface != null)
 					(undo_surface as IDisposable).Dispose ();
 			}
@@ -120,8 +122,10 @@ namespace Pinta.Tools
 		
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			surface_modified = false;
-			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentLayer.Surface.Clone ();
 			mouse_button = args.Event.Button;
 			
 			OnMouseMove (canvas, null, point);

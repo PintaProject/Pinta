@@ -151,6 +151,8 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			shape_origin = point;
 			current_point = point;
 			
@@ -163,31 +165,33 @@ namespace Pinta.Tools
 				outline_color = PintaCore.Palette.SecondaryColor;
 				fill_color = PintaCore.Palette.PrimaryColor;
 			}
-			
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = false;
+
+			doc.ToolLayer.Clear ();
+			doc.ToolLayer.Hidden = false;
 
 			surface_modified = false;
-			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			double x = point.X;
 			double y = point.Y;
 
 			current_point = point;
-			PintaCore.Layers.ToolLayer.Hidden = true;
-			
-			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.CurrentLayer);
+			doc.ToolLayer.Hidden = true;
+
+			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), doc.CurrentLayer);
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (shape_origin, new PointD (x, y));
-			PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
+			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			
 			is_drawing = false;
 
 			if (surface_modified)
-				PintaCore.History.PushNewItem (CreateHistoryItem ());
+				doc.History.PushNewItem (CreateHistoryItem ());
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 
@@ -199,21 +203,23 @@ namespace Pinta.Tools
 			if (!is_drawing)
 				return;
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			current_point = point;
 			double x = point.X;
 			double y = point.Y;
-			
-			PintaCore.Layers.ToolLayer.Clear ();
-			
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), PintaCore.Layers.ToolLayer);
+
+			doc.ToolLayer.Clear ();
+
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), doc.ToolLayer);
 			dirty = dirty.Clamp ();
-			
-			PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
-			PintaCore.Workspace.Invalidate (dirty.ToGdkRectangle ());
+
+			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
+			doc.Workspace.Invalidate (dirty.ToGdkRectangle ());
 			
 			last_dirty = dirty;
 
-			if (PintaCore.Workspace.PointInCanvas (point))
+			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 		}
 		#endregion
@@ -226,7 +232,7 @@ namespace Pinta.Tools
 		
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
-			return new ClippedSurfaceHistoryItem (Icon, Name, new IrregularSurface (undo_surface, Gdk.Region.Rectangle(last_dirty.ToGdkRectangle())), PintaCore.Layers.CurrentLayerIndex);
+			return new ClippedSurfaceHistoryItem (Icon, Name, new IrregularSurface (undo_surface, Gdk.Region.Rectangle (last_dirty.ToGdkRectangle ())), PintaCore.Workspace.ActiveDocument.CurrentLayerIndex);
 		}
 		#endregion
 

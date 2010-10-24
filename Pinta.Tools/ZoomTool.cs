@@ -75,20 +75,22 @@ namespace Pinta.Tools
 			if (!is_drawing)
 				return;
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			Rectangle r = PointsToRectangle (shape_origin, point);
 			Rectangle dirty;
 
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = false;
+			doc.ToolLayer.Clear ();
+			doc.ToolLayer.Hidden = false;
 
-			using (Context g = new Context (PintaCore.Layers.ToolLayer.Surface)) {
+			using (Context g = new Context (doc.ToolLayer.Surface)) {
 				g.Antialias = Antialias.Subpixel;
 
 				dirty = g.FillStrokedRectangle (r, new Color (0, 0.4, 0.8, 0.1), new Color (0, 0, 0.9), 1);
 				dirty = dirty.Clamp ();
 
-				PintaCore.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
-				PintaCore.Workspace.Invalidate (dirty.ToGdkRectangle ());
+				doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
+				doc.Workspace.Invalidate (dirty.ToGdkRectangle ());
 				
 				last_dirty = dirty;
 			}
@@ -119,6 +121,8 @@ namespace Pinta.Tools
 		{
 			base.OnMouseMove (o, args, point);
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (mouseDown == 1) {
 				if (Math.Abs (shape_origin.X - point.X) > tolerance || Math.Abs (shape_origin.Y - point.Y) > tolerance)  // if they've moved the mouse more than 10 pixels since they clicked
 					is_drawing = true;
@@ -126,27 +130,29 @@ namespace Pinta.Tools
 				//still draw rectangle after we have draw it one time...
 				UpdateRectangle (point);
 			} else if (mouseDown == 2) {
-				PintaCore.Workspace.ScrollCanvas ((int)((shape_origin.X - point.X) * PintaCore.Workspace.Scale), (int)((shape_origin.Y - point.Y) * PintaCore.Workspace.Scale));
+				doc.Workspace.ScrollCanvas ((int)((shape_origin.X - point.X) * doc.Workspace.Scale), (int)((shape_origin.Y - point.Y) * doc.Workspace.Scale));
 			}
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			double x = point.X;
 			double y = point.Y;
-			PintaCore.Layers.ToolLayer.Hidden = true;
+			doc.ToolLayer.Hidden = true;
 			
 			if (mouseDown == 1 || mouseDown == 3) {	//left or right
 				if (args.Event.Button == 1) {	//left
 					if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
-						PintaCore.Workspace.ZoomIn ();
-						PintaCore.Workspace.RecenterView (x, y);
+						doc.Workspace.ZoomIn ();
+						doc.Workspace.RecenterView (x, y);
 					} else {
-						PintaCore.Workspace.ZoomToRectangle (PointsToRectangle (shape_origin, point));
+						doc.Workspace.ZoomToRectangle (PointsToRectangle (shape_origin, point));
 					}
 				} else {
-					PintaCore.Workspace.ZoomOut ();
-					PintaCore.Workspace.RecenterView (x, y);
+					doc.Workspace.ZoomOut ();
+					doc.Workspace.RecenterView (x, y);
 				}
 			}
 

@@ -57,9 +57,9 @@ namespace Pinta.Tools
 		{
 			if (surface_modified)
 				return;
-		
+
 			surface_modified = false;
-			undo_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			undo_surface = PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface.Clone ();
 			Color tool_color;
 
 			if (args.Event.Button == 1) // left
@@ -92,7 +92,7 @@ namespace Pinta.Tools
 		
 		private void Draw (DrawingArea drawingarea1, Color tool_color, Cairo.PointD point, bool first_pixel)
 		{
-			int x = (int) point.X;
+			int x = (int)point.X;
 			int y = (int) point.Y;
 			
 			if (last_point.Equals (point_empty)) {
@@ -102,10 +102,12 @@ namespace Pinta.Tools
 					return;
 			}
 			
-			if (PintaCore.Workspace.PointInCanvas (point))
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = PintaCore.Layers.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentLayer.Surface;
 			
 			if (first_pixel) {
 				// Does Cairo really not support a single-pixel-long single-pixel-wide line?
@@ -118,7 +120,7 @@ namespace Pinta.Tools
 				surf.MarkDirty ();
 			} else {
 				using (Context g = new Context (surf)) {
-					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.AppendPath (doc.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.Clip ();
 				
@@ -137,15 +139,17 @@ namespace Pinta.Tools
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
 
-			PintaCore.Workspace.Invalidate (r);
+			doc.Workspace.Invalidate (r);
 			
 			last_point = new Point (x, y);
 		}
 		
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Layers.CurrentLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 

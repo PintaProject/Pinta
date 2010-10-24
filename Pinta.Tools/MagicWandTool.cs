@@ -73,6 +73,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			//SetCursor (Cursors.WaitCursor);
 
 			if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0 && args.Event.Button == 1)
@@ -86,15 +88,17 @@ namespace Pinta.Tools
 
 			base.OnMouseDown (canvas, args, point);
 
-			PintaCore.Layers.ShowSelection = true;
+			doc.ShowSelection = true;
 		}
 
 		protected override void OnFillRegionComputed (Point[][] polygonSet)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			SelectionHistoryItem undoAction = new SelectionHistoryItem (this.Icon, this.Name);
 			undoAction.TakeSnapshot ();
 
-			Path path = PintaCore.Layers.SelectionPath;
+			Path path = doc.SelectionPath;
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
 				PintaCore.Layers.SelectionPath = g.CreatePolygonPath (polygonSet);
@@ -123,8 +127,8 @@ namespace Pinta.Tools
 			//Selection.CommitContinuation();
 			//Selection.PerformChanged();
 
-			PintaCore.History.PushNewItem (undoAction);
-			PintaCore.Workspace.Invalidate ();
+			doc.History.PushNewItem (undoAction);
+			doc.Workspace.Invalidate ();
 		}
 	}
 }
