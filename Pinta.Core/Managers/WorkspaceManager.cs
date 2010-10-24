@@ -188,26 +188,6 @@ namespace Pinta.Core
 
 			return fileOpened;
 		}
-
-		public void ZoomIn ()
-		{
-			ActiveWorkspace.ZoomIn ();
-		}
-		
-		public void ZoomOut ()
-		{
-			ActiveWorkspace.ZoomOut ();
-		}
-
-		public void ZoomToRectangle (Rectangle rect)
-		{
-			ActiveWorkspace.ZoomToRectangle (rect);
-		}
-		
-		public void RecenterView (double x, double y)
-		{
-			ActiveWorkspace.RecenterView (x, y);
-		}
 		
 		public void ResizeImage (int width, int height)
 		{
@@ -224,27 +204,13 @@ namespace Pinta.Core
 			return ActiveWorkspace.WindowPointToCanvas (x, y);
 		}
 
-		public bool PointInCanvas (Cairo.PointD point)
-		{
-			return ActiveWorkspace.PointInCanvas (point);
-		}
-
 		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
 		{
 			return ActiveDocument.ClampToImageSize (r);
 		}
 
-		public bool CanvasFitsInWindow {
-			get { return ActiveWorkspace.CanvasFitsInWindow; }
-		}
-
 		public bool ImageFitsInWindow {
 			get { return ActiveWorkspace.CanvasFitsInWindow; }
-		}
-		
-		public void ScrollCanvas (int dx, int dy)
-		{
-			ActiveWorkspace.ScrollCanvas (dx, dy);
 		}
 		
 		internal void ResetTitle ()
