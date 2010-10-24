@@ -218,12 +218,12 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)
 		{
-			PintaCore.Workspace.ZoomOut ();
+			PintaCore.Workspace.ActiveDocument.Workspace.ZoomOut ();
 		}
 
 		private void HandlePintaCoreActionsViewZoomInActivated (object sender, EventArgs e)
 		{
-			PintaCore.Workspace.ZoomIn ();
+			PintaCore.Workspace.ActiveDocument.Workspace.ZoomIn ();
 		}
 		#endregion
 	}

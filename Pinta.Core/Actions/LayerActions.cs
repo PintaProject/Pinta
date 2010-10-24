@@ -126,7 +126,7 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void EnableOrDisableLayerActions (object sender, EventArgs e)
 		{
-			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Layers.Count > 1) {
+			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveDocument.Layers.Count > 1) {
 				PintaCore.Actions.Layers.DeleteLayer.Sensitive = true;
 				PintaCore.Actions.Image.Flatten.Sensitive = true;
 			} else {
@@ -134,7 +134,7 @@ namespace Pinta.Core
 				PintaCore.Actions.Image.Flatten.Sensitive = false;
 			}
 
-			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Layers.CurrentLayerIndex > 0) {
+			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveDocument.CurrentLayerIndex > 0) {
 				PintaCore.Actions.Layers.MergeLayerDown.Sensitive = true;
 				PintaCore.Actions.Layers.MoveLayerDown.Sensitive = true;
 			} else {
@@ -142,7 +142,7 @@ namespace Pinta.Core
 				PintaCore.Actions.Layers.MoveLayerDown.Sensitive = false;
 			}
 
-			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Layers.CurrentLayerIndex < PintaCore.Layers.Count - 1)
+			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveDocument.CurrentLayerIndex < PintaCore.Workspace.ActiveDocument.Layers.Count - 1)
 				PintaCore.Actions.Layers.MoveLayerUp.Sensitive = true;
 			else
 				PintaCore.Actions.Layers.MoveLayerUp.Sensitive = false;
@@ -150,7 +150,8 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
 			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), null, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
 			
@@ -162,9 +163,9 @@ namespace Pinta.Core
 				string file = fcd.Filename;
 				
 				// Open the image and add it to the layers
-				Layer layer = PintaCore.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
-				
-				Pixbuf bg = new Pixbuf (file, PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.ImageSize.Height, true);
+				Layer layer = doc.AddNewLayer (System.IO.Path.GetFileName (file));
+
+				Pixbuf bg = new Pixbuf (file, doc.ImageSize.Width, doc.ImageSize.Height, true);
 				
 				using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 					CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
@@ -172,13 +173,13 @@ namespace Pinta.Core
 				}
 				
 				bg.Dispose ();
-				
-				PintaCore.Layers.SetCurrentLayer (layer);
 
-				AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.ImportFromFile.png", Catalog.GetString ("Import From File"), PintaCore.Layers.IndexOf (layer));
-				PintaCore.History.PushNewItem (hist);
+				doc.SetCurrentLayer (layer);
 
-				PintaCore.Workspace.Invalidate ();
+				AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.ImportFromFile.png", Catalog.GetString ("Import From File"), doc.Layers.IndexOf (layer));
+				doc.History.PushNewItem (hist);
+
+				doc.Workspace.Invalidate ();
 			}
 			
 			fcd.Destroy ();
@@ -186,93 +187,101 @@ namespace Pinta.Core
 
 		private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			PintaCore.Workspace.ActiveDocument.CurrentLayer.FlipVertical ();
-			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, PintaCore.Layers.CurrentLayerIndex));
+			doc.CurrentLayer.FlipVertical ();
+			doc.Workspace.Invalidate ();
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, doc.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsLayersFlipHorizontalActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			PintaCore.Workspace.ActiveDocument.CurrentLayer.FlipHorizontal ();
-			PintaCore.Workspace.Invalidate ();
-			PintaCore.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, PintaCore.Layers.CurrentLayerIndex));
+			doc.CurrentLayer.FlipHorizontal ();
+			doc.Workspace.Invalidate ();
+			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, doc.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Catalog.GetString ("Move Layer Up"), PintaCore.Layers.CurrentLayerIndex, PintaCore.Layers.CurrentLayerIndex + 1);
-			
-			PintaCore.Layers.MoveCurrentLayerUp ();
-			PintaCore.History.PushNewItem (hist);
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Catalog.GetString ("Move Layer Up"), doc.CurrentLayerIndex, doc.CurrentLayerIndex + 1);
+
+			doc.MoveCurrentLayerUp ();
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersMoveLayerDownActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Catalog.GetString ("Move Layer Down"), PintaCore.Layers.CurrentLayerIndex, PintaCore.Layers.CurrentLayerIndex - 1);
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Catalog.GetString ("Move Layer Down"), doc.CurrentLayerIndex, doc.CurrentLayerIndex - 1);
 
-			PintaCore.Layers.MoveCurrentLayerDown ();
-			PintaCore.History.PushNewItem (hist);
+			doc.MoveCurrentLayerDown ();
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersMergeLayerDownActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Catalog.GetString ("Merge Layer Down"));
-			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, PintaCore.Layers.CurrentLayer, PintaCore.Layers.CurrentLayerIndex);
-			SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, PintaCore.Layers[PintaCore.Layers.CurrentLayerIndex - 1].Surface.Clone (), PintaCore.Layers.CurrentLayerIndex - 1);
+			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.CurrentLayer, doc.CurrentLayerIndex);
+			SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[doc.CurrentLayerIndex - 1].Surface.Clone (), doc.CurrentLayerIndex - 1);
 			
 			hist.Push (h1);
 			hist.Push (h2);
-			
-			PintaCore.Layers.MergeCurrentLayerDown ();
-			
-			PintaCore.History.PushNewItem (hist);
+
+			doc.MergeCurrentLayerDown ();
+
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			Layer l = PintaCore.Layers.DuplicateCurrentLayer ();
+			Layer l = doc.DuplicateCurrentLayer ();
 			
 			// Make new layer the current layer
-			PintaCore.Layers.SetCurrentLayer (l);
+			doc.SetCurrentLayer (l);
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.DuplicateLayer.png", Catalog.GetString ("Duplicate Layer"), PintaCore.Layers.IndexOf (l));
-			PintaCore.History.PushNewItem (hist);
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.DuplicateLayer.png", Catalog.GetString ("Duplicate Layer"), doc.Layers.IndexOf (l));
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersDeleteLayerActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Catalog.GetString ("Delete Layer"), PintaCore.Layers.CurrentLayer, PintaCore.Layers.CurrentLayerIndex);
+			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Catalog.GetString ("Delete Layer"), doc.CurrentLayer, doc.CurrentLayerIndex);
 
-			PintaCore.Layers.DeleteLayer (PintaCore.Layers.CurrentLayerIndex, false);
+			doc.DeleteLayer (doc.CurrentLayerIndex, false);
 
-			PintaCore.History.PushNewItem (hist);
+			doc.History.PushNewItem (hist);
 		}
 
 		private void HandlePintaCoreActionsLayersAddNewLayerActivated (object sender, EventArgs e)
 		{
-			PintaCore.Layers.FinishSelection ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.FinishSelection ();
 
-			Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+			Layer l = doc.AddNewLayer (string.Empty);
 
 			// Make new layer the current layer
-			PintaCore.Layers.SetCurrentLayer (l);
+			doc.SetCurrentLayer (l);
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), PintaCore.Layers.IndexOf (l));
-			PintaCore.History.PushNewItem (hist);
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), doc.Layers.IndexOf (l));
+			doc.History.PushNewItem (hist);
 		}
 		#endregion
 	}
