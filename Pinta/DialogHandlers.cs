@@ -429,15 +429,30 @@ namespace Pinta
 
 		private void HandleSaveAllActivated (object sender, EventArgs e)
 		{
-			foreach (Document doc in PintaCore.Workspace.OpenDocuments)
+			foreach (Document doc in PintaCore.Workspace.OpenDocuments) {
+				if (!doc.IsDirty)
+					continue;
+
+				PintaCore.Workspace.SetActiveDocument (doc);
+
+				// Loop through all of these until we get a cancel
 				if (!doc.Save ())
 					break;
+			}
 		}
 
 		private void HandleCloseAllActivated (object sender, EventArgs e)
 		{
-			if (main_window.hruler.Metric != MetricType.Pixels)
-				main_window.ChangeRulersUnit (Gtk.MetricType.Pixels);
+			while (PintaCore.Workspace.HasOpenDocuments) {
+				int count = PintaCore.Workspace.OpenDocuments.Count;
+
+				PintaCore.Actions.File.Close.Activate ();
+
+				// If we still have the same number of open documents,
+				// the user cancelled on a Save prompt.
+				if (count == PintaCore.Workspace.OpenDocuments.Count)
+					return;
+			}
 		}
 
 		#region Private Methods

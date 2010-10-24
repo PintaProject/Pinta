@@ -44,9 +44,9 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
-			//menu.Append (SaveAll.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			//menu.Append (CloseAll.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			//menu.AppendSeparator ();
+			menu.Append (SaveAll.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (CloseAll.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.AppendSeparator ();
 		}
 		#endregion
 	}
