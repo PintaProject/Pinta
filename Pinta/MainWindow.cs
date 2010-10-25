@@ -222,11 +222,7 @@ namespace Pinta
 
 		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
 		{
-			foreach (MenuItem item in ((Menu)window_menu.Submenu))
-				if (item.Name == e.Document.Guid.ToString ()) {
-					((Menu)window_menu.Submenu).Remove (item);
-					break;
-				}
+			PintaCore.Actions.Window.RemoveDocument (e.Document);
 
 			if (!PintaCore.Workspace.HasOpenDocuments) {
 				PintaCore.Actions.File.Close.Sensitive = false;
@@ -268,12 +264,7 @@ namespace Pinta
 
 		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
 		{
-			MenuItem mi = (MenuItem)new Gtk.Action ("effects", e.Document.Filename).CreateMenuItem ();
-			mi.Name = e.Document.Guid.ToString ();
-
-			mi.Activated += delegate { PintaCore.Workspace.SetActiveDocument (e.Document); };
-
-			((Menu)window_menu.Submenu).AppendItem (mi);
+			PintaCore.Actions.Window.AddDocument (e.Document);
 
 			PintaCore.Actions.File.Close.Sensitive = true;
 			PintaCore.Actions.File.Save.Sensitive = true;

@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Cairo;
 using Mono.Unix;
 using System.Collections.Generic;
@@ -228,16 +229,25 @@ namespace Pinta.Core
 			if (index < 0)
 				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument less that zero.");
 			
-			active_document_index = index;
-			
-			OnActiveDocumentChanged (EventArgs.Empty);
+			SetActiveDocument (OpenDocuments[index]);
 		}
 		
 		public void SetActiveDocument (Document document)
 		{
+			RadioAction action = PintaCore.Actions.Window.OpenWindows.Where (p => p.Name == document.Guid.ToString ()).FirstOrDefault ();
+
+			if (action == null)
+				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument.  Could not find document.");
+
+			action.Activate ();
+		}
+
+		internal void SetActiveDocumentInternal (Document document)
+		{
 			int index = OpenDocuments.IndexOf (document);
-			
-			SetActiveDocument (index);
+			active_document_index = index;
+
+			OnActiveDocumentChanged (EventArgs.Empty);
 		}
 		
 		#region Protected Methods

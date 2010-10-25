@@ -83,6 +83,16 @@ namespace Pinta.Core
 			return item;
 		}
 
+		public static Gtk.CheckMenuItem CreateAcceleratedMenuItem (this Gtk.ToggleAction action, Gdk.Key key, Gdk.ModifierType mods)
+		{
+			CheckMenuItem item = (CheckMenuItem)action.CreateMenuItem ();
+
+			(item.Child as AccelLabel).AccelWidget = item;
+			item.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (key, mods, AccelFlags.Visible));
+
+			return item;
+		}
+
 		public static Gtk.MenuItem CreateSubMenuItem (this Gtk.Action action)
 		{
 			MenuItem item = (MenuItem)action.CreateMenuItem ();

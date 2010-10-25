@@ -40,6 +40,7 @@ namespace Pinta.Core
 	// Workspace - Data about Pinta's state for the image
 	public class Document
 	{
+		private string filename;
 		private bool is_dirty;
 		private int layer_name_int = 2;
 		private int current_layer = -1;
@@ -85,7 +86,15 @@ namespace Pinta.Core
 		/// <summary>
 		/// Just the file name, like "dog.jpg".
 		/// </summary>
-		public string Filename { get; set; }
+		public string Filename { 
+			get { return filename; }
+			set {
+				if (filename != value) {
+					filename = value;
+					OnRenamed ();
+				}
+			}
+		}
 		
 		public Guid Guid { get; private set; }
 		
@@ -101,6 +110,7 @@ namespace Pinta.Core
 				if (is_dirty != value) {
 					is_dirty = value;
 					PintaCore.Workspace.ResetTitle ();
+					OnIsDirtyChanged ();
 				}
 			}
 		}
@@ -672,11 +682,30 @@ namespace Pinta.Core
 		}
 		#endregion
 
+		#region Protected Methods
+		protected void OnIsDirtyChanged ()
+		{
+			if (IsDirtyChanged != null)
+				IsDirtyChanged (this, EventArgs.Empty);
+		}
+
+		protected void OnRenamed ()
+		{
+			if (Renamed != null)
+				Renamed (this, EventArgs.Empty);
+		}
+		#endregion
+
 		#region Private Methods
 		private void RaiseLayerPropertyChangedEvent (object sender, PropertyChangedEventArgs e)
 		{
 			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
 		}
+		#endregion
+
+		#region Public Events
+		public event EventHandler IsDirtyChanged;
+		public event EventHandler Renamed;
 		#endregion
 	}
 }
