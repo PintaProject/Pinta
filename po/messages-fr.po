@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-07-07 13:03+0000\n"
+"PO-Revision-Date: 2010-10-20 00:50+0000\n"
 "Last-Translator: Simon Leblanc <contact@leblanc-simon.eu>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "_Aide"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Afficher la fenêtre"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -187,11 +187,6 @@ msgstr "Redimensionner l'image"
 msgid "By percentage:"
 msgstr "En pourcentage :"
 
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
-
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 msgid "By absolute size:"
@@ -300,14 +295,6 @@ msgstr "étiquette1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "étiquette"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -939,8 +926,8 @@ msgid "Blue "
 msgstr "Bleu "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
-msgstr "Astuce : Clic-droit pour retirer les points de contrôle."
+msgid "Tip: Right-click to remove control points."
+msgstr "Astuce : clic droit pour supprimer les points de contrôle."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -1477,6 +1464,12 @@ msgstr ""
 #~ msgid "In stetic action button box cannot be empty"
 #~ msgstr "Dans le stetic le bouton d'action ne peux rester vide"
 
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"
+
 #~ msgid ""
 #~ "<b>Contributors to this Release</b>\n"
 #~ "\n"
@@ -1535,6 +1528,9 @@ msgstr ""
 
 #~ msgid "label2"
 #~ msgstr "label2"
+
+#~ msgid "%"
+#~ msgstr "%"
 
 #~ msgid "Untitled1"
 #~ msgstr "SansTitre1"
@@ -1719,3 +1715,9 @@ msgstr ""
 
 #~ msgid "EdgeBehavior"
 #~ msgstr "Comportement aux Limites"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr "Astuce : Clic-droit pour retirer les points de contrôle."
+
+#~ msgid "Show Pad"
+#~ msgstr "Afficher la fenêtre"

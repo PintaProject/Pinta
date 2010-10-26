@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-08-13 14:05+0000\n"
-"Last-Translator: Luca Urbini <luca.urbini@gmail.com>\n"
+"PO-Revision-Date: 2010-10-12 20:25+0000\n"
+"Last-Translator: simone.sandri <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "_Aiuto"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Mostra pannello"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -119,13 +119,15 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Daniele Napolitano https://launchpad.net/~dnax88\n"
+"  Eagleman https://launchpad.net/~giacomomargarito\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Kabir94 https://launchpad.net/~kabirsala\n"
 "  Luca Urbini https://launchpad.net/~luca-urbini\n"
 "  Pullus In Fabula https://launchpad.net/~zatunga11\n"
 "  flux https://launchpad.net/~luigimarco\n"
 "  magic3 https://launchpad.net/~magic3\n"
-"  nTia89 https://launchpad.net/~tia-tif-deactivatedaccount"
+"  nTia89 https://launchpad.net/~tia-tif-deactivatedaccount\n"
+"  simone.sandri https://launchpad.net/~lexluxsox"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
 msgid "Translated by:"
@@ -189,11 +191,6 @@ msgstr "Ridimensiona immagine"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "In percentuale:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -303,14 +300,6 @@ msgstr "etichetta1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "etichetta"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -435,7 +424,7 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:52
 msgid "Gradient"
-msgstr "Gradiente"
+msgstr "Sfumatura"
 
 #: Pinta.Tools/GradientTool.cs:60
 msgid ""
@@ -455,7 +444,7 @@ msgstr "Gradiente lineare riflesso"
 
 #: Pinta.Tools/GradientTool.cs:173
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Sfumatura a diamante lineare"
 
 #: Pinta.Tools/GradientTool.cs:180
 msgid "Radial Gradient"
@@ -463,7 +452,7 @@ msgstr "Gradiente radiale"
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Sfumatura conica"
 
 #: Pinta.Tools/GradientTool.cs:198
 msgid "Color Mode"
@@ -496,17 +485,19 @@ msgstr "Raggio"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:82
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "Riduci il raggio dell'angolo del rettangolo"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:96
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "Aumenta il raggio dell'angolo del rettangolo"
 
 #: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Fare click sinistro per disegnare col colore primario, click destro per "
+"disegnare col colore secondario."
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -517,6 +508,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
+"Fare click e trascinare per effettuare una selezione rettangolare. Mantieni "
+"premuto shift per forzare a quadrato."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -536,15 +529,15 @@ msgstr "Clona"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "Sposta selezione"
+msgstr "Muovi selezione"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr ""
+msgstr "Trascina la selezione per muovere il bordo della selezione."
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Forma a mano libera"
 
 #: Pinta.Tools/FloodTool.cs:71
 msgid "Fill mode"
@@ -572,6 +565,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"Fare click e trascinare per disegnare un ellisse (click destro per il colore "
+"secondario). Mantenere premuto shift per forzare ad un cerchio."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
@@ -582,6 +577,8 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Fare click sinistro per posizionare il cursore, quindi scrivere il testo "
+"desiderato. Il colore del testo è quello primario."
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
@@ -617,7 +614,7 @@ msgstr "Seleziona la bacchetta magica"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Fare click in una regione di colore simile."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -699,7 +696,7 @@ msgstr "Sfocature"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr ""
+msgstr "Schizzo di inchiostro"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
@@ -754,7 +751,7 @@ msgstr "Renderizza"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr ""
+msgstr "Luminosità"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
@@ -837,7 +834,7 @@ msgstr "Livelli"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr ""
+msgstr "Livella automaticamente"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 #: SoftenPortraitData dialog
@@ -855,7 +852,7 @@ msgstr "Bianco e nero"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "Colore / Saturazione"
+msgstr "Tonalità / Saturazione"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
@@ -875,19 +872,19 @@ msgstr "Istogramma di partenza"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr ""
+msgstr "Input"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr ""
+msgstr "Risultato"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr ""
+msgstr "Mostra Istogramma"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
@@ -913,7 +910,7 @@ msgstr "Collegato"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr ""
+msgstr "Mappa di trasferimento"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
@@ -936,9 +933,8 @@ msgid "Blue "
 msgstr "Blu "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
+msgid "Tip: Right-click to remove control points."
 msgstr ""
-"Suggerimento: Tasto destro del mouse per rimuovere i punti di controllo."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -1160,7 +1156,7 @@ msgstr "Riempi selezione"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Invert Selection"
-msgstr "Inverti selezione"
+msgstr "Inverti la selezione"
 
 #: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
 msgid "Select All"
@@ -1188,7 +1184,7 @@ msgstr "Zoom alla selezione"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Actual Size"
-msgstr "Dimensione originale"
+msgstr "Dimensione reale"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Pixel Grid"
@@ -1326,7 +1322,7 @@ msgstr "Dimensione cella"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "Centra Offset"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
@@ -1372,7 +1368,7 @@ msgstr "Fattore"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "Frammenti"
 
 #: TileEffect dialog
 msgid "Ink Outline"
@@ -1396,7 +1392,7 @@ msgstr "Scostamento"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "Dimensioni della punta della matita"
 
 #: CloudsEffect dialog
 msgid "Percentile"
@@ -1428,7 +1424,7 @@ msgstr "Scala"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "Seme"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
@@ -1464,3 +1460,19 @@ msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Suggerimento: Per ottenere i migliori risultati, usa prima gli strumenti di "
 "selezione per selezionare ciascun occhio."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr ""
+#~ "Suggerimento: Tasto destro del mouse per rimuovere i punti di controllo."
+
+#~ msgid "Show Pad"
+#~ msgstr "Mostra pannello"

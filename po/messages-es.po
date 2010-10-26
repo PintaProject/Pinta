@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-28 03:14+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2010-10-05 03:39+0000\n"
+"Last-Translator: Fitoschido <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "Ay_uda"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Mostrar panel"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -118,6 +118,7 @@ msgstr "Contribuidores anteriores"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Fitoschido https://launchpad.net/~fitoschido\n"
 "  Francisco Camenforte Torres https://launchpad.net/~fct\n"
 "  Jin Valiant https://launchpad.net/~jin-valiant\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst"
@@ -184,11 +185,6 @@ msgstr "Cambiar tamaño de imagen"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "Por porcentaje:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -296,14 +292,6 @@ msgstr "etiqueta1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "etiqueta"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X:"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y:"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -940,9 +928,8 @@ msgid "Blue "
 msgstr "Azul "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
+msgid "Tip: Right-click to remove control points."
 msgstr ""
-"Sugerencia: haga clic con el botón derecho para quitar los puntos de control."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -966,7 +953,7 @@ msgstr "Combinar las capas hacia abajo"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr "Importar desde fichero..."
+msgstr "Importar desde archivo..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
@@ -997,7 +984,7 @@ msgstr "Abrir fichero de imagen"
 
 #: Pinta.Core/Actions/LayerActions.cs:177
 msgid "Import From File"
-msgstr "Importar desde fichero"
+msgstr "Importar desde archivo"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -1467,3 +1454,19 @@ msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Consejo: para mejorar el resultado, seleccione primero cada ojo con las "
 "herramientas de selección."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr ""
+#~ "Sugerencia: haga clic con el botón derecho para quitar los puntos de control."
+
+#~ msgid "X :"
+#~ msgstr "X:"
+
+#~ msgid "Y :"
+#~ msgstr "Y:"
+
+#~ msgid "Show Pad"
+#~ msgstr "Mostrar panel"

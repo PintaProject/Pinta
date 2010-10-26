@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-07-19 04:22+0000\n"
+"PO-Revision-Date: 2010-10-24 07:47+0000\n"
 "Last-Translator: taijuin lee <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "說明(_H)"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "顯示板"
+msgid "Tool Windows"
+msgstr "工具視窗"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -71,7 +71,7 @@ msgstr "工具"
 
 #: Pinta/MainWindow.cs:355
 msgid "Palette"
-msgstr "色盤"
+msgstr "調色盤"
 
 #: Pinta/MainWindow.cs:368
 msgid "Documents"
@@ -83,7 +83,7 @@ msgstr "圖層"
 
 #: Pinta/MainWindow.cs:398
 msgid "History"
-msgstr "歷史"
+msgstr "復原紀錄"
 
 #: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
 msgid "Hide"
@@ -91,11 +91,11 @@ msgstr "隱藏"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr "停駐式欄位"
+msgstr "停駐式"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr "浮動的"
+msgstr "浮動式"
 
 #: Pinta/DockLibrary/DockItem.cs:502
 #: Pinta/DockLibrary/DockItemContainer.cs:194
@@ -119,6 +119,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Eddie https://launchpad.net/~zx4636313\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  taijuin lee https://launchpad.net/~taijuin"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
@@ -135,7 +136,7 @@ msgstr "由此取用一些圖示："
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
-msgstr "關於Pinta"
+msgstr "關於 Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:263
 msgid "Version Info"
@@ -183,11 +184,6 @@ msgstr "縮放圖片"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "按百分比："
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -249,7 +245,7 @@ msgstr "定位點："
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Actions/FileActions.cs:133
 msgid "New Image"
-msgstr "新增圖像"
+msgstr "新增圖片"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
@@ -296,17 +292,9 @@ msgstr "標籤1"
 msgid "label"
 msgstr "標籤"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X："
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y："
-
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr "不規則雜色"
+msgstr "不規則雜訊"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
@@ -314,7 +302,7 @@ msgstr "變換"
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr "顏色挑選器"
+msgstr "顏色拾取器"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -386,7 +374,7 @@ msgstr "填充和邊框"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
-msgstr "移動選擇的像素"
+msgstr "移動選取的像素"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
@@ -513,11 +501,11 @@ msgstr "橡皮圖章"
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "移動選擇區域"
+msgstr "移動選取區域"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr "拖動選擇區域，以移動選取區域的邊框。"
+msgstr "拖動選取區域，以移動選取區域的邊框。"
 
 #: Pinta.Tools/FreeformShapeTool.cs:54
 msgid "Freeform Shape"
@@ -725,17 +713,17 @@ msgstr "粉刷"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr "色彩鮮豔"
+msgstr "美白效果"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr "增加雜色"
+msgstr "加入雜訊"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 msgid "Noise"
-msgstr "雜色"
+msgstr "雜訊"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
@@ -779,15 +767,15 @@ msgstr "凸起"
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr "旋轉"
+msgstr "扭曲"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr "軟化肖像"
+msgstr "柔化人像"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr "減少雜色"
+msgstr "減少雜訊"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
@@ -804,7 +792,7 @@ msgstr "曲線"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr "層級"
+msgstr "色階"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -813,7 +801,7 @@ msgstr "自動調整色階"
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 #: SoftenPortraitData dialog
 msgid "Invert Colors"
-msgstr "反轉顏色"
+msgstr "反相"
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
@@ -826,7 +814,7 @@ msgstr "黑白化"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "色調 / 飽和度"
+msgstr "色相 / 飽和度"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
@@ -863,7 +851,7 @@ msgstr "自動"
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr "重新設定"
+msgstr "重設"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
@@ -907,8 +895,8 @@ msgid "Blue "
 msgstr "藍色 "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
-msgstr "提示：按滑鼠右鍵刪除控制點。"
+msgid "Tip: Right-click to remove control points."
+msgstr "提示：按右鍵以刪除控制點。"
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -975,7 +963,7 @@ msgstr "開啟..."
 
 #: Pinta.Core/Actions/FileActions.cs:56
 msgid "Open Recent"
-msgstr "開啟最近的"
+msgstr "最近開啟的檔案"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "Close"
@@ -1007,7 +995,7 @@ msgstr "開啟"
 
 #: Pinta.Core/Actions/FileActions.cs:125
 msgid "Background"
-msgstr "背景圖"
+msgstr "背景"
 
 #: Pinta.Core/Actions/FileActions.cs:170
 msgid "Open Image"
@@ -1121,11 +1109,11 @@ msgstr "貼到新圖片"
 #: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
 #: Pinta.Core/Actions/EditActions.cs:276
 msgid "Erase Selection"
-msgstr "刪除選擇區域"
+msgstr "刪除選取區域"
 
 #: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
 msgid "Fill Selection"
-msgstr "填充選擇區域"
+msgstr "填充選取區域"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Invert Selection"
@@ -1133,7 +1121,7 @@ msgstr "反向選取"
 
 #: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
 msgid "Select All"
-msgstr "選擇全部"
+msgstr "全選"
 
 #: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
 msgid "Deselect"
@@ -1161,7 +1149,7 @@ msgstr "實際大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Pixel Grid"
-msgstr "像素格子"
+msgstr "像素格線"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Rulers"
@@ -1191,7 +1179,7 @@ msgstr "視窗"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta的官方網站"
+msgstr "Pinta 的官方網站"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
@@ -1275,7 +1263,7 @@ msgstr "角度"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr "消除鋸齒"
+msgstr "反鋸齒"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
@@ -1311,7 +1299,7 @@ msgstr "顏色範圍"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr "顏色飽和度"
+msgstr "飽和度"
 
 #: GlowEffect dialog
 msgid "Coloring"
@@ -1428,3 +1416,18 @@ msgstr "使用低質量預覽小圖像，小角度。使用高品質的最終質
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr "提示：要獲得最佳效果，首先使用選取工具選取每隻眼睛。"
+
+#~ msgid "Show Pad"
+#~ msgstr "顯示板"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X："
+
+#~ msgid "Y :"
+#~ msgstr "Y："
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr "提示：按滑鼠右鍵刪除控制點。"

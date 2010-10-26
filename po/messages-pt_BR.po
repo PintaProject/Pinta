@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-08-21 02:01+0000\n"
-"Last-Translator: JoseMelo <Unknown>\n"
+"PO-Revision-Date: 2010-10-20 00:36+0000\n"
+"Last-Translator: Luiz Fernando Palacios <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -35,7 +35,7 @@ msgstr "_Editar"
 
 #: Pinta/MainWindow.cs:261
 msgid "_View"
-msgstr "_Visualizar"
+msgstr "_Exibir"
 
 #: Pinta/MainWindow.cs:262
 msgid "_Image"
@@ -59,11 +59,11 @@ msgstr "_Janela"
 
 #: Pinta/MainWindow.cs:267
 msgid "_Help"
-msgstr "Ajuda"
+msgstr "_Ajuda"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Exibir bloco"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -91,7 +91,7 @@ msgstr "Ocultar"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr "Acoplável"
+msgstr "Encaixável"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
@@ -104,7 +104,7 @@ msgstr "Ocultar automaticamente"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr "Doca"
+msgstr "Acoplar"
 
 #: Pinta/Dialogs/AboutDialog.cs:97
 msgid "Contributors to this Release"
@@ -118,10 +118,14 @@ msgstr "Outros Contribuidores"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Christian Marques https://launchpad.net/~csmchristian\n"
+"  Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
 "  Gervásio da Silva Antônio https://launchpad.net/~gervasioantonio\n"
 "  Igor Belchior https://launchpad.net/~igorbelchior86\n"
-"  JoseMelo https://launchpad.net/~josehumberto-melo\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  José Humberto Melo https://launchpad.net/~josehumberto-melo\n"
 "  Kristian Gomes https://launchpad.net/~kristiang\n"
+"  Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
 "  Paulo N. Júnior https://launchpad.net/~naves-junior\n"
 "  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves"
 
@@ -156,7 +160,7 @@ msgstr "Versão"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "Localização"
+msgstr "Caminho"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
@@ -181,17 +185,12 @@ msgstr "Número de processos usados para renderizar"
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
 msgid "Resize Image"
-msgstr "Redimensionar a imagem"
+msgstr "Mudar tamanho da  imagem"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "Por percentagem"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -211,7 +210,7 @@ msgstr "Largura:"
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr "pontos"
+msgstr "pixels"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
@@ -244,7 +243,7 @@ msgstr "Opacidade:"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
-msgstr "Redimensionar tela"
+msgstr "Redimensionar Tela"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
@@ -277,7 +276,7 @@ msgstr "Continuar sem salvar"
 
 #: Pinta/DialogHandlers.cs:178
 msgid "Layer Opacity"
-msgstr "Opacidade da camada"
+msgstr "Opacidade da Camada"
 
 #: Pinta/DialogHandlers.cs:183
 msgid "Rename Layer"
@@ -300,14 +299,6 @@ msgstr "etiqueta1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "etiqueta"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X:"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y:"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -940,8 +931,8 @@ msgid "Blue "
 msgstr "Azul "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
-msgstr "Dica: Clique com o botão direito para remover pontos de controle."
+msgid "Tip: Right-click to remove control points."
+msgstr "Dica: Dê um clique direito para remover os pontos de controle."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -1466,3 +1457,18 @@ msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Dica: Para um melhor resultado, primeiro use as ferramentas de seleção para "
 "selecionar cada olho."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X:"
+
+#~ msgid "Y :"
+#~ msgstr "Y:"
+
+#~ msgid "Show Pad"
+#~ msgstr "Exibir bloco"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr "Dica: Clique com o botão direito para remover pontos de controle."

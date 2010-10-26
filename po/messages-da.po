@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-08-14 17:08+0000\n"
-"Last-Translator: Ole Carlsen <Unknown>\n"
+"PO-Revision-Date: 2010-09-07 11:12+0000\n"
+"Last-Translator: Jonathan Pobst <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "_Hjælp"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Vis blok"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -118,6 +118,7 @@ msgstr "Tidligere bidragyder"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Ole Carlsen https://launchpad.net/~ole-carlsen-web"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
@@ -182,11 +183,6 @@ msgstr "Ændring af billedstørrelse"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "I procent"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -294,14 +290,6 @@ msgstr "etiket1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "etiket"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -931,8 +919,8 @@ msgid "Blue "
 msgstr "Blå "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
-msgstr "Tip: Højre klik for at fjerne kontrol punkter."
+msgid "Tip: Right-click to remove control points."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -1455,3 +1443,18 @@ msgstr ""
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Tip: For bedste resultat, brug først valg værktøj for at vælge hvert øje."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr "Tip: Højre klik for at fjerne kontrol punkter."
+
+#~ msgid "Show Pad"
+#~ msgstr "Vis blok"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-07-21 14:11+0000\n"
-"Last-Translator: Miłosz Kosobucki <mikom3@gmail.com>\n"
+"PO-Revision-Date: 2010-10-15 21:30+0000\n"
+"Last-Translator: Michał Richter <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "_Pomoc"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Pokaż panel"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -119,6 +119,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Bartosz Kaszubowski https://launchpad.net/~simek\n"
+"  Michał Richter https://launchpad.net/~matmatyk\n"
 "  Miłosz Kosobucki https://launchpad.net/~mikom\n"
 "  Patryk Wychowaniec https://launchpad.net/~p98\n"
 "  Sebastian Mazur https://launchpad.net/~sebastianmaz\n"
@@ -187,11 +188,6 @@ msgstr "Zmień rozmiar..."
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "Procentowo:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -299,14 +295,6 @@ msgstr ""
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "podpis"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -439,6 +427,9 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Kliknij i przeciągnij, aby wypełnić gradientem z podstawowego do "
+"drugorzędnego koloru. Kliknięcie prawym przyciskiem myszy odwraca kolory "
+"wypełnienia."
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
@@ -744,7 +735,7 @@ msgstr "Rozmycie powiększające"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr ""
+msgstr "Inwersja polarna"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
@@ -940,7 +931,7 @@ msgid "Blue "
 msgstr "Niebieski "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
+msgid "Tip: Right-click to remove control points."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:64
@@ -1294,7 +1285,7 @@ msgstr "Warstwa"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "Ilość"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1356,7 +1347,7 @@ msgstr "Kontrast"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "Pokrycie"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
@@ -1370,7 +1361,7 @@ msgstr "Wykrywanie krawędzi"
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr ""
+msgstr "Współczynnik"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
@@ -1430,7 +1421,7 @@ msgstr "Skaluj"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "Ziarno"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
@@ -1461,3 +1452,15 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+
+#~ msgid "Show Pad"
+#~ msgstr "Pokaż panel"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"

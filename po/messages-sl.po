@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-08-16 18:51+0000\n"
+"PO-Revision-Date: 2010-10-18 07:09+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "Pomo_č"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Orodjarna"
+msgid "Tool Windows"
+msgstr ""
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -118,6 +118,7 @@ msgstr "Prejšnji avtorji prispevkov"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  grofaty https://launchpad.net/~grofaty"
 
 #: Pinta/Dialogs/AboutDialog.cs:119
@@ -182,11 +183,6 @@ msgstr "Spremeni velikost slike"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "Po odstotku:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -294,14 +290,6 @@ msgstr "oznaka1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "oznaka"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -925,8 +913,8 @@ msgid "Blue "
 msgstr "Modro "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
-msgstr "Namig: Desni-klik, da odstraniš nadzorne točke."
+msgid "Tip: Right-click to remove control points."
+msgstr "Namig: Desni klik, da odstraniš nadzorne točke."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -1448,3 +1436,18 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr "Namig: Za najboljši izid uporabi orodja za izbiro posameznega očesa."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"
+
+#~ msgid "Show Pad"
+#~ msgstr "Orodjarna"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr "Namig: Desni-klik, da odstraniš nadzorne točke."

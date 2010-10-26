@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-07-08 08:07+0000\n"
-"Last-Translator: Psychorat <Unknown>\n"
+"PO-Revision-Date: 2010-09-07 10:57+0000\n"
+"Last-Translator: Jonathan Pobst <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,7 +62,7 @@ msgid "_Help"
 msgstr "_Βοήθεια"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
+msgid "Tool Windows"
 msgstr ""
 
 #: Pinta/MainWindow.cs:345
@@ -185,11 +185,6 @@ msgstr "Αλλαγή Μεγέθους Εικόνας"
 msgid "By percentage:"
 msgstr "Σε ποσοστό:"
 
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
-
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 msgid "By absolute size:"
@@ -297,14 +292,6 @@ msgstr "ετικέττα1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "ετικέττα"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -909,7 +896,7 @@ msgid "Blue "
 msgstr "Μπλέ "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
+msgid "Tip: Right-click to remove control points."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:64
@@ -1432,3 +1419,12 @@ msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Υπόδειξη: Για καλύτερα αποτελέσματα, χρησημοποιείστε τα εργαλεία επιλογής σε "
 "κάθε μάτι."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-08-08 16:04+0000\n"
+"PO-Revision-Date: 2010-10-24 19:59+0000\n"
 "Last-Translator: Jarno Ruokamo <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 02:28+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
@@ -62,8 +62,8 @@ msgid "_Help"
 msgstr "_Ohje"
 
 #: Pinta/MainWindow.cs:272
-msgid "Show Pad"
-msgstr "Näytä valikko"
+msgid "Tool Windows"
+msgstr "Työkaluikkunat"
 
 #: Pinta/MainWindow.cs:345
 msgid "Tools"
@@ -119,6 +119,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jarno Ruokamo https://launchpad.net/~jarno-ruokamo\n"
+"  Jiri Grönroos https://launchpad.net/~jiri-gronroos\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Tommi Saira https://launchpad.net/~tommisaira\n"
 "  Urmas https://launchpad.net/~urmas-2006"
@@ -133,7 +134,7 @@ msgstr "Perustuu ohjelmaan Paint.NET:"
 
 #: Pinta/Dialogs/AboutDialog.cs:133
 msgid "Using some icons from:"
-msgstr "Käyttää ikoneita kokoelmista:"
+msgstr "Käyttää kuvakkeita kokoelmista:"
 
 #: Pinta/Dialogs/AboutDialog.cs:245
 msgid "About Pinta"
@@ -162,7 +163,7 @@ msgstr "Lisenssi"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr "Julkaistaan MIT X11 lisenssin alaisena."
+msgstr "Julkaistaan MIT X11 -lisenssin alaisena."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
@@ -170,7 +171,7 @@ msgstr "Tekijänoikeus"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr "Pinta tekijöiden"
+msgstr "Pinta-tekijöiden"
 
 #: Pinta/Main.cs:67
 msgid "number of threads to use for rendering"
@@ -185,11 +186,6 @@ msgstr "Muuta kokoa"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 msgid "By percentage:"
 msgstr "Prosentin mukaan:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:101
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:130
-msgid "%"
-msgstr "%"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
@@ -260,7 +256,7 @@ msgstr "Uusi koko          "
 #: Pinta/DialogHandlers.cs:57
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr "Tallenna muutokset kuvaan \"{0}\" ennen uuden luontia?"
+msgstr "Tallennetanko muutokset kuvaan \"{0}\" ennen uuden luontia?"
 
 #: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
 #: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
@@ -297,14 +293,6 @@ msgstr "label1"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
 msgstr "label"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X :"
-msgstr "X :"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y :"
-msgstr "Y :"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -350,7 +338,7 @@ msgstr "Lassovalinta"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klikkaa ja siirrä hiirtä luodaksesi valittavan alueen reunan."
+msgstr "Napsauta ja siirrä hiirtä luodaksesi valittavan alueen reunan."
 
 #: Pinta.Tools/ZoomTool.cs:49
 #: MandelbrotFractalEffect dialog
@@ -363,7 +351,7 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Vasemmalla napilla suurennat, oikealla pienennät. Klikkaa ja siirrä "
+"Vasemmalla napilla suurennat, oikealla pienennät. Napsauta ja siirrä "
 "luodaksesi valinnan."
 
 #: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
@@ -404,7 +392,7 @@ msgstr "Pan"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Klikkaa ja siirrä hiirtä liikkuaksesi kuvalla."
+msgstr "Napsauta ja siirrä hiirtä liikkuaksesi kuvalla."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
@@ -423,7 +411,7 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
-"Klikkaa ja siirrä piirtääksesi elliptisen valinnan. Paina shiftiä "
+"Napsauta ja siirrä piirtääksesi elliptisen valinnan. Paina shift-näppäintä "
 "pakottaaksesi ympyrään."
 
 #: Pinta.Tools/GradientTool.cs:52
@@ -435,8 +423,8 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Klikkaa ja siirrä piirtääksesi liukuman edustaväristä taustaväriin. Oikealla "
-"napilla käänteinen suunta."
+"Napsauta ja siirrä piirtääksesi liukuman edustaväristä taustaväriin. "
+"Oikealla napilla käänteinen suunta."
 
 #: Pinta.Tools/GradientTool.cs:158
 msgid "Linear Gradient"
@@ -475,8 +463,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
-"Klikkaa ja siirrä piirtääksesi pyöristetyn suorakulmion (oikealla napilla "
-"taustaväri). Pakota neliöksi shift-napilla."
+"Napsauta ja siirrä piirtääksesi pyöristetyn suorakulmion (oikealla napilla "
+"taustaväri). Pakota neliöksi shift-näppäimellä."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:77
 #: UnfocusEffect dialog
@@ -511,8 +499,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
-"Klikkaa ja siirrä piirtääksesi suorakulmaisen valinnan. Pakota neliöksi "
-"shift-napilla."
+"Napsauta ja siirrä piirtääksesi suorakulmaisen valinnan. Pakota neliöksi "
+"shift-näppäimellä."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -568,8 +556,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
-"Klikkaa ja siirrä piirtääksesi ellipsin (oikealla napilla taustavärillä). "
-"Pakota ympyräksi shift-napilla."
+"Napsauta ja siirrä piirtääksesi ellipsin (oikealla napilla taustavärillä). "
+"Pakota ympyräksi shift-näppäimellä."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
@@ -580,12 +568,12 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Klikkaa vasemmalla sijoittaaksesi kursorin, ja kirjoita teksti. Väri on "
+"Napsauta vasemmalla sijoittaaksesi kursorin, ja kirjoita teksti. Väri on "
 "edustaväri."
 
 #: Pinta.Tools/TextTool.cs:131
 msgid "Font"
-msgstr "Fontti"
+msgstr "Kirjasin"
 
 #: Pinta.Tools/TextTool.cs:186
 msgid "Bold"
@@ -617,7 +605,7 @@ msgstr "Taikasauva"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr "Klikkaa valitaksesi samanvärisen alueen."
+msgstr "Napsauta valitaksesi samanvärisen alueen."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -628,8 +616,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
-"Klikkaa ja siirrä piirtääksesi suorakulmion (oikealla napilla "
-"taustavärillä). Pakota neliöksi shift-napilla."
+"Napsauta ja siirrä piirtääksesi suorakulmion (oikealla napilla "
+"taustavärillä). Pakota neliöksi shift-näppäimellä."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
@@ -654,7 +642,7 @@ msgstr "Pyyhin"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr "Klikkaa ja siirrä poistaaksesi osan kuvasta."
+msgstr "Napsauta ja siirrä poistaaksesi osan kuvasta."
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
@@ -867,7 +855,7 @@ msgstr "Sävyjen säädöt"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "Sisääntulon histrogrammi"
+msgstr "Sisääntulon histogrammi"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
@@ -932,8 +920,8 @@ msgid "Blue "
 msgstr "Sininen "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip : Right-click to remove control points."
-msgstr "Vihje: Oikealla napilla voit poistaa pisteitä."
+msgid "Tip: Right-click to remove control points."
+msgstr "Vihje: Napsauta oikealla napilla poistaaksesi pisteitä."
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:271
@@ -1041,7 +1029,7 @@ msgstr "Avaa kuva"
 #: Pinta.Core/Actions/FileActions.cs:177
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "Tiedostoa ei voinut avata: {0}"
+msgstr "Tiedostoa ei voitu avata: {0}"
 
 #: Pinta.Core/Actions/FileActions.cs:178
 msgid "Error"
@@ -1050,7 +1038,8 @@ msgstr "Virhe"
 #: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr "Tallenna muutokset kuvaan \"{0}\" ennen kuin avaat uuden kuvan?"
+msgstr ""
+"Tallennetaanko muutokset kuvaan \"{0}\", ennen kuin avaat uuden kuvan?"
 
 #: Pinta.Core/Actions/FileActions.cs:284
 msgid "Image files"
@@ -1071,12 +1060,12 @@ msgstr "{0} kuva ({1})"
 
 #: Pinta.Core/Actions/FileActions.cs:365
 msgid "OpenRaster image (*.ora)"
-msgstr "OpenRaster kuva (*.ora)"
+msgstr "OpenRaster-kuva (*.ora)"
 
 #: Pinta.Core/Actions/FileActions.cs:392
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Tallenna muutokseen kuvaan \"{0}\" ennen kuin suljet?"
+msgstr "Tallennetaanko muutokset kuvaan \"{0}\" ennen sulkemista?"
 
 #: Pinta.Core/Actions/FileActions.cs:402
 msgid "Close without saving"
@@ -1216,7 +1205,7 @@ msgstr "Ikkuna"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta kotisivu"
+msgstr "Pintan verkkosivusto"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
@@ -1241,7 +1230,7 @@ msgstr "Pikanäppäin"
 #: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
 #: Pinta.Core/Classes/BaseTool.cs:239
 msgid "Antialiasing"
-msgstr "Ylinäytteistys"
+msgstr "Reunojen pehmennys"
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Normal blending / Overwrite blending"
@@ -1455,5 +1444,20 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Vihje: Parhaan tuloksen saamiseksi, käytä valintatyökalua ja valitse "
+"Vihje: Parhaan tuloksen saamiseksi käytä valintatyökalua ja valitse "
 "kummatkin silmät ennen käyttöä."
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "X :"
+#~ msgstr "X :"
+
+#~ msgid "Y :"
+#~ msgstr "Y :"
+
+#~ msgid "Tip : Right-click to remove control points."
+#~ msgstr "Vihje: Oikealla napilla voit poistaa pisteitä."
+
+#~ msgid "Show Pad"
+#~ msgstr "Näytä valikko"
