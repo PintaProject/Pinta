@@ -151,7 +151,10 @@ namespace Pinta.Core
 
 			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
-			using (var g = doc.CreateClippedContext ()) {
+			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+
 				g.Color = PintaCore.Palette.PrimaryColor;
 				g.Fill ();
 			}
@@ -184,7 +187,10 @@ namespace Pinta.Core
 
 			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
-			using (var g = doc.CreateClippedContext ()) {
+			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				g.AppendPath (doc.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+
 				g.Operator = Cairo.Operator.Clear;
 				g.Fill ();
 			}
