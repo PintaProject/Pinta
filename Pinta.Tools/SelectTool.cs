@@ -35,6 +35,7 @@ namespace Pinta.Tools
 	{
 		protected SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
+		protected override bool ShowAntialiasingButton { get { return false; } }
 		
 		#region ToolBar
 		// We don't want the ShapeTool's toolbar

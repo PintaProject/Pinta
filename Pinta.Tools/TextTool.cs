@@ -1146,7 +1146,7 @@ namespace Pinta.Tools
 
 		private void RenderText (Cairo.ImageSurface surf, int lineNumber)
 		{
-			DrawText (surf, this.Font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], antialiasing_btn.Active, PintaCore.Palette.PrimaryColor);
+			DrawText (surf, this.Font, (string)this.lines[lineNumber], this.uls[lineNumber], this.sizes[lineNumber], UseAlphaBlending, PintaCore.Palette.PrimaryColor);
 		}
 		/*
         private void PlaceMoveNub()

@@ -185,6 +185,8 @@
     <Compile Include="ImageFormats\TgaExporter.cs" />
     <Compile Include="Classes\BasePaintBrush.cs" />
     <Compile Include="Managers\PaintBrushManager.cs" />
+    <Compile Include="Widgets\MenuButton.cs" />
+    <Compile Include="Widgets\ToolBarDropDownButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

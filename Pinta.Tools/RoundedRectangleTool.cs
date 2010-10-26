@@ -38,7 +38,8 @@ namespace Pinta.Tools
 		protected ToolBarLabel radius_label;
 		protected ToolBarButton radius_minus;
 		protected ToolBarButton radius_plus;
-		
+		protected Gtk.SeparatorToolItem radius_sep;
+
 		public override string Name {
 			get { return Catalog.GetString ("Rounded Rectangle"); }
 		}
@@ -73,6 +74,11 @@ namespace Pinta.Tools
 		{
 			base.BuildToolBar (tb);
 			
+			if (radius_sep == null)
+				radius_sep = new Gtk.SeparatorToolItem ();
+
+			tb.AppendItem (radius_sep);
+
 			if (radius_label == null)
 				radius_label = new ToolBarLabel (string.Format ("  {0}: ", Catalog.GetString ("Radius")));
 			
@@ -111,7 +117,7 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
-				g.Antialias = Antialias.Subpixel;
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedRoundedRectangle (rect, Radius, fill_color, outline_color, BrushWidth);

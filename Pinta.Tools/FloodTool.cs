@@ -45,7 +45,8 @@ namespace Pinta.Tools
 	public abstract class FloodTool : BaseTool
 	{
 		protected ToolBarLabel mode_label;
-		protected ToolBarComboBox mode_combo;
+		protected ToolBarDropDownButton mode_button;
+		protected Gtk.ToolItem mode_sep;
 		protected ToolBarLabel tolerance_label;
 		protected ToolBarSlider tolerance_slider;
 		private bool limitToSelection = true;
@@ -53,7 +54,7 @@ namespace Pinta.Tools
 		protected IBitVector2D stencil;
 
 		#region Protected Properties
-		protected bool IsContinguousMode { get { return mode_combo.ComboBox.Active == 0; } }
+		protected bool IsContinguousMode { get { return (bool)mode_button.SelectedItem.Tag; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
 
 		protected bool LimitToSelection {
@@ -68,17 +69,26 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (mode_label == null)
-				mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Fill mode")));
+				mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Flood Mode")));
 
 			tb.AppendItem (mode_label);
 
-			if (mode_combo == null)
-				mode_combo = new ToolBarComboBox (100, 0, false, Catalog.GetString ("Contiguous"), Catalog.GetString ("Global"));
+			if (mode_button == null) {
+				mode_button = new ToolBarDropDownButton ();
 
-			tb.AppendItem (mode_combo);
+				mode_button.AddItem (Catalog.GetString ("Contiguous"), "Tools.FreeformShape.png", true);
+				mode_button.AddItem (Catalog.GetString ("Global"), "Menu.Help.Website.png", false);
+			}
+
+			tb.AppendItem (mode_button);
+
+			if (mode_sep == null)
+				mode_sep = new Gtk.SeparatorToolItem ();
+
+			tb.AppendItem (mode_sep);
 					
 			if (tolerance_label == null)
-				tolerance_label = new ToolBarLabel (string.Format ("    {0}: ", Catalog.GetString ("Tolerance")));
+				tolerance_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Tolerance")));
 
 			tb.AppendItem (tolerance_label);
 

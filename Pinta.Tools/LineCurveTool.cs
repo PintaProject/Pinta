@@ -58,8 +58,8 @@ namespace Pinta.Tools
 				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
-					
-				g.Antialias = Antialias.Subpixel;
+
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 				dirty = g.DrawLine (shape_origin, current_point , outline_color, BrushWidth);
 			}

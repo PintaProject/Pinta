@@ -43,17 +43,24 @@ namespace Pinta.Tools
 		protected ToolBarLabel brush_width_label;
 		protected ToolBarButton brush_width_minus;
 		protected ToolBarButton brush_width_plus;
-		protected ToolBarImage fill_outline_image;
-		protected ToolBarComboBox fill_outline;
-		protected ToolBarLabel spacer_label;
-		protected ToolBarLabel fill_outline_label;
-
+		protected ToolBarLabel fill_label;
+		protected ToolBarDropDownButton fill_button;
+		protected Gtk.SeparatorToolItem fill_sep;
 		protected Rectangle last_dirty;
 		protected ImageSurface undo_surface;
 		protected bool surface_modified;
 
 		public ShapeTool ()
 		{
+		}
+
+		static ShapeTool ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
+			fact.Add ("ShapeTool.Fill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Fill.png")));
+			fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
+			fact.AddDefault ();
 		}
 
 		#region Properties
@@ -73,6 +80,7 @@ namespace Pinta.Tools
 		}
 		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
+		protected override bool ShowAntialiasingButton { get { return true; } }
 		#endregion
 		
 		#region ToolBar
@@ -114,28 +122,28 @@ namespace Pinta.Tools
 			tb.AppendItem (brush_width_plus);
 			
 			if (ShowStrokeComboBox) {
-				if (spacer_label == null)
-					spacer_label = new ToolBarLabel ("  ");
+				if (fill_sep == null)
+					fill_sep = new Gtk.SeparatorToolItem ();
 
-				tb.AppendItem (spacer_label);
-				
-				if (fill_outline_image == null)
-					fill_outline_image = new ToolBarImage ("ShapeTool.OutlineFill.png");
+				tb.AppendItem (fill_sep);
 
-				tb.AppendItem (fill_outline_image);
-				
-				if (fill_outline_label == null)
-					fill_outline_label = new ToolBarLabel (" : ");
+				if (fill_label == null)
+					fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Fill Style")));
 
-				tb.AppendItem (fill_outline_label);
+				tb.AppendItem (fill_label);
 
-				if (fill_outline == null)
-					fill_outline = new ToolBarComboBox (150, 0, false, Catalog.GetString ("Outline Shape"), Catalog.GetString ("Fill Shape"), Catalog.GetString ("Fill and Outline Shape"));
-					
-				tb.AppendItem (fill_outline);
+				if (fill_button == null) {
+					fill_button = new ToolBarDropDownButton ();
+
+					fill_button.AddItem (Catalog.GetString ("Outline Shape"), "ShapeTool.Outline.png", 0);
+					fill_button.AddItem (Catalog.GetString ("Fill Shape"), "ShapeTool.Fill.png", 1);
+					fill_button.AddItem (Catalog.GetString ("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
+				}
+
+				tb.AppendItem (fill_button);
 			}
 		}
-		
+
 		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
 		{
 			if (BrushWidth > 1)
@@ -247,8 +255,8 @@ namespace Pinta.Tools
 			return new Gdk.Rectangle (x, y, w, h);
 		}
 
-		protected bool StrokeShape { get { return fill_outline.ComboBox.Active % 2 == 0; } }
-		protected bool FillShape { get { return fill_outline.ComboBox.Active >= 1; } }
+		protected bool StrokeShape { get { return (int)fill_button.SelectedItem.Tag % 2 == 0; } }
+		protected bool FillShape { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
 		protected virtual bool ShowStrokeComboBox { get { return true; } }
 		#endregion
 	}

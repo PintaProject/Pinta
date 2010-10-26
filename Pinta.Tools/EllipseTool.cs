@@ -60,7 +60,7 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
-				g.Antialias = Antialias.Subpixel;
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 				
 				dirty = rect;
 				

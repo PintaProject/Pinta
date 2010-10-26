@@ -48,6 +48,19 @@ namespace Pinta.Tools
 		protected ImageSurface undo_surface;
 		uint button;
 
+		static GradientTool ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Toolbar.LinearGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.LinearGradient.png")));
+			fact.Add ("Toolbar.LinearReflectedGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.LinearReflectedGradient.png")));
+			fact.Add ("Toolbar.DiamondGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.DiamondGradient.png")));
+			fact.Add ("Toolbar.RadialGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.RadialGradient.png")));
+			fact.Add ("Toolbar.ConicalGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.ConicalGradient.png")));
+			fact.Add ("Toolbar.ColorMode.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.ColorMode.png")));
+			fact.Add ("Toolbar.TransparentMode.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.TransparentMode.png")));
+			fact.AddDefault ();
+		}
+
 		public override string Name {
 			get { return Catalog.GetString ("Gradient"); }
 		}
@@ -150,131 +163,55 @@ namespace Pinta.Tools
 		#endregion
 
 		#region toolbar
-		private ToolBarToggleButton linear_gradient_btn;
-		private ToolBarToggleButton linear_reflected_gradient_btn;
-		private ToolBarToggleButton diamond_gradient_btn;
-		private ToolBarToggleButton radial_gradient_btn;
-		private ToolBarToggleButton conical_gradient_btn;
+		private ToolBarLabel gradient_label;
+		private ToolBarDropDownButton gradient_button;
+		private ToolBarLabel mode_label;
+		private ToolBarDropDownButton mode_button;
 		
-		private ToolBarToggleButton color_mode_gradient_btn;
-		private ToolBarToggleButton transparency_mode_gradient_btn;
-
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
-			
-			if (linear_gradient_btn == null) {
-				linear_gradient_btn = new ToolBarToggleButton ("Toolbar.LinearGradient.png", Catalog.GetString ("Linear Gradient"), Catalog.GetString ("Linear Gradient"));
-				linear_gradient_btn.Active = true;
-				linear_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
+
+			if (gradient_label == null)
+				gradient_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Gradient")));
+
+			tb.AppendItem (gradient_label);
+
+			if (gradient_button == null) {
+				gradient_button = new ToolBarDropDownButton ();
+
+				gradient_button.AddItem (Catalog.GetString ("Linear Gradient"), "Toolbar.LinearGradient.png", eGradientType.Linear);
+				gradient_button.AddItem (Catalog.GetString ("Linear Reflected Gradient"), "Toolbar.LinearReflectedGradient.png", eGradientType.LinearReflected);
+				gradient_button.AddItem (Catalog.GetString ("Linear Diamond Gradient"), "Toolbar.DiamondGradient.png", eGradientType.Diamond);
+				gradient_button.AddItem (Catalog.GetString ("Radial Gradient"), "Toolbar.RadialGradient.png", eGradientType.Radial);
+				gradient_button.AddItem (Catalog.GetString ("Conical Gradient"), "Toolbar.ConicalGradient.png", eGradientType.Conical);
 			}
-			
-			tb.AppendItem (linear_gradient_btn);
-			
-			if (linear_reflected_gradient_btn == null) {
-				linear_reflected_gradient_btn = new ToolBarToggleButton ("Toolbar.LinearReflectedGradient.png", Catalog.GetString ("Linear Reflected Gradient"), Catalog.GetString ("Linear Reflected Gradient"));
-				linear_reflected_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
-			}
-			
-			tb.AppendItem (linear_reflected_gradient_btn);
-			
-			if (diamond_gradient_btn == null) {
-				diamond_gradient_btn = new ToolBarToggleButton ("Toolbar.DiamondGradient.png", Catalog.GetString ("Linear Diamond Gradient"), Catalog.GetString ("Linear Diamond Gradient"));
-				diamond_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
-			}
-			
-			tb.AppendItem (diamond_gradient_btn);
-			
-			if (radial_gradient_btn == null) {
-				radial_gradient_btn = new ToolBarToggleButton ("Toolbar.RadialGradient.png", Catalog.GetString ("Radial Gradient"), Catalog.GetString ("Radial Gradient"));
-				radial_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
-			}
-			
-			tb.AppendItem (radial_gradient_btn);
-			
-			if (conical_gradient_btn == null) {
-				conical_gradient_btn = new ToolBarToggleButton ("Toolbar.ConicalGradient.png", Catalog.GetString ("Conical Gradient"), Catalog.GetString ("Conical Gradient"));
-				conical_gradient_btn.Toggled += HandleGradientTypeButtonToggled;;
-			}
-			
-			tb.AppendItem (conical_gradient_btn);
+
+			tb.AppendItem (gradient_button);
 			
 			tb.AppendItem (new Gtk.SeparatorToolItem ());
-			
-			/***** ColorBgra mode *****/
-			//TODO icons!
-			if (color_mode_gradient_btn == null) {
-				color_mode_gradient_btn = new ToolBarToggleButton ("ColorPalette.SwapIcon.png", Catalog.GetString ("Color Mode"), Catalog.GetString ("Color Mode"));
-				color_mode_gradient_btn.Active = true;
-				color_mode_gradient_btn.Toggled += HandleGradientColorModeButtonToggled;;
-			}
-			
-			tb.AppendItem (color_mode_gradient_btn);
-			
-			if (transparency_mode_gradient_btn == null) {
-				transparency_mode_gradient_btn = new ToolBarToggleButton ("ColorPalette.SwapIcon.png", Catalog.GetString ("Transparency Mode"), Catalog.GetString ("Transparency Mode"));
-				transparency_mode_gradient_btn.Toggled += HandleGradientColorModeButtonToggled;;
-			}
-			
-			tb.AppendItem (transparency_mode_gradient_btn);
-		}
 
-		void HandleGradientTypeButtonToggled (object sender, EventArgs e)
-		{
-			if (((ToolBarToggleButton)sender).Active) {
-				if ((ToolBarToggleButton)sender != linear_gradient_btn && linear_gradient_btn.Active)
-					linear_gradient_btn.Active = false;
-				if ((ToolBarToggleButton)sender != linear_reflected_gradient_btn && linear_reflected_gradient_btn.Active)
-					linear_reflected_gradient_btn.Active = false;
-				if ((ToolBarToggleButton)sender != diamond_gradient_btn && diamond_gradient_btn.Active)
-					diamond_gradient_btn.Active = false;
-				if ((ToolBarToggleButton)sender != radial_gradient_btn && radial_gradient_btn.Active)
-					radial_gradient_btn.Active = false;
-				if ((ToolBarToggleButton)sender != conical_gradient_btn && conical_gradient_btn.Active)
-					conical_gradient_btn.Active = false;
+			if (mode_label == null)
+				mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Mode")));
+
+			tb.AppendItem (mode_label);
+
+			if (mode_button == null) {
+				mode_button = new ToolBarDropDownButton ();
+
+				mode_button.AddItem (Catalog.GetString ("Color Mode"), "Toolbar.ColorMode.png", GradientColorMode.Color);
+				mode_button.AddItem (Catalog.GetString ("Transparency Mode"), "Toolbar.TransparentMode.png", GradientColorMode.Transparency);
 			}
-			else if (!linear_gradient_btn.Active && !linear_reflected_gradient_btn.Active && !diamond_gradient_btn.Active && !radial_gradient_btn.Active && !conical_gradient_btn.Active)
-				((ToolBarToggleButton)sender).Active = true;
-		}
-		
-		void HandleGradientColorModeButtonToggled (object sender, EventArgs e)
-		{
-			if (((ToolBarToggleButton)sender).Active) {
-				if ((ToolBarToggleButton)sender != color_mode_gradient_btn && color_mode_gradient_btn.Active)
-					color_mode_gradient_btn.Active = false;
-				if ((ToolBarToggleButton)sender != transparency_mode_gradient_btn && transparency_mode_gradient_btn.Active)
-					transparency_mode_gradient_btn.Active = false;
-			}
-			else if (!transparency_mode_gradient_btn.Active && !color_mode_gradient_btn.Active)
-				((ToolBarToggleButton)sender).Active = true;
+
+			tb.AppendItem (mode_button);
 		}
 		
 		public eGradientType GradientType {
-			get {
-				if (linear_gradient_btn.Active)
-					return eGradientType.Linear; 
-				else if (linear_reflected_gradient_btn.Active)
-					return eGradientType.LinearReflected;
-				else if (diamond_gradient_btn.Active)
-					return eGradientType.Diamond;
-				else if (radial_gradient_btn.Active)
-					return eGradientType.Radial;
-				else if (conical_gradient_btn.Active)
-					return eGradientType.Conical;
-				else
-					return eGradientType.Linear;
-			}
+			get { return (eGradientType)gradient_button.SelectedItem.Tag; }
 		}
 	
 		public GradientColorMode GradientColorMode {
-			get {
-				if (color_mode_gradient_btn.Active)
-					return GradientColorMode.Color;
-				else if (transparency_mode_gradient_btn.Active)
-					return GradientColorMode.Transparency;
-				else
-					return GradientColorMode.Color;
-			}
+			get { return (GradientColorMode)gradient_button.SelectedItem.Tag; }
 		}
 		#endregion
 	}

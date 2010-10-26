@@ -48,6 +48,7 @@ namespace Pinta.Tools
 		public override string StatusBarText { get { return Catalog.GetString ("Ctrl-left click to set origin, left click to paint."); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.L; } }
 		public override int Priority { get { return 33; } }
+		protected override bool ShowAntialiasingButton { get { return true; } }
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
@@ -93,7 +94,7 @@ namespace Pinta.Tools
 			}
 
 			using (var g = doc.CreateClippedToolContext ()) {
-				g.Antialias = Cairo.Antialias.Subpixel;
+				g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
 
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);

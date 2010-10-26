@@ -134,7 +134,7 @@ namespace Pinta.Tools
 				Drawable.FillRule = FillRule.EvenOdd;
 				Drawable.Clip ();
 
-				Drawable.Antialias = Antialias.Subpixel;
+				Drawable.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 				Drawable.LineWidth = brush_width;
 				Drawable.LineJoin = LineJoin.Round;
 				Drawable.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;

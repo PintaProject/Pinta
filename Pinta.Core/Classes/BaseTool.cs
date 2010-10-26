@@ -42,13 +42,24 @@ namespace Pinta.Core
 		protected ToolItem tool_label;
 		protected ToolItem tool_image;
 		protected ToolItem tool_sep;
-		protected ToggleToolButton antialiasing_btn;
-		protected ToggleToolButton alphablending_btn;
+		protected ToolBarDropDownButton antialiasing_button;
+		protected ToolBarDropDownButton alphablending_button;
 
 		protected BaseTool ()
 		{
 		}
-		
+
+		static BaseTool ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Toolbar.AntiAliasingEnabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png")));
+			fact.Add ("Toolbar.AntiAliasingDisabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png")));
+			fact.Add ("Toolbar.BlendingEnabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png")));
+			fact.Add ("Toolbar.BlendingOverwriteIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png")));
+			fact.Add ("Tools.FreeformShape.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.FreeformShape.png")));
+			fact.AddDefault ();
+		}
+
 		public virtual string Name { get { throw new ApplicationException ("Tool didn't override Name"); } }
 		public virtual string Icon { get { throw new ApplicationException ("Tool didn't override Icon"); } }		
 		public virtual string ToolTip { get { throw new ApplicationException ("Tool didn't override ToolTip"); } }
@@ -57,8 +68,8 @@ namespace Pinta.Core
 		public virtual bool Enabled { get { return true; } }
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
-		public virtual bool UseAntialiasing { get { return ShowAntialiasingButton && antialiasing_btn.Active; } }
-		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && alphablending_btn.Active; } }
+		public virtual bool UseAntialiasing { get { return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag; } }
+		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && (bool)alphablending_button.SelectedItem.Tag; } }
 		public virtual int Priority { get { return 75; } }
 
 		protected virtual bool ShowAntialiasingButton { get { return false; } }
@@ -206,44 +217,32 @@ namespace Pinta.Core
 		#region Private Methods
 		private void BuildAlphaBlending (Toolbar tb)
 		{
-			Image blending_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png"));
-			blending_on_icon.Show ();
-			Image blending_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png"));
-			blending_off_icon.Show ();
+			if (alphablending_button != null) {
+				tb.AppendItem (alphablending_button);
+				return;
+			}
 
-			alphablending_btn = new ToggleToolButton ();
-			alphablending_btn.IconWidget = blending_off_icon;
-			alphablending_btn.Show ();
-			alphablending_btn.Label = Catalog.GetString ("Antialiasing");
-			alphablending_btn.TooltipText = Catalog.GetString ("Normal blending / Overwrite blending");
-			alphablending_btn.Toggled += delegate {
-				if (alphablending_btn.Active)
-					alphablending_btn.IconWidget = blending_on_icon;
-				else
-					alphablending_btn.IconWidget = blending_off_icon;
-			};
-			tb.AppendItem (alphablending_btn);
+			alphablending_button = new ToolBarDropDownButton ();
+
+			alphablending_button.AddItem (Catalog.GetString ("Normal Blending"), "Toolbar.BlendingEnabledIcon.png", true);
+			alphablending_button.AddItem (Catalog.GetString ("Overwrite"), "Toolbar.BlendingOverwriteIcon.png", false);
+
+			tb.AppendItem (alphablending_button);
 		}
 
 		private void BuildAntialiasingTool (Toolbar tb)
 		{
-			Image antialiasing_on_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png"));
-			antialiasing_on_icon.Show ();
-			Image antialiasing_off_icon = new Image (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png"));
-			antialiasing_off_icon.Show ();
+			if (antialiasing_button != null) {
+				tb.AppendItem (antialiasing_button);
+				return;
+			}
 
-			antialiasing_btn = new ToggleToolButton ();
-			antialiasing_btn.IconWidget = antialiasing_off_icon;
-			antialiasing_btn.Show ();
-			antialiasing_btn.Label = Catalog.GetString ("Antialiasing");
-			antialiasing_btn.TooltipText = Catalog.GetString ("Antialiasing");
-			antialiasing_btn.Toggled += delegate {
-				if (antialiasing_btn.Active)
-					antialiasing_btn.IconWidget = antialiasing_on_icon;
-				else
-					antialiasing_btn.IconWidget = antialiasing_off_icon;
-			};
-			tb.AppendItem (antialiasing_btn);
+			antialiasing_button = new ToolBarDropDownButton ();
+
+			antialiasing_button.AddItem (Catalog.GetString ("Antialiasing On"), "Toolbar.AntiAliasingEnabledIcon.png", true);
+			antialiasing_button.AddItem (Catalog.GetString ("Antialiasing Off"), "Toolbar.AntiAliasingDisabledIcon.png", false);
+
+			tb.AppendItem (antialiasing_button);
 		}
 		#endregion
 	}

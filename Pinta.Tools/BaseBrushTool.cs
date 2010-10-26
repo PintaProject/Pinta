@@ -43,6 +43,8 @@ namespace Pinta.Tools
 		protected ImageSurface undo_surface;
 		protected bool surface_modified;
 		protected uint mouse_button;
+
+		protected override bool ShowAntialiasingButton { get { return true; } }
 	    
 		public virtual int BrushWidth { 
 			get { 

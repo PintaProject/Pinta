@@ -463,6 +463,18 @@
     <EmbeddedResource Include="Resources\Menu.Help.Translate.png">
       <LogicalName>Menu.Help.Translate.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.ColorMode.png">
+      <LogicalName>Toolbar.ColorMode.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.TransparentMode.png">
+      <LogicalName>Toolbar.TransparentMode.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ShapeTool.Fill.png">
+      <LogicalName>ShapeTool.Fill.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ShapeTool.Outline.png">
+      <LogicalName>ShapeTool.Outline.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

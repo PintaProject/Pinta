@@ -55,8 +55,8 @@ namespace Pinta.Tools
 				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
-					
-				g.Antialias = Antialias.Subpixel;
+
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedRectangle (rect, fill_color, outline_color, BrushWidth);

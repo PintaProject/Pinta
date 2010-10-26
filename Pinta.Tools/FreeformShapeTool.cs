@@ -37,10 +37,9 @@ namespace Pinta.Tools
 	{
 		private Point last_point = point_empty;
 
-		protected ToolBarImage fill_outline_image;
-		protected ToolBarComboBox fill_outline;
-		protected ToolBarLabel spacer_label;
-		protected ToolBarLabel fill_outline_label;
+		protected ToolBarLabel fill_label;
+		protected ToolBarDropDownButton fill_button;
+		protected Gtk.SeparatorToolItem fill_sep;
 
 		private Path path;
 		private Color fill_color;
@@ -63,25 +62,25 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar(tb);
 
-			if (spacer_label == null)
-				spacer_label = new ToolBarLabel ("  ");
+			if (fill_sep == null)
+				fill_sep = new Gtk.SeparatorToolItem ();
 
-			tb.AppendItem (spacer_label);
+			tb.AppendItem (fill_sep);
 
-			if (fill_outline_image == null)
-				fill_outline_image = new ToolBarImage ("ShapeTool.OutlineFill.png");
+			if (fill_label == null)
+				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Fill Style")));
 
-			tb.AppendItem (fill_outline_image);
+			tb.AppendItem (fill_label);
 
-			if (fill_outline_label == null)
-				fill_outline_label = new ToolBarLabel (" : ");
+			if (fill_button == null) {
+				fill_button = new ToolBarDropDownButton ();
 
-			tb.AppendItem (fill_outline_label);
+				fill_button.AddItem (Catalog.GetString ("Outline Shape"), "ShapeTool.Outline.png", 0);
+				fill_button.AddItem (Catalog.GetString ("Fill Shape"), "ShapeTool.Fill.png", 1);
+				fill_button.AddItem (Catalog.GetString ("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
+			}
 
-			if (fill_outline == null)
-				fill_outline = new ToolBarComboBox (150, 0, false, Catalog.GetString ("Outline Shape"), Catalog.GetString ("Fill Shape"), Catalog.GetString ("Fill and Outline Shape"));
-
-			tb.AppendItem (fill_outline);
+			tb.AppendItem (fill_button);
 		}
 		#endregion
 
@@ -134,7 +133,7 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
-				g.Antialias = Antialias.Subpixel;
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 				if (path != null) {
 					g.AppendPath (path);
@@ -189,7 +188,7 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
-				g.Antialias = Antialias.Subpixel;
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 				if (path != null) {
 					g.AppendPath (path);
@@ -222,8 +221,8 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Private Methods
-		private bool StrokeShape { get { return fill_outline.ComboBox.Active % 2 == 0; } }
-		private bool FillShape { get { return fill_outline.ComboBox.Active >= 1; } }
+		protected bool StrokeShape { get { return (int)fill_button.SelectedItem.Tag % 2 == 0; } }
+		protected bool FillShape { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
 		#endregion
 	}
 }
