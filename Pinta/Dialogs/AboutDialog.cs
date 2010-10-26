@@ -59,10 +59,11 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-			"Hanh Pham",
-			"Joe Hillenbrand",
+			"Aaron Bockover",
 			"Jonathan Pobst",
-			"Maia Kozheva"
+			"Maia Kozheva",
+			"Olivier Dufour",
+			"Richard Cohn"
 		};
 
 		string[] oldAuthors = new string[] {
@@ -70,10 +71,13 @@ namespace Pinta
 			"Greg Lowe",
 			"Hanh Pham",
 			"Joe Hillenbrand",
+			"Jon Rimmer",
 			"Jonathan Pobst",
 			"Juergen Obernolte",
 			"Krzysztof Marecki",
+			"Maia Kozheva",
 			"Marco Rolappe",
+			"Obinou Conseil",
 			"Olivier Dufour"
 		};
 
