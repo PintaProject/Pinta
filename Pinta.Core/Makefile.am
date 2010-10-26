@@ -119,5 +119,7 @@ SOURCES =  \
 	ImageFormats/FormatDescriptor.cs \
 	ImageFormats/TgaExporter.cs \
 	Classes/BasePaintBrush.cs \
-	Managers/PaintBrushManager.cs 
+	Managers/PaintBrushManager.cs \
+	Widgets/MenuButton.cs \
+	Widgets/ToolBarDropDownButton.cs
 

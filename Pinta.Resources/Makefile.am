@@ -145,5 +145,9 @@ RESOURCES = \
 	Resources/About.ImageSep.png \
 	Resources/About.MonoPowered.png \
 	Resources/About.ImageTop.png \
-	Resources/Menu.Help.Translate.png 
+	Resources/Menu.Help.Translate.png \
+	Resources/ShapeTool.Fill.png \
+	Resources/ShapeTool.Outline.png \
+	Resources/Toolbar.ColorMode.png \
+	Resources/Toolbar.TransparentMode.png
 
