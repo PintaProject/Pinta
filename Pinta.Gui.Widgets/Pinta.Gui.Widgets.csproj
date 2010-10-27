@@ -109,7 +109,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
-      <Name>Pinta.Core.2010</Name>
+      <Name>Pinta.Core</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
