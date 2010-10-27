@@ -111,6 +111,7 @@
     <ProjectReference Include="..\System.Composition.ComponentModel\System.ComponentModel.Composition.csproj">
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
       <Name>System.ComponentModel.Composition.2010</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
