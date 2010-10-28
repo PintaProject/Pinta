@@ -117,7 +117,13 @@ namespace Pinta
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 			PintaCore.Workspace.DocumentCreated += new EventHandler<DocumentEventArgs> (Workspace_DocumentCreated);
 			PintaCore.Workspace.DocumentClosed += new EventHandler<DocumentEventArgs> (Workspace_DocumentClosed);
-			
+
+			// We support drag and drop for URIs
+			Gtk.TargetEntry[] targetEntryTypes = new Gtk.TargetEntry[] { new Gtk.TargetEntry ("text/uri-list", 0, 100) };
+			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, targetEntryTypes, Gdk.DragAction.Copy);
+
+			this.DragDataReceived += MainWindow_DragDataReceived;
+
 			if (Platform.GetOS () == Platform.OS.Mac) {
 				try {
 					//enable the global key handler for keyboard shortcuts
@@ -155,6 +161,22 @@ namespace Pinta
 			args.RetVal = true;
 
 			PintaCore.Actions.File.Exit.Activate ();
+		}
+
+		private void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
+		{
+			// Only handle URIs
+			if (args.Info != 100)
+				return;
+
+			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
+
+			foreach (string individualFile in fullData.Split ('\n')) {
+				string file = individualFile.Trim ();
+
+				if (file.StartsWith ("file://"))
+					PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+			}
 		}
 
 		private void ZoomToSelection_Activated (object sender, EventArgs e)
