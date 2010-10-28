@@ -26,17 +26,18 @@
 
 using System;
 using Pinta.Core;
+using Gtk;
 
 namespace Pinta
 {
 	public partial class NewImageDialog : Gtk.Dialog
 	{
-		public NewImageDialog ()
+		public NewImageDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
 			this.Build ();
 
-			this.Icon = Gtk.IconTheme.Default.LoadIcon ("gtk-new", 16, Gtk.IconLookupFlags.UseBuiltin);
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+			this.Icon = Gtk.IconTheme.Default.LoadIcon ("gtk-new", 16, IconLookupFlags.UseBuiltin);
+			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 		}
 
 		public int NewImageWidth { get { return this.widthSpinner.ValueAsInt; } }
