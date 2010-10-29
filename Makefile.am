@@ -1,17 +1,82 @@
-SUBDIRS = \
-	Pinta.Resources \
-	Pinta.Core \
-	Pinta.Gui.Widgets \
-	System.Composition.ComponentModel \
-	Pinta.Effects \
-	Pinta.Tools \
-	Pinta
+BINDIR = $(srcdir)/bin
 
-EXTRA_DIST = \
-	expansions.m4 \
-	lib/ICSharpCode.SharpZipLib.dll
+BINFILES = \
+	$(BINDIR)/Pinta.exe \
+	$(BINDIR)/Pinta.Core.dll \
+	$(BINDIR)/Pinta.Gui.Widgets.dll \
+	$(BINDIR)/Pinta.Resources.dll \
+	$(BINDIR)/System.ComponentModel.Composition.dll \
+	$(BINDIR)/Extensions/Pinta.Effects.dll \
+	$(BINDIR)/Extensions/Pinta.Tools.dll
 
-# Targets
+RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
-run: 
-	(cd bin; mono --debug Pinta.exe)
+# target: all - Default target: build
+all: build
+
+# target: run - Launch the uninstalled copy
+run:
+	$(MONO) bin/Pinta.exe
+	
+# target: help - Display callable targets.
+help:
+	egrep "^# target:" Makefile | sed 's/^# target:/make/'
+
+# target: build - Build Pinta.
+build: Pinta.sln
+	cd $(srcdir) && $(XBUILD) Pinta.sln
+	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
+
+# target: list - List source files.
+list:
+	if ! git status > /dev/null 2> /dev/null ;\
+	then \
+		find . -type f -name *.cs | sed 's|./||' ;\
+	else \
+		git ls-files | grep '\.cs' ;\
+	fi
+
+# target: clean - Default clean command: cleanobj and cleanbin
+clean: cleanobj cleanbin
+
+# target: distclean - Removes configure files. 
+distclean: clean
+	rm -f Makefile pinta config.status config.cache config.log configure.lineno config.status.lineno
+
+# target: cleanall - Removes build files. 
+cleanall: distclean
+	rm -rf autom4te.cache
+	rm -f configure aclocal.m4 missing install-sh Makefile.in
+
+# target: cleanbin - Removes built files. 
+cleanbin: 
+	rm -rvf $(BINDIR)/*
+
+# target: cleanobj - Removes temporary build files. 
+cleanobj:
+	find $(srcdir)/ -type d -name obj | xargs rm -rvf
+	
+# target: install - Installs Pinta. 
+install: pinta $(BINFILES)
+	cd $(srcdir) && $(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta.Install.proj
+	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(prefix)/bin/$(PACKAGE)
+
+# target: uninstall - Uninstalls Pinta.
+uninstall: 
+	$(XBUILD) /target:Uninstall /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta.Install.proj
+
+# target: release - Default release type: releasetar
+release: releasetar
+
+# target: releasetar - Make a release tarball.
+releasetar: $(BINFILES)
+	cd $(BINDIR) && tar -czf ../$(RELEASE_FILE).tgz --exclude=*mdb *
+
+# target: releasezip - Make a release zip file.
+releasezip: $(BINFILES)
+	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
+
+EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po Tarball System.ComponentModel.Composition xdg \
+	license-mit.txt license-pdn.txt readme.txt todo.txt Pinta.sln Pinta.Install.proj
+
+.PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip
