@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT([pinta], [0.5])
-AM_INIT_AUTOMAKE([foreign])
+AM_INIT_AUTOMAKE([tar-ustar foreign])
 
 AC_PREFIX_DEFAULT([/usr])
 AC_PROG_INSTALL
