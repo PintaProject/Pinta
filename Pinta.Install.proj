@@ -9,11 +9,17 @@
 
   <!-- All of our translation files (po) -->
   <ItemGroup>
+    <Translation Include="po/messages-ar.po">
+      <Code>ar</Code>
+    </Translation>
     <Translation Include="po/messages-ca.po">
       <Code>ca</Code>
     </Translation>
     <Translation Include="po/messages-cs.po">
       <Code>cs</Code>
+    </Translation>
+    <Translation Include="po/messages-da.po">
+      <Code>da</Code>
     </Translation>
     <Translation Include="po/messages-de.po">
       <Code>de</Code>
@@ -30,11 +36,20 @@
     <Translation Include="po/messages-fr.po">
       <Code>fr</Code>
     </Translation>
+    <Translation Include="po/messages-ga.po">
+      <Code>ga</Code>
+    </Translation>
+    <Translation Include="po/messages-gl.po">
+      <Code>gl</Code>
+    </Translation>
     <Translation Include="po/messages-he.po">
       <Code>he</Code>
     </Translation>
     <Translation Include="po/messages-hr.po">
       <Code>hr</Code>
+    </Translation>
+    <Translation Include="po/messages-id.po">
+      <Code>id</Code>
     </Translation>
     <Translation Include="po/messages-it.po">
       <Code>it</Code>
@@ -45,11 +60,38 @@
     <Translation Include="po/messages-ko.po">
       <Code>ko</Code>
     </Translation>
+    <Translation Include="po/messages-lt.po">
+      <Code>lt</Code>
+    </Translation>
+    <Translation Include="po/messages-nb.po">
+      <Code>nb</Code>
+    </Translation>
+    <Translation Include="po/messages-pl.po">
+      <Code>pl</Code>
+    </Translation>
+    <Translation Include="po/messages-pt.po">
+      <Code>pt</Code>
+    </Translation>
+    <Translation Include="po/messages-pt_BR.po">
+      <Code>pt_BR</Code>
+    </Translation>
+    <Translation Include="po/messages-ro.po">
+      <Code>ro</Code>
+    </Translation>
     <Translation Include="po/messages-ru.po">
       <Code>ru</Code>
     </Translation>
     <Translation Include="po/messages-sk.po">
       <Code>sk</Code>
+    </Translation>
+    <Translation Include="po/messages-sl.po">
+      <Code>sl</Code>
+    </Translation>
+    <Translation Include="po/messages-sr.po">
+      <Code>sr</Code>
+    </Translation>
+    <Translation Include="po/messages-sv.po">
+      <Code>sv</Code>
     </Translation>
     <Translation Include="po/messages-th.po">
       <Code>th</Code>
@@ -59,6 +101,15 @@
     </Translation>
     <Translation Include="po/messages-uk.po">
       <Code>uk</Code>
+    </Translation>
+    <Translation Include="po/messages-vi.po">
+      <Code>vi</Code>
+    </Translation>
+    <Translation Include="po/messages-zh_CN.po">
+      <Code>zh_CN</Code>
+    </Translation>
+    <Translation Include="po/messages-zh_TW.po">
+      <Code>zh_TW</Code>
     </Translation>
   </ItemGroup>
 
