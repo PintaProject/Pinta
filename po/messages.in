@@ -1,0 +1,173 @@
+
+#: BulgeEffect dialog
+#: FrostedGlassEffect dialog
+#: PolarInversionEffect dialog
+#: TwistEffect dialog
+#: SharpenData dialog
+#: MotionBlurEffect dialog
+msgid "Amount"
+msgstr ""
+
+#: RadialBlurEffect dialog
+#: JuliaFractalEffect dialog
+#: MandelbrotFractalEffect dialog
+#: EdgeDetectData dialog
+#: EmbossEffect dialog
+#: ReliefData dialog
+#: TwistEffect dialog
+msgid "Angle"
+msgstr ""
+
+#: CloudsEffect dialog
+msgid "Antialias"
+msgstr ""
+
+#: GlowEffect dialog
+msgid "Blend Mode"
+msgstr ""
+
+#: OilPaintingEffect dialog
+msgid "Brightness"
+msgstr ""
+
+#: PixelateData dialog
+msgid "Brush Size"
+msgstr ""
+
+#: PolarInversionEffect dialog
+msgid "Cell Size"
+msgstr ""
+
+#: MotionBlurEffect dialog
+msgid "Center Offset"
+msgstr ""
+
+#: OilPaintingEffect dialog
+msgid "Centered"
+msgstr ""
+
+#: PencilSketchEffect dialog
+msgid "Coarseness"
+msgstr ""
+
+#: AddNoiseEffect dialog
+msgid "Color Range"
+msgstr ""
+
+#: InkSketchEffect dialog
+msgid "Color Saturation"
+msgstr ""
+
+#: GlowEffect dialog
+msgid "Coloring"
+msgstr ""
+
+#: AddNoiseEffect dialog
+msgid "Contrast"
+msgstr ""
+
+#: FragmentEffect dialog
+msgid "Coverage"
+msgstr ""
+
+#: MotionBlurEffect dialog
+#: PolarInversionEffect dialog
+msgid "Distance"
+msgstr ""
+
+#: JuliaFractalEffect dialog
+msgid "Edge Behavior"
+msgstr ""
+
+#: MandelbrotFractalEffect dialog
+#: FragmentEffect dialog
+msgid "Factor"
+msgstr ""
+
+#: InkSketchEffect dialog
+msgid "Fragments"
+msgstr ""
+
+#: TileEffect dialog
+msgid "Ink Outline"
+msgstr ""
+
+#: AddNoiseEffect dialog
+#: OutlineEffect dialog
+#: MandelbrotFractalEffect dialog
+msgid "Intensity"
+msgstr ""
+
+#: RadialBlurEffect dialog
+msgid "Lighting"
+msgstr ""
+
+#: ZoomBlurEffect dialog
+#: BulgeEffect dialog
+#: PencilSketchEffect dialog
+msgid "Offset"
+msgstr ""
+
+#: MedianEffect dialog
+msgid "Pencil Tip Size"
+msgstr ""
+
+#: CloudsEffect dialog
+msgid "Percentile"
+msgstr ""
+
+#: RadialBlurEffect dialog
+msgid "Power"
+msgstr ""
+
+#: PolarInversionEffect dialog
+#: JuliaFractalEffect dialog
+#: MandelbrotFractalEffect dialog
+#: GaussianBlurEffect dialog
+msgid "Quality"
+msgstr ""
+
+#: TileEffect dialog
+#: RedEyeRemoveData dialog
+msgid "Rotation"
+msgstr ""
+
+#: CloudsEffect dialog
+msgid "Saturation percentage"
+msgstr ""
+
+#: CloudsEffect dialog
+msgid "Scale"
+msgstr ""
+
+#: SoftenPortraitData dialog
+msgid "Seed"
+msgstr ""
+
+#: ReduceNoiseEffect dialog
+msgid "Softness"
+msgstr ""
+
+#: OutlineEffect dialog
+msgid "Strength"
+msgstr ""
+
+#: TileEffect dialog
+msgid "Thickness"
+msgstr ""
+
+#: RedEyeRemoveData dialog
+msgid "Tile Size"
+msgstr ""
+
+#: JuliaFractalEffect dialog
+msgid "Warmth"
+msgstr ""
+
+#: RadialBlurEffect dialog
+msgid "Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles."
+msgstr ""
+
+#: RedEyeRemoveEffect dialog
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
