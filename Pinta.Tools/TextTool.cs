@@ -46,9 +46,9 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
 
-		protected override bool ShowAntialiasingButton {
-			get { return true; }
-		}
+		//protected override bool ShowAntialiasingButton {
+		//        get { return true; }
+		//}
 
 		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
 		private Cairo.PointD startMouseXY;
