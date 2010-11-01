@@ -108,7 +108,7 @@
       <Name>Pinta.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\System.Composition.ComponentModel\System.ComponentModel.Composition.csproj">
+    <ProjectReference Include="..\System.ComponentModel.Composition\System.ComponentModel.Composition.csproj">
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
       <Name>System.ComponentModel.Composition</Name>
       <Private>False</Private>
