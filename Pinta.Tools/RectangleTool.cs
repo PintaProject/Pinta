@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	//[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class RectangleTool : ShapeTool
 	{
 		public override string Name {

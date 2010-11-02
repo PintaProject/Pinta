@@ -2,7 +2,6 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([pinta], [0.5])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
 
-AC_PREFIX_DEFAULT([/usr])
 AC_PROG_INSTALL
 
 dnl pkg-config
@@ -23,7 +22,7 @@ if test "x$MONO" = "xno"; then
 fi
 
 # Check Mono version
-MONO_MINIMUM_VERSION=2.6.7
+MONO_MINIMUM_VERSION=2.4
 PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
 
 AC_SUBST(XBUILD)

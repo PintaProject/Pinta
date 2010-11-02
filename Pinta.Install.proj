@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
 
   <!-- Set some paths -->
   <PropertyGroup>
     <OutputPath>bin</OutputPath>
-    <InstallPrefix>/usr/local</InstallPrefix>
+    <InstallPrefix Condition="'$(InstallPrefix)'==''">/usr/local</InstallPrefix>
   </PropertyGroup>
 
   <!-- All of our translation files (po) -->
@@ -126,13 +126,11 @@
   <ItemGroup>
     <BinFile Include="$(OutputPath)/*.exe" />
     <BinFile Include="$(OutputPath)/*.dll" />
-    <ExtensionFile Include="$(OutputPath)/Extensions/*.dll" />
   </ItemGroup>
 
   <!-- Install everything for Pinta -->
   <Target Name="Install">
     <Copy SourceFiles="@(BinFile)" DestinationFolder="$(InstallPrefix)/lib/pinta" />
-    <Copy SourceFiles="@(ExtensionFile)" DestinationFolder="$(InstallPrefix)/lib/pinta/Extensions" />
     <MakeDir Directories="$(InstallPrefix)/bin" />
     <Copy SourceFiles="$(OutputPath)/locale/%(Translation.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(InstallPrefix)/share/locale/%(Translation.Code)/LC_MESSAGES" />
     <Copy SourceFiles="xdg/pinta.1" DestinationFolder="$(InstallPrefix)/share/man/man1" />

@@ -26,18 +26,99 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
+//using System.ComponentModel.Composition;
 using Pinta.Core;
+using Pinta.Tools;
+using Pinta.Effects;
+using Pinta.Tools.Brushes;
 
 namespace Pinta
 {
 	class ExtensionPoints
 	{
-		[ImportMany]
+		//[ImportMany]
 		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
+		//[ImportMany]
 		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
+		//[ImportMany]
 		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+
+		public ExtensionPoints ()
+		{
+			Tools = new List<BaseTool> {
+				new RectangleSelectTool (),
+				new MoveSelectedTool (),
+				new LassoSelectTool (),
+				new MoveSelectionTool (),
+				new EllipseSelectTool (),
+				new ZoomTool (),
+				new MagicWandTool (),
+				new PanTool (),
+				new PaintBucketTool (),
+				new GradientTool (),
+				new PaintBrushTool (),
+				new EraserTool (),
+				new PencilTool (),
+				new ColorPickerTool (),
+				new CloneStampTool (),
+				new RecolorTool (),
+				new TextTool (),
+				new LineCurveTool (),
+				new RectangleTool (),
+				new RoundedRectangleTool (),
+				new EllipseTool (),
+				new FreeformShapeTool ()
+			};
+
+			Effects = new List<BaseEffect> () {
+				new AutoLevelEffect (),
+				new BlackAndWhiteEffect (),
+				new BrightnessContrastEffect (),
+				new CurvesEffect (),
+				new HueSaturationEffect (),
+				new InvertColorsEffect (),
+				new LevelsEffect (),
+				new PosterizeEffect (),
+				new SepiaEffect (),
+				new AddNoiseEffect (),
+				new BulgeEffect (),
+				new CloudsEffect (),
+				new EdgeDetectEffect (),
+				new EmbossEffect (),
+				new FragmentEffect (),
+				new FrostedGlassEffect (),
+				new GaussianBlurEffect (),
+				new GlowEffect (),
+				new InkSketchEffect (),
+				new JuliaFractalEffect (),
+				new MandelbrotFractalEffect (),
+				new MedianEffect (),
+				new MotionBlurEffect (),
+				new OilPaintingEffect (),
+				new OutlineEffect (),
+				new PencilSketchEffect (),
+				new PixelateEffect (),
+				new PolarInversionEffect (),
+				new RadialBlurEffect (),
+				new RedEyeRemoveEffect (),
+				new ReduceNoiseEffect (),
+				new ReliefEffect (),
+				new SharpenEffect (),
+				new SoftenPortraitEffect (),
+				new TileEffect (),
+				new TwistEffect (),
+				new UnfocusEffect (),
+				new ZoomBlurEffect ()
+			};
+
+			PaintBrushes = new List<BasePaintBrush> {
+				new CircleBrush (),
+				new GridBrush (),
+				new PlainBrush (),
+				new SplatterBrush (),
+				new SquaresBrush ()
+			};
+		}
+
 	}
 }
