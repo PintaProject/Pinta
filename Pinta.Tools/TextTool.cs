@@ -187,7 +187,7 @@ namespace Pinta.Tools
 						index = 0;
 					
 					if (size_combo == null) {
-						size_combo = new ToolBarComboBox (50, index, true, entries.ToArray ());
+						size_combo = new ToolBarComboBox (65, index, true, entries.ToArray ());
 						
 						size_combo.ComboBox.Changed += HandleSizeChanged;
 						(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
