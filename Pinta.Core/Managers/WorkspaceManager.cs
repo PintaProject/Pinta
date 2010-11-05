@@ -142,17 +142,19 @@ namespace Pinta.Core
 			ActiveWorkspace.Invalidate (rect);
 		}
 
-		public Document NewDocument (Gdk.Size imageSize)
+		public Document NewDocument (Gdk.Size imageSize, bool transparent)
 		{
 			Document doc = CreateAndActivateDocument (null, imageSize);
 			doc.Workspace.CanvasSize = imageSize;
 
 			// Start with an empty white layer
 			Layer background = doc.AddNewLayer (Catalog.GetString ("Background"));
-			
-			using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-				g.SetSourceRGB (1, 1, 1);
-				g.Paint ();
+
+			if (!transparent) {
+				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
+					g.SetSourceRGB (1, 1, 1);
+					g.Paint ();
+				}
 			}
 
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));

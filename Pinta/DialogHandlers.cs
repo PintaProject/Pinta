@@ -89,7 +89,7 @@ namespace Pinta
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok)
-				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight));
+				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), false);
 
 			dialog.Destroy ();
 		}
@@ -102,7 +102,7 @@ namespace Pinta
 			if (dialog.Run () == (int)Gtk.ResponseType.Ok) {
 				GLib.Timeout.Add ((uint)dialog.GetValue () * 1000, () => {
 					Screen screen = Screen.Default;
-					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height));
+					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), false);
 
 					using (Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height)) {
 						using (Cairo.Context g = new Cairo.Context (doc.Layers[0].Surface)) {
@@ -215,7 +215,7 @@ namespace Pinta
 				Gdk.Pixbuf image = cb.WaitForImage ();
 				Gdk.Size size = new Gdk.Size (image.Width, image.Height);
 
-				PintaCore.Workspace.NewDocument (size);
+				PintaCore.Workspace.NewDocument (size, true);
 				PintaCore.Actions.Edit.Paste.Activate ();
 			} else {
 				ClipboardEmptyError ();
