@@ -145,7 +145,7 @@ namespace Pinta
 				var message = string.Format (markup, primary, secondary);
 
 				var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-							    MessageType.Question, ButtonsType.None, true,
+							    MessageType.Warning, ButtonsType.None, true,
 							    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
 
 				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
