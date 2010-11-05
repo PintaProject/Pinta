@@ -76,7 +76,6 @@ namespace Pinta
 			LoadEffects ();
 			//CreateStatusBar ();
 
-			this.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 			canvas.IsFocus = true;
 
 			UpdateRulerRange ();
