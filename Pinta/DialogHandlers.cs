@@ -113,8 +113,12 @@ namespace Pinta
 
 					doc.IsDirty = true;
 
-					if (!PintaCore.Chrome.MainWindow.IsActive)
+					if (!PintaCore.Chrome.MainWindow.IsActive) {
 						PintaCore.Chrome.MainWindow.UrgencyHint = true;
+
+						// Don't flash forever
+						GLib.Timeout.Add (3 * 1000, () => PintaCore.Chrome.MainWindow.UrgencyHint = false);
+					}
 					
 					return false;
 				});
