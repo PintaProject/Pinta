@@ -143,7 +143,7 @@ namespace Pinta.Gui.Widgets {
             // Container child table1.Gtk.Table+TableChild
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("X:");
+            this.label2.LabelProp = "X:";
             this.table1.Add(this.label2);
             Gtk.Table.TableChild w23 = ((Gtk.Table.TableChild)(this.table1[this.label2]));
             w23.XOptions = ((Gtk.AttachOptions)(4));
@@ -151,7 +151,7 @@ namespace Pinta.Gui.Widgets {
             // Container child table1.Gtk.Table+TableChild
             this.label3 = new Gtk.Label();
             this.label3.Name = "label3";
-            this.label3.LabelProp = Mono.Unix.Catalog.GetString("Y:");
+            this.label3.LabelProp = "Y:";
             this.table1.Add(this.label3);
             Gtk.Table.TableChild w24 = ((Gtk.Table.TableChild)(this.table1[this.label3]));
             w24.TopAttach = ((uint)(1));

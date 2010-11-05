@@ -88,7 +88,7 @@ namespace Pinta.Core
 			Document doc = new Document (size);
 			
 			if (string.IsNullOrEmpty (filename))
-				doc.Filename = string.Format ("Unsaved Image {0}", new_file_name++);
+				doc.Filename = string.Format (Catalog.GetString ("Unsaved Image {0}"), new_file_name++);
 			else
 				doc.PathAndFileName = filename;
 			

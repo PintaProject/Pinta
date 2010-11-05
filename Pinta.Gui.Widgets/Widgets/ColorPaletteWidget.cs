@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta.Gui.Widgets
 {
@@ -71,7 +72,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			if (primary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Primary Color");
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Primary Color"));
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentAlpha = PintaCore.Palette.PrimaryColor.GdkColorAlpha ();
@@ -85,7 +86,7 @@ namespace Pinta.Gui.Widgets
 
 				csd.Destroy ();
 			} else if (secondary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Secondary Color");
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Secondary Color"));
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentAlpha = PintaCore.Palette.SecondaryColor.GdkColorAlpha ();
@@ -108,7 +109,7 @@ namespace Pinta.Gui.Widgets
 				else if (ev.Button == 1)
 					PintaCore.Palette.PrimaryColor = palette[pal];
 				else {
-					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Palette Color");
+					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Palette Color"));
 					csd.ColorSelection.PreviousColor = palette[pal].ToGdkColor ();
 					csd.ColorSelection.CurrentColor = palette[pal].ToGdkColor ();
 					csd.ColorSelection.CurrentAlpha = palette[pal].GdkColorAlpha ();

@@ -403,6 +403,11 @@ msgstr ""
 msgid "GIMP palette (*.gpl)"
 msgstr ""
 
+#: Pinta.Core/Managers/WorkspaceManager.cs:91
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr ""
+
 #: Pinta.Core/Managers/WorkspaceManager.cs:151
 msgid "Background"
 msgstr ""
@@ -721,12 +726,16 @@ msgstr ""
 msgid "label"
 msgstr ""
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:146
-msgid "X:"
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
+msgid "Choose Primary Color"
 msgstr ""
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:154
-msgid "Y:"
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
+msgid "Choose Secondary Color"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
+msgid "Choose Palette Color"
 msgstr ""
 
 #: Pinta.Tools/PanTool.cs:38
