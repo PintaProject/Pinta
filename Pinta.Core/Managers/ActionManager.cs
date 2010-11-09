@@ -112,12 +112,24 @@ namespace Pinta.Core
 			toolbar.AppendItem (File.Save.CreateToolBarItem ());
 			//toolbar.AppendItem (File.Print.CreateToolBarItem ());
 			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
-			toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+
+			// Cut/Copy/Paste comes before Undo/Redo on Windows
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
+				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+				toolbar.AppendItem (new SeparatorToolItem ());
+				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+			} else {
+				toolbar.AppendItem (Edit.Undo.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Redo.CreateToolBarItem ());
+				toolbar.AppendItem (new SeparatorToolItem ());
+				toolbar.AppendItem (Edit.Cut.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Copy.CreateToolBarItem ());
+				toolbar.AppendItem (Edit.Paste.CreateToolBarItem ());
+			}
+
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
