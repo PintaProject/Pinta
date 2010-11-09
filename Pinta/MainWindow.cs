@@ -123,7 +123,7 @@ namespace Pinta
 
 			this.DragDataReceived += MainWindow_DragDataReceived;
 
-			if (Platform.GetOS () == Platform.OS.Mac) {
+			if (PintaCore.System.OperatingSystem == OS.Mac) {
 				try {
 					//enable the global key handler for keyboard shortcuts
 					IgeMacMenu.GlobalKeyHandlerEnabled = true;
@@ -431,7 +431,7 @@ namespace Pinta
 
 			// On non-Windows systems, we clip to sufficient size for
 			// "both-horiz" mode.
-			if (Platform.GetOS () == Platform.OS.Windows)
+			if (PintaCore.System.OperatingSystem == OS.Windows)
 				tool_toolbar.HeightRequest = 28;
 			else
 				tool_toolbar.HeightRequest = 42;
@@ -476,8 +476,8 @@ namespace Pinta
 				Name = "main_toolbar",
 				ShowArrow = false,
 			};
-			
-			if (Platform.GetOS () == Platform.OS.Windows) {
+
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				main_toolbar.ToolbarStyle = ToolbarStyle.Icons;
 				main_toolbar.IconSize = IconSize.SmallToolbar;
 			}

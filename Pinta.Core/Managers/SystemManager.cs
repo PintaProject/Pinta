@@ -28,18 +28,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Pinta.Core
 {
 	public class SystemManager
 	{
+		private static OS operating_system;
+
 		public ImageConverterManager ImageFormats { get; private set; }
 		public int RenderThreads { get; set; }
+		public OS OperatingSystem { get { return operating_system; } }
 		
 		public SystemManager ()
 		{
 			ImageFormats = new ImageConverterManager ();
 			RenderThreads = Environment.ProcessorCount;
+		}
+
+		static SystemManager ()
+		{
+			if (Path.DirectorySeparatorChar == '\\')
+				operating_system = OS.Windows;
+			else if (IsRunningOnMac ())
+				operating_system = OS.Mac;
+			else if (Environment.OSVersion.Platform == PlatformID.Unix)
+				operating_system = OS.X11;
+			else
+				operating_system = OS.Other;
 		}
 
 		public string GetExecutablePathName ()
@@ -49,5 +66,41 @@ namespace Pinta.Core
 
 			return executablePathName;
 		}
+
+		public static OS GetOperatingSystem ()
+		{
+			return operating_system;
+		}
+
+		//From Managed.Windows.Forms/XplatUI
+		[DllImport ("libc")]
+		static extern int uname (IntPtr buf);
+
+		static bool IsRunningOnMac ()
+		{
+			IntPtr buf = IntPtr.Zero;
+			try {
+				buf = Marshal.AllocHGlobal (8192);
+				// This is a hacktastic way of getting sysname from uname ()
+				if (uname (buf) == 0) {
+					string os = Marshal.PtrToStringAnsi (buf);
+					if (os == "Darwin")
+						return true;
+				}
+			} catch {
+			} finally {
+				if (buf != IntPtr.Zero)
+					Marshal.FreeHGlobal (buf);
+			}
+			return false;
+		}
+	}
+
+	public enum OS
+	{
+		Windows,
+		Mac,
+		X11,
+		Other
 	}
 }

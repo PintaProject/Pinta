@@ -43,8 +43,8 @@ namespace Pinta
 			string locale_dir;
 			bool devel_mode = File.Exists (Path.Combine (Path.Combine (app_dir, ".."), "Pinta.sln"));
 			
-			if (Platform.GetOS () != Platform.OS.X11 || devel_mode)
-				locale_dir = Path.Combine (app_dir, "locale");	
+			if (SystemManager.GetOperatingSystem () != OS.X11 || devel_mode)
+				locale_dir = Path.Combine (app_dir, "locale");
 			else {
 				// From MonoDevelop:
 				// Pinta is located at $prefix/lib/pinta
@@ -89,7 +89,7 @@ namespace Pinta
 				
 			if (extra.Count > 0) {
 				// Not sure what this does for Mac, so I'm not touching it
-				if (Platform.GetOS () == Platform.OS.Mac) {
+				if (PintaCore.System.OperatingSystem == OS.Mac) {
 					string arg = args[0];
 
 					if (args[0].StartsWith ("-psn_")) {
