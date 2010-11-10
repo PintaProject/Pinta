@@ -64,10 +64,10 @@ namespace Pinta.Core
 		{
 			pb.Save (fileName, fileType);
 		}
-		
-		public void Export (LayerManager layers, string fileName)
+
+		public void Export (Document document, string fileName)
 		{
-			Cairo.ImageSurface surf = layers.GetFlattenedImage ();
+			Cairo.ImageSurface surf = document.GetFlattenedImage ();
 	
 			Pixbuf pb = surf.ToPixbuf ();
 			DoSave(pb, fileName, filetype);

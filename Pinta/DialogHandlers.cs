@@ -584,7 +584,7 @@ namespace Pinta
 				return false;
 			}
 
-			format.Exporter.Export (PintaCore.Layers, file);
+			format.Exporter.Export (document, file);
 
 			document.Filename = Path.GetFileName (file);
 			document.IsDirty = false;

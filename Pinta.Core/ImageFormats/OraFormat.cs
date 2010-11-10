@@ -33,6 +33,7 @@ using Gdk;
 using Cairo;
 
 using ICSharpCode.SharpZipLib.Zip;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
@@ -135,7 +136,7 @@ namespace Pinta.Core
 				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData (LayerManager layers) {
+		private byte[] GetLayerXmlData (List<Layer> layers) {
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
 			writer.Formatting = Formatting.Indented;
@@ -164,7 +165,8 @@ namespace Pinta.Core
 			return ms.ToArray ();
 		}
 
-		public void Export (LayerManager layers, string fileName) {
+		public void Export (Document document, string fileName)
+		{
 			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create));
 			ZipEntry mimetype = new ZipEntry ("mimetype");
 			mimetype.CompressionMethod = CompressionMethod.Stored;
@@ -173,8 +175,8 @@ namespace Pinta.Core
 			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
 			stream.Write (databytes, 0, databytes.Length);
 
-			for (int i = 0; i < layers.Count; i++) {
-				Pixbuf pb = layers[i].Surface.ToPixbuf ();
+			for (int i = 0; i < document.Layers.Count; i++) {
+				Pixbuf pb = document.Layers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 				(pb as IDisposable).Dispose ();
 
@@ -183,10 +185,10 @@ namespace Pinta.Core
 			}
 
 			stream.PutNextEntry (new ZipEntry ("stack.xml"));
-			databytes = GetLayerXmlData (layers);
+			databytes = GetLayerXmlData (document.Layers);
 			stream.Write (databytes, 0, databytes.Length);
 
-			ImageSurface flattened = layers.GetFlattenedImage();
+			ImageSurface flattened = document.GetFlattenedImage ();
 			Pixbuf flattenedPb = flattened.ToPixbuf ();
 			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
 			Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear);

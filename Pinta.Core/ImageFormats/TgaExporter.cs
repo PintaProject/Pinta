@@ -82,8 +82,8 @@ namespace Pinta.Core
 		
 		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 		// we can always add more through an export dialog.
-		public void Export (LayerManager layers, string fileName) {
-			ImageSurface surf = layers.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
+		public void Export (Document document, string fileName) {
+			ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
 			BinaryWriter writer = new BinaryWriter (new FileStream (fileName, FileMode.Create, FileAccess.Write));
 	
 			try {

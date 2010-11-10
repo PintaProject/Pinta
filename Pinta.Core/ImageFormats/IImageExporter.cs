@@ -30,6 +30,6 @@ namespace Pinta.Core
 {
 	public interface IImageExporter
 	{
-		void Export (LayerManager layers, string fileName);
+		void Export (Document document, string fileName);
 	}
 }
