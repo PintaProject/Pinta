@@ -584,6 +584,9 @@ namespace Pinta
 				return false;
 			}
 
+			// Commit any pending changes
+			document.FinishSelection ();
+
 			format.Exporter.Export (document, file);
 
 			document.Filename = Path.GetFileName (file);
