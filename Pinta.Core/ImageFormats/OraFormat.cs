@@ -48,6 +48,11 @@ namespace Pinta.Core
 			XmlElement imageElement = stackXml.DocumentElement;
 			int width = int.Parse (imageElement.GetAttribute ("w"));
 			int height = int.Parse (imageElement.GetAttribute ("h"));
+
+			Size imagesize = new Size (width, height);
+
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
+			doc.HasFile = true;
 			
 			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0];
 			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
@@ -55,11 +60,8 @@ namespace Pinta.Core
 			if (layerElements.Count == 0)
 				throw new XmlException ("No layers found in OpenRaster file");
 
-			layers.Clear ();
-			PintaCore.History.Clear ();
-			layers.DestroySelectionLayer ();
-			PintaCore.Workspace.ImageSize = new Size (width, height);
-			PintaCore.Workspace.CanvasSize = new Gdk.Size (width, height);
+			doc.ImageSize = imagesize;
+			doc.Workspace.CanvasSize = imagesize;
 
 			for (int i = 0; i < layerElements.Count; i++) {
 				XmlElement layerElement = (XmlElement) layerElements[i];
@@ -87,8 +89,9 @@ namespace Pinta.Core
 						}
 					}
 
-					Layer layer = layers.CreateLayer (name, width, height);
-					layers.Insert (layer, 0);
+					Layer layer = doc.CreateLayer (name);
+					doc.Insert (layer, 0);
+
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 					
 					using (Pixbuf pb = new Pixbuf (tmp_file)) {
