@@ -89,8 +89,23 @@ namespace Pinta.Core
 			if (disposed)
 				throw new ObjectDisposedException ("PlacedSurface");
 
-			using (Cairo.Context g = new Cairo.Context (dst))
-				g.DrawPixbuf (what.ToPixbuf (), new Cairo.Point (where.X, where.Y));
+			using (Cairo.Context g = new Cairo.Context (dst)) {
+				g.Save ();
+
+				Rectangle r = what.GetBounds ().ToCairoRectangle ();
+
+				// We need to use the source operator to fully replace the old
+				// data.  Or else we may paint transparent on top of it and 
+				// it will still be visible.  [Bug #670411]
+				using (Path p = g.CreateRectanglePath (new Rectangle (where.X, where.Y, r.Width, r.Height))) {
+					g.AppendPath (p);
+					g.Clip ();
+					g.Operator = Operator.Source;
+					g.DrawPixbuf (what.ToPixbuf (), new Cairo.Point (where.X, where.Y));
+				}
+
+				g.Restore ();
+			}
 		}
 
 		public void Draw (ImageSurface dst, PixelOp pixelOp)
