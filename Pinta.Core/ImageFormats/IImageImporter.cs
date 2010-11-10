@@ -30,6 +30,6 @@ namespace Pinta.Core
 {
 	public interface IImageImporter
 	{
-		void Import (LayerManager layers, string fileName);
+		void Import (string fileName);
 	}
 }

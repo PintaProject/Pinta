@@ -172,7 +172,7 @@ namespace Pinta.Core
 			try {
 				// Open the image and add it to the layers
 				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
-				importer.Import (PintaCore.Layers, file);
+				importer.Import (file);
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));

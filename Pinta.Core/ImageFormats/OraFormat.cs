@@ -40,7 +40,7 @@ namespace Pinta.Core
 	{
 		private const int ThumbMaxSize = 256;
 		
-		public void Import (LayerManager layers, string fileName) {
+		public void Import (string fileName) {
 			ZipFile file = new ZipFile (fileName);
 			XmlDocument stackXml = new XmlDocument ();
 			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));

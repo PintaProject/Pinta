@@ -40,17 +40,17 @@ namespace Pinta.Core
 			this.filetype = filetype;
 		}
 	
-		public void Import (LayerManager layers, string fileName)
+		public void Import (string fileName)
 		{
 			Pixbuf bg = new Pixbuf (fileName);
 			Size imagesize = new Size (bg.Width, bg.Height);
 
-			PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
-			PintaCore.Workspace.ActiveDocument.HasFile = true;
-			PintaCore.Workspace.ActiveDocument.ImageSize = imagesize;
-			PintaCore.Workspace.ActiveWorkspace.CanvasSize = imagesize;
+			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
+			doc.HasFile = true;
+			doc.ImageSize = imagesize;
+			doc.Workspace.CanvasSize = imagesize;
 
-			Layer layer = layers.AddNewLayer (Path.GetFileName (fileName));
+			Layer layer = doc.AddNewLayer (Path.GetFileName (fileName));
 
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
