@@ -1,5 +1,5 @@
 ﻿// 
-// ExtensionPoints.cs
+// BaseExtension.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -24,22 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using Pinta.Core;
 
-namespace Pinta
+using System;
+
+namespace Pinta.Core
 {
-	class ExtensionPoints
+	public class BaseExtension
 	{
-		[ImportMany]
-		public IEnumerable<BaseExtension> Extensions { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseTool> Tools { get; set; }
-		[ImportMany]
-		public IEnumerable<BaseEffect> Effects { get; set; }
-		[ImportMany]
-		public IEnumerable<BasePaintBrush> PaintBrushes { get; set; }
+		/// <summary>
+		/// Called during startup, perform any necessary initialization here
+		/// </summary>
+		public virtual void Initialize ()
+		{
+		}
 	}
 }

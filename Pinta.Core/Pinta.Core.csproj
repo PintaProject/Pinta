@@ -81,6 +81,7 @@
     <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
+    <Compile Include="Classes\BaseExtension.cs" />
     <Compile Include="Classes\DocumentWorkspaceHistory.cs" />
     <Compile Include="Classes\Document.cs" />
     <Compile Include="Classes\DocumentWorkspace.cs" />

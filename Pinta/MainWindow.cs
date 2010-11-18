@@ -333,6 +333,9 @@ namespace Pinta
 			var container = new CompositionContainer (catalog);
 
 			container.ComposeParts (extensions);
+
+			foreach (var extension in extensions.Extensions)
+				extension.Initialize ();
 		}
 
 		private void LoadPaintBrushes ()
