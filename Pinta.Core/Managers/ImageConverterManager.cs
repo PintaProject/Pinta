@@ -41,7 +41,19 @@ namespace Pinta.Core
 			// Create all the formats supported by Gdk
 			foreach (var format in Pixbuf.Formats) {
 				string formatName = format.Name.ToLowerInvariant ();
-				string[] extensions = (formatName == "jpeg") ? new string[] { "jpg", "jpeg" } : new string[] { formatName };
+				string[] extensions;
+
+				switch (formatName) {
+					case "jpeg":
+						extensions = new string[] { "jpg", "jpeg" };
+						break;
+					case "tiff":
+						extensions = new string[] { "tif", "tiff" };
+						break;
+					default:
+						extensions = new string[] { formatName };
+						break;
+				}
 				
 				GdkPixbufFormat importer = new GdkPixbufFormat (format.Name.ToLowerInvariant ());
 				IImageExporter exporter;
