@@ -203,7 +203,7 @@ namespace Pinta.Tools
 		}
 
 		private GradientColorMode SelectedGradientColorMode {
-			get { return (GradientColorMode)gradient_button.SelectedItem.Tag; }
+			get { return (GradientColorMode)mode_button.SelectedItem.Tag; }
 		}
 		#endregion
 
