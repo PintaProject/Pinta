@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		#region Properties
 		public override string Name { get { return Catalog.GetString ("Eraser"); } }
 		public override string Icon { get { return "Tools.Eraser.png"; } }
-		public override string StatusBarText { get { return Catalog.GetString ("Click and drag to erase a portion of the image."); } }
+		public override string StatusBarText { get { return Catalog.GetString ("Left click to erase to transparent, right click to erase to secondary color. "); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
 		public override int Priority { get { return 27; } }
 		#endregion
@@ -81,8 +81,13 @@ namespace Pinta.Tools
 				
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
-				
-				g.Operator = Operator.Clear;
+
+				// Right-click is erase to background color, left-click is transparent
+				if (mouse_button == 3)
+					g.Color = PintaCore.Palette.SecondaryColor;
+				else
+					g.Operator = Operator.Clear;
+
 				g.LineWidth = BrushWidth;
 				g.LineJoin = LineJoin.Round;
 				g.LineCap = LineCap.Round;
