@@ -31,15 +31,6 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public enum eGradientType
-	{
-		Linear,
-		LinearReflected,
-		Diamond,
-		Radial,
-		Conical
-	}
-
 	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class GradientTool : BaseTool
 	{
@@ -77,7 +68,7 @@ namespace Pinta.Tools
 		protected override bool ShowAlphaBlendingButton { get { return true; } }
 		public override int Priority { get { return 23; } }
 
-		#region mouse
+		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
@@ -109,39 +100,19 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			base.OnMouseMove (o, args, point);
 			if (tracking) {
+				GradientRenderer gr = CreateGradientRenderer ();
 				
-				UserBlendOps.NormalBlendOp normalBlendOp = new UserBlendOps.NormalBlendOp();
-				GradientRenderer gr = null;
-				switch (GradientType) {
-					case eGradientType.Linear:
-						gr = new GradientRenderers.LinearClamped (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
-					break;
-					case eGradientType.LinearReflected:
-						gr = new GradientRenderers.LinearReflected (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
-					break;
-					case eGradientType.Radial:
-						gr = new GradientRenderers.Radial (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
-					break;
-					case eGradientType.Diamond:
-						gr = new GradientRenderers.LinearDiamond (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
-					break;
-					case eGradientType.Conical:
-						gr = new GradientRenderers.Conical (GradientColorMode  == GradientColorMode.Transparency, normalBlendOp);
-					break;
-				}
-				if (button == 3) {//right
+				if (button == 3) {	// Right-click
 					gr.StartColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-	            	gr.EndColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
-				}
-				else {//1 left
+					gr.EndColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
+				} else {		//1 Left-click
 					gr.StartColor = PintaCore.Palette.PrimaryColor.ToColorBgra ();
-	            	gr.EndColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
+					gr.EndColor = PintaCore.Palette.SecondaryColor.ToColorBgra ();
 				}
 						
-	            gr.StartPoint = startpoint;
-	            gr.EndPoint = point;
+				gr.StartPoint = startpoint;
+				gr.EndPoint = point;
 				gr.AlphaBlending = UseAlphaBlending;
         
 				gr.BeforeRender ();
@@ -160,9 +131,30 @@ namespace Pinta.Tools
 				doc.Workspace.Invalidate (selection_bounds);
 			}
 		}
+
+		private GradientRenderer CreateGradientRenderer ()
+		{
+			var normalBlendOp = new UserBlendOps.NormalBlendOp ();
+			bool alpha_only = SelectedGradientColorMode == GradientColorMode.Transparency;
+
+			switch (SelectedGradientType) {
+				case GradientType.Linear:
+					return new GradientRenderers.LinearClamped (alpha_only, normalBlendOp);
+				case GradientType.LinearReflected:
+					return new GradientRenderers.LinearReflected (alpha_only, normalBlendOp);
+				case GradientType.Radial:
+					return new GradientRenderers.Radial (alpha_only, normalBlendOp);
+				case GradientType.Diamond:
+					return new GradientRenderers.LinearDiamond (alpha_only, normalBlendOp);
+				case GradientType.Conical:
+					return new GradientRenderers.Conical (alpha_only, normalBlendOp);
+			}
+
+			throw new ArgumentOutOfRangeException ("Unknown gradient type.");
+		}
 		#endregion
 
-		#region toolbar
+		#region ToolBar
 		private ToolBarLabel gradient_label;
 		private ToolBarDropDownButton gradient_button;
 		private ToolBarLabel mode_label;
@@ -180,11 +172,11 @@ namespace Pinta.Tools
 			if (gradient_button == null) {
 				gradient_button = new ToolBarDropDownButton ();
 
-				gradient_button.AddItem (Catalog.GetString ("Linear Gradient"), "Toolbar.LinearGradient.png", eGradientType.Linear);
-				gradient_button.AddItem (Catalog.GetString ("Linear Reflected Gradient"), "Toolbar.LinearReflectedGradient.png", eGradientType.LinearReflected);
-				gradient_button.AddItem (Catalog.GetString ("Linear Diamond Gradient"), "Toolbar.DiamondGradient.png", eGradientType.Diamond);
-				gradient_button.AddItem (Catalog.GetString ("Radial Gradient"), "Toolbar.RadialGradient.png", eGradientType.Radial);
-				gradient_button.AddItem (Catalog.GetString ("Conical Gradient"), "Toolbar.ConicalGradient.png", eGradientType.Conical);
+				gradient_button.AddItem (Catalog.GetString ("Linear Gradient"), "Toolbar.LinearGradient.png", GradientType.Linear);
+				gradient_button.AddItem (Catalog.GetString ("Linear Reflected Gradient"), "Toolbar.LinearReflectedGradient.png", GradientType.LinearReflected);
+				gradient_button.AddItem (Catalog.GetString ("Linear Diamond Gradient"), "Toolbar.DiamondGradient.png", GradientType.Diamond);
+				gradient_button.AddItem (Catalog.GetString ("Radial Gradient"), "Toolbar.RadialGradient.png", GradientType.Radial);
+				gradient_button.AddItem (Catalog.GetString ("Conical Gradient"), "Toolbar.ConicalGradient.png", GradientType.Conical);
 			}
 
 			tb.AppendItem (gradient_button);
@@ -206,13 +198,22 @@ namespace Pinta.Tools
 			tb.AppendItem (mode_button);
 		}
 		
-		public eGradientType GradientType {
-			get { return (eGradientType)gradient_button.SelectedItem.Tag; }
+		private GradientType SelectedGradientType {
+			get { return (GradientType)gradient_button.SelectedItem.Tag; }
 		}
-	
-		public GradientColorMode GradientColorMode {
+
+		private GradientColorMode SelectedGradientColorMode {
 			get { return (GradientColorMode)gradient_button.SelectedItem.Tag; }
 		}
 		#endregion
+
+		enum GradientType
+		{
+			Linear,
+			LinearReflected,
+			Diamond,
+			Radial,
+			Conical
+		}
 	}
 }
