@@ -490,7 +490,7 @@ namespace Pinta.Core
 			List<Layer> paint = Layers.Where (l => !l.Hidden).ToList ();
 
 			if (!tool_layer.Hidden)
-				paint.Add (tool_layer);
+				paint.Insert (current_layer + 1, tool_layer);
 			if (ShowSelectionLayer)
 				paint.Insert (selection_layer_index, selection_layer);
 
