@@ -76,7 +76,6 @@ namespace Pinta.Tools
 			if (tracking)
 				return;
 		
-			base.OnMouseDown (canvas, args, point);
 			startpoint = point;
 			tracking = true;
 			button = args.Event.Button;
@@ -90,7 +89,6 @@ namespace Pinta.Tools
 			if (!tracking || args.Event.Button != button)
 				return;
 		
-			base.OnMouseUp (canvas, args, point);
 			tracking = false;
 			doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
 		}
@@ -125,6 +123,8 @@ namespace Pinta.Tools
 					g.SetSource (scratch_layer);
 					g.Paint ();
 				}
+
+				doc.ToolLayer.Clear ();
 
 				selection_bounds.Inflate (5, 5);
 				doc.Workspace.Invalidate (selection_bounds);
