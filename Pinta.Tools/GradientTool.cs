@@ -65,7 +65,6 @@ namespace Pinta.Tools
 		}
 		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
-		protected override bool ShowAlphaBlendingButton { get { return true; } }
 		public override int Priority { get { return 23; } }
 
 		#region Mouse Handlers
@@ -157,8 +156,8 @@ namespace Pinta.Tools
 		#region ToolBar
 		private ToolBarLabel gradient_label;
 		private ToolBarDropDownButton gradient_button;
-		private ToolBarLabel mode_label;
-		private ToolBarDropDownButton mode_button;
+		//private ToolBarLabel mode_label;
+		//private ToolBarDropDownButton mode_button;
 		
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -181,21 +180,24 @@ namespace Pinta.Tools
 
 			tb.AppendItem (gradient_button);
 			
-			tb.AppendItem (new Gtk.SeparatorToolItem ());
+			// Hide TransparentMode.  The core issue is we can't just paint it on top of the
+			// current layer because it's transparent.  Will require significant effort to support.
 
-			if (mode_label == null)
-				mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Mode")));
+			//tb.AppendItem (new Gtk.SeparatorToolItem ());
 
-			tb.AppendItem (mode_label);
+			//if (mode_label == null)
+			//        mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Mode")));
 
-			if (mode_button == null) {
-				mode_button = new ToolBarDropDownButton ();
+			//tb.AppendItem (mode_label);
 
-				mode_button.AddItem (Catalog.GetString ("Color Mode"), "Toolbar.ColorMode.png", GradientColorMode.Color);
-				mode_button.AddItem (Catalog.GetString ("Transparency Mode"), "Toolbar.TransparentMode.png", GradientColorMode.Transparency);
-			}
+			//if (mode_button == null) {
+			//        mode_button = new ToolBarDropDownButton ();
 
-			tb.AppendItem (mode_button);
+			//        mode_button.AddItem (Catalog.GetString ("Color Mode"), "Toolbar.ColorMode.png", GradientColorMode.Color);
+			//        mode_button.AddItem (Catalog.GetString ("Transparency Mode"), "Toolbar.TransparentMode.png", GradientColorMode.Transparency);
+			//}
+
+			//tb.AppendItem (mode_button);
 		}
 		
 		private GradientType SelectedGradientType {
@@ -203,7 +205,8 @@ namespace Pinta.Tools
 		}
 
 		private GradientColorMode SelectedGradientColorMode {
-			get { return (GradientColorMode)mode_button.SelectedItem.Tag; }
+			// get { return (GradientColorMode)mode_button.SelectedItem.Tag; }
+			get { return GradientColorMode.Color; }
 		}
 		#endregion
 
