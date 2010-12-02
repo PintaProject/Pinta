@@ -68,8 +68,8 @@ namespace Pinta.Tools
 				if (offset.IsNotSet ())
 					offset = new Point ((int)point.X - origin.X, (int)point.Y - origin.Y);
 
-				PintaCore.Layers.ToolLayer.Clear ();
-				PintaCore.Layers.ToolLayer.Hidden = false;
+				doc.ToolLayer.Clear ();
+				doc.ToolLayer.Hidden = false;
 
 				surface_modified = false;
 				undo_surface = doc.CurrentLayer.Surface.Clone ();
