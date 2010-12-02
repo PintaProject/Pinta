@@ -553,9 +553,10 @@ namespace Pinta
 			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
 			toolbox_item.DefaultWidth = 65;
-			
-			Gtk.Action show_toolbox = show_pad.AppendAction ("Tools", Catalog.GetString ("Tools"), null, "Tools.Pencil.png");
-			show_toolbox.Activated += delegate { toolbox_item.Visible = true; };
+
+			Gtk.ToggleAction show_toolbox = show_pad.AppendToggleAction ("Tools", Catalog.GetString ("Tools"), null, "Tools.Pencil.png");
+			show_toolbox.Activated += delegate { toolbox_item.Visible = show_toolbox.Active; };
+			toolbox_item.VisibleChanged += delegate { show_toolbox.Active = toolbox_item.Visible; };
 		
 			// Palette pad
 			DockItem palette_item = dock.AddItem ("Palette");
@@ -568,8 +569,9 @@ namespace Pinta
 			palette_item.Behavior |= DockItemBehavior.CantClose;
 			palette_item.DefaultWidth = 65;
 
-			Gtk.Action show_palette = show_pad.AppendAction ("Palette", Catalog.GetString ("Palette"), null, "Pinta.png");
-			show_palette.Activated += delegate { palette_item.Visible = true; };
+			Gtk.ToggleAction show_palette = show_pad.AppendToggleAction ("Palette", Catalog.GetString ("Palette"), null, "Pinta.png");
+			show_palette.Activated += delegate { palette_item.Visible = show_palette.Active; };
+			palette_item.VisibleChanged += delegate { show_palette.Active = palette_item.Visible; };
 		
 			// Canvas pad
 			DockItem documentDockItem = dock.AddItem ("Canvas");
@@ -638,8 +640,9 @@ namespace Pinta
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
-			Gtk.Action show_layers = show_pad.AppendAction ("Layers", Catalog.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
-			show_layers.Activated += delegate { layers_item.Visible = true; };
+			Gtk.ToggleAction show_layers = show_pad.AppendToggleAction ("Layers", Catalog.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
+			show_layers.Activated += delegate { layers_item.Visible = show_layers.Active; };
+			layers_item.VisibleChanged += delegate { show_layers.Active = layers_item.Visible; };
 
 			// History pad
 			HistoryTreeView history = new HistoryTreeView ();
@@ -653,9 +656,9 @@ namespace Pinta
 
 			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
 			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
-
-			Gtk.Action show_history = show_pad.AppendAction ("History", Catalog.GetString ("History"), null, "Menu.Layers.DuplicateLayer.png");
-			show_history.Activated += delegate { history_item.Visible = true; };
+			Gtk.ToggleAction show_history = show_pad.AppendToggleAction ("History", Catalog.GetString ("History"), null, "Menu.Layers.DuplicateLayer.png");
+			show_history.Activated += delegate { history_item.Visible = show_history.Active; };
+			history_item.VisibleChanged += delegate { show_history.Active = history_item.Visible; };
 
 			container.PackStart (dock, true, true, 0);
 			
@@ -668,6 +671,11 @@ namespace Pinta
 				dock.CreateLayout ("Default", false);
 				
 			dock.CurrentLayout = "Default";
+
+			show_toolbox.Active = toolbox_item.Visible;
+			show_palette.Active = palette_item.Visible;
+			show_layers.Active = layers_item.Visible;
+			show_history.Active = history_item.Visible;
 		}
 		#endregion
 
