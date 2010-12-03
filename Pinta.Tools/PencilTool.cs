@@ -112,8 +112,8 @@ namespace Pinta.Tools
 			if (first_pixel) {
 				// Does Cairo really not support a single-pixel-long single-pixel-wide line?
 				surf.Flush ();
-				int shiftedX = (int) (point.X - 0.5);
-				int shiftedY = (int) (point.Y - 0.5);
+				int shiftedX = (int)point.X;
+				int shiftedY = (int)point.Y;
 				ColorBgra source = surf.GetColorBgra (shiftedX, shiftedY);
 				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, tool_color.ToColorBgra ());
 				surf.SetColorBgra (source, shiftedX, shiftedY);
