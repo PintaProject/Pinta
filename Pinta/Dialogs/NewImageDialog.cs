@@ -40,8 +40,15 @@ namespace Pinta
 			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 		}
 
-		public int NewImageWidth { get { return this.widthSpinner.ValueAsInt; } }
-		public int NewImageHeight { get { return this.heightSpinner.ValueAsInt; } }
+		public int NewImageWidth {
+			get { return widthSpinner.ValueAsInt; }
+			set { widthSpinner.Value = value; }
+		}
+
+		public int NewImageHeight {
+			get { return heightSpinner.ValueAsInt; }
+			set { heightSpinner.Value = value; }
+		}
 	}
 }
 

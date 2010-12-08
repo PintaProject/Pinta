@@ -83,13 +83,21 @@ namespace Pinta
 		{
 			NewImageDialog dialog = new NewImageDialog ();
 
+			dialog.NewImageWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
+			dialog.NewImageHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
+
 			dialog.ParentWindow = main_window.GdkWindow;
 			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
 
 			int response = dialog.Run ();
 
-			if (response == (int)Gtk.ResponseType.Ok)
+			if (response == (int)Gtk.ResponseType.Ok) {
 				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), false);
+
+				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
+				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+				PintaCore.Settings.SaveSettings ();
+			}
 
 			dialog.Destroy ();
 		}
