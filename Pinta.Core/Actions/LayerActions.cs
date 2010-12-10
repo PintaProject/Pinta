@@ -71,7 +71,7 @@ namespace Pinta.Core
 			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("Rotate / Zoom"), null, "Menu.Layers.RotateZoom.png");
 			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Catalog.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
 			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Catalog.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
-			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer Properties") + "...", null, "Menu.Layers.LayerProperties.png");
+			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
 
 			RotateZoom.Sensitive = false;
 		}
