@@ -104,11 +104,18 @@ namespace Pinta
 
 		private void HandlePintaCoreActionsFileNewScreenshotActivated (object sender, EventArgs e)
 		{
+			int delay = PintaCore.Settings.GetSetting<int> ("screenshot-delay", 0);
+
 			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Catalog.GetString ("Take Screenshot"),
-					PintaCore.Chrome.MainWindow, Catalog.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, 0);
+					PintaCore.Chrome.MainWindow, Catalog.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, delay);
 
 			if (dialog.Run () == (int)Gtk.ResponseType.Ok) {
-				GLib.Timeout.Add ((uint)dialog.GetValue () * 1000, () => {
+				delay = dialog.GetValue ();
+
+				PintaCore.Settings.PutSetting ("screenshot-delay", delay);
+				PintaCore.Settings.SaveSettings ();
+
+				GLib.Timeout.Add ((uint)delay * 1000, () => {
 					Screen screen = Screen.Default;
 					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), false);
 
