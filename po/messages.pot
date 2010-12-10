@@ -225,8 +225,7 @@ msgid "Move Layer Down"
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:74
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:316
-msgid "Layer Properties"
+msgid "Layer Properties..."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:156 Pinta/DialogHandlers.cs:396
@@ -1157,6 +1156,10 @@ msgstr ""
 msgid "New Image Size          "
 msgstr ""
 
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:316
+msgid "Layer Properties"
+msgstr ""
+
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
 msgstr ""
@@ -1169,7 +1172,11 @@ msgstr ""
 msgid "Opacity:"
 msgstr ""
 
-#: Pinta/MainWindow.cs:448
+#: Pinta/MainWindow.cs:365 Pinta/MainWindow.cs:381
+msgid "..."
+msgstr ""
+
+#: Pinta/MainWindow.cs:450
 msgid "_File"
 msgstr ""
 
