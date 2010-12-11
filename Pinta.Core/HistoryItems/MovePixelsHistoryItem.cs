@@ -31,11 +31,22 @@ namespace Pinta.Core
 {
 	public class MovePixelsHistoryItem : BaseHistoryItem
 	{
+		// There's 2 types of move pixel operations to handle
+		// - The first move "lifts" the selection up into a temporary layer
+		//   and then moves it to the new spot
+		// - Subsequent moves only move the selection
+		//   around the temporary layer
+		private Document doc;
 		private Path old_path;
 		private PointD old_offset;
+		private ImageSurface old_surface;
+		private int layer_index;
+		private bool lifted;		// Whether this item has lift
+		private bool is_lifted;		// Track state of undo/redo lift
 
-		public MovePixelsHistoryItem (string icon, string text) : base (icon, text)
+		public MovePixelsHistoryItem (string icon, string text, Document document) : base (icon, text)
 		{
+			doc = document;
 		}
 
 		public override void Undo ()
@@ -52,6 +63,8 @@ namespace Pinta.Core
 		{
 			if (old_path != null)
 				(old_path as IDisposable).Dispose ();
+			if (old_surface != null)
+				(old_surface as IDisposable).Dispose ();
 		}
 
 		private void Swap ()
@@ -64,12 +77,34 @@ namespace Pinta.Core
 
 			old_path = swap_path;
 			old_offset = swap_offset;
-			
+
+			if (lifted) {
+				// Grab the original surface
+				ImageSurface surf = PintaCore.Layers[layer_index].Surface;
+
+				// Undo to the "old" surface
+				PintaCore.Layers[layer_index].Surface = old_surface;
+
+				// Store the original surface for Redo
+				old_surface = surf;
+
+				is_lifted = !is_lifted;
+				doc.ShowSelectionLayer = is_lifted;
+			}
+
 			PintaCore.Workspace.Invalidate ();
 		}
 		
-		public void TakeSnapshot ()
+		public void TakeSnapshot (bool lift)
 		{
+			lifted = lift;
+			is_lifted = true;
+
+			if (lift) {
+				layer_index = doc.CurrentLayerIndex;
+				old_surface = doc.CurrentLayer.Surface.Clone ();
+			}
+				
 			old_path = PintaCore.Layers.SelectionPath.Clone ();
 			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 		}

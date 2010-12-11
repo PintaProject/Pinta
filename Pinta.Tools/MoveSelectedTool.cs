@@ -61,8 +61,8 @@ namespace Pinta.Tools
 			origin_offset = point;
 			is_dragging = true;
 
-			hist = new MovePixelsHistoryItem (Icon, Name);
-			hist.TakeSnapshot ();
+			hist = new MovePixelsHistoryItem (Icon, Name, doc);
+			hist.TakeSnapshot (!doc.ShowSelectionLayer);
 
 			if (!doc.ShowSelectionLayer) {
 				// Copy the selection to the temp layer
