@@ -46,19 +46,15 @@ namespace Pinta.Core
 
 		public override void Undo ()
 		{
-			// Grab the original surface
-			ImageSurface surf = PintaCore.Layers[layer_index].Surface;
-			
-			// Undo to the "old" surface
-			PintaCore.Layers[layer_index].Surface = old_surface;
-			
-			// Store the original surface for Redo
-			old_surface = surf;
-			
-			PintaCore.Workspace.Invalidate ();
+			Swap ();
 		}
 
 		public override void Redo ()
+		{
+			Swap ();
+		}
+
+		private void Swap ()
 		{
 			// Grab the original surface
 			ImageSurface surf = PintaCore.Layers[layer_index].Surface;
@@ -86,7 +82,7 @@ namespace Pinta.Core
 
 		public void TakeSnapshotOfLayer (Layer layer)
 		{
-			layer_index = PintaCore.Layers.IndexOf (layer);;
+			layer_index = PintaCore.Layers.IndexOf (layer);
 			old_surface = layer.Surface.Clone ();
 		}
 	}
