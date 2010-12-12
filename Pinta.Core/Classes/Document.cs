@@ -505,6 +505,17 @@ namespace Pinta.Core
 			return paint;
 		}
 
+		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
+		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
+		{
+			var bounds = SelectionPath.GetBounds ();
+
+			if (canvasOnly)
+				bounds = ClampToImageSize (bounds);
+
+			return bounds;
+		}
+
 		public int IndexOf (Layer layer)
 		{
 			return Layers.IndexOf (layer);

@@ -114,7 +114,7 @@ namespace Pinta.Tools
 				
 			base.OnMouseDown (canvas, args, point);
 
-			Gdk.Region currentRegion = Gdk.Region.Rectangle (doc.SelectionPath.GetBounds ());
+			Gdk.Region currentRegion = Gdk.Region.Rectangle (doc.GetSelectedBounds (true));
 
 			// See if the mouse click is valid
 			if (!currentRegion.PointIn (pos.X, pos.Y) && limitToSelection) {

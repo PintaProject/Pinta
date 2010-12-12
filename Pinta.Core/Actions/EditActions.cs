@@ -268,7 +268,7 @@ namespace Pinta.Core
 
 			ImageSurface src = doc.GetClippedLayer (doc.CurrentLayerIndex);
 
-			Gdk.Rectangle rect = doc.SelectionPath.GetBounds ();
+			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 			
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 

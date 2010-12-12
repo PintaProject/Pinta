@@ -173,7 +173,7 @@ namespace Pinta.Core
 
 			doc.FinishSelection ();
 
-			Gdk.Rectangle rect = doc.SelectionPath.GetBounds ();
+			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
 

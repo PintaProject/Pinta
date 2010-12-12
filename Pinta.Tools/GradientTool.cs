@@ -114,7 +114,7 @@ namespace Pinta.Tools
         
 				gr.BeforeRender ();
 
-				Gdk.Rectangle selection_bounds = doc.SelectionPath.GetBounds ();
+				Gdk.Rectangle selection_bounds = doc.GetSelectedBounds (true);
 				ImageSurface scratch_layer = doc.ToolLayer.Surface;
 
 				gr.Render (scratch_layer, new Gdk.Rectangle[] { selection_bounds });
