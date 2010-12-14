@@ -518,8 +518,12 @@ namespace Pinta.Tools
 
 		private void StopEditing ()
 		{
-			PintaCore.Layers.ToolLayer.Clear ();
-			PintaCore.Layers.ToolLayer.Hidden = true;
+			// If we don't have an open document, these will crash
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				PintaCore.Layers.ToolLayer.Clear ();
+				PintaCore.Layers.ToolLayer.Hidden = true;
+			}
+
 			mode = EditingMode.NotEditing;
 			pulseEnabled = false;
 			lines = null;
