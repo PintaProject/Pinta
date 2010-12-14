@@ -56,6 +56,10 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			// If we are already drawing, ignore any additional mouse down events
+			if (is_dragging)
+				return;
+
 			origin_offset = point;
 			is_dragging = true;
 

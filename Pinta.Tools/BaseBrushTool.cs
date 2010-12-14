@@ -124,6 +124,10 @@ namespace Pinta.Tools
 		
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			// If we are already drawing, ignore any additional mouse down events
+			if (mouse_button > 0)
+				return;
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			surface_modified = false;

@@ -54,6 +54,10 @@ namespace Pinta.Tools
 		
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
+			// If we are already panning, ignore any additional mouse down events
+			if (active)
+				return;
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Don't scroll if the whole canvas fits (no scrollbars)

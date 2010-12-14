@@ -98,6 +98,10 @@ namespace Pinta.Tools
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			// If we are already tracking, ignore any additional mouse down events
+			if (mouseDown > 0)
+				return;
+
 			shape_origin = point;
 
 			switch (args.Event.Button) {
