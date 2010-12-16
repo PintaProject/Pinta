@@ -55,11 +55,12 @@ namespace Pinta.Core
 			ToggleToolButton tb = (ToggleToolButton)sender;
 
 			BaseTool t = FindTool (tb.Label);
-		
+
 			// Don't let the user unselect the current tool	
 			if (t.Name == CurrentTool.Name) {
-				//tb.Active = true;
-				//return;
+				if (prev_index != index)
+					tb.Active = true;
+				return;
 			}
 
 			SetCurrentTool (t);
@@ -92,13 +93,13 @@ namespace Pinta.Core
 			
 			if (index == i)
 				return;
-			
+
 			// Unload previous tool if needed
 			if (index >= 0) {
+				prev_index = index;
 				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
 				Tools[index].DoDeactivated ();
 				Tools[index].ToolItem.Active = false;
-				prev_index = index;
 			}
 			
 			// Load new tool
