@@ -80,6 +80,10 @@ namespace Pinta
 
 			UpdateRulerRange ();
 
+			PintaCore.Chrome.DrawingArea.SizeAllocated += delegate {
+				UpdateRulerRange ();
+			};
+
 			dialog_handler = new DialogHandlers (this);
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
