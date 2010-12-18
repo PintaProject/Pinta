@@ -83,10 +83,7 @@ namespace Pinta.Core
 			
 		public void Clear ()
 		{
-			using (Context g = new Context (Surface)) {
-				g.Operator = Operator.Clear;
-				g.Paint ();
-			}
+			Surface.Clear ();
 		}
 		
 		public void FlipHorizontal ()

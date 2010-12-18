@@ -812,6 +812,14 @@ namespace Pinta.Core
 			return newpath;
 		}
 
+		public static void Clear (this ImageSurface surface)
+		{
+			using (Context g = new Context (surface)) {
+				g.Operator = Operator.Clear;
+				g.Paint ();
+			}
+		}
+
 		public static Gdk.Rectangle GetBounds (this Path path)
 		{
 			Rectangle rect;
