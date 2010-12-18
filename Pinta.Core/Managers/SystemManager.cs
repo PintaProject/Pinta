@@ -38,6 +38,7 @@ namespace Pinta.Core
 		private static OS operating_system;
 
 		public ImageConverterManager ImageFormats { get; private set; }
+		public FontManager Fonts { get; private set; }
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
 		
@@ -45,6 +46,7 @@ namespace Pinta.Core
 		{
 			ImageFormats = new ImageConverterManager ();
 			RenderThreads = Environment.ProcessorCount;
+			Fonts = new FontManager ();
 		}
 
 		static SystemManager ()

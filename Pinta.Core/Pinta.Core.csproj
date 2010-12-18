@@ -121,6 +121,7 @@
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
     <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
+    <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\ImageConverterManager.cs" />
     <Compile Include="Managers\HistoryManager.cs" />
     <Compile Include="Managers\LayerManager.cs" />

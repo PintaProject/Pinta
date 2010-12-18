@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gdk;
 using Gtk;
 using Pinta.Core;
@@ -33,24 +34,16 @@ namespace Pinta.Tools
 			Left
 		}
 
-		public override string Name {
-			get { return Catalog.GetString ("Text"); }
-		}
-		public override string Icon {
-			get { return "Tools.Text.png"; }
-		}
+		public override string Name { get { return Catalog.GetString ("Text"); } }
+		public override string Icon { get { return "Tools.Text.png"; } }
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
+		public override int Priority { get { return 37; } }
 
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
 		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
-		public override int Priority { get { return 37; } }
 
-		//protected override bool ShowAntialiasingButton {
-		//        get { return true; }
-		//}
 
-		//private string statusBarTextFormat = PdnResources.GetString("TextTool.StatusText.TextInfo.Format");
 		private Cairo.PointD startMouseXY;
 		private Point startClickPoint;
 		private bool tracking;
@@ -65,8 +58,7 @@ namespace Pinta.Tools
 		private IrregularSurface saved;
 		private const int cursorInterval = 300;
 		private bool pulseEnabled;
-		private System.DateTime startTime;
-		private bool lastPulseCursorState;
+		private DateTime startTime;
 		private bool enableNub = true;
 
 		private CompoundHistoryItem currentHA;
@@ -75,44 +67,17 @@ namespace Pinta.Tools
 		private DateTime controlKeyDownTime = DateTime.MinValue;
 		private readonly TimeSpan controlKeyDownThreshold = new TimeSpan (0, 0, 0, 0, 400);
 
-		/*public override Gdk.Cursor DefaultCursor {
-			get {
-				return new Gdk.Cursor(;
-			}
-		}*/
-
 		protected override void OnActivated ()
 		{
-			//PdnBaseForm.RegisterFormHotKey(Gdk.Key.Back, OnBackspaceTyped);
-			
 			base.OnActivated ();
 			
 			PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 			
-			//this.textToolCursor = new Gdk.Cursor (PintaCore.Chrome.DrawingArea.Display, PintaCore.Resources.GetIcon ("Tools.Text.png"), 0, 0);
-			
-			//this.Cursor = this.textToolCursor;
-			
-			
 			mode = EditingMode.NotEditing;
-			
-			//font = AppEnvironment.FontInfo.CreateFont();
-			//alignment = AppEnvironment.TextAlignment;
-			
-			
 		}
 
-		//this.threadPool = new System.Threading.ThreadPool ();
-
-/*this.moveNub = new MoveNubRenderer(this.RendererList);
-            this.moveNub.Shape = MoveNubShape.Compass;
-            this.moveNub.Size = new SizeF(10, 10);
-            this.moveNub.Visible = false;
-            this.RendererList.Add(this.moveNub, false);
-            */		
 		
 		#region ToolBar
-		
 		private ToolBarLabel font_label;
 		private ToolBarComboBox font_combo;
 		private ToolBarComboBox size_combo;
@@ -135,70 +100,44 @@ namespace Pinta.Tools
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
-			//TODO
-			//fontSmoothing
-			
 			base.OnBuildToolBar (tb);
 			
 			if (font_label == null)
 				font_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Font")));
 			
 			tb.AppendItem (font_label);
-			
-			using (Pango.Context c = PangoHelper.ContextGet ()) {
-				List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (c.Families);
-				
-				
-				List<string> entries = new List<string> ();
-				fonts.ForEach (f => entries.Add (f.Name));
-				entries.Sort ();
-				
-				//by default Arial!
-				int index = entries.IndexOf ("Arial");
-				if (index < 0)
-					index = 0;
-				//FIXME: I put a try to handle a bug when I am debugging on monodevelop there is a an exception
-				//this exception do not occure when I put a try catch ;(
-				try {
-					if (font_combo == null) {
-						font_combo = new ToolBarComboBox (150, index, false, entries.ToArray ());
-						font_combo.ComboBox.Changed += HandleFontChanged;
-						font_combo.ComboBox.SetCellDataFunc (font_combo.CellRendererText, new CellLayoutDataFunc (RenderFont));
-					}
-					
-					tb.AppendItem (font_combo);
 
-					if (spacer_label == null)
-						spacer_label = new ToolBarLabel (" ");
+			if (font_combo == null) {
+				var fonts = PintaCore.System.Fonts.GetInstalledFonts ();
+				fonts.Sort ();
 
-					tb.AppendItem (spacer_label);
-				
-					//size depend on font and modifier (italic, bold,...)
-					Pango.FontFamily fam = fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
-					
-					entries = new List<string> ();
-					foreach (int i in GetSizeList (fam.Faces[0])) {
-						entries.Add (i.ToString ());
-					}
-					
-					//by default 11!
-					index = entries.IndexOf ("11");
-					if (index < 0)
-						index = 0;
-					
-					if (size_combo == null) {
-						size_combo = new ToolBarComboBox (65, index, true, entries.ToArray ());
-						
-						size_combo.ComboBox.Changed += HandleSizeChanged;
-						(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
-						(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
-					}
-					
-					tb.AppendItem (size_combo);
-				} catch (Exception e) {
-					Console.WriteLine (e.ToString ());
-				}
+				// Default to Arial or first in list
+				int index = Math.Max (fonts.IndexOf ("Arial"), 0);
+
+				font_combo = new ToolBarComboBox (150, index, false, fonts.ToArray ());
+				font_combo.ComboBox.Changed += HandleFontChanged;
+				font_combo.ComboBox.SetCellDataFunc (font_combo.CellRendererText, new CellLayoutDataFunc (RenderFont));
 			}
+
+			tb.AppendItem (font_combo);
+
+			if (spacer_label == null)
+				spacer_label = new ToolBarLabel (" ");
+
+			tb.AppendItem (spacer_label);
+
+			if (size_combo == null) {
+				size_combo = new ToolBarComboBox (65, 0, true);
+
+				size_combo.ComboBox.Changed += HandleSizeChanged;
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
+			}
+
+			tb.AppendItem (size_combo);
+
+			UpdateFontSizes ();
+
 			tb.AppendItem (new SeparatorToolItem ());
 			
 			if (bold_btn == null) {
@@ -211,7 +150,6 @@ namespace Pinta.Tools
 			if (italic_btn == null) {
 				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Catalog.GetString ("Italic"), Catalog.GetString ("Italic"));
 				italic_btn.Toggled += HandleItalicButtonToggled;
-				;
 			}
 			
 			tb.AppendItem (italic_btn);
@@ -229,7 +167,6 @@ namespace Pinta.Tools
 				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Catalog.GetString ("Left Align"), Catalog.GetString ("Left Align"));
 				left_alignment_btn.Active = true;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
-				;
 			}
 			
 			tb.AppendItem (left_alignment_btn);
@@ -237,7 +174,6 @@ namespace Pinta.Tools
 			if (center_alignment_btn == null) {
 				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Catalog.GetString ("Center Align"), Catalog.GetString ("Center Align"));
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
-				;
 			}
 			
 			tb.AppendItem (center_alignment_btn);
@@ -245,7 +181,6 @@ namespace Pinta.Tools
 			if (Right_alignment_btn == null) {
 				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Catalog.GetString ("Right Align"), Catalog.GetString ("Right Align"));
 				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
-				;
 			}
 			
 			tb.AppendItem (Right_alignment_btn);
@@ -288,19 +223,23 @@ namespace Pinta.Tools
 
 		void UpdateFontSizes ()
 		{
-			List<int> lst;
 			string oldval = size_combo.ComboBox.ActiveText;
+
 			ListStore model = (ListStore)size_combo.ComboBox.Model;
 			model.Clear ();
-			using (Pango.Context c = PangoHelper.ContextGet ()) {
-				List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (c.Families);
-				Pango.FontFamily fam = fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
-				lst = GetSizeList (fam.Faces[0]);
-			}
-			foreach (int i in lst)
+
+			List<int> sizes = PintaCore.System.Fonts.GetSizes (FontFamily);
+
+			foreach (int i in sizes)
 				size_combo.ComboBox.AppendText (i.ToString ());
 			
-			int index = lst.IndexOf (int.Parse (oldval));
+			int index;
+			
+			if (string.IsNullOrEmpty (oldval))
+				index = sizes.IndexOf (12);
+			else
+				index = sizes.IndexOf (int.Parse (oldval));
+
 			if (index == -1)
 				index = 0;
 			
@@ -317,10 +256,7 @@ namespace Pinta.Tools
 		}
 
 		private Pango.FontFamily FontFamily {
-			get {
-				List<Pango.FontFamily> fonts = new List<Pango.FontFamily> (PintaCore.Chrome.DrawingArea.PangoContext.Families);
-				return fonts.Find (f => f.Name == font_combo.ComboBox.ActiveText);
-			}
+			get { return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.ActiveText); }
 		}
 
 
@@ -452,25 +388,6 @@ namespace Pinta.Tools
 				RedrawText (true);
 			}
 		}
-
-		unsafe private List<int> GetSizeList (Pango.FontFace fontFace)
-		{
-			List<int> result = new List<int> ();
-			int sizes;
-			int nsizes;
-			fontFace.ListSizes (out sizes, out nsizes);
-			if (nsizes == 0)
-				result.AddRange (new int[] { 6, 7, 8, 9, 10, 11, 12, 14, 15, 16,
-				18, 20, 22, 24, 26, 28, 32, 36, 40, 44,
-				48, 54, 60, 66, 72, 80, 88, 96 });
-			else {
-				for (int i = 0; i < nsizes; i++) {
-					result.Add (*(&sizes + 4 * i));
-				}
-			}
-			return result;
-		}
-
 		#endregion
 
 		protected override void OnDeactivated ()
