@@ -20,20 +20,6 @@ namespace Pinta.Tools
 	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
 	public class TextTool : BaseTool
 	{
-		private enum EditingMode
-		{
-			NotEditing,
-			EmptyEdit,
-			Editing
-		}
-
-		private enum TextAlignment
-		{
-			Right,
-			Center,
-			Left
-		}
-
 		public override string Name { get { return Catalog.GetString ("Text"); } }
 		public override string Icon { get { return "Tools.Text.png"; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
@@ -747,41 +733,6 @@ namespace Pinta.Tools
 				te = TextExtents (g, s);
 			}
 			return new Size ((int)te.Width, (int)te.Height);
-		}
-
-		private sealed class Position
-		{
-			private int line;
-			public int Line {
-				get { return line; }
-
-				set {
-					if (value >= 0) {
-						line = value;
-					} else {
-						line = 0;
-					}
-				}
-			}
-
-			private int offset;
-			public int Offset {
-				get { return offset; }
-
-				set {
-					if (value >= 0) {
-						offset = value;
-					} else {
-						offset = 0;
-					}
-				}
-			}
-
-			public Position (int line, int offset)
-			{
-				this.line = line;
-				this.offset = offset;
-			}
 		}
 
 		private void SaveHistoryMemento ()
