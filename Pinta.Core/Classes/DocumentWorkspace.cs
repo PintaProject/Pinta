@@ -34,6 +34,10 @@ namespace Pinta.Core
 	{
 		private Document document;
 		private Size canvas_size;
+		private enum ZoomType {
+			ZoomIn,
+			ZoomOut
+		};
 
 		internal DocumentWorkspace (Document document)
 		{
@@ -147,47 +151,22 @@ namespace Pinta.Core
 
 		public void ZoomIn ()
 		{
-			double zoom;
-
-			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
-				zoom = Scale * 100;
-
-			zoom = Math.Min (zoom, 3600);
-
-			int i = 0;
-
-			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == Catalog.GetString ("Window") || int.Parse (((object[])item)[0].ToString ().Trim ('%')) <= zoom) {
-					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
-					return;
-				}
-
-				i++;
-			}
+			ZoomAndRecenterView (ZoomType.ZoomIn, new Cairo.PointD (-1, -1)); // Zoom in relative to the center of the viewport.
 		}
 
 		public void ZoomOut ()
 		{
-			double zoom;
+			ZoomAndRecenterView (ZoomType.ZoomOut, new Cairo.PointD (-1 , -1)); // Zoom out relative to the center of the viewport.
+		}
 
-			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
-				zoom = Scale * 100;
+		public void ZoomInFromMouseScroll (Cairo.PointD point)
+		{
+			ZoomAndRecenterView (ZoomType.ZoomIn, point); // Zoom in relative to mouse position.
+		}
 
-			zoom = Math.Min (zoom, 3600);
-
-			int i = 0;
-
-			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
-				if (((object[])item)[0].ToString () == Catalog.GetString ("Window"))
-					return;
-
-				if (int.Parse (((object[])item)[0].ToString ().Trim ('%')) < zoom) {
-					PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
-					return;
-				}
-
-				i++;
-			}
+		public void ZoomOutFromMouseScroll (Cairo.PointD point)
+		{
+			ZoomAndRecenterView (ZoomType.ZoomOut, point); // Zoom out relative to mouse position.
 		}
 
 		public void ZoomToRectangle (Cairo.Rectangle rect)
@@ -202,6 +181,69 @@ namespace Pinta.Core
 			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+		}
+		#endregion
+
+		#region Private Methods
+		private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
+		{
+			double zoom;
+
+			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
+				zoom = Scale * 100;
+
+			zoom = Math.Min (zoom, 3600);
+
+			PintaCore.Chrome.DrawingArea.GdkWindow.FreezeUpdates ();
+
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+
+			bool adjustOnMousePosition = point.X >= 0.0 && point.Y >= 0.0;
+
+			double center_x = adjustOnMousePosition ?
+				point.X : view.Hadjustment.Value + (view.Hadjustment.PageSize / 2.0);
+			double center_y = adjustOnMousePosition ?
+				point.Y : view.Vadjustment.Value + (view.Vadjustment.PageSize / 2.0);
+
+			center_x = (center_x - Offset.X) / Scale;
+			center_y = (center_y - Offset.Y) / Scale;
+
+			int i = 0;
+
+			Predicate<string> UpdateZoomLevel = zoomInList => {
+				switch (zoomType) {
+				case ZoomType.ZoomIn:
+					if (zoomInList == Catalog.GetString ("Window") || int.Parse (zoomInList.Trim ('%')) <= zoom) {
+						PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
+						return true;
+					}
+
+					break;
+
+				case ZoomType.ZoomOut :
+					if (zoomInList == Catalog.GetString ("Window"))
+						return true;
+
+					if (int.Parse (zoomInList.Trim ('%')) < zoom) {
+						PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
+						return true;
+					}
+
+					break;
+				}
+
+				return false;
+			};
+
+			foreach (object item in (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model as Gtk.ListStore)) {
+				if (UpdateZoomLevel (((object[])item)[0].ToString ()))
+					break;
+
+				i++;
+			}
+
+			RecenterView (center_x, center_y);
+			PintaCore.Chrome.DrawingArea.GdkWindow.ThawUpdates ();
 		}
 		#endregion
 	}

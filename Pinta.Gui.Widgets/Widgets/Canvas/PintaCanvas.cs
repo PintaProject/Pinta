@@ -201,11 +201,11 @@ namespace Pinta.Gui.Widgets
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
-						PintaCore.Actions.View.ZoomOut.Activate ();
+						PintaCore.Workspace.ActiveWorkspace.ZoomOutFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
 						return true;
 					case ScrollDirection.Left:
 					case ScrollDirection.Up:
-						PintaCore.Actions.View.ZoomIn.Activate ();
+						PintaCore.Workspace.ActiveWorkspace.ZoomInFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
 						return true;
 				}
 			}
