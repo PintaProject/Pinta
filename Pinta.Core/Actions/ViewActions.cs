@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public Gtk.Action Fullscreen { get; private set; }
 
 		public ToolBarComboBox ZoomComboBox { get; private set; }
+		public string[] ZoomCollection { get; private set; }
 		
 		public ViewActions ()
 		{
@@ -71,8 +72,9 @@ namespace Pinta.Core
 			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("Inches"), null, null, 1);
 			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
 			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
-			
-			ZoomComboBox = new ToolBarComboBox (75, 11, true, "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window");
+
+			ZoomCollection = new string[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window" };
+			ZoomComboBox = new ToolBarComboBox (75, 11, true, ZoomCollection);
 
 			// Make sure these are the same group so only one will be selected at a time
 			Inches.Group = Pixels.Group;
@@ -184,18 +186,9 @@ namespace Pinta.Core
 		{
 			suspend_zoom_change = false;
 		}
-		
-		#region Action Handlers
-		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
-		{
-			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 11;
-		}
 
-		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
+		public void UpdateCanvasScale ()
 		{
-			if (suspend_zoom_change)
-				return;
-				
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
 
 			if (text == Catalog.GetString ("Window")) {
@@ -214,7 +207,20 @@ namespace Pinta.Core
 			percent = percent / 100.0;
 
 			PintaCore.Workspace.Scale = percent;
-	
+		}
+		
+		#region Action Handlers
+		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
+		{
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 11;
+		}
+
+		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
+		{
+			if (suspend_zoom_change)
+				return;
+
+			PintaCore.Workspace.ActiveDocument.Workspace.ZoomManually ();
 		}
 
 		private void HandlePintaCoreActionsViewZoomOutActivated (object sender, EventArgs e)
