@@ -389,6 +389,7 @@ namespace Pinta.Tools
 				StartEditing ();
 				engine.Origin = clickPoint;
 				RedrawText (true, true);
+				PintaCore.Workspace.Invalidate ();
 			}
 		}
 
