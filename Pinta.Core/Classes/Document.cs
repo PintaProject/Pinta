@@ -314,8 +314,13 @@ namespace Pinta.Core
 
 		public void CreateSelectionLayer ()
 		{
+			Layer old = selection_layer;
+
 			selection_layer = CreateLayer ();
 			selection_layer_index = current_layer + 1;
+
+			if (old != null)
+				(old.Surface as IDisposable).Dispose ();
 		}
 
 		// Delete the current layer
