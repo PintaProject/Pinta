@@ -246,6 +246,8 @@ namespace Pinta.Core
 
 		internal void SetActiveDocumentInternal (Document document)
 		{
+			PintaCore.Tools.Commit ();
+
 			int index = OpenDocuments.IndexOf (document);
 			active_document_index = index;
 
