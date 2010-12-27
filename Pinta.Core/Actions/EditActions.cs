@@ -232,32 +232,33 @@ namespace Pinta.Core
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			
 			Path p;
-			Cairo.ImageSurface old;
 
-			using (Gdk.Pixbuf image = cb.WaitForImage ()) {
+			// Don't dispose this, as we're going to give it to the history
+			Gdk.Pixbuf image = cb.WaitForImage ();
 
-				if (image == null)
-					return;
+			if (image == null)
+				return;
 
-				old = doc.CurrentLayer.Surface.Clone ();
+			// Copy the paste to the temp layer
+			doc.CreateSelectionLayer ();
+			doc.ShowSelectionLayer = true;
 
-				using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-					g.DrawPixbuf (image, new Cairo.Point (0, 0));
-					p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
-				}
+			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
+				g.DrawPixbuf (image, new Cairo.Point (0, 0));
+				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
 			}
 
+			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+			
 			Path old_path = doc.SelectionPath;
+			bool old_show_selection = doc.ShowSelection;
 
 			doc.SelectionPath = p;
 			doc.ShowSelection = true;
 
-			if (old_path != null)
-				(old_path as IDisposable).Dispose ();
-
 			doc.Workspace.Invalidate ();
 
-			doc.History.PushNewItem (new SimpleHistoryItem (Stock.Paste, Catalog.GetString ("Paste"), old, doc.CurrentLayerIndex));
+			doc.History.PushNewItem (new PasteHistoryItem (image, old_path, old_show_selection));
 		}
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
