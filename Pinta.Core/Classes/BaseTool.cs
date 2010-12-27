@@ -102,6 +102,11 @@ namespace Pinta.Core
 			OnMouseUp (canvas, args, point);
 		}
 
+		public void DoCommit ()
+		{
+			OnCommit ();
+		}
+
 		public void DoActivated ()
 		{
 			OnActivated ();
@@ -180,6 +185,15 @@ namespace Pinta.Core
 		{
 		}
 		
+		/// <summary>
+		/// This is called whenever a menu option is called, for
+		/// tools that are in a temporary state while being used, and
+		/// need to commit their work when another option is selected.
+		/// </summary>
+		protected virtual void OnCommit ()
+		{
+		}
+
 		protected virtual void OnActivated ()
 		{
 			SetCursor (DefaultCursor);

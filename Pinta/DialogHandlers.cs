@@ -206,7 +206,7 @@ namespace Pinta
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 
 			if (cb.WaitIsImageAvailable ()) {
-				PintaCore.Layers.FinishSelection ();
+				PintaCore.Tools.Commit ();
 
 				Gdk.Pixbuf image = cb.WaitForImage ();
 
@@ -600,7 +600,7 @@ namespace Pinta
 			}
 
 			// Commit any pending changes
-			document.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			format.Exporter.Export (document, file);
 

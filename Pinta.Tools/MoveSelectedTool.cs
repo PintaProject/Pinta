@@ -134,6 +134,11 @@ namespace Pinta.Tools
 		}
 		#endregion
 
+		protected override void OnCommit ()
+		{
+			PintaCore.Workspace.ActiveDocument.FinishSelection ();
+		}
+
 		protected override void OnDeactivated ()
 		{
 			base.OnDeactivated ();

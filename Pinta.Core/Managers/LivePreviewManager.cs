@@ -84,7 +84,7 @@ namespace Pinta.Core
 			this.effect = effect;
 			
 			// Handle selection path.
-			PintaCore.Layers.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Layers.SelectionPath : null;
 			render_bounds = selection_path.GetBounds ();
 			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);			

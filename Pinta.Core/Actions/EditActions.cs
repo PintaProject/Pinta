@@ -156,7 +156,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
@@ -176,7 +176,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Catalog.GetString ("Select All"));
 			hist.TakeSnapshot ();
@@ -192,7 +192,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
@@ -212,7 +212,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));
 			hist.TakeSnapshot ();
@@ -227,7 +227,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			
@@ -264,7 +264,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			ImageSurface src = doc.GetClippedLayer (doc.CurrentLayerIndex);
 
@@ -288,7 +288,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			
 			// Copy selection
 			HandlerPintaCoreActionsEditCopyActivated (sender, e);

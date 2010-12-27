@@ -151,7 +151,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), null, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
 			
@@ -188,7 +188,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			doc.CurrentLayer.FlipVertical ();
 			doc.Workspace.Invalidate ();
@@ -198,7 +198,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersFlipHorizontalActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			doc.CurrentLayer.FlipHorizontal ();
 			doc.Workspace.Invalidate ();
@@ -208,7 +208,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Catalog.GetString ("Move Layer Up"), doc.CurrentLayerIndex, doc.CurrentLayerIndex + 1);
 
@@ -219,7 +219,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersMoveLayerDownActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Catalog.GetString ("Move Layer Down"), doc.CurrentLayerIndex, doc.CurrentLayerIndex - 1);
 
@@ -230,7 +230,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersMergeLayerDownActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Catalog.GetString ("Merge Layer Down"));
 			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.CurrentLayer, doc.CurrentLayerIndex);
@@ -247,7 +247,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Layer l = doc.DuplicateCurrentLayer ();
 			
@@ -261,7 +261,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersDeleteLayerActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Catalog.GetString ("Delete Layer"), doc.CurrentLayer, doc.CurrentLayerIndex);
 
@@ -273,7 +273,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsLayersAddNewLayerActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Layer l = doc.AddNewLayer (string.Empty);
 

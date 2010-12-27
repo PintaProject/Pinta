@@ -601,7 +601,7 @@ namespace Pinta.Core
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
 
-			FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.Icon = "Menu.Image.CanvasSize.png";
@@ -629,7 +629,7 @@ namespace Pinta.Core
 			if (ImageSize.Width == width && ImageSize.Height == height)
 				return;
 
-			FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.TakeSnapshotOfImage ();

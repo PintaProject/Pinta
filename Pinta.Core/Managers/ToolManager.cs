@@ -87,6 +87,11 @@ namespace Pinta.Core
 			get { return Tools[prev_index]; }
 		}
 
+		public void Commit ()
+		{
+			CurrentTool.DoCommit ();
+		}
+
 		public void SetCurrentTool (BaseTool tool)
 		{
 			int i = Tools.IndexOf (tool);

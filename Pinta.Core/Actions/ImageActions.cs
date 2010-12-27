@@ -102,7 +102,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			doc.RotateImageCCW ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
@@ -112,7 +112,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			doc.RotateImageCW ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
@@ -122,7 +122,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
 			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[0].Surface.Clone (), 0);
@@ -141,7 +141,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			doc.RotateImage180 ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
@@ -151,7 +151,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			doc.FlipImageVertical ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
@@ -161,7 +161,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 			doc.FlipImageHorizontal ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
@@ -171,7 +171,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.FinishSelection ();
+			PintaCore.Tools.Commit ();
 
 			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
