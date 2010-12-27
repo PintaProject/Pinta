@@ -108,13 +108,18 @@ namespace Pinta.Core
 		private void LoadSettings ()
 		{
 			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
-			settings = Deserialize (settings_file);
+
+			try {
+				settings = Deserialize (settings_file);
+			} catch (Exception) {
+				// Will load with default settings
+			}
 			
 			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
 			
 			try {
 				PintaCore.Palette.CurrentPalette.Load (palette_file);
-			} catch (Exception e) {
+			} catch (Exception) {
 				// Retain the default palette
 			}
 		}
