@@ -61,7 +61,7 @@ namespace Pinta.Core
 			old_selection_layer = swap_sel;
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool ("Move Selected Pixels");
+			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
 		}
 
 		public override void Redo ()
