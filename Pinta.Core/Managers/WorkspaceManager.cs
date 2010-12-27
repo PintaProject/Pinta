@@ -213,7 +213,7 @@ namespace Pinta.Core
 		}
 
 		public bool ImageFitsInWindow {
-			get { return ActiveWorkspace.CanvasFitsInWindow; }
+			get { return ActiveWorkspace.ImageFitsInWindow; }
 		}
 		
 		internal void ResetTitle ()
