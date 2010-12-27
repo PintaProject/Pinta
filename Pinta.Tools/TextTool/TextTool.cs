@@ -326,6 +326,11 @@ namespace Pinta.Tools
 			is_editing = false;
 		}
 
+		protected override void OnCommit ()
+		{
+			StopEditing ();
+		}
+
 		protected override void OnDeactivated ()
 		{
 			base.OnDeactivated ();
