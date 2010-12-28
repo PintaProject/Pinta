@@ -47,6 +47,7 @@ namespace Pinta.Tools
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.F; } }
 		public override int Priority { get { return 21; } }
+		protected override bool CalculatePolygonSet { get { return false; } }
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
@@ -57,28 +58,38 @@ namespace Pinta.Tools
 			
 			base.OnMouseDown (canvas, args, point);
 		}
-		
-		protected unsafe override void OnFillRegionComputed (Point[][] polygonSet)
+
+		protected unsafe override void OnFillRegionComputed (IBitVector2D stencil)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
+			ImageSurface surf = doc.ToolLayer.Surface;
+			surf.Clear ();
 
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
 			hist.TakeSnapshotOfLayer (doc.CurrentLayer);
 
+			ColorBgra color = fill_color.ToColorBgra ();
+			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
+			int width = surf.Width;
+
+			surf.Flush ();
+
+			// Color in any pixel that the stencil says we need to fill
+			for (int x = 0; x < stencil.Width; x++)
+				for (int y = 0; y < stencil.Height; y++)
+					if (stencil.GetUnchecked (x, y))
+						surf.SetColorBgra (dstPtr, width, color, x, y);
+
+			surf.MarkDirty ();
+
+			// Transfer the temp layer to the real one,
+			// respecting any selection area
 			using (var g = doc.CreateClippedContext ()) {
-				// Reset FillRule to the default
-				g.FillRule = FillRule.Winding;
-
-				using (Path poly = g.CreatePolygonPath (polygonSet))
-					g.AppendPath (poly);
-
-				g.Antialias = Antialias.Subpixel;
-
-				g.Color = fill_color;
-				g.Fill ();
+				g.SetSource (surf);
+				g.Paint ();
 			}
 
-			doc.History.PushNewItem (hist);
+			doc.History.PushNewItem (hist); 
 			doc.Workspace.Invalidate ();
 		}
 	}

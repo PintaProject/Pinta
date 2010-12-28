@@ -56,6 +56,7 @@ namespace Pinta.Tools
 		#region Protected Properties
 		protected bool IsContinguousMode { get { return (bool)mode_button.SelectedItem.Tag; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
+		protected virtual bool CalculatePolygonSet { get { return true; } }
 
 		protected bool LimitToSelection {
 			get { return limitToSelection; }
@@ -130,18 +131,20 @@ namespace Pinta.Tools
 			int tol = (int)(Tolerance * Tolerance * 256);
 			Rectangle boundingBox;
 
-			surface.Flush ();
-
 			if (IsContinguousMode)
 				FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
 			else
 				FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 			
-			surface.MarkDirty ();
 			stencil = stencilBuffer;
-			
-			Point[][] polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
-			OnFillRegionComputed (polygonSet);
+			OnFillRegionComputed (stencilBuffer);
+
+			// If a derived tool is only going to use the stencil,
+			// don't waste time building the polygon set
+			if (CalculatePolygonSet) {
+				Point[][] polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
+				OnFillRegionComputed (polygonSet);
+			}
 		}
 		#endregion
 
@@ -352,7 +355,8 @@ namespace Pinta.Tools
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
 
-		protected abstract void OnFillRegionComputed (Point[][] polygonSet);
+		protected virtual void OnFillRegionComputed (Point[][] polygonSet) {}
+		protected virtual void OnFillRegionComputed (IBitVector2D stencil) {}
 		#endregion
 	}
 }
