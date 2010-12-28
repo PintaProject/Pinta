@@ -245,9 +245,7 @@ namespace Pinta.Core
 				ctx.FillRule = Cairo.FillRule.EvenOdd;
 				ctx.Clip ();				
 			
-				ctx.Operator = Cairo.Operator.Clear;
-				ctx.Paint ();
-				ctx.Operator = Cairo.Operator.Over;
+				ctx.Operator = Cairo.Operator.Source;
 				
 				ctx.SetSourceSurface (live_preview_surface, (int)layer.Offset.X, (int)layer.Offset.Y);
 				ctx.Paint ();
