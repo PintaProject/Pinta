@@ -542,7 +542,7 @@ namespace Pinta
 			if (hasFile)
 				fcd.Filter = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename).Filter;
 			else
-				fcd.Filter = PintaCore.System.ImageFormats.GetFormatByExtension ("jpeg").Filter;
+				fcd.Filter = PintaCore.System.ImageFormats.GetDefaultFormat ().Filter;
 
 			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
 			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
@@ -570,6 +570,7 @@ namespace Pinta
 				lastDialogDir = fcd.CurrentFolder;
 				SaveFile (document, file, format);
 				RecentManager.Default.AddFull (fcd.Uri, recentData);
+				PintaCore.System.ImageFormats.SetDefaultFormat (Path.GetExtension (file));
 
 				document.HasFile = true;
 				document.PathAndFileName = file;

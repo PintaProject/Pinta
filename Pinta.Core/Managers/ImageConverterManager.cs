@@ -77,6 +77,24 @@ namespace Pinta.Core
 
 		public IList<FormatDescriptor> Formats { get; private set; }
 
+		public FormatDescriptor GetDefaultFormat ()
+		{
+			string extension = PintaCore.Settings.GetSetting<string> ("default-image-type", "jpeg");
+
+			var fd = GetFormatByExtension (extension);
+
+			// We found the last one we used
+			if (fd != null)
+				return fd;
+
+			// Return any format we have
+			if (Formats.Count > 0)
+				return Formats[0];
+
+			// We don't have any formats
+			throw new InvalidOperationException ("There are no image formats supported.");
+		}
+
 		public IImageExporter GetExporterByExtension (string extension)
 		{
 			FormatDescriptor format = GetFormatByExtension (extension);
@@ -125,6 +143,15 @@ namespace Pinta.Core
 		{
 			string extension = Path.GetExtension (file);
 			return GetImporterByExtension (extension);
+		}
+
+		public void SetDefaultFormat (string extension)
+		{
+			// Normalize the extension
+			extension = extension.ToLowerInvariant ().TrimStart ('.').Trim ();
+
+			PintaCore.Settings.PutSetting ("default-image-type", extension);
+			PintaCore.Settings.SaveSettings ();
 		}
 	}
 }

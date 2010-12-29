@@ -71,7 +71,7 @@ namespace Pinta.Core
 			XmlDocument doc = new XmlDocument ();
 			doc.Load (filename);
 			
-			// Kinda cheating for now because I know there is only one thing stored in here
+			// Kinda cheating for now because I know there is only a few things stored in here
 			foreach (XmlElement setting in doc.DocumentElement.ChildNodes) {
 				switch (setting.GetAttribute ("type")) {
 					case "System.Int32":
@@ -79,6 +79,9 @@ namespace Pinta.Core
 						break;
 					case "System.Boolean":
 						properties[setting.GetAttribute ("name")] = bool.Parse (setting.InnerText);
+						break;
+					case "System.String":
+						properties[setting.GetAttribute ("name")] = setting.InnerText;
 						break;
 				}
 			
