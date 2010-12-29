@@ -567,6 +567,14 @@ namespace Pinta
 						continue;
 				}
 
+				// Always follow the extension rather than the file type drop down
+				// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
+				// to assume they just didn't update the dropdown and really want png
+				var format_type = PintaCore.System.ImageFormats.GetFormatByFile (file);
+
+				if (format_type != null)
+					format = format_type;
+
 				lastDialogDir = fcd.CurrentFolder;
 				SaveFile (document, file, format);
 				RecentManager.Default.AddFull (fcd.Uri, recentData);
