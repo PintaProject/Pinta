@@ -165,7 +165,7 @@ namespace Pinta.Effects
 		{
 			int* ptr = (int*)dst;
 			
-			for (int i = 0; i < 1020 / 4; i++) {
+			for (ulong i = 0; i < length / 4; i++) {
 				*ptr = 0;
 				ptr++;
 			}
