@@ -59,14 +59,13 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-			"Aaron Bockover",
 			"Jonathan Pobst",
-			"Maia Kozheva",
-			"Olivier Dufour",
-			"Richard Cohn"
+			"Khairuddin Ni'am",
+			"Mathias Fussenegger",
 		};
 
 		string[] oldAuthors = new string[] {
+			"Aaron Bockover",
 			"Anirudh Sanjeev",
 			"Greg Lowe",
 			"Hanh Pham",
@@ -78,7 +77,8 @@ namespace Pinta
 			"Maia Kozheva",
 			"Marco Rolappe",
 			"Obinou Conseil",
-			"Olivier Dufour"
+			"Olivier Dufour",
+			"Richard Cohn"
 		};
 
 		public ScrollBox ()
