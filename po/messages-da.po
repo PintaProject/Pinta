@@ -7,289 +7,706 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-09-07 11:12+0000\n"
+"POT-Creation-Date: 2010-10-31 12:19-0500\n"
+"PO-Revision-Date: 2010-10-27 02:02+0000\n"
 "Last-Translator: Jonathan Pobst <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-10 23:16+0000\n"
+"X-Generator: Launchpad (build 12161)\n"
 
-#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
-msgid "About"
-msgstr "Om"
+#: Pinta.Core/Classes/DocumentWorkspace.cs:160
+#: Pinta.Core/Classes/DocumentWorkspace.cs:181
+#: Pinta.Core/Actions/ViewActions.cs:200
+msgid "Window"
+msgstr "Vindue"
 
-#: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
-msgid "Paintbrush"
-msgstr "Malerpensel"
-
-#: Pinta/MainWindow.cs:259
-msgid "_File"
-msgstr "_Fil"
-
-#: Pinta/MainWindow.cs:260
-msgid "_Edit"
-msgstr "R_edigere"
-
-#: Pinta/MainWindow.cs:261
-msgid "_View"
-msgstr "_Vis"
-
-#: Pinta/MainWindow.cs:262
-msgid "_Image"
-msgstr "B_illede"
-
-#: Pinta/MainWindow.cs:263
-msgid "_Layers"
-msgstr "_Lag"
-
-#: Pinta/MainWindow.cs:264
-msgid "_Adjustments"
-msgstr "_Justeringer"
-
-#: Pinta/MainWindow.cs:265
-msgid "Effe_cts"
-msgstr "Effe_kter"
-
-#: Pinta/MainWindow.cs:266
-msgid "_Window"
-msgstr "_Vindue"
-
-#: Pinta/MainWindow.cs:267
-msgid "_Help"
-msgstr "_Hjælp"
-
-#: Pinta/MainWindow.cs:272
-msgid "Tool Windows"
-msgstr ""
-
-#: Pinta/MainWindow.cs:345
-msgid "Tools"
-msgstr "Værktøjer"
-
-#: Pinta/MainWindow.cs:355
-msgid "Palette"
-msgstr "Palet"
-
-#: Pinta/MainWindow.cs:368
-msgid "Documents"
-msgstr "Dokumenter"
-
-#: Pinta/MainWindow.cs:382
-msgid "Layers"
+#: Pinta.Core/Classes/Document.cs:299
+msgid "Layer"
 msgstr "Lag"
 
-#: Pinta/MainWindow.cs:398
-msgid "History"
-msgstr "Historik"
+#: Pinta.Core/Classes/Document.cs:367
+msgid "copy"
+msgstr "kopiere"
 
-#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
-msgid "Hide"
-msgstr "Skjul"
-
-#: Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr "Dokbar"
-
-#: Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "Flydende"
-
-#: Pinta/DockLibrary/DockItem.cs:502
-#: Pinta/DockLibrary/DockItemContainer.cs:194
-msgid "Auto Hide"
-msgstr "Skjul automatisk"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:190
-msgid "Dock"
-msgstr "Dok"
-
-#: Pinta/Dialogs/AboutDialog.cs:97
-msgid "Contributors to this Release"
-msgstr "Bidragyder til denne frigivelse"
-
-#: Pinta/Dialogs/AboutDialog.cs:107
-msgid "Previous Contributors"
-msgstr "Tidligere bidragyder"
-
-#: Pinta/Dialogs/AboutDialog.cs:116
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Ole Carlsen https://launchpad.net/~ole-carlsen-web"
-
-#: Pinta/Dialogs/AboutDialog.cs:119
-msgid "Translated by:"
-msgstr "Oversat af:"
-
-#: Pinta/Dialogs/AboutDialog.cs:126
-msgid "Based on the work of Paint.NET:"
-msgstr "Baseret på arbejdet med Paint.NET"
-
-#: Pinta/Dialogs/AboutDialog.cs:133
-msgid "Using some icons from:"
-msgstr "Bruger nogle ikoner fra:"
-
-#: Pinta/Dialogs/AboutDialog.cs:245
-msgid "About Pinta"
-msgstr "Om Pinta"
-
-#: Pinta/Dialogs/AboutDialog.cs:263
-msgid "Version Info"
-msgstr "Version Info"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Titel"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-msgid "Version"
-msgstr "Version"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Sti"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Licens"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Frigivet under MIT X11 Licens."
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Copyright"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "af Pinta bidragyder"
-
-#: Pinta/Main.cs:67
-msgid "number of threads to use for rendering"
-msgstr "antal tråde ved rendering"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
-msgid "Resize Image"
-msgstr "Ændring af billedstørrelse"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-msgid "By percentage:"
-msgstr "I procent"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-msgid "By absolute size:"
-msgstr "I absolut størrelse"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
-msgid "Width:"
-msgstr "Bredde:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
-msgid "pixels"
-msgstr "billedpunkter"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
-msgid "Height:"
-msgstr "Højde:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-msgid "Maintain aspect ratio"
-msgstr "Bevar størrelsesforhold"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
-#: Pinta.Core/Actions/LayerActions.cs:74
-msgid "Layer Properties"
-msgstr "Lag-egenskaber"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
-msgid "Name:"
-msgstr "Navn:"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
-msgid "Visible"
-msgstr "Synlig"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
-msgid "Opacity:"
-msgstr "Uigennemsighed:"
-
+#: Pinta.Core/Classes/Document.cs:589
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
 msgstr "Ændr lærred"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Forankring:"
+#: Pinta.Core/Classes/BaseTool.cs:146
+msgid "Tool"
+msgstr "Værktøj"
 
+#: Pinta.Core/Classes/BaseTool.cs:204
+msgid "Shortcut key"
+msgstr "Genvejstast"
+
+#: Pinta.Core/Classes/BaseTool.cs:227
+msgid "Normal Blending"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:228
+msgid "Overwrite"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:242
+msgid "Antialiasing On"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:243
+msgid "Antialiasing Off"
+msgstr ""
+
+#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+msgid "Resize Image"
+msgstr "Ændring af billedstørrelse"
+
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Afslut billedepunkter"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+#: Pinta.Core/Actions/ImageActions.cs:65
+msgid "Rotate 180°"
+msgstr "Rotere 180°"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Vend billede vandret"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Vend billede lodret"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+#: Pinta.Core/Actions/ImageActions.cs:63
+msgid "Rotate 90° Clockwise"
+msgstr "Rotere 90° med uret"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:64
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Rotere 90° mod uret"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Vend lag vandret"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Vend lag lodret"
+
+#: Pinta.Core/Effects/BaseEffect.cs:42
+msgid "General"
+msgstr "Generelt"
+
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} billede ({1})"
+
+#: Pinta.Core/Actions/ImageActions.cs:58
+#: Pinta.Core/Actions/ImageActions.cs:181
+msgid "Crop to Selection"
+msgstr "Beskær til valg"
+
+#: Pinta.Core/Actions/ImageActions.cs:59
+msgid "Resize..."
+msgstr "Størrelse..."
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Canvas Size..."
+msgstr "Lærred størrelse..."
+
+#: Pinta.Core/Actions/ImageActions.cs:61 Pinta.Core/Actions/LayerActions.cs:69
+msgid "Flip Horizontal"
+msgstr "Vend vandret"
+
+#: Pinta.Core/Actions/ImageActions.cs:62 Pinta.Core/Actions/LayerActions.cs:70
+msgid "Flip Vertical"
+msgstr "Vend lodret"
+
+#: Pinta.Core/Actions/ImageActions.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:127
+msgid "Flatten"
+msgstr "Udjævn"
+
+#: Pinta.Core/Actions/ViewActions.cs:62
+msgid "Zoom In"
+msgstr "Zoom ind"
+
+#: Pinta.Core/Actions/ViewActions.cs:63
+msgid "Zoom Out"
+msgstr "Zoom ud"
+
+#: Pinta.Core/Actions/ViewActions.cs:64
+msgid "Zoom to Window"
+msgstr "Zoom til vindue"
+
+#: Pinta.Core/Actions/ViewActions.cs:65
+msgid "Zoom to Selection"
+msgstr "Zoom til markering"
+
+#: Pinta.Core/Actions/ViewActions.cs:66
+msgid "Actual Size"
+msgstr "Faktisk størrelse"
+
+#: Pinta.Core/Actions/ViewActions.cs:67
+msgid "Toolbar"
+msgstr ""
+
+#: Pinta.Core/Actions/ViewActions.cs:68
+msgid "Pixel Grid"
+msgstr "Billedepunkter gitter"
+
+#: Pinta.Core/Actions/ViewActions.cs:69
+msgid "Rulers"
+msgstr "Linealer"
+
+#: Pinta.Core/Actions/ViewActions.cs:70
+msgid "Pixels"
+msgstr "Billedpunkter"
+
+#: Pinta.Core/Actions/ViewActions.cs:71
+msgid "Inches"
+msgstr "Tommer"
+
+#: Pinta.Core/Actions/ViewActions.cs:72
+msgid "Centimeters"
+msgstr "Centimeter"
+
+#: Pinta.Core/Actions/ViewActions.cs:73
+msgid "Fullscreen"
+msgstr "Fuldskærm"
+
+#: Pinta.Core/Actions/ViewActions.cs:111
+msgid "Ruler Units"
+msgstr ""
+
+#: Pinta.Core/Actions/LayerActions.cs:64
+#: Pinta.Core/Actions/LayerActions.cs:283
+msgid "Add New Layer"
+msgstr "Tilføj nyt lag"
+
+#: Pinta.Core/Actions/LayerActions.cs:65
+#: Pinta.Core/Actions/LayerActions.cs:266
+msgid "Delete Layer"
+msgstr "Slet lag"
+
+#: Pinta.Core/Actions/LayerActions.cs:66
+#: Pinta.Core/Actions/LayerActions.cs:257
+msgid "Duplicate Layer"
+msgstr "Dupliker lag"
+
+#: Pinta.Core/Actions/LayerActions.cs:67
+#: Pinta.Core/Actions/LayerActions.cs:235
+msgid "Merge Layer Down"
+msgstr "Fusionere lag nedad"
+
+#: Pinta.Core/Actions/LayerActions.cs:68
+msgid "Import from File..."
+msgstr "Importere fra fil..."
+
+#: Pinta.Core/Actions/LayerActions.cs:71
+msgid "Rotate / Zoom"
+msgstr "Rotere / Zoom"
+
+#: Pinta.Core/Actions/LayerActions.cs:72
+#: Pinta.Core/Actions/LayerActions.cs:213
+msgid "Move Layer Up"
+msgstr "Flyt lag op"
+
+#: Pinta.Core/Actions/LayerActions.cs:73
+#: Pinta.Core/Actions/LayerActions.cs:224
+msgid "Move Layer Down"
+msgstr "Flyt lag ned"
+
+#: Pinta.Core/Actions/LayerActions.cs:74
+msgid "Layer Properties..."
+msgstr ""
+
+#: Pinta.Core/Actions/LayerActions.cs:156 Pinta/DialogHandlers.cs:396
+msgid "Open Image File"
+msgstr "Åbn billede fil"
+
+#: Pinta.Core/Actions/LayerActions.cs:179
+msgid "Import From File"
+msgstr "Importere fra fil"
+
+#: Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr ""
+
+#: Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr ""
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Pinta Websted"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Rapportere en fejl"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr "Oversæt dette program"
+
+#: Pinta.Core/Actions/HelpActions.cs:53 Pinta/MainWindow.cs:141
+msgid "About"
+msgstr "Om"
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Ny..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr ""
+
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
+msgid "Open..."
+msgstr "Åbn..."
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Åbn seneste"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Luk"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Gem"
+
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
+msgid "Save As..."
+msgstr "Gem som..."
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Udskriv"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Afslut"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Ny"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Åbn"
+
+#: Pinta.Core/Actions/EditActions.cs:65
+msgid "Undo"
+msgstr "Fortryd"
+
+#: Pinta.Core/Actions/EditActions.cs:66
+msgid "Redo"
+msgstr "Omgør"
+
+#: Pinta.Core/Actions/EditActions.cs:67
+msgid "Cut"
+msgstr "Klip"
+
+#: Pinta.Core/Actions/EditActions.cs:68
+msgid "Copy"
+msgstr "Kopiere"
+
+#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:251
+msgid "Paste"
+msgstr "Indsæt"
+
+#: Pinta.Core/Actions/EditActions.cs:70 Pinta/DialogHandlers.cs:204
+msgid "Paste Into New Layer"
+msgstr "Indsæt i nyt lag"
+
+#: Pinta.Core/Actions/EditActions.cs:71
+msgid "Paste Into New Image"
+msgstr "Indsæt i nyt bilede"
+
+#: Pinta.Core/Actions/EditActions.cs:72 Pinta.Core/Actions/EditActions.cs:199
+#: Pinta.Core/Actions/EditActions.cs:296
+msgid "Erase Selection"
+msgstr "Slet markering"
+
+#: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:163
+msgid "Fill Selection"
+msgstr "Fyld markering"
+
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Invert Selection"
+msgstr "Omvend markering"
+
+#: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:172
+msgid "Select All"
+msgstr "Vælg alle"
+
+#: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:208
+msgid "Deselect"
+msgstr "Fravælg"
+
+#: Pinta.Core/Actions/EditActions.cs:80
+msgid "Reset to Default"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:81
+msgid "Set Number of Colors"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:105 Pinta/MainWindow.cs:562
+#: Pinta/MainWindow.cs:569
+msgid "Palette"
+msgstr "Palet"
+
+#: Pinta.Core/Actions/EditActions.cs:313
+msgid "Open Palette File"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:320
+msgid "Palette files (*.txt, *.gpl)"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:324 Pinta/DialogHandlers.cs:408
+msgid "All files"
+msgstr "Alle filer"
+
+#: Pinta.Core/Actions/EditActions.cs:340
+#, csharp-format
+msgid ""
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:341
+#: Pinta.Core/Managers/WorkspaceManager.cs:184 Pinta/DialogHandlers.cs:576
+msgid "Error"
+msgstr "Fejl"
+
+#: Pinta.Core/Actions/EditActions.cs:353
+msgid "Save Palette File"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:359
+msgid "Paint.NET palette (*.txt)"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:364
+msgid "GIMP palette (*.gpl)"
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:91
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:151
+msgid "Background"
+msgstr "Baggrund"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:158
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
-#: Pinta.Core/Actions/FileActions.cs:133
 msgid "New Image"
 msgstr "Nyt billede"
 
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
-msgid "New Image Size          "
-msgstr "Ny billede størrelse          "
+#: Pinta.Core/Managers/WorkspaceManager.cs:176
+msgid "Open Image"
+msgstr "Åbn billede"
 
-#: Pinta/DialogHandlers.cs:57
+#: Pinta.Core/Managers/WorkspaceManager.cs:183
 #, csharp-format
-msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr "Gem ændringer for billede \"{0}\" før oprettelse af nyt?"
+msgid "Could not open file: {0}"
+msgstr "Kunne ikke åbne fil: {0}"
 
-#: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
-#: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Hvis du ikke gemmer, vil ændringer være tabt."
+#: Pinta.Core/Managers/LivePreviewManager.cs:220
+msgid "Rendering Effect"
+msgstr "Optegne effekt"
 
-#: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
-#: Pinta.Core/Actions/FileActions.cs:258
-msgid "Continue without saving"
-msgstr "Fortsæt uden at gemme"
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
+msgid "Posterize"
+msgstr "Posterisere"
 
-#: Pinta/DialogHandlers.cs:178
-msgid "Layer Opacity"
-msgstr "Lag uigennemsigtighed"
+#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
+msgid "Invert Colors"
+msgstr "Invertere farver"
 
-#: Pinta/DialogHandlers.cs:183
-msgid "Rename Layer"
-msgstr "Omdøb lag"
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
+msgid "Levels"
+msgstr "Niveauer"
 
-#: Pinta/DialogHandlers.cs:188
-msgid "Hide Layer"
-msgstr "Skjul lag"
+#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
+msgid "Black and White"
+msgstr "Sort og hvid"
 
-#: Pinta/DialogHandlers.cs:188
-msgid "Show Layer"
-msgstr "Vis lag"
+#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
+msgid "Auto Level"
+msgstr "Auto niveau"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "etiket1"
+#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
+msgid "Hue / Saturation"
+msgstr "Nuance / Mætning"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-msgid "label"
-msgstr "etiket"
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
+msgid "Brightness / Contrast"
+msgstr "Lysstyrke / Kontrast"
+
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
+msgid "Sepia"
+msgstr "Sepia"
+
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:28
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Curves"
+msgstr "Kurver"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
+msgid "Transfer Map"
+msgstr "Overføre kort"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
+msgid "RGB"
+msgstr "RGB"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
+msgid "Luminosity"
+msgstr "Luminans"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
+msgid "(256, 256)"
+msgstr "(256, 256)"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
+msgid "Red  "
+msgstr "Rød  "
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
+msgid "Green"
+msgstr "Grøn"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
+msgid "Blue "
+msgstr "Blå "
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
+msgid "Reset"
+msgstr "Nulstil"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
+msgid "Tip: Right-click to remove control points."
+msgstr ""
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
+msgid "Levels Adjustment"
+msgstr "Niveauer justering"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
+msgid "Input Histogram"
+msgstr "Inddate histogram"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
+msgid "Input"
+msgstr "Inddata"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
+msgid "Output"
+msgstr "Uddata"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
+msgid "Output Histogram"
+msgstr "Uddate histogram"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
+msgid "Auto"
+msgstr "Auto"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
+msgid "Red"
+msgstr "Rød"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
+msgid "Blue"
+msgstr "Blå"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
+msgid "Linked"
+msgstr "Sammenkædet"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Pencil Sketch"
+msgstr "Blyant stregning"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
+#: Pinta.Effects/Effects/InkSketchEffect.cs:42
+msgid "Artistic"
+msgstr "Kunstnerisk"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:28
+msgid "Unfocus"
+msgstr "Ingen fokus"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:36
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
+#: Pinta.Effects/Effects/FragmentEffect.cs:34
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
+msgid "Blurs"
+msgstr "Sløringer"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:26
+msgid "Bulge"
+msgstr "Bule"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:34
+#: Pinta.Effects/Effects/PixelateEffect.cs:38
+#: Pinta.Effects/Effects/TileEffect.cs:34
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
+#: Pinta.Effects/Effects/TwistEffect.cs:34
+msgid "Distort"
+msgstr "Forvræng"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr "Mandelbrot Fraktal"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
+#: Pinta.Effects/Effects/CloudsEffect.cs:38
+msgid "Render"
+msgstr "Optegne"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:29
+msgid "Median"
+msgstr "Median"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:37
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
+msgid "Noise"
+msgstr "Støj"
+
+#: Pinta.Effects/Effects/PixelateEffect.cs:26
+msgid "Pixelate"
+msgstr "Pikselere"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:26
+msgid "Sharpen"
+msgstr "Gør skarpere"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:34
+#: Pinta.Effects/Effects/GlowEffect.cs:39
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
+msgid "Photo"
+msgstr "Billede"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "Olie farvning"
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
+msgid "Gaussian Blur"
+msgstr "Gaussisk sløring"
+
+#: Pinta.Effects/Effects/GlowEffect.cs:31
+msgid "Glow"
+msgstr "Glød"
+
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+msgid "Soften Portrait"
+msgstr "Blødt portræt"
+
+#: Pinta.Effects/Effects/TileEffect.cs:26
+msgid "Tile Reflection"
+msgstr "Flise refleksion"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
+msgid "Red Eye Removal"
+msgstr "Rødøje fjerne"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
+msgid "Frosted Glass"
+msgstr "Frostet glas"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
+msgid "Edge Detect"
+msgstr "Kant detektion"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
+#: Pinta.Effects/Effects/EmbossEffect.cs:34
+#: Pinta.Effects/Effects/ReliefEffect.cs:33
+#: Pinta.Effects/Effects/OutlineEffect.cs:37
+msgid "Stylize"
+msgstr "Stilistisk"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "Julia fraktal"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
+msgid "Motion Blur"
+msgstr "Bevægelsessløring"
+
+#: Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "Præg i relief"
+
+#: Pinta.Effects/Effects/InkSketchEffect.cs:34
+msgid "Ink Sketch"
+msgstr "Blæk skitse"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "Zoom sløring"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "Pol invertering"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:30
+msgid "Clouds"
+msgstr "Skyer"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:26
+msgid "Fragment"
+msgstr "Fragment"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
+msgid "Reduce Noise"
+msgstr "Reducere støj"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
+msgid "Radial Blur"
+msgstr "Radial sløring"
+
+#: Pinta.Effects/Effects/TwistEffect.cs:26
+msgid "Twist"
+msgstr "Drej"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
+msgid "Add Noise"
+msgstr "Tilføj støj"
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:45
+msgid "Relief"
+msgstr "Relief"
+
+#: Pinta.Effects/Effects/OutlineEffect.cs:29
+msgid "Outline"
+msgstr "Omrids"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -298,6 +715,350 @@ msgstr "Tilfældig støj"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
 msgstr "Gen-så"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+msgid "label1"
+msgstr "etiket1"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+msgid "label"
+msgstr "etiket"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
+msgid "Choose Primary Color"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
+msgid "Choose Secondary Color"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
+msgid "Choose Palette Color"
+msgstr ""
+
+#: Pinta.Tools/PanTool.cs:38
+msgid "Pan"
+msgstr "Panorér"
+
+#: Pinta.Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr "Klik og træk for at navigere billede."
+
+#: Pinta.Tools/TextTool.cs:37
+msgid "Text"
+msgstr "Tekst"
+
+#: Pinta.Tools/TextTool.cs:44
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Venstre klik for at placere cursor, indtast dernæst den ønskede tekst. Tekst "
+"farve er primær farve."
+
+#: Pinta.Tools/TextTool.cs:144
+msgid "Font"
+msgstr "Skrifttype"
+
+#: Pinta.Tools/TextTool.cs:205
+msgid "Bold"
+msgstr "Fed"
+
+#: Pinta.Tools/TextTool.cs:212
+msgid "Italic"
+msgstr "Kursiv"
+
+#: Pinta.Tools/TextTool.cs:220
+msgid "Underline"
+msgstr "Understreg"
+
+#: Pinta.Tools/TextTool.cs:229
+msgid "Left Align"
+msgstr "Venstrejustér"
+
+#: Pinta.Tools/TextTool.cs:238
+msgid "Center Align"
+msgstr "MidterJustér"
+
+#: Pinta.Tools/TextTool.cs:246
+msgid "Right Align"
+msgstr "Højrejustér"
+
+#: Pinta.Tools/RectangleTool.cs:38
+msgid "Rectangle"
+msgstr "Rektangel"
+
+#: Pinta.Tools/RectangleTool.cs:44
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+"Klik og træk for at tegne en rektangel (højre klik for sekundær farve). Hold "
+"skift for at begrænse til en kvadrat."
+
+#: Pinta.Tools/FreeformShapeTool.cs:53
+msgid "Freeform Shape"
+msgstr "Fritegne form"
+
+#: Pinta.Tools/FreeformShapeTool.cs:55 Pinta.Tools/PaintBrushTool.cs:43
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Venstre klik for at tegne med primær farve, højre klik for at tegne med "
+"sekundær farve."
+
+#: Pinta.Tools/FreeformShapeTool.cs:71 Pinta.Tools/ShapeTool.cs:131
+msgid "Fill Style"
+msgstr ""
+
+#: Pinta.Tools/FreeformShapeTool.cs:78 Pinta.Tools/ShapeTool.cs:138
+msgid "Outline Shape"
+msgstr "Omrids form"
+
+#: Pinta.Tools/FreeformShapeTool.cs:79 Pinta.Tools/ShapeTool.cs:139
+msgid "Fill Shape"
+msgstr "Fyld form"
+
+#: Pinta.Tools/FreeformShapeTool.cs:80 Pinta.Tools/ShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr "Fyld og omrids form"
+
+#: Pinta.Tools/FloodTool.cs:72
+msgid "Flood Mode"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:79
+msgid "Contiguous"
+msgstr "Sammenhængende"
+
+#: Pinta.Tools/FloodTool.cs:80
+msgid "Global"
+msgstr "Global"
+
+#: Pinta.Tools/FloodTool.cs:91 Pinta.Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr "Tolerance"
+
+#: Pinta.Tools/LineCurveTool.cs:38
+msgid "Line"
+msgstr "Linje"
+
+#: Pinta.Tools/LineCurveTool.cs:44
+msgid ""
+"Left click to draw with primary color, right click for secondary color."
+msgstr ""
+"Venstre klik for at tegne med primær farve, højre klik for sekundær farve."
+
+#: Pinta.Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Flyt markering"
+
+#: Pinta.Tools/MoveSelectionTool.cs:48
+msgid "Drag the selection to move selection outline."
+msgstr "Træk i valg for at flytte vaglt omrids."
+
+#: Pinta.Tools/RectangleSelectTool.cs:38
+msgid "Rectangle Select"
+msgstr "Rektangulær markering"
+
+#: Pinta.Tools/RectangleSelectTool.cs:44
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+"Klik og træk for at tegne et rektangel valg. Hold skift for at begrænse til "
+"en kvadrat."
+
+#: Pinta.Tools/MagicWandTool.cs:46
+msgid "Magic Wand Select"
+msgstr "Tryllestavsmarkering"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Click to select region of similar color."
+msgstr "Klik for at vælge område med tilsvarende farve."
+
+#: Pinta.Tools/EllipseSelectTool.cs:38
+msgid "Ellipse Select"
+msgstr "Ellipse markering"
+
+#: Pinta.Tools/EllipseSelectTool.cs:44
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+"Klik og træk for at tegne et ellipse valg. Hold skift for at begrænse til en "
+"cirkel."
+
+#: Pinta.Tools/LassoSelectTool.cs:45
+msgid "Lasso Select"
+msgstr "Lasso markering"
+
+#: Pinta.Tools/LassoSelectTool.cs:47
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "Klik og træk for at tegne omrids for valgt område."
+
+#: Pinta.Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Malespand"
+
+#: Pinta.Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"enstr klik for at fylde med primær farve, højre klik for at fylde med "
+"sekundær farve."
+
+#: Pinta.Tools/GradientTool.cs:65 Pinta.Tools/GradientTool.cs:176
+msgid "Gradient"
+msgstr "Overgang"
+
+#: Pinta.Tools/GradientTool.cs:73
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+"Klik og træk for at tegne farveovergang fra primær til sekundær farve. Højre "
+"klik for modsat."
+
+#: Pinta.Tools/GradientTool.cs:183
+msgid "Linear Gradient"
+msgstr "Lineær farveovergang"
+
+#: Pinta.Tools/GradientTool.cs:184
+msgid "Linear Reflected Gradient"
+msgstr "Lineær afspejlet farveovergang"
+
+#: Pinta.Tools/GradientTool.cs:185
+msgid "Linear Diamond Gradient"
+msgstr "Lineær diamant farveovergang"
+
+#: Pinta.Tools/GradientTool.cs:186
+msgid "Radial Gradient"
+msgstr "Radial farveovergang"
+
+#: Pinta.Tools/GradientTool.cs:187
+msgid "Conical Gradient"
+msgstr "Konisk farveovergang"
+
+#: Pinta.Tools/GradientTool.cs:195
+msgid "Mode"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:202
+msgid "Color Mode"
+msgstr "Farvetilstand"
+
+#: Pinta.Tools/GradientTool.cs:203
+msgid "Transparency Mode"
+msgstr "Gennemsigtighedstilstand"
+
+#: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
+msgid "Brush width"
+msgstr "Pensel bredde"
+
+#: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
+msgid "Decrease brush size"
+msgstr "Formindsk pensel størrelse"
+
+#: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
+msgid "Increase brush size"
+msgstr "Forøg pensel størrelse"
+
+#: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:393
+msgid "Paintbrush"
+msgstr "Malerpensel"
+
+#: Pinta.Tools/PaintBrushTool.cs:63
+msgid "Type"
+msgstr ""
+
+#: Pinta.Tools/RecolorTool.cs:59
+msgid "Recolor"
+msgstr "Gen-farve"
+
+#: Pinta.Tools/RecolorTool.cs:61
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "Venstre klik for at erstatte sekundær farve med primær farve."
+
+#: Pinta.Tools/Brushes/PlainBrush.cs:38
+msgid "Normal"
+msgstr ""
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:38
+msgid "Circles"
+msgstr ""
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:40
+msgid "Squares"
+msgstr ""
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:38
+msgid "Splatter"
+msgstr ""
+
+#: Pinta.Tools/Brushes/GridBrush.cs:38
+msgid "Grid"
+msgstr ""
+
+#: Pinta.Tools/EllipseTool.cs:38
+msgid "Ellipse"
+msgstr "Ellipse"
+
+#: Pinta.Tools/EllipseTool.cs:44
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+"Klik og træk for at tegne en ellipse (højre klik for sekundær farve). Hold "
+"skift for at begrænse til en cirkel."
+
+#: Pinta.Tools/CloneStampTool.cs:43
+msgid "Clone Stamp"
+msgstr "Stempel kloning"
+
+#: Pinta.Tools/CloneStampTool.cs:48
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr ""
+
+#: Pinta.Tools/ZoomTool.cs:49
+msgid "Zoom"
+msgstr "Zoom"
+
+#: Pinta.Tools/ZoomTool.cs:55
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Venstre klik for at zoome ind. Højre klik for at zoome ud. Klik og træk for "
+"at zoome ind på valgt."
+
+#: Pinta.Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "Afrundet rektangel"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:50
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain."
+msgstr ""
+"Klik og træk for at tegne en rund rektangel (højre klik for sekundær farve). "
+"Hold skift for at begrænse."
+
+#: Pinta.Tools/RoundedRectangleTool.cs:83
+msgid "Radius"
+msgstr "Radius"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:88
+msgid "Decrease rectangle's corner radius"
+msgstr "Formindsk rektangels hjørne radius"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:102
+msgid "Increase rectangle's corner radius"
+msgstr "Forøg rektangels hjørne radius"
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
@@ -325,315 +1086,9 @@ msgstr "Skift til forrige værktøj"
 msgid "Switch to Pencil tool"
 msgstr "Skift til blyant værktøj"
 
-#: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
+#: Pinta.Tools/ColorPickerTool.cs:120 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "Blyant"
-
-#: Pinta.Tools/LassoSelectTool.cs:45
-msgid "Lasso Select"
-msgstr "Lasso markering"
-
-#: Pinta.Tools/LassoSelectTool.cs:47
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klik og træk for at tegne omrids for valgt område."
-
-#: Pinta.Tools/ZoomTool.cs:49
-#: MandelbrotFractalEffect dialog
-#: FragmentEffect dialog
-msgid "Zoom"
-msgstr "Zoom"
-
-#: Pinta.Tools/ZoomTool.cs:55
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-"Venstre klik for at zoome ind. Højre klik for at zoome ud. Klik og træk for "
-"at zoome ind på valgt."
-
-#: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
-msgid "Brush width"
-msgstr "Pensel bredde"
-
-#: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
-msgid "Decrease brush size"
-msgstr "Formindsk pensel størrelse"
-
-#: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
-msgid "Increase brush size"
-msgstr "Forøg pensel størrelse"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Outline Shape"
-msgstr "Omrids form"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill Shape"
-msgstr "Fyld form"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill and Outline Shape"
-msgstr "Fyld og omrids form"
-
-#: Pinta.Tools/MoveSelectedTool.cs:42
-msgid "Move Selected Pixels"
-msgstr "Flyt markerede billedepunkter"
-
-#: Pinta.Tools/MoveSelectedTool.cs:48
-msgid "Drag the selection to move selected content."
-msgstr "Træk i valgt for at flytte valgt indhold."
-
-#: Pinta.Tools/PanTool.cs:38
-msgid "Pan"
-msgstr "Panorér"
-
-#: Pinta.Tools/PanTool.cs:44
-msgid "Click and drag to navigate image."
-msgstr "Klik og træk for at navigere billede."
-
-#: Pinta.Tools/PencilTool.cs:50
-msgid ""
-"Left click to draw freeform, one-pixel wide lines with the primary color, "
-"right click to use the secondary color."
-msgstr ""
-"Venstre klik for fritegning, et billedepunkt brede linjer med primær farve, "
-"højre klik for at bruge sekundær farve."
-
-#: Pinta.Tools/EllipseSelectTool.cs:38
-msgid "Ellipse Select"
-msgstr "Ellipse markering"
-
-#: Pinta.Tools/EllipseSelectTool.cs:44
-msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
-"circle."
-msgstr ""
-"Klik og træk for at tegne et ellipse valg. Hold skift for at begrænse til en "
-"cirkel."
-
-#: Pinta.Tools/GradientTool.cs:52
-msgid "Gradient"
-msgstr "Overgang"
-
-#: Pinta.Tools/GradientTool.cs:60
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-"Klik og træk for at tegne farveovergang fra primær til sekundær farve. Højre "
-"klik for modsat."
-
-#: Pinta.Tools/GradientTool.cs:158
-msgid "Linear Gradient"
-msgstr "Lineær farveovergang"
-
-#: Pinta.Tools/GradientTool.cs:166
-msgid "Linear Reflected Gradient"
-msgstr "Lineær afspejlet farveovergang"
-
-#: Pinta.Tools/GradientTool.cs:173
-msgid "Linear Diamond Gradient"
-msgstr "Lineær diamant farveovergang"
-
-#: Pinta.Tools/GradientTool.cs:180
-msgid "Radial Gradient"
-msgstr "Radial farveovergang"
-
-#: Pinta.Tools/GradientTool.cs:187
-msgid "Conical Gradient"
-msgstr "Konisk farveovergang"
-
-#: Pinta.Tools/GradientTool.cs:198
-msgid "Color Mode"
-msgstr "Farvetilstand"
-
-#: Pinta.Tools/GradientTool.cs:206
-msgid "Transparency Mode"
-msgstr "Gennemsigtighedstilstand"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "Afrundet rektangel"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain."
-msgstr ""
-"Klik og træk for at tegne en rund rektangel (højre klik for sekundær farve). "
-"Hold skift for at begrænse."
-
-#: Pinta.Tools/RoundedRectangleTool.cs:77
-#: UnfocusEffect dialog
-#: MedianEffect dialog
-#: ReduceNoiseEffect dialog
-#: GlowEffect dialog
-#: FragmentEffect dialog
-msgid "Radius"
-msgstr "Radius"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:82
-msgid "Decrease rectangle's corner radius"
-msgstr "Formindsk rektangels hjørne radius"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:96
-msgid "Increase rectangle's corner radius"
-msgstr "Forøg rektangels hjørne radius"
-
-#: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-"Venstre klik for at tegne med primær farve, højre klik for at tegne med "
-"sekundær farve."
-
-#: Pinta.Tools/RectangleSelectTool.cs:38
-msgid "Rectangle Select"
-msgstr "Rektangulær markering"
-
-#: Pinta.Tools/RectangleSelectTool.cs:44
-msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
-"square."
-msgstr ""
-"Klik og træk for at tegne et rektangel valg. Hold skift for at begrænse til "
-"en kvadrat."
-
-#: Pinta.Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Malespand"
-
-#: Pinta.Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"enstr klik for at fylde med primær farve, højre klik for at fylde med "
-"sekundær farve."
-
-#: Pinta.Tools/UnimplementedTools.cs:40
-msgid "Clone Stamp"
-msgstr "Stempel kloning"
-
-#: Pinta.Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Flyt markering"
-
-#: Pinta.Tools/MoveSelectionTool.cs:48
-msgid "Drag the selection to move selection outline."
-msgstr "Træk i valg for at flytte vaglt omrids."
-
-#: Pinta.Tools/FreeformShapeTool.cs:54
-msgid "Freeform Shape"
-msgstr "Fritegne form"
-
-#: Pinta.Tools/FloodTool.cs:71
-msgid "Fill mode"
-msgstr "Fyld tilstand"
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Contiguous"
-msgstr "Sammenhængende"
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Global"
-msgstr "Global"
-
-#: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
-#: SoftenPortraitData dialog
-msgid "Tolerance"
-msgstr "Tolerance"
-
-#: Pinta.Tools/EllipseTool.cs:38
-msgid "Ellipse"
-msgstr "Ellipse"
-
-#: Pinta.Tools/EllipseTool.cs:44
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr ""
-"Klik og træk for at tegne en ellipse (højre klik for sekundær farve). Hold "
-"skift for at begrænse til en cirkel."
-
-#: Pinta.Tools/TextTool.cs:37
-msgid "Text"
-msgstr "Tekst"
-
-#: Pinta.Tools/TextTool.cs:44
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-"Venstre klik for at placere cursor, indtast dernæst den ønskede tekst. Tekst "
-"farve er primær farve."
-
-#: Pinta.Tools/TextTool.cs:131
-msgid "Font"
-msgstr "Skrifttype"
-
-#: Pinta.Tools/TextTool.cs:186
-msgid "Bold"
-msgstr "Fed"
-
-#: Pinta.Tools/TextTool.cs:193
-msgid "Italic"
-msgstr "Kursiv"
-
-#: Pinta.Tools/TextTool.cs:201
-msgid "Underline"
-msgstr "Understreg"
-
-#: Pinta.Tools/TextTool.cs:210
-msgid "Left Align"
-msgstr "Venstrejustér"
-
-#: Pinta.Tools/TextTool.cs:219
-msgid "Center Align"
-msgstr "MidterJustér"
-
-#: Pinta.Tools/TextTool.cs:227
-msgid "Right Align"
-msgstr "Højrejustér"
-
-#: Pinta.Tools/MagicWandTool.cs:46
-msgid "Magic Wand Select"
-msgstr "Tryllestavsmarkering"
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Click to select region of similar color."
-msgstr "Klik for at vælge område med tilsvarende farve."
-
-#: Pinta.Tools/RectangleTool.cs:38
-msgid "Rectangle"
-msgstr "Rektangel"
-
-#: Pinta.Tools/RectangleTool.cs:44
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr ""
-"Klik og træk for at tegne en rektangel (højre klik for sekundær farve). Hold "
-"skift for at begrænse til en kvadrat."
-
-#: Pinta.Tools/LineCurveTool.cs:38
-msgid "Line"
-msgstr "Linje"
-
-#: Pinta.Tools/LineCurveTool.cs:44
-msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr ""
-"Venstre klik for at tegne med primær farve, højre klik for sekundær farve."
-
-#: Pinta.Tools/RecolorTool.cs:59
-msgid "Recolor"
-msgstr "Gen-farve"
-
-#: Pinta.Tools/RecolorTool.cs:61
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "Venstre klik for at erstatte sekundær farve med primær farve."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -643,628 +1098,318 @@ msgstr "Viskelæder"
 msgid "Click and drag to erase a portion of the image."
 msgstr "Klik og træk for at slette en del af billedet."
 
-#: Pinta.Effects/Effects/PixelateEffect.cs:26
-msgid "Pixelate"
-msgstr "Pikselere"
+#: Pinta.Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
+msgstr ""
+"Venstre klik for fritegning, et billedepunkt brede linjer med primær farve, "
+"højre klik for at bruge sekundær farve."
 
-#: Pinta.Effects/Effects/PixelateEffect.cs:38
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
-#: Pinta.Effects/Effects/TileEffect.cs:34
-#: Pinta.Effects/Effects/BulgeEffect.cs:34
-#: Pinta.Effects/Effects/TwistEffect.cs:34
-msgid "Distort"
-msgstr "Forvræng"
+#: Pinta.Tools/MoveSelectedTool.cs:42
+msgid "Move Selected Pixels"
+msgstr "Flyt markerede billedepunkter"
 
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
-msgid "Red Eye Removal"
-msgstr "Rødøje fjerne"
+#: Pinta.Tools/MoveSelectedTool.cs:48
+msgid "Drag the selection to move selected content."
+msgstr "Træk i valgt for at flytte valgt indhold."
 
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
-#: Pinta.Effects/Effects/GlowEffect.cs:39
-#: Pinta.Effects/Effects/SharpenEffect.cs:34
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
-msgid "Photo"
-msgstr "Billede"
+#: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
+msgid "Hide"
+msgstr "Skjul"
 
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
-msgid "Motion Blur"
-msgstr "Bevægelsessløring"
+#: Pinta/DockLibrary/DockItemContainer.cs:190
+msgid "Dock"
+msgstr "Dok"
 
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
-#: Pinta.Effects/Effects/UnfocusEffect.cs:36
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
-#: Pinta.Effects/Effects/FragmentEffect.cs:34
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
-msgid "Blurs"
-msgstr "Sløringer"
+#: Pinta/DockLibrary/DockItemContainer.cs:194
+#: Pinta/DockLibrary/DockItem.cs:502
+msgid "Auto Hide"
+msgstr "Skjul automatisk"
 
-#: Pinta.Effects/Effects/InkSketchEffect.cs:34
-msgid "Ink Sketch"
-msgstr "Blæk skitse"
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr "Dokbar"
 
-#: Pinta.Effects/Effects/InkSketchEffect.cs:42
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
-msgid "Artistic"
-msgstr "Kunstnerisk"
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Flydende"
 
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
-msgid "Radial Blur"
-msgstr "Radial sløring"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:28
-msgid "Unfocus"
-msgstr "Ingen fokus"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
-msgid "Edge Detect"
-msgstr "Kant detektion"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
-#: Pinta.Effects/Effects/OutlineEffect.cs:37
-#: Pinta.Effects/Effects/ReliefEffect.cs:33
-#: Pinta.Effects/Effects/EmbossEffect.cs:34
-msgid "Stylize"
-msgstr "Stilistisk"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
-msgid "Frosted Glass"
-msgstr "Frostet glas"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
-msgid "Oil Painting"
-msgstr "Olie farvning"
-
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
-msgid "Zoom Blur"
-msgstr "Zoom sløring"
-
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
-msgid "Polar Inversion"
-msgstr "Pol invertering"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
-msgstr "Skyer"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:38
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
-msgid "Render"
-msgstr "Optegne"
-
-#: Pinta.Effects/Effects/GlowEffect.cs:31
-msgid "Glow"
-msgstr "Glød"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
-msgid "Add Noise"
-msgstr "Tilføj støj"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
-#: Pinta.Effects/Effects/MedianEffect.cs:37
-msgid "Noise"
-msgstr "Støj"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:26
-msgid "Fragment"
-msgstr "Fragment"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:26
-msgid "Sharpen"
-msgstr "Gør skarpere"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
-msgid "Pencil Sketch"
-msgstr "Blyant stregning"
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:29
-msgid "Outline"
-msgstr "Omrids"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
-msgid "Gaussian Blur"
-msgstr "Gaussisk sløring"
-
-#: Pinta.Effects/Effects/TileEffect.cs:26
-msgid "Tile Reflection"
-msgstr "Flise refleksion"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:45
-msgid "Relief"
-msgstr "Relief"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:26
-msgid "Emboss"
-msgstr "Præg i relief"
-
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
-msgid "Mandelbrot Fractal"
-msgstr "Mandelbrot Fraktal"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:26
-msgid "Bulge"
-msgstr "Bule"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:26
-msgid "Twist"
-msgstr "Drej"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
-msgid "Soften Portrait"
-msgstr "Blødt portræt"
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
-msgid "Reduce Noise"
-msgstr "Reducere støj"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
-msgid "Julia Fractal"
-msgstr "Julia fraktal"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:29
-msgid "Median"
-msgstr "Median"
-
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:26
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "Kurver"
-
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
-msgid "Levels"
-msgstr "Niveauer"
-
-#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
-msgid "Auto Level"
-msgstr "Auto niveau"
-
-#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
-#: SoftenPortraitData dialog
-msgid "Invert Colors"
-msgstr "Invertere farver"
-
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
-msgid "Posterize"
-msgstr "Posterisere"
-
-#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
-msgid "Black and White"
-msgstr "Sort og hvid"
-
-#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
-msgid "Hue / Saturation"
-msgstr "Nuance / Mætning"
-
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
-msgid "Sepia"
-msgstr "Sepia"
-
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Lysstyrke / Kontrast"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
-msgid "Levels Adjustment"
-msgstr "Niveauer justering"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
-msgid "Input Histogram"
-msgstr "Inddate histogram"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
-msgid "Input"
-msgstr "Inddata"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
-msgid "Output"
-msgstr "Uddata"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
-msgid "Output Histogram"
-msgstr "Uddate histogram"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
-msgid "Auto"
-msgstr "Auto"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
-msgid "Reset"
-msgstr "Nulstil"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
-msgid "Red"
-msgstr "Rød"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
-msgid "Green"
-msgstr "Grøn"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
-msgid "Blue"
-msgstr "Blå"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
-msgid "Linked"
-msgstr "Sammenkædet"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
-msgid "Transfer Map"
-msgstr "Overføre kort"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
-msgid "RGB"
-msgstr "RGB"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
-msgid "Luminosity"
-msgstr "Luminans"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
-msgid "(256, 256)"
-msgstr "(256, 256)"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
-msgid "Red  "
-msgstr "Rød  "
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
-msgid "Blue "
-msgstr "Blå "
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip: Right-click to remove control points."
+#: Pinta/Options.cs:486
+msgid "OptionName"
 msgstr ""
 
-#: Pinta.Core/Actions/LayerActions.cs:64
-#: Pinta.Core/Actions/LayerActions.cs:271
-msgid "Add New Layer"
-msgstr "Tilføj nyt lag"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "I procent"
 
-#: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:255
-msgid "Delete Layer"
-msgstr "Slet lag"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "I absolut størrelse"
 
-#: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:247
-msgid "Duplicate Layer"
-msgstr "Dupliker lag"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+msgid "Width:"
+msgstr "Bredde:"
 
-#: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:226
-msgid "Merge Layer Down"
-msgstr "Fusionere lag nedad"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+msgid "pixels"
+msgstr "billedpunkter"
 
-#: Pinta.Core/Actions/LayerActions.cs:68
-msgid "Import from File..."
-msgstr "Importere fra fil..."
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+msgid "Height:"
+msgstr "Højde:"
 
-#: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
-msgid "Flip Horizontal"
-msgstr "Vend vandret"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Bevar størrelsesforhold"
 
-#: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
-msgid "Flip Vertical"
-msgstr "Vend lodret"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Forankring:"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Rotere / Zoom"
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
+msgid "New Image Size          "
+msgstr "Ny billede størrelse          "
 
-#: Pinta.Core/Actions/LayerActions.cs:72
-#: Pinta.Core/Actions/LayerActions.cs:206
-msgid "Move Layer Up"
-msgstr "Flyt lag op"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:316
+msgid "Layer Properties"
+msgstr "Lag-egenskaber"
 
-#: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:216
-msgid "Move Layer Down"
-msgstr "Flyt lag ned"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
+msgid "Name:"
+msgstr "Navn:"
 
-#: Pinta.Core/Actions/LayerActions.cs:155
-#: Pinta.Core/Actions/FileActions.cs:276
-msgid "Open Image File"
-msgstr "Åbn billede fil"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
+msgid "Visible"
+msgstr "Synlig"
 
-#: Pinta.Core/Actions/LayerActions.cs:177
-msgid "Import From File"
-msgstr "Importere fra fil"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
+msgid "Opacity:"
+msgstr "Uigennemsighed:"
 
-#: Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Ny..."
+#: Pinta/MainWindow.cs:365 Pinta/MainWindow.cs:381
+msgid "..."
+msgstr ""
 
-#: Pinta.Core/Actions/FileActions.cs:55
-msgid "Open..."
-msgstr "Åbn..."
+#: Pinta/MainWindow.cs:450
+msgid "_File"
+msgstr "_Fil"
 
-#: Pinta.Core/Actions/FileActions.cs:56
-msgid "Open Recent"
-msgstr "Åbn seneste"
+#: Pinta/MainWindow.cs:449
+msgid "_Edit"
+msgstr "R_edigere"
 
-#: Pinta.Core/Actions/FileActions.cs:70
-msgid "Close"
-msgstr "Luk"
+#: Pinta/MainWindow.cs:451
+msgid "_View"
+msgstr "_Vis"
 
-#: Pinta.Core/Actions/FileActions.cs:71
-msgid "Save"
-msgstr "Gem"
+#: Pinta/MainWindow.cs:454
+msgid "_Image"
+msgstr "B_illede"
 
-#: Pinta.Core/Actions/FileActions.cs:72
-msgid "Save As..."
-msgstr "Gem som..."
+#: Pinta/MainWindow.cs:455
+msgid "_Layers"
+msgstr "_Lag"
 
-#: Pinta.Core/Actions/FileActions.cs:73
-msgid "Print"
-msgstr "Udskriv"
+#: Pinta/MainWindow.cs:456
+msgid "_Adjustments"
+msgstr "_Justeringer"
 
-#: Pinta.Core/Actions/FileActions.cs:74
-msgid "Quit"
-msgstr "Afslut"
+#: Pinta/MainWindow.cs:457
+msgid "Effe_cts"
+msgstr "Effe_kter"
 
-#: Pinta.Core/Actions/FileActions.cs:76
-msgid "New"
-msgstr "Ny"
+#: Pinta/MainWindow.cs:459
+msgid "_Window"
+msgstr "_Vindue"
 
-#: Pinta.Core/Actions/FileActions.cs:77
-msgid "Open"
-msgstr "Åbn"
+#: Pinta/MainWindow.cs:463
+msgid "Tool Windows"
+msgstr ""
 
-#: Pinta.Core/Actions/FileActions.cs:125
-msgid "Background"
-msgstr "Baggrund"
+#: Pinta/MainWindow.cs:467
+msgid "_Help"
+msgstr "_Hjælp"
 
-#: Pinta.Core/Actions/FileActions.cs:170
-msgid "Open Image"
-msgstr "Åbn billede"
+#: Pinta/MainWindow.cs:549 Pinta/MainWindow.cs:555
+msgid "Tools"
+msgstr "Værktøjer"
 
-#: Pinta.Core/Actions/FileActions.cs:177
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Kunne ikke åbne fil: {0}"
+#: Pinta/MainWindow.cs:578
+msgid "Documents"
+msgstr "Dokumenter"
 
-#: Pinta.Core/Actions/FileActions.cs:178
-msgid "Error"
-msgstr "Fejl"
+#: Pinta/MainWindow.cs:628 Pinta/MainWindow.cs:639
+msgid "Layers"
+msgstr "Lag"
 
-#: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr "Gem ændringer for billede \"{0}\" før åbning af nyt billede?"
+#: Pinta/MainWindow.cs:647 Pinta/MainWindow.cs:655
+msgid "History"
+msgstr "Historik"
 
-#: Pinta.Core/Actions/FileActions.cs:284
-msgid "Image files"
-msgstr "Billede filer"
+#: Pinta/DialogHandlers.cs:99
+msgid "Take Screenshot"
+msgstr ""
 
-#: Pinta.Core/Actions/FileActions.cs:288
-msgid "All files"
-msgstr "Alle filer"
+#: Pinta/DialogHandlers.cs:100
+msgid "Delay before taking a screenshot (seconds):"
+msgstr ""
 
-#: Pinta.Core/Actions/FileActions.cs:320
-msgid "Save Image File"
-msgstr "Gem billede fil"
-
-#: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "{0} billede ({1})"
-
-#: Pinta.Core/Actions/FileActions.cs:365
-msgid "OpenRaster image (*.ora)"
-msgstr "OpenRaster billede (*.ora)"
-
-#: Pinta.Core/Actions/FileActions.cs:392
+#: Pinta/DialogHandlers.cs:139
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
 msgstr "Gem ændringer for billede \"{0}\" før luk?"
 
-#: Pinta.Core/Actions/FileActions.cs:402
+#: Pinta/DialogHandlers.cs:140
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Hvis du ikke gemmer, vil ændringer være tabt."
+
+#: Pinta/DialogHandlers.cs:147
 msgid "Close without saving"
 msgstr "Afslut uden at gemme"
 
-#: Pinta.Core/Actions/ImageActions.cs:58
-#: Pinta.Core/Actions/ImageActions.cs:168
-msgid "Crop to Selection"
-msgstr "Beskær til valg"
+#: Pinta/DialogHandlers.cs:174
+msgid "Resize Palette"
+msgstr ""
 
-#: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Størrelse..."
+#: Pinta/DialogHandlers.cs:175
+msgid "New palette size:"
+msgstr ""
 
-#: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Lærred størrelse..."
+#: Pinta/DialogHandlers.cs:301
+msgid "Layer Opacity"
+msgstr "Lag uigennemsigtighed"
 
-#: Pinta.Core/Actions/ImageActions.cs:63
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr "Rotere 90° med uret"
+#: Pinta/DialogHandlers.cs:306
+msgid "Rename Layer"
+msgstr "Omdøb lag"
 
-#: Pinta.Core/Actions/ImageActions.cs:64
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Rotere 90° mod uret"
+#: Pinta/DialogHandlers.cs:311
+msgid "Hide Layer"
+msgstr "Skjul lag"
 
-#: Pinta.Core/Actions/ImageActions.cs:65
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr "Rotere 180°"
+#: Pinta/DialogHandlers.cs:311
+msgid "Show Layer"
+msgstr "Vis lag"
 
-#: Pinta.Core/Actions/ImageActions.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:121
-msgid "Flatten"
-msgstr "Udjævn"
+#: Pinta/DialogHandlers.cs:404
+msgid "Image files"
+msgstr "Billede filer"
 
-#: Pinta.Core/Actions/EditActions.cs:59
-msgid "Undo"
-msgstr "Fortryd"
+#: Pinta/DialogHandlers.cs:461
+msgid "Paste cancelled"
+msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:60
-msgid "Redo"
-msgstr "Omgør"
+#: Pinta/DialogHandlers.cs:462
+msgid "The clipboard does not contain an image"
+msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:61
-msgid "Cut"
-msgstr "Klip"
+#: Pinta/DialogHandlers.cs:495
+msgid "Save Image File"
+msgstr "Gem billede fil"
 
-#: Pinta.Core/Actions/EditActions.cs:62
-msgid "Copy"
-msgstr "Kopiere"
+#: Pinta/DialogHandlers.cs:575
+msgid "Pinta does not support saving images in this file format."
+msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
-msgid "Paste"
-msgstr "Indsæt"
+#: Pinta/DialogHandlers.cs:593
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
-msgid "Paste Into New Layer"
-msgstr "Indsæt i nyt lag"
+#: Pinta/DialogHandlers.cs:594
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:65
-msgid "Paste Into New Image"
-msgstr "Indsæt i nyt bilede"
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr "antal tråde ved rendering"
 
-#: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
-#: Pinta.Core/Actions/EditActions.cs:276
-msgid "Erase Selection"
-msgstr "Slet markering"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "Version"
 
-#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
-msgid "Fill Selection"
-msgstr "Fyld markering"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Licens"
 
-#: Pinta.Core/Actions/EditActions.cs:68
-msgid "Invert Selection"
-msgstr "Omvend markering"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Frigivet under MIT X11 Licens."
 
-#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
-msgid "Select All"
-msgstr "Vælg alle"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Copyright"
 
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
-msgid "Deselect"
-msgstr "Fravælg"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "af Pinta bidragyder"
 
-#: Pinta.Core/Actions/ViewActions.cs:62
-msgid "Zoom In"
-msgstr "Zoom ind"
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Titel"
 
-#: Pinta.Core/Actions/ViewActions.cs:63
-msgid "Zoom Out"
-msgstr "Zoom ud"
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Sti"
 
-#: Pinta.Core/Actions/ViewActions.cs:64
-msgid "Zoom to Window"
-msgstr "Zoom til vindue"
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr ""
 
-#: Pinta.Core/Actions/ViewActions.cs:65
-msgid "Zoom to Selection"
-msgstr "Zoom til markering"
+#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "Quality: "
+msgstr ""
 
-#: Pinta.Core/Actions/ViewActions.cs:66
-msgid "Actual Size"
-msgstr "Faktisk størrelse"
+#: Pinta/Dialogs/AboutDialog.cs:101
+msgid "Contributors to this Release"
+msgstr "Bidragyder til denne frigivelse"
 
-#: Pinta.Core/Actions/ViewActions.cs:67
-msgid "Pixel Grid"
-msgstr "Billedepunkter gitter"
+#: Pinta/Dialogs/AboutDialog.cs:111
+msgid "Previous Contributors"
+msgstr "Tidligere bidragyder"
 
-#: Pinta.Core/Actions/ViewActions.cs:68
-msgid "Rulers"
-msgstr "Linealer"
+#: Pinta/Dialogs/AboutDialog.cs:120
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Ole Carlsen https://launchpad.net/~ole-carlsen-web"
 
-#: Pinta.Core/Actions/ViewActions.cs:69 Pinta.Core/Actions/ViewActions.cs:75
-msgid "Pixels"
-msgstr "Billedpunkter"
+#: Pinta/Dialogs/AboutDialog.cs:123
+msgid "Translated by:"
+msgstr "Oversat af:"
 
-#: Pinta.Core/Actions/ViewActions.cs:70 Pinta.Core/Actions/ViewActions.cs:75
-msgid "Inches"
-msgstr "Tommer"
+#: Pinta/Dialogs/AboutDialog.cs:130
+msgid "Based on the work of Paint.NET:"
+msgstr "Baseret på arbejdet med Paint.NET"
 
-#: Pinta.Core/Actions/ViewActions.cs:71 Pinta.Core/Actions/ViewActions.cs:75
-msgid "Centimeters"
-msgstr "Centimeter"
+#: Pinta/Dialogs/AboutDialog.cs:137
+msgid "Using some icons from:"
+msgstr "Bruger nogle ikoner fra:"
 
-#: Pinta.Core/Actions/ViewActions.cs:72
-msgid "Fullscreen"
-msgstr "Fuldskærm"
+#: Pinta/Dialogs/AboutDialog.cs:249
+msgid "About Pinta"
+msgstr "Om Pinta"
 
-#: Pinta.Core/Actions/ViewActions.cs:190
-#: Pinta.Core/Managers/WorkspaceManager.cs:126
-#: Pinta.Core/Managers/WorkspaceManager.cs:147
-msgid "Window"
-msgstr "Vindue"
-
-#: Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr "Pinta Websted"
-
-#: Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr "Rapportere en fejl"
-
-#: Pinta.Core/Actions/HelpActions.cs:52
-msgid "Translate This Application"
-msgstr "Oversæt dette program"
-
-#: Pinta.Core/Effects/BaseEffect.cs:42
-msgid "General"
-msgstr "Generelt"
-
-#: Pinta.Core/Classes/BaseTool.cs:135
-msgid "Tool"
-msgstr "Værktøj"
-
-#: Pinta.Core/Classes/BaseTool.cs:193
-msgid "Shortcut key"
-msgstr "Genvejstast"
-
-#: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
-#: Pinta.Core/Classes/BaseTool.cs:239
-msgid "Antialiasing"
-msgstr "Udjævning"
-
-#: Pinta.Core/Classes/BaseTool.cs:218
-msgid "Normal blending / Overwrite blending"
-msgstr "Normal blanding / Overskriv blanding"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Vend billede vandret"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Vend billede lodret"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Vend lag vandret"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Vend lag lodret"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Afslut billedepunkter"
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
-msgid "Rendering Effect"
-msgstr "Optegne effekt"
-
-#: Pinta.Core/Managers/LayerManager.cs:283
-msgid "copy"
-msgstr "kopiere"
-
-#: Pinta.Core/Managers/LayerManager.cs:538
-msgid "Layer"
-msgstr "Lag"
+#: Pinta/Dialogs/AboutDialog.cs:267
+msgid "Version Info"
+msgstr "Version Info"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1447,14 +1592,37 @@ msgstr ""
 #~ msgid "%"
 #~ msgstr "%"
 
+#~ msgid "Continue without saving"
+#~ msgstr "Fortsæt uden at gemme"
+
 #~ msgid "X :"
 #~ msgstr "X :"
 
 #~ msgid "Y :"
 #~ msgstr "Y :"
 
+#~ msgid "Fill mode"
+#~ msgstr "Fyld tilstand"
+
+#~ msgid "Antialiasing"
+#~ msgstr "Udjævning"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
+#~ msgstr "Gem ændringer for billede \"{0}\" før oprettelse af nyt?"
+
 #~ msgid "Tip : Right-click to remove control points."
 #~ msgstr "Tip: Højre klik for at fjerne kontrol punkter."
+
+#~ msgid "OpenRaster image (*.ora)"
+#~ msgstr "OpenRaster billede (*.ora)"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
+#~ msgstr "Gem ændringer for billede \"{0}\" før åbning af nyt billede?"
+
+#~ msgid "Normal blending / Overwrite blending"
+#~ msgstr "Normal blanding / Overskriv blanding"
 
 #~ msgid "Show Pad"
 #~ msgstr "Vis blok"

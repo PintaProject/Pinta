@@ -7,289 +7,709 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-06-28 03:12+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"POT-Creation-Date: 2010-10-31 12:19-0500\n"
+"PO-Revision-Date: 2011-01-10 20:20+0000\n"
+"Last-Translator: ma$terok <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-10 23:16+0000\n"
+"X-Generator: Launchpad (build 12161)\n"
 
-#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
-msgid "About"
-msgstr "Про програму"
+#: Pinta.Core/Classes/DocumentWorkspace.cs:160
+#: Pinta.Core/Classes/DocumentWorkspace.cs:181
+#: Pinta.Core/Actions/ViewActions.cs:200
+msgid "Window"
+msgstr "Вікно"
 
-#: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
-msgid "Paintbrush"
-msgstr "Пензлик"
+#: Pinta.Core/Classes/Document.cs:299
+msgid "Layer"
+msgstr "Шар"
 
-#: Pinta/MainWindow.cs:259
-msgid "_File"
-msgstr "_Файл"
+#: Pinta.Core/Classes/Document.cs:367
+msgid "copy"
+msgstr "копія"
 
-#: Pinta/MainWindow.cs:260
-msgid "_Edit"
-msgstr "_Правка"
-
-#: Pinta/MainWindow.cs:261
-msgid "_View"
-msgstr "_Вигляд"
-
-#: Pinta/MainWindow.cs:262
-msgid "_Image"
-msgstr "_Малюнок"
-
-#: Pinta/MainWindow.cs:263
-msgid "_Layers"
-msgstr "_Шари"
-
-#: Pinta/MainWindow.cs:264
-msgid "_Adjustments"
-msgstr "_Кольори"
-
-#: Pinta/MainWindow.cs:265
-msgid "Effe_cts"
-msgstr "_Ефекти"
-
-#: Pinta/MainWindow.cs:266
-msgid "_Window"
-msgstr "_Вікно"
-
-#: Pinta/MainWindow.cs:267
-msgid "_Help"
-msgstr "_Допомога"
-
-#: Pinta/MainWindow.cs:272
-msgid "Tool Windows"
-msgstr ""
-
-#: Pinta/MainWindow.cs:345
-msgid "Tools"
-msgstr "Інструменти"
-
-#: Pinta/MainWindow.cs:355
-msgid "Palette"
-msgstr "Палітра"
-
-#: Pinta/MainWindow.cs:368
-msgid "Documents"
-msgstr "Документи"
-
-#: Pinta/MainWindow.cs:382
-msgid "Layers"
-msgstr "Шари"
-
-#: Pinta/MainWindow.cs:398
-msgid "History"
-msgstr "Історія"
-
-#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
-msgid "Hide"
-msgstr "Приховати"
-
-#: Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr "Прилипаючі"
-
-#: Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "Плаваючі"
-
-#: Pinta/DockLibrary/DockItem.cs:502
-#: Pinta/DockLibrary/DockItemContainer.cs:194
-msgid "Auto Hide"
-msgstr "Автоматично приховувати"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:190
-msgid "Dock"
-msgstr "Прикріпити"
-
-#: Pinta/Dialogs/AboutDialog.cs:97
-msgid "Contributors to this Release"
-msgstr "Над релізом працювали:"
-
-#: Pinta/Dialogs/AboutDialog.cs:107
-msgid "Previous Contributors"
-msgstr "Попередні розробники"
-
-#: Pinta/Dialogs/AboutDialog.cs:116
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  ma$terok https://launchpad.net/~m-shein"
-
-#: Pinta/Dialogs/AboutDialog.cs:119
-msgid "Translated by:"
-msgstr "Над перекладом працювали:"
-
-#: Pinta/Dialogs/AboutDialog.cs:126
-msgid "Based on the work of Paint.NET:"
-msgstr "Працює на базі Paint.NET"
-
-#: Pinta/Dialogs/AboutDialog.cs:133
-msgid "Using some icons from:"
-msgstr "Використовує деякі іконки з:"
-
-#: Pinta/Dialogs/AboutDialog.cs:245
-msgid "About Pinta"
-msgstr "Про Pinta"
-
-#: Pinta/Dialogs/AboutDialog.cs:263
-msgid "Version Info"
-msgstr "Інформація про версію"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Заголовок"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-msgid "Version"
-msgstr "Версія"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Шлях"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Ліцензія"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Випущено за підтримки МТІ ліцензія X11"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Авторські права"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "розробники Pinta"
-
-#: Pinta/Main.cs:67
-msgid "number of threads to use for rendering"
-msgstr "кількість потоків, що будуть використані при рендерінгу"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
-msgid "Resize Image"
-msgstr "Змінити розмір зображення"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-msgid "By percentage:"
-msgstr "У процентному співвідношенні:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-msgid "By absolute size:"
-msgstr "Абсолютний розмір"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
-msgid "Width:"
-msgstr "Ширина:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
-msgid "pixels"
-msgstr "пікселів"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
-msgid "Height:"
-msgstr "Висота:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-msgid "Maintain aspect ratio"
-msgstr "Зберігати пропорції"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
-#: Pinta.Core/Actions/LayerActions.cs:74
-msgid "Layer Properties"
-msgstr "Властивості шару"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
-msgid "Name:"
-msgstr "Ім’я:"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
-msgid "Visible"
-msgstr "Видимий"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
-msgid "Opacity:"
-msgstr "Непрозорість:"
-
+#: Pinta.Core/Classes/Document.cs:589
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Managers/WorkspaceManager.cs:218
 msgid "Resize Canvas"
 msgstr "Зміна розміру полотна"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Прив’язка:"
+#: Pinta.Core/Classes/BaseTool.cs:146
+msgid "Tool"
+msgstr "Інструменти"
 
+#: Pinta.Core/Classes/BaseTool.cs:204
+msgid "Shortcut key"
+msgstr "Гарячі клавіши"
+
+#: Pinta.Core/Classes/BaseTool.cs:227
+msgid "Normal Blending"
+msgstr "Нормальне змішування"
+
+#: Pinta.Core/Classes/BaseTool.cs:228
+msgid "Overwrite"
+msgstr "Перезаписати"
+
+#: Pinta.Core/Classes/BaseTool.cs:242
+msgid "Antialiasing On"
+msgstr "Увімкнути згладжування"
+
+#: Pinta.Core/Classes/BaseTool.cs:243
+msgid "Antialiasing Off"
+msgstr "Вимкнути згладжування"
+
+#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+msgid "Resize Image"
+msgstr "Змінити розмір зображення"
+
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Завершити пікселі"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+#: Pinta.Core/Actions/ImageActions.cs:65
+msgid "Rotate 180°"
+msgstr "Повернути на 180°"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Відобразити зображення горизонтально"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Відобразити зображення вертикально"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+#: Pinta.Core/Actions/ImageActions.cs:63
+msgid "Rotate 90° Clockwise"
+msgstr "Повернути на 90° за годинниковою стрілкою"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:64
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Повернути на 90° проти годинникової стрілки"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Відобразити шар горизонтально"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Відобразити шар вертикально"
+
+#: Pinta.Core/Effects/BaseEffect.cs:42
+msgid "General"
+msgstr "Основні"
+
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "Зображення {0}_({1})"
+
+#: Pinta.Core/Actions/ImageActions.cs:58
+#: Pinta.Core/Actions/ImageActions.cs:181
+msgid "Crop to Selection"
+msgstr "Обрізати по виділеному"
+
+#: Pinta.Core/Actions/ImageActions.cs:59
+msgid "Resize..."
+msgstr "Змінити розмір..."
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Canvas Size..."
+msgstr "Розмір полотна..."
+
+#: Pinta.Core/Actions/ImageActions.cs:61 Pinta.Core/Actions/LayerActions.cs:69
+msgid "Flip Horizontal"
+msgstr "Перевернути по горизонталі"
+
+#: Pinta.Core/Actions/ImageActions.cs:62 Pinta.Core/Actions/LayerActions.cs:70
+msgid "Flip Vertical"
+msgstr "Перевернути по вертикалі"
+
+#: Pinta.Core/Actions/ImageActions.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:127
+msgid "Flatten"
+msgstr "Об'єднати"
+
+#: Pinta.Core/Actions/ViewActions.cs:62
+msgid "Zoom In"
+msgstr "Збільшити"
+
+#: Pinta.Core/Actions/ViewActions.cs:63
+msgid "Zoom Out"
+msgstr "Зменшити"
+
+#: Pinta.Core/Actions/ViewActions.cs:64
+msgid "Zoom to Window"
+msgstr "Пристосувати до вікна"
+
+#: Pinta.Core/Actions/ViewActions.cs:65
+msgid "Zoom to Selection"
+msgstr "По розміру виділення"
+
+#: Pinta.Core/Actions/ViewActions.cs:66
+msgid "Actual Size"
+msgstr "Натуральний розмір"
+
+#: Pinta.Core/Actions/ViewActions.cs:67
+msgid "Toolbar"
+msgstr "Панель інструментів"
+
+#: Pinta.Core/Actions/ViewActions.cs:68
+msgid "Pixel Grid"
+msgstr "Піксельна решітка"
+
+#: Pinta.Core/Actions/ViewActions.cs:69
+msgid "Rulers"
+msgstr "Лінійки"
+
+#: Pinta.Core/Actions/ViewActions.cs:70
+msgid "Pixels"
+msgstr "Пікселів"
+
+#: Pinta.Core/Actions/ViewActions.cs:71
+msgid "Inches"
+msgstr "Дюйми"
+
+#: Pinta.Core/Actions/ViewActions.cs:72
+msgid "Centimeters"
+msgstr "Сантиметри"
+
+#: Pinta.Core/Actions/ViewActions.cs:73
+msgid "Fullscreen"
+msgstr "На весь екран"
+
+#: Pinta.Core/Actions/ViewActions.cs:111
+msgid "Ruler Units"
+msgstr "Одиниці виміру"
+
+#: Pinta.Core/Actions/LayerActions.cs:64
+#: Pinta.Core/Actions/LayerActions.cs:283
+msgid "Add New Layer"
+msgstr "Додати новий шар"
+
+#: Pinta.Core/Actions/LayerActions.cs:65
+#: Pinta.Core/Actions/LayerActions.cs:266
+msgid "Delete Layer"
+msgstr "Видалити шар"
+
+#: Pinta.Core/Actions/LayerActions.cs:66
+#: Pinta.Core/Actions/LayerActions.cs:257
+msgid "Duplicate Layer"
+msgstr "Копіювати шар"
+
+#: Pinta.Core/Actions/LayerActions.cs:67
+#: Pinta.Core/Actions/LayerActions.cs:235
+msgid "Merge Layer Down"
+msgstr "Обєднати шар з попереднім"
+
+#: Pinta.Core/Actions/LayerActions.cs:68
+msgid "Import from File..."
+msgstr "Імпортувати з файлу ..."
+
+#: Pinta.Core/Actions/LayerActions.cs:71
+msgid "Rotate / Zoom"
+msgstr "Поворот / Масштабування"
+
+#: Pinta.Core/Actions/LayerActions.cs:72
+#: Pinta.Core/Actions/LayerActions.cs:213
+msgid "Move Layer Up"
+msgstr "Перемістити шар вище"
+
+#: Pinta.Core/Actions/LayerActions.cs:73
+#: Pinta.Core/Actions/LayerActions.cs:224
+msgid "Move Layer Down"
+msgstr "Перемістити шар нижче"
+
+#: Pinta.Core/Actions/LayerActions.cs:74
+msgid "Layer Properties..."
+msgstr "Властивості шару..."
+
+#: Pinta.Core/Actions/LayerActions.cs:156 Pinta/DialogHandlers.cs:396
+msgid "Open Image File"
+msgstr "Відкрити зображення"
+
+#: Pinta.Core/Actions/LayerActions.cs:179
+msgid "Import From File"
+msgstr "Імпортувати з файлу"
+
+#: Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Зберегти все"
+
+#: Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "Закрити все"
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Відвідати сайт Pinta"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Звітувати про помилку"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr "Перекласти цю програму"
+
+#: Pinta.Core/Actions/HelpActions.cs:53 Pinta/MainWindow.cs:141
+msgid "About"
+msgstr "Про програму"
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Новий..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr "Новий скріншот..."
+
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
+msgid "Open..."
+msgstr "Відкрити…"
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Відкрити недавні"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Закрити"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Зберегти"
+
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
+msgid "Save As..."
+msgstr "Зберегти як…"
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Друк"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Вихід"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Новий"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Відкрити"
+
+#: Pinta.Core/Actions/EditActions.cs:65
+msgid "Undo"
+msgstr "Відмінити"
+
+#: Pinta.Core/Actions/EditActions.cs:66
+msgid "Redo"
+msgstr "Відновити"
+
+#: Pinta.Core/Actions/EditActions.cs:67
+msgid "Cut"
+msgstr "Вирізати"
+
+#: Pinta.Core/Actions/EditActions.cs:68
+msgid "Copy"
+msgstr "Копіювати"
+
+#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:251
+msgid "Paste"
+msgstr "Вставити"
+
+#: Pinta.Core/Actions/EditActions.cs:70 Pinta/DialogHandlers.cs:204
+msgid "Paste Into New Layer"
+msgstr "Вставити як новий шар"
+
+#: Pinta.Core/Actions/EditActions.cs:71
+msgid "Paste Into New Image"
+msgstr "Вставити як нове зображення"
+
+#: Pinta.Core/Actions/EditActions.cs:72 Pinta.Core/Actions/EditActions.cs:199
+#: Pinta.Core/Actions/EditActions.cs:296
+msgid "Erase Selection"
+msgstr "Видалити виділення"
+
+#: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:163
+msgid "Fill Selection"
+msgstr "Заповнити виділення"
+
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Invert Selection"
+msgstr "Інвертувати виділення"
+
+#: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:172
+msgid "Select All"
+msgstr "Виділити все"
+
+#: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:208
+msgid "Deselect"
+msgstr "Зняти виділення"
+
+#: Pinta.Core/Actions/EditActions.cs:80
+msgid "Reset to Default"
+msgstr "Початкові налаштування"
+
+#: Pinta.Core/Actions/EditActions.cs:81
+msgid "Set Number of Colors"
+msgstr "Встановіть число кольорів"
+
+#: Pinta.Core/Actions/EditActions.cs:105 Pinta/MainWindow.cs:562
+#: Pinta/MainWindow.cs:569
+msgid "Palette"
+msgstr "Палітра"
+
+#: Pinta.Core/Actions/EditActions.cs:313
+msgid "Open Palette File"
+msgstr "Відкрити палітру"
+
+#: Pinta.Core/Actions/EditActions.cs:320
+msgid "Palette files (*.txt, *.gpl)"
+msgstr "Файли палітр (*.txt, *.gpl)"
+
+#: Pinta.Core/Actions/EditActions.cs:324 Pinta/DialogHandlers.cs:408
+msgid "All files"
+msgstr "Всі файли"
+
+#: Pinta.Core/Actions/EditActions.cs:340
+#, csharp-format
+msgid ""
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
+msgstr ""
+"Не вдалося відкрити файл палітри: {0}.\n"
+"Будь-ласка, переконайтеся, що ви намагаєтеся відкрити дійсну палітру від "
+"GIMP або Paint.NET."
+
+#: Pinta.Core/Actions/EditActions.cs:341
+#: Pinta.Core/Managers/WorkspaceManager.cs:184 Pinta/DialogHandlers.cs:576
+msgid "Error"
+msgstr "Помилка"
+
+#: Pinta.Core/Actions/EditActions.cs:353
+msgid "Save Palette File"
+msgstr "Зберегти Палітру"
+
+#: Pinta.Core/Actions/EditActions.cs:359
+msgid "Paint.NET palette (*.txt)"
+msgstr "Палітра Paint.NET (*.txt)"
+
+#: Pinta.Core/Actions/EditActions.cs:364
+msgid "GIMP palette (*.gpl)"
+msgstr "Палітра GIMP (*.gpl)"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:91
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Незбережених зображень {0}"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:151
+msgid "Background"
+msgstr "Фон"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:158
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
-#: Pinta.Core/Actions/FileActions.cs:133
 msgid "New Image"
 msgstr "Нове зображення"
 
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
-msgid "New Image Size          "
-msgstr "Розмір нового зображення          "
+#: Pinta.Core/Managers/WorkspaceManager.cs:176
+msgid "Open Image"
+msgstr "Відкрити зображення"
 
-#: Pinta/DialogHandlers.cs:57
+#: Pinta.Core/Managers/WorkspaceManager.cs:183
 #, csharp-format
-msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr "Зберегти зміни в зображенні \"{0}\" перед створенням нового?"
+msgid "Could not open file: {0}"
+msgstr "Не можу відкрити файл: {0}"
 
-#: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
-#: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Якщо ви не збережете, всі зміни будуть безповоротно втрачені."
+#: Pinta.Core/Managers/LivePreviewManager.cs:220
+msgid "Rendering Effect"
+msgstr "Обробити ефекти"
 
-#: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
-#: Pinta.Core/Actions/FileActions.cs:258
-msgid "Continue without saving"
-msgstr "Продовжити без збереження"
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
+msgid "Posterize"
+msgstr "Постеризація"
 
-#: Pinta/DialogHandlers.cs:178
-msgid "Layer Opacity"
-msgstr "Непрозорість шару"
+#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
+msgid "Invert Colors"
+msgstr "Інвертувати кольори"
 
-#: Pinta/DialogHandlers.cs:183
-msgid "Rename Layer"
-msgstr "Перейменувати шар"
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
+msgid "Levels"
+msgstr "Рівні"
 
-#: Pinta/DialogHandlers.cs:188
-msgid "Hide Layer"
-msgstr "Приховати шар"
+#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
+msgid "Black and White"
+msgstr "Чорно-біле"
 
-#: Pinta/DialogHandlers.cs:188
-msgid "Show Layer"
-msgstr "Показати шар"
+#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
+msgid "Auto Level"
+msgstr "Автокорекція"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "Мітка1"
+#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
+msgid "Hue / Saturation"
+msgstr "Відтінок / Насиченість"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-msgid "label"
-msgstr "мітка"
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
+msgid "Brightness / Contrast"
+msgstr "Яскравість / контраст"
+
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
+msgid "Sepia"
+msgstr "Сепія"
+
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:28
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Curves"
+msgstr "Криві"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
+msgid "Transfer Map"
+msgstr "Карта нормалей"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
+msgid "RGB"
+msgstr "RGB"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
+msgid "Luminosity"
+msgstr "Освітленість"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
+msgid "(256, 256)"
+msgstr "(256, 256)"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
+msgid "Red  "
+msgstr "Червоний  "
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
+msgid "Green"
+msgstr "Зелений"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
+msgid "Blue "
+msgstr "Синій "
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
+msgid "Reset"
+msgstr "Скинути"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
+msgid "Tip: Right-click to remove control points."
+msgstr "Підказка: Клік правою кнопкою миші видаляє контрольні точки."
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
+msgid "Levels Adjustment"
+msgstr "Корекція рівнів"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
+msgid "Input Histogram"
+msgstr "Вхідна гістограма"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
+msgid "Input"
+msgstr "Вхід"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
+msgid "Output"
+msgstr "Вихід"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
+msgid "Output Histogram"
+msgstr "Вихідна гістограма"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
+msgid "Auto"
+msgstr "Автоматично"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
+msgid "Red"
+msgstr "Червоний"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
+msgid "Blue"
+msgstr "Синій"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
+msgid "Linked"
+msgstr "Зв'язок"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Pencil Sketch"
+msgstr "Малюнок олівцем"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
+#: Pinta.Effects/Effects/InkSketchEffect.cs:42
+msgid "Artistic"
+msgstr "Художній"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:28
+msgid "Unfocus"
+msgstr "Розфокусування"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:36
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
+#: Pinta.Effects/Effects/FragmentEffect.cs:34
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
+msgid "Blurs"
+msgstr "Розмитість"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:26
+msgid "Bulge"
+msgstr "Опуклість"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:34
+#: Pinta.Effects/Effects/PixelateEffect.cs:38
+#: Pinta.Effects/Effects/TileEffect.cs:34
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
+#: Pinta.Effects/Effects/TwistEffect.cs:34
+msgid "Distort"
+msgstr "Спотворення"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr "Множина Мандельброта"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
+#: Pinta.Effects/Effects/CloudsEffect.cs:38
+msgid "Render"
+msgstr "Обробка"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:29
+msgid "Median"
+msgstr "Медіана"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:37
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
+msgid "Noise"
+msgstr "Шум"
+
+#: Pinta.Effects/Effects/PixelateEffect.cs:26
+msgid "Pixelate"
+msgstr "Пікселізація"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:26
+msgid "Sharpen"
+msgstr "Різкість"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:34
+#: Pinta.Effects/Effects/GlowEffect.cs:39
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
+msgid "Photo"
+msgstr "Знімок"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "Картина маслом."
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
+msgid "Gaussian Blur"
+msgstr "Розмивання по Гаусу"
+
+#: Pinta.Effects/Effects/GlowEffect.cs:31
+msgid "Glow"
+msgstr "Відблиск"
+
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+msgid "Soften Portrait"
+msgstr "Пом'якшити портрет"
+
+#: Pinta.Effects/Effects/TileEffect.cs:26
+msgid "Tile Reflection"
+msgstr "Мозаїка"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
+msgid "Red Eye Removal"
+msgstr "Прибирання ефекту червоних очей"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
+msgid "Frosted Glass"
+msgstr "Матове скло"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
+msgid "Edge Detect"
+msgstr "Виділення краю"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
+#: Pinta.Effects/Effects/EmbossEffect.cs:34
+#: Pinta.Effects/Effects/ReliefEffect.cs:33
+#: Pinta.Effects/Effects/OutlineEffect.cs:37
+msgid "Stylize"
+msgstr "Стилізація"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "Фрактал Julia"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
+msgid "Motion Blur"
+msgstr "Розмивання рухом"
+
+#: Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "Чеканка"
+
+#: Pinta.Effects/Effects/InkSketchEffect.cs:34
+msgid "Ink Sketch"
+msgstr "Ескіз чорнилами"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "Збільшувальне розмивання"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "Полярна інверсія"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:30
+msgid "Clouds"
+msgstr "Хмари"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:26
+msgid "Fragment"
+msgstr "Фрагмент"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
+msgid "Reduce Noise"
+msgstr "Зменшити шум"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
+msgid "Radial Blur"
+msgstr "Радіальне розмивання"
+
+#: Pinta.Effects/Effects/TwistEffect.cs:26
+msgid "Twist"
+msgstr "Скручування"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
+msgid "Add Noise"
+msgstr "Додати шум"
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:45
+msgid "Relief"
+msgstr "Рельєф"
+
+#: Pinta.Effects/Effects/OutlineEffect.cs:29
+msgid "Outline"
+msgstr "Контур"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
@@ -298,6 +718,350 @@ msgstr "Білий шум"
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
 msgstr "Перемішати"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+msgid "label1"
+msgstr "Мітка1"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+msgid "label"
+msgstr "мітка"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
+msgid "Choose Primary Color"
+msgstr "Виберіть основний колір"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
+msgid "Choose Secondary Color"
+msgstr "Виберіть вторинний колір"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
+msgid "Choose Palette Color"
+msgstr "Оберіть палітру кольорів"
+
+#: Pinta.Tools/PanTool.cs:38
+msgid "Pan"
+msgstr "Панорама"
+
+#: Pinta.Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr "Клацніть і перетягуйте для навігації по зображенню"
+
+#: Pinta.Tools/TextTool.cs:37
+msgid "Text"
+msgstr "Текст"
+
+#: Pinta.Tools/TextTool.cs:44
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Лівою клавішею помістіть курсор в потрібне місце і наберіть текст. Текст "
+"буде основним кольром."
+
+#: Pinta.Tools/TextTool.cs:144
+msgid "Font"
+msgstr "Шрифт"
+
+#: Pinta.Tools/TextTool.cs:205
+msgid "Bold"
+msgstr "Напівжирний"
+
+#: Pinta.Tools/TextTool.cs:212
+msgid "Italic"
+msgstr "Курсив"
+
+#: Pinta.Tools/TextTool.cs:220
+msgid "Underline"
+msgstr "Підкреслений"
+
+#: Pinta.Tools/TextTool.cs:229
+msgid "Left Align"
+msgstr "Рівняння ліворуч"
+
+#: Pinta.Tools/TextTool.cs:238
+msgid "Center Align"
+msgstr "Рівняння на середину"
+
+#: Pinta.Tools/TextTool.cs:246
+msgid "Right Align"
+msgstr "Рівняння праворуч"
+
+#: Pinta.Tools/RectangleTool.cs:38
+msgid "Rectangle"
+msgstr "Прямокутник"
+
+#: Pinta.Tools/RectangleTool.cs:44
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+"За допомогою миші намалюте прямокутник (правою клавіша малює додатковим "
+"кольром). Затисніть shift, щоб намалювати квадрат."
+
+#: Pinta.Tools/FreeformShapeTool.cs:53
+msgid "Freeform Shape"
+msgstr "Довільна форма"
+
+#: Pinta.Tools/FreeformShapeTool.cs:55 Pinta.Tools/PaintBrushTool.cs:43
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Натисніть ліву клавішу, щоб малювати основним кольром і праву, щоб "
+"додатковим."
+
+#: Pinta.Tools/FreeformShapeTool.cs:71 Pinta.Tools/ShapeTool.cs:131
+msgid "Fill Style"
+msgstr "Стиль заповнення"
+
+#: Pinta.Tools/FreeformShapeTool.cs:78 Pinta.Tools/ShapeTool.cs:138
+msgid "Outline Shape"
+msgstr "Обвести фігуру"
+
+#: Pinta.Tools/FreeformShapeTool.cs:79 Pinta.Tools/ShapeTool.cs:139
+msgid "Fill Shape"
+msgstr "Залити фігуру"
+
+#: Pinta.Tools/FreeformShapeTool.cs:80 Pinta.Tools/ShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr "Залити і обвести фігуру"
+
+#: Pinta.Tools/FloodTool.cs:72
+msgid "Flood Mode"
+msgstr "Режим заливки"
+
+#: Pinta.Tools/FloodTool.cs:79
+msgid "Contiguous"
+msgstr "Суміжні області"
+
+#: Pinta.Tools/FloodTool.cs:80
+msgid "Global"
+msgstr "Глобальна"
+
+#: Pinta.Tools/FloodTool.cs:91 Pinta.Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr "Допустиме відхилення"
+
+#: Pinta.Tools/LineCurveTool.cs:38
+msgid "Line"
+msgstr "Лінія"
+
+#: Pinta.Tools/LineCurveTool.cs:44
+msgid ""
+"Left click to draw with primary color, right click for secondary color."
+msgstr "Лівою клавішею малює основним кольром а правою малює додатковим."
+
+#: Pinta.Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Переміщення виділеного"
+
+#: Pinta.Tools/MoveSelectionTool.cs:48
+msgid "Drag the selection to move selection outline."
+msgstr "Перетягніть виділення мишкою, щоб перемістити контур виділення"
+
+#: Pinta.Tools/RectangleSelectTool.cs:38
+msgid "Rectangle Select"
+msgstr "Прямокутне виділення"
+
+#: Pinta.Tools/RectangleSelectTool.cs:44
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+"За допомогою миші намалюйте прямокутне виділення. Затисніть shift, щоб "
+"намалювати квадрат."
+
+#: Pinta.Tools/MagicWandTool.cs:46
+msgid "Magic Wand Select"
+msgstr "Виділення чарівною паличкою"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Click to select region of similar color."
+msgstr "Вибрати регіон з аналогічним кольром."
+
+#: Pinta.Tools/EllipseSelectTool.cs:38
+msgid "Ellipse Select"
+msgstr "Виділення еліпсом"
+
+#: Pinta.Tools/EllipseSelectTool.cs:44
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+"За допомогою миші намалюйте еліптичне виділення. Затисніть shift, щоб "
+"намалювати коло."
+
+#: Pinta.Tools/LassoSelectTool.cs:45
+msgid "Lasso Select"
+msgstr "Виділення лассом"
+
+#: Pinta.Tools/LassoSelectTool.cs:47
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "За допомогою миші виділіть контур для вибору області."
+
+#: Pinta.Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Заливка"
+
+#: Pinta.Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Лівий клік, щоб залити основним кольором і правий клік, щоб залити "
+"додатковим кольором."
+
+#: Pinta.Tools/GradientTool.cs:65 Pinta.Tools/GradientTool.cs:176
+msgid "Gradient"
+msgstr "Градієнт"
+
+#: Pinta.Tools/GradientTool.cs:73
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+"Клацніть і перетягуйте, щоб намалювати градієнт від основного кольору до до "
+"додаткового. Правий клік, щоб зробити навпаки."
+
+#: Pinta.Tools/GradientTool.cs:183
+msgid "Linear Gradient"
+msgstr "Лінійний градієнт"
+
+#: Pinta.Tools/GradientTool.cs:184
+msgid "Linear Reflected Gradient"
+msgstr "Лінійний відображений градієнт."
+
+#: Pinta.Tools/GradientTool.cs:185
+msgid "Linear Diamond Gradient"
+msgstr "Лінійний ромбовидний градієнт"
+
+#: Pinta.Tools/GradientTool.cs:186
+msgid "Radial Gradient"
+msgstr "Радіальний градієнт"
+
+#: Pinta.Tools/GradientTool.cs:187
+msgid "Conical Gradient"
+msgstr "Конічний градієнт"
+
+#: Pinta.Tools/GradientTool.cs:195
+msgid "Mode"
+msgstr "Режим"
+
+#: Pinta.Tools/GradientTool.cs:202
+msgid "Color Mode"
+msgstr "Кольоровий режим"
+
+#: Pinta.Tools/GradientTool.cs:203
+msgid "Transparency Mode"
+msgstr "Режим прозорості"
+
+#: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
+msgid "Brush width"
+msgstr "Товщина пензля."
+
+#: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
+msgid "Decrease brush size"
+msgstr "Зменшити розмір пензля"
+
+#: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
+msgid "Increase brush size"
+msgstr "Збільшити розмір пензля"
+
+#: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:393
+msgid "Paintbrush"
+msgstr "Пензлик"
+
+#: Pinta.Tools/PaintBrushTool.cs:63
+msgid "Type"
+msgstr "Тип"
+
+#: Pinta.Tools/RecolorTool.cs:59
+msgid "Recolor"
+msgstr "Перефарбування"
+
+#: Pinta.Tools/RecolorTool.cs:61
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "Лівий клік змінює додатковий колір на основний."
+
+#: Pinta.Tools/Brushes/PlainBrush.cs:38
+msgid "Normal"
+msgstr "Нормальний"
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:38
+msgid "Circles"
+msgstr "Кола"
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:40
+msgid "Squares"
+msgstr "Квадрати"
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:38
+msgid "Splatter"
+msgstr "Бризки"
+
+#: Pinta.Tools/Brushes/GridBrush.cs:38
+msgid "Grid"
+msgstr "Сітка"
+
+#: Pinta.Tools/EllipseTool.cs:38
+msgid "Ellipse"
+msgstr "Еліпс"
+
+#: Pinta.Tools/EllipseTool.cs:44
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+"За допомогою миші намалюйте еліпс (правою клавішею додатковим кольром). "
+"Затисніть shift, щоб намалювати коло."
+
+#: Pinta.Tools/CloneStampTool.cs:43
+msgid "Clone Stamp"
+msgstr "Штамп клонування."
+
+#: Pinta.Tools/CloneStampTool.cs:48
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr ""
+"Ctrl+лівий клік мишкою для встановлення основи, лівий клік для малювання."
+
+#: Pinta.Tools/ZoomTool.cs:49
+msgid "Zoom"
+msgstr "Масштабування"
+
+#: Pinta.Tools/ZoomTool.cs:55
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Лівий клік мишкою для збільшення. Правий клік мишкою для зменшення. "
+"Натисніть і рухайте мишкою, щоб масштабувати по виділеннню."
+
+#: Pinta.Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "Округлений прямокутник"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:50
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain."
+msgstr ""
+"За допомогою миші намалюйте округлений прямокутник (права клавіша малює "
+"додатковим кольором). Затисніть shift, щоб намалювати квадрат."
+
+#: Pinta.Tools/RoundedRectangleTool.cs:83
+msgid "Radius"
+msgstr "Радіус"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:88
+msgid "Decrease rectangle's corner radius"
+msgstr "Зменшити радіус кутів прямокутника"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:102
+msgid "Increase rectangle's corner radius"
+msgstr "Збільшити радіус кутів прямокутника"
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
@@ -325,314 +1089,9 @@ msgstr "Переключитися до попереднього інструм�
 msgid "Switch to Pencil tool"
 msgstr "Переключитися до наступного інструменту"
 
-#: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
+#: Pinta.Tools/ColorPickerTool.cs:120 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr "Олівець"
-
-#: Pinta.Tools/LassoSelectTool.cs:45
-msgid "Lasso Select"
-msgstr "Виділення лассом"
-
-#: Pinta.Tools/LassoSelectTool.cs:47
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "За допомогою миші виділіть контур для вибору області."
-
-#: Pinta.Tools/ZoomTool.cs:49
-#: MandelbrotFractalEffect dialog
-#: FragmentEffect dialog
-msgid "Zoom"
-msgstr "Масштабування"
-
-#: Pinta.Tools/ZoomTool.cs:55
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-"Лівий клік мишкою для збільшення. Правий клік мишкою для зменшення. "
-"Натисніть і рухайте мишкою, щоб масштабувати по виділеннню."
-
-#: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
-msgid "Brush width"
-msgstr "Товщина пензля."
-
-#: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
-msgid "Decrease brush size"
-msgstr "Зменшити розмір пензля"
-
-#: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
-msgid "Increase brush size"
-msgstr "Збільшити розмір пензля"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Outline Shape"
-msgstr "Обвести фігуру"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill Shape"
-msgstr "Залити фігуру"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill and Outline Shape"
-msgstr "Залити і обвести фігуру"
-
-#: Pinta.Tools/MoveSelectedTool.cs:42
-msgid "Move Selected Pixels"
-msgstr "Перемістити вибрані пікселі"
-
-#: Pinta.Tools/MoveSelectedTool.cs:48
-msgid "Drag the selection to move selected content."
-msgstr "Перемістіть мишкою виділення, щоб перемістити виділену область."
-
-#: Pinta.Tools/PanTool.cs:38
-msgid "Pan"
-msgstr "Панорама"
-
-#: Pinta.Tools/PanTool.cs:44
-msgid "Click and drag to navigate image."
-msgstr "Клацніть і перетягуйте для навігації по зображенню"
-
-#: Pinta.Tools/PencilTool.cs:50
-msgid ""
-"Left click to draw freeform, one-pixel wide lines with the primary color, "
-"right click to use the secondary color."
-msgstr ""
-"Клацніть лівою клавішею для малювання довільних ліній товщиною один піксель "
-"основним кольором і правою клавішею для використання додаткового кольору."
-
-#: Pinta.Tools/EllipseSelectTool.cs:38
-msgid "Ellipse Select"
-msgstr "Виділення еліпсом"
-
-#: Pinta.Tools/EllipseSelectTool.cs:44
-msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
-"circle."
-msgstr ""
-"За допомогою миші намалюйте еліптичне виділення. Затисніть shift, щоб "
-"намалювати коло."
-
-#: Pinta.Tools/GradientTool.cs:52
-msgid "Gradient"
-msgstr "Градієнт"
-
-#: Pinta.Tools/GradientTool.cs:60
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-"Клацніть і перетягуйте, щоб намалювати градієнт від основного кольору до до "
-"додаткового. Правий клік, щоб зробити навпаки."
-
-#: Pinta.Tools/GradientTool.cs:158
-msgid "Linear Gradient"
-msgstr "Лінійний градієнт"
-
-#: Pinta.Tools/GradientTool.cs:166
-msgid "Linear Reflected Gradient"
-msgstr "Лінійний відображений градієнт."
-
-#: Pinta.Tools/GradientTool.cs:173
-msgid "Linear Diamond Gradient"
-msgstr "Лінійний ромбовидний градієнт"
-
-#: Pinta.Tools/GradientTool.cs:180
-msgid "Radial Gradient"
-msgstr "Радіальний градієнт"
-
-#: Pinta.Tools/GradientTool.cs:187
-msgid "Conical Gradient"
-msgstr "Конічний градієнт"
-
-#: Pinta.Tools/GradientTool.cs:198
-msgid "Color Mode"
-msgstr "Кольоровий режим"
-
-#: Pinta.Tools/GradientTool.cs:206
-msgid "Transparency Mode"
-msgstr "Режим прозорості"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "Округлений прямокутник"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain."
-msgstr ""
-"За допомогою миші намалюйте округлений прямокутник (права клавіша малює "
-"додатковим кольором). Затисніть shift, щоб намалювати квадрат."
-
-#: Pinta.Tools/RoundedRectangleTool.cs:77
-#: UnfocusEffect dialog
-#: MedianEffect dialog
-#: ReduceNoiseEffect dialog
-#: GlowEffect dialog
-#: FragmentEffect dialog
-msgid "Radius"
-msgstr "Радіус"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:82
-msgid "Decrease rectangle's corner radius"
-msgstr "Зменшити радіус кутів прямокутника"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:96
-msgid "Increase rectangle's corner radius"
-msgstr "Збільшити радіус кутів прямокутника"
-
-#: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-"Натисніть ліву клавішу, щоб малювати основним кольром і праву, щоб "
-"додатковим."
-
-#: Pinta.Tools/RectangleSelectTool.cs:38
-msgid "Rectangle Select"
-msgstr "Прямокутне виділення"
-
-#: Pinta.Tools/RectangleSelectTool.cs:44
-msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
-"square."
-msgstr ""
-"За допомогою миші намалюйте прямокутне виділення. Затисніть shift, щоб "
-"намалювати квадрат."
-
-#: Pinta.Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Заливка"
-
-#: Pinta.Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"Лівий клік, щоб залити основним кольором і правий клік, щоб залити "
-"додатковим кольором."
-
-#: Pinta.Tools/UnimplementedTools.cs:40
-msgid "Clone Stamp"
-msgstr "Штамп клонування."
-
-#: Pinta.Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Переміщення виділеного"
-
-#: Pinta.Tools/MoveSelectionTool.cs:48
-msgid "Drag the selection to move selection outline."
-msgstr "Перетягніть виділення мишкою, щоб перемістити контур виділення"
-
-#: Pinta.Tools/FreeformShapeTool.cs:54
-msgid "Freeform Shape"
-msgstr "Довільна форма"
-
-#: Pinta.Tools/FloodTool.cs:71
-msgid "Fill mode"
-msgstr "Режим заливки"
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Contiguous"
-msgstr "Суміжні області"
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Global"
-msgstr "Глобальна"
-
-#: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
-#: SoftenPortraitData dialog
-msgid "Tolerance"
-msgstr "Допустиме відхилення"
-
-#: Pinta.Tools/EllipseTool.cs:38
-msgid "Ellipse"
-msgstr "Еліпс"
-
-#: Pinta.Tools/EllipseTool.cs:44
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr ""
-"За допомогою миші намалюйте еліпс (правою клавішею додатковим кольром). "
-"Затисніть shift, щоб намалювати коло."
-
-#: Pinta.Tools/TextTool.cs:37
-msgid "Text"
-msgstr "Текст"
-
-#: Pinta.Tools/TextTool.cs:44
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-"Лівою клавішею помістіть курсор в потрібне місце і наберіть текст. Текст "
-"буде основним кольром."
-
-#: Pinta.Tools/TextTool.cs:131
-msgid "Font"
-msgstr "Шрифт"
-
-#: Pinta.Tools/TextTool.cs:186
-msgid "Bold"
-msgstr "Напівжирний"
-
-#: Pinta.Tools/TextTool.cs:193
-msgid "Italic"
-msgstr "Курсив"
-
-#: Pinta.Tools/TextTool.cs:201
-msgid "Underline"
-msgstr "Підкреслений"
-
-#: Pinta.Tools/TextTool.cs:210
-msgid "Left Align"
-msgstr "Рівняння ліворуч"
-
-#: Pinta.Tools/TextTool.cs:219
-msgid "Center Align"
-msgstr "Рівняння на середину"
-
-#: Pinta.Tools/TextTool.cs:227
-msgid "Right Align"
-msgstr "Рівняння праворуч"
-
-#: Pinta.Tools/MagicWandTool.cs:46
-msgid "Magic Wand Select"
-msgstr "Виділення чарівною паличкою"
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Click to select region of similar color."
-msgstr "Вибрати регіон з аналогічним кольром."
-
-#: Pinta.Tools/RectangleTool.cs:38
-msgid "Rectangle"
-msgstr "Прямокутник"
-
-#: Pinta.Tools/RectangleTool.cs:44
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr ""
-"За допомогою миші намалюте прямокутник (правою клавіша малює додатковим "
-"кольром). Затисніть shift, щоб намалювати квадрат."
-
-#: Pinta.Tools/LineCurveTool.cs:38
-msgid "Line"
-msgstr "Лінія"
-
-#: Pinta.Tools/LineCurveTool.cs:44
-msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "Лівою клавішею малює основним кольром а правою малює додатковим."
-
-#: Pinta.Tools/RecolorTool.cs:59
-msgid "Recolor"
-msgstr "Перефарбування"
-
-#: Pinta.Tools/RecolorTool.cs:61
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "Лівий клік змінює додатковий колір на основний."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -642,628 +1101,320 @@ msgstr "Гумка"
 msgid "Click and drag to erase a portion of the image."
 msgstr "Натисніть тягніть щоб стерти частину зображення."
 
-#: Pinta.Effects/Effects/PixelateEffect.cs:26
-msgid "Pixelate"
-msgstr "Пікселізація"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:38
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
-#: Pinta.Effects/Effects/TileEffect.cs:34
-#: Pinta.Effects/Effects/BulgeEffect.cs:34
-#: Pinta.Effects/Effects/TwistEffect.cs:34
-msgid "Distort"
-msgstr "Спотворення"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
-msgid "Red Eye Removal"
-msgstr "Прибирання ефекту червоних очей"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
-#: Pinta.Effects/Effects/GlowEffect.cs:39
-#: Pinta.Effects/Effects/SharpenEffect.cs:34
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
-msgid "Photo"
-msgstr "Знімок"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
-msgid "Motion Blur"
-msgstr "Розмивання рухом"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
-#: Pinta.Effects/Effects/UnfocusEffect.cs:36
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
-#: Pinta.Effects/Effects/FragmentEffect.cs:34
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
-msgid "Blurs"
-msgstr "Розмитість"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:34
-msgid "Ink Sketch"
-msgstr "Ескіз чорнилами"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:42
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
-msgid "Artistic"
-msgstr "Художній"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
-msgid "Radial Blur"
-msgstr "Радіальне розмивання"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:28
-msgid "Unfocus"
-msgstr "Розфокусування"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
-msgid "Edge Detect"
-msgstr "Виділення краю"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
-#: Pinta.Effects/Effects/OutlineEffect.cs:37
-#: Pinta.Effects/Effects/ReliefEffect.cs:33
-#: Pinta.Effects/Effects/EmbossEffect.cs:34
-msgid "Stylize"
-msgstr "Стилізація"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
-msgid "Frosted Glass"
-msgstr "Матове скло"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
-msgid "Oil Painting"
-msgstr "Картина маслом."
-
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
-msgid "Zoom Blur"
-msgstr "Збільшувальне розмивання"
-
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
-msgid "Polar Inversion"
-msgstr "Полярна інверсія"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
-msgstr "Хмари"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:38
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
-msgid "Render"
-msgstr "Обробка"
-
-#: Pinta.Effects/Effects/GlowEffect.cs:31
-msgid "Glow"
-msgstr "Відблиск"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
-msgid "Add Noise"
-msgstr "Додати шум"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
-#: Pinta.Effects/Effects/MedianEffect.cs:37
-msgid "Noise"
-msgstr "Шум"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:26
-msgid "Fragment"
-msgstr "Фрагмент"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:26
-msgid "Sharpen"
-msgstr "Різкість"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
-msgid "Pencil Sketch"
-msgstr "Малюнок олівцем"
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:29
-msgid "Outline"
-msgstr "Контур"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
-msgid "Gaussian Blur"
-msgstr "Розмивання по Гаусу"
-
-#: Pinta.Effects/Effects/TileEffect.cs:26
-msgid "Tile Reflection"
-msgstr "Мозаїка"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:45
-msgid "Relief"
-msgstr "Рельєф"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:26
-msgid "Emboss"
-msgstr "Чеканка"
-
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
-msgid "Mandelbrot Fractal"
-msgstr "Множина Мандельброта"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:26
-msgid "Bulge"
-msgstr "Опуклість"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:26
-msgid "Twist"
-msgstr "Скручування"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
-msgid "Soften Portrait"
-msgstr "Пом'якшити портрет"
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
-msgid "Reduce Noise"
-msgstr "Зменшити шум"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
-msgid "Julia Fractal"
-msgstr "Фрактал Julia"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:29
-msgid "Median"
-msgstr "Медіана"
-
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:26
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "Криві"
-
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
-msgid "Levels"
-msgstr "Рівні"
-
-#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
-msgid "Auto Level"
-msgstr "Автокорекція"
-
-#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
-#: SoftenPortraitData dialog
-msgid "Invert Colors"
-msgstr "Інвертувати кольори"
-
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
-msgid "Posterize"
-msgstr "Постеризація"
-
-#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
-msgid "Black and White"
-msgstr "Чорно-біле"
-
-#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
-msgid "Hue / Saturation"
-msgstr "Відтінок / Насиченість"
-
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
-msgid "Sepia"
-msgstr "Сепія"
-
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Яскравість / контраст"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
-msgid "Levels Adjustment"
-msgstr "Корекція рівнів"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
-msgid "Input Histogram"
-msgstr "Вхідна гістограма"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
-msgid "Input"
-msgstr "Вхід"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
-msgid "Output"
-msgstr "Вихід"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
-msgid "Output Histogram"
-msgstr "Вихідна гістограма"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
-msgid "Auto"
-msgstr "Автоматично"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
-msgid "Reset"
-msgstr "Скинути"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
-msgid "Red"
-msgstr "Червоний"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
-msgid "Green"
-msgstr "Зелений"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
-msgid "Blue"
-msgstr "Синій"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
-msgid "Linked"
-msgstr "Зв'язок"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
-msgid "Transfer Map"
-msgstr "Карта нормалей"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
-msgid "RGB"
-msgstr "RGB"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
-msgid "Luminosity"
-msgstr "Освітленість"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
-msgid "(256, 256)"
-msgstr "(256, 256)"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
-msgid "Red  "
-msgstr "Червоний  "
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
-msgid "Blue "
-msgstr "Синій "
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip: Right-click to remove control points."
+#: Pinta.Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
 msgstr ""
+"Клацніть лівою клавішею для малювання довільних ліній товщиною один піксель "
+"основним кольором і правою клавішею для використання додаткового кольору."
 
-#: Pinta.Core/Actions/LayerActions.cs:64
-#: Pinta.Core/Actions/LayerActions.cs:271
-msgid "Add New Layer"
-msgstr "Додати новий шар"
+#: Pinta.Tools/MoveSelectedTool.cs:42
+msgid "Move Selected Pixels"
+msgstr "Перемістити вибрані пікселі"
 
-#: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:255
-msgid "Delete Layer"
-msgstr "Видалити шар"
+#: Pinta.Tools/MoveSelectedTool.cs:48
+msgid "Drag the selection to move selected content."
+msgstr "Перемістіть мишкою виділення, щоб перемістити виділену область."
 
-#: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:247
-msgid "Duplicate Layer"
-msgstr "Копіювати шар"
+#: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
+msgid "Hide"
+msgstr "Приховати"
 
-#: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:226
-msgid "Merge Layer Down"
-msgstr "Обєднати шар з попереднім"
+#: Pinta/DockLibrary/DockItemContainer.cs:190
+msgid "Dock"
+msgstr "Прикріпити"
 
-#: Pinta.Core/Actions/LayerActions.cs:68
-msgid "Import from File..."
-msgstr "Імпортувати з файлу ..."
+#: Pinta/DockLibrary/DockItemContainer.cs:194
+#: Pinta/DockLibrary/DockItem.cs:502
+msgid "Auto Hide"
+msgstr "Автоматично приховувати"
 
-#: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
-msgid "Flip Horizontal"
-msgstr "Перевернути по горизонталі"
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr "Прилипаючі"
 
-#: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
-msgid "Flip Vertical"
-msgstr "Перевернути по вертикалі"
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Плаваючі"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Поворот / Масштабування"
+#: Pinta/Options.cs:486
+msgid "OptionName"
+msgstr "Назва опції"
 
-#: Pinta.Core/Actions/LayerActions.cs:72
-#: Pinta.Core/Actions/LayerActions.cs:206
-msgid "Move Layer Up"
-msgstr "Перемістити шар вище"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "У процентному співвідношенні:"
 
-#: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:216
-msgid "Move Layer Down"
-msgstr "Перемістити шар нижче"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "Абсолютний розмір"
 
-#: Pinta.Core/Actions/LayerActions.cs:155
-#: Pinta.Core/Actions/FileActions.cs:276
-msgid "Open Image File"
-msgstr "Відкрити зображення"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+msgid "Width:"
+msgstr "Ширина:"
 
-#: Pinta.Core/Actions/LayerActions.cs:177
-msgid "Import From File"
-msgstr "Імпортувати з файлу"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+msgid "pixels"
+msgstr "пікселів"
 
-#: Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Новий..."
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+msgid "Height:"
+msgstr "Висота:"
 
-#: Pinta.Core/Actions/FileActions.cs:55
-msgid "Open..."
-msgstr "Відкрити…"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Зберігати пропорції"
 
-#: Pinta.Core/Actions/FileActions.cs:56
-msgid "Open Recent"
-msgstr "Відкрити недавні"
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Прив’язка:"
 
-#: Pinta.Core/Actions/FileActions.cs:70
-msgid "Close"
-msgstr "Закрити"
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
+msgid "New Image Size          "
+msgstr "Розмір нового зображення          "
 
-#: Pinta.Core/Actions/FileActions.cs:71
-msgid "Save"
-msgstr "Зберегти"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:316
+msgid "Layer Properties"
+msgstr "Властивості шару"
 
-#: Pinta.Core/Actions/FileActions.cs:72
-msgid "Save As..."
-msgstr "Зберегти як…"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
+msgid "Name:"
+msgstr "Ім’я:"
 
-#: Pinta.Core/Actions/FileActions.cs:73
-msgid "Print"
-msgstr "Друк"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
+msgid "Visible"
+msgstr "Видимий"
 
-#: Pinta.Core/Actions/FileActions.cs:74
-msgid "Quit"
-msgstr "Вихід"
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
+msgid "Opacity:"
+msgstr "Непрозорість:"
 
-#: Pinta.Core/Actions/FileActions.cs:76
-msgid "New"
-msgstr "Новий"
+#: Pinta/MainWindow.cs:365 Pinta/MainWindow.cs:381
+msgid "..."
+msgstr "…"
 
-#: Pinta.Core/Actions/FileActions.cs:77
-msgid "Open"
-msgstr "Відкрити"
+#: Pinta/MainWindow.cs:450
+msgid "_File"
+msgstr "_Файл"
 
-#: Pinta.Core/Actions/FileActions.cs:125
-msgid "Background"
-msgstr "Фон"
+#: Pinta/MainWindow.cs:449
+msgid "_Edit"
+msgstr "_Правка"
 
-#: Pinta.Core/Actions/FileActions.cs:170
-msgid "Open Image"
-msgstr "Відкрити зображення"
+#: Pinta/MainWindow.cs:451
+msgid "_View"
+msgstr "_Вигляд"
 
-#: Pinta.Core/Actions/FileActions.cs:177
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Не можу відкрити файл: {0}"
+#: Pinta/MainWindow.cs:454
+msgid "_Image"
+msgstr "_Малюнок"
 
-#: Pinta.Core/Actions/FileActions.cs:178
-msgid "Error"
-msgstr "Помилка"
+#: Pinta/MainWindow.cs:455
+msgid "_Layers"
+msgstr "_Шари"
 
-#: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr "Зберегти зміни в зображенні \"{0}\", перш ніж відкрити нове?"
+#: Pinta/MainWindow.cs:456
+msgid "_Adjustments"
+msgstr "_Кольори"
 
-#: Pinta.Core/Actions/FileActions.cs:284
-msgid "Image files"
-msgstr "Файли зображень"
+#: Pinta/MainWindow.cs:457
+msgid "Effe_cts"
+msgstr "_Ефекти"
 
-#: Pinta.Core/Actions/FileActions.cs:288
-msgid "All files"
-msgstr "Всі файли"
+#: Pinta/MainWindow.cs:459
+msgid "_Window"
+msgstr "_Вікно"
 
-#: Pinta.Core/Actions/FileActions.cs:320
-msgid "Save Image File"
-msgstr "Зберегти зображення"
+#: Pinta/MainWindow.cs:463
+msgid "Tool Windows"
+msgstr "Вікна інструментів"
 
-#: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "Зображення {0}_({1})"
+#: Pinta/MainWindow.cs:467
+msgid "_Help"
+msgstr "_Допомога"
 
-#: Pinta.Core/Actions/FileActions.cs:365
-msgid "OpenRaster image (*.ora)"
-msgstr "Зображення OpenRaster (*.ora)"
+#: Pinta/MainWindow.cs:549 Pinta/MainWindow.cs:555
+msgid "Tools"
+msgstr "Інструменти"
 
-#: Pinta.Core/Actions/FileActions.cs:392
+#: Pinta/MainWindow.cs:578
+msgid "Documents"
+msgstr "Документи"
+
+#: Pinta/MainWindow.cs:628 Pinta/MainWindow.cs:639
+msgid "Layers"
+msgstr "Шари"
+
+#: Pinta/MainWindow.cs:647 Pinta/MainWindow.cs:655
+msgid "History"
+msgstr "Історія"
+
+#: Pinta/DialogHandlers.cs:99
+msgid "Take Screenshot"
+msgstr "Зробити Скріншот"
+
+#: Pinta/DialogHandlers.cs:100
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Зробити скріншот із затримкою (в секундах):"
+
+#: Pinta/DialogHandlers.cs:139
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
 msgstr "Зберегти зміни в зображенні \"{0}\" перед закриттям?"
 
-#: Pinta.Core/Actions/FileActions.cs:402
+#: Pinta/DialogHandlers.cs:140
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Якщо ви не збережете, всі зміни будуть безповоротно втрачені."
+
+#: Pinta/DialogHandlers.cs:147
 msgid "Close without saving"
 msgstr "Закрити без збереження"
 
-#: Pinta.Core/Actions/ImageActions.cs:58
-#: Pinta.Core/Actions/ImageActions.cs:168
-msgid "Crop to Selection"
-msgstr "Обрізати по виділеному"
+#: Pinta/DialogHandlers.cs:174
+msgid "Resize Palette"
+msgstr "Змінити розмір палітри"
 
-#: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Змінити розмір..."
+#: Pinta/DialogHandlers.cs:175
+msgid "New palette size:"
+msgstr "Новий розмір палітри"
 
-#: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Розмір полотна..."
+#: Pinta/DialogHandlers.cs:301
+msgid "Layer Opacity"
+msgstr "Непрозорість шару"
 
-#: Pinta.Core/Actions/ImageActions.cs:63
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr "Повернути на 90° за годинниковою стрілкою"
+#: Pinta/DialogHandlers.cs:306
+msgid "Rename Layer"
+msgstr "Перейменувати шар"
 
-#: Pinta.Core/Actions/ImageActions.cs:64
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Повернути на 90° проти годинникової стрілки"
+#: Pinta/DialogHandlers.cs:311
+msgid "Hide Layer"
+msgstr "Приховати шар"
 
-#: Pinta.Core/Actions/ImageActions.cs:65
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr "Повернути на 180°"
+#: Pinta/DialogHandlers.cs:311
+msgid "Show Layer"
+msgstr "Показати шар"
 
-#: Pinta.Core/Actions/ImageActions.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:121
-msgid "Flatten"
-msgstr "Об'єднати"
+#: Pinta/DialogHandlers.cs:404
+msgid "Image files"
+msgstr "Файли зображень"
 
-#: Pinta.Core/Actions/EditActions.cs:59
-msgid "Undo"
-msgstr "Відмінити"
+#: Pinta/DialogHandlers.cs:461
+msgid "Paste cancelled"
+msgstr "Вставку відмінено"
 
-#: Pinta.Core/Actions/EditActions.cs:60
-msgid "Redo"
-msgstr "Відновити"
+#: Pinta/DialogHandlers.cs:462
+msgid "The clipboard does not contain an image"
+msgstr "Буфер обміну не містить зображення"
 
-#: Pinta.Core/Actions/EditActions.cs:61
-msgid "Cut"
-msgstr "Вирізати"
+#: Pinta/DialogHandlers.cs:495
+msgid "Save Image File"
+msgstr "Зберегти зображення"
 
-#: Pinta.Core/Actions/EditActions.cs:62
-msgid "Copy"
-msgstr "Копіювати"
+#: Pinta/DialogHandlers.cs:575
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta не підтримує збереження зображень в цьому форматі."
 
-#: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
-msgid "Paste"
-msgstr "Вставити"
+#: Pinta/DialogHandlers.cs:593
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "Файл з іменем \"{0}\" вже існує. Замінити його?"
 
-#: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
-msgid "Paste Into New Layer"
-msgstr "Вставити як новий шар"
+#: Pinta/DialogHandlers.cs:594
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr "Файл вже існує в \"{1}\". Заміна призведе до перезапису його змісту."
 
-#: Pinta.Core/Actions/EditActions.cs:65
-msgid "Paste Into New Image"
-msgstr "Вставити як нове зображення"
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr "кількість потоків, що будуть використані при рендерінгу"
 
-#: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
-#: Pinta.Core/Actions/EditActions.cs:276
-msgid "Erase Selection"
-msgstr "Видалити виділення"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "Версія"
 
-#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
-msgid "Fill Selection"
-msgstr "Заповнити виділення"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Ліцензія"
 
-#: Pinta.Core/Actions/EditActions.cs:68
-msgid "Invert Selection"
-msgstr "Інвертувати виділення"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Випущено за підтримки МТІ ліцензія X11"
 
-#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
-msgid "Select All"
-msgstr "Виділити все"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Авторські права"
 
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
-msgid "Deselect"
-msgstr "Зняти виділення"
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "розробники Pinta"
 
-#: Pinta.Core/Actions/ViewActions.cs:62
-msgid "Zoom In"
-msgstr "Збільшити"
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Заголовок"
 
-#: Pinta.Core/Actions/ViewActions.cs:63
-msgid "Zoom Out"
-msgstr "Зменшити"
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Шлях"
 
-#: Pinta.Core/Actions/ViewActions.cs:64
-msgid "Zoom to Window"
-msgstr "Пристосувати до вікна"
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr "Якість JPEG"
 
-#: Pinta.Core/Actions/ViewActions.cs:65
-msgid "Zoom to Selection"
-msgstr "По розміру виділення"
+#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "Quality: "
+msgstr "Якість: "
 
-#: Pinta.Core/Actions/ViewActions.cs:66
-msgid "Actual Size"
-msgstr "Натуральний розмір"
+#: Pinta/Dialogs/AboutDialog.cs:101
+msgid "Contributors to this Release"
+msgstr "Над релізом працювали:"
 
-#: Pinta.Core/Actions/ViewActions.cs:67
-msgid "Pixel Grid"
-msgstr "Піксельна решітка"
+#: Pinta/Dialogs/AboutDialog.cs:111
+msgid "Previous Contributors"
+msgstr "Попередні розробники"
 
-#: Pinta.Core/Actions/ViewActions.cs:68
-msgid "Rulers"
-msgstr "Лінійки"
+#: Pinta/Dialogs/AboutDialog.cs:120
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  UaHummer https://launchpad.net/~uahummer\n"
+"  ma$terok https://launchpad.net/~m-shein"
 
-#: Pinta.Core/Actions/ViewActions.cs:69 Pinta.Core/Actions/ViewActions.cs:75
-msgid "Pixels"
-msgstr "Пікселів"
+#: Pinta/Dialogs/AboutDialog.cs:123
+msgid "Translated by:"
+msgstr "Над перекладом працювали:"
 
-#: Pinta.Core/Actions/ViewActions.cs:70 Pinta.Core/Actions/ViewActions.cs:75
-msgid "Inches"
-msgstr "дюйми"
+#: Pinta/Dialogs/AboutDialog.cs:130
+msgid "Based on the work of Paint.NET:"
+msgstr "Працює на базі Paint.NET"
 
-#: Pinta.Core/Actions/ViewActions.cs:71 Pinta.Core/Actions/ViewActions.cs:75
-msgid "Centimeters"
-msgstr "Сантиметри"
+#: Pinta/Dialogs/AboutDialog.cs:137
+msgid "Using some icons from:"
+msgstr "Використовує деякі іконки з:"
 
-#: Pinta.Core/Actions/ViewActions.cs:72
-msgid "Fullscreen"
-msgstr "На весь екран"
+#: Pinta/Dialogs/AboutDialog.cs:249
+msgid "About Pinta"
+msgstr "Про Pinta"
 
-#: Pinta.Core/Actions/ViewActions.cs:190
-#: Pinta.Core/Managers/WorkspaceManager.cs:126
-#: Pinta.Core/Managers/WorkspaceManager.cs:147
-msgid "Window"
-msgstr "Вікно"
-
-#: Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr "Відвідати сайт Pinta"
-
-#: Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr "Звітувати про помилку"
-
-#: Pinta.Core/Actions/HelpActions.cs:52
-msgid "Translate This Application"
-msgstr "Перекласти цю програму"
-
-#: Pinta.Core/Effects/BaseEffect.cs:42
-msgid "General"
-msgstr "Основні"
-
-#: Pinta.Core/Classes/BaseTool.cs:135
-msgid "Tool"
-msgstr "Інструменти"
-
-#: Pinta.Core/Classes/BaseTool.cs:193
-msgid "Shortcut key"
-msgstr "Гарячі клавіши"
-
-#: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
-#: Pinta.Core/Classes/BaseTool.cs:239
-msgid "Antialiasing"
-msgstr "Згладжування"
-
-#: Pinta.Core/Classes/BaseTool.cs:218
-msgid "Normal blending / Overwrite blending"
-msgstr "Нормальне змішування / Перекриваюче змішування"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Відобразити зображення горизонтально"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Відобразити зображення вертикально"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Відобразити шар горизонтально"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Відобразити шар вертикально"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Завершити пікселі"
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
-msgid "Rendering Effect"
-msgstr "Обробити ефекти"
-
-#: Pinta.Core/Managers/LayerManager.cs:283
-msgid "copy"
-msgstr "копія"
-
-#: Pinta.Core/Managers/LayerManager.cs:538
-msgid "Layer"
-msgstr "Шар"
+#: Pinta/Dialogs/AboutDialog.cs:267
+msgid "Version Info"
+msgstr "Інформація про версію"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1445,8 +1596,36 @@ msgstr ""
 "Підказка: Для досягнення кращих результатів, спершу виділіть кожно око "
 "інструментами виділення."
 
+#~ msgid "Help"
+#~ msgstr "Допомога"
+
+#~ msgid "Adjustments"
+#~ msgstr "Корекція"
+
+#~ msgid "Effects"
+#~ msgstr "Ефекти"
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Edit"
+#~ msgstr "Правка"
+
+#~ msgid "View"
+#~ msgstr "Перегляд"
+
+#~ msgid "Image"
+#~ msgstr "Зображення"
+
 #~ msgid "%"
 #~ msgstr "%"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
+#~ msgstr "Зберегти зміни в зображенні \"{0}\" перед створенням нового?"
+
+#~ msgid "Continue without saving"
+#~ msgstr "Продовжити без збереження"
 
 #~ msgid "X :"
 #~ msgstr "X :"
@@ -1457,5 +1636,24 @@ msgstr ""
 #~ msgid "Tip : Right-click to remove control points."
 #~ msgstr "Підказка: Клік правою клавішею миші видаляє контрольну точку"
 
+#~ msgid "RGB\r"
+#~ msgstr "RGB\r"
+
+#~ msgid "Antialiasing"
+#~ msgstr "Згладжування"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
+#~ msgstr "Зберегти зміни в зображенні \"{0}\", перш ніж відкрити нове?"
+
+#~ msgid "Normal blending / Overwrite blending"
+#~ msgstr "Нормальне змішування / Перекриваюче змішування"
+
+#~ msgid "Fill mode"
+#~ msgstr "Режим заливки"
+
 #~ msgid "Show Pad"
 #~ msgstr "Показати вікно"
+
+#~ msgid "OpenRaster image (*.ora)"
+#~ msgstr "Зображення OpenRaster (*.ora)"

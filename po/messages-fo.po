@@ -1,229 +1,230 @@
-# Japanese translation for pinta
+# Faroese translation for pinta
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pinta package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Gunleif Joensen <gunleif@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-10-31 12:19-0500\n"
-"PO-Revision-Date: 2010-12-15 13:56+0000\n"
-"Last-Translator: ytetsu <Unknown>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"PO-Revision-Date: 2010-11-08 19:16+0000\n"
+"Last-Translator: Gunleif Joensen <Unknown>\n"
+"Language-Team: Føroyabólkurin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-10 23:16+0000\n"
 "X-Generator: Launchpad (build 12161)\n"
+"Language: fo\n"
 
 #: Pinta.Core/Classes/DocumentWorkspace.cs:160
 #: Pinta.Core/Classes/DocumentWorkspace.cs:181
 #: Pinta.Core/Actions/ViewActions.cs:200
 msgid "Window"
-msgstr "ウィンドウ"
+msgstr "Vindeyga"
 
 #: Pinta.Core/Classes/Document.cs:299
 msgid "Layer"
-msgstr "レイヤー"
+msgstr "Lag"
 
 #: Pinta.Core/Classes/Document.cs:367
 msgid "copy"
-msgstr "コピー"
+msgstr "avrita"
 
 #: Pinta.Core/Classes/Document.cs:589
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "キャンバスサイズの変更"
+msgstr "Broyt støddina á lørifti"
 
 #: Pinta.Core/Classes/BaseTool.cs:146
 msgid "Tool"
-msgstr "ツール"
+msgstr "Amboð"
 
 #: Pinta.Core/Classes/BaseTool.cs:204
 msgid "Shortcut key"
-msgstr "ショートカットキー"
+msgstr "Snarvegsknappur"
 
 #: Pinta.Core/Classes/BaseTool.cs:227
 msgid "Normal Blending"
-msgstr "ノーマルブレンド"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:228
 msgid "Overwrite"
-msgstr "上書き"
+msgstr "Skriva oman á"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Antialiasing On"
-msgstr "アンチエイリアスの有効"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:243
 msgid "Antialiasing Off"
-msgstr "アンチエイリアスの無効"
+msgstr ""
 
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "画像サイズの変更"
+msgstr "Broyt støddina á mynd"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "ピクセル完了"
+msgstr ""
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 #: Pinta.Core/Actions/ImageActions.cs:65
 msgid "Rotate 180°"
-msgstr "180度回転"
+msgstr "Snara 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "イメージを水平方向に反転"
+msgstr "Venda mynd vannrætt"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "イメージを垂直方向に反転"
+msgstr "Venda mynd loddrætt"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:63
 msgid "Rotate 90° Clockwise"
-msgstr "90度回転 (時計回り)"
+msgstr "Snara 90° við urinum"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:64
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "90度回転 (反時計回り)"
+msgstr "Snara 90° ímóti urinum"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "レイヤーを水平方向に反転"
+msgstr "Venda lag vannrætt"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "レイヤーを垂直方向に反転"
+msgstr "Venda lag loddrætt"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
-msgstr "一般"
+msgstr "Alment"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} イメージ ({1})"
+msgstr "{0} mynd {1}"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
-msgstr "選択範囲を切り取る"
+msgstr "Skerja til úrval"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize..."
-msgstr "リサイズ..."
+msgstr "Broyt støddina"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Canvas Size..."
-msgstr "キャンバスのサイズ..."
+msgstr "Løriftsstødd..."
 
 #: Pinta.Core/Actions/ImageActions.cs:61 Pinta.Core/Actions/LayerActions.cs:69
 msgid "Flip Horizontal"
-msgstr "水平方向に反転"
+msgstr "Venda vannrætt"
 
 #: Pinta.Core/Actions/ImageActions.cs:62 Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Vertical"
-msgstr "垂直方向に反転"
+msgstr "Venda loddrætt"
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
-msgstr "フラット化"
+msgstr "Trýsta flatan"
 
 #: Pinta.Core/Actions/ViewActions.cs:62
 msgid "Zoom In"
-msgstr "拡大"
+msgstr "Surra inn"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom Out"
-msgstr "縮小"
+msgstr "Surra út"
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom to Window"
-msgstr "ウィンドウに合わせる"
+msgstr "Surra til vindeyga"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Zoom to Selection"
-msgstr "選択範囲に合わせる"
+msgstr "Surra til úrval"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Actual Size"
-msgstr "実際のサイズ"
+msgstr "Verulig stødd"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Toolbar"
-msgstr "ツールバー"
+msgstr "Amboðsstong"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Pixel Grid"
-msgstr "網目"
+msgstr "skíggjadeplanet"
 
 #: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Rulers"
-msgstr "ルーラー"
+msgstr "Linealir"
 
 #: Pinta.Core/Actions/ViewActions.cs:70
 msgid "Pixels"
-msgstr "ピクセル"
+msgstr "Skíggjadeplar"
 
 #: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Inches"
-msgstr "インチ"
+msgstr "Tummar"
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Centimeters"
-msgstr "センチメートル"
+msgstr "Sentimetrar"
 
 #: Pinta.Core/Actions/ViewActions.cs:73
 msgid "Fullscreen"
-msgstr "全画面表示"
+msgstr "Fullskíggja"
 
 #: Pinta.Core/Actions/ViewActions.cs:111
 msgid "Ruler Units"
-msgstr "ルーラーの単位"
+msgstr "Linealeindir"
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
-msgstr "新規レイヤーを追加"
+msgstr "Legg nýtt lag afturat"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
-msgstr "レイヤーを削除"
+msgstr "Strika lag"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
-msgstr "レイヤーを複製"
+msgstr "Tvífalda lag"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
-msgstr "レイヤーを統合"
+msgstr "Flætta lag niður"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr "ファイルからインポート..."
+msgstr "Flyt inn úr fílu..."
 
 #: Pinta.Core/Actions/LayerActions.cs:71
 msgid "Rotate / Zoom"
-msgstr "回転 / ズーム"
+msgstr "Snara / surra"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
-msgstr "レイヤーを上に移動"
+msgstr "Flyt lag upp"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
-msgstr "レイヤーを下に移動"
+msgstr "Flyt lag niður"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
@@ -231,153 +232,153 @@ msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:156 Pinta/DialogHandlers.cs:396
 msgid "Open Image File"
-msgstr "イメージファイルを開く"
+msgstr "Opna myndafílu"
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
-msgstr "ファイルからインポート"
+msgstr "Flyt inn úr fílu"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "すべて保存"
+msgstr "Goym alt"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "すべて閉じる"
+msgstr "Lat alt aftur"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta 公式サイト"
+msgstr "Heimasíðan hjá Pinta"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "バグの報告"
+msgstr "Send filufrásøgn"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr "このアプリケーションを翻訳"
+msgstr "Týða hesa nýtsluskipan"
 
 #: Pinta.Core/Actions/HelpActions.cs:53 Pinta/MainWindow.cs:141
 msgid "About"
-msgstr "このソフトウェアについて"
+msgstr "Um"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "新規..."
+msgstr "Nýggj..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "新規スクリーンショット..."
+msgstr "Nýggj skíggjamynd"
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
-msgstr "開く..."
+msgstr "Opna..."
 
 #: Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "最近使用したファイルを開く"
+msgstr "Opna nýliga"
 
 #: Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
-msgstr "閉じる"
+msgstr "Lat aftur"
 
 #: Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "保存"
+msgstr "Goym"
 
 #: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
 msgid "Save As..."
-msgstr "名前を付けて保存..."
+msgstr "Goym sum..."
 
 #: Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "印刷"
+msgstr "Prenta"
 
 #: Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "終了"
+msgstr "Gevst"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "新規"
+msgstr "Nýtt"
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "開く"
+msgstr "Opna"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Undo"
-msgstr "元に戻す"
+msgstr "Angra"
 
 #: Pinta.Core/Actions/EditActions.cs:66
 msgid "Redo"
-msgstr "やり直し"
+msgstr "Endurgerð"
 
 #: Pinta.Core/Actions/EditActions.cs:67
 msgid "Cut"
-msgstr "切り取り"
+msgstr "Klipp"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Copy"
-msgstr "コピー"
+msgstr "Avrita"
 
 #: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:251
 msgid "Paste"
-msgstr "貼り付け"
+msgstr "Klistra"
 
 #: Pinta.Core/Actions/EditActions.cs:70 Pinta/DialogHandlers.cs:204
 msgid "Paste Into New Layer"
-msgstr "新規レイヤーに貼り付け"
+msgstr "Klistra inn í eitt nýtt lag"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Paste Into New Image"
-msgstr "新規イメージに貼り付け"
+msgstr "Klistra inn í eina nýggja mynd"
 
 #: Pinta.Core/Actions/EditActions.cs:72 Pinta.Core/Actions/EditActions.cs:199
 #: Pinta.Core/Actions/EditActions.cs:296
 msgid "Erase Selection"
-msgstr "選択範囲を消去"
+msgstr "Strika úrval"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:163
 msgid "Fill Selection"
-msgstr "選択範囲を塗りつぶす"
+msgstr "Fyll úrval"
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Invert Selection"
-msgstr "選択範囲を反転"
+msgstr "Vend úrval øvugt"
 
 #: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:172
 msgid "Select All"
-msgstr "すべて選択"
+msgstr "Vel alt"
 
 #: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:208
 msgid "Deselect"
-msgstr "選択解除"
+msgstr "Frávelja"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr "標準設定に戻す"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr ""
+msgstr "Set tal av litum"
 
 #: Pinta.Core/Actions/EditActions.cs:105 Pinta/MainWindow.cs:562
 #: Pinta/MainWindow.cs:569
 msgid "Palette"
-msgstr "パレット"
+msgstr "Palett"
 
 #: Pinta.Core/Actions/EditActions.cs:313
 msgid "Open Palette File"
-msgstr "パレットファイルを開く"
+msgstr "Opna palettfílu"
 
 #: Pinta.Core/Actions/EditActions.cs:320
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "パレットファイル(*.txt, *.gpl)"
+msgstr "Palettfílur (*.txt, *gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:324 Pinta/DialogHandlers.cs:408
 msgid "All files"
-msgstr "すべてのファイル"
+msgstr "Allar fílur"
 
 #: Pinta.Core/Actions/EditActions.cs:340
 #, csharp-format
@@ -385,100 +386,102 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
+"Kundi ikki opna palettfíluna: {0}.\n"
+"Vinarliga vátta, at tú roynir at opna eina gilda GIMP ella Paint.NET palett."
 
 #: Pinta.Core/Actions/EditActions.cs:341
 #: Pinta.Core/Managers/WorkspaceManager.cs:184 Pinta/DialogHandlers.cs:576
 msgid "Error"
-msgstr "エラー"
+msgstr "Villa"
 
 #: Pinta.Core/Actions/EditActions.cs:353
 msgid "Save Palette File"
-msgstr ""
+msgstr "Goym palettfílu"
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "Paint.NET palett (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:364
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "GIMP palett (*.gpl)"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:91
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr ""
+msgstr "Ikki goymd fíla {0}"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:151
 msgid "Background"
-msgstr "背景色"
+msgstr "Bakgrund"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:158
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 msgid "New Image"
-msgstr "新規イメージ"
+msgstr "Nýggj mynd"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:176
 msgid "Open Image"
-msgstr "イメージを開く"
+msgstr "Opna mynd"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:183
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "ファイルを開けません: {0}"
+msgstr "Kundi ikki opna fílu: {0}"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr "効果のレンダリング"
+msgstr ""
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "ポスタリゼーション"
+msgstr ""
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "色を反転"
+msgstr "Speglvenda litir"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr "レベル"
+msgstr "Stig"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr "モノクロ"
+msgstr "Svart og hvítt"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "自動レベル補正"
+msgstr ""
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "色彩 / 彩度"
+msgstr "Dámur / mettan"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr "明度 / コントラスト"
+msgstr ""
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
-msgstr "セピア"
+msgstr "Brúnlita"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr "カーブ"
+msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr "転送マップ"
+msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr "明度"
+msgstr "Ljósmegi"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
@@ -486,21 +489,21 @@ msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr "赤  "
+msgstr "Reytt  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 msgid "Green"
-msgstr "緑"
+msgstr "Grønt"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr "青 "
+msgstr "Blátt "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 msgid "Reset"
-msgstr "リセット"
+msgstr "Tómstilla"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
@@ -508,53 +511,53 @@ msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "レベル補正"
+msgstr "Stilla styrki"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "入力ヒストグラム"
+msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "入力"
+msgstr "Inntak"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "出力"
+msgstr "Úttak"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "出力ヒストグラム"
+msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr "自動"
+msgstr "Sjálvvirkið"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr "赤"
+msgstr "Reytt"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr "青"
+msgstr "Blátt"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr "リンク済み"
+msgstr "Leinkjað"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
-msgstr "鉛筆"
+msgstr "Blýantskitsa"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:41
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 msgid "Artistic"
-msgstr "アーティスティック"
+msgstr "Listarligt"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr "アンフォーカス"
+msgstr ""
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:36
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
@@ -563,11 +566,11 @@ msgstr "アンフォーカス"
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:34
 msgid "Blurs"
-msgstr "ぼかし"
+msgstr "Kámar"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
-msgstr "ふくらみ"
+msgstr "Buggla"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:34
 #: Pinta.Effects/Effects/PixelateEffect.cs:38
@@ -576,217 +579,219 @@ msgstr "ふくらみ"
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:39
 #: Pinta.Effects/Effects/TwistEffect.cs:34
 msgid "Distort"
-msgstr "変形"
+msgstr "Reingja"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr "フラクタル"
+msgstr "Mandelbrot fraktal"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 #: Pinta.Effects/Effects/CloudsEffect.cs:38
 msgid "Render"
-msgstr "レンダリング"
+msgstr ""
 
 #: Pinta.Effects/Effects/MedianEffect.cs:29
 msgid "Median"
-msgstr "中央値"
+msgstr "Miðil"
 
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 msgid "Noise"
-msgstr "ノイズ"
+msgstr "Larmur"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
-msgstr "ピクセレート"
+msgstr "Skíggjadepla"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
-msgstr "シャープ"
+msgstr "Skerpa"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 #: Pinta.Effects/Effects/GlowEffect.cs:39
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
 msgid "Photo"
-msgstr "写真"
+msgstr "Foto"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
-msgstr "油絵"
+msgstr "Oljutekning"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr "ぼかし (ガウス)"
+msgstr "Gaussisk káma"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr "発光"
+msgstr "Glóð"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr "描写"
+msgstr "Blóðka andlitsmynd"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
-msgstr "タイルの反射"
+msgstr ""
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
-msgstr "赤目除去"
+msgstr "Reyðeyga burturtøka"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr "すりガラス"
+msgstr "Óglærað glas"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr "エッジの強調"
+msgstr "Varnast kant"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 msgid "Stylize"
-msgstr "スタイライズ"
+msgstr "Sniðger"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr "フラクタル (Julia)"
+msgstr "Julia brýtil"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
-msgstr "ぼかし (詳細)"
+msgstr "Rørslukáma"
 
 #: Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
-msgstr "エンボス"
+msgstr ""
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr "スケッチ"
+msgstr "Blekkskitsa"
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
-msgstr "ぼかし (ズーム)"
+msgstr "Surrukáma"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr "極の反転"
+msgstr ""
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr "雲"
+msgstr "Skýggj"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
-msgstr "フラグメント"
+msgstr "Petti"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr "ノイズの低減"
+msgstr "Minka um larm"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr "ぼかし (放射状)"
+msgstr ""
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr "ねじれ"
+msgstr "Reingja"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr "ノイズの追加"
+msgstr "Legg larm til"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
-msgstr "浮き彫り"
+msgstr "Framsker"
 
 #: Pinta.Effects/Effects/OutlineEffect.cs:29
 msgid "Outline"
-msgstr "アウトライン"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr "ランダムノイズ"
+msgstr "Tilvildarligur larmur"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr "シード再生成"
+msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 msgid "label1"
-msgstr "ラベル1"
+msgstr "spjaldur1"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 msgid "label"
-msgstr "ラベル"
+msgstr "spjaldur"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr ""
+msgstr "Vel grundlit"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr ""
+msgstr "Vel hjálit"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Vel palettlit"
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "Skotra"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "Klikk og drag til at flyta myndina."
 
 #: Pinta.Tools/TextTool.cs:37
 msgid "Text"
-msgstr "テキスト"
+msgstr "Tekstur"
 
 #: Pinta.Tools/TextTool.cs:44
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Vinstraklikkja til at seta vísan, síðani skriva ynskta tekstin. Tekstliturin "
+"er grundliturin."
 
 #: Pinta.Tools/TextTool.cs:144
 msgid "Font"
-msgstr "フォント"
+msgstr "Stavasnið"
 
 #: Pinta.Tools/TextTool.cs:205
 msgid "Bold"
-msgstr "太文字"
+msgstr "Feitir stavir"
 
 #: Pinta.Tools/TextTool.cs:212
 msgid "Italic"
-msgstr "斜体"
+msgstr "Skákskrift"
 
 #: Pinta.Tools/TextTool.cs:220
 msgid "Underline"
-msgstr "下線"
+msgstr "Undirstrika"
 
 #: Pinta.Tools/TextTool.cs:229
 msgid "Left Align"
-msgstr ""
+msgstr "Vinstrastilla"
 
 #: Pinta.Tools/TextTool.cs:238
 msgid "Center Align"
-msgstr ""
+msgstr "Miðstilla"
 
 #: Pinta.Tools/TextTool.cs:246
 msgid "Right Align"
-msgstr ""
+msgstr "Høgrastilla"
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "Rætthyrningur"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
@@ -806,19 +811,19 @@ msgstr ""
 
 #: Pinta.Tools/FreeformShapeTool.cs:71 Pinta.Tools/ShapeTool.cs:131
 msgid "Fill Style"
-msgstr ""
+msgstr "Fyll snið"
 
 #: Pinta.Tools/FreeformShapeTool.cs:78 Pinta.Tools/ShapeTool.cs:138
 msgid "Outline Shape"
-msgstr "輪郭を描く"
+msgstr ""
 
 #: Pinta.Tools/FreeformShapeTool.cs:79 Pinta.Tools/ShapeTool.cs:139
 msgid "Fill Shape"
-msgstr "塗りつぶす"
+msgstr ""
 
 #: Pinta.Tools/FreeformShapeTool.cs:80 Pinta.Tools/ShapeTool.cs:140
 msgid "Fill and Outline Shape"
-msgstr "塗りつぶして輪郭を描く"
+msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:72
 msgid "Flood Mode"
@@ -826,19 +831,19 @@ msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:79
 msgid "Contiguous"
-msgstr ""
+msgstr "Grannanæstur"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Global"
-msgstr ""
+msgstr "Alheimsliga"
 
 #: Pinta.Tools/FloodTool.cs:91 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
-msgstr "許容値"
+msgstr "Loyvt frávik"
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr ""
+msgstr "Lína"
 
 #: Pinta.Tools/LineCurveTool.cs:44
 msgid ""
@@ -847,7 +852,7 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "Flyt úrval"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
@@ -855,7 +860,7 @@ msgstr ""
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "Vel rætthyrning"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
@@ -865,7 +870,7 @@ msgstr ""
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr ""
+msgstr "Velja við gandastavi"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
@@ -873,35 +878,37 @@ msgstr ""
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr ""
+msgstr "Vel við ellipsu"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
-msgstr "クリック - ドラッグで楕円の選択範囲を作成します。Shift を押しながらドラッグすると正円になります。"
+msgstr ""
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "Vel við lasso"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "クリック - ドラッグで境界線を描いて選択範囲を作成します。"
+msgstr ""
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Málingaspann"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"Vinstraklikkja til at fylla økið við grundlitinum, høgraklikkja til at fylla "
+"við hjálitinum."
 
 #: Pinta.Tools/GradientTool.cs:65 Pinta.Tools/GradientTool.cs:176
 msgid "Gradient"
-msgstr "グラデーション"
+msgstr "Stigil"
 
 #: Pinta.Tools/GradientTool.cs:73
 msgid ""
@@ -911,87 +918,87 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:183
 msgid "Linear Gradient"
-msgstr "線形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:184
 msgid "Linear Reflected Gradient"
-msgstr "反射形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:185
 msgid "Linear Diamond Gradient"
-msgstr "菱形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:186
 msgid "Radial Gradient"
-msgstr "放射状グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:187
 msgid "Conical Gradient"
-msgstr "円錐形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:195
 msgid "Mode"
-msgstr ""
+msgstr "Standur"
 
 #: Pinta.Tools/GradientTool.cs:202
 msgid "Color Mode"
-msgstr "色モード"
+msgstr "Litstandur"
 
 #: Pinta.Tools/GradientTool.cs:203
 msgid "Transparency Mode"
-msgstr "透過モード"
+msgstr "Skygnistandur"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
-msgstr "ブラシサイズ"
+msgstr "Pensilsbreidd"
 
 #: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
 msgid "Decrease brush size"
-msgstr "ブラシサイズを小さくします"
+msgstr "Minka um penslabreidd"
 
 #: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
 msgid "Increase brush size"
-msgstr "ブラシサイズを大きくします"
+msgstr "Økja um penslabreidd"
 
 #: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:393
 msgid "Paintbrush"
-msgstr "ブラシで描画"
+msgstr "Pensil"
 
 #: Pinta.Tools/PaintBrushTool.cs:63
 msgid "Type"
-msgstr ""
+msgstr "Slag"
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Endurlita"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "Vinstraklikkja til at seta grundlitin, í staðin fyri hjálitin."
 
 #: Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr ""
+msgstr "Vanligt"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
-msgstr ""
+msgstr "Sirklar"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:40
 msgid "Squares"
-msgstr ""
+msgstr "Fýrakantar"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
-msgstr ""
+msgstr "Sletta"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:38
 msgid "Grid"
-msgstr ""
+msgstr "Rist"
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipsa"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
@@ -1009,29 +1016,29 @@ msgstr ""
 
 #: Pinta.Tools/ZoomTool.cs:49
 msgid "Zoom"
-msgstr "ズーム"
+msgstr "Surra"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr "左クリックのときはズームイン、右クリックのときはズームアウトします。クリック - ドラッグで選択した範囲にズームインします。"
+msgstr ""
+"Vinstraklikkja til at surra inn. Høgraklikkja til at surra út. Klikk og drag "
+"til at surra úrvalið inn."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "Rundaður rætthyrningur"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:50
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
-"クリック - ドラッグで面取り四角形を描きます。左クリックのときは前景色で、右クリックのときは背景色で描きます。Shift "
-"を押しながらドラッグすると面取り正方形になります。"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
-msgstr "半径"
+msgstr "Radius"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:88
 msgid "Decrease rectangle's corner radius"
@@ -1043,39 +1050,40 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr "スポイト"
+msgstr "Litveljari"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "左クリックで前景色、右クリックで背景色を選択。"
+msgstr ""
+"Vinstraklikkja til at seta grundlit. Høgraklikkja til at seta hjálit."
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "Eftir val"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr ""
+msgstr "Skift ikki amboð"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr "以前のツールに切り替える"
+msgstr "Skift til fyrra amboðið"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr "鉛筆ツールに切り替える"
+msgstr "Skift til blýantsamboð"
 
 #: Pinta.Tools/ColorPickerTool.cs:120 Pinta.Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr "鉛筆"
+msgstr "Blýant"
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "Viskileður"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid "Click and drag to erase a portion of the image."
-msgstr ""
+msgstr "Klikk og drag til at viska ein part av myndini."
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
@@ -1085,32 +1093,32 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "Flyt valdar skíggjadeplar"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr "ドラッグで選択範囲のピクセルを移動します。"
+msgstr "Drag úrvalið til flyt úrvalda innihald."
 
 #: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
 msgid "Hide"
-msgstr "非表示"
+msgstr "Fjal"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr "ドッキング"
+msgstr "Dokk"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 #: Pinta/DockLibrary/DockItem.cs:502
 msgid "Auto Hide"
-msgstr "自動的に隠す"
+msgstr "Sjálvfjal"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr "ドックに格納可能"
+msgstr "Dokkiført"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr "フローティング"
+msgstr "Flótandi"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
@@ -1119,18 +1127,18 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "パーセント指定:"
+msgstr "Eftir prosent:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "絶対サイズ指定:"
+msgstr "Eftir avgjørdari stødd:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
-msgstr "幅:"
+msgstr "Breidd:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
@@ -1139,42 +1147,42 @@ msgstr "幅:"
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
-msgstr "ピクセル"
+msgstr "skíggjadeplar"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
-msgstr "高さ:"
+msgstr "Hædd:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "アスペクト比を保持する"
+msgstr "Halt áskoðanarlutfall"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "アンカー:"
+msgstr "Akker:"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "新規イメージのサイズ          "
+msgstr "Nýggj myndastødd          "
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:316
 msgid "Layer Properties"
-msgstr "レイヤーのプロパティ"
+msgstr "Lag eginleikar"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr "名前:"
+msgstr "Navn:"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr "表示"
+msgstr "Sjónligt"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr "不透明度:"
+msgstr "Óskygni:"
 
 #: Pinta/MainWindow.cs:365 Pinta/MainWindow.cs:381
 msgid "..."
@@ -1182,215 +1190,214 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:450
 msgid "_File"
-msgstr "ファイル(_F)"
+msgstr "_Fíla"
 
 #: Pinta/MainWindow.cs:449
 msgid "_Edit"
-msgstr "編集(_E)"
+msgstr ""
 
 #: Pinta/MainWindow.cs:451
 msgid "_View"
-msgstr "表示(_V)"
+msgstr "_Vís"
 
 #: Pinta/MainWindow.cs:454
 msgid "_Image"
-msgstr "画像(_I)"
+msgstr ""
 
 #: Pinta/MainWindow.cs:455
 msgid "_Layers"
-msgstr "レイヤ(_L)"
+msgstr "_Løg"
 
 #: Pinta/MainWindow.cs:456
 msgid "_Adjustments"
-msgstr "調整(_A)"
+msgstr "Stilling_ar"
 
 #: Pinta/MainWindow.cs:457
 msgid "Effe_cts"
-msgstr "エフェクト(_C)"
+msgstr ""
 
 #: Pinta/MainWindow.cs:459
 msgid "_Window"
-msgstr "ウィンドウ(_W)"
+msgstr "_Vindeygu"
 
 #: Pinta/MainWindow.cs:463
 msgid "Tool Windows"
-msgstr ""
+msgstr "Amboðsvindeygu"
 
 #: Pinta/MainWindow.cs:467
 msgid "_Help"
-msgstr "ヘルプ(_H)"
+msgstr "_Hjálp"
 
 #: Pinta/MainWindow.cs:549 Pinta/MainWindow.cs:555
 msgid "Tools"
-msgstr "ツール"
+msgstr "Amboð"
 
 #: Pinta/MainWindow.cs:578
 msgid "Documents"
-msgstr "ドキュメント"
+msgstr "Skjøl"
 
 #: Pinta/MainWindow.cs:628 Pinta/MainWindow.cs:639
 msgid "Layers"
-msgstr "レイヤー"
+msgstr "Løg"
 
 #: Pinta/MainWindow.cs:647 Pinta/MainWindow.cs:655
 msgid "History"
-msgstr "履歴"
+msgstr "Søga"
 
 #: Pinta/DialogHandlers.cs:99
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Tak skíggjamynd"
 
 #: Pinta/DialogHandlers.cs:100
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "スクリーンショットを撮るまでの遅延時間（秒）："
+msgstr "Seinkan áðrenn skíggjamyndstøku (sekund):"
 
 #: Pinta/DialogHandlers.cs:139
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "閉じる前に変更を \"{0}\" に保存しますか?"
+msgstr "Goym broytingar á myndini \"{0}\" áðrenn afturlatan?"
 
 #: Pinta/DialogHandlers.cs:140
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "保存しない場合、すべての変更が失われます。"
+msgstr "Um tú ikki goymir, verða allar broytingar varandi mistar."
 
 #: Pinta/DialogHandlers.cs:147
 msgid "Close without saving"
-msgstr "保存せずに閉じる"
+msgstr "Afturlatan uttan at goyma"
 
 #: Pinta/DialogHandlers.cs:174
 msgid "Resize Palette"
-msgstr ""
+msgstr "Broyta palettstødd"
 
 #: Pinta/DialogHandlers.cs:175
 msgid "New palette size:"
-msgstr ""
+msgstr "Nýggj palletstødd:"
 
 #: Pinta/DialogHandlers.cs:301
 msgid "Layer Opacity"
-msgstr "レイヤーの不透明度"
+msgstr "Óskygni á lagnum"
 
 #: Pinta/DialogHandlers.cs:306
 msgid "Rename Layer"
-msgstr "レイヤー名を変更"
+msgstr "Nýnevn lagið"
 
 #: Pinta/DialogHandlers.cs:311
 msgid "Hide Layer"
-msgstr "レイヤーを非表示"
+msgstr "Fjal lagið"
 
 #: Pinta/DialogHandlers.cs:311
 msgid "Show Layer"
-msgstr "レイヤーを表示"
+msgstr "Sýn lagið"
 
 #: Pinta/DialogHandlers.cs:404
 msgid "Image files"
-msgstr "イメージファイル"
+msgstr "Myndafílur"
 
 #: Pinta/DialogHandlers.cs:461
 msgid "Paste cancelled"
-msgstr "貼り付けはキャンセルされました"
+msgstr "Klistran ógildað"
 
 #: Pinta/DialogHandlers.cs:462
 msgid "The clipboard does not contain an image"
-msgstr "クリップボードに画像はありません"
+msgstr "Setiborðið inniheldur onga mynd"
 
 #: Pinta/DialogHandlers.cs:495
 msgid "Save Image File"
-msgstr "イメージファイルの保存"
+msgstr "Goym myndafílu"
 
 #: Pinta/DialogHandlers.cs:575
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pintaはこの画像形式での保存をサポートしていません"
+msgstr "Pinta stuðlar ikki goymslu í hesum fílusniði."
 
 #: Pinta/DialogHandlers.cs:593
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "同名のファイル \"{0}\" があります。置き換えますか？"
+msgstr "Ein fíla nevnd \"{0}\" finst longu. Vil tú seta í staðin fyri hana?"
 
 #: Pinta/DialogHandlers.cs:594
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
+"Fílan finst longi í \"{1}\". Setur tú nakað í staðin, skrivar tú omaná "
+"innihald hennara."
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
-msgstr "レンダリングに使用するスレッド数"
+msgstr ""
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
-msgstr "バージョン"
+msgstr "Útgáva"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr "ライセンス"
+msgstr "Loyvi"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr "MIT X11 ライセンスの元で公開されました。"
+msgstr "Útgivi undir MIT X11 loyvinum."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr "著作権"
+msgstr "Upphavsrættur"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr "Pinta 貢献者"
+msgstr "Pinta stuðlar"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "タイトル"
+msgstr "Heiti"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "パス名"
+msgstr "Leið"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "JPEG 画質"
+msgstr "JPEG góðska"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
-msgstr "画質 "
+msgstr "Góðska: "
 
 #: Pinta/Dialogs/AboutDialog.cs:101
 msgid "Contributors to this Release"
-msgstr "このバージョンの貢献者"
+msgstr "Stuðulsveitarir á hesari útgávu"
 
 #: Pinta/Dialogs/AboutDialog.cs:111
 msgid "Previous Contributors"
-msgstr "過去の貢献者"
+msgstr "Fyrrverandi stuðlar"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "translator-credits"
 msgstr ""
+"This is a dummy translation so that the credits are counted as translated.\n"
+"\n"
 "Launchpad Contributions:\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Kiyotaka NISHIBORI https://launchpad.net/~ml-nishibori-kiyotaka\n"
-"  OTHUBO Jumpei https://launchpad.net/~otsubo-jumpei\n"
-"  YannUbuntu https://launchpad.net/~yannubuntu\n"
-"  Yuki Kodama https://launchpad.net/~kuy\n"
-"  ytetsu https://launchpad.net/~ytetsu"
+"  Gunleif Joensen https://launchpad.net/~gunleif"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
-msgstr "翻訳:"
+msgstr "Týtt av:"
 
 #: Pinta/Dialogs/AboutDialog.cs:130
 msgid "Based on the work of Paint.NET:"
-msgstr "Paint.NET プロジェクト:"
+msgstr "Grundað á arbeiði hjá Paint.NET:"
 
 #: Pinta/Dialogs/AboutDialog.cs:137
 msgid "Using some icons from:"
-msgstr "一部のアイコン:"
+msgstr "Nýtandi nakrar ímyndir frá:"
 
 #: Pinta/Dialogs/AboutDialog.cs:249
 msgid "About Pinta"
-msgstr "Pinta について"
+msgstr "Um Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:267
 msgid "Version Info"
-msgstr "バージョン情報"
+msgstr "Útgávukunning"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1399,7 +1406,7 @@ msgstr "バージョン情報"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr "量"
+msgstr "Mongd"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1409,219 +1416,160 @@ msgstr "量"
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr "角度"
+msgstr "Vinkul"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr "アンチエイリアス"
+msgstr ""
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr "ブレンドモード"
+msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr "輝度"
+msgstr ""
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr "ブラシのサイズ"
+msgstr "Penslastødd"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr "セルのサイズ"
+msgstr "Puntastødd"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr "中央オフセット"
+msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr "中央揃え"
+msgstr "Miðstillað"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr "粗さ"
+msgstr "Grovleiki"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr "色の範囲"
+msgstr ""
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr "彩度"
+msgstr "Litmettan"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr "色の設定"
+msgstr ""
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr "コントラスト"
+msgstr ""
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr "範囲"
+msgstr "Dekningur"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr "距離"
+msgstr "Fjarstøða"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr "境界処理"
+msgstr "Kantatburður"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr "係数"
+msgstr "Faktorur"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr "断片"
+msgstr "Petti"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "インクのアウトライン"
+msgstr ""
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr "輝度"
+msgstr "Styrki"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr "照明"
+msgstr ""
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr "オフセット"
+msgstr ""
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr "鉛筆の先端のサイズ"
+msgstr "Stødd á blýantsspíski"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr "パーセント"
+msgstr ""
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr "強さ"
+msgstr "Styrki"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr "品質"
+msgstr "Góðska"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr "回転"
+msgstr "Snúningur"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr "彩度"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr "スケール"
+msgstr "Stigmarka"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr "乱数シード"
+msgstr ""
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr "ソフトネス"
+msgstr ""
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr "強度"
+msgstr ""
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr "太さ"
+msgstr "Tjúkd"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr "タイルのサイズ"
+msgstr "Tigulstødd"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr "暖色度"
+msgstr ""
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
-msgstr "プレビューは低品質(小さいイメージ、小さい角度)を使い、最終的な出力は高品質(大きなイメージ、大きな角度)にする。"
+msgstr ""
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr "ヒント: まず目の部分を選択ツールで選択するとうまくいきます。"
-
-#~ msgid "Help"
-#~ msgstr "ヘルプ"
-
-#~ msgid "Adjustments"
-#~ msgstr "調整"
-
-#~ msgid "Effects"
-#~ msgstr "効果"
-
-#~ msgid "File"
-#~ msgstr "ファイル"
-
-#~ msgid "Edit"
-#~ msgstr "編集"
-
-#~ msgid "View"
-#~ msgstr "表示"
-
-#~ msgid "Image"
-#~ msgstr "イメージ"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Continue without saving"
-#~ msgstr "保存しないで続行"
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "RGB\r"
-#~ msgstr "RGB\r"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "ヒント : 右クリックでコントロールポイントを削除できます。"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "新規イメージを開く前に、変更を \"{0}\" に保存しますか?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "OpenRaster イメージ (*.ora)"
-
-#~ msgid "Antialiasing"
-#~ msgstr "アンチエイリアス"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "通常ブレンド / 上書きブレンド"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "新規作成の前に変更を \"{0}\" に保存しますか?"
-
-#~ msgid "Show Pad"
-#~ msgstr "パッドを表示"
+msgstr ""
