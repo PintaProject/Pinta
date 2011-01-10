@@ -5,7 +5,6 @@ BINFILES = \
 	$(BINDIR)/Pinta.Core.dll \
 	$(BINDIR)/Pinta.Gui.Widgets.dll \
 	$(BINDIR)/Pinta.Resources.dll \
-	$(BINDIR)/System.ComponentModel.Composition.dll \
 	$(BINDIR)/Extensions/Pinta.Effects.dll \
 	$(BINDIR)/Extensions/Pinta.Tools.dll
 
@@ -85,7 +84,7 @@ releasetar: $(BINFILES)
 releasezip: $(BINFILES)
 	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po Tarball System.ComponentModel.Composition xdg \
+EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po Tarball xdg \
 	license-mit.txt license-pdn.txt readme.txt todo.txt Pinta.sln Pinta.Install.proj
 
 .PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip
