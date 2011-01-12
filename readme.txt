@@ -38,6 +38,11 @@ To build Pinta, run:
 make
 sudo make install
 
+or if building from a tarball, run:
+./configure
+make
+sudo make install
+
 To use different installation directory than the default (/usr), run this instead:
 ./autogen.sh --prefix=<install directory>
 
