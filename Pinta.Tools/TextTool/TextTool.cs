@@ -391,8 +391,8 @@ namespace Pinta.Tools
 						return width;
 					}
 				}
-				(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "1";
-				return 1;
+				(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "2";
+				return 2;
 			}
 			set { (outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
 		}
