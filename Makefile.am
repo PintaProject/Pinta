@@ -5,8 +5,8 @@ BINFILES = \
 	$(BINDIR)/Pinta.Core.dll \
 	$(BINDIR)/Pinta.Gui.Widgets.dll \
 	$(BINDIR)/Pinta.Resources.dll \
-	$(BINDIR)/Extensions/Pinta.Effects.dll \
-	$(BINDIR)/Extensions/Pinta.Tools.dll
+	$(BINDIR)/Pinta.Effects.dll \
+	$(BINDIR)/Pinta.Tools.dll
 
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
