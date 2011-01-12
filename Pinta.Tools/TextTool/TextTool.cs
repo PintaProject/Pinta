@@ -60,6 +60,13 @@ namespace Pinta.Tools
 		private ToolBarToggleButton center_alignment_btn;
 		private ToolBarToggleButton Right_alignment_btn;
 		private ToolBarLabel spacer_label;
+		private ToolBarLabel fill_label;
+		private ToolBarDropDownButton fill_button;
+		private SeparatorToolItem fill_sep;
+		private ToolBarComboBox outline_width;
+		private ToolBarLabel outline_width_label;
+		private ToolBarButton outline_width_minus;
+		private ToolBarButton outline_width_plus;
 
 		protected void RenderFont (Gtk.CellLayout layout, Gtk.CellRenderer renderer, Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
@@ -154,6 +161,57 @@ namespace Pinta.Tools
 			}
 			
 			tb.AppendItem (Right_alignment_btn);
+
+			if (fill_sep == null)
+				fill_sep = new Gtk.SeparatorToolItem ();
+
+			tb.AppendItem (fill_sep);
+
+			if (fill_label == null)
+				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Text Style")));
+
+			tb.AppendItem (fill_label);
+
+			if (fill_button == null) {
+				fill_button = new ToolBarDropDownButton ();
+
+				fill_button.AddItem (Catalog.GetString ("Normal"), "ShapeTool.Fill.png", 0);
+				fill_button.AddItem (Catalog.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
+				fill_button.AddItem (Catalog.GetString ("Outline"), "ShapeTool.Outline.png", 2);
+
+				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
+			}
+
+			tb.AppendItem (fill_button);
+
+			if (outline_width_label == null)
+				outline_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Outline width")));
+
+			tb.AppendItem (outline_width_label);
+
+			if (outline_width_minus == null) {
+				outline_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease outline size"));
+				outline_width_minus.Clicked += MinusButtonClickedEvent;
+			}
+
+			tb.AppendItem (outline_width_minus);
+
+			if (outline_width == null) {
+				outline_width = new ToolBarComboBox (65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
+				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
+				"40", "45", "50", "55");
+
+				(outline_width.Child as ComboBoxEntry).Changed += HandleBoldButtonToggled;
+			}
+
+			tb.AppendItem (outline_width);
+
+			if (outline_width_plus == null) {
+				outline_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase outline size"));
+				outline_width_plus.Clicked += PlusButtonClickedEvent;
+			}
+
+			tb.AppendItem (outline_width_plus);
 
 			UpdateFontSizes ();
 		}
@@ -312,6 +370,35 @@ namespace Pinta.Tools
 			if (is_editing)
 				RedrawText (true, true);
 		}
+
+		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
+		{
+			if (OutlineWidth > 1)
+				OutlineWidth--;
+		}
+
+		protected virtual void PlusButtonClickedEvent (object o, EventArgs args)
+		{
+			OutlineWidth++;
+		}
+
+		protected int OutlineWidth {
+			get {
+				int width;
+				if (Int32.TryParse (outline_width.ComboBox.ActiveText, out width)) {
+					if (width > 0) {
+						(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString ();
+						return width;
+					}
+				}
+				(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "1";
+				return 1;
+			}
+			set { (outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
+		}
+
+		protected bool StrokeText { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
+		protected bool FillText { get { return (int)fill_button.SelectedItem.Tag <= 1; } }
 		#endregion
 
 		#region Activation/Deactivation
@@ -321,6 +408,7 @@ namespace Pinta.Tools
 			
 			// We may need to redraw our text when the color changes
 			PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
+			PintaCore.Palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 			
 			// We always start off not in edit mode
 			is_editing = false;
@@ -337,6 +425,7 @@ namespace Pinta.Tools
 
 			// Stop listening for color change events
 			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+			PintaCore.Palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 			
 			StopEditing ();
 		}
@@ -579,7 +668,22 @@ namespace Pinta.Tools
 				g.Color = PintaCore.Palette.PrimaryColor;
 
 				// Draw the text
-				Pango.CairoHelper.ShowLayout (g, engine.Layout);
+				if (FillText)
+					Pango.CairoHelper.ShowLayout (g, engine.Layout);
+
+				if (FillText && StrokeText) {
+					g.Color = PintaCore.Palette.SecondaryColor;
+					g.LineWidth = OutlineWidth;
+
+					Pango.CairoHelper.LayoutPath (g, engine.Layout);
+					g.Stroke ();
+				} else if (StrokeText) {
+					g.Color = PintaCore.Palette.PrimaryColor;
+					g.LineWidth = OutlineWidth;
+
+					Pango.CairoHelper.LayoutPath (g, engine.Layout);
+					g.Stroke ();
+				}
 
 				if (showCursor) {
 					var loc = engine.GetCursorLocation ();
