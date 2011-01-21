@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define ProductShortName = "Pinta" ?>
+<?define ProductVersion = "0.6.0" ?>
+<?define ProductVersionText = "0.6" ?>
+<?define Manufacturer = "Pinta Community" ?>
+<?define UpgradeCode = "C0BCDEDA-62E7-4A43-8435-58323E096912" ?>
+
+<?define BuildRoot= "..\bin" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="$(var.ProductShortName) $(var.ProductVersionText)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+    <Package InstallerVersion="200" Compressed="yes" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <!-- Ensure GTK# 2.12.9+ is installed -->
+    <Property Id="GTKSHARPVERSION">
+      <RegistrySearch Id="gsversion" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\Version" Type="raw" />
+    </Property>
+    <Condition Message="Gtk# version 2.12.9 or greater must be installed.">
+      <![CDATA[GTKSHARPVERSION >= "2.12.9" OR (GTKSHARPVERSION << "2.12.1" AND GTKSHARPVERSION <> "2.12.1") OR REMOVE ~= "ALL"]]>
+    </Condition>
+
+    <!-- Ensure .Net 3.5 is installed -->
+    <PropertyRef Id="NETFRAMEWORK35" />
+    <Condition Message="This setup requires the .NET Framework 3.5 to be installed.">
+      Installed OR NETFRAMEWORK35
+    </Condition>
+
+    <!-- Get the GTK# install directory -->
+    <Property Id="GTKSHARPPATH">
+      <RegistrySearch Id="gspath" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\InstallFolder" Type="raw" />
+    </Property>
+
+    <!-- Major upgrade -->
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" Maximum="$(var.ProductVersion)" IncludeMinimum="yes" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="Pinta">
+          <Component Id="ProductComponent" Guid="7D5ABDF1-2CCE-4A74-8AFE-A06237D783AB">
+            <!-- Executable with Start Menu Icon -->
+            <File Name="Pinta.exe" Source="$(var.BuildRoot)\Pinta.exe">
+              <Shortcut Id="pinta_shortcut" Directory="ProgramMenuDir" Name="$(var.ProductShortName)" Icon="Pinta.exe" IconIndex="0" Advertise="yes" />
+            </File>
+
+            <!-- Additional Assemblies -->
+            <File Name="Pinta.Core.dll" Source="$(var.BuildRoot)\Pinta.Core.dll" />
+            <File Name="Pinta.Gui.Widgets.dll" Source="$(var.BuildRoot)\Pinta.Gui.Widgets.dll" />
+            <File Name="Pinta.Resources.dll" Source="$(var.BuildRoot)\Pinta.Resources.dll" />
+            <File Name="ICSharpCode.SharpZipLib.dll" Source="$(var.BuildRoot)\ICSharpCode.SharpZipLib.dll" />
+            <File Name="System.ComponentModel.Composition.dll" Source="$(var.BuildRoot)\System.ComponentModel.Composition.dll" />
+
+            <!-- Debug Symbols -->
+            <File Name="Pinta.pdb" Source="$(var.BuildRoot)\Pinta.pdb" />
+            <File Name="Pinta.Core.pdb" Source="$(var.BuildRoot)\Pinta.Core.pdb" />
+            <File Name="Pinta.Gui.Widgets.pdb" Source="$(var.BuildRoot)\Pinta.Gui.Widgets.pdb" />
+            <File Name="Pinta.Resources.pdb" Source="$(var.BuildRoot)\Pinta.Resources.pdb" />
+            <File Name="System.ComponentModel.Composition.pdb" Source="$(var.BuildRoot)\System.ComponentModel.Composition.pdb" />
+
+            <!-- Program Menu Shortcut -->
+            <RemoveFolder Id='ProgramMenuDir' Directory="ProgramMenuDir" On='uninstall' />
+          </Component>
+
+          <!-- Extensions-->
+          <Directory Id="Extensions" Name="Extensions">
+            <Component Id="ExtensionsComp" Guid="A6C05439-FCFF-4155-8A99-65AE373B77A0">
+              <File Name="Pinta.Tools.dll" Source="$(var.BuildRoot)\Extensions\Pinta.Tools.dll" />
+              <File Name="Pinta.Effects.dll" Source="$(var.BuildRoot)\Extensions\Pinta.Effects.dll" />
+              <File Name="Pinta.Tools.pdb" Source="$(var.BuildRoot)\Extensions\Pinta.Tools.pdb" />
+              <File Name="Pinta.Effects.pdb" Source="$(var.BuildRoot)\Extensions\Pinta.Effects.pdb" />
+            </Component>
+          </Directory>
+
+          <!--
+          <Directory Id="locale" Name="locale">
+            <Directory Id="ar" Name="ar">
+              <Directory Id="LC_MESSAGES_AR" Name='LC_MESSAGES'>
+                <Component Id="ArTranslation" Guid="42CCCE42-11DD-4C9E-AFE7-4037F32F971D">
+                  <File Id="pinta_ar" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ar\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="br" Name="br">
+              <Directory Id="LC_MESSAGES_BR" Name='LC_MESSAGES'>
+                <Component Id="BrTranslation" Guid="196B021E-309C-4A2E-94DA-AA17512A709B">
+                  <File Id="pinta_br" Name="pinta.mo" Source="$(var.BuildRoot)\locale\br\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="ca" Name='ca'>
+              <Directory Id="LC_MESSAGES_CA" Name='LC_MESSAGES'>
+                <Component Id="CaTranslation" Guid="0FF46F28-0348-48D9-9321-168077CAF1AE">
+                  <File Id="pinta_ca" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ca\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="cs" Name='cs'>
+              <Directory Id="LC_MESSAGES_CS" Name='LC_MESSAGES'>
+                <Component Id="CsTranslation" Guid="E34F5B21-175F-4403-8FA7-A4A626F0A6D4">
+                  <File Id="pinta_cs" Name="pinta.mo" Source="$(var.BuildRoot)\locale\cs\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="da" Name='da'>
+              <Directory Id="LC_MESSAGES_DA" Name='LC_MESSAGES'>
+                <Component Id="DaTranslation" Guid="3891256E-7A0C-4A26-872A-C7EBA14A87D8">
+                  <File Id="pinta_da" Name="pinta.mo" Source="$(var.BuildRoot)\locale\da\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="de" Name='de'>
+              <Directory Id="LC_MESSAGES_DE" Name='LC_MESSAGES'>
+                <Component Id="DeTranslation" Guid="F98414D7-8AE0-461B-B9EB-219DCE5284C4">
+                  <File Id="pinta_de" Name="pinta.mo" Source="$(var.BuildRoot)\locale\de\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="el" Name='el'>
+              <Directory Id="LC_MESSAGES_EL" Name='LC_MESSAGES'>
+                <Component Id="ElTranslation" Guid="E87E32A6-3546-41D8-8E91-2CFB12810254">
+                  <File Id="pinta_el" Name="pinta.mo" Source="$(var.BuildRoot)\locale\el\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="en_gb" Name='en_GB'>
+              <Directory Id="LC_MESSAGES_EN_GB" Name='LC_MESSAGES'>
+                <Component Id="EnGbTranslation" Guid="32265FEE-4D87-42CF-9848-CE449F9944CF">
+                  <File Id="pinta_en_gb" Name="pinta.mo" Source="$(var.BuildRoot)\locale\en_GB\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="es" Name='es'>
+              <Directory Id="LC_MESSAGES_ES" Name='LC_MESSAGES'>
+                <Component Id="EsTranslation" Guid="E5C85E52-046F-41EF-8DFF-576FE9DCF8A9">
+                  <File Id="pinta_es" Name="pinta.mo" Source="$(var.BuildRoot)\locale\es\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="eu" Name='eu'>
+              <Directory Id="LC_MESSAGES_EU" Name='LC_MESSAGES'>
+                <Component Id="EuTranslation" Guid="65080F25-35D3-4D29-BE78-A204E6B669C6">
+                  <File Id="pinta_eu" Name="pinta.mo" Source="$(var.BuildRoot)\locale\eu\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="fi" Name='fi'>
+              <Directory Id="LC_MESSAGES_FI" Name='LC_MESSAGES'>
+                <Component Id="FiTranslation" Guid="FD5A27FF-FE70-4CC4-9401-183E6EEAE79B">
+                  <File Id="pinta_fi" Name="pinta.mo" Source="$(var.BuildRoot)\locale\fi\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="fo" Name='fo'>
+              <Directory Id="LC_MESSAGES_FO" Name='LC_MESSAGES'>
+                <Component Id="FoTranslation" Guid="E52FE762-D62C-4B20-BB9B-F29666A9FFD4">
+                  <File Id="pinta_fo" Name="pinta.mo" Source="$(var.BuildRoot)\locale\fo\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="fr" Name='fr'>
+              <Directory Id="LC_MESSAGES_FR" Name='LC_MESSAGES'>
+                <Component Id="FrTranslation" Guid="7108526E-386E-4B4F-88DD-27A55DF5C322">
+                  <File Id="pinta_fr" Name="pinta.mo" Source="$(var.BuildRoot)\locale\fr\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="ga" Name='ga'>
+              <Directory Id="LC_MESSAGES_GA" Name='LC_MESSAGES'>
+                <Component Id="GaTranslation" Guid="404F60EE-DD26-4F01-A613-84477D9B06A7">
+                  <File Id="pinta_ga" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ga\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="gl" Name='gl'>
+              <Directory Id="LC_MESSAGES_GL" Name='LC_MESSAGES'>
+                <Component Id="GlTranslation" Guid="7BB516E8-10B7-4D74-9E0F-831CFDE496EA">
+                  <File Id="pinta_gl" Name="pinta.mo" Source="$(var.BuildRoot)\locale\gl\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="he" Name='he'>
+              <Directory Id="LC_MESSAGES_HE" Name='LC_MESSAGES'>
+                <Component Id="HeTranslation" Guid="9C765381-4B63-499F-82A5-208C0E6799D3">
+                  <File Id="pinta_he" Name="pinta.mo" Source="$(var.BuildRoot)\locale\he\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="hr" Name='hr'>
+              <Directory Id="LC_MESSAGES_HR" Name='LC_MESSAGES'>
+                <Component Id="HrTranslation" Guid="BF9F0237-C18E-4FED-B108-03066087B0D5">
+                  <File Id="pinta_hr" Name="pinta.mo" Source="$(var.BuildRoot)\locale\hr\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="hy" Name='hy'>
+              <Directory Id="LC_MESSAGES_HY" Name='LC_MESSAGES'>
+                <Component Id="HyTranslation" Guid="D88AA8FE-A4E0-4156-B96F-B122A9042702">
+                  <File Id="pinta_hy" Name="pinta.mo" Source="$(var.BuildRoot)\locale\hy\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="id" Name='id'>
+              <Directory Id="LC_MESSAGES_ID" Name='LC_MESSAGES'>
+                <Component Id="IdTranslation" Guid="79B75681-4F09-4F3E-9FD7-055706B686DF">
+                  <File Id="pinta_id" Name="pinta.mo" Source="$(var.BuildRoot)\locale\id\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="it" Name='it'>
+              <Directory Id="LC_MESSAGES_IT" Name='LC_MESSAGES'>
+                <Component Id="ItTranslation" Guid="B0C5EB19-C586-4980-941D-8DDC510A3FBA">
+                  <File Id="pinta_it" Name="pinta.mo" Source="$(var.BuildRoot)\locale\it\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="ja" Name='ja'>
+              <Directory Id="LC_MESSAGES_JA" Name='LC_MESSAGES'>
+                <Component Id="JaTranslation" Guid="67C2D595-1B88-477A-8FC2-9192EEC63690">
+                  <File Id="pinta_ja" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ja\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="ko" Name='ko'>
+              <Directory Id="LC_MESSAGES_KO" Name='LC_MESSAGES'>
+                <Component Id="KoTranslation" Guid="A9F2C3D8-9F48-4F1F-A262-94CAA8A7D982">
+                  <File Id="pinta_ko" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ko\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="lt" Name='lt'>
+              <Directory Id="LC_MESSAGES_LT" Name='LC_MESSAGES'>
+                <Component Id="LtTranslation" Guid="DC609476-C501-421D-8958-06DF5E420142">
+                  <File Id="pinta_lt" Name="pinta.mo" Source="$(var.BuildRoot)\locale\lt\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="nb" Name='nb'>
+              <Directory Id="LC_MESSAGES_NB" Name='LC_MESSAGES'>
+                <Component Id="NbTranslation" Guid="38C6EEB1-88CB-4ECA-BBDF-7F07C9114091">
+                  <File Id="pinta_nb" Name="pinta.mo" Source="$(var.BuildRoot)\locale\nb\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="nl" Name='nl'>
+              <Directory Id="LC_MESSAGES_NL" Name='LC_MESSAGES'>
+                <Component Id="NlTranslation" Guid="F8FFA0A4-40A7-4A0E-8E75-ACBCAE53CE56">
+                  <File Id="pinta_nl" Name="pinta.mo" Source="$(var.BuildRoot)\locale\nl\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="pl" Name='pl'>
+              <Directory Id="LC_MESSAGES_PL" Name='LC_MESSAGES'>
+                <Component Id="PlTranslation" Guid="5BEABE4B-B297-40F3-B211-EC43933BE52B">
+                  <File Id="pinta_pl" Name="pinta.mo" Source="$(var.BuildRoot)\locale\pl\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="pt" Name='pt'>
+              <Directory Id="LC_MESSAGES_PT" Name='LC_MESSAGES'>
+                <Component Id="PtTranslation" Guid="4F2EAD1F-A276-47B2-B591-90BE77A9B87F">
+                  <File Id="pinta_pt" Name="pinta.mo" Source="$(var.BuildRoot)\locale\pt\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="pt_BR" Name='pt_BR'>
+              <Directory Id="LC_MESSAGES_PT_BR" Name='LC_MESSAGES'>
+                <Component Id="PtBrTranslation" Guid="FD8FF383-5B2F-4302-951A-4B2E8923397B">
+                  <File Id="pinta_ptbr" Name="pinta.mo" Source="$(var.BuildRoot)\locale\pt_BR\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="ro" Name='ro'>
+              <Directory Id="LC_MESSAGES_RO" Name='LC_MESSAGES'>
+                <Component Id="RoTranslation" Guid="CA26C662-114D-48B9-889A-AE2710097BE2">
+                  <File Id="pinta_ro" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ro\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="ru" Name='ru'>
+              <Directory Id="LC_MESSAGES_RU" Name='LC_MESSAGES'>
+                <Component Id="RuTranslation" Guid="BF208BE8-3987-4132-875C-EE097416D675">
+                  <File Id="pinta_ru" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ru\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="sk" Name='sk'>
+              <Directory Id="LC_MESSAGES_SK" Name='LC_MESSAGES'>
+                <Component Id="SkTranslation" Guid="8BCC12E8-8055-48F2-9DC9-5B8736C35482">
+                  <File Id="pinta_sk" Name="pinta.mo" Source="$(var.BuildRoot)\locale\sk\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="sl" Name='sl'>
+              <Directory Id="LC_MESSAGES_SL" Name='LC_MESSAGES'>
+                <Component Id="SlTranslation" Guid="BFBAF55C-705A-470C-A99F-66D303E08D20">
+                  <File Id="pinta_sl" Name="pinta.mo" Source="$(var.BuildRoot)\locale\sl\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="sr" Name='sr'>
+              <Directory Id="LC_MESSAGES_SR" Name='LC_MESSAGES'>
+                <Component Id="SrTranslation" Guid="9BBFC675-625D-4E39-B667-3BAAE01F1459">
+                  <File Id="pinta_sr" Name="pinta.mo" Source="$(var.BuildRoot)\locale\sr\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="sv" Name='sv'>
+              <Directory Id="LC_MESSAGES_SV" Name='LC_MESSAGES'>
+                <Component Id="SvTranslation" Guid="1ADE1336-FED4-4011-A69F-6419CC77164A">
+                  <File Id="pinta_sv" Name="pinta.mo" Source="$(var.BuildRoot)\locale\sv\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="th" Name='th'>
+              <Directory Id="LC_MESSAGES_TH" Name='LC_MESSAGES'>
+                <Component Id="ThTranslation" Guid="89E5EC81-7464-435E-A550-FC73473F7FAB">
+                  <File Id="pinta_th" Name="pinta.mo" Source="$(var.BuildRoot)\locale\th\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="tr" Name='tr'>
+              <Directory Id="LC_MESSAGES_TR" Name='LC_MESSAGES'>
+                <Component Id="TrTranslation" Guid="A62ECF9D-7086-4F7B-B2B2-279D0BF90341">
+                  <File Id="pinta_tr" Name="pinta.mo" Source="$(var.BuildRoot)\locale\tr\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="uk" Name='uk'>
+              <Directory Id="LC_MESSAGES_UK" Name='LC_MESSAGES'>
+                <Component Id="UkTranslation" Guid="6058E93D-C04E-460A-86CD-D25544660BB3">
+                  <File Id="pinta_uk" Name="pinta.mo" Source="$(var.BuildRoot)\locale\uk\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="vi" Name='vi'>
+              <Directory Id="LC_MESSAGES_VI" Name='LC_MESSAGES'>
+                <Component Id="ViTranslation" Guid="9E9E81C1-2D97-4504-BD8B-060F38FA7C07">
+                  <File Id="pinta_vi" Name="pinta.mo" Source="$(var.BuildRoot)\locale\vi\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="zh_CN" Name='zh_CN'>
+              <Directory Id="LC_MESSAGES_ZhCn" Name='LC_MESSAGES'>
+                <Component Id="ZhCnTranslation" Guid="C96196DA-C971-4C59-B924-A0354AC71C6A">
+                  <File Id="pinta_zhcn" Name="pinta.mo" Source="$(var.BuildRoot)\locale\zh_CN\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="zh_TW" Name='zh_TW'>
+              <Directory Id="LC_MESSAGES_ZhTw" Name='LC_MESSAGES'>
+                <Component Id="ZhTwTranslation" Guid="827B9D1D-B2AE-4B46-9DD2-E42713B21FD4">
+                  <File Id="pinta_zhtw" Name="pinta.mo" Source="$(var.BuildRoot)\locale\zh_TW\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+          </Directory>-->
+        </Directory>
+
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder" Name="PMenu">
+        <Directory Id="ProgramMenuDir" Name='$(var.ProductShortName)' />
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="Pint" Level="1">
+      <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="ExtensionsComp" />
+      <!--<ComponentRef Id="ArTranslation" />
+      <ComponentRef Id="BrTranslation" />
+      <ComponentRef Id="CaTranslation" />
+      <ComponentRef Id="CsTranslation" />
+      <ComponentRef Id="DaTranslation" />
+      <ComponentRef Id="DeTranslation" />
+      <ComponentRef Id="ElTranslation" />
+      <ComponentRef Id="EnGbTranslation" />
+      <ComponentRef Id="EsTranslation" />
+      <ComponentRef Id="EuTranslation" />
+      <ComponentRef Id="FiTranslation" />
+      <ComponentRef Id="FoTranslation" />
+      <ComponentRef Id="FrTranslation" />
+      <ComponentRef Id="GaTranslation" />
+      <ComponentRef Id="GlTranslation" />
+      <ComponentRef Id="HeTranslation" />
+      <ComponentRef Id="HrTranslation" />
+      <ComponentRef Id="HyTranslation" />
+      <ComponentRef Id="IdTranslation" />
+      <ComponentRef Id="ItTranslation" />
+      <ComponentRef Id="JaTranslation" />
+      <ComponentRef Id="KoTranslation" />
+      <ComponentRef Id="LtTranslation" />
+      <ComponentRef Id="NbTranslation" />
+      <ComponentRef Id="NlTranslation" />
+      <ComponentRef Id="PlTranslation" />
+      <ComponentRef Id="PtTranslation" />
+      <ComponentRef Id="PtBrTranslation" />
+      <ComponentRef Id="RoTranslation" />
+      <ComponentRef Id="RuTranslation" />
+      <ComponentRef Id="SkTranslation" />
+      <ComponentRef Id="SlTranslation" />
+      <ComponentRef Id="SrTranslation" />
+      <ComponentRef Id="SvTranslation" />
+      <ComponentRef Id="ThTranslation" />
+      <ComponentRef Id="TrTranslation" />
+      <ComponentRef Id="UkTranslation" />
+      <ComponentRef Id="ViTranslation" />
+      <ComponentRef Id="ZhCnTranslation" />
+      <ComponentRef Id="ZhTwTranslation" />-->
+    </Feature>
+
+    <!-- Sequences -->
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallValidate" />
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <!-- Because we have a launch condition that uses the results of FindRelatedProducts, put it first. -->
+      <LaunchConditions After="FindRelatedProducts" />
+    </InstallUISequence>
+
+    <!-- This enables the license screen and where to install screen -->
+    <Property Id="WIXUI_INSTALLDIR">INSTALLLOCATION</Property>
+    <UIRef Id="WixUI_InstallDir"/>
+
+    <!-- Specify the license to display and graphics to use in our GUI -->
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="Bitmaps\bannrbmp.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Bitmaps\dlgbmp.bmp" />
+
+    <!-- This is for the icon that is shown in the Add/Remove Programs dialog and menu shortcut -->
+    <Icon Id="Pinta.exe" SourceFile="Bitmaps\Pinta.ico" />
+    <Property Id="ARPPRODUCTICON" Value="Pinta.exe" />
+  </Product>
+</Wix>
