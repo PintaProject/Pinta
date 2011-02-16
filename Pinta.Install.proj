@@ -5,6 +5,11 @@
   <PropertyGroup>
     <OutputPath>bin</OutputPath>
     <InstallPrefix>/usr/local</InstallPrefix>
+    <BinDir>/usr/local/bin</BinDir>
+    <LibDir>/usr/local/lib</LibDir>
+    <DataRootDir>/usr/local/share</DataRootDir>
+    <ManDir>/usr/local/share/man</ManDir>
+    <LocaleDir>/usr/local/share/locale</LocaleDir>
   </PropertyGroup>
 
   <!-- All of our translation files (po) -->
@@ -131,36 +136,36 @@
 
   <!-- Install everything for Pinta -->
   <Target Name="Install">
-    <Copy SourceFiles="@(BinFile)" DestinationFolder="$(InstallPrefix)/lib/pinta" />
-    <Copy SourceFiles="@(ExtensionFile)" DestinationFolder="$(InstallPrefix)/lib/pinta/Extensions" />
-    <MakeDir Directories="$(InstallPrefix)/bin" />
-    <Copy SourceFiles="$(OutputPath)/locale/%(Translation.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(InstallPrefix)/share/locale/%(Translation.Code)/LC_MESSAGES" />
-    <Copy SourceFiles="xdg/pinta.1" DestinationFolder="$(InstallPrefix)/share/man/man1" />
-    <Copy SourceFiles="xdg/pinta.desktop" DestinationFolder="$(InstallPrefix)/share/applications" />
-    <Copy SourceFiles="xdg/pinta.xpm" DestinationFolder="$(InstallPrefix)/share/pixmaps" />
-    <Copy SourceFiles="xdg/16x16/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/16x16/apps" />
-    <Copy SourceFiles="xdg/22x22/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/22x22/apps" />
-    <Copy SourceFiles="xdg/24x24/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/24x24/apps" />
-    <Copy SourceFiles="xdg/32x32/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/32x32/apps" />
-    <Copy SourceFiles="xdg/96x96/pinta.png" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/96x96/apps" />
-    <Copy SourceFiles="xdg/scalable/pinta.svg" DestinationFolder="$(InstallPrefix)/share/icons/hicolor/scalable/apps" />
-    <Exec Command='gzip -f "$(InstallPrefix)/share/man/man1/pinta.1"' />
+    <Copy SourceFiles="@(BinFile)" DestinationFolder="$(LibDir)/pinta" />
+    <Copy SourceFiles="@(ExtensionFile)" DestinationFolder="$(LibDir)/pinta/Extensions" />
+    <MakeDir Directories="$(BinDir)" />
+    <Copy SourceFiles="$(OutputPath)/locale/%(Translation.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(LocaleDir)/%(Translation.Code)/LC_MESSAGES" />
+    <Copy SourceFiles="xdg/pinta.1" DestinationFolder="$(ManDir)/man1" />
+    <Copy SourceFiles="xdg/pinta.desktop" DestinationFolder="$(DataRootDir)/applications" />
+    <Copy SourceFiles="xdg/pinta.xpm" DestinationFolder="$(DataRootDir)/pixmaps" />
+    <Copy SourceFiles="xdg/16x16/pinta.png" DestinationFolder="$(DataRootDir)/icons/hicolor/16x16/apps" />
+    <Copy SourceFiles="xdg/22x22/pinta.png" DestinationFolder="$(DataRootDir)/icons/hicolor/22x22/apps" />
+    <Copy SourceFiles="xdg/24x24/pinta.png" DestinationFolder="$(DataRootDir)/icons/hicolor/24x24/apps" />
+    <Copy SourceFiles="xdg/32x32/pinta.png" DestinationFolder="$(DataRootDir)/icons/hicolor/32x32/apps" />
+    <Copy SourceFiles="xdg/96x96/pinta.png" DestinationFolder="$(DataRootDir)/icons/hicolor/96x96/apps" />
+    <Copy SourceFiles="xdg/scalable/pinta.svg" DestinationFolder="$(DataRootDir)/icons/hicolor/scalable/apps" />
+    <Exec Command='gzip -f "$(ManDir)/man1/pinta.1"' />
   </Target>
 
   <!-- Uninstall everything for Pinta -->
   <Target Name="Uninstall">
-    <Exec Command='rm -rf "$(InstallPrefix)/lib/pinta"' />
-    <Delete Files="$(InstallPrefix)/bin/pinta" />
-    <Delete Files="$(InstallPrefix)/share/locale/%(Translation.Code)/LC_MESSAGES/pinta.mo" />
-    <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1" />
-    <Delete Files="$(InstallPrefix)/share/man/man1/pinta.1.gz" />
-    <Delete Files="$(InstallPrefix)/share/applications/pinta.desktop" />
-    <Delete Files="$(InstallPrefix)/share/pixmaps/pinta.xpm" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/16x16/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/22x22/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/24x24/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/32x32/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/96x96/apps/pinta.png" />
-    <Delete Files="$(InstallPrefix)/share/icons/hicolor/scalable/apps/pinta.svg" />
+    <Exec Command='rm -rf "$(LibDir)/pinta"' />
+    <Delete Files="$(BinDir)/pinta" />
+    <Delete Files="$(LocaleDir)/%(Translation.Code)/LC_MESSAGES/pinta.mo" />
+    <Delete Files="$(ManDir)/man1/pinta.1" />
+    <Delete Files="$(ManDir)/man1/pinta.1.gz" />
+    <Delete Files="$(DataRootDir)/applications/pinta.desktop" />
+    <Delete Files="$(DataRootDir)/pixmaps/pinta.xpm" />
+    <Delete Files="$(DataRootDir)/icons/hicolor/16x16/apps/pinta.png" />
+    <Delete Files="$(DataRootDir)/icons/hicolor/22x22/apps/pinta.png" />
+    <Delete Files="$(DataRootDir)/icons/hicolor/24x24/apps/pinta.png" />
+    <Delete Files="$(DataRootDir)/icons/hicolor/32x32/apps/pinta.png" />
+    <Delete Files="$(DataRootDir)/icons/hicolor/96x96/apps/pinta.png" />
+    <Delete Files="$(DataRootDir)/icons/hicolor/scalable/apps/pinta.svg" />
   </Target>
 </Project>

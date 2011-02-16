@@ -67,8 +67,11 @@ cleanobj:
 	
 # target: install - Installs Pinta. 
 install: pinta $(BINFILES)
-	cd $(srcdir) && $(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta.Install.proj
-	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(prefix)/bin/$(PACKAGE)
+	cd $(srcdir) && $(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) \
+		/property:BinDir=$(DESTDIR)$(bindir) /property:LibDir=$(DESTDIR)$(libdir) \
+		/property:DataRootDir=$(DESTDIR)$(datarootdir) /property:ManDir=$(DESTDIR)$(mandir) \
+		/property:LocaleDir=$(DESTDIR)$(localedir) Pinta.Install.proj
+	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
 uninstall: 
