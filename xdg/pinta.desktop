@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Pinta
-Comment=Create and edit images and photographs
+Comment=Easily create and edit images
 GenericName=Image Editor
 X-GNOME-FullName=Pinta Image Editor
 Exec=pinta
