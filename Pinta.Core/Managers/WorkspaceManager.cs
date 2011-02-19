@@ -93,10 +93,9 @@ namespace Pinta.Core
 				doc.PathAndFileName = filename;
 			
 			OpenDocuments.Add (doc);
-			active_document_index = OpenDocuments.Count - 1;
-			
 			OnDocumentCreated (new DocumentEventArgs (doc));
-			OnActiveDocumentChanged (EventArgs.Empty);
+
+			SetActiveDocument (doc);
 			
 			return doc;
 		}
