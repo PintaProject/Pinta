@@ -48,6 +48,7 @@ namespace Pinta.Tools
 		public Color FillColor { get; private set; }
 		public Point LastPoint { get; private set; }
 		public Cairo.Context Drawable { get; private set; }
+		public ImageSurface Surface { get; private set; }
 		#endregion
 
 		private PaintBrush default_brush;
@@ -129,6 +130,8 @@ namespace Pinta.Tools
 			var invalidate_rect = Gdk.Rectangle.Zero;
 			var brush_width = BrushWidth;
 
+			Surface = surf;
+
 			using (Drawable = new Context (surf)) {
 				Drawable.AppendPath (doc.SelectionPath);
 				Drawable.FillRule = FillRule.EvenOdd;
@@ -147,6 +150,7 @@ namespace Pinta.Tools
 				active_brush.Tool = null;
 			}
 
+			Surface = null;
 			Drawable = null;
 
 			if (invalidate_rect.IsEmpty) {

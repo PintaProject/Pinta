@@ -51,6 +51,9 @@ namespace Pinta.Tools.Brushes
 			get { return Tool.Drawable; }
 		}
 
+		protected Color StrokeColor { get { return Tool.StrokeColor; } }
+		protected ImageSurface Surface { get { return Tool.Surface; } }
+
 		public virtual void DoMouseUp ()
 		{
 			OnMouseUp ();

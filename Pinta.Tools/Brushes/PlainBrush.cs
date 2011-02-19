@@ -44,10 +44,21 @@ namespace Pinta.Tools.Brushes
 
 		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
 		{
+			// Cairo does not support a single-pixel-long single-pixel-wide line
+			if (x == lastX && y == lastY && G.LineWidth == 1) {
+				Surface.Flush ();
+
+				ColorBgra source = Surface.GetColorBgra (x, y);
+				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, StrokeColor.ToColorBgra ());
+				Surface.SetColorBgra (source, x, y);
+				Surface.MarkDirty ();
+
+				return new Gdk.Rectangle (x - 1, y - 1, 3, 3);
+			}
+
 			G.MoveTo (lastX, lastY);
 			G.LineTo (x, y);
 			G.StrokePreserve ();
-			
 			
 			return G.StrokeExtents ().ToGdkRectangle ();
 		}
