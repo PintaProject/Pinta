@@ -119,7 +119,14 @@ namespace Pinta.Tools
 
 			int x = (int)point.X;
 			int y = (int)point.Y;
-			
+
+			// If we have a large brush, center it on the clicked point
+			if (BrushWidth > 2) {
+				int size_offset = (BrushWidth - 1) / 2;
+				x -= size_offset;
+				y -= size_offset;
+			}
+
 			if (LastPoint.Equals (point_empty))
 				LastPoint = new Point (x, y);
 
