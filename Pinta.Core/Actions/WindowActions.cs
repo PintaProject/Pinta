@@ -146,6 +146,7 @@ namespace Pinta.Core
 		private void UpdateMenuLabel (RadioAction action, Document doc)
 		{
 			action.Label = string.Format ("{0}{1}", doc.Filename, doc.IsDirty ? "*" : string.Empty);
+			PintaCore.Workspace.ResetTitle ();
 		}
 		#endregion
 	}

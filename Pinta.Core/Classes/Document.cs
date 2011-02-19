@@ -109,7 +109,6 @@ namespace Pinta.Core
 			set {
 				if (is_dirty != value) {
 					is_dirty = value;
-					PintaCore.Workspace.ResetTitle ();
 					OnIsDirtyChanged ();
 				}
 			}
