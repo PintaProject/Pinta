@@ -77,7 +77,7 @@ namespace Pinta.Core
 
 		public IList<FormatDescriptor> Formats { get; private set; }
 
-		public FormatDescriptor GetDefaultFormat ()
+		public FormatDescriptor GetDefaultSaveFormat ()
 		{
 			string extension = PintaCore.Settings.GetSetting<string> ("default-image-type", "jpeg");
 
@@ -88,8 +88,9 @@ namespace Pinta.Core
 				return fd;
 
 			// Return any format we have
-			if (Formats.Count > 0)
-				return Formats[0];
+			foreach (var f in Formats)
+				if (!f.IsReadOnly ())
+					return f;
 
 			// We don't have any formats
 			throw new InvalidOperationException ("There are no image formats supported.");

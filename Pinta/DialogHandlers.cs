@@ -534,15 +534,24 @@ namespace Pinta
 				if (!format.IsReadOnly ()) {
 					fcd.AddFilter (format.Filter);
 					filetypes.Add (format.Filter, format);
+
+					// Set the filter to anything we found
+					// We want to ensure that *something* is selected in the filetype
+					fcd.Filter = format.Filter;
 				}
 			}
 
 			// If we already have a format, set it to the default.
 			// If not, default to jpeg
+			FormatDescriptor format_desc = null;
+
 			if (hasFile)
-				fcd.Filter = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename).Filter;
-			else
-				fcd.Filter = PintaCore.System.ImageFormats.GetDefaultFormat ().Filter;
+				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename);
+			
+			if (format_desc == null)
+				format_desc = PintaCore.System.ImageFormats.GetDefaultSaveFormat ();
+
+			fcd.Filter = format_desc.Filter;
 
 			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
 			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
