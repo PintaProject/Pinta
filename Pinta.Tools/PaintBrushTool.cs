@@ -120,13 +120,6 @@ namespace Pinta.Tools
 			int x = (int)point.X;
 			int y = (int)point.Y;
 
-			// If we have a large brush, center it on the clicked point
-			if (BrushWidth > 2) {
-				int size_offset = (BrushWidth - 1) / 2;
-				x -= size_offset;
-				y -= size_offset;
-			}
-
 			if (LastPoint.Equals (point_empty))
 				LastPoint = new Point (x, y);
 
@@ -150,8 +143,6 @@ namespace Pinta.Tools
 				Drawable.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 				Drawable.Color = StrokeColor;
 
-				Drawable.Translate (brush_width / 2.0, brush_width / 2.0);
-
 				active_brush.Tool = this;
 				invalidate_rect = active_brush.DoMouseMove (x, y, LastPoint.X, LastPoint.Y);
 				active_brush.Tool = null;
@@ -160,7 +151,9 @@ namespace Pinta.Tools
 			Surface = null;
 			Drawable = null;
 
-			if (invalidate_rect.IsEmpty) {
+			// If we draw partially offscreen to the left or top, Cairo
+			// gives us a bogus dirty rectangle, so redraw everything
+			if (invalidate_rect.IsEmpty || invalidate_rect.Top < 0 || invalidate_rect.Left < 0) {
 				doc.Workspace.Invalidate ();
 			} else {
 				doc.Workspace.Invalidate (invalidate_rect);
