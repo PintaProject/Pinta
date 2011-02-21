@@ -205,7 +205,11 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentLayerIndex));
+
+			if (sender is string && (sender as string) == "Cut")
+				doc.History.PushNewItem (new SimpleHistoryItem (Stock.Cut, Catalog.GetString ("Cut"), old, doc.CurrentLayerIndex));
+			else
+				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -295,15 +299,7 @@ namespace Pinta.Core
 			HandlerPintaCoreActionsEditCopyActivated (sender, e);
 
 			// Erase selection
-			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
-
-			using (var g = doc.CreateClippedContext ()) {
-				g.Operator = Cairo.Operator.Clear;
-				g.Fill ();
-			}
-
-			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, PintaCore.Layers.CurrentLayerIndex));
+			HandlePintaCoreActionsEditEraseSelectionActivated ("Cut", e);
 		}
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
