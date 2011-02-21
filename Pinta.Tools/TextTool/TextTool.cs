@@ -29,6 +29,7 @@ namespace Pinta.Tools
 		private Point clickPoint;
 		private bool is_editing;
 		private Rectangle old_bounds = Rectangle.Zero;
+		private Rectangle old_cursor_bounds = Rectangle.Zero;
 
 		private TextEngine engine;
 
@@ -649,7 +650,8 @@ namespace Pinta.Tools
 		private void RedrawText (bool showCursor, bool useToolLayer)
 		{
 			Cairo.ImageSurface surf;
-			
+			var invalidate_cursor = old_cursor_bounds;
+
 			if (!useToolLayer)
 				surf = PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface;
 			else {
@@ -690,6 +692,9 @@ namespace Pinta.Tools
 
 					g.Antialias = Cairo.Antialias.None;
 					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
+					
+					loc.Inflate (2, 10);
+					old_cursor_bounds = loc;
 				}
 
 				g.Restore ();
@@ -699,6 +704,7 @@ namespace Pinta.Tools
 			r.Inflate (10, 10);
 
 			PintaCore.Workspace.Invalidate (old_bounds);
+			PintaCore.Workspace.Invalidate (invalidate_cursor);
 			PintaCore.Workspace.Invalidate (r);
 
 			old_bounds = r;
