@@ -63,7 +63,12 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			ImageSurface surf = doc.ToolLayer.Surface;
-			surf.Clear ();
+
+			using (var g = new Context (surf)) {
+				g.Operator = Operator.Source;
+				g.SetSource (doc.CurrentLayer.Surface);
+				g.Paint ();
+			}
 
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
 			hist.TakeSnapshotOfLayer (doc.CurrentLayer);
@@ -85,6 +90,7 @@ namespace Pinta.Tools
 			// Transfer the temp layer to the real one,
 			// respecting any selection area
 			using (var g = doc.CreateClippedContext ()) {
+				g.Operator = Operator.Source;
 				g.SetSource (surf);
 				g.Paint ();
 			}
