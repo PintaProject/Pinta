@@ -192,7 +192,7 @@ namespace Pinta.Core
 			PintaCore.Chrome.DrawingArea.GdkWindow.ThawUpdates ();
 
 			foreach (var layer in doc.Layers)
-				layer.Crop (rect);
+				layer.Crop (rect, doc.SelectionPath);
 
 			doc.History.PushNewItem (hist);
 			doc.ResetSelectionPath ();

@@ -270,12 +270,21 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public void Crop (Gdk.Rectangle rect)
+		public void Crop (Gdk.Rectangle rect, Path path)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
 			using (Context g = new Context (dest)) {
-				g.SetSourceSurface (Surface, -rect.X, -rect.Y);
+				// Move the selected content to the upper left
+				g.Translate (-rect.X, -rect.Y);
+				g.Antialias = Antialias.None;
+
+				// Respect the selected path
+				g.AppendPath (path);
+				g.FillRule = Cairo.FillRule.EvenOdd;
+				g.Clip ();
+
+				g.SetSource (Surface);
 				g.Paint ();
 			}
 
