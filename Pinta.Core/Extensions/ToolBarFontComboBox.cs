@@ -1,10 +1,11 @@
-//
-// ToolBarComboBox.cs
+﻿//
+// ToolBarFontComboBox.cs
 //  
 // Author:
+//	 Olivier Dufour <olivier.duff@gmail.com>
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2011 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,41 +30,36 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolBarComboBox : ToolItem
+	public class ToolBarFontComboBox : ToolBarComboBox
 	{
-		public ComboBox ComboBox { get; private set; }
-		public ListStore Model { get; private set; }
+		private CellRendererText cell_renderer;
 
-		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
+		public ToolBarFontComboBox (int width, int activeIndex, params string[] contents) : base (width, activeIndex, false, contents)
 		{
-			if (allowEntry)
-				ComboBox = new ComboBoxEntry (contents);
-			else {
-				Model = new ListStore (typeof(string), typeof (object));
-
-				if (contents != null)
-					foreach (string entry in contents)
-						Model.AppendValues (entry, null);
-
-				ComboBox = CreateComboBox ();
-				ComboBox.Model = Model;
-			}
-
-			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
-			ComboBox.WidthRequest = width;
-			
-			if (activeIndex >= 0)
-				ComboBox.Active = activeIndex;
-			
-			ComboBox.Show ();
-			
-			Add (ComboBox);
-			Show ();
 		}
 
-		protected virtual ComboBox CreateComboBox ()
+		protected override ComboBox CreateComboBox ()
 		{
-			return ComboBox.NewText ();
+			var box = new ComboBox ();
+
+			cell_renderer = new CellRendererText ();
+
+			box.PackStart (cell_renderer, false);
+			box.AddAttribute (cell_renderer, "text", 0);
+			box.SetCellDataFunc (cell_renderer, new CellLayoutDataFunc (RenderFont));
+
+			return box;
+		}
+
+		private void RenderFont (CellLayout layout, CellRenderer renderer, TreeModel model, TreeIter iter)
+		{
+			string fontName = (string)model.GetValue (iter, 0);
+
+			CellRendererText cell = renderer as CellRendererText;
+
+			cell.Text = fontName;
+			cell.Font = string.Format ("{0} 10", fontName);
+			cell.Family = fontName;
 		}
 	}
 }

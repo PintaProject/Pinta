@@ -52,7 +52,7 @@ namespace Pinta.Tools
 
 		#region ToolBar
 		private ToolBarLabel font_label;
-		private ToolBarComboBox font_combo;
+		private ToolBarFontComboBox font_combo;
 		private ToolBarComboBox size_combo;
 		private ToolBarToggleButton bold_btn;
 		private ToolBarToggleButton italic_btn;
@@ -68,15 +68,6 @@ namespace Pinta.Tools
 		private ToolBarLabel outline_width_label;
 		private ToolBarButton outline_width_minus;
 		private ToolBarButton outline_width_plus;
-
-		protected void RenderFont (Gtk.CellLayout layout, Gtk.CellRenderer renderer, Gtk.TreeModel model, Gtk.TreeIter iter)
-		{
-			string fontName = (string)model.GetValue (iter, 0);
-			Gtk.CellRendererText cell = renderer as Gtk.CellRendererText;
-			cell.Text = fontName;
-			cell.Font = string.Format ("{0} 10", fontName);
-			cell.Family = fontName;
-		}
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -94,9 +85,8 @@ namespace Pinta.Tools
 				// Default to Arial or first in list
 				int index = Math.Max (fonts.IndexOf ("Arial"), 0);
 
-				font_combo = new ToolBarComboBox (150, index, false, fonts.ToArray ());
+				font_combo = new ToolBarFontComboBox (150, index, fonts.ToArray ());
 				font_combo.ComboBox.Changed += HandleFontChanged;
-				font_combo.ComboBox.SetCellDataFunc (font_combo.CellRendererText, new CellLayoutDataFunc (RenderFont));
 			}
 
 			tb.AppendItem (font_combo);

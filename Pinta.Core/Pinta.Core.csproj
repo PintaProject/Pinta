@@ -107,6 +107,7 @@
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemRemovedEventArgs.cs" />
     <Compile Include="EventArgs\TextChangedEventArgs.cs" />
+    <Compile Include="Extensions\ToolBarFontComboBox.cs" />
     <Compile Include="Extensions\ToolBarSlider.cs" />
     <Compile Include="HistoryItems\PasteHistoryItem.cs" />
     <Compile Include="HistoryItems\ResizeHistoryItem.cs" />
