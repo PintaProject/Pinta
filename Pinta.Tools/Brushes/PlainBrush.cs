@@ -56,8 +56,8 @@ namespace Pinta.Tools.Brushes
 				return new Gdk.Rectangle (x - 1, y - 1, 3, 3);
 			}
 
-			G.MoveTo (lastX, lastY);
-			G.LineTo (x, y);
+			G.MoveTo (lastX + 0.5, lastY + 0.5);
+			G.LineTo (x + 0.5, y + 0.5);
 			G.StrokePreserve ();
 			
 			return G.StrokeExtents ().ToGdkRectangle ();

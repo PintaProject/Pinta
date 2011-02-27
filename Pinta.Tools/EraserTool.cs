@@ -78,9 +78,11 @@ namespace Pinta.Tools
 				g.Clip ();
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				
-				g.MoveTo (last_point.X, last_point.Y);
-				g.LineTo (x, y);
+
+				// Adding 0.5 forces cairo into the correct square:
+				// See https://bugs.launchpad.net/bugs/672232
+				g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
+				g.LineTo (x + 0.5, y + 0.5);
 
 				// Right-click is erase to background color, left-click is transparent
 				if (mouse_button == 3)
