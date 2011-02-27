@@ -103,6 +103,7 @@ namespace Pinta
 				PintaCore.Settings.PutSetting ("ruler-metric", (int) hruler.Metric);
 				PintaCore.Settings.PutSetting ("ruler-show", PintaCore.Actions.View.Rulers.Active);
 				PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
+				PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
 				PintaCore.Settings.SaveSettings ();
 			};
 
@@ -115,6 +116,7 @@ namespace Pinta
 
 			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
 			ToggleToolbar (PintaCore.Actions.View.ToolBar.Active);
+			PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 			
 			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
