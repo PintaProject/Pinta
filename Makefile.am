@@ -39,7 +39,7 @@ list:
 #target: updatepot - update the messages.pot file
 updatepot: build
 	find . -type f -name *.cs | sed 's|./||' > files.list
-	grep -v System.Composition.ComponentModel files.list > files2.list
+	grep -v System.ComponentModel.Composition files.list > files2.list
 	xgettext --from-code=UTF-8 -f files2.list -o po/messages.pot
 	cat po/messages.in >> po/messages.pot
 	rm files.list
