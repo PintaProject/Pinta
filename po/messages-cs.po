@@ -7,822 +7,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-09-07 11:07+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"POT-Creation-Date: 2011-02-28 17:08-0600\n"
+"PO-Revision-Date: 2011-01-06 11:10+0000\n"
+"Last-Translator: schunka <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-
-#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
-msgid "About"
-msgstr "O aplikaci"
-
-#: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
-msgid "Paintbrush"
-msgstr "Štětec"
-
-#: Pinta/MainWindow.cs:259
-msgid "_File"
-msgstr "_Soubor"
-
-#: Pinta/MainWindow.cs:260
-msgid "_Edit"
-msgstr "_Upravit"
-
-#: Pinta/MainWindow.cs:261
-msgid "_View"
-msgstr "_Zobrazit"
-
-#: Pinta/MainWindow.cs:262
-msgid "_Image"
-msgstr "_Obrázek"
-
-#: Pinta/MainWindow.cs:263
-msgid "_Layers"
-msgstr "_Vrstvy"
-
-#: Pinta/MainWindow.cs:264
-msgid "_Adjustments"
-msgstr "_Přizpůsobení"
-
-#: Pinta/MainWindow.cs:265
-msgid "Effe_cts"
-msgstr "Efe_kty"
-
-#: Pinta/MainWindow.cs:266
-msgid "_Window"
-msgstr "_Okno"
-
-#: Pinta/MainWindow.cs:267
-msgid "_Help"
-msgstr "_Nápověda"
-
-#: Pinta/MainWindow.cs:272
-msgid "Tool Windows"
-msgstr ""
-
-#: Pinta/MainWindow.cs:345
-msgid "Tools"
-msgstr "Nástroje"
-
-#: Pinta/MainWindow.cs:355
-msgid "Palette"
-msgstr "Paleta"
-
-#: Pinta/MainWindow.cs:368
-msgid "Documents"
-msgstr "Dokumenty"
-
-#: Pinta/MainWindow.cs:382
-msgid "Layers"
-msgstr "Vrstvy"
-
-#: Pinta/MainWindow.cs:398
-msgid "History"
-msgstr "Historie"
-
-#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
-msgid "Hide"
-msgstr "Skrýt"
-
-#: Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr "Dokovatelné"
-
-#: Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "Plovoucí"
-
-#: Pinta/DockLibrary/DockItem.cs:502
-#: Pinta/DockLibrary/DockItemContainer.cs:194
-msgid "Auto Hide"
-msgstr "Skrývat automaticky"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:190
-msgid "Dock"
-msgstr "Ukotvit"
-
-#: Pinta/Dialogs/AboutDialog.cs:97
-msgid "Contributors to this Release"
-msgstr "Přispěvatelé tohoto vydání"
-
-#: Pinta/Dialogs/AboutDialog.cs:107
-msgid "Previous Contributors"
-msgstr "Předchozí přispěvatelé"
-
-#: Pinta/Dialogs/AboutDialog.cs:116
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  schunka https://launchpad.net/~schunka"
-
-#: Pinta/Dialogs/AboutDialog.cs:119
-msgid "Translated by:"
-msgstr "Přeložili:"
-
-#: Pinta/Dialogs/AboutDialog.cs:126
-msgid "Based on the work of Paint.NET:"
-msgstr "Na základě práce Paint.NET"
-
-#: Pinta/Dialogs/AboutDialog.cs:133
-msgid "Using some icons from:"
-msgstr "Použity některé ikonky z:"
-
-#: Pinta/Dialogs/AboutDialog.cs:245
-msgid "About Pinta"
-msgstr "O Pinta"
-
-#: Pinta/Dialogs/AboutDialog.cs:263
-msgid "Version Info"
-msgstr "Informace o verzi"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Název"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-msgid "Version"
-msgstr "Verze"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Cesta"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Licence"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Vydáno pod licencí MIT X11"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Copyright"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "Od přispěvatelů Pinta"
-
-#: Pinta/Main.cs:67
-msgid "number of threads to use for rendering"
-msgstr "počet vláken použitých k vykreslení"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
-msgid "Resize Image"
-msgstr "Změnit velikost"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-msgid "By percentage:"
-msgstr "Procentuelně:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-msgid "By absolute size:"
-msgstr "Na velikost:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
-msgid "Width:"
-msgstr "Šířka:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
-msgid "pixels"
-msgstr "pixely"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
-msgid "Height:"
-msgstr "Výška:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-msgid "Maintain aspect ratio"
-msgstr "Zachovat poměr stran"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
-#: Pinta.Core/Actions/LayerActions.cs:74
-msgid "Layer Properties"
-msgstr "Vlastnosti vrstvy"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
-msgid "Name:"
-msgstr "Název:"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
-msgid "Visible"
-msgstr "Viditelná"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
-msgid "Opacity:"
-msgstr "Průhlednost"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Managers/WorkspaceManager.cs:218
-msgid "Resize Canvas"
-msgstr "Změna velikosti plátna"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Kotva:"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
-#: Pinta.Core/Actions/FileActions.cs:133
-msgid "New Image"
-msgstr "Nový obrázek"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
-msgid "New Image Size          "
-msgstr "Velikost nového obrázku          "
-
-#: Pinta/DialogHandlers.cs:57
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr "Uložit změny v obrázku \"{0}\" před vytvořením nového?"
-
-#: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
-#: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Pokud je neuložíte, veškeré změny budou navždy ztraceny."
-
-#: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
-#: Pinta.Core/Actions/FileActions.cs:258
-msgid "Continue without saving"
-msgstr "Pokračovat bez uložení"
-
-#: Pinta/DialogHandlers.cs:178
-msgid "Layer Opacity"
-msgstr "Průhlednost vrstvy"
-
-#: Pinta/DialogHandlers.cs:183
-msgid "Rename Layer"
-msgstr "Přejmenovat vrstvu"
-
-#: Pinta/DialogHandlers.cs:188
-msgid "Hide Layer"
-msgstr "Skrýt vrstvu"
-
-#: Pinta/DialogHandlers.cs:188
-msgid "Show Layer"
-msgstr "Zobrazit vrstvu"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "popisek1"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-msgid "label"
-msgstr "popisek"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "Náhodný šum"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr "Znovu načíst"
-
-#: Pinta.Tools/ColorPickerTool.cs:44
-msgid "Color Picker"
-msgstr "Kapátko"
-
-#: Pinta.Tools/ColorPickerTool.cs:50
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
-"Levým klikem se nastaví primarní barva. Pravým klikem se nastaví sekundarní "
-"barva."
-
-#: Pinta.Tools/ColorPickerTool.cs:62
-msgid "After select"
-msgstr "Po výběru"
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Do not switch tool"
-msgstr "Nepřepínat nástroj"
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Switch to previous tool"
-msgstr "Přepnout na předchozí nástroj"
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Switch to Pencil tool"
-msgstr "Přepnout na tužku"
-
-#: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
-msgid "Pencil"
-msgstr "Tužka"
-
-#: Pinta.Tools/LassoSelectTool.cs:45
-msgid "Lasso Select"
-msgstr "Výběr lasem"
-
-#: Pinta.Tools/LassoSelectTool.cs:47
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klikněte a obtáhněte vybranou oblast."
-
-#: Pinta.Tools/ZoomTool.cs:49
-#: MandelbrotFractalEffect dialog
-#: FragmentEffect dialog
-msgid "Zoom"
-msgstr "Lupa"
-
-#: Pinta.Tools/ZoomTool.cs:55
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-"Levý klik přiblíží. Pravý klik oddálí. Klik a obtažení přiblíží výběr."
-
-#: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
-msgid "Brush width"
-msgstr "Šířka štětce"
-
-#: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
-msgid "Decrease brush size"
-msgstr "Zmenšit štětec"
-
-#: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
-msgid "Increase brush size"
-msgstr "Zvětšit štětec"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Outline Shape"
-msgstr "Obtáhnout tvar"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill Shape"
-msgstr "Vyplnit tvar"
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill and Outline Shape"
-msgstr "Vyplnit a Obtáhnout tvar"
-
-#: Pinta.Tools/MoveSelectedTool.cs:42
-msgid "Move Selected Pixels"
-msgstr "Posunout vybrané pixely"
-
-#: Pinta.Tools/MoveSelectedTool.cs:48
-msgid "Drag the selection to move selected content."
-msgstr "Táhněte výběrem abyste posunuli obsah"
-
-#: Pinta.Tools/PanTool.cs:38
-msgid "Pan"
-msgstr "Posun"
-
-#: Pinta.Tools/PanTool.cs:44
-msgid "Click and drag to navigate image."
-msgstr "Klik a táhnutí navedou obrazék."
-
-#: Pinta.Tools/PencilTool.cs:50
-msgid ""
-"Left click to draw freeform, one-pixel wide lines with the primary color, "
-"right click to use the secondary color."
-msgstr ""
-"Levý klik kreslí neupravenou, jednopixelovou čáru primární barvy, pravý klik "
-"kreslí sekundární barvou."
-
-#: Pinta.Tools/EllipseSelectTool.cs:38
-msgid "Ellipse Select"
-msgstr "Elipsový výběr"
-
-#: Pinta.Tools/EllipseSelectTool.cs:44
-msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
-"circle."
-msgstr ""
-"Klik a tažení nakreslí elliptický výběr. Pro kruhový výběr držte shift."
-
-#: Pinta.Tools/GradientTool.cs:52
-msgid "Gradient"
-msgstr "Přechod"
-
-#: Pinta.Tools/GradientTool.cs:60
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-"Klik a tažení nakreslé přechod od primární k sekundární barvě. Pravý klik "
-"kreslí obráceně."
-
-#: Pinta.Tools/GradientTool.cs:158
-msgid "Linear Gradient"
-msgstr "Lineární přechod"
-
-#: Pinta.Tools/GradientTool.cs:166
-msgid "Linear Reflected Gradient"
-msgstr "Lineární odražeý přechod"
-
-#: Pinta.Tools/GradientTool.cs:173
-msgid "Linear Diamond Gradient"
-msgstr "Lineární kosočtvercový přechod"
-
-#: Pinta.Tools/GradientTool.cs:180
-msgid "Radial Gradient"
-msgstr "Radiální přechod"
-
-#: Pinta.Tools/GradientTool.cs:187
-msgid "Conical Gradient"
-msgstr "Kónický přechod"
-
-#: Pinta.Tools/GradientTool.cs:198
-msgid "Color Mode"
-msgstr "Barevný režim"
-
-#: Pinta.Tools/GradientTool.cs:206
-msgid "Transparency Mode"
-msgstr "Průhledný režim"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "Zakulacený obdélník"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain."
-msgstr ""
-"Klik a težení nakreslí zaoblený obdélník (pravý klik v sekundární barvě). "
-"Pro čtverec držte shift."
-
-#: Pinta.Tools/RoundedRectangleTool.cs:77
-#: UnfocusEffect dialog
-#: MedianEffect dialog
-#: ReduceNoiseEffect dialog
-#: GlowEffect dialog
-#: FragmentEffect dialog
-msgid "Radius"
-msgstr "Poloměr"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:82
-msgid "Decrease rectangle's corner radius"
-msgstr "Snížit poloměr rohů obdélníku"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:96
-msgid "Increase rectangle's corner radius"
-msgstr "Zvýšit poloměr rohů obdélníku"
-
-#: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-"Levý klik kreslí primarní barvou, pravý klik kreslí sekundární barvou."
-
-#: Pinta.Tools/RectangleSelectTool.cs:38
-msgid "Rectangle Select"
-msgstr "Obdélníkový výběr"
-
-#: Pinta.Tools/RectangleSelectTool.cs:44
-msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
-"square."
-msgstr ""
-"Klik a tažení nakreslí obdélníkový výběr. Pro čtvercový výběr držte shift."
-
-#: Pinta.Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Plechovka barvy"
-
-#: Pinta.Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"Levý klik vyplní oblast primární barvou, pravý klik vyplní oblast sekundární "
-"barvou."
-
-#: Pinta.Tools/UnimplementedTools.cs:40
-msgid "Clone Stamp"
-msgstr "Klonovací razítko"
-
-#: Pinta.Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Přesunout výběr"
-
-#: Pinta.Tools/MoveSelectionTool.cs:48
-msgid "Drag the selection to move selection outline."
-msgstr "Pro posunutí obrysu táhnout vyběrem ."
-
-#: Pinta.Tools/FreeformShapeTool.cs:54
-msgid "Freeform Shape"
-msgstr "Volný tvar"
-
-#: Pinta.Tools/FloodTool.cs:71
-msgid "Fill mode"
-msgstr "Vyplňovací režim"
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Contiguous"
-msgstr "Spojité"
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Global"
-msgstr "Globální"
-
-#: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
-#: SoftenPortraitData dialog
-msgid "Tolerance"
-msgstr "Tolerance"
-
-#: Pinta.Tools/EllipseTool.cs:38
-msgid "Ellipse"
-msgstr "Elipsa"
-
-#: Pinta.Tools/EllipseTool.cs:44
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr ""
-"Klik a tažení nakreslí elipsu (pravý klik sekundární barvou). Pro nakreslení "
-"kruhu držte shift."
-
-#: Pinta.Tools/TextTool.cs:37
-msgid "Text"
-msgstr "Text"
-
-#: Pinta.Tools/TextTool.cs:44
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-"Levý klik umístí kurzor, pak můžete psát text. Primární barva je barva textu."
-
-#: Pinta.Tools/TextTool.cs:131
-msgid "Font"
-msgstr "Písmo"
-
-#: Pinta.Tools/TextTool.cs:186
-msgid "Bold"
-msgstr "Tučně"
-
-#: Pinta.Tools/TextTool.cs:193
-msgid "Italic"
-msgstr "Kurzíva"
-
-#: Pinta.Tools/TextTool.cs:201
-msgid "Underline"
-msgstr "Podtržené"
-
-#: Pinta.Tools/TextTool.cs:210
-msgid "Left Align"
-msgstr "Zarovnat doleva"
-
-#: Pinta.Tools/TextTool.cs:219
-msgid "Center Align"
-msgstr "Zarovnat na střed"
-
-#: Pinta.Tools/TextTool.cs:227
-msgid "Right Align"
-msgstr "Zarovnat doprava"
-
-#: Pinta.Tools/MagicWandTool.cs:46
-msgid "Magic Wand Select"
-msgstr "Výběr kouzelnou hůlkou"
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Click to select region of similar color."
-msgstr "Klik vybere oblast s podobnou barvou."
-
-#: Pinta.Tools/RectangleTool.cs:38
-msgid "Rectangle"
-msgstr "Obdélník"
-
-#: Pinta.Tools/RectangleTool.cs:44
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr ""
-"Klik a tažení nakreslí obdélník (pravý klik sekundární barvou). Pro kreslení "
-"čtverce držte shift."
-
-#: Pinta.Tools/LineCurveTool.cs:38
-msgid "Line"
-msgstr "Čára"
-
-#: Pinta.Tools/LineCurveTool.cs:44
-msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr ""
-"Levý klik kreslí primární barvou, pravý klik kreslí sekundární barvou."
-
-#: Pinta.Tools/RecolorTool.cs:59
-msgid "Recolor"
-msgstr "Přebarvit"
-
-#: Pinta.Tools/RecolorTool.cs:61
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "Levý klik přebarví sekundární barvu na primární."
-
-#: Pinta.Tools/EraserTool.cs:45
-msgid "Eraser"
-msgstr "Guma"
-
-#: Pinta.Tools/EraserTool.cs:47
-msgid "Click and drag to erase a portion of the image."
-msgstr "Klik a tažení smaže kus obrázku"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:26
-msgid "Pixelate"
-msgstr "Pixelizovat"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:38
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
-#: Pinta.Effects/Effects/TileEffect.cs:34
-#: Pinta.Effects/Effects/BulgeEffect.cs:34
-#: Pinta.Effects/Effects/TwistEffect.cs:34
-msgid "Distort"
-msgstr "Pokřivit"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
-msgid "Red Eye Removal"
-msgstr "Odstranění červených očí"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
-#: Pinta.Effects/Effects/GlowEffect.cs:39
-#: Pinta.Effects/Effects/SharpenEffect.cs:34
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
-msgid "Photo"
-msgstr "Fotografie"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
-msgid "Motion Blur"
-msgstr "Rozmazání pohybem"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
-#: Pinta.Effects/Effects/UnfocusEffect.cs:36
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
-#: Pinta.Effects/Effects/FragmentEffect.cs:34
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
-msgid "Blurs"
-msgstr "Rozmazání"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:34
-msgid "Ink Sketch"
-msgstr "Inkoustový náčrt"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:42
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
-msgid "Artistic"
-msgstr "Umělecké"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
-msgid "Radial Blur"
-msgstr "Rozmazání otáčením"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:28
-msgid "Unfocus"
-msgstr "Rozostření"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
-msgid "Edge Detect"
-msgstr "Detekce hran"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
-#: Pinta.Effects/Effects/OutlineEffect.cs:37
-#: Pinta.Effects/Effects/ReliefEffect.cs:33
-#: Pinta.Effects/Effects/EmbossEffect.cs:34
-msgid "Stylize"
-msgstr "Stylizování"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
-msgid "Frosted Glass"
-msgstr "Omrzlé sklo"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
-msgid "Oil Painting"
-msgstr "Olejomalba"
-
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
-msgid "Zoom Blur"
-msgstr "Rozmazání přiblížením"
-
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
-msgid "Polar Inversion"
-msgstr "Převrácení pólů"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
-msgstr "Mraky"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:38
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
-msgid "Render"
-msgstr "Vykreslit"
-
-#: Pinta.Effects/Effects/GlowEffect.cs:31
-msgid "Glow"
-msgstr "Záře"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
-msgid "Add Noise"
-msgstr "Přidat šum"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
-#: Pinta.Effects/Effects/MedianEffect.cs:37
-msgid "Noise"
-msgstr "Šum"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:26
-msgid "Fragment"
-msgstr "Fragment"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:26
-msgid "Sharpen"
-msgstr "Zaostřit"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
-msgid "Pencil Sketch"
-msgstr "Náčrt tužkou"
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:29
-msgid "Outline"
-msgstr "Obtáhnout"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
-msgid "Gaussian Blur"
-msgstr "Gaussovo rozmazání"
-
-#: Pinta.Effects/Effects/TileEffect.cs:26
-msgid "Tile Reflection"
-msgstr "Dlaždicový odraz"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:45
-msgid "Relief"
-msgstr "Reliéf"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:26
-msgid "Emboss"
-msgstr "Otisk"
-
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
-msgid "Mandelbrot Fractal"
-msgstr "Mandelbrotův fraktál"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:26
-msgid "Bulge"
-msgstr "Vyboulit"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:26
-msgid "Twist"
-msgstr "Zkroutit"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
-msgid "Soften Portrait"
-msgstr "Zjemnit portrét"
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
-msgid "Reduce Noise"
-msgstr "Snížit šum"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
-msgid "Julia Fractal"
-msgstr "Juliin fraktál"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:29
-msgid "Median"
-msgstr "Medián"
-
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:26
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "Křivky"
-
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
-msgid "Levels"
-msgstr "Úrovně"
+"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
+"X-Generator: Launchpad (build 12486)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
 msgstr "Automatická úroveň"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
-#: SoftenPortraitData dialog
 msgid "Invert Colors"
 msgstr "Invertovat barvy"
 
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
+msgid "Levels"
+msgstr "Úrovně"
+
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
+msgid "Sepia"
+msgstr "Sépie"
+
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
 msgstr "Posterizovat"
@@ -831,17 +42,18 @@ msgstr "Posterizovat"
 msgid "Black and White"
 msgstr "Černobílý"
 
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:28
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Curves"
+msgstr "Křivky"
+
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
+msgid "Brightness / Contrast"
+msgstr "Jas / Kontrast"
+
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
 msgstr "Odstín / Sytost"
-
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
-msgid "Sepia"
-msgstr "Sépie"
-
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Jas / Kontrast"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
@@ -915,25 +127,1069 @@ msgstr "Modrá "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
+msgstr "Tip: Pravým kliknutím odstraníte ovládací body"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
+msgid "Reduce Noise"
+msgstr "Snížit šum"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
+#: Pinta.Effects/Effects/MedianEffect.cs:37
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
+msgid "Noise"
+msgstr "Šum"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:26
+msgid "Fragment"
+msgstr "Fragment"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:34
+#: Pinta.Effects/Effects/UnfocusEffect.cs:36
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
+msgid "Blurs"
+msgstr "Rozmazání"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:30
+msgid "Clouds"
+msgstr "Mraky"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:38
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
+msgid "Render"
+msgstr "Vykreslit"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:28
+msgid "Unfocus"
+msgstr "Rozostření"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
+msgid "Red Eye Removal"
+msgstr "Odstranění červených očí"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
+#: Pinta.Effects/Effects/GlowEffect.cs:39
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
+#: Pinta.Effects/Effects/SharpenEffect.cs:34
+msgid "Photo"
+msgstr "Fotografie"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr "Mandelbrotův fraktál"
+
+#: Pinta.Effects/Effects/GlowEffect.cs:31
+msgid "Glow"
+msgstr "Záře"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
+msgid "Edge Detect"
+msgstr "Detekce hran"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
+#: Pinta.Effects/Effects/ReliefEffect.cs:33
+#: Pinta.Effects/Effects/EmbossEffect.cs:34
+#: Pinta.Effects/Effects/OutlineEffect.cs:37
+msgid "Stylize"
+msgstr "Stylizování"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
+msgid "Radial Blur"
+msgstr "Rozmazání otáčením"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
+msgid "Frosted Glass"
+msgstr "Omrzlé sklo"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
+#: Pinta.Effects/Effects/TileEffect.cs:34
+#: Pinta.Effects/Effects/PixelateEffect.cs:38
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
+#: Pinta.Effects/Effects/BulgeEffect.cs:34
+#: Pinta.Effects/Effects/TwistEffect.cs:34
+msgid "Distort"
+msgstr "Pokřivit"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "Olejomalba"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
+#: Pinta.Effects/Effects/InkSketchEffect.cs:42
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
+msgid "Artistic"
+msgstr "Umělecké"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "Juliin fraktál"
+
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+msgid "Soften Portrait"
+msgstr "Zjemnit portrét"
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:45
+msgid "Relief"
+msgstr "Reliéf"
+
+#: Pinta.Effects/Effects/InkSketchEffect.cs:34
+msgid "Ink Sketch"
+msgstr "Inkoustový náčrt"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:29
+msgid "Median"
+msgstr "Medián"
+
+#: Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "Otisk"
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
+msgid "Gaussian Blur"
+msgstr "Gaussovo rozmazání"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:26
+msgid "Sharpen"
+msgstr "Zaostřit"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
+msgid "Add Noise"
+msgstr "Přidat šum"
+
+#: Pinta.Effects/Effects/TileEffect.cs:26
+msgid "Tile Reflection"
+msgstr "Dlaždicový odraz"
+
+#: Pinta.Effects/Effects/PixelateEffect.cs:26
+msgid "Pixelate"
+msgstr "Rozpixelovat"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
+msgid "Motion Blur"
+msgstr "Rozmazání pohybem"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "Převrácení pólů"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:26
+msgid "Bulge"
+msgstr "Vyboulit"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "Rozmazání přiblížením"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Pencil Sketch"
+msgstr "Náčrt tužkou"
+
+#: Pinta.Effects/Effects/OutlineEffect.cs:29
+#: Pinta.Tools/TextTool/TextTool.cs:171
+msgid "Outline"
+msgstr "Obtáhnout"
+
+#: Pinta.Effects/Effects/TwistEffect.cs:26
+msgid "Twist"
+msgstr "Zkroutit"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+msgid "label1"
+msgstr "popisek1"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "popisek"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "Náhodný šum"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr "Znovu načíst"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
+msgid "Choose Primary Color"
+msgstr "Vybrat primární barvu"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
+msgid "Choose Secondary Color"
+msgstr "Vybrat sekundární barvu"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
+msgid "Choose Palette Color"
+msgstr "Vybrat barvu palety"
+
+#: Pinta.Tools/RectangleSelectTool.cs:38
+msgid "Rectangle Select"
+msgstr "Obdélníkový výběr"
+
+#: Pinta.Tools/RectangleSelectTool.cs:44
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+"Klik a tažení nakreslí obdélníkový výběr. Pro čtvercový výběr držte shift."
+
+#: Pinta.Tools/CloneStampTool.cs:43
+msgid "Clone Stamp"
+msgstr "Klonovací razítko"
+
+#: Pinta.Tools/CloneStampTool.cs:48
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr "Ctrl+Levý klik k výběru zdroje, levý klik kreslí."
+
+#: Pinta.Tools/MagicWandTool.cs:46
+msgid "Magic Wand Select"
+msgstr "Výběr kouzelnou hůlkou"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Click to select region of similar color."
+msgstr "Klik vybere oblast s podobnou barvou."
+
+#: Pinta.Tools/RectangleTool.cs:38
+msgid "Rectangle"
+msgstr "Obdélník"
+
+#: Pinta.Tools/RectangleTool.cs:44
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+"Klik a tažení nakreslí obdélník (pravý klik sekundární barvou). Pro kreslení "
+"čtverce držte shift."
+
+#: Pinta.Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Přesunout výběr"
+
+#: Pinta.Tools/MoveSelectionTool.cs:48
+msgid "Drag the selection to move selection outline."
+msgstr "Pro posunutí obrysu táhnout vyběrem ."
+
+#: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
+msgid "Gradient"
+msgstr "Přechod"
+
+#: Pinta.Tools/GradientTool.cs:64
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+"Klik a tažení nakreslé přechod od primární k sekundární barvě. Pravý klik "
+"kreslí obráceně."
+
+#: Pinta.Tools/GradientTool.cs:174
+msgid "Linear Gradient"
+msgstr "Lineární přechod"
+
+#: Pinta.Tools/GradientTool.cs:175
+msgid "Linear Reflected Gradient"
+msgstr "Lineární odražeý přechod"
+
+#: Pinta.Tools/GradientTool.cs:176
+msgid "Linear Diamond Gradient"
+msgstr "Lineární kosočtvercový přechod"
+
+#: Pinta.Tools/GradientTool.cs:177
+msgid "Radial Gradient"
+msgstr "Radiální přechod"
+
+#: Pinta.Tools/GradientTool.cs:178
+msgid "Conical Gradient"
+msgstr "Kónický přechod"
+
+#: Pinta.Tools/FloodTool.cs:73
+msgid "Flood Mode"
+msgstr "Záplavový režim"
+
+#: Pinta.Tools/FloodTool.cs:80
+msgid "Contiguous"
+msgstr "Spojité"
+
+#: Pinta.Tools/FloodTool.cs:81
+msgid "Global"
+msgstr "Globální"
+
+#: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr "Tolerance"
+
+#: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
+msgid "Paintbrush"
+msgstr "Štětec"
+
+#: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Levý klik kreslí primarní barvou, pravý klik kreslí sekundární barvou."
+
+#: Pinta.Tools/PaintBrushTool.cs:64
+msgid "Type"
+msgstr "Typ"
+
+#: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
+msgid "Pencil"
+msgstr "Tužka"
+
+#: Pinta.Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
+msgstr ""
+"Levý klik kreslí neupravenou, jednopixelovou čáru primární barvy, pravý klik "
+"kreslí sekundární barvou."
+
+#: Pinta.Tools/EllipseSelectTool.cs:38
+msgid "Ellipse Select"
+msgstr "Elipsový výběr"
+
+#: Pinta.Tools/EllipseSelectTool.cs:44
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+"Klik a tažení nakreslí elliptický výběr. Pro kruhový výběr držte shift."
+
+#: Pinta.Tools/LineCurveTool.cs:38
+msgid "Line"
+msgstr "Čára"
+
+#: Pinta.Tools/LineCurveTool.cs:44
+msgid ""
+"Left click to draw with primary color, right click for secondary color."
+msgstr ""
+"Levý klik kreslí primární barvou, pravý klik kreslí sekundární barvou."
+
+#: Pinta.Tools/EraserTool.cs:45
+msgid "Eraser"
+msgstr "Guma"
+
+#: Pinta.Tools/EraserTool.cs:47
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
 
+#: Pinta.Tools/PanTool.cs:38
+msgid "Pan"
+msgstr "Posun"
+
+#: Pinta.Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr "Klik a táhnutí navedou obrazék."
+
+#: Pinta.Tools/ColorPickerTool.cs:44
+msgid "Color Picker"
+msgstr "Kapátko"
+
+#: Pinta.Tools/ColorPickerTool.cs:50
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"Levým klikem se nastaví primarní barva. Pravým klikem se nastaví sekundarní "
+"barva."
+
+#: Pinta.Tools/ColorPickerTool.cs:62
+msgid "After select"
+msgstr "Po výběru"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Do not switch tool"
+msgstr "Nepřepínat nástroj"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to previous tool"
+msgstr "Přepnout na předchozí nástroj"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to Pencil tool"
+msgstr "Přepnout na tužku"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "Zakulacený obdélník"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:50
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain."
+msgstr ""
+"Klik a težení nakreslí zaoblený obdélník (pravý klik v sekundární barvě). "
+"Pro čtverec držte shift."
+
+#: Pinta.Tools/RoundedRectangleTool.cs:83
+msgid "Radius"
+msgstr "Poloměr"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:88
+msgid "Decrease rectangle's corner radius"
+msgstr "Snížit poloměr rohů obdélníku"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:102
+msgid "Increase rectangle's corner radius"
+msgstr "Zvýšit poloměr rohů obdélníku"
+
+#: Pinta.Tools/MoveSelectedTool.cs:42
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Move Selected Pixels"
+msgstr "Posunout vybrané pixely"
+
+#: Pinta.Tools/MoveSelectedTool.cs:48
+msgid "Drag the selection to move selected content."
+msgstr "Táhněte výběrem abyste posunuli obsah"
+
+#: Pinta.Tools/RecolorTool.cs:59
+msgid "Recolor"
+msgstr "Přebarvit"
+
+#: Pinta.Tools/RecolorTool.cs:61
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "Levý klik přebarví sekundární barvu na primární."
+
+#: Pinta.Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Plechovka barvy"
+
+#: Pinta.Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Levý klik vyplní oblast primární barvou, pravý klik vyplní oblast sekundární "
+"barvou."
+
+#: Pinta.Tools/EllipseTool.cs:38
+msgid "Ellipse"
+msgstr "Elipsa"
+
+#: Pinta.Tools/EllipseTool.cs:44
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+"Klik a tažení nakreslí elipsu (pravý klik sekundární barvou). Pro nakreslení "
+"kruhu držte shift."
+
+#: Pinta.Tools/TextTool/TextTool.cs:36
+msgid "Text"
+msgstr "Text"
+
+#: Pinta.Tools/TextTool/TextTool.cs:42
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Levý klik umístí kurzor, pak můžete psát text. Primární barva je barva textu."
+
+#: Pinta.Tools/TextTool/TextTool.cs:77
+msgid "Font"
+msgstr "Písmo"
+
+#: Pinta.Tools/TextTool/TextTool.cs:112
+msgid "Bold"
+msgstr "Tučně"
+
+#: Pinta.Tools/TextTool/TextTool.cs:119
+msgid "Italic"
+msgstr "Kurzíva"
+
+#: Pinta.Tools/TextTool/TextTool.cs:126
+msgid "Underline"
+msgstr "Podtržené"
+
+#: Pinta.Tools/TextTool/TextTool.cs:135
+msgid "Left Align"
+msgstr "Zarovnat doleva"
+
+#: Pinta.Tools/TextTool/TextTool.cs:143
+msgid "Center Align"
+msgstr "Zarovnat na střed"
+
+#: Pinta.Tools/TextTool/TextTool.cs:150
+msgid "Right Align"
+msgstr "Zarovnat doprava"
+
+#: Pinta.Tools/TextTool/TextTool.cs:162
+msgid "Text Style"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
+msgid "Normal"
+msgstr "Normální"
+
+#: Pinta.Tools/TextTool/TextTool.cs:170
+msgid "Normal and Outline"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:179
+msgid "Outline width"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:184
+msgid "Decrease outline size"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:201
+msgid "Increase outline size"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
+msgid "Brush width"
+msgstr "Šířka štětce"
+
+#: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
+msgid "Decrease brush size"
+msgstr "Zmenšit štětec"
+
+#: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
+msgid "Increase brush size"
+msgstr "Zvětšit štětec"
+
+#: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
+msgid "Fill Style"
+msgstr "Styl výpně"
+
+#: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
+msgid "Outline Shape"
+msgstr "Obtáhnout tvar"
+
+#: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
+msgid "Fill Shape"
+msgstr "Vyplnit tvar"
+
+#: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
+msgid "Fill and Outline Shape"
+msgstr "Vyplnit a Obtáhnout tvar"
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:38
+msgid "Circles"
+msgstr "Kruhy"
+
+#: Pinta.Tools/Brushes/GridBrush.cs:38
+msgid "Grid"
+msgstr "Mřížka"
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:40
+msgid "Squares"
+msgstr "Čtverce"
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:38
+msgid "Splatter"
+msgstr "Cákance"
+
+#: Pinta.Tools/ZoomTool.cs:49
+msgid "Zoom"
+msgstr "Lupa"
+
+#: Pinta.Tools/ZoomTool.cs:55
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Levý klik přiblíží. Pravý klik oddálí. Klik a obtažení přiblíží výběr."
+
+#: Pinta.Tools/LassoSelectTool.cs:45
+msgid "Lasso Select"
+msgstr "Výběr lasem"
+
+#: Pinta.Tools/LassoSelectTool.cs:47
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "Klikněte a obtáhněte vybranou oblast."
+
+#: Pinta.Tools/FreeformShapeTool.cs:53
+msgid "Freeform Shape"
+msgstr "Volný tvar"
+
+#: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
+msgid "About"
+msgstr "O aplikaci"
+
+#: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
+msgid "..."
+msgstr "…"
+
+#: Pinta/MainWindow.cs:456
+msgid "_File"
+msgstr "_Soubor"
+
+#: Pinta/MainWindow.cs:457
+msgid "_Edit"
+msgstr "_Upravit"
+
+#: Pinta/MainWindow.cs:459
+msgid "_View"
+msgstr "_Zobrazit"
+
+#: Pinta/MainWindow.cs:462
+msgid "_Image"
+msgstr "_Obrázek"
+
+#: Pinta/MainWindow.cs:463
+msgid "_Layers"
+msgstr "_Vrstvy"
+
+#: Pinta/MainWindow.cs:464
+msgid "_Adjustments"
+msgstr "_Přizpůsobení"
+
+#: Pinta/MainWindow.cs:465
+msgid "Effe_cts"
+msgstr "Efe_kty"
+
+#: Pinta/MainWindow.cs:467
+msgid "_Window"
+msgstr "_Okno"
+
+#: Pinta/MainWindow.cs:471
+msgid "Tool Windows"
+msgstr "Okna Nástrojů"
+
+#: Pinta/MainWindow.cs:475
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
+msgid "Tools"
+msgstr "Nástroje"
+
+#: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
+#: Pinta.Core/Actions/EditActions.cs:121
+msgid "Palette"
+msgstr "Paleta"
+
+#: Pinta/MainWindow.cs:588
+msgid "Documents"
+msgstr "Dokumenty"
+
+#: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
+msgid "Layers"
+msgstr "Vrstvy"
+
+#: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
+msgid "History"
+msgstr "Historie"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
+msgid "Hide"
+msgstr "Skrýt"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:190
+msgid "Dock"
+msgstr "Ukotvit"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:194
+#: Pinta/DockLibrary/DockItem.cs:502
+msgid "Auto Hide"
+msgstr "Skrývat automaticky"
+
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr "Dokovatelné"
+
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Plovoucí"
+
+#: Pinta/DialogHandlers.cs:109
+msgid "Take Screenshot"
+msgstr "Sejmout obrazovku"
+
+#: Pinta/DialogHandlers.cs:110
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Zpoždění před sejmutím obrazovky (sekundy):"
+
+#: Pinta/DialogHandlers.cs:158
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "Uložit změny obrázku \"{0}\" před zavřením?"
+
+#: Pinta/DialogHandlers.cs:159
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Pokud je neuložíte, veškeré změny budou navždy ztraceny."
+
+#: Pinta/DialogHandlers.cs:166
+msgid "Close without saving"
+msgstr "Zavřít bez uložení"
+
+#: Pinta/DialogHandlers.cs:193
+msgid "Resize Palette"
+msgstr "Velikost Palety"
+
+#: Pinta/DialogHandlers.cs:194
+msgid "New palette size:"
+msgstr "Nová velikost palety:"
+
+#: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
+msgid "Paste Into New Layer"
+msgstr "Vložit do nové vrstvy"
+
+#: Pinta/DialogHandlers.cs:320
+msgid "Layer Opacity"
+msgstr "Průhlednost vrstvy"
+
+#: Pinta/DialogHandlers.cs:325
+msgid "Rename Layer"
+msgstr "Přejmenovat vrstvu"
+
+#: Pinta/DialogHandlers.cs:330
+msgid "Hide Layer"
+msgstr "Skrýt vrstvu"
+
+#: Pinta/DialogHandlers.cs:330
+msgid "Show Layer"
+msgstr "Zobrazit vrstvu"
+
+#: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
+msgid "Layer Properties"
+msgstr "Vlastnosti vrstvy"
+
+#: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
+msgid "Open Image File"
+msgstr "Otevřít obrázek"
+
+#: Pinta/DialogHandlers.cs:423
+msgid "Image files"
+msgstr "Soubory obrázků"
+
+#: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
+msgid "All files"
+msgstr "Všechny soubory"
+
+#: Pinta/DialogHandlers.cs:480
+msgid "Paste cancelled"
+msgstr "Vkládání zrušeno"
+
+#: Pinta/DialogHandlers.cs:481
+msgid "The clipboard does not contain an image"
+msgstr "Schránka neobsahuje obrázek"
+
+#: Pinta/DialogHandlers.cs:514
+msgid "Save Image File"
+msgstr "Uložení obrázku"
+
+#: Pinta/DialogHandlers.cs:612
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta nepodporuje ukládání obrázků v tomto typu souborů.."
+
+#: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
+#: Pinta.Core/Actions/EditActions.cs:347
+msgid "Error"
+msgstr "Chyba"
+
+#: Pinta/DialogHandlers.cs:633
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "Soubor \"{0}\" už existuje. Chcete ho přepsat?"
+
+#: Pinta/DialogHandlers.cs:634
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr "Soubor už existuje v \"{1}\". Nahrazení přepíše jeho obsah."
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr "Kvalita JPEG"
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "Quality: "
+msgstr "Kvalita: "
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Název"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+msgid "Version"
+msgstr "Verze"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Cesta"
+
+#: Pinta/Dialogs/AboutDialog.cs:101
+msgid "Contributors to this Release"
+msgstr "Přispěvatelé tohoto vydání"
+
+#: Pinta/Dialogs/AboutDialog.cs:111
+msgid "Previous Contributors"
+msgstr "Předchozí přispěvatelé"
+
+#: Pinta/Dialogs/AboutDialog.cs:120
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  schunka https://launchpad.net/~schunka"
+
+#: Pinta/Dialogs/AboutDialog.cs:123
+msgid "Translated by:"
+msgstr "Přeložili:"
+
+#: Pinta/Dialogs/AboutDialog.cs:130
+msgid "Based on the work of Paint.NET:"
+msgstr "Na základě práce Paint.NET"
+
+#: Pinta/Dialogs/AboutDialog.cs:137
+msgid "Using some icons from:"
+msgstr "Použity některé ikonky z:"
+
+#: Pinta/Dialogs/AboutDialog.cs:249
+msgid "About Pinta"
+msgstr "O Pinta"
+
+#: Pinta/Dialogs/AboutDialog.cs:267
+msgid "Version Info"
+msgstr "Informace o verzi"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Licence"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Vydáno pod licencí MIT X11"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Copyright"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "Od přispěvatelů Pinta"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
+msgid "Name:"
+msgstr "Název:"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
+msgid "Visible"
+msgstr "Viditelná"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
+msgid "Opacity:"
+msgstr "Průhlednost"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: Pinta.Core/Classes/Document.cs:612
+msgid "Resize Canvas"
+msgstr "Změna velikosti plátna"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "Procentuelně:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "Na velikost:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
+msgid "Width:"
+msgstr "Šířka:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
+msgid "pixels"
+msgstr "pixely"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
+msgid "Height:"
+msgstr "Výška:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Zachovat poměr stran"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Kotva:"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+msgid "Resize Image"
+msgstr "Změnit velikost"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
+#: Pinta.Core/Managers/WorkspaceManager.cs:159
+msgid "New Image"
+msgstr "Nový obrázek"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
+msgid "New Image Size          "
+msgstr "Velikost nového obrázku          "
+
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr "počet vláken použitých k vykreslení"
+
+#: Pinta/Options.cs:486
+msgid "OptionName"
+msgstr "JménoVolby"
+
+#: Pinta.Core/Managers/LivePreviewManager.cs:220
+msgid "Rendering Effect"
+msgstr "Vykreslovací efekt"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:91
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Neuložený obrázek {0}"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:150
+msgid "Background"
+msgstr "Pozadí"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:177
+msgid "Open Image"
+msgstr "Otevřít obrázek"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:184
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Nelze otevřít soubor: {0}"
+
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+#: Pinta.Core/Actions/EditActions.cs:69
+msgid "Paste"
+msgstr "Vložit"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+#: Pinta.Core/Actions/ImageActions.cs:65
+msgid "Rotate 180°"
+msgstr "Otočit o 180°"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Překlopit obrázek horizontálně"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Překlopit obrázek vertikálně"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+#: Pinta.Core/Actions/ImageActions.cs:63
+msgid "Rotate 90° Clockwise"
+msgstr "Otočit o 90° po směru hodin"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:64
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Otočit o 90° proti směru hodin"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Překlopit vrstvu horizontálně"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Překlopit vrstvu vertikálně"
+
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Dokončit pixely"
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Stránky Pinta"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Nahlásit chybu"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr "Přeložit tuto aplikaci"
+
+#: Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Uložit vše"
+
+#: Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "Zavřít vše"
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Nový..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr "Nový Snímek obrazovky"
+
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
+msgid "Open..."
+msgstr "Otevřít..."
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Otevřít nedávný"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Zavřít"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Uložit"
+
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
+msgid "Save As..."
+msgstr "Uložit jako..."
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Vytisknout"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Ukončit"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Nový"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Otevřít"
+
 #: Pinta.Core/Actions/LayerActions.cs:64
-#: Pinta.Core/Actions/LayerActions.cs:271
+#: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
 msgstr "Přidat novou vrstvu"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:255
+#: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
 msgstr "Smazat vrstvu"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:247
+#: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
 msgstr "Duplikovat vrstvu"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:226
+#: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
 msgstr "Spojit vrstvy"
 
@@ -954,118 +1210,25 @@ msgid "Rotate / Zoom"
 msgstr "Otočení / Zoom"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
-#: Pinta.Core/Actions/LayerActions.cs:206
+#: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
 msgstr "Posunout vrstvu nahoru"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:216
+#: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
 msgstr "Posunout vrstvu dolů"
 
-#: Pinta.Core/Actions/LayerActions.cs:155
-#: Pinta.Core/Actions/FileActions.cs:276
-msgid "Open Image File"
-msgstr "Otevřít obrázek"
+#: Pinta.Core/Actions/LayerActions.cs:74
+msgid "Layer Properties..."
+msgstr "Vlastnosti Vrstvy..."
 
-#: Pinta.Core/Actions/LayerActions.cs:177
+#: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
 msgstr "Vložit ze souboru"
 
-#: Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Nový..."
-
-#: Pinta.Core/Actions/FileActions.cs:55
-msgid "Open..."
-msgstr "Otevřít..."
-
-#: Pinta.Core/Actions/FileActions.cs:56
-msgid "Open Recent"
-msgstr "Otevřít nedávný"
-
-#: Pinta.Core/Actions/FileActions.cs:70
-msgid "Close"
-msgstr "Zavřít"
-
-#: Pinta.Core/Actions/FileActions.cs:71
-msgid "Save"
-msgstr "Uložit"
-
-#: Pinta.Core/Actions/FileActions.cs:72
-msgid "Save As..."
-msgstr "Uložit jako..."
-
-#: Pinta.Core/Actions/FileActions.cs:73
-msgid "Print"
-msgstr "Vytisknout"
-
-#: Pinta.Core/Actions/FileActions.cs:74
-msgid "Quit"
-msgstr "Ukončit"
-
-#: Pinta.Core/Actions/FileActions.cs:76
-msgid "New"
-msgstr "Nový"
-
-#: Pinta.Core/Actions/FileActions.cs:77
-msgid "Open"
-msgstr "Otevřít"
-
-#: Pinta.Core/Actions/FileActions.cs:125
-msgid "Background"
-msgstr "Pozadí"
-
-#: Pinta.Core/Actions/FileActions.cs:170
-msgid "Open Image"
-msgstr "Otevřít obrázek"
-
-#: Pinta.Core/Actions/FileActions.cs:177
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Nelze otevřít soubor: {0}"
-
-#: Pinta.Core/Actions/FileActions.cs:178
-msgid "Error"
-msgstr "Chyba"
-
-#: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr "Uložit změny obrázku \"{0}\" před otevřením nového?"
-
-#: Pinta.Core/Actions/FileActions.cs:284
-msgid "Image files"
-msgstr "Soubory obrázků"
-
-#: Pinta.Core/Actions/FileActions.cs:288
-msgid "All files"
-msgstr "Všechny soubory"
-
-#: Pinta.Core/Actions/FileActions.cs:320
-msgid "Save Image File"
-msgstr "Uložení obrázku"
-
-#: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "{0} obrázek ({1})"
-
-#: Pinta.Core/Actions/FileActions.cs:365
-msgid "OpenRaster image (*.ora)"
-msgstr "OpenRaster formát (*.ora)"
-
-#: Pinta.Core/Actions/FileActions.cs:392
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Uložit změny obrázku \"{0}\" před zavřením?"
-
-#: Pinta.Core/Actions/FileActions.cs:402
-msgid "Close without saving"
-msgstr "Zavřít bez uložení"
-
 #: Pinta.Core/Actions/ImageActions.cs:58
-#: Pinta.Core/Actions/ImageActions.cs:168
+#: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "Vystřihnout do výběru"
 
@@ -1077,189 +1240,194 @@ msgstr "Zvětšit/zmenšit..."
 msgid "Canvas Size..."
 msgstr "Velikost plátna..."
 
-#: Pinta.Core/Actions/ImageActions.cs:63
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr "Otočit o 90° po směru hodin"
-
-#: Pinta.Core/Actions/ImageActions.cs:64
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Otočit o 90° proti směru hodin"
-
-#: Pinta.Core/Actions/ImageActions.cs:65
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr "Otočit o 180°"
-
 #: Pinta.Core/Actions/ImageActions.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:121
+#: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
 msgstr "Zploštit"
 
-#: Pinta.Core/Actions/EditActions.cs:59
-msgid "Undo"
-msgstr "Vrátit změny"
-
-#: Pinta.Core/Actions/EditActions.cs:60
-msgid "Redo"
-msgstr "Udělat znovu"
-
-#: Pinta.Core/Actions/EditActions.cs:61
-msgid "Cut"
-msgstr "Vyjmout"
-
-#: Pinta.Core/Actions/EditActions.cs:62
-msgid "Copy"
-msgstr "Kopírovat"
-
-#: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
-msgid "Paste"
-msgstr "Vložit"
-
-#: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
-msgid "Paste Into New Layer"
-msgstr "Vložit do nové vrstvy"
-
-#: Pinta.Core/Actions/EditActions.cs:65
-msgid "Paste Into New Image"
-msgstr "Vložit do nového obrázku"
-
-#: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
-#: Pinta.Core/Actions/EditActions.cs:276
-msgid "Erase Selection"
-msgstr "Smazat výběr"
-
-#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
-msgid "Fill Selection"
-msgstr "Vyplnit výběr"
-
-#: Pinta.Core/Actions/EditActions.cs:68
-msgid "Invert Selection"
-msgstr "Obrátit výběr"
-
-#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
-msgid "Select All"
-msgstr "Vybrat vše"
-
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
-msgid "Deselect"
-msgstr "Zrušit výběr"
-
-#: Pinta.Core/Actions/ViewActions.cs:62
+#: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
 msgstr "Přiblížit"
 
-#: Pinta.Core/Actions/ViewActions.cs:63
+#: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom Out"
 msgstr "Oddálit"
 
-#: Pinta.Core/Actions/ViewActions.cs:64
-msgid "Zoom to Window"
-msgstr "Přiblížit do okna"
-
 #: Pinta.Core/Actions/ViewActions.cs:65
+msgid "Best Fit"
+msgstr ""
+
+#: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
 msgstr "Přiblížit na výběr"
 
-#: Pinta.Core/Actions/ViewActions.cs:66
-msgid "Actual Size"
-msgstr "Současná velikost"
-
 #: Pinta.Core/Actions/ViewActions.cs:67
+msgid "Normal Size"
+msgstr ""
+
+#: Pinta.Core/Actions/ViewActions.cs:68
+msgid "Toolbar"
+msgstr "Panel Nástrojů"
+
+#: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Pixel Grid"
 msgstr "Pixelová mřížka"
 
-#: Pinta.Core/Actions/ViewActions.cs:68
+#: Pinta.Core/Actions/ViewActions.cs:70
 msgid "Rulers"
 msgstr "Pravítka"
 
-#: Pinta.Core/Actions/ViewActions.cs:69 Pinta.Core/Actions/ViewActions.cs:75
+#: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Pixels"
 msgstr "Pixely"
 
-#: Pinta.Core/Actions/ViewActions.cs:70 Pinta.Core/Actions/ViewActions.cs:75
+#: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Inches"
 msgstr "Palce"
 
-#: Pinta.Core/Actions/ViewActions.cs:71 Pinta.Core/Actions/ViewActions.cs:75
+#: Pinta.Core/Actions/ViewActions.cs:73
 msgid "Centimeters"
 msgstr "Centimetry"
 
-#: Pinta.Core/Actions/ViewActions.cs:72
+#: Pinta.Core/Actions/ViewActions.cs:74
 msgid "Fullscreen"
 msgstr "Celá obrazovka"
 
-#: Pinta.Core/Actions/ViewActions.cs:190
-#: Pinta.Core/Managers/WorkspaceManager.cs:126
-#: Pinta.Core/Managers/WorkspaceManager.cs:147
+#: Pinta.Core/Actions/ViewActions.cs:114
+msgid "Ruler Units"
+msgstr "Jednotky pravítka"
+
+#: Pinta.Core/Actions/ViewActions.cs:194
+#: Pinta.Core/Classes/DocumentWorkspace.cs:226
+#: Pinta.Core/Classes/DocumentWorkspace.cs:234
 msgid "Window"
 msgstr "Okno"
 
-#: Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr "Stránky Pinta"
+#: Pinta.Core/Actions/EditActions.cs:65
+msgid "Undo"
+msgstr "Vrátit změny"
 
-#: Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr "Nahlásit chybu"
+#: Pinta.Core/Actions/EditActions.cs:66
+msgid "Redo"
+msgstr "Udělat znovu"
 
-#: Pinta.Core/Actions/HelpActions.cs:52
-msgid "Translate This Application"
-msgstr "Přeložit tuto aplikaci"
+#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: Pinta.Core/Actions/EditActions.cs:68
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: Pinta.Core/Actions/EditActions.cs:71
+msgid "Paste Into New Image"
+msgstr "Vložit do nového obrázku"
+
+#: Pinta.Core/Actions/EditActions.cs:72
+msgid "Delete Selection"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
+msgid "Fill Selection"
+msgstr "Vyplnit výběr"
+
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Invert Selection"
+msgstr "Obrátit výběr"
+
+#: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
+msgid "Select All"
+msgstr "Vybrat vše"
+
+#: Pinta.Core/Actions/EditActions.cs:76
+msgid "Deselect All"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:80
+msgid "Reset to Default"
+msgstr "Nastavit na výchozí"
+
+#: Pinta.Core/Actions/EditActions.cs:81
+msgid "Set Number of Colors"
+msgstr "Nastavit počet barev"
+
+#: Pinta.Core/Actions/EditActions.cs:212
+msgid "Erase Selection"
+msgstr "Smazat výběr"
+
+#: Pinta.Core/Actions/EditActions.cs:221
+msgid "Deselect"
+msgstr "Zrušit výběr"
+
+#: Pinta.Core/Actions/EditActions.cs:319
+msgid "Open Palette File"
+msgstr "Otevřít sobor s paletou"
+
+#: Pinta.Core/Actions/EditActions.cs:326
+msgid "Palette files (*.txt, *.gpl)"
+msgstr "Soubory palet (*.txt, *.gpl)"
+
+#: Pinta.Core/Actions/EditActions.cs:346
+#, csharp-format
+msgid ""
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
+msgstr ""
+"Nelze otevřít soubor palety: {0}.\n"
+"Ověřte prosím, že se pokoušíte otevřít platnou paletu GIMP nebo Paint.NET."
+
+#: Pinta.Core/Actions/EditActions.cs:359
+msgid "Save Palette File"
+msgstr "Uložit soubor palety"
+
+#: Pinta.Core/Actions/EditActions.cs:365
+msgid "Paint.NET palette (*.txt)"
+msgstr "Paint.NET paleta (*.txt)"
+
+#: Pinta.Core/Actions/EditActions.cs:370
+msgid "GIMP palette (*.gpl)"
+msgstr "GIMP paleta (*.gpl)"
+
+#: Pinta.Core/Classes/Document.cs:298
+msgid "Layer"
+msgstr "Vrstva"
+
+#: Pinta.Core/Classes/Document.cs:371
+msgid "copy"
+msgstr "kopírovat"
+
+#: Pinta.Core/Classes/BaseTool.cs:151
+msgid "Tool"
+msgstr "Nástroj"
+
+#: Pinta.Core/Classes/BaseTool.cs:218
+msgid "Shortcut key"
+msgstr "Klávesová zkratka"
+
+#: Pinta.Core/Classes/BaseTool.cs:241
+msgid "Normal Blending"
+msgstr "Normální míchání"
+
+#: Pinta.Core/Classes/BaseTool.cs:242
+msgid "Overwrite"
+msgstr "Přepsat"
+
+#: Pinta.Core/Classes/BaseTool.cs:256
+msgid "Antialiasing On"
+msgstr "Antialiasing Zapnout"
+
+#: Pinta.Core/Classes/BaseTool.cs:257
+msgid "Antialiasing Off"
+msgstr "Antialiasing Vypnout"
+
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} obrázek ({1})"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
 msgstr "Všeobecné"
-
-#: Pinta.Core/Classes/BaseTool.cs:135
-msgid "Tool"
-msgstr "Nástroj"
-
-#: Pinta.Core/Classes/BaseTool.cs:193
-msgid "Shortcut key"
-msgstr "Klávesová zkratka"
-
-#: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
-#: Pinta.Core/Classes/BaseTool.cs:239
-msgid "Antialiasing"
-msgstr "Vyhlazování"
-
-#: Pinta.Core/Classes/BaseTool.cs:218
-msgid "Normal blending / Overwrite blending"
-msgstr "Normální / Přepisovací směšování"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Překlopit obrázek horizontálně"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Překlopit obrázek vertikálně"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Překlopit vrstvu horizontálně"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Překlopit vrstvu vertikálně"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Dokončit pixely"
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
-msgid "Rendering Effect"
-msgstr "Vykreslovací efekt"
-
-#: Pinta.Core/Managers/LayerManager.cs:283
-msgid "copy"
-msgstr "kopírovat"
-
-#: Pinta.Core/Managers/LayerManager.cs:538
-msgid "Layer"
-msgstr "Vrstva"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1440,8 +1608,36 @@ msgstr ""
 "Rada: Pro lepší vysledky nejprve použijte výběrové nástroje k označení "
 "každého oka."
 
+#~ msgid "Adjustments"
+#~ msgstr "Úpravy"
+
+#~ msgid "Help"
+#~ msgstr "Nápověda"
+
+#~ msgid "File"
+#~ msgstr "Soubor"
+
+#~ msgid "Effects"
+#~ msgstr "Efekty"
+
+#~ msgid "Edit"
+#~ msgstr "Upravit"
+
+#~ msgid "View"
+#~ msgstr "Zobrazit"
+
+#~ msgid "Image"
+#~ msgstr "Obrázek"
+
 #~ msgid "%"
 #~ msgstr "%"
+
+#~ msgid "Continue without saving"
+#~ msgstr "Pokračovat bez uložení"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
+#~ msgstr "Uložit změny v obrázku \"{0}\" před vytvořením nového?"
 
 #~ msgid "X :"
 #~ msgstr "X :"
@@ -1449,8 +1645,54 @@ msgstr ""
 #~ msgid "Y :"
 #~ msgstr "Y :"
 
+#~ msgid "RGB\r"
+#~ msgstr "RGB\r"
+
+#~ msgid "In stetic action button box cannot be empty"
+#~ msgstr "Ve steticu nemůže být aktivní tlačitko prázdné"
+
 #~ msgid "Tip : Right-click to remove control points."
 #~ msgstr "Tip: Pravý klik odstraní ovládací body."
 
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
+#~ msgstr "Uložit změny obrázku \"{0}\" před otevřením nového?"
+
+#~ msgid "OpenRaster image (*.ora)"
+#~ msgstr "OpenRaster formát (*.ora)"
+
+#~ msgid "Zoom to Window"
+#~ msgstr "Přiblížit do okna"
+
+#~ msgid "Actual Size"
+#~ msgstr "Současná velikost"
+
+#~ msgid "Normal blending / Overwrite blending"
+#~ msgstr "Normální / Přepisovací směšování"
+
+#~ msgid "Antialiasing"
+#~ msgstr "Vyhlazování"
+
 #~ msgid "Show Pad"
 #~ msgstr "Zobrazit podložku"
+
+#~ msgid "Color Mode"
+#~ msgstr "Barevný režim"
+
+#~ msgid "Transparency Mode"
+#~ msgstr "Průhledný režim"
+
+#~ msgid "Fill mode"
+#~ msgstr "Vyplňovací režim"
+
+#~ msgid "Click and drag to erase a portion of the image."
+#~ msgstr "Klik a tažení smaže kus obrázku"
+
+#~ msgid "X:"
+#~ msgstr "X:"
+
+#~ msgid "Y:"
+#~ msgstr "Y:"
+
+#~ msgid "Mode"
+#~ msgstr "Režim"

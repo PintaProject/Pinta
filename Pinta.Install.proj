@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
 
   <!-- Set some paths -->
@@ -17,6 +17,9 @@
     <Translation Include="po/messages-ar.po">
       <Code>ar</Code>
     </Translation>
+    <Translation Include="po/messages-br.po">
+      <Code>br</Code>
+    </Translation>
     <Translation Include="po/messages-ca.po">
       <Code>ca</Code>
     </Translation>
@@ -32,11 +35,20 @@
     <Translation Include="po/messages-el.po">
       <Code>el</Code>
     </Translation>
+    <Translation Include="po/messages-en_GB.po">
+      <Code>en_GB</Code>
+    </Translation>
     <Translation Include="po/messages-es.po">
       <Code>es</Code>
     </Translation>
+    <Translation Include="po/messages-eu.po">
+      <Code>eu</Code>
+    </Translation>
     <Translation Include="po/messages-fi.po">
       <Code>fi</Code>
+    </Translation>
+    <Translation Include="po/messages-fo.po">
+      <Code>fo</Code>
     </Translation>
     <Translation Include="po/messages-fr.po">
       <Code>fr</Code>
@@ -52,6 +64,12 @@
     </Translation>
     <Translation Include="po/messages-hr.po">
       <Code>hr</Code>
+    </Translation>
+    <Translation Include="po/messages-hu.po">
+      <Code>hu</Code>
+    </Translation>
+    <Translation Include="po/messages-hy.po">
+      <Code>hy</Code>
     </Translation>
     <Translation Include="po/messages-id.po">
       <Code>id</Code>
@@ -70,6 +88,9 @@
     </Translation>
     <Translation Include="po/messages-nb.po">
       <Code>nb</Code>
+    </Translation>
+    <Translation Include="po/messages-nl.po">
+      <Code>nl</Code>
     </Translation>
     <Translation Include="po/messages-pl.po">
       <Code>pl</Code>

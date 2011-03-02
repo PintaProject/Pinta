@@ -7,804 +7,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-20 21:05-0500\n"
-"PO-Revision-Date: 2010-09-07 10:57+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"POT-Creation-Date: 2011-02-28 17:08-0600\n"
+"PO-Revision-Date: 2010-12-16 10:57+0000\n"
+"Last-Translator: Νιάνιος Ρωμανός <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-26 20:06+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-
-#: Pinta/MainWindow.cs:103 Pinta.Core/Actions/HelpActions.cs:53
-msgid "About"
-msgstr "Σχετικά με..."
-
-#: Pinta/MainWindow.cs:214 Pinta.Tools/PaintBrushTool.cs:45
-msgid "Paintbrush"
-msgstr "Πινέλο"
-
-#: Pinta/MainWindow.cs:259
-msgid "_File"
-msgstr "_Αρχείο"
-
-#: Pinta/MainWindow.cs:260
-msgid "_Edit"
-msgstr "_Επεξεργασία"
-
-#: Pinta/MainWindow.cs:261
-msgid "_View"
-msgstr "_Προβολή"
-
-#: Pinta/MainWindow.cs:262
-msgid "_Image"
-msgstr "Ει_κόνα"
-
-#: Pinta/MainWindow.cs:263
-msgid "_Layers"
-msgstr "Επίπε_δα"
-
-#: Pinta/MainWindow.cs:264
-msgid "_Adjustments"
-msgstr ""
-
-#: Pinta/MainWindow.cs:265
-msgid "Effe_cts"
-msgstr "Ε_φέ"
-
-#: Pinta/MainWindow.cs:266
-msgid "_Window"
-msgstr "Παρά_θυρα"
-
-#: Pinta/MainWindow.cs:267
-msgid "_Help"
-msgstr "_Βοήθεια"
-
-#: Pinta/MainWindow.cs:272
-msgid "Tool Windows"
-msgstr ""
-
-#: Pinta/MainWindow.cs:345
-msgid "Tools"
-msgstr "Εργαλεία"
-
-#: Pinta/MainWindow.cs:355
-msgid "Palette"
-msgstr "Παλέττα"
-
-#: Pinta/MainWindow.cs:368
-msgid "Documents"
-msgstr "Έγγραφα"
-
-#: Pinta/MainWindow.cs:382
-msgid "Layers"
-msgstr "Επίπεδα"
-
-#: Pinta/MainWindow.cs:398
-msgid "History"
-msgstr "Ιστορικό"
-
-#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:90
-msgid "Hide"
-msgstr "Απόκρυψη"
-
-#: Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr ""
-
-#: Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "Ελεύθερα μετακινούμενη"
-
-#: Pinta/DockLibrary/DockItem.cs:502
-#: Pinta/DockLibrary/DockItemContainer.cs:194
-msgid "Auto Hide"
-msgstr "Αυτόματη απόκρυψη"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:190
-msgid "Dock"
-msgstr "Προσάρτηση"
-
-#: Pinta/Dialogs/AboutDialog.cs:97
-msgid "Contributors to this Release"
-msgstr "Συντελεστές Έκδοσης"
-
-#: Pinta/Dialogs/AboutDialog.cs:107
-msgid "Previous Contributors"
-msgstr "Προηγούμενοι Συντελεστές"
-
-#: Pinta/Dialogs/AboutDialog.cs:116
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Psychorat https://launchpad.net/~dougy-giro1\n"
-"  spiros anthis https://launchpad.net/~sugaraddicted"
-
-#: Pinta/Dialogs/AboutDialog.cs:119
-msgid "Translated by:"
-msgstr "Μεταφράστηκε από:"
-
-#: Pinta/Dialogs/AboutDialog.cs:126
-msgid "Based on the work of Paint.NET:"
-msgstr "Βασίζεται στο Paint.NET"
-
-#: Pinta/Dialogs/AboutDialog.cs:133
-msgid "Using some icons from:"
-msgstr "Γίνεται χρήση εικονιδίων απο:"
-
-#: Pinta/Dialogs/AboutDialog.cs:245
-msgid "About Pinta"
-msgstr "Σχετικά με το Pinta"
-
-#: Pinta/Dialogs/AboutDialog.cs:263
-msgid "Version Info"
-msgstr "Πληροφορίες Έκδοσης"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Τίτλος"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-msgid "Version"
-msgstr "Έκδοση"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Διαδρομή"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Άδεια Χρήσης"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Κυκλοφορεί κάτω απο την MIT X11 άδεια χρήσης"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Πνευματικά Δικαιώματα"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "απο τους συντελεστές του Pinta"
-
-#: Pinta/Main.cs:67
-msgid "number of threads to use for rendering"
-msgstr ""
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:44
-msgid "Resize Image"
-msgstr "Αλλαγή Μεγέθους Εικόνας"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-msgid "By percentage:"
-msgstr "Σε ποσοστό:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-msgid "By absolute size:"
-msgstr "Σε απόλυτο μέγεθος:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
-msgid "Width:"
-msgstr "Πλάτος:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
-msgid "pixels"
-msgstr "Εικονοστοιχεία"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
-msgid "Height:"
-msgstr "Ύψος:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-msgid "Maintain aspect ratio"
-msgstr "Διατήρηση αναλογίας διαστάσεων"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44 Pinta/DialogHandlers.cs:193
-#: Pinta.Core/Actions/LayerActions.cs:74
-msgid "Layer Properties"
-msgstr "Ιδιότητες στρώματος"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
-msgid "Name:"
-msgstr "Όνομα:"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
-msgid "Visible"
-msgstr "Ορατό"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
-msgid "Opacity:"
-msgstr "Διαφάνεια:"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Managers/WorkspaceManager.cs:218
-msgid "Resize Canvas"
-msgstr "Αλλαγή Μεγέθους"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Αγκυροβόληση"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
-#: Pinta.Core/Actions/FileActions.cs:133
-msgid "New Image"
-msgstr "Νέα Εικόνα"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
-msgid "New Image Size          "
-msgstr "Νέο Μέγεθος Εικόνας          "
-
-#: Pinta/DialogHandlers.cs:57
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before creating a new one?"
-msgstr ""
-"Να αποθηκευτούν οι αλλαγές στην εικόνα \"{0}\" πριν δημιουργήσετε νέα;"
-
-#: Pinta/DialogHandlers.cs:58 Pinta.Core/Actions/FileActions.cs:208
-#: Pinta.Core/Actions/FileActions.cs:249 Pinta.Core/Actions/FileActions.cs:393
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Αν δε γίνει αποθήκευση, οι αλλαγές θα χαθούν οριστικά."
-
-#: Pinta/DialogHandlers.cs:67 Pinta.Core/Actions/FileActions.cs:216
-#: Pinta.Core/Actions/FileActions.cs:258
-msgid "Continue without saving"
-msgstr "Να μην γίνει αποθήκευση"
-
-#: Pinta/DialogHandlers.cs:178
-msgid "Layer Opacity"
-msgstr "Αδιαφάνεια στρώματος"
-
-#: Pinta/DialogHandlers.cs:183
-msgid "Rename Layer"
-msgstr "Μετονομασία Στρώματος"
-
-#: Pinta/DialogHandlers.cs:188
-msgid "Hide Layer"
-msgstr "Απόκρυψη Στρώματος"
-
-#: Pinta/DialogHandlers.cs:188
-msgid "Show Layer"
-msgstr "Εμφάνιση Στρώματος"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "ετικέττα1"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-msgid "label"
-msgstr "ετικέττα"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "Τυχαίος Θόρυβος"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr ""
-
-#: Pinta.Tools/ColorPickerTool.cs:44
-msgid "Color Picker"
-msgstr "Επιλογέας Χρώματος"
-
-#: Pinta.Tools/ColorPickerTool.cs:50
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "Αριστερό κλικ πρωτεύον χρώμα.Δεξί κλικ δευτερεύον χρώμα."
-
-#: Pinta.Tools/ColorPickerTool.cs:62
-msgid "After select"
-msgstr ""
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Do not switch tool"
-msgstr ""
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Switch to previous tool"
-msgstr ""
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Switch to Pencil tool"
-msgstr "Αλλαγή σε μολύβι"
-
-#: Pinta.Tools/ColorPickerTool.cs:116 Pinta.Tools/PencilTool.cs:48
-msgid "Pencil"
-msgstr "Μολύβι"
-
-#: Pinta.Tools/LassoSelectTool.cs:45
-msgid "Lasso Select"
-msgstr "Επιλογή με λάσο"
-
-#: Pinta.Tools/LassoSelectTool.cs:47
-msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
-
-#: Pinta.Tools/ZoomTool.cs:49
-#: MandelbrotFractalEffect dialog
-#: FragmentEffect dialog
-msgid "Zoom"
-msgstr "Μεγένθυση"
-
-#: Pinta.Tools/ZoomTool.cs:55
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-
-#: Pinta.Tools/ShapeTool.cs:91 Pinta.Tools/BaseBrushTool.cs:68
-msgid "Brush width"
-msgstr "Μήκος βούρτσας"
-
-#: Pinta.Tools/ShapeTool.cs:96 Pinta.Tools/BaseBrushTool.cs:73
-msgid "Decrease brush size"
-msgstr ""
-
-#: Pinta.Tools/ShapeTool.cs:110 Pinta.Tools/BaseBrushTool.cs:87
-msgid "Increase brush size"
-msgstr ""
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Outline Shape"
-msgstr ""
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill Shape"
-msgstr ""
-
-#: Pinta.Tools/ShapeTool.cs:133 Pinta.Tools/FreeformShapeTool.cs:82
-msgid "Fill and Outline Shape"
-msgstr ""
-
-#: Pinta.Tools/MoveSelectedTool.cs:42
-msgid "Move Selected Pixels"
-msgstr ""
-
-#: Pinta.Tools/MoveSelectedTool.cs:48
-msgid "Drag the selection to move selected content."
-msgstr ""
-
-#: Pinta.Tools/PanTool.cs:38
-msgid "Pan"
-msgstr ""
-
-#: Pinta.Tools/PanTool.cs:44
-msgid "Click and drag to navigate image."
-msgstr ""
-
-#: Pinta.Tools/PencilTool.cs:50
-msgid ""
-"Left click to draw freeform, one-pixel wide lines with the primary color, "
-"right click to use the secondary color."
-msgstr ""
-
-#: Pinta.Tools/EllipseSelectTool.cs:38
-msgid "Ellipse Select"
-msgstr "Ελλειψοειδής επιλογή"
-
-#: Pinta.Tools/EllipseSelectTool.cs:44
-msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
-"circle."
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:52
-msgid "Gradient"
-msgstr "Διαβάθμιση χρώματος"
-
-#: Pinta.Tools/GradientTool.cs:60
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:158
-msgid "Linear Gradient"
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:166
-msgid "Linear Reflected Gradient"
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:173
-msgid "Linear Diamond Gradient"
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:180
-msgid "Radial Gradient"
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:187
-msgid "Conical Gradient"
-msgstr ""
-
-#: Pinta.Tools/GradientTool.cs:198
-msgid "Color Mode"
-msgstr "Τύπος χρώματος"
-
-#: Pinta.Tools/GradientTool.cs:206
-msgid "Transparency Mode"
-msgstr ""
-
-#: Pinta.Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "Στρογγυλεμένο ορθογώνιο"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain."
-msgstr ""
-
-#: Pinta.Tools/RoundedRectangleTool.cs:77
-#: UnfocusEffect dialog
-#: MedianEffect dialog
-#: ReduceNoiseEffect dialog
-#: GlowEffect dialog
-#: FragmentEffect dialog
-msgid "Radius"
-msgstr "Ακτίνα"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:82
-msgid "Decrease rectangle's corner radius"
-msgstr ""
-
-#: Pinta.Tools/RoundedRectangleTool.cs:96
-msgid "Increase rectangle's corner radius"
-msgstr ""
-
-#: Pinta.Tools/PaintBrushTool.cs:47 Pinta.Tools/FreeformShapeTool.cs:56
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-
-#: Pinta.Tools/RectangleSelectTool.cs:38
-msgid "Rectangle Select"
-msgstr "Ορθογώνια επιλογή"
-
-#: Pinta.Tools/RectangleSelectTool.cs:44
-msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
-"square."
-msgstr ""
-
-#: Pinta.Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr ""
-
-#: Pinta.Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-
-#: Pinta.Tools/UnimplementedTools.cs:40
-msgid "Clone Stamp"
-msgstr ""
-
-#: Pinta.Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Μετακίνηση επιλογής"
-
-#: Pinta.Tools/MoveSelectionTool.cs:48
-msgid "Drag the selection to move selection outline."
-msgstr ""
-
-#: Pinta.Tools/FreeformShapeTool.cs:54
-msgid "Freeform Shape"
-msgstr ""
-
-#: Pinta.Tools/FloodTool.cs:71
-msgid "Fill mode"
-msgstr ""
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Contiguous"
-msgstr ""
-
-#: Pinta.Tools/FloodTool.cs:76
-msgid "Global"
-msgstr ""
-
-#: Pinta.Tools/FloodTool.cs:81 Pinta.Tools/RecolorTool.cs:73
-#: SoftenPortraitData dialog
-msgid "Tolerance"
-msgstr "Ανοχή"
-
-#: Pinta.Tools/EllipseTool.cs:38
-msgid "Ellipse"
-msgstr ""
-
-#: Pinta.Tools/EllipseTool.cs:44
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr ""
-
-#: Pinta.Tools/TextTool.cs:37
-msgid "Text"
-msgstr "Κείμενο"
-
-#: Pinta.Tools/TextTool.cs:44
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-
-#: Pinta.Tools/TextTool.cs:131
-msgid "Font"
-msgstr "Γραμματοσειρά"
-
-#: Pinta.Tools/TextTool.cs:186
-msgid "Bold"
-msgstr "Έντονα"
-
-#: Pinta.Tools/TextTool.cs:193
-msgid "Italic"
-msgstr "Πλάγια"
-
-#: Pinta.Tools/TextTool.cs:201
-msgid "Underline"
-msgstr "Υπογράμμιση"
-
-#: Pinta.Tools/TextTool.cs:210
-msgid "Left Align"
-msgstr "Αριστερή στοίχιση"
-
-#: Pinta.Tools/TextTool.cs:219
-msgid "Center Align"
-msgstr ""
-
-#: Pinta.Tools/TextTool.cs:227
-msgid "Right Align"
-msgstr "Δεξιά στοίχιση"
-
-#: Pinta.Tools/MagicWandTool.cs:46
-msgid "Magic Wand Select"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Click to select region of similar color."
-msgstr ""
-
-#: Pinta.Tools/RectangleTool.cs:38
-msgid "Rectangle"
-msgstr "Ορθογώνιο"
-
-#: Pinta.Tools/RectangleTool.cs:44
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr ""
-
-#: Pinta.Tools/LineCurveTool.cs:38
-msgid "Line"
-msgstr "Γραμμή"
-
-#: Pinta.Tools/LineCurveTool.cs:44
-msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr ""
-
-#: Pinta.Tools/RecolorTool.cs:59
-msgid "Recolor"
-msgstr ""
-
-#: Pinta.Tools/RecolorTool.cs:61
-msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
-
-#: Pinta.Tools/EraserTool.cs:45
-msgid "Eraser"
-msgstr "Γόμα"
-
-#: Pinta.Tools/EraserTool.cs:47
-msgid "Click and drag to erase a portion of the image."
-msgstr ""
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:26
-msgid "Pixelate"
-msgstr "Εικονοστοιχειοποίηση"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:38
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
-#: Pinta.Effects/Effects/TileEffect.cs:34
-#: Pinta.Effects/Effects/BulgeEffect.cs:34
-#: Pinta.Effects/Effects/TwistEffect.cs:34
-msgid "Distort"
-msgstr "Παραμόρφωση"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
-msgid "Red Eye Removal"
-msgstr "Αφαίρεση Κοκκινίλας Ματιών"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
-#: Pinta.Effects/Effects/GlowEffect.cs:39
-#: Pinta.Effects/Effects/SharpenEffect.cs:34
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
-msgid "Photo"
-msgstr "Φωτογραφία"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
-msgid "Motion Blur"
-msgstr "Θόλωμα κίνησης"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
-#: Pinta.Effects/Effects/UnfocusEffect.cs:36
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
-#: Pinta.Effects/Effects/FragmentEffect.cs:34
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
-msgid "Blurs"
-msgstr ""
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:34
-msgid "Ink Sketch"
-msgstr ""
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:42
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
-msgid "Artistic"
-msgstr "Καλλιτεχνικό"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
-msgid "Radial Blur"
-msgstr "Ακτινικό θόλωμα"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:28
-msgid "Unfocus"
-msgstr "Αναίρεση Εστίασης"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
-msgid "Edge Detect"
-msgstr "Εντοπισμός Άκρου"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
-#: Pinta.Effects/Effects/OutlineEffect.cs:37
-#: Pinta.Effects/Effects/ReliefEffect.cs:33
-#: Pinta.Effects/Effects/EmbossEffect.cs:34
-msgid "Stylize"
-msgstr "Πρόσδοση Ύφους"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
-msgid "Frosted Glass"
-msgstr "Παγωμένο Γυαλί"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
-msgid "Oil Painting"
-msgstr "Ζωγραφική Λαδιού"
-
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
-msgid "Zoom Blur"
-msgstr "Θόλωμα μεγέθυνσης"
-
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
-msgid "Polar Inversion"
-msgstr "Πολική Αναστροφή"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
-msgstr "Σύννεφα"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:38
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
-msgid "Render"
-msgstr "Αποτύπωση"
-
-#: Pinta.Effects/Effects/GlowEffect.cs:31
-msgid "Glow"
-msgstr "Λάμψη"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
-msgid "Add Noise"
-msgstr "Προσθήκη θορύβου"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
-#: Pinta.Effects/Effects/MedianEffect.cs:37
-msgid "Noise"
-msgstr "Θόρυβος"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:26
-msgid "Fragment"
-msgstr "Κατακερμάτιση"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:26
-msgid "Sharpen"
-msgstr "Όξυνση"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
-msgid "Pencil Sketch"
-msgstr "Σκίτσο με μολύβι"
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:29
-msgid "Outline"
-msgstr "Εξωτερικό περίγραμμα"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
-msgid "Gaussian Blur"
-msgstr "Θόλωμα Gauss"
-
-#: Pinta.Effects/Effects/TileEffect.cs:26
-msgid "Tile Reflection"
-msgstr "Αντανάκλαση Πλακιδίου"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:45
-msgid "Relief"
-msgstr "Ανάγλυφο"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:26
-msgid "Emboss"
-msgstr "Εμβάθυνση"
-
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
-msgid "Mandelbrot Fractal"
-msgstr ""
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:26
-msgid "Bulge"
-msgstr "Φούσκωμα"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:26
-msgid "Twist"
-msgstr "Συστροφή"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
-msgid "Soften Portrait"
-msgstr ""
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
-msgid "Reduce Noise"
-msgstr "Μείωση Θορύβου"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
-msgid "Julia Fractal"
-msgstr "Φράκταλ Julia"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:29
-msgid "Median"
-msgstr "Μέση τιμή"
-
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:26
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "Καμπύλες"
-
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
-msgid "Levels"
-msgstr "Επίπεδα"
+"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
+"X-Generator: Launchpad (build 12486)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
 msgstr ""
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
-#: SoftenPortraitData dialog
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
 
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:24
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
+msgid "Levels"
+msgstr "Επίπεδα"
+
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
+msgid "Sepia"
+msgstr "Σέπια"
+
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
 msgstr "Δημιουργία πόστερ"
@@ -813,17 +42,18 @@ msgstr "Δημιουργία πόστερ"
 msgid "Black and White"
 msgstr "Ασπρόμαυρο"
 
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:28
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Curves"
+msgstr "Καμπύλες"
+
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
+msgid "Brightness / Contrast"
+msgstr "Φωτεινότητα / αντίθεση"
+
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
 msgstr "Απόχρωση / Κορεσμός"
-
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
-msgid "Sepia"
-msgstr "Σέπια"
-
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Φωτεινότητα / αντίθεση"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
@@ -899,23 +129,1050 @@ msgstr "Μπλέ "
 msgid "Tip: Right-click to remove control points."
 msgstr ""
 
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
+msgid "Reduce Noise"
+msgstr "Μείωση Θορύβου"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
+#: Pinta.Effects/Effects/MedianEffect.cs:37
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
+msgid "Noise"
+msgstr "Θόρυβος"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:26
+msgid "Fragment"
+msgstr "Κατακερμάτιση"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:34
+#: Pinta.Effects/Effects/UnfocusEffect.cs:36
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
+msgid "Blurs"
+msgstr ""
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:30
+msgid "Clouds"
+msgstr "Σύννεφα"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:38
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
+msgid "Render"
+msgstr "Αποτύπωση"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:28
+msgid "Unfocus"
+msgstr "Αναίρεση Εστίασης"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
+msgid "Red Eye Removal"
+msgstr "Αφαίρεση Κοκκινίλας Ματιών"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
+#: Pinta.Effects/Effects/GlowEffect.cs:39
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
+#: Pinta.Effects/Effects/SharpenEffect.cs:34
+msgid "Photo"
+msgstr "Φωτογραφία"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr ""
+
+#: Pinta.Effects/Effects/GlowEffect.cs:31
+msgid "Glow"
+msgstr "Λάμψη"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
+msgid "Edge Detect"
+msgstr "Εντοπισμός Άκρου"
+
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
+#: Pinta.Effects/Effects/ReliefEffect.cs:33
+#: Pinta.Effects/Effects/EmbossEffect.cs:34
+#: Pinta.Effects/Effects/OutlineEffect.cs:37
+msgid "Stylize"
+msgstr "Πρόσδοση Ύφους"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
+msgid "Radial Blur"
+msgstr "Ακτινικό θόλωμα"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
+msgid "Frosted Glass"
+msgstr "Παγωμένο Γυαλί"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
+#: Pinta.Effects/Effects/TileEffect.cs:34
+#: Pinta.Effects/Effects/PixelateEffect.cs:38
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
+#: Pinta.Effects/Effects/BulgeEffect.cs:34
+#: Pinta.Effects/Effects/TwistEffect.cs:34
+msgid "Distort"
+msgstr "Παραμόρφωση"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "Ζωγραφική Λαδιού"
+
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
+#: Pinta.Effects/Effects/InkSketchEffect.cs:42
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
+msgid "Artistic"
+msgstr "Καλλιτεχνικό"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "Φράκταλ Julia"
+
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+msgid "Soften Portrait"
+msgstr ""
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:45
+msgid "Relief"
+msgstr "Ανάγλυφο"
+
+#: Pinta.Effects/Effects/InkSketchEffect.cs:34
+msgid "Ink Sketch"
+msgstr ""
+
+#: Pinta.Effects/Effects/MedianEffect.cs:29
+msgid "Median"
+msgstr "Μέση τιμή"
+
+#: Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "Εμβάθυνση"
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
+msgid "Gaussian Blur"
+msgstr "Θόλωμα Gauss"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:26
+msgid "Sharpen"
+msgstr "Όξυνση"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
+msgid "Add Noise"
+msgstr "Προσθήκη θορύβου"
+
+#: Pinta.Effects/Effects/TileEffect.cs:26
+msgid "Tile Reflection"
+msgstr "Αντανάκλαση Πλακιδίου"
+
+#: Pinta.Effects/Effects/PixelateEffect.cs:26
+msgid "Pixelate"
+msgstr "Εικονοστοιχειοποίηση"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
+msgid "Motion Blur"
+msgstr "Θόλωμα κίνησης"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "Πολική Αναστροφή"
+
+#: Pinta.Effects/Effects/BulgeEffect.cs:26
+msgid "Bulge"
+msgstr "Φούσκωμα"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "Θόλωμα μεγέθυνσης"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Pencil Sketch"
+msgstr "Σκίτσο με μολύβι"
+
+#: Pinta.Effects/Effects/OutlineEffect.cs:29
+#: Pinta.Tools/TextTool/TextTool.cs:171
+msgid "Outline"
+msgstr "Εξωτερικό περίγραμμα"
+
+#: Pinta.Effects/Effects/TwistEffect.cs:26
+msgid "Twist"
+msgstr "Συστροφή"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+msgid "label1"
+msgstr "ετικέττα1"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "ετικέττα"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "Τυχαίος Θόρυβος"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
+msgid "Choose Primary Color"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
+msgid "Choose Secondary Color"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
+msgid "Choose Palette Color"
+msgstr ""
+
+#: Pinta.Tools/RectangleSelectTool.cs:38
+msgid "Rectangle Select"
+msgstr "Ορθογώνια επιλογή"
+
+#: Pinta.Tools/RectangleSelectTool.cs:44
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+
+#: Pinta.Tools/CloneStampTool.cs:43
+msgid "Clone Stamp"
+msgstr ""
+
+#: Pinta.Tools/CloneStampTool.cs:48
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:46
+msgid "Magic Wand Select"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Click to select region of similar color."
+msgstr ""
+
+#: Pinta.Tools/RectangleTool.cs:38
+msgid "Rectangle"
+msgstr "Ορθογώνιο"
+
+#: Pinta.Tools/RectangleTool.cs:44
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+
+#: Pinta.Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Μετακίνηση επιλογής"
+
+#: Pinta.Tools/MoveSelectionTool.cs:48
+msgid "Drag the selection to move selection outline."
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
+msgid "Gradient"
+msgstr "Διαβάθμιση χρώματος"
+
+#: Pinta.Tools/GradientTool.cs:64
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:174
+msgid "Linear Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:175
+msgid "Linear Reflected Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:176
+msgid "Linear Diamond Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:177
+msgid "Radial Gradient"
+msgstr ""
+
+#: Pinta.Tools/GradientTool.cs:178
+msgid "Conical Gradient"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:73
+msgid "Flood Mode"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:80
+msgid "Contiguous"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:81
+msgid "Global"
+msgstr ""
+
+#: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr "Ανοχή"
+
+#: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
+msgid "Paintbrush"
+msgstr "Πινέλο"
+
+#: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+
+#: Pinta.Tools/PaintBrushTool.cs:64
+msgid "Type"
+msgstr ""
+
+#: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
+msgid "Pencil"
+msgstr "Μολύβι"
+
+#: Pinta.Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
+msgstr ""
+
+#: Pinta.Tools/EllipseSelectTool.cs:38
+msgid "Ellipse Select"
+msgstr "Ελλειψοειδής επιλογή"
+
+#: Pinta.Tools/EllipseSelectTool.cs:44
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+
+#: Pinta.Tools/LineCurveTool.cs:38
+msgid "Line"
+msgstr "Γραμμή"
+
+#: Pinta.Tools/LineCurveTool.cs:44
+msgid ""
+"Left click to draw with primary color, right click for secondary color."
+msgstr ""
+
+#: Pinta.Tools/EraserTool.cs:45
+msgid "Eraser"
+msgstr "Γόμα"
+
+#: Pinta.Tools/EraserTool.cs:47
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+
+#: Pinta.Tools/PanTool.cs:38
+msgid "Pan"
+msgstr ""
+
+#: Pinta.Tools/PanTool.cs:44
+msgid "Click and drag to navigate image."
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:44
+msgid "Color Picker"
+msgstr "Επιλογέας Χρώματος"
+
+#: Pinta.Tools/ColorPickerTool.cs:50
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr "Αριστερό κλικ πρωτεύον χρώμα.Δεξί κλικ δευτερεύον χρώμα."
+
+#: Pinta.Tools/ColorPickerTool.cs:62
+msgid "After select"
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Do not switch tool"
+msgstr ""
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to previous tool"
+msgstr "Προηγούμενο εργαλείο"
+
+#: Pinta.Tools/ColorPickerTool.cs:68
+msgid "Switch to Pencil tool"
+msgstr "Αλλαγή σε μολύβι"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "Στρογγυλεμένο ορθογώνιο"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:50
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain."
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:83
+msgid "Radius"
+msgstr "Ακτίνα"
+
+#: Pinta.Tools/RoundedRectangleTool.cs:88
+msgid "Decrease rectangle's corner radius"
+msgstr ""
+
+#: Pinta.Tools/RoundedRectangleTool.cs:102
+msgid "Increase rectangle's corner radius"
+msgstr ""
+
+#: Pinta.Tools/MoveSelectedTool.cs:42
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Move Selected Pixels"
+msgstr ""
+
+#: Pinta.Tools/MoveSelectedTool.cs:48
+msgid "Drag the selection to move selected content."
+msgstr ""
+
+#: Pinta.Tools/RecolorTool.cs:59
+msgid "Recolor"
+msgstr ""
+
+#: Pinta.Tools/RecolorTool.cs:61
+msgid "Left click to replace the secondary color with the primary color."
+msgstr ""
+
+#: Pinta.Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr ""
+
+#: Pinta.Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+
+#: Pinta.Tools/EllipseTool.cs:38
+msgid "Ellipse"
+msgstr ""
+
+#: Pinta.Tools/EllipseTool.cs:44
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:36
+msgid "Text"
+msgstr "Κείμενο"
+
+#: Pinta.Tools/TextTool/TextTool.cs:42
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:77
+msgid "Font"
+msgstr "Γραμματοσειρά"
+
+#: Pinta.Tools/TextTool/TextTool.cs:112
+msgid "Bold"
+msgstr "Έντονα"
+
+#: Pinta.Tools/TextTool/TextTool.cs:119
+msgid "Italic"
+msgstr "Πλάγια"
+
+#: Pinta.Tools/TextTool/TextTool.cs:126
+msgid "Underline"
+msgstr "Υπογράμμιση"
+
+#: Pinta.Tools/TextTool/TextTool.cs:135
+msgid "Left Align"
+msgstr "Αριστερή στοίχιση"
+
+#: Pinta.Tools/TextTool/TextTool.cs:143
+msgid "Center Align"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:150
+msgid "Right Align"
+msgstr "Δεξιά στοίχιση"
+
+#: Pinta.Tools/TextTool/TextTool.cs:162
+msgid "Text Style"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
+msgid "Normal"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:170
+msgid "Normal and Outline"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:179
+msgid "Outline width"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:184
+msgid "Decrease outline size"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:201
+msgid "Increase outline size"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
+msgid "Brush width"
+msgstr "Μήκος βούρτσας"
+
+#: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
+msgid "Decrease brush size"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
+msgid "Increase brush size"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
+msgid "Fill Style"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
+msgid "Outline Shape"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
+msgid "Fill Shape"
+msgstr ""
+
+#: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
+msgid "Fill and Outline Shape"
+msgstr ""
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:38
+msgid "Circles"
+msgstr ""
+
+#: Pinta.Tools/Brushes/GridBrush.cs:38
+msgid "Grid"
+msgstr ""
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:40
+msgid "Squares"
+msgstr ""
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:38
+msgid "Splatter"
+msgstr ""
+
+#: Pinta.Tools/ZoomTool.cs:49
+msgid "Zoom"
+msgstr "Μεγένθυση"
+
+#: Pinta.Tools/ZoomTool.cs:55
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+
+#: Pinta.Tools/LassoSelectTool.cs:45
+msgid "Lasso Select"
+msgstr "Επιλογή με λάσο"
+
+#: Pinta.Tools/LassoSelectTool.cs:47
+msgid "Click and drag to draw the outline for a selection area."
+msgstr ""
+
+#: Pinta.Tools/FreeformShapeTool.cs:53
+msgid "Freeform Shape"
+msgstr ""
+
+#: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
+msgid "About"
+msgstr "Σχετικά με..."
+
+#: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
+msgid "..."
+msgstr ""
+
+#: Pinta/MainWindow.cs:456
+msgid "_File"
+msgstr "_Αρχείο"
+
+#: Pinta/MainWindow.cs:457
+msgid "_Edit"
+msgstr "_Επεξεργασία"
+
+#: Pinta/MainWindow.cs:459
+msgid "_View"
+msgstr "_Προβολή"
+
+#: Pinta/MainWindow.cs:462
+msgid "_Image"
+msgstr "Ει_κόνα"
+
+#: Pinta/MainWindow.cs:463
+msgid "_Layers"
+msgstr "Επίπε_δα"
+
+#: Pinta/MainWindow.cs:464
+msgid "_Adjustments"
+msgstr ""
+
+#: Pinta/MainWindow.cs:465
+msgid "Effe_cts"
+msgstr "Ε_φέ"
+
+#: Pinta/MainWindow.cs:467
+msgid "_Window"
+msgstr "Παρά_θυρα"
+
+#: Pinta/MainWindow.cs:471
+msgid "Tool Windows"
+msgstr "Εργαλειοθήκες"
+
+#: Pinta/MainWindow.cs:475
+msgid "_Help"
+msgstr "_Βοήθεια"
+
+#: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
+msgid "Tools"
+msgstr "Εργαλεία"
+
+#: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
+#: Pinta.Core/Actions/EditActions.cs:121
+msgid "Palette"
+msgstr "Παλέττα"
+
+#: Pinta/MainWindow.cs:588
+msgid "Documents"
+msgstr "Έγγραφα"
+
+#: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
+msgid "Layers"
+msgstr "Επίπεδα"
+
+#: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
+msgid "History"
+msgstr "Ιστορικό"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
+msgid "Hide"
+msgstr "Απόκρυψη"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:190
+msgid "Dock"
+msgstr "Προσάρτηση"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:194
+#: Pinta/DockLibrary/DockItem.cs:502
+msgid "Auto Hide"
+msgstr "Αυτόματη απόκρυψη"
+
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr ""
+
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Ελεύθερα μετακινούμενη"
+
+#: Pinta/DialogHandlers.cs:109
+msgid "Take Screenshot"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:110
+msgid "Delay before taking a screenshot (seconds):"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:158
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "Να αποθηκευτούν οι αλλαγές στην εικόνα \"{0}\" πριν την έξοδο;"
+
+#: Pinta/DialogHandlers.cs:159
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Αν δε γίνει αποθήκευση, οι αλλαγές θα χαθούν οριστικά."
+
+#: Pinta/DialogHandlers.cs:166
+msgid "Close without saving"
+msgstr "Κλείσιμο χωρίς αποθήκευση"
+
+#: Pinta/DialogHandlers.cs:193
+msgid "Resize Palette"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:194
+msgid "New palette size:"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
+msgid "Paste Into New Layer"
+msgstr "Επικόλληση Σε Νέο Στρώμα"
+
+#: Pinta/DialogHandlers.cs:320
+msgid "Layer Opacity"
+msgstr "Αδιαφάνεια στρώματος"
+
+#: Pinta/DialogHandlers.cs:325
+msgid "Rename Layer"
+msgstr "Μετονομασία Στρώματος"
+
+#: Pinta/DialogHandlers.cs:330
+msgid "Hide Layer"
+msgstr "Απόκρυψη Στρώματος"
+
+#: Pinta/DialogHandlers.cs:330
+msgid "Show Layer"
+msgstr "Εμφάνιση Στρώματος"
+
+#: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
+msgid "Layer Properties"
+msgstr "Ιδιότητες στρώματος"
+
+#: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
+msgid "Open Image File"
+msgstr "Άνοιγμα Αρχείου Εικόνας"
+
+#: Pinta/DialogHandlers.cs:423
+msgid "Image files"
+msgstr "Αρχεία Εικόνων"
+
+#: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
+msgid "All files"
+msgstr "Όλα τα αρχεία"
+
+#: Pinta/DialogHandlers.cs:480
+msgid "Paste cancelled"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:481
+msgid "The clipboard does not contain an image"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:514
+msgid "Save Image File"
+msgstr "Αποθήκευση αρχείου εικόνας"
+
+#: Pinta/DialogHandlers.cs:612
+msgid "Pinta does not support saving images in this file format."
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
+#: Pinta.Core/Actions/EditActions.cs:347
+msgid "Error"
+msgstr "Σφάλμα"
+
+#: Pinta/DialogHandlers.cs:633
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr ""
+
+#: Pinta/DialogHandlers.cs:634
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr ""
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "Quality: "
+msgstr ""
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Τίτλος"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+msgid "Version"
+msgstr "Έκδοση"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Διαδρομή"
+
+#: Pinta/Dialogs/AboutDialog.cs:101
+msgid "Contributors to this Release"
+msgstr "Συντελεστές Έκδοσης"
+
+#: Pinta/Dialogs/AboutDialog.cs:111
+msgid "Previous Contributors"
+msgstr "Προηγούμενοι Συντελεστές"
+
+#: Pinta/Dialogs/AboutDialog.cs:120
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Petros Kyladitis https://launchpad.net/~multipetros\n"
+"  Psychorat https://launchpad.net/~dougy-giro1\n"
+"  spiros anthis https://launchpad.net/~sugaraddicted\n"
+"  Νιάνιος Ρωμανός https://launchpad.net/~romanos-nianios"
+
+#: Pinta/Dialogs/AboutDialog.cs:123
+msgid "Translated by:"
+msgstr "Μεταφράστηκε από:"
+
+#: Pinta/Dialogs/AboutDialog.cs:130
+msgid "Based on the work of Paint.NET:"
+msgstr "Βασίζεται στο Paint.NET"
+
+#: Pinta/Dialogs/AboutDialog.cs:137
+msgid "Using some icons from:"
+msgstr "Γίνεται χρήση εικονιδίων απο:"
+
+#: Pinta/Dialogs/AboutDialog.cs:249
+msgid "About Pinta"
+msgstr "Σχετικά με το Pinta"
+
+#: Pinta/Dialogs/AboutDialog.cs:267
+msgid "Version Info"
+msgstr "Πληροφορίες Έκδοσης"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Άδεια Χρήσης"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Κυκλοφορεί κάτω απο την MIT X11 άδεια χρήσης"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Πνευματικά Δικαιώματα"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "απο τους συντελεστές του Pinta"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
+msgid "Name:"
+msgstr "Όνομα:"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
+msgid "Visible"
+msgstr "Ορατό"
+
+#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
+msgid "Opacity:"
+msgstr "Διαφάνεια:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: Pinta.Core/Classes/Document.cs:612
+msgid "Resize Canvas"
+msgstr "Αλλαγή Μεγέθους"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "Σε ποσοστό:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "Σε απόλυτο μέγεθος:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
+msgid "Width:"
+msgstr "Πλάτος:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
+msgid "pixels"
+msgstr "Εικονοστοιχεία"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
+msgid "Height:"
+msgstr "Ύψος:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Διατήρηση αναλογίας διαστάσεων"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Αγκυροβόληση"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+msgid "Resize Image"
+msgstr "Αλλαγή Μεγέθους Εικόνας"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
+#: Pinta.Core/Managers/WorkspaceManager.cs:159
+msgid "New Image"
+msgstr "Νέα Εικόνα"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
+msgid "New Image Size          "
+msgstr "Νέο Μέγεθος Εικόνας          "
+
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr ""
+
+#: Pinta/Options.cs:486
+msgid "OptionName"
+msgstr ""
+
+#: Pinta.Core/Managers/LivePreviewManager.cs:220
+msgid "Rendering Effect"
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:91
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:150
+msgid "Background"
+msgstr "Φόντο"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:177
+msgid "Open Image"
+msgstr "Άνοιγμα εικόνας"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:184
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr ""
+
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+#: Pinta.Core/Actions/EditActions.cs:69
+msgid "Paste"
+msgstr "Επικόλληση"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+#: Pinta.Core/Actions/ImageActions.cs:65
+msgid "Rotate 180°"
+msgstr "Περιστροφή 180°"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Αναποδογύρισμα Εικόνας Οριζόντια"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Αναποδογύρισμα Εικόνας Κάθετα"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+#: Pinta.Core/Actions/ImageActions.cs:63
+msgid "Rotate 90° Clockwise"
+msgstr "Περιστροφή 90° Δεξιόστροφα"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:64
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Περιστροφή 90° Αριστερόστροφα"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Αναποδογύρισμα Στρώματος Οριζόντια"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Αναποδογύρισμα Στρώματος Κάθετα"
+
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr ""
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Ιστοσελίδα Pinta"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Στείλτε αναφορά σφάλματος"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr ""
+
+#: Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Αποθήκευση όλων"
+
+#: Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr ""
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Νέο..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr "Νέα αποτύπωση οθόνης"
+
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
+msgid "Open..."
+msgstr "Άνοιγμα..."
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Άνοιγμα Πρόσφατου"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
+msgid "Save As..."
+msgstr "Αποθήκευση Ως"
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Εκτύπωση"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Έξοδος"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Νέο"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Άνοιγμα"
+
 #: Pinta.Core/Actions/LayerActions.cs:64
-#: Pinta.Core/Actions/LayerActions.cs:271
+#: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
 msgstr "Προσθήκη Στρώματος"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:255
+#: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
 msgstr "Διαγραφή Στρώματος"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:247
+#: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
 msgstr "Αντιγραφή Στρώματος"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:226
+#: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
 msgstr ""
 
@@ -936,118 +1193,25 @@ msgid "Rotate / Zoom"
 msgstr "Περιστροφή / Ζουμ"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
-#: Pinta.Core/Actions/LayerActions.cs:206
+#: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
 msgstr "Μετακίνηση Στρώματος Πάνω"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:216
+#: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
 msgstr "Μετακίνηση Στρώματος Κάτω"
 
-#: Pinta.Core/Actions/LayerActions.cs:155
-#: Pinta.Core/Actions/FileActions.cs:276
-msgid "Open Image File"
-msgstr "Άνοιγμα Αρχείου Εικόνας"
+#: Pinta.Core/Actions/LayerActions.cs:74
+msgid "Layer Properties..."
+msgstr ""
 
-#: Pinta.Core/Actions/LayerActions.cs:177
+#: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
 msgstr "Εισαγωγή Απο Αρχείο"
 
-#: Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Νέο..."
-
-#: Pinta.Core/Actions/FileActions.cs:55
-msgid "Open..."
-msgstr "Άνοιγμα..."
-
-#: Pinta.Core/Actions/FileActions.cs:56
-msgid "Open Recent"
-msgstr "Άνοιγμα Πρόσφατου"
-
-#: Pinta.Core/Actions/FileActions.cs:70
-msgid "Close"
-msgstr "Κλείσιμο"
-
-#: Pinta.Core/Actions/FileActions.cs:71
-msgid "Save"
-msgstr "Αποθήκευση"
-
-#: Pinta.Core/Actions/FileActions.cs:72
-msgid "Save As..."
-msgstr "Αποθήκευση Ως"
-
-#: Pinta.Core/Actions/FileActions.cs:73
-msgid "Print"
-msgstr "Εκτύπωση"
-
-#: Pinta.Core/Actions/FileActions.cs:74
-msgid "Quit"
-msgstr "Έξοδος"
-
-#: Pinta.Core/Actions/FileActions.cs:76
-msgid "New"
-msgstr "Νέο"
-
-#: Pinta.Core/Actions/FileActions.cs:77
-msgid "Open"
-msgstr "Άνοιγμα"
-
-#: Pinta.Core/Actions/FileActions.cs:125
-msgid "Background"
-msgstr "Φόντο"
-
-#: Pinta.Core/Actions/FileActions.cs:170
-msgid "Open Image"
-msgstr "Άνοιγμα εικόνας"
-
-#: Pinta.Core/Actions/FileActions.cs:177
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr ""
-
-#: Pinta.Core/Actions/FileActions.cs:178
-msgid "Error"
-msgstr "Σφάλμα"
-
-#: Pinta.Core/Actions/FileActions.cs:207 Pinta.Core/Actions/FileActions.cs:248
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before opening a new image?"
-msgstr "Να αποθηκευθούν οι αλλαγές στην εικόνα \"{0}\" πριν ανοίξετε νέα;"
-
-#: Pinta.Core/Actions/FileActions.cs:284
-msgid "Image files"
-msgstr "Αρχεία Εικόνων"
-
-#: Pinta.Core/Actions/FileActions.cs:288
-msgid "All files"
-msgstr "Όλα τα αρχεία"
-
-#: Pinta.Core/Actions/FileActions.cs:320
-msgid "Save Image File"
-msgstr "Αποθήκευση αρχείου εικόνας"
-
-#: Pinta.Core/Actions/FileActions.cs:345 Pinta.Core/Actions/FileActions.cs:349
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "{0} εικόνα ({1})"
-
-#: Pinta.Core/Actions/FileActions.cs:365
-msgid "OpenRaster image (*.ora)"
-msgstr "Εικόνα OpenRaster (*.ora)"
-
-#: Pinta.Core/Actions/FileActions.cs:392
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Να αποθηκευτούν οι αλλαγές στην εικόνα \"{0}\" πριν την έξοδο;"
-
-#: Pinta.Core/Actions/FileActions.cs:402
-msgid "Close without saving"
-msgstr "Κλείσιμο χωρίς αποθήκευση"
-
 #: Pinta.Core/Actions/ImageActions.cs:58
-#: Pinta.Core/Actions/ImageActions.cs:168
+#: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr ""
 
@@ -1059,189 +1223,192 @@ msgstr "Αλλαγή Μεγέθους"
 msgid "Canvas Size..."
 msgstr "Μέγεθος Καμβά"
 
-#: Pinta.Core/Actions/ImageActions.cs:63
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr "Περιστροφή 90° Δεξιόστροφα"
-
-#: Pinta.Core/Actions/ImageActions.cs:64
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Περιστροφή 90° Αριστερόστροφα"
-
-#: Pinta.Core/Actions/ImageActions.cs:65
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr "Περιστροφή 180°"
-
 #: Pinta.Core/Actions/ImageActions.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:121
+#: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
 msgstr "Ισοπέδωση"
 
-#: Pinta.Core/Actions/EditActions.cs:59
-msgid "Undo"
-msgstr "Αναίρεση"
-
-#: Pinta.Core/Actions/EditActions.cs:60
-msgid "Redo"
-msgstr "Επαναφορά"
-
-#: Pinta.Core/Actions/EditActions.cs:61
-msgid "Cut"
-msgstr "Αποκοπή"
-
-#: Pinta.Core/Actions/EditActions.cs:62
-msgid "Copy"
-msgstr "Αντιγραφή"
-
-#: Pinta.Core/Actions/EditActions.cs:63 Pinta.Core/Actions/EditActions.cs:233
-msgid "Paste"
-msgstr "Επικόλληση"
-
-#: Pinta.Core/Actions/EditActions.cs:64 Pinta.Core/Actions/EditActions.cs:205
-msgid "Paste Into New Layer"
-msgstr "Επικόλληση Σε Νέο Στρώμα"
-
-#: Pinta.Core/Actions/EditActions.cs:65
-msgid "Paste Into New Image"
-msgstr "Επικόλληση Σε Νέα Εικόνα"
-
-#: Pinta.Core/Actions/EditActions.cs:66 Pinta.Core/Actions/EditActions.cs:168
-#: Pinta.Core/Actions/EditActions.cs:276
-msgid "Erase Selection"
-msgstr "Διαγραφή Επιλογής"
-
-#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:137
-msgid "Fill Selection"
-msgstr "Επιλογή Αρχείου"
-
-#: Pinta.Core/Actions/EditActions.cs:68
-msgid "Invert Selection"
-msgstr "Αντιστροφή Επιλογής"
-
-#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:144
-msgid "Select All"
-msgstr "Επιλογή Όλων"
-
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:175
-msgid "Deselect"
-msgstr "Αποεπιλογή"
-
-#: Pinta.Core/Actions/ViewActions.cs:62
+#: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
 msgstr "Μεγέθυνση"
 
-#: Pinta.Core/Actions/ViewActions.cs:63
+#: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom Out"
 msgstr "Σμίκρυνση"
 
-#: Pinta.Core/Actions/ViewActions.cs:64
-msgid "Zoom to Window"
-msgstr "Εστίαση στο Παράθυρο"
-
 #: Pinta.Core/Actions/ViewActions.cs:65
+msgid "Best Fit"
+msgstr ""
+
+#: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
 msgstr "Εστίαση στην επιλογή"
 
-#: Pinta.Core/Actions/ViewActions.cs:66
-msgid "Actual Size"
-msgstr "Πραγματικό μέγεθος"
-
 #: Pinta.Core/Actions/ViewActions.cs:67
-msgid "Pixel Grid"
+msgid "Normal Size"
 msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:68
+msgid "Toolbar"
+msgstr "Γραμμή Εργαλείων"
+
+#: Pinta.Core/Actions/ViewActions.cs:69
+msgid "Pixel Grid"
+msgstr "Πίνακας Pixel"
+
+#: Pinta.Core/Actions/ViewActions.cs:70
 msgid "Rulers"
 msgstr "Χάρακες"
 
-#: Pinta.Core/Actions/ViewActions.cs:69 Pinta.Core/Actions/ViewActions.cs:75
+#: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Pixels"
 msgstr "Εικονοστοιχεία"
 
-#: Pinta.Core/Actions/ViewActions.cs:70 Pinta.Core/Actions/ViewActions.cs:75
+#: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Inches"
 msgstr "Ίντσες"
 
-#: Pinta.Core/Actions/ViewActions.cs:71 Pinta.Core/Actions/ViewActions.cs:75
+#: Pinta.Core/Actions/ViewActions.cs:73
 msgid "Centimeters"
 msgstr "Εκατοστά"
 
-#: Pinta.Core/Actions/ViewActions.cs:72
+#: Pinta.Core/Actions/ViewActions.cs:74
 msgid "Fullscreen"
 msgstr "Πλήρης Οθόνη"
 
-#: Pinta.Core/Actions/ViewActions.cs:190
-#: Pinta.Core/Managers/WorkspaceManager.cs:126
-#: Pinta.Core/Managers/WorkspaceManager.cs:147
+#: Pinta.Core/Actions/ViewActions.cs:114
+msgid "Ruler Units"
+msgstr "Μονάδας Χάρακα"
+
+#: Pinta.Core/Actions/ViewActions.cs:194
+#: Pinta.Core/Classes/DocumentWorkspace.cs:226
+#: Pinta.Core/Classes/DocumentWorkspace.cs:234
 msgid "Window"
 msgstr "Παράθυρο"
 
-#: Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr "Ιστοσελίδα Pinta"
+#: Pinta.Core/Actions/EditActions.cs:65
+msgid "Undo"
+msgstr "Αναίρεση"
 
-#: Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr "Στείλτε αναφορά σφάλματος"
+#: Pinta.Core/Actions/EditActions.cs:66
+msgid "Redo"
+msgstr "Επαναφορά"
 
-#: Pinta.Core/Actions/HelpActions.cs:52
-msgid "Translate This Application"
+#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
+msgid "Cut"
+msgstr "Αποκοπή"
+
+#: Pinta.Core/Actions/EditActions.cs:68
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: Pinta.Core/Actions/EditActions.cs:71
+msgid "Paste Into New Image"
+msgstr "Επικόλληση Σε Νέα Εικόνα"
+
+#: Pinta.Core/Actions/EditActions.cs:72
+msgid "Delete Selection"
 msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
+msgid "Fill Selection"
+msgstr "Επιλογή Αρχείου"
+
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Invert Selection"
+msgstr "Αντιστροφή Επιλογής"
+
+#: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
+msgid "Select All"
+msgstr "Επιλογή Όλων"
+
+#: Pinta.Core/Actions/EditActions.cs:76
+msgid "Deselect All"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:80
+msgid "Reset to Default"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:81
+msgid "Set Number of Colors"
+msgstr "Θέστε αριθμό χρωμάτων"
+
+#: Pinta.Core/Actions/EditActions.cs:212
+msgid "Erase Selection"
+msgstr "Διαγραφή Επιλογής"
+
+#: Pinta.Core/Actions/EditActions.cs:221
+msgid "Deselect"
+msgstr "Αποεπιλογή"
+
+#: Pinta.Core/Actions/EditActions.cs:319
+msgid "Open Palette File"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:326
+msgid "Palette files (*.txt, *.gpl)"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:346
+#, csharp-format
+msgid ""
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:359
+msgid "Save Palette File"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:365
+msgid "Paint.NET palette (*.txt)"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:370
+msgid "GIMP palette (*.gpl)"
+msgstr ""
+
+#: Pinta.Core/Classes/Document.cs:298
+msgid "Layer"
+msgstr "Στρώμα"
+
+#: Pinta.Core/Classes/Document.cs:371
+msgid "copy"
+msgstr "αντιγραφή"
+
+#: Pinta.Core/Classes/BaseTool.cs:151
+msgid "Tool"
+msgstr "Εργαλείο"
+
+#: Pinta.Core/Classes/BaseTool.cs:218
+msgid "Shortcut key"
+msgstr "Πλήκτρο συντόμευσης"
+
+#: Pinta.Core/Classes/BaseTool.cs:241
+msgid "Normal Blending"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:242
+msgid "Overwrite"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:256
+msgid "Antialiasing On"
+msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:257
+msgid "Antialiasing Off"
+msgstr ""
+
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} εικόνα ({1})"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
 msgstr "Γενικά"
-
-#: Pinta.Core/Classes/BaseTool.cs:135
-msgid "Tool"
-msgstr "Εργαλείο"
-
-#: Pinta.Core/Classes/BaseTool.cs:193
-msgid "Shortcut key"
-msgstr "Πλήκτρο συντόμευσης"
-
-#: Pinta.Core/Classes/BaseTool.cs:217 Pinta.Core/Classes/BaseTool.cs:238
-#: Pinta.Core/Classes/BaseTool.cs:239
-msgid "Antialiasing"
-msgstr "Antialiasing"
-
-#: Pinta.Core/Classes/BaseTool.cs:218
-msgid "Normal blending / Overwrite blending"
-msgstr ""
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Αναποδογύρισμα Εικόνας Οριζόντια"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Αναποδογύρισμα Εικόνας Κάθετα"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Αναποδογύρισμα Στρώματος Οριζόντια"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Αναποδογύρισμα Στρώματος Κάθετα"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr ""
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
-msgid "Rendering Effect"
-msgstr ""
-
-#: Pinta.Core/Managers/LayerManager.cs:283
-msgid "copy"
-msgstr "αντιγραφή"
-
-#: Pinta.Core/Managers/LayerManager.cs:538
-msgid "Layer"
-msgstr "Στρώμα"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1420,11 +1587,62 @@ msgstr ""
 "Υπόδειξη: Για καλύτερα αποτελέσματα, χρησημοποιείστε τα εργαλεία επιλογής σε "
 "κάθε μάτι."
 
+#~ msgid "Help"
+#~ msgstr "Βοήθεια"
+
+#~ msgid "Adjustments"
+#~ msgstr "Προσαρμογές"
+
+#~ msgid "Effects"
+#~ msgstr "Εφέ"
+
+#~ msgid "File"
+#~ msgstr "Αρχείο"
+
+#~ msgid "Edit"
+#~ msgstr "Επεξεργασία"
+
+#~ msgid "View"
+#~ msgstr "Προβολή"
+
+#~ msgid "Image"
+#~ msgstr "Εικόνα"
+
 #~ msgid "%"
 #~ msgstr "%"
+
+#~ msgid "Continue without saving"
+#~ msgstr "Να μην γίνει αποθήκευση"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
+#~ msgstr ""
+#~ "Να αποθηκευτούν οι αλλαγές στην εικόνα \"{0}\" πριν δημιουργήσετε νέα;"
 
 #~ msgid "X :"
 #~ msgstr "X :"
 
 #~ msgid "Y :"
 #~ msgstr "Y :"
+
+#~ msgid "OpenRaster image (*.ora)"
+#~ msgstr "Εικόνα OpenRaster (*.ora)"
+
+#~ msgid "Zoom to Window"
+#~ msgstr "Εστίαση στο Παράθυρο"
+
+#~ msgid "Actual Size"
+#~ msgstr "Πραγματικό μέγεθος"
+
+#~ msgid "Antialiasing"
+#~ msgstr "Antialiasing"
+
+#~ msgid "RGB\r"
+#~ msgstr "RGB\r"
+
+#, csharp-format
+#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
+#~ msgstr "Να αποθηκευθούν οι αλλαγές στην εικόνα \"{0}\" πριν ανοίξετε νέα;"
+
+#~ msgid "Color Mode"
+#~ msgstr "Τύπος χρώματος"
