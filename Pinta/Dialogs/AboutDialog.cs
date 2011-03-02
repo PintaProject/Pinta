@@ -60,8 +60,6 @@ namespace Pinta
 
 		string[] authors = new string[] {
 			"Jonathan Pobst",
-			"Khairuddin Ni'am",
-			"Mathias Fussenegger",
 		};
 
 		string[] oldAuthors = new string[] {
@@ -73,9 +71,11 @@ namespace Pinta
 			"Jon Rimmer",
 			"Jonathan Pobst",
 			"Juergen Obernolte",
+			"Khairuddin Ni'am",
 			"Krzysztof Marecki",
 			"Maia Kozheva",
 			"Marco Rolappe",
+			"Mathias Fussenegger",
 			"Obinou Conseil",
 			"Olivier Dufour",
 			"Richard Cohn"
@@ -244,7 +244,7 @@ namespace Pinta
 		ScrollBox aboutPictureScrollBox;
 		Pixbuf imageSep;
 
-		public AboutDialog ()
+		public AboutDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
 			Title = Catalog.GetString ("About Pinta");
 			//TransientFor = IdeApp.Workbench.RootWindow;
