@@ -32,7 +32,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[Mono.Addins.Extension]
 	public class LassoSelectTool : SelectTool
 	{
 		private Path path;

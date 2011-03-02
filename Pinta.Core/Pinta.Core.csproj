@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Addins, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\lib\Mono.Addins.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
     </Reference>
@@ -87,7 +90,9 @@
     <Compile Include="Classes\DocumentWorkspace.cs" />
     <Compile Include="Classes\ScaleFactor.cs" />
     <Compile Include="Classes\Palette.cs" />
-    <Compile Include="Effects\BaseEffect.cs" />
+    <Compile Include="Effects\BaseEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Effects\BinaryPixelOp.cs" />
     <Compile Include="Effects\BitVector2DSurfaceAdapter.cs" />
     <Compile Include="Effects\Histogram.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
     <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
+    <Compile Include="Managers\EffectsManager.cs" />
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\ImageConverterManager.cs" />
     <Compile Include="Managers\HistoryManager.cs" />

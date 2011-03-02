@@ -34,7 +34,7 @@ using Pinta.Tools.Brushes;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[Mono.Addins.Extension]
 	public class PaintBrushTool : BaseBrushTool
 	{
 		#region Properties

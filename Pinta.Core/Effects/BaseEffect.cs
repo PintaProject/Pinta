@@ -27,9 +27,13 @@
 using System;
 using Cairo;
 using Mono.Unix;
+using Mono.Addins;
+
+[assembly: AddinRoot ("Pinta", "1.0")]
 
 namespace Pinta.Core
 {
+	[TypeExtensionPoint]
 	public abstract class BaseEffect
 	{
 		public abstract string Icon { get; }

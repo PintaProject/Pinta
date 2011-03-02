@@ -17,7 +17,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[Mono.Addins.Extension]
 	public class TextTool : BaseTool
 	{
 		// Variables for dragging

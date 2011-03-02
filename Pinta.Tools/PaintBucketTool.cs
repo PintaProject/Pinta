@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[Mono.Addins.Extension]
 	public class PaintBucketTool : FloodTool
 	{
 		private Color fill_color;

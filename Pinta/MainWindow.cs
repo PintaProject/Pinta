@@ -25,14 +25,16 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using Gtk;
 using MonoDevelop.Components.Docking;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using Mono.Unix;
+using Mono.Addins.Gui;
+using Mono.Addins;
+
+//[assembly: AddinRoot ("Pinta", "1.0")]
 
 namespace Pinta
 {
@@ -41,7 +43,6 @@ namespace Pinta
 		DialogHandlers dialog_handler;
 
 		ProgressDialog progress_dialog;
-		ExtensionPoints extensions = new ExtensionPoints ();
 		
 		Toolbar main_toolbar;
 		Toolbar tool_toolbar;
@@ -69,7 +70,8 @@ namespace Pinta
 			PintaCore.Initialize (tool_toolbar, canvas, this, progress_dialog);
 			color.Initialize ();
 
-			Compose ();
+			AddinManager.Initialize (string.Empty);
+			AddinManager.Registry.Update ();
 
 			LoadPaintBrushes ();
 			LoadToolBox ();
@@ -221,13 +223,21 @@ namespace Pinta
 
 		private void About_Activated (object sender, EventArgs e)
 		{
-			AboutDialog dlg = new AboutDialog ();
+			AddinManagerWindow.AllowInstall = false;
+			var dlg = AddinManagerWindow.Show (this);
 
-			try {
-				dlg.Run ();
-			} finally {
-				dlg.Destroy ();
-			}
+			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
+			
+
+			return;
+
+			//AboutDialog dlg = new AboutDialog ();
+
+			//try {
+			//        dlg.Run ();
+			//} finally {
+			//        dlg.Destroy ();
+			//}
 		}
 		
 		private void ActiveDocumentChanged (object sender, EventArgs e)
@@ -331,22 +341,9 @@ namespace Pinta
 		#endregion
 
 		#region Extension Handlers
-		private void Compose ()
-		{
-			string ext_dir = System.IO.Path.Combine (System.IO.Path.GetDirectoryName (System.Reflection.Assembly.GetEntryAssembly ().Location), "Extensions");
-
-			var catalog = new DirectoryCatalog (ext_dir, "*.dll");
-			var container = new CompositionContainer (catalog);
-
-			container.ComposeParts (extensions);
-
-			foreach (var extension in extensions.Extensions)
-				extension.Initialize ();
-		}
-
 		private void LoadPaintBrushes ()
 		{
-			foreach (var brush in extensions.PaintBrushes.OrderBy (b => {
+			foreach (var brush in PintaCore.System.GetExtensions<BasePaintBrush> ().OrderBy (b => {
 				// This is a bit lame, but let's just hope brush
 				// names will never start with a number...
 				if (b.Priority == 0) {
@@ -360,46 +357,31 @@ namespace Pinta
 
 		private void LoadEffects ()
 		{
+			var effects = PintaCore.System.GetExtensions<BaseEffect> ();
+
+			if (effects.Length == 0)
+				return;
+
 			// Load our adjustments
-			foreach (BaseEffect effect in extensions.Effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Adjustment).OrderBy (t => t.Text)) {
-				// Add icon to IconFactory
-				Gtk.IconFactory fact = new Gtk.IconFactory ();
-				fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
-				fact.AddDefault ();
-
-				// Create a gtk action for each adjustment
-				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text + (effect.IsConfigurable ? Catalog.GetString ("...") : ""), string.Empty, effect.Icon);
-				PintaCore.Actions.Adjustments.Actions.Add (act);
-				act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (extensions.Effects.Where (t => t.GetType ().Name == (sender as Gtk.Action).Name).First ()); };
-
-				// Create a menu item for each adjustment
-				((Menu)((ImageMenuItem)main_menu.Children[5]).Submenu).Append (act.CreateAcceleratedMenuItem (effect.AdjustmentMenuKey, effect.AdjustmentMenuKeyModifiers));
-			}
+			foreach (var adj in effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Adjustment).OrderBy (t => t.Text))
+				PintaCore.Effects.RegisterAdjustment (adj, main_menu);
 
 			// Load our effects
-			foreach (BaseEffect effect in extensions.Effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Effect).OrderBy (t => string.Format ("{0}|{1}", t.EffectMenuCategory, t.Text))) {
-				// Add icon to IconFactory
-				Gtk.IconFactory fact = new Gtk.IconFactory ();
-				fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
-				fact.AddDefault ();
-
-				// Create a gtk action and menu item for each effect
-				Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text + (effect.IsConfigurable ? Catalog.GetString ("...") : ""), string.Empty, effect.Icon);
-				PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
-				act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (extensions.Effects.Where (t => t.GetType ().Name == (sender as Gtk.Action).Name).First ()); };
-			}
+			foreach (BaseEffect effect in effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Effect).OrderBy (t => string.Format ("{0}|{1}", t.EffectMenuCategory, t.Text)))
+				PintaCore.Effects.RegisterEffect (effect, main_menu);
 		}
 		
 		private void LoadToolBox ()
 		{
+
 			// Create our tools
-			foreach (BaseTool tool in extensions.Tools.OrderBy (t => t.Priority))
+			foreach (BaseTool tool in PintaCore.System.GetExtensions<BaseTool> ().OrderBy (t => t.Priority))
 				PintaCore.Tools.AddTool (tool);
 
 			// Try to set the paint brush as the default tool, if that
 			// fails, set the first thing we can find.
 			if (!PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Paintbrush")))
-				PintaCore.Tools.SetCurrentTool (extensions.Tools.First ());
+				PintaCore.Tools.SetCurrentTool (PintaCore.Tools.First ());
 
 			foreach (var tool in PintaCore.Tools)
 				toolbox.AddItem (tool.ToolItem);

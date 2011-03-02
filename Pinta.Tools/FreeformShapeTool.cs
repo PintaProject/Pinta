@@ -32,7 +32,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[Mono.Addins.Extension]
 	public class FreeformShapeTool : BaseBrushTool
 	{
 		private Point last_point = point_empty;

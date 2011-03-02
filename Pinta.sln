@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Tools", "Pinta.Tools\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Effects", "Pinta.Effects\Pinta.Effects.csproj", "{71A1C3E0-7343-48FE-BD9A-508929136E92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.ComponentModel.Composition", "System.ComponentModel.Composition\System.ComponentModel.Composition.csproj", "{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,10 +46,6 @@ Global
 		{71A1C3E0-7343-48FE-BD9A-508929136E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71A1C3E0-7343-48FE-BD9A-508929136E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71A1C3E0-7343-48FE-BD9A-508929136E92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

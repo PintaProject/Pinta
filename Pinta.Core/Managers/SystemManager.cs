@@ -30,6 +30,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using Mono.Addins;
 
 namespace Pinta.Core
 {
@@ -72,6 +73,11 @@ namespace Pinta.Core
 		public static OS GetOperatingSystem ()
 		{
 			return operating_system;
+		}
+
+		public T[] GetExtensions<T> ()
+		{
+			return AddinManager.GetExtensionObjects<T> ();
 		}
 
 		//From Managed.Windows.Forms/XplatUI

@@ -14,7 +14,7 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	[Mono.Addins.Extension]
 	public class ReliefEffect : ColorDifferenceEffect
 	{
 		public ReliefEffect () {

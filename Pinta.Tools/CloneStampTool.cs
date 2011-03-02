@@ -31,7 +31,7 @@ using Gdk;
 
 namespace Pinta.Tools
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseTool))]
+	[Mono.Addins.Extension]
 	public class CloneStampTool : BaseBrushTool
 	{
 		private bool painting;

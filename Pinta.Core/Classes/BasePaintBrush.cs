@@ -25,9 +25,11 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Addins;
 
 namespace Pinta.Core
 {
+	[TypeExtensionPoint]
 	public abstract class BasePaintBrush
 	{
 		public abstract string Name { get; }

@@ -14,7 +14,7 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	[Mono.Addins.Extension]
 	public class HueSaturationEffect : BaseEffect
 	{		
 		UnaryPixelOp op;
