@@ -13,7 +13,7 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	//[System.ComponentModel.Composition (typeof (BaseEffect))]
 	public class InvertColorsEffect : BaseEffect
 	{
 		UnaryPixelOp op = new UnaryPixelOps.Invert ();

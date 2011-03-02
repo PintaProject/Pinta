@@ -15,7 +15,7 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
+	//[System.ComponentModel.Composition (typeof (BaseEffect))]
 	public class InkSketchEffect : BaseEffect
 	{
 		private static readonly int[][] conv;
