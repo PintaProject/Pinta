@@ -114,7 +114,7 @@
     <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewLayerAction.cs" />
     <Compile Include="Actions\File\CloseDocumentAction.cs" />
-    <Compile Include="Actions\File\SaveDocumentImplmentationAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentImplementationAction.cs" />
     <Compile Include="Actions\File\ModifyCompressionAction.cs" />
     <Compile Include="Actions\File\ExitAction.cs" />
     <Compile Include="Actions\File\SaveDocumentAsAction.cs" />
