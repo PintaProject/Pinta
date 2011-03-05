@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreEffectsExtension.cs" />
     <Compile Include="Dialogs\Effects.LevelsDialog.cs" />
     <Compile Include="Dialogs\Effects.PosterizeDialog.cs" />
     <Compile Include="Adjustments\AutoLevelEffect.cs" />

@@ -38,7 +38,7 @@ namespace Pinta.Core
 		public Gtk.Action New { get; private set; }
 		public Gtk.Action NewScreenshot { get; private set; }
 		public Gtk.Action Open { get; private set; }
-		public Gtk.Action OpenRecent { get; private set; }
+		public Gtk.RecentAction OpenRecent { get; private set; }
 		public Gtk.Action Close { get; private set; }
 		public Gtk.Action Save { get; private set; }
 		public Gtk.Action SaveAs { get; private set; }
@@ -95,14 +95,19 @@ namespace Pinta.Core
 		
 		public void RegisterHandlers ()
 		{
-			Exit.Activated += HandlePintaCoreActionsFileExitActivated;
 		}
 		#endregion
 
 		#region Event Invokers
-		internal bool RaiseSaveDocument (Document document)
+		public void RaiseBeforeQuit ()
 		{
-			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document);
+			if (BeforeQuit != null)
+				BeforeQuit (this, EventArgs.Empty);
+		}
+
+		internal bool RaiseSaveDocument (Document document, bool saveAs)
+		{
+			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);
 
 			if (SaveDocument == null)
 				throw new InvalidOperationException ("GUI is not handling PintaCore.Workspace.SaveDocument");
@@ -120,27 +125,6 @@ namespace Pinta.Core
 				ModifyCompression (this, e);
 				
 			return e.Cancel ? -1 : e.Quality;
-		}
-		#endregion
-		
-		#region Action Handlers
-		private void HandlePintaCoreActionsFileExitActivated (object sender, EventArgs e)
-		{
-			while (PintaCore.Workspace.HasOpenDocuments) {
-				int count = PintaCore.Workspace.OpenDocuments.Count;
-				
-				Close.Activate ();
-				
-				// If we still have the same number of open documents,
-				// the user cancelled on a Save prompt.
-				if (count == PintaCore.Workspace.OpenDocuments.Count)
-					return;
-			}
-			
-			if (BeforeQuit != null)
-				BeforeQuit (this, EventArgs.Empty);
-				
-			Application.Quit ();
 		}
 		#endregion
 	}

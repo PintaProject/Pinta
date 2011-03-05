@@ -16,7 +16,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class CloudsEffect : BaseEffect
 	{
         // This is so that repetition of the effect with CTRL+F actually shows up differently.

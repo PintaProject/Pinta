@@ -14,7 +14,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class HueSaturationEffect : BaseEffect
 	{		
 		UnaryPixelOp op;

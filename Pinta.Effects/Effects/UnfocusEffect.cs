@@ -15,7 +15,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class UnfocusEffect : LocalHistogramEffect
 	{
 		private int radius;

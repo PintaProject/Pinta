@@ -43,7 +43,7 @@ namespace Pinta.Core
 		}
 
 		// TODO: Needs to keep menu sorted
-		public Gtk.Action RegisterAdjustment (BaseEffect adjustment, MenuBar menu)
+		public Gtk.Action AddAdjustment (BaseEffect adjustment)
 		{
 			adjustments.Add (adjustment);
 
@@ -59,13 +59,13 @@ namespace Pinta.Core
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
 			// Create a menu item for each adjustment
-			((Menu)((ImageMenuItem)menu.Children[5]).Submenu).Append (act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers));
+			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).Append (act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers));
 
 			return act;
 		}
 
 		// TODO: Needs to keep menu sorted
-		public Gtk.Action RegisterEffect (BaseEffect effect, MenuBar menu)
+		public Gtk.Action AddEffect (BaseEffect effect)
 		{
 			effects.Add (effect);
 

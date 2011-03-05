@@ -14,7 +14,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class ReliefEffect : ColorDifferenceEffect
 	{
 		public ReliefEffect () {

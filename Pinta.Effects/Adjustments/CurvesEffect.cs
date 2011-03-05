@@ -15,7 +15,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class CurvesEffect : BaseEffect
 	{
 		UnaryPixelOp op = null;

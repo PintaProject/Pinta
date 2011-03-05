@@ -15,7 +15,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class ZoomBlurEffect : BaseEffect
 	{
 		public override string Icon {

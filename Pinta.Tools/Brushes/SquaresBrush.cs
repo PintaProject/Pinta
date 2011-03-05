@@ -31,7 +31,6 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	[Mono.Addins.Extension]
 	public class SquaresBrush : PaintBrush
 	{
 		private static double theta = Math.PI / 2;

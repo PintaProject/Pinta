@@ -16,7 +16,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class GlowEffect : BaseEffect
 	{
 		private GaussianBlurEffect blurEffect;

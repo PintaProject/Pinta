@@ -182,14 +182,14 @@ namespace Pinta.Core
 			hist.TakeSnapshotOfImage ();
 			hist.RestorePath = doc.SelectionPath.Clone ();
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.FreezeUpdates ();
+			PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates ();
 
 			double original_scale = doc.Workspace.Scale;
 			doc.ImageSize = rect.Size;
 			doc.Workspace.CanvasSize = rect.Size;
 			doc.Workspace.Scale = original_scale;
 
-			PintaCore.Chrome.DrawingArea.GdkWindow.ThawUpdates ();
+			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
 
 			foreach (var layer in doc.Layers)
 				layer.Crop (rect, doc.SelectionPath);

@@ -31,12 +31,16 @@ using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 using Mono.Addins;
+using Gtk;
 
 namespace Pinta.Core
 {
 	public class SystemManager
 	{
 		private static OS operating_system;
+
+		private string last_dialog_directory;
+		private RecentData recent_data;
 
 		public ImageConverterManager ImageFormats { get; private set; }
 		public FontManager Fonts { get; private set; }
@@ -48,6 +52,13 @@ namespace Pinta.Core
 			ImageFormats = new ImageConverterManager ();
 			RenderThreads = Environment.ProcessorCount;
 			Fonts = new FontManager ();
+
+			last_dialog_directory = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
+
+			recent_data = new RecentData ();
+			recent_data.AppName = "Pinta";
+			recent_data.AppExec = GetExecutablePathName ();
+			recent_data.MimeType = "image/*";
 		}
 
 		static SystemManager ()
@@ -61,6 +72,16 @@ namespace Pinta.Core
 			else
 				operating_system = OS.Other;
 		}
+
+		#region Public Properties
+		// TODO: Store in settings
+		public string LastDialogDirectory {
+			get { return last_dialog_directory; }
+			set { last_dialog_directory = value; }
+		}
+
+		public RecentData RecentData { get { return recent_data; } }
+		#endregion
 
 		public string GetExecutablePathName ()
 		{

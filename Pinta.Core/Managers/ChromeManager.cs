@@ -37,30 +37,20 @@ namespace Pinta.Core
 		private IProgressDialog progress_dialog;
 		private bool main_window_busy;
 		private Gdk.Point last_canvas_cursor_point;
-		
+		private MenuBar main_menu;
+		private Toolbar main_toolbar;
+
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
-		public DrawingArea DrawingArea { get { return drawing_area; } }
+		public Toolbar MainToolBar { get { return main_toolbar; } }
+		public DrawingArea Canvas { get { return drawing_area; } }
 		public Window MainWindow { get { return main_window; } }
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
+		public MenuBar MainMenu { get { return main_menu; } }
 		
 		public ChromeManager ()
 		{
 		}
 		
-		public void Initialize (Toolbar toolToolBar,
-		                        DrawingArea drawingArea,
-		                        Window mainWindow,
-		                        IProgressDialog progressDialog)
-		{
-			if (progressDialog == null)
-				throw new ArgumentNullException ("progressDialog");
-			
-			tool_toolbar = toolToolBar;
-			drawing_area = drawingArea;
-			main_window = mainWindow;
-			progress_dialog = progressDialog;
-		}
-
 		#region Public Properties
 		public Gdk.Point LastCanvasCursorPoint {
 			get { return last_canvas_cursor_point; }
@@ -86,6 +76,40 @@ namespace Pinta.Core
 		#endregion
 
 		#region Public Methods
+		public void InitializeToolToolBar (Toolbar toolToolBar)
+		{
+			tool_toolbar = toolToolBar;
+		}
+
+		public void InitializeMainToolBar (Toolbar mainToolBar)
+		{
+			main_toolbar = mainToolBar;
+		}
+
+		public void InitializeCanvas (DrawingArea canvas)
+		{
+			drawing_area = canvas;
+		}
+
+		public void InitializeWindowShell (Window shell)
+		{
+			main_window = shell;
+		}
+
+		public void InitializeMainMenu (MenuBar menu)
+		{
+			main_menu = menu;
+		}
+
+		public void InitializeProgessDialog (IProgressDialog progressDialog)
+		{
+			if (progressDialog == null)
+				throw new ArgumentNullException ("progressDialog");
+
+			progress_dialog = progressDialog;
+		}
+
+
 		public void SetStatusBarText (string text)
 		{
 			OnStatusBarTextChanged (text);

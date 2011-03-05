@@ -36,6 +36,7 @@ namespace Pinta.Core
 		public void AddPaintBrush (BasePaintBrush paintBrush)
 		{
 			paint_brushes.Add (paintBrush);
+			paint_brushes.Sort (new BrushSorter ());
 		}
 
 		#region IEnumerable<BasePaintBrush> implementation
@@ -51,6 +52,17 @@ namespace Pinta.Core
 			return paint_brushes.GetEnumerator ();
 		}
 		#endregion
+
+		class BrushSorter : Comparer<BasePaintBrush>
+		{
+			public override int Compare (BasePaintBrush x, BasePaintBrush y)
+			{
+				var xstr = x.Priority == 0 ? x.Name : x.Priority.ToString ();
+				var ystr = y.Priority == 0 ? y.Name : y.Priority.ToString ();
+
+				return string.Compare (xstr, ystr);
+			}
+		}
 	}
 }
 

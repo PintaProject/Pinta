@@ -13,7 +13,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class AutoLevelEffect : BaseEffect
 	{
 		UnaryPixelOps.Level op;

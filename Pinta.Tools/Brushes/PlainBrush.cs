@@ -31,7 +31,6 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	[Mono.Addins.Extension]
 	public class PlainBrush : PaintBrush
 	{
 		public override string Name {

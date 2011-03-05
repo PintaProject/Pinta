@@ -15,7 +15,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[Mono.Addins.Extension]
 	public class PixelateEffect : BaseEffect
 	{
 		public override string Icon {

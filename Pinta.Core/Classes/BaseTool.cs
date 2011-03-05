@@ -226,7 +226,7 @@ namespace Pinta.Core
 		
 		protected void SetCursor (Gdk.Cursor cursor)
 		{
-			PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = cursor;
+			//PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = cursor;
 		}
 		#endregion
 

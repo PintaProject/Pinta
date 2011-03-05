@@ -685,9 +685,9 @@ namespace Pinta.Core
 		}
 
 		// Returns true if successful, false if canceled
-		public bool Save ()
+		public bool Save (bool saveAs)
 		{
-			return PintaCore.Actions.File.RaiseSaveDocument (this);
+			return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
 		}
 
 		public void SetCurrentLayer (int i)

@@ -82,7 +82,7 @@ namespace Pinta
 			
 			Application.Init ();
 			MainWindow win = new MainWindow ();
-			win.Show ();
+			//win.Show ();
 			
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
@@ -100,12 +100,10 @@ namespace Pinta
 					}
 				
 					if (!string.IsNullOrEmpty (arg)) {
-						if (PintaCore.Workspace.OpenFile (arg))
-							PintaCore.Workspace.ActiveDocument.HasFile = true;
+						PintaCore.Workspace.OpenFile (arg);
 					}
 				} else {
-					if (PintaCore.Workspace.OpenFile (extra[0]))
-						PintaCore.Workspace.ActiveDocument.HasFile = true;
+					PintaCore.Workspace.OpenFile (extra[0]);
 				}				
 			} else {
 				// Create a blank document

@@ -63,17 +63,8 @@ namespace Pinta.Core
 			Effects = new EffectsManager ();
 		}
 		
-		public static void Initialize (Toolbar toolToolBar,
-		                               DrawingArea drawingArea,
-		                               Window mainWindow,
-		                               IProgressDialog progressDialog)
+		public static void Initialize ()
 		{
-			Chrome.Initialize (toolToolBar,
-			                   drawingArea,
-			                   mainWindow,
-			                   progressDialog);
-			
-			
 			Actions.RegisterHandlers ();
 		}
 	}

@@ -25,111 +25,113 @@
 // THE SOFTWARE.
 
 using System;
-using System.Linq;
 using Gtk;
+using Mono.Addins;
+using Mono.Unix;
 using MonoDevelop.Components.Docking;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
-using Mono.Unix;
-using Mono.Addins.Gui;
-using Mono.Addins;
-
-//[assembly: AddinRoot ("Pinta", "1.0")]
 
 namespace Pinta
 {
-	public class MainWindow : Window
+	public class MainWindow
 	{
-		DialogHandlers dialog_handler;
-
-		ProgressDialog progress_dialog;
-		
-		Toolbar main_toolbar;
-		Toolbar tool_toolbar;
-		PintaCanvas canvas;
-		ToolBoxWidget toolbox;
-		ColorPaletteWidget color;
-		MenuBar main_menu;
+		WindowShell window_shell;
 		ScrolledWindow sw;
 		DockFrame dock;
-		MenuItem window_menu;
-		MenuItem view_menu;
-		LayersListWidget layers;
-		
 		Menu show_pad;
 		
-		public MainWindow () : base (WindowType.Toplevel)
+		ActionHandlers dialog_handlers;
+		
+		public MainWindow ()
 		{
+			// Build our window
 			CreateWindow ();
 
 			// Initialize interface things
-			this.AddAccelGroup (PintaCore.Actions.AccelGroup);
+			window_shell.AddAccelGroup (PintaCore.Actions.AccelGroup);
+			dialog_handlers = new ActionHandlers ();
 
-			progress_dialog = new ProgressDialog ();
+			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
+			PintaCore.Initialize ();
 
-			PintaCore.Initialize (tool_toolbar, canvas, this, progress_dialog);
-			color.Initialize ();
-
-			AddinManager.Initialize (string.Empty);
+			// Initialize extensions
+			AddinManager.Initialize ();
 			AddinManager.Registry.Update ();
 
-			LoadPaintBrushes ();
-			LoadToolBox ();
-			LoadEffects ();
-			//CreateStatusBar ();
+			foreach (var extension in PintaCore.System.GetExtensions<IExtension> ())
+				extension.Initialize ();
 
-			canvas.IsFocus = true;
+			// Try to set the default tool to the PaintBrush
+			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Paintbrush"));
 
-			UpdateRulerRange ();
+			// Load the user's previous settings
+			LoadUserSettings ();
 
-			PintaCore.Chrome.DrawingArea.SizeAllocated += delegate {
-				UpdateRulerRange ();
-			};
-
-			dialog_handler = new DialogHandlers (this);
-			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
-			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
-
-			DeleteEvent += new DeleteEventHandler (MainWindow_DeleteEvent);
-			
-			PintaCore.Actions.File.BeforeQuit += delegate {
-				dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
-
-				// Don't store the maximized height if the window is maximized
-				if ((this.GdkWindow.State & Gdk.WindowState.Maximized) == 0) {
-					PintaCore.Settings.PutSetting ("window-size-width", this.GdkWindow.GetSize ().Width);
-					PintaCore.Settings.PutSetting ("window-size-height", this.GdkWindow.GetSize ().Height);
-				}
-
-				PintaCore.Settings.PutSetting ("window-maximized", (this.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
-				PintaCore.Settings.PutSetting ("ruler-metric", (int) hruler.Metric);
-				PintaCore.Settings.PutSetting ("ruler-show", PintaCore.Actions.View.Rulers.Active);
-				PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
-				PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
-				PintaCore.Settings.SaveSettings ();
-			};
-
-			ChangeRulersUnit ((MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels));
-			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-show", false);
-			dialog_handler.UpdateRulerVisibility ();
-			
-			if (PintaCore.Settings.GetSetting <bool> ("window-maximized", false))
-				this.GdkWindow.Maximize ();
-
-			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
-			ToggleToolbar (PintaCore.Actions.View.ToolBar.Active);
-			PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
-			
-			PintaCore.Actions.Help.About.Activated += new EventHandler (About_Activated);
-			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
-			PintaCore.Workspace.DocumentCreated += new EventHandler<DocumentEventArgs> (Workspace_DocumentCreated);
-			PintaCore.Workspace.DocumentClosed += new EventHandler<DocumentEventArgs> (Workspace_DocumentClosed);
+			// Give the canvas focus
+			PintaCore.Chrome.Canvas.GrabFocus ();
 
 			// We support drag and drop for URIs
-			Gtk.TargetEntry[] targetEntryTypes = new Gtk.TargetEntry[] { new Gtk.TargetEntry ("text/uri-list", 0, 100) };
-			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, targetEntryTypes, Gdk.DragAction.Copy);
+			window_shell.AddDragDropSupport (new Gtk.TargetEntry ("text/uri-list", 0, 100));
+			
+			// Handle a few main window specific actions
+			PintaCore.Actions.File.BeforeQuit += delegate { SaveUserSettings (); };
 
-			this.DragDataReceived += MainWindow_DragDataReceived;
+			window_shell.DeleteEvent += MainWindow_DeleteEvent;
+			window_shell.DragDataReceived += MainWindow_DragDataReceived;
+
+			// TODO: These need to be [re]moved when we redo zoom support
+			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
+			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
+			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
+		}
+
+		#region GUI Construction
+		private void CreateWindow ()
+		{
+			// Check for stored window settings
+			var width = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
+			var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
+			var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
+
+			window_shell = new WindowShell ("Pinta.GenericWindow", "Pinta", width, height, maximize);
+
+			CreateMainMenu (window_shell);
+			CreateMainToolBar (window_shell);
+			CreateToolToolBar (window_shell);
+
+			CreatePanels (window_shell);
+
+			window_shell.ShowAll ();
+
+			PintaCore.Chrome.InitializeWindowShell (window_shell);
+		}
+
+		private void CreateMainMenu (WindowShell shell)
+		{
+			var main_menu = window_shell.CreateMainMenu ("main_menu");
+
+			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("_File")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("_Edit")).CreateMenuItem ());
+
+			MenuItem view_menu = (MenuItem)new Gtk.Action ("view", Catalog.GetString ("_View")).CreateMenuItem ();
+			main_menu.Append (view_menu);
+			
+			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("_Image")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
+
+			MenuItem window_menu = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
+			window_menu.Submenu = new Menu ();
+			main_menu.Append (window_menu);
+
+			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Tool Windows"), null, null);
+			view_menu.Submenu = new Menu ();
+			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
+
+			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
+
+			PintaCore.Actions.CreateMainMenu (main_menu);
 
 			if (PintaCore.System.OperatingSystem == OS.Mac) {
 				try {
@@ -152,12 +154,137 @@ namespace Pinta
 					// If things don't work out, just use a normal menu.
 				}
 			}
+
+			PintaCore.Chrome.InitializeMainMenu (main_menu);
 		}
 
-		#region Public Methods
-		public void ToggleToolbar (bool visible)
+		private void CreateMainToolBar (WindowShell shell)
 		{
-			main_toolbar.Visible = visible;
+			var main_toolbar = window_shell.CreateToolBar ("main_toolbar"); 
+			
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
+				main_toolbar.ToolbarStyle = ToolbarStyle.Icons;
+				main_toolbar.IconSize = IconSize.SmallToolbar;
+			}
+			
+			PintaCore.Actions.CreateToolBar (main_toolbar);
+
+			PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
+		}
+		
+		private void CreateToolToolBar (WindowShell shell)
+		{
+			var tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
+
+			tool_toolbar.ToolbarStyle = ToolbarStyle.Icons;
+			tool_toolbar.IconSize = IconSize.SmallToolbar;
+
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+				tool_toolbar.HeightRequest = 28;
+			else
+				tool_toolbar.HeightRequest = 42;
+
+			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
+		}
+		
+		private void CreatePanels (WindowShell shell)
+		{
+			HBox panel_container = shell.CreateWorkspace ();
+
+			CreateDockAndPads (panel_container);
+			panel_container.ShowAll ();
+		}
+		
+		private void CreateDockAndPads (HBox container)
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Tools.Pencil.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Pencil.png")));
+			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
+			fact.AddDefault ();
+
+			// Dock widget
+			dock = new DockFrame ();
+			dock.CompactGuiLevel = 5;
+
+			// Toolbox pad
+			var toolboxpad = new ToolBoxPad ();
+			toolboxpad.Initialize (dock, show_pad);
+		
+			// Palette pad
+			var palettepad = new ColorPalettePad ();
+			palettepad.Initialize (dock, show_pad);
+
+			// Canvas pad
+			var canvas_pad = new CanvasPad ();
+			canvas_pad.Initialize (dock, show_pad);
+
+			sw = canvas_pad.ScrolledWindow;
+
+			// Layer pad
+			var layers_pad = new LayersPad ();
+			layers_pad.Initialize (dock, show_pad);
+
+			// History pad
+			var history_pad = new HistoryPad ();
+			history_pad.Initialize (dock, show_pad);
+
+			container.PackStart (dock, true, true, 0);
+			
+			string layout_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
+			
+			if (System.IO.File.Exists (layout_file))
+				dock.LoadLayouts (layout_file);
+			
+			if (!dock.HasLayout ("Default"))
+				dock.CreateLayout ("Default", false);
+				
+			dock.CurrentLayout = "Default";
+		}
+		#endregion
+
+		#region User Settings
+		private void LoadUserSettings ()
+		{
+			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-shown", false);
+			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+			PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
+
+			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
+
+			switch (ruler_metric) {
+				case MetricType.Centimeters:
+					PintaCore.Actions.View.Centimeters.Activate ();
+					break;
+				case MetricType.Inches:
+					PintaCore.Actions.View.Inches.Activate ();
+					break;
+			}
+		}
+
+		private void SaveUserSettings ()
+		{
+			dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
+
+			// Don't store the maximized height if the window is maximized
+			if ((window_shell.GdkWindow.State & Gdk.WindowState.Maximized) == 0) {
+				PintaCore.Settings.PutSetting ("window-size-width", window_shell.GdkWindow.GetSize ().Width);
+				PintaCore.Settings.PutSetting ("window-size-height", window_shell.GdkWindow.GetSize ().Height);
+			}
+
+			var ruler_metric = MetricType.Pixels;
+
+			if (PintaCore.Actions.View.Inches.Active)
+				ruler_metric = MetricType.Inches;
+			else if (PintaCore.Actions.View.Centimeters.Active)
+				ruler_metric = MetricType.Centimeters;
+
+			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
+			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
+			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
+			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
+			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
+
+			PintaCore.Settings.SaveSettings ();
 		}
 		#endregion
 
@@ -220,25 +347,6 @@ namespace Pinta
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
 		}
-
-		private void About_Activated (object sender, EventArgs e)
-		{
-			AddinManagerWindow.AllowInstall = false;
-			var dlg = AddinManagerWindow.Show (this);
-
-			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
-			
-
-			return;
-
-			//AboutDialog dlg = new AboutDialog ();
-
-			//try {
-			//        dlg.Run ();
-			//} finally {
-			//        dlg.Destroy ();
-			//}
-		}
 		
 		private void ActiveDocumentChanged (object sender, EventArgs e)
 		{
@@ -253,488 +361,6 @@ namespace Pinta
 			}
 			
 			PintaCore.Workspace.Invalidate ();
-			
-			layers.Reset ();
-		}
-
-		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
-		{
-			PintaCore.Actions.Window.RemoveDocument (e.Document);
-
-			if (!PintaCore.Workspace.HasOpenDocuments) {
-				PintaCore.Actions.File.Close.Sensitive = false;
-				PintaCore.Actions.File.Save.Sensitive = false;
-				PintaCore.Actions.File.SaveAs.Sensitive = false;
-				PintaCore.Actions.Edit.Copy.Sensitive = false;
-				PintaCore.Actions.Edit.Cut.Sensitive = false;
-				PintaCore.Actions.Edit.Paste.Sensitive = false;
-				PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = false;
-				PintaCore.Actions.Edit.SelectAll.Sensitive = false;
-
-				PintaCore.Actions.View.ActualSize.Sensitive = false;
-				PintaCore.Actions.View.ZoomIn.Sensitive = false;
-				PintaCore.Actions.View.ZoomOut.Sensitive = false;
-				PintaCore.Actions.View.ZoomToSelection.Sensitive = false;
-				PintaCore.Actions.View.ZoomToWindow.Sensitive = false;
-				PintaCore.Actions.View.ZoomComboBox.Sensitive = false;
-
-				PintaCore.Actions.Image.CanvasSize.Sensitive = false;
-				PintaCore.Actions.Image.Resize.Sensitive = false;
-				PintaCore.Actions.Image.FlipHorizontal.Sensitive = false;
-				PintaCore.Actions.Image.FlipVertical.Sensitive = false;
-				PintaCore.Actions.Image.Rotate180.Sensitive = false;
-				PintaCore.Actions.Image.RotateCCW.Sensitive = false;
-				PintaCore.Actions.Image.RotateCW.Sensitive = false;
-
-				PintaCore.Actions.Layers.AddNewLayer.Sensitive = false;
-				PintaCore.Actions.Layers.DuplicateLayer.Sensitive = false;
-				PintaCore.Actions.Layers.FlipHorizontal.Sensitive = false;
-				PintaCore.Actions.Layers.FlipVertical.Sensitive = false;
-				PintaCore.Actions.Layers.ImportFromFile.Sensitive = false;
-				PintaCore.Actions.Layers.Properties.Sensitive = false;
-				PintaCore.Actions.Layers.RotateZoom.Sensitive = false;
-
-				PintaCore.Actions.Adjustments.ToggleActionsSensitive (false);
-				PintaCore.Actions.Effects.ToggleActionsSensitive (false);
-			}
-		}
-
-		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
-		{
-			PintaCore.Actions.Window.AddDocument (e.Document);
-
-			PintaCore.Actions.File.Close.Sensitive = true;
-			PintaCore.Actions.File.Save.Sensitive = true;
-			PintaCore.Actions.File.SaveAs.Sensitive = true;
-			PintaCore.Actions.Edit.Copy.Sensitive = true;
-			PintaCore.Actions.Edit.Cut.Sensitive = true;
-			PintaCore.Actions.Edit.Paste.Sensitive = true;
-			PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = true;
-			PintaCore.Actions.Edit.SelectAll.Sensitive = true;
-
-			PintaCore.Actions.View.ActualSize.Sensitive = true;
-			PintaCore.Actions.View.ZoomIn.Sensitive = true;
-			PintaCore.Actions.View.ZoomOut.Sensitive = true;
-			PintaCore.Actions.View.ZoomToSelection.Sensitive = true;
-			PintaCore.Actions.View.ZoomToWindow.Sensitive = true;
-			PintaCore.Actions.View.ZoomComboBox.Sensitive = true;
-
-			PintaCore.Actions.Image.CanvasSize.Sensitive = true;
-			PintaCore.Actions.Image.Resize.Sensitive = true;
-			PintaCore.Actions.Image.FlipHorizontal.Sensitive = true;
-			PintaCore.Actions.Image.FlipVertical.Sensitive = true;
-			PintaCore.Actions.Image.Rotate180.Sensitive = true;
-			PintaCore.Actions.Image.RotateCCW.Sensitive = true;
-			PintaCore.Actions.Image.RotateCW.Sensitive = true;
-
-			PintaCore.Actions.Layers.AddNewLayer.Sensitive = true;
-			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = true;
-			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = true;
-			PintaCore.Actions.Layers.FlipVertical.Sensitive = true;
-			PintaCore.Actions.Layers.ImportFromFile.Sensitive = true;
-			PintaCore.Actions.Layers.Properties.Sensitive = true;
-			PintaCore.Actions.Layers.RotateZoom.Sensitive = true;
-
-			PintaCore.Actions.Adjustments.ToggleActionsSensitive (true);
-			PintaCore.Actions.Effects.ToggleActionsSensitive (true);
-		}
-		#endregion
-
-		#region Extension Handlers
-		private void LoadPaintBrushes ()
-		{
-			foreach (var brush in PintaCore.System.GetExtensions<BasePaintBrush> ().OrderBy (b => {
-				// This is a bit lame, but let's just hope brush
-				// names will never start with a number...
-				if (b.Priority == 0) {
-					return b.Name;
-				} else {
-					return b.Priority.ToString ();
-				}
-			}))
-				PintaCore.PaintBrushes.AddPaintBrush (brush);
-		}
-
-		private void LoadEffects ()
-		{
-			var effects = PintaCore.System.GetExtensions<BaseEffect> ();
-
-			if (effects.Length == 0)
-				return;
-
-			// Load our adjustments
-			foreach (var adj in effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Adjustment).OrderBy (t => t.Text))
-				PintaCore.Effects.RegisterAdjustment (adj, main_menu);
-
-			// Load our effects
-			foreach (BaseEffect effect in effects.Where (t => t.EffectOrAdjustment == EffectAdjustment.Effect).OrderBy (t => string.Format ("{0}|{1}", t.EffectMenuCategory, t.Text)))
-				PintaCore.Effects.RegisterEffect (effect, main_menu);
-		}
-		
-		private void LoadToolBox ()
-		{
-
-			// Create our tools
-			foreach (BaseTool tool in PintaCore.System.GetExtensions<BaseTool> ().OrderBy (t => t.Priority))
-				PintaCore.Tools.AddTool (tool);
-
-			// Try to set the paint brush as the default tool, if that
-			// fails, set the first thing we can find.
-			if (!PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Paintbrush")))
-				PintaCore.Tools.SetCurrentTool (PintaCore.Tools.First ());
-
-			foreach (var tool in PintaCore.Tools)
-				toolbox.AddItem (tool.ToolItem);
-		}
-		#endregion
-
-		#region GUI Construction
-		private void CreateWindow ()
-		{
-			// Window
-			Name = "Pinta.MainWindow";
-			Title = "Pinta";
-			WindowPosition = WindowPosition.Center;
-			AllowShrink = true;
-			DefaultWidth = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
-			DefaultHeight = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
-			
-			if (PintaCore.Settings.GetSetting<bool> ("window-maximized", false))
-				Maximize ();
-
-			// shell - contains mainmenu, 2 toolbars, hbox
-			VBox shell = new VBox () {
-				Name = "shell"
-			};
-
-			CreateMainMenu (shell);
-			CreateMainToolBar (shell);
-			CreateToolToolBar (shell);
-
-			CreatePanels (shell);
-
-			Add (shell);
-
-			if (Child != null)
-				Child.ShowAll ();
-
-			Show ();
-
-			// On non-Windows systems, we clip to sufficient size for
-			// "both-horiz" mode.
-			if (PintaCore.System.OperatingSystem == OS.Windows)
-				tool_toolbar.HeightRequest = 28;
-			else
-				tool_toolbar.HeightRequest = 42;
-		}
-
-		private void CreateMainMenu (VBox shell)
-		{
-			// Main menu
-			main_menu = new MenuBar () {
-				Name = "main_menu"
-			};
-
-			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("_File")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("_Edit")).CreateMenuItem ());
-
-			view_menu = (MenuItem)new Gtk.Action ("view", Catalog.GetString ("_View")).CreateMenuItem ();
-			main_menu.Append (view_menu);
-			
-			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("_Image")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
-
-			window_menu = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
-			window_menu.Submenu = new Menu ();
-			main_menu.Append (window_menu);
-
-			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Tool Windows"), null, null);
-			view_menu.Submenu = new Menu ();
-			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
-
-			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
-
-			PintaCore.Actions.CreateMainMenu (main_menu);
-			shell.PackStart (main_menu, false, false, 0);
-		}
-
-		private void CreateMainToolBar (VBox shell)
-		{
-			// Main toolbar
-			main_toolbar = new Toolbar () {
-				Name = "main_toolbar",
-				ShowArrow = false,
-			};
-
-			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				main_toolbar.ToolbarStyle = ToolbarStyle.Icons;
-				main_toolbar.IconSize = IconSize.SmallToolbar;
-			}
-			
-			PintaCore.Actions.CreateToolBar (main_toolbar);
-
-			shell.PackStart (main_toolbar, false, false, 0);
-		}
-		
-		private void CreateToolToolBar (VBox shell)
-		{
-			// Tool toolbar
-			tool_toolbar = new Toolbar () {
-				Name = "tool_toolbar",
-				ShowArrow = false,
-				ToolbarStyle = ToolbarStyle.Icons,
-				IconSize = IconSize.SmallToolbar,
-			};
-			
-			shell.PackStart (tool_toolbar, false, false, 0);
-		}
-		
-		private void CreatePanels (VBox shell)
-		{
-			HBox panel_container = new HBox () {
-				Name = "panel_container"
-			};
-
-			CreateDockAndPads (panel_container);
-			
-			shell.PackStart (panel_container, true, true, 0);
-		}
-		
-		private void CreateDockAndPads (HBox container)
-		{
-			// Create canvas
-			Table mainTable = new Table (2, 2, false);
-
-			sw = new ScrolledWindow () {
-				Name = "sw",
-				ShadowType = ShadowType.EtchedOut
-			};
-			
-			Viewport vp = new Viewport () {
-				ShadowType = ShadowType.None
-			};
-			
-			canvas = new PintaCanvas () {
-				Name = "canvas",
-				CanDefault = true,
-				CanFocus = true,
-				Events = (Gdk.EventMask)16134
-			};
-			
-			// Dock widget
-			dock = new DockFrame ();
-			dock.CompactGuiLevel = 5;
-
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Tools.Pencil.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Pencil.png")));
-			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
-			fact.AddDefault ();
-			
-			// Toolbox pad
-			DockItem toolbox_item = dock.AddItem ("Toolbox");
-			toolbox = new ToolBoxWidget () { Name = "toolbox" };
-			
-			toolbox_item.Label = Catalog.GetString ("Tools");
-			toolbox_item.Content = toolbox;
-			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
-			toolbox_item.Behavior |= DockItemBehavior.CantClose;
-			toolbox_item.DefaultWidth = 65;
-
-			Gtk.ToggleAction show_toolbox = show_pad.AppendToggleAction ("Tools", Catalog.GetString ("Tools"), null, "Tools.Pencil.png");
-			show_toolbox.Activated += delegate { toolbox_item.Visible = show_toolbox.Active; };
-			toolbox_item.VisibleChanged += delegate { show_toolbox.Active = toolbox_item.Visible; };
-		
-			// Palette pad
-			DockItem palette_item = dock.AddItem ("Palette");
-			color = new ColorPaletteWidget () { Name = "color" };
-
-			palette_item.Label = Catalog.GetString ("Palette");
-			palette_item.Content = color;
-			palette_item.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
-			palette_item.DefaultLocation = "Toolbox/Bottom";
-			palette_item.Behavior |= DockItemBehavior.CantClose;
-			palette_item.DefaultWidth = 65;
-
-			Gtk.ToggleAction show_palette = show_pad.AppendToggleAction ("Palette", Catalog.GetString ("Palette"), null, "Pinta.png");
-			show_palette.Activated += delegate { palette_item.Visible = show_palette.Active; };
-			palette_item.VisibleChanged += delegate { show_palette.Active = palette_item.Visible; };
-		
-			// Canvas pad
-			DockItem documentDockItem = dock.AddItem ("Canvas");
-			documentDockItem.Behavior = DockItemBehavior.Locked;
-			documentDockItem.Expand = true;
-
-			documentDockItem.DrawFrame = false;
-			documentDockItem.Label = Catalog.GetString ("Documents");
-			documentDockItem.Content = mainTable;
-
-			//rulers
-			hruler = new HRuler ();
-			hruler.Metric = MetricType.Pixels;
-			mainTable.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-			
-			vruler = new VRuler ();
-			vruler.Metric = MetricType.Pixels;
-			mainTable.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-
-			sw.Hadjustment.ValueChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			sw.Vadjustment.ValueChanged += delegate {
-				UpdateRulerRange ();
-			};
-			
-			PintaCore.Workspace.CanvasSizeChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			canvas.MotionNotifyEvent += delegate (object o, MotionNotifyEventArgs args) {
-				if (!PintaCore.Workspace.HasOpenDocuments)
-					return;
-
-				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
-	
-				hruler.Position = point.X;
-				vruler.Position = point.Y;
-
-			};
-			mainTable.Attach (sw, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
-
-			sw.Add (vp);
-			vp.Add (canvas);
-
-			mainTable.ShowAll ();
-			canvas.Show ();
-			vp.Show ();
-
-			HideRulers();
-
-			// Layer pad
-			layers = new LayersListWidget ();
-			DockItem layers_item = dock.AddItem ("Layers");
-			DockItemToolbar layers_tb = layers_item.GetToolbar (PositionType.Bottom);
-			
-			layers_item.Label = Catalog.GetString ("Layers");
-			layers_item.Content = layers;
-			layers_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.MergeLayerDown.png");
-
-			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
-
-			Gtk.ToggleAction show_layers = show_pad.AppendToggleAction ("Layers", Catalog.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
-			show_layers.Activated += delegate { layers_item.Visible = show_layers.Active; };
-			layers_item.VisibleChanged += delegate { show_layers.Active = layers_item.Visible; };
-
-			// History pad
-			HistoryTreeView history = new HistoryTreeView ();
-			DockItem history_item = dock.AddItem ("History");
-			DockItemToolbar history_tb = history_item.GetToolbar (PositionType.Bottom);
-			
-			history_item.Label = Catalog.GetString ("History");
-			history_item.DefaultLocation = "Layers/Bottom";
-			history_item.Content = history;
-			history_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png");
-
-			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
-			Gtk.ToggleAction show_history = show_pad.AppendToggleAction ("History", Catalog.GetString ("History"), null, "Menu.Layers.DuplicateLayer.png");
-			show_history.Activated += delegate { history_item.Visible = show_history.Active; };
-			history_item.VisibleChanged += delegate { show_history.Active = history_item.Visible; };
-
-			container.PackStart (dock, true, true, 0);
-			
-			string layout_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
-			
-			if (System.IO.File.Exists (layout_file))
-				dock.LoadLayouts (layout_file);
-			
-			if (!dock.HasLayout ("Default"))
-				dock.CreateLayout ("Default", false);
-				
-			dock.CurrentLayout = "Default";
-
-			show_toolbox.Active = toolbox_item.Visible;
-			show_palette.Active = palette_item.Visible;
-			show_layers.Active = layers_item.Visible;
-			show_history.Active = history_item.Visible;
-		}
-		#endregion
-
-		#region rulers
-		public HRuler hruler;
-		private VRuler vruler;
-
-		public void ShowRulers ()
-		{
-			hruler.Show ();
-			vruler.Show ();
-		}
-
-		public void HideRulers ()
-		{
-			hruler.Hide ();
-			vruler.Hide ();
-		}
-
-		public void ChangeRulersUnit (Gtk.MetricType metric)
-		{
-			hruler.Metric = metric;
-			vruler.Metric = metric;
-
-			switch (metric) {
-				case Gtk.MetricType.Pixels:
-					if (!PintaCore.Actions.View.Pixels.Active)
-						PintaCore.Actions.View.Pixels.Active = true;
-
-					break;
-				case Gtk.MetricType.Inches:
-					if (!PintaCore.Actions.View.Inches.Active)
-						PintaCore.Actions.View.Inches.Active = true;
-
-					break;
-				case Gtk.MetricType.Centimeters:
-					if (!PintaCore.Actions.View.Centimeters.Active)
-						PintaCore.Actions.View.Centimeters.Active = true;
-
-					break;
-			}
-		}
-
-		public void UpdateRulerRange ()
-		{
-			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
-
-			Cairo.PointD lower = new Cairo.PointD (0, 0);
-			Cairo.PointD upper = new Cairo.PointD (0, 0);
-
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				if (PintaCore.Workspace.Offset.X > 0) {
-					lower.X = - PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-					upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
-				}
-				else {
-					lower.X = sw.Hadjustment.Value / PintaCore.Workspace.Scale;
-					upper.X = (sw.Hadjustment.Value + sw.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
-				}
-				if (PintaCore.Workspace.Offset.Y > 0) {
-					lower.Y = - PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-					upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
-				}
-				else {
-					lower.Y = sw.Vadjustment.Value / PintaCore.Workspace.Scale;
-					upper.Y = (sw.Vadjustment.Value + sw.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
-				}
-			}
-
-			hruler.SetRange (lower.X, upper.X, 0, upper.X);
-			vruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
 		}
 		#endregion
 	}

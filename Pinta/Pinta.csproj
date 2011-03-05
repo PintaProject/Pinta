@@ -110,6 +110,27 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Edit\ResizePaletteAction.cs" />
+    <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
+    <Compile Include="Actions\Edit\PasteIntoNewLayerAction.cs" />
+    <Compile Include="Actions\File\CloseDocumentAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentImplmentationAction.cs" />
+    <Compile Include="Actions\File\ModifyCompressionAction.cs" />
+    <Compile Include="Actions\File\ExitAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentAsAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentAction.cs" />
+    <Compile Include="Actions\File\OpenRecentAction.cs" />
+    <Compile Include="Actions\File\OpenDocumentAction.cs" />
+    <Compile Include="Actions\File\NewScreenshotAction.cs" />
+    <Compile Include="Actions\File\NewDocumentAction.cs" />
+    <Compile Include="Actions\Help\AboutDialogAction.cs" />
+    <Compile Include="Actions\IActionHandler.cs" />
+    <Compile Include="Actions\Image\ResizeCanvasAction.cs" />
+    <Compile Include="Actions\Image\ResizeImageAction.cs" />
+    <Compile Include="Actions\Layers\LayerPropertiesAction.cs" />
+    <Compile Include="Actions\View\ToolBarToggledAction.cs" />
+    <Compile Include="Actions\Window\CloseAllDocumentsAction.cs" />
+    <Compile Include="Actions\Window\SaveAllDocumentsAction.cs" />
     <Compile Include="Dialogs\AboutPintaTabPage.cs" />
     <Compile Include="Dialogs\AboutDialog.cs" />
     <Compile Include="Dialogs\ErrorDialog.cs" />
@@ -138,6 +159,13 @@
     <Compile Include="DockLibrary\ShadedContainer.cs" />
     <Compile Include="DockLibrary\TabStrip.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
+    <Compile Include="Pads\ColorPalettePad.cs" />
+    <Compile Include="Pads\CanvasPad.cs" />
+    <Compile Include="Pads\HistoryPad.cs" />
+    <Compile Include="Pads\LayersPad.cs" />
+    <Compile Include="Pads\IDockPad.cs" />
+    <Compile Include="Pads\ToolBoxPad.cs" />
+    <Compile Include="WindowShell.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
@@ -187,4 +215,5 @@
   <ItemGroup>
     <Content Include="Pinta.ico" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
