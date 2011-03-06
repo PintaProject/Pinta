@@ -309,9 +309,6 @@ namespace MonoDevelop.Components.Docking
 		
 		public void SaveLayouts (string file)
 		{
-			if (!System.IO.Directory.Exists (System.IO.Path.GetDirectoryName (file)))
-				System.IO.Directory.CreateDirectory (System.IO.Path.GetDirectoryName (file));
-				
 			using (XmlTextWriter w = new XmlTextWriter (file, System.Text.Encoding.UTF8)) {
 				w.Formatting = Formatting.Indented;
 				SaveLayouts (w);
@@ -609,6 +606,24 @@ namespace MonoDevelop.Components.Docking
 			AddTopLevel (aframe, x, y);
 			aframe.AnimateShow ();
 			return aframe;
+		}
+		
+		internal void UpdateSize (DockBar bar, AutoHideBox aframe)
+		{
+			Gdk.Size sTop = GetBarFrameSize (dockBarTop);
+			Gdk.Size sBot = GetBarFrameSize (dockBarBottom);
+			Gdk.Size sLeft = GetBarFrameSize (dockBarLeft);
+			Gdk.Size sRgt = GetBarFrameSize (dockBarRight);
+			
+			if (bar == dockBarLeft || bar == dockBarRight) {
+				aframe.HeightRequest = Allocation.Height - sTop.Height - sBot.Height;
+				if (bar == dockBarRight)
+					aframe.X = Allocation.Width - aframe.Allocation.Width - sRgt.Width;
+			} else {
+				aframe.WidthRequest = Allocation.Width - sLeft.Width - sRgt.Width;
+				if (bar == dockBarBottom)
+					aframe.Y = Allocation.Height - aframe.Allocation.Height - sBot.Height;
+			}
 		}
 		
 		Gdk.Size GetBarFrameSize (DockBar bar)

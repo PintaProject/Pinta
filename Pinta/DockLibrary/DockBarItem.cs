@@ -46,6 +46,7 @@ namespace MonoDevelop.Components.Docking
 		uint autoShowTimeout = uint.MaxValue;
 		uint autoHideTimeout = uint.MaxValue;
 		int size;
+		Gdk.Size lastFrameSize;
 		
 		public DockBarItem (DockBar bar, DockItem it, int size)
 		{
@@ -55,7 +56,25 @@ namespace MonoDevelop.Components.Docking
 			this.it = it;
 			VisibleWindow = false;
 			UpdateTab ();
+			lastFrameSize = bar.Frame.Allocation.Size;
+			bar.Frame.SizeAllocated += HandleBarFrameSizeAllocated;
 		}
+
+		void HandleBarFrameSizeAllocated (object o, SizeAllocatedArgs args)
+		{
+			if (!lastFrameSize.Equals (args.Allocation.Size)) {
+				lastFrameSize = args.Allocation.Size;
+				if (autoShowFrame != null)
+					bar.Frame.UpdateSize (bar, autoShowFrame);
+			}
+		}
+		
+		protected override void OnDestroyed ()
+		{
+			base.OnDestroyed ();
+			bar.Frame.SizeAllocated -= HandleBarFrameSizeAllocated;
+		}
+		
 		
 		public void Close ()
 		{
@@ -267,7 +286,12 @@ namespace MonoDevelop.Components.Docking
 			if (autoHideTimeout == uint.MaxValue) {
 				autoHideTimeout = GLib.Timeout.Add (force ? 0 : bar.Frame.AutoHideDelay, delegate {
 					// Don't hide the item if it has the focus. Try again later.
-					if (it.Widget.FocusChild != null)
+					if (it.Widget.FocusChild != null && !force)
+						return true;
+					// Don't hide the item if the mouse pointer is still inside the window. Try again later.
+					int px, py;
+					it.Widget.GetPointer (out px, out py);
+					if (it.Widget.Visible && it.Widget.IsRealized && it.Widget.Allocation.Contains (px, py) && !force)
 						return true;
 					autoHideTimeout = uint.MaxValue;
 					AutoHide (true);
