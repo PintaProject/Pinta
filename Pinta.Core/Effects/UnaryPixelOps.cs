@@ -34,7 +34,11 @@ namespace Pinta.Core
 
             public unsafe override void Apply(ColorBgra *dst, ColorBgra *src, int length)
             {
-                //Memory.Copy(dst, src, (ulong)length * (ulong)sizeof(ColorBgra));
+		    for (int i = 0; i < length; i++) {
+			*dst = *src;
+			dst++;
+			src++;
+		    }
             }
 
             public unsafe override void Apply(ColorBgra* ptr, int length)
