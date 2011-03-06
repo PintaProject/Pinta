@@ -104,8 +104,9 @@ namespace Pinta
 							PintaCore.Workspace.ActiveDocument.HasFile = true;
 					}
 				} else {
-					if (PintaCore.Workspace.OpenFile (extra[0]))
-						PintaCore.Workspace.ActiveDocument.HasFile = true;
+					foreach (var file in extra)
+						if (PintaCore.Workspace.OpenFile (file))
+							PintaCore.Workspace.ActiveDocument.HasFile = true;
 				}				
 			} else {
 				// Create a blank document
