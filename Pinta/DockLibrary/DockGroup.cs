@@ -314,7 +314,11 @@ namespace MonoDevelop.Components.Docking
 		{
 			base.RestoreAllocation ();
 			allocStatus = Size >= 0 ? AllocStatus.RestorePending : AllocStatus.NotSet;
-			foreach (DockObject ob in dockObjects)
+			
+			// Make a copy because RestoreAllocation can fire events such as VisibleChanged,
+			// and subscribers may do changes in the list.
+			List<DockObject> copy = new List<DockObject> (dockObjects);
+			foreach (DockObject ob in copy)
 				ob.RestoreAllocation ();
 		}
 		

@@ -79,6 +79,7 @@ namespace MonoDevelop.Components.Docking
 			title.Xalign = 0;
 			title.Xpad = 3;
 			title.UseMarkup = true;
+			title.Ellipsize = Pango.EllipsizeMode.End;
 			
 			btnDock = new Button (new Gtk.Image (pixAutoHide));
 			btnDock.Relief = ReliefStyle.None;
@@ -348,9 +349,14 @@ namespace MonoDevelop.Components.Docking
 
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
-			requisition = child.SizeRequest ();
-			requisition.Width += leftMargin + rightMargin + leftPadding + rightPadding;
-			requisition.Height += topMargin + bottomMargin + topPadding + bottomPadding;
+			if (child != null) {
+				requisition = child.SizeRequest ();
+				requisition.Width += leftMargin + rightMargin + leftPadding + rightPadding;
+				requisition.Height += topMargin + bottomMargin + topPadding + bottomPadding;
+			} else {
+				requisition.Width = 0;
+				requisition.Height = 0;
+			}
 		}
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
@@ -364,7 +370,8 @@ namespace MonoDevelop.Components.Docking
 				allocation.Y += topMargin + topPadding;
 				allocation.Height -= topMargin + bottomMargin + topPadding + bottomPadding;
 			}
-			child.SizeAllocate (allocation);
+			if (child != null)
+				child.SizeAllocate (allocation);
 		}
 
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
