@@ -430,16 +430,18 @@ namespace Pinta
 
 			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 			fcd.SetCurrentFolder (lastDialogDir);
+			fcd.SelectMultiple = true;
 
 			int response = fcd.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
 				lastDialogDir = fcd.CurrentFolder;
 
-				if (PintaCore.Workspace.OpenFile (fcd.Filename)) {
-					RecentManager.Default.AddFull (fcd.Uri, recentData);
-					PintaCore.Workspace.ActiveDocument.HasFile = true;
-				}
+				foreach (var file in fcd.Filenames)
+					if (PintaCore.Workspace.OpenFile (file)) {
+						RecentManager.Default.AddFull (fcd.Uri, recentData);
+						PintaCore.Workspace.ActiveDocument.HasFile = true;
+					}
 			}
 
 			fcd.Destroy ();
