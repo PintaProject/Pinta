@@ -53,7 +53,7 @@ namespace Pinta.Core
 		{
 			if (!Menus.ContainsKey (category)) {
 				Gtk.Action menu_action = new Gtk.Action (category, Mono.Unix.Catalog.GetString (category), null, null);
-				Menu category_menu = (Menu)effects_menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
+				Menu category_menu = (Menu)effects_menu.AppendMenuItemSorted ((MenuItem)(menu_action.CreateSubMenuItem ())).Submenu;
 				
 				Menus.Add (category, category_menu);
 			}
@@ -61,7 +61,7 @@ namespace Pinta.Core
 			Menu m = Menus[category];
 			
 			Actions.Add (action);
-			m.Append (action.CreateMenuItem ());
+			m.AppendMenuItemSorted ((MenuItem)action.CreateMenuItem ());
 		}
 		#endregion
 

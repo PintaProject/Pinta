@@ -24,19 +24,16 @@ namespace Pinta.Effects
 			PintaCore.Effects.AddAdjustment (new SepiaEffect ());
 
 			// Add the effects
-			// HACK: Have to add one from each submenu item in order
-			// until EffectsManager can keep the menus sorted
-			PintaCore.Effects.AddEffect (new InkSketchEffect ());
-			PintaCore.Effects.AddEffect (new FragmentEffect ());
-			PintaCore.Effects.AddEffect (new BulgeEffect ());
 			PintaCore.Effects.AddEffect (new AddNoiseEffect ());
-			PintaCore.Effects.AddEffect (new GlowEffect ());
+			PintaCore.Effects.AddEffect (new BulgeEffect ());
 			PintaCore.Effects.AddEffect (new CloudsEffect ());
 			PintaCore.Effects.AddEffect (new EdgeDetectEffect ());
-
 			PintaCore.Effects.AddEffect (new EmbossEffect ());
+			PintaCore.Effects.AddEffect (new FragmentEffect ());
 			PintaCore.Effects.AddEffect (new FrostedGlassEffect ());
 			PintaCore.Effects.AddEffect (new GaussianBlurEffect ());
+			PintaCore.Effects.AddEffect (new GlowEffect ());
+			PintaCore.Effects.AddEffect (new InkSketchEffect ());
 			PintaCore.Effects.AddEffect (new JuliaFractalEffect ());
 			PintaCore.Effects.AddEffect (new MandelbrotFractalEffect ());
 			PintaCore.Effects.AddEffect (new MedianEffect ());

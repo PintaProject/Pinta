@@ -59,7 +59,7 @@ namespace Pinta.Core
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
 			// Create a menu item for each adjustment
-			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).Append (act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers));
+			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).AppendMenuItemSorted (act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers));
 
 			return act;
 		}
