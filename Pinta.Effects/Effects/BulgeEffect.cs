@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Distort.Bulge.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Bulge"); }
 		}
 
@@ -48,7 +48,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			float bulge = (float)Data.Amount;
 			

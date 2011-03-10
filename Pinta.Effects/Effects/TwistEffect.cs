@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Distort.Twist.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Twist"); }
 		}
 
@@ -46,7 +46,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			float twist = Data.Amount;
 

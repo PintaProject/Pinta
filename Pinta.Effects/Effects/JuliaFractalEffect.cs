@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Render.JuliaFractal.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Julia Fractal"); }
 		}
 
@@ -64,7 +64,7 @@ namespace Pinta.Effects
 			return c;
 		}
 
-		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			const double jr = 0.3125;
 			const double ji = 0.03;

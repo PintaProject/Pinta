@@ -25,7 +25,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.BrightnessAndContrast.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Brightness / Contrast"); }
 		}
 
@@ -53,7 +53,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (!table_calculated)
 				Calculate ();

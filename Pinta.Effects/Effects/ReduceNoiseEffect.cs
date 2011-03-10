@@ -24,7 +24,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Noise.ReduceNoise.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Reduce Noise"); }
 		}
 
@@ -79,7 +79,7 @@ namespace Pinta.Effects
 			return ColorBgra.FromBgr ((byte)bc, (byte)gc, (byte)rc);
 		}
 
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			this.radius = Data.Radius;
 			this.strength = -0.2 * Data.Strength;

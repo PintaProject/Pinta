@@ -22,7 +22,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.Sepia.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Sepia"); }
 		}
 		
@@ -45,7 +45,7 @@ namespace Pinta.Effects
 				ColorBgra.White);
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			desat.Apply (dest, src, rois);
 			level.Apply (dest, dest, rois);

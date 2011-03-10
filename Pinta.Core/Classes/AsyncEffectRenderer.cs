@@ -257,13 +257,13 @@ namespace Pinta.Core
 				
 				if (!cancel_render_flag) {
 					dest_surface.Flush ();
-					effect.RenderEffect (source_surface, dest_surface, new [] { bounds });
+					effect.Render (source_surface, dest_surface, new [] { bounds });
 					dest_surface.MarkDirty (bounds.ToCairoRectangle ());
 				}
 				
 			} catch (Exception ex) {		
 				exception = ex;
-				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect.Text + " exception: " + ex.Message + "\n" + ex.StackTrace);
+				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
 			}
 			
 			// Ignore completions of tiles after a cancel or from a previous render.

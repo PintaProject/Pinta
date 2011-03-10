@@ -28,7 +28,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Artistic.PencilSketch.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Pencil Sketch"); }
 		}
 
@@ -59,16 +59,16 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			bacAdjustment.Data.Brightness = -Data.ColorRange;
 			bacAdjustment.Data.Contrast = -Data.ColorRange;
-			bacAdjustment.RenderEffect (src, dest, rois);
+			bacAdjustment.Render (src, dest, rois);
 
 			blurEffect.Data.Radius = Data.PencilTipSize;
-			blurEffect.RenderEffect (src, dest, rois);
+			blurEffect.Render (src, dest, rois);
 
-			invertEffect.RenderEffect (dest, dest, rois);
+			invertEffect.Render (dest, dest, rois);
 			desaturateOp.Apply (dest, dest, rois);
 
 			ColorBgra* dst_dataptr = (ColorBgra*)dest.DataPtr;

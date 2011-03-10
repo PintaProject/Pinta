@@ -22,7 +22,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.HueAndSaturation.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Hue / Saturation"); }
 		}
 
@@ -48,7 +48,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int hue_delta = Data.Hue;
 			int sat_delta =  Data.Saturation;

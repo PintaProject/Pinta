@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.InvertColors.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Invert Colors"); }
 		}
 
@@ -33,7 +33,7 @@ namespace Pinta.Effects
 			get { return Gdk.Key.I; }
 		}
 		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

@@ -57,7 +57,7 @@ namespace Pinta.Effects
 		protected double DefaultRadius2 { get { return this.defaultRadius2; } }
 		
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			
 			ColorBgra colPrimary = PintaCore.Palette.PrimaryColor.ToColorBgra ();

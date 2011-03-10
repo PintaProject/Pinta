@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Photo.Sharpen.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Sharpen"); }
 		}
 
@@ -45,7 +45,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 		
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			foreach (Gdk.Rectangle rect in rois)
 				RenderRect (Data.Amount, src, dest, rect);

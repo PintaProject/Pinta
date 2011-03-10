@@ -19,7 +19,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.Levels.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Levels"); }
 		}
 
@@ -49,7 +49,7 @@ namespace Pinta.Effects
 		public override bool LaunchConfiguration ()
 		{			
 			var dialog = new LevelsDialog (Data);
-			dialog.Title = Text;
+			dialog.Title = Name;
 			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 			
 			int response = dialog.Run ();
@@ -59,7 +59,7 @@ namespace Pinta.Effects
 			return (response == (int)Gtk.ResponseType.Ok);
 		}
 		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			Data.Levels.Apply (dest, src, rois);
 		}

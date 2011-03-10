@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Blurs.MotionBlur.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Motion Blur"); }
 		}
 
@@ -46,7 +46,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			PointD start = new PointD (0, 0);
 			double theta = ((double)(Data.Angle + 180) * 2 * Math.PI) / 360.0;

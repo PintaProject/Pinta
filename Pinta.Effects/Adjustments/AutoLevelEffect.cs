@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.AutoLevel.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Auto Level"); }
 		}
 
@@ -33,7 +33,7 @@ namespace Pinta.Effects
 			get { return Gdk.Key.L; }
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (op == null) {
 				HistogramRgb histogram = new HistogramRgb ();

@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.Posterize.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
 		}
 
@@ -47,7 +47,7 @@ namespace Pinta.Effects
 		public override bool LaunchConfiguration ()
 		{
 			var dialog = new PosterizeDialog ();
-			dialog.Title = Text;
+			dialog.Title = Name;
 			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 			dialog.EffectData = Data;
 			
@@ -58,7 +58,7 @@ namespace Pinta.Effects
 			return (response == (int)Gtk.ResponseType.Ok);
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (op == null)
 				op = new UnaryPixelOps.PosterizePixel (Data.Red, Data.Green, Data.Blue);

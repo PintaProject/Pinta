@@ -24,7 +24,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Stylize.Outline.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Outline"); }
 		}
 
@@ -126,7 +126,7 @@ namespace Pinta.Effects
 			    (byte)(a2));
 		}
 
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			this.thickness = Data.Thickness;
 			this.intensity = Data.Intensity;

@@ -218,7 +218,7 @@ namespace Pinta.Core
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
 				dialog.Title = Catalog.GetString ("Rendering Effect");
-				dialog.Text = effect.Text;
+				dialog.Text = effect.Name;
 				dialog.Progress = renderer.Progress;
 				dialog.Canceled += HandleProgressDialogCancel;
 				dialog.Show ();				
@@ -235,7 +235,7 @@ namespace Pinta.Core
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-			var item = new SimpleHistoryItem (effect.Icon, effect.Text);
+			var item = new SimpleHistoryItem (effect.Icon, effect.Name);
 			item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);			
 			
 			using (var ctx = new Cairo.Context (layer.Surface)) {

@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Distort.PolarInversion.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Polar Inversion"); }
 		}
 

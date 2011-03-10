@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Blurs.Fragment.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Fragment"); }
 		}
 
@@ -65,7 +65,7 @@ namespace Pinta.Effects
 			return pointOffsets;
 		}
 
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			Gdk.Point[] pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
 

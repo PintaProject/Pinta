@@ -26,7 +26,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Photo.Glow.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Glow"); }
 		}
 
@@ -55,14 +55,14 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			blurEffect.Data.Radius = Data.Radius;
-			blurEffect.RenderEffect (src, dest, rois);
+			blurEffect.Render (src, dest, rois);
 
 			contrastEffect.Data.Brightness = Data.Brightness;
 			contrastEffect.Data.Contrast = Data.Contrast;
-			contrastEffect.RenderEffect (dest, dest, rois);
+			contrastEffect.Render (dest, dest, rois);
 
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y < roi.Bottom; ++y) {

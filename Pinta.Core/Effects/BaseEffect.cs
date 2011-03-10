@@ -36,8 +36,8 @@ namespace Pinta.Core
 	[TypeExtensionPoint]
 	public abstract class BaseEffect
 	{
-		public abstract string Icon { get; }
-		public abstract string Text { get; }
+		public abstract string Name { get; }
+		public virtual string Icon { get { return "Menu.Effects.Default.png"; } }
 		public virtual bool IsConfigurable { get { return false; } }
 		public EffectData EffectData { get; protected set; }
 		public virtual EffectAdjustment EffectOrAdjustment { get { return EffectAdjustment.Effect; } }
@@ -55,13 +55,13 @@ namespace Pinta.Core
 		}
 
 		#region Overrideable Render Methods
-		public virtual void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			foreach (var rect in rois)
-				RenderEffect (src, dst, rect);
+				Render (src, dst, rect);
 		}
 
-		protected unsafe virtual void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected unsafe virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
 		{
 			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 			int src_width = src.Width;
@@ -71,21 +71,21 @@ namespace Pinta.Core
 			for (int y = roi.Y; y < roi.Bottom; ++y) {
 				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
 				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
-				RenderLine (srcPtr, dstPtr, roi.Width);
+				Render (srcPtr, dstPtr, roi.Width);
 			}
 		}
 
-		protected unsafe virtual void RenderLine (ColorBgra* src, ColorBgra* dst, int length)
+		protected unsafe virtual void Render (ColorBgra* src, ColorBgra* dst, int length)
 		{
 			while (length > 0) {
-				*dst = RenderPixel (*src);
+				*dst = Render (*src);
 				++dst;
 				++src;
 				--length;
 			}
 		}
 
-		protected virtual ColorBgra RenderPixel (ColorBgra color)
+		protected virtual ColorBgra Render (ColorBgra color)
 		{
 			return color;
 		}

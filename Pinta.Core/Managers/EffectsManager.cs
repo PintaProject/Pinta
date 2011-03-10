@@ -33,54 +33,82 @@ namespace Pinta.Core
 {
 	public class EffectsManager
 	{
-		private List<BaseEffect> adjustments;
-		private List<BaseEffect> effects;
+		private Dictionary<BaseEffect, Gtk.Action> adjustments;
+		private Dictionary<BaseEffect, MenuItem> adjustment_menuitems;
+		private Dictionary<BaseEffect, Gtk.Action> effects;
 
 		public EffectsManager ()
 		{
-			adjustments = new List<BaseEffect> ();
-			effects = new List<BaseEffect> ();
+			adjustments = new Dictionary<BaseEffect, Gtk.Action> ();
+			adjustment_menuitems = new Dictionary<BaseEffect,MenuItem> ();
+			effects = new Dictionary<BaseEffect, Gtk.Action> ();
 		}
 
-		// TODO: Needs to keep menu sorted
 		public Gtk.Action AddAdjustment (BaseEffect adjustment)
 		{
-			adjustments.Add (adjustment);
-
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
 			fact.Add (adjustment.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (adjustment.Icon)));
 			fact.AddDefault ();
 
 			// Create a gtk action for each adjustment
-			Gtk.Action act = new Gtk.Action (adjustment.GetType ().Name, adjustment.Text + (adjustment.IsConfigurable ? Catalog.GetString ("...") : ""), string.Empty, adjustment.Icon);
+			Gtk.Action act = new Gtk.Action (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Catalog.GetString ("...") : ""), string.Empty, adjustment.Icon);
 			act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (adjustment); };
 			
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
 			// Create a menu item for each adjustment
-			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).AppendMenuItemSorted (act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers));
+			var menu_item = act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers);
+
+			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).AppendMenuItemSorted (menu_item);
+
+			adjustments.Add (adjustment, act);
+			adjustment_menuitems.Add (adjustment, menu_item);
 
 			return act;
 		}
 
-		// TODO: Needs to keep menu sorted
 		public Gtk.Action AddEffect (BaseEffect effect)
 		{
-			effects.Add (effect);
-
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
 			fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
 			fact.AddDefault ();
 
 			// Create a gtk action and menu item for each effect
-			Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Text + (effect.IsConfigurable ? Catalog.GetString ("...") : ""), string.Empty, effect.Icon);
+			Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Catalog.GetString ("...") : ""), string.Empty, effect.Icon);
 			act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (effect); };
 			
 			PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
+			
+			effects.Add (effect, act);
 
 			return act;
+		}
+
+		public void RemoveEffect (BaseEffect effect)
+		{
+			if (!effects.ContainsKey (effect))
+				return;
+
+			var action = effects[effect];
+
+			effects.Remove (effect);
+			PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+		}
+
+		public void RemoveAdjustment (BaseEffect adjustment)
+		{
+			if (!adjustments.ContainsKey (adjustment))
+				return;
+
+			var action = adjustments[adjustment];
+			var menu_item = adjustment_menuitems[adjustment];
+
+			adjustments.Remove (adjustment);
+			PintaCore.Actions.Adjustments.Actions.Remove (action);
+
+			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).Remove (menu_item);
 		}
 	}
 }
