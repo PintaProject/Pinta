@@ -31,20 +31,28 @@ using Mono.Unix;
 
 namespace Pinta.Core
 {
+	/// <summary>
+	/// Provides methods for registering and unregistering effects and adjustments.
+	/// </summary>
 	public class EffectsManager
 	{
 		private Dictionary<BaseEffect, Gtk.Action> adjustments;
 		private Dictionary<BaseEffect, MenuItem> adjustment_menuitems;
 		private Dictionary<BaseEffect, Gtk.Action> effects;
 
-		public EffectsManager ()
+		internal EffectsManager ()
 		{
 			adjustments = new Dictionary<BaseEffect, Gtk.Action> ();
 			adjustment_menuitems = new Dictionary<BaseEffect,MenuItem> ();
 			effects = new Dictionary<BaseEffect, Gtk.Action> ();
 		}
 
-		public Gtk.Action AddAdjustment (BaseEffect adjustment)
+		/// <summary>
+		/// Register a new adjustment with Pinta, causing it to be added to the Adjustments menu.
+		/// </summary>
+		/// <param name="adjustment">The adjustment to register</param>
+		/// <returns>The action created for this adjustment</returns>
+		public Gtk.Action RegisterAdjustment (BaseEffect adjustment)
 		{
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
@@ -68,7 +76,12 @@ namespace Pinta.Core
 			return act;
 		}
 
-		public Gtk.Action AddEffect (BaseEffect effect)
+		/// <summary>
+		/// Register a new effect with Pinta, causing it to be added to the Effects menu.
+		/// </summary>
+		/// <param name="effect">The effect to register</param>
+		/// <returns>The action created for this effect</returns>
+		public Gtk.Action RegisterEffect (BaseEffect effect)
 		{
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
@@ -86,7 +99,11 @@ namespace Pinta.Core
 			return act;
 		}
 
-		public void RemoveEffect (BaseEffect effect)
+		/// <summary>
+		/// Unregister an effect with Pinta, causing it to be removed from the Effects menu.
+		/// </summary>
+		/// <param name="effect">The effect to unregister</param>
+		public void UnregisterEffect (BaseEffect effect)
 		{
 			if (!effects.ContainsKey (effect))
 				return;
@@ -97,7 +114,11 @@ namespace Pinta.Core
 			PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
 		}
 
-		public void RemoveAdjustment (BaseEffect adjustment)
+		/// <summary>
+		/// Unregister an effect with Pinta, causing it to be removed from the Adjustments menu.
+		/// </summary>
+		/// <param name="adjustment">The adjustment to unregister</param>
+		public void UnregisterAdjustment (BaseEffect adjustment)
 		{
 			if (!adjustments.ContainsKey (adjustment))
 				return;

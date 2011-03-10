@@ -13,45 +13,45 @@ namespace Pinta.Effects
 		public void Initialize ()
 		{
 			// Add the adjustments
-			PintaCore.Effects.AddAdjustment (new AutoLevelEffect ());
-			PintaCore.Effects.AddAdjustment (new BlackAndWhiteEffect ());
-			PintaCore.Effects.AddAdjustment (new BrightnessContrastEffect ());
-			PintaCore.Effects.AddAdjustment (new CurvesEffect ());
-			PintaCore.Effects.AddAdjustment (new HueSaturationEffect ());
-			PintaCore.Effects.AddAdjustment (new InvertColorsEffect ());
-			PintaCore.Effects.AddAdjustment (new LevelsEffect ());
-			PintaCore.Effects.AddAdjustment (new PosterizeEffect ());
-			PintaCore.Effects.AddAdjustment (new SepiaEffect ());
+			PintaCore.Effects.RegisterAdjustment (new AutoLevelEffect ());
+			PintaCore.Effects.RegisterAdjustment (new BlackAndWhiteEffect ());
+			PintaCore.Effects.RegisterAdjustment (new BrightnessContrastEffect ());
+			PintaCore.Effects.RegisterAdjustment (new CurvesEffect ());
+			PintaCore.Effects.RegisterAdjustment (new HueSaturationEffect ());
+			PintaCore.Effects.RegisterAdjustment (new InvertColorsEffect ());
+			PintaCore.Effects.RegisterAdjustment (new LevelsEffect ());
+			PintaCore.Effects.RegisterAdjustment (new PosterizeEffect ());
+			PintaCore.Effects.RegisterAdjustment (new SepiaEffect ());
 
 			// Add the effects
-			PintaCore.Effects.AddEffect (new AddNoiseEffect ());
-			PintaCore.Effects.AddEffect (new BulgeEffect ());
-			PintaCore.Effects.AddEffect (new CloudsEffect ());
-			PintaCore.Effects.AddEffect (new EdgeDetectEffect ());
-			PintaCore.Effects.AddEffect (new EmbossEffect ());
-			PintaCore.Effects.AddEffect (new FragmentEffect ());
-			PintaCore.Effects.AddEffect (new FrostedGlassEffect ());
-			PintaCore.Effects.AddEffect (new GaussianBlurEffect ());
-			PintaCore.Effects.AddEffect (new GlowEffect ());
-			PintaCore.Effects.AddEffect (new InkSketchEffect ());
-			PintaCore.Effects.AddEffect (new JuliaFractalEffect ());
-			PintaCore.Effects.AddEffect (new MandelbrotFractalEffect ());
-			PintaCore.Effects.AddEffect (new MedianEffect ());
-			PintaCore.Effects.AddEffect (new MotionBlurEffect ());
-			PintaCore.Effects.AddEffect (new OilPaintingEffect ());
-			PintaCore.Effects.AddEffect (new OutlineEffect ());
-			PintaCore.Effects.AddEffect (new PencilSketchEffect ());
-			PintaCore.Effects.AddEffect (new PixelateEffect ());
-			PintaCore.Effects.AddEffect (new PolarInversionEffect ());
-			PintaCore.Effects.AddEffect (new RadialBlurEffect ());
-			PintaCore.Effects.AddEffect (new RedEyeRemoveEffect ());
-			PintaCore.Effects.AddEffect (new ReduceNoiseEffect ());
-			PintaCore.Effects.AddEffect (new ReliefEffect ());
-			PintaCore.Effects.AddEffect (new SharpenEffect ());
-			PintaCore.Effects.AddEffect (new TileEffect ());
-			PintaCore.Effects.AddEffect (new TwistEffect ());
-			PintaCore.Effects.AddEffect (new UnfocusEffect ());
-			PintaCore.Effects.AddEffect (new ZoomBlurEffect ());
+			PintaCore.Effects.RegisterEffect (new AddNoiseEffect ());
+			PintaCore.Effects.RegisterEffect (new BulgeEffect ());
+			PintaCore.Effects.RegisterEffect (new CloudsEffect ());
+			PintaCore.Effects.RegisterEffect (new EdgeDetectEffect ());
+			PintaCore.Effects.RegisterEffect (new EmbossEffect ());
+			PintaCore.Effects.RegisterEffect (new FragmentEffect ());
+			PintaCore.Effects.RegisterEffect (new FrostedGlassEffect ());
+			PintaCore.Effects.RegisterEffect (new GaussianBlurEffect ());
+			PintaCore.Effects.RegisterEffect (new GlowEffect ());
+			PintaCore.Effects.RegisterEffect (new InkSketchEffect ());
+			PintaCore.Effects.RegisterEffect (new JuliaFractalEffect ());
+			PintaCore.Effects.RegisterEffect (new MandelbrotFractalEffect ());
+			PintaCore.Effects.RegisterEffect (new MedianEffect ());
+			PintaCore.Effects.RegisterEffect (new MotionBlurEffect ());
+			PintaCore.Effects.RegisterEffect (new OilPaintingEffect ());
+			PintaCore.Effects.RegisterEffect (new OutlineEffect ());
+			PintaCore.Effects.RegisterEffect (new PencilSketchEffect ());
+			PintaCore.Effects.RegisterEffect (new PixelateEffect ());
+			PintaCore.Effects.RegisterEffect (new PolarInversionEffect ());
+			PintaCore.Effects.RegisterEffect (new RadialBlurEffect ());
+			PintaCore.Effects.RegisterEffect (new RedEyeRemoveEffect ());
+			PintaCore.Effects.RegisterEffect (new ReduceNoiseEffect ());
+			PintaCore.Effects.RegisterEffect (new ReliefEffect ());
+			PintaCore.Effects.RegisterEffect (new SharpenEffect ());
+			PintaCore.Effects.RegisterEffect (new TileEffect ());
+			PintaCore.Effects.RegisterEffect (new TwistEffect ());
+			PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
+			PintaCore.Effects.RegisterEffect (new ZoomBlurEffect ());
 		}
 
 		public void Uninitialize ()
