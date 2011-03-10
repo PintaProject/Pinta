@@ -116,6 +116,7 @@ namespace Pinta.Core
 				settings = Deserialize (settings_file);
 			} catch (Exception) {
 				// Will load with default settings
+				settings = new Dictionary<string,object> ();
 			}
 			
 			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
