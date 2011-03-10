@@ -475,6 +475,9 @@
     <EmbeddedResource Include="Resources\ShapeTool.Outline.png">
       <LogicalName>ShapeTool.Outline.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Default.png">
+      <LogicalName>Menu.Effects.Default.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
