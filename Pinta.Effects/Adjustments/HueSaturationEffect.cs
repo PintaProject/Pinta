@@ -30,10 +30,6 @@ namespace Pinta.Effects
 			get { return true; }
 		}
 
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
-		}
-
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.U; }
 		}

@@ -25,10 +25,6 @@ namespace Pinta.Effects
 		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Sepia"); }
 		}
-		
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
-		}
 
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.E; }

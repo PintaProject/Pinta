@@ -25,10 +25,6 @@ namespace Pinta.Effects
 			get { return Mono.Unix.Catalog.GetString ("Black and White"); }
 		}
 
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
-		}
-
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.L; }
 		}

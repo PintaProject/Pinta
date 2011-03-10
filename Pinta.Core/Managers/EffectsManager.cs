@@ -66,7 +66,13 @@ namespace Pinta.Core
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
 			// Create a menu item for each adjustment
-			var menu_item = act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers);
+			MenuItem menu_item;
+			
+			// If no key is specified, don't use an accelerated menu item
+			if (adjustment.AdjustmentMenuKey == (Gdk.Key)0)
+				menu_item = (MenuItem)act.CreateMenuItem ();
+			else
+				menu_item = act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers);
 
 			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).AppendMenuItemSorted (menu_item);
 
