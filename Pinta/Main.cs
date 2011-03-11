@@ -103,7 +103,8 @@ namespace Pinta
 						PintaCore.Workspace.OpenFile (arg);
 					}
 				} else {
-					PintaCore.Workspace.OpenFile (extra[0]);
+					foreach (var file in extra)
+						PintaCore.Workspace.OpenFile (file);
 				}				
 			} else {
 				// Create a blank document
