@@ -65,15 +65,16 @@ namespace Pinta.Actions
 
 			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 			fcd.SetCurrentFolder (PintaCore.System.LastDialogDirectory);
+			fcd.SelectMultiple = true;
 
 			int response = fcd.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
 
-				if (PintaCore.Workspace.OpenFile (fcd.Filename)) {
-					RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
-				}
+				foreach (var file in fcd.Filenames)
+					if (PintaCore.Workspace.OpenFile (file))
+						RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 			}
 
 			fcd.Destroy ();
