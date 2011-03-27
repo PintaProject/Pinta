@@ -92,6 +92,11 @@ namespace Pinta.Core
 
 		private static void Serialize (string filename, Dictionary<string, object> settings)
 		{
+			string path = Path.GetDirectoryName (filename);
+
+			if (!Directory.Exists (path))
+				Directory.CreateDirectory (path);
+
 			using (XmlTextWriter xw = new XmlTextWriter (filename, System.Text.Encoding.UTF8)) {
 				xw.Formatting = Formatting.Indented;
 				xw.WriteStartElement ("settings");
