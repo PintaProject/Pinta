@@ -33,6 +33,8 @@ namespace Pinta.Tools
 {
 	public abstract class SelectTool : ShapeTool
 	{
+		private PointD reset_origin;
+
 		protected SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
@@ -51,6 +53,7 @@ namespace Pinta.Tools
 			if (is_drawing)
 				return;
 		
+			reset_origin = args.Event.GetPoint ();
 			shape_origin = point;
 			is_drawing = true;
 			
@@ -62,11 +65,11 @@ namespace Pinta.Tools
 		{
 			double x = point.X;
 			double y = point.Y;
-
+			
 			// If the user didn't move the mouse, they want to deselect
-			int tolerance = 2;
+			int tolerance = 0;
 
-			if (Math.Abs (shape_origin.X - x) <= tolerance && Math.Abs (shape_origin.Y - y) <= tolerance) {
+			if (Math.Abs (reset_origin.X - args.Event.X) <= tolerance && Math.Abs (reset_origin.Y - args.Event.Y) <= tolerance) {
 				PintaCore.Actions.Edit.Deselect.Activate ();
 				hist.Dispose ();
 				hist = null;
