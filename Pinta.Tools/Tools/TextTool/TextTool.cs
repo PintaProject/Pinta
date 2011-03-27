@@ -191,7 +191,7 @@ namespace Pinta.Tools
 				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 				"40", "45", "50", "55");
 
-				(outline_width.Child as ComboBoxEntry).Changed += HandleBoldButtonToggled;
+				(outline_width.Child as ComboBoxEntry).Changed += HandleSizeChanged;
 			}
 
 			tb.AppendItem (outline_width);
