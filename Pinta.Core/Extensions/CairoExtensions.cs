@@ -863,7 +863,12 @@ namespace Pinta.Core
 				rect = g.StrokeExtents ();
 			}
 
-			return new Gdk.Rectangle ((int)rect.X, (int)rect.Y, (int)rect.Width - (int)rect.X, (int)rect.Height - (int)rect.Y);
+			int x = (int)Math.Round (rect.X);
+			int y = (int)Math.Round (rect.Y);
+			int w = (int)Math.Round (rect.Width);
+			int h = (int)Math.Round (rect.Height);
+
+			return new Gdk.Rectangle (x, y, w - x, h - y);
 		}
 
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)
