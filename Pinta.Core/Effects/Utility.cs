@@ -19,10 +19,10 @@ namespace Pinta.Core
 
 			if (p1.Y <= p2.Y) {
 				y = p1.Y;
-				h = p2.Y - y;
+				h = p2.Y - y + 1;
 			} else {
 				y = p2.Y;
-				h = p1.Y - y;
+				h = p1.Y - y + 1;
 			}
 
 			if (p1.X <= p2.X) {
@@ -31,7 +31,7 @@ namespace Pinta.Core
 				if (constrain)
 					w = h;
 				else
-					w = p2.X - x;
+					w = p2.X - x + 1;
 			} else {
 				x = p2.X;
 
@@ -39,7 +39,7 @@ namespace Pinta.Core
 					w = h;
 					x = p1.X - w;
 				} else
-					w = p1.X - x;
+					w = p1.X - x + 1;
 			}
 
 			return new Cairo.Rectangle (x, y, w, h);
