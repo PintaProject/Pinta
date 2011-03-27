@@ -54,7 +54,13 @@ namespace Pinta.Tools
 				return;
 		
 			reset_origin = args.Event.GetPoint ();
-			shape_origin = point;
+
+			Document doc = PintaCore.Workspace.ActiveDocument; 
+			
+			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
+			double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
+
+			shape_origin = new PointD (x, y);
 			is_drawing = true;
 			
 			hist = new SelectionHistoryItem (Icon, Name);
