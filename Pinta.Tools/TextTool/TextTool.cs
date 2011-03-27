@@ -691,7 +691,7 @@ namespace Pinta.Tools
 			}
 
 			Rectangle r = engine.GetLayoutBounds ();
-			r.Inflate (10, 10);
+			r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
 
 			PintaCore.Workspace.Invalidate (old_bounds);
 			PintaCore.Workspace.Invalidate (invalidate_cursor);
