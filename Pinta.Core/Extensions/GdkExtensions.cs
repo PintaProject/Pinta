@@ -97,5 +97,10 @@ namespace Pinta.Core
 		{
 			return (ev.State & ModifierType.ControlMask) == ModifierType.ControlMask;
 		}
+
+		public static Cairo.PointD GetPoint (this EventButton ev)
+		{
+			return new Cairo.PointD (ev.X, ev.Y);
+		}
 	}
 }
