@@ -475,6 +475,12 @@
     <EmbeddedResource Include="Resources\ShapeTool.Outline.png">
       <LogicalName>ShapeTool.Outline.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta-16.png">
+      <LogicalName>Pinta-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta-32.png">
+      <LogicalName>Pinta-32.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

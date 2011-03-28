@@ -417,6 +417,13 @@ namespace Pinta
 			AllowShrink = true;
 			DefaultWidth = PintaCore.Settings.GetSetting<int> ("window-size-width", 1100);
 			DefaultHeight = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
+
+			// On !Windows, the icon from the exe isn't automatically used,
+			// so we declare it explicitly here.
+			var icon_16 = PintaCore.Resources.GetIcon ("Pinta-16.png");
+			var icon_32 = PintaCore.Resources.GetIcon ("Pinta-32.png", 32);
+
+			IconList = new Gdk.Pixbuf[] { icon_16, icon_32 };
 			
 			if (PintaCore.Settings.GetSetting<bool> ("window-maximized", false))
 				Maximize ();

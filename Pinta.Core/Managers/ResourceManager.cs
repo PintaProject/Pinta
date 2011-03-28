@@ -33,7 +33,12 @@ namespace Pinta
 	{
 		public Gdk.Pixbuf GetIcon (string name)
 		{
-			return ResourceLoader.GetIcon (name);
+			return GetIcon (name, 16);
+		}
+
+		public Gdk.Pixbuf GetIcon (string name, int size)
+		{
+			return ResourceLoader.GetIcon (name, size);
 		}
 	}
 }
