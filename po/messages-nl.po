@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-02-27 01:07+0000\n"
-"Last-Translator: Harry Slieker <Unknown>\n"
+"PO-Revision-Date: 2011-03-03 17:40+0000\n"
+"Last-Translator: Jonathan Pobst <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
-"X-Generator: Launchpad (build 12486)\n"
+"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
+"X-Generator: Launchpad (build 12684)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "Automatisch Niveaus Bepalen"
+msgstr "Automatisch niveaus bepalen"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "Kleuren Omkeren"
+msgstr "Kleuren omkeren"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
@@ -57,11 +57,11 @@ msgstr "Tint / Verzadiging"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "Niveaus Aanpassen"
+msgstr "Niveaus aanpassen"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "Invoer Histogram"
+msgstr "Invoerhistogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
@@ -73,7 +73,7 @@ msgstr "Uitvoer"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "Uitvoer Histogram"
+msgstr "Uitvoerhistogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
@@ -127,11 +127,11 @@ msgstr "Blauw "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr "Tip: Rechtermuisklik om controlepunten te verwijderen"
+msgstr "Tip: Rechtermuisklik om controlepunten te verwijderen."
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr "Ruis Verminderen"
+msgstr "Ruis verminderen"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
@@ -168,7 +168,7 @@ msgstr "Ontfocussen"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
-msgstr "Rode Ogen Verwijderen"
+msgstr "Rode ogen verwijderen"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
 #: Pinta.Effects/Effects/GlowEffect.cs:39
@@ -179,7 +179,7 @@ msgstr "Foto"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr "Mandelbrot Fractal"
+msgstr "Mandelbrot fractal"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
@@ -187,7 +187,7 @@ msgstr "Gloed"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr "Randen Detecteren"
+msgstr "Randen detecteren"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
@@ -198,7 +198,7 @@ msgstr "Stileren"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr "Radiale Vervaging"
+msgstr "Radiale vervaging"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
@@ -225,11 +225,11 @@ msgstr "Artistiek"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr "Julia Fractal"
+msgstr "Julia-fractal"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr "Portret Verzachten"
+msgstr "\"Portret verzachten"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
@@ -249,7 +249,7 @@ msgstr "Emboss"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr "Gaussians Vervagen"
+msgstr "Gaussiaans vervagen"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
@@ -257,7 +257,7 @@ msgstr "Verscherpen"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr "Ruis Toevoegen"
+msgstr "Ruis toevoegen"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
@@ -273,7 +273,7 @@ msgstr "Bewegingsvervaging"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr "Polaire Inversie"
+msgstr "Polaire inversie"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
@@ -308,7 +308,7 @@ msgstr "label"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr "Willekeurige Ruis"
+msgstr "Willekeurige ruis"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
@@ -316,15 +316,15 @@ msgstr "Hergenereren"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr "Primaire Kleur Kiezen"
+msgstr "Primaire kleur kiezen"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr "Secundaire Kleur Kiezen"
+msgstr "Secundaire kleur kiezen"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr "Paletkleur Kiezen"
+msgstr "Paletkleur kiezen"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -368,7 +368,7 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "Selectie Verplaatsen"
+msgstr "Selectie verplaatsen"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
@@ -388,23 +388,23 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
-msgstr "Lineaire Gradiënt"
+msgstr "Lineaire gradiënt"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr "Lineair Gereflecteerde Gradiënt"
+msgstr "Lineair gereflecteerde gradiënt"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr "Lineaire Diamant Gradiënt"
+msgstr "Lineaire diamantgradiënt"
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr "Radiale Gradiënt"
+msgstr "Radiale gradiënt"
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
-msgstr "Conische Gradiënt"
+msgstr "Conische gradiënt"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
@@ -479,6 +479,8 @@ msgstr "Gum"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Linkermuisklik om te verwijderen en transparant te maken, rechtermuisklik om "
+"te verwijderen en secundaire kleur te gebruiken. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -543,7 +545,7 @@ msgstr "Hoekradius van rechthoek vergroten"
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Move Selected Pixels"
-msgstr "Geselecteerde Pixels Verplaatsen"
+msgstr "Geselecteerde pixels verplaatsen"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
@@ -609,7 +611,7 @@ msgstr "Onderstreept"
 
 #: Pinta.Tools/TextTool/TextTool.cs:135
 msgid "Left Align"
-msgstr "Links Uitlijnen"
+msgstr "Links uitlijnen"
 
 #: Pinta.Tools/TextTool/TextTool.cs:143
 msgid "Center Align"
@@ -617,11 +619,11 @@ msgstr "Centreren"
 
 #: Pinta.Tools/TextTool/TextTool.cs:150
 msgid "Right Align"
-msgstr "Rechts Uitlijnen"
+msgstr "Rechts uitlijnen"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Tekststijl"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -629,19 +631,19 @@ msgstr "Normaal"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Standaard en omlijnd"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Lijndikte"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Verklein lijndikte"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Vergroot lijndikte"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -649,15 +651,15 @@ msgstr "Penceeldikte"
 
 #: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
 msgid "Decrease brush size"
-msgstr "Penceeldikte Verkleinen"
+msgstr "Penceeldikte verkleinen"
 
 #: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
 msgid "Increase brush size"
-msgstr "Penceeldikte Vergroten"
+msgstr "Penceeldikte vergroten"
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
-msgstr "Vulling Stijl"
+msgstr "Vullingstijl"
 
 #: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
 msgid "Outline Shape"
@@ -669,7 +671,7 @@ msgstr "Opvullen"
 
 #: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
 msgid "Fill and Outline Shape"
-msgstr "Opvullen en Omlijnen"
+msgstr "Opvullen en omlijnen"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
@@ -709,7 +711,7 @@ msgstr "Klik en sleep om een selectie te tekenen."
 
 #: Pinta.Tools/FreeformShapeTool.cs:53
 msgid "Freeform Shape"
-msgstr "Vrije Vorm"
+msgstr "Vrije vorm"
 
 #: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
@@ -791,7 +793,7 @@ msgstr "Dock"
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 #: Pinta/DockLibrary/DockItem.cs:502
 msgid "Auto Hide"
-msgstr "Automatisch Verbergen"
+msgstr "Automatisch verbergen"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
@@ -803,7 +805,7 @@ msgstr "Zwevend"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr "Schermafdruk Maken"
+msgstr "Schermafdruk maken"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
@@ -824,15 +826,15 @@ msgstr "Sluiten zonder opslaan"
 
 #: Pinta/DialogHandlers.cs:193
 msgid "Resize Palette"
-msgstr "Pas Paletgrootte aan"
+msgstr "Paletgrootte aanpassen"
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
-msgstr "Nieuw Paletgrootte:"
+msgstr "Nieuw paletgrootte"
 
 #: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
 msgid "Paste Into New Layer"
-msgstr "Plak In Nieuwe Laag"
+msgstr "In nieuwe laag plakken"
 
 #: Pinta/DialogHandlers.cs:320
 msgid "Layer Opacity"
@@ -840,15 +842,15 @@ msgstr "Laagdekking"
 
 #: Pinta/DialogHandlers.cs:325
 msgid "Rename Layer"
-msgstr "Laag Hernoemen"
+msgstr "Laag hernoemen"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Hide Layer"
-msgstr "Laag Verbergen"
+msgstr "Laag verbergen"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Show Layer"
-msgstr "Laag Tonen"
+msgstr "Laag tonen"
 
 #: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
 msgid "Layer Properties"
@@ -856,7 +858,7 @@ msgstr "Laageigenschappen"
 
 #: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
 msgid "Open Image File"
-msgstr "Open Afbeeldingsbestand"
+msgstr "Afbeeldingsbestand openen"
 
 #: Pinta/DialogHandlers.cs:423
 msgid "Image files"
@@ -864,7 +866,7 @@ msgstr "Afbeeldingsbestanden"
 
 #: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
 msgid "All files"
-msgstr "Alle Bestanden"
+msgstr "Alle bestanden"
 
 #: Pinta/DialogHandlers.cs:480
 msgid "Paste cancelled"
@@ -876,7 +878,7 @@ msgstr "Het klembord bevat geen afbeelding"
 
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
-msgstr "Afbeelding Opslaan"
+msgstr "Afbeelding opslaan"
 
 #: Pinta/DialogHandlers.cs:612
 msgid "Pinta does not support saving images in this file format."
@@ -901,7 +903,7 @@ msgstr ""
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "JPEG Kwaliteit"
+msgstr "JPEG-kwaliteit"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
@@ -926,13 +928,14 @@ msgstr "Bijdragen aan deze release"
 
 #: Pinta/Dialogs/AboutDialog.cs:111
 msgid "Previous Contributors"
-msgstr "Voorgaande Bijdragen"
+msgstr "Voorgaande bijdragen"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Harry Slieker https://launchpad.net/~harryslieker\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Tijmen Rekmans https://launchpad.net/~tijmenr"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -986,17 +989,17 @@ msgstr "Dekking:"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Classes/Document.cs:612
 msgid "Resize Canvas"
-msgstr "Canvasgrootte Aanpassen"
+msgstr "Canvasgrootte aanpassen"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "Met Percentage:"
+msgstr "Met percentage:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "Met Absolute Grootte"
+msgstr "Tot absolute grootte"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
@@ -1022,7 +1025,7 @@ msgstr "Hoogte:"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "Verhoudingen behouden"
+msgstr "Verhouding handhaven"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
@@ -1031,16 +1034,16 @@ msgstr "Vastzetten:"
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 msgid "Resize Image"
-msgstr "Formaat Wijzigen"
+msgstr "Formaat wijzigen"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Managers/WorkspaceManager.cs:159
 msgid "New Image"
-msgstr "Nieuwe Afbeelding"
+msgstr "Nieuwe afbeelding"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "Nieuwe Afbeeldingsgrootte          "
+msgstr "Nieuwe afbeeldingsgrootte          "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
@@ -1052,12 +1055,12 @@ msgstr "OptieNaam"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr "Render Effect"
+msgstr "Render-effect"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:91
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "Niet Opgeslagen Bestand {0}"
+msgstr "Niet opgeslagen bestand {0}"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:150
 msgid "Background"
@@ -1065,7 +1068,7 @@ msgstr "Achtergrond"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:177
 msgid "Open Image"
-msgstr "Afbeelding Openen"
+msgstr "Afbeelding openen"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:184
 #, csharp-format
@@ -1084,49 +1087,49 @@ msgstr "Roteer 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Spiegel Afbeelding Horizontaal"
+msgstr "Afbeelding horizontaal spiegelen"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "Spiegel Afbeelding Verticaal"
+msgstr "Afbeelding verticaal spiegelen"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:63
 msgid "Rotate 90° Clockwise"
-msgstr "Roteer 90° Rechtsom"
+msgstr "Roteer 90° rechtsom"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:64
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "Roteer 90° Linksom"
+msgstr "Roteer 90° linksom"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Spiegel Laag Horizontaal"
+msgstr "Laag horizontaal spiegelen"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "Spiegel Laag Verticaal"
+msgstr "Laag verticaal spiegelen"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "Pixels Beëindigen"
+msgstr "Pixels beëindigen"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta Website"
+msgstr "Pinta website"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "Rapporteer een Bug"
+msgstr "Een bug rapporteren"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr "Vertaal Deze Applicatie"
+msgstr "Deze applicatie vertalen"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "Alles opslaan"
+msgstr "Sla alles op"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
@@ -1138,7 +1141,7 @@ msgstr "Nieuw..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "Nieuwe Schermafdruk..."
+msgstr "Nieuwe schermafdruk"
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
@@ -1146,7 +1149,7 @@ msgstr "Openen..."
 
 #: Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Open Recent"
+msgstr "Recent openen"
 
 #: Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
@@ -1158,7 +1161,7 @@ msgstr "Opslaan"
 
 #: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
 msgid "Save As..."
-msgstr "Opslaan Als..."
+msgstr "Opslaan als..."
 
 #: Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
@@ -1179,34 +1182,34 @@ msgstr "Openen"
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
-msgstr "Voeg Nieuwe Laag Toe"
+msgstr "Nieuwe laag toevoegen"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
-msgstr "Laag Verwijderen"
+msgstr "Laag verwijderen"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
-msgstr "Laag Dupliceren"
+msgstr "Laag dupliceren"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
-msgstr "Laag Omlaag Samenvoegen"
+msgstr "Laag omlaag samenvoegen"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr "Importeren Uit Bestand..."
+msgstr "Uit bestand importeren..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr "Spiegel Horizontaal"
+msgstr "Horizontaal spiegelen"
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
-msgstr "Spiegel Verticaal"
+msgstr "Verticaal spiegelen"
 
 #: Pinta.Core/Actions/LayerActions.cs:71
 msgid "Rotate / Zoom"
@@ -1215,16 +1218,16 @@ msgstr "Roteer / Zoom"
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
-msgstr "Laag Omhoog Verplaatsen"
+msgstr "Laag omhoog verplaatsen"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
-msgstr "Laag Omlaag Verplaatsen"
+msgstr "Laag omlaag verplaatsen"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr "Laag Eigenschappen..."
+msgstr "Laageigenschappen..."
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
@@ -1233,11 +1236,11 @@ msgstr "Importeer uit bestand"
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
-msgstr "Bijsnijden tot Selectie"
+msgstr "Tot selectie bijsnijden"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize..."
-msgstr "Formaat Wijzigen"
+msgstr "Formaat wijzigen..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Canvas Size..."
@@ -1246,7 +1249,7 @@ msgstr "Canvasgrootte..."
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
-msgstr "Plat Maken"
+msgstr "Plat maken"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
@@ -1258,15 +1261,15 @@ msgstr "Uitzoomen"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Passend"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
-msgstr "Zoom naar Selectie"
+msgstr "Naar selectie zoomen"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Standaardgrootte"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1294,7 +1297,7 @@ msgstr "Centimeters"
 
 #: Pinta.Core/Actions/ViewActions.cs:74
 msgid "Fullscreen"
-msgstr "Volledig Scherm"
+msgstr "Volledig scherm"
 
 #: Pinta.Core/Actions/ViewActions.cs:114
 msgid "Ruler Units"
@@ -1308,7 +1311,7 @@ msgstr "Venster"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Undo"
-msgstr "Ongedaan Maken"
+msgstr "Ongedaan maken"
 
 #: Pinta.Core/Actions/EditActions.cs:66
 msgid "Redo"
@@ -1324,39 +1327,39 @@ msgstr "Kopiëren"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Paste Into New Image"
-msgstr "Plak Als Nieuwe Afbeelding"
+msgstr "Als nieuwe afbeelding plakken"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Selectie verwijderen"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
-msgstr "Selectie Vullen"
+msgstr "Selectie vullen"
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Invert Selection"
-msgstr "Selectie Omkeren"
+msgstr "Selectie omkeren"
 
 #: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
 msgid "Select All"
-msgstr "Alles Selecteren"
+msgstr "Alles selecteren"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Alles deselecteren"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr "Naar Standaard Terugzetten"
+msgstr "Naar standaard terugzetten"
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr "Aantal Kleuren Instellen"
+msgstr "Aantal kleuren instellen"
 
 #: Pinta.Core/Actions/EditActions.cs:212
 msgid "Erase Selection"
-msgstr "Wis Selectie"
+msgstr "Wis selectie"
 
 #: Pinta.Core/Actions/EditActions.cs:221
 msgid "Deselect"
@@ -1364,7 +1367,7 @@ msgstr "Deselecteren"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr "Paletbestand Openen"
+msgstr "Paletbestand openen"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
@@ -1381,7 +1384,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr "Paletbestand Opslaan"
+msgstr "Paletbestand opslaan"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
@@ -1409,7 +1412,7 @@ msgstr "Sneltoets"
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr "Standaard Menging"
+msgstr "Standaard menging"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
@@ -1417,11 +1420,11 @@ msgstr "Overschrijven"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
-msgstr "Antialias Aan"
+msgstr "Antialias aan"
 
 #: Pinta.Core/Classes/BaseTool.cs:257
 msgid "Antialiasing Off"
-msgstr "Antialias Uit"
+msgstr "Antialias uit"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
@@ -1523,7 +1526,7 @@ msgstr "Fragmenten"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "Inkt Omlijning"
+msgstr "Inktomlijning"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog

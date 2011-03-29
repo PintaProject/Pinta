@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2010-12-16 06:28+0000\n"
-"Last-Translator: 英华 <wantinghard@gmail.com>\n"
+"PO-Revision-Date: 2011-03-10 11:11+0000\n"
+"Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
-"X-Generator: Launchpad (build 12486)\n"
+"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
+"X-Generator: Launchpad (build 12684)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -601,7 +601,7 @@ msgstr "右对齐"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "文本样式"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -613,15 +613,15 @@ msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "描边宽度"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "减少描边宽度"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "增加描边宽度"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -695,7 +695,7 @@ msgstr "关于"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
@@ -846,7 +846,7 @@ msgstr "全部文件"
 
 #: Pinta/DialogHandlers.cs:480
 msgid "Paste cancelled"
-msgstr ""
+msgstr "取消粘贴"
 
 #: Pinta/DialogHandlers.cs:481
 msgid "The clipboard does not contain an image"
@@ -1025,7 +1025,7 @@ msgstr "渲染使用的线程数"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
-msgstr ""
+msgstr "选项名"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
@@ -1201,7 +1201,7 @@ msgstr "降低图层"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr ""
+msgstr "图层属性..."
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
@@ -1235,7 +1235,7 @@ msgstr "缩小"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "最适大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1243,7 +1243,7 @@ msgstr "缩放至选择部分"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "普通大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1305,7 +1305,7 @@ msgstr "粘贴到新图像"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "删除选区"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1321,7 +1321,7 @@ msgstr "全选"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "全部不选"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"

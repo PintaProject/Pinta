@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-01-31 06:23+0000\n"
-"Last-Translator: jacek <Unknown>\n"
+"PO-Revision-Date: 2011-03-20 20:12+0000\n"
+"Last-Translator: Patryk Wychowaniec <patryk1303@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
-"X-Generator: Launchpad (build 12486)\n"
+"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
+"X-Generator: Launchpad (build 12684)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -634,7 +634,7 @@ msgstr "Wyrównanie do prawej"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Styl napisu"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -1284,7 +1284,7 @@ msgstr "Pomniejsz"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Dopasuj"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1354,7 +1354,7 @@ msgstr "Wklej do nowego obrazu"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Usuń zaznaczone"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"

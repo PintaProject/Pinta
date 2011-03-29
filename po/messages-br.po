@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-01-04 23:41+0000\n"
+"PO-Revision-Date: 2011-03-04 17:14+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
-"X-Generator: Launchpad (build 12486)\n"
+"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
+"X-Generator: Launchpad (build 12684)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -482,6 +482,8 @@ msgstr "Gomenn"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Klikañ a-gleiz da ziverkañ betek boull, klikañ a-zehou da ziverkañ ha lakaat "
+"al liv eilvedel. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -626,7 +628,7 @@ msgstr "Marzekaat war an tu dehou"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Stil an destenn"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -634,19 +636,19 @@ msgstr "Reizh"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Reizh ha trolinenn"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Tevder an drolinenn"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Moanaat tevder an drolinenn"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Tevaat tevder an drolinenn"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -941,6 +943,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Alan https://launchpad.net/~alan-m.\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Skolajidi Diwan https://launchpad.net/~gireg-konan"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -1266,7 +1269,7 @@ msgstr "Zoum bihanaat"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Ment peurvat"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1274,7 +1277,7 @@ msgstr "Zoumañ da framm an diuzad"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Ment reizh"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1336,7 +1339,7 @@ msgstr "Pegañ war ur skeudenn nevez"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Dilemel an diuzad"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1352,7 +1355,7 @@ msgstr "Diuzañ pep tra"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Diziuzañ pep tra"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
