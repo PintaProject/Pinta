@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2010-12-16 10:57+0000\n"
-"Last-Translator: Νιάνιος Ρωμανός <Unknown>\n"
+"PO-Revision-Date: 2011-03-05 08:48+0000\n"
+"Last-Translator: Spiros Anthis <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-02 22:24+0000\n"
-"X-Generator: Launchpad (build 12486)\n"
+"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
+"X-Generator: Launchpad (build 12684)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -316,15 +316,15 @@ msgstr ""
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr ""
+msgstr "Επιλέξτε Πρωτεύον Χρώμα"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr ""
+msgstr "Επιλέξτε Δευτερεύον Χρώμα"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Επιλογή Χρώματος Παλέττας"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -350,7 +350,7 @@ msgstr ""
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Κλικ για επιλογή περιοχής ίδιου χρώματος"
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -394,7 +394,7 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Ακτινική Διαβάθμιση"
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
@@ -406,11 +406,11 @@ msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
-msgstr ""
+msgstr "Συνεχόμενη"
 
 #: Pinta.Tools/FloodTool.cs:81
 msgid "Global"
-msgstr ""
+msgstr "Καθολική"
 
 #: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
@@ -425,10 +425,12 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Αριστερό κλικ για σχεδίαση με πρωτεύον χρώμα, δεξί κλικ για σχεδίαση με "
+"δευτερεύον χρώμα"
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
@@ -553,7 +555,7 @@ msgstr ""
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "Έλλειψη"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
@@ -593,7 +595,7 @@ msgstr "Αριστερή στοίχιση"
 
 #: Pinta.Tools/TextTool/TextTool.cs:143
 msgid "Center Align"
-msgstr ""
+msgstr "Στοίχιση Στο Κέντρο"
 
 #: Pinta.Tools/TextTool/TextTool.cs:150
 msgid "Right Align"
@@ -601,11 +603,11 @@ msgstr "Δεξιά στοίχιση"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Στυλ Κειμένου"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr ""
+msgstr "Κανονικό"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
@@ -637,7 +639,7 @@ msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
-msgstr ""
+msgstr "Στυλ Γεμίσματος"
 
 #: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
 msgid "Outline Shape"
@@ -645,7 +647,7 @@ msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
 msgid "Fill Shape"
-msgstr ""
+msgstr "Σχήμα Γεμίσματος"
 
 #: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
 msgid "Fill and Outline Shape"
@@ -657,11 +659,11 @@ msgstr ""
 
 #: Pinta.Tools/Brushes/GridBrush.cs:38
 msgid "Grid"
-msgstr ""
+msgstr "Πλέγμα"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:40
 msgid "Squares"
-msgstr ""
+msgstr "Τετράγωνα"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
@@ -687,7 +689,7 @@ msgstr ""
 
 #: Pinta.Tools/FreeformShapeTool.cs:53
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Ελεύθερο Σχήμα"
 
 #: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
@@ -695,7 +697,7 @@ msgstr "Σχετικά με..."
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
@@ -781,7 +783,7 @@ msgstr "Ελεύθερα μετακινούμενη"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Λήψη στιγμιότυπου οθόνης"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
@@ -806,7 +808,7 @@ msgstr ""
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
-msgstr ""
+msgstr "Νέο Μέγεθος Παλέττας"
 
 #: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
 msgid "Paste Into New Layer"
@@ -878,11 +880,11 @@ msgstr ""
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr ""
+msgstr "Ποιότητα JPEG"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
-msgstr ""
+msgstr "Ποιότητα: "
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -912,7 +914,7 @@ msgstr ""
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Petros Kyladitis https://launchpad.net/~multipetros\n"
 "  Psychorat https://launchpad.net/~dougy-giro1\n"
-"  spiros anthis https://launchpad.net/~sugaraddicted\n"
+"  Spiros Anthis https://launchpad.net/~sugaraddicted\n"
 "  Νιάνιος Ρωμανός https://launchpad.net/~romanos-nianios"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -1102,7 +1104,7 @@ msgstr "Στείλτε αναφορά σφάλματος"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr ""
+msgstr "Μεταφράστε Αυτή Την Εφαρμογή"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -1110,7 +1112,7 @@ msgstr "Αποθήκευση όλων"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr ""
+msgstr "Κλείσιμο Όλων"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -1204,7 +1206,7 @@ msgstr "Μετακίνηση Στρώματος Κάτω"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr ""
+msgstr "Ιδιότητες Επιπέδου"
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
@@ -1238,7 +1240,7 @@ msgstr "Σμίκρυνση"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Καλύτερο Ταίριασμα"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1246,7 +1248,7 @@ msgstr "Εστίαση στην επιλογή"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Κανονικό Μέγεθος"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1308,7 +1310,7 @@ msgstr "Επικόλληση Σε Νέα Εικόνα"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Διαγραφή Επιλογής"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1324,7 +1326,7 @@ msgstr "Επιλογή Όλων"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Αποεπιλογή Όλων"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1363,11 +1365,11 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "Παλέττα Paint.NET (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "Παλέττα Gimp (*.gpl)"
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
@@ -1391,7 +1393,7 @@ msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr ""
+msgstr "Αντικατάσταση"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
@@ -1521,7 +1523,7 @@ msgstr "Μετατόπιση"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "Μέγεθος Μύτης Μολυβιού"
 
 #: CloudsEffect dialog
 msgid "Percentile"
