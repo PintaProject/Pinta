@@ -60,6 +60,7 @@ namespace Pinta
 
 		string[] authors = new string[] {
 			"Jonathan Pobst",
+			"Olivier Dufour",
 		};
 
 		string[] oldAuthors = new string[] {
