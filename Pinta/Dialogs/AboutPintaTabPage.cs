@@ -39,7 +39,7 @@ namespace Pinta
 			label.Markup = String.Format (
 			    "<b>{0}</b>\n    {1}",
 			    Catalog.GetString ("Version"),
-			    "0.7");
+			    "0.8");
 			    
 			HBox hBoxVersion = new HBox ();
 			hBoxVersion.PackStart (label, false, false, 5);
