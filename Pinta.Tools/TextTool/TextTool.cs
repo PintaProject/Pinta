@@ -613,26 +613,30 @@ namespace Pinta.Tools
 			if (!is_editing)
 				return;
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			try {
+				Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = true;
+				doc.ToolLayer.Clear ();
+				doc.ToolLayer.Hidden = true;
 
-			if (engine.EditMode == EditingMode.Editing) {
-				SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-				hist.TakeSnapshotOfLayer (doc.CurrentLayerIndex);
+				if (engine.EditMode == EditingMode.Editing) {
+					SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
+					hist.TakeSnapshotOfLayer (doc.CurrentLayerIndex);
 
-				// Redraw the text without the cursor,
-				// and on to the real layer
-				RedrawText (false, false);
+					// Redraw the text without the cursor,
+					// and on to the real layer
+					RedrawText (false, false);
 
-				doc.History.PushNewItem (hist);
+					doc.History.PushNewItem (hist);
+				}
+
+				engine.Clear ();
+				doc.Workspace.Invalidate (old_bounds);
+				old_bounds = Rectangle.Zero;
+				is_editing = false;
+			} catch (Exception) {
+				// Just ignore the error
 			}
-
-			engine.Clear ();
-			doc.Workspace.Invalidate (old_bounds);
-			old_bounds = Rectangle.Zero;
-			is_editing = false;
 		}
 		#endregion
 
