@@ -136,7 +136,11 @@ namespace Pinta.Tools
 
 		protected override void OnCommit ()
 		{
-			PintaCore.Workspace.ActiveDocument.FinishSelection ();
+			try {
+				PintaCore.Workspace.ActiveDocument.FinishSelection ();
+			} catch (Exception) {
+				// Ignore an error where ActiveDocument fails.
+			}
 		}
 
 		protected override void OnDeactivated ()
