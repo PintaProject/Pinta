@@ -67,6 +67,7 @@ namespace Pinta
 			progress_dialog = new ProgressDialog ();
 
 			PintaCore.Initialize (tool_toolbar, canvas, this, progress_dialog);
+			canvas.Realize ();
 			color.Initialize ();
 
 			Compose ();
