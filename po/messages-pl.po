@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-20 20:12+0000\n"
-"Last-Translator: Patryk Wychowaniec <patryk1303@gmail.com>\n"
+"PO-Revision-Date: 2011-04-04 07:10+0000\n"
+"Last-Translator: skrzat <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:50+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -959,7 +959,8 @@ msgstr ""
 "  doiges https://launchpad.net/~bohopicasso\n"
 "  eeree https://launchpad.net/~eeree\n"
 "  jacek https://launchpad.net/~yacka71\n"
-"  pp/bs https://launchpad.net/~pawprok"
+"  pp/bs https://launchpad.net/~pawprok\n"
+"  skrzat https://launchpad.net/~radek-floraland"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1370,7 +1371,7 @@ msgstr "Zaznacz wszystko"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Odznacz wszystko"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"

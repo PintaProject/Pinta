@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-07 15:34+0000\n"
+"PO-Revision-Date: 2011-04-01 12:22+0000\n"
 "Last-Translator: schunka <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:50+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -371,7 +371,7 @@ msgstr "Přesunout výběr"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr "Pro posunutí obrysu táhnout vyběrem ."
+msgstr "Pro posunutí obrysu táhnout výběrem."
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
@@ -382,7 +382,7 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Klik a tažení nakreslé přechod od primární k sekundární barvě. Pravý klik "
+"Klik a tažení nakreslí přechod od primární k sekundární barvě. Pravý klik "
 "kreslí obráceně."
 
 #: Pinta.Tools/GradientTool.cs:174
@@ -430,7 +430,7 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Levý klik kreslí primarní barvou, pravý klik kreslí sekundární barvou."
+"Levý klik kreslí primární barvou, pravý klik kreslí sekundární barvou."
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
@@ -457,7 +457,7 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
-"Klik a tažení nakreslí elliptický výběr. Pro kruhový výběr držte shift."
+"Klik a tažení nakreslí eliptický výběr. Pro kruhový výběr držte shift."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
@@ -484,7 +484,7 @@ msgstr "Posun"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Klik a táhnutí navedou obrazék."
+msgstr "Klik a táhnutí posunou obrázek."
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
@@ -493,8 +493,7 @@ msgstr "Kapátko"
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Levým klikem se nastaví primarní barva. Pravým klikem se nastaví sekundarní "
-"barva."
+"Levý klik nastaví primární barvu, pravý klik nastaví sekundární barvu."
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"

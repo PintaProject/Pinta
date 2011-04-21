@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 17:51+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-04-03 20:00+0000\n"
+"Last-Translator: Mechanick <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:50+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -164,7 +164,7 @@ msgstr "Renderelés"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr ""
+msgstr "Életlenít"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
@@ -294,7 +294,7 @@ msgstr "Körvonal"
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr ""
+msgstr "Elcsavarás"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
@@ -335,14 +335,16 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
+"Kattints és húzd az egeret a téglalap alakú kijelöléshez. Tartsd lenyomva a "
+"Shift-et a négyzet alakú kijelöléshez."
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
-msgstr ""
+msgstr "Klónozó bélyegző"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
+msgstr "Ctrl és bal egér gomb a kijelöléshez, bal egér gomb a festéshez."
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -350,7 +352,7 @@ msgstr "Kijelölés varázspálcával"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Kattints a hasonló színű terület kiválasztásához."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -374,37 +376,39 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr ""
+msgstr "Színátmenet"
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Bal egér gombbal színátmenetet rajzol az elsődleges színtől a másodlagosik. "
+"Jobb egér gomb a fordított színátmenethez."
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
-msgstr ""
+msgstr "Lineáris színátmenet"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "Lineáris tükrözött színátmenet"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Lineáris rombusz színátmenet"
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Sugárirányú színátmenet"
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Kúpos színátmenet"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr ""
+msgstr "Elöntés"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
@@ -420,7 +424,7 @@ msgstr "Tűrés"
 
 #: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
 msgid "Paintbrush"
-msgstr ""
+msgstr "Ecset"
 
 #: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
 msgid ""
@@ -431,17 +435,19 @@ msgstr ""
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
-msgstr ""
+msgstr "Ceruza"
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Bal egér gombbal szabad kezű, egy pixel széles vonal az elsődleges színnel, "
+"jobb egér gombbal a másodlagos színnel."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
@@ -452,6 +458,7 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"Klikk és húzd elliptikus kijelöléshez, Shift-tel együtt kör kijelöléshez."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
@@ -465,16 +472,17 @@ msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "Radír"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Bal egér gombbal átlátszóra töröl, jobb egér gombbal a másodlagos színre. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "Kéz eszköz"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
@@ -482,88 +490,96 @@ msgstr "Kattints és húzd a kép navigálásához."
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr ""
+msgstr "Színválasztó"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
+"Bal egér gombbal az elsődleges szín beállításához. Jobb egér gombbal a "
+"másodlagos szín beállításához."
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "Kijelölés után"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr ""
+msgstr "Ne válts eszközt"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "Váltás az előző eszközre"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "Váltás ceruza eszközre"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "Lekerekített téglalap"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:50
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"Klikk és húzd lekerekített téglalap rajzolásához (jobb egér gombbal a "
+"másodlagos színnel), Shift-tel a négyzet alakhoz."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
-msgstr ""
+msgstr "Sugár"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:88
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "Csökkenti a téglalap sarkának lekerekítési sugarát"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:102
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "Növeli a téglalap sarkának lekerekítési sugarát"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "A kijelölt pixelek mozgatása"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "Húzd a kijelölést a terület elmozdításához"
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Átszinező"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "Bal egér gombbal cseréli a másodlagos színt az elsődlegesre."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Festékes vödör"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"Bal egér gombbal a terület kitöltése elsődleges színnel, jobb egér gombbal a "
+"másodlagos színnel."
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipszis"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"Klikk és húzd ellipszis rajzoláshoz (jobb egér gombbal a másodlagos "
+"színnel). Tartsd lenyomva a Shift-et a szabályos kör alakhoz."
 
 #: Pinta.Tools/TextTool/TextTool.cs:36
 msgid "Text"
@@ -607,11 +623,11 @@ msgstr "Jobbra igazítás"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Szöveg stílus"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr ""
+msgstr "Normál"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
@@ -619,27 +635,27 @@ msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Körvonal vastagság"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Csökkenti a körvonal méretét"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Növeli a körvonal méretét"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
-msgstr ""
+msgstr "Ecset méret"
 
 #: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
 msgid "Decrease brush size"
-msgstr ""
+msgstr "Csökkenti az ecset méretét"
 
 #: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
 msgid "Increase brush size"
-msgstr ""
+msgstr "Növeli az ecset méretét"
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
@@ -659,37 +675,39 @@ msgstr "Alakzat kitöltése és körvonala"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
-msgstr ""
+msgstr "Kör ecset"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:38
 msgid "Grid"
-msgstr ""
+msgstr "Rács"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:40
 msgid "Squares"
-msgstr ""
+msgstr "Négyzet ecset"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
-msgstr ""
+msgstr "Folt ecset"
 
 #: Pinta.Tools/ZoomTool.cs:49
 msgid "Zoom"
-msgstr ""
+msgstr "Nagyító"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
+"Bal egér gombbal nagyít. Jobb egér gombbal kicsinyít. Klikk és húzd a "
+"kijelölésre nagyításhoz."
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "Lasszó kijelölés"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "Klikk és húzd a kijelöléshez."
 
 #: Pinta.Tools/FreeformShapeTool.cs:53
 msgid "Freeform Shape"
@@ -701,51 +719,51 @@ msgstr "Névjegy"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr ""
+msgstr "…"
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
-msgstr ""
+msgstr "_Fájl"
 
 #: Pinta/MainWindow.cs:457
 msgid "_Edit"
-msgstr ""
+msgstr "_Szerkesztés"
 
 #: Pinta/MainWindow.cs:459
 msgid "_View"
-msgstr ""
+msgstr "_Nézet"
 
 #: Pinta/MainWindow.cs:462
 msgid "_Image"
-msgstr ""
+msgstr "_Kép"
 
 #: Pinta/MainWindow.cs:463
 msgid "_Layers"
-msgstr ""
+msgstr "_Rétegek"
 
 #: Pinta/MainWindow.cs:464
 msgid "_Adjustments"
-msgstr ""
+msgstr "_Korrekciók"
 
 #: Pinta/MainWindow.cs:465
 msgid "Effe_cts"
-msgstr ""
+msgstr "_Effektusok"
 
 #: Pinta/MainWindow.cs:467
 msgid "_Window"
-msgstr ""
+msgstr "_Ablak"
 
 #: Pinta/MainWindow.cs:471
 msgid "Tool Windows"
-msgstr ""
+msgstr "Eszközök ablak"
 
 #: Pinta/MainWindow.cs:475
 msgid "_Help"
-msgstr ""
+msgstr "_Súgó"
 
 #: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
 msgid "Tools"
-msgstr ""
+msgstr "Eszközök"
 
 #: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
 #: Pinta.Core/Actions/EditActions.cs:121
@@ -754,65 +772,65 @@ msgstr "Paletta"
 
 #: Pinta/MainWindow.cs:588
 msgid "Documents"
-msgstr ""
+msgstr "Dokumentumok"
 
 #: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
 msgid "Layers"
-msgstr ""
+msgstr "Rétegek"
 
 #: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
 msgid "History"
-msgstr ""
+msgstr "Előzmények"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
 msgid "Hide"
-msgstr ""
+msgstr "Elrejt"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr ""
+msgstr "Dokkolás"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 #: Pinta/DockLibrary/DockItem.cs:502
 msgid "Auto Hide"
-msgstr ""
+msgstr "Automatikus elrejtés"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr ""
+msgstr "Dokkolható"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr ""
+msgstr "Lebegő"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Képernyőkép készítése"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
-msgstr ""
+msgstr "Várakozás a képernyő mentés előtt (mp):"
 
 #: Pinta/DialogHandlers.cs:158
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Menti a \"{0}\" -on végzett változtatásokat?"
 
 #: Pinta/DialogHandlers.cs:159
 msgid "If you don't save, all changes will be permanently lost."
-msgstr ""
+msgstr "Ha nem menti, akkor minden változtatás véglegesen elvész."
 
 #: Pinta/DialogHandlers.cs:166
 msgid "Close without saving"
-msgstr ""
+msgstr "Bezárás mentés nélkül"
 
 #: Pinta/DialogHandlers.cs:193
 msgid "Resize Palette"
-msgstr ""
+msgstr "Színek számának változtatása"
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
-msgstr ""
+msgstr "Színek száma:"
 
 #: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
 msgid "Paste Into New Layer"
@@ -820,23 +838,23 @@ msgstr "Beillesztés új rétegre"
 
 #: Pinta/DialogHandlers.cs:320
 msgid "Layer Opacity"
-msgstr ""
+msgstr "Réteg átlátszóság"
 
 #: Pinta/DialogHandlers.cs:325
 msgid "Rename Layer"
-msgstr ""
+msgstr "Réteg átnevezése"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Hide Layer"
-msgstr ""
+msgstr "Réteg elrejtése"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Show Layer"
-msgstr ""
+msgstr "Réteg megjelenítése"
 
 #: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
 msgid "Layer Properties"
-msgstr ""
+msgstr "Réteg tulajdonságai"
 
 #: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
 msgid "Open Image File"
@@ -844,7 +862,7 @@ msgstr "Kép megnyitása"
 
 #: Pinta/DialogHandlers.cs:423
 msgid "Image files"
-msgstr ""
+msgstr "Képfájlok"
 
 #: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
 msgid "All files"
@@ -852,19 +870,19 @@ msgstr "Minden fájl"
 
 #: Pinta/DialogHandlers.cs:480
 msgid "Paste cancelled"
-msgstr ""
+msgstr "Beillesztés megszakítva"
 
 #: Pinta/DialogHandlers.cs:481
 msgid "The clipboard does not contain an image"
-msgstr ""
+msgstr "Csak kép illeszthető be"
 
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
-msgstr ""
+msgstr "Kép fájl mentése"
 
 #: Pinta/DialogHandlers.cs:612
 msgid "Pinta does not support saving images in this file format."
-msgstr ""
+msgstr "Pinta nem támogatja ezt a fájl formátumot."
 
 #: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
 #: Pinta.Core/Actions/EditActions.cs:347
@@ -874,7 +892,7 @@ msgstr "Hiba"
 #: Pinta/DialogHandlers.cs:633
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr ""
+msgstr "\"{0}\" ez a fájl már létezik. Felülírja?"
 
 #: Pinta/DialogHandlers.cs:634
 #, csharp-format
@@ -884,43 +902,44 @@ msgstr ""
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr ""
+msgstr "JPEG minőség"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
-msgstr ""
+msgstr "Minőség: "
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr ""
+msgstr "Megnevezés"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
-msgstr ""
+msgstr "Verzió"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr ""
+msgstr "Elérési út"
 
 #: Pinta/Dialogs/AboutDialog.cs:101
 msgid "Contributors to this Release"
-msgstr ""
+msgstr "Közreműködők (jelen verzió)"
 
 #: Pinta/Dialogs/AboutDialog.cs:111
 msgid "Previous Contributors"
-msgstr ""
+msgstr "Közreműködők (korábbi verziók)"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Mechanick https://launchpad.net/~info-mechanick\n"
 "  Vizion-HUN https://launchpad.net/~vizler-k"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
-msgstr ""
+msgstr "Fordította:"
 
 #: Pinta/Dialogs/AboutDialog.cs:130
 msgid "Based on the work of Paint.NET:"
@@ -928,27 +947,27 @@ msgstr ""
 
 #: Pinta/Dialogs/AboutDialog.cs:137
 msgid "Using some icons from:"
-msgstr ""
+msgstr "Néhány ikon forrása:"
 
 #: Pinta/Dialogs/AboutDialog.cs:249
 msgid "About Pinta"
-msgstr ""
+msgstr "Pinta névjegy"
 
 #: Pinta/Dialogs/AboutDialog.cs:267
 msgid "Version Info"
-msgstr ""
+msgstr "Verzió infó"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr ""
+msgstr "Licensz"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "Kiadva a MIT X11 licensz alatt."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr ""
+msgstr "Szerzői jog"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
@@ -956,15 +975,15 @@ msgstr ""
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr ""
+msgstr "Név:"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr ""
+msgstr "Láthatóság"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr ""
+msgstr "Átlátszóság"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Classes/Document.cs:612
@@ -974,18 +993,18 @@ msgstr "Rajzvászon átméretezése"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr ""
+msgstr "Százalékos:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr ""
+msgstr "Méret alapján:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 msgid "Width:"
-msgstr ""
+msgstr "Szélesség:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
@@ -994,22 +1013,22 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr ""
+msgstr "képpontok"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 msgid "Height:"
-msgstr ""
+msgstr "Magasság:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr ""
+msgstr "Méretarány megőrzése"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr ""
+msgstr "Horgony:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
@@ -1023,7 +1042,7 @@ msgstr "Új kép"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr ""
+msgstr "Új kép méret          "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
@@ -1241,7 +1260,7 @@ msgstr "Kicsinyítés"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Legjobb illeszkedés"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1249,7 +1268,7 @@ msgstr "Nagyítás a kijelölésre"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Normál méret"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1311,7 +1330,7 @@ msgstr "Beillesztés új képként"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Kiválasztás törlése"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1327,7 +1346,7 @@ msgstr "Összes kijelölése"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Kijelölés megszüntetése"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1362,7 +1381,7 @@ msgstr "Nem sikerült megnyitni a paletta fájlt: {0}."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr ""
+msgstr "Színskála fájl mentése"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
@@ -1430,11 +1449,11 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "Szög"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "Élsimítás"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
@@ -1442,19 +1461,19 @@ msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "Fényerő"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "Ecset méret"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr ""
+msgstr "Cellaméret"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "Középpont eltolása"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
@@ -1466,19 +1485,19 @@ msgstr ""
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr ""
+msgstr "Színtartomány"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "Színtelítettséget"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "Színezés"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr ""
+msgstr "Kontraszt"
 
 #: FragmentEffect dialog
 msgid "Coverage"
@@ -1487,7 +1506,7 @@ msgstr ""
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "Távolság"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
@@ -1510,17 +1529,17 @@ msgstr ""
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr ""
+msgstr "Intenzitás"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "Megvilágítás"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "Eltolás"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
@@ -1539,12 +1558,12 @@ msgstr ""
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
+msgstr "Minőség"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "Elforgatás"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
@@ -1552,7 +1571,7 @@ msgstr ""
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "Méretarány"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
@@ -1564,11 +1583,11 @@ msgstr ""
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "Erősség"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "Vastagság"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
@@ -1576,7 +1595,7 @@ msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "Fraktál hőfok"
 
 #: RadialBlurEffect dialog
 msgid ""

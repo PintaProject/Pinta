@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2010-09-07 11:02+0000\n"
-"Last-Translator: Rytis Slatkevičius <rytis.s@gmail.com>\n"
+"PO-Revision-Date: 2011-04-10 13:58+0000\n"
+"Last-Translator: pencininkas4 <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:51+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -23,11 +23,11 @@ msgstr ""
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr ""
+msgstr "Invertuoti spalvas"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr ""
+msgstr "Lygiai"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Šviesumas/ Kontrastas"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
@@ -910,7 +910,8 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Mantas Kriaučiūnas https://launchpad.net/~mantas\n"
-"  Rytis Slatkevičius https://launchpad.net/~rytis-s"
+"  Rytis Slatkevičius https://launchpad.net/~rytis-s\n"
+"  pencininkas4 https://launchpad.net/~pencininkas4"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"

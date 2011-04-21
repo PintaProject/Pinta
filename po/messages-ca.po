@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 18:28+0000\n"
-"Last-Translator: tot3lmon <tot3lmon@gmail.com>\n"
+"PO-Revision-Date: 2011-04-05 07:18+0000\n"
+"Last-Translator: Pau Iranzo <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:51+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr ""
+msgstr "Inverteix els colors"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr ""
+msgstr "Nivells"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
-msgstr ""
+msgstr "Sèpia"
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
@@ -40,16 +40,16 @@ msgstr ""
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr ""
+msgstr "Blanc i negre"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr ""
+msgstr "Corbes"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Brillantor / Contrast"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
@@ -61,69 +61,69 @@ msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr ""
+msgstr "Histograma d'entrada"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr ""
+msgstr "Entrada"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr ""
+msgstr "Sortida"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr ""
+msgstr "Histograma de sortida"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr ""
+msgstr "Automàtic"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr ""
+msgstr "Restableix"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr ""
+msgstr "Vermell"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
-msgstr ""
+msgstr "Verd"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr ""
+msgstr "Enllaçat"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr ""
+msgstr "Transfereix el mapa"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr ""
+msgstr "Lluminositat"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
-msgstr ""
+msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr ""
+msgstr "Vermell  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr ""
+msgstr "Blau "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
@@ -131,17 +131,17 @@ msgstr ""
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr ""
+msgstr "Redueix el soroll"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 msgid "Noise"
-msgstr ""
+msgstr "Soroll"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
-msgstr ""
+msgstr "Fragment"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/UnfocusEffect.cs:36
@@ -150,17 +150,17 @@ msgstr ""
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:34
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
 msgid "Blurs"
-msgstr "Difuminats"
+msgstr ""
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr ""
+msgstr "Núvols"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:38
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr ""
+msgstr "Renderitza"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
@@ -175,7 +175,7 @@ msgstr "Elimina ulls vermells"
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 msgid "Photo"
-msgstr "Foto"
+msgstr "Fotografia"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
@@ -194,11 +194,11 @@ msgstr ""
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 msgid "Stylize"
-msgstr ""
+msgstr "Estilitza"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr ""
+msgstr "Desenfocament radial"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
@@ -221,11 +221,11 @@ msgstr ""
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:41
 msgid "Artistic"
-msgstr ""
+msgstr "Artístic"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr ""
+msgstr "Fractal Julia"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: Pinta.Effects/Effects/MedianEffect.cs:29
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 #: Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
@@ -249,15 +249,15 @@ msgstr ""
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Difuminat gaussià"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
-msgstr ""
+msgstr "Aguditza"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr ""
+msgstr "Afegeix soroll"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
@@ -269,11 +269,11 @@ msgstr "Pixelitza"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
-msgstr ""
+msgstr "Difuminació per moviment"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr ""
+msgstr "Inversió polar"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
@@ -281,7 +281,7 @@ msgstr ""
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
-msgstr ""
+msgstr "Desenfocament per zoom"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
@@ -909,6 +909,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Pau Iranzo https://launchpad.net/~paugnu\n"
 "  thor9216 https://launchpad.net/~thor9216\n"
 "  tot3lmon https://launchpad.net/~tot3lmon"
 

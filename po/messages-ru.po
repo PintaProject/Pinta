@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-29 16:23+0000\n"
-"Last-Translator: jeder <Unknown>\n"
+"PO-Revision-Date: 2011-04-13 20:01+0000\n"
+"Last-Translator: Polivoda Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:50+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -637,19 +637,19 @@ msgstr "Обычный"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Нормальный и контурный"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Ширина контура"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Уменьшить размер контура"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Увеличить размер контура"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -942,10 +942,13 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
 "  Anzhel https://launchpad.net/~a9227\n"
+"  Chubakur https://launchpad.net/~chubakur\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Maia Kozheva https://launchpad.net/~sikon\n"
 "  Nikita Putko https://launchpad.net/~ktototam98\n"
+"  Nkolay Parukhin https://launchpad.net/~parukhin\n"
+"  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
 "  Stepan Kislan https://launchpad.net/~stepa87\n"
 "  jeder https://launchpad.net/~i-jeder\n"
 "  ma$terok https://launchpad.net/~m-shein"

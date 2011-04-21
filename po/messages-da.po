@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2010-10-27 02:02+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-04-06 20:20+0000\n"
+"Last-Translator: Simon Højlind <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:50+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -23,7 +23,7 @@ msgstr "Auto niveau"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "Invertere farver"
+msgstr "Invertér farver"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
@@ -36,7 +36,7 @@ msgstr "Sepia"
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "Posterisere"
+msgstr "Posterisér"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
@@ -57,23 +57,23 @@ msgstr "Nuance / Mætning"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "Niveauer justering"
+msgstr "Niveau justering"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "Inddate histogram"
+msgstr "Input Histogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "Inddata"
+msgstr "Input"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "Uddata"
+msgstr "Output"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "Uddate histogram"
+msgstr "Output Histogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
@@ -103,7 +103,7 @@ msgstr "Sammenkædet"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr "Overføre kort"
+msgstr "Overfør kort"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
@@ -131,7 +131,7 @@ msgstr ""
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr "Reducere støj"
+msgstr "Reducér støj"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
@@ -285,7 +285,7 @@ msgstr "Zoom sløring"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
-msgstr "Blyant stregning"
+msgstr "Blyantssketch"
 
 #: Pinta.Effects/Effects/OutlineEffect.cs:29
 #: Pinta.Tools/TextTool/TextTool.cs:171
@@ -316,15 +316,15 @@ msgstr "Gen-så"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr ""
+msgstr "Vælg primær farve"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr ""
+msgstr "Vælg sekundær farve"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Vælg palettefarve"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -376,7 +376,7 @@ msgstr "Træk i valg for at flytte vaglt omrids."
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr "Overgang"
+msgstr "Farveovergang"
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
@@ -431,12 +431,12 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Venstre klik for at tegne med primær farve, højre klik for at tegne med "
+"Venstreklik for at tegne med primær farve, højreklik for at tegne med "
 "sekundær farve."
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
@@ -459,8 +459,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
-"Klik og træk for at tegne et ellipse valg. Hold skift for at begrænse til en "
-"cirkel."
+"Klik og træk for at skabe en elliptisk markering. Hold skift for at begrænse "
+"til en cirkel."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
@@ -470,7 +470,8 @@ msgstr "Linje"
 msgid ""
 "Left click to draw with primary color, right click for secondary color."
 msgstr ""
-"Venstre klik for at tegne med primær farve, højre klik for sekundær farve."
+"Venstre klik for at tegne med den primære farve, højre klik for den "
+"sekundære farve."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -533,22 +534,22 @@ msgstr "Radius"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:88
 msgid "Decrease rectangle's corner radius"
-msgstr "Formindsk rektangels hjørne radius"
+msgstr "Formindsk rektanglens hjørne-radius"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:102
 msgid "Increase rectangle's corner radius"
-msgstr "Forøg rektangels hjørne radius"
+msgstr "Forøg rektanglens hjørne-radius"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Move Selected Pixels"
-msgstr "Flyt markerede billedepunkter"
+msgstr "Flyt markerede pixels"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr "Træk i valgt for at flytte valgt indhold."
+msgstr "Træk i markeringen for at flytte det markerede indhold."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
@@ -560,7 +561,7 @@ msgstr "Venstre klik for at erstatte sekundær farve med primær farve."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "Malespand"
+msgstr "Farvespand"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
@@ -935,7 +936,8 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Ole Carlsen https://launchpad.net/~ole-carlsen-web"
+"  Ole Carlsen https://launchpad.net/~ole-carlsen-web\n"
+"  Simon Højlind https://launchpad.net/~hojlind"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"

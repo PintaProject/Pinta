@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 18:22+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-04-11 23:47+0000\n"
+"Last-Translator: Davide Lunghi <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:51+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -487,6 +487,8 @@ msgstr "Gomma"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Clicca pulsante sinistro per rendere trasparente, clicca pulsante per "
+"cancellare il colore secondario. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -632,7 +634,7 @@ msgstr "Allinea a destra"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Stile di testo"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -640,19 +642,19 @@ msgstr "Normale"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Normale e contornato"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Larghezza contorno"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Diminuire dimensione contorno"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Aumentare dimensione contorno"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -946,6 +948,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Daniele Napolitano https://launchpad.net/~dnax88\n"
+"  Davide Lunghi https://launchpad.net/~davide-lunghi\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Kabir94 https://launchpad.net/~kabirsala\n"
 "  Luca Urbini https://launchpad.net/~luca-urbini\n"
@@ -1282,7 +1285,7 @@ msgstr "Riduci"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Adatta alla pagina"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1290,7 +1293,7 @@ msgstr "Ingrandisci alla selezione"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Dimensione normale"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1352,7 +1355,7 @@ msgstr "Incolla in una nuova immagine"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Elimina selezione"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1368,7 +1371,7 @@ msgstr "Seleziona tutto"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Deseleziona tutto"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-10 11:11+0000\n"
+"PO-Revision-Date: 2011-04-08 01:41+0000\n"
 "Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-04-20 23:51+0000\n"
+"X-Generator: Launchpad (build 12883)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -342,7 +342,7 @@ msgstr "仿制图章"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
+msgstr "按住 Ctrl 键点击设置源点，然后点击进行涂抹。"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -386,7 +386,7 @@ msgstr "线性渐变"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "双线性渐变"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
@@ -406,11 +406,11 @@ msgstr "填充模式"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
-msgstr "连续"
+msgstr "区域"
 
 #: Pinta.Tools/FloodTool.cs:81
 msgid "Global"
-msgstr ""
+msgstr "整个区域"
 
 #: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
