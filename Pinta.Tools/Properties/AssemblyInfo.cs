@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle ("Pinta.Tools")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("Microsoft")]
+[assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("Pinta.Tools")]
-[assembly: AssemblyCopyright ("Copyright © Microsoft 2010")]
+[assembly: AssemblyCopyright ("")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 
