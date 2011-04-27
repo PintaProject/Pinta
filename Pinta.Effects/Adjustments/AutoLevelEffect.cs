@@ -13,7 +13,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class AutoLevelEffect : BaseEffect
 	{
 		UnaryPixelOps.Level op;
@@ -22,19 +21,15 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.AutoLevel.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Auto Level"); }
-		}
-
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.L; }
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (op == null) {
 				HistogramRgb histogram = new HistogramRgb ();

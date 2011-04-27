@@ -29,9 +29,11 @@ using Cairo;
 using Gtk;
 using System.IO;
 using Mono.Unix;
+using Mono.Addins;
 
 namespace Pinta.Core
 {
+	[TypeExtensionPoint]
 	public abstract class BaseTool
 	{
 		protected const int DEFAULT_BRUSH_WIDTH = 2;
@@ -224,7 +226,7 @@ namespace Pinta.Core
 		
 		protected void SetCursor (Gdk.Cursor cursor)
 		{
-			PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = cursor;
+			//PintaCore.Chrome.DrawingArea.GdkWindow.Cursor = cursor;
 		}
 		#endregion
 

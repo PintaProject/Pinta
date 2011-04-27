@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Addins, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\lib\Mono.Addins.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
     </Reference>
@@ -79,15 +82,18 @@
   <ItemGroup>
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Classes\BaseExtension.cs" />
     <Compile Include="Classes\DocumentWorkspaceHistory.cs" />
     <Compile Include="Classes\Document.cs" />
     <Compile Include="Classes\DocumentWorkspace.cs" />
+    <Compile Include="Classes\IExtension.cs" />
     <Compile Include="Classes\ScaleFactor.cs" />
     <Compile Include="Classes\Palette.cs" />
-    <Compile Include="Effects\BaseEffect.cs" />
+    <Compile Include="Effects\BaseEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Effects\BinaryPixelOp.cs" />
     <Compile Include="Effects\BitVector2DSurfaceAdapter.cs" />
     <Compile Include="Effects\Histogram.cs" />
@@ -102,6 +108,7 @@
     <Compile Include="Enumerations\EffectAdjustment.cs" />
     <Compile Include="Enumerations\GradientColorMode.cs" />
     <Compile Include="EventArgs\CanvasInvalidatedEventArgs.cs" />
+    <Compile Include="EventArgs\ToolEventArgs.cs" />
     <Compile Include="EventArgs\DocumentCancelEventArgs.cs" />
     <Compile Include="EventArgs\DocumentEventArgs.cs" />
     <Compile Include="EventArgs\HistoryItemAddedEventArgs.cs" />
@@ -123,6 +130,7 @@
     <Compile Include="HistoryItems\SimpleHistoryItem.cs" />
     <Compile Include="Managers\ActionManager.cs" />
     <Compile Include="Managers\ChromeManager.cs" />
+    <Compile Include="Managers\EffectsManager.cs" />
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\ImageConverterManager.cs" />
     <Compile Include="Managers\HistoryManager.cs" />

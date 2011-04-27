@@ -31,7 +31,6 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	[System.ComponentModel.Composition.Export (typeof (BasePaintBrush))]
 	public class CircleBrush : PaintBrush
 	{
 		public override string Name {

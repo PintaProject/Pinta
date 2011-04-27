@@ -14,7 +14,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class HueSaturationEffect : BaseEffect
 	{		
 		UnaryPixelOp op;
@@ -23,16 +22,12 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.HueAndSaturation.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Hue / Saturation"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
-		}
-
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {
@@ -49,7 +44,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int hue_delta = Data.Hue;
 			int sat_delta =  Data.Saturation;

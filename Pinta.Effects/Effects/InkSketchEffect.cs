@@ -15,7 +15,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class InkSketchEffect : BaseEffect
 	{
 		private static readonly int[][] conv;
@@ -30,7 +29,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Artistic.InkSketch.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Ink Sketch"); }
 		}
 
@@ -73,14 +72,14 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			// Glow backgound 
 			glowEffect.Data.Radius = 6;
 			glowEffect.Data.Brightness = -(Data.Coloring - 50) * 2;
 			glowEffect.Data.Contrast = -(Data.Coloring - 50) * 2;
 			
-			this.glowEffect.RenderEffect (src, dest, rois);
+			this.glowEffect.Render (src, dest, rois);
 
 			// Create black outlines by finding the edges of objects 
 			foreach (Gdk.Rectangle roi in rois) {

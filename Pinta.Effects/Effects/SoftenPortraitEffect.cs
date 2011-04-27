@@ -43,7 +43,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class SoftenPortraitEffect : BaseEffect
 	{
 		private GaussianBlurEffect blurEffect;
@@ -55,7 +54,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Photo.SoftenPortrait.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Soften Portrait"); }
 		}
 
@@ -84,14 +83,14 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 		
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int warmth = Data.Warmth;
 			float redAdjust = 1.0f + (warmth / 100.0f);
             float blueAdjust = 1.0f - (warmth / 100.0f);
 
-            this.blurEffect.RenderEffect(src, dest, rois);
-            this.bacAdjustment.RenderEffect(src, dest, rois);
+            this.blurEffect.Render(src, dest, rois);
+            this.bacAdjustment.Render(src, dest, rois);
 
 			foreach (Gdk.Rectangle roi in rois) {
                 for (int y = roi.Top; y < roi.Bottom; ++y) {

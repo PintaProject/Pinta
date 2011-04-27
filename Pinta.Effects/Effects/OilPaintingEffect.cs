@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class OilPaintingEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Artistic.OilPainting.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Oil Painting"); }
 		}
 
@@ -47,7 +46,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			int width = src.Width;
 			int height = src.Height;

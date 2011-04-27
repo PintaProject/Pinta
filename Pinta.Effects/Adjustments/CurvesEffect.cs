@@ -15,7 +15,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class CurvesEffect : BaseEffect
 	{
 		UnaryPixelOp op = null;
@@ -24,16 +23,12 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.Curves.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Curves"); }
 		}
 
 		public override bool IsConfigurable {
 			get { return true; }
-		}
-		
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {
@@ -50,7 +45,7 @@ namespace Pinta.Effects
 		public override bool LaunchConfiguration ()
 		{
 			var dialog = new CurvesDialog (Data);
-			dialog.Title = Text;
+			dialog.Title = Name;
 			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
 			
 			int response = dialog.Run ();
@@ -60,7 +55,7 @@ namespace Pinta.Effects
 			return (response == (int)Gtk.ResponseType.Ok);
 		}
 		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (Data.ControlPoints == null)
 				return;

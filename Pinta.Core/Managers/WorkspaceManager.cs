@@ -164,6 +164,7 @@ namespace Pinta.Core
 			return doc;
 		}
 
+		// TODO: Standardize add to recent files
 		public bool OpenFile (string file)
 		{
 			bool fileOpened = false;
@@ -176,6 +177,7 @@ namespace Pinta.Core
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.IsDirty = false;
+				PintaCore.Workspace.ActiveDocument.HasFile = true;
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				PintaCore.Workspace.Invalidate ();
 

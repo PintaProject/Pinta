@@ -113,10 +113,6 @@ namespace MonoDevelop.Components.Docking
 			}
 			else if (widget is VSeparator)
 				((VSeparator)widget).HeightRequest = 10;
-			else if (widget is ToolButton) {
-				((ToolButton)widget).HeightRequest = 26;
-				((ToolButton)widget).WidthRequest = 24;
-			}
 			
 			if (padding == -1)
 				padding = defaultPadding;
@@ -170,7 +166,6 @@ namespace MonoDevelop.Components.Docking
 	{
 		public DockToolButton (string stockId)
 		{
-			Label = string.Empty;
 			Image = new Gtk.Image (stockId, IconSize.Menu);
 			Image.Show ();
 		}

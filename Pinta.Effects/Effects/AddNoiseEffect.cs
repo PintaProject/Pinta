@@ -15,7 +15,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class AddNoiseEffect : BaseEffect
 	{
 		private int intensity;
@@ -26,7 +25,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Noise.AddNoise.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Add Noise"); }
 		}
 
@@ -112,7 +111,7 @@ namespace Pinta.Effects
 			}
 		}
 
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			this.intensity = Data.Intensity;
 			this.colorSaturation = Data.ColorSaturation;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
@@ -36,15 +37,23 @@ namespace Pinta.Gui.Widgets
 
 			PackStart (tb2, false, false, 0);
 			
+			PintaCore.Tools.ToolAdded += HandleToolAdded;
+
 			ShowAll ();
 		}
 		
+		// TODO: This should handle sorting the items
 		public void AddItem (ToolButton item)
 		{
 			if (tb1.NItems <= tb2.NItems)
 				tb1.Insert (item, tb1.NItems);
 			else
 				tb2.Insert (item, tb2.NItems);
+		}
+
+		private void HandleToolAdded (object sender, ToolEventArgs e)
+		{
+			AddItem (e.Tool.ToolItem);
 		}
 	}
 }

@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResourceManager.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Tools.CloneStamp.png">
@@ -474,6 +474,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ShapeTool.Outline.png">
       <LogicalName>ShapeTool.Outline.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Effects.Default.png">
+      <LogicalName>Menu.Effects.Default.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta-16.png">
+      <LogicalName>Pinta-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pinta-32.png">
+      <LogicalName>Pinta-32.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

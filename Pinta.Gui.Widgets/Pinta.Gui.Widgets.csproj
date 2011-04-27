@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="DialogAttributes.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorPanelWidget.cs" />
     <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
     <Compile Include="Widgets\Canvas\GridRenderer.cs" />

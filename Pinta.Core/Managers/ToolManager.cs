@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gtk;
 
 namespace Pinta.Core
@@ -37,6 +38,8 @@ namespace Pinta.Core
 		
 		private List<BaseTool> Tools;
 
+		public event EventHandler<ToolEventArgs> ToolAdded;
+
 		public ToolManager ()
 		{
 			Tools = new List<BaseTool> ();
@@ -47,7 +50,13 @@ namespace Pinta.Core
 			tool.ToolItem.Clicked += HandlePbToolItemClicked;
 			tool.ToolItem.Sensitive = tool.Enabled;
 			
-			Tools.Add (tool);	
+			Tools.Add (tool);
+			Tools.Sort (new ToolSorter ());
+
+			OnToolAdded (tool);
+
+			if (CurrentTool == null)
+				SetCurrentTool (tool);
 		}
 		
 		void HandlePbToolItemClicked (object sender, EventArgs e)
@@ -57,7 +66,7 @@ namespace Pinta.Core
 			BaseTool t = FindTool (tb.Label);
 
 			// Don't let the user unselect the current tool	
-			if (t.Name == CurrentTool.Name) {
+			if (CurrentTool != null && t.Name == CurrentTool.Name) {
 				if (prev_index != index)
 					tb.Active = true;
 				return;
@@ -80,7 +89,7 @@ namespace Pinta.Core
 		}
 		
 		public BaseTool CurrentTool {
-			get { return Tools[index]; }
+			get { if (index >= 0) return Tools[index]; return null; }
 		}
 		
 		public BaseTool PreviousTool {
@@ -89,7 +98,8 @@ namespace Pinta.Core
 
 		public void Commit ()
 		{
-			CurrentTool.DoCommit ();
+			if (CurrentTool != null)
+				CurrentTool.DoCommit ();
 		}
 
 		public void SetCurrentTool (BaseTool tool)
@@ -156,6 +166,12 @@ namespace Pinta.Core
 			return null;
 		}
 		
+		private void OnToolAdded (BaseTool tool)
+		{
+			if (ToolAdded != null)
+				ToolAdded (this, new ToolEventArgs (tool));
+		}
+
 		#region IEnumerable<BaseTool> implementation
 		public IEnumerator<BaseTool> GetEnumerator ()
 		{
@@ -169,5 +185,13 @@ namespace Pinta.Core
 			return Tools.GetEnumerator ();
 		}
 		#endregion
+
+		class ToolSorter : Comparer<BaseTool>
+		{
+			public override int Compare (BaseTool x, BaseTool y)
+			{
+				return x.Priority - y.Priority;
+			}
+		}
 	}
 }

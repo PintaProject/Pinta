@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Extensions\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,6 +54,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Addins">
+      <HintPath>..\lib\Mono.Addins.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -68,38 +72,39 @@
     <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseBrushTool.cs" />
+    <Compile Include="CoreToolsExtension.cs" />
+    <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Brushes\SplatterBrush.cs" />
-    <Compile Include="ColorPickerTool.cs" />
-    <Compile Include="EllipseSelectTool.cs" />
-    <Compile Include="EllipseTool.cs" />
-    <Compile Include="EraserTool.cs" />
-    <Compile Include="FloodTool.cs" />
-    <Compile Include="FreeformShapeTool.cs" />
-    <Compile Include="GradientTool.cs" />
-    <Compile Include="LassoSelectTool.cs" />
-    <Compile Include="LineCurveTool.cs" />
-    <Compile Include="MagicWandTool.cs" />
-    <Compile Include="MoveSelectedTool.cs" />
-    <Compile Include="MoveSelectionTool.cs" />
-    <Compile Include="PaintBrushTool.cs" />
-    <Compile Include="PaintBucketTool.cs" />
-    <Compile Include="PanTool.cs" />
-    <Compile Include="PencilTool.cs" />
+    <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Tools\EllipseSelectTool.cs" />
+    <Compile Include="Tools\EllipseTool.cs" />
+    <Compile Include="Tools\EraserTool.cs" />
+    <Compile Include="Tools\FloodTool.cs" />
+    <Compile Include="Tools\FreeformShapeTool.cs" />
+    <Compile Include="Tools\GradientTool.cs" />
+    <Compile Include="Tools\LassoSelectTool.cs" />
+    <Compile Include="Tools\LineCurveTool.cs" />
+    <Compile Include="Tools\MagicWandTool.cs" />
+    <Compile Include="Tools\MoveSelectedTool.cs" />
+    <Compile Include="Tools\MoveSelectionTool.cs" />
+    <Compile Include="Tools\PaintBrushTool.cs" />
+    <Compile Include="Tools\PaintBucketTool.cs" />
+    <Compile Include="Tools\PanTool.cs" />
+    <Compile Include="Tools\PencilTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecolorTool.cs" />
-    <Compile Include="RectangleSelectTool.cs" />
-    <Compile Include="RectangleTool.cs" />
-    <Compile Include="RoundedRectangleTool.cs" />
-    <Compile Include="SelectTool.cs" />
-    <Compile Include="ShapeTool.cs" />
-    <Compile Include="TextTool\Position.cs" />
-    <Compile Include="TextTool\TextAlignment.cs" />
-    <Compile Include="TextTool\EditingMode.cs" />
-    <Compile Include="TextTool\TextEngine.cs" />
-    <Compile Include="TextTool\TextTool.cs" />
-    <Compile Include="CloneStampTool.cs" />
-    <Compile Include="ZoomTool.cs" />
+    <Compile Include="Tools\RecolorTool.cs" />
+    <Compile Include="Tools\RectangleSelectTool.cs" />
+    <Compile Include="Tools\RectangleTool.cs" />
+    <Compile Include="Tools\RoundedRectangleTool.cs" />
+    <Compile Include="Tools\SelectTool.cs" />
+    <Compile Include="Tools\ShapeTool.cs" />
+    <Compile Include="Tools\TextTool\Position.cs" />
+    <Compile Include="Tools\TextTool\TextAlignment.cs" />
+    <Compile Include="Tools\TextTool\EditingMode.cs" />
+    <Compile Include="Tools\TextTool\TextEngine.cs" />
+    <Compile Include="Tools\TextTool\TextTool.cs" />
+    <Compile Include="Tools\CloneStampTool.cs" />
+    <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="Brushes\PaintBrush.cs" />
     <Compile Include="Brushes\GridBrush.cs" />
     <Compile Include="Brushes\SquaresBrush.cs" />
@@ -110,11 +115,6 @@
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
       <Name>Pinta.Core</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\System.ComponentModel.Composition\System.ComponentModel.Composition.csproj">
-      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
-      <Name>System.ComponentModel.Composition</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

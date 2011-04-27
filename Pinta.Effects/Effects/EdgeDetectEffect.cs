@@ -16,7 +16,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class EdgeDetectEffect : ColorDifferenceEffect
 	{
 		private double[][] weights;
@@ -25,7 +24,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Stylize.EdgeDetect.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Edge Detect"); }
 		}
 
@@ -49,7 +48,7 @@ namespace Pinta.Effects
 			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
 		
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			SetWeights ();
 			base.RenderColorDifferenceEffect (weights, src, dest, rois);

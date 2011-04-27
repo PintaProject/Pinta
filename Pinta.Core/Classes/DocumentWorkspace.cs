@@ -50,7 +50,7 @@ namespace Pinta.Core
 		#region Public Properties
 		public bool CanvasFitsInWindow {
 			get {
-				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.Canvas.Parent;
 				
 				int window_x = view.Allocation.Width;
 				int window_y = view.Children[0].Allocation.Height;
@@ -76,7 +76,7 @@ namespace Pinta.Core
 
 		public bool ImageFitsInWindow {
 			get {
-				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+				Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.Canvas.Parent;
 				
 				int window_x = view.Allocation.Width;
 				int window_y = view.Children[0].Allocation.Height;
@@ -89,7 +89,7 @@ namespace Pinta.Core
 		}
 
 		public Cairo.PointD Offset {
-			get { return new Cairo.PointD ((PintaCore.Chrome.DrawingArea.Allocation.Width - canvas_size.Width) / 2, (PintaCore.Chrome.DrawingArea.Allocation.Height - canvas_size.Height) / 2); }
+			get { return new Cairo.PointD ((PintaCore.Chrome.Canvas.Allocation.Width - canvas_size.Width) / 2, (PintaCore.Chrome.Canvas.Allocation.Height - canvas_size.Height) / 2); }
 		}
 
 		public double Scale {
@@ -132,7 +132,7 @@ namespace Pinta.Core
 
 		public void RecenterView (double x, double y)
 		{
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.Canvas.Parent;
 			
 			view.Hadjustment.Value = Utility.Clamp (x * Scale - view.Hadjustment.PageSize / 2, view.Hadjustment.Lower, view.Hadjustment.Upper);
 			view.Vadjustment.Value = Utility.Clamp (y * Scale - view.Vadjustment.PageSize / 2, view.Vadjustment.Lower, view.Vadjustment.Upper);
@@ -140,7 +140,7 @@ namespace Pinta.Core
 
 		public void ScrollCanvas (int dx, int dy)
 		{
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.Canvas.Parent;
 			
 			view.Hadjustment.Value = Utility.Clamp (dx + view.Hadjustment.Value, view.Hadjustment.Lower, view.Hadjustment.Upper - view.Hadjustment.PageSize);
 			view.Vadjustment.Value = Utility.Clamp (dy + view.Vadjustment.Value, view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
@@ -201,10 +201,10 @@ namespace Pinta.Core
 			
 			zoom = Math.Min (zoom, 3600);
 			
-			PintaCore.Chrome.DrawingArea.GdkWindow.FreezeUpdates ();
+			PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates ();
 			PintaCore.Actions.View.SuspendZoomUpdate ();
 			
-			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.DrawingArea.Parent;
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.Canvas.Parent;
 			
 			bool adjustOnMousePosition = point.X >= 0.0 && point.Y >= 0.0;
 			
@@ -263,7 +263,7 @@ namespace Pinta.Core
 			RecenterView (center_x, center_y);
 			
 			PintaCore.Actions.View.ResumeZoomUpdate ();
-			PintaCore.Chrome.DrawingArea.GdkWindow.ThawUpdates ();
+			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
 		}
 		#endregion
 	}

@@ -77,8 +77,9 @@ namespace Pinta.Gui.Widgets
 
 				if (PintaCore.Workspace.ActiveWorkspace.PointInCanvas (point))
 					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
-					
-				PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
+
+				if (PintaCore.Tools.CurrentTool != null)
+					PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
 			};
 
 			// Handle key press/release events

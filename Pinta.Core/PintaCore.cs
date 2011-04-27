@@ -44,7 +44,8 @@ namespace Pinta.Core
 		public static SystemManager System { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static SettingsManager Settings { get; private set; }
-		
+		public static EffectsManager Effects { get; private set; }
+
 		static PintaCore ()
 		{
 			Resources = new ResourceManager ();
@@ -59,19 +60,11 @@ namespace Pinta.Core
 			Palette = new PaletteManager ();
 			Settings = new SettingsManager ();
 			Chrome = new ChromeManager ();
+			Effects = new EffectsManager ();
 		}
 		
-		public static void Initialize (Toolbar toolToolBar,
-		                               DrawingArea drawingArea,
-		                               Window mainWindow,
-		                               IProgressDialog progressDialog)
+		public static void Initialize ()
 		{
-			Chrome.Initialize (toolToolBar,
-			                   drawingArea,
-			                   mainWindow,
-			                   progressDialog);
-			
-			
 			Actions.RegisterHandlers ();
 		}
 	}

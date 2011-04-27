@@ -73,6 +73,29 @@ namespace Pinta.Core
 			return action;
 		}
 
+		public static MenuItem AppendMenuItemSorted (this Menu menu, MenuItem item)
+		{
+			var text = item.GetText ();
+
+			for (int i = 0; i < menu.Children.Length; i++)
+				if (string.Compare (((menu.Children[i]) as MenuItem).GetText (), text) > 0) {
+					menu.Insert (item, i);
+					return item;
+				}
+
+			menu.AppendItem (item);
+			return item;
+		}
+
+		public static string GetText (this MenuItem item)
+		{
+			foreach (var child in item.AllChildren)
+				if (child is Label)
+					return (child as Label).Text;
+
+			return string.Empty;
+		}
+
 		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
 		{
 			Gtk.ToolItem item = (Gtk.ToolItem)action.CreateToolItem ();

@@ -31,12 +31,12 @@ namespace Pinta.Resources
 {
 	public static class ResourceLoader
 	{
-		public static Pixbuf GetIcon (string name)
+		public static Pixbuf GetIcon (string name, int size)
 		{
 			// First see if it's a built-in gtk icon, like gtk-new
 			if (Gtk.IconTheme.Default.HasIcon (name))
-				return Gtk.IconTheme.Default.LoadIcon (name, 16, Gtk.IconLookupFlags.UseBuiltin);
-			
+				return Gtk.IconTheme.Default.LoadIcon (name, size, Gtk.IconLookupFlags.UseBuiltin);
+
 			// Get it from our embedded resources
 			return Gdk.Pixbuf.LoadFromResource (name);
 		}

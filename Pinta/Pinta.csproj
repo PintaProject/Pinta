@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Pinta</RootNamespace>
     <AssemblyName>Pinta</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -84,6 +84,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Addins">
+      <HintPath>..\lib\Mono.Addins.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Addins.Gui">
+      <HintPath>..\lib\Mono.Addins.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Addins.Setup">
+      <HintPath>..\lib\Mono.Addins.Setup.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
@@ -101,6 +110,27 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Edit\ResizePaletteAction.cs" />
+    <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
+    <Compile Include="Actions\Edit\PasteIntoNewLayerAction.cs" />
+    <Compile Include="Actions\File\CloseDocumentAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentImplementationAction.cs" />
+    <Compile Include="Actions\File\ModifyCompressionAction.cs" />
+    <Compile Include="Actions\File\ExitAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentAsAction.cs" />
+    <Compile Include="Actions\File\SaveDocumentAction.cs" />
+    <Compile Include="Actions\File\OpenRecentAction.cs" />
+    <Compile Include="Actions\File\OpenDocumentAction.cs" />
+    <Compile Include="Actions\File\NewScreenshotAction.cs" />
+    <Compile Include="Actions\File\NewDocumentAction.cs" />
+    <Compile Include="Actions\Help\AboutDialogAction.cs" />
+    <Compile Include="Actions\IActionHandler.cs" />
+    <Compile Include="Actions\Image\ResizeCanvasAction.cs" />
+    <Compile Include="Actions\Image\ResizeImageAction.cs" />
+    <Compile Include="Actions\Layers\LayerPropertiesAction.cs" />
+    <Compile Include="Actions\View\ToolBarToggledAction.cs" />
+    <Compile Include="Actions\Window\CloseAllDocumentsAction.cs" />
+    <Compile Include="Actions\Window\SaveAllDocumentsAction.cs" />
     <Compile Include="Dialogs\AboutPintaTabPage.cs" />
     <Compile Include="Dialogs\AboutDialog.cs" />
     <Compile Include="Dialogs\ErrorDialog.cs" />
@@ -128,11 +158,17 @@
     <Compile Include="DockLibrary\PlaceholderWindow.cs" />
     <Compile Include="DockLibrary\ShadedContainer.cs" />
     <Compile Include="DockLibrary\TabStrip.cs" />
-    <Compile Include="ExtensionPoints.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
+    <Compile Include="Pads\ColorPalettePad.cs" />
+    <Compile Include="Pads\CanvasPad.cs" />
+    <Compile Include="Pads\HistoryPad.cs" />
+    <Compile Include="Pads\LayersPad.cs" />
+    <Compile Include="Pads\IDockPad.cs" />
+    <Compile Include="Pads\ToolBoxPad.cs" />
+    <Compile Include="WindowShell.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
@@ -175,12 +211,9 @@
       <Project>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</Project>
       <Name>Pinta.Gui.Widgets</Name>
     </ProjectReference>
-    <ProjectReference Include="..\System.ComponentModel.Composition\System.ComponentModel.Composition.csproj">
-      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
-      <Name>System.ComponentModel.Composition</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pinta.ico" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class PolarInversionEffect : WarpEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Distort.PolarInversion.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Polar Inversion"); }
 		}
 

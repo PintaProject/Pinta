@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class ZoomBlurEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Blurs.ZoomBlur.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Zoom Blur"); }
 		}
 
@@ -47,7 +46,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			if (Data.Amount == 0) {
 				// Copy src to dest

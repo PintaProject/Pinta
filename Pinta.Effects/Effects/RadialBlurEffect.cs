@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class RadialBlurEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Blurs.RadialBlur.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Radial Blur"); }
 		}
 
@@ -58,7 +57,7 @@ namespace Pinta.Effects
 			fy = cy + ((cx >> 8) * fr >> 8) - ((cy >> 14) * (fr * fr >> 11) >> 8);
 		}
 
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			if (Data.Angle == 0) {
 				// Copy src to dest

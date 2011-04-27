@@ -42,7 +42,7 @@ namespace Pinta
 			if (effect.EffectData == null)
 				throw new ArgumentException ("effect.EffectData is null.");
 			
-			var dialog = new SimpleEffectDialog (effect.Text,
+			var dialog = new SimpleEffectDialog (effect.Name,
 			                                     PintaCore.Resources.GetIcon (effect.Icon),
 			                                     effect.EffectData);
 			

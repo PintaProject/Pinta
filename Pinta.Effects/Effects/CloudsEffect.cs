@@ -16,7 +16,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class CloudsEffect : BaseEffect
 	{
         // This is so that repetition of the effect with CTRL+F actually shows up differently.
@@ -26,7 +25,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Render.Clouds.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Clouds"); }
 		}
 
@@ -171,7 +170,7 @@ namespace Pinta.Effects
             }
         }
 		
-		protected override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
+		protected override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
 		{
 			RenderClouds(dst, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), 
 				Data.Power/100.0, PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());

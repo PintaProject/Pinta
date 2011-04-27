@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class EmbossEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Stylize.Emboss.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Emboss"); }
 		}
 
@@ -47,7 +46,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois) {
+		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois) {
 			double[,] weights = Weights;
 
 			var srcWidth = src.Width;

@@ -14,7 +14,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class ReliefEffect : ColorDifferenceEffect
 	{
 		public ReliefEffect () {
@@ -41,12 +40,12 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Stylize.Relief.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Relief"); }
 		}
 
 		#region Algorithm Code Ported From PDN
-		public override void RenderEffect (Cairo.ImageSurface src, Cairo.ImageSurface dst, Gdk.Rectangle[] rois) {
+		public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, Gdk.Rectangle[] rois) {
 			base.RenderColorDifferenceEffect (Weights, src, dst, rois);
 		}
 

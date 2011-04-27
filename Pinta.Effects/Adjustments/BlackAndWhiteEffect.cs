@@ -13,7 +13,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class BlackAndWhiteEffect : BaseEffect
 	{
 		UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
@@ -22,19 +21,15 @@ namespace Pinta.Effects
 			get { return "Menu.Adjustments.BlackAndWhite.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Black and White"); }
-		}
-
-		public override EffectAdjustment EffectOrAdjustment {
-			get { return EffectAdjustment.Adjustment; }
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.L; }
 		}
 		
-		public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

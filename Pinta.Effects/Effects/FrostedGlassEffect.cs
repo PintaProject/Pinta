@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class FrostedGlassEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Distort.FrostedGlass.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Frosted Glass"); }
 		}
 
@@ -49,7 +48,7 @@ namespace Pinta.Effects
 		}
 
 		#region Algorithm Code Ported From PDN
-		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois) {
+		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois) {
 			int width = src.Width;
 			int height = src.Height;
 			int r = Data.Amount;

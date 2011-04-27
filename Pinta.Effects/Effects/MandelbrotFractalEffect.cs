@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class MandelbrotFractalEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Render.MandelbrotFractal.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Mandelbrot Fractal"); }
 		}
 
@@ -74,7 +73,7 @@ namespace Pinta.Effects
 			return c - Math.Log (y * y + x * x) * invLogMax;
 		}
 
-		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
+		unsafe public override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
 			int w = dst.Width;
 			int h = dst.Height;

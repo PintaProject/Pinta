@@ -16,7 +16,6 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class RedEyeRemoveEffect : BaseEffect
 	{
 		private UnaryPixelOp op;
@@ -25,7 +24,7 @@ namespace Pinta.Effects
 			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Red Eye Removal"); }
 		}
 
@@ -46,7 +45,7 @@ namespace Pinta.Effects
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Text, PintaCore.Resources.GetIcon (Icon), Data);
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data);
 
 			// Hookup event handling for live preview.
 			dialog.EffectDataChanged += (o, e) => {
@@ -63,7 +62,7 @@ namespace Pinta.Effects
 			return ret;
 		}
 		
-		public unsafe override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

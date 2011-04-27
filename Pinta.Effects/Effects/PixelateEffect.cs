@@ -15,14 +15,13 @@ using Mono.Unix;
 
 namespace Pinta.Effects
 {
-	[System.ComponentModel.Composition.Export (typeof (BaseEffect))]
 	public class PixelateEffect : BaseEffect
 	{
 		public override string Icon {
 			get { return "Menu.Effects.Distort.Pixelate.png"; }
 		}
 
-		public override string Text {
+		public override string Name {
 			get { return Catalog.GetString ("Pixelate"); }
 		}
 
@@ -77,7 +76,7 @@ namespace Pinta.Effects
 		}
 
 
-		unsafe public override void RenderEffect (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois) {
+		unsafe public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois) {
 			var cellSize = Data.CellSize;
 			
 			Gdk.Rectangle src_bounds = src.GetBounds ();
