@@ -42,8 +42,12 @@ namespace Pinta.Core
 	
 		public void Import (string fileName)
 		{
+			Pixbuf bg;
+
 			// Handle any EXIF orientation flags
-			Pixbuf bg = new Pixbuf (fileName);
+			using (var fs = new FileStream (fileName, FileMode.Open))
+				bg = new Pixbuf (fs);
+
 			bg = bg.ApplyEmbeddedOrientation ();
 
 			Size imagesize = new Size (bg.Width, bg.Height);

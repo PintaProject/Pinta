@@ -95,13 +95,14 @@ namespace Pinta.Core
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 					
-					using (Pixbuf pb = new Pixbuf (tmp_file)) {
-						using (Context g = new Context (layer.Surface)) {
-							CairoHelper.SetSourcePixbuf (g, pb, x, y);
-							g.Paint ();
+					using (var fs = new FileStream (tmp_file, FileMode.Open))
+						using (Pixbuf pb = new Pixbuf (fs)) {
+							using (Context g = new Context (layer.Surface)) {
+								CairoHelper.SetSourcePixbuf (g, pb, x, y);
+								g.Paint ();
+							}
 						}
-					}
-					
+
 					try {
 						File.Delete (tmp_file);
 					} catch { }
