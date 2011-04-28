@@ -10,6 +10,7 @@
 using System;
 using Cairo;
 using Pinta.Core;
+using System.Threading;
 
 namespace Pinta.Effects
 {
@@ -28,7 +29,12 @@ namespace Pinta.Effects
 		public override Gdk.Key AdjustmentMenuKey {
 			get { return Gdk.Key.I; }
 		}
-		
+
+		protected override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle rois, CancellationToken token)
+		{
+			op.Apply (dest, src, rois);
+		}
+
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
