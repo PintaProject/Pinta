@@ -9,9 +9,9 @@ using Mono.Addins;
 [assembly: AssemblyTitle ("Pinta.Effects")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("Microsoft")]
+[assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("Pinta.Effects")]
-[assembly: AssemblyCopyright ("Copyright © Microsoft 2010")]
+[assembly: AssemblyCopyright ("")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 
@@ -33,10 +33,10 @@ using Mono.Addins;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ("0.6.0.0")]
-[assembly: AssemblyFileVersion ("0.6.0.0")]
+[assembly: AssemblyVersion ("1.1.0.0")]
+[assembly: AssemblyFileVersion ("1.1.0.0")]
 
-[assembly: Addin ("DefaultEffects", "0.7", Category = "Core")]
+[assembly: Addin ("DefaultEffects", "1.1", Category = "Core")]
 [assembly: AddinName ("Default Effects")]
 [assembly: AddinDescription ("The default adjustments and effects that ship with Pinta")]
-[assembly: AddinDependency ("Pinta", "1.0")]
+[assembly: AddinDependency ("Pinta", "1.1")]
