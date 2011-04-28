@@ -104,8 +104,14 @@ namespace Pinta.Actions
 			if (hasFile)
 				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename);
 
-			if (format_desc == null)
+			if (format_desc == null) {
 				format_desc = PintaCore.System.ImageFormats.GetDefaultSaveFormat ();
+
+				// Gtk doesn't like it if we set the file name to an extension that we don't have
+				// a filter for, so we change the extension to our default extension.
+				if (hasFile)
+					fcd.SetFilename (Path.ChangeExtension (document.PathAndFileName, format_desc.Extensions[0]));
+			}
 
 			fcd.Filter = format_desc.Filter;
 
