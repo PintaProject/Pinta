@@ -28,8 +28,6 @@ using System;
 using Cairo;
 using Mono.Unix;
 using Mono.Addins;
-using System.Threading;
-using System.Threading.Tasks;
 
 [assembly: AddinRoot ("Pinta", "1.1")]
 
@@ -86,49 +84,6 @@ namespace Pinta.Core
 				throw new NotImplementedException (string.Format ("{0} is marked as configurable, but has not implemented LaunchConfiguration", this.GetType ()));
 				
 			return false;
-		}
-
-		public virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois, CancellationToken token)
-		{
-			foreach (var rect in rois)
-				Render (src, dst, rect, token);
-		}
-
-		protected unsafe virtual void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi, CancellationToken token)
-		{
-			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
-			int src_width = src.Width;
-			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
-			int dst_width = dst.Width;
-
-			int height = src.Height;
-			int count = 0;
-			
-			Parallel.For (0, PintaCore.System.RenderThreads, y => {
-				while (true) {
-					if (token.IsCancellationRequested)
-						return;
-
-					int index = Interlocked.Increment (ref count);
-
-					if (index >= height)
-						return;
-
-					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, index);
-					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, index);
-					Render (srcPtr, dstPtr, roi.Width);
-				}
-			});
-		}
-
-		protected unsafe virtual void Render (ColorBgra* src, ColorBgra* dst, int length, CancellationToken token)
-		{
-			while (length > 0) {
-				*dst = Render (*src);
-				++dst;
-				++src;
-				--length;
-			}
 		}
 
 		#region Overrideable Render Methods

@@ -32,8 +32,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Pinta.Core
 {
@@ -72,9 +70,7 @@ namespace Pinta.Core
 		int updated_y1;
 		int updated_x2;
 		int updated_y2;
-
-		CancellationTokenSource token_source = new CancellationTokenSource ();
-
+		
 		internal AsyncEffectRenderer (Settings settings)
 		{
 			if (settings.ThreadCount < 1)
@@ -148,19 +144,17 @@ namespace Pinta.Core
 			// If a render is already in progress, then cancel it,
 			// and start a new render.
 			if (IsRendering) {
-				token_source.Cancel ();
 				cancel_render_flag = true;
 				restart_render_flag = true;
 				return;
 			}
 			
-			StartRender2 ();
+			StartRender ();
 		}
 		
 		internal void Cancel ()
 		{
 			Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-			token_source.Cancel ();
 			cancel_render_flag = true;
 			restart_render_flag = false;			
 			
@@ -178,33 +172,6 @@ namespace Pinta.Core
 				GLib.Source.Remove (timer_tick_id);
 		}
 		
-		void StartRender2 ()
-		{
-			is_rendering = true;
-			cancel_render_flag = false;
-			restart_render_flag = false;
-			is_updated = false;
-
-			Stopwatch sw = new Stopwatch ();
-			sw.Start ();
-			
-			token_source = new CancellationTokenSource ();
-			var bounds = source_surface.GetBounds ();
-			dest_surface.Flush ();
-			TaskFactory tf = new TaskFactory ();
-			tf.StartNew (() => {
-				effect.Render (source_surface, dest_surface, new[] { bounds }, token_source.Token);
-				dest_surface.MarkDirty (bounds.ToCairoRectangle ());
-				Gtk.Application.Invoke ((o, e) => HandleRenderCompletion ());
-				sw.Stop ();
-				Console.WriteLine ("new: {0}ms", sw.ElapsedMilliseconds);
-			});
-
-			// Start timer used to periodically fire update events on the UI thread.
-			timer_tick_id = GLib.Timeout.Add ((uint)settings.UpdateMillis, HandleTimerTick2);			
-
-		}
-
 		void StartRender ()
 		{
 			is_rendering = true;			
@@ -223,44 +190,27 @@ namespace Pinta.Core
 			
 			// Copy the current render id.
 			int renderId = render_id;
-
-			Stopwatch sw = new Stopwatch ();
-			sw.Start ();
-			CancellationTokenSource token_source = new CancellationTokenSource ();
-
-			var bounds = source_surface.GetBounds ();
-			dest_surface.Flush ();
-			effect.Render (source_surface, dest_surface, new[] { bounds }, token_source.Token);
-			dest_surface.MarkDirty (bounds.ToCairoRectangle ());
-			Gtk.Application.Invoke ((o, e) => HandleRenderCompletion ());
-			sw.Stop ();
-			Console.WriteLine ("new: {0}ms", sw.ElapsedMilliseconds);
-
-				Stopwatch sw2 = new Stopwatch ();
-				sw2.Start ();
-
+			
 			// Start slave render threads.
 			int threadCount = settings.ThreadCount;
 			var slaves = new Thread[threadCount - 1];
 			for (int threadId = 1; threadId < threadCount; threadId++)
-				slaves[threadId - 1] = StartSlaveThread (renderId, threadId);
-
+				slaves[threadId - 1] = StartSlaveThread (renderId, threadId);			
+			
 			// Start the master render thread.
 			var master = new Thread (() => {
+				
 				// Do part of the rendering on the master thread.
 				Render (renderId, 0);
-
+				
 				// Wait for slave threads to complete.
 				foreach (var slave in slaves)
 					slave.Join ();
-
+				
 				// Change back to the UI thread to notify of completion.
-				Gtk.Application.Invoke ((o, e) => HandleRenderCompletion ());
-				sw2.Stop ();
-				Console.WriteLine ("ols: {0}ms", sw2.ElapsedMilliseconds);
-
+				Gtk.Application.Invoke ((o,e) => HandleRenderCompletion ());
 			});
-
+			
 			master.Priority = settings.ThreadPriority;
 			master.Start ();
 			
@@ -362,7 +312,7 @@ namespace Pinta.Core
 			return (int)(Math.Ceiling((float)render_bounds.Width / (float)settings.TileWidth)
                                 * Math.Ceiling((float)render_bounds.Height / (float)settings.TileHeight));
 		}
-
+		
 		// Called on the UI thread.
 		bool HandleTimerTick ()
 		{			
@@ -381,31 +331,7 @@ namespace Pinta.Core
 			    	                        updated_y1,
 				    	                    updated_x2 - updated_x1,
 				        	                updated_y2 - updated_y1);
-
 			}
-			
-			if (IsRendering && !cancel_render_flag)
-				OnUpdate (Progress, bounds);
-			
-			return true;
-		}
-
-		// Called on the UI thread.
-		bool HandleTimerTick2 ()
-		{			
-			Debug.WriteLine (DateTime.Now.ToString("HH:mm:ss:ffff") + " Timer tick.");
-			
-			Gdk.Rectangle bounds;
-			
-			//lock (updated_lock) {
-				
-			//        //if (!is_updated)
-			//        //        return true;
-			
-			//        is_updated = false;
-
-				bounds = source_surface.GetBounds ();
-			//}
 			
 			if (IsRendering && !cancel_render_flag)
 				OnUpdate (Progress, bounds);
@@ -427,7 +353,7 @@ namespace Pinta.Core
 			OnCompletion (cancel_render_flag, exceptions);
 			
 			if (restart_render_flag)
-				StartRender2 ();
+				StartRender ();
 			else
 				is_rendering = false;
 		}

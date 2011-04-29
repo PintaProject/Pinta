@@ -12,8 +12,6 @@ using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
 using Mono.Unix;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace Pinta.Effects
 {
@@ -62,7 +60,7 @@ namespace Pinta.Effects
 			return weights;
 		}
 
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois, CancellationToken token)
+		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			if (Data.Radius == 0) {
 				// Copy src to dest

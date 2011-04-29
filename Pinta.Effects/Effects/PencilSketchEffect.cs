@@ -61,12 +61,12 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			bacAdjustment.Data.Brightness = Data.ColorRange;
+			bacAdjustment.Data.Brightness = -Data.ColorRange;
 			bacAdjustment.Data.Contrast = -Data.ColorRange;
 			bacAdjustment.Render (src, dest, rois);
 
 			blurEffect.Data.Radius = Data.PencilTipSize;
-			blurEffect.Render (dest, dest, rois);
+			blurEffect.Render (src, dest, rois);
 
 			invertEffect.Render (dest, dest, rois);
 			desaturateOp.Apply (dest, dest, rois);
@@ -75,7 +75,7 @@ namespace Pinta.Effects
 			int dst_width = dest.Width;
 			ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
 			int src_width = src.Width;
-
+		
 			foreach (Gdk.Rectangle roi in rois) {
 				for (int y = roi.Top; y < roi.Bottom; ++y) {
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_dataptr, src_width, roi.X, y);
