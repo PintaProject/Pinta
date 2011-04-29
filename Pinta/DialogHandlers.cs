@@ -70,6 +70,7 @@ namespace Pinta
 
 			// Help
 			action_handlers.Add (new AboutDialogAction ());
+			action_handlers.Add (new ExtensionManagerAction ());
 
 			// Initialize each action handler
 			foreach (var action in action_handlers)

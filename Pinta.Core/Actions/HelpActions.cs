@@ -34,6 +34,7 @@ namespace Pinta.Core
 {
 	public class HelpActions
 	{
+		public Gtk.Action ExtensionManager { get; private set; }
 		public Gtk.Action Website { get; private set; }
 		public Gtk.Action Bugs { get; private set; }
 		public Gtk.Action Translate { get; private set; }
@@ -45,8 +46,10 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Bug.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Bug.png")));
 			fact.Add ("Menu.Help.Website.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Website.png")));
 			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
+			fact.Add ("Menu.Help.Extensions.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Extensions.png")));
 			fact.AddDefault ();
-			
+
+			ExtensionManager = new Gtk.Action ("ExtensionManager", Catalog.GetString ("Extension Manager"), null, "Menu.Help.Extensions.png");
 			Website = new Gtk.Action ("Website", Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
 			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
 			Translate = new Gtk.Action ("Translate", Catalog.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
@@ -56,6 +59,7 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
+			menu.Append (ExtensionManager.CreateMenuItem ());
 			menu.Append (Website.CreateMenuItem ());
 			menu.Append (Bugs.CreateMenuItem ());
 			menu.Append (Translate.CreateMenuItem ());

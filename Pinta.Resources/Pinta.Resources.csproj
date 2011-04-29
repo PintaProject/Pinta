@@ -484,6 +484,9 @@
     <EmbeddedResource Include="Resources\Pinta-32.png">
       <LogicalName>Pinta-32.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.Help.Extensions.png">
+      <LogicalName>Menu.Help.Extensions.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

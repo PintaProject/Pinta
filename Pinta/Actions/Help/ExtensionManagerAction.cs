@@ -32,29 +32,27 @@ using Mono.Addins.Gui;
 
 namespace Pinta.Actions
 {
-	class AboutDialogAction : IActionHandler
+	class ExtensionManagerAction : IActionHandler
 	{
 		#region IActionHandler Members
 		public void Initialize ()
 		{
-			PintaCore.Actions.Help.About.Activated += Activated;
+			PintaCore.Actions.Help.ExtensionManager.Activated += Activated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.Help.About.Activated -= Activated;
+			PintaCore.Actions.Help.ExtensionManager.Activated -= Activated;
 		}
 		#endregion
 
 		private void Activated (object sender, EventArgs e)
 		{
-			AboutDialog dlg = new AboutDialog ();
+			AddinManagerWindow.AllowInstall = false;
 
-			try {
-				dlg.Run ();
-			} finally {
-				dlg.Destroy ();
-			}
+			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
+
+			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
 		}
 	}
 }

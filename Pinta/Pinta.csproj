@@ -124,6 +124,7 @@
     <Compile Include="Actions\File\NewScreenshotAction.cs" />
     <Compile Include="Actions\File\NewDocumentAction.cs" />
     <Compile Include="Actions\Help\AboutDialogAction.cs" />
+    <Compile Include="Actions\Help\ExtensionManagerAction.cs" />
     <Compile Include="Actions\IActionHandler.cs" />
     <Compile Include="Actions\Image\ResizeCanvasAction.cs" />
     <Compile Include="Actions\Image\ResizeImageAction.cs" />
