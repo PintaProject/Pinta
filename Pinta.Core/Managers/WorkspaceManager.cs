@@ -42,6 +42,12 @@ namespace Pinta.Core
 		{
 			OpenDocuments = new List<Document> ();
 		}
+
+		public int ActiveDocumentIndex {
+			get {
+				return active_document_index;
+			}
+		}
 		
 		public Document ActiveDocument {
 			get {

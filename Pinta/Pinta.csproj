@@ -184,6 +184,7 @@
     <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="Pads\OpenImagesPad.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
