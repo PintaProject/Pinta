@@ -47,6 +47,9 @@ namespace Pinta.Core
 		
 		public override void Undo ()
 		{
+			// maintain the current scaling setting after the operation
+			double scale = PintaCore.Workspace.Scale;
+
 			Size swap = PintaCore.Workspace.ImageSize;
 
 			PintaCore.Workspace.ImageSize = old_size;
@@ -70,10 +73,15 @@ namespace Pinta.Core
 			}
 			
 			PintaCore.Workspace.Invalidate ();
+
+			PintaCore.Workspace.Scale = scale;
 		}
 
 		public override void Redo ()
 		{
+			// maintain the current scaling setting after the operation
+			double scale = PintaCore.Workspace.Scale;
+
 			Size swap = PintaCore.Workspace.ImageSize;
 
 			PintaCore.Workspace.ImageSize = old_size;
@@ -85,6 +93,8 @@ namespace Pinta.Core
 
 			PintaCore.Layers.ResetSelectionPath ();
 			PintaCore.Workspace.Invalidate ();
+
+			PintaCore.Workspace.Scale = scale;
 		}
 
 		public override void Dispose ()
