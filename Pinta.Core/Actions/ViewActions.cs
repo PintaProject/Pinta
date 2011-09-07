@@ -73,8 +73,8 @@ namespace Pinta.Core
 			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
 			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
 
-			ZoomCollection = new string[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window" };
-			ZoomComboBox = new ToolBarComboBox (75, 11, true, ZoomCollection);
+			ZoomCollection = new string[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "175%", "150%", "125%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window" };
+			ZoomComboBox = new ToolBarComboBox (75, DefaultZoomIndex(), true, ZoomCollection);
 
 			// Make sure these are the same group so only one will be selected at a time
 			Inches.Group = Pixels.Group;
@@ -212,7 +212,7 @@ namespace Pinta.Core
 		#region Action Handlers
 		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 		{
-			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 11;
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = DefaultZoomIndex();
 		}
 
 		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
@@ -233,5 +233,13 @@ namespace Pinta.Core
 			PintaCore.Workspace.ActiveDocument.Workspace.ZoomIn ();
 		}
 		#endregion
+
+		/// <summary>
+		/// Returns the index in the ZoomCollection of the default zoom level
+		/// </summary>
+		private int DefaultZoomIndex()
+		{
+			return Array.IndexOf(ZoomCollection, "100%");
+		}
 	}
 }
