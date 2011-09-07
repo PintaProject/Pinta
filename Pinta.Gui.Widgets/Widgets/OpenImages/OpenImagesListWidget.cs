@@ -35,6 +35,11 @@ namespace Pinta.Gui.Widgets
 		private TreeView tree;
 		private ListStore store;
 
+		private CellRendererPixbuf file_close_cell;
+		private TreeViewColumn file_name_column;
+
+		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon (Stock.Close);
+
 		public OpenImagesListWidget ()
 		{
 			CanFocus = false;
@@ -47,15 +52,20 @@ namespace Pinta.Gui.Widgets
 			tree.Selection.Mode = SelectionMode.Single;
 			tree.Selection.SelectFunction = HandleDocumentSelected;
 
-			TreeViewColumn file_name_column = new TreeViewColumn ();
+			file_name_column = new TreeViewColumn ();
 			CellRendererText file_name_cell = new CellRendererText ();
 			file_name_column.PackStart (file_name_cell, true);
 			file_name_column.AddAttribute (file_name_cell, "text", 0);
 
-			tree.AppendColumn(file_name_column);
+			file_close_cell = new CellRendererPixbuf ();
+			file_name_column.PackStart (file_close_cell, false);
+			file_name_column.AddAttribute (file_close_cell, "pixbuf", 1);
 
-			store = new ListStore (typeof (string));
+			tree.AppendColumn (file_name_column);
+
+			store = new ListStore (typeof (string), typeof (Gdk.Pixbuf));
 			tree.Model = store;
+			tree.ButtonPressEvent += HandleTreeButtonPressEvent;
 
 			Add (tree);
 			ShowAll ();
@@ -64,6 +74,29 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Workspace.DocumentClosed += HandleDocumentOpenedOrClosed;
 			PintaCore.Workspace.DocumentCreated += HandleDocumentOpenedOrClosed;
 			PintaCore.Workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
+		}
+
+		/// <summary>
+		/// Attempt to close the selected document if the close button is clicked
+		/// </summary>
+		[GLib.ConnectBefore]
+		void HandleTreeButtonPressEvent (object o, ButtonPressEventArgs args)
+		{
+			double click_x = args.Event.X;
+			double click_y = args.Event.Y;
+
+			int start_pos, width;
+			file_name_column.CellGetPosition (file_close_cell, out start_pos, out width);
+
+			// if the close button was clicked, find the row that was clicked and close that document
+			if (start_pos <= click_x && start_pos + width > click_x)
+			{
+				TreePath path;
+				tree.GetPathAtPos ((int)click_x, (int)click_y, out path);
+
+				PintaCore.Workspace.SetActiveDocument (path.Indices[0]);
+				PintaCore.Actions.File.Close.Activate ();
+			}
 		}
 
 		/// <summary>
@@ -92,7 +125,7 @@ namespace Pinta.Gui.Widgets
 
 			foreach (Document doc in PintaCore.Workspace.OpenDocuments)
 			{
-				store.AppendValues (doc.Filename);
+				store.AppendValues (doc.Filename, close_icon);
 			}
 		}
 
