@@ -158,6 +158,7 @@
               <widget class="Gtk.SpinButton" id="heightSpinner">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
+                <property name="Lower">1</property>
                 <property name="Upper">10000</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
@@ -272,6 +273,7 @@
               <widget class="Gtk.SpinButton" id="widthSpinner">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
+                <property name="Lower">1</property>
                 <property name="Upper">10000</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
