@@ -53,7 +53,7 @@ namespace Pinta.Core
 			RenderThreads = Environment.ProcessorCount;
 			Fonts = new FontManager ();
 
-			last_dialog_directory = System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures);
+			last_dialog_directory = DefaultDialogDirectory;
 
 			recent_data = new RecentData ();
 			recent_data.AppName = "Pinta";
@@ -74,10 +74,13 @@ namespace Pinta.Core
 		}
 
 		#region Public Properties
-		// TODO: Store in settings
 		public string LastDialogDirectory {
 			get { return last_dialog_directory; }
 			set { last_dialog_directory = value; }
+		}
+
+		public string DefaultDialogDirectory {
+			get { return System.Environment.GetFolderPath (Environment.SpecialFolder.MyPictures); }
 		}
 
 		public RecentData RecentData { get { return recent_data; } }

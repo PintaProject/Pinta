@@ -247,11 +247,15 @@ namespace Pinta
 		#endregion
 
 		#region User Settings
+		private const string LastDialogDirSettingKey = "last-dialog-directory";
+
 		private void LoadUserSettings ()
 		{
 			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-shown", false);
 			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
 			PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
+			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
+			                                                                      PintaCore.System.DefaultDialogDirectory);
 
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 
@@ -287,6 +291,7 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
 			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
+			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
 
 			PintaCore.Settings.SaveSettings ();
 		}
