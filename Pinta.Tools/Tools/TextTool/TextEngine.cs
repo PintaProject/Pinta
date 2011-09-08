@@ -385,14 +385,15 @@ namespace Pinta.Tools
 
 			foreach (string s in lines) {
 				// It's past this line, move along
-				if (current + s.Length < index) {
-					current += s.Length + 1;
+				if (current + StringToByteSize(s) < index) {
+					current += StringToByteSize(s) + 1;
 					line++;
 					continue;
 				}
 
 				// It's in this line
 				offset = index - current;
+				offset = ByteOffsetToCharacterOffset(lines[line], offset);
 				return new Position (line, offset);
 			}
 
@@ -405,13 +406,28 @@ namespace Pinta.Tools
 			int index = 0;
 
 			for (int i = 0; i < p.Line; i++)
-				index += lines[i].Length + 1;
-
-			index += p.Offset;
-
+				index += StringToByteSize(lines[i]) + 1;
+			
+			index += StringToByteSize(lines[p.Line].Substring(0, p.Offset));
 			return index;
 		}
-
+		
+		private int StringToByteSize(string s)
+		{
+			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+    			return (enc.GetBytes(s)).Length;
+		}
+		
+		private int ByteOffsetToCharacterOffset(string s, int offset)
+		{
+			int i = 0;
+			for(i = 0; i < offset; i++)
+			{
+				if(StringToByteSize(s.Substring(0, i)) >= offset) break;
+			}
+    			return i;
+		}
+		
 		private void Recalculate ()
 		{
 			string markup = ToString ();
