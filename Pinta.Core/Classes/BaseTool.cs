@@ -33,6 +33,8 @@ using Mono.Addins;
 
 namespace Pinta.Core
 {
+	public delegate void MouseHandler (double x, double y, Gdk.ModifierType state);
+
 	[TypeExtensionPoint]
 	public abstract class BaseTool
 	{
@@ -46,6 +48,9 @@ namespace Pinta.Core
 		protected ToolItem tool_sep;
 		protected ToolBarDropDownButton antialiasing_button;
 		protected ToolBarDropDownButton alphablending_button;
+		public event MouseHandler MouseMoved;
+		public event MouseHandler MousePressed;
+		public event MouseHandler MouseReleased;
 
 		protected BaseTool ()
 		{
@@ -80,6 +85,8 @@ namespace Pinta.Core
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			if (MouseMoved != null)
+				MouseMoved (point.X, point.Y, args.Event.State);
 			OnMouseMove (o, args, point);
 		}
 
@@ -96,11 +103,15 @@ namespace Pinta.Core
 
 		public void DoMouseDown (DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			if (MousePressed != null)
+				MousePressed (point.X, point.Y, args.Event.State);
 			OnMouseDown (canvas, args, point);
 		}
 
 		public void DoMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			if (MouseReleased != null)
+				MouseReleased (point.X, point.Y, args.Event.State);
 			OnMouseUp (canvas, args, point);
 		}
 

@@ -50,5 +50,6 @@ SOURCES =  \
 	Brushes/GridBrush.cs \
 	Brushes/SquaresBrush.cs \
 	Brushes/PlainBrush.cs \
-	Brushes/CircleBrush.cs 
+	Brushes/CircleBrush.cs \
+	ToolControl/ToolControl.cs
 
