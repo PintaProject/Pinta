@@ -24,7 +24,11 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 - [Fugue icon set](http://pinvoke.com/)
 Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
+##Getting help/contributing:
 
+- You can get technical help on the [Pinta Google Group](http://groups.google.com/group/pinta)
+- You can report bugs on [Launchpad.net](https://bugs.launchpad.net/pinta/+filebug)
+- You can fork the project on [Github](https://github.com/PintaProject/Pinta)
 
 ##Linux Build and Installation Instructions:
 
