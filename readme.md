@@ -29,33 +29,47 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 - You can get technical help on the [Pinta Google Group](http://groups.google.com/group/pinta)
 - You can report bugs on [Launchpad.net](https://bugs.launchpad.net/pinta/+filebug)
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta)
+- You can get help in #pinta on irc.gnome.org.
+
 
 ##Linux Build and Installation Instructions:
 
-Building Pinta requires the follow software:
+Building Pinta requires the following software:
+
 `mono mono-xbuild automake autoconf libmono-cairo2.0-cil gtk-sharp2`
 
 Pinta only supports version 2.8 or higher of Mono.
 
 To build Pinta, run:
 `./autogen.sh`
+
 `make`
+
 `sudo make install`
 
 or if building from a tarball, run:
+
 `./configure`
+
 `make`
+
 `sudo make install`
 
 To use different installation directory than the default (/usr), run this instead:
+
 `./autogen.sh --prefix=<install directory>`
 
+
 To uninstall Pinta, run:
+
 `sudo make uninstall`
 
 To clean all files created during the build process, run:
+
 `make cleanall`
-*Note* This will require you to rerun autogen.sh in order to run more make commands.
+
+**Note** This will require you to rerun `autogen.sh` in order to run more `make` commands.
 
 For a list of more make commands, run:
+
 `make help`
