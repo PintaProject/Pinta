@@ -51,16 +51,20 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, DocumentCancelEventArgs e)
 		{
-			// Document hasn't changed, don't re-save it
-			if (!e.Document.IsDirty)
-				return;
-
-			if (e.Document.HasFile)
-				// If the document already has a filename, just re-save it
-				e.Cancel = !SaveFile (e.Document, null, null);
-			else
-				// The document has never been saved before
-				e.Cancel = !SaveFileAs (e.Document);
+            // Prompt for a new filename for "Save As", or a document that hasn't been saved before
+            if (e.SaveAs || !e.Document.HasFile)
+            {
+                e.Cancel = !SaveFileAs (e.Document);
+            }
+            else
+            {
+                // Document hasn't changed, don't re-save it
+                if (!e.Document.IsDirty)
+                    return;
+                
+                // If the document already has a filename, just re-save it
+                e.Cancel = !SaveFile (e.Document, null, null);
+            }			
 		}
 
 		// This is actually both for "Save As" and saving a file that never
