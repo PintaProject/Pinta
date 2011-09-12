@@ -41,10 +41,13 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
 		bool handler_active = false;
+		private Gdk.Cursor cursor_hand;
+		bool is_hand_cursor = false;
 
 		public SelectTool ()
 		{
 			CreateHandler ();
+			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
 		}
 
 		#region ToolBar
@@ -85,6 +88,7 @@ namespace Pinta.Tools
 				hist.Dispose ();
 				hist = null;
 				handler_active = false;
+				Document doc = PintaCore.Workspace.ActiveDocument;
 				doc.ToolLayer.Clear ();
 			} else {
 				if (hist != null)
@@ -96,11 +100,23 @@ namespace Pinta.Tools
 
 			is_drawing = false;
 		}
-		
+
+		protected override void OnDeactivated ()
+		{
+			base.OnDeactivated ();
+			handler_active = false;
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				Document doc = PintaCore.Workspace.ActiveDocument;
+				doc.ToolLayer.Clear ();
+			}
+		}
+
 		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			if (!is_drawing)
+			if (!is_drawing) {
+				CheckHandlerCursor (point.X, point.Y);
 				return;
+			}
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
@@ -131,7 +147,6 @@ namespace Pinta.Tools
 			doc.ShowSelection = true;
 			doc.ToolLayer.Hidden = false;
 			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, shape_end, (state & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), doc.SelectionLayer);
-			doc.ToolLayer.Clear ();
 			DrawHandler (doc.ToolLayer);
 			doc.Workspace.Invalidate ();
 
@@ -189,9 +204,28 @@ namespace Pinta.Tools
 
 		public void DrawHandler (Layer layer)
 		{
+			layer.Clear ();
 			foreach (ToolControl ct in controls)
 				ct.Render (layer);
 		}
+
+		public void CheckHandlerCursor (double x, double y)
+		{
+			foreach (ToolControl ct in controls) {
+				if (ct.IsInside (x, y)) {
+					if (!is_hand_cursor) {
+						SetCursor (cursor_hand);
+						is_hand_cursor = true;
+					}
+					return;
+				}
+			}
+			if (is_hand_cursor) {
+				SetCursor (DefaultCursor);
+				is_hand_cursor = false;
+			}
+		}
+
 		#endregion
 	}
 }

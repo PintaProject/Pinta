@@ -54,7 +54,7 @@ namespace Pinta.Tools
 			return false;
 		}
 
-		protected bool IsInside (double x, double y)
+		public bool IsInside (double x, double y)
 		{
 			return (Math.Abs (x - Position.X) <= tolerance) && (Math.Abs (y - Position.Y) <= tolerance);
 		}
