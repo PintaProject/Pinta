@@ -7,6 +7,8 @@
 
 using System;
 using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
@@ -634,5 +636,75 @@ namespace Pinta.Core
             0x10204081, 0x10204081, 36, // 254
             0x80808081, 0x00000000, 39  // 255
         };
+
+		//enumerable/enumerator that given a range, will give an enumerator.
+		//The reason to create it is to make easy accessible Linq (or ParallelLinq)
+		//using constructions like: foreach (var x in new RangeEnumerable(3, 6)) { ... } where x will take values {3.4.5}
+		public class RangeEnumerable : IEnumerable<int>
+		{
+			private readonly int _startValue;
+			private readonly int _endValue;
+	
+			public RangeEnumerable(int startValue, int endValue)
+			{
+				_startValue = startValue;
+				_endValue = endValue;
+			}
+	
+			public IEnumerator<int> GetEnumerator()
+			{
+				return new RangeEnumerator(_startValue, _endValue);
+			}
+	
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
+		}
+	
+		public class RangeEnumerator : IEnumerator<int>
+		{
+			private int _startValue;
+			private int _endValue;
+			private int _current;
+	
+			public RangeEnumerator(int startValue, int endValue)
+			{
+				Setup(startValue, endValue);
+			}
+	
+			private void Setup(int startValue, int endValue)
+			{
+				_startValue = startValue;
+				_endValue = endValue;
+				_current = startValue;
+			}
+	
+			public void Dispose()
+			{
+				_current = _startValue;
+			}
+	
+			public bool MoveNext()
+			{
+				_current++;
+				return _current < _endValue;
+			}
+	
+			public void Reset()
+			{
+				_current = _startValue;
+			}
+	
+			public int Current
+			{
+				get {return _current;}
+			}
+	
+			object IEnumerator.Current
+			{
+				get {return Current;}
+			}
+		}
 	}
 }

@@ -6,7 +6,10 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Cairo;
+using Rectangle = Gdk.Rectangle;
 
 namespace Pinta.Core
 {
@@ -96,8 +99,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public abstract double ComputeUnboundedLerp (int x, int y);
-		public abstract double BoundLerp (double t);
+		public abstract byte ComputeByteLerp(int x, int y);
 
 		public virtual void AfterRender ()
 		{
@@ -156,56 +158,66 @@ namespace Pinta.Core
 						}
 					}
 				} else {
-					for (int y = rect.Top; y < rect.Bottom; ++y) {
-						ColorBgra* pixelPtr = surface.GetPointAddress(rect.Left, y);
-						
-						if (this.alphaOnly && this.alphaBlending) {
-							for (int x = rect.Left; x < rect.Right; ++x) {
-								double lerpUnbounded = ComputeUnboundedLerp (x, y);
-								double lerpBounded = BoundLerp (lerpUnbounded);
-								byte lerpByte = (byte)(lerpBounded * 255f);
-								byte lerpAlpha = this.lerpAlphas[lerpByte];
-								byte resultAlpha = Utility.FastScaleByteByByte (pixelPtr->A, lerpAlpha);
-								pixelPtr->A = resultAlpha;
-								++pixelPtr;
-							}
-						} else if (this.alphaOnly && !this.alphaBlending) {
-							for (int x = rect.Left; x < rect.Right; ++x) {
-								double lerpUnbounded = ComputeUnboundedLerp (x, y);
-								double lerpBounded = BoundLerp (lerpUnbounded);
-								byte lerpByte = (byte)(lerpBounded * 255f);
-								byte lerpAlpha = this.lerpAlphas[lerpByte];
-								pixelPtr->A = lerpAlpha;
-								++pixelPtr;
-							}
-						} else if (!this.alphaOnly && (this.alphaBlending && (startAlpha != 255 || endAlpha != 255))) {
-							// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
-							for (int x = rect.Left; x < rect.Right; ++x) {
-								double lerpUnbounded = ComputeUnboundedLerp (x, y);
-								double lerpBounded = BoundLerp (lerpUnbounded);
-								byte lerpByte = (byte)(lerpBounded * 255f);
-								ColorBgra lerpColor = this.lerpColors[lerpByte];
-								ColorBgra result = this.normalBlendOp.Apply (*pixelPtr, lerpColor);
-								*pixelPtr = result;
-								++pixelPtr;
-							}
-						//if (!this.alphaOnly && !this.alphaBlending) // or sC.A == 255 && eC.A == 255
-						} else {
-							for (int x = rect.Left; x < rect.Right; ++x) {
-								double lerpUnbounded = ComputeUnboundedLerp (x, y);
-								double lerpBounded = BoundLerp (lerpUnbounded);
-								byte lerpByte = (byte)(lerpBounded * 255f);
-								ColorBgra lerpColor = this.lerpColors[lerpByte];
-								*pixelPtr = lerpColor;
-								++pixelPtr;
-							}
-						}
-					}
+					var mainrect = rect;
+					var list = new List<int>(new Utility.RangeEnumerable(rect.Top, rect.Bottom));
+					Parallel.ForEach(list,
+						(y) => ProcessGradientLine(startAlpha, endAlpha, y, mainrect, surface));
 				}
 			}
 			
 			surface.MarkDirty ();
 			AfterRender ();
+		}
+
+		private unsafe bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, ImageSurface surface)
+		{
+			var pixelPtr = surface.GetPointAddress(rect.Left, y);
+			var right = rect.Right;
+			if (alphaOnly && alphaBlending)
+			{
+				for (var x = rect.Left; x < right; ++x)
+				{
+					var lerpByte = ComputeByteLerp(x, y);
+					var lerpAlpha = lerpAlphas[lerpByte];
+					var resultAlpha = Utility.FastScaleByteByByte(pixelPtr->A, lerpAlpha);
+					pixelPtr->A = resultAlpha;
+					++pixelPtr;
+				}
+			}
+			else if (alphaOnly && !alphaBlending)
+			{
+				for (var x = rect.Left; x < right; ++x)
+				{
+					var lerpByte = ComputeByteLerp(x, y);
+					var lerpAlpha = lerpAlphas[lerpByte];
+					pixelPtr->A = lerpAlpha;
+					++pixelPtr;
+				}
+			}
+			else if (!alphaOnly && (alphaBlending && (startAlpha != 255 || endAlpha != 255)))
+			{
+				// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
+				for (var x = rect.Left; x < right; ++x)
+				{
+					var lerpByte = ComputeByteLerp(x, y);
+					var lerpColor = lerpColors[lerpByte];
+					var result = normalBlendOp.Apply(*pixelPtr, lerpColor);
+					*pixelPtr = result;
+					++pixelPtr;
+				}
+				//if (!this.alphaOnly && !this.alphaBlending) // or sC.A == 255 && eC.A == 255
+			}
+			else
+			{
+				for (var x = rect.Left; x < right; ++x)
+				{
+					var lerpByte = ComputeByteLerp(x, y);
+					var lerpColor = lerpColors[lerpByte];
+					*pixelPtr = lerpColor;
+					++pixelPtr;
+				}
+			}
+			return true;
 		}
 
 		protected internal GradientRenderer (bool alphaOnly, BinaryPixelOp normalBlendOp)
