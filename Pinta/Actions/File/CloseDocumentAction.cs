@@ -49,6 +49,9 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
+			// Commit any pending changes
+			PintaCore.Tools.Commit ();
+
 			// If it's not dirty, just close it
 			if (!PintaCore.Workspace.ActiveDocument.IsDirty) {
 				PintaCore.Workspace.CloseActiveDocument ();
