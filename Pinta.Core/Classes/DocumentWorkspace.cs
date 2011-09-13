@@ -196,7 +196,7 @@ namespace Pinta.Core
 		{
 			double zoom;
 			
-			if (!double.TryParse (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText.Trim ('%'), out zoom))
+			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText, out zoom))
 				zoom = Scale * 100;
 			
 			zoom = Math.Min (zoom, 3600);

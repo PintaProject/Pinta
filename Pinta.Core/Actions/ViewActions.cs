@@ -167,7 +167,7 @@ namespace Pinta.Core
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
 			double percent;
 
-			if (!double.TryParse (text, out percent)) {
+			if (!TryParsePercent (text, out percent)) {
 				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_zoom;
 				return;
 			}
@@ -176,6 +176,14 @@ namespace Pinta.Core
 				PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = 0;
 		}
 		#endregion
+
+		/// <summary>
+		/// Converts the string representation of a percent (with or without a '%' sign) to a numeric value
+		/// </summary>
+		public static bool TryParsePercent (string text, out double percent)
+		{
+			return double.TryParse (text.Trim ('%'), out percent);
+		}
 
 		public void SuspendZoomUpdate ()
 		{
@@ -196,11 +204,9 @@ namespace Pinta.Core
 				return;
 			}
 
-			text = text.Trim ('%');
-
 			double percent;
 
-			if (!double.TryParse (text, out percent))
+			if (!TryParsePercent (text, out percent))
 				return;
 
 			percent = Math.Min (percent, 3600);
