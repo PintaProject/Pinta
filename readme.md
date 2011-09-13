@@ -30,6 +30,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 - You can report bugs on [Launchpad.net](https://bugs.launchpad.net/pinta/+filebug)
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta)
 - You can get help in #pinta on irc.gnome.org.
+- For details on patching, take a look at `patch-guidelines.md` in the repo.
 
 
 ##Linux Build and Installation Instructions:
