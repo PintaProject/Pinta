@@ -51,16 +51,20 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, DocumentCancelEventArgs e)
 		{
-			// Document hasn't changed, don't re-save it
-			if (!e.Document.IsDirty)
-				return;
+			// Prompt for a new filename for "Save As", or a document that hasn't been saved before
+			if (e.SaveAs || !e.Document.HasFile)
+			{
+				e.Cancel = !SaveFileAs (e.Document);
+			}
+			else
+			{
+				// Document hasn't changed, don't re-save it
+				if (!e.Document.IsDirty)
+					return;
 
-			if (e.Document.HasFile)
 				// If the document already has a filename, just re-save it
 				e.Cancel = !SaveFile (e.Document, null, null);
-			else
-				// The document has never been saved before
-				e.Cancel = !SaveFileAs (e.Document);
+			}
 		}
 
 		// This is actually both for "Save As" and saving a file that never
@@ -172,6 +176,18 @@ namespace Pinta.Actions
 
 			if (format == null || format.IsReadOnly ()) {
 				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
+				md.Title = Catalog.GetString ("Error");
+
+				md.Run ();
+				md.Destroy ();
+				return false;
+			}
+
+			// If the user tries to save over a read only file, give a more informative error message than "Unhandled Exception"
+			FileInfo file_info = new FileInfo (file);
+			if (file_info.Exists && file_info.IsReadOnly) {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error,
+					ButtonsType.Ok, Catalog.GetString ("Cannot save read only file."));
 				md.Title = Catalog.GetString ("Error");
 
 				md.Run ();

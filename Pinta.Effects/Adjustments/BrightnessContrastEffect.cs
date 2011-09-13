@@ -42,6 +42,15 @@ namespace Pinta.Effects
 		public BrightnessContrastEffect ()
 		{
 			EffectData = new BrightnessContrastData ();
+			EffectData.PropertyChanged += HandleEffectDataPropertyChanged;
+		}
+
+		/// <summary>
+		/// If any of the effect data was changed, we need to recalculate the rgb table before rendering
+		/// </summary>
+		void HandleEffectDataPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			table_calculated = false;
 		}
 		
 		public override bool LaunchConfiguration ()
@@ -137,9 +146,29 @@ namespace Pinta.Effects
 		
 		public class BrightnessContrastData : EffectData
 		{
-			public int Brightness = 0;
-			public int Contrast = 0;
-			
+			private int brightness = 0;
+			private int contrast = 0;
+
+			public int Brightness {
+				get { return brightness; }
+				set {
+					if (value != brightness) {
+						brightness = value;
+						FirePropertyChanged ("Brightness");
+					}
+				}
+			}
+
+			public int Contrast {
+				get { return contrast; }
+				set {
+					if (value != contrast) {
+						contrast = value;
+						FirePropertyChanged ("Contrast");
+					}
+				}
+			}
+
 			[Skip]
 			public override bool IsDefault {
 				get { return Brightness == 0 && Contrast == 0; }
