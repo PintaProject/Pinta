@@ -183,6 +183,18 @@ namespace Pinta.Actions
 				return false;
 			}
 
+			// If the user tries to save over a read only file, give a more informative error message than "Unhandled Exception"
+			FileInfo file_info = new FileInfo (file);
+			if (file_info.Exists && file_info.IsReadOnly) {
+				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error,
+					ButtonsType.Ok, Catalog.GetString ("Cannot save read only file."));
+				md.Title = Catalog.GetString ("Error");
+
+				md.Run ();
+				md.Destroy ();
+				return false;
+			}
+
 			// Commit any pending changes
 			PintaCore.Tools.Commit ();
 

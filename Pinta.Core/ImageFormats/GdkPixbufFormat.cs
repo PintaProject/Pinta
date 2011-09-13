@@ -45,7 +45,7 @@ namespace Pinta.Core
 			Pixbuf bg;
 
 			// Handle any EXIF orientation flags
-			using (var fs = new FileStream (fileName, FileMode.Open))
+			using (var fs = new FileStream (fileName, FileMode.Open, FileAccess.Read))
 				bg = new Pixbuf (fs);
 
 			bg = bg.ApplyEmbeddedOrientation ();
