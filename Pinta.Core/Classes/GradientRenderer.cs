@@ -160,8 +160,8 @@ namespace Pinta.Core
 				} else {
 					var mainrect = rect;
 					var list = new List<int>(new Utility.RangeEnumerable(rect.Top, rect.Bottom));
-					Parallel.ForEach(list,
-						(y) => ProcessGradientLine(startAlpha, endAlpha, y, mainrect, surface));
+					Parallel.ForEach(list.ToArray(),
+						(y) => ProcessGradientLine(startAlpha, endAlpha, y, mainrect, surface, src_data_ptr, src_width));
 				}
 			}
 			
@@ -169,9 +169,9 @@ namespace Pinta.Core
 			AfterRender ();
 		}
 
-		private unsafe bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, ImageSurface surface)
+		private unsafe bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, ImageSurface surface, ColorBgra* src_data_ptr, int src_width)
 		{
-			var pixelPtr = surface.GetPointAddress(rect.Left, y);
+			var pixelPtr = surface.GetPointAddressUnchecked(src_data_ptr, src_width, rect.Left, y);
 			var right = rect.Right;
 			if (alphaOnly && alphaBlending)
 			{
