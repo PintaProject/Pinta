@@ -56,8 +56,8 @@ namespace Pinta.Core
 			fact.AddDefault ();
 			
 			CropToSelection = new Gtk.Action ("CropToSelection", Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize..."), null, "Menu.Image.Resize.png");
-			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Canvas Size..."), null, "Menu.Image.CanvasSize.png");
+			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
+			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
 			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
 			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
 			RotateCW = new Gtk.Action ("RotateCW", Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
