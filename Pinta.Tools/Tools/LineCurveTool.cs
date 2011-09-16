@@ -65,5 +65,21 @@ namespace Pinta.Tools
 			
 			return dirty;
 		}
+
+		/// <summary>
+		/// Forces the line to snap to angles.
+		/// </summary>
+		protected override Rectangle DrawShape (Rectangle r, Layer l, bool shiftkey_pressed)
+		{
+			if (shiftkey_pressed) {
+				PointD dir = new PointD(current_point.X - shape_origin.X, current_point.Y - shape_origin.Y);
+				double theta = Math.Atan2(dir.Y, dir.X);
+				double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
+
+				theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
+				current_point = new PointD((shape_origin.X + len * Math.Cos(theta)), (shape_origin.Y + len * Math.Sin(theta)));
+			}
+			return DrawShape (r, l);
+		}
 	}
 }
