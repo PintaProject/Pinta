@@ -126,8 +126,17 @@ namespace Pinta.Tools
 			ReDraw (args.Event.State);
 		}
 
-		protected void RefreshHandler ()
+		protected void RefreshHandler (Cairo.Rectangle r)
 		{
+			/*controls[0].Position = new PointD (r.X, r.Y);
+			controls[1].Position = new PointD (r.X, r.GetBottom ());
+			controls[2].Position = new PointD (r.GetRight (), r.Y);
+			controls[3].Position = new PointD (r.GetRight (), r.GetBottom ());
+			controls[4].Position = new PointD (r.X, r.Y + (r.Height / 2));
+			controls[5].Position = n(ew PointD (r.X + (r.Width / 2), r.Y);
+			controls[6].Position = new PointD (r.GetRight (), r.Y + (r.Height / 2));
+			controls[7].Position = new PointD (r.X + (r.Width / 2), r.GetBottom ());
+			*/
 			controls[0].Position = new PointD (shape_origin.X, shape_origin.Y);
 			controls[1].Position = new PointD (shape_origin.X, shape_end.Y);
 			controls[2].Position = new PointD (shape_end.X, shape_origin.Y);
@@ -136,17 +145,34 @@ namespace Pinta.Tools
 			controls[5].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
 			controls[6].Position = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
 			controls[7].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
+
 		}
 
 		public void ReDraw (Gdk.ModifierType state)
 		{
-			RefreshHandler ();
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			doc.ShowSelection = true;
 			doc.ToolLayer.Hidden = false;
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, shape_end, (state & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask), doc.SelectionLayer);
+			bool constraint = (state & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+			if (constraint) {
+				double dx = Math.Abs (shape_end.X - shape_origin.X);
+				double dy = Math.Abs (shape_end.Y - shape_origin.Y);
+				if (dx <= dy)
+					if (shape_end.X >= shape_origin.X)
+						shape_end.X = shape_origin.X + dy;
+					else
+						shape_end.X = shape_origin.X - dy;
+				else
+					if (shape_end.Y >= shape_origin.Y)
+						shape_end.Y = shape_origin.Y + dx;
+					else
+						shape_end.Y = shape_origin.Y - dx;
+			}
+			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
+			RefreshHandler (rect);
+			Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
+
 			DrawHandler (doc.ToolLayer);
 			doc.Workspace.Invalidate ();
 
@@ -155,50 +181,97 @@ namespace Pinta.Tools
 
 		protected void CreateHandler ()
 		{
-			controls[0] = new ToolControl ((x, y, a) => {
+			controls[0] = new ToolControl ((x, y, s) => {
 				shape_origin.X = x;
 				shape_origin.Y = y;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
+					else
+						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+				}
+				ReDraw (s);
 			});
-			controls[1] = new ToolControl ((x, y, a) => {
+			controls[1] = new ToolControl ((x, y, s) => {
 				shape_origin.X = x;
 				shape_end.Y = y;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+						shape_origin.X = shape_end.X - shape_end.Y + shape_origin.Y;
+					else
+						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+				}
+				ReDraw (s);
 			});
-			controls[2] = new ToolControl ((x, y, a) => {
+			controls[2] = new ToolControl ((x, y, s) => {
 				shape_end.X = x;
 				shape_origin.Y = y;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
+					else
+						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
+				}
+				ReDraw (s);
 			});
-			controls[3] = new ToolControl ((x, y, a) => {
+			controls[3] = new ToolControl ((x, y, s) => {
 				shape_end.X = x;
 				shape_end.Y = y;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+						shape_end.X = shape_origin.X + shape_end.Y - shape_origin.Y;
+					else
+						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
+				}
+				ReDraw (s);
 			});
-			controls[4] = new ToolControl ((x, y, a) => {
+			controls[4] = new ToolControl ((x, y, s) => {
 				shape_origin.X = x;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					double d = shape_end.X - shape_origin.X;
+					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
+					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+				}
+				ReDraw (s);
 			});
-			controls[5] = new ToolControl ((x, y, a) => {
+			controls[5] = new ToolControl ((x, y, s) => {
 				shape_origin.Y = y;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					double d = shape_end.Y - shape_origin.Y;
+					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
+					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+				}
+				ReDraw (s);
 			});
-			controls[6] = new ToolControl ((x, y, a) => {
+			controls[6] = new ToolControl ((x, y, s) => {
 				shape_end.X = x;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					double d = shape_end.X - shape_origin.X;
+					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
+					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
+				}
+				ReDraw (s);
 			});
-			controls[7] = new ToolControl ((x, y, a) => {
+			controls[7] = new ToolControl ((x, y, s) => {
 				shape_end.Y = y;
-				ReDraw (a);
+				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+					double d = shape_end.Y - shape_origin.Y;
+					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
+					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
+				}
+				ReDraw (s);
 			});
 		}
 
 		public bool HandleResize (double x, double y)
 		{
-			bool res = false;
-			foreach (ToolControl ct in controls)
-				res |= ct.Handle (this, new PointD (x, y ));
-			return res;
+			foreach (ToolControl ct in controls) {
+				if (ct.Handle (this, new PointD (x, y ))) {
+
+					return true;
+				}
+			}
+			return false;
 
 		}
 
