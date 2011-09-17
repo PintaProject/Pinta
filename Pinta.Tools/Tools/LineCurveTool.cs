@@ -40,7 +40,7 @@ namespace Pinta.Tools
 			get { return "Tools.Line.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click to draw with primary color, right click for secondary color."); }
+			get { return Catalog.GetString ("Left click to draw with primary color, right click for secondary color. Hold Shift key to snap to angles."); }
 		}
 		protected override bool ShowStrokeComboBox {
 			get { return false; }
