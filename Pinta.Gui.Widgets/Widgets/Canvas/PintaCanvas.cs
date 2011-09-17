@@ -197,8 +197,8 @@ namespace Pinta.Gui.Widgets
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
-			// Allow the user to zoom in/out with Ctrl-Mousewheel
-			if (evnt.State  == ModifierType.ControlMask) {
+			// Allow the user to zoom in/out with Ctrl-Mousewheel (as long as Shift and Alt are not also pressed)
+			if ((evnt.State & (ModifierType.ControlMask | ModifierType.ShiftMask | ModifierType.Mod1Mask)) == ModifierType.ControlMask) {
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
