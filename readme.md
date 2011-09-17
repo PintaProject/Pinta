@@ -56,7 +56,7 @@ or if building from a tarball, run:
 
 `sudo make install`
 
-To use different installation directory than the default (/usr), run this instead:
+To use different installation directory than the default (/usr/local), run this instead:
 
 `./autogen.sh --prefix=<install directory>`
 
