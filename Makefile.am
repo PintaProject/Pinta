@@ -1,15 +1,23 @@
 BINDIR = $(srcdir)/bin
 
+PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
+
 BINFILES = \
 	$(BINDIR)/Pinta.exe \
 	$(BINDIR)/Pinta.Core.dll \
 	$(BINDIR)/Pinta.Gui.Widgets.dll \
 	$(BINDIR)/Pinta.Resources.dll \
-	$(BINDIR)/System.ComponentModel.Composition.dll \
-	$(BINDIR)/Extensions/Pinta.Effects.dll \
-	$(BINDIR)/Extensions/Pinta.Tools.dll
+	$(BINDIR)/Pinta.Effects.dll \
+	$(BINDIR)/Pinta.Tools.dll
 
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
+
+#magic automake variables
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = $(PINTA_ASSEMBLY_PC)
+
+#end
 
 # target: all - Default target: build
 all: build
@@ -50,7 +58,7 @@ clean: cleanobj cleanbin
 
 # target: distclean - Removes configure files. 
 distclean: clean
-	rm -f Makefile pinta config.status config.cache config.log configure.lineno config.status.lineno
+	rm -f Makefile pinta config.status config.cache config.log configure.lineno config.status.lineno pinta.pc
 
 # target: cleanall - Removes build files. 
 cleanall: distclean
@@ -88,7 +96,7 @@ releasetar: $(BINFILES)
 releasezip: $(BINFILES)
 	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po Tarball System.ComponentModel.Composition xdg \
-	license-mit.txt license-pdn.txt readme.txt todo.txt Pinta.sln Pinta.Install.proj
+EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg \
+	license-mit.txt license-pdn.txt todo.txt Pinta.sln Pinta.Install.proj pinta.pc.in
 
 .PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip

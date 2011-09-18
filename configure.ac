@@ -2,6 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([pinta], [1.1])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
 
+
 AC_PROG_INSTALL
 
 dnl pkg-config
@@ -33,6 +34,7 @@ PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([MONO_CAIRO], [mono-cairo])
 
 AC_CONFIG_FILES([
+pinta.pc
 Makefile
 pinta
 ])

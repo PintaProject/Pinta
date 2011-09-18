@@ -1,0 +1,9 @@
+Name: pinta
+Description: Pinta
+Version: @VERSION@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+
+Libs: -r:@prefix@/lib/pinta/Pinta.exe -r:@prefix@/lib/pinta/Pinta.Core.dll -r:@prefix@/lib/pinta/Pinta.Effects.dll -r:@prefix@/lib/pinta/Pinta.Widgets.dll -r:@prefix@/lib/pinta/Pinta.Resources.dll -r:@prefix@/lib/pinta/Pinta.Tools.dll
