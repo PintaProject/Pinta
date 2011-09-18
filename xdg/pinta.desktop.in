@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Pinta
-Comment=Easily create and edit images
-GenericName=Image Editor
+_Name=Pinta
+_Comment=Easily create and edit images
+_GenericName=Image Editor
 X-GNOME-FullName=Pinta Image Editor
 Exec=pinta
 Icon=pinta
@@ -10,3 +10,4 @@ Terminal=false
 Type=Application
 Categories=Graphics;2DGraphics;RasterGraphics;GTK;
 MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/pjpeg;image/png;image/svg+xml;image/tiff;image/x-bmp;image/x-gray;image/x-icb;image/x-ico;image/x-png;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;image/x-pcx;image/x-targa;image/x-tga;image/openraster;
+Name[en_IN]=pinta.desktop.in

@@ -34,6 +34,7 @@ PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([MONO_CAIRO], [mono-cairo])
 
 AC_CONFIG_FILES([
+xdg/Makefile
 pinta.pc
 Makefile
 pinta
