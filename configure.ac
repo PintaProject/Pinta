@@ -29,12 +29,24 @@ PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
 AC_SUBST(XBUILD)
 AC_SUBST(MONO)
 
+AC_PROG_INTLTOOL([0.35.0], [no-xml])
+GETTEXT_PACKAGE=pinta
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+
+ALL_LINGUAS="ar br ca cs da de el en_GB es eu fi fo fr ga gl he hr hu hy id it ja ko lt nb nl pl pt pt_BR ro ru sk sl sr sv th tr uk vi zh_CN zh_TW"
+AM_GLIB_GNU_GETTEXT
+
+pintalocaledir='${prefix}/${DATADIRNAME}/locale'
+AC_SUBST(pintalocaledir)
+
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([MONO_CAIRO], [mono-cairo])
 
 AC_CONFIG_FILES([
 xdg/Makefile
+po/Makefile.in
 pinta.pc
 Makefile
 pinta
