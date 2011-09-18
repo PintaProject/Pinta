@@ -1574,3 +1574,15 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr ""
+
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr ""
+
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr ""
