@@ -1586,3 +1586,7 @@ msgstr ""
 #: pinta.desktop.in
 msgid "Easily create and edit images"
 msgstr ""
+
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr ""
