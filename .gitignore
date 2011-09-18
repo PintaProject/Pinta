@@ -13,3 +13,5 @@ install-sh
 missing
 obj
 pinta
+pinta.pc
+
