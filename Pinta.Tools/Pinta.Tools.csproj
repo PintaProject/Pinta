@@ -109,6 +109,7 @@
     <Compile Include="Brushes\SquaresBrush.cs" />
     <Compile Include="Brushes\PlainBrush.cs" />
     <Compile Include="Brushes\CircleBrush.cs" />
+    <Compile Include="Tools\ToolControl\ToolControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
@@ -142,4 +143,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Tools\ToolControl\" />
+  </ItemGroup>
 </Project>
