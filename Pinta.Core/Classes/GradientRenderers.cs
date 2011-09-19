@@ -44,76 +44,68 @@ namespace Pinta.Core
 
 		public abstract class LinearStraight : LinearBase
 		{
-			private int _startY;
-			private int _startX;
-
-			protected internal LinearStraight(bool alphaOnly, BinaryPixelOp normalBlendOp)
-				: base(alphaOnly, normalBlendOp)
+			public override double ComputeUnboundedLerp (int x, int y)
 			{
+				double dx = x - StartPoint.X;
+				double dy = y - StartPoint.Y;
+				
+				double lerp = (dx * this.dtdx) + (dy * this.dtdy);
+				
+				return lerp;
 			}
 
-			private static byte BoundLerp(double t)
+			protected internal LinearStraight (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
 			{
-				return (byte)(Utility.Clamp(Math.Abs(t), 0, 1) * 255f);
-			}
-
-			public override void BeforeRender()
-			{
-				base.BeforeRender();
-
-				_startX = (int)StartPoint.X;
-				_startY = (int)StartPoint.Y;
-
-			}
-
-			public override byte ComputeByteLerp(int x, int y)
-			{
-				var dx = x - _startX;
-				var dy = y - _startY;
-
-				var lerp = (dx*dtdx) + (dy*dtdy);
-
-				return BoundLerp(lerp);
 			}
 		}
 
 		public sealed class LinearReflected : LinearStraight
 		{
-			public LinearReflected(bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			public override double BoundLerp (double t)
+			{
+				return Utility.Clamp (Math.Abs (t), 0, 1);
+			}
+
+			public LinearReflected (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
 			{
 			}
 		}
 
 		public sealed class LinearClamped : LinearStraight
 		{
-			public LinearClamped(bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			public override double BoundLerp (double t)
+			{
+				return Utility.Clamp (t, 0, 1);
+			}
+
+			public LinearClamped (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
 			{
 			}
 		}
 
 		public sealed class LinearDiamond : LinearStraight
 		{
-			public LinearDiamond(bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			public override double ComputeUnboundedLerp (int x, int y)
 			{
+				double dx = x - StartPoint.X;
+				double dy = y - StartPoint.Y;
+				
+				double lerp1 = (dx * this.dtdx) + (dy * this.dtdy);
+				double lerp2 = (dx * this.dtdy) - (dy * this.dtdx);
+				
+				double absLerp1 = Math.Abs (lerp1);
+				double absLerp2 = Math.Abs (lerp2);
+				
+				return absLerp1 + absLerp2;
 			}
 
-			public override byte ComputeByteLerp(int x, int y)
+			public override double BoundLerp (double t)
 			{
-				var dx = x - StartPoint.X;
-				var dy = y - StartPoint.Y;
-
-				var lerp1 = (dx*dtdx) + (dy*dtdy);
-				var lerp2 = (dx*dtdy) - (dy*dtdx);
-
-				var absLerp1 = Math.Abs(lerp1);
-				var absLerp2 = Math.Abs(lerp2);
-
-				return BoundLerp(absLerp1 + absLerp2);
+				return Utility.Clamp (t, 0, 1);
 			}
 
-			private byte BoundLerp(double t)
+			public LinearDiamond (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
 			{
-				return (byte)(Utility.Clamp(t, 0, 1)*255f);
 			}
 		}
 
@@ -121,83 +113,75 @@ namespace Pinta.Core
 		{
 			private double invDistanceScale;
 
-			public Radial(bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			public override void BeforeRender ()
 			{
+				double distanceScale = this.StartPoint.Distance (this.EndPoint);
+				
+				if (distanceScale == 0) {
+					this.invDistanceScale = 0;
+				} else {
+					this.invDistanceScale = 1f / distanceScale;
+				}
+				
+				base.BeforeRender ();
 			}
 
-			int _startX, _startY;
-
-			public override void BeforeRender()
+			public override double ComputeUnboundedLerp (int x, int y)
 			{
-				var distanceScale = StartPoint.Distance(EndPoint);
-
-				_startX = (int)StartPoint.X;
-				_startY = (int)StartPoint.Y;
-
-				if (distanceScale == 0)
-					invDistanceScale = 0;
-				else
-					invDistanceScale = 1f / distanceScale;
-
-				base.BeforeRender();
+				double dx = x - StartPoint.X;
+				double dy = y - StartPoint.Y;
+				
+				double distance = Math.Sqrt (dx * dx + dy * dy);
+				
+				return distance * this.invDistanceScale;
 			}
 
-			public override byte ComputeByteLerp(int x, int y)
+			public override double BoundLerp (double t)
 			{
-				var dx = x - _startX;
-				var dy = y - _startY;
+				return Utility.Clamp (t, 0, 1);
+			}
 
-				var distance = Math.Sqrt(dx*dx + dy*dy);
-
-				var result = distance*invDistanceScale;
-				if (result < 0.0)
-					return 0;
-				return result > 1.0 ? (byte)255 : (byte)(result*255f);
+			public Radial (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			{
 			}
 		}
 
 		public sealed class Conical : GradientRenderer
 		{
-			private const double invPi = 1.0 / Math.PI;
 			private double tOffset;
+			private const double invPi = 1.0 / Math.PI;
 
-			public Conical(bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			public override void BeforeRender ()
 			{
+				this.tOffset = -ComputeUnboundedLerp ((int)EndPoint.X, (int)EndPoint.Y);
+				base.BeforeRender ();
 			}
 
-			public override void BeforeRender()
+			public override double ComputeUnboundedLerp (int x, int y)
 			{
-				var ax = EndPoint.X - StartPoint.X;
-				var ay = EndPoint.Y - StartPoint.Y;
-
-				var theta = Math.Atan2(ay, ax);
-
-				var t = theta * invPi;
-
-				tOffset = -t;
-				base.BeforeRender();
+				double ax = x - StartPoint.X;
+				double ay = y - StartPoint.Y;
+				
+				double theta = Math.Atan2 (ay, ax);
+				
+				double t = theta * invPi;
+				
+				return t + this.tOffset;
 			}
 
-			public override byte ComputeByteLerp(int x, int y)
+			public override double BoundLerp (double t)
 			{
-				var ax = x - StartPoint.X;
-				var ay = y - StartPoint.Y;
-
-				var theta = Math.Atan2(ay, ax);
-
-				var t = theta*invPi;
-
-				return (byte)(BoundLerp(t + tOffset)*255f);
-			}
-
-			public double BoundLerp(double t)
-			{
-				if (t > 1)
+				if (t > 1) {
 					t -= 2;
-				else if (t < -1)
+				} else if (t < -1) {
 					t += 2;
+				}
+				
+				return Utility.Clamp (Math.Abs (t), 0, 1);
+			}
 
-				return Utility.Clamp(Math.Abs(t), 0, 1);
+			public Conical (bool alphaOnly, BinaryPixelOp normalBlendOp) : base(alphaOnly, normalBlendOp)
+			{
 			}
 		}
 	}
