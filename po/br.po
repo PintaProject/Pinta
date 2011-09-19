@@ -1640,19 +1640,3 @@ msgstr ""
 
 #~ msgid "Zoom to Window"
 #~ msgstr "Zoumañ da framm ar prenestr"
-
-#: pinta.desktop.in
-msgid "Pinta"
-msgstr "Pinta in br"
-
-#: pinta.desktop.in
-msgid "Image Editor"
-msgstr "Image Editor in br"
-
-#: pinta.desktop.in
-msgid "Easily create and edit images"
-msgstr "Easily create and edit images in br"
-
-#: pinta.desktop.in
-msgid "Pinta Image Editor"
-msgstr "Pinta Image Editor in br"
