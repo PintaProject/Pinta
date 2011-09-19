@@ -109,6 +109,15 @@ if test $? -eq 9; then
 	exit 1
 fi
 
+intltoolize_version=`xbuild /version | grep '^Mono' | egrep -o '([0-9]+\.?){2,}'`
+check_version "$intltoolize_version" "0.35" 2> /dev/null
+if test $? -eq 9; then
+       echo
+       echo "A newer version of intltoolize is required to run $PROJECT ( >= 0.35 )"
+       exit 1
+fi
+
+
 #Check directoy 
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
@@ -117,6 +126,9 @@ ORIGDIR=`pwd`
 cd $srcdir
 TEST_TYPE=-f
 aclocalinclude="-I . $ACLOCAL_FLAGS"
+
+echo "Running intltoolize"
+intltoolize --copy --force --automake
                                                                          
 test $TEST_TYPE $FILE || {
         echo "You must run this script in the top-level $PROJECT directory"

@@ -1,3 +1,5 @@
+SUBDIRS = xdg
+
 BINDIR = $(srcdir)/bin
 
 PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
@@ -96,7 +98,20 @@ releasetar: $(BINFILES)
 releasezip: $(BINFILES)
 	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg \
-	license-mit.txt license-pdn.txt todo.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md
+EXTRA_DIST = EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg license-mit.txt \
+           license-pdn.txt todo.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
+           intltool-merge.in intltool-update.in
+
+CLEANFILES = \
+       intltool-extract \
+       intltool-update \
+       intltool-merge
+
+DISTCLEANFILES = intltool-extract \
+                 intltool-merge \
+                 intltool-update \
+                 po/.intltool-merge-cache
+
+
 
 .PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip
