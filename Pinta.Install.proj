@@ -14,127 +14,127 @@
 
   <!-- All of our translation files (po) -->
   <ItemGroup>
-    <Translation Include="po/messages-ar.po">
+    <Translation Include="po/ar.po">
       <Code>ar</Code>
     </Translation>
-    <Translation Include="po/messages-br.po">
+    <Translation Include="po/br.po">
       <Code>br</Code>
     </Translation>
-    <Translation Include="po/messages-ca.po">
+    <Translation Include="po/ca.po">
       <Code>ca</Code>
     </Translation>
-    <Translation Include="po/messages-cs.po">
+    <Translation Include="po/cs.po">
       <Code>cs</Code>
     </Translation>
-    <Translation Include="po/messages-da.po">
+    <Translation Include="po/da.po">
       <Code>da</Code>
     </Translation>
-    <Translation Include="po/messages-de.po">
+    <Translation Include="po/de.po">
       <Code>de</Code>
     </Translation>
-    <Translation Include="po/messages-el.po">
+    <Translation Include="po/el.po">
       <Code>el</Code>
     </Translation>
-    <Translation Include="po/messages-en_GB.po">
+    <Translation Include="po/en_GB.po">
       <Code>en_GB</Code>
     </Translation>
-    <Translation Include="po/messages-es.po">
+    <Translation Include="po/es.po">
       <Code>es</Code>
     </Translation>
-    <Translation Include="po/messages-eu.po">
+    <Translation Include="po/eu.po">
       <Code>eu</Code>
     </Translation>
-    <Translation Include="po/messages-fi.po">
+    <Translation Include="po/fi.po">
       <Code>fi</Code>
     </Translation>
-    <Translation Include="po/messages-fo.po">
+    <Translation Include="po/fo.po">
       <Code>fo</Code>
     </Translation>
-    <Translation Include="po/messages-fr.po">
+    <Translation Include="po/fr.po">
       <Code>fr</Code>
     </Translation>
-    <Translation Include="po/messages-ga.po">
+    <Translation Include="po/ga.po">
       <Code>ga</Code>
     </Translation>
-    <Translation Include="po/messages-gl.po">
+    <Translation Include="po/gl.po">
       <Code>gl</Code>
     </Translation>
-    <Translation Include="po/messages-he.po">
+    <Translation Include="po/he.po">
       <Code>he</Code>
     </Translation>
-    <Translation Include="po/messages-hr.po">
+    <Translation Include="po/hr.po">
       <Code>hr</Code>
     </Translation>
-    <Translation Include="po/messages-hu.po">
+    <Translation Include="po/hu.po">
       <Code>hu</Code>
     </Translation>
-    <Translation Include="po/messages-hy.po">
+    <Translation Include="po/hy.po">
       <Code>hy</Code>
     </Translation>
-    <Translation Include="po/messages-id.po">
+    <Translation Include="po/id.po">
       <Code>id</Code>
     </Translation>
-    <Translation Include="po/messages-it.po">
+    <Translation Include="po/it.po">
       <Code>it</Code>
     </Translation>
-    <Translation Include="po/messages-ja.po">
+    <Translation Include="po/ja.po">
       <Code>ja</Code>
     </Translation>
-    <Translation Include="po/messages-ko.po">
+    <Translation Include="po/ko.po">
       <Code>ko</Code>
     </Translation>
-    <Translation Include="po/messages-lt.po">
+    <Translation Include="po/lt.po">
       <Code>lt</Code>
     </Translation>
-    <Translation Include="po/messages-nb.po">
+    <Translation Include="po/nb.po">
       <Code>nb</Code>
     </Translation>
-    <Translation Include="po/messages-nl.po">
+    <Translation Include="po/nl.po">
       <Code>nl</Code>
     </Translation>
-    <Translation Include="po/messages-pl.po">
+    <Translation Include="po/pl.po">
       <Code>pl</Code>
     </Translation>
-    <Translation Include="po/messages-pt.po">
+    <Translation Include="po/pt.po">
       <Code>pt</Code>
     </Translation>
-    <Translation Include="po/messages-pt_BR.po">
+    <Translation Include="po/pt_BR.po">
       <Code>pt_BR</Code>
     </Translation>
-    <Translation Include="po/messages-ro.po">
+    <Translation Include="po/ro.po">
       <Code>ro</Code>
     </Translation>
-    <Translation Include="po/messages-ru.po">
+    <Translation Include="po/ru.po">
       <Code>ru</Code>
     </Translation>
-    <Translation Include="po/messages-sk.po">
+    <Translation Include="po/sk.po">
       <Code>sk</Code>
     </Translation>
-    <Translation Include="po/messages-sl.po">
+    <Translation Include="po/sl.po">
       <Code>sl</Code>
     </Translation>
-    <Translation Include="po/messages-sr.po">
+    <Translation Include="po/sr.po">
       <Code>sr</Code>
     </Translation>
-    <Translation Include="po/messages-sv.po">
+    <Translation Include="po/sv.po">
       <Code>sv</Code>
     </Translation>
-    <Translation Include="po/messages-th.po">
+    <Translation Include="po/th.po">
       <Code>th</Code>
     </Translation>
-    <Translation Include="po/messages-tr.po">
+    <Translation Include="po/tr.po">
       <Code>tr</Code>
     </Translation>
-    <Translation Include="po/messages-uk.po">
+    <Translation Include="po/uk.po">
       <Code>uk</Code>
     </Translation>
-    <Translation Include="po/messages-vi.po">
+    <Translation Include="po/vi.po">
       <Code>vi</Code>
     </Translation>
-    <Translation Include="po/messages-zh_CN.po">
+    <Translation Include="po/zh_CN.po">
       <Code>zh_CN</Code>
     </Translation>
-    <Translation Include="po/messages-zh_TW.po">
+    <Translation Include="po/zh_TW.po">
       <Code>zh_TW</Code>
     </Translation>
   </ItemGroup>
