@@ -243,6 +243,33 @@ namespace Pinta.Core
 			if (image == null)
 				return;
 
+			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
+
+			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
+			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
+			{
+				string message = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+
+				var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
+				enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);
+				enlarge_dialog.AddButton (Catalog.GetString ("Don't change canvas size"), ResponseType.Reject);
+				enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
+				enlarge_dialog.DefaultResponse = ResponseType.Accept;
+
+				ResponseType response = (ResponseType)enlarge_dialog.Run ();
+				enlarge_dialog.Destroy ();
+
+				if (response == ResponseType.Accept)
+				{
+					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height, Pinta.Core.Anchor.Center);
+					PintaCore.Actions.View.UpdateCanvasScale ();
+				}
+				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
+				{
+					return;
+				}
+			}
+
 			// Copy the paste to the temp layer
 			doc.CreateSelectionLayer ();
 			doc.ShowSelectionLayer = true;
