@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Pinta
-Comment=Easily create and edit images
-GenericName=Image Editor
-X-GNOME-FullName=Pinta Image Editor
+_Name=Pinta
+_Comment=Easily create and edit images
+_GenericName=Image Editor
+_X-GNOME-FullName=Pinta Image Editor
 Exec=pinta
 Icon=pinta
 StartupNotify=false
