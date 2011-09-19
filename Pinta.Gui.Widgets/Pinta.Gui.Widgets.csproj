@@ -9,7 +9,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Pinta.Gui.Widgets</RootNamespace>
     <AssemblyName>Pinta.Gui.Widgets</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <CodePage>65001</CodePage>
     <FileUpgradeFlags>
     </FileUpgradeFlags>

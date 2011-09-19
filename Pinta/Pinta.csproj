@@ -9,7 +9,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Pinta</RootNamespace>
     <AssemblyName>Pinta</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <CodePage>65001</CodePage>
     <StartupObject>
     </StartupObject>
