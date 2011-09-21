@@ -73,7 +73,7 @@ namespace Pinta.Core
 			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
 			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
 
-			ZoomCollection = new string[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "175%", "150%", "125%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", "Window" };
+			ZoomCollection = new string[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "175%", "150%", "125%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", Catalog.GetString ("Window") };
 			ZoomComboBox = new ToolBarComboBox (75, DefaultZoomIndex(), true, ZoomCollection);
 
 			// Make sure these are the same group so only one will be selected at a time
