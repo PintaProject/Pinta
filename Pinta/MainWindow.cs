@@ -330,31 +330,37 @@ namespace Pinta
 		private void ZoomToWindow_Activated (object sender, EventArgs e)
 		{
 			// The image is small enough to fit in the window
-			if (PintaCore.Workspace.ImageFitsInWindow) {
+			if (PintaCore.Workspace.ImageFitsInWindow)
+			{
 				PintaCore.Actions.View.ActualSize.Activate ();
-				return;
 			}
+			else
+			{
+				int image_x = PintaCore.Workspace.ImageSize.Width;
+				int image_y = PintaCore.Workspace.ImageSize.Height;
 
-			int image_x = PintaCore.Workspace.ImageSize.Width;
-			int image_y = PintaCore.Workspace.ImageSize.Height;
+				int window_x = sw.Children[0].Allocation.Width;
+				int window_y = sw.Children[0].Allocation.Height;
 
-			int window_x = sw.Children[0].Allocation.Width;
-			int window_y = sw.Children[0].Allocation.Height;
+				double ratio;
 
-			// The image is more constrained by width than height
-			if ((double)image_x / (double)window_x >= (double)image_y / (double)window_y) {
-				double ratio = (double)(window_x - 20) / (double)image_x;
+				// The image is more constrained by width than height
+				if ((double)image_x / (double)window_x >= (double)image_y / (double)window_y)
+				{
+					ratio = (double)(window_x - 20) / (double)image_x;
+				}
+				else
+				{
+					ratio = (double)(window_y - 20) / (double)image_y;					
+				}
+
 				PintaCore.Workspace.Scale = ratio;
 				PintaCore.Actions.View.SuspendZoomUpdate ();
 				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
 				PintaCore.Actions.View.ResumeZoomUpdate ();
-			} else {
-				double ratio2 = (double)(window_y - 20) / (double)image_y;
-				PintaCore.Workspace.Scale = ratio2;
-				PintaCore.Actions.View.SuspendZoomUpdate ();
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
-				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
+
+			PintaCore.Actions.View.ZoomToWindowActivated = true;
 		}
 		
 		private void ActiveDocumentChanged (object sender, EventArgs e)
