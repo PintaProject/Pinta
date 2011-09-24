@@ -669,6 +669,8 @@ namespace Pinta.Core
 			ImageSize = new Gdk.Size (ImageSize.Height, ImageSize.Width);
 			Workspace.CanvasSize = new Gdk.Size (Workspace.CanvasSize.Height, Workspace.CanvasSize.Width);
 
+			PintaCore.Actions.View.UpdateCanvasScale ();
+
 			Workspace.Invalidate ();
 		}
 
@@ -679,6 +681,8 @@ namespace Pinta.Core
 
 			ImageSize = new Gdk.Size (ImageSize.Height, ImageSize.Width);
 			Workspace.CanvasSize = new Gdk.Size (Workspace.CanvasSize.Height, Workspace.CanvasSize.Width);
+
+			PintaCore.Actions.View.UpdateCanvasScale ();
 
 			Workspace.Invalidate ();
 
