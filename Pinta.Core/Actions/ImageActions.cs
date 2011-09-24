@@ -189,6 +189,8 @@ namespace Pinta.Core
 			doc.Workspace.CanvasSize = rect.Size;
 			doc.Workspace.Scale = original_scale;
 
+			PintaCore.Actions.View.UpdateCanvasScale ();
+
 			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
 
 			foreach (var layer in doc.Layers)
