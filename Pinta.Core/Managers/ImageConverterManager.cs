@@ -41,17 +41,18 @@ namespace Pinta.Core
 			// Create all the formats supported by Gdk
 			foreach (var format in Pixbuf.Formats) {
 				string formatName = format.Name.ToLowerInvariant ();
+				string formatNameUpperCase = formatName.ToUpperInvariant ();
 				string[] extensions;
 
 				switch (formatName) {
 					case "jpeg":
-						extensions = new string[] { "jpg", "jpeg" };
+						extensions = new string[] { "jpg", "jpeg", "JPG", "JPEG" };
 						break;
 					case "tiff":
-						extensions = new string[] { "tif", "tiff" };
+						extensions = new string[] { "tif", "tiff", "TIF", "TIFF" };
 						break;
 					default:
-						extensions = new string[] { formatName };
+						extensions = new string[] { formatName, formatNameUpperCase };
 						break;
 				}
 				
@@ -67,7 +68,7 @@ namespace Pinta.Core
 				else
 					exporter = null;
 
-				Formats.Add (new FormatDescriptor (formatName, formatName.ToUpperInvariant (), extensions, importer, exporter));
+				Formats.Add (new FormatDescriptor (formatName, formatNameUpperCase, extensions, importer, exporter));
 			}
 
 			// Create all the formats we have our own importers/exporters for
