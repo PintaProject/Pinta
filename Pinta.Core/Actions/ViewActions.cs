@@ -47,6 +47,18 @@ namespace Pinta.Core
 
 		public ToolBarComboBox ZoomComboBox { get; private set; }
 		public string[] ZoomCollection { get; private set; }
+
+		private string old_zoom_text = "";
+		private bool zoom_to_window_activated = false;
+
+		public bool ZoomToWindowActivated { 
+			get { return zoom_to_window_activated; }
+			set
+			{
+				zoom_to_window_activated = value;
+				old_zoom_text = ZoomComboBox.ComboBox.ActiveText;
+			}
+		}
 		
 		public ViewActions ()
 		{
@@ -199,9 +211,17 @@ namespace Pinta.Core
 		{
 			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
 
-			if (text == Catalog.GetString ("Window")) {
+			// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the 
+			// image was rotated or cropped) and "Zoom to Window" mode is active
+			if (text == Catalog.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text))
+			{
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
+				ZoomToWindowActivated = true;
 				return;
+			}
+			else
+			{
+				ZoomToWindowActivated = false;
 			}
 
 			double percent;
