@@ -239,6 +239,7 @@ namespace Pinta.Core
 		private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 		{
 			PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = DefaultZoomIndex();
+			UpdateCanvasScale ();
 		}
 
 		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
