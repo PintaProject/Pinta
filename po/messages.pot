@@ -453,8 +453,8 @@ msgstr ""
 msgid "Line"
 msgstr ""
 
-#: Pinta.Tools/LineCurveTool.cs:44
-msgid "Left click to draw with primary color, right click for secondary color."
+#: Pinta.Tools/LineCurveTool.cs:43
+msgid "Left click to draw with primary color, right click for secondary color. Hold Shift key to snap to angles."
 msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
@@ -1208,11 +1208,11 @@ msgid "Crop to Selection"
 msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
+msgid "Resize Image..."
 msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
+msgid "Resize Canvas..."
 msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
@@ -1589,4 +1589,24 @@ msgstr ""
 
 #: pinta.desktop.in
 msgid "Pinta Image Editor"
+msgstr ""
+
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
+
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid "The image being pasted is larger than the canvas size. What would you like to do?"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
 msgstr ""
