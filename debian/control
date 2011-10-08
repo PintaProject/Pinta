@@ -2,7 +2,7 @@ Source: pinta
 Section: graphics
 Priority: optional
 Maintainer: Cameron White <cameronwhite91@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), cli-common-dev (>= 0.5.7~)
+Build-Depends: debhelper (>= 8.0.0), cli-common-dev (>= 0.5.7~), autotools-dev, dh-autoreconf, gettext
 Build-Depends-Indep: mono-devel (>= 2.4.3), mono-xbuild (>= 2.4.3), libgtk2.0-cil-dev, libglade2.0-cil-dev
 Standards-Version: 3.9.2
 Homepage: http://pinta-project.com/

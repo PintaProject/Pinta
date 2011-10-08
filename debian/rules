@@ -9,4 +9,4 @@ override_dh_clideps:
 	dh_clideps --exclude-moduleref=libigemacintegration.dylib
 
 %:
-	dh $@
+	dh --with autoreconf $@
