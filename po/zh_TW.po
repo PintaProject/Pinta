@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2010-12-11 14:16+0000\n"
+"PO-Revision-Date: 2011-10-08 07:02+0000\n"
 "Last-Translator: taijuin lee <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -454,10 +454,11 @@ msgstr "按住滑鼠並拖動畫出一個橢圓選取區域。另外，按住\"S
 msgid "Line"
 msgstr "直線"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "按滑鼠左鍵繪圖用的是主要顏色，按滑鼠右鍵則是使用第二顏色。"
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -466,7 +467,7 @@ msgstr "橡皮擦"
 #: Pinta.Tools/EraserTool.cs:47
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
-msgstr ""
+msgstr "按滑鼠左鍵擦拭變成透明，按滑鼠右鍵擦拭變成第二顏色。 "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -601,7 +602,7 @@ msgstr "置右"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "文字樣式"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -609,19 +610,19 @@ msgstr "一般"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "一般及邊框"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "邊框寬度"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "減小邊框大小"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "增大邊框大小"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -1214,12 +1215,12 @@ msgid "Crop to Selection"
 msgstr "剪裁出選取區域"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "縮放圖片..."
+msgid "Resize Image..."
+msgstr "調整圖片大小..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "調整畫布尺寸..."
+msgid "Resize Canvas..."
+msgstr "調整畫布大小..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1236,7 +1237,7 @@ msgstr "縮小"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "最佳大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1244,7 +1245,7 @@ msgstr "放大成自選區域"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "正常大小"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1306,7 +1307,7 @@ msgstr "貼到新圖片"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "清除選取區域"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1322,7 +1323,7 @@ msgstr "全選"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "取消選取"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1585,64 +1586,40 @@ msgstr "使用低質量預覽小圖像，小角度。使用高品質的最終質
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr "提示：要獲得最佳效果，首先使用選取工具選取每隻眼睛。"
 
-#~ msgid "Show Pad"
-#~ msgstr "顯示板"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "圖片編輯器"
 
-#~ msgid "Continue without saving"
-#~ msgstr "繼續而不儲存"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "輕鬆建立和編輯圖片"
 
-#~ msgid "X :"
-#~ msgstr "X："
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Pinta 圖片編輯器"
 
-#~ msgid "Y :"
-#~ msgstr "Y："
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "開啟圖片"
 
-#~ msgid "Actual Size"
-#~ msgstr "實際大小"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "無法儲存唯讀檔的變更。"
 
-#~ msgid "Zoom to Window"
-#~ msgstr "符合視窗大小"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr "貼上的圖片大於畫布大小。您打算做什麼？"
 
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "提示：按滑鼠右鍵刪除控制點。"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "擴大畫布"
 
-#~ msgid "Fill mode"
-#~ msgstr "填充模式"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "在開啟新檔案前，儲存變更到圖片檔 \"{0}\" 中？"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "在開啟新圖片檔前，儲存變更到圖片檔 \"{0}\" 中?"
-
-#~ msgid "Color Mode"
-#~ msgstr "色彩模式"
-
-#~ msgid "Transparency Mode"
-#~ msgstr "透明模式"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "OpenRaster格式的圖片 (*.ora)"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "正常混合/覆蓋混合"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "按住並拖動滑鼠以擦掉一部分的圖片顏色。"
-
-#~ msgid "Antialiasing"
-#~ msgstr "反鋸齒"
-
-#~ msgid "X:"
-#~ msgstr "X："
-
-#~ msgid "Y:"
-#~ msgstr "Y："
-
-#~ msgid "Mode"
-#~ msgstr "模式"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "不要更改畫布大小"

@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2010-10-27 01:45+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-09-22 19:45+0000\n"
+"Last-Translator: Никола Павловић <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "Auto nivoi"
+msgstr "Auto nivo"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
@@ -36,11 +36,11 @@ msgstr "Sepia"
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "Posterizovanje"
+msgstr "Posterizuj"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr "Crno i belo"
+msgstr "Crno - Belo"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
@@ -49,7 +49,7 @@ msgstr "Krive"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr "Jačina osvetljenja/kontrast"
+msgstr "Osvetljenost / Kontrast"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
@@ -127,7 +127,7 @@ msgstr "Plavo "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr ""
+msgstr "Savet: Koristite desni klik da uklonite kontrolne tačke."
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
@@ -316,15 +316,15 @@ msgstr "Ponovo zasej"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr ""
+msgstr "Odaberi osnovnu boju"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr ""
+msgstr "Odaberi sporednu boju"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Izaberi boju palete"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -343,7 +343,7 @@ msgstr "Kloniraj kalup"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
+msgstr "Ctrl+ levi klik da podesite poreklo, levi klik za bojenje."
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -407,7 +407,7 @@ msgstr "Kupast preliv"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr ""
+msgstr "Popunjavanje"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
@@ -434,7 +434,7 @@ msgstr ""
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
@@ -463,10 +463,11 @@ msgstr ""
 msgid "Line"
 msgstr "Linija"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "Levi klik za crtanje osnovnom bojom, desni za drugu boju."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -476,6 +477,8 @@ msgstr "Gumica za brisanje"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Levi klik za brisanje do transparentnosti, desni klik za brisanje do "
+"sekundarne boje. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -620,27 +623,27 @@ msgstr "Desno poravnanje"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Stil teksta"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr ""
+msgstr "Нормално"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Normalno i spoljna linija"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Širina spoljne linije"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Smanji veličinu spoljne linije"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Povećaj veličinu spoljne linije"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -656,7 +659,7 @@ msgstr "Povećaj veličinu četkice"
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
-msgstr ""
+msgstr "Stil popunjavanja"
 
 #: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
 msgid "Outline Shape"
@@ -672,19 +675,19 @@ msgstr "Popuni i uokviri oblik"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
-msgstr ""
+msgstr "Кругови"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:38
 msgid "Grid"
-msgstr ""
+msgstr "Mreža"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:40
 msgid "Squares"
-msgstr ""
+msgstr "Квадрати"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
-msgstr ""
+msgstr "Splater"
 
 #: Pinta.Tools/ZoomTool.cs:49
 msgid "Zoom"
@@ -716,7 +719,7 @@ msgstr "O"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
@@ -752,7 +755,7 @@ msgstr "_Prozor"
 
 #: Pinta/MainWindow.cs:471
 msgid "Tool Windows"
-msgstr ""
+msgstr "Prozor sa alatkama"
 
 #: Pinta/MainWindow.cs:475
 msgid "_Help"
@@ -802,11 +805,11 @@ msgstr "Plutajuće"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Slikaj ekran"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
-msgstr ""
+msgstr "Odlaganje pre snimanja ekrana(u sekundama):"
 
 #: Pinta/DialogHandlers.cs:158
 #, csharp-format
@@ -823,11 +826,11 @@ msgstr "Zatvori bez snimanja"
 
 #: Pinta/DialogHandlers.cs:193
 msgid "Resize Palette"
-msgstr ""
+msgstr "Promeni veličinu palete"
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
-msgstr ""
+msgstr "Nova veličina palete:"
 
 #: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
 msgid "Paste Into New Layer"
@@ -867,19 +870,19 @@ msgstr "Svi fajlovi"
 
 #: Pinta/DialogHandlers.cs:480
 msgid "Paste cancelled"
-msgstr ""
+msgstr "Nalepljivanje otkazano"
 
 #: Pinta/DialogHandlers.cs:481
 msgid "The clipboard does not contain an image"
-msgstr ""
+msgstr "Klipbord ne sadrži sliku"
 
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
-msgstr "Svi fajlovi sa slikama"
+msgstr "Sačuvaj falj sa slike"
 
 #: Pinta/DialogHandlers.cs:612
 msgid "Pinta does not support saving images in this file format."
-msgstr ""
+msgstr "Pinta ne podržava čuvanje slika u ovom formatu"
 
 #: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
 #: Pinta.Core/Actions/EditActions.cs:347
@@ -889,21 +892,21 @@ msgstr "Greška"
 #: Pinta/DialogHandlers.cs:633
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr ""
+msgstr "Fajl \"{0}\" već postoji. Zameni?"
 
 #: Pinta/DialogHandlers.cs:634
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr ""
+msgstr "Fajl već postoji u \"{1}\". Zamena će obrisati njegov stari sadržaj."
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr ""
+msgstr "JPEG квалитет"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
-msgstr ""
+msgstr "Kvalitet: "
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -931,7 +934,9 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  boki24 https://launchpad.net/~bojansav"
+"  Milena https://launchpad.net/~milenad13\n"
+"  boki24 https://launchpad.net/~bojansav\n"
+"  Никола Павловић https://launchpad.net/~nikola825"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1046,7 +1051,7 @@ msgstr "broj niti koje će se koristiti za iscrtavanje"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
-msgstr ""
+msgstr "ОпционоИме"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
@@ -1055,7 +1060,7 @@ msgstr "Efekat iscrtavanja"
 #: Pinta.Core/Managers/WorkspaceManager.cs:91
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr ""
+msgstr "Nesačuvana slika {0}"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:150
 msgid "Background"
@@ -1124,11 +1129,11 @@ msgstr "Prevedi ovaj program"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr ""
+msgstr "Сачувај све"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr ""
+msgstr "Затвори све"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -1136,7 +1141,7 @@ msgstr "Nova..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr ""
+msgstr "Novi snimak ekrana..."
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
@@ -1222,7 +1227,7 @@ msgstr "Pomeri sloj dole"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr ""
+msgstr "Osobine sloja..."
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
@@ -1234,12 +1239,12 @@ msgid "Crop to Selection"
 msgstr "Izreži prema odabiru"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Promeni veličinu..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Dimenzije platna..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1256,7 +1261,7 @@ msgstr "Umanji"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Najbolje uklapanje"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1264,11 +1269,11 @@ msgstr "Uveličaj odabrano"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Нормална величина"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
-msgstr ""
+msgstr "Traka alatki"
 
 #: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Pixel Grid"
@@ -1296,7 +1301,7 @@ msgstr "Ceo ekran"
 
 #: Pinta.Core/Actions/ViewActions.cs:114
 msgid "Ruler Units"
-msgstr ""
+msgstr "Jedinice lenjira"
 
 #: Pinta.Core/Actions/ViewActions.cs:194
 #: Pinta.Core/Classes/DocumentWorkspace.cs:226
@@ -1326,7 +1331,7 @@ msgstr "Prilepi u novu sliku"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Obriši izabrano"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1342,15 +1347,15 @@ msgstr "Izaberi sve"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Одзначи све"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr ""
+msgstr "Ресетуј на подразумевано"
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr ""
+msgstr "Podesi broj boja"
 
 #: Pinta.Core/Actions/EditActions.cs:212
 msgid "Erase Selection"
@@ -1362,11 +1367,11 @@ msgstr "Poništi izbor"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr ""
+msgstr "Otvori fajl palete"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr ""
+msgstr "Fajlovi paleta (*.txt, *.gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
@@ -1374,18 +1379,20 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
+"Ne mogu da otvorim fajl palete: {0}.\n"
+"Molim vas proverite da otvarate važeći GIMP ili Paint.NET paletu."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr ""
+msgstr "Sačuvaj fajl palete"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "Paint.NET paleta (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "GIMP paleta (*.gpl)"
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
@@ -1405,19 +1412,19 @@ msgstr "Taster prečice"
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr ""
+msgstr "Normalno utapanje"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr ""
+msgstr "Prepiši"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
-msgstr ""
+msgstr "Antialijas uključen"
 
 #: Pinta.Core/Classes/BaseTool.cs:257
 msgid "Antialiasing Off"
-msgstr ""
+msgstr "Antialijas isključen"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
@@ -1607,55 +1614,40 @@ msgstr ""
 "Savet: Za najbolje rezultate, prvo pomoću alata za odabir, odaberite jedno "
 "pa drugo oka."
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Sačuvati izmene slike \"{0}\" pre kreiranja nove?"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Уређивач слика"
 
-#~ msgid "Continue without saving"
-#~ msgstr "Nastavit bez snimanja"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Jednostavno kreirajte i menjajte slike"
 
-#~ msgid "X :"
-#~ msgstr "X:"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Pinta, obrađivač slika"
 
-#~ msgid "Y :"
-#~ msgstr "Y:"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "Color Mode"
-#~ msgstr "Režim boje"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Režim providnosti"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "Fill mode"
-#~ msgstr "Režim popune"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Klikni i prevuci za brisanje dela slike."
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "Savet: Desni klik za uklanjanje kontrolnih tačaka."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "Sačuvaj izmene slike \"{0}\" pre otvaranja nove slike?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "OpenRaster slika (*.ora)"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Uveličaj do prozora"
-
-#~ msgid "Actual Size"
-#~ msgstr "Stvarna veličina"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Temeljno mešanje / Prebrisano mešanje"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Omekšavanje ivica"
-
-#~ msgid "Show Pad"
-#~ msgstr "Prikaži ped"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

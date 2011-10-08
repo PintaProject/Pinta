@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-06 02:21+0000\n"
-"Last-Translator: José Humberto Melo <Unknown>\n"
+"PO-Revision-Date: 2011-10-01 01:02+0000\n"
+"Last-Translator: José Humberto Alvarenga Melo <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -23,7 +23,7 @@ msgstr "Níveis Automáticos"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "Inverter as Cores"
+msgstr "Inverter cores"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
@@ -183,7 +183,7 @@ msgstr "Fractal Mandelbrot"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr "Brilho"
+msgstr "Fluorescência"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
@@ -467,12 +467,13 @@ msgstr ""
 msgid "Line"
 msgstr "Linha"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Clique com o botão esquerdo para desenhar com a cor primária, clique com o "
-"botão direito para cor secundária."
+"Clique esquerdo para desenhar com cor primária, com o botão direito para cor "
+"secundária. Segure a tecla Shift para tirar os ângulos."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -942,20 +943,19 @@ msgstr "Outros Contribuidores"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  André Gondim https://launchpad.net/~andregondim\n"
 "  Celso H. L. S. Junior https://launchpad.net/~celsojunior\n"
 "  Christian Marques https://launchpad.net/~csmchristian\n"
 "  Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
 "  Felipe Amaral https://launchpad.net/~felpi-flick\n"
 "  Fitoschido https://launchpad.net/~fitoschido\n"
-"  Gervásio da Silva Antônio https://launchpad.net/~gervasioantonio\n"
 "  Igor Belchior https://launchpad.net/~igorbelchior86\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  José Humberto Melo https://launchpad.net/~josehumberto-melo\n"
+"  José Humberto Alvarenga Melo https://launchpad.net/~josehumberto-melo\n"
+"  Julio Tomaschitz https://launchpad.net/~blaziushw\n"
 "  Julius Miranda https://launchpad.net/~juliusmiranda\n"
-"  Kristian Gomes https://launchpad.net/~kristiang\n"
 "  Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
 "  Luiz da Costa Batista Silva https://launchpad.net/~luiz-rsk\n"
-"  Paulo N. Júnior https://launchpad.net/~naves-junior\n"
 "  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -1141,7 +1141,7 @@ msgstr "Pinta Website"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "Reportar um Bug"
+msgstr "Relatar um erro"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
@@ -1259,12 +1259,12 @@ msgid "Crop to Selection"
 msgstr "Recortar para Seleção"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Redimensionar"
+msgid "Resize Image..."
+msgstr "Redimensionar Imagem..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Tamanho do quadro..."
+msgid "Resize Canvas..."
+msgstr "Redimensionar Tela..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1636,64 +1636,42 @@ msgstr ""
 "Dica: Para um melhor resultado, primeiro use as ferramentas de seleção para "
 "selecionar cada olho."
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Continue without saving"
-#~ msgstr "Continuar sem salvar"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Editor de Imagens"
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Salvar mudanças na imagem \"{0}\" antes de criar uma nova?"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Crie e edite imagens facilmente"
 
-#~ msgid "X :"
-#~ msgstr "X:"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Editor de imagem Pinta"
 
-#~ msgid "Y :"
-#~ msgstr "Y:"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Abrir Imagens"
 
-#~ msgid "Color Mode"
-#~ msgstr "Modo de Cor"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "Não é possível salvar,  apenas ler o arquivo."
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Modo de Transparência"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"A imagem a ser colada é maior do que o tamanho da tela. O que você gostaria "
+"de fazer?"
 
-#~ msgid "Fill mode"
-#~ msgstr "Modo preenchimento"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Expandir tela"
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Clique e arraste para apagar uma parte da imagem."
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Imagem OpenRaster (*.ora)"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Suavização"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Combinação automática / Substituir combinação"
-
-#~ msgid "Show Pad"
-#~ msgstr "Exibir bloco"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "Dica: Clique com o botão direito para remover pontos de controle."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "Salvar alterações na imagem \"{0}\" antes de abrir uma nova imagem?"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Ampliar para Janela"
-
-#~ msgid "Actual Size"
-#~ msgstr "Tamanho real"
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Não altere o tamanho da tela"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-29 16:23+0000\n"
-"Last-Translator: jeder <Unknown>\n"
+"PO-Revision-Date: 2011-09-29 06:56+0000\n"
+"Last-Translator: Nightingale <Serg.Solovyov@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -36,7 +36,7 @@ msgstr "Сепия"
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "Постеризация"
+msgstr "Постеризовать"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
@@ -49,11 +49,11 @@ msgstr "Кривые"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr "Яркость/контраст"
+msgstr "Яркость / Контраст"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "Тон/насыщенность"
+msgstr "Тон / Насыщенность"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
@@ -468,11 +468,11 @@ msgstr ""
 msgid "Line"
 msgstr "Линия"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Щёлкните левой кнопкой, чтобы рисовать первичным цветом, правой - вторичным."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -637,19 +637,19 @@ msgstr "Обычный"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Нормальный и контурный"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Ширина контура"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Уменьшить размер контура"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Увеличить размер контура"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -942,13 +942,20 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
 "  Anzhel https://launchpad.net/~a9227\n"
+"  ArtKun https://launchpad.net/~artkun\n"
+"  Chubakur https://launchpad.net/~chubakur\n"
+"  Dmitry Pashkevich https://launchpad.net/~dipish\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Maia Kozheva https://launchpad.net/~sikon\n"
+"  Nightingale https://launchpad.net/~solosn\n"
 "  Nikita Putko https://launchpad.net/~ktototam98\n"
+"  Nkolay Parukhin https://launchpad.net/~parukhin\n"
+"  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
 "  Stepan Kislan https://launchpad.net/~stepa87\n"
-"  jeder https://launchpad.net/~i-jeder\n"
-"  ma$terok https://launchpad.net/~m-shein"
+"  Strahov Nikita https://launchpad.net/~newerty\n"
+"  Yogar https://launchpad.net/~me-yogar\n"
+"  jeder https://launchpad.net/~i-jeder"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1251,12 +1258,12 @@ msgid "Crop to Selection"
 msgstr "Откадрировать в выделение"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Масштабировать..."
+msgid "Resize Image..."
+msgstr "Изменить размер изображения"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Размер холста..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1628,80 +1635,40 @@ msgstr ""
 "Подсказка: для наилучшего результата сначала выделите каждый глаз "
 "инструментами выделения."
 
-#~ msgid "Help"
-#~ msgstr "Помощь"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Adjustments"
-#~ msgstr "Коррекция"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Графический редактор"
 
-#~ msgid "Effects"
-#~ msgstr "Эффекты"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Простое создание и редактирование изображений"
 
-#~ msgid "File"
-#~ msgstr "Файл"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Графический редактор Pinta"
 
-#~ msgid "Edit"
-#~ msgstr "Правка"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "View"
-#~ msgstr "Вид"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Image"
-#~ msgstr "Изображение"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "%"
-#~ msgstr "%"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Сохранить изменения изображения \"{0}\" перед созданием нового?"
-
-#~ msgid "Continue without saving"
-#~ msgstr "Продолжить без сохранения"
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "Подсказка: щёлкните правой кнопкой для удаления контрольных точек."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr ""
-#~ "Сохранить изменения изображения \"{0}\" перед открытием нового изображения?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Изображение OpenRaster (*.ora)"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "По размеру окна"
-
-#~ msgid "Actual Size"
-#~ msgstr "Истинный размер"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Сглаживание"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Обычное смешение/Переопределить смешение"
-
-#~ msgid "Color Mode"
-#~ msgstr "Цветовой режим"
-
-#~ msgid "Transparency Mode"
-#~ msgstr "Режим прозрачности"
-
-#~ msgid "Fill mode"
-#~ msgstr "Режим заливки"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Щёлкните и перетаскивайте мышь, чтобы стереть часть изображения."
-
-#~ msgid "Show Pad"
-#~ msgstr "Показать окно"
-
-#~ msgid "Mode"
-#~ msgstr "Режим"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

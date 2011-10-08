@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-20 20:12+0000\n"
-"Last-Translator: Patryk Wychowaniec <patryk1303@gmail.com>\n"
+"PO-Revision-Date: 2011-09-30 18:51+0000\n"
+"Last-Translator: Lukasz Semler <lukasz.semler@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -36,7 +36,7 @@ msgstr "Sepia"
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "Redukcja kolorów"
+msgstr "Posteryzacja"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
@@ -273,7 +273,7 @@ msgstr "Rozmycie ruchem"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr "Inwersja polarna"
+msgstr "Odwrócenie biegunów"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
@@ -471,12 +471,11 @@ msgstr ""
 msgid "Line"
 msgstr "Linia"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby rysować kolorem podstawowym, a prawym - "
-"aby rysować kolorem dodatkowym."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -486,6 +485,8 @@ msgstr "Gumka"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Kliknij lewym przyciskiem myszy aby usunąć do przezroczystości, prawym aby "
+"usunąć do koloru podrzędnego. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -493,7 +494,7 @@ msgstr "Nawigacja"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Naciśnij i przytrzymaj lewy przycisk myszy by móc przesunąć obraz."
+msgstr "Naciśnij i przytrzymaj lewy przycisk myszy aby przesuwać obraz."
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
@@ -642,19 +643,19 @@ msgstr "Normalny"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Normalny i kontur"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Szerokość konturu"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Zmniejsz wielkość konturu"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Zwiększ rozmiar konturu"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -950,16 +951,20 @@ msgstr ""
 "  Bartosz Kaszubowski https://launchpad.net/~simek\n"
 "  Dweight https://launchpad.net/~devilsenator\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Lukasz Semler https://launchpad.net/~lukasz-semler\n"
 "  Maciej Leśniewski https://launchpad.net/~leshniak\n"
+"  Mariusz Jeznach https://launchpad.net/~mariusz-jeznach\n"
 "  Michał Richter https://launchpad.net/~matmatyk\n"
+"  Michał Ćwikliński https://launchpad.net/~mcwiklinski\n"
 "  Miłosz Kosobucki https://launchpad.net/~mikom\n"
-"  Patryk Wychowaniec https://launchpad.net/~p98\n"
+"  RapierTG https://launchpad.net/~rapier\n"
 "  Sebastian Mazur https://launchpad.net/~sebastianmaz\n"
 "  Spox5 https://launchpad.net/~spox5\n"
 "  doiges https://launchpad.net/~bohopicasso\n"
 "  eeree https://launchpad.net/~eeree\n"
 "  jacek https://launchpad.net/~yacka71\n"
-"  pp/bs https://launchpad.net/~pawprok"
+"  pp/bs https://launchpad.net/~pawprok\n"
+"  skrzat https://launchpad.net/~radek-floraland"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1262,12 +1267,12 @@ msgid "Crop to Selection"
 msgstr "Przytnij do zaznaczenia"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Zmień rozmiar..."
+msgid "Resize Image..."
+msgstr "Zmień rozmiar obrazu..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Zmień rozmiar na warstwie..."
+msgid "Resize Canvas..."
+msgstr "Zmień rozmiar płótna..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1292,7 +1297,7 @@ msgstr "Powiększ do zaznaczenia"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Normalny rozmiar"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1370,7 +1375,7 @@ msgstr "Zaznacz wszystko"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Odznacz wszystko"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1424,7 +1429,7 @@ msgstr "warstwa"
 
 #: Pinta.Core/Classes/Document.cs:371
 msgid "copy"
-msgstr ""
+msgstr "kopiuj"
 
 #: Pinta.Core/Classes/BaseTool.cs:151
 msgid "Tool"
@@ -1550,7 +1555,7 @@ msgstr "Fragmenty"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr ""
+msgstr "Wypełnij zarys"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
@@ -1636,55 +1641,45 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Wskazówka: Dla uzyskania lepszego efektu, zaznacz oko korzystając z narzędzi "
+"Wskazówka: Aby uzyskać optymalny efekt, zaznacz oko korzystając z narzędzi "
 "zaznaczania."
 
-#~ msgid "Show Pad"
-#~ msgstr "Pokaż panel"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Edytor obrazów"
 
-#~ msgid "Continue without saving"
-#~ msgstr "Kontynuuj bez zapisywania"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Łatwo twórz i edytuj grafikę"
 
-#~ msgid "X :"
-#~ msgstr "X :"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Edytor Obrazów Pinta"
 
-#~ msgid "Y :"
-#~ msgstr "Y :"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Otwarcie obrazów"
 
-#~ msgid "Color Mode"
-#~ msgstr "Tryb koloru"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "Nie można zapisać pliku. Plik tylko do odczytu."
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Tryb przeźroczystości"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"Obraz który próbujesz wkleić jest większy niż rozmiar płótna. Co chcesz z "
+"tym zrobić?"
 
-#~ msgid "Fill mode"
-#~ msgstr "Tryb wypełnienia"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Powiększ płótno"
 
-#~ msgid "Actual Size"
-#~ msgstr "Faktyczny rozmiar"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Wygładzanie krawędzi"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Dopasuj do okna"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Czy chcesz zapisać zmiany w \"{0}\" przed utworzeniem nowego obrazu?"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "Czy chcesz zapisać zmiany w \"{0}\" przed utworzeniem nowego obrazu?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Grafika OpenRaster (*.ora)"
-
-#~ msgid "Mode"
-#~ msgstr "Tryb"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Kliknij i przeciągnij, aby wymazać część obrazka."
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Nie zmieniaj rozmiaru płótna"

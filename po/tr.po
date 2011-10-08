@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 17:36+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-09-23 10:19+0000\n"
+"Last-Translator: rosencreuz <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -40,7 +40,7 @@ msgstr "Posterleştir"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr "Siyah ve Beyaz"
+msgstr "Siyah Beyaz"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
@@ -49,11 +49,11 @@ msgstr "Eğriler"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr "Açıklık / Parlaklık"
+msgstr "Parlaklık / Kontrast"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "Ton / Dolgunluk"
+msgstr "Ton / Doygunluk"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
@@ -160,11 +160,11 @@ msgstr "Bulutlar"
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr "Oluştur"
+msgstr "Tara"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr "Odaklan"
+msgstr "Odağı Kaldır"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
@@ -179,7 +179,7 @@ msgstr "Fotoğraf"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr ""
+msgstr "Mandelbrot Fraktali"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
@@ -194,7 +194,7 @@ msgstr "Kenar Saptama"
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 msgid "Stylize"
-msgstr "Stilize"
+msgstr "Stilize et"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
@@ -324,7 +324,7 @@ msgstr "İkincil Rengi Seç"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Palet Rengini Seç"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -340,11 +340,13 @@ msgstr ""
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
-msgstr "Stampa"
+msgstr "Klonlama Aracı"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
 msgstr ""
+"Kaynağı belirlemek için ctrl'ye basarak sol tıklayın, boyamak için sol "
+"tıklayın."
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -352,7 +354,7 @@ msgstr ""
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Benzer renkli bir bölge seçmek için tıklayın."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -383,6 +385,8 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Birincil renkten ikincil renge geçiş çizmek için tıklayıp sürükleyin. "
+"Tersini yapmak için sağ tıklayın."
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
@@ -444,6 +448,8 @@ msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Bir piksel kalınlığında, birincil renkte serbest çizim için sol tıklayın, "
+"ikincil rengi kullanmak için sağ tıklayın."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
@@ -454,16 +460,18 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"Elips şeklinde seçim yapmak için tıklayıp sürükleyin. Seçimini daire "
+"şeklinde olması için Shift'e basınız."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
 msgstr "Çizgi"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Birincil renkle çizmek için sol, ikincil renkle çizmek için sağ tıklayın."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -473,6 +481,8 @@ msgstr "Silgi"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Silindiğinde transparan olması için sol tıklayarak, ikincil rengin görünmesi "
+"için sağ tıklayarak silin. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -539,11 +549,11 @@ msgstr "Seçili Pikselleri Taşı"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "Seçili içeriği hareket ettirmek için seçili alanı sürükle."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Tekrar renklendir"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
@@ -595,7 +605,7 @@ msgstr "Kalın"
 
 #: Pinta.Tools/TextTool/TextTool.cs:119
 msgid "Italic"
-msgstr "Eğik"
+msgstr "İtalik"
 
 #: Pinta.Tools/TextTool/TextTool.cs:126
 msgid "Underline"
@@ -615,7 +625,7 @@ msgstr "Sağa Hizalı"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Yazı Stili"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -690,6 +700,8 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
+"Odağı büyütmek için sol, küçültmek için sağ tıklayın. Seçili bir alanı "
+"büyütmek için tıklayıp sürükleyin."
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
@@ -717,15 +729,15 @@ msgstr "_Dosya"
 
 #: Pinta/MainWindow.cs:457
 msgid "_Edit"
-msgstr "_Düzenle"
+msgstr "Düz_enle"
 
 #: Pinta/MainWindow.cs:459
 msgid "_View"
-msgstr "_Göster"
+msgstr "_Görünüm"
 
 #: Pinta/MainWindow.cs:462
 msgid "_Image"
-msgstr "_Görüntü"
+msgstr "Res_im"
 
 #: Pinta/MainWindow.cs:463
 msgid "_Layers"
@@ -745,7 +757,7 @@ msgstr "_Pencere"
 
 #: Pinta/MainWindow.cs:471
 msgid "Tool Windows"
-msgstr "Araç Penceresi"
+msgstr "Araç Pencereleri"
 
 #: Pinta/MainWindow.cs:475
 msgid "_Help"
@@ -817,7 +829,7 @@ msgstr "Kaydetmeden kapat"
 
 #: Pinta/DialogHandlers.cs:193
 msgid "Resize Palette"
-msgstr ""
+msgstr "Paleti Yeniden Boyutlandır"
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
@@ -929,8 +941,10 @@ msgstr ""
 "  58zarali https://launchpad.net/~yusufulku\n"
 "  Ahmet Vurgun https://launchpad.net/~ahmetvurgun\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Mehmet Gülmen https://launchpad.net/~memetgulmen\n"
 "  Omer GOK https://launchpad.net/~mechulkalan\n"
-"  Yalçın Can https://launchpad.net/~echza"
+"  Yalçın Can https://launchpad.net/~echza\n"
+"  rosencreuz https://launchpad.net/~iyiguncevik"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -993,7 +1007,7 @@ msgstr "Yüzde :"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr ""
+msgstr "Mutlak boyut:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
@@ -1195,7 +1209,7 @@ msgstr "Katmanı Birleştir"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr "Bir dosyayı içeri aktar..."
+msgstr "Dosyadan Aktar"
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
@@ -1225,7 +1239,7 @@ msgstr "Katman Özellikleri..."
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
-msgstr "Bir dosyayı içeri aktar"
+msgstr "Dosyadan Aktar"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
@@ -1233,12 +1247,12 @@ msgid "Crop to Selection"
 msgstr "Seçime Kırp"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Resmi Ölçeklendir..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Tuval Boyutu..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1255,15 +1269,15 @@ msgstr "Uzaklaştır"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "En Uygun Görünüm"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
-msgstr "Seçimi Büyüt"
+msgstr "Seçime Büyüt"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Normal Boyut"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1279,7 +1293,7 @@ msgstr "Cetvel"
 
 #: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Pixels"
-msgstr "Pikseller"
+msgstr "Piksel"
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Inches"
@@ -1325,7 +1339,7 @@ msgstr "Yeni Görüntü Dosyasına Yapıştır"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Seçimi sil"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1341,7 +1355,7 @@ msgstr "Tümünü Seç"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Tüm Seçimleri Kaldır"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1373,8 +1387,8 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"Palat dosyası açılamdı: {0}.\n"
-"Lütfen GIMP veya Paint.NET paletlerini seçiniz."
+"Palet dosyası açılamadı: {0}.\n"
+"Lütfen geçerli bir GIMP ya da Paint.NET paleti seçtiğinizi doğrulayın."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
@@ -1406,7 +1420,7 @@ msgstr "Kısayol tuşu"
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr "Normal Harmalama"
+msgstr "Normal Harmanlama"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
@@ -1486,7 +1500,7 @@ msgstr "Renk Dizisi"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "Renk Doygunluğu"
 
 #: GlowEffect dialog
 msgid "Coloring"
@@ -1544,7 +1558,7 @@ msgstr "Kalem Ucu Büyüklüğü"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr "Yüzde"
+msgstr "Yüzdelik Değer"
 
 #: RadialBlurEffect dialog
 msgid "Power"
@@ -1564,7 +1578,7 @@ msgstr "Döndürme"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "Doygunluk yüzdesi"
 
 #: CloudsEffect dialog
 msgid "Scale"
@@ -1599,46 +1613,49 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"Önizlemeler, küçük resimler ve dar açılar için düşük kalite kullanın. Son "
+"nüshada kalite, büyük resimler ve geniş açılar için yüksek kalite kullanın."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"Öneri: En iyi sonucu almak için ilk önce seçim araçlarını kullanarak iki "
+"gözü seçin."
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr ""
 
-#~ msgid "Continue without saving"
-#~ msgstr "Kaydetmeden devam et"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr ""
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr ""
-#~ "Yeni bir belge açılmadan önce \"{0}\" görüntüsündeki değişiklikler "
-#~ "kaydedilsin mi?"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr ""
 
-#~ msgid "X :"
-#~ msgstr "X :"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr ""
 
-#~ msgid "Y :"
-#~ msgstr "Y :"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "Color Mode"
-#~ msgstr "Renk Kipi"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Şeffaflık Kipi"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "Fill mode"
-#~ msgstr "Doldurma kipi"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#~ msgid "Actual Size"
-#~ msgstr "Özgün Boyut"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Yazıtipi yumuşatma"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Pencereye Yaklaş"
-
-#~ msgid "Mode"
-#~ msgstr "Mod"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

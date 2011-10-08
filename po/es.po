@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-08 10:04+0000\n"
+"PO-Revision-Date: 2011-09-28 04:26+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -127,7 +127,8 @@ msgstr "Azul "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr "Consejo: Haga clic secundario para eliminar los puntos de control."
+msgstr ""
+"Consejo: Pulse con el botón derecho para eliminar los puntos de control."
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
@@ -335,24 +336,24 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
-"Haga clic y arrastre para dibujar una selección rectangular. Mantenga "
-"pulsada la tecla Mayús si desea que la forma sea un cuadrado."
+"Pulse y arrastre para dibujar una selección rectangular. Mantenga presionada "
+"la tecla Mayús para que la forma sea un cuadrado."
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
-msgstr "Tampón de clonación"
+msgstr "Tampón de clonar"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "Ctrl+clic para fijar origen, clic para pintar."
+msgstr "Ctrl+pulse para fijar origen, pulse para pintar."
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr "Selección con varita mágica"
+msgstr "Varita mágica"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr "Haga clic para seleccionar una región de un color similar."
+msgstr "Pulse para seleccionar una región de un color similar."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
@@ -363,9 +364,9 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
-"Haga clic y arrastre para dibujar un rectángulo (con el botón derecho para "
-"usar el color secundario). Mantenga pulsada la tecla Mayús si desea que la "
-"forma sea un cuadrado."
+"Pulse y arrastre para dibujar un rectángulo (con el botón derecho para usar "
+"el color secundario). Mantenga presionada la tecla Mayús para que la forma "
+"sea un cuadrado."
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -377,36 +378,35 @@ msgstr "Arrastre la selección para mover su contorno."
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr "Gradiente"
+msgstr "Degradado"
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Haga clic y arrastre para dibujar un gradiente del color primario al "
-"secundario. Haga clic con el botón derecho para realizar la operación a la "
-"inversa."
+"Pulse y arrastre para dibujar un degradado del color primario al secundario. "
+"Pulse con el botón derecho para realizar la operación a la inversa."
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
-msgstr "Gradiente lineal"
+msgstr "Degradado lineal"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr "Gradiente lineal reflejado"
+msgstr "Degradado lineal reflejado"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr "Gradiente lineal en diamante"
+msgstr "Degradado lineal en diamante"
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr "Gradiente radial"
+msgstr "Degradado radial"
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
-msgstr "Gradiente cónico"
+msgstr "Degradado cónico"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
@@ -433,8 +433,8 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Haga clic con el botón izquierdo para dibujar con el color primario, o bien "
-"con el botón derecho para dibujar con el color secundario."
+"Pulse con el botón izquierdo para dibujar con el color primario, o bien con "
+"el botón derecho para dibujar con el color secundario."
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
@@ -449,8 +449,8 @@ msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
-"Clic para dibujar libremente líneas de un píxel de grosor con color "
-"primario, clic con botón derecho para usar el color secundario."
+"Pulse para dibujar líneas libres de un píxel de grosor con color primario, "
+"pulse con el botón derecho para usar el color secundario."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
@@ -461,38 +461,40 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
-"Haga clic y arrastre para dibujar una selección elíptica. Mantenga pulsada "
-"la tecla Mayús si desea que la forma sea un círculo."
+"Pulse y arrastre para dibujar una selección elíptica. Mantenga presionada "
+"Mayús para que la forma sea un círculo."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
 msgstr "Línea"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Haga clic con el botón izquierdo para dibujar con el color primario, o bien "
-"con el botón derecho para dibujar con el color secundario."
+"Pulse para dibujar con el color primario, pulse con el botón derecho para "
+"hacerlo con el color secundario. Mantenga presionada Mayús para ajustarse a "
+"los ángulos."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr "Goma de borrar"
+msgstr "Borrador"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Clic para borrar a transparente, clic derecho para borrar con el color "
-"secundario. "
+"Pulse para borrar con transparencia, use el botón derecho para borrar con el "
+"color secundario. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr "Desplazamiento"
+msgstr "Desplazar"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Haga clic y arrastre para desplazarse por la imagen."
+msgstr "Pulse y arrastre para desplazarse por la imagen."
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
@@ -501,8 +503,8 @@ msgstr "Selector de color"
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Haga clic con el botón izquierdo para establecer el color primario. Haga "
-"clic con el botón derecho para establecer el color secundario."
+"Pulse con el botón izquierdo para establecer el color primario, o bien con "
+"el botón derecho para establecer el color secundario."
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
@@ -529,9 +531,9 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
-"Haga clic y arrastre para dibujar un rectángulo redondeado (con el botón "
-"derecho para usar el color secundario). Mantenga pulsada la tecla Mayús si "
-"desea que la forma sea un cuadrado."
+"Pulse y arrastre para dibujar un rectángulo redondeado (con el botón derecho "
+"para usar el color secundario). Mantenga presionada la tecla Mayús para que "
+"la forma sea un cuadrado."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
@@ -563,7 +565,7 @@ msgstr "Recolorear"
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
 msgstr ""
-"Haga clic con el botón izquierdo para reemplazar el color secundario por el "
+"Pulse con el botón izquierdo para reemplazar el color secundario por el "
 "primario."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
@@ -575,8 +577,8 @@ msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Haga clic con botón izquierdo para rellenar una región con el color "
-"primario, con el botón derecho para usar el color secundario."
+"Pulse con el botón izquierdo para rellenar una región con el color primario, "
+"o bien con el botón derecho para usar el color secundario."
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
@@ -587,9 +589,9 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
-"Haga clic y arrastre para dibujar una elipse (con el botón derecho para usar "
-"el color secundario). Mantenga pulsada la tecla Mayús si desea que la forma "
-"sea un círculo."
+"Pulse y arrastre para dibujar una elipse (con el botón derecho para usar el "
+"color secundario). Mantenga presionada la tecla Mayús para que la forma sea "
+"un círculo."
 
 #: Pinta.Tools/TextTool/TextTool.cs:36
 msgid "Text"
@@ -600,8 +602,8 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Haga clic con botón izquierdo para color el cursor, después teclee el texto. "
-"El color del texto será el primario."
+"Pulse para colocar el cursor, después teclee el texto deseado. El color del "
+"texto será el primario."
 
 #: Pinta.Tools/TextTool/TextTool.cs:77
 msgid "Font"
@@ -649,11 +651,11 @@ msgstr "Ancho de contorno"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr "Reducir tamaño de contorneado"
+msgstr "Reducir tamaño de contorno"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr "Aumentar tamaño de contorneado"
+msgstr "Aumentar tamaño de contorno"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -708,8 +710,8 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Haga clic con el botón izquierdo para ampliar o con el botón derecho para "
-"reducir. Haga clic y arrastre para hacer zoom en la selección."
+"Pulse con el botón izquierdo para ampliar o con el botón derecho para "
+"reducir. Pulse y arrastre para hacer zoom en la selección."
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
@@ -729,7 +731,7 @@ msgstr "Acerca de"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
@@ -948,7 +950,8 @@ msgstr ""
 "  Fitoschido https://launchpad.net/~fitoschido\n"
 "  Francisco Camenforte Torres https://launchpad.net/~fct\n"
 "  Jin Valiant https://launchpad.net/~jin-valiant\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Woakaon https://launchpad.net/~calango-42"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -984,7 +987,7 @@ msgstr "Copyright"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr "de los contribuyentes de Pinta"
+msgstr "de los contribuyentes a Pinta"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
@@ -1055,11 +1058,11 @@ msgstr "Imagen nueva"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "Nuevo tamaño de imagen          "
+msgstr "Tamaño de la imagen nueva          "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
-msgstr "número de hebras que se usarán al renderizar"
+msgstr "número de hilos que se usarán al renderizar"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
@@ -1251,12 +1254,12 @@ msgid "Crop to Selection"
 msgstr "Recortar según la selección"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Redimensionar…"
+msgid "Resize Image..."
+msgstr "Redimensionar imagen…"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Tamaño de lienzo..."
+msgid "Resize Canvas..."
+msgstr "Redimensionar lienzo…"
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1628,89 +1631,41 @@ msgstr ""
 "Consejo: para mejorar el resultado, seleccione primero cada ojo con las "
 "herramientas de selección."
 
-#~ msgid "Help"
-#~ msgstr "Ayuda"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Adjustments"
-#~ msgstr "Ajustes"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Editor de imágenes"
 
-#~ msgid "Effects"
-#~ msgstr "Efectos"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Cree y edite imágenes fácilmente"
 
-#~ msgid "File"
-#~ msgstr "Fichero"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Editor de imágenes Pinta"
 
-#~ msgid "Edit"
-#~ msgstr "Edición"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Abrir imágenes"
 
-#~ msgid "View"
-#~ msgstr "Ver"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "No se puede guardar un archivo de solo lectura."
 
-#~ msgid "Image"
-#~ msgstr "Imagen"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"La imagen a pegar es más grande que el tamaño del lienzo. ¿Qué quiere hacer?"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Expandir lienzo"
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "¿Guardar los cambios en la imagen \"{0}\" antes de crear otra?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Imagen OpenRaster (*.ora)"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Ampliar a ventana"
-
-#~ msgid "Actual Size"
-#~ msgstr "Tamaño real"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Mezcla normal / Reemplazar"
-
-#~ msgid "Continue without saving"
-#~ msgstr "Continuar sin guardar"
-
-#~ msgid "RGB\r"
-#~ msgstr "RGB\r"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr ""
-#~ "Sugerencia: haga clic con el botón derecho para quitar los puntos de control."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "¿Guardar los cambios en la imagen \"{0}\" antes de abrir otra?"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Suavizado"
-
-#~ msgid "X :"
-#~ msgstr "X:"
-
-#~ msgid "Y :"
-#~ msgstr "Y:"
-
-#~ msgid "Color Mode"
-#~ msgstr "Modo de color"
-
-#~ msgid "Transparency Mode"
-#~ msgstr "Modo de transparencia"
-
-#~ msgid "Fill mode"
-#~ msgstr "Modo de relleno"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Haga clic y arrastre para borrar una parte de la imagen."
-
-#~ msgid "Show Pad"
-#~ msgstr "Mostrar panel"
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "No redimensionar el lienzo"

@@ -1,16 +1,16 @@
-# Japanese translation for pinta
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Malay translation for pinta
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-19 22:07+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"PO-Revision-Date: 2011-09-25 10:08+0000\n"
+"Last-Translator: abuyop <Unknown>\n"
+"Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,99 +19,99 @@ msgstr ""
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "自動レベル補正"
+msgstr "Paras Auto"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "色を反転"
+msgstr "Terbalikkan Warna"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr "レベル"
+msgstr "Paras-paras"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
-msgstr "セピア"
+msgstr "Sepia"
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "ポスタリゼーション"
+msgstr "Posterkan"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr "モノクロ"
+msgstr "Hitam Putih"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr "カーブ"
+msgstr "Lengkung"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr "明度 / コントラスト"
+msgstr "Kecerahan / Beza Jelas"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "色彩 / 彩度"
+msgstr "Hue / Ketepuan"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "レベル補正"
+msgstr "Pelarasan Paras"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "入力ヒストグラム"
+msgstr "Histogram Input"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "入力"
+msgstr "Input"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "出力"
+msgstr "Output"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "出力ヒストグラム"
+msgstr "Histogram Output"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr "自動"
+msgstr "Auto"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr "リセット"
+msgstr "Tetap semula"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr "赤"
+msgstr "Merah"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
-msgstr "緑"
+msgstr "Hijau"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr "青"
+msgstr "Biru"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr "リンク済み"
+msgstr "Terpaut"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr "転送マップ"
+msgstr "Peta Pindahan"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr "明度"
+msgstr "Luminans"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
@@ -119,29 +119,29 @@ msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr "赤  "
+msgstr "Merah  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr "青 "
+msgstr "Biru "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr ""
+msgstr "Klu: Klik kanan untuk buang titik kawalan"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr "ノイズの低減"
+msgstr "Kurangkan Hingar"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 msgid "Noise"
-msgstr "ノイズ"
+msgstr "Hingar"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
-msgstr "フラグメント"
+msgstr "Serpihan"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/UnfocusEffect.cs:36
@@ -150,59 +150,59 @@ msgstr "フラグメント"
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:34
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
 msgid "Blurs"
-msgstr "ぼかし"
+msgstr "Kabur"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr "雲"
+msgstr "Awan"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:38
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr "レンダリング"
+msgstr "Jadikan"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr "アンフォーカス"
+msgstr "Samar"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
-msgstr "赤目除去"
+msgstr "Pembuangan Mata Merah"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
 #: Pinta.Effects/Effects/GlowEffect.cs:39
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 msgid "Photo"
-msgstr "写真"
+msgstr "Foto"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr "フラクタル"
+msgstr "Fraktal Mandelbrot"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr "発光"
+msgstr "Bersinar"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr "エッジの強調"
+msgstr "Kesan Tepi"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 msgid "Stylize"
-msgstr "スタイライズ"
+msgstr "Gayakan"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr "ぼかし (放射状)"
+msgstr "Kabur Berjejari"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr "すりガラス"
+msgstr "Gelas Beku"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
 #: Pinta.Effects/Effects/TileEffect.cs:34
@@ -211,168 +211,172 @@ msgstr "すりガラス"
 #: Pinta.Effects/Effects/BulgeEffect.cs:34
 #: Pinta.Effects/Effects/TwistEffect.cs:34
 msgid "Distort"
-msgstr "変形"
+msgstr "Herot"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
-msgstr "油絵"
+msgstr "Lukisan Minyak"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:41
 msgid "Artistic"
-msgstr "アーティスティック"
+msgstr "Artistik"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr "フラクタル (Julia)"
+msgstr "Fraktal Julia"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr "描写"
+msgstr "Lembutkan Potret"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
-msgstr "浮き彫り"
+msgstr "Lepas"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr "スケッチ"
+msgstr "Lakaran Dakwat"
 
 #: Pinta.Effects/Effects/MedianEffect.cs:29
 msgid "Median"
-msgstr "中央値"
+msgstr "Median"
 
 #: Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
-msgstr "エンボス"
+msgstr "Cetak Timbul"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr "ぼかし (ガウス)"
+msgstr "Kabur Gaussian"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
-msgstr "シャープ"
+msgstr "Jelaskan"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr "ノイズの追加"
+msgstr "Tambah Hingar"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
-msgstr "タイルの反射"
+msgstr "Pantulan Genting"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
-msgstr "ピクセレート"
+msgstr "Pikselkan"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
-msgstr "ぼかし (詳細)"
+msgstr "Kabur Gerakan"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr "極の反転"
+msgstr "Pembalikan Kutub"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
-msgstr "ふくらみ"
+msgstr "Bonjol"
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
-msgstr "ぼかし (ズーム)"
+msgstr "Kabur Zum"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
-msgstr "鉛筆"
+msgstr "Lakaran Pensil"
 
 #: Pinta.Effects/Effects/OutlineEffect.cs:29
 #: Pinta.Tools/TextTool/TextTool.cs:171
 msgid "Outline"
-msgstr "アウトライン"
+msgstr "Garis Luar"
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr "ねじれ"
+msgstr "Putar"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
-msgstr "ラベル1"
+msgstr "label1"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 msgid "label"
-msgstr "ラベル"
+msgstr "label"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr "ランダムノイズ"
+msgstr "Hingar Rawak"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr "シード再生成"
+msgstr "Benih Semula"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr "プライマリーカラーを選択"
+msgstr "Pilih Warna Utama"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr ""
+msgstr "Pilih Warna Kedua"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Pilih Warna Palet"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr "矩形選択"
+msgstr "Pilih Segi Empat Tepat"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
-msgstr "クリック＆ドラッグで四角形の選択範囲を作成します。Shift を押しながらドラッグすると正方形になります。"
+msgstr ""
+"Klik dan heret untuk buat pilihan segi empat tepat. Tekan dan tahan shift "
+"untuk jadikan segi empat sama."
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
-msgstr ""
+msgstr "Klon Setem"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
+msgstr "Ctrl+klik kiri untuk tetapkan asalan, klik kiri untuk cat"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr "選択（魔法の杖）"
+msgstr "Pilih Tongkat Ajaib"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Klik untuk pilih kawasan yang sama warna"
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr ""
+msgstr "Segiempat Tepat"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
+"Klik dan heret untuk lukis segi empat tepat ( klik kanan untuk warna kedua). "
+"Tahan shift untuk jadikan segi empat sama."
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "選択範囲を移動"
+msgstr "Alih Pilihan"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr "ドラッグで選択範囲を移動します。"
+msgstr "Heret pilihan untuk alih garis luar pilihan."
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr "グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
@@ -382,43 +386,43 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
-msgstr "線形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr "反射形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr "菱形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr "放射状グラデーション"
+msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
-msgstr "円錐形グラデーション"
+msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr "フルードモード"
+msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
-msgstr "隣接領域を抽出"
+msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:81
 msgid "Global"
-msgstr "グローバル"
+msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
-msgstr "許容値"
+msgstr "Had terima"
 
 #: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
 msgid "Paintbrush"
-msgstr "ブラシで描画"
+msgstr "Berus cat"
 
 #: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
 msgid ""
@@ -428,11 +432,11 @@ msgstr ""
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr ""
+msgstr "Jenis"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
-msgstr "鉛筆"
+msgstr "Pensil"
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
@@ -448,11 +452,11 @@ msgstr ""
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
-msgstr "クリック - ドラッグで楕円の選択範囲を作成します。Shift を押しながらドラッグすると正円になります。"
+msgstr ""
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr "ライン"
+msgstr "Garis"
 
 #: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
@@ -462,7 +466,7 @@ msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr ""
+msgstr "Pemadam"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid ""
@@ -479,11 +483,11 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr "スポイト"
+msgstr "Pengambil Warna"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "左クリックで前景色、右クリックで背景色を選択。"
+msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
@@ -495,11 +499,11 @@ msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr "以前のツールに切り替える"
+msgstr ""
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr "鉛筆ツールに切り替える"
+msgstr ""
 
 #: Pinta.Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
@@ -510,12 +514,10 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
-"クリック - ドラッグで面取り四角形を描きます。左クリックのときは前景色で、右クリックのときは背景色で描きます。Shift "
-"を押しながらドラッグすると面取り正方形になります。"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
-msgstr "半径"
+msgstr "Jejari"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:88
 msgid "Decrease rectangle's corner radius"
@@ -534,7 +536,7 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr "ドラッグで選択範囲のピクセルを移動します。"
+msgstr ""
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
@@ -566,7 +568,7 @@ msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:36
 msgid "Text"
-msgstr "テキスト"
+msgstr "Tulisan"
 
 #: Pinta.Tools/TextTool/TextTool.cs:42
 msgid ""
@@ -576,23 +578,23 @@ msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:77
 msgid "Font"
-msgstr "フォント"
+msgstr "Huruf"
 
 #: Pinta.Tools/TextTool/TextTool.cs:112
 msgid "Bold"
-msgstr "太文字"
+msgstr "Huruf Tebal"
 
 #: Pinta.Tools/TextTool/TextTool.cs:119
 msgid "Italic"
-msgstr "斜体"
+msgstr "Huruf condong"
 
 #: Pinta.Tools/TextTool/TextTool.cs:126
 msgid "Underline"
-msgstr "下線"
+msgstr "Garis Bawah"
 
 #: Pinta.Tools/TextTool/TextTool.cs:135
 msgid "Left Align"
-msgstr "行揃え (左詰め)"
+msgstr "Jajar Kiri"
 
 #: Pinta.Tools/TextTool/TextTool.cs:143
 msgid "Center Align"
@@ -600,15 +602,15 @@ msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:150
 msgid "Right Align"
-msgstr ""
+msgstr "Jajar Kanan"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Gaya Tulisan"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr ""
+msgstr "Biasa"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
@@ -628,43 +630,43 @@ msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
-msgstr "ブラシサイズ"
+msgstr "Lebar Berus"
 
 #: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
 msgid "Decrease brush size"
-msgstr "ブラシサイズを小さくします"
+msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
 msgid "Increase brush size"
-msgstr "ブラシサイズを大きくします"
+msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
-msgstr "フィルスタイル"
+msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
 msgid "Outline Shape"
-msgstr "輪郭を描く"
+msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
 msgid "Fill Shape"
-msgstr "塗りつぶす"
+msgstr ""
 
 #: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
 msgid "Fill and Outline Shape"
-msgstr "塗りつぶして輪郭を描く"
+msgstr ""
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
-msgstr ""
+msgstr "Bulatan"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:38
 msgid "Grid"
-msgstr ""
+msgstr "Grid"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:40
 msgid "Squares"
-msgstr ""
+msgstr "Segi Empat Sama"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
@@ -672,13 +674,13 @@ msgstr ""
 
 #: Pinta.Tools/ZoomTool.cs:49
 msgid "Zoom"
-msgstr "ズーム"
+msgstr "Zoom"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr "左クリックのときはズームイン、右クリックのときはズームアウトします。クリック - ドラッグで選択した範囲にズームインします。"
+msgstr ""
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
@@ -686,7 +688,7 @@ msgstr ""
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "クリック - ドラッグで境界線を描いて選択範囲を作成します。"
+msgstr ""
 
 #: Pinta.Tools/FreeformShapeTool.cs:53
 msgid "Freeform Shape"
@@ -694,43 +696,43 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
-msgstr "このソフトウェアについて"
+msgstr ""
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
-msgstr "ファイル(_F)"
+msgstr "_Fail"
 
 #: Pinta/MainWindow.cs:457
 msgid "_Edit"
-msgstr "編集(_E)"
+msgstr "_Sunting"
 
 #: Pinta/MainWindow.cs:459
 msgid "_View"
-msgstr "表示(_V)"
+msgstr "_Paparan"
 
 #: Pinta/MainWindow.cs:462
 msgid "_Image"
-msgstr "画像(_I)"
+msgstr "_Imej"
 
 #: Pinta/MainWindow.cs:463
 msgid "_Layers"
-msgstr "レイヤ(_L)"
+msgstr "_Lapisan"
 
 #: Pinta/MainWindow.cs:464
 msgid "_Adjustments"
-msgstr "調整(_A)"
+msgstr ""
 
 #: Pinta/MainWindow.cs:465
 msgid "Effe_cts"
-msgstr "エフェクト(_C)"
+msgstr ""
 
 #: Pinta/MainWindow.cs:467
 msgid "_Window"
-msgstr "ウィンドウ(_W)"
+msgstr "_Tetingkap"
 
 #: Pinta/MainWindow.cs:471
 msgid "Tool Windows"
@@ -738,254 +740,254 @@ msgstr ""
 
 #: Pinta/MainWindow.cs:475
 msgid "_Help"
-msgstr "ヘルプ(_H)"
+msgstr "_Bantuan"
 
 #: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
 msgid "Tools"
-msgstr "ツール"
+msgstr "Alatan"
 
 #: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
 #: Pinta.Core/Actions/EditActions.cs:121
 msgid "Palette"
-msgstr "パレット"
+msgstr "Palet"
 
 #: Pinta/MainWindow.cs:588
 msgid "Documents"
-msgstr "ドキュメント"
+msgstr "Dokumen"
 
 #: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
 msgid "Layers"
-msgstr "レイヤー"
+msgstr "Lapisan"
 
 #: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
 msgid "History"
-msgstr "履歴"
+msgstr "Sejarah"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
 msgid "Hide"
-msgstr "非表示"
+msgstr "Sorok"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr "ドッキング"
+msgstr "Labuh"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 #: Pinta/DockLibrary/DockItem.cs:502
 msgid "Auto Hide"
-msgstr "自動的に隠す"
+msgstr "Auto Sembunyi"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr "ドックに格納可能"
+msgstr "Boleh labuh"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr "フローティング"
+msgstr "Terapung"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Ambil Cekupan Skrin"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "スクリーンショットを撮るまでの遅延時間（秒）："
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:158
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "閉じる前に変更を \"{0}\" に保存しますか?"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:159
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "保存しない場合、すべての変更が失われます。"
+msgstr ""
 
 #: Pinta/DialogHandlers.cs:166
 msgid "Close without saving"
-msgstr "保存せずに閉じる"
+msgstr "Tutup tanpa simpan"
 
 #: Pinta/DialogHandlers.cs:193
 msgid "Resize Palette"
-msgstr ""
+msgstr "Ubah Saiz Palet"
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
-msgstr ""
+msgstr "Saiz baru palet:"
 
 #: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
 msgid "Paste Into New Layer"
-msgstr "新規レイヤーに貼り付け"
+msgstr "Tampal dalam Lapisan Baru"
 
 #: Pinta/DialogHandlers.cs:320
 msgid "Layer Opacity"
-msgstr "レイヤーの不透明度"
+msgstr "Kelegapan Lapisan"
 
 #: Pinta/DialogHandlers.cs:325
 msgid "Rename Layer"
-msgstr "レイヤー名を変更"
+msgstr "Namakan Semula Lapisan"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Hide Layer"
-msgstr "レイヤーを非表示"
+msgstr "Sorok Lapisan"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Show Layer"
-msgstr "レイヤーを表示"
+msgstr "Paparkan Lapisan"
 
 #: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
 msgid "Layer Properties"
-msgstr "レイヤーのプロパティ"
+msgstr "Ciri Lapisan"
 
 #: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
 msgid "Open Image File"
-msgstr "イメージファイルを開く"
+msgstr "Buka Fail Gambar"
 
 #: Pinta/DialogHandlers.cs:423
 msgid "Image files"
-msgstr "イメージファイル"
+msgstr "Fail-fail Gambar"
 
 #: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
 msgid "All files"
-msgstr "すべてのファイル"
+msgstr "Semua fail-fail"
 
 #: Pinta/DialogHandlers.cs:480
 msgid "Paste cancelled"
-msgstr "貼り付けはキャンセルされました"
+msgstr "Tampalan dibatalkan"
 
 #: Pinta/DialogHandlers.cs:481
 msgid "The clipboard does not contain an image"
-msgstr "クリップボードに画像はありません"
+msgstr "Clipboard tidak mengandungi gambar"
 
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
-msgstr "イメージファイルの保存"
+msgstr "Simpan fail Gambar"
 
 #: Pinta/DialogHandlers.cs:612
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pintaはこの画像形式での保存をサポートしていません"
+msgstr "Pinta tidak boleh menyimpan gambar dalam format fail ini."
 
 #: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
 #: Pinta.Core/Actions/EditActions.cs:347
 msgid "Error"
-msgstr "エラー"
+msgstr "Ralat"
 
 #: Pinta/DialogHandlers.cs:633
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "同名のファイル \"{0}\" があります。置き換えますか？"
+msgstr "Fail bertajuk \"{0}\" sudah pun ada. Anda mahu gantikan ia?"
 
 #: Pinta/DialogHandlers.cs:634
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
+"Fail sudah pun wujud dalam \"{1}\". Semua kandungan sedia ada akan ditindan "
+"jika anda pilih gantikan."
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "JPEG 画質"
+msgstr "Kualiti JPEG"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
-msgstr "画質 "
+msgstr "Kualiti: "
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "タイトル"
+msgstr "Tajuk"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
-msgstr "バージョン"
+msgstr "Versi"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "パス名"
+msgstr "Laluan"
 
 #: Pinta/Dialogs/AboutDialog.cs:101
 msgid "Contributors to this Release"
-msgstr "このバージョンの貢献者"
+msgstr "Penyumbang Terbitan ini"
 
 #: Pinta/Dialogs/AboutDialog.cs:111
 msgid "Previous Contributors"
-msgstr "過去の貢献者"
+msgstr "Penyumbang Terdahulu"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Kiyotaka NISHIBORI https://launchpad.net/~ml-nishibori-kiyotaka\n"
-"  OTHUBO Jumpei https://launchpad.net/~otsubo-jumpei\n"
-"  Yutaka Aiko https://launchpad.net/~ubon\n"
-"  ytetsu https://launchpad.net/~ytetsu"
+"  Mohd Farimi Ab Rahman https://launchpad.net/~farimi\n"
+"  abuyop https://launchpad.net/~abuyop\n"
+"  lcdvirgo https://launchpad.net/~lcdvirgo"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
-msgstr "翻訳:"
+msgstr "Diterjemah oleh:"
 
 #: Pinta/Dialogs/AboutDialog.cs:130
 msgid "Based on the work of Paint.NET:"
-msgstr "Paint.NET プロジェクト:"
+msgstr "Berasaskan Paint.NET"
 
 #: Pinta/Dialogs/AboutDialog.cs:137
 msgid "Using some icons from:"
-msgstr "一部のアイコン:"
+msgstr "Menggunakan beberapa ikon dari:"
 
 #: Pinta/Dialogs/AboutDialog.cs:249
 msgid "About Pinta"
-msgstr "Pinta について"
+msgstr "Berkenaan Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:267
 msgid "Version Info"
-msgstr "バージョン情報"
+msgstr "Maklumat Versi"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr "ライセンス"
+msgstr "Lesen"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr "MIT X11 ライセンスの元で公開されました。"
+msgstr ""
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr "著作権"
+msgstr "Hakcipta"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr "Pinta 貢献者"
+msgstr "oleh penyumbang Pinta"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr "名前:"
+msgstr "Nama:"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr "表示"
+msgstr "Boleh Dilihat"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr "不透明度:"
+msgstr "Kelegapan:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Classes/Document.cs:612
 msgid "Resize Canvas"
-msgstr "キャンバスサイズの変更"
+msgstr "Ubah Saiz Kanvas"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "パーセント指定:"
+msgstr "Ikut peratus:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "絶対サイズ指定:"
+msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 msgid "Width:"
-msgstr "幅:"
+msgstr "Lebar:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
@@ -994,40 +996,40 @@ msgstr "幅:"
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr "ピクセル"
+msgstr "piksel"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 msgid "Height:"
-msgstr "高さ:"
+msgstr "Tinggi:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "アスペクト比を保持する"
+msgstr "Kekalkan nisbah aspek"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "アンカー:"
+msgstr "Sauh:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 msgid "Resize Image"
-msgstr "画像サイズの変更"
+msgstr "Ubah Saiz Gambar"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Managers/WorkspaceManager.cs:159
 msgid "New Image"
-msgstr "新規イメージ"
+msgstr "Gambar Baru"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "新規イメージのサイズ          "
+msgstr "Saiz Baru Gambar          "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
-msgstr "レンダリングに使用するスレッド数"
+msgstr ""
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
@@ -1035,188 +1037,188 @@ msgstr ""
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr "効果のレンダリング"
+msgstr ""
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:91
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "未保存の画像 {0}"
+msgstr "Gambar Belum Simpan {0}"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:150
 msgid "Background"
-msgstr "背景色"
+msgstr "Latar Belakang"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:177
 msgid "Open Image"
-msgstr "イメージを開く"
+msgstr "Buka Gambar"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:184
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "ファイルを開けません: {0}"
+msgstr "Gagal buka fail: {0}"
 
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 #: Pinta.Core/Actions/EditActions.cs:69
 msgid "Paste"
-msgstr "貼り付け"
+msgstr "Tampal"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 #: Pinta.Core/Actions/ImageActions.cs:65
 msgid "Rotate 180°"
-msgstr "180度回転"
+msgstr "Pusing 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "イメージを水平方向に反転"
+msgstr "Pusing Mendatar"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "イメージを垂直方向に反転"
+msgstr "Pusing Menegak"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:63
 msgid "Rotate 90° Clockwise"
-msgstr "90度回転 (時計回り)"
+msgstr "Pusing 90° Arah Jam"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:64
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "90度回転 (反時計回り)"
+msgstr "Pusing 90° Lawan Arah Jam"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "レイヤーを水平方向に反転"
+msgstr ""
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "レイヤーを垂直方向に反転"
+msgstr ""
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "ピクセル完了"
+msgstr ""
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta 公式サイト"
+msgstr "Laman web Pinta"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "バグの報告"
+msgstr "Adukan Ralat"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr "このアプリケーションを翻訳"
+msgstr "Terjemah Aplikasi Ini"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "すべて保存"
+msgstr "Simpan Semua"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "すべて閉じる"
+msgstr "Tutup Semua"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "新規..."
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "新規スクリーンショット..."
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
-msgstr "開く..."
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "最近使用したファイルを開く"
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
-msgstr "閉じる"
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "保存"
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
 msgid "Save As..."
-msgstr "名前を付けて保存..."
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "印刷"
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "終了"
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "新規"
+msgstr ""
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "開く"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
-msgstr "新規レイヤーを追加"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
-msgstr "レイヤーを削除"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
-msgstr "レイヤーを複製"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
-msgstr "レイヤーを統合"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr "ファイルからインポート..."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr "水平方向に反転"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
-msgstr "垂直方向に反転"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:71
 msgid "Rotate / Zoom"
-msgstr "回転 / ズーム"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
-msgstr "レイヤーを上に移動"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
-msgstr "レイヤーを下に移動"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr "レイヤー・プロパティ"
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
-msgstr "ファイルからインポート"
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
-msgstr "選択範囲を切り取る"
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1229,15 +1231,15 @@ msgstr ""
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
-msgstr "フラット化"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
-msgstr "拡大"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom Out"
-msgstr "縮小"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
@@ -1245,7 +1247,7 @@ msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
-msgstr "選択範囲に合わせる"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
@@ -1253,61 +1255,61 @@ msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
-msgstr "ツールバー"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Pixel Grid"
-msgstr "網目"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:70
 msgid "Rulers"
-msgstr "ルーラー"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Pixels"
-msgstr "ピクセル"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Inches"
-msgstr "インチ"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:73
 msgid "Centimeters"
-msgstr "センチメートル"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:74
 msgid "Fullscreen"
-msgstr "全画面表示"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:114
 msgid "Ruler Units"
-msgstr "ルーラーの単位"
+msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:194
 #: Pinta.Core/Classes/DocumentWorkspace.cs:226
 #: Pinta.Core/Classes/DocumentWorkspace.cs:234
 msgid "Window"
-msgstr "ウィンドウ"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Undo"
-msgstr "元に戻す"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:66
 msgid "Redo"
-msgstr "やり直し"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
 msgid "Cut"
-msgstr "切り取り"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Copy"
-msgstr "コピー"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Paste Into New Image"
-msgstr "新規イメージに貼り付け"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
@@ -1315,15 +1317,15 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
-msgstr "選択範囲を塗りつぶす"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Invert Selection"
-msgstr "選択範囲を反転"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
 msgid "Select All"
-msgstr "すべて選択"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
@@ -1331,38 +1333,38 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr "標準設定に戻す"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr "色数を指定"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:212
 msgid "Erase Selection"
-msgstr "選択範囲を消去"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:221
 msgid "Deselect"
-msgstr "選択解除"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr "パレットファイルを開く"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "パレットファイル(*.txt, *.gpl)"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
-msgstr "パレットが保存できません: {0}."
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr "パレットの保存"
+msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
@@ -1374,44 +1376,44 @@ msgstr ""
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
-msgstr "レイヤー"
+msgstr ""
 
 #: Pinta.Core/Classes/Document.cs:371
 msgid "copy"
-msgstr "コピー"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:151
 msgid "Tool"
-msgstr "ツール"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Shortcut key"
-msgstr "ショートカットキー"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr "ノーマルブレンド"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr "上書き"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
-msgstr "アンチエイリアスの有効"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:257
 msgid "Antialiasing Off"
-msgstr "アンチエイリアスの無効"
+msgstr ""
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} イメージ ({1})"
+msgstr ""
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
-msgstr "一般"
+msgstr ""
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1420,7 +1422,7 @@ msgstr "一般"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr "量"
+msgstr ""
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1430,163 +1432,165 @@ msgstr "量"
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr "角度"
+msgstr "Sudut"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr "アンチエイリアス"
+msgstr ""
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr "ブレンドモード"
+msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr "輝度"
+msgstr ""
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr "ブラシのサイズ"
+msgstr ""
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr "セルのサイズ"
+msgstr "Saiz Sel"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr "中央オフセット"
+msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr "中央揃え"
+msgstr ""
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr "粗さ"
+msgstr ""
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr "色の範囲"
+msgstr ""
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr "彩度"
+msgstr ""
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr "色の設定"
+msgstr ""
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr "コントラスト"
+msgstr ""
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr "範囲"
+msgstr ""
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr "距離"
+msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr "境界処理"
+msgstr ""
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr "係数"
+msgstr "Faktor"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr "断片"
+msgstr ""
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "インクのアウトライン"
+msgstr ""
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr "輝度"
+msgstr "Intensiti"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr "照明"
+msgstr ""
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr "オフセット"
+msgstr ""
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr "鉛筆の先端のサイズ"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr "パーセント"
+msgstr "Persentil"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr "強さ"
+msgstr ""
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr "品質"
+msgstr "Kualiti"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr "回転"
+msgstr "Putaran"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr "彩度"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr "スケール"
+msgstr "Skala"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr "乱数シード"
+msgstr ""
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr "ソフトネス"
+msgstr ""
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr "強度"
+msgstr ""
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr "太さ"
+msgstr ""
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr "タイルのサイズ"
+msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr "暖色度"
+msgstr ""
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
-msgstr "プレビューは低品質(小さいイメージ、小さい角度)を使い、最終的な出力は高品質(大きなイメージ、大きな角度)にする。"
+msgstr ""
+"Guna kualiti rendah untuk previews, imej kecil, dan sudut kecil. Guna "
+"kualiti tinggi untuk kualiti terakhir, imej besar, dan sudut besar."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr "ヒント: まず目の部分を選択ツールで選択するとうまくいきます。"
+msgstr ""
 
 #: pinta.desktop.in
 msgid "Pinta"
@@ -1594,15 +1598,15 @@ msgstr ""
 
 #: pinta.desktop.in
 msgid "Image Editor"
-msgstr ""
+msgstr "Penyunting Imej"
 
 #: pinta.desktop.in
 msgid "Easily create and edit images"
-msgstr ""
+msgstr "Cipta dan sunting imej dengan mudah"
 
 #: pinta.desktop.in
 msgid "Pinta Image Editor"
-msgstr ""
+msgstr "Penyunting Imej Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
 msgid "Open Images"

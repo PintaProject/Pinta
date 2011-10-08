@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 18:07+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-09-19 21:53+0000\n"
+"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -454,9 +454,10 @@ msgstr ""
 msgid "Line"
 msgstr "Líne"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
@@ -913,7 +914,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Seanan https://launchpad.net/~seananoc-gmail\n"
-"  Shane Halloran https://launchpad.net/~shane.halloran"
+"  Shane H https://launchpad.net/~shane.h"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1216,12 +1217,12 @@ msgid "Crop to Selection"
 msgstr "Crap go Roghnúchán"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Athmhéadaigh"
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Méid an Chanbháis..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1585,26 +1586,40 @@ msgstr ""
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr ""
 
-#~ msgid "X :"
-#~ msgstr "X :"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr ""
 
-#~ msgid "Y :"
-#~ msgstr "Y :"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr ""
 
-#~ msgid "Actual Size"
-#~ msgstr "Fíormhéid"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr ""
 
-#~ msgid "Color Mode"
-#~ msgstr "Mód Dathanna"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "Mode"
-#~ msgstr "Mód"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Zoom to Window"
-#~ msgstr "Formhéadaigh go dtí Fuinneog"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Brúigh agus tarraing cuid den íomhá chun a scriosadh."
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

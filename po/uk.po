@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 18:02+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-09-22 12:43+0000\n"
+"Last-Translator: Aleksandr Chepurnoy <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -467,10 +467,11 @@ msgstr ""
 msgid "Line"
 msgstr "Лінія"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "Лівою клавішею малює основним кольром а правою малює додатковим."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -479,7 +480,7 @@ msgstr "Гумка"
 #: Pinta.Tools/EraserTool.cs:47
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
-msgstr ""
+msgstr "Ліва кнопка миші стирає до прозорого, права стирає кольором фону. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -624,7 +625,7 @@ msgstr "Рівняння праворуч"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Стиль Тексту"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -632,19 +633,19 @@ msgstr "Нормальний"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Нормальний та контурний"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Товщина контуру"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Зменшити товщину контуру"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Збільшити товщину контуру"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -934,7 +935,9 @@ msgstr "Попередні розробники"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Aleksandr Chepurnoy https://launchpad.net/~wuron\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
+"  Fedik https://launchpad.net/~fedikw\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  UaHummer https://launchpad.net/~uahummer\n"
 "  ma$terok https://launchpad.net/~m-shein"
@@ -1240,12 +1243,12 @@ msgid "Crop to Selection"
 msgstr "Обрізати по виділеному"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Змінити розмір..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Розмір полотна..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1262,7 +1265,7 @@ msgstr "Зменшити"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Найкраще заповнення"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1270,7 +1273,7 @@ msgstr "По розміру виділення"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Нормальний розмір"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1332,7 +1335,7 @@ msgstr "Вставити як нове зображення"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Вилучити вибране"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1348,7 +1351,7 @@ msgstr "Виділити все"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Зняти виділення"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1617,82 +1620,40 @@ msgstr ""
 "Підказка: Для досягнення кращих результатів, спершу виділіть кожно око "
 "інструментами виділення."
 
-#~ msgid "Help"
-#~ msgstr "Допомога"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Adjustments"
-#~ msgstr "Корекція"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Редактор зображень"
 
-#~ msgid "Effects"
-#~ msgstr "Ефекти"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Проста програма для створення та редагування зображень"
 
-#~ msgid "File"
-#~ msgstr "Файл"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Редактор зображень Pinta"
 
-#~ msgid "Edit"
-#~ msgstr "Правка"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "View"
-#~ msgstr "Перегляд"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Image"
-#~ msgstr "Зображення"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "%"
-#~ msgstr "%"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Зберегти зміни в зображенні \"{0}\" перед створенням нового?"
-
-#~ msgid "Continue without saving"
-#~ msgstr "Продовжити без збереження"
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "Підказка: Клік правою клавішею миші видаляє контрольну точку"
-
-#~ msgid "RGB\r"
-#~ msgstr "RGB\r"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Пристосувати до вікна"
-
-#~ msgid "Actual Size"
-#~ msgstr "Натуральний розмір"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Згладжування"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "Зберегти зміни в зображенні \"{0}\", перш ніж відкрити нове?"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Нормальне змішування / Перекриваюче змішування"
-
-#~ msgid "Color Mode"
-#~ msgstr "Кольоровий режим"
-
-#~ msgid "Transparency Mode"
-#~ msgstr "Режим прозорості"
-
-#~ msgid "Fill mode"
-#~ msgstr "Режим заливки"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Натисніть тягніть щоб стерти частину зображення."
-
-#~ msgid "Show Pad"
-#~ msgstr "Показати вікно"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Зображення OpenRaster (*.ora)"
-
-#~ msgid "Mode"
-#~ msgstr "Режим"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

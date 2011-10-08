@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 18:22+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-10-07 07:46+0000\n"
+"Last-Translator: Daniele Del Giudice <dunox1@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:09+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "Livella automaticamente"
+msgstr "Livelli Automatici"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "Inverti colori"
+msgstr "Inverti i colori"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
@@ -472,12 +472,14 @@ msgstr ""
 msgid "Line"
 msgstr "Linea"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Click sinistro per disegnare col colore primario, click destro per il colore "
-"secondario."
+"Fai click sinistro per disegnare col colore primario, click destro per "
+"disegnare col colore secondario. Mantieni premuto il tasto Shift per "
+"attivare la guida magnetica sugli angoli."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -487,6 +489,8 @@ msgstr "Gomma"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Clicca pulsante sinistro per rendere trasparente, clicca pulsante per "
+"cancellare il colore secondario. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -632,7 +636,7 @@ msgstr "Allinea a destra"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Stile di testo"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
@@ -640,19 +644,19 @@ msgstr "Normale"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Normale e contornato"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Larghezza contorno"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Diminuire dimensione contorno"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Aumentare dimensione contorno"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -945,10 +949,15 @@ msgstr "Collaboratori precedenti"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Daniele \"OpenNingia\" Simonetti https://launchpad.net/~oppifjellet\n"
+"  Daniele Del Giudice https://launchpad.net/~d4n13le\n"
 "  Daniele Napolitano https://launchpad.net/~dnax88\n"
+"  Davide Lunghi https://launchpad.net/~davide-lunghi\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Kabir94 https://launchpad.net/~kabirsala\n"
+"  Loris Turchetti https://launchpad.net/~l-turchetti\n"
 "  Luca Urbini https://launchpad.net/~luca-urbini\n"
+"  Nicola Moretto https://launchpad.net/~nicola88\n"
 "  Pullus In Fabula https://launchpad.net/~zatunga11\n"
 "  Valeria De Luca https://launchpad.net/~adilaksmi\n"
 "  flux https://launchpad.net/~luigimarco\n"
@@ -1260,12 +1269,12 @@ msgid "Crop to Selection"
 msgstr "Ritaglia la selezione"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Ridimensiona..."
+msgid "Resize Image..."
+msgstr "Ridimensiona Immagine..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Dimensioni immagine..."
+msgid "Resize Canvas..."
+msgstr "Ridimensiona la superficie..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1282,7 +1291,7 @@ msgstr "Riduci"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Adatta alla pagina"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
@@ -1290,7 +1299,7 @@ msgstr "Ingrandisci alla selezione"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Dimensione normale"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
@@ -1352,7 +1361,7 @@ msgstr "Incolla in una nuova immagine"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Elimina selezione"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
@@ -1368,7 +1377,7 @@ msgstr "Seleziona tutto"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Deseleziona tutto"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
@@ -1636,88 +1645,40 @@ msgstr ""
 "Suggerimento: Per ottenere i migliori risultati, usa prima gli strumenti di "
 "selezione per selezionare ciascun occhio."
 
-#~ msgid "Help"
-#~ msgstr "Aiuto"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Adjustments"
-#~ msgstr "Regolazioni"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Editor di immagini"
 
-#~ msgid "Effects"
-#~ msgstr "Effetti"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Crea e modifica immagini facilmente"
 
-#~ msgid "File"
-#~ msgstr "File"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Editor di immagini Pinta"
 
-#~ msgid "View"
-#~ msgstr "Visualizza"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Apri Immagini"
 
-#~ msgid "Edit"
-#~ msgstr "Modifica"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "Impossibile salvare file di sola lettura."
 
-#~ msgid "Image"
-#~ msgstr "Immagine"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "%"
-#~ msgstr "%"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Espandi la superificie"
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr ""
-#~ "Salvare le modifiche all'immagine \"{0}\" prima di crearne una nuova?"
-
-#~ msgid "Continue without saving"
-#~ msgstr "Continua senza salvare"
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "RGB\r"
-#~ msgstr "RGB\r"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr ""
-#~ "Suggerimento: Tasto destro del mouse per rimuovere i punti di controllo."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr ""
-#~ "Salvare i cambiamenti dell'immagine \"{0}\" prima di aprirne una nuova?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Immagine OpenRaster (*.ora)"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Adatta alla finestra"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Antialiasing"
-
-#~ msgid "Fill mode"
-#~ msgstr "Modalità di riempimento"
-
-#~ msgid "Show Pad"
-#~ msgstr "Mostra pannello"
-
-#~ msgid "Color Mode"
-#~ msgstr "Modalità colore"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Fare clic e trascinare per cancellare una parte dell'immagine."
-
-#~ msgid "Transparency Mode"
-#~ msgstr "Modalità trasparenza"
-
-#~ msgid "Actual Size"
-#~ msgstr "Dimensione reale"
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
-
-#~ msgid "Mode"
-#~ msgstr "Modalità"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Non cambiare la dimensione della superficie"

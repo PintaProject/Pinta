@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 17:37+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-09-22 20:30+0000\n"
+"Last-Translator: amine <active-be@live.fr>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "اضبط المستويات بشكل تلقائيّ"
+msgstr "اضبط المستويات تلقائيا"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
@@ -36,7 +36,7 @@ msgstr "تأثير اللّون البنّي الدّاكن"
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr ""
+msgstr "تأثير الملصقات"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
@@ -127,7 +127,7 @@ msgstr "أزرق "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr "نصيحة: انقر بالزّر الأيمن لحذف نقط التّحكّم"
+msgstr "نصيحة: انقر بالزر الأيمن لحذف نقاط التحكم."
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
@@ -179,7 +179,7 @@ msgstr "صورة"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr ""
+msgstr "فركتلية مندلبروت"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
@@ -187,14 +187,14 @@ msgstr "توهّج"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr ""
+msgstr "تحديد الحواف"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 msgid "Stylize"
-msgstr ""
+msgstr "تصميم"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
@@ -202,7 +202,7 @@ msgstr "غشاوة شعاعيّة"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr ""
+msgstr "تأثير الزجاج المثلج"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
 #: Pinta.Effects/Effects/TileEffect.cs:34
@@ -225,15 +225,15 @@ msgstr "فنّيّ"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr ""
+msgstr "فركتلية جوليا"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr ""
+msgstr "تنعيم الصورة"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
-msgstr ""
+msgstr "تضريس"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
@@ -328,7 +328,7 @@ msgstr "اختر لون لوحة الألوان"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr ""
+msgstr "تحديد مستطيل"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
@@ -366,7 +366,7 @@ msgstr ""
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "نقل التحديد"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
@@ -374,7 +374,7 @@ msgstr ""
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr ""
+msgstr "تدرّج"
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
@@ -456,9 +456,10 @@ msgstr ""
 msgid "Line"
 msgstr ""
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
@@ -914,6 +915,11 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  KMan https://launchpad.net/~mail-kalgorithmist\n"
+"  Omar https://launchpad.net/~omar-w-kh\n"
+"  Rafy https://launchpad.net/~rafy\n"
+"  Said Mohammed AlRamadhani https://launchpad.net/~darknesscore0\n"
+"  amine https://launchpad.net/~active-be\n"
 "  daifallah https://launchpad.net/~daif\n"
 "  xDev https://launchpad.net/~mf393"
 
@@ -1218,12 +1224,12 @@ msgid "Crop to Selection"
 msgstr "قصّ وفقًا للتّحديد"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "غيّر أبعاد الصّورة..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "غيّر قياس مساحة الرّسم..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1589,11 +1595,40 @@ msgstr ""
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr ""
 
-#~ msgid "Zoom to Window"
-#~ msgstr "قرب لتلائم الصّورة النّافذة..."
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr ""
 
-#~ msgid "Actual Size"
-#~ msgstr "القياس الفعلي"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr ""
+
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr ""
+
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
+
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

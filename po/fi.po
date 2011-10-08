@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-02 21:59+0000\n"
-"Last-Translator: Jarno Ruokamo <Unknown>\n"
+"PO-Revision-Date: 2011-10-03 13:43+0000\n"
+"Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -465,10 +465,13 @@ msgstr ""
 msgid "Line"
 msgstr "Viiva"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "Vasemmalla piirrät edustavärillä, oikealla napilla taustavärillä."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
+"Vasemmalla napilla piirrät edustavärillä, oikealla napilla taustavärillä. "
+"Shift-nappi pohjassa pakottaa tasaisiin kulmiin."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -513,7 +516,7 @@ msgstr "Vaihda edelliseen työkaluun"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr "Vaihda Kynään"
+msgstr "Vaihda kynään"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
@@ -552,7 +555,7 @@ msgstr "Siirrä valintaa siirtääksesi kohdetta."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr "Uudelleen väritä"
+msgstr "Väritä uudelleen"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
@@ -903,7 +906,7 @@ msgstr "Tiedosto on jo olemassa \"{1}\". Korvaaminen ylikirjoittaa sisällön."
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "JPEG Laatu"
+msgstr "JPEG-laatu"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
@@ -1171,7 +1174,7 @@ msgstr "Tulosta"
 
 #: Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "Poistu"
+msgstr "Lopeta"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
@@ -1215,7 +1218,7 @@ msgstr "Käännä pystytasossa"
 
 #: Pinta.Core/Actions/LayerActions.cs:71
 msgid "Rotate / Zoom"
-msgstr "Pyöritä / Zoomaa"
+msgstr "Pyöritä / zoomaa"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1241,11 +1244,11 @@ msgid "Crop to Selection"
 msgstr "Rajaa valintaan"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
+msgid "Resize Image..."
 msgstr "Muuta kokoa..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
+msgid "Resize Canvas..."
 msgstr "Pohjan koko..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
@@ -1382,7 +1385,7 @@ msgid ""
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
 "Palettia ei voitu avata: {0}\n"
-"Varmista että tiedosto jota yrität avata on joko GIMP tai Paint.NET paletti."
+"Varmista, että avaamasi tiedosto on kelvollinen GIMP- tai Paint.NET-paletti."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
@@ -1390,11 +1393,11 @@ msgstr "Tallenna palettitiedosto"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
-msgstr "Paint.NET paletti (*.txt)"
+msgstr "Paint.NET-paletti (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
-msgstr "GIMP paletti (*.gpl)"
+msgstr "GIMP-paletti (*.gpl)"
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
@@ -1616,65 +1619,40 @@ msgstr ""
 "Vihje: Parhaan tuloksen saamiseksi käytä valintatyökalua ja valitse "
 "kummatkin silmät ennen käyttöä."
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Continue without saving"
-#~ msgstr "Jatka ilman tallennusta"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Kuvankäsittely"
 
-#~ msgid "Color Mode"
-#~ msgstr "Väritila"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Luo ja muokkaa kuvia vaivatta"
 
-#~ msgid "X :"
-#~ msgstr "X :"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Pinta-kuvankäsittely"
 
-#~ msgid "Y :"
-#~ msgstr "Y :"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Avaa kuvat"
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Läpinäkyvyystila"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "Vain luku -tiedostoon ei voi tallentaa."
 
-#~ msgid "Fill mode"
-#~ msgstr "Tulvatila"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr "Tuotava kuva on suurempi kuin pohjan koko. Mitä haluat tehdä?"
 
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "Vihje: Oikealla napilla voit poistaa pisteitä."
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Laajenna pohjaa"
 
-#~ msgid "Zoom to Window"
-#~ msgstr "Tarkenna ikkunaan"
-
-#~ msgid "Actual Size"
-#~ msgstr "Oikea koko"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Normaali sekoitus / Ylikirjoitus"
-
-#~ msgid "Show Pad"
-#~ msgstr "Näytä valikko"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Tallennetanko muutokset kuvaan \"{0}\" ennen uuden luontia?"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Napsauta ja siirrä poistaaksesi osan kuvasta."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr ""
-#~ "Tallennetaanko muutokset kuvaan \"{0}\", ennen kuin avaat uuden kuvan?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "OpenRaster-kuva (*.ora)"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Reunojen pehmennys"
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
-
-#~ msgid "Mode"
-#~ msgstr "Tila"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Pidä pohjan koko"

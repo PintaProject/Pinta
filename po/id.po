@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 18:32+0000\n"
-"Last-Translator: Jonathan Pobst <Unknown>\n"
+"PO-Revision-Date: 2011-09-24 23:10+0000\n"
+"Last-Translator: Fauzie Rofi <Unknown>\n"
 "Language-Team: Indonesian <permataharahap@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 "X-Poedit-Country: INDONESIA\n"
 "X-Poedit-Language: Indonesian\n"
 
@@ -318,15 +318,15 @@ msgstr "Umpankan-ulang"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr ""
+msgstr "Pilih Warna Primer"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr ""
+msgstr "Pilih Warna Sekunder"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr ""
+msgstr "Pilih Warna Palet"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
@@ -346,7 +346,7 @@ msgstr "Stempel Cangkok"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
+msgstr "Ctrl-Kiri untuk menentukan titik mula, klik kiri untuk melukis"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -410,7 +410,7 @@ msgstr "Gradasi Mengerucut"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr ""
+msgstr "Modus curah"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
@@ -438,7 +438,7 @@ msgstr ""
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
@@ -468,12 +468,11 @@ msgstr ""
 msgid "Line"
 msgstr "Garis"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Klik kiri untuk menggambar dengan warna primer, klik kanan untuk warna "
-"sekunder."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -483,6 +482,8 @@ msgstr "Penghapus"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Ctrl-Kiri untuk menghapus ketransparan, klik kiri untuk menghapus ke warna "
+"sekunder "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
@@ -626,15 +627,15 @@ msgstr "Rata Kanan"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr ""
+msgstr "Corak Teks"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Normal dan Skema"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -936,8 +937,10 @@ msgstr "Kontributor Sebelumnya"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Fauzie Rofi https://launchpad.net/~fauzie811\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Permata Harahap https://launchpad.net/~permataharahap"
+"  Permata Harahap https://launchpad.net/~permataharahap\n"
+"  Triwanto Simanjuntak https://launchpad.net/~lu176"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1130,11 +1133,11 @@ msgstr "Terjemahkan Aplikasi Ini"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr ""
+msgstr "Simpan Semua"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr ""
+msgstr "Tutup Semua"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -1240,12 +1243,12 @@ msgid "Crop to Selection"
 msgstr "Pangkas Pilihan"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Ubah Ukuran..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Ukuran Kanvas..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1270,11 +1273,11 @@ msgstr "Zum ke Pilihan"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Ukuran Normal"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
-msgstr ""
+msgstr "Toolbar"
 
 #: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Pixel Grid"
@@ -1415,7 +1418,7 @@ msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr ""
+msgstr "Timpa"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
@@ -1613,40 +1616,40 @@ msgstr ""
 "Saran: Demi hasil terbaik, terlebih dahulu gunakan alat pemilih untuk "
 "memilih masing-masing mata."
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Simpan perubahan ke citra \"{0}\" sebelum membuat yang baru?"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Continue without saving"
-#~ msgstr "Teruskan tanpa menyimpan"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Penyunting Gambar"
 
-#~ msgid "Color Mode"
-#~ msgstr "Modus Warna"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Buat dan sunting gambar dengan mudah"
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Modus Transparansi"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Penyunting Gambar Pinta"
 
-#~ msgid "Fill mode"
-#~ msgstr "Modus arsiran"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Klik dan seret untuk menghapus bagian dari citra."
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "Simpan perubahan ke citra \"{0}\" sebelum membuka citra baru?"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "Citra OpenRaster (*.ora)"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#~ msgid "Zoom to Window"
-#~ msgstr "Zum ke Jendela"
-
-#~ msgid "Actual Size"
-#~ msgstr "Ukuran Sebenarnya"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Antialias"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Pencampuran normal / timpa"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

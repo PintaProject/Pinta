@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 21:11+0000\n"
+"PO-Revision-Date: 2011-09-30 07:17+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -467,12 +467,13 @@ msgstr ""
 msgid "Line"
 msgstr "Lerroa"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Ezkerreko klik-a kolore nagusiarekin marrazteko, eskuineko klik-a bigarren "
-"mailako kolorea erabilitzeko."
+"Egin klik ezkerreko botoiarekin kolore nagusia margotzeko, eskuineko klik "
+"bigarren mailako kolorerako. Mantendu Shift sakatuta angeluetara atxikitzeko."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -1248,12 +1249,12 @@ msgid "Crop to Selection"
 msgstr "Moztu hautapenera"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Aldatu tamaina..."
+msgid "Resize Image..."
+msgstr "Aldatu irudiaren tamaina..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Oihalaren tamaina..."
+msgid "Resize Canvas..."
+msgstr "Aldatu mihisearen tamaina..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1625,26 +1626,42 @@ msgstr ""
 "Argibidea: Emaitza hobeak lortzeko, lehenengo erabili hautapen-tresnak begi "
 "bakoitza hautatzeko."
 
-#~ msgid "Actual Size"
-#~ msgstr "Uneko tamaina"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Zoom to Window"
-#~ msgstr "Zooma leihora"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Irudi-editorea"
 
-#~ msgid "X:"
-#~ msgstr "X:"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Sortu eta editatu irudiak modu errazean"
 
-#~ msgid "Y:"
-#~ msgstr "Y:"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Pinta irudi-editorea"
 
-#~ msgid "Mode"
-#~ msgstr "Modua"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Ireki irudiak"
 
-#~ msgid "Color Mode"
-#~ msgstr "Kolore-modua"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "Ezin da gorde irakurtzeko soilik den fitxategia."
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Gardentasun-modua"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"Itsatsi nahi den irudia mihisearen tamaina baino handiagoa da. Zer egin nahi "
+"duzu?"
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Egin klik eta arrastatu irudiaren zati bat borratzeko."
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Hedatu mihisea"
+
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Ez aldatu mihisearen tamaina"
