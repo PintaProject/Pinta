@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-02 06:35+0000\n"
+"PO-Revision-Date: 2011-09-28 12:15+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -466,10 +466,13 @@ msgstr ""
 msgid "Line"
 msgstr "Črta"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "Levi klik za slikanje z osnovno barvo, desni klik za pomožno barvo."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
+"Levi klik, da rišeš z osnovno barvo, desni klik, da rišeš s pomožno barvo. "
+"Pritisni tipko Shift za zamah do kota."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -720,7 +723,7 @@ msgstr "O programu"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr " ..."
+msgstr "..."
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
@@ -1239,12 +1242,12 @@ msgid "Crop to Selection"
 msgstr "Izreži izbor"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Spremeni velikost ..."
+msgid "Resize Image..."
+msgstr "Spremeni velikost slike..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Velikost platna ..."
+msgid "Resize Canvas..."
+msgstr "Spremeni velikost platna..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1613,64 +1616,40 @@ msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Namig: Za najboljši izid najprej uporabi orodja za izbiro vsakega očesa."
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Continue without saving"
-#~ msgstr "Nadaljuj brez shranjevanja"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Urejevalnik slik"
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "Shrani spremembe slike v \"{0}\" pred ustvarjanjem nove slike?"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Enostavno ustvarjanje in urejanje slik"
 
-#~ msgid "X :"
-#~ msgstr "X :"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Urejevalnik fotografij Pinta"
 
-#~ msgid "Y :"
-#~ msgstr "Y :"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Odpri slike"
 
-#~ msgid "Color Mode"
-#~ msgstr "Barvni način"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "Ne morem shraniti datoteke za branje"
 
-#~ msgid "Actual Size"
-#~ msgstr "Dejanska velikost"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr "Prilepljena slika je večja od velikosti platna. Kaj želite storiti?"
 
-#~ msgid "Show Pad"
-#~ msgstr "Orodjarna"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Razširi platno"
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Prozoren način"
-
-#~ msgid "Fill mode"
-#~ msgstr "Polnilni način"
-
-#~ msgid "Antialiasing"
-#~ msgstr "Glajenje"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "Namig: Desni-klik, da odstraniš nadzorne točke."
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "OpenRaster slika (*.ora)"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "Shrani spremembe v sliko \"{0}\" pred odpiranjem nove slike?"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "Običajno utripanje / prekrij utripanje"
-
-#~ msgid "Mode"
-#~ msgstr "Način"
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "Prilagodi velikost oknu"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Kliknite in vlecite, da zradirate del slike"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Ne spremeni velikosti platna"

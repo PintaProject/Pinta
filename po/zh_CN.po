@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-10 11:11+0000\n"
-"Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
+"PO-Revision-Date: 2011-09-22 12:28+0000\n"
+"Last-Translator: Hello World! <liuwanfang86@yahoo.com.cn>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -65,11 +65,11 @@ msgstr "输入直方图"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "输入"
+msgstr "Input"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "输出"
+msgstr "输入或输出"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
@@ -82,7 +82,7 @@ msgstr "自动"
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr "重置"
+msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
@@ -99,7 +99,7 @@ msgstr "蓝色"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr ""
+msgstr "已链接"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
@@ -342,7 +342,7 @@ msgstr "仿制图章"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
+msgstr "按住 Ctrl 键点击设置源点，然后点击进行涂抹。"
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
@@ -386,7 +386,7 @@ msgstr "线性渐变"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "双线性渐变"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
@@ -406,11 +406,11 @@ msgstr "填充模式"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
-msgstr "连续"
+msgstr "区域"
 
 #: Pinta.Tools/FloodTool.cs:81
 msgid "Global"
-msgstr ""
+msgstr "整个区域"
 
 #: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
@@ -454,10 +454,11 @@ msgstr "点击拖动以绘制椭圆形选取。按住 shift 键限制为圆形�
 msgid "Line"
 msgstr "线条"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "左击使用主颜色绘制，右击使用副颜色。"
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -909,6 +910,7 @@ msgstr "过去的贡献者"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Hello World! https://launchpad.net/~liuwanfang86\n"
 "  Xhacker Liu https://launchpad.net/~xhacker\n"
 "  英华 https://launchpad.net/~wantinghard"
 
@@ -1213,12 +1215,12 @@ msgid "Crop to Selection"
 msgstr "裁剪到选择部分"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "调整大小..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "画布大小..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1584,64 +1586,40 @@ msgstr ""
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr "提示：为了获得最好的效果，先使用选择工具选择每只眼睛。"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr ""
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "在新建之前保存修改到图像“{0}”吗？"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr ""
 
-#~ msgid "Color Mode"
-#~ msgstr "颜色模式"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr ""
 
-#~ msgid "Transparency Mode"
-#~ msgstr "透明模式"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr ""
 
-#~ msgid "Fill mode"
-#~ msgstr "填充模式"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "点击拖动以擦除图像的一部分。"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "提示：右击移除控制点。"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "在打开新的图像前将修改保存到图像“{0}”？"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "OpenRaster 图像 (*.ora)"
-
-#~ msgid "Continue without saving"
-#~ msgstr "不保存并继续"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "缩放适应窗口"
-
-#~ msgid "Actual Size"
-#~ msgstr "实际大小"
-
-#~ msgid "Antialiasing"
-#~ msgstr "抗锯齿"
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "Show Pad"
-#~ msgstr "显示面板"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "正常混合 / 覆盖混合"
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
-
-#~ msgid "Mode"
-#~ msgstr "模式"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

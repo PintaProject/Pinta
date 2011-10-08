@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-03 05:53+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"PO-Revision-Date: 2011-09-22 10:29+0000\n"
+"Last-Translator: David Raviv <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -462,10 +462,11 @@ msgstr ""
 msgid "Line"
 msgstr "קו"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
-msgstr "לחיצה שמאלית כדי לצייר עם הצבע העיקרי, ימנית עם הצבע המשני."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -928,7 +929,7 @@ msgstr "תורמי עבר"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron"
+"  David Raviv https://launchpad.net/~davrav"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1231,12 +1232,12 @@ msgid "Crop to Selection"
 msgstr "חיתוך לבחירה"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "שינוי גודל..."
+msgid "Resize Image..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "גודל משטח הציור..."
+msgid "Resize Canvas..."
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1606,88 +1607,40 @@ msgstr ""
 "עצה: לקבלת התוצאות המיטביות כדאי תחילה לסמן כל אחת מהעיניים באמצעות כלי "
 "הבחירה."
 
-#~ msgid "Help"
-#~ msgstr "עזרה"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Adjustments"
-#~ msgstr "התאמות"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "עורך תמונות"
 
-#~ msgid "Effects"
-#~ msgstr "אפקטים"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "צור וערוך תמונות בקלות"
 
-#~ msgid "File"
-#~ msgstr "קובץ"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "עורך תמונות Pinta"
 
-#~ msgid "Edit"
-#~ msgstr "עריכה"
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr ""
 
-#~ msgid "View"
-#~ msgstr "תצוגה"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr ""
 
-#~ msgid "Image"
-#~ msgstr "תמונה"
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
 
-#~ msgid "%"
-#~ msgstr "%"
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr ""
 
-#~ msgid "Continue without saving"
-#~ msgstr "להמשיך מבלי לשמור"
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before creating a new one?"
-#~ msgstr "האם לשמור את השינויים לתמונה \"{0}\" בטרם יצירת אחת חדשה?"
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "RGB\r"
-#~ msgstr "RGB\r"
-
-#~ msgid "Tip : Right-click to remove control points."
-#~ msgstr "עצה: לחיצה עם המקש הימני מסירה את נקודות הבקרה."
-
-#, csharp-format
-#~ msgid "Save the changes to image \"{0}\" before opening a new image?"
-#~ msgstr "האם לשמור את השינויים לתמונה \"{0}\" בטרם פתיחת תמונה חדשה?"
-
-#~ msgid "OpenRaster image (*.ora)"
-#~ msgstr "תמונת OpenRaster‏ (*.ora)"
-
-#~ msgid "Zoom to Window"
-#~ msgstr "תקריב על גודל החלון"
-
-#~ msgid "Actual Size"
-#~ msgstr "גודל ממשי"
-
-#~ msgid "Antialiasing"
-#~ msgstr "החלקה"
-
-#~ msgid "Normal blending / Overwrite blending"
-#~ msgstr "ערבול רגיל / שכתוב על הערבול"
-
-#~ msgid "Show Pad"
-#~ msgstr "הצגת הלוח"
-
-#~ msgid "Color Mode"
-#~ msgstr "מצב צבע"
-
-#~ msgid "Transparency Mode"
-#~ msgstr "מצב שקיפות"
-
-#~ msgid "Fill mode"
-#~ msgstr "מצב מילוי"
-
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "יש ללחוץ ולגרור כדי למחוק חלק מהתמונה."
-
-#~ msgid "X:"
-#~ msgstr "X:"
-
-#~ msgid "Y:"
-#~ msgstr "Y:"
-
-#~ msgid "Mode"
-#~ msgstr "מצב"
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr ""

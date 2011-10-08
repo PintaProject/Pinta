@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-03-04 17:14+0000\n"
+"PO-Revision-Date: 2011-10-01 23:02+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-29 21:32+0000\n"
-"X-Generator: Launchpad (build 12684)\n"
+"X-Launchpad-Export-Date: 2011-10-08 19:09+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -467,12 +467,13 @@ msgstr ""
 msgid "Line"
 msgstr "Linenn"
 
-#: Pinta.Tools/LineCurveTool.cs:44
+#: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
-"Left click to draw with primary color, right click for secondary color."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 msgstr ""
-"Klik kleiz a-benn tresañ gant ul liv kentael, klik dehou evit ul liv "
-"eilvedel."
+"Klik kleiz da dresañ gant ul liv kentael, klik dehou evit ul liv eilvedel. "
+"Mirout ar stokell Pennlizh (shift) a-benn desteudañ ouzh ar c'hornioù."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -1095,7 +1096,7 @@ msgstr "C'hwelañ  dre 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Gwintañ ar skeudenn a-zremm"
+msgstr "Gwintañ ar skeudenn a-blaen"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
@@ -1113,7 +1114,7 @@ msgstr "C'hwelañ dre 90° gant roud gin ar bizied"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Gwintañ an dreuzfollenn a-zremm"
+msgstr "Gwintañ an dreuzfollenn a-blaen"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
@@ -1213,7 +1214,7 @@ msgstr "Enporzhiañ diouzh ur restr..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr "Gwintañ a-zremm"
+msgstr "Gwintañ a-blaen"
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
@@ -1247,12 +1248,12 @@ msgid "Crop to Selection"
 msgstr "Didroc'hañ ouzh an diuzad"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize..."
-msgstr "Adventañ"
+msgid "Resize Image..."
+msgstr "Adventañ ar skeudenn..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Canvas Size..."
-msgstr "Ment ar steuenn..."
+msgid "Resize Canvas..."
+msgstr "Adventañ ar steuenn..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1623,20 +1624,42 @@ msgstr ""
 "Un ali : evit un disoc'h gwellañ, grit da gentañ gant an benveg diuzañ a-"
 "benn diuzañ pep lagad."
 
-#~ msgid "Actual Size"
-#~ msgstr "Ment vremanel"
+#: pinta.desktop.in
+msgid "Pinta"
+msgstr "Pinta"
 
-#~ msgid "Color Mode"
-#~ msgstr "Mod liv"
+#: pinta.desktop.in
+msgid "Image Editor"
+msgstr "Embanner skeudennoù"
 
-#~ msgid "Mode"
-#~ msgstr "Mod"
+#: pinta.desktop.in
+msgid "Easily create and edit images"
+msgstr "Krouiñ hag embann skeudennoù gant un doare aes"
 
-#~ msgid "Transparency Mode"
-#~ msgstr "Mod treuzweluster"
+#: pinta.desktop.in
+msgid "Pinta Image Editor"
+msgstr "Embanner skeudennoù Pinta"
 
-#~ msgid "Click and drag to erase a portion of the image."
-#~ msgstr "Klikañ ha riklañ da ziverkañ ul lod eus ar skeudenn."
+#: Pinta/Pads/OpenImagesPad.cs:42
+msgid "Open Images"
+msgstr "Digeriñ skeudennoù"
 
-#~ msgid "Zoom to Window"
-#~ msgstr "Zoumañ da framm ar prenestr"
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
+msgid "Cannot save read only file."
+msgstr "N'haller ket enrollañ ar skeudennoù e mod lenn nemetken."
+
+#: Pinta.Core/Actions/EditActions.cs:251
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"Brasoc'h eo ar skeudenn bet peget eget ment ar steuenn. Petra a fell deoc'h "
+"ober ?"
+
+#: Pinta.Core/Actions/EditActions.cs:254
+msgid "Expand canvas"
+msgstr "Astenn ar steuenn"
+
+#: Pinta.Core/Actions/EditActions.cs:255
+msgid "Don't change canvas size"
+msgstr "Arabat kemm ment ar steuenn"
