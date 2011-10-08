@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+include /usr/share/cli-common/cli.make
+
+overrid_dh_auto_clean:
+	$(MAKE) cleanall
+
+override_dh_clideps:
+	dh_clideps --exclude-moduleref=libigemacintegration.dylib
+
+%:
+	dh $@
