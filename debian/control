@@ -2,7 +2,8 @@ Source: pinta
 Section: graphics
 Priority: optional
 Maintainer: Cameron White <cameronwhite91@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), cli-common-dev (>= 0.5.7~)
+Build-Depends: debhelper (>= 8.0.0), cli-common-dev (>= 0.5.7~), 
+    intltool, libmono-addins-cil-dev, libmono-addins-gui-cil-dev
 Build-Depends-Indep: mono-devel (>= 2.4.3), mono-xbuild (>= 2.4.3), libgtk2.0-cil-dev, libglade2.0-cil-dev
 Standards-Version: 3.9.2
 Homepage: http://pinta-project.com/
@@ -11,7 +12,8 @@ Vcs-Browser: https://github.com/PintaProject/Pinta
 
 Package: pinta
 Architecture: all
-Depends: ${shlibs:Depends}, ${cli:Depends}, ${misc:Depends}, gnome-icon-theme
+Depends: ${shlibs:Depends}, ${cli:Depends}, ${misc:Depends}, 
+    gnome-icon-theme, libmono-addins0.2-cil, libmono-addins-gui0.2-cil
 Description: Simple drawing/painting program
  Pinta is a drawing/editing program modeled on Paint.NET. Its goal is to
  provide a simplified alternative to the GIMP for casual users.

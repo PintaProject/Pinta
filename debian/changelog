@@ -1,3 +1,9 @@
+pinta (1.1-1ubuntu1) oneiric; urgency=low
+
+  * Added dependencies for Mono.Addins
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sun, 09 Oct 2011 02:42:43 -0400
+
 pinta (1.1-1) oneiric; urgency=low
 
   * New upstream release with numerous bug fixes and improvements.
