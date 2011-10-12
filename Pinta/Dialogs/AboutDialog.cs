@@ -59,8 +59,14 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-			"Jonathan Pobst",
+			"Cameron White",
+			"James Gifford",
+                        "Jean-Michel Bea",
+                        "Jonathan Pobst",
+			"Manish Sinha",
+			"Martin Geier",
 			"Olivier Dufour",
+                        "Robert Nordan"
 		};
 
 		string[] oldAuthors = new string[] {
