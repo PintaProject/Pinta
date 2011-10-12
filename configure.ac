@@ -22,10 +22,6 @@ if test "x$MONO" = "xno"; then
 	AC_MSG_ERROR([No mono runtime found])
 fi
 
-# Check Mono version
-MONO_MINIMUM_VERSION=2.8
-PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
-
 AC_SUBST(XBUILD)
 AC_SUBST(MONO)
 
