@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define ProductShortName = "Pinta" ?>
-<?define ProductVersion = "0.6.0" ?>
-<?define ProductVersionText = "0.6" ?>
+<?define ProductVersion = "1.1.0" ?>
+<?define ProductVersionText = "1.1" ?>
 <?define Manufacturer = "Pinta Community" ?>
 <?define UpgradeCode = "C0BCDEDA-62E7-4A43-8435-58323E096912" ?>
 
@@ -12,19 +12,19 @@
     <Package InstallerVersion="200" Compressed="yes" />
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <!-- Ensure GTK# 2.12.9+ is installed -->
+    <!-- Ensure GTK# 2.12.9+ is installed 
     <Property Id="GTKSHARPVERSION">
       <RegistrySearch Id="gsversion" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\Version" Type="raw" />
     </Property>
     <Condition Message="Gtk# version 2.12.9 or greater must be installed.">
       <![CDATA[GTKSHARPVERSION >= "2.12.9" OR (GTKSHARPVERSION << "2.12.1" AND GTKSHARPVERSION <> "2.12.1") OR REMOVE ~= "ALL"]]>
-    </Condition>
+    </Condition>-->
 
-    <!-- Ensure .Net 3.5 is installed -->
+    <!-- Ensure .Net 3.5 is installed 
     <PropertyRef Id="NETFRAMEWORK35" />
     <Condition Message="This setup requires the .NET Framework 3.5 to be installed.">
       Installed OR NETFRAMEWORK35
-    </Condition>
+    </Condition>-->
 
     <!-- Get the GTK# install directory -->
     <Property Id="GTKSHARPPATH">
@@ -51,28 +51,28 @@
             <File Name="Pinta.Gui.Widgets.dll" Source="$(var.BuildRoot)\Pinta.Gui.Widgets.dll" />
             <File Name="Pinta.Resources.dll" Source="$(var.BuildRoot)\Pinta.Resources.dll" />
             <File Name="ICSharpCode.SharpZipLib.dll" Source="$(var.BuildRoot)\ICSharpCode.SharpZipLib.dll" />
-            <File Name="System.ComponentModel.Composition.dll" Source="$(var.BuildRoot)\System.ComponentModel.Composition.dll" />
+            <File Name="Mono.Addins.dll" Source="$(var.BuildRoot)\Mono.Addins.dll" />
+            <File Name="Mono.Addins.Gui.dll" Source="$(var.BuildRoot)\Mono.Addins.Gui.dll" />
+            <File Name="Mono.Addins.Setup.dll" Source="$(var.BuildRoot)\Mono.Addins.Setup.dll" />
 
             <!-- Debug Symbols -->
             <File Name="Pinta.pdb" Source="$(var.BuildRoot)\Pinta.pdb" />
             <File Name="Pinta.Core.pdb" Source="$(var.BuildRoot)\Pinta.Core.pdb" />
             <File Name="Pinta.Gui.Widgets.pdb" Source="$(var.BuildRoot)\Pinta.Gui.Widgets.pdb" />
             <File Name="Pinta.Resources.pdb" Source="$(var.BuildRoot)\Pinta.Resources.pdb" />
-            <File Name="System.ComponentModel.Composition.pdb" Source="$(var.BuildRoot)\System.ComponentModel.Composition.pdb" />
 
             <!-- Program Menu Shortcut -->
             <RemoveFolder Id='ProgramMenuDir' Directory="ProgramMenuDir" On='uninstall' />
-          </Component>
 
-          <!-- Extensions-->
-          <Directory Id="Extensions" Name="Extensions">
-            <Component Id="ExtensionsComp" Guid="A6C05439-FCFF-4155-8A99-65AE373B77A0">
-              <File Name="Pinta.Tools.dll" Source="$(var.BuildRoot)\Extensions\Pinta.Tools.dll" />
-              <File Name="Pinta.Effects.dll" Source="$(var.BuildRoot)\Extensions\Pinta.Effects.dll" />
-              <File Name="Pinta.Tools.pdb" Source="$(var.BuildRoot)\Extensions\Pinta.Tools.pdb" />
-              <File Name="Pinta.Effects.pdb" Source="$(var.BuildRoot)\Extensions\Pinta.Effects.pdb" />
+
+            <!-- Extensions-->
+
+              <File Name="Pinta.Tools.dll" Source="$(var.BuildRoot)\Pinta.Tools.dll" />
+              <File Name="Pinta.Effects.dll" Source="$(var.BuildRoot)\Pinta.Effects.dll" />
+              <File Name="Pinta.Tools.pdb" Source="$(var.BuildRoot)\Pinta.Tools.pdb" />
+              <File Name="Pinta.Effects.pdb" Source="$(var.BuildRoot)\Pinta.Effects.pdb" />
             </Component>
-          </Directory>
+
 
           <!--
           <Directory Id="locale" Name="locale">
@@ -368,7 +368,6 @@
 
     <Feature Id="ProductFeature" Title="Pint" Level="1">
       <ComponentRef Id="ProductComponent" />
-      <ComponentRef Id="ExtensionsComp" />
       <!--<ComponentRef Id="ArTranslation" />
       <ComponentRef Id="BrTranslation" />
       <ComponentRef Id="CaTranslation" />
