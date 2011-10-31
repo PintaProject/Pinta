@@ -1,18 +1,3 @@
-Index: pinta-1.1/configure.ac
-===================================================================
---- pinta-1.1.orig/configure.ac	2011-10-12 21:53:44.704625800 -0400
-+++ pinta-1.1/configure.ac	2011-10-12 21:54:04.376626616 -0400
-@@ -22,10 +22,6 @@
- 	AC_MSG_ERROR([No mono runtime found])
- fi
- 
--# Check Mono version
--MONO_MINIMUM_VERSION=2.8
--PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
--
- AC_SUBST(XBUILD)
- AC_SUBST(MONO)
- 
 Index: pinta-1.1/Pinta/Dialogs/AboutDialog.cs
 ===================================================================
 --- pinta-1.1.orig/Pinta/Dialogs/AboutDialog.cs	2011-10-12 21:53:56.644626296 -0400
