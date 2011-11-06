@@ -81,6 +81,9 @@
     <EmbeddedResource Include="Resources\Tools.Text.png">
       <LogicalName>Tools.Text.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Text.png">
+      <LogicalName>Cursor.Text.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.LassoSelect.png">
       <LogicalName>Tools.LassoSelect.png</LogicalName>
     </EmbeddedResource>

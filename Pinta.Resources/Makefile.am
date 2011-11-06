@@ -151,5 +151,6 @@ RESOURCES = \
 	Resources/Toolbar.ColorMode.png \
 	Resources/Toolbar.TransparentMode.png \
 	Resources/Cursor.PaintBucket.png \
-	Resources/Cursor.LassoSelect.png 
+	Resources/Cursor.LassoSelect.png \
+	Resources/Cursor.Text.png 
 
