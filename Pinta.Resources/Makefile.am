@@ -150,5 +150,6 @@ RESOURCES = \
 	Resources/ShapeTool.Outline.png \
 	Resources/Toolbar.ColorMode.png \
 	Resources/Toolbar.TransparentMode.png \
-	Resources/Cursor.PaintBucket.png 
+	Resources/Cursor.PaintBucket.png \
+	Resources/Cursor.LassoSelect.png 
 

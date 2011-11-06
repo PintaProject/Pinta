@@ -84,6 +84,9 @@
     <EmbeddedResource Include="Resources\Tools.LassoSelect.png">
       <LogicalName>Tools.LassoSelect.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.LassoSelect.png">
+      <LogicalName>Cursor.LassoSelect.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.MagicWand.png">
       <LogicalName>Tools.MagicWand.png</LogicalName>
     </EmbeddedResource>
