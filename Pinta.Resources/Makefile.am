@@ -149,5 +149,6 @@ RESOURCES = \
 	Resources/ShapeTool.Fill.png \
 	Resources/ShapeTool.Outline.png \
 	Resources/Toolbar.ColorMode.png \
-	Resources/Toolbar.TransparentMode.png
+	Resources/Toolbar.TransparentMode.png \
+	Resources/Cursor.PaintBucket.png 
 

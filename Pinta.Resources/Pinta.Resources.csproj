@@ -96,6 +96,9 @@
     <EmbeddedResource Include="Resources\Tools.PaintBucket.png">
       <LogicalName>Tools.PaintBucket.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
+      <LogicalName>Cursor.PaintBucket.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.Pan.png">
       <LogicalName>Tools.Pan.png</LogicalName>
     </EmbeddedResource>
