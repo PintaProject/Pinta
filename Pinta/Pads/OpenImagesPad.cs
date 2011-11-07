@@ -36,7 +36,7 @@ namespace Pinta
 	{
 		public void Initialize (DockFrame workspace, Menu padMenu)
 		{
-			const string pad_name = "Open Images";
+			const string pad_name = "Images";
 
 			DockItem open_images_item = workspace.AddItem (pad_name);
 			open_images_item.Label = Catalog.GetString (pad_name);
