@@ -1592,7 +1592,7 @@ msgid "Pinta Image Editor"
 msgstr ""
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
+msgid "Images"
 msgstr ""
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
