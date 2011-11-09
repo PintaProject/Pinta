@@ -40,6 +40,9 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
 		}
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Text.png"), 8, 0); }
+		}
 
 		#region Constructor
 		public TextTool ()

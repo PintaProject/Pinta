@@ -149,5 +149,18 @@ RESOURCES = \
 	Resources/ShapeTool.Fill.png \
 	Resources/ShapeTool.Outline.png \
 	Resources/Toolbar.ColorMode.png \
-	Resources/Toolbar.TransparentMode.png
+	Resources/Toolbar.TransparentMode.png \
+	Resources/Cursor.PaintBucket.png \
+	Resources/Cursor.LassoSelect.png \
+	Resources/Cursor.Text.png \
+	Resources/Cursor.Pencil.png \
+	Resources/Cursor.Line.png \
+	Resources/Cursor.ColorPicker.png \
+	Resources/Cursor.Rectangle.png \
+	Resources/Cursor.RoundedRectangle.png \
+	Resources/Cursor.FreeFormShape.png \
+	Resources/Cursor.CloneStamp.png \
+	Resources/Cursor.CloneStampSetSource.png \
+	Resources/Cursor.Recolor.png 
+
 

@@ -44,6 +44,9 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color."); }
 		}
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 13, 13); }
+		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.F; } }
 		public override int Priority { get { return 21; } }
 		protected override bool CalculatePolygonSet { get { return false; } }

@@ -45,6 +45,7 @@ namespace Pinta.Tools
 			get { return "Tools.CloneStamp.png"; }
 		}
 		public override string StatusBarText { get { return Catalog.GetString ("Ctrl-left click to set origin, left click to paint."); } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.CloneStamp.png"), 6, 11); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.L; } }
 		public override int Priority { get { return 33; } }
 		protected override bool ShowAntialiasingButton { get { return true; } }
@@ -131,6 +132,24 @@ namespace Pinta.Tools
 			doc.ToolLayer.Clear ();
 			doc.ToolLayer.Hidden = true;
 			doc.Workspace.Invalidate ();
+		}
+
+		protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
+		{
+			base.OnKeyDown(canvas, args);
+			//note that this WONT work if user presses control key and THEN selects the tool!
+			if (args.Event.Key == Key.Control_L || args.Event.Key == Key.Control_R) {
+				Gdk.Pixbuf icon = PintaCore.Resources.GetIcon ("Cursor.CloneStampSetSource.png");
+				Gdk.Cursor setSourceCursor = new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, icon, 6, 11);
+				SetCursor(setSourceCursor);
+			}
+		}
+
+		protected override void OnKeyUp (Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
+		{
+			base.OnKeyUp(canvas, args);
+			if (args.Event.Key == Key.Control_L || args.Event.Key == Key.Control_R)
+				SetCursor(DefaultCursor);
 		}
 
 		protected override void OnDeactivated ()
