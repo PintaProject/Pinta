@@ -42,7 +42,12 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Click and drag to draw a rectangle (right click for secondary color). Hold shift to constrain to a square."); }
 		}
-		public override int Priority { get { return 41; } }
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Rectangle.png"), 5, 9); }
+		}
+		public override int Priority{
+			get { return 41; }
+		}
 
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{

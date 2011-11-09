@@ -154,5 +154,10 @@ RESOURCES = \
 	Resources/Cursor.LassoSelect.png \
 	Resources/Cursor.Text.png \
 	Resources/Cursor.Pencil.png \
-	Resources/Cursor.Line.png
+	Resources/Cursor.Line.png \
+	Resources/Cursor.ColorPicker.png \
+	Resources/Cursor.Rectangle.png \
+	Resources/Cursor.RoundedRectangle.png \
+	Resources/Cursor.FreeFormShape.png
+
 
