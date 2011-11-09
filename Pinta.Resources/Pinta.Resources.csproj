@@ -108,6 +108,12 @@
     <EmbeddedResource Include="Resources\Cursor.FreeformShape.png">
       <LogicalName>Cursor.FreeformShape.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.CloneStamp.png">
+      <LogicalName>Cursor.CloneStamp.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.CloneStampSetSource.png">
+      <LogicalName>Cursor.CloneStampSetSource.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.MagicWand.png">
       <LogicalName>Tools.MagicWand.png</LogicalName>
     </EmbeddedResource>
