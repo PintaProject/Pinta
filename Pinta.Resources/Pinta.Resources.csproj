@@ -114,6 +114,9 @@
     <EmbeddedResource Include="Resources\Cursor.CloneStampSetSource.png">
       <LogicalName>Cursor.CloneStampSetSource.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Recolor.png">
+      <LogicalName>Cursor.Recolor.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.MagicWand.png">
       <LogicalName>Tools.MagicWand.png</LogicalName>
     </EmbeddedResource>

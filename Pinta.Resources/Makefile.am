@@ -160,6 +160,7 @@ RESOURCES = \
 	Resources/Cursor.RoundedRectangle.png \
 	Resources/Cursor.FreeFormShape.png \
 	Resources/Cursor.CloneStamp.png \
-	Resources/Cursor.CloneStampSetSource.png
+	Resources/Cursor.CloneStampSetSource.png \
+	Resources/Cursor.Recolor.png 
 
 
