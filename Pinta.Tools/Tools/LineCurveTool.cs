@@ -42,10 +42,15 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to draw with primary color, right click for secondary color. Hold Shift key to snap to angles."); }
 		}
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Line.png"), 7, 11); }
+		}
 		protected override bool ShowStrokeComboBox {
 			get { return false; }
 		}
-		public override int Priority { get { return 39; } }
+		public override int Priority {
+			get { return 39; }
+		}
 
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
