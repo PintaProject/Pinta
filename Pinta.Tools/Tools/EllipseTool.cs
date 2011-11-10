@@ -42,7 +42,12 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Click and drag to draw an ellipse (right click for secondary color). Hold shift to constrain to a circle."); }
 		}
-		public override int Priority { get { return 45; } }
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.RoundedRectangle.png"), 5, 9); }
+		}
+		public override int Priority {
+			get { return 45; }
+		}
 
 		public EllipseTool ()
 		{

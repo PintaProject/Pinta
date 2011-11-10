@@ -48,8 +48,15 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to set primary color. Right click to set secondary color."); }
 		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.K; } }
-		public override int Priority { get { return 31; } }
+		public override Gdk.Cursor DefaultCursor {
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.ColorPicker.png"), 1, 16); }
+		}
+		public override Gdk.Key ShortcutKey {
+			get { return Gdk.Key.K; }
+		}
+		public override int Priority {
+			get { return 31; }
+		}
 		#endregion
 
 		#region ToolBar
