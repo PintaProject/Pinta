@@ -104,10 +104,15 @@ namespace Pinta.Gui.Widgets
 		/// </summary>
 		private void HandleActiveDocumentChanged (object sender, EventArgs e)
 		{
+			UpdateSelectedDocument ();
+		}
+
+		private void UpdateSelectedDocument ()
+		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 			{
 				int doc_index = PintaCore.Workspace.ActiveDocumentIndex;
-
+			
 				if (doc_index != -1)
 				{
 					var path = new TreePath (new int[] { doc_index });
@@ -116,17 +121,33 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
+		private void RebuildDocumentList ()
+		{
+			store.Clear ();
+			
+			foreach (Document doc in PintaCore.Workspace.OpenDocuments)
+			{
+				doc.Renamed -= HandleDocRenamed;
+				doc.Renamed += HandleDocRenamed;
+				store.AppendValues (doc.Filename, close_icon);
+			}
+		}
+
 		/// <summary>
 		/// Rebuilds the list of documents after a document is opened or closed
 		/// </summary>
 		private void HandleDocumentOpenedOrClosed (object sender, DocumentEventArgs e)
 		{
-			store.Clear ();
+			RebuildDocumentList ();
+		}
 
-			foreach (Document doc in PintaCore.Workspace.OpenDocuments)
-			{
-				store.AppendValues (doc.Filename, close_icon);
-			}
+		/// <summary>
+		/// If a document is renamed, just rebuild the list of open documents
+		/// </summary>
+		private void HandleDocRenamed (object sender, EventArgs e)
+		{
+			RebuildDocumentList ();
+			UpdateSelectedDocument ();
 		}
 
 		/// <summary>
