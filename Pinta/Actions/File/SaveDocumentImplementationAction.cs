@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gtk;
 using Mono.Unix;
 using Pinta.Core;
@@ -118,6 +119,8 @@ namespace Pinta.Actions
 			}
 
 			fcd.Filter = format_desc.Filter;
+
+            fcd.AddNotification("filter", this.OnFilterChanged);
 
 			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
 			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
@@ -227,5 +230,17 @@ namespace Pinta.Actions
 			return response == (int)ResponseType.Ok;
 		}
 
+        private void OnFilterChanged(object o, GLib.NotifyArgs args)
+        {
+            FileChooserDialog fcd = (FileChooserDialog)o;
+    
+            // find the FormatDescriptor
+            FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
+
+            // adjust the filename
+            var p = fcd.Filename;
+            p = Path.ChangeExtension(Path.GetFileName(p), format_desc.Extensions[0]);
+            fcd.CurrentName = p;
+        }
 	}
 }
