@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gtk;
 using Mono.Unix;
 using Pinta.Core;
@@ -232,15 +233,9 @@ namespace Pinta.Actions
         private void OnFilterChanged(object o, GLib.NotifyArgs args)
         {
             FileChooserDialog fcd = (FileChooserDialog)o;
-            
+    
             // find the FormatDescriptor
-			FormatDescriptor format_desc = null;
-			foreach (var format in PintaCore.System.ImageFormats.Formats) {
-                if (format.Filter == fcd.Filter) {
-                    format_desc = format;
-                    break;
-                }
-            }
+            FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
 
             // adjust the filename
             var p = fcd.Filename;
