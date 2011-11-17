@@ -197,8 +197,8 @@ namespace Pinta.Gui.Widgets
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
-			// Allow the user to zoom in/out with Ctrl-Mousewheel (as long as Shift and Alt are not also pressed)
-			if ((evnt.State & (ModifierType.ControlMask | ModifierType.ShiftMask | ModifierType.Mod1Mask)) == ModifierType.ControlMask) {
+			// Allow the user to zoom in/out with Ctrl-Mousewheel
+			if (FilterModifierKeys(evnt.State) == ModifierType.ControlMask) {
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
@@ -240,8 +240,23 @@ namespace Pinta.Gui.Widgets
 
 			// If the tool didn't consume it, see if its a toolbox shortcut
 			if (e.RetVal == null || !(bool)e.RetVal)
-				if (e.Event.State == ModifierType.None)
+				if (FilterModifierKeys (e.Event.State) == ModifierType.None)
 					PintaCore.Tools.SetCurrentTool (e.Event.Key);
+		}
+
+		/// <summary>
+		/// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
+		/// from appearing as active modifier keys.
+		/// </summary>
+		private ModifierType FilterModifierKeys (Gdk.ModifierType current_state)
+		{
+			ModifierType state = ModifierType.None;
+
+			state |= (current_state & ModifierType.ControlMask);
+			state |= (current_state & ModifierType.ShiftMask);
+			state |= (current_state & ModifierType.Mod1Mask);
+
+			return state;
 		}
 		#endregion
 	}
