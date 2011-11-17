@@ -156,12 +156,14 @@ namespace Pinta.Core
 
 			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), null, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
 			
+			fcd.SetCurrentFolder (PintaCore.System.LastDialogDirectory);
 			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 			int response = fcd.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
 				
 				string file = fcd.Filename;
+				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
 				
 				// Open the image and add it to the layers
 				Layer layer = doc.AddNewLayer (System.IO.Path.GetFileName (file));
