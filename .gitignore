@@ -14,4 +14,9 @@ missing
 obj
 pinta
 pinta.pc
-
+intltool-extract.in
+intltool-merge.in
+intltool-update.in
+po/Makefile.in.in
+po/POTFILES
+po/stamp-it
