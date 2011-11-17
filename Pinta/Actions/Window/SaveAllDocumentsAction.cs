@@ -46,7 +46,7 @@ namespace Pinta.Actions
 		private void Activated (object sender, EventArgs e)
 		{
 			foreach (Document doc in PintaCore.Workspace.OpenDocuments) {
-				if (!doc.IsDirty)
+				if (!doc.IsDirty && doc.HasFile)
 					continue;
 
 				PintaCore.Workspace.SetActiveDocument (doc);
