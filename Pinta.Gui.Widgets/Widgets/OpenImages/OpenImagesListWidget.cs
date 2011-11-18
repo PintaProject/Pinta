@@ -38,7 +38,8 @@ namespace Pinta.Gui.Widgets
 		private CellRendererPixbuf file_close_cell;
 		private TreeViewColumn file_name_column;
 
-		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon (Stock.Close);
+		//Workaround because Gtk.IconTheme.Default.HasIcon (Stock.Close) doesn't work on Mac
+		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon ("GTK.Stock.Close.png");
 
 		public OpenImagesListWidget ()
 		{
