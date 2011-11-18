@@ -57,7 +57,7 @@ namespace Pinta.Core
 			fact.AddDefault ();
 			
 			CropToSelection = new Gtk.Action ("CropToSelection", Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			AutoCrop = new Gtk.Action ("AutoCrop", Catalog.GetString ("Automatically Crop"), null, "Menu.Image.Crop.png");
+			AutoCrop = new Gtk.Action ("AutoCrop", Catalog.GetString ("Automatic Crop"), null, "Menu.Image.Crop.png");
 			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
 			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
 			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
@@ -179,7 +179,7 @@ namespace Pinta.Core
 
 			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
-			CropImageToSelection (doc, rect);
+			CropImageToRectangle (doc, rect);
 		}
 
 		private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
@@ -188,13 +188,80 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
+			Cairo.ImageSurface image = doc.CurrentLayer.Surface;
+			Gdk.Rectangle rect = image.GetBounds ();
 
-			CropImageToSelection (doc, rect);
+			Cairo.Color borderColor = image.GetPixel (0, 0);
+			bool cropSide = true;
+			int depth = -1;
+
+			//From the top down
+			while (cropSide) {
+				depth++;
+				for (int i = 0; i < image.Width; i++) {
+					if (!borderColor.Equals(image.GetPixel (i, depth))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X, rect.Y + depth, rect.Width, rect.Height - depth);
+
+			depth = image.Height;
+			cropSide = true;
+			//From the bottom up
+			while (cropSide) {
+				depth--;
+				for (int i = 0; i < image.Width; i++) {
+					if (!borderColor.Equals(image.GetPixel (i, depth))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X, rect.Y, rect.Width, depth - rect.Y);
+
+			depth = 0;
+			cropSide = true;
+			//From left to right
+			while (cropSide) {
+				depth++;
+				for (int i = 0; i < image.Height; i++) {
+					if (!borderColor.Equals(image.GetPixel (depth, i))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X + depth, rect.Y, rect.Width - depth, rect.Height);
+
+			depth = image.Width;
+			cropSide = true;
+			//From right to left
+			while (cropSide) {
+				depth--;
+				for (int i = 0; i < image.Height; i++) {
+					if (!borderColor.Equals(image.GetPixel (depth, i))) {
+						cropSide = false;
+						break;
+					}
+				}
+
+			}
+
+			rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
+
+			CropImageToRectangle (doc, rect);
 		}
 		#endregion
 
-		static void CropImageToSelection (Document doc, Gdk.Rectangle rect)
+		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect)
 		{
 			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
 			
