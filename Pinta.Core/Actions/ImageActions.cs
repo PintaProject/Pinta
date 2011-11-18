@@ -32,6 +32,7 @@ namespace Pinta.Core
 	public class ImageActions
 	{
 		public Gtk.Action CropToSelection { get; private set; }
+		public Gtk.Action AutoCrop { get; private set; }
 		public Gtk.Action Resize { get; private set; }
 		public Gtk.Action CanvasSize { get; private set; }
 		public Gtk.Action FlipHorizontal { get; private set; }
@@ -56,6 +57,7 @@ namespace Pinta.Core
 			fact.AddDefault ();
 			
 			CropToSelection = new Gtk.Action ("CropToSelection", Catalog.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
+			AutoCrop = new Gtk.Action ("AutoCrop", Catalog.GetString ("Automatically Crop"), null, "Menu.Image.Crop.png");
 			Resize = new Gtk.Action ("Resize", Catalog.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
 			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
 			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
@@ -72,6 +74,7 @@ namespace Pinta.Core
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
 			menu.Append (CropToSelection.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (AutoCrop.CreateMenuItem ());
 			menu.Append (Resize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask));
 			menu.Append (CanvasSize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
@@ -94,6 +97,7 @@ namespace Pinta.Core
 			RotateCW.Activated += HandlePintaCoreActionsImageRotateCWActivated;
 			RotateCCW.Activated += HandlePintaCoreActionsImageRotateCCWActivated;
 			CropToSelection.Activated += HandlePintaCoreActionsImageCropToSelectionActivated;
+			AutoCrop.Activated += HandlePintaCoreActionsImageAutoCropActivated;
 		}
 		#endregion
 
@@ -175,32 +179,48 @@ namespace Pinta.Core
 
 			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
-			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
+			CropImageToSelection (doc, rect);
+		}
 
+		private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			PintaCore.Tools.Commit ();
+
+			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
+
+			CropImageToSelection (doc, rect);
+		}
+		#endregion
+
+		static void CropImageToSelection (Document doc, Gdk.Rectangle rect)
+		{
+			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
+			
 			hist.Icon = "Menu.Image.Crop.png";
 			hist.Text = Catalog.GetString ("Crop to Selection");
 			hist.TakeSnapshotOfImage ();
 			hist.RestorePath = doc.SelectionPath.Clone ();
-
+			
 			PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates ();
-
+			
 			double original_scale = doc.Workspace.Scale;
 			doc.ImageSize = rect.Size;
 			doc.Workspace.CanvasSize = rect.Size;
 			doc.Workspace.Scale = original_scale;
-
+			
 			PintaCore.Actions.View.UpdateCanvasScale ();
-
+			
 			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
-
+			
 			foreach (var layer in doc.Layers)
 				layer.Crop (rect, doc.SelectionPath);
-
+			
 			doc.History.PushNewItem (hist);
 			doc.ResetSelectionPath ();
-
+			
 			doc.Workspace.Invalidate ();
 		}
-		#endregion
 	}
 }
