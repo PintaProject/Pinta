@@ -55,6 +55,7 @@ namespace Pinta.Actions
 
 				PintaCore.Workspace.NewDocument (size, true);
 				PintaCore.Actions.Edit.Paste.Activate ();
+				PintaCore.Actions.Edit.Deselect.Activate ();
 			} else {
 				ClipboardEmptyError ();
 			}
