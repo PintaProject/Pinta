@@ -132,5 +132,35 @@ namespace Pinta.Core
 
 			return item;
 		}
+
+		/// <summary>
+		/// Initialize an image preview widget for the dialog
+		/// </summary>
+		public static void AddImagePreview (this FileChooserDialog dialog)
+		{
+			dialog.PreviewWidget = new Image ();
+			dialog.UpdatePreview += new EventHandler (OnUpdateImagePreview);
+		}
+
+		/// <summary>
+		/// Update the image preview widget of a FileChooserDialog
+		/// </summary>
+		/// <param name="sender"></param>
+		private static void OnUpdateImagePreview (object sender, EventArgs e)
+		{
+			FileChooserDialog dialog = (FileChooserDialog)sender;
+			Image preview = (Image)dialog.PreviewWidget;
+
+			try
+			{
+				preview.Pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename, 256, 512, true);
+				dialog.PreviewWidgetActive = true;
+			}
+			catch (GLib.GException)
+			{
+				// if the image preview failed, don't show the preview widget
+				dialog.PreviewWidgetActive = false;
+			}
+		}
 	}
 }

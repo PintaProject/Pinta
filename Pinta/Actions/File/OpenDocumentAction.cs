@@ -67,6 +67,8 @@ namespace Pinta.Actions
 			fcd.SetCurrentFolder (PintaCore.System.LastDialogDirectory);
 			fcd.SelectMultiple = true;
 
+			fcd.AddImagePreview ();
+
 			int response = fcd.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {

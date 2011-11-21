@@ -158,6 +158,9 @@ namespace Pinta.Core
 			
 			fcd.SetCurrentFolder (PintaCore.System.LastDialogDirectory);
 			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
+
+			fcd.AddImagePreview ();
+
 			int response = fcd.Run ();
 			
 			if (response == (int)Gtk.ResponseType.Ok) {
