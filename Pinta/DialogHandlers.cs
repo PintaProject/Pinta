@@ -103,6 +103,7 @@ namespace Pinta
 				PintaCore.Actions.View.ZoomToWindow.Sensitive = false;
 				PintaCore.Actions.View.ZoomComboBox.Sensitive = false;
 
+				PintaCore.Actions.Image.CropToSelection.Sensitive = false;
 				PintaCore.Actions.Image.AutoCrop.Sensitive = false;
 				PintaCore.Actions.Image.CanvasSize.Sensitive = false;
 				PintaCore.Actions.Image.Resize.Sensitive = false;
