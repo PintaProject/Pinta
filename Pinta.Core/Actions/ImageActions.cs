@@ -204,7 +204,9 @@ namespace Pinta.Core
 						break;
 					}
 				}
-
+				//Check if the image is blank/mono-coloured, only need to do it on this scan
+				if (depth == image.Height)
+					return;
 			}
 
 			rect = new Gdk.Rectangle (rect.X, rect.Y + depth, rect.Width, rect.Height - depth);

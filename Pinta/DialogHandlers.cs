@@ -103,6 +103,7 @@ namespace Pinta
 				PintaCore.Actions.View.ZoomToWindow.Sensitive = false;
 				PintaCore.Actions.View.ZoomComboBox.Sensitive = false;
 
+				PintaCore.Actions.Image.AutoCrop.Sensitive = false;
 				PintaCore.Actions.Image.CanvasSize.Sensitive = false;
 				PintaCore.Actions.Image.Resize.Sensitive = false;
 				PintaCore.Actions.Image.FlipHorizontal.Sensitive = false;
@@ -144,6 +145,7 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Sensitive = true;
 			PintaCore.Actions.View.ZoomComboBox.Sensitive = true;
 
+			PintaCore.Actions.Image.AutoCrop.Sensitive = true;
 			PintaCore.Actions.Image.CanvasSize.Sensitive = true;
 			PintaCore.Actions.Image.Resize.Sensitive = true;
 			PintaCore.Actions.Image.FlipHorizontal.Sensitive = true;
