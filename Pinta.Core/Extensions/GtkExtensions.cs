@@ -142,6 +142,9 @@ namespace Pinta.Core
 			dialog.UpdatePreview += new EventHandler (OnUpdateImagePreview);
 		}
 
+		private const int MaxPreviewWidth = 256;
+		private const int MaxPreviewHeight = 512;
+
 		/// <summary>
 		/// Update the image preview widget of a FileChooserDialog
 		/// </summary>
@@ -153,8 +156,32 @@ namespace Pinta.Core
 
 			try
 			{
-				preview.Pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename, 256, 512, true);
-				dialog.PreviewWidgetActive = true;
+				var pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename);
+
+				if (pixbuf == null)
+				{
+					dialog.PreviewWidgetActive = false;
+					return;
+				}
+
+				// scale down images that are too large, but don't scale up small images
+				if (pixbuf.Width > MaxPreviewWidth || pixbuf.Height > MaxPreviewHeight)
+				{
+					pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename, MaxPreviewWidth, MaxPreviewHeight, true);
+				}
+
+				if (pixbuf != null)
+				{
+					// add padding so that small images don't cause the dialog to shrink
+					preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
+					preview.Pixbuf = pixbuf;
+					dialog.PreviewWidgetActive = true;
+				}
+				else
+				{
+					dialog.PreviewWidgetActive = false;
+				}
+
 			}
 			catch (GLib.GException)
 			{
