@@ -1207,6 +1207,10 @@ msgstr ""
 msgid "Crop to Selection"
 msgstr ""
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr ""
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
 msgstr ""
