@@ -37,6 +37,11 @@ namespace Pinta.Gui.Widgets
 
 		private CellRendererPixbuf file_close_cell;
 		private TreeViewColumn file_name_column;
+		private TreeViewColumn file_preview_column;
+
+		private const int PreviewWidth = 60;
+		private const int PreviewHeight = 40;
+		private const int PreviewColumnWidth = 70;
 
 		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon (Stock.Close);
 
@@ -52,18 +57,24 @@ namespace Pinta.Gui.Widgets
 			tree.Selection.Mode = SelectionMode.Single;
 			tree.Selection.SelectFunction = HandleDocumentSelected;
 
+			var file_preview_cell = new CellRendererSurface (PreviewWidth, PreviewHeight);
+			file_preview_column = new TreeViewColumn ("File Preview", file_preview_cell, "surface", 0);
+			file_preview_column.Sizing = TreeViewColumnSizing.Fixed;
+			file_preview_column.FixedWidth = PreviewColumnWidth;
+			tree.AppendColumn (file_preview_column);
+
 			file_name_column = new TreeViewColumn ();
 			CellRendererText file_name_cell = new CellRendererText ();
 			file_name_column.PackStart (file_name_cell, true);
-			file_name_column.AddAttribute (file_name_cell, "text", 0);
+			file_name_column.AddAttribute (file_name_cell, "text", 1);
 
 			file_close_cell = new CellRendererPixbuf ();
 			file_name_column.PackStart (file_close_cell, false);
-			file_name_column.AddAttribute (file_close_cell, "pixbuf", 1);
+			file_name_column.AddAttribute (file_close_cell, "pixbuf", 2);
 
 			tree.AppendColumn (file_name_column);
 
-			store = new ListStore (typeof (string), typeof (Gdk.Pixbuf));
+			store = new ListStore (typeof (Cairo.ImageSurface), typeof (string), typeof (Gdk.Pixbuf));
 			tree.Model = store;
 			tree.ButtonPressEvent += HandleTreeButtonPressEvent;
 
@@ -74,6 +85,17 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Workspace.DocumentClosed += HandleDocumentOpenedOrClosed;
 			PintaCore.Workspace.DocumentCreated += HandleDocumentOpenedOrClosed;
 			PintaCore.Workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
+
+			// update the thumbnails whenever the image is modified
+			PintaCore.History.HistoryItemAdded += HandleDocumentModified;
+			PintaCore.History.ActionRedone += HandleDocumentModified;
+			PintaCore.History.ActionUndone += HandleDocumentModified;
+		}
+
+		void HandleDocumentModified (object sender, EventArgs e)
+		{
+			RebuildDocumentList ();
+			UpdateSelectedDocument ();
 		}
 
 		/// <summary>
@@ -88,6 +110,8 @@ namespace Pinta.Gui.Widgets
 			int start_pos, width;
 			file_name_column.CellGetPosition (file_close_cell, out start_pos, out width);
 
+			start_pos += file_preview_column.Width;
+
 			// if the close button was clicked, find the row that was clicked and close that document
 			if (start_pos <= click_x && start_pos + width > click_x)
 			{
@@ -96,6 +120,7 @@ namespace Pinta.Gui.Widgets
 
 				PintaCore.Workspace.SetActiveDocument (path.Indices[0]);
 				PintaCore.Actions.File.Close.Activate ();
+				UpdateSelectedDocument ();
 			}
 		}
 
@@ -129,7 +154,7 @@ namespace Pinta.Gui.Widgets
 			{
 				doc.Renamed -= HandleDocRenamed;
 				doc.Renamed += HandleDocRenamed;
-				store.AppendValues (doc.Filename, close_icon);
+				store.AppendValues (doc.GetFlattenedImage (), doc.Filename, close_icon);
 			}
 		}
 
