@@ -38,10 +38,12 @@ namespace Pinta.Gui.Widgets
 		private CellRendererPixbuf file_close_cell;
 		private TreeViewColumn file_name_column;
 		private TreeViewColumn file_preview_column;
+		private TreeViewColumn file_close_column;
 
 		private const int PreviewWidth = 60;
 		private const int PreviewHeight = 40;
 		private const int PreviewColumnWidth = 70;
+		private const int CloseColumnWidth = 30;
 
 		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon (Stock.Close);
 
@@ -63,16 +65,15 @@ namespace Pinta.Gui.Widgets
 			file_preview_column.FixedWidth = PreviewColumnWidth;
 			tree.AppendColumn (file_preview_column);
 
-			file_name_column = new TreeViewColumn ();
-			CellRendererText file_name_cell = new CellRendererText ();
-			file_name_column.PackStart (file_name_cell, true);
-			file_name_column.AddAttribute (file_name_cell, "text", 1);
+			file_name_column = new TreeViewColumn ("File Name", new CellRendererText (), "text", 1);
+			file_name_column.Expand = true;
+			tree.AppendColumn (file_name_column);
 
 			file_close_cell = new CellRendererPixbuf ();
-			file_name_column.PackStart (file_close_cell, false);
-			file_name_column.AddAttribute (file_close_cell, "pixbuf", 2);
-
-			tree.AppendColumn (file_name_column);
+			file_close_column = new TreeViewColumn ("Close File", file_close_cell, "pixbuf", 2);
+			file_close_column.Sizing = TreeViewColumnSizing.Fixed;
+			file_close_column.FixedWidth = CloseColumnWidth;
+			tree.AppendColumn (file_close_column);
 
 			store = new ListStore (typeof (Cairo.ImageSurface), typeof (string), typeof (Gdk.Pixbuf));
 			tree.Model = store;
@@ -108,9 +109,9 @@ namespace Pinta.Gui.Widgets
 			double click_y = args.Event.Y;
 
 			int start_pos, width;
-			file_name_column.CellGetPosition (file_close_cell, out start_pos, out width);
+			file_close_column.CellGetPosition (file_close_cell, out start_pos, out width);
 
-			start_pos += file_preview_column.Width;
+			start_pos += file_preview_column.Width + file_name_column.Width;
 
 			// if the close button was clicked, find the row that was clicked and close that document
 			if (start_pos <= click_x && start_pos + width > click_x)
