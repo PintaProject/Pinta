@@ -30,6 +30,8 @@ using Mono.Unix;
 
 namespace Pinta.Core
 {
+	public delegate void ZoomChangedEventHandler (object o, DocumentEventArgs e);
+
 	public class DocumentWorkspace
 	{
 		private Document document;
@@ -46,6 +48,8 @@ namespace Pinta.Core
 			this.document = document;
 			History = new DocumentWorkspaceHistory (document, this);
 		}
+
+		public event ZoomChangedEventHandler ZoomChanged;
 
 		#region Public Properties
 		public bool CanvasFitsInWindow {
@@ -188,6 +192,7 @@ namespace Pinta.Core
 			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+			ZoomChanged (this, new DocumentEventArgs (document));
 		}
 		#endregion
 
@@ -264,6 +269,8 @@ namespace Pinta.Core
 			
 			PintaCore.Actions.View.ResumeZoomUpdate ();
 			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
+
+			ZoomChanged (this, new DocumentEventArgs (document));
 		}
 		#endregion
 	}
