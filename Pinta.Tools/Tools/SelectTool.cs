@@ -43,7 +43,6 @@ namespace Pinta.Tools
 		bool handler_active = false;
 		private Gdk.Cursor cursor_hand;
 		bool is_hand_cursor = false;
-		bool eventhandler_active = false;
 
 		public SelectTool ()
 		{
@@ -97,10 +96,6 @@ namespace Pinta.Tools
 
 				handler_active = true;
 				hist = null;
-				if (!eventhandler_active) {
-					PintaCore.Workspace.ActiveWorkspace.ZoomChanged += ZoomChanged;
-					eventhandler_active = true;
-				}
 			}
 
 			is_drawing = false;
@@ -315,10 +310,5 @@ namespace Pinta.Tools
 		}
 
 		#endregion
-
-		private void ZoomChanged (object sender, DocumentEventArgs e)
-		{
-			if (handler_active) ReDraw (Gdk.ModifierType.None);
-		}
 	}
 }
