@@ -118,14 +118,30 @@ namespace Pinta.Core
 			(old as IDisposable).Dispose ();
 		}
 		
-		public void Rotate180 ()
+		/// <summary>
+		/// Rotates layer by the specified angle (in degrees).
+		/// </summary>
+		/// <param name='angle'>
+		/// Angle (in degrees).
+		/// </param>
+		public void Rotate (double angle)
 		{
-			Layer dest = PintaCore.Layers.CreateLayer ();
-			
+			int w = PintaCore.Workspace.ImageSize.Width;
+			int h = PintaCore.Workspace.ImageSize.Height;
+
+			double radians = (angle / 180d) * Math.PI;
+			double cos = Math.Cos (radians);
+			double sin = Math.Sin (radians);
+
+			var newSize = RotateDimensions (PintaCore.Workspace.ImageSize, angle);
+
+			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, newSize.Width, newSize.Height);
+
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Matrix = new Matrix (-1, 0, 0, -1, Surface.Width, Surface.Height);
+				g.Matrix = new Matrix (cos, sin, -sin, cos, newSize.Width / 2.0, newSize.Height / 2.0);
+				g.Translate (-w / 2.0, -h / 2.0);
 				g.SetSource (Surface);
-				
+
 				g.Paint ();
 			}
 			
@@ -133,47 +149,16 @@ namespace Pinta.Core
 			Surface = dest.Surface;
 			(old as IDisposable).Dispose ();
 		}
-		
-		public void Rotate90CW ()
+
+		public static Gdk.Size RotateDimensions (Gdk.Size originalSize, double angle)
 		{
-			int w = PintaCore.Workspace.ImageSize.Width;
-			int h = PintaCore.Workspace.ImageSize.Height;
-			
-			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
-			
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Translate (h / 2d, w / 2d);
-				g.Rotate (Math.PI / 2);
-				g.Translate (-w / 2d, -h / 2d);
-				g.SetSource (Surface);
-				
-				g.Paint ();
-			}
-			
-			Surface old = Surface;
-			Surface = dest.Surface;
-			(old as IDisposable).Dispose ();
-		}
-		
-		public void Rotate90CCW ()
-		{
-			int w = PintaCore.Workspace.ImageSize.Width;
-			int h = PintaCore.Workspace.ImageSize.Height;
-			
-			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, h, w);
-			
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Translate (h / 2, w / 2);
-				g.Rotate (Math.PI / -2);
-				g.Translate (-w / 2, -h / 2);
-				g.SetSource (Surface);
-				
-				g.Paint ();
-			}
-			
-			Surface old = Surface;
-			Surface = dest.Surface;
-			(old as IDisposable).Dispose ();
+			double radians = (angle / 180d) * Math.PI;
+			double cos = Math.Abs (Math.Cos (radians));
+			double sin = Math.Abs (Math.Sin (radians));
+			int w = originalSize.Width;
+			int h = originalSize.Height;
+
+			return new Gdk.Size ((int)(w * cos + h * sin), (int)(w * sin + h * cos));
 		}
 		
 		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
