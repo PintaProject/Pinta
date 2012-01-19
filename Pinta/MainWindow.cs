@@ -182,7 +182,7 @@ namespace Pinta
 			if (PintaCore.System.OperatingSystem == OS.Windows)
 				tool_toolbar.HeightRequest = 28;
 			else
-				tool_toolbar.HeightRequest = 42;
+				tool_toolbar.HeightRequest = 32;
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
