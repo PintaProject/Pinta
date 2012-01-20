@@ -609,6 +609,10 @@ msgstr ""
 msgid "Normal and Outline"
 msgstr ""
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr ""
