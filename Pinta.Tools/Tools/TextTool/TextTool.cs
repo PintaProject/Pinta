@@ -171,6 +171,7 @@ namespace Pinta.Tools
 				fill_button.AddItem (Catalog.GetString ("Normal"), "ShapeTool.Fill.png", 0);
 				fill_button.AddItem (Catalog.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
 				fill_button.AddItem (Catalog.GetString ("Outline"), "ShapeTool.Outline.png", 2);
+				fill_button.AddItem (Catalog.GetString ("Fill Background"), "ShapeTool.Fill.png", 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}
@@ -390,8 +391,9 @@ namespace Pinta.Tools
 			set { (outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
 		}
 
-		protected bool StrokeText { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
-		protected bool FillText { get { return (int)fill_button.SelectedItem.Tag <= 1; } }
+		protected bool StrokeText { get { return ((int)fill_button.SelectedItem.Tag >= 1 && (int)fill_button.SelectedItem.Tag != 3); } }
+		protected bool FillText { get { return (int)fill_button.SelectedItem.Tag <= 1 || (int)fill_button.SelectedItem.Tag == 3; } }
+		protected bool BackgroundFill { get { return (int)fill_button.SelectedItem.Tag == 3; } }
 		#endregion
 
 		#region Activation/Deactivation
@@ -664,6 +666,13 @@ namespace Pinta.Tools
 
 				g.MoveTo (new Cairo.PointD (engine.Origin.X, engine.Origin.Y));
 				g.Color = PintaCore.Palette.PrimaryColor;
+
+				//Fill in background
+				if (BackgroundFill) {
+					using (var g2 = new Cairo.Context (surf)) {
+						g2.FillRectangle (engine.GetLayoutBounds ().ToCairoRectangle (), PintaCore.Palette.SecondaryColor);
+					}
+				}
 
 				// Draw the text
 				if (FillText)
