@@ -655,37 +655,34 @@ namespace Pinta.Core
 		// Rotate image 180 degrees (flip H+V)
 		public void RotateImage180 ()
 		{
-			foreach (var layer in Layers)
-				layer.Rotate180 ();
-
-			Workspace.Invalidate ();
+			RotateImage (180);
 		}
 
 		public void RotateImageCW ()
 		{
-			foreach (var layer in Layers)
-				layer.Rotate90CW ();
-
-			ImageSize = new Gdk.Size (ImageSize.Height, ImageSize.Width);
-			Workspace.CanvasSize = new Gdk.Size (Workspace.CanvasSize.Height, Workspace.CanvasSize.Width);
-
-			PintaCore.Actions.View.UpdateCanvasScale ();
-
-			Workspace.Invalidate ();
+			RotateImage (90);
 		}
 
 		public void RotateImageCCW ()
 		{
-			foreach (var layer in Layers)
-				layer.Rotate90CCW ();
+			RotateImage (-90);
+		}
 
-			ImageSize = new Gdk.Size (ImageSize.Height, ImageSize.Width);
-			Workspace.CanvasSize = new Gdk.Size (Workspace.CanvasSize.Height, Workspace.CanvasSize.Width);
+		/// <summary>
+		/// Rotates the image by the specified angle (in degrees)
+		/// </summary>
+		private void RotateImage (double angle)
+		{
+			foreach (var layer in Layers)
+			{
+				layer.Rotate (angle);
+			}
+
+			ImageSize = Layer.RotateDimensions (ImageSize, angle);
+			Workspace.CanvasSize = Layer.RotateDimensions (Workspace.CanvasSize, angle);
 
 			PintaCore.Actions.View.UpdateCanvasScale ();
-
 			Workspace.Invalidate ();
-
 		}
 
 		// Returns true if successful, false if canceled
