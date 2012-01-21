@@ -69,7 +69,7 @@ namespace Pinta.Core
 			ImportFromFile = new Gtk.Action ("ImportFromFile", Catalog.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
 			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
 			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
-			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("Rotate / Zoom"), null, "Menu.Layers.RotateZoom.png");
+			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
 			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Catalog.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
 			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Catalog.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
 			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
@@ -88,7 +88,7 @@ namespace Pinta.Core
 			menu.AppendSeparator ();
 			menu.Append (FlipHorizontal.CreateMenuItem ());
 			menu.Append (FlipVertical.CreateMenuItem ());
-			//menu.Append (RotateZoom.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (RotateZoom.CreateMenuItem ());
 			menu.AppendSeparator ();
 			menu.Append (Properties.CreateAcceleratedMenuItem (Gdk.Key.F4, Gdk.ModifierType.None));
 		}
