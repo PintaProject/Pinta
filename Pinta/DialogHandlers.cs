@@ -60,6 +60,7 @@ namespace Pinta
 
 			// Layers
 			action_handlers.Add (new LayerPropertiesAction ());
+			action_handlers.Add (new RotateZoomLayerAction ());
 
 			// View
 			action_handlers.Add (new ToolBarToggledAction ());
