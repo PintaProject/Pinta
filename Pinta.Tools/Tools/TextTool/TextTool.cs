@@ -171,7 +171,7 @@ namespace Pinta.Tools
 				fill_button.AddItem (Catalog.GetString ("Normal"), "ShapeTool.Fill.png", 0);
 				fill_button.AddItem (Catalog.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
 				fill_button.AddItem (Catalog.GetString ("Outline"), "ShapeTool.Outline.png", 2);
-				fill_button.AddItem (Catalog.GetString ("Fill Background"), "ShapeTool.Fill.png", 3);
+				fill_button.AddItem (Catalog.GetString ("Fill Background"), "TextTool.FillBackground.png", 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}

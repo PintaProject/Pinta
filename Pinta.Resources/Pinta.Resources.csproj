@@ -9,7 +9,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Pinta.Resources</RootNamespace>
     <AssemblyName>Pinta.Resources</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <CodePage>65001</CodePage>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -522,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Help.Extensions.png">
       <LogicalName>Menu.Help.Extensions.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TextTool.FillBackground.png">
+      <LogicalName>TextTool.FillBackground.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
