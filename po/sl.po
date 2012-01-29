@@ -723,7 +723,7 @@ msgstr "O programu"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
-msgstr "..."
+msgstr " …"
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
