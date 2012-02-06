@@ -96,9 +96,9 @@ namespace Pinta.Core
 			get { return (double)CanvasSize.Width / (double)document.ImageSize.Width; }
 			set {
 				if (value != (double)CanvasSize.Width / (double)document.ImageSize.Width || value != (double)CanvasSize.Height / (double)document.ImageSize.Height) {
-					int new_x = (int)(document.ImageSize.Width * value);
-					int new_y = (int)((new_x * document.ImageSize.Height) / document.ImageSize.Width);
-					
+					int new_x = Math.Max ((int)(document.ImageSize.Width * value), 1);
+					int new_y = Math.Max ((int)((new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
+
 					CanvasSize = new Gdk.Size (new_x, new_y);
 					Invalidate ();
 				}
@@ -194,6 +194,9 @@ namespace Pinta.Core
 		#region Private Methods
 		private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
 		{
+			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height ==1))
+				return; //Can't zoom in past a 1x1 px canvas
+
 			double zoom;
 			
 			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText, out zoom))
