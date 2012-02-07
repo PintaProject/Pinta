@@ -109,6 +109,8 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 			doc.RotateImageCCW ();
 
+			doc.ResetSelectionPath ();
+
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 		}
 
@@ -118,6 +120,8 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 			doc.RotateImageCW ();
+
+			doc.ResetSelectionPath ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 		}
@@ -147,6 +151,8 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 			doc.RotateImage180 ();
+
+			doc.ResetSelectionPath ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 		}
