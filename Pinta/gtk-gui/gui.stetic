@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="..\..\bin\Pinta.Core.dll" />
-    <widget-library name="..\..\bin\Extensions\Pinta.Effects.dll" />
-    <widget-library name="..\..\bin\Pinta.Resources.dll" />
-    <widget-library name="..\..\Pinta.Gui.Widgets\bin\Debug\Pinta.Gui.Widgets.dll" />
-    <widget-library name="..\..\bin\Pinta.exe" internal="true" />
+    <widget-library name="../../lib/Mono.Addins.Gui.dll" />
+    <widget-library name="../../bin/Pinta.Core.dll" />
+    <widget-library name="../../bin/Pinta.Gui.Widgets.dll" />
+    <widget-library name="../../bin/Pinta.exe" internal="true" />
   </import>
   <widget class="Gtk.Dialog" id="Pinta.NewImageDialog" design-size="251 179">
     <property name="MemberName" />
@@ -380,7 +379,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Entry" id="entry1">
+                  <widget class="Gtk.Entry" id="layerNameEntry">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="IsEditable">True</property>
@@ -400,7 +399,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.CheckButton" id="checkbutton1">
+              <widget class="Gtk.CheckButton" id="visibilityCheckbox">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Visible</property>
@@ -443,7 +442,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.SpinButton" id="spinbutton1">
+                  <widget class="Gtk.SpinButton" id="opacitySpinner">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Upper">100</property>
@@ -460,7 +459,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.HScale" id="hscale1">
+                  <widget class="Gtk.HScale" id="opacitySlider">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Upper">100</property>
@@ -563,7 +562,6 @@
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Label" translatable="yes">By percentage:</property>
-                    <property name="Active">True</property>
                     <property name="DrawIndicator">True</property>
                     <property name="HasLabel">True</property>
                     <property name="UseUnderline">True</property>
@@ -596,7 +594,7 @@
                 <child>
                   <widget class="Gtk.Label" id="label1">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="no">%</property>
+                    <property name="LabelProp">%</property>
                   </widget>
                   <packing>
                     <property name="Position">2</property>
@@ -880,7 +878,7 @@
                 <child>
                   <widget class="Gtk.Label" id="label1">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="no">%</property>
+                    <property name="LabelProp">%</property>
                   </widget>
                   <packing>
                     <property name="Position">2</property>

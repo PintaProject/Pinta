@@ -41,7 +41,7 @@ namespace Pinta.Effects
 		}
 		
 		public int Blue {
-            get { return hscalespinBlue.ValueAsInt; }
+            		get { return hscalespinBlue.ValueAsInt; }
 		}
 
 		public PosterizeDialog ()
@@ -53,6 +53,7 @@ namespace Pinta.Effects
 			hscalespinBlue.ValueChanged += HandleValueChanged;
 
 			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+			DefaultResponse = Gtk.ResponseType.Ok;
 		}
 		
 		public PosterizeData EffectData { get; set; }

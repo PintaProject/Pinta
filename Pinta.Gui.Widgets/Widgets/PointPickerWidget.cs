@@ -76,6 +76,8 @@ namespace Pinta.Gui.Widgets
 			spinX.Adjustment.Lower = 0;
 			spinY.Adjustment.Lower = 0;
 
+			spinX.ActivatesDefault = true;
+			spinY.ActivatesDefault = true;
 		}
 
 		void HandlePointpickergraphic1PositionChanged (object sender, EventArgs e)

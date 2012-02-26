@@ -117,6 +117,8 @@ namespace Pinta.Gui.Widgets
 			hscale.ValueChanged += HandleHscaleValueChanged;
 			spin.ValueChanged += HandleSpinValueChanged;
 			button.Clicked += HandleButtonClicked;
+
+			spin.ActivatesDefault = true;
 		}
 
 		protected override void OnShown ()

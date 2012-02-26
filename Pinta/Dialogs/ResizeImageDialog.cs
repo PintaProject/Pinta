@@ -51,6 +51,11 @@ namespace Pinta
 			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
 			
 			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+			DefaultResponse = Gtk.ResponseType.Ok;
+
+			widthSpinner.ActivatesDefault = true;
+			heightSpinner.ActivatesDefault = true;
+			percentageSpinner.ActivatesDefault = true;
 		}
 
 		#region Public Methods

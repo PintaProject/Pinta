@@ -52,17 +52,21 @@ namespace Pinta
 				hidden,
 				opacity);
 			
-			entry1.Text = initial_properties.Name;
-			checkbutton1.Active = !initial_properties.Hidden;
-			spinbutton1.Value = (int)(initial_properties.Opacity * 100);
-			hscale1.Value = (int)(initial_properties.Opacity * 100);
+			layerNameEntry.Text = initial_properties.Name;
+			visibilityCheckbox.Active = !initial_properties.Hidden;
+			opacitySpinner.Value = (int)(initial_properties.Opacity * 100);
+			opacitySlider.Value = (int)(initial_properties.Opacity * 100);
 
-			entry1.Changed += entry1_Changed;
-			checkbutton1.Toggled += checkbutton1_Toggled;
-			spinbutton1.ValueChanged += new EventHandler (spinbutton1_ValueChanged);
-			hscale1.ValueChanged += new EventHandler (hscale1_ValueChanged);
+			layerNameEntry.Changed += OnLayerNameChanged;
+			visibilityCheckbox.Toggled += OnVisibilityToggled;
+			opacitySpinner.ValueChanged += new EventHandler (OnOpacitySpinnerChanged);
+			opacitySlider.ValueChanged += new EventHandler (OnOpacitySliderChanged);
 			
 			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+			DefaultResponse = Gtk.ResponseType.Ok;
+
+			layerNameEntry.ActivatesDefault = true;
+			opacitySpinner.ActivatesDefault = true;
 		}
 		
 		public bool AreLayerPropertiesUpdated {
@@ -86,34 +90,34 @@ namespace Pinta
 		}
 		
 		#region Private Methods
-		private void entry1_Changed (object sender, EventArgs e)
+		private void OnLayerNameChanged (object sender, EventArgs e)
 		{
-			name = entry1.Text;
+			name = layerNameEntry.Text;
 			PintaCore.Layers.CurrentLayer.Name = name;
 		}
 		
-		private void checkbutton1_Toggled (object sender, EventArgs e)
+		private void OnVisibilityToggled (object sender, EventArgs e)
 		{
-			hidden = !checkbutton1.Active;
+			hidden = !visibilityCheckbox.Active;
 			PintaCore.Layers.CurrentLayer.Hidden = hidden;
 		}
 		
-		private void hscale1_ValueChanged (object sender, EventArgs e)
+		private void OnOpacitySliderChanged (object sender, EventArgs e)
 		{
-			spinbutton1.Value = hscale1.Value;
+			opacitySpinner.Value = opacitySlider.Value;
 			UpdateOpacity ();
 		}
 
-		private void spinbutton1_ValueChanged (object sender, EventArgs e)
+		private void OnOpacitySpinnerChanged (object sender, EventArgs e)
 		{
-			hscale1.Value = spinbutton1.Value;			
+			opacitySlider.Value = opacitySpinner.Value;
 			UpdateOpacity ();
 		}
 		
 		private void UpdateOpacity ()
 		{
 			//TODO check redraws are being throttled.
-			opacity = spinbutton1.Value / 100d;
+			opacity = opacitySpinner.Value / 100d;
 			PintaCore.Layers.CurrentLayer.Opacity = opacity;
 		}
 		#endregion

@@ -42,12 +42,12 @@ namespace Pinta
 			
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
-			
+
 			percentageRadio.Toggled += new EventHandler (percentageRadio_Toggled);
 			absoluteRadio.Toggled += new EventHandler (absoluteRadio_Toggled);
 			
 			percentageSpinner.ValueChanged += new EventHandler (percentageSpinner_ValueChanged);
-			
+
 			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
 			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
 			
@@ -63,6 +63,11 @@ namespace Pinta
 			
 			SetAnchor (Anchor.Center);
 			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
+			DefaultResponse = Gtk.ResponseType.Ok;
+
+			widthSpinner.ActivatesDefault = true;
+			heightSpinner.ActivatesDefault = true;
+			percentageSpinner.ActivatesDefault = true;
 		}
 
 		#region Public Methods

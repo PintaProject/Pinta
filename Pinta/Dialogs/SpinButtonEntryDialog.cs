@@ -50,8 +50,10 @@ namespace Pinta
 			
 			hbox.ShowAll ();
 			VBox.Add (hbox);
-			DefaultResponse = ResponseType.Ok;
+
 			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
+			DefaultResponse = ResponseType.Ok;
+			spinButton.ActivatesDefault = true;
 		}
 		
 		public int GetValue ()

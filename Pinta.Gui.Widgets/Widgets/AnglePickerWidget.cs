@@ -22,6 +22,8 @@ namespace Pinta.Gui.Widgets
 			anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
 			spin.ValueChanged += HandleSpinValueChanged;
 			button.Clicked += HandleButtonClicked;
+
+			spin.ActivatesDefault = true;
 		}
 
 		#region Public Properties
