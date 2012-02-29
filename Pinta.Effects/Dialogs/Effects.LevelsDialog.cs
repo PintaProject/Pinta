@@ -59,8 +59,19 @@ namespace Pinta.Effects
 			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
 			VBox.Remove (hboxBottom);
-			AddActionWidget (hboxBottom, ResponseType.None);
-			
+			foreach (Widget widget in hboxBottom)
+			{
+				hboxBottom.Remove (widget);
+				if (widget == buttonOk)
+				{
+					AddActionWidget (widget, ResponseType.Ok);
+				}
+				else
+				{
+					AddActionWidget (widget, ResponseType.None);
+				}
+			}
+
 			UpdateInputHistogram ();
 			Reset ();
 			UpdateLevels ();
@@ -91,6 +102,14 @@ namespace Pinta.Effects
 			if (Gtk.Global.AlternativeDialogButtonOrder (this.Screen)) {
 				hboxBottom.ReorderChild (buttonCancel, 0);
 			}
+
+			buttonOk.CanDefault = true;
+			DefaultResponse = ResponseType.Ok;
+			spinInLow.ActivatesDefault = true;
+			spinInHigh.ActivatesDefault = true;
+			spinOutGamma.ActivatesDefault = true;
+			spinOutLow.ActivatesDefault = true;
+			spinOutHigh.ActivatesDefault = true;
 		}
 		
 		private UnaryPixelOps.Level Levels {
