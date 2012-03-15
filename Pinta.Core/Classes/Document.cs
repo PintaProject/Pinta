@@ -612,9 +612,9 @@ namespace Pinta.Core
 			hist.Text = Catalog.GetString ("Resize Canvas");
 			hist.TakeSnapshotOfImage ();
 
-			ImageSize = new Gdk.Size (width, height);
-
 			scale = Workspace.Scale;
+
+			ImageSize = new Gdk.Size (width, height);
 
 			foreach (var layer in Layers)
 				layer.ResizeCanvas (width, height, anchor);
