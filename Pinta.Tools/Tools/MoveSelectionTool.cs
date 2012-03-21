@@ -34,7 +34,9 @@ namespace Pinta.Tools
 	public class MoveSelectionTool : BaseTool
 	{
 		private PointD origin_offset;
+		private PointD selection_center;
 		private bool is_dragging;
+		private bool is_rotating;
 		private SelectionHistoryItem hist;
 		
 		public override string Name {
@@ -56,11 +58,21 @@ namespace Pinta.Tools
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			// If we are already drawing, ignore any additional mouse down events
-			if (is_dragging)
+			if (is_dragging || is_rotating)
 				return;
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			origin_offset = point;
-			is_dragging = true;
+
+			if(args.Event.Button == MOUSE_RIGHT_BUTTON)
+			{
+				is_rotating = true;
+				Gdk.Rectangle rc = doc.SelectionPath.GetBounds();
+				selection_center = new PointD(rc.X + rc.Width / 2, rc.Y + rc.Height / 2);
+			}
+			else
+				is_dragging = true;
 
 			hist = new SelectionHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
@@ -68,7 +80,7 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			if (!is_dragging)
+			if (!is_dragging && !is_rotating)
 				return;
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
@@ -78,11 +90,29 @@ namespace Pinta.Tools
 			double dx = origin_offset.X - new_offset.X;
 			double dy = origin_offset.Y - new_offset.Y;
 
+			double dy1 = origin_offset.Y-selection_center.Y;
+			double dx1 = origin_offset.X-selection_center.X;
+			double dy2 = new_offset.Y-selection_center.Y;
+			double dx2 = new_offset.X-selection_center.X;
+
+			double angle = Math.Atan2(dy1, dx1) - Math.Atan2(dy2,dx2);
+
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
 				Path old = doc.SelectionPath;
 				g.FillRule = FillRule.EvenOdd;
 				g.AppendPath (doc.SelectionPath);
-				g.Translate (dx, dy);
+
+				if(is_rotating)
+				{
+					g.Translate(selection_center.X, selection_center.Y);
+					g.Rotate(angle);
+					g.Translate(-selection_center.X, -selection_center.Y);
+				}
+				else
+				{
+					g.Translate (dx, dy);
+				}
+
 				doc.SelectionPath = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
@@ -96,6 +126,7 @@ namespace Pinta.Tools
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			is_dragging = false;
+			is_rotating = false;
 
 			if (hist != null)
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
