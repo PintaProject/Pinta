@@ -135,8 +135,7 @@ namespace Pinta.Gui.Widgets
 				// Resize each layer and paint it to the screen
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
 					cr.Render (layer.Surface, canvas, canvas_bounds.Location, checker);
-					g.SetSourceSurface (canvas, canvas_bounds.X + (int)(layer.Offset.X * scale), canvas_bounds.Y + (int)(layer.Offset.Y * scale));
-					g.PaintWithAlpha (layer.Opacity);
+					layer.Draw(g, canvas, layer.Opacity, canvas_bounds.X, canvas_bounds.Y, scale);
 
 					if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
 						cr.Render (PintaCore.LivePreview.LivePreviewSurface, canvas, canvas_bounds.Location, checker);

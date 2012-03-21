@@ -96,8 +96,7 @@ namespace Pinta.Core
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {
-				ctx.SetSourceSurface (layer.Surface, (int) layer.Offset.X, (int) layer.Offset.Y);
-				ctx.Paint ();
+				layer.Draw(ctx, layer.Surface, 1);
 			}
 			
 			if (effect.EffectData != null)
@@ -150,24 +149,21 @@ namespace Pinta.Core
 				ctx.Rectangle (0, 0, imageSize.Width, imageSize.Height);
 				ctx.AppendPath (selection_path);
 				ctx.Clip ();
-				ctx.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				ctx.PaintWithAlpha (opacity);
+				layer.Draw(ctx, layer.Surface, opacity);
 				ctx.ResetClip ();
 				
 				// Paint area inside the selection path, with the post-effect image.
 				ctx.AppendPath (selection_path);
 				ctx.Clip ();
 				
-				ctx.SetSourceSurface (live_preview_surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				ctx.PaintWithAlpha (opacity);
-				
+				layer.Draw(ctx, live_preview_surface, opacity);
+
 				ctx.AppendPath (selection_path);
 				ctx.FillRule = Cairo.FillRule.EvenOdd;
 				ctx.Clip ();			
 			} else {
 				
-				ctx.SetSourceSurface (live_preview_surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				ctx.PaintWithAlpha (opacity);				
+				layer.Draw(ctx, live_preview_surface, opacity);
 			}
 			ctx.Restore ();
 		}
@@ -247,8 +243,7 @@ namespace Pinta.Core
 			
 				ctx.Operator = Cairo.Operator.Source;
 				
-				ctx.SetSourceSurface (live_preview_surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				ctx.Paint ();
+				layer.Draw(ctx, live_preview_surface, 1);
 				ctx.Restore ();
 			}
 			

@@ -37,6 +37,7 @@ namespace Pinta
 
 		private MenuBar main_menu;
 		private Toolbar main_toolbar;
+		private Statusbar main_statusbar;
 
 		public WindowShell (string name, string title, int width, int height, bool maximize) : base (WindowType.Toplevel)
 		{
@@ -81,6 +82,17 @@ namespace Pinta
 			main_toolbar.Show ();
 
 			return main_toolbar;
+		}
+
+		public Statusbar CreateStatusbar (string name)
+		{
+			main_statusbar = new Statusbar ();
+			main_statusbar.Name = name;
+
+			shell_layout.PackEnd (main_statusbar, false, false, 0);
+			main_statusbar.Show ();
+
+			return main_statusbar;
 		}
 
 		public HBox CreateWorkspace ()

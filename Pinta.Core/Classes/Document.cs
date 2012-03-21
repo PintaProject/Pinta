@@ -361,7 +361,7 @@ namespace Pinta.Core
 		{
 			ShowSelectionLayer = false;
 			SelectionLayer.Clear ();
-			SelectionLayer.Offset = new PointD (0, 0);
+			SelectionLayer.Transform.InitIdentity();
 		}
 
 		// Duplicate current layer
@@ -400,12 +400,7 @@ namespace Pinta.Core
 			Layer layer = SelectionLayer;
 
 			using (Cairo.Context g = new Cairo.Context (CurrentLayer.Surface)) {
-				g.Save ();
-
-				g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				g.PaintWithAlpha (layer.Opacity);
-
-				g.Restore ();
+				layer.Draw(g);
 			}
 
 			DestroySelectionLayer ();

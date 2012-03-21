@@ -38,8 +38,7 @@ namespace Pinta.Core
 		private bool hidden;
 		private string name;
 		private bool tiled;
-		private PointD offset;
-		
+
 		public Layer () : this (null)
 		{
 		}
@@ -51,17 +50,17 @@ namespace Pinta.Core
 		public Layer (ImageSurface surface, bool hidden, double opacity, string name)
 		{
 			Surface = surface;
-			Offset = new PointD (0, 0);
-			
+			Transform = new Matrix();
+
 			this.hidden = hidden;
 			this.opacity = opacity;
 			this.name = name;			
 		}
 		
 		public ImageSurface Surface { get; set; }
-		public bool Tiled { get; set; }	
-		public PointD Offset { get; set; }		
-		
+		public bool Tiled { get; set; }
+		public Matrix Transform { get; set; }
+
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";
 		public static readonly string NameProperty = "Name";		
@@ -116,6 +115,30 @@ namespace Pinta.Core
 			Surface old = Surface;
 			Surface = dest.Surface;
 			(old as IDisposable).Dispose ();
+		}
+
+		public void Draw(Context ctx)
+		{
+			Draw(ctx, Surface, Opacity, 0, 0, 1);
+		}
+
+		public void Draw(Context ctx, ImageSurface surface, double opacity)
+		{
+			Draw(ctx, surface, opacity, 0, 0, 1);
+		}
+
+		public void Draw(Context ctx, ImageSurface surface, double opacity, double offsetX, double offsetY, double scale)
+		{
+			ctx.Save();
+
+			ctx.Translate(offsetX, offsetY);
+			ctx.Scale(scale, scale);
+			ctx.Transform(Transform);
+			ctx.Scale(1 / scale, 1 / scale);
+			ctx.SetSourceSurface(surface, 0, 0);
+			ctx.PaintWithAlpha(opacity);
+
+			ctx.Restore();
 		}
 		
 		/// <summary>
