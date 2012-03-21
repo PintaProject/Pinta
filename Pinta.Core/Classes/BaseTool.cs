@@ -38,6 +38,9 @@ namespace Pinta.Core
 	[TypeExtensionPoint]
 	public abstract class BaseTool
 	{
+		protected const int MOUSE_LEFT_BUTTON = 1;
+		protected const int MOUSE_MIDDLE_BUTTON = 3;
+		protected const int MOUSE_RIGHT_BUTTON = 3;
 		protected const int DEFAULT_BRUSH_WIDTH = 2;
 	    
 		protected static Point point_empty = new Point (-500, -500);
