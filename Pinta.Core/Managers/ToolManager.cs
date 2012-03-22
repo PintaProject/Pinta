@@ -99,7 +99,7 @@ namespace Pinta.Core
 		public void Commit ()
 		{
 			if (CurrentTool != null)
-				CurrentTool.DoCommit ();
+				CurrentTool.DoCommit (true);
 		}
 
 		public void SetCurrentTool (BaseTool tool)

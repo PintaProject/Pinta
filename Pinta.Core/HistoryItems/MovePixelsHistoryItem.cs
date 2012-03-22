@@ -106,7 +106,7 @@ namespace Pinta.Core
 			}
 				
 			old_path = PintaCore.Layers.SelectionPath.Clone ();
-			old_transform = PintaCore.Layers.SelectionLayer.Transform;
+			old_transform = (Matrix)PintaCore.Layers.SelectionLayer.Transform.Clone();
 		}
 	}
 }

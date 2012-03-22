@@ -31,6 +31,7 @@ namespace Pinta.Tools
 		private Rectangle old_cursor_bounds = Rectangle.Zero;
 
 		private TextEngine engine;
+		private SimpleHistoryItem hist;
 
 		public override string Name { get { return Catalog.GetString ("Text"); } }
 		public override string Icon { get { return "Tools.Text.png"; } }
@@ -47,9 +48,12 @@ namespace Pinta.Tools
 		#region Constructor
 		public TextTool ()
 		{
-			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+			Gdk.Pixbuf hand_icon = PintaCore.Resources.GetIcon ("Tools.Pan.png");
+			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, hand_icon, hand_icon.Width/2, hand_icon.Height/2);
 			engine = new TextEngine ();
+			engine.TextChanged += HandleEngineTextChanged;
 		}
+
 		#endregion
 
 		#region ToolBar
@@ -409,7 +413,7 @@ namespace Pinta.Tools
 			is_editing = false;
 		}
 
-		protected override void OnCommit ()
+		protected override void OnCommit (bool force)
 		{
 			StopEditing ();
 		}
@@ -606,6 +610,7 @@ namespace Pinta.Tools
 			is_editing = true;
 			engine.Clear ();
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = false;
+			hist = null;
 		}
 
 		private void StopEditing ()
@@ -623,15 +628,12 @@ namespace Pinta.Tools
 				doc.ToolLayer.Clear ();
 				doc.ToolLayer.Hidden = true;
 
-				if (engine.EditMode == EditingMode.Editing) {
-					SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
+				if (hist != null) {
 					hist.TakeSnapshotOfLayer (doc.CurrentLayerIndex);
 
 					// Redraw the text without the cursor,
 					// and on to the real layer
 					RedrawText (false, false);
-
-					doc.History.PushNewItem (hist);
 				}
 
 				engine.Clear ();
@@ -713,6 +715,19 @@ namespace Pinta.Tools
 			PintaCore.Workspace.Invalidate (r);
 
 			old_bounds = r;
+		}
+		#endregion
+
+		#region Text changes
+		private void HandleEngineTextChanged (object sender, TextChangedEventArgs e)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			if(hist == null)
+			{
+				hist = new SimpleHistoryItem(Icon, Name);
+				doc.History.PushNewItem (hist);
+			}
 		}
 		#endregion
 	}

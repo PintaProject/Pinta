@@ -178,12 +178,15 @@ namespace Pinta.Tools
 		}
 		#endregion
 
-		protected override void OnCommit ()
+		protected override void OnCommit (bool force)
 		{
-			try {
-				PintaCore.Workspace.ActiveDocument.FinishSelection ();
-			} catch (Exception) {
-				// Ignore an error where ActiveDocument fails.
+			if(force)
+			{
+				try {
+					PintaCore.Workspace.ActiveDocument.FinishSelection ();
+				} catch (Exception) {
+					// Ignore an error where ActiveDocument fails.
+				}
 			}
 		}
 

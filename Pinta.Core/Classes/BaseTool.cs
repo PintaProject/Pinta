@@ -118,9 +118,9 @@ namespace Pinta.Core
 			OnMouseUp (canvas, args, point);
 		}
 
-		public void DoCommit ()
+		public void DoCommit (bool force)
 		{
-			OnCommit ();
+			OnCommit (force);
 		}
 
 		public void DoActivated ()
@@ -206,7 +206,7 @@ namespace Pinta.Core
 		/// tools that are in a temporary state while being used, and
 		/// need to commit their work when another option is selected.
 		/// </summary>
-		protected virtual void OnCommit ()
+		protected virtual void OnCommit (bool force)
 		{
 		}
 

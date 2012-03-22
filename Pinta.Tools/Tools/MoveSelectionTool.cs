@@ -38,6 +38,7 @@ namespace Pinta.Tools
 		private bool is_dragging;
 		private bool is_rotating;
 		private SelectionHistoryItem hist;
+		private ToolControl[] control_points = new ToolControl[8];
 		
 		public override string Name {
 			get { return Catalog.GetString ("Move Selection"); }
