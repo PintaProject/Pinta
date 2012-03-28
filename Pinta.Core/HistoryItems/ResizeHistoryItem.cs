@@ -60,9 +60,9 @@ namespace Pinta.Core
 			base.Undo ();
 			
 			if (RestorePath != null) {
-				Cairo.Path old = PintaCore.Layers.SelectionPath;
+				Cairo.Path old = PintaCore.Layers.Selection.Path;
 
-				PintaCore.Layers.SelectionPath = RestorePath.Clone ();
+				PintaCore.Layers.Selection.Path = RestorePath.Clone ();
 				
 				if (old != null)
 					(old as IDisposable).Dispose ();

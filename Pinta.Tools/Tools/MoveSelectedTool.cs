@@ -68,7 +68,7 @@ namespace Pinta.Tools
 			if(args.Event.Button == MOUSE_RIGHT_BUTTON)
 			{
 				is_rotating = true;
-				Gdk.Rectangle rc = doc.SelectionPath.GetBounds();
+				Gdk.Rectangle rc = doc.Selection.Path.GetBounds();
 				selection_center = new PointD(rc.X + rc.Width / 2, rc.Y + rc.Height / 2);
 			}
 			else
@@ -83,17 +83,15 @@ namespace Pinta.Tools
 				doc.ShowSelectionLayer = true;
 
 				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
-					g.AppendPath (doc.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
+					doc.Selection.Clip(g);
 					g.SetSource (doc.CurrentLayer.Surface);
-					g.Clip ();
 					g.Paint ();
 				}
 
 				Cairo.ImageSurface surf = doc.CurrentLayer.Surface;
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
-					g.AppendPath (doc.SelectionPath);
+					g.AppendPath (doc.Selection.Path);
 					g.FillRule = FillRule.EvenOdd;
 					g.Operator = Cairo.Operator.Clear;
 					g.Fill ();
@@ -122,7 +120,7 @@ namespace Pinta.Tools
 
 			double angle = Math.Atan2(dy1, dx1) - Math.Atan2(dy2,dx2);
 
-			Path path = doc.SelectionPath;
+			Path path = doc.Selection.Path;
 
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
 				g.AppendPath (path);
@@ -138,7 +136,7 @@ namespace Pinta.Tools
 					g.Translate (dx, dy);
 				}
 
-				doc.SelectionPath = g.CopyPath ();
+				doc.Selection.Path = g.CopyPath ();
 			}
 
 			(path as IDisposable).Dispose ();

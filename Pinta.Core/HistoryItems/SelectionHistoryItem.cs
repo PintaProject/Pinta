@@ -58,10 +58,10 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			Path swap_path = PintaCore.Layers.SelectionPath;
+			Path swap_path = PintaCore.Layers.Selection.Path;
 			bool swap_show = PintaCore.Layers.ShowSelection;
 
-			PintaCore.Layers.SelectionPath = old_path;
+			PintaCore.Layers.Selection.Path = old_path;
 			PintaCore.Layers.ShowSelection = show_selection;
 
 			old_path = swap_path;
@@ -72,7 +72,7 @@ namespace Pinta.Core
 		
 		public void TakeSnapshot ()
 		{
-			old_path = PintaCore.Layers.SelectionPath.Clone ();
+			old_path = PintaCore.Layers.Selection.Path.Clone ();
 			show_selection = PintaCore.Layers.ShowSelection;
 		}
 	}

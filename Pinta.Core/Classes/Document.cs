@@ -51,7 +51,7 @@ namespace Pinta.Core
 		private Layer selection_layer;
 
 		private int selection_layer_index;
-		private Path selection_path;
+		private Pinta.Core.Selection selection = new Pinta.Core.Selection();
 		private bool show_selection;
 
 		public Document (Gdk.Size size)
@@ -141,14 +141,8 @@ namespace Pinta.Core
 			get { return selection_layer; }
 		}
 		
-		public Path SelectionPath {
-			get { return selection_path; }
-			set {
-				if (selection_path == value)
-					return;
-
-				selection_path = value;
-			}
+		public Pinta.Core.Selection Selection {
+			get { return selection; }
 		}
 
 		public bool ShowSelection {
@@ -241,17 +235,15 @@ namespace Pinta.Core
 			if (selection_layer != null)
 				(selection_layer.Surface as IDisposable).Dispose ();
 
-			if (selection_path != null)
-				(selection_path as IDisposable).Dispose ();
+			if (selection != null)
+				selection.Dispose ();
 		}
 
 		public Context CreateClippedContext ()
 		{
 			Context g = new Context (CurrentLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			return g;
 		}
@@ -260,9 +252,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (CurrentLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 
@@ -273,9 +263,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (ToolLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			return g;
 		}
@@ -284,9 +272,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (ToolLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 
@@ -460,8 +446,7 @@ namespace Pinta.Core
 			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
-				g.AppendPath (SelectionPath);
-				g.Clip ();
+				selection.Clip(g);
 
 				g.SetSource (Layers[index].Surface);
 				g.Paint ();
@@ -507,7 +492,7 @@ namespace Pinta.Core
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
 		{
-			var bounds = SelectionPath.GetBounds ();
+			var bounds = Selection.Path.GetBounds ();
 
 			if (canvasOnly)
 				bounds = ClampToImageSize (bounds);
@@ -582,10 +567,10 @@ namespace Pinta.Core
 		
 		public void ResetSelectionPath ()
 		{
-			Path old = SelectionPath;
+			Path old = Selection.Path;
 
 			using (Cairo.Context g = new Cairo.Context (selection_layer.Surface))
-				SelectionPath = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height));
+				Selection.Path = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height));
 
 			if (old != null)
 				(old as IDisposable).Dispose ();

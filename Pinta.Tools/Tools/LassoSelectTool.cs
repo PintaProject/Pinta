@@ -85,9 +85,9 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 
-				Path old = doc.SelectionPath;
+				Path old = doc.Selection.Path;
 
-				doc.SelectionPath = g.CopyPath (); 
+				doc.Selection.Path = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
 
@@ -112,9 +112,9 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 
-				Path old = doc.SelectionPath;
+				Path old = doc.Selection.Path;
 
-				doc.SelectionPath = g.CopyPath ();
+				doc.Selection.Path = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
 

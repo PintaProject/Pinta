@@ -205,9 +205,7 @@ namespace Pinta.Core
 			op.Apply (dstPtr, len);
 			
 			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.FillRule = Cairo.FillRule.EvenOdd;
-				g.Clip ();
+				PintaCore.Layers.Selection.Clip(g);
 
 				g.SetSource (dest);
 				g.Paint ();

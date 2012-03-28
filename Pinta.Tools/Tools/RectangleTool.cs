@@ -56,9 +56,7 @@ namespace Pinta.Tools
 			Rectangle dirty;
 			
 			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+				doc.Selection.Clip(g);
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 

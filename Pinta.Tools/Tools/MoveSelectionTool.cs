@@ -69,7 +69,7 @@ namespace Pinta.Tools
 			if(args.Event.Button == MOUSE_RIGHT_BUTTON)
 			{
 				is_rotating = true;
-				Gdk.Rectangle rc = doc.SelectionPath.GetBounds();
+				Gdk.Rectangle rc = doc.Selection.Path.GetBounds();
 				selection_center = new PointD(rc.X + rc.Width / 2, rc.Y + rc.Height / 2);
 			}
 			else
@@ -99,9 +99,9 @@ namespace Pinta.Tools
 			double angle = Math.Atan2(dy1, dx1) - Math.Atan2(dy2,dx2);
 
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				Path old = doc.SelectionPath;
+				Path old = doc.Selection.Path;
 				g.FillRule = FillRule.EvenOdd;
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.Path);
 
 				if(is_rotating)
 				{
@@ -114,7 +114,7 @@ namespace Pinta.Tools
 					g.Translate (dx, dy);
 				}
 
-				doc.SelectionPath = g.CopyPath ();
+				doc.Selection.Path = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
 

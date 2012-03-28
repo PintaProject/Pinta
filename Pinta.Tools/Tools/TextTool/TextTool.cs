@@ -662,9 +662,7 @@ namespace Pinta.Tools
 			using (var g = new Cairo.Context (surf)) {
 				g.Save ();
 
-				g.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
-				g.FillRule = Cairo.FillRule.EvenOdd;
-				g.Clip ();
+				PintaCore.Workspace.ActiveDocument.Selection.Clip(g);
 
 				g.MoveTo (new Cairo.PointD (engine.Origin.X, engine.Origin.Y));
 				g.Color = PintaCore.Palette.PrimaryColor;

@@ -61,9 +61,8 @@ namespace Pinta.Core
 			get { return PintaCore.Workspace.ActiveDocument.CurrentLayerIndex; }
 		}
 		
-		public Path SelectionPath {
-			get { return PintaCore.Workspace.ActiveDocument.SelectionPath; }
-			set { PintaCore.Workspace.ActiveDocument.SelectionPath = value; }
+		public Pinta.Core.Selection Selection {
+			get { return PintaCore.Workspace.ActiveDocument.Selection; }
 		}
 
 		public bool ShowSelection {

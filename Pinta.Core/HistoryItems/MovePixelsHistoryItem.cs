@@ -69,10 +69,10 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			Path swap_path = PintaCore.Layers.SelectionPath;
+			Path swap_path = PintaCore.Layers.Selection.Path;
 			Matrix swap_transform = PintaCore.Layers.SelectionLayer.Transform;
 
-			PintaCore.Layers.SelectionPath = old_path;
+			PintaCore.Layers.Selection.Path = old_path;
 			PintaCore.Layers.SelectionLayer.Transform = old_transform;
 
 			old_path = swap_path;
@@ -105,7 +105,7 @@ namespace Pinta.Core
 				old_surface = doc.CurrentLayer.Surface.Clone ();
 			}
 				
-			old_path = PintaCore.Layers.SelectionPath.Clone ();
+			old_path = PintaCore.Layers.Selection.Path.Clone ();
 			old_transform = (Matrix)PintaCore.Layers.SelectionLayer.Transform.Clone();
 		}
 	}

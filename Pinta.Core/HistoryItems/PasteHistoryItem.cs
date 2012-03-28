@@ -90,10 +90,10 @@ namespace Pinta.Core
 			// selection path should be visible
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Path swap_path = doc.SelectionPath;
+			Path swap_path = doc.Selection.Path;
 			bool swap_show_sel = doc.ShowSelection;
 
-			doc.SelectionPath = old_path;
+			doc.Selection.Path = old_path;
 			doc.ShowSelection = old_show_selection;
 
 			old_path = swap_path;
