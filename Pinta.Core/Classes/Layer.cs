@@ -131,10 +131,10 @@ namespace Pinta.Core
 		{
 			ctx.Save();
 
-			ctx.Translate(offsetX, offsetY);
 			ctx.Scale(scale, scale);
 			ctx.Transform(Transform);
 			ctx.Scale(1 / scale, 1 / scale);
+			ctx.Translate(offsetX, offsetY);
 			ctx.SetSourceSurface(surface, 0, 0);
 			ctx.PaintWithAlpha(opacity);
 

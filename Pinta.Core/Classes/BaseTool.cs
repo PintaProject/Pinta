@@ -131,7 +131,12 @@ namespace Pinta.Core
 		public void DoDeactivated ()
 		{
 			OnDeactivated ();
-		}		
+		}
+
+		public void Draw(Context g)
+		{
+			OnDraw(g);
+		}
 		
 		// Return true if the key was consumed.
 		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
@@ -218,6 +223,10 @@ namespace Pinta.Core
 		protected virtual void OnDeactivated ()
 		{
 			SetCursor (null);
+		}
+
+		protected virtual void OnDraw(Context g)
+		{
 		}
 
 		protected virtual ToggleToolButton CreateToolButton ()

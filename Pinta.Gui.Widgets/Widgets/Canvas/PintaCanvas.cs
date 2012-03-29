@@ -142,8 +142,7 @@ namespace Pinta.Gui.Widgets
 
 						g.Save ();
 						g.Scale (scale, scale);
-						g.AppendPath (PintaCore.Layers.SelectionPath);
-						g.Clip ();
+						PintaCore.Layers.Selection.Clip(g);
 
 						g.Scale (1 / scale, 1 / scale);
 						g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
@@ -164,31 +163,11 @@ namespace Pinta.Gui.Widgets
 
 				// Selection outline
 				if (PintaCore.Layers.ShowSelection) {
-					g.Save ();
-					g.Translate (0.5, 0.5);
-					g.Scale (scale, scale);
-
-					g.AppendPath (PintaCore.Layers.SelectionPath);
-
-					if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
-						g.Color = new Cairo.Color (0.7, 0.8, 0.9, 0.2);
-						g.FillRule = Cairo.FillRule.EvenOdd;
-						g.FillPreserve ();
-					}
-
-					g.LineWidth = 1 / scale;
-
-					// Draw a white line first so it shows up on dark backgrounds
-					g.Color = new Cairo.Color (1, 1, 1);
-					g.StrokePreserve ();
-
-					// Draw a black dashed line over the white line
-					g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
-					g.Color = new Cairo.Color (0, 0, 0);
-
-					g.Stroke ();
-					g.Restore ();
+					bool fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
+					PintaCore.Layers.Selection.Draw(g, scale, fillSelection);
 				}
+
+				PintaCore.Tools.CurrentTool.Draw(g);
 			}
 
 			return true;

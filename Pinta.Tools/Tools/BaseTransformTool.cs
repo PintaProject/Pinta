@@ -31,6 +31,12 @@ namespace Pinta.Tools
 {
 	public abstract class BaseTransformTool : BaseTool
 	{
+		#region Constants
+		private const double ControlSize = 6;
+		private readonly static Cairo.Color ControlStrokeColor = new Cairo.Color (0, 0, 1, 0.7);
+		private readonly static Cairo.Color ControlFillColor = new Cairo.Color (0, 0, 1, 0.3);
+		#endregion
+
 		#region Members
 		private Matrix transform = new Matrix();
 		private Rectangle source_rect;
@@ -64,6 +70,7 @@ namespace Pinta.Tools
 
 		protected virtual void OnFinishTransform()
 		{
+			PintaCore.Workspace.Invalidate();
 		}
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas,
@@ -133,6 +140,24 @@ namespace Pinta.Tools
 			is_rotating = false;
 
 			OnFinishTransform();
+		}
+
+		protected override void OnDraw (Cairo.Context g)
+		{
+			if(is_rotating)
+			{
+				PointD center = source_rect.GetCenter();
+				DrawControlPoint(g, center.X, center.Y, PintaCore.Workspace.ActiveWorkspace.Scale);
+			}
+			else if(is_dragging == false)
+			{
+			}
+		}
+
+		private void DrawControlPoint(Context g, double x, double y, double scale)
+		{
+			Rectangle rc = new Rectangle(x * scale - ControlSize / 2, y * scale - ControlSize / 2, ControlSize, ControlSize);
+			g.FillStrokedEllipse(rc, ControlFillColor, ControlStrokeColor, 1);
 		}
 		#endregion
 	}
