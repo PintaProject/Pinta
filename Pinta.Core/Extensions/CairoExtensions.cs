@@ -1406,5 +1406,21 @@ namespace Pinta.Core
 		{
 			return new Gdk.Point ((int)point.X, (int)point.Y);
 		}
+
+		public static void InitMatrix(this Matrix matrix, Matrix source)
+		{
+			matrix.X0 = source.X0;
+			matrix.Xx = source.Xx;
+			matrix.Xy = source.Xy;
+
+			matrix.Y0 = source.Y0;
+			matrix.Yx = source.Yx;
+			matrix.Yy = source.Yy;
+		}
+
+		public static PointD GetCenter(this Cairo.Rectangle rect)
+		{
+			return new PointD(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+		}
 	}
 }

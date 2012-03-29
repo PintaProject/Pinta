@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Pinta.Tools</RootNamespace>
     <AssemblyName>Pinta.Tools</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -55,8 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Cairo" />
@@ -110,6 +108,7 @@
     <Compile Include="Brushes\PlainBrush.cs" />
     <Compile Include="Brushes\CircleBrush.cs" />
     <Compile Include="Tools\ToolControl\ToolControl.cs" />
+    <Compile Include="Tools\BaseTransformTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
