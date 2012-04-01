@@ -14,11 +14,20 @@
 
   <!-- All of our translation files (po) -->
   <ItemGroup>
+    <Translation Include="po/af.po">
+      <Code>af</Code>
+    </Translation>
     <Translation Include="po/ar.po">
       <Code>ar</Code>
     </Translation>
+    <Translation Include="po/bg.po">
+      <Code>bg</Code>
+    </Translation>
     <Translation Include="po/br.po">
       <Code>br</Code>
+    </Translation>
+    <Translation Include="po/bs.po">
+      <Code>bs</Code>
     </Translation>
     <Translation Include="po/ca.po">
       <Code>ca</Code>
@@ -35,17 +44,29 @@
     <Translation Include="po/el.po">
       <Code>el</Code>
     </Translation>
+    <Translation Include="po/en_AU.po">
+      <Code>en_AU</Code>
+    </Translation>
+    <Translation Include="po/en_CA.po">
+      <Code>en_CA</Code>
+    </Translation>
     <Translation Include="po/en_GB.po">
       <Code>en_GB</Code>
     </Translation>
     <Translation Include="po/es.po">
       <Code>es</Code>
     </Translation>
+    <Translation Include="po/et.po">
+      <Code>et</Code>
+    </Translation>
     <Translation Include="po/eu.po">
       <Code>eu</Code>
     </Translation>
     <Translation Include="po/fi.po">
       <Code>fi</Code>
+    </Translation>
+    <Translation Include="po/fil.po">
+      <Code>fil</Code>
     </Translation>
     <Translation Include="po/fo.po">
       <Code>fo</Code>
@@ -61,6 +82,9 @@
     </Translation>
     <Translation Include="po/he.po">
       <Code>he</Code>
+    </Translation>
+    <Translation Include="po/hi.po">
+      <Code>hi</Code>
     </Translation>
     <Translation Include="po/hr.po">
       <Code>hr</Code>
@@ -83,14 +107,29 @@
     <Translation Include="po/ko.po">
       <Code>ko</Code>
     </Translation>
+    <Translation Include="po/la.po">
+      <Code>la</Code>
+    </Translation>
     <Translation Include="po/lt.po">
       <Code>lt</Code>
+    </Translation>
+    <Translation Include="po/lv.po">
+      <Code>lv</Code>
+    </Translation>
+    <Translation Include="po/ms.po">
+      <Code>ms</Code>
     </Translation>
     <Translation Include="po/nb.po">
       <Code>nb</Code>
     </Translation>
     <Translation Include="po/nl.po">
       <Code>nl</Code>
+    </Translation>
+    <Translation Include="po/nn.po">
+      <Code>nn</Code>
+    </Translation>
+    <Translation Include="po/oc.po">
+      <Code>oc</Code>
     </Translation>
     <Translation Include="po/pl.po">
       <Code>pl</Code>
@@ -112,6 +151,9 @@
     </Translation>
     <Translation Include="po/sl.po">
       <Code>sl</Code>
+    </Translation>
+    <Translation Include="po/sq.po">
+      <Code>sq</Code>
     </Translation>
     <Translation Include="po/sr.po">
       <Code>sr</Code>
