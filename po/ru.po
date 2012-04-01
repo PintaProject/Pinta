@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-29 06:56+0000\n"
-"Last-Translator: Nightingale <Serg.Solovyov@gmail.com>\n"
+"PO-Revision-Date: 2012-01-30 06:06+0000\n"
+"Last-Translator: Vyacheslav Sharmanov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -473,6 +473,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Нажмите левую кнопку мыши, чтобы рисовать первичным цветом, правую – чтобы "
+"рисовать вторичным цветом. Зажмите Shift, чтобы ограничить угол."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -638,6 +640,10 @@ msgstr "Обычный"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "Нормальный и контурный"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Заполнить фон"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -941,19 +947,21 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
-"  Anzhel https://launchpad.net/~a9227\n"
 "  ArtKun https://launchpad.net/~artkun\n"
 "  Chubakur https://launchpad.net/~chubakur\n"
 "  Dmitry Pashkevich https://launchpad.net/~dipish\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Maia Kozheva https://launchpad.net/~sikon\n"
+"  Mairon https://launchpad.net/~an9227\n"
 "  Nightingale https://launchpad.net/~solosn\n"
 "  Nikita Putko https://launchpad.net/~ktototam98\n"
 "  Nkolay Parukhin https://launchpad.net/~parukhin\n"
+"  PocketSam https://launchpad.net/~dr-chaoss\n"
 "  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
 "  Stepan Kislan https://launchpad.net/~stepa87\n"
 "  Strahov Nikita https://launchpad.net/~newerty\n"
+"  Vyacheslav Sharmanov https://launchpad.net/~vsharmanov\n"
 "  Yogar https://launchpad.net/~me-yogar\n"
 "  jeder https://launchpad.net/~i-jeder"
 
@@ -1230,9 +1238,9 @@ msgstr "Отразить по горизонтали"
 msgid "Flip Vertical"
 msgstr "Отразить по вертикали"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Поворот/Масштабирование"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Повернуть / Увеличить слой..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1257,13 +1265,17 @@ msgstr "Импорт из файла"
 msgid "Crop to Selection"
 msgstr "Откадрировать в выделение"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Автокадрирование"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
 msgstr "Изменить размер изображения"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Изменить размер холста..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1652,23 +1664,29 @@ msgid "Pinta Image Editor"
 msgstr "Графический редактор Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Изображения"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Невозможно сохранить файл, доступный только для чтения."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"Размер вставленного изображения больше размера холста. Что нужно сделать?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Увеличить размер холста"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "Не изменять размер холста"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Повернуть / Увеличить слой"

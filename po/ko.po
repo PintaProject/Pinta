@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-26 02:05+0000\n"
-"Last-Translator: Mike Sierra <Unknown>\n"
+"PO-Revision-Date: 2012-02-16 11:11+0000\n"
+"Last-Translator: Softblow <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -23,20 +23,20 @@ msgstr "자동 색보정"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "색 뒤집기"
+msgstr "색 반전"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr "단계"
+msgstr "레벨"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
-msgstr "오징어 먹물색"
+msgstr "세피아"
 
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "벽붙이그림"
+msgstr "포스터화"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
@@ -45,7 +45,7 @@ msgstr "흑백변환"
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr "색도표"
+msgstr "커브"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
@@ -53,7 +53,7 @@ msgstr "밝기 / 대비"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "색조 / 맑기"
+msgstr "색조 / 채도"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
@@ -61,28 +61,28 @@ msgstr "색보정"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "맑기 막대표"
+msgstr "입력 히스토그램"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "맑기"
+msgstr "입력"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "밝기"
+msgstr "출력"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "밝기 막대표"
+msgstr "출력 히스토그램"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr "자동 조정"
+msgstr "자동"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr "되돌리기"
+msgstr "초기화"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
@@ -613,6 +613,10 @@ msgstr "보통"
 msgid "Normal and Outline"
 msgstr "보통 과 외곽선"
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr "외곽선 굵기"
@@ -911,6 +915,7 @@ msgstr "이전 기여자"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Choi gyu ho https://launchpad.net/~cgh48\n"
 "  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim\n"
 "  Mike Sierra https://launchpad.net/~ubuntuda\n"
@@ -1189,8 +1194,8 @@ msgstr ""
 msgid "Flip Vertical"
 msgstr ""
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
@@ -1214,6 +1219,10 @@ msgstr ""
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
+msgstr ""
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
 msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
@@ -1603,7 +1612,7 @@ msgid "Pinta Image Editor"
 msgstr ""
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
+msgid "Images"
 msgstr ""
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
@@ -1622,4 +1631,9 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr ""
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-10-08 07:02+0000\n"
+"PO-Revision-Date: 2012-02-21 18:30+0000\n"
 "Last-Translator: taijuin lee <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -458,7 +458,7 @@ msgstr "直線"
 msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
-msgstr ""
+msgstr "單擊左鍵用主要顏色繪製，單擊右鍵則用次要顏色。按住Shift鍵捕捉角度。"
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -611,6 +611,10 @@ msgstr "一般"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "一般及邊框"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "填充背景"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -782,11 +786,11 @@ msgstr "浮動式"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr "拍下螢幕截圖"
+msgstr "拍下螢幕擷圖"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "在多少秒後，拍下螢幕截圖："
+msgstr "在多少秒後，拍下螢幕擷圖："
 
 #: Pinta/DialogHandlers.cs:158
 #, csharp-format
@@ -1117,7 +1121,7 @@ msgstr "新增..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "新增螢幕截圖 ..."
+msgstr "新增螢幕擷圖 ..."
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
@@ -1187,9 +1191,9 @@ msgstr "水平翻轉"
 msgid "Flip Vertical"
 msgstr "垂直翻轉"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "旋轉 /縮放"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "旋轉/縮放圖層..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1213,6 +1217,10 @@ msgstr "匯入圖片檔"
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "剪裁出選取區域"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "自動裁切"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1603,8 +1611,8 @@ msgid "Pinta Image Editor"
 msgstr "Pinta 圖片編輯器"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr "開啟圖片"
+msgid "Images"
+msgstr "影像"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
@@ -1623,3 +1631,8 @@ msgstr "擴大畫布"
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
 msgstr "不要更改畫布大小"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "旋轉/縮放圖層"

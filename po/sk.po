@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-24 08:12+0000\n"
-"Last-Translator: xXx <michalhusar.it@gmail.com>\n"
+"PO-Revision-Date: 2012-03-27 07:51+0000\n"
+"Last-Translator: DAG Software <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:16+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -634,6 +634,10 @@ msgstr "Normálny"
 msgid "Normal and Outline"
 msgstr "Normálny a obrys"
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Vyplniť pozadie"
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr "Šírka obrysu"
@@ -1212,9 +1216,9 @@ msgstr "Prevrátiť vodorovne"
 msgid "Flip Vertical"
 msgstr "Prevrátiť zvislo"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Otočenie / Priblíženie"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Otočiť / Priblížiť vrstvu..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1239,13 +1243,17 @@ msgstr "Importovať zo súboru"
 msgid "Crop to Selection"
 msgstr "Vystrihnúť na výber"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Automatické orezanie"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Zmeniť veľkosť obrázka..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Zmeniť veľkosť plátna..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1633,12 +1641,12 @@ msgid "Pinta Image Editor"
 msgstr "Pinta editor obrázkov"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Obrázky"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Nedá sa uložiť obrázok len na čítanie."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
@@ -1652,4 +1660,9 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "Nemeniť veľkosť plátna"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Otočiť / Priblížiť vrstvu"

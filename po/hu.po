@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-28 07:23+0000\n"
+"PO-Revision-Date: 2012-01-29 18:14+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -638,6 +638,10 @@ msgstr "Normál"
 msgid "Normal and Outline"
 msgstr "Normál és körvonal"
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Háttér kitöltése"
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr "Körvonal vastagság"
@@ -1217,9 +1221,9 @@ msgstr "Vízszintes tükrözés"
 msgid "Flip Vertical"
 msgstr "Függőleges tükrözés"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Forgatás / Nagyítás"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Réteg forgatása/nagyítása…"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1243,6 +1247,10 @@ msgstr "Importálás fájlból"
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "Kijelölés méretére vágása"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Automatikus vágás"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1636,8 +1644,8 @@ msgid "Pinta Image Editor"
 msgstr "Pinta képszerkesztő"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr "Képek megnyitása"
+msgid "Images"
+msgstr "Képek"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
@@ -1658,3 +1666,8 @@ msgstr "Rajzvászon kiterjesztése"
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
 msgstr "Ne változtassa a rajzvászon méretét"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Réteg forgatása/nagyítása"

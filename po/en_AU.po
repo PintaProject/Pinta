@@ -1,33 +1,33 @@
-# Breton translation for pinta
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# English (Australia) translation for pinta
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2012-01-31 19:20+0000\n"
-"Last-Translator: Alan <Unknown>\n"
-"Language-Team: Breton <br@li.org>\n"
+"PO-Revision-Date: 2012-02-16 22:36+0000\n"
+"Last-Translator: Rafael Neri <Unknown>\n"
+"Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-01 18:16+0000\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
 "X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
-msgstr "Live emgefreek"
+msgstr "Auto Level"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "Tuginañ al livioù"
+msgstr "Invert Colours"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
-msgstr "Liveoù"
+msgstr "Levels"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:27
 msgid "Sepia"
@@ -36,82 +36,82 @@ msgstr "Sepia"
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
-msgstr "Skritellaat"
+msgstr "Posterise"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr "Du ha Gwenn"
+msgstr "Black and White"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
-msgstr "Krommennoù"
+msgstr "Curves"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
 msgid "Brightness / Contrast"
-msgstr "Lintr/Dargemm"
+msgstr "Brightness / Contrast"
 
 #: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
 msgid "Hue / Saturation"
-msgstr "Arliv/Peurvec'hiañ"
+msgstr "Hue / Saturation"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "Kengeidadur al liveoù"
+msgstr "Levels Adjustment"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "Tellun enankañ"
+msgstr "Input Histogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "Enankad"
+msgstr "Input"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "Ec'hankad"
+msgstr "Output"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "Tellun ec'hankañ"
+msgstr "Output Histogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr "Emgefreek"
+msgstr "Auto"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr "Adderaouekaat"
+msgstr "Reset"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr "Ruz"
+msgstr "Red"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
-msgstr "Gwer"
+msgstr "Green"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr "Glas"
+msgstr "Blue"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr "Ereet"
+msgstr "Linked"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr "Kartenn dreuzkas"
+msgstr "Transfer Map"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr "RGG"
+msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr "Lintr"
+msgstr "Luminosity"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
@@ -119,29 +119,29 @@ msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr "Ruz  "
+msgstr "Red  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr "Glas "
+msgstr "Blue "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr "Tun : Klikañ a-zehou da zilemel ar poentoù reoliñ."
+msgstr "Tip: Right-click to remove control points."
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
 msgid "Reduce Noise"
-msgstr "Digreskiñ an trouz"
+msgstr "Reduce Noise"
 
 #: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
 #: Pinta.Effects/Effects/MedianEffect.cs:37
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:38
 msgid "Noise"
-msgstr "Trouz"
+msgstr "Noise"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:26
 msgid "Fragment"
-msgstr "Darnaouiñ"
+msgstr "Fragment"
 
 #: Pinta.Effects/Effects/FragmentEffect.cs:34
 #: Pinta.Effects/Effects/UnfocusEffect.cs:36
@@ -150,59 +150,59 @@ msgstr "Darnaouiñ"
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:34
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
 msgid "Blurs"
-msgstr "Ruzedoù"
+msgstr "Blurs"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr "Koumoul"
+msgstr "Clouds"
 
 #: Pinta.Effects/Effects/CloudsEffect.cs:38
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr "Deouez"
+msgstr "Render"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr "Distiañ"
+msgstr "Unfocus"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
-msgstr "Dilamadur an daoulagad ruz"
+msgstr "Red Eye Removal"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
 #: Pinta.Effects/Effects/GlowEffect.cs:39
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
 #: Pinta.Effects/Effects/SharpenEffect.cs:34
 msgid "Photo"
-msgstr "Luc'hskeudenn"
+msgstr "Photo"
 
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr "Brevennoù mod Mandelbrot"
+msgstr "Mandelbrot Fractal"
 
 #: Pinta.Effects/Effects/GlowEffect.cs:31
 msgid "Glow"
-msgstr "Skleur"
+msgstr "Glow"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
 msgid "Edge Detect"
-msgstr "Dinoiñ ar riblennoù"
+msgstr "Edge Detect"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
 #: Pinta.Effects/Effects/ReliefEffect.cs:33
 #: Pinta.Effects/Effects/EmbossEffect.cs:34
 #: Pinta.Effects/Effects/OutlineEffect.cs:37
 msgid "Stylize"
-msgstr "Stilaat"
+msgstr "Stylize"
 
 #: Pinta.Effects/Effects/RadialBlurEffect.cs:26
 msgid "Radial Blur"
-msgstr "Ruzed skinek"
+msgstr "Radial Blur"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
 msgid "Frosted Glass"
-msgstr "Gwerenn dilufr"
+msgstr "Frosted Glass"
 
 #: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
 #: Pinta.Effects/Effects/TileEffect.cs:34
@@ -211,521 +211,517 @@ msgstr "Gwerenn dilufr"
 #: Pinta.Effects/Effects/BulgeEffect.cs:34
 #: Pinta.Effects/Effects/TwistEffect.cs:34
 msgid "Distort"
-msgstr "Torrgammoù"
+msgstr "Distort"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
-msgstr "Livadur dre eoul"
+msgstr "Oil Painting"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:34
 #: Pinta.Effects/Effects/InkSketchEffect.cs:42
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:41
 msgid "Artistic"
-msgstr "Arzek"
+msgstr "Artistic"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr "Brevennoù mod Julia"
+msgstr "Julia Fractal"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 msgid "Soften Portrait"
-msgstr "Kuñvaat ar poltred"
+msgstr "Soften Portrait"
 
 #: Pinta.Effects/Effects/ReliefEffect.cs:45
 msgid "Relief"
-msgstr "Torosennadur"
+msgstr "Relief"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:34
 msgid "Ink Sketch"
-msgstr "Brastres dre huz"
+msgstr "Ink Sketch"
 
 #: Pinta.Effects/Effects/MedianEffect.cs:29
 msgid "Median"
-msgstr "Krenn"
+msgstr "Median"
 
 #: Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
-msgstr "Stampiñ"
+msgstr "Emboss"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
 msgid "Gaussian Blur"
-msgstr "Ruzed mod Gausse"
+msgstr "Gaussian Blur"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:26
 msgid "Sharpen"
-msgstr "Lemmañ"
+msgstr "Sharpen"
 
 #: Pinta.Effects/Effects/AddNoiseEffect.cs:30
 msgid "Add Noise"
-msgstr "Ouzhpennañ trouz"
+msgstr "Add Noise"
 
 #: Pinta.Effects/Effects/TileEffect.cs:26
 msgid "Tile Reflection"
-msgstr "Disvannadur er marelloù"
+msgstr "Tile Reflection"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:26
 msgid "Pixelate"
-msgstr "Pikselaat"
+msgstr "Pixelate"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:26
 msgid "Motion Blur"
-msgstr "Ruzed dre fiñval"
+msgstr "Motion Blur"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr "Tuginadur bleinek"
+msgstr "Polar Inversion"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:26
 msgid "Bulge"
-msgstr "Bos"
+msgstr "Bulge"
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
-msgstr "Ruzed dre zoumañ"
+msgstr "Zoom Blur"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Pencil Sketch"
-msgstr "Brastres gant ur c'hreion"
+msgstr "Pencil Sketch"
 
 #: Pinta.Effects/Effects/OutlineEffect.cs:29
 #: Pinta.Tools/TextTool/TextTool.cs:171
 msgid "Outline"
-msgstr "Trolinenn"
+msgstr "Outline"
 
 #: Pinta.Effects/Effects/TwistEffect.cs:26
 msgid "Twist"
-msgstr "Gweañ"
+msgstr "Twist"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
-msgstr "skritell1"
+msgstr "label1"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 msgid "label"
-msgstr "skritell"
+msgstr "label"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr "Trouz dargouezhek"
+msgstr "Random Noise"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr "Hadañ en-dro"
+msgstr "Reseed"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
-msgstr "Dibab al liv kentael"
+msgstr "Choose Primary Color"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
 msgid "Choose Secondary Color"
-msgstr "Dibab al liv eilvedel"
+msgstr "Choose Secondary Color"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
 msgid "Choose Palette Color"
-msgstr "Dibab al livaoueg"
+msgstr "Choose Palette Color"
 
 #: Pinta.Tools/RectangleSelectTool.cs:38
 msgid "Rectangle Select"
-msgstr "Diuzañ dre ur reizhkorn"
+msgstr "Rectangle Select"
 
 #: Pinta.Tools/RectangleSelectTool.cs:44
 msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un diuzad reizhkornek. Pouezañ war Pennlizh. "
-"a-benn tresañ ur c'harrez."
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
-msgstr "Stampon klonañ"
+msgstr "Clone Stamp"
 
 #: Pinta.Tools/CloneStampTool.cs:48
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
-"Ctrl-klik kleiz a-benn spislec'hiañ an orin, klik kleiz a-benn livañ."
+msgstr "Ctrl-left click to set origin, left click to paint."
 
 #: Pinta.Tools/MagicWandTool.cs:46
 msgid "Magic Wand Select"
-msgstr "Diuzad dre ar walenn hudus"
+msgstr "Magic Wand Select"
 
 #: Pinta.Tools/MagicWandTool.cs:54
 msgid "Click to select region of similar color."
-msgstr "Klikañ a-benn diuzañ maezioù gant livioù damheñvel"
+msgstr "Click to select region of similar color."
 
 #: Pinta.Tools/RectangleTool.cs:38
 msgid "Rectangle"
-msgstr "Reizhkorn"
+msgstr "Rectangle"
 
 #: Pinta.Tools/RectangleTool.cs:44
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ ur reizhkorn (klik dehou evut ul liv "
-"eilvedel). Pouezañ war Pennlizh. da dresañ ur c'harrez."
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "Dilec'hiañ an diuzad"
+msgstr "Move Selection"
 
 #: Pinta.Tools/MoveSelectionTool.cs:48
 msgid "Drag the selection to move selection outline."
-msgstr "Riklañ an diuzad da zilec'hiañ trolinenn an diuzad."
+msgstr "Drag the selection to move selection outline."
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr "Ilrezenn"
+msgstr "Gradient"
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un ilrezenn eus ul liv kentael d'ul liv "
-"eilvedel. Klik dehou da cheñch tu."
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
-msgstr "Ilrezenn linennek"
+msgstr "Linear Gradient"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr "Ilrezenn linennek disvannet"
+msgstr "Linear Reflected Gradient"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr "Ilrezenn linennek e doare diamant"
+msgstr "Linear Diamond Gradient"
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr "Ilrezenn skinek"
+msgstr "Radial Gradient"
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
-msgstr "Ilrezenn kernennek"
+msgstr "Conical Gradient"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr "Mod aloubiñ"
+msgstr "Flood Mode"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
-msgstr "Kevelek"
+msgstr "Contiguous"
 
 #: Pinta.Tools/FloodTool.cs:81
 msgid "Global"
-msgstr "Hollek"
+msgstr "Global"
 
 #: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
-msgstr "Aotrevarz"
+msgstr "Tolerance"
 
 #: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
 msgid "Paintbrush"
-msgstr "Broust livañ"
+msgstr "Paintbrush"
 
 #: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Klik kleiz a-benn trasañ gant ul liv kentael, klik dehou a-benn tresañ gant "
-"ul liv eilvedel."
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
-msgstr "Rizh"
+msgstr "Type"
 
 #: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
 msgid "Pencil"
-msgstr "Kreion"
+msgstr "Pencil"
 
 #: Pinta.Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
-"Klik kleiz a-benn tresañ ul lun gant an dorn, he linennoù ur piksel o zevder "
-"gant al liv kentael. Klik dehou a-benn ober gant al liv eilvedel."
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr "Diuzañ dre an elipsenn"
+msgstr "Ellipse Select"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un diuzad elipsennek. Pouezañ war Pennlizh. a-"
-"benn tresañ ur c'helc'h."
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
-msgstr "Linenn"
+msgstr "Line"
 
 #: Pinta.Tools/LineCurveTool.cs:43
 msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
-"Klik kleiz da dresañ gant ul liv kentael, klik dehou evit ul liv eilvedel. "
-"Mirout ar stokell Pennlizh (shift) a-benn desteudañ ouzh ar c'hornioù."
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
-msgstr "Gomenn"
+msgstr "Eraser"
 
 #: Pinta.Tools/EraserTool.cs:47
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Klikañ a-gleiz da ziverkañ betek boull, klikañ a-zehou da ziverkañ ha lakaat "
-"al liv eilvedel. "
+"Left click to erase to transparent, right click to erase to secondary color. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr "Dilec'hiañ"
+msgstr "Pan"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr "Klikañ ha riklañ a-benn merdeiñ war ar skeudenn."
+msgstr "Click and drag to navigate image."
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr "Gwalenn da dapout ul liv"
+msgstr "Color Picker"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
-"Klik kleiz da arventennañ ul liv kentael. Klik dehou da arventennañ al liv "
-"eilvedel."
+msgstr "Left click to set primary color. Right click to set secondary color."
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr "Goude bezañ diuzet"
+msgstr "After select"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr "Arabat kemmañ ar benveg"
+msgstr "Do not switch tool"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr "Kemmañ d'ar benveg kent"
+msgstr "Switch to previous tool"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr "Kemmañ d'ar benveg Kreion"
+msgstr "Switch to Pencil tool"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
-msgstr "Reizhkorn rontaet"
+msgstr "Rounded Rectangle"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:50
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ ur reizhkorn rontaet (klik dehou evit ul liv "
-"eilvedel). Pouezañ war Pennlizh. da dresañ ur c'harrez."
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
-msgstr "Skin"
+msgstr "Radius"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:88
 msgid "Decrease rectangle's corner radius"
-msgstr "Digreskiñ skin korn ar reizhkorn"
+msgstr "Decrease rectangle's corner radius"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:102
 msgid "Increase rectangle's corner radius"
-msgstr "Kreskiñ skin kornioù ar reizhkorn"
+msgstr "Increase rectangle's corner radius"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Move Selected Pixels"
-msgstr "Dilec'hiañ ar pikselioù bet diuzet"
+msgstr "Move Selected Pixels"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr "Riklañ an diuzad da zilec'hiañ an endalc'had diuzet"
+msgstr "Drag the selection to move selected content."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr "Adlivañ"
+msgstr "Recolor"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr "Klik kleiz a-benn amsaviñ al liv eilvedel gant al liv kentael."
+msgstr "Left click to replace the secondary color with the primary color."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "Sailh da livañ"
+msgstr "Paint Bucket"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Klik kleiz da leuniañ ur maez gant ul liv kentael, klik dehou a-benn leuniañ "
-"gant al liv eilvedel."
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr "Elipsenn"
+msgstr "Ellipse"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un elipsenn (klik dehou evit ul liv "
-"eilvedel). Pouezañ war Pennlizh. da dresañ ur c'helc'h."
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
 
 #: Pinta.Tools/TextTool/TextTool.cs:36
 msgid "Text"
-msgstr "Testenn"
+msgstr "Text"
 
 #: Pinta.Tools/TextTool/TextTool.cs:42
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Klikit kleiz da lakaat ar reti, biziatait neuze an destenn a fell deoc'h. "
-"Liv an destenn a vo al liv kentael."
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
 
 #: Pinta.Tools/TextTool/TextTool.cs:77
 msgid "Font"
-msgstr "Nodrezh"
+msgstr "Font"
 
 #: Pinta.Tools/TextTool/TextTool.cs:112
 msgid "Bold"
-msgstr "Tev"
+msgstr "Bold"
 
 #: Pinta.Tools/TextTool/TextTool.cs:119
 msgid "Italic"
-msgstr "Stouet"
+msgstr "Italic"
 
 #: Pinta.Tools/TextTool/TextTool.cs:126
 msgid "Underline"
-msgstr "Islinennet"
+msgstr "Underline"
 
 #: Pinta.Tools/TextTool/TextTool.cs:135
 msgid "Left Align"
-msgstr "Marzekaat war an tu kleiz"
+msgstr "Left Align"
 
 #: Pinta.Tools/TextTool/TextTool.cs:143
 msgid "Center Align"
-msgstr "Marzekaat e-kreiz"
+msgstr "Center Align"
 
 #: Pinta.Tools/TextTool/TextTool.cs:150
 msgid "Right Align"
-msgstr "Marzekaat war an tu dehou"
+msgstr "Right Align"
 
 #: Pinta.Tools/TextTool/TextTool.cs:162
 msgid "Text Style"
-msgstr "Stil an destenn"
+msgstr "Text Style"
 
 #: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
 msgid "Normal"
-msgstr "Reizh"
+msgstr "Normal"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr "Reizh ha trolinenn"
+msgstr "Normal and Outline"
 
 #: Pinta.Tools/TextTool/TextTool.cs:174
 msgid "Fill Background"
-msgstr "Leuniañ an drekleur"
+msgstr "Fill Background"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr "Tevder an drolinenn"
+msgstr "Outline width"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr "Moanaat tevder an drolinenn"
+msgstr "Decrease outline size"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr "Tevaat tevder an drolinenn"
+msgstr "Increase outline size"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
-msgstr "Led ar broust"
+msgstr "Brush width"
 
 #: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
 msgid "Decrease brush size"
-msgstr "Digreskiñ ment ar broust"
+msgstr "Decrease brush size"
 
 #: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
 msgid "Increase brush size"
-msgstr "Kreskiñ ment ar broust"
+msgstr "Increase brush size"
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
-msgstr "Stil leuniañ"
+msgstr "Fill Style"
 
 #: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
 msgid "Outline Shape"
-msgstr "Lun an drolinenn"
+msgstr "Outline Shape"
 
 #: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
 msgid "Fill Shape"
-msgstr "Lun leuniañ"
+msgstr "Fill Shape"
 
 #: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
 msgid "Fill and Outline Shape"
-msgstr "Lun leuniañ ha lun an drolinenn"
+msgstr "Fill and Outline Shape"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
-msgstr "Kelc'hioù"
+msgstr "Circles"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:38
 msgid "Grid"
-msgstr "Kael"
+msgstr "Grid"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:40
 msgid "Squares"
-msgstr "Karrezioù"
+msgstr "Squares"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
-msgstr "Strimpadenn"
+msgstr "Splatter"
 
 #: Pinta.Tools/ZoomTool.cs:49
 msgid "Zoom"
-msgstr "Zoum"
+msgstr "Zoom"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Klik kleiz evit ar zoum brasaat. Klik dehou a-benn dizoumañ. Klikañ ha "
-"riklañ a-benn zoumañ war an diuzad."
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr "Diuzañ gant al las-bann"
+msgstr "Lasso Select"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klikañ ha riklañ a-benn tresañ un drolinenn evit maez un diuzad."
+msgstr "Click and drag to draw the outline for a selection area."
 
 #: Pinta.Tools/FreeformShapeTool.cs:53
 msgid "Freeform Shape"
-msgstr "Lun dre zorn"
+msgstr "Freeform Shape"
 
 #: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
-msgstr "Diwar-benn"
+msgstr "About"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
@@ -733,251 +729,246 @@ msgstr "..."
 
 #: Pinta/MainWindow.cs:456
 msgid "_File"
-msgstr "_Restr"
+msgstr "_File"
 
 #: Pinta/MainWindow.cs:457
 msgid "_Edit"
-msgstr "_Embann"
+msgstr "_Edit"
 
 #: Pinta/MainWindow.cs:459
 msgid "_View"
-msgstr "_Gwelout"
+msgstr "_View"
 
 #: Pinta/MainWindow.cs:462
 msgid "_Image"
-msgstr "_Skeudenn"
+msgstr "_Image"
 
 #: Pinta/MainWindow.cs:463
 msgid "_Layers"
-msgstr "_Treuzfollenn"
+msgstr "_Layers"
 
 #: Pinta/MainWindow.cs:464
 msgid "_Adjustments"
-msgstr "_Kengeidadurioù"
+msgstr "_Adjustments"
 
 #: Pinta/MainWindow.cs:465
 msgid "Effe_cts"
-msgstr "Efe_doù"
+msgstr "Effe_cts"
 
 #: Pinta/MainWindow.cs:467
 msgid "_Window"
-msgstr "_Prenestr"
+msgstr "_Window"
 
 #: Pinta/MainWindow.cs:471
 msgid "Tool Windows"
-msgstr "Prenestr an ostilhoù"
+msgstr "Tool Windows"
 
 #: Pinta/MainWindow.cs:475
 msgid "_Help"
-msgstr "_Skoazell"
+msgstr "_Help"
 
 #: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
 msgid "Tools"
-msgstr "Binvioù"
+msgstr "Tools"
 
 #: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
 #: Pinta.Core/Actions/EditActions.cs:121
 msgid "Palette"
-msgstr "Livaoueg"
+msgstr "Palette"
 
 #: Pinta/MainWindow.cs:588
 msgid "Documents"
-msgstr "Teulioù"
+msgstr "Documents"
 
 #: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
 msgid "Layers"
-msgstr "Treuzfollennoù"
+msgstr "Layers"
 
 #: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
 msgid "History"
-msgstr "Roll istor"
+msgstr "History"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
 msgid "Hide"
-msgstr "Kuzhañ"
+msgstr "Hide"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:190
 msgid "Dock"
-msgstr "Kae"
+msgstr "Dock"
 
 #: Pinta/DockLibrary/DockItemContainer.cs:194
 #: Pinta/DockLibrary/DockItem.cs:502
 msgid "Auto Hide"
-msgstr "Kuzhañ emgefreek"
+msgstr "Auto Hide"
 
 #: Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr "Kaeadus"
+msgstr "Dockable"
 
 #: Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr "War neuñv"
+msgstr "Floating"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr "Ober ur skrammad"
+msgstr "Take Screenshot"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Pred a-raok ma vo graet ar skrammad (eilennoù) :"
+msgstr "Delay before taking a screenshot (seconds):"
 
 #: Pinta/DialogHandlers.cs:158
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Enrollañ ar c'hemmoù graet d'ar skeudenn \"{0}\" kent serriñ ?"
+msgstr "Save the changes to image \"{0}\" before closing?"
 
 #: Pinta/DialogHandlers.cs:159
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "Ma ne enrollot ket e vo kollet an holl gemmoù da vat."
+msgstr "If you don't save, all changes will be permanently lost."
 
 #: Pinta/DialogHandlers.cs:166
 msgid "Close without saving"
-msgstr "Serriñ hep enrollañ"
+msgstr "Close without saving"
 
 #: Pinta/DialogHandlers.cs:193
 msgid "Resize Palette"
-msgstr "Admentañ al livaoueg"
+msgstr "Resize Palette"
 
 #: Pinta/DialogHandlers.cs:194
 msgid "New palette size:"
-msgstr "Ment nevez al livaoueg :"
+msgstr "New palette size:"
 
 #: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
 msgid "Paste Into New Layer"
-msgstr "Pegañ war un dreuzfollenn nevez"
+msgstr "Paste Into New Layer"
 
 #: Pinta/DialogHandlers.cs:320
 msgid "Layer Opacity"
-msgstr "Demerez an dreuzfollenn"
+msgstr "Layer Opacity"
 
 #: Pinta/DialogHandlers.cs:325
 msgid "Rename Layer"
-msgstr "Adenvel an dreuzfollenn"
+msgstr "Rename Layer"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Hide Layer"
-msgstr "Kuzhañ an dreuzfollenn"
+msgstr "Hide Layer"
 
 #: Pinta/DialogHandlers.cs:330
 msgid "Show Layer"
-msgstr "Diskouez an dreuzfollenn"
+msgstr "Show Layer"
 
 #: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
 msgid "Layer Properties"
-msgstr "Perzhioù an dreuzfollenn"
+msgstr "Layer Properties"
 
 #: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
 msgid "Open Image File"
-msgstr "Digeriñ ur restr skeudenn"
+msgstr "Open Image File"
 
 #: Pinta/DialogHandlers.cs:423
 msgid "Image files"
-msgstr "Restroù skeudenn"
+msgstr "Image files"
 
 #: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
 msgid "All files"
-msgstr "An holl restroù"
+msgstr "All files"
 
 #: Pinta/DialogHandlers.cs:480
 msgid "Paste cancelled"
-msgstr "Dilezet eo bet ar pegañ"
+msgstr "Paste cancelled"
 
 #: Pinta/DialogHandlers.cs:481
 msgid "The clipboard does not contain an image"
-msgstr "N'eus skeudenn ebet er golver"
+msgstr "The clipboard does not contain an image"
 
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
-msgstr "Enrollañ restr ar skeudenn"
+msgstr "Save Image File"
 
 #: Pinta/DialogHandlers.cs:612
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta ne skor ket an enrollañ skeudennoù gant ar mentrezh restr-mañ."
+msgstr "Pinta does not support saving images in this file format."
 
 #: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
 #: Pinta.Core/Actions/EditActions.cs:347
 msgid "Error"
-msgstr "Fazi"
+msgstr "Error"
 
 #: Pinta/DialogHandlers.cs:633
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr ""
-"Ur restr anvet \"{0}\" ez eus anezhi endeo. Ha fellout a ra deoc'h hec'h "
-"amsaviñ ?"
+msgstr "A file named \"{0}\" already exists. Do you want to replace it?"
 
 #: Pinta/DialogHandlers.cs:634
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
-"Ar restr ez eus anezhi e \"{1}\". Mar bez amsavet e vo flastret hec'h "
-"endalc'had."
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "Perzhded JPEG"
+msgstr "JPEG Quality"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "Quality: "
-msgstr "Perzhded : "
+msgstr "Quality: "
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "Titl"
+msgstr "Title"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
-msgstr "Handelv"
+msgstr "Version"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "Treug"
+msgstr "Path"
 
 #: Pinta/Dialogs/AboutDialog.cs:101
 msgid "Contributors to this Release"
-msgstr "Perzhiaded evit an handelv-mañ"
+msgstr "Contributors to this Release"
 
 #: Pinta/Dialogs/AboutDialog.cs:111
 msgid "Previous Contributors"
-msgstr "Perzhiaded kent"
+msgstr "Previous Contributors"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Alan https://launchpad.net/~alan-m.\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Skolajidi Diwan https://launchpad.net/~gireg-konan"
+"  Rafael Neri https://launchpad.net/~rafepel"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
-msgstr "Troet gant :"
+msgstr "Translated by:"
 
 #: Pinta/Dialogs/AboutDialog.cs:130
 msgid "Based on the work of Paint.NET:"
-msgstr "Diazezet war al labour graet evit Paint.NET :"
+msgstr "Based on the work of Paint.NET:"
 
 #: Pinta/Dialogs/AboutDialog.cs:137
 msgid "Using some icons from:"
-msgstr "Arver arlunioù zo digant :"
+msgstr "Using some icons from:"
 
 #: Pinta/Dialogs/AboutDialog.cs:249
 msgid "About Pinta"
-msgstr "A-zivout Pinta"
+msgstr "About Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:267
 msgid "Version Info"
-msgstr "Titouroù an handelv"
+msgstr "Version Info"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "License"
-msgstr "Lañvaz"
+msgstr "License"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr "Savet dindan Lañvaz MIT X11."
+msgstr "Released under the MIT X11 License."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
@@ -985,40 +976,40 @@ msgstr "Copyright"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr "gant perzhiaded Pinta"
+msgstr "by Pinta contributors"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
-msgstr "Anv :"
+msgstr "Name:"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
 msgid "Visible"
-msgstr "Hewelus"
+msgstr "Visible"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
 msgid "Opacity:"
-msgstr "Demerez :"
+msgstr "Opacity:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 #: Pinta.Core/Classes/Document.cs:612
 msgid "Resize Canvas"
-msgstr "Adventañ ar steuenn"
+msgstr "Resize Canvas"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "Dre zregantad :"
+msgstr "By percentage:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "Dre ar vent dizave :"
+msgstr "By absolute size:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
 msgid "Width:"
-msgstr "Led :"
+msgstr "Width:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
@@ -1027,368 +1018,368 @@ msgstr "Led :"
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
 msgid "pixels"
-msgstr "a bikselioù"
+msgstr "pixels"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
 msgid "Height:"
-msgstr "Sav :"
+msgstr "Height:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "Mirout kenfeur an neuz"
+msgstr "Maintain aspect ratio"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "Eor :"
+msgstr "Anchor:"
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 msgid "Resize Image"
-msgstr "Adventañ ar skeudenn"
+msgstr "Resize Image"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
 #: Pinta.Core/Managers/WorkspaceManager.cs:159
 msgid "New Image"
-msgstr "Skeudenn nevez"
+msgstr "New Image"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
 msgid "New Image Size          "
-msgstr "Ment ar skeudenn nevez          "
+msgstr "New Image Size          "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
-msgstr "niver a neudennoù da arverañ evit an deouez"
+msgstr "number of threads to use for rendering"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
-msgstr "Anv an dibarzh"
+msgstr "OptionName"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr "Efed gant an deouez"
+msgstr "Rendering Effect"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:91
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "Skeudenn dienroll {0}"
+msgstr "Unsaved Image {0}"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:150
 msgid "Background"
-msgstr "Drekva"
+msgstr "Background"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:177
 msgid "Open Image"
-msgstr "Digeriñ ur skeudenn"
+msgstr "Open Image"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:184
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "N'hall ket digeriñ ar restr : {0}"
+msgstr "Could not open file: {0}"
 
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 #: Pinta.Core/Actions/EditActions.cs:69
 msgid "Paste"
-msgstr "Pegañ"
+msgstr "Paste"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 #: Pinta.Core/Actions/ImageActions.cs:65
 msgid "Rotate 180°"
-msgstr "C'hwelañ  dre 180°"
+msgstr "Rotate 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Gwintañ ar skeudenn a-blaen"
+msgstr "Flip Image Horizontal"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "Gwintañ ar skeudenn a-serzh"
+msgstr "Flip Image Vertical"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:63
 msgid "Rotate 90° Clockwise"
-msgstr "C'hwelañ dre 90° gant roud ar bizied"
+msgstr "Rotate 90° Clockwise"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:64
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "C'hwelañ dre 90° gant roud gin ar bizied"
+msgstr "Rotate 90° Counter-Clockwise"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Gwintañ an dreuzfollenn a-blaen"
+msgstr "Flip Layer Horizontal"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "Gwintañ an dreuzfollenn a-serzh"
+msgstr "Flip Layer Vertical"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "Peurlipat ar pikselioù"
+msgstr "Finish Pixels"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Lec'hienn Pinta"
+msgstr "Pinta Website"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "Kas un danevell a-zivout ur beug"
+msgstr "File a Bug"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr "Treiñ an arload-mañ"
+msgstr "Translate This Application"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "Enrollañ an holl anezho"
+msgstr "Save All"
 
 #: Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "Serriñ an holl anezho"
+msgstr "Close All"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "Nevez..."
+msgstr "New..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "Skeudenn nevez diwar ar skramm..."
+msgstr "New Screenshot..."
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
-msgstr "Digeriñ..."
+msgstr "Open..."
 
 #: Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Digeriñ ur restr krouet nevez zo"
+msgstr "Open Recent"
 
 #: Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
-msgstr "Serriñ"
+msgstr "Close"
 
 #: Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "Enrollañ"
+msgstr "Save"
 
 #: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
 msgid "Save As..."
-msgstr "Enrollañ evel..."
+msgstr "Save As..."
 
 #: Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "Moullañ"
+msgstr "Print"
 
 #: Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "Mont kuit"
+msgstr "Quit"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "Nevez"
+msgstr "New"
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "Digeriñ"
+msgstr "Open"
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
-msgstr "Ouzhpennañ un dreuzfollenn nevez"
+msgstr "Add New Layer"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
-msgstr "Dilemel an dreuzfollenn"
+msgstr "Delete Layer"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
-msgstr "Eilañ an dreuzfollenn"
+msgstr "Duplicate Layer"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
-msgstr "Toueziañ gant an dreuzfollenn a-zindan"
+msgstr "Merge Layer Down"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr "Enporzhiañ diouzh ur restr..."
+msgstr "Import from File..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr "Gwintañ a-blaen"
+msgstr "Flip Horizontal"
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
-msgstr "Gwintañ a-serzh"
+msgstr "Flip Vertical"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr "C'hwelañ/Zoumaat ouzh an drezufollenn..."
+msgstr "Rotate / Zoom Layer..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
-msgstr "Treuzfollenn d'an nec'h"
+msgstr "Move Layer Up"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
-msgstr "Treuzfollenn d'an traoñ"
+msgstr "Move Layer Down"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr "Perzhioù an dreuzfollenn..."
+msgstr "Layer Properties..."
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
-msgstr "Enporzhiañ diouzh ur restr"
+msgstr "Import From File"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
-msgstr "Didroc'hañ ouzh an diuzad"
+msgstr "Crop to Selection"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Auto Crop"
-msgstr "Didroc'hañ emgefreek"
+msgstr "Auto Crop"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr "Adventañ ar skeudenn..."
+msgstr "Resize Image..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr "Adventañ ar steuenn..."
+msgstr "Resize Canvas..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
-msgstr "Plataat"
+msgstr "Flatten"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
-msgstr "Zoum brasaat"
+msgstr "Zoom In"
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom Out"
-msgstr "Zoum bihanaat"
+msgstr "Zoom Out"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr "Ment peurvat"
+msgstr "Best Fit"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
-msgstr "Zoumañ da framm an diuzad"
+msgstr "Zoom to Selection"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr "Ment reizh"
+msgstr "Normal Size"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
-msgstr "Barrenn ostilhoù"
+msgstr "Toolbar"
 
 #: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Pixel Grid"
-msgstr "Kael ar pikselioù"
+msgstr "Pixel Grid"
 
 #: Pinta.Core/Actions/ViewActions.cs:70
 msgid "Rulers"
-msgstr "Reolennoù"
+msgstr "Rulers"
 
 #: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Pixels"
-msgstr "Pikselioù"
+msgstr "Pixels"
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Inches"
-msgstr "Meutadoù"
+msgstr "Inches"
 
 #: Pinta.Core/Actions/ViewActions.cs:73
 msgid "Centimeters"
-msgstr "Kentimetroù"
+msgstr "Centimeters"
 
 #: Pinta.Core/Actions/ViewActions.cs:74
 msgid "Fullscreen"
-msgstr "Skrammad a-bezh"
+msgstr "Fullscreen"
 
 #: Pinta.Core/Actions/ViewActions.cs:114
 msgid "Ruler Units"
-msgstr "Unanennoù ar reolenn"
+msgstr "Ruler Units"
 
 #: Pinta.Core/Actions/ViewActions.cs:194
 #: Pinta.Core/Classes/DocumentWorkspace.cs:226
 #: Pinta.Core/Classes/DocumentWorkspace.cs:234
 msgid "Window"
-msgstr "Prenestr"
+msgstr "Window"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Undo"
-msgstr "Dizober"
+msgstr "Undo"
 
 #: Pinta.Core/Actions/EditActions.cs:66
 msgid "Redo"
-msgstr "Adober"
+msgstr "Redo"
 
 #: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
 msgid "Cut"
-msgstr "Troc'hañ"
+msgstr "Cut"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Copy"
-msgstr "Eilañ"
+msgstr "Copy"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Paste Into New Image"
-msgstr "Pegañ war ur skeudenn nevez"
+msgstr "Paste Into New Image"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr "Dilemel an diuzad"
+msgstr "Delete Selection"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
-msgstr "Leuniañ an diuzad"
+msgstr "Fill Selection"
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Invert Selection"
-msgstr "Tuginañ an diuzad"
+msgstr "Invert Selection"
 
 #: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
 msgid "Select All"
-msgstr "Diuzañ pep tra"
+msgstr "Select All"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr "Diziuzañ pep tra"
+msgstr "Deselect All"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr "Adderaouekaat"
+msgstr "Reset to Default"
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr "Arventennañ niver al livioù"
+msgstr "Set Number of Colors"
 
 #: Pinta.Core/Actions/EditActions.cs:212
 msgid "Erase Selection"
-msgstr "Diverkañ an diuzad"
+msgstr "Erase Selection"
 
 #: Pinta.Core/Actions/EditActions.cs:221
 msgid "Deselect"
-msgstr "Diziuzañ"
+msgstr "Deselect"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr "Digeriñ ur restr livaoueg"
+msgstr "Open Palette File"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "Restroù livaouegoù (*.txt, *.gpl)"
+msgstr "Palette files (*.txt, *.gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
@@ -1396,61 +1387,61 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"N'hall ket digeriñ ar restr livaoueg : {0}.\n"
-"Gwiriit emaoc'h o klask digeriñ ul livaoueg talvoudek mod GIMP pe Paint.NET."
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr "Enrollañ ar restr livaoueg"
+msgstr "Save Palette File"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
-msgstr "Livaoueg mod Paint.NET (*.txt)"
+msgstr "Paint.NET palette (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
-msgstr "Livaoueg mod GIMP (*.gpl)"
+msgstr "GIMP palette (*.gpl)"
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
-msgstr "Treuzfollenn"
+msgstr "Layer"
 
 #: Pinta.Core/Classes/Document.cs:371
 msgid "copy"
-msgstr "eilañ"
+msgstr "copy"
 
 #: Pinta.Core/Classes/BaseTool.cs:151
 msgid "Tool"
-msgstr "Benveg"
+msgstr "Tool"
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Shortcut key"
-msgstr "Berradenn glavier"
+msgstr "Shortcut key"
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr "Meskadur reizh"
+msgstr "Normal Blending"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr "Flastrañ"
+msgstr "Overwrite"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
-msgstr "Gweredekaat al lufrañ"
+msgstr "Antialiasing On"
 
 #: Pinta.Core/Classes/BaseTool.cs:257
 msgid "Antialiasing Off"
-msgstr "Diweredekaat al lufrañ"
+msgstr "Antialiasing Off"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} skeudenn ({1})"
+msgstr "{0} image ({1})"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
-msgstr "Hollek"
+msgstr "General"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1459,7 +1450,7 @@ msgstr "Hollek"
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr "Kementad"
+msgstr "Amount"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1469,168 +1460,166 @@ msgstr "Kementad"
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr "Kornad"
+msgstr "Angle"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr "Lufrañ"
+msgstr "Antialias"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr "Mod kemmeskañ"
+msgstr "Blend Mode"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr "Lintr"
+msgstr "Brightness"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr "Ment ar broust"
+msgstr "Brush Size"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr "Ment ar gellig"
+msgstr "Cell Size"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr "Linkad ar c'hreiz"
+msgstr "Center Offset"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr "Kreizet"
+msgstr "Centered"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr "Diguñvder"
+msgstr "Coarseness"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr "Ledad livioù"
+msgstr "Color Range"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr "Peurvec'hiañ liv"
+msgstr "Color Saturation"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr "Livadur"
+msgstr "Coloring"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr "Dargemm"
+msgstr "Contrast"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr "Keitad"
+msgstr "Coverage"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr "Pellder"
+msgstr "Distance"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr "Emzalc'h ar riblenn"
+msgstr "Edge Behavior"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
 msgid "Factor"
-msgstr "Parenn"
+msgstr "Factor"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr "Darnoù"
+msgstr "Fragments"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "Trolinenn dre huz"
+msgstr "Ink Outline"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr "Kreñvder"
+msgstr "Intensity"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr "Goulaouiñ"
+msgstr "Lighting"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr "Linkañ"
+msgstr "Offset"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr "Ment min ar c'hreion"
+msgstr "Pencil Tip Size"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr "Kantranner"
+msgstr "Percentile"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr "Galloud"
+msgstr "Power"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr "Perzhded"
+msgstr "Quality"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr "C'hwelañ"
+msgstr "Rotation"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr "Tregantad ar peurvec'hiañ"
+msgstr "Saturation percentage"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr "Skeulaat"
+msgstr "Scale"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr "Hadañ"
+msgstr "Seed"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr "Kuñvder"
+msgstr "Softness"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr "Kreñvder"
+msgstr "Strength"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr "Tevder"
+msgstr "Thickness"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr "Ment ar marelloù"
+msgstr "Tile Size"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr "Tommder"
+msgstr "Warmth"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Arverañ ur berzhded izel evit an alberzioù, skeudennoù bihan ha kornadoù "
-"bihan. Arverañ ur berzhded uhel evit an disoc'h diwezhel, skeudennoù bras ha "
-"kornadoù bras."
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Un ali : evit un disoc'h gwellañ, grit da gentañ gant an benveg diuzañ a-"
-"benn diuzañ pep lagad."
+"Hint: For best results, first use selection tools to select each eye."
 
 #: pinta.desktop.in
 msgid "Pinta"
@@ -1638,41 +1627,41 @@ msgstr "Pinta"
 
 #: pinta.desktop.in
 msgid "Image Editor"
-msgstr "Embanner skeudennoù"
+msgstr "Image Editor"
 
 #: pinta.desktop.in
 msgid "Easily create and edit images"
-msgstr "Krouiñ hag embann skeudennoù gant un doare aes"
+msgstr "Easily create and edit images"
 
 #: pinta.desktop.in
 msgid "Pinta Image Editor"
-msgstr "Embanner skeudennoù Pinta"
+msgstr "Pinta Image Editor"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
 msgid "Images"
-msgstr "Skeudennoù"
+msgstr "Images"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr "N'haller ket enrollañ ar skeudennoù e mod lenn nemetken."
+msgstr "Cannot save read only file."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
-"Brasoc'h eo ar skeudenn bet peget eget ment ar steuenn. Petra a fell deoc'h "
-"ober ?"
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr "Astenn ar steuenn"
+msgstr "Expand canvas"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
-msgstr "Arabat kemm ment ar steuenn"
+msgstr "Don't change canvas size"
 
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
 msgid "Rotate / Zoom Layer"
-msgstr "C'hwelañ/Zoumaat ouzh an drezufollenn"
+msgstr "Rotate / Zoom Layer"

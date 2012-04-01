@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-22 09:34+0000\n"
-"Last-Translator: Yordi de Graaf <Unknown>\n"
+"PO-Revision-Date: 2012-02-09 15:47+0000\n"
+"Last-Translator: Arjan ten Vergert <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:16+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -470,6 +470,9 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Klik met de linkermuisknop om te tekenen met primaire kleuren, klik met de "
+"rechtermuisknop voor secundaire kleur. Houd de Shift-toets in om hoeken te "
+"uitlijnen."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -632,6 +635,10 @@ msgstr "Normaal"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "Standaard en omlijnd"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Vul achtergrond"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -934,6 +941,9 @@ msgstr "Voorgaande bijdragen"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Arjan ten Vergert https://launchpad.net/~info-bobsquad\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
+"  Guus https://launchpad.net/~guus-verbeek\n"
 "  Harry Slieker https://launchpad.net/~harryslieker\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Richard Prins https://launchpad.net/~pewpewaliens\n"
@@ -1213,9 +1223,9 @@ msgstr "Horizontaal spiegelen"
 msgid "Flip Vertical"
 msgstr "Verticaal spiegelen"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Roteer / Zoom"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Draai / Zoom Laag..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1240,13 +1250,17 @@ msgstr "Importeer uit bestand"
 msgid "Crop to Selection"
 msgstr "Tot selectie bijsnijden"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Automatisch Uitsnijden"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Wijzig Afbeeldingsformaat..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Wijzig Canvasformaat..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1633,23 +1647,30 @@ msgid "Pinta Image Editor"
 msgstr "Pinta Image Editor"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Afbeeldingen"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Kan niet alleen-lezen bestand opslaan."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"De afbeelding die wordt geplakt is groter dan de canvas grootte. Wat zou U "
+"graag willen doen?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Verruim canvas"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "Verander het canvasformaat niet"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Draai / Zoom Laag"

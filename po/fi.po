@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-10-03 13:43+0000\n"
+"PO-Revision-Date: 2012-01-22 11:56+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -637,6 +637,10 @@ msgstr "Normaali"
 msgid "Normal and Outline"
 msgstr "Normaali ja ääriviiva"
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Täytä tausta"
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr "Ääriviivan paksuus"
@@ -1216,9 +1220,9 @@ msgstr "Käännä vaakatasossa"
 msgid "Flip Vertical"
 msgstr "Käännä pystytasossa"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Pyöritä / zoomaa"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Käännä / lähennä tasoa..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1242,6 +1246,10 @@ msgstr "Tuo tiedostosta"
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "Rajaa valintaan"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Automaattinen rajaus"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1636,8 +1644,8 @@ msgid "Pinta Image Editor"
 msgstr "Pinta-kuvankäsittely"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr "Avaa kuvat"
+msgid "Images"
+msgstr "Kuvat"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
@@ -1656,3 +1664,8 @@ msgstr "Laajenna pohjaa"
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
 msgstr "Pidä pohjan koko"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Käännä / lähennä tasoa"

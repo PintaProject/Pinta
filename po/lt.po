@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-22 19:26+0000\n"
+"PO-Revision-Date: 2011-10-23 17:47+0000\n"
 "Last-Translator: Gintaras <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr ""
+msgstr "Juoda ir balta"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
@@ -57,7 +57,7 @@ msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr ""
+msgstr "Lygių koregavimas"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
@@ -165,7 +165,7 @@ msgstr "Generuoti"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
-msgstr ""
+msgstr "Nefokusuoti"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
 msgid "Red Eye Removal"
@@ -313,7 +313,7 @@ msgstr "Atsitiktinis triukšmas"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr ""
+msgstr "Pakrauti iš naujo"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
 msgid "Choose Primary Color"
@@ -396,7 +396,7 @@ msgstr "Tiesinis atspindėtas perėjimas (gradientas)"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Tiesinis rombo formos perėjimas (gradientas)"
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
@@ -408,7 +408,7 @@ msgstr ""
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr ""
+msgstr "Užpilimo režimas"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
@@ -620,6 +620,10 @@ msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
+msgstr ""
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
 msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
@@ -920,8 +924,10 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Gintaras https://launchpad.net/~gintaras-sakalauskas\n"
 "  Mantas Kriaučiūnas https://launchpad.net/~mantas\n"
+"  Rytis Slatkevičius https://launchpad.net/~rytis-s\n"
 "  pencininkas4 https://launchpad.net/~pencininkas4"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -1197,8 +1203,8 @@ msgstr ""
 msgid "Flip Vertical"
 msgstr ""
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
@@ -1222,6 +1228,10 @@ msgstr ""
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
+msgstr ""
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
 msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
@@ -1325,23 +1335,23 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Invert Selection"
-msgstr ""
+msgstr "Invertuoti pažymėjimą"
 
 #: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
 msgid "Select All"
-msgstr ""
+msgstr "Pasirinkti viską"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Atžymėti viską"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr ""
+msgstr "Atstatyti į numatytąjį"
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr ""
+msgstr "Nustatyti spalvų skaičių"
 
 #: Pinta.Core/Actions/EditActions.cs:212
 msgid "Erase Selection"
@@ -1349,15 +1359,15 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:221
 msgid "Deselect"
-msgstr ""
+msgstr "Panaikinti žymėjimą"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr ""
+msgstr "Atidaryti paletės failą"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr ""
+msgstr "Paletės dailai (*.txt, *.gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
@@ -1365,30 +1375,33 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
+"Nepavyko atverti paletės failo: {0}.\n"
+"Prašome įsitikinti ar tikrai bandote atidaryti taisyklingą GIMP arba "
+"Paint.NET paletę."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr ""
+msgstr "Išsaugoti paletės failą"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "Paint.NET paletė (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "GIMP paletė (*.gpl)"
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
-msgstr ""
+msgstr "Sluoksnis"
 
 #: Pinta.Core/Classes/Document.cs:371
 msgid "copy"
-msgstr ""
+msgstr "kopijuoti"
 
 #: Pinta.Core/Classes/BaseTool.cs:151
 msgid "Tool"
-msgstr ""
+msgstr "Įrankis"
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Shortcut key"
@@ -1426,7 +1439,7 @@ msgstr ""
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "Kiekis"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1436,11 +1449,11 @@ msgstr ""
 #: ReliefData dialog
 #: TwistEffect dialog
 msgid "Angle"
-msgstr ""
+msgstr "Kampas"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "Glotninimas"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
@@ -1448,11 +1461,11 @@ msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "Šviesumas"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "Teptuko dydis"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
@@ -1464,7 +1477,7 @@ msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr ""
+msgstr "Centruotas"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
@@ -1516,17 +1529,17 @@ msgstr ""
 #: OutlineEffect dialog
 #: MandelbrotFractalEffect dialog
 msgid "Intensity"
-msgstr ""
+msgstr "Intensyvumas"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "Apšvietimas"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "Poslinkis"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
@@ -1534,7 +1547,7 @@ msgstr ""
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "Procentai"
 
 #: RadialBlurEffect dialog
 msgid "Power"
@@ -1545,12 +1558,12 @@ msgstr ""
 #: MandelbrotFractalEffect dialog
 #: GaussianBlurEffect dialog
 msgid "Quality"
-msgstr ""
+msgstr "Kokybė"
 
 #: TileEffect dialog
 #: RedEyeRemoveData dialog
 msgid "Rotation"
-msgstr ""
+msgstr "Posūkis"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
@@ -1558,7 +1571,7 @@ msgstr ""
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr ""
+msgstr "Mastelis"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
@@ -1566,15 +1579,15 @@ msgstr ""
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "Švelnumas"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "Stiprumas"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "Storis"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
@@ -1593,41 +1606,50 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"Patarimas: geriausiems rezultatas gaunamas gaunamas prieš tai pasirinkimo "
+"įrankiu pažymėjus abi akis."
 
 #: pinta.desktop.in
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: pinta.desktop.in
 msgid "Image Editor"
-msgstr ""
+msgstr "Paveikslėlių redaktorius"
 
 #: pinta.desktop.in
 msgid "Easily create and edit images"
-msgstr ""
+msgstr "Lengvai kurk ir redaguok paveikslėlius"
 
 #: pinta.desktop.in
 msgid "Pinta Image Editor"
-msgstr ""
+msgstr "Paveikslėlių redaktorius „Pinta“"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
+msgid "Images"
 msgstr ""
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Negalima išsaugoti failo atidaryto peržiūros režimu."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"Įklijuojamas paveikslėlis yra didesnis už darbinę drobę. Ką norėtumėte "
+"daryti?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Išplėsti darbinę drobę"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr "Nekeisti darbinės drobės dydžio"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""

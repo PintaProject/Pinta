@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-10-04 13:27+0000\n"
+"PO-Revision-Date: 2012-03-06 14:13+0000\n"
 "Last-Translator: Sérgio Marques <Unknown>\n"
 "Language-Team: European Portuguese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -25,7 +25,7 @@ msgstr "Níveis automáticos"
 
 #: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
 msgid "Invert Colors"
-msgstr "Inverter as Cores"
+msgstr "Inverter cores"
 
 #: Pinta.Effects/Adjustments/LevelsEffect.cs:24
 msgid "Levels"
@@ -42,7 +42,7 @@ msgstr "Aplicar gradação às diversas regiões"
 
 #: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
 msgid "Black and White"
-msgstr "Preto e Branco"
+msgstr "Preto e branco"
 
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
@@ -101,7 +101,7 @@ msgstr "Azul"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
-msgstr "Ligado"
+msgstr "Vinculado"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
@@ -162,7 +162,7 @@ msgstr "Nuvens"
 #: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
 msgid "Render"
-msgstr "Renderizar"
+msgstr "Processar"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:28
 msgid "Unfocus"
@@ -337,8 +337,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
-"Clique e arraste para desenhar uma seleção retangular. Pressione a tecla "
-"Shift para restringir a um quadrado."
+"Clique e arraste para desenhar uma seleção retangular. Prima Shift para "
+"restringir a um quadrado."
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
@@ -367,7 +367,7 @@ msgid ""
 "shift to constrain to a square."
 msgstr ""
 "Clique e arraste para desenhar um retângulo (botão direito do rato para cor "
-"secundária). Pressione a tecla Shift para restringir a um quadrado."
+"secundária). Prima Shift para restringir a um quadrado."
 
 #: Pinta.Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -462,7 +462,7 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
-"Clique e arraste para a elipse. Pressione a tecla shitf para restringir a um "
+"Clique e arraste para desenhar a elipse. Prima Shitf para restringir a um "
 "círculo."
 
 #: Pinta.Tools/LineCurveTool.cs:38
@@ -474,7 +474,7 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
-"Botão esquerdo do rato para usar a cor primária e com o direito para a cor "
+"Botão esquerdo do rato para usar a cor primária e o direito para a cor "
 "secundária. Prima Shift para ajustar aos ângulos."
 
 #: Pinta.Tools/EraserTool.cs:45
@@ -532,7 +532,7 @@ msgid ""
 "color). Hold shift to constrain."
 msgstr ""
 "Clique e arraste para desenhar um retângulo arredondado (botão direito do "
-"rato para cor secundária). Pressione a tecla Shift para restringir."
+"rato para cor secundária). Prima Shift para restringir."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
@@ -563,7 +563,8 @@ msgstr "Colorir novamente"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr "Botão esquerdo para substituir a cor secundária pela principal."
+msgstr ""
+"Botão esquerdo do rato para substituir a cor secundária pela principal."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -587,7 +588,7 @@ msgid ""
 "shift to constrain to a circle."
 msgstr ""
 "Clique e arraste para desenhar uma elipse (botão direito para cor "
-"secundária). Pressione a tecla Shift para restringir a um círculo."
+"secundária). Prima Shift para restringir a um círculo."
 
 #: Pinta.Tools/TextTool/TextTool.cs:36
 msgid "Text"
@@ -640,6 +641,10 @@ msgstr "Normal"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "Normal e contorno"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Preencher fundo"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -706,8 +711,8 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Botão esquerdo para ampliar. Botão direito para reduzir. Para ampliar a "
-"seleção, clique e arraste."
+"Botão esquerdo do rato para ampliar. Botão direito para reduzir. Para "
+"ampliar a seleção, clique e arraste."
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
@@ -813,7 +818,7 @@ msgstr "Flutuante"
 
 #: Pinta/DialogHandlers.cs:109
 msgid "Take Screenshot"
-msgstr "Capturar uma imagem do ecrã"
+msgstr "Tirar uma captura de ecrã"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
@@ -890,7 +895,7 @@ msgstr "Gravar imagem"
 
 #: Pinta/DialogHandlers.cs:612
 msgid "Pinta does not support saving images in this file format."
-msgstr "O Pinta não suporta gravação de imagens neste formato."
+msgstr "O Pinta não suporta a gravação de imagens neste formato."
 
 #: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
 #: Pinta.Core/Actions/EditActions.cs:347
@@ -900,15 +905,14 @@ msgstr "Erro"
 #: Pinta/DialogHandlers.cs:633
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Já existe um ficheiro com o nome \"{0}\". Deseja substituí-lo?"
+msgstr "Já existe um ficheiro com o nome \"{0}\". Substituir?"
 
 #: Pinta/DialogHandlers.cs:634
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
-"O ficheiro já existe em \"{1}\". A sua substituição irá sobrepor o seu "
-"conteúdo."
+"O ficheiro já existe em \"{1}\". A sua substituição irá sobrepor o conteúdo."
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
@@ -945,12 +949,13 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Afer https://launchpad.net/~agosfernandes\n"
 "  Almufadado https://launchpad.net/~almufadado\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Duarte Cunha Leão https://launchpad.net/~duarte-leao\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Rafael Neri https://launchpad.net/~rafepel\n"
 "  Ricardo Conde https://launchpad.net/~turotulco\n"
 "  Ricardo Perry https://launchpad.net/~pirolocito\n"
 "  Sérgio Marques https://launchpad.net/~sergio+marques\n"
-"  Sérgio Marques https://launchpad.net/~smarquespt\n"
 "  Tiago https://launchpad.net/~reis-tiago\n"
 "  dcruz https://launchpad.net/~devel-david"
 
@@ -1227,9 +1232,9 @@ msgstr "Inverter horizontalmente"
 msgid "Flip Vertical"
 msgstr "Inverter verticalmente"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Rodar / Ampliar"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Rodar/Ampliar camada..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1254,6 +1259,10 @@ msgstr "Importar do ficheiro"
 msgid "Crop to Selection"
 msgstr "Recortar selecção"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Recorte automático"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
 msgstr "Ajustar imagem..."
@@ -1265,7 +1274,7 @@ msgstr "Ajustar tela..."
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
-msgstr "Achatar"
+msgstr "Alisar"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
@@ -1367,7 +1376,7 @@ msgstr "Desmarcar tudo"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr "Repor omissões"
+msgstr "Repor padrões"
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
@@ -1429,19 +1438,19 @@ msgstr "Tecla de atalho"
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr "Mistura Normal"
+msgstr "Mistura normal"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr "Sobrepor"
+msgstr "Substituir"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
-msgstr "Ligar suavização de fontes"
+msgstr "Ativar suavização de letras"
 
 #: Pinta.Core/Classes/BaseTool.cs:257
 msgid "Antialiasing Off"
-msgstr "Desligar suavização de fontes"
+msgstr "Desativar suavização de letras"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
@@ -1628,7 +1637,7 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Dica: Para melhores resultados, utilize as ferramentas de selecção para "
+"Dica: para melhores resultados, utilize as ferramentas de selecção para "
 "escolher cada olho."
 
 #: pinta.desktop.in
@@ -1637,7 +1646,7 @@ msgstr "Pinta"
 
 #: pinta.desktop.in
 msgid "Image Editor"
-msgstr "Editor de Imagens"
+msgstr "Editor de imagens"
 
 #: pinta.desktop.in
 msgid "Easily create and edit images"
@@ -1645,11 +1654,11 @@ msgstr "Crie e edite imagens com facilidade"
 
 #: pinta.desktop.in
 msgid "Pinta Image Editor"
-msgstr "Editor de Imagens Pinta"
+msgstr "Editor de imagens Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr "Abrir imagens"
+msgid "Images"
+msgstr "Imagens"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
@@ -1669,3 +1678,8 @@ msgstr "Expandir tela"
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
 msgstr "Não alterar o tamanho da tela"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Rodar/Ampliar camada"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-19 22:07+0000\n"
+"PO-Revision-Date: 2011-10-08 20:44+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -614,6 +614,10 @@ msgstr ""
 msgid "Normal and Outline"
 msgstr ""
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr ""
@@ -912,6 +916,7 @@ msgstr "過去の貢献者"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Kiyotaka NISHIBORI https://launchpad.net/~ml-nishibori-kiyotaka\n"
 "  OTHUBO Jumpei https://launchpad.net/~otsubo-jumpei\n"
@@ -1191,9 +1196,9 @@ msgstr "水平方向に反転"
 msgid "Flip Vertical"
 msgstr "垂直方向に反転"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "回転 / ズーム"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1217,6 +1222,10 @@ msgstr "ファイルからインポート"
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "選択範囲を切り取る"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1605,7 +1614,7 @@ msgid "Pinta Image Editor"
 msgstr ""
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
+msgid "Images"
 msgstr ""
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
@@ -1624,4 +1633,9 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr ""
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""

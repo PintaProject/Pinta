@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-25 10:08+0000\n"
+"PO-Revision-Date: 2012-01-25 02:27+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -376,45 +376,47 @@ msgstr "Heret pilihan untuk alih garis luar pilihan."
 
 #: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
 msgid "Gradient"
-msgstr ""
+msgstr "Gradien"
 
 #: Pinta.Tools/GradientTool.cs:64
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
+"Klik dan seret untuk lukis gradien dari warna utama ke warna sekunder. Klik "
+"kanan untuk songsangkan."
 
 #: Pinta.Tools/GradientTool.cs:174
 msgid "Linear Gradient"
-msgstr ""
+msgstr "Gredien Linear"
 
 #: Pinta.Tools/GradientTool.cs:175
 msgid "Linear Reflected Gradient"
-msgstr ""
+msgstr "Gradien Terpantul Linear"
 
 #: Pinta.Tools/GradientTool.cs:176
 msgid "Linear Diamond Gradient"
-msgstr ""
+msgstr "Gradien Intan Linear"
 
 #: Pinta.Tools/GradientTool.cs:177
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Gradien Jejari"
 
 #: Pinta.Tools/GradientTool.cs:178
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Gradien Berkon"
 
 #: Pinta.Tools/FloodTool.cs:73
 msgid "Flood Mode"
-msgstr ""
+msgstr "Mod Limpah"
 
 #: Pinta.Tools/FloodTool.cs:80
 msgid "Contiguous"
-msgstr ""
+msgstr "Bersebelahan"
 
 #: Pinta.Tools/FloodTool.cs:81
 msgid "Global"
-msgstr ""
+msgstr "Sejagat"
 
 #: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
 msgid "Tolerance"
@@ -429,6 +431,7 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Klik kiri untuk lukis warna utama, klik kanan untuk lukis warna sekunder."
 
 #: Pinta.Tools/PaintBrushTool.cs:64
 msgid "Type"
@@ -443,16 +446,20 @@ msgid ""
 "Left click to draw freeform, one-pixel wide lines with the primary color, "
 "right click to use the secondary color."
 msgstr ""
+"Klik kiri untuk lukis secara bebas, garis berlebar satu-piksel dengan warna "
+"utama, klik kanan untuk guna warna sekunder."
 
 #: Pinta.Tools/EllipseSelectTool.cs:38
 msgid "Ellipse Select"
-msgstr ""
+msgstr "Pilih Elips"
 
 #: Pinta.Tools/EllipseSelectTool.cs:44
 msgid ""
 "Click and drag to draw an elliptical selection. Hold shift to constrain to a "
 "circle."
 msgstr ""
+"Klik dan seret untuk lukis pemilihan berelips. Tekan shift untuk kekalkan "
+"kepada bulatan."
 
 #: Pinta.Tools/LineCurveTool.cs:38
 msgid "Line"
@@ -463,6 +470,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Klik kiri untuk lukis warna utama, klik kanan untuk warna sekunder. Tekan "
+"kekunci Shift untuk lekat ke sudut."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -472,48 +481,53 @@ msgstr "Pemadam"
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Klik kiri untuk padam ke lutsinar, klik kanan untuk padam ke warna sekunder. "
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr ""
+msgstr "Pan"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "Klik dan seret untuk pandu arah imej."
 
 #: Pinta.Tools/ColorPickerTool.cs:44
 msgid "Color Picker"
-msgstr "Pengambil Warna"
+msgstr "Pemilih Warna"
 
 #: Pinta.Tools/ColorPickerTool.cs:50
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
+"Klik kiri untuk tetapkan warna utama. Klik kanan untuk tetapkan warna "
+"sekunder."
 
 #: Pinta.Tools/ColorPickerTool.cs:62
 msgid "After select"
-msgstr ""
+msgstr "Selepas pilih"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Do not switch tool"
-msgstr ""
+msgstr "Jangan tukar alat"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "Tukar kepada alat terdahulu"
 
 #: Pinta.Tools/ColorPickerTool.cs:68
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "Tukar ke alat Pensel"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "Segi Empat Tepat Bundar"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:50
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain."
 msgstr ""
+"Klik dan seret untuk lukis segi empat tepat bundar (klik kanan untuk warna "
+"sekunder). Tekan shirt untuk kekalkan."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
@@ -521,60 +535,66 @@ msgstr "Jejari"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:88
 msgid "Decrease rectangle's corner radius"
-msgstr ""
+msgstr "Kurangkan jejari bucu segi empat tepat"
 
 #: Pinta.Tools/RoundedRectangleTool.cs:102
 msgid "Increase rectangle's corner radius"
-msgstr ""
+msgstr "Tingkatkan jejari bucu segi empat tepat"
 
 #: Pinta.Tools/MoveSelectedTool.cs:42
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "Alih Piksel Pilihan"
 
 #: Pinta.Tools/MoveSelectedTool.cs:48
 msgid "Drag the selection to move selected content."
-msgstr ""
+msgstr "Seret pemilihan untuk alihkan kandungan pilihan."
 
 #: Pinta.Tools/RecolorTool.cs:59
 msgid "Recolor"
-msgstr ""
+msgstr "Warna Semula"
 
 #: Pinta.Tools/RecolorTool.cs:61
 msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
+msgstr "Klik kiri untuk gantikan warna sekunder dengan warna utama."
 
 #: Pinta.Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Baldi Cat"
 
 #: Pinta.Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
+"Klik kiri untuk isi kawasan dengan warna utama, klik kanan untuk isi dengan "
+"warna sekunder."
 
 #: Pinta.Tools/EllipseTool.cs:38
 msgid "Ellipse"
-msgstr ""
+msgstr "Elips"
 
 #: Pinta.Tools/EllipseTool.cs:44
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "shift to constrain to a circle."
 msgstr ""
+"Klik dan seret untuk lukis elips (klik kanan untuk warna sekunder). Tekan "
+"shift untuk kekalkan ke bulatan."
 
 #: Pinta.Tools/TextTool/TextTool.cs:36
 msgid "Text"
-msgstr "Tulisan"
+msgstr "Teks"
 
 #: Pinta.Tools/TextTool/TextTool.cs:42
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Klik kiri untuk letakkan kursor, kemudian taip teks dikehendaki. Warna teks "
+"ialah warna utama."
 
 #: Pinta.Tools/TextTool/TextTool.cs:77
 msgid "Font"
@@ -598,7 +618,7 @@ msgstr "Jajar Kiri"
 
 #: Pinta.Tools/TextTool/TextTool.cs:143
 msgid "Center Align"
-msgstr ""
+msgstr "Jajar Tengah"
 
 #: Pinta.Tools/TextTool/TextTool.cs:150
 msgid "Right Align"
@@ -614,19 +634,23 @@ msgstr "Biasa"
 
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Biasa dan Garis Luar"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Isi Latar Belakang"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
-msgstr ""
+msgstr "Lebar garis luar"
 
 #: Pinta.Tools/TextTool/TextTool.cs:184
 msgid "Decrease outline size"
-msgstr ""
+msgstr "Kurangkan saiz garis luar"
 
 #: Pinta.Tools/TextTool/TextTool.cs:201
 msgid "Increase outline size"
-msgstr ""
+msgstr "Tingkatkan saiz garis luar"
 
 #: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
 msgid "Brush width"
@@ -634,27 +658,27 @@ msgstr "Lebar Berus"
 
 #: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
 msgid "Decrease brush size"
-msgstr ""
+msgstr "Kurangkan saiz berus"
 
 #: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
 msgid "Increase brush size"
-msgstr ""
+msgstr "Tingkatkan saiz berus"
 
 #: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
 msgid "Fill Style"
-msgstr ""
+msgstr "Gaya Isi"
 
 #: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
 msgid "Outline Shape"
-msgstr ""
+msgstr "Bentuk Garis Luar"
 
 #: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
 msgid "Fill Shape"
-msgstr ""
+msgstr "Bentuk Isi"
 
 #: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
 msgid "Fill and Outline Shape"
-msgstr ""
+msgstr "Isi dan Bentuk Garis Luar"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:38
 msgid "Circles"
@@ -670,33 +694,35 @@ msgstr "Segi Empat Sama"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:38
 msgid "Splatter"
-msgstr ""
+msgstr "Splatter"
 
 #: Pinta.Tools/ZoomTool.cs:49
 msgid "Zoom"
-msgstr "Zoom"
+msgstr "Zum"
 
 #: Pinta.Tools/ZoomTool.cs:55
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
+"Klik kiri untuk zum masuk. Klik kanan untuk zum keluar. Klik dan seret untuk "
+"zum dalam pemilihan."
 
 #: Pinta.Tools/LassoSelectTool.cs:45
 msgid "Lasso Select"
-msgstr ""
+msgstr "Pilih Lasso"
 
 #: Pinta.Tools/LassoSelectTool.cs:47
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "Klik dan seret untuk lukis garis luar kawasan pemilihan."
 
 #: Pinta.Tools/FreeformShapeTool.cs:53
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Bentuk Bebas"
 
 #: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
-msgstr ""
+msgstr "Perihal"
 
 #: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
 msgid "..."
@@ -724,11 +750,11 @@ msgstr "_Lapisan"
 
 #: Pinta/MainWindow.cs:464
 msgid "_Adjustments"
-msgstr ""
+msgstr "_Pelarasan"
 
 #: Pinta/MainWindow.cs:465
 msgid "Effe_cts"
-msgstr ""
+msgstr "Kes_an"
 
 #: Pinta/MainWindow.cs:467
 msgid "_Window"
@@ -736,7 +762,7 @@ msgstr "_Tetingkap"
 
 #: Pinta/MainWindow.cs:471
 msgid "Tool Windows"
-msgstr ""
+msgstr "Tetingkap Alat"
 
 #: Pinta/MainWindow.cs:475
 msgid "_Help"
@@ -790,16 +816,16 @@ msgstr "Ambil Cekupan Skrin"
 
 #: Pinta/DialogHandlers.cs:110
 msgid "Delay before taking a screenshot (seconds):"
-msgstr ""
+msgstr "Lengahan sebelum mengambil cekupan skrin (saat):"
 
 #: Pinta/DialogHandlers.cs:158
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Simpan perubahan ke imej \"{0}\" sebelum menutup?"
 
 #: Pinta/DialogHandlers.cs:159
 msgid "If you don't save, all changes will be permanently lost."
-msgstr ""
+msgstr "Jika anda tidak simpan, semua perubahan akan hilang."
 
 #: Pinta/DialogHandlers.cs:166
 msgid "Close without saving"
@@ -916,6 +942,7 @@ msgstr "Penyumbang Terdahulu"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Mohd Farimi Ab Rahman https://launchpad.net/~farimi\n"
 "  abuyop https://launchpad.net/~abuyop\n"
 "  lcdvirgo https://launchpad.net/~lcdvirgo"
@@ -946,7 +973,7 @@ msgstr "Lesen"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:50
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "Dilepaskan dibawah Lesen X11 MIT."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
@@ -981,7 +1008,7 @@ msgstr "Ikut peratus:"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr ""
+msgstr "Mengikut saiz mutlak:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
@@ -1029,15 +1056,15 @@ msgstr "Saiz Baru Gambar          "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
-msgstr ""
+msgstr "bilangan bebenang yang digunakan untuk penerapan"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
-msgstr ""
+msgstr "Nama Pilihan"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
-msgstr ""
+msgstr "Kesan Penerapan"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:91
 #, csharp-format
@@ -1087,15 +1114,15 @@ msgstr "Pusing 90° Lawan Arah Jam"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr ""
+msgstr "Kalih Lapisan Secara Melintang"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr ""
+msgstr "Kalih Lapisan Secara Menegak"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr ""
+msgstr "Piksel Selesai"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
@@ -1119,241 +1146,245 @@ msgstr "Tutup Semua"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr ""
+msgstr "Baru..."
 
 #: Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr ""
+msgstr "Cekupan Skrin Baru..."
 
 #: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
 msgid "Open..."
-msgstr ""
+msgstr "Buka..."
 
 #: Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr ""
+msgstr "Buka Terkini"
 
 #: Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 #: Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr ""
+msgstr "Simpan"
 
 #: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
 msgid "Save As..."
-msgstr ""
+msgstr "Simpan Sebagai..."
 
 #: Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr ""
+msgstr "Cetak"
 
 #: Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr ""
+msgstr "Berhenti"
 
 #: Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr ""
+msgstr "Baru"
 
 #: Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 #: Pinta.Core/Actions/LayerActions.cs:64
 #: Pinta.Core/Actions/LayerActions.cs:283
 msgid "Add New Layer"
-msgstr ""
+msgstr "Tambah Lapisan Baru"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Delete Layer"
-msgstr ""
+msgstr "Padam Lapisan"
 
 #: Pinta.Core/Actions/LayerActions.cs:66
 #: Pinta.Core/Actions/LayerActions.cs:257
 msgid "Duplicate Layer"
-msgstr ""
+msgstr "Gandakan Lapisan"
 
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:235
 msgid "Merge Layer Down"
-msgstr ""
+msgstr "Gabungkan Lapisan Bawah"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 msgid "Import from File..."
-msgstr ""
+msgstr "Import dari Fail..."
 
 #: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Kalih Mengufuk"
 
 #: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Kalih Menegak"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr ""
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Putar / Zum Lapisan..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
 msgid "Move Layer Up"
-msgstr ""
+msgstr "Alih Lapisan Ke atas"
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:224
 msgid "Move Layer Down"
-msgstr ""
+msgstr "Alih Lapisan Ke bawah"
 
 #: Pinta.Core/Actions/LayerActions.cs:74
 msgid "Layer Properties..."
-msgstr ""
+msgstr "Ciri-ciri Lapisan..."
 
 #: Pinta.Core/Actions/LayerActions.cs:179
 msgid "Import From File"
-msgstr ""
+msgstr "Import Dari Fail"
 
 #: Pinta.Core/Actions/ImageActions.cs:58
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Kerat ke Pemilihan"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Kerat-Sendiri"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Saiz Semula Imej..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Saiz Semula Kanvas..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
 msgid "Flatten"
-msgstr ""
+msgstr "Meratakan"
 
 #: Pinta.Core/Actions/ViewActions.cs:63
 msgid "Zoom In"
-msgstr ""
+msgstr "Zum Masuk"
 
 #: Pinta.Core/Actions/ViewActions.cs:64
 msgid "Zoom Out"
-msgstr ""
+msgstr "Zum Keluar"
 
 #: Pinta.Core/Actions/ViewActions.cs:65
 msgid "Best Fit"
-msgstr ""
+msgstr "Sesuai Muat"
 
 #: Pinta.Core/Actions/ViewActions.cs:66
 msgid "Zoom to Selection"
-msgstr ""
+msgstr "Zum ke Pemilihan"
 
 #: Pinta.Core/Actions/ViewActions.cs:67
 msgid "Normal Size"
-msgstr ""
+msgstr "Saiz Normal"
 
 #: Pinta.Core/Actions/ViewActions.cs:68
 msgid "Toolbar"
-msgstr ""
+msgstr "Palang Alat"
 
 #: Pinta.Core/Actions/ViewActions.cs:69
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Grid Piksel"
 
 #: Pinta.Core/Actions/ViewActions.cs:70
 msgid "Rulers"
-msgstr ""
+msgstr "Pembaris"
 
 #: Pinta.Core/Actions/ViewActions.cs:71
 msgid "Pixels"
-msgstr ""
+msgstr "Piksel"
 
 #: Pinta.Core/Actions/ViewActions.cs:72
 msgid "Inches"
-msgstr ""
+msgstr "Inci"
 
 #: Pinta.Core/Actions/ViewActions.cs:73
 msgid "Centimeters"
-msgstr ""
+msgstr "Sentimeter"
 
 #: Pinta.Core/Actions/ViewActions.cs:74
 msgid "Fullscreen"
-msgstr ""
+msgstr "Skrin Penuh"
 
 #: Pinta.Core/Actions/ViewActions.cs:114
 msgid "Ruler Units"
-msgstr ""
+msgstr "Unit Pembaris"
 
 #: Pinta.Core/Actions/ViewActions.cs:194
 #: Pinta.Core/Classes/DocumentWorkspace.cs:226
 #: Pinta.Core/Classes/DocumentWorkspace.cs:234
 msgid "Window"
-msgstr ""
+msgstr "Tetingkap"
 
 #: Pinta.Core/Actions/EditActions.cs:65
 msgid "Undo"
-msgstr ""
+msgstr "Buat Asal"
 
 #: Pinta.Core/Actions/EditActions.cs:66
 msgid "Redo"
-msgstr ""
+msgstr "Buat semula"
 
 #: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
 msgid "Cut"
-msgstr ""
+msgstr "Potong"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Paste Into New Image"
-msgstr ""
+msgstr "Tampal ke Imej Baru"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Delete Selection"
-msgstr ""
+msgstr "Padam Pemilihan"
 
 #: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
 msgid "Fill Selection"
-msgstr ""
+msgstr "Isi Pemilihan"
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Invert Selection"
-msgstr ""
+msgstr "Songsangkan Pemilihan"
 
 #: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
 msgid "Select All"
-msgstr ""
+msgstr "Pilih Semua"
 
 #: Pinta.Core/Actions/EditActions.cs:76
 msgid "Deselect All"
-msgstr ""
+msgstr "Nyahpilih Semua"
 
 #: Pinta.Core/Actions/EditActions.cs:80
 msgid "Reset to Default"
-msgstr ""
+msgstr "Tetap ke Lalai"
 
 #: Pinta.Core/Actions/EditActions.cs:81
 msgid "Set Number of Colors"
-msgstr ""
+msgstr "Tetapkan Bilangan Warna"
 
 #: Pinta.Core/Actions/EditActions.cs:212
 msgid "Erase Selection"
-msgstr ""
+msgstr "Padamkan Pemilihan"
 
 #: Pinta.Core/Actions/EditActions.cs:221
 msgid "Deselect"
-msgstr ""
+msgstr "Nyahpilih"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr ""
+msgstr "Buka Fail Palet"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr ""
+msgstr "Fail Palet (*.txt, *.gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
@@ -1361,59 +1392,62 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
+"Tidak Boleh Buka Fail Palet: {0}.\n"
+"Sila mengesahkan bahawa anda cuba membuka palet GIMP atau palet Paint.NET "
+"yang sah."
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr ""
+msgstr "Simpan Fail Palet"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "Palet Paint.NET (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "Palet GIMP (*.gpl)"
 
 #: Pinta.Core/Classes/Document.cs:298
 msgid "Layer"
-msgstr ""
+msgstr "Lapisan"
 
 #: Pinta.Core/Classes/Document.cs:371
 msgid "copy"
-msgstr ""
+msgstr "salin"
 
 #: Pinta.Core/Classes/BaseTool.cs:151
 msgid "Tool"
-msgstr ""
+msgstr "Alat"
 
 #: Pinta.Core/Classes/BaseTool.cs:218
 msgid "Shortcut key"
-msgstr ""
+msgstr "Kekunci pintasan"
 
 #: Pinta.Core/Classes/BaseTool.cs:241
 msgid "Normal Blending"
-msgstr ""
+msgstr "Pengadunan Normal"
 
 #: Pinta.Core/Classes/BaseTool.cs:242
 msgid "Overwrite"
-msgstr ""
+msgstr "Tulis-Ganti"
 
 #: Pinta.Core/Classes/BaseTool.cs:256
 msgid "Antialiasing On"
-msgstr ""
+msgstr "Antialias Hidup"
 
 #: Pinta.Core/Classes/BaseTool.cs:257
 msgid "Antialiasing Off"
-msgstr ""
+msgstr "Antialias Mati"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr ""
+msgstr "{0} imej ({1})"
 
 #: Pinta.Core/Effects/BaseEffect.cs:42
 msgid "General"
-msgstr ""
+msgstr "Am"
 
 #: BulgeEffect dialog
 #: FrostedGlassEffect dialog
@@ -1422,7 +1456,7 @@ msgstr ""
 #: SharpenData dialog
 #: MotionBlurEffect dialog
 msgid "Amount"
-msgstr ""
+msgstr "Amaun"
 
 #: RadialBlurEffect dialog
 #: JuliaFractalEffect dialog
@@ -1436,19 +1470,19 @@ msgstr "Sudut"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr ""
+msgstr "Antialias"
 
 #: GlowEffect dialog
 msgid "Blend Mode"
-msgstr ""
+msgstr "Mod Adunan"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr ""
+msgstr "Kecerahan"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr ""
+msgstr "Saiz Berus"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
@@ -1456,44 +1490,44 @@ msgstr "Saiz Sel"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr ""
+msgstr "Ofset Pusat"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr ""
+msgstr "Ditengahkan"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "Kekasaran"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr ""
+msgstr "Julat Warna"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr ""
+msgstr "Ketepuan Warna"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr ""
+msgstr "Pewarnaan"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr ""
+msgstr "Beza Jelas"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr ""
+msgstr "Liputan"
 
 #: MotionBlurEffect dialog
 #: PolarInversionEffect dialog
 msgid "Distance"
-msgstr ""
+msgstr "Jarak"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "Kelakuan Pinggir"
 
 #: MandelbrotFractalEffect dialog
 #: FragmentEffect dialog
@@ -1502,11 +1536,11 @@ msgstr "Faktor"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr ""
+msgstr "Cebisan"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr ""
+msgstr "Garis Luar Dakwat"
 
 #: AddNoiseEffect dialog
 #: OutlineEffect dialog
@@ -1516,17 +1550,17 @@ msgstr "Intensiti"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr ""
+msgstr "Pencahayaan"
 
 #: ZoomBlurEffect dialog
 #: BulgeEffect dialog
 #: PencilSketchEffect dialog
 msgid "Offset"
-msgstr ""
+msgstr "Ofset"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr ""
+msgstr "Saiz Tip Pensel"
 
 #: CloudsEffect dialog
 msgid "Percentile"
@@ -1534,7 +1568,7 @@ msgstr "Persentil"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr ""
+msgstr "Kuasa"
 
 #: PolarInversionEffect dialog
 #: JuliaFractalEffect dialog
@@ -1550,7 +1584,7 @@ msgstr "Putaran"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr ""
+msgstr "Peratusan Ketepuan"
 
 #: CloudsEffect dialog
 msgid "Scale"
@@ -1558,27 +1592,27 @@ msgstr "Skala"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr ""
+msgstr "Benih"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr ""
+msgstr "Kelembutan"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr ""
+msgstr "Kelembutan"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr ""
+msgstr "Ketebalan"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr ""
+msgstr "Saiz Jubin"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr ""
+msgstr "Kehangatan"
 
 #: RadialBlurEffect dialog
 msgid ""
@@ -1591,10 +1625,12 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"Pembayang: Untuk hasil yang terbaik, mula-mula sila gunakan alat pemilihan "
+"untuk memilih setiap mata."
 
 #: pinta.desktop.in
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: pinta.desktop.in
 msgid "Image Editor"
@@ -1609,23 +1645,29 @@ msgid "Pinta Image Editor"
 msgstr "Penyunting Imej Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Imej"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Tidak dapat simpan fail baca-sahaja"
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"Imej yang ditampal lebih besar dari saiz kanvas. Apa yang anda ingin lakukan?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Kembangkan kanvas"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "Jangan ubah saiz kanvas"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Putar / Zum Lapisan"

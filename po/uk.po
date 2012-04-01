@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-22 12:43+0000\n"
-"Last-Translator: Aleksandr Chepurnoy <Unknown>\n"
+"PO-Revision-Date: 2012-02-02 21:49+0000\n"
+"Last-Translator: Max_ym <kontact.cat@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -635,6 +635,10 @@ msgstr "Нормальний"
 msgid "Normal and Outline"
 msgstr "Нормальний та контурний"
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Залити тло"
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr "Товщина контуру"
@@ -936,9 +940,11 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Aleksandr Chepurnoy https://launchpad.net/~wuron\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
 "  Fedik https://launchpad.net/~fedikw\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Max_ym https://launchpad.net/~kontact-cat\n"
 "  UaHummer https://launchpad.net/~uahummer\n"
 "  ma$terok https://launchpad.net/~m-shein"
 
@@ -1215,9 +1221,9 @@ msgstr "Перевернути по горизонталі"
 msgid "Flip Vertical"
 msgstr "Перевернути по вертикалі"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Поворот / Масштабування"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1242,9 +1248,13 @@ msgstr "Імпортувати з файлу"
 msgid "Crop to Selection"
 msgstr "Обрізати по виділеному"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr ""
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Змінити розмір зображення..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
@@ -1637,12 +1647,12 @@ msgid "Pinta Image Editor"
 msgstr "Редактор зображень Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Зображення"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Неможливо зберегти файл, доступний тільки для читання"
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
@@ -1656,4 +1666,9 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr ""
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""

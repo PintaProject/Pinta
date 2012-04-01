@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-22 15:28+0000\n"
-"Last-Translator: Killigrew <Unknown>\n"
+"PO-Revision-Date: 2012-02-29 06:44+0000\n"
+"Last-Translator: Gregor Santner <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:16+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -472,6 +472,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Linksklick um in der primäre Farbe zu zeichnen, für die sekundäre Farbe "
+"rechtsklick verwenden. Shift halten um vorgegebene Winkel zu verwenden."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -638,6 +640,10 @@ msgstr "Normal"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "Normal und Kontur"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Hintergrund ausfüllen"
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -946,8 +952,12 @@ msgstr ""
 "  Achmed Decker https://launchpad.net/~deckerac\n"
 "  Andre https://launchpad.net/~ajx\n"
 "  Benedict Etzel https://launchpad.net/~benedict-etzel\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Christian https://launchpad.net/~make-panic\n"
+"  Christian Rupp https://launchpad.net/~grissi\n"
+"  Ettore Atalan https://launchpad.net/~atalanttore\n"
 "  Francisco Camenforte Torres https://launchpad.net/~fct\n"
+"  Gregor Santner https://launchpad.net/~gregi94\n"
 "  Hanh Pham https://launchpad.net/~joel-nohnn\n"
 "  Henrik Graßhoff https://launchpad.net/~henrik-grasshoff\n"
 "  Johannes Rössel https://launchpad.net/~joey-muhkuhsaft\n"
@@ -956,6 +966,7 @@ msgstr ""
 "  Mathias Fussenegger https://launchpad.net/~f-mathias\n"
 "  Matthias Mailänder https://launchpad.net/~mailaender\n"
 "  Paul Hoell https://launchpad.net/~hoellp\n"
+"  Richard Liebig https://launchpad.net/~systheron\n"
 "  ziggystar https://launchpad.net/~ziggystar-gmx"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -1231,9 +1242,9 @@ msgstr "Horizontal spiegeln"
 msgid "Flip Vertical"
 msgstr "Vertikal spiegeln"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Drehen/Vergrößern"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Drehen / Layer vergrößern"
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1258,13 +1269,17 @@ msgstr "Aus Datei importieren"
 msgid "Crop to Selection"
 msgstr "Auf Auswahl beschneiden"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Automatisches Zuschneiden"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Bildgröße ändern..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Arbeitsflächengröße ändern..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1653,23 +1668,30 @@ msgid "Pinta Image Editor"
 msgstr "Pinta Bildbearbeitung"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Bilder"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Schreibgeschützte Datei konnte nicht gespeichert werden."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"Das eingefügte Bild ist größer als die Arbeitsfläche. Was möchten Sie gerne "
+"tun?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Arbeitsfläche erweitern"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "Arbeitsflächengröße nicht ändern"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Drehen / Layer vergrößern"

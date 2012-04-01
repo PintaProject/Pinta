@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-24 08:17+0000\n"
-"Last-Translator: xXx <michalhusar.it@gmail.com>\n"
+"PO-Revision-Date: 2011-12-03 16:13+0000\n"
+"Last-Translator: Jan Fluksa <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:16+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -468,6 +468,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Levý klik kreslí primární barvou, pravý klik kreslí sekundární barvou. Držte "
+"Shift pro změnu úhlu"
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -628,6 +630,10 @@ msgstr "Normální"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "Normální a ohraničený"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -928,8 +934,10 @@ msgstr "Předchozí přispěvatelé"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Jan Fluksa https://launchpad.net/~jan-fluksa\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Petr Šimáček https://launchpad.net/~petr-simacek\n"
+"  luisah https://launchpad.net/~luisah\n"
 "  schunka https://launchpad.net/~schunka\n"
 "  xXx https://launchpad.net/~michalhusar-it"
 
@@ -1206,9 +1214,9 @@ msgstr "Převrátit horizontálně"
 msgid "Flip Vertical"
 msgstr "Převrátit vertikálně"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Otočení / Zoom"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1233,13 +1241,17 @@ msgstr "Vložit ze souboru"
 msgid "Crop to Selection"
 msgstr "Vystřihnout do výběru"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Automaticky oříznout"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Změnit velikost obrázku..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Změna velikosti plátna..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1626,23 +1638,28 @@ msgid "Pinta Image Editor"
 msgstr "Grafický editor Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Obrázky"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Nelze uložit soubor pouze pro čtení."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
-msgstr ""
+msgstr "Vkládaný obrázek je větší než plátno. Co chcete dělat?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Roztáhnout plátno"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr "Neměnit velikost plátna"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""

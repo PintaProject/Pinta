@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-10-01 01:02+0000\n"
-"Last-Translator: José Humberto Alvarenga Melo <Unknown>\n"
+"PO-Revision-Date: 2012-01-28 17:42+0000\n"
+"Last-Translator: victor.westmann <victor.westmann@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -641,6 +641,10 @@ msgstr "Normal"
 msgid "Normal and Outline"
 msgstr "Normal e Contorno"
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr "Preencher Fundo"
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr "Largura do contorno"
@@ -933,17 +937,18 @@ msgstr "Caminho"
 
 #: Pinta/Dialogs/AboutDialog.cs:101
 msgid "Contributors to this Release"
-msgstr "Contribuidores para esta versão"
+msgstr "Colaboradores para esta versão"
 
 #: Pinta/Dialogs/AboutDialog.cs:111
 msgid "Previous Contributors"
-msgstr "Outros Contribuidores"
+msgstr "Outros Colaboradores"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  André Gondim https://launchpad.net/~andregondim\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Celso H. L. S. Junior https://launchpad.net/~celsojunior\n"
 "  Christian Marques https://launchpad.net/~csmchristian\n"
 "  Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
@@ -956,7 +961,9 @@ msgstr ""
 "  Julius Miranda https://launchpad.net/~juliusmiranda\n"
 "  Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
 "  Luiz da Costa Batista Silva https://launchpad.net/~luiz-rsk\n"
-"  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves"
+"  Rafael Neri https://launchpad.net/~rafepel\n"
+"  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves\n"
+"  victor.westmann https://launchpad.net/~victor.westmann"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -992,7 +999,7 @@ msgstr "Direitos autorais"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
-msgstr "por contribuidores Pinta"
+msgstr "pelos colaboradores Pinta"
 
 #: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
 msgid "Name:"
@@ -1231,9 +1238,9 @@ msgstr "Inverter na Horizontal"
 msgid "Flip Vertical"
 msgstr "Inverter na Vertical"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Girar / Ampliar"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Rotacionar / Camada de Ampliação..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1257,6 +1264,10 @@ msgstr "Importar de Um Arquivo"
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "Recortar para Seleção"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Auto corte"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1653,8 +1664,8 @@ msgid "Pinta Image Editor"
 msgstr "Editor de imagem Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr "Abrir Imagens"
+msgid "Images"
+msgstr "Imagens"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
@@ -1675,3 +1686,8 @@ msgstr "Expandir tela"
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
 msgstr "Não altere o tamanho da tela"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
+msgstr "Rotacionar / Camada de Ampliação"

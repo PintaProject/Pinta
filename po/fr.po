@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-22 13:33+0000\n"
-"Last-Translator: Simon <Unknown>\n"
+"PO-Revision-Date: 2011-12-22 15:49+0000\n"
+"Last-Translator: SarahSlean <yoda4@hotmail.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -472,6 +472,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Clic gauche pour dessiner avec des couleurs primaires, faites un clic droit "
+"pour la couleur secondaire. Tenez la touche Maj d'aligner les angles."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -638,6 +640,10 @@ msgstr "Normal"
 #: Pinta.Tools/TextTool/TextTool.cs:170
 msgid "Normal and Outline"
 msgstr "Normal avec contours"
+
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
 
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
@@ -944,6 +950,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Achille Fouilleul https://launchpad.net/~achille-fouilleul\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Ersplus https://launchpad.net/~ersplus-free\n"
 "  Jean-François Huck https://launchpad.net/~huckjf-aquitania\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
@@ -952,9 +959,11 @@ msgstr ""
 "  Olivier Dufour https://launchpad.net/~olivier-duff\n"
 "  Quentin Pagès https://launchpad.net/~kwentin\n"
 "  RedGuff https://launchpad.net/~domsau2\n"
+"  SarahSlean https://launchpad.net/~yoda4\n"
 "  Simon https://launchpad.net/~nowis74\n"
 "  Simon Leblanc https://launchpad.net/~contact-leblanc-simon\n"
-"  Tonher3 https://launchpad.net/~jeanluc-jlg"
+"  Tonher3 https://launchpad.net/~jeanluc-jlg\n"
+"  fred.lavigne https://launchpad.net/~fred-taff"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1229,9 +1238,9 @@ msgstr "Retourner horizontalement"
 msgid "Flip Vertical"
 msgstr "Retourner verticalement"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Rotation / Zoom"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1256,13 +1265,17 @@ msgstr "Importer depuis un fichier"
 msgid "Crop to Selection"
 msgstr "Rogner"
 
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Rognage automatique"
+
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
-msgstr ""
+msgstr "Redimensionner l'image..."
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Redimensionner la  toile ..."
 
 #: Pinta.Core/Actions/ImageActions.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:127
@@ -1651,23 +1664,30 @@ msgid "Pinta Image Editor"
 msgstr "Éditeur d'image Pinta"
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
-msgstr ""
+msgid "Images"
+msgstr "Images"
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Impossible d'enregistrer un fichier en lecture seule."
 
 #: Pinta.Core/Actions/EditActions.cs:251
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"L'image étant collé est plus grande que la taille de la toile. Que souhaitez-"
+"vous faire?"
 
 #: Pinta.Core/Actions/EditActions.cs:254
 msgid "Expand canvas"
-msgstr ""
+msgstr "Elargir la toile"
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr "Ne pas changer la taille de la toile"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""

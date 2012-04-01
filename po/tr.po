@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2011-09-23 10:19+0000\n"
-"Last-Translator: rosencreuz <Unknown>\n"
+"PO-Revision-Date: 2011-10-08 20:42+0000\n"
+"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-08 19:08+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2012-04-01 18:17+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -635,6 +635,10 @@ msgstr "Normal"
 msgid "Normal and Outline"
 msgstr ""
 
+#: Pinta.Tools/TextTool/TextTool.cs:174
+msgid "Fill Background"
+msgstr ""
+
 #: Pinta.Tools/TextTool/TextTool.cs:179
 msgid "Outline width"
 msgstr ""
@@ -938,12 +942,13 @@ msgstr "Önceden Katkıda Bulunmuş Olanlar"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  58zarali https://launchpad.net/~yusufulku\n"
 "  Ahmet Vurgun https://launchpad.net/~ahmetvurgun\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Mehmet Gülmen https://launchpad.net/~memetgulmen\n"
 "  Omer GOK https://launchpad.net/~mechulkalan\n"
 "  Yalçın Can https://launchpad.net/~echza\n"
+"  Yusuf ÜLKÜ https://launchpad.net/~yusufulku\n"
 "  rosencreuz https://launchpad.net/~iyiguncevik"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
@@ -1219,9 +1224,9 @@ msgstr "Yatay Çevir"
 msgid "Flip Vertical"
 msgstr "Dikey Çevir"
 
-#: Pinta.Core/Actions/LayerActions.cs:71
-msgid "Rotate / Zoom"
-msgstr "Döndür / Yakınlaştır"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 #: Pinta.Core/Actions/LayerActions.cs:213
@@ -1245,6 +1250,10 @@ msgstr "Dosyadan Aktar"
 #: Pinta.Core/Actions/ImageActions.cs:181
 msgid "Crop to Selection"
 msgstr "Seçime Kırp"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 msgid "Resize Image..."
@@ -1639,7 +1648,7 @@ msgid "Pinta Image Editor"
 msgstr ""
 
 #: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Open Images"
+msgid "Images"
 msgstr ""
 
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
@@ -1658,4 +1667,9 @@ msgstr ""
 
 #: Pinta.Core/Actions/EditActions.cs:255
 msgid "Don't change canvas size"
+msgstr ""
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
+msgid "Rotate / Zoom Layer"
 msgstr ""
