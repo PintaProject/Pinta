@@ -59,21 +59,24 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
+			"Adam Doppelt",
+			"Adolfo Jayme Barrientos",
 			"Cameron White",
-			"James Gifford",
-                        "Jean-Michel Bea",
-                        "Jonathan Pobst",
-			"Manish Sinha",
-			"Martin Geier",
+			"Ciprian Mustiata",
+			"Felix Schmutz",
+			"Mikhail Makarov",
 			"Olivier Dufour",
-                        "Robert Nordan"
+			"Robert Nordan"
 		};
 
 		string[] oldAuthors = new string[] {
 			"Aaron Bockover",
 			"Anirudh Sanjeev",
+			"Cameron White",
 			"Greg Lowe",
 			"Hanh Pham",
+			"James Gifford",
+			"Jean-Michel Bea",
 			"Joe Hillenbrand",
 			"Jon Rimmer",
 			"Jonathan Pobst",
@@ -81,11 +84,14 @@ namespace Pinta
 			"Khairuddin Ni'am",
 			"Krzysztof Marecki",
 			"Maia Kozheva",
+			"Manish Sinha",
 			"Marco Rolappe",
+			"Martin Geier",
 			"Mathias Fussenegger",
 			"Obinou Conseil",
 			"Olivier Dufour",
-			"Richard Cohn"
+			"Richard Cohn",
+			"Robert Nordan"
 		};
 
 		public ScrollBox ()
