@@ -109,6 +109,7 @@
     <Compile Include="Brushes\CircleBrush.cs" />
     <Compile Include="Tools\ToolControl\ToolControl.cs" />
     <Compile Include="Tools\BaseTransformTool.cs" />
+    <Compile Include="Tools\ToolControl\TransformControlPoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">

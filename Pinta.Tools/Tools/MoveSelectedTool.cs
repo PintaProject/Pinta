@@ -33,7 +33,6 @@ namespace Pinta.Tools
 {
 	public class MoveSelectedTool : BaseTransformTool
 	{
-		Matrix old_transform = new Matrix();
 		private MovePixelsHistoryItem hist;
 
 		public override string Name {
@@ -62,8 +61,6 @@ namespace Pinta.Tools
 		protected override void OnStartTransform ()
 		{
 			base.OnStartTransform ();
-
-			old_transform.InitIdentity();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -94,29 +91,25 @@ namespace Pinta.Tools
 			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnUpdateTransform (Matrix transform)
+		protected override void OnUpdateTransform (Matrix transform, Matrix update)
 		{
-			old_transform.Invert();
-			old_transform.Multiply(transform);
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.SelectionLayer.Transform.Multiply(update);
+
+			update.Invert();
 
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface))
 			{
 				Path old = doc.Selection.Path;
+
 				g.FillRule = FillRule.EvenOdd;
 				g.AppendPath (doc.Selection.Path);
-				g.Transform(old_transform);
+				g.Transform(update);
 
 				doc.Selection.Path = g.CopyPath ();
 				(old as IDisposable).Dispose ();
 			}
 
-			old_transform.Invert();
-
-			doc.SelectionLayer.Transform.Multiply(old_transform);
-
-			old_transform.InitMatrix(transform);
 			doc.ShowSelection = true;
 
 			PintaCore.Workspace.Invalidate ();

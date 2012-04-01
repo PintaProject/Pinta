@@ -1407,6 +1407,17 @@ namespace Pinta.Core
 			return new Gdk.Point ((int)point.X, (int)point.Y);
 		}
 
+		public static void TransformPoint(this Matrix matrix, ref PointD point)
+		{
+			double x = point.X;
+			double y = point.Y;
+
+			matrix.TransformPoint(ref x, ref y);
+
+			point.X = x;
+			point.Y = y;
+		}
+
 		public static void InitMatrix(this Matrix matrix, Matrix source)
 		{
 			matrix.X0 = source.X0;
@@ -1416,6 +1427,22 @@ namespace Pinta.Core
 			matrix.Y0 = source.Y0;
 			matrix.Yx = source.Yx;
 			matrix.Yy = source.Yy;
+		}
+
+		public static void InitRectToRect(this Matrix matrix, Rectangle src, Rectangle dst)
+		{
+			matrix.InitIdentity();
+
+			matrix.Xx = dst.Width / src.Width;
+			matrix.Yy = dst.Height / src.Height;
+			matrix.X0 = dst.X - (matrix.Xx * src.X);
+			matrix.Y0 = dst.Y - (matrix.Yy * src.Y);
+		}
+
+		public static Rectangle FromLTRB(double left, double top, double right, double bottom)
+		{
+			return new Rectangle(Math.Min(left, right), Math.Min(top, bottom),
+			                     Math.Abs(right - left), Math.Abs(bottom - top));
 		}
 
 		public static PointD GetCenter(this Cairo.Rectangle rect)
