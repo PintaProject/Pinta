@@ -1,7 +1,12 @@
-pinta (1.1-1ubuntu3~natty1) natty; urgency=low
+pinta (1.2-0ubuntu1~oneiric1) oneiric; urgency=low
 
-  * Fix the Mono version check
-  * Allow older versions of Mono.Addins to be used
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sun, 15 Apr 2012 02:37:18 -0400
+
+pinta (1.1-1ubuntu3) oneiric; urgency=low
+
+  * Remove the Mono 2.8 version check patch 
 
  -- Cameron White <cameronwhite91@gmail.com>  Thu, 13 Oct 2011 20:26:54 -0400
 
