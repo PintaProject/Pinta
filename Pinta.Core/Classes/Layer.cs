@@ -37,8 +37,6 @@ namespace Pinta.Core
 		private double opacity;
 		private bool hidden;
 		private string name;
-		private bool tiled;
-		private PointD offset;
 		
 		public Layer () : this (null)
 		{

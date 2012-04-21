@@ -136,7 +136,6 @@ namespace Pinta.Core
             int* hg = stackalloc int[hLength];
             int* hr = stackalloc int[hLength];
             int* ha = stackalloc int[hLength];
-            uint hSize = (uint)(sizeof(int) * hLength);
 
             for (int y = (int)rect.Y; y < rect.Y + rect.Height; y++)
             {
@@ -343,7 +342,6 @@ namespace Pinta.Core
             int* hb = stackalloc int[hLength];
             int* hg = stackalloc int[hLength];
             int* hr = stackalloc int[hLength];
-            uint hSize = (uint)(sizeof(int) * hLength);
 
 			for (int y = (int)rect.Y; y < rect.Y + rect.Height; y++)
             {

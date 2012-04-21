@@ -35,7 +35,6 @@ namespace Pinta.Tools
 	{
 		private PointD reset_origin;
 		private PointD shape_end;
-		private int cornerTolerance = 3;
 		private ToolControl [] controls = new ToolControl [8];
 		protected SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
