@@ -38,6 +38,9 @@ namespace Pinta.Core
 	[TypeExtensionPoint]
 	public abstract class BaseTool
 	{
+		protected const int MOUSE_LEFT_BUTTON = 1;
+		protected const int MOUSE_MIDDLE_BUTTON = 3;
+		protected const int MOUSE_RIGHT_BUTTON = 3;
 		protected const int DEFAULT_BRUSH_WIDTH = 2;
 	    
 		protected static Point point_empty = new Point (-500, -500);
@@ -115,9 +118,9 @@ namespace Pinta.Core
 			OnMouseUp (canvas, args, point);
 		}
 
-		public void DoCommit ()
+		public void DoCommit (bool force)
 		{
-			OnCommit ();
+			OnCommit (force);
 		}
 
 		public void DoActivated ()
@@ -128,7 +131,12 @@ namespace Pinta.Core
 		public void DoDeactivated ()
 		{
 			OnDeactivated ();
-		}		
+		}
+
+		public void Draw(Context g)
+		{
+			OnDraw(g);
+		}
 		
 		// Return true if the key was consumed.
 		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
@@ -203,7 +211,7 @@ namespace Pinta.Core
 		/// tools that are in a temporary state while being used, and
 		/// need to commit their work when another option is selected.
 		/// </summary>
-		protected virtual void OnCommit ()
+		protected virtual void OnCommit (bool force)
 		{
 		}
 
@@ -215,6 +223,10 @@ namespace Pinta.Core
 		protected virtual void OnDeactivated ()
 		{
 			SetCursor (null);
+		}
+
+		protected virtual void OnDraw(Context g)
+		{
 		}
 
 		protected virtual ToggleToolButton CreateToolButton ()

@@ -47,7 +47,9 @@ namespace Pinta.Tools
 		public SelectTool ()
 		{
 			CreateHandler ();
-			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+			Gdk.Pixbuf handIcon = PintaCore.Resources.GetIcon ("Tools.Pan.png");
+			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display,
+			                              handIcon, handIcon.Width / 2, handIcon.Height / 2);
 		}
 
 		#region ToolBar
@@ -111,9 +113,9 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnCommit ()
+		protected override void OnCommit (bool force)
 		{
-			base.OnCommit ();
+			base.OnCommit (force);
 			handler_active = false;
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				Document doc = PintaCore.Workspace.ActiveDocument;

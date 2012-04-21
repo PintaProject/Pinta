@@ -25,6 +25,7 @@ namespace Pinta.Tools
 		private int linePos;
 		private int textPos;
 		bool underline;
+		bool editing;
 
 		public TextEngine ()
 		{
@@ -32,6 +33,8 @@ namespace Pinta.Tools
 
 			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
 		}
+
+		public event EventHandler<TextChangedEventArgs> TextChanged;
 
 		#region Public Properties
 		public Position CurrentPosition {
@@ -66,6 +69,7 @@ namespace Pinta.Tools
 			linePos = 0;
 			textPos = 0;
 			origin = Point.Zero;
+			editing = false;
 
 			Recalculate ();
 		}
@@ -167,6 +171,7 @@ namespace Pinta.Tools
 		#region Key Handlers
 		public void InsertCharIntoString (uint c)
 		{
+			editing = true;
 			byte[] bytes = { (byte)c, (byte)(c >> 8), (byte)(c >> 16), (byte)(c >> 24) };
 			string unicodeChar = System.Text.Encoding.UTF32.GetString (bytes);
 
@@ -177,6 +182,7 @@ namespace Pinta.Tools
 
 		public void PerformEnter ()
 		{
+			editing = true;
 			string currentLine = lines[linePos];
 
 			if (textPos == currentLine.Length) {
@@ -430,12 +436,16 @@ namespace Pinta.Tools
 		
 		private void Recalculate ()
 		{
-			string markup = ToString ();
+			string text = ToString ();
+			string markup = text;
 
 			if (underline)
 				markup = string.Format ("<u>{0}</u>", markup);
 
 			layout.SetMarkup (markup);
+
+			if(editing && TextChanged != null)
+				TextChanged(this, new TextChangedEventArgs(text));
 		}
 		#endregion
 	}

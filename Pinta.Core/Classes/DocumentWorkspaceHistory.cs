@@ -99,7 +99,7 @@ namespace Pinta.Core
 		public void Undo ()
 		{
 			// ensure that the current tool's modifications are added to the history first (e.g. editing text)
-			PintaCore.Tools.CurrentTool.DoCommit ();
+			PintaCore.Tools.CurrentTool.DoCommit (false);
 
 			if (historyPointer < 0) {
 				throw new InvalidOperationException ("Undo stack is empty");

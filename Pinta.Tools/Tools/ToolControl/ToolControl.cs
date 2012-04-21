@@ -32,6 +32,10 @@ namespace Pinta.Tools
 {
 	public class ToolControl
 	{
+		private const double SIZE = 6;
+		private readonly static Cairo.Color STROKE_COLOR = new Cairo.Color (0, 0, 1, 0.7);
+		private readonly static Cairo.Color FILL_COLOR = new Cairo.Color (0, 0, 1, 0.3);
+
 		public ToolControl (MouseHandler moveAction)
 		{
 			this.action = moveAction;
@@ -62,9 +66,11 @@ namespace Pinta.Tools
 		public void Render (Layer layer)
 		{
 			double scale_factor = (1.0 / PintaCore.Workspace.ActiveWorkspace.Scale);
+			double size = SIZE * scale_factor;
+
 			using (Context g = new Context (layer.Surface))
-				g.FillStrokedRectangle (new Cairo.Rectangle (Position.X - scale_factor * 2, Position.Y - scale_factor * 2, scale_factor * 4, scale_factor * 4),
-				                        new Cairo.Color (0, 0, 1, 0.5), new Cairo.Color (0, 0, 1, 0.7), 1);
+				g.FillStrokedRectangle (new Cairo.Rectangle (Position.X - size / 2, Position.Y - size / 2, size, size),
+				                        FILL_COLOR, STROKE_COLOR, 1);
 		}
 	}
 }

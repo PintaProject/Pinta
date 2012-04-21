@@ -31,12 +31,10 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public class MoveSelectedTool : BaseTool
+	public class MoveSelectedTool : BaseTransformTool
 	{
-		private PointD origin_offset;
-		private bool is_dragging;
 		private MovePixelsHistoryItem hist;
-		
+
 		public override string Name {
 			get { return Catalog.GetString ("Move Selected Pixels"); }
 		}
@@ -52,17 +50,19 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
 		public override int Priority { get { return 7; } }
 
-		#region Mouse Handlers
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		#region Implementation
+
+		protected override Rectangle GetSourceRectangle ()
 		{
-			// If we are already drawing, ignore any additional mouse down events
-			if (is_dragging)
-				return;
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			return doc.Selection.Path.GetBounds().ToCairoRectangle();
+		}
+
+		protected override void OnStartTransform ()
+		{
+			base.OnStartTransform ();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			origin_offset = point;
-			is_dragging = true;
 
 			hist = new MovePixelsHistoryItem (Icon, Name, doc);
 			hist.TakeSnapshot (!doc.ShowSelectionLayer);
@@ -73,72 +73,67 @@ namespace Pinta.Tools
 				doc.ShowSelectionLayer = true;
 
 				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
-					g.AppendPath (doc.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
+					doc.Selection.Clip(g);
 					g.SetSource (doc.CurrentLayer.Surface);
-					g.Clip ();
 					g.Paint ();
 				}
 
 				Cairo.ImageSurface surf = doc.CurrentLayer.Surface;
-				
+
 				using (Cairo.Context g = new Cairo.Context (surf)) {
-					g.AppendPath (doc.SelectionPath);
+					g.AppendPath (doc.Selection.Path);
 					g.FillRule = FillRule.EvenOdd;
 					g.Operator = Cairo.Operator.Clear;
 					g.Fill ();
 				}
 			}
-			
-			canvas.GdkWindow.Invalidate ();
+
+			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnUpdateTransform (Matrix transform, Matrix update)
 		{
-			if (!is_dragging)
-				return;
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
+			doc.SelectionLayer.Transform.Multiply(update);
 
-			PointD new_offset = new PointD (point.X, point.Y);
-			
-			double dx = origin_offset.X - new_offset.X;
-			double dy = origin_offset.Y - new_offset.Y;
+			update.Invert();
 
-			Path path = doc.SelectionPath;
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface))
+			{
+				Path old = doc.Selection.Path;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				g.AppendPath (path);
-				g.Translate (dx, dy);
-				doc.SelectionPath = g.CopyPath ();
+				g.FillRule = FillRule.EvenOdd;
+				g.AppendPath (doc.Selection.Path);
+				g.Transform(update);
+
+				doc.Selection.Path = g.CopyPath ();
+				(old as IDisposable).Dispose ();
 			}
 
-			(path as IDisposable).Dispose ();
+			doc.ShowSelection = true;
 
-			doc.SelectionLayer.Offset = new PointD (doc.SelectionLayer.Offset.X - dx, doc.SelectionLayer.Offset.Y - dy);
-			
-			origin_offset = new_offset;
-			
-			(o as Gtk.DrawingArea).GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnFinishTransform ()
 		{
-			is_dragging = false;
+			base.OnFinishTransform ();
 
 			if (hist != null)
 				PintaCore.History.PushNewItem (hist);
 
 			hist = null;
 		}
-		#endregion
 
-		protected override void OnCommit ()
+		protected override void OnCommit (bool force)
 		{
-			try {
-				PintaCore.Workspace.ActiveDocument.FinishSelection ();
-			} catch (Exception) {
-				// Ignore an error where ActiveDocument fails.
+			if(force)
+			{
+				try {
+					PintaCore.Workspace.ActiveDocument.FinishSelection ();
+				} catch (Exception) {
+					// Ignore an error where ActiveDocument fails.
+				}
 			}
 		}
 
@@ -148,5 +143,6 @@ namespace Pinta.Tools
 
 			PintaCore.Workspace.ActiveDocument.FinishSelection ();
 		}
+		#endregion
 	}
 }

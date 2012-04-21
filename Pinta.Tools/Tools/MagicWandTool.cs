@@ -97,10 +97,10 @@ namespace Pinta.Tools
 			SelectionHistoryItem undoAction = new SelectionHistoryItem (this.Icon, this.Name);
 			undoAction.TakeSnapshot ();
 
-			Path path = doc.SelectionPath;
+			Path path = doc.Selection.Path;
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				PintaCore.Layers.SelectionPath = g.CreatePolygonPath (polygonSet);
+				PintaCore.Layers.Selection.Path = g.CreatePolygonPath (polygonSet);
 
 				switch (combineMode) {
 					case CombineMode.Union:

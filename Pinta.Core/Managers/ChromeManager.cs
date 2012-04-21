@@ -39,6 +39,7 @@ namespace Pinta.Core
 		private Gdk.Point last_canvas_cursor_point;
 		private MenuBar main_menu;
 		private Toolbar main_toolbar;
+		private Statusbar main_statusbar;
 
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
@@ -46,7 +47,8 @@ namespace Pinta.Core
 		public Window MainWindow { get { return main_window; } }
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public MenuBar MainMenu { get { return main_menu; } }
-		
+		public Statusbar MainStatusbar { get { return main_statusbar; } }
+
 		public ChromeManager ()
 		{
 		}
@@ -101,6 +103,11 @@ namespace Pinta.Core
 			main_menu = menu;
 		}
 
+		public void InitializeMainStatusbar (Statusbar statusbar)
+		{
+			main_statusbar = statusbar;
+		}
+
 		public void InitializeProgessDialog (IProgressDialog progressDialog)
 		{
 			if (progressDialog == null)
@@ -113,6 +120,9 @@ namespace Pinta.Core
 		public void SetStatusBarText (string text)
 		{
 			OnStatusBarTextChanged (text);
+
+			if(main_statusbar != null)
+				main_statusbar.Push(0, text);
 		}
 		#endregion
 

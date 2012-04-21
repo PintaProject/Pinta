@@ -98,6 +98,7 @@ namespace Pinta
 			CreateMainMenu (window_shell);
 			CreateMainToolBar (window_shell);
 			CreateToolToolBar (window_shell);
+			CreateStatusBar(window_shell);
 
 			CreatePanels (window_shell);
 
@@ -186,7 +187,14 @@ namespace Pinta
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
-		
+
+		private void CreateStatusBar (WindowShell shell)
+		{
+			var main_statusbar = window_shell.CreateStatusbar ("main_statusbar");
+
+			PintaCore.Chrome.InitializeMainStatusbar (main_statusbar);
+		}
+
 		private void CreatePanels (WindowShell shell)
 		{
 			HBox panel_container = shell.CreateWorkspace ();
@@ -324,7 +332,7 @@ namespace Pinta
 
 		private void ZoomToSelection_Activated (object sender, EventArgs e)
 		{
-			PintaCore.Workspace.ActiveWorkspace.ZoomToRectangle (PintaCore.Workspace.ActiveDocument.SelectionPath.GetBounds ().ToCairoRectangle ());
+			PintaCore.Workspace.ActiveWorkspace.ZoomToRectangle (PintaCore.Workspace.ActiveDocument.Selection.Path.GetBounds ().ToCairoRectangle ());
 		}
 		
 		private void ZoomToWindow_Activated (object sender, EventArgs e)

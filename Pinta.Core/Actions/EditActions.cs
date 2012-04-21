@@ -161,7 +161,7 @@ namespace Pinta.Core
 			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
 			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.Path);
 				g.FillRule = FillRule.EvenOdd;
 
 				g.Color = PintaCore.Palette.PrimaryColor;
@@ -197,7 +197,7 @@ namespace Pinta.Core
 			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
 
 			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.Path);
 				g.FillRule = FillRule.EvenOdd;
 
 				g.Operator = Cairo.Operator.Clear;
@@ -281,10 +281,10 @@ namespace Pinta.Core
 
 			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
 			
-			Path old_path = doc.SelectionPath;
+			Path old_path = doc.Selection.Path;
 			bool old_show_selection = doc.ShowSelection;
 
-			doc.SelectionPath = p;
+			doc.Selection.Path = p;
 			doc.ShowSelection = true;
 
 			doc.Workspace.Invalidate ();

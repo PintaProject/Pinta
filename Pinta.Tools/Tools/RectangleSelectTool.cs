@@ -48,10 +48,10 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Path path = doc.SelectionPath;
+			Path path = doc.Selection.Path;
 			
 			using (Context g = new Context (l.Surface))
-				doc.SelectionPath = g.CreateRectanglePath (r);
+				doc.Selection.Path = g.CreateRectanglePath (r);
 			
 			(path as IDisposable).Dispose ();
 			

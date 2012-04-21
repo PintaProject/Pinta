@@ -854,7 +854,7 @@ namespace Pinta.Core
 			Rectangle rect;
 
 			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (path);
 
 				// We don't want the bounding box to include a stroke width 
 				// of 1, but setting it to 0 returns an empty rectangle.  Set
@@ -1405,6 +1405,49 @@ namespace Pinta.Core
 		public static Gdk.Point ToGdkPoint (this PointD point)
 		{
 			return new Gdk.Point ((int)point.X, (int)point.Y);
+		}
+
+		public static void TransformPoint(this Matrix matrix, ref PointD point)
+		{
+			double x = point.X;
+			double y = point.Y;
+
+			matrix.TransformPoint(ref x, ref y);
+
+			point.X = x;
+			point.Y = y;
+		}
+
+		public static void InitMatrix(this Matrix matrix, Matrix source)
+		{
+			matrix.X0 = source.X0;
+			matrix.Xx = source.Xx;
+			matrix.Xy = source.Xy;
+
+			matrix.Y0 = source.Y0;
+			matrix.Yx = source.Yx;
+			matrix.Yy = source.Yy;
+		}
+
+		public static void InitRectToRect(this Matrix matrix, Rectangle src, Rectangle dst)
+		{
+			matrix.InitIdentity();
+
+			matrix.Xx = dst.Width / src.Width;
+			matrix.Yy = dst.Height / src.Height;
+			matrix.X0 = dst.X - (matrix.Xx * src.X);
+			matrix.Y0 = dst.Y - (matrix.Yy * src.Y);
+		}
+
+		public static Rectangle FromLTRB(double left, double top, double right, double bottom)
+		{
+			return new Rectangle(Math.Min(left, right), Math.Min(top, bottom),
+			                     Math.Abs(right - left), Math.Abs(bottom - top));
+		}
+
+		public static PointD GetCenter(this Cairo.Rectangle rect)
+		{
+			return new PointD(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 	}
 }

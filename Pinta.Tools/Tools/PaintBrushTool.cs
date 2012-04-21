@@ -132,9 +132,7 @@ namespace Pinta.Tools
 			Surface = surf;
 
 			using (Drawable = new Context (surf)) {
-				Drawable.AppendPath (doc.SelectionPath);
-				Drawable.FillRule = FillRule.EvenOdd;
-				Drawable.Clip ();
+				doc.Selection.Clip (Drawable);
 
 				Drawable.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 				Drawable.LineWidth = brush_width;
