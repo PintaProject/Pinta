@@ -33,12 +33,29 @@ namespace Pinta.Resources
 	{
 		public static Pixbuf GetIcon (string name, int size)
 		{
-			// First see if it's a built-in gtk icon, like gtk-new
-			if (Gtk.IconTheme.Default.HasIcon (name))
-				return Gtk.IconTheme.Default.LoadIcon (name, size, Gtk.IconLookupFlags.UseBuiltin);
+            Pixbuf icon;
 
-			// Get it from our embedded resources
-			return Gdk.Pixbuf.LoadFromResource (name);
+            try
+            {
+                // First see if it's a built-in gtk icon, like gtk-new
+                if (Gtk.IconTheme.Default.HasIcon(name))
+                {
+                    icon = Gtk.IconTheme.Default.LoadIcon(name, size, Gtk.IconLookupFlags.UseBuiltin);
+                }
+                // Otherwise, get it from our embedded resources.
+                else
+                {
+                    icon = Gdk.Pixbuf.LoadFromResource(name);
+                }
+            }
+            // Ensure that we don't crash if an icon is missing for some reason.
+            catch (Exception e)
+            {
+                System.Console.Error.WriteLine (e.Message);
+                icon = Gtk.IconTheme.Default.LoadIcon (Gtk.Stock.MissingImage, size, Gtk.IconLookupFlags.UseBuiltin);
+            }
+
+            return icon;
 		}
 	}
 }
