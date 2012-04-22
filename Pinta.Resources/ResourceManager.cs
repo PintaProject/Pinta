@@ -33,7 +33,7 @@ namespace Pinta.Resources
 	{
 		public static Pixbuf GetIcon (string name, int size)
 		{
-            Pixbuf icon;
+            Pixbuf icon = null;
 
             try
             {
@@ -48,11 +48,14 @@ namespace Pinta.Resources
                     icon = Gdk.Pixbuf.LoadFromResource(name);
                 }
             }
-            // Ensure that we don't crash if an icon is missing for some reason.
+            // Ensure that we don't crash if an icon is missing for some reason, and provide a "missing image" icon if possible.
             catch (Exception e)
             {
-                System.Console.Error.WriteLine (e.Message);
-                icon = Gtk.IconTheme.Default.LoadIcon (Gtk.Stock.MissingImage, size, Gtk.IconLookupFlags.UseBuiltin);
+                System.Console.Error.WriteLine (e.ToString());
+                if (Gtk.IconTheme.Default.HasIcon (Gtk.Stock.MissingImage))
+                {
+                    icon = Gtk.IconTheme.Default.LoadIcon (Gtk.Stock.MissingImage, size, Gtk.IconLookupFlags.UseBuiltin);
+                }
             }
 
             return icon;
