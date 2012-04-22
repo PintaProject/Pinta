@@ -213,7 +213,8 @@ namespace Pinta.Tools
 					--localLeft;
 				}
 
-				while (localRight < surface.Width &&
+                int surfaceWidth = surface.Width;
+				while (localRight < surfaceWidth &&
 				       !stencil.GetUnchecked (localRight, pt.Y) &&
 				       CheckColor (cmp, rowPtr[localRight], tolerance)) {
 					stencil.SetUnchecked (localRight, pt.Y, true);
@@ -223,18 +224,19 @@ namespace Pinta.Tools
 				++localLeft;
 				--localRight;
 
-				if (pt.Y > 0) {
+                Action<int> checkRow = (row) =>
+                {
 					int sleft = localLeft;
 					int sright = localLeft;
-					ColorBgra* rowPtrUp = surface.GetRowAddressUnchecked (pt.Y - 1);
+					ColorBgra* otherRowPtr = surface.GetRowAddressUnchecked (row);
 
 					for (int sx = localLeft; sx <= localRight; ++sx) {
-						if (!stencil.GetUnchecked (sx, pt.Y - 1) &&
-						    CheckColor (cmp, rowPtrUp[sx], tolerance)) {
+						if (!stencil.GetUnchecked (sx, row) &&
+						    CheckColor (cmp, otherRowPtr[sx], tolerance)) {
 							++sright;
 						} else {
 							if (sright - sleft > 0) {
-								queue.Enqueue (new Point (sleft, pt.Y - 1));
+								queue.Enqueue (new Point (sleft, row));
 							}
 
 							++sright;
@@ -243,32 +245,16 @@ namespace Pinta.Tools
 					}
 
 					if (sright - sleft > 0) {
-						queue.Enqueue (new Point (sleft, pt.Y - 1));
+						queue.Enqueue (new Point (sleft, row));
 					}
+                };
+
+				if (pt.Y > 0) {
+                    checkRow (pt.Y - 1);
 				}
 
 				if (pt.Y < surface.Height - 1) {
-					int sleft = localLeft;
-					int sright = localLeft;
-					ColorBgra* rowPtrDown = surface.GetRowAddressUnchecked (pt.Y + 1);
-
-					for (int sx = localLeft; sx <= localRight; ++sx) {
-						if (!stencil.GetUnchecked (sx, pt.Y + 1) &&
-						    CheckColor (cmp, rowPtrDown[sx], tolerance)) {
-							++sright;
-						} else {
-							if (sright - sleft > 0) {
-								queue.Enqueue (new Point (sleft, pt.Y + 1));
-							}
-
-							++sright;
-							sleft = sright;
-						}
-					}
-
-					if (sright - sleft > 0) {
-						queue.Enqueue (new Point (sleft, pt.Y + 1));
-					}
+                    checkRow (pt.Y + 1);
 				}
 
 				if (localLeft < left) {
