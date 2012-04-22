@@ -26,11 +26,12 @@
 // THE SOFTWARE.
 
 using System;
-using System.Linq;
-using Pinta.Core;
-using Gtk;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using Gtk;
+using Mono.Unix;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
@@ -207,10 +208,10 @@ namespace Pinta.Gui.Widgets
 			
 			var initial = new LayerProperties(layer.Name, visibility, layer.Opacity);
 			var updated = new LayerProperties(layer.Name, !visibility, layer.Opacity);
-			
+
 			var historyItem = new UpdateLayerPropertiesHistoryItem (
 				"Menu.Layers.LayerProperties.png",
-				(visibility) ? "Layer Shown" : "Layer Hidden",
+				(visibility) ? Catalog.GetString ("Layer Shown") : Catalog.GetString ("Layer Hidden"),
 				PintaCore.Layers.IndexOf (layer),
 				initial,
 				updated);

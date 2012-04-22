@@ -1626,3 +1626,11 @@ msgstr ""
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
 msgid "Rotate / Zoom Layer"
 msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
+msgid "Layer Shown"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
+msgid "Layer Hidden"
+msgstr ""
