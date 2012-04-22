@@ -35,6 +35,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using System.Collections.Generic;
 using Pinta.Core;
@@ -315,39 +316,48 @@ namespace Pinta.Tools
 
 			foreach (Gdk.Rectangle rect in scans)
 				stencil.Set (rect, true);
-			
-			for (int y = 0; y < surface.Height; ++y) {
-				bool foundPixelInRow = false;
-				ColorBgra* ptr = surface.GetRowAddressUnchecked (y);
 
-				for (int x = 0; x < surface.Width; ++x) {
-					if (CheckColor (cmp, *ptr, tolerance)) {
-						stencil.SetUnchecked (x, y, true);
+            Parallel.For(0, surface.Height, y =>
+            {
+                bool foundPixelInRow = false;
+                ColorBgra* ptr = surface.GetRowAddressUnchecked(y);
 
-						if (x < left) {
-							left = x;
-						}
+                int surfaceWidth = surface.Width;
+                for (int x = 0; x < surfaceWidth; ++x)
+                {
+                    if (CheckColor(cmp, *ptr, tolerance))
+                    {
+                        stencil.SetUnchecked(x, y, true);
 
-						if (x > right) {
-							right = x;
-						}
+                        if (x < left)
+                        {
+                            left = x;
+                        }
 
-						foundPixelInRow = true;
-					}
+                        if (x > right)
+                        {
+                            right = x;
+                        }
 
-					++ptr;
-				}
+                        foundPixelInRow = true;
+                    }
 
-				if (foundPixelInRow) {
-					if (y < top) {
-						top = y;
-					}
+                    ++ptr;
+                }
 
-					if (y >= bottom) {
-						bottom = y;
-					}
-				}
-			}
+                if (foundPixelInRow)
+                {
+                    if (y < top)
+                    {
+                        top = y;
+                    }
+
+                    if (y >= bottom)
+                    {
+                        bottom = y;
+                    }
+                }
+            });
 
 			foreach (Gdk.Rectangle rect in scans)
 				stencil.Set (rect, false);
