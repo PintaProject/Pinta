@@ -47,7 +47,7 @@ namespace Pinta.Resources
 
 				// Try to return gtk's default missing image
 				if (name != "gtk-missing-image")
-					return GetIcon (name, size);
+					return GetIcon ("gtk-missing-image", size);
 
 				// If gtk is missing it's "missing image", we'll create one on the fly
 				return CreateMissingImage (size);
