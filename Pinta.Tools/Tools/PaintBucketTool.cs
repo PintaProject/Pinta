@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Mono.Unix;
@@ -82,10 +83,12 @@ namespace Pinta.Tools
 			surf.Flush ();
 
 			// Color in any pixel that the stencil says we need to fill
-			for (int x = 0; x < stencil.Width; x++)
+            Parallel.For(0, stencil.Width, x =>
+            {
 				for (int y = 0; y < stencil.Height; y++)
 					if (stencil.GetUnchecked (x, y))
 						surf.SetColorBgra (dstPtr, width, color, x, y);
+            });
 
 			surf.MarkDirty ();
 
