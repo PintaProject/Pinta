@@ -46,8 +46,8 @@ namespace Pinta.Resources
 				System.Console.Error.WriteLine (ex.Message);
 
 				// Try to return gtk's default missing image
-				if (name != "gtk-missing-image")
-					return GetIcon ("gtk-missing-image", size);
+				if (name != Gtk.Stock.MissingImage)
+					return GetIcon (Gtk.Stock.MissingImage, size);
 
 				// If gtk is missing it's "missing image", we'll create one on the fly
 				return CreateMissingImage (size);
