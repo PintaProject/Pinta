@@ -235,9 +235,19 @@ namespace Pinta
 			container.PackStart (dock, true, true, 0);
 			
 			string layout_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
-			
-			if (System.IO.File.Exists (layout_file))
-				dock.LoadLayouts (layout_file);
+
+            if (System.IO.File.Exists(layout_file))
+            {
+                try
+                {
+                    dock.LoadLayouts(layout_file);
+                }
+                // If parsing layouts.xml fails for some reason, proceed to create the default layout.
+                catch (Exception e)
+                {
+                    System.Console.Error.WriteLine ("Error reading layouts.xml: " + e.ToString());
+                }
+            }
 			
 			if (!dock.HasLayout ("Default"))
 				dock.CreateLayout ("Default", false);
