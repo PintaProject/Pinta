@@ -25,6 +25,28 @@ namespace Pinta.Core
 	/// </summary>
 	public sealed partial class UserBlendOps
 	{
+		private static UserBlendOp[] cached_ops;
+
+		static UserBlendOps ()
+		{
+			cached_ops = new UserBlendOp[] {
+				new NormalBlendOp (),
+				new MultiplyBlendOp (),
+				new AdditiveBlendOp (),
+				new ColorBurnBlendOp (),
+				new ColorDodgeBlendOp (),
+				new ReflectBlendOp (),
+				new GlowBlendOp (),
+				new OverlayBlendOp (),
+				new DifferenceBlendOp (),
+				new NegationBlendOp (),
+				new LightenBlendOp (),
+				new DarkenBlendOp (),
+				new ScreenBlendOp (),
+				new XorBlendOp ()
+			};
+		}
+
 		private UserBlendOps ()
 		{
 		}
@@ -69,6 +91,14 @@ namespace Pinta.Core
 		public static Type GetDefaultBlendOp ()
 		{
 			return typeof (NormalBlendOp);
+		}
+
+		public static UserBlendOp GetBlendOp (BlendMode mode, double opacity)
+		{
+			if (opacity == 1.0)
+				return cached_ops[(int)mode];
+
+			return cached_ops[(int)mode].CreateWithOpacity ((int)(opacity * 255));
 		}
 	}
 }
