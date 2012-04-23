@@ -36,11 +36,13 @@ namespace Pinta.Gui.Widgets
 	{
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
+		NewCanvasRenderer cr2;
 		GridRenderer gr;
 
 		public PintaCanvas ()
 		{
 			cr = new CanvasRenderer ();
+			cr2 = new NewCanvasRenderer ();
 			gr = new GridRenderer (cr);
 			
 			// Keep the widget the same size as the canvas
@@ -119,6 +121,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
+			cr2.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
 
 			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
 				// Draw our 1 px black border
@@ -133,28 +136,30 @@ namespace Pinta.Gui.Widgets
 				bool checker = true;
 
 				// Resize each layer and paint it to the screen
-				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-					cr.Render (layer.Surface, canvas, canvas_bounds.Location, checker);
-					g.SetSourceSurface (canvas, canvas_bounds.X + (int)(layer.Offset.X * scale), canvas_bounds.Y + (int)(layer.Offset.Y * scale));
-					g.PaintWithAlpha (layer.Opacity);
+				//foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
+				cr2.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location, checker);
+				g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
+				g.Paint ();
 
-					if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
-						cr.Render (PintaCore.LivePreview.LivePreviewSurface, canvas, canvas_bounds.Location, checker);
+				//g.SetSourceSurface (canvas, canvas_bounds.X + (int)(layer.Offset.X * scale), canvas_bounds.Y + (int)(layer.Offset.Y * scale));
+				//g.PaintWithAlpha (layer.Opacity);
+					//if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
+					//        cr.Render (PintaCore.LivePreview.LivePreviewSurface, canvas, canvas_bounds.Location, checker);
 
-						g.Save ();
-						g.Scale (scale, scale);
-						g.AppendPath (PintaCore.Layers.SelectionPath);
-						g.Clip ();
+					//        g.Save ();
+					//        g.Scale (scale, scale);
+					//        g.AppendPath (PintaCore.Layers.SelectionPath);
+					//        g.Clip ();
 
-						g.Scale (1 / scale, 1 / scale);
-						g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
-						g.PaintWithAlpha (layer.Opacity);
+					//        g.Scale (1 / scale, 1 / scale);
+					//        g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
+					//        g.PaintWithAlpha (layer.Opacity);
 
-						g.Restore ();
-					}
+					//        g.Restore ();
+					//}
 
 					checker = false;
-				}
+				//}
 
 				// If we are at least 200% and grid is requested, draw it
 				if (PintaCore.Actions.View.PixelGrid.Active && cr.ScaleFactor.Ratio <= 0.5d) {

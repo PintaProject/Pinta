@@ -83,7 +83,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.ActiveDocument.Clear ();
 		}
 
-		public List<Layer> GetLayersToPaint ()
+		public IEnumerable<Layer> GetLayersToPaint ()
 		{
 			return PintaCore.Workspace.ActiveDocument.GetLayersToPaint ();
 		}
