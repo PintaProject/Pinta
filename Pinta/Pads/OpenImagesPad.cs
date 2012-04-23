@@ -39,6 +39,7 @@ namespace Pinta
 			const string pad_name = "Images";
 
 			DockItem open_images_item = workspace.AddItem (pad_name);
+            open_images_item.DefaultLocation = "Layers/Bottom";
 			open_images_item.Label = Catalog.GetString (pad_name);
 			open_images_item.Content = new OpenImagesListWidget ();
 

@@ -41,7 +41,7 @@ namespace Pinta
 			DockItemToolbar history_tb = history_item.GetToolbar (PositionType.Bottom);
 
 			history_item.Label = Catalog.GetString ("History");
-			history_item.DefaultLocation = "Layers/Bottom";
+			history_item.DefaultLocation = "Images/Bottom";
 			history_item.Content = history;
 			history_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png");
 
