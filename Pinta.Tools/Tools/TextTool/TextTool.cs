@@ -605,6 +605,11 @@ namespace Pinta.Tools
 					RedrawText (true, true);
 
 			}
+            else
+            {
+                // If we're not editing, allow the key press to be handled elsewhere (e.g. for selecting another tool).
+                keyHandled = false;
+            }
 
 			args.RetVal = keyHandled;
 		}
