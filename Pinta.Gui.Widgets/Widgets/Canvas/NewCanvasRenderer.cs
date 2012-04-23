@@ -18,7 +18,8 @@ namespace Pinta.Gui.Widgets
 	{
 		private Size source_size;
 		private Size destination_size;
-		
+		private Layer scratch_layer;
+
 		private ScaleFactor scale_factor;
 		private bool generated;
 		private int[] d2sLookupX;
@@ -44,7 +45,7 @@ namespace Pinta.Gui.Widgets
 			generated = false;
 		}
 
-		public void Render (IEnumerable<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
+		public void Render (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
 		{
 			dst.Flush ();
 		
@@ -58,12 +59,60 @@ namespace Pinta.Gui.Widgets
 			dst.MarkDirty ();
 		}
 
+		private Layer ScratchLayer {
+			get {
+				// Create one if we don't have one
+				if (scratch_layer == null)
+					scratch_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
+
+				// If we have the wrong size one, dispose it and create the correct size
+				if (scratch_layer.Surface.Width != source_size.Width || scratch_layer.Surface.Height != source_size.Height) {
+					(scratch_layer.Surface as IDisposable).Dispose ();
+					scratch_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
+				}
+
+				return scratch_layer;
+			}
+		}
+
+		private Layer CreateLivePreviewLayer (Layer original)
+		{
+			var scratch = ScratchLayer;
+			scratch.Surface.Clear ();
+
+			using (var g = new Cairo.Context (scratch.Surface)) {
+				g.SetSource (original.Surface);
+				g.Paint ();
+
+				g.Save ();
+
+				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.Clip ();
+				g.SetSource (PintaCore.LivePreview.LivePreviewSurface);
+				g.Paint ();
+
+				g.Restore ();
+			}
+
+			scratch.BlendMode = original.BlendMode;
+			scratch.Offset = original.Offset;
+			scratch.Opacity = original.Opacity;
+
+			return scratch;
+		}
+
 		#region Algorithms ported from PDN
-		private unsafe void RenderOneToOne (IEnumerable<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
+		private unsafe void RenderOneToOne (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
 		{
 			checker = true;
 
-			foreach (var layer in layers) {
+			for (int i = 0; i < layers.Count; i++) {
+				var layer = layers[i];
+
+				// If we're in LivePreview, substitute current layer with the preview layer
+				if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
+					layer = CreateLivePreviewLayer (layer);
+
 				var src = layer.Surface;
 
 				// Get the blend mode for this layer and opacity
@@ -122,11 +171,17 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private unsafe void RenderZoomIn (IEnumerable<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
+		private unsafe void RenderZoomIn (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
 		{
 			checker = true;
 
-			foreach (var layer in layers) {
+			for (int i = 0; i < layers.Count; i++) {
+				var layer = layers[i];
+
+				// If we're in LivePreview, substitute current layer with the preview layer
+				if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
+					layer = CreateLivePreviewLayer (layer);
+
 				var src = layer.Surface;
 
 				// Get the blend mode for this layer and opacity
@@ -189,11 +244,17 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private unsafe void RenderZoomOut (IEnumerable<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, Gdk.Size destinationSize, bool checker)
+		private unsafe void RenderZoomOut (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, Gdk.Size destinationSize, bool checker)
 		{
 			checker = true;
 
-			foreach (var layer in layers) {
+			for (int i = 0; i < layers.Count; i++) {
+				var layer = layers[i];
+
+				// If we're in LivePreview, substitute current layer with the preview layer
+				if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
+					layer = CreateLivePreviewLayer (layer);
+
 				var src = layer.Surface;
 
 				// Get the blend mode for this layer and opacity
