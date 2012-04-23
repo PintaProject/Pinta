@@ -42,6 +42,7 @@ namespace Pinta
             open_images_item.DefaultLocation = "Layers/Bottom";
 			open_images_item.Label = Catalog.GetString (pad_name);
 			open_images_item.Content = new OpenImagesListWidget ();
+            open_images_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Default.png");
 
 			ToggleAction show_open_images = padMenu.AppendToggleAction (pad_name, Catalog.GetString (pad_name), null, null);
 
