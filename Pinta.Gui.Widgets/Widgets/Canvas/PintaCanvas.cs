@@ -128,39 +128,12 @@ namespace Pinta.Gui.Widgets
 
 				g.Translate (x, y);
 
-
-				// Resize each layer and paint it to the screen
-				//foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
+				// Render all the layers to a surface
 				cr.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location);
+
+				// Paint the surface to our canvas
 				g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
 				g.Paint ();
-
-				//g.SetSourceSurface (canvas, canvas_bounds.X + (int)(layer.Offset.X * scale), canvas_bounds.Y + (int)(layer.Offset.Y * scale));
-				//g.PaintWithAlpha (layer.Opacity);
-					//if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled) {
-					//        cr.Render (PintaCore.LivePreview.LivePreviewSurface, canvas, canvas_bounds.Location, checker);
-
-					//        g.Save ();
-					//        g.Scale (scale, scale);
-					//        g.AppendPath (PintaCore.Layers.SelectionPath);
-					//        g.Clip ();
-
-					//        g.Scale (1 / scale, 1 / scale);
-					//        g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
-					//        g.PaintWithAlpha (layer.Opacity);
-
-					//        g.Restore ();
-					//}
-
-					//checker = false;
-				//}
-
-				// If we are at least 200% and grid is requested, draw it
-				//if (PintaCore.Actions.View.PixelGrid.Active && cr.ScaleFactor.Ratio <= 0.5d) {
-				//        gr.Render (canvas, canvas_bounds.Location);
-				//        g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
-				//        g.Paint ();
-				//}
 
 				// Selection outline
 				if (PintaCore.Layers.ShowSelection) {
