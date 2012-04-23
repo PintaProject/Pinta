@@ -36,12 +36,10 @@ namespace Pinta.Gui.Widgets
 	{
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
-		NewCanvasRenderer cr2;
 
 		public PintaCanvas ()
 		{
 			cr = new CanvasRenderer ();
-			cr2 = new NewCanvasRenderer ();
 			
 			// Keep the widget the same size as the canvas
 			PintaCore.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
@@ -119,7 +117,6 @@ namespace Pinta.Gui.Widgets
 			}
 
 			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
-			cr2.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
 
 			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
 				// Draw our 1 px black border
@@ -134,7 +131,7 @@ namespace Pinta.Gui.Widgets
 
 				// Resize each layer and paint it to the screen
 				//foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-				cr2.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location);
+				cr.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location);
 				g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
 				g.Paint ();
 
