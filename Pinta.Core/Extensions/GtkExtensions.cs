@@ -154,6 +154,11 @@ namespace Pinta.Core
 			FileChooserDialog dialog = (FileChooserDialog)sender;
 			Image preview = (Image)dialog.PreviewWidget;
 
+            if (preview.Pixbuf != null)
+            {
+                preview.Pixbuf.Dispose ();
+            }
+
 			try
 			{
 				var pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename);
@@ -167,6 +172,7 @@ namespace Pinta.Core
 				// scale down images that are too large, but don't scale up small images
 				if (pixbuf.Width > MaxPreviewWidth || pixbuf.Height > MaxPreviewHeight)
 				{
+                    pixbuf.Dispose ();
 					pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename, MaxPreviewWidth, MaxPreviewHeight, true);
 				}
 
