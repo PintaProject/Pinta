@@ -36,7 +36,8 @@ namespace Pinta
 		private double opacity;
 		private bool hidden;
 		private string name;
-		
+		private BlendMode blendmode;
+
 		public LayerPropertiesDialog ()
 		{
 			this.Build ();
@@ -46,11 +47,13 @@ namespace Pinta
 			name = PintaCore.Layers.CurrentLayer.Name;
 			hidden = PintaCore.Layers.CurrentLayer.Hidden;
 			opacity = PintaCore.Layers.CurrentLayer.Opacity;
-			
+			blendmode = PintaCore.Layers.CurrentLayer.BlendMode;
+
 			initial_properties = new LayerProperties(
 				name,				
 				hidden,
-				opacity);
+				opacity,
+				blendmode);
 			
 			layerNameEntry.Text = initial_properties.Name;
 			visibilityCheckbox.Active = !initial_properties.Hidden;
@@ -73,7 +76,8 @@ namespace Pinta
 			get {
 				return initial_properties.Opacity != opacity
 					|| initial_properties.Hidden != hidden
-					|| initial_properties.Name != name;
+					|| initial_properties.Name != name
+					|| initial_properties.BlendMode != blendmode;
 			}
 		}
 		
@@ -85,7 +89,7 @@ namespace Pinta
 		
 		public LayerProperties UpdatedLayerProperties { 
 			get {
-				return new LayerProperties (name, hidden, opacity);
+				return new LayerProperties (name, hidden, opacity, blendmode);
 			}
 		}
 		
