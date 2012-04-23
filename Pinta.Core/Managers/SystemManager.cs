@@ -86,6 +86,15 @@ namespace Pinta.Core
 		public RecentData RecentData { get { return recent_data; } }
 		#endregion
 
+        /// <summary>
+        /// Returns a directory for use in a dialog. The last dialog directory is
+        /// returned if it exists, otherwise the default directory is used.
+        /// </summary>
+        public string GetDialogDirectory ()
+        {
+            return Directory.Exists (LastDialogDirectory) ? LastDialogDirectory : DefaultDialogDirectory;
+        }
+
 		public string GetExecutablePathName ()
 		{
 			string executablePathName = System.Environment.GetCommandLineArgs ()[0];

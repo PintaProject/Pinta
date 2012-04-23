@@ -80,7 +80,7 @@ namespace Pinta.Actions
 									       Gtk.Stock.Save, Gtk.ResponseType.Ok);
 
 			fcd.DoOverwriteConfirmation = true;
-			fcd.SetCurrentFolder (PintaCore.System.LastDialogDirectory);
+            fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 			bool hasFile = document.HasFile;

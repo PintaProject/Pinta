@@ -64,7 +64,7 @@ namespace Pinta.Actions
 			fcd.AddFilter (ff2);
 
 			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
-			fcd.SetCurrentFolder (PintaCore.System.LastDialogDirectory);
+            fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 			fcd.SelectMultiple = true;
 
 			fcd.AddImagePreview ();
