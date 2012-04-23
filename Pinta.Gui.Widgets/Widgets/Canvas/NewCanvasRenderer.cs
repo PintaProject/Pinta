@@ -19,6 +19,7 @@ namespace Pinta.Gui.Widgets
 		private Size source_size;
 		private Size destination_size;
 		private Layer scratch_layer;
+		private Layer offset_layer;
 
 		private ScaleFactor scale_factor;
 		private bool generated;
@@ -75,6 +76,22 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
+		private Layer OffsetLayer {
+			get {
+				// Create one if we don't have one
+				if (offset_layer == null)
+					offset_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
+
+				// If we have the wrong size one, dispose it and create the correct size
+				if (offset_layer.Surface.Width != source_size.Width || offset_layer.Surface.Height != source_size.Height) {
+					(offset_layer.Surface as IDisposable).Dispose ();
+					offset_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
+				}
+
+				return offset_layer;
+			}
+		}
+
 		private Layer CreateLivePreviewLayer (Layer original)
 		{
 			var scratch = ScratchLayer;
@@ -101,6 +118,23 @@ namespace Pinta.Gui.Widgets
 			return scratch;
 		}
 
+		private Layer CreateOffsetLayer (Layer original, Point canvas_offset)
+		{
+			var offset = OffsetLayer;
+			offset.Surface.Clear ();
+
+			using (var g = new Cairo.Context (offset.Surface)) {
+				g.SetSourceSurface (original.Surface, canvas_offset.X + (int)original.Offset.X, canvas_offset.Y + (int)original.Offset.Y);
+				g.Paint ();
+			}
+
+			offset.BlendMode = original.BlendMode;
+			offset.Offset = original.Offset;
+			offset.Opacity = original.Opacity;
+
+			return offset;
+		}
+
 		#region Algorithms ported from PDN
 		private unsafe void RenderOneToOne (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
 		{
@@ -112,6 +146,10 @@ namespace Pinta.Gui.Widgets
 				// If we're in LivePreview, substitute current layer with the preview layer
 				if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
 					layer = CreateLivePreviewLayer (layer);
+
+				// If the layer is offset, handle it here
+				if (!layer.Offset.IsEmpty ())
+					layer = CreateOffsetLayer (layer, offset);
 
 				var src = layer.Surface;
 
@@ -181,6 +219,10 @@ namespace Pinta.Gui.Widgets
 				// If we're in LivePreview, substitute current layer with the preview layer
 				if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
 					layer = CreateLivePreviewLayer (layer);
+
+				// If the layer is offset, handle it here
+				if (!layer.Offset.IsEmpty ())
+					layer = CreateOffsetLayer (layer, offset);
 
 				var src = layer.Surface;
 
@@ -254,6 +296,10 @@ namespace Pinta.Gui.Widgets
 				// If we're in LivePreview, substitute current layer with the preview layer
 				if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
 					layer = CreateLivePreviewLayer (layer);
+
+				// If the layer is offset, handle it here
+				if (!layer.Offset.IsEmpty ())
+					layer = CreateOffsetLayer (layer, offset);
 
 				var src = layer.Surface;
 
