@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Mono.Unix;
+using System.IO;
 
 namespace Pinta.Core
 {
@@ -93,6 +94,45 @@ namespace Pinta.Core
 			old_selection_layer = PintaCore.Layers.SelectionLayer.Surface.Clone ();
 			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 			old_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+
+			int len = reader.ReadInt32 ();
+			int width = reader.ReadInt32 ();
+			int height = reader.ReadInt32 ();
+			int stride = reader.ReadInt32 ();
+			old_selection_layer = new ImageSurface (reader.ReadBytes (len), Format.Argb32, width, height, stride);
+
+			old_offset = new PointD (reader.ReadInt32 (), reader.ReadInt32 ());
+
+			len = reader.ReadInt32 ();
+			width = reader.ReadInt32 ();
+			height = reader.ReadInt32 ();
+			stride = reader.ReadInt32 ();
+			old_surface = new ImageSurface (reader.ReadBytes (len), Format.Argb32, width, height, stride);
+		}
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			
+			writer.Write (old_selection_layer.Data.Length);
+			writer.Write (old_selection_layer.Width);
+			writer.Write (old_selection_layer.Height);
+			writer.Write (old_selection_layer.Stride);
+			writer.Write (old_selection_layer.Data, 0, old_selection_layer.Data.Length);
+
+			writer.Write(old_offset.X);
+			writer.Write(old_offset.Y);
+
+			writer.Write (old_surface.Data.Length);
+			writer.Write (old_surface.Width);
+			writer.Write (old_surface.Height);
+			writer.Write (old_surface.Stride);
+			writer.Write (old_surface.Data, 0, old_surface.Data.Length);
 		}
 	}
 }

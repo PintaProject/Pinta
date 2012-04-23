@@ -75,5 +75,20 @@ namespace Pinta.Core
 			old_path = PintaCore.Layers.SelectionPath.Clone ();
 			show_selection = PintaCore.Layers.ShowSelection;
 		}
+
+		public override void LoadInternal (System.IO.BinaryReader reader)
+		{
+			//todo how :Save path?
+			//so disable temporary this save/load
+			/*base.LoadInternal (reader);
+			show_selection = reader.ReadInt32 ();*/
+		}
+		public override void Save (System.IO.BinaryWriter writer)
+		{
+			//so disable temporary this save/load
+			/*base.Save (writer);
+			//writer.Write (Path.);
+			writer.Write (show_selection);*/
+		}
 	}
 }

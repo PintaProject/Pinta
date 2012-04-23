@@ -1,9 +1,9 @@
-﻿// 
+﻿﻿//
 // MovePixelsHistoryItem.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -104,9 +104,21 @@ namespace Pinta.Core
 				layer_index = doc.CurrentLayerIndex;
 				old_surface = doc.CurrentLayer.Surface.Clone ();
 			}
-				
+
 			old_path = PintaCore.Layers.SelectionPath.Clone ();
 			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 		}
+
+		public override void LoadInternal (System.IO.BinaryReader reader)
+		{
+			//base.LoadInternal (reader);
+			//inactive because path is not serialisable
+		}
+		public override void Save (System.IO.BinaryWriter writer)
+		{
+			//base.Save (writer);
+			//inactive because path is not serialisable
+		}
+
 	}
 }

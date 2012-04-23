@@ -199,6 +199,7 @@
     <Compile Include="Managers\PaintBrushManager.cs" />
     <Compile Include="Widgets\MenuButton.cs" />
     <Compile Include="Widgets\ToolBarDropDownButton.cs" />
+    <Compile Include="HistoryItems\ProxyHistoryItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

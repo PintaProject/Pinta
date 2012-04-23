@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
+using Cairo;
 
 namespace Pinta.Core
 {
@@ -60,6 +62,40 @@ namespace Pinta.Core
 		{
 			if (layer != null)
 				(layer.Surface as IDisposable).Dispose ();
+		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+
+			layer_index = reader.ReadInt32 ();
+			bool hidden = reader.ReadBoolean ();
+			string name = reader.ReadString ();
+			PointD offset = new PointD (reader.ReadDouble(), reader.ReadDouble());
+			double opacity = reader.ReadDouble ();
+			int len = reader.ReadInt32 ();
+			int width = reader.ReadInt32 ();
+			int height = reader.ReadInt32 ();
+			int stride = reader.ReadInt32 ();
+			ImageSurface surf = new ImageSurface(reader.ReadBytes (len), Format.Argb32, width, height, stride);
+			layer = new Layer (surf, hidden, opacity, name);
+			layer.Offset = offset;
+		}
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			writer.Write (layer_index);
+			writer.Write (layer.Hidden);
+			writer.Write (layer.Name);
+			writer.Write (layer.Offset.X);
+			writer.Write (layer.Offset.Y);
+			writer.Write (layer.Opacity);
+			writer.Write (layer.Surface.Data.Length);
+			writer.Write (layer.Surface.Width);
+			writer.Write (layer.Surface.Height);
+			writer.Write (layer.Surface.Stride);
+			writer.Write (layer.Surface.Data, 0, layer.Surface.Data.Length);
 		}
 	}
 }

@@ -26,6 +26,8 @@
 
 using System;
 using Gtk;
+using System.IO;
+using System.Linq.Expressions;
 
 namespace Pinta.Core
 {
@@ -63,6 +65,29 @@ namespace Pinta.Core
 
 		public virtual void Redo ()
 		{
+		}
+
+		public virtual void Save (BinaryWriter writer)
+		{
+			writer.Write (this.GetType().FullName);
+		}
+
+		public virtual void LoadInternal (BinaryReader reader)
+		{
+			//No need to save/restore icon, state & text because proxy keep it for us
+		}
+
+		public static BaseHistoryItem Load (BinaryReader reader)
+		{
+			string typeName = reader.ReadString ();
+			Type t = Type.GetType(typeName);
+
+			Expression<Func<BaseHistoryItem>> getHistoryExpression =
+				Expression.Lambda<Func<BaseHistoryItem>>(Expression.New(t));
+			Func<BaseHistoryItem> getHistory = getHistoryExpression.Compile();
+			BaseHistoryItem histo = getHistory ();
+			histo.LoadInternal (reader);
+			return histo;
 		}
 
 		#region IDisposable Members

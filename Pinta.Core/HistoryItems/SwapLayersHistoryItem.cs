@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 
 namespace Pinta.Core
 {
@@ -68,6 +69,20 @@ namespace Pinta.Core
 			PintaCore.Layers.Insert (layer1, l2);
 			
 			PintaCore.Layers.SetCurrentLayer (selected);
+		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+			layer_index_1 = reader.ReadInt32 ();
+			layer_index_2 = reader.ReadInt32 ();
+		}
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			writer.Write (layer_index_1);
+			writer.Write (layer_index_2);
 		}
 	}
 }

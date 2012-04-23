@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Pinta.Core
 {
@@ -71,5 +72,22 @@ namespace Pinta.Core
 			foreach (Layer item in PintaCore.Workspace.ActiveDocument.Layers)
 				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, item.Surface.Clone (), PintaCore.Layers.IndexOf (item)));
 		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+			int count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+				history_stack.Add(BaseHistoryItem.Load(reader));
+		}
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			writer.Write (history_stack.Count);
+			foreach (BaseHistoryItem h in history_stack)
+				h.Save (writer);
+		}
+
 	}
 }

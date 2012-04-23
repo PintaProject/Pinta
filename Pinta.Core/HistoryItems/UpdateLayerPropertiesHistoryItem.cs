@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 
 namespace Pinta.Core
 {
@@ -65,6 +66,26 @@ namespace Pinta.Core
 
 		public override void Dispose ()
 		{
+		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+			layer_index = reader.ReadInt32 ();
+			initial_properties = new LayerProperties (reader.ReadString (), reader.ReadBoolean (), reader.ReadDouble ());
+			updated_properties = new LayerProperties (reader.ReadString (), reader.ReadBoolean (), reader.ReadDouble ());
+		}
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			writer.Write (layer_index);
+			writer.Write (initial_properties.Name);
+			writer.Write (initial_properties.Hidden);
+			writer.Write (initial_properties.Opacity);
+			writer.Write (updated_properties.Name);
+			writer.Write (updated_properties.Hidden);
+			writer.Write (updated_properties.Opacity);
 		}
 	}
 }

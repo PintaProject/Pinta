@@ -26,6 +26,7 @@
 
 using System;
 using Mono.Unix;
+using System.IO;
 
 namespace Pinta.Core
 {
@@ -148,6 +149,20 @@ namespace Pinta.Core
 					PintaCore.Workspace.Invalidate ();
 					break;
 			}
+		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+			type = (InvertType)reader.ReadInt32 ();
+			layer_index = reader.ReadInt32 ();
+		}
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			writer.Write ((int)type);
+			writer.Write (layer_index);
 		}
 	}
 	

@@ -26,6 +26,8 @@
 
 using System;
 using Cairo;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
@@ -76,6 +78,60 @@ namespace Pinta.Core
 		{
 			// Free up native surface
 			(old_surface as IDisposable).Dispose ();
+		}
+
+		public override void LoadInternal (BinaryReader reader)
+		{
+			base.LoadInternal (reader);
+
+			layer_index = reader.ReadInt32 ();
+			int len = reader.ReadInt32 ();
+			Gdk.Rectangle[] rects = new Gdk.Rectangle[len];
+			for (int i = 0; i < len; i++)
+				rects[i] = new Gdk.Rectangle (reader.ReadInt32 (), reader.ReadInt32 (), reader.ReadInt32 (), reader.ReadInt32 ());
+			Gdk.Region roi = Utility.RectanglesToRegion(rects);
+
+			List<PlacedSurface> lst = new List<PlacedSurface> ();
+			len = reader.ReadInt32 ();
+			for (int j = 0; j < len; j++)
+			{
+				int leng = reader.ReadInt32 ();
+				int width = reader.ReadInt32 ();
+				int height = reader.ReadInt32 ();
+				int stride = reader.ReadInt32 ();
+				ImageSurface surf = new ImageSurface (reader.ReadBytes (leng), Format.Argb32, width, height, stride);
+				Gdk.Point p = new Gdk.Point(reader.ReadInt32 (), reader.ReadInt32 ());
+				lst.Add ( new PlacedSurface () {What = surf, Where = p} );
+			}
+			old_surface = new IrregularSurface (lst, roi);
+		}
+		//TODO move code in to irregularsurface/imagesurface (extention)/placedsurface
+
+		public override void Save (BinaryWriter writer)
+		{
+			base.Save (writer);
+			writer.Write (layer_index);
+			Gdk.Rectangle[] rects = old_surface.Region.GetRectangles();
+			writer.Write (rects.Length);
+			foreach (Gdk.Rectangle rect in rects)
+			{
+				writer.Write(rect.X);
+				writer.Write(rect.Y);
+				writer.Write(rect.Width);
+				writer.Write(rect.Height);
+			}
+
+			writer.Write (old_surface.PlacedSurfaces.Count);
+			foreach (PlacedSurface placedsurf in old_surface.PlacedSurfaces)
+			{
+				writer.Write (placedsurf.What.Data.Length);
+				writer.Write (placedsurf.What.Width);
+				writer.Write (placedsurf.What.Height);
+				writer.Write (placedsurf.What.Stride);
+				writer.Write (placedsurf.What.Data, 0, placedsurf.What.Data.Length);
+				writer.Write (placedsurf.Where.X);
+				writer.Write (placedsurf.Where.Y);
+			}
 		}
 
 	}

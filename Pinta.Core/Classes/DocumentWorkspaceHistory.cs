@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using Gtk;
+using System.IO;
 
 namespace Pinta.Core
 {
@@ -34,14 +35,17 @@ namespace Pinta.Core
 	{
 		private Document document;
 		private DocumentWorkspace workspace;
-		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
+		List<ProxyHistoryItem> history = new List<ProxyHistoryItem> ();
 		int historyPointer = -1;
+		FileStream stream;
+		readonly int MemoryStackSize = 1;
 
 		internal DocumentWorkspaceHistory (Document document, DocumentWorkspace workspace)
 		{
 			this.document = document;
 			this.workspace = workspace;
-			ListStore = new ListStore (typeof (BaseHistoryItem));
+			ListStore = new ListStore (typeof (ProxyHistoryItem));
+			stream = File.Open("history.dat", FileMode.Create, FileAccess.ReadWrite);
 		}
 
 		public Gtk.ListStore ListStore { get; private set; }
@@ -58,29 +62,30 @@ namespace Pinta.Core
 					return null;
 			}
 		}
-		
+
 		public void PushNewItem (BaseHistoryItem newItem)
 		{
 			
 			//Remove all old redos starting from the end of the list
 			for (int i = history.Count - 1; i >= 0; i--) {
 			
-				BaseHistoryItem item = history[i];
+				ProxyHistoryItem item = history[i];
 				
 				if (item.State == HistoryItemState.Redo) {
 					history.RemoveAt(i);
 					item.Dispose();
 					//Remove from ListStore
 					ListStore.Remove (ref item.Id);
-					
+					//TODO seek to last cached item
 				} else if (item.State == HistoryItemState.Undo) {
 					break;
 				}
 			}
 		
 			//Add new undo to ListStore
-			newItem.Id = ListStore.AppendValues (newItem);
-			history.Add (newItem);
+			ProxyHistoryItem item2 = new ProxyHistoryItem(newItem);
+			item2.Id = ListStore.AppendValues (item2);
+			history.Add (item2);
 			historyPointer = history.Count - 1;
 			
 			if (newItem.CausesDirty)
@@ -90,7 +95,12 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.Undo.Sensitive = true;
 				CanUndo = true;
 			}
-				
+
+			if (history.Count > MemoryStackSize) {
+				BinaryWriter writer = new BinaryWriter (stream);
+				history[history.Count - MemoryStackSize - 1].Save (writer);
+			}
+
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			CanRedo = false;
 			PintaCore.History.OnHistoryItemAdded (newItem);
@@ -101,7 +111,7 @@ namespace Pinta.Core
 			if (historyPointer < 0) {
 				throw new InvalidOperationException ("Undo stack is empty");
 			} else {
-				BaseHistoryItem item = history[historyPointer];
+				ProxyHistoryItem item = history[historyPointer];
 				item.Undo ();
 				item.State = HistoryItemState.Redo;
 				ListStore.SetValue (item.Id, 0, item);
@@ -126,7 +136,7 @@ namespace Pinta.Core
 				throw new InvalidOperationException ("Redo stack is empty");
 
 			historyPointer++;
-			BaseHistoryItem item = history[historyPointer];
+			ProxyHistoryItem item = history[historyPointer];
 			item.Redo ();
 			item.State = HistoryItemState.Undo;
 			ListStore.SetValue (item.Id, 0, item);
@@ -145,12 +155,17 @@ namespace Pinta.Core
 				CanUndo = true;
 			}
 
+			if (history.Count > MemoryStackSize) {
+				BinaryWriter writer = new BinaryWriter (stream);
+				history[historyPointer - MemoryStackSize].Save(writer);
+			}
+
 			PintaCore.History.OnActionRedone ();
 		}
 		
 		public void Clear ()
 		{
-			history.ForEach (delegate(BaseHistoryItem item) { item.Dispose (); } );
+			history.ForEach (delegate(ProxyHistoryItem item) { item.Dispose (); } );
 			history.Clear();	
 			ListStore.Clear ();	
 			historyPointer = -1;
@@ -158,9 +173,26 @@ namespace Pinta.Core
 			document.IsDirty = false;
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			PintaCore.Actions.Edit.Undo.Sensitive = false;
+
+			stream.Seek (0, SeekOrigin.Begin);
 			
 			CanRedo = false;
 			CanUndo = false;
+
+		}
+
+		public BaseHistoryItem LoadCachedItem (long offset)
+		{
+			BinaryReader reader = new BinaryReader (stream);
+			stream.Seek (offset, System.IO.SeekOrigin.Begin);
+			BaseHistoryItem item = BaseHistoryItem.Load (reader);
+			//I have load data so I can ovewrite this cache
+			// but this will corrupt next item if I overflow the buffer
+			//so seek end for security
+			//seems to not be the issue of corrupted image surface
+			//reader.BaseStream.Seek (offset, System.IO.SeekOrigin.Begin);
+			reader.BaseStream.Seek (0, System.IO.SeekOrigin.End);
+			return item;
 		}
 		
 		public bool CanRedo { get; private set; }

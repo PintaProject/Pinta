@@ -26,6 +26,16 @@ namespace Pinta.Core
 		[NonSerialized]
 		private Region region;
 
+    	public List<PlacedSurface> PlacedSurfaces
+    	{
+    		get {
+    			if (this.disposed)
+    	                {
+    	                    throw new ObjectDisposedException("IrregularSurface");
+    	                }
+    			return placedSurfaces;}
+    	}
+
 		#region Constructors
 		/// <summary>
 		/// Constructs an IrregularSurface by copying the given region-of-interest from an Image.
@@ -72,6 +82,12 @@ namespace Pinta.Core
 			this.placedSurfaces.Add (new PlacedSurface (source, roi));
 			this.region = Region.Rectangle (roi);
 		}
+
+		public IrregularSurface (List<PlacedSurface> lst, Region roi)
+        {
+            this.placedSurfaces = lst;
+            this.region = roi;
+        }
 
 		private IrregularSurface (IrregularSurface cloneMe)
 		{

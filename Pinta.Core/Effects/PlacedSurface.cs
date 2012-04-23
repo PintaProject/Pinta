@@ -29,7 +29,7 @@ namespace Pinta.Core
 			what = ps.What.Clone ();
 		}
 
-		private PlacedSurface ()
+		public PlacedSurface ()
 		{
 		}
 
@@ -53,6 +53,7 @@ namespace Pinta.Core
 
 				return where;
 			}
+            set { where = value;}
 		}
 
 		public ImageSurface What {
@@ -62,6 +63,7 @@ namespace Pinta.Core
 
 				return what;
 			}
+            set { what = value;}
 		}
 
 		public Gdk.Size Size {
