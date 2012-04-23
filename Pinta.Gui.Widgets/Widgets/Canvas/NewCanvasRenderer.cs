@@ -28,12 +28,6 @@ namespace Pinta.Gui.Widgets
 		private int[] s2dLookupX;
 		private int[] s2dLookupY;
 
-		public ScaleFactor ScaleFactor { get {return scale_factor;}}
-		public int[] Dst2SrcLookupX { get {return d2sLookupX;}}
-		public int[] Dst2SrcLookupY { get {return d2sLookupY;}}
-		public int[] Src2DstLookupX { get {return s2dLookupX;}}
-		public int[] Src2DstLookupY { get {return s2dLookupY;}}
-
 		public void Initialize (Size sourceSize, Size destinationSize)
 		{
 			if (sourceSize == source_size && destinationSize == destination_size)
@@ -288,7 +282,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			// If we are at least 200% and grid is requested, draw it
-			if (PintaCore.Actions.View.PixelGrid.Active && ScaleFactor.Ratio <= 0.5d)
+			if (PintaCore.Actions.View.PixelGrid.Active && scale_factor.Ratio <= 0.5d)
 				RenderPixelGrid (dst, offset);
 		}
 
@@ -473,7 +467,7 @@ namespace Pinta.Gui.Widgets
 		}
 		
 		private int[] CreateS2DLookupX(int srcWidth, int dstWidth, ScaleFactor scaleFactor)
-        {
+		{
 			var lookup = new int[srcWidth + 1];
 
 			for (int x = 0; x < lookup.Length; ++x) {
@@ -487,7 +481,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			return lookup;
-        }
+		}
 
 		private int[] CreateS2DLookupY (int srcHeight, int dstHeight, ScaleFactor scaleFactor)
 		{
@@ -505,7 +499,6 @@ namespace Pinta.Gui.Widgets
 
 			return lookup;
 		}
-
 		#endregion
 	}
 }
