@@ -80,7 +80,6 @@
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorPanelWidget.cs" />
     <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
     <Compile Include="Widgets\Canvas\NewCanvasRenderer.cs" />
-    <Compile Include="Widgets\Canvas\GridRenderer.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\ColorPanelWidget.cs" />
     <Compile Include="Widgets\History\HistoryTreeView.cs" />

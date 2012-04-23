@@ -37,13 +37,11 @@ namespace Pinta.Gui.Widgets
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
 		NewCanvasRenderer cr2;
-		GridRenderer gr;
 
 		public PintaCanvas ()
 		{
 			cr = new CanvasRenderer ();
 			cr2 = new NewCanvasRenderer ();
-			gr = new GridRenderer (cr);
 			
 			// Keep the widget the same size as the canvas
 			PintaCore.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
@@ -133,11 +131,10 @@ namespace Pinta.Gui.Widgets
 
 				g.Translate (x, y);
 
-				bool checker = true;
 
 				// Resize each layer and paint it to the screen
 				//foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-				cr2.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location, checker);
+				cr2.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location);
 				g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
 				g.Paint ();
 
@@ -158,15 +155,15 @@ namespace Pinta.Gui.Widgets
 					//        g.Restore ();
 					//}
 
-					checker = false;
+					//checker = false;
 				//}
 
 				// If we are at least 200% and grid is requested, draw it
-				if (PintaCore.Actions.View.PixelGrid.Active && cr.ScaleFactor.Ratio <= 0.5d) {
-					gr.Render (canvas, canvas_bounds.Location);
-					g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
-					g.Paint ();
-				}
+				//if (PintaCore.Actions.View.PixelGrid.Active && cr.ScaleFactor.Ratio <= 0.5d) {
+				//        gr.Render (canvas, canvas_bounds.Location);
+				//        g.SetSourceSurface (canvas, canvas_bounds.X, canvas_bounds.Y);
+				//        g.Paint ();
+				//}
 
 				// Selection outline
 				if (PintaCore.Layers.ShowSelection) {

@@ -286,6 +286,10 @@ namespace Pinta.Gui.Widgets
 				// Only checker the first layer
 				checker = false;
 			}
+
+			// If we are at least 200% and grid is requested, draw it
+			if (PintaCore.Actions.View.PixelGrid.Active && ScaleFactor.Ratio <= 0.5d)
+				RenderPixelGrid (dst, offset);
 		}
 
 		private unsafe void RenderZoomOut (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, Gdk.Size destinationSize)
@@ -380,6 +384,57 @@ namespace Pinta.Gui.Widgets
 
 				// Only checker the first layer
 				checker = false;
+			}
+		}
+
+		private unsafe void RenderPixelGrid (Cairo.ImageSurface dst, Gdk.Point offset)
+		{
+			var blackAndWhite = new ColorBgra[2] { ColorBgra.White, ColorBgra.Black };
+
+			// Draw horizontal lines
+			var dst_ptr = (ColorBgra*)dst.DataPtr; 
+			int dstHeight = dst.Height;
+			int dstWidth = dst.Width;
+			int dstStride = dst.Stride;
+			int sTop = d2sLookupY[offset.Y];
+			int sBottom = d2sLookupY[offset.Y + dstHeight];
+
+			for (int srcY = sTop; srcY <= sBottom; ++srcY) {
+				int dstY = s2dLookupY[srcY];
+				int dstRow = dstY - offset.Y;
+
+				if (dstRow >= 0 && dstRow < dstHeight) {
+					ColorBgra* dstRowPtr = dst.GetRowAddressUnchecked (dst_ptr, dstWidth, dstRow);
+					ColorBgra* dstRowEndPtr = dstRowPtr + dstWidth;
+
+					dstRowPtr += offset.X & 1;
+
+					while (dstRowPtr < dstRowEndPtr) {
+						*dstRowPtr = ColorBgra.Black;
+						dstRowPtr += 2;
+					}
+				}
+			}
+
+			// Draw vertical lines
+			int sLeft = d2sLookupX[offset.X];
+			int sRight = d2sLookupX[offset.X + dstWidth];
+
+			for (int srcX = sLeft; srcX <= sRight; ++srcX) {
+				int dstX = s2dLookupX[srcX];
+				int dstCol = dstX - offset.X;
+
+				if (dstCol >= 0 && dstCol < dstWidth) {
+					byte* dstColPtr = (byte*)dst.GetPointAddress (dstCol, 0);
+					byte* dstColEndPtr = dstColPtr + dstStride * dstHeight;
+
+					dstColPtr += (offset.Y & 1) * dstStride;
+
+					while (dstColPtr < dstColEndPtr) {
+						*((ColorBgra*)dstColPtr) = ColorBgra.Black;
+						dstColPtr += 2 * dstStride;
+					}
+				}
 			}
 		}
 
