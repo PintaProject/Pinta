@@ -8,9 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
 using Gdk;
 using Pinta.Core;
-using System.Collections.Generic;
 
 namespace Pinta.Gui.Widgets
 {
@@ -46,16 +46,16 @@ namespace Pinta.Gui.Widgets
 			generated = false;
 		}
 
-		public void Render (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
+		public void Render (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset)
 		{
 			dst.Flush ();
 		
 			if (scale_factor.Ratio == 1)
-				RenderOneToOne (layers, dst, offset, checker);
+				RenderOneToOne (layers, dst, offset);
 			else if (scale_factor.Ratio < 1)
-				RenderZoomIn (layers, dst, offset, checker);
+				RenderZoomIn (layers, dst, offset);
 			else
-				RenderZoomOut (layers, dst, offset, destination_size, checker);
+				RenderZoomOut (layers, dst, offset, destination_size);
 			
 			dst.MarkDirty ();
 		}
@@ -136,9 +136,10 @@ namespace Pinta.Gui.Widgets
 		}
 
 		#region Algorithms ported from PDN
-		private unsafe void RenderOneToOne (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
+		private unsafe void RenderOneToOne (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset)
 		{
-			checker = true;
+			// The first layer should be blended with the transparent checkerboard
+			var checker = true;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -209,9 +210,10 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private unsafe void RenderZoomIn (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, bool checker)
+		private unsafe void RenderZoomIn (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset)
 		{
-			checker = true;
+			// The first layer should be blended with the transparent checkerboard
+			var checker = true;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -286,9 +288,10 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private unsafe void RenderZoomOut (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, Gdk.Size destinationSize, bool checker)
+		private unsafe void RenderZoomOut (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset, Gdk.Size destinationSize)
 		{
-			checker = true;
+			// The first layer should be blended with the transparent checkerboard
+			var checker = true;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
