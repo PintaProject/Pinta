@@ -45,6 +45,10 @@ namespace Pinta.Core
 		{
 		}
 
+		public SimpleHistoryItem () : base ()
+		{
+		}
+
 		public override void Undo ()
 		{
 			Swap ();

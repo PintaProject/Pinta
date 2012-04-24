@@ -45,7 +45,7 @@ namespace Pinta.Core
 			this.document = document;
 			this.workspace = workspace;
 			ListStore = new ListStore (typeof (ProxyHistoryItem));
-			stream = File.Open("history.dat", FileMode.Create, FileAccess.ReadWrite);
+			stream = File.Open("history.dat", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
 		}
 
 		public Gtk.ListStore ListStore { get; private set; }
