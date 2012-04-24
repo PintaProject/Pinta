@@ -201,7 +201,21 @@ namespace Pinta.Actions
 			// Commit any pending changes
 			PintaCore.Tools.Commit ();
 
-			format.Exporter.Export (document, file);
+			try {
+				format.Exporter.Export (document, file);
+			} catch (GLib.GException e) { // Errors from GDK
+				if (e.Message == "Image too large to be saved as ICO") {
+					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error,
+					ButtonsType.Ok, Catalog.GetString ("ICO files can not be larger than 256 x 256 pixels."));
+					md.Title = Catalog.GetString ("Error");
+
+					md.Run ();
+					md.Destroy ();
+					return false;
+				} else {
+					throw e; // Only catch exceptions we know the reason for
+				}
+			}
 
 			document.Filename = Path.GetFileName (file);
 			document.IsDirty = false;
