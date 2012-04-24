@@ -46,7 +46,7 @@ namespace Pinta.Tools
 			get { return "Tools.RoundedRectangle.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain."); }
+			get { return Catalog.GetString ("Click and drag to draw a rounded rectangle (right click for secondary color). Hold shift to constrain to a square."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.RoundedRectangle.png"), 5, 9); }

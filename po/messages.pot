@@ -504,7 +504,7 @@ msgstr ""
 #: Pinta.Tools/RoundedRectangleTool.cs:50
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain."
+"color). Hold shift to constrain to a square."
 msgstr ""
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
