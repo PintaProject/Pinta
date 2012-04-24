@@ -149,6 +149,13 @@ namespace Pinta.Gui.Widgets
 
 		private void RebuildDocumentList ()
 		{
+            // Ensure that the old image previews are disposed.
+            foreach (object[] row in store)
+            {
+                var imageSurface = (Cairo.ImageSurface)row[0];
+                (imageSurface as IDisposable).Dispose ();
+            }
+
 			store.Clear ();
 			
 			foreach (Document doc in PintaCore.Workspace.OpenDocuments)
