@@ -161,33 +161,32 @@ namespace Pinta.Core
 
 			try
 			{
-				var pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename);
+                Gdk.Pixbuf pixbuf = null;
+                int imageWidth, imageHeight;
+                string filename = dialog.PreviewFilename;
 
-				if (pixbuf == null)
-				{
-					dialog.PreviewWidgetActive = false;
-					return;
-				}
+                var imageInfo = Gdk.Pixbuf.GetFileInfo (filename, out imageWidth, out imageHeight);
 
-				// scale down images that are too large, but don't scale up small images
-				if (pixbuf.Width > MaxPreviewWidth || pixbuf.Height > MaxPreviewHeight)
-				{
-                    pixbuf.Dispose ();
-					pixbuf = new Gdk.Pixbuf (dialog.PreviewFilename, MaxPreviewWidth, MaxPreviewHeight, true);
-				}
+                if (imageInfo == null)
+                {
+                    dialog.PreviewWidgetActive = false;
+                    return;
+                }
 
-				if (pixbuf != null)
-				{
-					// add padding so that small images don't cause the dialog to shrink
-					preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
-					preview.Pixbuf = pixbuf;
-					dialog.PreviewWidgetActive = true;
-				}
-				else
-				{
-					dialog.PreviewWidgetActive = false;
-				}
+                // scale down images that are too large, but don't scale up small images
+                if (imageWidth > MaxPreviewWidth || imageHeight > MaxPreviewHeight)
+                {
+                    pixbuf = new Gdk.Pixbuf (filename, MaxPreviewWidth, MaxPreviewHeight, true);
+                }
+                else
+                {
+                    pixbuf = new Gdk.Pixbuf (filename);
+                }
 
+                // add padding so that small images don't cause the dialog to shrink
+                preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
+                preview.Pixbuf = pixbuf;
+                dialog.PreviewWidgetActive = true;
 			}
 			catch (GLib.GException)
 			{
