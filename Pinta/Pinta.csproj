@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -167,7 +167,6 @@
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
     <Compile Include="DialogHandlers.cs" />
     <Compile Include="Dialogs\LayerPropertiesDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.LayerPropertiesDialog.cs" />
     <Compile Include="Dialogs\ResizeImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />

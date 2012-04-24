@@ -10,7 +10,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -26,6 +28,7 @@ namespace Pinta.Core
 	public sealed partial class UserBlendOps
 	{
 		private static UserBlendOp[] cached_ops;
+		private static Dictionary<string, BlendMode> blend_modes = new Dictionary<string,BlendMode> ();
 
 		static UserBlendOps ()
 		{
@@ -45,6 +48,21 @@ namespace Pinta.Core
 				new ScreenBlendOp (),
 				new XorBlendOp ()
 			};
+
+			blend_modes.Add (Catalog.GetString ("Normal"), BlendMode.Normal);
+			blend_modes.Add (Catalog.GetString ("Multiply"), BlendMode.Multiply);
+			blend_modes.Add (Catalog.GetString ("Additive"), BlendMode.Additive);
+			blend_modes.Add (Catalog.GetString ("Color Burn"), BlendMode.ColorBurn);
+			blend_modes.Add (Catalog.GetString ("Color Dodge"), BlendMode.ColorDodge);
+			blend_modes.Add (Catalog.GetString ("Reflect"), BlendMode.Reflect);
+			blend_modes.Add (Catalog.GetString ("Glow"), BlendMode.Glow);
+			blend_modes.Add (Catalog.GetString ("Overlay"), BlendMode.Overlay);
+			blend_modes.Add (Catalog.GetString ("Difference"), BlendMode.Difference);
+			blend_modes.Add (Catalog.GetString ("Negation"), BlendMode.Negation);
+			blend_modes.Add (Catalog.GetString ("Lighten"), BlendMode.Lighten);
+			blend_modes.Add (Catalog.GetString ("Darken"), BlendMode.Darken);
+			blend_modes.Add (Catalog.GetString ("Screen"), BlendMode.Screen);
+			blend_modes.Add (Catalog.GetString ("Xor"), BlendMode.Xor);
 		}
 
 		private UserBlendOps ()
@@ -99,6 +117,21 @@ namespace Pinta.Core
 				return cached_ops[(int)mode];
 
 			return cached_ops[(int)mode].CreateWithOpacity ((int)(opacity * 255));
+		}
+
+		public static IEnumerable<string> GetAllBlendModeNames ()
+		{
+			return blend_modes.Keys;
+		}
+
+		public static BlendMode GetBlendModeByName (string name)
+		{
+			return blend_modes[name];
+		}
+
+		public static string GetBlendModeName (BlendMode mode)
+		{
+			return blend_modes.Where (p => p.Value == mode).First ().Key;
 		}
 	}
 }
