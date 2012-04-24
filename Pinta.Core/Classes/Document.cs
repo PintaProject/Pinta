@@ -243,6 +243,8 @@ namespace Pinta.Core
 
 			if (selection_path != null)
 				(selection_path as IDisposable).Dispose ();
+
+            Workspace.History.Clear ();
 		}
 
 		public Context CreateClippedContext ()
