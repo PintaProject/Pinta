@@ -206,7 +206,7 @@ namespace Pinta.Actions
 			} catch (GLib.GException e) { // Errors from GDK
 				if (e.Message == "Image too large to be saved as ICO") {
 					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error,
-					ButtonsType.Ok, Catalog.GetString ("ICO files can not be larger than 256 x 256 pixels."));
+					ButtonsType.Ok, Catalog.GetString ("ICO files can not be larger than 255 x 255 pixels."));
 					md.Title = Catalog.GetString ("Error");
 
 					md.Run ();
