@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Mono.Unix;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Pinta.Core
 {
@@ -104,7 +105,10 @@ namespace Pinta.Core
 			int width = reader.ReadInt32 ();
 			int height = reader.ReadInt32 ();
 			int stride = reader.ReadInt32 ();
-			old_selection_layer = new ImageSurface (reader.ReadBytes (len), Format.Argb32, width, height, stride);
+			byte[] datas = reader.ReadBytes (len);
+			IntPtr ptr = Marshal.AllocHGlobal (datas.Length * sizeof(byte));
+			Marshal.Copy (datas, 0, ptr, len);
+			old_selection_layer = new ImageSurface (ptr, Format.Argb32, width, height, stride);
 
 			old_offset = new PointD (reader.ReadInt32 (), reader.ReadInt32 ());
 
@@ -112,7 +116,10 @@ namespace Pinta.Core
 			width = reader.ReadInt32 ();
 			height = reader.ReadInt32 ();
 			stride = reader.ReadInt32 ();
-			old_surface = new ImageSurface (reader.ReadBytes (len), Format.Argb32, width, height, stride);
+			datas = reader.ReadBytes (len);
+			IntPtr ptr2 = Marshal.AllocHGlobal (datas.Length * sizeof(byte));
+			Marshal.Copy (datas, 0, ptr2, len);
+			old_surface = new ImageSurface (ptr2, Format.Argb32, width, height, stride);
 		}
 
 		public override void Save (BinaryWriter writer)

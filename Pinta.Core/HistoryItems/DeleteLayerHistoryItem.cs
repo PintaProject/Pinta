@@ -27,6 +27,7 @@
 using System;
 using System.IO;
 using Cairo;
+using System.Runtime.InteropServices;
 
 namespace Pinta.Core
 {
@@ -77,7 +78,10 @@ namespace Pinta.Core
 			int width = reader.ReadInt32 ();
 			int height = reader.ReadInt32 ();
 			int stride = reader.ReadInt32 ();
-			ImageSurface surf = new ImageSurface(reader.ReadBytes (len), Format.Argb32, width, height, stride);
+			byte[] datas = reader.ReadBytes (len);
+			IntPtr ptr = Marshal.AllocHGlobal (datas.Length * sizeof(byte));
+			Marshal.Copy (datas, 0, ptr, len);
+			ImageSurface surf = new ImageSurface(ptr, Format.Argb32, width, height, stride);
 			layer = new Layer (surf, hidden, opacity, name);
 			layer.Offset = offset;
 		}

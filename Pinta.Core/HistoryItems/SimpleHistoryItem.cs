@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Pinta.Core
 {
@@ -100,7 +101,9 @@ namespace Pinta.Core
 			int stride = reader.ReadInt32 ();
 			Format eformat = (Format)reader.ReadInt32 ();
 			byte[] datas = reader.ReadBytes (len);
-			old_surface = new ImageSurface (datas, eformat, width, height, stride);
+			IntPtr ptr = Marshal.AllocHGlobal (datas.Length * sizeof(byte));
+			Marshal.Copy (datas, 0, ptr, len);
+			old_surface = new ImageSurface (ptr, eformat, width, height, stride);
 			layer_index = reader.ReadInt32 ();
 		}
 		
