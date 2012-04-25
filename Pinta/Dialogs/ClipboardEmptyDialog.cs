@@ -33,8 +33,8 @@ namespace Pinta.Dialogs
 	{
 		public static void Show ()
 		{
-			var primary = Catalog.GetString ("Paste cancelled");
-			var secondary = Catalog.GetString ("The clipboard does not contain an image");
+			var primary = Catalog.GetString ("Image cannot be pasted");
+			var secondary = Catalog.GetString ("The clipboard does not contain an image.");
 			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
 			markup = string.Format (markup, primary, secondary);
 

@@ -845,14 +845,6 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: Pinta/DialogHandlers.cs:480
-msgid "Paste cancelled"
-msgstr ""
-
-#: Pinta/DialogHandlers.cs:481
-msgid "The clipboard does not contain an image"
-msgstr ""
-
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
 msgstr ""
@@ -875,6 +867,14 @@ msgstr ""
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+msgid "Image cannot be pasted"
+msgstr ""
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+msgid "The clipboard does not contain an image."
 msgstr ""
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
