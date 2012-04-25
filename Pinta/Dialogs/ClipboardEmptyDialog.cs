@@ -1,10 +1,10 @@
 ﻿// 
-// PasteIntoNewImageAction.cs
+// ClipboardEmptyDialog.cs
 //  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Cameron White <cameronwhite91@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2012 Cameron White
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,41 +24,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Gtk;
 using Mono.Unix;
-using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Dialogs
 {
-	class PasteIntoNewImageAction : IActionHandler
+	public static class ClipboardEmptyDialog
 	{
-		#region IActionHandler Members
-		public void Initialize ()
+		public static void Show ()
 		{
-			PintaCore.Actions.Edit.PasteIntoNewImage.Activated += Activated;
-		}
+			var primary = Catalog.GetString ("Paste cancelled");
+			var secondary = Catalog.GetString ("The clipboard does not contain an image");
+			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+			markup = string.Format (markup, primary, secondary);
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.Edit.PasteIntoNewImage.Activated -= Activated;
-		}
-		#endregion
+			var md = new MessageDialog (Pinta.Core.PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+						    MessageType.Error, ButtonsType.None, true,
+						    markup);
 
-		private void Activated (object sender, EventArgs e)
-		{
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			md.AddButton (Stock.Ok, ResponseType.Yes);
 
-			if (cb.WaitIsImageAvailable ()) {
-				Gdk.Pixbuf image = cb.WaitForImage ();
-				Gdk.Size size = new Gdk.Size (image.Width, image.Height);
-
-				PintaCore.Workspace.NewDocument (size, true);
-				PintaCore.Actions.Edit.Paste.Activate ();
-				PintaCore.Actions.Edit.Deselect.Activate ();
-			} else {
-				Pinta.Dialogs.ClipboardEmptyDialog.Show ();
-			}
+			md.Run ();
+			md.Destroy ();
 		}
 	}
 }

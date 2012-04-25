@@ -50,6 +50,7 @@ namespace Pinta
 			action_handlers.Add (new SaveDocumentImplmentationAction ());
 
 			// Edit
+			action_handlers.Add (new PasteAction ());
 			action_handlers.Add (new PasteIntoNewLayerAction ());
 			action_handlers.Add (new PasteIntoNewImageAction ());
 			action_handlers.Add (new ResizePaletteAction ());

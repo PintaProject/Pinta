@@ -51,7 +51,6 @@ namespace Pinta.Core
 		public Gtk.Action ResizePalette { get; private set; }
 		
 		private string lastPaletteDir = null;
-		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 		
 		public EditActions ()
 		{
@@ -139,7 +138,6 @@ namespace Pinta.Core
 			EraseSelection.Activated += HandlePintaCoreActionsEditEraseSelectionActivated;
 			SelectAll.Activated += HandlePintaCoreActionsEditSelectAllActivated;
 			FillSelection.Activated += HandlePintaCoreActionsEditFillSelectionActivated;
-			Paste.Activated += HandlerPintaCoreActionsEditPasteActivated;
 			Copy.Activated += HandlerPintaCoreActionsEditCopyActivated;
 			Undo.Activated += HandlerPintaCoreActionsEditUndoActivated;
 			Redo.Activated += HandlerPintaCoreActionsEditRedoActivated;
@@ -226,73 +224,6 @@ namespace Pinta.Core
 
 			doc.History.PushNewItem (hist);
 			doc.Workspace.Invalidate ();
-		}
-
-		private void HandlerPintaCoreActionsEditPasteActivated (object sender, EventArgs e)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			PintaCore.Tools.Commit ();
-
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			
-			Path p;
-
-			// Don't dispose this, as we're going to give it to the history
-			Gdk.Pixbuf image = cb.WaitForImage ();
-
-			if (image == null)
-				return;
-
-			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
-
-			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
-			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
-			{
-				string primary = Catalog.GetString ("Image larger than canvas");
-				string secondary = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
-				string message = string.Format (markup, primary, secondary);
-
-				var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
-				enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);
-				enlarge_dialog.AddButton (Catalog.GetString ("Don't change canvas size"), ResponseType.Reject);
-				enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
-				enlarge_dialog.DefaultResponse = ResponseType.Accept;
-
-				ResponseType response = (ResponseType)enlarge_dialog.Run ();
-				enlarge_dialog.Destroy ();
-
-				if (response == ResponseType.Accept)
-				{
-					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height, Pinta.Core.Anchor.Center);
-					PintaCore.Actions.View.UpdateCanvasScale ();
-				}
-				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
-				{
-					return;
-				}
-			}
-
-			// Copy the paste to the temp layer
-			doc.CreateSelectionLayer ();
-			doc.ShowSelectionLayer = true;
-
-			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
-				g.DrawPixbuf (image, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
-			}
-
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
-			
-			Path old_path = doc.SelectionPath;
-			bool old_show_selection = doc.ShowSelection;
-
-			doc.SelectionPath = p;
-			doc.ShowSelection = true;
-
-			doc.Workspace.Invalidate ();
-
-			doc.History.PushNewItem (new PasteHistoryItem (image, old_path, old_show_selection));
 		}
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)

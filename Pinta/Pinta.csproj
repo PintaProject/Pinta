@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -101,6 +101,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Edit\PasteAction.cs" />
     <Compile Include="Actions\Edit\ResizePaletteAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewLayerAction.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Actions\Window\SaveAllDocumentsAction.cs" />
     <Compile Include="Dialogs\AboutPintaTabPage.cs" />
     <Compile Include="Dialogs\AboutDialog.cs" />
+    <Compile Include="Dialogs\ClipboardEmptyDialog.cs" />
     <Compile Include="Dialogs\ErrorDialog.cs" />
     <Compile Include="Dialogs\JpegCompressionDialog.cs" />
     <Compile Include="Dialogs\SpinButtonEntryDialog.cs" />

@@ -67,25 +67,8 @@ namespace Pinta.Actions
 				AddLayerHistoryItem hist = new AddLayerHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
 				PintaCore.History.PushNewItem (hist);
 			} else {
-				ClipboardEmptyError ();
+				Pinta.Dialogs.ClipboardEmptyDialog.Show ();
 			}
-		}
-
-		private void ClipboardEmptyError ()
-		{
-			var primary = Catalog.GetString ("Paste cancelled");
-			var secondary = Catalog.GetString ("The clipboard does not contain an image");
-			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
-			markup = string.Format (markup, primary, secondary);
-
-			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-						    MessageType.Error, ButtonsType.None, true,
-						    markup);
-
-			md.AddButton (Stock.Ok, ResponseType.Yes);
-
-			md.Run ();
-			md.Destroy ();
 		}
 	}
 }
