@@ -51,6 +51,7 @@ namespace Pinta.Core
 		public Gtk.Action ResizePalette { get; private set; }
 		
 		private string lastPaletteDir = null;
+		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 		
 		public EditActions ()
 		{
@@ -248,7 +249,9 @@ namespace Pinta.Core
 			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
 			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
 			{
-				string message = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+				string primary = Catalog.GetString ("Image larger than canvas");
+				string secondary = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+				string message = string.Format (markup, primary, secondary);
 
 				var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
 				enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);

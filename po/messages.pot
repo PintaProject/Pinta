@@ -1616,17 +1616,21 @@ msgstr ""
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:251
+#: Pinta.Core/Actions/EditActions.cs:252
+msgid "Image larger than canvas"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:253
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:254
+#: Pinta.Core/Actions/EditActions.cs:257
 msgid "Expand canvas"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:255
+#: Pinta.Core/Actions/EditActions.cs:258
 msgid "Don't change canvas size"
 msgstr ""
 
