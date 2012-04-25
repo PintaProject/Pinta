@@ -31,22 +31,25 @@ using System.IO;
 
 namespace Pinta.Core
 {
-	public class DocumentWorkspaceHistory
+	public class DocumentWorkspaceHistory : IDisposable
 	{
 		private Document document;
 		private DocumentWorkspace workspace;
 		List<ProxyHistoryItem> history = new List<ProxyHistoryItem> ();
 		int historyPointer = -1;
 		FileStream stream;
-		readonly int MemoryStackSize = 1;
+		readonly int MemoryStackSize = 5;
 
 		internal DocumentWorkspaceHistory (Document document, DocumentWorkspace workspace)
 		{
 			this.document = document;
 			this.workspace = workspace;
 			ListStore = new ListStore (typeof (ProxyHistoryItem));
-			stream = File.Open("history.dat", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+			HistoryTempFile = Path.GetTempFileName ();
+			stream = File.Open (HistoryTempFile, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
 		}
+
+		private string HistoryTempFile { get; set; }
 
 		public Gtk.ListStore ListStore { get; private set; }
 		
@@ -194,7 +197,14 @@ namespace Pinta.Core
 			reader.BaseStream.Seek (0, System.IO.SeekOrigin.End);
 			return item;
 		}
-		
+
+		#region IDisposable implementation
+		public void Dispose ()
+		{
+			stream.Dispose ();
+			File.Delete (HistoryTempFile);
+		}
+		#endregion
 		public bool CanRedo { get; private set; }
 		public bool CanUndo { get; private set; }
 	}
