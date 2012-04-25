@@ -1608,6 +1608,10 @@ msgstr ""
 msgid "Cannot save read only file."
 msgstr ""
 
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:208
+msgid "Image too large"
+msgstr ""
+
 #: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:209
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
