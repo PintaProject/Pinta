@@ -247,17 +247,24 @@ namespace Pinta.Actions
 			return response == (int)ResponseType.Ok;
 		}
 
-        private void OnFilterChanged(object o, GLib.NotifyArgs args)
-        {
-            FileChooserDialog fcd = (FileChooserDialog)o;
-    
-            // find the FormatDescriptor
-            FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
+		private void OnFilterChanged (object o, GLib.NotifyArgs args)
+		{
+			FileChooserDialog fcd = (FileChooserDialog)o;
 
-            // adjust the filename
-            var p = fcd.Filename;
-            p = Path.ChangeExtension(Path.GetFileName(p), format_desc.Extensions[0]);
-            fcd.CurrentName = p;
-        }
+			// Ensure that the file filter is never blank.
+			if (fcd.Filter == null)
+			{
+				fcd.Filter = PintaCore.System.ImageFormats.GetDefaultSaveFormat ().Filter;
+				return;
+			}
+
+			// find the FormatDescriptor
+			FormatDescriptor format_desc = PintaCore.System.ImageFormats.Formats.Single (f => f.Filter == fcd.Filter);
+
+			// adjust the filename
+			var p = fcd.Filename;
+			p = Path.ChangeExtension (Path.GetFileName (p), format_desc.Extensions[0]);
+			fcd.CurrentName = p;
+		}
 	}
 }
