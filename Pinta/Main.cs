@@ -86,32 +86,33 @@ namespace Pinta
 			
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
-				
-			if (extra.Count > 0) {
-				// Not sure what this does for Mac, so I'm not touching it
-				if (PintaCore.System.OperatingSystem == OS.Mac) {
-					string arg = args[0];
 
-					if (args[0].StartsWith ("-psn_")) {
-						if (args.Length > 1)
-							arg = args[1];
-						else
-							arg = null;
-					}
-				
-					if (!string.IsNullOrEmpty (arg)) {
-						PintaCore.Workspace.OpenFile (arg);
-					}
-				} else {
-					foreach (var file in extra)
-						PintaCore.Workspace.OpenFile (file);
-				}				
-			} else {
+			OpenFilesFromCommandLine (extra);
+			
+			Application.Run ();
+		}
+
+		private static void OpenFilesFromCommandLine (List<string> extra)
+		{
+			// Ignore the process serial number parameter on Mac OS X
+			if (PintaCore.System.OperatingSystem == OS.Mac && extra.Count > 0)
+			{
+				if (extra[0].StartsWith ("-psn_"))
+				{
+					extra.RemoveAt (0);
+				}
+			}
+
+			if (extra.Count > 0)
+			{
+				foreach (var file in extra)
+					PintaCore.Workspace.OpenFile (file);
+			}
+			else
+			{
 				// Create a blank document
 				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), false);
 			}
-			
-			Application.Run ();
 		}
 
 		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
