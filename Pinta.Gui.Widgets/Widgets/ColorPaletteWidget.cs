@@ -59,7 +59,12 @@ namespace Pinta.Gui.Widgets
 		
 		private void Palette_ColorChanged (object sender, EventArgs e)
 		{
-			GdkWindow.Invalidate ();
+			// Color change events may be received while the widget is minimized,
+			// so we only call Invalidate() if the widget is shown.
+			if (IsRealized)
+			{
+				GdkWindow.Invalidate ();
+			}
 		}
 
 		protected override bool OnButtonPressEvent (Gdk.EventButton ev)
