@@ -26,6 +26,7 @@
 
 using System;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta
 {
@@ -121,7 +122,7 @@ namespace Pinta
 			this.image884 = new global::Gtk.Image ();
 			this.image884.Name = "image884";
 			this.image884.Yalign = 0f;
-			this.image884.Pixbuf = Gtk.IconTheme.Default.LoadIcon ("gtk-dialog-error", 32, Gtk.IconLookupFlags.UseBuiltin);
+			this.image884.Pixbuf = PintaCore.Resources.GetIcon (Stock.DialogError, 32);
 			this.hbox1.Add (this.image884);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.image884]));
 			w2.Position = 0;

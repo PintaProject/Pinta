@@ -36,7 +36,7 @@ namespace Pinta
 		{
 			this.Build ();
 
-			this.Icon = Gtk.IconTheme.Default.LoadIcon ("gtk-new", 16, IconLookupFlags.UseBuiltin);
+			this.Icon = PintaCore.Resources.GetIcon (Stock.New, 16);
 			DefaultResponse = ResponseType.Ok;
 			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 
