@@ -175,7 +175,7 @@ namespace Pinta
 			var box2 = new HBox ();
 
 			box2.Spacing = 6;
-			box2.PackStart (new Label (Mono.Unix.Catalog.GetString ("Blend Mode:")), false, false, 0);
+			box2.PackStart (new Label (Mono.Unix.Catalog.GetString ("Blend Mode") + ":"), false, false, 0);
 
 			blendComboBox = new ComboBox (UserBlendOps.GetAllBlendModeNames ().ToArray ());
 			box2.PackStart (blendComboBox);

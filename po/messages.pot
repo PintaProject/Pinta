@@ -1626,3 +1626,52 @@ msgstr ""
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
 msgid "Rotate / Zoom Layer"
 msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:53
+msgid "Multiply"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:54
+msgid "Additive"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:55
+msgid "Color Burn"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:56
+msgid "Color Dodge"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:57
+msgid "Reflect"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:59
+msgid "Overlay"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:60
+msgid "Difference"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:61
+msgid "Negation"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:62
+msgid "Lighten"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:63
+msgid "Darken"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:64
+msgid "Screen"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:65
+msgid "Xor"
+msgstr ""
+
