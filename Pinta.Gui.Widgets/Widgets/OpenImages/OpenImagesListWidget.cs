@@ -45,6 +45,10 @@ namespace Pinta.Gui.Widgets
 		private const int PreviewColumnWidth = 70;
 		private const int CloseColumnWidth = 30;
 
+		private const int FilePreviewColumnIndex = 0;
+		private const int FileNameColumnIndex = 1;
+		private const int FileCloseColumnIndex = 2;
+
 		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon (Stock.Close);
 
 		public OpenImagesListWidget ()
@@ -60,17 +64,17 @@ namespace Pinta.Gui.Widgets
 			tree.Selection.SelectFunction = HandleDocumentSelected;
 
 			var file_preview_cell = new CellRendererSurface (PreviewWidth, PreviewHeight);
-			file_preview_column = new TreeViewColumn ("File Preview", file_preview_cell, "surface", 0);
+			file_preview_column = new TreeViewColumn ("File Preview", file_preview_cell, "surface", FilePreviewColumnIndex);
 			file_preview_column.Sizing = TreeViewColumnSizing.Fixed;
 			file_preview_column.FixedWidth = PreviewColumnWidth;
 			tree.AppendColumn (file_preview_column);
 
-			file_name_column = new TreeViewColumn ("File Name", new CellRendererText (), "text", 1);
+			file_name_column = new TreeViewColumn ("File Name", new CellRendererText (), "text", FileNameColumnIndex);
 			file_name_column.Expand = true;
 			tree.AppendColumn (file_name_column);
 
 			file_close_cell = new CellRendererPixbuf ();
-			file_close_column = new TreeViewColumn ("Close File", file_close_cell, "pixbuf", 2);
+			file_close_column = new TreeViewColumn ("Close File", file_close_cell, "pixbuf", FileCloseColumnIndex);
 			file_close_column.Sizing = TreeViewColumnSizing.Fixed;
 			file_close_column.FixedWidth = CloseColumnWidth;
 			tree.AppendColumn (file_close_column);
@@ -93,10 +97,24 @@ namespace Pinta.Gui.Widgets
 			PintaCore.History.ActionUndone += HandleDocumentModified;
 		}
 
+		/// <summary>
+		/// Update the preview image for a modified document.
+		/// </summary>
 		void HandleDocumentModified (object sender, EventArgs e)
 		{
-			RebuildDocumentList ();
-			UpdateSelectedDocument ();
+			int docIndex = PintaCore.Workspace.ActiveDocumentIndex;
+
+			if (docIndex != -1)
+			{
+				TreeIter iter;
+				if (store.GetIter (out iter, new TreePath (new int[] { docIndex })))
+				{
+					var surface = (Cairo.ImageSurface)store.GetValue (iter, FilePreviewColumnIndex);
+					(surface as IDisposable).Dispose ();
+
+					store.SetValue (iter, FilePreviewColumnIndex, PintaCore.Workspace.ActiveDocument.GetFlattenedImage ());
+				}
+			}
 		}
 
 		/// <summary>
@@ -149,15 +167,15 @@ namespace Pinta.Gui.Widgets
 
 		private void RebuildDocumentList ()
 		{
-            // Ensure that the old image previews are disposed.
-            foreach (object[] row in store)
-            {
-                var imageSurface = (Cairo.ImageSurface)row[0];
-                (imageSurface as IDisposable).Dispose ();
-            }
+			// Ensure that the old image previews are disposed.
+			foreach (object[] row in store)
+			{
+				var imageSurface = (Cairo.ImageSurface)row[FilePreviewColumnIndex];
+				(imageSurface as IDisposable).Dispose ();
+			}
 
 			store.Clear ();
-			
+
 			foreach (Document doc in PintaCore.Workspace.OpenDocuments)
 			{
 				doc.Renamed -= HandleDocRenamed;
