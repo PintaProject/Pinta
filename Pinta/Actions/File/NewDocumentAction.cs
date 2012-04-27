@@ -47,12 +47,8 @@ namespace Pinta.Actions
 		{
 			NewImageDialog dialog = new NewImageDialog ();
 
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (cb.WaitIsImageAvailable ()) {
-				Gdk.Pixbuf image = cb.WaitForImage ();
-				dialog.NewImageWidth = image.Width;
-				dialog.NewImageHeight = image.Height;
-			} else {
+			if (!TryUseClipboardImageSize (dialog))
+			{
 				dialog.NewImageWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
 				dialog.NewImageHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
 			}
@@ -70,6 +66,32 @@ namespace Pinta.Actions
 			}
 
 			dialog.Destroy ();
+		}
+
+		/// <summary>
+		/// Sets the dialog to use the clipboard image's dimensions, if possible.
+		/// </summary>
+		/// <returns>True if an image was on the clipboard, false otherwise.</returns>
+		private static bool TryUseClipboardImageSize (NewImageDialog dialog)
+		{
+			bool clipboardUsed = false;
+
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			if (cb.WaitIsImageAvailable ())
+			{
+				Gdk.Pixbuf image = cb.WaitForImage ();
+				if (image != null)
+				{
+					clipboardUsed = true;
+					dialog.NewImageWidth = image.Width;
+					dialog.NewImageHeight = image.Height;
+					image.Dispose ();
+				}
+			}
+
+			cb.Dispose ();
+
+			return clipboardUsed;
 		}
 	}
 }
