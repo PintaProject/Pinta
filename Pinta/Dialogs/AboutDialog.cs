@@ -59,20 +59,19 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-			"Adam Doppelt",
-			"Adolfo Jayme Barrientos",
 			"Cameron White",
-			"Ciprian Mustiata",
-			"Felix Schmutz",
-			"Mikhail Makarov",
-			"Olivier Dufour",
+			"Jonathan Pobst",
 			"Robert Nordan"
 		};
 
 		string[] oldAuthors = new string[] {
 			"Aaron Bockover",
+			"Adam Doppelt",
+			"Adolfo Jayme Barrientos",
 			"Anirudh Sanjeev",
 			"Cameron White",
+			"Ciprian Mustiata",
+			"Felix Schmutz",
 			"Greg Lowe",
 			"Hanh Pham",
 			"James Gifford",
@@ -88,6 +87,7 @@ namespace Pinta
 			"Marco Rolappe",
 			"Martin Geier",
 			"Mathias Fussenegger",
+			"Mikhail Makarov",
 			"Obinou Conseil",
 			"Olivier Dufour",
 			"Richard Cohn",
