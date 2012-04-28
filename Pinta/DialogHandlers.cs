@@ -54,6 +54,7 @@ namespace Pinta
 			action_handlers.Add (new PasteIntoNewLayerAction ());
 			action_handlers.Add (new PasteIntoNewImageAction ());
 			action_handlers.Add (new ResizePaletteAction ());
+			action_handlers.Add (new AddinManagerAction ());
 
 			// Image
 			action_handlers.Add (new ResizeImageAction ());
@@ -72,7 +73,6 @@ namespace Pinta
 
 			// Help
 			action_handlers.Add (new AboutDialogAction ());
-			action_handlers.Add (new ExtensionManagerAction ());
 
 			// Initialize each action handler
 			foreach (var action in action_handlers)

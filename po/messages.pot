@@ -1646,3 +1646,7 @@ msgstr ""
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
 msgid "Layer Hidden"
 msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:85
+msgid "Add-in Manager"
+msgstr ""

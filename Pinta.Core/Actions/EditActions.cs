@@ -49,6 +49,7 @@ namespace Pinta.Core
 		public Gtk.Action SavePalette { get; private set; }
 		public Gtk.Action ResetPalette { get; private set; }
 		public Gtk.Action ResizePalette { get; private set; }
+		public Gtk.Action AddinManager { get; private set; }
 		
 		private string lastPaletteDir = null;
 		
@@ -60,6 +61,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.FillSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.FillSelection.png")));
 			fact.Add ("Menu.Edit.InvertSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.InvertSelection.png")));
 			fact.Add ("Menu.Edit.SelectAll.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.SelectAll.png")));
+			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
 			fact.AddDefault ();
 			
 			Undo = new Gtk.Action ("Undo", Catalog.GetString ("Undo"), null, Stock.Undo);
@@ -79,6 +81,8 @@ namespace Pinta.Core
 			SavePalette = new Gtk.Action ("SavePalette", Catalog.GetString ("Save As..."), null, Stock.Save);
 			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("Reset to Default"), null, Stock.RevertToSaved);
 			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+
+			AddinManager = new Gtk.Action ("AddinManager", Catalog.GetString ("Add-in Manager"), null, "Menu.Edit.Addins.png");
 			
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
@@ -124,6 +128,9 @@ namespace Pinta.Core
 			palette_menu.Append (SavePalette.CreateMenuItem ());
 			palette_menu.Append (ResetPalette.CreateMenuItem ());
 			palette_menu.Append (ResizePalette.CreateMenuItem ());
+
+			menu.AppendSeparator ();
+			menu.Append (AddinManager.CreateMenuItem ());
 		}
 
 		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)

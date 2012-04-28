@@ -25,24 +25,22 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
-using Mono.Unix;
-using Pinta.Core;
 using Mono.Addins.Gui;
+using Pinta.Core;
 
 namespace Pinta.Actions
 {
-	class ExtensionManagerAction : IActionHandler
+	class AddinManagerAction : IActionHandler
 	{
 		#region IActionHandler Members
 		public void Initialize ()
 		{
-			PintaCore.Actions.Help.ExtensionManager.Activated += Activated;
+			PintaCore.Actions.Edit.AddinManager.Activated += Activated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.Help.ExtensionManager.Activated -= Activated;
+			PintaCore.Actions.Edit.AddinManager.Activated -= Activated;
 		}
 		#endregion
 
