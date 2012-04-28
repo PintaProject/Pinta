@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2012-01-31 07:01+0000\n"
+"PO-Revision-Date: 2012-04-28 07:44+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-01 18:16+0000\n"
-"X-Generator: Launchpad (build 15032)\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
+"X-Launchpad-Export-Date: 2012-04-28 16:20+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
 msgid "Auto Level"
@@ -335,8 +337,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold shift to constrain to a "
 "square."
 msgstr ""
-"Kliknite in vlecite za izris izbire pravokotnika. Pritisnite Shift, da "
-"omejite na kvadrat."
+"Kliknite in vlecite za izris izbire pravokotnika. Držite Shift, da omejite "
+"na kvadrat."
 
 #: Pinta.Tools/CloneStampTool.cs:43
 msgid "Clone Stamp"
@@ -471,8 +473,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
-"Levi klik, da rišeš z osnovno barvo, desni klik, da rišeš s pomožno barvo. "
-"Pritisni tipko Shift za zamah do kota."
+"Levi klik, da rišete z osnovno barvo, desni klik, da rišete s pomožno barvo. "
+"Držite Shift za zamah po kotih."
 
 #: Pinta.Tools/EraserTool.cs:45
 msgid "Eraser"
@@ -487,7 +489,7 @@ msgstr ""
 
 #: Pinta.Tools/PanTool.cs:38
 msgid "Pan"
-msgstr "Posoda"
+msgstr "Pomik"
 
 #: Pinta.Tools/PanTool.cs:44
 msgid "Click and drag to navigate image."
@@ -525,10 +527,10 @@ msgstr "Zaobljen pravokotnik"
 #: Pinta.Tools/RoundedRectangleTool.cs:50
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain."
+"color). Hold shift to constrain to a square."
 msgstr ""
-"Kliknite in vlecite za slikanje zaokroženega pravokotnika (desni klik za "
-"pomožno barvo). Držite Shift za omejitev."
+"Kliknite in povlecite, da narišete zaobljen pravokotnik. Držite Shift, da "
+"omejite na kvadrat."
 
 #: Pinta.Tools/RoundedRectangleTool.cs:83
 msgid "Radius"
@@ -872,17 +874,10 @@ msgstr "Odpri slikovno datoteko"
 msgid "Image files"
 msgstr "Datoteke slik"
 
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:528
 #: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
 msgid "All files"
 msgstr "Vse datoteke"
-
-#: Pinta/DialogHandlers.cs:480
-msgid "Paste cancelled"
-msgstr "Prilepljanje preklicano"
-
-#: Pinta/DialogHandlers.cs:481
-msgid "The clipboard does not contain an image"
-msgstr "Odložišče ne vsebuje slike"
 
 #: Pinta/DialogHandlers.cs:514
 msgid "Save Image File"
@@ -892,6 +887,7 @@ msgstr "Shrani slikovno datoteko"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta ne podpira shranjevanje slike v to obliko datoteke."
 
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:23
 #: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
 #: Pinta.Core/Actions/EditActions.cs:347
 msgid "Error"
@@ -909,6 +905,14 @@ msgid ""
 msgstr ""
 "Datoteka že obstaja v \"{1}\". Zamenjava bo prepisala obstoječo vsebino."
 
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+msgid "Image cannot be pasted"
+msgstr "Slike ni mogoče prilepiti"
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+msgid "The clipboard does not contain an image."
+msgstr "Odložišče ne vsebuje slike"
+
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "JPEG kakovost"
@@ -921,6 +925,8 @@ msgstr "Kakovost: "
 msgid "Title"
 msgstr "Naslov"
 
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:290
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:143
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 msgid "Version"
@@ -944,7 +950,8 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Andrej Znidarsic https://launchpad.net/~andrej.znidarsic\n"
 "  Fitoschido https://launchpad.net/~fitoschido\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  grofaty https://launchpad.net/~grofaty"
 
 #: Pinta/Dialogs/AboutDialog.cs:123
 msgid "Translated by:"
@@ -1649,17 +1656,29 @@ msgstr "Slike"
 msgid "Cannot save read only file."
 msgstr "Ne morem shraniti datoteke za branje"
 
-#: Pinta.Core/Actions/EditActions.cs:251
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:208
+msgid "Image too large"
+msgstr "Slika je prevelika"
+
+#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:209
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "Datoteke ICO ne morejo biti večje od 255 x 255 točk."
+
+#: Pinta.Core/Actions/EditActions.cs:252
+msgid "Image larger than canvas"
+msgstr "Slika je večja od platna"
+
+#: Pinta.Core/Actions/EditActions.cs:253
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr "Prilepljena slika je večja od velikosti platna. Kaj želite storiti?"
 
-#: Pinta.Core/Actions/EditActions.cs:254
+#: Pinta.Core/Actions/EditActions.cs:257
 msgid "Expand canvas"
 msgstr "Razširi platno"
 
-#: Pinta.Core/Actions/EditActions.cs:255
+#: Pinta.Core/Actions/EditActions.cs:258
 msgid "Don't change canvas size"
 msgstr "Ne spremeni velikosti platna"
 
@@ -1667,3 +1686,319 @@ msgstr "Ne spremeni velikosti platna"
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
 msgid "Rotate / Zoom Layer"
 msgstr "Zavrti / Približaj plast"
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
+msgid "Layer Shown"
+msgstr "Plast prikazana"
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
+msgid "Layer Hidden"
+msgstr "Plast skrita"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:21
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:50
+#: Pinta.Core/Actions/EditActions.cs:85
+msgid "Add-in Manager"
+msgstr "Upravljalnik vstavkov"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
+msgid ""
+"Multiple selection:\n"
+"\n"
+msgstr ""
+"Večkratna izbira\n"
+"\n"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
+msgid "Enable"
+msgstr "Vključi"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
+msgid "Disable"
+msgstr "Izključi"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
+msgid "No selection"
+msgstr "Brez izbire"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
+msgid "Available in repository:"
+msgstr "Na voljo v skladišču"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
+msgid "Update available"
+msgstr "Na voljo je posodobitev"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
+msgid "This add-in can't be loaded due to missing dependencies"
+msgstr "Ta vstavek se ne more naložiti zaradi manjkajočih odvisnosti"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
+#, csharp-format
+msgid "Required: {0} v{1}, found v{2}"
+msgstr "Zahtevano {0} v{1}, najdeno v{2}"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
+#, csharp-format
+msgid "Missing: {0} v{1}"
+msgstr "Manjka: {0} v{1}"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
+msgid "Installed version"
+msgstr "Nameščena različica"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
+msgid "Repository version"
+msgstr "Različica skladišča"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
+msgid "Download size"
+msgstr "Prenesena velikost"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
+msgid "The following depedencies required by this add-in are not available:"
+msgstr "Sledeče odvisnosti zahtevane z vstavkom niso na voljo:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
+msgid "Installation cancelled"
+msgstr "Namestitev je bila preklicana"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
+msgid "Some of the required add-ins were not found"
+msgstr "Ne najdem nekaterih zahtevanih vstavkov"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
+msgid "Installation failed"
+msgstr "Namestitev je spodletela"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
+msgid "Installed"
+msgstr "Nameščeno"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+msgid "Updates"
+msgstr "Posodobitve"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+msgid "Gallery"
+msgstr "Galerija"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
+msgid "All repositories"
+msgstr "Vsa skladišča"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
+msgid "Manage Repositories..."
+msgstr "Upravljanje skladišč ..."
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
+#, csharp-format
+msgid "{0} update available"
+msgid_plural "{0} updates available"
+msgstr[0] "{0} posodobitev je na voljo"
+msgstr[1] "{0} posodobitev je na voljo"
+msgstr[2] "{0} posodobitvi sta na voljo"
+msgstr[3] "{0} posodobitve so na voljo"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
+msgid "Updating repository"
+msgstr "Osvežujem skladišče"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
+msgid "Install Add-in Package"
+msgstr "Namesti paket dodatkov"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
+msgid "Add-in packages"
+msgstr "Paketi dodatkov"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
+msgid "No add-ins found"
+msgstr "Vstavkov ni bilo mogoče najti"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
+msgid "Add-in"
+msgstr "Vstavek"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
+msgid "Other"
+msgstr "Drugo"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+msgid "Uninstall"
+msgstr "Odstrani"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+msgid "The following packages will be uninstalled:"
+msgstr "Sledeči paketi bodo odstranjeni:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+msgid ""
+"There are other add-ins that depend on the previous ones which will also be "
+"uninstalled:"
+msgstr ""
+"Obstajajo še drugi vstavki, ki so odvisni od prejšnjih, in bodo prav tako "
+"odstranjeni:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+msgid ""
+"The selected add-ins can't be installed because there are dependency "
+"conflicts."
+msgstr ""
+"Obstoječi vstavki ne morejo biti nameščeni, ker obstajajo neskladnosti v "
+"odvisnosti."
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+msgid "The following packages will be installed:"
+msgstr "Nameščeni bodo sledeči paketi:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+msgid " (in user directory)"
+msgstr " (v uporabnikovi mapi)"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+msgid "The following packages need to be uninstalled:"
+msgstr "Odstranjeni bodo sledeči paketi:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
+msgid "The following dependencies could not be resolved:"
+msgstr "Ni bilo zadoščeno sledečim odvisnostim:"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
+msgid "Are you sure you want to cancel the installation?"
+msgstr "Ali ste prepričani, da želite preklicati namestitev?"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
+msgid "Installing Add-ins"
+msgstr "Nameščam vstavke"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
+msgid "The installation failed!"
+msgstr "Namestitev je spodletela!"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
+msgid "The installation has completed with warnings."
+msgstr "Namestitev je zaključena z opozorili."
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
+msgid "Uninstalling Add-ins"
+msgstr "Odstranjujem vstavke"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
+msgid "The uninstallation failed!"
+msgstr "Odstranjevanje namestitve je spodletelo!"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
+msgid "The uninstallation has completed with warnings."
+msgstr "Odstranjevanje namestitve je bilo zaključeno z opozorili."
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
+msgid "Registering repository"
+msgstr "Vpisovanje skladišča"
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
+#, csharp-format
+msgid "Exception occurred: {0}"
+msgstr "Prišlo je do izjemne napake: {0}"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
+msgid "More information"
+msgstr "Več podrobnosti"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+msgid "Install..."
+msgstr "Namesti ..."
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
+msgid "Update"
+msgstr "Posodobitev"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
+msgid "_Uninstall..."
+msgstr "_Odstrani ..."
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
+msgid "Additional extensions are required to perform this operation."
+msgstr "Za izvajanje dejanja so zahtevane dodatne razširitve."
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
+msgid "The following add-ins will be installed:"
+msgstr "Nameščeni bodo naslednji vstavki:"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
+msgid "No updates found"
+msgstr "Ne najdem posodobitev"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
+msgid "Refresh"
+msgstr "Osveži"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
+msgid "Update All"
+msgstr "Posodobi vse"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
+msgid "Repository:"
+msgstr "Skladišče:"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+msgid "Install from file..."
+msgstr "Namesti iz datoteke ..."
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+msgid "Details"
+msgstr "Podrobnosti"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+msgid "Install"
+msgstr "Namesti"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
+msgid "Add-in Repository Management"
+msgstr "Upravljanje skladišč dodatkov"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
+msgid "Add New Repository"
+msgstr "Dodajanje novega skladišča"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
+msgid "Select the location of the repository you want to register:"
+msgstr "Izberite mesto skladišča za vpis:"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
+msgid "Register an on-line repository"
+msgstr "Vpis spletnega odlagališča"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
+msgid "Url:"
+msgstr "Naslov:"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
+msgid "Register a local repository"
+msgstr "Vpis krajevnega skladišča"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
+msgid "Path:"
+msgstr "Pot:"
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
+msgid "Browse..."
+msgstr "Brskanje ..."
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
+msgid "Progress"
+msgstr "Napredek"
+
+#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
+#, csharp-format
+msgid "(provided by {0})"
+msgstr "(ponudnik {0})"
