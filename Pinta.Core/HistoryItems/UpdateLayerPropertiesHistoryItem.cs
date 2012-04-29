@@ -53,6 +53,7 @@ namespace Pinta.Core
 			layer.Opacity = initial_properties.Opacity;
 			layer.Hidden = initial_properties.Hidden;
 			layer.Name = initial_properties.Name;
+			layer.BlendMode = initial_properties.BlendMode;
 		}
 
 		public override void Redo ()
@@ -61,6 +62,7 @@ namespace Pinta.Core
 			layer.Opacity = updated_properties.Opacity;
 			layer.Hidden = updated_properties.Hidden;
 			layer.Name = updated_properties.Name;
+			layer.BlendMode = updated_properties.BlendMode;
 		}
 
 		public override void Dispose ()

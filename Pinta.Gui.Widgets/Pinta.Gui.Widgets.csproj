@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -79,7 +79,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorPanelWidget.cs" />
     <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
-    <Compile Include="Widgets\Canvas\GridRenderer.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\ColorPanelWidget.cs" />
     <Compile Include="Widgets\History\HistoryTreeView.cs" />
