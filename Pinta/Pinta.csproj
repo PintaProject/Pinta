@@ -169,7 +169,6 @@
     <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
     <Compile Include="DialogHandlers.cs" />
     <Compile Include="Dialogs\LayerPropertiesDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.LayerPropertiesDialog.cs" />
     <Compile Include="Dialogs\ResizeImageDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />

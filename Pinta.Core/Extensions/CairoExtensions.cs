@@ -1406,5 +1406,10 @@ namespace Pinta.Core
 		{
 			return new Gdk.Point ((int)point.X, (int)point.Y);
 		}
+
+		public static bool IsEmpty (this PointD point)
+		{
+			return point.X == 0 && point.Y == 0;
+		}
 	}
 }

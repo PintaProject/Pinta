@@ -37,7 +37,8 @@ namespace Pinta.Core
 		private double opacity;
 		private bool hidden;
 		private string name;
-		
+		private BlendMode blend_mode;
+
 		public Layer () : this (null)
 		{
 		}
@@ -54,6 +55,7 @@ namespace Pinta.Core
 			this.hidden = hidden;
 			this.opacity = opacity;
 			this.name = name;			
+			this.blend_mode = BlendMode.Normal;
 		}
 		
 		public ImageSurface Surface { get; set; }
@@ -63,7 +65,8 @@ namespace Pinta.Core
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";
 		public static readonly string NameProperty = "Name";		
-		
+		public static readonly string BlendModeProperty = "BlendMode";
+
 		public double Opacity {
 			get { return opacity; }
 			set { if (opacity != value) SetValue (OpacityProperty, ref opacity, value); }
@@ -79,6 +82,11 @@ namespace Pinta.Core
 			set { if (name != value) SetValue (NameProperty, ref name, value); }
 		}				
 			
+		public BlendMode BlendMode {
+			get { return blend_mode; }
+			set { if (blend_mode != value) SetValue (BlendModeProperty, ref blend_mode, value); }
+		}				
+		
 		public void Clear ()
 		{
 			Surface.Clear ();

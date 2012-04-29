@@ -94,7 +94,8 @@ namespace Pinta.Core
 					doc.Insert (layer, 0);
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
-					
+					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
+
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
 						using (Pixbuf pb = new Pixbuf (fs)) {
 							using (Context g = new Context (layer.Surface)) {
@@ -155,6 +156,7 @@ namespace Pinta.Core
 				writer.WriteStartElement ("layer");
 				writer.WriteAttributeString ("opacity", layers[i].Hidden ? "0" : string.Format (GetFormat (), "{0:0.00}", layers[i].Opacity));
 				writer.WriteAttributeString ("name", layers[i].Name);
+				writer.WriteAttributeString ("composite-op", BlendModeToStandard (layers[i].BlendMode));
 				writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
 				writer.WriteEndElement ();
 			}
@@ -203,6 +205,78 @@ namespace Pinta.Core
 			(thumb as IDisposable).Dispose();
 
 			stream.Close ();
+		}
+
+		private string BlendModeToStandard (BlendMode mode)
+		{
+			switch (mode) {
+				case BlendMode.Normal:
+				default:
+					return "svg:src-over";
+				case BlendMode.Multiply:
+					return "svg:multiply";
+				case BlendMode.Additive:
+					return "svg:plus";
+				case BlendMode.ColorBurn:
+					return "svg:color-burn";
+				case BlendMode.ColorDodge:
+					return "svg:color-dodge";
+				case BlendMode.Reflect:
+					return "pinta-reflect";
+				case BlendMode.Glow:
+					return "pinta-glow";
+				case BlendMode.Overlay:
+					return "svg:overlay";
+				case BlendMode.Difference:
+					return "svg:difference";
+				case BlendMode.Negation:
+					return "pinta-negation";
+				case BlendMode.Lighten:
+					return "svg:lighten";
+				case BlendMode.Darken:
+					return "svg:darken";
+				case BlendMode.Screen:
+					return "svg:screen";
+				case BlendMode.Xor:
+					return "svg:xor";
+			}
+		}
+
+		private BlendMode StandardToBlendMode (string mode)
+		{
+			switch (mode) {				
+				case "svg:src-over":				
+					return BlendMode.Normal;
+				case "svg:multiply":
+					return BlendMode.Multiply;
+				case "svg:plus":
+					return BlendMode.Additive;
+				case "svg:color-burn":
+					return BlendMode.ColorBurn;
+				case "svg:color-dodge":
+					return BlendMode.ColorDodge;
+				case "pinta-reflect":
+					return BlendMode.Reflect;
+				case "pinta-glow":
+					return BlendMode.Glow;
+				case "svg:overlay":
+					return BlendMode.Overlay;
+				case "svg:difference":
+					return BlendMode.Difference;
+				case "pinta-negation":
+					return BlendMode.Negation;
+				case "svg:lighten":
+					return BlendMode.Lighten;
+				case "svg:darken":
+					return BlendMode.Darken;
+				case "svg:screen":
+					return BlendMode.Screen;
+				case "svg:xor":
+					return BlendMode.Xor;
+				default:
+					Console.WriteLine ("Unrecognized composite-op: {0}, using Normal.", mode);
+					return BlendMode.Normal;
+			}
 		}
 	}
 }
