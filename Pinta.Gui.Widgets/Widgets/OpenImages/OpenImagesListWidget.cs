@@ -34,6 +34,7 @@ namespace Pinta.Gui.Widgets
 	{
 		private TreeView tree;
 		private ListStore store;
+		private CanvasRenderer canvas_renderer;
 
 		private CellRendererPixbuf file_close_cell;
 		private TreeViewColumn file_name_column;
@@ -56,6 +57,8 @@ namespace Pinta.Gui.Widgets
 			CanFocus = false;
 			SetSizeRequest (200, 200);
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+
+			canvas_renderer = new CanvasRenderer ();
 
 			tree = new TreeView ();
 			tree.HeadersVisible = false;
@@ -112,7 +115,7 @@ namespace Pinta.Gui.Widgets
 					var surface = (Cairo.ImageSurface)store.GetValue (iter, FilePreviewColumnIndex);
 					(surface as IDisposable).Dispose ();
 
-					store.SetValue (iter, FilePreviewColumnIndex, PintaCore.Workspace.ActiveDocument.GetFlattenedImage ());
+					store.SetValue (iter, FilePreviewColumnIndex, CreateImagePreview (PintaCore.Workspace.ActiveDocument));
 				}
 			}
 		}
@@ -180,8 +183,20 @@ namespace Pinta.Gui.Widgets
 			{
 				doc.Renamed -= HandleDocRenamed;
 				doc.Renamed += HandleDocRenamed;
-				store.AppendValues (doc.GetFlattenedImage (), doc.Filename, close_icon);
+
+				store.AppendValues (CreateImagePreview (doc), doc.Filename, close_icon);
 			}
+		}
+
+		/// <summary>
+		/// Creates a thumbnail image preview of a document.
+		/// </summary>
+		private Cairo.ImageSurface CreateImagePreview (Document doc)
+		{
+			var surface = new Cairo.ImageSurface (Cairo.Format.Argb32, PreviewWidth, PreviewHeight);
+			canvas_renderer.Initialize (doc.ImageSize, new Gdk.Size (PreviewWidth, PreviewHeight));
+			canvas_renderer.Render (doc.GetLayersToPaint (), surface, Gdk.Point.Zero);
+			return surface;
 		}
 
 		/// <summary>
