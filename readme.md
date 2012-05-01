@@ -28,6 +28,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 
 - You can get technical help on the [Pinta Google Group](http://groups.google.com/group/pinta)
 - You can report bugs on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
+- You can make suggestions on the [Future Ideas Page](http://pinta.uservoice.com/forums/105955-general)
 - You can help translate Pinta to your native language on [Launchpad translations](https://translations.launchpad.net/pinta)
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta)
 - You can get help in #pinta on irc.gnome.org.
