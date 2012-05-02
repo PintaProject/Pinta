@@ -270,6 +270,9 @@ namespace Pinta
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 
 			switch (ruler_metric) {
+				case MetricType.Pixels:
+					PintaCore.Actions.View.Pixels.Activate ();
+					break;
 				case MetricType.Centimeters:
 					PintaCore.Actions.View.Centimeters.Activate ();
 					break;
