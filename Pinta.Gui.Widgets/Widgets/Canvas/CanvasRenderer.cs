@@ -18,7 +18,6 @@ namespace Pinta.Gui.Widgets
 	{
 		private Size source_size;
 		private Size destination_size;
-		private Layer scratch_layer;
 		private Layer offset_layer;
 
 		private ScaleFactor scale_factor;
@@ -54,22 +53,6 @@ namespace Pinta.Gui.Widgets
 			dst.MarkDirty ();
 		}
 
-		private Layer ScratchLayer {
-			get {
-				// Create one if we don't have one
-				if (scratch_layer == null)
-					scratch_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
-
-				// If we have the wrong size one, dispose it and create the correct size
-				if (scratch_layer.Surface.Width != source_size.Width || scratch_layer.Surface.Height != source_size.Height) {
-					(scratch_layer.Surface as IDisposable).Dispose ();
-					scratch_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
-				}
-
-				return scratch_layer;
-			}
-		}
-
 		private Layer OffsetLayer {
 			get {
 				// Create one if we don't have one
@@ -88,28 +71,14 @@ namespace Pinta.Gui.Widgets
 
 		private Layer CreateLivePreviewLayer (Layer original)
 		{
-			var scratch = ScratchLayer;
-			scratch.Surface.Clear ();
+			var preview_layer = new Layer (PintaCore.LivePreview.LivePreviewSurface);
 
-			using (var g = new Cairo.Context (scratch.Surface)) {
-				g.SetSource (original.Surface);
-				g.Paint ();
+			preview_layer.BlendMode = original.BlendMode;
+			preview_layer.Offset = original.Offset;
+			preview_layer.Opacity = original.Opacity;
+			preview_layer.Hidden = original.Hidden;
 
-				g.Save ();
-
-				g.AppendPath (PintaCore.Layers.SelectionPath);
-				g.Clip ();
-				g.SetSource (PintaCore.LivePreview.LivePreviewSurface);
-				g.Paint ();
-
-				g.Restore ();
-			}
-
-			scratch.BlendMode = original.BlendMode;
-			scratch.Offset = original.Offset;
-			scratch.Opacity = original.Opacity;
-
-			return scratch;
+			return preview_layer;
 		}
 
 		private Layer CreateOffsetLayer (Layer original, Point canvas_offset)
