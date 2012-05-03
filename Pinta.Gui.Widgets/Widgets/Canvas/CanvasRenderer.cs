@@ -16,6 +16,8 @@ namespace Pinta.Gui.Widgets
 {
 	class CanvasRenderer
 	{
+		private static CheckerBoardOperation checker_op = new CheckerBoardOperation ();
+
 		private Size source_size;
 		private Size destination_size;
 		private Layer offset_layer;
@@ -143,24 +145,10 @@ namespace Pinta.Gui.Widgets
 
 					while (dstCol < dstColEnd) {
 						// Blend it over the checkerboard background
-						if (checker) {
-							int b = srcRowPtr->B;
-							int g = srcRowPtr->G;
-							int r = srcRowPtr->R;
-							int a = srcRowPtr->A;
-
-							int v = (((dstCol ^ checkerY) & 8) << 3) + 191;
-							a = a + (a >> 7);
-							int vmia = v * (256 - a);
-
-							r = ((r * a) + vmia) >> 8;
-							g = ((g * a) + vmia) >> 8;
-							b = ((b * a) + vmia) >> 8;
-
-							dstRowPtr->Bgra = (uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)255 << 24);
-						} else {
+						if (checker)
+							*dstRowPtr = checker_op.Apply (*srcRowPtr, dstCol, checkerY);
+						else
 							*dstRowPtr = blend_op.Apply (*dstRowPtr, *srcRowPtr);
-						}
 					
 						++dstRowPtr;
 						++srcRowPtr;
@@ -220,27 +208,12 @@ namespace Pinta.Gui.Widgets
 					for (int dstCol = 0; dstCol < dst_width; ++dstCol) {
 						int nnX = dstCol + offset.X;
 						int srcX = d2sLookupX[nnX];
-					
-						if (checker) {
-							ColorBgra src2 = *(srcRow + srcX);
-							int b = src2.B;
-							int g = src2.G;
-							int r = src2.R;
-							int a = src2.A;
 
-							// Blend it over the checkerboard background
-							int v = (((dstCol + offset.X) ^ (dstRow + offset.Y)) & 8) * 8 + 191;
-							a = a + (a >> 7);
-							int vmia = v * (256 - a);
-
-							r = ((r * a) + vmia) >> 8;
-							g = ((g * a) + vmia) >> 8;
-							b = ((b * a) + vmia) >> 8;
-
-							dstPtr->Bgra = (uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)255 << 24);
-						} else {
+						// Blend it over the checkerboard background
+						if (checker)
+							*dstPtr = checker_op.Apply (*(srcRow + srcX), dstCol + offset.X, dstRow + offset.Y);
+						else
 							*dstPtr = blend_op.Apply (*dstPtr, *(srcRow + srcX));
-						}
 
 						++dstPtr;
 					}
@@ -326,20 +299,11 @@ namespace Pinta.Gui.Widgets
 						int b = (2 + p1->B + p2->B + p3->B + p4->B) >> 2;
 						int a = (2 + p1->A + p2->A + p3->A + p4->A) >> 2;
 
-						if (checker) {
-							// Blend it over the checkerboard background
-							int v = ((checkerX ^ checkerY) & 8) * 8 + 191;
-							a = a + (a >> 7);
-							int vmia = v * (256 - a);
-
-							r = ((r * a) + vmia) >> 8;
-							g = ((g * a) + vmia) >> 8;
-							b = ((b * a) + vmia) >> 8;
-
-							dstPtr->Bgra = (uint)b + ((uint)g << 8) + ((uint)r << 16) + 0xff000000;
-						} else {
+						// Blend it over the checkerboard background
+						if (checker)
+							*dstPtr = checker_op.Apply (ColorBgra.FromUInt32 ((uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24)), checkerX, checkerY);
+						else
 							*dstPtr = blend_op.Apply (*dstPtr, ColorBgra.FromUInt32 ((uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24)));
-						}
 					
 						++dstPtr;
 					}
