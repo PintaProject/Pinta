@@ -83,6 +83,7 @@
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />
+    <Compile Include="PixelOperations\CheckerBoardOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />
     <Compile Include="Classes\BaseExtension.cs" />
