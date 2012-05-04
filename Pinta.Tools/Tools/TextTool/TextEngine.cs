@@ -239,7 +239,6 @@ namespace Pinta.Tools
 		{
 			if (selectionRelativeIndex != 0) {
 				DeleteSelection ();
-				Recalculate ();
 				return;
 			}
 
@@ -272,7 +271,6 @@ namespace Pinta.Tools
 		{
 			if (selectionRelativeIndex != 0) {
 				DeleteSelection ();
-				Recalculate ();
 				return;
 			}
 
@@ -490,6 +488,12 @@ namespace Pinta.Tools
 				clipboard.Clear ();
 		}
 
+		public void PerformCut (Gtk.Clipboard clipboard)
+		{
+			PerformCopy (clipboard);
+			DeleteSelection ();
+		}
+
 		public void PerformPaste (Gtk.Clipboard clipboard)
 		{
 			string txt = string.Empty;
@@ -601,10 +605,13 @@ namespace Pinta.Tools
 		{
 			StringBuilder strbld = new StringBuilder ();
 			ForeachLine (startLine, startPos, len, (currentLinePos, strpos, endpos) =>{
-			    if (endpos - strpos > 0)
-			        strbld.AppendLine(lines[currentLinePos].Substring (strpos, endpos - strpos));
+				if (endpos - strpos > 0)
+					strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
+				else if (endpos == strpos)
+					strbld.AppendLine ();
 			});
-			return 	strbld.ToString ();
+			strbld.Remove (strbld.Length - 1, 1);
+			return strbld.ToString ();
 		}
 
 		private void DeleteSelection ()
@@ -614,30 +621,35 @@ namespace Pinta.Tools
 			} else if (selectionRelativeIndex < 0) {
 				Position p = IndexToPosition (PositionToIndex (new Position (linePos, textPos)) + selectionRelativeIndex);
 				DeleteText (p.Offset, p.Line, -selectionRelativeIndex);
+				textPos = p.Offset;
+				linePos = p.Line;
 			}
+			selectionRelativeIndex = 0;
 		}
 
 		private void DeleteText (int startPos, int startLine, int len)
 		{
 			int TextPosLenght = len;
 			int curlinepos = startLine;
-			int startpos = textPos;
-			if (textPos + len > lines[startLine].Length) {
+			int startposition = startPos;
+			if (startposition + len > lines[startLine].Length) {
 				TextPosLenght -= lines[startLine].Length - startPos;
-				lines[startLine] = lines[startLine].Substring (0, textPos);
+				lines[startLine] = lines[startLine].Substring (0, startposition);
 				curlinepos++;
-				startpos = 0;
+				startposition = 0;
 			}
 
-			while (TextPosLenght > lines[curlinepos].Length) {
+			while ((TextPosLenght != 0) && (TextPosLenght > lines[curlinepos].Length)) {
 				TextPosLenght -= lines[curlinepos].Length + 1;
 				lines.RemoveAt (curlinepos);
+				startposition = 0;
 			}
 			if (TextPosLenght != 0) {
-				if ( startLine == curlinepos) {
-					lines[startLine] = lines[startLine].Substring (0, textPos) + lines[curlinepos].Substring (startpos + TextPosLenght);
+				if (startLine == curlinepos) {
+					lines[startLine] = lines[startLine].Substring (0, startposition) + lines[curlinepos].Substring (startposition + TextPosLenght);
 				} else {
-					lines[startLine] = lines[startLine].Substring (0, textPos) + lines[curlinepos].Substring (startpos + TextPosLenght - 1);
+					//lines[startLine] = lines[startLine].Substring (0, startposition) + lines[curlinepos].Substring (startposition + TextPosLenght - 1);
+					lines[startLine] += lines[curlinepos].Substring (startposition + TextPosLenght - 1);
 					lines.RemoveAt (curlinepos);
 				}
 			}

@@ -146,6 +146,11 @@ namespace Pinta.Core
 			return false;
 		}
 
+		public virtual bool TryHandleCut (Clipboard cb)
+		{
+			return false;
+		}
+
 		public virtual bool TryHandleCopy (Clipboard cb)
 		{
 			return false;

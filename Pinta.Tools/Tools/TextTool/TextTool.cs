@@ -691,7 +691,7 @@ namespace Pinta.Tools
 				// Show selection if on tool layer
 				if (useToolLayer) {
 					// Selected Text
-					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.2);
+					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
 					foreach (Rectangle rect in engine.SelectionRectangles)
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
@@ -768,6 +768,15 @@ namespace Pinta.Tools
 				return false;
 			}
 			engine.PerformCopy (cb);
+			return true;
+		}
+
+		public override bool TryHandleCut (Clipboard cb)
+		{
+			if (engine.EditMode == EditingMode.NotEditing) {
+				return false;
+			}
+			engine.PerformCut (cb);
 			return true;
 		}
 
