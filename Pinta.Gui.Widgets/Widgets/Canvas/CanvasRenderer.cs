@@ -16,8 +16,6 @@ namespace Pinta.Gui.Widgets
 {
 	class CanvasRenderer
 	{
-		private static CheckerBoardOperation checker_op = new CheckerBoardOperation ();
-
 		private Size source_size;
 		private Size destination_size;
 		private Layer offset_layer;
@@ -105,6 +103,7 @@ namespace Pinta.Gui.Widgets
 		{
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
+			CheckerBoardOperation checker_op = null;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -122,6 +121,9 @@ namespace Pinta.Gui.Widgets
 				// Get the blend mode for this layer and opacity
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
 				
+				if (checker)
+					checker_op = new CheckerBoardOperation (layer.Opacity);
+
 				// Figure out where our source and destination intersect
 				var srcRect = new Gdk.Rectangle (offset, dst.GetBounds ().Size);
 				srcRect.Intersect (src.GetBounds ());
@@ -165,6 +167,7 @@ namespace Pinta.Gui.Widgets
 		{
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
+			CheckerBoardOperation checker_op = null;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -181,6 +184,9 @@ namespace Pinta.Gui.Widgets
 
 				// Get the blend mode for this layer and opacity
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
+
+				if (checker)
+					checker_op = new CheckerBoardOperation (layer.Opacity);
 				
 				ColorBgra* src_ptr = (ColorBgra*)src.DataPtr;
 				ColorBgra* dst_ptr = (ColorBgra*)dst.DataPtr;
@@ -232,6 +238,7 @@ namespace Pinta.Gui.Widgets
 		{
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
+			CheckerBoardOperation checker_op = null;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -248,7 +255,10 @@ namespace Pinta.Gui.Widgets
 
 				// Get the blend mode for this layer and opacity
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
-				
+
+				if (checker)
+					checker_op = new CheckerBoardOperation (layer.Opacity);
+
 				const int fpShift = 12;
 				const int fpFactor = (1 << fpShift);
 
