@@ -750,6 +750,19 @@ namespace Pinta.Tools
 			old_bounds = r;
 		}
 		#endregion
+		#region undo
+
+		public override bool TryHandleUndo ()
+		{
+			if (engine.EditMode == EditingMode.NotEditing) {
+				return false;
+			}
+			// commit an history item to let the undo action undo text history item
+			StopEditing ();
+			return false;
+		}
+
+		#endregion
 		#region Copy/Paste
 
 		public override bool TryHandlePaste (Clipboard cb)

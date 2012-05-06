@@ -51,7 +51,7 @@ namespace Pinta.Actions
 		private void Activated (object sender, EventArgs e)
 		{
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (PintaCore.Tools.CurrentTool.TryHandlePaste(cb))
+			if (PintaCore.Tools.CurrentTool.TryHandlePaste (cb))
 				return;
 
 			Document doc = PintaCore.Workspace.ActiveDocument;

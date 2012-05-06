@@ -156,6 +156,16 @@ namespace Pinta.Core
 			return false;
 		}
 
+		public virtual bool TryHandleUndo ()
+		{
+			return false;
+		}
+
+		public virtual bool TryHandleRedo ()
+		{
+			return false;
+		}
+
 		#endregion
 
 		#region Protected Methods
