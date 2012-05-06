@@ -48,6 +48,7 @@ namespace Pinta.Effects
 			PintaCore.Effects.RegisterEffect (new ReduceNoiseEffect ());
 			PintaCore.Effects.RegisterEffect (new ReliefEffect ());
 			PintaCore.Effects.RegisterEffect (new SharpenEffect ());
+			PintaCore.Effects.RegisterEffect (new SoftenPortraitEffect ());
 			PintaCore.Effects.RegisterEffect (new TileEffect ());
 			PintaCore.Effects.RegisterEffect (new TwistEffect ());
 			PintaCore.Effects.RegisterEffect (new UnfocusEffect ());
