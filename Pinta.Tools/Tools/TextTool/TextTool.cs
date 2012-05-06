@@ -554,27 +554,27 @@ namespace Pinta.Tools
 						break;
 
 					case Gdk.Key.Left:
-						engine.PerformLeft ((modifier & Gdk.ModifierType.ControlMask) != 0);
+						engine.PerformLeft ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Right:
-						engine.PerformRight ((modifier & Gdk.ModifierType.ControlMask) != 0);
+						engine.PerformRight ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Up:
-						engine.PerformUp ();
+						engine.PerformUp ((modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Down:
-						engine.PerformDown ();
+						engine.PerformDown ((modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Home:
-						engine.PerformHome ((modifier & Gdk.ModifierType.ControlMask) != 0);
+						engine.PerformHome ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.End:
-						engine.PerformEnd ((modifier & Gdk.ModifierType.ControlMask) != 0);
+						engine.PerformEnd ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Next:
@@ -584,19 +584,17 @@ namespace Pinta.Tools
 					case Gdk.Key.Escape:
 						StopEditing ();
 						break;
-
-					default:
-						// Try to handle it as a character
-						uint ch = Gdk.Keyval.ToUnicode (args.Event.KeyValue);
-
-						if (ch != 0) {
-							engine.InsertCharIntoString (ch);
-							RedrawText (true, true);
-						} else {
-							// We didn't handle the key
-							keyHandled = false;
+					case Gdk.Key.Insert:
+						if ((modifier & Gdk.ModifierType.ShiftMask) != 0) {
+							Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+							engine.PerformPaste (cb);
+						} else if ((modifier & Gdk.ModifierType.ControlMask) != 0) {
+							Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+							engine.PerformCopy (cb);
 						}
-
+						break;
+					default:
+						keyHandled = TryHandleChar(args.Event.KeyValue);
 						break;
 				}
 
@@ -612,6 +610,21 @@ namespace Pinta.Tools
             }
 
 			args.RetVal = keyHandled;
+		}
+
+		private bool TryHandleChar(uint keyValue)
+		{
+			// Try to handle it as a character
+			uint ch = Gdk.Keyval.ToUnicode (keyValue);
+
+			if (ch != 0) {
+				engine.InsertCharIntoString (ch);
+				RedrawText (true, true);
+				return true;
+			}
+
+			// We didn't handle the key
+			return false;
 		}
 		#endregion
 
@@ -675,6 +688,13 @@ namespace Pinta.Tools
 			using (var g = new Cairo.Context (surf)) {
 				g.Save ();
 
+				// Show selection if on tool layer
+				if (useToolLayer) {
+					// Selected Text
+					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
+					foreach (Rectangle rect in engine.SelectionRectangles)
+						g.FillRectangle (rect.ToCairoRectangle (), c);
+				}
 				g.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
@@ -730,5 +750,49 @@ namespace Pinta.Tools
 			old_bounds = r;
 		}
 		#endregion
+		#region undo
+
+		public override bool TryHandleUndo ()
+		{
+			if (engine.EditMode == EditingMode.NotEditing) {
+				return false;
+			}
+			// commit an history item to let the undo action undo text history item
+			StopEditing ();
+			return false;
+		}
+
+		#endregion
+		#region Copy/Paste
+
+		public override bool TryHandlePaste (Clipboard cb)
+		{
+			if (engine.EditMode == EditingMode.NotEditing) {
+				return false;
+			}
+			engine.PerformPaste (cb);
+			RedrawText (true, true);
+			return true;
+		}
+
+		public override bool TryHandleCopy (Clipboard cb)
+		{
+			if (engine.EditMode == EditingMode.NotEditing) {
+				return false;
+			}
+			engine.PerformCopy (cb);
+			return true;
+		}
+
+		public override bool TryHandleCut (Clipboard cb)
+		{
+			if (engine.EditMode == EditingMode.NotEditing) {
+				return false;
+			}
+			engine.PerformCut (cb);
+			return true;
+		}
+
+		#endregion#endregion
 	}
 }
