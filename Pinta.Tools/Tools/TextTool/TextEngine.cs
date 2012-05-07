@@ -24,6 +24,8 @@ namespace Pinta.Tools
 		private List<string> lines;
 		private int linePos;
 		private int textPos;
+		// Relative coordonate of selection
+		private int selectionRelativeIndex = 0;
 		bool underline;
 
 		public TextEngine ()
@@ -55,6 +57,41 @@ namespace Pinta.Tools
 			get { return origin; }
 			set { origin = value; }
 		}
+
+		public Rectangle[] SelectionRectangles
+		{
+			get {
+				List<Rectangle> rects = new List<Rectangle> ();
+				Point p1, p2;
+
+				if (selectionRelativeIndex > 0) {
+					p1 = TextPositionToPoint (new Position (linePos, textPos));
+
+					ForeachLine (linePos, textPos, selectionRelativeIndex, (currentLinePos, strpos, endpos) =>
+						{
+					        p2 = TextPositionToPoint (new Position (currentLinePos , endpos));
+							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, 20)));//todo height of txt
+							if (currentLinePos + 1 < lines.Count)
+								p1 = TextPositionToPoint (new Position (currentLinePos + 1, 0));
+					             });
+					return rects.ToArray ();
+
+				} else if (selectionRelativeIndex < 0) {
+					Position mypos = IndexToPosition (PositionToIndex (new Position (linePos, textPos)) + selectionRelativeIndex);
+					p1 = TextPositionToPoint (mypos);
+					ForeachLine (mypos.Line, mypos.Offset, -selectionRelativeIndex, (currentLinePos, strpos, endpos) =>
+						{
+					        p2 = TextPositionToPoint (new Position (currentLinePos , endpos));
+							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, 20)));//todo height of txt
+							if (currentLinePos + 1 < lines.Count)
+								p1 = TextPositionToPoint (new Position (currentLinePos + 1, 0));
+					             });
+					return rects.ToArray ();
+				}
+				return new Rectangle[] {};
+			}
+		}
+
 		#endregion
 
 		#region Public Methods
@@ -167,6 +204,9 @@ namespace Pinta.Tools
 		#region Key Handlers
 		public void InsertCharIntoString (uint c)
 		{
+			if (selectionRelativeIndex != 0)
+				DeleteSelection ();
+
 			byte[] bytes = { (byte)c, (byte)(c >> 8), (byte)(c >> 16), (byte)(c >> 24) };
 			string unicodeChar = System.Text.Encoding.UTF32.GetString (bytes);
 
@@ -177,6 +217,9 @@ namespace Pinta.Tools
 
 		public void PerformEnter ()
 		{
+			if (selectionRelativeIndex != 0)
+				DeleteSelection ();
+
 			string currentLine = lines[linePos];
 
 			if (textPos == currentLine.Length) {
@@ -194,6 +237,11 @@ namespace Pinta.Tools
 
 		public void PerformBackspace ()
 		{
+			if (selectionRelativeIndex != 0) {
+				DeleteSelection ();
+				return;
+			}
+
 			// We're at the beginning of a line and there's
 			// a line above us, go to the end of the prior line
 			if (textPos == 0 && linePos > 0) {
@@ -221,6 +269,11 @@ namespace Pinta.Tools
 
 		public void PerformDelete ()
 		{
+			if (selectionRelativeIndex != 0) {
+				DeleteSelection ();
+				return;
+			}
+
 			// Where are we?!
 			if ((linePos == lines.Count - 1) && (textPos == lines[lines.Count - 1].Length)) {
 				// The cursor is at the end of the text block
@@ -237,12 +290,16 @@ namespace Pinta.Tools
 			Recalculate ();
 		}
 
-		public void PerformLeft (bool control)
+		public void PerformLeft (bool control, bool shift)
 		{
 			if (control) {
-				PerformControlLeft ();
+				PerformControlLeft (shift);
 				return;
 			}
+			if (shift)
+				selectionRelativeIndex++;
+			else
+				selectionRelativeIndex = 0;
 
 			// Move caret to the left, or to the previous line
 			if (textPos > 0)
@@ -253,7 +310,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public void PerformControlLeft ()
+		public void PerformControlLeft (bool shift)
 		{
 			// Move caret to the left to the beginning of the word/space/etc.
 			if (textPos > 0) {
@@ -275,21 +332,31 @@ namespace Pinta.Tools
 				} else {
 					ntp--;
 				}
-
+				if (shift)
+					selectionRelativeIndex += textPos - ntp;
+				else
+					selectionRelativeIndex = 0;
 				textPos = ntp;
 			} else if (textPos == 0 && linePos > 0) {
 				linePos--;
 				textPos = lines[linePos].Length;
+				if (shift)
+					selectionRelativeIndex++;
+				else
+					selectionRelativeIndex = 0;
 			}
 		}
 
-		public void PerformRight (bool control)
+		public void PerformRight (bool control, bool shift)
 		{
 			if (control) {
-				PerformControlRight ();
+				PerformControlRight (shift);
 				return;
 			}
-
+			if (shift)
+				selectionRelativeIndex--;
+			else
+				selectionRelativeIndex = 0;
 			// Move caret to the right, or to the next line
 			if (textPos < lines[linePos].Length) {
 				textPos++;
@@ -299,7 +366,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public void PerformControlRight ()
+		public void PerformControlRight (bool shift)
 		{
 			// Move caret to the right to the end of the word/space/etc.
 			if (textPos < lines[linePos].Length) {
@@ -321,26 +388,48 @@ namespace Pinta.Tools
 				} else {
 					ntp++;
 				}
-
+				if (shift)
+					selectionRelativeIndex -= ntp - textPos;
+				else
+					selectionRelativeIndex = 0;
 				textPos = ntp;
 			} else if (textPos == lines[linePos].Length && linePos < lines.Count - 1) {
 				linePos++;
 				textPos = 0;
+				if (shift)
+					selectionRelativeIndex--;
+				else
+					selectionRelativeIndex = 0;
 			}
 		}
 
-		public void PerformHome (bool control)
+		public void PerformHome (bool control, bool shift)
 		{
+			if (control && shift)
+				selectionRelativeIndex += PositionToIndex (new Position (linePos, textPos));
+			else if (shift)
+				selectionRelativeIndex += textPos;
+			else
+				selectionRelativeIndex = 0;
+
 			// For Ctrl-Home, we go to the top line
-			if (control)
+			if (control) {
 				linePos = 0;
+			}
 
 			// Go to the beginning of the line
 			textPos = 0;
 		}
 
-		public void PerformEnd (bool control)
+		public void PerformEnd (bool control, bool shift)
 		{
+			if (control && shift)
+				selectionRelativeIndex -= PositionToIndex (new Position (lines.Count - 1, lines[lines.Count - 1].Length)) - PositionToIndex (new Position (linePos, textPos));
+			else if (shift)
+				selectionRelativeIndex -= lines[linePos].Length - textPos;
+			else
+				selectionRelativeIndex = 0;
+
 			// For Ctrl-End, we go to the last line
 			if (control)
 				linePos = lines.Count - 1;
@@ -349,7 +438,7 @@ namespace Pinta.Tools
 			textPos = lines[linePos].Length;
 		}
 
-		public void PerformUp ()
+		public void PerformUp (bool shift)
 		{
 			// Move to the letter above this one
 			Point point = TextPositionToPoint (CurrentPosition);
@@ -357,10 +446,16 @@ namespace Pinta.Tools
 			point.Y -= FontHeight;
 
 			Position pos = PointToTextPosition (point);
+
+			if (shift)
+				selectionRelativeIndex += PositionToIndex (new Position (linePos, textPos)) - PositionToIndex (pos);
+			else
+				selectionRelativeIndex = 0;
+
 			SetCursorPosition (pos);
 		}
 
-		public void PerformDown ()
+		public void PerformDown (bool shift)
 		{
 			if (CurrentPosition.Line == LineCount - 1) {
 				// Last line -> don't do squat
@@ -371,12 +466,80 @@ namespace Pinta.Tools
 				point.Y += FontHeight;
 
 				Position pos = PointToTextPosition (point);
+
+				if (shift)
+					selectionRelativeIndex -= PositionToIndex (pos) - PositionToIndex (new Position (linePos, textPos));
+				else
+					selectionRelativeIndex = 0;
+
 				SetCursorPosition (pos);
 			}
+		}
+
+		public void PerformCopy (Gtk.Clipboard clipboard)
+		{
+			if (selectionRelativeIndex > 0) {
+				clipboard.Text = GetText (linePos, textPos, selectionRelativeIndex);
+			} else if (selectionRelativeIndex < 0) {
+				Position p = IndexToPosition (PositionToIndex (new Position (linePos, textPos)) + selectionRelativeIndex);
+				clipboard.Text = GetText (p.Line, p.Offset, -selectionRelativeIndex);
+			}
+			else
+				clipboard.Clear ();
+		}
+
+		public void PerformCut (Gtk.Clipboard clipboard)
+		{
+			PerformCopy (clipboard);
+			DeleteSelection ();
+		}
+
+		public void PerformPaste (Gtk.Clipboard clipboard)
+		{
+			string txt = string.Empty;
+			txt = clipboard.WaitForText ();
+			if (String.IsNullOrEmpty (txt))
+				return;
+			string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.None);
+			string endline = lines [linePos].Substring (textPos);
+			lines [linePos] = lines [linePos].Substring (0, textPos);
+			bool first = true;
+			foreach (string ins_txt in ins_lines) {
+				if (!first) {
+					linePos++;
+					lines.Insert (linePos, ins_txt);
+					textPos = ins_txt.Length;
+				} else {
+					first = false;
+					lines[linePos] += ins_txt;
+					textPos += ins_txt.Length;
+				}
+			}
+			lines [linePos] += endline;
+
+			Recalculate ();
 		}
 		#endregion
 
 		#region Private Methods
+
+		delegate void Action(int currentLine, int strartPosition, int endPosition);
+
+		private void ForeachLine (int startLine, int startPos, int len, Action action)
+		{
+			int strTextPos = startPos;
+			int TextPosLenght = len;
+			int currentLinePos = startLine;
+
+			while (strTextPos + TextPosLenght > lines[currentLinePos].Length) {
+				action (currentLinePos, strTextPos, lines[currentLinePos].Length);
+				TextPosLenght -= lines[currentLinePos].Length - strTextPos + 1;
+				currentLinePos++;
+				strTextPos = 0;
+			}
+			action (currentLinePos, strTextPos, strTextPos + TextPosLenght);
+		}
+
 		private Position IndexToPosition (int index)
 		{
 			int current = 0;
@@ -437,6 +600,65 @@ namespace Pinta.Tools
 
 			layout.SetMarkup (markup);
 		}
+
+		private string GetText (int startLine, int startPos, int len)
+		{
+			StringBuilder strbld = new StringBuilder ();
+			ForeachLine (startLine, startPos, len, (currentLinePos, strpos, endpos) =>{
+				if (endpos - strpos > 0)
+					strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
+				else if (endpos == strpos)
+					strbld.AppendLine ();
+			});
+			strbld.Remove (strbld.Length - 1, 1);
+			return strbld.ToString ();
+		}
+
+		private void DeleteSelection ()
+		{
+			if (selectionRelativeIndex > 0) {
+				DeleteText (textPos, linePos, selectionRelativeIndex);
+			} else if (selectionRelativeIndex < 0) {
+				Position p = IndexToPosition (PositionToIndex (new Position (linePos, textPos)) + selectionRelativeIndex);
+				DeleteText (p.Offset, p.Line, -selectionRelativeIndex);
+				textPos = p.Offset;
+				linePos = p.Line;
+			}
+			selectionRelativeIndex = 0;
+		}
+
+		private void DeleteText (int startPos, int startLine, int len)
+		{
+			int TextPosLenght = len;
+			int curlinepos = startLine;
+			int startposition = startPos;
+			if (startposition + len > lines[startLine].Length) {
+				TextPosLenght -= lines[startLine].Length - startPos;
+				lines[startLine] = lines[startLine].Substring (0, startposition);
+				curlinepos++;
+				startposition = 0;
+			}
+
+			while ((TextPosLenght != 0) && (TextPosLenght > lines[curlinepos].Length)) {
+				TextPosLenght -= lines[curlinepos].Length + 1;
+				lines.RemoveAt (curlinepos);
+				startposition = 0;
+			}
+			if (TextPosLenght != 0) {
+				if (startLine == curlinepos) {
+					lines[startLine] = lines[startLine].Substring (0, startposition) + lines[curlinepos].Substring (startposition + TextPosLenght);
+				} else {
+					//lines[startLine] = lines[startLine].Substring (0, startposition) + lines[curlinepos].Substring (startposition + TextPosLenght - 1);
+					lines[startLine] += lines[curlinepos].Substring (startposition + TextPosLenght - 1);
+					lines.RemoveAt (curlinepos);
+				}
+			}
+
+			Recalculate ();
+
+		}
+
+		//TODO video inverse for selected text
 		#endregion
 	}
 }

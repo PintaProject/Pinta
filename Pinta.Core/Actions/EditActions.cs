@@ -235,6 +235,10 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			if (PintaCore.Tools.CurrentTool.TryHandleCopy (cb))
+				return;
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			PintaCore.Tools.Commit ();
@@ -250,7 +254,6 @@ namespace Pinta.Core
 				g.Paint ();
 			}
 			
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			cb.Image = dest.ToPixbuf ();
 
 			(src as IDisposable).Dispose ();
@@ -259,8 +262,10 @@ namespace Pinta.Core
 		
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			if (PintaCore.Tools.CurrentTool.TryHandleCut (cb))
+				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			PintaCore.Tools.Commit ();
 			
 			// Copy selection
@@ -272,12 +277,16 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 		{
+			if (PintaCore.Tools.CurrentTool.TryHandleUndo ())
+				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.History.Undo ();
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 		{
+			if (PintaCore.Tools.CurrentTool.TryHandleRedo ())
+				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.History.Redo ();
 		}
