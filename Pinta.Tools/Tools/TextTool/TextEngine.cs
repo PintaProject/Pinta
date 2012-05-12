@@ -27,12 +27,16 @@ namespace Pinta.Tools
 		// Relative coordonate of selection
 		private int selectionRelativeIndex = 0;
 		bool underline;
+		Gtk.IMMulticontext imContext;
 
 		public TextEngine ()
 		{
 			lines = new List<string> ();
 
 			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
+			imContext = new Gtk.IMMulticontext ();
+			imContext.Commit += OnCommit;
+
 		}
 
 		#region Public Properties
@@ -202,17 +206,23 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Key Handlers
-		public void InsertCharIntoString (uint c)
+		public bool HandleKeyPress (Gdk.EventKey evt)
 		{
-			if (selectionRelativeIndex != 0)
-				DeleteSelection ();
+			return imContext.FilterKeypress (evt);
+		}
 
-			byte[] bytes = { (byte)c, (byte)(c >> 8), (byte)(c >> 16), (byte)(c >> 24) };
-			string unicodeChar = System.Text.Encoding.UTF32.GetString (bytes);
+		void OnCommit (object sender, Gtk.CommitArgs ca)
+		{
+			try {
+				if (selectionRelativeIndex != 0)
+					DeleteSelection ();
 
-			lines[linePos] = lines[linePos].Insert (textPos, unicodeChar);
-			textPos++;
-			Recalculate ();
+				lines[linePos] = lines[linePos].Insert (textPos, ca.Str);
+				textPos += ca.Str.Length;
+				Recalculate ();
+			} finally {
+				imContext.Reset ();
+			}
 		}
 
 		public void PerformEnter ()

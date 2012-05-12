@@ -51,15 +51,15 @@ namespace Pinta.Tools
 			engine = new TextEngine ();
 		}
 
-        static TextTool ()
-        {
-            Gtk.IconFactory fact = new Gtk.IconFactory ();
-            fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
-            fact.Add ("ShapeTool.Fill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Fill.png")));
-            fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
-            fact.Add ("TextTool.FillBackground.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("TextTool.FillBackground.png")));
-            fact.AddDefault ();
-        }
+		static TextTool ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
+			fact.Add ("ShapeTool.Fill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Fill.png")));
+			fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
+			fact.Add ("TextTool.FillBackground.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("TextTool.FillBackground.png")));
+			fact.AddDefault ();
+		}
 		#endregion
 
 		#region ToolBar
@@ -594,7 +594,11 @@ namespace Pinta.Tools
 						}
 						break;
 					default:
-						keyHandled = TryHandleChar(args.Event.KeyValue);
+						// Ignore command shortcut
+						if ((modifier & Gdk.ModifierType.ControlMask) != 0)
+							return;
+
+						keyHandled = TryHandleChar(args.Event);
 						break;
 				}
 
@@ -603,22 +607,19 @@ namespace Pinta.Tools
 					RedrawText (true, true);
 
 			}
-            else
-            {
-                // If we're not editing, allow the key press to be handled elsewhere (e.g. for selecting another tool).
-                keyHandled = false;
-            }
+			else
+			{
+				// If we're not editing, allow the key press to be handled elsewhere (e.g. for selecting another tool).
+				keyHandled = false;
+			}
 
 			args.RetVal = keyHandled;
 		}
 
-		private bool TryHandleChar(uint keyValue)
+		private bool TryHandleChar(EventKey eventKey)
 		{
 			// Try to handle it as a character
-			uint ch = Gdk.Keyval.ToUnicode (keyValue);
-
-			if (ch != 0) {
-				engine.InsertCharIntoString (ch);
+			if (engine.HandleKeyPress (eventKey)) {
 				RedrawText (true, true);
 				return true;
 			}
