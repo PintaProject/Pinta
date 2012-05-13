@@ -253,7 +253,7 @@ namespace Pinta.Tools
 		
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
-			return new ClippedSurfaceHistoryItem (Icon, Name, new IrregularSurface (undo_surface, Gdk.Region.Rectangle (last_dirty.ToGdkRectangle ())), PintaCore.Workspace.ActiveDocument.CurrentLayerIndex);
+			return new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Workspace.ActiveDocument.CurrentLayerIndex);
 		}
 		#endregion
 
