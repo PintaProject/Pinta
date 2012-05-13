@@ -74,7 +74,7 @@ namespace Pinta.Tools
 					ForeachLine (linePos, textPos, selectionRelativeIndex, (currentLinePos, strpos, endpos) =>
 						{
 					        p2 = TextPositionToPoint (new Position (currentLinePos , endpos));
-							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, 20)));//todo height of txt
+							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
 							if (currentLinePos + 1 < lines.Count)
 								p1 = TextPositionToPoint (new Position (currentLinePos + 1, 0));
 					             });
@@ -86,7 +86,7 @@ namespace Pinta.Tools
 					ForeachLine (mypos.Line, mypos.Offset, -selectionRelativeIndex, (currentLinePos, strpos, endpos) =>
 						{
 					        p2 = TextPositionToPoint (new Position (currentLinePos , endpos));
-							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, 20)));//todo height of txt
+							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
 							if (currentLinePos + 1 < lines.Count)
 								p1 = TextPositionToPoint (new Position (currentLinePos + 1, 0));
 					             });
@@ -107,6 +107,7 @@ namespace Pinta.Tools
 			linePos = 0;
 			textPos = 0;
 			origin = Point.Zero;
+			selectionRelativeIndex = 0;
 
 			Recalculate ();
 		}
@@ -620,7 +621,7 @@ namespace Pinta.Tools
 				else if (endpos == strpos)
 					strbld.AppendLine ();
 			});
-			strbld.Remove (strbld.Length - 1, 1);
+			strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
 			return strbld.ToString ();
 		}
 
