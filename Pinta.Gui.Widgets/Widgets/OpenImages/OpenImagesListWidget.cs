@@ -72,7 +72,9 @@ namespace Pinta.Gui.Widgets
 			file_preview_column.FixedWidth = PreviewColumnWidth;
 			tree.AppendColumn (file_preview_column);
 
-			file_name_column = new TreeViewColumn ("File Name", new CellRendererText (), "text", FileNameColumnIndex);
+			var textCell = new CellRendererText ();
+			textCell.Ellipsize = Pango.EllipsizeMode.End;
+			file_name_column = new TreeViewColumn ("File Name", textCell, "text", FileNameColumnIndex);
 			file_name_column.Expand = true;
 			tree.AppendColumn (file_name_column);
 
