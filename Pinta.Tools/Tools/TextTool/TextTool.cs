@@ -790,6 +790,7 @@ namespace Pinta.Tools
 				return false;
 			}
 			engine.PerformCut (cb);
+			RedrawText (true, true);
 			return true;
 		}
 
