@@ -36,7 +36,7 @@ namespace Pinta.Tools
 	{
 		private int button_down = 0;
 
-		private ToolBarComboBox tool_select;
+		private ToolBarDropDownButton tool_select;
 		private ToolBarLabel tool_select_label;
 		private ToolBarLabel sampling_label;
 		private ToolBarDropDownButton sample_size;
@@ -52,6 +52,9 @@ namespace Pinta.Tools
 			fact.Add ("Toolbar.Sampling.7x7.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.7x7.png")));
 			fact.Add ("Toolbar.Sampling.9x9.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.9x9.png")));
 			fact.Add ("ResizeCanvas.Image.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png")));
+			fact.Add ("Tools.ColorPicker.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.ColorPicker.png")));
+			fact.Add ("Tools.ColorPicker.PreviousTool.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.ColorPicker.PreviousTool.png")));
+			fact.Add ("Tools.Pencil.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Pencil.png")));
 			fact.AddDefault ();
 		}
 
@@ -123,9 +126,13 @@ namespace Pinta.Tools
 
 			tb.AppendItem (tool_select_label);
 
-			// TODO: Enable when we have the Pencil tool
-			if (tool_select == null)
-				tool_select = new ToolBarComboBox (170, 0, false, Catalog.GetString ("Do not switch tool"), Catalog.GetString ("Switch to previous tool"), Catalog.GetString ("Switch to Pencil tool"));
+			if (tool_select == null) {
+				tool_select = new ToolBarDropDownButton (true);
+
+				tool_select.AddItem (Catalog.GetString ("Do not switch tool"), "Tools.ColorPicker.png", 0);
+				tool_select.AddItem (Catalog.GetString ("Switch to previous tool"), "Tools.ColorPicker.PreviousTool.png", 1);
+				tool_select.AddItem (Catalog.GetString ("Switch to Pencil tool"), "Tools.Pencil.png", 2);
+			}
 
 			tb.AppendItem (tool_select);
 		}
@@ -174,9 +181,9 @@ namespace Pinta.Tools
 		{
 			button_down = 0;
 			
-			if (tool_select.ComboBox.Active == 1)
+			if ((int)tool_select.SelectedItem.Tag == 1)
 				PintaCore.Tools.SetCurrentTool (PintaCore.Tools.PreviousTool);
-			else if (tool_select.ComboBox.Active == 2)
+			else if ((int)tool_select.SelectedItem.Tag == 2)
 				PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Pencil"));
 		}
 		#endregion
