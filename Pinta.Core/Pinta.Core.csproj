@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
+    <Compile Include="Classes\SurfaceDiff.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />
     <Compile Include="PixelOperations\CheckerBoardOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,10 +175,8 @@
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
     <Compile Include="Extensions\OtherExtensions.cs" />
-    <Compile Include="Effects\IrregularSurface.cs" />
     <Compile Include="Effects\ISurfaceDraw.cs" />
     <Compile Include="Effects\PlacedSurface.cs" />
-    <Compile Include="HistoryItems\ClippedSurfaceHistoryItem.cs" />
     <Compile Include="Classes\IndexEventHandler.cs" />
     <Compile Include="Classes\IndexEventArgs.cs" />
     <Compile Include="Effects\LocalHistogramEffect.cs" />
