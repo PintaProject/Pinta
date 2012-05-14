@@ -40,6 +40,7 @@ namespace Pinta.Tools
 		private ToolBarLabel tool_select_label;
 		private ToolBarLabel sampling_label;
 		private ToolBarDropDownButton sample_size;
+		private ToolBarDropDownButton sample_type;
 		private Gtk.ToolItem sample_sep;
 
 		public ColorPickerTool ()
@@ -50,6 +51,7 @@ namespace Pinta.Tools
 			fact.Add ("Toolbar.Sampling.5x5.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.5x5.png")));
 			fact.Add ("Toolbar.Sampling.7x7.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.7x7.png")));
 			fact.Add ("Toolbar.Sampling.9x9.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.9x9.png")));
+			fact.Add ("ResizeCanvas.Image.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png")));
 			fact.AddDefault ();
 		}
 
@@ -75,6 +77,9 @@ namespace Pinta.Tools
 		private int SampleSize {
 			get { return (int)sample_size.SelectedItem.Tag; }
 		}
+		private bool SampleLayerOnly {
+			get { return (bool)sample_type.SelectedItem.Tag; }
+		}
 		#endregion
 
 		#region ToolBar
@@ -98,6 +103,15 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem (sample_size);
+
+			if (sample_type == null) {
+				sample_type = new ToolBarDropDownButton (true);
+
+				sample_type.AddItem (Catalog.GetString ("Layer"), "Menu.Layers.MergeLayerDown.png", true);
+				sample_type.AddItem (Catalog.GetString ("Image"), "ResizeCanvas.Image.png", false);
+			}
+
+			tb.AppendItem (sample_type);
 
 			if (sample_sep == null)
 				sample_sep = new Gtk.SeparatorToolItem ();
@@ -186,7 +200,7 @@ namespace Pinta.Tools
 
 			// Short circuit for single pixel
 			if (size == 1)
-				return new ColorBgra[] { doc.CurrentLayer.Surface.GetColorBgra (x, y) };
+				return new ColorBgra[] { GetPixel (x, y) };
 
 			// Find the pixels we need (clamp to the size of the image)
 			var rect = new Gdk.Rectangle (x - half, y - half, size, size);
@@ -196,9 +210,17 @@ namespace Pinta.Tools
 
 			for (int i = rect.Left; i < rect.Right; i++)
 				for (int j = rect.Top; j < rect.Bottom; j++)
-					pixels.Add (doc.CurrentLayer.Surface.GetColorBgra (i, j));
+					pixels.Add (GetPixel (i, j));
 
 			return pixels.ToArray ();
+		}
+
+		private ColorBgra GetPixel (int x, int y)
+		{
+			if (SampleLayerOnly)
+				return PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface.GetColorBgra (x, y);
+			else
+				return PintaCore.Workspace.ActiveDocument.GetComputedPixel (x, y);
 		}
 		#endregion
 	}

@@ -477,6 +477,22 @@ namespace Pinta.Core
 			return surf;
 		}
 
+		/// <summary>
+		/// Gets the final pixel color for the given point, taking layers, opacity, and blend modes into account.
+		/// </summary>
+		public ColorBgra GetComputedPixel (int x, int y)
+		{
+			var pixel = ColorBgra.Zero;
+
+			foreach (var layer in GetLayersToPaint ()) {
+				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
+
+				pixel = blend_op.Apply (pixel, layer.Surface.GetColorBgra (x, y));
+			}
+
+			return pixel;
+		}
+
 		public ImageSurface GetFlattenedImage ()
 		{
 			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);

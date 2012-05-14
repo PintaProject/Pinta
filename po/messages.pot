@@ -2023,3 +2023,7 @@ msgstr ""
 #: Pinta.Tools/Tools/ColorPickerTool.cs:97
 msgid "9 x 9 Region"
 msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:111
+msgid "Image"
+msgstr ""
