@@ -217,9 +217,18 @@ namespace Pinta.Tools
 			try {
 				if (selectionRelativeIndex != 0)
 					DeleteSelection ();
+				for (int i = 0; i < ca.Str.Length; i++) {
+					char utf32Char;
+					if (char.IsHighSurrogate (ca.Str, i)) {
+						utf32Char = (char)char.ConvertToUtf32 (ca.Str, i);
+						i++;
+					} else {
+						utf32Char = ca.Str[i];
+					}
+					lines[linePos] = lines[linePos].Insert (textPos, utf32Char.ToString ());
+					textPos += utf32Char.ToString ().Length;
+				}
 
-				lines[linePos] = lines[linePos].Insert (textPos, ca.Str);
-				textPos += ca.Str.Length;
 				Recalculate ();
 			} finally {
 				imContext.Reset ();
