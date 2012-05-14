@@ -15,14 +15,14 @@ namespace Pinta.Core
 
 		public List<ToolBarItem> Items { get; private set; }
 
-		public ToolBarDropDownButton ()
+		public ToolBarDropDownButton (bool showLabel = false)
 		{
 			Items = new List<ToolBarItem> ();
 
 			dropdown = new Menu ();
 			image = new Image ();
 
-			Construct (image, dropdown, true);
+			Construct (image, dropdown, true, showLabel);
 		}
 
 		public ToolBarItem AddItem (string text, string imageId)
@@ -59,6 +59,9 @@ namespace Pinta.Core
 
 			selected_item = item;
 			TooltipText = item.Text;
+
+			if (label_widget != null)
+				label_widget.Text = item.Text;
 
 			OnSelectedItemChanged ();
 		}
