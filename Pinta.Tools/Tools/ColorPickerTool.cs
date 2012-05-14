@@ -25,9 +25,10 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Cairo;
-using Pinta.Core;
 using Mono.Unix;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
@@ -37,6 +38,20 @@ namespace Pinta.Tools
 
 		private ToolBarComboBox tool_select;
 		private ToolBarLabel tool_select_label;
+		private ToolBarLabel sampling_label;
+		private ToolBarDropDownButton sample_size;
+		private Gtk.ToolItem sample_sep;
+
+		public ColorPickerTool ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Toolbar.Sampling.1x1.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.1x1.png")));
+			fact.Add ("Toolbar.Sampling.3x3.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.3x3.png")));
+			fact.Add ("Toolbar.Sampling.5x5.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.5x5.png")));
+			fact.Add ("Toolbar.Sampling.7x7.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.7x7.png")));
+			fact.Add ("Toolbar.Sampling.9x9.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.9x9.png")));
+			fact.AddDefault ();
+		}
 
 		#region Properties
 		public override string Name {
@@ -57,12 +72,37 @@ namespace Pinta.Tools
 		public override int Priority {
 			get { return 31; }
 		}
+		private int SampleSize {
+			get { return (int)sample_size.SelectedItem.Tag; }
+		}
 		#endregion
 
 		#region ToolBar
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
+
+			if (sampling_label == null)
+				sampling_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Sampling")));
+
+			tb.AppendItem (sampling_label);
+
+			if (sample_size == null) {
+				sample_size = new ToolBarDropDownButton (true);
+
+				sample_size.AddItem (Catalog.GetString ("Single Pixel"), "Toolbar.Sampling.1x1.png", 1);
+				sample_size.AddItem (Catalog.GetString ("3 x 3 Region"), "Toolbar.Sampling.3x3.png", 3);
+				sample_size.AddItem (Catalog.GetString ("5 x 5 Region"), "Toolbar.Sampling.5x5.png", 5);
+				sample_size.AddItem (Catalog.GetString ("7 x 7 Region"), "Toolbar.Sampling.7x7.png", 7);
+				sample_size.AddItem (Catalog.GetString ("9 x 9 Region"), "Toolbar.Sampling.9x9.png", 9);
+			}
+
+			tb.AppendItem (sample_size);
+
+			if (sample_sep == null)
+				sample_sep = new Gtk.SeparatorToolItem ();
+
+			tb.AppendItem (sample_sep);
 
 			if (tool_select_label == null)
 				tool_select_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("After select")));
@@ -90,7 +130,7 @@ namespace Pinta.Tools
 			if (!doc.Workspace.PointInCanvas (point))
 				return;
 
-			Color color = doc.CurrentLayer.Surface.GetPixel ((int)point.X, (int)point.Y);
+			var color = GetColorFromPoint (point);
 
 			if (button_down == 1)
 				PintaCore.Palette.PrimaryColor = color;
@@ -108,7 +148,7 @@ namespace Pinta.Tools
 			if (!doc.Workspace.PointInCanvas (point))
 				return;
 
-			Color color = doc.CurrentLayer.Surface.GetPixel ((int)point.X, (int)point.Y);
+			var color = GetColorFromPoint (point);
 
 			if (button_down == 1)
 				PintaCore.Palette.PrimaryColor = color;
@@ -124,6 +164,41 @@ namespace Pinta.Tools
 				PintaCore.Tools.SetCurrentTool (PintaCore.Tools.PreviousTool);
 			else if (tool_select.ComboBox.Active == 2)
 				PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Pencil"));
+		}
+		#endregion
+
+		#region Private Methods
+		private unsafe Color GetColorFromPoint (PointD point)
+		{
+			var pixels = GetPixelsFromPoint (point);
+
+			fixed (ColorBgra* ptr = pixels)
+				return ColorBgra.Blend (ptr, pixels.Length).ToCairoColor ();
+		}
+
+		private ColorBgra[] GetPixelsFromPoint (PointD point)
+		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+			var x = (int)point.X;
+			var y = (int)point.Y;
+			var size = SampleSize;
+			var half = size / 2;
+
+			// Short circuit for single pixel
+			if (size == 1)
+				return new ColorBgra[] { doc.CurrentLayer.Surface.GetColorBgra (x, y) };
+
+			// Find the pixels we need (clamp to the size of the image)
+			var rect = new Gdk.Rectangle (x - half, y - half, size, size);
+			rect.Intersect (new Gdk.Rectangle (Gdk.Point.Zero, doc.ImageSize));
+
+			var pixels = new List<ColorBgra> ();
+
+			for (int i = rect.Left; i < rect.Right; i++)
+				for (int j = rect.Top; j < rect.Bottom; j++)
+					pixels.Add (doc.CurrentLayer.Surface.GetColorBgra (i, j));
+
+			return pixels.ToArray ();
 		}
 		#endregion
 	}

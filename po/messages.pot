@@ -1999,3 +1999,27 @@ msgstr ""
 #, csharp-format
 msgid "(provided by {0})"
 msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:86
+msgid "Sampling"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:93
+msgid "Single Pixel"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:94
+msgid "3 x 3 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:95
+msgid "5 x 5 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:96
+msgid "7 x 7 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:97
+msgid "9 x 9 Region"
+msgstr ""
