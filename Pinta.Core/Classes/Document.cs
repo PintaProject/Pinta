@@ -422,23 +422,21 @@ namespace Pinta.Core
 			if (Layers.Count < 2)
 				throw new InvalidOperationException ("Cannot flatten image because there is only one layer.");
 
-			Layer dest = Layers[0];
+			// Find the "bottom" layer
+			var bottom_layer = Layers[0];
+			var old_surf = bottom_layer.Surface;
 
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				for (int i = 1; i < Layers.Count; i++) {
-					Layer source = Layers[i];
-					g.SetSource (source.Surface);
-					g.PaintWithAlpha (source.Opacity);
-				}
-			}
+			// Replace the bottom surface with the flattened image,
+			// and dispose the old surface
+			bottom_layer.Surface = GetFlattenedImage ();
+			(old_surf as IDisposable).Dispose ();
 
+			// Reset our layer pointer to the only remaining layer
 			current_layer = 0;
 
-			while (Layers.Count > 1) {
-				Layer l = Layers[1];
-
+			// Delete all other layers
+			while (Layers.Count > 1)
 				Layers.RemoveAt (1);
-			}
 
 			PintaCore.Layers.OnLayerRemoved ();
 			Workspace.Invalidate ();
@@ -495,13 +493,13 @@ namespace Pinta.Core
 
 		public ImageSurface GetFlattenedImage ()
 		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
+			// Create a new image surface
+			var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
-			using (Cairo.Context g = new Cairo.Context (surf)) {
-				foreach (var layer in GetLayersToPaint ()) {
-					g.SetSource (layer.Surface);
-					g.PaintWithAlpha (layer.Opacity);
-				}
+			// Blend each visible layer onto our surface
+			foreach (var layer in GetLayersToPaint ()) {
+				var blendop = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
+				blendop.Apply (surf, layer.Surface);
 			}
 
 			return surf;
@@ -562,13 +560,13 @@ namespace Pinta.Core
 			if (current_layer == 0)
 				throw new InvalidOperationException ("Cannot flatten layer because current layer is the bottom layer.");
 
-			Layer source = CurrentLayer;
-			Layer dest = Layers[current_layer - 1];
+			// Get our source and destination layers
+			var source = CurrentLayer;
+			var dest = Layers[current_layer - 1];
 
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.SetSource (source.Surface);
-				g.PaintWithAlpha (source.Opacity);
-			}
+			// Blend the layers
+			var blendop = UserBlendOps.GetBlendOp (source.BlendMode, source.Opacity);
+			blendop.Apply (dest.Surface, source.Surface);
 
 			DeleteCurrentLayer ();
 		}
