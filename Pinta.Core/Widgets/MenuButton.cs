@@ -40,6 +40,7 @@ namespace Hyena.Widgets
 		private Widget button_widget;
 		private Menu menu;
 		private Widget size_widget;
+		protected Gtk.Label label_widget;
 
 		protected MenuButton (IntPtr ptr) : base (ptr) { }
 
@@ -52,7 +53,7 @@ namespace Hyena.Widgets
 			Construct (buttonWidget, menu, showArrow);
 		}
 
-		protected void Construct (Widget buttonWidget, Menu menu, bool showArrow)
+		protected void Construct (Widget buttonWidget, Menu menu, bool showArrow, bool showLabel = false)
 		{
 			WidgetFlags |= WidgetFlags.NoWindow;
 
@@ -69,7 +70,14 @@ namespace Hyena.Widgets
 			box.Parent = this;
 
 			if (showArrow) {
-				box.PackStart (button_widget, true, true, 5);
+				if (showLabel) {
+					box.PackStart (button_widget, true, true, 3);
+					label_widget = new Gtk.Label ();
+					box.PackStart (label_widget, true, false, 2);
+				} else {
+					box.PackStart (button_widget, true, true, 5);
+				}
+
 				alignment = new Alignment (0f, 0.5f, 0f, 0f);
 				arrow = new Arrow (ArrowType.Down, ShadowType.None);
 				alignment.Add (arrow);
