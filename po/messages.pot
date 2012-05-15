@@ -2027,3 +2027,7 @@ msgstr ""
 #: Pinta.Tools/Tools/ColorPickerTool.cs:111
 msgid "Image"
 msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:72
+msgid "Copy Merged"
+msgstr ""
