@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using Gdk;
 using Pinta.Core;
+using System.Security;
 
 namespace Pinta.Tools
 {
@@ -613,7 +614,7 @@ namespace Pinta.Tools
 		
 		private void Recalculate ()
 		{
-			string markup = ToString ();
+			string markup = SecurityElement.Escape (ToString ());
 
 			if (underline)
 				markup = string.Format ("<u>{0}</u>", markup);
