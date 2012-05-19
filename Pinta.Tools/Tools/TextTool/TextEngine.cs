@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using Gdk;
 using Pinta.Core;
+using System.Security;
 
 namespace Pinta.Tools
 {
@@ -27,12 +28,16 @@ namespace Pinta.Tools
 		// Relative coordonate of selection
 		private int selectionRelativeIndex = 0;
 		bool underline;
+		Gtk.IMMulticontext imContext;
 
 		public TextEngine ()
 		{
 			lines = new List<string> ();
 
 			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
+			imContext = new Gtk.IMMulticontext ();
+			imContext.Commit += OnCommit;
+
 		}
 
 		#region Public Properties
@@ -70,7 +75,7 @@ namespace Pinta.Tools
 					ForeachLine (linePos, textPos, selectionRelativeIndex, (currentLinePos, strpos, endpos) =>
 						{
 					        p2 = TextPositionToPoint (new Position (currentLinePos , endpos));
-							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, 20)));//todo height of txt
+							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
 							if (currentLinePos + 1 < lines.Count)
 								p1 = TextPositionToPoint (new Position (currentLinePos + 1, 0));
 					             });
@@ -82,7 +87,7 @@ namespace Pinta.Tools
 					ForeachLine (mypos.Line, mypos.Offset, -selectionRelativeIndex, (currentLinePos, strpos, endpos) =>
 						{
 					        p2 = TextPositionToPoint (new Position (currentLinePos , endpos));
-							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, 20)));//todo height of txt
+							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
 							if (currentLinePos + 1 < lines.Count)
 								p1 = TextPositionToPoint (new Position (currentLinePos + 1, 0));
 					             });
@@ -103,6 +108,7 @@ namespace Pinta.Tools
 			linePos = 0;
 			textPos = 0;
 			origin = Point.Zero;
+			selectionRelativeIndex = 0;
 
 			Recalculate ();
 		}
@@ -202,17 +208,32 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Key Handlers
-		public void InsertCharIntoString (uint c)
+		public bool HandleKeyPress (Gdk.EventKey evt)
 		{
-			if (selectionRelativeIndex != 0)
-				DeleteSelection ();
+			return imContext.FilterKeypress (evt);
+		}
 
-			byte[] bytes = { (byte)c, (byte)(c >> 8), (byte)(c >> 16), (byte)(c >> 24) };
-			string unicodeChar = System.Text.Encoding.UTF32.GetString (bytes);
+		void OnCommit (object sender, Gtk.CommitArgs ca)
+		{
+			try {
+				if (selectionRelativeIndex != 0)
+					DeleteSelection ();
+				for (int i = 0; i < ca.Str.Length; i++) {
+					char utf32Char;
+					if (char.IsHighSurrogate (ca.Str, i)) {
+						utf32Char = (char)char.ConvertToUtf32 (ca.Str, i);
+						i++;
+					} else {
+						utf32Char = ca.Str[i];
+					}
+					lines[linePos] = lines[linePos].Insert (textPos, utf32Char.ToString ());
+					textPos += utf32Char.ToString ().Length;
+				}
 
-			lines[linePos] = lines[linePos].Insert (textPos, unicodeChar);
-			textPos++;
-			Recalculate ();
+				Recalculate ();
+			} finally {
+				imContext.Reset ();
+			}
 		}
 
 		public void PerformEnter ()
@@ -593,7 +614,7 @@ namespace Pinta.Tools
 		
 		private void Recalculate ()
 		{
-			string markup = ToString ();
+			string markup = SecurityElement.Escape (ToString ());
 
 			if (underline)
 				markup = string.Format ("<u>{0}</u>", markup);
@@ -610,7 +631,7 @@ namespace Pinta.Tools
 				else if (endpos == strpos)
 					strbld.AppendLine ();
 			});
-			strbld.Remove (strbld.Length - 1, 1);
+			strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
 			return strbld.ToString ();
 		}
 
