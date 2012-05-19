@@ -36,15 +36,13 @@ namespace Pinta
 	{
 		public void Initialize (DockFrame workspace, Menu padMenu)
 		{
-			const string pad_name = "Images";
-
-			DockItem open_images_item = workspace.AddItem (pad_name);
-            open_images_item.DefaultLocation = "Layers/Bottom";
-			open_images_item.Label = Catalog.GetString (pad_name);
+			DockItem open_images_item = workspace.AddItem ("Images");
+			open_images_item.DefaultLocation = "Layers/Bottom";
+			open_images_item.Label = Catalog.GetString ("Images");
 			open_images_item.Content = new OpenImagesListWidget ();
-            open_images_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Default.png");
+			open_images_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Default.png");
 
-			ToggleAction show_open_images = padMenu.AppendToggleAction (pad_name, Catalog.GetString (pad_name), null, null);
+			ToggleAction show_open_images = padMenu.AppendToggleAction ("Images", Catalog.GetString ("Images"), null, null);
 
 			show_open_images.Activated += delegate {
 				open_images_item.Visible = show_open_images.Active;
