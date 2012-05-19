@@ -317,10 +317,6 @@ namespace Pinta.Tools
 				PerformControlLeft (shift);
 				return;
 			}
-			if (shift)
-				selectionRelativeIndex++;
-			else
-				selectionRelativeIndex = 0;
 
 			// Move caret to the left, or to the previous line
 			if (textPos > 0)
@@ -328,7 +324,12 @@ namespace Pinta.Tools
 			else if (textPos == 0 && linePos > 0) {
 				linePos--;
 				textPos = lines[linePos].Length;
-			}
+			} else
+				return;
+			if (shift)
+				selectionRelativeIndex++;
+			else
+				selectionRelativeIndex = 0;
 		}
 
 		public void PerformControlLeft (bool shift)
@@ -374,17 +375,20 @@ namespace Pinta.Tools
 				PerformControlRight (shift);
 				return;
 			}
-			if (shift)
-				selectionRelativeIndex--;
-			else
-				selectionRelativeIndex = 0;
+
 			// Move caret to the right, or to the next line
 			if (textPos < lines[linePos].Length) {
 				textPos++;
 			} else if (textPos == lines[linePos].Length && linePos < lines.Count - 1) {
 				linePos++;
 				textPos = 0;
-			}
+			} else
+				return;
+
+			if (shift)
+				selectionRelativeIndex--;
+			else
+				selectionRelativeIndex = 0;
 		}
 
 		public void PerformControlRight (bool shift)
