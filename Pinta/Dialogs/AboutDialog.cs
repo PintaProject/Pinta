@@ -50,7 +50,7 @@ namespace Pinta
 		Pixbuf monoPowered;
 		int scroll;
 		Pango.Layout layout;
-		int monoLogoSpacing = 80;
+		int monoLogoSpacing = 5;
 		int textTop;
 		int scrollPause;
 		int scrollStart;
@@ -103,7 +103,7 @@ namespace Pinta
 			image_top = PintaCore.Resources.GetIcon ("About.ImageTop.png");
 			monoPowered = PintaCore.Resources.GetIcon ("About.MonoPowered.png");
 
-			this.SetSizeRequest (450, image.Height - 1);
+			this.SetSizeRequest (400, image.Height - 1);
 
 			TimerHandle = GLib.Timeout.Add (50, new TimeoutHandler (ScrollDown));
 		}
@@ -111,24 +111,28 @@ namespace Pinta
 		string CreditText {
 			get {
 				StringBuilder sb = new StringBuilder ();
-				sb.AppendFormat ("<b>{0}</b>\n\n", Catalog.GetString ("Contributors to this Release"));
+				sb.AppendFormat ("<b>{0}</b>\n\n", Catalog.GetString ("Contributors to this release:"));
 
 				for (int n = 0; n < authors.Length; n++) {
 					sb.Append (authors[n]);
 					if (n % 2 == 1)
 						sb.Append ("\n");
 					else if (n < authors.Length - 1)
-						sb.Append (",  ");
+						sb.Append (", ");
 				}
 
-				sb.Append ("\n\n<b>" + Catalog.GetString ("Previous Contributors") + "</b>\n\n");
+				sb.AppendLine ();
+
+				sb.Append ("\n\n<b>" + Catalog.GetString ("Previous contributors:") + "</b>\n\n");
 				for (int n = 0; n < oldAuthors.Length; n++) {
 					sb.Append (oldAuthors[n]);
 					if (n % 2 == 1)
 						sb.Append ("\n");
 					else if (n < oldAuthors.Length - 1)
-						sb.Append (",  ");
+						sb.Append (", ");
 				}
+
+				sb.AppendLine ();
 
 				string trans = Catalog.GetString ("translator-credits");
 
@@ -137,7 +141,6 @@ namespace Pinta
 					sb.Append (trans);
 				}
 
-				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Based on the work of Paint.NET:"));
@@ -151,6 +154,11 @@ namespace Pinta
 				sb.AppendLine ();
 				sb.AppendLine ("Silk - http://www.famfamfam.com/lab/icons/silk");
 				sb.Append ("Fugue - http://pinvoke.com/");
+
+				sb.AppendLine ();
+				sb.AppendLine ();
+				sb.AppendLine ();
+				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Powered by Mono:"));
 
 				return sb.ToString ();
 			}
@@ -204,7 +212,7 @@ namespace Pinta
 
 			if ((scroll == heightPixel) && (scrollPause == 0))
 				scrollPause = 60;
-			if (scroll > heightPixel + monoLogoSpacing + monoPowered.Height + 250)
+			if (scroll > heightPixel + monoLogoSpacing + monoPowered.Height + 200)
 				scroll = scrollStart;
 		}
 
