@@ -58,8 +58,8 @@ namespace Pinta
 			AddinManager.Initialize ();
 			AddinManager.Registry.Update ();
 
-			foreach (var extension in PintaCore.System.GetExtensions<IExtension> ())
-				extension.Initialize ();
+			//Look out for any changes in extensions
+			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
 
 			// Try to set the default tool to the PaintBrush
 			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Paintbrush"));
@@ -83,6 +83,16 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
+		}
+
+		// Called when an extension node is added or removed
+		private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
+		{
+			IExtension extension = (IExtension) args.ExtensionObject;
+			if (args.Change == ExtensionChange.Add)
+				extension.Initialize ();
+			else
+				extension.Uninitialize ();
 		}
 
 		#region GUI Construction
