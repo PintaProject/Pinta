@@ -39,6 +39,17 @@ namespace Pinta.Core
 			paint_brushes.Sort (new BrushSorter ());
 		}
 
+		public void RemoveInstanceOfPaintBrush (System.Type paintBrush)
+		{
+			foreach (BasePaintBrush brush in paint_brushes) {
+				if (brush.GetType () == paintBrush) {
+					paint_brushes.Remove (brush);
+					break;
+				}
+			}
+			paint_brushes.Sort (new BrushSorter ());
+		}
+
 		#region IEnumerable<BasePaintBrush> implementation
 		public IEnumerator<BasePaintBrush> GetEnumerator ()
 		{

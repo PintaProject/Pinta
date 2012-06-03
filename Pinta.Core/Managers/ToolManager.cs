@@ -39,6 +39,7 @@ namespace Pinta.Core
 		private List<BaseTool> Tools;
 
 		public event EventHandler<ToolEventArgs> ToolAdded;
+		public event EventHandler<ToolEventArgs> ToolRemoved;
 
 		public ToolManager ()
 		{
@@ -57,6 +58,23 @@ namespace Pinta.Core
 
 			if (CurrentTool == null)
 				SetCurrentTool (tool);
+		}
+
+		public void RemoveInstanceOfTool (System.Type tool_type)
+		{
+			foreach (BaseTool tool in Tools) {
+				if (tool.GetType () == tool_type) {
+					tool.ToolItem.Clicked -= HandlePbToolItemClicked;
+					tool.ToolItem.Active = false;
+					tool.ToolItem.Sensitive = false;
+
+					Tools.Remove (tool);
+					Tools.Sort (new ToolSorter ());
+
+					OnToolRemoved (tool);
+					break;
+				}
+			}
 		}
 		
 		void HandlePbToolItemClicked (object sender, EventArgs e)
@@ -170,6 +188,12 @@ namespace Pinta.Core
 		{
 			if (ToolAdded != null)
 				ToolAdded (this, new ToolEventArgs (tool));
+		}
+
+		private void OnToolRemoved (BaseTool tool)
+		{
+			if (ToolRemoved != null)
+				ToolRemoved (this, new ToolEventArgs (tool));
 		}
 
 		#region IEnumerable<BaseTool> implementation
