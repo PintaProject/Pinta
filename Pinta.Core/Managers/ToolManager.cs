@@ -71,6 +71,7 @@ namespace Pinta.Core
 					Tools.Remove (tool);
 					Tools.Sort (new ToolSorter ());
 
+					SetCurrentTool (new DummyTool ());
 					OnToolRemoved (tool);
 					return;
 				}
@@ -107,7 +108,14 @@ namespace Pinta.Core
 		}
 		
 		public BaseTool CurrentTool {
-			get { if (index >= 0) return Tools[index]; return null; }
+			get { if (index >= 0) {
+					return Tools[index];}
+				else {
+					DummyTool dummy = new DummyTool ();
+					SetCurrentTool (dummy);
+					return dummy;
+				}
+			}
 		}
 		
 		public BaseTool PreviousTool {
@@ -216,6 +224,22 @@ namespace Pinta.Core
 			{
 				return x.Priority - y.Priority;
 			}
+		}
+	}
+
+	//This tool does nothing, is used when no tools are in toolbox. If used seriously will probably
+	// throw a zillion exceptions due to missing overrides
+	public class DummyTool : BaseTool
+	{
+		public override string Name { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+		public override string Icon { get { return Gtk.Stock.MissingImage; } }
+		public override string StatusBarText { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+
+		protected override void OnBuildToolBar (Toolbar tb)
+		{
+			tool_label = null;
+			tool_image = null;
+			tool_sep = null;
 		}
 	}
 }
