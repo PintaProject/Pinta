@@ -38,6 +38,7 @@ namespace Pinta.Gui.Widgets
 			PackStart (tb2, false, false, 0);
 			
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
+			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
 			ShowAll ();
 		}
@@ -51,9 +52,21 @@ namespace Pinta.Gui.Widgets
 				tb2.Insert (item, tb2.NItems);
 		}
 
+		public void RemoveItem (ToolButton item)
+		{
+			//Run a remove on both tables since it might be in either
+			tb1.Remove (item);
+			tb2.Remove (item);
+		}
+
 		private void HandleToolAdded (object sender, ToolEventArgs e)
 		{
 			AddItem (e.Tool.ToolItem);
+		}
+
+		private void HandleToolRemoved (object sender, ToolEventArgs e)
+		{
+			RemoveItem (e.Tool.ToolItem);
 		}
 	}
 }
