@@ -108,34 +108,39 @@ namespace Pinta.Core
 		/// <summary>
 		/// Unregister an effect with Pinta, causing it to be removed from the Effects menu.
 		/// </summary>
-		/// <param name="effect">The effect to unregister</param>
-		public void UnregisterEffect (BaseEffect effect)
+		/// <param name="effect">The type of the effect to unregister</param>
+		public void UnregisterInstanceOfEffect (System.Type effect_type)
 		{
-			if (!effects.ContainsKey (effect))
-				return;
+			foreach (BaseEffect effect in effects.Keys) {
+				if (effect.GetType () == effect_type) {
+					var action = effects[effect];
 
-			var action = effects[effect];
-
-			effects.Remove (effect);
-			PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+					effects.Remove (effect);
+					PintaCore.Actions.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+					return;
+				}
+			}
 		}
 
 		/// <summary>
 		/// Unregister an effect with Pinta, causing it to be removed from the Adjustments menu.
 		/// </summary>
-		/// <param name="adjustment">The adjustment to unregister</param>
-		public void UnregisterAdjustment (BaseEffect adjustment)
+		/// <param name="adjustment_type">The type of the adjustment to unregister</param>
+		public void UnregisterInstanceOfAdjustment (System.Type adjustment_type)
 		{
-			if (!adjustments.ContainsKey (adjustment))
-				return;
+			foreach (BaseEffect adjustment in adjustments.Keys) {
+				if (adjustment.GetType () == adjustment_type) {
 
-			var action = adjustments[adjustment];
-			var menu_item = adjustment_menuitems[adjustment];
+					var action = adjustments[adjustment];
+					var menu_item = adjustment_menuitems[adjustment];
 
-			adjustments.Remove (adjustment);
-			PintaCore.Actions.Adjustments.Actions.Remove (action);
+					adjustments.Remove (adjustment);
+					PintaCore.Actions.Adjustments.Actions.Remove (action);
 
-			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).Remove (menu_item);
+					((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).Remove (menu_item);
+					return;
+				}
+			}
 		}
 	}
 }
