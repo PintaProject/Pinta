@@ -72,7 +72,7 @@ namespace Pinta.Core
 					Tools.Sort (new ToolSorter ());
 
 					OnToolRemoved (tool);
-					break;
+					return;
 				}
 			}
 		}
