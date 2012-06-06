@@ -53,7 +53,7 @@ namespace Pinta.Core
 		private int selection_layer_index;
 		private bool show_selection;
 
-		public DocumentSelection Selection;
+		public DocumentSelection Selection = new DocumentSelection();
 
 		public Document (Gdk.Size size)
 		{
@@ -232,8 +232,7 @@ namespace Pinta.Core
 			if (selection_layer != null)
 				(selection_layer.Surface as IDisposable).Dispose ();
 
-			if (selection_path != null)
-				(selection_path as IDisposable).Dispose ();
+			Selection.DisposeSelection();
 
             Workspace.History.Clear ();
 		}
@@ -242,7 +241,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (CurrentLayer.Surface);
 
-			g.AppendPath (SelectionPath);
+			g.AppendPath (Selection.SelectionPath);
 			g.FillRule = Cairo.FillRule.EvenOdd;
 			g.Clip ();
 
@@ -253,7 +252,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (CurrentLayer.Surface);
 
-			g.AppendPath (SelectionPath);
+			g.AppendPath(Selection.SelectionPath);
 			g.FillRule = Cairo.FillRule.EvenOdd;
 			g.Clip ();
 
@@ -266,7 +265,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (ToolLayer.Surface);
 
-			g.AppendPath (SelectionPath);
+			g.AppendPath(Selection.SelectionPath);
 			g.FillRule = Cairo.FillRule.EvenOdd;
 			g.Clip ();
 
@@ -277,7 +276,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (ToolLayer.Surface);
 
-			g.AppendPath (SelectionPath);
+			g.AppendPath(Selection.SelectionPath);
 			g.FillRule = Cairo.FillRule.EvenOdd;
 			g.Clip ();
 
@@ -458,7 +457,7 @@ namespace Pinta.Core
 			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
-				g.AppendPath (SelectionPath);
+				g.AppendPath(Selection.SelectionPath);
 				g.Clip ();
 
 				g.SetSource (Layers[index].Surface);
@@ -505,7 +504,7 @@ namespace Pinta.Core
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
 		{
-			var bounds = SelectionPath.GetBounds ();
+			var bounds = Selection.SelectionPath.GetBounds();
 
 			if (canvasOnly)
 				bounds = ClampToImageSize (bounds);
@@ -580,7 +579,7 @@ namespace Pinta.Core
 		
 		public void ResetSelectionPath()
 		{
-			Selection.DisposeOldPath();
+			Selection.DisposeSelectionPreserve();
 
 			Selection.ResetSelection(selection_layer.Surface, ImageSize);
 

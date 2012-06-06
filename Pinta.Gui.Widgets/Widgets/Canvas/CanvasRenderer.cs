@@ -97,7 +97,7 @@ namespace Pinta.Gui.Widgets
 
 				g.Save ();
 
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 				g.Clip ();
 				g.SetSource (PintaCore.LivePreview.LivePreviewSurface);
 				g.Paint ();

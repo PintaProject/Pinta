@@ -79,6 +79,8 @@ namespace Pinta.Tools
 
 			//SetCursor (Cursors.WaitCursor);
 
+			//Here is where the CombineMode for the Magic Wand Tool's selection is determined based on None/Ctrl/Shift + Left/Right Click.
+
 			//Left Click (usually) - also the default
 			combineMode = CombineMode.Replace;
 
@@ -118,80 +120,63 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			List<List<IntPoint>> newPolygons = new List<List<IntPoint>>();
-
-			foreach (Point[] pA in polygonSet)
-			{
-				List<IntPoint> newPolygon = new List<IntPoint>();
-
-				foreach (Point p in pA)
-				{
-					newPolygon.Add(new IntPoint((long)p.X, (long)p.Y));
-				}
-
-				//Add the first point again.
-				newPolygon.Add(new IntPoint((long)pA[0].X, (long)pA[0].Y));
-
-				newPolygons.Add(newPolygon);
-			}
-
 			SelectionHistoryItem undoAction = new SelectionHistoryItem(this.Icon, this.Name);
 			undoAction.TakeSnapshot();
 
+			//Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
+			List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons(polygonSet);
+
 			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
 			{
-				switch (combineMode)
+				//Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
+				if (combineMode == CombineMode.Replace)
 				{
-					case CombineMode.Union:
-						//Everything in Union is a Subject, not a Clip.
+					//Clear any previously stored Polygons.
+					doc.Selection.SelectionPolygons.Clear();
 
-						List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>>();
-						Point[][] resultingPolygonSet;
+					//Set the resulting selection path to the new selection path.
+					doc.Selection.SelectionPolygons = newPolygons;
+					doc.Selection.SelectionPath = g.CreatePolygonPath(polygonSet);
+				}
+				else
+				{
+					List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>>();
 
-						doc.SelectionClipper.AddPolygons(newPolygons, PolyType.ptSubject);
-						doc.SelectionClipper.Execute(ClipType.ctUnion, resultingPolygons);
+					//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
+					//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
+					doc.Selection.SelectionClipper.AddPolygons(doc.Selection.SelectionPolygons, PolyType.ptSubject);
+					doc.Selection.SelectionClipper.AddPolygons(newPolygons, PolyType.ptClip);
 
-						doc.SelectionClipper.Clear();
-						doc.SelectionClipper.AddPolygons(resultingPolygons, PolyType.ptSubject);
+					switch (combineMode)
+					{
+						case CombineMode.Xor:
+							//Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
+							doc.Selection.SelectionClipper.Execute(ClipType.ctXor, resultingPolygons);
+							break;
+						case CombineMode.Exclude:
+							//Exclude == Difference
 
-						resultingPolygonSet = new Point[resultingPolygons.Count][];
+							//Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
+							doc.Selection.SelectionClipper.Execute(ClipType.ctDifference, resultingPolygons);
+							break;
+						case CombineMode.Intersect:
+							//Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
+							doc.Selection.SelectionClipper.Execute(ClipType.ctIntersection, resultingPolygons);
+							break;
+						default:
+							//Default should only be *CombineMode.Union*, but just in case...
 
-						int polygonNumber = 0;
+							//Union means "Combine both Polygon sets, and keep any overlapping areas as well."
+							doc.Selection.SelectionClipper.Execute(ClipType.ctUnion, resultingPolygons);
+							break;
+					}
 
-						foreach (List<IntPoint> ipL in resultingPolygons)
-						{
-							resultingPolygonSet[polygonNumber] = new Point[ipL.Count];
+					//After using Clipper, it has to be cleared to there are no conflicts with its next usage.
+					doc.Selection.SelectionClipper.Clear();
 
-							int pointNumber = 0;
-
-							foreach (IntPoint ip in ipL)
-							{
-								resultingPolygonSet[polygonNumber][pointNumber] = new Point((int)ip.X, (int)ip.Y);
-
-								++pointNumber;
-							}
-
-							++polygonNumber;
-						}
-
-						doc.SelectionPath = g.CreatePolygonPath(resultingPolygonSet);
-						break;
-					case CombineMode.Xor:
-
-						doc.SelectionPath = g.CopyPath();
-						break;
-					case CombineMode.Exclude:
-
-						break;
-					case CombineMode.Intersect:
-
-						break;
-					default:
-						//Set the resulting selection path to the new selection path.
-						doc.SelectionPath = g.CreatePolygonPath(polygonSet);
-						doc.SelectionClipper.Clear();
-						doc.SelectionClipper.AddPolygons(newPolygons, PolyType.ptSubject);
-						break;
+					//Set the resulting selection path to the calculated ("clipped") selection path.
+					doc.Selection.SelectionPolygons = resultingPolygons;
+					doc.Selection.SelectionPath = g.CreatePolygonPath(DocumentSelection.ConvertToPolygonSet(resultingPolygons));
 				}
 			}
 

@@ -34,18 +34,18 @@ namespace Pinta.Core
 	public class PasteHistoryItem : BaseHistoryItem
 	{
 		private Gdk.Pixbuf paste_image;
-		private Path old_path;
+		private DocumentSelection old_selection;
 		private bool old_show_selection;
 
 		public override bool CausesDirty { get { return true; } }
 
-		public PasteHistoryItem (Gdk.Pixbuf pasteImage, Path oldPath, bool oldShowSelection)
+		public PasteHistoryItem (Gdk.Pixbuf pasteImage, DocumentSelection oldSelection, bool oldShowSelection)
 		{
 			Text = Catalog.GetString ("Paste");
 			Icon = Stock.Paste;
 
 			paste_image = pasteImage;
-			old_path = oldPath;
+			old_selection = oldSelection;
 			old_show_selection = oldShowSelection;
 		}
 
@@ -90,13 +90,13 @@ namespace Pinta.Core
 			// selection path should be visible
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Path swap_path = doc.SelectionPath;
+			DocumentSelection swap_selection = doc.Selection.Clone();
 			bool swap_show_sel = doc.ShowSelection;
 
-			doc.SelectionPath = old_path;
+			doc.Selection = old_selection;
 			doc.ShowSelection = old_show_selection;
 
-			old_path = swap_path;
+			old_selection = swap_selection;
 			old_show_selection = swap_show_sel;
 		}
 	}

@@ -188,7 +188,7 @@ namespace Pinta.Core
 			op.Apply (dstPtr, len);
 			
 			using (Context g = new Context (Surface)) {
-				g.AppendPath (PintaCore.Layers.SelectionPath);
+				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 

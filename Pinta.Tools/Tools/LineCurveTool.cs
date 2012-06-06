@@ -59,7 +59,7 @@ namespace Pinta.Tools
 			Rectangle dirty;
 			
 			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 

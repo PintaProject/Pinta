@@ -69,10 +69,10 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			Path swap_path = PintaCore.Layers.SelectionPath;
+			Path swap_path = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath;
 			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
 
-			PintaCore.Layers.SelectionPath = old_path;
+			PintaCore.Workspace.ActiveDocument.Selection.SelectionPath = old_path;
 			PintaCore.Layers.SelectionLayer.Offset = old_offset;
 
 			old_path = swap_path;
@@ -105,7 +105,7 @@ namespace Pinta.Core
 				old_surface = doc.CurrentLayer.Surface.Clone ();
 			}
 				
-			old_path = PintaCore.Layers.SelectionPath.Clone ();
+			old_path = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.Clone ();
 			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 		}
 	}

@@ -28,6 +28,8 @@ using System;
 using Cairo;
 using Pinta.Core;
 using Mono.Unix;
+using ClipperLibrary;
+using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
@@ -79,13 +81,30 @@ namespace Pinta.Tools
 			double dy = origin_offset.Y - new_offset.Y;
 
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				Path old = doc.SelectionPath;
 				g.FillRule = FillRule.EvenOdd;
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.SelectionPath);
 				g.Translate (dx, dy);
-				doc.SelectionPath = g.CopyPath ();
-				(old as IDisposable).Dispose ();
+				doc.Selection.DisposeSelectionPreserve();
+				doc.Selection.SelectionPath = g.CopyPath ();
 			}
+
+
+			List<List<IntPoint>> newSelectionPolygons = new List<List<IntPoint>>();
+
+			foreach (List<IntPoint> ipL in doc.Selection.SelectionPolygons)
+			{
+				List<IntPoint> newPolygon = new List<IntPoint>();
+
+				foreach (IntPoint ip in ipL)
+				{
+					newPolygon.Add(new IntPoint(ip.X + (long)Math.Round(dx), ip.Y + (long)Math.Round(dy)));
+				}
+
+				newSelectionPolygons.Add(newPolygon);
+			}
+
+			doc.Selection.SelectionPolygons = newSelectionPolygons;
+
 
 			origin_offset = new_offset;
 			doc.ShowSelection = true;

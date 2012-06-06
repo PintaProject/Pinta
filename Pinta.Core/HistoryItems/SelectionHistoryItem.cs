@@ -31,7 +31,7 @@ namespace Pinta.Core
 {
 	public class SelectionHistoryItem : BaseHistoryItem
 	{
-		private Path old_path;
+		private DocumentSelection old_selection;
 		private bool show_selection;
 
 		public override bool CausesDirty { get { return false; } }
@@ -52,19 +52,18 @@ namespace Pinta.Core
 
 		public override void Dispose ()
 		{
-			if (old_path != null)
-				(old_path as IDisposable).Dispose ();
+			old_selection.DisposeSelection();
 		}
 
 		private void Swap ()
 		{
-			Path swap_path = PintaCore.Layers.SelectionPath;
+			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone();
 			bool swap_show = PintaCore.Layers.ShowSelection;
 
-			PintaCore.Layers.SelectionPath = old_path;
+			PintaCore.Workspace.ActiveDocument.Selection = old_selection;
 			PintaCore.Layers.ShowSelection = show_selection;
 
-			old_path = swap_path;
+			old_selection = swap_selection;
 			show_selection = swap_show;
 			
 			PintaCore.Workspace.Invalidate ();
@@ -72,7 +71,7 @@ namespace Pinta.Core
 		
 		public void TakeSnapshot ()
 		{
-			old_path = PintaCore.Layers.SelectionPath.Clone ();
+			old_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
 			show_selection = PintaCore.Layers.ShowSelection;
 		}
 	}

@@ -29,12 +29,15 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 using Mono.Unix;
+using ClipperLibrary;
+using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
 	public class LassoSelectTool : SelectTool
 	{
 		private Path path;
+		private List<IntPoint> lassoPolygon = new List<IntPoint>();
 
 		public LassoSelectTool ()
 		{
@@ -80,15 +83,16 @@ namespace Pinta.Tools
 					
 				g.LineTo (x, y);
 
+				lassoPolygon.Add(new IntPoint((long)x, (long)y));
+
 				path = g.CopyPath ();
 				
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 
-				Path old = doc.SelectionPath;
+				doc.Selection.DisposeSelectionPreserve();
 
-				doc.SelectionPath = g.CopyPath (); 
-				(old as IDisposable).Dispose ();
+				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
 			doc.Workspace.Invalidate ();
@@ -112,11 +116,13 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 
-				Path old = doc.SelectionPath;
+				doc.Selection.DisposeSelectionPreserve();
 
-				doc.SelectionPath = g.CopyPath ();
-				(old as IDisposable).Dispose ();
+				doc.Selection.SelectionPath = g.CopyPath ();
 			}
+
+			doc.Selection.SelectionPolygons.Add(lassoPolygon);
+			lassoPolygon.Clear();
 
 			doc.Workspace.Invalidate ();
 		}

@@ -675,7 +675,7 @@ namespace Pinta.Tools
 			using (var g = new Cairo.Context (surf)) {
 				g.Save ();
 
-				g.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
+				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 

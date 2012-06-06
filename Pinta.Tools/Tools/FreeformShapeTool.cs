@@ -129,7 +129,7 @@ namespace Pinta.Tools
 			ImageSurface surf = doc.ToolLayer.Surface;
 
 			using (Context g = new Context (surf)) {
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
@@ -184,7 +184,7 @@ namespace Pinta.Tools
 			ImageSurface surf = doc.CurrentLayer.Surface;
 
 			using (Context g = new Context (surf)) {
-				g.AppendPath (doc.SelectionPath);
+				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip ();
 
