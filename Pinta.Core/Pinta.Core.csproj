@@ -82,6 +82,8 @@
   <ItemGroup>
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
+    <Compile Include="Classes\DocumentSelection.cs" />
+    <Compile Include="Clipper Library\clipper.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />

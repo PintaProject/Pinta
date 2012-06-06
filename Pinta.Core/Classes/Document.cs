@@ -51,8 +51,9 @@ namespace Pinta.Core
 		private Layer selection_layer;
 
 		private int selection_layer_index;
-		private Path selection_path;
 		private bool show_selection;
+
+		public DocumentSelection Selection;
 
 		public Document (Gdk.Size size)
 		{
@@ -139,16 +140,6 @@ namespace Pinta.Core
 
 		public Layer SelectionLayer {
 			get { return selection_layer; }
-		}
-		
-		public Path SelectionPath {
-			get { return selection_path; }
-			set {
-				if (selection_path == value)
-					return;
-
-				selection_path = value;
-			}
 		}
 
 		public bool ShowSelection {
@@ -587,15 +578,11 @@ namespace Pinta.Core
 			Workspace.Invalidate ();
 		}
 		
-		public void ResetSelectionPath ()
+		public void ResetSelectionPath()
 		{
-			Path old = SelectionPath;
+			Selection.DisposeOldPath();
 
-			using (Cairo.Context g = new Cairo.Context (selection_layer.Surface))
-				SelectionPath = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height));
-
-			if (old != null)
-				(old as IDisposable).Dispose ();
+			Selection.ResetSelection(selection_layer.Surface, ImageSize);
 
 			ShowSelection = false;
 		}

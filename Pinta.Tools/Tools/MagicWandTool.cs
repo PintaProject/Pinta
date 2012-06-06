@@ -28,6 +28,8 @@ using System;
 using Cairo;
 using Pinta.Core;
 using Mono.Unix;
+using ClipperLibrary;
+using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
@@ -36,98 +38,165 @@ namespace Pinta.Tools
 		private CombineMode combineMode;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 
-		public MagicWandTool ()
+		public MagicWandTool()
 		{
 			LimitToSelection = false;
 		}
 
-		public override string Name {
-			get { return Catalog.GetString ("Magic Wand Select"); }
+		public override string Name
+		{
+			get { return Catalog.GetString("Magic Wand Select"); }
 		}
 
-		public override string Icon {
+		public override string Icon
+		{
 			get { return "Tools.MagicWand.png"; }
 		}
 
-		public override string StatusBarText {
-			get { return Catalog.GetString ("Click to select region of similar color."); }
+		public override string StatusBarText
+		{
+			get { return Catalog.GetString("Click to select region of similar color."); }
 		}
-		
-		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.MagicWand.png"), 0, 0); }
+
+		public override Gdk.Cursor DefaultCursor
+		{
+			get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Tools.MagicWand.png"), 0, 0); }
 		}
 		public override int Priority { get { return 17; } }
 
 		private enum CombineMode
 		{
-			Union,
-			Xor,
-			Exclude,
-			Replace
+			Union, //Control + Left Click
+			Xor, //Control + Right Click
+			Exclude, //Right Click
+			Replace, //Left Click (and default)
+			Intersect //Shift + Left Click
 		}
-		// nothing = replace
-		// Ctrl = union
-		// RMB = exclude
-		// Ctrl+RMB = xor
 
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			//SetCursor (Cursors.WaitCursor);
 
-			if (args.Event.IsControlPressed () && args.Event.Button == 1)
-				this.combineMode = CombineMode.Union;
-			else if (args.Event.IsControlPressed () && args.Event.Button == 3)
-				this.combineMode = CombineMode.Xor;
-			else if (args.Event.Button == 3)
-				this.combineMode = CombineMode.Exclude;
-			else
-				this.combineMode = CombineMode.Replace;
+			//Left Click (usually) - also the default
+			combineMode = CombineMode.Replace;
 
-			base.OnMouseDown (canvas, args, point);
+			if (args.Event.Button == 1)
+			{
+				if (args.Event.IsControlPressed())
+				{
+					//Control + Left Click
+					combineMode = CombineMode.Union;
+				}
+				else if (args.Event.IsShiftPressed())
+				{
+					//Shift + Left Click
+					combineMode = CombineMode.Intersect;
+				}
+			}
+			else if (args.Event.Button == 3)
+			{
+				if (args.Event.IsControlPressed())
+				{
+					//Control + Right Click
+					combineMode = CombineMode.Xor;
+				}
+				else
+				{
+					//Right Click
+					combineMode = CombineMode.Exclude;
+				}
+			}
+
+			base.OnMouseDown(canvas, args, point);
 
 			doc.ShowSelection = true;
 		}
 
-		protected override void OnFillRegionComputed (Point[][] polygonSet)
+		protected override void OnFillRegionComputed(Point[][] polygonSet)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			SelectionHistoryItem undoAction = new SelectionHistoryItem (this.Icon, this.Name);
-			undoAction.TakeSnapshot ();
+			List<List<IntPoint>> newPolygons = new List<List<IntPoint>>();
 
-			Path path = doc.SelectionPath;
+			foreach (Point[] pA in polygonSet)
+			{
+				List<IntPoint> newPolygon = new List<IntPoint>();
 
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				PintaCore.Layers.SelectionPath = g.CreatePolygonPath (polygonSet);
-
-				switch (combineMode) {
-					case CombineMode.Union:
-						g.AppendPath (path);
-						break;
-					case CombineMode.Xor:
-						//not supported
-						break;
-					case CombineMode.Exclude:
-						//not supported
-						break;
-					case CombineMode.Replace:
-						//do nothing
-						break;
+				foreach (Point p in pA)
+				{
+					newPolygon.Add(new IntPoint((long)p.X, (long)p.Y));
 				}
 
+				//Add the first point again.
+				newPolygon.Add(new IntPoint((long)pA[0].X, (long)pA[0].Y));
+
+				newPolygons.Add(newPolygon);
 			}
 
-			(path as IDisposable).Dispose ();
+			SelectionHistoryItem undoAction = new SelectionHistoryItem(this.Icon, this.Name);
+			undoAction.TakeSnapshot();
 
-			//Selection.PerformChanging();
-			//Selection.SetContinuation(polygonSet, this.combineMode);
-			//Selection.CommitContinuation();
-			//Selection.PerformChanged();
+			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
+			{
+				switch (combineMode)
+				{
+					case CombineMode.Union:
+						//Everything in Union is a Subject, not a Clip.
 
-			doc.History.PushNewItem (undoAction);
-			doc.Workspace.Invalidate ();
+						List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>>();
+						Point[][] resultingPolygonSet;
+
+						doc.SelectionClipper.AddPolygons(newPolygons, PolyType.ptSubject);
+						doc.SelectionClipper.Execute(ClipType.ctUnion, resultingPolygons);
+
+						doc.SelectionClipper.Clear();
+						doc.SelectionClipper.AddPolygons(resultingPolygons, PolyType.ptSubject);
+
+						resultingPolygonSet = new Point[resultingPolygons.Count][];
+
+						int polygonNumber = 0;
+
+						foreach (List<IntPoint> ipL in resultingPolygons)
+						{
+							resultingPolygonSet[polygonNumber] = new Point[ipL.Count];
+
+							int pointNumber = 0;
+
+							foreach (IntPoint ip in ipL)
+							{
+								resultingPolygonSet[polygonNumber][pointNumber] = new Point((int)ip.X, (int)ip.Y);
+
+								++pointNumber;
+							}
+
+							++polygonNumber;
+						}
+
+						doc.SelectionPath = g.CreatePolygonPath(resultingPolygonSet);
+						break;
+					case CombineMode.Xor:
+
+						doc.SelectionPath = g.CopyPath();
+						break;
+					case CombineMode.Exclude:
+
+						break;
+					case CombineMode.Intersect:
+
+						break;
+					default:
+						//Set the resulting selection path to the new selection path.
+						doc.SelectionPath = g.CreatePolygonPath(polygonSet);
+						doc.SelectionClipper.Clear();
+						doc.SelectionClipper.AddPolygons(newPolygons, PolyType.ptSubject);
+						break;
+				}
+			}
+
+			doc.History.PushNewItem(undoAction);
+			doc.Workspace.Invalidate();
 		}
 	}
 }
