@@ -57,7 +57,13 @@ namespace Pinta.Core
 		/// <returns>A copy of this Selection (as a DocumentSelection object).</returns>
 		public DocumentSelection Clone()
 		{
-			return (DocumentSelection)MemberwiseClone();
+			DocumentSelection clonedSelection = new DocumentSelection();
+
+			clonedSelection.selection_path = selection_path.Clone();
+			clonedSelection.SelectionPolygons = SelectionPolygons.ToList();
+			clonedSelection.SelectionClipper = new Clipper();
+
+			return clonedSelection;
 		}
 
 		/// <summary>
