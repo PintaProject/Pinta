@@ -93,7 +93,7 @@ namespace Pinta.Core
 			DocumentSelection swap_selection = doc.Selection.Clone();
 			bool swap_show_sel = doc.ShowSelection;
 
-			doc.Selection = old_selection;
+			doc.Selection = old_selection.Clone();
 			doc.ShowSelection = old_show_selection;
 
 			old_selection = swap_selection;

@@ -37,7 +37,7 @@ namespace Pinta.Core
 		// - Subsequent moves only move the selection
 		//   around the temporary layer
 		private Document doc;
-		private Path old_path;
+		private DocumentSelection old_selection;
 		private PointD old_offset;
 		private ImageSurface old_surface;
 		private int layer_index;
@@ -61,21 +61,21 @@ namespace Pinta.Core
 
 		public override void Dispose ()
 		{
-			if (old_path != null)
-				(old_path as IDisposable).Dispose ();
+			old_selection.DisposeSelection();
+
 			if (old_surface != null)
 				(old_surface as IDisposable).Dispose ();
 		}
 
 		private void Swap ()
 		{
-			Path swap_path = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath;
+			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone();
 			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
 
-			PintaCore.Workspace.ActiveDocument.Selection.SelectionPath = old_path;
+			PintaCore.Workspace.ActiveDocument.Selection = old_selection.Clone();
 			PintaCore.Layers.SelectionLayer.Offset = old_offset;
 
-			old_path = swap_path;
+			old_selection = swap_selection;
 			old_offset = swap_offset;
 
 			if (lifted) {
@@ -105,7 +105,7 @@ namespace Pinta.Core
 				old_surface = doc.CurrentLayer.Surface.Clone ();
 			}
 				
-			old_path = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.Clone ();
+			old_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
 			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 		}
 	}

@@ -97,7 +97,7 @@ namespace Pinta.Tools
 
 				foreach (IntPoint ip in ipL)
 				{
-					newPolygon.Add(new IntPoint(ip.X + (long)Math.Round(dx), ip.Y + (long)Math.Round(dy)));
+					newPolygon.Add(new IntPoint(ip.X - (long)dx, ip.Y - (long)dy));
 				}
 
 				newSelectionPolygons.Add(newPolygon);
