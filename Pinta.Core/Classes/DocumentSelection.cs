@@ -4,7 +4,7 @@
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2010 Andrew Davis
+// Copyright (c) 2012 Andrew Davis, GSoC 2012
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal

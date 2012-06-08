@@ -35,12 +35,41 @@ namespace Pinta.Tools
 {
 	public class MagicWandTool : FloodTool
 	{
+		protected Gtk.ToolItem selection_sep;
+		protected ToolBarLabel selection_label;
+		private ToolBarDropDownButton selection_button;
+
+		protected int SelectionMode { get { return (int)selection_button.SelectedItem.Tag; } }
+
 		private CombineMode combineMode;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 
 		public MagicWandTool()
 		{
 			LimitToSelection = false;
+		}
+
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			if (selection_label == null)
+				selection_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Selection Mode")));
+
+			tb.AppendItem(selection_label);
+
+			if (selection_button == null)
+			{
+				selection_button = new ToolBarDropDownButton();
+
+				selection_button.AddItem(Catalog.GetString("Replace"), "Tools.MagicWand.png", 0);
+				selection_button.AddItem(Catalog.GetString("Union (+) (Ctrl + Left Click)"), "Tools.MagicWand.png", 1);
+				selection_button.AddItem(Catalog.GetString("Exclude (-) (Right Click)"), "Tools.MagicWand.png", 2);
+				selection_button.AddItem(Catalog.GetString("Xor (Ctrl + Right Click)"), "Tools.MagicWand.png", 3);
+				selection_button.AddItem(Catalog.GetString("Intersect (Shft + Left Click)"), "Tools.MagicWand.png", 4);
+			}
+
+			tb.AppendItem(selection_button);
 		}
 
 		public override string Name
@@ -81,8 +110,25 @@ namespace Pinta.Tools
 
 			//Here is where the CombineMode for the Magic Wand Tool's selection is determined based on None/Ctrl/Shift + Left/Right Click.
 
-			//Left Click (usually) - also the default
-			combineMode = CombineMode.Replace;
+			switch (SelectionMode)
+			{
+				case 1:
+					combineMode = CombineMode.Union;
+					break;
+				case 2:
+					combineMode = CombineMode.Exclude;
+					break;
+				case 3:
+					combineMode = CombineMode.Xor;
+					break;
+				case 4:
+					combineMode = CombineMode.Intersect;
+					break;
+				default:
+					//Left Click (usually) - also the default
+					combineMode = CombineMode.Replace;
+					break;
+			}
 
 			if (args.Event.Button == 1)
 			{
@@ -171,7 +217,7 @@ namespace Pinta.Tools
 							break;
 					}
 
-					//After using Clipper, it has to be cleared to there are no conflicts with its next usage.
+					//After using Clipper, it has to be cleared so there are no conflicts with its next usage.
 					doc.Selection.SelectionClipper.Clear();
 
 					//Set the resulting selection path to the calculated ("clipped") selection path.
