@@ -31,6 +31,7 @@ using Pinta.Core;
 using Mono.Unix;
 using ClipperLibrary;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pinta.Tools
 {
@@ -121,7 +122,7 @@ namespace Pinta.Tools
 				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
-			doc.Selection.SelectionPolygons.Add(lassoPolygon);
+			doc.Selection.SelectionPolygons.Add(lassoPolygon.ToList());
 			lassoPolygon.Clear();
 
 			doc.Workspace.Invalidate ();
