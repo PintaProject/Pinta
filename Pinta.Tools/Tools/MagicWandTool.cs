@@ -35,11 +35,13 @@ namespace Pinta.Tools
 {
 	public class MagicWandTool : FloodTool
 	{
-		protected Gtk.ToolItem selection_sep;
-		protected ToolBarLabel selection_label;
-		private ToolBarDropDownButton selection_button;
+		private Gtk.ToolItem selection_sep;
+		private ToolBarLabel selection_label;
+		private ToolBarComboBox selection_combo_box;
 
-		protected int SelectionMode { get { return (int)selection_button.SelectedItem.Tag; } }
+		private Dictionary<int, string> selectionCombinations = new Dictionary<int, string>();
+
+		private int SelectionMode = 0;
 
 		private CombineMode combineMode;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
@@ -47,29 +49,52 @@ namespace Pinta.Tools
 		public MagicWandTool()
 		{
 			LimitToSelection = false;
+
+			selectionCombinations.Add(0, "Replace");
+			selectionCombinations.Add(1, "Union (+) (Ctrl + Left Click)");
+			selectionCombinations.Add(2, "Exclude (-) (Right Click)");
+			selectionCombinations.Add(3, "Xor (Ctrl + Right Click)");
+			selectionCombinations.Add(4, "Intersect (Shift + Left Click)");
 		}
 
 		protected override void OnBuildToolBar(Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar(tb);
 
+			if (selection_sep == null)
+				selection_sep = new Gtk.SeparatorToolItem();
+
+			tb.AppendItem(selection_sep);
+
 			if (selection_label == null)
 				selection_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Selection Mode")));
 
 			tb.AppendItem(selection_label);
 
-			if (selection_button == null)
-			{
-				selection_button = new ToolBarDropDownButton();
 
-				selection_button.AddItem(Catalog.GetString("Replace"), "Tools.MagicWand.png", 0);
-				selection_button.AddItem(Catalog.GetString("Union (+) (Ctrl + Left Click)"), "Tools.MagicWand.png", 1);
-				selection_button.AddItem(Catalog.GetString("Exclude (-) (Right Click)"), "Tools.MagicWand.png", 2);
-				selection_button.AddItem(Catalog.GetString("Xor (Ctrl + Right Click)"), "Tools.MagicWand.png", 3);
-				selection_button.AddItem(Catalog.GetString("Intersect (Shft + Left Click)"), "Tools.MagicWand.png", 4);
+			if (selection_combo_box == null)
+			{
+				selection_combo_box = new ToolBarComboBox(170, 0, false);
+
+				selection_combo_box.ComboBox.Changed += (o, e) =>
+				{
+					Gtk.TreeIter iter;
+
+					if (selection_combo_box.ComboBox.GetActiveIter(out iter))
+					{
+						SelectionMode = ((KeyValuePair<int, string>)selection_combo_box.Model.GetValue(iter, 1)).Key;
+					}
+				};
+
+				foreach(KeyValuePair<int, string> sel in selectionCombinations)
+				{
+					selection_combo_box.Model.AppendValues(sel.Value, sel);
+				}
+
+				selection_combo_box.ComboBox.Active = 0;
 			}
 
-			tb.AppendItem(selection_button);
+			tb.AppendItem(selection_combo_box);
 		}
 
 		public override string Name
