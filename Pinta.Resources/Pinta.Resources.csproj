@@ -525,6 +525,24 @@
     <EmbeddedResource Include="Resources\TextTool.FillBackground.png">
       <LogicalName>TextTool.FillBackground.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.1x1.png">
+      <LogicalName>Toolbar.Sampling.1x1.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.3x3.png">
+      <LogicalName>Toolbar.Sampling.3x3.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.5x5.png">
+      <LogicalName>Toolbar.Sampling.5x5.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.7x7.png">
+      <LogicalName>Toolbar.Sampling.7x7.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.Sampling.9x9.png">
+      <LogicalName>Toolbar.Sampling.9x9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tools.ColorPicker.PreviousTool.png">
+      <LogicalName>Tools.ColorPicker.PreviousTool.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

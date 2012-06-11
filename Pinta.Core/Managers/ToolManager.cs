@@ -39,6 +39,7 @@ namespace Pinta.Core
 		private List<BaseTool> Tools;
 
 		public event EventHandler<ToolEventArgs> ToolAdded;
+		public event EventHandler<ToolEventArgs> ToolRemoved;
 
 		public ToolManager ()
 		{
@@ -57,6 +58,24 @@ namespace Pinta.Core
 
 			if (CurrentTool == null)
 				SetCurrentTool (tool);
+		}
+
+		public void RemoveInstanceOfTool (System.Type tool_type)
+		{
+			foreach (BaseTool tool in Tools) {
+				if (tool.GetType () == tool_type) {
+					tool.ToolItem.Clicked -= HandlePbToolItemClicked;
+					tool.ToolItem.Active = false;
+					tool.ToolItem.Sensitive = false;
+
+					Tools.Remove (tool);
+					Tools.Sort (new ToolSorter ());
+
+					SetCurrentTool (new DummyTool ());
+					OnToolRemoved (tool);
+					return;
+				}
+			}
 		}
 		
 		void HandlePbToolItemClicked (object sender, EventArgs e)
@@ -89,7 +108,14 @@ namespace Pinta.Core
 		}
 		
 		public BaseTool CurrentTool {
-			get { if (index >= 0) return Tools[index]; return null; }
+			get { if (index >= 0) {
+					return Tools[index];}
+				else {
+					DummyTool dummy = new DummyTool ();
+					SetCurrentTool (dummy);
+					return dummy;
+				}
+			}
 		}
 		
 		public BaseTool PreviousTool {
@@ -172,6 +198,12 @@ namespace Pinta.Core
 				ToolAdded (this, new ToolEventArgs (tool));
 		}
 
+		private void OnToolRemoved (BaseTool tool)
+		{
+			if (ToolRemoved != null)
+				ToolRemoved (this, new ToolEventArgs (tool));
+		}
+
 		#region IEnumerable<BaseTool> implementation
 		public IEnumerator<BaseTool> GetEnumerator ()
 		{
@@ -192,6 +224,22 @@ namespace Pinta.Core
 			{
 				return x.Priority - y.Priority;
 			}
+		}
+	}
+
+	//This tool does nothing, is used when no tools are in toolbox. If used seriously will probably
+	// throw a zillion exceptions due to missing overrides
+	public class DummyTool : BaseTool
+	{
+		public override string Name { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+		public override string Icon { get { return Gtk.Stock.MissingImage; } }
+		public override string StatusBarText { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+
+		protected override void OnBuildToolBar (Toolbar tb)
+		{
+			tool_label = null;
+			tool_image = null;
+			tool_sep = null;
 		}
 	}
 }

@@ -31,13 +31,20 @@ namespace Pinta.Core
 {
 	public class SimpleHistoryItem : BaseHistoryItem
 	{
+		private SurfaceDiff surface_diff;
 		ImageSurface old_surface;
 		int layer_index;
 
 		public SimpleHistoryItem (string icon, string text, ImageSurface oldSurface, int layerIndex) : base (icon, text)
 		{
-			old_surface = oldSurface;
 			layer_index = layerIndex;
+			surface_diff = SurfaceDiff.Create (oldSurface, PintaCore.Layers[layer_index].Surface);
+
+			// If the diff was too big, store the original surface, else, dispose it
+			if (surface_diff == null)
+				old_surface = oldSurface;
+			else
+				(oldSurface as IDisposable).Dispose ();
 		}
 
 		public SimpleHistoryItem (string icon, string text) : base (icon, text)
@@ -59,19 +66,25 @@ namespace Pinta.Core
 			// Grab the original surface
 			ImageSurface surf = PintaCore.Layers[layer_index].Surface;
 
-			// Undo to the "old" surface
-			PintaCore.Layers[layer_index].Surface = old_surface;
+			if (surface_diff != null) {
+				surface_diff.ApplyAndSwap (surf);
+				PintaCore.Workspace.Invalidate (surface_diff.GetBounds ());
+			} else {
+				// Undo to the "old" surface
+				PintaCore.Layers[layer_index].Surface = old_surface;
 
-			// Store the original surface for Redo
-			old_surface = surf;
+				// Store the original surface for Redo
+				old_surface = surf;
 
-			PintaCore.Workspace.Invalidate ();
+				PintaCore.Workspace.Invalidate ();
+			}
 		}
 
 		public override void Dispose ()
 		{
 			// Free up native surface
-			(old_surface as IDisposable).Dispose ();
+			if (old_surface != null)
+				(old_surface as IDisposable).Dispose ();
 		}
 
 		public void TakeSnapshotOfLayer (int layerIndex)

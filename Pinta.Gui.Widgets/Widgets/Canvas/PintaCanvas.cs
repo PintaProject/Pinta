@@ -119,8 +119,10 @@ namespace Pinta.Gui.Widgets
 			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
 
 			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				// Draw our 1 px black border
-				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width + 1, PintaCore.Workspace.CanvasSize.Height + 1), new Cairo.Color (0, 0, 0), 1);
+				// Draw our canvas drop shadow
+				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width + 1, PintaCore.Workspace.CanvasSize.Height + 1), new Cairo.Color (.5, .5, .5), 1);
+				g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 3, PintaCore.Workspace.CanvasSize.Height + 3), new Cairo.Color (.8, .8, .8), 1);
+				g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 5, PintaCore.Workspace.CanvasSize.Height + 5), new Cairo.Color (.9, .9, .9), 1);
 
 				// Set up our clip rectangle
 				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height));

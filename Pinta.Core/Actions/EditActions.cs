@@ -37,6 +37,7 @@ namespace Pinta.Core
 		public Gtk.Action Redo { get; private set; }
 		public Gtk.Action Cut { get; private set; }
 		public Gtk.Action Copy { get; private set; }
+		public Gtk.Action CopyMerged { get; private set; }
 		public Gtk.Action Paste { get; private set; }
 		public Gtk.Action PasteIntoNewLayer { get; private set; }
 		public Gtk.Action PasteIntoNewImage { get; private set; }
@@ -68,6 +69,7 @@ namespace Pinta.Core
 			Redo = new Gtk.Action ("Redo", Catalog.GetString ("Redo"), null, Stock.Redo);
 			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cut"), null, Stock.Cut);
 			Copy = new Gtk.Action ("Copy", Catalog.GetString ("Copy"), null, Stock.Copy);
+			CopyMerged = new Gtk.Action ("CopyMerged", Catalog.GetString ("Copy Merged"), null, Stock.Copy);
 			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
 			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
 			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
@@ -105,6 +107,7 @@ namespace Pinta.Core
 			menu.AppendSeparator ();
 			menu.Append (Cut.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask));
 			menu.Append (Copy.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask));
+			menu.Append (CopyMerged.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.Append (Paste.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ControlMask));
 			menu.Append (PasteIntoNewLayer.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ShiftMask | Gdk.ModifierType.ControlMask));
 			menu.Append (PasteIntoNewImage.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
@@ -146,6 +149,7 @@ namespace Pinta.Core
 			SelectAll.Activated += HandlePintaCoreActionsEditSelectAllActivated;
 			FillSelection.Activated += HandlePintaCoreActionsEditFillSelectionActivated;
 			Copy.Activated += HandlerPintaCoreActionsEditCopyActivated;
+			CopyMerged.Activated += HandlerPintaCoreActionsEditCopyMergedActivated;
 			Undo.Activated += HandlerPintaCoreActionsEditUndoActivated;
 			Redo.Activated += HandlerPintaCoreActionsEditRedoActivated;
 			Cut.Activated += HandlerPintaCoreActionsEditCutActivated;
@@ -235,6 +239,10 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			if (PintaCore.Tools.CurrentTool.TryHandleCopy (cb))
+				return;
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			PintaCore.Tools.Commit ();
@@ -250,17 +258,42 @@ namespace Pinta.Core
 				g.Paint ();
 			}
 			
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			cb.Image = dest.ToPixbuf ();
 
 			(src as IDisposable).Dispose ();
 			(dest as IDisposable).Dispose ();
 		}
+
+		private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
+		{
+			var cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			PintaCore.Tools.Commit ();
+
+			// Get our merged ("flattened") image
+			using (var src = doc.GetFlattenedImage ()) {
+				var rect = doc.GetSelectedBounds (true);
+
+				// Copy it to a correctly sized surface 
+				using (var dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height)) {
+					using (Context g = new Context (dest)) {
+						g.SetSourceSurface (src, -rect.X, -rect.Y);
+						g.Paint ();
+					}
+
+					// Give it to the clipboard
+					cb.Image = dest.ToPixbuf ();
+				}
+			}
+		}
 		
 		private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 		{
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+			if (PintaCore.Tools.CurrentTool.TryHandleCut (cb))
+				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			PintaCore.Tools.Commit ();
 			
 			// Copy selection
@@ -272,12 +305,16 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 		{
+			if (PintaCore.Tools.CurrentTool.TryHandleUndo ())
+				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.History.Undo ();
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 		{
+			if (PintaCore.Tools.CurrentTool.TryHandleRedo ())
+				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.History.Redo ();
 		}

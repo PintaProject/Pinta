@@ -29,7 +29,7 @@ using Cairo;
 using Mono.Unix;
 using Mono.Addins;
 
-[assembly: AddinRoot ("Pinta", "1.3")]
+[assembly: AddinRoot ("Pinta", "1.4")]
 
 namespace Pinta.Core
 {

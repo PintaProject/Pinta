@@ -18,7 +18,6 @@ namespace Pinta.Gui.Widgets
 	{
 		private Size source_size;
 		private Size destination_size;
-		private Layer scratch_layer;
 		private Layer offset_layer;
 
 		private ScaleFactor scale_factor;
@@ -54,22 +53,6 @@ namespace Pinta.Gui.Widgets
 			dst.MarkDirty ();
 		}
 
-		private Layer ScratchLayer {
-			get {
-				// Create one if we don't have one
-				if (scratch_layer == null)
-					scratch_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
-
-				// If we have the wrong size one, dispose it and create the correct size
-				if (scratch_layer.Surface.Width != source_size.Width || scratch_layer.Surface.Height != source_size.Height) {
-					(scratch_layer.Surface as IDisposable).Dispose ();
-					scratch_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
-				}
-
-				return scratch_layer;
-			}
-		}
-
 		private Layer OffsetLayer {
 			get {
 				// Create one if we don't have one
@@ -88,28 +71,14 @@ namespace Pinta.Gui.Widgets
 
 		private Layer CreateLivePreviewLayer (Layer original)
 		{
-			var scratch = ScratchLayer;
-			scratch.Surface.Clear ();
+			var preview_layer = new Layer (PintaCore.LivePreview.LivePreviewSurface);
 
-			using (var g = new Cairo.Context (scratch.Surface)) {
-				g.SetSource (original.Surface);
-				g.Paint ();
+			preview_layer.BlendMode = original.BlendMode;
+			preview_layer.Offset = original.Offset;
+			preview_layer.Opacity = original.Opacity;
+			preview_layer.Hidden = original.Hidden;
 
-				g.Save ();
-
-				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
-				g.Clip ();
-				g.SetSource (PintaCore.LivePreview.LivePreviewSurface);
-				g.Paint ();
-
-				g.Restore ();
-			}
-
-			scratch.BlendMode = original.BlendMode;
-			scratch.Offset = original.Offset;
-			scratch.Opacity = original.Opacity;
-
-			return scratch;
+			return preview_layer;
 		}
 
 		private Layer CreateOffsetLayer (Layer original, Point canvas_offset)
@@ -134,6 +103,7 @@ namespace Pinta.Gui.Widgets
 		{
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
+			CheckerBoardOperation checker_op = null;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -151,6 +121,9 @@ namespace Pinta.Gui.Widgets
 				// Get the blend mode for this layer and opacity
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
 				
+				if (checker)
+					checker_op = new CheckerBoardOperation (layer.Opacity);
+
 				// Figure out where our source and destination intersect
 				var srcRect = new Gdk.Rectangle (offset, dst.GetBounds ().Size);
 				srcRect.Intersect (src.GetBounds ());
@@ -174,24 +147,10 @@ namespace Pinta.Gui.Widgets
 
 					while (dstCol < dstColEnd) {
 						// Blend it over the checkerboard background
-						if (checker) {
-							int b = srcRowPtr->B;
-							int g = srcRowPtr->G;
-							int r = srcRowPtr->R;
-							int a = srcRowPtr->A;
-
-							int v = (((dstCol ^ checkerY) & 8) << 3) + 191;
-							a = a + (a >> 7);
-							int vmia = v * (256 - a);
-
-							r = ((r * a) + vmia) >> 8;
-							g = ((g * a) + vmia) >> 8;
-							b = ((b * a) + vmia) >> 8;
-
-							dstRowPtr->Bgra = (uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)255 << 24);
-						} else {
+						if (checker)
+							*dstRowPtr = checker_op.Apply (*srcRowPtr, dstCol, checkerY);
+						else
 							*dstRowPtr = blend_op.Apply (*dstRowPtr, *srcRowPtr);
-						}
 					
 						++dstRowPtr;
 						++srcRowPtr;
@@ -208,6 +167,7 @@ namespace Pinta.Gui.Widgets
 		{
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
+			CheckerBoardOperation checker_op = null;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -224,6 +184,9 @@ namespace Pinta.Gui.Widgets
 
 				// Get the blend mode for this layer and opacity
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
+
+				if (checker)
+					checker_op = new CheckerBoardOperation (layer.Opacity);
 				
 				ColorBgra* src_ptr = (ColorBgra*)src.DataPtr;
 				ColorBgra* dst_ptr = (ColorBgra*)dst.DataPtr;
@@ -251,27 +214,12 @@ namespace Pinta.Gui.Widgets
 					for (int dstCol = 0; dstCol < dst_width; ++dstCol) {
 						int nnX = dstCol + offset.X;
 						int srcX = d2sLookupX[nnX];
-					
-						if (checker) {
-							ColorBgra src2 = *(srcRow + srcX);
-							int b = src2.B;
-							int g = src2.G;
-							int r = src2.R;
-							int a = src2.A;
 
-							// Blend it over the checkerboard background
-							int v = (((dstCol + offset.X) ^ (dstRow + offset.Y)) & 8) * 8 + 191;
-							a = a + (a >> 7);
-							int vmia = v * (256 - a);
-
-							r = ((r * a) + vmia) >> 8;
-							g = ((g * a) + vmia) >> 8;
-							b = ((b * a) + vmia) >> 8;
-
-							dstPtr->Bgra = (uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)255 << 24);
-						} else {
+						// Blend it over the checkerboard background
+						if (checker)
+							*dstPtr = checker_op.Apply (*(srcRow + srcX), dstCol + offset.X, dstRow + offset.Y);
+						else
 							*dstPtr = blend_op.Apply (*dstPtr, *(srcRow + srcX));
-						}
 
 						++dstPtr;
 					}
@@ -290,6 +238,7 @@ namespace Pinta.Gui.Widgets
 		{
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
+			CheckerBoardOperation checker_op = null;
 
 			for (int i = 0; i < layers.Count; i++) {
 				var layer = layers[i];
@@ -306,7 +255,10 @@ namespace Pinta.Gui.Widgets
 
 				// Get the blend mode for this layer and opacity
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
-				
+
+				if (checker)
+					checker_op = new CheckerBoardOperation (layer.Opacity);
+
 				const int fpShift = 12;
 				const int fpFactor = (1 << fpShift);
 
@@ -357,20 +309,11 @@ namespace Pinta.Gui.Widgets
 						int b = (2 + p1->B + p2->B + p3->B + p4->B) >> 2;
 						int a = (2 + p1->A + p2->A + p3->A + p4->A) >> 2;
 
-						if (checker) {
-							// Blend it over the checkerboard background
-							int v = ((checkerX ^ checkerY) & 8) * 8 + 191;
-							a = a + (a >> 7);
-							int vmia = v * (256 - a);
-
-							r = ((r * a) + vmia) >> 8;
-							g = ((g * a) + vmia) >> 8;
-							b = ((b * a) + vmia) >> 8;
-
-							dstPtr->Bgra = (uint)b + ((uint)g << 8) + ((uint)r << 16) + 0xff000000;
-						} else {
+						// Blend it over the checkerboard background
+						if (checker)
+							*dstPtr = checker_op.Apply (ColorBgra.FromUInt32 ((uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24)), checkerX, checkerY);
+						else
 							*dstPtr = blend_op.Apply (*dstPtr, ColorBgra.FromUInt32 ((uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24)));
-						}
 					
 						++dstPtr;
 					}
