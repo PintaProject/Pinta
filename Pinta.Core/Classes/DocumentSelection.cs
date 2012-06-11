@@ -159,11 +159,37 @@ namespace Pinta.Core
 			//the ellipse's 4 curves (and all of the Points on each curve) are determined.
 			//Note: each curve is consecutive to the previous one, but they *do not* overlap,
 			//other than the first/last Point (which is how it is supposed to work).
-			newPolygon.Add(new IntPoint((long)(cx + rx), (long)cy)); //The starting Point.
-			newPolygon.AddRange(CalculateCurvePoints(tInterval, cx + rx, cy, cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry)); //Curve 1.
-			newPolygon.AddRange(CalculateCurvePoints(tInterval, cx, cy - ry, cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy)); //Curve 2.
-			newPolygon.AddRange(CalculateCurvePoints(tInterval, cx - rx, cy, cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry)); //Curve 3.
-			newPolygon.AddRange(CalculateCurvePoints(tInterval, cx, cy + ry, cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy)); //Curve 4.
+
+			//The starting Point.
+			newPolygon.Add(new IntPoint((long)(cx + rx), (long)cy));
+
+			//Curve 1.
+			newPolygon.AddRange(CalculateCurvePoints(tInterval,
+				cx + rx, cy,
+				cx + rx, cy - c1 * ry,
+				cx + c1 * rx, cy - ry,
+				cx, cy - ry));
+
+			//Curve 2.
+			newPolygon.AddRange(CalculateCurvePoints(tInterval,
+				cx, cy - ry,
+				cx - c1 * rx, cy - ry,
+				cx - rx, cy - c1 * ry,
+				cx - rx, cy));
+
+			//Curve 3.
+			newPolygon.AddRange(CalculateCurvePoints(tInterval,
+				cx - rx, cy,
+				cx - rx, cy + c1 * ry,
+				cx - c1 * rx, cy + ry,
+				cx, cy + ry));
+
+			//Curve 4.
+			newPolygon.AddRange(CalculateCurvePoints(tInterval,
+				cx, cy + ry,
+				cx + c1 * rx, cy + ry,
+				cx + rx, cy + c1 * ry,
+				cx + rx, cy));
 
 			//Add the newly calculated elliptical Polygon.
 			SelectionPolygons.Add(newPolygon);
@@ -234,7 +260,9 @@ namespace Pinta.Core
 				intermediatePointsY[1, 1] = (intermediatePointsY[0, 2] - intermediatePointsY[0, 1]) * t + intermediatePointsY[0, 1];
 
 				//The "third layer" (the resulting Point that is on the curve) is stored immediately after calculation.
-				calculatedPoints.Add(new IntPoint((long)((intermediatePointsX[1, 1] - intermediatePointsX[1, 0]) * t + intermediatePointsX[1, 0]), (long)((intermediatePointsY[1, 1] - intermediatePointsY[1, 0]) * t + intermediatePointsY[1, 0])));
+				calculatedPoints.Add(new IntPoint(
+					(long)((intermediatePointsX[1, 1] - intermediatePointsX[1, 0]) * t + intermediatePointsX[1, 0]),
+					(long)((intermediatePointsY[1, 1] - intermediatePointsY[1, 0]) * t + intermediatePointsY[1, 0])));
 			}
 
 			//Return the partial Polygon containing the calculated Points in the curve.

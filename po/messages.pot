@@ -2021,5 +2021,5 @@ msgid "Intersect (Shift + Left Click)"
 msgstr ""
 
 #: Pinta.Tools/MagicWandTool.cs:70
-msgid "Selection Mode:"
+msgid " Selection Mode: "
 msgstr ""

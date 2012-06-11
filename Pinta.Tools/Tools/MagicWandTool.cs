@@ -50,11 +50,11 @@ namespace Pinta.Tools
 		{
 			LimitToSelection = false;
 
-			selectionCombinations.Add(0, "Replace");
-			selectionCombinations.Add(1, "Union (+) (Ctrl + Left Click)");
-			selectionCombinations.Add(2, "Exclude (-) (Right Click)");
-			selectionCombinations.Add(3, "Xor (Ctrl + Right Click)");
-			selectionCombinations.Add(4, "Intersect (Shift + Left Click)");
+			selectionCombinations.Add(0, Catalog.GetString("Replace"));
+			selectionCombinations.Add(1, Catalog.GetString("Union (+) (Ctrl + Left Click)"));
+			selectionCombinations.Add(2, Catalog.GetString("Exclude (-) (Right Click)"));
+			selectionCombinations.Add(3, Catalog.GetString("Xor (Ctrl + Right Click)"));
+			selectionCombinations.Add(4, Catalog.GetString("Intersect (Shift + Left Click)"));
 		}
 
 		protected override void OnBuildToolBar(Gtk.Toolbar tb)
@@ -67,7 +67,7 @@ namespace Pinta.Tools
 			tb.AppendItem(selection_sep);
 
 			if (selection_label == null)
-				selection_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Selection Mode")));
+				selection_label = new ToolBarLabel(Catalog.GetString(" Selection Mode: "));
 
 			tb.AppendItem(selection_label);
 
