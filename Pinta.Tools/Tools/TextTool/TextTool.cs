@@ -696,7 +696,7 @@ namespace Pinta.Tools
 					foreach (Rectangle rect in engine.SelectionRectangles)
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
-				g.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
+				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 

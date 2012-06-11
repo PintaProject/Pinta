@@ -42,8 +42,8 @@ namespace Pinta.Core
 			Icon = "Menu.Image.Resize.png";
 			Text = Catalog.GetString ("Resize Image");
 		}
-		
-		public Cairo.Path RestorePath { get; set; }
+
+		public DocumentSelection RestoreSelection;
 		
 		public override void Undo ()
 		{
@@ -59,10 +59,10 @@ namespace Pinta.Core
 			
 			base.Undo ();
 			
-			if (RestorePath != null) {
-				Cairo.Path old = PintaCore.Layers.SelectionPath;
+			if (RestoreSelection != null) {
+				Cairo.Path old = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath;
 
-				PintaCore.Layers.SelectionPath = RestorePath.Clone ();
+				PintaCore.Workspace.ActiveDocument.Selection = RestoreSelection.Clone();
 				
 				if (old != null)
 					(old as IDisposable).Dispose ();
@@ -101,10 +101,7 @@ namespace Pinta.Core
 		{
 			base.Dispose ();
 
-			if (RestorePath != null) {
-				(RestorePath as IDisposable).Dispose ();
-				RestorePath = null;
-			}
+			RestoreSelection.DisposeSelectionPreserve();
 		}
 	}
 }

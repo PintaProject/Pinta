@@ -99,15 +99,16 @@ namespace Pinta.Actions
 
 			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
 
-			Path old_path = doc.SelectionPath;
+			DocumentSelection old_selection = doc.Selection.Clone();
 			bool old_show_selection = doc.ShowSelection;
 
-			doc.SelectionPath = p;
+			doc.Selection.SelectionPath = p;
+			doc.Selection.SelectionPolygons.Clear();
 			doc.ShowSelection = true;
 
 			doc.Workspace.Invalidate ();
 
-			doc.History.PushNewItem (new PasteHistoryItem (image, old_path, old_show_selection));
+			doc.History.PushNewItem (new PasteHistoryItem (image, old_selection, old_show_selection));
 		}
 
 		private ResponseType ShowExpandCanvasDialog ()

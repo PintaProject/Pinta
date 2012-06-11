@@ -120,7 +120,7 @@ namespace Pinta.Tools
 				surf.MarkDirty ();
 			} else {
 				using (Context g = new Context (surf)) {
-					g.AppendPath (doc.SelectionPath);
+					g.AppendPath (doc.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.Clip ();
 				

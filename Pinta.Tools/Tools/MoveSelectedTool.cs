@@ -28,6 +28,8 @@ using System;
 using Cairo;
 using Pinta.Core;
 using Mono.Unix;
+using ClipperLibrary;
+using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
@@ -73,7 +75,7 @@ namespace Pinta.Tools
 				doc.ShowSelectionLayer = true;
 
 				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
-					g.AppendPath (doc.SelectionPath);
+					g.AppendPath (doc.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.SetSource (doc.CurrentLayer.Surface);
 					g.Clip ();
@@ -83,7 +85,7 @@ namespace Pinta.Tools
 				Cairo.ImageSurface surf = doc.CurrentLayer.Surface;
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
-					g.AppendPath (doc.SelectionPath);
+					g.AppendPath (doc.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
 					g.Operator = Cairo.Operator.Clear;
 					g.Fill ();
@@ -105,15 +107,31 @@ namespace Pinta.Tools
 			double dx = origin_offset.X - new_offset.X;
 			double dy = origin_offset.Y - new_offset.Y;
 
-			Path path = doc.SelectionPath;
-
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				g.AppendPath (path);
+				g.AppendPath(doc.Selection.SelectionPath);
 				g.Translate (dx, dy);
-				doc.SelectionPath = g.CopyPath ();
+				doc.Selection.DisposeSelectionPreserve();
+				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
-			(path as IDisposable).Dispose ();
+
+			List<List<IntPoint>> newSelectionPolygons = new List<List<IntPoint>>();
+
+			foreach (List<IntPoint> ipL in doc.Selection.SelectionPolygons)
+			{
+				List<IntPoint> newPolygon = new List<IntPoint>();
+
+				foreach (IntPoint ip in ipL)
+				{
+					newPolygon.Add(new IntPoint(ip.X - (long)dx, ip.Y - (long)dy));
+				}
+
+				newSelectionPolygons.Add(newPolygon);
+			}
+
+
+			doc.Selection.SelectionPolygons = newSelectionPolygons;
+
 
 			doc.SelectionLayer.Offset = new PointD (doc.SelectionLayer.Offset.X - dx, doc.SelectionLayer.Offset.Y - dy);
 			
