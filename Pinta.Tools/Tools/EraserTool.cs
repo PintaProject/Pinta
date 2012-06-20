@@ -44,6 +44,7 @@ namespace Pinta.Tools
 		public override string Name { get { return Catalog.GetString ("Eraser"); } }
 		public override string Icon { get { return "Tools.Eraser.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to erase to transparent, right click to erase to secondary color. "); } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 6); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
 		public override int Priority { get { return 27; } }
 		#endregion

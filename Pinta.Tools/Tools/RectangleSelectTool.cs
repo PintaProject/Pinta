@@ -42,6 +42,9 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Click and drag to draw a rectangular selection. Hold shift to constrain to a square."); }
 		}
+
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 6); } }
+
 		public override int Priority { get { return 5; } }
 
 		protected override Rectangle DrawShape (Rectangle r, Layer l)
