@@ -40,7 +40,9 @@ namespace Pinta.Tools
 		public override string Name { get { return Catalog.GetString ("Paintbrush"); } }
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, SetThicknessIcon("Menu.Edit.EraseSelection.png"), BrushWidth / 2 + 2, BrushWidth / 2 + 2); } }
+		private int iconOffsetX, iconOffsetY;
+		private Color iconColor = new Color(0, 0, 0);
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, CreateThicknessIcon("Tools.Paintbrush.png", 16, 16, 0, 16, iconColor, 1), iconOffsetX, iconOffsetY); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
 		public override int Priority { get { return 25; } }
 
@@ -56,19 +58,26 @@ namespace Pinta.Tools
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
 
-		private Gdk.Pixbuf SetThicknessIcon(string name)
+		private Gdk.Pixbuf CreateThicknessIcon(string name, int cursorWidth, int cursorHeight, int cursorOffsetX, int cursorOffsetY, Color ellipseColor, int ellipseThickness)
 		{
-			ImageSurface i = new ImageSurface(Format.ARGB32, BrushWidth + 17, BrushWidth + 17);
+			int halfOfEllipseThickness = (int)Math.Ceiling(ellipseThickness / 2d);
+			int halfOfBrushWidth = BrushWidth / 2;
+
+			int iconWidth = (int)Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfEllipseThickness, BrushWidth + ellipseThickness + 1);
+			int iconHeight = (int)Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfEllipseThickness, BrushWidth + ellipseThickness + 1);
+
+			iconOffsetX = (int)Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfEllipseThickness);
+			iconOffsetY = (int)Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfEllipseThickness);
+
+			ImageSurface i = new ImageSurface(Format.ARGB32, iconWidth, iconHeight);
 
 			using (Context g = new Context(i))
 			{
-				g.DrawEllipse(new Rectangle(2, 2, BrushWidth, BrushWidth), new Color(0, 0, 0), 1);
-				g.DrawLine(new PointD(0d, (double)BrushWidth / 2d + 2d), new PointD(4d, (double)BrushWidth / 2d + 2d), new Color(0, 0, 0), 1);
-				g.DrawLine(new PointD((double)BrushWidth / 2d + 2d, 0d), new PointD((double)BrushWidth / 2d + 2d, 4d), new Color(0, 0, 0), 1);
-				g.DrawLine(new PointD((double)BrushWidth, (double)BrushWidth / 2d + 2d), new PointD((double)BrushWidth + 4d, (double)BrushWidth / 2d + 2d), new Color(0, 0, 0), 1);
-				g.DrawLine(new PointD((double)BrushWidth / 2d + 2d, (double)BrushWidth), new PointD((double)BrushWidth / 2d + 2d, (double)BrushWidth + 4d), new Color(0, 0, 0), 1);
-				g.DrawEllipse(new Rectangle(BrushWidth / 2 + 2, BrushWidth / 2 + 2, 1, 1), new Color(0, 0, 0), 1);
-				g.DrawPixbuf(PintaCore.Resources.GetIcon(name), new Point(BrushWidth + 1, BrushWidth + 1));
+				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth, iconOffsetY - halfOfBrushWidth, BrushWidth, BrushWidth),
+					ellipseColor, ellipseThickness);
+
+				g.DrawPixbuf(PintaCore.Resources.GetIcon(name),
+					new Point(iconOffsetX - cursorOffsetX, iconOffsetY - cursorOffsetY));
 			}
 
 			return CairoExtensions.ToPixbuf(i);
