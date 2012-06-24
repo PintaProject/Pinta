@@ -68,9 +68,15 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to set primary color. Right click to set secondary color."); }
 		}
-		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.ColorPicker.png"), 1, 16); }
-		}
+		private int iconOffsetX, iconOffsetY;
+		private int cursorOffsetX = 1;
+		private int cursorOffsetY = 16;
+		private Cairo.Color iconRectangleColor1 = new Cairo.Color(0, 0, 0);
+		private Cairo.Color iconRectangleColor2 = new Cairo.Color(255, 255, 255);
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
+					CreateRectangularThicknessIcon("Cursor.ColorPicker.png", SampleSize, 16, 16,
+					cursorOffsetX, cursorOffsetY, iconRectangleColor1, iconRectangleColor2, 1,
+					ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override Gdk.Key ShortcutKey {
 			get { return Gdk.Key.K; }
 		}
@@ -78,7 +84,17 @@ namespace Pinta.Tools
 			get { return 31; }
 		}
 		private int SampleSize {
-			get { return (int)sample_size.SelectedItem.Tag; }
+			get
+			{
+				if (sample_size != null)
+				{
+					return (int)sample_size.SelectedItem.Tag;
+				}
+				else
+				{
+					return 1;
+				}
+			}
 		}
 		private bool SampleLayerOnly {
 			get { return (bool)sample_type.SelectedItem.Tag; }
@@ -97,6 +113,9 @@ namespace Pinta.Tools
 
 			if (sample_size == null) {
 				sample_size = new ToolBarDropDownButton (true);
+
+				//Change the cursor when the SampleSize is changed.
+				sample_size.SelectedItemChanged += new EventHandler(sample_size_SelectedItemChanged);
 
 				sample_size.AddItem (Catalog.GetString ("Single Pixel"), "Toolbar.Sampling.1x1.png", 1);
 				sample_size.AddItem (Catalog.GetString ("3 x 3 Region"), "Toolbar.Sampling.3x3.png", 3);
@@ -135,6 +154,12 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem (tool_select);
+		}
+
+		void sample_size_SelectedItemChanged(object sender, EventArgs e)
+		{
+			//Change the cursor when the SampleSize is changed.
+			SetCursor(DefaultCursor);
 		}
 		#endregion
 		

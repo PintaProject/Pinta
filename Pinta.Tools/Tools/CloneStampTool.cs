@@ -45,10 +45,32 @@ namespace Pinta.Tools
 			get { return "Tools.CloneStamp.png"; }
 		}
 		public override string StatusBarText { get { return Catalog.GetString ("Ctrl-left click to set origin, left click to paint."); } }
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.CloneStamp.png"), 6, 11); } }
+		private int iconOffsetX, iconOffsetY;
+		private int cursorOffsetX = 6;
+		private int cursorOffsetY = 11;
+		private Cairo.Color iconEllipseColor1 = new Cairo.Color(0, 0, 0);
+		private Cairo.Color iconEllipseColor2 = new Cairo.Color(255, 255, 255, .5d);
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
+			CreateEllipticalThicknessIcon("Cursor.CloneStamp.png", BrushWidth, 16, 16,
+			cursorOffsetX, cursorOffsetY, iconEllipseColor1, iconEllipseColor2, 1,
+			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.L; } }
 		public override int Priority { get { return 33; } }
 		protected override bool ShowAntialiasingButton { get { return true; } }
+
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			//Change the cursor when the BrushWidth is changed.
+			brush_width.ComboBox.Changed += new EventHandler(ComboBox_Changed);
+		}
+
+		void ComboBox_Changed(object sender, EventArgs e)
+		{
+			//Change the cursor when the BrushWidth is changed.
+			SetCursor(DefaultCursor);
+		}
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{

@@ -41,8 +41,14 @@ namespace Pinta.Tools
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 		private int iconOffsetX, iconOffsetY;
-		private Color iconColor = new Color(0, 0, 0);
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, CreateThicknessIcon("Tools.Paintbrush.png", 16, 16, 0, 16, iconColor, 1), iconOffsetX, iconOffsetY); } }
+		private int cursorOffsetX = 0;
+		private int cursorOffsetY = 16;
+		private Color iconEllipseColor1 = new Color(0, 0, 0);
+		private Color iconEllipseColor2 = new Color(255, 255, 255, .5d);
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
+			CreateEllipticalThicknessIcon("Tools.Paintbrush.png", BrushWidth, 16, 16,
+			cursorOffsetX, cursorOffsetY, iconEllipseColor1, iconEllipseColor2, 1,
+			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
 		public override int Priority { get { return 25; } }
 
@@ -58,33 +64,9 @@ namespace Pinta.Tools
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
 
-		private Gdk.Pixbuf CreateThicknessIcon(string name, int cursorWidth, int cursorHeight, int cursorOffsetX, int cursorOffsetY, Color ellipseColor, int ellipseThickness)
-		{
-			int halfOfEllipseThickness = (int)Math.Ceiling(ellipseThickness / 2d);
-			int halfOfBrushWidth = BrushWidth / 2;
-
-			int iconWidth = (int)Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfEllipseThickness, BrushWidth + ellipseThickness + 1);
-			int iconHeight = (int)Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfEllipseThickness, BrushWidth + ellipseThickness + 1);
-
-			iconOffsetX = (int)Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfEllipseThickness);
-			iconOffsetY = (int)Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfEllipseThickness);
-
-			ImageSurface i = new ImageSurface(Format.ARGB32, iconWidth, iconHeight);
-
-			using (Context g = new Context(i))
-			{
-				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth, iconOffsetY - halfOfBrushWidth, BrushWidth, BrushWidth),
-					ellipseColor, ellipseThickness);
-
-				g.DrawPixbuf(PintaCore.Resources.GetIcon(name),
-					new Point(iconOffsetX - cursorOffsetX, iconOffsetY - cursorOffsetY));
-			}
-
-			return CairoExtensions.ToPixbuf(i);
-		}
-
 		void ComboBox_Changed(object sender, EventArgs e)
 		{
+			//Change the cursor when the BrushWidth is changed.
 			SetCursor(DefaultCursor);
 		}
 
@@ -92,6 +74,7 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar (tb);
 
+			//Change the cursor when the BrushWidth is changed.
 			brush_width.ComboBox.Changed += new EventHandler(ComboBox_Changed);
 
 			if (brush_label == null)
