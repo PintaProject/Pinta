@@ -77,6 +77,7 @@ namespace Pinta.Tools
 					CreateRectangularThicknessIcon("Cursor.ColorPicker.png", SampleSize, 16, 16,
 					cursorOffsetX, cursorOffsetY, iconRectangleColor1, iconRectangleColor2, 1,
 					ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
+		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey {
 			get { return Gdk.Key.K; }
 		}

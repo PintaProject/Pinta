@@ -79,6 +79,8 @@ namespace Pinta.Core
 		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && (bool)alphablending_button.SelectedItem.Tag; } }
 		public virtual int Priority { get { return 75; } }
 
+		public virtual bool CursorChangesOnZoom { get { return false; } }
+
 		protected virtual bool ShowAntialiasingButton { get { return false; } }
 		protected virtual bool ShowAlphaBlendingButton { get { return false; } }
 		
@@ -261,7 +263,7 @@ namespace Pinta.Core
 			return tool_item;
 		}
 		
-		protected void SetCursor (Gdk.Cursor cursor)
+		public void SetCursor (Gdk.Cursor cursor)
 		{
 			PintaCore.Chrome.Canvas.GdkWindow.Cursor = cursor;
 		}
@@ -283,22 +285,37 @@ namespace Pinta.Core
 		/// <returns>The new cursor icon with an ellipse that represents the tool's thickness.</returns>
 		protected Gdk.Pixbuf CreateEllipticalThicknessIcon(string name, int brushWidth, int cursorWidth, int cursorHeight, int cursorOffsetX, int cursorOffsetY, Color ellipseColor1, Color ellipseColor2, int ellipseThickness, ref int iconOffsetX, ref int iconOffsetY)
 		{
+			double zoom = 1d;
+
+			if (PintaCore.Workspace.HasOpenDocuments)
+			{
+				zoom = Math.Min(30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
+			}
+
+			brushWidth = (int)Math.Min(800d, ((double)brushWidth) * zoom);
+			cursorWidth = (int)((double)cursorWidth * zoom);
+			cursorHeight = (int)((double)cursorHeight * zoom);
+
+
 			int halfOfEllipseThickness = (int)Math.Ceiling(ellipseThickness / 2d);
 			int halfOfBrushWidth = brushWidth / 2;
 
-			int iconWidth = (int)Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfEllipseThickness,
-				brushWidth + ellipseThickness + 1);
-			int iconHeight = (int)Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfEllipseThickness,
-				brushWidth + ellipseThickness + 1);
+			int iconWidth = Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfEllipseThickness,
+				brushWidth + ellipseThickness + (int)(16d / zoom));
+			int iconHeight = Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfEllipseThickness,
+				brushWidth + ellipseThickness + (int)(16d / zoom));
 
-			iconOffsetX = (int)Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfEllipseThickness);
-			iconOffsetY = (int)Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfEllipseThickness);
+			iconOffsetX = Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfEllipseThickness);
+			iconOffsetY = Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfEllipseThickness);
 
 			ImageSurface i = new ImageSurface(Format.ARGB32, iconWidth, iconHeight);
 
 			using (Context g = new Context(i))
 			{
-				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth, iconOffsetY - halfOfBrushWidth, brushWidth, brushWidth),
+				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth,
+					iconOffsetY - halfOfBrushWidth,
+					brushWidth,
+					brushWidth),
 					ellipseColor2, ellipseThickness);
 
 				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth + ellipseThickness,
@@ -331,20 +348,37 @@ namespace Pinta.Core
 		/// <returns>The new cursor icon with an rectangle that represents the tool's thickness.</returns>
 		protected Gdk.Pixbuf CreateRectangularThicknessIcon(string name, int brushWidth, int cursorWidth, int cursorHeight, int cursorOffsetX, int cursorOffsetY, Color rectangleColor1, Color rectangleColor2, int rectangleThickness, ref int iconOffsetX, ref int iconOffsetY)
 		{
+			double zoom = 1d;
+
+			if (PintaCore.Workspace.HasOpenDocuments)
+			{
+				zoom = Math.Min(30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
+			}
+
+			brushWidth = (int)Math.Min(800d, ((double)brushWidth) * zoom);
+			cursorWidth = (int)((double)cursorWidth * zoom);
+			cursorHeight = (int)((double)cursorHeight * zoom);
+
+
 			int halfOfRectangleThickness = (int)Math.Ceiling(rectangleThickness / 2d);
 			int halfOfBrushWidth = brushWidth / 2;
 
-			int iconWidth = (int)Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfRectangleThickness, brushWidth + rectangleThickness + 1);
-			int iconHeight = (int)Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfRectangleThickness, brushWidth + rectangleThickness + 1);
+			int iconWidth = Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfRectangleThickness,
+				brushWidth + rectangleThickness + (int)(16d / zoom));
+			int iconHeight = Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfRectangleThickness,
+				brushWidth + rectangleThickness + (int)(16d / zoom));
 
-			iconOffsetX = (int)Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfRectangleThickness);
-			iconOffsetY = (int)Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfRectangleThickness);
+			iconOffsetX = Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfRectangleThickness);
+			iconOffsetY = Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfRectangleThickness);
 
 			ImageSurface i = new ImageSurface(Format.ARGB32, iconWidth, iconHeight);
 
 			using (Context g = new Context(i))
 			{
-				g.DrawRectangle(new Rectangle(iconOffsetX - halfOfBrushWidth, iconOffsetY - halfOfBrushWidth, brushWidth, brushWidth),
+				g.DrawRectangle(new Rectangle(iconOffsetX - halfOfBrushWidth,
+					iconOffsetY - halfOfBrushWidth,
+					brushWidth,
+					brushWidth),
 					rectangleColor2, rectangleThickness);
 
 				g.DrawRectangle(new Rectangle(iconOffsetX - halfOfBrushWidth + rectangleThickness,

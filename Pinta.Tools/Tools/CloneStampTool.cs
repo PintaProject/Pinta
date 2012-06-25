@@ -54,6 +54,7 @@ namespace Pinta.Tools
 			CreateEllipticalThicknessIcon("Cursor.CloneStamp.png", BrushWidth, 16, 16,
 			cursorOffsetX, cursorOffsetY, iconEllipseColor1, iconEllipseColor2, 1,
 			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
+		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.L; } }
 		public override int Priority { get { return 33; } }
 		protected override bool ShowAntialiasingButton { get { return true; } }

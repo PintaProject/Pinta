@@ -67,6 +67,7 @@ namespace Pinta.Tools
 			CreateEllipticalThicknessIcon("Tools.Eraser.png", BrushWidth, 16, 16,
 			cursorOffsetX, cursorOffsetY, iconEllipseColor1, iconEllipseColor2, 1,
 			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
+		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
 		public override int Priority { get { return 27; } }
 		#endregion
