@@ -61,6 +61,7 @@ namespace Pinta.Core
 			Workspace = new DocumentWorkspace (this);
 			IsDirty = false;
 			HasFile = false;
+			HasBeenSaved = false;
 			ImageSize = size;
 			
 			Layers = new List<Layer> ();
@@ -99,6 +100,9 @@ namespace Pinta.Core
 		public Guid Guid { get; private set; }
 		
 		public bool HasFile { get; set; }
+
+		//Determines whether or not the document has been saved before.
+		public bool HasBeenSaved { get; set; }
 		
 		public DocumentWorkspaceHistory History { get { return Workspace.History; } }
 

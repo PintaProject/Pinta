@@ -42,6 +42,9 @@ namespace Pinta
 			this.VBox.Spacing = 3;
 			VBox content = new VBox ();
 			content.Spacing = 5;
+
+			DefaultResponse = ResponseType.Ok;
+			TransientFor = (Gtk.Window)Parent;
 			
 			Label label = new Label (Catalog.GetString ("Quality: "));
 			label.Xalign = 0;

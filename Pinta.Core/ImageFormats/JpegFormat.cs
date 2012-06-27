@@ -33,17 +33,51 @@ namespace Pinta.Core
 {
 	public class JpegFormat: GdkPixbufFormat
 	{
+		//This is used to remember the previous JPG export compression quality value. It must be
+		//a number between 1-100. It starts out at 101 so Pinta knows it hasn't been loaded yet.
+		private static int jpgCompression = 101;
+
 		public JpegFormat()
 			: base ("jpeg")
 		{
+			//Save the JPG export compression quality to the settings file before Pinta closes.
+			PintaCore.Actions.File.BeforeQuit += new EventHandler(SaveJPGCompression);
 		}
-		
-		protected override void DoSave (Pixbuf pb, string fileName, string fileType)
+
+		void SaveJPGCompression(object sender, EventArgs e)
 		{
-			int level = PintaCore.Actions.File.RaiseModifyCompression (85);
-			
+			//Save the JPG export compression quality to the settings file before Pinta closes.
+			PintaCore.Settings.PutSetting("jpg-quality", jpgCompression);
+		}
+
+		protected override void DoSave(Pixbuf pb, string fileName, string fileType)
+		{
+			//If the JPG export compression quality is equal to 101,
+			//it hasn't been loaded from the settings file yet.
+			if (jpgCompression == 101)
+			{
+				//Load the JPG export compression quality, with a default of 85.
+				jpgCompression = PintaCore.Settings.GetSetting<int>("jpg-quality", 85);
+			}
+
+			int level = jpgCompression;
+
+			//Check to see if the document has been saved before. If it has,
+			//ask the user for the JPG compression quality to export with.
+			if (!PintaCore.Workspace.ActiveDocument.HasBeenSaved)
+			{
+				//Show the user the JPG compression export quality.
+				level = PintaCore.Actions.File.RaiseModifyCompression(jpgCompression);
+			}
+
 			if (level != -1)
-				pb.Savev (fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
+			{
+				//Store the "previous" JPG export compression quality value (before saving with it).
+				jpgCompression = level;
+
+				//Save the file.
+				pb.Savev(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
+			}
 		}
 	}
 }

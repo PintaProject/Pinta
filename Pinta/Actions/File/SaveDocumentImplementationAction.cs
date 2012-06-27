@@ -72,6 +72,9 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
+			//The user is saving the document to a new file, so technically it hasn't been saved yet.
+			document.HasBeenSaved = false;
+
 			var fcd = new FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
 									       PintaCore.Chrome.MainWindow,
 									       FileChooserAction.Save,
@@ -222,6 +225,9 @@ namespace Pinta.Actions
 
 			document.Filename = Path.GetFileName (file);
 			document.IsDirty = false;
+
+			//Now the document has been saved before.
+			document.HasBeenSaved = true;
 
 			return true;
 		}
