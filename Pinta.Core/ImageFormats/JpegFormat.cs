@@ -33,47 +33,36 @@ namespace Pinta.Core
 {
 	public class JpegFormat: GdkPixbufFormat
 	{
-		//This is used to remember the previous JPG export compression quality value. It must be
-		//a number between 1-100. It starts out at 101 so Pinta knows it hasn't been loaded yet.
-		private static int jpgCompression = 101;
+		//The identifier of the setting that is used to remember the previously
+		//saved JPG compression quality, even when Pinta is restarted.
+		private const string jpgCompressionQualitySetting = "jpg-quality";
+
+		//The default JPG compression quality to use when no saved setting is loaded. This will usually
+		//occur when Pinta is first run on a machine, although there are other possibile cases as well.
+		private const int defaultQuality = 85;
 
 		public JpegFormat()
 			: base ("jpeg")
 		{
-			//Save the JPG export compression quality to the settings file before Pinta closes.
-			PintaCore.Actions.File.BeforeQuit += new EventHandler(SaveJPGCompression);
-		}
-
-		void SaveJPGCompression(object sender, EventArgs e)
-		{
-			//Save the JPG export compression quality to the settings file before Pinta closes.
-			PintaCore.Settings.PutSetting("jpg-quality", jpgCompression);
 		}
 
 		protected override void DoSave(Pixbuf pb, string fileName, string fileType)
 		{
-			//If the JPG export compression quality is equal to 101,
-			//it hasn't been loaded from the settings file yet.
-			if (jpgCompression == 101)
-			{
-				//Load the JPG export compression quality, with a default of 85.
-				jpgCompression = PintaCore.Settings.GetSetting<int>("jpg-quality", 85);
-			}
+			//Load the JPG compression quality, but use the default value if there is no saved value.
+			int level = PintaCore.Settings.GetSetting<int>(jpgCompressionQualitySetting, defaultQuality);
 
-			int level = jpgCompression;
-
-			//Check to see if the document has been saved before. If it has,
-			//ask the user for the JPG compression quality to export with.
-			if (!PintaCore.Workspace.ActiveDocument.HasBeenSaved)
+			//Check to see if the Document has been saved before.
+			if (!PintaCore.Workspace.ActiveDocument.HasBeenSavedInSession)
 			{
-				//Show the user the JPG compression export quality.
-				level = PintaCore.Actions.File.RaiseModifyCompression(jpgCompression);
+				//Show the user the JPG export compression quality dialog, with the default
+				//value being the one loaded in (or the default value if it was not saved).
+				level = PintaCore.Actions.File.RaiseModifyCompression(level);
 			}
 
 			if (level != -1)
 			{
-				//Store the "previous" JPG export compression quality value (before saving with it).
-				jpgCompression = level;
+				//Store the "previous" JPG compression quality value (before saving with it).
+				PintaCore.Settings.PutSetting(jpgCompressionQualitySetting, level);
 
 				//Save the file.
 				pb.Savev(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });

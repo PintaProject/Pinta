@@ -72,9 +72,6 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			//The user is saving the document to a new file, so technically it hasn't been saved yet.
-			document.HasBeenSaved = false;
-
 			var fcd = new FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
 									       PintaCore.Chrome.MainWindow,
 									       FileChooserAction.Save,
@@ -157,6 +154,11 @@ namespace Pinta.Actions
 					format = format_type;
 
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
+
+				//The user is saving the Document to a new file, so technically it
+				//hasn't been saved to its associated file in this session.
+				document.HasBeenSavedInSession = false;
+
 				SaveFile (document, file, format);
 				RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 				PintaCore.System.ImageFormats.SetDefaultFormat (Path.GetExtension (file));
@@ -226,8 +228,8 @@ namespace Pinta.Actions
 			document.Filename = Path.GetFileName (file);
 			document.IsDirty = false;
 
-			//Now the document has been saved before.
-			document.HasBeenSaved = true;
+			//Now the Document has been saved to the file it's associated with in this session.
+			document.HasBeenSavedInSession = true;
 
 			return true;
 		}
