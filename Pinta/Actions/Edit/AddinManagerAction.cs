@@ -46,7 +46,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			AddinManagerWindow.AllowInstall = false;
+			AddinManagerWindow.AllowInstall = true;
 
 			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
 
