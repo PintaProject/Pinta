@@ -235,13 +235,22 @@ namespace Pinta.Core
 		{
 		}
 
+		void Workspace_CanvasSizeChanged(object sender, EventArgs e)
+		{
+			SetCursor(DefaultCursor);
+		}
+
 		protected virtual void OnActivated ()
 		{
+			PintaCore.Workspace.CanvasSizeChanged += new EventHandler(Workspace_CanvasSizeChanged);
+
 			SetCursor (DefaultCursor);
 		}
 		
 		protected virtual void OnDeactivated ()
 		{
+			PintaCore.Workspace.CanvasSizeChanged -= new EventHandler(Workspace_CanvasSizeChanged);
+
 			SetCursor (null);
 		}
 

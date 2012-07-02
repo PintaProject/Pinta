@@ -103,9 +103,7 @@ namespace Pinta.Core
 
 		//Determines whether or not the Document has been saved to the file that it is currently associated with in the
 		//current session. This should be false if the Document has not yet been saved, if it was just loaded into
-		//Pinta from a file, or if the user just clicked Save As. Once the Document is actually saved, this variable's
-		//value becomes true. If the user clicks Save As and follows through with the saving, this variable will
-		//temporarily be set to false, but immediately after saving the Document it will again be set to true.
+		//Pinta from a file, or if the user just clicked Save As.
 		public bool HasBeenSavedInSession { get; set; }
 		
 		public DocumentWorkspaceHistory History { get { return Workspace.History; } }
