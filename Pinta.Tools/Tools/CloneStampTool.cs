@@ -46,13 +46,9 @@ namespace Pinta.Tools
 		}
 		public override string StatusBarText { get { return Catalog.GetString ("Ctrl-left click to set origin, left click to paint."); } }
 		private int iconOffsetX, iconOffsetY;
-		private int cursorOffsetX = 6;
-		private int cursorOffsetY = 11;
-		private Cairo.Color iconEllipseColor1 = new Cairo.Color(0, 0, 0);
-		private Cairo.Color iconEllipseColor2 = new Cairo.Color(255, 255, 255, .5d);
 		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
 			CreateEllipticalThicknessIcon("Cursor.CloneStamp.png", BrushWidth, 16, 16,
-			cursorOffsetX, cursorOffsetY, iconEllipseColor1, iconEllipseColor2, 1,
+			6, 11, new Cairo.Color(0, 0, 0), new Cairo.Color(255, 255, 255, .5d), 1,
 			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.L; } }

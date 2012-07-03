@@ -41,13 +41,9 @@ namespace Pinta.Tools
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 		private int iconOffsetX, iconOffsetY;
-		private int cursorOffsetX = 0;
-		private int cursorOffsetY = 16;
-		private Color iconEllipseColor1 = new Color(0, 0, 0);
-		private Color iconEllipseColor2 = new Color(255, 255, 255, .5d);
 		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
 			CreateEllipticalThicknessIcon("Tools.Paintbrush.png", BrushWidth, 16, 16,
-			cursorOffsetX, cursorOffsetY, iconEllipseColor1, iconEllipseColor2, 1,
+			0, 16, new Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
 			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }

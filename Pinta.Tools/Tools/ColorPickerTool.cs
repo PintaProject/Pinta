@@ -69,13 +69,9 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Left click to set primary color. Right click to set secondary color."); }
 		}
 		private int iconOffsetX, iconOffsetY;
-		private int cursorOffsetX = 1;
-		private int cursorOffsetY = 16;
-		private Cairo.Color iconRectangleColor1 = new Cairo.Color(0, 0, 0);
-		private Cairo.Color iconRectangleColor2 = new Cairo.Color(255, 255, 255);
 		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
 					CreateRectangularThicknessIcon("Cursor.ColorPicker.png", SampleSize, 16, 16,
-					cursorOffsetX, cursorOffsetY, iconRectangleColor1, iconRectangleColor2, 1,
+					1, 16, new Cairo.Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
 					ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey {
