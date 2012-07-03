@@ -61,6 +61,7 @@ namespace Pinta.Core
 			Workspace = new DocumentWorkspace (this);
 			IsDirty = false;
 			HasFile = false;
+			HasBeenSavedInSession = false;
 			ImageSize = size;
 			
 			Layers = new List<Layer> ();
@@ -99,6 +100,11 @@ namespace Pinta.Core
 		public Guid Guid { get; private set; }
 		
 		public bool HasFile { get; set; }
+
+		//Determines whether or not the Document has been saved to the file that it is currently associated with in the
+		//current session. This should be false if the Document has not yet been saved, if it was just loaded into
+		//Pinta from a file, or if the user just clicked Save As.
+		public bool HasBeenSavedInSession { get; set; }
 		
 		public DocumentWorkspaceHistory History { get { return Workspace.History; } }
 

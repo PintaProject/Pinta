@@ -40,10 +40,30 @@ namespace Pinta.Tools
 		{
 		}
 
+		protected override void OnBuildToolBar(Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			//Change the cursor when the BrushWidth is changed.
+			brush_width.ComboBox.Changed += new EventHandler(ComboBox_Changed);
+		}
+
+		void ComboBox_Changed(object sender, EventArgs e)
+		{
+			//Change the cursor when the BrushWidth is changed.
+			SetCursor(DefaultCursor);
+		}
+
 		#region Properties
 		public override string Name { get { return Catalog.GetString ("Eraser"); } }
 		public override string Icon { get { return "Tools.Eraser.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to erase to transparent, right click to erase to secondary color. "); } }
+		private int iconOffsetX, iconOffsetY;
+		public override Gdk.Cursor DefaultCursor { get	{ return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
+			CreateEllipticalThicknessIcon("Tools.Eraser.png", BrushWidth, 16, 16,
+			0, 16, new Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
+			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
+		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
 		public override int Priority { get { return 27; } }
 		#endregion
