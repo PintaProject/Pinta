@@ -43,7 +43,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Click and drag to draw a rectangular selection. Hold shift to constrain to a square."); }
 		}
 
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 6); } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Tools.RectangleSelect.png"), 2, 2); } }
 
 		public override int Priority { get { return 5; } }
 

@@ -43,7 +43,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Click and drag to draw an elliptical selection. Hold shift to constrain to a circle."); }
 		}
 
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 6); } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Tools.EllipseSelect.png"), 3, 3); } }
 
 		public override int Priority { get { return 13; } }
 

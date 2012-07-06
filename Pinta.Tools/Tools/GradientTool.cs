@@ -63,7 +63,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse."); }
 		}
 
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 6); } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Tools.Gradient.png"), 8, 6); } }
 
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
 		public override int Priority { get { return 23; } }

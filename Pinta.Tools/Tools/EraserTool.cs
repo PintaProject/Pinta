@@ -61,7 +61,7 @@ namespace Pinta.Tools
 		private int iconOffsetX, iconOffsetY;
 		public override Gdk.Cursor DefaultCursor { get	{ return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
 			CreateEllipticalThicknessIcon("Tools.Eraser.png", BrushWidth, 16, 16,
-			0, 16, new Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
+			0, 14, new Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
 			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
 		public override bool CursorChangesOnZoom { get { return true; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.E; } }
