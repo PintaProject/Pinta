@@ -74,7 +74,7 @@ namespace Pinta.Gui.Widgets
 			var preview_layer = new Layer (PintaCore.LivePreview.LivePreviewSurface);
 
 			preview_layer.BlendMode = original.BlendMode;
-			preview_layer.Offset = original.Offset;
+			preview_layer.Transform.InitMatrix(original.Transform);
 			preview_layer.Opacity = original.Opacity;
 			preview_layer.Hidden = original.Hidden;
 
@@ -87,12 +87,11 @@ namespace Pinta.Gui.Widgets
 			offset.Surface.Clear ();
 
 			using (var g = new Cairo.Context (offset.Surface)) {
-				g.SetSourceSurface (original.Surface, canvas_offset.X + (int)original.Offset.X, canvas_offset.Y + (int)original.Offset.Y);
-				g.Paint ();
+				original.Draw(g, original.Surface, 1, canvas_offset.X, canvas_offset.Y, 1);
 			}
 
 			offset.BlendMode = original.BlendMode;
-			offset.Offset = original.Offset;
+			offset.Transform.InitMatrix(original.Transform);
 			offset.Opacity = original.Opacity;
 
 			return offset;
@@ -113,7 +112,7 @@ namespace Pinta.Gui.Widgets
 					layer = CreateLivePreviewLayer (layer);
 
 				// If the layer is offset, handle it here
-				if (!layer.Offset.IsEmpty ())
+				if (!layer.Transform.IsIdentity ())
 					layer = CreateOffsetLayer (layer, offset);
 
 				var src = layer.Surface;
@@ -177,7 +176,7 @@ namespace Pinta.Gui.Widgets
 					layer = CreateLivePreviewLayer (layer);
 
 				// If the layer is offset, handle it here
-				if (!layer.Offset.IsEmpty ())
+				if (!layer.Transform.IsIdentity ())
 					layer = CreateOffsetLayer (layer, offset);
 
 				var src = layer.Surface;
@@ -248,7 +247,7 @@ namespace Pinta.Gui.Widgets
 					layer = CreateLivePreviewLayer (layer);
 
 				// If the layer is offset, handle it here
-				if (!layer.Offset.IsEmpty ())
+				if (!layer.Transform.IsIdentity ())
 					layer = CreateOffsetLayer (layer, offset);
 
 				var src = layer.Surface;

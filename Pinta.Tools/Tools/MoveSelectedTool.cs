@@ -31,12 +31,11 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public class MoveSelectedTool : BaseTool
+	public class MoveSelectedTool : BaseTransformTool
 	{
-		private PointD origin_offset;
-		private bool is_dragging;
 		private MovePixelsHistoryItem hist;
-		
+		private readonly Matrix temp_transform = new Matrix();
+
 		public override string Name {
 			get { return Catalog.GetString ("Move Selected Pixels"); }
 		}
@@ -53,16 +52,18 @@ namespace Pinta.Tools
 		public override int Priority { get { return 7; } }
 
 		#region Mouse Handlers
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+
+		protected override Rectangle GetSourceRectangle ()
 		{
-			// If we are already drawing, ignore any additional mouse down events
-			if (is_dragging)
-				return;
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			return doc.SelectionPath.GetBounds().ToCairoRectangle();
+		}
+
+		protected override void OnStartTransform ()
+		{
+			base.OnStartTransform ();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			origin_offset = point;
-			is_dragging = true;
 
 			hist = new MovePixelsHistoryItem (Icon, Name, doc);
 			hist.TakeSnapshot (!doc.ShowSelectionLayer);
@@ -90,41 +91,41 @@ namespace Pinta.Tools
 				}
 			}
 			
-			canvas.GdkWindow.Invalidate ();
+			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnUpdateTransform (Matrix newTransform, Matrix oldTransform)
 		{
-			if (!is_dragging)
-				return;
+			base.OnUpdateTransform (newTransform, oldTransform);
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			PointD new_offset = new PointD (point.X, point.Y);
-			
-			double dx = origin_offset.X - new_offset.X;
-			double dy = origin_offset.Y - new_offset.Y;
-
-			Path path = doc.SelectionPath;
+			temp_transform.InitMatrix(oldTransform);
+			temp_transform.Invert();
+			temp_transform.Multiply(newTransform);
 
 			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
-				g.AppendPath (path);
-				g.Translate (dx, dy);
+				Path old = doc.SelectionPath;
+				g.FillRule = FillRule.EvenOdd;
+				g.AppendPath (doc.SelectionPath);
+				g.Transform(temp_transform);
+
 				doc.SelectionPath = g.CopyPath ();
+				(old as IDisposable).Dispose ();
 			}
 
-			(path as IDisposable).Dispose ();
+			doc.ShowSelection = true;
 
-			doc.SelectionLayer.Offset = new PointD (doc.SelectionLayer.Offset.X - dx, doc.SelectionLayer.Offset.Y - dy);
-			
-			origin_offset = new_offset;
-			
-			(o as Gtk.DrawingArea).GdkWindow.Invalidate ();
+			temp_transform.Invert();
+
+			doc.SelectionLayer.Transform.Multiply(temp_transform);
+
+			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnFinishTransform ()
 		{
-			is_dragging = false;
+			base.OnFinishTransform ();
 
 			if (hist != null)
 				PintaCore.History.PushNewItem (hist);
