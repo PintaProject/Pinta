@@ -129,9 +129,7 @@ namespace Pinta.Tools
 			ImageSurface surf = doc.ToolLayer.Surface;
 
 			using (Context g = new Context (surf)) {
-				g.AppendPath (doc.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+				doc.Selection.Clip(g);
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 

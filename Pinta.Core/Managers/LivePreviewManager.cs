@@ -238,9 +238,7 @@ namespace Pinta.Core
 			using (var ctx = new Cairo.Context (layer.Surface)) {
 				
 				ctx.Save ();
-				ctx.AppendPath (PintaCore.Layers.SelectionPath);
-				ctx.FillRule = Cairo.FillRule.EvenOdd;
-				ctx.Clip ();				
+				PintaCore.Layers.Selection.Clip(ctx);
 			
 				ctx.Operator = Cairo.Operator.Source;
 				
