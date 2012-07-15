@@ -51,7 +51,7 @@ namespace Pinta.Core
 		private Layer selection_layer;
 
 		private int selection_layer_index;
-		private Path selection_path;
+		private readonly Selection selection = new Selection();
 		private bool show_selection;
 
 		public Document (Gdk.Size size)
@@ -140,14 +140,20 @@ namespace Pinta.Core
 		public Layer SelectionLayer {
 			get { return selection_layer; }
 		}
-		
-		public Path SelectionPath {
-			get { return selection_path; }
-			set {
-				if (selection_path == value)
-					return;
 
-				selection_path = value;
+		[Obsolete("Use selection property")]
+		public Path SelectionPath {
+			get { return selection.Path; }
+			set {
+				selection.Path = value;
+			}
+		}
+
+		public Selection Selection
+		{
+			get
+			{
+				return selection;
 			}
 		}
 
@@ -241,8 +247,7 @@ namespace Pinta.Core
 			if (selection_layer != null)
 				(selection_layer.Surface as IDisposable).Dispose ();
 
-			if (selection_path != null)
-				(selection_path as IDisposable).Dispose ();
+			selection.Dispose();
 
             Workspace.History.Clear ();
 		}
@@ -251,9 +256,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (CurrentLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			return g;
 		}
@@ -262,9 +265,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (CurrentLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 
@@ -275,9 +276,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (ToolLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			return g;
 		}
@@ -286,9 +285,7 @@ namespace Pinta.Core
 		{
 			Context g = new Context (ToolLayer.Surface);
 
-			g.AppendPath (SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
+			selection.Clip(g);
 
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 
@@ -363,7 +360,7 @@ namespace Pinta.Core
 		{
 			ShowSelectionLayer = false;
 			SelectionLayer.Clear ();
-			SelectionLayer.Offset = new PointD (0, 0);
+			SelectionLayer.Transform.InitIdentity();
 		}
 
 		// Duplicate current layer
@@ -402,12 +399,7 @@ namespace Pinta.Core
 			Layer layer = SelectionLayer;
 
 			using (Cairo.Context g = new Cairo.Context (CurrentLayer.Surface)) {
-				g.Save ();
-
-				g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				g.PaintWithAlpha (layer.Opacity);
-
-				g.Restore ();
+				layer.Draw(g);
 			}
 
 			DestroySelectionLayer ();

@@ -31,6 +31,10 @@ namespace Pinta.Core
 {
 	public static class GtkExtensions
 	{
+		public const int MouseLeftButton = 1;
+		public const int MouseMiddleButton = 2;
+		public const int MouseRightButton = 3;
+
 		public static void AddWidgetItem (this Toolbar tb, Widget w)
 		{
 			w.Show ();
