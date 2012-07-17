@@ -93,7 +93,7 @@ namespace Pinta.Core
 			old_surface = PintaCore.Layers[layerIndex].Surface.Clone ();
 		}
 
-		public void TakeSnapshotOfLayer (Layer layer)
+		public void TakeSnapshotOfLayer(UserLayer layer)
 		{
 			layer_index = PintaCore.Layers.IndexOf (layer);
 			old_surface = layer.Surface.Clone ();

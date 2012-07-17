@@ -83,6 +83,7 @@
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="Classes\SurfaceDiff.cs" />
+    <Compile Include="Classes\UserLayer.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />
     <Compile Include="PixelOperations\CheckerBoardOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

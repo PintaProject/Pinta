@@ -117,16 +117,16 @@ namespace Pinta.Gui.Widgets
 
 			ShowAll ();
 		}
-		
-		private Layer GetSelectedLayerInTreeView ()
+
+		private UserLayer GetSelectedLayerInTreeView()
 		{
-			Layer layer = null;
+			UserLayer layer = null;
 			TreeIter iter;
 			
 			var paths = tree.Selection.GetSelectedRows ();
 				
 			if (paths != null && paths.Length > 0 && store.GetIter (out iter, paths[0])) {
-				layer = store.GetValue (iter, store_index_layer) as Layer;
+				layer = store.GetValue(iter, store_index_layer) as UserLayer;
 			}
 			
 			return layer;
@@ -151,8 +151,8 @@ namespace Pinta.Gui.Widgets
 			if (store.GetIter (out iter, new TreePath (args.Path))) {
 				bool b = (bool) store.GetValue (iter, store_index_visibility);				
 				store.SetValue(iter, store_index_visibility, !b);
-				
-				var layer = (Layer) store.GetValue (iter, store_index_layer);
+
+				var layer = (UserLayer)store.GetValue(iter, store_index_layer);
 				SetLayerVisibility (layer, !b);
 			}
 		}
@@ -201,9 +201,9 @@ namespace Pinta.Gui.Widgets
 				store.AppendValues (layer.Surface, layer.Name, !layer.Hidden, layer);
 						
 			SelectLayerInTreeView (PintaCore.Layers.Count - PintaCore.Layers.CurrentLayerIndex - 1);
-		}		
-		
-		private void SetLayerVisibility (Layer layer, bool visibility)
+		}
+
+		private void SetLayerVisibility(UserLayer layer, bool visibility)
 		{
 			if (layer != null)
 				layer.Hidden = !visibility;
@@ -221,7 +221,7 @@ namespace Pinta.Gui.Widgets
 			PintaCore.History.PushNewItem (historyItem);
 			
 			//TODO Call this automatically when the layer visibility changes.
-			PintaCore.Workspace.Invalidate ();			
+			PintaCore.Workspace.Invalidate ();
 		}
 	}
 }

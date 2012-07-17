@@ -169,7 +169,7 @@ namespace Pinta.Core
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
 				
 				// Open the image and add it to the layers
-				Layer layer = doc.AddNewLayer (System.IO.Path.GetFileName (file));
+				UserLayer layer = doc.AddNewLayer(System.IO.Path.GetFileName(file));
 
 				using (var fs = new FileStream (file, FileMode.Open))
 					using (Pixbuf bg = new Pixbuf (fs))
@@ -253,7 +253,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			Layer l = doc.DuplicateCurrentLayer ();
+			UserLayer l = doc.DuplicateCurrentLayer();
 			
 			// Make new layer the current layer
 			doc.SetCurrentLayer (l);
@@ -279,7 +279,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			Layer l = doc.AddNewLayer (string.Empty);
+			UserLayer l = doc.AddNewLayer(string.Empty);
 
 			// Make new layer the current layer
 			doc.SetCurrentLayer (l);

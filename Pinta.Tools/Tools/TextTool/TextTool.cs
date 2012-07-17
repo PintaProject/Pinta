@@ -453,7 +453,15 @@ namespace Pinta.Tools
 
 				SetCursor (cursor_hand);
 				return;
-			} 
+			}
+
+			if (args.Event.Button == 2)
+			{
+				StartEditing();
+				engine.Origin = clickPoint;
+				RedrawText(true, true);
+				PintaCore.Workspace.Invalidate();
+			}
 			
 			// The user clicked the left mouse button			
 			if (args.Event.Button == 1) {

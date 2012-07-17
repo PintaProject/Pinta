@@ -90,7 +90,7 @@ namespace Pinta.Core
 						}
 					}
 
-					Layer layer = doc.CreateLayer (name);
+					UserLayer layer = doc.CreateLayer(name);
 					doc.Insert (layer, 0);
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
@@ -138,7 +138,8 @@ namespace Pinta.Core
 				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData (List<Layer> layers) {
+		private byte[] GetLayerXmlData(List<UserLayer> layers)
+		{
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
 			writer.Formatting = Formatting.Indented;

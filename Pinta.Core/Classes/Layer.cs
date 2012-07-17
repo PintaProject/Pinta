@@ -34,10 +34,10 @@ namespace Pinta.Core
 {
 	public class Layer : ObservableObject
 	{	
-		private double opacity;
-		private bool hidden;
-		private string name;
-		private BlendMode blend_mode;
+		protected double opacity;
+		protected bool hidden;
+		protected string name;
+		protected BlendMode blend_mode;
 
 		public Layer () : this (null)
 		{

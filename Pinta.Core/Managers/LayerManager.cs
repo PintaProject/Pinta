@@ -37,11 +37,13 @@ namespace Pinta.Core
 	public class LayerManager
 	{
 		#region Public Properties
-		public Layer this[int index] {
+		public UserLayer this[int index]
+		{
 			get { return PintaCore.Workspace.ActiveDocument.Layers[index]; }
 		}
 
-		public Layer CurrentLayer {
+		public UserLayer CurrentLayer
+		{
 			get { return PintaCore.Workspace.ActiveDocument.CurrentLayer; }
 		}
 
@@ -93,7 +95,7 @@ namespace Pinta.Core
 			PintaCore.Workspace.ActiveDocument.SetCurrentLayer (i);
 		}
 
-		public void SetCurrentLayer (Layer layer)
+		public void SetCurrentLayer(UserLayer layer)
 		{
 			PintaCore.Workspace.ActiveDocument.SetCurrentLayer (layer);
 		}
@@ -104,18 +106,18 @@ namespace Pinta.Core
 		}
 		
 		// Adds a new layer above the current one
-		public Layer AddNewLayer (string name)
+		public UserLayer AddNewLayer(string name)
 		{
 			return PintaCore.Workspace.ActiveDocument.AddNewLayer (name);
 		}
 		
 		// Adds a new layer above the current one
-		public void Insert (Layer layer, int index)
+		public void Insert(UserLayer layer, int index)
 		{
 			PintaCore.Workspace.ActiveDocument.Insert (layer, index);
 		}
 
-		public int IndexOf (Layer layer)
+		public int IndexOf(UserLayer layer)
 		{
 			return PintaCore.Workspace.ActiveDocument.IndexOf (layer);
 		}

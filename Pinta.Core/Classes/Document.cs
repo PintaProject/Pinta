@@ -62,8 +62,8 @@ namespace Pinta.Core
 			IsDirty = false;
 			HasFile = false;
 			ImageSize = size;
-			
-			Layers = new List<Layer> ();
+
+			Layers = new List<UserLayer>();
 
 			tool_layer = CreateLayer ("Tool Layer");
 			tool_layer.Hidden = true;
@@ -75,7 +75,8 @@ namespace Pinta.Core
 		}
 
 		#region Public Properties
-		public Layer CurrentLayer {
+		public UserLayer CurrentLayer
+		{
 			get { return Layers[current_layer]; }
 		}
 
@@ -114,7 +115,7 @@ namespace Pinta.Core
 			}
 		}
 		
-		public List<Layer> Layers { get; private set; }
+		public List<UserLayer> Layers { get; private set; }
 
 		/// <summary>
 		/// Just the directory name, like "C:\MyPictures".
@@ -181,9 +182,9 @@ namespace Pinta.Core
 
 		#region Public Methods
 		// Adds a new layer above the current one
-		public Layer AddNewLayer (string name)
+		public UserLayer AddNewLayer(string name)
 		{
-			Layer layer;
+			UserLayer layer;
 
 			if (string.IsNullOrEmpty (name))
 				layer = CreateLayer ();
@@ -295,20 +296,20 @@ namespace Pinta.Core
 			return g;
 		}
 
-		public Layer CreateLayer ()
+		public UserLayer CreateLayer ()
 		{
 			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++));
 		}
 
-		public Layer CreateLayer (string name)
+		public UserLayer CreateLayer (string name)
 		{
 			return CreateLayer (name, ImageSize.Width, ImageSize.Height);
 		}
 
-		public Layer CreateLayer (string name, int width, int height)
+		public UserLayer CreateLayer(string name, int width, int height)
 		{
 			Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
-			Layer layer = new Layer (surface) { Name = name };
+			UserLayer layer = new UserLayer(surface) { Name = name };
 
 			return layer;
 		}
@@ -367,10 +368,10 @@ namespace Pinta.Core
 		}
 
 		// Duplicate current layer
-		public Layer DuplicateCurrentLayer ()
+		public UserLayer DuplicateCurrentLayer()
 		{
-			Layer source = CurrentLayer;
-			Layer layer = CreateLayer (string.Format ("{0} {1}", source.Name, Catalog.GetString ("copy")));
+			UserLayer source = CurrentLayer;
+			UserLayer layer = CreateLayer(string.Format("{0} {1}", source.Name, Catalog.GetString("copy")));
 
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				g.SetSource (source.Surface);
@@ -536,13 +537,13 @@ namespace Pinta.Core
 			return bounds;
 		}
 
-		public int IndexOf (Layer layer)
+		public int IndexOf(UserLayer layer)
 		{
 			return Layers.IndexOf (layer);
 		}
 
 		// Adds a new layer above the current one
-		public void Insert (Layer layer, int index)
+		public void Insert(UserLayer layer, int index)
 		{
 			Layers.Insert (index, layer);
 
@@ -577,7 +578,7 @@ namespace Pinta.Core
 			if (current_layer == 0)
 				throw new InvalidOperationException ("Cannot move layer down because current layer is the bottom layer.");
 
-			Layer layer = CurrentLayer;
+			UserLayer layer = CurrentLayer;
 			Layers.RemoveAt (current_layer);
 			Layers.Insert (--current_layer, layer);
 
@@ -592,7 +593,7 @@ namespace Pinta.Core
 			if (current_layer == Layers.Count)
 				throw new InvalidOperationException ("Cannot move layer up because current layer is the top layer.");
 
-			Layer layer = CurrentLayer;
+			UserLayer layer = CurrentLayer;
 			Layers.RemoveAt (current_layer);
 			Layers.Insert (++current_layer, layer);
 
@@ -714,7 +715,7 @@ namespace Pinta.Core
 			PintaCore.Layers.OnSelectedLayerChanged ();
 		}
 
-		public void SetCurrentLayer (Layer layer)
+		public void SetCurrentLayer(UserLayer layer)
 		{
 			current_layer = Layers.IndexOf (layer);
 
