@@ -674,13 +674,13 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Text Drawing Methods
-		private void RedrawText (bool showCursor, bool useToolLayer)
+		private void RedrawText (bool showCursor, bool useTextLayer)
 		{
 			Cairo.ImageSurface surf;
 			var invalidate_cursor = old_cursor_bounds;
 
-			if (!useToolLayer)
-				surf = PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface;
+			if (!useTextLayer)
+				surf = PintaCore.Workspace.ActiveDocument.CurrentLayer.TextLayer.Surface;
 			else {
 				surf = PintaCore.Workspace.ActiveDocument.ToolLayer.Surface;
 				surf.Clear ();
@@ -690,7 +690,7 @@ namespace Pinta.Tools
 				g.Save ();
 
 				// Show selection if on tool layer
-				if (useToolLayer) {
+				if (useTextLayer) {
 					// Selected Text
 					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
 					foreach (Rectangle rect in engine.SelectionRectangles)

@@ -521,6 +521,8 @@ namespace Pinta.Core
 					if (ShowSelectionLayer)
 						paint.Add (selection_layer);
 				}
+
+				paint.Add(layer.TextLayer);
 			}
 
 			return paint;

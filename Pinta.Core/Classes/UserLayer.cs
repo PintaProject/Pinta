@@ -37,14 +37,31 @@ namespace Pinta.Core
 	{
 		public UserLayer () : base()
 		{
+			SetupTextLayer();
 		}
 		
 		public UserLayer (ImageSurface surface) : base (surface)
 		{
+			SetupTextLayer();
 		}
 
 		public UserLayer(ImageSurface surface, bool hidden, double opacity, string name) : base(surface, hidden, opacity, name)
 		{
+			SetupTextLayer();
 		}
+
+		private void SetupTextLayer()
+		{
+			if (Surface == null)
+			{
+				TextLayer = new Layer();
+			}
+			else
+			{
+				TextLayer = new Layer(new Cairo.ImageSurface(Cairo.Format.ARGB32, Surface.Width, Surface.Height));
+			}
+		}
+
+		public Layer TextLayer;
 	}
 }
