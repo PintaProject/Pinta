@@ -9,9 +9,9 @@
 
 using System;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	enum EditingMode
+	public enum EditingMode
 	{
 		NotEditing,
 		EmptyEdit,

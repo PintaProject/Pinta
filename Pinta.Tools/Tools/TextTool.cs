@@ -27,10 +27,23 @@ namespace Pinta.Tools
 
 		private Point clickPoint;
 		private bool is_editing;
-		private Rectangle old_bounds = Rectangle.Zero;
 		private Rectangle old_cursor_bounds = Rectangle.Zero;
 
-		private TextEngine engine;
+		private Rectangle OldBounds
+		{
+			get
+			{
+				return PintaCore.Workspace.ActiveDocument.CurrentLayer.old_bounds;
+			}
+
+			set
+			{
+				PintaCore.Workspace.ActiveDocument.CurrentLayer.old_bounds = value;
+			}
+		}
+		private TextEngine CurrentTextEngine { get { return PintaCore.Workspace.ActiveDocument.CurrentLayer.tEngine; } }
+
+		private bool IgnoreNextFinalization = false;
 
 		public override string Name { get { return Catalog.GetString ("Text"); } }
 		public override string Icon { get { return "Tools.Text.png"; } }
@@ -48,7 +61,6 @@ namespace Pinta.Tools
 		public TextTool ()
 		{
 			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
-			engine = new TextEngine ();
 		}
 
 		static TextTool ()
@@ -217,6 +229,8 @@ namespace Pinta.Tools
 
 			tb.AppendItem (outline_width_plus);
 
+			PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
+
 			UpdateFontSizes ();
 		}
 
@@ -368,8 +382,8 @@ namespace Pinta.Tools
 
 		private void UpdateFont ()
 		{
-			engine.SetAlignment (Alignment);
-			engine.SetFont (Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
+			CurrentTextEngine.SetAlignment(Alignment);
+			CurrentTextEngine.SetFont(Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
 
 			if (is_editing)
 				RedrawText (true, true);
@@ -459,9 +473,10 @@ namespace Pinta.Tools
 			if (args.Event.Button == 1) {
 				// If we're editing and the user clicked within the text,
 				// move the cursor to the click location
-				if (is_editing && old_bounds.ContainsCorrect (pt)) {
-					Position p = engine.PointToTextPosition (pt);
-					engine.SetCursorPosition (p);
+				if (is_editing && OldBounds.ContainsCorrect(pt))
+				{
+					Position p = CurrentTextEngine.PointToTextPosition (pt);
+					CurrentTextEngine.SetCursorPosition (p);
 					RedrawText (true, true);
 					return;
 				}
@@ -469,7 +484,7 @@ namespace Pinta.Tools
 				// We're already editing and the user clicked outside the text,
 				// commit the user's work, and start a new edit
 				if (is_editing) {
-					switch (engine.EditMode) {
+					switch (CurrentTextEngine.EditMode) {
 						// We were editing, save and stop
 						case EditingMode.Editing:
 							StopEditing ();
@@ -483,12 +498,27 @@ namespace Pinta.Tools
 					}
 				}
 
-				// Start editing at the cursor location
-				clickPoint = pt;
-				StartEditing ();
-				engine.Origin = clickPoint;
-				RedrawText (true, true);
-				PintaCore.Workspace.Invalidate ();
+				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.Layers.ToArray())
+				{
+					if (ul.old_bounds.ContainsCorrect(pt))
+					{
+						PintaCore.Workspace.ActiveDocument.SetCurrentLayer(ul);
+						is_editing = true;
+						Position p = CurrentTextEngine.PointToTextPosition(pt);
+						CurrentTextEngine.SetCursorPosition(p);
+						RedrawText(true, true);
+						break;
+					}
+				}
+
+				if (!is_editing)
+				{
+					// Start editing at the cursor location
+					clickPoint = pt;
+					StartEditing();
+					CurrentTextEngine.Origin = clickPoint;
+					RedrawText(true, true);
+				}
 			}
 		}
 
@@ -499,7 +529,7 @@ namespace Pinta.Tools
 				Cairo.PointD delta = new Cairo.PointD (point.X - startMouseXY.X, point.Y - startMouseXY.Y);
 
 				clickPoint = new Point ((int)(startClickPoint.X + delta.X), (int)(startClickPoint.Y + delta.Y));
-				engine.Origin = clickPoint;
+				CurrentTextEngine.Origin = clickPoint;
 
 				RedrawText (true, true);
 			}
@@ -512,7 +542,7 @@ namespace Pinta.Tools
 				Cairo.PointD delta = new Cairo.PointD (point.X - startMouseXY.X, point.Y - startMouseXY.Y);
 				
 				clickPoint = new Point ((int)(startClickPoint.X + delta.X), (int)(startClickPoint.Y + delta.Y));
-				engine.Origin = clickPoint;
+				CurrentTextEngine.Origin = clickPoint;
 
 				RedrawText (false, true);
 				tracking = false;
@@ -541,40 +571,40 @@ namespace Pinta.Tools
 			if (is_editing) {
 				switch (args.Event.Key) {
 					case Gdk.Key.BackSpace:
-						engine.PerformBackspace ();
+						CurrentTextEngine.PerformBackspace ();
 						break;
 
 					case Gdk.Key.Delete:
-						engine.PerformDelete ();
+						CurrentTextEngine.PerformDelete ();
 						break;
 
 					case Gdk.Key.KP_Enter:
 					case Gdk.Key.Return:
-						engine.PerformEnter ();
+						CurrentTextEngine.PerformEnter ();
 						break;
 
 					case Gdk.Key.Left:
-						engine.PerformLeft ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformLeft ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Right:
-						engine.PerformRight ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformRight ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Up:
-						engine.PerformUp ((modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformUp ((modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Down:
-						engine.PerformDown ((modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformDown ((modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Home:
-						engine.PerformHome ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformHome ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.End:
-						engine.PerformEnd ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformEnd ((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
 						break;
 
 					case Gdk.Key.Next:
@@ -587,10 +617,10 @@ namespace Pinta.Tools
 					case Gdk.Key.Insert:
 						if ((modifier & Gdk.ModifierType.ShiftMask) != 0) {
 							Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-							engine.PerformPaste (cb);
+							CurrentTextEngine.PerformPaste (cb);
 						} else if ((modifier & Gdk.ModifierType.ControlMask) != 0) {
 							Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-							engine.PerformCopy (cb);
+							CurrentTextEngine.PerformCopy (cb);
 						}
 						break;
 					default:
@@ -619,7 +649,7 @@ namespace Pinta.Tools
 		private bool TryHandleChar(EventKey eventKey)
 		{
 			// Try to handle it as a character
-			if (engine.HandleKeyPress (eventKey)) {
+			if (CurrentTextEngine.HandleKeyPress (eventKey)) {
 				RedrawText (true, true);
 				return true;
 			}
@@ -633,43 +663,14 @@ namespace Pinta.Tools
 		private void StartEditing ()
 		{
 			is_editing = true;
-			engine.Clear ();
-			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = false;
+			CurrentTextEngine.Clear ();
 		}
 
 		private void StopEditing ()
 		{
-			// If we don't have an open document, some of this stuff will crash
-			if (!PintaCore.Workspace.HasOpenDocuments)
-				return;
+			RedrawText(false, true);
 
-			if (!is_editing)
-				return;
-
-			try {
-				Document doc = PintaCore.Workspace.ActiveDocument;
-
-				doc.ToolLayer.Clear ();
-				doc.ToolLayer.Hidden = true;
-
-				if (engine.EditMode == EditingMode.Editing) {
-					SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-					hist.TakeSnapshotOfLayer (doc.CurrentLayerIndex);
-
-					// Redraw the text without the cursor,
-					// and on to the real layer
-					RedrawText (false, false);
-
-					doc.History.PushNewItem (hist);
-				}
-
-				engine.Clear ();
-				doc.Workspace.Invalidate (old_bounds);
-				old_bounds = Rectangle.Zero;
-				is_editing = false;
-			} catch (Exception) {
-				// Just ignore the error
-			}
+			is_editing = false;
 		}
 		#endregion
 
@@ -680,56 +681,62 @@ namespace Pinta.Tools
 			var invalidate_cursor = old_cursor_bounds;
 
 			if (!useTextLayer)
-				surf = PintaCore.Workspace.ActiveDocument.CurrentLayer.TextLayer.Surface;
+				surf = PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface;
 			else {
-				surf = PintaCore.Workspace.ActiveDocument.ToolLayer.Surface;
+				surf = PintaCore.Workspace.ActiveDocument.CurrentLayer.TextLayer.Surface;
 				surf.Clear ();
 			}
 			
 			using (var g = new Cairo.Context (surf)) {
 				g.Save ();
 
-				// Show selection if on tool layer
+				// Show selection if on text layer
 				if (useTextLayer) {
 					// Selected Text
 					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
-					foreach (Rectangle rect in engine.SelectionRectangles)
+					foreach (Rectangle rect in CurrentTextEngine.SelectionRectangles)
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
 				g.AppendPath (PintaCore.Workspace.ActiveDocument.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 
-				g.MoveTo (new Cairo.PointD (engine.Origin.X, engine.Origin.Y));
-				g.Color = PintaCore.Palette.PrimaryColor;
+				g.MoveTo (new Cairo.PointD (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y));
+
+				if (useTextLayer)
+				{
+					PintaCore.Workspace.ActiveDocument.CurrentLayer.textColor = PintaCore.Palette.PrimaryColor;
+				}
+
+				g.Color = PintaCore.Workspace.ActiveDocument.CurrentLayer.textColor;
 
 				//Fill in background
 				if (BackgroundFill) {
 					using (var g2 = new Cairo.Context (surf)) {
-						g2.FillRectangle (engine.GetLayoutBounds ().ToCairoRectangle (), PintaCore.Palette.SecondaryColor);
+						g2.FillRectangle (CurrentTextEngine.GetLayoutBounds ().ToCairoRectangle (), PintaCore.Palette.SecondaryColor);
 					}
 				}
 
 				// Draw the text
 				if (FillText)
-					Pango.CairoHelper.ShowLayout (g, engine.Layout);
+					Pango.CairoHelper.ShowLayout (g, CurrentTextEngine.Layout);
 
 				if (FillText && StrokeText) {
 					g.Color = PintaCore.Palette.SecondaryColor;
 					g.LineWidth = OutlineWidth;
 
-					Pango.CairoHelper.LayoutPath (g, engine.Layout);
+					Pango.CairoHelper.LayoutPath (g, CurrentTextEngine.Layout);
 					g.Stroke ();
 				} else if (StrokeText) {
 					g.Color = PintaCore.Palette.PrimaryColor;
 					g.LineWidth = OutlineWidth;
 
-					Pango.CairoHelper.LayoutPath (g, engine.Layout);
+					Pango.CairoHelper.LayoutPath (g, CurrentTextEngine.Layout);
 					g.Stroke ();
 				}
 
 				if (showCursor) {
-					var loc = engine.GetCursorLocation ();
+					var loc = CurrentTextEngine.GetCursorLocation ();
 
 					g.Antialias = Cairo.Antialias.None;
 					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
@@ -741,21 +748,55 @@ namespace Pinta.Tools
 				g.Restore ();
 			}
 
-			Rectangle r = engine.GetLayoutBounds ();
+			Rectangle r = CurrentTextEngine.GetLayoutBounds ();
 			r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
 
-			PintaCore.Workspace.Invalidate (old_bounds);
+			PintaCore.Workspace.Invalidate(OldBounds);
 			PintaCore.Workspace.Invalidate (invalidate_cursor);
 			PintaCore.Workspace.Invalidate (r);
 
-			old_bounds = r;
+			OldBounds = r;
+		}
+
+		public void FinalizeText()
+		{
+			if (IgnoreNextFinalization)
+			{
+				IgnoreNextFinalization = false;
+			}
+			else
+			{
+				try
+				{
+					IgnoreNextFinalization = true;
+
+					Document doc = PintaCore.Workspace.ActiveDocument;
+
+					doc.CurrentLayer.TextLayer.Clear();
+
+					SimpleHistoryItem hist = new SimpleHistoryItem(Icon, Name);
+					hist.TakeSnapshotOfLayer(doc.CurrentLayerIndex);
+
+					// Redraw the text without the cursor,
+					// and on to the real layer
+					RedrawText(false, false);
+
+					doc.History.PushNewItem(hist);
+
+					doc.Workspace.Invalidate(OldBounds);
+				}
+				catch (Exception)
+				{
+					//Ignore
+				}
+			}
 		}
 		#endregion
 		#region undo
 
 		public override bool TryHandleUndo ()
 		{
-			if (engine.EditMode == EditingMode.NotEditing) {
+			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
 				return false;
 			}
 			// commit an history item to let the undo action undo text history item
@@ -768,29 +809,29 @@ namespace Pinta.Tools
 
 		public override bool TryHandlePaste (Clipboard cb)
 		{
-			if (engine.EditMode == EditingMode.NotEditing) {
+			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
 				return false;
 			}
-			engine.PerformPaste (cb);
+			CurrentTextEngine.PerformPaste (cb);
 			RedrawText (true, true);
 			return true;
 		}
 
 		public override bool TryHandleCopy (Clipboard cb)
 		{
-			if (engine.EditMode == EditingMode.NotEditing) {
+			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
 				return false;
 			}
-			engine.PerformCopy (cb);
+			CurrentTextEngine.PerformCopy (cb);
 			return true;
 		}
 
 		public override bool TryHandleCut (Clipboard cb)
 		{
-			if (engine.EditMode == EditingMode.NotEditing) {
+			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
 				return false;
 			}
-			engine.PerformCut (cb);
+			CurrentTextEngine.PerformCut (cb);
 			RedrawText (true, true);
 			return true;
 		}

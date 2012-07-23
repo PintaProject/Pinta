@@ -169,7 +169,7 @@ namespace Pinta.Core
 		
 		public unsafe void HueSaturation (int hueDelta, int satDelta, int lightness)
 		{
-			ImageSurface dest = Surface.Clone ();
+			ImageSurface dest = Surface.Clone();
 			ColorBgra* dstPtr = (ColorBgra*)dest.DataPtr;
 			
 			int len = Surface.Data.Length / 4;

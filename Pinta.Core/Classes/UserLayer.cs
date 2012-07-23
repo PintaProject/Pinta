@@ -30,16 +30,10 @@ using System.Collections.Specialized;
 using Cairo;
 using Gdk;
 
-
 namespace Pinta.Core
 {
 	public class UserLayer : Layer
 	{
-		public UserLayer () : base()
-		{
-			SetupTextLayer();
-		}
-		
 		public UserLayer (ImageSurface surface) : base (surface)
 		{
 			SetupTextLayer();
@@ -54,6 +48,7 @@ namespace Pinta.Core
 		{
 			if (Surface == null)
 			{
+				//Should never happen?
 				TextLayer = new Layer();
 			}
 			else
@@ -63,5 +58,8 @@ namespace Pinta.Core
 		}
 
 		public Layer TextLayer;
+		public TextEngine tEngine = new TextEngine();
+		public Gdk.Rectangle old_bounds = Gdk.Rectangle.Zero;
+		public Cairo.Color textColor;
 	}
 }

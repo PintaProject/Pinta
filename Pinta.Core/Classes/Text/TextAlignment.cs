@@ -9,9 +9,9 @@
 
 using System;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	enum TextAlignment
+	public enum TextAlignment
 	{
 		Right,
 		Center,

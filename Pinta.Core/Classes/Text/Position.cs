@@ -9,9 +9,9 @@
 
 using System;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	sealed class Position
+	public sealed class Position
 	{
 		private int line;
 		private int offset;

@@ -15,9 +15,9 @@ using Gdk;
 using Pinta.Core;
 using System.Security;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	class TextEngine
+	public class TextEngine
 	{
 		private Point origin;
 		private Pango.Layout layout;
@@ -102,8 +102,8 @@ namespace Pinta.Tools
 		#region Public Methods
 		public void Clear ()
 		{
-			lines.Clear ();
-			lines.Add (string.Empty);
+			lines.Clear();
+			lines.Add(string.Empty);
 
 			linePos = 0;
 			textPos = 0;

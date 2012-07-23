@@ -178,6 +178,8 @@ namespace Pinta.Core
 		}
 
 		public DocumentWorkspace Workspace { get; private set; }
+
+		public delegate void LayerCloneEvent();
 		#endregion
 
 		#region Public Methods
@@ -723,6 +725,14 @@ namespace Pinta.Core
 
 			PintaCore.Layers.OnSelectedLayerChanged ();
 		}
+
+		public void SignalLayerCloned()
+		{
+			if (LayerCloned != null)
+			{
+				LayerCloned();
+			}
+		}
 		#endregion
 
 		#region Protected Methods
@@ -749,6 +759,7 @@ namespace Pinta.Core
 		#region Public Events
 		public event EventHandler IsDirtyChanged;
 		public event EventHandler Renamed;
+		public event LayerCloneEvent LayerCloned;
 		#endregion
 	}
 }
