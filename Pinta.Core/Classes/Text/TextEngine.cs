@@ -14,6 +14,8 @@ using System.Text;
 using Gdk;
 using Pinta.Core;
 using System.Security;
+using System.Reflection;
+using System.Linq;
 
 namespace Pinta.Core
 {
@@ -58,6 +60,7 @@ namespace Pinta.Core
 		public Pango.Layout Layout { get { return layout; } }
 		public int LineCount { get { return lines.Count; } }
 
+		//The position to draw the text at.
 		public Point Origin {
 			get { return origin; }
 			set { origin = value; }
@@ -107,10 +110,32 @@ namespace Pinta.Core
 
 			linePos = 0;
 			textPos = 0;
+
 			origin = Point.Zero;
 			selectionRelativeIndex = 0;
 
 			Recalculate ();
+		}
+
+		/// <summary>
+		/// Performs a deep clone of the TextEngine instance and returns the clone.
+		/// </summary>
+		/// <returns>A clone of this TextEngine instance.</returns>
+		public TextEngine Clone()
+		{
+			TextEngine clonedTE = new TextEngine();
+
+			clonedTE.layout = layout.Copy();
+			clonedTE.lines = lines.ToList();
+			clonedTE.linePos = linePos;
+			clonedTE.textPos = textPos;
+			clonedTE.selectionRelativeIndex = selectionRelativeIndex;
+			clonedTE.underline = underline;
+			clonedTE.Origin = new Point(Origin.X, Origin.Y);
+
+			//The rest of the variables are calculated on the spot.
+
+			return clonedTE;
 		}
 
 		public Rectangle GetCursorLocation ()

@@ -89,6 +89,7 @@
     <Compile Include="Classes\Text\TextEngine.cs" />
     <Compile Include="Classes\UserLayer.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />
+    <Compile Include="HistoryItems\TextHistoryItem.cs" />
     <Compile Include="PixelOperations\CheckerBoardOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Anchor.cs" />

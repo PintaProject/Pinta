@@ -79,7 +79,7 @@ namespace Pinta.Core
 			image.Submenu = new Menu ();
 			Image.CreateMainMenu ((Menu)image.Submenu);
 			
-			//Layers menu
+			//UserLayers menu
 			ImageMenuItem layer = (ImageMenuItem)menu.Children[4];
 			layer.Submenu = new Menu ();
 			Layers.CreateMainMenu ((Menu)layer.Submenu);

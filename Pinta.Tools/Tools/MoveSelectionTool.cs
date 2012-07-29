@@ -78,7 +78,7 @@ namespace Pinta.Tools
 			double dx = origin_offset.X - new_offset.X;
 			double dy = origin_offset.Y - new_offset.Y;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				Path old = doc.SelectionPath;
 				g.FillRule = FillRule.EvenOdd;
 				g.AppendPath (doc.SelectionPath);

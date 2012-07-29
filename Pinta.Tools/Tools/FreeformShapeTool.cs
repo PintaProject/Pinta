@@ -90,7 +90,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			surface_modified = false;
-			undo_surface = doc.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
 			path = null;
 
 			doc.ToolLayer.Clear ();
@@ -176,12 +176,12 @@ namespace Pinta.Tools
 			doc.ToolLayer.Hidden = true;
 
 			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
+				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 
 			surface_modified = false;
-			ImageSurface surf = doc.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentUserLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				g.AppendPath (doc.SelectionPath);

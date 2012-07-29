@@ -179,8 +179,8 @@ namespace Pinta.Core
 			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
 			stream.Write (databytes, 0, databytes.Length);
 
-			for (int i = 0; i < document.Layers.Count; i++) {
-				Pixbuf pb = document.Layers[i].Surface.ToPixbuf ();
+			for (int i = 0; i < document.UserLayers.Count; i++) {
+				Pixbuf pb = document.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 				(pb as IDisposable).Dispose ();
 
@@ -189,7 +189,7 @@ namespace Pinta.Core
 			}
 
 			stream.PutNextEntry (new ZipEntry ("stack.xml"));
-			databytes = GetLayerXmlData (document.Layers);
+			databytes = GetLayerXmlData (document.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
 			ImageSurface flattened = document.GetFlattenedImage ();

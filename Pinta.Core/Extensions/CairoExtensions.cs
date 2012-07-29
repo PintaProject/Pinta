@@ -799,7 +799,7 @@ namespace Pinta.Core
 
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
-			PintaCore.Workspace.ActiveDocument.SignalLayerCloned();
+			PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned();
 
 			ImageSurface newsurf = new ImageSurface(surf.Format, surf.Width, surf.Height);
 

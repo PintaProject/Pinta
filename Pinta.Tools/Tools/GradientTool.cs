@@ -78,7 +78,7 @@ namespace Pinta.Tools
 			startpoint = point;
 			tracking = true;
 			button = args.Event.Button;
-			undo_surface = doc.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -89,7 +89,7 @@ namespace Pinta.Tools
 				return;
 		
 			tracking = false;
-			doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)

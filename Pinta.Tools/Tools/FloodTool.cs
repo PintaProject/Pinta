@@ -125,7 +125,7 @@ namespace Pinta.Tools
 				return;
 			}
 
-			ImageSurface surface = doc.CurrentLayer.Surface;
+			ImageSurface surface = doc.CurrentUserLayer.Surface;
 			ImageSurface stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height);
 
 			IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter (stencil_surface);

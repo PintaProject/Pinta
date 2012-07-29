@@ -69,12 +69,12 @@ namespace Pinta.Tools
 
 			using (var g = new Context (surf)) {
 				g.Operator = Operator.Source;
-				g.SetSource (doc.CurrentLayer.Surface);
+				g.SetSource (doc.CurrentUserLayer.Surface);
 				g.Paint ();
 			}
 
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-			hist.TakeSnapshotOfLayer (doc.CurrentLayer);
+			hist.TakeSnapshotOfLayer (doc.CurrentUserLayer);
 
 			ColorBgra color = fill_color.ToColorBgra ();
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;

@@ -71,7 +71,7 @@ namespace Pinta.Actions
 
 			} else {
 
-				var layer = PintaCore.Workspace.ActiveDocument.CurrentLayer;
+				var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
 				var initial = dialog.InitialLayerProperties;
 				initial.SetProperties (layer);
 

@@ -39,16 +39,16 @@ namespace Pinta.Core
 		#region Public Properties
 		public UserLayer this[int index]
 		{
-			get { return PintaCore.Workspace.ActiveDocument.Layers[index]; }
+			get { return PintaCore.Workspace.ActiveDocument.UserLayers[index]; }
 		}
 
 		public UserLayer CurrentLayer
 		{
-			get { return PintaCore.Workspace.ActiveDocument.CurrentLayer; }
+			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayer; }
 		}
 
 		public int Count {
-			get { return PintaCore.Workspace.ActiveDocument.Layers.Count; }
+			get { return PintaCore.Workspace.ActiveDocument.UserLayers.Count; }
 		}
 
 		public Layer ToolLayer {
@@ -60,7 +60,7 @@ namespace Pinta.Core
 		}
 
 		public int CurrentLayerIndex {
-			get { return PintaCore.Workspace.ActiveDocument.CurrentLayerIndex; }
+			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex; }
 		}
 		
 		public Path SelectionPath {
@@ -97,7 +97,7 @@ namespace Pinta.Core
 
 		public void SetCurrentLayer(UserLayer layer)
 		{
-			PintaCore.Workspace.ActiveDocument.SetCurrentLayer (layer);
+			PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer (layer);
 		}
 
 		public void FinishSelection ()

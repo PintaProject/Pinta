@@ -32,18 +32,27 @@ using Gdk;
 
 namespace Pinta.Core
 {
+	/// <summary>
+	/// A UserLayer is a Layer that the user interacts with directly. Each UserLayer contains a TextLayer
+	/// and some other text related variables that allow for the re-editability of text.
+	/// </summary>
 	public class UserLayer : Layer
 	{
+		//Call the base class constructor, and then setup the TextLayer.
 		public UserLayer (ImageSurface surface) : base (surface)
 		{
 			SetupTextLayer();
 		}
 
+		//Call the base class constructor, and then setup the TextLayer.
 		public UserLayer(ImageSurface surface, bool hidden, double opacity, string name) : base(surface, hidden, opacity, name)
 		{
 			SetupTextLayer();
 		}
 
+		/// <summary>
+		/// Setup the TextLayer based on this UserLayer's Surface.
+		/// </summary>
 		private void SetupTextLayer()
 		{
 			if (Surface == null)
@@ -53,13 +62,17 @@ namespace Pinta.Core
 			}
 			else
 			{
-				TextLayer = new Layer(new Cairo.ImageSurface(Cairo.Format.ARGB32, Surface.Width, Surface.Height));
+				TextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
 			}
 		}
 
+		//The Layer for Text to be drawn on while it is still editable.
 		public Layer TextLayer;
+
+		//The TextEngine that stores most of the editable text's data, including the text itself.
 		public TextEngine tEngine = new TextEngine();
-		public Gdk.Rectangle old_bounds = Gdk.Rectangle.Zero;
-		public Cairo.Color textColor;
+
+		//The rectangular boundary surrounding the editable text.
+		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 	}
 }

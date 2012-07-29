@@ -197,7 +197,7 @@ namespace Pinta.Gui.Widgets
 			if (!PintaCore.Workspace.HasOpenDocuments)
 				return;
 				
-			foreach (var layer in (PintaCore.Workspace.ActiveDocument.Layers as IEnumerable<Layer>).Reverse ())
+			foreach (var layer in (PintaCore.Workspace.ActiveDocument.UserLayers as IEnumerable<Layer>).Reverse ())
 				store.AppendValues (layer.Surface, layer.Name, !layer.Hidden, layer);
 						
 			SelectLayerInTreeView (PintaCore.Layers.Count - PintaCore.Layers.CurrentLayerIndex - 1);
