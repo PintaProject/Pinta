@@ -60,7 +60,7 @@ namespace Pinta
 			action_handlers.Add (new ResizeImageAction ());
 			action_handlers.Add (new ResizeCanvasAction ());
 
-			// UserLayers
+			// Layers
 			action_handlers.Add (new LayerPropertiesAction ());
 			action_handlers.Add (new RotateZoomLayerAction ());
 
