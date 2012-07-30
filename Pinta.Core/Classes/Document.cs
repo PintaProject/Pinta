@@ -47,6 +47,7 @@ namespace Pinta.Core
 
 		// The layer for tools to use until their output is committed
 		private Layer tool_layer;
+
 		// The layer used for selections
 		private Layer selection_layer;
 
@@ -524,7 +525,11 @@ namespace Pinta.Core
 						paint.Add (selection_layer);
 				}
 
-				paint.Add(layer.TextLayer);
+				if (!layer.Hidden)
+				{
+					paint.Add(layer.TextLayer);
+					paint.Add(layer.tEngine.textBoundsLayer);
+				}
 			}
 
 			return paint;

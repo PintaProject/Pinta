@@ -55,22 +55,15 @@ namespace Pinta.Core
 		/// </summary>
 		private void SetupTextLayer()
 		{
-			if (Surface == null)
-			{
-				//Should never happen?
-				TextLayer = new Layer();
-			}
-			else
-			{
-				TextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
-			}
+			TextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
+			tEngine = new TextEngine(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
 		}
 
 		//The Layer for Text to be drawn on while it is still editable.
 		public Layer TextLayer;
 
 		//The TextEngine that stores most of the editable text's data, including the text itself.
-		public TextEngine tEngine = new TextEngine();
+		public TextEngine tEngine;
 
 		//The rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
