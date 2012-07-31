@@ -32,8 +32,6 @@ namespace Pinta.Core
 		bool underline;
 		Gtk.IMMulticontext imContext;
 
-		private Cairo.ImageSurface boundsRectangleSurface;
-
 		public TextEngine(Cairo.ImageSurface passedBoundsRectangleSurface)
 		{
 			lines = new List<string> ();
@@ -42,9 +40,7 @@ namespace Pinta.Core
 			imContext = new Gtk.IMMulticontext ();
 			imContext.Commit += OnCommit;
 
-			boundsRectangleSurface = passedBoundsRectangleSurface;
-
-			textBoundsLayer = new Layer(boundsRectangleSurface);
+			textBoundsLayer = new Layer(passedBoundsRectangleSurface);
 		}
 
 		#region Public Properties
@@ -130,7 +126,7 @@ namespace Pinta.Core
 		/// <returns>A clone of this TextEngine instance.</returns>
 		public TextEngine Clone()
 		{
-			TextEngine clonedTE = new TextEngine(boundsRectangleSurface.Clone());
+			TextEngine clonedTE = new TextEngine(textBoundsLayer.Surface.Clone());
 
 			clonedTE.layout = layout.Copy();
 			clonedTE.lines = lines.ToList();
