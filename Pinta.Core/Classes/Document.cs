@@ -767,7 +767,7 @@ namespace Pinta.Core
 		#region Public Events
 		public event EventHandler IsDirtyChanged;
 		public event EventHandler Renamed;
-		public event LayerCloneEvent SurfaceCloned;
+		public event LayerCloneEvent LayerCloned;
 		#endregion
 	}
 }

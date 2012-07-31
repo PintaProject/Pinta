@@ -60,7 +60,7 @@ namespace Pinta.Tools
 		}
 
 		//While this is true, text will not be finalized upon Surface.Clone calls.
-		private bool IgnoreCloneFinalizations = false;
+		private bool ignoreCloneFinalizations = false;
 
 		//Whether or not either (or both) of the Ctrl keys are pressed.
 		private bool ctrlKey = false;
@@ -535,7 +535,7 @@ namespace Pinta.Tools
 				if (ctrlKey)
 				{
 					//Go through every UserLayer.
-					foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers.ToArray())
+					foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers)
 					{
 						//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
 						if (ul.textBounds.ContainsCorrect(pt))
@@ -618,7 +618,7 @@ namespace Pinta.Tools
 			if (ctrlKey)
 			{
 				//Go through every UserLayer.
-				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers.ToArray())
+				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers)
 				{
 					//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
 					if (ul.textBounds.ContainsCorrect(lastMousePosition))
@@ -782,14 +782,14 @@ namespace Pinta.Tools
 			is_editing = true;
 
 			//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
-			IgnoreCloneFinalizations = true;
+			ignoreCloneFinalizations = true;
 
 			//Store the previous state of the current UserLayer's and TextLayer's ImageSurfaces.
 			user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
 			text_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface.Clone();
 
 			//Stop ignoring any Surface.Clone calls from this point on.
-			IgnoreCloneFinalizations = false;
+			ignoreCloneFinalizations = false;
 		}
 
 		private void StopEditing(bool finalize)
@@ -799,12 +799,12 @@ namespace Pinta.Tools
 				Document doc = PintaCore.Workspace.ActiveDocument;
 
 				//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
-				IgnoreCloneFinalizations = true;
+				ignoreCloneFinalizations = true;
 
 				doc.History.PushNewItem(new TextHistoryItem(Icon, Name, text_undo_surface, user_undo_surface, doc.CurrentUserLayer));
 
 				//Stop ignoring any Surface.Clone calls from this point on.
-				IgnoreCloneFinalizations = false;
+				ignoreCloneFinalizations = false;
 			}
 
 			RedrawText(false, true);
@@ -948,47 +948,40 @@ namespace Pinta.Tools
 			if (CurrentTextEngine.EditMode == EditingMode.Editing)
 			{
 				//If this is true, don't finalize any text - this is used to prevent the code from looping recursively.
-				if (!IgnoreCloneFinalizations)
+				if (!ignoreCloneFinalizations)
 				{
-					try
-					{
-						//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
-						IgnoreCloneFinalizations = true;
+					//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
+					ignoreCloneFinalizations = true;
 
 
 
-						Document doc = PintaCore.Workspace.ActiveDocument;
+					Document doc = PintaCore.Workspace.ActiveDocument;
 
-						//Create a new TextFinalizeHistoryItem so that the finalization of the text can be undone.
-						TextHistoryItem hist = new TextHistoryItem(Icon, Name);
-						hist.TakeSnapshotOfLayer(doc.CurrentUserLayer);
-
-
-
-						//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
-						RedrawText(false, false);
-
-						//Clear the TextLayer.
-						doc.CurrentUserLayer.TextLayer.Clear();
-
-						//Clear the text and its boundaries.
-						CurrentTextEngine.Clear();
-						CurrentTextBounds = Gdk.Rectangle.Zero;
+					//Create a new TextFinalizeHistoryItem so that the finalization of the text can be undone.
+					TextHistoryItem hist = new TextHistoryItem(Icon, Name);
+					hist.TakeSnapshotOfLayer(doc.CurrentUserLayer);
 
 
 
-						//Add the new SimpleHistoryItem.
-						doc.History.PushNewItem(hist);
+					//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
+					RedrawText(false, false);
+
+					//Clear the TextLayer.
+					doc.CurrentUserLayer.TextLayer.Clear();
+
+					//Clear the text and its boundaries.
+					CurrentTextEngine.Clear();
+					CurrentTextBounds = Gdk.Rectangle.Zero;
 
 
 
-						//Stop ignoring any Surface.Clone calls from this point on.
-						IgnoreCloneFinalizations = false;
-					}
-					catch (Exception)
-					{
-						//Ignore.
-					}
+					//Add the new SimpleHistoryItem.
+					doc.History.PushNewItem(hist);
+
+
+
+					//Stop ignoring any Surface.Clone calls from this point on.
+					ignoreCloneFinalizations = false;
 				}
 			}
 		}

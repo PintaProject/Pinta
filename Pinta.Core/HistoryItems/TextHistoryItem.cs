@@ -51,8 +51,8 @@ namespace Pinta.Core
 		{
 			userLayer = passedUserLayer;
 
-			textSurface = passedTextSurface.Clone();
-			userSurface = passedUserSurface.Clone();
+			textSurface = passedTextSurface;
+			userSurface = passedUserSurface;
 
 			tEngine = userLayer.tEngine.Clone();
 			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
@@ -75,10 +75,10 @@ namespace Pinta.Core
 		private void Swap()
 		{
 			// Grab the original surface
-			ImageSurface surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface;
+			ImageSurface surf = userLayer.TextLayer.Surface;
 
 			// Undo to the "old" surface
-			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface = textSurface;
+			userLayer.TextLayer.Surface = textSurface;
 
 			// Store the original surface for Redo
 			textSurface = surf;
@@ -86,10 +86,10 @@ namespace Pinta.Core
 
 
 			// Grab the original surface
-			surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface;
+			surf = userLayer.Surface;
 
 			// Undo to the "old" surface
-			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface = userSurface;
+			userLayer.Surface = userSurface;
 
 			// Store the original surface for Redo
 			userSurface = surf;
