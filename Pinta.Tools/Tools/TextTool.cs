@@ -255,7 +255,7 @@ namespace Pinta.Tools
 			UpdateFontSizes ();
 
 			//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
-			PintaCore.Workspace.ActiveDocument.SurfaceCloned += FinalizeText;
+			PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
 		}
 
 		string temp_size;

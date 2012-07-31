@@ -736,9 +736,9 @@ namespace Pinta.Core
 		/// </summary>
 		public void SignalSurfaceCloned()
 		{
-			if (SurfaceCloned != null)
+			if (LayerCloned != null)
 			{
-				SurfaceCloned();
+				LayerCloned();
 			}
 		}
 		#endregion
