@@ -268,17 +268,11 @@ namespace Pinta.Tools
 
 			UpdateFontSizes();
 
+			//Make sure the event handler is never added twice.
+			PintaCore.Workspace.ActiveDocument.LayerCloned -= FinalizeText;
 
 			//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
 			PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
-		}
-
-		protected override void OnClearToolBar(Toolbar tb)
-		{
-			base.OnClearToolBar(tb);
-
-			//Make sure it's only performed once.
-			PintaCore.Workspace.ActiveDocument.LayerCloned -= FinalizeText;
 		}
 
 		string temp_size;
@@ -742,7 +736,8 @@ namespace Pinta.Tools
 						break;
 
 					case Gdk.Key.Escape:
-						StopEditing(false);
+						//Finalize.
+						StopEditing(true);
 						break;
 					case Gdk.Key.Insert:
 						if ((modifier & Gdk.ModifierType.ShiftMask) != 0)
