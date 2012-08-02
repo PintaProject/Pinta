@@ -25,6 +25,7 @@ namespace Pinta.Core
 		private Pango.Layout layout;
 
 		private List<string> lines;
+
 		private int linePos;
 		private int textPos;
 		// Relative coordonate of selection
@@ -32,15 +33,15 @@ namespace Pinta.Core
 		bool underline;
 		Gtk.IMMulticontext imContext;
 
-		public TextEngine(Cairo.ImageSurface passedBoundsRectangleSurface)
+		public TextEngine()
 		{
 			lines = new List<string> ();
+			lines.Add(string.Empty);
+			linesChanged = false;
 
 			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
 			imContext = new Gtk.IMMulticontext ();
 			imContext.Commit += OnCommit;
-
-			textBoundsLayer = new Layer(passedBoundsRectangleSurface);
 		}
 
 		#region Public Properties
@@ -49,8 +50,14 @@ namespace Pinta.Core
 		}
 
 		public EditingMode EditMode {
-			get {
-				if (lines.Count == 1 && lines[0] == string.Empty)
+			get
+			{
+				if (!linesChanged)
+				{
+					return EditingMode.NoChangeEditing;
+				}
+
+				if (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty))
 					return EditingMode.EmptyEdit;
 
 				return EditingMode.Editing;
@@ -60,6 +67,7 @@ namespace Pinta.Core
 		public int FontHeight { get { return GetCursorLocation ().Height; } }
 		public Pango.Layout Layout { get { return layout; } }
 		public int LineCount { get { return lines.Count; } }
+		public bool linesChanged;
 
 		//The position to draw the text at.
 		public Point Origin {
@@ -101,8 +109,6 @@ namespace Pinta.Core
 			}
 		}
 
-		public Layer textBoundsLayer;
-
 		#endregion
 
 		#region Public Methods
@@ -110,6 +116,7 @@ namespace Pinta.Core
 		{
 			lines.Clear();
 			lines.Add(string.Empty);
+			linesChanged = false;
 
 			linePos = 0;
 			textPos = 0;
@@ -126,10 +133,11 @@ namespace Pinta.Core
 		/// <returns>A clone of this TextEngine instance.</returns>
 		public TextEngine Clone()
 		{
-			TextEngine clonedTE = new TextEngine(textBoundsLayer.Surface.Clone());
+			TextEngine clonedTE = new TextEngine();
 
 			clonedTE.layout = layout.Copy();
 			clonedTE.lines = lines.ToList();
+			clonedTE.linesChanged = linesChanged;
 			clonedTE.linePos = linePos;
 			clonedTE.textPos = textPos;
 			clonedTE.selectionRelativeIndex = selectionRelativeIndex;
@@ -255,6 +263,7 @@ namespace Pinta.Core
 						utf32Char = ca.Str[i];
 					}
 					lines[linePos] = lines[linePos].Insert (textPos, utf32Char.ToString ());
+					linesChanged = true;
 					textPos += utf32Char.ToString ().Length;
 				}
 
@@ -278,6 +287,8 @@ namespace Pinta.Core
 				lines.Insert (linePos + 1, currentLine.Substring (textPos, currentLine.Length - textPos));
 				lines[linePos] = lines[linePos].Substring (0, textPos);
 			}
+
+			linesChanged = true;
 
 			linePos++;
 			textPos = 0;
@@ -314,6 +325,8 @@ namespace Pinta.Core
 				textPos--;
 				Recalculate ();
 			}
+
+			linesChanged = true;
 		}
 
 		public void PerformDelete ()
@@ -335,6 +348,8 @@ namespace Pinta.Core
 				// Middle of a line somewhere
 				lines[linePos] = lines[linePos].Substring (0, textPos) + (lines[linePos]).Substring (textPos + 1);
 			}
+
+			linesChanged = true;
 
 			Recalculate ();
 		}
@@ -570,6 +585,8 @@ namespace Pinta.Core
 			}
 			lines [linePos] += endline;
 
+			linesChanged = true;
+
 			Recalculate ();
 		}
 		#endregion
@@ -706,6 +723,8 @@ namespace Pinta.Core
 					lines.RemoveAt (curlinepos);
 				}
 			}
+
+			linesChanged = true;
 
 			Recalculate ();
 

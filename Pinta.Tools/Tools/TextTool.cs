@@ -42,6 +42,8 @@ namespace Pinta.Tools
 
 			set
 			{
+				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.textBounds;
+
 				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.textBounds = value;
 			}
 		}
@@ -116,146 +118,167 @@ namespace Pinta.Tools
 		private ToolBarButton outline_width_minus;
 		private ToolBarButton outline_width_plus;
 
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
 		{
-			base.OnBuildToolBar (tb);
-			
-			if (font_label == null)
-				font_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Font")));
-			
-			tb.AppendItem (font_label);
+			base.OnBuildToolBar(tb);
 
-			if (font_combo == null) {
-				var fonts = PintaCore.System.Fonts.GetInstalledFonts ();
-				fonts.Sort ();
+			if (font_label == null)
+				font_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Font")));
+
+			tb.AppendItem(font_label);
+
+			if (font_combo == null)
+			{
+				var fonts = PintaCore.System.Fonts.GetInstalledFonts();
+				fonts.Sort();
 
 				// Default to Arial or first in list
-				int index = Math.Max (fonts.IndexOf ("Arial"), 0);
+				int index = Math.Max(fonts.IndexOf("Arial"), 0);
 
-				font_combo = new ToolBarFontComboBox (150, index, fonts.ToArray ());
+				font_combo = new ToolBarFontComboBox(150, index, fonts.ToArray());
 				font_combo.ComboBox.Changed += HandleFontChanged;
 			}
 
-			tb.AppendItem (font_combo);
+			tb.AppendItem(font_combo);
 
 			if (spacer_label == null)
-				spacer_label = new ToolBarLabel (" ");
+				spacer_label = new ToolBarLabel(" ");
 
-			tb.AppendItem (spacer_label);
+			tb.AppendItem(spacer_label);
 
-			if (size_combo == null) {
-				size_combo = new ToolBarComboBox (65, 0, true);
+			if (size_combo == null)
+			{
+				size_combo = new ToolBarComboBox(65, 0, true);
 
 				size_combo.ComboBox.Changed += HandleSizeChanged;
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler(HandleFontSizeFocusOut);
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler(HandleFontSizeFocusIn);
 			}
 
-			tb.AppendItem (size_combo);
+			tb.AppendItem(size_combo);
 
-			tb.AppendItem (new SeparatorToolItem ());
-			
-			if (bold_btn == null) {
-				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Catalog.GetString ("Bold"), Catalog.GetString ("Bold"));
+			tb.AppendItem(new SeparatorToolItem());
+
+			if (bold_btn == null)
+			{
+				bold_btn = new ToolBarToggleButton("Toolbar.Bold.png", Catalog.GetString("Bold"), Catalog.GetString("Bold"));
 				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
-			
-			tb.AppendItem (bold_btn);
-			
-			if (italic_btn == null) {
-				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Catalog.GetString ("Italic"), Catalog.GetString ("Italic"));
+
+			tb.AppendItem(bold_btn);
+
+			if (italic_btn == null)
+			{
+				italic_btn = new ToolBarToggleButton("Toolbar.Italic.png", Catalog.GetString("Italic"), Catalog.GetString("Italic"));
 				italic_btn.Toggled += HandleItalicButtonToggled;
 			}
-			
-			tb.AppendItem (italic_btn);
-			
-			if (underscore_btn == null) {
-				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Catalog.GetString ("Underline"), Catalog.GetString ("Underline"));
+
+			tb.AppendItem(italic_btn);
+
+			if (underscore_btn == null)
+			{
+				underscore_btn = new ToolBarToggleButton("Toolbar.Underline.png", Catalog.GetString("Underline"), Catalog.GetString("Underline"));
 				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
-			
-			tb.AppendItem (underscore_btn);
-			
-			tb.AppendItem (new SeparatorToolItem ());
-			
-			if (left_alignment_btn == null) {
-				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Catalog.GetString ("Left Align"), Catalog.GetString ("Left Align"));
+
+			tb.AppendItem(underscore_btn);
+
+			tb.AppendItem(new SeparatorToolItem());
+
+			if (left_alignment_btn == null)
+			{
+				left_alignment_btn = new ToolBarToggleButton("Toolbar.LeftAlignment.png", Catalog.GetString("Left Align"), Catalog.GetString("Left Align"));
 				left_alignment_btn.Active = true;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
 			}
-			
-			tb.AppendItem (left_alignment_btn);
-			
-			if (center_alignment_btn == null) {
-				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Catalog.GetString ("Center Align"), Catalog.GetString ("Center Align"));
+
+			tb.AppendItem(left_alignment_btn);
+
+			if (center_alignment_btn == null)
+			{
+				center_alignment_btn = new ToolBarToggleButton("Toolbar.CenterAlignment.png", Catalog.GetString("Center Align"), Catalog.GetString("Center Align"));
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
 			}
-			
-			tb.AppendItem (center_alignment_btn);
-			
-			if (Right_alignment_btn == null) {
-				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Catalog.GetString ("Right Align"), Catalog.GetString ("Right Align"));
+
+			tb.AppendItem(center_alignment_btn);
+
+			if (Right_alignment_btn == null)
+			{
+				Right_alignment_btn = new ToolBarToggleButton("Toolbar.RightAlignment.png", Catalog.GetString("Right Align"), Catalog.GetString("Right Align"));
 				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
 			}
-			
-			tb.AppendItem (Right_alignment_btn);
+
+			tb.AppendItem(Right_alignment_btn);
 
 			if (fill_sep == null)
-				fill_sep = new Gtk.SeparatorToolItem ();
+				fill_sep = new Gtk.SeparatorToolItem();
 
-			tb.AppendItem (fill_sep);
+			tb.AppendItem(fill_sep);
 
 			if (fill_label == null)
-				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Text Style")));
+				fill_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Text Style")));
 
-			tb.AppendItem (fill_label);
+			tb.AppendItem(fill_label);
 
-			if (fill_button == null) {
-				fill_button = new ToolBarDropDownButton ();
+			if (fill_button == null)
+			{
+				fill_button = new ToolBarDropDownButton();
 
-				fill_button.AddItem (Catalog.GetString ("Normal"), "ShapeTool.Fill.png", 0);
-				fill_button.AddItem (Catalog.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
-				fill_button.AddItem (Catalog.GetString ("Outline"), "ShapeTool.Outline.png", 2);
-				fill_button.AddItem (Catalog.GetString ("Fill Background"), "TextTool.FillBackground.png", 3);
+				fill_button.AddItem(Catalog.GetString("Normal"), "ShapeTool.Fill.png", 0);
+				fill_button.AddItem(Catalog.GetString("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
+				fill_button.AddItem(Catalog.GetString("Outline"), "ShapeTool.Outline.png", 2);
+				fill_button.AddItem(Catalog.GetString("Fill Background"), "TextTool.FillBackground.png", 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}
 
-			tb.AppendItem (fill_button);
+			tb.AppendItem(fill_button);
 
 			if (outline_width_label == null)
-				outline_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Outline width")));
+				outline_width_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Outline width")));
 
-			tb.AppendItem (outline_width_label);
+			tb.AppendItem(outline_width_label);
 
-			if (outline_width_minus == null) {
-				outline_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease outline size"));
+			if (outline_width_minus == null)
+			{
+				outline_width_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease outline size"));
 				outline_width_minus.Clicked += MinusButtonClickedEvent;
 			}
 
-			tb.AppendItem (outline_width_minus);
+			tb.AppendItem(outline_width_minus);
 
-			if (outline_width == null) {
-				outline_width = new ToolBarComboBox (65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			if (outline_width == null)
+			{
+				outline_width = new ToolBarComboBox(65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
 				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 				"40", "45", "50", "55");
 
 				(outline_width.Child as ComboBoxEntry).Changed += HandleSizeChanged;
 			}
 
-			tb.AppendItem (outline_width);
+			tb.AppendItem(outline_width);
 
-			if (outline_width_plus == null) {
-				outline_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase outline size"));
+			if (outline_width_plus == null)
+			{
+				outline_width_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase outline size"));
 				outline_width_plus.Clicked += PlusButtonClickedEvent;
 			}
 
-			tb.AppendItem (outline_width_plus);
+			tb.AppendItem(outline_width_plus);
 
-			UpdateFontSizes ();
+			UpdateFontSizes();
+
 
 			//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
 			PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
+		}
+
+		protected override void OnClearToolBar(Toolbar tb)
+		{
+			base.OnClearToolBar(tb);
+
+			//Make sure it's only performed once.
+			PintaCore.Workspace.ActiveDocument.LayerCloned -= FinalizeText;
 		}
 
 		string temp_size;
@@ -455,6 +478,8 @@ namespace Pinta.Tools
 			
 			// We always start off not in edit mode
 			is_editing = false;
+
+			CurrentTextEngine.linesChanged = false;
 		}
 
 		protected override void OnCommit ()
@@ -642,6 +667,8 @@ namespace Pinta.Tools
 			{
 				SetCursor(InvalidEditCursor);
 			}
+
+			RedrawText(false, true);
 		}
 		#endregion
 
@@ -794,7 +821,7 @@ namespace Pinta.Tools
 
 		private void StopEditing(bool finalize)
 		{
-			if (text_undo_surface != null && user_undo_surface != null)
+			if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.EditMode == EditingMode.Editing)
 			{
 				Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -820,6 +847,18 @@ namespace Pinta.Tools
 
 		#region Text Drawing Methods
 		/// <summary>
+		/// Clears the entire TextLayer and redraw the previous text boundary.
+		/// </summary>
+		private void ClearTextLayer()
+		{
+			//Clear the TextLayer.
+			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface.Clear();
+
+			//Redraw the previous text boundary.
+			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
+		}
+
+		/// <summary>
 		/// Draws the text.
 		/// </summary>
 		/// <param name="showCursor">Whether or not to show the mouse cursor in the drawing.</param>
@@ -839,8 +878,7 @@ namespace Pinta.Tools
 				//Draw text on the current UserLayer's TextLayer's surface as re-editable text.
 				surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface;
 
-				//Clear the TextLayer.
-				surf.Clear();
+				ClearTextLayer();
 			}
 			
 			using (var g = new Cairo.Context (surf)) {
@@ -897,42 +935,40 @@ namespace Pinta.Tools
 				}
 
 				g.Restore ();
-			}
 
-			CurrentTextEngine.textBoundsLayer.Surface.Clear();
 
-			//Draw the text boundary rectangle onto the textBoundsLayer.
-			using (var g = new Cairo.Context(CurrentTextEngine.textBoundsLayer.Surface))
-			{
-				double scale = PintaCore.Workspace.Scale;
+				if (useTextLayer && (is_editing || ctrlKey))
+				{
+					//Draw the text edit rectangle.
 
-				g.Save();
+					double scale = PintaCore.Workspace.Scale;
 
-				g.Translate(.5, .5);
+					g.Save();
 
-				g.AppendPath(g.CreateRectanglePath(new Cairo.Rectangle(CurrentTextBounds.Left, CurrentTextBounds.Top,
-					CurrentTextBounds.Width, CurrentTextBounds.Height - FontSize)));
+					g.Translate(.5, .5);
 
-				g.LineWidth = 1;
+					g.AppendPath(g.CreateRectanglePath(new Cairo.Rectangle(CurrentTextBounds.Left, CurrentTextBounds.Top,
+						CurrentTextBounds.Width, CurrentTextBounds.Height - FontSize)));
 
-				g.Color = new Cairo.Color(1, 1, 1);
-				g.StrokePreserve();
+					g.LineWidth = 1;
 
-				g.SetDash(new double[] { 2, 4 }, 0);
-				g.Color = new Cairo.Color(1, 0, 0);
+					g.Color = new Cairo.Color(1, 1, 1);
+					g.StrokePreserve();
 
-				g.Stroke();
+					g.SetDash(new double[] { 2, 4 }, 0);
+					g.Color = new Cairo.Color(1, 0, 0);
 
-				g.Restore();
+					g.Stroke();
+
+					g.Restore();
+				}
 			}
 
 			Rectangle r = CurrentTextEngine.GetLayoutBounds ();
 			r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
 
-			Rectangle inflatedTextBounds = CurrentTextBounds;
-			inflatedTextBounds.Inflate(1, 1);
+			InflateAndInvalidate(CurrentTextBounds);
 
-			PintaCore.Workspace.Invalidate(inflatedTextBounds);
 			PintaCore.Workspace.Invalidate (invalidate_cursor);
 			PintaCore.Workspace.Invalidate (r);
 
@@ -944,11 +980,11 @@ namespace Pinta.Tools
 		/// </summary>
 		public void FinalizeText()
 		{
-			//Only bother finalizing text if editing.
-			if (CurrentTextEngine.EditMode == EditingMode.Editing)
+			//If this is true, don't finalize any text - this is used to prevent the code from looping recursively.
+			if (!ignoreCloneFinalizations)
 			{
-				//If this is true, don't finalize any text - this is used to prevent the code from looping recursively.
-				if (!ignoreCloneFinalizations)
+				//Only bother finalizing text if editing.
+				if (CurrentTextEngine.EditMode == EditingMode.Editing)
 				{
 					//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 					ignoreCloneFinalizations = true;
@@ -984,6 +1020,12 @@ namespace Pinta.Tools
 					ignoreCloneFinalizations = false;
 				}
 			}
+		}
+
+		private void InflateAndInvalidate(Rectangle r)
+		{
+			r.Inflate(1, 1);
+			PintaCore.Workspace.Invalidate(r);
 		}
 		#endregion
 		#region undo

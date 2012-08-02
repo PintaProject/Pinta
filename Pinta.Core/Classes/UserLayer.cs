@@ -56,7 +56,7 @@ namespace Pinta.Core
 		private void SetupTextLayer()
 		{
 			TextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
-			tEngine = new TextEngine(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
+			tEngine = new TextEngine();
 		}
 
 		//The Layer for Text to be drawn on while it is still editable.
@@ -67,5 +67,6 @@ namespace Pinta.Core
 
 		//The rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
+		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
 	}
 }

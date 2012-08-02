@@ -528,7 +528,6 @@ namespace Pinta.Core
 				if (!layer.Hidden)
 				{
 					paint.Add(layer.TextLayer);
-					paint.Add(layer.tEngine.textBoundsLayer);
 				}
 			}
 

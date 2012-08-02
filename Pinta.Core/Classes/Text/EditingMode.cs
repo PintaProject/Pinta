@@ -15,6 +15,7 @@ namespace Pinta.Core
 	{
 		NotEditing,
 		EmptyEdit,
+		NoChangeEditing,
 		Editing
 	}
 }
