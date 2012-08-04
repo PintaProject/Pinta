@@ -83,9 +83,10 @@
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
     <Compile Include="Classes\SurfaceDiff.cs" />
-    <Compile Include="Classes\Text\EditingMode.cs" />
+    <Compile Include="Enumerations\TextMode.cs" />
+    <Compile Include="Enumerations\EditingMode.cs" />
     <Compile Include="Classes\Text\Position.cs" />
-    <Compile Include="Classes\Text\TextAlignment.cs" />
+    <Compile Include="Enumerations\TextAlignment.cs" />
     <Compile Include="Classes\Text\TextEngine.cs" />
     <Compile Include="Classes\UserLayer.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />

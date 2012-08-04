@@ -71,6 +71,7 @@ namespace Pinta.Tools
 		private Point lastMousePosition = new Point(0, 0);
 
 		public override string Name { get { return Catalog.GetString ("Text"); } }
+		private string FinalizeName { get { return Catalog.GetString("Text - Finalize"); } }
 		public override string Icon { get { return "Tools.Text.png"; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
@@ -473,7 +474,7 @@ namespace Pinta.Tools
 			// We always start off not in edit mode
 			is_editing = false;
 
-			CurrentTextEngine.linesChanged = false;
+			CurrentTextEngine.textMode = TextMode.Unchanged;
 		}
 
 		protected override void OnCommit ()
@@ -520,10 +521,12 @@ namespace Pinta.Tools
 			
 			// The user clicked the left mouse button			
 			if (args.Event.Button == 1) {
-				// If we're editing and the user clicked within the text,
+				// If the user is holding down Ctrl and clicked within the text,
 				// move the cursor to the click location
-				if (is_editing && CurrentTextBounds.ContainsCorrect(pt))
+				if (ctrlKey && CurrentTextBounds.ContainsCorrect(pt))
 				{
+					is_editing = true;
+
 					//Change the position of the cursor to where the mouse clicked.
 					Position p = CurrentTextEngine.PointToTextPosition (pt);
 					CurrentTextEngine.SetCursorPosition (p);
@@ -815,17 +818,21 @@ namespace Pinta.Tools
 
 		private void StopEditing(bool finalize)
 		{
-			if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.EditMode == EditingMode.Editing)
+			//Make sure that neither undo surface is null, the user is editing, and there are uncommitted changes.
+			if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.EditMode == EditingMode.Editing && CurrentTextEngine.textMode == TextMode.Uncommitted)
 			{
 				Document doc = PintaCore.Workspace.ActiveDocument;
 
 				//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 				ignoreCloneFinalizations = true;
 
-				doc.History.PushNewItem(new TextHistoryItem(Icon, Name, text_undo_surface, user_undo_surface, doc.CurrentUserLayer));
+				doc.History.PushNewItem(new TextHistoryItem(Icon, Name, text_undo_surface.Clone(), user_undo_surface.Clone(), doc.CurrentUserLayer));
 
 				//Stop ignoring any Surface.Clone calls from this point on.
 				ignoreCloneFinalizations = false;
+
+				//Now that the text has been committed, change its state.
+				CurrentTextEngine.textMode = TextMode.NotFinalized;
 			}
 
 			RedrawText(false, true);
@@ -958,10 +965,10 @@ namespace Pinta.Tools
 				}
 			}
 
+			InflateAndInvalidate(CurrentTextBounds);
+
 			Rectangle r = CurrentTextEngine.GetLayoutBounds ();
 			r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
-
-			InflateAndInvalidate(CurrentTextBounds);
 
 			PintaCore.Workspace.Invalidate (invalidate_cursor);
 			PintaCore.Workspace.Invalidate (r);
@@ -988,7 +995,7 @@ namespace Pinta.Tools
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
 					//Create a new TextFinalizeHistoryItem so that the finalization of the text can be undone.
-					TextHistoryItem hist = new TextHistoryItem(Icon, Name);
+					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName);
 					hist.TakeSnapshotOfLayer(doc.CurrentUserLayer);
 
 
@@ -1012,6 +1019,11 @@ namespace Pinta.Tools
 
 					//Stop ignoring any Surface.Clone calls from this point on.
 					ignoreCloneFinalizations = false;
+
+
+
+					//Now that the text has been finalized, change its state.
+					CurrentTextEngine.textMode = TextMode.Unchanged;
 				}
 			}
 		}

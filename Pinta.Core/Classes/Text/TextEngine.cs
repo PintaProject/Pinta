@@ -37,7 +37,7 @@ namespace Pinta.Core
 		{
 			lines = new List<string> ();
 			lines.Add(string.Empty);
-			linesChanged = false;
+			textMode = TextMode.Unchanged;
 
 			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
 			imContext = new Gtk.IMMulticontext ();
@@ -52,7 +52,7 @@ namespace Pinta.Core
 		public EditingMode EditMode {
 			get
 			{
-				if (!linesChanged)
+				if (textMode == TextMode.Unchanged)
 				{
 					return EditingMode.NoChangeEditing;
 				}
@@ -67,7 +67,7 @@ namespace Pinta.Core
 		public int FontHeight { get { return GetCursorLocation ().Height; } }
 		public Pango.Layout Layout { get { return layout; } }
 		public int LineCount { get { return lines.Count; } }
-		public bool linesChanged;
+		public TextMode textMode;
 
 		//The position to draw the text at.
 		public Point Origin {
@@ -116,7 +116,7 @@ namespace Pinta.Core
 		{
 			lines.Clear();
 			lines.Add(string.Empty);
-			linesChanged = false;
+			textMode = TextMode.Unchanged;
 
 			linePos = 0;
 			textPos = 0;
@@ -137,7 +137,7 @@ namespace Pinta.Core
 
 			clonedTE.layout = layout.Copy();
 			clonedTE.lines = lines.ToList();
-			clonedTE.linesChanged = linesChanged;
+			clonedTE.textMode = textMode;
 			clonedTE.linePos = linePos;
 			clonedTE.textPos = textPos;
 			clonedTE.selectionRelativeIndex = selectionRelativeIndex;
@@ -263,7 +263,7 @@ namespace Pinta.Core
 						utf32Char = ca.Str[i];
 					}
 					lines[linePos] = lines[linePos].Insert (textPos, utf32Char.ToString ());
-					linesChanged = true;
+					textMode = TextMode.Uncommitted;
 					textPos += utf32Char.ToString ().Length;
 				}
 
@@ -288,7 +288,7 @@ namespace Pinta.Core
 				lines[linePos] = lines[linePos].Substring (0, textPos);
 			}
 
-			linesChanged = true;
+			textMode = TextMode.Uncommitted;
 
 			linePos++;
 			textPos = 0;
@@ -326,7 +326,7 @@ namespace Pinta.Core
 				Recalculate ();
 			}
 
-			linesChanged = true;
+			textMode = TextMode.Uncommitted;
 		}
 
 		public void PerformDelete ()
@@ -349,7 +349,7 @@ namespace Pinta.Core
 				lines[linePos] = lines[linePos].Substring (0, textPos) + (lines[linePos]).Substring (textPos + 1);
 			}
 
-			linesChanged = true;
+			textMode = TextMode.Uncommitted;
 
 			Recalculate ();
 		}
@@ -585,7 +585,7 @@ namespace Pinta.Core
 			}
 			lines [linePos] += endline;
 
-			linesChanged = true;
+			textMode = TextMode.Uncommitted;
 
 			Recalculate ();
 		}
@@ -724,7 +724,7 @@ namespace Pinta.Core
 				}
 			}
 
-			linesChanged = true;
+			textMode = TextMode.Uncommitted;
 
 			Recalculate ();
 
