@@ -736,8 +736,7 @@ namespace Pinta.Tools
 						break;
 
 					case Gdk.Key.Escape:
-						//Finalize.
-						StopEditing(true);
+						StopEditing(false);
 						break;
 					case Gdk.Key.Insert:
 						if ((modifier & Gdk.ModifierType.ShiftMask) != 0)
