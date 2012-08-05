@@ -47,14 +47,14 @@ namespace Pinta.Core
 		/// <param name="passedTextSurface">The stored TextLayer surface.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface, ImageSurface passedUserSurface, UserLayer passedUserLayer) : base(icon, text)
+		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface, ImageSurface passedUserSurface, TextEngine passedTextEngine, UserLayer passedUserLayer) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
 
 			textSurface = passedTextSurface;
 			userSurface = passedUserSurface;
+			tEngine = passedTextEngine;
 
-			tEngine = userLayer.tEngine.Clone();
 			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
 		}
 

@@ -32,6 +32,7 @@ namespace Pinta.Tools
 		//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
 		private Cairo.ImageSurface text_undo_surface;
 		private Cairo.ImageSurface user_undo_surface;
+		private TextEngine undo_engine;
 
 		private Rectangle CurrentTextBounds
 		{
@@ -495,17 +496,18 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Mouse Handlers
-		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown(DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			//Store the mouse position.
-			Point pt = point.ToGdkPoint ();
+			Point pt = point.ToGdkPoint();
 
 			// Grab focus so we can get keystrokes
-			PintaCore.Chrome.Canvas.GrabFocus ();
+			PintaCore.Chrome.Canvas.GrabFocus();
 
 			// If we're in editing mode, a right click
 			// allows you to move the text around
-			if (is_editing && (args.Event.Button == 3)) {
+			if (is_editing && (args.Event.Button == 3))
+			{
 				//The user is dragging text with the right mouse button held down, so track the mouse as it moves.
 				tracking = true;
 
@@ -514,44 +516,44 @@ namespace Pinta.Tools
 				startClickPoint = clickPoint;
 
 				//Change the cursor to indicate that the text is being dragged.
-				SetCursor (cursor_hand);
+				SetCursor(cursor_hand);
 
 				return;
 			}
-			
+
 			// The user clicked the left mouse button			
-			if (args.Event.Button == 1) {
+			if (args.Event.Button == 1)
+			{
 				// If the user is holding down Ctrl and clicked within the text,
 				// move the cursor to the click location
 				if (ctrlKey && CurrentTextBounds.ContainsCorrect(pt))
 				{
-					is_editing = true;
+					StartEditing();
 
 					//Change the position of the cursor to where the mouse clicked.
-					Position p = CurrentTextEngine.PointToTextPosition (pt);
-					CurrentTextEngine.SetCursorPosition (p);
-					
+					Position p = CurrentTextEngine.PointToTextPosition(pt);
+					CurrentTextEngine.SetCursorPosition(p);
+
 					//Redraw the text with the new cursor position.
-					RedrawText (true, true);
+					RedrawText(true, true);
 
 					return;
 				}
 
 				// We're already editing and the user clicked outside the text,
 				// commit the user's work, and start a new edit
-				if (is_editing) {
-					switch (CurrentTextEngine.EditMode) {
-						// We were editing, save and stop
-						case EditingMode.Editing:
-							StopEditing(true);
-							break;
+				switch (CurrentTextEngine.EditMode)
+				{
+					// We were editing, save and stop
+					case EditingMode.Editing:
+						StopEditing(true);
+						break;
 
-						// We were editing, but nothing had been
-						// keyed. Stop editing.
-						case EditingMode.EmptyEdit:
-							StopEditing(false);
-							break;
-					}
+					// We were editing, but nothing had been
+					// keyed. Stop editing.
+					case EditingMode.EmptyEdit:
+						StopEditing(false);
+						break;
 				}
 
 				if (ctrlKey)
@@ -665,7 +667,7 @@ namespace Pinta.Tools
 				SetCursor(InvalidEditCursor);
 			}
 
-			RedrawText(false, true);
+			RedrawText(is_editing, true);
 		}
 		#endregion
 
@@ -754,11 +756,31 @@ namespace Pinta.Tools
 						}
 						break;
 					default:
-						// Ignore command shortcut
 						if ((modifier & Gdk.ModifierType.ControlMask) != 0)
-							return;
+						{
+							if (args.Event.Key == Gdk.Key.z)
+							{
+								//Ctrl + Z for undo while editing.
+								TryHandleUndo();
 
-						keyHandled = TryHandleChar(args.Event);
+								if (PintaCore.Workspace.ActiveDocument.History.CanUndo)
+								{
+									PintaCore.Workspace.ActiveDocument.History.Undo();
+								}
+
+								return;
+							}
+							else
+							{
+								//Ignore command shortcut.
+								return;
+							}
+						}
+						else
+						{
+							keyHandled = TryHandleChar(args.Event);
+						}
+
 						break;
 				}
 
@@ -811,6 +833,7 @@ namespace Pinta.Tools
 			//Store the previous state of the current UserLayer's and TextLayer's ImageSurfaces.
 			user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
 			text_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface.Clone();
+			undo_engine = CurrentTextEngine.Clone();
 
 			//Stop ignoring any Surface.Clone calls from this point on.
 			ignoreCloneFinalizations = false;
@@ -826,7 +849,8 @@ namespace Pinta.Tools
 				//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 				ignoreCloneFinalizations = true;
 
-				doc.History.PushNewItem(new TextHistoryItem(Icon, Name, text_undo_surface.Clone(), user_undo_surface.Clone(), doc.CurrentUserLayer));
+				//Create a new TextHistoryItem so that the committing of text can be undone.
+				doc.History.PushNewItem(new TextHistoryItem(Icon, Name, text_undo_surface.Clone(), user_undo_surface.Clone(), undo_engine.Clone(), doc.CurrentUserLayer));
 
 				//Stop ignoring any Surface.Clone calls from this point on.
 				ignoreCloneFinalizations = false;
@@ -938,7 +962,7 @@ namespace Pinta.Tools
 				g.Restore ();
 
 
-				if (useTextLayer && (is_editing || ctrlKey))
+				if (useTextLayer && (is_editing || ctrlKey) && !CurrentTextEngine.IsEmpty())
 				{
 					//Draw the text edit rectangle.
 
@@ -957,7 +981,7 @@ namespace Pinta.Tools
 					g.StrokePreserve();
 
 					g.SetDash(new double[] { 2, 4 }, 0);
-					g.Color = new Cairo.Color(1, 0, 0);
+					g.Color = new Cairo.Color(1, .1, .2);
 
 					g.Stroke();
 
@@ -967,11 +991,11 @@ namespace Pinta.Tools
 
 			InflateAndInvalidate(CurrentTextBounds);
 
-			Rectangle r = CurrentTextEngine.GetLayoutBounds ();
+			Rectangle r = CurrentTextEngine.GetLayoutBounds();
 			r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
 
-			PintaCore.Workspace.Invalidate (invalidate_cursor);
-			PintaCore.Workspace.Invalidate (r);
+			PintaCore.Workspace.Invalidate(invalidate_cursor);
+			PintaCore.Workspace.Invalidate(r);
 
 			CurrentTextBounds = r;
 		}
@@ -994,7 +1018,7 @@ namespace Pinta.Tools
 
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
-					//Create a new TextFinalizeHistoryItem so that the finalization of the text can be undone.
+					//Create a new TextHistoryItem so that the finalization of the text can be undone.
 					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName);
 					hist.TakeSnapshotOfLayer(doc.CurrentUserLayer);
 
@@ -1012,7 +1036,7 @@ namespace Pinta.Tools
 
 
 
-					//Add the new SimpleHistoryItem.
+					//Add the new TextHistoryItem.
 					doc.History.PushNewItem(hist);
 
 
@@ -1041,7 +1065,7 @@ namespace Pinta.Tools
 			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
 				return false;
 			}
-			// commit an history item to let the undo action undo text history item
+			// commit a history item to let the undo action undo text history item
 			StopEditing(false);
 			return false;
 		}

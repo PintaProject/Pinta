@@ -57,8 +57,10 @@ namespace Pinta.Core
 					return EditingMode.NoChangeEditing;
 				}
 
-				if (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty))
+				if (IsEmpty())
+				{
 					return EditingMode.EmptyEdit;
+				}
 
 				return EditingMode.Editing;
 			}
@@ -172,6 +174,11 @@ namespace Pinta.Core
 
 			Rectangle r = new Rectangle (ink.X + origin.X, ink.Y + origin.Y, ink.Width, ink.Height);
 			return r;
+		}
+
+		public bool IsEmpty()
+		{
+			return (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty));
 		}
 
 		public Position PointToTextPosition (Point point)
