@@ -972,8 +972,11 @@ namespace Pinta.Tools
 
 					g.Translate(.5, .5);
 
-					g.AppendPath(g.CreateRectanglePath(new Cairo.Rectangle(CurrentTextBounds.Left, CurrentTextBounds.Top,
-						CurrentTextBounds.Width, CurrentTextBounds.Height - FontSize)));
+					using (Cairo.Path p = g.CreateRectanglePath(new Cairo.Rectangle(CurrentTextBounds.Left, CurrentTextBounds.Top,
+						CurrentTextBounds.Width, CurrentTextBounds.Height - FontSize)))
+					{
+						g.AppendPath(p);
+					}
 
 					g.LineWidth = 1;
 
