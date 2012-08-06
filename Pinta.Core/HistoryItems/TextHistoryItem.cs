@@ -33,7 +33,10 @@ namespace Pinta.Core
 	{
 		UserLayer userLayer;
 
+		SurfaceDiff text_surface_diff;
 		ImageSurface textSurface;
+
+		SurfaceDiff user_surface_diff;
 		ImageSurface userSurface;
 
 		TextEngine tEngine;
@@ -51,8 +54,31 @@ namespace Pinta.Core
 		{
 			userLayer = passedUserLayer;
 
-			textSurface = passedTextSurface;
-			userSurface = passedUserSurface;
+
+			text_surface_diff = SurfaceDiff.Create(passedTextSurface, userLayer.TextLayer.Surface);
+			
+			if (text_surface_diff == null)
+			{
+				textSurface = passedTextSurface;
+			}
+			else
+			{
+				(passedTextSurface as IDisposable).Dispose();
+			}
+
+
+			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface);
+
+			if (user_surface_diff == null)
+			{
+				userSurface = passedUserSurface;
+			}
+			else
+			{
+				(passedUserSurface as IDisposable).Dispose();
+			}
+
+
 			tEngine = passedTextEngine;
 
 			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
@@ -77,22 +103,38 @@ namespace Pinta.Core
 			// Grab the original surface
 			ImageSurface surf = userLayer.TextLayer.Surface;
 
-			// Undo to the "old" surface
-			userLayer.TextLayer.Surface = textSurface;
+			if (text_surface_diff != null)
+			{
+				text_surface_diff.ApplyAndSwap(surf);
+				PintaCore.Workspace.Invalidate(text_surface_diff.GetBounds());
+			}
+			else
+			{
+				// Undo to the "old" surface
+				userLayer.TextLayer.Surface = textSurface;
 
-			// Store the original surface for Redo
-			textSurface = surf;
+				// Store the original surface for Redo
+				textSurface = surf;
+			}
 
 
 
 			// Grab the original surface
 			surf = userLayer.Surface;
 
-			// Undo to the "old" surface
-			userLayer.Surface = userSurface;
+			if (user_surface_diff != null)
+			{
+				user_surface_diff.ApplyAndSwap(surf);
+				PintaCore.Workspace.Invalidate(user_surface_diff.GetBounds());
+			}
+			else
+			{
+				// Undo to the "old" surface
+				userLayer.Surface = userSurface;
 
-			// Store the original surface for Redo
-			userSurface = surf;
+				// Store the original surface for Redo
+				userSurface = surf;
+			}
 
 
 

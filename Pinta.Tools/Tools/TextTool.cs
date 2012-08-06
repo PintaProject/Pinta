@@ -850,7 +850,9 @@ namespace Pinta.Tools
 				ignoreCloneFinalizations = true;
 
 				//Create a new TextHistoryItem so that the committing of text can be undone.
-				doc.History.PushNewItem(new TextHistoryItem(Icon, Name, text_undo_surface.Clone(), user_undo_surface.Clone(), undo_engine.Clone(), doc.CurrentUserLayer));
+				doc.History.PushNewItem(new TextHistoryItem(Icon, Name,
+					text_undo_surface.Clone(), user_undo_surface.Clone(),
+					undo_engine.Clone(), doc.CurrentUserLayer));
 
 				//Stop ignoring any Surface.Clone calls from this point on.
 				ignoreCloneFinalizations = false;
@@ -1021,9 +1023,14 @@ namespace Pinta.Tools
 
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
-					//Create a new TextHistoryItem so that the finalization of the text can be undone.
-					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName);
-					hist.TakeSnapshotOfLayer(doc.CurrentUserLayer);
+					//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
+					//it on the spot so that it is more memory efficient if the changes are small.
+					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName,
+						doc.CurrentUserLayer.TextLayer.Surface.Clone(), doc.CurrentUserLayer.Surface.Clone(),
+						CurrentTextEngine.Clone(), doc.CurrentUserLayer);
+
+					//Add the new TextHistoryItem.
+					doc.History.PushNewItem(hist);
 
 
 
@@ -1036,11 +1043,6 @@ namespace Pinta.Tools
 					//Clear the text and its boundaries.
 					CurrentTextEngine.Clear();
 					CurrentTextBounds = Gdk.Rectangle.Zero;
-
-
-
-					//Add the new TextHistoryItem.
-					doc.History.PushNewItem(hist);
 
 
 
