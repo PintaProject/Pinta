@@ -474,8 +474,6 @@ namespace Pinta.Tools
 			
 			// We always start off not in edit mode
 			is_editing = false;
-
-			CurrentTextEngine.textMode = TextMode.Unchanged;
 		}
 
 		protected override void OnCommit ()
@@ -504,9 +502,8 @@ namespace Pinta.Tools
 			// Grab focus so we can get keystrokes
 			PintaCore.Chrome.Canvas.GrabFocus();
 
-			// If we're in editing mode, a right click
-			// allows you to move the text around
-			if (is_editing && (args.Event.Button == 3))
+			// A right click allows you to move the text around
+			if (args.Event.Button == 3)
 			{
 				//The user is dragging text with the right mouse button held down, so track the mouse as it moves.
 				tracking = true;
@@ -586,6 +583,12 @@ namespace Pinta.Tools
 				}
 				else
 				{
+					if (CurrentTextEngine.textMode == TextMode.NotFinalized)
+					{
+						//The user is making a new text and the old text hasn't been finalized yet.
+						FinalizeText();
+					}
+
 					if (!is_editing)
 					{
 						// Start editing at the cursor location
@@ -861,14 +864,14 @@ namespace Pinta.Tools
 				CurrentTextEngine.textMode = TextMode.NotFinalized;
 			}
 
+			is_editing = false;
+
 			RedrawText(false, true);
 
 			if (finalize)
 			{
 				FinalizeText();
 			}
-
-			is_editing = false;
 		}
 		#endregion
 
@@ -1023,14 +1026,10 @@ namespace Pinta.Tools
 
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
-					//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
-					//it on the spot so that it is more memory efficient if the changes are small.
-					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName,
-						doc.CurrentUserLayer.TextLayer.Surface.Clone(), doc.CurrentUserLayer.Surface.Clone(),
-						CurrentTextEngine.Clone(), doc.CurrentUserLayer);
-
-					//Add the new TextHistoryItem.
-					doc.History.PushNewItem(hist);
+					//Create a backup of everything before redrawing the text and etc.
+					Cairo.ImageSurface oldTextSurface = doc.CurrentUserLayer.TextLayer.Surface.Clone();
+					Cairo.ImageSurface oldUserSurface = doc.CurrentUserLayer.Surface.Clone();
+					TextEngine oldTextEngine = CurrentTextEngine.Clone();
 
 
 
@@ -1043,6 +1042,15 @@ namespace Pinta.Tools
 					//Clear the text and its boundaries.
 					CurrentTextEngine.Clear();
 					CurrentTextBounds = Gdk.Rectangle.Zero;
+
+
+
+					//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
+					//it on the spot so that it is more memory efficient if the changes are small.
+					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName, oldTextSurface, oldUserSurface, oldTextEngine, doc.CurrentUserLayer);
+
+					//Add the new TextHistoryItem.
+					doc.History.PushNewItem(hist);
 
 
 
@@ -1063,15 +1071,16 @@ namespace Pinta.Tools
 			PintaCore.Workspace.Invalidate(r);
 		}
 		#endregion
-		#region undo
+		#region Undo
 
 		public override bool TryHandleUndo ()
 		{
-			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
-				return false;
+			if (CurrentTextEngine.EditMode != EditingMode.NotEditing)
+			{
+				// commit a history item to let the undo action undo text history item
+				StopEditing(false);
 			}
-			// commit a history item to let the undo action undo text history item
-			StopEditing(false);
+
 			return false;
 		}
 
