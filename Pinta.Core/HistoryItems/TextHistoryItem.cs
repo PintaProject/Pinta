@@ -55,7 +55,7 @@ namespace Pinta.Core
 			userLayer = passedUserLayer;
 
 
-			text_surface_diff = SurfaceDiff.Create(passedTextSurface, userLayer.TextLayer.Surface);
+			text_surface_diff = SurfaceDiff.Create(passedTextSurface, userLayer.TextLayer.Surface, true);
 			
 			if (text_surface_diff == null)
 			{
@@ -67,7 +67,7 @@ namespace Pinta.Core
 			}
 
 
-			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface);
+			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
 
 			if (user_surface_diff == null)
 			{
@@ -165,17 +165,6 @@ namespace Pinta.Core
 			// Free up native surface
 			if (userSurface != null)
 				(userSurface as IDisposable).Dispose();
-		}
-
-		public void TakeSnapshotOfLayer(UserLayer passedUserLayer)
-		{
-			userLayer = passedUserLayer;
-
-			textSurface = userLayer.TextLayer.Surface.Clone();
-			userSurface = userLayer.Surface.Clone();
-
-			tEngine = userLayer.tEngine.Clone();
-			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
 		}
 	}
 }

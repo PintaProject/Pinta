@@ -2028,3 +2028,7 @@ msgstr ""
 #, csharp-format
 msgid "(provided by {0})"
 msgstr ""
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr ""
