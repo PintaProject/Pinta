@@ -131,7 +131,11 @@ namespace Pinta.Gui.Widgets
 				g.Translate (x, y);
 
 				// Render all the layers to a surface
-				cr.Render (PintaCore.Layers.GetLayersToPaint (), canvas, canvas_bounds.Location);
+				var layers = PintaCore.Layers.GetLayersToPaint ();
+				if (layers.Count == 0) {
+					canvas.Clear ();
+				}
+				cr.Render (layers, canvas, canvas_bounds.Location);
 
 				// Paint the surface to our canvas
 				g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
