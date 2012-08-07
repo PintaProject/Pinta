@@ -38,29 +38,58 @@ namespace Pinta.Core
 	/// </summary>
 	public class UserLayer : Layer
 	{
-		//Call the base class constructor, and then setup the TextLayer.
-		public UserLayer (ImageSurface surface) : base (surface)
+		//The Layer for Text to be drawn on while it is still editable.
+		private Layer actualTextLayer;
+
+
+
+		//Call the base class constructor and setup the TextEngine.
+		public UserLayer(ImageSurface surface) : base(surface)
 		{
-			SetupTextLayer();
+			tEngine = new TextEngine();
 		}
 
-		//Call the base class constructor, and then setup the TextLayer.
+		//Call the base class constructor and setup the TextEngine.
 		public UserLayer(ImageSurface surface, bool hidden, double opacity, string name) : base(surface, hidden, opacity, name)
 		{
-			SetupTextLayer();
+			tEngine = new TextEngine();
 		}
+
+
 
 		/// <summary>
 		/// Setup the TextLayer based on this UserLayer's Surface.
 		/// </summary>
 		private void SetupTextLayer()
 		{
-			TextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
-			tEngine = new TextEngine();
+			actualTextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
+
+			isTextLayerSetup = true;
 		}
 
-		//The Layer for Text to be drawn on while it is still editable.
-		public Layer TextLayer;
+
+
+		//Whether or not the TextLayer and TextEngine have already been setup.
+		public bool isTextLayerSetup = false;
+
+		//A public property for the actual TextLayer that creates a new one when it's first used.
+		public Layer TextLayer
+		{
+			get
+			{
+				if (!isTextLayerSetup)
+				{
+					SetupTextLayer();
+				}
+
+				return actualTextLayer;
+			}
+
+			set
+			{
+				actualTextLayer = value;
+			}
+		}
 
 		//The TextEngine that stores most of the editable text's data, including the text itself.
 		public TextEngine tEngine;

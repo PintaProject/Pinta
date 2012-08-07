@@ -525,7 +525,8 @@ namespace Pinta.Core
 						paint.Add (selection_layer);
 				}
 
-				if (!layer.Hidden)
+				//Make sure that the UserLayer's TextLayer is in use.
+				if (!layer.Hidden && layer.isTextLayerSetup)
 				{
 					paint.Add(layer.TextLayer);
 				}
