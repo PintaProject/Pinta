@@ -828,6 +828,13 @@ namespace Pinta.Tools
 		#region Start/Stop Editing
 		private void StartEditing ()
 		{
+			if (!PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextFontSizeUpdated)
+			{
+				UpdateFontSizes();
+
+				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextFontSizeUpdated = true;
+			}
+
 			is_editing = true;
 
 			//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).

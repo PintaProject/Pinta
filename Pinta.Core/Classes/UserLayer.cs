@@ -68,5 +68,8 @@ namespace Pinta.Core
 		//The rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
+
+		//Whether or not the TextTool's font size has been updated yet for this specific UserLayer.
+		public bool TextFontSizeUpdated = false;
 	}
 }
