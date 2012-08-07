@@ -64,20 +64,20 @@ namespace Pinta.Core
 		{
 			actualTextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
 
-			isTextLayerSetup = true;
+			IsTextLayerSetup = true;
 		}
 
 
 
 		//Whether or not the TextLayer and TextEngine have already been setup.
-		public bool isTextLayerSetup = false;
+		public bool IsTextLayerSetup = false;
 
 		//A public property for the actual TextLayer that creates a new one when it's first used.
 		public Layer TextLayer
 		{
 			get
 			{
-				if (!isTextLayerSetup)
+				if (!IsTextLayerSetup)
 				{
 					SetupTextLayer();
 				}
