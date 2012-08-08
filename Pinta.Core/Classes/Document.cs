@@ -717,7 +717,7 @@ namespace Pinta.Core
 			return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
 		}
 
-		public void SetCurrentLayer (int i)
+		public void SetCurrentUserLayer (int i)
 		{
 			current_layer = i;
 

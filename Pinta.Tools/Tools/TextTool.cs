@@ -71,6 +71,9 @@ namespace Pinta.Tools
 		//Store the most recent mouse position.
 		private Point lastMousePosition = new Point(0, 0);
 
+		//Whether or not the previous TextTool mouse cursor shown was the normal one.
+		private bool previousMouseCursorNormal = true;
+
 		public override string Name { get { return Catalog.GetString ("Text"); } }
 		private string FinalizeName { get { return Catalog.GetString("Text - Finalize"); } }
 		public override string Icon { get { return "Tools.Text.png"; } }
@@ -423,6 +426,11 @@ namespace Pinta.Tools
 			UpdateFont ();
 		}
 
+		private void HandleSelectedLayerChanged(object sender, EventArgs e)
+		{
+			UpdateFont();
+		}
+
 		private void UpdateFont ()
 		{
 			CurrentTextEngine.SetAlignment(Alignment);
@@ -471,6 +479,8 @@ namespace Pinta.Tools
 			// We may need to redraw our text when the color changes
 			PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 			PintaCore.Palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
+
+			PintaCore.Layers.SelectedLayerChanged += new EventHandler(HandleSelectedLayerChanged);
 			
 			// We always start off not in edit mode
 			is_editing = false;
@@ -488,6 +498,8 @@ namespace Pinta.Tools
 			// Stop listening for color change events
 			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 			PintaCore.Palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+
+			PintaCore.Layers.SelectedLayerChanged -= new EventHandler(HandleSelectedLayerChanged);
 
 			StopEditing(false);
 		}
@@ -521,9 +533,9 @@ namespace Pinta.Tools
 			// The user clicked the left mouse button			
 			if (args.Event.Button == 1)
 			{
-				// If the user is holding down Ctrl and clicked within the text,
-				// move the cursor to the click location
-				if (ctrlKey && CurrentTextBounds.ContainsCorrect(pt))
+				// If the user is [editing or holding down Ctrl] and clicked
+				//within the text, move the cursor to the click location
+				if ((is_editing || ctrlKey) && CurrentTextBounds.ContainsCorrect(pt))
 				{
 					StartEditing();
 
@@ -663,14 +675,26 @@ namespace Pinta.Tools
 
 			if (showNormalCursor)
 			{
-				SetCursor(DefaultCursor);
+				if (!previousMouseCursorNormal)
+				{
+					SetCursor(DefaultCursor);
+
+					previousMouseCursorNormal = showNormalCursor;
+
+					RedrawText(is_editing, true);
+				}
 			}
 			else
 			{
-				SetCursor(InvalidEditCursor);
-			}
+				if (previousMouseCursorNormal)
+				{
+					SetCursor(InvalidEditCursor);
 
-			RedrawText(is_editing, true);
+					previousMouseCursorNormal = showNormalCursor;
+
+					RedrawText(is_editing, true);
+				}
+			}
 		}
 		#endregion
 
@@ -828,13 +852,6 @@ namespace Pinta.Tools
 		#region Start/Stop Editing
 		private void StartEditing ()
 		{
-			if (!PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextFontSizeUpdated)
-			{
-				UpdateFontSizes();
-
-				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextFontSizeUpdated = true;
-			}
-
 			is_editing = true;
 
 			//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
@@ -893,6 +910,7 @@ namespace Pinta.Tools
 
 			//Redraw the previous text boundary.
 			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
+			//PintaCore.Workspace.Invalidate();
 		}
 
 		/// <summary>

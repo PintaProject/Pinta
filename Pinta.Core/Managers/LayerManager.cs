@@ -92,7 +92,7 @@ namespace Pinta.Core
 
 		public void SetCurrentLayer (int i)
 		{
-			PintaCore.Workspace.ActiveDocument.SetCurrentLayer (i);
+			PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer (i);
 		}
 
 		public void SetCurrentLayer(UserLayer layer)
