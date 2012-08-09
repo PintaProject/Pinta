@@ -681,7 +681,7 @@ namespace Pinta.Tools
 
 					previousMouseCursorNormal = showNormalCursor;
 
-					RedrawText(is_editing, true);
+					RedrawText(true, true);
 				}
 			}
 			else
@@ -692,7 +692,7 @@ namespace Pinta.Tools
 
 					previousMouseCursorNormal = showNormalCursor;
 
-					RedrawText(is_editing, true);
+					RedrawText(true, true);
 				}
 			}
 		}
@@ -910,7 +910,6 @@ namespace Pinta.Tools
 
 			//Redraw the previous text boundary.
 			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
-			//PintaCore.Workspace.Invalidate();
 		}
 
 		/// <summary>
@@ -920,6 +919,11 @@ namespace Pinta.Tools
 		/// <param name="useTextLayer">Whether or not to use the TextLayer (as opposed to the Userlayer).</param>
 		private void RedrawText (bool showCursor, bool useTextLayer)
 		{
+			Rectangle r = CurrentTextEngine.GetLayoutBounds();
+			r.Inflate(10 + OutlineWidth, 10 + OutlineWidth);
+			CurrentTextBounds = r;
+
+
 			Cairo.ImageSurface surf;
 			var invalidate_cursor = old_cursor_bounds;
 
@@ -1022,15 +1026,10 @@ namespace Pinta.Tools
 				}
 			}
 
-			InflateAndInvalidate(CurrentTextBounds);
 
-			Rectangle r = CurrentTextEngine.GetLayoutBounds();
-			r.Inflate (10 + OutlineWidth, 10 + OutlineWidth);
-
+			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
 			PintaCore.Workspace.Invalidate(invalidate_cursor);
 			PintaCore.Workspace.Invalidate(r);
-
-			CurrentTextBounds = r;
 		}
 
 		/// <summary>
@@ -1090,8 +1089,11 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void InflateAndInvalidate(Rectangle r)
+		private void InflateAndInvalidate(Rectangle passedRectangle)
 		{
+			//Create a new instance to preserve the passed Rectangle.
+			Rectangle r = new Rectangle(passedRectangle.Location, passedRectangle.Size);
+
 			r.Inflate(1, 1);
 			PintaCore.Workspace.Invalidate(r);
 		}
