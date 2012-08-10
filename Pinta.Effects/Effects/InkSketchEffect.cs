@@ -83,7 +83,7 @@ namespace Pinta.Effects
 
 			// Create black outlines by finding the edges of objects 
 			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y < roi.Bottom; ++y) {
+				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
 					int top = y - radius;
 					int bottom = y + radius + 1;
 
@@ -98,7 +98,7 @@ namespace Pinta.Effects
 					ColorBgra* srcPtr = src.GetPointAddress (roi.X, y);
 					ColorBgra* dstPtr = dest.GetPointAddress (roi.X, y);
 
-					for (int x = roi.Left; x < roi.Right; ++x) {
+					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
 						int left = x - radius;
 						int right = x + radius + 1;
 

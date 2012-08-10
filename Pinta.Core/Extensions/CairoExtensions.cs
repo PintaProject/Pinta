@@ -990,7 +990,7 @@ namespace Pinta.Core
 		/// </summary>
 		public static bool ContainsCorrect (this Gdk.Rectangle r, int x, int y)
 		{
-			return ((((x >= r.Left) && (x < r.Right)) && (y >= r.Top)) && (y < r.Bottom));
+			return ((((x >= r.Left) && (x <= r.GetRight ())) && (y >= r.Top)) && (y <= r.GetBottom ()));
 		}
 
 		/// <summary>

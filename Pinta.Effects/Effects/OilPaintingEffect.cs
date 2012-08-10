@@ -78,16 +78,16 @@ namespace Pinta.Effects
 			foreach (Gdk.Rectangle rect in rois) {
 
 				int rectTop = rect.Top;
-				int rectBottom = rect.Bottom;
+				int rectBottom = rect.GetBottom ();
 				int rectLeft = rect.Left;
-				int rectRight = rect.Right;
+				int rectRight = rect.GetRight ();
 
 				ColorBgra* dst_dataptr = (ColorBgra*)dest.DataPtr;
 				int dst_width = dest.Width;
 				ColorBgra* src_dataptr = (ColorBgra*)src.DataPtr;
 				int src_width = src.Width;
 				
-				for (int y = rectTop; y < rectBottom; ++y) {
+				for (int y = rectTop; y <= rectBottom; ++y) {
 					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (dst_dataptr, dst_width, rect.Left, y);
 
 					int top = y - Data.BrushSize;
@@ -101,7 +101,7 @@ namespace Pinta.Effects
 						bottom = height;
 					}
 
-					for (int x = rectLeft; x < rectRight; ++x) {
+					for (int x = rectLeft; x <= rectRight; ++x) {
 						SetToZero (localStore, (ulong)localStoreSize);
 
 						int left = x - Data.BrushSize;

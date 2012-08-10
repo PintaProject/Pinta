@@ -56,7 +56,7 @@ namespace Pinta.Effects
 			
 			foreach (var rect in rois) {
 				// loop through each line of target rectangle
-				for (int y = rect.Top; y < rect.Bottom; ++y) {
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					int fyStart = 0;
 					int fyEnd = 3;
 
@@ -69,7 +69,7 @@ namespace Pinta.Effects
 					// loop through each point in the line 
 					ColorBgra* dstPtr = dst.GetPointAddress (rect.Left, y);
 
-					for (int x = rect.Left; x < rect.Right; ++x) {
+					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						int fxStart = 0;
 						int fxEnd = 3;
 

@@ -129,7 +129,7 @@ namespace Pinta.Effects
 			int[] localLookup = lookup;
 
 			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; ++y) {
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 

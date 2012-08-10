@@ -301,8 +301,8 @@ namespace Pinta.Core
 			
             int x = ((tileIndex % horizTileCount) * settings.TileWidth) + render_bounds.X;
             int y = ((tileIndex / horizTileCount) * settings.TileHeight) + render_bounds.Y;
-            int w = Math.Min(settings.TileWidth, render_bounds.Right - x);
-            int h = Math.Min(settings.TileHeight, render_bounds.Bottom - y);
+            int w = Math.Min(settings.TileWidth, render_bounds.GetRight () + 1 - x);
+            int h = Math.Min(settings.TileHeight, render_bounds.GetBottom () + 1 - y);
 			
 			return new Gdk.Rectangle (x, y, w, h);			
 		}

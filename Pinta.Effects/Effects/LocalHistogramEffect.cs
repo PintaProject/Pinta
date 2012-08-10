@@ -156,7 +156,7 @@ namespace Pinta.Effects
             int* ha = stackalloc int[hLength];
             uint hSize = (uint)(sizeof(int) * hLength);
 
-            for (int y = rect.Top; y < rect.Bottom; y++)
+            for (int y = rect.Top; y <= rect.GetBottom (); ++y)
             {
                 SetToZero(hb, hSize);
                 SetToZero(hg, hSize);
@@ -199,7 +199,7 @@ namespace Pinta.Effects
                     }
                 }
 
-                for (int x = rect.Left; x < rect.Right; x++)
+                for (int x = rect.Left; x <= rect.GetRight (); x++)
                 {
                     *pd = Apply(*ps, area, hb, hg, hr, ha);
 
@@ -363,7 +363,7 @@ namespace Pinta.Effects
             int* hr = stackalloc int[hLength];
             uint hSize = (uint)(sizeof(int) * hLength);
 
-            for (int y = rect.Top; y < rect.Bottom; y++)
+            for (int y = rect.Top; y <= rect.GetBottom (); y++)
             {
                 SetToZero(hb, hSize);
                 SetToZero(hg, hSize);
@@ -407,7 +407,7 @@ namespace Pinta.Effects
                     }
                 }
 
-                for (int x = rect.Left; x < rect.Right; x++)
+                for (int x = rect.Left; x <= rect.GetRight (); x++)
                 {
                     *pd = ApplyWithAlpha(*ps, area, sum, hb, hg, hr);
 

@@ -76,11 +76,11 @@ namespace Pinta.Effects
 			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 
 			foreach (var rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; y++) {
+				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					float j = y - hh;
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 					
-					for (int x = rect.Left; x < rect.Right; x++) {
+					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int b = 0;
 						int g = 0;
 						int r = 0;

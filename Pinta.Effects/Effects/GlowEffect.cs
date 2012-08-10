@@ -65,7 +65,7 @@ namespace Pinta.Effects
 			contrastEffect.Render (dest, dest, rois);
 
 			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y < roi.Bottom; ++y) {
+				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
 					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (roi.Left, y);
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (roi.Left, y);
 

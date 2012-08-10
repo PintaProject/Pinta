@@ -183,8 +183,8 @@ namespace Pinta.Core
 
 			int left = rects[startIndex].Left;
 			int top = rects[startIndex].Top;
-			int right = rects[startIndex].Right;
-			int bottom = rects[startIndex].Bottom;
+			int right = rects[startIndex].GetRight ();
+			int bottom = rects[startIndex].GetBottom ();
 
 			for (int i = startIndex + 1; i < startIndex + length; ++i) {
 				Gdk.Rectangle rect = rects[i];
@@ -197,12 +197,12 @@ namespace Pinta.Core
 					top = rect.Top;
 				}
 
-				if (rect.Right > right) {
-					right = rect.Right;
+				if (rect.GetRight () > right) {
+					right = rect.GetRight ();
 				}
 
-				if (rect.Bottom > bottom) {
-					bottom = rect.Bottom;
+				if (rect.GetBottom () > bottom) {
+					bottom = rect.GetBottom ();
 				}
 			}
 

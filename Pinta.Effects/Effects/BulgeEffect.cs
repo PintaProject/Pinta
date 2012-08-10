@@ -66,14 +66,14 @@ namespace Pinta.Effects
 			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 			
 			foreach (Gdk.Rectangle rect in rois) {
-				
-				for (int y = rect.Top; y < rect.Bottom; y++) {
+
+				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 					float v = y - hh;
 					
-					for (int x = rect.Left; x < rect.Right; x++) {
+					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						float u = x - hw;
 						float r = (float)Math.Sqrt (u * u + v * v);
 						float rscale1 = (1f - (r / maxrad));

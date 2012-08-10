@@ -64,7 +64,7 @@ namespace Pinta.Effects
 				Calculate ();
 
 			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; y++) {
+				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					ColorBgra* srcRowPtr = src.GetPointAddressUnchecked (rect.Left, y);
 					ColorBgra* dstRowPtr = dest.GetPointAddressUnchecked (rect.Left, y);
 					ColorBgra* dstRowEndPtr = dstRowPtr + rect.Width;

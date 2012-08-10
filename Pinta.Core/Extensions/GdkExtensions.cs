@@ -102,5 +102,23 @@ namespace Pinta.Core
 		{
 			return new Cairo.PointD (ev.X, ev.Y);
 		}
+
+		/// <summary>
+		/// The implementation of Rectangle.Bottom was changed in 2.12.11 to fix an off-by-one error,
+		/// and this function provides the newer behaviour for backwards compatibility with older versions.
+		/// </summary>
+		public static int GetBottom(this Rectangle r)
+		{
+			return r.Y + r.Height - 1;
+		}
+
+		/// <summary>
+		/// The implementation of Rectangle.Right was changed in 2.12.11 to fix an off-by-one error,
+		/// and this function provides the newer behaviour for backwards compatibility with older versions.
+		/// </summary>
+		public static int GetRight(this Rectangle r)
+		{
+			return r.X + r.Width - 1;
+		}
 	}
 }

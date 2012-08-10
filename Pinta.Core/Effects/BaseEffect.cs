@@ -112,7 +112,7 @@ namespace Pinta.Core
 			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
 			int dst_width = dst.Width;
 
-			for (int y = roi.Y; y < roi.Bottom; ++y) {
+			for (int y = roi.Y; y <= roi.GetBottom (); ++y) {
 				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
 				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
 				Render (srcPtr, dstPtr, roi.Width);

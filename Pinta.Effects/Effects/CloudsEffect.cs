@@ -129,12 +129,12 @@ namespace Pinta.Effects
             int w = surface.Width;
             int h = surface.Height;
 
-            for (int y = rect.Top; y < rect.Bottom; ++y)
+            for (int y = rect.Top; y <= rect.GetBottom (); ++y)
             {
                 ColorBgra* ptr = surface.GetPointAddressUnchecked(rect.Left, y);
                 int dy = 2 * y - h;
 
-                for (int x = rect.Left; x < rect.Right; ++x)
+                for (int x = rect.Left; x <= rect.GetRight (); ++x)
                 {
                     int dx = 2 * x - w;
                     double val = 0;

@@ -74,11 +74,11 @@ namespace Pinta.Effects
 			int fr = (int)(Data.Angle * Math.PI * 65536.0 / 181.0);
 
 			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; ++y) {
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (rect.Left, y);
 
-					for (int x = rect.Left; x < rect.Right; ++x) {
+					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						int fx = (x << 16) - fcx;
 						int fy = (y << 16) - fcy;
 

@@ -136,8 +136,8 @@ namespace Pinta.Core
 
 				int index = 0;
 
-				for (int y = bounds.Y; y < bounds.Bottom; y++)
-					for (int x = bounds.X; x < bounds.Right; x++)
+				for (int y = bounds.Y; y <= bounds.GetBottom (); y++)
+					for (int x = bounds.X; x <= bounds.GetRight (); x++)
 						new_bitmask[index++] = bitmask[y * orig_width + x];
 
 				bitmask = new_bitmask;
@@ -173,8 +173,8 @@ namespace Pinta.Core
 				var pixel_ptr = fixed_ptr;
 				new_ptr += bounds.X + bounds.Y * orig_width;
 
-				for (int y = bounds.Y; y < bounds.Bottom; y++) {
-					for (int x = bounds.X; x < bounds.Right; x++) {
+				for (int y = bounds.Y; y <= bounds.GetBottom (); y++) {
+					for (int x = bounds.X; x <= bounds.GetRight (); x++) {
 						if (bitmask[mask_index++])
 							*pixel_ptr++ = *new_ptr;
 
@@ -220,8 +220,8 @@ namespace Pinta.Core
 				var pixel_ptr = fixed_ptr;
 				dst_ptr += bounds.X + bounds.Y * dest_width;
 
-				for (int y = bounds.Y; y < bounds.Bottom; y++) {
-					for (int x = bounds.X; x < bounds.Right; x++) {
+				for (int y = bounds.Y; y <= bounds.GetBottom (); y++) {
+					for (int x = bounds.X; x <= bounds.GetRight (); x++) {
 						if (bitmask[mask_index++])
 							if (swap) {
 								swap_pixel = *dst_ptr;

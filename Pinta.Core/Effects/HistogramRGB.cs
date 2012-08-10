@@ -47,12 +47,12 @@ namespace Pinta.Core
             long[] histogramG = histogram[1];
             long[] histogramR = histogram[2];
             
-            int rect_right = rect.Right;
+            int rect_right = rect.GetRight ();
             
-            for (int y = rect.Y; y < rect.Bottom; ++y)
+            for (int y = rect.Y; y <= rect.GetBottom (); ++y)
             {
                 ColorBgra* ptr = surface.GetPointAddressUnchecked(rect.X, y);
-				for (int x = rect.X; x < rect_right; ++x)
+		for (int x = rect.X; x <= rect_right; ++x)
                 {
                     ++histogramB[ptr->B];
                     ++histogramG[ptr->G];

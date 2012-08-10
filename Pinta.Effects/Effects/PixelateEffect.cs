@@ -51,8 +51,8 @@ namespace Pinta.Effects
 			cell.Intersect (srcBounds);
 			
 			int left = cell.Left;
-			int right = cell.Right - 1;
-			int bottom = cell.Bottom - 1;
+			int right = cell.GetRight ();
+			int bottom = cell.GetBottom ();
 			int top = cell.Top;
 			
 			ColorBgra colorTopLeft = src.GetColorBgra (left, top);
@@ -83,21 +83,21 @@ namespace Pinta.Effects
 			Gdk.Rectangle dest_bounds = dest.GetBounds ();
 			
 			foreach (var rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; ++y) {
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					int yEnd = y + 1;
 					
-					for (int x = rect.Left; x < rect.Right; ++x) {
+					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						var cellRect = GetCellBox (x, y, cellSize);
 						cellRect.Intersect (dest_bounds);
 						var color = ComputeCellColor (x, y, src, cellSize, src_bounds);
 						
-						int xEnd = Math.Min (rect.Right, cellRect.Right);
-						yEnd = Math.Min (rect.Bottom, cellRect.Bottom);
+						int xEnd = Math.Min (rect.GetRight (), cellRect.GetRight ());
+						yEnd = Math.Min (rect.GetBottom (), cellRect.GetBottom ());
 						
-						for (int y2 = y; y2 < yEnd; ++y2) {
+						for (int y2 = y; y2 <= yEnd; ++y2) {
 							ColorBgra* ptr = dest.GetPointAddressUnchecked (x, y2);
 							
-							for (int x2 = x; x2 < xEnd; ++x2) {
+							for (int x2 = x; x2 <= xEnd; ++x2) {
 								ptr->Bgra = color.Bgra;
 								++ptr;
 							}

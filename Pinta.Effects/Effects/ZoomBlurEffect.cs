@@ -70,11 +70,11 @@ namespace Pinta.Effects
 			const int n = 64;
 			
 			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; ++y) {
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, rect.Left, y);
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, rect.Left, y);
 
-					for (int x = rect.Left; x < rect.Right; ++x) {
+					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						long fx = (x << 16) - fcx;
 						long fy = (y << 16) - fcy;
 

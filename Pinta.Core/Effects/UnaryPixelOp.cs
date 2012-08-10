@@ -50,7 +50,7 @@ namespace Pinta.Core
 
 		private unsafe void ApplyRectangle (ImageSurface surface, Gdk.Rectangle rect)
 		{
-			for (int y = rect.Left; y < rect.Bottom; ++y) {
+			for (int y = rect.Left; y <= rect.GetBottom (); ++y) {
 				ColorBgra* ptr = surface.GetPointAddress (rect.Left, y);
 				Apply (ptr, rect.Width);
 			}
@@ -91,7 +91,7 @@ namespace Pinta.Core
 			ColorBgra* dst_data_ptr = (ColorBgra*)dst.DataPtr;
 			int dst_width = dst.Width;
 
-			for (int y = roi.Y; y < roi.Bottom; ++y) {
+			for (int y = roi.Y; y <= roi.GetBottom(); ++y) {
 				ColorBgra* dstPtr = dst.GetPointAddressUnchecked (dst_data_ptr, dst_width, roi.X, y);
 				ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_data_ptr, src_width, roi.X, y);
 				Apply (dstPtr, srcPtr, roi.Width);

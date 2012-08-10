@@ -66,11 +66,11 @@ namespace Pinta.Effects
 			
 			foreach (var rect in rois) {
 				int rectTop = rect.Top;
-				int rectBottom = rect.Bottom;
+				int rectBottom = rect.GetBottom ();
 				int rectLeft = rect.Left;
-				int rectRight = rect.Right;
+				int rectRight = rect.GetRight ();
 				
-				for (int y = rectTop; y < rectBottom; ++y) {
+				for (int y = rectTop; y <= rectBottom; ++y) {
 					ColorBgra* dstPtr = dst.GetPointAddress (rect.Left, y);
 
 					int top = y - r;
@@ -84,7 +84,7 @@ namespace Pinta.Effects
 						bottom = height;
 					}
 					
-					for (int x = rectLeft; x < rectRight; ++x) {
+					for (int x = rectLeft; x <= rectRight; ++x) {
 						int intensityChoicesIndex = 0;
 						
 						for (int i = 0; i < 256; ++i) {

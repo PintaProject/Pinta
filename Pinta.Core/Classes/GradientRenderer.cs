@@ -133,10 +133,10 @@ namespace Pinta.Core
 				
 				if (this.startPoint.X == this.endPoint.X && this.startPoint.Y == this.endPoint.Y) {
 					// Start and End point are the same ... fill with solid color.
-					for (int y = rect.Top; y < rect.Bottom; ++y) {
+					for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 						ColorBgra* pixelPtr = surface.GetPointAddress(rect.Left, y);
 						
-						for (int x = rect.Left; x < rect.Right; ++x) {
+						for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 							ColorBgra result;
 							
 							if (this.alphaOnly && this.alphaBlending) {
@@ -159,7 +159,7 @@ namespace Pinta.Core
 					}
 				} else {
 					var mainrect = rect;
-					var list = new List<int>(new Utility.RangeEnumerable(rect.Top, rect.Bottom));
+					var list = new List<int>(new Utility.RangeEnumerable(rect.Top, rect.GetBottom() + 1));
 					Parallel.ForEach(list.ToArray(),
 						(y) => ProcessGradientLine(startAlpha, endAlpha, y, mainrect, surface, src_data_ptr, src_width));
 				}
@@ -172,10 +172,10 @@ namespace Pinta.Core
 		private unsafe bool ProcessGradientLine (byte startAlpha, byte endAlpha, int y, Rectangle rect, ImageSurface surface, ColorBgra* src_data_ptr, int src_width)
 		{
 			var pixelPtr = surface.GetPointAddressUnchecked(src_data_ptr, src_width, rect.Left, y);
-			var right = rect.Right;
+			var right = rect.GetRight ();
 			if (alphaOnly && alphaBlending)
 			{
-				for (var x = rect.Left; x < right; ++x)
+				for (var x = rect.Left; x <= right; ++x)
 				{
 					var lerpByte = ComputeByteLerp(x, y);
 					var lerpAlpha = lerpAlphas[lerpByte];
@@ -186,7 +186,7 @@ namespace Pinta.Core
 			}
 			else if (alphaOnly && !alphaBlending)
 			{
-				for (var x = rect.Left; x < right; ++x)
+				for (var x = rect.Left; x <= right; ++x)
 				{
 					var lerpByte = ComputeByteLerp(x, y);
 					var lerpAlpha = lerpAlphas[lerpByte];
@@ -197,7 +197,7 @@ namespace Pinta.Core
 			else if (!alphaOnly && (alphaBlending && (startAlpha != 255 || endAlpha != 255)))
 			{
 				// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
-				for (var x = rect.Left; x < right; ++x)
+				for (var x = rect.Left; x <= right; ++x)
 				{
 					var lerpByte = ComputeByteLerp(x, y);
 					var lerpColor = lerpColors[lerpByte];
@@ -209,7 +209,7 @@ namespace Pinta.Core
 			}
 			else
 			{
-				for (var x = rect.Left; x < right; ++x)
+				for (var x = rect.Left; x <= right; ++x)
 				{
 					var lerpByte = ComputeByteLerp(x, y);
 					var lerpColor = lerpColors[lerpByte];

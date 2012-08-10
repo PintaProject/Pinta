@@ -137,8 +137,8 @@ namespace Pinta.Tools
 			// The stencil lets us know if we've already checked this
 			// pixel, providing a nice perf boost
 			// Maybe this should be changed to a BitVector2DSurfaceAdapter?
-			for (int i = roi.X; i < roi.Right; i++)
-				for (int j = roi.Y; j < roi.Bottom; j++) {
+			for (int i = roi.X; i <= roi.GetRight (); i++)
+				for (int j = roi.Y; j <= roi.GetBottom (); j++) {
 					if (stencil[i, j])
 						continue;
 						

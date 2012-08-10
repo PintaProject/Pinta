@@ -83,10 +83,10 @@ namespace Pinta.Effects
 			ColorBgra* src_data_ptr = (ColorBgra*)src.DataPtr;
 
 			foreach (Gdk.Rectangle rect in rois) {
-				for (int y = rect.Top; y < rect.Bottom; y++) {
+				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 
-					for (int x = rect.Left; x < rect.Right; x++) {
+					for (int x = rect.Left; x <= rect.GetRight (); x++) {
 						int sampleCount = 0;
 
 						for (int i = 0; i < poLength; ++i) {

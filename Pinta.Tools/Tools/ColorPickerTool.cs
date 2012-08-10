@@ -215,8 +215,8 @@ namespace Pinta.Tools
 
 			var pixels = new List<ColorBgra> ();
 
-			for (int i = rect.Left; i < rect.Right; i++)
-				for (int j = rect.Top; j < rect.Bottom; j++)
+			for (int i = rect.Left; i <= rect.GetRight (); i++)
+				for (int j = rect.Top; j <= rect.GetBottom (); j++)
 					pixels.Add (GetPixel (i, j));
 
 			return pixels.ToArray ();

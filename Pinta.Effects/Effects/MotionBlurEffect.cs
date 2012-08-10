@@ -80,10 +80,10 @@ namespace Pinta.Effects
 
 			foreach (Gdk.Rectangle rect in rois) {
 
-				for (int y = rect.Top; y < rect.Bottom; ++y) {
+				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 
-					for (int x = rect.Left; x < rect.Right; ++x) {
+					for (int x = rect.Left; x <= rect.GetBottom (); ++x) {
 						int sampleCount = 0;
 
 						PointD a = new PointD ((float)x + points[0].X, (float)y + points[0].Y);

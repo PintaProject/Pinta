@@ -77,11 +77,11 @@ namespace Pinta.Effects
 			int src_width = src.Width;
 		
 			foreach (Gdk.Rectangle roi in rois) {
-				for (int y = roi.Top; y < roi.Bottom; ++y) {
+				for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
 					ColorBgra* srcPtr = src.GetPointAddressUnchecked (src_dataptr, src_width, roi.X, y);
 					ColorBgra* dstPtr = dest.GetPointAddressUnchecked (dst_dataptr, dst_width, roi.X, y);
 
-					for (int x = roi.Left; x < roi.Right; ++x) {
+					for (int x = roi.Left; x <= roi.GetRight (); ++x) {
 						ColorBgra srcGrey = desaturateOp.Apply (*srcPtr);
 						ColorBgra sketched = colorDodgeOp.Apply (srcGrey, *dstPtr);
 						*dstPtr = sketched;

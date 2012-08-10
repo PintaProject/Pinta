@@ -102,7 +102,7 @@ namespace Pinta.Effects
 			
 			foreach (Gdk.Rectangle rect in rois) {
 				if (rect.Height >= 1 && rect.Width >= 1) {
-					for (int y = rect.Top; y < rect.Bottom; ++y) {
+					for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 						//Memory.SetToZero (localStore, (ulong)localStoreSize);
 
 						long waSum = 0;
@@ -168,7 +168,7 @@ namespace Pinta.Effects
 
 						++dstPtr;
 
-						for (int x = rect.Left + 1; x < rect.Right; ++x) {
+						for (int x = rect.Left + 1; x <= rect.GetRight (); ++x) {
 							for (int i = 0; i < wlen - 1; ++i) {
 								waSums[i] = waSums[i + 1];
 								wcSums[i] = wcSums[i + 1];

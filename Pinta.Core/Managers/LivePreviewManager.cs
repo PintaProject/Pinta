@@ -355,8 +355,8 @@ namespace Pinta.Core
 			// Calculate canvas bounds.
 			double x1 = bounds.Left * scale;
 			double y1 = bounds.Top * scale;
-			double x2 = bounds.Right * scale;
-			double y2 = bounds.Bottom * scale;
+			double x2 = (bounds.GetRight () + 1) * scale;
+			double y2 = (bounds.GetBottom () + 1) * scale;
 
 			// TODO Figure out why when scale > 1 that I need add on an
 			// extra pixel of padding.

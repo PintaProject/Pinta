@@ -93,11 +93,11 @@ namespace Pinta.Effects
             this.bacAdjustment.Render(src, dest, rois);
 
 			foreach (Gdk.Rectangle roi in rois) {
-                for (int y = roi.Top; y < roi.Bottom; ++y) {
+                for (int y = roi.Top; y <= roi.GetBottom (); ++y) {
                     ColorBgra* srcPtr = src.GetPointAddress(roi.X, y);
                     ColorBgra* dstPtr = dest.GetPointAddress(roi.X, y);
 
-                    for (int x = roi.Left; x < roi.Right; ++x) {
+                    for (int x = roi.Left; x <= roi.GetRight (); ++x) {
                         ColorBgra srcGrey = this.desaturateOp.Apply(*srcPtr);
 
                         srcGrey.R = Utility.ClampToByte((int)((float)srcGrey.R * redAdjust));
