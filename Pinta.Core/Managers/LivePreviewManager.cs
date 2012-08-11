@@ -76,7 +76,6 @@ namespace Pinta.Core
 			// Start rendering.
 			// Listen for changes to effectConfiguration object, and restart render if needed.
 			
-			live_preview_enabled = true;
 			apply_live_preview_flag = false;
 			cancel_live_preview_flag = false;
 			
@@ -93,6 +92,8 @@ namespace Pinta.Core
 			live_preview_surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 			                                  PintaCore.Workspace.ImageSize.Width,
 			                                  PintaCore.Workspace.ImageSize.Height);
+
+			live_preview_enabled = true;
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {
