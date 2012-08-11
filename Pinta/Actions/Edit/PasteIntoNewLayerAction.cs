@@ -54,7 +54,7 @@ namespace Pinta.Actions
 
 				Gdk.Pixbuf image = cb.WaitForImage ();
 
-				Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+				UserLayer l = PintaCore.Layers.AddNewLayer(string.Empty);
 
 				using (Cairo.Context g = new Cairo.Context (l.Surface))
 					g.DrawPixbuf (image, new Cairo.Point (0, 0));

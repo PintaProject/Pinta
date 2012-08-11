@@ -182,7 +182,7 @@ namespace Pinta.Tools
 			doc.ToolLayer.Hidden = false;
 
 			surface_modified = false;
-			undo_surface = doc.CurrentLayer.Surface.Clone ();
+			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -195,7 +195,7 @@ namespace Pinta.Tools
 			current_point = point;
 			doc.ToolLayer.Hidden = true;
 
-			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentLayer, args.Event.IsShiftPressed ());
+			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentUserLayer, args.Event.IsShiftPressed ());
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (shape_origin, new PointD (x, y));
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
@@ -253,7 +253,7 @@ namespace Pinta.Tools
 		
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
-			return new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Workspace.ActiveDocument.CurrentLayerIndex);
+			return new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
 		}
 		#endregion
 

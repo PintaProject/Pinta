@@ -101,8 +101,8 @@ namespace Pinta.Core
 			is_lifted = true;
 
 			if (lift) {
-				layer_index = doc.CurrentLayerIndex;
-				old_surface = doc.CurrentLayer.Surface.Clone ();
+				layer_index = doc.CurrentUserLayerIndex;
+				old_surface = doc.CurrentUserLayer.Surface.Clone ();
 			}
 				
 			old_path = PintaCore.Layers.SelectionPath.Clone ();

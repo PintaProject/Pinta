@@ -67,12 +67,12 @@ namespace Pinta.Actions
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			var oldSurface = doc.CurrentLayer.Surface.Clone ();
+			var oldSurface = doc.CurrentUserLayer.Surface.Clone ();
 
-			doc.CurrentLayer.Rotate (rotateZoomData.Angle);
+			doc.CurrentUserLayer.Rotate (rotateZoomData.Angle);
 			doc.Workspace.Invalidate ();
 
-			var historyItem = new SimpleHistoryItem ("Menu.Layers.RotateZoom.png", Catalog.GetString ("Rotate / Zoom Layer"), oldSurface, doc.CurrentLayerIndex);
+			var historyItem = new SimpleHistoryItem ("Menu.Layers.RotateZoom.png", Catalog.GetString ("Rotate / Zoom Layer"), oldSurface, doc.CurrentUserLayerIndex);
 
 			doc.History.PushNewItem (historyItem);
 		}

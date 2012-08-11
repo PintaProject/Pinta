@@ -90,7 +90,7 @@ namespace Pinta.Core
 						}
 					}
 
-					Layer layer = doc.CreateLayer (name);
+					UserLayer layer = doc.CreateLayer(name);
 					doc.Insert (layer, 0);
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
@@ -138,7 +138,8 @@ namespace Pinta.Core
 				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData (List<Layer> layers) {
+		private byte[] GetLayerXmlData(List<UserLayer> layers)
+		{
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
 			writer.Formatting = Formatting.Indented;
@@ -178,8 +179,8 @@ namespace Pinta.Core
 			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
 			stream.Write (databytes, 0, databytes.Length);
 
-			for (int i = 0; i < document.Layers.Count; i++) {
-				Pixbuf pb = document.Layers[i].Surface.ToPixbuf ();
+			for (int i = 0; i < document.UserLayers.Count; i++) {
+				Pixbuf pb = document.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 				(pb as IDisposable).Dispose ();
 
@@ -188,7 +189,7 @@ namespace Pinta.Core
 			}
 
 			stream.PutNextEntry (new ZipEntry ("stack.xml"));
-			databytes = GetLayerXmlData (document.Layers);
+			databytes = GetLayerXmlData (document.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
 			ImageSurface flattened = document.GetFlattenedImage ();

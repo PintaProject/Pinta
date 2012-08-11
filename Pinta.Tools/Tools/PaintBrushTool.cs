@@ -125,7 +125,7 @@ namespace Pinta.Tools
 			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			var surf = doc.CurrentLayer.Surface;
+			var surf = doc.CurrentUserLayer.Surface;
 			var invalidate_rect = Gdk.Rectangle.Zero;
 			var brush_width = BrushWidth;
 

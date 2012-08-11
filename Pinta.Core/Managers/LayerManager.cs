@@ -37,16 +37,18 @@ namespace Pinta.Core
 	public class LayerManager
 	{
 		#region Public Properties
-		public Layer this[int index] {
-			get { return PintaCore.Workspace.ActiveDocument.Layers[index]; }
+		public UserLayer this[int index]
+		{
+			get { return PintaCore.Workspace.ActiveDocument.UserLayers[index]; }
 		}
 
-		public Layer CurrentLayer {
-			get { return PintaCore.Workspace.ActiveDocument.CurrentLayer; }
+		public UserLayer CurrentLayer
+		{
+			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayer; }
 		}
 
 		public int Count {
-			get { return PintaCore.Workspace.ActiveDocument.Layers.Count; }
+			get { return PintaCore.Workspace.ActiveDocument.UserLayers.Count; }
 		}
 
 		public Layer ToolLayer {
@@ -58,7 +60,7 @@ namespace Pinta.Core
 		}
 
 		public int CurrentLayerIndex {
-			get { return PintaCore.Workspace.ActiveDocument.CurrentLayerIndex; }
+			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex; }
 		}
 		
 		public Path SelectionPath {
@@ -90,12 +92,12 @@ namespace Pinta.Core
 
 		public void SetCurrentLayer (int i)
 		{
-			PintaCore.Workspace.ActiveDocument.SetCurrentLayer (i);
+			PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer (i);
 		}
 
-		public void SetCurrentLayer (Layer layer)
+		public void SetCurrentLayer(UserLayer layer)
 		{
-			PintaCore.Workspace.ActiveDocument.SetCurrentLayer (layer);
+			PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer (layer);
 		}
 
 		public void FinishSelection ()
@@ -104,18 +106,18 @@ namespace Pinta.Core
 		}
 		
 		// Adds a new layer above the current one
-		public Layer AddNewLayer (string name)
+		public UserLayer AddNewLayer(string name)
 		{
 			return PintaCore.Workspace.ActiveDocument.AddNewLayer (name);
 		}
 		
 		// Adds a new layer above the current one
-		public void Insert (Layer layer, int index)
+		public void Insert(UserLayer layer, int index)
 		{
 			PintaCore.Workspace.ActiveDocument.Insert (layer, index);
 		}
 
-		public int IndexOf (Layer layer)
+		public int IndexOf(UserLayer layer)
 		{
 			return PintaCore.Workspace.ActiveDocument.IndexOf (layer);
 		}

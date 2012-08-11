@@ -168,9 +168,9 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
@@ -179,7 +179,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, doc.CurrentLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -204,9 +204,9 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface old = doc.CurrentLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				g.AppendPath (doc.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
@@ -217,9 +217,9 @@ namespace Pinta.Core
 			doc.Workspace.Invalidate ();
 
 			if (sender is string && (sender as string) == "Cut")
-				doc.History.PushNewItem (new SimpleHistoryItem (Stock.Cut, Catalog.GetString ("Cut"), old, doc.CurrentLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Stock.Cut, Catalog.GetString ("Cut"), old, doc.CurrentUserLayerIndex));
 			else
-				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			ImageSurface src = doc.GetClippedLayer (doc.CurrentLayerIndex);
+			ImageSurface src = doc.GetClippedLayer (doc.CurrentUserLayerIndex);
 
 			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 			

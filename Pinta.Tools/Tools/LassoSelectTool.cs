@@ -100,7 +100,7 @@ namespace Pinta.Tools
 
 			base.OnMouseUp (canvas, args, point);
 
-			ImageSurface surf = doc.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentUserLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				if (path != null) {

@@ -75,12 +75,12 @@ namespace Pinta.Tools
 				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
 					g.AppendPath (doc.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
-					g.SetSource (doc.CurrentLayer.Surface);
+					g.SetSource (doc.CurrentUserLayer.Surface);
 					g.Clip ();
 					g.Paint ();
 				}
 
-				Cairo.ImageSurface surf = doc.CurrentLayer.Surface;
+				Cairo.ImageSurface surf = doc.CurrentUserLayer.Surface;
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
 					g.AppendPath (doc.SelectionPath);
@@ -107,7 +107,7 @@ namespace Pinta.Tools
 
 			Path path = doc.SelectionPath;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				g.AppendPath (path);
 				g.Translate (dx, dy);
 				doc.SelectionPath = g.CopyPath ();

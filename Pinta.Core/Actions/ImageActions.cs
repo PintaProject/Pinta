@@ -133,12 +133,12 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
-			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[0].Surface.Clone (), 0);
+			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, doc.UserLayers[0].Surface.Clone (), 0);
 
 			hist.Push (h1);
 
-			for (int i = 1; i < doc.Layers.Count; i++)
-				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers[i], i));
+			for (int i = 1; i < doc.UserLayers.Count; i++)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.UserLayers[i], i));
 
 			doc.FlattenImage ();
 
@@ -194,7 +194,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface image = doc.CurrentLayer.Surface;
+			Cairo.ImageSurface image = doc.CurrentUserLayer.Surface;
 			Gdk.Rectangle rect = image.GetBounds ();
 
 			Cairo.Color borderColor = image.GetPixel (0, 0);
@@ -289,7 +289,7 @@ namespace Pinta.Core
 			
 			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
 			
-			foreach (var layer in doc.Layers)
+			foreach (var layer in doc.UserLayers)
 				layer.Crop (rect, doc.SelectionPath);
 			
 			doc.History.PushNewItem (hist);

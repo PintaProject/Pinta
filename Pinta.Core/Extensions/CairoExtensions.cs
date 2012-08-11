@@ -799,7 +799,19 @@ namespace Pinta.Core
 
 		public static ImageSurface Clone (this ImageSurface surf)
 		{
-			return new ImageSurface ((byte[])surf.Data.Clone (), surf.Format, surf.Width, surf.Height, surf.Stride);
+			PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned();
+
+			ImageSurface newsurf = new ImageSurface(surf.Format, surf.Width, surf.Height);
+
+			using (Context g = new Context(newsurf))
+			{
+				g.SetSource(surf);
+				g.Paint();
+			}
+
+			return newsurf;
+
+			//return new ImageSurface (surf.Data, surf.Format, surf.Width, surf.Height, surf.Stride);
 		}
 
 		public static unsafe bool ContainsTranslucent (this ImageSurface surf)
