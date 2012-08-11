@@ -103,10 +103,10 @@ namespace Pinta.Effects
 							}
 						}
 						
-						x = xEnd - 1;
+						x = xEnd;
 					}
 					
-					y = yEnd - 1;
+					y = yEnd;
 				}
 			}
 		}

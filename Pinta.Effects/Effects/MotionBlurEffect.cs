@@ -83,7 +83,7 @@ namespace Pinta.Effects
 				for (int y = rect.Top; y <= rect.GetBottom (); ++y) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 
-					for (int x = rect.Left; x <= rect.GetBottom (); ++x) {
+					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						int sampleCount = 0;
 
 						PointD a = new PointD ((float)x + points[0].X, (float)y + points[0].Y);
