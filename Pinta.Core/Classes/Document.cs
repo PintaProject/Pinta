@@ -502,6 +502,7 @@ namespace Pinta.Core
 				blendop.Apply (surf, layer.Surface);
 			}
 
+			surf.MarkDirty ();
 			return surf;
 		}
 
