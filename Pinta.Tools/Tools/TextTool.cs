@@ -868,10 +868,14 @@ namespace Pinta.Tools
 
 		private void StopEditing(bool finalize)
 		{
+			is_editing = false;
+
 			//Make sure that neither undo surface is null, the user is editing, and there are uncommitted changes.
 			if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.EditMode == EditingMode.Editing && CurrentTextEngine.textMode == TextMode.Uncommitted)
 			{
 				Document doc = PintaCore.Workspace.ActiveDocument;
+
+				RedrawText(false, true);
 
 				//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 				ignoreCloneFinalizations = true;
@@ -887,8 +891,6 @@ namespace Pinta.Tools
 				//Now that the text has been committed, change its state.
 				CurrentTextEngine.textMode = TextMode.NotFinalized;
 			}
-
-			is_editing = false;
 
 			RedrawText(false, true);
 
@@ -1098,7 +1100,7 @@ namespace Pinta.Tools
 			PintaCore.Workspace.Invalidate(r);
 		}
 		#endregion
-		#region Undo
+		#region Undo/Redo
 
 		public override bool TryHandleUndo ()
 		{
@@ -1106,6 +1108,20 @@ namespace Pinta.Tools
 			{
 				// commit a history item to let the undo action undo text history item
 				StopEditing(false);
+			}
+
+			return false;
+		}
+
+		public override bool TryHandleRedo()
+		{
+			//Rather than redoing something, if the text has been edited then simply commit and do not redo.
+			if (CurrentTextEngine.EditMode != EditingMode.NotEditing && CurrentTextEngine.textMode == TextMode.Uncommitted)
+			{
+				//Commit a new TextHistoryItem.
+				StopEditing(false);
+
+				return true;
 			}
 
 			return false;
