@@ -52,6 +52,7 @@ updatepot: build
 	grep -v System.ComponentModel.Composition files.list > files2.list
 	xgettext --from-code=UTF-8 -f files2.list -o po/messages.pot
 	cat po/messages.in >> po/messages.pot
+	cat po/messages.pot | msguniq -o po/messages.pot
 	rm files.list
 	rm files2.list
 
