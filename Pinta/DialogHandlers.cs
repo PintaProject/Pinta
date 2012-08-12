@@ -126,6 +126,9 @@ namespace Pinta
 
 				PintaCore.Actions.Adjustments.ToggleActionsSensitive (false);
 				PintaCore.Actions.Effects.ToggleActionsSensitive (false);
+
+				PintaCore.Actions.Window.SaveAll.Sensitive = false;
+				PintaCore.Actions.Window.CloseAll.Sensitive = false;
 			}
 		}
 
@@ -169,6 +172,9 @@ namespace Pinta
 
 			PintaCore.Actions.Adjustments.ToggleActionsSensitive (true);
 			PintaCore.Actions.Effects.ToggleActionsSensitive (true);
+
+			PintaCore.Actions.Window.SaveAll.Sensitive = true;
+			PintaCore.Actions.Window.CloseAll.Sensitive = true;
 		}
 	}
 }
