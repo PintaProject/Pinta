@@ -56,7 +56,7 @@ namespace Pinta.Core
 		{
 			window_menu = menu;
 
-			menu.Append (SaveAll.CreateAcceleratedMenuItem (Gdk.Key.L, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			menu.Append (SaveAll.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
 			menu.Append (CloseAll.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
 		}

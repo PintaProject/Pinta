@@ -26,7 +26,7 @@ namespace Pinta.Effects
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.L; }
+			get { return Gdk.Key.G; }
 		}
 		
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
