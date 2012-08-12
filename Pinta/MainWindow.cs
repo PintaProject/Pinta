@@ -150,10 +150,10 @@ namespace Pinta
 
 					//Tell the IGE library to use your GTK menu as the Mac main menu
 					IgeMacMenu.MenuBar = main_menu;
-					/*
+
 					//tell IGE which menu item should be used for the app menu's quit item
-					IgeMacMenu.QuitMenuItem = yourQuitMenuItem;
-					*/
+					IgeMacMenu.QuitMenuItem = (MenuItem)PintaCore.Actions.File.Exit.CreateMenuItem ();
+
 					//add a new group to the app menu, and add some items to it
 					var appGroup = IgeMacMenu.AddAppMenuGroup ();
 					MenuItem aboutItem = (MenuItem)PintaCore.Actions.Help.About.CreateMenuItem ();
