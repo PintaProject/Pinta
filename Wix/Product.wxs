@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define ProductShortName = "Pinta" ?>
-<?define ProductVersion = "1.2.0" ?>
-<?define ProductVersionText = "1.2" ?>
+<?define ProductVersion = "1.4.0" ?>
+<?define ProductVersionText = "1.4" ?>
 <?define Manufacturer = "Pinta Community" ?>
 <?define UpgradeCode = "C0BCDEDA-62E7-4A43-8435-58323E096912" ?>
 
