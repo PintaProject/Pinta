@@ -12,7 +12,12 @@ BINFILES = \
 	$(BINDIR)/Pinta.Effects.dll \
 	$(BINDIR)/Pinta.Tools.dll
 
+DEBUG_FILES = $(addsuffix .mdb, $(BINFILES))
+
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
+
+MAC_APP_DIR = Pinta.app
+MAC_APP_BIN_DIR = "$(MAC_APP_DIR)/Contents/MacOS/"
 
 #magic automake variables
 
@@ -98,6 +103,16 @@ releasetar: $(BINFILES)
 # target: releasezip - Make a release zip file.
 releasezip: $(BINFILES)
 	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
+
+releaseosx: build $(BINFILES)
+	mkdir -p $(MAC_APP_DIR)/Contents/{MacOS,Resources}
+	cp -r $(BINDIR)/locale $(BINFILES) $(DEBUG_FILES) osx/pinta $(MAC_APP_BIN_DIR)
+	chmod +x $(MAC_APP_BIN_DIR)/pinta
+	cp osx/Info.plist $(MAC_APP_DIR)/Contents
+	cp osx/pinta.icns $(MAC_APP_DIR)/Contents/Resources
+	touch $(MAC_APP_DIR)
+	zip -r9uq $(MAC_APP_DIR).zip $(MAC_APP_DIR)
+	rm -rf $(MAC_APP_DIR)
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
