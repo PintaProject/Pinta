@@ -132,16 +132,16 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
-			SimpleHistoryItem h1 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[0].Surface.Clone (), 0);
+			var oldBottomSurface = doc.Layers[0].Surface.Clone ();
 
-			hist.Push (h1);
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
 
 			for (int i = 1; i < doc.Layers.Count; i++)
 				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers[i], i));
 
 			doc.FlattenImage ();
 
+			hist.Push (new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, 0));
 			doc.History.PushNewItem (hist);
 		}
 

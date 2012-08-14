@@ -236,14 +236,17 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
+			int bottomLayerIndex = doc.CurrentLayerIndex - 1;
+			var oldBottomSurface = doc.Layers[bottomLayerIndex].Surface.Clone ();
+
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Catalog.GetString ("Merge Layer Down"));
 			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.CurrentLayer, doc.CurrentLayerIndex);
-			SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, doc.Layers[doc.CurrentLayerIndex - 1].Surface.Clone (), doc.CurrentLayerIndex - 1);
-			
-			hist.Push (h1);
-			hist.Push (h2);
 
 			doc.MergeCurrentLayerDown ();
+
+			SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, bottomLayerIndex);
+			hist.Push (h1);
+			hist.Push (h2);
 
 			doc.History.PushNewItem (hist);
 		}
