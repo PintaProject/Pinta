@@ -119,6 +119,15 @@ namespace Pinta.Core
 			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs (rect));
 		}
 
+		/// <summary>
+		/// Determines whether the rectangle lies (at least partially) outside the canvas area.
+		/// </summary>
+		public bool IsPartiallyOffscreen (Gdk.Rectangle rect)
+		{
+			return (rect.IsEmpty || rect.Left < 0 || rect.Top < 0 ||
+			        rect.Bottom > CanvasSize.Height || rect.Right > CanvasSize.Width);
+		}
+
 		public bool PointInCanvas (Cairo.PointD point)
 		{
 			if (point.X < 0 || point.Y < 0)

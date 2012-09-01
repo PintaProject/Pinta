@@ -98,7 +98,11 @@ namespace Pinta.Tools
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
 
-			doc.Workspace.Invalidate (r);
+			if (doc.Workspace.IsPartiallyOffscreen (r)) {
+				doc.Workspace.Invalidate ();
+			} else {
+				doc.Workspace.Invalidate (r);
+			}
 			
 			last_point = new Point (x, y);
 		}

@@ -150,9 +150,9 @@ namespace Pinta.Tools
 			Surface = null;
 			Drawable = null;
 
-			// If we draw partially offscreen to the left or top, Cairo
-			// gives us a bogus dirty rectangle, so redraw everything
-			if (invalidate_rect.IsEmpty || invalidate_rect.Top < 0 || invalidate_rect.Left < 0) {
+			// If we draw partially offscreen, Cairo gives us a bogus
+			// dirty rectangle, so redraw everything.
+			if (doc.Workspace.IsPartiallyOffscreen (invalidate_rect)) {
 				doc.Workspace.Invalidate ();
 			} else {
 				doc.Workspace.Invalidate (invalidate_rect);
