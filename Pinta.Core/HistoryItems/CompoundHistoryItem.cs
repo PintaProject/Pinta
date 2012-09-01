@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using Cairo;
 using System;
 using System.Collections.Generic;
 
@@ -32,6 +33,7 @@ namespace Pinta.Core
 	public class CompoundHistoryItem : BaseHistoryItem
 	{
 		protected List<BaseHistoryItem> history_stack = new List<BaseHistoryItem> ();
+		private List<ImageSurface> snapshots;
 
 		public CompoundHistoryItem () : base ()
 		{
@@ -65,11 +67,21 @@ namespace Pinta.Core
 			foreach (var item in history_stack)
 				item.Dispose ();
 		}
-		
-		public void TakeSnapshotOfImage ()
+
+		public void StartSnapshotOfImage ()
 		{
-			foreach (Layer item in PintaCore.Workspace.ActiveDocument.Layers)
-				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, item.Surface.Clone (), PintaCore.Layers.IndexOf (item)));
+			snapshots = new List<ImageSurface> ();
+			foreach (Layer item in PintaCore.Workspace.ActiveDocument.Layers) {
+				snapshots.Add (item.Surface.Clone ());
+			}
+		}
+
+		public void FinishSnapshotOfImage ()
+		{
+			for (int i = 0; i < PintaCore.Workspace.ActiveDocument.Layers.Count; ++i) {
+				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, snapshots[i], i));
+			}
+			snapshots.Clear ();
 		}
 	}
 }

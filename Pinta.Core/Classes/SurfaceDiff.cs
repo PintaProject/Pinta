@@ -52,8 +52,14 @@ namespace Pinta.Core
 
 		public static unsafe SurfaceDiff Create (ImageSurface original, ImageSurface updated, bool force = false)
 		{
-			if (original.Width != updated.Width || original.Height != updated.Height)
-				throw new InvalidOperationException ("SurfaceDiff requires surfaces to be same size.");
+			if (original.Width != updated.Width || original.Height != updated.Height) {
+				// If the surface changed size, only throw an error if the user forced the use of a diff.
+				if (force) {
+					throw new InvalidOperationException ("SurfaceDiff requires surfaces to be same size.");
+				} else {
+					return null;
+				}
+			}
 
 			// Cache some pinvokes
 			var orig_width = original.Width;

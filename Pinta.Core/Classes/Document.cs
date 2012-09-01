@@ -627,7 +627,7 @@ namespace Pinta.Core
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.Icon = "Menu.Image.CanvasSize.png";
 			hist.Text = Catalog.GetString ("Resize Canvas");
-			hist.TakeSnapshotOfImage ();
+			hist.StartSnapshotOfImage ();
 
 			scale = Workspace.Scale;
 
@@ -635,6 +635,8 @@ namespace Pinta.Core
 
 			foreach (var layer in Layers)
 				layer.ResizeCanvas (width, height, anchor);
+
+			hist.FinishSnapshotOfImage ();
 
 			Workspace.History.PushNewItem (hist);
 
@@ -653,7 +655,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
-			hist.TakeSnapshotOfImage ();
+			hist.StartSnapshotOfImage ();
 
 			scale = Workspace.Scale;
 
@@ -661,6 +663,8 @@ namespace Pinta.Core
 
 			foreach (var layer in Layers)
 				layer.Resize (width, height);
+
+			hist.FinishSnapshotOfImage ();
 
 			Workspace.History.PushNewItem (hist);
 

@@ -275,7 +275,7 @@ namespace Pinta.Core
 			
 			hist.Icon = "Menu.Image.Crop.png";
 			hist.Text = Catalog.GetString ("Crop to Selection");
-			hist.TakeSnapshotOfImage ();
+			hist.StartSnapshotOfImage ();
 			hist.RestorePath = doc.SelectionPath.Clone ();
 			
 			PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates ();
@@ -291,6 +291,8 @@ namespace Pinta.Core
 			
 			foreach (var layer in doc.Layers)
 				layer.Crop (rect, doc.SelectionPath);
+
+			hist.FinishSnapshotOfImage ();
 			
 			doc.History.PushNewItem (hist);
 			doc.ResetSelectionPath ();
