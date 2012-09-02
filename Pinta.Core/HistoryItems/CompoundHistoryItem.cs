@@ -78,7 +78,7 @@ namespace Pinta.Core
 
 		public void FinishSnapshotOfImage ()
 		{
-			for (int i = 0; i < PintaCore.Workspace.ActiveDocument.Layers.Count; ++i) {
+			for (int i = 0; i < snapshots.Count; ++i) {
 				history_stack.Add (new SimpleHistoryItem (string.Empty, string.Empty, snapshots[i], i));
 			}
 			snapshots.Clear ();
