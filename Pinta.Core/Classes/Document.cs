@@ -615,7 +615,14 @@ namespace Pinta.Core
 			ShowSelection = false;
 		}
 
-		public void ResizeCanvas (int width, int height, Anchor anchor)
+		/// <summary>
+		/// Resizes the canvas.
+		/// </summary>
+		/// <param name='compoundAction'>
+		/// Optionally, the history item for resizing the canvas can be added to
+		/// a CompoundHistoryItem if it is part of a larger action (e.g. pasting an image).
+		/// </param>
+		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem compoundAction)
 		{
 			double scale;
 
@@ -638,7 +645,11 @@ namespace Pinta.Core
 
 			hist.FinishSnapshotOfImage ();
 
-			Workspace.History.PushNewItem (hist);
+			if (compoundAction != null) {
+				compoundAction.Push (hist);
+			} else {
+				Workspace.History.PushNewItem (hist);
+			}
 
 			ResetSelectionPath ();
 

@@ -73,7 +73,7 @@ namespace Pinta
 		#region Public Methods
 		public void SaveChanges ()
 		{
-			PintaCore.Workspace.ResizeCanvas (widthSpinner.ValueAsInt, heightSpinner.ValueAsInt, anchor);
+			PintaCore.Workspace.ResizeCanvas (widthSpinner.ValueAsInt, heightSpinner.ValueAsInt, anchor, null);
 		}
 		#endregion
 

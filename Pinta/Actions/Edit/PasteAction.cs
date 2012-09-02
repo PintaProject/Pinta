@@ -71,6 +71,9 @@ namespace Pinta.Actions
 
 			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
 
+			// Merge the (optional) canvas resize and the pasted image into a single history item.
+			var paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste"));
+
 			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
 			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
 			{
@@ -78,7 +81,8 @@ namespace Pinta.Actions
 
 				if (response == ResponseType.Accept)
 				{
-					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height, Pinta.Core.Anchor.Center);
+					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height,
+					                                  Pinta.Core.Anchor.Center, paste_action);
 					PintaCore.Actions.View.UpdateCanvasScale ();
 				}
 				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
@@ -107,7 +111,8 @@ namespace Pinta.Actions
 
 			doc.Workspace.Invalidate ();
 
-			doc.History.PushNewItem (new PasteHistoryItem (image, old_path, old_show_selection));
+			paste_action.Push (new PasteHistoryItem (image, old_path, old_show_selection));
+			doc.History.PushNewItem (paste_action);
 		}
 
 		private ResponseType ShowExpandCanvasDialog ()
