@@ -136,7 +136,7 @@ namespace Pinta.Core
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
 
-			for (int i = 1; i < doc.Layers.Count; i++)
+			for (int i = doc.Layers.Count - 1; i >= 1; i--)
 				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers[i], i));
 
 			doc.FlattenImage ();

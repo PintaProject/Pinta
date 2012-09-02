@@ -50,16 +50,16 @@ namespace Pinta.Core
 		
 		public override void Undo ()
 		{
-			foreach (var item in history_stack)
-				item.Undo ();
+			for (int i = history_stack.Count - 1; i >= 0; i--)
+				history_stack[i].Undo ();
 		}
 
 		public override void Redo ()
 		{
 			// We want to redo the actions in the
 			// opposite order than the undo order
-			for (int i = history_stack.Count - 1; i >= 0; i--)
-				history_stack[i].Redo ();
+			foreach (var item in history_stack)
+				item.Redo ();
 		}
 
 		public override void Dispose ()
