@@ -79,6 +79,13 @@ namespace Pinta.Core
 				output.Write (this.imageDesc);
 			}
 		}
+
+		/// <summary>
+		/// The image ID field contents. It is important for this field to be non-empty, since
+		/// GDK incorrectly identifies the mime type as image/x-win-bitmap if the idLength
+		/// value is 0 (see bug #987641).
+		/// </summary>
+		private const string ImageIdField = "Created by Pinta";
 		
 		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 		// we can always add more through an export dialog.
@@ -89,7 +96,7 @@ namespace Pinta.Core
 			try {
 				TgaHeader header = new TgaHeader();
 
-				header.idLength = 0;
+				header.idLength = (byte) (ImageIdField.Length + 1);
 				header.cmapType = 0;
 				header.imageType = 2; // uncompressed RGB
 				header.cmapIndex = 0;
@@ -102,6 +109,8 @@ namespace Pinta.Core
 				header.pixelDepth = 32;
 				header.imageDesc = 8; // 32-bit, lower-left origin, which is weird but hey...
 				header.WriteTo (writer);
+
+				writer.Write(ImageIdField);
 				
 				byte[] data = surf.Data;
 				
