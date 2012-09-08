@@ -132,7 +132,7 @@ namespace Pinta.Tools
 			Surface = surf;
 
 			using (Drawable = new Context (surf)) {
-				Drawable.AppendPath (doc.SelectionPath);
+				Drawable.AppendPath (doc.Selection.SelectionPath);
 				Drawable.FillRule = FillRule.EvenOdd;
 				Drawable.Clip ();
 

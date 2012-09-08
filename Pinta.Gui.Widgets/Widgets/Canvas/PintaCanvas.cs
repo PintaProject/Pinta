@@ -147,7 +147,7 @@ namespace Pinta.Gui.Widgets
 					g.Translate (0.5, 0.5);
 					g.Scale (scale, scale);
 
-					g.AppendPath (PintaCore.Layers.SelectionPath);
+					g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 
 					if (PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected")) {
 						g.Color = new Cairo.Color (0.7, 0.8, 0.9, 0.2);

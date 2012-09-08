@@ -48,12 +48,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Path path = doc.SelectionPath;
-
-			using (Context g = new Context (l.Surface))
-				doc.SelectionPath = g.CreateEllipsePath (r);
-
-			(path as IDisposable).Dispose ();
+			doc.Selection.CreateEllipseSelection(l.Surface, r);
 			
 			return r;
 		}

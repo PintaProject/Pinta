@@ -85,7 +85,7 @@ namespace Pinta.Core
 			
 			// Handle selection path.
 			PintaCore.Tools.Commit ();
-			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Layers.SelectionPath : null;
+			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Workspace.ActiveDocument.Selection.SelectionPath : null;
 			render_bounds = selection_path.GetBounds ();
 			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);			
 									
@@ -241,7 +241,7 @@ namespace Pinta.Core
 			using (var ctx = new Cairo.Context (layer.Surface)) {
 				
 				ctx.Save ();
-				ctx.AppendPath (PintaCore.Layers.SelectionPath);
+				ctx.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
 				ctx.FillRule = Cairo.FillRule.EvenOdd;
 				ctx.Clip ();				
 			
