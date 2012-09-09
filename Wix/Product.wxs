@@ -282,6 +282,13 @@
                 </Component>
               </Directory>
             </Directory>
+            <Directory Id="ka" Name='ka'>
+              <Directory Id="LC_MESSAGES_KA" Name='LC_MESSAGES'>
+                <Component Id="KaTranslation" Guid="2091EA03-4272-45a5-A18B-B936611D3D19">
+                  <File Id="pinta_ka" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ka\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
             <Directory Id="ko" Name='ko'>
               <Directory Id="LC_MESSAGES_KO" Name='LC_MESSAGES'>
                 <Component Id="KoTranslation" Guid="A9F2C3D8-9F48-4F1F-A262-94CAA8A7D982">
@@ -499,6 +506,7 @@
       <ComponentRef Id="IdTranslation" />
       <ComponentRef Id="ItTranslation" />
       <ComponentRef Id="JaTranslation" />
+      <ComponentRef Id="KaTranslation" />
       <ComponentRef Id="KoTranslation" />
       <ComponentRef Id="LaTranslation" />
       <ComponentRef Id="LtTranslation" />
