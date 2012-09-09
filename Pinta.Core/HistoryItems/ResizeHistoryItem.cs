@@ -101,7 +101,9 @@ namespace Pinta.Core
 		{
 			base.Dispose ();
 
-			RestoreSelection.DisposeSelectionPreserve();
+			if (RestoreSelection != null) {
+				RestoreSelection.DisposeSelection ();
+			}
 		}
 	}
 }
