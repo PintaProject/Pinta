@@ -188,12 +188,10 @@ namespace Pinta.Core
 				PintaCore.Workspace.Invalidate ();
 
 				fileOpened = true;
-			} catch {
-				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Could not open file: {0}"), file);
-				md.Title = Catalog.GetString ("Error");
-
-				md.Run ();
-				md.Destroy ();
+			} catch (UnauthorizedAccessException) {
+				ShowOpenFileErrorDialog (file, Catalog.GetString ("Permission denied"));
+			} catch (Exception e) {
+				ShowOpenFileErrorDialog (file, e.Message);
 			}
 
 			return fileOpened;
@@ -303,6 +301,18 @@ namespace Pinta.Core
 				DocumentClosed (this, e);
 		}
 		#endregion
+
+		private void ShowOpenFileErrorDialog (string filename, string primaryText)
+		{
+			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+			string secondaryText = string.Format (Catalog.GetString ("Could not open file: {0}"), filename);
+			string message = string.Format (markup, primaryText, secondaryText);
+
+			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+			                            MessageType.Error, ButtonsType.Ok, message);
+			md.Run ();
+			md.Destroy ();
+		}
 
 		#region Public Events
 		public event EventHandler ActiveDocumentChanged;

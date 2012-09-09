@@ -541,7 +541,6 @@ msgstr ""
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr ""
@@ -877,7 +876,7 @@ msgstr ""
 msgid "Open Image"
 msgstr ""
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr ""
@@ -2036,4 +2035,8 @@ msgstr ""
 
 #: Pinta.Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
 msgstr ""
