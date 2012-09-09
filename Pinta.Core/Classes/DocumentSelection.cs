@@ -47,6 +47,8 @@ namespace Pinta.Core
 				if (selection_path == value)
 					return;
 
+				DisposeSelection ();
+
 				selection_path = value;
 			}
 		}
