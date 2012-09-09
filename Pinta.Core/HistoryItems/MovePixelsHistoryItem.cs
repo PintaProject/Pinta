@@ -69,10 +69,10 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone();
+			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection;
 			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
 
-			PintaCore.Workspace.ActiveDocument.Selection = old_selection.Clone();
+			PintaCore.Workspace.ActiveDocument.Selection = old_selection;
 			PintaCore.Layers.SelectionLayer.Offset = old_offset;
 
 			old_selection = swap_selection;

@@ -60,13 +60,13 @@ namespace Pinta.Core
 			base.Undo ();
 			
 			if (RestoreSelection != null) {
-				Cairo.Path old = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath;
-
+				DocumentSelection old = PintaCore.Workspace.ActiveDocument.Selection;
 				PintaCore.Workspace.ActiveDocument.Selection = RestoreSelection.Clone();
-				
-				if (old != null)
-					(old as IDisposable).Dispose ();
-					
+
+				if (old != null) {
+					old.DisposeSelection ();
+				}
+
 				PintaCore.Layers.ShowSelection = true;
 			} else {
 				PintaCore.Layers.ResetSelectionPath ();

@@ -57,11 +57,8 @@ namespace Pinta.Core
 			doc.CreateSelectionLayer ();
 			doc.ShowSelectionLayer = true;
 
-			Path p;
-
 			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
 				g.DrawPixbuf (paste_image, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Rectangle (0, 0, paste_image.Width, paste_image.Height));
 			}
 
 			Swap ();
@@ -82,6 +79,9 @@ namespace Pinta.Core
 		{
 			if (paste_image != null)
 				(paste_image as IDisposable).Dispose ();
+
+			if (old_selection != null)
+				old_selection.DisposeSelection ();
 		}
 
 		private void Swap ()
@@ -90,10 +90,10 @@ namespace Pinta.Core
 			// selection path should be visible
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			DocumentSelection swap_selection = doc.Selection.Clone();
+			DocumentSelection swap_selection = doc.Selection;
 			bool swap_show_sel = doc.ShowSelection;
 
-			doc.Selection = old_selection.Clone();
+			doc.Selection = old_selection;
 			doc.ShowSelection = old_show_selection;
 
 			old_selection = swap_selection;
