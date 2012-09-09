@@ -7,55 +7,1350 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-28 17:08-0600\n"
-"PO-Revision-Date: 2012-04-02 01:07+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"POT-Creation-Date: 2012-08-12 01:45-0400\n"
+"PO-Revision-Date: 2012-05-05 16:45+0000\n"
+"Last-Translator: Drovosekov Anton <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-04-28 16:20+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
+"X-Generator: Launchpad (build 15914)\n"
 
-#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:26
-msgid "Auto Level"
-msgstr "Автокоррекция"
+#: Pinta.Tools/Tools/PanTool.cs:37
+msgid "Pan"
+msgstr "Перемещение"
 
-#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:26
-msgid "Invert Colors"
-msgstr "Обратить цвета"
+#: Pinta.Tools/Tools/PanTool.cs:43
+msgid "Click and drag to navigate image."
+msgstr "Щёлкните и перетаскивайте для навигации по изображению."
 
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:24
-msgid "Levels"
-msgstr "Уровни"
+#: Pinta.Tools/Tools/MoveSelectedTool.cs:41
+#: Pinta/Actions/Edit/PasteAction.cs:100
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
+msgid "Move Selected Pixels"
+msgstr "Переместить выбранные пиксели"
 
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:27
-msgid "Sepia"
-msgstr "Сепия"
+#: Pinta.Tools/Tools/MoveSelectedTool.cs:47
+msgid "Drag the selection to move selected content."
+msgstr "Перетащите мышью выделение, чтобы переместить выделенный фрагмент."
 
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:26
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
-msgid "Posterize"
-msgstr "Постеризовать"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:63
+msgid "Color Picker"
+msgstr "Получение цвета"
 
-#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:26
-msgid "Black and White"
-msgstr "Чёрно-белое"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:69
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"Щёлкните левой кнопкой для задания первичного цвета. Щёлкните правой кнопкой "
+"для задания вторичного цвета."
 
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:28
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "Кривые"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:94
+msgid "Sampling"
+msgstr ""
 
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:30
-msgid "Brightness / Contrast"
-msgstr "Яркость / Контраст"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:101
+msgid "Single Pixel"
+msgstr ""
 
-#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:27
-msgid "Hue / Saturation"
-msgstr "Тон / Насыщенность"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:102
+msgid "3 x 3 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:103
+msgid "5 x 5 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:104
+msgid "7 x 7 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:105
+msgid "9 x 9 Region"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:113 Pinta.Core/Classes/Document.cs:300
+msgid "Layer"
+msgstr "Слой"
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:114
+msgid "Image"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:125
+msgid "After select"
+msgstr "После выбора"
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:132
+msgid "Do not switch tool"
+msgstr "Не переключайте инструмент"
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:133
+msgid "Switch to previous tool"
+msgstr "Переключиться на предыдущий инструмент"
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:134
+msgid "Switch to Pencil tool"
+msgstr "Переключиться на инструмент \"Карандаш\""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:187 Pinta.Tools/Tools/PencilTool.cs:47
+msgid "Pencil"
+msgstr "Карандаш"
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:45
+msgid "Magic Wand Select"
+msgstr "Волшебная палочка"
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:53
+msgid "Click to select region of similar color."
+msgstr "Щёлкните, чтобы выделить регион с похожим цветом."
+
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:41
+msgid "Move Selection"
+msgstr "Перемещение выделения"
+
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:47
+msgid "Drag the selection to move selection outline."
+msgstr "Перетащите выделение мышью, чтобы переместить контур выделения."
+
+#: Pinta.Tools/Tools/PaintBrushTool.cs:40 Pinta/MainWindow.cs:65
+msgid "Paintbrush"
+msgstr "Кисть"
+
+#: Pinta.Tools/Tools/PaintBrushTool.cs:42
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:54
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Нажмите левую кнопку, чтобы рисовать первичным цветом, правую - вторичным."
+
+#: Pinta.Tools/Tools/PaintBrushTool.cs:63
+msgid "Type"
+msgstr "Тип"
+
+#: Pinta.Tools/Tools/RectangleSelectTool.cs:37
+msgid "Rectangle Select"
+msgstr "Прямоугольное выделение"
+
+#: Pinta.Tools/Tools/RectangleSelectTool.cs:43
+msgid ""
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
+msgstr ""
+"Нажмите и перетаскивайте, чтобы нарисовать прямоугольное выделение. Нажмите "
+"Shift, чтобы получить квадрат."
+
+#: Pinta.Tools/Tools/FloodTool.cs:74
+msgid "Flood Mode"
+msgstr "Избыточный режим"
+
+#: Pinta.Tools/Tools/FloodTool.cs:81
+msgid "Contiguous"
+msgstr "Смежная область"
+
+#: Pinta.Tools/Tools/FloodTool.cs:82
+msgid "Global"
+msgstr "Глобальная"
+
+#: Pinta.Tools/Tools/FloodTool.cs:93 Pinta.Tools/Tools/RecolorTool.cs:73
+msgid "Tolerance"
+msgstr "Чувствительность"
+
+#: Pinta.Tools/Tools/BaseBrushTool.cs:70 Pinta.Tools/Tools/ShapeTool.cs:99
+msgid "Brush width"
+msgstr "Толщина кисти"
+
+#: Pinta.Tools/Tools/BaseBrushTool.cs:75 Pinta.Tools/Tools/ShapeTool.cs:104
+msgid "Decrease brush size"
+msgstr "Уменьшить размер кисти"
+
+#: Pinta.Tools/Tools/BaseBrushTool.cs:89 Pinta.Tools/Tools/ShapeTool.cs:118
+msgid "Increase brush size"
+msgstr "Увеличить размер кисти"
+
+#: Pinta.Tools/Tools/EllipseTool.cs:37
+msgid "Ellipse"
+msgstr "Эллипс"
+
+#: Pinta.Tools/Tools/EllipseTool.cs:43
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+"Щёлкните и перетаскивайте мышь, чтобы нарисовать эллипс (правая кнопка "
+"рисует вторичным цветом). Нажмите Shift, чтобы получить круг."
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
+msgid "Rounded Rectangle"
+msgstr "Скруглённый прямоугольник"
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain to a square."
+msgstr ""
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
+msgid "Radius"
+msgstr "Радиус"
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:92
+msgid "Decrease rectangle's corner radius"
+msgstr "Уменьшить радиус углов прямоугольника"
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:106
+msgid "Increase rectangle's corner radius"
+msgstr "Увеличить радиус углов прямоугольника"
+
+#: Pinta.Tools/Tools/RecolorTool.cs:58
+msgid "Recolor"
+msgstr "Перекрашивание"
+
+#: Pinta.Tools/Tools/RecolorTool.cs:60
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "Щёлкните левой кнопкой, чтобы заменить вторичный цвет первичным."
+
+#: Pinta.Tools/Tools/EllipseSelectTool.cs:37
+msgid "Ellipse Select"
+msgstr "Эллиптическое выделение"
+
+#: Pinta.Tools/Tools/EllipseSelectTool.cs:43
+msgid ""
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
+msgstr ""
+"Щёлкните и перетаскивайте, чтобы нарисовать эллиптическое выделение. Держите "
+"Shift, чтобы выделить круг."
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:35
+msgid "Text"
+msgstr "Текст"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:41
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Щёлкните левой кнопкой, чтобы поместить курсор, затем наберите нужный текст. "
+"Текст рисуется первичным цветом."
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:89
+msgid "Font"
+msgstr "Шрифт"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:124
+msgid "Bold"
+msgstr "Полужирный"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:131
+msgid "Italic"
+msgstr "Курсивный"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:138
+msgid "Underline"
+msgstr "Подчёркнутый"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:147
+msgid "Left Align"
+msgstr "По левому краю"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:155
+msgid "Center Align"
+msgstr "По центру"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:162
+msgid "Right Align"
+msgstr "По правому краю"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:174
+msgid "Text Style"
+msgstr "Стиль текста"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:181
+#: Pinta.Tools/Brushes/PlainBrush.cs:37 Pinta.Core/Effects/UserBlendOps.cs:52
+msgid "Normal"
+msgstr "Обычный"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:182
+msgid "Normal and Outline"
+msgstr "Нормальный и контурный"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:183
+#: Pinta.Effects/Effects/OutlineEffect.cs:28
+msgid "Outline"
+msgstr "Контур"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:184
+msgid "Fill Background"
+msgstr "Заполнить фон"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:192
+msgid "Outline width"
+msgstr "Ширина контура"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:197
+msgid "Decrease outline size"
+msgstr "Уменьшить размер контура"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:214
+msgid "Increase outline size"
+msgstr "Увеличить размер контура"
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:37
+msgid "Line"
+msgstr "Линия"
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:43
+msgid ""
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
+"Нажмите левую кнопку мыши, чтобы рисовать первичным цветом, правую – чтобы "
+"рисовать вторичным цветом. Зажмите Shift, чтобы ограничить угол."
+
+#: Pinta.Tools/Tools/ZoomTool.cs:48
+msgid "Zoom"
+msgstr "Масштабирование"
+
+#: Pinta.Tools/Tools/ZoomTool.cs:54
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Щёлкните левой кнопкой для приближения. Щёлкните правой кнопкой для "
+"отдаления. Нажмите и перетаскивайте мышь, чтобы масштабировать по выделению."
+
+#: Pinta.Tools/Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Плоская заливка"
+
+#: Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Щёлкните левой кнопкой, чтобы залить регион первичным цветом, правой - "
+"вторичным."
+
+#: Pinta.Tools/Tools/RectangleTool.cs:37
+msgid "Rectangle"
+msgstr "Прямоугольник"
+
+#: Pinta.Tools/Tools/RectangleTool.cs:43
+msgid ""
+"Click and drag to draw a rectangle (right click for secondary color). Hold "
+"shift to constrain to a square."
+msgstr ""
+"Щёлкните и перетащите мышь, чтобы нарисовать прямоугольник (правая кнопка "
+"рисует вторичным цветом). Зажмите Shift, чтобы получить квадрат."
+
+#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:166
+msgid "Gradient"
+msgstr "Градиент"
+
+#: Pinta.Tools/Tools/GradientTool.cs:63
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+"Щёлкните и перетаскивайте, чтобы нарисовать градиент от первичного цвета к "
+"вторичному. Щёлкните правой кнопкой для инверсии."
+
+#: Pinta.Tools/Tools/GradientTool.cs:173
+msgid "Linear Gradient"
+msgstr "Линейный градиент"
+
+#: Pinta.Tools/Tools/GradientTool.cs:174
+msgid "Linear Reflected Gradient"
+msgstr "Линейный отражённый градиент"
+
+#: Pinta.Tools/Tools/GradientTool.cs:175
+msgid "Linear Diamond Gradient"
+msgstr "Линейный ромбовидный градиент"
+
+#: Pinta.Tools/Tools/GradientTool.cs:176
+msgid "Radial Gradient"
+msgstr "Радиальный градиент"
+
+#: Pinta.Tools/Tools/GradientTool.cs:177
+msgid "Conical Gradient"
+msgstr "Конический градиент"
+
+#: Pinta.Tools/Tools/ShapeTool.cs:131
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:71
+msgid "Fill Style"
+msgstr "Стиль заполнения"
+
+#: Pinta.Tools/Tools/ShapeTool.cs:138
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:78
+msgid "Outline Shape"
+msgstr "Обвести фигуру"
+
+#: Pinta.Tools/Tools/ShapeTool.cs:139
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:79
+msgid "Fill Shape"
+msgstr "Залить фигуру"
+
+#: Pinta.Tools/Tools/ShapeTool.cs:140
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:80
+msgid "Fill and Outline Shape"
+msgstr "Залить и обвести фигуру"
+
+#: Pinta.Tools/Tools/PencilTool.cs:49
+msgid ""
+"Left click to draw freeform, one-pixel wide lines with the primary color, "
+"right click to use the secondary color."
+msgstr ""
+"Щёлкните левой кнопкой для рисования произвольных линий в один пиксель "
+"толщиной первичным цветом, правой кнопкой для использования вторичного цвета."
+
+#: Pinta.Tools/Tools/LassoSelectTool.cs:44
+msgid "Lasso Select"
+msgstr "Выделение лассо"
+
+#: Pinta.Tools/Tools/LassoSelectTool.cs:46
+msgid "Click and drag to draw the outline for a selection area."
+msgstr ""
+"Нажмите и перетаскивайте мышь, чтобы выделить контур области выделения."
+
+#: Pinta.Tools/Tools/CloneStampTool.cs:42
+msgid "Clone Stamp"
+msgstr "Штамп клонирования"
+
+#: Pinta.Tools/Tools/CloneStampTool.cs:47
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr ""
+"Ctrl+щелчок левой кнопкой мыши для установки основы, левой кнопкой мыши "
+"начать рисовать"
+
+#: Pinta.Tools/Tools/EraserTool.cs:44
+msgid "Eraser"
+msgstr "Ластик"
+
+#: Pinta.Tools/Tools/EraserTool.cs:46
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+"Левая кнопка мыши стирает до прозрачного фона, правая кнопка стирает цветом "
+"фона. "
+
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:52
+msgid "Freeform Shape"
+msgstr "Произвольная фигура"
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:37
+msgid "Circles"
+msgstr "Круги"
+
+#: Pinta.Tools/Brushes/GridBrush.cs:37
+msgid "Grid"
+msgstr "Сетка"
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "Брызги"
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:39
+msgid "Squares"
+msgstr "Квадраты"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "Случайный шум"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr "Перемешать"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "метка"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+msgid "label1"
+msgstr "метка1"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:80
+msgid "Choose Primary Color"
+msgstr "Выберите цвет переднего плана"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:94
+msgid "Choose Secondary Color"
+msgstr "Выберите фоновый цвет"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:117
+msgid "Choose Palette Color"
+msgstr "Выберите цвет цалитры"
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
+msgid "Layer Shown"
+msgstr "Видимый слой"
+
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
+msgid "Layer Hidden"
+msgstr "Скрытый слой"
+
+#: Pinta/Options.cs:486
+msgid "OptionName"
+msgstr "Название опции"
+
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr "число потоков для использования при отрисовке"
+
+#: Pinta/Actions/Edit/ResizePaletteAction.cs:50
+msgid "Resize Palette"
+msgstr "Изменить размер палитры"
+
+#: Pinta/Actions/Edit/ResizePaletteAction.cs:51
+msgid "New palette size:"
+msgstr "Новый размер палитры"
+
+#: Pinta/Actions/Edit/PasteAction.cs:115
+msgid "Image larger than canvas"
+msgstr "Изображение больше, чем размер холста"
+
+#: Pinta/Actions/Edit/PasteAction.cs:116
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"Размер вставленного изображения больше размера холста. Что нужно сделать?"
+
+#: Pinta/Actions/Edit/PasteAction.cs:120
+msgid "Expand canvas"
+msgstr "Увеличить размер холста"
+
+#: Pinta/Actions/Edit/PasteAction.cs:121
+msgid "Don't change canvas size"
+msgstr "Не изменять размер холста"
+
+#: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Paste Into New Layer"
+msgstr "Вставить как новый слой"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
+msgid "Layer Opacity"
+msgstr "Непрозрачность слоя"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:97
+msgid "Rename Layer"
+msgstr "Переименовать слой"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Hide Layer"
+msgstr "Скрыть слой"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Show Layer"
+msgstr "Показать слой"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:50
+msgid "Layer Properties"
+msgstr "Свойства слоя"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
+msgid "Rotate / Zoom Layer"
+msgstr "Повернуть / Увеличить слой"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
+msgid "Save Image File"
+msgstr "Сохранить файл изображения"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:181
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta не поддерживает сохранение изображений в этом формате."
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
+#: Pinta.Core/Managers/WorkspaceManager.cs:193
+#: Pinta.Core/Actions/EditActions.cs:352
+msgid "Error"
+msgstr "Ошибка"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:193
+msgid "Cannot save read only file."
+msgstr "Невозможно сохранить файл, доступный только для чтения."
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:208
+msgid "Image too large"
+msgstr "Изображение слишком большое"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "Изображение в файле ICO не может быть больше, чем 255x255 пикселей."
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "Файл с именем \"{0}\" существует. Хотите ли вы его заменить?"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr "Файл уже существует в \"{1}\". Его замена перзапишет его содержимое."
+
+#: Pinta/Actions/File/OpenDocumentAction.cs:50
+#: Pinta.Core/Actions/LayerActions.cs:157
+msgid "Open Image File"
+msgstr "Открыть файл изображения"
+
+#: Pinta/Actions/File/OpenDocumentAction.cs:64
+msgid "Image files"
+msgstr "Файлы изображений"
+
+#: Pinta/Actions/File/OpenDocumentAction.cs:68
+#: Pinta.Core/Actions/EditActions.cs:335
+msgid "All files"
+msgstr "Все файлы"
+
+#: Pinta/Actions/File/CloseDocumentAction.cs:61
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "Сохранить изменения изображения \"{0}\" перед закрытием?"
+
+#: Pinta/Actions/File/CloseDocumentAction.cs:62
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Если вы не сохраните изменения, они будут потеряны безвозвратно."
+
+#: Pinta/Actions/File/CloseDocumentAction.cs:69
+msgid "Close without saving"
+msgstr "Закрыть без сохранения"
+
+#: Pinta/Actions/File/NewScreenshotAction.cs:52
+msgid "Take Screenshot"
+msgstr "Сделать снимок экрана"
+
+#: Pinta/Actions/File/NewScreenshotAction.cs:53
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Задержка перед созданием снимка экрана (в секундах)"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:27
+#: Pinta.Core/Managers/WorkspaceManager.cs:165
+msgid "New Image"
+msgstr "Новое изображение"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
+msgid "New Image Size          "
+msgstr "Размер нового изображения          "
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+msgid "pixels"
+msgstr "пикселей"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+msgid "Width:"
+msgstr "Ширина:"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+msgid "Height:"
+msgstr "Высота:"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+msgid "Resize Image"
+msgstr "Масштабировать изображение"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+msgid "By percentage:"
+msgstr "В процентах:"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+msgid "By absolute size:"
+msgstr "Абсолютный размер:"
+
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+msgid "Maintain aspect ratio"
+msgstr "Соблюдать соотношение сторон"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: Pinta.Core/Classes/Document.cs:629
+msgid "Resize Canvas"
+msgstr "Изменить размер холста"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Якорь:"
+
+#: Pinta/Dialogs/AboutDialog.cs:114
+msgid "Contributors to this release:"
+msgstr ""
+
+#: Pinta/Dialogs/AboutDialog.cs:126
+msgid "Previous contributors:"
+msgstr ""
+
+#: Pinta/Dialogs/AboutDialog.cs:137
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
+"  ArtKun https://launchpad.net/~artkun\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
+"  Chubakur https://launchpad.net/~chubakur\n"
+"  Drovosekov Anton https://launchpad.net/~corningster\n"
+"  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Maia Kozheva https://launchpad.net/~sikon\n"
+"  Mairon https://launchpad.net/~an9227\n"
+"  Nightingale https://launchpad.net/~solosn\n"
+"  Nikita Putko https://launchpad.net/~ktototam98\n"
+"  Nkolay Parukhin https://launchpad.net/~parukhin\n"
+"  PocketSam https://launchpad.net/~dr-chaoss\n"
+"  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
+"  Stepan Kislan https://launchpad.net/~stepa87\n"
+"  Strahov Nikita https://launchpad.net/~newerty\n"
+"  Vyacheslav Sharmanov https://launchpad.net/~vsharmanov\n"
+"  Yogar https://launchpad.net/~me-yogar\n"
+"  jeder https://launchpad.net/~i-jeder\n"
+"  ma$terok https://launchpad.net/~m-shein"
+
+#: Pinta/Dialogs/AboutDialog.cs:140
+msgid "Translated by:"
+msgstr "Переведено:"
+
+#: Pinta/Dialogs/AboutDialog.cs:146
+msgid "Based on the work of Paint.NET:"
+msgstr "Основано на Paint.NET:"
+
+#: Pinta/Dialogs/AboutDialog.cs:153
+msgid "Using some icons from:"
+msgstr "Использованы некоторые значки из:"
+
+#: Pinta/Dialogs/AboutDialog.cs:161
+msgid "Powered by Mono:"
+msgstr ""
+
+#: Pinta/Dialogs/AboutDialog.cs:270
+msgid "About Pinta"
+msgstr "О программе Pinta"
+
+#: Pinta/Dialogs/AboutDialog.cs:288
+msgid "Version Info"
+msgstr "Сведения о версии"
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr "Качество JPEG"
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "Quality: "
+msgstr "Качество: "
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:159
+msgid "Name:"
+msgstr "Имя:"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:167
+msgid "Visible"
+msgstr "Видимый"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
+msgid "Blend Mode"
+msgstr "Режим смешения"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:189
+msgid "Opacity:"
+msgstr "Непрозрачность:"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "Версия"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Лицензия"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Распространяется под лицензией MIT X11."
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Авторское право"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "разработчики Pinta"
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+msgid "Image cannot be pasted"
+msgstr "Изображение не может быть вставлено"
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+msgid "The clipboard does not contain an image."
+msgstr "Буфер обмена не содержит изображение."
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Название"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Путь"
+
+#: Pinta/MainWindow.cs:123
+msgid "_File"
+msgstr "_Файл"
+
+#: Pinta/MainWindow.cs:124
+msgid "_Edit"
+msgstr "_Правка"
+
+#: Pinta/MainWindow.cs:126
+msgid "_View"
+msgstr "_Вид"
+
+#: Pinta/MainWindow.cs:129
+msgid "_Image"
+msgstr "_Изображение"
+
+#: Pinta/MainWindow.cs:130
+msgid "_Layers"
+msgstr "С_лои"
+
+#: Pinta/MainWindow.cs:131
+msgid "_Adjustments"
+msgstr "_Цвета"
+
+#: Pinta/MainWindow.cs:132
+msgid "Effe_cts"
+msgstr "_Эффекты"
+
+#: Pinta/MainWindow.cs:134
+msgid "_Window"
+msgstr "_Окно"
+
+#: Pinta/MainWindow.cs:138
+msgid "Tool Windows"
+msgstr "Инструментальные окна"
+
+#: Pinta/MainWindow.cs:142
+msgid "_Help"
+msgstr "_Справка"
+
+#: Pinta/MainWindow.cs:160 Pinta.Core/Actions/HelpActions.cs:53
+msgid "About"
+msgstr "О программе"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:91 Pinta/DockLibrary/DockItem.cs:477
+msgid "Hide"
+msgstr "Скрыть"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:191
+msgid "Dock"
+msgstr "Прикрепить"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:195
+#: Pinta/DockLibrary/DockItem.cs:502
+msgid "Auto Hide"
+msgstr "Автоматически скрывать"
+
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr "Прикрепляемое"
+
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Плавающее"
+
+#: Pinta/Pads/ToolBoxPad.cs:42 Pinta/Pads/ToolBoxPad.cs:48
+msgid "Tools"
+msgstr "Инструменты"
+
+#: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
+msgid "History"
+msgstr "История"
+
+#: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
+msgid "Layers"
+msgstr "Слои"
+
+#: Pinta/Pads/CanvasPad.cs:75
+msgid "Documents"
+msgstr "Документы"
+
+#: Pinta/Pads/ColorPalettePad.cs:42 Pinta/Pads/ColorPalettePad.cs:49
+#: Pinta.Core/Actions/EditActions.cs:128
+msgid "Palette"
+msgstr "Палитра"
+
+#: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
+msgid "Images"
+msgstr "Изображения"
+
+#: Pinta.Core/Managers/EffectsManager.cs:63
+#: Pinta.Core/Managers/EffectsManager.cs:98
+msgid "..."
+msgstr "..."
+
+#: Pinta.Core/Managers/ToolManager.cs:234
+#: Pinta.Core/Managers/ToolManager.cs:236
+msgid "No tool selected."
+msgstr ""
+
+#: Pinta.Core/Managers/LivePreviewManager.cs:220
+msgid "Rendering Effect"
+msgstr "Эффект отрисовки"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:97
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Несохранённое изображение {0}"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:156
+msgid "Background"
+msgstr "Фон"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:184
+msgid "Open Image"
+msgstr "Открыть изображение"
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Не удалось открыть файл: {0}"
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Создать..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr "Новый снимок экрана"
+
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:82
+msgid "Open..."
+msgstr "Открыть..."
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Открыть последние"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Закрыть"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Сохранить"
+
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:83
+msgid "Save As..."
+msgstr "Сохранить как..."
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Печать"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Выход"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Создать"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Открыть"
+
+#: Pinta.Core/Actions/LayerActions.cs:65
+#: Pinta.Core/Actions/LayerActions.cs:287
+msgid "Add New Layer"
+msgstr "Добавить слой"
+
+#: Pinta.Core/Actions/LayerActions.cs:66
+#: Pinta.Core/Actions/LayerActions.cs:270
+msgid "Delete Layer"
+msgstr "Удалить слой"
+
+#: Pinta.Core/Actions/LayerActions.cs:67
+#: Pinta.Core/Actions/LayerActions.cs:261
+msgid "Duplicate Layer"
+msgstr "Дублировать слой"
+
+#: Pinta.Core/Actions/LayerActions.cs:68
+#: Pinta.Core/Actions/LayerActions.cs:239
+msgid "Merge Layer Down"
+msgstr "Объединить с нижележащим"
+
+#: Pinta.Core/Actions/LayerActions.cs:69
+msgid "Import from File..."
+msgstr "Импорт из файла..."
+
+#: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:63
+msgid "Flip Horizontal"
+msgstr "Отразить по горизонтали"
+
+#: Pinta.Core/Actions/LayerActions.cs:71 Pinta.Core/Actions/ImageActions.cs:64
+msgid "Flip Vertical"
+msgstr "Отразить по вертикали"
+
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Повернуть / Увеличить слой..."
+
+#: Pinta.Core/Actions/LayerActions.cs:73
+#: Pinta.Core/Actions/LayerActions.cs:217
+msgid "Move Layer Up"
+msgstr "Переместить слой вверх"
+
+#: Pinta.Core/Actions/LayerActions.cs:74
+#: Pinta.Core/Actions/LayerActions.cs:228
+msgid "Move Layer Down"
+msgstr "Переместить слой вниз"
+
+#: Pinta.Core/Actions/LayerActions.cs:75
+msgid "Layer Properties..."
+msgstr "Параметры слоя..."
+
+#: Pinta.Core/Actions/LayerActions.cs:183
+msgid "Import From File"
+msgstr "Импорт из файла"
+
+#: Pinta.Core/Actions/EditActions.cs:68
+msgid "Undo"
+msgstr "Отменить"
+
+#: Pinta.Core/Actions/EditActions.cs:69
+msgid "Redo"
+msgstr "Вернуть"
+
+#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:220
+msgid "Cut"
+msgstr "Вырезать"
+
+#: Pinta.Core/Actions/EditActions.cs:71
+msgid "Copy"
+msgstr "Копировать"
+
+#: Pinta.Core/Actions/EditActions.cs:72
+msgid "Copy Merged"
+msgstr ""
+
+#: Pinta.Core/Actions/EditActions.cs:73
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+msgid "Paste"
+msgstr "Вставить"
+
+#: Pinta.Core/Actions/EditActions.cs:75
+msgid "Paste Into New Image"
+msgstr "Вставить как новое изображение"
+
+#: Pinta.Core/Actions/EditActions.cs:76
+msgid "Delete Selection"
+msgstr "Удалить выделение"
+
+#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:182
+msgid "Fill Selection"
+msgstr "Заполнить выделение"
+
+#: Pinta.Core/Actions/EditActions.cs:78
+msgid "Invert Selection"
+msgstr "Обратить выделение"
+
+#: Pinta.Core/Actions/EditActions.cs:79 Pinta.Core/Actions/EditActions.cs:191
+msgid "Select All"
+msgstr "Выделить всё"
+
+#: Pinta.Core/Actions/EditActions.cs:80
+msgid "Deselect All"
+msgstr "Снять выбор"
+
+#: Pinta.Core/Actions/EditActions.cs:84
+msgid "Reset to Default"
+msgstr "Сбросить установки"
+
+#: Pinta.Core/Actions/EditActions.cs:85
+msgid "Set Number of Colors"
+msgstr "Установить количество цветов"
+
+#: Pinta.Core/Actions/EditActions.cs:87
+msgid "Add-in Manager"
+msgstr "Менеджер дополнений"
+
+#: Pinta.Core/Actions/EditActions.cs:222
+msgid "Erase Selection"
+msgstr "Удалить выделение"
+
+#: Pinta.Core/Actions/EditActions.cs:231
+msgid "Deselect"
+msgstr "Сбросить выделение"
+
+#: Pinta.Core/Actions/EditActions.cs:324
+msgid "Open Palette File"
+msgstr "Открыть файл палитры"
+
+#: Pinta.Core/Actions/EditActions.cs:331
+msgid "Palette files (*.txt, *.gpl)"
+msgstr "Файлы палитры (*.txt, *.gpl)"
+
+#: Pinta.Core/Actions/EditActions.cs:351
+#, csharp-format
+msgid ""
+"Could not open palette file: {0}.\n"
+"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
+msgstr ""
+"Не открывается файл палитры: {0}.\n"
+"Пожалуйста, проверьте, что вы открываете правильный файл палитры GIMP или "
+"Paint.NET"
+
+#: Pinta.Core/Actions/EditActions.cs:364
+msgid "Save Palette File"
+msgstr "Сохранить файл палитры"
+
+#: Pinta.Core/Actions/EditActions.cs:370
+msgid "Paint.NET palette (*.txt)"
+msgstr "Палитра Paint.NET (*.txt)"
+
+#: Pinta.Core/Actions/EditActions.cs:375
+msgid "GIMP palette (*.gpl)"
+msgstr "Палитра GIMP (*.gpl)"
+
+#: Pinta.Core/Actions/ImageActions.cs:59
+#: Pinta.Core/Actions/ImageActions.cs:277
+msgid "Crop to Selection"
+msgstr "Откадрировать в выделение"
+
+#: Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Автокадрирование"
+
+#: Pinta.Core/Actions/ImageActions.cs:61
+msgid "Resize Image..."
+msgstr "Изменить размер изображения"
+
+#: Pinta.Core/Actions/ImageActions.cs:62
+msgid "Resize Canvas..."
+msgstr "Изменить размер холста..."
+
+#: Pinta.Core/Actions/ImageActions.cs:65
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+msgid "Rotate 90° Clockwise"
+msgstr "Повернуть на 90° по часовой стрелке"
+
+#: Pinta.Core/Actions/ImageActions.cs:66
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Повернуть на 90° против часовой стрелки"
+
+#: Pinta.Core/Actions/ImageActions.cs:67
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+msgid "Rotate 180°"
+msgstr "Повернуть на 180°"
+
+#: Pinta.Core/Actions/ImageActions.cs:68
+#: Pinta.Core/Actions/ImageActions.cs:135
+msgid "Flatten"
+msgstr "Объединить слои"
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Веб-сайт Pinta"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Сообщить о неполадке"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr "Перевести это приложение"
+
+#: Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Сохранить как"
+
+#: Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "Закрыть все"
+
+#: Pinta.Core/Actions/ViewActions.cs:75
+msgid "Zoom In"
+msgstr "Крупнее"
+
+#: Pinta.Core/Actions/ViewActions.cs:76
+msgid "Zoom Out"
+msgstr "Мельче"
+
+#: Pinta.Core/Actions/ViewActions.cs:77
+msgid "Best Fit"
+msgstr "Уместить в окне"
+
+#: Pinta.Core/Actions/ViewActions.cs:78
+msgid "Zoom to Selection"
+msgstr "По размеру выделения"
+
+#: Pinta.Core/Actions/ViewActions.cs:79
+msgid "Normal Size"
+msgstr "Исходный размер"
+
+#: Pinta.Core/Actions/ViewActions.cs:80
+msgid "Toolbar"
+msgstr "Стандартная панель"
+
+#: Pinta.Core/Actions/ViewActions.cs:81
+msgid "Pixel Grid"
+msgstr "Пиксельная сетка"
+
+#: Pinta.Core/Actions/ViewActions.cs:82
+msgid "Rulers"
+msgstr "Линейки"
+
+#: Pinta.Core/Actions/ViewActions.cs:83
+msgid "Pixels"
+msgstr "Пиксели"
+
+#: Pinta.Core/Actions/ViewActions.cs:84
+msgid "Inches"
+msgstr "Дюймы"
+
+#: Pinta.Core/Actions/ViewActions.cs:85
+msgid "Centimeters"
+msgstr "Сантиметры"
+
+#: Pinta.Core/Actions/ViewActions.cs:86
+msgid "Fullscreen"
+msgstr "Полный экран"
+
+#: Pinta.Core/Actions/ViewActions.cs:88 Pinta.Core/Actions/ViewActions.cs:216
+#: Pinta.Core/Classes/DocumentWorkspace.cs:229
+#: Pinta.Core/Classes/DocumentWorkspace.cs:237
+msgid "Window"
+msgstr "Окно"
+
+#: Pinta.Core/Actions/ViewActions.cs:126
+msgid "Ruler Units"
+msgstr "Единицы измерения"
+
+#: Pinta.Core/Classes/Document.cs:373
+msgid "copy"
+msgstr "- копия"
+
+#: Pinta.Core/Classes/BaseTool.cs:190
+msgid "Tool"
+msgstr "Инструмент"
+
+#: Pinta.Core/Classes/BaseTool.cs:257
+msgid "Shortcut key"
+msgstr "Горячая клавиша"
+
+#: Pinta.Core/Classes/BaseTool.cs:280
+msgid "Normal Blending"
+msgstr "Обычное смешивание"
+
+#: Pinta.Core/Classes/BaseTool.cs:281
+msgid "Overwrite"
+msgstr "Переписать"
+
+#: Pinta.Core/Classes/BaseTool.cs:295
+msgid "Antialiasing On"
+msgstr "Включить сглаживание"
+
+#: Pinta.Core/Classes/BaseTool.cs:296
+msgid "Antialiasing Off"
+msgstr "Выключить сглаживание"
+
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "Изображение {0} ({1})"
+
+#: Pinta.Core/Effects/UserBlendOps.cs:53
+msgid "Multiply"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:54
+msgid "Additive"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:55
+msgid "Color Burn"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:56
+msgid "Color Dodge"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:57
+msgid "Reflect"
+msgstr "Отражение"
+
+#: Pinta.Core/Effects/UserBlendOps.cs:58
+#: Pinta.Effects/Effects/GlowEffect.cs:30
+msgid "Glow"
+msgstr "Сияние"
+
+#: Pinta.Core/Effects/UserBlendOps.cs:59
+msgid "Overlay"
+msgstr "Оверлей"
+
+#: Pinta.Core/Effects/UserBlendOps.cs:60
+msgid "Difference"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:61
+msgid "Negation"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:62
+msgid "Lighten"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:63
+msgid "Darken"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:64
+msgid "Screen"
+msgstr ""
+
+#: Pinta.Core/Effects/UserBlendOps.cs:65
+msgid "Xor"
+msgstr ""
+
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Завершить пиксели"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Отразить изображение по горизонтали"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Отразить изображение по вертикали"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Отразить слой по горизонтали"
+
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Отразить слой по вертикали"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
@@ -99,9 +1394,10 @@ msgstr "Зелёный"
 msgid "Blue"
 msgstr "Синий"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
-msgid "Linked"
-msgstr "Связь"
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:27
+msgid "Curves"
+msgstr "Кривые"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
@@ -132,1370 +1428,214 @@ msgid "Tip: Right-click to remove control points."
 msgstr ""
 "Подсказка: Нажмите правую кнопку мыши, чтобы убрать контрольные отметки"
 
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:29
-msgid "Reduce Noise"
-msgstr "Уменьшить шум"
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+msgid "Posterize"
+msgstr "Постеризовать"
 
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:37
-#: Pinta.Effects/Effects/MedianEffect.cs:37
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:38
-msgid "Noise"
-msgstr "Шум"
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
+msgid "Linked"
+msgstr "Связь"
 
-#: Pinta.Effects/Effects/FragmentEffect.cs:26
-msgid "Fragment"
-msgstr "Фрагмент"
+#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+msgid "Invert Colors"
+msgstr "Обратить цвета"
 
-#: Pinta.Effects/Effects/FragmentEffect.cs:34
-#: Pinta.Effects/Effects/UnfocusEffect.cs:36
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:34
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:34
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:34
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:34
-msgid "Blurs"
-msgstr "Размытие"
+#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+msgid "Auto Level"
+msgstr "Автокоррекция"
 
-#: Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
-msgstr "Облака"
+#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+msgid "Black and White"
+msgstr "Чёрно-белое"
 
-#: Pinta.Effects/Effects/CloudsEffect.cs:38
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:34
-msgid "Render"
-msgstr "Рисование"
+#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+msgid "Hue / Saturation"
+msgstr "Тон / Насыщенность"
 
-#: Pinta.Effects/Effects/UnfocusEffect.cs:28
-msgid "Unfocus"
-msgstr "Расфокусировка"
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+msgid "Brightness / Contrast"
+msgstr "Яркость / Контраст"
 
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:29
-msgid "Red Eye Removal"
-msgstr "Удаление красных глаз"
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "Уровни"
 
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:37
-#: Pinta.Effects/Effects/GlowEffect.cs:39
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:67
-#: Pinta.Effects/Effects/SharpenEffect.cs:34
-msgid "Photo"
-msgstr "Снимок"
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:26
+msgid "Sepia"
+msgstr "Сепия"
 
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
-msgid "Mandelbrot Fractal"
-msgstr "Фрактал Мандельброта"
-
-#: Pinta.Effects/Effects/GlowEffect.cs:31
-msgid "Glow"
-msgstr "Сияние"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:29
-msgid "Edge Detect"
-msgstr "Определение краёв"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:37
-#: Pinta.Effects/Effects/ReliefEffect.cs:33
-#: Pinta.Effects/Effects/EmbossEffect.cs:34
-#: Pinta.Effects/Effects/OutlineEffect.cs:37
-msgid "Stylize"
-msgstr "Стилизация"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:26
-msgid "Radial Blur"
-msgstr "Радиальное размытие"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:26
-msgid "Frosted Glass"
-msgstr "Матовое стекло"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:34
-#: Pinta.Effects/Effects/TileEffect.cs:34
-#: Pinta.Effects/Effects/PixelateEffect.cs:38
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:39
-#: Pinta.Effects/Effects/BulgeEffect.cs:34
-#: Pinta.Effects/Effects/TwistEffect.cs:34
-msgid "Distort"
-msgstr "Искажения"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:26
-msgid "Oil Painting"
-msgstr "Масляные краски"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:34
-#: Pinta.Effects/Effects/InkSketchEffect.cs:42
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:41
-msgid "Artistic"
-msgstr "Художественные"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:26
-msgid "Julia Fractal"
-msgstr "Фрактал Жюлиа"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
-msgid "Soften Portrait"
-msgstr "Смягчить портрет"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:45
-msgid "Relief"
-msgstr "Рельеф"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:34
-msgid "Ink Sketch"
-msgstr "Набросок чернилами"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:29
+#: Pinta.Effects/Effects/MedianEffect.cs:28
 msgid "Median"
 msgstr "Медиана"
 
-#: Pinta.Effects/Effects/EmbossEffect.cs:26
-msgid "Emboss"
-msgstr "Барельеф"
+#: Pinta.Effects/Effects/MedianEffect.cs:36
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:37
+msgid "Noise"
+msgstr "Шум"
 
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:26
-msgid "Gaussian Blur"
-msgstr "Размывание Гаусса"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:26
-msgid "Sharpen"
-msgstr "Добавить резкость"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:30
-msgid "Add Noise"
-msgstr "Добавить шум"
-
-#: Pinta.Effects/Effects/TileEffect.cs:26
-msgid "Tile Reflection"
-msgstr "Мозаичное отражение"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:26
+#: Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
 msgstr "Пикселизация"
 
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:26
-msgid "Motion Blur"
-msgstr "Размытие в движении"
+#: Pinta.Effects/Effects/PixelateEffect.cs:37
+#: Pinta.Effects/Effects/TwistEffect.cs:33
+#: Pinta.Effects/Effects/BulgeEffect.cs:33
+#: Pinta.Effects/Effects/TileEffect.cs:33
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:38
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:33
+msgid "Distort"
+msgstr "Искажения"
 
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:26
-msgid "Polar Inversion"
-msgstr "Полярная инверсия"
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:25
+msgid "Oil Painting"
+msgstr "Масляные краски"
 
-#: Pinta.Effects/Effects/BulgeEffect.cs:26
-msgid "Bulge"
-msgstr "Выпуклость"
+#: Pinta.Effects/Effects/OilPaintingEffect.cs:33
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:40
+#: Pinta.Effects/Effects/InkSketchEffect.cs:41
+msgid "Artistic"
+msgstr "Художественные"
 
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:26
-msgid "Zoom Blur"
-msgstr "Увеличительное размытие"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:33
-msgid "Pencil Sketch"
-msgstr "Карандашный набросок"
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:29
-#: Pinta.Tools/TextTool/TextTool.cs:171
-msgid "Outline"
-msgstr "Контур"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:26
+#: Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
 msgstr "Завихрение"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "метка1"
+#: Pinta.Effects/Effects/BulgeEffect.cs:25
+msgid "Bulge"
+msgstr "Выпуклость"
+
+#: Pinta.Effects/Effects/GlowEffect.cs:38
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
+#: Pinta.Effects/Effects/SharpenEffect.cs:33
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
+msgid "Photo"
+msgstr "Снимок"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:25
+msgid "Fragment"
+msgstr "Фрагмент"
+
+#: Pinta.Effects/Effects/FragmentEffect.cs:33
+#: Pinta.Effects/Effects/UnfocusEffect.cs:35
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:33
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:33
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:33
+msgid "Blurs"
+msgstr "Размытие"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
+msgid "Reduce Noise"
+msgstr "Уменьшить шум"
+
+#: Pinta.Effects/Effects/UnfocusEffect.cs:27
+msgid "Unfocus"
+msgstr "Расфокусировка"
+
+#: Pinta.Effects/Effects/TileEffect.cs:25
+msgid "Tile Reflection"
+msgstr "Мозаичное отражение"
+
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+msgid "Red Eye Removal"
+msgstr "Удаление красных глаз"
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:32
+#: Pinta.Effects/Effects/OutlineEffect.cs:36
+#: Pinta.Effects/Effects/EmbossEffect.cs:33
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:36
+msgid "Stylize"
+msgstr "Стилизация"
+
+#: Pinta.Effects/Effects/ReliefEffect.cs:44
+msgid "Relief"
+msgstr "Рельеф"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:29
+msgid "Add Noise"
+msgstr "Добавить шум"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:25
+msgid "Radial Blur"
+msgstr "Радиальное размытие"
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:25
+msgid "Gaussian Blur"
+msgstr "Размывание Гаусса"
+
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:32
+msgid "Pencil Sketch"
+msgstr "Карандашный набросок"
+
+#: Pinta.Effects/Effects/EmbossEffect.cs:25
+msgid "Emboss"
+msgstr "Барельеф"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:25
+msgid "Julia Fractal"
+msgstr "Фрактал Жюлиа"
+
+#: Pinta.Effects/Effects/JuliaFractalEffect.cs:33
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: Pinta.Effects/Effects/CloudsEffect.cs:37
+msgid "Render"
+msgstr "Рисование"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
+msgid "Mandelbrot Fractal"
+msgstr "Фрактал Мандельброта"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:25
+msgid "Motion Blur"
+msgstr "Размытие в движении"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:25
+msgid "Polar Inversion"
+msgstr "Полярная инверсия"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:25
+msgid "Sharpen"
+msgstr "Добавить резкость"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:25
+msgid "Zoom Blur"
+msgstr "Увеличительное размытие"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:25
+msgid "Frosted Glass"
+msgstr "Матовое стекло"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-msgid "label"
-msgstr "метка"
+#: Pinta.Effects/Effects/CloudsEffect.cs:29
+msgid "Clouds"
+msgstr "Облака"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "Случайный шум"
+#: Pinta.Effects/Effects/InkSketchEffect.cs:33
+msgid "Ink Sketch"
+msgstr "Набросок чернилами"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr "Перемешать"
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+msgid "Soften Portrait"
+msgstr "Смягчить портрет"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:75
-msgid "Choose Primary Color"
-msgstr "Выберите цвет переднего плана"
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:28
+msgid "Edge Detect"
+msgstr "Определение краёв"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:89
-msgid "Choose Secondary Color"
-msgstr "Выберите фоновый цвет"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:112
-msgid "Choose Palette Color"
-msgstr "Выберите цвет цалитры"
-
-#: Pinta.Tools/RectangleSelectTool.cs:38
-msgid "Rectangle Select"
-msgstr "Прямоугольное выделение"
-
-#: Pinta.Tools/RectangleSelectTool.cs:44
-msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
-"square."
-msgstr ""
-"Нажмите и перетаскивайте, чтобы нарисовать прямоугольное выделение. Нажмите "
-"Shift, чтобы получить квадрат."
-
-#: Pinta.Tools/CloneStampTool.cs:43
-msgid "Clone Stamp"
-msgstr "Штамп клонирования"
-
-#: Pinta.Tools/CloneStampTool.cs:48
-msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
-"Ctrl+щелчок левой кнопкой мыши для установки основы, левой кнопкой мыши "
-"начать рисовать"
-
-#: Pinta.Tools/MagicWandTool.cs:46
-msgid "Magic Wand Select"
-msgstr "Волшебная палочка"
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Click to select region of similar color."
-msgstr "Щёлкните, чтобы выделить регион с похожим цветом."
-
-#: Pinta.Tools/RectangleTool.cs:38
-msgid "Rectangle"
-msgstr "Прямоугольник"
-
-#: Pinta.Tools/RectangleTool.cs:44
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr ""
-"Щёлкните и перетащите мышь, чтобы нарисовать прямоугольник (правая кнопка "
-"рисует вторичным цветом). Зажмите Shift, чтобы получить квадрат."
-
-#: Pinta.Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Перемещение выделения"
-
-#: Pinta.Tools/MoveSelectionTool.cs:48
-msgid "Drag the selection to move selection outline."
-msgstr "Перетащите выделение мышью, чтобы переместить контур выделения."
-
-#: Pinta.Tools/GradientTool.cs:56 Pinta.Tools/GradientTool.cs:167
-msgid "Gradient"
-msgstr "Градиент"
-
-#: Pinta.Tools/GradientTool.cs:64
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-"Щёлкните и перетаскивайте, чтобы нарисовать градиент от первичного цвета к "
-"вторичному. Щёлкните правой кнопкой для инверсии."
-
-#: Pinta.Tools/GradientTool.cs:174
-msgid "Linear Gradient"
-msgstr "Линейный градиент"
-
-#: Pinta.Tools/GradientTool.cs:175
-msgid "Linear Reflected Gradient"
-msgstr "Линейный отражённый градиент"
-
-#: Pinta.Tools/GradientTool.cs:176
-msgid "Linear Diamond Gradient"
-msgstr "Линейный ромбовидный градиент"
-
-#: Pinta.Tools/GradientTool.cs:177
-msgid "Radial Gradient"
-msgstr "Радиальный градиент"
-
-#: Pinta.Tools/GradientTool.cs:178
-msgid "Conical Gradient"
-msgstr "Конический градиент"
-
-#: Pinta.Tools/FloodTool.cs:73
-msgid "Flood Mode"
-msgstr "Избыточный режим"
-
-#: Pinta.Tools/FloodTool.cs:80
-msgid "Contiguous"
-msgstr "Смежная область"
-
-#: Pinta.Tools/FloodTool.cs:81
-msgid "Global"
-msgstr "Глобальная"
-
-#: Pinta.Tools/FloodTool.cs:92 Pinta.Tools/RecolorTool.cs:73
-msgid "Tolerance"
-msgstr "Чувствительность"
-
-#: Pinta.Tools/PaintBrushTool.cs:41 Pinta/MainWindow.cs:401
-msgid "Paintbrush"
-msgstr "Кисть"
-
-#: Pinta.Tools/PaintBrushTool.cs:43 Pinta.Tools/FreeformShapeTool.cs:55
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-"Нажмите левую кнопку, чтобы рисовать первичным цветом, правую - вторичным."
-
-#: Pinta.Tools/PaintBrushTool.cs:64
-msgid "Type"
-msgstr "Тип"
-
-#: Pinta.Tools/PencilTool.cs:48 Pinta.Tools/ColorPickerTool.cs:120
-msgid "Pencil"
-msgstr "Карандаш"
-
-#: Pinta.Tools/PencilTool.cs:50
-msgid ""
-"Left click to draw freeform, one-pixel wide lines with the primary color, "
-"right click to use the secondary color."
-msgstr ""
-"Щёлкните левой кнопкой для рисования произвольных линий в один пиксель "
-"толщиной первичным цветом, правой кнопкой для использования вторичного цвета."
-
-#: Pinta.Tools/EllipseSelectTool.cs:38
-msgid "Ellipse Select"
-msgstr "Эллиптическое выделение"
-
-#: Pinta.Tools/EllipseSelectTool.cs:44
-msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
-"circle."
-msgstr ""
-"Щёлкните и перетаскивайте, чтобы нарисовать эллиптическое выделение. Держите "
-"Shift, чтобы выделить круг."
-
-#: Pinta.Tools/LineCurveTool.cs:38
-msgid "Line"
-msgstr "Линия"
-
-#: Pinta.Tools/LineCurveTool.cs:43
-msgid ""
-"Left click to draw with primary color, right click for secondary color. Hold "
-"Shift key to snap to angles."
-msgstr ""
-"Нажмите левую кнопку мыши, чтобы рисовать первичным цветом, правую – чтобы "
-"рисовать вторичным цветом. Зажмите Shift, чтобы ограничить угол."
-
-#: Pinta.Tools/EraserTool.cs:45
-msgid "Eraser"
-msgstr "Ластик"
-
-#: Pinta.Tools/EraserTool.cs:47
-msgid ""
-"Left click to erase to transparent, right click to erase to secondary color. "
-msgstr ""
-"Левая кнопка мыши стирает до прозрачного фона, правая кнопка стирает цветом "
-"фона. "
-
-#: Pinta.Tools/PanTool.cs:38
-msgid "Pan"
-msgstr "Перемещение"
-
-#: Pinta.Tools/PanTool.cs:44
-msgid "Click and drag to navigate image."
-msgstr "Щёлкните и перетаскивайте для навигации по изображению."
-
-#: Pinta.Tools/ColorPickerTool.cs:44
-msgid "Color Picker"
-msgstr "Получение цвета"
-
-#: Pinta.Tools/ColorPickerTool.cs:50
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
-"Щёлкните левой кнопкой для задания первичного цвета. Щёлкните правой кнопкой "
-"для задания вторичного цвета."
-
-#: Pinta.Tools/ColorPickerTool.cs:62
-msgid "After select"
-msgstr "После выбора"
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Do not switch tool"
-msgstr "Не переключайте инструмент"
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Switch to previous tool"
-msgstr "Переключиться на предыдущий инструмент"
-
-#: Pinta.Tools/ColorPickerTool.cs:68
-msgid "Switch to Pencil tool"
-msgstr "Переключиться на инструмент \"Карандаш\""
-
-#: Pinta.Tools/RoundedRectangleTool.cs:44
-msgid "Rounded Rectangle"
-msgstr "Скруглённый прямоугольник"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:50
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
-msgstr ""
-
-#: Pinta.Tools/RoundedRectangleTool.cs:83
-msgid "Radius"
-msgstr "Радиус"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:88
-msgid "Decrease rectangle's corner radius"
-msgstr "Уменьшить радиус углов прямоугольника"
-
-#: Pinta.Tools/RoundedRectangleTool.cs:102
-msgid "Increase rectangle's corner radius"
-msgstr "Увеличить радиус углов прямоугольника"
-
-#: Pinta.Tools/MoveSelectedTool.cs:42
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
-#: Pinta.Core/Actions/EditActions.cs:255
-msgid "Move Selected Pixels"
-msgstr "Переместить выбранные пиксели"
-
-#: Pinta.Tools/MoveSelectedTool.cs:48
-msgid "Drag the selection to move selected content."
-msgstr "Перетащите мышью выделение, чтобы переместить выделенный фрагмент."
-
-#: Pinta.Tools/RecolorTool.cs:59
-msgid "Recolor"
-msgstr "Перекрашивание"
-
-#: Pinta.Tools/RecolorTool.cs:61
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "Щёлкните левой кнопкой, чтобы заменить вторичный цвет первичным."
-
-#: Pinta.Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Плоская заливка"
-
-#: Pinta.Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"Щёлкните левой кнопкой, чтобы залить регион первичным цветом, правой - "
-"вторичным."
-
-#: Pinta.Tools/EllipseTool.cs:38
-msgid "Ellipse"
-msgstr "Эллипс"
-
-#: Pinta.Tools/EllipseTool.cs:44
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr ""
-"Щёлкните и перетаскивайте мышь, чтобы нарисовать эллипс (правая кнопка "
-"рисует вторичным цветом). Нажмите Shift, чтобы получить круг."
-
-#: Pinta.Tools/TextTool/TextTool.cs:36
-msgid "Text"
-msgstr "Текст"
-
-#: Pinta.Tools/TextTool/TextTool.cs:42
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-"Щёлкните левой кнопкой, чтобы поместить курсор, затем наберите нужный текст. "
-"Текст рисуется первичным цветом."
-
-#: Pinta.Tools/TextTool/TextTool.cs:77
-msgid "Font"
-msgstr "Шрифт"
-
-#: Pinta.Tools/TextTool/TextTool.cs:112
-msgid "Bold"
-msgstr "Полужирный"
-
-#: Pinta.Tools/TextTool/TextTool.cs:119
-msgid "Italic"
-msgstr "Курсивный"
-
-#: Pinta.Tools/TextTool/TextTool.cs:126
-msgid "Underline"
-msgstr "Подчёркнутый"
-
-#: Pinta.Tools/TextTool/TextTool.cs:135
-msgid "Left Align"
-msgstr "По левому краю"
-
-#: Pinta.Tools/TextTool/TextTool.cs:143
-msgid "Center Align"
-msgstr "По центру"
-
-#: Pinta.Tools/TextTool/TextTool.cs:150
-msgid "Right Align"
-msgstr "По правому краю"
-
-#: Pinta.Tools/TextTool/TextTool.cs:162
-msgid "Text Style"
-msgstr "Стиль текста"
-
-#: Pinta.Tools/TextTool/TextTool.cs:169 Pinta.Tools/Brushes/PlainBrush.cs:38
-msgid "Normal"
-msgstr "Обычный"
-
-#: Pinta.Tools/TextTool/TextTool.cs:170
-msgid "Normal and Outline"
-msgstr "Нормальный и контурный"
-
-#: Pinta.Tools/TextTool/TextTool.cs:174
-msgid "Fill Background"
-msgstr "Заполнить фон"
-
-#: Pinta.Tools/TextTool/TextTool.cs:179
-msgid "Outline width"
-msgstr "Ширина контура"
-
-#: Pinta.Tools/TextTool/TextTool.cs:184
-msgid "Decrease outline size"
-msgstr "Уменьшить размер контура"
-
-#: Pinta.Tools/TextTool/TextTool.cs:201
-msgid "Increase outline size"
-msgstr "Увеличить размер контура"
-
-#: Pinta.Tools/ShapeTool.cs:99 Pinta.Tools/BaseBrushTool.cs:70
-msgid "Brush width"
-msgstr "Толщина кисти"
-
-#: Pinta.Tools/ShapeTool.cs:104 Pinta.Tools/BaseBrushTool.cs:75
-msgid "Decrease brush size"
-msgstr "Уменьшить размер кисти"
-
-#: Pinta.Tools/ShapeTool.cs:118 Pinta.Tools/BaseBrushTool.cs:89
-msgid "Increase brush size"
-msgstr "Увеличить размер кисти"
-
-#: Pinta.Tools/ShapeTool.cs:131 Pinta.Tools/FreeformShapeTool.cs:71
-msgid "Fill Style"
-msgstr "Стиль заполнения"
-
-#: Pinta.Tools/ShapeTool.cs:138 Pinta.Tools/FreeformShapeTool.cs:78
-msgid "Outline Shape"
-msgstr "Обвести фигуру"
-
-#: Pinta.Tools/ShapeTool.cs:139 Pinta.Tools/FreeformShapeTool.cs:79
-msgid "Fill Shape"
-msgstr "Залить фигуру"
-
-#: Pinta.Tools/ShapeTool.cs:140 Pinta.Tools/FreeformShapeTool.cs:80
-msgid "Fill and Outline Shape"
-msgstr "Залить и обвести фигуру"
-
-#: Pinta.Tools/Brushes/CircleBrush.cs:38
-msgid "Circles"
-msgstr "Круги"
-
-#: Pinta.Tools/Brushes/GridBrush.cs:38
-msgid "Grid"
-msgstr "Сетка"
-
-#: Pinta.Tools/Brushes/SquaresBrush.cs:40
-msgid "Squares"
-msgstr "Квадраты"
-
-#: Pinta.Tools/Brushes/SplatterBrush.cs:38
-msgid "Splatter"
-msgstr "Брызги"
-
-#: Pinta.Tools/ZoomTool.cs:49
-msgid "Zoom"
-msgstr "Масштабирование"
-
-#: Pinta.Tools/ZoomTool.cs:55
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-"Щёлкните левой кнопкой для приближения. Щёлкните правой кнопкой для "
-"отдаления. Нажмите и перетаскивайте мышь, чтобы масштабировать по выделению."
-
-#: Pinta.Tools/LassoSelectTool.cs:45
-msgid "Lasso Select"
-msgstr "Выделение лассо"
-
-#: Pinta.Tools/LassoSelectTool.cs:47
-msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
-"Нажмите и перетаскивайте мышь, чтобы выделить контур области выделения."
-
-#: Pinta.Tools/FreeformShapeTool.cs:53
-msgid "Freeform Shape"
-msgstr "Произвольная фигура"
-
-#: Pinta/MainWindow.cs:146 Pinta.Core/Actions/HelpActions.cs:53
-msgid "About"
-msgstr "О программе"
-
-#: Pinta/MainWindow.cs:371 Pinta/MainWindow.cs:387
-msgid "..."
-msgstr "..."
-
-#: Pinta/MainWindow.cs:456
-msgid "_File"
-msgstr "_Файл"
-
-#: Pinta/MainWindow.cs:457
-msgid "_Edit"
-msgstr "_Правка"
-
-#: Pinta/MainWindow.cs:459
-msgid "_View"
-msgstr "_Вид"
-
-#: Pinta/MainWindow.cs:462
-msgid "_Image"
-msgstr "_Изображение"
-
-#: Pinta/MainWindow.cs:463
-msgid "_Layers"
-msgstr "С_лои"
-
-#: Pinta/MainWindow.cs:464
-msgid "_Adjustments"
-msgstr "_Цвета"
-
-#: Pinta/MainWindow.cs:465
-msgid "Effe_cts"
-msgstr "_Эффекты"
-
-#: Pinta/MainWindow.cs:467
-msgid "_Window"
-msgstr "_Окно"
-
-#: Pinta/MainWindow.cs:471
-msgid "Tool Windows"
-msgstr "Инструментальные окна"
-
-#: Pinta/MainWindow.cs:475
-msgid "_Help"
-msgstr "_Справка"
-
-#: Pinta/MainWindow.cs:557 Pinta/MainWindow.cs:563
-msgid "Tools"
-msgstr "Инструменты"
-
-#: Pinta/MainWindow.cs:571 Pinta/MainWindow.cs:578
-#: Pinta.Core/Actions/EditActions.cs:121
-msgid "Palette"
-msgstr "Палитра"
-
-#: Pinta/MainWindow.cs:588
-msgid "Documents"
-msgstr "Документы"
-
-#: Pinta/MainWindow.cs:638 Pinta/MainWindow.cs:649
-msgid "Layers"
-msgstr "Слои"
-
-#: Pinta/MainWindow.cs:658 Pinta/MainWindow.cs:665
-msgid "History"
-msgstr "История"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:90 Pinta/DockLibrary/DockItem.cs:477
-msgid "Hide"
-msgstr "Скрыть"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:190
-msgid "Dock"
-msgstr "Прикрепить"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:194
-#: Pinta/DockLibrary/DockItem.cs:502
-msgid "Auto Hide"
-msgstr "Автоматически скрывать"
-
-#: Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr "Прикрепляемое"
-
-#: Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "Плавающее"
-
-#: Pinta/DialogHandlers.cs:109
-msgid "Take Screenshot"
-msgstr "Сделать снимок экрана"
-
-#: Pinta/DialogHandlers.cs:110
-msgid "Delay before taking a screenshot (seconds):"
-msgstr "Задержка перед созданием снимка экрана (в секундах)"
-
-#: Pinta/DialogHandlers.cs:158
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Сохранить изменения изображения \"{0}\" перед закрытием?"
-
-#: Pinta/DialogHandlers.cs:159
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Если вы не сохраните изменения, они будут потеряны безвозвратно."
-
-#: Pinta/DialogHandlers.cs:166
-msgid "Close without saving"
-msgstr "Закрыть без сохранения"
-
-#: Pinta/DialogHandlers.cs:193
-msgid "Resize Palette"
-msgstr "Изменить размер палитры"
-
-#: Pinta/DialogHandlers.cs:194
-msgid "New palette size:"
-msgstr "Новый размер палитры"
-
-#: Pinta/DialogHandlers.cs:223 Pinta.Core/Actions/EditActions.cs:70
-msgid "Paste Into New Layer"
-msgstr "Вставить как новый слой"
-
-#: Pinta/DialogHandlers.cs:320
-msgid "Layer Opacity"
-msgstr "Непрозрачность слоя"
-
-#: Pinta/DialogHandlers.cs:325
-msgid "Rename Layer"
-msgstr "Переименовать слой"
-
-#: Pinta/DialogHandlers.cs:330
-msgid "Hide Layer"
-msgstr "Скрыть слой"
-
-#: Pinta/DialogHandlers.cs:330
-msgid "Show Layer"
-msgstr "Показать слой"
-
-#: Pinta/DialogHandlers.cs:335 Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:44
-msgid "Layer Properties"
-msgstr "Свойства слоя"
-
-#: Pinta/DialogHandlers.cs:415 Pinta.Core/Actions/LayerActions.cs:156
-msgid "Open Image File"
-msgstr "Открыть файл изображения"
-
-#: Pinta/DialogHandlers.cs:423
-msgid "Image files"
-msgstr "Файлы изображений"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:528
-#: Pinta/DialogHandlers.cs:427 Pinta.Core/Actions/EditActions.cs:330
-msgid "All files"
-msgstr "Все файлы"
-
-#: Pinta/DialogHandlers.cs:514
-msgid "Save Image File"
-msgstr "Сохранить файл изображения"
-
-#: Pinta/DialogHandlers.cs:612
-msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta не поддерживает сохранение изображений в этом формате."
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:23
-#: Pinta/DialogHandlers.cs:613 Pinta.Core/Managers/WorkspaceManager.cs:185
-#: Pinta.Core/Actions/EditActions.cs:347
-msgid "Error"
-msgstr "Ошибка"
-
-#: Pinta/DialogHandlers.cs:633
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Файл с именем \"{0}\" существует. Хотите ли вы его заменить?"
-
-#: Pinta/DialogHandlers.cs:634
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "Файл уже существует в \"{1}\". Его замена перзапишет его содержимое."
-
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
-msgid "Image cannot be pasted"
-msgstr ""
-
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
-msgid "The clipboard does not contain an image."
-msgstr ""
-
-#: Pinta/Dialogs/JpegCompressionDialog.cs:38
-msgid "JPEG Quality"
-msgstr "Качество JPEG"
-
-#: Pinta/Dialogs/JpegCompressionDialog.cs:46
-msgid "Quality: "
-msgstr "Качество: "
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Название"
-
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:290
-#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:143
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-msgid "Version"
-msgstr "Версия"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Путь"
-
-#: Pinta/Dialogs/AboutDialog.cs:101
-msgid "Contributors to this Release"
-msgstr "Работавшие над этой версией"
-
-#: Pinta/Dialogs/AboutDialog.cs:111
-msgid "Previous Contributors"
-msgstr "Работавшие над предыдущими версиями"
-
-#: Pinta/Dialogs/AboutDialog.cs:120
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
-"  ArtKun https://launchpad.net/~artkun\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Chubakur https://launchpad.net/~chubakur\n"
-"  Dmitry Pashkevich https://launchpad.net/~dipish\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Maia Kozheva https://launchpad.net/~sikon\n"
-"  Mairon https://launchpad.net/~an9227\n"
-"  Nightingale https://launchpad.net/~solosn\n"
-"  Nikita Putko https://launchpad.net/~ktototam98\n"
-"  Nkolay Parukhin https://launchpad.net/~parukhin\n"
-"  PocketSam https://launchpad.net/~dr-chaoss\n"
-"  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
-"  Stepan Kislan https://launchpad.net/~stepa87\n"
-"  Strahov Nikita https://launchpad.net/~newerty\n"
-"  Vyacheslav Sharmanov https://launchpad.net/~vsharmanov\n"
-"  Yogar https://launchpad.net/~me-yogar\n"
-"  jeder https://launchpad.net/~i-jeder"
-
-#: Pinta/Dialogs/AboutDialog.cs:123
-msgid "Translated by:"
-msgstr "Переведено:"
-
-#: Pinta/Dialogs/AboutDialog.cs:130
-msgid "Based on the work of Paint.NET:"
-msgstr "Основано на Paint.NET:"
-
-#: Pinta/Dialogs/AboutDialog.cs:137
-msgid "Using some icons from:"
-msgstr "Использованы некоторые значки из:"
-
-#: Pinta/Dialogs/AboutDialog.cs:249
-msgid "About Pinta"
-msgstr "О программе Pinta"
-
-#: Pinta/Dialogs/AboutDialog.cs:267
-msgid "Version Info"
-msgstr "Сведения о версии"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Лицензия"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Распространяется под лицензией MIT X11."
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Авторское право"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "разработчики Pinta"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:62
-msgid "Name:"
-msgstr "Имя:"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:86
-msgid "Visible"
-msgstr "Видимый"
-
-#: Pinta/gtk-gui/Pinta.LayerPropertiesDialog.cs:109
-msgid "Opacity:"
-msgstr "Непрозрачность:"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Classes/Document.cs:612
-msgid "Resize Canvas"
-msgstr "Изменить размер холста"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-msgid "By percentage:"
-msgstr "В процентах:"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-msgid "By absolute size:"
-msgstr "Абсолютный размер:"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:148
-msgid "Width:"
-msgstr "Ширина:"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:123
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:135
-msgid "pixels"
-msgstr "пикселей"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:161
-msgid "Height:"
-msgstr "Высота:"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-msgid "Maintain aspect ratio"
-msgstr "Соблюдать соотношение сторон"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Якорь:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
-msgid "Resize Image"
-msgstr "Масштабировать изображение"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:48
-#: Pinta.Core/Managers/WorkspaceManager.cs:159
-msgid "New Image"
-msgstr "Новое изображение"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:58
-msgid "New Image Size          "
-msgstr "Размер нового изображения          "
-
-#: Pinta/Main.cs:68
-msgid "number of threads to use for rendering"
-msgstr "число потоков для использования при отрисовке"
-
-#: Pinta/Options.cs:486
-msgid "OptionName"
-msgstr "Название опции"
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
-msgid "Rendering Effect"
-msgstr "Эффект отрисовки"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:91
-#, csharp-format
-msgid "Unsaved Image {0}"
-msgstr "Несохранённое изображение {0}"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:150
-msgid "Background"
-msgstr "Фон"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:177
-msgid "Open Image"
-msgstr "Открыть изображение"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:184
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Не удалось открыть файл: {0}"
-
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
-#: Pinta.Core/Actions/EditActions.cs:69
-msgid "Paste"
-msgstr "Вставить"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-#: Pinta.Core/Actions/ImageActions.cs:65
-msgid "Rotate 180°"
-msgstr "Повернуть на 180°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Отразить изображение по горизонтали"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Отразить изображение по вертикали"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-#: Pinta.Core/Actions/ImageActions.cs:63
-msgid "Rotate 90° Clockwise"
-msgstr "Повернуть на 90° по часовой стрелке"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:64
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Повернуть на 90° против часовой стрелки"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Отразить слой по горизонтали"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Отразить слой по вертикали"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Завершить пиксели"
-
-#: Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr "Веб-сайт Pinta"
-
-#: Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr "Сообщить о неполадке"
-
-#: Pinta.Core/Actions/HelpActions.cs:52
-msgid "Translate This Application"
-msgstr "Перевести это приложение"
-
-#: Pinta.Core/Actions/WindowActions.cs:45
-msgid "Save All"
-msgstr "Сохранить как"
-
-#: Pinta.Core/Actions/WindowActions.cs:46
-msgid "Close All"
-msgstr "Закрыть все"
-
-#: Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Создать..."
-
-#: Pinta.Core/Actions/FileActions.cs:55
-msgid "New Screenshot..."
-msgstr "Новый снимок экрана"
-
-#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:78
-msgid "Open..."
-msgstr "Открыть..."
-
-#: Pinta.Core/Actions/FileActions.cs:57
-msgid "Open Recent"
-msgstr "Открыть последние"
-
-#: Pinta.Core/Actions/FileActions.cs:64
-msgid "Close"
-msgstr "Закрыть"
-
-#: Pinta.Core/Actions/FileActions.cs:65
-msgid "Save"
-msgstr "Сохранить"
-
-#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:79
-msgid "Save As..."
-msgstr "Сохранить как..."
-
-#: Pinta.Core/Actions/FileActions.cs:67
-msgid "Print"
-msgstr "Печать"
-
-#: Pinta.Core/Actions/FileActions.cs:68
-msgid "Quit"
-msgstr "Выход"
-
-#: Pinta.Core/Actions/FileActions.cs:70
-msgid "New"
-msgstr "Создать"
-
-#: Pinta.Core/Actions/FileActions.cs:71
-msgid "Open"
-msgstr "Открыть"
-
-#: Pinta.Core/Actions/LayerActions.cs:64
-#: Pinta.Core/Actions/LayerActions.cs:283
-msgid "Add New Layer"
-msgstr "Добавить слой"
-
-#: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:266
-msgid "Delete Layer"
-msgstr "Удалить слой"
-
-#: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:257
-msgid "Duplicate Layer"
-msgstr "Дублировать слой"
-
-#: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:235
-msgid "Merge Layer Down"
-msgstr "Объединить с нижележащим"
-
-#: Pinta.Core/Actions/LayerActions.cs:68
-msgid "Import from File..."
-msgstr "Импорт из файла..."
-
-#: Pinta.Core/Actions/LayerActions.cs:69 Pinta.Core/Actions/ImageActions.cs:61
-msgid "Flip Horizontal"
-msgstr "Отразить по горизонтали"
-
-#: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:62
-msgid "Flip Vertical"
-msgstr "Отразить по вертикали"
-
-#: Pinta.Core/Actions/LayerActions.cs:72
-msgid "Rotate / Zoom Layer..."
-msgstr "Повернуть / Увеличить слой..."
-
-#: Pinta.Core/Actions/LayerActions.cs:72
-#: Pinta.Core/Actions/LayerActions.cs:213
-msgid "Move Layer Up"
-msgstr "Переместить слой вверх"
-
-#: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:224
-msgid "Move Layer Down"
-msgstr "Переместить слой вниз"
-
-#: Pinta.Core/Actions/LayerActions.cs:74
-msgid "Layer Properties..."
-msgstr "Параметры слоя..."
-
-#: Pinta.Core/Actions/LayerActions.cs:179
-msgid "Import From File"
-msgstr "Импорт из файла"
-
-#: Pinta.Core/Actions/ImageActions.cs:58
-#: Pinta.Core/Actions/ImageActions.cs:181
-msgid "Crop to Selection"
-msgstr "Откадрировать в выделение"
-
-#: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Auto Crop"
-msgstr "Автокадрирование"
-
-#: Pinta.Core/Actions/ImageActions.cs:59
-msgid "Resize Image..."
-msgstr "Изменить размер изображения"
-
-#: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Resize Canvas..."
-msgstr "Изменить размер холста..."
-
-#: Pinta.Core/Actions/ImageActions.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:127
-msgid "Flatten"
-msgstr "Объединить слои"
-
-#: Pinta.Core/Actions/ViewActions.cs:63
-msgid "Zoom In"
-msgstr "Крупнее"
-
-#: Pinta.Core/Actions/ViewActions.cs:64
-msgid "Zoom Out"
-msgstr "Мельче"
-
-#: Pinta.Core/Actions/ViewActions.cs:65
-msgid "Best Fit"
-msgstr "Уместить в окне"
-
-#: Pinta.Core/Actions/ViewActions.cs:66
-msgid "Zoom to Selection"
-msgstr "По размеру выделения"
-
-#: Pinta.Core/Actions/ViewActions.cs:67
-msgid "Normal Size"
-msgstr "Исходный размер"
-
-#: Pinta.Core/Actions/ViewActions.cs:68
-msgid "Toolbar"
-msgstr "Стандартная панель"
-
-#: Pinta.Core/Actions/ViewActions.cs:69
-msgid "Pixel Grid"
-msgstr "Пиксельная сетка"
-
-#: Pinta.Core/Actions/ViewActions.cs:70
-msgid "Rulers"
-msgstr "Линейки"
-
-#: Pinta.Core/Actions/ViewActions.cs:71
-msgid "Pixels"
-msgstr "Пиксели"
-
-#: Pinta.Core/Actions/ViewActions.cs:72
-msgid "Inches"
-msgstr "Дюймы"
-
-#: Pinta.Core/Actions/ViewActions.cs:73
-msgid "Centimeters"
-msgstr "Сантиметры"
-
-#: Pinta.Core/Actions/ViewActions.cs:74
-msgid "Fullscreen"
-msgstr "Полный экран"
-
-#: Pinta.Core/Actions/ViewActions.cs:114
-msgid "Ruler Units"
-msgstr "Единицы измерения"
-
-#: Pinta.Core/Actions/ViewActions.cs:194
-#: Pinta.Core/Classes/DocumentWorkspace.cs:226
-#: Pinta.Core/Classes/DocumentWorkspace.cs:234
-msgid "Window"
-msgstr "Окно"
-
-#: Pinta.Core/Actions/EditActions.cs:65
-msgid "Undo"
-msgstr "Отменить"
-
-#: Pinta.Core/Actions/EditActions.cs:66
-msgid "Redo"
-msgstr "Вернуть"
-
-#: Pinta.Core/Actions/EditActions.cs:67 Pinta.Core/Actions/EditActions.cs:210
-msgid "Cut"
-msgstr "Вырезать"
-
-#: Pinta.Core/Actions/EditActions.cs:68
-msgid "Copy"
-msgstr "Копировать"
-
-#: Pinta.Core/Actions/EditActions.cs:71
-msgid "Paste Into New Image"
-msgstr "Вставить как новое изображение"
-
-#: Pinta.Core/Actions/EditActions.cs:72
-msgid "Delete Selection"
-msgstr "Удалить выделение"
-
-#: Pinta.Core/Actions/EditActions.cs:73 Pinta.Core/Actions/EditActions.cs:172
-msgid "Fill Selection"
-msgstr "Заполнить выделение"
-
-#: Pinta.Core/Actions/EditActions.cs:74
-msgid "Invert Selection"
-msgstr "Обратить выделение"
-
-#: Pinta.Core/Actions/EditActions.cs:75 Pinta.Core/Actions/EditActions.cs:181
-msgid "Select All"
-msgstr "Выделить всё"
-
-#: Pinta.Core/Actions/EditActions.cs:76
-msgid "Deselect All"
-msgstr "Снять выбор"
-
-#: Pinta.Core/Actions/EditActions.cs:80
-msgid "Reset to Default"
-msgstr "Сбросить установки"
-
-#: Pinta.Core/Actions/EditActions.cs:81
-msgid "Set Number of Colors"
-msgstr "Установить количество цветов"
-
-#: Pinta.Core/Actions/EditActions.cs:212
-msgid "Erase Selection"
-msgstr "Удалить выделение"
-
-#: Pinta.Core/Actions/EditActions.cs:221
-msgid "Deselect"
-msgstr "Сбросить выделение"
-
-#: Pinta.Core/Actions/EditActions.cs:319
-msgid "Open Palette File"
-msgstr "Открыть файл палитры"
-
-#: Pinta.Core/Actions/EditActions.cs:326
-msgid "Palette files (*.txt, *.gpl)"
-msgstr "Файлы палитры (*.txt, *.gpl)"
-
-#: Pinta.Core/Actions/EditActions.cs:346
-#, csharp-format
-msgid ""
-"Could not open palette file: {0}.\n"
-"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
-msgstr ""
-"Не открывается файл палитры: {0}.\n"
-"Пожалуйста, проверьте, что вы открываете правильный файл палитры GIMP или "
-"Paint.NET"
-
-#: Pinta.Core/Actions/EditActions.cs:359
-msgid "Save Palette File"
-msgstr "Сохранить файл палитры"
-
-#: Pinta.Core/Actions/EditActions.cs:365
-msgid "Paint.NET palette (*.txt)"
-msgstr "Палитра Paint.NET (*.txt)"
-
-#: Pinta.Core/Actions/EditActions.cs:370
-msgid "GIMP palette (*.gpl)"
-msgstr "Палитра GIMP (*.gpl)"
-
-#: Pinta.Core/Classes/Document.cs:298
-msgid "Layer"
-msgstr "Слой"
-
-#: Pinta.Core/Classes/Document.cs:371
-msgid "copy"
-msgstr "- копия"
-
-#: Pinta.Core/Classes/BaseTool.cs:151
-msgid "Tool"
-msgstr "Инструмент"
-
-#: Pinta.Core/Classes/BaseTool.cs:218
-msgid "Shortcut key"
-msgstr "Горячая клавиша"
-
-#: Pinta.Core/Classes/BaseTool.cs:241
-msgid "Normal Blending"
-msgstr "Обычное смешивание"
-
-#: Pinta.Core/Classes/BaseTool.cs:242
-msgid "Overwrite"
-msgstr "Переписать"
-
-#: Pinta.Core/Classes/BaseTool.cs:256
-msgid "Antialiasing On"
-msgstr "Включить сглаживание"
-
-#: Pinta.Core/Classes/BaseTool.cs:257
-msgid "Antialiasing Off"
-msgstr "Выключить сглаживание"
-
-#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "Изображение {0} ({1})"
-
-#: Pinta.Core/Effects/BaseEffect.cs:42
-msgid "General"
-msgstr "Общие"
-
-#: BulgeEffect dialog
-#: FrostedGlassEffect dialog
-#: PolarInversionEffect dialog
-#: TwistEffect dialog
-#: SharpenData dialog
-#: MotionBlurEffect dialog
+#: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
+#: SharpenData MotionBlurEffect
 msgid "Amount"
 msgstr "Количество"
 
-#: RadialBlurEffect dialog
-#: JuliaFractalEffect dialog
-#: MandelbrotFractalEffect dialog
-#: EdgeDetectData dialog
-#: EmbossEffect dialog
-#: ReliefData dialog
-#: TwistEffect dialog
+#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
+#: EdgeDetectData EmbossEffect ReliefData TwistEffect
 msgid "Angle"
 msgstr "Угол"
 
 #: CloudsEffect dialog
 msgid "Antialias"
 msgstr "Сглаживание"
-
-#: GlowEffect dialog
-msgid "Blend Mode"
-msgstr "Режим смешения"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
@@ -1541,8 +1681,7 @@ msgstr "Контраст"
 msgid "Coverage"
 msgstr "Покрытие"
 
-#: MotionBlurEffect dialog
-#: PolarInversionEffect dialog
+#: MotionBlurEffect dialog PolarInversionEffect
 msgid "Distance"
 msgstr "Расстояние"
 
@@ -1550,8 +1689,7 @@ msgstr "Расстояние"
 msgid "Edge Behavior"
 msgstr "Поведение на границе"
 
-#: MandelbrotFractalEffect dialog
-#: FragmentEffect dialog
+#: MandelbrotFractalEffect dialog FragmentEffect
 msgid "Factor"
 msgstr "Фактор"
 
@@ -1563,9 +1701,7 @@ msgstr "Фрагменты"
 msgid "Ink Outline"
 msgstr "Чернильный контур"
 
-#: AddNoiseEffect dialog
-#: OutlineEffect dialog
-#: MandelbrotFractalEffect dialog
+#: AddNoiseEffect dialog OutlineEffect MandelbrotFractalEffect
 msgid "Intensity"
 msgstr "Интенсивность"
 
@@ -1573,9 +1709,7 @@ msgstr "Интенсивность"
 msgid "Lighting"
 msgstr "Освещение"
 
-#: ZoomBlurEffect dialog
-#: BulgeEffect dialog
-#: PencilSketchEffect dialog
+#: ZoomBlurEffect dialog BulgeEffect PencilSketchEffect
 msgid "Offset"
 msgstr "Смещение"
 
@@ -1591,15 +1725,12 @@ msgstr "Процент"
 msgid "Power"
 msgstr "Мощность"
 
-#: PolarInversionEffect dialog
-#: JuliaFractalEffect dialog
-#: MandelbrotFractalEffect dialog
-#: GaussianBlurEffect dialog
+#: PolarInversionEffect dialog JuliaFractalEffect MandelbrotFractalEffect
+#: GaussianBlurEffect
 msgid "Quality"
 msgstr "Качество"
 
-#: TileEffect dialog
-#: RedEyeRemoveData dialog
+#: TileEffect dialog RedEyeRemoveData
 msgid "Rotation"
 msgstr "Поворот"
 
@@ -1650,76 +1781,6 @@ msgstr ""
 "Подсказка: для наилучшего результата сначала выделите каждый глаз "
 "инструментами выделения."
 
-#: pinta.desktop.in
-msgid "Pinta"
-msgstr "Pinta"
-
-#: pinta.desktop.in
-msgid "Image Editor"
-msgstr "Графический редактор"
-
-#: pinta.desktop.in
-msgid "Easily create and edit images"
-msgstr "Простое создание и редактирование изображений"
-
-#: pinta.desktop.in
-msgid "Pinta Image Editor"
-msgstr "Графический редактор Pinta"
-
-#: Pinta/Pads/OpenImagesPad.cs:42
-msgid "Images"
-msgstr "Изображения"
-
-#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:190
-msgid "Cannot save read only file."
-msgstr "Невозможно сохранить файл, доступный только для чтения."
-
-#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:208
-msgid "Image too large"
-msgstr ""
-
-#: Pinta/Actions/Files/SaveDocumentImplementationAction.cs:209
-msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr ""
-
-#: Pinta.Core/Actions/EditActions.cs:252
-msgid "Image larger than canvas"
-msgstr ""
-
-#: Pinta.Core/Actions/EditActions.cs:253
-msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
-msgstr ""
-"Размер вставленного изображения больше размера холста. Что нужно сделать?"
-
-#: Pinta.Core/Actions/EditActions.cs:257
-msgid "Expand canvas"
-msgstr "Увеличить размер холста"
-
-#: Pinta.Core/Actions/EditActions.cs:258
-msgid "Don't change canvas size"
-msgstr "Не изменять размер холста"
-
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:49
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:72
-msgid "Rotate / Zoom Layer"
-msgstr "Повернуть / Увеличить слой"
-
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
-msgid "Layer Shown"
-msgstr ""
-
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:214
-msgid "Layer Hidden"
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:21
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:50
-#: Pinta.Core/Actions/EditActions.cs:85
-msgid "Add-in Manager"
-msgstr ""
-
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
 "Multiple selection:\n"
@@ -1745,7 +1806,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Доступно обновление"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
@@ -1754,16 +1815,16 @@ msgstr ""
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
+msgstr "Требуется: {0} v{1}, найдено v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "Отсутствует: {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "Установленная версия"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
@@ -1771,7 +1832,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "Размер загрузки"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
@@ -1779,41 +1840,41 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "Установка отменена"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "Некоторые необходимые расширения не были найдены"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "Установка завершилась неудачно"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "Установлено"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Обновления"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Галерея"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Все репозитории"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Управление репозиториями..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
@@ -1848,7 +1909,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Удаление"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
