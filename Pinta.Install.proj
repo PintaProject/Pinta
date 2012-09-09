@@ -104,6 +104,9 @@
     <Translation Include="po/ja.po">
       <Code>ja</Code>
     </Translation>
+    <Translation Include="po/ka.po">
+      <Code>ko</Code>
+    </Translation>
     <Translation Include="po/ko.po">
       <Code>ko</Code>
     </Translation>
