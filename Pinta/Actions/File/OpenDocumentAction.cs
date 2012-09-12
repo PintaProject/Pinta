@@ -81,7 +81,7 @@ namespace Pinta.Actions
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
 
 				foreach (var file in fcd.Filenames)
-					if (PintaCore.Workspace.OpenFile (file))
+					if (PintaCore.Workspace.OpenFile (file, fcd))
 						RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 			}
 

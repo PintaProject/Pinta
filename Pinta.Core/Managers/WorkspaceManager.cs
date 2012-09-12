@@ -171,7 +171,7 @@ namespace Pinta.Core
 		}
 
 		// TODO: Standardize add to recent files
-		public bool OpenFile (string file)
+		public bool OpenFile (string file, Window parent = null)
 		{
 			bool fileOpened = false;
 
@@ -189,9 +189,9 @@ namespace Pinta.Core
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException) {
-				ShowOpenFileErrorDialog (file, Catalog.GetString ("Permission denied"));
+				ShowOpenFileErrorDialog (parent, file, Catalog.GetString ("Permission denied"));
 			} catch (Exception e) {
-				ShowOpenFileErrorDialog (file, e.Message);
+				ShowOpenFileErrorDialog (parent, file, e.Message);
 			}
 
 			return fileOpened;
@@ -302,13 +302,16 @@ namespace Pinta.Core
 		}
 		#endregion
 
-		private void ShowOpenFileErrorDialog (string filename, string primaryText)
+		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText)
 		{
+			if (parent == null)
+				parent = PintaCore.Chrome.MainWindow;
+
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 			string secondaryText = string.Format (Catalog.GetString ("Could not open file: {0}"), filename);
 			string message = string.Format (markup, primaryText, secondaryText);
 
-			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+			var md = new MessageDialog (parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
 			                            MessageType.Error, ButtonsType.Ok, message);
 			md.Run ();
 			md.Destroy ();
