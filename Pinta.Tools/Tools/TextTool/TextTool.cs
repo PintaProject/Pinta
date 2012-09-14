@@ -595,8 +595,18 @@ namespace Pinta.Tools
 						break;
 					default:
 						// Ignore command shortcut
-						if ((modifier & Gdk.ModifierType.ControlMask) != 0)
+						if ((modifier & Gdk.ModifierType.ControlMask) != 0) {
+							// Handle undo while editing - if there is nothing on the history stack but
+							// the user has typed some text, we need to handle the shortcut ourselves.
+							if (args.Event.Key == Gdk.Key.z) {
+								StopEditing ();
+
+								if (PintaCore.Workspace.ActiveDocument.History.CanUndo) {
+									PintaCore.Workspace.ActiveDocument.History.Undo ();
+								}
+							}
 							return;
+						}
 
 						keyHandled = TryHandleChar(args.Event);
 						break;
