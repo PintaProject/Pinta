@@ -711,16 +711,17 @@ namespace Pinta.Core
 
 		public void SetCurrentLayer (int i)
 		{
-			current_layer = i;
+			// Ensure that the current tool's modifications are finalized before
+			// switching layers.
+			PintaCore.Tools.CurrentTool.DoCommit ();
 
+			current_layer = i;
 			PintaCore.Layers.OnSelectedLayerChanged ();
 		}
 
 		public void SetCurrentLayer (Layer layer)
 		{
-			current_layer = Layers.IndexOf (layer);
-
-			PintaCore.Layers.OnSelectedLayerChanged ();
+			SetCurrentLayer (Layers.IndexOf (layer));
 		}
 		#endregion
 
