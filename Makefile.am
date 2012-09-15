@@ -106,7 +106,7 @@ releasezip: $(BINFILES)
 
 releaseosx: build $(BINFILES)
 	mkdir -p $(MAC_APP_DIR)/Contents/{MacOS,Resources}
-	cp -r $(BINDIR)/locale $(BINFILES) $(DEBUG_FILES) osx/pinta $(MAC_APP_BIN_DIR)
+	cp -r $(BINDIR)/locale $(BINFILES) $(DEBUG_FILES) $(BINDIR)/ICSharpCode.SharpZipLib.dll osx/pinta $(MAC_APP_BIN_DIR)
 	chmod +x $(MAC_APP_BIN_DIR)/pinta
 	cp osx/Info.plist $(MAC_APP_DIR)/Contents
 	cp osx/pinta.icns $(MAC_APP_DIR)/Contents/Resources
