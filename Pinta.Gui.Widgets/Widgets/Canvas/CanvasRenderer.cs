@@ -81,13 +81,13 @@ namespace Pinta.Gui.Widgets
 			return preview_layer;
 		}
 
-		private Layer CreateOffsetLayer (Layer original, Point canvas_offset)
+		private Layer CreateOffsetLayer (Layer original)
 		{
 			var offset = OffsetLayer;
 			offset.Surface.Clear ();
 
 			using (var g = new Cairo.Context (offset.Surface)) {
-				g.SetSourceSurface (original.Surface, canvas_offset.X + (int)original.Offset.X, canvas_offset.Y + (int)original.Offset.Y);
+				g.SetSourceSurface (original.Surface, (int)original.Offset.X, (int)original.Offset.Y);
 				g.Paint ();
 			}
 
@@ -114,7 +114,7 @@ namespace Pinta.Gui.Widgets
 
 				// If the layer is offset, handle it here
 				if (!layer.Offset.IsEmpty ())
-					layer = CreateOffsetLayer (layer, offset);
+					layer = CreateOffsetLayer (layer);
 
 				var src = layer.Surface;
 
@@ -178,7 +178,7 @@ namespace Pinta.Gui.Widgets
 
 				// If the layer is offset, handle it here
 				if (!layer.Offset.IsEmpty ())
-					layer = CreateOffsetLayer (layer, offset);
+					layer = CreateOffsetLayer (layer);
 
 				var src = layer.Surface;
 
@@ -249,7 +249,7 @@ namespace Pinta.Gui.Widgets
 
 				// If the layer is offset, handle it here
 				if (!layer.Offset.IsEmpty ())
-					layer = CreateOffsetLayer (layer, offset);
+					layer = CreateOffsetLayer (layer);
 
 				var src = layer.Surface;
 
