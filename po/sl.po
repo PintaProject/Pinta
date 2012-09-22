@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-08-12 06:42+0000\n"
+"PO-Revision-Date: 2012-09-15 05:53+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -570,7 +570,6 @@ msgstr "Pinta ne podpira shranjevanje slike v to obliko datoteke."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "Napaka"
@@ -912,7 +911,7 @@ msgstr "Ozadje"
 msgid "Open Image"
 msgstr "Odpri sliko"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Ne morem odpreti datoteke: {0}"
@@ -2061,3 +2060,31 @@ msgstr "Napredek"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(ponudnik {0})"
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr "Zamenjava"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr "Unija (+) (Ctrl + levi klik)"
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr "Izločitev (-) (desni klik)"
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr "Xor (Ctrl + desni klik)"
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr "Presek (Shift + levi klik)"
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr " Način izbire: "
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr "Dovoljenje je zavrnjeno"

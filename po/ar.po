@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -565,7 +565,6 @@ msgstr "لايدعم بِنْتا الصور المحفوظة بهذه الصي�
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "خطأ"
@@ -913,7 +912,7 @@ msgstr "الخلفيّة"
 msgid "Open Image"
 msgstr "افتح صورة"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "لم يستطع فتح الملف: {0}"
@@ -2057,4 +2056,32 @@ msgstr ""
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
 msgstr ""

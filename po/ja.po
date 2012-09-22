@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-04-02 01:08+0000\n"
+"PO-Revision-Date: 2012-09-09 08:12+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -542,7 +542,6 @@ msgstr "Pintaはこの画像形式での保存をサポートしていません"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "エラー"
@@ -678,8 +677,8 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Kiyotaka NISHIBORI https://launchpad.net/~ml-nishibori-kiyotaka\n"
 "  OTHUBO Jumpei https://launchpad.net/~otsubo-jumpei\n"
+"  Too-Dee Nishbone https://launchpad.net/~ml-nishibori-kiyotaka\n"
 "  YannUbuntu https://launchpad.net/~yannubuntu\n"
 "  Yuki Kodama https://launchpad.net/~kuy\n"
 "  Yutaka Aiko https://launchpad.net/~ubon\n"
@@ -887,7 +886,7 @@ msgstr "背景色"
 msgid "Open Image"
 msgstr "イメージを開く"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "ファイルを開けません: {0}"
@@ -2022,4 +2021,32 @@ msgstr ""
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
 msgstr ""

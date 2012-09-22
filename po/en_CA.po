@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-08-12 17:19+0000\n"
+"PO-Revision-Date: 2012-09-22 05:34+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -569,7 +569,6 @@ msgstr "Pinta does not support saving images in this file format."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "Error"
@@ -909,7 +908,7 @@ msgstr "Background"
 msgid "Open Image"
 msgstr "Open Image"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Could not open file: {0}"
@@ -2056,3 +2055,31 @@ msgstr "Progress"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(provided by {0})"
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr "Replace"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr "Union (+) (Ctrl + Left Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr "Exclude (-) (Right Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr "Xor (Ctrl + Right Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr "Intersect (Shift + Left Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr " Selection Mode: "
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr "Permission denied"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-05-19 17:37+0000\n"
-"Last-Translator: Dennis Baudys <Unknown>\n"
+"PO-Revision-Date: 2012-09-22 17:49+0000\n"
+"Last-Translator: Jannis Christ <Fliegenfalle@ovi.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -39,7 +39,7 @@ msgstr "Auswahl ziehen, um ausgewählten Bereich zu verschieben"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
-msgstr "Farbwähler"
+msgstr "Farbpipette"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -53,7 +53,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:101
 msgid "Single Pixel"
-msgstr "Einzelner Pixel"
+msgstr "Einzelnes Pixel"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:102
 msgid "3 x 3 Region"
@@ -573,7 +573,6 @@ msgstr ""
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "Fehler"
@@ -700,11 +699,11 @@ msgstr "Ankerpunkt:"
 
 #: Pinta/Dialogs/AboutDialog.cs:114
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Beitragende in dieser Version:"
 
 #: Pinta/Dialogs/AboutDialog.cs:126
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Ehemalig Beitragende:"
 
 #: Pinta/Dialogs/AboutDialog.cs:137
 msgid "translator-credits"
@@ -722,6 +721,7 @@ msgstr ""
 "  Ghenrik https://launchpad.net/~ghenrik-deactivatedaccount\n"
 "  Gregor Santner https://launchpad.net/~gregi94\n"
 "  Hanh Pham https://launchpad.net/~joel-nohnn\n"
+"  Jannis Christ https://launchpad.net/~fliegenfalle\n"
 "  Johannes Rössel https://launchpad.net/~joey-muhkuhsaft\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Killigrew https://launchpad.net/~killigrew\n"
@@ -914,7 +914,7 @@ msgstr "…"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Kein Werkzeug ausgewählt."
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
@@ -933,7 +933,7 @@ msgstr "Hintergrund"
 msgid "Open Image"
 msgstr "Bild öffnen"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Datei konnte nicht geöffnet werden: {0}"
@@ -1301,7 +1301,7 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "Reflektieren"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -1330,7 +1330,7 @@ msgstr "Abdunkeln"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Bildschirm"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
@@ -1807,7 +1807,7 @@ msgstr "Keine Auswahl"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "In den Quellen verfügbar:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
@@ -1816,6 +1816,7 @@ msgstr "Aktualisierung verfügbar"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
 msgstr ""
+"Diese Erweiterung kann mangels fehlender Abhängigkeiten nicht geladen werden"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
@@ -1833,7 +1834,7 @@ msgstr "Installierte Version"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Version der Erweiterungsquelle"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
@@ -1842,6 +1843,8 @@ msgstr "Download-Größe"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
+"Die folgenden, durch diese Erweiterung benötigten Abhängigkeiten, sind nicht "
+"verfügbar:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
@@ -1849,7 +1852,7 @@ msgstr "Installation abgebrochen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "Einige der benötigten Erweiterungen wurden nicht gefunden"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
@@ -1875,11 +1878,11 @@ msgstr "Galerie"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Alle Quellen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Erweiterungsquellen verwalten"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
@@ -1890,23 +1893,23 @@ msgstr[1] "{0} Aktualisierungen verfügbar"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "Repositorium aktualisieren"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "Erweiterung installieren"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Erweiterungspakete"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Es wurden keine Erweiterungen gefunden"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Erweiterung"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
@@ -1925,12 +1928,16 @@ msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Auf Grund nicht erfüllbarer gemeinsamer Abhängigkeiten werden die folgenden "
+"Erweiterungen ebenso deinstalliert:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"Wegen Abhängigkeitskonflikten konnten die ausgewählten Erweiterungen nicht "
+"installiert werden."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
@@ -1954,7 +1961,7 @@ msgstr "Sind Sie sicher, dass Sie die Installation abbrechen möchten?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Die Erweiterungen werden installiert"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
@@ -1966,7 +1973,7 @@ msgstr "Die Installation wurde mit Warnungen abgeschlossen."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Die Erweiterungen werden deinstalliert"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
@@ -1978,7 +1985,7 @@ msgstr "Die Deinstallation wurde mit Warnungen abgeschlossen."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Quelle wird registriert"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
@@ -2009,7 +2016,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Die folgenden Erweiterungen werden installiert:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
@@ -2025,7 +2032,7 @@ msgstr "Alle aktualisieren"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Erweiterungsquelle:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
@@ -2042,19 +2049,19 @@ msgstr "Installieren"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Erweiterungs-Quellenverwaltung"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Neue Quelle hinzufügen"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "Wählen Sie den Ort der Quelle, die Sie registrieren möchten:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Eine Online-Erweiterungsquelle registrieren"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
@@ -2062,7 +2069,7 @@ msgstr "URL:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Lokale Quelle registrieren"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
@@ -2080,3 +2087,31 @@ msgstr "Fortschritt"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(bereitgestellt von {0})"
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr "Ersetzen"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr "Zugriff verweigert"

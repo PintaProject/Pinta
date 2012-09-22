@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-05-05 16:45+0000\n"
-"Last-Translator: Drovosekov Anton <Unknown>\n"
+"PO-Revision-Date: 2012-09-19 19:12+0000\n"
+"Last-Translator: sympler <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -50,27 +50,27 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:94
 msgid "Sampling"
-msgstr ""
+msgstr "Выборка"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:101
 msgid "Single Pixel"
-msgstr ""
+msgstr "Один пиксель"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:102
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "Область 3 на 2"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:103
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "Область 5 на 5"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:104
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "Область 7 на 7"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:105
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "Область 9 на 9"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113 Pinta.Core/Classes/Document.cs:300
 msgid "Layer"
@@ -78,7 +78,7 @@ msgstr "Слой"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:114
 msgid "Image"
-msgstr ""
+msgstr "изображение"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "After select"
@@ -193,6 +193,9 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold shift to constrain to a square."
 msgstr ""
+"Кликните и перетащите, чтобы нарисовать прямоугольник с закругленными углами "
+"(правой кнопкой мыши чтобы рисовать вторичным цветом). Удерживайте SHIFT, "
+"чтобы прямоугольник был квадратом."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -572,7 +575,6 @@ msgstr "Pinta не поддерживает сохранение изображ�
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "Ошибка"
@@ -696,11 +698,11 @@ msgstr "Якорь:"
 
 #: Pinta/Dialogs/AboutDialog.cs:114
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Авторы этой версии:"
 
 #: Pinta/Dialogs/AboutDialog.cs:126
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Авторы предыдущих версий:"
 
 #: Pinta/Dialogs/AboutDialog.cs:137
 msgid "translator-credits"
@@ -725,7 +727,8 @@ msgstr ""
 "  Vyacheslav Sharmanov https://launchpad.net/~vsharmanov\n"
 "  Yogar https://launchpad.net/~me-yogar\n"
 "  jeder https://launchpad.net/~i-jeder\n"
-"  ma$terok https://launchpad.net/~m-shein"
+"  ma$terok https://launchpad.net/~m-shein\n"
+"  sympler https://launchpad.net/~sympler"
 
 #: Pinta/Dialogs/AboutDialog.cs:140
 msgid "Translated by:"
@@ -741,7 +744,7 @@ msgstr "Использованы некоторые значки из:"
 
 #: Pinta/Dialogs/AboutDialog.cs:161
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "Работает на Mono:"
 
 #: Pinta/Dialogs/AboutDialog.cs:270
 msgid "About Pinta"
@@ -910,7 +913,7 @@ msgstr "..."
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Не выбран инструмент"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:220
 msgid "Rendering Effect"
@@ -929,7 +932,7 @@ msgstr "Фон"
 msgid "Open Image"
 msgstr "Открыть изображение"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не удалось открыть файл: {0}"
@@ -1050,7 +1053,7 @@ msgstr "Копировать"
 
 #: Pinta.Core/Actions/EditActions.cs:72
 msgid "Copy Merged"
-msgstr ""
+msgstr "Скопировать выделенное"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
@@ -1281,19 +1284,19 @@ msgstr "Изображение {0} ({1})"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "Множитель"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
-msgstr ""
+msgstr "Добавка"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "Горение цвета"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "Color Dodge"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
@@ -1310,27 +1313,27 @@ msgstr "Оверлей"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "Различие"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
-msgstr ""
+msgstr "Отрицание"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Осветление"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Затемнение"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Освещение"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
-msgstr ""
+msgstr "Искл. ИЛИ"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -1786,23 +1789,25 @@ msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
+"Мультивыделение\n"
+"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "Включить"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "Выкл."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Ничего не выбрано"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Доступно в репозитории"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
@@ -1810,7 +1815,7 @@ msgstr "Доступно обновление"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
+msgstr "Этот add-in не может быть загружен из-за несоответствия зависимостей"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
@@ -1828,7 +1833,7 @@ msgstr "Установленная версия"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Версия репозитория"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
@@ -1836,7 +1841,7 @@ msgstr "Размер загрузки"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
+msgstr "Следующие зависимости необходимы для этого дополнения"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
@@ -1880,32 +1885,33 @@ msgstr "Управление репозиториями..."
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "доступно {0} обновление"
+msgstr[1] "доступно {0} обновления"
+msgstr[2] "доступно {0} обновлений"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "Обновление репозитория"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "Установить пакет"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Пакеты дополнений"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Дополнения не найдены"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Дополнение"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Прочее"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
@@ -1913,164 +1919,196 @@ msgstr "Удаление"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "Следующие пакеты будут удалены:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Есть и другие надстройки, которые зависят от предыдущих которые также будут "
+"удалены:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"Следующие дополнения не могут быть установлены поскольку создают конфликты"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Будут установлены следующие пакеты:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (в пользовательский каталог)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Следующие пакеты будут удалены:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Следующие зависимости не удалось удовлетворить:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "Вы действительно хотите отменить установку?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Установка дополнений"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "Установка закончилась неудачей"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "Установка завершилась с предупреждениями."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Удаление дополнений"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "Удаление закончилась неудачей"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "Удаление завершилось с предупреждениями."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Регистрация репозитория"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "Возникла исключительная ситуация: {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Подробнее"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Установка..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Обновление"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "Удалить..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
 msgstr ""
+"Необходимо установить дополнительные расширения для выполнения этой операции."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Следующие дополнения будут установлены:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Обновлений не найдено"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Обновить все"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Репозиторий:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Установить из файла..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Подробности"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Установить"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Управление репозиториями с дополнениями"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Добавить репозиторий"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "Укажите расположение регистрируемого репозитория:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Зарегистрировать сетевой репозиторий"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "URL:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Зарегистрировать локальный репозиторий"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Путь:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Обзор…"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "Ход выполнения"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(предоставлено {0})"
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr "Заменить"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr "Соединить (+) (Ctrl + Left Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr "Отсоединить (-) (Right Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr "Xor (Ctrl + Right Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr "Intersect (Shift + Left Click)"
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr " Режим выделения "
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr "Отказано в доступе"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-08-15 17:21+0000\n"
-"Last-Translator: Jin Valiant <Unknown>\n"
+"PO-Revision-Date: 2012-09-12 06:57+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-09-09 02:36+0000\n"
-"X-Generator: Launchpad (build 15914)\n"
+"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -577,7 +577,6 @@ msgstr "Pinta no es compatible con el guardado de imágenes en este formato."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Managers/WorkspaceManager.cs:193
 #: Pinta.Core/Actions/EditActions.cs:352
 msgid "Error"
 msgstr "Error"
@@ -592,7 +591,7 @@ msgstr "Imagen demasiado grande"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Los archivos ICO no pueden ser más grandes que 255×255 píxeles."
+msgstr "Los archivos ICO no pueden ser más grandes que 255 × 255 píxeles."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 #, csharp-format
@@ -714,6 +713,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Adolfo Jayme Barrientos https://launchpad.net/~fitoschido\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Francisco Camenforte Torres https://launchpad.net/~fct\n"
 "  Jin Valiant https://launchpad.net/~jin-valiant\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
@@ -921,7 +921,7 @@ msgstr "Fondo"
 msgid "Open Image"
 msgstr "Abrir imagen"
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
+#: Pinta.Core/Managers/WorkspaceManager.cs:308
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "No se pudo abrir el archivo: {0}"
@@ -2074,3 +2074,31 @@ msgstr "Progreso"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(proporcionado por {0})"
+
+#: Pinta.Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr "Reemplazar"
+
+#: Pinta.Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr " Modo de selección: "
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr "Permiso denegado"
