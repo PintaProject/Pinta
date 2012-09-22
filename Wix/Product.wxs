@@ -12,19 +12,19 @@
     <Package InstallerVersion="200" Compressed="yes" />
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-    <!-- Ensure GTK# 2.12.9+ is installed
+    <!-- Ensure GTK# 2.12.9+ is installed -->
     <Property Id="GTKSHARPVERSION">
       <RegistrySearch Id="gsversion" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\Version" Type="raw" />
     </Property>
     <Condition Message="Gtk# version 2.12.9 or greater must be installed.">
       <![CDATA[GTKSHARPVERSION >= "2.12.9" OR (GTKSHARPVERSION << "2.12.1" AND GTKSHARPVERSION <> "2.12.1") OR REMOVE ~= "ALL"]]>
-    </Condition>-->
+    </Condition>
 
-    <!-- Ensure .Net 3.5 is installed
-    <PropertyRef Id="NETFRAMEWORK35" />
-    <Condition Message="This setup requires the .NET Framework 3.5 to be installed.">
-      Installed OR NETFRAMEWORK35
-    </Condition>-->
+    <!-- Ensure .Net 4.0 is installed -->
+    <PropertyRef Id="NETFRAMEWORK40CLIENT" />
+    <Condition Message="This setup requires the .NET Framework 4.0 to be installed.">
+      Installed OR NETFRAMEWORK40CLIENT
+    </Condition>
 
     <!-- Get the GTK# install directory -->
     <Property Id="GTKSHARPPATH">
@@ -542,6 +542,8 @@
     <InstallUISequence>
       <!-- Because we have a launch condition that uses the results of FindRelatedProducts, put it first. -->
       <LaunchConditions After="FindRelatedProducts" />
+      <!-- Because we have a launch condition that uses the results of a RegistrySearch (done during "AppSearch"), put it first. -->
+      <AppSearch Before="LaunchConditions" />
     </InstallUISequence>
 
     <!-- This enables the license screen and where to install screen -->
