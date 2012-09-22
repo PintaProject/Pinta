@@ -59,8 +59,14 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
+			"Adolfo Jayme Barrientos",
+			"Akshara Proddatoori",
+			"Andrew Davis",
+			"Balló György",
 			"Cameron White",
+			"John Burak",
 			"Jonathan Pobst",
+			"Olivier Dufour",
 			"Robert Nordan"
 		};
 
