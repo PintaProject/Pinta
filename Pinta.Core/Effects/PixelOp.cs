@@ -92,7 +92,7 @@ namespace Pinta.Core
 
 			// Do the work.
 			unsafe {
-				for (int row = 0; row < roiSize.Height; ++row) {
+				for (int row = 0; row < height; ++row) {
 					ColorBgra* dstPtr = dst.GetPointAddress (dstOffset.X, dstOffset.Y + row);
 					ColorBgra* srcPtr = src.GetPointAddress (srcOffset.X, srcOffset.Y + row);
 					Apply (dstPtr, srcPtr, width);

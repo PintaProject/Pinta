@@ -67,9 +67,6 @@ namespace Pinta.Effects
 
 		private static void InitLookup ()
 		{
-			int[] curve = new int[tableSize];
-			int[] integral = new int[tableSize];
-
 			double l = 5;
 			double r = 10;
 			double scale = 50;

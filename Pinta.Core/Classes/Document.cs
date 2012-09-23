@@ -50,7 +50,6 @@ namespace Pinta.Core
 		// The layer used for selections
 		private Layer selection_layer;
 
-		private int selection_layer_index;
 		private bool show_selection;
 
 		public DocumentSelection Selection = new DocumentSelection();
@@ -308,7 +307,6 @@ namespace Pinta.Core
 			Layer old = selection_layer;
 
 			selection_layer = CreateLayer ();
-			selection_layer_index = current_layer + 1;
 
 			if (old != null)
 				(old.Surface as IDisposable).Dispose ();

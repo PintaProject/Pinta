@@ -293,7 +293,6 @@ namespace Pinta.Core
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			if (PintaCore.Tools.CurrentTool.TryHandleCut (cb))
 				return;
-			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 			
 			// Copy selection

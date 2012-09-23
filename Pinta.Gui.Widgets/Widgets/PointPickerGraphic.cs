@@ -178,8 +178,6 @@ namespace Pinta.Gui.Widgets
 
 		private Cairo.PointD PositionToClientPt (Point pos)
 		{
-			Point center = Allocation.Center ();
-			
 			double halfWidth = PintaCore.Workspace.ImageSize.Width / Allocation.Width;
 			double halfHeight = PintaCore.Workspace.ImageSize.Height / Allocation.Height;
 			

@@ -86,9 +86,6 @@ namespace Pinta.Effects
 					for (int x = rect.Left; x <= rect.GetRight (); ++x) {
 						int sampleCount = 0;
 
-						PointD a = new PointD ((float)x + points[0].X, (float)y + points[0].Y);
-						PointD b = new PointD ((float)x + points[points.Length - 1].X, (float)y + points[points.Length - 1].Y);
-
 						for (int j = 0; j < points.Length; ++j) {
 							PointD pt = new PointD (points[j].X + (float)x, points[j].Y + (float)y);
 

@@ -197,7 +197,6 @@ namespace Pinta.Tools
 
 			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentLayer, args.Event.IsShiftPressed ());
 			
-			Gdk.Rectangle r = GetRectangleFromPoints (shape_origin, new PointD (x, y));
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			
 			is_drawing = false;

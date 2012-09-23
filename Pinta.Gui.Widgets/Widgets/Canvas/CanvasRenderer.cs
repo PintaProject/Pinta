@@ -132,10 +132,9 @@ namespace Pinta.Gui.Widgets
 				var src_ptr = (ColorBgra*)src.DataPtr;
 				var dst_ptr = (ColorBgra*)dst.DataPtr;
 
-				// Cache widths and heights
+				// Cache widths
 				int src_width = src.Width;
 				int dst_width = dst.Width;
-				int dst_height = dst.Height;
 
 				for (int dstRow = 0; dstRow < srcRect.Height; ++dstRow) {
 					ColorBgra* dstRowPtr = dst.GetRowAddressUnchecked (dst_ptr, dst_width, dstRow);
@@ -326,8 +325,6 @@ namespace Pinta.Gui.Widgets
 
 		private unsafe void RenderPixelGrid (Cairo.ImageSurface dst, Gdk.Point offset)
 		{
-			var blackAndWhite = new ColorBgra[2] { ColorBgra.White, ColorBgra.Black };
-
 			// Draw horizontal lines
 			var dst_ptr = (ColorBgra*)dst.DataPtr; 
 			int dstHeight = dst.Height;

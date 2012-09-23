@@ -112,8 +112,6 @@ namespace Pinta.Tools
 				return;
 			}
 
-			DrawingArea drawingarea1 = (DrawingArea)o;
-
 			int x = (int)point.X;
 			int y = (int)point.Y;
 

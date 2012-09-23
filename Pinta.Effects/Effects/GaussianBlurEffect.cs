@@ -93,8 +93,6 @@ namespace Pinta.Effects
 			long* rSums = (long*)p;
 			p += wlen * sizeof (long);
 
-			ulong arraysLength = (ulong)(sizeof (long) * wlen);
-
 			// Cache these for a massive performance boost
 			int src_width = src.Width;
 			int src_height = src.Height;

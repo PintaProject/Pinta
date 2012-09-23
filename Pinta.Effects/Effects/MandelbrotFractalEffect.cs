@@ -78,9 +78,6 @@ namespace Pinta.Effects
 			int w = dst.Width;
 			int h = dst.Height;
 			
-			double wDiv2 = (double)w / 2;
-			double hDiv2 = (double)h / 2;
-			
 			double invH = 1.0 / h;
 			double zoom = 1 + zoomFactor * Data.Zoom;
 			double invZoom = 1.0 / zoom;

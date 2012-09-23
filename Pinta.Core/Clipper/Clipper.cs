@@ -205,7 +205,7 @@ namespace ClipperLibrary
             if (denom > result) return new Int128(0); //result is only a fraction of 1
             denom = -denom;
 
-            Int128 p = new Int128(0), p2 = new Int128(0);
+            Int128 p = new Int128(0);
             for (int i = 0; i < 128; ++i)
             {
                 p.hi = p.hi << 1;
@@ -1137,9 +1137,7 @@ namespace ClipperLibrary
         private Int64 PopScanbeam()
         {
           Int64 Y = m_Scanbeam.Y;
-          Scanbeam sb2 = m_Scanbeam;
           m_Scanbeam = m_Scanbeam.next;
-          sb2 = null;
           return Y;
         }
         //------------------------------------------------------------------------------
@@ -1174,13 +1172,10 @@ namespace ClipperLibrary
         private void DisposeOutPts(OutPt pp)
         {
             if (pp == null) return;
-            OutPt tmpPp = null;
             pp.prev.next = null;
             while (pp != null)
             {
-                tmpPp = pp;
                 pp = pp.next;
-                tmpPp = null;
             }
         }
         //------------------------------------------------------------------------------
@@ -3080,13 +3075,11 @@ namespace ClipperLibrary
                   SlopesEqual(pp.prev.pt, pp.pt, pp.next.pt, m_UseFullRange))
                 {
                     lastOK = null;
-                    OutPt tmp = pp;
                     if (pp == outRec.bottomPt)
                          outRec.bottomPt = null; //flags need for updating
                     pp.prev.next = pp.next;
                     pp.next.prev = pp.prev;
                     pp = pp.prev;
-                    tmp = null;
                 }
                 else if (pp == lastOK) break;
                 else
@@ -3420,7 +3413,6 @@ namespace ClipperLibrary
 
                 normals = new List<DoublePoint>();
 
-                double deltaSq = delta*delta;
                 solution.Clear();
                 solution.Capacity = pts.Count;
                 for (m_i = 0; m_i < pts.Count; m_i++)

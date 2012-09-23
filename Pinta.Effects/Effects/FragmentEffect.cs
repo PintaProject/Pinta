@@ -50,7 +50,6 @@ namespace Pinta.Effects
 		{
 			double pointStep = 2 * Math.PI / (double)fragments;
 			double rotationRadians = ((rotationAngle - 90.0) * Math.PI) / 180.0;
-			double offsetAngle = pointStep;
 
 			Gdk.Point[] pointOffsets = new Gdk.Point[fragments];
 

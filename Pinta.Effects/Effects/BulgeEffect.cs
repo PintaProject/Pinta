@@ -55,8 +55,7 @@ namespace Pinta.Effects
 			float hw = dst.Width / 2f;
 			float hh = dst.Height / 2f;
 			float maxrad = Math.Min (hw, hh);
-			float maxrad2 = maxrad * maxrad;
-			float amt = Data.Amount / 100f;
+			float amt = bulge / 100f;
 			
 			hh = hh + (float)Data.Offset.Y * hh;
 			hw = hw + (float)Data.Offset.X * hw;

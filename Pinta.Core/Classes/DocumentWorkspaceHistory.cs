@@ -33,14 +33,12 @@ namespace Pinta.Core
 	public class DocumentWorkspaceHistory
 	{
 		private Document document;
-		private DocumentWorkspace workspace;
 		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
 		int historyPointer = -1;
 
-		internal DocumentWorkspaceHistory (Document document, DocumentWorkspace workspace)
+		internal DocumentWorkspaceHistory (Document document)
 		{
 			this.document = document;
-			this.workspace = workspace;
 			ListStore = new ListStore (typeof (BaseHistoryItem));
 		}
 

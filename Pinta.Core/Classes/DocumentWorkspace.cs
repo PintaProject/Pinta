@@ -44,7 +44,7 @@ namespace Pinta.Core
 		internal DocumentWorkspace (Document document)
 		{
 			this.document = document;
-			History = new DocumentWorkspaceHistory (document, this);
+			History = new DocumentWorkspaceHistory (document);
 		}
 
 		#region Public Properties
