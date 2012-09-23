@@ -250,8 +250,6 @@ namespace Pinta
 			layout.Width = w * (int)Pango.Scale.PangoScale;
 			layout.Wrap = Pango.WrapMode.Word;
 			layout.Alignment = Pango.Alignment.Center;
-			FontDescription fd = FontDescription.FromString ("Tahoma 10");
-			layout.FontDescription = fd;
 			layout.SetMarkup (CreditText);
 
 			backGc = new Gdk.GC (GdkWindow);
