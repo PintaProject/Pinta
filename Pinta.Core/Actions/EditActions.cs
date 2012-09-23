@@ -122,7 +122,7 @@ namespace Pinta.Core
 			menu.AppendSeparator ();
 			menu.Append (EraseSelection.CreateAcceleratedMenuItem (Gdk.Key.Delete, Gdk.ModifierType.None));
 			menu.Append (FillSelection.CreateAcceleratedMenuItem (Gdk.Key.BackSpace, Gdk.ModifierType.None));
-			//menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
+			menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
 			
 			menu.AppendSeparator ();
 			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Palette"), null, null);
@@ -156,9 +156,11 @@ namespace Pinta.Core
 			LoadPalette.Activated += HandlerPintaCoreActionsEditLoadPaletteActivated;
 			SavePalette.Activated += HandlerPintaCoreActionsEditSavePaletteActivated;
 			ResetPalette.Activated += HandlerPintaCoreActionsEditResetPaletteActivated;
+			InvertSelection.Activated += HandleInvertSelectionActivated;
 
 			PintaCore.Workspace.ActiveDocumentChanged += WorkspaceActiveDocumentChanged;
 		}
+
 		#endregion
 
 		#region Action Handlers
@@ -392,6 +394,23 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
 		{
 			PintaCore.Palette.CurrentPalette.LoadDefault ();
+		}
+
+		void HandleInvertSelectionActivated (object sender, EventArgs e)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			// Clear the selection resize handles if necessary.
+			doc.ToolLayer.Clear ();
+
+			SelectionHistoryItem historyItem = new SelectionHistoryItem ("Menu.Edit.InvertSelection.png",
+			                                                             Catalog.GetString ("Invert Selection"));
+			historyItem.TakeSnapshot ();
+
+			doc.Selection.Invert (doc.SelectionLayer.Surface, doc.ImageSize);
+
+			doc.History.PushNewItem (historyItem);
+			doc.Workspace.Invalidate ();
 		}
 
 		private void WorkspaceActiveDocumentChanged (object sender, EventArgs e)

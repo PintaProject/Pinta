@@ -149,6 +149,7 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.EraseSelection.Sensitive = show_selection;
 				PintaCore.Actions.Edit.FillSelection.Sensitive = show_selection;
 				PintaCore.Actions.Image.CropToSelection.Sensitive = show_selection;
+				PintaCore.Actions.Edit.InvertSelection.Sensitive = show_selection;
 			}
 		}
 

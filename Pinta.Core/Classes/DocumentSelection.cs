@@ -338,31 +338,36 @@ namespace Pinta.Core
 				SelectionPath = g.CreateRectanglePath(r);
 			}
 
-
 			//Clear the Selection Polygons collection to start from a clean slate.
 			SelectionPolygons.Clear();
 
-			//The 4 corners of the Rectangle.
-			int corner1X = (int)Math.Round(r.X);
-			int corner1Y = (int)Math.Round(r.Y);
-			int corner2X = (int)Math.Round(r.X + r.Width);
-			int corner2Y = (int)Math.Round(r.Y + r.Height);
+			SelectionPolygons.Add (CreateRectanglePolygon (r));
+		}
 
-			//Create a new Polygon to store the upcoming rectangle.
-			List<IntPoint> newPolygon = new List<IntPoint>();
+		/// <summary>
+		/// Inverts the selection.
+		/// </summary>
+		/// <param name='imageSize'>
+		/// The size of the document.
+		/// </param>
+		public void Invert (Surface surface, Gdk.Size imageSize)
+		{
+			List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>> ();
 
-			//Store each of the 4 corners of the Rectangle in the Polygon, and then store
-			//the first corner again. It is important to note that the order of the
-			//corners being added (clockwise) and the first/last Point being the same
-			//should be kept this way; otherwise, problems could result.
-			newPolygon.Add(new IntPoint(corner1X, corner1Y));
-			newPolygon.Add(new IntPoint(corner2X, corner1Y));
-			newPolygon.Add(new IntPoint(corner2X, corner2Y));
-			newPolygon.Add(new IntPoint(corner1X, corner2Y));
-			newPolygon.Add(new IntPoint(corner1X, corner1Y));
+			var documentPolygon = CreateRectanglePolygon (new Rectangle (0, 0, imageSize.Width, imageSize.Height));
 
-			//Add the newly calculated rectangular Polygon.
-			SelectionPolygons.Add(newPolygon);
+			// Create a rectangle that is the size of the entire image,
+			// and subtract all of the polygons in the current selection from it.
+			SelectionClipper.AddPolygon (documentPolygon, PolyType.ptSubject);
+			SelectionClipper.AddPolygons (SelectionPolygons, PolyType.ptClip);
+			SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
+			
+			SelectionClipper.Clear ();
+
+			SelectionPolygons = resultingPolygons;
+			using (Context g = new Context (surface)) {
+				SelectionPath = g.CreatePolygonPath (ConvertToPolygonSet (resultingPolygons));
+			}
 		}
 
 		/// <summary>
@@ -404,6 +409,29 @@ namespace Pinta.Core
 			}
 
 			SelectionPolygons.Clear();
+		}
+
+		private List<IntPoint> CreateRectanglePolygon (Rectangle r)
+		{
+			// The 4 corners of the Rectangle.
+			int corner1X = (int)Math.Round(r.X);
+			int corner1Y = (int)Math.Round(r.Y);
+			int corner2X = (int)Math.Round(r.X + r.Width);
+			int corner2Y = (int)Math.Round(r.Y + r.Height);
+			
+			// Store each of the 4 corners of the Rectangle in the Polygon, and then store
+			// the first corner again. It is important to note that the order of the
+			// corners being added (clockwise) and the first/last Point being the same
+			// should be kept this way; otherwise, problems could result.
+			List<IntPoint> newPolygon = new List<IntPoint>() {
+				new IntPoint(corner1X, corner1Y),
+				new IntPoint(corner2X, corner1Y),
+				new IntPoint(corner2X, corner2Y),
+				new IntPoint(corner1X, corner2Y),
+				new IntPoint(corner1X, corner1Y)
+			};
+
+			return newPolygon;
 		}
 	}
 }
