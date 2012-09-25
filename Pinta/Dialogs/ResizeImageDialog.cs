@@ -25,15 +25,18 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
+using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta
 {
-	public partial class ResizeImageDialog : Gtk.Dialog
+	public partial class ResizeImageDialog : Dialog
 	{
 		private bool value_changing;
 		
-		public ResizeImageDialog ()
+		public ResizeImageDialog () : base (Catalog.GetString ("Resize Image"), PintaCore.Chrome.MainWindow,
+		                                    DialogFlags.Modal)
 		{
 			this.Build ();
 

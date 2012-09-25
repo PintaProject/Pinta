@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
+using Mono.Unix;
 using System.Collections.Generic;
 using Cairo;
 
@@ -77,7 +79,8 @@ namespace Pinta.Effects
 
 		public CurvesData EffectData { get; private set; }
 		
-		public CurvesDialog (CurvesData effectData)
+		public CurvesDialog (CurvesData effectData) : base (Catalog.GetString ("Curves"), PintaCore.Chrome.MainWindow,
+		                                                    DialogFlags.Modal)
 		{
 			this.Build ();
 			

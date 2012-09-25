@@ -154,9 +154,11 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			Gtk.FileChooserDialog fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), null, FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Open, Gtk.ResponseType.Ok);
+			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"),PintaCore.Chrome.MainWindow,
+			                                     FileChooserAction.Open, Stock.Cancel, ResponseType.Cancel,
+			                                     Stock.Open, ResponseType.Ok);
 
-            fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+            		fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 
 			fcd.AddImagePreview ();

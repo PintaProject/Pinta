@@ -25,16 +25,19 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
+using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta
 {
-	public partial class ResizeCanvasDialog : Gtk.Dialog
+	public partial class ResizeCanvasDialog : Dialog
 	{
 		private bool value_changing;
 		private Anchor anchor;
 		
-		public ResizeCanvasDialog ()
+		public ResizeCanvasDialog () : base (Catalog.GetString ("Resize Canvas"), PintaCore.Chrome.MainWindow,
+		                                     DialogFlags.Modal)
 		{
 			this.Build ();
 			

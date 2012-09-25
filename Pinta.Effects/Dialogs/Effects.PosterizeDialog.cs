@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
+using Mono.Unix;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -44,7 +46,8 @@ namespace Pinta.Effects
             		get { return hscalespinBlue.ValueAsInt; }
 		}
 
-		public PosterizeDialog ()
+		public PosterizeDialog () : base (Catalog.GetString ("Posterize"),
+		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
 			Build ();
 			

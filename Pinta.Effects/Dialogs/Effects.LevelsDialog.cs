@@ -36,6 +36,7 @@
 
 using System;
 using Gtk;
+using Mono.Unix;
 using Cairo;
 
 using Pinta.Core;
@@ -49,7 +50,8 @@ namespace Pinta.Effects
 		
 		public LevelsData EffectData { get; private set; }
 		
-		public LevelsDialog (LevelsData effectData)
+		public LevelsDialog (LevelsData effectData) : base (Catalog.GetString ("Levels Adjustment"),
+		                                                    PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{			
 			this.Build ();
 			
