@@ -58,8 +58,10 @@ namespace Pinta.Core
 			CellRendererText cell = renderer as CellRendererText;
 
 			cell.Text = fontName;
-			cell.Font = string.Format ("{0} 10", fontName);
-			cell.Family = fontName;
+			if (PintaCore.System.OperatingSystem != OS.Mac) {
+				cell.Font = string.Format ("{0} 10", fontName);
+				cell.Family = fontName;
+			}
 		}
 	}
 }
