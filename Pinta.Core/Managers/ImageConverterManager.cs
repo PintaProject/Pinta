@@ -34,9 +34,11 @@ namespace Pinta.Core
 {
 	public class ImageConverterManager
 	{
+		private List<FormatDescriptor> formats;
+
 		public ImageConverterManager ()
 		{
-			Formats = new List<FormatDescriptor> ();
+			formats = new List<FormatDescriptor> ();
 
 			// Create all the formats supported by Gdk
 			foreach (var format in Pixbuf.Formats) {
@@ -68,15 +70,33 @@ namespace Pinta.Core
 				else
 					exporter = null;
 
-				Formats.Add (new FormatDescriptor (formatName, formatNameUpperCase, extensions, importer, exporter));
+				RegisterFormat (new FormatDescriptor (formatName, formatNameUpperCase, extensions, importer, exporter));
 			}
 
 			// Create all the formats we have our own importers/exporters for
 			OraFormat oraHandler = new OraFormat ();
-			Formats.Add (new FormatDescriptor ("ora", "OpenRaster", new string[] { "ora" }, oraHandler, oraHandler));
+			RegisterFormat (new FormatDescriptor ("ora", "OpenRaster", new string[] { "ora" }, oraHandler, oraHandler));
 		}
 
-		public IList<FormatDescriptor> Formats { get; private set; }
+		public IEnumerable<FormatDescriptor> Formats { get { return formats; } }
+
+		/// <summary>
+		/// Registers a new file format.
+		/// </summary>
+		public void RegisterFormat (FormatDescriptor fd)
+		{
+			formats.Add (fd);
+		}
+
+		/// <summary>
+		/// Unregisters the file format for the given extension.
+		/// </summary>
+		public void UnregisterFormatByExtension (string extension)
+		{
+			extension = NormalizeExtension (extension);
+
+			formats.RemoveAll (f => f.Extensions.Contains (extension));			
+		}
 
 		public FormatDescriptor GetDefaultSaveFormat ()
 		{
@@ -115,8 +135,7 @@ namespace Pinta.Core
 
 		public FormatDescriptor GetFormatByExtension (string extension)
 		{
-			// Normalize the extension
-			extension = extension.ToLowerInvariant ().TrimStart ('.').Trim ();
+			extension = NormalizeExtension (extension);
 
 			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
 		}
@@ -125,8 +144,7 @@ namespace Pinta.Core
 		{
 			string extension = Path.GetExtension (file);
 
-			// Normalize the extension
-			extension = extension.ToLowerInvariant ().TrimStart ('.').Trim ();
+			extension = NormalizeExtension (extension);
 
 			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
 		}
@@ -147,13 +165,21 @@ namespace Pinta.Core
 			return GetImporterByExtension (extension);
 		}
 
+
 		public void SetDefaultFormat (string extension)
 		{
-			// Normalize the extension
-			extension = extension.ToLowerInvariant ().TrimStart ('.').Trim ();
+			extension = NormalizeExtension (extension);
 
 			PintaCore.Settings.PutSetting ("default-image-type", extension);
 			PintaCore.Settings.SaveSettings ();
+		}
+
+		/// <summary>
+		/// Normalizes the extension.
+		/// </summary>
+		private static string NormalizeExtension (string extension)
+		{
+			return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
 		}
 	}
 }

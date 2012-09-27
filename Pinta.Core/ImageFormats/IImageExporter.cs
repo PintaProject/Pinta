@@ -25,11 +25,16 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Addins;
 
 namespace Pinta.Core
 {
+	[TypeExtensionPoint]
 	public interface IImageExporter
 	{
+		/// <summary>
+		/// Exports a document to a file.
+		/// </summary>
 		void Export (Document document, string fileName);
 	}
 }

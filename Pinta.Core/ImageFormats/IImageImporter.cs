@@ -25,11 +25,19 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Addins;
 
 namespace Pinta.Core
 {
+	[TypeExtensionPoint]
 	public interface IImageImporter
 	{
+		/// <summary>
+		/// Imports a document into Pinta.
+		/// </summary>
+		/// <param name='fileName'>
+		/// The name of the file to be imported.
+		/// </param>
 		void Import (string fileName);
 	}
 }
