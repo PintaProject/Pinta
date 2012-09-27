@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-12 01:45-0400\n"
+"POT-Creation-Date: 2012-09-27 19:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,14 +25,14 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr ""
 
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:41
-#: Pinta/Actions/Edit/PasteAction.cs:100
+#: Pinta.Tools/Tools/MoveSelectedTool.cs:43
+#: Pinta/Actions/Edit/PasteAction.cs:104
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 msgid "Move Selected Pixels"
 msgstr ""
 
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:47
+#: Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid "Drag the selection to move selected content."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "9 x 9 Region"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:113 Pinta.Core/Classes/Document.cs:300
+#: Pinta.Tools/Tools/ColorPickerTool.cs:113 Pinta.Core/Classes/Document.cs:290
 msgid "Layer"
 msgstr ""
 
@@ -96,19 +96,43 @@ msgstr ""
 msgid "Pencil"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:45
+#: Pinta.Tools/Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr ""
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr ""
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr ""
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr ""
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr ""
+
+#: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:53
+#: Pinta.Tools/Tools/MagicWandTool.cs:112
 msgid "Click to select region of similar color."
 msgstr ""
 
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:41
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:43
 msgid "Move Selection"
 msgstr ""
 
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:47
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:49
 msgid "Drag the selection to move selection outline."
 msgstr ""
 
@@ -383,11 +407,11 @@ msgid ""
 "right click to use the secondary color."
 msgstr ""
 
-#: Pinta.Tools/Tools/LassoSelectTool.cs:44
+#: Pinta.Tools/Tools/LassoSelectTool.cs:48
 msgid "Lasso Select"
 msgstr ""
 
-#: Pinta.Tools/Tools/LassoSelectTool.cs:46
+#: Pinta.Tools/Tools/LassoSelectTool.cs:50
 msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
@@ -446,16 +470,28 @@ msgstr ""
 msgid "label1"
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:80
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:94
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:98
 msgid "Choose Secondary Color"
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:117
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
 msgid "Choose Palette Color"
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:216
+msgid "Click to switch between primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:218
+msgid "Click to select primary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:220
+msgid "Click to select secondary color."
 msgstr ""
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
@@ -482,21 +518,26 @@ msgstr ""
 msgid "New palette size:"
 msgstr ""
 
-#: Pinta/Actions/Edit/PasteAction.cs:115
+#: Pinta/Actions/Edit/PasteAction.cs:75 Pinta.Core/Actions/EditActions.cs:73
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+msgid "Paste"
+msgstr ""
+
+#: Pinta/Actions/Edit/PasteAction.cs:121
 msgid "Image larger than canvas"
 msgstr ""
 
-#: Pinta/Actions/Edit/PasteAction.cs:116
+#: Pinta/Actions/Edit/PasteAction.cs:122
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 
-#: Pinta/Actions/Edit/PasteAction.cs:120
+#: Pinta/Actions/Edit/PasteAction.cs:126
 msgid "Expand canvas"
 msgstr ""
 
-#: Pinta/Actions/Edit/PasteAction.cs:121
+#: Pinta/Actions/Edit/PasteAction.cs:127
 msgid "Don't change canvas size"
 msgstr ""
 
@@ -541,7 +582,7 @@ msgstr ""
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Actions/EditActions.cs:352
+#: Pinta.Core/Actions/EditActions.cs:353
 msgid "Error"
 msgstr ""
 
@@ -578,7 +619,7 @@ msgid "Image files"
 msgstr ""
 
 #: Pinta/Actions/File/OpenDocumentAction.cs:68
-#: Pinta.Core/Actions/EditActions.cs:335
+#: Pinta.Core/Actions/EditActions.cs:336
 msgid "All files"
 msgstr ""
 
@@ -634,6 +675,7 @@ msgid "Height:"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+#: Pinta/Dialogs/ResizeImageDialog.cs:38
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 msgid "Resize Image"
 msgstr ""
@@ -654,7 +696,7 @@ msgid "Maintain aspect ratio"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Classes/Document.cs:629
+#: Pinta/Dialogs/ResizeCanvasDialog.cs:39 Pinta.Core/Classes/Document.cs:621
 msgid "Resize Canvas"
 msgstr ""
 
@@ -662,39 +704,39 @@ msgstr ""
 msgid "Anchor:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:114
+#: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:126
+#: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:137
+#: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:140
+#: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:146
+#: Pinta/Dialogs/AboutDialog.cs:152
 msgid "Based on the work of Paint.NET:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:153
+#: Pinta/Dialogs/AboutDialog.cs:159
 msgid "Using some icons from:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:161
+#: Pinta/Dialogs/AboutDialog.cs:167
 msgid "Powered by Mono:"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:270
+#: Pinta/Dialogs/AboutDialog.cs:274
 msgid "About Pinta"
 msgstr ""
 
-#: Pinta/Dialogs/AboutDialog.cs:288
+#: Pinta/Dialogs/AboutDialog.cs:292
 msgid "Version Info"
 msgstr ""
 
@@ -876,7 +918,11 @@ msgstr ""
 msgid "Open Image"
 msgstr ""
 
-#: Pinta.Core/Managers/WorkspaceManager.cs:308
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr ""
+
+#: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr ""
@@ -926,22 +972,22 @@ msgid "Open"
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:287
+#: Pinta.Core/Actions/LayerActions.cs:292
 msgid "Add New Layer"
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:270
+#: Pinta.Core/Actions/LayerActions.cs:275
 msgid "Delete Layer"
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:261
+#: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:68
-#: Pinta.Core/Actions/LayerActions.cs:239
+#: Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
 msgstr ""
 
@@ -962,12 +1008,12 @@ msgid "Rotate / Zoom Layer..."
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:217
+#: Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
 msgstr ""
 
 #: Pinta.Core/Actions/LayerActions.cs:74
-#: Pinta.Core/Actions/LayerActions.cs:228
+#: Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
 msgstr ""
 
@@ -975,7 +1021,7 @@ msgstr ""
 msgid "Layer Properties..."
 msgstr ""
 
-#: Pinta.Core/Actions/LayerActions.cs:183
+#: Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
 msgstr ""
 
@@ -987,7 +1033,7 @@ msgstr ""
 msgid "Redo"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:220
+#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:222
 msgid "Cut"
 msgstr ""
 
@@ -999,11 +1045,6 @@ msgstr ""
 msgid "Copy Merged"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:73
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
-msgid "Paste"
-msgstr ""
-
 #: Pinta.Core/Actions/EditActions.cs:75
 msgid "Paste Into New Image"
 msgstr ""
@@ -1012,15 +1053,15 @@ msgstr ""
 msgid "Delete Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:182
+#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:184
 msgid "Fill Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:78
+#: Pinta.Core/Actions/EditActions.cs:78 Pinta.Core/Actions/EditActions.cs:407
 msgid "Invert Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:79 Pinta.Core/Actions/EditActions.cs:191
+#: Pinta.Core/Actions/EditActions.cs:79 Pinta.Core/Actions/EditActions.cs:193
 msgid "Select All"
 msgstr ""
 
@@ -1040,38 +1081,38 @@ msgstr ""
 msgid "Add-in Manager"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:222
+#: Pinta.Core/Actions/EditActions.cs:224
 msgid "Erase Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:231
+#: Pinta.Core/Actions/EditActions.cs:233
 msgid "Deselect"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:324
+#: Pinta.Core/Actions/EditActions.cs:325
 msgid "Open Palette File"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:331
+#: Pinta.Core/Actions/EditActions.cs:332
 msgid "Palette files (*.txt, *.gpl)"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:351
+#: Pinta.Core/Actions/EditActions.cs:352
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:364
+#: Pinta.Core/Actions/EditActions.cs:365
 msgid "Save Palette File"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:370
+#: Pinta.Core/Actions/EditActions.cs:371
 msgid "Paint.NET palette (*.txt)"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:375
+#: Pinta.Core/Actions/EditActions.cs:376
 msgid "GIMP palette (*.gpl)"
 msgstr ""
 
@@ -1108,7 +1149,7 @@ msgid "Rotate 180°"
 msgstr ""
 
 #: Pinta.Core/Actions/ImageActions.cs:68
-#: Pinta.Core/Actions/ImageActions.cs:135
+#: Pinta.Core/Actions/ImageActions.cs:137
 msgid "Flatten"
 msgstr ""
 
@@ -1181,8 +1222,8 @@ msgid "Fullscreen"
 msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:88 Pinta.Core/Actions/ViewActions.cs:216
-#: Pinta.Core/Classes/DocumentWorkspace.cs:229
-#: Pinta.Core/Classes/DocumentWorkspace.cs:237
+#: Pinta.Core/Classes/DocumentWorkspace.cs:238
+#: Pinta.Core/Classes/DocumentWorkspace.cs:246
 msgid "Window"
 msgstr ""
 
@@ -1190,7 +1231,7 @@ msgstr ""
 msgid "Ruler Units"
 msgstr ""
 
-#: Pinta.Core/Classes/Document.cs:373
+#: Pinta.Core/Classes/Document.cs:362
 msgid "copy"
 msgstr ""
 
@@ -1297,6 +1338,7 @@ msgid "Flip Layer Vertical"
 msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
+#: Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 msgid "Levels Adjustment"
 msgstr ""
 
@@ -1340,6 +1382,7 @@ msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 msgid "Curves"
 msgstr ""
 
@@ -1373,6 +1416,7 @@ msgstr ""
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
 msgid "Posterize"
 msgstr ""
 
@@ -2011,32 +2055,4 @@ msgstr ""
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:53
-msgid "Replace"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:55
-msgid "Exclude (-) (Right Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:56
-msgid "Xor (Ctrl + Right Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:57
-msgid "Intersect (Shift + Left Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:70
-msgid " Selection Mode: "
-msgstr ""
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
-msgid "Permission denied"
 msgstr ""

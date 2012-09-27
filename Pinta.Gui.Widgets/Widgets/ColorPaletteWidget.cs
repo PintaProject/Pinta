@@ -48,7 +48,11 @@ namespace Pinta.Gui.Widgets
 			
 			swap_icon = PintaCore.Resources.GetIcon ("ColorPalette.SwapIcon.png");
 			palette = PintaCore.Palette.CurrentPalette;
+
+			HasTooltip = true;
+			QueryTooltip += HandleQueryTooltip;
 		}
+
 
 		public void Initialize ()
 		{
@@ -197,6 +201,27 @@ namespace Pinta.Gui.Widgets
 			row = (y - 60) / 15;
 			
 			return (col + row >= palette.Count) ? -1 : col + row;
+		}
+
+		/// <summary>
+		/// Provide a custom tooltip based on the cursor location.
+		/// </summary>
+		private void HandleQueryTooltip (object o, Gtk.QueryTooltipArgs args)
+		{
+			int x = args.X;
+			int y = args.Y;
+			string text = null;
+
+			if (swap_rect.ContainsPoint (x, y)) {
+				text = Catalog.GetString ("Click to switch between primary and secondary color.");
+			} else if (primary_rect.ContainsPoint (x, y)) {
+				text = Catalog.GetString ("Click to select primary color.");
+			} else if (secondary_rect.ContainsPoint (x, y)) {
+				text = Catalog.GetString ("Click to select secondary color.");
+			}
+
+			args.Tooltip.Text = text;
+			args.RetVal = (text != null);
 		}
 	}
 }
