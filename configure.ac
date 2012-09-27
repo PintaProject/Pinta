@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([pinta], [1.4])
+AC_INIT([pinta], [1.5])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
 
 
