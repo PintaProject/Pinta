@@ -110,7 +110,6 @@
     <Compile Include="Actions\Edit\ResizePaletteAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewLayerAction.cs" />
-    <Compile Include="Actions\Edit\AddinManagerAction.cs" />
     <Compile Include="Actions\File\CloseDocumentAction.cs" />
     <Compile Include="Actions\File\SaveDocumentImplementationAction.cs" />
     <Compile Include="Actions\File\ModifyCompressionAction.cs" />
@@ -183,6 +182,7 @@
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Pads\OpenImagesPad.cs" />
+    <Compile Include="Actions\Addins\AddinManagerAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
@@ -216,4 +216,7 @@
     <Content Include="Pinta.ico" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Actions\Addins\" />
+  </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 19:27-0400\n"
+"POT-Creation-Date: 2012-09-27 21:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -518,7 +518,7 @@ msgstr ""
 msgid "New palette size:"
 msgstr ""
 
-#: Pinta/Actions/Edit/PasteAction.cs:75 Pinta.Core/Actions/EditActions.cs:73
+#: Pinta/Actions/Edit/PasteAction.cs:75 Pinta.Core/Actions/EditActions.cs:72
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
 msgstr ""
@@ -542,7 +542,7 @@ msgid "Don't change canvas size"
 msgstr ""
 
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
-#: Pinta.Core/Actions/EditActions.cs:74
+#: Pinta.Core/Actions/EditActions.cs:73
 msgid "Paste Into New Layer"
 msgstr ""
 
@@ -582,7 +582,7 @@ msgstr ""
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Actions/EditActions.cs:353
+#: Pinta.Core/Actions/EditActions.cs:347
 msgid "Error"
 msgstr ""
 
@@ -619,7 +619,7 @@ msgid "Image files"
 msgstr ""
 
 #: Pinta/Actions/File/OpenDocumentAction.cs:68
-#: Pinta.Core/Actions/EditActions.cs:336
+#: Pinta.Core/Actions/EditActions.cs:330
 msgid "All files"
 msgstr ""
 
@@ -829,19 +829,23 @@ msgstr ""
 msgid "Effe_cts"
 msgstr ""
 
-#: Pinta/MainWindow.cs:134
+#: Pinta/MainWindow.cs:133
+msgid "A_dd-ins"
+msgstr ""
+
+#: Pinta/MainWindow.cs:135
 msgid "_Window"
 msgstr ""
 
-#: Pinta/MainWindow.cs:138
+#: Pinta/MainWindow.cs:139
 msgid "Tool Windows"
 msgstr ""
 
-#: Pinta/MainWindow.cs:142
+#: Pinta/MainWindow.cs:143
 msgid "_Help"
 msgstr ""
 
-#: Pinta/MainWindow.cs:160 Pinta.Core/Actions/HelpActions.cs:53
+#: Pinta/MainWindow.cs:161 Pinta.Core/Actions/HelpActions.cs:53
 msgid "About"
 msgstr ""
 
@@ -883,7 +887,7 @@ msgid "Documents"
 msgstr ""
 
 #: Pinta/Pads/ColorPalettePad.cs:42 Pinta/Pads/ColorPalettePad.cs:49
-#: Pinta.Core/Actions/EditActions.cs:128
+#: Pinta.Core/Actions/EditActions.cs:125
 msgid "Palette"
 msgstr ""
 
@@ -927,6 +931,10 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr ""
 
+#: Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager"
+msgstr ""
+
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
 msgstr ""
@@ -935,7 +943,7 @@ msgstr ""
 msgid "New Screenshot..."
 msgstr ""
 
-#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:82
+#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:81
 msgid "Open..."
 msgstr ""
 
@@ -951,7 +959,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:83
+#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:82
 msgid "Save As..."
 msgstr ""
 
@@ -1025,94 +1033,90 @@ msgstr ""
 msgid "Import From File"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:68
+#: Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:69
+#: Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:222
+#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:71
+#: Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:72
+#: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:75
+#: Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:76
+#: Pinta.Core/Actions/EditActions.cs:75
 msgid "Delete Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:184
+#: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:78 Pinta.Core/Actions/EditActions.cs:407
+#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:401
 msgid "Invert Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:79 Pinta.Core/Actions/EditActions.cs:193
+#: Pinta.Core/Actions/EditActions.cs:78 Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:80
+#: Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:84
+#: Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:85
+#: Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:87
-msgid "Add-in Manager"
-msgstr ""
-
-#: Pinta.Core/Actions/EditActions.cs:224
+#: Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:233
+#: Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:325
+#: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:332
+#: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:352
+#: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:365
+#: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:371
+#: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
 msgstr ""
 
-#: Pinta.Core/Actions/EditActions.cs:376
+#: Pinta.Core/Actions/EditActions.cs:370
 msgid "GIMP palette (*.gpl)"
 msgstr ""
 

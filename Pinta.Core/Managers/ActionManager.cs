@@ -40,6 +40,7 @@ namespace Pinta.Core
 		public LayerActions Layers { get; private set; }
 		public AdjustmentsActions Adjustments { get; private set; }
 		public EffectsActions Effects { get; private set; }
+		public AddinActions Addins { get; private set; }
 		public WindowActions Window { get; private set; }
 		public HelpActions Help { get; private set; }
 		
@@ -54,6 +55,7 @@ namespace Pinta.Core
 			Layers = new LayerActions ();
 			Adjustments = new AdjustmentsActions ();
 			Effects = new EffectsActions ();
+			Addins = new AddinActions ();
 			Window = new WindowActions ();
 			Help = new HelpActions ();
 		}
@@ -94,13 +96,18 @@ namespace Pinta.Core
 			eff.Submenu = new Menu ();
 			Effects.CreateMainMenu ((Menu)eff.Submenu);
 
+			// Add-ins menu
+			ImageMenuItem addins = (ImageMenuItem)menu.Children[7];
+			addins.Submenu = new Menu ();
+			Addins.CreateMainMenu ((Menu)addins.Submenu);
+
 			// Window menu
-			ImageMenuItem window = (ImageMenuItem)menu.Children[7];
+			ImageMenuItem window = (ImageMenuItem)menu.Children[8];
 			window.Submenu = new Menu ();
 			Window.CreateMainMenu ((Menu)window.Submenu);
 			
 			//Help menu
-			ImageMenuItem help = (ImageMenuItem)menu.Children[8];
+			ImageMenuItem help = (ImageMenuItem)menu.Children[9];
 			help.Submenu = new Menu ();
 			Help.CreateMainMenu ((Menu)help.Submenu);
 		}

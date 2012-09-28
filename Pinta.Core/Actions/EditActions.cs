@@ -50,7 +50,6 @@ namespace Pinta.Core
 		public Gtk.Action SavePalette { get; private set; }
 		public Gtk.Action ResetPalette { get; private set; }
 		public Gtk.Action ResizePalette { get; private set; }
-		public Gtk.Action AddinManager { get; private set; }
 		
 		private string lastPaletteDir = null;
 		
@@ -84,8 +83,6 @@ namespace Pinta.Core
 			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("Reset to Default"), null, Stock.RevertToSaved);
 			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
 
-			AddinManager = new Gtk.Action ("AddinManager", Catalog.GetString ("Add-in Manager"), null, "Menu.Edit.Addins.png");
-			
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
@@ -131,9 +128,6 @@ namespace Pinta.Core
 			palette_menu.Append (SavePalette.CreateMenuItem ());
 			palette_menu.Append (ResetPalette.CreateMenuItem ());
 			palette_menu.Append (ResizePalette.CreateMenuItem ());
-
-			menu.AppendSeparator ();
-			menu.Append (AddinManager.CreateMenuItem ());
 		}
 
 		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)

@@ -130,6 +130,7 @@ namespace Pinta
 			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("addins", Catalog.GetString ("A_dd-ins")).CreateMenuItem ());
 
 			MenuItem window_menu = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
 			window_menu.Submenu = new Menu ();

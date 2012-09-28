@@ -1,5 +1,5 @@
 ﻿// 
-// AboutDialogAction.cs
+// AddinManagerAction.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -35,12 +35,12 @@ namespace Pinta.Actions
 		#region IActionHandler Members
 		public void Initialize ()
 		{
-			PintaCore.Actions.Edit.AddinManager.Activated += Activated;
+			PintaCore.Actions.Addins.AddinManager.Activated += Activated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.Edit.AddinManager.Activated -= Activated;
+			PintaCore.Actions.Addins.AddinManager.Activated -= Activated;
 		}
 		#endregion
 

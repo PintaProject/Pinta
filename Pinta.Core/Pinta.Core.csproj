@@ -203,6 +203,7 @@
     <Compile Include="Widgets\MenuButton.cs" />
     <Compile Include="Widgets\ToolBarDropDownButton.cs" />
     <Compile Include="Clipper\Clipper.cs" />
+    <Compile Include="Actions\AddinActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
