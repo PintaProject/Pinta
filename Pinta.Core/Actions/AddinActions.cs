@@ -63,6 +63,7 @@ namespace Pinta.Core
 			addins_menu = menu;
 
 			menu.Append (AddinManager.CreateMenuItem ());
+			menu.AppendSeparator ();
 		}
 		#endregion
 	}
