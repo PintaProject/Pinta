@@ -519,12 +519,19 @@ namespace Pinta.Tools
 			DeleteSelection ();
 		}
 
-		public void PerformPaste (Gtk.Clipboard clipboard)
+		/// <summary>
+		/// Pastes text from the clipboard.
+		/// </summary>
+		/// <returns>
+		/// <c>true</c>, if the paste was successfully performed, <c>false</c> otherwise.
+		/// </returns>
+		public bool PerformPaste (Gtk.Clipboard clipboard)
 		{
 			string txt = string.Empty;
 			txt = clipboard.WaitForText ();
 			if (String.IsNullOrEmpty (txt))
-				return;
+				return false;
+
 			string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.None);
 			string endline = lines [linePos].Substring (textPos);
 			lines [linePos] = lines [linePos].Substring (0, textPos);
@@ -543,6 +550,7 @@ namespace Pinta.Tools
 			lines [linePos] += endline;
 
 			Recalculate ();
+			return true;
 		}
 		#endregion
 

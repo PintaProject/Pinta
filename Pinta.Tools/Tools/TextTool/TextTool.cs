@@ -781,7 +781,10 @@ namespace Pinta.Tools
 			if (engine.EditMode == EditingMode.NotEditing) {
 				return false;
 			}
-			engine.PerformPaste (cb);
+
+			if (!engine.PerformPaste (cb)) {
+				return false;
+			}
 			RedrawText (true, true);
 			return true;
 		}
