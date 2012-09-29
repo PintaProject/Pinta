@@ -40,12 +40,18 @@ namespace Pinta.Tools
 		public override string Name { get { return Catalog.GetString ("Paintbrush"); } }
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
-		private int iconOffsetX, iconOffsetY;
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
-			CreateEllipticalThicknessIcon("Tools.Paintbrush.png", BrushWidth, 16, 16,
-			0, 16, new Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
-			ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
+
+		public override Gdk.Cursor DefaultCursor {
+			get {
+				int iconOffsetX, iconOffsetY;
+				var icon = CreateEllipticalThicknessIcon ("Tools.Paintbrush.png", BrushWidth, 16, 16, 0, 16,
+				                                          new Cairo.Color (0, 0, 0), new Cairo.Color (255, 255, 255, .5d), 1,
+				                                          out iconOffsetX, out iconOffsetY);
+				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
+			}
+		}
 		public override bool CursorChangesOnZoom { get { return true; } }
+
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
 		public override int Priority { get { return 25; } }
 
@@ -61,18 +67,12 @@ namespace Pinta.Tools
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
 
-		void ComboBox_Changed(object sender, EventArgs e)
-		{
-			//Change the cursor when the BrushWidth is changed.
-			SetCursor(DefaultCursor);
-		}
-
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			//Change the cursor when the BrushWidth is changed.
-			brush_width.ComboBox.Changed += new EventHandler(ComboBox_Changed);
+			// Change the cursor when the BrushWidth is changed.
+			brush_width.ComboBox.Changed += (sender, e) => SetCursor (DefaultCursor);
 
 			if (brush_label == null)
 				brush_label = new ToolBarLabel (string.Format (" {0}:  ", Catalog.GetString ("Type")));

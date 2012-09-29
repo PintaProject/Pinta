@@ -68,12 +68,18 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Left click to set primary color. Right click to set secondary color."); }
 		}
-		private int iconOffsetX, iconOffsetY;
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display,
-					CreateRectangularThicknessIcon("Cursor.ColorPicker.png", SampleSize, 16, 16,
-					1, 16, new Cairo.Color(0, 0, 0), new Color(255, 255, 255, .5d), 1,
-					ref iconOffsetX, ref iconOffsetY), iconOffsetX, iconOffsetY); } }
+
+		public override Gdk.Cursor DefaultCursor {
+			get {
+				int iconOffsetX, iconOffsetY;
+				var icon = CreateRectangularThicknessIcon ("Cursor.ColorPicker.png", SampleSize, 16, 16, 1, 16,
+				                                          new Cairo.Color (0, 0, 0), new Cairo.Color (255, 255, 255, .5d), 1,
+				                                          out iconOffsetX, out iconOffsetY);
+				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
+			}
+		}
 		public override bool CursorChangesOnZoom { get { return true; } }
+
 		public override Gdk.Key ShortcutKey {
 			get { return Gdk.Key.K; }
 		}
@@ -111,8 +117,8 @@ namespace Pinta.Tools
 			if (sample_size == null) {
 				sample_size = new ToolBarDropDownButton (true);
 
-				//Change the cursor when the SampleSize is changed.
-				sample_size.SelectedItemChanged += new EventHandler(sample_size_SelectedItemChanged);
+				// Change the cursor when the SampleSize is changed.
+				sample_size.SelectedItemChanged += (sender, e) => SetCursor (DefaultCursor);
 
 				sample_size.AddItem (Catalog.GetString ("Single Pixel"), "Toolbar.Sampling.1x1.png", 1);
 				sample_size.AddItem (Catalog.GetString ("3 x 3 Region"), "Toolbar.Sampling.3x3.png", 3);
@@ -151,12 +157,6 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem (tool_select);
-		}
-
-		void sample_size_SelectedItemChanged(object sender, EventArgs e)
-		{
-			//Change the cursor when the SampleSize is changed.
-			SetCursor(DefaultCursor);
 		}
 		#endregion
 		

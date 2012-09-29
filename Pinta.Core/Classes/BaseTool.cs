@@ -290,7 +290,7 @@ namespace Pinta.Core
 		protected Gdk.Pixbuf CreateEllipticalThicknessIcon(string name, int brushWidth, int cursorWidth, int cursorHeight,
 		                                                   int cursorOffsetX, int cursorOffsetY, Color ellipseColor1,
 		                                                   Color ellipseColor2, int ellipseThickness,
-		                                                   ref int iconOffsetX, ref int iconOffsetY)
+		                                                   out int iconOffsetX, out int iconOffsetY)
 		{
 			double zoom = 1d;
 
@@ -356,7 +356,7 @@ namespace Pinta.Core
 		protected Gdk.Pixbuf CreateRectangularThicknessIcon(string name, int brushWidth, int cursorWidth, int cursorHeight,
 		                                                    int cursorOffsetX, int cursorOffsetY, Color rectangleColor1,
 		                                                    Color rectangleColor2, int rectangleThickness,
-		                                                    ref int iconOffsetX,ref int iconOffsetY)
+		                                                    out int iconOffsetX, out int iconOffsetY)
 		{
 			double zoom = 1d;
 
