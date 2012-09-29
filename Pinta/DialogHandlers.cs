@@ -44,6 +44,7 @@ namespace Pinta
 			action_handlers.Add (new OpenRecentAction ());
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
+			action_handlers.Add (new PrintDocumentAction ());
 			action_handlers.Add (new CloseDocumentAction ());
 			action_handlers.Add (new ExitProgramAction ());
 			action_handlers.Add (new ModifyCompressionAction ());
@@ -92,6 +93,7 @@ namespace Pinta
 				PintaCore.Actions.File.Close.Sensitive = false;
 				PintaCore.Actions.File.Save.Sensitive = false;
 				PintaCore.Actions.File.SaveAs.Sensitive = false;
+				PintaCore.Actions.File.Print.Sensitive = false;
 				PintaCore.Actions.Edit.Copy.Sensitive = false;
 				PintaCore.Actions.Edit.CopyMerged.Sensitive = false;
 				PintaCore.Actions.Edit.Cut.Sensitive = false;
@@ -139,6 +141,7 @@ namespace Pinta
 			PintaCore.Actions.File.Close.Sensitive = true;
 			PintaCore.Actions.File.Save.Sensitive = true;
 			PintaCore.Actions.File.SaveAs.Sensitive = true;
+			PintaCore.Actions.File.Print.Sensitive = true;
 			PintaCore.Actions.Edit.Copy.Sensitive = true;
 			PintaCore.Actions.Edit.CopyMerged.Sensitive = true;
 			PintaCore.Actions.Edit.Cut.Sensitive = true;

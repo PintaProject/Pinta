@@ -183,6 +183,7 @@
     <Compile Include="MainWindow.cs" />
     <Compile Include="Pads\OpenImagesPad.cs" />
     <Compile Include="Actions\Addins\AddinManagerAction.cs" />
+    <Compile Include="Actions\File\PrintDocumentAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
