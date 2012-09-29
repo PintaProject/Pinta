@@ -62,7 +62,6 @@ namespace Pinta.Tools
 		public override string StatusBarText {
 			get { return Catalog.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse."); }
 		}
-		
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
 		public override int Priority { get { return 23; } }
 

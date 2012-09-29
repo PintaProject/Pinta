@@ -154,6 +154,11 @@ namespace Pinta.Actions
 					format = format_type;
 
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
+
+				//The user is saving the Document to a new file, so technically it
+				//hasn't been saved to its associated file in this session.
+				document.HasBeenSavedInSession = false;
+
 				SaveFile (document, file, format);
 				RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 				PintaCore.System.ImageFormats.SetDefaultFormat (Path.GetExtension (file));
@@ -222,6 +227,9 @@ namespace Pinta.Actions
 
 			document.Filename = Path.GetFileName (file);
 			document.IsDirty = false;
+
+			//Now the Document has been saved to the file it's associated with in this session.
+			document.HasBeenSavedInSession = true;
 
 			return true;
 		}
