@@ -55,8 +55,7 @@ namespace Pinta.Gui.Widgets
 			using (Cairo.Context g = new Cairo.Context (thumbnail)) {
 				g.Scale (scalex, scaley);
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
-					g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-					g.PaintWithAlpha (layer.Opacity);
+					layer.Draw(g);
 				}
 			}
 		}

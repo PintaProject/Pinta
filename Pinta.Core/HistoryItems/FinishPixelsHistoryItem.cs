@@ -33,8 +33,8 @@ namespace Pinta.Core
 	public class FinishPixelsHistoryItem : BaseHistoryItem
 	{
 		private ImageSurface old_selection_layer;
-		private PointD old_offset;
 		private ImageSurface old_surface;
+		private readonly Matrix old_transform = new Matrix();
 
 		public override bool CausesDirty { get { return false; } }
 		
@@ -48,15 +48,16 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.ShowSelectionLayer = true;
 
-			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
+			Matrix swap_transfrom = new Matrix();
+			swap_transfrom.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
 			ImageSurface swap_surf = PintaCore.Layers.CurrentLayer.Surface;
 			ImageSurface swap_sel = PintaCore.Layers.SelectionLayer.Surface;
 
 			PintaCore.Layers.SelectionLayer.Surface = old_selection_layer;
-			PintaCore.Layers.SelectionLayer.Offset = old_offset;
+			PintaCore.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
 			PintaCore.Layers.CurrentLayer.Surface = old_surface;
 
-			old_offset = swap_offset;
+			old_transform.InitMatrix(swap_transfrom);
 			old_surface = swap_surf;
 			old_selection_layer = swap_sel;
 
@@ -66,17 +67,18 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
-			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
+			Matrix swap_transfrom = new Matrix();
+			swap_transfrom.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
 			ImageSurface swap_surf = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 			ImageSurface swap_sel = PintaCore.Layers.SelectionLayer.Surface;
 
 			PintaCore.Layers.CurrentLayer.Surface = old_surface;
 			PintaCore.Layers.SelectionLayer.Surface = old_selection_layer;
-			PintaCore.Layers.SelectionLayer.Offset = old_offset;
+			PintaCore.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
 
 			old_surface = swap_surf;
 			old_selection_layer = swap_sel;
-			old_offset = swap_offset;
+			old_transform.InitMatrix(swap_transfrom);
 
 			PintaCore.Layers.DestroySelectionLayer ();
 			PintaCore.Workspace.Invalidate ();
@@ -91,8 +93,8 @@ namespace Pinta.Core
 		public void TakeSnapshot ()
 		{
 			old_selection_layer = PintaCore.Layers.SelectionLayer.Surface.Clone ();
-			old_offset = PintaCore.Layers.SelectionLayer.Offset;
 			old_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
+			old_transform.InitMatrix(PintaCore.Layers.CurrentLayer.Transform);
 		}
 	}
 }

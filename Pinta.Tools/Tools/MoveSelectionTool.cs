@@ -33,11 +33,10 @@ using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
-	public class MoveSelectionTool : BaseTool
+	public class MoveSelectionTool : BaseTransformTool
 	{
-		private PointD origin_offset;
-		private bool is_dragging;
 		private SelectionHistoryItem hist;
+		private List<List<IntPoint>> original_selection;
 		
 		public override string Name {
 			get { return Catalog.GetString ("Move Selection"); }
@@ -55,71 +54,53 @@ namespace Pinta.Tools
 		public override int Priority { get { return 11; } }
 
 		#region Mouse Handlers
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-		{
-			// If we are already drawing, ignore any additional mouse down events
-			if (is_dragging)
-				return;
 
-			origin_offset = point;
-			is_dragging = true;
+		protected override Rectangle GetSourceRectangle ()
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			return doc.Selection.SelectionPath.GetBounds().ToCairoRectangle();
+		}
+
+		protected override void OnStartTransform ()
+		{
+			base.OnStartTransform ();
+
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
 
 			hist = new SelectionHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnUpdateTransform (Matrix transform)
 		{
-			if (!is_dragging)
-				return;
+			base.OnUpdateTransform (transform);
+
+			List<List<IntPoint>> newSelectionPolygons = DocumentSelection.Transform (original_selection, transform);
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			PointD new_offset = point;
-			
-			double dx = origin_offset.X - new_offset.X;
-			double dy = origin_offset.Y - new_offset.Y;
-
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			doc.Selection.SelectionClipper.Clear ();
+			doc.Selection.SelectionPolygons = newSelectionPolygons;
+			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+				doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (newSelectionPolygons));
 				g.FillRule = FillRule.EvenOdd;
 				g.AppendPath (doc.Selection.SelectionPath);
-				g.Translate (dx, dy);
-				doc.Selection.DisposeSelectionPreserve();
-				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
-
-			List<List<IntPoint>> newSelectionPolygons = new List<List<IntPoint>>();
-
-			foreach (List<IntPoint> ipL in doc.Selection.SelectionPolygons)
-			{
-				List<IntPoint> newPolygon = new List<IntPoint>();
-
-				foreach (IntPoint ip in ipL)
-				{
-					newPolygon.Add(new IntPoint(ip.X - (long)dx, ip.Y - (long)dy));
-				}
-
-				newSelectionPolygons.Add(newPolygon);
-			}
-
-			doc.Selection.SelectionPolygons = newSelectionPolygons;
-
-
-			origin_offset = new_offset;
 			doc.ShowSelection = true;
-			
-			(o as Gtk.DrawingArea).GdkWindow.Invalidate ();
+
+			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnFinishTransform ()
 		{
-			is_dragging = false;
+			base.OnFinishTransform ();
 
 			if (hist != null)
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
 
 			hist = null;
+			original_selection = null;
 		}
 		#endregion
 	}

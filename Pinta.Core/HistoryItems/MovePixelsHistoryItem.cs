@@ -38,7 +38,7 @@ namespace Pinta.Core
 		//   around the temporary layer
 		private Document doc;
 		private DocumentSelection old_selection;
-		private PointD old_offset;
+		private readonly Matrix old_transform = new Matrix();
 		private ImageSurface old_surface;
 		private int layer_index;
 		private bool lifted;		// Whether this item has lift
@@ -70,13 +70,13 @@ namespace Pinta.Core
 		private void Swap ()
 		{
 			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection;
-			PointD swap_offset = PintaCore.Layers.SelectionLayer.Offset;
-
 			PintaCore.Workspace.ActiveDocument.Selection = old_selection;
-			PintaCore.Layers.SelectionLayer.Offset = old_offset;
-
 			old_selection = swap_selection;
-			old_offset = swap_offset;
+
+			Matrix swap_transform = new Matrix();
+			swap_transform.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
+			PintaCore.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
+			old_transform.InitMatrix(swap_transform);
 
 			if (lifted) {
 				// Grab the original surface
@@ -106,7 +106,7 @@ namespace Pinta.Core
 			}
 				
 			old_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
-			old_offset = PintaCore.Layers.SelectionLayer.Offset;
+			old_transform.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
 		}
 	}
 }

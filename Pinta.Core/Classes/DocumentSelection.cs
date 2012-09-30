@@ -53,6 +53,42 @@ namespace Pinta.Core
 			}
 		}
 
+		public void Clip (Context g)
+		{
+			g.AppendPath (selection_path);
+			g.FillRule = FillRule.EvenOdd;
+			g.Clip ();
+		}
+
+		public void Draw (Cairo.Context g, double scale, bool fillSelection)
+		{
+			g.Save ();
+			g.Translate (0.5, 0.5);
+			g.Scale (scale, scale);
+			
+			g.AppendPath (selection_path);
+			
+			if (fillSelection)
+			{
+				g.Color = new Cairo.Color (0.7, 0.8, 0.9, 0.2);
+				g.FillRule = Cairo.FillRule.EvenOdd;
+				g.FillPreserve ();
+			}
+			
+			g.LineWidth = 1 / scale;
+			
+			// Draw a white line first so it shows up on dark backgrounds
+			g.Color = new Cairo.Color (1, 1, 1);
+			g.StrokePreserve ();
+			
+			// Draw a black dashed line over the white line
+			g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
+			g.Color = new Cairo.Color (0, 0, 0);
+			
+			g.Stroke ();
+			g.Restore ();
+		}
+
 		/// <summary>
 		/// Make a complete copy of the Selection.
 		/// </summary>
@@ -120,6 +156,26 @@ namespace Pinta.Core
 			}
 
 			return resultingPolygonSet;
+		}
+
+		public static List<List<IntPoint>> Transform (List<List<IntPoint>> selection, Matrix transform)
+		{
+			List<List<IntPoint>> newPolygons = new List<List<IntPoint>> ();
+			
+			foreach (List<IntPoint> ipL in selection) {
+				List<IntPoint> newPolygon = new List<IntPoint> ();
+				
+				foreach (IntPoint ip in ipL) {
+					double x = ip.X;
+					double y = ip.Y;
+					transform.TransformPoint (ref x, ref y);
+					newPolygon.Add (new IntPoint ((long)x, (long)y));
+				}
+				
+				newPolygons.Add (newPolygon);
+			}
+
+			return newPolygons;
 		}
 
 		/// <summary>

@@ -38,6 +38,7 @@ namespace Pinta.Core
 		private bool hidden;
 		private string name;
 		private BlendMode blend_mode;
+		private Matrix transform = new Matrix();
 
 		public Layer () : this (null)
 		{
@@ -50,8 +51,7 @@ namespace Pinta.Core
 		public Layer (ImageSurface surface, bool hidden, double opacity, string name)
 		{
 			Surface = surface;
-			Offset = new PointD (0, 0);
-			
+
 			this.hidden = hidden;
 			this.opacity = opacity;
 			this.name = name;			
@@ -60,7 +60,7 @@ namespace Pinta.Core
 		
 		public ImageSurface Surface { get; set; }
 		public bool Tiled { get; set; }	
-		public PointD Offset { get; set; }		
+		public Matrix Transform { get { return transform; } }
 		
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";
@@ -122,6 +122,20 @@ namespace Pinta.Core
 			Surface old = Surface;
 			Surface = dest.Surface;
 			(old as IDisposable).Dispose ();
+		}
+
+		public void Draw(Context ctx)
+		{
+			Draw(ctx, Surface, Opacity);
+		}
+
+		public void Draw(Context ctx, ImageSurface surface, double opacity)
+		{
+			ctx.Save();
+			ctx.Transform(Transform);
+			ctx.SetSourceSurface(surface, 0, 0);
+			ctx.PaintWithAlpha(opacity);
+			ctx.Restore();
 		}
 		
 		/// <summary>

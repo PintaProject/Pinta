@@ -240,54 +240,36 @@ namespace Pinta.Core
 
 			Selection.DisposeSelection();
 
-            Workspace.History.Clear ();
+			Workspace.History.Clear ();
 		}
 
 		public Context CreateClippedContext ()
 		{
 			Context g = new Context (CurrentLayer.Surface);
-
-			g.AppendPath (Selection.SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
-
+			Selection.Clip (g);
 			return g;
 		}
 
 		public Context CreateClippedContext (bool antialias)
 		{
 			Context g = new Context (CurrentLayer.Surface);
-
-			g.AppendPath(Selection.SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
-
+			Selection.Clip (g);
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
-
 			return g;
 		}
 
 		public Context CreateClippedToolContext ()
 		{
 			Context g = new Context (ToolLayer.Surface);
-
-			g.AppendPath(Selection.SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
-
+			Selection.Clip (g);
 			return g;
 		}
 
 		public Context CreateClippedToolContext (bool antialias)
 		{
 			Context g = new Context (ToolLayer.Surface);
-
-			g.AppendPath(Selection.SelectionPath);
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.Clip ();
-
+			Selection.Clip (g);
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
-
 			return g;
 		}
 
@@ -358,7 +340,7 @@ namespace Pinta.Core
 		{
 			ShowSelectionLayer = false;
 			SelectionLayer.Clear ();
-			SelectionLayer.Offset = new PointD (0, 0);
+			SelectionLayer.Transform.InitIdentity();
 		}
 
 		// Duplicate current layer
@@ -397,12 +379,7 @@ namespace Pinta.Core
 			Layer layer = SelectionLayer;
 
 			using (Cairo.Context g = new Cairo.Context (CurrentLayer.Surface)) {
-				g.Save ();
-
-				g.SetSourceSurface (layer.Surface, (int)layer.Offset.X, (int)layer.Offset.Y);
-				g.PaintWithAlpha (layer.Opacity);
-
-				g.Restore ();
+				layer.Draw(g);
 			}
 
 			DestroySelectionLayer ();
