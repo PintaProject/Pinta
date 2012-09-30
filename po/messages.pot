@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:37-0400\n"
+"POT-Creation-Date: 2012-09-30 15:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,13 +27,15 @@ msgstr ""
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta/Actions/Edit/PasteAction.cs:104
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 msgid "Move Selected Pixels"
 msgstr ""
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:49
-msgid "Drag the selection to move selected content."
+msgid ""
+"Left click and drag the selection to move selected content. Right click and "
+"drag the selection to rotate selected content."
 msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:63
@@ -44,55 +46,55 @@ msgstr ""
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:94
+#: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:101
+#: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:102
+#: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:103
+#: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:104
+#: Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:105
+#: Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:113 Pinta.Core/Classes/Document.cs:290
+#: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
 msgid "Layer"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:114
+#: Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:125
+#: Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:132
+#: Pinta.Tools/Tools/ColorPickerTool.cs:154
 msgid "Do not switch tool"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:133
+#: Pinta.Tools/Tools/ColorPickerTool.cs:155
 msgid "Switch to previous tool"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:134
+#: Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:187 Pinta.Tools/Tools/PencilTool.cs:47
+#: Pinta.Tools/Tools/ColorPickerTool.cs:209 Pinta.Tools/Tools/PencilTool.cs:47
 msgid "Pencil"
 msgstr ""
 
@@ -128,12 +130,14 @@ msgstr ""
 msgid "Click to select region of similar color."
 msgstr ""
 
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:43
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
 msgstr ""
 
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:49
-msgid "Drag the selection to move selection outline."
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:48
+msgid ""
+"Left click and drag the selection to move selection outline. Right click and "
+"drag the selection to rotate selection outline."
 msgstr ""
 
 #: Pinta.Tools/Tools/PaintBrushTool.cs:40 Pinta/MainWindow.cs:65
@@ -147,7 +151,7 @@ msgid ""
 "color."
 msgstr ""
 
-#: Pinta.Tools/Tools/PaintBrushTool.cs:63
+#: Pinta.Tools/Tools/PaintBrushTool.cs:78
 msgid "Type"
 msgstr ""
 
@@ -177,15 +181,15 @@ msgstr ""
 msgid "Tolerance"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:70 Pinta.Tools/Tools/ShapeTool.cs:99
+#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Tools/ShapeTool.cs:99
 msgid "Brush width"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:75 Pinta.Tools/Tools/ShapeTool.cs:104
+#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Tools/ShapeTool.cs:104
 msgid "Decrease brush size"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:89 Pinta.Tools/Tools/ShapeTool.cs:118
+#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Tools/ShapeTool.cs:118
 msgid "Increase brush size"
 msgstr ""
 
@@ -351,7 +355,7 @@ msgid ""
 "shift to constrain to a square."
 msgstr ""
 
-#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:166
+#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:165
 msgid "Gradient"
 msgstr ""
 
@@ -361,23 +365,23 @@ msgid ""
 "click to reverse."
 msgstr ""
 
-#: Pinta.Tools/Tools/GradientTool.cs:173
+#: Pinta.Tools/Tools/GradientTool.cs:172
 msgid "Linear Gradient"
 msgstr ""
 
-#: Pinta.Tools/Tools/GradientTool.cs:174
+#: Pinta.Tools/Tools/GradientTool.cs:173
 msgid "Linear Reflected Gradient"
 msgstr ""
 
-#: Pinta.Tools/Tools/GradientTool.cs:175
+#: Pinta.Tools/Tools/GradientTool.cs:174
 msgid "Linear Diamond Gradient"
 msgstr ""
 
-#: Pinta.Tools/Tools/GradientTool.cs:176
+#: Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Radial Gradient"
 msgstr ""
 
-#: Pinta.Tools/Tools/GradientTool.cs:177
+#: Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Conical Gradient"
 msgstr ""
 
@@ -423,11 +427,11 @@ msgstr ""
 msgid "Ctrl-left click to set origin, left click to paint."
 msgstr ""
 
-#: Pinta.Tools/Tools/EraserTool.cs:44
+#: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
 msgstr ""
 
-#: Pinta.Tools/Tools/EraserTool.cs:46
+#: Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -576,34 +580,34 @@ msgstr ""
 msgid "Save Image File"
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:181
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
 #: Pinta.Core/Actions/EditActions.cs:347
 msgid "Error"
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:193
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
 msgid "Cannot save read only file."
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:208
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr ""
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -696,7 +700,7 @@ msgid "Maintain aspect ratio"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta/Dialogs/ResizeCanvasDialog.cs:39 Pinta.Core/Classes/Document.cs:621
+#: Pinta/Dialogs/ResizeCanvasDialog.cs:39 Pinta.Core/Classes/Document.cs:604
 msgid "Resize Canvas"
 msgstr ""
 
@@ -744,7 +748,7 @@ msgstr ""
 msgid "JPEG Quality"
 msgstr ""
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:46
+#: Pinta/Dialogs/JpegCompressionDialog.cs:49
 msgid "Quality: "
 msgstr ""
 
@@ -905,7 +909,7 @@ msgstr ""
 msgid "No tool selected."
 msgstr ""
 
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
+#: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
 msgstr ""
 
@@ -1226,8 +1230,8 @@ msgid "Fullscreen"
 msgstr ""
 
 #: Pinta.Core/Actions/ViewActions.cs:88 Pinta.Core/Actions/ViewActions.cs:216
-#: Pinta.Core/Classes/DocumentWorkspace.cs:238
-#: Pinta.Core/Classes/DocumentWorkspace.cs:246
+#: Pinta.Core/Classes/DocumentWorkspace.cs:244
+#: Pinta.Core/Classes/DocumentWorkspace.cs:252
 msgid "Window"
 msgstr ""
 
@@ -1235,31 +1239,31 @@ msgstr ""
 msgid "Ruler Units"
 msgstr ""
 
-#: Pinta.Core/Classes/Document.cs:362
+#: Pinta.Core/Classes/Document.cs:350
 msgid "copy"
 msgstr ""
 
-#: Pinta.Core/Classes/BaseTool.cs:190
+#: Pinta.Core/Classes/BaseTool.cs:192
 msgid "Tool"
 msgstr ""
 
-#: Pinta.Core/Classes/BaseTool.cs:257
+#: Pinta.Core/Classes/BaseTool.cs:263
 msgid "Shortcut key"
 msgstr ""
 
-#: Pinta.Core/Classes/BaseTool.cs:280
+#: Pinta.Core/Classes/BaseTool.cs:418
 msgid "Normal Blending"
 msgstr ""
 
-#: Pinta.Core/Classes/BaseTool.cs:281
+#: Pinta.Core/Classes/BaseTool.cs:419
 msgid "Overwrite"
 msgstr ""
 
-#: Pinta.Core/Classes/BaseTool.cs:295
+#: Pinta.Core/Classes/BaseTool.cs:433
 msgid "Antialiasing On"
 msgstr ""
 
-#: Pinta.Core/Classes/BaseTool.cs:296
+#: Pinta.Core/Classes/BaseTool.cs:434
 msgid "Antialiasing Off"
 msgstr ""
 
