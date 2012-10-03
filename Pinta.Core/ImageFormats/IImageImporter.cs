@@ -39,5 +39,22 @@ namespace Pinta.Core
 		/// The name of the file to be imported.
 		/// </param>
 		void Import (string fileName);
+
+		/// <summary>
+		/// Returns a thumbnail of an image.
+		/// If the format provides an efficient way to load a thumbnail (such as
+		/// with the OpenRaster format), it is suggested to use that method to
+		/// load the thumbnail if possible.
+		/// </summary>
+		/// <returns>
+		/// The thumbnail, or null if the image could not be loaded.
+		/// </returns>			
+		/// <param name='maxWidth'>
+		/// The maximum width of the thumbnail.
+		/// </param>
+		/// <param name='maxHeight'>
+		/// The maximum height of the thumbnail.
+		/// </param>
+		Gdk.Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight);
 	}
 }

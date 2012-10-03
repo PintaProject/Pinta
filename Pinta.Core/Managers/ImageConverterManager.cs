@@ -162,9 +162,13 @@ namespace Pinta.Core
 		public IImageImporter GetImporterByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
-			return GetImporterByExtension (extension);
-		}
 
+			if (extension == null) {
+				return null;
+			} else {
+				return GetImporterByExtension (extension);
+			}
+		}
 
 		public void SetDefaultFormat (string extension)
 		{

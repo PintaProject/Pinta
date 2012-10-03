@@ -39,7 +39,9 @@ namespace Pinta.Core
 		{
 			this.filetype = filetype;
 		}
-	
+
+		#region IImageImporter implementation
+
 		public void Import (string fileName)
 		{
 			Pixbuf bg;
@@ -66,6 +68,30 @@ namespace Pinta.Core
 
 			bg.Dispose ();
 		}
+
+		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight)
+		{
+			int imageWidth;
+			int imageHeight;
+			Pixbuf pixbuf = null;
+
+			var imageInfo = Gdk.Pixbuf.GetFileInfo (filename, out imageWidth, out imageHeight);
+
+			if (imageInfo == null) {
+				return null;
+			}
+
+			// Scale down images that are too large, but don't scale up small images.
+			if (imageWidth > maxWidth || imageHeight > maxHeight) {
+				pixbuf = new Gdk.Pixbuf (filename, maxWidth, maxHeight, true);
+			} else {
+				pixbuf = new Gdk.Pixbuf (filename);
+			}
+
+			return pixbuf;
+		}
+
+		#endregion
 		
 		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType)
 		{

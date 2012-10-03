@@ -40,6 +40,8 @@ namespace Pinta.Core
 	public class OraFormat: IImageImporter, IImageExporter
 	{
 		private const int ThumbMaxSize = 256;
+
+		#region IImageImporter implementation
 		
 		public void Import (string fileName) {
 			ZipFile file = new ZipFile (fileName);
@@ -118,6 +120,21 @@ namespace Pinta.Core
 			
 			file.Close ();
 		}
+
+		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight)
+		{
+			ZipFile file = new ZipFile (filename);
+			ZipEntry ze = file.GetEntry ("Thumbnails/thumbnail.png");
+
+			// The ORA specification requires that all files will have a
+			// thumbnail that is less than 256x256 pixels, so don't bother
+			// with scaling the preview.
+			Pixbuf p = new Pixbuf (file.GetInputStream (ze));
+			file.Close ();
+			return p;
+		}
+
+		#endregion
 		
 		private static IFormatProvider GetFormat () {
 			return System.Globalization.CultureInfo.CreateSpecificCulture ("en");

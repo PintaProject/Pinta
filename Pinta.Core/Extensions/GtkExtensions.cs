@@ -158,42 +158,30 @@ namespace Pinta.Core
 			FileChooserDialog dialog = (FileChooserDialog)sender;
 			Image preview = (Image)dialog.PreviewWidget;
 
-            if (preview.Pixbuf != null)
-            {
-                preview.Pixbuf.Dispose ();
-            }
-
-			try
-			{
-                Gdk.Pixbuf pixbuf = null;
-                int imageWidth, imageHeight;
-                string filename = dialog.PreviewFilename;
-
-                var imageInfo = Gdk.Pixbuf.GetFileInfo (filename, out imageWidth, out imageHeight);
-
-                if (imageInfo == null)
-                {
-                    dialog.PreviewWidgetActive = false;
-                    return;
-                }
-
-                // scale down images that are too large, but don't scale up small images
-                if (imageWidth > MaxPreviewWidth || imageHeight > MaxPreviewHeight)
-                {
-                    pixbuf = new Gdk.Pixbuf (filename, MaxPreviewWidth, MaxPreviewHeight, true);
-                }
-                else
-                {
-                    pixbuf = new Gdk.Pixbuf (filename);
-                }
-
-                // add padding so that small images don't cause the dialog to shrink
-                preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
-                preview.Pixbuf = pixbuf;
-                dialog.PreviewWidgetActive = true;
+			if (preview.Pixbuf != null) {
+				preview.Pixbuf.Dispose ();
 			}
-			catch (GLib.GException)
-			{
+
+			try {
+				Gdk.Pixbuf pixbuf = null;
+				string filename = dialog.PreviewFilename;
+
+				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (filename);
+
+				if (importer != null) {
+					pixbuf = importer.LoadThumbnail (filename, MaxPreviewWidth, MaxPreviewHeight);
+				}
+
+				if (pixbuf == null) {
+					dialog.PreviewWidgetActive = false;
+					return;
+				}
+
+				// add padding so that small images don't cause the dialog to shrink
+				preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
+				preview.Pixbuf = pixbuf;
+				dialog.PreviewWidgetActive = true;
+			} catch (GLib.GException) {
 				// if the image preview failed, don't show the preview widget
 				dialog.PreviewWidgetActive = false;
 			}
