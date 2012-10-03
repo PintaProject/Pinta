@@ -97,7 +97,6 @@ namespace Pinta
 				PintaCore.Actions.Edit.Copy.Sensitive = false;
 				PintaCore.Actions.Edit.CopyMerged.Sensitive = false;
 				PintaCore.Actions.Edit.Cut.Sensitive = false;
-				PintaCore.Actions.Edit.Paste.Sensitive = false;
 				PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = false;
 				PintaCore.Actions.Edit.SelectAll.Sensitive = false;
 
@@ -145,7 +144,6 @@ namespace Pinta
 			PintaCore.Actions.Edit.Copy.Sensitive = true;
 			PintaCore.Actions.Edit.CopyMerged.Sensitive = true;
 			PintaCore.Actions.Edit.Cut.Sensitive = true;
-			PintaCore.Actions.Edit.Paste.Sensitive = true;
 			PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = true;
 			PintaCore.Actions.Edit.SelectAll.Sensitive = true;
 

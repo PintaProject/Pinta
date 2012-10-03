@@ -54,8 +54,6 @@ namespace Pinta.Actions
 			if (PintaCore.Tools.CurrentTool.TryHandlePaste (cb))
 				return;
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			PintaCore.Tools.Commit ();
 
 			Path p;
@@ -68,7 +66,13 @@ namespace Pinta.Actions
 				Dialogs.ClipboardEmptyDialog.Show ();
 				return;
 			}
+			else if (!PintaCore.Workspace.HasOpenDocuments) {
+				// Create a new document if no documents are open.
+				PintaCore.Workspace.NewDocument (new Gdk.Size (image.Width, image.Height), true);
+			}
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			
 			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
 
 			// Merge the (optional) canvas resize and the pasted image into a single history item.
