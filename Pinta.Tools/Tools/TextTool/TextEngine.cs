@@ -184,6 +184,10 @@ namespace Pinta.Tools
 		{
 			var font = Pango.FontDescription.FromString (string.Format ("{0} {1}", face, size));
 
+			// Forces font variants to be rendered properly
+			// (e.g. this will use "Ubuntu Condensed" instead of "Ubuntu").
+			font.Family = face;
+
 			font.Weight = bold ? Pango.Weight.Bold : Pango.Weight.Normal;
 			font.Style = italic ? Pango.Style.Italic : Pango.Style.Normal;
 
