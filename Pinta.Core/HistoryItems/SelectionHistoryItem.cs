@@ -33,6 +33,7 @@ namespace Pinta.Core
 	{
 		private DocumentSelection old_selection;
 		private bool show_selection;
+		private bool hide_tool_layer;
 
 		public override bool CausesDirty { get { return false; } }
 
@@ -57,22 +58,28 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection;
+			var doc = PintaCore.Workspace.ActiveDocument;
+			DocumentSelection swap_selection = doc.Selection;
 			bool swap_show = PintaCore.Layers.ShowSelection;
+			bool swap_hide_tool_layer = doc.ToolLayer.Hidden;
 
-			PintaCore.Workspace.ActiveDocument.Selection = old_selection;
+			doc.Selection = old_selection;
 			PintaCore.Layers.ShowSelection = show_selection;
+			doc.ToolLayer.Hidden = hide_tool_layer;
 
 			old_selection = swap_selection;
 			show_selection = swap_show;
+			hide_tool_layer = swap_hide_tool_layer;
 			
 			PintaCore.Workspace.Invalidate ();
 		}
 		
 		public void TakeSnapshot ()
 		{
-			old_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
+			var doc = PintaCore.Workspace.ActiveDocument;
+			old_selection = doc.Selection.Clone ();
 			show_selection = PintaCore.Layers.ShowSelection;
+			hide_tool_layer = doc.ToolLayer.Hidden;
 		}
 	}
 }
