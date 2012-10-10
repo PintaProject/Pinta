@@ -6,8 +6,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Cairo;
 using Rectangle = Gdk.Rectangle;
 
@@ -159,8 +160,7 @@ namespace Pinta.Core
 					}
 				} else {
 					var mainrect = rect;
-					var list = new List<int>(new Utility.RangeEnumerable(rect.Top, rect.GetBottom() + 1));
-					Parallel.ForEach(list.ToArray(),
+					Parallel.ForEach(Enumerable.Range (rect.Top, rect.GetBottom () + 1),
 						(y) => ProcessGradientLine(startAlpha, endAlpha, y, mainrect, surface, src_data_ptr, src_width));
 				}
 			}
