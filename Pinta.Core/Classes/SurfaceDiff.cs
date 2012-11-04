@@ -28,12 +28,37 @@
 
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Cairo;
 
 namespace Pinta.Core
 {
 	public class SurfaceDiff
 	{
+		private struct DiffBounds
+		{
+			public int left;
+			public int right;
+			public int top;
+			public int bottom;
+
+			public DiffBounds (int width, int height)
+			{
+				left = width + 1;
+				right = -1;
+				top = height + 1;
+				bottom = -1;
+			}
+
+			public void Merge (DiffBounds other)
+			{
+				this.left = System.Math.Min (this.left, other.left);
+				this.right = System.Math.Max (this.right, other.right);
+				this.top = System.Math.Min (this.top, other.top);
+				this.bottom = System.Math.Max (this.bottom, other.bottom);
+			}
+		}
+
 		// If we aren't going to save at least x% from the diff,
 		// don't use it and store the whole surface instead
 		private const int MINIMUM_SAVINGS_PERCENT = 10;
@@ -50,9 +75,9 @@ namespace Pinta.Core
 			this.pixels = pixels;
 		}
 
-		public static unsafe SurfaceDiff Create (ImageSurface original, ImageSurface updated, bool force = false)
+		public static unsafe SurfaceDiff Create (ImageSurface original, ImageSurface updated_surf, bool force = false)
 		{
-			if (original.Width != updated.Width || original.Height != updated.Height) {
+			if (original.Width != updated_surf.Width || original.Height != updated_surf.Height) {
 				// If the surface changed size, only throw an error if the user forced the use of a diff.
 				if (force) {
 					throw new InvalidOperationException ("SurfaceDiff requires surfaces to be same size.");
@@ -67,99 +92,87 @@ namespace Pinta.Core
 
 #if DEBUG_DIFF
 			Console.WriteLine ("Original surface size: {0}x{1}", orig_width, orig_height);
+			System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+			timer.Start();
 #endif
 
-			// STEP 1 - Create a bitarray of whether each pixel is changed (true for changed)
-			var bitmask = new BitArray (orig_width * orig_height);
-
-			var hit_first_change = false;
-			var first_change = -1;
-			var last_change = -1;
-
+			// STEP 1 - Find the bounds of the changed pixels.
 			var orig_ptr = (int*)original.DataPtr;
-			var updated_ptr = (int*)updated.DataPtr;
+			var updated_ptr = (int*)updated_surf.DataPtr;
 
-			for (int i = 0; i < bitmask.Length; i++) {
-				var changed = *(orig_ptr++) == *(updated_ptr++) ? false : true;
-				bitmask.Set (i, changed);
+			DiffBounds diff_bounds = new DiffBounds (orig_width, orig_height);
+			object diff_bounds_lock = new Object();
 
-				if (!hit_first_change) {
-					if (changed) {
-						first_change = i;
-						hit_first_change = true;
-					}
-				}
+			// Split up the work among several threads, each of which processes one row at a time
+			// and updates the bounds of the changed pixels it has seen so far. At the end, the
+			// results from each thread are merged together to find the overall bounds of the changed
+			// pixels.
+			Parallel.For<DiffBounds>(0, orig_height, () => new DiffBounds (orig_width, orig_height),
+                     		(row, loop, my_bounds) => {
 
-				if (changed)
-					last_change = i;
-			}
-			
-			// STEP 2 - Figure out the bounds of the changed pixels
-			var first_row = first_change / orig_width;
-			var last_row = last_change / orig_width + 1;
+					var offset = row * orig_width;
+					var orig = orig_ptr + offset;
+					var updated = updated_ptr + offset;
+					bool change_in_row = false;
 
-			// We have to loop through the bitmask to find the first and last column
-			first_change = -1;
-			last_change = -1;
-			hit_first_change = false;
-
-			for (int x = 0; x < orig_width; x++)
-				for (int y = 0; y < orig_height; y++) {
-					var changed = bitmask[x + (y * orig_width)];
-
-					if (!hit_first_change) {
-						if (changed) {
-							first_change = (x * orig_height) + y;
-							hit_first_change = true;
-						}
+					for (int i = 0; i < orig_width; ++i) {
+						if (*(orig++) != *(updated++)) {
+							change_in_row = true;
+							my_bounds.left = System.Math.Min(my_bounds.left, i);
+							my_bounds.right = System.Math.Max(my_bounds.right, i);
+						}				
 					}
 
-					if (changed)
-						last_change = (x * orig_height) + y;
-				}
+					if (change_in_row) {
+						my_bounds.top = System.Math.Min(my_bounds.top, row);
+						my_bounds.bottom = System.Math.Max(my_bounds.bottom, row);
+					}
 
-			var first_col = first_change / orig_height;
-			var last_col = last_change / orig_height + 1;
+					return my_bounds;
 
-			var bounds = new Gdk.Rectangle (first_col, first_row, last_col - first_col, last_row - first_row);
+			},	(my_bounds) => {
+					lock (diff_bounds_lock) {
+						diff_bounds.Merge (my_bounds);
+					}
+					return;
+			});
+
+			var bounds = new Gdk.Rectangle (diff_bounds.left, diff_bounds.top,
+			                                diff_bounds.right - diff_bounds.left + 1,
+			                                diff_bounds.bottom - diff_bounds.top + 1);
 
 #if DEBUG_DIFF
 			Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
 #endif
 
-			// If truncating doesn't save us at least x%, don't bother
-			if (100 - (float)(bounds.Width * bounds.Height) / (float)(orig_width * orig_height) * 100 < MINIMUM_SAVINGS_PERCENT) {
-				bounds = new Gdk.Rectangle (0, 0, orig_width, orig_height);
+			// STEP 2 - Create a bitarray of whether each pixel in the bounds has changed, and count
+			// how many changed pixels we need to store.
+			var bitmask = new BitArray (bounds.Width * bounds.Height);
+			int index = 0;
+			int num_changed = 0;
 
+			int bottom = bounds.GetBottom ();
+			int right = bounds.GetRight ();
+			int bounds_x = bounds.X;
+			int bounds_y = bounds.Y;
+
+			for (int y = bounds_y; y <= bottom; ++y) {
+				var offset = y * orig_width;
+				var updated = updated_ptr + offset + bounds_x;
+				var orig = orig_ptr + offset + bounds_x;
+
+				for (int x = bounds_x; x <= right; ++x) {
+					bool changed = *(orig++) != *(updated++);
+					bitmask[index++] = changed;
+					if (changed) {
+						num_changed++;
+					}
+				}
+			}			
+
+			var savings = 100 - (float)num_changed / (float)(orig_width * orig_height) * 100;
 #if DEBUG_DIFF
-				Console.WriteLine ("Truncating not worth it, skipping.");
-#endif
-			}
-
-			// STEP 3 - Truncate our bitarray to the bounding rectangle
-			if (bounds.Width != orig_width || bounds.Height != orig_height) {
-				var new_bitmask = new BitArray (bounds.Width * bounds.Height);
-
-				int index = 0;
-
-				for (int y = bounds.Y; y <= bounds.GetBottom (); y++)
-					for (int x = bounds.X; x <= bounds.GetRight (); x++)
-						new_bitmask[index++] = bitmask[y * orig_width + x];
-
-				bitmask = new_bitmask;
-			}
-			
-
-			// STEP 4 - Count how many changed pixels we need to store
-			var length = 0;
-
-			for (int i = 0; i < bitmask.Length; i++)
-				if (bitmask[i])
-					length++;
-
-			var savings = 100 - (float)length / (float)(orig_width * orig_height) * 100;
-#if DEBUG_DIFF
-			Console.WriteLine ("Compressed bitmask: {0}/{1} = {2}%", length, orig_height * orig_width, 100 - savings);
+			Console.WriteLine ("Compressed bitmask: {0}/{1} = {2}%", num_changed, orig_height * orig_width, 100 - savings);
 #endif
 
 			if (!force && savings < MINIMUM_SAVINGS_PERCENT) {
@@ -169,27 +182,31 @@ namespace Pinta.Core
 				return null;
 			}
 
-			// Store the old pixels
-			var pixels = new ColorBgra[length];
+			// Store the old pixels.
+			var pixels = new ColorBgra[num_changed];
 			var new_ptr = (ColorBgra*)original.DataPtr;
-
-			var mask_index = 0;
+			int mask_index = 0;
 
 			fixed (ColorBgra* fixed_ptr = pixels) {
 				var pixel_ptr = fixed_ptr;
-				new_ptr += bounds.X + bounds.Y * orig_width;
 
-				for (int y = bounds.Y; y <= bounds.GetBottom (); y++) {
-					for (int x = bounds.X; x <= bounds.GetRight (); x++) {
-						if (bitmask[mask_index++])
-							*pixel_ptr++ = *new_ptr;
+				for (int y = bounds_y; y <= bottom; ++y) {
+					var new_pixel_ptr = new_ptr + bounds_x + bounds_y * orig_width;
 
-						new_ptr++;
+					for (int x = bounds_x; x <= right; ++x) {
+						if (bitmask[mask_index++]) {
+							*pixel_ptr++ = *new_pixel_ptr;
+						}
+
+						new_pixel_ptr++;
 					}
-
-					new_ptr += orig_width - bounds.Width;
 				}
 			}
+
+#if DEBUG_DIFF
+			timer.Stop();
+			System.Console.WriteLine("SurfaceDiff time: " + timer.ElapsedMilliseconds);
+#endif
 
 			return new SurfaceDiff (bitmask, bounds, pixels);
 		}
