@@ -82,6 +82,7 @@ namespace Pinta.Gui.Widgets
 
 			if (primary_rect.ContainsPoint (ev.X, ev.Y)) {
 				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Primary Color"));
+				csd.TransientFor = PintaCore.Chrome.MainWindow;
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentAlpha = PintaCore.Palette.PrimaryColor.GdkColorAlpha ();
@@ -96,6 +97,7 @@ namespace Pinta.Gui.Widgets
 				csd.Destroy ();
 			} else if (secondary_rect.ContainsPoint (ev.X, ev.Y)) {
 				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Secondary Color"));
+				csd.TransientFor = PintaCore.Chrome.MainWindow;
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentAlpha = PintaCore.Palette.SecondaryColor.GdkColorAlpha ();
@@ -119,6 +121,7 @@ namespace Pinta.Gui.Widgets
 					PintaCore.Palette.PrimaryColor = palette[pal];
 				else {
 					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Palette Color"));
+					csd.TransientFor = PintaCore.Chrome.MainWindow;
 					csd.ColorSelection.PreviousColor = palette[pal].ToGdkColor ();
 					csd.ColorSelection.CurrentColor = palette[pal].ToGdkColor ();
 					csd.ColorSelection.CurrentAlpha = palette[pal].GdkColorAlpha ();
