@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-04 12:58-0500\n"
+"POT-Creation-Date: 2012-11-04 13:25-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,29 +29,30 @@ msgstr ""
 msgid "Choose Primary Color"
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:98
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:99
 msgid "Choose Secondary Color"
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
 msgid "Choose Palette Color"
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:216
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:218
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
 msgid "Click to select primary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:220
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
 msgid "Click to select secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:222
-#: Pinta.Tools/Tools/ColorPickerTool.cs:69
-msgid "Left click to set primary color. Right click to set secondary color."
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
 msgstr ""
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:33
@@ -165,6 +166,10 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
+msgstr ""
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:69
+msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
@@ -1272,13 +1277,13 @@ msgid "By percentage:"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:106
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:92
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:91
 msgid "By absolute size:"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:127
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:113
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:112
 msgid "Width:"
 msgstr ""
 
@@ -1286,19 +1291,19 @@ msgstr ""
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:135
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:175
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:134
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:174
 msgid "pixels"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:153
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:152
 msgid "Height:"
 msgstr ""
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:205
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:191
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:190
 msgid "Maintain aspect ratio"
 msgstr ""
 
