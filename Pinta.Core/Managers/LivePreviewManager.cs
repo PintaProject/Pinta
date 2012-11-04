@@ -82,17 +82,17 @@ namespace Pinta.Core
 			
 			layer = PintaCore.Layers.CurrentLayer;
 			this.effect = effect;
-			
-			// Handle selection path.
-			PintaCore.Tools.Commit ();
-			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Workspace.ActiveDocument.Selection.SelectionPath : null;
-			render_bounds = selection_path.GetBounds ();
-			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);			
-									
+
 			//TODO Use the current tool layer instead.
 			live_preview_surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
 			                                  PintaCore.Workspace.ImageSize.Width,
 			                                  PintaCore.Workspace.ImageSize.Height);
+
+			// Handle selection path.
+			PintaCore.Tools.Commit ();
+			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Workspace.ActiveDocument.Selection.SelectionPath : null;
+			render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
+			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);									
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {
