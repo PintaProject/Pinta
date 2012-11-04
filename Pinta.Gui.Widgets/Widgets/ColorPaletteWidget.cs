@@ -218,6 +218,8 @@ namespace Pinta.Gui.Widgets
 				text = Catalog.GetString ("Click to select primary color.");
 			} else if (secondary_rect.ContainsPoint (x, y)) {
 				text = Catalog.GetString ("Click to select secondary color.");
+			} else if (PointToPalette (x, y) >= 0) {
+				text = Catalog.GetString ("Left click to set primary color. Right click to set secondary color.");
 			}
 
 			args.Tooltip.Text = text;
