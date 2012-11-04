@@ -191,7 +191,7 @@ namespace Pinta.Core
 				var pixel_ptr = fixed_ptr;
 
 				for (int y = bounds_y; y <= bottom; ++y) {
-					var new_pixel_ptr = new_ptr + bounds_x + bounds_y * orig_width;
+					var new_pixel_ptr = new_ptr + bounds_x + y * orig_width;
 
 					for (int x = bounds_x; x <= right; ++x) {
 						if (bitmask[mask_index++]) {
