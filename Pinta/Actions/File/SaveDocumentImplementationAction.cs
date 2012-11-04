@@ -64,7 +64,7 @@ namespace Pinta.Actions
 					return;
 
 				// If the document already has a filename, just re-save it
-				e.Cancel = !SaveFile (e.Document, null, null);
+				e.Cancel = !SaveFile (e.Document, null, null, PintaCore.Chrome.MainWindow);
 			}
 		}
 
@@ -159,7 +159,7 @@ namespace Pinta.Actions
 				//hasn't been saved to its associated file in this session.
 				document.HasBeenSavedInSession = false;
 
-				SaveFile (document, file, format);
+				SaveFile (document, file, format, fcd);
 				RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 				PintaCore.System.ImageFormats.SetDefaultFormat (Path.GetExtension (file));
 
@@ -174,7 +174,7 @@ namespace Pinta.Actions
 			return false;
 		}
 
-		private bool SaveFile (Document document, string file, FormatDescriptor format)
+		private bool SaveFile (Document document, string file, FormatDescriptor format, Window parent)
 		{
 			if (string.IsNullOrEmpty (file))
 				file = document.PathAndFileName;
@@ -183,7 +183,7 @@ namespace Pinta.Actions
 				format = PintaCore.System.ImageFormats.GetFormatByFile (file);
 
 			if (format == null || format.IsReadOnly ()) {
-				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
+				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
 				md.Title = Catalog.GetString ("Error");
 
 				md.Run ();
@@ -194,7 +194,7 @@ namespace Pinta.Actions
 			// If the user tries to save over a read only file, give a more informative error message than "Unhandled Exception"
 			FileInfo file_info = new FileInfo (file);
 			if (file_info.Exists && file_info.IsReadOnly) {
-				MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error,
+				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
 					ButtonsType.Ok, Catalog.GetString ("Cannot save read only file."));
 				md.Title = Catalog.GetString ("Error");
 
@@ -214,7 +214,7 @@ namespace Pinta.Actions
 					string secondary = Catalog.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 					string message = string.Format (markup, primary, secondary);
 
-					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error,
+					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
 					ButtonsType.Ok, message);
 
 					md.Run ();
