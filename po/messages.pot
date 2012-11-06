@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-04 13:25-0500\n"
+"POT-Creation-Date: 2012-11-05 23:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,21 +55,21 @@ msgid ""
 "click to choose palette color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:33
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:35
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 msgid "label1"
 msgstr ""
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:32
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
 msgstr ""
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:59
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
 msgstr ""
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:30
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:38
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 msgid "label"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr ""
 
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: Pinta/Dialogs/ResizeImageDialog.cs:38
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:31
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
 msgstr ""
 
@@ -1006,7 +1006,7 @@ msgid "copy"
 msgstr ""
 
 #: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:46
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr ""
 
@@ -1267,47 +1267,43 @@ msgstr ""
 msgid "_Help"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ProgressDialog.cs:24
-msgid "label2"
-msgstr ""
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:65
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:50
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:106
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:91
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:127
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:112
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:149
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:134
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:174
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:152
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:205
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:190
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
 msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:490
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
 msgstr ""
 
@@ -1358,18 +1354,18 @@ msgstr ""
 
 #: Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Curves"
 msgstr ""
 
 #: Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
 msgstr ""
 
 #: Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:20
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
 msgid "Posterize"
 msgstr ""
 
@@ -1401,77 +1397,73 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:87
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
 msgid "Linked"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
+#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:508
-msgid "In stetic action button box cannot be empty"
-msgstr ""
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
 msgstr ""
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
 msgstr ""
 
