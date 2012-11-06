@@ -278,6 +278,11 @@ namespace Pinta.Core
 			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++));
 		}
 
+		public Layer CreateLayer (int width, int height)
+		{
+			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++), width, height);
+		}
+
 		public Layer CreateLayer (string name)
 		{
 			return CreateLayer (name, ImageSize.Width, ImageSize.Height);
@@ -296,6 +301,16 @@ namespace Pinta.Core
 			Layer old = selection_layer;
 
 			selection_layer = CreateLayer ();
+
+			if (old != null)
+				(old.Surface as IDisposable).Dispose ();
+		}
+
+		public void CreateSelectionLayer (int width, int height)
+		{
+			Layer old = selection_layer;
+
+			selection_layer = CreateLayer (width, height);
 
 			if (old != null)
 				(old.Surface as IDisposable).Dispose ();

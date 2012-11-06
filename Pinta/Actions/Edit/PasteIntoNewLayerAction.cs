@@ -26,6 +26,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 using Mono.Unix;
 using Pinta.Core;
 
@@ -33,6 +34,8 @@ namespace Pinta.Actions
 {
 	class PasteIntoNewLayerAction : IActionHandler
 	{
+		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+
 		#region IActionHandler Members
 		public void Initialize ()
 		{
@@ -49,26 +52,95 @@ namespace Pinta.Actions
 		{
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 
-			if (cb.WaitIsImageAvailable ()) {
-				PintaCore.Tools.Commit ();
+			PintaCore.Tools.Commit ();
 
-				Gdk.Pixbuf image = cb.WaitForImage ();
+			Path p;
 
-				Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+			// Don't dispose this, as we're going to give it to the history
+			Gdk.Pixbuf image = cb.WaitForImage ();
 
-				using (Cairo.Context g = new Cairo.Context (l.Surface))
-					g.DrawPixbuf (image, new Cairo.Point (0, 0));
-
-				// Make new layer the current layer
-				PintaCore.Layers.SetCurrentLayer (l);
-
-				PintaCore.Workspace.Invalidate ();
-
-				AddLayerHistoryItem hist = new AddLayerHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
-				PintaCore.History.PushNewItem (hist);
-			} else {
-				Pinta.Dialogs.ClipboardEmptyDialog.Show ();
+			if (image == null)
+			{
+				Dialogs.ClipboardEmptyDialog.Show ();
+				return;
 			}
+			else if (!PintaCore.Workspace.HasOpenDocuments) {
+				// Create a new document if no documents are open.
+				PintaCore.Workspace.NewDocument (new Gdk.Size (image.Width, image.Height), true);
+			}
+
+			Document doc = PintaCore.Workspace.ActiveDocument;
+			
+			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
+
+			// Merge the (optional) canvas resize and the pasted image into a single history item.
+			var paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"));
+
+			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
+			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
+			{
+				ResponseType response = ShowExpandCanvasDialog ();
+
+				if (response == ResponseType.Accept)
+				{
+					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height,
+					                                  Pinta.Core.Anchor.Center, paste_action);
+					PintaCore.Actions.View.UpdateCanvasScale ();
+				}
+				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
+				{
+					return;
+				}
+			}
+
+			// Create a new layer and make it the current layer
+			Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
+			PintaCore.Layers.SetCurrentLayer (l);
+
+			// Record in the History that a new layer was added
+			paste_action.Push (new AddLayerHistoryItem("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), PintaCore.Layers.IndexOf (l)));
+
+			// Copy the paste to the temp layer
+			doc.CreateSelectionLayer (image.Width, image.Height);
+			doc.ShowSelectionLayer = true;
+
+			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface))
+			{
+				g.DrawPixbuf (image, new Cairo.Point (0, 0));
+				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
+			}
+
+			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+
+			DocumentSelection old_selection = doc.Selection.Clone();
+			bool old_show_selection = doc.ShowSelection;
+
+			doc.Selection.SelectionPath = p;
+			doc.Selection.SelectionPolygons.Clear();
+			doc.ShowSelection = true;
+
+			doc.Workspace.Invalidate ();
+
+			paste_action.Push (new PasteHistoryItem (image, old_selection, old_show_selection));
+			doc.History.PushNewItem (paste_action);
+		}
+
+		private ResponseType ShowExpandCanvasDialog ()
+		{
+			string primary = Catalog.GetString ("Image larger than canvas");
+			string secondary = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+			string message = string.Format (markup, primary, secondary);
+
+			var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
+			enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);
+			enlarge_dialog.AddButton (Catalog.GetString ("Don't change canvas size"), ResponseType.Reject);
+			enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
+			enlarge_dialog.DefaultResponse = ResponseType.Accept;
+
+			ResponseType response = (ResponseType)enlarge_dialog.Run ();
+			enlarge_dialog.Destroy ();
+
+			return response;
 		}
 	}
 }

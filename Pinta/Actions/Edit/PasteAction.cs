@@ -96,7 +96,7 @@ namespace Pinta.Actions
 			}
 
 			// Copy the paste to the temp layer
-			doc.CreateSelectionLayer ();
+			doc.CreateSelectionLayer (image.Width, image.Height);
 			doc.ShowSelectionLayer = true;
 
 			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface))
