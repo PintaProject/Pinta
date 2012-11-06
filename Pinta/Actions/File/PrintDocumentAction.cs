@@ -47,6 +47,9 @@ namespace Pinta.Actions
 		
 		void HandleActivated (object sender, EventArgs e)
 		{
+			// Commit any pending changes.
+			PintaCore.Tools.Commit ();
+
 			var op = new PrintOperation ();
 			op.BeginPrint += HandleBeginPrint;
 			op.DrawPage += HandleDrawPage;

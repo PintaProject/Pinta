@@ -487,11 +487,11 @@ namespace Pinta.Core
 					paint.Add (layer);
 
 				if (layer == CurrentLayer) {
-					if (!tool_layer.Hidden)
-						paint.Add (tool_layer);
+					if (!ToolLayer.Hidden)
+						paint.Add (ToolLayer);
 
 					if (ShowSelectionLayer)
-						paint.Add (selection_layer);
+						paint.Add (SelectionLayer);
 				}
 			}
 
