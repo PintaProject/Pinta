@@ -70,7 +70,7 @@ namespace Pinta.Core
 				if (main_window_busy)
 					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
 				else
-					main_window.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.DefaultCursor;
+					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Arrow);
 			}
 		}
 		#endregion
