@@ -94,7 +94,7 @@ namespace Pinta.Core
 		{
 			old_selection_layer = PintaCore.Layers.SelectionLayer.Surface.Clone ();
 			old_surface = PintaCore.Layers.CurrentLayer.Surface.Clone ();
-			old_transform.InitMatrix(PintaCore.Layers.CurrentLayer.Transform);
+			old_transform.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
 		}
 	}
 }
