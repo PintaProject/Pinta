@@ -1,4 +1,4 @@
-﻿// 
+// 
 // PasteAction.cs
 //  
 // Author:
@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 using Gtk;
 using Mono.Unix;
 using Pinta.Core;
@@ -34,8 +33,6 @@ namespace Pinta.Actions
 {
 	class PasteAction : IActionHandler
 	{
-		private const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-
 		#region IActionHandler Members
 		public void Initialize ()
 		{
@@ -50,92 +47,18 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (PintaCore.Tools.CurrentTool.TryHandlePaste (cb))
-				return;
-
-			PintaCore.Tools.Commit ();
-
-			Path p;
-
-			// Don't dispose this, as we're going to give it to the history
-			Gdk.Pixbuf image = cb.WaitForImage ();
-
-			if (image == null)
+			// If no documents are open, activate the
+			// PasteIntoNewImage action and abort this Paste action.
+			if (!PintaCore.Workspace.HasOpenDocuments)
 			{
-				Dialogs.ClipboardEmptyDialog.Show ();
+				PintaCore.Actions.Edit.PasteIntoNewImage.Activate();
 				return;
 			}
-			else if (!PintaCore.Workspace.HasOpenDocuments) {
-				// Create a new document if no documents are open.
-				PintaCore.Workspace.NewDocument (new Gdk.Size (image.Width, image.Height), true);
-			}
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			
-			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
-
-			// Merge the (optional) canvas resize and the pasted image into a single history item.
-			var paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste"));
-
-			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
-			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
-			{
-				ResponseType response = ShowExpandCanvasDialog ();
-
-				if (response == ResponseType.Accept)
-				{
-					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height,
-					                                  Pinta.Core.Anchor.Center, paste_action);
-					PintaCore.Actions.View.UpdateCanvasScale ();
-				}
-				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
-				{
-					return;
-				}
-			}
-
-			// Copy the paste to the temp layer
-			doc.CreateSelectionLayer (image.Width, image.Height);
-			doc.ShowSelectionLayer = true;
-
-			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface))
-			{
-				g.DrawPixbuf (image, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Rectangle (0, 0, image.Width, image.Height));
-			}
-
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
-
-			DocumentSelection old_selection = doc.Selection.Clone();
-			bool old_show_selection = doc.ShowSelection;
-
-			doc.Selection.SelectionPath = p;
-			doc.Selection.SelectionPolygons.Clear();
-			doc.ShowSelection = true;
-
-			doc.Workspace.Invalidate ();
-
-			paste_action.Push (new PasteHistoryItem (image, old_selection, old_show_selection));
-			doc.History.PushNewItem (paste_action);
-		}
-
-		private ResponseType ShowExpandCanvasDialog ()
-		{
-			string primary = Catalog.GetString ("Image larger than canvas");
-			string secondary = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
-			string message = string.Format (markup, primary, secondary);
-
-			var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
-			enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);
-			enlarge_dialog.AddButton (Catalog.GetString ("Don't change canvas size"), ResponseType.Reject);
-			enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
-			enlarge_dialog.DefaultResponse = ResponseType.Accept;
-
-			ResponseType response = (ResponseType)enlarge_dialog.Run ();
-			enlarge_dialog.Destroy ();
-
-			return response;
+			// Paste into the active document.
+			// The 'false' argument indicates that paste should be
+			// performed into the current (not a new) layer.
+			PintaCore.Workspace.ActiveDocument.Paste (false);
 		}
 	}
 }

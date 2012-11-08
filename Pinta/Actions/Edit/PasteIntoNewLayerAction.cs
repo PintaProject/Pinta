@@ -47,16 +47,18 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-
-			PintaCore.Tools.Commit ();
-
-			if (cb.WaitIsImageAvailable ()) {
-				PintaCore.Actions.Layers.AddNewLayer.Activate();
-				PintaCore.Actions.Edit.Paste.Activate ();
-			} else {
-				Pinta.Dialogs.ClipboardEmptyDialog.Show ();
+			// If no documents are open, activate the
+			// PasteIntoNewImage action and abort this Paste action.
+			if (!PintaCore.Workspace.HasOpenDocuments)
+			{
+				PintaCore.Actions.Edit.PasteIntoNewImage.Activate();
+				return;
 			}
+
+			// Paste into the active document.
+			// The 'true' argument indicates that paste should be
+			// performed into a new layer.
+			PintaCore.Workspace.ActiveDocument.Paste (true);
 		}
 	}
 }

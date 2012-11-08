@@ -57,7 +57,7 @@ namespace Pinta.Actions
 				PintaCore.Actions.Edit.Paste.Activate ();
 				PintaCore.Actions.Edit.Deselect.Activate ();
 			} else {
-				Pinta.Dialogs.ClipboardEmptyDialog.Show ();
+				Pinta.Core.Document.ShowClipboardEmptyDialog ();
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-﻿// 
+// 
 // Document.cs
 //  
 // Author:
@@ -28,9 +28,11 @@ using System;
 using System.Linq;
 using Mono.Unix;
 using Gdk;
+using Gtk;
 using System.Collections.Generic;
 using Cairo;
 using System.ComponentModel;
+using Pinta;
 
 namespace Pinta.Core
 {
@@ -719,6 +721,127 @@ namespace Pinta.Core
 		public void SetCurrentLayer (Layer layer)
 		{
 			SetCurrentLayer (Layers.IndexOf (layer));
+		}
+
+		public void Paste (bool toNewLayer)
+		{
+			// Create a compound history item for recording several
+			// operations so that they can all be undone/redone together.
+			CompoundHistoryItem paste_action;
+			string actionCatalogString = toNewLayer ? "Paste Into New Layer" : "Paste";
+			paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString (actionCatalogString));
+
+			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+
+			// See if the current tool wants to handle the paste
+			// operation (e.g., the text tool could paste text)
+			if (!toNewLayer)
+			{
+				if (PintaCore.Tools.CurrentTool.TryHandlePaste (cb))
+					return;
+			}
+
+			PintaCore.Tools.Commit ();
+
+			Path p;
+
+			// Don't dispose this, as we're going to give it to the history
+			Gdk.Pixbuf image = cb.WaitForImage ();
+
+			if (image == null)
+			{
+				ShowClipboardEmptyDialog();
+				return;
+			}
+
+			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
+
+			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
+			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
+			{
+				ResponseType response = ShowExpandCanvasDialog ();
+			
+				if (response == ResponseType.Accept)
+				{
+					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height,
+					Pinta.Core.Anchor.Center, paste_action);
+					PintaCore.Actions.View.UpdateCanvasScale ();
+				}
+				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
+				{
+					return;
+				}
+			}
+
+			// If requested, create a new layer, make it the current
+			// layer and record it's creation in the history
+			if (toNewLayer)
+			{
+				Layer l = AddNewLayer (string.Empty);
+				SetCurrentLayer (l);
+				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), Layers.IndexOf (l)));
+			}
+
+			// Copy the paste to the temp layer
+			CreateSelectionLayer (image.Width, image.Height);
+			ShowSelectionLayer = true;
+			
+			using (Cairo.Context g = new Cairo.Context (SelectionLayer.Surface))
+			{
+				g.DrawPixbuf (image, new Cairo.Point (0, 0));
+				p = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, image.Width, image.Height));
+			}
+			
+			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+			
+			DocumentSelection old_selection = Selection.Clone();
+			bool old_show_selection = ShowSelection;
+			
+			Selection.SelectionPath = p;
+			Selection.SelectionPolygons.Clear();
+			ShowSelection = true;
+			
+			Workspace.Invalidate ();
+			
+			paste_action.Push (new PasteHistoryItem (image, old_selection, old_show_selection));
+			History.PushNewItem (paste_action);
+		}
+
+		private ResponseType ShowExpandCanvasDialog ()
+		{
+			const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+			string primary = Catalog.GetString ("Image larger than canvas");
+			string secondary = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+			string message = string.Format (markup, primary, secondary);
+
+			var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
+			enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);
+			enlarge_dialog.AddButton (Catalog.GetString ("Don't change canvas size"), ResponseType.Reject);
+			enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
+			enlarge_dialog.DefaultResponse = ResponseType.Accept;
+
+			ResponseType response = (ResponseType)enlarge_dialog.Run ();
+
+			enlarge_dialog.Destroy ();
+
+			return response;
+		}
+
+		public static void ShowClipboardEmptyDialog()
+		{
+			var primary = Catalog.GetString ("Image cannot be pasted");
+			var secondary = Catalog.GetString ("The clipboard does not contain an image.");
+			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
+			markup = string.Format (markup, primary, secondary);
+
+			var md = new MessageDialog (Pinta.Core.PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+						    MessageType.Error, ButtonsType.None, true,
+						    markup);
+
+			md.AddButton (Stock.Ok, ResponseType.Yes);
+
+			md.Run ();
+			md.Destroy ();
 		}
 		#endregion
 
