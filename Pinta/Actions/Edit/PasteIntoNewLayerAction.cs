@@ -47,28 +47,18 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-
-			if (cb.WaitIsImageAvailable ()) {
-				PintaCore.Tools.Commit ();
-
-				Gdk.Pixbuf image = cb.WaitForImage ();
-
-				Layer l = PintaCore.Layers.AddNewLayer (string.Empty);
-
-				using (Cairo.Context g = new Cairo.Context (l.Surface))
-					g.DrawPixbuf (image, new Cairo.Point (0, 0));
-
-				// Make new layer the current layer
-				PintaCore.Layers.SetCurrentLayer (l);
-
-				PintaCore.Workspace.Invalidate ();
-
-				AddLayerHistoryItem hist = new AddLayerHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"), PintaCore.Layers.IndexOf (l));
-				PintaCore.History.PushNewItem (hist);
-			} else {
-				Pinta.Dialogs.ClipboardEmptyDialog.Show ();
+			// If no documents are open, activate the
+			// PasteIntoNewImage action and abort this Paste action.
+			if (!PintaCore.Workspace.HasOpenDocuments)
+			{
+				PintaCore.Actions.Edit.PasteIntoNewImage.Activate();
+				return;
 			}
+
+			// Paste into the active document.
+			// The 'true' argument indicates that paste should be
+			// performed into a new layer.
+			PintaCore.Workspace.ActiveDocument.Paste (true);
 		}
 	}
 }
