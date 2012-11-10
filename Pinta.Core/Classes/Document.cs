@@ -728,8 +728,14 @@ namespace Pinta.Core
 			// Create a compound history item for recording several
 			// operations so that they can all be undone/redone together.
 			CompoundHistoryItem paste_action;
-			string actionCatalogString = toNewLayer ? "Paste Into New Layer" : "Paste";
-			paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString (actionCatalogString));
+			if (toNewLayer)
+			{
+				paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"));
+			}
+			else
+			{
+				paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste"));
+			}
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 
