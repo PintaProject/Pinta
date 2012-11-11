@@ -130,8 +130,7 @@ namespace Pinta.Core
 		/// </summary>
 		public bool IsPartiallyOffscreen (Gdk.Rectangle rect)
 		{
-			return (rect.IsEmpty || rect.Left < 0 || rect.Top < 0 ||
-			        rect.Bottom > CanvasSize.Height || rect.Right > CanvasSize.Width);
+			return (rect.IsEmpty || rect.Left < 0 || rect.Top < 0);
 		}
 
 		public bool PointInCanvas (Cairo.PointD point)
