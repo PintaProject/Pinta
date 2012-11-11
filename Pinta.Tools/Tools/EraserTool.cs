@@ -119,7 +119,7 @@ namespace Pinta.Tools
 			if (doc.Workspace.IsPartiallyOffscreen (r)) {
 				doc.Workspace.Invalidate ();
 			} else {
-				doc.Workspace.Invalidate (r);
+				doc.Workspace.Invalidate (doc.ClampToImageSize (r));
 			}
 			
 			last_point = new Point (x, y);

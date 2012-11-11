@@ -170,7 +170,7 @@ namespace Pinta.Tools
 			if (doc.Workspace.IsPartiallyOffscreen (invalidate_rect)) {
 				doc.Workspace.Invalidate ();
 			} else {
-				doc.Workspace.Invalidate (invalidate_rect);
+				doc.Workspace.Invalidate (doc.ClampToImageSize (invalidate_rect));
 			}
 
 			LastPoint = new Point (x, y);
