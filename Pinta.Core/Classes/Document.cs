@@ -788,8 +788,9 @@ namespace Pinta.Core
 				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), Layers.IndexOf (l)));
 			}
 
-			// Copy the paste to the temp layer
-			CreateSelectionLayer (image.Width, image.Height);
+			// Copy the paste to the temp layer, which should be at least the size of this document.
+			CreateSelectionLayer (Math.Max(ImageSize.Width, image.Width),
+			                      Math.Max(ImageSize.Height, image.Height));
 			ShowSelectionLayer = true;
 			
 			using (Cairo.Context g = new Cairo.Context (SelectionLayer.Surface))
