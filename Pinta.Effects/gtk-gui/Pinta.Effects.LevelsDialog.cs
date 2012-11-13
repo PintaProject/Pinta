@@ -5,95 +5,51 @@ namespace Pinta.Effects
 	public partial class LevelsDialog
 	{
 		private global::Gtk.HBox hbox1;
-
 		private global::Gtk.VBox vbox2;
-
 		private global::Gtk.HBox hbox2;
-
 		private global::Gtk.Label labelInputHist;
-
 		private global::Gtk.HSeparator hseparator1;
-
 		private global::Pinta.Gui.Widgets.HistogramWidget histogramInput;
-
 		private global::Gtk.VBox vbox3;
-
 		private global::Gtk.HBox hbox3;
-
 		private global::Gtk.Label labelInput;
-
 		private global::Gtk.HSeparator hseparator2;
-
 		private global::Gtk.HBox hbox8;
-
 		private global::Gtk.VBox vboxInputSpin;
-
 		private global::Gtk.SpinButton spinInHigh;
-
 		private global::Pinta.Gui.Widgets.ColorPanelWidget colorpanelInHigh;
-
 		private global::Gtk.Alignment alignment1;
-
 		private global::Pinta.Gui.Widgets.ColorPanelWidget colorpanelInLow;
-
 		private global::Gtk.SpinButton spinInLow;
-
 		private global::Pinta.Gui.Widgets.ColorGradientWidget gradientInput;
-
 		private global::Gtk.VBox vbox4;
-
 		private global::Gtk.HBox hbox4;
-
 		private global::Gtk.Label labelOutput;
-
 		private global::Gtk.HSeparator hseparator3;
-
 		private global::Gtk.HBox hbox9;
-
 		private global::Pinta.Gui.Widgets.ColorGradientWidget gradientOutput;
-
 		private global::Gtk.VBox vboxOutputSpin;
-
 		private global::Gtk.SpinButton spinOutHigh;
-
 		private global::Pinta.Gui.Widgets.ColorPanelWidget colorpanelOutHigh;
-
 		private global::Gtk.SpinButton spinOutGamma;
-
 		private global::Pinta.Gui.Widgets.ColorPanelWidget colorpanelOutMid;
-
 		private global::Pinta.Gui.Widgets.ColorPanelWidget colorpanelOutLow;
-
 		private global::Gtk.SpinButton spinOutLow;
-
 		private global::Gtk.VBox vbox5;
-
 		private global::Gtk.HBox hbox5;
-
 		private global::Gtk.Label labelOutputHist;
-
 		private global::Gtk.HSeparator hseparator4;
-
 		private global::Pinta.Gui.Widgets.HistogramWidget histogramOutput;
-
 		private global::Gtk.HBox hboxBottom;
-
 		private global::Gtk.Button buttonAuto;
-
 		private global::Gtk.Button buttonReset;
-
 		private global::Gtk.CheckButton checkRed;
-
 		private global::Gtk.CheckButton checkGreen;
-
 		private global::Gtk.Button buttonOk;
-
 		private global::Gtk.Button buttonCancel;
-
 		private global::Gtk.CheckButton checkBlue;
-
 		private global::Gtk.Button buttonDummy;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -129,7 +85,7 @@ namespace Pinta.Effects
 			this.labelInputHist.Name = "labelInputHist";
 			this.labelInputHist.LabelProp = global::Mono.Unix.Catalog.GetString ("Input Histogram");
 			this.hbox2.Add (this.labelInputHist);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.labelInputHist]));
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelInputHist]));
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
@@ -137,10 +93,10 @@ namespace Pinta.Effects
 			this.hseparator1 = new global::Gtk.HSeparator ();
 			this.hseparator1.Name = "hseparator1";
 			this.hbox2.Add (this.hseparator1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.hseparator1]));
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.hseparator1]));
 			w3.Position = 1;
 			this.vbox2.Add (this.hbox2);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox2]));
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hbox2]));
 			w4.Position = 0;
 			w4.Expand = false;
 			w4.Fill = false;
@@ -152,10 +108,10 @@ namespace Pinta.Effects
 			this.histogramInput.FlipHorizontal = true;
 			this.histogramInput.FlipVertical = false;
 			this.vbox2.Add (this.histogramInput);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.histogramInput]));
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.histogramInput]));
 			w5.Position = 1;
 			this.hbox1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.vbox2]));
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox2]));
 			w6.Position = 0;
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.vbox3 = new global::Gtk.VBox ();
@@ -171,7 +127,7 @@ namespace Pinta.Effects
 			this.labelInput.Name = "labelInput";
 			this.labelInput.LabelProp = global::Mono.Unix.Catalog.GetString ("Input");
 			this.hbox3.Add (this.labelInput);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.labelInput]));
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.labelInput]));
 			w7.Position = 0;
 			w7.Expand = false;
 			w7.Fill = false;
@@ -179,10 +135,10 @@ namespace Pinta.Effects
 			this.hseparator2 = new global::Gtk.HSeparator ();
 			this.hseparator2.Name = "hseparator2";
 			this.hbox3.Add (this.hseparator2);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.hseparator2]));
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.hseparator2]));
 			w8.Position = 1;
 			this.vbox3.Add (this.hbox3);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox3]));
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox3]));
 			w9.Position = 0;
 			w9.Expand = false;
 			w9.Fill = false;
@@ -204,7 +160,7 @@ namespace Pinta.Effects
 			this.spinInHigh.Numeric = true;
 			this.spinInHigh.Value = 255;
 			this.vboxInputSpin.Add (this.spinInHigh);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin[this.spinInHigh]));
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin [this.spinInHigh]));
 			w10.Position = 0;
 			w10.Expand = false;
 			w10.Fill = false;
@@ -214,15 +170,15 @@ namespace Pinta.Effects
 			this.colorpanelInHigh.Events = ((global::Gdk.EventMask)(256));
 			this.colorpanelInHigh.Name = "colorpanelInHigh";
 			this.vboxInputSpin.Add (this.colorpanelInHigh);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin[this.colorpanelInHigh]));
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin [this.colorpanelInHigh]));
 			w11.Position = 1;
 			w11.Expand = false;
 			w11.Fill = false;
 			// Container child vboxInputSpin.Gtk.Box+BoxChild
-			this.alignment1 = new global::Gtk.Alignment (0.5f, 0.5f, 1f, 1f);
+			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
 			this.alignment1.Name = "alignment1";
 			this.vboxInputSpin.Add (this.alignment1);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin[this.alignment1]));
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin [this.alignment1]));
 			w12.Position = 2;
 			// Container child vboxInputSpin.Gtk.Box+BoxChild
 			this.colorpanelInLow = new global::Pinta.Gui.Widgets.ColorPanelWidget ();
@@ -230,7 +186,7 @@ namespace Pinta.Effects
 			this.colorpanelInLow.Events = ((global::Gdk.EventMask)(256));
 			this.colorpanelInLow.Name = "colorpanelInLow";
 			this.vboxInputSpin.Add (this.colorpanelInLow);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin[this.colorpanelInLow]));
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin [this.colorpanelInLow]));
 			w13.Position = 3;
 			w13.Expand = false;
 			w13.Fill = false;
@@ -242,12 +198,12 @@ namespace Pinta.Effects
 			this.spinInLow.ClimbRate = 1;
 			this.spinInLow.Numeric = true;
 			this.vboxInputSpin.Add (this.spinInLow);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin[this.spinInLow]));
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vboxInputSpin [this.spinInLow]));
 			w14.Position = 4;
 			w14.Expand = false;
 			w14.Fill = false;
 			this.hbox8.Add (this.vboxInputSpin);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox8[this.vboxInputSpin]));
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox8 [this.vboxInputSpin]));
 			w15.Position = 0;
 			w15.Expand = false;
 			w15.Fill = false;
@@ -260,15 +216,15 @@ namespace Pinta.Effects
 			this.gradientInput.Name = "gradientInput";
 			this.gradientInput.Count = 2;
 			this.hbox8.Add (this.gradientInput);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox8[this.gradientInput]));
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox8 [this.gradientInput]));
 			w16.Position = 1;
 			w16.Expand = false;
 			w16.Fill = false;
 			this.vbox3.Add (this.hbox8);
-			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox8]));
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox8]));
 			w17.Position = 1;
 			this.hbox1.Add (this.vbox3);
-			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.vbox3]));
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox3]));
 			w18.Position = 1;
 			w18.Expand = false;
 			// Container child hbox1.Gtk.Box+BoxChild
@@ -284,7 +240,7 @@ namespace Pinta.Effects
 			this.labelOutput.Name = "labelOutput";
 			this.labelOutput.LabelProp = global::Mono.Unix.Catalog.GetString ("Output");
 			this.hbox4.Add (this.labelOutput);
-			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.labelOutput]));
+			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.labelOutput]));
 			w19.Position = 0;
 			w19.Expand = false;
 			w19.Fill = false;
@@ -292,10 +248,10 @@ namespace Pinta.Effects
 			this.hseparator3 = new global::Gtk.HSeparator ();
 			this.hseparator3.Name = "hseparator3";
 			this.hbox4.Add (this.hseparator3);
-			global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.hseparator3]));
+			global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.hseparator3]));
 			w20.Position = 1;
 			this.vbox4.Add (this.hbox4);
-			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.hbox4]));
+			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hbox4]));
 			w21.Position = 0;
 			w21.Expand = false;
 			w21.Fill = false;
@@ -310,7 +266,7 @@ namespace Pinta.Effects
 			this.gradientOutput.Name = "gradientOutput";
 			this.gradientOutput.Count = 3;
 			this.hbox9.Add (this.gradientOutput);
-			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox9[this.gradientOutput]));
+			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox9 [this.gradientOutput]));
 			w22.Position = 1;
 			w22.Expand = false;
 			w22.Fill = false;
@@ -327,7 +283,7 @@ namespace Pinta.Effects
 			this.spinOutHigh.Numeric = true;
 			this.spinOutHigh.Value = 255;
 			this.vboxOutputSpin.Add (this.spinOutHigh);
-			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin[this.spinOutHigh]));
+			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin [this.spinOutHigh]));
 			w23.Position = 0;
 			w23.Expand = false;
 			w23.Fill = false;
@@ -337,7 +293,7 @@ namespace Pinta.Effects
 			this.colorpanelOutHigh.Events = ((global::Gdk.EventMask)(256));
 			this.colorpanelOutHigh.Name = "colorpanelOutHigh";
 			this.vboxOutputSpin.Add (this.colorpanelOutHigh);
-			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin[this.colorpanelOutHigh]));
+			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin [this.colorpanelOutHigh]));
 			w24.Position = 1;
 			w24.Expand = false;
 			w24.Fill = false;
@@ -350,7 +306,7 @@ namespace Pinta.Effects
 			this.spinOutGamma.Numeric = true;
 			this.spinOutGamma.Value = 1;
 			this.vboxOutputSpin.Add (this.spinOutGamma);
-			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin[this.spinOutGamma]));
+			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin [this.spinOutGamma]));
 			w25.Position = 2;
 			w25.Expand = false;
 			w25.Fill = false;
@@ -360,7 +316,7 @@ namespace Pinta.Effects
 			this.colorpanelOutMid.Events = ((global::Gdk.EventMask)(256));
 			this.colorpanelOutMid.Name = "colorpanelOutMid";
 			this.vboxOutputSpin.Add (this.colorpanelOutMid);
-			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin[this.colorpanelOutMid]));
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin [this.colorpanelOutMid]));
 			w26.Position = 3;
 			w26.Expand = false;
 			w26.Fill = false;
@@ -370,7 +326,7 @@ namespace Pinta.Effects
 			this.colorpanelOutLow.Events = ((global::Gdk.EventMask)(256));
 			this.colorpanelOutLow.Name = "colorpanelOutLow";
 			this.vboxOutputSpin.Add (this.colorpanelOutLow);
-			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin[this.colorpanelOutLow]));
+			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin [this.colorpanelOutLow]));
 			w27.Position = 4;
 			w27.Expand = false;
 			w27.Fill = false;
@@ -382,20 +338,20 @@ namespace Pinta.Effects
 			this.spinOutLow.ClimbRate = 1;
 			this.spinOutLow.Numeric = true;
 			this.vboxOutputSpin.Add (this.spinOutLow);
-			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin[this.spinOutLow]));
+			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.vboxOutputSpin [this.spinOutLow]));
 			w28.Position = 5;
 			w28.Expand = false;
 			w28.Fill = false;
 			this.hbox9.Add (this.vboxOutputSpin);
-			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.hbox9[this.vboxOutputSpin]));
+			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.hbox9 [this.vboxOutputSpin]));
 			w29.Position = 2;
 			w29.Expand = false;
 			w29.Fill = false;
 			this.vbox4.Add (this.hbox9);
-			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.hbox9]));
+			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hbox9]));
 			w30.Position = 1;
 			this.hbox1.Add (this.vbox4);
-			global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.vbox4]));
+			global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox4]));
 			w31.Position = 2;
 			w31.Expand = false;
 			w31.Fill = false;
@@ -412,7 +368,7 @@ namespace Pinta.Effects
 			this.labelOutputHist.Name = "labelOutputHist";
 			this.labelOutputHist.LabelProp = global::Mono.Unix.Catalog.GetString ("Output Histogram");
 			this.hbox5.Add (this.labelOutputHist);
-			global::Gtk.Box.BoxChild w32 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.labelOutputHist]));
+			global::Gtk.Box.BoxChild w32 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.labelOutputHist]));
 			w32.Position = 0;
 			w32.Expand = false;
 			w32.Fill = false;
@@ -420,10 +376,10 @@ namespace Pinta.Effects
 			this.hseparator4 = new global::Gtk.HSeparator ();
 			this.hseparator4.Name = "hseparator4";
 			this.hbox5.Add (this.hseparator4);
-			global::Gtk.Box.BoxChild w33 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.hseparator4]));
+			global::Gtk.Box.BoxChild w33 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.hseparator4]));
 			w33.Position = 1;
 			this.vbox5.Add (this.hbox5);
-			global::Gtk.Box.BoxChild w34 = ((global::Gtk.Box.BoxChild)(this.vbox5[this.hbox5]));
+			global::Gtk.Box.BoxChild w34 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.hbox5]));
 			w34.Position = 0;
 			w34.Expand = false;
 			w34.Fill = false;
@@ -435,13 +391,13 @@ namespace Pinta.Effects
 			this.histogramOutput.FlipHorizontal = false;
 			this.histogramOutput.FlipVertical = false;
 			this.vbox5.Add (this.histogramOutput);
-			global::Gtk.Box.BoxChild w35 = ((global::Gtk.Box.BoxChild)(this.vbox5[this.histogramOutput]));
+			global::Gtk.Box.BoxChild w35 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.histogramOutput]));
 			w35.Position = 1;
 			this.hbox1.Add (this.vbox5);
-			global::Gtk.Box.BoxChild w36 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.vbox5]));
+			global::Gtk.Box.BoxChild w36 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox5]));
 			w36.Position = 3;
 			w1.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w37 = ((global::Gtk.Box.BoxChild)(w1[this.hbox1]));
+			global::Gtk.Box.BoxChild w37 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox1]));
 			w37.Position = 0;
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
 			this.hboxBottom = new global::Gtk.HBox ();
@@ -455,7 +411,7 @@ namespace Pinta.Effects
 			this.buttonAuto.UseUnderline = true;
 			this.buttonAuto.Label = global::Mono.Unix.Catalog.GetString ("Auto");
 			this.hboxBottom.Add (this.buttonAuto);
-			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.buttonAuto]));
+			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.buttonAuto]));
 			w38.Position = 0;
 			w38.Expand = false;
 			w38.Fill = false;
@@ -467,7 +423,7 @@ namespace Pinta.Effects
 			this.buttonReset.UseUnderline = true;
 			this.buttonReset.Label = global::Mono.Unix.Catalog.GetString ("Reset");
 			this.hboxBottom.Add (this.buttonReset);
-			global::Gtk.Box.BoxChild w39 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.buttonReset]));
+			global::Gtk.Box.BoxChild w39 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.buttonReset]));
 			w39.Position = 1;
 			w39.Expand = false;
 			w39.Fill = false;
@@ -480,7 +436,7 @@ namespace Pinta.Effects
 			this.checkRed.DrawIndicator = true;
 			this.checkRed.UseUnderline = true;
 			this.hboxBottom.Add (this.checkRed);
-			global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.checkRed]));
+			global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.checkRed]));
 			w40.Position = 2;
 			// Container child hboxBottom.Gtk.Box+BoxChild
 			this.checkGreen = new global::Gtk.CheckButton ();
@@ -491,7 +447,7 @@ namespace Pinta.Effects
 			this.checkGreen.DrawIndicator = true;
 			this.checkGreen.UseUnderline = true;
 			this.hboxBottom.Add (this.checkGreen);
-			global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.checkGreen]));
+			global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.checkGreen]));
 			w41.Position = 3;
 			// Container child hboxBottom.Gtk.Box+BoxChild
 			this.buttonOk = new global::Gtk.Button ();
@@ -502,7 +458,7 @@ namespace Pinta.Effects
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.hboxBottom.Add (this.buttonOk);
-			global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.buttonOk]));
+			global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.buttonOk]));
 			w42.PackType = ((global::Gtk.PackType)(1));
 			w42.Position = 4;
 			w42.Expand = false;
@@ -516,7 +472,7 @@ namespace Pinta.Effects
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.hboxBottom.Add (this.buttonCancel);
-			global::Gtk.Box.BoxChild w43 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.buttonCancel]));
+			global::Gtk.Box.BoxChild w43 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.buttonCancel]));
 			w43.PackType = ((global::Gtk.PackType)(1));
 			w43.Position = 5;
 			w43.Expand = false;
@@ -530,11 +486,11 @@ namespace Pinta.Effects
 			this.checkBlue.DrawIndicator = true;
 			this.checkBlue.UseUnderline = true;
 			this.hboxBottom.Add (this.checkBlue);
-			global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.hboxBottom[this.checkBlue]));
+			global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.hboxBottom [this.checkBlue]));
 			w44.PackType = ((global::Gtk.PackType)(1));
 			w44.Position = 6;
 			w1.Add (this.hboxBottom);
-			global::Gtk.Box.BoxChild w45 = ((global::Gtk.Box.BoxChild)(w1[this.hboxBottom]));
+			global::Gtk.Box.BoxChild w45 = ((global::Gtk.Box.BoxChild)(w1 [this.hboxBottom]));
 			w45.PackType = ((global::Gtk.PackType)(1));
 			w45.Position = 4;
 			w45.Expand = false;
@@ -549,9 +505,9 @@ namespace Pinta.Effects
 			this.buttonDummy.CanFocus = true;
 			this.buttonDummy.Name = "buttonDummy";
 			this.buttonDummy.UseUnderline = true;
-			this.buttonDummy.Label = "In stetic action button box cannot be empty";
+			this.buttonDummy.Label = global::Mono.Unix.Catalog.GetString ("In stetic action button box cannot be empty");
 			this.AddActionWidget (this.buttonDummy, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w47 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w46[this.buttonDummy]));
+			global::Gtk.ButtonBox.ButtonBoxChild w47 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w46 [this.buttonDummy]));
 			w47.Expand = false;
 			w47.Fill = false;
 			if ((this.Child != null)) {

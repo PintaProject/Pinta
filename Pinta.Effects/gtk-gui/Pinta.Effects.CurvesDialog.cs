@@ -5,39 +5,23 @@ namespace Pinta.Effects
 	public partial class CurvesDialog
 	{
 		private global::Gtk.HBox hbox1;
-
 		private global::Gtk.Label labelMap;
-
 		private global::Gtk.HSeparator hseparatorMap;
-
 		private global::Gtk.HBox hbox2;
-
 		private global::Gtk.ComboBox comboMap;
-
 		private global::Gtk.Alignment alignment3;
-
 		private global::Gtk.Label labelPoint;
-
 		private global::Gtk.DrawingArea drawing;
-
 		private global::Gtk.HBox hbox3;
-
 		private global::Gtk.CheckButton checkRed;
-
 		private global::Gtk.CheckButton checkGreen;
-
 		private global::Gtk.CheckButton checkBlue;
-
 		private global::Gtk.Alignment alignment1;
-
 		private global::Gtk.Button buttonReset;
-
 		private global::Gtk.Label labelTip;
-
 		private global::Gtk.Button buttonCancel;
-
 		private global::Gtk.Button buttonOk;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -61,7 +45,7 @@ namespace Pinta.Effects
 			this.labelMap.Name = "labelMap";
 			this.labelMap.LabelProp = global::Mono.Unix.Catalog.GetString ("Transfer Map");
 			this.hbox1.Add (this.labelMap);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.labelMap]));
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.labelMap]));
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
@@ -69,10 +53,10 @@ namespace Pinta.Effects
 			this.hseparatorMap = new global::Gtk.HSeparator ();
 			this.hseparatorMap.Name = "hseparatorMap";
 			this.hbox1.Add (this.hseparatorMap);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.hseparatorMap]));
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.hseparatorMap]));
 			w3.Position = 1;
 			w1.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1[this.hbox1]));
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox1]));
 			w4.Position = 0;
 			w4.Expand = false;
 			w4.Fill = false;
@@ -87,12 +71,12 @@ namespace Pinta.Effects
 			this.comboMap.Name = "comboMap";
 			this.comboMap.Active = 1;
 			this.hbox2.Add (this.comboMap);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboMap]));
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.comboMap]));
 			w5.Position = 0;
 			w5.Expand = false;
 			w5.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.alignment3 = new global::Gtk.Alignment (1f, 0.5f, 0f, 0f);
+			this.alignment3 = new global::Gtk.Alignment (1F, 0.5F, 0F, 0F);
 			this.alignment3.Name = "alignment3";
 			// Container child alignment3.Gtk.Container+ContainerChild
 			this.labelPoint = new global::Gtk.Label ();
@@ -100,13 +84,13 @@ namespace Pinta.Effects
 			this.labelPoint.LabelProp = global::Mono.Unix.Catalog.GetString ("(256, 256)");
 			this.alignment3.Add (this.labelPoint);
 			this.hbox2.Add (this.alignment3);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.alignment3]));
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.alignment3]));
 			w7.PackType = ((global::Gtk.PackType)(1));
 			w7.Position = 2;
 			w7.Expand = false;
 			w7.Fill = false;
 			w1.Add (this.hbox2);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(w1[this.hbox2]));
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox2]));
 			w8.Position = 1;
 			w8.Expand = false;
 			w8.Fill = false;
@@ -118,7 +102,7 @@ namespace Pinta.Effects
 			this.drawing.Events = ((global::Gdk.EventMask)(795646));
 			this.drawing.Name = "drawing";
 			w1.Add (this.drawing);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1[this.drawing]));
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.drawing]));
 			w9.Position = 2;
 			w9.Padding = ((uint)(8));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -133,7 +117,7 @@ namespace Pinta.Effects
 			this.checkRed.DrawIndicator = true;
 			this.checkRed.UseUnderline = true;
 			this.hbox3.Add (this.checkRed);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.checkRed]));
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.checkRed]));
 			w10.Position = 0;
 			// Container child hbox3.Gtk.Box+BoxChild
 			this.checkGreen = new global::Gtk.CheckButton ();
@@ -144,7 +128,7 @@ namespace Pinta.Effects
 			this.checkGreen.DrawIndicator = true;
 			this.checkGreen.UseUnderline = true;
 			this.hbox3.Add (this.checkGreen);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.checkGreen]));
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.checkGreen]));
 			w11.Position = 1;
 			// Container child hbox3.Gtk.Box+BoxChild
 			this.checkBlue = new global::Gtk.CheckButton ();
@@ -155,13 +139,13 @@ namespace Pinta.Effects
 			this.checkBlue.DrawIndicator = true;
 			this.checkBlue.UseUnderline = true;
 			this.hbox3.Add (this.checkBlue);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.checkBlue]));
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.checkBlue]));
 			w12.Position = 2;
 			// Container child hbox3.Gtk.Box+BoxChild
-			this.alignment1 = new global::Gtk.Alignment (0.5f, 0.5f, 1f, 1f);
+			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
 			this.alignment1.Name = "alignment1";
 			this.hbox3.Add (this.alignment1);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.alignment1]));
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.alignment1]));
 			w13.Position = 3;
 			// Container child hbox3.Gtk.Box+BoxChild
 			this.buttonReset = new global::Gtk.Button ();
@@ -172,12 +156,12 @@ namespace Pinta.Effects
 			this.buttonReset.UseUnderline = true;
 			this.buttonReset.Label = global::Mono.Unix.Catalog.GetString ("Reset");
 			this.hbox3.Add (this.buttonReset);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.buttonReset]));
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.buttonReset]));
 			w14.Position = 4;
 			w14.Expand = false;
 			w14.Fill = false;
 			w1.Add (this.hbox3);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(w1[this.hbox3]));
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox3]));
 			w15.Position = 3;
 			w15.Expand = false;
 			w15.Fill = false;
@@ -186,7 +170,7 @@ namespace Pinta.Effects
 			this.labelTip.Name = "labelTip";
 			this.labelTip.LabelProp = global::Mono.Unix.Catalog.GetString ("Tip: Right-click to remove control points.");
 			w1.Add (this.labelTip);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(w1[this.labelTip]));
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(w1 [this.labelTip]));
 			w16.Position = 4;
 			w16.Expand = false;
 			w16.Fill = false;
@@ -204,7 +188,7 @@ namespace Pinta.Effects
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w18 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w17[this.buttonCancel]));
+			global::Gtk.ButtonBox.ButtonBoxChild w18 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w17 [this.buttonCancel]));
 			w18.Expand = false;
 			w18.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
@@ -216,7 +200,7 @@ namespace Pinta.Effects
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w19 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w17[this.buttonOk]));
+			global::Gtk.ButtonBox.ButtonBoxChild w19 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w17 [this.buttonOk]));
 			w19.Position = 1;
 			w19.Expand = false;
 			w19.Fill = false;

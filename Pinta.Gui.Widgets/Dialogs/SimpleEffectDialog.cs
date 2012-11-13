@@ -55,6 +55,7 @@ namespace Pinta.Gui.Widgets
 			BorderWidth = 6;
 			VBox.Spacing = 12;
 			WidthRequest = 400;
+			Resizable = false;
 			DefaultResponse = Gtk.ResponseType.Ok;
 			AlternativeButtonOrder = new int[] { (int)Gtk.ResponseType.Ok, (int)Gtk.ResponseType.Cancel };
 

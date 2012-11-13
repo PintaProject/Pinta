@@ -5,19 +5,13 @@ namespace Pinta.Effects
 	public partial class PosterizeDialog
 	{
 		private global::Gtk.VBox vbox2;
-
 		private global::Pinta.Gui.Widgets.HScaleSpinButtonWidget hscalespinRed;
-
 		private global::Pinta.Gui.Widgets.HScaleSpinButtonWidget hscalespinGreen;
-
 		private global::Pinta.Gui.Widgets.HScaleSpinButtonWidget hscalespinBlue;
-
 		private global::Gtk.CheckButton checkLinked;
-
 		private global::Gtk.Button buttonCancel;
-
 		private global::Gtk.Button buttonOk;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -25,8 +19,10 @@ namespace Pinta.Effects
 			this.Name = "Pinta.Effects.PosterizeDialog";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Posterize");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.Resizable = false;
 			// Internal child Pinta.Effects.PosterizeDialog.VBox
 			global::Gtk.VBox w1 = this.VBox;
+			w1.WidthRequest = 400;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -45,7 +41,7 @@ namespace Pinta.Effects
 			this.hscalespinRed.IncrementValue = 0;
 			this.hscalespinRed.Value = 0;
 			this.vbox2.Add (this.hscalespinRed);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hscalespinRed]));
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hscalespinRed]));
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
@@ -61,7 +57,7 @@ namespace Pinta.Effects
 			this.hscalespinGreen.IncrementValue = 0;
 			this.hscalespinGreen.Value = 0;
 			this.vbox2.Add (this.hscalespinGreen);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hscalespinGreen]));
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hscalespinGreen]));
 			w3.Position = 1;
 			w3.Expand = false;
 			w3.Fill = false;
@@ -77,12 +73,12 @@ namespace Pinta.Effects
 			this.hscalespinBlue.IncrementValue = 0;
 			this.hscalespinBlue.Value = 0;
 			this.vbox2.Add (this.hscalespinBlue);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hscalespinBlue]));
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hscalespinBlue]));
 			w4.Position = 2;
 			w4.Expand = false;
 			w4.Fill = false;
 			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(w1[this.vbox2]));
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
 			w5.Position = 0;
 			w5.Expand = false;
 			w5.Fill = false;
@@ -95,7 +91,7 @@ namespace Pinta.Effects
 			this.checkLinked.DrawIndicator = true;
 			this.checkLinked.UseUnderline = true;
 			w1.Add (this.checkLinked);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(w1[this.checkLinked]));
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(w1 [this.checkLinked]));
 			w6.Position = 1;
 			w6.Expand = false;
 			w6.Fill = false;
@@ -114,7 +110,7 @@ namespace Pinta.Effects
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w8 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w7[this.buttonCancel]));
+			global::Gtk.ButtonBox.ButtonBoxChild w8 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w7 [this.buttonCancel]));
 			w8.Expand = false;
 			w8.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
@@ -126,7 +122,7 @@ namespace Pinta.Effects
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w9 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w7[this.buttonOk]));
+			global::Gtk.ButtonBox.ButtonBoxChild w9 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w7 [this.buttonOk]));
 			w9.Position = 1;
 			w9.Expand = false;
 			w9.Fill = false;
