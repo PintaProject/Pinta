@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="..\..\bin\Pinta.Core.dll" />
-    <widget-library name="..\..\Pinta.Gui.Widgets\bin\Debug\Pinta.Gui.Widgets.dll" />
-    <widget-library name="..\..\bin\Pinta.Resources.dll" />
-    <widget-library name="..\..\bin\Extensions\Pinta.Effects.dll" internal="true" />
+    <widget-library name="../../bin/Pinta.Core.dll" />
+    <widget-library name="../../bin/Pinta.Gui.Widgets.dll" />
+    <widget-library name="../../bin/Pinta.Effects.dll" internal="true" />
   </import>
   <widget class="Gtk.Dialog" id="Pinta.Effects.LevelsDialog" design-size="1754 326">
     <property name="MemberName" />
@@ -929,11 +928,13 @@ Luminosity</property>
     <property name="MemberName" />
     <property name="Title" translatable="yes">Posterize</property>
     <property name="WindowPosition">CenterOnParent</property>
+    <property name="Resizable">False</property>
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
       <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />
+        <property name="WidthRequest">400</property>
         <property name="BorderWidth">2</property>
         <child>
           <widget class="Gtk.VBox" id="vbox2">
