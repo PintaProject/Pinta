@@ -392,6 +392,8 @@ namespace Pinta.Core
 
 		void HandleInvertSelectionActivated (object sender, EventArgs e)
 		{
+			PintaCore.Tools.Commit ();
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Clear the selection resize handles if necessary.
