@@ -79,7 +79,7 @@ namespace Pinta.Tools
 
 				if (path != null) {
 					g.AppendPath (path);
-					path.Dispose ();
+					(path as IDisposable).Dispose ();
 				} else {
 					g.MoveTo (x, y);
 				}
