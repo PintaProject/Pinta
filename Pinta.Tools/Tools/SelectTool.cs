@@ -71,6 +71,8 @@ namespace Pinta.Tools
 				double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
 
 				shape_origin = new PointD (x, y);
+
+				doc.Selection.SelectionPolygons.Clear ();
 				is_drawing = true;
 			}
 			hist = new SelectionHistoryItem (Icon, Name);
