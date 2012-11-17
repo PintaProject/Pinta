@@ -72,18 +72,19 @@ namespace Pinta.Tools
 
 			doc.ShowSelection = true;
 
-			ImageSurface surf = doc.ToolLayer.Surface;
+			ImageSurface surf = doc.SelectionLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				g.Antialias = Antialias.Subpixel;
 
 				if (path != null) {
 					g.AppendPath (path);
-					(path as IDisposable).Dispose ();
+					path.Dispose ();
+				} else {
+					g.MoveTo (x, y);
 				}
 					
 				g.LineTo (x, y);
-
 				lassoPolygon.Add(new IntPoint((long)x, (long)y));
 
 				path = g.CopyPath ();
@@ -105,7 +106,7 @@ namespace Pinta.Tools
 
 			base.OnMouseUp (canvas, args, point);
 
-			ImageSurface surf = doc.CurrentLayer.Surface;
+			ImageSurface surf = doc.SelectionLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				if (path != null) {
