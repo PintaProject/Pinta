@@ -243,21 +243,23 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			ImageSurface src = doc.GetClippedLayer (doc.CurrentLayerIndex);
+			using (ImageSurface src = doc.GetClippedLayer (doc.CurrentLayerIndex)) {
 
-			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
+				Gdk.Rectangle rect = doc.GetSelectedBounds (true);
+				if (rect.Width == 0 || rect.Height == 0)
+					return;
 			
-			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
+				ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-			using (Context g = new Context (dest)) {
-				g.SetSourceSurface (src, -rect.X, -rect.Y);
-				g.Paint ();
+				using (Context g = new Context (dest)) {
+					g.SetSourceSurface (src, -rect.X, -rect.Y);
+					g.Paint ();
+				}
+			
+				cb.Image = dest.ToPixbuf ();
+
+				(dest as IDisposable).Dispose ();
 			}
-			
-			cb.Image = dest.ToPixbuf ();
-
-			(src as IDisposable).Dispose ();
-			(dest as IDisposable).Dispose ();
 		}
 
 		private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
