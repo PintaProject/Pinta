@@ -119,7 +119,7 @@ namespace Pinta.Tools
 			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = doc.CurrentLayer.Surface;
+			ImageSurface surf = doc.CurrentUserLayer.Surface;
 			ImageSurface tmp_layer = doc.ToolLayer.Surface;
 
 			Gdk.Rectangle roi = GetRectangleFromPoints (last_point, new Point (x, y));

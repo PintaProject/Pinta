@@ -108,11 +108,11 @@ namespace Pinta.Core
 					PintaCore.Layers.RotateImageCW ();
 					break;
 				case InvertType.FlipLayerHorizontal:
-					PintaCore.Workspace.ActiveDocument.Layers[layer_index].FlipHorizontal ();
+					PintaCore.Workspace.ActiveDocument.UserLayers[layer_index].FlipHorizontal ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 				case InvertType.FlipLayerVertical:
-					PintaCore.Workspace.ActiveDocument.Layers[layer_index].FlipVertical ();
+					PintaCore.Workspace.ActiveDocument.UserLayers[layer_index].FlipVertical ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 			}
@@ -140,11 +140,11 @@ namespace Pinta.Core
 					PintaCore.Layers.RotateImageCCW ();
 					break;
 				case InvertType.FlipLayerHorizontal:
-					PintaCore.Workspace.ActiveDocument.Layers[layer_index].FlipHorizontal ();
+					PintaCore.Workspace.ActiveDocument.UserLayers[layer_index].FlipHorizontal ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 				case InvertType.FlipLayerVertical:
-					PintaCore.Workspace.ActiveDocument.Layers[layer_index].FlipVertical ();
+					PintaCore.Workspace.ActiveDocument.UserLayers[layer_index].FlipVertical ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 			}

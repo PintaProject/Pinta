@@ -58,8 +58,8 @@ namespace Pinta.Core
 			int l1 = Math.Min (layer_index_1, layer_index_2);
 			int l2 = Math.Max (layer_index_1, layer_index_2);
 
-			Layer layer1 = PintaCore.Layers[l1];
-			Layer layer2 = PintaCore.Layers[l2];
+			UserLayer layer1 = PintaCore.Layers[l1];
+			UserLayer layer2 = PintaCore.Layers[l2];
 
 			PintaCore.Layers.DeleteLayer (l1, false);
 			PintaCore.Layers.DeleteLayer (l2 - 1, false);

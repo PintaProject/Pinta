@@ -81,12 +81,12 @@ namespace Pinta.Tools
 				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
 					g.AppendPath (doc.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
-					g.SetSource (doc.CurrentLayer.Surface);
+					g.SetSource (doc.CurrentUserLayer.Surface);
 					g.Clip ();
 					g.Paint ();
 				}
 
-				Cairo.ImageSurface surf = doc.CurrentLayer.Surface;
+				Cairo.ImageSurface surf = doc.CurrentUserLayer.Surface;
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
 					g.AppendPath (doc.Selection.SelectionPath);
@@ -108,7 +108,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.Selection.SelectionClipper.Clear ();
 			doc.Selection.SelectionPolygons = newSelectionPolygons;
-			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (newSelectionPolygons));
 				g.FillRule = FillRule.EvenOdd;
 				g.AppendPath (doc.Selection.SelectionPath);

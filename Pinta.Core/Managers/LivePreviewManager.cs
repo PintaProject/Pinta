@@ -76,7 +76,6 @@ namespace Pinta.Core
 			// Start rendering.
 			// Listen for changes to effectConfiguration object, and restart render if needed.
 			
-			live_preview_enabled = true;
 			apply_live_preview_flag = false;
 			cancel_live_preview_flag = false;
 			

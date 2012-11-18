@@ -247,7 +247,7 @@ namespace Pinta.Tools
 		private ColorBgra GetPixel (int x, int y)
 		{
 			if (SampleLayerOnly)
-				return PintaCore.Workspace.ActiveDocument.CurrentLayer.Surface.GetColorBgra (x, y);
+				return PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.GetColorBgra (x, y);
 			else
 				return PintaCore.Workspace.ActiveDocument.GetComputedPixel (x, y);
 		}

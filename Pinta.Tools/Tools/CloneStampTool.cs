@@ -91,7 +91,7 @@ namespace Pinta.Tools
 				doc.ToolLayer.Hidden = false;
 
 				surface_modified = false;
-				undo_surface = doc.CurrentLayer.Surface.Clone ();
+				undo_surface = doc.CurrentUserLayer.Surface.Clone ();
 			} else {
 				origin = point.ToGdkPoint ();
 			}
@@ -118,7 +118,7 @@ namespace Pinta.Tools
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
 
-				g.SetSource (doc.CurrentLayer.Surface, offset.X, offset.Y);
+				g.SetSource (doc.CurrentUserLayer.Surface, offset.X, offset.Y);
 				g.LineWidth = BrushWidth;
 				g.LineCap = Cairo.LineCap.Round;
 
@@ -138,7 +138,7 @@ namespace Pinta.Tools
 
 			painting = false;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				g.SetSource (doc.ToolLayer.Surface);
 				g.Paint ();
 			}

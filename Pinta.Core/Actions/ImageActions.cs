@@ -132,12 +132,12 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			var oldBottomSurface = doc.Layers[0].Surface.Clone ();
+			var oldBottomSurface = doc.UserLayers[0].Surface.Clone ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Catalog.GetString ("Flatten"));
 
-			for (int i = doc.Layers.Count - 1; i >= 1; i--)
-				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers[i], i));
+			for (int i = doc.UserLayers.Count - 1; i >= 1; i--)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.UserLayers[i], i));
 
 			doc.FlattenImage ();
 
@@ -194,7 +194,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface image = doc.CurrentLayer.Surface;
+			Cairo.ImageSurface image = doc.CurrentUserLayer.Surface;
 			Gdk.Rectangle rect = image.GetBounds ();
 
 			Cairo.Color borderColor = image.GetPixel (0, 0);
@@ -289,7 +289,7 @@ namespace Pinta.Core
 			
 			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
 			
-			foreach (var layer in doc.Layers)
+			foreach (var layer in doc.UserLayers)
 				layer.Crop (rect, doc.Selection.SelectionPath);
 
 			hist.FinishSnapshotOfImage ();

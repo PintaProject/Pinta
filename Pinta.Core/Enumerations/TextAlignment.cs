@@ -9,12 +9,12 @@
 
 using System;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	enum EditingMode
+	public enum TextAlignment
 	{
-		NotEditing,
-		EmptyEdit,
-		Editing
+		Right,
+		Center,
+		Left
 	}
 }

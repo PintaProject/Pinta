@@ -81,7 +81,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.Selection.SelectionClipper.Clear ();
 			doc.Selection.SelectionPolygons = newSelectionPolygons;
-			using (var g = new Cairo.Context (doc.CurrentLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
 				doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (newSelectionPolygons));
 				g.FillRule = FillRule.EvenOdd;
 				g.AppendPath (doc.Selection.SelectionPath);

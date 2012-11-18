@@ -9,12 +9,27 @@
 
 using System;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	enum TextAlignment
+	public sealed class Position
 	{
-		Right,
-		Center,
-		Left
+		private int line;
+		private int offset;
+
+		public Position (int line, int offset)
+		{
+			this.line = line;
+			this.offset = offset;
+		}
+
+		public int Line {
+			get { return line; }
+			set { line = Math.Max (value, 0); }
+		}
+
+		public int Offset {
+			get { return offset; }
+			set { offset = Math.Max (value, 0); }
+		}
 	}
 }

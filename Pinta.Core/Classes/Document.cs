@@ -49,6 +49,7 @@ namespace Pinta.Core
 
 		// The layer for tools to use until their output is committed
 		private Layer tool_layer;
+
 		// The layer used for selections
 		private Layer selection_layer;
 
@@ -65,8 +66,8 @@ namespace Pinta.Core
 			HasFile = false;
 			HasBeenSavedInSession = false;
 			ImageSize = size;
-			
-			Layers = new List<Layer> ();
+
+			UserLayers = new List<UserLayer>();
 
 			tool_layer = CreateLayer ("Tool Layer");
 			tool_layer.Hidden = true;
@@ -78,11 +79,12 @@ namespace Pinta.Core
 		}
 
 		#region Public Properties
-		public Layer CurrentLayer {
-			get { return Layers[current_layer]; }
+		public UserLayer CurrentUserLayer
+		{
+			get { return UserLayers[current_layer]; }
 		}
 
-		public int CurrentLayerIndex {
+		public int CurrentUserLayerIndex {
 			get { return current_layer; }
 		}
 		
@@ -122,7 +124,7 @@ namespace Pinta.Core
 			}
 		}
 		
-		public List<Layer> Layers { get; private set; }
+		public List<UserLayer> UserLayers { get; private set; }
 
 		/// <summary>
 		/// Just the directory name, like "C:\MyPictures".
@@ -176,22 +178,24 @@ namespace Pinta.Core
 		}
 
 		public DocumentWorkspace Workspace { get; private set; }
+
+		public delegate void LayerCloneEvent();
 		#endregion
 
 		#region Public Methods
 		// Adds a new layer above the current one
-		public Layer AddNewLayer (string name)
+		public UserLayer AddNewLayer(string name)
 		{
-			Layer layer;
+			UserLayer layer;
 
 			if (string.IsNullOrEmpty (name))
 				layer = CreateLayer ();
 			else
 				layer = CreateLayer (name);
 
-			Layers.Insert (current_layer + 1, layer);
+			UserLayers.Insert (current_layer + 1, layer);
 
-			if (Layers.Count == 1)
+			if (UserLayers.Count == 1)
 				current_layer = 0;
 
 			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
@@ -212,9 +216,9 @@ namespace Pinta.Core
 
 		public void Clear ()
 		{
-			while (Layers.Count > 0) {
-				Layer l = Layers[Layers.Count - 1];
-				Layers.RemoveAt (Layers.Count - 1);
+			while (UserLayers.Count > 0) {
+				Layer l = UserLayers[UserLayers.Count - 1];
+				UserLayers.RemoveAt (UserLayers.Count - 1);
 				(l.Surface as IDisposable).Dispose ();
 			}
 
@@ -226,9 +230,9 @@ namespace Pinta.Core
 		public void Close ()
 		{
 			// Dispose all of our layers
-			while (Layers.Count > 0) {
-				Layer l = Layers[Layers.Count - 1];
-				Layers.RemoveAt (Layers.Count - 1);
+			while (UserLayers.Count > 0) {
+				Layer l = UserLayers[UserLayers.Count - 1];
+				UserLayers.RemoveAt (UserLayers.Count - 1);
 				(l.Surface as IDisposable).Dispose ();
 			}
 
@@ -247,14 +251,14 @@ namespace Pinta.Core
 
 		public Context CreateClippedContext ()
 		{
-			Context g = new Context (CurrentLayer.Surface);
+			Context g = new Context (CurrentUserLayer.Surface);
 			Selection.Clip (g);
 			return g;
 		}
 
 		public Context CreateClippedContext (bool antialias)
 		{
-			Context g = new Context (CurrentLayer.Surface);
+			Context g = new Context (CurrentUserLayer.Surface);
 			Selection.Clip (g);
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 			return g;
@@ -275,25 +279,25 @@ namespace Pinta.Core
 			return g;
 		}
 
-		public Layer CreateLayer ()
+		public UserLayer CreateLayer ()
 		{
 			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++));
 		}
 
-		public Layer CreateLayer (int width, int height)
+		public UserLayer CreateLayer (int width, int height)
 		{
 			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++), width, height);
 		}
 
-		public Layer CreateLayer (string name)
+		public UserLayer CreateLayer (string name)
 		{
 			return CreateLayer (name, ImageSize.Width, ImageSize.Height);
 		}
 
-		public Layer CreateLayer (string name, int width, int height)
+		public UserLayer CreateLayer(string name, int width, int height)
 		{
 			Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
-			Layer layer = new Layer (surface) { Name = name };
+			UserLayer layer = new UserLayer(surface) { Name = name };
 
 			return layer;
 		}
@@ -321,9 +325,9 @@ namespace Pinta.Core
 		// Delete the current layer
 		public void DeleteCurrentLayer ()
 		{
-			Layer layer = CurrentLayer;
+			Layer layer = CurrentUserLayer;
 
-			Layers.RemoveAt (current_layer);
+			UserLayers.RemoveAt (current_layer);
 
 			// Only change this if this wasn't already the bottom layer
 			if (current_layer > 0)
@@ -337,9 +341,9 @@ namespace Pinta.Core
 		// Delete the layer
 		public void DeleteLayer (int index, bool dispose)
 		{
-			Layer layer = Layers[index];
+			Layer layer = UserLayers[index];
 
-			Layers.RemoveAt (index);
+			UserLayers.RemoveAt (index);
 
 			if (dispose)
 				(layer.Surface as IDisposable).Dispose ();
@@ -361,10 +365,10 @@ namespace Pinta.Core
 		}
 
 		// Duplicate current layer
-		public Layer DuplicateCurrentLayer ()
+		public UserLayer DuplicateCurrentLayer()
 		{
-			Layer source = CurrentLayer;
-			Layer layer = CreateLayer (string.Format ("{0} {1}", source.Name, Catalog.GetString ("copy")));
+			UserLayer source = CurrentUserLayer;
+			UserLayer layer = CreateLayer(string.Format("{0} {1}", source.Name, Catalog.GetString("copy")));
 
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				g.SetSource (source.Surface);
@@ -375,7 +379,7 @@ namespace Pinta.Core
 			layer.Opacity = source.Opacity;
 			layer.Tiled = source.Tiled;
 
-			Layers.Insert (++current_layer, layer);
+			UserLayers.Insert (++current_layer, layer);
 
 			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
@@ -395,7 +399,7 @@ namespace Pinta.Core
 
 			Layer layer = SelectionLayer;
 
-			using (Cairo.Context g = new Cairo.Context (CurrentLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (CurrentUserLayer.Surface)) {
 				layer.Draw(g);
 			}
 
@@ -408,11 +412,11 @@ namespace Pinta.Core
 		// Flatten image
 		public void FlattenImage ()
 		{
-			if (Layers.Count < 2)
+			if (UserLayers.Count < 2)
 				throw new InvalidOperationException ("Cannot flatten image because there is only one layer.");
 
 			// Find the "bottom" layer
-			var bottom_layer = Layers[0];
+			var bottom_layer = UserLayers[0];
 			var old_surf = bottom_layer.Surface;
 
 			// Replace the bottom surface with the flattened image,
@@ -424,8 +428,8 @@ namespace Pinta.Core
 			current_layer = 0;
 
 			// Delete all other layers
-			while (Layers.Count > 1)
-				Layers.RemoveAt (1);
+			while (UserLayers.Count > 1)
+				UserLayers.RemoveAt (1);
 
 			PintaCore.Layers.OnLayerRemoved ();
 			Workspace.Invalidate ();
@@ -434,7 +438,7 @@ namespace Pinta.Core
 		// Flip image horizontally
 		public void FlipImageHorizontal ()
 		{
-			foreach (var layer in Layers)
+			foreach (var layer in UserLayers)
 				layer.FlipHorizontal ();
 
 			Workspace.Invalidate ();
@@ -443,7 +447,7 @@ namespace Pinta.Core
 		// Flip image vertically
 		public void FlipImageVertical ()
 		{
-			foreach (var layer in Layers)
+			foreach (var layer in UserLayers)
 				layer.FlipVertical ();
 
 			Workspace.Invalidate ();
@@ -457,7 +461,7 @@ namespace Pinta.Core
 				g.AppendPath(Selection.SelectionPath);
 				g.Clip ();
 
-				g.SetSource (Layers[index].Surface);
+				g.SetSource (UserLayers[index].Surface);
 				g.Paint ();
 			}
 
@@ -499,16 +503,22 @@ namespace Pinta.Core
 		{
 			List<Layer> paint = new List<Layer> ();
 
-			foreach (var layer in Layers) {
+			foreach (var layer in UserLayers) {
 				if (!layer.Hidden)
 					paint.Add (layer);
 
-				if (layer == CurrentLayer) {
+				if (layer == CurrentUserLayer) {
 					if (!ToolLayer.Hidden)
 						paint.Add (ToolLayer);
 
 					if (ShowSelectionLayer)
 						paint.Add (SelectionLayer);
+				}
+
+				//Make sure that the UserLayer's TextLayer is in use.
+				if (!layer.Hidden && layer.IsTextLayerSetup)
+				{
+					paint.Add(layer.TextLayer);
 				}
 			}
 
@@ -526,17 +536,17 @@ namespace Pinta.Core
 			return bounds;
 		}
 
-		public int IndexOf (Layer layer)
+		public int IndexOf(UserLayer layer)
 		{
-			return Layers.IndexOf (layer);
+			return UserLayers.IndexOf (layer);
 		}
 
 		// Adds a new layer above the current one
-		public void Insert (Layer layer, int index)
+		public void Insert(UserLayer layer, int index)
 		{
-			Layers.Insert (index, layer);
+			UserLayers.Insert (index, layer);
 
-			if (Layers.Count == 1)
+			if (UserLayers.Count == 1)
 				current_layer = 0;
 
 			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
@@ -551,8 +561,8 @@ namespace Pinta.Core
 				throw new InvalidOperationException ("Cannot flatten layer because current layer is the bottom layer.");
 
 			// Get our source and destination layers
-			var source = CurrentLayer;
-			var dest = Layers[current_layer - 1];
+			var source = CurrentUserLayer;
+			var dest = UserLayers[current_layer - 1];
 
 			// Blend the layers
 			var blendop = UserBlendOps.GetBlendOp (source.BlendMode, source.Opacity);
@@ -567,9 +577,9 @@ namespace Pinta.Core
 			if (current_layer == 0)
 				throw new InvalidOperationException ("Cannot move layer down because current layer is the bottom layer.");
 
-			Layer layer = CurrentLayer;
-			Layers.RemoveAt (current_layer);
-			Layers.Insert (--current_layer, layer);
+			UserLayer layer = CurrentUserLayer;
+			UserLayers.RemoveAt (current_layer);
+			UserLayers.Insert (--current_layer, layer);
 
 			PintaCore.Layers.OnSelectedLayerChanged ();
 
@@ -579,12 +589,12 @@ namespace Pinta.Core
 		// Move current layer up
 		public void MoveCurrentLayerUp ()
 		{
-			if (current_layer == Layers.Count)
+			if (current_layer == UserLayers.Count)
 				throw new InvalidOperationException ("Cannot move layer up because current layer is the top layer.");
 
-			Layer layer = CurrentLayer;
-			Layers.RemoveAt (current_layer);
-			Layers.Insert (++current_layer, layer);
+			UserLayer layer = CurrentUserLayer;
+			UserLayers.RemoveAt (current_layer);
+			UserLayers.Insert (++current_layer, layer);
 
 			PintaCore.Layers.OnSelectedLayerChanged ();
 
@@ -625,7 +635,7 @@ namespace Pinta.Core
 
 			ImageSize = new Gdk.Size (width, height);
 
-			foreach (var layer in Layers)
+			foreach (var layer in UserLayers)
 				layer.ResizeCanvas (width, height, anchor);
 
 			hist.FinishSnapshotOfImage ();
@@ -657,7 +667,7 @@ namespace Pinta.Core
 
 			ImageSize = new Gdk.Size (width, height);
 
-			foreach (var layer in Layers)
+			foreach (var layer in UserLayers)
 				layer.Resize (width, height);
 
 			hist.FinishSnapshotOfImage ();
@@ -690,7 +700,7 @@ namespace Pinta.Core
 		/// </summary>
 		private void RotateImage (double angle)
 		{
-			foreach (var layer in Layers)
+			foreach (var layer in UserLayers)
 			{
 				layer.Rotate (angle);
 			}
@@ -708,7 +718,7 @@ namespace Pinta.Core
 			return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
 		}
 
-		public void SetCurrentLayer (int i)
+		public void SetCurrentUserLayer (int i)
 		{
 			// Ensure that the current tool's modifications are finalized before
 			// switching layers.
@@ -718,9 +728,9 @@ namespace Pinta.Core
 			PintaCore.Layers.OnSelectedLayerChanged ();
 		}
 
-		public void SetCurrentLayer (Layer layer)
+		public void SetCurrentUserLayer(UserLayer layer)
 		{
-			SetCurrentLayer (Layers.IndexOf (layer));
+			SetCurrentUserLayer (UserLayers.IndexOf (layer));
 		}
 
 		public void Paste (bool toNewLayer)
@@ -783,9 +793,9 @@ namespace Pinta.Core
 			// layer and record it's creation in the history
 			if (toNewLayer)
 			{
-				Layer l = AddNewLayer (string.Empty);
-				SetCurrentLayer (l);
-				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), Layers.IndexOf (l)));
+				UserLayer l = AddNewLayer (string.Empty);
+				SetCurrentUserLayer (l);
+				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), UserLayers.IndexOf (l)));
 			}
 
 			// Copy the paste to the temp layer, which should be at least the size of this document.
@@ -850,6 +860,17 @@ namespace Pinta.Core
 			md.Run ();
 			md.Destroy ();
 		}
+
+		/// <summary>
+		/// Signal to the TextTool that an ImageSurface was cloned.
+		/// </summary>
+		public void SignalSurfaceCloned()
+		{
+			if (LayerCloned != null)
+			{
+				LayerCloned();
+			}
+		}
 		#endregion
 
 		#region Protected Methods
@@ -876,6 +897,7 @@ namespace Pinta.Core
 		#region Public Events
 		public event EventHandler IsDirtyChanged;
 		public event EventHandler Renamed;
+		public event LayerCloneEvent LayerCloned;
 		#endregion
 	}
 }

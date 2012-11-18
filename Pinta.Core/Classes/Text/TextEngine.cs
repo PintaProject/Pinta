@@ -14,15 +14,18 @@ using System.Text;
 using Gdk;
 using Pinta.Core;
 using System.Security;
+using System.Reflection;
+using System.Linq;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	class TextEngine
+	public class TextEngine
 	{
 		private Point origin;
 		private Pango.Layout layout;
 
 		private List<string> lines;
+
 		private int linePos;
 		private int textPos;
 		// Relative coordonate of selection
@@ -30,14 +33,15 @@ namespace Pinta.Tools
 		bool underline;
 		Gtk.IMMulticontext imContext;
 
-		public TextEngine ()
+		public TextEngine()
 		{
 			lines = new List<string> ();
+			lines.Add(string.Empty);
+			textMode = TextMode.Unchanged;
 
 			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
 			imContext = new Gtk.IMMulticontext ();
 			imContext.Commit += OnCommit;
-
 		}
 
 		#region Public Properties
@@ -46,9 +50,17 @@ namespace Pinta.Tools
 		}
 
 		public EditingMode EditMode {
-			get {
-				if (lines.Count == 1 && lines[0] == string.Empty)
+			get
+			{
+				if (textMode == TextMode.Unchanged)
+				{
+					return EditingMode.NoChangeEditing;
+				}
+
+				if (IsEmpty())
+				{
 					return EditingMode.EmptyEdit;
+				}
 
 				return EditingMode.Editing;
 			}
@@ -57,7 +69,9 @@ namespace Pinta.Tools
 		public int FontHeight { get { return GetCursorLocation ().Height; } }
 		public Pango.Layout Layout { get { return layout; } }
 		public int LineCount { get { return lines.Count; } }
+		public TextMode textMode;
 
+		//The position to draw the text at.
 		public Point Origin {
 			get { return origin; }
 			set { origin = value; }
@@ -102,15 +116,39 @@ namespace Pinta.Tools
 		#region Public Methods
 		public void Clear ()
 		{
-			lines.Clear ();
-			lines.Add (string.Empty);
+			lines.Clear();
+			lines.Add(string.Empty);
+			textMode = TextMode.Unchanged;
 
 			linePos = 0;
 			textPos = 0;
+
 			origin = Point.Zero;
 			selectionRelativeIndex = 0;
 
 			Recalculate ();
+		}
+
+		/// <summary>
+		/// Performs a deep clone of the TextEngine instance and returns the clone.
+		/// </summary>
+		/// <returns>A clone of this TextEngine instance.</returns>
+		public TextEngine Clone()
+		{
+			TextEngine clonedTE = new TextEngine();
+
+			clonedTE.layout = layout.Copy();
+			clonedTE.lines = lines.ToList();
+			clonedTE.textMode = textMode;
+			clonedTE.linePos = linePos;
+			clonedTE.textPos = textPos;
+			clonedTE.selectionRelativeIndex = selectionRelativeIndex;
+			clonedTE.underline = underline;
+			clonedTE.Origin = new Point(Origin.X, Origin.Y);
+
+			//The rest of the variables are calculated on the spot.
+
+			return clonedTE;
 		}
 
 		public Rectangle GetCursorLocation ()
@@ -136,6 +174,11 @@ namespace Pinta.Tools
 
 			Rectangle r = new Rectangle (ink.X + origin.X, ink.Y + origin.Y, ink.Width, ink.Height);
 			return r;
+		}
+
+		public bool IsEmpty()
+		{
+			return (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty));
 		}
 
 		public Position PointToTextPosition (Point point)
@@ -231,6 +274,7 @@ namespace Pinta.Tools
 						utf32Char = ca.Str[i];
 					}
 					lines[linePos] = lines[linePos].Insert (textPos, utf32Char.ToString ());
+					textMode = TextMode.Uncommitted;
 					textPos += utf32Char.ToString ().Length;
 				}
 
@@ -254,6 +298,8 @@ namespace Pinta.Tools
 				lines.Insert (linePos + 1, currentLine.Substring (textPos, currentLine.Length - textPos));
 				lines[linePos] = lines[linePos].Substring (0, textPos);
 			}
+
+			textMode = TextMode.Uncommitted;
 
 			linePos++;
 			textPos = 0;
@@ -290,6 +336,8 @@ namespace Pinta.Tools
 				textPos--;
 				Recalculate ();
 			}
+
+			textMode = TextMode.Uncommitted;
 		}
 
 		public void PerformDelete ()
@@ -311,6 +359,8 @@ namespace Pinta.Tools
 				// Middle of a line somewhere
 				lines[linePos] = lines[linePos].Substring (0, textPos) + (lines[linePos]).Substring (textPos + 1);
 			}
+
+			textMode = TextMode.Uncommitted;
 
 			Recalculate ();
 		}
@@ -553,6 +603,8 @@ namespace Pinta.Tools
 			}
 			lines [linePos] += endline;
 
+			textMode = TextMode.Uncommitted;
+
 			Recalculate ();
 			return true;
 		}
@@ -690,6 +742,8 @@ namespace Pinta.Tools
 					lines.RemoveAt (curlinepos);
 				}
 			}
+
+			textMode = TextMode.Uncommitted;
 
 			Recalculate ();
 

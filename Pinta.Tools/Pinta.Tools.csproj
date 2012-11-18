@@ -96,11 +96,7 @@
     <Compile Include="Tools\RoundedRectangleTool.cs" />
     <Compile Include="Tools\SelectTool.cs" />
     <Compile Include="Tools\ShapeTool.cs" />
-    <Compile Include="Tools\TextTool\Position.cs" />
-    <Compile Include="Tools\TextTool\TextAlignment.cs" />
-    <Compile Include="Tools\TextTool\EditingMode.cs" />
-    <Compile Include="Tools\TextTool\TextEngine.cs" />
-    <Compile Include="Tools\TextTool\TextTool.cs" />
+    <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Tools\CloneStampTool.cs" />
     <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="Brushes\PaintBrush.cs" />
