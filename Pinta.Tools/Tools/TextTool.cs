@@ -53,7 +53,8 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine;
+				return PintaCore.Workspace.HasOpenDocuments ?
+					PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine : null;
 			}
 
 			set
@@ -123,161 +124,151 @@ namespace Pinta.Tools
 		private ToolBarButton outline_width_minus;
 		private ToolBarButton outline_width_plus;
 
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
-			base.OnBuildToolBar(tb);
+			base.OnBuildToolBar (tb);
 
 			if (font_label == null)
-				font_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Font")));
+				font_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Font")));
 
-			tb.AppendItem(font_label);
+			tb.AppendItem (font_label);
 
-			if (font_combo == null)
-			{
-				var fonts = PintaCore.System.Fonts.GetInstalledFonts();
-				fonts.Sort();
+			if (font_combo == null) {
+				var fonts = PintaCore.System.Fonts.GetInstalledFonts ();
+				fonts.Sort ();
 
 				// Default to Arial or first in list
-				int index = Math.Max(fonts.IndexOf("Arial"), 0);
+				int index = Math.Max (fonts.IndexOf ("Arial"), 0);
 
-				font_combo = new ToolBarFontComboBox(150, index, fonts.ToArray());
+				font_combo = new ToolBarFontComboBox (150, index, fonts.ToArray ());
 				font_combo.ComboBox.Changed += HandleFontChanged;
 			}
 
-			tb.AppendItem(font_combo);
+			tb.AppendItem (font_combo);
 
 			if (spacer_label == null)
-				spacer_label = new ToolBarLabel(" ");
+				spacer_label = new ToolBarLabel (" ");
 
-			tb.AppendItem(spacer_label);
+			tb.AppendItem (spacer_label);
 
-			if (size_combo == null)
-			{
-				size_combo = new ToolBarComboBox(65, 0, true);
+			if (size_combo == null) {
+				size_combo = new ToolBarComboBox (65, 0, true);
 
 				size_combo.ComboBox.Changed += HandleSizeChanged;
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler(HandleFontSizeFocusOut);
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler(HandleFontSizeFocusIn);
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
+				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
 			}
 
-			tb.AppendItem(size_combo);
+			tb.AppendItem (size_combo);
 
-			tb.AppendItem(new SeparatorToolItem());
+			tb.AppendItem (new SeparatorToolItem ());
 
-			if (bold_btn == null)
-			{
-				bold_btn = new ToolBarToggleButton("Toolbar.Bold.png", Catalog.GetString("Bold"), Catalog.GetString("Bold"));
+			if (bold_btn == null) {
+				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Catalog.GetString ("Bold"), Catalog.GetString ("Bold"));
 				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
 
-			tb.AppendItem(bold_btn);
+			tb.AppendItem (bold_btn);
 
-			if (italic_btn == null)
-			{
-				italic_btn = new ToolBarToggleButton("Toolbar.Italic.png", Catalog.GetString("Italic"), Catalog.GetString("Italic"));
+			if (italic_btn == null) {
+				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Catalog.GetString ("Italic"), Catalog.GetString ("Italic"));
 				italic_btn.Toggled += HandleItalicButtonToggled;
 			}
 
-			tb.AppendItem(italic_btn);
+			tb.AppendItem (italic_btn);
 
-			if (underscore_btn == null)
-			{
-				underscore_btn = new ToolBarToggleButton("Toolbar.Underline.png", Catalog.GetString("Underline"), Catalog.GetString("Underline"));
+			if (underscore_btn == null) {
+				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Catalog.GetString ("Underline"), Catalog.GetString ("Underline"));
 				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
 
-			tb.AppendItem(underscore_btn);
+			tb.AppendItem (underscore_btn);
 
-			tb.AppendItem(new SeparatorToolItem());
+			tb.AppendItem (new SeparatorToolItem ());
 
-			if (left_alignment_btn == null)
-			{
-				left_alignment_btn = new ToolBarToggleButton("Toolbar.LeftAlignment.png", Catalog.GetString("Left Align"), Catalog.GetString("Left Align"));
+			if (left_alignment_btn == null) {
+				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Catalog.GetString ("Left Align"), Catalog.GetString ("Left Align"));
 				left_alignment_btn.Active = true;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
 			}
 
-			tb.AppendItem(left_alignment_btn);
+			tb.AppendItem (left_alignment_btn);
 
-			if (center_alignment_btn == null)
-			{
-				center_alignment_btn = new ToolBarToggleButton("Toolbar.CenterAlignment.png", Catalog.GetString("Center Align"), Catalog.GetString("Center Align"));
+			if (center_alignment_btn == null) {
+				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Catalog.GetString ("Center Align"), Catalog.GetString ("Center Align"));
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
 			}
 
-			tb.AppendItem(center_alignment_btn);
+			tb.AppendItem (center_alignment_btn);
 
-			if (Right_alignment_btn == null)
-			{
-				Right_alignment_btn = new ToolBarToggleButton("Toolbar.RightAlignment.png", Catalog.GetString("Right Align"), Catalog.GetString("Right Align"));
+			if (Right_alignment_btn == null) {
+				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Catalog.GetString ("Right Align"), Catalog.GetString ("Right Align"));
 				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
 			}
 
-			tb.AppendItem(Right_alignment_btn);
+			tb.AppendItem (Right_alignment_btn);
 
 			if (fill_sep == null)
-				fill_sep = new Gtk.SeparatorToolItem();
+				fill_sep = new Gtk.SeparatorToolItem ();
 
-			tb.AppendItem(fill_sep);
+			tb.AppendItem (fill_sep);
 
 			if (fill_label == null)
-				fill_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Text Style")));
+				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Text Style")));
 
-			tb.AppendItem(fill_label);
+			tb.AppendItem (fill_label);
 
-			if (fill_button == null)
-			{
-				fill_button = new ToolBarDropDownButton();
+			if (fill_button == null) {
+				fill_button = new ToolBarDropDownButton ();
 
-				fill_button.AddItem(Catalog.GetString("Normal"), "ShapeTool.Fill.png", 0);
-				fill_button.AddItem(Catalog.GetString("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
-				fill_button.AddItem(Catalog.GetString("Outline"), "ShapeTool.Outline.png", 2);
-				fill_button.AddItem(Catalog.GetString("Fill Background"), "TextTool.FillBackground.png", 3);
+				fill_button.AddItem (Catalog.GetString ("Normal"), "ShapeTool.Fill.png", 0);
+				fill_button.AddItem (Catalog.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
+				fill_button.AddItem (Catalog.GetString ("Outline"), "ShapeTool.Outline.png", 2);
+				fill_button.AddItem (Catalog.GetString ("Fill Background"), "TextTool.FillBackground.png", 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}
 
-			tb.AppendItem(fill_button);
+			tb.AppendItem (fill_button);
 
 			if (outline_width_label == null)
-				outline_width_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Outline width")));
+				outline_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Outline width")));
 
-			tb.AppendItem(outline_width_label);
+			tb.AppendItem (outline_width_label);
 
-			if (outline_width_minus == null)
-			{
-				outline_width_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease outline size"));
+			if (outline_width_minus == null) {
+				outline_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease outline size"));
 				outline_width_minus.Clicked += MinusButtonClickedEvent;
 			}
 
-			tb.AppendItem(outline_width_minus);
+			tb.AppendItem (outline_width_minus);
 
-			if (outline_width == null)
-			{
-				outline_width = new ToolBarComboBox(65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			if (outline_width == null) {
+				outline_width = new ToolBarComboBox (65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
 				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 				"40", "45", "50", "55");
 
 				(outline_width.Child as ComboBoxEntry).Changed += HandleSizeChanged;
 			}
 
-			tb.AppendItem(outline_width);
+			tb.AppendItem (outline_width);
 
-			if (outline_width_plus == null)
-			{
-				outline_width_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase outline size"));
+			if (outline_width_plus == null) {
+				outline_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase outline size"));
 				outline_width_plus.Clicked += PlusButtonClickedEvent;
 			}
 
-			tb.AppendItem(outline_width_plus);
+			tb.AppendItem (outline_width_plus);
 
-			UpdateFontSizes();
+			UpdateFontSizes ();
 
-			//Make sure the event handler is never added twice.
-			PintaCore.Workspace.ActiveDocument.LayerCloned -= FinalizeText;
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				//Make sure the event handler is never added twice.
+				PintaCore.Workspace.ActiveDocument.LayerCloned -= FinalizeText;
 
-			//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
-			PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
+				//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
+				PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
+			}
 		}
 
 		string temp_size;
@@ -433,8 +424,10 @@ namespace Pinta.Tools
 
 		private void UpdateFont ()
 		{
-			CurrentTextEngine.SetAlignment(Alignment);
-			CurrentTextEngine.SetFont(Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
+			if (CurrentTextEngine != null) {
+				CurrentTextEngine.SetAlignment (Alignment);
+				CurrentTextEngine.SetFont (Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
+			}
 
 			if (is_editing)
 				RedrawText (true, true);
@@ -699,8 +692,13 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Keyboard Handlers
-		protected override void OnKeyDown(DrawingArea canvas, KeyPressEventArgs args)
+		protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
 		{
+			if (!PintaCore.Workspace.HasOpenDocuments) {
+				args.RetVal = false;
+				return;
+			}
+
 			Gdk.ModifierType modifier = args.Event.State;
 
 			// If we are dragging the text, we
@@ -868,6 +866,12 @@ namespace Pinta.Tools
 
 		private void StopEditing(bool finalize)
 		{
+			if (!PintaCore.Workspace.HasOpenDocuments)
+				return;
+
+			if (!is_editing)
+				return;
+
 			is_editing = false;
 
 			//Make sure that neither undo surface is null, the user is editing, and there are uncommitted changes.
