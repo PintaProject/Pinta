@@ -30,6 +30,7 @@ using Mono.Addins;
 using Mono.Unix;
 using MonoDevelop.Components.Docking;
 using Pinta.Core;
+using Pinta.MacInterop;
 
 namespace Pinta
 {

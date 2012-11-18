@@ -87,6 +87,10 @@ namespace Pinta
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
 
+			if (SystemManager.GetOperatingSystem () == OS.Mac) {
+				RegisterForAppleEvents ();
+			}
+
 			OpenFilesFromCommandLine (extra);
 			
 			Application.Run ();
@@ -128,6 +132,17 @@ namespace Pinta
 			} finally {
 				errorDialog.Destroy ();
 			}
+		}
+
+		/// <summary>
+		/// Registers for OSX-specific events, like quitting from the dock.
+		/// </summary>
+		static void RegisterForAppleEvents ()
+		{
+			MacInterop.ApplicationEvents.Quit += (sender, e) => {
+				Application.Quit ();
+				e.Handled = true;
+			};
 		}
 	}
 }
