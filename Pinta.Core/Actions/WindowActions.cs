@@ -97,7 +97,9 @@ namespace Pinta.Core
 			// Remove from our list of actions
 			RadioAction act = OpenWindows.Where (p => p.Name == doc.Guid.ToString ()).FirstOrDefault ();
 			OpenWindows.Remove (act);
-            act.Dispose ();
+            		act.Dispose ();
+
+			window_menu.HideAll ();
 
 			// Remove all the menu items from the menu
 			foreach (var item in action_menu_items.Values) {
@@ -123,6 +125,8 @@ namespace Pinta.Core
 				action_menu_items.Add (action, menuitem);
 				window_menu.Add (menuitem);
 			}
+
+			window_menu.ShowAll ();
 		}
 		#endregion
 
