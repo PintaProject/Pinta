@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
@@ -7,7 +7,7 @@
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../../bin/Pinta.Core.dll" />
-    <widget-library name="../bin/Debug/Pinta.Gui.Widgets.dll" internal="true" />
+    <widget-library name="../../bin/Pinta.Gui.Widgets.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Pinta.Gui.Widgets.HistogramWidget" design-size="300 300">
     <property name="MemberName" />
