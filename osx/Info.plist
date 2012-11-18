@@ -3,7 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDocumentTypes</key>
-	<array/>
+	<array>
+            <dict>
+                <key>CFBundleTypeIconFile</key>
+                <string>pinta.icns</string>
+                <key>CFBundleTypeName</key>
+                <string>PNG</string>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>LSItemContentTypes</key>
+                <array>
+                    <string>public.png</string>
+                </array>
+            </dict>
+        </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>

@@ -140,7 +140,23 @@ namespace Pinta
 		static void RegisterForAppleEvents ()
 		{
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
-				Application.Quit ();
+				GLib.Timeout.Add (10, delegate {
+					PintaCore.Actions.File.Exit.Activate ();
+					return false;
+				});
+				e.Handled = true;
+			};
+
+			MacInterop.ApplicationEvents.OpenDocuments += (sender, e) => {
+				if (e.Documents != null) {
+					GLib.Timeout.Add (10, delegate {
+						foreach (string filename in e.Documents.Keys) {
+							System.Console.Error.WriteLine ("Opening: {0}", filename);
+							PintaCore.Workspace.OpenFile (filename);
+						}
+						return false;
+					});
+				}
 				e.Handled = true;
 			};
 		}
