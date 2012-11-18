@@ -647,7 +647,7 @@ namespace Pinta.Tools
 			//Whether or not to show the normal text cursor.
 			bool showNormalCursor = false;
 
-			if (ctrlKey)
+			if (ctrlKey && PintaCore.Workspace.HasOpenDocuments)
 			{
 				//Go through every UserLayer.
 				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers)
@@ -674,7 +674,8 @@ namespace Pinta.Tools
 
 					previousMouseCursorNormal = showNormalCursor;
 
-					RedrawText(true, true);
+					if (PintaCore.Workspace.HasOpenDocuments)
+						RedrawText(true, true);
 				}
 			}
 			else
