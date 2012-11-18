@@ -1,1159 +1,792 @@
 # Serbian translation for pinta
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-08-12 01:45-0400\n"
-"PO-Revision-Date: 2012-04-02 01:08+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
-"Language-Team: Serbian <sr@li.org>\n"
+"POT-Creation-Date: 2012-11-05 23:09-0500\n"
+"PO-Revision-Date: 2012-11-03 14:12+0000\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian translators\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-09-22 22:52+0000\n"
-"X-Generator: Launchpad (build 15985)\n"
+"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
+"Language: sr\n"
 
-#: Pinta.Tools/Tools/PanTool.cs:37
-msgid "Pan"
-msgstr "Pan"
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
+msgid "Layer Shown"
+msgstr "Приказани слој"
 
-#: Pinta.Tools/Tools/PanTool.cs:43
-msgid "Click and drag to navigate image."
-msgstr "Klikni i prevuci za pozicioniranje slike."
+#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
+msgid "Layer Hidden"
+msgstr "Скривени слој"
 
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:41
-#: Pinta/Actions/Edit/PasteAction.cs:100
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:64
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:70
-msgid "Move Selected Pixels"
-msgstr "Premesti odabrane piksele"
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
+msgid "Choose Primary Color"
+msgstr "Изаберите основну боју"
 
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:47
-msgid "Drag the selection to move selected content."
-msgstr "Premesti odabir da bi premestio odabrani sadržaj."
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:99
+msgid "Choose Secondary Color"
+msgstr "Изаберите споредну боју"
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:63
-msgid "Color Picker"
-msgstr "Birač boja"
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+msgid "Choose Palette Color"
+msgstr "Изаберите боју палете"
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:69
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
-"Levi klik za postavljanje osnovne boje. Desni klik za postavljanje druge "
-"boje."
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+msgid "Click to switch between primary and secondary color."
+msgstr "Кликните да се пребаците између основне и споредне боје."
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:94
-msgid "Sampling"
-msgstr ""
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+msgid "Click to select primary color."
+msgstr "Кликните да изаберете основну боју."
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:101
-msgid "Single Pixel"
-msgstr ""
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+msgid "Click to select secondary color."
+msgstr "Кликните да изаберете споредну боју."
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:102
-msgid "3 x 3 Region"
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
 msgstr ""
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:103
-msgid "5 x 5 Region"
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+msgid "label1"
+msgstr "натпис1"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "Насумичне сметње"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr "Понови"
+
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "натпис"
+
+#: Pinta.Tools/Brushes/CircleBrush.cs:37
+msgid "Circles"
+msgstr "Кругови"
+
+#: Pinta.Tools/Brushes/PlainBrush.cs:37
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:181
+#: Pinta.Core/Effects/UserBlendOps.cs:52
+msgid "Normal"
+msgstr "Нормално"
+
+#: Pinta.Tools/Brushes/GridBrush.cs:37
+msgid "Grid"
+msgstr "Мрежа"
+
+#: Pinta.Tools/Brushes/SquaresBrush.cs:39
+msgid "Squares"
+msgstr "Квадрати"
+
+#: Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "Прскач"
+
+#: Pinta.Tools/Tools/CloneStampTool.cs:42
+msgid "Clone Stamp"
+msgstr "Клонирајте калуп"
+
+#: Pinta.Tools/Tools/CloneStampTool.cs:47
+msgid "Ctrl-left click to set origin, left click to paint."
 msgstr ""
+"Ктрл + леви клик тастера да подесите порекло, кликните левим тастером да "
+"обојите."
 
-#: Pinta.Tools/Tools/ColorPickerTool.cs:104
-msgid "7 x 7 Region"
-msgstr ""
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:105
-msgid "9 x 9 Region"
-msgstr ""
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:113 Pinta.Core/Classes/Document.cs:300
-msgid "Layer"
-msgstr "Sloj"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:114
-msgid "Image"
-msgstr ""
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:125
-msgid "After select"
-msgstr "Nakon odabira"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:132
-msgid "Do not switch tool"
-msgstr "Ne vrši izmenu alata"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:133
-msgid "Switch to previous tool"
-msgstr "Izmeni na prethodni alaz"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:134
-msgid "Switch to Pencil tool"
-msgstr "Prebaci na alat olovka"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:187 Pinta.Tools/Tools/PencilTool.cs:47
+#: Pinta.Tools/Tools/PencilTool.cs:47 Pinta.Tools/Tools/ColorPickerTool.cs:209
 msgid "Pencil"
-msgstr "Olovka"
+msgstr "Оловка"
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:45
-msgid "Magic Wand Select"
-msgstr "Odabir čarobnim štapićem"
+#: Pinta.Tools/Tools/PencilTool.cs:49
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Right click to use the secondary color."
+msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:53
-msgid "Click to select region of similar color."
-msgstr "Klikni za odabir regiona sa sličnom bojom."
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:52
+msgid "Freeform Shape"
+msgstr "Руком цртани облик"
 
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:41
-msgid "Move Selection"
-msgstr "Premesti odabrano"
-
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:47
-msgid "Drag the selection to move selection outline."
-msgstr "Prevucite odabrano da premestite odabrani okvir."
-
-#: Pinta.Tools/Tools/PaintBrushTool.cs:40 Pinta/MainWindow.cs:65
-msgid "Paintbrush"
-msgstr "Četkica"
-
-#: Pinta.Tools/Tools/PaintBrushTool.cs:42
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:54
+#: Pinta.Tools/Tools/PaintBrushTool.cs:42
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Levi klik za crtanje osnovnom bojom, desni klik za crtanje drugom bojom."
+"Кликните левим тастером да цртате основном бојом, кликните десним тастером "
+"да цртате споредном бојом."
 
-#: Pinta.Tools/Tools/PaintBrushTool.cs:63
-msgid "Type"
-msgstr "Tip"
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:71
+#: Pinta.Tools/Tools/ShapeTool.cs:131
+msgid "Fill Style"
+msgstr "Стил испуњавања"
 
-#: Pinta.Tools/Tools/RectangleSelectTool.cs:37
-msgid "Rectangle Select"
-msgstr "Odabir kvadratom"
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:78
+#: Pinta.Tools/Tools/ShapeTool.cs:138
+msgid "Outline Shape"
+msgstr "Облик контуре"
 
-#: Pinta.Tools/Tools/RectangleSelectTool.cs:43
-msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
-"square."
-msgstr ""
-"Klikni i prevuci da iscrtaš odabir pravougaonikom. Pritisni šift za kvadrat."
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:79
+#: Pinta.Tools/Tools/ShapeTool.cs:139
+msgid "Fill Shape"
+msgstr "Облик испуњавања"
 
-#: Pinta.Tools/Tools/FloodTool.cs:74
-msgid "Flood Mode"
-msgstr "Popunjavanje"
+#: Pinta.Tools/Tools/FreeformShapeTool.cs:80
+#: Pinta.Tools/Tools/ShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr "Облик испуњавања и контуре"
 
-#: Pinta.Tools/Tools/FloodTool.cs:81
-msgid "Contiguous"
-msgstr "Neprekidno"
-
-#: Pinta.Tools/Tools/FloodTool.cs:82
-msgid "Global"
-msgstr "Globalno"
-
-#: Pinta.Tools/Tools/FloodTool.cs:93 Pinta.Tools/Tools/RecolorTool.cs:73
-msgid "Tolerance"
-msgstr "Tolerancija"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:70 Pinta.Tools/Tools/ShapeTool.cs:99
+#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Tools/ShapeTool.cs:99
 msgid "Brush width"
-msgstr "Širina četkice"
+msgstr "Ширина четкице"
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:75 Pinta.Tools/Tools/ShapeTool.cs:104
+#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Tools/ShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Smanji veličinu četkice"
+msgstr "Смањите величину четкице"
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:89 Pinta.Tools/Tools/ShapeTool.cs:118
+#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Tools/ShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Povećaj veličinu četkice"
+msgstr "Повећајте величину четкице"
 
-#: Pinta.Tools/Tools/EllipseTool.cs:37
-msgid "Ellipse"
-msgstr "Elipsa"
+#: Pinta.Tools/Tools/PaintBrushTool.cs:40 Pinta/MainWindow.cs:65
+msgid "Paintbrush"
+msgstr "Четкица"
 
-#: Pinta.Tools/Tools/EllipseTool.cs:43
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+#: Pinta.Tools/Tools/PaintBrushTool.cs:78
+msgid "Type"
+msgstr "Врста"
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:63
+msgid "Color Picker"
+msgstr "Бирач боја"
+
+#: Pinta.Tools/Tools/ColorPickerTool.cs:69
+msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Klikni i prevuci da iscrtaš elipsu (desni klik za drugu boju). Pritisni šift "
-"za krug."
+"Кликните левим тастером да подесите основну боју. Кликните десним тастером "
+"да подесите споредну боју."
 
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "Zaobljeni pravougaonik"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:113
+msgid "Sampling"
+msgstr "Узорковање"
 
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
-msgstr ""
+#: Pinta.Tools/Tools/ColorPickerTool.cs:123
+msgid "Single Pixel"
+msgstr "Једна тачкица"
 
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
-msgid "Radius"
-msgstr "Poluprečnik"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:124
+msgid "3 x 3 Region"
+msgstr "3 x 3 област"
 
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:92
-msgid "Decrease rectangle's corner radius"
-msgstr "Smanji poluprečnik zaobljenja uglova"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:125
+msgid "5 x 5 Region"
+msgstr "5 x 5 област"
 
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:106
-msgid "Increase rectangle's corner radius"
-msgstr "Povećaj poluprečnik zaobljenja uglova"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:126
+msgid "7 x 7 Region"
+msgstr "7 x 7 област"
 
-#: Pinta.Tools/Tools/RecolorTool.cs:58
-msgid "Recolor"
-msgstr "Ponovo oboji"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:127
+msgid "9 x 9 Region"
+msgstr "9 x 9 област"
 
-#: Pinta.Tools/Tools/RecolorTool.cs:60
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "Levi klik da zamenite drugu boju osnovnom bojom."
+#: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
+msgid "Layer"
+msgstr "Слој"
 
-#: Pinta.Tools/Tools/EllipseSelectTool.cs:37
-msgid "Ellipse Select"
-msgstr "Odaberi elipsom"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:136
+msgid "Image"
+msgstr "Слика"
 
-#: Pinta.Tools/Tools/EllipseSelectTool.cs:43
-msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
-"circle."
-msgstr ""
-"Klikni i prevuci da za eliptični odabir. Pritisni šift za kružni odabir."
+#: Pinta.Tools/Tools/ColorPickerTool.cs:147
+msgid "After select"
+msgstr "Након избора"
 
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:35
-msgid "Text"
-msgstr "Tekst"
+#: Pinta.Tools/Tools/ColorPickerTool.cs:154
+msgid "Do not switch tool"
+msgstr "Не мењај алат"
 
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:41
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-"Levi klik da postavite kursor, zatim otkucajte željeni tekst. Boja teksta je "
-"osnovna."
+#: Pinta.Tools/Tools/ColorPickerTool.cs:155
+msgid "Switch to previous tool"
+msgstr "Пребаци на претходни алат"
 
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:89
-msgid "Font"
-msgstr "Font"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:124
-msgid "Bold"
-msgstr "Podebljano"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:131
-msgid "Italic"
-msgstr "Kurziv"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:138
-msgid "Underline"
-msgstr "Podvučeno"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:147
-msgid "Left Align"
-msgstr "Levo poravnanje"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:155
-msgid "Center Align"
-msgstr "Centralno poravnanje"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:162
-msgid "Right Align"
-msgstr "Desno poravnanje"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:174
-msgid "Text Style"
-msgstr "Stil teksta"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:181
-#: Pinta.Tools/Brushes/PlainBrush.cs:37 Pinta.Core/Effects/UserBlendOps.cs:52
-msgid "Normal"
-msgstr "Нормално"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:182
-msgid "Normal and Outline"
-msgstr "Normalno i spoljna linija"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:183
-#: Pinta.Effects/Effects/OutlineEffect.cs:28
-msgid "Outline"
-msgstr "Kontura"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:184
-msgid "Fill Background"
-msgstr ""
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:192
-msgid "Outline width"
-msgstr "Širina spoljne linije"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:197
-msgid "Decrease outline size"
-msgstr "Smanji veličinu spoljne linije"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:214
-msgid "Increase outline size"
-msgstr "Povećaj veličinu spoljne linije"
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:37
-msgid "Line"
-msgstr "Linija"
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:43
-msgid ""
-"Left click to draw with primary color, right click for secondary color. Hold "
-"Shift key to snap to angles."
-msgstr ""
-
-#: Pinta.Tools/Tools/ZoomTool.cs:48
-msgid "Zoom"
-msgstr "Uvećanje"
-
-#: Pinta.Tools/Tools/ZoomTool.cs:54
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-"Levi klik za povećanje. Desni klik za smanjenje. Klik i povlačenje za "
-"povećanje odabranog."
-
-#: Pinta.Tools/Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Kantica sa bojom"
-
-#: Pinta.Tools/Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"Levi klik da bi popunili oblast osnovnom bojom, desni za popunjavanje drugom "
-"bojom."
+#: Pinta.Tools/Tools/ColorPickerTool.cs:156
+msgid "Switch to Pencil tool"
+msgstr "Пребаци на оловку"
 
 #: Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr "Pravougaonik"
+msgstr "Правоугаоник"
 
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "shift to constrain to a square."
 msgstr ""
-"Klikni i prevuci da iscrtaš pravougaonik (desni klik za drugu boju). "
-"Pritisni šift za kvadratni oblik."
+"Кликните и превуците да исцртате правоугаоник (десни клик за споредну боју). "
+"Држите помак да ограничите на квадрат."
 
-#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:166
+#: Pinta.Tools/Tools/EraserTool.cs:52
+msgid "Eraser"
+msgstr "Гумица"
+
+#: Pinta.Tools/Tools/EraserTool.cs:54
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+"Кликните левим тастером да обришете до провидности, кликните десним тастером "
+"да обришете до споредне боје. "
+
+#: Pinta.Tools/Tools/ZoomTool.cs:48
+msgid "Zoom"
+msgstr "Увеличајте"
+
+#: Pinta.Tools/Tools/ZoomTool.cs:54
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Кликните левим тастером да увећате. Кликните десним тастером да умањите. "
+"Кликните и превуците да поставите избор у први план."
+
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Преместите избор"
+
+#: Pinta.Tools/Tools/MoveSelectionTool.cs:48
+msgid ""
+"Left click and drag the selection to move selection outline. Right click and "
+"drag the selection to rotate selection outline."
+msgstr ""
+"Кликните левим тастером и превуците избор да померите обрис избора. Кликните "
+"десним тастером и превуците избор да заокренете обрис избора."
+
+#: Pinta.Tools/Tools/MoveSelectedTool.cs:43
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
+#: Pinta/Actions/Edit/PasteAction.cs:108
+msgid "Move Selected Pixels"
+msgstr "Преместите изабране тачкице"
+
+#: Pinta.Tools/Tools/MoveSelectedTool.cs:49
+msgid ""
+"Left click and drag the selection to move selected content. Right click and "
+"drag the selection to rotate selected content."
+msgstr ""
+"Кликните левим тастером и превуците избор да померите изабрани садржај. "
+"Кликните десним тастером и превуците избор да заокренете изабрани садржај."
+
+#: Pinta.Tools/Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Кантица са бојом"
+
+#: Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Кликните левим тастером да попуните област основном бојом, кликните десним "
+"тастером да попуните споредном бојом."
+
+#: Pinta.Tools/Tools/LassoSelectTool.cs:48
+msgid "Lasso Select"
+msgstr "Изаберите ласо"
+
+#: Pinta.Tools/Tools/LassoSelectTool.cs:50
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "Кликните и превуците да исцртате контуру за област избора."
+
+#: Pinta.Tools/Tools/RecolorTool.cs:58
+msgid "Recolor"
+msgstr "Поново обоји"
+
+#: Pinta.Tools/Tools/RecolorTool.cs:60
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "Кликните левим тастером да замените споредну боју основном."
+
+#: Pinta.Tools/Tools/RecolorTool.cs:73 Pinta.Tools/Tools/FloodTool.cs:93
+msgid "Tolerance"
+msgstr "Допуштеност"
+
+#: Pinta.Tools/Tools/EllipseTool.cs:37
+msgid "Ellipse"
+msgstr "Елипса"
+
+#: Pinta.Tools/Tools/EllipseTool.cs:43
+msgid ""
+"Click and drag to draw an ellipse (right click for secondary color). Hold "
+"shift to constrain to a circle."
+msgstr ""
+"Кликните и превуците да исцртате елипсу (десни клик за споредну боју). "
+"Држите помак да ограничите на круг."
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
+msgid "Rounded Rectangle"
+msgstr "Заобљени правоугаоник"
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
+msgid ""
+"Click and drag to draw a rounded rectangle (right click for secondary "
+"color). Hold shift to constrain to a square."
+msgstr ""
+"Кликните и превуците да исцртате заобљени правоугаоник (десни клик за "
+"споредну боју). Држите помак да ограничите на квадрат."
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
+msgid "Radius"
+msgstr "Полупречник"
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:92
+msgid "Decrease rectangle's corner radius"
+msgstr "Смањите полупречник угла правоугаоника"
+
+#: Pinta.Tools/Tools/RoundedRectangleTool.cs:106
+msgid "Increase rectangle's corner radius"
+msgstr "Повећајте полупречник угла правоугаоника"
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:37
+msgid "Line"
+msgstr "Линија"
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:43
+msgid ""
+"Left click to draw with primary color, right click for secondary color. Hold "
+"Shift key to snap to angles."
+msgstr ""
+"Кликните левим тастером да исцртате првом бојом, кликните десним тастером за "
+"споредну боју. Држите тастер помака да прионете на углове."
+
+#: Pinta.Tools/Tools/FloodTool.cs:74
+msgid "Flood Mode"
+msgstr "Режим поплаве"
+
+#: Pinta.Tools/Tools/FloodTool.cs:81
+msgid "Contiguous"
+msgstr "Непрекидно"
+
+#: Pinta.Tools/Tools/FloodTool.cs:82
+msgid "Global"
+msgstr "Опште"
+
+#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:165
 msgid "Gradient"
-msgstr "Preliv"
+msgstr "Прелијте"
 
 #: Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Klikni i prevuci da se iscrta od osnovne do druge boje. Desni klik za "
-"obrnuto."
+"Кликните и превуците да исцртате прелив од основне до споредне боје. "
+"Кликните десним тастером да преокренете."
+
+#: Pinta.Tools/Tools/GradientTool.cs:172
+msgid "Linear Gradient"
+msgstr "Линијски прелив"
 
 #: Pinta.Tools/Tools/GradientTool.cs:173
-msgid "Linear Gradient"
-msgstr "Linearni preliv"
+msgid "Linear Reflected Gradient"
+msgstr "Линијски одбијени прелив"
 
 #: Pinta.Tools/Tools/GradientTool.cs:174
-msgid "Linear Reflected Gradient"
-msgstr "Linearni reflektujući preliv"
+msgid "Linear Diamond Gradient"
+msgstr "Линијски дијамантски прелив"
 
 #: Pinta.Tools/Tools/GradientTool.cs:175
-msgid "Linear Diamond Gradient"
-msgstr "Linearni dijamant preliv"
+msgid "Radial Gradient"
+msgstr "Кружни прелив"
 
 #: Pinta.Tools/Tools/GradientTool.cs:176
-msgid "Radial Gradient"
-msgstr "Kružni preliv"
-
-#: Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Conical Gradient"
-msgstr "Kupast preliv"
+msgstr "Купасти прелив"
 
-#: Pinta.Tools/Tools/ShapeTool.cs:131
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:71
-msgid "Fill Style"
-msgstr "Stil popunjavanja"
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:35
+msgid "Text"
+msgstr "Текст"
 
-#: Pinta.Tools/Tools/ShapeTool.cs:138
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:78
-msgid "Outline Shape"
-msgstr "Uokviri oblik"
-
-#: Pinta.Tools/Tools/ShapeTool.cs:139
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:79
-msgid "Fill Shape"
-msgstr "Popuni oblikom"
-
-#: Pinta.Tools/Tools/ShapeTool.cs:140
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:80
-msgid "Fill and Outline Shape"
-msgstr "Popuni i uokviri oblik"
-
-#: Pinta.Tools/Tools/PencilTool.cs:49
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:41
 msgid ""
-"Left click to draw freeform, one-pixel wide lines with the primary color, "
-"right click to use the secondary color."
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
 msgstr ""
-"Levi klik za crtanje slobodnom formom, širine jedan piksel osnovnom bojom, "
-"desni klik za drugu boju."
+"Кликните левим тастером да поставите курсор, затим упишите жељени текст. "
+"Боја текста је основна боја."
 
-#: Pinta.Tools/Tools/LassoSelectTool.cs:44
-msgid "Lasso Select"
-msgstr "Odabir tipa laso"
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:89
+msgid "Font"
+msgstr "Слова"
 
-#: Pinta.Tools/Tools/LassoSelectTool.cs:46
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "Klikni i povuci da se isrta okvir odabranog područja."
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:124
+msgid "Bold"
+msgstr "Подебљано"
 
-#: Pinta.Tools/Tools/CloneStampTool.cs:42
-msgid "Clone Stamp"
-msgstr "Kloniraj kalup"
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:131
+msgid "Italic"
+msgstr "Искошено"
 
-#: Pinta.Tools/Tools/CloneStampTool.cs:47
-msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "Ctrl+ levi klik da podesite poreklo, levi klik za bojenje."
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:138
+msgid "Underline"
+msgstr "Подвучено"
 
-#: Pinta.Tools/Tools/EraserTool.cs:44
-msgid "Eraser"
-msgstr "Gumica za brisanje"
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:147
+msgid "Left Align"
+msgstr "Лево поравнање"
 
-#: Pinta.Tools/Tools/EraserTool.cs:46
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:155
+msgid "Center Align"
+msgstr "Поравнање по средини"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:162
+msgid "Right Align"
+msgstr "Десно поравнање"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:174
+msgid "Text Style"
+msgstr "Стил текста"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:182
+msgid "Normal and Outline"
+msgstr "Обично и контура"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:183
+#: Pinta.Effects/Effects/OutlineEffect.cs:28
+msgid "Outline"
+msgstr "Обрис"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:184
+msgid "Fill Background"
+msgstr "Позадина испуне"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:192
+msgid "Outline width"
+msgstr "Ширина контуре"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:197
+msgid "Decrease outline size"
+msgstr "Смањите величину контуре"
+
+#: Pinta.Tools/Tools/TextTool/TextTool.cs:214
+msgid "Increase outline size"
+msgstr "Повећајте величину контуре"
+
+#: Pinta.Tools/Tools/EllipseSelectTool.cs:37
+msgid "Ellipse Select"
+msgstr "Изаберите елипсу"
+
+#: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Left click to erase to transparent, right click to erase to secondary color. "
+"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"circle."
 msgstr ""
-"Levi klik za brisanje do transparentnosti, desni klik za brisanje do "
-"sekundarne boje. "
+"Кликните и превуците да исцртате елипсоидни избор. Држите помак да "
+"ограничите на круг."
 
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:52
-msgid "Freeform Shape"
-msgstr "Slobodan oblik"
+#: Pinta.Tools/Tools/MagicWandTool.cs:53
+msgid "Replace"
+msgstr "Замени"
 
-#: Pinta.Tools/Brushes/CircleBrush.cs:37
-msgid "Circles"
-msgstr "Кругови"
+#: Pinta.Tools/Tools/MagicWandTool.cs:54
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr "Унија (+) (ктрл + леви клик)"
 
-#: Pinta.Tools/Brushes/GridBrush.cs:37
-msgid "Grid"
-msgstr "Mreža"
+#: Pinta.Tools/Tools/MagicWandTool.cs:55
+msgid "Exclude (-) (Right Click)"
+msgstr "Искључи (-) (десни клик)"
 
-#: Pinta.Tools/Brushes/SplatterBrush.cs:37
-msgid "Splatter"
-msgstr "Splater"
+#: Pinta.Tools/Tools/MagicWandTool.cs:56
+msgid "Xor (Ctrl + Right Click)"
+msgstr "Иксор (Ктрл + десни клик)"
 
-#: Pinta.Tools/Brushes/SquaresBrush.cs:39
-msgid "Squares"
-msgstr "Квадрати"
+#: Pinta.Tools/Tools/MagicWandTool.cs:57
+msgid "Intersect (Shift + Left Click)"
+msgstr "Пресеци (помак + леви клик)"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "Slučajni šum"
+#: Pinta.Tools/Tools/MagicWandTool.cs:70
+msgid " Selection Mode: "
+msgstr " Режим избора: "
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr "Ponovo zasej"
+#: Pinta.Tools/Tools/MagicWandTool.cs:102
+msgid "Magic Wand Select"
+msgstr "Изаберите чаробним штапићем"
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-msgid "label"
-msgstr "natpis"
+#: Pinta.Tools/Tools/MagicWandTool.cs:112
+msgid "Click to select region of similar color."
+msgstr "Кликните да изаберете област сличне боје."
 
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "natpis1"
+#: Pinta.Tools/Tools/RectangleSelectTool.cs:37
+msgid "Rectangle Select"
+msgstr "Изаберите квадрат"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:80
-msgid "Choose Primary Color"
-msgstr "Odaberi osnovnu boju"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:94
-msgid "Choose Secondary Color"
-msgstr "Odaberi sporednu boju"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:117
-msgid "Choose Palette Color"
-msgstr "Izaberi boju palete"
-
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
-msgid "Layer Shown"
-msgstr ""
-
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
-msgid "Layer Hidden"
-msgstr ""
-
-#: Pinta/Options.cs:486
-msgid "OptionName"
-msgstr "ОпционоИме"
-
-#: Pinta/Main.cs:68
-msgid "number of threads to use for rendering"
-msgstr "broj niti koje će se koristiti za iscrtavanje"
-
-#: Pinta/Actions/Edit/ResizePaletteAction.cs:50
-msgid "Resize Palette"
-msgstr "Promeni veličinu palete"
-
-#: Pinta/Actions/Edit/ResizePaletteAction.cs:51
-msgid "New palette size:"
-msgstr "Nova veličina palete:"
-
-#: Pinta/Actions/Edit/PasteAction.cs:115
-msgid "Image larger than canvas"
-msgstr ""
-
-#: Pinta/Actions/Edit/PasteAction.cs:116
+#: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
+"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"square."
 msgstr ""
+"Кликните и превуците да исцртате правоугаони избор. Држите помак да "
+"ограничите на квадрат."
 
-#: Pinta/Actions/Edit/PasteAction.cs:120
-msgid "Expand canvas"
-msgstr ""
+#: Pinta.Tools/Tools/PanTool.cs:37
+msgid "Pan"
+msgstr "Померајте"
 
-#: Pinta/Actions/Edit/PasteAction.cs:121
-msgid "Don't change canvas size"
-msgstr ""
+#: Pinta.Tools/Tools/PanTool.cs:43
+msgid "Click and drag to navigate image."
+msgstr "Кликните и превуците да идете до слике."
 
-#: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
-#: Pinta.Core/Actions/EditActions.cs:74
-msgid "Paste Into New Layer"
-msgstr "Prilepi u novi sloj"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
-msgid "Layer Opacity"
-msgstr "Providnost sloja"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:97
-msgid "Rename Layer"
-msgstr "Preimenuj sloj"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
-msgid "Hide Layer"
-msgstr "Sakrij sloj"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
-msgid "Show Layer"
-msgstr "Prikaži sloj"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:107
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:50
-msgid "Layer Properties"
-msgstr "Osobine sloja"
-
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
-msgid "Rotate / Zoom Layer"
-msgstr ""
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-msgid "Save Image File"
-msgstr "Sačuvaj falj sa slike"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:181
-msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta ne podržava čuvanje slika u ovom formatu"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:182
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:194
-#: Pinta.Core/Actions/EditActions.cs:352
-msgid "Error"
-msgstr "Greška"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:193
-msgid "Cannot save read only file."
-msgstr ""
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:208
-msgid "Image too large"
-msgstr ""
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:209
-msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr ""
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Fajl \"{0}\" već postoji. Zameni?"
+msgid "{0} image ({1})"
+msgstr "{0} слика ({1})"
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:232
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "Fajl već postoji u \"{1}\". Zamena će obrisati njegov stari sadržaj."
-
-#: Pinta/Actions/File/OpenDocumentAction.cs:50
-#: Pinta.Core/Actions/LayerActions.cs:157
-msgid "Open Image File"
-msgstr "Učitaj sliku"
-
-#: Pinta/Actions/File/OpenDocumentAction.cs:64
-msgid "Image files"
-msgstr "Fajlovi slika"
-
-#: Pinta/Actions/File/OpenDocumentAction.cs:68
-#: Pinta.Core/Actions/EditActions.cs:335
-msgid "All files"
-msgstr "Svi fajlovi"
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:61
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Sačuvaj izmene slike \"{0}\" pre zavaranja?"
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:62
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Ako ne sačuvate, sve izmene će biti trajno izgubljene."
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:69
-msgid "Close without saving"
-msgstr "Zatvori bez snimanja"
-
-#: Pinta/Actions/File/NewScreenshotAction.cs:52
-msgid "Take Screenshot"
-msgstr "Slikaj ekran"
-
-#: Pinta/Actions/File/NewScreenshotAction.cs:53
-msgid "Delay before taking a screenshot (seconds):"
-msgstr "Odlaganje pre snimanja ekrana(u sekundama):"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:27
-#: Pinta.Core/Managers/WorkspaceManager.cs:165
-msgid "New Image"
-msgstr "Nova slika"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
-msgid "New Image Size          "
-msgstr "Nova veličina slike          "
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-msgid "pixels"
-msgstr "piksela"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-msgid "Width:"
-msgstr "Širina:"
-
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-msgid "Height:"
-msgstr "Visina:"
-
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+#: Pinta/Dialogs/ResizeImageDialog.cs:38
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "Promeni veličinu slike"
+msgstr "Промените величину слике"
 
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-msgid "By percentage:"
-msgstr "U procentima:"
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+#: Pinta.Core/Actions/ImageActions.cs:67
+msgid "Rotate 180°"
+msgstr "Заокрени за 180°"
 
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-msgid "By absolute size:"
-msgstr "Po apsolutnoj veličini:"
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Изврни слику водоравно"
 
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-msgid "Maintain aspect ratio"
-msgstr "Zadrži proporcije"
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Изврни слику усправно"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
-#: Pinta.Core/Classes/Document.cs:629
-msgid "Resize Canvas"
-msgstr "Promeni veličinu platna"
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+#: Pinta.Core/Actions/ImageActions.cs:65
+msgid "Rotate 90° Clockwise"
+msgstr "Заокрени за 90° на десно"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Sidro:"
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+#: Pinta.Core/Actions/ImageActions.cs:66
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Заокрени за 90° на лево"
 
-#: Pinta/Dialogs/AboutDialog.cs:114
-msgid "Contributors to this release:"
-msgstr ""
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Изврни слој водоравно"
 
-#: Pinta/Dialogs/AboutDialog.cs:126
-msgid "Previous contributors:"
-msgstr ""
+#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Изврни слој усправно"
 
-#: Pinta/Dialogs/AboutDialog.cs:137
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Milena https://launchpad.net/~milenad13\n"
-"  boki24 https://launchpad.net/~bojansav\n"
-"  Никола Павловић https://launchpad.net/~nikola825"
+#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Доврши тачкице"
 
-#: Pinta/Dialogs/AboutDialog.cs:140
-msgid "Translated by:"
-msgstr "Preveo:"
+#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+#: Pinta.Core/Actions/EditActions.cs:72 Pinta/Actions/Edit/PasteAction.cs:79
+msgid "Paste"
+msgstr "Убаци"
 
-#: Pinta/Dialogs/AboutDialog.cs:146
-msgid "Based on the work of Paint.NET:"
-msgstr "Zasniva se na programu Paint.NET:"
+#: Pinta.Core/Managers/WorkspaceManager.cs:97
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Несачувана слика {0}"
 
-#: Pinta/Dialogs/AboutDialog.cs:153
-msgid "Using some icons from:"
-msgstr "Koristi pojedine ikone iz:"
+#: Pinta.Core/Managers/WorkspaceManager.cs:156
+msgid "Background"
+msgstr "Позадина"
 
-#: Pinta/Dialogs/AboutDialog.cs:161
-msgid "Powered by Mono:"
-msgstr ""
+#: Pinta.Core/Managers/WorkspaceManager.cs:165
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:27
+msgid "New Image"
+msgstr "Нова слика"
 
-#: Pinta/Dialogs/AboutDialog.cs:270
-msgid "About Pinta"
-msgstr "O Pinta programu"
+#: Pinta.Core/Managers/WorkspaceManager.cs:184
+msgid "Open Image"
+msgstr "Отвори слику"
 
-#: Pinta/Dialogs/AboutDialog.cs:288
-msgid "Version Info"
-msgstr "Informacija o verziji"
+#: Pinta.Core/Managers/WorkspaceManager.cs:192
+msgid "Permission denied"
+msgstr "Приступ је одбијен"
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:38
-msgid "JPEG Quality"
-msgstr "JPEG квалитет"
+#: Pinta.Core/Managers/WorkspaceManager.cs:311
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Не могу да отворим датотеку: {0}"
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:46
-msgid "Quality: "
-msgstr "Kvalitet: "
+#: Pinta.Core/Managers/ToolManager.cs:234
+#: Pinta.Core/Managers/ToolManager.cs:236
+msgid "No tool selected."
+msgstr "Није изабран ниједан алат."
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:159
-msgid "Name:"
-msgstr "Naziv:"
-
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:167
-msgid "Visible"
-msgstr "Vidljivo"
-
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
-msgid "Blend Mode"
-msgstr "Režim mešanja"
-
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:189
-msgid "Opacity:"
-msgstr "Prozirnost"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Verzija"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Licenca"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Izdato pod MIT X11 licencom"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Autorska prava"
-
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "od Pinta saradnika"
-
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
-msgid "Image cannot be pasted"
-msgstr ""
-
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
-msgid "The clipboard does not contain an image."
-msgstr ""
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Naslov"
-
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Putanja"
-
-#: Pinta/MainWindow.cs:123
-msgid "_File"
-msgstr "_Fajl"
-
-#: Pinta/MainWindow.cs:124
-msgid "_Edit"
-msgstr "_Izmeni"
-
-#: Pinta/MainWindow.cs:126
-msgid "_View"
-msgstr "_Prikaz"
-
-#: Pinta/MainWindow.cs:129
-msgid "_Image"
-msgstr "_Slika"
-
-#: Pinta/MainWindow.cs:130
-msgid "_Layers"
-msgstr "_Slojevi"
-
-#: Pinta/MainWindow.cs:131
-msgid "_Adjustments"
-msgstr "_Podešavanja"
-
-#: Pinta/MainWindow.cs:132
-msgid "Effe_cts"
-msgstr "_Efekti"
-
-#: Pinta/MainWindow.cs:134
-msgid "_Window"
-msgstr "_Prozor"
-
-#: Pinta/MainWindow.cs:138
-msgid "Tool Windows"
-msgstr "Prozor sa alatkama"
-
-#: Pinta/MainWindow.cs:142
-msgid "_Help"
-msgstr "_Pomoć"
-
-#: Pinta/MainWindow.cs:160 Pinta.Core/Actions/HelpActions.cs:53
-msgid "About"
-msgstr "O"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:91 Pinta/DockLibrary/DockItem.cs:477
-msgid "Hide"
-msgstr "Sakrij"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:191
-msgid "Dock"
-msgstr "Dok"
-
-#: Pinta/DockLibrary/DockItemContainer.cs:195
-#: Pinta/DockLibrary/DockItem.cs:502
-msgid "Auto Hide"
-msgstr "Automatski Sakrij"
-
-#: Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr "Prikačiv"
-
-#: Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "Plutajuće"
-
-#: Pinta/Pads/ToolBoxPad.cs:42 Pinta/Pads/ToolBoxPad.cs:48
-msgid "Tools"
-msgstr "Alati"
-
-#: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
-msgid "History"
-msgstr "Istorijat"
-
-#: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
-msgid "Layers"
-msgstr "Slojevi"
-
-#: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokumenti"
-
-#: Pinta/Pads/ColorPalettePad.cs:42 Pinta/Pads/ColorPalettePad.cs:49
-#: Pinta.Core/Actions/EditActions.cs:128
-msgid "Palette"
-msgstr "Paleta"
-
-#: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
-msgid "Images"
-msgstr ""
+#: Pinta.Core/Managers/LivePreviewManager.cs:217
+msgid "Rendering Effect"
+msgstr "Дејство исцртавања"
 
 #: Pinta.Core/Managers/EffectsManager.cs:63
 #: Pinta.Core/Managers/EffectsManager.cs:98
 msgid "..."
 msgstr "..."
 
-#: Pinta.Core/Managers/ToolManager.cs:234
-#: Pinta.Core/Managers/ToolManager.cs:236
-msgid "No tool selected."
-msgstr ""
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:220
-msgid "Rendering Effect"
-msgstr "Efekat iscrtavanja"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:97
-#, csharp-format
-msgid "Unsaved Image {0}"
-msgstr "Nesačuvana slika {0}"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:156
-msgid "Background"
-msgstr "Pozadina"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:184
-msgid "Open Image"
-msgstr "Otvori sliku"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:308
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Nisam uspeo otvoriti fajl: {0}"
-
-#: Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
-msgstr "Nova..."
-
-#: Pinta.Core/Actions/FileActions.cs:55
-msgid "New Screenshot..."
-msgstr "Novi snimak ekrana..."
-
-#: Pinta.Core/Actions/FileActions.cs:56 Pinta.Core/Actions/EditActions.cs:82
-msgid "Open..."
-msgstr "Otvori..."
-
-#: Pinta.Core/Actions/FileActions.cs:57
-msgid "Open Recent"
-msgstr "Otvori skorašnje"
-
-#: Pinta.Core/Actions/FileActions.cs:64
-msgid "Close"
-msgstr "Zatvori"
-
-#: Pinta.Core/Actions/FileActions.cs:65
-msgid "Save"
-msgstr "Sačuvaj"
-
-#: Pinta.Core/Actions/FileActions.cs:66 Pinta.Core/Actions/EditActions.cs:83
-msgid "Save As..."
-msgstr "Sačuvaj kao..."
-
-#: Pinta.Core/Actions/FileActions.cs:67
-msgid "Print"
-msgstr "Odštampaj"
-
-#: Pinta.Core/Actions/FileActions.cs:68
-msgid "Quit"
-msgstr "Izađi"
-
-#: Pinta.Core/Actions/FileActions.cs:70
-msgid "New"
-msgstr "Novi"
-
-#: Pinta.Core/Actions/FileActions.cs:71
-msgid "Open"
-msgstr "Otvori"
-
-#: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:287
-msgid "Add New Layer"
-msgstr "Dodaj novi sloj"
-
-#: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:270
-msgid "Delete Layer"
-msgstr "Obriši sloj"
-
-#: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:261
-msgid "Duplicate Layer"
-msgstr "Dupliraj sloj"
-
-#: Pinta.Core/Actions/LayerActions.cs:68
-#: Pinta.Core/Actions/LayerActions.cs:239
-msgid "Merge Layer Down"
-msgstr "Spoj sloj sa donjim"
-
-#: Pinta.Core/Actions/LayerActions.cs:69
-msgid "Import from File..."
-msgstr "Uvezi iz fajla ..."
-
-#: Pinta.Core/Actions/LayerActions.cs:70 Pinta.Core/Actions/ImageActions.cs:63
-msgid "Flip Horizontal"
-msgstr "Prevrni vodoravno"
-
-#: Pinta.Core/Actions/LayerActions.cs:71 Pinta.Core/Actions/ImageActions.cs:64
-msgid "Flip Vertical"
-msgstr "Prevrni uspravno"
-
-#: Pinta.Core/Actions/LayerActions.cs:72
-msgid "Rotate / Zoom Layer..."
-msgstr ""
-
-#: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:217
-msgid "Move Layer Up"
-msgstr "Pomeri sloj gore"
-
-#: Pinta.Core/Actions/LayerActions.cs:74
-#: Pinta.Core/Actions/LayerActions.cs:228
-msgid "Move Layer Down"
-msgstr "Pomeri sloj dole"
-
-#: Pinta.Core/Actions/LayerActions.cs:75
-msgid "Layer Properties..."
-msgstr "Osobine sloja..."
-
-#: Pinta.Core/Actions/LayerActions.cs:183
-msgid "Import From File"
-msgstr "Unesi iz fajla"
+#: Pinta.Core/Actions/EditActions.cs:67
+msgid "Undo"
+msgstr "Опозови"
 
 #: Pinta.Core/Actions/EditActions.cs:68
-msgid "Undo"
-msgstr "Opozovi"
-
-#: Pinta.Core/Actions/EditActions.cs:69
 msgid "Redo"
-msgstr "Ponovi"
+msgstr "Поврати"
 
-#: Pinta.Core/Actions/EditActions.cs:70 Pinta.Core/Actions/EditActions.cs:220
+#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
-msgstr "Iseci"
+msgstr "Исеци"
+
+#: Pinta.Core/Actions/EditActions.cs:70
+msgid "Copy"
+msgstr "Умножи"
 
 #: Pinta.Core/Actions/EditActions.cs:71
-msgid "Copy"
-msgstr "Kopiraj"
-
-#: Pinta.Core/Actions/EditActions.cs:72
 msgid "Copy Merged"
-msgstr ""
+msgstr "Умножи стопљено"
 
 #: Pinta.Core/Actions/EditActions.cs:73
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
-msgid "Paste"
-msgstr "Prilepi"
+#: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
+msgid "Paste Into New Layer"
+msgstr "Убаци у нови слој"
+
+#: Pinta.Core/Actions/EditActions.cs:74
+msgid "Paste Into New Image"
+msgstr "Убаци у нову слику"
 
 #: Pinta.Core/Actions/EditActions.cs:75
-msgid "Paste Into New Image"
-msgstr "Prilepi u novu sliku"
-
-#: Pinta.Core/Actions/EditActions.cs:76
 msgid "Delete Selection"
-msgstr "Obriši izabrano"
+msgstr "Обриши изабрано"
 
-#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:182
+#: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr "Popuni odabrano"
+msgstr "Попуни изабрано"
 
-#: Pinta.Core/Actions/EditActions.cs:78
+#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:401
 msgid "Invert Selection"
-msgstr "Obrni odabrano"
+msgstr "Обрни избор"
 
-#: Pinta.Core/Actions/EditActions.cs:79 Pinta.Core/Actions/EditActions.cs:191
+#: Pinta.Core/Actions/EditActions.cs:78 Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr "Izaberi sve"
+msgstr "Изабери све"
 
-#: Pinta.Core/Actions/EditActions.cs:80
+#: Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
 msgstr "Одзначи све"
 
-#: Pinta.Core/Actions/EditActions.cs:84
+#: Pinta.Core/Actions/EditActions.cs:81 Pinta.Core/Actions/FileActions.cs:56
+msgid "Open..."
+msgstr "Отвори..."
+
+#: Pinta.Core/Actions/EditActions.cs:82 Pinta.Core/Actions/FileActions.cs:66
+msgid "Save As..."
+msgstr "Сачувај као..."
+
+#: Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr "Ресетуј на подразумевано"
+msgstr "Врати на основно"
 
-#: Pinta.Core/Actions/EditActions.cs:85
+#: Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr "Podesi broj boja"
+msgstr "Подеси број боја"
 
-#: Pinta.Core/Actions/EditActions.cs:87
-msgid "Add-in Manager"
-msgstr ""
+#: Pinta.Core/Actions/EditActions.cs:125 Pinta/Pads/ColorPalettePad.cs:42
+#: Pinta/Pads/ColorPalettePad.cs:49
+msgid "Palette"
+msgstr "Палета"
 
-#: Pinta.Core/Actions/EditActions.cs:222
+#: Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
-msgstr "Obriši odabrano"
+msgstr "Обриши изабрано"
 
-#: Pinta.Core/Actions/EditActions.cs:231
+#: Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr "Poništi izbor"
+msgstr "Поништи избор"
 
-#: Pinta.Core/Actions/EditActions.cs:324
+#: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr "Otvori fajl palete"
+msgstr "Отвори датотеку палете"
 
-#: Pinta.Core/Actions/EditActions.cs:331
+#: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "Fajlovi paleta (*.txt, *.gpl)"
+msgstr "Датотеке палете (*.txt, *.gpl)"
 
-#: Pinta.Core/Actions/EditActions.cs:351
+#: Pinta.Core/Actions/EditActions.cs:330
+#: Pinta/Actions/File/OpenDocumentAction.cs:68
+msgid "All files"
+msgstr "Све датотеке"
+
+#: Pinta.Core/Actions/EditActions.cs:346
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"Ne mogu da otvorim fajl palete: {0}.\n"
-"Molim vas proverite da otvarate važeći GIMP ili Paint.NET paletu."
+"Не могу да отворим датотеку палете: {0}.\n"
+"Проверите да ли покушавате да отворите исправну палету ГИМП-а или Пеинт.НЕТ-"
+"а."
 
-#: Pinta.Core/Actions/EditActions.cs:364
+#: Pinta.Core/Actions/EditActions.cs:347
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+msgid "Error"
+msgstr "Грeшкa"
+
+#: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr "Sačuvaj fajl palete"
+msgstr "Сачувај датотеку палете"
+
+#: Pinta.Core/Actions/EditActions.cs:365
+msgid "Paint.NET palette (*.txt)"
+msgstr "Палета Пеинт.НЕТ-а (*.txt)"
 
 #: Pinta.Core/Actions/EditActions.cs:370
-msgid "Paint.NET palette (*.txt)"
-msgstr "Paint.NET paleta (*.txt)"
-
-#: Pinta.Core/Actions/EditActions.cs:375
 msgid "GIMP palette (*.gpl)"
-msgstr "GIMP paleta (*.gpl)"
+msgstr "Палета ГИМП-а (*.gpl)"
 
 #: Pinta.Core/Actions/ImageActions.cs:59
 #: Pinta.Core/Actions/ImageActions.cs:277
 msgid "Crop to Selection"
-msgstr "Izreži prema odabiru"
+msgstr "Исеци на изабрано"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Auto Crop"
-msgstr ""
+msgstr "Сам исеци"
 
 #: Pinta.Core/Actions/ImageActions.cs:61
 msgid "Resize Image..."
-msgstr ""
+msgstr "Промени величину слике..."
 
 #: Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Промени величину платна..."
 
-#: Pinta.Core/Actions/ImageActions.cs:65
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr "Okreni 90° u smeru kazaljke na časovniku"
+#: Pinta.Core/Actions/ImageActions.cs:63 Pinta.Core/Actions/LayerActions.cs:70
+msgid "Flip Horizontal"
+msgstr "Изврни водоравно"
 
-#: Pinta.Core/Actions/ImageActions.cs:66
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Okreni 90° suprotno od smera kazaljke na časovniku"
-
-#: Pinta.Core/Actions/ImageActions.cs:67
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr "Okreni 180°"
+#: Pinta.Core/Actions/ImageActions.cs:64 Pinta.Core/Actions/LayerActions.cs:71
+msgid "Flip Vertical"
+msgstr "Изврни усправно"
 
 #: Pinta.Core/Actions/ImageActions.cs:68
-#: Pinta.Core/Actions/ImageActions.cs:135
+#: Pinta.Core/Actions/ImageActions.cs:137
 msgid "Flatten"
-msgstr "Spljošti"
-
-#: Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr "Pinta internet stranica"
-
-#: Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr "Zabeleži grešku"
-
-#: Pinta.Core/Actions/HelpActions.cs:52
-msgid "Translate This Application"
-msgstr "Prevedi ovaj program"
+msgstr "Изравнај"
 
 #: Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -1165,19 +798,19 @@ msgstr "Затвори све"
 
 #: Pinta.Core/Actions/ViewActions.cs:75
 msgid "Zoom In"
-msgstr "Uveličaj"
+msgstr "Увећај"
 
 #: Pinta.Core/Actions/ViewActions.cs:76
 msgid "Zoom Out"
-msgstr "Umanji"
+msgstr "Умањи"
 
 #: Pinta.Core/Actions/ViewActions.cs:77
 msgid "Best Fit"
-msgstr "Najbolje uklapanje"
+msgstr "Најбоље уклапање"
 
 #: Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom to Selection"
-msgstr "Uveličaj odabrano"
+msgstr "Изабрано у први план"
 
 #: Pinta.Core/Actions/ViewActions.cs:79
 msgid "Normal Size"
@@ -1185,94 +818,168 @@ msgstr "Нормална величина"
 
 #: Pinta.Core/Actions/ViewActions.cs:80
 msgid "Toolbar"
-msgstr "Traka alatki"
+msgstr "Трака алата"
 
 #: Pinta.Core/Actions/ViewActions.cs:81
 msgid "Pixel Grid"
-msgstr "Mreža piksela"
+msgstr "Мрежа пиксела"
 
 #: Pinta.Core/Actions/ViewActions.cs:82
 msgid "Rulers"
-msgstr "Lenjiri"
+msgstr "Лењири"
 
 #: Pinta.Core/Actions/ViewActions.cs:83
 msgid "Pixels"
-msgstr "Pikseli"
+msgstr "Тачкице"
 
 #: Pinta.Core/Actions/ViewActions.cs:84
 msgid "Inches"
-msgstr "Inči"
+msgstr "Инчи"
 
 #: Pinta.Core/Actions/ViewActions.cs:85
 msgid "Centimeters"
-msgstr "Centimetri"
+msgstr "Центиметри"
 
 #: Pinta.Core/Actions/ViewActions.cs:86
 msgid "Fullscreen"
-msgstr "Ceo ekran"
+msgstr "Преко целог екана"
 
 #: Pinta.Core/Actions/ViewActions.cs:88 Pinta.Core/Actions/ViewActions.cs:216
-#: Pinta.Core/Classes/DocumentWorkspace.cs:229
-#: Pinta.Core/Classes/DocumentWorkspace.cs:237
+#: Pinta.Core/Classes/DocumentWorkspace.cs:244
+#: Pinta.Core/Classes/DocumentWorkspace.cs:252
 msgid "Window"
-msgstr "Prozor"
+msgstr "Прозор"
 
 #: Pinta.Core/Actions/ViewActions.cs:126
 msgid "Ruler Units"
-msgstr "Jedinice lenjira"
+msgstr "Јединице лењира"
 
-#: Pinta.Core/Classes/Document.cs:373
-msgid "copy"
-msgstr "kopiraj"
+#: Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager"
+msgstr "Управник додатака"
 
-#: Pinta.Core/Classes/BaseTool.cs:190
-msgid "Tool"
-msgstr "Alatke"
+#: Pinta.Core/Actions/LayerActions.cs:65
+#: Pinta.Core/Actions/LayerActions.cs:292
+msgid "Add New Layer"
+msgstr "Додај нови слој"
 
-#: Pinta.Core/Classes/BaseTool.cs:257
-msgid "Shortcut key"
-msgstr "Taster prečice"
+#: Pinta.Core/Actions/LayerActions.cs:66
+#: Pinta.Core/Actions/LayerActions.cs:275
+msgid "Delete Layer"
+msgstr "Обриши слој"
 
-#: Pinta.Core/Classes/BaseTool.cs:280
-msgid "Normal Blending"
-msgstr "Normalno utapanje"
+#: Pinta.Core/Actions/LayerActions.cs:67
+#: Pinta.Core/Actions/LayerActions.cs:266
+msgid "Duplicate Layer"
+msgstr "Удвостручи слој"
 
-#: Pinta.Core/Classes/BaseTool.cs:281
-msgid "Overwrite"
-msgstr "Prepiši"
+#: Pinta.Core/Actions/LayerActions.cs:68
+#: Pinta.Core/Actions/LayerActions.cs:244
+msgid "Merge Layer Down"
+msgstr "Стопи слој са доњим"
 
-#: Pinta.Core/Classes/BaseTool.cs:295
-msgid "Antialiasing On"
-msgstr "Antialijas uključen"
+#: Pinta.Core/Actions/LayerActions.cs:69
+msgid "Import from File..."
+msgstr "Увези из датотеке..."
 
-#: Pinta.Core/Classes/BaseTool.cs:296
-msgid "Antialiasing Off"
-msgstr "Antialijas isključen"
+#: Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Заокрени / Зумирај слој..."
 
-#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "{0} slika ({1})"
+#: Pinta.Core/Actions/LayerActions.cs:73
+#: Pinta.Core/Actions/LayerActions.cs:219
+msgid "Move Layer Up"
+msgstr "Помери слој горе"
+
+#: Pinta.Core/Actions/LayerActions.cs:74
+#: Pinta.Core/Actions/LayerActions.cs:230
+msgid "Move Layer Down"
+msgstr "Помери слој доле"
+
+#: Pinta.Core/Actions/LayerActions.cs:75
+msgid "Layer Properties..."
+msgstr "Својства слоја..."
+
+#: Pinta.Core/Actions/LayerActions.cs:157
+#: Pinta/Actions/File/OpenDocumentAction.cs:50
+msgid "Open Image File"
+msgstr "Отворите датотеку слике"
+
+#: Pinta.Core/Actions/LayerActions.cs:185
+msgid "Import From File"
+msgstr "Увези из датотеке"
+
+#: Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr "Нова..."
+
+#: Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr "Нови снимак екрана..."
+
+#: Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr "Отвори скорашње"
+
+#: Pinta.Core/Actions/FileActions.cs:64
+msgid "Close"
+msgstr "Затвори"
+
+#: Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr "Сачувај"
+
+#: Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr "Штампај"
+
+#: Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr "Изађи"
+
+#: Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr "Нова"
+
+#: Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr "Отвори"
+
+#: Pinta.Core/Actions/HelpActions.cs:50
+msgid "Pinta Website"
+msgstr "Веб сајт Пинте"
+
+#: Pinta.Core/Actions/HelpActions.cs:51
+msgid "File a Bug"
+msgstr "Пријавите грешку"
+
+#: Pinta.Core/Actions/HelpActions.cs:52
+msgid "Translate This Application"
+msgstr "Преведите овај програм"
+
+#: Pinta.Core/Actions/HelpActions.cs:53 Pinta/MainWindow.cs:161
+msgid "About"
+msgstr "О програму"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "Помножи"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
-msgstr ""
+msgstr "Додатно"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "Затамњивање боје"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "Осветљавање боје"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "Одсјај"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -1281,797 +988,1140 @@ msgstr "Сјај"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "Преклапање"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "Разлика"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
-msgstr ""
+msgstr "Негација"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Расветљено"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Потамњено"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Екран"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
+msgstr "Иксор"
+
+#: Pinta.Core/Classes/BaseTool.cs:192
+msgid "Tool"
+msgstr "Алатка"
+
+#: Pinta.Core/Classes/BaseTool.cs:263
+msgid "Shortcut key"
+msgstr "Тастер пречице"
+
+#: Pinta.Core/Classes/BaseTool.cs:418
+msgid "Normal Blending"
+msgstr "Обично стапање"
+
+#: Pinta.Core/Classes/BaseTool.cs:419
+msgid "Overwrite"
+msgstr "Препиши"
+
+#: Pinta.Core/Classes/BaseTool.cs:433
+msgid "Antialiasing On"
+msgstr "Умекшавање је укључено"
+
+#: Pinta.Core/Classes/BaseTool.cs:434
+msgid "Antialiasing Off"
+msgstr "Умекшавање је искључено"
+
+#: Pinta.Core/Classes/Document.cs:350
+msgid "copy"
+msgstr "умножи"
+
+#: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+msgid "Resize Canvas"
+msgstr "Промените величину платна"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:41
+#: Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "Издање"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "License"
+msgstr "Дозвола"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:50
+msgid "Released under the MIT X11 License."
+msgstr "Програм је издат под дозволом МИТ Икс11."
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "Copyright"
+msgstr "Ауторска права"
+
+#: Pinta/Dialogs/AboutPintaTabPage.cs:57
+msgid "by Pinta contributors"
+msgstr "доприносиоци Пинте"
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+msgid "Image cannot be pasted"
+msgstr "Слика не може бити убачена"
+
+#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+msgid "The clipboard does not contain an image."
+msgstr "Остава не садржи слику."
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Наслов"
+
+#: Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Путања"
+
+#: Pinta/Dialogs/AboutDialog.cs:120
+msgid "Contributors to this release:"
+msgstr "Доприносиоци овом издању:"
+
+#: Pinta/Dialogs/AboutDialog.cs:132
+msgid "Previous contributors:"
+msgstr "Претходни доприносиоци:"
+
+#: Pinta/Dialogs/AboutDialog.cs:143
+msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Cameron White https://launchpad.net/~cameronwhite91\n"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Milena https://launchpad.net/~milenad13\n"
+"  boki24 https://launchpad.net/~bojansav\n"
+"  Мирослав Николић https://launchpad.net/~lipek\n"
+"  Никола Павловић https://launchpad.net/~nikola825"
 
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Dovrši piksele"
+#: Pinta/Dialogs/AboutDialog.cs:146
+msgid "Translated by:"
+msgstr "Преводиоци:"
 
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Prevrni sliku horizontalno"
+#: Pinta/Dialogs/AboutDialog.cs:152
+msgid "Based on the work of Paint.NET:"
+msgstr "Засновано на раду „Paint.NET“-а:"
 
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Prevrni sliku vertikalno"
+#: Pinta/Dialogs/AboutDialog.cs:159
+msgid "Using some icons from:"
+msgstr "Користи неке иконице из:"
 
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Prevrni sloj horizontalno"
+#: Pinta/Dialogs/AboutDialog.cs:167
+msgid "Powered by Mono:"
+msgstr "Погони га Моно:"
 
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Prevrni sloj vertikalno"
+#: Pinta/Dialogs/AboutDialog.cs:274
+msgid "About Pinta"
+msgstr "О Пинти"
 
+#: Pinta/Dialogs/AboutDialog.cs:292
+msgid "Version Info"
+msgstr "Подаци о издању"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:50
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+msgid "Layer Properties"
+msgstr "Својства слоја"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:159
+msgid "Name:"
+msgstr "Назив:"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:167
+msgid "Visible"
+msgstr "Видљив"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
+msgid "Blend Mode"
+msgstr "Режим стапања"
+
+#: Pinta/Dialogs/LayerPropertiesDialog.cs:189
+msgid "Opacity:"
+msgstr "Непровидност:"
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr "ЈПЕГ квалитет"
+
+#: Pinta/Dialogs/JpegCompressionDialog.cs:49
+msgid "Quality: "
+msgstr "Квалитет: "
+
+#: Pinta/Main.cs:68
+msgid "number of threads to use for rendering"
+msgstr "број нити за исцртавање"
+
+#: Pinta/Options.cs:486
+msgid "OptionName"
+msgstr "Назив опције"
+
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
+#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
+msgid "Rotate / Zoom Layer"
+msgstr "Заокрени / Зумирај слој"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
+msgid "Layer Opacity"
+msgstr "Провидност слоја"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:97
+msgid "Rename Layer"
+msgstr "Преименуј слој"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Hide Layer"
+msgstr "Сакриј слој"
+
+#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Show Layer"
+msgstr "Прикажи слој"
+
+#: Pinta/Actions/Edit/ResizePaletteAction.cs:50
+msgid "Resize Palette"
+msgstr "Промени величину палете"
+
+#: Pinta/Actions/Edit/ResizePaletteAction.cs:51
+msgid "New palette size:"
+msgstr "Нова величина палете:"
+
+#: Pinta/Actions/Edit/PasteAction.cs:125
+msgid "Image larger than canvas"
+msgstr "Слика је већа од платна"
+
+#: Pinta/Actions/Edit/PasteAction.cs:126
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr "Убачена слика је већа од платна. Шта желите да урадите?"
+
+#: Pinta/Actions/Edit/PasteAction.cs:130
+msgid "Expand canvas"
+msgstr "Рашири платно"
+
+#: Pinta/Actions/Edit/PasteAction.cs:131
+msgid "Don't change canvas size"
+msgstr "Не мењај величину платна"
+
+#: Pinta/Actions/File/OpenDocumentAction.cs:64
+msgid "Image files"
+msgstr "Датотеке слика"
+
+#: Pinta/Actions/File/NewScreenshotAction.cs:52
+msgid "Take Screenshot"
+msgstr "Сними екран"
+
+#: Pinta/Actions/File/NewScreenshotAction.cs:53
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Застој пре снимања екрана (у секундама):"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
+msgid "Save Image File"
+msgstr "Сачувај датотеку слике"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+msgid "Pinta does not support saving images in this file format."
+msgstr "Пинта не подржава чување слика у овом запису."
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
+msgid "Cannot save read only file."
+msgstr "Не могу да сачувам датотеку само за читање."
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
+msgid "Image too large"
+msgstr "Слика је превелика"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "ИЦО датотеке не могу бити веће од 255 x 255 тачкица."
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "Датотека под називом „{0}“ већ постоји. Да ли желите да је замените?"
+
+#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
+"Већ постоји датотека у „{1}“. Уколико је замените преписаћете њен садржај."
+
+#: Pinta/Actions/File/CloseDocumentAction.cs:61
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "Да сачувам измене на слици „{0}“ пре затварања?"
+
+#: Pinta/Actions/File/CloseDocumentAction.cs:62
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Уколико не сачувате, све измене ће бити трајно изгубљене."
+
+#: Pinta/Actions/File/CloseDocumentAction.cs:69
+msgid "Close without saving"
+msgstr "Затвори без чувања"
+
+#: Pinta/MainWindow.cs:123
+msgid "_File"
+msgstr "_Датотека"
+
+#: Pinta/MainWindow.cs:124
+msgid "_Edit"
+msgstr "_Уређивање"
+
+#: Pinta/MainWindow.cs:126
+msgid "_View"
+msgstr "_Преглед"
+
+#: Pinta/MainWindow.cs:129
+msgid "_Image"
+msgstr "_Слика"
+
+#: Pinta/MainWindow.cs:130
+msgid "_Layers"
+msgstr "Сл_ојеви"
+
+#: Pinta/MainWindow.cs:131
+msgid "_Adjustments"
+msgstr "Доте_ривања"
+
+#: Pinta/MainWindow.cs:132
+msgid "Effe_cts"
+msgstr "Дејст_ва"
+
+#: Pinta/MainWindow.cs:133
+msgid "A_dd-ins"
+msgstr "_Додаци"
+
+#: Pinta/MainWindow.cs:135
+msgid "_Window"
+msgstr "_Прозор"
+
+#: Pinta/MainWindow.cs:139
+msgid "Tool Windows"
+msgstr "Прозор алата"
+
+#: Pinta/MainWindow.cs:143
+msgid "_Help"
+msgstr "По_моћ"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "У процентима:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "Према апсолутној величини:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+msgid "Width:"
+msgstr "Ширина:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+msgid "pixels"
+msgstr "тачкица"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+msgid "Height:"
+msgstr "Висина:"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Задржи однос размере"
+
+#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Усидри:"
+
+#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
+msgid "New Image Size          "
+msgstr "Величина нове слике          "
+
+#: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
+msgid "Layers"
+msgstr "Слојеви"
+
+#: Pinta/Pads/CanvasPad.cs:75
+msgid "Documents"
+msgstr "Документи"
+
+#: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
+msgid "History"
+msgstr "Историјат"
+
+#: Pinta/Pads/ToolBoxPad.cs:42 Pinta/Pads/ToolBoxPad.cs:48
+msgid "Tools"
+msgstr "Алати"
+
+#: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
+msgid "Images"
+msgstr "Слике"
+
+#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:91
+msgid "Hide"
+msgstr "Сакриј"
+
+#: Pinta/DockLibrary/DockItem.cs:485
+msgid "Dockable"
+msgstr "Прикачив"
+
+#: Pinta/DockLibrary/DockItem.cs:493
+msgid "Floating"
+msgstr "Плутајуће"
+
+#: Pinta/DockLibrary/DockItem.cs:502
+#: Pinta/DockLibrary/DockItemContainer.cs:195
+msgid "Auto Hide"
+msgstr "Сам сакриј"
+
+#: Pinta/DockLibrary/DockItemContainer.cs:191
+msgid "Dock"
+msgstr "Прикачи"
+
+#: Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
+#: Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Curves"
+msgstr "Криве"
+
+#: Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "Podešavanje nivoa"
+msgstr "Подешавање нивоа"
+
+#: Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
+#: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
+msgid "Posterize"
+msgstr "Смањите број боја"
+
+#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+msgid "Brightness / Contrast"
+msgstr "Осветљеност / Контраст"
+
+#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+msgid "Auto Level"
+msgstr "Самонивелисање"
+
+#: Pinta.Effects/Adjustments/SepiaEffect.cs:26
+msgid "Sepia"
+msgstr "Црвеносмеђа"
+
+#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+msgid "Black and White"
+msgstr "Црно-бело"
+
+#: Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "Нивои"
+
+#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+msgid "Invert Colors"
+msgstr "Изврни боје"
+
+#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+msgid "Hue / Saturation"
+msgstr "Нијанса / Засићеност"
+
+#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
+msgid "Linked"
+msgstr "Повезано"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "Ulazni histogram"
+msgstr "Улазни хистограм"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
-msgstr "Ulaz"
+msgstr "Улаз"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
 msgid "Output"
-msgstr "Izlaz"
+msgstr "Излаз"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "Izlazni histogram"
+msgstr "Излазни хистограм"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
-msgstr "Automatski"
+msgstr "Самостално"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
 msgid "Reset"
-msgstr "Resetuj"
+msgstr "Поврати"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
 msgid "Red"
-msgstr "Crveno"
+msgstr "Црвена"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
 msgid "Green"
-msgstr "Zeleno"
+msgstr "Зелена"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
 msgid "Blue"
-msgstr "Plavo"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:27
-msgid "Curves"
-msgstr "Krive"
+msgstr "Плава"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
 msgid "Transfer Map"
-msgstr "Mapa prenosa"
+msgstr "Мапа преноса"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
 msgid "RGB"
-msgstr "RGB"
+msgstr "РГБ"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr "Osvetljenost"
+msgstr "Осветљеност"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
-msgstr "Copy text   \t (256, 256)"
+msgstr "(256, 256)"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
 msgid "Red  "
-msgstr "Crveno  "
+msgstr "Црвена  "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
 msgid "Blue "
-msgstr "Plavo "
+msgstr "Плава "
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
 msgid "Tip: Right-click to remove control points."
-msgstr "Savet: Koristite desni klik da uklonite kontrolne tačke."
+msgstr "Савет: Кликните десним тастером да уклоните тачке управљања."
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-msgid "Posterize"
-msgstr "Posterizuj"
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
-msgid "Linked"
-msgstr "Povezano"
-
-#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-msgid "Invert Colors"
-msgstr "Izvrni boje"
-
-#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
-msgid "Auto Level"
-msgstr "Auto nivo"
-
-#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
-msgid "Black and White"
-msgstr "Crno - Belo"
-
-#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
-msgid "Hue / Saturation"
-msgstr "Nijansa / Zasićenje"
-
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Osvetljenost / Kontrast"
-
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:23
-msgid "Levels"
-msgstr "Nivoi"
-
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:26
-msgid "Sepia"
-msgstr "Sepia"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:28
-msgid "Median"
-msgstr "Srednji"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:36
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:37
-msgid "Noise"
-msgstr "Šum"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:25
-msgid "Pixelate"
-msgstr "Pikselizuj"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:37
-#: Pinta.Effects/Effects/TwistEffect.cs:33
-#: Pinta.Effects/Effects/BulgeEffect.cs:33
-#: Pinta.Effects/Effects/TileEffect.cs:33
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:38
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:33
-msgid "Distort"
-msgstr "Deformiši"
+#: Pinta.Effects/Effects/OutlineEffect.cs:36
+#: Pinta.Effects/Effects/EmbossEffect.cs:33
+#: Pinta.Effects/Effects/ReliefEffect.cs:32
+#: Pinta.Effects/Effects/EdgeDetectEffect.cs:36
+msgid "Stylize"
+msgstr "Стилизирај"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr "Slikanje uljem"
+msgstr "Уљани цртеж"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:40
 #: Pinta.Effects/Effects/InkSketchEffect.cs:41
 msgid "Artistic"
-msgstr "Umetnička"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:25
-msgid "Twist"
-msgstr "uvrni"
+msgstr "Уметнички"
 
 #: Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr "Ispupči"
+msgstr "Испупчи"
 
-#: Pinta.Effects/Effects/GlowEffect.cs:38
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
-#: Pinta.Effects/Effects/SharpenEffect.cs:33
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
-msgid "Photo"
-msgstr "Fotografija"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:25
-msgid "Fragment"
-msgstr "Deo"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:33
-#: Pinta.Effects/Effects/UnfocusEffect.cs:35
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:33
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:33
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:33
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:33
-msgid "Blurs"
-msgstr "Zamućenja"
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
-msgid "Reduce Noise"
-msgstr "Umanji šum"
+#: Pinta.Effects/Effects/BulgeEffect.cs:33
+#: Pinta.Effects/Effects/TwistEffect.cs:33
+#: Pinta.Effects/Effects/PixelateEffect.cs:37
+#: Pinta.Effects/Effects/TileEffect.cs:33
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:33
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:38
+msgid "Distort"
+msgstr "Искриви"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "Van fokusa"
+msgstr "Ван првог плана"
 
-#: Pinta.Effects/Effects/TileEffect.cs:25
-msgid "Tile Reflection"
-msgstr "Odsjaj pločica"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
-msgid "Red Eye Removal"
-msgstr "Uklanjanje efekta crvenih očiju"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:32
-#: Pinta.Effects/Effects/OutlineEffect.cs:36
-#: Pinta.Effects/Effects/EmbossEffect.cs:33
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:36
-msgid "Stylize"
-msgstr "Silizuj"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:44
-msgid "Relief"
-msgstr "Reljef"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:29
-msgid "Add Noise"
-msgstr "Dodaj šum"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:25
-msgid "Radial Blur"
-msgstr "Kružno zamućenje"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:25
-msgid "Gaussian Blur"
-msgstr "Gausovo zamućenje"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:32
-msgid "Pencil Sketch"
-msgstr "Skica olovkom"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:25
-msgid "Emboss"
-msgstr "Izbočine"
+#: Pinta.Effects/Effects/UnfocusEffect.cs:35
+#: Pinta.Effects/Effects/FragmentEffect.cs:33
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:33
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:33
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:33
+msgid "Blurs"
+msgstr "Замућења"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
-msgstr "Julijin fraktal"
+msgstr "Јулијин фрактал"
 
 #: Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 #: Pinta.Effects/Effects/CloudsEffect.cs:37
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
-msgstr "Iscrtavanje"
+msgstr "Исцртај"
 
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
-msgid "Mandelbrot Fractal"
-msgstr "Mandelbrotov fraktal"
+#: Pinta.Effects/Effects/EmbossEffect.cs:25
+msgid "Emboss"
+msgstr "Избочине"
 
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:25
-msgid "Motion Blur"
-msgstr "Zamućenje pokreta"
+#: Pinta.Effects/Effects/FragmentEffect.cs:25
+msgid "Fragment"
+msgstr "Парчићи"
 
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:25
-msgid "Polar Inversion"
-msgstr "Polarna inverzija"
+#: Pinta.Effects/Effects/ReliefEffect.cs:44
+msgid "Relief"
+msgstr "Рељеф"
 
-#: Pinta.Effects/Effects/SharpenEffect.cs:25
-msgid "Sharpen"
-msgstr "Izoštri"
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+msgid "Red Eye Removal"
+msgstr "Уклони црвене очи"
 
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:25
-msgid "Zoom Blur"
-msgstr "Uvećano zamućenje"
+#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
+#: Pinta.Effects/Effects/GlowEffect.cs:38
+#: Pinta.Effects/Effects/SharpenEffect.cs:33
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
+msgid "Photo"
+msgstr "Фотографија"
 
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:25
-msgid "Frosted Glass"
-msgstr "Zaleđeno staklo"
+#: Pinta.Effects/Effects/TwistEffect.cs:25
+msgid "Twist"
+msgstr "Уврни"
 
-#: Pinta.Effects/Effects/CloudsEffect.cs:29
-msgid "Clouds"
-msgstr "Oblaci"
+#: Pinta.Effects/Effects/PencilSketchEffect.cs:32
+msgid "Pencil Sketch"
+msgstr "Скица оловком"
+
+#: Pinta.Effects/Effects/PixelateEffect.cs:25
+msgid "Pixelate"
+msgstr "Истачкај"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "Skica mastilom"
+msgstr "Скица мастилом"
 
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-msgid "Soften Portrait"
-msgstr "Umekšani portret"
+#: Pinta.Effects/Effects/TileEffect.cs:25
+msgid "Tile Reflection"
+msgstr "Одсјај плочица"
+
+#: Pinta.Effects/Effects/SharpenEffect.cs:25
+msgid "Sharpen"
+msgstr "Изоштри"
+
+#: Pinta.Effects/Effects/FrostedGlassEffect.cs:25
+msgid "Frosted Glass"
+msgstr "Залеђено стакло"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:28
+msgid "Median"
+msgstr "Симетрала"
+
+#: Pinta.Effects/Effects/MedianEffect.cs:36
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:37
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
+msgid "Noise"
+msgstr "Сметње"
+
+#: Pinta.Effects/Effects/RadialBlurEffect.cs:25
+msgid "Radial Blur"
+msgstr "Кружно замућење"
+
+#: Pinta.Effects/Effects/ZoomBlurEffect.cs:25
+msgid "Zoom Blur"
+msgstr "Замућење увећања"
+
+#: Pinta.Effects/Effects/MotionBlurEffect.cs:25
+msgid "Motion Blur"
+msgstr "Замућење покрета"
+
+#: Pinta.Effects/Effects/AddNoiseEffect.cs:29
+msgid "Add Noise"
+msgstr "Додај сметње"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "Pronađi ivice"
+msgstr "Откриј ивице"
+
+#: Pinta.Effects/Effects/GaussianBlurEffect.cs:25
+msgid "Gaussian Blur"
+msgstr "Гаусно замућење"
+
+#: Pinta.Effects/Effects/CloudsEffect.cs:29
+msgid "Clouds"
+msgstr "Облаци"
+
+#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
+msgid "Reduce Noise"
+msgstr "Смањи сметње"
+
+#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
+msgid "Mandelbrot Fractal"
+msgstr "Манделбротов фрактал"
+
+#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+msgid "Soften Portrait"
+msgstr "Умекшани портрет"
+
+#: Pinta.Effects/Effects/PolarInversionEffect.cs:25
+msgid "Polar Inversion"
+msgstr "Поларно преокретање"
 
 #: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
 #: SharpenData MotionBlurEffect
 msgid "Amount"
-msgstr "Količina"
+msgstr "Количина"
 
 #: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
 #: EdgeDetectData EmbossEffect ReliefData TwistEffect
 msgid "Angle"
-msgstr "Ugao"
+msgstr "Угао"
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr "Omakšavanje ivica"
+msgstr "Умекшавање ивица"
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr "Osvijetljenost"
+msgstr "Осветљеност"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr "Veličina četkice"
+msgstr "Величина четкице"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr "Veličina ćelije"
+msgstr "Величина ћелије"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr "Centriraj pomak"
+msgstr "Усредсредишти помак"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr "Centrirano"
+msgstr "Усредиштено"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr "Hrapavost"
+msgstr "Храпавост"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr "Opseg boja"
+msgstr "Опсег боја"
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr "Zasićenost boja"
+msgstr "Засићеност"
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr "Bojenje"
+msgstr "Обојеност"
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr "Kontrast"
+msgstr "Контраст"
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr "Pokrivenost"
+msgstr "Покривеност"
 
 #: MotionBlurEffect dialog PolarInversionEffect
 msgid "Distance"
-msgstr "Rastojanje"
+msgstr "Удаљеност"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr "Ponašanje ivica"
+msgstr "Понашање ивица"
 
 #: MandelbrotFractalEffect dialog FragmentEffect
 msgid "Factor"
-msgstr "Faktor"
+msgstr "Фактор"
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr "Delovi"
+msgstr "Парчићи"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "kontura mastila"
+msgstr "Обрис мастила"
 
 #: AddNoiseEffect dialog OutlineEffect MandelbrotFractalEffect
 msgid "Intensity"
-msgstr "Intenzitet"
+msgstr "Јакост"
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr "Osvetljenje"
+msgstr "Осветљење"
 
 #: ZoomBlurEffect dialog BulgeEffect PencilSketchEffect
 msgid "Offset"
-msgstr "Pomak"
+msgstr "Померај"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr "Veličina vrha olovke"
+msgstr "Величина врха оловке"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr "Procenat"
+msgstr "Проценат"
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr "Snaga"
+msgstr "Снага"
 
 #: PolarInversionEffect dialog JuliaFractalEffect MandelbrotFractalEffect
 #: GaussianBlurEffect
 msgid "Quality"
-msgstr "Kvalitet"
+msgstr "Квалитет"
 
 #: TileEffect dialog RedEyeRemoveData
 msgid "Rotation"
-msgstr "Okretanje"
+msgstr "Окренутост"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr "Procenat zasićenosti"
+msgstr "Проценат засићења"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr "Promjeni veličinu"
+msgstr "Развлачење"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr "Posej"
+msgstr "Семе"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr "Mekoća"
+msgstr "Мекоћа"
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr "Jačina"
+msgstr "Јачина"
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr "Debljina"
+msgstr "Дебљина"
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr "Veličina pločice"
+msgstr "Величина плочице"
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr "Toplota"
+msgstr "Топлота"
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Koristi manje kvalitetan prikaz za pregled, male slike i male uglove. "
-"Koristi visoki kvalitet prikaza, velike slike i velike uglove."
+"Користите мањи квалитет за прегледе, мале слике, и мале углове. Користите "
+"већи квалитет за крајњи квалитет, велике слике, и велике углове."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Savet: Za najbolje rezultate, prvo pomoću alata za odabir, odaberite jedno "
-"pa drugo oka."
+"Савет: За боље резултате, као прво користите алате за избор да изаберете "
+"прво једно па друго око."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
+"Више избора:\n"
+"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "Укључи"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "Искључи"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Нема избора"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Доступно у ризници:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Доступна је доградња"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
+msgstr "Овај додатак не може бити учитан због недостајућих зависности"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
+msgstr "Потребно је: {0} в{1}, нађох в{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "Недостаје: {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "Инсталирано издање"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Издање ризнице"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "За преузимање"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
+msgstr "Следеће зависности које захтева овај додатак нису доступне:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "Инсталација је отказана"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "Нисам пронашао неке од затражених додатака"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "Инсталација није успела"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "Инсталиран"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Доградње"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Збирка"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Све ризнице"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Управљај ризницама..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Доступна је {0} доградња"
+msgstr[1] "Доступне су {0} доградње"
+msgstr[2] "Доступно је {0} доградњи"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "Освежавам ризницу"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "Инсталирајте пакете додатака"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Пакети додатака"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Нисам пронашао додатке"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Додатак"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Друго"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Уклони"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "Следећи пакети ће бити уклоњени:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Постоје други додаци који зависе од претходног који ће такође бити уклоњен:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"Изабрани додаци не могу бити инсталирани зато што постоје сукоби зависности."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Следећи пакети ће бити инсталирани:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (у корисничком директоријуму)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Следећи пакети морају бити уклоњени:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Следеће зависности не могу бити решене:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "Да ли сте сигурни да желите да откажете инсталацију?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Инсталирам додатке"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "Инсталација није успела!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "Инсталација је завршена са упозорењима."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Уклањам додатке"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "Укалњање није успело!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "Уклањање је завршено са упозорењима."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Бележим ризницу"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "Дошло је до изузетка: {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Више података"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Инсталирај..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Освежи"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "_Уклони..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "Потребна су додатна проширења за извођење ове радње."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Следећи додаци ће бити инсталирани:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Нисам пронашао доградње"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Освежи"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Догради све"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Ризница:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Инсталирај из датотеке..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Појединости"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Инсталирај"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Управљање ризницама додатака"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Додајте нову ризницу"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "Изаберите ризницу коју желите да забележите:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Забележи ризницу на мрежи"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "Адреса:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Забележи месну ризницу"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Путања:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Разгледај..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "Напредовање"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:53
-msgid "Replace"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:54
-msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:55
-msgid "Exclude (-) (Right Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:56
-msgid "Xor (Ctrl + Right Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:57
-msgid "Intersect (Shift + Left Click)"
-msgstr ""
-
-#: Pinta.Tools/MagicWandTool.cs:70
-msgid " Selection Mode: "
-msgstr ""
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
-msgid "Permission denied"
-msgstr ""
+msgstr "(обезбеђује га {0})"
