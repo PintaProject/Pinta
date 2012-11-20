@@ -47,8 +47,6 @@ namespace Pinta.Tools
 				var icon = CreateIconWithShape ("Tools.Paintbrush.png",
 				                                Shape.Ellipse, BrushWidth, 0, 16,
 				                                out iconOffsetX, out iconOffsetY);
-				//iconOffsetX = 0;
-				//iconOffsetY = 0;
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}
 		}
