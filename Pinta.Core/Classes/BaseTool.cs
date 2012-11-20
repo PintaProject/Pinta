@@ -299,7 +299,7 @@ namespace Pinta.Core
 			shapeWidth = (int)Math.Min(800d, ((double)shapeWidth) * zoom);
 			int halfOfShapeWidth = shapeWidth / 2;
 
-			// Calculate bounding boxes around the both image and ellipse
+			// Calculate bounding boxes around the both image and shape
 			// relative to the image top-left corner.
 			Gdk.Rectangle imgBBox = new Gdk.Rectangle(0, 0, img.Width, img.Height);
 			Gdk.Rectangle shapeBBox = new Gdk.Rectangle(
