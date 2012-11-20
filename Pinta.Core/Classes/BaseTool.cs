@@ -27,6 +27,7 @@
 using System;
 using Cairo;
 using Gtk;
+using Gdk;
 using System.IO;
 using Mono.Unix;
 using Mono.Addins;
@@ -40,7 +41,7 @@ namespace Pinta.Core
 	{
 		protected const int DEFAULT_BRUSH_WIDTH = 2;
 	    
-		protected static Point point_empty = new Point (-500, -500);
+		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
 	    
 		protected ToggleToolButton tool_item;
 		protected ToolItem tool_label;
@@ -251,7 +252,7 @@ namespace Pinta.Core
 
 		protected virtual ToggleToolButton CreateToolButton ()
 		{
-			Image i2 = new Image (PintaCore.Resources.GetIcon (Icon));
+			Gtk.Image i2 = new Gtk.Image (PintaCore.Resources.GetIcon (Icon));
 			i2.Show ();
 			
 			ToggleToolButton tool_item = new ToggleToolButton ();
@@ -273,132 +274,86 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Create a cursor icon with an ellipse that visually represents the tool's thickness.
+		/// Create a cursor icon with a shape that visually represents the tool's thickness.
 		/// </summary>
-		/// <param name="name">A string containing the name of the tool's icon to use.</param>
-		/// <param name="brushWidth">The current thickness of the tool.</param>
-		/// <param name="cursorWidth">The width of the tool's icon.</param>
-		/// <param name="cursorHeight">The height of the tool's icon.</param>
-		/// <param name="cursorOffsetX">The X position in the tool's icon where the center of the affected area will be.</param>
-		/// <param name="cursorOffsetY">The Y position in the tool's icon where the center of the affected area will be.</param>
-		/// <param name="ellipseColor1">The inner color of the ellipse.</param>
-		/// <param name="ellipseColor2">The outer color of the ellipse.</param>
-		/// <param name="ellipseThickness">The thickness of the ellipse that will be drawn.</param>
-		/// <param name="iconOffsetX">The X position in the returned Pixbuf that will be the center of the new cursor icon.</param>
-		/// <param name="iconOffsetY">The Y position in the returned Pixbuf that will be the center of the new cursor icon.</param>
-		/// <returns>The new cursor icon with an ellipse that represents the tool's thickness.</returns>
-		protected Gdk.Pixbuf CreateEllipticalThicknessIcon(string name, int brushWidth, int cursorWidth, int cursorHeight,
-		                                                   int cursorOffsetX, int cursorOffsetY, Color ellipseColor1,
-		                                                   Color ellipseColor2, int ellipseThickness,
-		                                                   out int iconOffsetX, out int iconOffsetY)
+		/// <param name="imgName">A string containing the name of the tool's icon image to use.</param>
+		/// <param name="shape">The shape to draw.</param>
+		/// <param name="shapeWidth">The width of the shape.</param>
+		/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
+		/// <param name="imgToShapeX">The verical distance between the image's top-left corner and the shape center.</param>
+		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
+		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
+		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
+		protected Gdk.Pixbuf CreateIconWithShape(string imgName, Shape shape, int shapeWidth,
+		                                          int imgToShapeX, int imgToShapeY,
+		                                          out int shapeX, out int shapeY)
 		{
-			double zoom = 1d;
+			Gdk.Pixbuf img = PintaCore.Resources.GetIcon(imgName);
 
+			double zoom = 1d;
 			if (PintaCore.Workspace.HasOpenDocuments)
 			{
 				zoom = Math.Min(30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
 			}
 
-			brushWidth = (int)Math.Min(800d, ((double)brushWidth) * zoom);
-			cursorWidth = (int)((double)cursorWidth * zoom);
-			cursorHeight = (int)((double)cursorHeight * zoom);
+			shapeWidth = (int)Math.Min(800d, ((double)shapeWidth) * zoom);
+			int halfOfShapeWidth = shapeWidth / 2;
 
+			// Calculate bounding boxes around the both image and ellipse
+			// relative to the image top-left corner.
+			Gdk.Rectangle imgBBox = new Gdk.Rectangle(0, 0, img.Width, img.Height);
+			Gdk.Rectangle shapeBBox = new Gdk.Rectangle(
+				imgToShapeX - halfOfShapeWidth,
+				imgToShapeY - halfOfShapeWidth,
+				shapeWidth,
+				shapeWidth);
 
-			int halfOfEllipseThickness = (int)Math.Ceiling(ellipseThickness / 2d);
-			int halfOfBrushWidth = brushWidth / 2;
+			// Inflate shape bounding box to allow for anti-aliasing
+			shapeBBox.Inflate(2, 2);
 
-			int iconWidth = Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfEllipseThickness,
-				brushWidth + ellipseThickness + (int)(16d / zoom));
-			int iconHeight = Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfEllipseThickness,
-				brushWidth + ellipseThickness + (int)(16d / zoom));
+			// To determine required size of icon,
+			// find union of the image and shape bounding boxes
+			// (still relative to image top-left corner)
+			Gdk.Rectangle iconBBox = imgBBox.Union (shapeBBox);
 
-			iconOffsetX = Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfEllipseThickness);
-			iconOffsetY = Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfEllipseThickness);
+			// Image top-left corner in icon co-ordinates
+			int imgX = imgBBox.Left - iconBBox.Left;
+			int imgY = imgBBox.Top - iconBBox.Top;
 
-			ImageSurface i = new ImageSurface(Format.ARGB32, iconWidth, iconHeight);
+			// Shape center point in icon co-ordinates
+			shapeX = imgToShapeX - iconBBox.Left;
+			shapeY = imgToShapeY - iconBBox.Top;
 
+			ImageSurface i = new ImageSurface(Format.ARGB32, iconBBox.Width, iconBBox.Height);
 			using (Context g = new Context(i))
 			{
-				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth,
-					iconOffsetY - halfOfBrushWidth,
-					brushWidth,
-					brushWidth),
-					ellipseColor2, ellipseThickness);
+				// Don't show shape if shapeWidth less than 3,
+				if (shapeWidth > 3)
+				{
+					int diam = Math.Max (1, shapeWidth - 2);
+					Cairo.Rectangle shapeRect = new Cairo.Rectangle(shapeX - halfOfShapeWidth + 1,
+					                                                 shapeY - halfOfShapeWidth + 1,
+					                                                 diam,
+					                                                 diam);
 
-				g.DrawEllipse(new Rectangle(iconOffsetX - halfOfBrushWidth + ellipseThickness,
-					iconOffsetY - halfOfBrushWidth + ellipseThickness,
-					brushWidth - ellipseThickness - 1,
-					brushWidth - ellipseThickness - 1),
-					ellipseColor1, ellipseThickness);
+					Cairo.Color thickColor = new Cairo.Color (255, 255, 255);
+					Cairo.Color thinColor = new Cairo.Color (0, 0, 0);
 
-				g.DrawPixbuf(PintaCore.Resources.GetIcon(name),
-					new Point(iconOffsetX - cursorOffsetX, iconOffsetY - cursorOffsetY));
-			}
+					switch (shape)
+					{
+					case Shape.Ellipse:
+						g.DrawEllipse(shapeRect, thickColor, 3);
+						g.DrawEllipse(shapeRect, thinColor, 1);
+						break;
+					case Shape.Rectangle:
+						g.DrawRectangle(shapeRect, thickColor, 3);
+						g.DrawRectangle(shapeRect, thinColor, 1);
+						break;
+					}
+				}
 
-			return CairoExtensions.ToPixbuf(i);
-		}
-
-		/// <summary>
-		/// Create a cursor icon with an rectangle that visually represents the tool's thickness.
-		/// </summary>
-		/// <param name="name">A string containing the name of the tool's icon to use.</param>
-		/// <param name="brushWidth">The current thickness of the tool.</param>
-		/// <param name="cursorWidth">The width of the tool's icon.</param>
-		/// <param name="cursorHeight">The height of the tool's icon.</param>
-		/// <param name="cursorOffsetX">The X position in the tool's icon where the center of the affected area will be.</param>
-		/// <param name="cursorOffsetY">The Y position in the tool's icon where the center of the affected area will be.</param>
-		/// <param name="rectangleColor1">The inner color of the rectangle.</param>
-		/// <param name="rectangleColor2">The outer color of the rectangle.</param>
-		/// <param name="rectangleThickness">The thickness of the rectangle that will be drawn.</param>
-		/// <param name="iconOffsetX">The X position in the returned Pixbuf that will be the center of the new cursor icon.</param>
-		/// <param name="iconOffsetY">The Y position in the returned Pixbuf that will be the center of the new cursor icon.</param>
-		/// <returns>The new cursor icon with an rectangle that represents the tool's thickness.</returns>
-		protected Gdk.Pixbuf CreateRectangularThicknessIcon(string name, int brushWidth, int cursorWidth, int cursorHeight,
-		                                                    int cursorOffsetX, int cursorOffsetY, Color rectangleColor1,
-		                                                    Color rectangleColor2, int rectangleThickness,
-		                                                    out int iconOffsetX, out int iconOffsetY)
-		{
-			double zoom = 1d;
-
-			if (PintaCore.Workspace.HasOpenDocuments)
-			{
-				zoom = Math.Min(30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
-			}
-
-			brushWidth = (int)Math.Min(800d, ((double)brushWidth) * zoom);
-			cursorWidth = (int)((double)cursorWidth * zoom);
-			cursorHeight = (int)((double)cursorHeight * zoom);
-
-
-			int halfOfRectangleThickness = (int)Math.Ceiling(rectangleThickness / 2d);
-			int halfOfBrushWidth = brushWidth / 2;
-
-			int iconWidth = Math.Max(cursorWidth + cursorOffsetX + halfOfBrushWidth + halfOfRectangleThickness,
-				brushWidth + rectangleThickness + (int)(16d / zoom));
-			int iconHeight = Math.Max(cursorHeight + cursorOffsetY + halfOfBrushWidth + halfOfRectangleThickness,
-				brushWidth + rectangleThickness + (int)(16d / zoom));
-
-			iconOffsetX = Math.Max(cursorOffsetX, halfOfBrushWidth + halfOfRectangleThickness);
-			iconOffsetY = Math.Max(cursorOffsetY, halfOfBrushWidth + halfOfRectangleThickness);
-
-			ImageSurface i = new ImageSurface(Format.ARGB32, iconWidth, iconHeight);
-
-			using (Context g = new Context(i))
-			{
-				g.DrawRectangle(new Rectangle(iconOffsetX - halfOfBrushWidth,
-					iconOffsetY - halfOfBrushWidth,
-					brushWidth,
-					brushWidth),
-					rectangleColor2, rectangleThickness);
-
-				g.DrawRectangle(new Rectangle(iconOffsetX - halfOfBrushWidth + rectangleThickness,
-					iconOffsetY - halfOfBrushWidth + rectangleThickness,
-					brushWidth - rectangleThickness - 1,
-					brushWidth - rectangleThickness - 1),
-					rectangleColor1, rectangleThickness);
-
-				g.DrawPixbuf(PintaCore.Resources.GetIcon(name),
-					new Point(iconOffsetX - cursorOffsetX, iconOffsetY - cursorOffsetY));
+				// Draw the image
+				g.DrawPixbuf(img, new Cairo.Point(imgX, imgY));
 			}
 
 			return CairoExtensions.ToPixbuf(i);

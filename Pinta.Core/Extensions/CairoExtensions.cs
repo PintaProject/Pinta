@@ -49,7 +49,7 @@ namespace Pinta.Core
 		{
 			// Put it on a pixel line
 			if (lineWidth == 1)
-				r = new Rectangle (r.X - 0.5, r.Y - 0.5, r.Width, r.Height);
+				r = new Rectangle (r.X + 0.5, r.Y + 0.5, r.Width-1, r.Height-1);
 
 			g.Save ();
 
@@ -456,8 +456,10 @@ namespace Pinta.Core
 		public static Rectangle DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
-			if (lineWidth == 1)
-				p1 = new PointD (p1.X - 0.5, p1.Y - 0.5);
+			if (lineWidth == 1){
+				p1 = new PointD (p1.X + 0.5, p1.Y + 0.5);
+				p2 = new PointD (p2.X + 0.5, p2.Y + 0.5);
+			}
 
 			g.Save ();
 
