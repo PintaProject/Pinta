@@ -56,9 +56,9 @@ namespace Pinta.Tools
 		public override Gdk.Cursor DefaultCursor {
 			get {
 				int iconOffsetX, iconOffsetY;
-				var icon = CreateEllipticalThicknessIcon ("Tools.Eraser.png", BrushWidth, 16, 16, 0, 14,
-				                                          new Cairo.Color (0, 0, 0), new Cairo.Color (255, 255, 255, .5d), 1,
-				                                          out iconOffsetX, out iconOffsetY);
+				var icon = CreateIconWithShape ("Tools.Eraser.png",
+				                                CursorShape.Ellipse, BrushWidth, 0, 14,
+				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}
 		}

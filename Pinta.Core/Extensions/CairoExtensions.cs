@@ -49,7 +49,7 @@ namespace Pinta.Core
 		{
 			// Put it on a pixel line
 			if (lineWidth == 1)
-				r = new Rectangle (r.X - 0.5, r.Y - 0.5, r.Width, r.Height);
+				r = new Rectangle (r.X + 0.5, r.Y + 0.5, r.Width-1, r.Height-1);
 
 			g.Save ();
 
@@ -456,8 +456,10 @@ namespace Pinta.Core
 		public static Rectangle DrawLine (this Context g, PointD p1, PointD p2, Color color, int lineWidth)
 		{
 			// Put it on a pixel line
-			if (lineWidth == 1)
-				p1 = new PointD (p1.X - 0.5, p1.Y - 0.5);
+			if (lineWidth == 1){
+				p1 = new PointD (p1.X + 0.5, p1.Y + 0.5);
+				p2 = new PointD (p2.X + 0.5, p2.Y + 0.5);
+			}
 
 			g.Save ();
 
@@ -897,6 +899,20 @@ namespace Pinta.Core
 		public static double GetRight (this Rectangle rect)
 		{
 			return rect.X + rect.Width;
+		}
+
+		/// <summary>
+		/// Creates a copy of the rectangle but with the side edges
+		/// moved out from the center by dx, and the top and bottom
+		/// edges moved out from the center by dy.  Edges are moved
+		/// inwards when dx or dy are negative.
+		/// </summary>
+		/// <param name="dx">Dist to move sides from center.</param>
+		/// <param name="dy">Dist to move top & botom from center.</param>
+		/// <returns>The inflated (or deflated) rectangle.</returns>
+		public static Rectangle Inflate (this Rectangle rect, int dx, int dy)
+		{
+			return new Rectangle(rect.X - dx, rect.Y - dy, rect.Width + 2 * dx, rect.Height + 2 * dy);
 		}
 
 		/// <summary>
