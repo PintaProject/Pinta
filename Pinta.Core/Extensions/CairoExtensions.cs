@@ -901,6 +901,15 @@ namespace Pinta.Core
 			return rect.X + rect.Width;
 		}
 
+		/// <summary>
+		/// Creates a copy of the rectangle but with the side edges
+		/// moved out from the center by dx, and the top and bottom
+		/// edges moved out from the center by dy.  Edges are moved
+		/// inwards when dx or dy are negative.
+		/// </summary>
+		/// <param name="dx">Dist to move sides from center.</param>
+		/// <param name="dy">Dist to move top & botom from center.</param>
+		/// <returns>The inflated (or deflated) rectangle.</returns>
 		public static Rectangle Inflate (this Rectangle rect, int dx, int dy)
 		{
 			return new Rectangle(rect.X - dx, rect.Y - dy, rect.Width + 2 * dx, rect.Height + 2 * dy);
