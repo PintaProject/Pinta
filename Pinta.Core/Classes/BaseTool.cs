@@ -284,7 +284,7 @@ namespace Pinta.Core
 		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
-		protected Gdk.Pixbuf CreateIconWithShape(string imgName, Shape shape, int shapeWidth,
+		protected Gdk.Pixbuf CreateIconWithShape(string imgName, CursorShape shape, int shapeWidth,
 		                                          int imgToShapeX, int imgToShapeY,
 		                                          out int shapeX, out int shapeY)
 		{
@@ -341,12 +341,12 @@ namespace Pinta.Core
 
 					switch (shape)
 					{
-					case Shape.Ellipse:
+					case CursorShape.Ellipse:
 						g.DrawEllipse(shapeRect, outerColor, 1);
 						shapeRect = shapeRect.Inflate (-1, -1);
 						g.DrawEllipse(shapeRect, innerColor, 1);
 						break;
-					case Shape.Rectangle:
+					case CursorShape.Rectangle:
 						g.DrawRectangle(shapeRect, outerColor, 1);
 						shapeRect = shapeRect.Inflate (-1, -1);
 						g.DrawRectangle(shapeRect, innerColor, 1);

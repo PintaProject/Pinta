@@ -57,7 +57,7 @@ namespace Pinta.Tools
 			get {
 				int iconOffsetX, iconOffsetY;
 				var icon = CreateIconWithShape ("Tools.Eraser.png",
-				                                Shape.Ellipse, BrushWidth, 0, 14,
+				                                CursorShape.Ellipse, BrushWidth, 0, 14,
 				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}

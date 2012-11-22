@@ -1,5 +1,5 @@
 //
-// Shape.cs
+// CursorShape.cs
 //
 // Author:
 //       Don McComb <don.mccomb@gmail.com>
@@ -27,7 +27,7 @@ using System;
 
 namespace Pinta.Core
 {
-	public enum Shape
+	public enum CursorShape
 	{
 		Ellipse,
 		Rectangle

@@ -50,7 +50,7 @@ namespace Pinta.Tools
 			get {
 				int iconOffsetX, iconOffsetY;
 				var icon = CreateIconWithShape ("Cursor.CloneStamp.png",
-				                                Shape.Ellipse, BrushWidth, 6, 11,
+				                                CursorShape.Ellipse, BrushWidth, 6, 11,
 				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}

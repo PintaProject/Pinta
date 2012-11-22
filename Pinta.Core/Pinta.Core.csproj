@@ -209,7 +209,7 @@
     <Compile Include="Widgets\ToolBarDropDownButton.cs" />
     <Compile Include="Clipper\Clipper.cs" />
     <Compile Include="Actions\AddinActions.cs" />
-    <Compile Include="Enumerations\Shape.cs" />
+    <Compile Include="Enumerations\CursorShape.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
