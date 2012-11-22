@@ -901,6 +901,11 @@ namespace Pinta.Core
 			return rect.X + rect.Width;
 		}
 
+		public static Rectangle Inflate (this Rectangle rect, int dx, int dy)
+		{
+			return new Rectangle(rect.X - dx, rect.Y - dy, rect.Width + 2 * dx, rect.Height + 2 * dy);
+		}
+
 		/// <summary>
 		/// Determines if the requested pixel coordinate is within bounds.
 		/// </summary>

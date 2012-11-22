@@ -331,23 +331,25 @@ namespace Pinta.Core
 				if (shapeWidth > 3)
 				{
 					int diam = Math.Max (1, shapeWidth - 2);
-					Cairo.Rectangle shapeRect = new Cairo.Rectangle(shapeX - halfOfShapeWidth + 1,
-					                                                 shapeY - halfOfShapeWidth + 1,
+					Cairo.Rectangle shapeRect = new Cairo.Rectangle(shapeX - halfOfShapeWidth,
+					                                                 shapeY - halfOfShapeWidth,
 					                                                 diam,
 					                                                 diam);
 
-					Cairo.Color thickColor = new Cairo.Color (255, 255, 255);
-					Cairo.Color thinColor = new Cairo.Color (0, 0, 0);
+					Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.5);
+					Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
 
 					switch (shape)
 					{
 					case Shape.Ellipse:
-						g.DrawEllipse(shapeRect, thickColor, 3);
-						g.DrawEllipse(shapeRect, thinColor, 1);
+						g.DrawEllipse(shapeRect, outerColor, 1);
+						shapeRect = shapeRect.Inflate (-1, -1);
+						g.DrawEllipse(shapeRect, innerColor, 1);
 						break;
 					case Shape.Rectangle:
-						g.DrawRectangle(shapeRect, thickColor, 3);
-						g.DrawRectangle(shapeRect, thinColor, 1);
+						g.DrawRectangle(shapeRect, outerColor, 1);
+						shapeRect = shapeRect.Inflate (-1, -1);
+						g.DrawRectangle(shapeRect, innerColor, 1);
 						break;
 					}
 				}
