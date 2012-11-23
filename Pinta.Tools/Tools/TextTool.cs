@@ -501,6 +501,8 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown(DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
 		{
+			ctrlKey = (args.Event.State & ModifierType.ControlMask) != 0;
+
 			//Store the mouse position.
 			Point pt = point.ToGdkPoint();
 
@@ -610,6 +612,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
+			ctrlKey = (args.Event.State & ModifierType.ControlMask) != 0;
+
 			lastMousePosition = point.ToGdkPoint();
 
 			// If we're dragging the text around, do that
@@ -624,7 +628,7 @@ namespace Pinta.Tools
 			}
 			else
 			{
-				updateMouseCursor();
+				UpdateMouseCursor();
 			}
 		}
 
@@ -643,7 +647,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void updateMouseCursor()
+		private void UpdateMouseCursor()
 		{
 			//Whether or not to show the normal text cursor.
 			bool showNormalCursor = false;
@@ -712,12 +716,8 @@ namespace Pinta.Tools
 			if ((modifier & Gdk.ModifierType.Mod1Mask) != 0)
 				return;
 
-			if (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R)
-			{
-				ctrlKey = true;
-
-				updateMouseCursor();
-			}
+			ctrlKey = (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R);
+			UpdateMouseCursor ();
 
 			// Assume that we are going to handle the key
 			bool keyHandled = true;
@@ -828,11 +828,12 @@ namespace Pinta.Tools
 
 		protected override void OnKeyUp(DrawingArea canvas, KeyReleaseEventArgs args)
 		{
-			if (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R)
+			if (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R ||
+			    (args.Event.State & ModifierType.ControlMask) != 0)
 			{
 				ctrlKey = false;
 
-				updateMouseCursor();
+				UpdateMouseCursor();
 			}
 		}
 
