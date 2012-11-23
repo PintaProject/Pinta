@@ -676,7 +676,7 @@ namespace Pinta.Tools
 					previousMouseCursorNormal = showNormalCursor;
 
 					if (PintaCore.Workspace.HasOpenDocuments)
-						RedrawText(true, true);
+						RedrawText(is_editing, true);
 				}
 			}
 			else
@@ -687,7 +687,7 @@ namespace Pinta.Tools
 
 					previousMouseCursorNormal = showNormalCursor;
 
-					RedrawText(true, true);
+					RedrawText(is_editing, true);
 				}
 			}
 		}
@@ -769,7 +769,7 @@ namespace Pinta.Tools
 
 					case Gdk.Key.Escape:
 						StopEditing(false);
-						break;
+						return;
 					case Gdk.Key.Insert:
 						if ((modifier & Gdk.ModifierType.ShiftMask) != 0)
 						{
