@@ -120,9 +120,9 @@ namespace Pinta.Gui.Widgets
 
 			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
 				// Draw our canvas drop shadow
-				g.DrawRectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width + 1, PintaCore.Workspace.CanvasSize.Height + 1), new Cairo.Color (.5, .5, .5), 1);
-				g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 3, PintaCore.Workspace.CanvasSize.Height + 3), new Cairo.Color (.8, .8, .8), 1);
-				g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 5, PintaCore.Workspace.CanvasSize.Height + 5), new Cairo.Color (.9, .9, .9), 1);
+				g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 2, PintaCore.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+				g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 4, PintaCore.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+				g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, PintaCore.Workspace.CanvasSize.Width + 6, PintaCore.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
 				// Set up our clip rectangle
 				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height));

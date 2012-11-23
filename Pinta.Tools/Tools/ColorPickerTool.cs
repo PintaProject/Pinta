@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ColorPickerTool.cs
 //  
 // Author:
@@ -72,9 +72,9 @@ namespace Pinta.Tools
 		public override Gdk.Cursor DefaultCursor {
 			get {
 				int iconOffsetX, iconOffsetY;
-				var icon = CreateRectangularThicknessIcon ("Cursor.ColorPicker.png", SampleSize, 16, 16, 1, 16,
-				                                          new Cairo.Color (0, 0, 0), new Cairo.Color (255, 255, 255, .5d), 1,
-				                                          out iconOffsetX, out iconOffsetY);
+				var icon = CreateIconWithShape ("Cursor.ColorPicker.png",
+				                                CursorShape.Rectangle, SampleSize, 1, 16,
+				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}
 		}
