@@ -5,19 +5,13 @@ namespace Pinta.Gui.Widgets
 	public partial class ReseedButtonWidget
 	{
 		private global::Gtk.VBox vbox;
-
 		private global::Gtk.HBox hbox1;
-
 		private global::Gtk.Label label;
-
 		private global::Gtk.HSeparator hseparator;
-
 		private global::Gtk.HBox hbox2;
-
 		private global::Gtk.Button button1;
-
 		private global::Gtk.Alignment alignment2;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -37,7 +31,7 @@ namespace Pinta.Gui.Widgets
 			this.label.Name = "label";
 			this.label.LabelProp = global::Mono.Unix.Catalog.GetString ("Random Noise");
 			this.hbox1.Add (this.label);
-			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.label]));
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.label]));
 			w1.Position = 0;
 			w1.Expand = false;
 			w1.Fill = false;
@@ -45,10 +39,10 @@ namespace Pinta.Gui.Widgets
 			this.hseparator = new global::Gtk.HSeparator ();
 			this.hseparator.Name = "hseparator";
 			this.hbox1.Add (this.hseparator);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.hseparator]));
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.hseparator]));
 			w2.Position = 1;
 			this.vbox.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox[this.hbox1]));
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox [this.hbox1]));
 			w3.Position = 0;
 			w3.Expand = false;
 			w3.Fill = false;
@@ -64,18 +58,18 @@ namespace Pinta.Gui.Widgets
 			this.button1.UseUnderline = true;
 			this.button1.Label = global::Mono.Unix.Catalog.GetString ("Reseed");
 			this.hbox2.Add (this.button1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.button1]));
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.button1]));
 			w4.Position = 0;
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.alignment2 = new global::Gtk.Alignment (0.5f, 0f, 1f, 0f);
+			this.alignment2 = new global::Gtk.Alignment (0.5F, 0F, 1F, 0F);
 			this.alignment2.Name = "alignment2";
 			this.hbox2.Add (this.alignment2);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.alignment2]));
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.alignment2]));
 			w5.Position = 1;
 			this.vbox.Add (this.hbox2);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox[this.hbox2]));
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox [this.hbox2]));
 			w6.Position = 1;
 			w6.Expand = false;
 			w6.Fill = false;
