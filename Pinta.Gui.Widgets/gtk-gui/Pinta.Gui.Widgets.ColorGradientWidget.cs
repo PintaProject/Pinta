@@ -5,7 +5,7 @@ namespace Pinta.Gui.Widgets
 	public partial class ColorGradientWidget
 	{
 		private global::Gtk.EventBox eventbox;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
