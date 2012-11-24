@@ -932,9 +932,9 @@ namespace Pinta.Tools
 			r.Inflate(10 + OutlineWidth, 10 + OutlineWidth);
 			CurrentTextBounds = r;
 
+			Rectangle cursorBounds = Rectangle.Zero;
 
 			Cairo.ImageSurface surf;
-			var invalidate_cursor = old_cursor_bounds;
 
 			if (!useTextLayer)
 			{
@@ -998,8 +998,7 @@ namespace Pinta.Tools
 					g.Antialias = Cairo.Antialias.None;
 					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
 					
-					loc.Inflate (2, 10);
-					old_cursor_bounds = loc;
+					cursorBounds = Rectangle.Inflate (loc, 2, 10);
 				}
 
 				g.Restore ();
@@ -1033,10 +1032,12 @@ namespace Pinta.Tools
 				}
 			}
 
-
 			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
-			PintaCore.Workspace.Invalidate(invalidate_cursor);
+			PintaCore.Workspace.Invalidate(old_cursor_bounds);
 			PintaCore.Workspace.Invalidate(r);
+			PintaCore.Workspace.Invalidate(cursorBounds);
+
+			old_cursor_bounds = cursorBounds;
 		}
 
 		/// <summary>
