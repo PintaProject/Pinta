@@ -416,7 +416,7 @@ namespace Pinta.Tools
 		{
 			UpdateFont ();
 		}
-
+		
 		private void HandleSelectedLayerChanged(object sender, EventArgs e)
 		{
 			UpdateFont();
@@ -473,7 +473,9 @@ namespace Pinta.Tools
 			PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 			PintaCore.Palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 
-			PintaCore.Layers.SelectedLayerChanged += new EventHandler(HandleSelectedLayerChanged);
+			PintaCore.Layers.LayerAdded += HandleSelectedLayerChanged;
+			PintaCore.Layers.LayerRemoved += HandleSelectedLayerChanged;
+			PintaCore.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
 			
 			// We always start off not in edit mode
 			is_editing = false;
@@ -492,7 +494,9 @@ namespace Pinta.Tools
 			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 			PintaCore.Palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 
-			PintaCore.Layers.SelectedLayerChanged -= new EventHandler(HandleSelectedLayerChanged);
+			PintaCore.Layers.LayerAdded -= HandleSelectedLayerChanged;
+			PintaCore.Layers.LayerRemoved -= HandleSelectedLayerChanged;
+			PintaCore.Layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
 
 			StopEditing(false);
 		}
