@@ -42,8 +42,9 @@ namespace Pinta.Core
 		{
 			int level = PintaCore.Actions.File.RaiseModifyCompression (85);
 			
-			if (level != -1)
-				pb.Savev (fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
+			if (level != -1) {
+				pb.SavevUtf8(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
+			}
 		}
 	}
 }
