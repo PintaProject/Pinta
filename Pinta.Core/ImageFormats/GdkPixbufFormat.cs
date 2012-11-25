@@ -26,6 +26,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 
 using Gdk;
 
@@ -95,7 +96,7 @@ namespace Pinta.Core
 		
 		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType)
 		{
-			pb.Save (fileName, fileType);
+			pb.SaveUtf8(fileName, fileType);
 		}
 
 		public void Export (Document document, string fileName)
@@ -107,6 +108,60 @@ namespace Pinta.Core
 
 			(pb as IDisposable).Dispose ();
 			(surf as IDisposable).Dispose ();
+		}
+	}
+
+	internal static class PixbufExtensions
+	{
+		[DllImport ("libgdk_pixbuf-2.0-0.dll")]
+		private static extern bool gdk_pixbuf_save_utf8 (IntPtr raw, IntPtr filename, IntPtr type, out IntPtr error, IntPtr dummy);
+
+		public static bool SaveUtf8 (this Pixbuf pb, string filename, string type)
+		{
+			if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
+				IntPtr zero = IntPtr.Zero;
+				IntPtr intPtr = GLib.Marshaller.StringToPtrGStrdup (filename);
+				IntPtr intPtr2 = GLib.Marshaller.StringToPtrGStrdup (type);
+				bool result = gdk_pixbuf_save_utf8 (pb.Handle, intPtr, intPtr2, out zero, IntPtr.Zero);
+				GLib.Marshaller.Free (intPtr);
+				GLib.Marshaller.Free (intPtr2);
+				if (zero != IntPtr.Zero) {
+					throw new GLib.GException (zero);
+				}
+				return result;
+			}
+			return pb.Save(filename, type);
+		}
+
+		[DllImport ("libgdk_pixbuf-2.0-0.dll")]
+		private static extern bool gdk_pixbuf_savev_utf8 (IntPtr raw, IntPtr filename, IntPtr type, IntPtr[] option_keys, IntPtr[] option_values, out IntPtr error);
+
+		public static bool SavevUtf8 (this Pixbuf pb, string filename, string type, string[] option_keys, string[] option_values)
+		{
+			if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
+				IntPtr intPtr = GLib.Marshaller.StringToPtrGStrdup (filename);
+				IntPtr intPtr2 = GLib.Marshaller.StringToPtrGStrdup (type);
+				int num = (option_keys == null) ? 0 : option_keys.Length;
+				IntPtr[] array = new IntPtr[num];
+				for (int i = 0; i < num; i++) {
+					array [i] = GLib.Marshaller.StringToPtrGStrdup (option_keys [i]);
+				}
+				int num2 = (option_values == null) ? 0 : option_values.Length;
+				IntPtr[] array2 = new IntPtr[num2];
+				for (int j = 0; j < num2; j++) {
+					array2 [j] = GLib.Marshaller.StringToPtrGStrdup (option_values [j]);
+				}
+				IntPtr zero = IntPtr.Zero;
+				bool flag = gdk_pixbuf_savev_utf8 (pb.Handle, intPtr, intPtr2, array, array2, out zero);
+				bool result = flag;
+				GLib.Marshaller.Free (intPtr);
+				GLib.Marshaller.Free (intPtr2);
+				if (zero != IntPtr.Zero) {
+					throw new GLib.GException (zero);
+				}
+				return result;
+			}
+			return pb.Savev(filename, type, option_keys, option_values);
 		}
 	}
 }

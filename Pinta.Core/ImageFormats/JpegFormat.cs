@@ -65,7 +65,7 @@ namespace Pinta.Core
 				PintaCore.Settings.PutSetting(JpgCompressionQualitySetting, level);
 
 				//Save the file.
-				pb.Savev(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
+				pb.SavevUtf8(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
 			}
 		}
 	}
