@@ -53,6 +53,8 @@ namespace Pinta.Actions
 				dialog.NewImageHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
 			}
 
+			dialog.SelectWidthText();
+
 			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
 
 			int response = dialog.Run ();

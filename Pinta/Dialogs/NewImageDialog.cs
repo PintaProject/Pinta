@@ -53,6 +53,10 @@ namespace Pinta
 			get { return heightSpinner.ValueAsInt; }
 			set { heightSpinner.Value = value; }
 		}
+
+		public void SelectWidthText() {
+			widthSpinner.SelectRegion (0, -1);
+		}
 	}
 }
 
