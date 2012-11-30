@@ -32,7 +32,12 @@ namespace Pinta
 {
 	public partial class NewImageDialog : Gtk.Dialog
 	{
-		public NewImageDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
+		/// <summary>
+		/// Configures and builds a NewImageDialog object.
+		/// </summary>
+		/// <param name="imgWidth">Initial value of the width spin control.</param>
+		/// <param name="imgHeight">nitial value of the height spin control.</param>
+		public NewImageDialog (int imgWidth, int imgHeight) : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
 			this.Build ();
 
@@ -42,6 +47,13 @@ namespace Pinta
 
 			widthSpinner.ActivatesDefault = true;
 			heightSpinner.ActivatesDefault = true;
+
+			// Initialize the spin control values
+			widthSpinner.Value = imgWidth;
+			heightSpinner.Value =imgHeight;
+
+			// Set focus to the width spin control and select it's text
+			widthSpinner.GrabFocus();
 		}
 
 		public int NewImageWidth {
@@ -52,10 +64,6 @@ namespace Pinta
 		public int NewImageHeight {
 			get { return heightSpinner.ValueAsInt; }
 			set { heightSpinner.Value = value; }
-		}
-
-		public void SelectWidthText() {
-			widthSpinner.SelectRegion (0, -1);
 		}
 	}
 }
