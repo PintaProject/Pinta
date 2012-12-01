@@ -79,10 +79,6 @@ namespace Pinta.Gui.Widgets
 				if (PintaCore.Tools.CurrentTool != null)
 					PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
 			};
-
-			// Handle key press/release events
-			KeyPressEvent += new KeyPressEventHandler (PintaCanvas_KeyPressEvent);
-			KeyReleaseEvent += new KeyReleaseEventHandler (PintaCanvas_KeyReleaseEvent);
 		}
 
 		#region Protected Methods
@@ -183,14 +179,7 @@ namespace Pinta.Gui.Widgets
 			QueueResize ();
 		}
 
-		[GLib.ConnectBefore]
-		private void PintaCanvas_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
-		{
-			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
-		}
-
-		[GLib.ConnectBefore]
-		private void PintaCanvas_KeyPressEvent (object o, KeyPressEventArgs e)
+		public void DoKeyPressEvent (object o, KeyPressEventArgs e)
 		{
 			// Give the current tool a chance to handle the key press
 			PintaCore.Tools.CurrentTool.DoKeyPress (this, e);
@@ -199,6 +188,11 @@ namespace Pinta.Gui.Widgets
 			if (e.RetVal == null || !(bool)e.RetVal)
 				if (FilterModifierKeys (e.Event.State) == ModifierType.None)
 					PintaCore.Tools.SetCurrentTool (e.Event.Key);
+		}
+
+		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		{
+			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
 		}
 
 		/// <summary>
