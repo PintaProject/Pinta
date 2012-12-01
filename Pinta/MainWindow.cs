@@ -91,23 +91,25 @@ namespace Pinta
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 		}
 
+		[GLib.ConnectBefore]
 		void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
 		{
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
 			// the mouse pointer is on the canvas
-			if (IsMouseOnCanvas())
+			if (IsMouseOnCanvas() || canvas_pad.Canvas.HasFocus)
 			{
 				canvas_pad.Canvas.DoKeyPressEvent (o, e);
 			}
 		}
 
+		[GLib.ConnectBefore]
 		void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
 			// the mouse pointer is on the canvas
-			if (IsMouseOnCanvas())
+			if (IsMouseOnCanvas() || canvas_pad.Canvas.HasFocus)
 			{
 				canvas_pad.Canvas.DoKeyReleaseEvent (o, e);
 			}
