@@ -56,15 +56,8 @@ namespace Pinta
 			widthSpinner.GrabFocus();
 		}
 
-		public int NewImageWidth {
-			get { return widthSpinner.ValueAsInt; }
-			set { widthSpinner.Value = value; }
-		}
-
-		public int NewImageHeight {
-			get { return heightSpinner.ValueAsInt; }
-			set { heightSpinner.Value = value; }
-		}
+		public int NewImageWidth { get { return widthSpinner.ValueAsInt; } }
+		public int NewImageHeight { get { return heightSpinner.ValueAsInt; } }
 	}
 }
 
