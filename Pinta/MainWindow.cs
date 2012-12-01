@@ -40,7 +40,9 @@ namespace Pinta
 		ScrolledWindow sw;
 		DockFrame dock;
 		Menu show_pad;
-		
+
+		CanvasPad canvas_pad;
+
 		ActionHandlers dialog_handlers;
 		
 		public MainWindow ()
@@ -80,10 +82,52 @@ namespace Pinta
 			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
 
+			window_shell.KeyPressEvent += MainWindow_KeyPressEvent;
+			window_shell.KeyReleaseEvent += MainWindow_KeyReleaseEvent;
+
 			// TODO: These need to be [re]moved when we redo zoom support
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
+		}
+
+		[GLib.ConnectBefore]
+		void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
+		{
+			// Give the Canvas (and by extension the tools)
+			// first shot at handling the event if
+			// the mouse pointer is on the canvas
+			if (IsMouseOnCanvas() || canvas_pad.Canvas.HasFocus)
+			{
+				canvas_pad.Canvas.DoKeyPressEvent (o, e);
+			}
+		}
+
+		[GLib.ConnectBefore]
+		void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		{
+			// Give the Canvas (and by extension the tools)
+			// first shot at handling the event if
+			// the mouse pointer is on the canvas
+			if (IsMouseOnCanvas() || canvas_pad.Canvas.HasFocus)
+			{
+				canvas_pad.Canvas.DoKeyReleaseEvent (o, e);
+			}
+		}
+
+		// Check if the mouse pointer is on the canvas
+		private bool IsMouseOnCanvas()
+		{
+			int x = 0;
+			int y = 0;
+
+			// Get the position of the mouse pointer relative
+			// to canvas scrolled window top-left corner
+			sw.GetPointer (out x, out y);
+
+			// Check if the pointer is on the canvas
+			return (x > 0) && (x < sw.Allocation.Width) &&
+			    (y > 0) && (y < sw.Allocation.Height);
 		}
 
 		// Called when an extension node is added or removed
@@ -227,7 +271,7 @@ namespace Pinta
 			palettepad.Initialize (dock, show_pad);
 
 			// Canvas pad
-			var canvas_pad = new CanvasPad ();
+			canvas_pad = new CanvasPad ();
 			canvas_pad.Initialize (dock, show_pad);
 
 			sw = canvas_pad.ScrolledWindow;
