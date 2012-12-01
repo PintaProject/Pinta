@@ -45,13 +45,20 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			NewImageDialog dialog = new NewImageDialog ();
-
-			if (!TryUseClipboardImageSize (dialog))
+			int imgWidth = 0;
+			int imgHeight = 0;
+			
+			// Try to get the dimensions of an image on the clipboard
+			// for the initial width and height values on the NewImageDialog
+			if (!GetClipboardImageSize (out imgWidth, out imgHeight))
 			{
-				dialog.NewImageWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
-				dialog.NewImageHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
+				// An image was not on the clipboard,
+				// so use saved dimensions from settings
+				imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
+				imgHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
 			}
+
+			NewImageDialog dialog = new NewImageDialog (imgWidth, imgHeight);
 
 			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
 
@@ -69,12 +76,16 @@ namespace Pinta.Actions
 		}
 
 		/// <summary>
-		/// Sets the dialog to use the clipboard image's dimensions, if possible.
+		/// Gets the width and height of an image on the clipboard,
+		/// if available.
 		/// </summary>
-		/// <returns>True if an image was on the clipboard, false otherwise.</returns>
-		private static bool TryUseClipboardImageSize (NewImageDialog dialog)
+		/// <param name="width">Destination for the image width.</param>
+		/// <param name="height">Destination for the image height.</param>
+		/// <returns>True if dimensions were available, false otherwise.</returns>
+		private static bool GetClipboardImageSize (out int width, out int height)
 		{
 			bool clipboardUsed = false;
+			width = height = 0;
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 			if (cb.WaitIsImageAvailable ())
@@ -83,8 +94,8 @@ namespace Pinta.Actions
 				if (image != null)
 				{
 					clipboardUsed = true;
-					dialog.NewImageWidth = image.Width;
-					dialog.NewImageHeight = image.Height;
+					width = image.Width;
+					height = image.Height;
 					image.Dispose ();
 				}
 			}
