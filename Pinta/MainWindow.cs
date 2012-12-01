@@ -82,8 +82,8 @@ namespace Pinta
 			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
 
-			window_shell.KeyPressEvent += HandleWindowShellKeyPressEvent;
-			window_shell.KeyReleaseEvent += HandleWindow_shellKeyReleaseEvent;
+			window_shell.KeyPressEvent += MainWindow_KeyPressEvent;
+			window_shell.KeyReleaseEvent += MainWindow_KeyReleaseEvent;
 
 			// TODO: These need to be [re]moved when we redo zoom support
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
@@ -91,7 +91,7 @@ namespace Pinta
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 		}
 
-		void HandleWindowShellKeyPressEvent (object o, KeyPressEventArgs e)
+		void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
 		{
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
@@ -102,7 +102,7 @@ namespace Pinta
 			}
 		}
 
-		void HandleWindow_shellKeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
