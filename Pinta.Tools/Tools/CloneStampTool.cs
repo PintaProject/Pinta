@@ -66,13 +66,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar(tb);
 
 			// Change the cursor when the BrushWidth is changed.
-			brush_width.ComboBox.Changed += HandleBrushWidthComboBoxChanged;
-		}
-
-		void HandleBrushWidthComboBoxChanged (object sender, EventArgs e)
-		{
-			SetCursor (DefaultCursor);
-			PintaCore.Chrome.Canvas.GrabFocus ();
+			brush_width.ComboBox.Changed += (sender, e) => SetCursor (DefaultCursor);
 		}
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
