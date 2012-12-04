@@ -122,6 +122,15 @@ namespace Pinta.Core
 		public void Invalidate (Gdk.Rectangle rect)
 		{
 			rect = new Gdk.Rectangle ((int)((rect.X) * Scale + Offset.X), (int)((rect.Y) * Scale + Offset.Y), (int)(rect.Width * Scale), (int)(rect.Height * Scale));
+
+			// Adjust dirty rectangle to allow for rounding errors
+			// when rendering a zoomed image
+			if (Scale != 1)
+			{
+				rect.Offset (1, 1);
+				rect.Inflate (2, 2);
+			}
+
 			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs (rect));
 		}
 
