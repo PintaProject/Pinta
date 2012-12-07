@@ -206,10 +206,35 @@ namespace Pinta.Core
 		{
 			ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
 		}
-		
+
+		/// <summary>
+		/// Converts a point from the active documents
+		/// window coordinates to canvas coordinates
+		/// </summary>
+		/// <param name='x'>
+		/// The X coordinate of the window point
+		/// </param>
+		/// <param name='y'>
+		/// The Y coordinate of the window point
+		/// </param>
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
 			return ActiveWorkspace.WindowPointToCanvas (x, y);
+		}
+
+		/// <summary>
+		/// Converts a point from the active documents
+		/// canvas coordinates to window coordinates
+		/// </summary>
+		/// <param name='x'>
+		/// The X coordinate of the canvas point
+		/// </param>
+		/// <param name='y'>
+		/// The Y coordinate of the canvas point
+		/// </param>
+		public Cairo.PointD CanvasPointToWindow (double x, double y)
+		{
+			return ActiveWorkspace.CanvasPointToWindow (x, y);
 		}
 
 		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
