@@ -119,10 +119,23 @@ namespace Pinta.Core
 			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
 		}
 
-		public void Invalidate (Gdk.Rectangle rect)
+		/// <summary>
+		/// Repaints a rectangle region on the canvas.
+		/// </summary>
+		/// <param name='canvasRect'>
+		/// The rectangle region of the canvas requiring repainting
+		/// </param>
+		public void Invalidate (Gdk.Rectangle canvasRect)
 		{
-			rect = new Gdk.Rectangle ((int)((rect.X) * Scale + Offset.X), (int)((rect.Y) * Scale + Offset.Y), (int)(rect.Width * Scale), (int)(rect.Height * Scale));
-			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs (rect));
+			Cairo.PointD canvasTopLeft = new Cairo.PointD(canvasRect.Left, canvasRect.Top);
+			Cairo.PointD canvasBtmRight = new Cairo.PointD(canvasRect.Right, canvasRect.Bottom);
+
+			Cairo.PointD winTopLeft = CanvasPointToWindow(canvasTopLeft.X, canvasTopLeft.Y);
+			Cairo.PointD winBtmRight = CanvasPointToWindow(canvasBtmRight.X, canvasBtmRight.Y);
+
+			Gdk.Rectangle winRect = Utility.PointsToRectangle(winTopLeft, winBtmRight, false).ToGdkRectangle();
+
+			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
 		}
 
 		/// <summary>
@@ -160,9 +173,36 @@ namespace Pinta.Core
 			view.Vadjustment.Value = Utility.Clamp (dy + view.Vadjustment.Value, view.Vadjustment.Lower, view.Vadjustment.Upper - view.Vadjustment.PageSize);
 		}
 
+		/// <summary>
+		/// Converts a point from window coordinates to canvas coordinates
+		/// </summary>
+		/// <param name='x'>
+		/// The X coordinate of the window point
+		/// </param>
+		/// <param name='y'>
+		/// The Y coordinate of the window point
+		/// </param>
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
-			return new Cairo.PointD (Math.Floor ((x - Offset.X) / PintaCore.Workspace.Scale), Math.Floor ((y - Offset.Y) / PintaCore.Workspace.Scale));
+			ScaleFactor sf = new ScaleFactor(PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.CanvasSize.Width);
+			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD(x - Offset.X, y - Offset.Y));
+			return new Cairo.PointD((int)pt.X, (int)pt.Y);
+		}
+
+		/// <summary>
+		/// Converts a point from canvas coordinates to window coordinates
+		/// </summary>
+		/// <param name='x'>
+		/// The X coordinate of the canvas point
+		/// </param>
+		/// <param name='y'>
+		/// The Y coordinate of the canvas point
+		/// </param>
+		public Cairo.PointD CanvasPointToWindow (double x, double y)
+		{
+			ScaleFactor sf = new ScaleFactor(PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.CanvasSize.Width);
+			Cairo.PointD pt = sf.UnscalePoint (new Cairo.PointD(x, y));
+			return new Cairo.PointD((int)(pt.X + Offset.X), (int)(pt.Y + Offset.Y));
 		}
 
 		public void ZoomIn ()
