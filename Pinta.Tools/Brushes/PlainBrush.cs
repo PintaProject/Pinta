@@ -58,8 +58,14 @@ namespace Pinta.Tools.Brushes
 			G.MoveTo (lastX + 0.5, lastY + 0.5);
 			G.LineTo (x + 0.5, y + 0.5);
 			G.StrokePreserve ();
-			
-			return G.StrokeExtents ().ToGdkRectangle ();
+
+			Gdk.Rectangle dirty = G.FixedStrokeExtents ().ToGdkRectangle ();
+
+			// For some reason (?!) we need to inflate the dirty
+			// rectangle for small brush widths in zoomed images
+			dirty.Inflate (1, 1);
+
+			return dirty;
 		}
 	}
 }
