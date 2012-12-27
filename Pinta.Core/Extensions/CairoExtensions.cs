@@ -63,7 +63,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
@@ -99,7 +99,7 @@ namespace Pinta.Core
 
 			g.Color = color;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Fill ();
 			g.Restore ();
@@ -119,7 +119,7 @@ namespace Pinta.Core
 
 			g.Pattern = pattern;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Fill ();
 
 			g.Restore ();
@@ -140,7 +140,7 @@ namespace Pinta.Core
 
 			g.Color = color;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
@@ -158,7 +158,7 @@ namespace Pinta.Core
 
 			g.Color = color;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Fill ();
 
 			g.Restore ();
@@ -192,7 +192,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -222,7 +222,7 @@ namespace Pinta.Core
 			g.Color = color;
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -251,7 +251,7 @@ namespace Pinta.Core
 
 			g.Color = color;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Fill ();
 			g.Restore ();
@@ -310,7 +310,7 @@ namespace Pinta.Core
 			g.Color = stroke;
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -341,7 +341,7 @@ namespace Pinta.Core
 			g.Color = stroke;
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -368,7 +368,7 @@ namespace Pinta.Core
 
 			g.Color = fill;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Fill ();
 			g.Restore ();
@@ -391,7 +391,7 @@ namespace Pinta.Core
 
 				g.Color = color;
 
-				g.StrokeExtents ();
+				g.FixedStrokeExtents ();
 				g.Fill ();
 			}
 
@@ -409,7 +409,7 @@ namespace Pinta.Core
 			g.Color = stroke;
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
 			g.Stroke ();
 			g.Restore ();
@@ -470,12 +470,33 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.StrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
 
 			return dirty;
+		}
+
+		/// <summary>
+		/// Computes a bounding box in user coordinates covering the
+		/// area that would be affected by a call to Context.Stroke()
+		/// using the current stroke parameters.
+		/// 
+		/// The rectangle returned by Cairo.Context.StrokeExtents()
+		/// incorrectly specifies the X & Y coordinates of the
+		/// bottom-right corner of the Rectangle in the width and
+		/// height members. This method corrects the rectangle to
+		/// contain the width and height in the width and height members.
+		/// </summary>
+		/// <returns>
+		/// The rectangle describing the area that would be
+		/// affected.
+		/// </returns>
+		public static Rectangle FixedStrokeExtents (this Context g)
+		{
+			Rectangle r = g.StrokeExtents();
+			return new Rectangle (r.X, r.Y, r.Width - r.X, r.Height - r.Y);
 		}
 
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
@@ -865,7 +886,7 @@ namespace Pinta.Core
 				// of 1, but setting it to 0 returns an empty rectangle.  Set
 				// it to a sufficiently small width and rounding takes care of it
 				g.LineWidth = .01;
-				rect = g.StrokeExtents ();
+				rect = g.FixedStrokeExtents ();
 			}
 
 			int x = (int)Math.Round (rect.X);
@@ -873,7 +894,7 @@ namespace Pinta.Core
 			int w = (int)Math.Round (rect.Width);
 			int h = (int)Math.Round (rect.Height);
 
-			return new Gdk.Rectangle (x, y, w - x, h - y);
+			return new Gdk.Rectangle (x, y, w, h);
 		}
 
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)
