@@ -733,7 +733,18 @@ namespace Pinta.Core
 			SetCurrentUserLayer (UserLayers.IndexOf (layer));
 		}
 
-		public void Paste (bool toNewLayer)
+		/// <summary>
+		/// Pastes an image from the clipboard.
+		/// </summary>
+		/// <param name="toNewLayer">Set to TRUE to paste into a
+		/// new layer.  Otherwise, will paste to the current layer.</param>
+		/// <param name="x">Optional. Location within image to paste to.
+		/// Position will be adjusted if pasted image would hang
+		/// over right or bottom edges of canvas.</param>
+		/// <param name="y">Optional. Location within image to paste to.
+		/// Position will be adjusted if pasted image would hang
+		/// over right or bottom edges of canvas.</param>
+		public void Paste (bool toNewLayer, int x = 0, int y = 0)
 		{
 			// Create a compound history item for recording several
 			// operations so that they can all be undone/redone together.
@@ -762,9 +773,9 @@ namespace Pinta.Core
 			Path p;
 
 			// Don't dispose this, as we're going to give it to the history
-			Gdk.Pixbuf image = cb.WaitForImage ();
+			Gdk.Pixbuf cbImage = cb.WaitForImage ();
 
-			if (image == null)
+			if (cbImage == null)
 			{
 				ShowClipboardEmptyDialog();
 				return;
@@ -773,13 +784,13 @@ namespace Pinta.Core
 			Gdk.Size canvas_size = PintaCore.Workspace.ImageSize;
 
 			// If the image being pasted is larger than the canvas size, allow the user to optionally resize the canvas
-			if (image.Width > canvas_size.Width || image.Height > canvas_size.Height)
+			if (cbImage.Width > canvas_size.Width || cbImage.Height > canvas_size.Height)
 			{
 				ResponseType response = ShowExpandCanvasDialog ();
 			
 				if (response == ResponseType.Accept)
 				{
-					PintaCore.Workspace.ResizeCanvas (image.Width, image.Height,
+					PintaCore.Workspace.ResizeCanvas (cbImage.Width, cbImage.Height,
 					Pinta.Core.Anchor.Center, paste_action);
 					PintaCore.Actions.View.UpdateCanvasScale ();
 				}
@@ -788,6 +799,11 @@ namespace Pinta.Core
 					return;
 				}
 			}
+
+			// If the pasted image would fall off bottom- or right-
+			// side of image, adjust paste position
+			x = Math.Max (0, Math.Min (x, canvas_size.Width - cbImage.Width));
+			y = Math.Max (0, Math.Min (y, canvas_size.Height - cbImage.Height));
 
 			// If requested, create a new layer, make it the current
 			// layer and record it's creation in the history
@@ -799,16 +815,20 @@ namespace Pinta.Core
 			}
 
 			// Copy the paste to the temp layer, which should be at least the size of this document.
-			CreateSelectionLayer (Math.Max(ImageSize.Width, image.Width),
-			                      Math.Max(ImageSize.Height, image.Height));
+			CreateSelectionLayer (Math.Max(ImageSize.Width, cbImage.Width),
+			                      Math.Max(ImageSize.Height, cbImage.Height));
 			ShowSelectionLayer = true;
 			
 			using (Cairo.Context g = new Cairo.Context (SelectionLayer.Surface))
 			{
-				g.DrawPixbuf (image, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, image.Width, image.Height));
+
+				g.DrawPixbuf (cbImage, new Cairo.Point (0, 0));
+				p = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, cbImage.Width, cbImage.Height));
 			}
-			
+
+			SelectionLayer.Transform.InitIdentity();
+			SelectionLayer.Transform.Translate (x, y);
+
 			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
 			
 			DocumentSelection old_selection = Selection.Clone();
@@ -820,7 +840,7 @@ namespace Pinta.Core
 			
 			Workspace.Invalidate ();
 			
-			paste_action.Push (new PasteHistoryItem (image, old_selection, old_show_selection));
+			paste_action.Push (new PasteHistoryItem (cbImage, old_selection, old_show_selection));
 			History.PushNewItem (paste_action);
 		}
 
