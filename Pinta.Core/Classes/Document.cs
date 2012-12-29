@@ -823,7 +823,7 @@ namespace Pinta.Core
 			{
 
 				g.DrawPixbuf (cbImage, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Cairo.Rectangle (0, 0, cbImage.Width, cbImage.Height));
+				p = g.CreateRectanglePath (new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
 			}
 
 			SelectionLayer.Transform.InitIdentity();
