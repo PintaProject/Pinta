@@ -55,10 +55,19 @@ namespace Pinta.Actions
 				return;
 			}
 
+			// Get the scroll position in canvas co-ordinates
+			Gtk.Viewport view = (Gtk.Viewport)PintaCore.Chrome.Canvas.Parent;
+			Cairo.PointD canvasPos = PintaCore.Workspace.ActiveWorkspace.WindowPointToCanvas (
+				view.Hadjustment.Value,
+				view.Vadjustment.Value);
+
 			// Paste into the active document.
 			// The 'false' argument indicates that paste should be
 			// performed into the current (not a new) layer.
-			PintaCore.Workspace.ActiveDocument.Paste (false);
+			PintaCore.Workspace.ActiveDocument.Paste (
+				false,
+				(int) canvasPos.X,
+				(int) canvasPos.Y);
 		}
 	}
 }
