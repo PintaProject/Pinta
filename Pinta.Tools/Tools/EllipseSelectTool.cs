@@ -40,7 +40,7 @@ namespace Pinta.Tools
 			get { return "Tools.EllipseSelect.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw an elliptical selection. Hold shift to constrain to a circle."); }
+			get { return Catalog.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle."); }
 		}
 		public override int Priority { get { return 13; } }
 

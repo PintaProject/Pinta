@@ -40,7 +40,7 @@ namespace Pinta.Tools
 			get { return "Tools.RectangleSelect.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw a rectangular selection. Hold shift to constrain to a square."); }
+			get { return Catalog.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square."); }
 		}
 		public override int Priority { get { return 5; } }
 
