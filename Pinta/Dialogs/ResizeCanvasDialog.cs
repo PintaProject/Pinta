@@ -71,6 +71,7 @@ namespace Pinta
 			widthSpinner.ActivatesDefault = true;
 			heightSpinner.ActivatesDefault = true;
 			percentageSpinner.ActivatesDefault = true;
+			percentageSpinner.GrabFocus();
 		}
 
 		#region Public Methods
