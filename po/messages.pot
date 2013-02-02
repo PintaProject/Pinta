@@ -1316,7 +1316,7 @@ msgid "Layers"
 msgstr ""
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
+msgid "Canvas"
 msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50

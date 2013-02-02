@@ -72,8 +72,9 @@ namespace Pinta
 			documentDockItem.Expand = true;
 
 			documentDockItem.DrawFrame = false;
-			documentDockItem.Label = Catalog.GetString ("Documents");
+			documentDockItem.Label = Catalog.GetString ("Canvas");
 			documentDockItem.Content = mainTable;
+			documentDockItem.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png");
 
 			//rulers
 			hruler = new HRuler ();
