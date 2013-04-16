@@ -55,6 +55,19 @@ namespace Pinta
 			dialog_handlers = new ActionHandlers ();
 
 			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
+			PintaCore.Chrome.InitializeErrorDialogHandler ((parent, message, details) => {
+				System.Console.Error.WriteLine ("Pinta: {0}", details);
+				ErrorDialog errorDialog = new ErrorDialog (parent);				
+				try {
+					errorDialog.SetMessage (message);
+					errorDialog.AddDetails (details);
+					errorDialog.Run ();
+				} finally {
+					errorDialog.Destroy ();
+				}
+			}
+			);
+
 			PintaCore.Initialize ();
 
 			// Initialize extensions

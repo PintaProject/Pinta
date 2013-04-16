@@ -39,6 +39,7 @@ namespace Pinta.Core
 		private Gdk.Point last_canvas_cursor_point;
 		private MenuBar main_menu;
 		private Toolbar main_toolbar;
+		private ErrorDialogHandler error_dialog_handler;
 
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
@@ -109,6 +110,15 @@ namespace Pinta.Core
 			progress_dialog = progressDialog;
 		}
 
+		public void InitializeErrorDialogHandler (ErrorDialogHandler handler)
+		{
+			error_dialog_handler = handler;
+		}
+
+		public void ShowErrorDialog (Window parent, string message, string details)
+		{
+			error_dialog_handler (parent, message, details);
+		}
 
 		public void SetStatusBarText (string text)
 		{
@@ -128,7 +138,7 @@ namespace Pinta.Core
 			if (StatusBarTextChanged != null)
 				StatusBarTextChanged (this, new TextChangedEventArgs (text));
 		}
-		#endregion
+#endregion
 		
 		#region Public Events
 		public event EventHandler LastCanvasCursorPointChanged;
@@ -145,4 +155,6 @@ namespace Pinta.Core
 		double Progress { get; set; }
 		event EventHandler<EventArgs> Canceled;
 	}
+
+	public delegate void ErrorDialogHandler(Window parent, string message, string details);
 }

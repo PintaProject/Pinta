@@ -121,17 +121,10 @@ namespace Pinta
 
 		private static void ExceptionManager_UnhandledException (GLib.UnhandledExceptionArgs args)
 		{
-			ErrorDialog errorDialog = new ErrorDialog (null);
-			
 			Exception ex = (Exception)args.ExceptionObject;
-			
-			try {
-				errorDialog.Message = string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message);
-				errorDialog.AddDetails (ex.ToString (), false);
-				errorDialog.Run ();
-			} finally {
-				errorDialog.Destroy ();
-			}
+			PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+			                                  string.Format ("{0}:\n{1}", "Unhandled exception", ex.Message),
+			                                  ex.ToString ());
 		}
 
 		/// <summary>

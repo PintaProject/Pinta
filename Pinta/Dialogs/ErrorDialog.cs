@@ -45,7 +45,7 @@ namespace Pinta
 		TextTag tagNoWrap;
 		TextTag tagWrap;
 		
-		public ErrorDialog (Window parent)
+		public ErrorDialog (Window parent) : base("Pinta", parent, DialogFlags.Modal | DialogFlags.DestroyWithParent)
 		{
 			this.Build ();
 			TransientFor = parent;
@@ -60,26 +60,18 @@ namespace Pinta
 			detailsTextView.Buffer.TagTable.Add (tagWrap);
 			
 			expander.Visible = false;
+			okButton.GrabFocus ();
+		}
+
+		public void SetMessage (string message)
+		{
+			descriptionLabel.Markup = message;
 		}
 		
-		public string Message {
-			get { return descriptionLabel.Text; }
-			set {
-				string message = value;
-				while (message.EndsWith ("\r") || message.EndsWith ("\n"))
-					message = message.Substring (0, message.Length - 1);
-				if (!message.EndsWith (".")) message += ".";
-				descriptionLabel.Text = message;
-			}
-		}
-		
-		public void AddDetails (string text, bool wrapped)
+		public void AddDetails (string text)
 		{
 			TextIter it = detailsTextView.Buffer.EndIter;
-			if (wrapped)
-				detailsTextView.Buffer.InsertWithTags (ref it, text, tagWrap);
-			else
-				detailsTextView.Buffer.InsertWithTags (ref it, text, tagNoWrap);
+			detailsTextView.Buffer.InsertWithTags (ref it, text, tagNoWrap);
 			expander.Visible = true;
 		}
 		
