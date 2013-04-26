@@ -58,7 +58,7 @@ namespace Pinta.Gui.Widgets
 			SetSizeRequest (200, 200);
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
-			canvas_renderer = new CanvasRenderer ();
+			canvas_renderer = new CanvasRenderer (false);
 
 			tree = new TreeView ();
 			tree.HeadersVisible = false;

@@ -19,6 +19,7 @@ namespace Pinta.Gui.Widgets
 		private Size source_size;
 		private Size destination_size;
 		private Layer offset_layer;
+		private bool enable_pixel_grid;
 
 		private ScaleFactor scale_factor;
 		private bool generated;
@@ -26,6 +27,11 @@ namespace Pinta.Gui.Widgets
 		private int[] d2sLookupY;
 		private int[] s2dLookupX;
 		private int[] s2dLookupY;
+
+		public CanvasRenderer (bool enable_pixel_grid)
+		{
+			this.enable_pixel_grid = enable_pixel_grid;
+		}
 
 		public void Initialize (Size sourceSize, Size destinationSize)
 		{
@@ -163,6 +169,15 @@ namespace Pinta.Gui.Widgets
 
 		private unsafe void RenderZoomIn (List<Layer> layers, Cairo.ImageSurface dst, Gdk.Point offset)
 		{
+			if (!generated) {
+				d2sLookupX = CreateLookupX (source_size.Width, destination_size.Width, scale_factor);
+				d2sLookupY = CreateLookupY (source_size.Height, destination_size.Height, scale_factor);
+				s2dLookupX = CreateS2DLookupX (source_size.Width, destination_size.Width, scale_factor);
+				s2dLookupY = CreateS2DLookupY (source_size.Height, destination_size.Height, scale_factor);
+
+				generated = true;
+			}
+
 			// The first layer should be blended with the transparent checkerboard
 			var checker = true;
 			CheckerBoardOperation checker_op = null;
@@ -193,15 +208,6 @@ namespace Pinta.Gui.Widgets
 				int dst_width = dst.Width;
 				int dst_height = dst.Height;
 
-				if (!generated) {
-					d2sLookupX = CreateLookupX (src_width, destination_size.Width, scale_factor);
-					d2sLookupY = CreateLookupY (src.Height, destination_size.Height, scale_factor);
-					s2dLookupX = CreateS2DLookupX (src_width, destination_size.Width, scale_factor);
-					s2dLookupY = CreateS2DLookupY (src.Height, destination_size.Height, scale_factor);
-
-					generated = true;
-				}
-
 				for (int dstRow = 0; dstRow < dst_height; ++dstRow) {
 					int nnY = dstRow + offset.Y;
 					int srcY = d2sLookupY[nnY];
@@ -228,7 +234,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			// If we are at least 200% and grid is requested, draw it
-			if (PintaCore.Actions.View.PixelGrid.Active && scale_factor.Ratio <= 0.5d)
+			if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Active && scale_factor.Ratio <= 0.5d)
 				RenderPixelGrid (dst, offset);
 		}
 

@@ -39,7 +39,7 @@ namespace Pinta.Gui.Widgets
 
 		public PintaCanvas ()
 		{
-			cr = new CanvasRenderer ();
+			cr = new CanvasRenderer (true);
 			
 			// Keep the widget the same size as the canvas
 			PintaCore.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
