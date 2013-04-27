@@ -741,6 +741,7 @@ namespace Pinta.Tools
 					case Gdk.Key.KP_Enter:
 					case Gdk.Key.Return:
 						CurrentTextEngine.PerformEnter();
+						RedrawText(true, true);
 						break;
 
 					case Gdk.Key.Left:
