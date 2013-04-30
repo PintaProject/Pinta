@@ -845,7 +845,6 @@ namespace Pinta.Tools
 		{
 			// Try to handle it as a character
 			if (CurrentTextEngine.HandleKeyPress (eventKey)) {
-				RedrawText (true, true);
 				return true;
 			}
 
@@ -934,6 +933,7 @@ namespace Pinta.Tools
 		{
 			Rectangle r = CurrentTextEngine.GetLayoutBounds();
 			r.Inflate(10 + OutlineWidth, 10 + OutlineWidth);
+			InflateAndInvalidate(r);
 			CurrentTextBounds = r;
 
 			Rectangle cursorBounds = Rectangle.Zero;
