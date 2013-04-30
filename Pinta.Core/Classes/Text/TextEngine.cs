@@ -586,7 +586,7 @@ namespace Pinta.Core
 			if (String.IsNullOrEmpty (txt))
 				return false;
 
-			string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.None);
+			string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
 			string endline = lines [linePos].Substring (textPos);
 			lines [linePos] = lines [linePos].Substring (0, textPos);
 			bool first = true;
