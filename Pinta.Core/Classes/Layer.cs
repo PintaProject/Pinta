@@ -144,7 +144,7 @@ namespace Pinta.Core
 		/// <param name='angle'>
 		/// Angle (in degrees).
 		/// </param>
-		public void Rotate (double angle)
+		public virtual void Rotate (double angle)
 		{
 			int w = PintaCore.Workspace.ImageSize.Width;
 			int h = PintaCore.Workspace.ImageSize.Height;
@@ -213,7 +213,7 @@ namespace Pinta.Core
 			(dest as IDisposable).Dispose ();
 		}
 
-		public void Resize (int width, int height)
+		public virtual void Resize (int width, int height)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
 			Pixbuf pb = Surface.ToPixbuf();
@@ -230,7 +230,7 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public void ResizeCanvas (int width, int height, Anchor anchor)
+		public virtual void ResizeCanvas (int width, int height, Anchor anchor)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
 
@@ -275,7 +275,7 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public void Crop (Gdk.Rectangle rect, Path path)
+		public virtual void Crop (Gdk.Rectangle rect, Path path)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 

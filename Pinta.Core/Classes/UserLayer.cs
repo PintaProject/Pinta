@@ -91,5 +91,37 @@ namespace Pinta.Core
 		//The rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
+
+		public override void Rotate(double angle)
+		{
+			base.Rotate (angle);
+			if (IsTextLayerSetup) {
+				TextLayer.Rotate (angle);
+			}
+		}
+
+		public override void Crop(Gdk.Rectangle rect, Path path)
+		{
+			base.Crop (rect, path);
+			if (IsTextLayerSetup) {
+				TextLayer.Crop (rect, path);
+			}
+		}
+
+		public override void ResizeCanvas(int width, int height, Anchor anchor)
+		{
+			base.ResizeCanvas (width, height, anchor);
+			if (IsTextLayerSetup) {
+				TextLayer.ResizeCanvas (width, height, anchor);
+			}
+		}
+
+		public override void Resize(int width, int height)
+		{
+			base.Resize (width, height);
+			if (IsTextLayerSetup) {
+				TextLayer.Resize (width, height);
+			}
+		}
 	}
 }
