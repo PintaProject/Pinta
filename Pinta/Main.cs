@@ -37,6 +37,7 @@ namespace Pinta
 {
 	class MainClass
 	{
+		[STAThread]
 		public static void Main (string[] args)
 		{
 			string app_dir = Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location);
