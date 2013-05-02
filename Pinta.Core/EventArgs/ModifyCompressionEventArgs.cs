@@ -32,11 +32,13 @@ namespace Pinta.Core
 	{
 		public int Quality { get; set; }
 		public bool Cancel { get; set; }
+		public Gtk.Window ParentWindow { get; set; }
 		
-		public ModifyCompressionEventArgs (int quality)
+		public ModifyCompressionEventArgs (int quality, Gtk.Window parent)
 		{
 			this.Quality = quality;
 			this.Cancel = false;
+			this.ParentWindow = parent;
 		}
 	}
 }

@@ -46,7 +46,7 @@ namespace Pinta.Core
 		{
 		}
 
-		protected override void DoSave(Pixbuf pb, string fileName, string fileType)
+		protected override void DoSave(Pixbuf pb, string fileName, string fileType, Gtk.Window parent)
 		{
 			//Load the JPG compression quality, but use the default value if there is no saved value.
 			int level = PintaCore.Settings.GetSetting<int>(JpgCompressionQualitySetting, defaultQuality);
@@ -56,7 +56,7 @@ namespace Pinta.Core
 			{
 				//Show the user the JPG export compression quality dialog, with the default
 				//value being the one loaded in (or the default value if it was not saved).
-				level = PintaCore.Actions.File.RaiseModifyCompression(level);
+				level = PintaCore.Actions.File.RaiseModifyCompression(level, parent);
 			}
 
 			if (level != -1)

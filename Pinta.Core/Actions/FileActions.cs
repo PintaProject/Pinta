@@ -117,9 +117,9 @@ namespace Pinta.Core
 			return !e.Cancel;
 		}
 
-		internal int RaiseModifyCompression (int defaultCompression)
+		internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
 		{
-			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression);
+			ModifyCompressionEventArgs e = new ModifyCompressionEventArgs (defaultCompression, parent);
 			
 			if (ModifyCompression != null)
 				ModifyCompression (this, e);

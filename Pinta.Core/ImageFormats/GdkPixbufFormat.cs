@@ -94,17 +94,17 @@ namespace Pinta.Core
 
 		#endregion
 		
-		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType)
+		protected virtual void DoSave (Pixbuf pb, string fileName, string fileType, Gtk.Window parent)
 		{
 			pb.SaveUtf8(fileName, fileType);
 		}
 
-		public void Export (Document document, string fileName)
+		public void Export (Document document, string fileName, Gtk.Window parent)
 		{
 			Cairo.ImageSurface surf = document.GetFlattenedImage ();
 	
 			Pixbuf pb = surf.ToPixbuf ();
-			DoSave(pb, fileName, filetype);
+			DoSave(pb, fileName, filetype, parent);
 
 			(pb as IDisposable).Dispose ();
 			(surf as IDisposable).Dispose ();

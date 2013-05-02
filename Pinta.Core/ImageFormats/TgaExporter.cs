@@ -89,7 +89,7 @@ namespace Pinta.Core
 		
 		// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 		// we can always add more through an export dialog.
-		public void Export (Document document, string fileName) {
+		public void Export (Document document, string fileName, Gtk.Window parent) {
 			ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
 			BinaryWriter writer = new BinaryWriter (new FileStream (fileName, FileMode.Create, FileAccess.Write));
 	

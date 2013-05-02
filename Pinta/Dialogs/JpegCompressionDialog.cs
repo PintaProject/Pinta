@@ -34,8 +34,8 @@ namespace Pinta
 	{
 		private HScale compressionLevel;
 	
-		public JpegCompressionDialog (int defaultQuality)
-			: base (Catalog.GetString ("JPEG Quality"), Pinta.Core.PintaCore.Chrome.MainWindow, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+		public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
+			: base (Catalog.GetString ("JPEG Quality"), parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
 				Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
 		{
 			this.BorderWidth = 6;
@@ -44,7 +44,6 @@ namespace Pinta
 			content.Spacing = 5;
 
 			DefaultResponse = ResponseType.Ok;
-			TransientFor = (Gtk.Window)Parent;
 			
 			Label label = new Label (Catalog.GetString ("Quality: "));
 			label.Xalign = 0;

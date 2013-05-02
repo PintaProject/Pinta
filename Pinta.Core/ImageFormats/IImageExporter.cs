@@ -35,6 +35,15 @@ namespace Pinta.Core
 		/// <summary>
 		/// Exports a document to a file.
 		/// </summary>
-		void Export (Document document, string fileName);
+		/// <param name='document'>
+		/// The document to be saved.
+		/// </param>
+		/// <param name='fileName'>
+		/// File name to save to.
+		/// </param>
+		/// <param name='parent'>
+		/// Window to be used as a parent for any dialogs that are shown.
+		/// </param>
+		void Export (Document document, string fileName, Gtk.Window parent);
 	}
 }

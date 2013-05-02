@@ -47,7 +47,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, ModifyCompressionEventArgs e)
 		{
-			JpegCompressionDialog dlg = new JpegCompressionDialog (e.Quality);
+			JpegCompressionDialog dlg = new JpegCompressionDialog (e.Quality, e.ParentWindow);
 
 			try {
 				if (dlg.Run () == (int)Gtk.ResponseType.Ok)

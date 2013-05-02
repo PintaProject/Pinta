@@ -186,7 +186,7 @@ namespace Pinta.Core
 			return ms.ToArray ();
 		}
 
-		public void Export (Document document, string fileName)
+		public void Export (Document document, string fileName, Gtk.Window parent)
 		{
 			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create));
 			ZipEntry mimetype = new ZipEntry ("mimetype");

@@ -207,7 +207,7 @@ namespace Pinta.Actions
 			PintaCore.Tools.Commit ();
 
 			try {
-				format.Exporter.Export (document, file);
+				format.Exporter.Export (document, file, parent);
 			} catch (GLib.GException e) { // Errors from GDK
 				if (e.Message == "Image too large to be saved as ICO") {
 					string primary = Catalog.GetString ("Image too large");
