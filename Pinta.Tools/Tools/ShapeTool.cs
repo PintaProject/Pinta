@@ -224,6 +224,12 @@ namespace Pinta.Tools
 
 			bool shiftkey_pressed = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), shiftkey_pressed), doc.ToolLayer, shiftkey_pressed);
+
+			// Increase the size of the dirty rect to account for antialiasing.
+			if (UseAntialiasing) {
+				dirty = dirty.Inflate (1, 1);
+			}
+
 			dirty = dirty.Clamp ();
 
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());

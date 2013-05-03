@@ -662,7 +662,8 @@ namespace Pinta.Core
 
 		public static Gdk.Rectangle ToGdkRectangle (this Cairo.Rectangle r)
 		{
-			return new Gdk.Rectangle ((int)r.X, (int)r.Y, (int)r.Width, (int)r.Height);
+			return new Gdk.Rectangle ((int)Math.Floor (r.X), (int)Math.Floor (r.Y),
+			                          (int)Math.Ceiling (r.Width), (int)Math.Ceiling (r.Height));
 		}
 
 		public static bool ContainsPoint (this Cairo.Rectangle r, double x, double y)
