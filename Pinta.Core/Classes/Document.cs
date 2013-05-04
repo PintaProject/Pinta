@@ -388,7 +388,7 @@ namespace Pinta.Core
 			return layer;
 		}
 
-		public void FinishSelection ()
+		public void FinishSelection (CompoundHistoryItem compoundAction)
 		{
 			// We don't have an uncommitted layer, abort
 			if (!ShowSelectionLayer)
@@ -406,7 +406,11 @@ namespace Pinta.Core
 			DestroySelectionLayer ();
 			Workspace.Invalidate ();
 
-			Workspace.History.PushNewItem (hist);
+			if (compoundAction != null) {
+				compoundAction.Push (hist);
+			} else {
+				Workspace.History.PushNewItem (hist);
+			}
 		}
 		
 		// Flatten image
@@ -837,10 +841,9 @@ namespace Pinta.Core
 			Selection.SelectionPath = p;
 			Selection.SelectionPolygons.Clear();
 			ShowSelection = true;
-			
-			Workspace.Invalidate ();
-			
+
 			paste_action.Push (new PasteHistoryItem (cbImage, old_selection, old_show_selection));
+			FinishSelection(paste_action);
 			History.PushNewItem (paste_action);
 		}
 
