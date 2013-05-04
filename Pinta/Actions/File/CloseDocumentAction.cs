@@ -66,9 +66,17 @@ namespace Pinta.Actions
 						    MessageType.Warning, ButtonsType.None, true,
 						    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
 
-			md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
-			md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			md.AddButton (Stock.Save, ResponseType.Yes);
+			// Use the standard button order for each OS.
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
+				md.AddButton (Stock.Save, ResponseType.Yes);
+				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+			}
+			else {
+				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Yes);
+			}
 
 			// so that user won't accidentally overwrite
 			md.DefaultResponse = ResponseType.Cancel;
