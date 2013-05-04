@@ -842,7 +842,6 @@ namespace Pinta.Core
 			Selection.SelectionPolygons.Clear();
 			ShowSelection = true;
 
-			Workspace.Invalidate ();
 			paste_action.Push (new PasteHistoryItem (cbImage, old_selection, old_show_selection));
 			FinishSelection(paste_action);
 			History.PushNewItem (paste_action);
