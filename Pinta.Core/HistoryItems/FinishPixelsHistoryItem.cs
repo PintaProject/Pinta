@@ -89,7 +89,7 @@ namespace Pinta.Core
 			if (old_surface != null)
 				(old_surface as IDisposable).Dispose ();
 			if (old_selection_layer != null)
-				old_selection_layer.Dispose ();
+				(old_selection_layer as IDisposable).Dispose ();
 		}
 
 		public void TakeSnapshot ()
