@@ -34,9 +34,14 @@ namespace Pinta.Resources
 		public static Pixbuf GetIcon (string name, int size)
 		{
 			try {
-				// First see if it's a built-in gtk icon, like gtk-new
-				if (Gtk.IconTheme.Default.HasIcon (name))
-					return Gtk.IconTheme.Default.LoadIcon (name, size, Gtk.IconLookupFlags.UseBuiltin);
+				// First see if it's a built-in gtk icon, like gtk-new.
+				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
+				using (var icon_set = Gtk.Widget.DefaultStyle.LookupIconSet (name)) {
+					if (icon_set != null) {
+						return icon_set.RenderIcon (Gtk.Widget.DefaultStyle, Gtk.Widget.DefaultDirection,
+							Gtk.StateType.Normal, GetIconSize (size), null, null);
+					}
+				}
 
 				// Otherwise, get it from our embedded resources.
 				return Gdk.Pixbuf.LoadFromResource (name);
@@ -72,6 +77,18 @@ namespace Pinta.Resources
 			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
 
 			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
+		}
+
+		private static Gtk.IconSize GetIconSize(int size)
+		{
+			switch (size) {
+				case 16:
+					return Gtk.IconSize.SmallToolbar;
+				case 32:
+					return Gtk.IconSize.Dnd;
+				default:
+					return Gtk.IconSize.Invalid;
+			}
 		}
 	}
 }
