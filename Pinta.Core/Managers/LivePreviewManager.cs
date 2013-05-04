@@ -50,6 +50,7 @@ namespace Pinta.Core
 		
 		Cairo.ImageSurface live_preview_surface;
 		Gdk.Rectangle render_bounds;
+		SimpleHistoryItem history_item;
 		
 		AsyncEffectRenderer renderer;
 		
@@ -92,7 +93,10 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Workspace.ActiveDocument.Selection.SelectionPath : null;
 			render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
-			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);									
+			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);	
+
+			history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
+			history_item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);	
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {
@@ -197,8 +201,7 @@ namespace Pinta.Core
 			live_preview_enabled = false;
 			
 			if (live_preview_surface != null) {
-				var disposable = live_preview_surface as IDisposable;
-					disposable.Dispose ();
+				(live_preview_surface as IDisposable).Dispose ();
 			}
 			
 			PintaCore.Workspace.Invalidate ();
@@ -232,9 +235,6 @@ namespace Pinta.Core
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-			var item = new SimpleHistoryItem (effect.Icon, effect.Name);
-			item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);			
-			
 			using (var ctx = new Cairo.Context (layer.Surface)) {
 				
 				ctx.Save ();
@@ -246,7 +246,8 @@ namespace Pinta.Core
 				ctx.Restore ();
 			}
 			
-			PintaCore.History.PushNewItem (item);
+			PintaCore.History.PushNewItem (history_item);
+			history_item = null;
 			
 			FireLivePreviewEndedEvent(RenderStatus.Completed, null);
 			
@@ -274,6 +275,11 @@ namespace Pinta.Core
 			if (renderer != null) {
 				renderer.Dispose ();
 				renderer = null;
+			}
+
+			if (history_item != null) {
+				history_item.Dispose ();
+				history_item = null;
 			}
 			
 			// Hide progress dialog and clean up events.
