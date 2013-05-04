@@ -324,41 +324,39 @@ namespace Pinta.Core
 			shapeX = imgToShapeX - iconBBox.Left;
 			shapeY = imgToShapeY - iconBBox.Top;
 
-			ImageSurface i = new ImageSurface(Format.ARGB32, iconBBox.Width, iconBBox.Height);
-			using (Context g = new Context(i))
-			{
-				// Don't show shape if shapeWidth less than 3,
-				if (shapeWidth > 3)
-				{
-					int diam = Math.Max (1, shapeWidth - 2);
-					Cairo.Rectangle shapeRect = new Cairo.Rectangle(shapeX - halfOfShapeWidth,
-					                                                 shapeY - halfOfShapeWidth,
-					                                                 diam,
-					                                                 diam);
+			using (ImageSurface i = new ImageSurface (Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
+				using (Context g = new Context (i)) {
+					// Don't show shape if shapeWidth less than 3,
+					if (shapeWidth > 3) {
+						int diam = Math.Max (1, shapeWidth - 2);
+						Cairo.Rectangle shapeRect = new Cairo.Rectangle (shapeX - halfOfShapeWidth,
+												 shapeY - halfOfShapeWidth,
+												 diam,
+												 diam);
 
-					Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.5);
-					Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
+						Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.5);
+						Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
 
-					switch (shape)
-					{
-					case CursorShape.Ellipse:
-						g.DrawEllipse(shapeRect, outerColor, 1);
-						shapeRect = shapeRect.Inflate (-1, -1);
-						g.DrawEllipse(shapeRect, innerColor, 1);
-						break;
-					case CursorShape.Rectangle:
-						g.DrawRectangle(shapeRect, outerColor, 1);
-						shapeRect = shapeRect.Inflate (-1, -1);
-						g.DrawRectangle(shapeRect, innerColor, 1);
-						break;
+						switch (shape) {
+							case CursorShape.Ellipse:
+								g.DrawEllipse (shapeRect, outerColor, 1);
+								shapeRect = shapeRect.Inflate (-1, -1);
+								g.DrawEllipse (shapeRect, innerColor, 1);
+								break;
+							case CursorShape.Rectangle:
+								g.DrawRectangle (shapeRect, outerColor, 1);
+								shapeRect = shapeRect.Inflate (-1, -1);
+								g.DrawRectangle (shapeRect, innerColor, 1);
+								break;
+						}
 					}
+
+					// Draw the image
+					g.DrawPixbuf (img, new Cairo.Point (imgX, imgY));
 				}
 
-				// Draw the image
-				g.DrawPixbuf(img, new Cairo.Point(imgX, imgY));
+				return CairoExtensions.ToPixbuf (i);
 			}
-
-			return CairoExtensions.ToPixbuf(i);
 		}
 		#endregion
 

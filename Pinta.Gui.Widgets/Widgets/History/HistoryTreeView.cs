@@ -119,7 +119,10 @@ namespace Pinta.Gui.Widgets
 		private void HistoryRenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
 			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
-			(cell as Gtk.CellRendererPixbuf).Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
+			var pixbuf_cell = cell as Gtk.CellRendererPixbuf;
+			if (pixbuf_cell.Pixbuf != null)
+				pixbuf_cell.Pixbuf.Dispose ();
+			pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
 		}
 
 		private void OnHistoryItemsChanged (object o, EventArgs args)

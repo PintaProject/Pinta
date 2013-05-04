@@ -52,8 +52,6 @@ namespace Pinta.Tools
 		protected ToolBarSlider tolerance_slider;
 		private bool limitToSelection = true;
 		
-		protected IBitVector2D stencil;
-
 		#region Protected Properties
 		protected bool IsContinguousMode { get { return (bool)mode_button.SelectedItem.Tag; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
@@ -126,25 +124,24 @@ namespace Pinta.Tools
 			}
 
 			ImageSurface surface = doc.CurrentUserLayer.Surface;
-			ImageSurface stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height);
+			using (var stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height)) {
+				IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter (stencil_surface);
+				int tol = (int)(Tolerance * Tolerance * 256);
+				Rectangle boundingBox;
 
-			IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter (stencil_surface);
-			int tol = (int)(Tolerance * Tolerance * 256);
-			Rectangle boundingBox;
+				if (IsContinguousMode)
+					FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
+				else
+					FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 
-			if (IsContinguousMode)
-				FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
-			else
-				FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
-			
-			stencil = stencilBuffer;
-			OnFillRegionComputed (stencilBuffer);
+				OnFillRegionComputed (stencilBuffer);
 
-			// If a derived tool is only going to use the stencil,
-			// don't waste time building the polygon set
-			if (CalculatePolygonSet) {
-				Point[][] polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
-				OnFillRegionComputed (polygonSet);
+				// If a derived tool is only going to use the stencil,
+				// don't waste time building the polygon set
+				if (CalculatePolygonSet) {
+					Point[][] polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
+					OnFillRegionComputed (polygonSet);
+				}
 			}
 		}
 		#endregion
