@@ -388,7 +388,7 @@ namespace Pinta.Core
 			return layer;
 		}
 
-		public void FinishSelection ()
+		public void FinishSelection (CompoundHistoryItem compoundAction)
 		{
 			// We don't have an uncommitted layer, abort
 			if (!ShowSelectionLayer)
@@ -406,7 +406,11 @@ namespace Pinta.Core
 			DestroySelectionLayer ();
 			Workspace.Invalidate ();
 
-			Workspace.History.PushNewItem (hist);
+			if (compoundAction != null) {
+				compoundAction.Push (hist);
+			} else {
+				Workspace.History.PushNewItem (hist);
+			}
 		}
 		
 		// Flatten image
@@ -840,7 +844,7 @@ namespace Pinta.Core
 
 			Workspace.Invalidate ();
 			paste_action.Push (new PasteHistoryItem (cbImage, old_selection, old_show_selection));
-			RedrawLayerPreview (paste_action);
+			FinishSelection(paste_action);
 			History.PushNewItem (paste_action);
 		}
 
@@ -911,20 +915,6 @@ namespace Pinta.Core
 		private void RaiseLayerPropertyChangedEvent (object sender, PropertyChangedEventArgs e)
 		{
 			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
-		}
-
-		private void RedrawLayerPreview (CompoundHistoryItem compoundAction)
-		{
-			FinishPixelsHistoryItem hist = new FinishPixelsHistoryItem ();
-			hist.TakeSnapshot ();
-			
-			Layer layer = SelectionLayer;
-			using (Cairo.Context g = new Cairo.Context (CurrentUserLayer.Surface)) {
-				layer.Draw (g);
-			}
-			DestroySelectionLayer ();
-			
-			compoundAction.Push (hist);
 		}
 		#endregion
 
