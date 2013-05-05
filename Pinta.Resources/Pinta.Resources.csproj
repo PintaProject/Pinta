@@ -83,6 +83,9 @@
     <EmbeddedResource Include="Resources\Cursor.ColorPicker.png">
       <LogicalName>Cursor.ColorPicker.png</LogicalName>
     </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.MagicWand.png">
+      <LogicalName>Cursor.MagicWand.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Text.png">
       <LogicalName>Cursor.Text.png</LogicalName>
     </EmbeddedResource>
@@ -95,8 +98,14 @@
     <EmbeddedResource Include="Resources\Tools.LassoSelect.png">
       <LogicalName>Tools.LassoSelect.png</LogicalName>
     </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.RectangleSelect.png">
+      <LogicalName>Cursor.RectangleSelect.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.LassoSelect.png">
       <LogicalName>Cursor.LassoSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.EllipseSelect.png">
+      <LogicalName>Cursor.EllipseSelect.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Rectangle.png">
       <LogicalName>Cursor.Rectangle.png</LogicalName>
