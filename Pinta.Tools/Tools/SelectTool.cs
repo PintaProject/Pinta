@@ -36,7 +36,7 @@ namespace Pinta.Tools
 		private PointD reset_origin;
 		private PointD shape_end;
 		private ToolControl [] controls = new ToolControl [8];
-		protected SelectionHistoryItem hist;
+		private SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
 		bool handler_active = false;
@@ -81,7 +81,6 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-
 			// If the user didn't move the mouse, they want to deselect
 			int tolerance = 0;
 			if (Math.Abs (reset_origin.X - args.Event.X) <= tolerance && Math.Abs (reset_origin.Y - args.Event.Y) <= tolerance) {
@@ -128,6 +127,7 @@ namespace Pinta.Tools
 				CheckHandlerCursor (point.X, point.Y);
 				return;
 			}
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
@@ -139,15 +139,6 @@ namespace Pinta.Tools
 
 		protected void RefreshHandler (Cairo.Rectangle r)
 		{
-			/*controls[0].Position = new PointD (r.X, r.Y);
-			controls[1].Position = new PointD (r.X, r.GetBottom ());
-			controls[2].Position = new PointD (r.GetRight (), r.Y);
-			controls[3].Position = new PointD (r.GetRight (), r.GetBottom ());
-			controls[4].Position = new PointD (r.X, r.Y + (r.Height / 2));
-			controls[5].Position = n(ew PointD (r.X + (r.Width / 2), r.Y);
-			controls[6].Position = new PointD (r.GetRight (), r.Y + (r.Height / 2));
-			controls[7].Position = new PointD (r.X + (r.Width / 2), r.GetBottom ());
-			*/
 			controls[0].Position = new PointD (shape_origin.X, shape_origin.Y);
 			controls[1].Position = new PointD (shape_origin.X, shape_end.Y);
 			controls[2].Position = new PointD (shape_end.X, shape_origin.Y);
@@ -156,7 +147,6 @@ namespace Pinta.Tools
 			controls[5].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
 			controls[6].Position = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
 			controls[7].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
-
 		}
 
 		public void ReDraw (Gdk.ModifierType state)
@@ -180,6 +170,7 @@ namespace Pinta.Tools
 					else
 						shape_end.Y = shape_origin.Y - dx;
 			}
+
 			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
 			RefreshHandler (rect);
 			Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
@@ -278,17 +269,17 @@ namespace Pinta.Tools
 		{
 			foreach (ToolControl ct in controls) {
 				if (ct.Handle (this, new PointD (x, y ))) {
-
 					return true;
 				}
 			}
-			return false;
 
+			return false;
 		}
 
 		public void DrawHandler (Layer layer)
 		{
 			layer.Clear ();
+			
 			foreach (ToolControl ct in controls)
 				ct.Render (layer);
 		}
@@ -304,6 +295,7 @@ namespace Pinta.Tools
 					return;
 				}
 			}
+
 			if (is_hand_cursor) {
 				SetCursor (DefaultCursor);
 				is_hand_cursor = false;

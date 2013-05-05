@@ -38,8 +38,10 @@ namespace Pinta.Tools
 			Position = new PointD (-5, -5);
 		}
 
-		int tolerance = 3;
-		MouseHandler action;
+		private const int Tolerance = 3;
+		private static readonly Cairo.Color FillColor = new Cairo.Color (0, 0, 1, 0.5);
+		private static readonly Cairo.Color StrokeColor = new Cairo.Color (0, 0, 1, 0.7);
+		private MouseHandler action;
 
 		public PointD Position {get; set;}
 
@@ -56,15 +58,17 @@ namespace Pinta.Tools
 
 		public bool IsInside (double x, double y)
 		{
-			return (Math.Abs (x - Position.X) <= tolerance) && (Math.Abs (y - Position.Y) <= tolerance);
+			return (Math.Abs (x - Position.X) <= Tolerance) && (Math.Abs (y - Position.Y) <= Tolerance);
 		}
 
 		public void Render (Layer layer)
 		{
 			double scale_factor = (1.0 / PintaCore.Workspace.ActiveWorkspace.Scale);
-			using (Context g = new Context (layer.Surface))
-				g.FillStrokedRectangle (new Cairo.Rectangle (Position.X - scale_factor * 2, Position.Y - scale_factor * 2, scale_factor * 4, scale_factor * 4),
-				                        new Cairo.Color (0, 0, 1, 0.5), new Cairo.Color (0, 0, 1, 0.7), 1);
+			using (Context g = new Context (layer.Surface)) {
+				var rect = new Cairo.Rectangle (Position.X - scale_factor * 2, Position.Y - scale_factor * 2,
+					scale_factor * 4, scale_factor * 4);
+				g.FillStrokedRectangle (rect, FillColor, StrokeColor, 1);
+			}
 		}
 	}
 }
