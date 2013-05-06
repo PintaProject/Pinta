@@ -69,8 +69,10 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar (tb);
 
+			tb.AppendItem (new Gtk.SeparatorToolItem ());
+
 			if (tolerance_label == null)
-				tolerance_label = new ToolBarLabel (string.Format ("    {0}: ", Catalog.GetString ("Tolerance")));
+				tolerance_label = new ToolBarLabel (string.Format ("  {0}: ", Catalog.GetString ("Tolerance")));
 
 			tb.AppendItem (tolerance_label);
 

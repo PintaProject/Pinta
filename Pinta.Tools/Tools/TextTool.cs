@@ -231,6 +231,8 @@ namespace Pinta.Tools
 
 			tb.AppendItem (fill_button);
 
+			tb.AppendItem (new SeparatorToolItem ());
+
 			if (outline_width_label == null)
 				outline_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Outline width")));
 
