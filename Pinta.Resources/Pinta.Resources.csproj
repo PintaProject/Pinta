@@ -86,6 +86,9 @@
 	<EmbeddedResource Include="Resources\Cursor.MagicWand.png">
       <LogicalName>Cursor.MagicWand.png</LogicalName>
     </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.Gradient.png">
+      <LogicalName>Cursor.Gradient.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Text.png">
       <LogicalName>Cursor.Text.png</LogicalName>
     </EmbeddedResource>
