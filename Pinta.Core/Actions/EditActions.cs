@@ -381,7 +381,14 @@ namespace Pinta.Core
 		
 			if (response == (int) Gtk.ResponseType.Ok) {
 				Palette.FileFormat format = (fcd.Filter == ffPDN) ? Palette.FileFormat.PDN : Palette.FileFormat.GIMP;
-				PintaCore.Palette.CurrentPalette.Save (fcd.Filename, format);
+
+				string fileExtension = (fcd.Filter == ffPDN) ? ".txt" : ".gpl";
+				string finalFileName = fcd.Filename;
+				bool fileNameHasExtension = finalFileName.EndsWith(".txt") || finalFileName.EndsWith(".gpl");
+				if (!fileNameHasExtension)
+					finalFileName += fileExtension;
+
+				PintaCore.Palette.CurrentPalette.Save (finalFileName, format);
 			}
 
 			fcd.Destroy ();
