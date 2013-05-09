@@ -37,8 +37,10 @@ namespace Pinta.Gui.Widgets
 		private Rectangle primary_rect = new Rectangle (7, 7, 30, 30);
 		private Rectangle secondary_rect = new Rectangle (22, 22, 30, 30);
 		private Rectangle swap_rect = new Rectangle (37, 6, 15, 15);
+		private Rectangle reset_rect = new Rectangle (7, 37, 15, 15);
 		
 		private Gdk.Pixbuf swap_icon;
+		private Gdk.Pixbuf reset_icon;
 		private Palette palette;
 		
 		public ColorPaletteWidget ()
@@ -47,6 +49,7 @@ namespace Pinta.Gui.Widgets
 			this.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			
 			swap_icon = PintaCore.Resources.GetIcon ("ColorPalette.SwapIcon.png");
+			reset_icon = PintaCore.Resources.GetIcon ("ColorPalette.ResetIcon.png");
 			palette = PintaCore.Palette.CurrentPalette;
 
 			HasTooltip = true;
@@ -77,6 +80,10 @@ namespace Pinta.Gui.Widgets
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
+				GdkWindow.Invalidate ();
+			} else if (reset_rect.ContainsPoint (ev.X, ev.Y)) {
+				PintaCore.Palette.PrimaryColor = new Color (0, 0, 0);
+				PintaCore.Palette.SecondaryColor = new Color (1, 1, 1);
 				GdkWindow.Invalidate ();
 			}
 
@@ -159,6 +166,7 @@ namespace Pinta.Gui.Widgets
 				g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
 	
 				g.DrawPixbuf (swap_icon, swap_rect.Location ());
+				g.DrawPixbuf (reset_icon, reset_rect.Location ());
 				
 				// Draw swatches
 				int roundedCount = (palette.Count % 3 == 0) ?
@@ -217,6 +225,8 @@ namespace Pinta.Gui.Widgets
 
 			if (swap_rect.ContainsPoint (x, y)) {
 				text = Catalog.GetString ("Click to switch between primary and secondary color.");
+			} else if (reset_rect.ContainsPoint (x, y)) {
+				text = Catalog.GetString ("Click to reset primary and secondary color.");
 			} else if (primary_rect.ContainsPoint (x, y)) {
 				text = Catalog.GetString ("Click to select primary color.");
 			} else if (secondary_rect.ContainsPoint (x, y)) {

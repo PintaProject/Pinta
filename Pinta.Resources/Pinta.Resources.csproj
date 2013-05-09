@@ -86,6 +86,9 @@
 	<EmbeddedResource Include="Resources\Cursor.MagicWand.png">
       <LogicalName>Cursor.MagicWand.png</LogicalName>
     </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.Gradient.png">
+      <LogicalName>Cursor.Gradient.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Text.png">
       <LogicalName>Cursor.Text.png</LogicalName>
     </EmbeddedResource>
@@ -184,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ColorPalette.SwapIcon.png">
       <LogicalName>ColorPalette.SwapIcon.png</LogicalName>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\ColorPalette.ResetIcon.png">
+      <LogicalName>ColorPalette.ResetIcon.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.Paintbrush.png">
       <LogicalName>Tools.Paintbrush.png</LogicalName>
