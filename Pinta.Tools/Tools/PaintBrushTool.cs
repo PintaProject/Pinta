@@ -74,6 +74,8 @@ namespace Pinta.Tools
 			// Change the cursor when the BrushWidth is changed.
 			brush_width.ComboBox.Changed += (sender, e) => SetCursor (DefaultCursor);
 
+			tb.AppendItem (new Gtk.SeparatorToolItem ());
+
 			if (brush_label == null)
 				brush_label = new ToolBarLabel (string.Format (" {0}:  ", Catalog.GetString ("Type")));
 
