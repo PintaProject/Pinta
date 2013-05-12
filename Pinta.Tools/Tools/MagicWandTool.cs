@@ -114,7 +114,7 @@ namespace Pinta.Tools
 
 		public override Gdk.Cursor DefaultCursor
 		{
-			get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Tools.MagicWand.png"), 12, 1); }
+			get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Cursor.MagicWand.png"), 13, 2); }
 		}
 		public override int Priority { get { return 17; } }
 
