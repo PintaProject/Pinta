@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?define ProductShortName = "Pinta" ?>
-<?define ProductVersion = "1.5.0" ?>
-<?define ProductVersionText = "1.5" ?>
-<?define Manufacturer = "Pinta Community" ?>
-<?define UpgradeCode = "C0BCDEDA-62E7-4A43-8435-58323E096912" ?>
-
+<?include common.wxi ?>
 <?define BuildRoot= "..\bin" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="$(var.ProductShortName) $(var.ProductVersionText)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
     <Package InstallerVersion="200" Compressed="yes" />
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
-
-    <!-- Ensure GTK# 2.12.9+ is installed -->
-    <Property Id="GTKSHARPVERSION">
-      <RegistrySearch Id="gsversion" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\Version" Type="raw" />
-    </Property>
-    <Condition Message="Gtk# version 2.12.9 or greater must be installed.">
-      <![CDATA[GTKSHARPVERSION >= "2.12.9" OR (GTKSHARPVERSION << "2.12.1" AND GTKSHARPVERSION <> "2.12.1") OR REMOVE ~= "ALL"]]>
-    </Condition>
-
-    <!-- Ensure .Net 4.0 is installed -->
-    <PropertyRef Id="NETFRAMEWORK40CLIENT" />
-    <Condition Message="This setup requires the .NET Framework 4.0 to be installed.">
-      Installed OR NETFRAMEWORK40CLIENT
-    </Condition>
-
-    <!-- Get the GTK# install directory -->
-    <Property Id="GTKSHARPPATH">
-      <RegistrySearch Id="gspath" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\InstallFolder" Type="raw" />
-    </Property>
 
     <!-- Major upgrade -->
     <Upgrade Id="$(var.UpgradeCode)">
