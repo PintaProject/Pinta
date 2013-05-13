@@ -32,6 +32,7 @@ using Pinta.Core;
 using Mono.Unix;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Pinta
 {
@@ -80,6 +81,10 @@ namespace Pinta
 			}
 
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
+
+			if (SystemManager.GetOperatingSystem () == OS.Windows) {
+				SetWindowsGtkPath ();
+			}
 			
 			Application.Init ();
 			MainWindow win = new MainWindow ();
@@ -153,6 +158,40 @@ namespace Pinta
 				}
 				e.Handled = true;
 			};
+		}
+
+		[DllImport ("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		[return: MarshalAs (UnmanagedType.Bool)]
+		static extern bool SetDllDirectory (string lpPathName);
+
+		/// <summary>
+		/// Explicitly add GTK+ to the search path.
+		/// From MonoDevelop: https://bugzilla.xamarin.com/show_bug.cgi?id=10558
+		/// </summary>
+		private static void SetWindowsGtkPath ()
+		{
+			string location = null;
+			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
+				if (key != null) {
+					location = key.GetValue (null) as string;
+				}
+			}
+
+			if (location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-win32-2.0-0.dll"))) {
+				System.Console.Error.WriteLine ("Did not find registered GTK# installation");
+				return;
+			}
+
+			var path = Path.Combine (location, @"bin");
+			try {
+				if (SetDllDirectory (path)) {
+					return;
+				}
+			}
+			catch (EntryPointNotFoundException) {
+			}
+
+			System.Console.Error.WriteLine ("Unable to set GTK# dll directory");
 		}
 	}
 }
