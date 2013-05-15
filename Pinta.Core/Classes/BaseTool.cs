@@ -334,12 +334,12 @@ namespace Pinta.Core
 												 diam,
 												 diam);
 
-						Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.5);
+						Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
 						Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
 
 						switch (shape) {
 							case CursorShape.Ellipse:
-								g.DrawEllipse (shapeRect, outerColor, 1);
+								g.DrawEllipse (shapeRect, outerColor, 2);
 								shapeRect = shapeRect.Inflate (-1, -1);
 								g.DrawEllipse (shapeRect, innerColor, 1);
 								break;
