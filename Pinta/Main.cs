@@ -146,6 +146,15 @@ namespace Pinta
 				e.Handled = true;
 			};
 
+			MacInterop.ApplicationEvents.Reopen += (sender, e) => {
+				var window = PintaCore.Chrome.MainWindow;
+				window.Deiconify ();
+				window.Hide ();
+				window.Show ();
+				window.Present ();
+				e.Handled = true;
+			};
+
 			MacInterop.ApplicationEvents.OpenDocuments += (sender, e) => {
 				if (e.Documents != null) {
 					GLib.Timeout.Add (10, delegate {
