@@ -5,26 +5,28 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-09-26 05:02+0000\n"
-"Last-Translator: Philippe AUCOIN <philippe.aucoin@orange.fr>\n"
+"PO-Revision-Date: 2013-02-21 22:17+0000\n"
+"Last-Translator: jc1 <jc1.quebecos@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
+"Language: fr_FR\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
-msgstr ""
+msgstr "Calque visible"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Hidden"
-msgstr ""
+msgstr "Calque caché"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
@@ -34,27 +36,33 @@ msgstr "Choisir la couleur primaire"
 msgid "Choose Secondary Color"
 msgstr "Choisir la couleur secondaire"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Choisir la palette de couleurs"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
+msgstr "Cliquer pour passer de la couleur primaire à la couleur secondaire"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Cliquer pour sélectionner la couleur primaire"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Cliquer pour sélectionner la couleur secondaire"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Choix de couleur primaire : clic gauche. Choix de couleur secondaire : clic "
+"droit. Palette de couleur : clic molette."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -67,12 +75,12 @@ msgstr "Bruit aléatoire"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr "regénérer"
+msgstr "Regénérer"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 msgid "label"
-msgstr "étiquette"
+msgstr "Étiquette"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
@@ -98,7 +106,7 @@ msgstr "Éclaboussure"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "Tampon Duplicateur"
+msgstr "Tampon duplicateur"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
@@ -114,6 +122,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"bouton gauche pour dessiner à main levée des lignes d'un pixel de large en "
+"couleur primaire. Bouton droit pour utiliser la couleur secondaire."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -184,7 +194,7 @@ msgstr "Échantillonage"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr ""
+msgstr "Pixel Unique"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
@@ -233,10 +243,10 @@ msgstr "Rectangle"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Cliquer et glisser pour dessiner un rectangle (clic droit pour la couleur "
-"secondaire). Maintenir la touche Majuscule pour faire un carré."
+"Cliquez et faites glisser pour dessiner un rectangle (clic droit pour la "
+"couleur secondaire). Maintenez la touche Maj pour contraindre un carré."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -270,23 +280,29 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Clic gauche et faites glisser la sélection pour déplacer le contour de la "
+"sélection. Faites un clic droit et faites glisser la sélection à tourner le "
+"contour de la sélection."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: Pinta/Actions/Edit/PasteAction.cs:108
 msgid "Move Selected Pixels"
-msgstr "Déplacer les Pixels Sélectionnés"
+msgstr "Déplacer les pixels sélectionnés"
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Clic gauche et faites glisser la sélection pour déplacer le contenu "
+"sélectionné. Faites un clic droit et faites glisser la sélection pour faire "
+"pivoter le contenu sélectionné."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "Pot de Peinture"
+msgstr "Pot de peinture"
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
@@ -298,7 +314,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/LassoSelectTool.cs:48
 msgid "Lasso Select"
-msgstr "Sélection Lasso"
+msgstr "Sélection lasso"
 
 #: Pinta.Tools/Tools/LassoSelectTool.cs:50
 msgid "Click and drag to draw the outline for a selection area."
@@ -324,20 +340,23 @@ msgstr "Ellipse"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Cliquer et glisser pour dessiner une ellipse (clic droit pour la couleur "
-"secondaire). Maintenez la touche Majuscule pour forcer un cercle."
+"Cliquez et faites glisser pour dessiner une ellipse (clic droit pour la "
+"couleur secondaire). Maintenez la touche Maj pour contraindre un cercle."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr "Rectangle aux coins Arrondis"
+msgstr "Rectangle aux coins arrondis"
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
+"Cliquez et faites glisser pour dessiner un rectangle arrondi (clic droit "
+"pour la couleur secondaire). Maintenez la touche Maj pour contraindre un "
+"carré."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -389,23 +408,23 @@ msgstr ""
 
 #: Pinta.Tools/Tools/GradientTool.cs:172
 msgid "Linear Gradient"
-msgstr "Dégradé Linéaire"
+msgstr "Dégradé linéaire"
 
 #: Pinta.Tools/Tools/GradientTool.cs:173
 msgid "Linear Reflected Gradient"
-msgstr "Dégradé Linéaire Réfléchi"
+msgstr "Dégradé linéaire réfléchi"
 
 #: Pinta.Tools/Tools/GradientTool.cs:174
 msgid "Linear Diamond Gradient"
-msgstr "Dégradé Linéaire en Diamant"
+msgstr "Dégradé linéaire en diamant"
 
 #: Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Radial Gradient"
-msgstr "Dégradé Radial"
+msgstr "Dégradé radial"
 
 #: Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Conical Gradient"
-msgstr "Dégradé Conique"
+msgstr "Dégradé conique"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:35
 msgid "Text"
@@ -462,7 +481,7 @@ msgstr "Sélection des contours"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:184
 msgid "Fill Background"
-msgstr ""
+msgstr "Remplir le fond"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:192
 msgid "Outline width"
@@ -478,43 +497,43 @@ msgstr "Augmenter la taille du contour"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
-msgstr "Sélection Elliptique"
+msgstr "Sélection elliptique"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Cliquer et glisser pour faire une sélection elliptique. Maintenir Majuscule "
-"pour faire un cercle."
+"Cliquez et faites glisser pour dessiner une sélection elliptique. Maintenez "
+"la touche Maj pour contraindre un cercle."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "Remplacer"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "Union (+) (Ctrl + Clic gauche)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Exclusion (-) (Clic droit)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "Xor (Ctrl + Clic droit)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Intersection (Shift + Clic gauche)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Mode de sélection : "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
-msgstr "Sélection Baguette Magique"
+msgstr "Sélection baguette magique"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:112
 msgid "Click to select region of similar color."
@@ -522,15 +541,15 @@ msgstr "Cliquer pour sélectionner une région de couleur similaire"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
-msgstr "Sélection Rectangulaire"
+msgstr "Sélection rectangulaire"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Cliquer et glisser pour faire une sélection rectangulaire. Maintenir la "
-"touche Majuscule pour contraindre la sélection à un carré."
+"Cliquez et faites glisser pour tracer une sélection rectangulaire. Maintenez "
+"la touche Maj pour contraindre un carré."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -558,11 +577,11 @@ msgstr "Rotation de 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Retourner l'Image Horizontalement"
+msgstr "Retourner l'image horizontalement"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "Retourner l'Image Verticalement"
+msgstr "Retourner l'image verticalement"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:65
@@ -576,11 +595,11 @@ msgstr "Rotation anti-horaire de 90°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Retourner le Calque Horizontalement"
+msgstr "Retourner le calque horizontalement"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "Retourner le Calque Verticalement"
+msgstr "Retourner le calque verticalement"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -611,7 +630,7 @@ msgstr "Ouvrir une image"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "Permission refusée"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -621,7 +640,7 @@ msgstr "Impossible d'ouvrir le fichier : {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Aucun outil sélectionné"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -650,7 +669,7 @@ msgstr "Copier"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Copie fusionnée"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
@@ -712,11 +731,11 @@ msgstr "Désélectionner"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr "Ouvrir Fichier Palette"
+msgstr "Ouvrir le fichier de palette"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "Fichiers Palette (*.txt, *.gpl)"
+msgstr "Fichiers palette (*.txt, *.gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:330
 #: Pinta/Actions/File/OpenDocumentAction.cs:68
@@ -766,7 +785,7 @@ msgstr "Redimensionner l'image..."
 
 #: Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Canvas..."
-msgstr "Redimensionner la  toile ..."
+msgstr "Redimensionner la toile ..."
 
 #: Pinta.Core/Actions/ImageActions.cs:63 Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
@@ -845,11 +864,11 @@ msgstr "Fenêtre"
 
 #: Pinta.Core/Actions/ViewActions.cs:126
 msgid "Ruler Units"
-msgstr "Unités rêgle"
+msgstr "Unités des règles"
 
 #: Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "Gestionnaire d’extensions"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:292
@@ -877,7 +896,7 @@ msgstr "Importer depuis un fichier..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr ""
+msgstr "Calque Zoom / Rotation..."
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:219
@@ -956,23 +975,23 @@ msgstr "À propos"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "Multiplier"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
-msgstr ""
+msgstr "Additif"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "Densité couleur +"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "Densité couleur -"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "Reflet"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -981,31 +1000,31 @@ msgstr "Halo"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "Recouvrement"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "Différence"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
-msgstr ""
+msgstr "Négation"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Éclaircir"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Assombrir"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Ecran"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
-msgstr ""
+msgstr "Xor"
 
 #: Pinta.Core/Classes/BaseTool.cs:192
 msgid "Tool"
@@ -1063,11 +1082,11 @@ msgstr "par les contributeurs de Pinta"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "L'image ne peut pas être collée"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "Le presse-papier ne contient pas d'image"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -1079,11 +1098,11 @@ msgstr "Emplacement"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Ont contribué à cette version :"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Contributeurs précédents :"
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
@@ -1104,7 +1123,9 @@ msgstr ""
 "  Simon https://launchpad.net/~nowis74\n"
 "  Simon Leblanc https://launchpad.net/~contact-leblanc-simon\n"
 "  Tonher3 https://launchpad.net/~jeanluc-jlg\n"
-"  fred.lavigne https://launchpad.net/~fred-taff"
+"  fred.lavigne https://launchpad.net/~fred-taff\n"
+"  jc1 https://launchpad.net/~jc1-quebecos\n"
+"  satbadkd https://launchpad.net/~satbadkd"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
@@ -1120,7 +1141,7 @@ msgstr "Utilisation d'icônes provenant de :"
 
 #: Pinta/Dialogs/AboutDialog.cs:167
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "Réalisé avec Mono :"
 
 #: Pinta/Dialogs/AboutDialog.cs:274
 msgid "About Pinta"
@@ -1157,7 +1178,7 @@ msgstr "Qualité JPEG"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:49
 msgid "Quality: "
-msgstr "Qualité: "
+msgstr "Qualité : "
 
 #: Pinta/Main.cs:68
 msgid "number of threads to use for rendering"
@@ -1170,7 +1191,7 @@ msgstr "Nom de l'option"
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
 msgid "Rotate / Zoom Layer"
-msgstr ""
+msgstr "Tourner / Zoomer le calque"
 
 #: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
 msgid "Layer Opacity"
@@ -1198,7 +1219,7 @@ msgstr "Nouvelle taille de la palette :"
 
 #: Pinta/Actions/Edit/PasteAction.cs:125
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Agrandir l'image plus que le canevas"
 
 #: Pinta/Actions/Edit/PasteAction.cs:126
 msgid ""
@@ -1206,7 +1227,7 @@ msgid ""
 "to do?"
 msgstr ""
 "L'image étant collé est plus grande que la taille de la toile. Que souhaitez-"
-"vous faire?"
+"vous faire ?"
 
 #: Pinta/Actions/Edit/PasteAction.cs:130
 msgid "Expand canvas"
@@ -1226,7 +1247,7 @@ msgstr "Prendre une capture d'écran"
 
 #: Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Délai avant de prendre une capture d'écran (en secondes):"
+msgstr "Délai avant de prendre une capture d'écran (en secondes) :"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
@@ -1244,29 +1265,29 @@ msgstr "Impossible d'enregistrer un fichier en lecture seule."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
-msgstr ""
+msgstr "Image trop grande"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr ""
+msgstr "Les fichiers ICO ne peuvent dépasser 255 x 255 pixels."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Un fichier nommé \"{0}\" existe déjà. Souhaitez vous le remplacer ?"
+msgstr "Un fichier nommé « {0} » existe déjà. Souhaitez vous le remplacer ?"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
-"Le fichier existe déjà dans \"{1}\". Le remplacer écrasera son contenu "
+"Le fichier existe déjà dans « {1} ». Le remplacer écrasera son contenu "
 "actuel."
 
 #: Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Enregistrer les changements de l'image \"{0}\" avant de fermer ?"
+msgstr "Enregistrer les changements de l'image « {0} » avant de fermer ?"
 
 #: Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
@@ -1306,7 +1327,7 @@ msgstr "Effet_s"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr ""
+msgstr "Extensions"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -1369,8 +1390,8 @@ msgid "Layers"
 msgstr "Calques"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Documents"
+msgid "Canvas"
+msgstr "Zone de travail"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1424,7 +1445,7 @@ msgstr "Postériser"
 
 #: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "Luminosité / contraste"
+msgstr "Luminosité / Contraste"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
@@ -1841,291 +1862,305 @@ msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
+"Sélection multiple :\n"
+"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "Activer"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "Désactiver"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Aucune sélection"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Disponible dans le dépôt :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Mise à jour disponible"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
+msgstr "Cette extension ne peut être chargée faute de librairies"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
+msgstr "Requis : {0} v{1}, trouvé v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "Manquant : {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "Version installée"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "version du référentiel"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "Taille du téléchargement"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
+"Les librairies suivantes, nécessaires pour cette extension, ne sont pas "
+"disponibles :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "Installation annulée"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "Certains greffons requis n'ont pas été trouvés"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "L’installation a échoué"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "Installé"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Mise à jour disponible"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Galerie"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Tous les dépôts"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Gérer les dépôts..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} mises à jour disponible"
+msgstr[1] "{0} mises à jour disponibles"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "Dépôt en cours de mise à jour"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "Installer le paquet d'extensions"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Paquets d'extensions"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Aucune extension trouvée"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Extension"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Autres"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Désinstaller"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "Les paquets suivants seront désinstallés :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Il y a des extensions dépendant des précédentes, qui seront aussi "
+"désinstallées :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"les extensions choisies ne peuvent être installées en raison "
+"d'incompatibilités avec d'autres."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Les paquets suivants seront installés :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (dans le répertoire utilisateur)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Les extensions suivantes doivent être désinstallées :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Les incompatibilités suivantes doivent être résolues :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "Voulez-vous vraiment annuler l'installation ?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Extensions en cours d'installation"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "L'installation a échoué."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "L'installation s'est déroulée avec des avertissements."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Désinstallation des extensions"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "La désinstallation a échoué !"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "La désinstallation s'est déroulée avec des avertissements."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Enregistrement du dépôt"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "Une exception a été levée : {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Informations supplémentaires"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Installation..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "_Désinstaller..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
 msgstr ""
+"Des extensions supplémentaires sont requises pour effectuer cette opération."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Les extensions suivantes seront installées :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Aucune mise à jour trouvée"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Rafraichir"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Tout mettre à jour"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Référentiel :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Installer à partir d'un fichier..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Installation"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Gestionnaire de dépôts d'extensions"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Ajouter un nouveau référentiel"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
 msgstr ""
+"Sélectionnez l'emplacement du référentiel que vous voulez enregistrer :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Enregistrer un référentiel en ligne"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "Url :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Enregistrer un référentiel local"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Emplacement :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Parcourir…"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "En cours"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(fourni par {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Texte - Finaliser"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-09-09 08:01+0000\n"
+"PO-Revision-Date: 2013-04-13 10:26+0000\n"
 "Last-Translator: Ciprian <c1pr1an_43v3r@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
-msgstr ""
+msgstr "Afișare strat"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Hidden"
-msgstr ""
+msgstr "Ascundere strat"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
@@ -35,27 +35,33 @@ msgstr "Alege culoarea principală"
 msgid "Choose Secondary Color"
 msgstr "Alege culoarea secundară"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Alege culoarea din paletă"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
+msgstr "Dați clic pentru a trece de la culoarea primară la cea secundară."
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Clic pentru selectarea culorii primare."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Clic pentru selectarea culorii secundare."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Clic stânga pentru culoarea primară. Clic dreapta pentru culoarea secundară. "
+"Clic mijloc pentru a selecta o culoare de pe paletă."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -83,7 +89,7 @@ msgstr "Cercuri"
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:181
 #: Pinta.Core/Effects/UserBlendOps.cs:52
 msgid "Normal"
-msgstr "Normală"
+msgstr "Normal"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
@@ -233,10 +239,8 @@ msgstr "Dreptunghi"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Clic apoi trage pentru a desena un dreptunghi (clic dreapta pentru culoarea "
-"secundară). Ține apăsat shift pentru pătrat."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -323,10 +327,8 @@ msgstr "Elipsă"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Clic și trage pentru a desena o elipsă (clic dreapta pentru culoarea "
-"secundară). Ține apăsat shift pentru a constrânge la cerc."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -335,7 +337,7 @@ msgstr "Dreptunghi rotunjit"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
@@ -479,11 +481,9 @@ msgstr "Selecție eliptică"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Clic, apoi trage pentru a desena o selecție eliptică. Ține apăsat shift "
-"pentru a constrânge selecâia la cerc."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -523,11 +523,9 @@ msgstr "Selecție dreptunghiulară"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Clic apoi trage pentru selecție dreptunghiulară, apasă shift pentru "
-"constrângere la selecție pătrată."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1092,6 +1090,7 @@ msgstr ""
 "  Ion https://launchpad.net/~vaneam\n"
 "  Istrate Sebastian https://launchpad.net/~sebyx87\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Nagy Ákos https://launchpad.net/~e-contact-pecska-ro\n"
 "  Nicolae Crefelean https://launchpad.net/~kneekoo\n"
 "  Radu Zoran https://launchpad.net/~radu-r2dev\n"
 "  ciplogic https://launchpad.net/~ciprian-mustiata\n"
@@ -1356,8 +1355,8 @@ msgid "Layers"
 msgstr "Straturi"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Documente"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2114,4 +2113,8 @@ msgstr ""
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr ""
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
 msgstr ""

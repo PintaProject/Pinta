@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-10-21 10:01+0000\n"
+"PO-Revision-Date: 2013-04-25 12:44+0000\n"
 "Last-Translator: Phoenix <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
-msgstr ""
+msgstr "Lager synligt"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Hidden"
-msgstr ""
+msgstr "Lager dolt"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
@@ -34,27 +34,33 @@ msgstr "Välj primär färg"
 msgid "Choose Secondary Color"
 msgstr "Välj sekundär färg"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Välj palettfärg"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr "Klicka för att byta mellan primär och sekundär färg."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Klicka för att välja primär färg."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Klicka för att välja sekundär färg."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Vänsterklicka för att ange primär färg. Högerklicka för att ange sekundär "
+"färg. Mittenklicka för att välja palettfärg."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -233,10 +239,10 @@ msgstr "Rektangel"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Vänsterklicka och dra för att rita en rektangel. Högerklicka för sekundär "
-"färg. Håll ned Shift för att begränsa till en kvadrat."
+"Klicka och dra för att rita en rektangel (högerklicka för sekundär färg). "
+"Håll ned Shift för att göra en kvadrat."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -323,10 +329,8 @@ msgstr "Ellips"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Vänsterklicka och dra för att rita en ellips. Högerklicka för sekundär färg. "
-"Håll ned Shift för att begränsa till en cirkel."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -335,7 +339,7 @@ msgstr "Rundad rektangel"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
@@ -481,11 +485,9 @@ msgstr "Ellipsmarkering"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Klicka och dra för att rita en ellipsmarkering. Håll ned Shift för att "
-"begränsa till en cirkel."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -525,11 +527,11 @@ msgstr "Rektangelmarkering"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Klicka och dra för att rita en rektangelmarkering. Håll ned Shift för att "
-"begränsa till en kvadrat."
+"Klicka och dra för att rita en rektangulär markering (högerklicka för "
+"sekundär färg). Håll ned Shift för att göra en kvadrat."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -610,7 +612,7 @@ msgstr "Öppna bild"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "Åtkomst nekad"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -620,7 +622,7 @@ msgstr "Kunde inte öppna filen: {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Inget verktyg valt."
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -991,11 +993,11 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Ljusare"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Mörkare"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
@@ -1077,11 +1079,11 @@ msgstr "Sökväg"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Bidragsgivare till denna utgåva:"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Föregående bidragsgivare:"
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
@@ -1354,8 +1356,8 @@ msgid "Layers"
 msgstr "Lager"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokument"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1825,6 +1827,8 @@ msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
+"Flera markeringar:\n"
+"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
@@ -2113,3 +2117,7 @@ msgstr "Förlopp"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(tillhandahålls av {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr ""

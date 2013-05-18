@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-09 16:19+0000\n"
+"PO-Revision-Date: 2013-02-04 01:46+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -34,23 +34,27 @@ msgstr "Pilih Warna Utama"
 msgid "Choose Secondary Color"
 msgstr "Pilih Warna Kedua"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Pilih Warna Palet"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik untuk tukar diantara warna utama dan sekunder."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Klik untuk pilih warna utama."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Klik untuk pilih warna sekunder."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -235,10 +239,10 @@ msgstr "Segiempat Tepat"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Klik dan seret untuk lukis segi empat tepat ( klik kanan untuk warna kedua). "
-"Tahan shift untuk jadikan segi empat sama."
+"Klik dan seret untuk lukis segiempat (klik kanan untuk warna sekunder). "
+"Tahan Shift untuk kekang menjadi segiempat sama."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -328,10 +332,10 @@ msgstr "Elips"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Klik dan seret untuk lukis elips (klik kanan untuk warna sekunder). Tekan "
-"shift untuk kekalkan ke bulatan."
+"Klik dan seret untuk lukis elips (klik kanan untuk warna sekunder). Tahan "
+"Shift untuk kekang menjadi bulatan."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -340,10 +344,10 @@ msgstr "Segi Empat Tepat Bundar"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"Klik dan seret untuk lukis segiempat terbuundar (klik kanan untuk warna "
-"sekunder). Tahan shift untuk kekangkan segiempat."
+"Klik dan seret untuk lukis segiempat berbucu bulat (klik kanan untuk warna "
+"sekunder). Tahan Shift untuk kekang menjadi segiempat sama."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -488,11 +492,11 @@ msgstr "Pilih Elips"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Klik dan seret untuk lukis pemilihan berelips. Tekan shift untuk kekalkan "
-"kepada bulatan."
+"Klik dan seret untuk lukis pemilihan eliptik. Tahan Shift untuk kekang "
+"menjadi bulatan."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -532,11 +536,11 @@ msgstr "Pilih Segi Empat Tepat"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Klik dan seret untuk lukis pemilihan segi empat tepat. Tekan dan tahan shift "
-"untuk jadikan segi empat sama."
+"Klik dan seret untuk lukis pemilihan segiempat. Tahan Shift untuk kekang "
+"menjadi segiempat sama."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1360,8 +1364,8 @@ msgid "Layers"
 msgstr "Lapisan"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokumen"
+msgid "Canvas"
+msgstr "Kanvas"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2124,3 +2128,7 @@ msgstr "Kemajuan"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(disediakan oleh {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Teks - Muktamatkan"

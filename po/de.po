@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-13 16:32+0000\n"
+"PO-Revision-Date: 2013-02-04 18:43+0000\n"
 "Last-Translator: Dennis Baudys <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -34,25 +34,29 @@ msgstr "Vordergrundfarbe wählen"
 msgid "Choose Secondary Color"
 msgstr "Hintergrundfarbe wählen"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Palettenfarbe wählen"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 "Anklicken, um zwischen der Vordergrundfarbe und Hintergrundfarbe "
 "umzuschalten."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Anklicken, um die Vordergrundfarbe festzulegen."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Anklicken, um die Hintergrundfarbe festzulegen."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -240,11 +244,11 @@ msgstr "Rechteck"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Klicken und ziehen, um ein Rechteck zu zeichnen (Rechtsklick für "
-"Hintergrundfarbe). Umschalttaste dabei gedrückt halten, um ein Quadrat zu "
-"zeichnen."
+"Klicken und ziehen, um ein Rechteck zu zeichnen (Rechtsklick, um mit der "
+"Hintergrundfarbe zu zeichnen). Umschalttaste gedrückt halten, zeichnet ein "
+"Quadrat."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -336,11 +340,11 @@ msgstr "Ellipse"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Klicken und ziehen, um eine Ellipse zu zeichnen (Rechtsklick, um die "
-"Hintergrundfarbe zu verwenden). Umschalttaste dabei gedrückt halten, um "
-"einen Kreis zu zeichnen."
+"Klicken und ziehen, um eine Ellipse zu zeichnen (Rechtsklick, um mit der "
+"Hintergrundfarbe zu zeichnen). Umschalttaste gedrückt halten, zeichnet einen "
+"Kreis."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -349,11 +353,11 @@ msgstr "Abgerundetes Rechteck"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"Klicken und ziehen, um ein abgerundetes Rechteck zu zeichnen (Rechtsklick "
-"für Hintergrundfarbe). Umschalttaste dabei gedrückt halten, um ein "
-"abgerundetes Quadrat zu zeichnen."
+"Klicken und ziehen, um ein abgerundetes Rechteck zu zeichnen (Rechtsklick, "
+"um mit der Hintergrundfarbe zu zeichnen). Umschalttaste gedrückt halten, "
+"zeichnet ein Quadrat."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -377,8 +381,8 @@ msgid ""
 "Shift key to snap to angles."
 msgstr ""
 "Linksklick, um mit der Vordergrundfarbe zu zeichnen. Rechtsklick, um mit der "
-"Hintergrundfarbe zu zeichnen. Umschalttaste dabei gedrückt halten, um an "
-"bestimmten Winkeln einzurasten."
+"Hintergrundfarbe zu zeichnen. Umschalttaste gedrückt halten, rastet an "
+"bestimmten Winkeln."
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
 msgid "Flood Mode"
@@ -499,11 +503,11 @@ msgstr "Elliptische Auswahl"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Klicken und ziehen, um eine elliptische Auswahl aufzuziehen. Die "
-"Umschalttaste gedrückt halten, um daraus einen Kreis zu machen."
+"Klicken und ziehen, um einen elliptischen Bereich auszuwählen. Umschalttaste "
+"gedrückt halten, wählt einen Kreis aus."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -543,11 +547,11 @@ msgstr "Rechteckige Auswahl"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Klicken und ziehen, um eine rechteckige Auswahl aufzuziehen. Die "
-"Umschalttaste gedrückt halten, um daraus ein Quadrat zu machen."
+"Klicken und ziehen, um einen rechteckigen Bereich auszuwählen. Umschalttaste "
+"gedrückt halten, wählt ein Quadrat aus."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1110,8 +1114,9 @@ msgstr ""
 "  Andre https://launchpad.net/~ajx\n"
 "  Benedict Etzel https://launchpad.net/~benedict-etzel\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Christian https://launchpad.net/~make-panic\n"
 "  Christian Rupp https://launchpad.net/~grissi\n"
+"  Christian Schulz https://launchpad.net/~make-panic\n"
+"  Daniel Winzen https://launchpad.net/~q-d\n"
 "  Dennis Baudys https://launchpad.net/~thecondordb\n"
 "  Ettore Atalan https://launchpad.net/~atalanttore\n"
 "  Francisco Camenforte Torres https://launchpad.net/~fct\n"
@@ -1125,7 +1130,7 @@ msgstr ""
 "  Marco Rolappe https://launchpad.net/~mrolappe\n"
 "  Mathias Fussenegger https://launchpad.net/~f-mathias\n"
 "  Matthias Mailänder https://launchpad.net/~mailaender\n"
-"  Richard Liebig https://launchpad.net/~systheron\n"
+"  Richard Liebig https://launchpad.net/~systheron-deactivatedaccount\n"
 "  ziggystar https://launchpad.net/~ziggystar-gmx"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
@@ -1391,8 +1396,8 @@ msgid "Layers"
 msgstr "Ebenen"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokumente"
+msgid "Canvas"
+msgstr "Zeichenfläche"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1855,8 +1860,8 @@ msgstr ""
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Bemerkung: Um das beste Ergebnis zu bekommen, markiere am bestens jede Auge "
-"einzeln."
+"Tipp: Beste Ergebnisse erzielt man, wenn zuvor jedes Auge mittels "
+"Auswahlwerkzeugen ausgewählt wurde."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
@@ -1942,7 +1947,7 @@ msgstr "Installiert"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr "Aktuallisierungen"
+msgstr "Aktualisierungen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
@@ -2161,3 +2166,7 @@ msgstr "Fortschritt"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(bereitgestellt von {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Text - Finalisieren"

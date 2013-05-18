@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -34,23 +34,27 @@ msgstr "選擇主要顏色"
 msgid "Choose Secondary Color"
 msgstr "選擇第二顏色"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "選擇調色盤顏色"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -228,8 +232,8 @@ msgstr "矩形"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr "按住滑鼠左鍵並拖動畫出一矩形(若用滑鼠右鍵則使用的是第二顏色)。按住\"Shift\"鍵以限制畫出來的是正方形。"
+"Shift to constrain to a square."
+msgstr ""
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -310,8 +314,8 @@ msgstr "橢圓形"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr "按住滑鼠左鍵並拖動畫出一橢圓(若用滑鼠右鍵則使用的是第二顏色)。按住\"Shift\"鍵以限制畫出來的是圓形。"
+"Shift to constrain to a circle."
+msgstr ""
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -320,8 +324,8 @@ msgstr "圓角矩形"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
-msgstr "點擊並拖曳畫出一個圓角矩形 (用滑鼠右鍵點擊則使用第二顏色)。按住 [ Shift ] 鍵 可限制畫出為正方形。"
+"color). Hold Shift to constrain to a square."
+msgstr ""
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -460,9 +464,9 @@ msgstr "橢圓形選取工具"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
-msgstr "按住滑鼠並拖動畫出一個橢圓選取區域。另外，按住\"Shift\"鍵以限制畫出來的是圓形。"
+msgstr ""
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -502,9 +506,9 @@ msgstr "矩形選取工具"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
-msgstr "點選並拖動畫出一個矩形選取區域。按住\"Shift\"鍵以限制畫出來的是正方形。"
+msgstr ""
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1323,8 +1327,8 @@ msgid "Layers"
 msgstr "圖層"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "文件"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2079,3 +2083,7 @@ msgstr "進展"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(由 {0} 提供)"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr ""

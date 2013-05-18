@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-07 16:42+0000\n"
+"PO-Revision-Date: 2013-02-04 02:41+0000\n"
 "Last-Translator: Rafael Neri <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -34,23 +34,27 @@ msgstr "Escolha a cor primária"
 msgid "Choose Secondary Color"
 msgstr "Escolha a cor secundária"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Escolha o padrão de cores"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr "Clique para alternar entre cor primária e secundária."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Clique para selecionar a cor primária."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Clique para selecionar a cor secundária."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -117,6 +121,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Clique com o botão esquerdo do mouse para desenhar com linhas de um pixel de "
+"largura de forma livre, com a cor primária. Botão direito do mouse para usar "
+"a cor secundária."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -236,10 +243,10 @@ msgstr "Retângulo"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Clique e arraste para desenhar um retângulo (clique com o botão direito para "
-"cor secundária). Pressione shift para restringir a um quadrado."
+"Clique e arraste para desenhar um retângulo (clique direito para a cor "
+"secundária). Mantenha a tecla Shift para restringir a um quadrado."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -273,6 +280,9 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Clique com o botão esquerdo e arraste a seleção para mover contorno de "
+"seleção. Clique com o botão direito e arraste a seleção para girar contorno "
+"de seleção."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -286,6 +296,9 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Clique com o botão esquerdo arraste a seleção para mover o conteúdo "
+"selecionado. Clique com o botão direito e arraste a seleção para rodar "
+"conteúdo selecionado."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -328,10 +341,10 @@ msgstr "Elipse"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Clique e arraste para desenhar uma elipse (clique com botão direito para cor "
-"secundária). Pressione shift para restringir a um círculo."
+"Clique e arraste para desenhar uma elipse (clique direito para a cor "
+"secundária). Mantenha a tecla Shift para restringir a um círculo."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -340,10 +353,10 @@ msgstr "Retângulo Arredondado"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"Clique e arraste para desenhar um retângulo arredondado (botão direito para "
-"cor secundária). Pressione o shift para restringir a um quadrado."
+"Clique e arraste para desenhar um retângulo arredondado (clique direito para "
+"a cor secundária). Mantenha a tecla Shift para restringir a um quadrado."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -488,11 +501,11 @@ msgstr "Seleção Elíptica"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Clique e arraste para desenhar a seleção elíptica. Pressione shift para "
-"restringir o círculo."
+"Clique e arraste para desenhar uma seleção elíptica. Mantenha a tecla Shift "
+"para restringir a um círculo."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -532,11 +545,11 @@ msgstr "Seleção Retangular"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Clique e arraste para desenhar uma seleção retangular. Pressione shift para "
-"restringir a um quadrado."
+"Clique e arraste para desenhar uma seleção retangular. Mantenha a tecla "
+"Shift para restringir a um quadrado."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1313,7 +1326,7 @@ msgstr "Efeito_s"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr ""
+msgstr "A_dd-ins"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -1376,8 +1389,8 @@ msgid "Layers"
 msgstr "Camadas"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Documentos"
+msgid "Canvas"
+msgstr "Canvas"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2146,3 +2159,7 @@ msgstr "Progresso"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(fornecido por {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Texto – Finalizar"

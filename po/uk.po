@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-09-09 07:58+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"PO-Revision-Date: 2012-11-18 12:29+0000\n"
+"Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -35,23 +35,27 @@ msgstr "Виберіть основний колір"
 msgid "Choose Secondary Color"
 msgstr "Виберіть вторинний колір"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Оберіть палітру кольорів"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
+msgstr "Клацніть, щоб перемкнутися між основним та додатковим кольором."
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Клацніть, щоб вибрати основний колір."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Клацніть, щоб вибрати додатковий колір."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -181,7 +185,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "Вибірка"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
@@ -189,19 +193,19 @@ msgstr "Одиночний піксель"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "Область 3 на 2"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "Область 5 на 5"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "Область 7 на 7"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "Область 9 на 9"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
 msgid "Layer"
@@ -234,10 +238,8 @@ msgstr "Прямокутник"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"За допомогою миші намалюте прямокутник (правою клавіша малює додатковим "
-"кольром). Затисніть shift, щоб намалювати квадрат."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -322,10 +324,8 @@ msgstr "Еліпс"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"За допомогою миші намалюйте еліпс (правою клавішею додатковим кольром). "
-"Затисніть shift, щоб намалювати коло."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -334,7 +334,7 @@ msgstr "Округлений прямокутник"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
@@ -358,6 +358,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Натисніть ліву кнопку миші, щоб малювати первинним кольором, праву — щоб "
+"малювати вторинним кольором. Затисніть Shift, щоб обмежити кут."
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
 msgid "Flood Mode"
@@ -478,27 +480,25 @@ msgstr "Виділення еліпсом"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"За допомогою миші намалюйте еліптичне виділення. Затисніть shift, щоб "
-"намалювати коло."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "Замінити"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "Поєднати (+) (Ctrl + лівий клік)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Від’єднати (-) (правий клік)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "Xor (Ctrl + правий клік)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
@@ -506,7 +506,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Режим виділення "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -522,11 +522,9 @@ msgstr "Прямокутне виділення"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"За допомогою миші намалюйте прямокутне виділення. Затисніть shift, щоб "
-"намалювати квадрат."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1092,8 +1090,10 @@ msgstr ""
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Maks Lyashuk aka Ma)(imuM https://launchpad.net/~probel\n"
 "  Max_ym https://launchpad.net/~kontact-cat\n"
+"  Nazariy Ritter https://launchpad.net/~nazariy-ritter\n"
 "  UaHummer https://launchpad.net/~uahummer\n"
-"  ma$terok https://launchpad.net/~m-shein"
+"  ma$terok https://launchpad.net/~m-shein\n"
+"  Сергій Дубик https://launchpad.net/~dubyk-library"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
@@ -1353,8 +1353,8 @@ msgid "Layers"
 msgstr "Шари"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Документи"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2112,4 +2112,8 @@ msgstr "Виконання"
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr ""
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
 msgstr ""

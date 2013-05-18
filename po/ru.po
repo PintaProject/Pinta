@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-10-25 11:06+0000\n"
-"Last-Translator: Eugene Marshal <Unknown>\n"
+"PO-Revision-Date: 2013-05-15 20:16+0000\n"
+"Last-Translator: Oleg Koptev <koptev.oleg@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -35,28 +35,35 @@ msgstr "Выберите цвет переднего плана"
 msgid "Choose Secondary Color"
 msgstr "Выберите фоновый цвет"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Выберите цвет цалитры"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 "Щёлкните, чтобы переключиться между основным и дополнительным цветом."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr "Нажмите для сброса первичного и вторичного цветов."
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Щёлкните, чтобы выбрать основной цвет."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Щёлкните, чтобы выбрать дополнительный цвет."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Щелчок левой кнопки мыши для установки основного цвета. Щелчок правой "
+"кнопкой мыши для установки вторичного цвета. Щелчок средней кнопки мыши для "
+"выбора цветовой палитры."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -117,6 +124,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Щелчок левой кнопки мыши для рисования произвольной линии основного цвета "
+"толщиной в один пиксель. Щелчок правой кнопкой мыши для использования "
+"вторичного цвета."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -235,10 +245,10 @@ msgstr "Прямоугольник"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Щёлкните и перетащите мышь, чтобы нарисовать прямоугольник (правая кнопка "
-"рисует вторичным цветом). Зажмите Shift, чтобы получить квадрат."
+"Нажмите и тяните,  чтобы нарисовать прямоугольник (правой кнопкой мыши для "
+"использования вторичного цвета). Удерживайте Shift, чтобы нарисовать квадрат."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -272,6 +282,8 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Нажмите левую кнопку мыши и тяните для перемещения контура выделения. "
+"Нажмите правую кнопку мыши и тяните для вращения контура выделения."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -285,6 +297,8 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Нажмите левую кнопку мыши и тяните для перемещения выделенного контента. "
+"Нажмите правую кнопку мыши и тяните для вращения выделенного контента."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -326,10 +340,10 @@ msgstr "Эллипс"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Щёлкните и перетаскивайте мышь, чтобы нарисовать эллипс (правая кнопка "
-"рисует вторичным цветом). Нажмите Shift, чтобы получить круг."
+"Нажмите и тяните, чтобы начертить эллипс (правой кнопкой мыши для "
+"использования вторичного цвета). Удерживайте Shift для черчения окружности."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -338,11 +352,11 @@ msgstr "Скруглённый прямоугольник"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"Кликните и перетащите, чтобы нарисовать прямоугольник с закругленными углами "
-"(правой кнопкой мыши чтобы рисовать вторичным цветом). Удерживайте SHIFT, "
-"чтобы прямоугольник был квадратом."
+"Нажмите и тяните, чтобы начертить прямоугольник с закругленными углами "
+"(правой кнопкой мыши для использования вторичного цвета). Удерживайте Shift "
+"для черчения скругленного квадрата."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -487,11 +501,11 @@ msgstr "Эллиптическое выделение"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Щёлкните и перетаскивайте, чтобы нарисовать эллиптическое выделение. Держите "
-"Shift, чтобы выделить круг."
+"Нажмите и тяните,  чтобы выделить эллептическую область . Удерживайте Shift, "
+"чтобы выделить круглую область."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -531,11 +545,11 @@ msgstr "Прямоугольное выделение"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Нажмите и перетаскивайте, чтобы нарисовать прямоугольное выделение. Нажмите "
-"Shift, чтобы получить квадрат."
+"Нажмите и тяните,  чтобы выделить прямоугольную область . Удерживайте Shift, "
+"чтобы выделить квадратную область."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1107,12 +1121,14 @@ msgstr ""
 "  Nightingale https://launchpad.net/~solosn\n"
 "  Nikita Putko https://launchpad.net/~ktototam98\n"
 "  Nkolay Parukhin https://launchpad.net/~parukhin\n"
+"  Oleg Koptev https://launchpad.net/~koptev-oleg\n"
 "  PocketSam https://launchpad.net/~dr-chaoss\n"
 "  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
 "  Stepan Kislan https://launchpad.net/~stepa87\n"
 "  Strahov Nikita https://launchpad.net/~newerty\n"
 "  Vyacheslav Sharmanov https://launchpad.net/~vsharmanov\n"
 "  Yogar https://launchpad.net/~me-yogar\n"
+"  dadatamada https://launchpad.net/~stas-stv\n"
 "  jeder https://launchpad.net/~i-jeder\n"
 "  ma$terok https://launchpad.net/~m-shein\n"
 "  sympler https://launchpad.net/~sympler"
@@ -1375,8 +1391,8 @@ msgid "Layers"
 msgstr "Слои"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Документы"
+msgid "Canvas"
+msgstr "Холст"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2143,3 +2159,7 @@ msgstr "Ход выполнения"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(предоставлено {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Текст - Завершить"

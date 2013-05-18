@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -35,23 +35,27 @@ msgstr "Wybierz kolor podstawowy"
 msgid "Choose Secondary Color"
 msgstr "Wybierz kolor dodatkowy"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Wybierz kolor z palety"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr "Kliknij aby przełączyć między kolorem podstawowym a kolorem tła"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Kliknij aby wybrać kolor podstawowy"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Kliknij aby wybrać kolor tła"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -238,11 +242,8 @@ msgstr "Prostokąt"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Kliknij i przeciągaj, aby narysować prostokąt (jeśli chcesz użyć koloru "
-"dodatkowego, użyj prawego przycisku myszy). Przytrzymaj klawisz Shift aby "
-"zawsze rysowany był kwadrat."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -332,11 +333,8 @@ msgstr "Elipsa"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Kliknij i przeciągnij, aby narysować elipsę (kliknij prawym przyciskiem "
-"myszy, by użyć koloru dodatkowego). Przytrzymaj klawisz Shift, aby zawsze "
-"rysowany był okrąg."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -345,7 +343,7 @@ msgstr "Zaokrąglony prostokąt"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
@@ -493,11 +491,9 @@ msgstr "Zaznaczenie eliptyczne"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Kliknij i przeciągnij, aby narysować zaznaczenie eliptyczne. Przytrzymaj "
-"klawisz Shift, aby zawsze rysowane było zaznaczenie o kształcie koła."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -537,11 +533,9 @@ msgstr "Zaznaczenie prostokątne"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Kliknij i przeciągaj, aby narysować zaznaczenie prostokątne. Przytrzymaj "
-"klawisz Shift aby zawsze rysowane było zaznaczenie kwadratowe."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1118,7 +1112,7 @@ msgstr ""
 "  eeree https://launchpad.net/~eeree\n"
 "  jacek https://launchpad.net/~yacka71\n"
 "  pp/bs https://launchpad.net/~pawprok\n"
-"  skrzat https://launchpad.net/~radek-floraland\n"
+"  skrzat https://launchpad.net/~skrzat\n"
 "  Łukasz Semler https://launchpad.net/~lukasz-semler"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
@@ -1382,8 +1376,8 @@ msgid "Layers"
 msgstr "Warstwy"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokumenty"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2141,4 +2135,8 @@ msgstr ""
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr ""
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
 msgstr ""

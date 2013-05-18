@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-09-09 08:03+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"PO-Revision-Date: 2013-03-01 13:28+0000\n"
+"Last-Translator: zoltanlazar <pupileater@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -34,27 +34,33 @@ msgstr "Elsődleges szín kiválasztása"
 msgid "Choose Secondary Color"
 msgstr "Másodlagos szín kiválasztása"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Színpaletta kiválasztása"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
+msgstr "Váltás az elsődleges és másodlagos szín között."
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Elsődleges szín kiválasztása"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Másodlagos szín kiválasztása"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Bal kattintás az elsődleges színhez. Jobb kattintás a másodlagos színhez, "
+"középső a színskála megjelenítéséhez."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -113,6 +119,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Bal klikk rajzolás egy-pixeles vonalakkal szabad-kézzel az elsődleges "
+"színnel. Jobb klikk a másodlagos színnel."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -231,10 +239,10 @@ msgstr "Téglalap"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Kattintson és húzza az egeret négyszög rajzoláshoz (másodlagos színhez jobb "
-"klikk). A Shift billentyűt nyomva tartva rögzíti az oldalarányokat."
+"Klikk és húzás téglalap rajzoláshoz (jobb klikk a másodlagos színnel). Shift "
+"nyomva tartása kényszerített négyzethez."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -320,11 +328,8 @@ msgstr "Ellipszis"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Kattintson és húzz az egeret ellipszis rajzoláshoz (jobb egérgombbal a "
-"másodlagos színnel). Tartsd lenyomva a Shift billentyűt a szabályos kör "
-"alakhoz."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -333,10 +338,8 @@ msgstr "Lekerekített téglalap"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"Kattintson és húzza az egeret lekerekített téglalap rajzolásához (jobb gomb "
-"a másodlagos színhez). Tartsa lenyomva a Shiftet négyzet rajzolásához."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -481,35 +484,33 @@ msgstr "Ellipszis-kijelölés"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Kattintson és húzza az egeret elliptikus kijelöléshez, kör alakú "
-"kijelöléshez tartsa nyomva a Shift billentyűt."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "Csere"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "Egyesít (+) (Ctrl + Bal Kattintás)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Leválaszt (-) (Jobb kattintás)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "Xor (Ctrl + Jobb kattintás)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Metszet (Shift + Bal kattintás)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Kiválasztási mód: "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -525,11 +526,9 @@ msgstr "Téglalap-kijelölés"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Kattintson és húzza az egeret a téglalap alakú kijelöléshez. Tartsa lenyomva "
-"a Shift billentyűt a négyzet alakú kijelöléshez."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -610,7 +609,7 @@ msgstr "Kép megnyitása"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "Engedély megtagadva"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -620,7 +619,7 @@ msgstr "Nem sikerült a fájl megnyitása: {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Nincs kiválasztot eszköz"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -1078,11 +1077,11 @@ msgstr "Elérési út"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Jelen kiadás hozzájárulói:"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Előzetes hozzájárulók:"
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
@@ -1091,9 +1090,11 @@ msgstr ""
 "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Mechanick https://launchpad.net/~info-mechanick\n"
+"  Nagy Ákos https://launchpad.net/~e-contact-pecska-ro\n"
 "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
 "  Robert Roth https://launchpad.net/~evfool\n"
-"  Vizion-HUN https://launchpad.net/~vizler-k"
+"  Vizion-HUN https://launchpad.net/~vizler-k\n"
+"  zoltanlazar https://launchpad.net/~pupileater"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
@@ -1354,8 +1355,8 @@ msgid "Layers"
 msgstr "Rétegek"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokumentumok"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2115,3 +2116,7 @@ msgstr "Előrehaladás"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(biztosítja: {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr ""

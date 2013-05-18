@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-05 06:43+0000\n"
+"PO-Revision-Date: 2013-05-18 06:03+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -35,23 +35,27 @@ msgstr "Izberi osnovno barvo"
 msgid "Choose Secondary Color"
 msgstr "Izberi pomožno barvo"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Izberi barvo palete"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
-msgstr "Klikni, da zamenjaš pomožno barvo z osnovno barvo."
+msgstr "Kliknite, da zamenjate pomožno barvo z osnovno barvo."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr "Kliknite da ponastavite osnovno in pomožno barvo."
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Kliknite za izbiro osnovne barve."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Kliknite za izbiro pomožne barve."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -236,7 +240,7 @@ msgstr "Pravokotnik"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
 "Kliknite in vlecite, da narišete pravokotnik (desni klik za izbiro pomožne "
 "barve). Držite Shift, da omejite na kvadrat."
@@ -317,7 +321,7 @@ msgstr "Ponovno pobarvaj"
 
 #: Pinta.Tools/Tools/RecolorTool.cs:60
 msgid "Left click to replace the secondary color with the primary color."
-msgstr "Levi klik, da zamenjaš pomožno barvo z osnovno barvo."
+msgstr "Levi klik za zamenjavo pomožne barve z osnovno barvo."
 
 #: Pinta.Tools/Tools/RecolorTool.cs:73 Pinta.Tools/Tools/FloodTool.cs:93
 msgid "Tolerance"
@@ -330,7 +334,7 @@ msgstr "Elipsa"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
 "Kliknite in vlecite za izris elipse (desni klik za pomožno barvo). Držite "
 "Shift, da omejite na krog."
@@ -342,7 +346,7 @@ msgstr "Zaobljen pravokotnik"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
 "Kliknite in povlecite, da narišete zaobljen pravokotnik. Držite Shift, da "
 "omejite na kvadrat."
@@ -490,7 +494,7 @@ msgstr "Eliptični izbor"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
 "Kliknite in povlecite, da narišete eliptično obliko. Držite Shift, da "
@@ -534,11 +538,11 @@ msgstr "Pravokotni izbor"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Kliknite in vlecite za izris izbire pravokotnika. Držite Shift, da omejite "
-"na kvadrat."
+"Kliknite in vlecite za izris pravokotne izbire. Držite Shift, da omejite na "
+"kvadrat."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1272,7 +1276,7 @@ msgstr "_Datoteka"
 
 #: Pinta/MainWindow.cs:124
 msgid "_Edit"
-msgstr "_Uredi"
+msgstr "Ur_ejanje"
 
 #: Pinta/MainWindow.cs:126
 msgid "_View"
@@ -1359,8 +1363,8 @@ msgid "Layers"
 msgstr "Plasti"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Dokumenti"
+msgid "Canvas"
+msgstr "Platno"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2125,3 +2129,7 @@ msgstr "Napredek"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(ponudnik {0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Besedilo - Zaključi"

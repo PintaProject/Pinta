@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-09-09 08:09+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"PO-Revision-Date: 2013-03-30 16:24+0000\n"
+"Last-Translator: qinghao <qinghao1@foxmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
-msgstr ""
+msgstr "显示图层"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Hidden"
-msgstr ""
+msgstr "隐藏图层"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
@@ -34,27 +34,31 @@ msgstr "选取主颜色"
 msgid "Choose Secondary Color"
 msgstr "选取副颜色"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "选取调色板颜色"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
+msgstr "点击切换主副颜色"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "点击选择主颜色"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "点击选择副颜色"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
-msgstr ""
+msgstr "左键点击选择主颜色，右键点击选择副颜色，中键点击选择调色板颜色"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -112,7 +116,7 @@ msgstr "铅笔"
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
-msgstr ""
+msgstr "左键点击用主颜色绘制 1 像素宽的线。右键使用副助色。"
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -179,23 +183,23 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr ""
+msgstr "单个像素"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "3 x 3 区域"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "5 x 5 区域"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "7 x 7 区域"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "9 x 9 区域"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
 msgid "Layer"
@@ -203,7 +207,7 @@ msgstr "图层"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr ""
+msgstr "图像"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
@@ -228,8 +232,8 @@ msgstr "矩形"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
-msgstr "点击拖动以绘制一个矩形(右击使用副颜色)。按住 shift 键约束为正方形。"
+"Shift to constrain to a square."
+msgstr "点击并拖动绘制矩形（右键使用副颜色绘制）。按住 Shift 强制绘制正方形。"
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -238,7 +242,7 @@ msgstr "橡皮擦"
 #: Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
-msgstr "左键点击为擦除至透明，右键点击为用第二候选颜色擦除 "
+msgstr "左键点击擦除为透明色，右键点击擦除为副颜色 "
 
 #: Pinta.Tools/Tools/ZoomTool.cs:48
 msgid "Zoom"
@@ -258,7 +262,7 @@ msgstr "移动选区"
 msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
-msgstr ""
+msgstr "左键点击并拖动选择移动选中区域的轮廓。右键点击并拖动选择及旋转选中区域的轮廓。"
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -271,7 +275,7 @@ msgstr "移动选择的像素"
 msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
-msgstr ""
+msgstr "左键点击并拖动选择移动选中区域的内容。右键点击并拖动选择及旋转选中区域的内容。"
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -310,8 +314,8 @@ msgstr "椭圆"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
-msgstr "点击拖动以绘制一个椭圆(右击使用副颜色)。按住 shift 键约束为圆形。"
+"Shift to constrain to a circle."
+msgstr "点击并拖动绘制椭圆（右键使用副颜色绘制）。按住 Shift 强制绘制圆。"
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -320,8 +324,8 @@ msgstr "圆角矩形。"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
-msgstr ""
+"color). Hold Shift to constrain to a square."
+msgstr "点击并拖动绘制圆角矩形（右键使用副颜色绘制）。按住 Shift 强制绘制正方形的。"
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -343,7 +347,7 @@ msgstr "线条"
 msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
-msgstr "左键点击为用第一候选的颜色绘制，右键点击为用第二候选的颜色绘制，按住Shift键可以咬住边角。"
+msgstr "左键点击为用主颜色绘制，右键点击为用副颜色绘制，按住 Shift 键可以锁定直接方向。"
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
 msgid "Flood Mode"
@@ -460,33 +464,33 @@ msgstr "椭圆形选择"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
-msgstr "点击拖动以绘制椭圆形选取。按住 shift 键限制为圆形。"
+msgstr "点击并拖动绘制椭圆选区。按住 Shift 强制画圆形区域。"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "替换"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "合并 (+) (Ctrl + 左键)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "排除 (-) (右键)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "异或 (Ctrl +右键)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "交错 (Shift + 左键)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " 选取模式: "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -502,9 +506,9 @@ msgstr "矩形选择"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
-msgstr "点击拖动以绘制一个矩形选区。按住 shift 键约束为正方形。"
+msgstr "单击并拖动绘制矩形选区。按住 Shift 键强制为正方形。"
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -512,12 +516,12 @@ msgstr "移动"
 
 #: Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
-msgstr "点击拖动以浏览图片。"
+msgstr "点击拖动以操纵图像。"
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} 图片 ({1})"
+msgstr "{0} 图像 ({1})"
 
 #: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: Pinta/Dialogs/ResizeImageDialog.cs:38
@@ -532,11 +536,11 @@ msgstr "旋转180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "水平翻转图片"
+msgstr "水平翻转图像"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "垂直翻转图片"
+msgstr "垂直翻转图像"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:65
@@ -568,7 +572,7 @@ msgstr "粘贴"
 #: Pinta.Core/Managers/WorkspaceManager.cs:97
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "未保存的图片 {0}"
+msgstr "未保存的图像 {0}"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:156
 msgid "Background"
@@ -595,7 +599,7 @@ msgstr "无法打开文件：{0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "没有选择工具。"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -735,11 +739,11 @@ msgstr "自动裁剪"
 
 #: Pinta.Core/Actions/ImageActions.cs:61
 msgid "Resize Image..."
-msgstr "重设图片尺寸"
+msgstr "改变图像大小..."
 
 #: Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Canvas..."
-msgstr "重设画布尺寸"
+msgstr "改变画布大小..."
 
 #: Pinta.Core/Actions/ImageActions.cs:63 Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
@@ -822,7 +826,7 @@ msgstr "尺度单位"
 
 #: Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "插件管理器"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:292
@@ -978,7 +982,7 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
-msgstr ""
+msgstr "异或"
 
 #: Pinta.Core/Classes/BaseTool.cs:192
 msgid "Tool"
@@ -990,7 +994,7 @@ msgstr "快捷键"
 
 #: Pinta.Core/Classes/BaseTool.cs:418
 msgid "Normal Blending"
-msgstr "一般混合"
+msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:419
 msgid "Overwrite"
@@ -1011,7 +1015,7 @@ msgstr "复制"
 #: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "调整画布大小"
+msgstr "改变画布大小"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
@@ -1036,11 +1040,11 @@ msgstr "由 Pinta 贡献者"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "不能粘贴图像"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "剪切板中没有图像"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -1052,11 +1056,11 @@ msgstr "路径"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "这一版本的贡献者："
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "以前的贡献者："
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
@@ -1066,6 +1070,7 @@ msgstr ""
 "  Hello World! https://launchpad.net/~liuwanfang86\n"
 "  Wylmer Wang https://launchpad.net/~wantinghard\n"
 "  Xhacker Liu https://launchpad.net/~xhacker\n"
+"  qinghao https://launchpad.net/~qinghao1\n"
 "  邵开来 https://launchpad.net/~kailai.shao"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
@@ -1160,7 +1165,7 @@ msgstr "调色板大小："
 
 #: Pinta/Actions/Edit/PasteAction.cs:125
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "图像比画布大"
 
 #: Pinta/Actions/Edit/PasteAction.cs:126
 msgid ""
@@ -1194,7 +1199,7 @@ msgstr "保存图像文件"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta 不支持储存这种类型的图片。"
+msgstr "Pinta 不支持保存图像为这种格式。"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
 msgid "Cannot save read only file."
@@ -1202,11 +1207,11 @@ msgstr "不能保存只读文件"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
-msgstr ""
+msgstr "图像太大"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr ""
+msgstr "ICO 不能大于 255 x 255 像素。"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 #, csharp-format
@@ -1230,7 +1235,7 @@ msgstr "如果您不保存，所有修改 将会永久丢失。"
 
 #: Pinta/Actions/File/CloseDocumentAction.cs:69
 msgid "Close without saving"
-msgstr "不保存并关闭"
+msgstr "不保存关闭"
 
 #: Pinta/MainWindow.cs:123
 msgid "_File"
@@ -1262,7 +1267,7 @@ msgstr "效果(_C)"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr ""
+msgstr "插件(_D)"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -1318,15 +1323,15 @@ msgstr "锚点："
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
 msgid "New Image Size          "
-msgstr "新图像尺寸          "
+msgstr "新图像大小          "
 
 #: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
 msgid "Layers"
 msgstr "图层"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "文档"
+msgid "Canvas"
+msgstr "画布"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1338,7 +1343,7 @@ msgstr "工具"
 
 #: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
 msgid "Images"
-msgstr "图片"
+msgstr "图像"
 
 #: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:91
 msgid "Hide"
@@ -1792,19 +1797,21 @@ msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
+"多选：\n"
+"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "禁用"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "没有选择"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
@@ -1812,25 +1819,25 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "有可用更新"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
+msgstr "这个插件因为缺少依赖项不能载入"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
+msgstr "需要：{0} v{1}，但找到 v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "缺少：{0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "已安装版本"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
@@ -1838,35 +1845,35 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "下载大小"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
+msgstr "这一插件的下面这些依赖项不能满足："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "安装已取消"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "一些所需的插件没有找到"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "安装失败"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "已安装"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "更新"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
@@ -1891,35 +1898,35 @@ msgstr[1] ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "更新插件库"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "安装插件软件包"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "插件软件包"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "没有插件"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "插件"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "其它"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "卸载"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "下列软件包将被卸载："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
@@ -1935,7 +1942,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "下列软件包将被安装："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
@@ -1943,11 +1950,11 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "下列软件包需要卸载："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "无法解决下列依赖关系："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
@@ -1955,27 +1962,27 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "正在安装插件"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "安装失败！"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "安装完成但有警告信息。"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "正在卸载插件"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "卸载失败！"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "卸载完成但有警告信息。"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
@@ -1989,39 +1996,39 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "更多信息"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "安装..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "卸载(_U)..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "执行该操作需要额外的扩展。"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "将安装下列插件："
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "未找到更新"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "更新全部"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
@@ -2029,16 +2036,16 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "从文件安装..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "详细信息"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "安装"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
@@ -2050,7 +2057,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "选择您想要注册的插件库的位置："
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
@@ -2058,7 +2065,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "地址："
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
@@ -2066,17 +2073,21 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "路径："
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "浏览..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "进度"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr "(由 {0} 提供)"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
 msgstr ""

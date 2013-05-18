@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-14 19:43+0000\n"
+"PO-Revision-Date: 2013-05-12 12:37+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -34,23 +34,27 @@ msgstr "Dibab al liv kentael"
 msgid "Choose Secondary Color"
 msgstr "Dibab al liv eilvedel"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "Dibab al livaoueg"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
 msgstr "Klikañ a-benn diuzañ al liv kentael pe al liv eilvedel."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
+msgstr "Klikañ da adderaouekaat al livioù kentael hag eilvedel."
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
 msgstr "Klikañ a-benn diuzañ al liv kentael."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
 msgstr "Klikañ a-benn diuzañ al liv eilvedel."
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -237,10 +241,10 @@ msgstr "Reizhkorn"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ ur reizhkorn (klik dehou evut ul liv "
-"eilvedel). Pouezañ war Pennlizh. da dresañ ur c'harrez."
+"Klikañ ha riklañ a-benn tresañ ur reizhkorn (klik dehou evit ul liv "
+"eivedel). Mirout Pennlizh. pouezet da zestrizhañ ouzh tresañ ur c'harrez."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -331,10 +335,10 @@ msgstr "Elipsenn"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un elipsenn (klik dehou evit ul liv "
-"eilvedel). Pouezañ war Pennlizh. da dresañ ur c'helc'h."
+"Klikañ ha riklañ a-benn tresañ un elipsenn (klik dehou evit ul liv eivedel). "
+"Mirout Pennlizh. pouezet da zestrizhañ ouzh tresañ ur c'helc'h."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -343,10 +347,10 @@ msgstr "Reizhkorn rontaet"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"Klikañ ha riklañ evit tresañ ur reizhkorn gant kornioù ront (klikañ a-zehou "
-"evit al liv eilel). Mirout Pennlizh. pouezet evit tresañ ur c'harrez."
+"Klikañ ha riklañ a-benn tresañ ur reizhkorn rontaet (klik dehou evit ul liv "
+"eivedel). Mirout Pennlizh. pouezet da zestrizhañ ouzh tresañ ur c'harrez."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -491,15 +495,15 @@ msgstr "Diuzañ dre an elipsenn"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un diuzad elipsennek. Pouezañ war Pennlizh. a-"
-"benn tresañ ur c'helc'h."
+"Klikañ ha riklañ a-benn tresañ un diuzad elipsennek. Mirout Pennlizh. "
+"pouezet da zestrizhañ ouzh tresañ ur c'helc'h."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr "Lakaat e-lec'h"
+msgstr "Amsaviñ"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
@@ -535,11 +539,11 @@ msgstr "Diuzañ dre ur reizhkorn"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Klikañ ha riklañ a-benn tresañ un diuzad reizhkornek. Pouezañ war Pennlizh. "
-"a-benn tresañ ur c'harrez."
+"Klikañ ha riklañ a-benn tresañ un diuzad keizhkornek. Mirout Pennlizh. "
+"pouezet da zestrizhañ ouzh tresañ ur c'harrez."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -620,7 +624,7 @@ msgstr "Digeriñ ur skeudenn"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr "Aotre nac'het"
+msgstr "Nac'het eo bet an aotre"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -1366,8 +1370,8 @@ msgid "Layers"
 msgstr "Treuzfollennoù"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "Teulioù"
+msgid "Canvas"
+msgstr "Steuenn"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2133,3 +2137,7 @@ msgstr "Araokadur"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(pourchaset gant{0})"
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
+msgstr "Skrid - Peurechuiñ"

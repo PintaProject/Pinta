@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-07-12 12:01+0000\n"
-"Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
+"PO-Revision-Date: 2013-02-18 06:14+0000\n"
+"Last-Translator: xDev <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2012-11-18 05:32+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -35,27 +35,33 @@ msgstr "اختر اللّون الأساسيّ"
 msgid "Choose Secondary Color"
 msgstr "اختر اللّون الثّانويّ"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:123
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
 msgstr "اختر لون لوحة الألوان"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:219
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
+msgstr "انقر للتبديل بين اللون الأولي واللون الثانوي"
+
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
+msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:221
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "انقر لاختيار اللون الأولي"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:223
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "انقر لاختيار اللون الثانوي"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:225
+#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"انقر باليسار لاختيار اللون الأولي، أو باليمين لاختيار اللون الثانوي، أو بزر "
+"الفأرة الأوسط لاختيار لون من لوح الألوان."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -115,6 +121,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"انقر باليسار لرسم شكل حر بخط عرضه بكسل واحد ولونه اللون الأولي، أو باليمين "
+"إذا أردت الرسم باللون الثانوي."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -183,23 +191,23 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr ""
+msgstr "بيكسل مفرد"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "منطقة بمساحة 3 × 3"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "منطقة بمساحة 5 × 5"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "منطقة بمساحة 7 × 7"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "منطقة بمساحة 9 × 9"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
 msgid "Layer"
@@ -207,7 +215,7 @@ msgstr "الطبقة"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr ""
+msgstr "صورة"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
@@ -232,10 +240,10 @@ msgstr "مستطيل"
 #: Pinta.Tools/Tools/RectangleTool.cs:43
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
-"shift to constrain to a square."
+"Shift to constrain to a square."
 msgstr ""
-"انقر واسحب لرسم مستطيل (أو انقر بالزّرّ الأيمن للفأرة لرسمه باللّون "
-"الثّانويّ). اضغط مطولا على زرّ Shift أثناء السحب لرسم مربّع."
+"انقر واسحب لرسم مستطيل (باليمين لاستخدام اللون الثانوي). اضغط ضغطة مستمرة "
+"على زر Shift لرسم مربع."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -268,6 +276,8 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"انقر فوق التحديد باليسار واسحبه لنقل حدوده، أو انقر فوقه باليمين واسحبه "
+"لتدويره."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -281,6 +291,8 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"انقر فوق التحديد باليسار واسحبه لنقل محتواه، أو انقر فوقه باليمين واسحبه "
+"لتدوير محتواه."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -321,10 +333,10 @@ msgstr "إهليج"
 #: Pinta.Tools/Tools/EllipseTool.cs:43
 msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
-"shift to constrain to a circle."
+"Shift to constrain to a circle."
 msgstr ""
-"انقر واسحب لرسم شكل بيضاوي (استخدم الزر الأيمن للرسم باللون الثانوي). اضغط "
-"مطولا على Shift لرسم دائرة."
+"انقر واسحب لرسم شكل بيضوي (باليمين لاستخدام اللون الثانوي). اضغط ضغطة مستمرة "
+"على زر Shift لرسم دائرة."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -333,10 +345,10 @@ msgstr "مستطيل مستدير الزوايا"
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
 msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold shift to constrain to a square."
+"color). Hold Shift to constrain to a square."
 msgstr ""
-"انقر واسحب لرسم مستطيل مستدير الزوايا (استخدم الزر الأيمن للرسم باللون "
-"الثانوي). اضغط مطولا على Shift لرسم مربع."
+"انقر واسحب لرسم مستطيل مدوّر الحوافّ (باليمين لاستخدام اللون الثانوي). اضغط "
+"ضغطة مستمرة على زر Shift لرسم مربّع."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -481,13 +493,14 @@ msgstr "تحديد بيضاوي"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
-"Click and drag to draw an elliptical selection. Hold shift to constrain to a "
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
-msgstr "انقر واسحب لرسم تحديد بيضاوي. اضغط على Shift أثناء السحب لرسم دائرة."
+msgstr ""
+"انقر واسحب لرسم تحديد بيضوي. اضغط ضغطة مستمرة على Shift لرسم تحديد دائري."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "استبدل"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
@@ -507,7 +520,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " وضع التحديد: "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -523,9 +536,9 @@ msgstr "تحديد مستطيل"
 
 #: Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
-"Click and drag to draw a rectangular selection. Hold shift to constrain to a "
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
-msgstr "انقر واسحب لرسم تحديد مستطيل. اضغط على shift أثناء السحب لرسم مربع."
+msgstr ""
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -606,7 +619,7 @@ msgstr "افتح صورة"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "رُفض التّصريح"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -616,7 +629,7 @@ msgstr "لم يستطع فتح الملف: {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "لا أداة مُحدَّدة"
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -645,7 +658,7 @@ msgstr "انسخ"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "انسخ ما دُمج"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
@@ -950,11 +963,11 @@ msgstr "عنْ"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "تكرار"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
-msgstr ""
+msgstr "جمعي"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
@@ -966,7 +979,7 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "انعكاس"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -975,11 +988,11 @@ msgstr "توهّج"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "كسو"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "طرح"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
@@ -987,15 +1000,15 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "تخفيف"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "تقتيم"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "شاشة"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
@@ -1352,8 +1365,8 @@ msgid "Layers"
 msgstr "الطبقات"
 
 #: Pinta/Pads/CanvasPad.cs:75
-msgid "Documents"
-msgstr "المستندات"
+msgid "Canvas"
+msgstr ""
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2113,4 +2126,8 @@ msgstr ""
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
+msgstr ""
+
+#: Pinta.Tools/Tools/TextTool.cs:75
+msgid "Text - Finalize"
 msgstr ""
