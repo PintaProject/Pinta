@@ -147,7 +147,9 @@ namespace Pinta.Tools
 		{
 			base.OnDeactivated ();
 
-			PintaCore.Workspace.ActiveDocument.FinishSelection (null);
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				PintaCore.Workspace.ActiveDocument.FinishSelection (null);
+			}
 		}
 	}
 }
