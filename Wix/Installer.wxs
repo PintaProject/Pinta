@@ -11,6 +11,9 @@
     <util:RegistrySearch Variable="GTKSHARPVERSION" Id="gsversion" Root="HKLM" Key="SOFTWARE\Xamarin\GtkSharp\Version" Result="value" Format="raw" />
     
     <Variable Name="InstallFolder" Type="string" Value="[ProgramFilesFolder]Pinta" />
+    
+    <!-- Allows Pinta to be launched after installation completes. -->
+    <Variable Name="LaunchTarget" Value="[InstallFolder]\Pinta.exe"/>
 
     <Chain>
       <!-- Ensure .Net 4.0 is installed. -->
@@ -19,7 +22,7 @@
       <!-- Wix needs a local copy of the msi when building, but setting Compressed to No ensures that it's not bundled with the installer. -->
       <!-- Set Permanent=Yes to prevent GTK# from being uninstalled when Pinta is uninstalled. -->
       <MsiPackage Id="GtkSharpSetup" SourceFile="gtk-sharp-2.12.20.msi" Compressed="no" ForcePerMachine="yes" Visible="yes" Vital="yes" Cache="yes"
-                  InstallCondition="NOT(GTKSHARPVERSION &gt;= &quot;2.12.20&quot;)" Permanent="yes"
+                  InstallCondition="NOT(GTKSHARPVERSION &gt;= &quot;2.12.20&quot;)" Permanent="yes" DisplayInternalUI="yes"
                   DownloadUrl="http://download.xamarin.com/Installer/gtk-sharp-2.12.20.msi" />
       <!-- Install the Pinta msi. -->
       <MsiPackage SourceFile="$(var.PintaWix.TargetPath)" Id="PintaSetup" Vital="yes" ForcePerMachine="yes">
