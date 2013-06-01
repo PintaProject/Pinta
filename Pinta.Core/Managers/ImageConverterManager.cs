@@ -98,6 +98,10 @@ namespace Pinta.Core
 			formats.RemoveAll (f => f.Extensions.Contains (extension));			
 		}
 
+		/// <summary>
+		/// Returns the default format that should be used when saving a file.
+		/// This is normally the last format that was chosen by the user.
+		/// </summary>
 		public FormatDescriptor GetDefaultSaveFormat ()
 		{
 			string extension = PintaCore.Settings.GetSetting<string> ("default-image-type", "jpeg");
@@ -117,29 +121,20 @@ namespace Pinta.Core
 			throw new InvalidOperationException ("There are no image formats supported.");
 		}
 
-		public IImageExporter GetExporterByExtension (string extension)
-		{
-			FormatDescriptor format = GetFormatByExtension (extension);
-
-			if (format == null)
-				return null;
-
-			return format.Exporter;
-		}
-
+		/// <summary>
+		/// Finds the correct exporter to use for opening the given file, or null
+		/// if no exporter exists for the file.
+		/// </summary>
 		public IImageExporter GetExporterByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
 			return GetExporterByExtension (extension);
 		}
 
-		public FormatDescriptor GetFormatByExtension (string extension)
-		{
-			extension = NormalizeExtension (extension);
-
-			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
-		}
-
+		/// <summary>
+		/// Finds the file format for the given file name, or null
+		/// if no file format exists for that file.
+		/// </summary>
 		public FormatDescriptor GetFormatByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
@@ -149,16 +144,10 @@ namespace Pinta.Core
 			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
 		}
 
-		public IImageImporter GetImporterByExtension (string extension)
-		{
-			FormatDescriptor format = GetFormatByExtension (extension);
-
-			if (format == null)
-				return null;
-
-			return format.Importer;
-		}
-
+		/// <summary>
+		/// Finds the correct importer to use for opening the given file, or null
+		/// if no importer exists for the file.
+		/// </summary>
 		public IImageImporter GetImporterByFile (string file)
 		{
 			string extension = Path.GetExtension (file);
@@ -170,12 +159,54 @@ namespace Pinta.Core
 			}
 		}
 
+		/// <summary>
+		/// Sets the default format used when saving files to the given extension.
+		/// </summary>
 		public void SetDefaultFormat (string extension)
 		{
 			extension = NormalizeExtension (extension);
 
 			PintaCore.Settings.PutSetting ("default-image-type", extension);
 			PintaCore.Settings.SaveSettings ();
+		}
+
+		/// <summary>
+		/// Finds the correct exporter to use for the given file extension, or null
+		/// if no exporter exists for that extension.
+		/// </summary>
+		private IImageExporter GetExporterByExtension (string extension)
+		{
+			FormatDescriptor format = GetFormatByExtension (extension);
+
+			if (format == null)
+				return null;
+
+			return format.Exporter;
+		}
+
+		/// <summary>
+		/// Finds the correct importer to use for the given file extension, or null
+		/// if no importer exists for that extension.
+		/// </summary>
+		private IImageImporter GetImporterByExtension (string extension)
+		{
+			FormatDescriptor format = GetFormatByExtension (extension);
+
+			if (format == null)
+				return null;
+
+			return format.Importer;
+		}
+
+		/// <summary>
+		/// Finds the file format for the given file extension, or null
+		/// if no file format exists for that extension.
+		/// </summary>
+		private FormatDescriptor GetFormatByExtension (string extension)
+		{
+			extension = NormalizeExtension (extension);
+
+			return Formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
 		}
 
 		/// <summary>
