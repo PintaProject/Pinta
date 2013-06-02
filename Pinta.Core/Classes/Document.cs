@@ -771,7 +771,11 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			// Don't dispose this, as we're going to give it to the history
-			Gdk.Pixbuf cbImage = cb.WaitForImage ();
+			Gdk.Pixbuf cbImage = null;
+
+			if (cb.WaitIsImageAvailable ()) {
+				cbImage = cb.WaitForImage ();
+			}
 
 			if (cbImage == null)
 			{

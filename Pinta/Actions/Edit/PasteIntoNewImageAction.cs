@@ -49,18 +49,20 @@ namespace Pinta.Actions
 		{
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 
-			using (Gdk.Pixbuf image = cb.WaitForImage ()) {
-				if (image != null) {
-					Gdk.Size size = new Gdk.Size (image.Width, image.Height);
+			if (cb.WaitIsImageAvailable ()) {
+				using (Gdk.Pixbuf image = cb.WaitForImage ()) {
+					if (image != null) {
+						Gdk.Size size = new Gdk.Size (image.Width, image.Height);
 
-					PintaCore.Workspace.NewDocument (size, true);
-					PintaCore.Actions.Edit.Paste.Activate ();
-					PintaCore.Actions.Edit.Deselect.Activate ();
-				}
-				else {
-					Pinta.Core.Document.ShowClipboardEmptyDialog ();
+						PintaCore.Workspace.NewDocument (size, true);
+						PintaCore.Actions.Edit.Paste.Activate ();
+						PintaCore.Actions.Edit.Deselect.Activate ();
+						return;
+					}
 				}
 			}
+
+			Pinta.Core.Document.ShowClipboardEmptyDialog ();
 		}
 	}
 }
