@@ -1040,7 +1040,7 @@ namespace Pinta.Tools
 
 			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
 			PintaCore.Workspace.Invalidate(old_cursor_bounds);
-			PintaCore.Workspace.Invalidate(r);
+			InflateAndInvalidate (r);
 			PintaCore.Workspace.Invalidate(cursorBounds);
 
 			old_cursor_bounds = cursorBounds;
@@ -1108,7 +1108,7 @@ namespace Pinta.Tools
 			//Create a new instance to preserve the passed Rectangle.
 			Rectangle r = new Rectangle(passedRectangle.Location, passedRectangle.Size);
 
-			r.Inflate(1, 1);
+			r.Inflate(2, 2);
 			PintaCore.Workspace.Invalidate(r);
 		}
 		#endregion
