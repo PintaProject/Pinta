@@ -40,6 +40,11 @@ namespace Pinta.Gui.Widgets
 	{
 		private TreeView tree;
 		private TreeStore store;
+
+		// For the active layer, we also draw the selection layer on top of it,
+		// so we can't directly use that layer's surface.
+		private Cairo.ImageSurface active_layer_surface;
+		private CanvasRenderer canvas_renderer = new CanvasRenderer (false);
 				
 		private const int store_index_thumbnail = 0;
 		private const int store_index_name = 1;
@@ -194,11 +199,34 @@ namespace Pinta.Gui.Widgets
 		{
 			store.Clear ();
 
+			if (active_layer_surface != null) {
+				active_layer_surface.Dispose ();
+				active_layer_surface = null;
+			}
+
 			if (!PintaCore.Workspace.HasOpenDocuments)
 				return;
+
+			var doc = PintaCore.Workspace.ActiveDocument;
 				
-			foreach (var layer in (PintaCore.Workspace.ActiveDocument.UserLayers as IEnumerable<Layer>).Reverse ())
-				store.AppendValues (layer.Surface, layer.Name, !layer.Hidden, layer);
+			foreach (var layer in (doc.UserLayers as IEnumerable<Layer>).Reverse ()) {
+				var surf = layer.Surface;
+
+				// Draw the selection layer on top of the active layer.
+				if (layer == doc.CurrentUserLayer && doc.ShowSelectionLayer) {
+					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width,
+					                                               thumbnail_height);
+					canvas_renderer.Initialize (doc.ImageSize,
+					                            new Gdk.Size (thumbnail_width, thumbnail_height));
+
+					var layers = new List<Layer> { layer, doc.SelectionLayer };
+					canvas_renderer.Render (layers, active_layer_surface, Gdk.Point.Zero);
+
+					surf = active_layer_surface;
+				}
+
+				store.AppendValues (surf, layer.Name, !layer.Hidden, layer);
+			}
 						
 			SelectLayerInTreeView (PintaCore.Layers.Count - PintaCore.Layers.CurrentLayerIndex - 1);
 		}

@@ -97,7 +97,7 @@ namespace Pinta.Core
 
 		public void FinishSelection ()
 		{
-			PintaCore.Workspace.ActiveDocument.FinishSelection (null);
+			PintaCore.Workspace.ActiveDocument.FinishSelection ();
 		}
 		
 		// Adds a new layer above the current one
