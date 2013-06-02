@@ -128,7 +128,7 @@ namespace Pinta.Core
 		public void Invalidate (Gdk.Rectangle canvasRect)
 		{
 			Cairo.PointD canvasTopLeft = new Cairo.PointD(canvasRect.Left, canvasRect.Top);
-			Cairo.PointD canvasBtmRight = new Cairo.PointD(canvasRect.Right, canvasRect.Bottom);
+			Cairo.PointD canvasBtmRight = new Cairo.PointD(canvasRect.Right + 1, canvasRect.Bottom + 1);
 
 			Cairo.PointD winTopLeft = CanvasPointToWindow(canvasTopLeft.X, canvasTopLeft.Y);
 			Cairo.PointD winBtmRight = CanvasPointToWindow(canvasBtmRight.X, canvasBtmRight.Y);
@@ -184,8 +184,9 @@ namespace Pinta.Core
 		/// </param>
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
-			ScaleFactor sf = new ScaleFactor(PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.CanvasSize.Width);
-			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD(x - Offset.X, y - Offset.Y));
+			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
+			                                  PintaCore.Workspace.CanvasSize.Width);
+			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD (x - Offset.X, y - Offset.Y));
 			return new Cairo.PointD((int)pt.X, (int)pt.Y);
 		}
 
@@ -200,9 +201,10 @@ namespace Pinta.Core
 		/// </param>
 		public Cairo.PointD CanvasPointToWindow (double x, double y)
 		{
-			ScaleFactor sf = new ScaleFactor(PintaCore.Workspace.ImageSize.Width, PintaCore.Workspace.CanvasSize.Width);
-			Cairo.PointD pt = sf.UnscalePoint (new Cairo.PointD(x, y));
-			return new Cairo.PointD((int)(pt.X + Offset.X), (int)(pt.Y + Offset.Y));
+			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
+			                                  PintaCore.Workspace.CanvasSize.Width);
+			Cairo.PointD pt = sf.UnscalePoint (new Cairo.PointD (x, y));
+			return new Cairo.PointD(pt.X + Offset.X, pt.Y + Offset.Y);
 		}
 
 		public void ZoomIn ()
