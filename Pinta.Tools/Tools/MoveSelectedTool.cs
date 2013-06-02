@@ -67,11 +67,14 @@ namespace Pinta.Tools
 			base.OnStartTransform ();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			// If there is no selection, select the whole image.
+			if (doc.Selection.SelectionPolygons.Count == 0) {
+				doc.Selection.CreateRectangleSelection (
+					doc.SelectionLayer.Surface, new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
+			}
+
 			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
-
-			if (original_selection.Count == 0)
-				throw new InvalidOperationException ("Cannot move a selection that has no selection polygons");
-
 			original_transform.InitMatrix (doc.SelectionLayer.Transform);
 
 			hist = new MovePixelsHistoryItem (Icon, Name, doc);
