@@ -109,7 +109,7 @@ namespace Pinta.Tools
 
 			ImageSurface surf = doc.CurrentUserLayer.Surface;
 			
-			if (first_pixel) {
+			if (first_pixel && doc.Workspace.PointInCanvas (point)) {
 				// Does Cairo really not support a single-pixel-long single-pixel-wide line?
 				surf.Flush ();
 				int shiftedX = (int)point.X;
@@ -141,11 +141,7 @@ namespace Pinta.Tools
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
 
-			if (doc.Workspace.IsPartiallyOffscreen (r)) {
-				doc.Workspace.Invalidate ();
-			} else {
-				doc.Workspace.Invalidate (doc.ClampToImageSize (r));
-			}
+			doc.Workspace.Invalidate (doc.ClampToImageSize (r));
 			
 			last_point = new Point (x, y);
 		}
