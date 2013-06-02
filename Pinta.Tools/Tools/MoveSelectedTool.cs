@@ -68,6 +68,10 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
+
+			if (original_selection.Count == 0)
+				throw new InvalidOperationException ("Cannot move a selection that has no selection polygons");
+
 			original_transform.InitMatrix (doc.SelectionLayer.Transform);
 
 			hist = new MovePixelsHistoryItem (Icon, Name, doc);

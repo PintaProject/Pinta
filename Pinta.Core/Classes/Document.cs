@@ -774,8 +774,6 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Path p;
-
 			// Don't dispose this, as we're going to give it to the history
 			Gdk.Pixbuf cbImage = cb.WaitForImage ();
 
@@ -825,9 +823,7 @@ namespace Pinta.Core
 			
 			using (Cairo.Context g = new Cairo.Context (SelectionLayer.Surface))
 			{
-
 				g.DrawPixbuf (cbImage, new Cairo.Point (0, 0));
-				p = g.CreateRectanglePath (new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
 			}
 
 			SelectionLayer.Transform.InitIdentity();
@@ -837,9 +833,9 @@ namespace Pinta.Core
 			
 			DocumentSelection old_selection = Selection.Clone();
 			bool old_show_selection = ShowSelection;
-			
-			Selection.SelectionPath = p;
-			Selection.SelectionPolygons.Clear();
+
+			Selection.CreateRectangleSelection (SelectionLayer.Surface,
+			                                    new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
 			ShowSelection = true;
 
 			paste_action.Push (new PasteHistoryItem (cbImage, old_selection, old_show_selection));
