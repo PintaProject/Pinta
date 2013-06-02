@@ -90,46 +90,7 @@ namespace Pinta
 			PintaCore.Actions.Window.RemoveDocument (e.Document);
 
 			if (!PintaCore.Workspace.HasOpenDocuments) {
-				PintaCore.Actions.File.Close.Sensitive = false;
-				PintaCore.Actions.File.Save.Sensitive = false;
-				PintaCore.Actions.File.SaveAs.Sensitive = false;
-				PintaCore.Actions.File.Print.Sensitive = false;
-				PintaCore.Actions.Edit.Copy.Sensitive = false;
-				PintaCore.Actions.Edit.CopyMerged.Sensitive = false;
-				PintaCore.Actions.Edit.Cut.Sensitive = false;
-				PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = false;
-				PintaCore.Actions.Edit.SelectAll.Sensitive = false;
-
-				PintaCore.Actions.View.ActualSize.Sensitive = false;
-				PintaCore.Actions.View.ZoomIn.Sensitive = false;
-				PintaCore.Actions.View.ZoomOut.Sensitive = false;
-				PintaCore.Actions.View.ZoomToSelection.Sensitive = false;
-				PintaCore.Actions.View.ZoomToWindow.Sensitive = false;
-				PintaCore.Actions.View.ZoomComboBox.Sensitive = false;
-
-				PintaCore.Actions.Image.CropToSelection.Sensitive = false;
-				PintaCore.Actions.Image.AutoCrop.Sensitive = false;
-				PintaCore.Actions.Image.CanvasSize.Sensitive = false;
-				PintaCore.Actions.Image.Resize.Sensitive = false;
-				PintaCore.Actions.Image.FlipHorizontal.Sensitive = false;
-				PintaCore.Actions.Image.FlipVertical.Sensitive = false;
-				PintaCore.Actions.Image.Rotate180.Sensitive = false;
-				PintaCore.Actions.Image.RotateCCW.Sensitive = false;
-				PintaCore.Actions.Image.RotateCW.Sensitive = false;
-
-				PintaCore.Actions.Layers.AddNewLayer.Sensitive = false;
-				PintaCore.Actions.Layers.DuplicateLayer.Sensitive = false;
-				PintaCore.Actions.Layers.FlipHorizontal.Sensitive = false;
-				PintaCore.Actions.Layers.FlipVertical.Sensitive = false;
-				PintaCore.Actions.Layers.ImportFromFile.Sensitive = false;
-				PintaCore.Actions.Layers.Properties.Sensitive = false;
-				PintaCore.Actions.Layers.RotateZoom.Sensitive = false;
-
-				PintaCore.Actions.Adjustments.ToggleActionsSensitive (false);
-				PintaCore.Actions.Effects.ToggleActionsSensitive (false);
-
-				PintaCore.Actions.Window.SaveAll.Sensitive = false;
-				PintaCore.Actions.Window.CloseAll.Sensitive = false;
+				ToggleActions (false);
 			}
 		}
 
@@ -137,45 +98,55 @@ namespace Pinta
 		{
 			PintaCore.Actions.Window.AddDocument (e.Document);
 
-			PintaCore.Actions.File.Close.Sensitive = true;
-			PintaCore.Actions.File.Save.Sensitive = true;
-			PintaCore.Actions.File.SaveAs.Sensitive = true;
-			PintaCore.Actions.File.Print.Sensitive = true;
-			PintaCore.Actions.Edit.Copy.Sensitive = true;
-			PintaCore.Actions.Edit.CopyMerged.Sensitive = true;
-			PintaCore.Actions.Edit.Cut.Sensitive = true;
-			PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = true;
-			PintaCore.Actions.Edit.SelectAll.Sensitive = true;
+			ToggleActions (true);
+		}
 
-			PintaCore.Actions.View.ActualSize.Sensitive = true;
-			PintaCore.Actions.View.ZoomIn.Sensitive = true;
-			PintaCore.Actions.View.ZoomOut.Sensitive = true;
-			PintaCore.Actions.View.ZoomToSelection.Sensitive = true;
-			PintaCore.Actions.View.ZoomToWindow.Sensitive = true;
-			PintaCore.Actions.View.ZoomComboBox.Sensitive = true;
+		private static void ToggleActions (bool enable)
+		{
+			PintaCore.Actions.File.Close.Sensitive = enable;
+			PintaCore.Actions.File.Save.Sensitive = enable;
+			PintaCore.Actions.File.SaveAs.Sensitive = enable;
+			PintaCore.Actions.File.Print.Sensitive = enable;
+			PintaCore.Actions.Edit.Copy.Sensitive = enable;
+			PintaCore.Actions.Edit.CopyMerged.Sensitive = enable;
+			PintaCore.Actions.Edit.Cut.Sensitive = enable;
+			PintaCore.Actions.Edit.PasteIntoNewLayer.Sensitive = enable;
+			PintaCore.Actions.Edit.EraseSelection.Sensitive = enable;
+			PintaCore.Actions.Edit.FillSelection.Sensitive = enable;
+			PintaCore.Actions.Edit.InvertSelection.Sensitive = enable;
+			PintaCore.Actions.Edit.SelectAll.Sensitive = enable;
+			PintaCore.Actions.Edit.Deselect.Sensitive = enable;
 
-			PintaCore.Actions.Image.AutoCrop.Sensitive = true;
-			PintaCore.Actions.Image.CanvasSize.Sensitive = true;
-			PintaCore.Actions.Image.Resize.Sensitive = true;
-			PintaCore.Actions.Image.FlipHorizontal.Sensitive = true;
-			PintaCore.Actions.Image.FlipVertical.Sensitive = true;
-			PintaCore.Actions.Image.Rotate180.Sensitive = true;
-			PintaCore.Actions.Image.RotateCCW.Sensitive = true;
-			PintaCore.Actions.Image.RotateCW.Sensitive = true;
+			PintaCore.Actions.View.ActualSize.Sensitive = enable;
+			PintaCore.Actions.View.ZoomIn.Sensitive = enable;
+			PintaCore.Actions.View.ZoomOut.Sensitive = enable;
+			PintaCore.Actions.View.ZoomToSelection.Sensitive = enable;
+			PintaCore.Actions.View.ZoomToWindow.Sensitive = enable;
+			PintaCore.Actions.View.ZoomComboBox.Sensitive = enable;
 
-			PintaCore.Actions.Layers.AddNewLayer.Sensitive = true;
-			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = true;
-			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = true;
-			PintaCore.Actions.Layers.FlipVertical.Sensitive = true;
-			PintaCore.Actions.Layers.ImportFromFile.Sensitive = true;
-			PintaCore.Actions.Layers.Properties.Sensitive = true;
-			PintaCore.Actions.Layers.RotateZoom.Sensitive = true;
+			PintaCore.Actions.Image.CropToSelection.Sensitive = enable;
+			PintaCore.Actions.Image.AutoCrop.Sensitive = enable;
+			PintaCore.Actions.Image.CanvasSize.Sensitive = enable;
+			PintaCore.Actions.Image.Resize.Sensitive = enable;
+			PintaCore.Actions.Image.FlipHorizontal.Sensitive = enable;
+			PintaCore.Actions.Image.FlipVertical.Sensitive = enable;
+			PintaCore.Actions.Image.Rotate180.Sensitive = enable;
+			PintaCore.Actions.Image.RotateCCW.Sensitive = enable;
+			PintaCore.Actions.Image.RotateCW.Sensitive = enable;
 
-			PintaCore.Actions.Adjustments.ToggleActionsSensitive (true);
-			PintaCore.Actions.Effects.ToggleActionsSensitive (true);
+			PintaCore.Actions.Layers.AddNewLayer.Sensitive = enable;
+			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = enable;
+			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = enable;
+			PintaCore.Actions.Layers.FlipVertical.Sensitive = enable;
+			PintaCore.Actions.Layers.ImportFromFile.Sensitive = enable;
+			PintaCore.Actions.Layers.Properties.Sensitive = enable;
+			PintaCore.Actions.Layers.RotateZoom.Sensitive = enable;
 
-			PintaCore.Actions.Window.SaveAll.Sensitive = true;
-			PintaCore.Actions.Window.CloseAll.Sensitive = true;
+			PintaCore.Actions.Adjustments.ToggleActionsSensitive (enable);
+			PintaCore.Actions.Effects.ToggleActionsSensitive (enable);
+
+			PintaCore.Actions.Window.SaveAll.Sensitive = enable;
+			PintaCore.Actions.Window.CloseAll.Sensitive = enable;
 		}
 	}
 }
