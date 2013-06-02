@@ -124,7 +124,7 @@ namespace Pinta.Effects
 									break;
 								
 								case WarpEdgeBehavior.Original:
-									sample = src.GetColorBgra (x, y);
+									sample = src.GetColorBgraUnchecked (x, y);
 									break;
 								default:
 									

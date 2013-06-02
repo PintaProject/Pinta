@@ -144,8 +144,8 @@ namespace Pinta.Tools
 					if (stencil[i, j])
 						continue;
 						
-					if (IsColorInTolerance (new_color, surf.GetColorBgra (surf_data_ptr, surf_width, i, j)))
-						*tmp_layer.GetPointAddressUnchecked (tmp_data_ptr, tmp_width, i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgra (surf_data_ptr, surf_width, i, j));
+					if (IsColorInTolerance (new_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j)))
+						*tmp_layer.GetPointAddressUnchecked (tmp_data_ptr, tmp_width, i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j));
 
 					stencil[i, j] = true;
 				}

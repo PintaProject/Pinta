@@ -478,7 +478,7 @@ namespace Pinta.Core
 			foreach (var layer in GetLayersToPaint ()) {
 				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
 
-				pixel = blend_op.Apply (pixel, layer.Surface.GetColorBgra (x, y));
+				pixel = blend_op.Apply (pixel, layer.Surface.GetColorBgraUnchecked (x, y));
 			}
 
 			return pixel;

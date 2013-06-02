@@ -132,7 +132,7 @@ namespace Pinta.Tools
 				if (IsContinguousMode)
 					FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
 				else
-					FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
+					FillStencilByColor (surface, stencilBuffer, surface.GetColorBgraUnchecked (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 
 				OnFillRegionComputed (stencilBuffer);
 
@@ -171,7 +171,7 @@ namespace Pinta.Tools
 		public unsafe static void FillStencilFromPoint (ImageSurface surface, IBitVector2D stencil, Point start, int tolerance, 
 		                                                out Rectangle boundingBox, Gdk.Region limitRegion, bool limitToSelection)
 		{
-			ColorBgra cmp = surface.GetColorBgra (start.X, start.Y);
+			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;

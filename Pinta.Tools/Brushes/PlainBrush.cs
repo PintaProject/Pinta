@@ -44,10 +44,11 @@ namespace Pinta.Tools.Brushes
 		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
 		{
 			// Cairo does not support a single-pixel-long single-pixel-wide line
-			if (x == lastX && y == lastY && G.LineWidth == 1) {
+			if (x == lastX && y == lastY && G.LineWidth == 1 &&
+			    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD(x,y))) {
 				Surface.Flush ();
 
-				ColorBgra source = Surface.GetColorBgra (x, y);
+				ColorBgra source = Surface.GetColorBgraUnchecked (x, y);
 				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, StrokeColor.ToColorBgra ());
 				Surface.SetColorBgra (source, x, y);
 				Surface.MarkDirty ();

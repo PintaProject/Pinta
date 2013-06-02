@@ -734,7 +734,7 @@ namespace Pinta.Core
 			dstPtr->A = (byte)(color.A * 255);
 		}
 
-		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, int x, int y)
+		public unsafe static ColorBgra GetColorBgraUnchecked (this Cairo.ImageSurface surf, int x, int y)
 		{
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
@@ -745,6 +745,9 @@ namespace Pinta.Core
 
 		public unsafe static void SetColorBgra (this Cairo.ImageSurface surf, ColorBgra color, int x, int y)
 		{
+			if (x > surf.Width || y > surf.Height)
+				throw new ArgumentOutOfRangeException ("Invalid canvas coordinates");
+
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 
 			dstPtr += (x) + (y * surf.Width);
@@ -752,7 +755,11 @@ namespace Pinta.Core
 			*dstPtr = color;
 		}
 
-		public unsafe static void SetColorBgra (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, ColorBgra color, int x, int y)
+		/// <summary>
+		/// For performance reasons, this method does not check that the x and y coordinates are
+		/// within the bounds of the image.
+		/// </summary>
+		public unsafe static void SetColorBgraUnchecked (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, ColorBgra color, int x, int y)
 		{
 			ColorBgra* dstPtr = surfDataPtr;
 
@@ -761,7 +768,7 @@ namespace Pinta.Core
 			*dstPtr = color;
 		}
 
-		public unsafe static ColorBgra GetColorBgra (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
+		public unsafe static ColorBgra GetColorBgraUnchecked (this Cairo.ImageSurface surf, ColorBgra* surfDataPtr, int surfWidth, int x, int y)
 		{
 			ColorBgra* dstPtr = surfDataPtr;
 
@@ -845,10 +852,10 @@ namespace Pinta.Core
 
 			for (int x = 0; x < width; x++)
 				for (int y = 0; y < surf.Height; y++) {
-					int a = (int)surf.GetColorBgra (ptr, width, x, y).A;
+					int a = (int)surf.GetColorBgraUnchecked (ptr, width, x, y).A;
 
 					if (a > 0 && a < 255) {
-						Console.WriteLine (surf.GetColorBgra (ptr, width, x, y).ToString ());
+						Console.WriteLine (surf.GetColorBgraUnchecked (ptr, width, x, y).ToString ());
 						ret = true;
 					}
 				}

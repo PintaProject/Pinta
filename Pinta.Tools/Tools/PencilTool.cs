@@ -114,7 +114,7 @@ namespace Pinta.Tools
 				surf.Flush ();
 				int shiftedX = (int)point.X;
 				int shiftedY = (int)point.Y;
-				ColorBgra source = surf.GetColorBgra (shiftedX, shiftedY);
+				ColorBgra source = surf.GetColorBgraUnchecked (shiftedX, shiftedY);
 				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, tool_color.ToColorBgra ());
 				surf.SetColorBgra (source, shiftedX, shiftedY);
 				surf.MarkDirty ();

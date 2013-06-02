@@ -88,7 +88,7 @@ namespace Pinta.Tools
 				int stencil_width = stencil.Width;
 				for (int x = 0; x < stencil_width; ++x) {
 					if (stencil.GetUnchecked (x, y)) {
-						surf.SetColorBgra (dstPtr, width, color, x, y);
+						surf.SetColorBgraUnchecked (dstPtr, width, color, x, y);
 					}
 				}
 			});
