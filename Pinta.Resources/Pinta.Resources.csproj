@@ -116,6 +116,9 @@
     <EmbeddedResource Include="Resources\Cursor.RoundedRectangle.png">
       <LogicalName>Cursor.RoundedRectangle.png</LogicalName>
     </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.Ellipse.png">
+      <LogicalName>Cursor.Ellipse.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.FreeformShape.png">
       <LogicalName>Cursor.FreeformShape.png</LogicalName>
     </EmbeddedResource>

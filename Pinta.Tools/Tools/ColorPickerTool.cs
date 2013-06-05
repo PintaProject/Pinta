@@ -73,7 +73,7 @@ namespace Pinta.Tools
 			get {
 				int iconOffsetX, iconOffsetY;
 				var icon = CreateIconWithShape ("Cursor.ColorPicker.png",
-				                                CursorShape.Rectangle, SampleSize, 1, 16,
+				                                CursorShape.Rectangle, SampleSize, 7, 27,
 				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}
