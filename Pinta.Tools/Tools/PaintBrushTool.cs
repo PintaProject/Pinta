@@ -44,8 +44,8 @@ namespace Pinta.Tools
 		public override Gdk.Cursor DefaultCursor {
 			get {
 				int iconOffsetX, iconOffsetY;
-				var icon = CreateIconWithShape ("Tools.Paintbrush.png",
-				                                CursorShape.Ellipse, BrushWidth, 0, 16,
+				var icon = CreateIconWithShape ("Cursor.Paintbrush.png",
+				                                CursorShape.Ellipse, BrushWidth, 8, 24,
 				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}
