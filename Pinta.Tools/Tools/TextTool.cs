@@ -85,13 +85,13 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
 		}
 
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Cursor.Text.png"), 8, 0);	} }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Cursor.Text.png"), 16, 8);	} }
 		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 0); } }
 
 		#region Constructor
 		public TextTool ()
 		{
-			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
 		}
 
 		static TextTool ()
