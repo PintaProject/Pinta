@@ -46,7 +46,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 13, 13); }
+			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 21, 21); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.F; } }
 		public override int Priority { get { return 21; } }

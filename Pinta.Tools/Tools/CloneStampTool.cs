@@ -50,7 +50,7 @@ namespace Pinta.Tools
 			get {
 				int iconOffsetX, iconOffsetY;
 				var icon = CreateIconWithShape ("Cursor.CloneStamp.png",
-				                                CursorShape.Ellipse, BrushWidth, 6, 11,
+				                                CursorShape.Ellipse, BrushWidth, 16, 26,
 				                                out iconOffsetX, out iconOffsetY);
 				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
 			}
@@ -159,7 +159,7 @@ namespace Pinta.Tools
 			//note that this WONT work if user presses control key and THEN selects the tool!
 			if (args.Event.Key == Key.Control_L || args.Event.Key == Key.Control_R) {
 				Gdk.Pixbuf icon = PintaCore.Resources.GetIcon ("Cursor.CloneStampSetSource.png");
-				Gdk.Cursor setSourceCursor = new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, icon, 6, 11);
+				Gdk.Cursor setSourceCursor = new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, icon, 16, 26);
 				SetCursor(setSourceCursor);
 			}
 		}

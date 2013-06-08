@@ -52,7 +52,7 @@ namespace Pinta.Tools
 		public override string Name { get { return Catalog.GetString ("Freeform Shape"); } }
 		public override string Icon { get { return "Tools.FreeformShape.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.FreeformShape.png"), 6, 10); } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
 		public override int Priority { get { return 47; } }
 		#endregion
