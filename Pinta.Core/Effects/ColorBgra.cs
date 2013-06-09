@@ -190,20 +190,6 @@ namespace Pinta.Core
         }
 
         /// <summary>
-        /// Gets the equivalent GDI+ PixelFormat.
-        /// </summary>
-        /// <remarks>
-        /// This property always returns PixelFormat.Format32bppArgb.
-        /// </remarks>
-//        public static PixelFormat PixelFormat
-//        {
-//            get
-//            {
-//                return PixelFormat.Format32bppArgb;
-//            }
-//        }
-
-        /// <summary>
         /// Returns a new ColorBgra with the same color values but with a new alpha component value.
         /// </summary>
         public ColorBgra NewAlpha(byte newA)
@@ -327,21 +313,6 @@ namespace Pinta.Core
                 return (byte)x;
             }
         }
-        /// <summary>
-        /// Constructs a new ColorBgra instance from the values in the given Color instance.
-        /// </summary>
-//        public static ColorBgra FromColor(Color c)
-//        {
-//            return FromBgra(c.B, c.G, c.R, c.A);
-//        }
-
-        /// <summary>
-        /// Converts this ColorBgra instance to a Color instance.
-        /// </summary>
-//        public Color ToColor()
-//        {
-//            return Color.FromArgb(A, R, G, B);
-//        }
 
         /// <summary>
         /// Smoothly blends between two colors.
@@ -615,9 +586,6 @@ namespace Pinta.Core
 		/// <summary>
         /// Smoothly blends the given colors together, assuming equal weighting for each one.
         /// </summary>
-        /// <param name="colors"></param>
-        /// <param name="colorCount"></param>
-        /// <returns></returns>
         public unsafe static ColorBgra Blend(ColorBgra* colors, int count)
         {
             if (count < 0)

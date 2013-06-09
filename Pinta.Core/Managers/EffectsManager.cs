@@ -108,7 +108,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Unregister an effect with Pinta, causing it to be removed from the Effects menu.
 		/// </summary>
-		/// <param name="effect">The type of the effect to unregister</param>
+		/// <param name="effect_type">The type of the effect to unregister</param>
 		public void UnregisterInstanceOfEffect (System.Type effect_type)
 		{
 			foreach (BaseEffect effect in effects.Keys) {

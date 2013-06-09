@@ -484,7 +484,7 @@ namespace Pinta.Core
 		/// using the current stroke parameters.
 		/// 
 		/// The rectangle returned by Cairo.Context.StrokeExtents()
-		/// incorrectly specifies the X & Y coordinates of the
+		/// incorrectly specifies the X and Y coordinates of the
 		/// bottom-right corner of the Rectangle in the width and
 		/// height members. This method corrects the rectangle to
 		/// contain the width and height in the width and height members.
@@ -936,8 +936,9 @@ namespace Pinta.Core
 		/// edges moved out from the center by dy.  Edges are moved
 		/// inwards when dx or dy are negative.
 		/// </summary>
-		/// <param name="dx">Dist to move sides from center.</param>
-		/// <param name="dy">Dist to move top & botom from center.</param>
+		/// <param name="rect">The source rectangle.</param>
+		/// <param name="dx">Distance to move sides from center.</param>
+		/// <param name="dy">Distance to move top and bottom from center.</param>
 		/// <returns>The inflated (or deflated) rectangle.</returns>
 		public static Rectangle Inflate (this Rectangle rect, int dx, int dy)
 		{
@@ -947,6 +948,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Determines if the requested pixel coordinate is within bounds.
 		/// </summary>
+		/// <param name="surf">The image surface to check against.</param>
 		/// <param name="x">The x coordinate.</param>
 		/// <param name="y">The y coordinate.</param>
 		/// <returns>true if (x,y) is in bounds, false if it's not.</returns>

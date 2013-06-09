@@ -152,7 +152,6 @@ namespace Pinta.Core
 		/// <summary>
 		/// Update the image preview widget of a FileChooserDialog
 		/// </summary>
-		/// <param name="sender"></param>
 		private static void OnUpdateImagePreview (object sender, EventArgs e)
 		{
 			FileChooserDialog dialog = (FileChooserDialog)sender;

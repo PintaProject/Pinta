@@ -49,8 +49,11 @@ namespace Pinta.Core
 		/// <param name="text">The history item's title.</param>
 		/// <param name="passedTextSurface">The stored TextLayer surface.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
+		/// <param name="passedTextEngine">The text engine being used.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface, ImageSurface passedUserSurface, TextEngine passedTextEngine, UserLayer passedUserLayer) : base(icon, text)
+		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface,
+		                       ImageSurface passedUserSurface, TextEngine passedTextEngine,
+		                       UserLayer passedUserLayer) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
 

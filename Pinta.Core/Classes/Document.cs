@@ -613,6 +613,9 @@ namespace Pinta.Core
 		/// <summary>
 		/// Resizes the canvas.
 		/// </summary>
+		/// <param name="width">The new width of the canvas.</param>
+		/// <param name="height">The new height of the canvas.</param>
+		/// <param name="anchor">Direction in which to adjust the canvas</param>
 		/// <param name='compoundAction'>
 		/// Optionally, the history item for resizing the canvas can be added to
 		/// a CompoundHistoryItem if it is part of a larger action (e.g. pasting an image).

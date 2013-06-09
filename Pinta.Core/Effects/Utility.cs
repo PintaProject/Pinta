@@ -173,8 +173,10 @@ namespace Pinta.Core
 		/// Allows you to find the bounding box for a "region" that is described as an
 		/// array of bounding boxes.
 		/// </summary>
-		/// <param name="rectsF">The "region" you want to find a bounding box for.</param>
-		/// <returns>A RectangleF structure that surrounds the Region.</returns>
+		/// <param name="rects">The "region" you want to find a bounding box for.</param>
+		/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
+		/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
+		/// <returns>A rectangle that surrounds the region.</returns>
 		public static Gdk.Rectangle GetRegionBounds (Gdk.Rectangle[] rects, int startIndex, int length)
 		{
 			if (rects.Length == 0) {

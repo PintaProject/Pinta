@@ -280,7 +280,7 @@ namespace Pinta.Core
 		/// <param name="shape">The shape to draw.</param>
 		/// <param name="shapeWidth">The width of the shape.</param>
 		/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
-		/// <param name="imgToShapeX">The verical distance between the image's top-left corner and the shape center.</param>
+		/// <param name="imgToShapeY">The verical distance between the image's top-left corner and the shape center.</param>
 		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
 		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>

@@ -35,10 +35,8 @@ namespace Pinta.Core
 		/// <summary>
 		/// Imports a document into Pinta.
 		/// </summary>
-		/// <param name='fileName'>
-		/// The name of the file to be imported.
-		/// </param>
-		void Import (string fileName);
+		/// <param name='filename'>The name of the file to be imported.</param>
+		void Import (string filename);
 
 		/// <summary>
 		/// Returns a thumbnail of an image.
@@ -48,15 +46,10 @@ namespace Pinta.Core
 		/// returned pixbuf will need to be rescaled by the calling code if it
 		/// exceeds the maximum size.
 		/// </summary>
-		/// <returns>
-		/// The thumbnail, or null if the image could not be loaded.
-		/// </returns>			
-		/// <param name='maxWidth'>
-		/// The maximum width of the thumbnail.
-		/// </param>
-		/// <param name='maxHeight'>
-		/// The maximum height of the thumbnail.
-		/// </param>
+		/// <param name='filename'>The name of the file to be imported.</param>
+		/// <param name='maxWidth'>The maximum width of the thumbnail.</param>
+		/// <param name='maxHeight'>The maximum height of the thumbnail.</param>
+		/// <returns>The thumbnail, or null if the image could not be loaded.</returns>
 		Gdk.Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight);
 	}
 }

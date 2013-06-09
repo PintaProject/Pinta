@@ -403,6 +403,9 @@ namespace Pinta.Core
 		/// <summary>
 		/// Inverts the selection.
 		/// </summary>
+		/// <param name="surface">
+		/// Surface for the selection path.
+		/// </param>
 		/// <param name='imageSize'>
 		/// The size of the document.
 		/// </param>

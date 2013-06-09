@@ -45,7 +45,7 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="dst">The Surface to write pixels to, and from which pixels are read and used as the lhs parameter for calling the method <b>ColorBgra Apply(ColorBgra, ColorBgra)</b>.</param>
 		/// <param name="dstOffset">The pixel offset that defines the upper-left of the rectangle-of-interest for the dst Surface.</param>
-		/// <param name="src">The Surface to read pixels from for the rhs parameter given to the method <b>ColorBgra Apply(ColorBgra, ColorBgra)</b>b>.</param></param>
+		/// <param name="src">The Surface to read pixels from for the rhs parameter given to the method <b>ColorBgra Apply(ColorBgra, ColorBgra)</b>.</param>
 		/// <param name="srcOffset">The pixel offset that defines the upper-left of the rectangle-of-interest for the src Surface.</param>
 		/// <param name="roiSize">The size of the rectangles-of-interest for all Surfaces.</param>
 		public void ApplyBase (ImageSurface dst, Gdk.Point dstOffset, ImageSurface src, Gdk.Point srcOffset, Gdk.Size roiSize)
