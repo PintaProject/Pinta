@@ -70,12 +70,12 @@ namespace Pinta.Core
 				else
 					exporter = null;
 
-				RegisterFormat (new FormatDescriptor (formatName, formatNameUpperCase, extensions, importer, exporter));
+				RegisterFormat (new FormatDescriptor (formatNameUpperCase, extensions, importer, exporter));
 			}
 
 			// Create all the formats we have our own importers/exporters for
 			OraFormat oraHandler = new OraFormat ();
-			RegisterFormat (new FormatDescriptor ("ora", "OpenRaster", new string[] { "ora", "ORA" }, oraHandler, oraHandler));
+			RegisterFormat (new FormatDescriptor ("OpenRaster", new string[] { "ora", "ORA" }, oraHandler, oraHandler));
 		}
 
 		public IEnumerable<FormatDescriptor> Formats { get { return formats; } }

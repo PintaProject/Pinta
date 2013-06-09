@@ -53,12 +53,11 @@ namespace Pinta.Actions
 
 			// Add image files filter
 			FileFilter ff = new FileFilter ();
-            foreach (var format in PintaCore.System.ImageFormats.Formats)
-            {
-                foreach (var ext in format.Extensions)
-                {
-                    ff.AddPattern (string.Format("*.{0}", ext));
-                }
+            foreach (var format in PintaCore.System.ImageFormats.Formats) {
+				if (!format.IsWriteOnly ()) {
+					foreach (var ext in format.Extensions)
+						ff.AddPattern (string.Format("*.{0}", ext));
+				}
             }
 
 			ff.Name = Catalog.GetString ("Image files");
