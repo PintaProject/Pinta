@@ -184,8 +184,6 @@
     <Compile Include="Effects\ColorTransferMode.cs" />
     <Compile Include="Effects\SplineInterpolator.cs" />
     <Compile Include="Extensions\OtherExtensions.cs" />
-    <Compile Include="Effects\ISurfaceDraw.cs" />
-    <Compile Include="Effects\PlacedSurface.cs" />
     <Compile Include="Classes\IndexEventHandler.cs" />
     <Compile Include="Classes\IndexEventArgs.cs" />
     <Compile Include="Effects\LocalHistogramEffect.cs" />
