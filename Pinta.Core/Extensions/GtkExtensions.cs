@@ -177,6 +177,17 @@ namespace Pinta.Core
 					return;
 				}
 
+				// Resize the thumbnail in case the importer didn't.
+				if (pixbuf.Width > MaxPreviewWidth || pixbuf.Width > MaxPreviewHeight) {
+					double ratio = Math.Min ((double)MaxPreviewWidth / pixbuf.Width,
+					                         (double)MaxPreviewHeight / pixbuf.Height);
+					var old_pixbuf = pixbuf;
+					pixbuf = pixbuf.ScaleSimple ((int)(ratio * pixbuf.Width),
+					                             (int)(ratio * pixbuf.Height),
+					                             Gdk.InterpType.Bilinear);
+					old_pixbuf.Dispose ();
+				}
+
 				// add padding so that small images don't cause the dialog to shrink
 				preview.Xpad = (MaxPreviewWidth - pixbuf.Width) / 2;
 				preview.Pixbuf = pixbuf;

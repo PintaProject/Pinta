@@ -42,9 +42,11 @@ namespace Pinta.Core
 
 		/// <summary>
 		/// Returns a thumbnail of an image.
-		/// If the format provides an efficient way to load a thumbnail (such as
-		/// with the OpenRaster format), it is suggested to use that method to
-		/// load the thumbnail if possible.
+		/// If the format provides an efficient way to load a smaller version of
+		/// the image, it is suggested to use that method to load a thumbnail
+		/// no larger than the given width and height parameters. Otherwise, the
+		/// returned pixbuf will need to be rescaled by the calling code if it
+		/// exceeds the maximum size.
 		/// </summary>
 		/// <returns>
 		/// The thumbnail, or null if the image could not be loaded.
