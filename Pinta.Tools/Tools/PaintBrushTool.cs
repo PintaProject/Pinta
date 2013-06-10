@@ -62,8 +62,8 @@ namespace Pinta.Tools
 		public ImageSurface Surface { get; private set; }
 		#endregion
 
-		private PaintBrush default_brush;
-		private PaintBrush active_brush;
+		private BasePaintBrush default_brush;
+		private BasePaintBrush active_brush;
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
 
@@ -84,14 +84,14 @@ namespace Pinta.Tools
 				brush_combo_box.ComboBox.Changed += (o, e) => {
 					Gtk.TreeIter iter;
 					if (brush_combo_box.ComboBox.GetActiveIter (out iter)) {
-						active_brush = (PaintBrush)brush_combo_box.Model.GetValue (iter, 1);
+						active_brush = (BasePaintBrush)brush_combo_box.Model.GetValue (iter, 1);
 					} else {
 						active_brush = default_brush;
 					}
 				};
 				foreach (var brush in PintaCore.PaintBrushes) {
 					if (default_brush == null)
-						default_brush = (PaintBrush)brush;
+						default_brush = (BasePaintBrush)brush;
 					brush_combo_box.Model.AppendValues (brush.Name, brush);
 				}
 				brush_combo_box.ComboBox.Active = 0;
@@ -159,9 +159,8 @@ namespace Pinta.Tools
 				Drawable.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 				Drawable.Color = StrokeColor;
 
-				active_brush.Tool = this;
-				invalidate_rect = active_brush.DoMouseMove (x, y, LastPoint.X, LastPoint.Y);
-				active_brush.Tool = null;
+				invalidate_rect = active_brush.DoMouseMove (Drawable, StrokeColor, Surface,
+				                                            x, y, LastPoint.X, LastPoint.Y);
 			}
 
 			Surface = null;

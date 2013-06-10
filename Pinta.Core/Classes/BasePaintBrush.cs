@@ -26,17 +26,57 @@
 
 using System;
 using Mono.Addins;
+using Cairo;
 
 namespace Pinta.Core
 {
 	[TypeExtensionPoint]
 	public abstract class BasePaintBrush
 	{
+		private static Random random = new Random ();
+
 		public abstract string Name { get; }
-		
+
 		public virtual int Priority {
 			get { return 0; }
 		}
+
+		public Random Random {
+			get { return random; }
+		}
+
+		public virtual double StrokeAlphaMultiplier {
+			get { return 1; }
+		}
+
+		public virtual void DoMouseUp ()
+		{
+			OnMouseUp ();
+		}
+
+		public virtual void DoMouseDown ()
+		{
+			OnMouseDown ();
+		}
+
+		public virtual Gdk.Rectangle DoMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                          int x, int y, int lastX, int lastY)
+		{
+			return OnMouseMove (g, strokeColor, surface, x, y, lastX, lastY);
+		}
+
+		protected virtual void OnMouseUp ()
+		{
+		}
+
+		protected virtual void OnMouseDown ()
+		{
+		}
+
+		protected virtual Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                             int x, int y, int lastX, int lastY)
+		{
+			return Gdk.Rectangle.Zero;
+		}
 	}
 }
-

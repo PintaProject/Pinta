@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	public class GridBrush : PaintBrush
+	public class GridBrush : BasePaintBrush
 	{
 		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Grid"); }
@@ -41,7 +41,8 @@ namespace Pinta.Tools.Brushes
 			get { return 0.05; }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                              int x, int y, int lastX, int lastY)
 		{
 			double cx = Math.Round (x / 100.0) * 100.0;
 			double cy = Math.Round (y / 100.0) * 100.0;
@@ -49,13 +50,13 @@ namespace Pinta.Tools.Brushes
 			double dy = (cy - y) * 10.0;
 
 			for (int i = 0; i < 50; i++) {
-				G.MoveTo (cx, cy);
-				G.QuadraticCurveTo (
+				g.MoveTo (cx, cy);
+				g.QuadraticCurveTo (
 					x + Random.NextDouble () * dx,
 					y + Random.NextDouble () * dy,
 					cx,
 					cy);
-				G.Stroke ();
+				g.Stroke ();
 			}
 
 			return Gdk.Rectangle.Zero;

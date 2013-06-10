@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	public class PlainBrush : PaintBrush
+	public class PlainBrush : BasePaintBrush
 	{
 		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Normal"); }
@@ -41,26 +41,27 @@ namespace Pinta.Tools.Brushes
 			get { return -100; }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                              int x, int y, int lastX, int lastY)
 		{
 			// Cairo does not support a single-pixel-long single-pixel-wide line
-			if (x == lastX && y == lastY && G.LineWidth == 1 &&
+			if (x == lastX && y == lastY && g.LineWidth == 1 &&
 			    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD(x,y))) {
-				Surface.Flush ();
+				surface.Flush ();
 
-				ColorBgra source = Surface.GetColorBgraUnchecked (x, y);
-				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, StrokeColor.ToColorBgra ());
-				Surface.SetColorBgra (source, x, y);
-				Surface.MarkDirty ();
+				ColorBgra source = surface.GetColorBgraUnchecked (x, y);
+				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, strokeColor.ToColorBgra ());
+				surface.SetColorBgra (source, x, y);
+				surface.MarkDirty ();
 
 				return new Gdk.Rectangle (x - 1, y - 1, 3, 3);
 			}
 
-			G.MoveTo (lastX + 0.5, lastY + 0.5);
-			G.LineTo (x + 0.5, y + 0.5);
-			G.StrokePreserve ();
+			g.MoveTo (lastX + 0.5, lastY + 0.5);
+			g.LineTo (x + 0.5, y + 0.5);
+			g.StrokePreserve ();
 
-			Gdk.Rectangle dirty = G.FixedStrokeExtents ().ToGdkRectangle ();
+			Gdk.Rectangle dirty = g.FixedStrokeExtents ().ToGdkRectangle ();
 
 			// For some reason (?!) we need to inflate the dirty
 			// rectangle for small brush widths in zoomed images

@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	public class SquaresBrush : PaintBrush
+	public class SquaresBrush : BasePaintBrush
 	{
 		private static double theta = Math.PI / 2;
 
@@ -39,22 +39,23 @@ namespace Pinta.Tools.Brushes
 			get { return Mono.Unix.Catalog.GetString ("Squares"); }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                              int x, int y, int lastX, int lastY)
 		{
 			int dx = x - lastX;
 			int dy = y - lastY;
 			double px = Math.Cos (theta) * dx - Math.Sin (theta) * dy;
 			double py = Math.Sin (theta) * dx + Math.Cos (theta) * dy;
 
-			G.MoveTo (lastX - px, lastY - py);
-			G.LineTo (lastX + px, lastY + py);
-			G.LineTo (x + px, y + py);
-			G.LineTo (x - px, y - py);
-			G.LineTo (lastX - px, lastY - py);
+			g.MoveTo (lastX - px, lastY - py);
+			g.LineTo (lastX + px, lastY + py);
+			g.LineTo (x + px, y + py);
+			g.LineTo (x - px, y - py);
+			g.LineTo (lastX - px, lastY - py);
 
-			G.StrokePreserve ();
+			g.StrokePreserve ();
 
-			return G.FixedStrokeExtents ().ToGdkRectangle ();
+			return g.FixedStrokeExtents ().ToGdkRectangle ();
 		}
 	}
 }

@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	public class SplatterBrush : PaintBrush
+	public class SplatterBrush : BasePaintBrush
 	{
 		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Splatter"); }
@@ -41,9 +41,10 @@ namespace Pinta.Tools.Brushes
 			get { return 0.5; }
 		}
 		
-		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                              int x, int y, int lastX, int lastY)
 		{
-			int line_width = (int)G.LineWidth;
+			int line_width = (int)g.LineWidth;
 			int size;
 
 			// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
@@ -64,21 +65,21 @@ namespace Pinta.Tools.Brushes
 			double cy = r.Y + ry;
 			double c1 = 0.552285;
 
-			G.Save ();
+			g.Save ();
 
-			G.MoveTo (cx + rx, cy);
+			g.MoveTo (cx + rx, cy);
 
-			G.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
-			G.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
-			G.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
-			G.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
+			g.CurveTo (cx + rx, cy - c1 * ry, cx + c1 * rx, cy - ry, cx, cy - ry);
+			g.CurveTo (cx - c1 * rx, cy - ry, cx - rx, cy - c1 * ry, cx - rx, cy);
+			g.CurveTo (cx - rx, cy + c1 * ry, cx - c1 * rx, cy + ry, cx, cy + ry);
+			g.CurveTo (cx + c1 * rx, cy + ry, cx + rx, cy + c1 * ry, cx + rx, cy);
 
-			G.ClosePath ();
+			g.ClosePath ();
 
-			Rectangle dirty = G.FixedStrokeExtents ();
+			Rectangle dirty = g.FixedStrokeExtents ();
 
-			G.Fill ();
-			G.Restore ();
+			g.Fill ();
+			g.Restore ();
 
 			return dirty.ToGdkRectangle ();
 		}

@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes
 {
-	public class CircleBrush : PaintBrush
+	public class CircleBrush : BasePaintBrush
 	{
 		public override string Name {
 			get { return Mono.Unix.Catalog.GetString ("Circles"); }
@@ -41,7 +41,8 @@ namespace Pinta.Tools.Brushes
 			get { return 0.05; }
 		}
 
-		protected override Gdk.Rectangle OnMouseMove (int x, int y, int lastX, int lastY)
+		protected override Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                              int x, int y, int lastX, int lastY)
 		{
 			int dx = x - lastX;
 			int dy = y - lastY;
@@ -54,8 +55,8 @@ namespace Pinta.Tools.Brushes
 			double step_delta = d / steps;
 
 			for (int i = 0; i < steps; i++) {
-				G.Arc (cx, cy, (steps - i) * step_delta, 0, Math.PI * 2);
-				G.Stroke ();
+				g.Arc (cx, cy, (steps - i) * step_delta, 0, Math.PI * 2);
+				g.Stroke ();
 			}
 
 			return Gdk.Rectangle.Zero;

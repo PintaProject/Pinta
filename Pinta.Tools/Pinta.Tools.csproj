@@ -99,7 +99,6 @@
     <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Tools\CloneStampTool.cs" />
     <Compile Include="Tools\ZoomTool.cs" />
-    <Compile Include="Brushes\PaintBrush.cs" />
     <Compile Include="Brushes\GridBrush.cs" />
     <Compile Include="Brushes\SquaresBrush.cs" />
     <Compile Include="Brushes\PlainBrush.cs" />
