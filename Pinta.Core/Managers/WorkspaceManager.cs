@@ -175,10 +175,13 @@ namespace Pinta.Core
 		{
 			bool fileOpened = false;
 
+			if (parent == null)
+				parent = PintaCore.Chrome.MainWindow;
+
 			try {
 				// Open the image and add it to the layers
 				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
-				importer.Import (file);
+				importer.Import (file, parent);
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
@@ -329,9 +332,6 @@ namespace Pinta.Core
 
 		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
-			if (parent == null)
-				parent = PintaCore.Chrome.MainWindow;
-
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 			string secondaryText = string.Format (Catalog.GetString ("Could not open file: {0}"), filename);
 			string message = string.Format (markup, primaryText, secondaryText);

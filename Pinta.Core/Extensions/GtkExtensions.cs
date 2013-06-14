@@ -168,7 +168,7 @@ namespace Pinta.Core
 				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (filename);
 
 				if (importer != null) {
-					pixbuf = importer.LoadThumbnail (filename, MaxPreviewWidth, MaxPreviewHeight);
+					pixbuf = importer.LoadThumbnail (filename, MaxPreviewWidth, MaxPreviewHeight, dialog);
 				}
 
 				if (pixbuf == null) {

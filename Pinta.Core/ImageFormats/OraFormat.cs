@@ -43,7 +43,7 @@ namespace Pinta.Core
 
 		#region IImageImporter implementation
 		
-		public void Import (string fileName) {
+		public void Import (string fileName, Gtk.Window parent) {
 			ZipFile file = new ZipFile (fileName);
 			XmlDocument stackXml = new XmlDocument ();
 			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
@@ -110,7 +110,7 @@ namespace Pinta.Core
 						File.Delete (tmp_file);
 					} catch { }
 				} catch {
-					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
+					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
 					md.Title = "Error";
 				
 					md.Run ();
@@ -121,7 +121,7 @@ namespace Pinta.Core
 			file.Close ();
 		}
 
-		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight)
+		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
 		{
 			ZipFile file = new ZipFile (filename);
 			ZipEntry ze = file.GetEntry ("Thumbnails/thumbnail.png");

@@ -43,7 +43,7 @@ namespace Pinta.Core
 
 		#region IImageImporter implementation
 
-		public void Import (string fileName)
+		public void Import (string fileName, Gtk.Window parent)
 		{
 			Pixbuf bg;
 
@@ -70,7 +70,7 @@ namespace Pinta.Core
 			bg.Dispose ();
 		}
 
-		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight)
+		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
 		{
 			int imageWidth;
 			int imageHeight;
