@@ -39,17 +39,9 @@ namespace Pinta.Effects
 		
 		public override bool LaunchConfiguration ()
 		{
-			if (EffectHelper.LaunchSimpleEffectDialog (this)) {
-				Data.PropertyChanged += delegate {
-						//TODO
-						this.defaultRadius = 2; //Math.Min(selection.Width, selection.Height) * 0.5;
-						this.defaultRadius2 = this.defaultRadius * this.defaultRadius;
-				};
-				return true;
-			}
-			return false;
+			return EffectHelper.LaunchSimpleEffectDialog (this);
 		}
-
+	
 		private double defaultRadius;
 		private double defaultRadius2;
 		
@@ -59,6 +51,12 @@ namespace Pinta.Effects
 		#region Algorithm Code Ported From PDN
 		public unsafe override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle[] rois)
 		{
+			var selection = PintaCore.LivePreview.RenderBounds;
+			this.defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
+			this.defaultRadius2 = this.defaultRadius * this.defaultRadius;
+
+			var x_center_offset = selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5);
+			var y_center_offset = selection.Top + (selection.Height * (1.0 + Data.CenterOffset.Y) * 0.5);
 			
 			ColorBgra colPrimary = PintaCore.Palette.PrimaryColor.ToColorBgra ();
 			ColorBgra colSecondary = PintaCore.Palette.SecondaryColor.ToColorBgra ();
@@ -76,10 +74,10 @@ namespace Pinta.Effects
 				for (int y = rect.Top; y <= rect.GetBottom (); y++) {
 					ColorBgra* dstPtr = dst.GetPointAddressUnchecked (rect.Left, y);
 					
-					double relativeY = y - Data.CenterOffset.Y;
+					double relativeY = y - y_center_offset;
 					
 					for (int x = rect.Left; x <= rect.GetRight (); x++) {
-						double relativeX = x - Data.CenterOffset.X;
+						double relativeX = x - x_center_offset;
 						
 						int sampleCount = 0;
 						
@@ -89,8 +87,8 @@ namespace Pinta.Effects
 							
 							InverseTransform (ref td);
 							
-							float sampleX = (float)(td.X + Data.CenterOffset.X);
-							float sampleY = (float)(td.Y + Data.CenterOffset.Y);
+							float sampleX = (float)(td.X + x_center_offset);
+							float sampleY = (float)(td.Y + y_center_offset);
 							
 							ColorBgra sample = colPrimary;
 							
@@ -183,7 +181,7 @@ namespace Pinta.Effects
 			[MinimumValue(1), MaximumValue(5)]
 			public int Quality = 2;
 			
-			public Gdk.Point CenterOffset;
+			public Cairo.PointD CenterOffset;
 			
 			public WarpEdgeBehavior EdgeBehavior = WarpEdgeBehavior.Wrap;
 		}
