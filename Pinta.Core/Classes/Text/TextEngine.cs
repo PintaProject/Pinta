@@ -220,10 +220,13 @@ namespace Pinta.Core
 			}
 		}
 
-		public void SetCursorPosition (Position position)
+		public void SetCursorPosition (Position position, bool clearSelection)
 		{
 			linePos = position.Line;
 			textPos = position.Offset;
+
+			if (clearSelection)
+				selectionRelativeIndex = 0;
 		}
 
 		public void SetFont (string face, int size, bool bold, bool italic, bool underline)
@@ -534,7 +537,7 @@ namespace Pinta.Core
 			else
 				selectionRelativeIndex = 0;
 
-			SetCursorPosition (pos);
+			SetCursorPosition (pos, false);
 		}
 
 		public void PerformDown (bool shift)
@@ -554,7 +557,7 @@ namespace Pinta.Core
 				else
 					selectionRelativeIndex = 0;
 
-				SetCursorPosition (pos);
+				SetCursorPosition (pos, false);
 			}
 		}
 
