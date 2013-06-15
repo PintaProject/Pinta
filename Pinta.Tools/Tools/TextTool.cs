@@ -548,7 +548,7 @@ namespace Pinta.Tools
 
 					//Change the position of the cursor to where the mouse clicked.
 					Position p = CurrentTextEngine.PointToTextPosition(pt);
-					CurrentTextEngine.SetCursorPosition(p);
+					CurrentTextEngine.SetCursorPosition(p, true);
 
 					//Redraw the text with the new cursor position.
 					RedrawText(true, true);
@@ -590,7 +590,7 @@ namespace Pinta.Tools
 
 							//Set the cursor in the editable text where the mouse was clicked.
 							Position p = CurrentTextEngine.PointToTextPosition(pt);
-							CurrentTextEngine.SetCursorPosition(p);
+							CurrentTextEngine.SetCursorPosition(p, true);
 
 							//Redraw the editable text with the cursor.
 							RedrawText(true, true);
