@@ -33,12 +33,18 @@ namespace Pinta.Core
 	{
 		private List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
 
+		/// <summary>
+		/// Register a new brush.
+		/// </summary>
 		public void AddPaintBrush (BasePaintBrush paintBrush)
 		{
 			paint_brushes.Add (paintBrush);
 			paint_brushes.Sort (new BrushSorter ());
 		}
 
+		/// <summary>
+		/// Remove a brush type.
+		/// </summary>
 		public void RemoveInstanceOfPaintBrush (System.Type paintBrush)
 		{
 			foreach (BasePaintBrush brush in paint_brushes) {
