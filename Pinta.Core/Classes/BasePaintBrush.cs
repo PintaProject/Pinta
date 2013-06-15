@@ -73,10 +73,7 @@ namespace Pinta.Core
 		{
 		}
 
-		protected virtual Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
-		                                             int x, int y, int lastX, int lastY)
-		{
-			return Gdk.Rectangle.Zero;
-		}
+		protected abstract Gdk.Rectangle OnMouseMove (Context g, Color strokeColor, ImageSurface surface,
+		                                              int x, int y, int lastX, int lastY);
 	}
 }
