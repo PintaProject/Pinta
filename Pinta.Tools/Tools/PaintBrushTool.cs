@@ -67,6 +67,18 @@ namespace Pinta.Tools
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
 
+		protected override void OnActivated ()
+		{
+			PintaCore.PaintBrushes.BrushAdded += HandleBrushAddedOrRemoved;
+			PintaCore.PaintBrushes.BrushRemoved += HandleBrushAddedOrRemoved;
+		}
+
+		protected override void OnDeactivated ()
+		{
+			PintaCore.PaintBrushes.BrushAdded -= HandleBrushAddedOrRemoved;
+			PintaCore.PaintBrushes.BrushRemoved -= HandleBrushAddedOrRemoved;
+		}
+
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
@@ -89,16 +101,37 @@ namespace Pinta.Tools
 						active_brush = default_brush;
 					}
 				};
-				foreach (var brush in PintaCore.PaintBrushes) {
-					if (default_brush == null)
-						default_brush = (BasePaintBrush)brush;
-					brush_combo_box.Model.AppendValues (brush.Name, brush);
-				}
-				brush_combo_box.ComboBox.Active = 0;
+
+				RebuildBrushComboBox ();
 			}
 
 			tb.AppendItem (brush_label);
 			tb.AppendItem (brush_combo_box);
+		}
+
+		/// <summary>
+		/// Rebuild the list of brushes when a brush is added or removed.
+		/// </summary>
+		private void HandleBrushAddedOrRemoved (object sender, BrushEventArgs e)
+		{
+			RebuildBrushComboBox ();
+		}
+
+		/// <summary>
+		/// Rebuild the list of brushes.
+		/// </summary>
+		private void RebuildBrushComboBox ()
+		{
+			brush_combo_box.Model.Clear ();
+			default_brush = null;
+
+			foreach (var brush in PintaCore.PaintBrushes) {
+				if (default_brush == null)
+					default_brush = (BasePaintBrush)brush;
+				brush_combo_box.Model.AppendValues (brush.Name, brush);
+			}
+
+			brush_combo_box.ComboBox.Active = 0;
 		}
 
 		#region Mouse Handlers

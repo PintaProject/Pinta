@@ -210,6 +210,7 @@
     <Compile Include="Clipper\Clipper.cs" />
     <Compile Include="Actions\AddinActions.cs" />
     <Compile Include="Enumerations\CursorShape.cs" />
+    <Compile Include="EventArgs\BrushEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

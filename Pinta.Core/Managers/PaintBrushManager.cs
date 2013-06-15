@@ -33,6 +33,9 @@ namespace Pinta.Core
 	{
 		private List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
 
+		public event EventHandler<BrushEventArgs> BrushAdded;
+		public event EventHandler<BrushEventArgs> BrushRemoved;
+
 		/// <summary>
 		/// Register a new brush.
 		/// </summary>
@@ -40,6 +43,7 @@ namespace Pinta.Core
 		{
 			paint_brushes.Add (paintBrush);
 			paint_brushes.Sort (new BrushSorter ());
+			OnBrushAdded (paintBrush);
 		}
 
 		/// <summary>
@@ -50,10 +54,11 @@ namespace Pinta.Core
 			foreach (BasePaintBrush brush in paint_brushes) {
 				if (brush.GetType () == paintBrush) {
 					paint_brushes.Remove (brush);
-					break;
+					paint_brushes.Sort (new BrushSorter ());
+					OnBrushRemoved (brush);
+					return;
 				}
 			}
-			paint_brushes.Sort (new BrushSorter ());
 		}
 
 		#region IEnumerable<BasePaintBrush> implementation
@@ -69,6 +74,20 @@ namespace Pinta.Core
 			return paint_brushes.GetEnumerator ();
 		}
 		#endregion
+
+		private void OnBrushAdded (BasePaintBrush brush)
+		{
+			var handler = BrushAdded;
+			if (handler != null)
+				handler (this, new BrushEventArgs (brush));
+		}
+
+		private void OnBrushRemoved (BasePaintBrush brush)
+		{
+			var handler = BrushRemoved;
+			if (handler != null)
+				handler (this, new BrushEventArgs (brush));
+		}
 
 		class BrushSorter : Comparer<BasePaintBrush>
 		{
