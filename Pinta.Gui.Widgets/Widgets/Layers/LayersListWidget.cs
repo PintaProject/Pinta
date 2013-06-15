@@ -200,7 +200,7 @@ namespace Pinta.Gui.Widgets
 			store.Clear ();
 
 			if (active_layer_surface != null) {
-				active_layer_surface.Dispose ();
+				(active_layer_surface as IDisposable).Dispose ();
 				active_layer_surface = null;
 			}
 
