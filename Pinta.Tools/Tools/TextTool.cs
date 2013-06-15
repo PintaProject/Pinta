@@ -33,6 +33,9 @@ namespace Pinta.Tools
 		private Cairo.ImageSurface text_undo_surface;
 		private Cairo.ImageSurface user_undo_surface;
 		private TextEngine undo_engine;
+		// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
+		// if the selection changes before the text is finalized.
+		private DocumentSelection selection;
 
 		private Rectangle CurrentTextBounds
 		{
@@ -521,6 +524,10 @@ namespace Pinta.Tools
 			// Grab focus so we can get keystrokes
 			PintaCore.Chrome.Canvas.GrabFocus();
 
+			if (selection != null)
+				selection.DisposeSelection ();
+			selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
+
 			// A right click allows you to move the text around
 			if (args.Event.Button == 3)
 			{
@@ -866,6 +873,9 @@ namespace Pinta.Tools
 		{
 			is_editing = true;
 
+			if (selection == null)
+				selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
+
 			//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 			ignoreCloneFinalizations = true;
 
@@ -971,7 +981,8 @@ namespace Pinta.Tools
 					foreach (Rectangle rect in CurrentTextEngine.SelectionRectangles)
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
-				g.AppendPath (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath);
+
+				g.AppendPath (selection.SelectionPath);
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.Clip ();
 
@@ -1064,17 +1075,12 @@ namespace Pinta.Tools
 				{
 					//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 					ignoreCloneFinalizations = true;
-
-
-
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
 					//Create a backup of everything before redrawing the text and etc.
 					Cairo.ImageSurface oldTextSurface = doc.CurrentUserLayer.TextLayer.Surface.Clone();
 					Cairo.ImageSurface oldUserSurface = doc.CurrentUserLayer.Surface.Clone();
 					TextEngine oldTextEngine = CurrentTextEngine.Clone();
-
-
 
 					//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
 					RedrawText(false, false);
@@ -1086,24 +1092,22 @@ namespace Pinta.Tools
 					CurrentTextEngine.Clear();
 					CurrentTextBounds = Gdk.Rectangle.Zero;
 
-
-
 					//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
 					//it on the spot so that it is more memory efficient if the changes are small.
-					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName, oldTextSurface, oldUserSurface, oldTextEngine, doc.CurrentUserLayer);
+					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName, oldTextSurface, oldUserSurface,
+					                                           oldTextEngine, doc.CurrentUserLayer);
 
 					//Add the new TextHistoryItem.
 					doc.History.PushNewItem(hist);
 
-
-
 					//Stop ignoring any Surface.Clone calls from this point on.
 					ignoreCloneFinalizations = false;
 
-
-
 					//Now that the text has been finalized, change its state.
 					CurrentTextEngine.textMode = TextMode.Unchanged;
+
+					selection.DisposeSelection ();
+					selection = null;
 				}
 			}
 		}
