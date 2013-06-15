@@ -129,13 +129,10 @@ namespace Pinta.Core
 
 		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
 		{
-			Random rand = new Random ();
-
 			g.Save ();
 			g.MoveTo (points[0]);
 			foreach (var point in points) {
-				g.LineTo (point.X - rand.NextDouble () * 0, point.Y);
-				//g.Stroke();
+				g.LineTo (point.X, point.Y);
 			}
 
 			g.Color = color;
