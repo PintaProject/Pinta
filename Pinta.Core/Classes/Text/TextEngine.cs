@@ -171,9 +171,12 @@ namespace Pinta.Core
 		{
 			Pango.Rectangle ink, logical;
 			layout.GetPixelExtents (out ink, out logical);
+			var cursor = GetCursorLocation ();
 
-			Rectangle r = new Rectangle (ink.X + origin.X, ink.Y + origin.Y, ink.Width, ink.Height);
-			return r;
+			// GetPixelExtents() doesn't really return a very sensible height.
+			// Instead of doing some hacky arithmetic to correct it, the height will just
+			// be the cursor's height times the number of lines.
+			return new Rectangle (origin.X, origin.Y, ink.Width, cursor.Height * LineCount);
 		}
 
 		public bool IsEmpty()
