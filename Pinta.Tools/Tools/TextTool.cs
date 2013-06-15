@@ -982,9 +982,11 @@ namespace Pinta.Tools
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
 
-				g.AppendPath (selection.SelectionPath);
-				g.FillRule = Cairo.FillRule.EvenOdd;
-				g.Clip ();
+				if (selection != null) {
+					g.AppendPath (selection.SelectionPath);
+					g.FillRule = Cairo.FillRule.EvenOdd;
+					g.Clip ();
+				}
 
 				g.MoveTo (new Cairo.PointD (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y));
 
