@@ -69,12 +69,16 @@ namespace Pinta.Tools
 
 		protected override void OnActivated ()
 		{
+			base.OnActivated ();
+
 			PintaCore.PaintBrushes.BrushAdded += HandleBrushAddedOrRemoved;
 			PintaCore.PaintBrushes.BrushRemoved += HandleBrushAddedOrRemoved;
 		}
 
 		protected override void OnDeactivated ()
 		{
+			base.OnDeactivated ();
+
 			PintaCore.PaintBrushes.BrushAdded -= HandleBrushAddedOrRemoved;
 			PintaCore.PaintBrushes.BrushRemoved -= HandleBrushAddedOrRemoved;
 		}
