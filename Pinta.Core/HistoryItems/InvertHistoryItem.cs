@@ -51,11 +51,11 @@ namespace Pinta.Core
 					Icon = "Menu.Image.Rotate180CW.png";
 					break;
 				case InvertType.FlipHorizontal:
-					Text = Catalog.GetString ("Flip Image Horizontal");
+					Text = Catalog.GetString ("Flip Horizontal");
 					Icon = "Menu.Image.FlipHorizontal.png";
 					break;
 				case InvertType.FlipVertical:
-					Text = Catalog.GetString ("Flip Image Vertical");
+					Text = Catalog.GetString ("Flip Vertical");
 					Icon = "Menu.Image.FlipVertical.png";
 					break;
 				case InvertType.Rotate90CW:
