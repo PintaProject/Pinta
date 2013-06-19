@@ -70,10 +70,14 @@ namespace Pinta.Tools
 		                                     Gtk.ButtonPressEventArgs args,
 		                                     Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			if(is_dragging || is_rotating)
 				return;
 
 			original_point = point;
+			if (!doc.Workspace.PointInCanvas(point))
+				return;
 
 			if(args.Event.Button == GtkExtensions.MouseRightButton)
 			{
