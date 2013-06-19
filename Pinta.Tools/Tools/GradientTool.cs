@@ -76,6 +76,9 @@ namespace Pinta.Tools
 				return;
 		
 			startpoint = point;
+			if (!doc.Workspace.PointInCanvas(point))
+				return;
+
 			tracking = true;
 			button = args.Event.Button;
 			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
