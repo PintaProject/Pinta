@@ -268,43 +268,8 @@ namespace Pinta.Core
 		/// <returns></returns>
 		List<IntPoint> CalculateCurvePoints(double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
 		{
-			//For benchmarking purposes.
-			/*tInterval = .00001;
-			x0 = 50;
-			y0 = 50;
-			x1 = 150;
-			y1 = 155;
-			x2 = 200;
-			y2 = 208;
-			x3 = 506;
-			y3 = 632;
-
-			long startTime = DateTime.Now.Ticks;*/
-
-
-
 			//Create a new partial Polygon to store the calculated Points.
 			List<IntPoint> calculatedPoints = new List<IntPoint>();
-
-
-			//Old calculation code.
-			/*//This is for optimization, since these values will be used repetitively.
-			//These 6 values (3 for X and Y each) store the distance between each
-			//of the 4 Points of the curve, consecutively.
-			double[] firstLayerDistancesX = new double[3];
-			double[] firstLayerDistancesY = new double[3];
-			firstLayerDistancesX[0] = x1 - x0;
-			firstLayerDistancesX[1] = x2 - x1;
-			firstLayerDistancesX[2] = x3 - x2;
-			firstLayerDistancesY[0] = y1 - y0;
-			firstLayerDistancesY[1] = y2 - y1;
-			firstLayerDistancesY[2] = y3 - y2;
-
-			//This is also for optimization.
-			double[,] intermediatePointsX = new double[2, 3];
-			double[,] intermediatePointsY = new double[2, 3];*/
-
-
 
 			double oneMinusT;
 			double oneMinusTSquared;
@@ -332,30 +297,6 @@ namespace Pinta.Core
 				//calculated for the X and Y of every consecutive Point in every layer
 				//until the last Point possible is reached, which is the Point on the curve.
 
-
-
-				//Old calculation code.
-				/*//These Points are in the "first layer".
-				intermediatePointsX[0, 0] = firstLayerDistancesX[0] * t + x0;
-				intermediatePointsX[0, 1] = firstLayerDistancesX[1] * t + x1;
-				intermediatePointsX[0, 2] = firstLayerDistancesX[2] * t + x2;
-				intermediatePointsY[0, 0] = firstLayerDistancesY[0] * t + y0;
-				intermediatePointsY[0, 1] = firstLayerDistancesY[1] * t + y1;
-				intermediatePointsY[0, 2] = firstLayerDistancesY[2] * t + y2;
-
-				//These Points are in the "second layer".
-				intermediatePointsX[1, 0] = (intermediatePointsX[0, 1] - intermediatePointsX[0, 0]) * t + intermediatePointsX[0, 0];
-				intermediatePointsX[1, 1] = (intermediatePointsX[0, 2] - intermediatePointsX[0, 1]) * t + intermediatePointsX[0, 1];
-				intermediatePointsY[1, 0] = (intermediatePointsY[0, 1] - intermediatePointsY[0, 0]) * t + intermediatePointsY[0, 0];
-				intermediatePointsY[1, 1] = (intermediatePointsY[0, 2] - intermediatePointsY[0, 1]) * t + intermediatePointsY[0, 1];
-
-				//The "third layer" (the resulting Point that is on the curve) is stored immediately after calculation.
-				calculatedPoints.Add(new IntPoint(
-					(long)((intermediatePointsX[1, 1] - intermediatePointsX[1, 0]) * t + intermediatePointsX[1, 0]),
-					(long)((intermediatePointsY[1, 1] - intermediatePointsY[1, 0]) * t + intermediatePointsY[1, 0])));*/
-
-
-
 				oneMinusT = 1d - t;
 				oneMinusTSquared = oneMinusT * oneMinusT;
 				oneMinusTCubed = oneMinusTSquared * oneMinusT;
@@ -370,13 +311,6 @@ namespace Pinta.Core
 					(long)(oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3),
 					(long)(oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)));
 			}
-
-
-
-			//For benchmarking purposes.
-			//long timeTaken = DateTime.Now.Ticks - startTime;
-
-
 
 			//Return the partial Polygon containing the calculated Points in the curve.
 			return calculatedPoints;
