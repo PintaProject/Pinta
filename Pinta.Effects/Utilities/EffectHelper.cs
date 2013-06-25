@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using Mono.Addins;
+using Mono.Addins.Localization;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using System.ComponentModel;
@@ -34,7 +36,31 @@ namespace Pinta
 
 	public static class EffectHelper
 	{
-		public static bool LaunchSimpleEffectDialog (BaseEffect effect)
+		/// <summary>
+		/// Launchs an effect dialog.
+		/// </summary>
+		/// <param name="localizer">
+		/// The localizer for the effect add-in. This is used to fetch translations for the
+		/// strings in the dialog.
+		/// </param>
+		public static bool LaunchSimpleEffectDialog (BaseEffect effect, AddinLocalizer localizer)
+		{
+			return LaunchSimpleEffectDialog (effect, new AddinLocalizerWrapper (localizer));
+		}
+
+		/// <summary>
+		/// Launchs an effect dialog using Pinta's translation template.
+		/// </summary>
+		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
+		{
+			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
+		}
+
+		/// <summary>
+		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
+		/// get translated strings both for Pinta's effects and for effect add-ins.
+		/// </summary>
+		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
 		{
 			if (effect == null)
 				throw new ArgumentNullException ("effect");
@@ -44,7 +70,7 @@ namespace Pinta
 			
 			var dialog = new SimpleEffectDialog (effect.Name,
 			                                     PintaCore.Resources.GetIcon (effect.Icon),
-			                                     effect.EffectData);
+			                                     effect.EffectData, localizer);
 			
 			// Hookup event handling for live preview.
 			dialog.EffectDataChanged += (o, e) => {
@@ -62,5 +88,23 @@ namespace Pinta
 
 			return ret;
 		}
+
+		/// <summary>
+		/// Wrapper around the AddinLocalizer of an add-in.
+		/// </summary>
+		private class AddinLocalizerWrapper : IAddinLocalizer
+		{
+			private AddinLocalizer localizer;
+
+			public AddinLocalizerWrapper (AddinLocalizer localizer)
+			{
+				this.localizer = localizer;
+			}
+
+			public string GetString (string msgid)
+			{
+				return localizer.GetString (msgid);
+			}
+		};
 	}
 }

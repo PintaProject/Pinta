@@ -50,7 +50,8 @@ namespace Pinta.Actions
 			
 			var rotateZoomData = new RotateZoomData ();
 			var dialog = new SimpleEffectDialog (Catalog.GetString ("Rotate / Zoom Layer"),
-				PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png"), rotateZoomData);
+				PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png"), rotateZoomData,
+			                                     new PintaLocalizer ());
 
 			int response = dialog.Run ();
 

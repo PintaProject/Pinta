@@ -33,6 +33,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
+using Mono.Addins.Localization;
 using Mono.Unix;
 
 namespace Pinta.Gui.Widgets
@@ -45,7 +46,11 @@ namespace Pinta.Gui.Widgets
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
 
-		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData)
+		/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
+		/// fetched from the appropriate place.
+		/// </param>
+		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData,
+		                           IAddinLocalizer localizer)
 			: base (title, Pinta.Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal,
 				Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
 		{
@@ -59,7 +64,7 @@ namespace Pinta.Gui.Widgets
 			DefaultResponse = Gtk.ResponseType.Ok;
 			AlternativeButtonOrder = new int[] { (int)Gtk.ResponseType.Ok, (int)Gtk.ResponseType.Cancel };
 
-			BuildDialog ();
+			BuildDialog (localizer);
 		}
 
 		public object EffectData { get; private set; }
@@ -67,7 +72,7 @@ namespace Pinta.Gui.Widgets
 		public event PropertyChangedEventHandler EffectDataChanged;
 
 		#region EffectData Parser
-		private void BuildDialog ()
+		private void BuildDialog (IAddinLocalizer localizer)
 		{
 			var members = EffectData.GetType ().GetMembers ();
 
@@ -103,26 +108,26 @@ namespace Pinta.Gui.Widgets
 					caption = MakeCaption (mi.Name);
 
 				if (mType == typeof (int) && (caption == "Seed"))
-					AddWidget (CreateSeed (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateSeed (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (int))
-					AddWidget (CreateSlider (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateSlider (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double) && (caption == "Angle" || caption == "Rotation"))
-					AddWidget (CreateAnglePicker (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateAnglePicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (double))
-					AddWidget (CreateDoubleSlider (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateDoubleSlider (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (combo && mType == typeof (string))
-					AddWidget (CreateComboBox (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateComboBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (bool))
-					AddWidget (CreateCheckBox (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateCheckBox (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (Gdk.Point))
-					AddWidget (CreatePointPicker (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreatePointPicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType == typeof (Cairo.PointD))
-					AddWidget (CreateOffsetPicker (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateOffsetPicker (localizer.GetString (caption), EffectData, mi, attrs));
 				else if (mType.IsEnum)
-					AddWidget (CreateEnumComboBox (Catalog.GetString (caption), EffectData, mi, attrs));
+					AddWidget (CreateEnumComboBox (localizer.GetString (caption), EffectData, mi, attrs));
 
 				if (hint != null)
-					AddWidget (CreateHintLabel (Catalog.GetString (hint)));
+					AddWidget (CreateHintLabel (localizer.GetString (hint)));
 			}
 		}
 
@@ -424,4 +429,15 @@ namespace Pinta.Gui.Widgets
 		}
 		#endregion
 	}
+
+	/// <summary>
+	/// Wrapper around Pinta's translation template.
+	/// </summary>
+	public class PintaLocalizer : IAddinLocalizer
+	{
+		public string GetString (string msgid)
+		{
+			return Mono.Unix.Catalog.GetString (msgid);
+		}
+	};
 }

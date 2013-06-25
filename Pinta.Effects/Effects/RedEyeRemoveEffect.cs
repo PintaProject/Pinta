@@ -45,7 +45,8 @@ namespace Pinta.Effects
 		
 		public override bool LaunchConfiguration ()
 		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data);
+			SimpleEffectDialog dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data,
+			                                                    new PintaLocalizer ());
 
 			// Hookup event handling for live preview.
 			dialog.EffectDataChanged += (o, e) => {
