@@ -269,8 +269,8 @@ namespace Pinta.Core
 		List<IntPoint> CalculateCurvePoints(double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
 		{
 			//Create a new partial Polygon to store the calculated Points.
-			List<IntPoint> calculatedPoints = new List<IntPoint>();
-
+			List<IntPoint> calculatedPoints = new List<IntPoint>((int)(1d / tInterval));
+            
 			double oneMinusT;
 			double oneMinusTSquared;
 			double oneMinusTCubed;
@@ -296,6 +296,8 @@ namespace Pinta.Core
 				//the two consecutive Points from the previous "layer"]. This must be
 				//calculated for the X and Y of every consecutive Point in every layer
 				//until the last Point possible is reached, which is the Point on the curve.
+
+				//Note: the code below is an optimized version of the commented explanation above.
 
 				oneMinusT = 1d - t;
 				oneMinusTSquared = oneMinusT * oneMinusT;
