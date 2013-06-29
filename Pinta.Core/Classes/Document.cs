@@ -515,10 +515,16 @@ namespace Pinta.Core
 						paint.Add (SelectionLayer);
 				}
 
-				//Make sure that the UserLayer's TextLayer is in use.
-				if (!layer.Hidden && layer.IsTextLayerSetup)
+				if (!layer.Hidden)
 				{
-					paint.Add(layer.TextLayer);
+					foreach (ReEditableLayer rel in layer.ReEditableLayers)
+					{
+						//Make sure that each UserLayer's ReEditableLayer is in use before adding it to the List of Layers to Paint.
+						if (rel.IsLayerSetup)
+						{
+							paint.Add(rel.Layer);
+						}
+					}
 				}
 			}
 

@@ -4,7 +4,7 @@
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2012 Andrew Davis, GSoC 2012
+// Copyright (c) 2013 Andrew Davis, GSoC 2012 and GSoC 2013
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,98 +29,100 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using Cairo;
 using Gdk;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
 	/// <summary>
-	/// A UserLayer is a Layer that the user interacts with directly. Each UserLayer contains a TextLayer
-	/// and some other text related variables that allow for the re-editability of text.
+	/// A UserLayer is a Layer that the user interacts with directly. Each UserLayer contains special layers
+	/// and some other special variables that allow for re-editability of various things.
 	/// </summary>
 	public class UserLayer : Layer
 	{
-		//The Layer for Text to be drawn on while it is still editable.
-		private Layer actualTextLayer;
+		//Special layers to be drawn on to keep things editable by drawing them separately from the UserLayers.
+		public List<ReEditableLayer> ReEditableLayers = new List<ReEditableLayer>();
+		public ReEditableLayer TextLayer, CurvesLayer;
 
-		//Call the base class constructor and setup the TextEngine.
+		//Call the base class constructor and setup the engines.
 		public UserLayer(ImageSurface surface) : base(surface)
 		{
-			tEngine = new TextEngine();
+			setupUserLayer();
 		}
 
-		//Call the base class constructor and setup the TextEngine.
+		//Call the base class constructor and setup the engines.
 		public UserLayer(ImageSurface surface, bool hidden, double opacity, string name) : base(surface, hidden, opacity, name)
 		{
+			setupUserLayer();
+		}
+
+		private void setupUserLayer()
+		{
 			tEngine = new TextEngine();
+			cEngine = new CurveEngine();
+
+			TextLayer = new ReEditableLayer(this);
+			CurvesLayer = new ReEditableLayer(this);
 		}
 
-		/// <summary>
-		/// Setup the TextLayer based on this UserLayer's Surface.
-		/// </summary>
-		private void SetupTextLayer()
-		{
-			actualTextLayer = new Layer(new Cairo.ImageSurface(Surface.Format, Surface.Width, Surface.Height));
-
-			IsTextLayerSetup = true;
-		}
-
-		//Whether or not the TextLayer and TextEngine have already been setup.
-		public bool IsTextLayerSetup = false;
-
-		//A public property for the actual TextLayer that creates a new one when it's first used.
-		public Layer TextLayer
-		{
-			get
-			{
-				if (!IsTextLayerSetup)
-				{
-					SetupTextLayer();
-				}
-
-				return actualTextLayer;
-			}
-
-			set
-			{
-				actualTextLayer = value;
-			}
-		}
-
-		//The TextEngine that stores most of the editable text's data, including the text itself.
+		//Stores most of the editable text's data, including the text itself.
 		public TextEngine tEngine;
 
-		//The rectangular boundary surrounding the editable text.
+		//Rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
+
+		//Stores the editable curve data.
+		public CurveEngine cEngine;
 
 		public override void Rotate(double angle)
 		{
 			base.Rotate (angle);
-			if (IsTextLayerSetup) {
-				TextLayer.Rotate (angle);
+
+			foreach (ReEditableLayer rel in ReEditableLayers)
+			{
+				if (rel.IsLayerSetup)
+				{
+					rel.Layer.Rotate(angle);
+				}
 			}
 		}
 
 		public override void Crop(Gdk.Rectangle rect, Path path)
 		{
 			base.Crop (rect, path);
-			if (IsTextLayerSetup) {
-				TextLayer.Crop (rect, path);
+
+			foreach (ReEditableLayer rel in ReEditableLayers)
+			{
+				if (rel.IsLayerSetup)
+				{
+					rel.Layer.Crop(rect, path);
+				}
 			}
 		}
 
 		public override void ResizeCanvas(int width, int height, Anchor anchor)
 		{
 			base.ResizeCanvas (width, height, anchor);
-			if (IsTextLayerSetup) {
-				TextLayer.ResizeCanvas (width, height, anchor);
+
+			foreach (ReEditableLayer rel in ReEditableLayers)
+			{
+				if (rel.IsLayerSetup)
+				{
+					rel.Layer.ResizeCanvas(width, height, anchor);
+				}
 			}
 		}
 
 		public override void Resize(int width, int height)
 		{
 			base.Resize (width, height);
-			if (IsTextLayerSetup) {
-				TextLayer.Resize (width, height);
+
+			foreach (ReEditableLayer rel in ReEditableLayers)
+			{
+				if (rel.IsLayerSetup)
+				{
+					rel.Layer.Resize(width, height);
+				}
 			}
 		}
 	}

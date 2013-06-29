@@ -1,10 +1,10 @@
 ﻿// 
-// TextHistoryItem.cs
+// CurvesHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2012 Andrew Davis, GSoC 2012
+// Copyright (c) 2013 Andrew Davis, GSoC 2013
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,44 +29,43 @@ using Cairo;
 
 namespace Pinta.Core
 {
-	public class TextHistoryItem : BaseHistoryItem
+	public class CurvesHistoryItem : BaseHistoryItem
 	{
 		UserLayer userLayer;
 
-		SurfaceDiff text_surface_diff;
-		ImageSurface textSurface;
+		SurfaceDiff curves_surface_diff;
+		ImageSurface curvesSurface;
 
 		SurfaceDiff user_surface_diff;
 		ImageSurface userSurface;
 
-		TextEngine tEngine;
-		Gdk.Rectangle textBounds;
+		CurveEngine cEngine;
 
 		/// <summary>
-		/// A history item for when text is created, edited, and/or finalized.
+		/// A history item for when curves are created, modified, and/or finalized.
 		/// </summary>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		/// <param name="passedTextSurface">The stored TextLayer surface.</param>
+		/// <param name="passedCurvesSurface">The stored CurvesLayer surface.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
-		/// <param name="passedTextEngine">The text engine being used.</param>
+		/// <param name="passedCurveEngine">The curve engine being used.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface,
-		                       ImageSurface passedUserSurface, TextEngine passedTextEngine,
+		public CurvesHistoryItem(string icon, string text, ImageSurface passedCurvesSurface,
+		                       ImageSurface passedUserSurface, CurveEngine passedCurveEngine,
 		                       UserLayer passedUserLayer) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
 
 
-			text_surface_diff = SurfaceDiff.Create(passedTextSurface, userLayer.TextLayer.Layer.Surface, true);
+			curves_surface_diff = SurfaceDiff.Create(passedCurvesSurface, userLayer.TextLayer.Layer.Surface, true);
 			
-			if (text_surface_diff == null)
+			if (curves_surface_diff == null)
 			{
-				textSurface = passedTextSurface;
+				curvesSurface = passedCurvesSurface;
 			}
 			else
 			{
-				(passedTextSurface as IDisposable).Dispose();
+				(passedCurvesSurface as IDisposable).Dispose();
 			}
 
 
@@ -82,12 +81,10 @@ namespace Pinta.Core
 			}
 
 
-			tEngine = passedTextEngine;
-
-			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
+			cEngine = passedCurveEngine;
 		}
 
-		public TextHistoryItem(string icon, string text) : base(icon, text)
+		public CurvesHistoryItem(string icon, string text) : base(icon, text)
 		{
 		}
 
@@ -104,20 +101,20 @@ namespace Pinta.Core
 		private void Swap()
 		{
 			// Grab the original surface
-			ImageSurface surf = userLayer.TextLayer.Layer.Surface;
+			ImageSurface surf = userLayer.CurvesLayer.Layer.Surface;
 
-			if (text_surface_diff != null)
+			if (curves_surface_diff != null)
 			{
-				text_surface_diff.ApplyAndSwap(surf);
-				PintaCore.Workspace.Invalidate(text_surface_diff.GetBounds());
+				curves_surface_diff.ApplyAndSwap(surf);
+				PintaCore.Workspace.Invalidate(curves_surface_diff.GetBounds());
 			}
 			else
 			{
 				// Undo to the "old" surface
-				userLayer.TextLayer.Layer.Surface = textSurface;
+				userLayer.TextLayer.Layer.Surface = curvesSurface;
 
 				// Store the original surface for Redo
-				textSurface = surf;
+				curvesSurface = surf;
 			}
 
 
@@ -147,23 +144,20 @@ namespace Pinta.Core
 
 
 			//Store the old text data temporarily.
-			TextEngine oldTEngine = tEngine;
-			Gdk.Rectangle oldTextBounds = textBounds;
+			CurveEngine oldCEngine = cEngine;
 
 			//Swap half of the data.
-			tEngine = userLayer.tEngine;
-			textBounds = userLayer.textBounds;
+			cEngine = userLayer.cEngine;
 
 			//Swap the other half.
-			userLayer.tEngine = oldTEngine;
-			userLayer.textBounds = oldTextBounds;
+			userLayer.cEngine = oldCEngine;
 		}
 
 		public override void Dispose()
 		{
 			// Free up native surface
-			if (textSurface != null)
-				(textSurface as IDisposable).Dispose();
+			if (curvesSurface != null)
+				(curvesSurface as IDisposable).Dispose();
 
 			// Free up native surface
 			if (userSurface != null)
