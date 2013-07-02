@@ -35,11 +35,13 @@ namespace Pinta.Tools
 {
 	public class LineCurveTool : ShapeTool
 	{
-		private static double curveClickRange = 8d;
-		private static double defaultTension = 1d / 3d;
+		private static double curveClickRange = 9d;
+		private static double defaultTension = 1d / 6d;
 
 		private int selectedPointIndex = 0;
 		private int selectedPointCurveIndex = 0;
+
+		private bool drawPoints = true;
 
 		//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
 		private Cairo.ImageSurface curves_undo_surface;
@@ -48,21 +50,10 @@ namespace Pinta.Tools
 
 		// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
 		// if the selection changes before the text is finalized.
-		private DocumentSelection selection; //***IMPLEMENT THIS LATER?***
+		private DocumentSelection selection; //***IMPLEMENT THIS BUG FIX LATER***
 
-		private CurveEngine CurrentCurveEngine
-		{
-			get
-			{
-				return PintaCore.Workspace.HasOpenDocuments ?
-					PintaCore.Workspace.ActiveDocument.CurrentUserLayer.cEngine : null;
-			}
-
-			set
-			{
-				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.cEngine = value;
-			}
-		}
+		//Stores the editable curve data.
+		public static CurveEngine cEngine = new CurveEngine();
 
 		public override string Name {
 			get { return Catalog.GetString ("Line"); }
@@ -91,7 +82,7 @@ namespace Pinta.Tools
 
 			using (Context g = new Context(l.Surface))
 			{
-				List<List<ControlPoint>> gPC = CurrentCurveEngine.givenPointsCollection;
+				List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
 
 
 
@@ -107,115 +98,89 @@ namespace Pinta.Tools
 
 				Color cpColor = new Color(0d, .06d, .6d);
 
-				//Used to find the minimal invalidation rectangle.
-				double dX = -1d;
-				double dY = -1d;
-				double dX2 = -1d;
-				double dY2 = -1d;
 
-				for (int n = 0; n < gPC.Count; ++n)
+				dirty = new Rectangle(-1d, -1d, -1d, -1d);
+
+				if (drawPoints)
 				{
-					if (gPC[n].Count > 0)
+					for (int n = 0; n < gPC.Count; ++n)
 					{
-						CurrentCurveEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
-
-						Rectangle tempDirty = g.DrawPolygonal(CurrentCurveEngine.generatedCurvePointsCollection[n], outline_color);
-
-						//Expand the invalidation rectangle as necessary.
-						if (dX2 == -1d)
+						if (gPC[n].Count > 0)
 						{
-							dX = tempDirty.X;
-							dY = tempDirty.Y;
-							dX2 = tempDirty.X + tempDirty.Width;
-							dY2 = tempDirty.Y + tempDirty.Height;
-						}
-						else
-						{
-							if (tempDirty.X < dX)
+							cEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
+
+							Rectangle tempDirty = g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color);
+
+							//Expand the invalidation rectangle as necessary.
+							dirty = CairoExtensions.UnionRectangles(dirty, tempDirty);
+
+							//Draw the control points.
+							for (int i = 0; i < gPC[n].Count; ++i)
 							{
-								dX = tempDirty.X;
+								g.DrawEllipse(new Rectangle(gPC[n][i].Position.X - 1d, gPC[n][i].Position.Y - 1d, 2d, 2d), cpColor, 2);
 							}
-
-							if (tempDirty.Y < dY)
-							{
-								dY = tempDirty.Y;
-							}
-
-							if (tempDirty.X + tempDirty.Width > dX2)
-							{
-								dX2 = tempDirty.X + tempDirty.Width;
-							}
-
-							if (tempDirty.Y + tempDirty.Height > dY2)
-							{
-								dY2 = tempDirty.Y + tempDirty.Height;
-							}
-						}
-
-
-
-						//Draw the control points.
-						for (int i = 0; i < gPC[n].Count; ++i)
-						{
-							g.DrawEllipse(new Rectangle(gPC[n][i].Position.X - 1d, gPC[n][i].Position.Y - 1d, 2d, 2d), cpColor, 2);
 						}
 					}
+
+					//NOTE: Control point graphics need to replicate the coloring of selection points.
+					if (selectedPointIndex > -1)
+					{
+						//Draw a ring around the selected point.
+						g.DrawEllipse(
+							new Rectangle(
+								gPC[selectedPointCurveIndex][selectedPointIndex].Position.X - 4d,
+								gPC[selectedPointCurveIndex][selectedPointIndex].Position.Y - 4d, 8d, 8d),
+							cpColor, 1);
+					}
+
+					dirty = dirty.Inflate(8, 8);
 				}
-
-				if (dY2 == -1d)
+				else
 				{
-					dX = 0d;
-					dY = 0d;
-					dX2 = 0d;
-					dY2 = 0d;
-				}
+					for (int n = 0; n < gPC.Count; ++n)
+					{
+						if (gPC[n].Count > 0)
+						{
+							cEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
-				dirty = new Rectangle(dX, dY, dX2 - dX, dY2 - dY);
-				dirty.Inflate(8, 8);
+							Rectangle tempDirty = g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color);
 
-
-
-				//NOTE: Control point graphics need to replicate the coloring of selection points.
-				if (selectedPointIndex > -1)
-				{
-					//Draw a ring around the selected point.
-					g.DrawEllipse(
-						new Rectangle(
-							gPC[selectedPointCurveIndex][selectedPointIndex].Position.X - 4d,
-							gPC[selectedPointCurveIndex][selectedPointIndex].Position.Y - 4d, 8d, 8d),
-						cpColor, 1);
+							//Expand the invalidation rectangle as necessary.
+							dirty = CairoExtensions.UnionRectangles(dirty, tempDirty);
+						}
+					}
 				}
 			}
 			
 			return dirty;
 		}
 
-		/// <summary>
-		/// Forces the line to snap to angles.
-		/// </summary>
-		protected override Rectangle DrawShape (Rectangle r, Layer l, bool shiftkey_pressed)
-		{
-			if (shiftkey_pressed) {
-				PointD dir = new PointD(current_point.X - shape_origin.X, current_point.Y - shape_origin.Y);
-				double theta = Math.Atan2(dir.Y, dir.X);
-				double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
-
-				theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
-				current_point = new PointD((shape_origin.X + len * Math.Cos(theta)), (shape_origin.Y + len * Math.Sin(theta)));
-			}
-			return DrawShape (r, l);
-		}
-
 		protected void drawCurves(bool finalize, bool shiftKey)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.CurrentUserLayer.CurvesLayer.Layer.Clear();
+			Rectangle dirty;
 
-			Rectangle dirty = DrawShape(
-				Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey),
-				doc.CurrentUserLayer.CurvesLayer.Layer,
-				shiftKey);
+			if (finalize)
+			{
+				selectedPointIndex = -1;
+				drawPoints = false;
+
+				dirty = DrawShape(
+					Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey),
+					doc.CurrentUserLayer,
+					shiftKey);
+			}
+			else
+			{
+				doc.ToolLayer.Clear();
+				drawPoints = true;
+
+				dirty = DrawShape(
+					Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey),
+					doc.ToolLayer,
+					shiftKey);
+			}
 
 
 
@@ -225,9 +190,10 @@ namespace Pinta.Tools
 				dirty = dirty.Inflate(1, 1);
 			}
 
+			dirty = CairoExtensions.UnionRectangles(dirty, last_dirty);
+
 			dirty = dirty.Clamp();
 
-			doc.Workspace.Invalidate(last_dirty.ToGdkRectangle());
 			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
 
 			last_dirty = dirty;
@@ -236,66 +202,37 @@ namespace Pinta.Tools
 
 			if (finalize)
 			{
-				is_drawing = false;
-
-				if (surface_modified)
+				//Make sure that neither undo surface is null.
+				if (curves_undo_surface != null && user_undo_surface != null)
 				{
-					//Make sure that neither undo surface is null.
-					if (curves_undo_surface != null && user_undo_surface != null)
-					{
-						//Create a new CurvesHistoryItem so that the updated drawing of curves can be undone.
-						doc.History.PushNewItem(new CurvesHistoryItem(Icon, Name,
-							curves_undo_surface.Clone(), user_undo_surface.Clone(),
-							undo_engine.Clone(), doc.CurrentUserLayer));
-					}
+					//Create a new CurvesHistoryItem so that the updated drawing of curves can be undone.
+					doc.History.PushNewItem(new CurvesHistoryItem(Icon, Name,
+						curves_undo_surface.Clone(), user_undo_surface.Clone(),
+						undo_engine.Clone(), doc.CurrentUserLayer));
 				}
 
+				is_drawing = false;
 				surface_modified = false;
 			}
 		}
 
-		/*protected void drawCurveOnToolLayer(bool shiftKey)
+		protected override void OnDeactivated()
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
-			doc.ToolLayer.Clear();
+			drawCurves(true, false);
 
-			Rectangle dirty = DrawShape(
-				Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey),
-				doc.ToolLayer,
-				shiftKey);
-
-			// Increase the size of the dirty rect to account for antialiasing.
-			if (UseAntialiasing)
-			{
-				dirty = dirty.Inflate(1, 1);
-			}
-
-			dirty = dirty.Clamp();
-
-			doc.Workspace.Invalidate(last_dirty.ToGdkRectangle());
-			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
-
-			last_dirty = dirty;
+			base.OnDeactivated();
 		}
 
-		protected void drawCurveOnUserLayer(bool shiftKey)
+		protected override void OnCommit()
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
-			DrawShape(Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey), doc.CurrentUserLayer, shiftKey);
+			drawCurves(true, false);
 
-			doc.Workspace.Invalidate(last_dirty.ToGdkRectangle());
-
-			is_drawing = false;
-
-			if (surface_modified)
-				doc.History.PushNewItem(CreateHistoryItem());
-			else if (undo_surface != null)
-				(undo_surface as IDisposable).Dispose();
-
-			surface_modified = false;
-		}*/
+			base.OnCommit();
+		}
 
 		protected override void OnKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
 		{
@@ -303,7 +240,7 @@ namespace Pinta.Tools
 			{
 				if (selectedPointIndex > -1)
 				{
-					List<List<ControlPoint>> gPC = CurrentCurveEngine.givenPointsCollection;
+					List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
 
 
 					undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
@@ -333,10 +270,26 @@ namespace Pinta.Tools
 
 					surface_modified = true;
 
-					drawCurves(true, false);
+					drawCurves(false, false);
 				}
 
 				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.z && surface_modified)
+			{
+				selectedPointIndex = -1;
+				surface_modified = false;
+
+				//Draw the current state.
+				drawCurves(false, false);
+			}
+			else if (args.Event.Key == Gdk.Key.y)
+			{
+				selectedPointIndex = -1;
+				surface_modified = false;
+
+				//Draw the current state.
+				drawCurves(false, false);
 			}
 			else
 			{
@@ -367,6 +320,15 @@ namespace Pinta.Tools
 			shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
 			current_point = shape_origin;
 
+
+			bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+
+			if (shiftKey)
+			{
+				calculateModifiedCurrentPoint();
+			}
+
+
 			is_drawing = true;
 
 			if (args.Event.Button == 1)
@@ -386,16 +348,7 @@ namespace Pinta.Tools
 
 
 
-			//Store the previous state of the current UserLayer's and CurvesLayer's ImageSurfaces.
-			user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-			curves_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.CurvesLayer.Layer.Surface.Clone();
-
-			//Store the previous state of the Curve Engine.
-			undo_engine = CurrentCurveEngine.Clone();
-
-
-
-			List<List<ControlPoint>> gPC = CurrentCurveEngine.givenPointsCollection;
+			List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
 
 
 			PointD closestPoint = new PointD(double.MaxValue, double.MaxValue);
@@ -413,7 +366,7 @@ namespace Pinta.Tools
 					currentPointNumber = 0;
 
 					//Find the closest point on the curve to the mouse position.
-					foreach (PointD p in CurrentCurveEngine.generatedCurvePointsCollection[n])
+					foreach (PointD p in cEngine.generatedCurvePointsCollection[n])
 					{
 						if (p.X == gPC[n][currentPointNumber].Position.X && p.Y == gPC[n][currentPointNumber].Position.Y)
 						{
@@ -436,11 +389,11 @@ namespace Pinta.Tools
 
 
 
-			bool clickedOnControlPoint = false;
-
 			if (closestDistance < curveClickRange)
 			{
 				//User clicked on a generated point on a line/curve.
+
+				bool clickedOnControlPoint = false;
 
 				if (closestPointNumber > 0)
 				{
@@ -481,26 +434,35 @@ namespace Pinta.Tools
 			{
 				//User clicked outside of any lines/curves.
 
-				//Make sure there's actually a curve.
-				if (gPC.Count > 0)
-				{
-					//Make sure that neither undo surface is null.
-					if (curves_undo_surface != null && user_undo_surface != null)
-					{
-						//Create a new CurvesHistoryItem so that the current curve can be finalized.
-						doc.History.PushNewItem(new CurvesHistoryItem(Icon, Name,
-							curves_undo_surface.Clone(), user_undo_surface.Clone(),
-							undo_engine.Clone(), doc.CurrentUserLayer));
-					}
-				}
-
 				if (gPC[0].Count > 0)
 				{
 					//Create a new curve.
-					gPC.Insert(0, new List<ControlPoint>());
-					CurrentCurveEngine.generatedCurvePointsCollection.Insert(0, new PointD[0]);
+
+					//Finalize the previous curve.
+					drawCurves(true, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
+
+					is_drawing = true;
+
+					//Clear out all of the old data.
+					gPC[0].Clear();
+					cEngine.generatedCurvePointsCollection[0] = new PointD[0];
 				}
+
+
+				//Store the previous state of the current UserLayer's and ToolLayer's ImageSurfaces.
+				user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
+				curves_undo_surface = doc.ToolLayer.Surface.Clone();
+
+				//Store the previous state of the Curve Engine.
+				undo_engine = cEngine.Clone();
+
+
+				//Create a new CurvesHistoryItem so that the updated drawing of curves can be undone.
+				doc.History.PushNewItem(new CurvesHistoryItem(Icon, Name,
+					curves_undo_surface.Clone(), user_undo_surface.Clone(),
+					undo_engine.Clone(), doc.CurrentUserLayer));
 				
+
 				//Add the first two points of the line. The second point will follow the mouse around until released.
 				gPC[0].Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), defaultTension));
 				gPC[0].Add(new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), defaultTension));
@@ -511,23 +473,16 @@ namespace Pinta.Tools
 
 
 
-			if (!clickedOnControlPoint)
-			{
-				surface_modified = true;
+			surface_modified = true;
 
-				drawCurves(false, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
-			}
+			drawCurves(false, shiftKey);
 		}
 
 		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			is_drawing = false;
 
-			doc.ToolLayer.Hidden = true;
-
-			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
-
-			drawCurves(true, args.Event.IsShiftPressed());
+			drawCurves(false, args.Event.IsShiftPressed());
 		}
 
 		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, PointD point)
@@ -536,27 +491,51 @@ namespace Pinta.Tools
 				return;
 
 
-			List<List<ControlPoint>> gPC = CurrentCurveEngine.givenPointsCollection;
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
+
+
+			bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+
+			if (shiftKey)
+			{
+				calculateModifiedCurrentPoint();
+			}
+
+
+			List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
 
 
 			//Make sure the point was moved.
-			if (point.X != gPC[selectedPointCurveIndex][selectedPointIndex].Position.X
-				|| point.Y != gPC[selectedPointCurveIndex][selectedPointIndex].Position.Y)
+			if (current_point.X != gPC[selectedPointCurveIndex][selectedPointIndex].Position.X
+				|| current_point.Y != gPC[selectedPointCurveIndex][selectedPointIndex].Position.Y)
 			{
-				Document doc = PintaCore.Workspace.ActiveDocument;
-
-				current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
-
-
 				gPC[selectedPointCurveIndex].RemoveAt(selectedPointIndex);
-				gPC[selectedPointCurveIndex].Insert(selectedPointIndex, new ControlPoint(new PointD(current_point.X, current_point.Y), defaultTension));
+				gPC[selectedPointCurveIndex].Insert(selectedPointIndex,
+					new ControlPoint(new PointD(current_point.X, current_point.Y),
+						defaultTension));
 
 				surface_modified = true;
 
 
 
-				drawCurves(false, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
+				drawCurves(false, shiftKey);
 			}
+		}
+
+		/// <summary>
+		/// Calculate the modified position of current_point such that the angle between shape_origin
+		/// and current_point is snapped to the closest angle out of a certain number of angles.
+		/// </summary>
+		protected void calculateModifiedCurrentPoint()
+		{
+			PointD dir = new PointD(current_point.X - shape_origin.X, current_point.Y - shape_origin.Y);
+			double theta = Math.Atan2(dir.Y, dir.X);
+			double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
+
+			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
+			current_point = new PointD((shape_origin.X + len * Math.Cos(theta)), (shape_origin.Y + len * Math.Sin(theta)));
 		}
 
 		/// <summary>
@@ -566,7 +545,7 @@ namespace Pinta.Tools
 		/// <returns></returns>
 		protected List<PointD> GenerateCardinalSplinePolynomialCurvePoints(int curveNum)
 		{
-			List<List<ControlPoint>> gPC = CurrentCurveEngine.givenPointsCollection;
+			List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
 
 
 			List<PointD> generatedPoints = new List<PointD>();

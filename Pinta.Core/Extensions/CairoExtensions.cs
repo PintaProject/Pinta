@@ -1501,5 +1501,57 @@ namespace Pinta.Core
 		{
 			return new PointD(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
+
+		public static bool IsRectanglePositive(this Rectangle r)
+		{
+			return r.X >= 0 || r.Y >= 0 || r.Width >= 0 || r.Height >= 0;
+		}
+
+		/// <summary>
+		/// Computes and returns the Union (largest possible combination) of two Rectangles.
+		/// The two given Rectangles do not need to intersect, and the order of passing does not matter.
+		/// 
+		/// Another way to understand this function is that it computes and returns the
+		/// smallest possible Rectangle that encompasses both given Rectangles.
+		/// 
+		/// A Rectangle is considered "negative" if any of its parameters are less than 0. Neither given Rectangle needs to be positive.
+		/// If both Rectangles are positive, the Union is calculated. If only one Rectangle is positive, a copy of that Rectangle is returned.
+		/// If both Rectangles are negative, an empty Rectangle (0d, 0d, 0d, 0d) is returned. This ensures that all results are usable.
+		/// </summary>
+		/// <param name="r1">The first given Rectangle.</param>
+		/// <param name="r2">The second given Rectangle.</param>
+		/// <returns></returns>
+		public static Rectangle UnionRectangles(Rectangle r1, Rectangle r2)
+		{
+			if (!r1.IsRectanglePositive())
+			{
+				if (!r2.IsRectanglePositive())
+				{
+					//Neither Rectangle is positive.
+					return new Rectangle(0d, 0d, 0d, 0d);
+				}
+				else
+				{
+					//Only r2 is positive.
+					return new Rectangle(r2.X, r2.Y, r2.Width, r2.Height);
+				}
+			}
+			else if (!r2.IsRectanglePositive())
+			{
+				//Only r1 is positive.
+				return new Rectangle(r1.X, r1.Y, r1.Width, r1.Height);
+			}
+
+			//Both r1 and r2 are positive.
+
+			//Calculate the left-most and top-most values.
+			double smallestX = Math.Min(r1.X, r2.X);
+			double smallestY = Math.Min(r1.Y, r2.Y);
+
+			//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
+			return new Rectangle(smallestX, smallestY,
+				Math.Max(r1.X + r1.Width, r2.X + r2.Width) - smallestX,
+				Math.Max(r1.Y + r1.Height, r2.Y + r2.Height) - smallestY);
+		}
 	}
 }

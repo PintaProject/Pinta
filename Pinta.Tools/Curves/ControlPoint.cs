@@ -30,7 +30,7 @@ using System.Linq;
 using System.Text;
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	public class ControlPoint
 	{
@@ -47,6 +47,11 @@ namespace Pinta.Core
 		{
 			Position = passedPosition;
 			Tension = passedTension;
+		}
+
+		public ControlPoint Clone()
+		{
+			return new ControlPoint(Position, Tension);
 		}
 	}
 }

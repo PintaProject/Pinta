@@ -25,9 +25,10 @@
 // THE SOFTWARE.
 
 using System;
+using Pinta.Core;
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	public class CurvesHistoryItem : BaseHistoryItem
 	{
@@ -101,7 +102,7 @@ namespace Pinta.Core
 		private void Swap()
 		{
 			// Grab the original surface
-			ImageSurface surf = userLayer.CurvesLayer.Layer.Surface;
+			ImageSurface surf = PintaCore.Workspace.ActiveDocument.ToolLayer.Surface;
 
 			if (curves_surface_diff != null)
 			{
@@ -147,10 +148,10 @@ namespace Pinta.Core
 			CurveEngine oldCEngine = cEngine;
 
 			//Swap half of the data.
-			cEngine = userLayer.cEngine;
+			cEngine = Pinta.Tools.LineCurveTool.cEngine;
 
 			//Swap the other half.
-			userLayer.cEngine = oldCEngine;
+			Pinta.Tools.LineCurveTool.cEngine = oldCEngine;
 		}
 
 		public override void Dispose()

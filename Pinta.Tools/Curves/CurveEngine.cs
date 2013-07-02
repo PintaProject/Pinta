@@ -30,7 +30,7 @@ using System.Linq;
 using System.Text;
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
 	public class CurveEngine
 	{
@@ -47,8 +47,8 @@ namespace Pinta.Core
 		{
 			CurveEngine clonedCE = new CurveEngine();
 
-			clonedCE.givenPointsCollection = givenPointsCollection.ToList();
-			clonedCE.generatedCurvePointsCollection = generatedCurvePointsCollection.ToList(); 
+			clonedCE.givenPointsCollection[0] = givenPointsCollection[0].Select(i => i.Clone()).ToList();
+			clonedCE.generatedCurvePointsCollection[0] = generatedCurvePointsCollection[0].Select(i => new PointD(i.X, i.Y)).ToArray();
 
 			return clonedCE;
 		}

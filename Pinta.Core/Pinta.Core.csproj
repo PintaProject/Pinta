@@ -84,8 +84,6 @@
   <ItemGroup>
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
-    <Compile Include="Classes\Re-editable\Curves\ControlPoint.cs" />
-    <Compile Include="Classes\Re-editable\Curves\CurveEngine.cs" />
     <Compile Include="Classes\Re-editable\ReEditableLayer.cs" />
     <Compile Include="Classes\SurfaceDiff.cs" />
     <Compile Include="Classes\DocumentSelection.cs" />
@@ -96,7 +94,6 @@
     <Compile Include="Classes\Re-editable\Text\TextEngine.cs" />
     <Compile Include="Classes\UserLayer.cs" />
     <Compile Include="Enumerations\BlendMode.cs" />
-    <Compile Include="HistoryItems\CurvesHistoryItem.cs" />
     <Compile Include="HistoryItems\TextHistoryItem.cs" />
     <Compile Include="PixelOperations\CheckerBoardOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

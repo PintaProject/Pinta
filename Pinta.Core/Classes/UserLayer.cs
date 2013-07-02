@@ -41,7 +41,7 @@ namespace Pinta.Core
 	{
 		//Special layers to be drawn on to keep things editable by drawing them separately from the UserLayers.
 		public List<ReEditableLayer> ReEditableLayers = new List<ReEditableLayer>();
-		public ReEditableLayer TextLayer, CurvesLayer;
+		public ReEditableLayer TextLayer;
 
 		//Call the base class constructor and setup the engines.
 		public UserLayer(ImageSurface surface) : base(surface)
@@ -58,10 +58,8 @@ namespace Pinta.Core
 		private void setupUserLayer()
 		{
 			tEngine = new TextEngine();
-			cEngine = new CurveEngine();
 
 			TextLayer = new ReEditableLayer(this);
-			CurvesLayer = new ReEditableLayer(this);
 		}
 
 		//Stores most of the editable text's data, including the text itself.
@@ -70,9 +68,6 @@ namespace Pinta.Core
 		//Rectangular boundary surrounding the editable text.
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
-
-		//Stores the editable curve data.
-		public CurveEngine cEngine;
 
 		public override void Rotate(double angle)
 		{
