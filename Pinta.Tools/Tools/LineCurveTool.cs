@@ -78,7 +78,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Rectangle dirty;
+			Rectangle? dirty = null;
 
 			using (Context g = new Context(l.Surface))
 			{
@@ -98,9 +98,6 @@ namespace Pinta.Tools
 
 				Color cpColor = new Color(0d, .06d, .6d);
 
-
-				dirty = new Rectangle(-1d, -1d, -1d, -1d);
-
 				if (drawPoints)
 				{
 					for (int n = 0; n < gPC.Count; ++n)
@@ -109,10 +106,8 @@ namespace Pinta.Tools
 						{
 							cEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
-							Rectangle tempDirty = g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color);
-
 							//Expand the invalidation rectangle as necessary.
-							dirty = CairoExtensions.UnionRectangles(dirty, tempDirty);
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color));
 
 							//Draw the control points.
 							for (int i = 0; i < gPC[n].Count; ++i)
@@ -133,7 +128,14 @@ namespace Pinta.Tools
 							cpColor, 1);
 					}
 
-					dirty = dirty.Inflate(8, 8);
+					if (dirty == null)
+					{
+						dirty = new Rectangle(0d, 0d, 0d, 0d);
+					}
+					else
+					{
+						dirty = dirty.Value.Inflate(8, 8);
+					}
 				}
 				else
 				{
@@ -143,23 +145,21 @@ namespace Pinta.Tools
 						{
 							cEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
-							Rectangle tempDirty = g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color);
-
 							//Expand the invalidation rectangle as necessary.
-							dirty = CairoExtensions.UnionRectangles(dirty, tempDirty);
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color));
 						}
 					}
 				}
 			}
-			
-			return dirty;
+
+			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
 		}
 
 		protected void drawCurves(bool finalize, bool shiftKey)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Rectangle dirty;
+			Rectangle? dirty;
 
 			if (finalize)
 			{
@@ -187,16 +187,16 @@ namespace Pinta.Tools
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (UseAntialiasing)
 			{
-				dirty = dirty.Inflate(1, 1);
+				dirty = dirty.Value.Inflate(1, 1);
 			}
 
-			dirty = CairoExtensions.UnionRectangles(dirty, last_dirty);
+			dirty = dirty.UnionRectangles(last_dirty);
 
-			dirty = dirty.Clamp();
+			dirty = dirty.Value.Clamp();
 
-			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
+			doc.Workspace.Invalidate(dirty.Value.ToGdkRectangle());
 
-			last_dirty = dirty;
+			last_dirty = dirty.Value;
 
 
 
