@@ -338,8 +338,8 @@ msgstr ""
 msgid "Increase rectangle's corner radius"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:37
-msgid "Line"
+#: Pinta.Tools/Tools/LineCurveTool.cs:64
+msgid "Line/Curve"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:43

@@ -35,12 +35,15 @@ namespace Pinta.Tools
 	public class CurveEngine
 	{
 		public List<List<ControlPoint>> givenPointsCollection = new List<List<ControlPoint>>();
-		public List<PointD[]> generatedCurvePointsCollection = new List<PointD[]>();
+		public List<PointD[]> generatedPointsCollection = new List<PointD[]>();
+		public List<Dictionary<double, Dictionary<double, List<OrganizedPoint>>>> organizedPointsCollection =
+			new List<Dictionary<double, Dictionary<double, List<OrganizedPoint>>>>();
 
 		public CurveEngine()
 		{
 			givenPointsCollection.Add(new List<ControlPoint>());
-			generatedCurvePointsCollection.Add(new PointD[0]);
+			generatedPointsCollection.Add(new PointD[0]);
+			organizedPointsCollection.Add(new Dictionary<double, Dictionary<double, List<OrganizedPoint>>>());
 		}
 
 		public CurveEngine Clone()
@@ -48,7 +51,21 @@ namespace Pinta.Tools
 			CurveEngine clonedCE = new CurveEngine();
 
 			clonedCE.givenPointsCollection[0] = givenPointsCollection[0].Select(i => i.Clone()).ToList();
-			clonedCE.generatedCurvePointsCollection[0] = generatedCurvePointsCollection[0].Select(i => new PointD(i.X, i.Y)).ToArray();
+			clonedCE.generatedPointsCollection[0] = generatedPointsCollection[0].Select(i => new PointD(i.X, i.Y)).ToArray();
+
+			foreach (KeyValuePair<double, Dictionary<double, List<OrganizedPoint>>> xSection in organizedPointsCollection[0])
+			{
+				//This must be created each time to ensure that it is fresh for each loop iteration.
+				Dictionary<double, List<OrganizedPoint>> tempSection = new Dictionary<double, List<OrganizedPoint>>();
+
+				foreach (KeyValuePair<double, List<OrganizedPoint>> section in xSection.Value)
+				{
+					tempSection.Add(section.Key,
+						section.Value.Select(i => new OrganizedPoint(new PointD(i.Position.X, i.Position.Y), i.Index)).ToList());
+				}
+
+				clonedCE.organizedPointsCollection[0].Add(xSection.Key, tempSection);
+			}
 
 			return clonedCE;
 		}

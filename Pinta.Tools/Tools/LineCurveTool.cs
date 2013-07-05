@@ -35,11 +35,23 @@ namespace Pinta.Tools
 {
 	public class LineCurveTool : ShapeTool
 	{
-		private static double curveClickRange = 9d;
-		private static double defaultTension = 1d / 6d;
+		private const double curveClickRange = 12d;
+		private const double defaultTension = 1d / 6d;
+		private const double sectionSize = 15d;
+
+		//Don't change this; it's automatically calculated!
+		private static double borderingSectionRange = Math.Ceiling(curveClickRange / sectionSize) * sectionSize;
 
 		private int selectedPointIndex = 0;
 		private int selectedPointCurveIndex = 0;
+
+		private PointD hoverPoint = new PointD(-1d, -1d);
+		private int hoveredPointAsControlPoint = -1;
+
+		private PointD closestPoint;
+		private double closestDistance;
+		private int closestPointIndex = 0;
+		private int closestCurveIndex = 0;
 
 		private bool drawPoints = true;
 
@@ -51,12 +63,12 @@ namespace Pinta.Tools
 		// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
 		// if the selection changes before the text is finalized.
 		private DocumentSelection selection; //***IMPLEMENT THIS BUG FIX LATER***
-
+		
 		//Stores the editable curve data.
 		public static CurveEngine cEngine = new CurveEngine();
 
 		public override string Name {
-			get { return Catalog.GetString ("Line"); }
+			get { return Catalog.GetString ("Line/Curve"); }
 		}
 		public override string Icon {
 			get { return "Tools.Line.png"; }
@@ -97,21 +109,32 @@ namespace Pinta.Tools
 
 
 				Color cpColor = new Color(0d, .06d, .6d);
+				Color hpColor = new Color(.5d, .5d, .5d);
 
 				if (drawPoints)
 				{
+					//For each curve currently being drawn/edited by the user.
 					for (int n = 0; n < gPC.Count; ++n)
 					{
+						//If the curve has one or more points.
 						if (gPC[n].Count > 0)
 						{
-							cEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
+							//Generate the points that make up the curve.
+							cEngine.generatedPointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
 							//Expand the invalidation rectangle as necessary.
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color));
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.generatedPointsCollection[n], outline_color));
 
 							//Draw the control points.
 							for (int i = 0; i < gPC[n].Count; ++i)
 							{
+								//Skip the hovered control point.
+								if (hoveredPointAsControlPoint > -1 && hoverPoint.Distance(gPC[n][i].Position) < 1d)
+								{
+									continue;
+								}
+
+								//NOTE: Control point graphics need to replicate the coloring of selection points.
 								g.DrawEllipse(new Rectangle(gPC[n][i].Position.X - 1d, gPC[n][i].Position.Y - 1d, 2d, 2d), cpColor, 2);
 							}
 						}
@@ -124,8 +147,17 @@ namespace Pinta.Tools
 						g.DrawEllipse(
 							new Rectangle(
 								gPC[selectedPointCurveIndex][selectedPointIndex].Position.X - 4d,
-								gPC[selectedPointCurveIndex][selectedPointIndex].Position.Y - 4d, 8d, 8d),
+								gPC[selectedPointCurveIndex][selectedPointIndex].Position.Y - 4d,
+								8d, 8d),
 							cpColor, 1);
+					}
+
+					//NOTE: Control point graphics need to replicate the coloring of selection points.
+					if (hoverPoint.X > -1d)
+					{
+						//NOTE: Control point graphics need to replicate the coloring of selection points.
+						g.DrawEllipse(new Rectangle(hoverPoint.X - 1d, hoverPoint.Y - 1d, 2d, 2d), hpColor, 2);
+						g.DrawEllipse(new Rectangle(hoverPoint.X - 4d, hoverPoint.Y - 4d, 8d, 8d), hpColor, 1);
 					}
 
 					if (dirty == null)
@@ -143,23 +175,37 @@ namespace Pinta.Tools
 					{
 						if (gPC[n].Count > 0)
 						{
-							cEngine.generatedCurvePointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
+							cEngine.generatedPointsCollection[n] = GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
 							//Expand the invalidation rectangle as necessary.
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.generatedCurvePointsCollection[n], outline_color));
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.generatedPointsCollection[n], outline_color));
 						}
 					}
 				}
 			}
 
+
+
 			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
 		}
 
-		protected void drawCurves(bool finalize, bool shiftKey)
+		/// <summary>
+		/// Draw all of the lines/curves that are currently being drawn/edited by the user.
+		/// </summary>
+		/// <param name="calculateOrganizedPoints">Whether or not to calculate the spatially organized
+		/// points for mouse detection after drawing the curve.</param>
+		/// <param name="finalize">Whether or not to finalize the drawing.</param>
+		/// <param name="shiftKey">Whether or not the shift key is being pressed.</param>
+		protected void drawCurves(bool calculateOrganizedPoints, bool finalize, bool shiftKey)
 		{
+			if (!surface_modified)
+			{
+				return;
+			}
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Rectangle? dirty;
+			Rectangle dirty;
 
 			if (finalize)
 			{
@@ -173,6 +219,47 @@ namespace Pinta.Tools
 			}
 			else
 			{
+				if (!calculateOrganizedPoints)
+				{
+					findClosestPoint();
+
+					List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
+
+					//Determine if the user is hovering the mouse close enough to a line,
+					//curve, or point that's currently being drawn/edited by the user.
+					if (closestDistance < curveClickRange)
+					{
+						//User is hovering over a generated point on a line/curve.
+
+						//Note: compare the current_point's distance here because it's the actual mouse position.
+						if (gPC[closestCurveIndex].Count > closestPointIndex &&
+							current_point.Distance(gPC[closestCurveIndex][closestPointIndex].Position) < curveClickRange)
+						{
+							//User clicked on a control point (on the "previous order" side of the point).
+
+							hoverPoint.X = gPC[closestCurveIndex][closestPointIndex].Position.X;
+							hoverPoint.Y = gPC[closestCurveIndex][closestPointIndex].Position.Y;
+							hoveredPointAsControlPoint = closestPointIndex;
+						}
+						else if (current_point.Distance(gPC[closestCurveIndex][closestPointIndex - 1].Position) < curveClickRange)
+						{
+							//User clicked on a control point (on the "following order" side of the point).
+
+							hoverPoint.X = gPC[closestCurveIndex][closestPointIndex - 1].Position.X;
+							hoverPoint.Y = gPC[closestCurveIndex][closestPointIndex - 1].Position.Y;
+							hoveredPointAsControlPoint = closestPointIndex - 1;
+						}
+
+						if (hoverPoint.X < 0d)
+						{
+							hoverPoint.X = closestPoint.X;
+							hoverPoint.Y = closestPoint.Y;
+						}
+					}
+				}
+
+
+
 				doc.ToolLayer.Clear();
 				drawPoints = true;
 
@@ -180,6 +267,62 @@ namespace Pinta.Tools
 					Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey),
 					doc.ToolLayer,
 					shiftKey);
+
+
+
+				//Reset the hover point after each drawing.
+				hoverPoint = new PointD(-1d, -1d);
+				hoveredPointAsControlPoint = -1;
+			}
+
+
+
+			if (calculateOrganizedPoints)
+			{
+				//Organize the generated points for quick mouse interaction detection.
+
+				//First, clear the previously organized points, if any.
+				cEngine.organizedPointsCollection[0].Clear();
+
+				double sX, sY;
+
+				int pointIndex = 0;
+
+				foreach (PointD p in cEngine.generatedPointsCollection[0])
+				{
+					sX = (p.X - p.X % sectionSize) / sectionSize;
+					sY = (p.Y - p.Y % sectionSize) / sectionSize;
+
+					//These must be created each time to ensure that they are fresh for each loop iteration.
+					Dictionary<double, List<OrganizedPoint>> xSection;
+					List<OrganizedPoint> ySection;
+
+					//Ensure that the ySection for this particular point exists.
+					if (!cEngine.organizedPointsCollection[0].TryGetValue(sX, out xSection))
+					{
+						//This particular X section does not exist yet; create it.
+						xSection = new Dictionary<double, List<OrganizedPoint>>();
+						cEngine.organizedPointsCollection[0].Add(sX, xSection);
+					}
+
+					//Ensure that the ySection (which is contained within the respective xSection) for this particular point exists.
+					if (!xSection.TryGetValue(sY, out ySection))
+					{
+						//This particular Y section does not exist yet; create it.
+						ySection = new List<OrganizedPoint>();
+						xSection.Add(sY, ySection);
+					}
+
+					//Now that both the corresponding xSection and ySection for this particular point exist, add the point to the list.
+					ySection.Add(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
+
+					if (cEngine.givenPointsCollection[0].Count > pointIndex
+						&& p.X == cEngine.givenPointsCollection[0][pointIndex].Position.X
+						&& p.Y == cEngine.givenPointsCollection[0][pointIndex].Position.Y)
+					{
+						++pointIndex;
+					}
+				}
 			}
 
 
@@ -187,16 +330,16 @@ namespace Pinta.Tools
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (UseAntialiasing)
 			{
-				dirty = dirty.Value.Inflate(1, 1);
+				dirty = dirty.Inflate(1, 1);
 			}
 
-			dirty = dirty.UnionRectangles(last_dirty);
+			dirty = ((Rectangle?)dirty).UnionRectangles(last_dirty).Value;
 
-			dirty = dirty.Value.Clamp();
+			dirty = dirty.Clamp();
 
-			doc.Workspace.Invalidate(dirty.Value.ToGdkRectangle());
+			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
 
-			last_dirty = dirty.Value;
+			last_dirty = dirty;
 
 
 
@@ -220,7 +363,9 @@ namespace Pinta.Tools
 		{
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
-			drawCurves(true, false);
+			drawCurves(false, true, false);
+
+			cEngine = new CurveEngine();
 
 			base.OnDeactivated();
 		}
@@ -229,7 +374,9 @@ namespace Pinta.Tools
 		{
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
-			drawCurves(true, false);
+			drawCurves(false, true, false);
+
+			cEngine = new CurveEngine();
 
 			base.OnCommit();
 		}
@@ -270,26 +417,12 @@ namespace Pinta.Tools
 
 					surface_modified = true;
 
-					drawCurves(false, false);
+					hoverPoint = new PointD(-1d, -1d);
+
+					drawCurves(true, false, false);
 				}
 
 				args.RetVal = true;
-			}
-			else if (args.Event.Key == Gdk.Key.z && surface_modified)
-			{
-				selectedPointIndex = -1;
-				surface_modified = false;
-
-				//Draw the current state.
-				drawCurves(false, false);
-			}
-			else if (args.Event.Key == Gdk.Key.y)
-			{
-				selectedPointIndex = -1;
-				surface_modified = false;
-
-				//Draw the current state.
-				drawCurves(false, false);
 			}
 			else
 			{
@@ -309,6 +442,31 @@ namespace Pinta.Tools
 			}
 		}
 
+		public override bool TryHandleUndo()
+		{
+			if (surface_modified)
+			{
+				selectedPointIndex = -1;
+				surface_modified = false;
+
+				//Draw the current state.
+				drawCurves(true, false, false);
+			}
+
+			return base.TryHandleUndo();
+		}
+
+		public override bool TryHandleRedo()
+		{
+			selectedPointIndex = -1;
+			surface_modified = false;
+
+			//Draw the current state.
+			drawCurves(true, false, false);
+
+			return base.TryHandleRedo();
+		}
+
 		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
 			// If we are already drawing, ignore any additional mouse down events
@@ -317,10 +475,6 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
-			current_point = shape_origin;
-
-
 			bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 
 			if (shiftKey)
@@ -328,8 +482,12 @@ namespace Pinta.Tools
 				calculateModifiedCurrentPoint();
 			}
 
+			shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
+			current_point = shape_origin;
 
 			is_drawing = true;
+			surface_modified = true;
+			doc.ToolLayer.Hidden = false;
 
 			if (args.Event.Button == 1)
 			{
@@ -342,92 +500,51 @@ namespace Pinta.Tools
 				fill_color = PintaCore.Palette.PrimaryColor;
 			}
 
-			doc.ToolLayer.Hidden = false;
 
-			surface_modified = false;
+
+			findClosestPoint();
 
 
 
 			List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
 
-
-			PointD closestPoint = new PointD(double.MaxValue, double.MaxValue);
-			double closestDistance = double.MaxValue;
-			double currentDistance = double.MaxValue;
-			int closestPointNumber = -1;
-			int closestPointCurveNumber = 0;
-			int currentPointNumber = 0;
-
-			for (int n = 0; n < gPC.Count; ++n)
-			{
-				if (gPC[n].Count > 0)
-				{
-					//Reset this for each curve.
-					currentPointNumber = 0;
-
-					//Find the closest point on the curve to the mouse position.
-					foreach (PointD p in cEngine.generatedCurvePointsCollection[n])
-					{
-						if (p.X == gPC[n][currentPointNumber].Position.X && p.Y == gPC[n][currentPointNumber].Position.Y)
-						{
-							++currentPointNumber;
-						}
-
-						currentDistance = p.Distance(current_point);
-
-						if (currentDistance < closestDistance)
-						{
-							closestPoint = p;
-							closestDistance = currentDistance;
-
-							closestPointNumber = currentPointNumber;
-							closestPointCurveNumber = n;
-						}
-					}
-				}
-			}
-
-
-
+			//Determine if the user clicked close enough to a line, curve, or point that's currently being drawn/edited by the user.
 			if (closestDistance < curveClickRange)
 			{
 				//User clicked on a generated point on a line/curve.
 
 				bool clickedOnControlPoint = false;
 
-				if (closestPointNumber > 0)
+				//Note: compare the current_point's distance here because it's the actual mouse position.
+				if (gPC[closestCurveIndex].Count > closestPointIndex &&
+					current_point.Distance(gPC[closestCurveIndex][closestPointIndex].Position) < curveClickRange)
 				{
-					//Note: compare the current_point's distance here (instead of the closestPoint) because it's the actual mouse position.
-					if (gPC[closestPointCurveNumber].Count > closestPointNumber &&
-						current_point.Distance(gPC[closestPointCurveNumber][closestPointNumber].Position) < curveClickRange)
-					{
-						//User clicked on a control point (on the "previous order" side of the point).
+					//User clicked on a control point (on the "previous order" side of the point).
 
-						selectedPointIndex = closestPointNumber;
-						selectedPointCurveIndex = closestPointCurveNumber;
+					selectedPointIndex = closestPointIndex;
+					selectedPointCurveIndex = closestCurveIndex;
 
-						clickedOnControlPoint = true;
-					}
-					else if (current_point.Distance(gPC[closestPointCurveNumber][closestPointNumber - 1].Position) < curveClickRange)
-					{
-						//User clicked on a control point (on the "following order" side of the point).
+					clickedOnControlPoint = true;
+				}
+				else if (current_point.Distance(gPC[closestCurveIndex][closestPointIndex - 1].Position) < curveClickRange)
+				{
+					//User clicked on a control point (on the "following order" side of the point).
 
-						selectedPointIndex = closestPointNumber - 1;
-						selectedPointCurveIndex = closestPointCurveNumber;
+					selectedPointIndex = closestPointIndex - 1;
+					selectedPointCurveIndex = closestCurveIndex;
 
-						clickedOnControlPoint = true;
-					}
+					clickedOnControlPoint = true;
 				}
 
 				if (!clickedOnControlPoint)
 				{
 					//User clicked on a non-control point on a line/curve.
 
-					gPC[closestPointCurveNumber].Insert(closestPointNumber,
+					gPC[closestCurveIndex].Insert(closestPointIndex,
 						new ControlPoint(new PointD(current_point.X, current_point.Y), defaultTension));
 
-					selectedPointIndex = closestPointNumber;
-					selectedPointCurveIndex = closestPointCurveNumber;
+					selectedPointIndex = closestPointIndex;
+					selectedPointCurveIndex = closestCurveIndex;
 				}
 			}
 			else
@@ -439,13 +556,13 @@ namespace Pinta.Tools
 					//Create a new curve.
 
 					//Finalize the previous curve.
-					drawCurves(true, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
+					drawCurves(false, true, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
 
 					is_drawing = true;
 
 					//Clear out all of the old data.
 					gPC[0].Clear();
-					cEngine.generatedCurvePointsCollection[0] = new PointD[0];
+					cEngine.generatedPointsCollection[0] = new PointD[0];
 				}
 
 
@@ -473,29 +590,18 @@ namespace Pinta.Tools
 
 
 
-			surface_modified = true;
-
-			drawCurves(false, shiftKey);
+			drawCurves(false, false, shiftKey);
 		}
 
 		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
 		{
 			is_drawing = false;
 
-			drawCurves(false, args.Event.IsShiftPressed());
+			drawCurves(true, false, args.Event.IsShiftPressed());
 		}
 
 		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, PointD point)
 		{
-			if (!is_drawing)
-				return;
-
-
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
-
-
 			bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 
 			if (shiftKey)
@@ -503,8 +609,23 @@ namespace Pinta.Tools
 				calculateModifiedCurrentPoint();
 			}
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
+
+
+
+			if (!is_drawing)
+			{
+				drawCurves(false, false, shiftKey);
+
+				return;
+			}
+
+
 
 			List<List<ControlPoint>> gPC = cEngine.givenPointsCollection;
+
 
 
 			//Make sure the point was moved.
@@ -520,7 +641,67 @@ namespace Pinta.Tools
 
 
 
-				drawCurves(false, shiftKey);
+				drawCurves(false, false, shiftKey);
+			}
+		}
+
+		/// <summary>
+		/// Efficiently calculate the closest point (to current_point) on the curve being edited.
+		/// </summary>
+		protected void findClosestPoint()
+		{
+			Dictionary<double, Dictionary<double, List<OrganizedPoint>>> oP = cEngine.organizedPointsCollection[0];
+
+			double currentDistance = double.MaxValue;
+
+			closestDistance = double.MaxValue;
+			closestPointIndex = 0;
+			closestCurveIndex = 0;
+
+			//Calculate the current_point's corresponding *center* section.
+			double sX = (current_point.X - current_point.X % sectionSize) / sectionSize;
+			double sY = (current_point.Y - current_point.Y % sectionSize) / sectionSize;
+
+			double xMin = sX - borderingSectionRange;
+			double xMax = sX + borderingSectionRange;
+			double yMin = sY - borderingSectionRange;
+			double yMax = sY + borderingSectionRange;
+
+			//Since the mouse and/or curve points can be close to the edge of a section,
+			//the points in the surrounding sections must also be checked.
+			for (double x = xMin; x <= xMax; ++x)
+			{
+				//This must be created each time to ensure that it is fresh for each loop iteration.
+				Dictionary<double, List<OrganizedPoint>> xSection;
+
+				//If the xSection doesn't exist, move on.
+				if (oP.TryGetValue(x, out xSection))
+				{
+					//Since the mouse and/or curve points can be close to the edge of a section,
+					//the points in the surrounding sections must also be checked.
+					for (double y = yMin; y <= yMax; ++y)
+					{
+						List<OrganizedPoint> ySection;
+
+						//If the ySection doesn't exist, move on.
+						if (xSection.TryGetValue(y, out ySection))
+						{
+							foreach (OrganizedPoint p in ySection)
+							{
+								currentDistance = p.Position.Distance(current_point);
+
+								if (currentDistance < closestDistance)
+								{
+									closestDistance = currentDistance;
+
+									closestPointIndex = p.Index;
+
+									closestPoint = p.Position;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 
@@ -623,7 +804,7 @@ namespace Pinta.Tools
 		/// <param name="p2">The second control point that the curve does not necessarily pass through.</param>
 		/// <param name="p3">The second end point that the curve passes through.</param>
 		/// <returns></returns>
-		protected void GenerateCubicBezierCurvePoints(List<PointD> resultList, PointD p0, PointD p1, PointD p2, PointD p3)
+		protected static void GenerateCubicBezierCurvePoints(List<PointD> resultList, PointD p0, PointD p1, PointD p2, PointD p3)
 		{
 			//Note: this must be low enough for mouse clicks to be properly considered on/off the line/curve at any given point.
 			double tInterval = .025d;

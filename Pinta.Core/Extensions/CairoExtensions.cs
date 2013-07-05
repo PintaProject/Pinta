@@ -1526,13 +1526,13 @@ namespace Pinta.Core
 				else
 				{
 					//Only r2 has a value.
-					return new Rectangle(r2.Value.X, r2.Value.Y, r2.Value.Width, r2.Value.Height);
+					return r2;
 				}
 			}
 			else if (r2 == null)
 			{
 				//Only r1 has a value.
-				return new Rectangle(r1.Value.X, r1.Value.Y, r1.Value.Width, r1.Value.Height);
+				return r1;
 			}
 			else
 			{
