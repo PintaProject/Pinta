@@ -34,26 +34,25 @@ namespace Pinta.Tools
 {
 	public class CurveEngine
 	{
-		public List<List<ControlPoint>> givenPointsCollection = new List<List<ControlPoint>>();
-		public List<PointD[]> generatedPointsCollection = new List<PointD[]>();
-		public List<Dictionary<double, Dictionary<double, List<OrganizedPoint>>>> organizedPointsCollection =
-			new List<Dictionary<double, Dictionary<double, List<OrganizedPoint>>>>();
+		public List<List<ControlPoint>> GivenPointsCollection = new List<List<ControlPoint>>();
+		public List<PointD[]> GeneratedPointsCollection = new List<PointD[]>();
+		public List<OrganizedPointCollection> OrganizedPointsCollection = new List<OrganizedPointCollection>();
 
 		public CurveEngine()
 		{
-			givenPointsCollection.Add(new List<ControlPoint>());
-			generatedPointsCollection.Add(new PointD[0]);
-			organizedPointsCollection.Add(new Dictionary<double, Dictionary<double, List<OrganizedPoint>>>());
+			GivenPointsCollection.Add(new List<ControlPoint>());
+			GeneratedPointsCollection.Add(new PointD[0]);
+			OrganizedPointsCollection.Add(new OrganizedPointCollection());
 		}
 
 		public CurveEngine Clone()
 		{
 			CurveEngine clonedCE = new CurveEngine();
 
-			clonedCE.givenPointsCollection[0] = givenPointsCollection[0].Select(i => i.Clone()).ToList();
-			clonedCE.generatedPointsCollection[0] = generatedPointsCollection[0].Select(i => new PointD(i.X, i.Y)).ToArray();
+			clonedCE.GivenPointsCollection[0] = GivenPointsCollection[0].Select(i => i.Clone()).ToList();
+			clonedCE.GeneratedPointsCollection[0] = GeneratedPointsCollection[0].Select(i => new PointD(i.X, i.Y)).ToArray();
 
-			foreach (KeyValuePair<double, Dictionary<double, List<OrganizedPoint>>> xSection in organizedPointsCollection[0])
+			foreach (KeyValuePair<double, Dictionary<double, List<OrganizedPoint>>> xSection in OrganizedPointsCollection[0].Collection)
 			{
 				//This must be created each time to ensure that it is fresh for each loop iteration.
 				Dictionary<double, List<OrganizedPoint>> tempSection = new Dictionary<double, List<OrganizedPoint>>();
@@ -64,7 +63,7 @@ namespace Pinta.Tools
 						section.Value.Select(i => new OrganizedPoint(new PointD(i.Position.X, i.Position.Y), i.Index)).ToList());
 				}
 
-				clonedCE.organizedPointsCollection[0].Add(xSection.Key, tempSection);
+				clonedCE.OrganizedPointsCollection[0].Collection.Add(xSection.Key, tempSection);
 			}
 
 			return clonedCE;

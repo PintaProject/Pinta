@@ -1518,16 +1518,8 @@ namespace Pinta.Core
 		{
 			if (r1 == null)
 			{
-				if (r2 == null)
-				{
-					//Neither r1 nor r2 has a value.
-					return null;
-				}
-				else
-				{
-					//Only r2 has a value.
-					return r2;
-				}
+				//r2 is the only given Rectangle that could still have a value, and if it's null, return that anyways.
+				return r2;
 			}
 			else if (r2 == null)
 			{

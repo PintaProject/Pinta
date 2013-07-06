@@ -1,5 +1,5 @@
 ﻿// 
-// OrganizedPoint.cs
+// OrganizedPointCollection.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
@@ -32,6 +32,16 @@ using Cairo;
 
 namespace Pinta.Tools
 {
+	public class OrganizedPointCollection
+	{
+		public Dictionary<double, Dictionary<double, List<OrganizedPoint>>> Collection;
+
+		public OrganizedPointCollection()
+		{
+			Collection = new Dictionary<double, Dictionary<double, List<OrganizedPoint>>>();
+		}
+	}
+
 	public class OrganizedPoint
 	{
 		//Note: not using get/set because this is used in time-critical code that is sped up without it.
