@@ -37,10 +37,14 @@ namespace Pinta.Tools
 	{
 		private const double CurveClickRange = 12d;
 		private const double DefaultTension = 1d / 6d;
-		private const double SectionSize = 15d;
+
+		public const int SectionSize = 15;
+
+		//To avoid numerous conversions. Don't change this.
+		public const double SectionSizeDouble = SectionSize;
 
 		//Don't change this; it's automatically calculated!
-		private static double borderingSectionRange = Math.Ceiling(CurveClickRange / SectionSize) * SectionSize;
+		public static int BorderingSectionRange = (int)Math.Ceiling(CurveClickRange / SectionSize);
 
 		private int selectedPointIndex = 0;
 		private int selectedPointCurveIndex = 0;
@@ -48,19 +52,10 @@ namespace Pinta.Tools
 		private PointD hoverPoint = new PointD(-1d, -1d);
 		private int hoveredPointAsControlPoint = -1;
 
-		private PointD closestPoint;
-		private double closestDistance;
-		private int closestPointIndex = 0;
-		private int closestCurveIndex = 0;
-
 		//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
 		private Cairo.ImageSurface curves_undo_surface;
 		private Cairo.ImageSurface user_undo_surface;
 		private CurveEngine undo_engine;
-
-		// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
-		// if the selection changes before the text is finalized.
-		private DocumentSelection selection; //***IMPLEMENT THIS BUG FIX LATER***
 		
 		//Stores the editable curve data.
 		public static CurveEngine cEngine = new CurveEngine();
@@ -118,7 +113,7 @@ namespace Pinta.Tools
 						if (controlPoints[n].Count > 0)
 						{
 							//Generate the points that make up the curve.
-							cEngine.GeneratedPointsCollection[n] = generateCardinalSplinePolynomialCurvePoints(n).ToArray();
+							cEngine.GeneratedPointsCollection[n] = CurveEngine.GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
 							//Expand the invalidation rectangle as necessary.
 							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.GeneratedPointsCollection[n], outline_color));
@@ -169,7 +164,7 @@ namespace Pinta.Tools
 					{
 						if (controlPoints[n].Count > 0)
 						{
-							cEngine.GeneratedPointsCollection[n] = generateCardinalSplinePolynomialCurvePoints(n).ToArray();
+							cEngine.GeneratedPointsCollection[n] = CurveEngine.GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
 
 							//Expand the invalidation rectangle as necessary.
 							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.GeneratedPointsCollection[n], outline_color));
@@ -213,7 +208,11 @@ namespace Pinta.Tools
 			{
 				if (!calculateOrganizedPoints)
 				{
-					findClosestPoint();
+					int closestCurveIndex, closestPointIndex;
+					PointD closestPoint;
+					double closestDistance;
+
+					OrganizedPointCollection.findClosestPoint(current_point, out closestCurveIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
 					List<List<ControlPoint>> controlPoints = cEngine.GivenPointsCollection;
 
@@ -272,45 +271,23 @@ namespace Pinta.Tools
 				//Organize the generated points for quick mouse interaction detection.
 
 				//First, clear the previously organized points, if any.
-				cEngine.OrganizedPointsCollection[0].Collection.Clear();
-
-				double sX, sY;
-
-				int pointIndex = 0;
-
-				foreach (PointD p in cEngine.GeneratedPointsCollection[0])
+				for (int n = 0; n < cEngine.OrganizedPointsCollection.Count; ++n)
 				{
-					sX = (p.X - p.X % SectionSize) / SectionSize;
-					sY = (p.Y - p.Y % SectionSize) / SectionSize;
+					cEngine.OrganizedPointsCollection[n].ClearCollection();
 
-					//These must be created each time to ensure that they are fresh for each loop iteration.
-					Dictionary<double, List<OrganizedPoint>> xSection;
-					List<OrganizedPoint> ySection;
+					int pointIndex = 0;
 
-					//Ensure that the ySection for this particular point exists.
-					if (!cEngine.OrganizedPointsCollection[0].Collection.TryGetValue(sX, out xSection))
+					foreach (PointD p in cEngine.GeneratedPointsCollection[n])
 					{
-						//This particular X section does not exist yet; create it.
-						xSection = new Dictionary<double, List<OrganizedPoint>>();
-						cEngine.OrganizedPointsCollection[0].Collection.Add(sX, xSection);
-					}
+						cEngine.OrganizedPointsCollection[0].StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
 
-					//Ensure that the ySection (which is contained within the respective xSection) for this particular point exists.
-					if (!xSection.TryGetValue(sY, out ySection))
-					{
-						//This particular Y section does not exist yet; create it.
-						ySection = new List<OrganizedPoint>();
-						xSection.Add(sY, ySection);
-					}
-
-					//Now that both the corresponding xSection and ySection for this particular point exist, add the point to the list.
-					ySection.Add(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
-
-					if (cEngine.GivenPointsCollection[0].Count > pointIndex
-						&& p.X == cEngine.GivenPointsCollection[0][pointIndex].Position.X
-						&& p.Y == cEngine.GivenPointsCollection[0][pointIndex].Position.Y)
-					{
-						++pointIndex;
+						//Keep track of the point's order in relation to the control points.
+						if (cEngine.GivenPointsCollection[n].Count > pointIndex
+							&& p.X == cEngine.GivenPointsCollection[n][pointIndex].Position.X
+							&& p.Y == cEngine.GivenPointsCollection[n][pointIndex].Position.Y)
+						{
+							++pointIndex;
+						}
 					}
 				}
 			}
@@ -492,7 +469,12 @@ namespace Pinta.Tools
 
 
 
-			findClosestPoint();
+			int closestCurveIndex, closestPointIndex;
+			PointD closestPoint;
+			double closestDistance;
+
+			OrganizedPointCollection.findClosestPoint(current_point,
+				out closestCurveIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
 
 
@@ -636,66 +618,6 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Efficiently calculate the closest point (to current_point) on the curve being edited.
-		/// </summary>
-		protected void findClosestPoint()
-		{
-			Dictionary<double, Dictionary<double, List<OrganizedPoint>>> oP = cEngine.OrganizedPointsCollection[0].Collection;
-
-			double currentDistance = double.MaxValue;
-
-			closestDistance = double.MaxValue;
-			closestPointIndex = 0;
-			closestCurveIndex = 0;
-
-			//Calculate the current_point's corresponding *center* section.
-			double sX = (current_point.X - current_point.X % SectionSize) / SectionSize;
-			double sY = (current_point.Y - current_point.Y % SectionSize) / SectionSize;
-
-			double xMin = sX - borderingSectionRange;
-			double xMax = sX + borderingSectionRange;
-			double yMin = sY - borderingSectionRange;
-			double yMax = sY + borderingSectionRange;
-
-			//Since the mouse and/or curve points can be close to the edge of a section,
-			//the points in the surrounding sections must also be checked.
-			for (double x = xMin; x <= xMax; ++x)
-			{
-				//This must be created each time to ensure that it is fresh for each loop iteration.
-				Dictionary<double, List<OrganizedPoint>> xSection;
-
-				//If the xSection doesn't exist, move on.
-				if (oP.TryGetValue(x, out xSection))
-				{
-					//Since the mouse and/or curve points can be close to the edge of a section,
-					//the points in the surrounding sections must also be checked.
-					for (double y = yMin; y <= yMax; ++y)
-					{
-						List<OrganizedPoint> ySection;
-
-						//If the ySection doesn't exist, move on.
-						if (xSection.TryGetValue(y, out ySection))
-						{
-							foreach (OrganizedPoint p in ySection)
-							{
-								currentDistance = p.Position.Distance(current_point);
-
-								if (currentDistance < closestDistance)
-								{
-									closestDistance = currentDistance;
-
-									closestPointIndex = p.Index;
-
-									closestPoint = p.Position;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
 		/// Calculate the modified position of current_point such that the angle between shape_origin
 		/// and current_point is snapped to the closest angle out of a certain number of angles.
 		/// </summary>
@@ -707,136 +629,6 @@ namespace Pinta.Tools
 
 			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
 			current_point = new PointD((shape_origin.X + len * Math.Cos(theta)), (shape_origin.Y + len * Math.Sin(theta)));
-		}
-
-		/// <summary>
-		/// Generate each point in a cardinal spline polynomial curve that passes through the given control points.
-		/// </summary>
-		/// <param name="curveNum">The number of the curve to generate the points for.</param>
-		/// <returns></returns>
-		protected List<PointD> generateCardinalSplinePolynomialCurvePoints(int curveNum)
-		{
-			List<List<ControlPoint>> controlPoints = cEngine.GivenPointsCollection;
-
-
-			List<PointD> generatedPoints = new List<PointD>();
-
-			//Note: it's important that there be many generated points even if there are only 2 given points and it's just a line.
-			//This is because the generated points are used in the check that determines if the mouse clicks on the line/curve.
-			if (controlPoints[curveNum].Count < 2)
-			{
-				foreach (ControlPoint cP in controlPoints[curveNum])
-				{
-					generatedPoints.Add(cP.Position);
-				}
-
-				return generatedPoints;
-			}
-
-
-
-			//Generate tangents for each of the smaller cubic Bezier curves that make up each segment of the resulting curve.
-
-			//Stores all of the tangent values.
-			List<PointD> bezierTangents = new List<PointD>();
-
-			//Calculate the first tangent.
-			bezierTangents.Add(new PointD(
-				controlPoints[curveNum][1].Tension * (controlPoints[curveNum][1].Position.X - controlPoints[curveNum][0].Position.X),
-				controlPoints[curveNum][1].Tension * (controlPoints[curveNum][1].Position.Y - controlPoints[curveNum][0].Position.Y)));
-
-			//Calculate all of the middle tangents.
-			for (int i = 1; i < controlPoints[curveNum].Count - 1; ++i)
-			{
-				bezierTangents.Add(new PointD(
-					controlPoints[curveNum][i + 1].Tension * (controlPoints[curveNum][i + 1].Position.X - controlPoints[curveNum][i - 1].Position.X),
-					controlPoints[curveNum][i + 1].Tension * (controlPoints[curveNum][i + 1].Position.Y - controlPoints[curveNum][i - 1].Position.Y)));
-			}
-
-			//Calculate the last tangent.
-			bezierTangents.Add(new PointD(
-				controlPoints[curveNum][controlPoints[curveNum].Count - 1].Tension * (controlPoints[curveNum][controlPoints[curveNum].Count - 1].Position.X - controlPoints[curveNum][controlPoints[curveNum].Count - 2].Position.X),
-				controlPoints[curveNum][controlPoints[curveNum].Count - 1].Tension * (controlPoints[curveNum][controlPoints[curveNum].Count - 1].Position.Y - controlPoints[curveNum][controlPoints[curveNum].Count - 2].Position.Y)));
-
-
-
-			//For optimization.
-			int iMinusOne;
-
-			//Generate the resulting curve's points with consecutive cubic Bezier curves that
-			//use the given points as end points and the calculated tangents as control points.
-			for (int i = 1; i < controlPoints[curveNum].Count; ++i)
-			{
-				iMinusOne = i - 1;
-
-				generateCubicBezierCurvePoints(
-					generatedPoints,
-					controlPoints[curveNum][iMinusOne].Position,
-					new PointD(
-						controlPoints[curveNum][iMinusOne].Position.X + bezierTangents[iMinusOne].X,
-						controlPoints[curveNum][iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
-					new PointD(
-						controlPoints[curveNum][i].Position.X - bezierTangents[i].X,
-						controlPoints[curveNum][i].Position.Y - bezierTangents[i].Y),
-					controlPoints[curveNum][i].Position);
-			}
-
-
-			return generatedPoints;
-		}
-
-		/// <summary>
-		/// Generate each point in a cubic Bezier curve given the end points and control points.
-		/// </summary>
-		/// <param name="resultList">The resulting List of PointD's to add the generated points to.</param>
-		/// <param name="p0">The first end point that the curve passes through.</param>
-		/// <param name="p1">The first control point that the curve does not necessarily pass through.</param>
-		/// <param name="p2">The second control point that the curve does not necessarily pass through.</param>
-		/// <param name="p3">The second end point that the curve passes through.</param>
-		/// <returns></returns>
-		protected static void generateCubicBezierCurvePoints(List<PointD> resultList, PointD p0, PointD p1, PointD p2, PointD p3)
-		{
-			//Note: this must be low enough for mouse clicks to be properly considered on/off the line/curve at any given point.
-			double tInterval = .025d;
-
-			double oneMinusT;
-			double oneMinusTSquared;
-			double oneMinusTCubed;
-
-			double tSquared;
-			double tCubed;
-
-			double oneMinusTSquaredTimesTTimesThree;
-			double oneMinusTTimesTSquaredTimesThree;
-
-			//t will go from 0d to 1d at the interval of tInterval.
-			for (double t = 0d; t < 1d + tInterval; t += tInterval)
-			{
-				//There are 3 "layers" in a cubic Bezier curve's calculation. These "layers"
-				//must be calculated for each intermediate Point (for each value of t from
-				//tInterval to 1d). The Points in each "layer" store [the distance between
-				//two consecutive Points from the previous "layer" multipled by the value
-				//of t (which is between 0d-1d)] plus [the position of the first Point of
-				//the two consecutive Points from the previous "layer"]. This must be
-				//calculated for the X and Y of every consecutive Point in every layer
-				//until the last Point possible is reached, which is the Point on the curve.
-
-				//Note: the code below is an optimized version of the commented explanation above.
-
-				oneMinusT = 1d - t;
-				oneMinusTSquared = oneMinusT * oneMinusT;
-				oneMinusTCubed = oneMinusTSquared * oneMinusT;
-
-				tSquared = t * t;
-				tCubed = tSquared * t;
-
-				oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
-				oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
-
-				resultList.Add(new PointD(
-					oneMinusTCubed * p0.X + oneMinusTSquaredTimesTTimesThree * p1.X + oneMinusTTimesTSquaredTimesThree * p2.X + tCubed * p3.X,
-					oneMinusTCubed * p0.Y + oneMinusTSquaredTimesTTimesThree * p1.Y + oneMinusTTimesTSquaredTimesThree * p2.Y + tCubed * p3.Y));
-			}
 		}
 	}
 }

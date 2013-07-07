@@ -29,18 +29,162 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
 	public class OrganizedPointCollection
 	{
-		public Dictionary<double, Dictionary<double, List<OrganizedPoint>>> Collection;
+		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
+		/// <summary>
+		/// A collection of points that is organized using spatial hashing to optimize and speed up nearest point detection.
+		/// </summary>
 		public OrganizedPointCollection()
 		{
-			Collection = new Dictionary<double, Dictionary<double, List<OrganizedPoint>>>();
+			collection = new Dictionary<int, Dictionary<int, List<OrganizedPoint>>>();
+		}
+
+		
+		/// <summary>
+		/// Store the given OrganizedPoint in an organized (spatially hashed) manner.
+		/// </summary>
+		/// <param name="op">The OrganizedPoint to store.</param>
+		public void StoreAndOrganizePoint(OrganizedPoint op)
+		{
+			int sX = (int)((op.Position.X - op.Position.X % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
+			int sY = (int)((op.Position.Y - op.Position.Y % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
+
+			//These must be created each time to ensure that they are fresh for each loop iteration.
+			Dictionary<int, List<OrganizedPoint>> xSection;
+			List<OrganizedPoint> ySection;
+
+			//Ensure that the ySection for this particular point exists.
+			if (!collection.TryGetValue(sX, out xSection))
+			{
+				//This particular X section does not exist yet; create it.
+				xSection = new Dictionary<int, List<OrganizedPoint>>();
+				collection.Add(sX, xSection);
+			}
+
+			//Ensure that the ySection (which is contained within the respective xSection) for this particular point exists.
+			if (!xSection.TryGetValue(sY, out ySection))
+			{
+				//This particular Y section does not exist yet; create it.
+				ySection = new List<OrganizedPoint>();
+				xSection.Add(sY, ySection);
+			}
+
+			//Now that both the corresponding xSection and ySection for this particular point exist, add the point to the list.
+			ySection.Add(op);
+		}
+
+		/// <summary>
+		/// Clear the collection of organized points.
+		/// </summary>
+		public void ClearCollection()
+		{
+			collection.Clear();
+		}
+
+
+		/// <summary>
+		/// Clone the collection of organized points.
+		/// </summary>
+		/// <returns>A clone of the organized points.</returns>
+		public OrganizedPointCollection Clone()
+		{
+			OrganizedPointCollection clonedOPC = new OrganizedPointCollection();
+
+			foreach (KeyValuePair<int, Dictionary<int, List<OrganizedPoint>>> xSection in collection)
+			{
+				//This must be created each time to ensure that it is fresh for each loop iteration.
+				Dictionary<int, List<OrganizedPoint>> tempSection = new Dictionary<int, List<OrganizedPoint>>();
+
+				foreach (KeyValuePair<int, List<OrganizedPoint>> section in xSection.Value)
+				{
+					tempSection.Add(section.Key,
+						section.Value.Select(i => new OrganizedPoint(new PointD(i.Position.X, i.Position.Y), i.Index)).ToList());
+				}
+
+				clonedOPC.collection.Add(xSection.Key, tempSection);
+			}
+
+			return clonedOPC;
+		}
+
+
+		/// <summary>
+		/// Efficiently calculate the closest point (to currentPoint) on the curve.
+		/// </summary>
+		/// <param name="currentPoint">The point to calculate the closest point to.</param>
+		/// <param name="closestCurveIndex">The index of the curve with the closest point.</param>
+		/// <param name="closestPointIndex">The index of the closest point (in the closest curve).</param>
+		/// <param name="closestPoint">The position of the closest point.</param>
+		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
+		public static void findClosestPoint(
+			PointD currentPoint,
+			out int closestCurveIndex, out int closestPointIndex,
+			out PointD closestPoint, out double closestDistance)
+		{
+			Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.cEngine.OrganizedPointsCollection[0].collection;
+
+			closestCurveIndex = 0;
+			closestPointIndex = 0;
+			closestPoint = new PointD(0d, 0d);
+			closestDistance = double.MaxValue;
+
+			double currentDistance = double.MaxValue;
+
+			//Calculate the current_point's corresponding *center* section.
+			int sX = (int)((currentPoint.X - currentPoint.X % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
+			int sY = (int)((currentPoint.Y - currentPoint.Y % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
+
+			int xMin = sX - LineCurveTool.BorderingSectionRange;
+			int xMax = sX + LineCurveTool.BorderingSectionRange;
+			int yMin = sY - LineCurveTool.BorderingSectionRange;
+			int yMax = sY + LineCurveTool.BorderingSectionRange;
+
+			//Since the mouse and/or curve points can be close to the edge of a section,
+			//the points in the surrounding sections must also be checked.
+			for (int x = xMin; x <= xMax; ++x)
+			{
+				//This must be created each time to ensure that it is fresh for each loop iteration.
+				Dictionary<int, List<OrganizedPoint>> xSection;
+
+				//If the xSection doesn't exist, move on.
+				if (oP.TryGetValue(x, out xSection))
+				{
+					//Since the mouse and/or curve points can be close to the edge of a section,
+					//the points in the surrounding sections must also be checked.
+					for (int y = yMin; y <= yMax; ++y)
+					{
+						List<OrganizedPoint> ySection;
+
+						//If the ySection doesn't exist, move on.
+						if (xSection.TryGetValue(y, out ySection))
+						{
+							foreach (OrganizedPoint p in ySection)
+							{
+								currentDistance = p.Position.Distance(currentPoint);
+
+								if (currentDistance < closestDistance)
+								{
+									closestDistance = currentDistance;
+
+									closestPointIndex = p.Index;
+
+									closestPoint = p.Position;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
+
+
 
 	public class OrganizedPoint
 	{
