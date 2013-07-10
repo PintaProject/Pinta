@@ -35,30 +35,40 @@ namespace Pinta.Tools
 {
 	public class LineCurveTool : ShapeTool
 	{
+		private static readonly Color hoverColor =
+			new Color(ToolControl.FillColor.R / 2d, ToolControl.FillColor.G / 2d, ToolControl.FillColor.B / 2d, ToolControl.FillColor.A / 2d);
+
 		private const double CurveClickRange = 12d;
-		private const double DefaultTension = 1d / 6d;
+		private const double DefaultEndPointTension = 0d;
+		private const double DefaultMidPointTension = 1d / 3d;
 
 		public const int SectionSize = 15;
 
-		//To avoid numerous conversions. Don't change this.
+		//For optimization.
 		public const double SectionSizeDouble = SectionSize;
 
-		//Don't change this; it's automatically calculated!
-		public static int BorderingSectionRange = (int)Math.Ceiling(CurveClickRange / SectionSize);
+		//Don't change this; it's automatically calculated.
+		public static readonly int BorderingSectionRange = (int)Math.Ceiling(CurveClickRange / SectionSize);
 
-		private int selectedPointIndex = 0;
+
+		private int selectedPointIndex = -1;
 		private int selectedPointCurveIndex = 0;
 
 		private PointD hoverPoint = new PointD(-1d, -1d);
 		private int hoveredPointAsControlPoint = -1;
 
+		private bool changingTension = false;
+		private PointD lastMousePos = new PointD(0d, 0d);
+
+
 		//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
-		private Cairo.ImageSurface curves_undo_surface;
-		private Cairo.ImageSurface user_undo_surface;
+		private ImageSurface curves_undo_surface;
+		private ImageSurface user_undo_surface;
 		private CurveEngine undo_engine;
 		
 		//Stores the editable curve data.
 		public static CurveEngine cEngine = new CurveEngine();
+
 
 		public override string Name {
 			get { return Catalog.GetString ("Line/Curve"); }
@@ -87,10 +97,6 @@ namespace Pinta.Tools
 
 			using (Context g = new Context(l.Surface))
 			{
-				List<List<ControlPoint>> controlPoints = cEngine.GivenPointsCollection;
-
-
-
 				g.AppendPath(doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip();
@@ -99,10 +105,11 @@ namespace Pinta.Tools
 
 				g.LineWidth = BrushWidth;
 
+				int controlPointSize = BrushWidth;
+				double controlPointOffset = (double)controlPointSize / 2d;
 
 
-				Color cpColor = new Color(0d, .06d, .6d);
-				Color hpColor = new Color(.5d, .5d, .5d);
+				List<List<ControlPoint>> controlPoints = cEngine.GivenPointsCollection;
 
 				if (drawControlPoints)
 				{
@@ -113,7 +120,7 @@ namespace Pinta.Tools
 						if (controlPoints[n].Count > 0)
 						{
 							//Generate the points that make up the curve.
-							cEngine.GeneratedPointsCollection[n] = CurveEngine.GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
+							cEngine.GenerateCardinalSplinePolynomialCurvePoints(n);
 
 							//Expand the invalidation rectangle as necessary.
 							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.GeneratedPointsCollection[n], outline_color));
@@ -127,35 +134,40 @@ namespace Pinta.Tools
 									continue;
 								}
 
-								//NOTE: Control point graphics need to replicate the coloring of selection points.
-								g.DrawEllipse(new Rectangle(controlPoints[n][i].Position.X - 1d, controlPoints[n][i].Position.Y - 1d, 2d, 2d), cpColor, 2);
+								g.FillStrokedEllipse(
+									new Rectangle(
+										controlPoints[n][i].Position.X - controlPointOffset,
+										controlPoints[n][i].Position.Y - controlPointOffset,
+										controlPointSize, controlPointSize),
+									ToolControl.FillColor, ToolControl.StrokeColor, controlPointSize);
 							}
 						}
 					}
 
-					//NOTE: Control point graphics need to replicate the coloring of selection points.
 					if (selectedPointIndex > -1)
 					{
 						//Draw a ring around the selected point.
-						g.DrawEllipse(
+						g.FillStrokedEllipse(
 							new Rectangle(
-								controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.X - 4d,
-								controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.Y - 4d,
-								8d, 8d),
-							cpColor, 1);
+								controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.X - controlPointOffset * 3d,
+								controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.Y - controlPointOffset * 3d,
+								controlPointOffset * 6d, controlPointOffset * 6d),
+							ToolControl.FillColor, ToolControl.StrokeColor, 1);
 					}
-
-					//NOTE: Control point graphics need to replicate the coloring of selection points.
-					if (hoverPoint.X > -1d)
+					
+					if (!changingTension && hoverPoint.X > -1d)
 					{
-						//NOTE: Control point graphics need to replicate the coloring of selection points.
-						g.DrawEllipse(new Rectangle(hoverPoint.X - 1d, hoverPoint.Y - 1d, 2d, 2d), hpColor, 2);
-						g.DrawEllipse(new Rectangle(hoverPoint.X - 4d, hoverPoint.Y - 4d, 8d, 8d), hpColor, 1);
+						g.FillStrokedEllipse(new Rectangle(
+							hoverPoint.X - controlPointOffset, hoverPoint.Y - controlPointOffset,
+							controlPointSize, controlPointSize), hoverColor, hoverColor, controlPointSize);
+						g.FillStrokedEllipse(new Rectangle(
+							hoverPoint.X - controlPointOffset * 3d, hoverPoint.Y - controlPointOffset * 3d,
+							controlPointOffset * 6d, controlPointOffset * 6d), hoverColor, hoverColor, 1);
 					}
 
 					if (dirty != null)
 					{
-						dirty = dirty.Value.Inflate(8, 8);
+						dirty = dirty.Value.Inflate(controlPointSize * 8, controlPointSize * 8);
 					}
 				}
 				else
@@ -164,7 +176,7 @@ namespace Pinta.Tools
 					{
 						if (controlPoints[n].Count > 0)
 						{
-							cEngine.GeneratedPointsCollection[n] = CurveEngine.GenerateCardinalSplinePolynomialCurvePoints(n).ToArray();
+							cEngine.GenerateCardinalSplinePolynomialCurvePoints(n);
 
 							//Expand the invalidation rectangle as necessary.
 							dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngine.GeneratedPointsCollection[n], outline_color));
@@ -172,7 +184,6 @@ namespace Pinta.Tools
 					}
 				}
 			}
-
 
 
 			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
@@ -222,23 +233,25 @@ namespace Pinta.Tools
 					{
 						//User is hovering over a generated point on a line/curve.
 
-						//Note: compare the current_point's distance here because it's the actual mouse position.
-						if (controlPoints[closestCurveIndex].Count > closestPointIndex &&
-							current_point.Distance(controlPoints[closestCurveIndex][closestPointIndex].Position) < CurveClickRange)
+						if (controlPoints[closestCurveIndex].Count > closestPointIndex)
 						{
-							//User clicked on a control point (on the "previous order" side of the point).
+							//Note: compare the current_point's distance here because it's the actual mouse position.
+							if (current_point.Distance(controlPoints[closestCurveIndex][closestPointIndex].Position) < CurveClickRange)
+							{
+								//User clicked on a control point (on the "previous order" side of the point).
 
-							hoverPoint.X = controlPoints[closestCurveIndex][closestPointIndex].Position.X;
-							hoverPoint.Y = controlPoints[closestCurveIndex][closestPointIndex].Position.Y;
-							hoveredPointAsControlPoint = closestPointIndex;
-						}
-						else if (current_point.Distance(controlPoints[closestCurveIndex][closestPointIndex - 1].Position) < CurveClickRange)
-						{
-							//User clicked on a control point (on the "following order" side of the point).
+								hoverPoint.X = controlPoints[closestCurveIndex][closestPointIndex].Position.X;
+								hoverPoint.Y = controlPoints[closestCurveIndex][closestPointIndex].Position.Y;
+								hoveredPointAsControlPoint = closestPointIndex;
+							}
+							else if (current_point.Distance(controlPoints[closestCurveIndex][closestPointIndex - 1].Position) < CurveClickRange)
+							{
+								//User clicked on a control point (on the "following order" side of the point).
 
-							hoverPoint.X = controlPoints[closestCurveIndex][closestPointIndex - 1].Position.X;
-							hoverPoint.Y = controlPoints[closestCurveIndex][closestPointIndex - 1].Position.Y;
-							hoveredPointAsControlPoint = closestPointIndex - 1;
+								hoverPoint.X = controlPoints[closestCurveIndex][closestPointIndex - 1].Position.X;
+								hoverPoint.Y = controlPoints[closestCurveIndex][closestPointIndex - 1].Position.Y;
+								hoveredPointAsControlPoint = closestPointIndex - 1;
+							}
 						}
 
 						if (hoverPoint.X < 0d)
@@ -318,7 +331,7 @@ namespace Pinta.Tools
 					//Create a new CurvesHistoryItem so that the updated drawing of curves can be undone.
 					doc.History.PushNewItem(new CurvesHistoryItem(Icon, Name,
 						curves_undo_surface.Clone(), user_undo_surface.Clone(),
-						undo_engine.Clone(), doc.CurrentUserLayer));
+						cEngine.Clone(), doc.CurrentUserLayer));
 				}
 
 				is_drawing = false;
@@ -326,24 +339,28 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnDeactivated()
+		/// <summary>
+		/// Finalize the curve onto the UserLayer and clear out any old curve data.
+		/// </summary>
+		protected void finalizeCurve()
 		{
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
 			drawCurves(false, true, false);
 
 			cEngine = new CurveEngine();
+		}
+
+		protected override void OnDeactivated()
+		{
+			finalizeCurve();
 
 			base.OnDeactivated();
 		}
 
 		protected override void OnCommit()
 		{
-			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
-
-			drawCurves(false, true, false);
-
-			cEngine = new CurveEngine();
+			finalizeCurve();
 
 			base.OnCommit();
 		}
@@ -391,15 +408,116 @@ namespace Pinta.Tools
 
 				args.RetVal = true;
 			}
+			else if (args.Event.Key == Gdk.Key.Return)
+			{
+				finalizeCurve();
+
+				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.Up)
+			{
+				//Make sure a control point is selected.
+				if (selectedPointIndex > -1)
+				{
+					//Move the selected control point.
+					cEngine.GivenPointsCollection[selectedPointCurveIndex][selectedPointIndex].Position.Y -= 1d;
+
+					drawCurves(true, false, false);
+				}
+
+				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.Down)
+			{
+				//Make sure a control point is selected.
+				if (selectedPointIndex > -1)
+				{
+					//Move the selected control point.
+					cEngine.GivenPointsCollection[selectedPointCurveIndex][selectedPointIndex].Position.Y += 1d;
+
+					drawCurves(true, false, false);
+				}
+
+				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.Left)
+			{
+				//Make sure a control point is selected.
+				if (selectedPointIndex > -1)
+				{
+					if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+					{
+						//Change the selected control point to be the previous one, if applicable.
+						if (selectedPointIndex > 0)
+						{
+							--selectedPointIndex;
+						}
+					}
+					else
+					{
+						//Move the selected control point.
+						cEngine.GivenPointsCollection[selectedPointCurveIndex][selectedPointIndex].Position.X -= 1d;
+					}
+
+					drawCurves(true, false, false);
+				}
+
+				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.Right)
+			{
+				//Make sure a control point is selected.
+				if (selectedPointIndex > -1)
+				{
+					if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+					{
+						//Change the selected control point to be the following one, if applicable.
+						if (selectedPointIndex < cEngine.GivenPointsCollection[selectedPointCurveIndex].Count - 1)
+						{
+							++selectedPointIndex;
+						}
+					}
+					else
+					{
+						//Move the selected control point.
+						cEngine.GivenPointsCollection[selectedPointCurveIndex][selectedPointIndex].Position.X += 1d;
+					}
+
+					drawCurves(true, false, false);
+				}
+
+				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.z && (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+			{
+				finalizeCurve();
+
+				PintaCore.Workspace.Invalidate();
+
+				selectedPointIndex = -1;
+				surface_modified = false;
+			}
+			else if (args.Event.Key == Gdk.Key.y && (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+			{
+				//Draw the current state.
+				drawCurves(true, false, false);
+
+				selectedPointIndex = -1;
+			}
 			else
 			{
 				base.OnKeyDown(canvas, args);
 			}
 		}
-
+		
 		protected override void OnKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
 		{
 			if (args.Event.Key == Gdk.Key.Delete)
+			{
+				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.Up || args.Event.Key == Gdk.Key.Down
+				|| args.Event.Key == Gdk.Key.Left || args.Event.Key == Gdk.Key.Right)
 			{
 				args.RetVal = true;
 			}
@@ -407,31 +525,6 @@ namespace Pinta.Tools
 			{
 				base.OnKeyUp(canvas, args);
 			}
-		}
-
-		public override bool TryHandleUndo()
-		{
-			if (surface_modified)
-			{
-				selectedPointIndex = -1;
-				surface_modified = false;
-
-				//Draw the current state.
-				drawCurves(true, false, false);
-			}
-
-			return base.TryHandleUndo();
-		}
-
-		public override bool TryHandleRedo()
-		{
-			selectedPointIndex = -1;
-			surface_modified = false;
-
-			//Draw the current state.
-			drawCurves(true, false, false);
-
-			return base.TryHandleRedo();
 		}
 
 		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
@@ -456,15 +549,19 @@ namespace Pinta.Tools
 			surface_modified = true;
 			doc.ToolLayer.Hidden = false;
 
+			outline_color = PintaCore.Palette.PrimaryColor;
+			fill_color = PintaCore.Palette.SecondaryColor;
+
+
+
+			//Right clicking changes tension.
 			if (args.Event.Button == 1)
 			{
-				outline_color = PintaCore.Palette.PrimaryColor;
-				fill_color = PintaCore.Palette.SecondaryColor;
+				changingTension = false;
 			}
 			else
 			{
-				outline_color = PintaCore.Palette.SecondaryColor;
-				fill_color = PintaCore.Palette.PrimaryColor;
+				changingTension = true;
 			}
 
 
@@ -508,56 +605,58 @@ namespace Pinta.Tools
 					clickedOnControlPoint = true;
 				}
 
-				if (!clickedOnControlPoint)
+				//Don't change anything here if right clicked.
+				if (!changingTension)
 				{
-					//User clicked on a non-control point on a line/curve.
+					if (!clickedOnControlPoint)
+					{
+						//User clicked on a non-control point on a line/curve.
 
-					controlPoints[closestCurveIndex].Insert(closestPointIndex,
-						new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultTension));
+						controlPoints[closestCurveIndex].Insert(closestPointIndex,
+							new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
 
-					selectedPointIndex = closestPointIndex;
-					selectedPointCurveIndex = closestCurveIndex;
+						selectedPointIndex = closestPointIndex;
+						selectedPointCurveIndex = closestCurveIndex;
+					}
 				}
 			}
 			else
 			{
 				//User clicked outside of any lines/curves.
 
-				if (controlPoints[0].Count > 0)
+				//Don't change anything here if right clicked.
+				if (!changingTension)
 				{
-					//Create a new curve.
+					if (controlPoints[0].Count > 0)
+					{
+						//Create a new curve.
 
-					//Finalize the previous curve.
-					drawCurves(false, true, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
+						//Finalize the previous curve.
+						drawCurves(false, true, (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask);
 
-					is_drawing = true;
+						is_drawing = true;
 
-					//Clear out all of the old data.
-					controlPoints[0].Clear();
-					cEngine.GeneratedPointsCollection[0] = new PointD[0];
+						//Clear out all of the old data.
+						controlPoints[0].Clear();
+						cEngine.GeneratedPointsCollection[0] = new PointD[0];
+					}
+
+
+					//Store the previous state of the current UserLayer's and ToolLayer's ImageSurfaces.
+					user_undo_surface = doc.CurrentUserLayer.Surface.Clone();
+					curves_undo_surface = doc.ToolLayer.Surface.Clone();
+
+					//Store the previous state of the Curve Engine.
+					undo_engine = cEngine.Clone();
+
+
+					//Add the first two points of the line. The second point will follow the mouse around until released.
+					controlPoints[0].Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
+					controlPoints[0].Add(new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultEndPointTension));
+
+					selectedPointIndex = 1;
+					selectedPointCurveIndex = 0;
 				}
-
-
-				//Store the previous state of the current UserLayer's and ToolLayer's ImageSurfaces.
-				user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-				curves_undo_surface = doc.ToolLayer.Surface.Clone();
-
-				//Store the previous state of the Curve Engine.
-				undo_engine = cEngine.Clone();
-
-
-				//Create a new CurvesHistoryItem so that the updated drawing of curves can be undone.
-				doc.History.PushNewItem(new CurvesHistoryItem(Icon, Name,
-					curves_undo_surface.Clone(), user_undo_surface.Clone(),
-					undo_engine.Clone(), doc.CurrentUserLayer));
-				
-
-				//Add the first two points of the line. The second point will follow the mouse around until released.
-				controlPoints[0].Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultTension));
-				controlPoints[0].Add(new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultTension));
-
-				selectedPointIndex = 1;
-				selectedPointCurveIndex = 0;
 			}
 
 
@@ -568,6 +667,8 @@ namespace Pinta.Tools
 		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
 		{
 			is_drawing = false;
+
+			changingTension = false;
 
 			drawCurves(true, false, args.Event.IsShiftPressed());
 		}
@@ -586,35 +687,53 @@ namespace Pinta.Tools
 			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
 
 
-
 			if (!is_drawing)
 			{
+				//Redraw everything to show a (temporary) highlighted control point when applicable.
 				drawCurves(false, false, shiftKey);
-
-				return;
 			}
-
-
-
-			List<List<ControlPoint>> controlPoints = cEngine.GivenPointsCollection;
-
-
-
-			//Make sure the point was moved.
-			if (current_point.X != controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.X
-				|| current_point.Y != controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.Y)
+			else
 			{
-				controlPoints[selectedPointCurveIndex].RemoveAt(selectedPointIndex);
-				controlPoints[selectedPointCurveIndex].Insert(selectedPointIndex,
-					new ControlPoint(new PointD(current_point.X, current_point.Y),
-						DefaultTension));
+				//Make sure a control point is selected.
+				if (selectedPointIndex > -1)
+				{
+					List<List<ControlPoint>> controlPoints = cEngine.GivenPointsCollection;
 
-				surface_modified = true;
+					//Make sure the control point was moved.
+					if (current_point.X != controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.X
+						|| current_point.Y != controlPoints[selectedPointCurveIndex][selectedPointIndex].Position.Y)
+					{
+						if (!changingTension)
+						{
+							//Keep the tension value consistent.
+							double movingPointTension = controlPoints[selectedPointCurveIndex][selectedPointIndex].Tension;
 
+							//Update the control point's position.
+							controlPoints[selectedPointCurveIndex].RemoveAt(selectedPointIndex);
+							controlPoints[selectedPointCurveIndex].Insert(selectedPointIndex,
+								new ControlPoint(new PointD(current_point.X, current_point.Y),
+									movingPointTension));
 
+							surface_modified = true;
+						}
+						else
+						{
+							//Update the control point's tension.
+							controlPoints[selectedPointCurveIndex][selectedPointIndex].Tension += (lastMousePos.Y - current_point.Y) / 200d;
 
-				drawCurves(false, false, shiftKey);
+							//Restrict the new tension to range from 0d to 1d.
+							controlPoints[selectedPointCurveIndex][selectedPointIndex].Tension =
+								Utility.Clamp(controlPoints[selectedPointCurveIndex][selectedPointIndex].Tension, 0d, 1d);
+
+							surface_modified = true;
+						}
+
+						drawCurves(false, false, shiftKey);
+					}
+				}
 			}
+
+			lastMousePos = current_point;
 		}
 
 		/// <summary>

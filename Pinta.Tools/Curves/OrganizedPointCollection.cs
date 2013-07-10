@@ -45,6 +45,31 @@ namespace Pinta.Tools
 			collection = new Dictionary<int, Dictionary<int, List<OrganizedPoint>>>();
 		}
 
+		/// <summary>
+		/// Clone the collection of organized points.
+		/// </summary>
+		/// <returns>A clone of the organized points.</returns>
+		public OrganizedPointCollection Clone()
+		{
+			OrganizedPointCollection clonedOPC = new OrganizedPointCollection();
+
+			foreach (KeyValuePair<int, Dictionary<int, List<OrganizedPoint>>> xSection in collection)
+			{
+				//This must be created each time to ensure that it is fresh for each loop iteration.
+				Dictionary<int, List<OrganizedPoint>> tempSection = new Dictionary<int, List<OrganizedPoint>>();
+
+				foreach (KeyValuePair<int, List<OrganizedPoint>> section in xSection.Value)
+				{
+					tempSection.Add(section.Key,
+						section.Value.Select(i => new OrganizedPoint(new PointD(i.Position.X, i.Position.Y), i.Index)).ToList());
+				}
+
+				clonedOPC.collection.Add(xSection.Key, tempSection);
+			}
+
+			return clonedOPC;
+		}
+
 		
 		/// <summary>
 		/// Store the given OrganizedPoint in an organized (spatially hashed) manner.
@@ -55,11 +80,10 @@ namespace Pinta.Tools
 			int sX = (int)((op.Position.X - op.Position.X % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
 			int sY = (int)((op.Position.Y - op.Position.Y % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
 
-			//These must be created each time to ensure that they are fresh for each loop iteration.
 			Dictionary<int, List<OrganizedPoint>> xSection;
 			List<OrganizedPoint> ySection;
 
-			//Ensure that the ySection for this particular point exists.
+			//Ensure that the xSection for this particular point exists.
 			if (!collection.TryGetValue(sX, out xSection))
 			{
 				//This particular X section does not exist yet; create it.
@@ -85,32 +109,6 @@ namespace Pinta.Tools
 		public void ClearCollection()
 		{
 			collection.Clear();
-		}
-
-
-		/// <summary>
-		/// Clone the collection of organized points.
-		/// </summary>
-		/// <returns>A clone of the organized points.</returns>
-		public OrganizedPointCollection Clone()
-		{
-			OrganizedPointCollection clonedOPC = new OrganizedPointCollection();
-
-			foreach (KeyValuePair<int, Dictionary<int, List<OrganizedPoint>>> xSection in collection)
-			{
-				//This must be created each time to ensure that it is fresh for each loop iteration.
-				Dictionary<int, List<OrganizedPoint>> tempSection = new Dictionary<int, List<OrganizedPoint>>();
-
-				foreach (KeyValuePair<int, List<OrganizedPoint>> section in xSection.Value)
-				{
-					tempSection.Add(section.Key,
-						section.Value.Select(i => new OrganizedPoint(new PointD(i.Position.X, i.Position.Y), i.Index)).ToList());
-				}
-
-				clonedOPC.collection.Add(xSection.Key, tempSection);
-			}
-
-			return clonedOPC;
 		}
 
 
@@ -183,8 +181,6 @@ namespace Pinta.Tools
 			}
 		}
 	}
-
-
 
 	public class OrganizedPoint
 	{
