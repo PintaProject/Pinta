@@ -125,8 +125,6 @@ namespace Pinta.Tools
 			out int closestCurveIndex, out int closestPointIndex,
 			out PointD closestPoint, out double closestDistance)
 		{
-			Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.cEngine.OrganizedPointsCollection[0].collection;
-
 			closestCurveIndex = 0;
 			closestPointIndex = 0;
 			closestPoint = new PointD(0d, 0d);
@@ -134,45 +132,51 @@ namespace Pinta.Tools
 
 			double currentDistance = double.MaxValue;
 
-			//Calculate the current_point's corresponding *center* section.
-			int sX = (int)((currentPoint.X - currentPoint.X % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
-			int sY = (int)((currentPoint.Y - currentPoint.Y % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
-
-			int xMin = sX - LineCurveTool.BorderingSectionRange;
-			int xMax = sX + LineCurveTool.BorderingSectionRange;
-			int yMin = sY - LineCurveTool.BorderingSectionRange;
-			int yMax = sY + LineCurveTool.BorderingSectionRange;
-
-			//Since the mouse and/or curve points can be close to the edge of a section,
-			//the points in the surrounding sections must also be checked.
-			for (int x = xMin; x <= xMax; ++x)
+			for (int n = 0; n < LineCurveTool.cEngines.CEL.Count; ++n)
 			{
-				//This must be created each time to ensure that it is fresh for each loop iteration.
-				Dictionary<int, List<OrganizedPoint>> xSection;
+				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.cEngines.CEL[n].OrganizedPoints.collection;
 
-				//If the xSection doesn't exist, move on.
-				if (oP.TryGetValue(x, out xSection))
+				//Calculate the current_point's corresponding *center* section.
+				int sX = (int)((currentPoint.X - currentPoint.X % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
+				int sY = (int)((currentPoint.Y - currentPoint.Y % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
+
+				int xMin = sX - LineCurveTool.BorderingSectionRange;
+				int xMax = sX + LineCurveTool.BorderingSectionRange;
+				int yMin = sY - LineCurveTool.BorderingSectionRange;
+				int yMax = sY + LineCurveTool.BorderingSectionRange;
+
+				//Since the mouse and/or curve points can be close to the edge of a section,
+				//the points in the surrounding sections must also be checked.
+				for (int x = xMin; x <= xMax; ++x)
 				{
-					//Since the mouse and/or curve points can be close to the edge of a section,
-					//the points in the surrounding sections must also be checked.
-					for (int y = yMin; y <= yMax; ++y)
+					//This must be created each time to ensure that it is fresh for each loop iteration.
+					Dictionary<int, List<OrganizedPoint>> xSection;
+
+					//If the xSection doesn't exist, move on.
+					if (oP.TryGetValue(x, out xSection))
 					{
-						List<OrganizedPoint> ySection;
-
-						//If the ySection doesn't exist, move on.
-						if (xSection.TryGetValue(y, out ySection))
+						//Since the mouse and/or curve points can be close to the edge of a section,
+						//the points in the surrounding sections must also be checked.
+						for (int y = yMin; y <= yMax; ++y)
 						{
-							foreach (OrganizedPoint p in ySection)
+							List<OrganizedPoint> ySection;
+
+							//If the ySection doesn't exist, move on.
+							if (xSection.TryGetValue(y, out ySection))
 							{
-								currentDistance = p.Position.Distance(currentPoint);
-
-								if (currentDistance < closestDistance)
+								foreach (OrganizedPoint p in ySection)
 								{
-									closestDistance = currentDistance;
+									currentDistance = p.Position.Distance(currentPoint);
 
-									closestPointIndex = p.Index;
+									if (currentDistance < closestDistance)
+									{
+										closestDistance = currentDistance;
 
-									closestPoint = p.Position;
+										closestPointIndex = p.Index;
+										closestCurveIndex = n;
+
+										closestPoint = p.Position;
+									}
 								}
 							}
 						}

@@ -1,5 +1,5 @@
 ﻿// 
-// CurveEngine.cs
+// CurveEngineCollection.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
@@ -32,27 +32,54 @@ using Cairo;
 
 namespace Pinta.Tools
 {
-	public class CurveEngine
+	public class CurveEngineCollection
 	{
-		//GivenPointsCollection is a collection of the original ControlPoints that the curve is based on and that the user interacts with.
-		public List<List<ControlPoint>> GivenPointsCollection = new List<List<ControlPoint>>();
-
-		//GeneratedPointsCollection is a collection of calculated PointD's that make up the entirety of the curve being drawn.
-		public List<PointD[]> GeneratedPointsCollection = new List<PointD[]>();
-
-		//OrganizedPointsCollection is an organized collection of the GeneratedPointsCollection's points for optimized nearest point detection.
-		public List<OrganizedPointCollection> OrganizedPointsCollection = new List<OrganizedPointCollection>();
-
+		//A List of CurveEngines.
+		public List<CurveEngine> CEL = new List<CurveEngine>();
 
 		/// <summary>
-		/// A cloneable engine used for storing and calculating curve data.
+		/// A cloneable CurveEngine collection.
 		/// </summary>
-		public CurveEngine()
+		public CurveEngineCollection()
 		{
-			GivenPointsCollection.Add(new List<ControlPoint>());
-			GeneratedPointsCollection.Add(new PointD[0]);
-			OrganizedPointsCollection.Add(new OrganizedPointCollection());
+			CEL.Add(new CurveEngine());
 		}
+
+		/// <summary>
+		/// A cloneable CurveEngine collection. This constructor creates a clone of an existing CurveEngineCollection.
+		/// </summary>
+		/// <param name="passedCEC">An existing CurveEngineCollection to clone.</param>
+		public CurveEngineCollection(CurveEngineCollection passedCEC)
+		{
+			for (int n = 0; n < passedCEC.CEL.Count; ++n)
+			{
+				CEL.Add(passedCEC.CEL[n].Clone());
+			}
+		}
+
+		/// <summary>
+		/// Clone all of the CurveEngines in the collection.
+		/// </summary>
+		/// <returns>The cloned CurveEngineCollection.</returns>
+		public CurveEngineCollection Clone()
+		{
+			return new CurveEngineCollection(this);
+		}
+	}
+
+	public class CurveEngine
+	{
+		//A collection of the original ControlPoints that the curve is based on and that the user interacts with.
+		public List<ControlPoint> GivenPoints = new List<ControlPoint>();
+
+		//A collection of calculated PointD's that make up the entirety of the curve being drawn.
+		public PointD[] GeneratedPoints = new PointD[0];
+
+		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
+		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
+
+		//Whether or not to show arrows.
+		public bool showArrowOne = false, showArrowTwo = false;
 
 		/// <summary>
 		/// Clone all of the data in the CurveEngine.
@@ -62,20 +89,11 @@ namespace Pinta.Tools
 		{
 			CurveEngine clonedCE = new CurveEngine();
 
-			for (int n = 0; n < GivenPointsCollection.Count; ++n)
-			{
-				clonedCE.GivenPointsCollection[n] = GivenPointsCollection[n].Select(i => i.Clone()).ToList();
-			}
-
-			for (int n = 0; n < GeneratedPointsCollection.Count; ++n)
-			{
-				clonedCE.GeneratedPointsCollection[n] = GeneratedPointsCollection[n].Select(i => new PointD(i.X, i.Y)).ToArray();
-			}
-
-			for (int n = 0; n < OrganizedPointsCollection.Count; ++n)
-			{
-				clonedCE.OrganizedPointsCollection[n] = OrganizedPointsCollection[n].Clone();
-			}
+			clonedCE.GivenPoints = GivenPoints.Select(i => i.Clone()).ToList();
+			clonedCE.GeneratedPoints = GeneratedPoints.Select(i => new PointD(i.X, i.Y)).ToArray();
+			clonedCE.OrganizedPoints = OrganizedPoints.Clone();
+			clonedCE.showArrowOne = showArrowOne;
+			clonedCE.showArrowTwo = showArrowTwo;
 
 			return clonedCE;
 		}
@@ -83,21 +101,21 @@ namespace Pinta.Tools
 
 		/// <summary>
 		/// Generate each point in a cardinal spline polynomial curve that passes through
-		/// the given control points and store the result in GeneratedPointsCollection.
+		/// the given control points and store the result in GeneratedPoints.
 		/// </summary>
 		/// <param name="curveNum">The number of the curve to generate the points for.</param>
 		public void GenerateCardinalSplinePolynomialCurvePoints(int curveNum)
 		{
-			List<List<ControlPoint>> controlPoints = LineCurveTool.cEngine.GivenPointsCollection;
+			List<ControlPoint> controlPoints = LineCurveTool.cEngines.CEL[curveNum].GivenPoints;
 
 
 			List<PointD> generatedPoints = new List<PointD>();
 
 			//Note: it's important that there be many generated points even if there are only 2 given points and it's just a line.
 			//This is because the generated points are used in the check that determines if the mouse clicks on the line/curve.
-			if (controlPoints[curveNum].Count < 2)
+			if (controlPoints.Count < 2)
 			{
-				foreach (ControlPoint cP in controlPoints[curveNum])
+				foreach (ControlPoint cP in controlPoints)
 				{
 					generatedPoints.Add(cP.Position);
 				}
@@ -114,31 +132,31 @@ namespace Pinta.Tools
 
 				//Calculate the first tangent.
 				bezierTangents.Add(new PointD(
-					controlPoints[curveNum][0].Tension * (controlPoints[curveNum][1].Position.X - controlPoints[curveNum][0].Position.X),
-					controlPoints[curveNum][0].Tension * (controlPoints[curveNum][1].Position.Y - controlPoints[curveNum][0].Position.Y)));
+					controlPoints[0].Tension * (controlPoints[1].Position.X - controlPoints[0].Position.X),
+					controlPoints[0].Tension * (controlPoints[1].Position.Y - controlPoints[0].Position.Y)));
 
-				int pointCount = controlPoints[curveNum].Count - 1;
+				int pointCount = controlPoints.Count - 1;
 				double pointCountDouble = (double)pointCount;
 				double tensionForPoint;
 
 				//Calculate all of the middle tangents.
 				for (int i = 1; i < pointCount; ++i)
 				{
-					tensionForPoint = controlPoints[curveNum][i].Tension * (double)i / pointCountDouble;
+					tensionForPoint = controlPoints[i].Tension * (double)i / pointCountDouble;
 
 					bezierTangents.Add(new PointD(
 						tensionForPoint *
-							(controlPoints[curveNum][i + 1].Position.X - controlPoints[curveNum][i - 1].Position.X),
+							(controlPoints[i + 1].Position.X - controlPoints[i - 1].Position.X),
 						tensionForPoint *
-							(controlPoints[curveNum][i + 1].Position.Y - controlPoints[curveNum][i - 1].Position.Y)));
+							(controlPoints[i + 1].Position.Y - controlPoints[i - 1].Position.Y)));
 				}
 
 				//Calculate the last tangent.
 				bezierTangents.Add(new PointD(
-					controlPoints[curveNum][pointCount].Tension *
-						(controlPoints[curveNum][pointCount].Position.X - controlPoints[curveNum][pointCount - 1].Position.X),
-					controlPoints[curveNum][pointCount].Tension *
-						(controlPoints[curveNum][pointCount].Position.Y - controlPoints[curveNum][pointCount - 1].Position.Y)));
+					controlPoints[pointCount].Tension *
+						(controlPoints[pointCount].Position.X - controlPoints[pointCount - 1].Position.X),
+					controlPoints[pointCount].Tension *
+						(controlPoints[pointCount].Position.Y - controlPoints[pointCount - 1].Position.Y)));
 
 
 
@@ -147,24 +165,24 @@ namespace Pinta.Tools
 
 				//Generate the resulting curve's points with consecutive cubic Bezier curves that
 				//use the given points as end points and the calculated tangents as control points.
-				for (int i = 1; i < controlPoints[curveNum].Count; ++i)
+				for (int i = 1; i < controlPoints.Count; ++i)
 				{
 					iMinusOne = i - 1;
 
 					GenerateCubicBezierCurvePoints(
 						generatedPoints,
-						controlPoints[curveNum][iMinusOne].Position,
+						controlPoints[iMinusOne].Position,
 						new PointD(
-							controlPoints[curveNum][iMinusOne].Position.X + bezierTangents[iMinusOne].X,
-							controlPoints[curveNum][iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
+							controlPoints[iMinusOne].Position.X + bezierTangents[iMinusOne].X,
+							controlPoints[iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
 						new PointD(
-							controlPoints[curveNum][i].Position.X - bezierTangents[i].X,
-							controlPoints[curveNum][i].Position.Y - bezierTangents[i].Y),
-						controlPoints[curveNum][i].Position);
+							controlPoints[i].Position.X - bezierTangents[i].X,
+							controlPoints[i].Position.Y - bezierTangents[i].Y),
+						controlPoints[i].Position);
 				}
 			}
 
-			GeneratedPointsCollection[curveNum] = generatedPoints.ToArray();
+			GeneratedPoints = generatedPoints.ToArray();
 		}
 
 		/// <summary>

@@ -73,7 +73,7 @@
     <Compile Include="CoreToolsExtension.cs" />
     <Compile Include="Curves\ControlPoint.cs" />
     <Compile Include="Curves\OrganizedPointCollection.cs" />
-    <Compile Include="Curves\CurveEngine.cs" />
+    <Compile Include="Curves\CurveEngineCollection.cs" />
     <Compile Include="HistoryItems\CurvesHistoryItem.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Brushes\SplatterBrush.cs" />

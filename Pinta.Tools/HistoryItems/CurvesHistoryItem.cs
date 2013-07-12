@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		SurfaceDiff user_surface_diff;
 		ImageSurface userSurface;
 
-		CurveEngine cEngine;
+		CurveEngineCollection cEngines;
 
 		/// <summary>
 		/// A history item for when curves are created, modified, and/or finalized.
@@ -49,10 +49,10 @@ namespace Pinta.Tools
 		/// <param name="text">The history item's title.</param>
 		/// <param name="passedCurvesSurface">The stored CurvesLayer surface.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
-		/// <param name="passedCurveEngine">The curve engine being used.</param>
+		/// <param name="passedCurveEngines">The curve engines being used.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
 		public CurvesHistoryItem(string icon, string text, ImageSurface passedCurvesSurface,
-		                       ImageSurface passedUserSurface, CurveEngine passedCurveEngine,
+							   ImageSurface passedUserSurface, CurveEngineCollection passedCurveEngines,
 		                       UserLayer passedUserLayer) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
@@ -82,7 +82,7 @@ namespace Pinta.Tools
 			}
 
 
-			cEngine = passedCurveEngine;
+			cEngines = passedCurveEngines;
 		}
 
 		public CurvesHistoryItem(string icon, string text) : base(icon, text)
@@ -144,14 +144,14 @@ namespace Pinta.Tools
 
 
 
-			//Store the old text data temporarily.
-			CurveEngine oldCEngine = cEngine;
+			//Store the old curve data temporarily.
+			CurveEngineCollection oldCEngine = cEngines;
 
 			//Swap half of the data.
-			cEngine = Pinta.Tools.LineCurveTool.cEngine;
+			cEngines = Pinta.Tools.LineCurveTool.cEngines;
 
 			//Swap the other half.
-			Pinta.Tools.LineCurveTool.cEngine = oldCEngine;
+			Pinta.Tools.LineCurveTool.cEngines = oldCEngine;
 		}
 
 		public override void Dispose()
