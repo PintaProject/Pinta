@@ -137,8 +137,8 @@ namespace Pinta.Tools
 				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.cEngines.CEL[n].OrganizedPoints.collection;
 
 				//Calculate the current_point's corresponding *center* section.
-				int sX = (int)((currentPoint.X - currentPoint.X % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
-				int sY = (int)((currentPoint.Y - currentPoint.Y % LineCurveTool.SectionSize) / LineCurveTool.SectionSize);
+				int sX = (int)((currentPoint.X - currentPoint.X % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
+				int sY = (int)((currentPoint.Y - currentPoint.Y % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
 
 				int xMin = sX - LineCurveTool.BorderingSectionRange;
 				int xMax = sX + LineCurveTool.BorderingSectionRange;

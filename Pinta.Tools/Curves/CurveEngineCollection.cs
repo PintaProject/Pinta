@@ -38,7 +38,7 @@ namespace Pinta.Tools
 		public List<CurveEngine> CEL = new List<CurveEngine>();
 
 		/// <summary>
-		/// A cloneable CurveEngine collection.
+		/// A partially cloneable CurveEngine collection.
 		/// </summary>
 		public CurveEngineCollection()
 		{
@@ -46,22 +46,22 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// A cloneable CurveEngine collection. This constructor creates a clone of an existing CurveEngineCollection.
+		/// A partially cloneable CurveEngine collection. This constructor creates a partial clone of an existing CurveEngineCollection.
 		/// </summary>
-		/// <param name="passedCEC">An existing CurveEngineCollection to clone.</param>
+		/// <param name="passedCEC">An existing CurveEngineCollection to partially clone.</param>
 		public CurveEngineCollection(CurveEngineCollection passedCEC)
 		{
 			for (int n = 0; n < passedCEC.CEL.Count; ++n)
 			{
-				CEL.Add(passedCEC.CEL[n].Clone());
+				CEL.Add(passedCEC.CEL[n].PartialClone());
 			}
 		}
 
 		/// <summary>
-		/// Clone all of the CurveEngines in the collection.
+		/// Clone the necessary data in each of the CurveEngines in the collection.
 		/// </summary>
-		/// <returns>The cloned CurveEngineCollection.</returns>
-		public CurveEngineCollection Clone()
+		/// <returns>The partially cloned CurveEngineCollection.</returns>
+		public CurveEngineCollection PartialClone()
 		{
 			return new CurveEngineCollection(this);
 		}
@@ -70,7 +70,7 @@ namespace Pinta.Tools
 	public class CurveEngine
 	{
 		//A collection of the original ControlPoints that the curve is based on and that the user interacts with.
-		public List<ControlPoint> GivenPoints = new List<ControlPoint>();
+		public List<ControlPoint> ControlPoints = new List<ControlPoint>();
 
 		//A collection of calculated PointD's that make up the entirety of the curve being drawn.
 		public PointD[] GeneratedPoints = new PointD[0];
@@ -78,22 +78,22 @@ namespace Pinta.Tools
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
 
-		//Whether or not to show arrows.
-		public bool showArrowOne = false, showArrowTwo = false;
+		public Arrow Arrow1 = new Arrow(), Arrow2 = new Arrow();
 
 		/// <summary>
-		/// Clone all of the data in the CurveEngine.
+		/// Clone all of the necessary data in the CurveEngine.
 		/// </summary>
-		/// <returns>The cloned curve data.</returns>
-		public CurveEngine Clone()
+		/// <returns>The partially cloned curve data.</returns>
+		public CurveEngine PartialClone()
 		{
 			CurveEngine clonedCE = new CurveEngine();
 
-			clonedCE.GivenPoints = GivenPoints.Select(i => i.Clone()).ToList();
-			clonedCE.GeneratedPoints = GeneratedPoints.Select(i => new PointD(i.X, i.Y)).ToArray();
-			clonedCE.OrganizedPoints = OrganizedPoints.Clone();
-			clonedCE.showArrowOne = showArrowOne;
-			clonedCE.showArrowTwo = showArrowTwo;
+			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
+
+			//Don't clone the GeneratedPoints or OrganizedPoints as they will be calculated.
+
+			clonedCE.Arrow1 = Arrow1.Clone();
+			clonedCE.Arrow2 = Arrow2.Clone();
 
 			return clonedCE;
 		}
@@ -106,7 +106,7 @@ namespace Pinta.Tools
 		/// <param name="curveNum">The number of the curve to generate the points for.</param>
 		public void GenerateCardinalSplinePolynomialCurvePoints(int curveNum)
 		{
-			List<ControlPoint> controlPoints = LineCurveTool.cEngines.CEL[curveNum].GivenPoints;
+			List<ControlPoint> controlPoints = LineCurveTool.cEngines.CEL[curveNum].ControlPoints;
 
 
 			List<PointD> generatedPoints = new List<PointD>();

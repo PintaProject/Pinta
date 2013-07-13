@@ -1,5 +1,5 @@
 ﻿// 
-// CurvesHistoryItem.cs
+// CurveModifyHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
@@ -30,41 +30,18 @@ using Cairo;
 
 namespace Pinta.Tools
 {
-	public class CurvesHistoryItem : BaseHistoryItem
+	public class CurveModifyHistoryItem : BaseHistoryItem
 	{
-		UserLayer userLayer;
-
-		SurfaceDiff user_surface_diff;
-		ImageSurface userSurface;
-
 		CurveEngineCollection cEngines;
 
 		/// <summary>
-		/// A history item for when curves are finalized.
+		/// A history item for when curves are modified.
 		/// </summary>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedCurveEngines">The curve engines being used.</param>
-		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, CurveEngineCollection passedCurveEngines,
-		                       UserLayer passedUserLayer) : base(icon, text)
+		public CurveModifyHistoryItem(string icon, string text, CurveEngineCollection passedCurveEngines) : base(icon, text)
 		{
-			userLayer = passedUserLayer;
-
-
-			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
-
-			if (user_surface_diff == null)
-			{
-				userSurface = passedUserSurface;
-			}
-			else
-			{
-				(passedUserSurface as IDisposable).Dispose();
-			}
-
-
 			cEngines = passedCurveEngines;
 		}
 
@@ -80,35 +57,6 @@ namespace Pinta.Tools
 
 		private void Swap()
 		{
-			// Grab the original surface
-			ImageSurface surf = PintaCore.Workspace.ActiveDocument.ToolLayer.Surface;
-
-
-
-			// Grab the original surface
-			surf = userLayer.Surface;
-
-			if (user_surface_diff != null)
-			{
-				user_surface_diff.ApplyAndSwap(surf);
-				PintaCore.Workspace.Invalidate(user_surface_diff.GetBounds());
-			}
-			else
-			{
-				// Undo to the "old" surface
-				userLayer.Surface = userSurface;
-
-				// Store the original surface for Redo
-				userSurface = surf;
-			}
-
-
-
-			//Redraw everything since surfaces were swapped.
-			PintaCore.Workspace.Invalidate();
-
-
-
 			//Store the old curve data temporarily.
 			CurveEngineCollection oldCEngine = cEngines;
 
@@ -117,13 +65,6 @@ namespace Pinta.Tools
 
 			//Swap the other half.
 			Pinta.Tools.LineCurveTool.cEngines = oldCEngine;
-		}
-
-		public override void Dispose()
-		{
-			// Free up native surface
-			if (userSurface != null)
-				(userSurface as IDisposable).Dispose();
 		}
 	}
 }

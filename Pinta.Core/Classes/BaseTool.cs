@@ -169,6 +169,16 @@ namespace Pinta.Core
 			return false;
 		}
 
+		public virtual void AfterUndo()
+		{
+
+		}
+
+		public virtual void AfterRedo()
+		{
+
+		}
+
 		#endregion
 
 		#region Protected Methods

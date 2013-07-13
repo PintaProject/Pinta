@@ -306,6 +306,7 @@ namespace Pinta.Core
 				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.History.Undo ();
+			PintaCore.Tools.CurrentTool.AfterUndo();
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
@@ -314,6 +315,7 @@ namespace Pinta.Core
 				return;
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.History.Redo ();
+			PintaCore.Tools.CurrentTool.AfterRedo();
 		}
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
