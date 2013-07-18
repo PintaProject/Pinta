@@ -338,14 +338,24 @@ msgstr ""
 msgid "Increase rectangle's corner radius"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:64
+#: Pinta.Tools/Tools/LineCurveTool.cs:125
 msgid "Line/Curve"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:43
+#: Pinta.Tools/Tools/LineCurveTool.cs:131
 msgid ""
-"Left click to draw with primary color, right click for secondary color. Hold "
-"Shift key to snap to angles."
+"Left click to draw a line with primary color."
+"\nLeft click on a line to add curve control points."
+"\nLeft click on a control point and drag to move it."
+"\nRight click on a control point and drag to change tension."
+"\nHold Shift to snap to angles."
+"\nUse arrow keys to move selected control point."
+"\nPress Ctrl + left/right arrows to navigate through (select) control points by order."
+"\nPress Delete to delete selected control point."
+"\nPress Space to create a new point on the outermost side of the selected control point at the mouse position."
+"\nHold Ctrl while pressing Space to create the point at the exact same position."
+"\nHold Ctrl while left clicking on a control point to create a new line at the exact same position."
+"\nPress Enter to finalize the curve."
 msgstr ""
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
@@ -2078,4 +2088,72 @@ msgstr ""
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:191
+msgid "Arrow 1"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:198
+msgid "Show"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:198
+msgid "Hide"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:209
+msgid "Arrow 2"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:216
+msgid "Show"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:216
+msgid "Hide"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:227
+msgid "Arrow size"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:234
+msgid "Decrease arrow size"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:303
+msgid "Increase arrow size"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:314
+msgid "Angle offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:314
+msgid "Angle offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:321
+msgid "Decrease angle offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:321
+msgid "Decrease angle offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:386
+msgid "Increase angle offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:397
+msgid "Length offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:404
+msgid "Decrease length offset"
+msgstr ""
+
+#: Pinta.Tools/Tools/LineCurveTool.cs:469
+msgid "Increase length offset"
 msgstr ""

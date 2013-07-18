@@ -37,7 +37,6 @@ namespace Pinta.Tools
 	{
 		public bool Show = false;
 		public double ArrowSize = 10d, AngleOffset = 0d, LengthOffset = 10d;
-		public Color FillColor = new Color(0d, 0d, 0d, 0d);
 
 		private const double radiansToDegrees = Math.PI / 180d;
 		private const double invRadiansToDegrees = 180d / Math.PI;
@@ -54,7 +53,6 @@ namespace Pinta.Tools
 			clonedA.ArrowSize = ArrowSize;
 			clonedA.AngleOffset = AngleOffset;
 			clonedA.LengthOffset = LengthOffset;
-			clonedA.FillColor = FillColor;
 
 			return clonedA;
 		}
@@ -108,8 +106,7 @@ namespace Pinta.Tools
 							};
 
 			//Draw the arrow.
-			g.FillPolygonal(arrowPoints, FillColor);
-			g.DrawPolygonal(arrowPoints, outlineColor);
+			g.FillPolygonal(arrowPoints, outlineColor);
 
 			//Calculate the minimum bounding rectangle for the arrowhead and union it with the existing invalidation rectangle.
 			dirty = dirty.UnionRectangles(new Rectangle(

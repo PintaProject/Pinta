@@ -62,12 +62,26 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return SelectedCurveEngine.ControlPoints[selectedPointIndex];
+				CurveEngine selEngine = SelectedCurveEngine;
+
+				if (selEngine != null)
+				{
+					return selEngine.ControlPoints[selectedPointIndex];
+				}
+				else
+				{
+					return null;
+				}
 			}
 
 			set
 			{
-				SelectedCurveEngine.ControlPoints[selectedPointIndex] = value;
+				CurveEngine selEngine = SelectedCurveEngine;
+
+				if (selEngine != null)
+				{
+					selEngine.ControlPoints[selectedPointIndex] = value;
+				}
 			}
 		}
 
@@ -78,7 +92,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				if (cEngines.CEL.Count > selectedPointCurveIndex)
+				if (selectedPointIndex > -1 && cEngines.CEL.Count > selectedPointCurveIndex)
 				{
 					return cEngines.CEL[selectedPointCurveIndex];
 				}
@@ -113,10 +127,20 @@ namespace Pinta.Tools
 		public override string Icon {
 			get { return "Tools.Line.png"; }
 		}
-		//TODO: "Left click to draw a line with primary color. Left click on line to add curve control points.
-		//Right click to change tension. Hold Shift key to snap to angles." etc...
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click to draw with primary color, right click for secondary color. Hold Shift key to snap to angles."); }
+			get { return Catalog.GetString ("Left click to draw a line with primary color." +
+					"\nLeft click on a line to add curve control points." +
+					"\nLeft click on a control point and drag to move it." +
+					"\nRight click on a control point and drag to change tension." +
+					"\nHold Shift to snap to angles." +
+					"\nUse arrow keys to move selected control point." +
+					"\nPress Ctrl + left/right arrows to navigate through (select) control points by order." +
+					"\nPress Delete to delete selected control point." +
+					"\nPress Space to create a new point on the outermost side of the selected control point at the mouse position." +
+					"\nHold Ctrl while pressing Space to create the point at the exact same position." +
+					"\nHold Ctrl while left clicking on a control point to create a new line at the exact same position." +
+					"\nPress Enter to finalize the curve.");
+			}
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Line.png"), 9, 18); }
@@ -128,13 +152,29 @@ namespace Pinta.Tools
 			get { return 39; }
 		}
 
+
 		private Gtk.SeparatorToolItem arrowSep;
 		private ToolBarLabel showArrowOneLabel, showArrowTwoLabel;
 		private ToolBarComboBox showArrowOneBox, showArrowTwoBox;
 
+		private ToolBarComboBox arrowSize;
+		private ToolBarLabel arrowSizeLabel;
+		private ToolBarButton arrowSizeMinus, arrowSizePlus;
+
+		private ToolBarComboBox arrowAngleOffset;
+		private ToolBarLabel arrowAngleOffsetLabel;
+		private ToolBarButton arrowAngleOffsetMinus, arrowAngleOffsetPlus;
+
+		private ToolBarComboBox arrowLengthOffset;
+		private ToolBarLabel arrowLengthOffsetLabel;
+		private ToolBarButton arrowLengthOffsetMinus, arrowLengthOffsetPlus;
+
+
 		protected override void BuildToolBar(Gtk.Toolbar tb)
 		{
 			base.BuildToolBar(tb);
+
+			//Arrow separator.
 
 			if (arrowSep == null)
 			{
@@ -143,6 +183,8 @@ namespace Pinta.Tools
 
 			tb.AppendItem(arrowSep);
 
+
+			//Show arrow 1.
 
 			if (showArrowOneLabel == null)
 			{
@@ -153,12 +195,14 @@ namespace Pinta.Tools
 
 			if (showArrowOneBox == null)
 			{
-				showArrowOneBox = new ToolBarComboBox(65, 1, true, "Show", "Hide");
+				showArrowOneBox = new ToolBarComboBox(60, 1, false, Catalog.GetString("Show"), Catalog.GetString("Hide"));
 				showArrowOneBox.ComboBox.Changed += new EventHandler(ComboBox_ArrowOneShowChanged);
 			}
 
 			tb.AppendItem(showArrowOneBox);
 
+
+			//Show arrow 2.
 
 			if (showArrowTwoLabel == null)
 			{
@@ -169,11 +213,264 @@ namespace Pinta.Tools
 
 			if (showArrowTwoBox == null)
 			{
-				showArrowTwoBox = new ToolBarComboBox(65, 1, true, "Show", "Hide");
+				showArrowTwoBox = new ToolBarComboBox(60, 1, true, Catalog.GetString("Show"), Catalog.GetString("Hide"));
 				showArrowTwoBox.ComboBox.Changed += new EventHandler(ComboBox_ArrowTwoShowChanged);
 			}
 
 			tb.AppendItem(showArrowTwoBox);
+
+
+			//Arrow size.
+
+			if (arrowSizeLabel == null)
+			{
+				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow size")));
+			}
+
+			tb.AppendItem(arrowSizeLabel);
+
+			if (arrowSizeMinus == null)
+			{
+				arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease arrow size"));
+				arrowSizeMinus.Clicked += new EventHandler(arrowSizeMinus_Clicked);
+			}
+
+			tb.AppendItem(arrowSizeMinus);
+
+			if (arrowSize == null)
+			{
+				arrowSize = new ToolBarComboBox(65, 9, true,
+					"3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "18",
+					"20", "25", "30", "40", "50", "60", "70", "80", "90", "100");
+
+				arrowSize.ComboBox.Changed += (o, e) =>
+				{
+					if (arrowSize.ComboBox.ActiveText.Length < 1)
+					{
+						//Ignore the change until the user enters something.
+						return;
+					}
+					else
+					{
+						double newSize = 10d;
+
+						if (arrowSize.ComboBox.ActiveText == "-")
+						{
+							//The user is trying to enter a negative value: change it to 1.
+							newSize = 1d;
+						}
+						else
+						{
+							if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
+							{
+								if (newSize < 1d)
+								{
+									//Less than 1: change it to 1.
+									newSize = 1d;
+								}
+								else if (newSize > 100d)
+								{
+									//Greater than 100: change it to 100.
+									newSize = 100d;
+								}
+							}
+							else
+							{
+								//Not a number: wait until the user enters something.
+								return;
+							}
+						}
+
+						(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+
+						CurveEngine selEngine = SelectedCurveEngine;
+
+						if (selEngine != null)
+						{
+							selEngine.Arrow1.ArrowSize = newSize;
+							selEngine.Arrow2.ArrowSize = newSize;
+
+							drawCurves(false, false, false);
+						}
+					}
+				};
+			}
+
+			tb.AppendItem(arrowSize);
+
+			if (arrowSizePlus == null)
+			{
+				arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase arrow size"));
+				arrowSizePlus.Clicked += new EventHandler(arrowSizePlus_Clicked);
+			}
+
+			tb.AppendItem(arrowSizePlus);
+
+
+			//Angle offset.
+
+			if (arrowAngleOffsetLabel == null)
+			{
+				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle offset")));
+			}
+
+			tb.AppendItem(arrowAngleOffsetLabel);
+
+			if (arrowAngleOffsetMinus == null)
+			{
+				arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease angle offset"));
+				arrowAngleOffsetMinus.Clicked += new EventHandler(arrowAngleOffsetMinus_Clicked);
+			}
+
+			tb.AppendItem(arrowAngleOffsetMinus);
+
+			if (arrowAngleOffset == null)
+			{
+				arrowAngleOffset = new ToolBarComboBox(65, 6, true,
+					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
+
+				arrowAngleOffset.ComboBox.Changed += (o, e) =>
+				{
+					if (arrowAngleOffset.ComboBox.ActiveText.Length < 1)
+					{
+						//Ignore the change until the user enters something.
+						return;
+					}
+					else if (arrowAngleOffset.ComboBox.ActiveText == "-")
+					{
+						//The user is trying to enter a negative value: ignore the change until the user enters more.
+						return;
+					}
+					else
+					{
+						double newAngle = 0d;
+
+						if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
+						{
+							if (newAngle < -89d)
+							{
+								//Less than -89: change it to -89.
+								newAngle = -89d;
+							}
+							else if (newAngle > 89d)
+							{
+								//Greater than 89: change it to 89.
+								newAngle = 89d;
+							}
+						}
+						else
+						{
+							//Not a number: wait until the user enters something.
+							return;
+						}
+
+						(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+
+						CurveEngine selEngine = SelectedCurveEngine;
+
+						if (selEngine != null)
+						{
+							selEngine.Arrow1.AngleOffset = newAngle;
+							selEngine.Arrow2.AngleOffset = newAngle;
+
+							drawCurves(false, false, false);
+						}
+					}
+				};
+			}
+
+			tb.AppendItem(arrowAngleOffset);
+
+			if (arrowAngleOffsetPlus == null)
+			{
+				arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase angle offset"));
+				arrowAngleOffsetPlus.Clicked += new EventHandler(arrowAngleOffsetPlus_Clicked);
+			}
+
+			tb.AppendItem(arrowAngleOffsetPlus);
+
+
+			//Length offset.
+
+			if (arrowLengthOffsetLabel == null)
+			{
+				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length offset")));
+			}
+
+			tb.AppendItem(arrowLengthOffsetLabel);
+
+			if (arrowLengthOffsetMinus == null)
+			{
+				arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease length offset"));
+				arrowLengthOffsetMinus.Clicked += new EventHandler(arrowLengthOffsetMinus_Clicked);
+			}
+
+			tb.AppendItem(arrowLengthOffsetMinus);
+
+			if (arrowLengthOffset == null)
+			{
+				arrowLengthOffset = new ToolBarComboBox(65, 8, true,
+					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
+
+				arrowLengthOffset.ComboBox.Changed += (o, e) =>
+				{
+					if (arrowLengthOffset.ComboBox.ActiveText.Length < 1)
+					{
+						//Ignore the change until the user enters something.
+						return;
+					}
+					else if (arrowLengthOffset.ComboBox.ActiveText == "-")
+					{
+						//The user is trying to enter a negative value: ignore the change until the user enters more.
+						return;
+					}
+					else
+					{
+						double newLength = 0d;
+
+						if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
+						{
+							if (newLength < -100d)
+							{
+								//Less than -100: change it to -100.
+								newLength = -100d;
+							}
+							else if (newLength > 100d)
+							{
+								//Greater than 100: change it to 100.
+								newLength = 100d;
+							}
+						}
+						else
+						{
+							//Not a number: wait until the user enters something.
+							return;
+						}
+
+						(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
+
+						CurveEngine selEngine = SelectedCurveEngine;
+
+						if (selEngine != null)
+						{
+							selEngine.Arrow1.LengthOffset = newLength;
+							selEngine.Arrow2.LengthOffset = newLength;
+
+							drawCurves(false, false, false);
+						}
+					}
+				};
+			}
+
+			tb.AppendItem(arrowLengthOffset);
+
+			if (arrowLengthOffsetPlus == null)
+			{
+				arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase length offset"));
+				arrowLengthOffsetPlus.Clicked += new EventHandler(arrowLengthOffsetPlus_Clicked);
+			}
+
+			tb.AppendItem(arrowLengthOffsetPlus);
 		}
 
 		/// <summary>
@@ -205,6 +502,9 @@ namespace Pinta.Tools
 			}
 		}
 
+
+		#region EventHandlers
+
 		private void ComboBox_ArrowOneShowChanged(object sender, EventArgs e)
 		{
 			CurveEngine selEngine = SelectedCurveEngine;
@@ -215,7 +515,7 @@ namespace Pinta.Tools
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem(
 					new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
 
-				selEngine.Arrow1.Show = (showArrowOneBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text == "Show";
+				selEngine.Arrow1.Show = showArrowOneBox.ComboBox.ActiveText == Catalog.GetString("Show");
 			}
 		}
 
@@ -229,9 +529,138 @@ namespace Pinta.Tools
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem(
 					new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
 
-				selEngine.Arrow2.Show = (showArrowTwoBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text == "Show";
+				selEngine.Arrow2.Show = showArrowTwoBox.ComboBox.ActiveText == Catalog.GetString("Show");
 			}
 		}
+
+		void arrowSizeMinus_Clicked(object sender, EventArgs e)
+		{
+			double newSize = 10d;
+
+			if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
+			{
+				--newSize;
+
+				if (newSize < 1d)
+				{
+					newSize = 1d;
+				}
+			}
+			else
+			{
+				newSize = 10d;
+			}
+
+			(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+		}
+
+		void arrowSizePlus_Clicked(object sender, EventArgs e)
+		{
+			double newSize = 10d;
+
+			if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
+			{
+				++newSize;
+
+				if (newSize > 100d)
+				{
+					newSize = 100d;
+				}
+			}
+			else
+			{
+				newSize = 10d;
+			}
+
+			(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+		}
+
+		void arrowAngleOffsetMinus_Clicked(object sender, EventArgs e)
+		{
+			double newAngle = 0d;
+
+			if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
+			{
+				--newAngle;
+
+				if (newAngle < -89d)
+				{
+					newAngle = -89d;
+				}
+			}
+			else
+			{
+				newAngle = 0d;
+			}
+
+			(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+		}
+
+		void arrowAngleOffsetPlus_Clicked(object sender, EventArgs e)
+		{
+			double newAngle = 0d;
+
+			if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
+			{
+				++newAngle;
+
+				if (newAngle > 89d)
+				{
+					newAngle = 89d;
+				}
+			}
+			else
+			{
+				newAngle = 0d;
+			}
+
+			(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+		}
+
+		void arrowLengthOffsetMinus_Clicked(object sender, EventArgs e)
+		{
+			double newLength = 10d;
+
+			if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
+			{
+				--newLength;
+
+				if (newLength < -100d)
+				{
+					newLength = -100d;
+				}
+			}
+			else
+			{
+				newLength = 10d;
+			}
+
+			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
+		}
+
+		void arrowLengthOffsetPlus_Clicked(object sender, EventArgs e)
+		{
+			double newLength = 10d;
+
+			if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
+			{
+				++newLength;
+
+				if (newLength > 100d)
+				{
+					newLength = 100d;
+				}
+			}
+			else
+			{
+				newLength = 10d;
+			}
+
+			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
+		}
+
+		#endregion EventHandlers
+
 
 		protected override Rectangle DrawShape (Rectangle rect, Layer l, bool drawControlPoints)
 		{
@@ -560,19 +989,12 @@ namespace Pinta.Tools
 					//Delete the selected point from the curve.
 					controlPoints.RemoveAt(selectedPointIndex);
 
-					//Set the newly selected point to be the median-most point on the curve, if possible. Otherwise, set it to noPointSelected.
+					//Set the newly selected point to be the median-most point on the curve, order-wise.
 					if (controlPoints.Count > 0)
 					{
-						if (selectedPointIndex != controlPoints.Count / 2)
+						if (selectedPointIndex > controlPoints.Count / 2)
 						{
-							if (selectedPointIndex > controlPoints.Count / 2)
-							{
-								--selectedPointIndex;
-							}
-							else
-							{
-								++selectedPointIndex;
-							}
+							--selectedPointIndex;
 						}
 					}
 					else
@@ -594,6 +1016,60 @@ namespace Pinta.Tools
 				finalizeCurve();
 
 				args.RetVal = true;
+			}
+			else if (args.Event.Key == Gdk.Key.space)
+			{
+				ControlPoint selPoint = SelectedPoint;
+
+				if (selPoint != null)
+				{
+					//This can be assumed not to be null since selPoint was not null.
+					CurveEngine selEngine = SelectedCurveEngine;
+
+					//Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
+					PintaCore.Workspace.ActiveDocument.History.PushNewItem(
+						new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
+
+
+					bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+					bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+
+					PointD newPointPos;
+
+					if (ctrlKey)
+					{
+						//Ctrl + space combo: same position as currently selected point.
+						newPointPos = new PointD(selPoint.Position.X, selPoint.Position.Y);
+					}
+					else
+					{
+						shape_origin = new PointD(selPoint.Position.X, selPoint.Position.Y);
+
+						if (shiftKey)
+						{
+							calculateModifiedCurrentPoint();
+						}
+
+						//Space only: position of mouse (after any potential shift alignment).
+						newPointPos = new PointD(current_point.X, current_point.Y);
+					}
+
+					//Place the new point on the outside-most end, order-wise.
+					if ((double)selectedPointIndex < (double)selEngine.ControlPoints.Count / 2d)
+					{
+						SelectedCurveEngine.ControlPoints.Insert(selectedPointIndex,
+							new ControlPoint(new PointD(newPointPos.X, newPointPos.Y), DefaultMidPointTension));
+					}
+					else
+					{
+						SelectedCurveEngine.ControlPoints.Insert(selectedPointIndex + 1,
+							new ControlPoint(new PointD(newPointPos.X, newPointPos.Y), DefaultMidPointTension));
+
+						++selectedPointIndex;
+					}
+
+					drawCurves(true, false, shiftKey);
+				}
 			}
 			else if (args.Event.Key == Gdk.Key.Up)
 			{
@@ -674,6 +1150,20 @@ namespace Pinta.Tools
 				base.OnKeyDown(canvas, args);
 			}
 		}
+		
+		protected override void OnKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
+		{
+			if (args.Event.Key == Gdk.Key.Delete || args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.space
+				|| args.Event.Key == Gdk.Key.Up || args.Event.Key == Gdk.Key.Down
+				|| args.Event.Key == Gdk.Key.Left || args.Event.Key == Gdk.Key.Right)
+			{
+				args.RetVal = true;
+			}
+			else
+			{
+				base.OnKeyUp(canvas, args);
+			}
+		}
 
 		public override void AfterUndo()
 		{
@@ -700,19 +1190,6 @@ namespace Pinta.Tools
 
 			base.AfterRedo();
 		}
-		
-		protected override void OnKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-		{
-			if (args.Event.Key == Gdk.Key.Delete || args.Event.Key == Gdk.Key.Up || args.Event.Key == Gdk.Key.Down
-				|| args.Event.Key == Gdk.Key.Left || args.Event.Key == Gdk.Key.Right)
-			{
-				args.RetVal = true;
-			}
-			else
-			{
-				base.OnKeyUp(canvas, args);
-			}
-		}
 
 		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
 		{
@@ -722,6 +1199,11 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
+			lastMousePosition = point;
+
+			shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
+			current_point = shape_origin;
+
 			bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 
 			if (shiftKey)
@@ -729,18 +1211,12 @@ namespace Pinta.Tools
 				calculateModifiedCurrentPoint();
 			}
 
-			lastMousePosition = point;
-
-			shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
-			current_point = shape_origin;
-
 			is_drawing = true;
 			surface_modified = true;
 			doc.ToolLayer.Hidden = false;
 
 			outline_color = PintaCore.Palette.PrimaryColor;
 			fill_color = PintaCore.Palette.SecondaryColor;
-
 
 
 			//Right clicking changes tension.
@@ -754,7 +1230,6 @@ namespace Pinta.Tools
 			}
 
 
-
 			int closestCurveIndex, closestPointIndex;
 			PointD closestPoint;
 			double closestDistance;
@@ -762,17 +1237,14 @@ namespace Pinta.Tools
 			OrganizedPointCollection.findClosestPoint(current_point,
 				out closestCurveIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
+			bool clickedOnControlPoint = false;
 
-
-			
 			//Determine if the user clicked close enough to a line, curve, or point that's currently being drawn/edited by the user.
 			if (closestDistance < CurveClickRange)
 			{
 				//User clicked on a generated point on a line/curve.
 
 				List<ControlPoint> controlPoints = cEngines.CEL[closestCurveIndex].ControlPoints;
-
-				bool clickedOnControlPoint = false;
 
 				//Note: compare the current_point's distance here because it's the actual mouse position.
 				if (controlPoints.Count > closestPointIndex &&
@@ -818,47 +1290,71 @@ namespace Pinta.Tools
 					}
 				}
 			}
-			else
+
+			bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+
+			//Create a new line/curve if the user simply clicks outside of any lines/curves or if the user control + clicks on an existing point.
+			if ((ctrlKey && clickedOnControlPoint) || closestDistance >= CurveClickRange)
 			{
-				//User clicked outside of any lines/curves.
+				PointD prevSelPoint;
 
-				//Don't change anything here if right clicked.
-				if (!changingTension)
+				//First, store the position of the currently selected point.
+				if (SelectedPoint != null && ctrlKey)
 				{
-					//Create a new curve.
-
-					//Keep track of the current UserLayer's ImageSurface.
-					user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-
-					//Finalize the previous curve (if needed).
-					drawCurves(false, true, false);
-
-					//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
-					doc.History.PushNewItem(
-						new CurvesHistoryItem(Icon, Name, user_undo_surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
-
-
-					is_drawing = true;
-
-					//Clear out all of the old data.
-					cEngines = new CurveEngineCollection();
-
-					//Reset the toolbar arrow options.
-					resetToolbarArrowOptions();
-
-
-
-					//Add the first two points of the line. The second point will follow the mouse around until released.
-					cEngines.CEL[0].ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
-					cEngines.CEL[0].ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultEndPointTension));
-
-					selectedPointIndex = 1;
-					selectedPointCurveIndex = 0;
+					prevSelPoint = new PointD(SelectedPoint.Position.X, SelectedPoint.Position.Y);
 				}
 				else
 				{
-					clickedWithoutModifying = true;
+					//This doesn't matter, other than the fact that it gets set to a value in order for the code to build.
+					prevSelPoint = new PointD(0d, 0d);
 				}
+
+
+				//Next, take care of the old curve's data.
+
+				//Keep track of the current UserLayer's ImageSurface.
+				user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
+
+				//Finalize the previous curve (if needed).
+				drawCurves(false, true, false);
+
+				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
+				doc.History.PushNewItem(
+					new CurvesHistoryItem(Icon, Name, user_undo_surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
+
+				is_drawing = true;
+
+				//Clear out all of the old data.
+				cEngines = new CurveEngineCollection();
+
+				//Reset the toolbar arrow options.
+				resetToolbarArrowOptions();
+
+
+				//Then create the first two points of the line/curve. The second point will follow the mouse around until released.
+				if (ctrlKey && clickedOnControlPoint)
+				{
+					cEngines.CEL[0].ControlPoints.Add(new ControlPoint(new PointD(prevSelPoint.X, prevSelPoint.Y), DefaultEndPointTension));
+					cEngines.CEL[0].ControlPoints.Add(
+						new ControlPoint(new PointD(prevSelPoint.X + .01d, prevSelPoint.Y + .01d), DefaultEndPointTension));
+
+					clickedWithoutModifying = false;
+				}
+				else
+				{
+					cEngines.CEL[0].ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
+					cEngines.CEL[0].ControlPoints.Add(
+						new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultEndPointTension));
+				}
+
+				selectedPointIndex = 1;
+				selectedPointCurveIndex = 0;
+			}
+
+			//If the user right clicks outside of any lines/curves.
+			if (closestDistance >= CurveClickRange && changingTension)
+			{
+				clickedWithoutModifying = true;
 			}
 
 			surface_modified = true;
@@ -877,16 +1373,16 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
+
 			bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 
 			if (shiftKey)
 			{
 				calculateModifiedCurrentPoint();
 			}
-
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
 
 
 			if (!is_drawing)
