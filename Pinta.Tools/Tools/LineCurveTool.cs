@@ -153,9 +153,8 @@ namespace Pinta.Tools
 		}
 
 
-		private Gtk.SeparatorToolItem arrowSep;
-		private ToolBarLabel showArrowOneLabel, showArrowTwoLabel;
-		private ToolBarComboBox showArrowOneBox, showArrowTwoBox;
+		private Gtk.SeparatorToolItem arrowSep1, arrowSep2, arrowSep3;
+		private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
 
 		private ToolBarComboBox arrowSize;
 		private ToolBarLabel arrowSizeLabel;
@@ -174,57 +173,88 @@ namespace Pinta.Tools
 		{
 			base.BuildToolBar(tb);
 
+
+			#region Show Arrows
+
 			//Arrow separator.
 
-			if (arrowSep == null)
+			if (arrowSep1 == null)
 			{
-				arrowSep = new Gtk.SeparatorToolItem();
+				arrowSep1 = new Gtk.SeparatorToolItem();
 			}
 
-			tb.AppendItem(arrowSep);
+			tb.AppendItem(arrowSep1);
 
 
 			//Show arrow 1.
 
-			if (showArrowOneLabel == null)
-			{
-				showArrowOneLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow 1")));
-			}
-
-			tb.AppendItem(showArrowOneLabel);
-
 			if (showArrowOneBox == null)
 			{
-				showArrowOneBox = new ToolBarComboBox(60, 1, false, Catalog.GetString("Show"), Catalog.GetString("Hide"));
-				showArrowOneBox.ComboBox.Changed += new EventHandler(ComboBox_ArrowOneShowChanged);
+				showArrowOneBox = new Gtk.CheckButton(Catalog.GetString("Arrow 1"));
+
+				showArrowOneBox.Toggled += (o, e) =>
+				{
+					CurveEngine selEngine = SelectedCurveEngine;
+
+					if (selEngine != null)
+					{
+						selEngine.Arrow1.Show = showArrowOneBox.Active;
+
+						drawCurves(false, false, false);
+					}
+				};
 			}
 
-			tb.AppendItem(showArrowOneBox);
+			tb.AddWidgetItem(showArrowOneBox);
+
+			//Arrow separator 2.
+
+			if (arrowSep2 == null)
+			{
+				arrowSep2 = new Gtk.SeparatorToolItem();
+			}
+
+			tb.AppendItem(arrowSep2);
 
 
 			//Show arrow 2.
 
-			if (showArrowTwoLabel == null)
-			{
-				showArrowTwoLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow 2")));
-			}
-
-			tb.AppendItem(showArrowTwoLabel);
-
 			if (showArrowTwoBox == null)
 			{
-				showArrowTwoBox = new ToolBarComboBox(60, 1, true, Catalog.GetString("Show"), Catalog.GetString("Hide"));
-				showArrowTwoBox.ComboBox.Changed += new EventHandler(ComboBox_ArrowTwoShowChanged);
+				showArrowTwoBox = new Gtk.CheckButton(Catalog.GetString("Arrow 2"));
+
+				showArrowTwoBox.Toggled += (o, e) =>
+				{
+					CurveEngine selEngine = SelectedCurveEngine;
+
+					if (selEngine != null)
+					{
+						selEngine.Arrow2.Show = showArrowTwoBox.Active;
+
+						drawCurves(false, false, false);
+					}
+				};
 			}
 
-			tb.AppendItem(showArrowTwoBox);
+			tb.AddWidgetItem(showArrowTwoBox);
+
+			//Arrow separator 3.
+
+			if (arrowSep3 == null)
+			{
+				arrowSep3 = new Gtk.SeparatorToolItem();
+			}
+
+			tb.AppendItem(arrowSep3);
+
+			#endregion Show Arrows
 
 
-			//Arrow size.
+			#region Arrow Size
 
 			if (arrowSizeLabel == null)
 			{
-				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow size")));
+				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Size")));
 			}
 
 			tb.AppendItem(arrowSizeLabel);
@@ -239,7 +269,7 @@ namespace Pinta.Tools
 
 			if (arrowSize == null)
 			{
-				arrowSize = new ToolBarComboBox(65, 9, true,
+				arrowSize = new ToolBarComboBox(65, 7, true,
 					"3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "18",
 					"20", "25", "30", "40", "50", "60", "70", "80", "90", "100");
 
@@ -306,12 +336,14 @@ namespace Pinta.Tools
 
 			tb.AppendItem(arrowSizePlus);
 
+			#endregion Arrow Size
 
-			//Angle offset.
+
+			#region Angle Offset
 
 			if (arrowAngleOffsetLabel == null)
 			{
-				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle offset")));
+				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle")));
 			}
 
 			tb.AppendItem(arrowAngleOffsetLabel);
@@ -326,7 +358,7 @@ namespace Pinta.Tools
 
 			if (arrowAngleOffset == null)
 			{
-				arrowAngleOffset = new ToolBarComboBox(65, 6, true,
+				arrowAngleOffset = new ToolBarComboBox(65, 9, true,
 					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
 
 				arrowAngleOffset.ComboBox.Changed += (o, e) =>
@@ -343,7 +375,7 @@ namespace Pinta.Tools
 					}
 					else
 					{
-						double newAngle = 0d;
+						double newAngle = 15d;
 
 						if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
 						{
@@ -389,12 +421,14 @@ namespace Pinta.Tools
 
 			tb.AppendItem(arrowAngleOffsetPlus);
 
+			#endregion Angle Offset
 
-			//Length offset.
+
+			#region Length Offset
 
 			if (arrowLengthOffsetLabel == null)
 			{
-				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length offset")));
+				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length")));
 			}
 
 			tb.AppendItem(arrowLengthOffsetLabel);
@@ -426,7 +460,7 @@ namespace Pinta.Tools
 					}
 					else
 					{
-						double newLength = 0d;
+						double newLength = 10d;
 
 						if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
 						{
@@ -471,6 +505,8 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem(arrowLengthOffsetPlus);
+
+			#endregion Length Offset
 		}
 
 		/// <summary>
@@ -478,10 +514,12 @@ namespace Pinta.Tools
 		/// </summary>
 		private void resetToolbarArrowOptions()
 		{
-			//TODO: Additionally hide Arrow options!
+			showArrowOneBox.Active = false;
+			showArrowTwoBox.Active = false;
 
-			showArrowOneBox.ComboBox.Active = 1;
-			showArrowTwoBox.ComboBox.Active = 1;
+			arrowSize.ComboBox.Active = 7;
+			arrowAngleOffset.ComboBox.Active = 7;
+			arrowLengthOffset.ComboBox.Active = 9;
 		}
 
 		/// <summary>
@@ -493,45 +531,17 @@ namespace Pinta.Tools
 
 			if (selEngine != null)
 			{
-				showArrowOneBox.ComboBox.Active = selEngine.Arrow1.Show ? 0 : 1;
-				showArrowTwoBox.ComboBox.Active = selEngine.Arrow2.Show ? 0 : 1;
-			}
-			else
-			{
-				//TODO: Hide Arrow options when no curve is selected!
+				showArrowOneBox.Active = selEngine.Arrow1.Show ? true: false;
+				showArrowTwoBox.Active = selEngine.Arrow2.Show ? true : false;
+
+				(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "10";
+				(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "15";
+				(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "10";
 			}
 		}
 
 
 		#region EventHandlers
-
-		private void ComboBox_ArrowOneShowChanged(object sender, EventArgs e)
-		{
-			CurveEngine selEngine = SelectedCurveEngine;
-
-			if (selEngine != null)
-			{
-				//Create a new CurveModifyHistoryItem so that the option change can be undone.
-				PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-					new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
-
-				selEngine.Arrow1.Show = showArrowOneBox.ComboBox.ActiveText == Catalog.GetString("Show");
-			}
-		}
-
-		private void ComboBox_ArrowTwoShowChanged(object sender, EventArgs e)
-		{
-			CurveEngine selEngine = SelectedCurveEngine;
-
-			if (selEngine != null)
-			{
-				//Create a new CurveModifyHistoryItem so that the option change can be undone.
-				PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-					new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
-
-				selEngine.Arrow2.Show = showArrowTwoBox.ComboBox.ActiveText == Catalog.GetString("Show");
-			}
-		}
 
 		void arrowSizeMinus_Clicked(object sender, EventArgs e)
 		{
@@ -1294,7 +1304,7 @@ namespace Pinta.Tools
 			bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
 
 			//Create a new line/curve if the user simply clicks outside of any lines/curves or if the user control + clicks on an existing point.
-			if ((ctrlKey && clickedOnControlPoint) || closestDistance >= CurveClickRange)
+			if (!changingTension && ((ctrlKey && clickedOnControlPoint) || closestDistance >= CurveClickRange))
 			{
 				PointD prevSelPoint;
 

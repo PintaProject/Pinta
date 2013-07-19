@@ -71,10 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreToolsExtension.cs" />
-    <Compile Include="Curves\ControlPoint.cs" />
-    <Compile Include="Curves\Arrow.cs" />
-    <Compile Include="Curves\OrganizedPointCollection.cs" />
-    <Compile Include="Curves\CurveEngineCollection.cs" />
+    <Compile Include="LinesCurves\ControlPoint.cs" />
+    <Compile Include="LinesCurves\Arrow.cs" />
+    <Compile Include="LinesCurves\OrganizedPointCollection.cs" />
+    <Compile Include="LinesCurves\CurveEngineCollection.cs" />
     <Compile Include="HistoryItems\CurveModifyHistoryItem.cs" />
     <Compile Include="HistoryItems\CurvesHistoryItem.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />

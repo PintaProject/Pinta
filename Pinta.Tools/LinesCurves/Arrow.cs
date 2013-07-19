@@ -36,7 +36,7 @@ namespace Pinta.Tools
 	public class Arrow
 	{
 		public bool Show = false;
-		public double ArrowSize = 10d, AngleOffset = 0d, LengthOffset = 10d;
+		public double ArrowSize = 10d, AngleOffset = 15d, LengthOffset = 10d;
 
 		private const double radiansToDegrees = Math.PI / 180d;
 		private const double invRadiansToDegrees = 180d / Math.PI;

@@ -2090,32 +2090,16 @@ msgstr ""
 msgid "Text - Finalize"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:191
+#: Pinta.Tools/Tools/LineCurveTool.cs:190
 msgid "Arrow 1"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:198
-msgid "Show"
-msgstr ""
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:198
-msgid "Hide"
-msgstr ""
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:209
+#: Pinta.Tools/Tools/LineCurveTool.cs:210
 msgid "Arrow 2"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:216
-msgid "Show"
-msgstr ""
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:216
-msgid "Hide"
-msgstr ""
-
 #: Pinta.Tools/Tools/LineCurveTool.cs:227
-msgid "Arrow size"
+msgid "Size"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:234
@@ -2127,15 +2111,7 @@ msgid "Increase arrow size"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:314
-msgid "Angle offset"
-msgstr ""
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:314
-msgid "Angle offset"
-msgstr ""
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:321
-msgid "Decrease angle offset"
+msgid "Angle"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:321
@@ -2147,7 +2123,7 @@ msgid "Increase angle offset"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:397
-msgid "Length offset"
+msgid "Length"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:404
