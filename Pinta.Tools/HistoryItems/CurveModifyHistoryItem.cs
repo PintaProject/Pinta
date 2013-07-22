@@ -34,6 +34,8 @@ namespace Pinta.Tools
 	{
 		CurveEngineCollection cEngines;
 
+		int selectedPointIndex, selectedPointCurveIndex;
+
 		/// <summary>
 		/// A history item for when curves are modified.
 		/// </summary>
@@ -43,6 +45,10 @@ namespace Pinta.Tools
 		public CurveModifyHistoryItem(string icon, string text, CurveEngineCollection passedCurveEngines) : base(icon, text)
 		{
 			cEngines = passedCurveEngines;
+
+
+			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
+			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
 		}
 
 		public override void Undo()
@@ -65,6 +71,17 @@ namespace Pinta.Tools
 
 			//Swap the other half.
 			Pinta.Tools.LineCurveTool.cEngines = oldCEngine;
+
+
+			//Swap the selected point data.
+			int temp = selectedPointIndex;
+			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
+			Pinta.Tools.LineCurveTool.selectedPointIndex = temp;
+
+			//Swap the selected curve data.
+			temp = selectedPointCurveIndex;
+			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
+			Pinta.Tools.LineCurveTool.selectedPointCurveIndex = temp;
 		}
 	}
 }

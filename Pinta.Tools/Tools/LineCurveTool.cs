@@ -52,8 +52,8 @@ namespace Pinta.Tools
 		public static readonly int BorderingSectionRange = (int)Math.Ceiling(CurveClickRange / SectionSizeDouble);
 
 
-		private int selectedPointIndex = -1;
-		private int selectedPointCurveIndex = 0;
+		public static int selectedPointIndex = -1;
+		public static int selectedPointCurveIndex = 0;
 
 		/// <summary>
 		/// The selected ControlPoint.
@@ -121,8 +121,9 @@ namespace Pinta.Tools
 		public static CurveEngineCollection cEngines = new CurveEngineCollection();
 
 
-		public override string Name {
-			get { return Catalog.GetString ("Line/Curve"); }
+		public override string Name
+		{
+			get { return Catalog.GetString("Line/Curve"); }
 		}
 		public override string Icon {
 			get { return "Tools.Line.png"; }
@@ -153,8 +154,9 @@ namespace Pinta.Tools
 		}
 
 
-		private Gtk.SeparatorToolItem arrowSep1, arrowSep2, arrowSep3;
+		private Gtk.SeparatorToolItem arrowSep;
 		private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
+		private bool showOtherArrowOptions;
 
 		private ToolBarComboBox arrowSize;
 		private ToolBarLabel arrowSizeLabel;
@@ -178,74 +180,136 @@ namespace Pinta.Tools
 
 			//Arrow separator.
 
-			if (arrowSep1 == null)
+			if (arrowSep == null)
 			{
-				arrowSep1 = new Gtk.SeparatorToolItem();
+				arrowSep = new Gtk.SeparatorToolItem();
+
+				showOtherArrowOptions = false;
 			}
 
-			tb.AppendItem(arrowSep1);
+			tb.AppendItem(arrowSep);
 
 
 			//Show arrow 1.
 
-			if (showArrowOneBox == null)
+			showArrowOneBox = new Gtk.CheckButton(Catalog.GetString("Arrow 1"));
+
+			showArrowOneBox.Toggled += (o, e) =>
 			{
-				showArrowOneBox = new Gtk.CheckButton(Catalog.GetString("Arrow 1"));
-
-				showArrowOneBox.Toggled += (o, e) =>
+				//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
+				if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
 				{
-					CurveEngine selEngine = SelectedCurveEngine;
-
-					if (selEngine != null)
+					if (showOtherArrowOptions)
 					{
-						selEngine.Arrow1.Show = showArrowOneBox.Active;
+						tb.Remove(arrowSizeLabel);
+						tb.Remove(arrowSizeMinus);
+						tb.Remove(arrowSize);
+						tb.Remove(arrowSizePlus);
+						tb.Remove(arrowAngleOffsetLabel);
+						tb.Remove(arrowAngleOffsetMinus);
+						tb.Remove(arrowAngleOffset);
+						tb.Remove(arrowAngleOffsetPlus);
+						tb.Remove(arrowLengthOffsetLabel);
+						tb.Remove(arrowLengthOffsetMinus);
+						tb.Remove(arrowLengthOffset);
+						tb.Remove(arrowLengthOffsetPlus);
 
-						drawCurves(false, false, false);
+						showOtherArrowOptions = false;
 					}
-				};
-			}
+				}
+				else
+				{
+					if (!showOtherArrowOptions)
+					{
+						tb.Add(arrowSizeLabel);
+						tb.Add(arrowSizeMinus);
+						tb.Add(arrowSize);
+						tb.Add(arrowSizePlus);
+						tb.Add(arrowAngleOffsetLabel);
+						tb.Add(arrowAngleOffsetMinus);
+						tb.Add(arrowAngleOffset);
+						tb.Add(arrowAngleOffsetPlus);
+						tb.Add(arrowLengthOffsetLabel);
+						tb.Add(arrowLengthOffsetMinus);
+						tb.Add(arrowLengthOffset);
+						tb.Add(arrowLengthOffsetPlus);
+
+						showOtherArrowOptions = true;
+					}
+				}
+
+				CurveEngine selEngine = SelectedCurveEngine;
+
+				if (selEngine != null)
+				{
+					selEngine.Arrow1.Show = showArrowOneBox.Active;
+
+					drawCurves(false, false, false);
+				}
+			};
 
 			tb.AddWidgetItem(showArrowOneBox);
-
-			//Arrow separator 2.
-
-			if (arrowSep2 == null)
-			{
-				arrowSep2 = new Gtk.SeparatorToolItem();
-			}
-
-			tb.AppendItem(arrowSep2);
 
 
 			//Show arrow 2.
 
-			if (showArrowTwoBox == null)
+			showArrowTwoBox = new Gtk.CheckButton(Catalog.GetString("Arrow 2"));
+
+			showArrowTwoBox.Toggled += (o, e) =>
 			{
-				showArrowTwoBox = new Gtk.CheckButton(Catalog.GetString("Arrow 2"));
-
-				showArrowTwoBox.Toggled += (o, e) =>
+				//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
+				if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
 				{
-					CurveEngine selEngine = SelectedCurveEngine;
-
-					if (selEngine != null)
+					if (showOtherArrowOptions)
 					{
-						selEngine.Arrow2.Show = showArrowTwoBox.Active;
+						tb.Remove(arrowSizeLabel);
+						tb.Remove(arrowSizeMinus);
+						tb.Remove(arrowSize);
+						tb.Remove(arrowSizePlus);
+						tb.Remove(arrowAngleOffsetLabel);
+						tb.Remove(arrowAngleOffsetMinus);
+						tb.Remove(arrowAngleOffset);
+						tb.Remove(arrowAngleOffsetPlus);
+						tb.Remove(arrowLengthOffsetLabel);
+						tb.Remove(arrowLengthOffsetMinus);
+						tb.Remove(arrowLengthOffset);
+						tb.Remove(arrowLengthOffsetPlus);
 
-						drawCurves(false, false, false);
+						showOtherArrowOptions = false;
 					}
-				};
-			}
+				}
+				else
+				{
+					if (!showOtherArrowOptions)
+					{
+						tb.Add(arrowSizeLabel);
+						tb.Add(arrowSizeMinus);
+						tb.Add(arrowSize);
+						tb.Add(arrowSizePlus);
+						tb.Add(arrowAngleOffsetLabel);
+						tb.Add(arrowAngleOffsetMinus);
+						tb.Add(arrowAngleOffset);
+						tb.Add(arrowAngleOffsetPlus);
+						tb.Add(arrowLengthOffsetLabel);
+						tb.Add(arrowLengthOffsetMinus);
+						tb.Add(arrowLengthOffset);
+						tb.Add(arrowLengthOffsetPlus);
+
+						showOtherArrowOptions = true;
+					}
+				}
+
+				CurveEngine selEngine = SelectedCurveEngine;
+
+				if (selEngine != null)
+				{
+					selEngine.Arrow2.Show = showArrowTwoBox.Active;
+
+					drawCurves(false, false, false);
+				}
+			};
 
 			tb.AddWidgetItem(showArrowTwoBox);
-
-			//Arrow separator 3.
-
-			if (arrowSep3 == null)
-			{
-				arrowSep3 = new Gtk.SeparatorToolItem();
-			}
-
-			tb.AppendItem(arrowSep3);
 
 			#endregion Show Arrows
 
@@ -257,15 +321,11 @@ namespace Pinta.Tools
 				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Size")));
 			}
 
-			tb.AppendItem(arrowSizeLabel);
-
 			if (arrowSizeMinus == null)
 			{
 				arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease arrow size"));
 				arrowSizeMinus.Clicked += new EventHandler(arrowSizeMinus_Clicked);
 			}
-
-			tb.AppendItem(arrowSizeMinus);
 
 			if (arrowSize == null)
 			{
@@ -326,15 +386,11 @@ namespace Pinta.Tools
 				};
 			}
 
-			tb.AppendItem(arrowSize);
-
 			if (arrowSizePlus == null)
 			{
 				arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase arrow size"));
 				arrowSizePlus.Clicked += new EventHandler(arrowSizePlus_Clicked);
 			}
-
-			tb.AppendItem(arrowSizePlus);
 
 			#endregion Arrow Size
 
@@ -346,15 +402,11 @@ namespace Pinta.Tools
 				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle")));
 			}
 
-			tb.AppendItem(arrowAngleOffsetLabel);
-
 			if (arrowAngleOffsetMinus == null)
 			{
 				arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease angle offset"));
 				arrowAngleOffsetMinus.Clicked += new EventHandler(arrowAngleOffsetMinus_Clicked);
 			}
-
-			tb.AppendItem(arrowAngleOffsetMinus);
 
 			if (arrowAngleOffset == null)
 			{
@@ -411,15 +463,11 @@ namespace Pinta.Tools
 				};
 			}
 
-			tb.AppendItem(arrowAngleOffset);
-
 			if (arrowAngleOffsetPlus == null)
 			{
 				arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase angle offset"));
 				arrowAngleOffsetPlus.Clicked += new EventHandler(arrowAngleOffsetPlus_Clicked);
 			}
-
-			tb.AppendItem(arrowAngleOffsetPlus);
 
 			#endregion Angle Offset
 
@@ -431,15 +479,11 @@ namespace Pinta.Tools
 				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length")));
 			}
 
-			tb.AppendItem(arrowLengthOffsetLabel);
-
 			if (arrowLengthOffsetMinus == null)
 			{
 				arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease length offset"));
 				arrowLengthOffsetMinus.Clicked += new EventHandler(arrowLengthOffsetMinus_Clicked);
 			}
-
-			tb.AppendItem(arrowLengthOffsetMinus);
 
 			if (arrowLengthOffset == null)
 			{
@@ -496,30 +540,59 @@ namespace Pinta.Tools
 				};
 			}
 
-			tb.AppendItem(arrowLengthOffset);
-
 			if (arrowLengthOffsetPlus == null)
 			{
 				arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase length offset"));
 				arrowLengthOffsetPlus.Clicked += new EventHandler(arrowLengthOffsetPlus_Clicked);
 			}
 
-			tb.AppendItem(arrowLengthOffsetPlus);
-
 			#endregion Length Offset
+
+			if (showOtherArrowOptions)
+			{
+				tb.Add(arrowSizeLabel);
+				tb.Add(arrowSizeMinus);
+				tb.Add(arrowSize);
+				tb.Add(arrowSizePlus);
+				tb.Add(arrowAngleOffsetLabel);
+				tb.Add(arrowAngleOffsetMinus);
+				tb.Add(arrowAngleOffset);
+				tb.Add(arrowAngleOffsetPlus);
+				tb.Add(arrowLengthOffsetLabel);
+				tb.Add(arrowLengthOffsetMinus);
+				tb.Add(arrowLengthOffset);
+				tb.Add(arrowLengthOffsetPlus);
+			}
 		}
 
 		/// <summary>
-		/// Reset the Arrow options in the toolbar to their default values.
+		/// Set the Arrow options for the current curve to their respective values in the toolbar.
 		/// </summary>
-		private void resetToolbarArrowOptions()
+		private void setArrowOptions()
 		{
-			showArrowOneBox.Active = false;
-			showArrowTwoBox.Active = false;
+			CurveEngine selEngine = SelectedCurveEngine;
 
-			arrowSize.ComboBox.Active = 7;
-			arrowAngleOffset.ComboBox.Active = 7;
-			arrowLengthOffset.ComboBox.Active = 9;
+			if (selEngine != null)
+			{
+				selEngine.Arrow1.Show = showArrowOneBox.Active;
+				selEngine.Arrow2.Show = showArrowTwoBox.Active;
+
+				showOtherArrowOptions = showArrowOneBox.Active && showArrowTwoBox.Active;
+
+				if (showOtherArrowOptions)
+				{
+					Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.ArrowSize);
+					Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.AngleOffset);
+					Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.LengthOffset);
+
+					selEngine.Arrow1.ArrowSize = Utility.Clamp(selEngine.Arrow1.ArrowSize, 1d, 100d);
+					selEngine.Arrow2.ArrowSize = selEngine.Arrow1.ArrowSize;
+					selEngine.Arrow1.AngleOffset = Utility.Clamp(selEngine.Arrow1.AngleOffset, -89d, 89d);
+					selEngine.Arrow2.AngleOffset = selEngine.Arrow1.AngleOffset;
+					selEngine.Arrow1.LengthOffset = Utility.Clamp(selEngine.Arrow1.LengthOffset, -100d, 100d);
+					selEngine.Arrow2.LengthOffset = selEngine.Arrow1.LengthOffset;
+				}
+			}
 		}
 
 		/// <summary>
@@ -531,12 +604,15 @@ namespace Pinta.Tools
 
 			if (selEngine != null)
 			{
-				showArrowOneBox.Active = selEngine.Arrow1.Show ? true: false;
-				showArrowTwoBox.Active = selEngine.Arrow2.Show ? true : false;
+				showArrowOneBox.Active = selEngine.Arrow1.Show;
+				showArrowTwoBox.Active = selEngine.Arrow2.Show;
 
-				(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "10";
-				(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "15";
-				(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "10";
+				if (showOtherArrowOptions)
+				{
+					(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.ArrowSize.ToString();
+					(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.AngleOffset.ToString();
+					(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.LengthOffset.ToString();
+				}
 			}
 		}
 
@@ -824,7 +900,8 @@ namespace Pinta.Tools
 				{
 					//Create a new CurvesHistoryItem so that the finalization of the curves can be undone.
 					doc.History.PushNewItem(
-						new CurvesHistoryItem(Icon, Name, user_undo_surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
+						new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Finalized"),
+							PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
 				}
 
 				is_drawing = false;
@@ -947,8 +1024,10 @@ namespace Pinta.Tools
 		{
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
+			//Finalize the previous curve (if needed).
 			drawCurves(false, true, false);
 
+			//Clear out all of the old data.
 			cEngines = new CurveEngineCollection();
 		}
 
@@ -964,6 +1043,16 @@ namespace Pinta.Tools
 
 			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
 			current_point = new PointD((shape_origin.X + len * Math.Cos(theta)), (shape_origin.Y + len * Math.Sin(theta)));
+		}
+
+		protected override void OnActivated()
+		{
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = false;
+
+			drawCurves(false, false, false);
+
+			base.OnActivated();
 		}
 
 		protected override void OnDeactivated()
@@ -988,7 +1077,7 @@ namespace Pinta.Tools
 				{
 					//Create a new CurveModifyHistoryItem so that the deletion of a control point can be undone.
 					PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
+						new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Deleted"), cEngines.PartialClone()));
 
 
 					List<ControlPoint> controlPoints = SelectedCurveEngine.ControlPoints;
@@ -1038,7 +1127,7 @@ namespace Pinta.Tools
 
 					//Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
 					PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
+						new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Added"), cEngines.PartialClone()));
 
 
 					bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
@@ -1178,7 +1267,6 @@ namespace Pinta.Tools
 		public override void AfterUndo()
 		{
 			surface_modified = true;
-			selectedPointIndex = -1;
 
 			//Draw the current state.
 			drawCurves(true, false, false);
@@ -1191,7 +1279,6 @@ namespace Pinta.Tools
 		public override void AfterRedo()
 		{
 			surface_modified = true;
-			selectedPointIndex = -1;
 
 			//Draw the current state.
 			drawCurves(true, false, false);
@@ -1290,7 +1377,7 @@ namespace Pinta.Tools
 
 						//Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
 						doc.History.PushNewItem(
-							new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
+							new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Added"), cEngines.PartialClone()));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
@@ -1330,15 +1417,12 @@ namespace Pinta.Tools
 
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
-					new CurvesHistoryItem(Icon, Name, user_undo_surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
+					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), user_undo_surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
 
 				is_drawing = true;
 
 				//Clear out all of the old data.
 				cEngines = new CurveEngineCollection();
-
-				//Reset the toolbar arrow options.
-				resetToolbarArrowOptions();
 
 
 				//Then create the first two points of the line/curve. The second point will follow the mouse around until released.
@@ -1359,6 +1443,8 @@ namespace Pinta.Tools
 
 				selectedPointIndex = 1;
 				selectedPointCurveIndex = 0;
+
+				setArrowOptions();
 			}
 
 			//If the user right clicks outside of any lines/curves.
@@ -1409,7 +1495,7 @@ namespace Pinta.Tools
 					{
 						//Create a new CurveModifyHistoryItem so that the modification of the curve can be undone.
 						doc.History.PushNewItem(
-							new CurveModifyHistoryItem(Icon, Name, cEngines.PartialClone()));
+							new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Modified"), cEngines.PartialClone()));
 
 						clickedWithoutModifying = false;
 					}
