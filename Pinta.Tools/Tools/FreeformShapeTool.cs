@@ -131,6 +131,8 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
+				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+
 				if (path != null) {
 					g.AppendPath (path);
 					(path as IDisposable).Dispose ();
@@ -187,6 +189,8 @@ namespace Pinta.Tools
 				g.Clip ();
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+
+				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);

@@ -762,6 +762,8 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
+				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+
 				g.LineWidth = BrushWidth;
 
 				//Draw the curves.
@@ -778,6 +780,8 @@ namespace Pinta.Tools
 						dirty = dirty.UnionRectangles(g.DrawPolygonal(cEngines.CEL[n].GeneratedPoints, outline_color));
 					}
 				}
+
+				g.SetDash(new double[] {}, 0.0);
 
 				//Draw the arrows for all of the curves.
 				for (int n = 0; n < cEngines.CEL.Count; ++n)

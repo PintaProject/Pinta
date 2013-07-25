@@ -123,6 +123,8 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
+				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedRoundedRectangle (rect, Radius, fill_color, outline_color, BrushWidth);
 				else if (FillShape)
