@@ -110,9 +110,6 @@ namespace Pinta.Tools
 		private PointD lastMousePosition = new PointD(0d, 0d);
 
 
-		//This is used to temporarily store the UserLayer's previous ImageSurface state.
-		private ImageSurface user_undo_surface;
-
 		//Helps to keep track of the first modification on a curve after the mouse is clicked, to prevent unnecessary history items.
 		private bool clickedWithoutModifying = false;
 
@@ -617,7 +614,7 @@ namespace Pinta.Tools
 		}
 
 
-		#region EventHandlers
+		#region ToolbarEventHandlers
 
 		void arrowSizeMinus_Clicked(object sender, EventArgs e)
 		{
@@ -745,7 +742,7 @@ namespace Pinta.Tools
 			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
 		}
 
-		#endregion EventHandlers
+		#endregion ToolbarEventHandlers
 
 
 		protected override Rectangle DrawShape (Rectangle rect, Layer l, bool drawControlPoints)
@@ -795,7 +792,7 @@ namespace Pinta.Tools
 						{
 							if (genPoints.Length > 1)
 							{
-								cEngines.CEL[n].Arrow1.Draw(g, dirty, outline_color, genPoints[0], genPoints[1]);
+								dirty = dirty.UnionRectangles(cEngines.CEL[n].Arrow1.Draw(g, outline_color, genPoints[0], genPoints[1]));
 							}
 						}
 
@@ -803,8 +800,8 @@ namespace Pinta.Tools
 						{
 							if (genPoints.Length > 1)
 							{
-								cEngines.CEL[n].Arrow1.Draw(g, dirty, outline_color,
-									genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]);
+								dirty = dirty.UnionRectangles(cEngines.CEL[n].Arrow1.Draw(g, outline_color,
+									genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
 							}
 						}
 					}
@@ -899,24 +896,30 @@ namespace Pinta.Tools
 
 			if (finalize)
 			{
-				//Make sure that the undo surface isn't null and that there are actually points.
-				if (user_undo_surface != null && cEngines.CEL[0].ControlPoints.Count > 0)
-				{
-					//Create a new CurvesHistoryItem so that the finalization of the curves can be undone.
-					doc.History.PushNewItem(
-						new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Finalized"),
-							PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
-				}
+				doc.ToolLayer.Clear();
+
+				ImageSurface undoSurface = doc.CurrentUserLayer.Surface.Clone();
 
 				is_drawing = false;
 				surface_modified = false;
-
 
 				selectedPointIndex = -1;
 
 				dirty = DrawShape(
 					Utility.PointsToRectangle(shape_origin, new PointD(current_point.X, current_point.Y), shiftKey),
 					doc.CurrentUserLayer, false);
+
+				//Make sure that the undo surface isn't null and that there are actually points.
+				if (undoSurface != null && cEngines.CEL[0].ControlPoints.Count > 0)
+				{
+					//Create a new CurvesHistoryItem so that the finalization of the curves can be undone.
+					doc.History.PushNewItem(
+						new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Finalized"),
+							undoSurface, cEngines.PartialClone(), doc.CurrentUserLayer));
+				}
+
+				//Clear out all of the old data.
+				cEngines = new CurveEngineCollection();
 			}
 			else
 			{
@@ -1022,20 +1025,6 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Finalize the curve onto the UserLayer and clear out any old curve data.
-		/// </summary>
-		private void finalizeCurve()
-		{
-			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
-
-			//Finalize the previous curve (if needed).
-			drawCurves(false, true, false);
-
-			//Clear out all of the old data.
-			cEngines = new CurveEngineCollection();
-		}
-
-		/// <summary>
 		/// Calculate the modified position of current_point such that the angle between shape_origin
 		/// and current_point is snapped to the closest angle out of a certain number of angles.
 		/// </summary>
@@ -1061,14 +1050,20 @@ namespace Pinta.Tools
 
 		protected override void OnDeactivated()
 		{
-			finalizeCurve();
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
+
+			//Finalize the previous curve (if needed).
+			drawCurves(false, true, false);
 
 			base.OnDeactivated();
 		}
 
 		protected override void OnCommit()
 		{
-			finalizeCurve();
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
+
+			//Finalize the previous curve (if needed).
+			drawCurves(false, true, false);
 
 			base.OnCommit();
 		}
@@ -1116,7 +1111,8 @@ namespace Pinta.Tools
 			}
 			else if (args.Event.Key == Gdk.Key.Return)
 			{
-				finalizeCurve();
+				//Finalize the previous curve (if needed).
+				drawCurves(false, true, false);
 
 				args.RetVal = true;
 			}
@@ -1413,20 +1409,14 @@ namespace Pinta.Tools
 
 				//Next, take care of the old curve's data.
 
-				//Keep track of the current UserLayer's ImageSurface.
-				user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-
 				//Finalize the previous curve (if needed).
 				drawCurves(false, true, false);
 
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
-					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), user_undo_surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
+					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
 
 				is_drawing = true;
-
-				//Clear out all of the old data.
-				cEngines = new CurveEngineCollection();
 
 
 				//Then create the first two points of the line/curve. The second point will follow the mouse around until released.

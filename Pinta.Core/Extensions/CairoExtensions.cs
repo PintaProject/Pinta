@@ -1531,13 +1531,13 @@ namespace Pinta.Core
 				//Both r1 and r2 have values.
 
 				//Calculate the left-most and top-most values.
-				double smallestX = Math.Min(r1.Value.X, r2.Value.X);
-				double smallestY = Math.Min(r1.Value.Y, r2.Value.Y);
+				double minX = Math.Min(r1.Value.X, r2.Value.X);
+				double minY = Math.Min(r1.Value.Y, r2.Value.Y);
 
 				//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
-				return new Rectangle(smallestX, smallestY,
-					Math.Max(r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - smallestX,
-					Math.Max(r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - smallestY);
+				return new Rectangle(minX, minY,
+					Math.Max(r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - minX,
+					Math.Max(r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - minY);
 			}
 		}
 	}
