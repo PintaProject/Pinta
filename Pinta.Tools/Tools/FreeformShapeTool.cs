@@ -44,6 +44,10 @@ namespace Pinta.Tools
 		private Color fill_color;
 		private Color outline_color;
 
+		protected override bool showDashPattern { get { return true; } }
+
+		private string dashPattern = "-";
+
 		public FreeformShapeTool ()
 		{
 		}
@@ -61,6 +65,18 @@ namespace Pinta.Tools
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar(tb);
+
+
+			if (!dashChangeSetup && dashPatternBox != null)
+			{
+				dashPatternBox.ComboBox.Changed += (o, e) =>
+				{
+					dashPattern = dashPatternBox.ComboBox.ActiveText;
+				};
+
+				dashChangeSetup = true;
+			}
+
 
 			if (fill_sep == null)
 				fill_sep = new Gtk.SeparatorToolItem ();
@@ -131,7 +147,7 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+				g.SetDash(GenerateDashArray(dashPattern, BrushWidth), 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);
@@ -146,8 +162,6 @@ namespace Pinta.Tools
 				
 				g.ClosePath ();
 				g.LineWidth = BrushWidth;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = LineCap.Round;
 				g.FillRule = FillRule.EvenOdd;
 
 				if (FillShape && StrokeShape) {
@@ -190,7 +204,7 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+				g.SetDash(GenerateDashArray(dashPattern, BrushWidth), 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);
@@ -200,8 +214,6 @@ namespace Pinta.Tools
 
 				g.ClosePath ();
 				g.LineWidth = BrushWidth;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = LineCap.Round;
 				g.FillRule = FillRule.EvenOdd;
 
 				if (FillShape && StrokeShape) {

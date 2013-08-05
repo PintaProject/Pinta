@@ -49,6 +49,10 @@ namespace Pinta.Tools
 			get { return 41; }
 		}
 
+		protected override bool showDashPattern { get { return true; } }
+
+		private string dashPattern = "-";
+
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
@@ -62,17 +66,49 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+				double[] dashes = GenerateDashArray(dashPattern, BrushWidth);
+				g.SetDash(dashes, 0.0);
 
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedRectangle (rect, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillRectangle (rect, outline_color);
+				if (dashes.Length == 2 && dashes[1] == 0.0)
+				{
+					//No dash pattern (solid line), so draw rectangle normally (glitch free).
+
+					if (FillShape && StrokeShape)
+						dirty = g.FillStrokedRectangle(rect, fill_color, outline_color, BrushWidth);
+					else if (FillShape)
+						dirty = g.FillRectangle(rect, outline_color);
+					else
+						dirty = g.DrawRectangle(rect, outline_color, BrushWidth);
+				}
 				else
-					dirty = g.DrawRectangle (rect, outline_color, BrushWidth);
+				{
+					//Dash pattern, so draw rectangle as best as possible for dashes (but with possible corner glitches for some rectangle sizes).
+
+					if (FillShape && StrokeShape)
+						dirty = g.FillStrokedFullRectangle(rect, fill_color, outline_color, BrushWidth);
+					else if (FillShape)
+						dirty = g.FillRectangle(rect, outline_color);
+					else
+						dirty = g.DrawFullRectangle(rect, outline_color, BrushWidth);
+				}
 			}
 			
 			return dirty;
+		}
+
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			if (!dashChangeSetup && dashPatternBox != null)
+			{
+				dashPatternBox.ComboBox.Changed += (o, e) =>
+				{
+					dashPattern = dashPatternBox.ComboBox.ActiveText;
+				};
+
+				dashChangeSetup = true;
+			}
 		}
 	}
 }

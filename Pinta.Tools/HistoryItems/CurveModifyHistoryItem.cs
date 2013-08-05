@@ -41,12 +41,9 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		/// <param name="passedCurveEngines">The curve engines being used.</param>
-		public CurveModifyHistoryItem(string icon, string text, CurveEngineCollection passedCurveEngines) : base(icon, text)
+		public CurveModifyHistoryItem(string icon, string text) : base(icon, text)
 		{
-			cEngines = passedCurveEngines;
-
-
+			cEngines = Pinta.Tools.LineCurveTool.cEngines.PartialClone();
 			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
 			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
 		}

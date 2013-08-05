@@ -49,6 +49,10 @@ namespace Pinta.Tools
 			get { return 45; }
 		}
 
+		protected override bool showDashPattern { get { return true; } }
+
+		private string dashPattern = "-";
+
 		public EllipseTool ()
 		{
 		}
@@ -68,7 +72,7 @@ namespace Pinta.Tools
 				
 				dirty = rect;
 
-				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+				g.SetDash(GenerateDashArray(dashPattern, BrushWidth), 0.0);
 				
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
@@ -79,6 +83,21 @@ namespace Pinta.Tools
 			}
 			
 			return dirty;
+		}
+
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			if (!dashChangeSetup && dashPatternBox != null)
+			{
+				dashPatternBox.ComboBox.Changed += (o, e) =>
+				{
+					dashPattern = dashPatternBox.ComboBox.ActiveText;
+				};
+
+				dashChangeSetup = true;
+			}
 		}
 	}
 }

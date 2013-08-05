@@ -47,10 +47,8 @@ namespace Pinta.Tools
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
-		/// <param name="passedCurveEngines">The curve engines being used.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, CurveEngineCollection passedCurveEngines,
-		                       UserLayer passedUserLayer) : base(icon, text)
+		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
 
@@ -67,9 +65,7 @@ namespace Pinta.Tools
 			}
 
 
-			cEngines = passedCurveEngines;
-
-
+			cEngines = Pinta.Tools.LineCurveTool.cEngines.PartialClone();
 			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
 			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
 		}

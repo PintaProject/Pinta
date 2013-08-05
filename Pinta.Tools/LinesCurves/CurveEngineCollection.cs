@@ -40,9 +40,10 @@ namespace Pinta.Tools
 		/// <summary>
 		/// A partially cloneable CurveEngine collection.
 		/// </summary>
-		public CurveEngineCollection()
+		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
+		public CurveEngineCollection(bool passedAA)
 		{
-			CEL.Add(new CurveEngine());
+			CEL.Add(new CurveEngine(passedAA));
 		}
 
 		/// <summary>
@@ -80,20 +81,35 @@ namespace Pinta.Tools
 
 		public Arrow Arrow1 = new Arrow(), Arrow2 = new Arrow();
 
+		public bool AntiAliasing;
+
+		public string DashPattern = "-";
+
+		/// <summary>
+		/// Create a new CurveEngine.
+		/// </summary>
+		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
+		public CurveEngine(bool passedAA)
+		{
+			AntiAliasing = passedAA;
+		}
+
 		/// <summary>
 		/// Clone all of the necessary data in the CurveEngine.
 		/// </summary>
 		/// <returns>The partially cloned curve data.</returns>
 		public CurveEngine PartialClone()
 		{
-			CurveEngine clonedCE = new CurveEngine();
+			CurveEngine clonedCE = new CurveEngine(AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
-			//Don't clone the GeneratedPoints or OrganizedPoints as they will be calculated.
+			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
 
 			clonedCE.Arrow1 = Arrow1.Clone();
 			clonedCE.Arrow2 = Arrow2.Clone();
+
+			clonedCE.DashPattern = DashPattern;
 
 			return clonedCE;
 		}

@@ -71,6 +71,31 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+		public static Rectangle DrawFullRectangle(this Context g, Rectangle r, Color color, int lineWidth)
+		{
+			// Put it on a pixel line
+			if (lineWidth == 1)
+				r = new Rectangle(r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1);
+
+			g.Save();
+
+			g.MoveTo(r.X - (double)lineWidth / 2d, r.Y);
+			g.LineTo(r.X + r.Width, r.Y);
+			g.LineTo(r.X + r.Width, r.Y + r.Height);
+			g.LineTo(r.X, r.Y + r.Height);
+			g.LineTo(r.X, r.Y);
+
+			g.Color = color;
+			g.LineWidth = lineWidth;
+
+			Rectangle dirty = g.FixedStrokeExtents();
+			g.Stroke();
+
+			g.Restore();
+
+			return dirty;
+		}
+
 		public static Path CreateRectanglePath (this Context g, Rectangle r)
 		{
 			g.Save ();
@@ -193,6 +218,40 @@ namespace Pinta.Core
 
 			g.Stroke ();
 			g.Restore ();
+
+			return dirty;
+		}
+
+		public static Rectangle FillStrokedFullRectangle(this Context g, Rectangle r, Color fill, Color stroke, int lineWidth)
+		{
+			double x = r.X;
+			double y = r.Y;
+
+			g.Save();
+
+			// Put it on a pixel line
+			if (lineWidth == 1)
+			{
+				x += 0.5;
+				y += 0.5;
+			}
+
+			g.MoveTo(x - (double)lineWidth / 2d, y);
+			g.LineTo(x + r.Width, y);
+			g.LineTo(x + r.Width, y + r.Height);
+			g.LineTo(x, y + r.Height);
+			g.LineTo(x, y);
+
+			g.Color = fill;
+			g.FillPreserve();
+
+			g.Color = stroke;
+			g.LineWidth = lineWidth;
+
+			Rectangle dirty = g.FixedStrokeExtents();
+
+			g.Stroke();
+			g.Restore();
 
 			return dirty;
 		}

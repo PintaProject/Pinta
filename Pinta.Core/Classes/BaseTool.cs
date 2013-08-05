@@ -31,6 +31,7 @@ using Gdk;
 using System.IO;
 using Mono.Unix;
 using Mono.Addins;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
@@ -42,12 +43,25 @@ namespace Pinta.Core
 		protected const int DEFAULT_BRUSH_WIDTH = 2;
 	    
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
+
+
+		protected virtual bool showDashPattern { get { return false; } }
+		protected bool dashChangeSetup = false;
+
+		//The number to multiply each dash and space character by when generating the dash pattern double[].
+		protected static double dashFactor = 1.0;
+
+		protected ToolBarComboBox dashPatternBox;
+		protected ToolBarLabel dashPatternLabel;
+		protected ToolItem dashPatternSep;
+
 	    
 		protected ToggleToolButton tool_item;
 		protected ToolItem tool_label;
 		protected ToolItem tool_image;
 		protected ToolItem tool_sep;
 		protected ToolBarDropDownButton antialiasing_button;
+		private ToolBarItem aaOn, aaOff;
 		protected ToolBarDropDownButton alphablending_button;
 		public event MouseHandler MouseMoved;
 		public event MouseHandler MousePressed;
@@ -76,7 +90,30 @@ namespace Pinta.Core
 		public virtual bool Enabled { get { return true; } }
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
-		public virtual bool UseAntialiasing { get { return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag; } }
+
+		public virtual bool UseAntialiasing
+		{
+			get
+			{
+				return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag;
+			}
+
+			set
+			{
+				if (ShowAntialiasingButton && antialiasing_button != null)
+				{
+					if (value)
+					{
+						antialiasing_button.SelectedItem = aaOn;
+					}
+					else
+					{
+						antialiasing_button.SelectedItem = aaOff;
+					}
+				}
+			}
+		}
+
 		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && (bool)alphablending_button.SelectedItem.Tag; } }
 		public virtual int Priority { get { return 75; } }
 
@@ -194,7 +231,14 @@ namespace Pinta.Core
 			if (ShowAntialiasingButton)
 				BuildAntialiasingTool (tb);
 			if (ShowAlphaBlendingButton)
-				BuildAlphaBlending (tb);			
+				BuildAlphaBlending(tb);
+
+			AfterBuildRasterization();
+		}
+
+		protected virtual void AfterBuildRasterization()
+		{
+
 		}
 
 		protected virtual void OnBuildToolBar (Toolbar tb)
@@ -213,6 +257,36 @@ namespace Pinta.Core
 				tool_sep = new SeparatorToolItem ();
 			
 			tb.AppendItem (tool_sep);
+
+
+			#region Dash Pattern
+
+			if (showDashPattern)
+			{
+				if (dashPatternLabel == null)
+				{
+					dashPatternLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Dash")));
+				}
+
+				tb.AppendItem(dashPatternLabel);
+
+				if (dashPatternBox == null)
+				{
+					dashPatternBox = new ToolBarComboBox(100, 0, true,
+						"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
+				}
+
+				tb.AppendItem(dashPatternBox);
+
+				if (dashPatternSep == null)
+				{
+					dashPatternSep = new SeparatorToolItem();
+				}
+
+				tb.AppendItem(dashPatternSep);
+			}
+
+			#endregion Dash Pattern
 		}
 
 		protected virtual void OnClearToolBar (Toolbar tb)
@@ -368,6 +442,83 @@ namespace Pinta.Core
 				return CairoExtensions.ToPixbuf (i);
 			}
 		}
+
+		/// <summary>
+		/// Generates a double[] given a string pattern that consists of any combination of dashes and spaces.
+		/// </summary>
+		/// <param name="dP">The dash pattern string.</param>
+		/// <param name="brushWidth">The width of the brush.</param>
+		/// <returns>The double[] generated.</returns>
+		protected double[] GenerateDashArray(string dP, double brushWidth)
+		{
+			List<double> dashList = new List<double>();
+
+			//For each consecutive dash character, extent will increase by 1.
+			//For each consecutive space character, extent will dicrease by 1.
+			int extent = 0;
+
+			//Go through each character in the given dash pattern string.
+			foreach (char c in dP)
+			{
+				if (c == '-')
+				{
+					//Dash character.
+
+					if (extent >= 0)
+					{
+						++extent;
+					}
+					else
+					{
+						//There was previously one or more non-dash characters.
+						dashList.Add((double)-extent * brushWidth * dashFactor);
+
+						extent = 1;
+					}
+				}
+				else
+				{
+					//Non-dash character.
+
+					if (extent == 0)
+					{
+						//Pattern is starting with a non-dash character. Resulting double[] pattern must end
+						//with a dash representation for this to be accurate: 0.0 is merely a placeholder.
+						dashList.Add(0.0);
+
+						--extent;
+					}
+					else if (extent < 0)
+					{
+						--extent;
+					}
+					else
+					{
+						//There was previously one or more dash characters.
+						dashList.Add((double)extent * brushWidth * dashFactor);
+
+						extent = -1;
+					}
+				}
+			}
+
+			//At this point, extent != 0.
+			if (extent > 0)
+			{
+				//extent > 0. Pattern ended with a dash character.
+				dashList.Add((double)extent * brushWidth * dashFactor);
+
+				//Resulting double[] pattern must end with a space representation for this to be accurate: 0.0 is merely a placeholder.
+				dashList.Add(0.0);
+			}
+			else
+			{
+				//extent < 0. Pattern ended with a non-dash character.
+				dashList.Add((double)-extent * brushWidth * dashFactor);
+			}
+
+			return dashList.ToArray();
+		}
 		#endregion
 
 		#region Private Methods
@@ -395,8 +546,8 @@ namespace Pinta.Core
 
 			antialiasing_button = new ToolBarDropDownButton ();
 
-			antialiasing_button.AddItem (Catalog.GetString ("Antialiasing On"), "Toolbar.AntiAliasingEnabledIcon.png", true);
-			antialiasing_button.AddItem (Catalog.GetString ("Antialiasing Off"), "Toolbar.AntiAliasingDisabledIcon.png", false);
+			aaOn = antialiasing_button.AddItem (Catalog.GetString ("Antialiasing On"), "Toolbar.AntiAliasingEnabledIcon.png", true);
+			aaOff = antialiasing_button.AddItem (Catalog.GetString ("Antialiasing Off"), "Toolbar.AntiAliasingDisabledIcon.png", false);
 
 			tb.AppendItem (antialiasing_button);
 		}

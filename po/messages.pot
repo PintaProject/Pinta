@@ -2153,3 +2153,7 @@ msgstr ""
 #: Pinta.Tools/Tools/LineCurveTool.cs:1498
 msgid "Line/Curve Modified"
 msgstr ""
+
+#: Pinta.Core/Classes/BaseTool.cs:268
+msgid "Dash"
+msgstr ""

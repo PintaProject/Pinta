@@ -38,7 +38,8 @@ namespace Pinta.Tools
 		private static readonly Color hoverColor =
 			new Color(ToolControl.FillColor.R / 2d, ToolControl.FillColor.G / 2d, ToolControl.FillColor.B / 2d, ToolControl.FillColor.A / 3d);
 
-		private const double CurveClickRange = 12d;
+		private const double CurveClickStartingRange = 10d;
+		private const double CurveClickThicknessFactor = 1d;
 		private const double DefaultEndPointTension = 0d;
 		private const double DefaultMidPointTension = 1d / 3d;
 
@@ -49,7 +50,7 @@ namespace Pinta.Tools
 		public const double SectionSizeDouble = SectionSize;
 
 		//Don't change this; it's automatically calculated.
-		public static readonly int BorderingSectionRange = (int)Math.Ceiling(CurveClickRange / SectionSizeDouble);
+		public static readonly int BorderingSectionRange = (int)Math.Ceiling(CurveClickStartingRange / SectionSizeDouble);
 
 
 		public static int selectedPointIndex = -1;
@@ -86,15 +87,33 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// The selected curve's CurveEngine.
+		/// The active curve's CurveEngine.
+		/// </summary>
+		private CurveEngine ActiveCurveEngine
+		{
+			get
+			{
+				if (cEngines.CEL.Count > selectedPointCurveIndex)
+				{
+					return cEngines.CEL[selectedPointCurveIndex];
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
+
+		/// <summary>
+		/// The selected curve's CurveEngine. This can be null.
 		/// </summary>
 		private CurveEngine SelectedCurveEngine
 		{
 			get
 			{
-				if (selectedPointIndex > -1 && cEngines.CEL.Count > selectedPointCurveIndex)
+				if (selectedPointIndex > -1)
 				{
-					return cEngines.CEL[selectedPointCurveIndex];
+					return ActiveCurveEngine;
 				}
 				else
 				{
@@ -115,7 +134,7 @@ namespace Pinta.Tools
 
 
 		//Stores the editable curve data.
-		public static CurveEngineCollection cEngines = new CurveEngineCollection();
+		public static CurveEngineCollection cEngines = new CurveEngineCollection(false);
 
 
 		public override string Name
@@ -150,6 +169,8 @@ namespace Pinta.Tools
 			get { return 39; }
 		}
 
+		protected override bool showDashPattern { get { return true; } }
+
 
 		private Gtk.SeparatorToolItem arrowSep;
 		private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
@@ -171,6 +192,20 @@ namespace Pinta.Tools
 		protected override void BuildToolBar(Gtk.Toolbar tb)
 		{
 			base.BuildToolBar(tb);
+
+
+			if (!dashChangeSetup && dashPatternBox != null)
+			{
+				dashPatternBox.ComboBox.Changed += (o, e) =>
+				{
+					ActiveCurveEngine.DashPattern = dashPatternBox.ComboBox.ActiveText;
+
+					//Update the line/curve.
+					drawCurves(false, false, false);
+				};
+
+				dashChangeSetup = true;
+			}
 
 
 			#region Show Arrows
@@ -545,6 +580,7 @@ namespace Pinta.Tools
 
 			#endregion Length Offset
 
+
 			if (showOtherArrowOptions)
 			{
 				tb.Add(arrowSizeLabel);
@@ -615,6 +651,20 @@ namespace Pinta.Tools
 
 
 		#region ToolbarEventHandlers
+
+		protected override void PlusButtonClickedEvent(object o, EventArgs args)
+		{
+			base.PlusButtonClickedEvent(o, args);
+
+			drawCurves(false, false, false);
+		}
+
+		protected override void MinusButtonClickedEvent(object o, EventArgs args)
+		{
+			base.MinusButtonClickedEvent(o, args);
+
+			drawCurves(false, false, false);
+		}
 
 		void arrowSizeMinus_Clicked(object sender, EventArgs e)
 		{
@@ -757,9 +807,11 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip();
 
+				ActiveCurveEngine.AntiAliasing = UseAntialiasing;
+
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(new double[] { 5.0, 20.0, 1.0, 30.0 }, 0.0);
+				g.SetDash(GenerateDashArray(ActiveCurveEngine.DashPattern, BrushWidth), 0.0);
 
 				g.LineWidth = BrushWidth;
 
@@ -910,16 +962,16 @@ namespace Pinta.Tools
 					doc.CurrentUserLayer, false);
 
 				//Make sure that the undo surface isn't null and that there are actually points.
-				if (undoSurface != null && cEngines.CEL[0].ControlPoints.Count > 0)
+				if (undoSurface != null && ActiveCurveEngine.ControlPoints.Count > 0)
 				{
 					//Create a new CurvesHistoryItem so that the finalization of the curves can be undone.
 					doc.History.PushNewItem(
 						new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Finalized"),
-							undoSurface, cEngines.PartialClone(), doc.CurrentUserLayer));
+							undoSurface, doc.CurrentUserLayer));
 				}
 
 				//Clear out all of the old data.
-				cEngines = new CurveEngineCollection();
+				cEngines = new CurveEngineCollection(true);
 			}
 			else
 			{
@@ -938,14 +990,14 @@ namespace Pinta.Tools
 
 					//Determine if the user is hovering the mouse close enough to a line,
 					//curve, or point that's currently being drawn/edited by the user.
-					if (closestDistance < CurveClickRange)
+					if (closestDistance < CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor)
 					{
 						//User is hovering over a generated point on a line/curve.
 
 						if (controlPoints.Count > closestPointIndex)
 						{
 							//Note: compare the current_point's distance here because it's the actual mouse position.
-							if (current_point.Distance(controlPoints[closestPointIndex].Position) < CurveClickRange)
+							if (current_point.Distance(controlPoints[closestPointIndex].Position) < CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor)
 							{
 								//Mouse hovering over a control point (on the "previous order" side of the point).
 
@@ -953,7 +1005,7 @@ namespace Pinta.Tools
 								hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
 								hoveredPointAsControlPoint = closestPointIndex;
 							}
-							else if (current_point.Distance(controlPoints[closestPointIndex - 1].Position) < CurveClickRange)
+							else if (current_point.Distance(controlPoints[closestPointIndex - 1].Position) < CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor)
 							{
 								//Mouse hovering over a control point (on the "following order" side of the point).
 
@@ -1076,7 +1128,7 @@ namespace Pinta.Tools
 				{
 					//Create a new CurveModifyHistoryItem so that the deletion of a control point can be undone.
 					PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Deleted"), cEngines.PartialClone()));
+						new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Deleted")));
 
 
 					List<ControlPoint> controlPoints = SelectedCurveEngine.ControlPoints;
@@ -1127,7 +1179,7 @@ namespace Pinta.Tools
 
 					//Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
 					PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Added"), cEngines.PartialClone()));
+						new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Added")));
 
 
 					bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
@@ -1268,9 +1320,22 @@ namespace Pinta.Tools
 		{
 			surface_modified = true;
 
+
+			CurveEngine actEngine = ActiveCurveEngine;
+
+			if (actEngine != null)
+			{
+				UseAntialiasing = actEngine.AntiAliasing;
+
+				//Update the dashPatternBox to represent the current curve's DashPattern.
+				(dashPatternBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+			}
+
+
 			//Draw the current state.
 			drawCurves(true, false, false);
 
+			//Update the toolbar's arrow options.
 			setToolbarArrowOptions();
 
 			base.AfterUndo();
@@ -1280,12 +1345,32 @@ namespace Pinta.Tools
 		{
 			surface_modified = true;
 
+
+			CurveEngine actEngine = ActiveCurveEngine;
+
+			if (actEngine != null)
+			{
+				UseAntialiasing = actEngine.AntiAliasing;
+
+				//Update the dashPatternBox to represent the current curve's DashPattern.
+				(dashPatternBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+			}
+
+
 			//Draw the current state.
 			drawCurves(true, false, false);
 
+			//Update the toolbar's arrow options.
 			setToolbarArrowOptions();
 
 			base.AfterRedo();
+		}
+
+		protected override void AfterBuildRasterization()
+		{
+			UseAntialiasing = true;
+
+			base.AfterBuildRasterization();
 		}
 
 		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
@@ -1337,7 +1422,7 @@ namespace Pinta.Tools
 			bool clickedOnControlPoint = false;
 
 			//Determine if the user clicked close enough to a line, curve, or point that's currently being drawn/edited by the user.
-			if (closestDistance < CurveClickRange)
+			if (closestDistance < CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor)
 			{
 				//User clicked on a generated point on a line/curve.
 
@@ -1345,7 +1430,7 @@ namespace Pinta.Tools
 
 				//Note: compare the current_point's distance here because it's the actual mouse position.
 				if (controlPoints.Count > closestPointIndex &&
-					current_point.Distance(controlPoints[closestPointIndex].Position) < CurveClickRange)
+					current_point.Distance(controlPoints[closestPointIndex].Position) < CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor)
 				{
 					//User clicked on a control point (on the "previous order" side of the point).
 
@@ -1356,7 +1441,7 @@ namespace Pinta.Tools
 
 					clickedOnControlPoint = true;
 				}
-				else if (current_point.Distance(controlPoints[closestPointIndex - 1].Position) < CurveClickRange)
+				else if (current_point.Distance(controlPoints[closestPointIndex - 1].Position) < CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor)
 				{
 					//User clicked on a control point (on the "following order" side of the point).
 
@@ -1377,7 +1462,7 @@ namespace Pinta.Tools
 
 						//Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
 						doc.History.PushNewItem(
-							new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Added"), cEngines.PartialClone()));
+							new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
@@ -1391,7 +1476,7 @@ namespace Pinta.Tools
 			bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
 
 			//Create a new line/curve if the user simply clicks outside of any lines/curves or if the user control + clicks on an existing point.
-			if (!changingTension && ((ctrlKey && clickedOnControlPoint) || closestDistance >= CurveClickRange))
+			if (!changingTension && ((ctrlKey && clickedOnControlPoint) || closestDistance >= CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor))
 			{
 				PointD prevSelPoint;
 
@@ -1412,37 +1497,47 @@ namespace Pinta.Tools
 				//Finalize the previous curve (if needed).
 				drawCurves(false, true, false);
 
+				CurveEngine actEngine = ActiveCurveEngine;
+
+				//Set the DashPattern for the finalized curve to be the same as the unfinalized curve's.
+				actEngine.DashPattern = dashPatternBox.ComboBox.ActiveText;
+
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
-					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), cEngines.PartialClone(), doc.CurrentUserLayer));
+					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer));
 
 				is_drawing = true;
+
 
 
 				//Then create the first two points of the line/curve. The second point will follow the mouse around until released.
 				if (ctrlKey && clickedOnControlPoint)
 				{
-					cEngines.CEL[0].ControlPoints.Add(new ControlPoint(new PointD(prevSelPoint.X, prevSelPoint.Y), DefaultEndPointTension));
-					cEngines.CEL[0].ControlPoints.Add(
+					actEngine.ControlPoints.Add(new ControlPoint(new PointD(prevSelPoint.X, prevSelPoint.Y), DefaultEndPointTension));
+					actEngine.ControlPoints.Add(
 						new ControlPoint(new PointD(prevSelPoint.X + .01d, prevSelPoint.Y + .01d), DefaultEndPointTension));
 
 					clickedWithoutModifying = false;
 				}
 				else
 				{
-					cEngines.CEL[0].ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
-					cEngines.CEL[0].ControlPoints.Add(
+					actEngine.ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
+					actEngine.ControlPoints.Add(
 						new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultEndPointTension));
 				}
 
 				selectedPointIndex = 1;
 				selectedPointCurveIndex = 0;
 
+				//Set the new curve's arrow options to be the same as the previous curve's.
 				setArrowOptions();
+
+				//Set the DashPattern for the new curve to be the same as the previous curve's.
+				actEngine.DashPattern = dashPatternBox.ComboBox.ActiveText;
 			}
 
 			//If the user right clicks outside of any lines/curves.
-			if (closestDistance >= CurveClickRange && changingTension)
+			if (closestDistance >= CurveClickStartingRange + BrushWidth * CurveClickThicknessFactor && changingTension)
 			{
 				clickedWithoutModifying = true;
 			}
@@ -1489,7 +1584,7 @@ namespace Pinta.Tools
 					{
 						//Create a new CurveModifyHistoryItem so that the modification of the curve can be undone.
 						doc.History.PushNewItem(
-							new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Modified"), cEngines.PartialClone()));
+							new CurveModifyHistoryItem(Icon, Catalog.GetString("Line/Curve Modified")));
 
 						clickedWithoutModifying = false;
 					}
