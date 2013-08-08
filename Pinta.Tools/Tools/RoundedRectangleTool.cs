@@ -74,7 +74,7 @@ namespace Pinta.Tools
 			set { (radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }			
 		}
 
-		protected override bool showDashPattern { get { return true; } }
+		private DashPatternBox dpb = new DashPatternBox();
 
 		private string dashPattern = "-";
 		
@@ -118,14 +118,14 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar(tb);
 
-			if (!dashChangeSetup && dashPatternBox != null)
-			{
-				dashPatternBox.ComboBox.Changed += (o, e) =>
-				{
-					dashPattern = dashPatternBox.ComboBox.ActiveText;
-				};
+			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
 
-				dashChangeSetup = true;
+			if (dpbBox != null)
+			{
+				dpbBox.Changed += (o, e) =>
+				{
+					dashPattern = dpbBox.ActiveText;
+				};
 			}
 		}
 
@@ -142,7 +142,7 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(GenerateDashArray(dashPattern, BrushWidth), 0.0);
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
 
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedRoundedRectangle (rect, Radius, fill_color, outline_color, BrushWidth);

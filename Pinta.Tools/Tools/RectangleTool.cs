@@ -49,7 +49,7 @@ namespace Pinta.Tools
 			get { return 41; }
 		}
 
-		protected override bool showDashPattern { get { return true; } }
+		private DashPatternBox dpb = new DashPatternBox();
 
 		private string dashPattern = "-";
 
@@ -66,7 +66,7 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				double[] dashes = GenerateDashArray(dashPattern, BrushWidth);
+				double[] dashes = DashPatternBox.GenerateDashArray(dashPattern, BrushWidth);
 				g.SetDash(dashes, 0.0);
 
 				if (dashes.Length == 2 && dashes[1] == 0.0)
@@ -100,14 +100,14 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar(tb);
 
-			if (!dashChangeSetup && dashPatternBox != null)
-			{
-				dashPatternBox.ComboBox.Changed += (o, e) =>
-				{
-					dashPattern = dashPatternBox.ComboBox.ActiveText;
-				};
+			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
 
-				dashChangeSetup = true;
+			if (dpbBox != null)
+			{
+				dpbBox.Changed += (o, e) =>
+				{
+					dashPattern = dpbBox.ActiveText;
+				};
 			}
 		}
 	}

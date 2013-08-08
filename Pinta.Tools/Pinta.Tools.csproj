@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreToolsExtension.cs" />
+    <Compile Include="Dashes\DashPatternBox.cs" />
     <Compile Include="LinesCurves\ControlPoint.cs" />
     <Compile Include="LinesCurves\Arrow.cs" />
     <Compile Include="LinesCurves\OrganizedPointCollection.cs" />

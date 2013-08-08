@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		private Color fill_color;
 		private Color outline_color;
 
-		protected override bool showDashPattern { get { return true; } }
+		private DashPatternBox dpb = new DashPatternBox();
 
 		private string dashPattern = "-";
 
@@ -67,17 +67,6 @@ namespace Pinta.Tools
 			base.OnBuildToolBar(tb);
 
 
-			if (!dashChangeSetup && dashPatternBox != null)
-			{
-				dashPatternBox.ComboBox.Changed += (o, e) =>
-				{
-					dashPattern = dashPatternBox.ComboBox.ActiveText;
-				};
-
-				dashChangeSetup = true;
-			}
-
-
 			if (fill_sep == null)
 				fill_sep = new Gtk.SeparatorToolItem ();
 
@@ -97,6 +86,17 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem (fill_button);
+
+
+			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
+
+			if (dpbBox != null)
+			{
+				dpbBox.Changed += (o, e) =>
+				{
+					dashPattern = dpbBox.ActiveText;
+				};
+			}
 		}
 		#endregion
 
@@ -147,7 +147,7 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(GenerateDashArray(dashPattern, BrushWidth), 0.0);
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);
@@ -204,7 +204,7 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-				g.SetDash(GenerateDashArray(dashPattern, BrushWidth), 0.0);
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
 
 				if (path != null) {
 					g.AppendPath (path);
