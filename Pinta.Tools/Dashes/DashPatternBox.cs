@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		private ToolBarLabel dashPatternLabel;
 		private ToolItem dashPatternSep;
 
-		public ToolBarComboBox DashPatternBox;
+		public ToolBarComboBox comboBox;
 
 
 
@@ -75,13 +75,13 @@ namespace Pinta.Tools
 
 			tb.AppendItem(dashPatternLabel);
 
-			if (DashPatternBox == null)
+			if (comboBox == null)
 			{
-				DashPatternBox = new ToolBarComboBox(100, 0, true,
+				comboBox = new ToolBarComboBox(100, 0, true,
 					"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
 			}
 
-			tb.AppendItem(DashPatternBox);
+			tb.AppendItem(comboBox);
 
 			if (dashChangeSetup)
 			{
@@ -91,7 +91,7 @@ namespace Pinta.Tools
 			{
 				dashChangeSetup = true;
 
-				return DashPatternBox.ComboBox;
+				return comboBox.ComboBox;
 			}
 		}
 

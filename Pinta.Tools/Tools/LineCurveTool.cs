@@ -1329,7 +1329,7 @@ namespace Pinta.Tools
 				UseAntialiasing = actEngine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current curve's DashPattern.
-				(dpb.DashPatternBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+				(dpb.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
 			}
 
 
@@ -1354,7 +1354,7 @@ namespace Pinta.Tools
 				UseAntialiasing = actEngine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current curve's DashPattern.
-				(dpb.DashPatternBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+				(dpb.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
 			}
 
 
@@ -1501,7 +1501,7 @@ namespace Pinta.Tools
 				CurveEngine actEngine = ActiveCurveEngine;
 
 				//Set the DashPattern for the finalized curve to be the same as the unfinalized curve's.
-				actEngine.DashPattern = dpb.DashPatternBox.ComboBox.ActiveText;
+				actEngine.DashPattern = dpb.comboBox.ComboBox.ActiveText;
 
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
@@ -1534,7 +1534,7 @@ namespace Pinta.Tools
 				setArrowOptions();
 
 				//Set the DashPattern for the new curve to be the same as the previous curve's.
-				actEngine.DashPattern = dpb.DashPatternBox.ComboBox.ActiveText;
+				actEngine.DashPattern = dpb.comboBox.ComboBox.ActiveText;
 			}
 
 			//If the user right clicks outside of any lines/curves.
