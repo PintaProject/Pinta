@@ -49,7 +49,7 @@ namespace Pinta.Tools
 			get { return 41; }
 		}
 
-		private DashPatternBox dpb = new DashPatternBox();
+		private DashPatternBox dashPBox = new DashPatternBox();
 
 		private string dashPattern = "-";
 
@@ -100,7 +100,7 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar(tb);
 
-			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
 
 			if (dpbBox != null)
 			{

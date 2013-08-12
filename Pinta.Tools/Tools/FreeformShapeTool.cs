@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		private Color fill_color;
 		private Color outline_color;
 
-		private DashPatternBox dpb = new DashPatternBox();
+		private DashPatternBox dashPBox = new DashPatternBox();
 
 		private string dashPattern = "-";
 
@@ -88,7 +88,7 @@ namespace Pinta.Tools
 			tb.AppendItem (fill_button);
 
 
-			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
 
 			if (dpbBox != null)
 			{

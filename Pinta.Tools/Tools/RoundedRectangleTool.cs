@@ -74,7 +74,7 @@ namespace Pinta.Tools
 			set { (radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }			
 		}
 
-		private DashPatternBox dpb = new DashPatternBox();
+		private DashPatternBox dashPBox = new DashPatternBox();
 
 		private string dashPattern = "-";
 		
@@ -118,7 +118,7 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar(tb);
 
-			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
 
 			if (dpbBox != null)
 			{

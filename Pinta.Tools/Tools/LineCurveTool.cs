@@ -170,7 +170,7 @@ namespace Pinta.Tools
 		}
 
 
-		private DashPatternBox dpb = new DashPatternBox();
+		private DashPatternBox dashPBox = new DashPatternBox();
 
 
 		private Gtk.SeparatorToolItem arrowSep;
@@ -195,7 +195,7 @@ namespace Pinta.Tools
 			base.BuildToolBar(tb);
 
 
-			Gtk.ComboBox dpbBox = dpb.SetupToolbar(tb);
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
 
 			if (dpbBox != null)
 			{
@@ -1222,6 +1222,8 @@ namespace Pinta.Tools
 
 					drawCurves(true, false, shiftKey);
 				}
+
+				args.RetVal = true;
 			}
 			else if (args.Event.Key == Gdk.Key.Up)
 			{
@@ -1329,7 +1331,7 @@ namespace Pinta.Tools
 				UseAntialiasing = actEngine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current curve's DashPattern.
-				(dpb.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+				(dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
 			}
 
 
@@ -1354,7 +1356,7 @@ namespace Pinta.Tools
 				UseAntialiasing = actEngine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current curve's DashPattern.
-				(dpb.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+				(dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
 			}
 
 
@@ -1501,7 +1503,7 @@ namespace Pinta.Tools
 				CurveEngine actEngine = ActiveCurveEngine;
 
 				//Set the DashPattern for the finalized curve to be the same as the unfinalized curve's.
-				actEngine.DashPattern = dpb.comboBox.ComboBox.ActiveText;
+				actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
@@ -1534,7 +1536,7 @@ namespace Pinta.Tools
 				setArrowOptions();
 
 				//Set the DashPattern for the new curve to be the same as the previous curve's.
-				actEngine.DashPattern = dpb.comboBox.ComboBox.ActiveText;
+				actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 			}
 
 			//If the user right clicks outside of any lines/curves.
