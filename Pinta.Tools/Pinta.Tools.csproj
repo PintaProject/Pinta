@@ -78,6 +78,7 @@
     <Compile Include="LinesCurves\CurveEngineCollection.cs" />
     <Compile Include="HistoryItems\CurveModifyHistoryItem.cs" />
     <Compile Include="HistoryItems\CurvesHistoryItem.cs" />
+    <Compile Include="Selections\SelectionModeHandler.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Brushes\SplatterBrush.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />

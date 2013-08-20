@@ -477,23 +477,23 @@ msgid ""
 "circle."
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:53
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:50
 msgid "Replace"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:54
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:51
 msgid "Union (+) (Ctrl + Left Click)"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:55
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:52
 msgid "Exclude (-) (Right Click)"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:56
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:53
 msgid "Xor (Ctrl + Right Click)"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:57
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:54
 msgid "Intersect (Shift + Left Click)"
 msgstr ""
 
