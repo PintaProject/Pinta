@@ -55,7 +55,9 @@ namespace Pinta.Core
 
 		private bool show_selection;
 
+		public SelectionModeHandler selHandler;
 		public DocumentSelection Selection = new DocumentSelection();
+		public DocumentSelection PreviousSelection = new DocumentSelection();
 
 		public Document (Gdk.Size size)
 		{
@@ -76,6 +78,8 @@ namespace Pinta.Core
 			selection_layer.Hidden = true;
 
 			ResetSelectionPath ();
+
+			selHandler = new SelectionModeHandler();
 		}
 
 		#region Public Properties

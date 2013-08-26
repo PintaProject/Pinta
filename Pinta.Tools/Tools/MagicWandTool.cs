@@ -37,25 +37,16 @@ namespace Pinta.Tools
 	{
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 
-		SelectionModeHandler selHandler;
-
 		public MagicWandTool()
 		{
 			LimitToSelection = false;
-		}
-
-		protected override void OnActivated()
-		{
-			base.OnActivated();
-
-			selHandler = new SelectionModeHandler();
 		}
 
 		protected override void OnBuildToolBar(Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar(tb);
 
-			selHandler.BuildToolbar(tb);
+			PintaCore.Workspace.ActiveDocument.selHandler.BuildToolbar(tb);
 		}
 
 		public override string Name
@@ -85,7 +76,7 @@ namespace Pinta.Tools
 
 			//SetCursor (Cursors.WaitCursor);
 
-			selHandler.DetermineCombineMode(args);
+			doc.selHandler.DetermineCombineMode(args);
 
 			base.OnMouseDown(canvas, args, point);
 
@@ -100,7 +91,10 @@ namespace Pinta.Tools
 			undoAction.TakeSnapshot();
 
 
-			selHandler.PerformSelectionMode(polygonSet);
+			doc.PreviousSelection = doc.Selection.Clone();
+			doc.Selection.SelectionPolygons.Clear();
+
+			doc.selHandler.PerformSelectionMode(polygonSet);
 
 
 			doc.History.PushNewItem(undoAction);

@@ -28,6 +28,8 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using System.Collections.Generic;
+using ClipperLibrary;
 
 namespace Pinta.Tools
 {
@@ -53,6 +55,7 @@ namespace Pinta.Tools
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Toolbar tb)
 		{
+			PintaCore.Workspace.ActiveDocument.selHandler.BuildToolbar(tb);
 		}
 		#endregion
 		
@@ -63,16 +66,21 @@ namespace Pinta.Tools
 			if (is_drawing)
 				return;
 
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			doc.selHandler.DetermineCombineMode(args);
+
 			reset_origin = args.Event.GetPoint ();
 
-			Document doc = PintaCore.Workspace.ActiveDocument; 
-			if (!handler_active || !HandleResize (point.X, point.Y)) {			
+			if (!handler_active || !HandleResize (point.X, point.Y)) {
 				double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
 				double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
 
 				shape_origin = new PointD (x, y);
 
-				doc.Selection.SelectionPolygons.Clear ();
+				doc.PreviousSelection = doc.Selection.Clone();
+				doc.Selection.SelectionPolygons.Clear();
+
 				is_drawing = true;
 			}
 			hist = new SelectionHistoryItem (Icon, Name);
@@ -81,6 +89,8 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			// If the user didn't move the mouse, they want to deselect
 			int tolerance = 0;
 			if (Math.Abs (reset_origin.X - args.Event.X) <= tolerance && Math.Abs (reset_origin.Y - args.Event.Y) <= tolerance) {
@@ -88,11 +98,17 @@ namespace Pinta.Tools
 				hist.Dispose ();
 				hist = null;
 				handler_active = false;
-				Document doc = PintaCore.Workspace.ActiveDocument;
+
 				doc.ToolLayer.Clear ();
 			} else {
+				if (doc.Selection != null)
+				{
+					doc.selHandler.PerformSelectionMode(DocumentSelection.ConvertToPolygonSet(doc.Selection.SelectionPolygons));
+					PintaCore.Workspace.Invalidate();
+				}
+
 				if (hist != null)
-					PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
+					doc.History.PushNewItem (hist);
 
 				handler_active = true;
 				hist = null;

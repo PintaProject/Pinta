@@ -104,8 +104,6 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			base.OnMouseUp (canvas, args, point);
-
 			ImageSurface surf = doc.SelectionLayer.Surface;
 
 			using (Context g = new Context (surf)) {
@@ -127,6 +125,8 @@ namespace Pinta.Tools
 			lassoPolygon.Clear();
 
 			doc.Workspace.Invalidate ();
+
+			base.OnMouseUp(canvas, args, point);
 		}
 		#endregion
 	}

@@ -26,6 +26,8 @@
 
 using System;
 using Gtk;
+using System.Collections.Generic;
+using ClipperLibrary;
 
 namespace Pinta.Core
 {
@@ -142,6 +144,7 @@ namespace Pinta.Core
 			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
 			View.CreateToolBar (toolbar);
 
+
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (new ToolBarImage ("StatusBar.CursorXY.png"));
 
@@ -152,6 +155,64 @@ namespace Pinta.Core
 			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
 				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
 				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
+			};
+
+
+			toolbar.AppendItem(new SeparatorToolItem());
+			toolbar.AppendItem(new ToolBarImage("Tools.RectangleSelect.png"));
+
+			ToolBarLabel SelectionSize = new ToolBarLabel("  0, 0");
+
+			toolbar.AppendItem(SelectionSize);
+
+			PintaCore.Workspace.SelectionChanged += delegate
+			{
+				double minX = double.MaxValue;
+				double minY = double.MaxValue;
+				double maxX = double.MinValue;
+				double maxY = double.MinValue;
+
+				//Calculate the minimum rectangular bounds that surround the current selection.
+				foreach (List<IntPoint> li in PintaCore.Workspace.ActiveDocument.Selection.SelectionPolygons)
+				{
+					foreach (IntPoint ip in li)
+					{
+						if (minX > ip.X)
+						{
+							minX = ip.X;
+						}
+
+						if (minY > ip.Y)
+						{
+							minY = ip.Y;
+						}
+
+						if (maxX < ip.X)
+						{
+							maxX = ip.X;
+						}
+
+						if (maxY < ip.Y)
+						{
+							maxY = ip.Y;
+						}
+					}
+				}
+
+				double xDiff = maxX - minX;
+				double yDiff = maxY - minY;
+
+				if (double.IsNegativeInfinity(xDiff))
+				{
+					xDiff = 0d;
+				}
+
+				if (double.IsNegativeInfinity(yDiff))
+				{
+					yDiff = 0d;
+				}
+
+				SelectionSize.Text = string.Format("  {0}, {1}", xDiff, yDiff);
 			};
 		}
 		

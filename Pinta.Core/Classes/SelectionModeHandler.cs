@@ -26,14 +26,13 @@
 
 using System;
 using Cairo;
-using Pinta.Core;
 using Mono.Unix;
 using ClipperLibrary;
 using System.Collections.Generic;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	class SelectionModeHandler
+	public class SelectionModeHandler
 	{
 		private Gtk.ToolItem selection_sep;
 		private ToolBarLabel selection_label;
@@ -151,6 +150,8 @@ namespace Pinta.Tools
 			//Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
 			List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons(polygonSet);
 
+			doc.Selection = doc.PreviousSelection.Clone();
+
 			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
 			{
 				//Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
@@ -204,6 +205,8 @@ namespace Pinta.Tools
 					doc.Selection.SelectionPath = g.CreatePolygonPath(DocumentSelection.ConvertToPolygonSet(resultingPolygons));
 				}
 			}
+
+			PintaCore.Workspace.CallSelectionChanged(this, EventArgs.Empty);
 		}
 	}
 

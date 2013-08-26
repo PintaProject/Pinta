@@ -97,7 +97,11 @@ namespace Pinta.Core
 		{
 			DocumentSelection clonedSelection = new DocumentSelection();
 
-			clonedSelection.selection_path = selection_path.Clone();
+			if (selection_path != null)
+			{
+				clonedSelection.selection_path = selection_path.Clone();
+			}
+
 			clonedSelection.SelectionPolygons = SelectionPolygons.ToList();
 			clonedSelection.SelectionClipper = new Clipper();
 
