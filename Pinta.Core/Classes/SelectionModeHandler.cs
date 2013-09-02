@@ -34,7 +34,6 @@ namespace Pinta.Core
 {
 	public class SelectionModeHandler
 	{
-		private Gtk.ToolItem selection_sep;
 		private ToolBarLabel selection_label;
 		private ToolBarComboBox selection_combo_box;
 
@@ -55,11 +54,6 @@ namespace Pinta.Core
 
 		public void BuildToolbar(Gtk.Toolbar tb)
 		{
-			if (selection_sep == null)
-				selection_sep = new Gtk.SeparatorToolItem();
-
-			tb.AppendItem(selection_sep);
-
 			if (selection_label == null)
 				selection_label = new ToolBarLabel(Catalog.GetString(" Selection Mode: "));
 

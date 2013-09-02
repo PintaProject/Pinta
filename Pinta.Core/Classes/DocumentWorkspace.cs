@@ -96,6 +96,16 @@ namespace Pinta.Core
 			get { return (double)CanvasSize.Width / (double)document.ImageSize.Width; }
 			set {
 				if (value != (double)CanvasSize.Width / (double)document.ImageSize.Width || value != (double)CanvasSize.Height / (double)document.ImageSize.Height) {
+					if (document.ImageSize.Width == 0)
+					{
+						document.ImageSize = new Size(1, document.ImageSize.Height);
+					}
+
+					if (document.ImageSize.Height == 0)
+					{
+						document.ImageSize = new Size(document.ImageSize.Width, 1);
+					}
+
 					int new_x = Math.Max ((int)(document.ImageSize.Width * value), 1);
 					int new_y = Math.Max ((int)((new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
 
