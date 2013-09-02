@@ -45,6 +45,8 @@ namespace Pinta.Tools
 		private Gdk.Cursor cursor_hand;
 		bool is_hand_cursor = false;
 
+		private bool isResizing = false;
+
 		public SelectTool ()
 		{
 			CreateHandler ();
@@ -79,19 +81,23 @@ namespace Pinta.Tools
 
 			reset_origin = args.Event.GetPoint();
 
-			if (!handler_active || !HandleResize (point.X, point.Y))
+			if (!handler_active || !HandleResize(point.X, point.Y))
 			{
 				doc.selHandler.DetermineCombineMode(args);
 
 				doc.PreviousSelection = doc.Selection.Clone();
 				doc.Selection.SelectionPolygons.Clear();
 
-				double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
-				double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
+				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
+				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
 
-				shape_origin = new PointD (x, y);
+				shape_origin = new PointD(x, y);
 
 				is_drawing = true;
+			}
+			else
+			{
+				isResizing = true;
 			}
 		}
 		
@@ -125,6 +131,7 @@ namespace Pinta.Tools
 			}
 
 			is_drawing = false;
+			isResizing = false;
 		}
 
 		protected override void OnDeactivated ()
@@ -154,6 +161,11 @@ namespace Pinta.Tools
 			if (!is_drawing)
 			{
 				CheckHandlerCursor(point.X, point.Y);
+
+				if (!isResizing)
+				{
+					return;
+				}
 			}
 			else
 			{
