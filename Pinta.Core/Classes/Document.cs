@@ -56,8 +56,36 @@ namespace Pinta.Core
 		private bool show_selection;
 
 		public SelectionModeHandler selHandler;
-		public DocumentSelection Selection = new DocumentSelection();
-		public DocumentSelection PreviousSelection = new DocumentSelection();
+
+		private DocumentSelection actualSelection = new DocumentSelection();
+		public DocumentSelection Selection
+		{
+			get
+			{
+				return actualSelection;
+			}
+
+			set
+			{
+				actualSelection.DisposeSelection();
+				actualSelection = value;
+			}
+		}
+
+		private DocumentSelection actualPreviousSelection = new DocumentSelection();
+		public DocumentSelection PreviousSelection
+		{
+			get
+			{
+				return actualPreviousSelection;
+			}
+
+			set
+			{
+				actualPreviousSelection.DisposeSelection();
+				actualPreviousSelection = value;
+			}
+		}
 
 		public Document (Gdk.Size size)
 		{
