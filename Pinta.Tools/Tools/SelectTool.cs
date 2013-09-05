@@ -127,6 +127,7 @@ namespace Pinta.Tools
 					doc.History.PushNewItem (hist);
 
 				handler_active = true;
+				hist.Dispose();
 				hist = null;
 			}
 
