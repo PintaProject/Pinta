@@ -53,8 +53,41 @@ namespace Pinta.Tools
 		public static readonly int BorderingSectionRange = (int)Math.Ceiling(CurveClickStartingRange / SectionSizeDouble);
 
 
-		public static int selectedPointIndex = -1;
-		public static int selectedPointCurveIndex = 0;
+		public static int previousSelectedPointIndex = -1;
+		public static int previousSelectedPointCurveIndex = 0;
+
+		private static int sPI = -1;
+		private static int sPCI = 0;
+		
+		public static int selectedPointIndex
+		{
+			get
+			{
+				return sPI;
+			}
+
+			set
+			{
+				previousSelectedPointIndex = sPI;
+
+				sPI = value;
+			}
+		}
+
+		public static int selectedPointCurveIndex
+		{
+			get
+			{
+				return sPCI;
+			}
+
+			set
+			{
+				previousSelectedPointCurveIndex = sPCI;
+
+				sPCI = value;
+			}
+		}
 
 		/// <summary>
 		/// The selected ControlPoint.
@@ -174,6 +207,7 @@ namespace Pinta.Tools
 
 
 		private Gtk.SeparatorToolItem arrowSep;
+		private ToolBarLabel arrowLabel;
 		private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
 		private bool showOtherArrowOptions;
 
@@ -223,9 +257,17 @@ namespace Pinta.Tools
 			tb.AppendItem(arrowSep);
 
 
+			if (arrowLabel == null)
+			{
+				arrowLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow")));
+			}
+
+			tb.AppendItem(arrowLabel);
+
+
 			//Show arrow 1.
 
-			showArrowOneBox = new Gtk.CheckButton(Catalog.GetString("Arrow 1"));
+			showArrowOneBox = new Gtk.CheckButton("1");
 
 			showArrowOneBox.Toggled += (o, e) =>
 			{
@@ -286,7 +328,7 @@ namespace Pinta.Tools
 
 			//Show arrow 2.
 
-			showArrowTwoBox = new Gtk.CheckButton(Catalog.GetString("Arrow 2"));
+			showArrowTwoBox = new Gtk.CheckButton("2");
 
 			showArrowTwoBox.Toggled += (o, e) =>
 			{
@@ -611,7 +653,7 @@ namespace Pinta.Tools
 				selEngine.Arrow1.Show = showArrowOneBox.Active;
 				selEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-				showOtherArrowOptions = showArrowOneBox.Active && showArrowTwoBox.Active;
+				showOtherArrowOptions = showArrowOneBox.Active || showArrowTwoBox.Active;
 
 				if (showOtherArrowOptions)
 				{
@@ -853,7 +895,7 @@ namespace Pinta.Tools
 						{
 							if (genPoints.Length > 1)
 							{
-								dirty = dirty.UnionRectangles(cEngines.CEL[n].Arrow1.Draw(g, outline_color,
+								dirty = dirty.UnionRectangles(cEngines.CEL[n].Arrow2.Draw(g, outline_color,
 									genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
 							}
 						}
@@ -864,7 +906,7 @@ namespace Pinta.Tools
 				{
 					//Draw the control points for all of the curves.
 
-					int controlPointSize = BrushWidth + 1;
+					int controlPointSize = Math.Min(BrushWidth + 1, 5);
 					double controlPointOffset = (double)controlPointSize / 2d;
 
 					if (selectedPointIndex > -1)
@@ -968,7 +1010,7 @@ namespace Pinta.Tools
 					//Create a new CurvesHistoryItem so that the finalization of the curves can be undone.
 					doc.History.PushNewItem(
 						new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Finalized"),
-							undoSurface, doc.CurrentUserLayer));
+							undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, previousSelectedPointCurveIndex));
 				}
 
 				//Clear out all of the old data.
@@ -1507,7 +1549,8 @@ namespace Pinta.Tools
 
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
-					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer));
+					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer,
+						previousSelectedPointIndex, previousSelectedPointCurveIndex));
 
 				is_drawing = true;
 

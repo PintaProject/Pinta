@@ -77,7 +77,7 @@ namespace Pinta.Tools
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
 				else if (FillShape)
-					dirty = g.FillEllipse (rect, outline_color);
+					dirty = g.FillStrokedEllipse(rect, outline_color, outline_color, BrushWidth);
 				else
 					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
 			}

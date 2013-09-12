@@ -2090,12 +2090,8 @@ msgstr ""
 msgid "Text - Finalize"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:190
-msgid "Arrow 1"
-msgstr ""
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:210
-msgid "Arrow 2"
+#: Pinta.Tools/Tools/LineCurveTool.cs:229
+msgid "Arrow"
 msgstr ""
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:227

@@ -171,7 +171,9 @@ namespace Pinta.Tools
 					g.Stroke ();
 				} else if (FillShape) {
 					g.Color = outline_color;
-					g.Fill ();
+					g.FillPreserve();
+					g.Color = outline_color;
+					g.Stroke();
 				} else {
 					g.Color = outline_color;
 					g.Stroke ();
@@ -223,7 +225,9 @@ namespace Pinta.Tools
 					g.Stroke ();
 				} else if (FillShape) {
 					g.Color = outline_color;
-					g.Fill ();
+					g.FillPreserve();
+					g.Color = outline_color;
+					g.Stroke();
 				} else {
 					g.Color = outline_color;
 					g.Stroke ();

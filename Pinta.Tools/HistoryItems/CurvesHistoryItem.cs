@@ -48,7 +48,10 @@ namespace Pinta.Tools
 		/// <param name="text">The history item's title.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer) : base(icon, text)
+		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
+		/// <param name="passedSelectedPointCurveIndex">The selected point's curve index.</param>
+		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
+			int passedSelectedPointIndex, int passedSelectedPointCurveIndex) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
 
@@ -66,8 +69,8 @@ namespace Pinta.Tools
 
 
 			cEngines = Pinta.Tools.LineCurveTool.cEngines.PartialClone();
-			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
-			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
+			selectedPointIndex = passedSelectedPointIndex;
+			selectedPointCurveIndex = passedSelectedPointCurveIndex;
 		}
 
 		public override void Undo()

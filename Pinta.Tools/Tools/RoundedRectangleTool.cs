@@ -147,7 +147,7 @@ namespace Pinta.Tools
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedRoundedRectangle (rect, Radius, fill_color, outline_color, BrushWidth);
 				else if (FillShape)
-					dirty = g.FillRoundedRectangle (rect, Radius, outline_color);
+					dirty = g.FillStrokedRoundedRectangle(rect, Radius, outline_color, outline_color, BrushWidth);
 				else
 					dirty = g.DrawRoundedRectangle (rect, Radius, outline_color, BrushWidth);
 			}

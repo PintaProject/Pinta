@@ -76,7 +76,7 @@ namespace Pinta.Tools
 					if (FillShape && StrokeShape)
 						dirty = g.FillStrokedRectangle(rect, fill_color, outline_color, BrushWidth);
 					else if (FillShape)
-						dirty = g.FillRectangle(rect, outline_color);
+						dirty = g.FillStrokedRectangle(rect, outline_color, outline_color, BrushWidth);
 					else
 						dirty = g.DrawRectangle(rect, outline_color, BrushWidth);
 				}
@@ -87,7 +87,7 @@ namespace Pinta.Tools
 					if (FillShape && StrokeShape)
 						dirty = g.FillStrokedFullRectangle(rect, fill_color, outline_color, BrushWidth);
 					else if (FillShape)
-						dirty = g.FillRectangle(rect, outline_color);
+						dirty = g.FillStrokedFullRectangle(rect, outline_color, outline_color, BrushWidth);
 					else
 						dirty = g.DrawFullRectangle(rect, outline_color, BrushWidth);
 				}
