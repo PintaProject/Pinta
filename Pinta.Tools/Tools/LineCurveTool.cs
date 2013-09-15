@@ -36,7 +36,7 @@ namespace Pinta.Tools
 	public class LineCurveTool : ShapeTool
 	{
 		private static readonly Color hoverColor =
-			new Color(ToolControl.FillColor.R / 2d, ToolControl.FillColor.G / 2d, ToolControl.FillColor.B / 2d, ToolControl.FillColor.A / 3d);
+			new Color(ToolControl.FillColor.R / 2d, ToolControl.FillColor.G / 2d, ToolControl.FillColor.B / 2d, ToolControl.FillColor.A * 2d / 3d);
 
 		private const double CurveClickStartingRange = 10d;
 		private const double CurveClickThicknessFactor = 1d;
@@ -1140,7 +1140,24 @@ namespace Pinta.Tools
 
 			drawCurves(false, false, false);
 
+			PintaCore.Palette.PrimaryColorChanged += new EventHandler(Palette_PrimaryColorChanged);
+			PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
+
 			base.OnActivated();
+		}
+
+		void Palette_PrimaryColorChanged(object sender, EventArgs e)
+		{
+			outline_color = PintaCore.Palette.PrimaryColor;
+
+			drawCurves(false, false, false);
+		}
+
+		void Palette_SecondaryColorChanged(object sender, EventArgs e)
+		{
+			fill_color = PintaCore.Palette.SecondaryColor;
+
+			drawCurves(false, false, false);
 		}
 
 		protected override void OnDeactivated()
@@ -1149,6 +1166,9 @@ namespace Pinta.Tools
 
 			//Finalize the previous curve (if needed).
 			drawCurves(false, true, false);
+
+			PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
+			PintaCore.Palette.SecondaryColorChanged += Palette_SecondaryColorChanged;
 
 			base.OnDeactivated();
 		}
