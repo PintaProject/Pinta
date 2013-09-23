@@ -94,7 +94,6 @@
       <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Addins, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -106,6 +105,7 @@
     <Reference Include="Mono.Addins.Setup, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <HintPath>..\lib\Mono.Addins.Setup.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
