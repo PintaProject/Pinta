@@ -194,6 +194,7 @@
     <Compile Include="MacInterop\Carbon.cs" />
     <Compile Include="MacInterop\CoreFoundation.cs" />
     <Compile Include="MacInterop\IgeMacMenu.cs" />
+    <Compile Include="AddinSetupService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
