@@ -27,6 +27,7 @@
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
+using Mono.Unix;
 
 namespace Pinta
 {
@@ -47,7 +48,7 @@ namespace Pinta
 			string url = GetPlatformRepositoryUrl ();
 			if (!Repositories.ContainsRepository (url)) {
 				var rep = Repositories.RegisterRepository (null, url, false);
-				rep.Name = "Pinta Platform Dependent Add-in Repository";
+				rep.Name = Catalog.GetString ("Pinta Platform Dependent Add-in Repository");
 				if (!enable)
 					Repositories.SetRepositoryEnabled (url, false);
 			}
@@ -55,7 +56,7 @@ namespace Pinta
 			url = GetAllRepositoryUrl ();
 			if (!Repositories.ContainsRepository (url)) {
 				var rep2 = Repositories.RegisterRepository (null, url, false);
-				rep2.Name = "Pinta Platform Independent Add-in Repository";
+				rep2.Name = Catalog.GetString ("Pinta Platform Independent Add-in Repository");
 				if (!enable)
 					Repositories.SetRepositoryEnabled (url, false);
 			}
