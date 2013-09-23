@@ -66,7 +66,7 @@ namespace Pinta
 		{
 			string platform;
 			if (SystemManager.GetOperatingSystem () == OS.Windows)
-				platform = "Win";
+				platform = "Windows";
 			else if (SystemManager.GetOperatingSystem () == OS.Mac)
 				platform = "Mac";
 			else
