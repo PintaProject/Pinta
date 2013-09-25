@@ -914,8 +914,8 @@ namespace Pinta.Tools
 						//Draw a ring around the selected point.
 						g.FillStrokedEllipse(
 							new Rectangle(
-								SelectedCurveEngine.ControlPoints[selectedPointIndex].Position.X - controlPointOffset * 4d,
-								SelectedCurveEngine.ControlPoints[selectedPointIndex].Position.Y - controlPointOffset * 4d,
+								SelectedPoint.Position.X - controlPointOffset * 4d,
+								SelectedPoint.Position.Y - controlPointOffset * 4d,
 								controlPointOffset * 8d, controlPointOffset * 8d),
 							ToolControl.FillColor, ToolControl.StrokeColor, 1);
 					}
@@ -1570,7 +1570,7 @@ namespace Pinta.Tools
 				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 				doc.History.PushNewItem(
 					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer,
-						previousSelectedPointIndex, previousSelectedPointCurveIndex));
+						-1, previousSelectedPointCurveIndex));
 
 				is_drawing = true;
 
