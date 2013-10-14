@@ -106,7 +106,6 @@ namespace Pinta
 			PintaCore.Actions.File.Close.Sensitive = enable;
 			PintaCore.Actions.File.Save.Sensitive = enable;
 			PintaCore.Actions.File.SaveAs.Sensitive = enable;
-			PintaCore.Actions.File.Print.Sensitive = enable;
 			PintaCore.Actions.Edit.Copy.Sensitive = enable;
 			PintaCore.Actions.Edit.CopyMerged.Sensitive = enable;
 			PintaCore.Actions.Edit.Cut.Sensitive = enable;

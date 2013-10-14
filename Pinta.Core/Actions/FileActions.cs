@@ -42,7 +42,6 @@ namespace Pinta.Core
 		public Gtk.Action Close { get; private set; }
 		public Gtk.Action Save { get; private set; }
 		public Gtk.Action SaveAs { get; private set; }
-		public Gtk.Action Print { get; private set; }
 		public Gtk.Action Exit { get; private set; }
 		
 		public event EventHandler BeforeQuit;
@@ -64,7 +63,6 @@ namespace Pinta.Core
 			Close = new Gtk.Action ("Close", Catalog.GetString ("Close"), null, Stock.Close);
 			Save = new Gtk.Action ("Save", Catalog.GetString ("Save"), null, Stock.Save);
 			SaveAs = new Gtk.Action ("SaveAs", Catalog.GetString ("Save As..."), null, Stock.SaveAs);
-			Print = new Gtk.Action ("Print", Catalog.GetString ("Print"), null, Stock.Print);
 			Exit = new Gtk.Action ("Exit", Catalog.GetString ("Quit"), null, Stock.Quit);
 
 			New.ShortLabel = Catalog.GetString ("New");
@@ -73,7 +71,6 @@ namespace Pinta.Core
 			Save.IsImportant = true;
 			
 			Close.Sensitive = false;
-			Print.Sensitive = false;
 		}
 
 		#region Initialization
@@ -86,8 +83,6 @@ namespace Pinta.Core
 			menu.AppendSeparator ();
 			menu.Append (Save.CreateAcceleratedMenuItem (Gdk.Key.S, Gdk.ModifierType.ControlMask));
 			menu.Append (SaveAs.CreateAcceleratedMenuItem (Gdk.Key.S, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.AppendSeparator ();
-			menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 			menu.AppendSeparator ();
 			menu.Append (Close.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask));
 			menu.Append (Exit.CreateAcceleratedMenuItem (Gdk.Key.Q, Gdk.ModifierType.ControlMask));

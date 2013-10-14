@@ -35,12 +35,10 @@ namespace Pinta.Actions
 
 		public void Initialize ()
 		{
-			PintaCore.Actions.File.Print.Activated += HandleActivated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.File.Print.Activated -= HandleActivated;
 		}
 
 		#endregion
