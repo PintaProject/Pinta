@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-03-30 16:24+0000\n"
-"Last-Translator: qinghao <qinghao1@foxmail.com>\n"
+"PO-Revision-Date: 2013-07-03 16:09+0000\n"
+"Last-Translator: ZhengJianhui <zheng1733@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:40+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -80,13 +80,13 @@ msgstr "标签"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr "方形"
+msgstr "圆圈"
 
 #: Pinta.Tools/Brushes/PlainBrush.cs:37
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:181
 #: Pinta.Core/Effects/UserBlendOps.cs:52
 msgid "Normal"
-msgstr "普通"
+msgstr "一般"
 
 #: Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
@@ -94,7 +94,7 @@ msgstr "网格"
 
 #: Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
-msgstr "方块"
+msgstr "方格"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
@@ -1070,6 +1070,7 @@ msgstr ""
 "  Hello World! https://launchpad.net/~liuwanfang86\n"
 "  Wylmer Wang https://launchpad.net/~wantinghard\n"
 "  Xhacker Liu https://launchpad.net/~xhacker\n"
+"  ZhengJianhui https://launchpad.net/~zheng1733\n"
 "  qinghao https://launchpad.net/~qinghao1\n"
 "  邵开来 https://launchpad.net/~kailai.shao"
 

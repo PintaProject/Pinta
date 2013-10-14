@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-18 10:16+0000\n"
+"PO-Revision-Date: 2013-06-09 07:02+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian translators\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "Language: sr\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
@@ -45,7 +45,7 @@ msgstr "Кликните да се пребаците између основн�
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Кликните да повратите основну и споредну боју."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
@@ -60,6 +60,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Леви клик да поставите основну боју. Десни клик да поставите споредну боју. "
+"Средњи клик да да изаберете палету боја."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -120,6 +122,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Леви клик да слободном руком нацртате линије ширине једне тачкице основном "
+"бојом. Десни клик да користите споредну боју."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -241,6 +245,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Кликните и превуците да исцртате правоугаоник (десни клик за споредну боју). "
+"Држите помак да ограничите на квадрат."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -333,6 +339,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Кликните и превуците да исцртате елипсу (десни клик за споредну боју). "
+"Држите помак да ограничите на круг."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -343,6 +351,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Кликните и превуците да исцртате заобљени правоугаоник (десни клик за "
+"споредну боју). Држите помак да ограничите на квадрат."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -490,6 +500,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Кликните и превуците да исцртате елипсоидни избор. Држите помак да "
+"ограничите на круг."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -532,6 +544,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Кликните и превуците да исцртате правоугаони избор. Држите помак да "
+"ограничите на квадрат."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1356,7 +1370,7 @@ msgstr "Слојеви"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "Платно"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2122,4 +2136,4 @@ msgstr "(обезбеђује га {0})"
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Текст — Доврши"

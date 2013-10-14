@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-04-13 10:26+0000\n"
-"Last-Translator: Ciprian <c1pr1an_43v3r@yahoo.com>\n"
+"PO-Revision-Date: 2013-05-19 18:24+0000\n"
+"Last-Translator: Elvis Alistar <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -45,7 +45,7 @@ msgstr "Dați clic pentru a trece de la culoarea primară la cea secundară."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Click pentru a reseta culoarea principală și cea secundară."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
@@ -105,7 +105,7 @@ msgstr "Stropi"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "Duplică marca"
+msgstr "Ștampilă de clonare"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
@@ -120,6 +120,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Click stânga pentru a desena linii arbitrare cu lățimea de un pixel folosind "
+"culoarea principală. Click dreapta pentru a folosi culoarea secundară."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -186,27 +188,27 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "Prelevare de probe"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr ""
+msgstr "Un Singur Pixel"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "Regiune 3 x 3"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "Regiune 5 x 5"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "Regiune 7 x 7"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "Regiune 9 x 9"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
 msgid "Layer"
@@ -214,7 +216,7 @@ msgstr "Strat"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr ""
+msgstr "Imagine"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
@@ -230,7 +232,7 @@ msgstr "Schimbă la unealta precedentă"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
-msgstr "Schimbă pe creion"
+msgstr "Schimbă la creion"
 
 #: Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
@@ -241,6 +243,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Click și trage pentry a desena un dreptunghi (click dreapta pentru a folosi "
+"culoarea secundară). Apasă tasta Shift pentru a desena un pătrat."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -274,6 +278,8 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Click stânga pe selecție și trage pentru a muta conturul selecției. Click "
+"dreapta pe selecție și trage pentru a roti conturul selecției."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -287,6 +293,8 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Click stânga pe selecție și trage pentru a muta conținutul selecției. Click "
+"dreapta pe selecție și trage pentru a roti conținutul selecției."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -329,6 +337,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Click și trage pentru a desena o elipsă (click dreapta pentru a folosi "
+"culoarea secundară). Ține apăsată tasta Shift pentru a desena un cerc."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -339,6 +349,9 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Click și trage pentru a desena un dreptunghi cu colțuri rotunjite (click "
+"dreapta pentru a folosi culoarea secundară). Ține apăsată tasta Shift pentru "
+"a desena un pătrat."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -361,6 +374,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
+"Click stânga pentru a desena folosind culoarea primară, click dreapta pentru "
+"culoarea secundară. Ține apăsată tasta Shift pentru a folosi unghiuri fixe."
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
 msgid "Flood Mode"
@@ -461,7 +476,7 @@ msgstr "Evidențiază contururi"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:184
 msgid "Fill Background"
-msgstr ""
+msgstr "Umple fundalul"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:192
 msgid "Outline width"
@@ -484,30 +499,32 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Click și trage pentru a desena o selecție eliptică. Ține apăsată tasta Shift "
+"pentru a constrânge selecția la forma de cerc."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "Înlocuiește"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "Uniune (+) (Ctrl + Click stânga)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Exclude (-) (Click dreapta)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "Xor (Ctrl + Click dreapta)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Intersecție (Shift + Click stânga)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Modul de selecție: "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -526,6 +543,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Click și trage pentru a desena o selecție rectangulară. Ține apăsată tasta "
+"Shift pentru a constrânge selecția la forma de pătrat."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -606,7 +625,7 @@ msgstr "Deschide imagine"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "Permisiune respinsă"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -616,7 +635,7 @@ msgstr "Nu am putut deschide fişierul: {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Nici o unealtă selectată."
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -645,7 +664,7 @@ msgstr "Copiază"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Copiază mixat"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
@@ -749,11 +768,11 @@ msgstr "Paletă GIMP (*.gpl)"
 #: Pinta.Core/Actions/ImageActions.cs:59
 #: Pinta.Core/Actions/ImageActions.cs:277
 msgid "Crop to Selection"
-msgstr "Taie cat e selecţia"
+msgstr "Decupează selecția"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Auto Crop"
-msgstr ""
+msgstr "Auto Decupare"
 
 #: Pinta.Core/Actions/ImageActions.cs:61
 msgid "Resize Image..."
@@ -761,7 +780,7 @@ msgstr "Redimensionare imagine..."
 
 #: Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Redimensionează Canvas"
 
 #: Pinta.Core/Actions/ImageActions.cs:63 Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
@@ -844,7 +863,7 @@ msgstr "Unităţi de măsură riglă"
 
 #: Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "Administrator de module"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:292
@@ -872,7 +891,7 @@ msgstr "Importă din fișier..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr ""
+msgstr "Rotire / Zoom strat..."
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:219
@@ -951,23 +970,23 @@ msgstr "Despre aplicație"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "Multiplicare"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
-msgstr ""
+msgstr "Sumare"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "Culoare arsă"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "Culoare evitată"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "Reflectă"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -976,31 +995,31 @@ msgstr "luminiscență"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "Suprapunere"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "Diferenţă"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
-msgstr ""
+msgstr "Negare"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Iluminare"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Închide culoarea"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Ecran"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
-msgstr ""
+msgstr "Xor"
 
 #: Pinta.Core/Classes/BaseTool.cs:192
 msgid "Tool"
@@ -1058,11 +1077,11 @@ msgstr "de contribuitorii Pinta"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "Imaginea nu poate fi lipită"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "Nu există nici o imagine în Clipboard"
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -1074,27 +1093,28 @@ msgstr "Cale"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Au contribuit la această versiune:"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Au contribuit la versiunile anterioare:"
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  9emE0iL18gxCqLTa https://launchpad.net/~9eme0il18gxcqlta\n"
 "  Alex https://launchpad.net/~icidrop\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Ciprian https://launchpad.net/~c1pr1ancip\n"
+"  Elvis Alistar https://launchpad.net/~ealis2001\n"
 "  Ion https://launchpad.net/~vaneam\n"
 "  Istrate Sebastian https://launchpad.net/~sebyx87\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Nagy Ákos https://launchpad.net/~e-contact-pecska-ro\n"
 "  Nicolae Crefelean https://launchpad.net/~kneekoo\n"
 "  Radu Zoran https://launchpad.net/~radu-r2dev\n"
-"  ciplogic https://launchpad.net/~ciprian-mustiata\n"
-"  monocoder https://launchpad.net/~monocoder"
+"  ciplogic https://launchpad.net/~ciprian-mustiata"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
@@ -1110,7 +1130,7 @@ msgstr "Sunt utilizate unele pictograme din:"
 
 #: Pinta/Dialogs/AboutDialog.cs:167
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "Bazat pe Mono:"
 
 #: Pinta/Dialogs/AboutDialog.cs:274
 msgid "About Pinta"
@@ -1155,12 +1175,12 @@ msgstr "numărul firelor de execuţie utilizate pentru randare"
 
 #: Pinta/Options.cs:486
 msgid "OptionName"
-msgstr "Nume opțiune"
+msgstr "NumeOpțiune"
 
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
 msgid "Rotate / Zoom Layer"
-msgstr ""
+msgstr "Rotire / Zoom Strat"
 
 #: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
 msgid "Layer Opacity"
@@ -1188,21 +1208,23 @@ msgstr "Noua mărime a paletei:"
 
 #: Pinta/Actions/Edit/PasteAction.cs:125
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Imagine mai mare decât canvas"
 
 #: Pinta/Actions/Edit/PasteAction.cs:126
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
+"Imaginea care trebuie lipită este mai mare decât spațiul de desen. Ce doriți "
+"să faceți?"
 
 #: Pinta/Actions/Edit/PasteAction.cs:130
 msgid "Expand canvas"
-msgstr ""
+msgstr "Mărește spațiul de desen"
 
 #: Pinta/Actions/Edit/PasteAction.cs:131
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "Nu schimba dimensiunea spațiului de desen"
 
 #: Pinta/Actions/File/OpenDocumentAction.cs:64
 msgid "Image files"
@@ -1226,15 +1248,15 @@ msgstr "Pinta nu susţine salvarea imaginii in acest tip de fişier"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Fișierul read-only nu poate fi salvat."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
-msgstr ""
+msgstr "Imagine prea mare"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr ""
+msgstr "Fișierele cu extensia ICO nu pot fi mai mare de 255 x 255 pixeli."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 #, csharp-format
@@ -1292,7 +1314,7 @@ msgstr "Efe_cte"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr ""
+msgstr "E_xtensii"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -1356,7 +1378,7 @@ msgstr "Straturi"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "Spațiu de desen"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1368,7 +1390,7 @@ msgstr "Unelte"
 
 #: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
 msgid "Images"
-msgstr ""
+msgstr "Imagini"
 
 #: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:91
 msgid "Hide"
@@ -1573,7 +1595,7 @@ msgstr "Relief"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr "Suprimare ochi roșii"
+msgstr "Îndepărtare efect de ochi roșii"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: Pinta.Effects/Effects/GlowEffect.cs:38
@@ -1700,7 +1722,7 @@ msgstr "Centrat"
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr ""
+msgstr "Asprime"
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
@@ -1728,7 +1750,7 @@ msgstr "Distanță"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "Comportament la margine"
 
 #: MandelbrotFractalEffect dialog FragmentEffect
 msgid "Factor"
@@ -1760,7 +1782,7 @@ msgstr "Mărime vârf pensulă"
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr ""
+msgstr "Percentilă"
 
 #: RadialBlurEffect dialog
 msgid "Power"
@@ -1826,295 +1848,307 @@ msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
+"Selecție multiplă:\n"
+"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "Activează"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "Dezactivează"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Nici o selecție"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Disponibil în repository"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Actualizare disponibilă"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
 msgstr ""
+"Această extensie nu poate fi încărcată deoarece nu au putut fi găsite "
+"dependințele"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
+msgstr "Necesar: {0} v{1}, găsit v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "Lipsește: {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "Versiune instalată"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Versiune Repository"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "Dimensiune download"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
+"Următoarele dependințe necesare pentru această extensie nu sunt disponibile:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "Instalare anulată"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "O parte din modulele obligatorii nu au fost găsite"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "Instalare nereușită"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "Instalat"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Actualizări"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Galerie"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Toate sursele"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Management Surse..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} actualizare disponibilă"
+msgstr[1] "{0} actualizări disponibile"
+msgstr[2] ""
+"{0} actualizare disponibilă\r\n"
+"{0} actualizări disponibile"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "Actualizare sursă"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "Instalează pachet actualizare"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Pachete cu actualizări"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Nu a fost găsită nici o extensie"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Extensie"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Altele"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Dezinstalează"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "Următoarele pachete vor fi dezinstalate:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Există alte extensii care depind de extensiile anteriaore care vor fi de "
+"asemenea dezinstalate:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"Următoarele extensii nu pot fi instalate pentru că există conflicte în "
+"dependințe."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Următoarele pachete vor fi instalate:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (în directorul utilizatorului)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Următoarele pachete trebuie dezinstalate:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Următoarele dependențe nu au putut fi rezolvate:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "Sigur doriți anularea instalării?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Instalează extensii"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "Instalare eșuată!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "Instalarea s-a terminat cu avertizări."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Dezinstalează extensii"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "Dezinstalarea a eșuat!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "Dezinstalarea s-a terminat cu avertizări."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Înregistrare sursă"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "A apărut o excepție: {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Informații suplimentare"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Instalează..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Actualizare"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "_Dezinstalează..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "Sunt necesare extensii adiționale pentru a efectua această operație."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Următoarele extensii vor fi instalate:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Nu au fost găsite actualizări"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Reactualizare"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Actualizează toate"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Sursă:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Instalează din fișier..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Detalii"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Instalează"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Management surse extensii"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Adaugă sursă nouă"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "Selectați locația sursei pe care doriți să o înregistrați:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Înregistrează o sursă online"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "Url:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Înregistrează o sursă locală"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Cale:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Navighează..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "În desfășurare"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(furnizat de către {0})"
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Text - Finalizare"

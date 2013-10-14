@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-05-07 10:47+0000\n"
-"Last-Translator: Martin Tesar <tesarmar@gmail.com>\n"
+"PO-Revision-Date: 2013-05-20 10:53+0000\n"
+"Last-Translator: schunka <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -44,7 +44,7 @@ msgstr "Kliknutím zaměníte primární a sekundární barvu."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Kliknutím restartujete primární a skundární barvu."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
@@ -119,6 +119,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Levým klikem nakreslíte volnou čáru širokou 1px primární bravou. Pravý klik "
+"použijte pro kreslení sekundární barvou."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -238,6 +240,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Kliknutím a tažením nakreslíte obdélník (pravé tlačítko myši pro sekundární "
+"barvu). Držte shift pro omezení na kresbu čtverce."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -268,6 +272,8 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Kliknutím a tažením výběru můžete hýbat obrysem výběru. Pravým klikem a "
+"tažením otáčejte obrysem výběru."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -281,6 +287,8 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Kliknutím a tažením výběru pohybujte vybraným obsahem. Pravý klikem a "
+"tažením výběru otáčejte výbraným obsahem."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -323,6 +331,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Kliknutím a tažením nakreslíte elipsu (pravým klikem sekundární barvou). "
+"Držte shift k nakreslení kruhu."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -333,6 +343,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Kliknutím a tažením nakreslíte zakulacený obdélník (pravým klikem sekundární "
+"barvou). Držte shift k nakreslení čtverce."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -496,15 +508,15 @@ msgstr "Odečíst"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "Xor (Ctrl +Pravý klik)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Prolnutí (Shift + Levý klik)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Mód výběru: "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -523,6 +535,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Kliknutím a tažením nakreslíte obdélníkový výběr. Držte shift k nakreslení "
+"čtverce."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1284,7 +1298,7 @@ msgstr "Efe_kty"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr ""
+msgstr "D_oplňky"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -2116,4 +2130,4 @@ msgstr "(poskytuje {0})"
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Text - Dokončení"

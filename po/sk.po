@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-10-15 12:33+0000\n"
-"Last-Translator: helix84 <Unknown>\n"
+"PO-Revision-Date: 2013-05-27 18:40+0000\n"
+"Last-Translator: Slavko <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -44,7 +44,7 @@ msgstr "Kliknutím prepnete medzi primárnou a sekundárnou farbou"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Kliknite na zmenu primárnej a sekundárnej farby"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
@@ -59,6 +59,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Ľavým tlačidlom myši nastavíte primárnu farbu, pravým nastavíte sekundárnu "
+"farbu a prostredné umožní výber farby z palety."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -117,6 +119,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Ľavým tlačidlom myši kreslite voľnou rukou čiary s hrúbkou jeden bod "
+"primárnou farbou. Pravým tlačidlom použite sekundárnu farbu."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -238,6 +242,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Kliknite a ťahajte na kreslenie pravouholníka (pravé tlačidlo pre sekundárnu "
+"farbu). Podržte Shift na vynútenie štvorca."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -328,6 +334,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Kliknite a ťahajte na kreslenie elipsy (pravé tlačidlo pre sekundárnu "
+"farbu). Podržte Shift na vynútenie kruhu."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -338,6 +346,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Kliknite a ťahajte na kreslenie zaobleného pravouholníka (pravé tlačidlo pre "
+"sekundárnu farbu). Podržte Shift na vynútenie štvorca."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -485,6 +495,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Kliknite a ťahajte na kreslenie eliptického výberu. Podržte Shift na "
+"vynútenie kruhového."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -527,6 +539,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Kliknite a ťahajte na kreslenie pravouhlého výberu. Podržte Shift na "
+"vynútenie štvorcového."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -1086,6 +1100,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  DAG Software https://launchpad.net/~dagsoftware\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Slavko https://launchpad.net/~linux-slavino\n"
 "  helix84 https://launchpad.net/~helix84\n"
 "  xXx https://launchpad.net/~michalhusar-it"
 
@@ -1347,7 +1362,7 @@ msgstr "Vrstvy"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "Plátno"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2115,4 +2130,4 @@ msgstr "(poskytuje {0})"
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Text – Finalizácia"

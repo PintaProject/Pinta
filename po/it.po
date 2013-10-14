@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-02-08 06:17+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2013-06-27 15:54+0000\n"
+"Last-Translator: andrea venturi <be17068@iperbole.bo.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:40+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -40,25 +40,27 @@ msgstr "Scegli Tavolozza dei Colori"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
-msgstr ""
+msgstr "Clicca per ruotare tra il colore primario e quello secondario"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Clicca per selezionare i colori primario e secondario"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Clicca per selezionare il colore primario"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Clicca per selezionare il colore secondario"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Click sinistro per settare il colore primario. Click destro per settare il "
+"colore secondario. Click centrale per scegliere la paletta dei colori"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -80,7 +82,7 @@ msgstr "etichetta"
 
 #: Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr "Circolare"
+msgstr "Cerchi"
 
 #: Pinta.Tools/Brushes/PlainBrush.cs:37
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:181
@@ -98,7 +100,7 @@ msgstr "Quadrati"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "Splatter"
+msgstr "Schizzo"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -119,6 +121,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Tasto sinistro per disegnare a mano libera linee di un punto di larghezza "
+"col colore primario. Tasto destro per usare il colore secondario."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -136,7 +140,7 @@ msgstr ""
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:71
 #: Pinta.Tools/Tools/ShapeTool.cs:131
 msgid "Fill Style"
-msgstr "Stile di ripempimento"
+msgstr "Stile di riempimento"
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:78
 #: Pinta.Tools/Tools/ShapeTool.cs:138
@@ -185,11 +189,11 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "Campionamento"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr ""
+msgstr "Singolo punto"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
@@ -240,6 +244,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Premi e trascina per disegnare un rettangolo (premi il destro per il colore "
+"secondario). Tieni premuto il tasto Maiusc per forzare la forma quadrata."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -254,7 +260,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/ZoomTool.cs:48
 msgid "Zoom"
-msgstr "Ingradimento"
+msgstr "Ingrandimento"
 
 #: Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
@@ -273,6 +279,9 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Premi il tasto sinistro e trascina la selezione per traslare il contorno "
+"della selezione. Premi il tasto destro e trascina la selezioneper ruotare il "
+"contorno della selezione."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -329,6 +338,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Premi e trascina per disegnare una ellisse (premi il tasto destro per il "
+"colore secondario). Tieni premuto Maiusc per forzare un cerchio."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -339,6 +350,9 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Premi e trascina per disegnare una rettangolo arrotondato (premi il tasto "
+"destro per il colore secondario). Tieni premuto Maiusc per forzare un "
+"quadrato."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -487,30 +501,32 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Premi e trascina per disegnare una sezione ellittica. Tieni premuto Maiusc "
+"per forzare un cerchio."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "Sostituisci"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "Unisci (+) (Control + Tasto Sinistro)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Escludi (-) (Tasto Destro)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "Xor (Control + Tasto Destro)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Intersezione (Maiusc + Tasto Sinistro)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Modo di Selezione: "
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:102
 msgid "Magic Wand Select"
@@ -529,6 +545,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Premi e trascina per disegnare una selezione rettangolare. Tieni premuto "
+"Maiusc per forzare un quadrato."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -609,7 +627,7 @@ msgstr "Apri immagine"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "Permesso negato"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -619,7 +637,7 @@ msgstr "Impossibile aprire il file: {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Nessuno strumento selezionato."
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -648,7 +666,7 @@ msgstr "Copia"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Copia Fusa"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
@@ -874,7 +892,7 @@ msgstr "Importa dal file..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr ""
+msgstr "Ruotare / Zoom Livello..."
 
 #: Pinta.Core/Actions/LayerActions.cs:73
 #: Pinta.Core/Actions/LayerActions.cs:219
@@ -953,23 +971,23 @@ msgstr "Informazioni su Pinta"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "Moltiplica"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
-msgstr ""
+msgstr "Additivo"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "Brucia colore"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "Slava colore"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "Rifletti"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -978,27 +996,27 @@ msgstr "Luminosità"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "Sovrapposizione"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "Differenza"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
-msgstr ""
+msgstr "Inversione"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Schiarisci"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Scurisci"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Schermo"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
@@ -1006,7 +1024,7 @@ msgstr "Xor"
 
 #: Pinta.Core/Classes/BaseTool.cs:192
 msgid "Tool"
-msgstr "Strumenti"
+msgstr "Strumento"
 
 #: Pinta.Core/Classes/BaseTool.cs:263
 msgid "Shortcut key"
@@ -1035,7 +1053,7 @@ msgstr "copia"
 #: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "Ridimensiona Tela"
+msgstr "Ridimensiona dimensioni"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
@@ -1076,11 +1094,11 @@ msgstr "Percorso"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Collaboratori a questa versione:"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Collaboratori precedenti:"
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
@@ -1100,13 +1118,15 @@ msgstr ""
 "  Nicola Moretto https://launchpad.net/~nicola88\n"
 "  Pullus In Fabula https://launchpad.net/~zatunga11\n"
 "  Valeria De Luca https://launchpad.net/~adilaksmi\n"
+"  andrea venturi https://launchpad.net/~be17068\n"
 "  flux https://launchpad.net/~luigimarco\n"
 "  giacomo margarito https://launchpad.net/~eagleman\n"
 "  joshg https://launchpad.net/~joshg\n"
 "  magic3 https://launchpad.net/~magic3\n"
 "  nTia89 https://launchpad.net/~tia-tif-deactivatedaccount-"
 "deactivatedaccount\n"
-"  simone.sandri https://launchpad.net/~lexluxsox"
+"  simone.sandri https://launchpad.net/~lexluxsox\n"
+"  tommaso scappini https://launchpad.net/~tommasoscappini"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
@@ -1172,7 +1192,7 @@ msgstr "Opzioni Nome"
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
 #: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
 msgid "Rotate / Zoom Layer"
-msgstr ""
+msgstr "Ruotare / Zoom Livello"
 
 #: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
 msgid "Layer Opacity"
@@ -1200,7 +1220,7 @@ msgstr "Nuova dimensione Tavolozza:"
 
 #: Pinta/Actions/Edit/PasteAction.cs:125
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Immagine più grande della dimensione della superficie"
 
 #: Pinta/Actions/Edit/PasteAction.cs:126
 msgid ""
@@ -1370,7 +1390,7 @@ msgstr "Livelli"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "Superficie"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"

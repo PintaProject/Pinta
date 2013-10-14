@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-09-27 13:37+0000\n"
+"PO-Revision-Date: 2013-08-09 11:42+0000\n"
 "Last-Translator: taijuin lee <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-05-18 18:08+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -32,7 +32,7 @@ msgstr "選擇主要顏色"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:99
 msgid "Choose Secondary Color"
-msgstr "選擇第二顏色"
+msgstr "選擇次要顏色"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
 msgid "Choose Palette Color"
@@ -40,25 +40,25 @@ msgstr "選擇調色盤顏色"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
-msgstr ""
+msgstr "按一下以切換主要和次要之間的顏色。"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "按一下以重設主要和次要的顏色。"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "按一下以選取主要顏色。"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "按一下以選取次要顏色。"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
-msgstr ""
+msgstr "按一下滑鼠左鍵設定主要顏色。按一下滑鼠右鍵設定次要顏色。按一下中間鍵選擇調色盤的顏色。"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -116,7 +116,7 @@ msgstr "鉛筆"
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
-msgstr ""
+msgstr "按滑鼠左鍵用主要顏色畫出自由變形且一像素寬的線條。按滑鼠右鍵將使用次要顏色。"
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -127,7 +127,7 @@ msgstr "自由形態形狀"
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr "畫圖時，按滑鼠左鍵畫出來的顏色是主要顏色，按滑鼠右鍵畫出來的顏色是第二顏色。"
+msgstr "畫圖時，按滑鼠左鍵畫出來的顏色是主要顏色，按滑鼠右鍵畫出來的顏色是次要顏色。"
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:71
 #: Pinta.Tools/Tools/ShapeTool.cs:131
@@ -175,7 +175,7 @@ msgstr "顏色拾取器"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "按滑鼠左鍵設置主要顏色，按滑鼠右鍵設置第二顏色。"
+msgstr "按滑鼠左鍵設置主要顏色，按滑鼠右鍵設置次要顏色。"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
@@ -233,7 +233,7 @@ msgstr "矩形"
 msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
-msgstr ""
+msgstr "點擊並拖動畫出一個矩形（若用右擊則為次要顏色）。按住Shift鍵來限制為一個正方形。"
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -242,7 +242,7 @@ msgstr "橡皮擦"
 #: Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
-msgstr "按滑鼠左鍵擦拭變成透明，按滑鼠右鍵擦拭變成第二顏色。 "
+msgstr "按滑鼠左鍵擦拭變成透明，按滑鼠右鍵擦拭變成次要顏色。 "
 
 #: Pinta.Tools/Tools/ZoomTool.cs:48
 msgid "Zoom"
@@ -285,7 +285,7 @@ msgstr "油漆桶"
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
-msgstr "點擊滑鼠左鍵，用主要顏色填滿一區域。點擊滑鼠右鍵，則用的是第二顏色。"
+msgstr "點擊滑鼠左鍵，用主要顏色填滿一區域。點擊滑鼠右鍵，則用的是次要顏色。"
 
 #: Pinta.Tools/Tools/LassoSelectTool.cs:48
 msgid "Lasso Select"
@@ -301,7 +301,7 @@ msgstr "重新著色"
 
 #: Pinta.Tools/Tools/RecolorTool.cs:60
 msgid "Left click to replace the secondary color with the primary color."
-msgstr "按滑鼠左鍵,用主要顏色取代第二顏色。"
+msgstr "按滑鼠左鍵,用主要顏色取代次要顏色。"
 
 #: Pinta.Tools/Tools/RecolorTool.cs:73 Pinta.Tools/Tools/FloodTool.cs:93
 msgid "Tolerance"
@@ -369,7 +369,7 @@ msgstr "漸層"
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
-msgstr "按住滑鼠左鍵並拖動畫出從主要顏色到第二顏色的漸層顏色，按住滑鼠右鍵則相反。"
+msgstr "按住滑鼠左鍵並拖動畫出從主要顏色到次要顏色的漸層顏色，按住滑鼠右鍵則相反。"
 
 #: Pinta.Tools/Tools/GradientTool.cs:172
 msgid "Linear Gradient"
@@ -1264,7 +1264,7 @@ msgstr "效果(_C)"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr ""
+msgstr "增益集(_D)"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -1328,7 +1328,7 @@ msgstr "圖層"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "畫布"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
