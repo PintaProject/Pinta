@@ -59,22 +59,24 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-			"Adolfo Jayme Barrientos",
-			"Akshara Proddatoori",
 			"Andrew Davis",
-			"Balló György",
 			"Cameron White",
-			"John Burak",
+			"David Nabraczky",
+			"Don McComb",
+			"Elvis Alistar",
 			"Jonathan Pobst",
-			"Olivier Dufour",
-			"Robert Nordan"
+			"Robert Nordan",
+			"Tom Kadwill"
 		};
 
 		string[] oldAuthors = new string[] {
 			"Aaron Bockover",
 			"Adam Doppelt",
 			"Adolfo Jayme Barrientos",
+			"Akshara Proddatoori",
+			"Andrew Davis",
 			"Anirudh Sanjeev",
+			"Balló György",
 			"Cameron White",
 			"Ciprian Mustiata",
 			"Felix Schmutz",
@@ -83,6 +85,7 @@ namespace Pinta
 			"James Gifford",
 			"Jean-Michel Bea",
 			"Joe Hillenbrand",
+			"John Burak",
 			"Jon Rimmer",
 			"Jonathan Pobst",
 			"Juergen Obernolte",
