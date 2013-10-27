@@ -44,6 +44,7 @@ Building Pinta requires the following software:
 Pinta only supports version 2.8 or higher of Mono.
 
 To build Pinta, run:
+
 `./autogen.sh`
 
 `make`
