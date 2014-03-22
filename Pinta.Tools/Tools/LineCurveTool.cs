@@ -1078,17 +1078,34 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Calculate the modified position of current_point such that the angle between shape_origin
-		/// and current_point is snapped to the closest angle out of a certain number of angles.
+		/// Calculate the modified position of current_point such that the angle between the adjacent point
+		/// (if any) and current_point is snapped to the closest angle out of a certain number of angles.
 		/// </summary>
 		private void calculateModifiedCurrentPoint()
 		{
-			PointD dir = new PointD(current_point.X - shape_origin.X, current_point.Y - shape_origin.Y);
+			CurveEngine selEngine = SelectedCurveEngine;
+			ControlPoint adjacentPoint;
+
+			if (selectedPointIndex > 0)
+			{
+				adjacentPoint = selEngine.ControlPoints[selectedPointIndex - 1];
+			}
+			else if (selectedPointIndex + 1 < selEngine.ControlPoints.Count)
+			{
+				adjacentPoint = selEngine.ControlPoints[selectedPointIndex + 1];
+			}
+			else
+			{
+				//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
+				return;
+			}
+
+			PointD dir = new PointD(current_point.X - adjacentPoint.Position.X, current_point.Y - adjacentPoint.Position.Y);
 			double theta = Math.Atan2(dir.Y, dir.X);
 			double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
 
 			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
-			current_point = new PointD((shape_origin.X + len * Math.Cos(theta)), (shape_origin.Y + len * Math.Sin(theta)));
+			current_point = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
 		}
 
 		protected override void OnActivated()
@@ -1495,6 +1512,7 @@ namespace Pinta.Tools
 				}
 
 
+
 				//Next, take care of the old curve's data.
 
 				//Finalize the previous curve (if needed).
@@ -1505,38 +1523,43 @@ namespace Pinta.Tools
 				//Set the DashPattern for the finalized curve to be the same as the unfinalized curve's.
 				actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
-				//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
-				doc.History.PushNewItem(
-					new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer));
-
-				is_drawing = true;
 
 
 
-				//Then create the first two points of the line/curve. The second point will follow the mouse around until released.
-				if (ctrlKey && clickedOnControlPoint)
+				//Verify that the user clicked inside the image bounds.
+				if (point.X == shape_origin.X && point.Y == shape_origin.Y)
 				{
-					actEngine.ControlPoints.Add(new ControlPoint(new PointD(prevSelPoint.X, prevSelPoint.Y), DefaultEndPointTension));
-					actEngine.ControlPoints.Add(
-						new ControlPoint(new PointD(prevSelPoint.X + .01d, prevSelPoint.Y + .01d), DefaultEndPointTension));
+					//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
+					doc.History.PushNewItem(
+						new CurvesHistoryItem(Icon, Catalog.GetString("Line/Curve Added"), doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer));
 
-					clickedWithoutModifying = false;
+					is_drawing = true;
+
+					//Then create the first two points of the line/curve. The second point will follow the mouse around until released.
+					if (ctrlKey && clickedOnControlPoint)
+					{
+						actEngine.ControlPoints.Add(new ControlPoint(new PointD(prevSelPoint.X, prevSelPoint.Y), DefaultEndPointTension));
+						actEngine.ControlPoints.Add(
+							new ControlPoint(new PointD(prevSelPoint.X + .01d, prevSelPoint.Y + .01d), DefaultEndPointTension));
+
+						clickedWithoutModifying = false;
+					}
+					else
+					{
+						actEngine.ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
+						actEngine.ControlPoints.Add(
+							new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultEndPointTension));
+					}
+
+					selectedPointIndex = 1;
+					selectedPointCurveIndex = 0;
+
+					//Set the new curve's arrow options to be the same as the previous curve's.
+					setArrowOptions();
+
+					//Set the DashPattern for the new curve to be the same as the previous curve's.
+					actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 				}
-				else
-				{
-					actEngine.ControlPoints.Add(new ControlPoint(new PointD(shape_origin.X, shape_origin.Y), DefaultEndPointTension));
-					actEngine.ControlPoints.Add(
-						new ControlPoint(new PointD(shape_origin.X + .01d, shape_origin.Y + .01d), DefaultEndPointTension));
-				}
-
-				selectedPointIndex = 1;
-				selectedPointCurveIndex = 0;
-
-				//Set the new curve's arrow options to be the same as the previous curve's.
-				setArrowOptions();
-
-				//Set the DashPattern for the new curve to be the same as the previous curve's.
-				actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 			}
 
 			//If the user right clicks outside of any lines/curves.
