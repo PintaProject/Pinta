@@ -156,6 +156,7 @@ namespace Pinta.Tools
 					"\nPress Space to create a new point on the outermost side of the selected control point at the mouse position." +
 					"\nHold Ctrl while pressing Space to create the point at the exact same position." +
 					"\nHold Ctrl while left clicking on a control point to create a new line at the exact same position." +
+					"\nHold Ctrl while clicking outside of the Image bounds to create a new line starting at the edge." +
 					"\nPress Enter to finalize the curve.");
 			}
 		}
@@ -1086,18 +1087,26 @@ namespace Pinta.Tools
 			CurveEngine selEngine = SelectedCurveEngine;
 			ControlPoint adjacentPoint;
 
-			if (selectedPointIndex > 0)
+			if (selEngine == null)
 			{
-				adjacentPoint = selEngine.ControlPoints[selectedPointIndex - 1];
-			}
-			else if (selectedPointIndex + 1 < selEngine.ControlPoints.Count)
-			{
-				adjacentPoint = selEngine.ControlPoints[selectedPointIndex + 1];
+				//Don't bother calculating a modified point because there is no selected curve.
+				return;
 			}
 			else
 			{
-				//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
-				return;
+				if (selectedPointIndex > 0)
+				{
+					adjacentPoint = selEngine.ControlPoints[selectedPointIndex - 1];
+				}
+				else if (selectedPointIndex + 1 < selEngine.ControlPoints.Count)
+				{
+					adjacentPoint = selEngine.ControlPoints[selectedPointIndex + 1];
+				}
+				else
+				{
+					//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
+					return;
+				}
 			}
 
 			PointD dir = new PointD(current_point.X - adjacentPoint.Position.X, current_point.Y - adjacentPoint.Position.Y);
@@ -1526,8 +1535,9 @@ namespace Pinta.Tools
 
 
 
-				//Verify that the user clicked inside the image bounds.
-				if (point.X == shape_origin.X && point.Y == shape_origin.Y)
+				//Verify that the user clicked inside the image bounds or that the user is
+				//holding the Ctrl key (to ignore the Image bounds and draw a line on the edge).
+				if ((point.X == shape_origin.X && point.Y == shape_origin.Y) || ctrlKey)
 				{
 					//Create a new CurvesHistoryItem so that the creation of a new curve can be undone.
 					doc.History.PushNewItem(

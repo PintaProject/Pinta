@@ -355,6 +355,7 @@ msgid ""
 "\nPress Space to create a new point on the outermost side of the selected control point at the mouse position."
 "\nHold Ctrl while pressing Space to create the point at the exact same position."
 "\nHold Ctrl while left clicking on a control point to create a new line at the exact same position."
+"\nHold Ctrl while clicking outside of the Image bounds to create a new line starting at the edge."
 "\nPress Enter to finalize the curve."
 msgstr ""
 
