@@ -276,7 +276,7 @@ namespace Pinta.Effects
 		
 		private void DrawGrid (Context g)
 		{
-			g.Color = new Color (0.05, 0.05, 0.05);
+			g.SetSourceColor (new Color (0.05, 0.05, 0.05));
 			g.SetDash (new double[] {4, 4}, 2);
 			g.LineWidth = 1;
 			
@@ -390,7 +390,7 @@ namespace Pinta.Effects
 				infos.MoveNext ();
 				var info = infos.Current;
 					
-				g.Color = info.Color;
+				g.SetSourceColor (info.Color);
 				g.LineWidth = info.IsActive ? 2 : 1;
 				g.Stroke ();
 			}

@@ -59,7 +59,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
@@ -97,7 +97,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 
@@ -117,7 +117,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			g.Pattern = pattern;
+			g.SetSource (pattern);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Fill ();
@@ -135,7 +135,7 @@ namespace Pinta.Core
 				g.LineTo (point.X, point.Y);
 			}
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Stroke ();
@@ -153,7 +153,7 @@ namespace Pinta.Core
 			foreach (var point in points)
 				g.LineTo (point);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Fill ();
@@ -182,10 +182,10 @@ namespace Pinta.Core
 			g.LineTo (x, y + r.Height);
 			g.LineTo (x, y);
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve ();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
@@ -216,7 +216,7 @@ namespace Pinta.Core
 
 			g.ClosePath ();
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -246,7 +246,7 @@ namespace Pinta.Core
 
 			g.ClosePath ();
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 
@@ -301,10 +301,10 @@ namespace Pinta.Core
 
 			g.ClosePath ();
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve ();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -332,10 +332,10 @@ namespace Pinta.Core
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve ();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -363,7 +363,7 @@ namespace Pinta.Core
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 
@@ -377,7 +377,7 @@ namespace Pinta.Core
 		{
 			g.Save ();
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			foreach (Gdk.Rectangle r in region.GetRectangles ()) {
 				g.MoveTo (r.X, r.Y);
@@ -386,7 +386,7 @@ namespace Pinta.Core
 				g.LineTo (r.X, r.Y + r.Height);
 				g.LineTo (r.X, r.Y);
 
-				g.Color = color;
+				g.SetSourceColor (color);
 
 				g.FixedStrokeExtents ();
 				g.Fill ();
@@ -403,7 +403,7 @@ namespace Pinta.Core
 
 			g.AppendPath (p);
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -463,7 +463,7 @@ namespace Pinta.Core
 			g.MoveTo (p1.X, p1.Y);
 			g.LineTo (p2.X, p2.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
@@ -518,7 +518,7 @@ namespace Pinta.Core
 			g.Save ();
 
 			g.MoveTo (p.X, p.Y);
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.Antialias = antiAliasing ? Antialias.Subpixel : Antialias.None;
 
 			Pango.Layout layout = Pango.CairoHelper.CreateLayout (g);
@@ -560,12 +560,12 @@ namespace Pinta.Core
 			if (mode == GradientColorMode.Color) {
 				gradient.AddColorStop (0, c1);
 				gradient.AddColorStop (1, c2);
-				g.Source = gradient;
+				g.SetSource (gradient);
 				g.Paint ();
 			} else if (mode == GradientColorMode.Transparency) {
 				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
-				g.Source = new SurfacePattern (oldsurface);
+				g.SetSource (new SurfacePattern (oldsurface));
 				g.Mask (gradient);
 			}
 
@@ -582,13 +582,13 @@ namespace Pinta.Core
 				gradient.AddColorStop (0, c1);
 				gradient.AddColorStop (0.5, c2);
 				gradient.AddColorStop (1, c1);
-				g.Source = gradient;
+				g.SetSource (gradient);
 				g.Paint ();
 			} else if (mode == GradientColorMode.Transparency) {
 				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (0.5, new Color (0, 0, 0, 0));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 1));
-				g.Source = new SurfacePattern (oldsurface);
+				g.SetSource (new SurfacePattern (oldsurface));
 				g.Mask (gradient);
 			}
 
@@ -604,16 +604,22 @@ namespace Pinta.Core
 			if (mode == GradientColorMode.Color) {
 				gradient.AddColorStop (0, c1);
 				gradient.AddColorStop (1, c2);
-				g.Source = gradient;
+				g.SetSource (gradient);
 				g.Paint ();
 			} else if (mode == GradientColorMode.Transparency) {
 				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
-				g.Source = new SurfacePattern (oldsurface);
+				g.SetSource (new SurfacePattern (oldsurface));
 				g.Mask (gradient);
 			}
 
 			g.Restore ();
+		}
+
+		// The Color property is deprecated, so use this extension method until SetSourceColor is officially available everywhere.
+		public static void SetSourceColor (this Context g, Color c)
+		{
+			g.SetSourceRGBA (c.R, c.G, c.B, c.A);
 		}
 		#endregion
 

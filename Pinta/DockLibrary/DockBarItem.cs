@@ -31,6 +31,7 @@
 
 using System;
 using Gtk;
+using Pinta.Core;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -186,12 +187,12 @@ namespace MonoDevelop.Components.Docking
 					ctx.LineTo (x+w, y+h);
 					ctx.LineTo (x, y+h);
 					ctx.ClosePath ();
-					ctx.Pattern = pat;
+					ctx.SetSource (pat);
 					ctx.FillPreserve ();
 					c1 = c;
 					c1.L *= 0.7;
 					ctx.LineWidth = 1;
-					ctx.Color = c1;
+					ctx.SetSourceColor (c1);
 					ctx.Stroke ();
 					
 					// Inner line
@@ -205,7 +206,7 @@ namespace MonoDevelop.Components.Docking
 					c1 = c;
 					//c1.L *= 0.9;
 					ctx.LineWidth = 1;
-					ctx.Color = c1;
+					ctx.SetSourceColor (c1);
 					ctx.Stroke ();
 				}
 			}

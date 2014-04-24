@@ -279,7 +279,7 @@ namespace MonoDevelop.Components.Docking
 						color1.G *= 1.2;
 						color1.B *= 1.2;
 						pat.AddColorStop (1, color1);
-						cr.Pattern = pat;
+						cr.SetSource (pat);
 						cr.FillPreserve ();
 					}
 				}

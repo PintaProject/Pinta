@@ -230,7 +230,7 @@ namespace Pinta.Gui.Widgets
 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0));
 			
 			g.Rectangle (rect);
-			g.Pattern = pat;
+			g.SetSource (pat);
 			g.Fill();
 		}
 		

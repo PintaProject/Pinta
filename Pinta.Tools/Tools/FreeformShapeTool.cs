@@ -149,15 +149,15 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 
 				if (FillShape && StrokeShape) {
-					g.Color = fill_color;
+					g.SetSourceColor (fill_color);
 					g.FillPreserve ();
-					g.Color = outline_color;
+					g.SetSourceColor (outline_color);
 					g.Stroke ();
 				} else if (FillShape) {
-					g.Color = outline_color;
+					g.SetSourceColor (outline_color);
 					g.Fill ();
 				} else {
-					g.Color = outline_color;
+					g.SetSourceColor (outline_color);
 					g.Stroke ();
 				}
 			}
@@ -201,15 +201,15 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 
 				if (FillShape && StrokeShape) {
-					g.Color = fill_color;
+					g.SetSourceColor (fill_color);
 					g.FillPreserve ();
-					g.Color = outline_color;
+					g.SetSourceColor (outline_color);
 					g.Stroke ();
 				} else if (FillShape) {
-					g.Color = outline_color;
+					g.SetSourceColor (outline_color);
 					g.Fill ();
 				} else {
-					g.Color = outline_color;
+					g.SetSourceColor (outline_color);
 					g.Stroke ();
 				}
 			}

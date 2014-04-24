@@ -170,7 +170,7 @@ namespace Pinta.Core
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
-				g.Color = PintaCore.Palette.PrimaryColor;
+				g.SetSourceColor (PintaCore.Palette.PrimaryColor);
 				g.Fill ();
 			}
 
