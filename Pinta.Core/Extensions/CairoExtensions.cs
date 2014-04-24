@@ -36,6 +36,7 @@
 using System;
 using Cairo;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Pinta.Core
 {
@@ -485,6 +486,8 @@ namespace Pinta.Core
 		/// bottom-right corner of the Rectangle in the width and
 		/// height members. This method corrects the rectangle to
 		/// contain the width and height in the width and height members.
+		/// 
+		/// This can be removed once we port to GTK3.
 		/// </summary>
 		/// <returns>
 		/// The rectangle describing the area that would be
@@ -492,9 +495,13 @@ namespace Pinta.Core
 		/// </returns>
 		public static Rectangle FixedStrokeExtents (this Context g)
 		{
-			Rectangle r = g.StrokeExtents();
-			return new Rectangle (r.X, r.Y, r.Width - r.X, r.Height - r.Y);
+			double x1, y1, x2, y2;
+			cairo_stroke_extents (g.Handle, out x1, out y1, out x2, out y2);
+			return new Rectangle (x1, y1, x2 - x1, y2 - y1);
 		}
+
+		[DllImport ("libcairo-2.dll", CallingConvention=CallingConvention.Cdecl)]
+		private static extern void cairo_stroke_extents (IntPtr cr, out double x1, out double y1, out double x2, out double y2);
 
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
 		{
