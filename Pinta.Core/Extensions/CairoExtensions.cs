@@ -509,7 +509,9 @@ namespace Pinta.Core
 		/// </summary>
 		public static void SetSource (this Context g, Pattern source)
 		{
-			cairo_set_source (g.Handle, source.Handle);
+#pragma warning disable 612
+			cairo_set_source (g.Handle, source.Pointer);
+#pragma warning restore 612
 		}
 
 		private const string CairoLib = "libcairo-2.dll";
