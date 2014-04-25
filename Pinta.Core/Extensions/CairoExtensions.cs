@@ -500,8 +500,25 @@ namespace Pinta.Core
 			return new Rectangle (x1, y1, x2 - x1, y2 - y1);
 		}
 
-		[DllImport ("libcairo-2.dll", CallingConvention=CallingConvention.Cdecl)]
+		/// <summary>
+		/// The Pattern property is now deprecated in favour of the SetSource (pattern) method,
+		/// but that method doesn't exist in older versions of Mono.Cairo. This extension method
+		/// provides an implementation of that functionality.
+		/// 
+		/// This can be removed once we port to GTK3.
+		/// </summary>
+		public static void SetSource (this Context g, Pattern source)
+		{
+			cairo_set_source (g.Handle, source.Handle);
+		}
+
+		private const string CairoLib = "libcairo-2.dll";
+
+		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
 		private static extern void cairo_stroke_extents (IntPtr cr, out double x1, out double y1, out double x2, out double y2);
+
+		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
+		private static extern void cairo_set_source (IntPtr cr, IntPtr pattern);
 
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
 		{
