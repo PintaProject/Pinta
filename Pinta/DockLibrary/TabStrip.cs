@@ -31,6 +31,7 @@
 using Gtk; 
 
 using System;
+using Pinta.Core;
 
 namespace MonoDevelop.Components.Docking
 {
