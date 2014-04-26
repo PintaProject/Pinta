@@ -990,7 +990,7 @@ namespace Pinta.Tools
 
 				g.MoveTo (new Cairo.PointD (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y));
 
-				g.Color = PintaCore.Palette.PrimaryColor;
+				g.SetSourceColor (PintaCore.Palette.PrimaryColor);
 
 				//Fill in background
 				if (BackgroundFill) {
@@ -1004,13 +1004,13 @@ namespace Pinta.Tools
 					Pango.CairoHelper.ShowLayout (g, CurrentTextEngine.Layout);
 
 				if (FillText && StrokeText) {
-					g.Color = PintaCore.Palette.SecondaryColor;
+					g.SetSourceColor (PintaCore.Palette.SecondaryColor);
 					g.LineWidth = OutlineWidth;
 
 					Pango.CairoHelper.LayoutPath (g, CurrentTextEngine.Layout);
 					g.Stroke ();
 				} else if (StrokeText) {
-					g.Color = PintaCore.Palette.PrimaryColor;
+					g.SetSourceColor (PintaCore.Palette.PrimaryColor);
 					g.LineWidth = OutlineWidth;
 
 					Pango.CairoHelper.LayoutPath (g, CurrentTextEngine.Layout);
@@ -1044,11 +1044,11 @@ namespace Pinta.Tools
 
 					g.LineWidth = 1;
 
-					g.Color = new Cairo.Color(1, 1, 1);
+					g.SetSourceColor (new Cairo.Color (1, 1, 1));
 					g.StrokePreserve();
 
 					g.SetDash(new double[] { 2, 4 }, 0);
-					g.Color = new Cairo.Color(1, .1, .2);
+					g.SetSourceColor (new Cairo.Color(1, .1, .2));
 
 					g.Stroke();
 

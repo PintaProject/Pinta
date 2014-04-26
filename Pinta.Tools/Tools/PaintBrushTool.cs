@@ -194,7 +194,7 @@ namespace Pinta.Tools
 				Drawable.LineWidth = brush_width;
 				Drawable.LineJoin = LineJoin.Round;
 				Drawable.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
-				Drawable.Color = StrokeColor;
+				Drawable.SetSourceColor (StrokeColor);
 
 				invalidate_rect = active_brush.DoMouseMove (Drawable, StrokeColor, Surface,
 				                                            x, y, LastPoint.X, LastPoint.Y);
