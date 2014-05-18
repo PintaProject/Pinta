@@ -39,8 +39,8 @@ namespace Pinta.Tools
 		}
 
 		private const int Tolerance = 3;
-		private static readonly Cairo.Color FillColor = new Cairo.Color (0, 0, 1, 0.5);
-		private static readonly Cairo.Color StrokeColor = new Cairo.Color (0, 0, 1, 0.7);
+		public static readonly Cairo.Color FillColor = new Cairo.Color (0, 0, 1, 0.5);
+		public static readonly Cairo.Color StrokeColor = new Cairo.Color (0, 0, 1, 0.7);
 		private MouseHandler action;
 
 		public PointD Position {get; set;}

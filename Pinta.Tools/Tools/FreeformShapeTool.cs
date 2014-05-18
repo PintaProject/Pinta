@@ -44,6 +44,10 @@ namespace Pinta.Tools
 		private Color fill_color;
 		private Color outline_color;
 
+		private DashPatternBox dashPBox = new DashPatternBox();
+
+		private string dashPattern = "-";
+
 		public FreeformShapeTool ()
 		{
 		}
@@ -61,6 +65,7 @@ namespace Pinta.Tools
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar(tb);
+
 
 			if (fill_sep == null)
 				fill_sep = new Gtk.SeparatorToolItem ();
@@ -81,6 +86,17 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem (fill_button);
+
+
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
+
+			if (dpbBox != null)
+			{
+				dpbBox.Changed += (o, e) =>
+				{
+					dashPattern = dpbBox.ActiveText;
+				};
+			}
 		}
 		#endregion
 
@@ -131,6 +147,8 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
+
 				if (path != null) {
 					g.AppendPath (path);
 					(path as IDisposable).Dispose ();
@@ -144,8 +162,6 @@ namespace Pinta.Tools
 				
 				g.ClosePath ();
 				g.LineWidth = BrushWidth;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = LineCap.Round;
 				g.FillRule = FillRule.EvenOdd;
 
 				if (FillShape && StrokeShape) {
@@ -155,7 +171,9 @@ namespace Pinta.Tools
 					g.Stroke ();
 				} else if (FillShape) {
 					g.SetSourceColor (outline_color);
-					g.Fill ();
+					g.FillPreserve();
+					g.SetSourceColor (outline_color);
+					g.Stroke();
 				} else {
 					g.SetSourceColor (outline_color);
 					g.Stroke ();
@@ -188,6 +206,8 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
+
 				if (path != null) {
 					g.AppendPath (path);
 					(path as IDisposable).Dispose ();
@@ -196,8 +216,6 @@ namespace Pinta.Tools
 
 				g.ClosePath ();
 				g.LineWidth = BrushWidth;
-				g.LineJoin = LineJoin.Round;
-				g.LineCap = LineCap.Round;
 				g.FillRule = FillRule.EvenOdd;
 
 				if (FillShape && StrokeShape) {
@@ -207,7 +225,9 @@ namespace Pinta.Tools
 					g.Stroke ();
 				} else if (FillShape) {
 					g.SetSourceColor (outline_color);
-					g.Fill ();
+					g.FillPreserve();
+					g.SetSourceColor (outline_color);
+					g.Stroke();
 				} else {
 					g.SetSourceColor (outline_color);
 					g.Stroke ();
