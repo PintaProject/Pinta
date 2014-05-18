@@ -73,6 +73,10 @@ namespace Pinta.Tools
 			}
 			set { (radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }			
 		}
+
+		private DashPatternBox dashPBox = new DashPatternBox();
+
+		private string dashPattern = "-";
 		
 		protected override void BuildToolBar (Gtk.Toolbar tb)
 		{
@@ -110,6 +114,21 @@ namespace Pinta.Tools
 			tb.AppendItem (radius_plus);
 		}
 
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
+
+			if (dpbBox != null)
+			{
+				dpbBox.Changed += (o, e) =>
+				{
+					dashPattern = dpbBox.ActiveText;
+				};
+			}
+		}
+
 		protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
@@ -123,10 +142,12 @@ namespace Pinta.Tools
 
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
+
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedRoundedRectangle (rect, Radius, fill_color, outline_color, BrushWidth);
 				else if (FillShape)
-					dirty = g.FillRoundedRectangle (rect, Radius, outline_color);
+					dirty = g.FillStrokedRoundedRectangle(rect, Radius, outline_color, outline_color, BrushWidth);
 				else
 					dirty = g.DrawRoundedRectangle (rect, Radius, outline_color, BrushWidth);
 			}

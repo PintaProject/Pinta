@@ -881,7 +881,9 @@ namespace Pinta.Tools
 
 			//Store the previous state of the current UserLayer's and TextLayer's ImageSurfaces.
 			user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-			text_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface.Clone();
+			text_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Layer.Surface.Clone();
+
+			//Store the previous state of the Text Engine.
 			undo_engine = CurrentTextEngine.Clone();
 
 			//Stop ignoring any Surface.Clone calls from this point on.
@@ -936,7 +938,7 @@ namespace Pinta.Tools
 		private void ClearTextLayer()
 		{
 			//Clear the TextLayer.
-			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface.Clear();
+			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Layer.Surface.Clear();
 
 			//Redraw the previous text boundary.
 			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
@@ -966,7 +968,7 @@ namespace Pinta.Tools
 			else
 			{
 				//Draw text on the current UserLayer's TextLayer's surface as re-editable text.
-				surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Surface;
+				surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Layer.Surface;
 
 				ClearTextLayer();
 			}
@@ -1080,7 +1082,7 @@ namespace Pinta.Tools
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
 					//Create a backup of everything before redrawing the text and etc.
-					Cairo.ImageSurface oldTextSurface = doc.CurrentUserLayer.TextLayer.Surface.Clone();
+					Cairo.ImageSurface oldTextSurface = doc.CurrentUserLayer.TextLayer.Layer.Surface.Clone();
 					Cairo.ImageSurface oldUserSurface = doc.CurrentUserLayer.Surface.Clone();
 					TextEngine oldTextEngine = CurrentTextEngine.Clone();
 
@@ -1088,7 +1090,7 @@ namespace Pinta.Tools
 					RedrawText(false, false);
 
 					//Clear the TextLayer.
-					doc.CurrentUserLayer.TextLayer.Clear();
+					doc.CurrentUserLayer.TextLayer.Layer.Clear();
 
 					//Clear the text and its boundaries.
 					CurrentTextEngine.Clear();

@@ -1,10 +1,10 @@
 ﻿// 
-// TextHistoryItem.cs
+// CurvesHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2012 Andrew Davis, GSoC 2012
+// Copyright (c) 2013 Andrew Davis, GSoC 2013
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,49 +25,35 @@
 // THE SOFTWARE.
 
 using System;
+using Pinta.Core;
 using Cairo;
 
-namespace Pinta.Core
+namespace Pinta.Tools
 {
-	public class TextHistoryItem : BaseHistoryItem
+	public class CurvesHistoryItem : BaseHistoryItem
 	{
 		UserLayer userLayer;
-
-		SurfaceDiff text_surface_diff;
-		ImageSurface textSurface;
 
 		SurfaceDiff user_surface_diff;
 		ImageSurface userSurface;
 
-		TextEngine tEngine;
-		Gdk.Rectangle textBounds;
+		CurveEngineCollection cEngines;
+
+		int selectedPointIndex, selectedPointCurveIndex;
 
 		/// <summary>
-		/// A history item for when text is created, edited, and/or finalized.
+		/// A history item for when curves are finalized.
 		/// </summary>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		/// <param name="passedTextSurface">The stored TextLayer surface.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
-		/// <param name="passedTextEngine">The text engine being used.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
-		public TextHistoryItem(string icon, string text, ImageSurface passedTextSurface,
-		                       ImageSurface passedUserSurface, TextEngine passedTextEngine,
-		                       UserLayer passedUserLayer) : base(icon, text)
+		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
+		/// <param name="passedSelectedPointCurveIndex">The selected point's curve index.</param>
+		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
+			int passedSelectedPointIndex, int passedSelectedPointCurveIndex) : base(icon, text)
 		{
 			userLayer = passedUserLayer;
-
-
-			text_surface_diff = SurfaceDiff.Create(passedTextSurface, userLayer.TextLayer.Layer.Surface, true);
-			
-			if (text_surface_diff == null)
-			{
-				textSurface = passedTextSurface;
-			}
-			else
-			{
-				(passedTextSurface as IDisposable).Dispose();
-			}
 
 
 			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
@@ -82,13 +68,9 @@ namespace Pinta.Core
 			}
 
 
-			tEngine = passedTextEngine;
-
-			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
-		}
-
-		public TextHistoryItem(string icon, string text) : base(icon, text)
-		{
+			cEngines = Pinta.Tools.LineCurveTool.cEngines.PartialClone();
+			selectedPointIndex = passedSelectedPointIndex;
+			selectedPointCurveIndex = passedSelectedPointCurveIndex;
 		}
 
 		public override void Undo()
@@ -104,21 +86,7 @@ namespace Pinta.Core
 		private void Swap()
 		{
 			// Grab the original surface
-			ImageSurface surf = userLayer.TextLayer.Layer.Surface;
-
-			if (text_surface_diff != null)
-			{
-				text_surface_diff.ApplyAndSwap(surf);
-				PintaCore.Workspace.Invalidate(text_surface_diff.GetBounds());
-			}
-			else
-			{
-				// Undo to the "old" surface
-				userLayer.TextLayer.Layer.Surface = textSurface;
-
-				// Store the original surface for Redo
-				textSurface = surf;
-			}
+			ImageSurface surf = PintaCore.Workspace.ActiveDocument.ToolLayer.Surface;
 
 
 
@@ -146,25 +114,29 @@ namespace Pinta.Core
 
 
 
-			//Store the old text data temporarily.
-			TextEngine oldTEngine = tEngine;
-			Gdk.Rectangle oldTextBounds = textBounds;
+			//Store the old curve data temporarily.
+			CurveEngineCollection oldCEngine = cEngines;
 
 			//Swap half of the data.
-			tEngine = userLayer.tEngine;
-			textBounds = userLayer.textBounds;
+			cEngines = Pinta.Tools.LineCurveTool.cEngines;
 
 			//Swap the other half.
-			userLayer.tEngine = oldTEngine;
-			userLayer.textBounds = oldTextBounds;
+			Pinta.Tools.LineCurveTool.cEngines = oldCEngine;
+
+
+			//Swap the selected point data.
+			int temp = selectedPointIndex;
+			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
+			Pinta.Tools.LineCurveTool.selectedPointIndex = temp;
+
+			//Swap the selected curve data.
+			temp = selectedPointCurveIndex;
+			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
+			Pinta.Tools.LineCurveTool.selectedPointCurveIndex = temp;
 		}
 
 		public override void Dispose()
 		{
-			// Free up native surface
-			if (textSurface != null)
-				(textSurface as IDisposable).Dispose();
-
 			// Free up native surface
 			if (userSurface != null)
 				(userSurface as IDisposable).Dispose();

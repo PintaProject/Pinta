@@ -49,6 +49,10 @@ namespace Pinta.Tools
 			get { return 45; }
 		}
 
+		private DashPatternBox dashPBox = new DashPatternBox();
+
+		private string dashPattern = "-";
+
 		public EllipseTool ()
 		{
 		}
@@ -67,16 +71,33 @@ namespace Pinta.Tools
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 				
 				dirty = rect;
+
+				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
 				
 				if (FillShape && StrokeShape)
 					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
 				else if (FillShape)
-					dirty = g.FillEllipse (rect, outline_color);
+					dirty = g.FillStrokedEllipse(rect, outline_color, outline_color, BrushWidth);
 				else
 					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
 			}
 			
 			return dirty;
+		}
+
+		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		{
+			base.OnBuildToolBar(tb);
+
+			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
+
+			if (dpbBox != null)
+			{
+				dpbBox.Changed += (o, e) =>
+				{
+					dashPattern = dpbBox.ActiveText;
+				};
+			}
 		}
 	}
 }
