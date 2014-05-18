@@ -86,7 +86,7 @@ namespace Pinta.Core
 			g.LineTo(r.X, r.Y + r.Height);
 			g.LineTo(r.X, r.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents();
@@ -243,10 +243,10 @@ namespace Pinta.Core
 			g.LineTo(x, y + r.Height);
 			g.LineTo(x, y);
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents();

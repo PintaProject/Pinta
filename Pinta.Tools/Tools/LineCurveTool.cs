@@ -238,7 +238,7 @@ namespace Pinta.Tools
 					ActiveCurveEngine.DashPattern = dpbBox.ActiveText;
 
 					//Update the line/curve.
-					drawCurves(false, false, false);
+					DrawCurves(false, false, false);
 				};
 			}
 
@@ -319,7 +319,7 @@ namespace Pinta.Tools
 				{
 					selEngine.Arrow1.Show = showArrowOneBox.Active;
 
-					drawCurves(false, false, false);
+					DrawCurves(false, false, false);
 				}
 			};
 
@@ -380,7 +380,7 @@ namespace Pinta.Tools
 				{
 					selEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-					drawCurves(false, false, false);
+					DrawCurves(false, false, false);
 				}
 			};
 
@@ -455,7 +455,7 @@ namespace Pinta.Tools
 							selEngine.Arrow1.ArrowSize = newSize;
 							selEngine.Arrow2.ArrowSize = newSize;
 
-							drawCurves(false, false, false);
+							DrawCurves(false, false, false);
 						}
 					}
 				};
@@ -532,7 +532,7 @@ namespace Pinta.Tools
 							selEngine.Arrow1.AngleOffset = newAngle;
 							selEngine.Arrow2.AngleOffset = newAngle;
 
-							drawCurves(false, false, false);
+							DrawCurves(false, false, false);
 						}
 					}
 				};
@@ -609,7 +609,7 @@ namespace Pinta.Tools
 							selEngine.Arrow1.LengthOffset = newLength;
 							selEngine.Arrow2.LengthOffset = newLength;
 
-							drawCurves(false, false, false);
+							DrawCurves(false, false, false);
 						}
 					}
 				};
@@ -644,7 +644,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Set the Arrow options for the current curve to their respective values in the toolbar.
 		/// </summary>
-		private void setArrowOptions()
+		private void SetArrowOptions()
 		{
 			CurveEngine selEngine = SelectedCurveEngine;
 
@@ -674,7 +674,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Set the Arrow options in the toolbar to their respective values for the current curve.
 		/// </summary>
-		private void setToolbarArrowOptions()
+		private void SetToolbarArrowOptions()
 		{
 			CurveEngine selEngine = SelectedCurveEngine;
 
@@ -699,14 +699,14 @@ namespace Pinta.Tools
 		{
 			base.PlusButtonClickedEvent(o, args);
 
-			drawCurves(false, false, false);
+			DrawCurves(false, false, false);
 		}
 
 		protected override void MinusButtonClickedEvent(object o, EventArgs args)
 		{
 			base.MinusButtonClickedEvent(o, args);
 
-			drawCurves(false, false, false);
+			DrawCurves(false, false, false);
 		}
 
 		void arrowSizeMinus_Clicked(object sender, EventArgs e)
@@ -978,7 +978,7 @@ namespace Pinta.Tools
 		/// points for mouse detection after drawing the curve.</param>
 		/// <param name="finalize">Whether or not to finalize the drawing.</param>
 		/// <param name="shiftKey">Whether or not the shift key is being pressed.</param>
-		public void drawCurves(bool calculateOrganizedPoints, bool finalize, bool shiftKey)
+		public void DrawCurves(bool calculateOrganizedPoints, bool finalize, bool shiftKey)
 		{
 			if (!surface_modified)
 			{
@@ -1123,7 +1123,7 @@ namespace Pinta.Tools
 		/// Calculate the modified position of current_point such that the angle between shape_origin
 		/// and current_point is snapped to the closest angle out of a certain number of angles.
 		/// </summary>
-		private void calculateModifiedCurrentPoint()
+		private void CalculateModifiedCurrentPoint()
 		{
 			PointD dir = new PointD(current_point.X - shape_origin.X, current_point.Y - shape_origin.Y);
 			double theta = Math.Atan2(dir.Y, dir.X);
@@ -1138,7 +1138,7 @@ namespace Pinta.Tools
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = false;
 
-			drawCurves(false, false, false);
+			DrawCurves(false, false, false);
 
 			PintaCore.Palette.PrimaryColorChanged += new EventHandler(Palette_PrimaryColorChanged);
 			PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
@@ -1150,14 +1150,14 @@ namespace Pinta.Tools
 		{
 			outline_color = PintaCore.Palette.PrimaryColor;
 
-			drawCurves(false, false, false);
+			DrawCurves(false, false, false);
 		}
 
 		void Palette_SecondaryColorChanged(object sender, EventArgs e)
 		{
 			fill_color = PintaCore.Palette.SecondaryColor;
 
-			drawCurves(false, false, false);
+			DrawCurves(false, false, false);
 		}
 
 		protected override void OnDeactivated()
@@ -1165,7 +1165,7 @@ namespace Pinta.Tools
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
 			//Finalize the previous curve (if needed).
-			drawCurves(false, true, false);
+			DrawCurves(false, true, false);
 
 			PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
 			PintaCore.Palette.SecondaryColorChanged += Palette_SecondaryColorChanged;
@@ -1178,7 +1178,7 @@ namespace Pinta.Tools
 			PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
 			//Finalize the previous curve (if needed).
-			drawCurves(false, true, false);
+			DrawCurves(false, true, false);
 
 			base.OnCommit();
 		}
@@ -1219,7 +1219,7 @@ namespace Pinta.Tools
 
 					hoverPoint = new PointD(-1d, -1d);
 
-					drawCurves(true, false, false);
+					DrawCurves(true, false, false);
 				}
 
 				args.RetVal = true;
@@ -1227,7 +1227,7 @@ namespace Pinta.Tools
 			else if (args.Event.Key == Gdk.Key.Return)
 			{
 				//Finalize the previous curve (if needed).
-				drawCurves(false, true, false);
+				DrawCurves(false, true, false);
 
 				args.RetVal = true;
 			}
@@ -1261,7 +1261,7 @@ namespace Pinta.Tools
 
 						if (shiftKey)
 						{
-							calculateModifiedCurrentPoint();
+							CalculateModifiedCurrentPoint();
 						}
 
 						//Space only: position of mouse (after any potential shift alignment).
@@ -1282,7 +1282,7 @@ namespace Pinta.Tools
 						++selectedPointIndex;
 					}
 
-					drawCurves(true, false, shiftKey);
+					DrawCurves(true, false, shiftKey);
 				}
 
 				args.RetVal = true;
@@ -1295,7 +1295,7 @@ namespace Pinta.Tools
 					//Move the selected control point.
 					SelectedPoint.Position.Y -= 1d;
 
-					drawCurves(true, false, false);
+					DrawCurves(true, false, false);
 				}
 
 				args.RetVal = true;
@@ -1308,7 +1308,7 @@ namespace Pinta.Tools
 					//Move the selected control point.
 					SelectedPoint.Position.Y += 1d;
 
-					drawCurves(true, false, false);
+					DrawCurves(true, false, false);
 				}
 
 				args.RetVal = true;
@@ -1332,7 +1332,7 @@ namespace Pinta.Tools
 						SelectedPoint.Position.X -= 1d;
 					}
 
-					drawCurves(true, false, false);
+					DrawCurves(true, false, false);
 				}
 
 				args.RetVal = true;
@@ -1356,7 +1356,7 @@ namespace Pinta.Tools
 						SelectedPoint.Position.X += 1d;
 					}
 
-					drawCurves(true, false, false);
+					DrawCurves(true, false, false);
 				}
 
 				args.RetVal = true;
@@ -1398,10 +1398,10 @@ namespace Pinta.Tools
 
 
 			//Draw the current state.
-			drawCurves(true, false, false);
+			DrawCurves(true, false, false);
 
 			//Update the toolbar's arrow options.
-			setToolbarArrowOptions();
+			SetToolbarArrowOptions();
 
 			base.AfterUndo();
 		}
@@ -1423,10 +1423,10 @@ namespace Pinta.Tools
 
 
 			//Draw the current state.
-			drawCurves(true, false, false);
+			DrawCurves(true, false, false);
 
 			//Update the toolbar's arrow options.
-			setToolbarArrowOptions();
+			SetToolbarArrowOptions();
 
 			base.AfterRedo();
 		}
@@ -1455,7 +1455,7 @@ namespace Pinta.Tools
 
 			if (shiftKey)
 			{
-				calculateModifiedCurrentPoint();
+				CalculateModifiedCurrentPoint();
 			}
 
 			is_drawing = true;
@@ -1560,7 +1560,7 @@ namespace Pinta.Tools
 				//Next, take care of the old curve's data.
 
 				//Finalize the previous curve (if needed).
-				drawCurves(false, true, false);
+				DrawCurves(false, true, false);
 
 				CurveEngine actEngine = ActiveCurveEngine;
 
@@ -1596,7 +1596,7 @@ namespace Pinta.Tools
 				selectedPointCurveIndex = 0;
 
 				//Set the new curve's arrow options to be the same as the previous curve's.
-				setArrowOptions();
+				SetArrowOptions();
 
 				//Set the DashPattern for the new curve to be the same as the previous curve's.
 				actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
@@ -1610,7 +1610,7 @@ namespace Pinta.Tools
 
 			surface_modified = true;
 
-			drawCurves(false, false, shiftKey);
+			DrawCurves(false, false, shiftKey);
 		}
 
 		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
@@ -1619,7 +1619,7 @@ namespace Pinta.Tools
 
 			changingTension = false;
 
-			drawCurves(true, false, args.Event.IsShiftPressed());
+			DrawCurves(true, false, args.Event.IsShiftPressed());
 		}
 
 		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, PointD point)
@@ -1632,14 +1632,14 @@ namespace Pinta.Tools
 
 			if (shiftKey)
 			{
-				calculateModifiedCurrentPoint();
+				CalculateModifiedCurrentPoint();
 			}
 
 
 			if (!is_drawing)
 			{
 				//Redraw everything to show a (temporary) highlighted control point when applicable.
-				drawCurves(false, false, shiftKey);
+				DrawCurves(false, false, shiftKey);
 			}
 			else
 			{
@@ -1752,7 +1752,7 @@ namespace Pinta.Tools
 
 					surface_modified = true;
 
-					drawCurves(false, false, shiftKey);
+					DrawCurves(false, false, shiftKey);
 				}
 			}
 
