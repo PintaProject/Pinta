@@ -185,7 +185,7 @@ namespace Pinta.Core
 
 			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
-			CropImageToRectangle (doc, rect);
+			CropImageToRectangle (doc, rect, false);
 		}
 
 		private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
@@ -265,16 +265,19 @@ namespace Pinta.Core
 
 			rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
 
-			CropImageToRectangle (doc, rect);
+			CropImageToRectangle (doc, rect, true);
 		}
 		#endregion
 
-		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect)
+		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, bool isAutoCrop)
 		{
 			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
-			
+
 			hist.Icon = "Menu.Image.Crop.png";
-			hist.Text = Catalog.GetString ("Crop to Selection");
+			if (isAutoCrop)				
+				hist.Text = Catalog.GetString("Auto Crop");
+			else
+				hist.Text = Catalog.GetString("Crop to Selection");
 			hist.StartSnapshotOfImage ();
 			hist.RestoreSelection = doc.Selection.Clone();
 			
