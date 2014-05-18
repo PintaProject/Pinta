@@ -993,7 +993,11 @@ namespace Pinta.Tools
 			{
 				doc.ToolLayer.Clear();
 
-				ImageSurface undoSurface = doc.CurrentUserLayer.Surface.Clone();
+				ImageSurface undoSurface = null;
+				// We only need to create a history item if there was a previous curve.
+				if (ActiveCurveEngine.ControlPoints.Count > 0) {
+					undoSurface = doc.CurrentUserLayer.Surface.Clone ();
+				}
 
 				is_drawing = false;
 				surface_modified = false;
@@ -1005,7 +1009,7 @@ namespace Pinta.Tools
 					doc.CurrentUserLayer, false);
 
 				//Make sure that the undo surface isn't null and that there are actually points.
-				if (undoSurface != null && ActiveCurveEngine.ControlPoints.Count > 0)
+				if (undoSurface != null)
 				{
 					//Create a new CurvesHistoryItem so that the finalization of the curves can be undone.
 					doc.History.PushNewItem(
