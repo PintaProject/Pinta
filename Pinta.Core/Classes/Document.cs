@@ -55,7 +55,37 @@ namespace Pinta.Core
 
 		private bool show_selection;
 
-		public DocumentSelection Selection = new DocumentSelection();
+		public SelectionModeHandler selHandler;
+
+		private DocumentSelection actualSelection = new DocumentSelection();
+		public DocumentSelection Selection
+		{
+			get
+			{
+				return actualSelection;
+			}
+
+			set
+			{
+				actualSelection.DisposeSelection();
+				actualSelection = value;
+			}
+		}
+
+		private DocumentSelection actualPreviousSelection = new DocumentSelection();
+		public DocumentSelection PreviousSelection
+		{
+			get
+			{
+				return actualPreviousSelection;
+			}
+
+			set
+			{
+				actualPreviousSelection.DisposeSelection();
+				actualPreviousSelection = value;
+			}
+		}
 
 		public Document (Gdk.Size size)
 		{
@@ -75,7 +105,9 @@ namespace Pinta.Core
 			selection_layer = CreateLayer ("Selection Layer");
 			selection_layer.Hidden = true;
 
-			ResetSelectionPath ();
+			ResetSelectionPaths ();
+
+			selHandler = new SelectionModeHandler();
 		}
 
 		#region Public Properties
@@ -607,11 +639,13 @@ namespace Pinta.Core
 			Workspace.Invalidate ();
 		}
 		
-		public void ResetSelectionPath()
+		public void ResetSelectionPaths()
 		{
 			Selection.DisposeSelectionPreserve();
-
 			Selection.ResetSelection(selection_layer.Surface, ImageSize);
+
+			PreviousSelection.DisposeSelectionPreserve();
+			PreviousSelection.ResetSelection(selection_layer.Surface, ImageSize);
 
 			ShowSelection = false;
 		}
@@ -655,7 +689,7 @@ namespace Pinta.Core
 				Workspace.History.PushNewItem (hist);
 			}
 
-			ResetSelectionPath ();
+			ResetSelectionPaths ();
 
 			Workspace.Scale = scale;
 		}
@@ -683,7 +717,7 @@ namespace Pinta.Core
 
 			Workspace.History.PushNewItem (hist);
 
-			ResetSelectionPath ();
+			ResetSelectionPaths ();
 
 			Workspace.Scale = scale;
 		}

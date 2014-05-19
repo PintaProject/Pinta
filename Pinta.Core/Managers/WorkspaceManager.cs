@@ -37,10 +37,17 @@ namespace Pinta.Core
 	{
 		private int active_document_index = -1;
 		private int new_file_name = 1;
+
+		public event EventHandler SelectionChanged;
 		
 		public WorkspaceManager ()
 		{
 			OpenDocuments = new List<Document> ();
+		}
+
+		public void CallSelectionChanged(object sender, EventArgs e)
+		{
+			SelectionChanged(sender, e);
 		}
 
 		public int ActiveDocumentIndex {

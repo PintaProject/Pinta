@@ -187,7 +187,7 @@ namespace Pinta.Core
 			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Catalog.GetString ("Select All"));
 			hist.TakeSnapshot ();
 
-			doc.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
 			doc.ShowSelection = true;
 
 			doc.History.PushNewItem (hist);
@@ -227,7 +227,11 @@ namespace Pinta.Core
 			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 
-			doc.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
+			doc.Selection.SelectionPolygons.Clear();
+			doc.PreviousSelection.SelectionPolygons.Clear();
+			doc.Selection.selOrigin = new PointD();
+			doc.Selection.selEnd = new PointD();
 
 			doc.History.PushNewItem (hist);
 			doc.Workspace.Invalidate ();

@@ -39,6 +39,9 @@ namespace Pinta.Core
 		public List<List<IntPoint>> SelectionPolygons = new List<List<IntPoint>>();
 		public Clipper SelectionClipper = new Clipper();
 
+		public PointD selOrigin;
+		public PointD selEnd;
+
 		public Path SelectionPath
 		{
 			get { return selection_path; }
@@ -97,9 +100,16 @@ namespace Pinta.Core
 		{
 			DocumentSelection clonedSelection = new DocumentSelection();
 
-			clonedSelection.selection_path = selection_path.Clone();
+			if (selection_path != null)
+			{
+				clonedSelection.selection_path = selection_path.Clone();
+			}
+
 			clonedSelection.SelectionPolygons = SelectionPolygons.ToList();
 			clonedSelection.SelectionClipper = new Clipper();
+
+			clonedSelection.selOrigin = new PointD(selOrigin.X, selOrigin.Y);
+			clonedSelection.selEnd = new PointD(selEnd.X, selEnd.Y);
 
 			return clonedSelection;
 		}
