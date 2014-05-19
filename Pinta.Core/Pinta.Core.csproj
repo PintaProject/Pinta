@@ -206,6 +206,7 @@
     <Compile Include="ImageFormats\TgaExporter.cs" />
     <Compile Include="Classes\BasePaintBrush.cs" />
     <Compile Include="Managers\PaintBrushManager.cs" />
+    <Compile Include="Classes\SelectionModeHandler.cs" />
     <Compile Include="Widgets\MenuButton.cs" />
     <Compile Include="Widgets\ToolBarDropDownButton.cs" />
     <Compile Include="Clipper\Clipper.cs" />

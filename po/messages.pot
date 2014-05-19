@@ -355,6 +355,7 @@ msgid ""
 "\nPress Space to create a new point on the outermost side of the selected control point at the mouse position."
 "\nHold Ctrl while pressing Space to create the point at the exact same position."
 "\nHold Ctrl while left clicking on a control point to create a new line at the exact same position."
+"\nHold Ctrl while clicking outside of the Image bounds to create a new line starting at the edge."
 "\nPress Enter to finalize the curve."
 msgstr ""
 
@@ -477,23 +478,23 @@ msgid ""
 "circle."
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:53
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:50
 msgid "Replace"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:54
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:51
 msgid "Union (+) (Ctrl + Left Click)"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:55
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:52
 msgid "Exclude (-) (Right Click)"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:56
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:53
 msgid "Xor (Ctrl + Right Click)"
 msgstr ""
 
-#: Pinta.Tools/Tools/MagicWandTool.cs:57
+#: Pinta.Tools/Tools/Selections/SelectionModeHandler.cs:54
 msgid "Intersect (Shift + Left Click)"
 msgstr ""
 

@@ -28,6 +28,8 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
+using System.Collections.Generic;
+using ClipperLibrary;
 
 namespace Pinta.Tools
 {
@@ -43,6 +45,8 @@ namespace Pinta.Tools
 		private Gdk.Cursor cursor_hand;
 		bool is_hand_cursor = false;
 
+		private bool isResizing = false;
+
 		public SelectTool ()
 		{
 			CreateHandler ();
@@ -53,6 +57,10 @@ namespace Pinta.Tools
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Toolbar tb)
 		{
+			if (PintaCore.Workspace.HasOpenDocuments)
+			{
+				PintaCore.Workspace.ActiveDocument.selHandler.BuildToolbar(tb);
+			}
 		}
 		#endregion
 		
@@ -63,24 +71,40 @@ namespace Pinta.Tools
 			if (is_drawing)
 				return;
 
-			reset_origin = args.Event.GetPoint ();
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			Document doc = PintaCore.Workspace.ActiveDocument; 
-			if (!handler_active || !HandleResize (point.X, point.Y)) {			
-				double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
-				double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
+			doc.Selection.selOrigin = shape_origin;
+			doc.Selection.selEnd = shape_end;
 
-				shape_origin = new PointD (x, y);
+			hist = new SelectionHistoryItem(Icon, Name);
+			hist.TakeSnapshot();
 
-				doc.Selection.SelectionPolygons.Clear ();
+			reset_origin = args.Event.GetPoint();
+
+			if (!handler_active || !HandleResize(point.X, point.Y))
+			{
+				doc.selHandler.DetermineCombineMode(args);
+
+				doc.PreviousSelection = doc.Selection.Clone();
+				doc.Selection.SelectionPolygons.Clear();
+
+				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
+				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
+
+				shape_origin = new PointD(x, y);
+
 				is_drawing = true;
 			}
-			hist = new SelectionHistoryItem (Icon, Name);
-			hist.TakeSnapshot ();
+			else
+			{
+				isResizing = true;
+			}
 		}
-
+		
 		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
 			// If the user didn't move the mouse, they want to deselect
 			int tolerance = 0;
 			if (Math.Abs (reset_origin.X - args.Event.X) <= tolerance && Math.Abs (reset_origin.Y - args.Event.Y) <= tolerance) {
@@ -88,17 +112,27 @@ namespace Pinta.Tools
 				hist.Dispose ();
 				hist = null;
 				handler_active = false;
-				Document doc = PintaCore.Workspace.ActiveDocument;
+
 				doc.ToolLayer.Clear ();
 			} else {
+				ReDraw(args.Event.State);
+
+				if (doc.Selection != null)
+				{
+					doc.selHandler.PerformSelectionMode(DocumentSelection.ConvertToPolygonSet(doc.Selection.SelectionPolygons));
+					PintaCore.Workspace.Invalidate();
+				}
+
 				if (hist != null)
-					PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
+					doc.History.PushNewItem (hist);
 
 				handler_active = true;
+				hist.Dispose();
 				hist = null;
 			}
 
 			is_drawing = false;
+			isResizing = false;
 		}
 
 		protected override void OnDeactivated ()
@@ -123,21 +157,35 @@ namespace Pinta.Tools
 
 		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-			if (!is_drawing) {
-				CheckHandlerCursor (point.X, point.Y);
-				return;
-			}
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
-			double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
+			if (!is_drawing)
+			{
+				CheckHandlerCursor(point.X, point.Y);
 
-			shape_end = new PointD (x, y);
-			ReDraw (args.Event.State);
+				if (!isResizing)
+				{
+					return;
+				}
+			}
+			else
+			{
+				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
+				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
+
+				shape_end = new PointD(x, y);
+
+				ReDraw(args.Event.State);
+			}
+			
+			if (doc.Selection != null)
+			{
+				doc.selHandler.PerformSelectionMode(DocumentSelection.ConvertToPolygonSet(doc.Selection.SelectionPolygons));
+				PintaCore.Workspace.Invalidate();
+			}
 		}
 
-		protected void RefreshHandler (Cairo.Rectangle r)
+		protected void RefreshHandler ()
 		{
 			controls[0].Position = new PointD (shape_origin.X, shape_origin.Y);
 			controls[1].Position = new PointD (shape_origin.X, shape_end.Y);
@@ -172,11 +220,9 @@ namespace Pinta.Tools
 			}
 
 			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
-			RefreshHandler (rect);
 			Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
 
-			DrawHandler (doc.ToolLayer);
-			doc.Workspace.Invalidate ();
+			updateHandler();
 
 			last_dirty = dirty;
 		}
@@ -303,5 +349,41 @@ namespace Pinta.Tools
 		}
 
 		#endregion
+
+		public override void AfterUndo()
+		{
+			base.AfterUndo();
+
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			shape_origin = doc.Selection.selOrigin;
+			shape_end = doc.Selection.selEnd;
+
+			updateHandler();
+		}
+
+		public override void AfterRedo()
+		{
+			base.AfterRedo();
+
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			shape_origin = doc.Selection.selOrigin;
+			shape_end = doc.Selection.selEnd;
+
+			updateHandler();
+		}
+
+		/// <summary>
+		/// Update the selection handler positioning and drawing.
+		/// </summary>
+		private void updateHandler()
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			RefreshHandler();
+			DrawHandler(doc.ToolLayer);
+			PintaCore.Workspace.Invalidate();
+		}
 	}
 }

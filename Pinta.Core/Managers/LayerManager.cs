@@ -199,7 +199,7 @@ namespace Pinta.Core
 
 		public void ResetSelectionPath ()
 		{
-			PintaCore.Workspace.ActiveDocument.ResetSelectionPath ();
+			PintaCore.Workspace.ActiveDocument.ResetSelectionPaths ();
 		}
 
 		public ImageSurface GetFlattenedImage ()

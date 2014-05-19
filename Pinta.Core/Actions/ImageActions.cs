@@ -109,7 +109,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 			doc.RotateImageCCW ();
 
-			doc.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 		}
@@ -121,7 +121,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 			doc.RotateImageCW ();
 
-			doc.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 		}
@@ -152,7 +152,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 			doc.RotateImage180 ();
 
-			doc.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
 
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 		}
@@ -271,33 +271,36 @@ namespace Pinta.Core
 
 		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect)
 		{
-			ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize);
-			
-			hist.Icon = "Menu.Image.Crop.png";
-			hist.Text = Catalog.GetString ("Crop to Selection");
-			hist.StartSnapshotOfImage ();
-			hist.RestoreSelection = doc.Selection.Clone();
-			
-			PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates ();
-			
-			double original_scale = doc.Workspace.Scale;
-			doc.ImageSize = rect.Size;
-			doc.Workspace.CanvasSize = rect.Size;
-			doc.Workspace.Scale = original_scale;
-			
-			PintaCore.Actions.View.UpdateCanvasScale ();
-			
-			PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates ();
-			
-			foreach (var layer in doc.UserLayers)
-				layer.Crop (rect, doc.Selection.SelectionPath);
+			if (rect.Width > 0 && rect.Height > 0)
+			{
+				ResizeHistoryItem hist = new ResizeHistoryItem(doc.ImageSize);
 
-			hist.FinishSnapshotOfImage ();
-			
-			doc.History.PushNewItem (hist);
-			doc.ResetSelectionPath ();
-			
-			doc.Workspace.Invalidate ();
+				hist.Icon = "Menu.Image.Crop.png";
+				hist.Text = Catalog.GetString("Crop to Selection");
+				hist.StartSnapshotOfImage();
+				hist.RestoreSelection = doc.Selection.Clone();
+
+				PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates();
+
+				double original_scale = doc.Workspace.Scale;
+				doc.ImageSize = rect.Size;
+				doc.Workspace.CanvasSize = rect.Size;
+				doc.Workspace.Scale = original_scale;
+
+				PintaCore.Actions.View.UpdateCanvasScale();
+
+				PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates();
+
+				foreach (var layer in doc.UserLayers)
+					layer.Crop(rect, doc.Selection.SelectionPath);
+
+				hist.FinishSnapshotOfImage();
+
+				doc.History.PushNewItem(hist);
+				doc.ResetSelectionPaths();
+
+				doc.Workspace.Invalidate();
+			}
 		}
 	}
 }
