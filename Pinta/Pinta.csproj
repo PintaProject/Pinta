@@ -97,13 +97,13 @@
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.Cairo" />
     <Reference Include="System.Xml" />
-    <Reference Include="Mono.Addins, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+    <Reference Include="Mono.Addins, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <HintPath>..\lib\Mono.Addins.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Addins.Gui, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+    <Reference Include="Mono.Addins.Gui, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <HintPath>..\lib\Mono.Addins.Gui.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Addins.Setup, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+    <Reference Include="Mono.Addins.Setup, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <HintPath>..\lib\Mono.Addins.Setup.dll</HintPath>
     </Reference>
   </ItemGroup>
