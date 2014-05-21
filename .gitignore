@@ -4,6 +4,7 @@
 aclocal.m4
 autom4te.cache
 bin
+compile
 config.log
 config.status
 configure
