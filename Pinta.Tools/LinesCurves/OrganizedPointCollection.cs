@@ -35,6 +35,12 @@ namespace Pinta.Tools
 {
 	public class OrganizedPointCollection
 	{
+		//Must be an integer.
+		public const double SectionSize = 15;
+
+		//Don't change this; it's automatically calculated.
+		public static readonly int BorderingSectionRange = (int)Math.Ceiling(LineCurveTool.CurveClickStartingRange / SectionSize);
+
 		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
 		/// <summary>
@@ -77,8 +83,8 @@ namespace Pinta.Tools
 		/// <param name="op">The OrganizedPoint to store.</param>
 		public void StoreAndOrganizePoint(OrganizedPoint op)
 		{
-			int sX = (int)((op.Position.X - op.Position.X % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
-			int sY = (int)((op.Position.Y - op.Position.Y % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
+			int sX = (int)((op.Position.X - op.Position.X % SectionSize) / SectionSize);
+			int sY = (int)((op.Position.Y - op.Position.Y % SectionSize) / SectionSize);
 
 			Dictionary<int, List<OrganizedPoint>> xSection;
 			List<OrganizedPoint> ySection;
@@ -132,18 +138,18 @@ namespace Pinta.Tools
 
 			double currentDistance = double.MaxValue;
 
-			for (int n = 0; n < LineCurveTool.cEngines.CEL.Count; ++n)
+			for (int n = 0; n < LineCurveTool.CEngines.CEL.Count; ++n)
 			{
-				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.cEngines.CEL[n].OrganizedPoints.collection;
+				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.CEngines.CEL[n].OrganizedPoints.collection;
 
 				//Calculate the current_point's corresponding *center* section.
-				int sX = (int)((currentPoint.X - currentPoint.X % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
-				int sY = (int)((currentPoint.Y - currentPoint.Y % LineCurveTool.SectionSizeDouble) / LineCurveTool.SectionSizeDouble);
+				int sX = (int)((currentPoint.X - currentPoint.X % SectionSize) / SectionSize);
+				int sY = (int)((currentPoint.Y - currentPoint.Y % SectionSize) / SectionSize);
 
-				int xMin = sX - LineCurveTool.BorderingSectionRange;
-				int xMax = sX + LineCurveTool.BorderingSectionRange;
-				int yMin = sY - LineCurveTool.BorderingSectionRange;
-				int yMax = sY + LineCurveTool.BorderingSectionRange;
+				int xMin = sX - BorderingSectionRange;
+				int xMax = sX + BorderingSectionRange;
+				int yMin = sY - BorderingSectionRange;
+				int yMax = sY + BorderingSectionRange;
 
 				//Since the mouse and/or curve points can be close to the edge of a section,
 				//the points in the surrounding sections must also be checked.

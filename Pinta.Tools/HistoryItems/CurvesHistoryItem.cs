@@ -32,14 +32,14 @@ namespace Pinta.Tools
 {
 	public class CurvesHistoryItem : BaseHistoryItem
 	{
-		UserLayer userLayer;
+		private UserLayer userLayer;
 
-		SurfaceDiff user_surface_diff;
-		ImageSurface userSurface;
+		private SurfaceDiff user_surface_diff;
+		private ImageSurface userSurface;
 
-		CurveEngineCollection cEngines;
+		private CurveEngineCollection cEngines;
 
-		int selectedPointIndex, selectedPointCurveIndex;
+		private int selectedPointIndex, selectedPointCurveIndex;
 
 		/// <summary>
 		/// A history item for when curves are finalized.
@@ -68,7 +68,7 @@ namespace Pinta.Tools
 			}
 
 
-			cEngines = Pinta.Tools.LineCurveTool.cEngines.PartialClone();
+			cEngines = Pinta.Tools.LineCurveTool.CEngines.PartialClone();
 			selectedPointIndex = passedSelectedPointIndex;
 			selectedPointCurveIndex = passedSelectedPointCurveIndex;
 		}
@@ -118,21 +118,21 @@ namespace Pinta.Tools
 			CurveEngineCollection oldCEngine = cEngines;
 
 			//Swap half of the data.
-			cEngines = Pinta.Tools.LineCurveTool.cEngines;
+			cEngines = Pinta.Tools.LineCurveTool.CEngines;
 
 			//Swap the other half.
-			Pinta.Tools.LineCurveTool.cEngines = oldCEngine;
+			Pinta.Tools.LineCurveTool.CEngines = oldCEngine;
 
 
 			//Swap the selected point data.
 			int temp = selectedPointIndex;
-			selectedPointIndex = Pinta.Tools.LineCurveTool.selectedPointIndex;
-			Pinta.Tools.LineCurveTool.selectedPointIndex = temp;
+			selectedPointIndex = Pinta.Tools.LineCurveTool.SelectedPointIndex;
+			Pinta.Tools.LineCurveTool.SelectedPointIndex = temp;
 
 			//Swap the selected curve data.
 			temp = selectedPointCurveIndex;
-			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.selectedPointCurveIndex;
-			Pinta.Tools.LineCurveTool.selectedPointCurveIndex = temp;
+			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.SelectedPointCurveIndex;
+			Pinta.Tools.LineCurveTool.SelectedPointCurveIndex = temp;
 		}
 
 		public override void Dispose()

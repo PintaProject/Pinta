@@ -122,7 +122,7 @@ namespace Pinta.Tools
 		/// <param name="curveNum">The number of the curve to generate the points for.</param>
 		public void GenerateCardinalSplinePolynomialCurvePoints(int curveNum)
 		{
-			List<ControlPoint> controlPoints = LineCurveTool.cEngines.CEL[curveNum].ControlPoints;
+			List<ControlPoint> controlPoints = LineCurveTool.CEngines.CEL[curveNum].ControlPoints;
 
 
 			List<PointD> generatedPoints = new List<PointD>();
