@@ -35,7 +35,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 - For details on patching, take a look at `patch-guidelines.md` in the repo.
 
 
-##Window Build and Installation Instructions:
+##Windows Build and Installation Instructions:
 
 Be sure to install [Gtk# for Windows](http://download.mono-project.com/gtk-sharp/gtk-sharp-2.12.9-2.win32.msi) when building in Visual Studio.
 
