@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-04-02 01:08+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"PO-Revision-Date: 2014-03-21 04:13+0000\n"
+"Last-Translator: Seanan <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
-msgstr ""
+msgstr "An ciseal ar taispeáint"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Hidden"
-msgstr ""
+msgstr "An ciseal i bhfolach"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
-msgstr "Roghnaigh an Príomhdhath"
+msgstr "Roghnaigh an príomhdhath"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:99
 msgid "Choose Secondary Color"
@@ -45,14 +45,15 @@ msgstr ""
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
 msgstr ""
+"Brúigh anseo chun an príomhdhath agus an dath tánaisteach a athshocrú."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Brúigh anseo chun an príomhdhath a roghnú."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Brúigh anseo chun an dath tánaisteach a roghnú."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""

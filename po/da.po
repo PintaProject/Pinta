@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-05-19 03:14+0000\n"
-"Last-Translator: Vlad V. Petersen <vladikpetersen@gmail.com>\n"
+"PO-Revision-Date: 2014-03-06 18:28+0000\n"
+"Last-Translator: Simon Højlind <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -44,7 +44,7 @@ msgstr "Klik for at vælge mellem primær og sekundær farve."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Klik for at nulstille primær og sekundær farve."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
@@ -59,6 +59,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Venstreklik for at vælge primær farve. Højreklik for at vælge sekundær "
+"farve. Tryk på musehjulet for at vælge palettefarve."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -71,7 +73,7 @@ msgstr "Tilfældig støj"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr "Gen-så"
+msgstr "Så igen"
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
@@ -98,11 +100,11 @@ msgstr "Firkanter"
 
 #: Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr ""
+msgstr "Stænk"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "Stemplekloning"
+msgstr "Kloningsværktøj"
 
 #: Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
@@ -117,12 +119,12 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
-"Venstreklik for at tegne polygone, en pixel brede, linjer med den primære "
+"Venstreklik for at tegne ét billedpunkt brede frihåndslinjer med den primære "
 "farve. Højreklik for at bruge den sekundære farve."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
-msgstr "Polygon"
+msgstr "Frihåndsfigur"
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:54
 #: Pinta.Tools/Tools/PaintBrushTool.cs:42
@@ -180,32 +182,31 @@ msgstr "Farvevælger"
 #: Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Venstre klik for at vælge primær farve. Højre klik for at vælge sekundær "
-"farve."
+"Venstreklik for at vælge primær farve. Højreklik for at vælge sekundær farve."
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "Prøvetagning"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr "Enkel Pixel"
+msgstr "Et billedpunkt"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "3 x 3 område"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "5 x 5 område"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "7 x 7 område"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "9 x 9 område"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
 msgid "Layer"
@@ -229,7 +230,7 @@ msgstr "Skift til forrige værktøj"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
-msgstr "Skift til blyant værktøj"
+msgstr "Skift til blyant"
 
 #: Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
@@ -240,6 +241,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Klik og træk for at tegne et rektangel (højreklik for sekundær farve). Hold "
+"skift-tasten nede for at tegne et kvadrat."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -261,8 +264,8 @@ msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Venstre klik for at zoome ind. Højre klik for at zoome ud. Klik og træk for "
-"at zoome ind på valgt."
+"Venstreklik for at zoome ind. Højreklik for at zoome ud. Klik og træk for at "
+"zoome ind på et område."
 
 #: Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -281,7 +284,7 @@ msgstr ""
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: Pinta/Actions/Edit/PasteAction.cs:108
 msgid "Move Selected Pixels"
-msgstr "Flyt markerede pixels"
+msgstr "Flyt markerede billedpunkter"
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
@@ -300,12 +303,12 @@ msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"enstr klik for at fylde med primær farve, højre klik for at fylde med "
+"Venstreklik for at fylde med primær farve, højreklik for at fylde med "
 "sekundær farve."
 
 #: Pinta.Tools/Tools/LassoSelectTool.cs:48
 msgid "Lasso Select"
-msgstr "Lasso markering"
+msgstr "Lassomarkering"
 
 #: Pinta.Tools/Tools/LassoSelectTool.cs:50
 msgid "Click and drag to draw the outline for a selection area."
@@ -317,7 +320,7 @@ msgstr "Omfarv"
 
 #: Pinta.Tools/Tools/RecolorTool.cs:60
 msgid "Left click to replace the secondary color with the primary color."
-msgstr "Venstre klik for at erstatte sekundær farve med primær farve."
+msgstr "Venstreklik for at erstatte sekundær farve med primær farve."
 
 #: Pinta.Tools/Tools/RecolorTool.cs:73 Pinta.Tools/Tools/FloodTool.cs:93
 msgid "Tolerance"
@@ -332,6 +335,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Klik og træk for at tegne en ellipse (højreklik for sekundær farve). Hold "
+"skift-tasten nede for at tegne en cirkel."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -342,6 +347,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Klik og træk for at tegne et rektangel (højreklik for sekundær farve). Hold "
+"skift-tasten nede for at tegne et kvadrat."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -349,11 +356,11 @@ msgstr "Radius"
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:92
 msgid "Decrease rectangle's corner radius"
-msgstr "Formindsk rektanglens hjørne-radius"
+msgstr "Formindsk rektangelhjørnets radius"
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:106
 msgid "Increase rectangle's corner radius"
-msgstr "Forøg rektanglens hjørne-radius"
+msgstr "Forøg rektangelhjørnets radius"
 
 #: Pinta.Tools/Tools/LineCurveTool.cs:37
 msgid "Line"
@@ -364,8 +371,8 @@ msgid ""
 "Left click to draw with primary color, right click for secondary color. Hold "
 "Shift key to snap to angles."
 msgstr ""
-"Venstreklik for at tegne med primærfarven, højreklik for at tegne med "
-"sekondærfarven. Hold skift-tasten nede for at rette ind til vinkler."
+"Venstreklik for at tegne med primær farve, højreklik for at tegne med "
+"sekundær farve. Hold skift-tasten nede for at låse vinklen."
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
 msgid "Flood Mode"
@@ -388,8 +395,8 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Klik og træk for at tegne farveovergang fra primær til sekundær farve. Højre "
-"klik for modsat."
+"Klik og træk for at skabe en farveovergang fra primær til sekundær farve. "
+"Højre klik for modsat."
 
 #: Pinta.Tools/Tools/GradientTool.cs:172
 msgid "Linear Gradient"
@@ -420,8 +427,8 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Venstre klik for at placere cursor, indtast dernæst den ønskede tekst. Tekst "
-"farve er primær farve."
+"Venstreklik for at placere markøren, indtast dernæst den ønskede tekst. "
+"Tekstfarve er primær farve."
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:89
 msgid "Font"
@@ -441,15 +448,15 @@ msgstr "Understreg"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:147
 msgid "Left Align"
-msgstr "Venstrejustér"
+msgstr "Venstrejusteret"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:155
 msgid "Center Align"
-msgstr "MidterJustér"
+msgstr "Centreret"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:162
 msgid "Right Align"
-msgstr "Højrejustér"
+msgstr "Højrejusteret"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:174
 msgid "Text Style"
@@ -466,7 +473,7 @@ msgstr "Omrids"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:184
 msgid "Fill Background"
-msgstr "Fyld Baggrund"
+msgstr "Fyldt baggrund"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:192
 msgid "Outline width"
@@ -474,7 +481,7 @@ msgstr "Bredde af omrids"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:197
 msgid "Decrease outline size"
-msgstr "Sænk størrelsen af omridset"
+msgstr "Formindsk størrelsen af omridset"
 
 #: Pinta.Tools/Tools/TextTool/TextTool.cs:214
 msgid "Increase outline size"
@@ -482,13 +489,15 @@ msgstr "Forøg størrelsen af omridset"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
-msgstr "Ellipse markering"
+msgstr "Ellipsemarkering"
 
 #: Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Klik og træk for at tegne en elliptisk markering. Hold skift-tasten nede for "
+"at tegne en cirkel."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
@@ -500,7 +509,7 @@ msgstr "Sammenslut (+) (Ctrl + Venstreklik)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Udeluk (-) (Højreklik)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
@@ -508,7 +517,7 @@ msgstr "Xor (⊻) (Ctrl + Højreklik)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr "Gennemskær (Shift + Venstreklik)"
+msgstr "Gennemskær (Skift + Venstreklik)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
@@ -531,6 +540,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Klik og træk for at tegne en rektangulær markering. Hold skift-tasten nede "
+"for at tegne et kvadrat."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -538,7 +549,7 @@ msgstr "Panorér"
 
 #: Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
-msgstr "Klik og træk for at navigere billede."
+msgstr "Klik og træk for at flytte billedet rundt."
 
 #: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
 #, csharp-format
@@ -554,7 +565,7 @@ msgstr "Ændring af billedstørrelse"
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 #: Pinta.Core/Actions/ImageActions.cs:67
 msgid "Rotate 180°"
-msgstr "Rotere 180°"
+msgstr "Rotér 180°"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
@@ -567,12 +578,12 @@ msgstr "Vend billede lodret"
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 #: Pinta.Core/Actions/ImageActions.cs:65
 msgid "Rotate 90° Clockwise"
-msgstr "Rotere 90° med uret"
+msgstr "Rotér 90° med uret"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 #: Pinta.Core/Actions/ImageActions.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "Rotere 90° mod uret"
+msgstr "Rotér 90° mod uret"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
@@ -584,7 +595,7 @@ msgstr "Vend lag lodret"
 
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "Afslut billedepunkter"
+msgstr "Afslut billedpunkter"
 
 #: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 #: Pinta.Core/Actions/EditActions.cs:72 Pinta/Actions/Edit/PasteAction.cs:79
@@ -625,7 +636,7 @@ msgstr "Intet værktøj valgt."
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
-msgstr "Optegne effekt"
+msgstr "Optegne-effekt"
 
 #: Pinta.Core/Managers/EffectsManager.cs:63
 #: Pinta.Core/Managers/EffectsManager.cs:98
@@ -638,7 +649,7 @@ msgstr "Fortryd"
 
 #: Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "Omgør"
+msgstr "Gentag"
 
 #: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
@@ -646,11 +657,11 @@ msgstr "Klip"
 
 #: Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
-msgstr "Kopiere"
+msgstr "Kopiér"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr "Kopi Forenet"
+msgstr "Kopiér forenet"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
@@ -679,7 +690,7 @@ msgstr "Vælg alle"
 
 #: Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr "Afmarker alt"
+msgstr "Fravælg alt"
 
 #: Pinta.Core/Actions/EditActions.cs:81 Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
@@ -708,15 +719,15 @@ msgstr "Slet markering"
 
 #: Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr "Fravælg"
+msgstr "Afmarkér"
 
 #: Pinta.Core/Actions/EditActions.cs:319
 msgid "Open Palette File"
-msgstr "Åben palet fil"
+msgstr "Åbn paletfil"
 
 #: Pinta.Core/Actions/EditActions.cs:326
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "Palet filer (*.txt, *.gpl)"
+msgstr "Paletfiler (*.txt, *.gpl)"
 
 #: Pinta.Core/Actions/EditActions.cs:330
 #: Pinta/Actions/File/OpenDocumentAction.cs:68
@@ -729,8 +740,8 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"Kunne ikke åbne palet fil: {0}.\n"
-"Kontroller venligst at du prøver på at åbne en gyldig GIMP eller Paint.NET "
+"Kunne ikke åbne paletfil: {0}.\n"
+"Kontrollér venligst, at du prøver på at åbne en gyldig GIMP eller Paint.NET "
 "palet."
 
 #: Pinta.Core/Actions/EditActions.cs:347
@@ -741,7 +752,7 @@ msgstr "Fejl"
 
 #: Pinta.Core/Actions/EditActions.cs:359
 msgid "Save Palette File"
-msgstr "Gem palet fil"
+msgstr "Gem paletfil"
 
 #: Pinta.Core/Actions/EditActions.cs:365
 msgid "Paint.NET palette (*.txt)"
@@ -754,7 +765,7 @@ msgstr "GIMP palet (*.gpl)"
 #: Pinta.Core/Actions/ImageActions.cs:59
 #: Pinta.Core/Actions/ImageActions.cs:277
 msgid "Crop to Selection"
-msgstr "Beskær til valg"
+msgstr "Beskær til markering"
 
 #: Pinta.Core/Actions/ImageActions.cs:60
 msgid "Auto Crop"
@@ -799,7 +810,7 @@ msgstr "Zoom ud"
 
 #: Pinta.Core/Actions/ViewActions.cs:77
 msgid "Best Fit"
-msgstr "Bedst Egnet"
+msgstr "Bedste tilpasning"
 
 #: Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom to Selection"
@@ -815,7 +826,7 @@ msgstr "Værktøjslinje"
 
 #: Pinta.Core/Actions/ViewActions.cs:81
 msgid "Pixel Grid"
-msgstr "Billedepunkter gitter"
+msgstr "Billedpunktsgitter"
 
 #: Pinta.Core/Actions/ViewActions.cs:82
 msgid "Rulers"
@@ -849,7 +860,7 @@ msgstr "Enheder på lineal"
 
 #: Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "Håndtering af udvidelsesmoduler"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:292
@@ -864,16 +875,16 @@ msgstr "Slet lag"
 #: Pinta.Core/Actions/LayerActions.cs:67
 #: Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "Dupliker lag"
+msgstr "Duplikér lag"
 
 #: Pinta.Core/Actions/LayerActions.cs:68
 #: Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr "Fusionere lag nedad"
+msgstr "Forén lag nedad"
 
 #: Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr "Importere fra fil..."
+msgstr "Importér fra fil..."
 
 #: Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
@@ -891,16 +902,16 @@ msgstr "Flyt lag ned"
 
 #: Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr "Lag egenskaber..."
+msgstr "Lagegenskaber..."
 
 #: Pinta.Core/Actions/LayerActions.cs:157
 #: Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "Åbn billede fil"
+msgstr "Åbn billedfil"
 
 #: Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr "Importere fra fil"
+msgstr "Importér fra fil"
 
 #: Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -940,11 +951,11 @@ msgstr "Åbn"
 
 #: Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta Websted"
+msgstr "Pinta hjemmeside"
 
 #: Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "Rapportere en fejl"
+msgstr "Rapportér en fejl"
 
 #: Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
@@ -964,11 +975,11 @@ msgstr "Additiv"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "Farvebrænding"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "Farveundvigelse"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
@@ -981,7 +992,7 @@ msgstr "Glød"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "Læg over"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
@@ -993,15 +1004,15 @@ msgstr "Negation"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr "Lysne"
+msgstr "Gør lysere"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr "Mørkne"
+msgstr "Gør mørkere"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr ""
+msgstr "Skærm"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
@@ -1033,12 +1044,12 @@ msgstr "Kantudjævning fra"
 
 #: Pinta.Core/Classes/Document.cs:350
 msgid "copy"
-msgstr "kopiere"
+msgstr "kopiér"
 
 #: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "Ændr lærred"
+msgstr "Ændr størrelse på lærred"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:41
 #: Pinta/Dialogs/VersionInformationTabPage.cs:50
@@ -1055,7 +1066,7 @@ msgstr "Frigivet under MIT X11 Licens."
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "Copyright"
-msgstr "Copyright"
+msgstr "Ophavsret"
 
 #: Pinta/Dialogs/AboutPintaTabPage.cs:57
 msgid "by Pinta contributors"
@@ -1067,7 +1078,7 @@ msgstr "Billede kan ikke sættes ind"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
 msgid "The clipboard does not contain an image."
-msgstr "Der er ikke et billede i clipboardet."
+msgstr "Der er ikke et billede i udklipsholderen."
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -1079,7 +1090,7 @@ msgstr "Sti"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr "Bidragydere om denne version:"
+msgstr "Bidragydere til denne version:"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
@@ -1089,6 +1100,7 @@ msgstr "Tidligere bidragydere:"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Alan Mortensen https://launchpad.net/~alanmortensen-am\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Marc Dam https://launchpad.net/~marcdam\n"
@@ -1102,7 +1114,7 @@ msgstr "Oversat af:"
 
 #: Pinta/Dialogs/AboutDialog.cs:152
 msgid "Based on the work of Paint.NET:"
-msgstr "Baseret på arbejdet med Paint.NET"
+msgstr "Baseret på Paint.NET:"
 
 #: Pinta/Dialogs/AboutDialog.cs:159
 msgid "Using some icons from:"
@@ -1110,7 +1122,7 @@ msgstr "Bruger nogle ikoner fra:"
 
 #: Pinta/Dialogs/AboutDialog.cs:167
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "Drevet af Mono:"
 
 #: Pinta/Dialogs/AboutDialog.cs:274
 msgid "About Pinta"
@@ -1118,12 +1130,12 @@ msgstr "Om Pinta"
 
 #: Pinta/Dialogs/AboutDialog.cs:292
 msgid "Version Info"
-msgstr "Version Info"
+msgstr "VersionsInfo"
 
 #: Pinta/Dialogs/LayerPropertiesDialog.cs:50
 #: Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Layer Properties"
-msgstr "Lag-egenskaber"
+msgstr "Lagegenskaber"
 
 #: Pinta/Dialogs/LayerPropertiesDialog.cs:159
 msgid "Name:"
@@ -1135,11 +1147,11 @@ msgstr "Synlig"
 
 #: Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
 msgid "Blend Mode"
-msgstr "Blande tilstand"
+msgstr "Blandetilstand"
 
 #: Pinta/Dialogs/LayerPropertiesDialog.cs:189
 msgid "Opacity:"
-msgstr "Uigennemsighed:"
+msgstr "Uigennemsigtighed:"
 
 #: Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
@@ -1164,7 +1176,7 @@ msgstr "Rotér / Zoom Lag"
 
 #: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
 msgid "Layer Opacity"
-msgstr "Lag uigennemsigtighed"
+msgstr "Lagets uigennemsigtighed"
 
 #: Pinta/Actions/Layers/LayerPropertiesAction.cs:97
 msgid "Rename Layer"
@@ -1188,15 +1200,14 @@ msgstr "Ny størrelse af palet:"
 
 #: Pinta/Actions/Edit/PasteAction.cs:125
 msgid "Image larger than canvas"
-msgstr "Billede størrere end lærred"
+msgstr "Billede større end lærred"
 
 #: Pinta/Actions/Edit/PasteAction.cs:126
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
-"Billedet der bliver indsat er størrere end lærredet størrelse. Hvad vil du "
-"gerne gøre?"
+"Billedet, der indsættes, er større end lærredet. Hvad vil du gerne gøre?"
 
 #: Pinta/Actions/Edit/PasteAction.cs:130
 msgid "Expand canvas"
@@ -1204,11 +1215,11 @@ msgstr "Udvid lærredet"
 
 #: Pinta/Actions/Edit/PasteAction.cs:131
 msgid "Don't change canvas size"
-msgstr "Ændr ikke størrelsen af lærredet"
+msgstr "Ændr ikke lærredets størrelse"
 
 #: Pinta/Actions/File/OpenDocumentAction.cs:64
 msgid "Image files"
-msgstr "Billede filer"
+msgstr "Billedfiler"
 
 #: Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
@@ -1216,11 +1227,11 @@ msgstr "Tag skærmbillede"
 
 #: Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Forsinkelse før skærmbillede tages (sekunder)"
+msgstr "Forsinkelse før skærmbillede tages (sekunder):"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr "Gem billede fil"
+msgstr "Gem billedfil"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Pinta does not support saving images in this file format."
@@ -1228,7 +1239,7 @@ msgstr "Pinta understøtter ikke at gemme billeder i dette filformat."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
 msgid "Cannot save read only file."
-msgstr "Kan ikke gemme skrivebeskyttet fil"
+msgstr "Kan ikke gemme skrivebeskyttet fil."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
@@ -1236,7 +1247,7 @@ msgstr "Billede for stort"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "ICO filer kan ikke være større end 255 x 255 pixels."
+msgstr "ICO filer kan ikke være større end 255 x 255 billedpunkter."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 #, csharp-format
@@ -1270,7 +1281,7 @@ msgstr "_Fil"
 
 #: Pinta/MainWindow.cs:124
 msgid "_Edit"
-msgstr "R_edigere"
+msgstr "_Redigér"
 
 #: Pinta/MainWindow.cs:126
 msgid "_View"
@@ -1278,7 +1289,7 @@ msgstr "_Vis"
 
 #: Pinta/MainWindow.cs:129
 msgid "_Image"
-msgstr "B_illede"
+msgstr "_Billede"
 
 #: Pinta/MainWindow.cs:130
 msgid "_Layers"
@@ -1290,11 +1301,11 @@ msgstr "_Justeringer"
 
 #: Pinta/MainWindow.cs:132
 msgid "Effe_cts"
-msgstr "Effe_kter"
+msgstr "_Effekter"
 
 #: Pinta/MainWindow.cs:133
 msgid "A_dd-ins"
-msgstr "A_dd-ins"
+msgstr "_Udvidelsesmoduler"
 
 #: Pinta/MainWindow.cs:135
 msgid "_Window"
@@ -1302,7 +1313,7 @@ msgstr "_Vindue"
 
 #: Pinta/MainWindow.cs:139
 msgid "Tool Windows"
-msgstr "Værktøjsvindue"
+msgstr "Værktøjsvinduer"
 
 #: Pinta/MainWindow.cs:143
 msgid "_Help"
@@ -1311,12 +1322,12 @@ msgstr "_Hjælp"
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "I procent"
+msgstr "Procent:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "I absolut størrelse"
+msgstr "Absolut størrelse:"
 
 #: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
@@ -1350,7 +1361,7 @@ msgstr "Forankring:"
 
 #: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
 msgid "New Image Size          "
-msgstr "Ny billede størrelse          "
+msgstr "Ny billedstørrelse          "
 
 #: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
 msgid "Layers"
@@ -1358,7 +1369,7 @@ msgstr "Lag"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "Lærred"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1402,7 +1413,7 @@ msgstr "Kurver"
 #: Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
 msgid "Levels Adjustment"
-msgstr "Niveau justering"
+msgstr "Niveaujustering"
 
 #: Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
 #: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
@@ -1416,7 +1427,7 @@ msgstr "Lysstyrke / Kontrast"
 
 #: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "Auto niveau"
+msgstr "Autoniveau"
 
 #: Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
@@ -1444,7 +1455,7 @@ msgstr "Sammenkædet"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
 msgid "Input Histogram"
-msgstr "Input Histogram"
+msgstr "Inputhistogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
 msgid "Input"
@@ -1456,7 +1467,7 @@ msgstr "Output"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
 msgid "Output Histogram"
-msgstr "Output Histogram"
+msgstr "Outputhistogram"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
 msgid "Auto"
@@ -1490,7 +1501,7 @@ msgstr "RGB"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
 msgid "Luminosity"
-msgstr "Luminans"
+msgstr "Lysstyrke"
 
 #: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
 msgid "(256, 256)"
@@ -1517,7 +1528,7 @@ msgstr "Stilistisk"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr "Olie farvning"
+msgstr "Oliemaleri"
 
 #: Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:40
@@ -1540,7 +1551,7 @@ msgstr "Forvræng"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "Ingen fokus"
+msgstr "Ufokuseret"
 
 #: Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: Pinta.Effects/Effects/FragmentEffect.cs:33
@@ -1575,7 +1586,7 @@ msgstr "Relief"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr "Rødøje fjerne"
+msgstr "Fjern røde øjne"
 
 #: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: Pinta.Effects/Effects/GlowEffect.cs:38
@@ -1590,19 +1601,19 @@ msgstr "Drej"
 
 #: Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
-msgstr "Blyantssketch"
+msgstr "Blyantsskitse"
 
 #: Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr "Pikselere"
+msgstr "Pixelér"
 
 #: Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "Blæk skitse"
+msgstr "Blækskitse"
 
 #: Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
-msgstr "Flise refleksion"
+msgstr "Glasfliser"
 
 #: Pinta.Effects/Effects/SharpenEffect.cs:25
 msgid "Sharpen"
@@ -1628,7 +1639,7 @@ msgstr "Radial sløring"
 
 #: Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
-msgstr "Zoom sløring"
+msgstr "Zoomsløring"
 
 #: Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
@@ -1640,7 +1651,7 @@ msgstr "Tilføj støj"
 
 #: Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "Kant detektion"
+msgstr "Kantdetektion"
 
 #: Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
@@ -1660,16 +1671,16 @@ msgstr "Mandelbrot Fraktal"
 
 #: Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Soften Portrait"
-msgstr "Blødt portræt"
+msgstr "Blødgør portræt"
 
 #: Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
-msgstr "Pol invertering"
+msgstr "Polinvertering"
 
 #: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
 #: SharpenData MotionBlurEffect
 msgid "Amount"
-msgstr "Mængde"
+msgstr "Værdi"
 
 #: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
 #: EdgeDetectData EmbossEffect ReliefData TwistEffect
@@ -1686,15 +1697,15 @@ msgstr "Lysstyrke"
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr "Pensel størrelse"
+msgstr "Penselstørrelse"
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr "Celle størrelse"
+msgstr "Cellestørrelse"
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr "Cener forskydning"
+msgstr "Centerforskydning"
 
 #: OilPaintingEffect dialog
 msgid "Centered"
@@ -1730,7 +1741,7 @@ msgstr "Afstand"
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr "Kant opførsel"
+msgstr "Kantopførsel"
 
 #: MandelbrotFractalEffect dialog FragmentEffect
 msgid "Factor"
@@ -1742,7 +1753,7 @@ msgstr "Fragmenter"
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "Blæk omrids"
+msgstr "Blækomrids"
 
 #: AddNoiseEffect dialog OutlineEffect MandelbrotFractalEffect
 msgid "Intensity"
@@ -1758,7 +1769,7 @@ msgstr "Forskydning"
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr "Blyantspids størrelse"
+msgstr "Blyantspidsstørrelse"
 
 #: CloudsEffect dialog
 msgid "Percentile"
@@ -1779,15 +1790,15 @@ msgstr "Rotation"
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr "Mæthedsprocent"
+msgstr "Mætningsprocent"
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr "Skalere"
+msgstr "Skala"
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr "Frø"
+msgstr "Startværdi"
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
@@ -1814,13 +1825,14 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Brug lav kvalitet til forhåndsvisning, små billeder and små vinkler. Brug "
-"høj kvalitet for afsluttende kvalitet, store billeder og store vinkler."
+"Brug lav kvalitet til forhåndsvisning, små billeder og små vinkler. Brug høj "
+"kvalitet for afsluttende kvalitet, store billeder og store vinkler."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Tip: For bedste resultat, brug først valg værktøj for at vælge hvert øje."
+"Tip: Markér hvert øje med markeringsværktøjet for at opnå det bedste "
+"resultat."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
@@ -1841,11 +1853,11 @@ msgstr "Deaktivér"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr "Intet valgt"
+msgstr "Intet er valgt"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Tilgængelig i arkiv:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
@@ -1853,12 +1865,13 @@ msgstr "Opdatering tilgængelig"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr "Denne add-in kan ikke indlæses på grund af manglende afhænigheder"
+msgstr ""
+"Dette udvidelsesmodul kan ikke indlæses på grund af manglende afhængigheder"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr "Krævet: {0} v{1}, found v{2}"
+msgstr "Krævet: {0} v{1}, fundet v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
@@ -1871,7 +1884,7 @@ msgstr "Installeret version"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Arkivversion"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
@@ -1880,6 +1893,8 @@ msgstr "Downloadstørrelse"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
+"De følgende afhængigheder krævet af dette udvidelsesmodul er ikke "
+"tilgængelige:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
@@ -1887,7 +1902,7 @@ msgstr "Installation afbrudt"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr "Nogle af de påkrævede add-ins blev ikke fundet"
+msgstr "Nogle af de påkrævede udvidelsesmoduler blev ikke fundet"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
@@ -1917,7 +1932,7 @@ msgstr "Alle arkiver"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr "Håndter arkiver..."
+msgstr "Håndtér arkiver..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
@@ -1932,19 +1947,19 @@ msgstr "Opdaterer arkiv"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr "Installér Add-in Pakke"
+msgstr "Installér udvidelsesmodulpakke"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr "Add-In Pakker"
+msgstr "Udvidelsesmodulpakker"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr "Ingen add-ins fundet"
+msgstr "Ingen udvidelsesmoduler fundet"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr "Add-in"
+msgstr "Udvidelsesmodul"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
@@ -1963,164 +1978,165 @@ msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
-"Der er andre add-ins der er afhænige af de tidligere, som også vil blive "
-"afinstalléret:"
+"Der er andre udvidelsesmoduler, der er afhængige af de tidligere, som også "
+"vil blive afinstalleret:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
-"De valgte add-ins kan ikke installeres fordi der er afhænighedskonflikter."
+"De valgte udvidelsesmoduler kan ikke installeres, fordi der er "
+"afhængighedskonflikter."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Følgende pakker vil blive installeret:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (i brugermappe)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Følgende pakker mangler at blive afinstalleret:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Følgende afhængigheder kunne ikke løses:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "Er du sikker på, du vil afbryde installationen?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Installerer udvidelsesmoduler"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "Installationen mislykkedes!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "Installationen er gennemført med advarsler."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Afinstallerer udvidelsesmoduler"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "Afinstallationen mislykkedes!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "Afinstallationen er gennemført med advarsler."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Registrerer arkiv"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "Der opstod en undtagelse: {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Mere information"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Installér..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Opdatér"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "_Afinstallér..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "Yderligere udvidelser er krævet for at udføre denne handling."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "De følgende udvidelsesmoduler vil blive installeret:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Ingen opdateringer fundet"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Opdatér"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Opdatér alle"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Arkiv:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Installér fra fil..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Installér"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Håndtering af arkiver for udvidelsesmoduler"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Tilføj nyt arkiv"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "Vælg placeringen af det arkiv, du vil registrere:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Registrér et arkiv på nettet"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "Url:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Registrér et lokalt arkiv"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Sti:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Gennemse..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "Status"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(leveret af {0})"
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Text - Færdiggør"

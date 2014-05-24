@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -1092,7 +1092,7 @@ msgstr ""
 "  Omer GOK https://launchpad.net/~mechulkalan\n"
 "  Yalçın Can https://launchpad.net/~yalcin.can\n"
 "  Yusuf ÜLKÜ https://launchpad.net/~yusufulku\n"
-"  rosencreuz https://launchpad.net/~iyiguncevik"
+"  rosencreuz https://launchpad.net/~rosencreuz"
 
 #: Pinta/Dialogs/AboutDialog.cs:146
 msgid "Translated by:"
