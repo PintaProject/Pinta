@@ -1,105 +1,146 @@
-Format: http://dep.debian.net/deps/dep5/
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pinta
-Upstream-Contact: Pinta Maintainers (https://launchpad.net/~pinta-maintainers)
-Source: https://github.com/PintaProject/Pinta/downloads
+Upstream-Contact: pinta@googlegroups.com
+Upstream-Source: https://github.com/PintaProject/Pinta/releases
 
 Files: *
-Copyright: 2010, Jonathan Pobst <monkey@jpobst.com>
-License: MIT
+Copyright: 2010-2011, Jonathan Pobst
+License: Expat
 
-Files: debian/*
-Copyright: 2010, Iain Lane <laney@ubuntu.com>
-License: MIT
-
-Files: Pinta.Core/Effects/UnaryPixelOp.cs,
-       Pinta.Core/Effects/HistogramRGB.cs,
-       Pinta.Core/Effects/UnaryPixelOps.cs,
-       Pinta.Core/Effects/Utility.cs,
-       Pinta.Core/Effects/PixelOp.cs,
-       Pinta.Core/Effects/ColorBgra.cs,
-       Pinta.Core/Effects/RgbColor.cs,
-       Pinta.Core/Effects/HsvColor.cs,
-       Pinta.Core/Effects/Histogram.cs,
-       Pinta.Core/Effects/IrregularSurface.cs,
-       Pinta.Core/Effects/LocalHistogramEffect.cs,
-       Pinta.Core/Effects/UserBlendOps.Generated.cs,
-       Pinta.Core/Effects/SplineInterpolator.cs,
-       Pinta.Core/Effects/ColorTransferMode.cs,
-       Pinta.Core/Effects/IBitVector2D.cs,
-       Pinta.Core/Effects/PlacedSurface.cs,
-       Pinta.Core/Effects/ColorDifferenceEffect.cs,
-       Pinta.Core/Effects/Scanline.cs,
-       Pinta.Core/Effects/BinaryPixelOp.cs,
-       Pinta.Core/Effects/ISurfaceDraw.cs,
-       Pinta.Core/Effects/UserBlendOps.cs,
-       Pinta.Core/Effects/UserBlendOp.cs,
-       Pinta.Core/Effects/BitVector2DSurfaceAdapter.cs,
-       Pinta.Core/Classes/IndexEventArgs.cs,
-       Pinta.Core/Classes/GradientRenderers.cs,
-       Pinta.Core/Classes/IndexEventHandler.cs,
-       Pinta.Core/Classes/GradientRenderer.cs,
-       Pinta.Core/Classes/ScaleFactor.cs,
-       Pinta/Widgets/HistogramWidget.cs,
-       Pinta/ConfigurableEffects/SoftenPortraitEffect.cs,
-       Pinta/ConfigurableEffects/PerlinNoise2D.cs,
-       Pinta.Resources/Resources/ColorPalette.SwapIcon.png,
-       Pinta.Resources/Resources/Menu.Adjustments.AutoLevel.png,
-       Pinta.Resources/Resources/Menu.Adjustments.BlackAndWhite.png,
-       Pinta.Resources/Resources/Menu.Adjustments.HueAndSaturation.png,
-       Pinta.Resources/Resources/Menu.Adjustments.InvertColors.png,
-       Pinta.Resources/Resources/Menu.Adjustments.Levels.png,
-       Pinta.Resources/Resources/Menu.Adjustments.Posterize.png,
-       Pinta.Resources/Resources/Menu.Adjustments.Sepia.png,
-       Pinta.Resources/Resources/Menu.Edit.Deselect.png,
-       Pinta.Resources/Resources/Menu.Edit.EraseSelection.png,
-       Pinta.Resources/Resources/Menu.Edit.FillSelection.png,
-       Pinta.Resources/Resources/Menu.Edit.InvertSelection.png,
-       Pinta.Resources/Resources/Menu.Edit.SelectAll.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.Fragment.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.SurfaceBlur.png,
-       Pinta.Resources/Resources/Menu.Image.CanvasSize.png,
-       Pinta.Resources/Resources/Menu.Image.Crop.png,
-       Pinta.Resources/Resources/Menu.Image.Flatten.png,
-       Pinta.Resources/Resources/Menu.Image.Resize.png,
-       Pinta.Resources/Resources/Menu.Image.Rotate180CW.png,
-       Pinta.Resources/Resources/Menu.Image.Rotate90CCW.png,
-       Pinta.Resources/Resources/Menu.Image.Rotate90CW.png,
-       Pinta.Resources/Resources/Menu.Layers.ImportFromFile.png,
-       Pinta.Resources/Resources/Menu.Layers.MoveLayerDown.png,
-       Pinta.Resources/Resources/Menu.Layers.MoveLayerUp.png,
-       Pinta.Resources/Resources/Menu.Layers.RotateZoom.png,
-       Pinta.Resources/Resources/Menu.View.ActualSize.png,
-       Pinta.Resources/Resources/Menu.View.Grid.png,
-       Pinta.Resources/Resources/Menu.View.Rulers.png,
-       Pinta.Resources/Resources/Menu.View.ZoomIn.png,
-       Pinta.Resources/Resources/Menu.View.ZoomOut.png,
-       Pinta.Resources/Resources/Menu.View.ZoomToSelection.png,
-       Pinta.Resources/Resources/Menu.View.ZoomToWindow.png,
-       Pinta.Resources/Resources/ShapeTool.OutlineFill.png,
-       Pinta.Resources/Resources/StatusBar.CursorXY.png,
-       Pinta.Resources/Resources/Toolbar.MinusButton.png,
-       Pinta.Resources/Resources/Toolbar.PlusButton.png,
-       Pinta.Resources/Resources/Tools.CloneStamp.png,
-       Pinta.Resources/Resources/Tools.Ellipse.png,
-       Pinta.Resources/Resources/Tools.EllipseSelect.png,
-       Pinta.Resources/Resources/Tools.Eraser.png,
-       Pinta.Resources/Resources/Tools.FreeformShape.png,
-       Pinta.Resources/Resources/Tools.Gradient.png,
-       Pinta.Resources/Resources/Tools.LassoSelect.png,
-       Pinta.Resources/Resources/Tools.Line.png,
-       Pinta.Resources/Resources/Tools.Move.png,
-       Pinta.Resources/Resources/Tools.MoveSelection.png,
-       Pinta.Resources/Resources/Tools.Pan.png,
-       Pinta.Resources/Resources/Tools.Recolor.png,
-       Pinta.Resources/Resources/Tools.Rectangle.png,
-       Pinta.Resources/Resources/Tools.RectangleSelect.png,
-       Pinta.Resources/Resources/Tools.RoundedRectangle.png,
-       Pinta.Resources/Resources/Tools.Text.png
+Files: Pinta.Core/Classes/GradientRenderer.cs
+ Pinta.Core/Classes/GradientRenderers.cs
+ Pinta.Core/Classes/IndexEventArgs.cs
+ Pinta.Core/Classes/IndexEventHandler.cs
+ Pinta.Core/Classes/ScaleFactor.cs
+ Pinta.Core/Effects/BinaryPixelOp.cs
+ Pinta.Core/Effects/BitVector2DSurfaceAdapter.cs
+ Pinta.Core/Effects/ColorBgra.cs
+ Pinta.Core/Effects/ColorDifferenceEffect.cs
+ Pinta.Core/Effects/ColorTransferMode.cs
+ Pinta.Core/Effects/Histogram.cs
+ Pinta.Core/Effects/HistogramRGB.cs
+ Pinta.Core/Effects/HsvColor.cs
+ Pinta.Core/Effects/IBitVector2D.cs
+ Pinta.Core/Effects/ISurfaceDraw.cs
+ Pinta.Core/Effects/IrregularSurface.cs
+ Pinta.Core/Effects/LocalHistogramEffect.cs
+ Pinta.Core/Effects/PixelOp.cs
+ Pinta.Core/Effects/PlacedSurface.cs
+ Pinta.Core/Effects/RgbColor.cs
+ Pinta.Core/Effects/Scanline.cs
+ Pinta.Core/Effects/SplineInterpolator.cs
+ Pinta.Core/Effects/UnaryPixelOp.cs
+ Pinta.Core/Effects/UnaryPixelOps.cs
+ Pinta.Core/Effects/UserBlendOp.cs
+ Pinta.Core/Effects/UserBlendOps.Generated.cs
+ Pinta.Core/Effects/UserBlendOps.cs
+ Pinta.Core/Effects/Utility.cs
+ Pinta.Core/Extensions/OtherExtensions.cs
+ Pinta.Effects/Adjustments/AutoLevelEffect.cs
+ Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs
+ Pinta.Effects/Adjustments/BrightnessContrastEffect.cs
+ Pinta.Effects/Adjustments/CurvesEffect.cs
+ Pinta.Effects/Adjustments/HueSaturationEffect.cs
+ Pinta.Effects/Adjustments/InvertColorsEffect.cs
+ Pinta.Effects/Adjustments/LevelsEffect.cs
+ Pinta.Effects/Adjustments/PosterizeEffect.cs
+ Pinta.Effects/Adjustments/SepiaEffect.cs
+ Pinta.Effects/Effects/AddNoiseEffect.cs
+ Pinta.Effects/Effects/BulgeEffect.cs
+ Pinta.Effects/Effects/CloudsEffect.cs
+ Pinta.Effects/Effects/EdgeDetectEffect.cs
+ Pinta.Effects/Effects/EmbossEffect.cs
+ Pinta.Effects/Effects/FragmentEffect.cs
+ Pinta.Effects/Effects/FrostedGlassEffect.cs
+ Pinta.Effects/Effects/GaussianBlurEffect.cs
+ Pinta.Effects/Effects/GlowEffect.cs
+ Pinta.Effects/Effects/InkSketchEffect.cs
+ Pinta.Effects/Effects/JuliaFractalEffect.cs
+ Pinta.Effects/Effects/LocalHistogramEffect.cs
+ Pinta.Effects/Effects/MandelbrotFractalEffect.cs
+ Pinta.Effects/Effects/MedianEffect.cs
+ Pinta.Effects/Effects/MotionBlurEffect.cs
+ Pinta.Effects/Effects/OilPaintingEffect.cs
+ Pinta.Effects/Effects/OutlineEffect.cs
+ Pinta.Effects/Effects/PencilSketchEffect.cs
+ Pinta.Effects/Effects/PixelateEffect.cs
+ Pinta.Effects/Effects/PolarInversionEffect.cs
+ Pinta.Effects/Effects/RadialBlurEffect.cs
+ Pinta.Effects/Effects/RedEyeRemoveEffect.cs
+ Pinta.Effects/Effects/ReduceNoiseEffect.cs
+ Pinta.Effects/Effects/ReliefEffect.cs
+ Pinta.Effects/Effects/SharpenEffect.cs
+ Pinta.Effects/Effects/TileEffect.cs
+ Pinta.Effects/Effects/TwistEffect.cs
+ Pinta.Effects/Effects/UnfocusEffect.cs
+ Pinta.Effects/Effects/WarpEffect.cs
+ Pinta.Effects/Effects/ZoomBlurEffect.cs
+ Pinta.Gui.Widgets/Widgets/AnglePickerGraphic.cs
+ Pinta.Gui.Widgets/Widgets/AnglePickerWidget.cs
+ Pinta.Gui.Widgets/Widgets/Canvas/CanvasRenderer.cs
+ Pinta.Gui.Widgets/Widgets/Canvas/GridRenderer.cs
+ Pinta.Tools/Tools/TextTool/EditingMode.cs
+ Pinta.Tools/Tools/TextTool/Position.cs
+ Pinta.Tools/Tools/TextTool/TextAlignment.cs
+ Pinta.Tools/Tools/TextTool/TextEngine.cs
+ Pinta.Tools/Tools/TextTool/TextTool.cs
+ Pinta.Resources/Resources/ColorPalette.SwapIcon.png
+ Pinta.Resources/Resources/Menu.Adjustments.AutoLevel.png
+ Pinta.Resources/Resources/Menu.Adjustments.BlackAndWhite.png
+ Pinta.Resources/Resources/Menu.Adjustments.HueAndSaturation.png
+ Pinta.Resources/Resources/Menu.Adjustments.InvertColors.png
+ Pinta.Resources/Resources/Menu.Adjustments.Levels.png
+ Pinta.Resources/Resources/Menu.Adjustments.Posterize.png
+ Pinta.Resources/Resources/Menu.Adjustments.Sepia.png
+ Pinta.Resources/Resources/Menu.Edit.Deselect.png
+ Pinta.Resources/Resources/Menu.Edit.EraseSelection.png
+ Pinta.Resources/Resources/Menu.Edit.FillSelection.png
+ Pinta.Resources/Resources/Menu.Edit.InvertSelection.png
+ Pinta.Resources/Resources/Menu.Edit.SelectAll.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.Fragment.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.SurfaceBlur.png
+ Pinta.Resources/Resources/Menu.Image.CanvasSize.png
+ Pinta.Resources/Resources/Menu.Image.Crop.png
+ Pinta.Resources/Resources/Menu.Image.Flatten.png
+ Pinta.Resources/Resources/Menu.Image.Resize.png
+ Pinta.Resources/Resources/Menu.Image.Rotate180CW.png
+ Pinta.Resources/Resources/Menu.Image.Rotate90CCW.png
+ Pinta.Resources/Resources/Menu.Image.Rotate90CW.png
+ Pinta.Resources/Resources/Menu.Layers.ImportFromFile.png
+ Pinta.Resources/Resources/Menu.Layers.MoveLayerDown.png
+ Pinta.Resources/Resources/Menu.Layers.MoveLayerUp.png
+ Pinta.Resources/Resources/Menu.Layers.RotateZoom.png
+ Pinta.Resources/Resources/Menu.View.ActualSize.png
+ Pinta.Resources/Resources/Menu.View.Grid.png
+ Pinta.Resources/Resources/Menu.View.Rulers.png
+ Pinta.Resources/Resources/Menu.View.ZoomIn.png
+ Pinta.Resources/Resources/Menu.View.ZoomOut.png
+ Pinta.Resources/Resources/Menu.View.ZoomToSelection.png
+ Pinta.Resources/Resources/Menu.View.ZoomToWindow.png
+ Pinta.Resources/Resources/ShapeTool.OutlineFill.png
+ Pinta.Resources/Resources/StatusBar.CursorXY.png
+ Pinta.Resources/Resources/Toolbar.MinusButton.png
+ Pinta.Resources/Resources/Toolbar.PlusButton.png
+ Pinta.Resources/Resources/Tools.CloneStamp.png
+ Pinta.Resources/Resources/Tools.Ellipse.png
+ Pinta.Resources/Resources/Tools.EllipseSelect.png
+ Pinta.Resources/Resources/Tools.Eraser.png
+ Pinta.Resources/Resources/Tools.FreeformShape.png
+ Pinta.Resources/Resources/Tools.Gradient.png
+ Pinta.Resources/Resources/Tools.LassoSelect.png
+ Pinta.Resources/Resources/Tools.Line.png
+ Pinta.Resources/Resources/Tools.Move.png
+ Pinta.Resources/Resources/Tools.MoveSelection.png
+ Pinta.Resources/Resources/Tools.Pan.png
+ Pinta.Resources/Resources/Tools.Recolor.png
+ Pinta.Resources/Resources/Tools.Rectangle.png
+ Pinta.Resources/Resources/Tools.RectangleSelect.png
+ Pinta.Resources/Resources/Tools.RoundedRectangle.png
+ Pinta.Resources/Resources/Tools.Text.png
 Copyright: 2007, Rick Brewster, Chris Crosetto, Tom Jackson, Michael Kelsey,
        Brandon Ortiz, Craig Taylor, Chris Trevino, Luke Walker,
        Microsoft Corporation
 License: Other
-
 
 Files: Pinta.Resources/Resources/Tools.ColorPicker.png
 Copyright: 2005-2006, Mark James <mjames@gmail.com>
@@ -107,134 +148,153 @@ License: CC-BY-3.0
 X-Comment: The above icon is from the Silk icon set, which can be found at
            http://www.famfamfam.com/lab/icons/silk/
 
-Files: Pinta.Resources/Resources/Menu.Effects.Artistic.InkSketch.png,
-       Pinta.Resources/Resources/Menu.Effects.Artistic.OilPainting.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.GaussianBlur.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.MotionBlur.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.RadialBlur.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.Unfocus.png,
-       Pinta.Resources/Resources/Menu.Effects.Blurs.ZoomBlur.png
+Files: Pinta.Resources/Resources/Menu.Effects.Artistic.InkSketch.png
+ Pinta.Resources/Resources/Menu.Effects.Artistic.OilPainting.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.GaussianBlur.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.MotionBlur.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.RadialBlur.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.Unfocus.png
+ Pinta.Resources/Resources/Menu.Effects.Blurs.ZoomBlur.png
 Copyright: 2010, Yusuke Kamiyamane <p@yusukekamiyamane.com>
 License: CC-BY-3.0
 X-Comment: The above icons are from the Fugue icon set, which can be found at
            http://pinvoke.com/
 
-Files: Pinta.Core/HistoryItems/UpdateLayerPropertiesHistoryItem.cs,
-       Pinta.Core/Classes/ObservableObject.cs,
-       Pinta.Core/Classes/AsyncEffectRenderer.cs,
-       Pinta.Core/Classes/LayerProperties.cs,
-       Pinta.Core/Managers/LivePreviewManager.cs,
-       Pinta.Core/EventArgs/LivePreviewEndedEventArgs.cs,
-       Pinta.Core/EventArgs/LivePreviewStartedEventArgs.cs,
-       Pinta.Core/EventArgs/LivePreviewRenderUpdatedEventArgs.cs,
-       Pinta/Widgets/CellRendererSurface.cs,
-       Pinta/Dialogs/ProgressDialog.cs,
-       Pinta/ConfigurableEffects/EffectHelper.cs
-Copyright: 2010, Greg Lowe <greg@vis.net.nz>
-License: MIT
+Files: Pinta.Core/Classes/AsyncEffectRenderer.cs
+ Pinta.Core/Classes/LayerProperties.cs
+ Pinta.Core/Classes/ObservableObject.cs
+ Pinta.Core/EventArgs/LivePreviewEndedEventArgs.cs
+ Pinta.Core/EventArgs/LivePreviewRenderUpdatedEventArgs.cs
+ Pinta.Core/EventArgs/LivePreviewStartedEventArgs.cs
+ Pinta.Core/HistoryItems/UpdateLayerPropertiesHistoryItem.cs
+ Pinta.Core/Managers/LivePreviewManager.cs
+ Pinta.Effects/Utilities/EffectHelper.cs
+ Pinta.Gui.Widgets/Widgets/Layers/CellRendererSurface.cs
+ Pinta/Dialogs/ProgressDialog.cs
+Copyright: 2010, Greg Lowe
+License: Expat
 
-Files: Pinta.Core/Managers/PathManager.cs,
-       Pinta.Tools/PanTool.cs,
-       Pinta.Tools/TextTool.cs,
-       Pinta.Tools/ZoomTool.cs,
-       Pinta.Tools/MagicWandTool.cs,
-       Pinta.Tools/GradientTool.cs,
-       Pinta/ConfigurableEffects/WarpEffect.cs,
-       Pinta/ConfigurableEffects/PolarInversionEffect.cs,
-       Pinta/ConfigurableEffects/MotionBlurEffect.cs,
-       Pinta/ConfigurableEffects/BulgeEffect.cs,
-       Pinta/ConfigurableEffects/JuliaFractalEffect.cs,
-       Pinta/ConfigurableEffects/DentsEffect.cs,
-       Pinta/ConfigurableEffects/CloudsEffect.cs,
-       Pinta/ConfigurableEffects/MandelbrotFractalEffect.cs,
-       Pinta/ConfigurableEffects/ZoomBlurEffect.cs,
-       Pinta/ConfigurableEffects/FragmentEffect.cs,
-       Pinta/ConfigurableEffects/RadialBlurEffect.cs,
-       Pinta.Gui.Widgets/Widgets/ComboBoxWidget.cs,
-       Pinta.Gui.Widgets/Widgets/PointPickerGraphic.cs,
-       Pinta.Gui.Widgets/Widgets/Canvas/GridRenderer.cs,
-       Pinta.Gui.Widgets/Widgets/PointPickerWidget.cs
-Copyright: 2010, Olivier Dufour <olivier.duff@gmail.com>
-License: MIT
-
-Files: Pinta/ConfigurableEffects/AddNoiseEffect.cs,
-       Pinta/ConfigurableEffects/LocalHistogramEffect.cs,
-       Pinta/ConfigurableEffects/ReduceNoiseEffect.cs,
-       Pinta/ConfigurableEffects/MedianEffect.cs,
-       Pinta/ConfigurableEffects/UnfocusEffect.cs,
-       Pinta/ConfigurableEffects/SurfaceBlurEffect.cs,
-       Pinta/ConfigurableEffects/OutlineEffect.cs
-Copyright: 2010, Hanh Pham <hanh.pham@gmx.com>
-License: MIT
-
-Files: Pinta/Widgets/HScaleSpinButtonWidget.cs,
-       Pinta/Widgets/ColorGradientWidget.cs,
-       Pinta/Widgets/ColorPanelWidget.cs,
-       Pinta/Dialogs/CurvesDialog.cs,
-       Pinta/Dialogs/PosterizeDialog.cs,
-       Pinta/Dialogs/LevelsDialog.cs,
-       Pinta/ConfigurableEffects/PosterizeEffect.cs,
-       Pinta/ConfigurableEffects/SharpenEffect.cs,
-       Pinta/ConfigurableEffects/EdgeDetectEffect.cs,
-       Pinta/ConfigurableEffects/CurvesEffect.cs,
-       Pinta/ConfigurableEffects/BrightnessContrastEffect.cs,
-       Pinta/ConfigurableEffects/LevelsEffect.cs,
-       Pinta/ConfigurableEffects/HueSaturationEffect.cs,
-       Pinta/ConfigurableEffects/RedEyeRemoveEffect.cs,
-       Pinta.Gui.Widgets/Widgets/HScaleSpinButtonWidget.cs
-Copyright: 2010, Krzysztof Marecki <marecki.krzysztof@gmail.com>
-License: MIT
-
-Files: Pinta/ConfigurableEffects/EmbossEffect.cs,
-       Pinta/ConfigurableEffects/PixelateEffect.cs,
-       Pinta/ConfigurableEffects/TileEffect.cs,
-       Pinta/ConfigurableEffects/TwistEffect.cs,
-       Pinta/ConfigurableEffects/FrostedGlassEffect.cs,
-       Pinta/ConfigurableEffects/ReliefEffect.cs
-Copyright: 2010, Marco Rolappe <m_rolappe@gmx.net>
-License: MIT
-
-Files: Pinta.Core/ImageFormats/IImageExporter.cs,
-       Pinta.Core/ImageFormats/IImageImporter.cs,
-       Pinta.Core/ImageFormats/OraFormat.cs
+Files: Pinta.Core/Classes/Palette.cs
+ Pinta.Core/EventArgs/ModifyCompressionEventArgs.cs
+ Pinta.Core/ImageFormats/FormatDescriptor.cs
+ Pinta.Core/ImageFormats/GdkPixbufFormat.cs
+ Pinta.Core/ImageFormats/IImageExporter.cs
+ Pinta.Core/ImageFormats/IImageImporter.cs
+ Pinta.Core/ImageFormats/JpegFormat.cs
+ Pinta.Core/ImageFormats/OraFormat.cs
+ Pinta.Core/ImageFormats/TgaExporter.cs
+ Pinta/Dialogs/JpegCompressionDialog.cs
+ Pinta/Dialogs/SpinButtonEntryDialog.cs
 Copyright: 2010, Maia Kozheva <sikon@ubuntu.com>
-License: MIT
-
-Files: Pinta/Dialogs/AboutDialog.cs
-Copyright: 2004-2008, Todd Berman, John Luke, Novell Inc.
-License: MIT
-
-Files: Pinta/Dialogs/AboutPintaTabPage.cs
-Copyright: 2009 RemObjects Software
-License: MIT
+License: Expat
 
 Files: Pinta/DockLibrary/*
-Copyright: 2007, Novell Inc.
-License: MIT
+ Pinta.Core/Classes/BasePaintBrush.cs
+ Pinta.Core/Managers/PaintBrushManager.cs
+ Pinta.Gui.Widgets/DialogAttributes.cs
+ Pinta.Tools/Brushes/CircleBrush.cs
+ Pinta.Tools/Brushes/GridBrush.cs
+ Pinta.Tools/Brushes/PaintBrush.cs
+ Pinta.Tools/Brushes/PlainBrush.cs
+ Pinta.Tools/Brushes/SquaresBrush.cs
+ Pinta/Dialogs/ErrorDialog.cs
+ Pinta/DockLibrary/DockItemToolbar.cs
+ Pinta/DockLibrary/HslColor.cs
+ Pinta/DockLibrary/ShadedContainer.cs
+ Pinta/Options.cs
+Copyright: 2007-2010, Novell, Inc
+License: Expat
 
-License: MIT
- Permission is hereby granted, free of charge, to any person obtaining a copy of
- this software and associated documentation files (the "Software"), to deal in
- the Software without restriction, including without limitation the rights to
- use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- the Software, and to permit persons to whom the Software is furnished to do so,
- subject to the following conditions:
+Files: Pinta.Gui.Widgets/Widgets/ComboBoxWidget.cs
+ Pinta.Gui.Widgets/Widgets/PointPickerGraphic.cs
+ Pinta.Gui.Widgets/Widgets/PointPickerWidget.cs
+ Pinta.Tools/Tools/GradientTool.cs
+ Pinta.Tools/Tools/MagicWandTool.cs
+ Pinta.Tools/Tools/PanTool.cs
+ Pinta.Tools/Tools/ZoomTool.cs
+ Pinta.Tools/Tools/ToolControl/ToolControl.cs
+Copyright: 2010-2011, Olivier Dufour
+License: Expat
+
+Files: Pinta.Effects/Dialogs/Effects.CurvesDialog.cs
+ Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs
+ Pinta.Gui.Widgets/Widgets/ColorGradientWidget.cs
+ Pinta.Gui.Widgets/Widgets/ColorPanelWidget.cs
+ Pinta.Effects/Dialogs/Effects.LevelsDialog.cs
+ Pinta.Gui.Widgets/Widgets/HistogramWidget.cs
+ Pinta.Gui.Widgets/Widgets/HScaleSpinButtonWidget.cs
+Copyright: 2010, Krzysztof Marecki <marecki.krzysztof@gmail.com>
+License: Expat
+
+Files: Pinta/Actions/Layers/RotateZoomLayerAction.cs
+ Pinta/Dialogs/ClipboardEmptyDialog.cs
+ Pinta.Gui.Widgets/Widgets/OpenImages/OpenImagesListWidget.cs
+ Pinta/Pads/OpenImagesPad.cs
+Copyright: 2011-2012, Cameron White
+License: Expat
+
+Files: Pinta/Dialogs/AboutPintaTabPage.cs
+Copyright: 2009, RemObjects Software
+License: Expat
+
+Files: Pinta.Core/EventArgs/HistoryItemRemovedEventArgs.cs
+ Pinta.Core/EventArgs/HistoryItemRemovedEventArgs.cs
+Copyright: 2010, Anirudh Sanjeev
+License: Expat
+
+Files: Pinta.Effects/Effects/SoftenPortraitEffect.cs
+ Pinta.Effects/Effects/SoftenPortraitEffect.cs
+Copyright: 2007, David Issel
+License: Expat
+
+Files: Pinta/IgeMacMenu.cs
+ Pinta/IgeMacMenu.cs
+Copyright: 2010, Eoin Hennessy
+License: Expat
+
+Files: Pinta/Dialogs/AboutDialog.cs
+ Pinta/Dialogs/AboutDialog.cs
+Copyright: 2004, John Luke
+ 2004, Todd Berman
+ 2008, Novell, Inc
+License: Expat
+
+Files: Pinta/Actions/Edit/PasteAction.cs
+ Pinta/Actions/Edit/PasteAction.cs
+Copyright: 2012, Jonathan Pobst, Cameron White
+License: Expat
+
+Files: Pinta.Tools/Tools/BaseBrushTool.cs
+ Pinta.Tools/Tools/BaseBrushTool.cs
+Copyright: 2010, Joseph Hillenbrand
+License: Expat
+
+Files: Pinta/Dialogs/VersionInformationTabPage.cs
+Copyright: 2009, RemObjects Software
+License: Expat
+
+Files: Pinta.Core/Widgets/MenuButton.cs
+Copyright: 2008, Scott Peterson
+License: Expat
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
  .
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
  .
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-X-Comment: While the exception about the Paint.NET logo below might make this
-           package look non-free, it is not actually distributed in the package
-           at all. Upstream is reluctant to modify the pre-fork license to
-           remove the clause. So this is really just the same MIT license as
-           above.
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
 
 License: Other
  This software is licensed as per the MIT License below, but with one exception:
@@ -264,6 +324,11 @@ License: Other
  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: While the exception about the Paint.NET logo below might make this
+           package look non-free, it is not actually distributed in the package
+           at all. Upstream is reluctant to modify the pre-fork license to
+           remove the clause. So this is really just the same MIT license as
+           above.
 
 License: CC-BY-3.0
  THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE

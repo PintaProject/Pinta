@@ -1,4 +1,23 @@
-pinta (1.2-0ubuntu1~oneiric1) oneiric; urgency=low
+pinta (1.4-0ppa1~saucy1) saucy; urgency=low
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Thu, 02 Jan 2014 18:53:31 -0500
+
+pinta (1.4-0ppa1~quantal1) quantal; urgency=low
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Wed, 26 Sep 2012 19:44:13 -0400
+
+pinta (1.3-0ubuntu1~precise1) precise; urgency=low
+
+  * New upstream release with a focus on improved stability.
+  * 35 bug fixes, 17 of which were for high-priority issues and crashes.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sat, 28 Apr 2012 13:59:08 -0400
+
+pinta (1.2-0ubuntu1~precise1) precise; urgency=low
 
   * New upstream release with numerous bug fixes and new features.
 
