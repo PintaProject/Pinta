@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-11-06 07:17+0000\n"
-"Last-Translator: Jongwon Kim <nanpa777@hanmail.net>\n"
+"PO-Revision-Date: 2013-11-30 05:13+0000\n"
+"Last-Translator: Litty <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -1071,6 +1071,7 @@ msgstr ""
 "  Choi gyu ho https://launchpad.net/~cgh48\n"
 "  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim\n"
 "  Jongwon Kim https://launchpad.net/~nanpa777-y\n"
+"  Litty https://launchpad.net/~litty\n"
 "  Mike Sierra https://launchpad.net/~ubuntuda\n"
 "  Softblow https://launchpad.net/~ccwpc"
 
@@ -2045,7 +2046,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "설치"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
@@ -2053,7 +2054,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "새 저장소 추가"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
@@ -2061,7 +2062,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "온라인 저장소 등록"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
