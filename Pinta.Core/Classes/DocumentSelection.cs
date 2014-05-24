@@ -70,7 +70,7 @@ namespace Pinta.Core
 			
 			if (fillSelection)
 			{
-				g.Color = new Cairo.Color (0.7, 0.8, 0.9, 0.2);
+				g.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.2));
 				g.FillRule = Cairo.FillRule.EvenOdd;
 				g.FillPreserve ();
 			}
@@ -78,12 +78,12 @@ namespace Pinta.Core
 			g.LineWidth = 1 / scale;
 			
 			// Draw a white line first so it shows up on dark backgrounds
-			g.Color = new Cairo.Color (1, 1, 1);
+			g.SetSourceColor (new Cairo.Color (1, 1, 1));
 			g.StrokePreserve ();
 			
 			// Draw a black dashed line over the white line
 			g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
-			g.Color = new Cairo.Color (0, 0, 0);
+			g.SetSourceColor (new Cairo.Color (0, 0, 0));
 			
 			g.Stroke ();
 			g.Restore ();

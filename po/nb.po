@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2012-04-22 20:07+0000\n"
-"Last-Translator: Robert Nordan <Unknown>\n"
+"PO-Revision-Date: 2014-04-22 20:32+0000\n"
+"Last-Translator: Harald H. <haarektrans@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-14 16:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
-msgstr ""
+msgstr "Lag vises"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Hidden"
-msgstr ""
+msgstr "Lag skjult"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
 msgid "Choose Primary Color"
@@ -40,25 +40,27 @@ msgstr "Velg palettfarge"
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
 msgid "Click to switch between primary and secondary color."
-msgstr ""
+msgstr "Klikk for bytte mellom primær- og sekundærfarge."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Klikk for å tilbakestille primær- og sekundærfarge."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Klikk for å velge primærfarge."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Klikk for å velge sekundærfarge."
 
 #: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
+"Venstreklikk for å sette primærfarge. Høyreklikk for å sette sekundærfarge. "
+"Mellomklikk for å velge palettfarge."
 
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 #: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
@@ -119,6 +121,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Venstreklikk for å frihåndstegne en-piksel brede linjer med primærfargen. "
+"Høyreklikk for å bruke den sekundære farger."
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:52
 msgid "Freeform Shape"
@@ -212,7 +216,7 @@ msgstr "Lag"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr ""
+msgstr "Bilde"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
@@ -239,6 +243,8 @@ msgid ""
 "Click and drag to draw a rectangle (right click for secondary color). Hold "
 "Shift to constrain to a square."
 msgstr ""
+"Klikk og dra for å tegne et rektangel (høyreklikk for sekundær farge). Hold "
+"Shift å begrense til en firkant."
 
 #: Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -272,6 +278,8 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Venstreklikk og dra utvalget for å flytte utvalgets omrisse. Høyreklikk og "
+"dra utvalget for å rotere utvalgets omrisse."
 
 #: Pinta.Tools/Tools/MoveSelectedTool.cs:43
 #: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -285,6 +293,8 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Venstreklikk og dra utvalget å flytte valgt innhold. Høyreklikk og dra "
+"utvalget for å rotere valgt innhold."
 
 #: Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -327,6 +337,8 @@ msgid ""
 "Click and drag to draw an ellipse (right click for secondary color). Hold "
 "Shift to constrain to a circle."
 msgstr ""
+"Klikk og dra for å tegne en ellipse (høyreklikk for sekundær farge). Hold "
+"Shift å begrense til en sirkel."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
@@ -337,6 +349,8 @@ msgid ""
 "Click and drag to draw a rounded rectangle (right click for secondary "
 "color). Hold Shift to constrain to a square."
 msgstr ""
+"Klikk og dra for å tegne et avrundet rektangel (høyreklikk for sekundær "
+"farge). Hold Shift å begrense til en firkant."
 
 #: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
 msgid "Radius"
@@ -484,10 +498,12 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Klikk og dra for å tegne et elliptisk utvalg. Hold Shift å begrense til en "
+"sirkel."
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:53
 msgid "Replace"
-msgstr ""
+msgstr "Erstatt"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Union (+) (Ctrl + Left Click)"
@@ -495,7 +511,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:55
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "Ekskluder (-) (Høyreklikk)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:56
 msgid "Xor (Ctrl + Right Click)"
@@ -503,7 +519,7 @@ msgstr ""
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Avskjær (Shift + Venstreklikk)"
 
 #: Pinta.Tools/Tools/MagicWandTool.cs:70
 msgid " Selection Mode: "
@@ -526,6 +542,8 @@ msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Klikk og dra for å tegne et rektangulært utvalg. Hold Shift å begrense til "
+"en firkant."
 
 #: Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
@@ -606,7 +624,7 @@ msgstr "Åpne bilde"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:192
 msgid "Permission denied"
-msgstr ""
+msgstr "Tilgang nektet"
 
 #: Pinta.Core/Managers/WorkspaceManager.cs:311
 #, csharp-format
@@ -616,7 +634,7 @@ msgstr "Kunne ikke åpne fil: {0}"
 #: Pinta.Core/Managers/ToolManager.cs:234
 #: Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Ingen verktøy er valgt."
 
 #: Pinta.Core/Managers/LivePreviewManager.cs:217
 msgid "Rendering Effect"
@@ -645,7 +663,7 @@ msgstr "Kopiér"
 
 #: Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Kopi slått sammen"
 
 #: Pinta.Core/Actions/EditActions.cs:73
 #: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
@@ -844,7 +862,7 @@ msgstr "Linjalenheter"
 
 #: Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "Tilleggshåndtering"
 
 #: Pinta.Core/Actions/LayerActions.cs:65
 #: Pinta.Core/Actions/LayerActions.cs:292
@@ -951,7 +969,7 @@ msgstr "Om"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "Multipliser"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
@@ -967,7 +985,7 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "Reflekter"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -976,11 +994,11 @@ msgstr "Glød"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "Overlegg"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr ""
+msgstr "Forskjell"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
@@ -988,11 +1006,11 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "Gjør lysere"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "Gjør mørkere"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
@@ -1058,11 +1076,11 @@ msgstr "av Pintas bidragsytere"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "Bildet kan ikke limes inn"
 
 #: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "Utklippstavlen inneholder ikke et bilde."
 
 #: Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -1074,11 +1092,11 @@ msgstr "Sti"
 
 #: Pinta/Dialogs/AboutDialog.cs:120
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Bidragsytere til denne utgivelsen:"
 
 #: Pinta/Dialogs/AboutDialog.cs:132
 msgid "Previous contributors:"
-msgstr ""
+msgstr "Tidligere bidragsytere:"
 
 #: Pinta/Dialogs/AboutDialog.cs:143
 msgid "translator-credits"
@@ -1086,6 +1104,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Espen L https://launchpad.net/~espenl\n"
+"  Harald H. https://launchpad.net/~haarektrans\n"
 "  Hender https://launchpad.net/~simsalabimladen\n"
 "  Robert Nordan https://launchpad.net/~rpvn\n"
 "  Svein Tore Seljebotn https://launchpad.net/~sveint\n"
@@ -1183,7 +1202,7 @@ msgstr "Ny palettstørrelse:"
 
 #: Pinta/Actions/Edit/PasteAction.cs:125
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Bildet er større enn lerretet"
 
 #: Pinta/Actions/Edit/PasteAction.cs:126
 msgid ""
@@ -1225,11 +1244,11 @@ msgstr "Kan ikke lagre over en skrivebeskyttet fil."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
-msgstr ""
+msgstr "Bildet er for stort"
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr ""
+msgstr "ICO-filer kan ikke være større enn 255 x 255 piksler."
 
 #: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 #, csharp-format
@@ -1351,7 +1370,7 @@ msgstr "Lag"
 
 #: Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
-msgstr ""
+msgstr "Lerret"
 
 #: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -1824,250 +1843,255 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "Aktiver"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "Deaktiver"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Ingen utvalg"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Tilgjengelig i lageret:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Oppdatering tilgjengelig"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
+msgstr "Dette tillegget kan ikke lastes på grunn av manglende avhengigheter"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr ""
+msgstr "Påkrevet: {0} v{1}, funnet v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "Mangler: {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "Installert versjon"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Lagerversjon"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "Nedlastingsstørrelse"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
+"Følgende avhengigheter som kreves av dette tillegget er ikke tilgjengelig:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "Installasjon avbrutt"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "Noen av de nødvendige tilleggene ble ikke funnet"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "Installasjonen mislyktes"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "Installert"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Oppdateringer"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Galleri"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Alle lagre"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Håndter lager …"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} oppdatering tilgjengelig"
+msgstr[1] "{0} oppdateringer tilgjengelig"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr ""
+msgstr "Oppdaterer lager"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr ""
+msgstr "Installer tilleggspakke"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Tilleggspakker"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Ingen tillegg ble funnet"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Tillegg"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Annet"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Avinstaller"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "Følgende pakker vil bli avinstallert:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Det er andre tillegg som er avhengige av de forrige som også vil bli "
+"avinstallert:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"De valgte tilleggene kan ikke installeres fordi det finnes "
+"avhengighetskonflikter."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Følgene pakker vil bli installert:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (i brukerkatalog)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Følgende pakker må avinstalleres:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Følgende avhengigheter kunne ikke løses:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "Er du sikker på at du vil avbryte installasjonen?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr ""
+msgstr "Installerer tillegg"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr ""
+msgstr "Installasjonen mislyktes!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "Installasjonen har blitt fullført med advarsler."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr ""
+msgstr "Avinstallerer tillegg"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "Avinstallasjonen mislyktes!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "Avinstallasjonen har blitt fullført med advarsler."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Registrere lager"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "Unntak oppstod: {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Mer informasjon"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Installer …"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Oppdater"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr ""
+msgstr "_Avinstaller …"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "Ytterligere utvidelser er nødvendig for å utføre denne operasjonen."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Følgende tillegg vil bli installert:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Ingen oppdateringer ble funnet"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Oppdater"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Oppdater alt"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Lager:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Installer fra fil …"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Installer"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
@@ -2075,35 +2099,35 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Legg til nytt lager"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "Velg lokasjon for lageret du vil registrere:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Registrer et lager på nettet"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "URL:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Registrer et lokalt lager"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Sti:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Bla gjennom …"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "Framdrift"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
@@ -2112,4 +2136,4 @@ msgstr ""
 
 #: Pinta.Tools/Tools/TextTool.cs:75
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Tekstfullføring"

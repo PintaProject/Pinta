@@ -36,6 +36,7 @@
 using System;
 using Cairo;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Pinta.Core
 {
@@ -59,7 +60,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
@@ -97,7 +98,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 
@@ -117,7 +118,7 @@ namespace Pinta.Core
 			g.LineTo (r.X, r.Y + r.Height);
 			g.LineTo (r.X, r.Y);
 
-			g.Pattern = pattern;
+			g.SetSource (pattern);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Fill ();
@@ -135,7 +136,7 @@ namespace Pinta.Core
 				g.LineTo (point.X, point.Y);
 			}
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Stroke ();
@@ -153,7 +154,7 @@ namespace Pinta.Core
 			foreach (var point in points)
 				g.LineTo (point);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 			g.Fill ();
@@ -182,10 +183,10 @@ namespace Pinta.Core
 			g.LineTo (x, y + r.Height);
 			g.LineTo (x, y);
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve ();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
@@ -216,7 +217,7 @@ namespace Pinta.Core
 
 			g.ClosePath ();
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -246,7 +247,7 @@ namespace Pinta.Core
 
 			g.ClosePath ();
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 
@@ -301,10 +302,10 @@ namespace Pinta.Core
 
 			g.ClosePath ();
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve ();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -332,10 +333,10 @@ namespace Pinta.Core
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 			g.FillPreserve ();
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -363,7 +364,7 @@ namespace Pinta.Core
 			g.Arc (r.X + radius, r.Y + r.Height - radius, radius, Math.PI / 2, Math.PI);
 			g.ClosePath ();
 
-			g.Color = fill;
+			g.SetSourceColor (fill);
 
 			Rectangle dirty = g.FixedStrokeExtents ();
 
@@ -377,7 +378,7 @@ namespace Pinta.Core
 		{
 			g.Save ();
 
-			g.Color = color;
+			g.SetSourceColor (color);
 
 			foreach (Gdk.Rectangle r in region.GetRectangles ()) {
 				g.MoveTo (r.X, r.Y);
@@ -386,7 +387,7 @@ namespace Pinta.Core
 				g.LineTo (r.X, r.Y + r.Height);
 				g.LineTo (r.X, r.Y);
 
-				g.Color = color;
+				g.SetSourceColor (color);
 
 				g.FixedStrokeExtents ();
 				g.Fill ();
@@ -403,7 +404,7 @@ namespace Pinta.Core
 
 			g.AppendPath (p);
 
-			g.Color = stroke;
+			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
 			Rectangle dirty = g.FixedStrokeExtents ();
@@ -463,7 +464,7 @@ namespace Pinta.Core
 			g.MoveTo (p1.X, p1.Y);
 			g.LineTo (p2.X, p2.Y);
 
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
@@ -485,6 +486,8 @@ namespace Pinta.Core
 		/// bottom-right corner of the Rectangle in the width and
 		/// height members. This method corrects the rectangle to
 		/// contain the width and height in the width and height members.
+		/// 
+		/// This can be removed once we port to GTK3.
 		/// </summary>
 		/// <returns>
 		/// The rectangle describing the area that would be
@@ -492,9 +495,32 @@ namespace Pinta.Core
 		/// </returns>
 		public static Rectangle FixedStrokeExtents (this Context g)
 		{
-			Rectangle r = g.StrokeExtents();
-			return new Rectangle (r.X, r.Y, r.Width - r.X, r.Height - r.Y);
+			double x1, y1, x2, y2;
+			cairo_stroke_extents (g.Handle, out x1, out y1, out x2, out y2);
+			return new Rectangle (x1, y1, x2 - x1, y2 - y1);
 		}
+
+		/// <summary>
+		/// The Pattern property is now deprecated in favour of the SetSource (pattern) method,
+		/// but that method doesn't exist in older versions of Mono.Cairo. This extension method
+		/// provides an implementation of that functionality.
+		/// 
+		/// This can be removed once we port to GTK3.
+		/// </summary>
+		public static void SetSource (this Context g, Pattern source)
+		{
+#pragma warning disable 612
+			cairo_set_source (g.Handle, source.Pointer);
+#pragma warning restore 612
+		}
+
+		private const string CairoLib = "libcairo-2.dll";
+
+		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
+		private static extern void cairo_stroke_extents (IntPtr cr, out double x1, out double y1, out double x2, out double y2);
+
+		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
+		private static extern void cairo_set_source (IntPtr cr, IntPtr pattern);
 
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
 		{
@@ -518,7 +544,7 @@ namespace Pinta.Core
 			g.Save ();
 
 			g.MoveTo (p.X, p.Y);
-			g.Color = color;
+			g.SetSourceColor (color);
 			g.Antialias = antiAliasing ? Antialias.Subpixel : Antialias.None;
 
 			Pango.Layout layout = Pango.CairoHelper.CreateLayout (g);
@@ -560,12 +586,12 @@ namespace Pinta.Core
 			if (mode == GradientColorMode.Color) {
 				gradient.AddColorStop (0, c1);
 				gradient.AddColorStop (1, c2);
-				g.Source = gradient;
+				g.SetSource (gradient);
 				g.Paint ();
 			} else if (mode == GradientColorMode.Transparency) {
 				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
-				g.Source = new SurfacePattern (oldsurface);
+				g.SetSource (new SurfacePattern (oldsurface));
 				g.Mask (gradient);
 			}
 
@@ -582,13 +608,13 @@ namespace Pinta.Core
 				gradient.AddColorStop (0, c1);
 				gradient.AddColorStop (0.5, c2);
 				gradient.AddColorStop (1, c1);
-				g.Source = gradient;
+				g.SetSource (gradient);
 				g.Paint ();
 			} else if (mode == GradientColorMode.Transparency) {
 				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (0.5, new Color (0, 0, 0, 0));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 1));
-				g.Source = new SurfacePattern (oldsurface);
+				g.SetSource (new SurfacePattern (oldsurface));
 				g.Mask (gradient);
 			}
 
@@ -604,16 +630,22 @@ namespace Pinta.Core
 			if (mode == GradientColorMode.Color) {
 				gradient.AddColorStop (0, c1);
 				gradient.AddColorStop (1, c2);
-				g.Source = gradient;
+				g.SetSource (gradient);
 				g.Paint ();
 			} else if (mode == GradientColorMode.Transparency) {
 				gradient.AddColorStop (0, new Color (0, 0, 0, 1));
 				gradient.AddColorStop (1, new Color (0, 0, 0, 0));
-				g.Source = new SurfacePattern (oldsurface);
+				g.SetSource (new SurfacePattern (oldsurface));
 				g.Mask (gradient);
 			}
 
 			g.Restore ();
+		}
+
+		// The Color property is deprecated, so use this extension method until SetSourceColor is officially available everywhere.
+		public static void SetSourceColor (this Context g, Color c)
+		{
+			g.SetSourceRGBA (c.R, c.G, c.B, c.A);
 		}
 		#endregion
 

@@ -131,7 +131,7 @@ namespace Pinta.Tools
 					g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
 					g.LineTo (x + 0.5, y + 0.5);
 
-					g.Color = tool_color;
+					g.SetSourceColor (tool_color);
 					g.LineWidth = 1;
 					g.LineCap = LineCap.Square;
 				

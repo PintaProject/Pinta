@@ -73,9 +73,10 @@ namespace Pinta
 			// Initialize extensions
 			AddinManager.Initialize ();
 			AddinManager.Registry.Update ();
-			AddinSetupService setupService = new AddinSetupService (AddinManager.Registry);
-			if (!setupService.AreRepositoriesRegistered ())
-				setupService.RegisterRepositories (true);
+			//AddinSetupService setupService = new AddinSetupService (AddinManager.Registry);
+			// For Pinta 1.5, don't register a default add-in server.
+			//if (!setupService.AreRepositoriesRegistered ())
+			//	setupService.RegisterRepositories (true);
 
 			//Look out for any changes in extensions
 			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);

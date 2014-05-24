@@ -48,7 +48,7 @@ namespace Pinta.Gui.Widgets
 			int grid_width = 4;
 
 			using (Cairo.Context g = new Cairo.Context (transparent)) {
-				g.Color = new Cairo.Color (1, 1, 1);
+				g.SetSourceColor (new Cairo.Color (1, 1, 1));
 				g.Paint ();
 
 				for (int y = 0; y < height; y += grid_width)
@@ -123,7 +123,7 @@ namespace Pinta.Gui.Widgets
 			g.Restore ();
 
 			// TODO: scale this box correctly to match layer aspect ratio
-			g.Color = new Cairo.Color (0.5, 0.5, 0.5);
+			g.SetSourceColor (new Cairo.Color (0.5, 0.5, 0.5));
 			g.Rectangle (offset_x + 0.5, offset_y + 0.5, draw_width, draw_height);
 			g.LineWidth = 1;
 			g.Stroke ();

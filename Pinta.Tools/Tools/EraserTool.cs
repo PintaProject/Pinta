@@ -103,7 +103,7 @@ namespace Pinta.Tools
 
 				// Right-click is erase to background color, left-click is transparent
 				if (mouse_button == 3)
-					g.Color = PintaCore.Palette.SecondaryColor;
+					g.SetSourceColor (PintaCore.Palette.SecondaryColor);
 				else
 					g.Operator = Operator.Clear;
 

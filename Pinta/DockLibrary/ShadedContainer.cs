@@ -191,7 +191,7 @@ namespace MonoDevelop.Components.Docking
 				Gdk.Rectangle wr = new Gdk.Rectangle (allocation.X, allocation.Y, allocation.Width, allocation.Height);
 				using (Cairo.Context ctx = Gdk.CairoHelper.Create (w.GdkWindow)) {
 					ctx.Rectangle (wr.X, wr.Y, wr.Width, wr.Height);
-					ctx.Color = lightColor.ToCairoColor ();
+					ctx.SetSourceColor (lightColor.ToCairoColor ());
 					ctx.Fill ();
 				}
 				return;
@@ -236,7 +236,7 @@ namespace MonoDevelop.Components.Docking
 			Gdk.Rectangle r = new Gdk.Rectangle (allocation.X, allocation.Y, allocation.Width, allocation.Height);
 			using (Cairo.Context ctx = Gdk.CairoHelper.Create (w.GdkWindow)) {
 				ctx.Rectangle (r.X, r.Y, r.Width, r.Height);
-				ctx.Color = lightColor.ToCairoColor ();
+				ctx.SetSourceColor (lightColor.ToCairoColor ());
 				ctx.Fill ();
 				
 				DrawShadow (ctx, r, PositionType.Left, secsL);
@@ -285,9 +285,9 @@ namespace MonoDevelop.Components.Docking
 				pat.AddColorStop (1, c);
 				ctx.NewPath ();
 				ctx.Rectangle (r.X, r.Y, r.Width, r.Height);
-				ctx.Pattern = pat;
+				ctx.SetSource (pat);
 				ctx.Fill ();
-				pat.Destroy ();
+				pat.Dispose ();
 			}
 		}
 		

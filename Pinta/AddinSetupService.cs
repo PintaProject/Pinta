@@ -45,24 +45,27 @@ namespace Pinta
 		
 		public void RegisterRepositories (bool enable)
 		{
-			string url = GetPlatformRepositoryUrl ();
+			RegisterRepository (GetPlatformRepositoryUrl (),
+			                    Catalog.GetString ("Pinta Platform Dependent Add-in Repository"),
+			                    enable);
+
+			RegisterRepository (GetAllRepositoryUrl (),
+			                    Catalog.GetString ("Pinta Platform Independent Add-in Repository"),
+			                    enable);
+		}
+
+		private void RegisterRepository(string url, string name, bool enable)
+		{
 			if (!Repositories.ContainsRepository (url)) {
 				var rep = Repositories.RegisterRepository (null, url, false);
-				rep.Name = Catalog.GetString ("Pinta Platform Dependent Add-in Repository");
-				if (!enable)
-					Repositories.SetRepositoryEnabled (url, false);
-			}
-
-			url = GetAllRepositoryUrl ();
-			if (!Repositories.ContainsRepository (url)) {
-				var rep2 = Repositories.RegisterRepository (null, url, false);
-				rep2.Name = Catalog.GetString ("Pinta Platform Independent Add-in Repository");
-				if (!enable)
-					Repositories.SetRepositoryEnabled (url, false);
+				rep.Name = name;
+				// Although repositories are enabled by default, we should always call this method to ensure
+				// that the repository name from the previous line ends up being saved to disk.
+				Repositories.SetRepositoryEnabled (url, enable);
 			}
 		}
 		
-		public string GetPlatformRepositoryUrl ()
+		private string GetPlatformRepositoryUrl ()
 		{
 			string platform;
 			if (SystemManager.GetOperatingSystem () == OS.Windows)
@@ -76,7 +79,7 @@ namespace Pinta
 			return "http://178.79.177.109:8080/Stable/" + platform + "/" + "1.5" + "/main.mrep";
 		}
 
-		public string GetAllRepositoryUrl ()
+		private string GetAllRepositoryUrl ()
 		{
 			//TODO: Need to change version number here
 			return "http://178.79.177.109:8080/Stable/All/" + "1.5" + "/main.mrep";

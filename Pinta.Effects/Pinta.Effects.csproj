@@ -61,7 +61,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core">
     </Reference>
-    <Reference Include="Mono.Addins, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+    <Reference Include="Mono.Addins, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <HintPath>..\lib\Mono.Addins.dll</HintPath>
       <Private>False</Private>
     </Reference>

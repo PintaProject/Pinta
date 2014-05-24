@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-07-03 16:09+0000\n"
-"Last-Translator: ZhengJianhui <zheng1733@gmail.com>\n"
+"PO-Revision-Date: 2014-03-16 15:29+0000\n"
+"Last-Translator: qinghao <qinghao1@foxmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-10-14 16:40+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
 msgid "Layer Shown"
@@ -179,7 +179,7 @@ msgstr "左击设置主颜色，右击设置副颜色。"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "取样"
 
 #: Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
@@ -527,7 +527,7 @@ msgstr "{0} 图像 ({1})"
 #: Pinta/Dialogs/ResizeImageDialog.cs:38
 #: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "缩放图像"
+msgstr "改变图像大小"
 
 #: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 #: Pinta.Core/Actions/ImageActions.cs:67
@@ -637,7 +637,7 @@ msgstr "粘贴到新图层"
 
 #: Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr "粘贴到新图像"
+msgstr "粘贴为新图像"
 
 #: Pinta.Core/Actions/EditActions.cs:75
 msgid "Delete Selection"
@@ -933,7 +933,7 @@ msgstr "关于"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr ""
+msgstr "正片叠加"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
@@ -941,15 +941,15 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:55
 msgid "Color Burn"
-msgstr ""
+msgstr "颜色加深"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:56
 msgid "Color Dodge"
-msgstr ""
+msgstr "颜色减淡"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:57
 msgid "Reflect"
-msgstr ""
+msgstr "反射"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:58
 #: Pinta.Effects/Effects/GlowEffect.cs:30
@@ -958,7 +958,7 @@ msgstr "发光"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr ""
+msgstr "重叠"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
@@ -966,15 +966,15 @@ msgstr ""
 
 #: Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
-msgstr ""
+msgstr "负片"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr ""
+msgstr "加亮"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr ""
+msgstr "减暗"
 
 #: Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
@@ -1088,7 +1088,7 @@ msgstr "使用了一些图标："
 
 #: Pinta/Dialogs/AboutDialog.cs:167
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "基于 Mono 构建："
 
 #: Pinta/Dialogs/AboutDialog.cs:274
 msgid "About Pinta"
@@ -1158,7 +1158,7 @@ msgstr "显示图层"
 
 #: Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "Resize Palette"
-msgstr "调整调色板大小"
+msgstr "改变调色板大小"
 
 #: Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
@@ -1228,7 +1228,7 @@ msgstr "文件在“{1}”中已存在。替换将会覆盖它的内容。"
 #: Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "在关闭前将修改保存到图像“{0}”？"
+msgstr "关闭前保存对图像“{0}”的修改？"
 
 #: Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
@@ -1816,7 +1816,7 @@ msgstr "没有选择"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "可用的插件库："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
@@ -1842,7 +1842,7 @@ msgstr "已安装版本"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "插件库版本"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
@@ -1884,11 +1884,11 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "所有插件库"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "管理插件库"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
@@ -1933,13 +1933,13 @@ msgstr "下列软件包将被卸载："
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
-msgstr ""
+msgstr "有插件依赖于前面这个插件，也会一起被卸载掉："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
-msgstr ""
+msgstr "不能安装选中的插件，因为有依赖冲突。"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
@@ -1959,7 +1959,7 @@ msgstr "无法解决下列依赖关系："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr ""
+msgstr "你确认要取消本次安装吗？"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
@@ -1987,13 +1987,13 @@ msgstr "卸载完成但有警告信息。"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "注册插件库"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr ""
+msgstr "发生了异常：{0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
@@ -2033,7 +2033,7 @@ msgstr "更新全部"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "插件库"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
@@ -2050,11 +2050,11 @@ msgstr "安装"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "插件源管理"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "添加新的插件库"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
@@ -2062,7 +2062,7 @@ msgstr "选择您想要注册的插件库的位置："
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "注册一个在线插件库"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
@@ -2070,7 +2070,7 @@ msgstr "地址："
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "注册一个本地插件库"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
