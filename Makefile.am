@@ -1,4 +1,5 @@
 SUBDIRS = xdg
+DIST_SUBDIRS = xdg
 
 BINDIR = $(srcdir)/bin
 
@@ -51,27 +52,17 @@ list:
 		git ls-files | grep '\.cs' ;\
 	fi
 
-#target: updatepot - update the messages.pot file
-updatepot: build
-	find . -type f -name *.cs | sed 's|./||' > files.list
-	grep -v System.ComponentModel.Composition files.list > files2.list
-	xgettext --from-code=UTF-8 -f files2.list -o po/messages.pot
-	cat po/messages.in >> po/messages.pot
-	cat po/messages.pot | msguniq -o po/messages.pot
-	rm files.list
-	rm files2.list
+#target: updatepot - update the pinta.pot file
+updatepot:
+	cd po && intltool-update -m && intltool-update -p
+	cat po/messages.in >> po/pinta.pot
+	cat po/pinta.pot | msguniq -o po/pinta.pot
 
 # target: clean - Default clean command: cleanobj and cleanbin
-clean: cleanobj cleanbin
+clean-local: cleanobj cleanbin
 
-# target: distclean - Removes configure files. 
-distclean: clean
-	rm -f Makefile pinta config.status config.cache config.log configure.lineno config.status.lineno pinta.pc
-
-# target: cleanall - Removes build files. 
-cleanall: distclean
+maintainer-clean-local:
 	rm -rf autom4te.cache
-	rm -f configure aclocal.m4 missing install-sh Makefile.in
 
 # target: cleanbin - Removes built files. 
 cleanbin: 
@@ -118,16 +109,24 @@ EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pi
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in
 
-CLEANFILES = \
-       intltool-extract \
-       intltool-update \
-       intltool-merge
+CLEANFILES = intltool-extract \
+	     intltool-update \
+	     intltool-merge \
+	     intltool-extract.in \
+	     intltool-update.in \
+	     intltool-merge.in
 
-DISTCLEANFILES = intltool-extract \
-                 intltool-merge \
-                 intltool-update \
-                 po/.intltool-merge-cache
+DISTCLEANFILES = po/.intltool-merge-cache \
+		 po/Makefile \
+		 po/Makefile.in \
+		 po/Makefile
 
+MAINTAINERCLEANFILES = po/Makefile.in.in \
+		       Makefile.in \
+		       install-sh \
+		       configure \
+		       aclocal.m4 \
+		       missing \
+		       compile
 
-
-.PHONY: install uninstall cleanall cleanbin cleanobj release releasetar releasezip
+.PHONY: install uninstall cleanbin cleanobj release releasetar releasezip

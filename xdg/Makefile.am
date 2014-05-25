@@ -13,3 +13,4 @@ CLEANFILES = $(desktop_DATA)
 
 DISTCLEANFILES = $(desktop_DATA)
 
+MAINTAINERCLEANFILES = Makefile.in
