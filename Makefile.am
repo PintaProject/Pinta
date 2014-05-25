@@ -52,11 +52,11 @@ list:
 		git ls-files | grep '\.cs' ;\
 	fi
 
-#target: updatepot - update the pinta.pot file
+#target: updatepot - update the messages.pot file
 updatepot:
-	cd po && intltool-update -m && intltool-update -p
-	cat po/messages.in >> po/pinta.pot
-	cat po/pinta.pot | msguniq -o po/pinta.pot
+	cd po && intltool-update -m && intltool-update -p --gettext-package=messages
+	cat po/messages.in >> po/messages.pot
+	cat po/messages.pot | msguniq -o po/messages.pot
 
 # target: clean - Default clean command: cleanobj and cleanbin
 clean-local: cleanobj cleanbin
