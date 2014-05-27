@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-25 14:06-0400\n"
+"POT-Creation-Date: 2014-05-26 20:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -887,10 +887,6 @@ msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
 msgid "Blue"
-msgstr ""
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:508
-msgid "In stetic action button box cannot be empty"
 msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:89
