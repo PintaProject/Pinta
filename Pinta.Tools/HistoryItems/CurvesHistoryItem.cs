@@ -32,9 +32,11 @@ namespace Pinta.Tools
 {
 	public class CurvesHistoryItem : BaseHistoryItem
 	{
+        private EditEngine ee;
+
 		private UserLayer userLayer;
 
-		private SurfaceDiff user_surface_diff;
+		private SurfaceDiff userSurfaceDiff;
 		private ImageSurface userSurface;
 
 		private CurveEngineCollection cEngines;
@@ -44,21 +46,24 @@ namespace Pinta.Tools
 		/// <summary>
 		/// A history item for when curves are finalized.
 		/// </summary>
+        /// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
 		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
 		/// <param name="passedSelectedPointCurveIndex">The selected point's curve index.</param>
-		public CurvesHistoryItem(string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
+        public CurvesHistoryItem(EditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
 			int passedSelectedPointIndex, int passedSelectedPointCurveIndex) : base(icon, text)
 		{
+            ee = passedEE;
+
 			userLayer = passedUserLayer;
 
 
-			user_surface_diff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
+			userSurfaceDiff = SurfaceDiff.Create(passedUserSurface, userLayer.Surface, true);
 
-			if (user_surface_diff == null)
+			if (userSurfaceDiff == null)
 			{
 				userSurface = passedUserSurface;
 			}
@@ -68,7 +73,7 @@ namespace Pinta.Tools
 			}
 
 
-			cEngines = Pinta.Tools.LineCurveTool.CEngines.PartialClone();
+			cEngines = ee.CEngines.PartialClone();
 			selectedPointIndex = passedSelectedPointIndex;
 			selectedPointCurveIndex = passedSelectedPointCurveIndex;
 		}
@@ -93,10 +98,10 @@ namespace Pinta.Tools
 			// Grab the original surface
 			surf = userLayer.Surface;
 
-			if (user_surface_diff != null)
+			if (userSurfaceDiff != null)
 			{
-				user_surface_diff.ApplyAndSwap(surf);
-				PintaCore.Workspace.Invalidate(user_surface_diff.GetBounds());
+				userSurfaceDiff.ApplyAndSwap(surf);
+				PintaCore.Workspace.Invalidate(userSurfaceDiff.GetBounds());
 			}
 			else
 			{
@@ -118,21 +123,21 @@ namespace Pinta.Tools
 			CurveEngineCollection oldCEngine = cEngines;
 
 			//Swap half of the data.
-			cEngines = Pinta.Tools.LineCurveTool.CEngines;
+            cEngines = ee.CEngines;
 
 			//Swap the other half.
-			Pinta.Tools.LineCurveTool.CEngines = oldCEngine;
+            ee.CEngines = oldCEngine;
 
 
 			//Swap the selected point data.
 			int temp = selectedPointIndex;
-			selectedPointIndex = Pinta.Tools.LineCurveTool.SelectedPointIndex;
-			Pinta.Tools.LineCurveTool.SelectedPointIndex = temp;
+            selectedPointIndex = ee.SelectedPointIndex;
+            ee.SelectedPointIndex = temp;
 
 			//Swap the selected curve data.
 			temp = selectedPointCurveIndex;
-			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.SelectedPointCurveIndex;
-			Pinta.Tools.LineCurveTool.SelectedPointCurveIndex = temp;
+            selectedPointCurveIndex = ee.SelectedPointCurveIndex;
+            ee.SelectedPointCurveIndex = temp;
 		}
 
 		public override void Dispose()

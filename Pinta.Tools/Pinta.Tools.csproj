@@ -72,15 +72,16 @@
   <ItemGroup>
     <Compile Include="CoreToolsExtension.cs" />
     <Compile Include="Dashes\DashPatternBox.cs" />
-    <Compile Include="LinesCurves\ControlPoint.cs" />
-    <Compile Include="LinesCurves\Arrow.cs" />
-    <Compile Include="LinesCurves\OrganizedPointCollection.cs" />
-    <Compile Include="LinesCurves\CurveEngineCollection.cs" />
+    <Compile Include="Editable\LinesCurves\ControlPoint.cs" />
+    <Compile Include="Editable\LinesCurves\Arrow.cs" />
+    <Compile Include="Editable\LinesCurves\OrganizedPointCollection.cs" />
+    <Compile Include="Editable\LinesCurves\CurveEngineCollection.cs" />
     <Compile Include="HistoryItems\CurveModifyHistoryItem.cs" />
     <Compile Include="HistoryItems\CurvesHistoryItem.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Brushes\SplatterBrush.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Editable\EditEngine.cs" />
     <Compile Include="Tools\EllipseSelectTool.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
     <Compile Include="Tools\EraserTool.cs" />

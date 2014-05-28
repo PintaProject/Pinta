@@ -32,6 +32,8 @@ namespace Pinta.Tools
 {
 	public class CurveModifyHistoryItem : BaseHistoryItem
 	{
+        private EditEngine ee;
+
 		private CurveEngineCollection cEngines;
 
 		private int selectedPointIndex, selectedPointCurveIndex;
@@ -39,13 +41,16 @@ namespace Pinta.Tools
 		/// <summary>
 		/// A history item for when curves are modified.
 		/// </summary>
+        /// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		public CurveModifyHistoryItem(string icon, string text) : base(icon, text)
+		public CurveModifyHistoryItem(EditEngine passedEE, string icon, string text) : base(icon, text)
 		{
-			cEngines = Pinta.Tools.LineCurveTool.CEngines.PartialClone();
-			selectedPointIndex = Pinta.Tools.LineCurveTool.SelectedPointIndex;
-			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.SelectedPointCurveIndex;
+            ee = passedEE;
+
+			cEngines = ee.CEngines.PartialClone();
+            selectedPointIndex = ee.SelectedPointIndex;
+            selectedPointCurveIndex = ee.SelectedPointCurveIndex;
 		}
 
 		public override void Undo()
@@ -64,21 +69,21 @@ namespace Pinta.Tools
 			CurveEngineCollection oldCEngine = cEngines;
 
 			//Swap half of the data.
-			cEngines = Pinta.Tools.LineCurveTool.CEngines;
+            cEngines = ee.CEngines;
 
 			//Swap the other half.
-			Pinta.Tools.LineCurveTool.CEngines = oldCEngine;
+            ee.CEngines = oldCEngine;
 
 
 			//Swap the selected point data.
 			int temp = selectedPointIndex;
-			selectedPointIndex = Pinta.Tools.LineCurveTool.SelectedPointIndex;
-			Pinta.Tools.LineCurveTool.SelectedPointIndex = temp;
+            selectedPointIndex = ee.SelectedPointIndex;
+            ee.SelectedPointIndex = temp;
 
 			//Swap the selected curve data.
 			temp = selectedPointCurveIndex;
-			selectedPointCurveIndex = Pinta.Tools.LineCurveTool.SelectedPointCurveIndex;
-			Pinta.Tools.LineCurveTool.SelectedPointCurveIndex = temp;
+            selectedPointCurveIndex = ee.SelectedPointCurveIndex;
+            ee.SelectedPointCurveIndex = temp;
 		}
 	}
 }

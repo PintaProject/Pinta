@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		public const double SectionSize = 15;
 
 		//Don't change this; it's automatically calculated.
-		public static readonly int BorderingSectionRange = (int)Math.Ceiling(LineCurveTool.CurveClickStartingRange / SectionSize);
+        public static readonly int BorderingSectionRange = (int)Math.Ceiling(EditEngine.CurveClickStartingRange / SectionSize);
 
 		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
@@ -121,12 +121,14 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Efficiently calculate the closest point (to currentPoint) on the curve.
 		/// </summary>
+        /// <param name="CEL">The List of CurveEngines to search through.</param>
 		/// <param name="currentPoint">The point to calculate the closest point to.</param>
 		/// <param name="closestCurveIndex">The index of the curve with the closest point.</param>
 		/// <param name="closestPointIndex">The index of the closest point (in the closest curve).</param>
 		/// <param name="closestPoint">The position of the closest point.</param>
 		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
-		public static void findClosestPoint(
+		public static void FindClosestPoint(
+            List<CurveEngine> CEL,
 			PointD currentPoint,
 			out int closestCurveIndex, out int closestPointIndex,
 			out PointD closestPoint, out double closestDistance)
@@ -138,9 +140,9 @@ namespace Pinta.Tools
 
 			double currentDistance = double.MaxValue;
 
-			for (int n = 0; n < LineCurveTool.CEngines.CEL.Count; ++n)
+			for (int n = 0; n < CEL.Count; ++n)
 			{
-				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = LineCurveTool.CEngines.CEL[n].OrganizedPoints.collection;
+				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = CEL[n].OrganizedPoints.collection;
 
 				//Calculate the current_point's corresponding *center* section.
 				int sX = (int)((currentPoint.X - currentPoint.X % SectionSize) / SectionSize);
