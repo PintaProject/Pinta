@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		public const double SectionSize = 15;
 
 		//Don't change this; it's automatically calculated.
-        public static readonly int BorderingSectionRange = (int)Math.Ceiling(EditEngine.CurveClickStartingRange / SectionSize);
+        public static readonly int BorderingSectionRange = (int)Math.Ceiling(EditEngine.ShapeClickStartingRange / SectionSize);
 
 		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 
@@ -119,21 +119,21 @@ namespace Pinta.Tools
 
 
 		/// <summary>
-		/// Efficiently calculate the closest point (to currentPoint) on the curve.
+		/// Efficiently calculate the closest point (to currentPoint) on the shape.
 		/// </summary>
-        /// <param name="CEL">The List of CurveEngines to search through.</param>
+        /// <param name="CEL">The List of ShapeEngines to search through.</param>
 		/// <param name="currentPoint">The point to calculate the closest point to.</param>
-		/// <param name="closestCurveIndex">The index of the curve with the closest point.</param>
-		/// <param name="closestPointIndex">The index of the closest point (in the closest curve).</param>
+		/// <param name="closestShapeIndex">The index of the shape with the closest point.</param>
+		/// <param name="closestPointIndex">The index of the closest point (in the closest shape).</param>
 		/// <param name="closestPoint">The position of the closest point.</param>
 		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
 		public static void FindClosestPoint(
-            List<CurveEngine> CEL,
+            List<ShapeEngine> CEL,
 			PointD currentPoint,
-			out int closestCurveIndex, out int closestPointIndex,
+			out int closestShapeIndex, out int closestPointIndex,
 			out PointD closestPoint, out double closestDistance)
 		{
-			closestCurveIndex = 0;
+			closestShapeIndex = 0;
 			closestPointIndex = 0;
 			closestPoint = new PointD(0d, 0d);
 			closestDistance = double.MaxValue;
@@ -153,7 +153,7 @@ namespace Pinta.Tools
 				int yMin = sY - BorderingSectionRange;
 				int yMax = sY + BorderingSectionRange;
 
-				//Since the mouse and/or curve points can be close to the edge of a section,
+				//Since the mouse and/or shape points can be close to the edge of a section,
 				//the points in the surrounding sections must also be checked.
 				for (int x = xMin; x <= xMax; ++x)
 				{
@@ -163,7 +163,7 @@ namespace Pinta.Tools
 					//If the xSection doesn't exist, move on.
 					if (oP.TryGetValue(x, out xSection))
 					{
-						//Since the mouse and/or curve points can be close to the edge of a section,
+						//Since the mouse and/or shape points can be close to the edge of a section,
 						//the points in the surrounding sections must also be checked.
 						for (int y = yMin; y <= yMax; ++y)
 						{
@@ -181,7 +181,7 @@ namespace Pinta.Tools
 										closestDistance = currentDistance;
 
 										closestPointIndex = p.Index;
-										closestCurveIndex = n;
+										closestShapeIndex = n;
 
 										closestPoint = p.Position;
 									}
@@ -201,10 +201,10 @@ namespace Pinta.Tools
 		public int Index;
 
 		/// <summary>
-		/// A wrapper class for a PointD that knows its index within the generated points of the curve that it's in.
+		/// A wrapper class for a PointD that knows its index within the generated points of the shape that it's in.
 		/// </summary>
 		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
-		/// <param name="passedIndex">The index within the generated points of the curve that it's in.</param>
+		/// <param name="passedIndex">The index within the generated points of the shape that it's in.</param>
 		public OrganizedPoint(PointD passedPosition, int passedIndex)
 		{
 			Position = passedPosition;

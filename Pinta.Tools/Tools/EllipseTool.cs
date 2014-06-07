@@ -49,15 +49,11 @@ namespace Pinta.Tools
 			get { return 45; }
 		}
 
-		private DashPatternBox dashPBox = new DashPatternBox();
-
-		private string dashPattern = "-";
-
 		public EllipseTool ()
 		{
 		}
 		
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		/*protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -83,21 +79,6 @@ namespace Pinta.Tools
 			}
 			
 			return dirty;
-		}
-
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
-		{
-			base.OnBuildToolBar(tb);
-
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
-
-			if (dpbBox != null)
-			{
-				dpbBox.Changed += (o, e) =>
-				{
-					dashPattern = dpbBox.ActiveText;
-				};
-			}
-		}
+		}*/
 	}
 }

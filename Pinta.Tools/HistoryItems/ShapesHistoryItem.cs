@@ -1,10 +1,10 @@
 ﻿// 
-// CurvesHistoryItem.cs
+// ShapesHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2013 Andrew Davis, GSoC 2013
+// Copyright (c) 2013 Andrew Davis, GSoC 2013 & 2014
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ using Cairo;
 
 namespace Pinta.Tools
 {
-	public class CurvesHistoryItem : BaseHistoryItem
+	public class ShapeHistoryItem : BaseHistoryItem
 	{
         private EditEngine ee;
 
@@ -39,12 +39,12 @@ namespace Pinta.Tools
 		private SurfaceDiff userSurfaceDiff;
 		private ImageSurface userSurface;
 
-		private CurveEngineCollection cEngines;
+		private ShapeEngineCollection sEngines;
 
-		private int selectedPointIndex, selectedPointCurveIndex;
+		private int selectedPointIndex, selectedPointShapeIndex;
 
 		/// <summary>
-		/// A history item for when curves are finalized.
+		/// A history item for when shapes are finalized.
 		/// </summary>
         /// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
@@ -52,9 +52,9 @@ namespace Pinta.Tools
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
 		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
-		/// <param name="passedSelectedPointCurveIndex">The selected point's curve index.</param>
-        public CurvesHistoryItem(EditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
-			int passedSelectedPointIndex, int passedSelectedPointCurveIndex) : base(icon, text)
+		/// <param name="passedSelectedPointShapeIndex">The selected point's shape index.</param>
+        public ShapeHistoryItem(EditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
+			int passedSelectedPointIndex, int passedSelectedPointShapeIndex) : base(icon, text)
 		{
             ee = passedEE;
 
@@ -73,9 +73,9 @@ namespace Pinta.Tools
 			}
 
 
-			cEngines = ee.CEngines.PartialClone();
+			sEngines = ee.SEngines.PartialClone();
 			selectedPointIndex = passedSelectedPointIndex;
-			selectedPointCurveIndex = passedSelectedPointCurveIndex;
+			selectedPointShapeIndex = passedSelectedPointShapeIndex;
 		}
 
 		public override void Undo()
@@ -119,14 +119,14 @@ namespace Pinta.Tools
 
 
 
-			//Store the old curve data temporarily.
-			CurveEngineCollection oldCEngine = cEngines;
+			//Store the old shape data temporarily.
+			ShapeEngineCollection oldSEngine = sEngines;
 
 			//Swap half of the data.
-            cEngines = ee.CEngines;
+            sEngines = ee.SEngines;
 
 			//Swap the other half.
-            ee.CEngines = oldCEngine;
+            ee.SEngines = oldSEngine;
 
 
 			//Swap the selected point data.
@@ -134,10 +134,10 @@ namespace Pinta.Tools
             selectedPointIndex = ee.SelectedPointIndex;
             ee.SelectedPointIndex = temp;
 
-			//Swap the selected curve data.
-			temp = selectedPointCurveIndex;
-            selectedPointCurveIndex = ee.SelectedPointCurveIndex;
-            ee.SelectedPointCurveIndex = temp;
+			//Swap the selected shape data.
+			temp = selectedPointShapeIndex;
+            selectedPointShapeIndex = ee.SelectedShapeIndex;
+            ee.SelectedShapeIndex = temp;
 		}
 
 		public override void Dispose()

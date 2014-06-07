@@ -129,34 +129,34 @@ msgid ""
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:71
-#: Pinta.Tools/Tools/ShapeTool.cs:131
+#: Pinta.Tools/Editable/EditEngine.cs:221
 msgid "Fill Style"
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:78
-#: Pinta.Tools/Tools/ShapeTool.cs:138
+#: Pinta.Tools/Editable/EditEngine.cs:229
 msgid "Outline Shape"
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:79
-#: Pinta.Tools/Tools/ShapeTool.cs:139
+#: Pinta.Tools/Editable/EditEngine.cs:230
 msgid "Fill Shape"
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:80
-#: Pinta.Tools/Tools/ShapeTool.cs:140
+#: Pinta.Tools/Editable/EditEngine.cs:231
 msgid "Fill and Outline Shape"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Tools/ShapeTool.cs:99
+#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Editable/EditEngine.cs:186
 msgid "Brush width"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Tools/ShapeTool.cs:104
+#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Editable/EditEngine.cs:192
 msgid "Decrease brush size"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Tools/ShapeTool.cs:118
+#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Editable/EditEngine.cs:207
 msgid "Increase brush size"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgstr ""
 #: Pinta.Tools/Tools/LineCurveTool.cs:131
 msgid ""
 "Left click to draw a line with primary color."
-"\nLeft click on a line to add curve control points."
+"\nLeft click on a line to add control points."
 "\nLeft click on a control point and drag to move it."
 "\nRight click on a control point and drag to change tension."
 "\nHold Shift to snap to angles."
@@ -356,7 +356,7 @@ msgid ""
 "\nHold Ctrl while pressing Space to create the point at the exact same position."
 "\nHold Ctrl while left clicking on a control point to create a new line at the exact same position."
 "\nHold Ctrl while clicking outside of the Image bounds to create a new line starting at the edge."
-"\nPress Enter to finalize the curve."
+"\nPress Enter to finalize the shape."
 msgstr ""
 
 #: Pinta.Tools/Tools/FloodTool.cs:74
@@ -2131,24 +2131,24 @@ msgstr ""
 msgid "Increase length offset"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:903
-msgid "Line/Curve Finalized"
+#: Pinta.Tools/Editable/EditEngine.cs:695
+msgid "Shape Finalized"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:1080
-msgid "Line/Curve Point Deleted"
+#: Pinta.Tools/Editable/EditEngine.cs:904
+msgid "Shape Point Deleted"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:1130
-msgid "Line/Curve Point Added"
+#: Pinta.Tools/Editable/EditEngine.cs:347
+msgid "Shape Point Added"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:1420
-msgid "Line/Curve Added"
+#: Pinta.Tools/Editable/EditEngine.cs:395
+msgid "Shape Added"
 msgstr ""
 
-#: Pinta.Tools/Tools/LineCurveTool.cs:1498
-msgid "Line/Curve Modified"
+#: Pinta.Tools/Editable/EditEngine.cs:477
+msgid "Shape Modified"
 msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:268

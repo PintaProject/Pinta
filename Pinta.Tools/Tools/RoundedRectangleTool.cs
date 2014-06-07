@@ -55,7 +55,7 @@ namespace Pinta.Tools
 			get { return 43; }
 		}
 
-		public double Radius {
+		/*public double Radius {
 			get {
 				double rad;
 				if (Double.TryParse (radius.ComboBox.ActiveText, out rad))
@@ -72,13 +72,9 @@ namespace Pinta.Tools
 				}
 			}
 			set { (radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }			
-		}
-
-		private DashPatternBox dashPBox = new DashPatternBox();
-
-		private string dashPattern = "-";
+		}*/
 		
-		protected override void BuildToolBar (Gtk.Toolbar tb)
+		/*protected override void BuildToolBar (Gtk.Toolbar tb)
 		{
 			base.BuildToolBar (tb);
 			
@@ -112,24 +108,9 @@ namespace Pinta.Tools
 			}
 			
 			tb.AppendItem (radius_plus);
-		}
+		}*/
 
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
-		{
-			base.OnBuildToolBar(tb);
-
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
-
-			if (dpbBox != null)
-			{
-				dpbBox.Changed += (o, e) =>
-				{
-					dashPattern = dpbBox.ActiveText;
-				};
-			}
-		}
-
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		/*protected override Rectangle DrawShape (Rectangle rect, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -153,9 +134,9 @@ namespace Pinta.Tools
 			}
 			
 			return dirty;
-		}
+		}*/
 		
-		private void RadiusMinusButtonClickedEvent (object o, EventArgs args)
+		/*private void RadiusMinusButtonClickedEvent (object o, EventArgs args)
 		{
 			if (Math.Truncate(Radius) > 0)
 				Radius = Math.Truncate(Radius) - 1;
@@ -164,6 +145,6 @@ namespace Pinta.Tools
 		private void RadiusPlusButtonClickedEvent (object o, EventArgs args)
 		{
 			Radius = Math.Truncate(Radius) + 1;
-		}
+		}*/
 	}
 }

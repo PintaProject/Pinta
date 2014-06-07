@@ -61,7 +61,7 @@ namespace Pinta.Tools
 		/// Draws the arrow.
 		/// </summary>
 		/// <param name="g">The drawing context.</param>
-		/// <param name="endPoint">The end point of a line/curve.</param>
+		/// <param name="endPoint">The end point of a shape.</param>
 		/// <param name="almostEndPoint">The point right before the end point.</param>
 		public Rectangle? Draw(Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
 		{

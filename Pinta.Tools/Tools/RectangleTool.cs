@@ -28,6 +28,7 @@ using System;
 using Cairo;
 using Pinta.Core;
 using Mono.Unix;
+using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
@@ -47,68 +48,6 @@ namespace Pinta.Tools
 		}
 		public override int Priority{
 			get { return 41; }
-		}
-
-		private DashPatternBox dashPBox = new DashPatternBox();
-
-		private string dashPattern = "-";
-
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-
-				double[] dashes = DashPatternBox.GenerateDashArray(dashPattern, BrushWidth);
-				g.SetDash(dashes, 0.0);
-
-				if (dashes.Length == 2 && dashes[1] == 0.0)
-				{
-					//No dash pattern (solid line), so draw rectangle normally (glitch free).
-
-					if (FillShape && StrokeShape)
-						dirty = g.FillStrokedRectangle(rect, fill_color, outline_color, BrushWidth);
-					else if (FillShape)
-						dirty = g.FillStrokedRectangle(rect, outline_color, outline_color, BrushWidth);
-					else
-						dirty = g.DrawRectangle(rect, outline_color, BrushWidth);
-				}
-				else
-				{
-					//Dash pattern, so draw rectangle as best as possible for dashes (but with possible corner glitches for some rectangle sizes).
-
-					if (FillShape && StrokeShape)
-						dirty = g.FillStrokedFullRectangle(rect, fill_color, outline_color, BrushWidth);
-					else if (FillShape)
-						dirty = g.FillStrokedFullRectangle(rect, outline_color, outline_color, BrushWidth);
-					else
-						dirty = g.DrawFullRectangle(rect, outline_color, BrushWidth);
-				}
-			}
-			
-			return dirty;
-		}
-
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
-		{
-			base.OnBuildToolBar(tb);
-
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
-
-			if (dpbBox != null)
-			{
-				dpbBox.Changed += (o, e) =>
-				{
-					dashPattern = dpbBox.ActiveText;
-				};
-			}
 		}
 	}
 }

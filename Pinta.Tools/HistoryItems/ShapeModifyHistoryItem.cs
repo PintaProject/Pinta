@@ -1,10 +1,10 @@
 ﻿// 
-// CurveModifyHistoryItem.cs
+// ShapeModifyHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2013 Andrew Davis, GSoC 2013
+// Copyright (c) 2013 Andrew Davis, GSoC 2013 & 2014
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,27 +30,27 @@ using Cairo;
 
 namespace Pinta.Tools
 {
-	public class CurveModifyHistoryItem : BaseHistoryItem
+	public class ShapeModifyHistoryItem : BaseHistoryItem
 	{
         private EditEngine ee;
 
-		private CurveEngineCollection cEngines;
+		private ShapeEngineCollection sEngines;
 
-		private int selectedPointIndex, selectedPointCurveIndex;
+		private int selectedPointIndex, selectedPointShapeIndex;
 
 		/// <summary>
-		/// A history item for when curves are modified.
+		/// A history item for when shapes are modified.
 		/// </summary>
         /// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		public CurveModifyHistoryItem(EditEngine passedEE, string icon, string text) : base(icon, text)
+		public ShapeModifyHistoryItem(EditEngine passedEE, string icon, string text) : base(icon, text)
 		{
             ee = passedEE;
 
-			cEngines = ee.CEngines.PartialClone();
+			sEngines = ee.SEngines.PartialClone();
             selectedPointIndex = ee.SelectedPointIndex;
-            selectedPointCurveIndex = ee.SelectedPointCurveIndex;
+            selectedPointShapeIndex = ee.SelectedShapeIndex;
 		}
 
 		public override void Undo()
@@ -65,14 +65,14 @@ namespace Pinta.Tools
 
 		private void Swap()
 		{
-			//Store the old curve data temporarily.
-			CurveEngineCollection oldCEngine = cEngines;
+			//Store the old shape data temporarily.
+			ShapeEngineCollection oldSEngine = sEngines;
 
 			//Swap half of the data.
-            cEngines = ee.CEngines;
+            sEngines = ee.SEngines;
 
 			//Swap the other half.
-            ee.CEngines = oldCEngine;
+            ee.SEngines = oldSEngine;
 
 
 			//Swap the selected point data.
@@ -80,10 +80,10 @@ namespace Pinta.Tools
             selectedPointIndex = ee.SelectedPointIndex;
             ee.SelectedPointIndex = temp;
 
-			//Swap the selected curve data.
-			temp = selectedPointCurveIndex;
-            selectedPointCurveIndex = ee.SelectedPointCurveIndex;
-            ee.SelectedPointCurveIndex = temp;
+			//Swap the selected shape data.
+			temp = selectedPointShapeIndex;
+            selectedPointShapeIndex = ee.SelectedShapeIndex;
+            ee.SelectedShapeIndex = temp;
 		}
 	}
 }

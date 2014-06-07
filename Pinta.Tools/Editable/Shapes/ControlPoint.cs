@@ -42,7 +42,7 @@ namespace Pinta.Tools
 		/// A wrapper class for a PointD with its own tension value.
 		/// </summary>
 		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
-		/// <param name="passedTension">The tension of the ControlPoint on the curve.</param>
+		/// <param name="passedTension">The tension of the ControlPoint on the shape.</param>
 		public ControlPoint(PointD passedPosition, double passedTension)
 		{
 			Position = passedPosition;

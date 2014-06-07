@@ -1,10 +1,10 @@
 ﻿// 
-// CurveEngineCollection.cs
+// ShapeEngineCollection.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2013 Andrew Davis, GSoC 2013
+// Copyright (c) 2013 Andrew Davis, GSoC 2013 & 2014
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,22 +32,22 @@ using Cairo;
 
 namespace Pinta.Tools
 {
-	public class CurveEngineCollection: List<CurveEngine>
+	public class ShapeEngineCollection: List<ShapeEngine>
 	{
 		/// <summary>
-		/// A partially cloneable CurveEngine collection.
+		/// A partially cloneable ShapeEngine collection.
 		/// </summary>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public CurveEngineCollection(bool passedAA)
+		public ShapeEngineCollection(bool passedAA)
 		{
-			Add(new CurveEngine(passedAA));
+			Add(new ShapeEngine(passedAA));
 		}
 
 		/// <summary>
-		/// A partially cloneable CurveEngine collection. This constructor creates a partial clone of an existing CurveEngineCollection.
+		/// A partially cloneable ShapeEngine collection. This constructor creates a partial clone of an existing ShapeEngineCollection.
 		/// </summary>
-		/// <param name="passedCEC">An existing CurveEngineCollection to partially clone.</param>
-		public CurveEngineCollection(CurveEngineCollection passedCEC)
+		/// <param name="passedCEC">An existing ShapeEngineCollection to partially clone.</param>
+		public ShapeEngineCollection(ShapeEngineCollection passedCEC)
 		{
 			for (int n = 0; n < passedCEC.Count; ++n)
 			{
@@ -56,21 +56,21 @@ namespace Pinta.Tools
 		}
         
 		/// <summary>
-		/// Clone the necessary data in each of the CurveEngines in the collection.
+		/// Clone the necessary data in each of the ShapeEngines in the collection.
 		/// </summary>
-		/// <returns>The partially cloned CurveEngineCollection.</returns>
-		public CurveEngineCollection PartialClone()
+		/// <returns>The partially cloned ShapeEngineCollection.</returns>
+		public ShapeEngineCollection PartialClone()
 		{
-			return new CurveEngineCollection(this);
+			return new ShapeEngineCollection(this);
 		}
 	}
 
-	public class CurveEngine
+	public class ShapeEngine
 	{
-		//A collection of the original ControlPoints that the curve is based on and that the user interacts with.
+		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
 		public List<ControlPoint> ControlPoints = new List<ControlPoint>();
 
-		//A collection of calculated PointD's that make up the entirety of the curve being drawn.
+		//A collection of calculated PointD's that make up the entirety of the shape being drawn.
 		public PointD[] GeneratedPoints = new PointD[0];
 
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
@@ -83,21 +83,21 @@ namespace Pinta.Tools
 		public string DashPattern = "-";
 
 		/// <summary>
-		/// Create a new CurveEngine.
+		/// Create a new ShapeEngine.
 		/// </summary>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public CurveEngine(bool passedAA)
+		public ShapeEngine(bool passedAA)
 		{
 			AntiAliasing = passedAA;
 		}
 
 		/// <summary>
-		/// Clone all of the necessary data in the CurveEngine.
+		/// Clone all of the necessary data in the ShapeEngine.
 		/// </summary>
-		/// <returns>The partially cloned curve data.</returns>
-		public CurveEngine PartialClone()
+		/// <returns>The partially cloned shape data.</returns>
+		public ShapeEngine PartialClone()
 		{
-			CurveEngine clonedCE = new CurveEngine(AntiAliasing);
+			ShapeEngine clonedCE = new ShapeEngine(AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
@@ -113,7 +113,7 @@ namespace Pinta.Tools
 
 
 		/// <summary>
-		/// Generate each point in a cardinal spline polynomial curve that passes through
+		/// Generate each point in a cardinal spline polynomial shape that passes through
 		/// the control points and store the result in GeneratedPoints.
 		/// </summary>
 		public void GenerateCardinalSplinePolynomialCurvePoints()
@@ -121,7 +121,7 @@ namespace Pinta.Tools
 			List<PointD> generatedPoints = new List<PointD>();
 
 			//Note: it's important that there be many generated points even if there are only 2 given points and it's just a line.
-			//This is because the generated points are used in the check that determines if the mouse clicks on the line/curve.
+			//This is because the generated points are used in the check that determines if the mouse clicks on the shape.
 			if (ControlPoints.Count < 2)
 			{
 				foreach (ControlPoint cP in ControlPoints)
@@ -131,7 +131,7 @@ namespace Pinta.Tools
 			}
 			else
 			{
-				//Generate tangents for each of the smaller cubic Bezier curves that make up each segment of the resulting curve.
+				//Generate tangents for each of the smaller cubic Bezier shapes that make up each segment of the resulting shape.
 
 				//The tension calculated for each point is a gradient between the previous
 				//control point's tension and the following control point's tension.
@@ -172,7 +172,7 @@ namespace Pinta.Tools
 				//For optimization.
 				int iMinusOne;
 
-				//Generate the resulting curve's points with consecutive cubic Bezier curves that
+				//Generate the resulting shape's points with consecutive cubic Bezier shapes that
 				//use the given points as end points and the calculated tangents as control points.
 				for (int i = 1; i < ControlPoints.Count; ++i)
 				{
@@ -195,17 +195,17 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Generate each point in a cubic Bezier curve given the end points and control points.
+		/// Generate each point in a cubic Bezier shape given the end points and control points.
 		/// </summary>
 		/// <param name="resultList">The resulting List of PointD's to add the generated points to.</param>
-		/// <param name="p0">The first end point that the curve passes through.</param>
-		/// <param name="p1">The first control point that the curve does not necessarily pass through.</param>
-		/// <param name="p2">The second control point that the curve does not necessarily pass through.</param>
-		/// <param name="p3">The second end point that the curve passes through.</param>
+		/// <param name="p0">The first end point that the shape passes through.</param>
+		/// <param name="p1">The first control point that the shape does not necessarily pass through.</param>
+		/// <param name="p2">The second control point that the shape does not necessarily pass through.</param>
+		/// <param name="p3">The second end point that the shape passes through.</param>
 		/// <returns></returns>
 		private static void GenerateCubicBezierCurvePoints(List<PointD> resultList, PointD p0, PointD p1, PointD p2, PointD p3)
 		{
-			//Note: this must be low enough for mouse clicks to be properly considered on/off the line/curve at any given point.
+			//Note: this must be low enough for mouse clicks to be properly considered on/off the shape at any given point.
 			double tInterval = .025d;
 
 			double oneMinusT;
@@ -221,14 +221,14 @@ namespace Pinta.Tools
 			//t will go from 0d to 1d at the interval of tInterval.
 			for (double t = 0d; t < 1d + tInterval; t += tInterval)
 			{
-				//There are 3 "layers" in a cubic Bezier curve's calculation. These "layers"
+				//There are 3 "layers" in a cubic Bezier shape's calculation. These "layers"
 				//must be calculated for each intermediate Point (for each value of t from
 				//tInterval to 1d). The Points in each "layer" store [the distance between
 				//two consecutive Points from the previous "layer" multipled by the value
 				//of t (which is between 0d-1d)] plus [the position of the first Point of
 				//the two consecutive Points from the previous "layer"]. This must be
 				//calculated for the X and Y of every consecutive Point in every layer
-				//until the last Point possible is reached, which is the Point on the curve.
+				//until the last Point possible is reached, which is the Point on the shape.
 
 				//Note: the code below is an optimized version of the commented explanation above.
 

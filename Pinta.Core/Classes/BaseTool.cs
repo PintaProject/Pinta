@@ -40,7 +40,7 @@ namespace Pinta.Core
 	[TypeExtensionPoint]
 	public abstract class BaseTool
 	{
-		protected const int DEFAULT_BRUSH_WIDTH = 2;
+		public const int DEFAULT_BRUSH_WIDTH = 2;
 	    
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
 
