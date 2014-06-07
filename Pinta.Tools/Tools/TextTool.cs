@@ -1024,6 +1024,7 @@ namespace Pinta.Tools
 
 					g.Antialias = Cairo.Antialias.None;
 					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
+					g.DrawRectangle(new Cairo.Rectangle(loc.X - 1, loc.Y - 1, 3, loc.Height + 2), new Cairo.Color(255, 255, 255), 1);
 					
 					cursorBounds = Rectangle.Inflate (loc, 2, 10);
 				}
