@@ -60,25 +60,7 @@ namespace Pinta.Tools
         protected bool surfaceModified;
 
 
-        private DashPatternBox dashPBox = new DashPatternBox();
-
-
-        private Gtk.SeparatorToolItem arrowSep;
-        private ToolBarLabel arrowLabel;
-        private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
-        private bool showOtherArrowOptions;
-
-        private ToolBarComboBox arrowSize;
-        private ToolBarLabel arrowSizeLabel;
-        private ToolBarButton arrowSizeMinus, arrowSizePlus;
-
-        private ToolBarComboBox arrowAngleOffset;
-        private ToolBarLabel arrowAngleOffsetLabel;
-        private ToolBarButton arrowAngleOffsetMinus, arrowAngleOffsetPlus;
-
-        private ToolBarComboBox arrowLengthOffset;
-        private ToolBarLabel arrowLengthOffsetLabel;
-        private ToolBarButton arrowLengthOffsetMinus, arrowLengthOffsetPlus;
+        protected DashPatternBox dashPBox = new DashPatternBox();
 
 
         protected int BrushWidth
@@ -200,56 +182,6 @@ namespace Pinta.Tools
         public ShapeEngineCollection SEngines = new ShapeEngineCollection(false);
 
 
-        /// <summary>
-        /// Set the Arrow options for the current shape to their respective values in the toolbar.
-        /// </summary>
-        private void SetArrowOptions()
-        {
-            ShapeEngine selEngine = SelectedShapeEngine;
-
-            if (selEngine != null)
-            {
-                selEngine.Arrow1.Show = showArrowOneBox.Active;
-                selEngine.Arrow2.Show = showArrowTwoBox.Active;
-
-                showOtherArrowOptions = showArrowOneBox.Active || showArrowTwoBox.Active;
-
-                if (showOtherArrowOptions)
-                {
-                    Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.ArrowSize);
-                    Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.AngleOffset);
-                    Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.LengthOffset);
-
-                    selEngine.Arrow1.ArrowSize = Utility.Clamp(selEngine.Arrow1.ArrowSize, 1d, 100d);
-                    selEngine.Arrow2.ArrowSize = selEngine.Arrow1.ArrowSize;
-                    selEngine.Arrow1.AngleOffset = Utility.Clamp(selEngine.Arrow1.AngleOffset, -89d, 89d);
-                    selEngine.Arrow2.AngleOffset = selEngine.Arrow1.AngleOffset;
-                    selEngine.Arrow1.LengthOffset = Utility.Clamp(selEngine.Arrow1.LengthOffset, -100d, 100d);
-                    selEngine.Arrow2.LengthOffset = selEngine.Arrow1.LengthOffset;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Set the Arrow options in the toolbar to their respective values for the current shape.
-        /// </summary>
-        private void SetToolbarArrowOptions()
-        {
-            ShapeEngine selEngine = SelectedShapeEngine;
-
-            if (selEngine != null)
-            {
-                showArrowOneBox.Active = selEngine.Arrow1.Show;
-                showArrowTwoBox.Active = selEngine.Arrow2.Show;
-
-                if (showOtherArrowOptions)
-                {
-                    (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.ArrowSize.ToString();
-                    (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.AngleOffset.ToString();
-                    (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.LengthOffset.ToString();
-                }
-            }
-        }
 
         #region ToolbarEventHandlers
 
@@ -268,132 +200,6 @@ namespace Pinta.Tools
             DrawShapes(false, false, false);
         }
 
-        void arrowSizeMinus_Clicked(object sender, EventArgs e)
-        {
-            double newSize = 10d;
-
-            if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-            {
-                --newSize;
-
-                if (newSize < 1d)
-                {
-                    newSize = 1d;
-                }
-            }
-            else
-            {
-                newSize = 10d;
-            }
-
-            (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
-        }
-
-        void arrowSizePlus_Clicked(object sender, EventArgs e)
-        {
-            double newSize = 10d;
-
-            if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-            {
-                ++newSize;
-
-                if (newSize > 100d)
-                {
-                    newSize = 100d;
-                }
-            }
-            else
-            {
-                newSize = 10d;
-            }
-
-            (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
-        }
-
-        void arrowAngleOffsetMinus_Clicked(object sender, EventArgs e)
-        {
-            double newAngle = 0d;
-
-            if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-            {
-                --newAngle;
-
-                if (newAngle < -89d)
-                {
-                    newAngle = -89d;
-                }
-            }
-            else
-            {
-                newAngle = 0d;
-            }
-
-            (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
-        }
-
-        void arrowAngleOffsetPlus_Clicked(object sender, EventArgs e)
-        {
-            double newAngle = 0d;
-
-            if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-            {
-                ++newAngle;
-
-                if (newAngle > 89d)
-                {
-                    newAngle = 89d;
-                }
-            }
-            else
-            {
-                newAngle = 0d;
-            }
-
-            (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
-        }
-
-        void arrowLengthOffsetMinus_Clicked(object sender, EventArgs e)
-        {
-            double newLength = 10d;
-
-            if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-            {
-                --newLength;
-
-                if (newLength < -100d)
-                {
-                    newLength = -100d;
-                }
-            }
-            else
-            {
-                newLength = 10d;
-            }
-
-            (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
-        }
-
-        void arrowLengthOffsetPlus_Clicked(object sender, EventArgs e)
-        {
-            double newLength = 10d;
-
-            if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-            {
-                ++newLength;
-
-                if (newLength > 100d)
-                {
-                    newLength = 100d;
-                }
-            }
-            else
-            {
-                newLength = 10d;
-            }
-
-            (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
-        }
-
         #endregion ToolbarEventHandlers
 
 
@@ -404,7 +210,7 @@ namespace Pinta.Tools
         }
 
 
-        public void HandleBuildToolBar(Gtk.Toolbar tb)
+        public virtual void HandleBuildToolBar(Gtk.Toolbar tb)
         {
             if (brushWidthLabel == null)
                 brushWidthLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Brush width")));
@@ -471,407 +277,9 @@ namespace Pinta.Tools
                     DrawShapes(false, false, false);
                 };
             }
-
-
-            #region Show Arrows
-
-            //Arrow separator.
-
-            if (arrowSep == null)
-            {
-                arrowSep = new Gtk.SeparatorToolItem();
-
-                showOtherArrowOptions = false;
-            }
-
-            tb.AppendItem(arrowSep);
-
-
-            if (arrowLabel == null)
-            {
-                arrowLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow")));
-            }
-
-            tb.AppendItem(arrowLabel);
-
-
-            //Show arrow 1.
-
-            showArrowOneBox = new Gtk.CheckButton("1");
-
-            showArrowOneBox.Toggled += (o, e) =>
-            {
-                //Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
-                if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
-                {
-                    if (showOtherArrowOptions)
-                    {
-                        tb.Remove(arrowSizeLabel);
-                        tb.Remove(arrowSizeMinus);
-                        tb.Remove(arrowSize);
-                        tb.Remove(arrowSizePlus);
-                        tb.Remove(arrowAngleOffsetLabel);
-                        tb.Remove(arrowAngleOffsetMinus);
-                        tb.Remove(arrowAngleOffset);
-                        tb.Remove(arrowAngleOffsetPlus);
-                        tb.Remove(arrowLengthOffsetLabel);
-                        tb.Remove(arrowLengthOffsetMinus);
-                        tb.Remove(arrowLengthOffset);
-                        tb.Remove(arrowLengthOffsetPlus);
-
-                        showOtherArrowOptions = false;
-                    }
-                }
-                else
-                {
-                    if (!showOtherArrowOptions)
-                    {
-                        tb.Add(arrowSizeLabel);
-                        tb.Add(arrowSizeMinus);
-                        tb.Add(arrowSize);
-                        tb.Add(arrowSizePlus);
-                        tb.Add(arrowAngleOffsetLabel);
-                        tb.Add(arrowAngleOffsetMinus);
-                        tb.Add(arrowAngleOffset);
-                        tb.Add(arrowAngleOffsetPlus);
-                        tb.Add(arrowLengthOffsetLabel);
-                        tb.Add(arrowLengthOffsetMinus);
-                        tb.Add(arrowLengthOffset);
-                        tb.Add(arrowLengthOffsetPlus);
-
-                        showOtherArrowOptions = true;
-                    }
-                }
-
-                ShapeEngine selEngine = SelectedShapeEngine;
-
-                if (selEngine != null)
-                {
-                    selEngine.Arrow1.Show = showArrowOneBox.Active;
-
-                    DrawShapes(false, false, false);
-                }
-            };
-
-            tb.AddWidgetItem(showArrowOneBox);
-
-
-            //Show arrow 2.
-
-            showArrowTwoBox = new Gtk.CheckButton("2");
-
-            showArrowTwoBox.Toggled += (o, e) =>
-            {
-                //Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
-                if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
-                {
-                    if (showOtherArrowOptions)
-                    {
-                        tb.Remove(arrowSizeLabel);
-                        tb.Remove(arrowSizeMinus);
-                        tb.Remove(arrowSize);
-                        tb.Remove(arrowSizePlus);
-                        tb.Remove(arrowAngleOffsetLabel);
-                        tb.Remove(arrowAngleOffsetMinus);
-                        tb.Remove(arrowAngleOffset);
-                        tb.Remove(arrowAngleOffsetPlus);
-                        tb.Remove(arrowLengthOffsetLabel);
-                        tb.Remove(arrowLengthOffsetMinus);
-                        tb.Remove(arrowLengthOffset);
-                        tb.Remove(arrowLengthOffsetPlus);
-
-                        showOtherArrowOptions = false;
-                    }
-                }
-                else
-                {
-                    if (!showOtherArrowOptions)
-                    {
-                        tb.Add(arrowSizeLabel);
-                        tb.Add(arrowSizeMinus);
-                        tb.Add(arrowSize);
-                        tb.Add(arrowSizePlus);
-                        tb.Add(arrowAngleOffsetLabel);
-                        tb.Add(arrowAngleOffsetMinus);
-                        tb.Add(arrowAngleOffset);
-                        tb.Add(arrowAngleOffsetPlus);
-                        tb.Add(arrowLengthOffsetLabel);
-                        tb.Add(arrowLengthOffsetMinus);
-                        tb.Add(arrowLengthOffset);
-                        tb.Add(arrowLengthOffsetPlus);
-
-                        showOtherArrowOptions = true;
-                    }
-                }
-
-                ShapeEngine selEngine = SelectedShapeEngine;
-
-                if (selEngine != null)
-                {
-                    selEngine.Arrow2.Show = showArrowTwoBox.Active;
-
-                    DrawShapes(false, false, false);
-                }
-            };
-
-            tb.AddWidgetItem(showArrowTwoBox);
-
-            #endregion Show Arrows
-
-
-            #region Arrow Size
-
-            if (arrowSizeLabel == null)
-            {
-                arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Size")));
-            }
-
-            if (arrowSizeMinus == null)
-            {
-                arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease arrow size"));
-                arrowSizeMinus.Clicked += new EventHandler(arrowSizeMinus_Clicked);
-            }
-
-            if (arrowSize == null)
-            {
-                arrowSize = new ToolBarComboBox(65, 7, true,
-                    "3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "18",
-                    "20", "25", "30", "40", "50", "60", "70", "80", "90", "100");
-
-                arrowSize.ComboBox.Changed += (o, e) =>
-                {
-                    if (arrowSize.ComboBox.ActiveText.Length < 1)
-                    {
-                        //Ignore the change until the user enters something.
-                        return;
-                    }
-                    else
-                    {
-                        double newSize = 10d;
-
-                        if (arrowSize.ComboBox.ActiveText == "-")
-                        {
-                            //The user is trying to enter a negative value: change it to 1.
-                            newSize = 1d;
-                        }
-                        else
-                        {
-                            if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-                            {
-                                if (newSize < 1d)
-                                {
-                                    //Less than 1: change it to 1.
-                                    newSize = 1d;
-                                }
-                                else if (newSize > 100d)
-                                {
-                                    //Greater than 100: change it to 100.
-                                    newSize = 100d;
-                                }
-                            }
-                            else
-                            {
-                                //Not a number: wait until the user enters something.
-                                return;
-                            }
-                        }
-
-                        (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
-
-                        ShapeEngine selEngine = SelectedShapeEngine;
-
-                        if (selEngine != null)
-                        {
-                            selEngine.Arrow1.ArrowSize = newSize;
-                            selEngine.Arrow2.ArrowSize = newSize;
-
-                            DrawShapes(false, false, false);
-                        }
-                    }
-                };
-            }
-
-            if (arrowSizePlus == null)
-            {
-                arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase arrow size"));
-                arrowSizePlus.Clicked += new EventHandler(arrowSizePlus_Clicked);
-            }
-
-            #endregion Arrow Size
-
-
-            #region Angle Offset
-
-            if (arrowAngleOffsetLabel == null)
-            {
-                arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle")));
-            }
-
-            if (arrowAngleOffsetMinus == null)
-            {
-                arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease angle offset"));
-                arrowAngleOffsetMinus.Clicked += new EventHandler(arrowAngleOffsetMinus_Clicked);
-            }
-
-            if (arrowAngleOffset == null)
-            {
-                arrowAngleOffset = new ToolBarComboBox(65, 9, true,
-                    "-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
-
-                arrowAngleOffset.ComboBox.Changed += (o, e) =>
-                {
-                    if (arrowAngleOffset.ComboBox.ActiveText.Length < 1)
-                    {
-                        //Ignore the change until the user enters something.
-                        return;
-                    }
-                    else if (arrowAngleOffset.ComboBox.ActiveText == "-")
-                    {
-                        //The user is trying to enter a negative value: ignore the change until the user enters more.
-                        return;
-                    }
-                    else
-                    {
-                        double newAngle = 15d;
-
-                        if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-                        {
-                            if (newAngle < -89d)
-                            {
-                                //Less than -89: change it to -89.
-                                newAngle = -89d;
-                            }
-                            else if (newAngle > 89d)
-                            {
-                                //Greater than 89: change it to 89.
-                                newAngle = 89d;
-                            }
-                        }
-                        else
-                        {
-                            //Not a number: wait until the user enters something.
-                            return;
-                        }
-
-                        (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
-
-                        ShapeEngine selEngine = SelectedShapeEngine;
-
-                        if (selEngine != null)
-                        {
-                            selEngine.Arrow1.AngleOffset = newAngle;
-                            selEngine.Arrow2.AngleOffset = newAngle;
-
-                            DrawShapes(false, false, false);
-                        }
-                    }
-                };
-            }
-
-            if (arrowAngleOffsetPlus == null)
-            {
-                arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase angle offset"));
-                arrowAngleOffsetPlus.Clicked += new EventHandler(arrowAngleOffsetPlus_Clicked);
-            }
-
-            #endregion Angle Offset
-
-
-            #region Length Offset
-
-            if (arrowLengthOffsetLabel == null)
-            {
-                arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length")));
-            }
-
-            if (arrowLengthOffsetMinus == null)
-            {
-                arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease length offset"));
-                arrowLengthOffsetMinus.Clicked += new EventHandler(arrowLengthOffsetMinus_Clicked);
-            }
-
-            if (arrowLengthOffset == null)
-            {
-                arrowLengthOffset = new ToolBarComboBox(65, 8, true,
-                    "-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
-
-                arrowLengthOffset.ComboBox.Changed += (o, e) =>
-                {
-                    if (arrowLengthOffset.ComboBox.ActiveText.Length < 1)
-                    {
-                        //Ignore the change until the user enters something.
-                        return;
-                    }
-                    else if (arrowLengthOffset.ComboBox.ActiveText == "-")
-                    {
-                        //The user is trying to enter a negative value: ignore the change until the user enters more.
-                        return;
-                    }
-                    else
-                    {
-                        double newLength = 10d;
-
-                        if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-                        {
-                            if (newLength < -100d)
-                            {
-                                //Less than -100: change it to -100.
-                                newLength = -100d;
-                            }
-                            else if (newLength > 100d)
-                            {
-                                //Greater than 100: change it to 100.
-                                newLength = 100d;
-                            }
-                        }
-                        else
-                        {
-                            //Not a number: wait until the user enters something.
-                            return;
-                        }
-
-                        (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
-
-                        ShapeEngine selEngine = SelectedShapeEngine;
-
-                        if (selEngine != null)
-                        {
-                            selEngine.Arrow1.LengthOffset = newLength;
-                            selEngine.Arrow2.LengthOffset = newLength;
-
-                            DrawShapes(false, false, false);
-                        }
-                    }
-                };
-            }
-
-            if (arrowLengthOffsetPlus == null)
-            {
-                arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase length offset"));
-                arrowLengthOffsetPlus.Clicked += new EventHandler(arrowLengthOffsetPlus_Clicked);
-            }
-
-            #endregion Length Offset
-
-
-            if (showOtherArrowOptions)
-            {
-                tb.Add(arrowSizeLabel);
-                tb.Add(arrowSizeMinus);
-                tb.Add(arrowSize);
-                tb.Add(arrowSizePlus);
-                tb.Add(arrowAngleOffsetLabel);
-                tb.Add(arrowAngleOffsetMinus);
-                tb.Add(arrowAngleOffset);
-                tb.Add(arrowAngleOffsetPlus);
-                tb.Add(arrowLengthOffsetLabel);
-                tb.Add(arrowLengthOffsetMinus);
-                tb.Add(arrowLengthOffset);
-                tb.Add(arrowLengthOffsetPlus);
-            }
         }
 
-        public void HandleActivated()
+        public virtual void HandleActivated()
         {
             PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
             PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = false;
@@ -882,7 +290,7 @@ namespace Pinta.Tools
             PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
         }
 
-        public void HandleDeactivated()
+        public virtual void HandleDeactivated()
         {
             PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
@@ -893,7 +301,7 @@ namespace Pinta.Tools
             PintaCore.Palette.SecondaryColorChanged += Palette_SecondaryColorChanged;
         }
 
-        public void HandleCommit()
+        public virtual void HandleCommit()
         {
             PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
 
@@ -901,7 +309,7 @@ namespace Pinta.Tools
             DrawShapes(false, true, false);
         }
 
-        public void HandleAfterUndo()
+        public virtual void HandleAfterUndo()
         {
             surfaceModified = true;
 
@@ -919,12 +327,9 @@ namespace Pinta.Tools
 
             //Draw the current state.
             DrawShapes(true, false, false);
-
-            //Update the toolbar's arrow options.
-            SetToolbarArrowOptions();
         }
 
-        public void HandleAfterRedo()
+        public virtual void HandleAfterRedo()
         {
             surfaceModified = true;
 
@@ -942,17 +347,9 @@ namespace Pinta.Tools
 
             //Draw the current state.
             DrawShapes(true, false, false);
-
-            //Update the toolbar's arrow options.
-            SetToolbarArrowOptions();
         }
 
-        public void HandleAfterBuildRasterization()
-        {
-            owner.UseAntialiasing = true;
-        }
-
-        public bool HandleKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
+        public virtual bool HandleKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
         {
             if (args.Event.Key == Gdk.Key.Delete)
             {
@@ -1138,7 +535,7 @@ namespace Pinta.Tools
             return true;
         }
 
-        public bool HandleKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
+        public virtual bool HandleKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
         {
             if (args.Event.Key == Gdk.Key.Delete || args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.space
                 || args.Event.Key == Gdk.Key.Up || args.Event.Key == Gdk.Key.Down
@@ -1154,7 +551,7 @@ namespace Pinta.Tools
             }
         }
 
-        public void HandleMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
         {
             // If we are already drawing, ignore any additional mouse down events
             if (isDrawing)
@@ -1294,11 +691,6 @@ namespace Pinta.Tools
 
 
                     CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
-                    
-
-                    //Set the new shape's arrow options and DashPattern to be the same as the previous shape's.
-                    SetArrowOptions();
-                    actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
                 }
             }
 
@@ -1313,7 +705,7 @@ namespace Pinta.Tools
             DrawShapes(false, false, shiftKey);
         }
 
-        public void HandleMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
         {
             isDrawing = false;
 
@@ -1322,7 +714,7 @@ namespace Pinta.Tools
             DrawShapes(true, false, args.Event.IsShiftPressed());
         }
 
-        public void HandleMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
         {
             Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -1453,7 +845,7 @@ namespace Pinta.Tools
             LastMousePosition = currentPoint;
         }
 
-        public void DrawControlPoints(Context g, Rectangle? dirty)
+        public virtual void DrawControlPoints(Context g, Rectangle? dirty)
         {
             //Draw the control points for all of the shapes.
 
@@ -1758,32 +1150,9 @@ namespace Pinta.Tools
 
                 g.SetDash(new double[] { }, 0.0);
 
-                //Draw the arrows for all of the shapes.
-                for (int n = 0; n < SEngines.Count; ++n)
-                {
-                    PointD[] genPoints = SEngines[n].GeneratedPoints;
 
-                    //For each shape currently being drawn/edited by the user.
-                    for (int i = 0; i < SEngines[n].ControlPoints.Count; ++i)
-                    {
-                        if (SEngines[n].Arrow1.Show)
-                        {
-                            if (genPoints.Length > 1)
-                            {
-                                dirty = dirty.UnionRectangles(SEngines[n].Arrow1.Draw(g, outlineColor, genPoints[0], genPoints[1]));
-                            }
-                        }
+                DrawExtras(dirty, g);
 
-                        if (SEngines[n].Arrow2.Show)
-                        {
-                            if (genPoints.Length > 1)
-                            {
-                                dirty = dirty.UnionRectangles(SEngines[n].Arrow2.Draw(g, outlineColor,
-                                    genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
-                            }
-                        }
-                    }
-                }
 
                 if (drawControlPoints)
                 {
@@ -1832,6 +1201,11 @@ namespace Pinta.Tools
         }
 
         protected virtual void MovePoint(List<ControlPoint> controlPoints)
+        {
+            
+        }
+
+        protected virtual void DrawExtras(Rectangle? dirty, Context g)
         {
             
         }

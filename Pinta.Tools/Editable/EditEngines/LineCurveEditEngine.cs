@@ -34,7 +34,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-    class LineCurveEditEngine: BaseEditEngine
+    public class LineCurveEditEngine: ArrowedEditEngine
     {
         public LineCurveEditEngine(BaseTool passedOwner): base(passedOwner)
         {
@@ -64,6 +64,13 @@ namespace Pinta.Tools
 
             SelectedPointIndex = 1;
             SelectedShapeIndex = SEngines.Count - 1;
+
+
+            //Set the new shape's DashPattern to be the same as the previous shape's.
+            actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+
+
+            base.CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
         }
 
         protected override void MovePoint(List<ControlPoint> controlPoints)

@@ -132,12 +132,5 @@ namespace Pinta.Tools
 
             base.AfterRedo();
         }
-
-        protected override void AfterBuildRasterization()
-        {
-            editEngine.HandleAfterBuildRasterization();
-
-            base.AfterBuildRasterization();
-        }
 	}
 }

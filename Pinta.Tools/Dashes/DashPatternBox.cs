@@ -34,7 +34,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	class DashPatternBox
+	public class DashPatternBox
 	{
 		private bool dashChangeSetup = false;
 

@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="CoreToolsExtension.cs" />
     <Compile Include="Dashes\DashPatternBox.cs" />
+    <Compile Include="Editable\EditEngines\ArrowedEditEngine.cs" />
     <Compile Include="Editable\EditEngines\RectangleEditEngine.cs" />
     <Compile Include="Editable\Shapes\ControlPoint.cs" />
     <Compile Include="Editable\Shapes\Arrow.cs" />

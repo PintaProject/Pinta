@@ -34,7 +34,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-    class RectangleEditEngine: BaseEditEngine
+    public class RectangleEditEngine: ArrowedEditEngine
     {
         public RectangleEditEngine(BaseTool passedOwner): base(passedOwner)
         {
@@ -69,6 +69,13 @@ namespace Pinta.Tools
 
             SelectedPointIndex = 2;
             SelectedShapeIndex = SEngines.Count - 1;
+
+
+            //Set the new shape's DashPattern option to be the same as the previous shape's.
+            actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+
+
+            base.CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
         }
 
         protected override void MovePoint(List<ControlPoint> controlPoints)
@@ -122,23 +129,39 @@ namespace Pinta.Tools
 
             //Update the control points' positions.
 
+
+            //Update the selected control point's position.
             controlPoints.RemoveAt(SelectedPointIndex);
             controlPoints.Insert(SelectedPointIndex, new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), movingPointTension));
 
+
+            //Determine the positions of each of the surrounding points.
             PointD doublePreviousPoint = controlPoints.ElementAt(doublePreviousIndex).Position;
             PointD previousPoint = controlPoints.ElementAt(previousPointIndex).Position;
             PointD nextPoint = controlPoints.ElementAt(nextPointIndex).Position;
             PointD doubleNextPoint = controlPoints.ElementAt(doubleNextIndex).Position;
 
+
+            //Ensure that only one direction is moved in at a time, if either.
+            bool moveVertical = (previousPoint.X == doublePreviousPoint.X);
+            bool moveHorizontal = moveVertical ? false : (previousPoint.Y == doublePreviousPoint.Y);
+
+            //Update the previous control point's position.
             controlPoints.RemoveAt(previousPointIndex);
             controlPoints.Insert(previousPointIndex,
-                new ControlPoint(new PointD(previousPoint.X == doublePreviousPoint.X ? previousPoint.X : currentPoint.X,
-                    previousPoint.Y == doublePreviousPoint.Y ? previousPoint.Y : currentPoint.Y), previousPointTension));
+                new ControlPoint(new PointD(moveHorizontal ? currentPoint.X : previousPoint.X,
+                    moveVertical ? currentPoint.Y : previousPoint.Y), previousPointTension));
 
+
+            //Ensure that only one direction is moved in at a time, if either.
+            moveVertical = (nextPoint.X == doubleNextPoint.X);
+            moveHorizontal = moveVertical ? false : (nextPoint.Y == doubleNextPoint.Y);
+
+            //Update the next control point's position.
             controlPoints.RemoveAt(nextPointIndex);
             controlPoints.Insert(nextPointIndex,
-                new ControlPoint(new PointD(nextPoint.X == doubleNextPoint.X ? nextPoint.X : currentPoint.X,
-                    nextPoint.Y == doubleNextPoint.Y ? nextPoint.Y : currentPoint.Y), nextPointTension));
+                new ControlPoint(new PointD(moveHorizontal ? currentPoint.X : nextPoint.X,
+                    moveVertical ? currentPoint.Y : nextPoint.Y), nextPointTension));
         }
     }
 }
