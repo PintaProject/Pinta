@@ -49,5 +49,10 @@ namespace Pinta.Tools
 		public override int Priority{
 			get { return 41; }
 		}
+
+        protected override void InitEditEngine()
+        {
+            editEngine = new RectangleEditEngine(this);
+        }
 	}
 }

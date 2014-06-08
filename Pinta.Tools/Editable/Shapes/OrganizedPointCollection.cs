@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		public const double SectionSize = 15;
 
 		//Don't change this; it's automatically calculated.
-        public static readonly int BorderingSectionRange = (int)Math.Ceiling(EditEngine.ShapeClickStartingRange / SectionSize);
+        public static readonly int BorderingSectionRange = (int)Math.Ceiling(BaseEditEngine.ShapeClickStartingRange / SectionSize);
 
 		private Dictionary<int, Dictionary<int, List<OrganizedPoint>>> collection;
 

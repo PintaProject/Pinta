@@ -34,12 +34,17 @@ namespace Pinta.Tools
 {
 	public abstract class ShapeTool : BaseTool
 	{
-        protected EditEngine editEngine;
+        protected BaseEditEngine editEngine;
 
 		public ShapeTool ()
 		{
-            editEngine = new EditEngine(this);
+            InitEditEngine();
 		}
+
+        protected virtual void InitEditEngine()
+        {
+            editEngine = new BaseEditEngine(this);
+        }
 
 		static ShapeTool ()
 		{
@@ -49,7 +54,7 @@ namespace Pinta.Tools
 			fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
 			fact.AddDefault ();
 		}
-
+        
 		#region Properties
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
         protected override bool ShowAntialiasingButton { get { return true; } }

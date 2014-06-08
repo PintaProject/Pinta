@@ -32,7 +32,7 @@ namespace Pinta.Tools
 {
 	public class ShapeModifyHistoryItem : BaseHistoryItem
 	{
-        private EditEngine ee;
+        private BaseEditEngine ee;
 
 		private ShapeEngineCollection sEngines;
 
@@ -44,7 +44,7 @@ namespace Pinta.Tools
         /// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		public ShapeModifyHistoryItem(EditEngine passedEE, string icon, string text) : base(icon, text)
+		public ShapeModifyHistoryItem(BaseEditEngine passedEE, string icon, string text) : base(icon, text)
 		{
             ee = passedEE;
 

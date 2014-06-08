@@ -1,5 +1,5 @@
 ﻿// 
-// UserLayer.cs
+// EditEngine.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
@@ -37,7 +37,7 @@ namespace Pinta.Tools
     //The EditEngine was created for tools that wish to utilize any of the control point, line/curve, hover point (reacting to the mouse),
     //and etc. code that was originally used in the LineCurveTool for editability. If a class wishes to use it, it should create and instantiate
     //a private instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
-    public class EditEngine
+    public class BaseEditEngine
     {
         protected readonly BaseTool owner;
 
@@ -398,7 +398,7 @@ namespace Pinta.Tools
 
 
 
-        public EditEngine(BaseTool passedOwner)
+        public BaseEditEngine(BaseTool passedOwner)
         {
             owner = passedOwner;
         }
@@ -958,7 +958,7 @@ namespace Pinta.Tools
             {
                 if (SelectedPointIndex > -1)
                 {
-                    //Create a new CurveModifyHistoryItem so that the deletion of a control point can be undone.
+                    //Create a new ShapeModifyHistoryItem so that the deletion of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
                         new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Deleted")));
 
@@ -1009,7 +1009,7 @@ namespace Pinta.Tools
                     //This can be assumed not to be null since selPoint was not null.
                     ShapeEngine selEngine = SelectedShapeEngine;
 
-                    //Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
+                    //Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
                         new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
 
@@ -1190,12 +1190,12 @@ namespace Pinta.Tools
                 ChangingTension = true;
             }
 
-            int closestCurveIndex, closestPointIndex;
+            int closestShapeIndex, closestPointIndex;
             PointD closestPoint;
             double closestDistance;
 
             OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-                out closestCurveIndex, out closestPointIndex, out closestPoint, out closestDistance);
+                out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
             bool clickedOnControlPoint = false;
 
@@ -1204,9 +1204,9 @@ namespace Pinta.Tools
             {
                 //User clicked on a generated point on a shape.
 
-                List<ControlPoint> controlPoints = SEngines[closestCurveIndex].ControlPoints;
+                List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
 
-                //Note: compare the current_point's distance here because it's the actual mouse position.
+                //Note: compare the currentPoint's distance here because it's the actual mouse position.
                 if (controlPoints.Count > closestPointIndex &&
                     currentPoint.Distance(controlPoints[closestPointIndex].Position) < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
                 {
@@ -1215,7 +1215,7 @@ namespace Pinta.Tools
                     ClickedWithoutModifying = true;
 
                     SelectedPointIndex = closestPointIndex;
-                    SelectedShapeIndex = closestCurveIndex;
+                    SelectedShapeIndex = closestShapeIndex;
 
                     clickedOnControlPoint = true;
                 }
@@ -1226,7 +1226,7 @@ namespace Pinta.Tools
                     ClickedWithoutModifying = true;
 
                     SelectedPointIndex = closestPointIndex - 1;
-                    SelectedShapeIndex = closestCurveIndex;
+                    SelectedShapeIndex = closestShapeIndex;
 
                     clickedOnControlPoint = true;
                 }
@@ -1238,7 +1238,7 @@ namespace Pinta.Tools
                     {
                         //User clicked on a non-control point on a shape.
 
-                        //Create a new CurveModifyHistoryItem so that the adding of a control point can be undone.
+                        //Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
                         doc.History.PushNewItem(
                             new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
 
@@ -1246,7 +1246,7 @@ namespace Pinta.Tools
                             new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
 
                         SelectedPointIndex = closestPointIndex;
-                        SelectedShapeIndex = closestCurveIndex;
+                        SelectedShapeIndex = closestShapeIndex;
                     }
                 }
             }
@@ -1282,39 +1282,22 @@ namespace Pinta.Tools
                 actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
                 //Verify that the user clicked inside the image bounds or that the user is
-                //holding the Ctrl key (to ignore the Image bounds and draw a line on the edge).
+                //holding the Ctrl key (to ignore the Image bounds and draw on the edge).
                 if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
                 {
-                    //Create a new CurvesHistoryItem so that the creation of a new shape can be undone.
+                    //Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
                     doc.History.PushNewItem(
                         new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
                             doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
                     isDrawing = true;
 
-                    //Then create the first two points of the shape. The second point will follow the mouse around until released.
-                    if (ctrlKey && clickedOnControlPoint)
-                    {
-                        actEngine.ControlPoints.Add(new ControlPoint(new PointD(prevSelPoint.X, prevSelPoint.Y), DefaultEndPointTension));
-                        actEngine.ControlPoints.Add(
-                            new ControlPoint(new PointD(prevSelPoint.X + .01d, prevSelPoint.Y + .01d), DefaultEndPointTension));
 
-                        ClickedWithoutModifying = false;
-                    }
-                    else
-                    {
-                        actEngine.ControlPoints.Add(new ControlPoint(new PointD(shapeOrigin.X, shapeOrigin.Y), DefaultEndPointTension));
-                        actEngine.ControlPoints.Add(
-                            new ControlPoint(new PointD(shapeOrigin.X + .01d, shapeOrigin.Y + .01d), DefaultEndPointTension));
-                    }
+                    CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
+                    
 
-                    SelectedPointIndex = 1;
-                    SelectedShapeIndex = 0;
-
-                    //Set the new shape's arrow options to be the same as the previous shape's.
+                    //Set the new shape's arrow options and DashPattern to be the same as the previous shape's.
                     SetArrowOptions();
-
-                    //Set the DashPattern for the new shape to be the same as the previous shape's.
                     actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
                 }
             }
@@ -1365,7 +1348,7 @@ namespace Pinta.Tools
                 {
                     if (ClickedWithoutModifying)
                     {
-                        //Create a new CurveModifyHistoryItem so that the modification of the shape can be undone.
+                        //Create a new ShapeModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
                             new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Modified")));
 
@@ -1382,14 +1365,7 @@ namespace Pinta.Tools
                         if (currentPoint.X != controlPoints[SelectedPointIndex].Position.X
                             || currentPoint.Y != controlPoints[SelectedPointIndex].Position.Y)
                         {
-                            //Keep the tension value consistent.
-                            double movingPointTension = controlPoints[SelectedPointIndex].Tension;
-
-                            //Update the control point's position.
-                            controlPoints.RemoveAt(SelectedPointIndex);
-                            controlPoints.Insert(SelectedPointIndex,
-                                new ControlPoint(new PointD(currentPoint.X, currentPoint.Y),
-                                    movingPointTension));
+                            MovePoint(controlPoints);
                         }
                     }
                     else
@@ -1458,6 +1434,7 @@ namespace Pinta.Tools
                         }
 
                         //Update the control point's tension.
+
                         //Note: the difference factors are to be inverted for x and y change because this is perpendicular motion.
                         controlPoints[SelectedPointIndex].Tension +=
                             Math.Round(Utility.Clamp((xChange * yDiff + yChange * xDiff) / totalDiff, -1d, 1d)) / 50d;
@@ -1585,7 +1562,7 @@ namespace Pinta.Tools
                 //Make sure that the undo surface isn't null and that there are actually points.
                 if (undoSurface != null)
                 {
-                    //Create a new CurvesHistoryItem so that the finalization of the shapes can be undone.
+                    //Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
                     doc.History.PushNewItem(new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
                             undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, previousSelectedShapeIndex));
                 }
@@ -1600,14 +1577,14 @@ namespace Pinta.Tools
                 {
                     //Calculate the hover point, if any.
 
-                    int closestCurveIndex, closestPointIndex;
+                    int closestShapeIndex, closestPointIndex;
                     PointD closestPoint;
                     double closestDistance;
 
                     OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-                        out closestCurveIndex, out closestPointIndex, out closestPoint, out closestDistance);
+                        out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
-                    List<ControlPoint> controlPoints = SEngines[closestCurveIndex].ControlPoints;
+                    List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
 
                     //Determine if the user is hovering the mouse close enough to a line,
                     //shape, or point that's currently being drawn/edited by the user.
@@ -1846,6 +1823,17 @@ namespace Pinta.Tools
             outlineColor = PintaCore.Palette.SecondaryColor;
 
             DrawShapes(false, false, false);
+        }
+
+
+        protected virtual void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine actEngine, PointD prevSelPoint)
+        {
+
+        }
+
+        protected virtual void MovePoint(List<ControlPoint> controlPoints)
+        {
+            
         }
     }
 }

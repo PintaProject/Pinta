@@ -32,7 +32,7 @@ namespace Pinta.Tools
 {
 	public class ShapeHistoryItem : BaseHistoryItem
 	{
-        private EditEngine ee;
+        private BaseEditEngine ee;
 
 		private UserLayer userLayer;
 
@@ -53,7 +53,7 @@ namespace Pinta.Tools
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
 		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
 		/// <param name="passedSelectedPointShapeIndex">The selected point's shape index.</param>
-        public ShapeHistoryItem(EditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
+        public ShapeHistoryItem(BaseEditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
 			int passedSelectedPointIndex, int passedSelectedPointShapeIndex) : base(icon, text)
 		{
             ee = passedEE;

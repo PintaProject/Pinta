@@ -69,5 +69,10 @@ namespace Pinta.Tools
         {
             editEngine.ShowStrokeComboBox = false;
         }
+
+        protected override void InitEditEngine()
+        {
+            editEngine = new LineCurveEditEngine(this);
+        }
 	}
 }
