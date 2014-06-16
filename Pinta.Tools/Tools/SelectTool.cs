@@ -33,7 +33,7 @@ using ClipperLibrary;
 
 namespace Pinta.Tools
 {
-	public abstract class SelectTool : ShapeTool
+	public abstract class SelectTool : SelectShapeTool
 	{
 		private PointD reset_origin;
 		private PointD shape_end;
@@ -53,7 +53,6 @@ namespace Pinta.Tools
 			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
 		}
 
-        /*
         #region ToolBar
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Toolbar tb)
@@ -69,7 +68,7 @@ namespace Pinta.Tools
 		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			// Ignore extra button clicks while drawing
-			if (isDrawing)
+			if (is_drawing)
 				return;
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
@@ -94,7 +93,7 @@ namespace Pinta.Tools
 
 				shape_origin = new PointD(x, y);
 
-				isDrawing = true;
+				is_drawing = true;
 			}
 			else
 			{
@@ -132,7 +131,7 @@ namespace Pinta.Tools
 				hist = null;
 			}
 
-			isDrawing = false;
+			is_drawing = false;
 			isResizing = false;
 		}
 
@@ -160,7 +159,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if (!isDrawing)
+			if (!is_drawing)
 			{
 				CheckHandlerCursor(point.X, point.Y);
 
@@ -386,7 +385,5 @@ namespace Pinta.Tools
 			DrawHandler(doc.ToolLayer);
 			PintaCore.Workspace.Invalidate();
 		}
-        
-        */
 	}
 }

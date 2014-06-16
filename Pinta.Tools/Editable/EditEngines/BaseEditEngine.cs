@@ -1,5 +1,5 @@
 ﻿// 
-// EditEngine.cs
+// BaseEditEngine.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
@@ -37,9 +37,17 @@ namespace Pinta.Tools
     //The EditEngine was created for tools that wish to utilize any of the control point, line/curve, hover point (reacting to the mouse),
     //and etc. code that was originally used in the LineCurveTool for editability. If a class wishes to use it, it should create and instantiate
     //a private instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
-    public class BaseEditEngine
+    public abstract class BaseEditEngine
     {
         protected readonly BaseTool owner;
+
+		protected virtual Type shapeEngineType
+		{
+			get
+			{
+				return Type.GetType("ShapeEngine");
+			}
+		}
 
         protected bool isDrawing = false;
 
@@ -179,7 +187,7 @@ namespace Pinta.Tools
 
 
         //Stores the editable shape data.
-        public ShapeEngineCollection SEngines = new ShapeEngineCollection(false);
+		public ShapeEngineCollection SEngines = new ShapeEngineCollection();
 
 
 
@@ -207,6 +215,8 @@ namespace Pinta.Tools
         public BaseEditEngine(BaseTool passedOwner)
         {
             owner = passedOwner;
+
+			ResetShapes();
         }
 
 
@@ -271,7 +281,12 @@ namespace Pinta.Tools
             {
                 dpbBox.Changed += (o, e) =>
                 {
-                    ActiveShapeEngine.DashPattern = dpbBox.ActiveText;
+					ShapeEngine actEngine = ActiveShapeEngine;
+
+					if (actEngine != null)
+					{
+						actEngine.DashPattern = dpbBox.ActiveText;
+					}
 
                     //Update the shape.
                     DrawShapes(false, false, false);
@@ -556,7 +571,7 @@ namespace Pinta.Tools
             // If we are already drawing, ignore any additional mouse down events
             if (isDrawing)
                 return;
-
+			
             Document doc = PintaCore.Workspace.ActiveDocument;
 
             shapeOrigin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
@@ -616,17 +631,33 @@ namespace Pinta.Tools
 
                     clickedOnControlPoint = true;
                 }
-                else if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
-                {
-                    //User clicked on a control point (on the "following order" side of the point).
+                else if (closestPointIndex > 0)
+				{
+					if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position)
+						< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+					{
+						//User clicked on a control point (on the "following order" side of the point).
 
-                    ClickedWithoutModifying = true;
+						ClickedWithoutModifying = true;
 
-                    SelectedPointIndex = closestPointIndex - 1;
-                    SelectedShapeIndex = closestShapeIndex;
+						SelectedPointIndex = closestPointIndex - 1;
+						SelectedShapeIndex = closestShapeIndex;
 
-                    clickedOnControlPoint = true;
-                }
+						clickedOnControlPoint = true;
+					}
+					else if (controlPoints.Count > 0 && currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position)
+						< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+					{
+						//User clicked on a control point (on the "following order" side of the point).
+
+						ClickedWithoutModifying = true;
+
+						SelectedPointIndex = closestPointIndex - 1;
+						SelectedShapeIndex = closestShapeIndex;
+
+						clickedOnControlPoint = true;
+					}
+				}
 
                 //Don't change anything here if right clicked.
                 if (!ChangingTension)
@@ -675,23 +706,26 @@ namespace Pinta.Tools
 
                 ShapeEngine actEngine = ActiveShapeEngine;
 
-                //Set the DashPattern for the finalized shape to be the same as the unfinalized shape's.
-                actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+				if (actEngine != null)
+				{
+					//Set the DashPattern for the finalized shape to be the same as the unfinalized shape's.
+					actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
-                //Verify that the user clicked inside the image bounds or that the user is
-                //holding the Ctrl key (to ignore the Image bounds and draw on the edge).
-                if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
-                {
-                    //Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
-                    doc.History.PushNewItem(
-                        new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
-                            doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
+					//Verify that the user clicked inside the image bounds or that the user is
+					//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
+					if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
+					{
+						//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
+						doc.History.PushNewItem(
+							new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
+								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
-                    isDrawing = true;
+						isDrawing = true;
 
 
-                    CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
-                }
+						CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
+					}
+				}
             }
 
             //If the user right clicks outside of any shapes.
@@ -918,10 +952,17 @@ namespace Pinta.Tools
         /// <param name="shiftKey">Whether or not the shift key is being pressed.</param>
         public void DrawShapes(bool calculateOrganizedPoints, bool finalize, bool shiftKey)
         {
-            if (!surfaceModified)
+            if (!surfaceModified || SEngines.Count == 0)
             {
                 return;
             }
+
+			ShapeEngine actEngine = ActiveShapeEngine;
+
+			if (actEngine == null)
+			{
+				return;
+			}
 
             Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -934,10 +975,13 @@ namespace Pinta.Tools
                 ImageSurface undoSurface = null;
 
                 // We only need to create a history item if there was a previous shape.
-                if (ActiveShapeEngine.ControlPoints.Count > 0)
-                {
-                    undoSurface = doc.CurrentUserLayer.Surface.Clone();
-                }
+				if (actEngine != null)
+				{
+					if (actEngine.ControlPoints.Count > 0)
+					{
+						undoSurface = doc.CurrentUserLayer.Surface.Clone();
+					}
+				}
 
                 isDrawing = false;
                 surfaceModified = false;
@@ -960,7 +1004,7 @@ namespace Pinta.Tools
                 }
 
                 //Clear out all of the old data.
-                SEngines = new ShapeEngineCollection(true);
+				ResetShapes();
             }
             else
             {
@@ -986,7 +1030,7 @@ namespace Pinta.Tools
 
                         if (controlPoints.Count > closestPointIndex)
                         {
-                            //Note: compare the current_point's distance here because it's the actual mouse position.
+                            //Note: compare the currentPoint's distance here because it's the actual mouse position.
                             if (currentPoint.Distance(controlPoints[closestPointIndex].Position)
                                 < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
                             {
@@ -996,15 +1040,27 @@ namespace Pinta.Tools
                                 HoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
                                 HoveredPointAsControlPoint = closestPointIndex;
                             }
-                            else if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position)
-                                < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
-                            {
-                                //Mouse hovering over a control point (on the "following order" side of the point).
+                            else if (closestPointIndex > 0)
+							{
+								if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position)
+									< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+								{
+									//Mouse hovering over a control point (on the "following order" side of the point).
 
-                                HoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
-                                HoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
-                                HoveredPointAsControlPoint = closestPointIndex - 1;
-                            }
+									HoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
+									HoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
+									HoveredPointAsControlPoint = closestPointIndex - 1;
+								}
+							}
+							else if (controlPoints.Count > 0 && currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position)
+								< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+							{
+								//Mouse hovering over a control point (on the "following order" side of the point).
+
+								HoveredPointAsControlPoint = controlPoints.Count - 1;
+								HoverPoint.X = controlPoints[HoveredPointAsControlPoint].Position.X;
+								HoverPoint.Y = controlPoints[HoveredPointAsControlPoint].Position.Y;
+							}
                         }
 
                         if (HoverPoint.X < 0d)
@@ -1108,57 +1164,57 @@ namespace Pinta.Tools
         }
 
 
-        /*protected virtual Rectangle DrawShape(Rectangle r, Layer l)
-        {
-            return r;
-        }*/
-
         protected Rectangle DrawShape(Rectangle rect, Layer l, bool drawControlPoints)
         {
             Document doc = PintaCore.Workspace.ActiveDocument;
 
             Rectangle? dirty = null;
 
-            using (Context g = new Context(l.Surface))
-            {
-                g.AppendPath(doc.Selection.SelectionPath);
-                g.FillRule = FillRule.EvenOdd;
-                g.Clip();
+			ShapeEngine actEngine = ActiveShapeEngine;
 
-                ActiveShapeEngine.AntiAliasing = owner.UseAntialiasing;
+			if (actEngine != null)
+			{
+				using (Context g = new Context(l.Surface))
+				{
+					g.AppendPath(doc.Selection.SelectionPath);
+					g.FillRule = FillRule.EvenOdd;
+					g.Clip();
 
-                g.Antialias = owner.UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+					actEngine.AntiAliasing = owner.UseAntialiasing;
 
-                g.SetDash(DashPatternBox.GenerateDashArray(ActiveShapeEngine.DashPattern, BrushWidth), 0.0);
+					g.Antialias = owner.UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-                g.LineWidth = BrushWidth;
+					g.SetDash(DashPatternBox.GenerateDashArray(actEngine.DashPattern, BrushWidth), 0.0);
 
-                //Draw the shapes.
-                for (int n = 0; n < SEngines.Count; ++n)
-                {
-                    List<ControlPoint> controlPoints = SEngines[n].ControlPoints;
+					g.LineWidth = BrushWidth;
 
-                    if (controlPoints.Count > 0)
-                    {
-                        //Generate the points that make up the shape.
-                        SEngines[n].GenerateCardinalSplinePolynomialCurvePoints();
+					//Draw the shapes.
+					for (int n = 0; n < SEngines.Count; ++n)
+					{
+						List<ControlPoint> controlPoints = SEngines[n].ControlPoints;
 
-                        //Expand the invalidation rectangle as necessary.
-                        dirty = dirty.UnionRectangles(g.DrawPolygonal(SEngines[n].GeneratedPoints, outlineColor));
-                    }
-                }
+						if (controlPoints.Count > 0)
+						{
+							//Generate the points that make up the shape.
+							SEngines[n].GeneratePoints();
 
-                g.SetDash(new double[] { }, 0.0);
+							//Expand the invalidation rectangle as necessary.
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(SEngines[n].GeneratedPoints, outlineColor));
+						}
+					}
+
+					g.SetDash(new double[] { }, 0.0);
 
 
-                DrawExtras(dirty, g);
+					DrawExtras(dirty, g);
 
 
-                if (drawControlPoints)
-                {
-                    DrawControlPoints(g, dirty);
-                }
-            }
+					if (drawControlPoints)
+					{
+						DrawControlPoints(g, dirty);
+					}
+				}
+			}
 
 
             return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
@@ -1209,5 +1265,16 @@ namespace Pinta.Tools
         {
             
         }
+
+		protected void ResetShapes()
+		{
+			SEngines = new ShapeEngineCollection();
+
+			AddShape();
+		}
+
+		protected abstract void AddShape();
+		//Overrides should implement (with their own ShapeEngine child type):
+			//SEngines.Add(new ShapeEngine(owner.UseAntialiasing));
     }
 }

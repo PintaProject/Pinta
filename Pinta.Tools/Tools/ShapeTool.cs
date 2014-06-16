@@ -32,21 +32,15 @@ using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
-	public abstract class ShapeTool : BaseTool
+	public class ShapeTool : BaseTool
 	{
         protected BaseEditEngine editEngine;
 
-		public ShapeTool ()
+		public ShapeTool()
 		{
-            InitEditEngine();
 		}
 
-        protected virtual void InitEditEngine()
-        {
-            editEngine = new BaseEditEngine(this);
-        }
-
-		static ShapeTool ()
+		static ShapeTool()
 		{
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
 			fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
@@ -67,17 +61,17 @@ namespace Pinta.Tools
             editEngine.HandleBuildToolBar(tb);
         }
 
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
             editEngine.HandleMouseDown(canvas, args, point);
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
             editEngine.HandleMouseUp(canvas, args, point);
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
             editEngine.HandleMouseMove(o, args, point);
 		}

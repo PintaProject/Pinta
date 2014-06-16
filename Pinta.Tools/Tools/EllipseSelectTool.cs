@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public class EllipseSelectTool : SelectTool
+	public class EllipseSelectTool : SelectShapeTool
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Ellipse Select"); }
@@ -45,13 +45,13 @@ namespace Pinta.Tools
 		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18); } }
 		public override int Priority { get { return 13; } }
 
-		/*protected override Rectangle DrawShape (Rectangle r, Layer l)
+		protected override Rectangle DrawShape (Rectangle r, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			doc.Selection.CreateEllipseSelection(l.Surface, r);
 			
 			return r;
-		}*/
+		}
 	}
 }

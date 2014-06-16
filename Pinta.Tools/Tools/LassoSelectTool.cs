@@ -35,7 +35,7 @@ using System.Linq;
 
 namespace Pinta.Tools
 {
-	public class LassoSelectTool : SelectTool
+	public class LassoSelectTool : SelectShapeTool
 	{
 		private Path path;
 		private List<IntPoint> lassoPolygon = new List<IntPoint>();
@@ -52,7 +52,7 @@ namespace Pinta.Tools
 		public override int Priority { get { return 9; } }
 		#endregion
 
-		/*#region Mouse Handlers
+		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			base.OnMouseDown (canvas, args, point);
@@ -64,7 +64,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if (!isDrawing)
+			if (!is_drawing)
 				return;
 
 			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
@@ -128,6 +128,6 @@ namespace Pinta.Tools
 
 			base.OnMouseUp(canvas, args, point);
 		}
-		#endregion*/
+		#endregion
 	}
 }

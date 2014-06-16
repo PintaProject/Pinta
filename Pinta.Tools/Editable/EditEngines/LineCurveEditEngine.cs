@@ -35,7 +35,7 @@ using Mono.Unix;
 namespace Pinta.Tools
 {
     public class LineCurveEditEngine: ArrowedEditEngine
-    {
+	{
         public LineCurveEditEngine(BaseTool passedOwner): base(passedOwner)
         {
 
@@ -75,14 +75,13 @@ namespace Pinta.Tools
 
         protected override void MovePoint(List<ControlPoint> controlPoints)
         {
-            //Keep the tension value consistent.
-            double movingPointTension = controlPoints[SelectedPointIndex].Tension;
-
             //Update the control point's position.
-            controlPoints.RemoveAt(SelectedPointIndex);
-            controlPoints.Insert(SelectedPointIndex,
-                new ControlPoint(new PointD(currentPoint.X, currentPoint.Y),
-                    movingPointTension));
+			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
         }
+
+		protected override void AddShape()
+		{
+			SEngines.Add(new LineCurveSeriesEngine(owner.UseAntialiasing));
+		}
     }
 }

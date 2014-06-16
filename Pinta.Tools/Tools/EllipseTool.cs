@@ -51,6 +51,7 @@ namespace Pinta.Tools
 
 		public EllipseTool ()
 		{
+			editEngine = new EllipseEditEngine(this);
 		}
 		
 		/*protected override Rectangle DrawShape (Rectangle rect, Layer l)

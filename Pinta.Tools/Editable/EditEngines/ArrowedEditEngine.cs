@@ -59,7 +59,7 @@ namespace Pinta.Tools
         /// </summary>
         private void SetArrowOptions()
         {
-            ShapeEngine selEngine = SelectedShapeEngine;
+            LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
             if (selEngine != null)
             {
@@ -89,7 +89,7 @@ namespace Pinta.Tools
         /// </summary>
         private void SetToolbarArrowOptions()
         {
-            ShapeEngine selEngine = SelectedShapeEngine;
+            LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
             if (selEngine != null)
             {
@@ -312,7 +312,7 @@ namespace Pinta.Tools
                     }
                 }
 
-                ShapeEngine selEngine = SelectedShapeEngine;
+                LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
                 if (selEngine != null)
                 {
@@ -373,7 +373,7 @@ namespace Pinta.Tools
                     }
                 }
 
-                ShapeEngine selEngine = SelectedShapeEngine;
+                LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
                 if (selEngine != null)
                 {
@@ -447,7 +447,7 @@ namespace Pinta.Tools
 
                         (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
 
-                        ShapeEngine selEngine = SelectedShapeEngine;
+                        LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
                         if (selEngine != null)
                         {
@@ -524,7 +524,7 @@ namespace Pinta.Tools
 
                         (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
 
-                        ShapeEngine selEngine = SelectedShapeEngine;
+                        LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
                         if (selEngine != null)
                         {
@@ -601,7 +601,7 @@ namespace Pinta.Tools
 
                         (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
 
-                        ShapeEngine selEngine = SelectedShapeEngine;
+                        LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
 
                         if (selEngine != null)
                         {
@@ -678,20 +678,21 @@ namespace Pinta.Tools
                 //For each shape currently being drawn/edited by the user.
                 for (int i = 0; i < SEngines[n].ControlPoints.Count; ++i)
                 {
-                    if (SEngines[n].Arrow1.Show)
+                    if (((LineCurveSeriesEngine)SEngines[n]).Arrow1.Show)
                     {
                         if (genPoints.Length > 1)
                         {
-                            dirty = dirty.UnionRectangles(SEngines[n].Arrow1.Draw(g, outlineColor, genPoints[0], genPoints[1]));
+                            dirty = dirty.UnionRectangles(((LineCurveSeriesEngine)SEngines[n]).Arrow1.Draw(
+                                g, outlineColor, genPoints[0], genPoints[1]));
                         }
                     }
 
-                    if (SEngines[n].Arrow2.Show)
+                    if (((LineCurveSeriesEngine)SEngines[n]).Arrow2.Show)
                     {
                         if (genPoints.Length > 1)
                         {
-                            dirty = dirty.UnionRectangles(SEngines[n].Arrow2.Draw(g, outlineColor,
-                                genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
+                            dirty = dirty.UnionRectangles(((LineCurveSeriesEngine)SEngines[n]).Arrow2.Draw(
+                                g, outlineColor, genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
                         }
                     }
                 }

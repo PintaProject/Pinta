@@ -37,10 +37,8 @@ namespace Pinta.Tools
 		/// <summary>
 		/// A partially cloneable ShapeEngine collection.
 		/// </summary>
-		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public ShapeEngineCollection(bool passedAA)
+		public ShapeEngineCollection()
 		{
-			Add(new ShapeEngine(passedAA));
 		}
 
 		/// <summary>
@@ -65,7 +63,7 @@ namespace Pinta.Tools
 		}
 	}
 
-	public class ShapeEngine
+	public abstract class ShapeEngine
 	{
 		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
 		public List<ControlPoint> ControlPoints = new List<ControlPoint>();
@@ -75,8 +73,6 @@ namespace Pinta.Tools
 
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
-
-		public Arrow Arrow1 = new Arrow(), Arrow2 = new Arrow();
 
 		public bool AntiAliasing;
 
@@ -95,157 +91,23 @@ namespace Pinta.Tools
 		/// Clone all of the necessary data in the ShapeEngine.
 		/// </summary>
 		/// <returns>The partially cloned shape data.</returns>
-		public ShapeEngine PartialClone()
-		{
+		public abstract ShapeEngine PartialClone();
+		//Overrides should implement at least:
+		/*{
 			ShapeEngine clonedCE = new ShapeEngine(AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
 			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
 
-			clonedCE.Arrow1 = Arrow1.Clone();
-			clonedCE.Arrow2 = Arrow2.Clone();
-
 			clonedCE.DashPattern = DashPattern;
 
 			return clonedCE;
-		}
+		}*/
 
-
-		/// <summary>
-		/// Generate each point in a cardinal spline polynomial shape that passes through
-		/// the control points and store the result in GeneratedPoints.
-		/// </summary>
-		public void GenerateCardinalSplinePolynomialCurvePoints()
-		{
-			List<PointD> generatedPoints = new List<PointD>();
-
-			//Note: it's important that there be many generated points even if there are only 2 given points and it's just a line.
-			//This is because the generated points are used in the check that determines if the mouse clicks on the shape.
-			if (ControlPoints.Count < 2)
-			{
-				foreach (ControlPoint cP in ControlPoints)
-				{
-					generatedPoints.Add(cP.Position);
-				}
-			}
-			else
-			{
-				//Generate tangents for each of the smaller cubic Bezier shapes that make up each segment of the resulting shape.
-
-				//The tension calculated for each point is a gradient between the previous
-				//control point's tension and the following control point's tension.
-
-				//Stores all of the tangent values.
-				List<PointD> bezierTangents = new List<PointD>();
-
-				//Calculate the first tangent.
-				bezierTangents.Add(new PointD(
-					ControlPoints[0].Tension * (ControlPoints[1].Position.X - ControlPoints[0].Position.X),
-					ControlPoints[0].Tension * (ControlPoints[1].Position.Y - ControlPoints[0].Position.Y)));
-
-				int pointCount = ControlPoints.Count - 1;
-				double pointCountDouble = (double)pointCount;
-				double tensionForPoint;
-
-				//Calculate all of the middle tangents.
-				for (int i = 1; i < pointCount; ++i)
-				{
-					tensionForPoint = ControlPoints[i].Tension * (double)i / pointCountDouble;
-
-					bezierTangents.Add(new PointD(
-						tensionForPoint *
-							(ControlPoints[i + 1].Position.X - ControlPoints[i - 1].Position.X),
-						tensionForPoint *
-							(ControlPoints[i + 1].Position.Y - ControlPoints[i - 1].Position.Y)));
-				}
-
-				//Calculate the last tangent.
-				bezierTangents.Add(new PointD(
-					ControlPoints[pointCount].Tension *
-						(ControlPoints[pointCount].Position.X - ControlPoints[pointCount - 1].Position.X),
-					ControlPoints[pointCount].Tension *
-						(ControlPoints[pointCount].Position.Y - ControlPoints[pointCount - 1].Position.Y)));
-
-
-
-				//For optimization.
-				int iMinusOne;
-
-				//Generate the resulting shape's points with consecutive cubic Bezier shapes that
-				//use the given points as end points and the calculated tangents as control points.
-				for (int i = 1; i < ControlPoints.Count; ++i)
-				{
-					iMinusOne = i - 1;
-
-					GenerateCubicBezierCurvePoints(
-						generatedPoints,
-						ControlPoints[iMinusOne].Position,
-						new PointD(
-							ControlPoints[iMinusOne].Position.X + bezierTangents[iMinusOne].X,
-							ControlPoints[iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
-						new PointD(
-							ControlPoints[i].Position.X - bezierTangents[i].X,
-							ControlPoints[i].Position.Y - bezierTangents[i].Y),
-						ControlPoints[i].Position);
-				}
-			}
-
-			GeneratedPoints = generatedPoints.ToArray();
-		}
-
-		/// <summary>
-		/// Generate each point in a cubic Bezier shape given the end points and control points.
-		/// </summary>
-		/// <param name="resultList">The resulting List of PointD's to add the generated points to.</param>
-		/// <param name="p0">The first end point that the shape passes through.</param>
-		/// <param name="p1">The first control point that the shape does not necessarily pass through.</param>
-		/// <param name="p2">The second control point that the shape does not necessarily pass through.</param>
-		/// <param name="p3">The second end point that the shape passes through.</param>
-		/// <returns></returns>
-		private static void GenerateCubicBezierCurvePoints(List<PointD> resultList, PointD p0, PointD p1, PointD p2, PointD p3)
-		{
-			//Note: this must be low enough for mouse clicks to be properly considered on/off the shape at any given point.
-			double tInterval = .025d;
-
-			double oneMinusT;
-			double oneMinusTSquared;
-			double oneMinusTCubed;
-
-			double tSquared;
-			double tCubed;
-
-			double oneMinusTSquaredTimesTTimesThree;
-			double oneMinusTTimesTSquaredTimesThree;
-
-			//t will go from 0d to 1d at the interval of tInterval.
-			for (double t = 0d; t < 1d + tInterval; t += tInterval)
-			{
-				//There are 3 "layers" in a cubic Bezier shape's calculation. These "layers"
-				//must be calculated for each intermediate Point (for each value of t from
-				//tInterval to 1d). The Points in each "layer" store [the distance between
-				//two consecutive Points from the previous "layer" multipled by the value
-				//of t (which is between 0d-1d)] plus [the position of the first Point of
-				//the two consecutive Points from the previous "layer"]. This must be
-				//calculated for the X and Y of every consecutive Point in every layer
-				//until the last Point possible is reached, which is the Point on the shape.
-
-				//Note: the code below is an optimized version of the commented explanation above.
-
-				oneMinusT = 1d - t;
-				oneMinusTSquared = oneMinusT * oneMinusT;
-				oneMinusTCubed = oneMinusTSquared * oneMinusT;
-
-				tSquared = t * t;
-				tCubed = tSquared * t;
-
-				oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
-				oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
-
-				resultList.Add(new PointD(
-					oneMinusTCubed * p0.X + oneMinusTSquaredTimesTTimesThree * p1.X + oneMinusTTimesTSquaredTimesThree * p2.X + tCubed * p3.X,
-					oneMinusTCubed * p0.Y + oneMinusTSquaredTimesTTimesThree * p1.Y + oneMinusTTimesTSquaredTimesThree * p2.Y + tCubed * p3.Y));
-			}
-		}
+        /// <summary>
+        /// Generate the points that make up the entirety of the shape being drawn.
+        /// </summary>
+        public abstract void GeneratePoints();
 	}
 }

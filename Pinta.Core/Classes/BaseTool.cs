@@ -84,7 +84,14 @@ namespace Pinta.Core
 		{
 			get
 			{
-				return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag;
+				if (antialiasing_button == null)
+				{
+					return false;
+				}
+				else
+				{
+					return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag;
+				}
 			}
 
 			set

@@ -50,9 +50,9 @@ namespace Pinta.Tools
 			get { return 41; }
 		}
 
-        protected override void InitEditEngine()
-        {
-            editEngine = new RectangleEditEngine(this);
-        }
+		public RectangleTool()
+		{
+			editEngine = new RectangleEditEngine(this);
+		}
 	}
 }

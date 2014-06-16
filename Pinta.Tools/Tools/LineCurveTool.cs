@@ -67,12 +67,9 @@ namespace Pinta.Tools
 
         public LineCurveTool()
         {
-            editEngine.ShowStrokeComboBox = false;
-        }
+			editEngine = new LineCurveEditEngine(this);
 
-        protected override void InitEditEngine()
-        {
-            editEngine = new LineCurveEditEngine(this);
+            editEngine.ShowStrokeComboBox = false;
         }
 	}
 }

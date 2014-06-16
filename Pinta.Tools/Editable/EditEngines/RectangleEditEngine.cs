@@ -45,7 +45,7 @@ namespace Pinta.Tools
         {
             PointD startingPoint;
 
-            //Then create the initial points of the shape. The second point will follow the mouse around until released.
+            //Create the initial points of the shape. The second point will follow the mouse around until released.
             if (ctrlKey && clickedOnControlPoint)
             {
                 startingPoint = prevSelPoint;
@@ -58,13 +58,13 @@ namespace Pinta.Tools
             }
 
 
-            actEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), DefaultEndPointTension));
+            actEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
             actEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), DefaultEndPointTension));
+                new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), 0.0));
             actEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), DefaultEndPointTension));
+                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), 0.0));
             actEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), DefaultEndPointTension));
+                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), 0.0));
 
 
             SelectedPointIndex = 2;
@@ -120,19 +120,11 @@ namespace Pinta.Tools
             }
 
 
-            //Keep the tension values consistent.
-
-            double movingPointTension = controlPoints[SelectedPointIndex].Tension;
-            double previousPointTension = controlPoints[previousPointIndex].Tension;
-            double nextPointTension = controlPoints[nextPointIndex].Tension;
-
-
             //Update the control points' positions.
 
 
             //Update the selected control point's position.
-            controlPoints.RemoveAt(SelectedPointIndex);
-            controlPoints.Insert(SelectedPointIndex, new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), movingPointTension));
+			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
 
 
             //Determine the positions of each of the surrounding points.
@@ -141,27 +133,26 @@ namespace Pinta.Tools
             PointD nextPoint = controlPoints.ElementAt(nextPointIndex).Position;
             PointD doubleNextPoint = controlPoints.ElementAt(doubleNextIndex).Position;
 
-
             //Ensure that only one direction is moved in at a time, if either.
             bool moveVertical = (previousPoint.X == doublePreviousPoint.X);
             bool moveHorizontal = moveVertical ? false : (previousPoint.Y == doublePreviousPoint.Y);
 
             //Update the previous control point's position.
-            controlPoints.RemoveAt(previousPointIndex);
-            controlPoints.Insert(previousPointIndex,
-                new ControlPoint(new PointD(moveHorizontal ? currentPoint.X : previousPoint.X,
-                    moveVertical ? currentPoint.Y : previousPoint.Y), previousPointTension));
-
+			controlPoints.ElementAt(previousPointIndex).Position = new PointD(
+				moveHorizontal ? currentPoint.X : previousPoint.X, moveVertical ? currentPoint.Y : previousPoint.Y);
 
             //Ensure that only one direction is moved in at a time, if either.
             moveVertical = (nextPoint.X == doubleNextPoint.X);
             moveHorizontal = moveVertical ? false : (nextPoint.Y == doubleNextPoint.Y);
 
             //Update the next control point's position.
-            controlPoints.RemoveAt(nextPointIndex);
-            controlPoints.Insert(nextPointIndex,
-                new ControlPoint(new PointD(moveHorizontal ? currentPoint.X : nextPoint.X,
-                    moveVertical ? currentPoint.Y : nextPoint.Y), nextPointTension));
+			controlPoints.ElementAt(nextPointIndex).Position = new PointD(
+				moveHorizontal ? currentPoint.X : nextPoint.X, moveVertical ? currentPoint.Y : nextPoint.Y);
         }
+
+		protected override void AddShape()
+		{
+			SEngines.Add(new LineCurveSeriesEngine(owner.UseAntialiasing));
+		}
     }
 }
