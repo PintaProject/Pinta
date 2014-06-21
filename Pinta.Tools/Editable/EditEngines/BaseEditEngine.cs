@@ -118,7 +118,7 @@ namespace Pinta.Tools
             {
                 ShapeEngine selEngine = SelectedShapeEngine;
 
-                if (selEngine != null)
+                if (selEngine != null && selEngine.ControlPoints.Count > 0)
                 {
                     return selEngine.ControlPoints[SelectedPointIndex];
                 }
@@ -132,7 +132,7 @@ namespace Pinta.Tools
             {
                 ShapeEngine selEngine = SelectedShapeEngine;
 
-                if (selEngine != null)
+                if (selEngine != null && selEngine.ControlPoints.Count > SelectedPointIndex)
                 {
                     selEngine.ControlPoints[SelectedPointIndex] = value;
                 }
@@ -146,7 +146,7 @@ namespace Pinta.Tools
         {
             get
             {
-                if (SEngines.Count > SelectedShapeIndex)
+                if (SelectedShapeIndex > -1 && SEngines.Count > SelectedShapeIndex)
                 {
                     return SEngines[SelectedShapeIndex];
                 }
@@ -609,6 +609,8 @@ namespace Pinta.Tools
             OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
                 out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
+			//TO DO: Also check for direct control point clicks.
+
             bool clickedOnControlPoint = false;
 
             //Determine if the user clicked close enough to a line, shape, or point that's currently being drawn/edited by the user.
@@ -698,19 +700,12 @@ namespace Pinta.Tools
                 }
 
 
-
-                //Next, take care of the old shape's data.
-
-                //Finalize the previous shape (if needed).
-                DrawShapes(false, true, false);
+				AddShape();
 
                 ShapeEngine actEngine = ActiveShapeEngine;
 
 				if (actEngine != null)
 				{
-					//Set the DashPattern for the finalized shape to be the same as the unfinalized shape's.
-					actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
-
 					//Verify that the user clicked inside the image bounds or that the user is
 					//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
 					if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
@@ -769,8 +764,10 @@ namespace Pinta.Tools
             }
             else
             {
+				ControlPoint selPoint = SelectedPoint;
+
                 //Make sure a control point is selected.
-                if (SelectedPointIndex > -1)
+				if (selPoint != null)
                 {
                     if (ClickedWithoutModifying)
                     {
@@ -788,8 +785,8 @@ namespace Pinta.Tools
                         //Moving a control point.
 
                         //Make sure the control point was moved.
-                        if (currentPoint.X != controlPoints[SelectedPointIndex].Position.X
-                            || currentPoint.Y != controlPoints[SelectedPointIndex].Position.Y)
+						if (currentPoint.X != selPoint.Position.X
+							|| currentPoint.Y != selPoint.Position.Y)
                         {
                             MovePoint(controlPoints);
                         }
@@ -804,7 +801,7 @@ namespace Pinta.Tools
                         //Calculate the new tension based off of the movement of the mouse that's
                         //perpendicular to the previous and following control points.
 
-                        PointD curPoint = controlPoints[SelectedPointIndex].Position;
+                        PointD curPoint = selPoint.Position;
                         PointD prevPoint, nextPoint;
 
                         //Calculate the previous control point.
@@ -867,7 +864,7 @@ namespace Pinta.Tools
 
                         //Restrict the new tension to range from 0d to 1d.
                         controlPoints[SelectedPointIndex].Tension =
-                            Utility.Clamp(controlPoints[SelectedPointIndex].Tension, 0d, 1d);
+							Utility.Clamp(selPoint.Tension, 0d, 1d);
                     }
 
                     surfaceModified = true;
@@ -886,13 +883,15 @@ namespace Pinta.Tools
             int controlPointSize = Math.Min(BrushWidth + 1, 5);
             double controlPointOffset = (double)controlPointSize / 2d;
 
-            if (SelectedPointIndex > -1)
+			ControlPoint selPoint = SelectedPoint;
+
+			if (selPoint != null)
             {
                 //Draw a ring around the selected point.
                 g.FillStrokedEllipse(
                     new Rectangle(
-                        SelectedPoint.Position.X - controlPointOffset * 4d,
-                        SelectedPoint.Position.Y - controlPointOffset * 4d,
+						selPoint.Position.X - controlPointOffset * 4d,
+						selPoint.Position.Y - controlPointOffset * 4d,
                         controlPointOffset * 8d, controlPointOffset * 8d),
                     ToolControl.FillColor, ToolControl.StrokeColor, 1);
             }
@@ -964,14 +963,14 @@ namespace Pinta.Tools
 				return;
 			}
 
+			actEngine.DrawingLayer.Layer.Clear();
+
             Document doc = PintaCore.Workspace.ActiveDocument;
 
             Rectangle dirty;
 
             if (finalize)
             {
-                doc.ToolLayer.Clear();
-
                 ImageSurface undoSurface = null;
 
                 // We only need to create a history item if there was a previous shape.
@@ -1019,6 +1018,8 @@ namespace Pinta.Tools
 
                     OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
                         out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+
+					//TO DO: also check for direct control point clicks.
 
                     List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
 
@@ -1073,11 +1074,9 @@ namespace Pinta.Tools
 
 
 
-                doc.ToolLayer.Clear();
-
                 dirty = DrawShape(
                     Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-                    doc.ToolLayer, true);
+                    actEngine.DrawingLayer.Layer, true);
 
 
 
@@ -1269,12 +1268,16 @@ namespace Pinta.Tools
 		protected void ResetShapes()
 		{
 			SEngines = new ShapeEngineCollection();
-
-			AddShape();
 		}
 
-		protected abstract void AddShape();
-		//Overrides should implement (with their own ShapeEngine child type):
-			//SEngines.Add(new ShapeEngine(owner.UseAntialiasing));
+		protected virtual void AddShape()
+		{
+			//Overrides should implement (with their own ShapeEngine child type):
+			//Document doc = PintaCore.Workspace.ActiveDocument;
+			//SEngines.Add(new ShapeEngine(doc.CurrentUserLayer, owner.UseAntialiasing));
+			//base.AddShape();
+
+			SelectedShapeIndex = SEngines.Count - 1;
+		}
     }
 }

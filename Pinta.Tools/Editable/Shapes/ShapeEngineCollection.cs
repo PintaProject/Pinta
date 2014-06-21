@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
@@ -74,6 +75,8 @@ namespace Pinta.Tools
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
 
+		public ReEditableLayer DrawingLayer;
+
 		public bool AntiAliasing;
 
 		public string DashPattern = "-";
@@ -81,9 +84,13 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new ShapeEngine.
 		/// </summary>
+		/// <param name="passedParentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public ShapeEngine(bool passedAA)
+		public ShapeEngine(UserLayer passedParentLayer, bool passedAA)
 		{
+			parentLayer = passedParentLayer;
+			DrawingLayer = new ReEditableLayer(parentLayer);
+
 			AntiAliasing = passedAA;
 		}
 
@@ -109,5 +116,8 @@ namespace Pinta.Tools
         /// Generate the points that make up the entirety of the shape being drawn.
         /// </summary>
         public abstract void GeneratePoints();
+
+
+		protected UserLayer parentLayer;
 	}
 }

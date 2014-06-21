@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
@@ -39,15 +40,17 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new RoundedLineEngine.
 		/// </summary>
+		/// <param name="passedEditEngine">The owner EditEngine.</param>
+		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public RoundedLineEngine(RoundedLineEditEngine passedEditEngine, bool passedAA): base(passedAA)
+		public RoundedLineEngine(RoundedLineEditEngine passedEditEngine, UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA)
 		{
 			editEngine = passedEditEngine;
 		}
 
 		public override ShapeEngine PartialClone()
 		{
-			RoundedLineEngine clonedCE = new RoundedLineEngine(editEngine, AntiAliasing);
+			RoundedLineEngine clonedCE = new RoundedLineEngine(editEngine, parentLayer, AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 

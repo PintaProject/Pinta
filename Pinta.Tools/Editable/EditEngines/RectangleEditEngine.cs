@@ -152,7 +152,11 @@ namespace Pinta.Tools
 
 		protected override void AddShape()
 		{
-			SEngines.Add(new LineCurveSeriesEngine(owner.UseAntialiasing));
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing));
+
+			base.AddShape();
 		}
     }
 }

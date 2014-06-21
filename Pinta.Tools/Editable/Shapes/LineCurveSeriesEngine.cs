@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
@@ -39,15 +40,16 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new LineCurveSeriesEngine.
 		/// </summary>
+		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-        public LineCurveSeriesEngine(bool passedAA): base(passedAA)
+        public LineCurveSeriesEngine(UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA)
 		{
 			
 		}
 
         public override ShapeEngine PartialClone()
         {
-            LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(AntiAliasing);
+            LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, AntiAliasing);
 
             clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 

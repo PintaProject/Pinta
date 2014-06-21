@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Tools
 {
@@ -37,15 +38,16 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new EllipseEngine.
 		/// </summary>
+		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public EllipseEngine(bool passedAA): base(passedAA)
+		public EllipseEngine(UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA)
 		{
 			
 		}
 
 		public override ShapeEngine PartialClone()
 		{
-			EllipseEngine clonedCE = new EllipseEngine(AntiAliasing);
+			EllipseEngine clonedCE = new EllipseEngine(parentLayer, AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 

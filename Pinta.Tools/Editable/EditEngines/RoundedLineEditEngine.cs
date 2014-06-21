@@ -129,7 +129,11 @@ namespace Pinta.Tools
 
 		protected override void AddShape()
 		{
-			SEngines.Add(new RoundedLineEngine(this, owner.UseAntialiasing));
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			SEngines.Add(new RoundedLineEngine(this, doc.CurrentUserLayer, owner.UseAntialiasing));
+
+			base.AddShape();
 		}
 
 
