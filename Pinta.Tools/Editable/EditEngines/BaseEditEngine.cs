@@ -118,7 +118,7 @@ namespace Pinta.Tools
             {
                 ShapeEngine selEngine = SelectedShapeEngine;
 
-                if (selEngine != null && selEngine.ControlPoints.Count > 0)
+                if (selEngine != null && selEngine.ControlPoints.Count > SelectedPointIndex)
                 {
                     return selEngine.ControlPoints[SelectedPointIndex];
                 }
@@ -878,68 +878,69 @@ namespace Pinta.Tools
 
         public virtual void DrawControlPoints(Context g, Rectangle? dirty)
         {
-            //Draw the control points for all of the shapes.
+			ShapeEngine actEngine = ActiveShapeEngine;
 
-            int controlPointSize = Math.Min(BrushWidth + 1, 5);
-            double controlPointOffset = (double)controlPointSize / 2d;
+			if (actEngine != null)
+			{
+				//Draw the control points for the active shape.
 
-			ControlPoint selPoint = SelectedPoint;
+				int controlPointSize = Math.Min(BrushWidth + 1, 5);
+				double controlPointOffset = (double)controlPointSize / 2d;
 
-			if (selPoint != null)
-            {
-                //Draw a ring around the selected point.
-                g.FillStrokedEllipse(
-                    new Rectangle(
-						selPoint.Position.X - controlPointOffset * 4d,
-						selPoint.Position.Y - controlPointOffset * 4d,
-                        controlPointOffset * 8d, controlPointOffset * 8d),
-                    ToolControl.FillColor, ToolControl.StrokeColor, 1);
-            }
+				ControlPoint selPoint = SelectedPoint;
 
-            //For each shape currently being drawn/edited by the user.
-            for (int n = 0; n < SEngines.Count; ++n)
-            {
-                List<ControlPoint> controlPoints = SEngines[n].ControlPoints;
+				if (selPoint != null)
+				{
+					//Draw a ring around the selected point.
+					g.FillStrokedEllipse(
+						new Rectangle(
+							selPoint.Position.X - controlPointOffset * 4d,
+							selPoint.Position.Y - controlPointOffset * 4d,
+							controlPointOffset * 8d, controlPointOffset * 8d),
+						ToolControl.FillColor, ToolControl.StrokeColor, 1);
+				}
 
-                //If the shape has one or more points.
-                if (controlPoints.Count > 0)
-                {
-                    //Draw the control points for the shape.
-                    for (int i = 0; i < controlPoints.Count; ++i)
-                    {
-                        //Skip drawing the hovered control point.
-                        if (HoveredPointAsControlPoint > -1 && HoverPoint.Distance(controlPoints[i].Position) < 1d)
-                        {
-                            continue;
-                        }
+				List<ControlPoint> controlPoints = actEngine.ControlPoints;
 
-                        // Draw the control point.
-                        g.FillStrokedEllipse(
-                            new Rectangle(
-                                controlPoints[i].Position.X - controlPointOffset,
-                                controlPoints[i].Position.Y - controlPointOffset,
-                                controlPointSize, controlPointSize),
-                            ToolControl.FillColor, ToolControl.StrokeColor, controlPointSize);
-                    }
-                }
-            }
+				//If the shape has one or more points.
+				if (controlPoints.Count > 0)
+				{
+					//Draw the control points for the shape.
+					for (int i = 0; i < controlPoints.Count; ++i)
+					{
+						//Skip drawing the hovered control point.
+						if (HoveredPointAsControlPoint > -1 && HoverPoint.Distance(controlPoints[i].Position) < 1d)
+						{
+							continue;
+						}
 
-            //Draw the hover point.
-            if (!ChangingTension && HoverPoint.X > -1d)
-            {
-                g.FillStrokedEllipse(new Rectangle(
-                    HoverPoint.X - controlPointOffset * 4d, HoverPoint.Y - controlPointOffset * 4d,
-                    controlPointOffset * 8d, controlPointOffset * 8d), HoverColor, HoverColor, 1);
-                g.FillStrokedEllipse(new Rectangle(
-                    HoverPoint.X - controlPointOffset, HoverPoint.Y - controlPointOffset,
-                    controlPointSize, controlPointSize), HoverColor, HoverColor, controlPointSize);
-            }
+						// Draw the control point.
+						g.FillStrokedEllipse(
+							new Rectangle(
+								controlPoints[i].Position.X - controlPointOffset,
+								controlPoints[i].Position.Y - controlPointOffset,
+								controlPointSize, controlPointSize),
+							ToolControl.FillColor, ToolControl.StrokeColor, controlPointSize);
+					}
+				}
 
-            if (dirty != null)
-            {
-                //Inflate to accomodate for control points.
-                dirty = dirty.Value.Inflate(controlPointSize * 8, controlPointSize * 8);
-            }
+				//Draw the hover point.
+				if (!ChangingTension && HoverPoint.X > -1d)
+				{
+					g.FillStrokedEllipse(new Rectangle(
+						HoverPoint.X - controlPointOffset * 4d, HoverPoint.Y - controlPointOffset * 4d,
+						controlPointOffset * 8d, controlPointOffset * 8d), HoverColor, HoverColor, 1);
+					g.FillStrokedEllipse(new Rectangle(
+						HoverPoint.X - controlPointOffset, HoverPoint.Y - controlPointOffset,
+						controlPointSize, controlPointSize), HoverColor, HoverColor, controlPointSize);
+				}
+
+				if (dirty != null)
+				{
+					//Inflate to accomodate for control points.
+					dirty = dirty.Value.Inflate(controlPointSize * 8, controlPointSize * 8);
+				}
+			}
         }
 
         /// <summary>
@@ -1072,13 +1073,9 @@ namespace Pinta.Tools
                     }
                 }
 
-
-
                 dirty = DrawShape(
                     Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
                     actEngine.DrawingLayer.Layer, true);
-
-
 
                 //Reset the hover point after each drawing.
                 HoverPoint = new PointD(-1d, -1d);
@@ -1090,23 +1087,20 @@ namespace Pinta.Tools
                 //Organize the generated points for quick mouse interaction detection.
 
                 //First, clear the previously organized points, if any.
-                for (int n = 0; n < SEngines.Count; ++n)
+                actEngine.OrganizedPoints.ClearCollection();
+
+                int pointIndex = 0;
+
+				foreach (PointD p in actEngine.GeneratedPoints)
                 {
-                    SEngines[n].OrganizedPoints.ClearCollection();
+					actEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
 
-                    int pointIndex = 0;
-
-                    foreach (PointD p in SEngines[n].GeneratedPoints)
+                    //Keep track of the point's order in relation to the control points.
+					if (actEngine.ControlPoints.Count > pointIndex
+						&& p.X == actEngine.ControlPoints[pointIndex].Position.X
+						&& p.Y == actEngine.ControlPoints[pointIndex].Position.Y)
                     {
-                        SEngines[n].OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
-
-                        //Keep track of the point's order in relation to the control points.
-                        if (SEngines[n].ControlPoints.Count > pointIndex
-                            && p.X == SEngines[n].ControlPoints[pointIndex].Position.X
-                            && p.Y == SEngines[n].ControlPoints[pointIndex].Position.Y)
-                        {
-                            ++pointIndex;
-                        }
+                        ++pointIndex;
                     }
                 }
             }
@@ -1187,19 +1181,14 @@ namespace Pinta.Tools
 
 					g.LineWidth = BrushWidth;
 
-					//Draw the shapes.
-					for (int n = 0; n < SEngines.Count; ++n)
+					//Draw the shape.
+					if (actEngine.ControlPoints.Count > 0)
 					{
-						List<ControlPoint> controlPoints = SEngines[n].ControlPoints;
+						//Generate the points that make up the shape.
+						actEngine.GeneratePoints();
 
-						if (controlPoints.Count > 0)
-						{
-							//Generate the points that make up the shape.
-							SEngines[n].GeneratePoints();
-
-							//Expand the invalidation rectangle as necessary.
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(SEngines[n].GeneratedPoints, outlineColor));
-						}
+						//Expand the invalidation rectangle as necessary.
+						dirty = dirty.UnionRectangles(g.DrawPolygonal(actEngine.GeneratedPoints, outlineColor));
 					}
 
 					g.SetDash(new double[] { }, 0.0);
