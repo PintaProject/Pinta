@@ -36,7 +36,7 @@ namespace Pinta.Tools
 {
     //The EditEngine was created for tools that wish to utilize any of the control point, line/curve, hover point (reacting to the mouse),
     //and etc. code that was originally used in the LineCurveTool for editability. If a class wishes to use it, it should create and instantiate
-    //a private instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
+    //a protected instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
     public abstract class BaseEditEngine
     {
         protected readonly BaseTool owner;
@@ -1186,9 +1186,27 @@ namespace Pinta.Tools
 					{
 						//Generate the points that make up the shape.
 						actEngine.GeneratePoints();
-
+						
 						//Expand the invalidation rectangle as necessary.
-						dirty = dirty.UnionRectangles(g.DrawPolygonal(actEngine.GeneratedPoints, outlineColor));
+						if (FillShape)
+						{
+							if (StrokeShape)
+							{
+								//Fill and outline.
+								dirty = dirty.UnionRectangles(g.FillPolygonal(actEngine.GeneratedPoints, fillColor));
+								dirty = dirty.UnionRectangles(g.DrawPolygonal(actEngine.GeneratedPoints, outlineColor));
+							}
+							else
+							{
+								//Fill only.
+								dirty = dirty.UnionRectangles(g.FillPolygonal(actEngine.GeneratedPoints, fillColor));
+							}
+						}
+						else
+						{
+							//Outline only.
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(actEngine.GeneratedPoints, outlineColor));
+						}
 					}
 
 					g.SetDash(new double[] { }, 0.0);
@@ -1233,7 +1251,7 @@ namespace Pinta.Tools
 
         protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
         {
-            outlineColor = PintaCore.Palette.SecondaryColor;
+            fillColor = PintaCore.Palette.SecondaryColor;
 
             DrawShapes(false, false, false);
         }

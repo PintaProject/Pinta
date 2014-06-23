@@ -53,31 +53,5 @@ namespace Pinta.Tools
 		{
 			editEngine = new RoundedLineEditEngine(this);
 		}
-
-		/*protected override Rectangle DrawShape (Rectangle rect, Layer l)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-
-				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
-
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedRoundedRectangle (rect, Radius, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillStrokedRoundedRectangle(rect, Radius, outline_color, outline_color, BrushWidth);
-				else
-					dirty = g.DrawRoundedRectangle (rect, Radius, outline_color, BrushWidth);
-			}
-			
-			return dirty;
-		}*/
 	}
 }

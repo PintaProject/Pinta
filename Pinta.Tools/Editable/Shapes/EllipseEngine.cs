@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public EllipseEngine(UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA)
+		public EllipseEngine(UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA, true)
 		{
 			
 		}

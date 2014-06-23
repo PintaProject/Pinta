@@ -81,17 +81,21 @@ namespace Pinta.Tools
 
 		public string DashPattern = "-";
 
+		public bool Closed;
+
 		/// <summary>
 		/// Create a new ShapeEngine.
 		/// </summary>
 		/// <param name="passedParentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public ShapeEngine(UserLayer passedParentLayer, bool passedAA)
+		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
+		public ShapeEngine(UserLayer passedParentLayer, bool passedAA, bool passedClosed)
 		{
 			parentLayer = passedParentLayer;
 			DrawingLayer = new ReEditableLayer(parentLayer);
 
 			AntiAliasing = passedAA;
+			Closed = passedClosed;
 		}
 
 		/// <summary>

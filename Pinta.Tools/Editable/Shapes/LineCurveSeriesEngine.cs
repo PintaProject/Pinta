@@ -42,14 +42,15 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-        public LineCurveSeriesEngine(UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA)
+		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
+        public LineCurveSeriesEngine(UserLayer parentLayer, bool passedAA, bool passedClosed): base(parentLayer, passedAA, passedClosed)
 		{
 			
 		}
 
         public override ShapeEngine PartialClone()
         {
-            LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, AntiAliasing);
+            LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, AntiAliasing, Closed);
 
             clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
@@ -95,14 +96,23 @@ namespace Pinta.Tools
                 //Stores all of the tangent values.
                 List<PointD> bezierTangents = new List<PointD>();
 
-                //Calculate the first tangent.
-                bezierTangents.Add(new PointD(
-                    ControlPoints[0].Tension * (ControlPoints[1].Position.X - ControlPoints[0].Position.X),
-                    ControlPoints[0].Tension * (ControlPoints[1].Position.Y - ControlPoints[0].Position.Y)));
+				int pointCount = ControlPoints.Count - 1;
+				double pointCountDouble = (double)pointCount;
+				double tensionForPoint;
 
-                int pointCount = ControlPoints.Count - 1;
-                double pointCountDouble = (double)pointCount;
-                double tensionForPoint;
+                //Calculate the first tangent.
+				if (Closed)
+				{
+					bezierTangents.Add(new PointD(
+						ControlPoints[0].Tension * (ControlPoints[1].Position.X - ControlPoints[pointCount].Position.X),
+						ControlPoints[0].Tension * (ControlPoints[1].Position.Y - ControlPoints[pointCount].Position.Y)));
+				}
+				else
+				{
+					bezierTangents.Add(new PointD(
+						ControlPoints[0].Tension * (ControlPoints[1].Position.X - ControlPoints[0].Position.X),
+						ControlPoints[0].Tension * (ControlPoints[1].Position.Y - ControlPoints[0].Position.Y)));
+				}
 
                 //Calculate all of the middle tangents.
                 for (int i = 1; i < pointCount; ++i)
@@ -117,12 +127,22 @@ namespace Pinta.Tools
                 }
 
                 //Calculate the last tangent.
-                bezierTangents.Add(new PointD(
-                    ControlPoints[pointCount].Tension *
-                        (ControlPoints[pointCount].Position.X - ControlPoints[pointCount - 1].Position.X),
-                    ControlPoints[pointCount].Tension *
-                        (ControlPoints[pointCount].Position.Y - ControlPoints[pointCount - 1].Position.Y)));
-
+				if (Closed)
+				{
+					bezierTangents.Add(new PointD(
+						ControlPoints[pointCount].Tension *
+							(ControlPoints[0].Position.X - ControlPoints[pointCount - 1].Position.X),
+						ControlPoints[pointCount].Tension *
+							(ControlPoints[0].Position.Y - ControlPoints[pointCount - 1].Position.Y)));
+				}
+				else
+				{
+					bezierTangents.Add(new PointD(
+						ControlPoints[pointCount].Tension *
+							(ControlPoints[pointCount].Position.X - ControlPoints[pointCount - 1].Position.X),
+						ControlPoints[pointCount].Tension *
+							(ControlPoints[pointCount].Position.Y - ControlPoints[pointCount - 1].Position.Y)));
+				}
 
 
                 //For optimization.
@@ -144,6 +164,23 @@ namespace Pinta.Tools
                             ControlPoints[i].Position.Y - bezierTangents[i].Y),
                         ControlPoints[i].Position));
                 }
+
+				if (Closed)
+				{
+					//Close the shape.
+
+					iMinusOne = ControlPoints.Count - 1;
+
+					generatedPoints.AddRange(GenerateCubicBezierCurvePoints(
+							ControlPoints[iMinusOne].Position,
+							new PointD(
+								ControlPoints[iMinusOne].Position.X + bezierTangents[iMinusOne].X,
+								ControlPoints[iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
+							new PointD(
+								ControlPoints[0].Position.X - bezierTangents[0].X,
+								ControlPoints[0].Position.Y - bezierTangents[0].Y),
+							ControlPoints[0].Position));
+				}
             }
 
             GeneratedPoints = generatedPoints.ToArray();

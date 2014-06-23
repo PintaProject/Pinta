@@ -68,8 +68,6 @@ namespace Pinta.Tools
         public LineCurveTool()
         {
 			editEngine = new LineCurveEditEngine(this);
-
-            editEngine.ShowStrokeComboBox = false;
         }
 	}
 }

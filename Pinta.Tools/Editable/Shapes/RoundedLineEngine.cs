@@ -43,7 +43,7 @@ namespace Pinta.Tools
 		/// <param name="passedEditEngine">The owner EditEngine.</param>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public RoundedLineEngine(RoundedLineEditEngine passedEditEngine, UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA)
+		public RoundedLineEngine(RoundedLineEditEngine passedEditEngine, UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA, true)
 		{
 			editEngine = passedEditEngine;
 		}

@@ -83,7 +83,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing));
+			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing, false));
 
 			base.AddShape();
 		}

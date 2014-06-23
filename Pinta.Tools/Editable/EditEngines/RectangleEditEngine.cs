@@ -34,7 +34,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-    public class RectangleEditEngine: ArrowedEditEngine
+    public class RectangleEditEngine: BaseEditEngine
     {
         public RectangleEditEngine(BaseTool passedOwner): base(passedOwner)
         {
@@ -154,7 +154,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing));
+			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing, true));
 
 			base.AddShape();
 		}

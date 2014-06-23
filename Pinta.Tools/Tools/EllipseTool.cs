@@ -53,33 +53,5 @@ namespace Pinta.Tools
 		{
 			editEngine = new EllipseEditEngine(this);
 		}
-		
-		/*protected override Rectangle DrawShape (Rectangle rect, Layer l)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				
-				dirty = rect;
-
-				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
-				
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillStrokedEllipse(rect, outline_color, outline_color, BrushWidth);
-				else
-					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
-			}
-			
-			return dirty;
-		}*/
 	}
 }
