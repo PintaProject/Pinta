@@ -41,7 +41,7 @@ namespace Pinta.Tools
 
         }
 
-		protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine actEngine, PointD prevSelPoint)
+		protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
 		{
 			PointD startingPoint;
 
@@ -58,12 +58,12 @@ namespace Pinta.Tools
 			}
 
 
-			actEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
-			actEngine.ControlPoints.Add(
+			activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
+			activeEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), 0.0));
-			actEngine.ControlPoints.Add(
+			activeEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), 0.0));
-			actEngine.ControlPoints.Add(
+			activeEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), 0.0));
 
 
@@ -72,10 +72,10 @@ namespace Pinta.Tools
 
 
 			//Set the new shape's DashPattern option to be the same as the previous shape's.
-			actEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+			activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
 
-			base.CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
+			base.CreateShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 		}
 
 		protected override void MovePoint(List<ControlPoint> controlPoints)

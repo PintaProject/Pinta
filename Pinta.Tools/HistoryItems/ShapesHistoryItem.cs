@@ -73,7 +73,7 @@ namespace Pinta.Tools
 			}
 
 
-			sEngines = ee.SEngines.PartialClone();
+			sEngines = BaseEditEngine.SEngines.PartialClone();
 			selectedPointIndex = passedSelectedPointIndex;
 			selectedPointShapeIndex = passedSelectedPointShapeIndex;
 		}
@@ -123,10 +123,10 @@ namespace Pinta.Tools
 			ShapeEngineCollection oldSEngine = sEngines;
 
 			//Swap half of the data.
-            sEngines = ee.SEngines;
+			sEngines = BaseEditEngine.SEngines;
 
 			//Swap the other half.
-            ee.SEngines = oldSEngine;
+			BaseEditEngine.SEngines = oldSEngine;
 
 
 			//Swap the selected point data.

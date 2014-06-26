@@ -187,7 +187,7 @@ namespace Pinta.Tools
 
 
         //Stores the editable shape data.
-		public ShapeEngineCollection SEngines = new ShapeEngineCollection();
+		public static ShapeEngineCollection SEngines = new ShapeEngineCollection();
 
 
 
@@ -215,6 +215,8 @@ namespace Pinta.Tools
         public BaseEditEngine(BaseTool passedOwner)
         {
             owner = passedOwner;
+
+			owner.Editable = true;
 
 			ResetShapes();
         }
@@ -281,11 +283,11 @@ namespace Pinta.Tools
             {
                 dpbBox.Changed += (o, e) =>
                 {
-					ShapeEngine actEngine = ActiveShapeEngine;
+					ShapeEngine activeEngine = ActiveShapeEngine;
 
-					if (actEngine != null)
+					if (activeEngine != null)
 					{
-						actEngine.DashPattern = dpbBox.ActiveText;
+						activeEngine.DashPattern = dpbBox.ActiveText;
 					}
 
                     //Update the shape.
@@ -296,21 +298,19 @@ namespace Pinta.Tools
 
         public virtual void HandleActivated()
         {
-            PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
-            PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = false;
-
             DrawShapes(false, false, false);
 
             PintaCore.Palette.PrimaryColorChanged += new EventHandler(Palette_PrimaryColorChanged);
             PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
         }
 
-        public virtual void HandleDeactivated()
+		public virtual void HandleDeactivated(BaseTool newTool)
         {
-            PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
-
-            //Finalize the previous shape (if needed).
-            DrawShapes(false, true, false);
+			if (!newTool.Editable)
+			{
+				//Finalize the previous shape (if needed).
+				DrawShapes(false, true, false);
+			}
 
             PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
             PintaCore.Palette.SecondaryColorChanged += Palette_SecondaryColorChanged;
@@ -318,8 +318,6 @@ namespace Pinta.Tools
 
         public virtual void HandleCommit()
         {
-            PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
-
             //Finalize the previous shape (if needed).
             DrawShapes(false, true, false);
         }
@@ -329,14 +327,14 @@ namespace Pinta.Tools
             surfaceModified = true;
 
 
-            ShapeEngine actEngine = ActiveShapeEngine;
+            ShapeEngine activeEngine = ActiveShapeEngine;
 
-            if (actEngine != null)
+            if (activeEngine != null)
             {
-                owner.UseAntialiasing = actEngine.AntiAliasing;
+                owner.UseAntialiasing = activeEngine.AntiAliasing;
 
                 //Update the DashPatternBox to represent the current shape's DashPattern.
-                (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+                (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
             }
 
 
@@ -349,14 +347,14 @@ namespace Pinta.Tools
             surfaceModified = true;
 
 
-            ShapeEngine actEngine = ActiveShapeEngine;
+            ShapeEngine activeEngine = ActiveShapeEngine;
 
-            if (actEngine != null)
+            if (activeEngine != null)
             {
-                owner.UseAntialiasing = actEngine.AntiAliasing;
+                owner.UseAntialiasing = activeEngine.AntiAliasing;
 
                 //Update the DashPatternBox to represent the current shape's DashPattern.
-                (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = actEngine.DashPattern;
+                (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
             }
 
 
@@ -586,7 +584,6 @@ namespace Pinta.Tools
 
             isDrawing = true;
             surfaceModified = true;
-            doc.ToolLayer.Hidden = false;
 
             outlineColor = PintaCore.Palette.PrimaryColor;
             fillColor = PintaCore.Palette.SecondaryColor;
@@ -702,9 +699,9 @@ namespace Pinta.Tools
 
 				AddShape();
 
-                ShapeEngine actEngine = ActiveShapeEngine;
+                ShapeEngine activeEngine = ActiveShapeEngine;
 
-				if (actEngine != null)
+				if (activeEngine != null)
 				{
 					//Verify that the user clicked inside the image bounds or that the user is
 					//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
@@ -718,7 +715,7 @@ namespace Pinta.Tools
 						isDrawing = true;
 
 
-						CreateShape(ctrlKey, clickedOnControlPoint, actEngine, prevSelPoint);
+						CreateShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 					}
 				}
             }
@@ -878,9 +875,9 @@ namespace Pinta.Tools
 
         public virtual void DrawControlPoints(Context g, Rectangle? dirty)
         {
-			ShapeEngine actEngine = ActiveShapeEngine;
+			ShapeEngine activeEngine = ActiveShapeEngine;
 
-			if (actEngine != null)
+			if (activeEngine != null)
 			{
 				//Draw the control points for the active shape.
 
@@ -900,7 +897,7 @@ namespace Pinta.Tools
 						ToolControl.FillColor, ToolControl.StrokeColor, 1);
 				}
 
-				List<ControlPoint> controlPoints = actEngine.ControlPoints;
+				List<ControlPoint> controlPoints = activeEngine.ControlPoints;
 
 				//If the shape has one or more points.
 				if (controlPoints.Count > 0)
@@ -957,14 +954,14 @@ namespace Pinta.Tools
                 return;
             }
 
-			ShapeEngine actEngine = ActiveShapeEngine;
+			ShapeEngine activeEngine = ActiveShapeEngine;
 
-			if (actEngine == null)
+			if (activeEngine == null)
 			{
 				return;
 			}
 
-			actEngine.DrawingLayer.Layer.Clear();
+			activeEngine.DrawingLayer.Layer.Clear();
 
             Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -975,9 +972,9 @@ namespace Pinta.Tools
                 ImageSurface undoSurface = null;
 
                 // We only need to create a history item if there was a previous shape.
-				if (actEngine != null)
+				if (activeEngine != null)
 				{
-					if (actEngine.ControlPoints.Count > 0)
+					if (activeEngine.ControlPoints.Count > 0)
 					{
 						undoSurface = doc.CurrentUserLayer.Surface.Clone();
 					}
@@ -1075,7 +1072,7 @@ namespace Pinta.Tools
 
                 dirty = DrawShape(
                     Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-                    actEngine.DrawingLayer.Layer, true);
+                    activeEngine.DrawingLayer.Layer, true);
 
                 //Reset the hover point after each drawing.
                 HoverPoint = new PointD(-1d, -1d);
@@ -1087,18 +1084,18 @@ namespace Pinta.Tools
                 //Organize the generated points for quick mouse interaction detection.
 
                 //First, clear the previously organized points, if any.
-                actEngine.OrganizedPoints.ClearCollection();
+                activeEngine.OrganizedPoints.ClearCollection();
 
                 int pointIndex = 0;
 
-				foreach (PointD p in actEngine.GeneratedPoints)
+				foreach (PointD p in activeEngine.GeneratedPoints)
                 {
-					actEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
+					activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
 
                     //Keep track of the point's order in relation to the control points.
-					if (actEngine.ControlPoints.Count > pointIndex
-						&& p.X == actEngine.ControlPoints[pointIndex].Position.X
-						&& p.Y == actEngine.ControlPoints[pointIndex].Position.Y)
+					if (activeEngine.ControlPoints.Count > pointIndex
+						&& p.X == activeEngine.ControlPoints[pointIndex].Position.X
+						&& p.Y == activeEngine.ControlPoints[pointIndex].Position.Y)
                     {
                         ++pointIndex;
                     }
@@ -1163,9 +1160,9 @@ namespace Pinta.Tools
 
             Rectangle? dirty = null;
 
-			ShapeEngine actEngine = ActiveShapeEngine;
+			ShapeEngine activeEngine = ActiveShapeEngine;
 
-			if (actEngine != null)
+			if (activeEngine != null)
 			{
 				using (Context g = new Context(l.Surface))
 				{
@@ -1173,39 +1170,30 @@ namespace Pinta.Tools
 					g.FillRule = FillRule.EvenOdd;
 					g.Clip();
 
-					actEngine.AntiAliasing = owner.UseAntialiasing;
+					activeEngine.AntiAliasing = owner.UseAntialiasing;
 
 					g.Antialias = owner.UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
-					g.SetDash(DashPatternBox.GenerateDashArray(actEngine.DashPattern, BrushWidth), 0.0);
+					g.SetDash(DashPatternBox.GenerateDashArray(activeEngine.DashPattern, BrushWidth), 0.0);
 
 					g.LineWidth = BrushWidth;
 
 					//Draw the shape.
-					if (actEngine.ControlPoints.Count > 0)
+					if (activeEngine.ControlPoints.Count > 0)
 					{
 						//Generate the points that make up the shape.
-						actEngine.GeneratePoints();
+						activeEngine.GeneratePoints();
 						
 						//Expand the invalidation rectangle as necessary.
+
 						if (FillShape)
 						{
-							if (StrokeShape)
-							{
-								//Fill and outline.
-								dirty = dirty.UnionRectangles(g.FillPolygonal(actEngine.GeneratedPoints, fillColor));
-								dirty = dirty.UnionRectangles(g.DrawPolygonal(actEngine.GeneratedPoints, outlineColor));
-							}
-							else
-							{
-								//Fill only.
-								dirty = dirty.UnionRectangles(g.FillPolygonal(actEngine.GeneratedPoints, fillColor));
-							}
+							dirty = dirty.UnionRectangles(g.FillPolygonal(activeEngine.GeneratedPoints, fillColor));
 						}
-						else
+
+						if (StrokeShape)
 						{
-							//Outline only.
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(actEngine.GeneratedPoints, outlineColor));
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(activeEngine.GeneratedPoints, outlineColor));
 						}
 					}
 
@@ -1257,7 +1245,7 @@ namespace Pinta.Tools
         }
 
 
-        protected virtual void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine actEngine, PointD prevSelPoint)
+        protected virtual void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
 
         }

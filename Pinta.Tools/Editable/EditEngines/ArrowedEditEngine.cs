@@ -662,7 +662,7 @@ namespace Pinta.Tools
 
         }
 
-        protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine actEngine, PointD prevSelPoint)
+        protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
             //Set the new shape's arrow options to be the same as the previous shape's.
             SetArrowOptions();

@@ -83,11 +83,11 @@ namespace Pinta.Tools
             base.OnActivated();
         }
 
-        protected override void OnDeactivated()
+		protected override void OnDeactivated(BaseTool newTool)
         {
-            editEngine.HandleDeactivated();
+            editEngine.HandleDeactivated(newTool);
 
-            base.OnDeactivated();
+            base.OnDeactivated(newTool);
         }
 
         protected override void OnCommit()

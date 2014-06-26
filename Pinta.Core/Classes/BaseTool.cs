@@ -80,6 +80,9 @@ namespace Pinta.Core
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 
+		//Whether or not the effects of the tool are editable without undoing any actions.
+		public bool Editable = false;
+
 		public virtual bool UseAntialiasing
 		{
 			get
@@ -161,9 +164,9 @@ namespace Pinta.Core
 			OnActivated ();
 		}
 		
-		public void DoDeactivated ()
+		public void DoDeactivated (BaseTool newTool)
 		{
-			OnDeactivated ();
+			OnDeactivated(newTool);
 		}		
 		
 		// Return true if the key was consumed.
@@ -292,8 +295,8 @@ namespace Pinta.Core
 
 			SetCursor (DefaultCursor);
 		}
-		
-		protected virtual void OnDeactivated ()
+
+		protected virtual void OnDeactivated(BaseTool newTool)
 		{
 			PintaCore.Workspace.CanvasSizeChanged -= new EventHandler(Workspace_CanvasSizeChanged);
 

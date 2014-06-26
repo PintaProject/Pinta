@@ -139,7 +139,7 @@ namespace Pinta.Core
 			if (index >= 0) {
 				prev_index = index;
 				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
-				Tools[index].DoDeactivated ();
+				Tools[index].DoDeactivated (tool);
 				Tools[index].ToolItem.Active = false;
 			}
 			

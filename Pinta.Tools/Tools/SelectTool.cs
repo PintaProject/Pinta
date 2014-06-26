@@ -135,9 +135,9 @@ namespace Pinta.Tools
 			isResizing = false;
 		}
 
-		protected override void OnDeactivated ()
+		protected override void OnDeactivated(BaseTool newTool)
 		{
-			base.OnDeactivated ();
+			base.OnDeactivated (newTool);
 			handler_active = false;
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				Document doc = PintaCore.Workspace.ActiveDocument;

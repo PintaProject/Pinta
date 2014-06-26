@@ -171,7 +171,7 @@ namespace Pinta.Tools
 				SetCursor(DefaultCursor);
 		}
 
-		protected override void OnDeactivated ()
+		protected override void OnDeactivated(BaseTool newTool)
 		{
 			origin = new Point (int.MinValue, int.MinValue);
 		}
