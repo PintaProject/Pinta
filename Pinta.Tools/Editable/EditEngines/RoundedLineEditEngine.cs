@@ -83,57 +83,33 @@ namespace Pinta.Tools
 
         }
 
-		protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+		protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
 		{
-			PointD startingPoint;
-
-			//Create the initial points of the shape. The second point will follow the mouse around until released.
-			if (ctrlKey && clickedOnControlPoint)
-			{
-				startingPoint = prevSelPoint;
-
-				ClickedWithoutModifying = false;
-			}
-			else
-			{
-				startingPoint = shapeOrigin;
-			}
+			addRectanglePoints(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 
 
-			activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
-			activeEngine.ControlPoints.Add(
-				new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), 0.0));
-			/*activeEngine.ControlPoints.Add(
-				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), 0.0));
-			activeEngine.ControlPoints.Add(
-				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), 0.0));
-
-
-			SelectedPointIndex = 2;*/
-			SelectedPointIndex = 1;
-			SelectedShapeIndex = SEngines.Count - 1;
-
-
-			//Set the new shape's DashPattern and Radius options to be the same as the previous shape's.
+			//Set the new shape's DashPattern option to be the same as the previous shape's.
 			activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
 
-			base.CreateShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+			base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 		}
 
-		protected override void MovePoint(List<ControlPoint> controlPoints)
+		protected override void movePoint(List<ControlPoint> controlPoints)
 		{
-			//Update the control point's position.
-			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
+			moveRectangularPoint(controlPoints);
+
+
+			base.movePoint(controlPoints);
 		}
 
-		protected override void AddShape()
+		protected override void addShape()
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			SEngines.Add(new RoundedLineEngine(this, doc.CurrentUserLayer, owner.UseAntialiasing));
 
-			base.AddShape();
+			base.addShape();
 		}
 
 

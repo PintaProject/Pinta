@@ -41,122 +41,33 @@ namespace Pinta.Tools
 
         }
 
-        protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+        protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
-            PointD startingPoint;
-
-            //Create the initial points of the shape. The second point will follow the mouse around until released.
-            if (ctrlKey && clickedOnControlPoint)
-            {
-                startingPoint = prevSelPoint;
-
-                ClickedWithoutModifying = false;
-            }
-            else
-            {
-                startingPoint = shapeOrigin;
-            }
-
-
-            activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
-            activeEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), 0.0));
-            activeEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), 0.0));
-            activeEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), 0.0));
-
-
-            SelectedPointIndex = 2;
-            SelectedShapeIndex = SEngines.Count - 1;
+			addRectanglePoints(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 
 
             //Set the new shape's DashPattern option to be the same as the previous shape's.
             activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
 
-            base.CreateShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+            base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
         }
 
-        protected override void MovePoint(List<ControlPoint> controlPoints)
+        protected override void movePoint(List<ControlPoint> controlPoints)
         {
-            //NOTE: doubleNext and doublePrevious may not be the same if there are not 4 control points!
-
-            //Figure out the indeces of the surrounding points.
-
-            int doublePreviousIndex = SelectedPointIndex - 2;
-            int previousPointIndex = SelectedPointIndex - 1;
-            int nextPointIndex = SelectedPointIndex + 1;
-            int doubleNextIndex = SelectedPointIndex + 2;
-
-            if (previousPointIndex < 0)
-            {
-                previousPointIndex = controlPoints.Count - 1;
-                doublePreviousIndex = controlPoints.Count - 2;
-
-                if (doublePreviousIndex < 0)
-                {
-                    doublePreviousIndex = 0;
-                }
-            }
-            else if (doublePreviousIndex < 0)
-            {
-                doublePreviousIndex = controlPoints.Count - 1;
-            }
-
-            if (nextPointIndex >= controlPoints.Count)
-            {
-                nextPointIndex = 0;
-                doubleNextIndex = 1;
-
-                if (doubleNextIndex >= controlPoints.Count)
-                {
-                    doubleNextIndex = 0;
-                }
-            }
-            else if (doubleNextIndex >= controlPoints.Count)
-            {
-                doubleNextIndex = 0;
-            }
+			moveRectangularPoint(controlPoints);
 
 
-            //Update the control points' positions.
-
-
-            //Update the selected control point's position.
-			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
-
-
-            //Determine the positions of each of the surrounding points.
-            PointD doublePreviousPoint = controlPoints.ElementAt(doublePreviousIndex).Position;
-            PointD previousPoint = controlPoints.ElementAt(previousPointIndex).Position;
-            PointD nextPoint = controlPoints.ElementAt(nextPointIndex).Position;
-            PointD doubleNextPoint = controlPoints.ElementAt(doubleNextIndex).Position;
-
-            //Ensure that only one direction is moved in at a time, if either.
-            bool moveVertical = (previousPoint.X == doublePreviousPoint.X);
-            bool moveHorizontal = moveVertical ? false : (previousPoint.Y == doublePreviousPoint.Y);
-
-            //Update the previous control point's position.
-			controlPoints.ElementAt(previousPointIndex).Position = new PointD(
-				moveHorizontal ? currentPoint.X : previousPoint.X, moveVertical ? currentPoint.Y : previousPoint.Y);
-
-            //Ensure that only one direction is moved in at a time, if either.
-            moveVertical = (nextPoint.X == doubleNextPoint.X);
-            moveHorizontal = moveVertical ? false : (nextPoint.Y == doubleNextPoint.Y);
-
-            //Update the next control point's position.
-			controlPoints.ElementAt(nextPointIndex).Position = new PointD(
-				moveHorizontal ? currentPoint.X : nextPoint.X, moveVertical ? currentPoint.Y : nextPoint.Y);
+			base.movePoint(controlPoints);
         }
 
-		protected override void AddShape()
+		protected override void addShape()
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing, true));
 
-			base.AddShape();
+			base.addShape();
 		}
     }
 }

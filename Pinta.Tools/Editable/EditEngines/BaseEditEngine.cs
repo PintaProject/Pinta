@@ -190,7 +190,6 @@ namespace Pinta.Tools
 		public static ShapeEngineCollection SEngines = new ShapeEngineCollection();
 
 
-
         #region ToolbarEventHandlers
 
         protected virtual void BrushMinusButtonClickedEvent(object o, EventArgs args)
@@ -211,14 +210,13 @@ namespace Pinta.Tools
         #endregion ToolbarEventHandlers
 
 
-
         public BaseEditEngine(BaseTool passedOwner)
         {
             owner = passedOwner;
 
 			owner.Editable = true;
 
-			ResetShapes();
+			resetShapes();
         }
 
 
@@ -697,7 +695,7 @@ namespace Pinta.Tools
                 }
 
 
-				AddShape();
+				addShape();
 
                 ShapeEngine activeEngine = ActiveShapeEngine;
 
@@ -715,7 +713,7 @@ namespace Pinta.Tools
 						isDrawing = true;
 
 
-						CreateShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+						createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 					}
 				}
             }
@@ -785,7 +783,7 @@ namespace Pinta.Tools
 						if (currentPoint.X != selPoint.Position.X
 							|| currentPoint.Y != selPoint.Position.Y)
                         {
-                            MovePoint(controlPoints);
+                            movePoint(controlPoints);
                         }
                     }
                     else
@@ -873,8 +871,24 @@ namespace Pinta.Tools
             LastMousePosition = currentPoint;
         }
 
-        public virtual void DrawControlPoints(Context g, Rectangle? dirty)
-        {
+
+		protected void Palette_PrimaryColorChanged(object sender, EventArgs e)
+		{
+			outlineColor = PintaCore.Palette.PrimaryColor;
+
+			DrawShapes(false, false, false);
+		}
+
+		protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
+		{
+			fillColor = PintaCore.Palette.SecondaryColor;
+
+			DrawShapes(false, false, false);
+		}
+
+
+		public virtual void DrawControlPoints(Context g, Rectangle? dirty)
+		{
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
@@ -938,21 +952,21 @@ namespace Pinta.Tools
 					dirty = dirty.Value.Inflate(controlPointSize * 8, controlPointSize * 8);
 				}
 			}
-        }
+		}
 
-        /// <summary>
-        /// Draw all of the shapes that are currently being drawn/edited by the user.
-        /// </summary>
-        /// <param name="calculateOrganizedPoints">Whether or not to calculate the spatially organized
-        /// points for mouse detection after drawing the shape.</param>
-        /// <param name="finalize">Whether or not to finalize the drawing.</param>
-        /// <param name="shiftKey">Whether or not the shift key is being pressed.</param>
-        public void DrawShapes(bool calculateOrganizedPoints, bool finalize, bool shiftKey)
-        {
-            if (!surfaceModified || SEngines.Count == 0)
-            {
-                return;
-            }
+		/// <summary>
+		/// Draw all of the shapes that are currently being drawn/edited by the user.
+		/// </summary>
+		/// <param name="calculateOrganizedPoints">Whether or not to calculate the spatially organized
+		/// points for mouse detection after drawing the shape.</param>
+		/// <param name="finalize">Whether or not to finalize the drawing.</param>
+		/// <param name="shiftKey">Whether or not the shift key is being pressed.</param>
+		public void DrawShapes(bool calculateOrganizedPoints, bool finalize, bool shiftKey)
+		{
+			if (!surfaceModified || SEngines.Count == 0)
+			{
+				return;
+			}
 
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
@@ -963,15 +977,15 @@ namespace Pinta.Tools
 
 			activeEngine.DrawingLayer.Layer.Clear();
 
-            Document doc = PintaCore.Workspace.ActiveDocument;
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-            Rectangle dirty;
+			Rectangle dirty;
 
-            if (finalize)
-            {
-                ImageSurface undoSurface = null;
+			if (finalize)
+			{
+				ImageSurface undoSurface = null;
 
-                // We only need to create a history item if there was a previous shape.
+				// We only need to create a history item if there was a previous shape.
 				if (activeEngine != null)
 				{
 					if (activeEngine.ControlPoints.Count > 0)
@@ -980,66 +994,66 @@ namespace Pinta.Tools
 					}
 				}
 
-                isDrawing = false;
-                surfaceModified = false;
+				isDrawing = false;
+				surfaceModified = false;
 
-                int previousSelectedPointIndex = SelectedPointIndex;
-                int previousSelectedShapeIndex = SelectedShapeIndex;
+				int previousSelectedPointIndex = SelectedPointIndex;
+				int previousSelectedShapeIndex = SelectedShapeIndex;
 
-                SelectedPointIndex = -1;
+				SelectedPointIndex = -1;
 
-                dirty = DrawShape(
-                    Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-                    doc.CurrentUserLayer, false);
+				dirty = DrawShape(
+					Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
+					doc.CurrentUserLayer, false);
 
-                //Make sure that the undo surface isn't null and that there are actually points.
-                if (undoSurface != null)
-                {
-                    //Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-                    doc.History.PushNewItem(new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
-                            undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, previousSelectedShapeIndex));
-                }
+				//Make sure that the undo surface isn't null and that there are actually points.
+				if (undoSurface != null)
+				{
+					//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
+					doc.History.PushNewItem(new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
+							undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, previousSelectedShapeIndex));
+				}
 
-                //Clear out all of the old data.
-				ResetShapes();
-            }
-            else
-            {
-                //Only calculate the hover point when there isn't a request to organize the generated points by spatial hashing.
-                if (!calculateOrganizedPoints)
-                {
-                    //Calculate the hover point, if any.
+				//Clear out all of the old data.
+				resetShapes();
+			}
+			else
+			{
+				//Only calculate the hover point when there isn't a request to organize the generated points by spatial hashing.
+				if (!calculateOrganizedPoints)
+				{
+					//Calculate the hover point, if any.
 
-                    int closestShapeIndex, closestPointIndex;
-                    PointD closestPoint;
-                    double closestDistance;
+					int closestShapeIndex, closestPointIndex;
+					PointD closestPoint;
+					double closestDistance;
 
-                    OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-                        out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+					OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
+						out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
 					//TO DO: also check for direct control point clicks.
 
-                    List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+					List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
 
-                    //Determine if the user is hovering the mouse close enough to a line,
-                    //shape, or point that's currently being drawn/edited by the user.
-                    if (closestDistance < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
-                    {
-                        //User is hovering over a generated point on a shape.
+					//Determine if the user is hovering the mouse close enough to a line,
+					//shape, or point that's currently being drawn/edited by the user.
+					if (closestDistance < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+					{
+						//User is hovering over a generated point on a shape.
 
-                        if (controlPoints.Count > closestPointIndex)
-                        {
-                            //Note: compare the currentPoint's distance here because it's the actual mouse position.
-                            if (currentPoint.Distance(controlPoints[closestPointIndex].Position)
-                                < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
-                            {
-                                //Mouse hovering over a control point (on the "previous order" side of the point).
+						if (controlPoints.Count > closestPointIndex)
+						{
+							//Note: compare the currentPoint's distance here because it's the actual mouse position.
+							if (currentPoint.Distance(controlPoints[closestPointIndex].Position)
+								< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+							{
+								//Mouse hovering over a control point (on the "previous order" side of the point).
 
-                                HoverPoint.X = controlPoints[closestPointIndex].Position.X;
-                                HoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
-                                HoveredPointAsControlPoint = closestPointIndex;
-                            }
-                            else if (closestPointIndex > 0)
+								HoverPoint.X = controlPoints[closestPointIndex].Position.X;
+								HoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
+								HoveredPointAsControlPoint = closestPointIndex;
+							}
+							else if (closestPointIndex > 0)
 							{
 								if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position)
 									< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
@@ -1060,105 +1074,65 @@ namespace Pinta.Tools
 								HoverPoint.X = controlPoints[HoveredPointAsControlPoint].Position.X;
 								HoverPoint.Y = controlPoints[HoveredPointAsControlPoint].Position.Y;
 							}
-                        }
+						}
 
-                        if (HoverPoint.X < 0d)
-                        {
-                            HoverPoint.X = closestPoint.X;
-                            HoverPoint.Y = closestPoint.Y;
-                        }
-                    }
-                }
+						if (HoverPoint.X < 0d)
+						{
+							HoverPoint.X = closestPoint.X;
+							HoverPoint.Y = closestPoint.Y;
+						}
+					}
+				}
 
-                dirty = DrawShape(
-                    Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-                    activeEngine.DrawingLayer.Layer, true);
+				dirty = DrawShape(
+					Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
+					activeEngine.DrawingLayer.Layer, true);
 
-                //Reset the hover point after each drawing.
-                HoverPoint = new PointD(-1d, -1d);
-                HoveredPointAsControlPoint = -1;
-            }
+				//Reset the hover point after each drawing.
+				HoverPoint = new PointD(-1d, -1d);
+				HoveredPointAsControlPoint = -1;
+			}
 
-            if (calculateOrganizedPoints)
-            {
-                //Organize the generated points for quick mouse interaction detection.
+			if (calculateOrganizedPoints)
+			{
+				//Organize the generated points for quick mouse interaction detection.
 
-                //First, clear the previously organized points, if any.
-                activeEngine.OrganizedPoints.ClearCollection();
+				//First, clear the previously organized points, if any.
+				activeEngine.OrganizedPoints.ClearCollection();
 
-                int pointIndex = 0;
+				int pointIndex = 0;
 
 				foreach (PointD p in activeEngine.GeneratedPoints)
-                {
+				{
 					activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
 
-                    //Keep track of the point's order in relation to the control points.
+					//Keep track of the point's order in relation to the control points.
 					if (activeEngine.ControlPoints.Count > pointIndex
 						&& p.X == activeEngine.ControlPoints[pointIndex].Position.X
 						&& p.Y == activeEngine.ControlPoints[pointIndex].Position.Y)
-                    {
-                        ++pointIndex;
-                    }
-                }
-            }
+					{
+						++pointIndex;
+					}
+				}
+			}
 
-            // Increase the size of the dirty rect to account for antialiasing.
-            if (owner.UseAntialiasing)
-            {
-                dirty = dirty.Inflate(1, 1);
-            }
+			// Increase the size of the dirty rect to account for antialiasing.
+			if (owner.UseAntialiasing)
+			{
+				dirty = dirty.Inflate(1, 1);
+			}
 
-            dirty = ((Rectangle?)dirty).UnionRectangles(lastDirty).Value;
-            dirty = dirty.Clamp();
-            doc.Workspace.Invalidate(dirty.ToGdkRectangle());
-            lastDirty = dirty;
-        }
+			dirty = ((Rectangle?)dirty).UnionRectangles(lastDirty).Value;
+			dirty = dirty.Clamp();
+			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
+			lastDirty = dirty;
+		}
 
-        /// <summary>
-        /// Calculate the modified position of current_point such that the angle between the adjacent point
-        /// (if any) and current_point is snapped to the closest angle out of a certain number of angles.
-        /// </summary>
-        public void CalculateModifiedCurrentPoint()
-        {
-            ShapeEngine selEngine = SelectedShapeEngine;
-            ControlPoint adjacentPoint;
+		protected Rectangle DrawShape(Rectangle rect, Layer l, bool drawControlPoints)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-            if (selEngine == null)
-            {
-                //Don't bother calculating a modified point because there is no selected shape.
-                return;
-            }
-            else
-            {
-                if (SelectedPointIndex > 0)
-                {
-                    adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
-                }
-                else if (SelectedPointIndex + 1 < selEngine.ControlPoints.Count)
-                {
-                    adjacentPoint = selEngine.ControlPoints[SelectedPointIndex + 1];
-                }
-                else
-                {
-                    //Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
-                    return;
-                }
-            }
-
-            PointD dir = new PointD(currentPoint.X - adjacentPoint.Position.X, currentPoint.Y - adjacentPoint.Position.Y);
-            double theta = Math.Atan2(dir.Y, dir.X);
-            double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
-
-            theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
-            currentPoint = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
-        }
-
-
-        protected Rectangle DrawShape(Rectangle rect, Layer l, bool drawControlPoints)
-        {
-            Document doc = PintaCore.Workspace.ActiveDocument;
-
-            Rectangle? dirty = null;
+			Rectangle? dirty = null;
 
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
@@ -1183,7 +1157,7 @@ namespace Pinta.Tools
 					{
 						//Generate the points that make up the shape.
 						activeEngine.GeneratePoints();
-						
+
 						//Expand the invalidation rectangle as necessary.
 
 						if (FillShape)
@@ -1200,7 +1174,7 @@ namespace Pinta.Tools
 					g.SetDash(new double[] { }, 0.0);
 
 
-					DrawExtras(dirty, g);
+					drawExtras(dirty, g);
 
 
 					if (drawControlPoints)
@@ -1211,15 +1185,61 @@ namespace Pinta.Tools
 			}
 
 
-            return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
-        }
+			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
+		}
 
-        protected virtual BaseHistoryItem CreateHistoryItem()
-        {
-            return new SimpleHistoryItem(owner.Icon, owner.Name, undoSurface, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
-        }
 
-        protected Gdk.Rectangle GetRectangleFromPoints(PointD a, PointD b)
+		/// <summary>
+		/// Calculate the modified position of current_point such that the angle between the adjacent point
+		/// (if any) and current_point is snapped to the closest angle out of a certain number of angles.
+		/// </summary>
+		public void CalculateModifiedCurrentPoint()
+		{
+			ShapeEngine selEngine = SelectedShapeEngine;
+			ControlPoint adjacentPoint;
+
+			if (selEngine == null)
+			{
+				//Don't bother calculating a modified point because there is no selected shape.
+				return;
+			}
+			else
+			{
+				if (SelectedPointIndex > 0)
+				{
+					adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
+				}
+				else if (SelectedPointIndex + 1 < selEngine.ControlPoints.Count)
+				{
+					adjacentPoint = selEngine.ControlPoints[SelectedPointIndex + 1];
+				}
+				else
+				{
+					//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
+					return;
+				}
+			}
+
+			PointD dir = new PointD(currentPoint.X - adjacentPoint.Position.X, currentPoint.Y - adjacentPoint.Position.Y);
+			double theta = Math.Atan2(dir.Y, dir.X);
+			double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
+
+			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
+			currentPoint = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
+		}
+		
+		protected virtual BaseHistoryItem CreateHistoryItem()
+		{
+			return new SimpleHistoryItem(owner.Icon, owner.Name, undoSurface, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
+		}
+
+		protected void resetShapes()
+		{
+			SEngines = new ShapeEngineCollection();
+		}
+
+
+        protected Gdk.Rectangle getRectangleFromPoints(PointD a, PointD b)
         {
             int x = (int)Math.Min(a.X, b.X) - BrushWidth - 2;
             int y = (int)Math.Min(a.Y, b.Y) - BrushWidth - 2;
@@ -1230,42 +1250,23 @@ namespace Pinta.Tools
         }
 
 
-        protected void Palette_PrimaryColorChanged(object sender, EventArgs e)
-        {
-            outlineColor = PintaCore.Palette.PrimaryColor;
-
-            DrawShapes(false, false, false);
-        }
-
-        protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
-        {
-            fillColor = PintaCore.Palette.SecondaryColor;
-
-            DrawShapes(false, false, false);
-        }
-
-
-        protected virtual void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+        protected virtual void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
 
         }
 
-        protected virtual void MovePoint(List<ControlPoint> controlPoints)
+        protected virtual void movePoint(List<ControlPoint> controlPoints)
+        {
+			//Update the control point's position.
+			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
+        }
+
+        protected virtual void drawExtras(Rectangle? dirty, Context g)
         {
             
         }
 
-        protected virtual void DrawExtras(Rectangle? dirty, Context g)
-        {
-            
-        }
-
-		protected void ResetShapes()
-		{
-			SEngines = new ShapeEngineCollection();
-		}
-
-		protected virtual void AddShape()
+		protected virtual void addShape()
 		{
 			//Overrides should implement (with their own ShapeEngine child type):
 			//Document doc = PintaCore.Workspace.ActiveDocument;
@@ -1273,6 +1274,147 @@ namespace Pinta.Tools
 			//base.AddShape();
 
 			SelectedShapeIndex = SEngines.Count - 1;
+		}
+
+
+		protected void addLinePoints(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+		{
+			PointD startingPoint;
+
+			//Create the initial points of the shape. The second point will follow the mouse around until released.
+			if (ctrlKey && clickedOnControlPoint)
+			{
+				startingPoint = prevSelPoint;
+
+				ClickedWithoutModifying = false;
+			}
+			else
+			{
+				startingPoint = shapeOrigin;
+			}
+
+
+			activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), DefaultEndPointTension));
+			activeEngine.ControlPoints.Add(
+				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), DefaultEndPointTension));
+
+
+			SelectedPointIndex = 1;
+			SelectedShapeIndex = SEngines.Count - 1;
+		}
+
+		protected void addRectanglePoints(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+		{
+			PointD startingPoint;
+
+			//Create the initial points of the shape. The second point will follow the mouse around until released.
+			if (ctrlKey && clickedOnControlPoint)
+			{
+				startingPoint = prevSelPoint;
+
+				ClickedWithoutModifying = false;
+			}
+			else
+			{
+				startingPoint = shapeOrigin;
+			}
+
+
+			activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
+			activeEngine.ControlPoints.Add(
+				new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), 0.0));
+			activeEngine.ControlPoints.Add(
+				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), 0.0));
+			activeEngine.ControlPoints.Add(
+				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), 0.0));
+
+
+			SelectedPointIndex = 2;
+			SelectedShapeIndex = SEngines.Count - 1;
+		}
+
+		protected void moveRectangularPoint(List<ControlPoint> controlPoints)
+		{
+			ShapeEngine selEngine = SelectedShapeEngine;
+
+			if (selEngine != null && selEngine.Closed && controlPoints.Count == 4)
+			{
+				//Figure out the indeces of the surrounding points. The lowest point index should be 0 and the highest 3.
+
+				int previousPointIndex = SelectedPointIndex - 1;
+				int nextPointIndex = SelectedPointIndex + 1;
+				int oppositePointIndex = SelectedPointIndex + 2;
+
+				if (previousPointIndex < 0)
+				{
+					previousPointIndex = controlPoints.Count - 1;
+				}
+
+				if (nextPointIndex >= controlPoints.Count)
+				{
+					nextPointIndex = 0;
+					oppositePointIndex = 1;
+				}
+				else if (oppositePointIndex >= controlPoints.Count)
+				{
+					oppositePointIndex = 0;
+				}
+
+
+				ControlPoint selectedPoint = controlPoints.ElementAt(SelectedPointIndex);
+				ControlPoint previousPoint = controlPoints.ElementAt(previousPointIndex);
+				ControlPoint oppositePoint = controlPoints.ElementAt(oppositePointIndex);
+				ControlPoint nextPoint = controlPoints.ElementAt(nextPointIndex);
+
+
+				//Now that we know the indexed order of the points, we can align everything properly.
+				if (SelectedPointIndex == 2 || SelectedPointIndex == 0)
+				{
+					//Control point visual order (counter-clockwise order always goes selectedPoint, previousPoint, oppositePoint, nextPoint,
+					//where moving point == selectedPoint):
+					//
+					//static (opposite) point		horizontally aligned point
+					//vertically aligned point		moving point
+					//OR
+					//moving point					vertically aligned point
+					//horizontally aligned point	static (opposite) point
+
+
+					//Update the previous control point's position.
+					previousPoint.Position = new PointD(previousPoint.Position.X, currentPoint.Y);
+
+					//Update the next control point's position.
+					nextPoint.Position = new PointD(currentPoint.X, nextPoint.Position.Y);
+
+
+					//Even though it's supposed to be static, just in case the points get out of order
+					//(they do sometimes), update the opposite control point's position.
+					oppositePoint.Position = new PointD(previousPoint.Position.X, nextPoint.Position.Y);
+				}
+				else
+				{
+					//Control point visual order (counter-clockwise order always goes selectedPoint, previousPoint, oppositePoint, nextPoint,
+					//where moving point == selectedPoint):
+					//
+					//horizontally aligned point	static (opposite) point
+					//moving point					vertically aligned point
+					//OR
+					//vertically aligned point		moving point
+					//static (opposite) point		horizontally aligned point
+
+
+					//Update the previous control point's position.
+					previousPoint.Position = new PointD(currentPoint.X, previousPoint.Position.Y);
+
+					//Update the next control point's position.
+					nextPoint.Position = new PointD(nextPoint.Position.X, currentPoint.Y);
+
+
+					//Even though it's supposed to be static, just in case the points get out of order
+					//(they do sometimes), update the opposite control point's position.
+					oppositePoint.Position = new PointD(nextPoint.Position.X, previousPoint.Position.Y);
+				}
+			}
 		}
     }
 }

@@ -41,51 +41,30 @@ namespace Pinta.Tools
 
         }
 
-        protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+        protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
-            PointD startingPoint;
-
-            //Then create the initial points of the shape. The second point will follow the mouse around until released.
-            if (ctrlKey && clickedOnControlPoint)
-            {
-                startingPoint = prevSelPoint;
-
-                ClickedWithoutModifying = false;
-            }
-            else
-            {
-                startingPoint = shapeOrigin;
-            }
-
-            activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), DefaultEndPointTension));
-            activeEngine.ControlPoints.Add(
-                new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), DefaultEndPointTension));
-
-
-            SelectedPointIndex = 1;
-            SelectedShapeIndex = SEngines.Count - 1;
+			addLinePoints(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 
 
             //Set the new shape's DashPattern to be the same as the previous shape's.
             activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
 
-            base.CreateShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+            base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
         }
 
-        protected override void MovePoint(List<ControlPoint> controlPoints)
+        protected override void movePoint(List<ControlPoint> controlPoints)
         {
-            //Update the control point's position.
-			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
+			base.movePoint(controlPoints);
         }
 
-		protected override void AddShape()
+		protected override void addShape()
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, owner.UseAntialiasing, false));
 
-			base.AddShape();
+			base.addShape();
 		}
     }
 }

@@ -662,13 +662,13 @@ namespace Pinta.Tools
 
         }
 
-        protected override void CreateShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+        protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
             //Set the new shape's arrow options to be the same as the previous shape's.
             SetArrowOptions();
         }
 
-        protected override void DrawExtras(Rectangle? dirty, Context g)
+        protected override void drawExtras(Rectangle? dirty, Context g)
         {
             //Draw the arrows for all of the shapes.
             for (int n = 0; n < SEngines.Count; ++n)

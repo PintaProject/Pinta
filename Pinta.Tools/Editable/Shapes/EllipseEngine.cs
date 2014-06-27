@@ -69,111 +69,139 @@ namespace Pinta.Tools
 			//An ellipse requires exactly 4 control points in order to draw anything.
 			if (ControlPoints.Count == 4)
 			{
-				//It is expected that the 4 control points always form a rectangle parallel/perpendicular to the window.
-				//However, we must first determine which control point is at the top left and which is at the bottom right.
-				//It is also expected that the 4 control points are adjacent to each other by index and position, e.g.: 0, 1, 2, 3.
-				
-				PointD topLeft = ControlPoints[0].Position;
-				PointD bottomRight = ControlPoints[0].Position;
+				//This is mostly for time efficiency/optimization, but it can also help readability.
+				PointD cp0 = ControlPoints[0].Position, cp1 = ControlPoints[1].Position,
+					cp2 = ControlPoints[2].Position, cp3 = ControlPoints[3].Position;
 
-				//Compare the second point with the first.
-				if (ControlPoints[1].Position.X < topLeft.X || ControlPoints[1].Position.Y < topLeft.Y)
+				//An ellipse also requires that all 4 control points compose a perfect rectangle parallel/perpendicular to the window.
+				//So, confirm that it is indeed a perfect rectangle.
+
+				bool perfectRectangle = false;
+
+				if (cp0.X == cp1.X)
 				{
-					//The second point is either more left or more up than the first.
-					
-					topLeft = ControlPoints[1].Position;
-
-					//Compare the third point with the second.
-					if (ControlPoints[2].Position.X < topLeft.X || ControlPoints[2].Position.Y < topLeft.Y)
+					if (cp0.Y == cp3.Y && cp1.Y == cp2.Y && cp2.X == cp3.X)
 					{
-						//The third point is either more left or more up than the second.
-
-						topLeft = ControlPoints[2].Position;
-
-						//The first point remains the bottom right.
-					}
-					else
-					{
-						//The third point is neither more left nor more up than the second.
-
-						//The second point remains the top left.
-
-						bottomRight = ControlPoints[3].Position;
+						perfectRectangle = true;
 					}
 				}
-				else
+				else if (cp0.Y == cp1.Y)
 				{
-					//The second point is neither more left nor more up than the first.
-
-					PointD secondPoint = ControlPoints[1].Position;
-
-					//Compare the third point with the second.
-					if (ControlPoints[2].Position.X < secondPoint.X || ControlPoints[2].Position.Y < secondPoint.Y)
+					if (cp0.X == cp3.X && cp1.X == cp2.X && cp2.Y == cp3.Y)
 					{
-						//The third point is either more left or more up than the second.
-
-						topLeft = ControlPoints[3].Position;
-						bottomRight = ControlPoints[1].Position;
-					}
-					else
-					{
-						//The third point is neither more left nor more up than the second.
-
-						//The first point remains the top left.
-
-						bottomRight = ControlPoints[2].Position;
+						perfectRectangle = true;
 					}
 				}
 
+				if (perfectRectangle)
+				{
+					//It is expected that the 4 control points always form a perfect rectangle parallel/perpendicular to the window.
+					//However, we must first determine which control point is at the top left and which is at the bottom right.
+					//It is also expected that the 4 control points are adjacent to each other by index and position, e.g.: 0, 1, 2, 3.
 
-				//Now we can calculate the width and height.
-				double width = bottomRight.X - topLeft.X;
-				double height = bottomRight.Y - topLeft.Y;
+					PointD topLeft = cp0;
+					PointD bottomRight = cp0;
+
+					//Compare the second point with the first.
+					if (cp1.X < topLeft.X || cp1.Y < topLeft.Y)
+					{
+						//The second point is either more left or more up than the first.
+
+						topLeft = cp1;
+
+						//Compare the third point with the second.
+						if (cp2.X < topLeft.X || cp2.Y < topLeft.Y)
+						{
+							//The third point is either more left or more up than the second.
+
+							topLeft = cp2;
+
+							//The first point remains the bottom right.
+						}
+						else
+						{
+							//The third point is neither more left nor more up than the second.
+
+							//The second point remains the top left.
+
+							bottomRight = cp3;
+						}
+					}
+					else
+					{
+						//The second point is neither more left nor more up than the first.
+
+						PointD secondPoint = cp1;
+
+						//Compare the third point with the second.
+						if (cp2.X < secondPoint.X || cp2.Y < secondPoint.Y)
+						{
+							//The third point is either more left or more up than the second.
+
+							topLeft = cp3;
+							bottomRight = cp1;
+						}
+						else
+						{
+							//The third point is neither more left nor more up than the second.
+
+							//The first point remains the top left.
+
+							bottomRight = cp2;
+						}
+					}
 
 
-				//Some elliptic math code taken from Cairo Extensions, and some from DocumentSelection code written for GSoC 2013.
+					//Now we can calculate the width and height.
+					double width = bottomRight.X - topLeft.X;
+					double height = bottomRight.Y - topLeft.Y;
 
-				//Calculate an appropriate interval at which to increment t based on
-				//the bounding rectangle's width and height properties. The increment
-				//for t determines how many intermediate Points to calculate for the
-				//ellipse. For each curve, t will go from tInterval to 1. The lower
-				//the value of tInterval, the higher number of intermediate Points
-				//that will be calculated and stored into the Polygon collection.
-				double tInterval = 1d / (width + height);
 
-				double rx = width / 2; //1/2 of the bounding Rectangle Width.
-				double ry = height / 2; //1/2 of the bounding Rectangle Height.
-				double cx = topLeft.X + rx; //The middle of the bounding Rectangle, horizontally speaking.
-				double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
-				double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d = 0.5522847498307933984022516322796d
+					//Some elliptic math code taken from Cairo Extensions, and some from DocumentSelection code written for GSoC 2013.
 
-				generatedPoints.Add(new PointD(cx + rx, cy));
+					//Calculate an appropriate interval at which to increment t based on
+					//the bounding rectangle's width and height properties. The increment
+					//for t determines how many intermediate Points to calculate for the
+					//ellipse. For each curve, t will go from tInterval to 1. The lower
+					//the value of tInterval, the higher number of intermediate Points
+					//that will be calculated and stored into the Polygon collection.
+					double tInterval = 1d / (width + height);
 
-				generatedPoints.AddRange(calculateCurvePoints(tInterval,
-					cx + rx, cy,
-					cx + rx, cy - c1 * ry,
-					cx + c1 * rx, cy - ry,
-					cx, cy - ry));
+					double rx = width / 2d; //1/2 of the bounding Rectangle Width.
+					double ry = height / 2d; //1/2 of the bounding Rectangle Height.
+					double cx = topLeft.X + rx; //The middle of the bounding Rectangle, horizontally speaking.
+					double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
+					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d = 0.5522847498307933984022516322796d
 
-				generatedPoints.AddRange(calculateCurvePoints(tInterval,
-					cx, cy - ry,
-					cx - c1 * rx, cy - ry,
-					cx - rx, cy - c1 * ry,
-					cx - rx, cy));
+					generatedPoints.Add(new PointD(cx + rx, cy));
 
-				generatedPoints.AddRange(calculateCurvePoints(tInterval,
-					cx - rx, cy,
-					cx - rx, cy + c1 * ry,
-					cx - c1 * rx, cy + ry,
-					cx, cy + ry));
+					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+						cx + rx, cy,
+						cx + rx, cy - c1 * ry,
+						cx + c1 * rx, cy - ry,
+						cx, cy - ry));
 
-				generatedPoints.AddRange(calculateCurvePoints(tInterval,
-					cx, cy + ry,
-					cx + c1 * rx, cy + ry,
-					cx + rx, cy + c1 * ry,
-					cx + rx, cy));
+					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+						cx, cy - ry,
+						cx - c1 * rx, cy - ry,
+						cx - rx, cy - c1 * ry,
+						cx - rx, cy));
+
+					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+						cx - rx, cy,
+						cx - rx, cy + c1 * ry,
+						cx - c1 * rx, cy + ry,
+						cx, cy + ry));
+
+					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+						cx, cy + ry,
+						cx + c1 * rx, cy + ry,
+						cx + rx, cy + c1 * ry,
+						cx + rx, cy));
+				}
 			}
-			else
+			
+			if (generatedPoints.Count == 0)
 			{
 				//Something went wrong. Just copy the control points.
 				foreach (ControlPoint cp in ControlPoints)
