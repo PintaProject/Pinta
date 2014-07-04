@@ -52,7 +52,7 @@ namespace Pinta.Tools
 
 		public RectangleTool()
 		{
-			editEngine = new RectangleEditEngine(this);
+			EditEngine = new RectangleEditEngine(this);
 		}
 	}
 }

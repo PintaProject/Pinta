@@ -41,16 +41,18 @@ namespace Pinta.Tools
 		/// Create a new LineCurveSeriesEngine.
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedShapeType">The owner EditEngine.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
 		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
-        public LineCurveSeriesEngine(UserLayer parentLayer, bool passedAA, bool passedClosed): base(parentLayer, passedAA, passedClosed)
+		public LineCurveSeriesEngine(UserLayer parentLayer, BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed)
+			: base(parentLayer, passedShapeType, passedAA, passedClosed)
 		{
 			
 		}
 
         public override ShapeEngine PartialClone()
         {
-            LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, AntiAliasing, Closed);
+			LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, shapeType, AntiAliasing, Closed);
 
             clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
@@ -61,10 +63,10 @@ namespace Pinta.Tools
             clonedCE.Arrow1 = Arrow1.Clone();
             clonedCE.Arrow2 = Arrow2.Clone();
 
-            return clonedCE;   
+            return clonedCE;
         }
 
-        public override void GeneratePoints()
+		public override void GeneratePoints()
         {
             GenerateCardinalSplinePolynomialCurvePoints();
         }
@@ -77,14 +79,9 @@ namespace Pinta.Tools
         {
             List<PointD> generatedPoints = new List<PointD>();
 
-            //Note: it's important that there be many generated points even if there are only 2 given points and it's just a line.
-            //This is because the generated points are used in the check that determines if the mouse clicks on the curve.
             if (ControlPoints.Count < 2)
             {
-                foreach (ControlPoint cP in ControlPoints)
-                {
-                    generatedPoints.Add(cP.Position);
-                }
+				generatedPoints.Add(ControlPoints[0].Position);
             }
             else
             {

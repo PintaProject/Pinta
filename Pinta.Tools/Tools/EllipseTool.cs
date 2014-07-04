@@ -51,7 +51,7 @@ namespace Pinta.Tools
 
 		public EllipseTool ()
 		{
-			editEngine = new EllipseEditEngine(this);
+			EditEngine = new EllipseEditEngine(this);
 		}
 	}
 }

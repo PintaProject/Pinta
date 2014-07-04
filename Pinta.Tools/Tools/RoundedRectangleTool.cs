@@ -51,7 +51,7 @@ namespace Pinta.Tools
 
 		public RoundedRectangleTool()
 		{
-			editEngine = new RoundedLineEditEngine(this);
+			EditEngine = new RoundedLineEditEngine(this);
 		}
 	}
 }

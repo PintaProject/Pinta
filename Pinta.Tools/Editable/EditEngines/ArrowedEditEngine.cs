@@ -34,7 +34,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-    public abstract class ArrowedEditEngine: BaseEditEngine
+	public abstract class ArrowedEditEngine : BaseEditEngine
     {
         private Gtk.SeparatorToolItem arrowSep;
         private ToolBarLabel arrowLabel;
@@ -318,7 +318,7 @@ namespace Pinta.Tools
                 {
                     selEngine.Arrow1.Show = showArrowOneBox.Active;
 
-                    DrawShapes(false, false, false);
+                    DrawShapes(false, false, true, false);
                 }
             };
 
@@ -379,7 +379,7 @@ namespace Pinta.Tools
                 {
                     selEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-                    DrawShapes(false, false, false);
+					DrawShapes(false, false, true, false);
                 }
             };
 
@@ -454,7 +454,7 @@ namespace Pinta.Tools
                             selEngine.Arrow1.ArrowSize = newSize;
                             selEngine.Arrow2.ArrowSize = newSize;
 
-                            DrawShapes(false, false, false);
+							DrawShapes(false, false, true, false);
                         }
                     }
                 };
@@ -531,7 +531,7 @@ namespace Pinta.Tools
                             selEngine.Arrow1.AngleOffset = newAngle;
                             selEngine.Arrow2.AngleOffset = newAngle;
 
-                            DrawShapes(false, false, false);
+							DrawShapes(false, false, true, false);
                         }
                     }
                 };
@@ -608,7 +608,7 @@ namespace Pinta.Tools
                             selEngine.Arrow1.LengthOffset = newLength;
                             selEngine.Arrow2.LengthOffset = newLength;
 
-                            DrawShapes(false, false, false);
+							DrawShapes(false, false, true, false);
                         }
                     }
                 };
@@ -665,38 +665,48 @@ namespace Pinta.Tools
         protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
         {
             //Set the new shape's arrow options to be the same as the previous shape's.
-            SetArrowOptions();
+			SetArrowOptions();
+
+
+			base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
         }
 
         protected override void drawExtras(Rectangle? dirty, Context g)
         {
-            //Draw the arrows for all of the shapes.
-            for (int n = 0; n < SEngines.Count; ++n)
-            {
-                PointD[] genPoints = SEngines[n].GeneratedPoints;
+			ShapeEngine activeEngine = ActiveShapeEngine;
 
-                //For each shape currently being drawn/edited by the user.
-                for (int i = 0; i < SEngines[n].ControlPoints.Count; ++i)
-                {
-                    if (((LineCurveSeriesEngine)SEngines[n]).Arrow1.Show)
-                    {
-                        if (genPoints.Length > 1)
-                        {
-                            dirty = dirty.UnionRectangles(((LineCurveSeriesEngine)SEngines[n]).Arrow1.Draw(
-                                g, outlineColor, genPoints[0], genPoints[1]));
-                        }
-                    }
+			if (activeEngine != null && activeEngine.ControlPoints.Count > 0)
+			{
+				//Draw the arrows for the currently active shape.
 
-                    if (((LineCurveSeriesEngine)SEngines[n]).Arrow2.Show)
-                    {
-                        if (genPoints.Length > 1)
-                        {
-                            dirty = dirty.UnionRectangles(((LineCurveSeriesEngine)SEngines[n]).Arrow2.Draw(
-                                g, outlineColor, genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
-                        }
-                    }
-                }
-            }
+				PointD[] genPoints = activeEngine.GeneratedPoints;
+
+				for (int i = 0; i < activeEngine.ControlPoints.Count; ++i)
+				{
+					LineCurveSeriesEngine activeLCSEngine = (LineCurveSeriesEngine)activeEngine;
+
+					if (activeLCSEngine.Arrow1.Show)
+					{
+						if (genPoints.Length > 1)
+						{
+							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow1.Draw(
+								g, outlineColor, genPoints[0], genPoints[1]));
+						}
+					}
+
+					if (activeLCSEngine.Arrow2.Show)
+					{
+						if (genPoints.Length > 1)
+						{
+							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow2.Draw(
+								g, outlineColor, genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
+						}
+					}
+				}
+			}
+
+
+			base.drawExtras(dirty, g);
         }
     }
 }

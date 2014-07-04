@@ -129,34 +129,54 @@ msgid ""
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:71
-#: Pinta.Tools/Editable/EditEngine.cs:221
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:221
 msgid "Fill Style"
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:78
-#: Pinta.Tools/Editable/EditEngine.cs:229
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:229
 msgid "Outline Shape"
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:79
-#: Pinta.Tools/Editable/EditEngine.cs:230
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:230
 msgid "Fill Shape"
 msgstr ""
 
 #: Pinta.Tools/Tools/FreeformShapeTool.cs:80
-#: Pinta.Tools/Editable/EditEngine.cs:231
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:231
 msgid "Fill and Outline Shape"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Editable/EditEngine.cs:186
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:320
+msgid "Shape Type"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:328
+msgid "Open Line/Curve Series"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:329
+msgid "Closed Line/Curve Series"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
+msgid "Ellipse"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+msgid "Rounded Line Series"
+msgstr ""
+
+#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:186
 msgid "Brush width"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Editable/EditEngine.cs:192
+#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:192
 msgid "Decrease brush size"
 msgstr ""
 
-#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Editable/EditEngine.cs:207
+#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:207
 msgid "Increase brush size"
 msgstr ""
 
@@ -2131,23 +2151,23 @@ msgstr ""
 msgid "Increase length offset"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngine.cs:695
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:695
 msgid "Shape Finalized"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngine.cs:904
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:904
 msgid "Shape Point Deleted"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngine.cs:347
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:347
 msgid "Shape Point Added"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngine.cs:395
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:395
 msgid "Shape Added"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngine.cs:477
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:477
 msgid "Shape Modified"
 msgstr ""
 

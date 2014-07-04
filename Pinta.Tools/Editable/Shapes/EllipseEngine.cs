@@ -40,7 +40,8 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public EllipseEngine(UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA, true)
+		public EllipseEngine(UserLayer parentLayer, bool passedAA)
+			: base(parentLayer, BaseEditEngine.ShapeTypes.Ellipse, passedAA, true)
 		{
 			
 		}
@@ -55,7 +56,7 @@ namespace Pinta.Tools
 
 			clonedCE.DashPattern = DashPattern;
 
-			return clonedCE;   
+			return clonedCE;
 		}
 
 		/// <summary>
@@ -201,12 +202,37 @@ namespace Pinta.Tools
 				}
 			}
 			
+			//Make sure everything worked.
 			if (generatedPoints.Count == 0)
 			{
-				//Something went wrong. Just copy the control points.
-				foreach (ControlPoint cp in ControlPoints)
+				//Something went wrong. Just copy the control points. Note: it's important that there be many generated points even if
+				//everything is just a linear connection of control points. This is because the generated points are used in the check
+				//that determines if the mouse clicks on the shape.
+
+				int nextNum;
+
+				PointD currentPoint, nextPoint;
+
+				//Go through each control point.
+				for (int currentNum = 0; currentNum < ControlPoints.Count; ++currentNum)
 				{
-					generatedPoints.Add(cp.Position);
+					//Determine the next control point.
+
+					nextNum = currentNum + 1;
+
+					if (nextNum >= ControlPoints.Count)
+					{
+						nextNum = 0;
+					}
+
+					currentPoint = ControlPoints[currentNum].Position;
+					nextPoint = ControlPoints[nextNum].Position;
+					
+					//Lerp from the current point to the next point.
+					for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f)
+					{
+						generatedPoints.Add(Utility.Lerp(currentPoint, nextPoint, lerpPos));
+					}
 				}
 			}
 

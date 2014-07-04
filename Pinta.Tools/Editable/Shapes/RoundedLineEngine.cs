@@ -35,22 +35,22 @@ namespace Pinta.Tools
 {
 	public class RoundedLineEngine: ShapeEngine
 	{
-		protected RoundedLineEditEngine editEngine;
+		public double Radius;
 
 		/// <summary>
 		/// Create a new RoundedLineEngine.
 		/// </summary>
-		/// <param name="passedEditEngine">The owner EditEngine.</param>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public RoundedLineEngine(RoundedLineEditEngine passedEditEngine, UserLayer parentLayer, bool passedAA): base(parentLayer, passedAA, true)
+		public RoundedLineEngine(UserLayer parentLayer, double passedRadius, bool passedAA)
+			: base(parentLayer, BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true)
 		{
-			editEngine = passedEditEngine;
+			Radius = passedRadius;
 		}
 
 		public override ShapeEngine PartialClone()
 		{
-			RoundedLineEngine clonedCE = new RoundedLineEngine(editEngine, parentLayer, AntiAliasing);
+			RoundedLineEngine clonedCE = new RoundedLineEngine(parentLayer, Radius, AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
@@ -58,7 +58,7 @@ namespace Pinta.Tools
 
 			clonedCE.DashPattern = DashPattern;
 
-			return clonedCE;   
+			return clonedCE;
 		}
 
 		/// <summary>
@@ -68,8 +68,6 @@ namespace Pinta.Tools
 		{
 			List<PointD> generatedPoints = new List<PointD>();
 
-
-			double radius = editEngine.Radius;
 
 			//TO DO: implement the equivalent for this with a calculated bounding box.
 			/*if ((radius > r.Height / 2) || (radius > r.Width / 2))
@@ -101,7 +99,7 @@ namespace Pinta.Tools
 				}
 				else
 				{
-					offsetRatio = radius / distance;
+					offsetRatio = Radius / distance;
 
 					if (offsetRatio > 1d)
 					{
@@ -117,9 +115,6 @@ namespace Pinta.Tools
 
 				//Add each line.
 				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(startPoint, endPoint, endPoint));
-
-
-
 
 
 				//Calculate each rounded corner.
@@ -141,7 +136,7 @@ namespace Pinta.Tools
 				}
 				else
 				{
-					offsetRatio = radius / distance;
+					offsetRatio = Radius / distance;
 
 					if (offsetRatio > 1d)
 					{

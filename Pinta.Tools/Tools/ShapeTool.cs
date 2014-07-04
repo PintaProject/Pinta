@@ -34,7 +34,7 @@ namespace Pinta.Tools
 {
 	public class ShapeTool : BaseTool
 	{
-        protected BaseEditEngine editEngine;
+		public BaseEditEngine EditEngine;
 
 		public ShapeTool()
 		{
@@ -58,48 +58,48 @@ namespace Pinta.Tools
         {
             base.OnBuildToolBar(tb);
 
-            editEngine.HandleBuildToolBar(tb);
+            EditEngine.HandleBuildToolBar(tb);
         }
 
 		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
-            editEngine.HandleMouseDown(canvas, args, point);
+            EditEngine.HandleMouseDown(canvas, args, point);
 		}
 
 		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-            editEngine.HandleMouseUp(canvas, args, point);
+            EditEngine.HandleMouseUp(canvas, args, point);
 		}
 
 		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
 		{
-            editEngine.HandleMouseMove(o, args, point);
+            EditEngine.HandleMouseMove(o, args, point);
 		}
 
         protected override void OnActivated()
         {
-            editEngine.HandleActivated();
+            EditEngine.HandleActivated();
 
             base.OnActivated();
         }
 
 		protected override void OnDeactivated(BaseTool newTool)
         {
-            editEngine.HandleDeactivated(newTool);
+            EditEngine.HandleDeactivated(newTool);
 
             base.OnDeactivated(newTool);
         }
 
         protected override void OnCommit()
         {
-            editEngine.HandleCommit();
+            EditEngine.HandleCommit();
 
             base.OnCommit();
         }
 
         protected override void OnKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
         {
-            if (!editEngine.HandleKeyDown(canvas, args))
+            if (!EditEngine.HandleKeyDown(canvas, args))
             {
                 base.OnKeyDown(canvas, args);
             }
@@ -107,7 +107,7 @@ namespace Pinta.Tools
 
         protected override void OnKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
         {
-            if (!editEngine.HandleKeyUp(canvas, args))
+            if (!EditEngine.HandleKeyUp(canvas, args))
             {
                 base.OnKeyUp(canvas, args);
             }
@@ -115,14 +115,14 @@ namespace Pinta.Tools
 
         public override void AfterUndo()
         {
-            editEngine.HandleAfterUndo();
+            EditEngine.HandleAfterUndo();
 
             base.AfterUndo();
         }
 
         public override void AfterRedo()
         {
-            editEngine.HandleAfterRedo();
+            EditEngine.HandleAfterRedo();
 
             base.AfterRedo();
         }

@@ -36,6 +36,8 @@ namespace Pinta.Tools
 {
     public class RoundedLineEditEngine: BaseEditEngine
     {
+		public const double DefaultRadius = 20d;
+
 		protected ToolBarComboBox radius;
 		protected ToolBarLabel radius_label;
 		protected ToolBarButton radius_minus;
@@ -74,6 +76,15 @@ namespace Pinta.Tools
 			set
 			{
 				(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+
+				RoundedLineEngine selEngine = (RoundedLineEngine)SelectedShapeEngine;
+
+				if (selEngine != null)
+				{
+					selEngine.Radius = Radius;
+
+					DrawShapes(false, false, true, false);
+				}
 			}
 		}
 
@@ -107,7 +118,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			SEngines.Add(new RoundedLineEngine(this, doc.CurrentUserLayer, owner.UseAntialiasing));
+			SEngines.Add(new RoundedLineEngine(doc.CurrentUserLayer, Radius, owner.UseAntialiasing));
 
 			base.addShape();
 		}
@@ -137,9 +148,17 @@ namespace Pinta.Tools
 			tb.AppendItem(radius_minus);
 
 			if (radius == null)
+			{
 				radius = new ToolBarComboBox(65, 16, true, "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
-				"40", "45", "50", "55");
+				"10", "11", "12", "13", "14", "15", "20", "25", "30", "40",
+				"50", "60", "70", "80");
+
+				radius.ComboBox.Changed += (o, e) =>
+				{
+					//Go through the Get/Set routine.
+					Radius = Radius;
+				};
+			}
 
 			tb.AppendItem(radius);
 
@@ -157,26 +176,12 @@ namespace Pinta.Tools
 			if (Math.Truncate(Radius) > 0)
 			{
 				Radius = Math.Truncate(Radius) - 1;
-
-				RoundedLineEngine selEngine = (RoundedLineEngine)SelectedShapeEngine;
-
-				if (selEngine != null)
-				{
-					DrawShapes(false, false, false);
-				}
 			}
 		}
 
 		private void RadiusPlusButtonClickedEvent(object o, EventArgs args)
 		{
 			Radius = Math.Truncate(Radius) + 1;
-
-			RoundedLineEngine selEngine = (RoundedLineEngine)SelectedShapeEngine;
-
-			if (selEngine != null)
-			{
-				DrawShapes(false, false, false);
-			}
 		}
     }
 }

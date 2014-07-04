@@ -83,16 +83,21 @@ namespace Pinta.Tools
 
 		public bool Closed;
 
+		protected BaseEditEngine.ShapeTypes shapeType;
+
 		/// <summary>
 		/// Create a new ShapeEngine.
 		/// </summary>
 		/// <param name="passedParentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedShapeType">The type of shape to create.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
 		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
-		public ShapeEngine(UserLayer passedParentLayer, bool passedAA, bool passedClosed)
+		public ShapeEngine(UserLayer passedParentLayer, BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed)
 		{
 			parentLayer = passedParentLayer;
 			DrawingLayer = new ReEditableLayer(parentLayer);
+
+			shapeType = passedShapeType;
 
 			AntiAliasing = passedAA;
 			Closed = passedClosed;
@@ -105,7 +110,7 @@ namespace Pinta.Tools
 		public abstract ShapeEngine PartialClone();
 		//Overrides should implement at least:
 		/*{
-			ShapeEngine clonedCE = new ShapeEngine(AntiAliasing);
+			ShapeEngine clonedCE = new ShapeEngine(parentLayer, editEngine, AntiAliasing);
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
@@ -115,6 +120,49 @@ namespace Pinta.Tools
 
 			return clonedCE;
 		}*/
+
+		/// <summary>
+		/// Converts the ShapeEngine instance into a new instance of a different ShapeEngine (child) type, copying the common data.
+		/// </summary>
+		/// <param name="newShapeType">The new ShapeEngine type to create.</param>
+		/// <returns>A new ShapeEngine instance of the specified type with the common data copied over.</returns>
+		public ShapeEngine GenericClone(BaseEditEngine.ShapeTypes newShapeType)
+		{
+			//Remove the old ShapeEngine instance.
+			BaseEditEngine.SEngines.Remove(this);
+			DrawingLayer.Layer.Clear();
+
+			ShapeEngine clonedEngine;
+
+			switch (newShapeType)
+			{
+				case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
+					clonedEngine = new LineCurveSeriesEngine(parentLayer, newShapeType, AntiAliasing, true);
+					break;
+				case BaseEditEngine.ShapeTypes.Ellipse:
+					clonedEngine = new EllipseEngine(parentLayer, AntiAliasing);
+					break;
+				case BaseEditEngine.ShapeTypes.RoundedLineSeries:
+					clonedEngine = new RoundedLineEngine(parentLayer, RoundedLineEditEngine.DefaultRadius, AntiAliasing);
+					break;
+				default:
+					//Defaults to OpenLineCurveSeries.
+					clonedEngine = new LineCurveSeriesEngine(parentLayer, newShapeType, AntiAliasing, false);
+
+					break;
+			}
+
+			clonedEngine.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
+
+			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
+			
+			clonedEngine.DashPattern = DashPattern;
+
+			//Add the new ShapeEngine instance.
+			BaseEditEngine.SEngines.Add(clonedEngine);
+
+			return clonedEngine;
+		}
 
         /// <summary>
         /// Generate the points that make up the entirety of the shape being drawn.

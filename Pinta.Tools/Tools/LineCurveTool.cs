@@ -67,7 +67,7 @@ namespace Pinta.Tools
 
         public LineCurveTool()
         {
-			editEngine = new LineCurveEditEngine(this);
+			EditEngine = new LineCurveEditEngine(this);
         }
 	}
 }
