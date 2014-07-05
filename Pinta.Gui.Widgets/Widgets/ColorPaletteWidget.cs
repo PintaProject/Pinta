@@ -38,7 +38,11 @@ namespace Pinta.Gui.Widgets
 		private Rectangle secondary_rect = new Rectangle (22, 22, 30, 30);
 		private Rectangle swap_rect = new Rectangle (37, 6, 15, 15);
 		private Rectangle reset_rect = new Rectangle (7, 37, 15, 15);
-		
+
+        private const int swatch_width = 15;
+        private const int swatch_height = 15;
+        private const int swatch_area_margin = 7;
+
 		private Gdk.Pixbuf swap_icon;
 		private Gdk.Pixbuf reset_icon;
 		private Palette palette;
@@ -169,12 +173,14 @@ namespace Pinta.Gui.Widgets
 				g.DrawPixbuf (reset_icon, reset_rect.Location ());
 				
 				// Draw swatches
-				int roundedCount = (palette.Count % 3 == 0) ?
-					palette.Count : palette.Count + 3 - (palette.Count % 3);
-				
+                int noOfCols = (this.Allocation.Width - 2 * swatch_area_margin) / swatch_width;
+
+                int roundedCount = (palette.Count % noOfCols == 0) ?
+                    palette.Count : palette.Count + noOfCols - (palette.Count % noOfCols);
+
 				for (int i = 0; i < palette.Count; i++) {
-					int x = 7 + 15 * (i / (roundedCount / 3));
-					int y = 60 +15 * (i % (roundedCount / 3));
+					int x = swatch_area_margin + swatch_width * (i / (roundedCount / noOfCols));
+					int y = 60 + swatch_height * (i % (roundedCount / noOfCols));
 					
 					g.FillRectangle (new Rectangle (x, y, 15, 15), palette[i]);
 				}
