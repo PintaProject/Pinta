@@ -173,14 +173,29 @@ namespace Pinta.Gui.Widgets
 				g.DrawPixbuf (reset_icon, reset_rect.Location ());
 				
 				// Draw swatches
-                int noOfCols = (this.Allocation.Width - 2 * swatch_area_margin) / swatch_width;
+                int noOfCols;
+                int swatch_start_y;
+                int swatch_start_x;
+
+                if (Allocation.Height > Allocation.Width)
+                {
+                    noOfCols = Math.Max((this.Allocation.Width - 2 * swatch_area_margin) / swatch_width, 3);
+                    swatch_start_x = swatch_area_margin;
+                    swatch_start_y = 60;
+                }
+                else
+                {
+                    noOfCols = (Allocation.Width - 60 - swatch_area_margin) / swatch_width;
+                    swatch_start_x = 60;
+                    swatch_start_y = swatch_area_margin;
+                }
 
                 int roundedCount = (palette.Count % noOfCols == 0) ?
-                    palette.Count : palette.Count + noOfCols - (palette.Count % noOfCols);
+                   palette.Count : palette.Count + noOfCols - (palette.Count % noOfCols);
 
 				for (int i = 0; i < palette.Count; i++) {
-					int x = swatch_area_margin + swatch_width * (i / (roundedCount / noOfCols));
-					int y = 60 + swatch_height * (i % (roundedCount / noOfCols));
+					int x = swatch_start_x + swatch_width * (i / (roundedCount / noOfCols));
+					int y = swatch_start_y + swatch_height * (i % (roundedCount / noOfCols));
 					
 					g.FillRectangle (new Rectangle (x, y, 15, 15), palette[i]);
 				}
@@ -192,7 +207,7 @@ namespace Pinta.Gui.Widgets
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
 			// Calculate desired size here.
-			requisition.Height = 305;
+			requisition.Height = 60;
 			requisition.Width = 60;
 		}
 		

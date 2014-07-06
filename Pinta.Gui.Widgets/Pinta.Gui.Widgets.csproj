@@ -85,6 +85,7 @@
     <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
     <Compile Include="Widgets\ColorPanelWidget.cs" />
+    <Compile Include="WrappingPaletteContainer.cs" />
     <Compile Include="Widgets\History\HistoryTreeView.cs" />
     <Compile Include="Widgets\HScaleSpinButtonWidget.cs" />
     <Compile Include="Dialogs\SimpleEffectDialog.cs" />
