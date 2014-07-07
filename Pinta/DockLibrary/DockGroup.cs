@@ -404,7 +404,14 @@ namespace MonoDevelop.Components.Docking
 				CalcNewSizes ();
 			}
 			else if (allocStatus != AllocStatus.NewSizeRequest) {
-				// Available space has changed, so the size of the items must be changed.
+
+                // Don't proportionally resize the pads. Instead, resize only those pads with the Expand flag.
+				// This logic is implemented in CalcNewSizes, so no need to reimplement it
+				CalcNewSizes ();
+
+				// Disabled the proportional resize of pads for the above reason
+
+/*				// Available space has changed, so the size of the items must be changed.
 				// First of all, get the change fraction
 				double change;
 				if (horiz)
@@ -433,7 +440,7 @@ namespace MonoDevelop.Components.Docking
 					}
 					ob.DefaultSize = ob.DefaultSize * change;
 				}
-				CheckMinSizes ();
+				CheckMinSizes ();*/
 			}
 
 			allocStatus = AllocStatus.Valid;
