@@ -679,6 +679,14 @@ namespace Pinta.Tools
                 ChangingTension = true;
             }
 
+
+			int closestCPIndex, closestCPShapeIndex;
+			ControlPoint closestControlPoint;
+			double closestCPDistance;
+
+			SEngines.FindClosestControlPoint(currentPoint,
+				out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+
             int closestShapeIndex, closestPointIndex;
             PointD closestPoint;
             double closestDistance;
@@ -686,34 +694,43 @@ namespace Pinta.Tools
             OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
                 out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
 
-			//TO DO: Also check for direct control point clicks.
-
             bool clickedOnControlPoint = false;
 
-            //Determine if the user clicked close enough to a line, shape, or point that's currently being drawn/edited by the user.
-            if (closestDistance < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
-            {
-                //User clicked on a generated point on a shape.
+			double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
 
-                List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+			//Determine if the closest ControlPoint is within the expected click range.
+			if (closestControlPoint != null && closestCPDistance < currentClickRange)
+			{
+				//User clicked directly on a ControlPoint on a shape.
 
-                //Note: compare the currentPoint's distance here because it's the actual mouse position.
-                if (controlPoints.Count > closestPointIndex &&
-                    currentPoint.Distance(controlPoints[closestPointIndex].Position) < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
-                {
-                    //User clicked on a control point (on the "previous order" side of the point).
+				ClickedWithoutModifying = true;
 
-                    ClickedWithoutModifying = true;
+				SelectedPointIndex = closestCPIndex;
+				SelectedShapeIndex = closestCPShapeIndex;
 
-                    SelectedPointIndex = closestPointIndex;
-                    SelectedShapeIndex = closestShapeIndex;
+				clickedOnControlPoint = true;
+			}
+			else if (closestDistance < currentClickRange) //Determine if the user clicked close enough to a shape.
+			{
+				//User clicked on a generated point on a shape.
 
-                    clickedOnControlPoint = true;
-                }
-                else if (closestPointIndex > 0)
+				List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+
+				//Note: compare the currentPoint's distance here because it's the actual mouse position.
+				if (controlPoints.Count > closestPointIndex && currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
 				{
-					if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position)
-						< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+					//User clicked on a control point (on the "previous order" side of the point).
+
+					ClickedWithoutModifying = true;
+
+					SelectedPointIndex = closestPointIndex;
+					SelectedShapeIndex = closestShapeIndex;
+
+					clickedOnControlPoint = true;
+				}
+				else if (closestPointIndex > 0)
+				{
+					if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
 					{
 						//User clicked on a control point (on the "following order" side of the point).
 
@@ -724,8 +741,7 @@ namespace Pinta.Tools
 
 						clickedOnControlPoint = true;
 					}
-					else if (controlPoints.Count > 0 && currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position)
-						< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+					else if (controlPoints.Count > 0 && currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
 					{
 						//User clicked on a control point (on the "following order" side of the point).
 
@@ -738,30 +754,30 @@ namespace Pinta.Tools
 					}
 				}
 
-                //Don't change anything here if right clicked.
-                if (!ChangingTension)
-                {
-                    if (!clickedOnControlPoint)
-                    {
-                        //User clicked on a non-control point on a shape.
+				//Check for clicking on a non-control point. Don't do anything here if right clicked.
+				if (!ChangingTension)
+				{
+					if (!clickedOnControlPoint)
+					{
+						//User clicked on a non-control point on a shape.
 
-                        //Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
-                        doc.History.PushNewItem(
+						//Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
+						doc.History.PushNewItem(
 							new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
 
-                        controlPoints.Insert(closestPointIndex,
-                            new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
+						controlPoints.Insert(closestPointIndex,
+							new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
 
-                        SelectedPointIndex = closestPointIndex;
-                        SelectedShapeIndex = closestShapeIndex;
-                    }
-                }
-            }
+						SelectedPointIndex = closestPointIndex;
+						SelectedShapeIndex = closestShapeIndex;
+					}
+				}
+			}
 
             bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
 
             //Create a new shape if the user simply clicks outside of any shapes or if the user control + clicks on an existing point.
-            if (!ChangingTension && ((ctrlKey && clickedOnControlPoint) || closestDistance >= ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor))
+			if (!ChangingTension && ((ctrlKey && clickedOnControlPoint) || (closestCPDistance >= currentClickRange && closestDistance >= currentClickRange)))
             {
                 PointD prevSelPoint;
 
@@ -801,7 +817,7 @@ namespace Pinta.Tools
             }
 
             //If the user right clicks outside of any shapes.
-            if (closestDistance >= ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor && ChangingTension)
+			if ((closestCPDistance >= currentClickRange && closestDistance >= currentClickRange) && ChangingTension)
             {
                 ClickedWithoutModifying = true;
             }
@@ -862,8 +878,7 @@ namespace Pinta.Tools
                         //Moving a control point.
 
                         //Make sure the control point was moved.
-						if (currentPoint.X != selPoint.Position.X
-							|| currentPoint.Y != selPoint.Position.Y)
+						if (currentPoint.X != selPoint.Position.X || currentPoint.Y != selPoint.Position.Y)
                         {
                             movePoint(controlPoints);
                         }
@@ -1111,32 +1126,47 @@ namespace Pinta.Tools
 				//Only calculate the hover point when there isn't a request to organize the generated points by spatial hashing.
 				if (!calculateOrganizedPoints)
 				{
-					//Calculate the hover point, if any.
-
-					int closestShapeIndex, closestPointIndex;
-					PointD closestPoint;
-					double closestDistance;
-
-					OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-						out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
-
-					//TO DO: also check for direct control point clicks.
-
-					List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
-
 					if (drawHoverSelection)
 					{
-						//Determine if the user is hovering the mouse close enough to a line,
-						//shape, or point that's currently being drawn/edited by the user.
-						if (closestDistance < ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+						//Calculate the hover point, if any.
+
+						int closestCPIndex, closestCPShapeIndex;
+						ControlPoint closestControlPoint;
+						double closestCPDistance;
+
+						SEngines.FindClosestControlPoint(currentPoint,
+							out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+
+						int closestShapeIndex, closestPointIndex;
+						PointD closestPoint;
+						double closestDistance;
+
+						OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
+							out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+
+						bool clickedOnControlPoint = false;
+
+						double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
+
+						List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+
+						//Determine if the closest ControlPoint is within the expected click range.
+						if (closestControlPoint != null && closestCPDistance < currentClickRange)
+						{
+							//User clicked directly on a ControlPoint on a shape.
+
+							HoverPoint.X = closestControlPoint.Position.X;
+							HoverPoint.Y = closestControlPoint.Position.Y;
+							HoveredPointAsControlPoint = closestCPIndex;
+						}
+						else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
 						{
 							//User is hovering over a generated point on a shape.
 
 							if (controlPoints.Count > closestPointIndex)
 							{
 								//Note: compare the currentPoint's distance here because it's the actual mouse position.
-								if (currentPoint.Distance(controlPoints[closestPointIndex].Position)
-									< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+								if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
 								{
 									//Mouse hovering over a control point (on the "previous order" side of the point).
 
@@ -1146,8 +1176,7 @@ namespace Pinta.Tools
 								}
 								else if (closestPointIndex > 0)
 								{
-									if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position)
-										< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+									if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
 									{
 										//Mouse hovering over a control point (on the "following order" side of the point).
 
@@ -1156,8 +1185,8 @@ namespace Pinta.Tools
 										HoveredPointAsControlPoint = closestPointIndex - 1;
 									}
 								}
-								else if (controlPoints.Count > 0 && currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position)
-									< ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor)
+								else if (controlPoints.Count > 0 &&
+									currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
 								{
 									//Mouse hovering over a control point (on the "following order" side of the point).
 
@@ -1176,7 +1205,7 @@ namespace Pinta.Tools
 					}
 					else
 					{
-						//Reset the hover point.
+						//Reset the hover point. NOTE: this is necessary even though the hover point is reset later. It affects the DrawShape call.
 						HoverPoint = new PointD(-1d, -1d);
 						HoveredPointAsControlPoint = -1;
 					}

@@ -119,16 +119,16 @@ namespace Pinta.Tools
 
 
 		/// <summary>
-		/// Efficiently calculate the closest point (to currentPoint) on the shape.
+		/// Efficiently calculate the closest point (to currentPoint) on the shapes.
 		/// </summary>
-        /// <param name="CEL">The List of ShapeEngines to search through.</param>
+        /// <param name="SEL">The List of ShapeEngines to search through.</param>
 		/// <param name="currentPoint">The point to calculate the closest point to.</param>
 		/// <param name="closestShapeIndex">The index of the shape with the closest point.</param>
 		/// <param name="closestPointIndex">The index of the closest point (in the closest shape).</param>
 		/// <param name="closestPoint">The position of the closest point.</param>
 		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
 		public static void FindClosestPoint(
-            List<ShapeEngine> CEL,
+            List<ShapeEngine> SEL,
 			PointD currentPoint,
 			out int closestShapeIndex, out int closestPointIndex,
 			out PointD closestPoint, out double closestDistance)
@@ -140,9 +140,9 @@ namespace Pinta.Tools
 
 			double currentDistance = double.MaxValue;
 
-			for (int n = 0; n < CEL.Count; ++n)
+			for (int n = 0; n < SEL.Count; ++n)
 			{
-				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = CEL[n].OrganizedPoints.collection;
+				Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = SEL[n].OrganizedPoints.collection;
 
 				//Calculate the current_point's corresponding *center* section.
 				int sX = (int)((currentPoint.X - currentPoint.X % SectionSize) / SectionSize);

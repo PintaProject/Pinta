@@ -62,6 +62,44 @@ namespace Pinta.Tools
 		{
 			return new ShapeEngineCollection(this);
 		}
+
+
+		/// <summary>
+		/// Calculate the closest ControlPoint to currentPoint.
+		/// </summary>
+		/// <param name="currentPoint">The point to calculate the closest ControlPoint to.</param>
+		/// <param name="closestCPShapeIndex">The index of the shape with the closest ControlPoint.</param>
+		/// <param name="closestCPIndex">The index of the closest ControlPoint.</param>
+		/// <param name="closestControlPoint">The closest ControlPoint to currentPoint.</param>
+		/// <param name="closestCPDistance">The closest ControlPoint's distance from currentPoint.</param>
+		public void FindClosestControlPoint(PointD currentPoint,
+			out int closestCPShapeIndex, out int closestCPIndex, out ControlPoint closestControlPoint, out double closestCPDistance)
+		{
+			closestCPShapeIndex = 0;
+			closestCPIndex = 0;
+			closestControlPoint = null;
+			closestCPDistance = double.MaxValue;
+
+			double currentDistance;
+
+			for (int shapeIndex = 0; shapeIndex < Count; ++shapeIndex)
+			{
+				List<ControlPoint> controlPoints = this[shapeIndex].ControlPoints;
+
+				for (int cPIndex = 0; cPIndex < controlPoints.Count; ++cPIndex)
+				{
+					currentDistance = controlPoints[cPIndex].Position.Distance(currentPoint);
+
+					if (currentDistance < closestCPDistance)
+					{
+						closestCPShapeIndex = shapeIndex;
+						closestCPIndex = cPIndex;
+						closestControlPoint = controlPoints[cPIndex];
+						closestCPDistance = currentDistance;
+					}
+				}
+			}
+		}
 	}
 
 	public abstract class ShapeEngine
