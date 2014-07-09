@@ -166,13 +166,13 @@ namespace Pinta.Tools
 					//ellipse. For each curve, t will go from tInterval to 1. The lower
 					//the value of tInterval, the higher number of intermediate Points
 					//that will be calculated and stored into the Polygon collection.
-					double tInterval = 1d / (width + height);
+					double tInterval = .02d;
 
 					double rx = width / 2d; //1/2 of the bounding Rectangle Width.
 					double ry = height / 2d; //1/2 of the bounding Rectangle Height.
 					double cx = topLeft.X + rx; //The middle of the bounding Rectangle, horizontally speaking.
 					double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
-					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d = 0.5522847498307933984022516322796d
+					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
 					generatedPoints.Add(new PointD(cx + rx, cy));
 
@@ -199,6 +199,21 @@ namespace Pinta.Tools
 						cx + c1 * rx, cy + ry,
 						cx + rx, cy + c1 * ry,
 						cx + rx, cy));
+
+					if (DashPattern == "-")
+					{
+						//Overlap to prevent a "crack" at the start of the ellipse.
+						generatedPoints.AddRange(calculateCurvePoints(tInterval,
+						cx + rx, cy,
+						cx + rx, cy - c1 * ry,
+						cx + c1 * rx, cy - ry,
+						cx, cy - ry));
+					}
+					else
+					{
+						//Don't overlap if there is a dash pattern.
+						generatedPoints.Add(new PointD(cx + rx, cy));
+					}
 				}
 			}
 			
