@@ -1,5 +1,5 @@
 ﻿// 
-// ShapeModifyHistoryItem.cs
+// ShapesModifyHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
@@ -30,7 +30,7 @@ using Cairo;
 
 namespace Pinta.Tools
 {
-	public class ShapeModifyHistoryItem : BaseHistoryItem
+	public class ShapesModifyHistoryItem : BaseHistoryItem
 	{
         private BaseEditEngine ee;
 
@@ -44,7 +44,7 @@ namespace Pinta.Tools
         /// <param name="passedEE">The EditEngine being used.</param>
 		/// <param name="icon">The history item's icon.</param>
 		/// <param name="text">The history item's title.</param>
-		public ShapeModifyHistoryItem(BaseEditEngine passedEE, string icon, string text) : base(icon, text)
+		public ShapesModifyHistoryItem(BaseEditEngine passedEE, string icon, string text) : base(icon, text)
 		{
             ee = passedEE;
 

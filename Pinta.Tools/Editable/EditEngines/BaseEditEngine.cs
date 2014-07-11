@@ -64,7 +64,6 @@ namespace Pinta.Tools
         protected ToolBarDropDownButton fillButton;
         protected Gtk.SeparatorToolItem fillSep;
         protected Rectangle lastDirty;
-        protected ImageSurface undoSurface;
         protected bool surfaceModified;
 
 		protected ToolBarLabel shapeTypeLabel;
@@ -384,7 +383,6 @@ namespace Pinta.Tools
 			else
 			{
 				//Redraw the previous shape without any hover or selection points.
-
 				DrawShapes(false, false, false, false);
 
 				//Then deselect (if needed).
@@ -417,7 +415,6 @@ namespace Pinta.Tools
                 (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
             }
 
-
             //Draw the current state.
             DrawShapes(true, false, true, false);
         }
@@ -448,22 +445,19 @@ namespace Pinta.Tools
             {
                 if (SelectedPointIndex > -1)
                 {
-                    //Create a new ShapeModifyHistoryItem so that the deletion of a control point can be undone.
-                    PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-                        new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Deleted")));
-
-
                     List<ControlPoint> controlPoints = SelectedShapeEngine.ControlPoints;
 
-
-                    undoSurface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-
-                    //Delete the selected point from the shape.
-                    controlPoints.RemoveAt(SelectedPointIndex);
-
-                    //Set the newly selected point to be the median-most point on the shape, order-wise.
-                    if (controlPoints.Count > 0)
+					//Either delete a ControlPoint or an entire shape (if there's only 1 ControlPoint left).
+                    if (controlPoints.Count > 1)
                     {
+						//Create a new ShapeModifyHistoryItem so that the deletion of a control point can be undone.
+						PintaCore.Workspace.ActiveDocument.History.PushNewItem(
+							new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Deleted")));
+
+						//Delete the selected point from the shape.
+						controlPoints.RemoveAt(SelectedPointIndex);
+
+						//Set the newly selected point to be the median-most point on the shape, order-wise.
                         if (SelectedPointIndex > controlPoints.Count / 2)
                         {
                             --SelectedPointIndex;
@@ -471,7 +465,24 @@ namespace Pinta.Tools
                     }
                     else
                     {
+						Document doc = PintaCore.Workspace.ActiveDocument;
+
+						//Create a new ShapeHistoryItem so that the deletion of a shape can be undone.
+						doc.History.PushNewItem(
+							new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Deleted"),
+								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
+
+						//Clear the drawing of the shape.
+						SEngines[SelectedShapeIndex].DrawingLayer.Layer.Clear();
+
+						//Delete the selected shape.
+						SEngines.RemoveAt(SelectedShapeIndex);
+
+						//Redraw the workspace.
+						doc.Workspace.Invalidate();
+
                         SelectedPointIndex = -1;
+						--SelectedShapeIndex;
                     }
 
                     surfaceModified = true;
@@ -501,7 +512,7 @@ namespace Pinta.Tools
 
                     //Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
+						new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
 
 
                     bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
@@ -763,7 +774,7 @@ namespace Pinta.Tools
 
 						//Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
 						doc.History.PushNewItem(
-							new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
+							new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
@@ -776,7 +787,7 @@ namespace Pinta.Tools
 
             bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
 
-            //Create a new shape if the user simply clicks outside of any shapes or if the user control + clicks on an existing point.
+			//Create a new shape if the user control + clicks on an existing point or if the user simply clicks outside of any shapes.
 			if (!ChangingTension && ((ctrlKey && clickedOnControlPoint) || (closestCPDistance >= currentClickRange && closestDistance >= currentClickRange)))
             {
                 PointD prevSelPoint;
@@ -793,7 +804,13 @@ namespace Pinta.Tools
                 }
 
 
+				//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
+				doc.History.PushNewItem(
+					new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
+						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
+
 				addShape();
+
 
                 ShapeEngine activeEngine = ActiveShapeEngine;
 
@@ -803,13 +820,7 @@ namespace Pinta.Tools
 					//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
 					if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
 					{
-						//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
-						doc.History.PushNewItem(
-							new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
-								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
-
 						isDrawing = true;
-
 
 						createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
 					}
@@ -866,7 +877,7 @@ namespace Pinta.Tools
                     {
                         //Create a new ShapeModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
-							new ShapeModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Modified")));
+							new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Modified")));
 
                         ClickedWithoutModifying = false;
                     }
@@ -1114,7 +1125,7 @@ namespace Pinta.Tools
 				if (undoSurface != null)
 				{
 					//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-					doc.History.PushNewItem(new ShapeHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
 							undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, previousSelectedShapeIndex));
 				}
 
@@ -1353,11 +1364,6 @@ namespace Pinta.Tools
 
 			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
 			currentPoint = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
-		}
-		
-		protected virtual BaseHistoryItem CreateHistoryItem()
-		{
-			return new SimpleHistoryItem(owner.Icon, owner.Name, undoSurface, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
 		}
 
 		protected void resetShapes()

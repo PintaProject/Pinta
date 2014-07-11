@@ -2155,8 +2155,12 @@ msgstr ""
 msgid "Shape Finalized"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:904
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:456
 msgid "Shape Point Deleted"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:473
+msgid "Shape Deleted"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:347

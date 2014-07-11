@@ -83,7 +83,7 @@
     <Compile Include="Editable\Shapes\OrganizedPointCollection.cs" />
     <Compile Include="Editable\Shapes\EllipseEngine.cs" />
     <Compile Include="Editable\Shapes\ShapeEngineCollection.cs" />
-    <Compile Include="HistoryItems\ShapeModifyHistoryItem.cs" />
+    <Compile Include="HistoryItems\ShapesModifyHistoryItem.cs" />
     <Compile Include="HistoryItems\ShapesHistoryItem.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Brushes\SplatterBrush.cs" />
