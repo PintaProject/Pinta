@@ -318,7 +318,7 @@ namespace Pinta.Tools
                 {
                     selEngine.Arrow1.Show = showArrowOneBox.Active;
 
-                    DrawShapes(false, false, true, false);
+                    DrawActiveShape(false, false, true, false);
                 }
             };
 
@@ -379,7 +379,7 @@ namespace Pinta.Tools
                 {
                     selEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-					DrawShapes(false, false, true, false);
+					DrawActiveShape(false, false, true, false);
                 }
             };
 
@@ -454,7 +454,7 @@ namespace Pinta.Tools
                             selEngine.Arrow1.ArrowSize = newSize;
                             selEngine.Arrow2.ArrowSize = newSize;
 
-							DrawShapes(false, false, true, false);
+							DrawActiveShape(false, false, true, false);
                         }
                     }
                 };
@@ -531,7 +531,7 @@ namespace Pinta.Tools
                             selEngine.Arrow1.AngleOffset = newAngle;
                             selEngine.Arrow2.AngleOffset = newAngle;
 
-							DrawShapes(false, false, true, false);
+							DrawActiveShape(false, false, true, false);
                         }
                     }
                 };
@@ -608,7 +608,7 @@ namespace Pinta.Tools
                             selEngine.Arrow1.LengthOffset = newLength;
                             selEngine.Arrow2.LengthOffset = newLength;
 
-							DrawShapes(false, false, true, false);
+							DrawActiveShape(false, false, true, false);
                         }
                     }
                 };
@@ -659,22 +659,14 @@ namespace Pinta.Tools
 
         public ArrowedEditEngine(BaseTool passedOwner): base(passedOwner)
         {
-
-        }
-
-        protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
-        {
-            //Set the new shape's arrow options to be the same as the previous shape's.
+			//Set the new shape's arrow options to be the same as what's in the toolbar settings.
 			SetArrowOptions();
-
-
-			base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
         }
 
         protected override void drawExtras(Rectangle? dirty, Context g)
         {
 			ShapeEngine activeEngine = ActiveShapeEngine;
-
+			
 			if (activeEngine != null && activeEngine.ControlPoints.Count > 0)
 			{
 				//Draw the arrows for the currently active shape.
@@ -690,7 +682,7 @@ namespace Pinta.Tools
 						if (genPoints.Length > 1)
 						{
 							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow1.Draw(
-								g, outlineColor, genPoints[0], genPoints[1]));
+								g, activeLCSEngine.OutlineColor, genPoints[0], genPoints[1]));
 						}
 					}
 
@@ -699,12 +691,11 @@ namespace Pinta.Tools
 						if (genPoints.Length > 1)
 						{
 							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow2.Draw(
-								g, outlineColor, genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
+								g, activeLCSEngine.OutlineColor, genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
 						}
 					}
 				}
 			}
-
 
 			base.drawExtras(dirty, g);
         }

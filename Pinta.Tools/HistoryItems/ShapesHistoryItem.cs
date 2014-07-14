@@ -91,15 +91,12 @@ namespace Pinta.Tools
 		private void Swap()
 		{
 			// Grab the original surface
-			ImageSurface surf = PintaCore.Workspace.ActiveDocument.ToolLayer.Surface;
-
-
-			// Grab the original surface
-			surf = userLayer.Surface;
+			ImageSurface surf = userLayer.Surface;
 
 			if (userSurfaceDiff != null)
 			{
 				userSurfaceDiff.ApplyAndSwap(surf);
+
 				PintaCore.Workspace.Invalidate(userSurfaceDiff.GetBounds());
 			}
 			else
@@ -109,21 +106,43 @@ namespace Pinta.Tools
 
 				// Store the original surface for Redo
 				userSurface = surf;
+
+				//Redraw everything since surfaces were swapped.
+				PintaCore.Workspace.Invalidate();
 			}
 
 
-			//Redraw everything since surfaces were swapped.
-			PintaCore.Workspace.Invalidate();
-
-
 			//Store the old shape data temporarily.
-			ShapeEngineCollection oldSEngine = sEngines;
+			ShapeEngineCollection oldSEngines = sEngines;
 
 			//Swap half of the data.
 			sEngines = BaseEditEngine.SEngines;
 
 			//Swap the other half.
-			BaseEditEngine.SEngines = oldSEngine;
+			BaseEditEngine.SEngines = oldSEngines;
+
+
+			//Ensure that all of the shapes that should no longer be drawn have their ReEditableLayer removed from the drawing loop.
+			foreach (ShapeEngine se in sEngines)
+			{
+				//Determine if it is currently in the drawing loop and should no longer be. Note: a DrawingLayer could be both removed and then
+				//later added in the same swap operation, but this is faster than looping through each ShapeEngine in BaseEditEngine.SEngines.
+				if (se.DrawingLayer.InTheLoop && !BaseEditEngine.SEngines.Contains(se))
+				{
+					se.DrawingLayer.TryRemoveLayer();
+				}
+			}
+
+
+			//Ensure that all of the shapes that should now be drawn have their ReEditableLayer in the drawing loop.
+			foreach (ShapeEngine se in BaseEditEngine.SEngines)
+			{
+				//Determine if it is currently out of the drawing loop; if not, it should be.
+				if (!se.DrawingLayer.InTheLoop)
+				{
+					se.DrawingLayer.TryAddLayer();
+				}
+			}
 
 
 			//Swap the selected point data.

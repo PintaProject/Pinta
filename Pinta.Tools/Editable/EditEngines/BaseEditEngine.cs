@@ -51,10 +51,14 @@ namespace Pinta.Tools
 
         protected bool isDrawing = false;
 
+		protected Rectangle? lastDirty = null;
+		protected Rectangle? lastHover = null;
+
+		protected double lastControlPointSize = 0d;
+
         protected PointD shapeOrigin;
         protected PointD currentPoint;
-        protected Color outlineColor;
-        protected Color fillColor;
+		public static Color OutlineColor, FillColor;
 
         protected ToolBarComboBox brushWidth;
         protected ToolBarLabel brushWidthLabel;
@@ -63,15 +67,12 @@ namespace Pinta.Tools
         protected ToolBarLabel fillLabel;
         protected ToolBarDropDownButton fillButton;
         protected Gtk.SeparatorToolItem fillSep;
-        protected Rectangle lastDirty;
-        protected bool surfaceModified;
 
 		protected ToolBarLabel shapeTypeLabel;
 		protected ToolBarDropDownButton shapeTypeButton;
 		protected Gtk.SeparatorToolItem shapeTypeSep;
 
         protected DashPatternBox dashPBox = new DashPatternBox();
-
 
         protected int BrushWidth
         {
@@ -99,8 +100,7 @@ namespace Pinta.Tools
 
         public bool ShowStrokeComboBox = true;
 
-
-        public static readonly Color HoverColor =
+        protected static readonly Color hoverColor =
             new Color(ToolControl.FillColor.R / 2d, ToolControl.FillColor.G / 2d, ToolControl.FillColor.B / 2d, ToolControl.FillColor.A * 2d / 3d);
 
 		public const double ShapeClickStartingRange = 10d;
@@ -108,40 +108,8 @@ namespace Pinta.Tools
 		public const double DefaultEndPointTension = 0d;
 		public const double DefaultMidPointTension = 1d / 3d;
 
-
-		private int sPI, sSI;
-
-        public int SelectedPointIndex
-		{
-			get
-			{
-				return sPI;
-			}
-
-			set
-			{
-				//Clear the old selection.
-				DrawShapes(false, false, false, false);
-
-				sPI = value;
-			}
-		}
-
-		public int SelectedShapeIndex
-		{
-			get
-			{
-				return sSI;
-			}
-
-			set
-			{
-				//Clear the old selection.
-				DrawShapes(false, false, false, false);
-
-				sSI = value;
-			}
-		}
+		public int SelectedPointIndex, SelectedShapeIndex;
+		private int previousSelectedShapeIndex;
 
         /// <summary>
         /// The selected ControlPoint.
@@ -173,41 +141,41 @@ namespace Pinta.Tools
             }
         }
 
-        /// <summary>
-        /// The active shape's ShapeEngine.
-        /// </summary>
+		/// <summary>
+		/// The active shape's ShapeEngine. A point does not have to be selected here, only a shape. This can be null.
+		/// </summary>
 		public ShapeEngine ActiveShapeEngine
-        {
-            get
-            {
-                if (SelectedShapeIndex > -1 && SEngines.Count > SelectedShapeIndex)
-                {
-                    return SEngines[SelectedShapeIndex];
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
+		{
+			get
+			{
+				if (SelectedShapeIndex > -1 && SEngines.Count > SelectedShapeIndex)
+				{
+					return SEngines[SelectedShapeIndex];
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
 
-        /// <summary>
-        /// The selected shape's ShapeEngine. This can be null.
-        /// </summary>
+		/// <summary>
+		/// The selected shape's ShapeEngine. This requires that a point in the shape be selected and should be used in most cases. This can be null.
+		/// </summary>
 		public ShapeEngine SelectedShapeEngine
-        {
-            get
-            {
-                if (SelectedPointIndex > -1)
-                {
-                    return ActiveShapeEngine;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
+		{
+			get
+			{
+				if (SelectedPointIndex > -1)
+				{
+					return ActiveShapeEngine;
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
 
 		public PointD HoverPoint = new PointD(-1d, -1d);
 		public int HoveredPointAsControlPoint = -1;
@@ -215,10 +183,8 @@ namespace Pinta.Tools
 		public bool ChangingTension = false;
 		public PointD LastMousePosition = new PointD(0d, 0d);
 
-
         //Helps to keep track of the first modification on a shape after the mouse is clicked, to prevent unnecessary history items.
 		public bool ClickedWithoutModifying = false;
-
 
         //Stores the editable shape data.
 		public static ShapeEngineCollection SEngines = new ShapeEngineCollection();
@@ -231,14 +197,14 @@ namespace Pinta.Tools
             if (BrushWidth > 1)
                 BrushWidth--;
 
-            DrawShapes(false, false, true, false);
+            DrawActiveShape(false, false, true, false);
         }
 
         protected virtual void BrushPlusButtonClickedEvent(object o, EventArgs args)
         {
             BrushWidth++;
 
-            DrawShapes(false, false, true, false);
+            DrawActiveShape(false, false, true, false);
         }
 
         #endregion ToolbarEventHandlers
@@ -331,15 +297,15 @@ namespace Pinta.Tools
 
 				shapeTypeButton.SelectedItemChanged += (o, e) =>
 				{
-					ShapeEngine activeEngine = ActiveShapeEngine;
+					ShapeEngine selEngine = SelectedShapeEngine;
 
-					if (activeEngine != null)
+					if (selEngine != null)
 					{
-						activeEngine = activeEngine.GenericClone(ShapeType);
+						selEngine = selEngine.GenericClone(ShapeType);
 					}
 
 					//Draw the new shape with organized points generation (for mouse detection).
-					DrawShapes(true, false, true, false);
+					DrawActiveShape(true, false, true, false);
 				};
 			}
 
@@ -352,22 +318,25 @@ namespace Pinta.Tools
             {
                 dpbBox.Changed += (o, e) =>
                 {
-					ShapeEngine activeEngine = ActiveShapeEngine;
+					ShapeEngine selEngine = SelectedShapeEngine;
 
-					if (activeEngine != null)
+					if (selEngine != null)
 					{
-						activeEngine.DashPattern = dpbBox.ActiveText;
+						selEngine.DashPattern = dpbBox.ActiveText;
 					}
 
                     //Update the shape.
-                    DrawShapes(false, false, true, false);
+                    DrawActiveShape(false, false, true, false);
                 };
             }
         }
 
         public virtual void HandleActivated()
         {
-            DrawShapes(false, false, true, false);
+			OutlineColor = PintaCore.Palette.PrimaryColor;
+			FillColor = PintaCore.Palette.SecondaryColor;
+
+            DrawActiveShape(false, false, true, false);
 
             PintaCore.Palette.PrimaryColorChanged += new EventHandler(Palette_PrimaryColorChanged);
             PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
@@ -375,36 +344,53 @@ namespace Pinta.Tools
 
 		public virtual void HandleDeactivated(BaseTool newTool)
         {
+			//Deselect any point (but not any shape).
+			SelectedPointIndex = -1;
+
+			ShapeEngine activeEngine = ActiveShapeEngine;
+
+			if (activeEngine != null)
+			{
+				owner.UseAntialiasing = activeEngine.AntiAliasing;
+
+				//Update the DashPatternBox to represent the current shape's DashPattern.
+				(dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
+			}
+
+			//Determine if the tool being switched to will be another editable tool.
 			if (!newTool.Editable)
 			{
-				//Finalize the previous shape (if needed).
-				DrawShapes(false, true, false, false);
+				//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
+				finalizeAllShapes();
 			}
 			else
 			{
-				//Redraw the previous shape without any hover or selection points.
-				DrawShapes(false, false, false, false);
-
-				//Then deselect (if needed).
-				SelectedPointIndex = -1;
-				SelectedShapeIndex = -1;
+				//The tool being switched to is also editable. Redraw the current shape without any hover or selection points though.
+				DrawActiveShape(false, false, false, false);
 			}
 
             PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
-            PintaCore.Palette.SecondaryColorChanged += Palette_SecondaryColorChanged;
+            PintaCore.Palette.SecondaryColorChanged -= Palette_SecondaryColorChanged;
         }
 
         public virtual void HandleCommit()
         {
-            //Finalize the previous shape (if needed).
-			DrawShapes(false, true, false, false);
+            //Finalize every editable shape not yet finalized.
+			finalizeAllShapes();
         }
+
+		public virtual bool HandleBeforeUndo()
+		{
+			return false;
+		}
+
+		public virtual bool HandleBeforeRedo()
+		{
+			return false;
+		}
 
         public virtual void HandleAfterUndo()
         {
-            surfaceModified = true;
-
-
             ShapeEngine activeEngine = ActiveShapeEngine;
 
             if (activeEngine != null)
@@ -416,14 +402,11 @@ namespace Pinta.Tools
             }
 
             //Draw the current state.
-            DrawShapes(true, false, true, false);
+            DrawActiveShape(true, false, true, false);
         }
 
         public virtual void HandleAfterRedo()
         {
-            surfaceModified = true;
-
-
             ShapeEngine activeEngine = ActiveShapeEngine;
 
             if (activeEngine != null)
@@ -434,14 +417,15 @@ namespace Pinta.Tools
                 (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
             }
 
-
             //Draw the current state.
-            DrawShapes(true, false, true, false);
+            DrawActiveShape(true, false, true, false);
         }
 
         public virtual bool HandleKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
         {
-            if (args.Event.Key == Gdk.Key.Delete)
+			Gdk.Key keyPressed = args.Event.Key;
+
+			if (keyPressed == Gdk.Key.Delete)
             {
                 if (SelectedPointIndex > -1)
                 {
@@ -472,8 +456,16 @@ namespace Pinta.Tools
 							new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Deleted"),
 								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
-						//Clear the drawing of the shape.
-						SEngines[SelectedShapeIndex].DrawingLayer.Layer.Clear();
+
+						//Since the shape itself will be deleted, remove its ReEditableLayer from the drawing loop.
+
+						ReEditableLayer removeMe = SEngines.ElementAt(SelectedShapeIndex).DrawingLayer;
+
+						if (removeMe.InTheLoop)
+						{
+							SEngines.ElementAt(SelectedShapeIndex).DrawingLayer.TryRemoveLayer();
+						}
+
 
 						//Delete the selected shape.
 						SEngines.RemoveAt(SelectedShapeIndex);
@@ -482,26 +474,24 @@ namespace Pinta.Tools
 						doc.Workspace.Invalidate();
 
                         SelectedPointIndex = -1;
-						--SelectedShapeIndex;
+						SelectedShapeIndex = -1;
                     }
-
-                    surfaceModified = true;
 
                     HoverPoint = new PointD(-1d, -1d);
 
-                    DrawShapes(true, false, true, false);
+                    DrawActiveShape(true, false, true, false);
                 }
 
                 args.RetVal = true;
             }
-            else if (args.Event.Key == Gdk.Key.Return)
+            else if (keyPressed == Gdk.Key.Return)
             {
                 //Finalize the previous shape (if needed).
-				DrawShapes(false, true, false, false);
+				DrawActiveShape(false, true, false, false);
 
                 args.RetVal = true;
             }
-            else if (args.Event.Key == Gdk.Key.space)
+            else if (keyPressed == Gdk.Key.space)
             {
                 ControlPoint selPoint = SelectedPoint;
 
@@ -531,7 +521,7 @@ namespace Pinta.Tools
 
                         if (shiftKey)
                         {
-                            CalculateModifiedCurrentPoint();
+                            calculateModifiedCurrentPoint();
                         }
 
                         //Space only: position of mouse (after any potential shift alignment).
@@ -552,12 +542,12 @@ namespace Pinta.Tools
                         ++SelectedPointIndex;
                     }
 
-                    DrawShapes(true, false, true, shiftKey);
+                    DrawActiveShape(true, false, true, shiftKey);
                 }
 
                 args.RetVal = true;
             }
-            else if (args.Event.Key == Gdk.Key.Up)
+            else if (keyPressed == Gdk.Key.Up)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
@@ -565,12 +555,12 @@ namespace Pinta.Tools
                     //Move the selected control point.
                     SelectedPoint.Position.Y -= 1d;
 
-                    DrawShapes(true, false, true, false);
+                    DrawActiveShape(true, false, true, false);
                 }
 
                 args.RetVal = true;
             }
-            else if (args.Event.Key == Gdk.Key.Down)
+            else if (keyPressed == Gdk.Key.Down)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
@@ -578,12 +568,12 @@ namespace Pinta.Tools
                     //Move the selected control point.
                     SelectedPoint.Position.Y += 1d;
 
-                    DrawShapes(true, false, true, false);
+                    DrawActiveShape(true, false, true, false);
                 }
 
                 args.RetVal = true;
             }
-            else if (args.Event.Key == Gdk.Key.Left)
+            else if (keyPressed == Gdk.Key.Left)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
@@ -602,12 +592,12 @@ namespace Pinta.Tools
                         SelectedPoint.Position.X -= 1d;
                     }
 
-                    DrawShapes(true, false, true, false);
+                    DrawActiveShape(true, false, true, false);
                 }
 
                 args.RetVal = true;
             }
-            else if (args.Event.Key == Gdk.Key.Right)
+            else if (keyPressed == Gdk.Key.Right)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
@@ -626,7 +616,7 @@ namespace Pinta.Tools
                         SelectedPoint.Position.X += 1d;
                     }
 
-                    DrawShapes(true, false, true, false);
+                    DrawActiveShape(true, false, true, false);
                 }
 
                 args.RetVal = true;
@@ -641,9 +631,11 @@ namespace Pinta.Tools
 
         public virtual bool HandleKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
         {
-            if (args.Event.Key == Gdk.Key.Delete || args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.space
-                || args.Event.Key == Gdk.Key.Up || args.Event.Key == Gdk.Key.Down
-                || args.Event.Key == Gdk.Key.Left || args.Event.Key == Gdk.Key.Right)
+			Gdk.Key keyReleased = args.Event.Key;
+
+            if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.space
+                || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
+                || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right)
             {
                 args.RetVal = true;
 
@@ -657,9 +649,14 @@ namespace Pinta.Tools
 
         public virtual void HandleMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
         {
-            // If we are already drawing, ignore any additional mouse down events
-            if (isDrawing)
-                return;
+            //If we are already drawing, ignore any additional mouse down events.
+			if (isDrawing)
+			{
+				return;
+			}
+
+			//Redraw the previously (and possibly currently) active shape without any control points in case another shape is made active.
+			DrawActiveShape(false, false, false, false);
 			
             Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -670,14 +667,10 @@ namespace Pinta.Tools
 
             if (shiftKey)
             {
-                CalculateModifiedCurrentPoint();
+                calculateModifiedCurrentPoint();
             }
 
             isDrawing = true;
-            surfaceModified = true;
-
-            outlineColor = PintaCore.Palette.PrimaryColor;
-            fillColor = PintaCore.Palette.SecondaryColor;
 
 
             //Right clicking changes tension.
@@ -773,8 +766,7 @@ namespace Pinta.Tools
 						//User clicked on a non-control point on a shape.
 
 						//Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
-						doc.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
+						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
@@ -790,40 +782,34 @@ namespace Pinta.Tools
 			//Create a new shape if the user control + clicks on an existing point or if the user simply clicks outside of any shapes.
 			if (!ChangingTension && ((ctrlKey && clickedOnControlPoint) || (closestCPDistance >= currentClickRange && closestDistance >= currentClickRange)))
             {
-                PointD prevSelPoint;
+				//Verify that the user clicked inside the image bounds or that the user is
+				//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
+				if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
+				{
+					PointD prevSelPoint;
 
-                //First, store the position of the currently selected point.
-                if (SelectedPoint != null && ctrlKey)
-                {
-                    prevSelPoint = new PointD(SelectedPoint.Position.X, SelectedPoint.Position.Y);
-                }
-                else
-                {
-                    //This doesn't matter, other than the fact that it gets set to a value in order for the code to build.
-                    prevSelPoint = new PointD(0d, 0d);
-                }
+					//First, store the position of the currently selected point.
+					if (SelectedPoint != null && ctrlKey)
+					{
+						prevSelPoint = new PointD(SelectedPoint.Position.X, SelectedPoint.Position.Y);
+					}
+					else
+					{
+						//This doesn't matter, other than the fact that it gets set to a value in order for the code to build.
+						prevSelPoint = new PointD(0d, 0d);
+					}
 
-
-				//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
-				doc.History.PushNewItem(
-					new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
+					//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
 						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
-				addShape();
+					//Create the shape, add its starting points, and add it to SEngines.
+					SEngines.Add(createShape(ctrlKey, clickedOnControlPoint, prevSelPoint));
 
+					//Select the new shape.
+					SelectedShapeIndex = SEngines.Count - 1;
 
-                ShapeEngine activeEngine = ActiveShapeEngine;
-
-				if (activeEngine != null)
-				{
-					//Verify that the user clicked inside the image bounds or that the user is
-					//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
-					if ((point.X == shapeOrigin.X && point.Y == shapeOrigin.Y) || ctrlKey)
-					{
-						isDrawing = true;
-
-						createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
-					}
+					isDrawing = true;
 				}
             }
 
@@ -833,9 +819,7 @@ namespace Pinta.Tools
                 ClickedWithoutModifying = true;
             }
 
-            surfaceModified = true;
-
-            DrawShapes(false, false, true, shiftKey);
+            DrawActiveShape(false, false, true, shiftKey);
         }
 
         public virtual void HandleMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -844,7 +828,7 @@ namespace Pinta.Tools
 
             ChangingTension = false;
 
-            DrawShapes(true, false, true, args.Event.IsShiftPressed());
+            DrawActiveShape(true, false, true, args.Event.IsShiftPressed());
         }
 
         public virtual void HandleMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
@@ -857,14 +841,13 @@ namespace Pinta.Tools
 
             if (shiftKey)
             {
-                CalculateModifiedCurrentPoint();
+                calculateModifiedCurrentPoint();
             }
-
 
             if (!isDrawing)
             {
-                //Redraw everything to show a (temporary) highlighted control point when applicable.
-                DrawShapes(false, false, true, shiftKey);
+                //Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
+                DrawActiveShape(false, false, true, shiftKey);
             }
             else
             {
@@ -970,9 +953,7 @@ namespace Pinta.Tools
 							Utility.Clamp(selPoint.Tension, 0d, 1d);
                     }
 
-                    surfaceModified = true;
-
-                    DrawShapes(false, false, true, shiftKey);
+                    DrawActiveShape(false, false, true, shiftKey);
                 }
             }
 
@@ -982,109 +963,44 @@ namespace Pinta.Tools
 
 		protected void Palette_PrimaryColorChanged(object sender, EventArgs e)
 		{
-			outlineColor = PintaCore.Palette.PrimaryColor;
+			ShapeEngine activeEngine = ActiveShapeEngine;
 
-			DrawShapes(false, false, true, false);
+			if (activeEngine != null)
+			{
+				OutlineColor = PintaCore.Palette.PrimaryColor;
+				activeEngine.OutlineColor = OutlineColor;
+
+				DrawActiveShape(false, false, true, false);
+			}
 		}
 
 		protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
-		{
-			fillColor = PintaCore.Palette.SecondaryColor;
-
-			DrawShapes(false, false, true, false);
-		}
-
-
-		public virtual void DrawControlPoints(Context g, Rectangle? dirty, bool drawHoverSelection)
 		{
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
 			{
-				//Draw the control points for the active shape.
+				FillColor = PintaCore.Palette.SecondaryColor;
+				activeEngine.FillColor = FillColor;
 
-				int controlPointSize = Math.Min(BrushWidth + 1, 5);
-				double controlPointOffset = (double)controlPointSize / 2d;
-
-				if (drawHoverSelection)
-				{
-					ControlPoint selPoint = SelectedPoint;
-
-					if (selPoint != null)
-					{
-						//Draw a ring around the selected point.
-						g.FillStrokedEllipse(
-							new Rectangle(
-								selPoint.Position.X - controlPointOffset * 4d,
-								selPoint.Position.Y - controlPointOffset * 4d,
-								controlPointOffset * 8d, controlPointOffset * 8d),
-							ToolControl.FillColor, ToolControl.StrokeColor, 1);
-					}
-				}
-
-				List<ControlPoint> controlPoints = activeEngine.ControlPoints;
-
-				//If the shape has one or more points.
-				if (controlPoints.Count > 0)
-				{
-					//Draw the control points for the shape.
-					for (int i = 0; i < controlPoints.Count; ++i)
-					{
-						//Skip drawing the hovered control point.
-						if (drawHoverSelection && HoveredPointAsControlPoint > -1 && HoverPoint.Distance(controlPoints[i].Position) < 1d)
-						{
-							continue;
-						}
-
-						// Draw the control point.
-						g.FillStrokedEllipse(
-							new Rectangle(
-								controlPoints[i].Position.X - controlPointOffset,
-								controlPoints[i].Position.Y - controlPointOffset,
-								controlPointSize, controlPointSize),
-							ToolControl.FillColor, ToolControl.StrokeColor, controlPointSize);
-					}
-				}
-
-				if (drawHoverSelection)
-				{
-					//Draw the hover point.
-					if (!ChangingTension && HoverPoint.X > -1d)
-					{
-						g.FillStrokedEllipse(new Rectangle(
-							HoverPoint.X - controlPointOffset * 4d, HoverPoint.Y - controlPointOffset * 4d,
-							controlPointOffset * 8d, controlPointOffset * 8d), HoverColor, HoverColor, 1);
-						g.FillStrokedEllipse(new Rectangle(
-							HoverPoint.X - controlPointOffset, HoverPoint.Y - controlPointOffset,
-							controlPointSize, controlPointSize), HoverColor, HoverColor, controlPointSize);
-					}
-				}
-
-				if (dirty != null)
-				{
-					//Inflate to accomodate for control points.
-					dirty = dirty.Value.Inflate(controlPointSize * 8, controlPointSize * 8);
-				}
+				DrawActiveShape(false, false, true, false);
 			}
 		}
 
+
 		/// <summary>
-		/// Draw all of the shapes that are currently being drawn/edited by the user.
+		/// Draw the currently active shape.
 		/// </summary>
 		/// <param name="calculateOrganizedPoints">Whether or not to calculate the spatially organized
 		/// points for mouse detection after drawing the shape.</param>
 		/// <param name="finalize">Whether or not to finalize the drawing.</param>
 		/// <param name="drawHoverSelection">Whether or not to draw any hover point or selected point.</param>
-		/// <param name="shiftKey">Whether or not the shift key is being pressed.</param>
-		public void DrawShapes(bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey)
+		/// <param name="shiftKey">Whether or not the shift key is being pressed. This is for width/height constraining/equalizing.</param>
+		public void DrawActiveShape(bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey)
 		{
-			if (!surfaceModified || SEngines.Count == 0)
-			{
-				return;
-			}
-
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
+			//Note: if removed, this check must be done later in the method.
 			if (activeEngine == null)
 			{
 				return;
@@ -1092,41 +1008,52 @@ namespace Pinta.Tools
 
 			activeEngine.DrawingLayer.Layer.Clear();
 
+			//Invalidate the old hover point bounds, if any.
+			if (lastHover != null)
+			{
+				PintaCore.Workspace.Invalidate(lastHover.Value.ToGdkRectangle());
+
+				lastHover = null;
+			}
+
+
+			if (previousSelectedShapeIndex != SelectedShapeIndex)
+			{
+				lastDirty = null;
+
+				previousSelectedShapeIndex = SelectedShapeIndex;
+			}
+
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			Rectangle dirty;
-
+			
+			//Determine if the drawing should be for finalizing the shape onto the image or drawing it temporarily.
 			if (finalize)
 			{
+				//Finalize the shape onto the CurrentUserLayer.
+
 				ImageSurface undoSurface = null;
 
-				// We only need to create a history item if there was a previous shape.
-				if (activeEngine != null)
+				//We only need to create a history item if there was a previous shape.
+				//Note: activeEngine's null check was performed earlier in the method.
+				if (activeEngine.ControlPoints.Count > 0)
 				{
-					if (activeEngine.ControlPoints.Count > 0)
-					{
-						undoSurface = doc.CurrentUserLayer.Surface.Clone();
-					}
+					undoSurface = doc.CurrentUserLayer.Surface.Clone();
 				}
 
-				isDrawing = false;
-				surfaceModified = false;
-
-				int previousSelectedPointIndex = SelectedPointIndex;
-				int previousSelectedShapeIndex = SelectedShapeIndex;
-
-				SelectedPointIndex = -1;
-
-				dirty = DrawShape(
-					Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-					doc.CurrentUserLayer, false, drawHoverSelection);
+				//Draw the finalized shape. Note: drawHoverSelection is ignored here since the finalized shape should never draw hover
+				//or selected points. Instead of passing drawHoverSelection to drawShape, then, the value of false is always passed in.
+				dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
+					doc.CurrentUserLayer, false, false);
 
 				//Make sure that the undo surface isn't null and that there are actually points.
 				if (undoSurface != null)
 				{
 					//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
 					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
-							undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, previousSelectedShapeIndex));
+						undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 				}
 
 				//Clear out all of the old data.
@@ -1134,7 +1061,9 @@ namespace Pinta.Tools
 			}
 			else
 			{
-				//Only calculate the hover point when there isn't a request to organize the generated points by spatial hashing.
+				//Not finalizing the shape; drawing it on the temporary DrawingLayer.
+
+				//Calculate the hover point if there isn't a request to organize the generated points by spatial hashing.
 				if (!calculateOrganizedPoints)
 				{
 					if (drawHoverSelection)
@@ -1216,14 +1145,15 @@ namespace Pinta.Tools
 					}
 					else
 					{
-						//Reset the hover point. NOTE: this is necessary even though the hover point is reset later. It affects the DrawShape call.
+						//Do not draw the hover point. Instead, reset the hover point. NOTE: this is necessary even though the hover point
+						//is reset later. It affects the drawShape call.
 						HoverPoint = new PointD(-1d, -1d);
 						HoveredPointAsControlPoint = -1;
 					}
 				}
 
-				dirty = DrawShape(
-					Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
+				//Draw the shape onto the temporary DrawingLayer.
+				dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
 					activeEngine.DrawingLayer.Layer, true, drawHoverSelection);
 
 				//Reset the hover point after each drawing.
@@ -1231,6 +1161,7 @@ namespace Pinta.Tools
 				HoveredPointAsControlPoint = -1;
 			}
 
+			//Determine if the organized (spatially hashed) points should be generated. This is for mouse interaction detection after drawing.
 			if (calculateOrganizedPoints)
 			{
 				//Organize the generated points for quick mouse interaction detection.
@@ -1242,6 +1173,7 @@ namespace Pinta.Tools
 
 				foreach (PointD p in activeEngine.GeneratedPoints)
 				{
+					//For each generated point on the shape, calculate the spatial hashing for it and then store this information for later usage.
 					activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
 
 					//Keep track of the point's order in relation to the control points.
@@ -1254,19 +1186,25 @@ namespace Pinta.Tools
 				}
 			}
 
+			//Inflate to accomodate for previously drawn control points, if any.
+			int inflate = (int)(lastControlPointSize * 8d);
+			dirty = dirty.Inflate(inflate, inflate);
+
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (owner.UseAntialiasing)
 			{
 				dirty = dirty.Inflate(1, 1);
 			}
 
+			//Combine, clamp, and invalidate the dirty Rectangle.
 			dirty = ((Rectangle?)dirty).UnionRectangles(lastDirty).Value;
 			dirty = dirty.Clamp();
 			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
+
 			lastDirty = dirty;
 		}
 
-		protected Rectangle DrawShape(Rectangle rect, Layer l, bool drawControlPoints, bool drawHoverSelection)
+		protected Rectangle drawShape(Rectangle rect, Layer l, bool drawCP, bool drawHoverSelection)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -1300,24 +1238,23 @@ namespace Pinta.Tools
 
 						if (FillShape)
 						{
-							dirty = dirty.UnionRectangles(g.FillPolygonal(activeEngine.GeneratedPoints, fillColor));
+							dirty = dirty.UnionRectangles(g.FillPolygonal(activeEngine.GeneratedPoints, activeEngine.FillColor));
 						}
 
 						if (StrokeShape)
 						{
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(activeEngine.GeneratedPoints, outlineColor));
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(activeEngine.GeneratedPoints, activeEngine.OutlineColor));
 						}
 					}
 
 					g.SetDash(new double[] { }, 0.0);
 
-
+					//Draw anything extra (that not every shape has), like arrows.
 					drawExtras(dirty, g);
 
-
-					if (drawControlPoints)
+					if (drawCP)
 					{
-						DrawControlPoints(g, dirty, drawHoverSelection);
+						drawControlPoints(g, dirty, drawHoverSelection);
 					}
 				}
 			}
@@ -1326,70 +1263,159 @@ namespace Pinta.Tools
 			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
 		}
 
+		protected virtual void drawControlPoints(Context g, Rectangle? dirty, bool drawHoverSelection)
+		{
+			lastControlPointSize = Math.Min(BrushWidth + 1, 5);
+			double controlPointOffset = (double)lastControlPointSize / 2d;
+
+			ShapeEngine activeEngine = ActiveShapeEngine;
+
+			if (activeEngine != null)
+			{
+				//Draw the control points for the active shape.
+
+				if (drawHoverSelection)
+				{
+					ControlPoint selPoint = SelectedPoint;
+
+					if (selPoint != null)
+					{
+						//Draw a ring around the selected point.
+						g.FillStrokedEllipse(
+							new Rectangle(
+								selPoint.Position.X - controlPointOffset * 4d,
+								selPoint.Position.Y - controlPointOffset * 4d,
+								controlPointOffset * 8d, controlPointOffset * 8d),
+							ToolControl.FillColor, ToolControl.StrokeColor, 1);
+					}
+				}
+
+				List<ControlPoint> controlPoints = activeEngine.ControlPoints;
+
+				//Determine if the shape has one or more points.
+				if (controlPoints.Count > 0)
+				{
+					//Draw the control points for the shape.
+					for (int i = 0; i < controlPoints.Count; ++i)
+					{
+						//Skip drawing the hovered control point.
+						if (drawHoverSelection && HoveredPointAsControlPoint > -1 && HoverPoint.Distance(controlPoints[i].Position) < 1d)
+						{
+							continue;
+						}
+
+						//Draw each control point.
+						g.FillStrokedEllipse(
+							new Rectangle(
+								controlPoints[i].Position.X - controlPointOffset,
+								controlPoints[i].Position.Y - controlPointOffset,
+								lastControlPointSize, lastControlPointSize),
+							ToolControl.FillColor, ToolControl.StrokeColor, (int)lastControlPointSize);
+					}
+				}
+
+				if (drawHoverSelection)
+				{
+					//Draw the hover point.
+					if (!ChangingTension && HoverPoint.X > -1d)
+					{
+						Rectangle hoverOuterEllipseRect = new Rectangle(
+							HoverPoint.X - controlPointOffset * 4d, HoverPoint.Y - controlPointOffset * 4d,
+							controlPointOffset * 8d, controlPointOffset * 8d);
+
+						g.FillStrokedEllipse(hoverOuterEllipseRect, hoverColor, hoverColor, 1);
+
+						g.FillStrokedEllipse(new Rectangle(
+							HoverPoint.X - controlPointOffset, HoverPoint.Y - controlPointOffset,
+							lastControlPointSize, lastControlPointSize), hoverColor, hoverColor, (int)lastControlPointSize);
+
+						//Since the hover point can be outside of the active shape's bounds (hovering over a different shape), a special
+						//invalidation call needs to be made for the hover point in order to ensure its visibility at all times.
+						PintaCore.Workspace.Invalidate(hoverOuterEllipseRect.ToGdkRectangle());
+
+						lastHover = hoverOuterEllipseRect;
+						lastHover = lastHover.Value.Clamp();
+					}
+				}
+			}
+		}
+
 
 		/// <summary>
-		/// Calculate the modified position of current_point such that the angle between the adjacent point
-		/// (if any) and current_point is snapped to the closest angle out of a certain number of angles.
+		/// Go through every editable shape not yet finalized and finalize it.
 		/// </summary>
-		public void CalculateModifiedCurrentPoint()
+		protected void finalizeAllShapes()
+		{
+			//for (SelectedShapeIndex = 0; SelectedShapeIndex < SEngines.Count; ++SelectedShapeIndex)
+			for (SelectedShapeIndex = SEngines.Count - 1; SelectedShapeIndex >= 0; --SelectedShapeIndex)
+			{
+				//Finalize the now active shape.
+				DrawActiveShape(false, true, false, false);
+			}
+		}
+
+		/// <summary>
+		/// Calculate the modified position of currentPoint such that the angle between the adjacent point
+		/// (if any) and currentPoint is snapped to the closest angle out of a certain number of angles.
+		/// </summary>
+		private void calculateModifiedCurrentPoint()
 		{
 			ShapeEngine selEngine = SelectedShapeEngine;
-			ControlPoint adjacentPoint;
 
-			if (selEngine == null)
+			//Don't bother calculating a modified point if there is no selected shape.
+			if (selEngine != null)
 			{
-				//Don't bother calculating a modified point because there is no selected shape.
-				return;
-			}
-			else
-			{
+				ControlPoint adjacentPoint;
+
 				if (SelectedPointIndex > 0)
 				{
+					//Previous point.
 					adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
 				}
-				else if (SelectedPointIndex + 1 < selEngine.ControlPoints.Count)
+				else if (selEngine.ControlPoints.Count > 1)
 				{
-					adjacentPoint = selEngine.ControlPoints[SelectedPointIndex + 1];
+					//Previous point (looping around to the end) if there is more than 1 point.
+					adjacentPoint = selEngine.ControlPoints[selEngine.ControlPoints.Count - 1];
 				}
 				else
 				{
 					//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
 					return;
 				}
+
+				PointD dir = new PointD(currentPoint.X - adjacentPoint.Position.X, currentPoint.Y - adjacentPoint.Position.Y);
+				double theta = Math.Atan2(dir.Y, dir.X);
+				double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
+
+				theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
+				currentPoint = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
 			}
-
-			PointD dir = new PointD(currentPoint.X - adjacentPoint.Position.X, currentPoint.Y - adjacentPoint.Position.Y);
-			double theta = Math.Atan2(dir.Y, dir.X);
-			double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
-
-			theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
-			currentPoint = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
 		}
 
-		protected void resetShapes()
+		/// <summary>
+		/// Resets the editable data.
+		/// </summary>
+		private void resetShapes()
 		{
 			SEngines = new ShapeEngineCollection();
 			
+			//The fields are modified instead of the properties here because a redraw call is undesired (for speed/efficiency).
 			SelectedPointIndex = -1;
-			SelectedShapeIndex = 0;
+			SelectedShapeIndex = -1;
+
+			isDrawing = false;
+
+			lastDirty = null;
 		}
 
 
-        protected Gdk.Rectangle getRectangleFromPoints(PointD a, PointD b)
-        {
-            int x = (int)Math.Min(a.X, b.X) - BrushWidth - 2;
-            int y = (int)Math.Min(a.Y, b.Y) - BrushWidth - 2;
-            int w = (int)Math.Max(a.X, b.X) - x + (BrushWidth * 2) + 4;
-            int h = (int)Math.Max(a.Y, b.Y) - y + (BrushWidth * 2) + 4;
-
-            return new Gdk.Rectangle(x, y, w, h);
-        }
-
-
-        protected virtual void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
-        {
-
-        }
+		/// <summary>
+		/// Creates a new shape, adds its starting points, and returns it.
+		/// </summary>
+		/// <param name="ctrlKey"></param>
+		/// <param name="clickedOnControlPoint"></param>
+		/// <param name="prevSelPoint"></param>
+		protected abstract ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint);
 
         protected virtual void movePoint(List<ControlPoint> controlPoints)
         {
@@ -1402,18 +1428,8 @@ namespace Pinta.Tools
             
         }
 
-		protected virtual void addShape()
-		{
-			//Overrides should implement (with their own ShapeEngine child type):
-			//Document doc = PintaCore.Workspace.ActiveDocument;
-			//SEngines.Add(new ShapeEngine(doc.CurrentUserLayer, owner.UseAntialiasing));
-			//base.AddShape();
 
-			SelectedShapeIndex = SEngines.Count - 1;
-		}
-
-
-		protected void addLinePoints(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+		protected void addLinePoints(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine selEngine, PointD prevSelPoint)
 		{
 			PointD startingPoint;
 
@@ -1430,8 +1446,8 @@ namespace Pinta.Tools
 			}
 
 
-			activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), DefaultEndPointTension));
-			activeEngine.ControlPoints.Add(
+			selEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), DefaultEndPointTension));
+			selEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), DefaultEndPointTension));
 
 
@@ -1439,7 +1455,7 @@ namespace Pinta.Tools
 			SelectedShapeIndex = SEngines.Count - 1;
 		}
 
-		protected void addRectanglePoints(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+		protected void addRectanglePoints(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine selEngine, PointD prevSelPoint)
 		{
 			PointD startingPoint;
 
@@ -1456,12 +1472,12 @@ namespace Pinta.Tools
 			}
 
 
-			activeEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
-			activeEngine.ControlPoints.Add(
+			selEngine.ControlPoints.Add(new ControlPoint(new PointD(startingPoint.X, startingPoint.Y), 0.0));
+			selEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X, startingPoint.Y + .01d), 0.0));
-			activeEngine.ControlPoints.Add(
+			selEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y + .01d), 0.0));
-			activeEngine.ControlPoints.Add(
+			selEngine.ControlPoints.Add(
 				new ControlPoint(new PointD(startingPoint.X + .01d, startingPoint.Y), 0.0));
 
 

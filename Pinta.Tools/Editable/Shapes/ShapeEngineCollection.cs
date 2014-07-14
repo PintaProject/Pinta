@@ -116,39 +116,52 @@ namespace Pinta.Tools
 		public ReEditableLayer DrawingLayer;
 
 		public bool AntiAliasing;
-
 		public string DashPattern = "-";
-
 		public bool Closed;
 
-		protected BaseEditEngine.ShapeTypes shapeType;
+		public Color OutlineColor, FillColor;
+
+		public BaseEditEngine.ShapeTypes ShapeType;
 
 		/// <summary>
 		/// Create a new ShapeEngine.
 		/// </summary>
 		/// <param name="passedParentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="passedShapeType">The type of shape to create.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
 		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
-		public ShapeEngine(UserLayer passedParentLayer, BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed)
+		/// <param name="passedOutlineColor">The outline color for the shape.</param>
+		/// <param name="passedFillColor">The fill color for the shape.</param>
+		public ShapeEngine(UserLayer passedParentLayer, ReEditableLayer passedDrawingLayer,
+			BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor)
 		{
 			parentLayer = passedParentLayer;
-			DrawingLayer = new ReEditableLayer(parentLayer);
 
-			shapeType = passedShapeType;
+			if (passedDrawingLayer == null)
+			{
+				DrawingLayer = new ReEditableLayer(parentLayer);
+			}
+			else
+			{
+				DrawingLayer = passedDrawingLayer;
+			}
 
+			ShapeType = passedShapeType;
 			AntiAliasing = passedAA;
 			Closed = passedClosed;
+			OutlineColor = passedOutlineColor;
+			FillColor = passedFillColor;
 		}
 
 		/// <summary>
-		/// Clone all of the necessary data in the ShapeEngine.
+		/// Create a ShapeEngine clone with all of the common and added extra data (that depends on the ShapeEngine child type).
 		/// </summary>
 		/// <returns>The partially cloned shape data.</returns>
-		public abstract ShapeEngine PartialClone();
-		//Overrides should implement at least:
-		/*{
-			ShapeEngine clonedCE = new ShapeEngine(parentLayer, editEngine, AntiAliasing);
+		public ShapeEngine PartialClone()
+		{
+			//The actual type of ShapeEngine child created for the clone must be done in an overridden method.
+			ShapeEngine clonedCE = cloneSpecific();
 
 			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
 
@@ -157,7 +170,14 @@ namespace Pinta.Tools
 			clonedCE.DashPattern = DashPattern;
 
 			return clonedCE;
-		}*/
+		}
+
+		/// <summary>
+		/// Create a ShapeEngine clone with added extra data (besides the common data) to the clone that depends on the ShapeEngine child type.
+		/// Note: do not add the common data when overriding this method! That is done in PartialClone.
+		/// </summary>
+		/// <returns></returns>
+		protected abstract ShapeEngine cloneSpecific();
 
 		/// <summary>
 		/// Converts the ShapeEngine instance into a new instance of a different ShapeEngine (child) type, copying the common data.
@@ -168,24 +188,24 @@ namespace Pinta.Tools
 		{
 			//Remove the old ShapeEngine instance.
 			BaseEditEngine.SEngines.Remove(this);
-			DrawingLayer.Layer.Clear();
 
 			ShapeEngine clonedEngine;
 
 			switch (newShapeType)
 			{
 				case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
-					clonedEngine = new LineCurveSeriesEngine(parentLayer, newShapeType, AntiAliasing, true);
+					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, true, OutlineColor, FillColor);
 					break;
 				case BaseEditEngine.ShapeTypes.Ellipse:
-					clonedEngine = new EllipseEngine(parentLayer, AntiAliasing);
+					clonedEngine = new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor);
 					break;
 				case BaseEditEngine.ShapeTypes.RoundedLineSeries:
-					clonedEngine = new RoundedLineEngine(parentLayer, RoundedLineEditEngine.DefaultRadius, AntiAliasing);
+					clonedEngine = new RoundedLineEngine(parentLayer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
+						AntiAliasing, OutlineColor, FillColor);
 					break;
 				default:
 					//Defaults to OpenLineCurveSeries.
-					clonedEngine = new LineCurveSeriesEngine(parentLayer, newShapeType, AntiAliasing, false);
+					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, false, OutlineColor, FillColor);
 
 					break;
 			}

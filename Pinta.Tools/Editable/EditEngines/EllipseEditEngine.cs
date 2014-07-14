@@ -41,33 +41,26 @@ namespace Pinta.Tools
 
         }
 
-		protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
+		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
-			addRectanglePoints(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
+			ShapeEngine newEngine = new EllipseEngine(doc.CurrentUserLayer, null, owner.UseAntialiasing,
+				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
+
+			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option to be the same as the previous shape's.
-			activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
-
-			base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+			return newEngine;
 		}
 
 		protected override void movePoint(List<ControlPoint> controlPoints)
 		{
 			moveRectangularPoint(controlPoints);
 
-
 			base.movePoint(controlPoints);
-		}
-
-		protected override void addShape()
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			SEngines.Add(new EllipseEngine(doc.CurrentUserLayer, owner.UseAntialiasing));
-
-			base.addShape();
 		}
     }
 }

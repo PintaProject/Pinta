@@ -41,24 +41,20 @@ namespace Pinta.Tools
 		/// Create a new RoundedLineEngine.
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public RoundedLineEngine(UserLayer parentLayer, double passedRadius, bool passedAA)
-			: base(parentLayer, BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true)
+		/// <param name="passedOutlineColor">The outline color for the shape.</param>
+		/// <param name="passedFillColor">The fill color for the shape.</param>
+		public RoundedLineEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, double passedRadius, bool passedAA,
+			Color passedOutlineColor, Color passedFillColor)
+			: base(parentLayer, passedDrawingLayer, BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true, passedOutlineColor, passedFillColor)
 		{
 			Radius = passedRadius;
 		}
 
-		public override ShapeEngine PartialClone()
+		protected override ShapeEngine cloneSpecific()
 		{
-			RoundedLineEngine clonedCE = new RoundedLineEngine(parentLayer, Radius, AntiAliasing);
-
-			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
-
-			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-
-			clonedCE.DashPattern = DashPattern;
-
-			return clonedCE;
+			return new RoundedLineEngine(parentLayer, DrawingLayer, Radius, AntiAliasing, OutlineColor, FillColor);
 		}
 
 		/// <summary>

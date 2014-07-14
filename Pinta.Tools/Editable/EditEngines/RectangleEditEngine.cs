@@ -41,33 +41,26 @@ namespace Pinta.Tools
 
         }
 
-        protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
-        {
-			addRectanglePoints(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
+			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
+				owner.UseAntialiasing, true, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
 
-            //Set the new shape's DashPattern option to be the same as the previous shape's.
-            activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
+			//Set the new shape's DashPattern option to be the same as the previous shape's.
+			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
-            base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
-        }
+			return newEngine;
+		}
 
         protected override void movePoint(List<ControlPoint> controlPoints)
         {
 			moveRectangularPoint(controlPoints);
 
-
 			base.movePoint(controlPoints);
         }
-
-		protected override void addShape()
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries, owner.UseAntialiasing, true));
-
-			base.addShape();
-		}
     }
 }

@@ -41,30 +41,24 @@ namespace Pinta.Tools
 
         }
 
-        protected override void createShape(bool ctrlKey, bool clickedOnControlPoint, ShapeEngine activeEngine, PointD prevSelPoint)
-        {
-			addLinePoints(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
+		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
+			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
 
-            //Set the new shape's DashPattern to be the same as the previous shape's.
-            activeEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+			addLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
+			//Set the new shape's DashPattern option to be the same as the previous shape's.
+			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
-            base.createShape(ctrlKey, clickedOnControlPoint, activeEngine, prevSelPoint);
-        }
+			return newEngine;
+		}
 
         protected override void movePoint(List<ControlPoint> controlPoints)
         {
 			base.movePoint(controlPoints);
         }
-
-		protected override void addShape()
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			SEngines.Add(new LineCurveSeriesEngine(doc.CurrentUserLayer, BaseEditEngine.ShapeTypes.OpenLineCurveSeries, owner.UseAntialiasing, false));
-
-			base.addShape();
-		}
     }
 }

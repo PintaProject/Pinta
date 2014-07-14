@@ -39,24 +39,20 @@ namespace Pinta.Tools
 		/// Create a new EllipseEngine.
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		public EllipseEngine(UserLayer parentLayer, bool passedAA)
-			: base(parentLayer, BaseEditEngine.ShapeTypes.Ellipse, passedAA, true)
+		/// <param name="passedOutlineColor">The outline color for the shape.</param>
+		/// <param name="passedFillColor">The fill color for the shape.</param>
+		public EllipseEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, bool passedAA,
+			Color passedOutlineColor, Color passedFillColor)
+			: base(parentLayer, passedDrawingLayer, BaseEditEngine.ShapeTypes.Ellipse, passedAA, true, passedOutlineColor, passedFillColor)
 		{
 			
 		}
 
-		public override ShapeEngine PartialClone()
+		protected override ShapeEngine cloneSpecific()
 		{
-			EllipseEngine clonedCE = new EllipseEngine(parentLayer, AntiAliasing);
-
-			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
-
-			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-
-			clonedCE.DashPattern = DashPattern;
-
-			return clonedCE;
+			return new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor);
 		}
 
 		/// <summary>

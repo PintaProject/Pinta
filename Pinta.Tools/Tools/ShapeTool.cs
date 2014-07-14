@@ -113,6 +113,30 @@ namespace Pinta.Tools
             }
         }
 
+		public override bool TryHandleUndo()
+		{
+			if (!EditEngine.HandleBeforeUndo())
+			{
+				return base.TryHandleUndo();
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		public override bool TryHandleRedo()
+		{
+			if (!EditEngine.HandleBeforeRedo())
+			{
+				return base.TryHandleRedo();
+			}
+			else
+			{
+				return true;
+			}
+		}
+
         public override void AfterUndo()
         {
             EditEngine.HandleAfterUndo();

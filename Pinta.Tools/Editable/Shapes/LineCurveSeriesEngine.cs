@@ -41,30 +41,28 @@ namespace Pinta.Tools
 		/// Create a new LineCurveSeriesEngine.
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="passedShapeType">The owner EditEngine.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
 		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
-		public LineCurveSeriesEngine(UserLayer parentLayer, BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed)
-			: base(parentLayer, passedShapeType, passedAA, passedClosed)
+		/// <param name="passedOutlineColor">The outline color for the shape.</param>
+		/// <param name="passedFillColor">The fill color for the shape.</param>
+		public LineCurveSeriesEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer,
+			BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor)
+			: base(parentLayer, passedDrawingLayer, passedShapeType, passedAA, passedClosed, passedOutlineColor, passedFillColor)
 		{
 			
 		}
 
-        public override ShapeEngine PartialClone()
-        {
-			LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, shapeType, AntiAliasing, Closed);
+		protected override ShapeEngine cloneSpecific()
+		{
+			LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, DrawingLayer, ShapeType, AntiAliasing, Closed, OutlineColor, FillColor);
 
-            clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
+			clonedCE.Arrow1 = Arrow1.Clone();
+			clonedCE.Arrow2 = Arrow2.Clone();
 
-            //Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-
-            clonedCE.DashPattern = DashPattern;
-
-            clonedCE.Arrow1 = Arrow1.Clone();
-            clonedCE.Arrow2 = Arrow2.Clone();
-
-            return clonedCE;
-        }
+			return clonedCE;
+		}
 
 		public override void GeneratePoints()
         {
