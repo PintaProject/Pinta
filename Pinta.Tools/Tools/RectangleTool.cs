@@ -53,6 +53,8 @@ namespace Pinta.Tools
 		public RectangleTool()
 		{
 			EditEngine = new RectangleEditEngine(this);
+
+			BaseEditEngine.CorrespondingTools.Add(BaseEditEngine.ShapeTypes.ClosedLineCurveSeries, this);
 		}
 	}
 }

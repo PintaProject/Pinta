@@ -68,6 +68,8 @@ namespace Pinta.Tools
         public LineCurveTool()
         {
 			EditEngine = new LineCurveEditEngine(this);
+
+			BaseEditEngine.CorrespondingTools.Add(BaseEditEngine.ShapeTypes.OpenLineCurveSeries, this);
         }
 	}
 }

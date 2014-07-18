@@ -126,7 +126,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new ShapeEngine.
 		/// </summary>
-		/// <param name="passedParentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="passedParentLayer">The parent UserLayer for the ReEditable DrawingLayer.</param>
 		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="passedShapeType">The type of shape to create.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>

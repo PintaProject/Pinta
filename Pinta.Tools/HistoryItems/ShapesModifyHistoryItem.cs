@@ -107,6 +107,12 @@ namespace Pinta.Tools
 			temp = selectedPointShapeIndex;
             selectedPointShapeIndex = ee.SelectedShapeIndex;
             ee.SelectedShapeIndex = temp;
+
+
+			//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
+			BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex);
+
+			//The currently active tool should now match the clicked on shape's corresponding tool.
 		}
 	}
 }

@@ -57,7 +57,7 @@ namespace Pinta.Core
 			OnToolAdded (tool);
 
 			if (CurrentTool == null)
-				SetCurrentTool (tool);
+				SetCurrentTool (tool, true);
 		}
 
 		public void RemoveInstanceOfTool (System.Type tool_type)
@@ -71,7 +71,7 @@ namespace Pinta.Core
 					Tools.Remove (tool);
 					Tools.Sort (new ToolSorter ());
 
-					SetCurrentTool (new DummyTool ());
+					SetCurrentTool(new DummyTool(), true);
 					OnToolRemoved (tool);
 					return;
 				}
@@ -91,7 +91,7 @@ namespace Pinta.Core
 				return;
 			}
 
-			SetCurrentTool (t);
+			SetCurrentTool(t, true);
 		}
 
 		private BaseTool FindTool (string name)
@@ -112,7 +112,7 @@ namespace Pinta.Core
 					return Tools[index];}
 				else {
 					DummyTool dummy = new DummyTool ();
-					SetCurrentTool (dummy);
+					SetCurrentTool(dummy, true);
 					return dummy;
 				}
 			}
@@ -128,7 +128,7 @@ namespace Pinta.Core
 				CurrentTool.DoCommit ();
 		}
 
-		public void SetCurrentTool (BaseTool tool)
+		public void SetCurrentTool (BaseTool tool, bool deactivatePrevious)
 		{
 			int i = Tools.IndexOf (tool);
 			
@@ -139,14 +139,19 @@ namespace Pinta.Core
 			if (index >= 0) {
 				prev_index = index;
 				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
-				Tools[index].DoDeactivated (tool);
+
+				if (deactivatePrevious)
+				{
+					Tools[index].DoDeactivated(tool);
+				}
+
 				Tools[index].ToolItem.Active = false;
 			}
 			
 			// Load new tool
 			index = i;
 			tool.ToolItem.Active = true;
-			tool.DoActivated ();
+			tool.DoActivated();
 			tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
 			
 			PintaCore.Workspace.Invalidate ();
@@ -158,7 +163,7 @@ namespace Pinta.Core
 			BaseTool t = FindTool (tool);
 			
 			if (t != null) {
-				SetCurrentTool (t);
+				SetCurrentTool(t, true);
 				return true;
 			}
 			
@@ -170,7 +175,7 @@ namespace Pinta.Core
 			BaseTool tool = FindNextTool (shortcut);
 			
 			if (tool != null)
-				SetCurrentTool (tool);
+				SetCurrentTool(tool, true);
 		}
 		
 		private BaseTool FindNextTool (Gdk.Key shortcut)

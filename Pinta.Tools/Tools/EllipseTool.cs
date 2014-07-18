@@ -52,6 +52,8 @@ namespace Pinta.Tools
 		public EllipseTool ()
 		{
 			EditEngine = new EllipseEditEngine(this);
+
+			BaseEditEngine.CorrespondingTools.Add(BaseEditEngine.ShapeTypes.Ellipse, this);
 		}
 	}
 }

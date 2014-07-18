@@ -52,6 +52,8 @@ namespace Pinta.Tools
 		public RoundedRectangleTool()
 		{
 			EditEngine = new RoundedLineEditEngine(this);
+
+			BaseEditEngine.CorrespondingTools.Add(BaseEditEngine.ShapeTypes.RoundedLineSeries, this);
 		}
 	}
 }
