@@ -183,8 +183,10 @@ namespace Pinta.Tools
 		/// Converts the ShapeEngine instance into a new instance of a different ShapeEngine (child) type, copying the common data.
 		/// </summary>
 		/// <param name="newShapeType">The new ShapeEngine type to create.</param>
+		/// <param name="shapeIndex">The index to insert the ShapeEngine clone into SEngines at.
+		/// This ensures that the clone is as transparent as possible.</param>
 		/// <returns>A new ShapeEngine instance of the specified type with the common data copied over.</returns>
-		public ShapeEngine GenericClone(BaseEditEngine.ShapeTypes newShapeType)
+		public ShapeEngine GenericClone(BaseEditEngine.ShapeTypes newShapeType, int shapeIndex)
 		{
 			//Remove the old ShapeEngine instance.
 			BaseEditEngine.SEngines.Remove(this);
@@ -216,8 +218,8 @@ namespace Pinta.Tools
 			
 			clonedEngine.DashPattern = DashPattern;
 
-			//Add the new ShapeEngine instance.
-			BaseEditEngine.SEngines.Add(clonedEngine);
+			//Add the new ShapeEngine instance at the specified index to ensure as transparent of a cloning as possible.
+			BaseEditEngine.SEngines.Insert(shapeIndex, clonedEngine);
 
 			return clonedEngine;
 		}

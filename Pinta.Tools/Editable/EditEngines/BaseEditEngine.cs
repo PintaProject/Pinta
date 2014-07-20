@@ -48,7 +48,7 @@ namespace Pinta.Tools
 			RoundedLineSeries
 		}
 
-		public static Dictionary<ShapeTypes, BaseTool> CorrespondingTools = new Dictionary<ShapeTypes, BaseTool>();
+		public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new Dictionary<ShapeTypes, ShapeTool>();
 
         protected readonly BaseTool owner;
 
@@ -75,7 +75,6 @@ namespace Pinta.Tools
 		protected ToolBarLabel shapeTypeLabel;
 		protected ToolBarDropDownButton shapeTypeButton;
 		protected ToolBarItem noShapeType;
-		protected bool updatingShapeTypeButton = false;
 		protected Gtk.SeparatorToolItem shapeTypeSep;
 
         protected DashPatternBox dashPBox = new DashPatternBox();
@@ -84,41 +83,41 @@ namespace Pinta.Tools
         {
             get
             {
-                int width;
-                if (Int32.TryParse(brushWidth.ComboBox.ActiveText, out width))
-                {
-                    if (width > 0)
-                    {
-                        (brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString();
-                        return width;
-                    }
-                }
-                (brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BaseTool.DEFAULT_BRUSH_WIDTH.ToString();
+				if (brushWidth != null)
+				{
+					int width;
+
+					if (Int32.TryParse(brushWidth.ComboBox.ActiveText, out width))
+					{
+						if (width > 0)
+						{
+							(brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString();
+
+							return width;
+						}
+					}
+
+					(brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BaseTool.DEFAULT_BRUSH_WIDTH.ToString();
+				}
+
                 return BaseTool.DEFAULT_BRUSH_WIDTH;
             }
-            set { (brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString(); }
+            
+			set
+			{
+				(brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+			}
         }
 
         protected bool ShowAntialiasingButton { get { return true; } }
         protected bool StrokeShape { get { return (int)fillButton.SelectedItem.Tag % 2 == 0; } }
         protected bool FillShape { get { return (int)fillButton.SelectedItem.Tag >= 1; } }
 
-		protected ShapeTypes previousShapeType;
-
 		protected ShapeTypes ShapeType
 		{
 			get
 			{
-				int newTypeValue = (int)shapeTypeButton.SelectedItem.Tag;
-
-				if (newTypeValue > 0)
-				{
-					return (ShapeTypes)newTypeValue;
-				}
-				else
-				{
-					return previousShapeType;
-				}
+				return (ShapeTypes)(int)shapeTypeButton.SelectedItem.Tag;
 			}
 		}
 
@@ -213,6 +212,8 @@ namespace Pinta.Tools
 
         //Stores the editable shape data.
 		public static ShapeEngineCollection SEngines = new ShapeEngineCollection();
+
+		protected static bool usedToolLayer = false;
 
 
         #region ToolbarEventHandlers
@@ -325,40 +326,27 @@ namespace Pinta.Tools
 
 				shapeTypeButton.SelectedItemChanged += (o, e) =>
 				{
-					if (updatingShapeTypeButton)
-					{
-						updatingShapeTypeButton = false;
-					}
-					else
-					{
-						if (ShapeType != previousShapeType)
-						{
-							ShapeEngine selEngine = SelectedShapeEngine;
+					ShapeTypes newShapeType = ShapeType;
 
-							if (selEngine != null)
+					if (newShapeType != ShapeTypes.None)
+					{
+						ShapeEngine selEngine = SelectedShapeEngine;
+
+						if (selEngine != null)
+						{
+							//Verify that the tool needs to be switched.
+							if (GetCorrespondingTool(newShapeType) != this.owner)
 							{
-								//ShapeType will have the updated value.
-								selEngine = selEngine.GenericClone(ShapeType);
+								//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
+								selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
 
 								//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
 								ActivateCorrespondingTool(SelectedShapeIndex);
 
 								//The currently active tool should now match the clicked on shape's corresponding tool.
-
-								//Note: the newly active tool's EditEngine must be used now because otherwise the wrong shape data would be assumed.
-								BaseEditEngine newlyActiveEditEngine = ((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine;
-
-								//Set the active tool's active shape and point to the updated shape and point.
-								newlyActiveEditEngine.SelectedShapeIndex = SelectedShapeIndex;
-								newlyActiveEditEngine.SelectedPointIndex = SelectedPointIndex;
-
-								//Draw the updated shape with organized points generation (for mouse detection). 
-								newlyActiveEditEngine.DrawActiveShape(true, false, true, false);
 							}
 						}
 					}
-
-					previousShapeType = ShapeType;
 				};
 			}
 
@@ -391,11 +379,8 @@ namespace Pinta.Tools
 
 			if (shapeTypeButton != null)
 			{
-				updatingShapeTypeButton = true;
 				shapeTypeButton.SelectedItem = noShapeType;
 			}
-
-			previousShapeType = ShapeTypes.None;
 
             DrawActiveShape(false, false, true, false);
 
@@ -405,9 +390,6 @@ namespace Pinta.Tools
 
 		public virtual void HandleDeactivated(BaseTool newTool)
         {
-			//Deselect any point (but not any shape).
-			SelectedPointIndex = -1;
-
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
 			if (activeEngine != null)
@@ -426,7 +408,7 @@ namespace Pinta.Tools
 			}
 			else
 			{
-				//The tool being switched to is also editable. Redraw the current shape without any hover or selection points though.
+				//The tool being switched to is also editable. Redraw the current shape without any hover or selection points, though.
 				DrawActiveShape(false, false, false, false);
 			}
 
@@ -888,14 +870,20 @@ namespace Pinta.Tools
 
 					//Select the new shape.
 					SelectedShapeIndex = SEngines.Count - 1;
+
+					ShapeEngine activeEngine = ActiveShapeEngine;
+
+					if (activeEngine != null)
+					{
+						//Set the AntiAliasing.
+						activeEngine.AntiAliasing = owner.UseAntialiasing;
+					}
 				}
             }
 			else if (clickedOnControlPoint)
 			{
 				//Since the user is not creating a new shape or control point but rather modifying an existing control point, it should be determined
 				//whether the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
-
-				//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
 				if (ActivateCorrespondingTool(SelectedShapeIndex))
 				{
 					//Pass on the event and its data to the newly activated tool.
@@ -1093,15 +1081,15 @@ namespace Pinta.Tools
 		/// <param name="shiftKey">Whether or not the shift key is being pressed. This is for width/height constraining/equalizing.</param>
 		public void DrawActiveShape(bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey)
 		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
+			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			//Note: if removed, this check must be done later in the method.
-			if (activeEngine == null)
+			//Clear the ToolLayer if it was used previously (e.g. for hover points when there was no activate shape).
+			if (usedToolLayer)
 			{
-				return;
-			}
+				doc.ToolLayer.Clear();
 
-			activeEngine.DrawingLayer.Layer.Clear();
+				usedToolLayer = false;
+			}
 
 			//Invalidate the old hover point bounds, if any.
 			if (lastHover != null)
@@ -1111,191 +1099,214 @@ namespace Pinta.Tools
 				lastHover = null;
 			}
 
+			//Check to see if a new shape is selected.
 			if (previousSelectedShapeIndex != SelectedShapeIndex)
 			{
+				//A new shape is selected, so clear the previous dirty Rectangle.
 				lastDirty = null;
 
 				previousSelectedShapeIndex = SelectedShapeIndex;
 			}
 
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			ShapeEngine activeEngine = ActiveShapeEngine;
 
-			Rectangle dirty;
-			
-			//Determine if the drawing should be for finalizing the shape onto the image or drawing it temporarily.
-			if (finalize)
+			if (activeEngine == null)
 			{
-				//Finalize the shape onto the CurrentUserLayer.
-
-				ImageSurface undoSurface = null;
-
-				//We only need to create a history item if there was a previous shape.
-				//Note: activeEngine's null check was performed earlier in the method.
-				if (activeEngine.ControlPoints.Count > 0)
+				//No shape will be drawn; however, the hover point still needs to be drawn if drawHoverSelection is true.
+				if (drawHoverSelection)
 				{
-					undoSurface = doc.CurrentUserLayer.Surface.Clone();
+					//Since there is no active ShapeEngine, the ToolLayer's surface will be used to draw the hover point on.
+					using (Context g = new Context(doc.ToolLayer.Surface))
+					{
+						g.AppendPath(doc.Selection.SelectionPath);
+						g.FillRule = FillRule.EvenOdd;
+						g.Clip();
+
+						//Draw the hover point. Note: the hover point has its own invalidation.
+						drawHoverPoint(g);
+					}
 				}
-
-				//Draw the finalized shape. Note: drawHoverSelection is ignored here since the finalized shape should never draw hover
-				//or selected points. Instead of passing drawHoverSelection to drawShape, then, the value of false is always passed in.
-				dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-					doc.CurrentUserLayer, false, false);
-
-				//Make sure that the undo surface isn't null and that there are actually points.
-				if (undoSurface != null)
-				{
-					//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
-						undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
-				}
-
-				//Clear out all of the old data.
-				resetShapes();
-			}
+			} //activeEngine == null
 			else
 			{
-				//Not finalizing the shape; drawing it on the temporary DrawingLayer.
+				//Clear any temporary drawing, because something new will be drawn.
+				activeEngine.DrawingLayer.Layer.Clear();
 
-				//Calculate the hover point if there isn't a request to organize the generated points by spatial hashing.
-				if (!calculateOrganizedPoints)
+
+				Rectangle dirty;
+
+				//Determine if the drawing should be for finalizing the shape onto the image or drawing it temporarily.
+				if (finalize)
 				{
-					if (drawHoverSelection)
+					//Finalize the shape onto the CurrentUserLayer.
+
+					ImageSurface undoSurface = null;
+
+					//We only need to create a history item if there was a previous shape.
+					//Note: activeEngine's null check was performed earlier in the method.
+					if (activeEngine.ControlPoints.Count > 0)
 					{
-						//Calculate the hover point, if any.
+						undoSurface = doc.CurrentUserLayer.Surface.Clone();
+					}
 
-						int closestCPIndex, closestCPShapeIndex;
-						ControlPoint closestControlPoint;
-						double closestCPDistance;
+					//Draw the finalized shape. Note: drawHoverSelection is ignored here since the finalized shape should never draw hover
+					//or selected points. Instead of passing drawHoverSelection to drawShape, then, the value of false is always passed in.
+					dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
+						doc.CurrentUserLayer, false, false);
 
-						SEngines.FindClosestControlPoint(currentPoint,
-							out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+					//Make sure that the undo surface isn't null and that there are actually points.
+					if (undoSurface != null)
+					{
+						//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
+						doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
+							undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
+					}
+				} //finalize
+				else
+				{
+					//Not finalizing the shape; drawing it on the temporary DrawingLayer.
 
-						int closestShapeIndex, closestPointIndex;
-						PointD closestPoint;
-						double closestDistance;
-
-						OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-							out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
-
-						bool clickedOnControlPoint = false;
-
-						double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
-
-						List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
-
-						//Determine if the closest ControlPoint is within the expected click range.
-						if (closestControlPoint != null && closestCPDistance < currentClickRange)
+					//Calculate the hover point if there isn't a request to organize the generated points by spatial hashing.
+					if (!calculateOrganizedPoints)
+					{
+						if (drawHoverSelection)
 						{
-							//User clicked directly on a ControlPoint on a shape.
+							//Calculate the hover point, if any.
 
-							hoverPoint.X = closestControlPoint.Position.X;
-							hoverPoint.Y = closestControlPoint.Position.Y;
-							hoveredPointAsControlPoint = closestCPIndex;
-						}
-						else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
-						{
-							//User is hovering over a generated point on a shape.
+							int closestCPIndex, closestCPShapeIndex;
+							ControlPoint closestControlPoint;
+							double closestCPDistance;
 
-							if (controlPoints.Count > closestPointIndex)
+							SEngines.FindClosestControlPoint(currentPoint,
+								out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+
+							int closestShapeIndex, closestPointIndex;
+							PointD closestPoint;
+							double closestDistance;
+
+							OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
+								out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+
+							bool clickedOnControlPoint = false;
+
+							double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
+
+							List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+
+							//Determine if the closest ControlPoint is within the expected click range.
+							if (closestControlPoint != null && closestCPDistance < currentClickRange)
 							{
-								//Note: compare the currentPoint's distance here because it's the actual mouse position.
-								if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
-								{
-									//Mouse hovering over a control point (on the "previous order" side of the point).
+								//User clicked directly on a ControlPoint on a shape.
 
-									hoverPoint.X = controlPoints[closestPointIndex].Position.X;
-									hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
-									hoveredPointAsControlPoint = closestPointIndex;
-								}
-								else if (closestPointIndex > 0)
+								hoverPoint.X = closestControlPoint.Position.X;
+								hoverPoint.Y = closestControlPoint.Position.Y;
+								hoveredPointAsControlPoint = closestCPIndex;
+							}
+							else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
+							{
+								//User is hovering over a generated point on a shape.
+
+								if (controlPoints.Count > closestPointIndex)
 								{
-									if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
+									//Note: compare the currentPoint's distance here because it's the actual mouse position.
+									if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
+									{
+										//Mouse hovering over a control point (on the "previous order" side of the point).
+
+										hoverPoint.X = controlPoints[closestPointIndex].Position.X;
+										hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
+										hoveredPointAsControlPoint = closestPointIndex;
+									}
+									else if (closestPointIndex > 0)
+									{
+										if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
+										{
+											//Mouse hovering over a control point (on the "following order" side of the point).
+
+											hoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
+											hoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
+											hoveredPointAsControlPoint = closestPointIndex - 1;
+										}
+									}
+									else if (controlPoints.Count > 0 &&
+										currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
 									{
 										//Mouse hovering over a control point (on the "following order" side of the point).
 
-										hoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
-										hoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
-										hoveredPointAsControlPoint = closestPointIndex - 1;
+										hoveredPointAsControlPoint = controlPoints.Count - 1;
+										hoverPoint.X = controlPoints[hoveredPointAsControlPoint].Position.X;
+										hoverPoint.Y = controlPoints[hoveredPointAsControlPoint].Position.Y;
 									}
 								}
-								else if (controlPoints.Count > 0 &&
-									currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
-								{
-									//Mouse hovering over a control point (on the "following order" side of the point).
 
-									hoveredPointAsControlPoint = controlPoints.Count - 1;
-									hoverPoint.X = controlPoints[hoveredPointAsControlPoint].Position.X;
-									hoverPoint.Y = controlPoints[hoveredPointAsControlPoint].Position.Y;
+								if (hoverPoint.X < 0d)
+								{
+									hoverPoint.X = closestPoint.X;
+									hoverPoint.Y = closestPoint.Y;
 								}
 							}
+						}
+						else
+						{
+							//Do not draw the hover point. Instead, reset the hover point. NOTE: this is necessary even though the hover point
+							//is reset later. It affects the drawShape call.
+							hoverPoint = new PointD(-1d, -1d);
+							hoveredPointAsControlPoint = -1;
+						}
+					} //calculateOrganizedPoints (inside !finalize)
 
-							if (hoverPoint.X < 0d)
-							{
-								hoverPoint.X = closestPoint.X;
-								hoverPoint.Y = closestPoint.Y;
-							}
+					//Draw the shape onto the temporary DrawingLayer.
+					dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
+						activeEngine.DrawingLayer.Layer, true, drawHoverSelection);
+
+					//Reset the hover point after each drawing.
+					hoverPoint = new PointD(-1d, -1d);
+					hoveredPointAsControlPoint = -1;
+				} //!finalize
+
+				//Determine if the organized (spatially hashed) points should be generated. This is for mouse interaction detection after drawing.
+				if (calculateOrganizedPoints)
+				{
+					//Organize the generated points for quick mouse interaction detection.
+
+					//First, clear the previously organized points, if any.
+					activeEngine.OrganizedPoints.ClearCollection();
+
+					int pointIndex = 0;
+
+					foreach (PointD p in activeEngine.GeneratedPoints)
+					{
+						//For each generated point on the shape, calculate the spatial hashing for it and then store this information for later usage.
+						activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
+
+						//Keep track of the point's order in relation to the control points.
+						if (activeEngine.ControlPoints.Count > pointIndex
+							&& p.X == activeEngine.ControlPoints[pointIndex].Position.X
+							&& p.Y == activeEngine.ControlPoints[pointIndex].Position.Y)
+						{
+							++pointIndex;
 						}
 					}
-					else
-					{
-						//Do not draw the hover point. Instead, reset the hover point. NOTE: this is necessary even though the hover point
-						//is reset later. It affects the drawShape call.
-						hoverPoint = new PointD(-1d, -1d);
-						hoveredPointAsControlPoint = -1;
-					}
-				}
+				} //calculateOrganizedPoints (inside activeEngine != null, after finalize or !finalize)
 
-				//Draw the shape onto the temporary DrawingLayer.
-				dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-					activeEngine.DrawingLayer.Layer, true, drawHoverSelection);
+				//Inflate to accomodate for previously drawn control points, if any.
+				int inflate = (int)(lastControlPointSize * 8d);
+				dirty = dirty.Inflate(inflate, inflate);
 
-				//Reset the hover point after each drawing.
-				hoverPoint = new PointD(-1d, -1d);
-				hoveredPointAsControlPoint = -1;
-			}
-
-			//Determine if the organized (spatially hashed) points should be generated. This is for mouse interaction detection after drawing.
-			if (calculateOrganizedPoints)
-			{
-				//Organize the generated points for quick mouse interaction detection.
-
-				//First, clear the previously organized points, if any.
-				activeEngine.OrganizedPoints.ClearCollection();
-
-				int pointIndex = 0;
-
-				foreach (PointD p in activeEngine.GeneratedPoints)
+				// Increase the size of the dirty rect to account for antialiasing.
+				if (owner.UseAntialiasing)
 				{
-					//For each generated point on the shape, calculate the spatial hashing for it and then store this information for later usage.
-					activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
-
-					//Keep track of the point's order in relation to the control points.
-					if (activeEngine.ControlPoints.Count > pointIndex
-						&& p.X == activeEngine.ControlPoints[pointIndex].Position.X
-						&& p.Y == activeEngine.ControlPoints[pointIndex].Position.Y)
-					{
-						++pointIndex;
-					}
+					dirty = dirty.Inflate(1, 1);
 				}
-			}
 
-			//Inflate to accomodate for previously drawn control points, if any.
-			int inflate = (int)(lastControlPointSize * 8d);
-			dirty = dirty.Inflate(inflate, inflate);
+				//Combine, clamp, and invalidate the dirty Rectangle.
+				dirty = ((Rectangle?)dirty).UnionRectangles(lastDirty).Value;
+				dirty = dirty.Clamp();
+				doc.Workspace.Invalidate(dirty.ToGdkRectangle());
 
-			// Increase the size of the dirty rect to account for antialiasing.
-			if (owner.UseAntialiasing)
-			{
-				dirty = dirty.Inflate(1, 1);
-			}
-
-			//Combine, clamp, and invalidate the dirty Rectangle.
-			dirty = ((Rectangle?)dirty).UnionRectangles(lastDirty).Value;
-			dirty = dirty.Clamp();
-			doc.Workspace.Invalidate(dirty.ToGdkRectangle());
-
-			lastDirty = dirty;
+				lastDirty = dirty;
+			} //activeEngine != null
 		}
 
 		protected Rectangle drawShape(Rectangle rect, Layer l, bool drawCP, bool drawHoverSelection)
@@ -1314,9 +1325,7 @@ namespace Pinta.Tools
 					g.FillRule = FillRule.EvenOdd;
 					g.Clip();
 
-					activeEngine.AntiAliasing = owner.UseAntialiasing;
-
-					g.Antialias = owner.UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+					g.Antialias = activeEngine.AntiAliasing ? Antialias.Subpixel : Antialias.None;
 
 					g.SetDash(DashPatternBox.GenerateDashArray(activeEngine.DashPattern, BrushWidth), 0.0);
 
@@ -1357,7 +1366,7 @@ namespace Pinta.Tools
 			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
 		}
 
-		protected virtual void drawControlPoints(Context g, Rectangle? dirty, bool drawHoverSelection)
+		protected void drawControlPoints(Context g, Rectangle? dirty, bool drawHoverSelection)
 		{
 			lastControlPointSize = Math.Min(BrushWidth + 1, 5);
 			double controlPointOffset = (double)lastControlPointSize / 2d;
@@ -1411,26 +1420,42 @@ namespace Pinta.Tools
 				if (drawHoverSelection)
 				{
 					//Draw the hover point.
-					if (!changingTension && hoverPoint.X > -1d)
-					{
-						Rectangle hoverOuterEllipseRect = new Rectangle(
-							hoverPoint.X - controlPointOffset * 4d, hoverPoint.Y - controlPointOffset * 4d,
-							controlPointOffset * 8d, controlPointOffset * 8d);
-
-						g.FillStrokedEllipse(hoverOuterEllipseRect, hoverColor, hoverColor, 1);
-
-						g.FillStrokedEllipse(new Rectangle(
-							hoverPoint.X - controlPointOffset, hoverPoint.Y - controlPointOffset,
-							lastControlPointSize, lastControlPointSize), hoverColor, hoverColor, (int)lastControlPointSize);
-
-						//Since the hover point can be outside of the active shape's bounds (hovering over a different shape), a special
-						//invalidation call needs to be made for the hover point in order to ensure its visibility at all times.
-						PintaCore.Workspace.Invalidate(hoverOuterEllipseRect.ToGdkRectangle());
-
-						lastHover = hoverOuterEllipseRect;
-						lastHover = lastHover.Value.Clamp();
-					}
+					drawHoverPoint(g);
 				}
+			}
+		}
+
+		/// <summary>
+		/// Draws the hover point, if any.
+		/// </summary>
+		/// <param name="g"></param>
+		protected void drawHoverPoint(Context g)
+		{
+			lastControlPointSize = Math.Min(BrushWidth + 1, 5);
+			double controlPointOffset = (double)lastControlPointSize / 2d;
+
+			//Verify that the user isn't changing the tension of a control point and that there is a hover point to draw.
+			if (!changingTension && hoverPoint.X > -1d)
+			{
+				Rectangle hoverOuterEllipseRect = new Rectangle(
+					hoverPoint.X - controlPointOffset * 4d, hoverPoint.Y - controlPointOffset * 4d,
+					controlPointOffset * 8d, controlPointOffset * 8d);
+
+				g.FillStrokedEllipse(hoverOuterEllipseRect, hoverColor, hoverColor, 1);
+
+				g.FillStrokedEllipse(new Rectangle(
+					hoverPoint.X - controlPointOffset, hoverPoint.Y - controlPointOffset,
+					lastControlPointSize, lastControlPointSize), hoverColor, hoverColor, (int)lastControlPointSize);
+
+
+				hoverOuterEllipseRect = hoverOuterEllipseRect.Inflate(1, 1);
+
+				//Since the hover point can be outside of the active shape's bounds (hovering over a different shape), a special
+				//invalidation call needs to be made for the hover point in order to ensure its visibility at all times.
+				PintaCore.Workspace.Invalidate(hoverOuterEllipseRect.ToGdkRectangle());
+
+				lastHover = hoverOuterEllipseRect;
+				lastHover = lastHover.Value.Clamp();
 			}
 		}
 
@@ -1440,12 +1465,26 @@ namespace Pinta.Tools
 		/// </summary>
 		protected void finalizeAllShapes()
 		{
+			isDrawing = false;
+
 			for (SelectedShapeIndex = 0; SelectedShapeIndex < SEngines.Count; ++SelectedShapeIndex)
-			//for (SelectedShapeIndex = SEngines.Count - 1; SelectedShapeIndex >= 0; --SelectedShapeIndex)
 			{
-				//Finalize the now active shape.
-				DrawActiveShape(false, true, false, false);
+				//Get a reference to each shape's corresponding tool.
+				ShapeTool correspondingTool = GetCorrespondingTool(SEngines[SelectedShapeIndex].ShapeType);
+
+				if (correspondingTool != null)
+				{
+					//Finalize the now active shape using its corresponding tool's EditEngine.
+
+					BaseEditEngine correspondingEngine = correspondingTool.EditEngine;
+
+					//Draw the current shape with the corresponding tool's EditEngine.
+					correspondingEngine.DrawActiveShape(false, true, false, false);
+				}
 			}
+
+			//Clear out all of the data.
+			resetShapes();
 		}
 
 		/// <summary>
@@ -1503,26 +1542,43 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Activates the corresponding tool to the given shapeIndex value if the tool is not already active and then returns whether a tool switch
+		/// Activates the corresponding tool to the given shapeIndex value if the tool is not already active, and then returns whether a tool switch
 		/// has occurred. If so and this was called in an event handler, it should most likely pass the event data on to the newly activated tool
 		/// (accessing it using PintaCore.Tools.CurrentTool) and then return.
 		/// </summary>
-		/// <param name="shapeIndex">The index of the shape in SEngines to find the corresponding tool to.</param>
+		/// <param name="shapeIndex">The index of the shape in SEngines to find the corresponding tool to and switch to.</param>
 		/// <returns>Whether or not a tool switch has occurred.</returns>
 		public static bool ActivateCorrespondingTool(int shapeIndex)
 		{
-			//First make sure that there is a validly selected tool.
+			//First make sure that there is a validly selectable tool.
 			if (shapeIndex > -1 && SEngines.Count > shapeIndex)
 			{
-				//Get the corresponding BaseTool reference to the shape.
-				BaseTool correspondingTool;
-				CorrespondingTools.TryGetValue(SEngines[shapeIndex].ShapeType, out correspondingTool);
+				ShapeTool correspondingTool = GetCorrespondingTool(SEngines[shapeIndex].ShapeType);
 
-				//Next, verify that the corresponding tool is valid and that it doesn't match the currently active tool.
+				//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
 				if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool)
 				{
+					ShapeTool oldTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+
 					//The active tool needs to be switched to the corresponding tool.
 					PintaCore.Tools.SetCurrentTool(correspondingTool, false);
+
+					ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+
+					//Set the new tool's active shape and point to the old shape and point.
+					newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
+					newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
+
+					//Deselect any shape or point in the old tool.
+					oldTool.EditEngine.SelectedPointIndex = -1;
+					oldTool.EditEngine.SelectedShapeIndex = -1;
+
+					//Make sure neither tool thinks it is drawing anything.
+					newTool.EditEngine.isDrawing = false;
+					oldTool.EditEngine.isDrawing = false;
+
+					//Draw the updated shape with organized points generation (for mouse detection). 
+					newTool.EditEngine.DrawActiveShape(true, false, true, false);
 
 					//Let the caller know that the active tool has been switched.
 					return true;
@@ -1531,6 +1587,21 @@ namespace Pinta.Tools
 
 			//Let the caller know that the active tool has not been switched.
 			return false;
+		}
+
+		/// <summary>
+		/// Gets the corresponding tool to the given shape type and then returns that tool.
+		/// </summary>
+		/// <param name="shapeType">The shape type to find the corresponding tool to.</param>
+		/// <returns>The corresponding tool to the given shape type.</returns>
+		public static ShapeTool GetCorrespondingTool(ShapeTypes shapeType)
+		{
+			ShapeTool correspondingTool = null;
+			
+			//Get the corresponding BaseTool reference to the shape type.
+			CorrespondingTools.TryGetValue(shapeType, out correspondingTool);
+
+			return correspondingTool;
 		}
 
 
