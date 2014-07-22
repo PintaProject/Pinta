@@ -623,10 +623,18 @@ namespace Pinta.Tools
                 {
                     if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
                     {
-                        //Change the selected control point to be the previous one, if applicable.
-                        if (SelectedPointIndex > 0)
+                        //Change the selected control point to be the previous one.
+						
+						--SelectedPointIndex;
+
+                        if (SelectedPointIndex < 0)
                         {
-                            --SelectedPointIndex;
+							ShapeEngine activeEngine = ActiveShapeEngine;
+
+							if (activeEngine != null)
+							{
+								SelectedPointIndex = activeEngine.ControlPoints.Count - 1;
+							}
                         }
                     }
                     else
@@ -647,11 +655,19 @@ namespace Pinta.Tools
                 {
                     if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
                     {
-                        //Change the selected control point to be the following one, if applicable.
-                        if (SelectedPointIndex < SelectedShapeEngine.ControlPoints.Count - 1)
-                        {
-                            ++SelectedPointIndex;
-                        }
+						//Change the selected control point to be the following one.
+
+						ShapeEngine activeEngine = ActiveShapeEngine;
+
+						if (activeEngine != null)
+						{
+							++SelectedPointIndex;
+
+							if (SelectedPointIndex > activeEngine.ControlPoints.Count - 1)
+							{
+								SelectedPointIndex = 0;
+							}
+						}
                     }
                     else
                     {

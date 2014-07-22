@@ -63,7 +63,6 @@ namespace Pinta.Tools
 		{
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
-
 			//An ellipse requires exactly 4 control points in order to draw anything.
 			if (ControlPoints.Count == 4)
 			{
@@ -149,11 +148,9 @@ namespace Pinta.Tools
 						}
 					}
 
-
 					//Now we can calculate the width and height.
 					double width = bottomRight.X - topLeft.X;
 					double height = bottomRight.Y - topLeft.Y;
-
 
 					//Some elliptic math code taken from Cairo Extensions, and some from DocumentSelection code written for GSoC 2013.
 
@@ -219,7 +216,7 @@ namespace Pinta.Tools
 				}
 			}
 			
-			//Make sure everything worked.
+			//Make sure there are now generated points; otherwise, one of the ellipse conditions was not met.
 			if (generatedPoints.Count == 0)
 			{
 				//Something went wrong. Just copy the control points. Note: it's important that there be many generated points even if
@@ -244,7 +241,7 @@ namespace Pinta.Tools
 
 					currentPoint = ControlPoints[currentNum].Position;
 					nextPoint = ControlPoints[nextNum].Position;
-					
+
 					//Lerp from the current point to the next point.
 					for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f)
 					{
@@ -252,7 +249,6 @@ namespace Pinta.Tools
 					}
 				}
 			}
-
 
 			GeneratedPoints = generatedPoints.ToArray();
 		}
