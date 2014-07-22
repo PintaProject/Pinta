@@ -56,9 +56,10 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Generate each point in an elliptic shape that passes through the control points and store the result in GeneratedPoints.
+		/// Generate each point in an elliptic shape and store the result in GeneratedPoints.
+		/// <param name="brushWidth">The width of the brush that will be used to draw the shape.</param>
 		/// </summary>
-		public override void GeneratePoints()
+		public override void GeneratePoints(int brushWidth)
 		{
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 

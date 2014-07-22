@@ -125,7 +125,7 @@ namespace Pinta.Tools
 
 
         protected static readonly Color hoverColor =
-            new Color(ToolControl.FillColor.R / 2d, ToolControl.FillColor.G / 2d, ToolControl.FillColor.B / 2d, ToolControl.FillColor.A * 2d / 3d);
+            new Color(ToolControl.FillColor.R, ToolControl.FillColor.G, ToolControl.FillColor.B, ToolControl.FillColor.A * 2d / 3d);
 
 		public const double ShapeClickStartingRange = 10d;
 		public const double ShapeClickThicknessFactor = 1d;
@@ -1322,7 +1322,7 @@ namespace Pinta.Tools
 					if (activeEngine.ControlPoints.Count > 0)
 					{
 						//Generate the points that make up the shape.
-						activeEngine.GeneratePoints();
+						activeEngine.GeneratePoints(BrushWidth);
 
 						PointD[] actualPoints = activeEngine.GetActualPoints();
 
@@ -1357,7 +1357,7 @@ namespace Pinta.Tools
 
 		protected void drawControlPoints(Context g, bool drawHoverSelection)
 		{
-			lastControlPointSize = Math.Min(BrushWidth + 1, 5);
+			lastControlPointSize = Math.Min(BrushWidth + 1, 3);
 			double controlPointOffset = (double)lastControlPointSize / 2d;
 
 			ShapeEngine activeEngine = ActiveShapeEngine;
@@ -1427,8 +1427,8 @@ namespace Pinta.Tools
 			if (!changingTension && hoverPoint.X > -1d)
 			{
 				Rectangle hoverOuterEllipseRect = new Rectangle(
-					hoverPoint.X - controlPointOffset * 4d, hoverPoint.Y - controlPointOffset * 4d,
-					controlPointOffset * 8d, controlPointOffset * 8d);
+					hoverPoint.X - controlPointOffset * 3d, hoverPoint.Y - controlPointOffset * 3d,
+					controlPointOffset * 6d, controlPointOffset * 6d);
 
 				g.FillStrokedEllipse(hoverOuterEllipseRect, hoverColor, hoverColor, 1);
 

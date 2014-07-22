@@ -63,39 +63,35 @@ namespace Pinta.Tools
 
 			return clonedCE;
 		}
-
-		public override void GeneratePoints()
-        {
-            GenerateCardinalSplinePolynomialCurvePoints();
-        }
-
-        /// <summary>
-        /// Generate each point in a cardinal spline polynomial curve that passes through
-        /// the control points, and store the result in GeneratedPoints.
-        /// </summary>
-        public void GenerateCardinalSplinePolynomialCurvePoints()
+		
+		/// <summary>
+		/// Generate each point in an line/curve series (cardinal spline polynomial curve) shape that passes through the control points,
+		/// and store the result in GeneratedPoints.
+		/// <param name="brushWidth">The width of the brush that will be used to draw the shape.</param>
+		/// </summary>
+		public override void GeneratePoints(int brushWidth)
         {
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
-            if (ControlPoints.Count < 2)
-            {
+			if (ControlPoints.Count < 2)
+			{
 				generatedPoints.Add(new GeneratedPoint(ControlPoints[0].Position, 0));
-            }
-            else
-            {
-                //Generate tangents for each of the smaller cubic Bezier curves that make up each segment of the resulting curve.
+			}
+			else
+			{
+				//Generate tangents for each of the smaller cubic Bezier curves that make up each segment of the resulting curve.
 
-                //The tension calculated for each point is a gradient between the previous
-                //control point's tension and the following control point's tension.
+				//The tension calculated for each point is a gradient between the previous
+				//control point's tension and the following control point's tension.
 
-                //Stores all of the tangent values.
-                List<PointD> bezierTangents = new List<PointD>();
+				//Stores all of the tangent values.
+				List<PointD> bezierTangents = new List<PointD>();
 
 				int pointCount = ControlPoints.Count - 1;
 				double pointCountDouble = (double)pointCount;
 				double tensionForPoint;
 
-                //Calculate the first tangent.
+				//Calculate the first tangent.
 				if (Closed)
 				{
 					bezierTangents.Add(new PointD(
@@ -109,19 +105,19 @@ namespace Pinta.Tools
 						ControlPoints[0].Tension * (ControlPoints[1].Position.Y - ControlPoints[0].Position.Y)));
 				}
 
-                //Calculate all of the middle tangents.
-                for (int i = 1; i < pointCount; ++i)
-                {
-                    tensionForPoint = ControlPoints[i].Tension * (double)i / pointCountDouble;
+				//Calculate all of the middle tangents.
+				for (int i = 1; i < pointCount; ++i)
+				{
+					tensionForPoint = ControlPoints[i].Tension * (double)i / pointCountDouble;
 
-                    bezierTangents.Add(new PointD(
-                        tensionForPoint *
-                            (ControlPoints[i + 1].Position.X - ControlPoints[i - 1].Position.X),
-                        tensionForPoint *
-                            (ControlPoints[i + 1].Position.Y - ControlPoints[i - 1].Position.Y)));
-                }
+					bezierTangents.Add(new PointD(
+						tensionForPoint *
+							(ControlPoints[i + 1].Position.X - ControlPoints[i - 1].Position.X),
+						tensionForPoint *
+							(ControlPoints[i + 1].Position.Y - ControlPoints[i - 1].Position.Y)));
+				}
 
-                //Calculate the last tangent.
+				//Calculate the last tangent.
 				if (Closed)
 				{
 					bezierTangents.Add(new PointD(
@@ -140,26 +136,25 @@ namespace Pinta.Tools
 				}
 
 
-                //For optimization.
-                int iMinusOne;
+				int iMinusOne;
 
-                //Generate the resulting curve's points with consecutive cubic Bezier curves that
-                //use the given points as end points and the calculated tangents as control points.
-                for (int i = 1; i < ControlPoints.Count; ++i)
-                {
-                    iMinusOne = i - 1;
+				//Generate the resulting curve's points with consecutive cubic Bezier curves that
+				//use the given points as end points and the calculated tangents as control points.
+				for (int i = 1; i < ControlPoints.Count; ++i)
+				{
+					iMinusOne = i - 1;
 
-                    generatedPoints.AddRange(GenerateCubicBezierCurvePoints(
-                        ControlPoints[iMinusOne].Position,
-                        new PointD(
-                            ControlPoints[iMinusOne].Position.X + bezierTangents[iMinusOne].X,
-                            ControlPoints[iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
-                        new PointD(
-                            ControlPoints[i].Position.X - bezierTangents[i].X,
-                            ControlPoints[i].Position.Y - bezierTangents[i].Y),
-                        ControlPoints[i].Position,
+					generatedPoints.AddRange(GenerateCubicBezierCurvePoints(
+						ControlPoints[iMinusOne].Position,
+						new PointD(
+							ControlPoints[iMinusOne].Position.X + bezierTangents[iMinusOne].X,
+							ControlPoints[iMinusOne].Position.Y + bezierTangents[iMinusOne].Y),
+						new PointD(
+							ControlPoints[i].Position.X - bezierTangents[i].X,
+							ControlPoints[i].Position.Y - bezierTangents[i].Y),
+						ControlPoints[i].Position,
 						i));
-                }
+				}
 
 				if (Closed)
 				{
@@ -178,9 +173,9 @@ namespace Pinta.Tools
 							ControlPoints[0].Position,
 							0));
 				}
-            }
+			}
 
-            GeneratedPoints = generatedPoints.ToArray();
+			GeneratedPoints = generatedPoints.ToArray();
         }
 
 		/// <summary>
