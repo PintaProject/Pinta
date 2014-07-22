@@ -75,11 +75,11 @@ namespace Pinta.Tools
         /// </summary>
         public void GenerateCardinalSplinePolynomialCurvePoints()
         {
-            List<PointD> generatedPoints = new List<PointD>();
+			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
             if (ControlPoints.Count < 2)
             {
-				generatedPoints.Add(ControlPoints[0].Position);
+				generatedPoints.Add(new GeneratedPoint(ControlPoints[0].Position, 0));
             }
             else
             {
@@ -157,7 +157,8 @@ namespace Pinta.Tools
                         new PointD(
                             ControlPoints[i].Position.X - bezierTangents[i].X,
                             ControlPoints[i].Position.Y - bezierTangents[i].Y),
-                        ControlPoints[i].Position));
+                        ControlPoints[i].Position,
+						i));
                 }
 
 				if (Closed)
@@ -174,7 +175,8 @@ namespace Pinta.Tools
 							new PointD(
 								ControlPoints[0].Position.X - bezierTangents[0].X,
 								ControlPoints[0].Position.Y - bezierTangents[0].Y),
-							ControlPoints[0].Position));
+							ControlPoints[0].Position,
+							0));
 				}
             }
 
@@ -188,10 +190,11 @@ namespace Pinta.Tools
 		/// <param name="p1">The first control point that the curve does not necessarily pass through.</param>
 		/// <param name="p2">The second control point that the curve does not necessarily pass through.</param>
 		/// <param name="p3">The second end point that the curve passes through.</param>
+		/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 		/// <returns>The List of generated points.</returns>
-		protected static List<PointD> GenerateCubicBezierCurvePoints(PointD p0, PointD p1, PointD p2, PointD p3)
+		protected static List<GeneratedPoint> GenerateCubicBezierCurvePoints(PointD p0, PointD p1, PointD p2, PointD p3, int cPIndex)
 		{
-			List<PointD> resultList = new List<PointD>();
+			List<GeneratedPoint> resultList = new List<GeneratedPoint>();
 
 
 			//Note: this must be low enough for mouse clicks to be properly considered on/off the curve at any given point.
@@ -232,12 +235,13 @@ namespace Pinta.Tools
 				oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
 				//Resulting Point = (1 - t) ^ 3 * p0 + 3 * (1 - t) ^ 2 * t * p1 + 3 * (1 - t) * t ^ 2 * p2 + t ^ 3 * p3
-				//This is done for both the X and Y given a value t going from 0 to 1 at a very small interval
+				//This is done for both the X and Y given a value t going from 0d to 1d at a very small interval
 				//and given 4 points p0, p1, p2, and p3, where p0 and p3 are end points and p1 and p2 are control points.
 
-				resultList.Add(new PointD(
+				resultList.Add(new GeneratedPoint(new PointD(
 					oneMinusTCubed * p0.X + oneMinusTSquaredTimesTTimesThree * p1.X + oneMinusTTimesTSquaredTimesThree * p2.X + tCubed * p3.X,
-					oneMinusTCubed * p0.Y + oneMinusTSquaredTimesTTimesThree * p1.Y + oneMinusTTimesTSquaredTimesThree * p2.Y + tCubed * p3.Y));
+					oneMinusTCubed * p0.Y + oneMinusTSquaredTimesTTimesThree * p1.Y + oneMinusTTimesTSquaredTimesThree * p2.Y + tCubed * p3.Y),
+					cPIndex));
 			}
 
 

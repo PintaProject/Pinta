@@ -1167,94 +1167,91 @@ namespace Pinta.Tools
 				{
 					//Not finalizing the shape; drawing it on the temporary DrawingLayer.
 
-					//Calculate the hover point if there isn't a request to organize the generated points by spatial hashing.
-					if (!calculateOrganizedPoints)
+					//Calculate the hover point unless told otherwise.
+					if (drawHoverSelection)
 					{
-						if (drawHoverSelection)
+						//Calculate the hover point, if any.
+
+						int closestCPIndex, closestCPShapeIndex;
+						ControlPoint closestControlPoint;
+						double closestCPDistance;
+
+						SEngines.FindClosestControlPoint(currentPoint,
+							out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+
+						int closestShapeIndex, closestPointIndex;
+						PointD closestPoint;
+						double closestDistance;
+
+						OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
+							out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+
+						bool clickedOnControlPoint = false;
+
+						double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
+
+						List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+
+						//Determine if the closest ControlPoint is within the expected click range.
+						if (closestControlPoint != null && closestCPDistance < currentClickRange)
 						{
-							//Calculate the hover point, if any.
+							//User clicked directly on a ControlPoint on a shape.
 
-							int closestCPIndex, closestCPShapeIndex;
-							ControlPoint closestControlPoint;
-							double closestCPDistance;
+							hoverPoint.X = closestControlPoint.Position.X;
+							hoverPoint.Y = closestControlPoint.Position.Y;
+							hoveredPointAsControlPoint = closestCPIndex;
+						}
+						else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
+						{
+							//User is hovering over a generated point on a shape.
 
-							SEngines.FindClosestControlPoint(currentPoint,
-								out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
-
-							int closestShapeIndex, closestPointIndex;
-							PointD closestPoint;
-							double closestDistance;
-
-							OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-								out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
-
-							bool clickedOnControlPoint = false;
-
-							double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
-
-							List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
-
-							//Determine if the closest ControlPoint is within the expected click range.
-							if (closestControlPoint != null && closestCPDistance < currentClickRange)
+							if (controlPoints.Count > closestPointIndex)
 							{
-								//User clicked directly on a ControlPoint on a shape.
-
-								hoverPoint.X = closestControlPoint.Position.X;
-								hoverPoint.Y = closestControlPoint.Position.Y;
-								hoveredPointAsControlPoint = closestCPIndex;
-							}
-							else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
-							{
-								//User is hovering over a generated point on a shape.
-
-								if (controlPoints.Count > closestPointIndex)
+								//Note: compare the currentPoint's distance here because it's the actual mouse position.
+								if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
 								{
-									//Note: compare the currentPoint's distance here because it's the actual mouse position.
-									if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
-									{
-										//Mouse hovering over a control point (on the "previous order" side of the point).
+									//Mouse hovering over a control point (on the "previous order" side of the point).
 
-										hoverPoint.X = controlPoints[closestPointIndex].Position.X;
-										hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
-										hoveredPointAsControlPoint = closestPointIndex;
-									}
-									else if (closestPointIndex > 0)
-									{
-										if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
-										{
-											//Mouse hovering over a control point (on the "following order" side of the point).
-
-											hoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
-											hoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
-											hoveredPointAsControlPoint = closestPointIndex - 1;
-										}
-									}
-									else if (controlPoints.Count > 0 &&
-										currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
+									hoverPoint.X = controlPoints[closestPointIndex].Position.X;
+									hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
+									hoveredPointAsControlPoint = closestPointIndex;
+								}
+								else if (closestPointIndex > 0)
+								{
+									if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
 									{
 										//Mouse hovering over a control point (on the "following order" side of the point).
 
-										hoveredPointAsControlPoint = controlPoints.Count - 1;
-										hoverPoint.X = controlPoints[hoveredPointAsControlPoint].Position.X;
-										hoverPoint.Y = controlPoints[hoveredPointAsControlPoint].Position.Y;
+										hoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
+										hoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
+										hoveredPointAsControlPoint = closestPointIndex - 1;
 									}
 								}
-
-								if (hoverPoint.X < 0d)
+								else if (controlPoints.Count > 0 &&
+									currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
 								{
-									hoverPoint.X = closestPoint.X;
-									hoverPoint.Y = closestPoint.Y;
+									//Mouse hovering over a control point (on the "following order" side of the point).
+
+									hoveredPointAsControlPoint = controlPoints.Count - 1;
+									hoverPoint.X = controlPoints[hoveredPointAsControlPoint].Position.X;
+									hoverPoint.Y = controlPoints[hoveredPointAsControlPoint].Position.Y;
 								}
 							}
+
+							if (hoverPoint.X < 0d)
+							{
+								hoverPoint.X = closestPoint.X;
+								hoverPoint.Y = closestPoint.Y;
+							}
 						}
-						else
-						{
-							//Do not draw the hover point. Instead, reset the hover point. NOTE: this is necessary even though the hover point
-							//is reset later. It affects the drawShape call.
-							hoverPoint = new PointD(-1d, -1d);
-							hoveredPointAsControlPoint = -1;
-						}
-					} //calculateOrganizedPoints (inside !finalize)
+					}
+					else
+					{
+						//Do not draw the hover point. Instead, reset the hover point. NOTE: this is necessary even though the hover point
+						//is reset later. It affects the drawShape call.
+						hoverPoint = new PointD(-1d, -1d);
+						hoveredPointAsControlPoint = -1;
+					}
 
 					//Draw the shape onto the temporary DrawingLayer.
 					dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
@@ -1273,20 +1270,10 @@ namespace Pinta.Tools
 					//First, clear the previously organized points, if any.
 					activeEngine.OrganizedPoints.ClearCollection();
 
-					int pointIndex = 0;
-
-					foreach (PointD p in activeEngine.GeneratedPoints)
+					foreach (GeneratedPoint gp in activeEngine.GeneratedPoints)
 					{
 						//For each generated point on the shape, calculate the spatial hashing for it and then store this information for later usage.
-						activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(p.X, p.Y), pointIndex));
-
-						//Keep track of the point's order in relation to the control points.
-						if (activeEngine.ControlPoints.Count > pointIndex
-							&& p.X == activeEngine.ControlPoints[pointIndex].Position.X
-							&& p.Y == activeEngine.ControlPoints[pointIndex].Position.Y)
-						{
-							++pointIndex;
-						}
+						activeEngine.OrganizedPoints.StoreAndOrganizePoint(new OrganizedPoint(new PointD(gp.Position.X, gp.Position.Y), gp.ControlPointIndex));
 					}
 				} //calculateOrganizedPoints (inside activeEngine != null, after finalize or !finalize)
 
@@ -1337,16 +1324,18 @@ namespace Pinta.Tools
 						//Generate the points that make up the shape.
 						activeEngine.GeneratePoints();
 
+						PointD[] actualPoints = activeEngine.GetActualPoints();
+
 						//Expand the invalidation rectangle as necessary.
 
 						if (FillShape)
 						{
-							dirty = dirty.UnionRectangles(g.FillPolygonal(activeEngine.GeneratedPoints, activeEngine.FillColor));
+							dirty = dirty.UnionRectangles(g.FillPolygonal(actualPoints, activeEngine.FillColor));
 						}
 
 						if (StrokeShape)
 						{
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(activeEngine.GeneratedPoints, activeEngine.OutlineColor));
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(actualPoints, activeEngine.OutlineColor));
 						}
 					}
 
@@ -1357,7 +1346,7 @@ namespace Pinta.Tools
 
 					if (drawCP)
 					{
-						drawControlPoints(g, dirty, drawHoverSelection);
+						drawControlPoints(g, drawHoverSelection);
 					}
 				}
 			}
@@ -1366,7 +1355,7 @@ namespace Pinta.Tools
 			return dirty ?? new Rectangle(0d, 0d, 0d, 0d);
 		}
 
-		protected void drawControlPoints(Context g, Rectangle? dirty, bool drawHoverSelection)
+		protected void drawControlPoints(Context g, bool drawHoverSelection)
 		{
 			lastControlPointSize = Math.Min(BrushWidth + 1, 5);
 			double controlPointOffset = (double)lastControlPointSize / 2d;

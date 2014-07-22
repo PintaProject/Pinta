@@ -60,7 +60,7 @@ namespace Pinta.Tools
 		/// </summary>
 		public override void GeneratePoints()
 		{
-			List<PointD> generatedPoints = new List<PointD>();
+			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
 
 			//An ellipse requires exactly 4 control points in order to draw anything.
@@ -170,31 +170,35 @@ namespace Pinta.Tools
 					double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
 					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
-					generatedPoints.Add(new PointD(cx + rx, cy));
+					generatedPoints.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
 
 					generatedPoints.AddRange(calculateCurvePoints(tInterval,
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
 						cx + c1 * rx, cy - ry,
-						cx, cy - ry));
+						cx, cy - ry,
+						3));
 
 					generatedPoints.AddRange(calculateCurvePoints(tInterval,
 						cx, cy - ry,
 						cx - c1 * rx, cy - ry,
 						cx - rx, cy - c1 * ry,
-						cx - rx, cy));
+						cx - rx, cy,
+						0));
 
 					generatedPoints.AddRange(calculateCurvePoints(tInterval,
 						cx - rx, cy,
 						cx - rx, cy + c1 * ry,
 						cx - c1 * rx, cy + ry,
-						cx, cy + ry));
+						cx, cy + ry,
+						1));
 
 					generatedPoints.AddRange(calculateCurvePoints(tInterval,
 						cx, cy + ry,
 						cx + c1 * rx, cy + ry,
 						cx + rx, cy + c1 * ry,
-						cx + rx, cy));
+						cx + rx, cy,
+						2));
 
 					if (DashPattern == "-")
 					{
@@ -203,12 +207,13 @@ namespace Pinta.Tools
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
 						cx + c1 * rx, cy - ry,
-						cx, cy - ry));
+						cx, cy - ry,
+						3));
 					}
 					else
 					{
 						//Don't overlap if there is a dash pattern.
-						generatedPoints.Add(new PointD(cx + rx, cy));
+						generatedPoints.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
 					}
 				}
 			}
@@ -242,7 +247,7 @@ namespace Pinta.Tools
 					//Lerp from the current point to the next point.
 					for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f)
 					{
-						generatedPoints.Add(Utility.Lerp(currentPoint, nextPoint, lerpPos));
+						generatedPoints.Add(new GeneratedPoint(Utility.Lerp(currentPoint, nextPoint, lerpPos), currentNum));
 					}
 				}
 			}
@@ -263,11 +268,14 @@ namespace Pinta.Tools
 		/// <param name="y2">Control point 2 Y.</param>
 		/// <param name="x3">Ending point X (included in the returned Point(s)).</param>
 		/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
+		/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 		/// <returns></returns>
-		protected List<PointD> calculateCurvePoints(double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
+		protected List<GeneratedPoint> calculateCurvePoints(
+			double tInterval,
+			double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3,
+			int cPIndex)
 		{
-			//Create a new partial Polygon to store the calculated Points.
-			List<PointD> calculatedPoints = new List<PointD>((int)(1d / tInterval));
+			List<GeneratedPoint> calculatedPoints = new List<GeneratedPoint>((int)(1d / tInterval));
 
 			double oneMinusT;
 			double oneMinusTSquared;
@@ -307,9 +315,10 @@ namespace Pinta.Tools
 				oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
 				oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
-				calculatedPoints.Add(new PointD(
+				calculatedPoints.Add(new GeneratedPoint(new PointD(
 					(oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3),
-					(oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)));
+					(oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)),
+					cPIndex));
 			}
 
 			//Return the partial Polygon containing the calculated Points in the curve.

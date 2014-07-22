@@ -107,8 +107,8 @@ namespace Pinta.Tools
 		//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
 		public List<ControlPoint> ControlPoints = new List<ControlPoint>();
 
-		//A collection of calculated PointD's that make up the entirety of the shape being drawn.
-		public PointD[] GeneratedPoints = new PointD[0];
+		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
+		public GeneratedPoint[] GeneratedPoints = new GeneratedPoint[0];
 
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
@@ -228,6 +228,18 @@ namespace Pinta.Tools
         /// Generate the points that make up the entirety of the shape being drawn.
         /// </summary>
         public abstract void GeneratePoints();
+
+		public PointD[] GetActualPoints()
+		{
+			PointD[] actualPoints = new PointD[GeneratedPoints.Count()];
+
+			for (int pointNum = 0; pointNum < GeneratedPoints.Count(); ++pointNum)
+			{
+				actualPoints[pointNum] = GeneratedPoints[pointNum].Position;
+			}
+
+			return actualPoints;
+		}
 
 
 		protected UserLayer parentLayer;

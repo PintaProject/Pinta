@@ -76,6 +76,7 @@
     <Compile Include="Editable\EditEngines\RoundedLineEditEngine.cs" />
     <Compile Include="Editable\EditEngines\EllipseEditEngine.cs" />
     <Compile Include="Editable\EditEngines\RectangleEditEngine.cs" />
+    <Compile Include="Editable\Shapes\GeneratedPoint.cs" />
     <Compile Include="Editable\Shapes\ControlPoint.cs" />
     <Compile Include="Editable\Shapes\Arrow.cs" />
     <Compile Include="Editable\Shapes\RoundedLineEngine.cs" />

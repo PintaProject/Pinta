@@ -128,10 +128,8 @@ namespace Pinta.Tools
 		/// <param name="closestPoint">The position of the closest point.</param>
 		/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
 		public static void FindClosestPoint(
-            List<ShapeEngine> SEL,
-			PointD currentPoint,
-			out int closestShapeIndex, out int closestPointIndex,
-			out PointD closestPoint, out double closestDistance)
+            List<ShapeEngine> SEL, PointD currentPoint,
+			out int closestShapeIndex, out int closestPointIndex, out PointD closestPoint, out double closestDistance)
 		{
 			closestShapeIndex = 0;
 			closestPointIndex = 0;
@@ -187,11 +185,11 @@ namespace Pinta.Tools
 									}
 								}
 							}
-						}
+						} //for each organized row
 					}
-				}
-			}
-		}
+				} //for each organized column
+			} //for each ShapeEngine List
+		} //FindClosestPoint
 	}
 
 	public class OrganizedPoint

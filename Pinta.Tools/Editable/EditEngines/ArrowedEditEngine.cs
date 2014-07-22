@@ -671,7 +671,7 @@ namespace Pinta.Tools
 			{
 				//Draw the arrows for the currently active shape.
 
-				PointD[] genPoints = activeEngine.GeneratedPoints;
+				GeneratedPoint[] genPoints = activeEngine.GeneratedPoints;
 
 				for (int i = 0; i < activeEngine.ControlPoints.Count; ++i)
 				{
@@ -682,7 +682,7 @@ namespace Pinta.Tools
 						if (genPoints.Length > 1)
 						{
 							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow1.Draw(
-								g, activeLCSEngine.OutlineColor, genPoints[0], genPoints[1]));
+								g, activeLCSEngine.OutlineColor, genPoints[0].Position, genPoints[1].Position));
 						}
 					}
 
@@ -691,7 +691,8 @@ namespace Pinta.Tools
 						if (genPoints.Length > 1)
 						{
 							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow2.Draw(
-								g, activeLCSEngine.OutlineColor, genPoints[genPoints.Length - 1], genPoints[genPoints.Length - 2]));
+								g, activeLCSEngine.OutlineColor,
+								genPoints[genPoints.Length - 1].Position, genPoints[genPoints.Length - 2].Position));
 						}
 					}
 				}

@@ -62,8 +62,7 @@ namespace Pinta.Tools
 		/// </summary>
 		public override void GeneratePoints()
 		{
-			List<PointD> generatedPoints = new List<PointD>();
-
+			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
 			for (int currentIndex = 0; currentIndex < ControlPoints.Count; ++currentIndex)
 			{
@@ -87,11 +86,9 @@ namespace Pinta.Tools
 				PointD nextPosition = ControlPoints[nextIndex].Position;
 				PointD doubleNextPosition = ControlPoints[doubleNextIndex].Position;
 
-
 				//Calculate the distance between the current and next point and the next and double next point.
 				double currentDistance = currentPosition.Distance(nextPosition);
 				double nextDistance = nextPosition.Distance(doubleNextPosition);
-
 
 				//The radius value used can change between ControlPoints depending on their proximity to each other.
 				double currentRadius = Radius;
@@ -101,7 +98,6 @@ namespace Pinta.Tools
 				{
 					currentRadius = Math.Min(currentDistance / 2d, nextDistance / 2d);
 				}
-
 
 				//Calculate the current offset ratio, which is the ratio of the radius to the distance between the current and next points.
 
@@ -122,7 +118,6 @@ namespace Pinta.Tools
 					}
 				}
 
-
 				//Calculate the next offset ratio, which is the ratio of the radius to the distance between the next and double next points.
 
 				double nextOffsetRatio;
@@ -142,7 +137,6 @@ namespace Pinta.Tools
 					}
 				}
 
-
 				//Calculate the start and end points of the actual, straight line.
 
 				PointD startPoint = new PointD(currentPosition.X + (nextPosition.X - currentPosition.X) * currentOffsetRatio,
@@ -156,14 +150,12 @@ namespace Pinta.Tools
 				PointD nextEndPoint = new PointD(nextPosition.X + (doubleNextPosition.X - nextPosition.X) * nextOffsetRatio,
 					nextPosition.Y + (doubleNextPosition.Y - nextPosition.Y) * nextOffsetRatio);
 
-
 				//Add the line.
-				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(startPoint, endPoint, endPoint));
+				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(startPoint, endPoint, endPoint, nextIndex));
 
 				//Add the rounded corner.
-				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(endPoint, nextPosition, nextEndPoint));
+				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(endPoint, nextPosition, nextEndPoint, nextIndex));
 			}
-
 
 			GeneratedPoints = generatedPoints.ToArray();
 		}
@@ -174,10 +166,11 @@ namespace Pinta.Tools
 		/// <param name="p0">The first end point that the curve passes through.</param>
 		/// <param name="p1">The control point that the curve does not necessarily pass through.</param>
 		/// <param name="p2">The second end point that the curve passes through.</param>
+		/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 		/// <returns>The List of generated points.</returns>
-		protected static List<PointD> GenerateQuadraticBezierCurvePoints(PointD p0, PointD p1, PointD p2)
+		protected static List<GeneratedPoint> GenerateQuadraticBezierCurvePoints(PointD p0, PointD p1, PointD p2, int cPIndex)
 		{
-			List<PointD> resultList = new List<PointD>();
+			List<GeneratedPoint> resultList = new List<GeneratedPoint>();
 
 
 			//Note: this must be low enough for mouse clicks to be properly considered on/off the curve at any given point.
@@ -212,12 +205,13 @@ namespace Pinta.Tools
 				oneMinusTTimesTTimesTwo = oneMinusT * t * 2d;
 
 				//Resulting Point = (1 - t) ^ 2 * p0 + 2 * (1 - t) * t * p1 + t ^ 2 * p2
-				//This is done for both the X and Y given a value t going from 0 to 1 at a very small interval
+				//This is done for both the X and Y given a value t going from 0d to 1d at a very small interval
 				//and given 3 points p0, p1, and p2, where p0 and p2 are end points and p1 is a control point.
 
-				resultList.Add(new PointD(
+				resultList.Add(new GeneratedPoint(new PointD(
 					oneMinusTSquared * p0.X + oneMinusTTimesTTimesTwo * p1.X + tSquared * p2.X,
-					oneMinusTSquared * p0.Y + oneMinusTTimesTTimesTwo * p1.Y + tSquared * p2.Y));
+					oneMinusTSquared * p0.Y + oneMinusTTimesTTimesTwo * p1.Y + tSquared * p2.Y),
+					cPIndex));
 			}
 
 
