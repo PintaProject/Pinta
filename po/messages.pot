@@ -2185,27 +2185,47 @@ msgid "Increase length offset"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:695
-msgid "Shape Finalized"
+msgid "Finalized"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:456
-msgid "Shape Point Deleted"
+msgid "Point Deleted"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:473
-msgid "Shape Deleted"
+msgid "Deleted"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:347
-msgid "Shape Point Added"
+msgid "Point Added"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:395
-msgid "Shape Added"
+msgid "Added"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:477
-msgid "Shape Modified"
+msgid "Modified"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:52
+msgid "Shape"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
+msgid "Open Curve Series"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
+msgid "Closed Curve Series"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
+msgid "Ellipse"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
+msgid "Rounded Line Series"
 msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:268

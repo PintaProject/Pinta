@@ -80,8 +80,8 @@ namespace Pinta.Core
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 
-		//Whether or not the effects of the tool are editable without undoing any actions.
-		public bool Editable = false;
+		//Whether or not the tool is an editable ShapeTool.
+		public bool IsEditableShapeTool = false;
 
 		public virtual bool UseAntialiasing
 		{

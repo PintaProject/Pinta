@@ -41,7 +41,6 @@ namespace Pinta.Tools
     {
 		public enum ShapeTypes
 		{
-			None,
 			OpenLineCurveSeries,
 			ClosedLineCurveSeries,
 			Ellipse,
@@ -50,7 +49,9 @@ namespace Pinta.Tools
 
 		public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new Dictionary<ShapeTypes, ShapeTool>();
 
-        protected readonly BaseTool owner;
+		protected virtual string shapeString { get { return Catalog.GetString("Shape"); } }
+
+        protected readonly ShapeTool owner;
 
         protected bool isDrawing = false;
 
@@ -74,7 +75,6 @@ namespace Pinta.Tools
 
 		protected ToolBarLabel shapeTypeLabel;
 		protected ToolBarDropDownButton shapeTypeButton;
-		protected ToolBarItem noShapeType;
 		protected Gtk.SeparatorToolItem shapeTypeSep;
 
         protected DashPatternBox dashPBox = new DashPatternBox();
@@ -236,11 +236,11 @@ namespace Pinta.Tools
         #endregion ToolbarEventHandlers
 
 
-        public BaseEditEngine(BaseTool passedOwner)
+        public BaseEditEngine(ShapeTool passedOwner)
         {
             owner = passedOwner;
 
-			owner.Editable = true;
+			owner.IsEditableShapeTool = true;
 
 			resetShapes();
         }
@@ -308,7 +308,7 @@ namespace Pinta.Tools
 			tb.AppendItem(shapeTypeSep);
 
 			if (shapeTypeLabel == null)
-				shapeTypeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Shape Type")));
+				shapeTypeLabel = new ToolBarLabel(string.Format(" {0}: ", shapeString + " " + Catalog.GetString("Type")));
 
 			tb.AppendItem(shapeTypeLabel);
 
@@ -316,39 +316,34 @@ namespace Pinta.Tools
 			{
 				shapeTypeButton = new ToolBarDropDownButton();
 
-				shapeTypeButton.AddItem("", "", 0);
-				shapeTypeButton.AddItem(Catalog.GetString("Open Line/Curve Series"), "Tools.Line.png", 1);
-				shapeTypeButton.AddItem(Catalog.GetString("Closed Line/Curve Series"), "Tools.Rectangle.png", 2);
-				shapeTypeButton.AddItem(Catalog.GetString("Ellipse"), "Tools.Ellipse.png", 3);
-				shapeTypeButton.AddItem(Catalog.GetString("Rounded Line Series"), "Tools.RoundedRectangle.png", 4);
-
-				noShapeType = shapeTypeButton.Items[0];
+				shapeTypeButton.AddItem(Catalog.GetString("Open Line/Curve Series"), "Tools.Line.png", 0);
+				shapeTypeButton.AddItem(Catalog.GetString("Closed Line/Curve Series"), "Tools.Rectangle.png", 1);
+				shapeTypeButton.AddItem(Catalog.GetString("Ellipse"), "Tools.Ellipse.png", 2);
+				shapeTypeButton.AddItem(Catalog.GetString("Rounded Line Series"), "Tools.RoundedRectangle.png", 3);
 
 				shapeTypeButton.SelectedItemChanged += (o, e) =>
 				{
 					ShapeTypes newShapeType = ShapeType;
+					ShapeEngine selEngine = SelectedShapeEngine;
 
-					if (newShapeType != ShapeTypes.None)
+					if (selEngine != null)
 					{
-						ShapeEngine selEngine = SelectedShapeEngine;
-
-						if (selEngine != null)
+						//Verify that the tool needs to be switched.
+						if (GetCorrespondingTool(newShapeType) != this.owner)
 						{
-							//Verify that the tool needs to be switched.
-							if (GetCorrespondingTool(newShapeType) != this.owner)
-							{
-								//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
-								selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
+							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
+							selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
 
-								//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
-								ActivateCorrespondingTool(SelectedShapeIndex);
+							//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
+							ActivateCorrespondingTool(SelectedShapeIndex);
 
-								//The currently active tool should now match the clicked on shape's corresponding tool.
-							}
+							//The currently active tool should now match the clicked on shape's corresponding tool.
 						}
 					}
 				};
 			}
+
+			shapeTypeButton.SelectedItem = shapeTypeButton.Items[(int)owner.ShapeType];
 
 			tb.AppendItem(shapeTypeButton);
 
@@ -377,11 +372,6 @@ namespace Pinta.Tools
 			OutlineColor = PintaCore.Palette.PrimaryColor;
 			FillColor = PintaCore.Palette.SecondaryColor;
 
-			if (shapeTypeButton != null)
-			{
-				shapeTypeButton.SelectedItem = noShapeType;
-			}
-
             DrawActiveShape(false, false, true, false);
 
             PintaCore.Palette.PrimaryColorChanged += new EventHandler(Palette_PrimaryColorChanged);
@@ -401,7 +391,7 @@ namespace Pinta.Tools
 			}
 
 			//Determine if the tool being switched to will be another editable tool.
-			if (!newTool.Editable)
+			if (!newTool.IsEditableShapeTool)
 			{
 				//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
 				finalizeAllShapes();
@@ -479,7 +469,7 @@ namespace Pinta.Tools
                     {
 						//Create a new ShapeModifyHistoryItem so that the deletion of a control point can be undone.
 						PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Deleted")));
+							new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Deleted")));
 
 						//Delete the selected point from the shape.
 						controlPoints.RemoveAt(SelectedPointIndex);
@@ -496,7 +486,7 @@ namespace Pinta.Tools
 
 						//Create a new ShapeHistoryItem so that the deletion of a shape can be undone.
 						doc.History.PushNewItem(
-							new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Deleted"),
+							new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Deleted"),
 								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
 
@@ -529,8 +519,8 @@ namespace Pinta.Tools
             }
             else if (keyPressed == Gdk.Key.Return)
             {
-                //Finalize the previous shape (if needed).
-				DrawActiveShape(false, true, false, false);
+                //Finalize every editable shape not yet finalized.
+				finalizeAllShapes();
 
                 args.RetVal = true;
             }
@@ -545,7 +535,7 @@ namespace Pinta.Tools
 
                     //Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
+						new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Added")));
 
 
                     bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
@@ -743,6 +733,9 @@ namespace Pinta.Tools
             }
 
 
+			bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+
+
 			int closestCPIndex, closestCPShapeIndex;
 			ControlPoint closestControlPoint;
 			double closestCPDistance;
@@ -817,15 +810,13 @@ namespace Pinta.Tools
 					}
 				}
 
-				int actualClosestSI = closestShapeIndex > closestCPShapeIndex ? closestCPShapeIndex : closestShapeIndex;
-
 				//Check for clicking on a non-control point. Don't do anything here if right clicked.
-				if (!changingTension && !clickedOnControlPoint && actualClosestSI > -1 && SEngines.Count > actualClosestSI)
+				if (!changingTension && !clickedOnControlPoint && closestShapeIndex > -1 && closestPointIndex > -1 && SEngines.Count > closestShapeIndex)
 				{
 					//User clicked on a non-control point on a shape.
 
 					//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
-					if (ActivateCorrespondingTool(actualClosestSI))
+					if (ActivateCorrespondingTool(closestShapeIndex))
 					{
 						//Pass on the event and its data to the newly activated tool.
 						PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
@@ -836,29 +827,26 @@ namespace Pinta.Tools
 
 					//The currently active tool matches the clicked on shape's corresponding tool.
 
-					//Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
-					doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Point Added")));
-
-					controlPoints.Insert(closestPointIndex,
-						new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
-
-					if (closestDistance < closestCPDistance)
+					//Only create a new shape if the user isn't holding the control key down.
+					if (!ctrlKey)
 					{
-						SelectedPointIndex = closestPointIndex;
-						SelectedShapeIndex = closestShapeIndex;
+						//Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
+						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Added")));
+
+						controlPoints.Insert(closestPointIndex,
+							new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
 					}
-					else
-					{
-						SelectedPointIndex = closestCPIndex;
-						SelectedShapeIndex = closestCPShapeIndex;
-					}
+
+					//These should be set after creating the history item.
+					SelectedPointIndex = closestPointIndex;
+					SelectedShapeIndex = closestShapeIndex;
+
+					clickedOnShape();
 				}
 			}
 
-            bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
-
-			//Create a new shape if the user control + clicks on an existing point or if the user simply clicks outside of any shapes.
-			if (!changingTension && ((ctrlKey && clickedOnControlPoint) || (closestCPDistance >= currentClickRange && closestDistance >= currentClickRange)))
+			//Create a new shape if the user control + clicks on a shape or if the user simply clicks outside of any shapes.
+			if (!changingTension && (ctrlKey || (closestCPDistance >= currentClickRange && closestDistance >= currentClickRange)))
             {
 				//Verify that the user clicked inside the image bounds or that the user is
 				//holding the Ctrl key (to ignore the Image bounds and draw on the edge).
@@ -878,7 +866,7 @@ namespace Pinta.Tools
 					}
 
 					//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Added"),
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Added"),
 						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
 					//Create the shape, add its starting points, and add it to SEngines.
@@ -910,6 +898,8 @@ namespace Pinta.Tools
 				}
 
 				//The currently active tool matches the clicked on shape's corresponding tool.
+
+				clickedOnShape();
 			}
 
             //Determine if the user right clicks outside of any shapes (neither on their control points nor on their generated points).
@@ -959,7 +949,7 @@ namespace Pinta.Tools
                     {
                         //Create a new ShapeModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, Catalog.GetString("Shape Modified")));
+							new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Modified")));
 
                         clickedWithoutModifying = false;
                     }
@@ -1175,7 +1165,7 @@ namespace Pinta.Tools
 					if (undoSurface != null)
 					{
 						//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-						doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Shape Finalized"),
+						doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Finalized"),
 							undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 					}
 				} //finalize
@@ -1201,8 +1191,6 @@ namespace Pinta.Tools
 
 						OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
 							out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
-
-						bool clickedOnControlPoint = false;
 
 						double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
 
@@ -1563,30 +1551,50 @@ namespace Pinta.Tools
 				//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
 				if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool)
 				{
-					ShapeTool oldTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+					//What happens next depends on whether the old tool is an editable ShapeTool.
+					if (PintaCore.Tools.CurrentTool.IsEditableShapeTool)
+					{
+						ShapeTool oldTool = (ShapeTool)PintaCore.Tools.CurrentTool;
 
-					//The active tool needs to be switched to the corresponding tool.
-					PintaCore.Tools.SetCurrentTool(correspondingTool, false);
+						//The active tool needs to be switched to the corresponding tool.
+						PintaCore.Tools.SetCurrentTool(correspondingTool, false);
 
-					ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+						ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
 
-					//Set the new tool's active shape and point to the old shape and point.
-					newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
-					newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
+						//Set the new tool's active shape and point to the old shape and point.
+						newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
+						newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
 
-					//Deselect any shape or point in the old tool.
-					oldTool.EditEngine.SelectedPointIndex = -1;
-					oldTool.EditEngine.SelectedShapeIndex = -1;
+						//Deselect any shape or point in the old tool.
+						oldTool.EditEngine.SelectedPointIndex = -1;
+						oldTool.EditEngine.SelectedShapeIndex = -1;
 
-					//Make sure neither tool thinks it is drawing anything.
-					newTool.EditEngine.isDrawing = false;
-					oldTool.EditEngine.isDrawing = false;
+						//Make sure neither tool thinks it is drawing anything.
+						newTool.EditEngine.isDrawing = false;
+						oldTool.EditEngine.isDrawing = false;
 
-					//Draw the updated shape with organized points generation (for mouse detection). 
-					newTool.EditEngine.DrawActiveShape(true, false, true, false);
+						//Draw the updated shape with organized points generation (for mouse detection). 
+						newTool.EditEngine.DrawActiveShape(true, false, true, false);
 
-					//Let the caller know that the active tool has been switched.
-					return true;
+						//Let the caller know that the active tool has been switched.
+						return true;
+					}
+					else
+					{
+						//The active tool needs to be switched to the corresponding tool.
+						PintaCore.Tools.SetCurrentTool(correspondingTool, false);
+
+						ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+
+						//Make sure that the new tool doesn't think it is drawing anything.
+						newTool.EditEngine.isDrawing = false;
+
+						//Draw the updated shape with organized points generation (for mouse detection). 
+						newTool.EditEngine.DrawActiveShape(true, false, true, false);
+
+						//Let the caller know that the active tool has been switched.
+						return true;
+					}
 				}
 			}
 
@@ -1597,7 +1605,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Gets the corresponding tool to the given shape type and then returns that tool.
 		/// </summary>
-		/// <param name="shapeType">The shape type to find the corresponding tool to.</param>
+		/// <param name="ShapeType">The shape type to find the corresponding tool to.</param>
 		/// <returns>The corresponding tool to the given shape type.</returns>
 		public static ShapeTool GetCorrespondingTool(ShapeTypes shapeType)
 		{
@@ -1609,6 +1617,11 @@ namespace Pinta.Tools
 			return correspondingTool;
 		}
 
+
+		protected virtual void clickedOnShape()
+		{
+
+		}
 
 		/// <summary>
 		/// Creates a new shape, adds its starting points, and returns it.

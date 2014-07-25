@@ -36,7 +36,15 @@ namespace Pinta.Tools
 {
     public class LineCurveEditEngine: ArrowedEditEngine
 	{
-        public LineCurveEditEngine(BaseTool passedOwner): base(passedOwner)
+		protected override string shapeString
+		{
+			get
+			{
+				return Catalog.GetString("Open Curve Series");
+			}
+		}
+
+        public LineCurveEditEngine(ShapeTool passedOwner): base(passedOwner)
         {
 
         }
@@ -52,6 +60,9 @@ namespace Pinta.Tools
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+
+			//Set the new shape's arrow options to be the same as what's in the toolbar settings.
+			setArrowOptions((LineCurveSeriesEngine)newEngine);
 
 			return newEngine;
 		}

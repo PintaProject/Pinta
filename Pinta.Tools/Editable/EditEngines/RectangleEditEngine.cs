@@ -36,7 +36,15 @@ namespace Pinta.Tools
 {
     public class RectangleEditEngine: BaseEditEngine
     {
-        public RectangleEditEngine(BaseTool passedOwner): base(passedOwner)
+		protected override string shapeString
+		{
+			get
+			{
+				return Catalog.GetString("Closed Curve Series");
+			}
+		}
+
+		public RectangleEditEngine(ShapeTool passedOwner): base(passedOwner)
         {
 
         }

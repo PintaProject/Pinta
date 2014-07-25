@@ -62,11 +62,19 @@ namespace Pinta.Tools
 			get { return 45; }
 		}
 
+		public override BaseEditEngine.ShapeTypes ShapeType
+		{
+			get
+			{
+				return BaseEditEngine.ShapeTypes.Ellipse;
+			}
+		}
+
 		public EllipseTool ()
 		{
 			EditEngine = new EllipseEditEngine(this);
 
-			BaseEditEngine.CorrespondingTools.Add(BaseEditEngine.ShapeTypes.Ellipse, this);
+			BaseEditEngine.CorrespondingTools.Add(ShapeType, this);
 		}
 	}
 }

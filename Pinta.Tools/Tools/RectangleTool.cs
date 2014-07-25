@@ -62,11 +62,19 @@ namespace Pinta.Tools
 			get { return 41; }
 		}
 
+		public override BaseEditEngine.ShapeTypes ShapeType
+		{
+			get
+			{
+				return BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
+			}
+		}
+
 		public RectangleTool()
 		{
 			EditEngine = new RectangleEditEngine(this);
 
-			BaseEditEngine.CorrespondingTools.Add(BaseEditEngine.ShapeTypes.ClosedLineCurveSeries, this);
+			BaseEditEngine.CorrespondingTools.Add(ShapeType, this);
 		}
 	}
 }

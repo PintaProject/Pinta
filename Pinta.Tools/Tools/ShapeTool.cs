@@ -51,7 +51,10 @@ namespace Pinta.Tools
         
 		#region Properties
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
-        protected override bool ShowAntialiasingButton { get { return true; } }
+        
+		protected override bool ShowAntialiasingButton { get { return true; } }
+
+		public virtual BaseEditEngine.ShapeTypes ShapeType { get { return BaseEditEngine.ShapeTypes.ClosedLineCurveSeries; } }
 		#endregion
 
         protected override void OnBuildToolBar(Gtk.Toolbar tb)

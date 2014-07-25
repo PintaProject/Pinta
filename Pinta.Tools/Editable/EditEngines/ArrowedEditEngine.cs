@@ -53,57 +53,76 @@ namespace Pinta.Tools
         private ToolBarLabel arrowLengthOffsetLabel;
         private ToolBarButton arrowLengthOffsetMinus, arrowLengthOffsetPlus;
 
+		private Arrow previousSettings1 = new Arrow();
+		private Arrow previousSettings2 = new Arrow();
+
 
         /// <summary>
-        /// Set the Arrow options for the current shape to their respective values in the toolbar.
+        /// Set the Arrow options for the given shape to their respective values in the toolbar.
         /// </summary>
-        private void SetArrowOptions()
+        protected void setArrowOptions(LineCurveSeriesEngine newEngine)
         {
-            LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
-
-            if (selEngine != null)
+			if (newEngine != null && showArrowOneBox != null)
             {
-                selEngine.Arrow1.Show = showArrowOneBox.Active;
-                selEngine.Arrow2.Show = showArrowTwoBox.Active;
+				newEngine.Arrow1.Show = showArrowOneBox.Active;
+				newEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-                showOtherArrowOptions = showArrowOneBox.Active || showArrowTwoBox.Active;
+				Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.ArrowSize);
+                Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.AngleOffset);
+				Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.LengthOffset);
 
-                if (showOtherArrowOptions)
-                {
-                    Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.ArrowSize);
-                    Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.AngleOffset);
-                    Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out selEngine.Arrow1.LengthOffset);
+				newEngine.Arrow1.ArrowSize = Utility.Clamp(newEngine.Arrow1.ArrowSize, 1d, 100d);
+				newEngine.Arrow2.ArrowSize = newEngine.Arrow1.ArrowSize;
+				newEngine.Arrow1.AngleOffset = Utility.Clamp(newEngine.Arrow1.AngleOffset, -89d, 89d);
+				newEngine.Arrow2.AngleOffset = newEngine.Arrow1.AngleOffset;
+				newEngine.Arrow1.LengthOffset = Utility.Clamp(newEngine.Arrow1.LengthOffset, -100d, 100d);
+				newEngine.Arrow2.LengthOffset = newEngine.Arrow1.LengthOffset;
 
-                    selEngine.Arrow1.ArrowSize = Utility.Clamp(selEngine.Arrow1.ArrowSize, 1d, 100d);
-                    selEngine.Arrow2.ArrowSize = selEngine.Arrow1.ArrowSize;
-                    selEngine.Arrow1.AngleOffset = Utility.Clamp(selEngine.Arrow1.AngleOffset, -89d, 89d);
-                    selEngine.Arrow2.AngleOffset = selEngine.Arrow1.AngleOffset;
-                    selEngine.Arrow1.LengthOffset = Utility.Clamp(selEngine.Arrow1.LengthOffset, -100d, 100d);
-                    selEngine.Arrow2.LengthOffset = selEngine.Arrow1.LengthOffset;
-                }
+
+				storePreviousSettings(newEngine);
             }
         }
 
         /// <summary>
         /// Set the Arrow options in the toolbar to their respective values for the current shape.
         /// </summary>
-        private void SetToolbarArrowOptions()
+        private void setToolbarArrowOptions()
         {
-            LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
+			if (showArrowOneBox != null)
+			{
+				showArrowOneBox.Active = previousSettings1.Show;
+				showArrowTwoBox.Active = previousSettings2.Show;
 
-            if (selEngine != null)
-            {
-                showArrowOneBox.Active = selEngine.Arrow1.Show;
-                showArrowTwoBox.Active = selEngine.Arrow2.Show;
-
-                if (showOtherArrowOptions)
-                {
-                    (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.ArrowSize.ToString();
-                    (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.AngleOffset.ToString();
-                    (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = selEngine.Arrow1.LengthOffset.ToString();
-                }
-            }
+				if (showOtherArrowOptions)
+				{
+					(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.ArrowSize.ToString();
+					(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.AngleOffset.ToString();
+					(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.LengthOffset.ToString();
+				}
+			}
         }
+
+		private void storePreviousSettings()
+		{
+			ShapeEngine activeEngine = ActiveShapeEngine;
+
+			if (activeEngine != null)
+			{
+				storePreviousSettings((LineCurveSeriesEngine)activeEngine);
+			}
+		}
+
+		private void storePreviousSettings(LineCurveSeriesEngine engine)
+		{
+			previousSettings1.Show = engine.Arrow1.Show;
+			previousSettings2.Show = engine.Arrow2.Show;
+
+			previousSettings1.ArrowSize = engine.Arrow1.ArrowSize;
+			previousSettings1.AngleOffset = engine.Arrow1.AngleOffset;
+			previousSettings1.LengthOffset = engine.Arrow1.LengthOffset;
+
+			//Other Arrow2 settings are unnecessary since they are the same as Arrow1's.
+		}
 
 
         #region ToolbarEventHandlers
@@ -267,6 +286,7 @@ namespace Pinta.Tools
             //Show arrow 1.
 
             showArrowOneBox = new Gtk.CheckButton("1");
+			showArrowOneBox.Active = previousSettings1.Show;
 
             showArrowOneBox.Toggled += (o, e) =>
             {
@@ -312,13 +332,15 @@ namespace Pinta.Tools
                     }
                 }
 
-                LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
+                LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
-                if (selEngine != null)
+                if (activeEngine != null)
                 {
-                    selEngine.Arrow1.Show = showArrowOneBox.Active;
+                    activeEngine.Arrow1.Show = showArrowOneBox.Active;
 
                     DrawActiveShape(false, false, true, false);
+
+					storePreviousSettings(activeEngine);
                 }
             };
 
@@ -328,6 +350,7 @@ namespace Pinta.Tools
             //Show arrow 2.
 
             showArrowTwoBox = new Gtk.CheckButton("2");
+			showArrowTwoBox.Active = previousSettings2.Show;
 
             showArrowTwoBox.Toggled += (o, e) =>
             {
@@ -373,13 +396,15 @@ namespace Pinta.Tools
                     }
                 }
 
-                LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
+                LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
-                if (selEngine != null)
+                if (activeEngine != null)
                 {
-                    selEngine.Arrow2.Show = showArrowTwoBox.Active;
+                    activeEngine.Arrow2.Show = showArrowTwoBox.Active;
 
 					DrawActiveShape(false, false, true, false);
+
+					storePreviousSettings(activeEngine);
                 }
             };
 
@@ -447,14 +472,16 @@ namespace Pinta.Tools
 
                         (arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
 
-                        LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
+                        LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
-                        if (selEngine != null)
+                        if (activeEngine != null)
                         {
-                            selEngine.Arrow1.ArrowSize = newSize;
-                            selEngine.Arrow2.ArrowSize = newSize;
+                            activeEngine.Arrow1.ArrowSize = newSize;
+                            activeEngine.Arrow2.ArrowSize = newSize;
 
 							DrawActiveShape(false, false, true, false);
+
+							storePreviousSettings(activeEngine);
                         }
                     }
                 };
@@ -524,14 +551,16 @@ namespace Pinta.Tools
 
                         (arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
 
-                        LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
+                        LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
-                        if (selEngine != null)
+                        if (activeEngine != null)
                         {
-                            selEngine.Arrow1.AngleOffset = newAngle;
-                            selEngine.Arrow2.AngleOffset = newAngle;
+                            activeEngine.Arrow1.AngleOffset = newAngle;
+                            activeEngine.Arrow2.AngleOffset = newAngle;
 
 							DrawActiveShape(false, false, true, false);
+
+							storePreviousSettings(activeEngine);
                         }
                     }
                 };
@@ -601,14 +630,16 @@ namespace Pinta.Tools
 
                         (arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
 
-                        LineCurveSeriesEngine selEngine = (LineCurveSeriesEngine)SelectedShapeEngine;
+                        LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
-                        if (selEngine != null)
+                        if (activeEngine != null)
                         {
-                            selEngine.Arrow1.LengthOffset = newLength;
-                            selEngine.Arrow2.LengthOffset = newLength;
+                            activeEngine.Arrow1.LengthOffset = newLength;
+                            activeEngine.Arrow2.LengthOffset = newLength;
 
 							DrawActiveShape(false, false, true, false);
+
+							storePreviousSettings(activeEngine);
                         }
                     }
                 };
@@ -645,7 +676,7 @@ namespace Pinta.Tools
             base.HandleAfterUndo();
 
             //Update the toolbar's arrow options.
-            SetToolbarArrowOptions();
+            setToolbarArrowOptions();
         }
 
         public override void HandleAfterRedo()
@@ -653,15 +684,30 @@ namespace Pinta.Tools
             base.HandleAfterRedo();
 
             //Update the toolbar's arrow options.
-            SetToolbarArrowOptions();
+            setToolbarArrowOptions();
         }
 
+		public override void HandleActivated()
+		{
+			base.HandleActivated();
 
-        public ArrowedEditEngine(BaseTool passedOwner): base(passedOwner)
+			//Update the toolbar's arrow options.
+			setToolbarArrowOptions();
+		}
+
+
+        public ArrowedEditEngine(ShapeTool passedOwner): base(passedOwner)
         {
-			//Set the new shape's arrow options to be the same as what's in the toolbar settings.
-			SetArrowOptions();
+			
         }
+
+		protected override void clickedOnShape()
+		{
+			storePreviousSettings();
+			setToolbarArrowOptions();
+
+			base.clickedOnShape();
+		}
 
         protected override void drawExtras(Rectangle? dirty, Context g)
         {

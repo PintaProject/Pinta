@@ -36,7 +36,15 @@ namespace Pinta.Tools
 {
     public class EllipseEditEngine: BaseEditEngine
     {
-		public EllipseEditEngine(BaseTool passedOwner): base(passedOwner)
+		protected override string shapeString
+		{
+			get
+			{
+				return Catalog.GetString("Ellipse");
+			}
+		}
+
+		public EllipseEditEngine(ShapeTool passedOwner): base(passedOwner)
         {
 
         }

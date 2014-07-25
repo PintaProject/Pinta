@@ -36,6 +36,14 @@ namespace Pinta.Tools
 {
     public class RoundedLineEditEngine: BaseEditEngine
     {
+		protected override string shapeString
+		{
+			get
+			{
+				return Catalog.GetString("Rounded Line Series");
+			}
+		}
+
 		public const double DefaultRadius = 20d;
 
 		protected ToolBarComboBox radius;
@@ -89,7 +97,7 @@ namespace Pinta.Tools
 		}
 
 
-		public RoundedLineEditEngine(BaseTool passedOwner): base(passedOwner)
+		public RoundedLineEditEngine(ShapeTool passedOwner): base(passedOwner)
         {
 
         }
