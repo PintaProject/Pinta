@@ -40,11 +40,13 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Rounded Line Series");
+				return Catalog.GetString("Rounded Line Shape");
 			}
 		}
 
 		public const double DefaultRadius = 20d;
+
+		protected double previousRadius = DefaultRadius;
 
 		protected ToolBarComboBox radius;
 		protected ToolBarLabel radius_label;
@@ -58,13 +60,22 @@ namespace Pinta.Tools
 			{
 				double rad;
 
-				if (Double.TryParse(radius.ComboBox.ActiveText, out rad))
+				if (radius != null)
 				{
-					if (rad >= 0)
+					if (Double.TryParse(radius.ComboBox.ActiveText, out rad))
 					{
-						(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = rad.ToString();
+						if (rad >= 0)
+						{
+							(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = rad.ToString();
 
-						return rad;
+							return rad;
+						}
+						else
+						{
+							(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString();
+
+							return BrushWidth;
+						}
 					}
 					else
 					{
@@ -75,53 +86,28 @@ namespace Pinta.Tools
 				}
 				else
 				{
-					(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString();
-
 					return BrushWidth;
 				}
 			}
 
 			set
 			{
-				(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
-
-				RoundedLineEngine selEngine = (RoundedLineEngine)SelectedShapeEngine;
-
-				if (selEngine != null)
+				if (radius != null)
 				{
-					selEngine.Radius = Radius;
+					(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
 
-					DrawActiveShape(false, false, true, false);
+					RoundedLineEngine selEngine = (RoundedLineEngine)SelectedShapeEngine;
+
+					if (selEngine != null)
+					{
+						selEngine.Radius = Radius;
+
+						storePreviousSettings();
+
+						DrawActiveShape(false, false, true, false);
+					}
 				}
 			}
-		}
-
-
-		public RoundedLineEditEngine(ShapeTool passedOwner): base(passedOwner)
-        {
-
-        }
-
-		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			ShapeEngine newEngine = new RoundedLineEngine(doc.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
-				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
-
-			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
-
-			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
-
-			return newEngine;
-		}
-
-		protected override void movePoint(List<ControlPoint> controlPoints)
-		{
-			moveRectangularPoint(controlPoints);
-
-			base.movePoint(controlPoints);
 		}
 
 
@@ -183,6 +169,61 @@ namespace Pinta.Tools
 		private void RadiusPlusButtonClickedEvent(object o, EventArgs args)
 		{
 			Radius = Math.Truncate(Radius) + 1;
+		}
+
+
+		public RoundedLineEditEngine(ShapeTool passedOwner): base(passedOwner)
+        {
+
+        }
+
+		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		{
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			ShapeEngine newEngine = new RoundedLineEngine(doc.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
+				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
+
+			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+
+			//Set the new shape's DashPattern option.
+			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+
+			return newEngine;
+		}
+
+		protected override void movePoint(List<ControlPoint> controlPoints)
+		{
+			moveRectangularPoint(controlPoints);
+
+			base.movePoint(controlPoints);
+		}
+
+
+		protected override void updateToolbarSettings(ShapeEngine engine)
+		{
+			if (engine != null)
+			{
+				RoundedLineEngine rLEngine = (RoundedLineEngine)engine;
+
+				Radius = rLEngine.Radius;
+
+				base.updateToolbarSettings(engine);
+			}
+		}
+
+		protected override void recallPreviousSettings()
+		{
+			Radius = previousRadius;
+
+			base.recallPreviousSettings();
+		}
+
+		protected override void storePreviousSettings()
+		{
+			previousRadius = Radius;
+
+			base.storePreviousSettings();
 		}
     }
 }

@@ -63,7 +63,32 @@ namespace Pinta.Tools
 
         protected PointD shapeOrigin;
         protected PointD currentPoint;
-		public static Color OutlineColor, FillColor;
+
+		public static Color OutlineColor
+		{
+			get
+			{
+				return PintaCore.Palette.PrimaryColor;
+			}
+
+			set
+			{
+				PintaCore.Palette.PrimaryColor = value;
+			}
+		}
+
+		public static Color FillColor
+		{
+			get
+			{
+				return PintaCore.Palette.SecondaryColor;
+			}
+
+			set
+			{
+				PintaCore.Palette.SecondaryColor = value;
+			}
+		}
 
         protected ToolBarComboBox brushWidth;
         protected ToolBarLabel brushWidthLabel;
@@ -78,6 +103,9 @@ namespace Pinta.Tools
 		protected Gtk.SeparatorToolItem shapeTypeSep;
 
         protected DashPatternBox dashPBox = new DashPatternBox();
+		protected string previousDashPattern = "";
+
+		protected bool previousAntiAliasing = true;
 
         protected int BrushWidth
         {
@@ -105,9 +133,14 @@ namespace Pinta.Tools
             
 			set
 			{
-				(brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+				if (brushWidth != null)
+				{
+					(brushWidth.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+				}
 			}
         }
+
+		protected int previousBrushWidth = BaseTool.DEFAULT_BRUSH_WIDTH;
 
         protected bool ShowAntialiasingButton { get { return true; } }
         protected bool StrokeShape { get { return (int)fillButton.SelectedItem.Tag % 2 == 0; } }
@@ -223,6 +256,8 @@ namespace Pinta.Tools
             if (BrushWidth > 1)
                 BrushWidth--;
 
+			storePreviousSettings();
+
             DrawActiveShape(false, false, true, false);
         }
 
@@ -230,8 +265,34 @@ namespace Pinta.Tools
         {
             BrushWidth++;
 
+			storePreviousSettings();
+
             DrawActiveShape(false, false, true, false);
         }
+
+		protected void Palette_PrimaryColorChanged(object sender, EventArgs e)
+		{
+			ShapeEngine activeEngine = ActiveShapeEngine;
+
+			if (activeEngine != null)
+			{
+				activeEngine.OutlineColor = OutlineColor;
+
+				DrawActiveShape(false, false, true, false);
+			}
+		}
+
+		protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
+		{
+			ShapeEngine activeEngine = ActiveShapeEngine;
+
+			if (activeEngine != null)
+			{
+				activeEngine.FillColor = FillColor;
+
+				DrawActiveShape(false, false, true, false);
+			}
+		}
 
         #endregion ToolbarEventHandlers
 
@@ -263,8 +324,7 @@ namespace Pinta.Tools
 
             if (brushWidth == null)
                 brushWidth = new ToolBarComboBox(65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                "10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
-                "40", "45", "50", "55");
+					"10", "11", "12", "13", "14", "15", "20", "25", "30", "35", "40", "45", "50", "55");
 
             tb.AppendItem(brushWidth);
 
@@ -361,6 +421,8 @@ namespace Pinta.Tools
 						selEngine.DashPattern = dpbBox.ActiveText;
 					}
 
+					storePreviousSettings();
+
                     //Update the shape.
                     DrawActiveShape(false, false, true, false);
                 };
@@ -369,8 +431,7 @@ namespace Pinta.Tools
 
         public virtual void HandleActivated()
         {
-			OutlineColor = PintaCore.Palette.PrimaryColor;
-			FillColor = PintaCore.Palette.SecondaryColor;
+			recallPreviousSettings();
 
             DrawActiveShape(false, false, true, false);
 
@@ -428,10 +489,7 @@ namespace Pinta.Tools
 
             if (activeEngine != null)
             {
-                owner.UseAntialiasing = activeEngine.AntiAliasing;
-
-                //Update the DashPatternBox to represent the current shape's DashPattern.
-                (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
+				updateToolbarSettings(activeEngine);
             }
 
             //Draw the current state.
@@ -444,10 +502,7 @@ namespace Pinta.Tools
 
             if (activeEngine != null)
             {
-                owner.UseAntialiasing = activeEngine.AntiAliasing;
-
-                //Update the DashPatternBox to represent the current shape's DashPattern.
-                (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = activeEngine.DashPattern;
+				updateToolbarSettings(activeEngine);
             }
 
             //Draw the current state.
@@ -841,7 +896,12 @@ namespace Pinta.Tools
 					SelectedPointIndex = closestPointIndex;
 					SelectedShapeIndex = closestShapeIndex;
 
-					clickedOnShape();
+					ShapeEngine activeEngine = ActiveShapeEngine;
+
+					if (activeEngine != null)
+					{
+						updateToolbarSettings(activeEngine);
+					}
 				}
 			}
 
@@ -882,6 +942,8 @@ namespace Pinta.Tools
 						//Set the AntiAliasing.
 						activeEngine.AntiAliasing = owner.UseAntialiasing;
 					}
+
+					storePreviousSettings();
 				}
             }
 			else if (clickedOnControlPoint)
@@ -899,7 +961,12 @@ namespace Pinta.Tools
 
 				//The currently active tool matches the clicked on shape's corresponding tool.
 
-				clickedOnShape();
+				ShapeEngine activeEngine = ActiveShapeEngine;
+
+				if (activeEngine != null)
+				{
+					updateToolbarSettings(activeEngine);
+				}
 			}
 
             //Determine if the user right clicks outside of any shapes (neither on their control points nor on their generated points).
@@ -1048,33 +1115,6 @@ namespace Pinta.Tools
 
             lastMousePosition = currentPoint;
         }
-
-
-		protected void Palette_PrimaryColorChanged(object sender, EventArgs e)
-		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
-
-			if (activeEngine != null)
-			{
-				OutlineColor = PintaCore.Palette.PrimaryColor;
-				activeEngine.OutlineColor = OutlineColor;
-
-				DrawActiveShape(false, false, true, false);
-			}
-		}
-
-		protected void Palette_SecondaryColorChanged(object sender, EventArgs e)
-		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
-
-			if (activeEngine != null)
-			{
-				FillColor = PintaCore.Palette.SecondaryColor;
-				activeEngine.FillColor = FillColor;
-
-				DrawActiveShape(false, false, true, false);
-			}
-		}
 
 
 		/// <summary>
@@ -1617,11 +1657,55 @@ namespace Pinta.Tools
 			return correspondingTool;
 		}
 
-
-		protected virtual void clickedOnShape()
+		
+		/// <summary>
+		/// Copy the given shape's settings to the toolbar settings. Calls storePreviousSettings.
+		/// </summary>
+		/// <param name="engine"></param>
+		protected virtual void updateToolbarSettings(ShapeEngine engine)
 		{
+			if (engine != null)
+			{
+				owner.UseAntialiasing = engine.AntiAliasing;
 
+				//Update the DashPatternBox to represent the current shape's DashPattern.
+				(dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = engine.DashPattern;
+
+				OutlineColor = engine.OutlineColor;
+				FillColor = engine.FillColor;
+
+				storePreviousSettings();
+			}
 		}
+
+		/// <summary>
+		/// Copy the previous settings to the toolbar settings.
+		/// </summary>
+		protected virtual void recallPreviousSettings()
+		{
+			if (dashPBox.comboBox != null)
+			{
+				(dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousDashPattern;
+			}
+
+			owner.UseAntialiasing = previousAntiAliasing;
+			BrushWidth = previousBrushWidth;
+		}
+
+		/// <summary>
+		/// Copy the toolbar settings to the previous settings.
+		/// </summary>
+		protected virtual void storePreviousSettings()
+		{
+			if (dashPBox.comboBox != null)
+			{
+				previousDashPattern = (dashPBox.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text;
+			}
+
+			previousAntiAliasing = owner.UseAntialiasing;
+			previousBrushWidth = BrushWidth;
+		}
+
 
 		/// <summary>
 		/// Creates a new shape, adds its starting points, and returns it.

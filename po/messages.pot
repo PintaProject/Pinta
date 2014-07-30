@@ -2213,11 +2213,11 @@ msgid "Shape"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
-msgid "Open Curve Series"
+msgid "Open Curve Shape"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
-msgid "Closed Curve Series"
+msgid "Closed Curve Shape"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
@@ -2225,7 +2225,7 @@ msgid "Ellipse"
 msgstr ""
 
 #: Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
-msgid "Rounded Line Series"
+msgid "Rounded Line Shape"
 msgstr ""
 
 #: Pinta.Core/Classes/BaseTool.cs:268

@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Open Curve Series");
+				return Catalog.GetString("Open Curve Shape");
 			}
 		}
 
@@ -53,7 +53,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
 				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
 
 			addLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
@@ -61,8 +61,8 @@ namespace Pinta.Tools
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
 
-			//Set the new shape's arrow options to be the same as what's in the toolbar settings.
-			setArrowOptions((LineCurveSeriesEngine)newEngine);
+			//Set the new arrow's settings to be the same as what's in the toolbar settings.
+			setNewArrowSettings(newEngine);
 
 			return newEngine;
 		}

@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Closed Curve Series");
+				return Catalog.GetString("Closed Curve Shape");
 			}
 		}
 
