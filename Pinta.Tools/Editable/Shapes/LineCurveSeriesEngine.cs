@@ -73,6 +73,8 @@ namespace Pinta.Tools
         {
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
+			ShapeFillPointCount = -1;
+
 			if (ControlPoints.Count < 2)
 			{
 				generatedPoints.Add(new GeneratedPoint(ControlPoints[0].Position, 0));
@@ -172,6 +174,25 @@ namespace Pinta.Tools
 								ControlPoints[0].Position.Y - bezierTangents[0].Y),
 							ControlPoints[0].Position,
 							0));
+
+
+					//If the shape outline is solid, draw an overlap line/curve at the end/beginning to fix a "gap bug".
+					if (DashPattern == "-")
+					{
+						//Stop filling the shape here.
+						ShapeFillPointCount = generatedPoints.Count();
+
+						generatedPoints.AddRange(GenerateCubicBezierCurvePoints(
+							ControlPoints[0].Position,
+							new PointD(
+								ControlPoints[0].Position.X + bezierTangents[0].X,
+								ControlPoints[0].Position.Y + bezierTangents[0].Y),
+							new PointD(
+								ControlPoints[1].Position.X - bezierTangents[1].X,
+								ControlPoints[1].Position.Y - bezierTangents[1].Y),
+							ControlPoints[1].Position,
+							1));
+					}
 				}
 			}
 

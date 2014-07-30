@@ -63,6 +63,8 @@ namespace Pinta.Tools
 		{
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
+			ShapeFillPointCount = -1;
+
 			//An ellipse requires exactly 4 control points in order to draw anything.
 			if (ControlPoints.Count == 4)
 			{
@@ -200,7 +202,10 @@ namespace Pinta.Tools
 
 					if (DashPattern == "-")
 					{
-						//Overlap to prevent a "crack" at the start of the ellipse.
+						//Stop filling the shape here.
+						ShapeFillPointCount = generatedPoints.Count();
+
+						//Overlap to prevent a "gap bug" at the start of the ellipse.
 						generatedPoints.AddRange(calculateCurvePoints(tInterval,
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
