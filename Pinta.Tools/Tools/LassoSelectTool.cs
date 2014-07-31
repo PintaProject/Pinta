@@ -35,7 +35,7 @@ using System.Linq;
 
 namespace Pinta.Tools
 {
-	public class LassoSelectTool : SelectShapeTool
+	public class LassoSelectTool : SelectTool
 	{
 		private Path path;
 		private List<IntPoint> lassoPolygon = new List<IntPoint>();

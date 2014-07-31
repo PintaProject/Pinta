@@ -232,8 +232,6 @@ namespace Pinta.Tools
 
 			dirty = dirty.Clamp ();
 
-			doc.ShowSelection = true;
-
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			doc.Workspace.Invalidate (dirty.ToGdkRectangle ());
 			

@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public class EllipseSelectTool : SelectShapeTool
+	public class EllipseSelectTool : SelectTool
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Ellipse Select"); }

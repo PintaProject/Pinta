@@ -31,7 +31,7 @@ using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public class RectangleSelectTool : SelectShapeTool
+	public class RectangleSelectTool : SelectTool
 	{
 		public override string Name {
 			get { return Catalog.GetString ("Rectangle Select"); }
