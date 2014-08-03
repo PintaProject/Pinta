@@ -65,97 +65,27 @@ namespace Pinta.Tools
 		{
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 
+			int nextIndex;
+			PointD lineEndPoint, cornerEndPoint;
+
+			//Calculate the last ControlPoint's segment end points.
+			calculateSegmentEndPoints(ControlPoints.Count - 1, out nextIndex, out lineEndPoint, out cornerEndPoint);
+
+			//Start the first line at the last rounded corner's end point.
+			PointD lineStartPoint = cornerEndPoint;
+
 			for (int currentIndex = 0; currentIndex < ControlPoints.Count; ++currentIndex)
 			{
-				//Determine the positions of the current, next, and double next ControlPoints.
-
-				int nextIndex = currentIndex + 1;
-
-				if (nextIndex >= ControlPoints.Count)
-				{
-					nextIndex = 0;
-				}
-
-				int doubleNextIndex = nextIndex + 1;
-
-				if (doubleNextIndex >= ControlPoints.Count)
-				{
-					doubleNextIndex = 0;
-				}
-
-				PointD currentPosition = ControlPoints[currentIndex].Position;
-				PointD nextPosition = ControlPoints[nextIndex].Position;
-				PointD doubleNextPosition = ControlPoints[doubleNextIndex].Position;
-
-				//Calculate the distance between the current and next point and the next and double next point.
-				double currentDistance = currentPosition.Distance(nextPosition);
-				double nextDistance = nextPosition.Distance(doubleNextPosition);
-
-				//The radius value used can change between ControlPoints depending on their proximity to each other.
-				double currentRadius = Radius;
-
-				//Reduce the radius according to the distance between adjacent ControlPoints if necessary.
-				if (currentRadius > currentDistance / 2d || currentRadius > nextDistance / 2d)
-				{
-					currentRadius = Math.Min(currentDistance / 2d, nextDistance / 2d);
-				}
-
-				//Calculate the current offset ratio, which is the ratio of the radius to the distance between the current and next points.
-
-				double currentOffsetRatio;
-
-				//Prevent a divide by 0 error.
-				if (currentDistance <= 0d)
-				{
-					currentOffsetRatio = 0d;
-				}
-				else
-				{
-					currentOffsetRatio = currentRadius / currentDistance;
-
-					if (currentOffsetRatio > 1d)
-					{
-						currentOffsetRatio = 1d;
-					}
-				}
-
-				//Calculate the next offset ratio, which is the ratio of the radius to the distance between the next and double next points.
-
-				double nextOffsetRatio;
-
-				//Prevent a divide by 0 error.
-				if (nextDistance <= 0d)
-				{
-					nextOffsetRatio = 0d;
-				}
-				else
-				{
-					nextOffsetRatio = currentRadius / nextDistance;
-
-					if (nextOffsetRatio > 1d)
-					{
-						nextOffsetRatio = 1d;
-					}
-				}
-
-				//Calculate the start and end points of the actual, straight line.
-
-				PointD startPoint = new PointD(currentPosition.X + (nextPosition.X - currentPosition.X) * currentOffsetRatio,
-					currentPosition.Y + (nextPosition.Y - currentPosition.Y) * currentOffsetRatio);
-
-				PointD endPoint = new PointD(nextPosition.X - (nextPosition.X - currentPosition.X) * currentOffsetRatio,
-					nextPosition.Y - (nextPosition.Y - currentPosition.Y) * currentOffsetRatio);
-
-
-				//Calculate the end point of the rounded corner.
-				PointD nextEndPoint = new PointD(nextPosition.X + (doubleNextPosition.X - nextPosition.X) * nextOffsetRatio,
-					nextPosition.Y + (doubleNextPosition.Y - nextPosition.Y) * nextOffsetRatio);
+				calculateSegmentEndPoints(currentIndex, out nextIndex, out lineEndPoint, out cornerEndPoint);				
 
 				//Add the line.
-				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(startPoint, endPoint, endPoint, nextIndex));
+				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(lineStartPoint, lineEndPoint, lineEndPoint, nextIndex));
 
 				//Add the rounded corner.
-				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(endPoint, nextPosition, nextEndPoint, nextIndex));
+				generatedPoints.AddRange(GenerateQuadraticBezierCurvePoints(
+					lineEndPoint, ControlPoints[nextIndex].Position, cornerEndPoint, nextIndex));
+
+				lineStartPoint = cornerEndPoint;
 			}
 
 			GeneratedPoints = generatedPoints.ToArray();
@@ -217,6 +147,98 @@ namespace Pinta.Tools
 
 
 			return resultList;
+		}
+
+		/// <summary>
+		/// Calculates the given index's segment end point data.
+		/// </summary>
+		/// <param name="currentIndex">The index of the ControlPoint to calculate the segment end point data of.</param>
+		/// <param name="nextIndex">The index of the next ControlPoint.</param>
+		/// <param name="lineEndPoint">The end point of the line prior to the given ControlPoint's index.</param>
+		/// <param name="cornerEndPoint">The end point of the rounded corner at the given ControlPoint's index.</param>
+		private void calculateSegmentEndPoints(int currentIndex, out int nextIndex, out PointD lineEndPoint, out PointD cornerEndPoint)
+		{
+			//Determine the positions of the current, next, and double next ControlPoints.
+
+			nextIndex = currentIndex + 1;
+
+			if (nextIndex >= ControlPoints.Count)
+			{
+				nextIndex = 0;
+			}
+
+			int doubleNextIndex = nextIndex + 1;
+
+			if (doubleNextIndex >= ControlPoints.Count)
+			{
+				doubleNextIndex = 0;
+			}
+
+			PointD currentPosition = ControlPoints[currentIndex].Position;
+			PointD nextPosition = ControlPoints[nextIndex].Position;
+			PointD doubleNextPosition = ControlPoints[doubleNextIndex].Position;
+
+			//Calculate the distance between the current and next point and the next and double next point.
+			double currentDistance = currentPosition.Distance(nextPosition);
+			double nextDistance = nextPosition.Distance(doubleNextPosition);
+
+			//Calculate the smaller of the two distances.
+			double minDistance = Math.Min(currentDistance, nextDistance);
+
+			//The radius value used can change between ControlPoints depending on their proximity to each other.
+			double currentRadius = Radius;
+
+			//Reduce the radius according to the distance between adjacent ControlPoints if necessary.
+			if (currentRadius > minDistance / 2d)
+			{
+				currentRadius = minDistance / 2d;
+			}
+
+			//Calculate the current offset ratio, which is the ratio of the radius to the distance between the current and next points.
+
+			double currentOffsetRatio;
+
+			//Prevent a divide by 0 error.
+			if (currentDistance < 0d)
+			{
+				currentOffsetRatio = 0d;
+			}
+			else
+			{
+				currentOffsetRatio = currentRadius / currentDistance;
+
+				if (currentOffsetRatio > 1d)
+				{
+					currentOffsetRatio = 1d;
+				}
+			}
+
+			//Calculate the next offset ratio, which is the ratio of the radius to the distance between the next and double next points.
+
+			double nextOffsetRatio;
+
+			//Prevent a divide by 0 error.
+			if (nextDistance < 0d)
+			{
+				nextOffsetRatio = 0d;
+			}
+			else
+			{
+				nextOffsetRatio = currentRadius / nextDistance;
+
+				if (nextOffsetRatio > 1d)
+				{
+					nextOffsetRatio = 1d;
+				}
+			}
+
+			//Calculate the end point of the straight line before the rounded corner.
+			lineEndPoint = new PointD(nextPosition.X - (nextPosition.X - currentPosition.X) * currentOffsetRatio,
+				nextPosition.Y - (nextPosition.Y - currentPosition.Y) * currentOffsetRatio);
+
+			//Calculate the end point of the rounded corner after the straight line.
+			cornerEndPoint = new PointD(nextPosition.X + (doubleNextPosition.X - nextPosition.X) * nextOffsetRatio,
+				nextPosition.Y + (doubleNextPosition.Y - nextPosition.Y) * nextOffsetRatio);
 		}
 	}
 }

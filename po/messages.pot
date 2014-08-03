@@ -148,7 +148,7 @@ msgstr ""
 msgid "Fill and Outline Shape"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:320
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Shape Type"
 msgstr ""
 

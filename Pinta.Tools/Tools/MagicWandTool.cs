@@ -35,6 +35,8 @@ namespace Pinta.Tools
 {
 	public class MagicWandTool : FloodTool
 	{
+		private Gtk.ToolItem selection_sep;
+
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 
 		public MagicWandTool()
@@ -45,6 +47,13 @@ namespace Pinta.Tools
 		protected override void OnBuildToolBar(Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar(tb);
+
+
+			if (selection_sep == null)
+				selection_sep = new Gtk.SeparatorToolItem();
+
+			tb.AppendItem(selection_sep);
+
 
 			PintaCore.Workspace.ActiveDocument.selHandler.BuildToolbar(tb);
 		}

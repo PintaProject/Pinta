@@ -1,5 +1,5 @@
 ﻿// 
-// ShapeHistoryItem.cs
+// ShapesHistoryItem.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>

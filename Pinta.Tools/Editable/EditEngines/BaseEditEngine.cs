@@ -368,7 +368,7 @@ namespace Pinta.Tools
 			tb.AppendItem(shapeTypeSep);
 
 			if (shapeTypeLabel == null)
-				shapeTypeLabel = new ToolBarLabel(string.Format(" {0}: ", shapeString + " " + Catalog.GetString("Type")));
+				shapeTypeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Shape Type")));
 
 			tb.AppendItem(shapeTypeLabel);
 
@@ -391,6 +391,11 @@ namespace Pinta.Tools
 						//Verify that the tool needs to be switched.
 						if (GetCorrespondingTool(newShapeType) != this.owner)
 						{
+							//Needs fixing: after undoing and redoing a shape type change, the redone shape is no longer visible.
+							//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
+							//PintaCore.Workspace.ActiveDocument.History.PushNewItem(new ShapesModifyHistoryItem(
+								//this, owner.Icon, Catalog.GetString("Changed Shape Type")));
+
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 							selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
 
@@ -522,7 +527,7 @@ namespace Pinta.Tools
 					//Either delete a ControlPoint or an entire shape (if there's only 1 ControlPoint left).
                     if (controlPoints.Count > 1)
                     {
-						//Create a new ShapeModifyHistoryItem so that the deletion of a control point can be undone.
+						//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
 						PintaCore.Workspace.ActiveDocument.History.PushNewItem(
 							new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Deleted")));
 
@@ -539,7 +544,7 @@ namespace Pinta.Tools
                     {
 						Document doc = PintaCore.Workspace.ActiveDocument;
 
-						//Create a new ShapeHistoryItem so that the deletion of a shape can be undone.
+						//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
 						doc.History.PushNewItem(
 							new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Deleted"),
 								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
@@ -588,7 +593,7 @@ namespace Pinta.Tools
                     //This can be assumed not to be null since selPoint was not null.
                     ShapeEngine selEngine = SelectedShapeEngine;
 
-                    //Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
+                    //Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
 						new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Added")));
 
@@ -885,7 +890,7 @@ namespace Pinta.Tools
 					//Only create a new shape if the user isn't holding the control key down.
 					if (!ctrlKey)
 					{
-						//Create a new ShapeModifyHistoryItem so that the adding of a control point can be undone.
+						//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
 						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
@@ -925,7 +930,7 @@ namespace Pinta.Tools
 						prevSelPoint = new PointD(0d, 0d);
 					}
 
-					//Create a new ShapeHistoryItem so that the creation of a new shape can be undone.
+					//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
 					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Added"),
 						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex));
 
@@ -1014,7 +1019,7 @@ namespace Pinta.Tools
                 {
                     if (clickedWithoutModifying)
                     {
-                        //Create a new ShapeModifyHistoryItem so that the modification of the shape can be undone.
+                        //Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
 							new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Modified")));
 
@@ -1606,10 +1611,6 @@ namespace Pinta.Tools
 						//Set the new tool's active shape and point to the old shape and point.
 						newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
 						newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
-
-						//Deselect any shape or point in the old tool.
-						oldTool.EditEngine.SelectedPointIndex = -1;
-						oldTool.EditEngine.SelectedShapeIndex = -1;
 
 						//Make sure neither tool thinks it is drawing anything.
 						newTool.EditEngine.isDrawing = false;
