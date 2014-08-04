@@ -155,8 +155,8 @@ namespace Pinta.Tools
 			ShapeType = passedShapeType;
 			AntiAliasing = passedAA;
 			Closed = passedClosed;
-			OutlineColor = passedOutlineColor;
-			FillColor = passedFillColor;
+			OutlineColor = passedOutlineColor.Clone();
+			FillColor = passedFillColor.Clone();
 		}
 
 		/// <summary>
