@@ -403,10 +403,9 @@ namespace Pinta.Tools
 						//Verify that the tool needs to be switched.
 						if (GetCorrespondingTool(newShapeType) != this.owner)
 						{
-							//Needs fixing: after undoing and redoing a shape type change, the redone shape is no longer visible.
 							//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
-							//PintaCore.Workspace.ActiveDocument.History.PushNewItem(new ShapesModifyHistoryItem(
-								//this, owner.Icon, Catalog.GetString("Changed Shape Type")));
+							PintaCore.Workspace.ActiveDocument.History.PushNewItem(new ShapesModifyHistoryItem(
+								this, owner.Icon, Catalog.GetString("Changed Shape Type")));
 
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 							selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
