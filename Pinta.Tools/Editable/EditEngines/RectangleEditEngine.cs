@@ -54,7 +54,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			ShapeEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.ClosedLineCurveSeries,
-				owner.UseAntialiasing, true, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
+				owner.UseAntialiasing, true, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 

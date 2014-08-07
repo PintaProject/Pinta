@@ -54,7 +54,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			ShapeEngine newEngine = new EllipseEngine(doc.CurrentUserLayer, null, owner.UseAntialiasing,
-				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
+				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 

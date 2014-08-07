@@ -43,16 +43,17 @@ namespace Pinta.Tools
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
 		/// <param name="passedOutlineColor">The outline color for the shape.</param>
 		/// <param name="passedFillColor">The fill color for the shape.</param>
+		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
 		public EllipseEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, bool passedAA,
-			Color passedOutlineColor, Color passedFillColor)
-			: base(parentLayer, passedDrawingLayer, BaseEditEngine.ShapeTypes.Ellipse, passedAA, true, passedOutlineColor, passedFillColor)
+			Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer, passedDrawingLayer,
+			BaseEditEngine.ShapeTypes.Ellipse, passedAA, true, passedOutlineColor, passedFillColor, passedBrushWidth)
 		{
 			
 		}
 
 		protected override ShapeEngine cloneSpecific()
 		{
-			return new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor);
+			return new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
 		}
 
 		/// <summary>

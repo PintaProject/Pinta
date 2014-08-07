@@ -634,7 +634,7 @@ namespace Pinta.Tools
 		}
 
 
-		protected override void updateToolbarSettings(ShapeEngine engine)
+		public override void updateToolbarSettings(ShapeEngine engine)
 		{
 			if (engine != null)
 			{

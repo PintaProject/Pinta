@@ -41,7 +41,9 @@ namespace Pinta.Tools
 
 		private ShapeEngineCollection sEngines;
 
-		private int selectedPointIndex, selectedPointShapeIndex;
+		private int selectedPointIndex, selectedShapeIndex;
+
+		private bool redrawEverything;
 
 		/// <summary>
 		/// A history item for when shapes are finalized.
@@ -52,9 +54,10 @@ namespace Pinta.Tools
 		/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 		/// <param name="passedUserLayer">The UserLayer being modified.</param>
 		/// <param name="passedSelectedPointIndex">The selected point's index.</param>
-		/// <param name="passedSelectedPointShapeIndex">The selected point's shape index.</param>
+		/// <param name="passedSelectedShapeIndex">The selected point's shape index.</param>
+		/// <param name="passedRedrawEverything">Whether every shape should be redrawn when undoing (e.g. finalization).</param>
         public ShapesHistoryItem(BaseEditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
-			int passedSelectedPointIndex, int passedSelectedPointShapeIndex) : base(icon, text)
+			int passedSelectedPointIndex, int passedSelectedShapeIndex, bool passedRedrawEverything) : base(icon, text)
 		{
             ee = passedEE;
 
@@ -75,20 +78,22 @@ namespace Pinta.Tools
 
 			sEngines = BaseEditEngine.SEngines.PartialClone();
 			selectedPointIndex = passedSelectedPointIndex;
-			selectedPointShapeIndex = passedSelectedPointShapeIndex;
+			selectedShapeIndex = passedSelectedShapeIndex;
+
+			redrawEverything = passedRedrawEverything;
 		}
 
 		public override void Undo()
 		{
-			Swap();
+			Swap(redrawEverything);
 		}
 
 		public override void Redo()
 		{
-			Swap();
+			Swap(false);
 		}
 
-		private void Swap()
+		private void Swap(bool redraw)
 		{
 			// Grab the original surface
 			ImageSurface surf = userLayer.Surface;
@@ -151,15 +156,21 @@ namespace Pinta.Tools
             ee.SelectedPointIndex = temp;
 
 			//Swap the selected shape data.
-			temp = selectedPointShapeIndex;
-            selectedPointShapeIndex = ee.SelectedShapeIndex;
+			temp = selectedShapeIndex;
+            selectedShapeIndex = ee.SelectedShapeIndex;
 			ee.SelectedShapeIndex = temp;
 
 
-			//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
-			BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex);
+			//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
+			if (BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex, true))
+			{
+				//The currently active tool now matches the shape's corresponding tool.
 
-			//The currently active tool should now match the clicked on shape's corresponding tool.
+				if (redraw)
+				{
+					((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine.DrawAllShapes();
+				}
+			}
 		}
 
 		public override void Dispose()

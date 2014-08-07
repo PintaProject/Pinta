@@ -2184,7 +2184,11 @@ msgstr ""
 msgid "Increase length offset"
 msgstr ""
 
-#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:695
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1257
+msgid "Finalized"
+msgstr ""
+
+#: Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1620
 msgid "Finalized"
 msgstr ""
 

@@ -47,16 +47,18 @@ namespace Pinta.Tools
 		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
 		/// <param name="passedOutlineColor">The outline color for the shape.</param>
 		/// <param name="passedFillColor">The fill color for the shape.</param>
-		public LineCurveSeriesEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer,
-			BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor)
-			: base(parentLayer, passedDrawingLayer, passedShapeType, passedAA, passedClosed, passedOutlineColor, passedFillColor)
+		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
+		public LineCurveSeriesEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, BaseEditEngine.ShapeTypes passedShapeType,
+			bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer,
+			passedDrawingLayer, passedShapeType, passedAA, passedClosed, passedOutlineColor, passedFillColor, passedBrushWidth)
 		{
 			
 		}
 
 		protected override ShapeEngine cloneSpecific()
 		{
-			LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, DrawingLayer, ShapeType, AntiAliasing, Closed, OutlineColor, FillColor);
+			LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, DrawingLayer, ShapeType, AntiAliasing, Closed,
+				OutlineColor, FillColor, BrushWidth);
 
 			clonedCE.Arrow1 = Arrow1.Clone();
 			clonedCE.Arrow2 = Arrow2.Clone();

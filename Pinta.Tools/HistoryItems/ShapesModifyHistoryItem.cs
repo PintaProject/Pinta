@@ -36,7 +36,7 @@ namespace Pinta.Tools
 
 		private ShapeEngineCollection sEngines;
 
-		private int selectedPointIndex, selectedPointShapeIndex;
+		private int selectedPointIndex, selectedShapeIndex;
 
 		/// <summary>
 		/// A history item for when shapes are modified.
@@ -50,7 +50,7 @@ namespace Pinta.Tools
 
 			sEngines = BaseEditEngine.SEngines.PartialClone();
             selectedPointIndex = ee.SelectedPointIndex;
-            selectedPointShapeIndex = ee.SelectedShapeIndex;
+            selectedShapeIndex = ee.SelectedShapeIndex;
 		}
 
 		public override void Undo()
@@ -104,15 +104,15 @@ namespace Pinta.Tools
             ee.SelectedPointIndex = temp;
 
 			//Swap the selected shape data.
-			temp = selectedPointShapeIndex;
-            selectedPointShapeIndex = ee.SelectedShapeIndex;
+			temp = selectedShapeIndex;
+            selectedShapeIndex = ee.SelectedShapeIndex;
             ee.SelectedShapeIndex = temp;
 
 
-			//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
-			BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex);
+			//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
+			BaseEditEngine.ActivateCorrespondingTool(selectedShapeIndex, true);
 
-			//The currently active tool should now match the clicked on shape's corresponding tool.
+			//The currently active tool should now match the shape's corresponding tool.
 		}
 	}
 }

@@ -126,6 +126,8 @@ namespace Pinta.Tools
 
 		public Color OutlineColor, FillColor;
 
+		public int BrushWidth;
+
 		public BaseEditEngine.ShapeTypes ShapeType;
 
 		/// <summary>
@@ -138,8 +140,9 @@ namespace Pinta.Tools
 		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
 		/// <param name="passedOutlineColor">The outline color for the shape.</param>
 		/// <param name="passedFillColor">The fill color for the shape.</param>
-		public ShapeEngine(UserLayer passedParentLayer, ReEditableLayer passedDrawingLayer,
-			BaseEditEngine.ShapeTypes passedShapeType, bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor)
+		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
+		public ShapeEngine(UserLayer passedParentLayer, ReEditableLayer passedDrawingLayer, BaseEditEngine.ShapeTypes passedShapeType,
+			bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor, int passedBrushWidth)
 		{
 			parentLayer = passedParentLayer;
 
@@ -157,6 +160,7 @@ namespace Pinta.Tools
 			Closed = passedClosed;
 			OutlineColor = passedOutlineColor.Clone();
 			FillColor = passedFillColor.Clone();
+			BrushWidth = passedBrushWidth;
 		}
 
 		/// <summary>
@@ -173,6 +177,8 @@ namespace Pinta.Tools
 			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
 
 			clonedCE.DashPattern = DashPattern;
+
+			clonedCE.BrushWidth = BrushWidth;
 
 			return clonedCE;
 		}
@@ -201,18 +207,23 @@ namespace Pinta.Tools
 			switch (newShapeType)
 			{
 				case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
-					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, true, OutlineColor, FillColor);
+					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, true,
+						OutlineColor, FillColor, BrushWidth);
+
 					break;
 				case BaseEditEngine.ShapeTypes.Ellipse:
-					clonedEngine = new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor);
+					clonedEngine = new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
+
 					break;
 				case BaseEditEngine.ShapeTypes.RoundedLineSeries:
 					clonedEngine = new RoundedLineEngine(parentLayer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
-						AntiAliasing, OutlineColor, FillColor);
+						AntiAliasing, OutlineColor, FillColor, BrushWidth);
+
 					break;
 				default:
 					//Defaults to OpenLineCurveSeries.
-					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, false, OutlineColor, FillColor);
+					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, false,
+						OutlineColor, FillColor, BrushWidth);
 
 					break;
 			}

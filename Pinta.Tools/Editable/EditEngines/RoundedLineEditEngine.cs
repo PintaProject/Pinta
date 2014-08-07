@@ -182,7 +182,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			ShapeEngine newEngine = new RoundedLineEngine(doc.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
-				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor);
+				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
@@ -200,7 +200,7 @@ namespace Pinta.Tools
 		}
 
 
-		protected override void updateToolbarSettings(ShapeEngine engine)
+		public override void updateToolbarSettings(ShapeEngine engine)
 		{
 			if (engine != null)
 			{

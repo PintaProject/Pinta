@@ -42,19 +42,21 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+		/// <param name="passedRadius">The radius of the corners.</param>
 		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
 		/// <param name="passedOutlineColor">The outline color for the shape.</param>
 		/// <param name="passedFillColor">The fill color for the shape.</param>
+		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
 		public RoundedLineEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, double passedRadius, bool passedAA,
-			Color passedOutlineColor, Color passedFillColor)
-			: base(parentLayer, passedDrawingLayer, BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true, passedOutlineColor, passedFillColor)
+			Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer, passedDrawingLayer,
+			BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true, passedOutlineColor, passedFillColor, passedBrushWidth)
 		{
 			Radius = passedRadius;
 		}
 
 		protected override ShapeEngine cloneSpecific()
 		{
-			return new RoundedLineEngine(parentLayer, DrawingLayer, Radius, AntiAliasing, OutlineColor, FillColor);
+			return new RoundedLineEngine(parentLayer, DrawingLayer, Radius, AntiAliasing, OutlineColor, FillColor, BrushWidth);
 		}
 
 		/// <summary>
