@@ -693,7 +693,7 @@ namespace Pinta.Tools
 		}
 
 
-		protected override void drawExtras(Rectangle? dirty, Context g)
+		protected override void drawExtras(ref Rectangle? dirty, Context g)
 		{
 			ShapeEngine activeEngine = ActiveShapeEngine;
 			
@@ -728,7 +728,7 @@ namespace Pinta.Tools
 				}
 			}
 
-			base.drawExtras(dirty, g);
+			base.drawExtras(ref dirty, g);
 		}
 	}
 }

@@ -1469,7 +1469,7 @@ namespace Pinta.Tools
 					g.SetDash(new double[] { }, 0.0);
 
 					//Draw anything extra (that not every shape has), like arrows.
-					drawExtras(dirty, g);
+					drawExtras(ref dirty, g);
 
 					if (drawCP)
 					{
@@ -1892,7 +1892,7 @@ namespace Pinta.Tools
 			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
         }
 
-        protected virtual void drawExtras(Rectangle? dirty, Context g)
+        protected virtual void drawExtras(ref Rectangle? dirty, Context g)
         {
             
         }
