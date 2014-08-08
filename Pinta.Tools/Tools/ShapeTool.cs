@@ -93,6 +93,13 @@ namespace Pinta.Tools
             base.OnDeactivated(newTool);
         }
 
+		protected override void AfterSave()
+		{
+			EditEngine.HandleAfterSave();
+
+			base.AfterSave();
+		}
+
         protected override void OnCommit()
         {
             EditEngine.HandleCommit();

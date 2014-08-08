@@ -477,6 +477,13 @@ namespace Pinta.Tools
             PintaCore.Palette.SecondaryColorChanged -= Palette_SecondaryColorChanged;
         }
 
+		public virtual void HandleAfterSave()
+		{
+			PintaCore.Actions.Edit.Undo.Activate();
+
+			DrawAllShapes();
+		}
+
         public virtual void HandleCommit()
         {
             //Finalize every editable shape not yet finalized.

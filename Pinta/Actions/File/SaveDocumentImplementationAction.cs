@@ -228,6 +228,8 @@ namespace Pinta.Actions
 			document.Filename = Path.GetFileName (file);
 			document.IsDirty = false;
 
+			PintaCore.Tools.CurrentTool.DoAfterSave();
+
 			//Now the Document has been saved to the file it's associated with in this session.
 			document.HasBeenSavedInSession = true;
 

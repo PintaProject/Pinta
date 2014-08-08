@@ -159,6 +159,11 @@ namespace Pinta.Core
 			OnCommit ();
 		}
 
+		public void DoAfterSave()
+		{
+			AfterSave();
+		}
+
 		public void DoActivated ()
 		{
 			OnActivated ();
@@ -287,6 +292,11 @@ namespace Pinta.Core
 		/// </summary>
 		protected virtual void OnCommit ()
 		{
+		}
+
+		protected virtual void AfterSave()
+		{
+
 		}
 
 		protected virtual void OnActivated ()
