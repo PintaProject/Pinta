@@ -479,8 +479,11 @@ namespace Pinta.Tools
 
 		public virtual void HandleAfterSave()
 		{
+			//When saving, everything will be finalized, which is good; however, afterwards, the user will expect
+			//everything to remain editable. Currently, a finalization history item will always be added.
 			PintaCore.Actions.Edit.Undo.Activate();
 
+			//Redraw all of the editable shapes in case saving caused some extra/unexpected behavior.
 			DrawAllShapes();
 		}
 
