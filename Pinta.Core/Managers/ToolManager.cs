@@ -57,7 +57,7 @@ namespace Pinta.Core
 			OnToolAdded (tool);
 
 			if (CurrentTool == null)
-				SetCurrentTool (tool, true);
+				SetCurrentTool (tool);
 		}
 
 		public void RemoveInstanceOfTool (System.Type tool_type)
@@ -71,7 +71,7 @@ namespace Pinta.Core
 					Tools.Remove (tool);
 					Tools.Sort (new ToolSorter ());
 
-					SetCurrentTool(new DummyTool(), true);
+					SetCurrentTool(new DummyTool());
 					OnToolRemoved (tool);
 					return;
 				}
@@ -91,7 +91,7 @@ namespace Pinta.Core
 				return;
 			}
 
-			SetCurrentTool(t, true);
+			SetCurrentTool(t);
 		}
 
 		private BaseTool FindTool (string name)
@@ -112,7 +112,7 @@ namespace Pinta.Core
 					return Tools[index];}
 				else {
 					DummyTool dummy = new DummyTool ();
-					SetCurrentTool(dummy, true);
+					SetCurrentTool(dummy);
 					return dummy;
 				}
 			}
@@ -128,7 +128,7 @@ namespace Pinta.Core
 				CurrentTool.DoCommit ();
 		}
 
-		public void SetCurrentTool (BaseTool tool, bool deactivatePrevious)
+		public void SetCurrentTool(BaseTool tool)
 		{
 			int i = Tools.IndexOf (tool);
 			
@@ -139,12 +139,7 @@ namespace Pinta.Core
 			if (index >= 0) {
 				prev_index = index;
 				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
-
-				if (deactivatePrevious)
-				{
-					Tools[index].DoDeactivated(tool);
-				}
-
+				Tools[index].DoDeactivated(tool);
 				Tools[index].ToolItem.Active = false;
 			}
 			
@@ -163,7 +158,7 @@ namespace Pinta.Core
 			BaseTool t = FindTool (tool);
 			
 			if (t != null) {
-				SetCurrentTool(t, true);
+				SetCurrentTool(t);
 				return true;
 			}
 			
@@ -175,7 +170,7 @@ namespace Pinta.Core
 			BaseTool tool = FindNextTool (shortcut);
 			
 			if (tool != null)
-				SetCurrentTool(tool, true);
+				SetCurrentTool(tool);
 		}
 		
 		private BaseTool FindNextTool (Gdk.Key shortcut)

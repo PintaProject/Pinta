@@ -107,7 +107,7 @@ namespace Pinta.Tools
 
 
 			//Note: this must be low enough for mouse clicks to be properly considered on/off the curve at any given point.
-			double tInterval = .025d;
+			double tInterval = .03d;
 
 			double oneMinusT;
 			double oneMinusTSquared;

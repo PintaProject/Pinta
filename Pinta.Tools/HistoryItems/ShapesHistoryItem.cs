@@ -162,7 +162,7 @@ namespace Pinta.Tools
 
 
 			//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
-			if (BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex, true))
+			if (BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex, true) != null)
 			{
 				//The currently active tool now matches the shape's corresponding tool.
 

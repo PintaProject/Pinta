@@ -96,15 +96,15 @@ namespace Pinta.Tools
 				{
 					(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
 
-					RoundedLineEngine selEngine = (RoundedLineEngine)SelectedShapeEngine;
+					ShapeEngine selEngine = SelectedShapeEngine;
 
-					if (selEngine != null)
+					if (selEngine != null && selEngine.ShapeType == ShapeTypes.RoundedLineSeries)
 					{
-						selEngine.Radius = Radius;
+						((RoundedLineEngine)selEngine).Radius = Radius;
 
 						storePreviousSettings();
 
-						DrawActiveShape(false, false, true, false);
+						DrawActiveShape(false, false, true, false, false);
 					}
 				}
 			}
@@ -202,7 +202,7 @@ namespace Pinta.Tools
 
 		public override void updateToolbarSettings(ShapeEngine engine)
 		{
-			if (engine != null)
+			if (engine != null && engine.ShapeType == ShapeTypes.RoundedLineSeries)
 			{
 				RoundedLineEngine rLEngine = (RoundedLineEngine)engine;
 

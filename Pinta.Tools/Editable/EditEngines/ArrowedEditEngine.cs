@@ -270,7 +270,7 @@ namespace Pinta.Tools
 				{
 					activeEngine.Arrow1.Show = showArrowOneBox.Active;
 
-					DrawActiveShape(false, false, true, false);
+					DrawActiveShape(false, false, true, false, false);
 
 					storePreviousSettings();
 				}
@@ -334,7 +334,7 @@ namespace Pinta.Tools
 				{
 					activeEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-					DrawActiveShape(false, false, true, false);
+					DrawActiveShape(false, false, true, false, false);
 
 					storePreviousSettings();
 				}
@@ -411,7 +411,7 @@ namespace Pinta.Tools
 							activeEngine.Arrow1.ArrowSize = newSize;
 							activeEngine.Arrow2.ArrowSize = newSize;
 
-							DrawActiveShape(false, false, true, false);
+							DrawActiveShape(false, false, true, false, false);
 
 							storePreviousSettings();
 						}
@@ -490,7 +490,7 @@ namespace Pinta.Tools
 							activeEngine.Arrow1.AngleOffset = newAngle;
 							activeEngine.Arrow2.AngleOffset = newAngle;
 
-							DrawActiveShape(false, false, true, false);
+							DrawActiveShape(false, false, true, false, false);
 
 							storePreviousSettings();
 						}
@@ -569,7 +569,7 @@ namespace Pinta.Tools
 							activeEngine.Arrow1.LengthOffset = newLength;
 							activeEngine.Arrow2.LengthOffset = newLength;
 
-							DrawActiveShape(false, false, true, false);
+							DrawActiveShape(false, false, true, false, false);
 
 							storePreviousSettings();
 						}
@@ -636,7 +636,7 @@ namespace Pinta.Tools
 
 		public override void updateToolbarSettings(ShapeEngine engine)
 		{
-			if (engine != null)
+			if (engine != null && engine.ShapeType == ShapeTypes.OpenLineCurveSeries)
 			{
 				if (showArrowOneBox != null)
 				{
@@ -693,42 +693,39 @@ namespace Pinta.Tools
 		}
 
 
-		protected override void drawExtras(ref Rectangle? dirty, Context g)
+		protected override void drawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
 		{
-			ShapeEngine activeEngine = ActiveShapeEngine;
-			
-			if (activeEngine != null && activeEngine.ControlPoints.Count > 0)
+			if (engine.ControlPoints.Count > 0)
 			{
 				//Draw the arrows for the currently active shape.
 
-				GeneratedPoint[] genPoints = activeEngine.GeneratedPoints;
+				GeneratedPoint[] genPoints = engine.GeneratedPoints;
 
-				for (int i = 0; i < activeEngine.ControlPoints.Count; ++i)
+				for (int i = 0; i < engine.ControlPoints.Count; ++i)
 				{
-					LineCurveSeriesEngine activeLCSEngine = (LineCurveSeriesEngine)activeEngine;
+					LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine)engine;
 
-					if (activeLCSEngine.Arrow1.Show)
+					if (lCSEngine.Arrow1.Show)
 					{
 						if (genPoints.Length > 1)
 						{
-							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow1.Draw(
-								g, activeLCSEngine.OutlineColor, genPoints[0].Position, genPoints[1].Position));
+							dirty = dirty.UnionRectangles(lCSEngine.Arrow1.Draw(g, lCSEngine.OutlineColor,
+								genPoints[0].Position, genPoints[1].Position));
 						}
 					}
 
-					if (activeLCSEngine.Arrow2.Show)
+					if (lCSEngine.Arrow2.Show)
 					{
 						if (genPoints.Length > 1)
 						{
-							dirty = dirty.UnionRectangles(activeLCSEngine.Arrow2.Draw(
-								g, activeLCSEngine.OutlineColor,
+							dirty = dirty.UnionRectangles(lCSEngine.Arrow2.Draw(g, lCSEngine.OutlineColor,
 								genPoints[genPoints.Length - 1].Position, genPoints[genPoints.Length - 2].Position));
 						}
 					}
 				}
 			}
 
-			base.drawExtras(ref dirty, g);
+			base.drawExtras(ref dirty, g, engine);
 		}
 	}
 }

@@ -274,7 +274,7 @@ namespace Pinta.Tools
 			{
 				activeEngine.OutlineColor = OutlineColor.Clone();
 
-				DrawActiveShape(false, false, true, false);
+				DrawActiveShape(false, false, true, false, false);
 			}
 		}
 
@@ -286,7 +286,7 @@ namespace Pinta.Tools
 			{
 				activeEngine.FillColor = FillColor.Clone();
 
-				DrawActiveShape(false, false, true, false);
+				DrawActiveShape(false, false, true, false, false);
 			}
 		}
 
@@ -334,7 +334,7 @@ namespace Pinta.Tools
 
 					storePreviousSettings();
 
-					DrawActiveShape(false, false, true, false);
+					DrawActiveShape(false, false, true, false, false);
 				};
 			}
 
@@ -410,10 +410,14 @@ namespace Pinta.Tools
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 							selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
 
-							//Determine if the currently active tool matches the new shape type's corresponding tool, and if not, switch to it.
-							ActivateCorrespondingTool(SelectedShapeIndex, true);
+							int previousSSI = SelectedShapeIndex;
 
-							//The currently active tool should now match the clicked on shape's corresponding tool.
+							ActivateCorrespondingTool(selEngine.ShapeType, true);
+
+							SelectedShapeIndex = previousSSI;
+
+							//Draw the updated shape with organized points generation (for mouse detection). 
+							DrawActiveShape(true, false, true, false, true);
 						}
 					}
 				};
@@ -440,7 +444,7 @@ namespace Pinta.Tools
 					storePreviousSettings();
 
                     //Update the shape.
-                    DrawActiveShape(false, false, true, false);
+					DrawActiveShape(false, false, true, false, false);
                 };
             }
         }
@@ -449,14 +453,15 @@ namespace Pinta.Tools
         {
 			recallPreviousSettings();
 
-            DrawActiveShape(false, false, true, false);
-
             PintaCore.Palette.PrimaryColorChanged += new EventHandler(Palette_PrimaryColorChanged);
             PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
         }
 
 		public virtual void HandleDeactivated(BaseTool newTool)
-        {
+		{
+			SelectedPointIndex = -1;
+			SelectedShapeIndex = -1;
+
 			ShapeEngine activeEngine = ActiveShapeEngine;
 
 			storePreviousSettings();
@@ -466,11 +471,6 @@ namespace Pinta.Tools
 			{
 				//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
 				finalizeAllShapes();
-			}
-			else
-			{
-				//The tool being switched to is also editable. Redraw the current shape without any hover or selection points, though.
-				DrawActiveShape(false, false, false, false);
 			}
 
             PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
@@ -510,7 +510,7 @@ namespace Pinta.Tools
             }
 
             //Draw the current state.
-            DrawActiveShape(true, false, true, false);
+			DrawActiveShape(true, false, true, false, false);
         }
 
         public virtual void HandleAfterRedo()
@@ -523,7 +523,7 @@ namespace Pinta.Tools
             }
 
             //Draw the current state.
-            DrawActiveShape(true, false, true, false);
+			DrawActiveShape(true, false, true, false, false);
         }
 
         public virtual bool HandleKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
@@ -584,7 +584,7 @@ namespace Pinta.Tools
 
                     hoverPoint = new PointD(-1d, -1d);
 
-                    DrawActiveShape(true, false, true, false);
+					DrawActiveShape(true, false, true, false, false);
                 }
 
                 args.RetVal = true;
@@ -647,7 +647,7 @@ namespace Pinta.Tools
                         ++SelectedPointIndex;
                     }
 
-                    DrawActiveShape(true, false, true, shiftKey);
+					DrawActiveShape(true, false, true, shiftKey, false);
                 }
 
                 args.RetVal = true;
@@ -660,7 +660,7 @@ namespace Pinta.Tools
                     //Move the selected control point.
                     SelectedPoint.Position.Y -= 1d;
 
-                    DrawActiveShape(true, false, true, false);
+					DrawActiveShape(true, false, true, false, false);
                 }
 
                 args.RetVal = true;
@@ -673,7 +673,7 @@ namespace Pinta.Tools
                     //Move the selected control point.
                     SelectedPoint.Position.Y += 1d;
 
-                    DrawActiveShape(true, false, true, false);
+					DrawActiveShape(true, false, true, false, false);
                 }
 
                 args.RetVal = true;
@@ -705,7 +705,7 @@ namespace Pinta.Tools
                         SelectedPoint.Position.X -= 1d;
                     }
 
-                    DrawActiveShape(true, false, true, false);
+					DrawActiveShape(true, false, true, false, false);
                 }
 
                 args.RetVal = true;
@@ -737,7 +737,7 @@ namespace Pinta.Tools
                         SelectedPoint.Position.X += 1d;
                     }
 
-                    DrawActiveShape(true, false, true, false);
+					DrawActiveShape(true, false, true, false, false);
                 }
 
                 args.RetVal = true;
@@ -777,7 +777,7 @@ namespace Pinta.Tools
 			}
 
 			//Redraw the previously (and possibly currently) active shape without any control points in case another shape is made active.
-			DrawActiveShape(false, false, false, false);
+			DrawActiveShape(false, false, false, false, false);
 			
             Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -888,7 +888,7 @@ namespace Pinta.Tools
 					//User clicked on a non-control point on a shape.
 
 					//Determine if the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
-					if (ActivateCorrespondingTool(closestShapeIndex, true))
+					if (ActivateCorrespondingTool(closestShapeIndex, true) != null)
 					{
 						//Pass on the event and its data to the newly activated tool.
 						PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
@@ -967,7 +967,7 @@ namespace Pinta.Tools
 			{
 				//Since the user is not creating a new shape or control point but rather modifying an existing control point, it should be determined
 				//whether the currently active tool matches the clicked on shape's corresponding tool, and if not, switch to it.
-				if (ActivateCorrespondingTool(SelectedShapeIndex, true))
+				if (ActivateCorrespondingTool(SelectedShapeIndex, true) != null)
 				{
 					//Pass on the event and its data to the newly activated tool.
 					PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
@@ -992,7 +992,7 @@ namespace Pinta.Tools
                 clickedWithoutModifying = true;
             }
 
-            DrawActiveShape(false, false, true, shiftKey);
+			DrawActiveShape(false, false, true, shiftKey, false);
         }
 
         public virtual void HandleMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -1001,7 +1001,7 @@ namespace Pinta.Tools
 
             changingTension = false;
 
-            DrawActiveShape(true, false, true, args.Event.IsShiftPressed());
+			DrawActiveShape(true, false, true, args.Event.IsShiftPressed(), false);
         }
 
         public virtual void HandleMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
@@ -1020,7 +1020,7 @@ namespace Pinta.Tools
             if (!isDrawing)
             {
                 //Redraw the active shape to show a (temporary) highlighted control point (over any shape) when applicable.
-                DrawActiveShape(false, false, true, shiftKey);
+				DrawActiveShape(false, false, true, shiftKey, false);
             }
             else
             {
@@ -1126,7 +1126,7 @@ namespace Pinta.Tools
 							Utility.Clamp(selPoint.Tension, 0d, 1d);
                     }
 
-                    DrawActiveShape(false, false, true, shiftKey);
+                    DrawActiveShape(false, false, true, shiftKey, false);
                 }
             }
 
@@ -1137,13 +1137,34 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Draw the currently active shape.
 		/// </summary>
-		/// <param name="calculateOrganizedPoints">Whether or not to calculate the spatially organized
+		/// <param name="calculateOrganizedPoints">Whether to calculate the spatially organized
 		/// points for mouse detection after drawing the shape.</param>
-		/// <param name="finalize">Whether or not to finalize the drawing.</param>
-		/// <param name="drawHoverSelection">Whether or not to draw any hover point or selected point.</param>
-		/// <param name="shiftKey">Whether or not the shift key is being pressed. This is for width/height constraining/equalizing.</param>
-		public void DrawActiveShape(bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey)
+		/// <param name="finalize">Whether to finalize the drawing.</param>
+		/// <param name="drawHoverSelection">Whether to draw any hover point or selected point.</param>
+		/// <param name="shiftKey">Whether the shift key is being pressed. This is for width/height constraining/equalizing.</param>
+		/// <param name="preventSwitchBack">Whether to prevent switching back to the old tool if a tool change is necessary.</param>
+		public void DrawActiveShape(bool calculateOrganizedPoints, bool finalize, bool drawHoverSelection, bool shiftKey, bool preventSwitchBack)
 		{
+			ShapeTool oldTool = BaseEditEngine.ActivateCorrespondingTool(SelectedShapeIndex, calculateOrganizedPoints);
+
+			//First, determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
+			if (oldTool != null)
+			{
+				//The tool has switched, so call DrawActiveShape again but inside that tool.
+				((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine.DrawActiveShape(
+					calculateOrganizedPoints, finalize, drawHoverSelection, shiftKey, preventSwitchBack);
+
+				//Afterwards, switch back to the old tool, unless specified otherwise.
+				if (!preventSwitchBack)
+				{
+					ActivateCorrespondingTool(oldTool.ShapeType, true);
+				}
+
+				return;
+			}
+
+			//The currently active tool should now match the shape's corresponding tool.
+
 			beforeDraw();
 
 			ShapeEngine activeEngine = ActiveShapeEngine;
@@ -1228,9 +1249,15 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.Clip();
 
+				calculateHoverPoint();
+
 				//Draw the hover point. Note: the hover point has its own invalidation.
 				drawHoverPoint(g);
+
+				usedToolLayer = true;
 			}
+
+			doc.ToolLayer.Hidden = false;
 		}
 
 		/// <summary>
@@ -1257,8 +1284,7 @@ namespace Pinta.Tools
 			}
 
 			//Draw the finalized shape.
-			Rectangle dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-				doc.CurrentUserLayer, false, false);
+			Rectangle dirty = drawShape(engine, doc.CurrentUserLayer, false, false);
 
 			if (createHistoryItem)
 			{
@@ -1299,8 +1325,7 @@ namespace Pinta.Tools
 			}
 
 			//Draw the shape onto the temporary DrawingLayer.
-			Rectangle dirty = drawShape(Utility.PointsToRectangle(shapeOrigin, new PointD(currentPoint.X, currentPoint.Y), shiftKey),
-				engine.DrawingLayer.Layer, true, drawHoverSelection);
+			Rectangle dirty = drawShape(engine, engine.DrawingLayer.Layer, true, drawHoverSelection);
 
 			//Reset the hover point after each drawing.
 			hoverPoint = new PointD(-1d, -1d);
@@ -1309,78 +1334,83 @@ namespace Pinta.Tools
 			return dirty;
 		}
 
+		/// <summary>
+		/// Calculate the hover point, if any. Result is stored in hoverPoint.
+		/// </summary>
 		private void calculateHoverPoint()
 		{
-			//Calculate the hover point, if any.
-
-			int closestCPIndex, closestCPShapeIndex;
-			ControlPoint closestControlPoint;
-			double closestCPDistance;
-
-			SEngines.FindClosestControlPoint(currentPoint,
-				out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
-
-			int closestShapeIndex, closestPointIndex;
-			PointD closestPoint;
-			double closestDistance;
-
-			OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
-				out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
-
-			double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
-
-			List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
-
-			//Determine if the closest ControlPoint is within the expected click range.
-			if (closestControlPoint != null && closestCPDistance < currentClickRange)
+			if (SEngines.Count > 0)
 			{
-				//User clicked directly on a ControlPoint on a shape.
+				hoverPoint = new PointD(-1d, -1d);
 
-				hoverPoint.X = closestControlPoint.Position.X;
-				hoverPoint.Y = closestControlPoint.Position.Y;
-				hoveredPointAsControlPoint = closestCPIndex;
-			}
-			else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
-			{
-				//User is hovering over a generated point on a shape.
+				int closestCPIndex, closestCPShapeIndex;
+				ControlPoint closestControlPoint;
+				double closestCPDistance;
 
-				if (controlPoints.Count > closestPointIndex)
+				SEngines.FindClosestControlPoint(currentPoint,
+					out closestCPShapeIndex, out closestCPIndex, out closestControlPoint, out closestCPDistance);
+
+				int closestShapeIndex, closestPointIndex;
+				PointD closestPoint;
+				double closestDistance;
+
+				OrganizedPointCollection.FindClosestPoint(SEngines, currentPoint,
+					out closestShapeIndex, out closestPointIndex, out closestPoint, out closestDistance);
+
+				double currentClickRange = ShapeClickStartingRange + BrushWidth * ShapeClickThicknessFactor;
+
+				List<ControlPoint> controlPoints = SEngines[closestShapeIndex].ControlPoints;
+
+				//Determine if the closest ControlPoint is within the expected click range.
+				if (closestControlPoint != null && closestCPDistance < currentClickRange)
 				{
-					//Note: compare the currentPoint's distance here because it's the actual mouse position.
-					if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
-					{
-						//Mouse hovering over a control point (on the "previous order" side of the point).
+					//User clicked directly on a ControlPoint on a shape.
 
-						hoverPoint.X = controlPoints[closestPointIndex].Position.X;
-						hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
-						hoveredPointAsControlPoint = closestPointIndex;
-					}
-					else if (closestPointIndex > 0)
+					hoverPoint.X = closestControlPoint.Position.X;
+					hoverPoint.Y = closestControlPoint.Position.Y;
+					hoveredPointAsControlPoint = closestCPIndex;
+				}
+				else if (closestDistance < currentClickRange) //Determine if the user is hovering the mouse close enough to a shape.
+				{
+					//User is hovering over a generated point on a shape.
+
+					if (controlPoints.Count > closestPointIndex)
 					{
-						if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
+						//Note: compare the currentPoint's distance here because it's the actual mouse position.
+						if (currentPoint.Distance(controlPoints[closestPointIndex].Position) < currentClickRange)
+						{
+							//Mouse hovering over a control point (on the "previous order" side of the point).
+
+							hoverPoint.X = controlPoints[closestPointIndex].Position.X;
+							hoverPoint.Y = controlPoints[closestPointIndex].Position.Y;
+							hoveredPointAsControlPoint = closestPointIndex;
+						}
+						else if (closestPointIndex > 0)
+						{
+							if (currentPoint.Distance(controlPoints[closestPointIndex - 1].Position) < currentClickRange)
+							{
+								//Mouse hovering over a control point (on the "following order" side of the point).
+
+								hoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
+								hoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
+								hoveredPointAsControlPoint = closestPointIndex - 1;
+							}
+						}
+						else if (controlPoints.Count > 0 && currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
 						{
 							//Mouse hovering over a control point (on the "following order" side of the point).
 
-							hoverPoint.X = controlPoints[closestPointIndex - 1].Position.X;
-							hoverPoint.Y = controlPoints[closestPointIndex - 1].Position.Y;
-							hoveredPointAsControlPoint = closestPointIndex - 1;
+							hoveredPointAsControlPoint = controlPoints.Count - 1;
+							hoverPoint.X = controlPoints[hoveredPointAsControlPoint].Position.X;
+							hoverPoint.Y = controlPoints[hoveredPointAsControlPoint].Position.Y;
 						}
 					}
-					else if (controlPoints.Count > 0 &&
-						currentPoint.Distance(controlPoints[controlPoints.Count - 1].Position) < currentClickRange)
+
+					if (hoverPoint.X < 0d)
 					{
-						//Mouse hovering over a control point (on the "following order" side of the point).
-
-						hoveredPointAsControlPoint = controlPoints.Count - 1;
-						hoverPoint.X = controlPoints[hoveredPointAsControlPoint].Position.X;
-						hoverPoint.Y = controlPoints[hoveredPointAsControlPoint].Position.Y;
+						hoverPoint.X = closestPoint.X;
+						hoverPoint.Y = closestPoint.Y;
 					}
-				}
-
-				if (hoverPoint.X < 0d)
-				{
-					hoverPoint.X = closestPoint.X;
-					hoverPoint.Y = closestPoint.Y;
 				}
 			}
 		}
@@ -1428,7 +1458,7 @@ namespace Pinta.Tools
 		}
 
 
-		protected Rectangle drawShape(Rectangle rect, Layer l, bool drawCP, bool drawHoverSelection)
+		protected Rectangle drawShape(ShapeEngine engine, Layer l, bool drawCP, bool drawHoverSelection)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -1476,7 +1506,7 @@ namespace Pinta.Tools
 					g.SetDash(new double[] { }, 0.0);
 
 					//Draw anything extra (that not every shape has), like arrows.
-					drawExtras(ref dirty, g);
+					drawExtras(ref dirty, g, engine);
 
 					if (drawCP)
 					{
@@ -1614,17 +1644,8 @@ namespace Pinta.Tools
 			//Draw all of the shapes.
 			for (SelectedShapeIndex = 0; SelectedShapeIndex < SEngines.Count; ++SelectedShapeIndex)
 			{
-				//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
-				BaseEditEngine.ActivateCorrespondingTool(SelectedShapeIndex, false);
-
-				//The currently active tool should now match the shape's corresponding tool.
-
-				BaseEditEngine correspondingEngine = ((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine;
-
-				correspondingEngine.SelectedShapeIndex = SelectedShapeIndex;
-
-				//Draw the shape. Only draw the selection point on the previously selected shape.
-				correspondingEngine.DrawActiveShape(true, false, previousToolSI == SelectedShapeIndex, false);
+				//Only draw the selected point for the selected shape.
+				DrawActiveShape(true, false, previousToolSI == SelectedShapeIndex, false, true);
 			}
 
 			//Restore the previous SelectedShapeIndex value.
@@ -1746,76 +1767,83 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Activates the corresponding tool to the given shapeIndex value if the tool is not already active, and then returns whether a tool switch
-		/// has occurred. If so and this was called in an event handler, it should most likely pass the event data on to the newly activated tool
-		/// (accessing it using PintaCore.Tools.CurrentTool) and then return.
+		/// Activates the corresponding tool to the given shapeIndex value if the tool is not already active, and then returns the previous tool
+		/// if a tool switch has occurred or null otherwise. If a switch did occur and this was called in e.g. an event handler, it should most
+		/// likely pass the event data on to the newly activated tool (accessing it using PintaCore.Tools.CurrentTool) and then return.
 		/// </summary>
 		/// <param name="shapeIndex">The index of the shape in SEngines to find the corresponding tool to and switch to.</param>
 		/// <param name="permanentSwitch">Whether the tool switch is permanent or just temporary (for drawing).</param>
-		/// <returns>Whether or not a tool switch has occurred.</returns>
-		public static bool ActivateCorrespondingTool(int shapeIndex, bool permanentSwitch)
+		/// <returns>The *previous* tool if a tool switch has occurred or null otherwise.</returns>
+		public static ShapeTool ActivateCorrespondingTool(int shapeIndex, bool permanentSwitch)
 		{
 			//First make sure that there is a validly selectable tool.
 			if (shapeIndex > -1 && SEngines.Count > shapeIndex)
 			{
-				ShapeTool correspondingTool = GetCorrespondingTool(SEngines[shapeIndex].ShapeType);
-
-				//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
-				if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool)
-				{
-					//What happens next depends on whether the old tool is an editable ShapeTool.
-					if (PintaCore.Tools.CurrentTool.IsEditableShapeTool)
-					{
-						ShapeTool oldTool = (ShapeTool)PintaCore.Tools.CurrentTool;
-
-						//The active tool needs to be switched to the corresponding tool.
-						PintaCore.Tools.SetCurrentTool(correspondingTool, false);
-
-						ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
-
-						newTool.EditEngine.updateToolbarSettings(SEngines[shapeIndex]);
-
-						if (permanentSwitch)
-						{
-							//Set the new tool's active shape and point to the old shape and point.
-							newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
-							newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
-
-							//Make sure neither tool thinks it is drawing anything.
-							newTool.EditEngine.isDrawing = false;
-							oldTool.EditEngine.isDrawing = false;
-
-							//Draw the updated shape with organized points generation (for mouse detection). 
-							newTool.EditEngine.DrawActiveShape(true, false, true, false);
-						}
-
-						//Let the caller know that the active tool has been switched.
-						return true;
-					}
-					else
-					{
-						//The active tool needs to be switched to the corresponding tool.
-						PintaCore.Tools.SetCurrentTool(correspondingTool, false);
-
-						ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
-
-						if (permanentSwitch)
-						{
-							//Make sure that the new tool doesn't think it is drawing anything.
-							newTool.EditEngine.isDrawing = false;
-
-							//Draw the updated shape with organized points generation (for mouse detection). 
-							newTool.EditEngine.DrawActiveShape(true, false, true, false);
-						}
-
-						//Let the caller know that the active tool has been switched.
-						return true;
-					}
-				}
+				return ActivateCorrespondingTool(SEngines[shapeIndex].ShapeType, permanentSwitch);
 			}
 
 			//Let the caller know that the active tool has not been switched.
-			return false;
+			return null;
+		}
+
+		/// <summary>
+		/// Activates the corresponding tool to the given shapeType value if the tool is not already active, and then returns the previous tool
+		/// if a tool switch has occurred or null otherwise. If a switch did occur and this was called in e.g. an event handler, it should most
+		/// likely pass the event data on to the newly activated tool (accessing it using PintaCore.Tools.CurrentTool) and then return.
+		/// </summary>
+		/// <param name="shapeType">The index of the shape in SEngines to find the corresponding tool to and switch to.</param>
+		/// <param name="permanentSwitch">Whether the tool switch is permanent or just temporary (for drawing).</param>
+		/// <returns>The *previous* tool if a tool switch has occurred or null otherwise.</returns>
+		public static ShapeTool ActivateCorrespondingTool(ShapeTypes shapeType, bool permanentSwitch)
+		{
+			ShapeTool correspondingTool = GetCorrespondingTool(shapeType);
+
+			//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
+			if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool)
+			{
+				ShapeTool oldTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+
+				//The active tool needs to be switched to the corresponding tool.
+				PintaCore.Tools.SetCurrentTool(correspondingTool);
+
+				ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+
+				//What happens next depends on whether the old tool was an editable ShapeTool.
+				if (oldTool.IsEditableShapeTool)
+				{
+					if (permanentSwitch)
+					{
+						//Set the new tool's active shape and point to the old shape and point.
+						newTool.EditEngine.SelectedPointIndex = oldTool.EditEngine.SelectedPointIndex;
+						newTool.EditEngine.SelectedShapeIndex = oldTool.EditEngine.SelectedShapeIndex;
+
+						//Make sure neither tool thinks it is drawing anything.
+						newTool.EditEngine.isDrawing = false;
+						oldTool.EditEngine.isDrawing = false;
+					}
+
+					ShapeEngine activeEngine = newTool.EditEngine.ActiveShapeEngine;
+
+					if (activeEngine != null)
+					{
+						newTool.EditEngine.updateToolbarSettings(activeEngine);
+					}
+				}
+				else
+				{
+					if (permanentSwitch)
+					{
+						//Make sure that the new tool doesn't think it is drawing anything.
+						newTool.EditEngine.isDrawing = false;
+					}
+				}
+
+				//Let the caller know that the active tool has been switched.
+				return oldTool;
+			}
+
+			//Let the caller know that the active tool has not been switched.
+			return null;
 		}
 
 		/// <summary>
@@ -1899,7 +1927,7 @@ namespace Pinta.Tools
 			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);
         }
 
-        protected virtual void drawExtras(ref Rectangle? dirty, Context g)
+		protected virtual void drawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
         {
             
         }

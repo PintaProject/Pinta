@@ -204,7 +204,7 @@ namespace Pinta.Tools
 			button_down = 0;
 			
 			if ((int)tool_select.SelectedItem.Tag == 1)
-				PintaCore.Tools.SetCurrentTool(PintaCore.Tools.PreviousTool, true);
+				PintaCore.Tools.SetCurrentTool(PintaCore.Tools.PreviousTool);
 			else if ((int)tool_select.SelectedItem.Tag == 2)
 				PintaCore.Tools.SetCurrentTool(Catalog.GetString("Pencil"));
 		}
