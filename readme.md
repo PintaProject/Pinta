@@ -1,5 +1,7 @@
 #Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
 
+[![Build Status](https://travis-ci.org/PintaProject/Pinta.svg)](https://travis-ci.org/PintaProject/Pinta)
+
 Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
 
 Pinta is a Gtk# clone of [Paint.Net 3.0](http://www.getpaint.net/)
