@@ -76,13 +76,13 @@ namespace Pinta
 				platform = "Linux";
 			
 			//TODO: Need to change version number here
-			return "http://178.79.177.109:8080/Stable/" + platform + "/" + "1.6" + "/main.mrep";
+			return "http://178.79.177.109:8080/Stable/" + platform + "/" + PintaCore.ApplicationVersion + "/main.mrep";
 		}
 
 		private string GetAllRepositoryUrl ()
 		{
 			//TODO: Need to change version number here
-			return "http://178.79.177.109:8080/Stable/All/" + "1.6" + "/main.mrep";
+			return "http://178.79.177.109:8080/Stable/All/" + PintaCore.ApplicationVersion + "/main.mrep";
 		}
 	}
 }
