@@ -65,12 +65,12 @@ namespace Pinta
 			}
 
 			int threads = -1;
-            bool show_help = false;
-            bool show_version = false;
+                        bool show_help = false;
+                        bool show_version = false;
 			
 			var p = new OptionSet () {
-                { "h|help", Catalog.GetString("Show this message and exit."), v => show_help = v != null },
-                { "v|version", Catalog.GetString("Display the application version."), v => show_version = v != null },
+                                { "h|help", Catalog.GetString("Show this message and exit."), v => show_help = v != null },
+                                { "v|version", Catalog.GetString("Display the application version."), v => show_version = v != null },
 				{ "rt|render-threads=", Catalog.GetString ("number of threads to use for rendering"), (int v) => threads = v }
 			};
 
@@ -80,21 +80,21 @@ namespace Pinta
 				extra = p.Parse (args);
 			} catch (OptionException e) {
 				Console.WriteLine (e.Message);
-                ShowHelp (p);
+                                ShowHelp (p);
 				return;
 			}
 
-            if (show_version)
-            {
-                Console.WriteLine (PintaCore.ApplicationVersion);
-                return;
-            }
+                        if (show_version)
+                        {
+                            Console.WriteLine (PintaCore.ApplicationVersion);
+                            return;
+                        }
 
-            if (show_help)
-            {
-                ShowHelp (p);
-                return;
-            }
+                        if (show_help)
+                        {
+                            ShowHelp (p);
+                            return;
+                        }
 
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
 
@@ -118,13 +118,13 @@ namespace Pinta
 			Application.Run ();
 		}
 
-        private static void ShowHelp (OptionSet p)
-        {
-            Console.WriteLine (Catalog.GetString ("Usage: pinta [files]"));
-            Console.WriteLine ();
-            Console.WriteLine (Catalog.GetString ("Options: "));
-            p.WriteOptionDescriptions (Console.Out);
-        }
+                private static void ShowHelp (OptionSet p)
+                {
+                    Console.WriteLine (Catalog.GetString ("Usage: pinta [files]"));
+                    Console.WriteLine ();
+                    Console.WriteLine (Catalog.GetString ("Options: "));
+                    p.WriteOptionDescriptions (Console.Out);
+                }
 
 		private static void OpenFilesFromCommandLine (List<string> extra)
 		{

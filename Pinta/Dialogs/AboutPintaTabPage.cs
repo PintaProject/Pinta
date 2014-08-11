@@ -40,7 +40,7 @@ namespace Pinta
 			label.Markup = String.Format (
 			    "<b>{0}</b>\n    {1}",
 			    Catalog.GetString ("Version"),
-                PintaCore.ApplicationVersion);
+                            PintaCore.ApplicationVersion);
 			    
 			HBox hBoxVersion = new HBox ();
 			hBoxVersion.PackStart (label, false, false, 5);
