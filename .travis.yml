@@ -1,6 +1,6 @@
 language: c
 install:
-  - sudo apt-get update --qq
-  - sudo apt-get install mono-devel mono-xbuild -qq
+  - sudo apt-get update -yqq
+  - sudo apt-get install mono-devel mono-xbuild -yqq
 script:
   - ./autogen.sh && make
