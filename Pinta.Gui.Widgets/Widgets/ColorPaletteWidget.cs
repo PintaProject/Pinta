@@ -39,14 +39,26 @@ namespace Pinta.Gui.Widgets
 		private Rectangle swap_rect = new Rectangle (37, 6, 15, 15);
 		private Rectangle reset_rect = new Rectangle (7, 37, 15, 15);
 
-        private const int swatch_width = 15;
-        private const int swatch_height = 15;
-        private const int swatch_area_margin = 7;
+        const int primarySecondaryAreaSize = 60;
+        const int swatchSize = 15;
+        const int swatchAreaMargin = 7;
+
+        OrientationEnum orientation;
+
+        const int defaultNumOfJRows = 3;
+        int jRows;
+        int iRows;
 
 		private Gdk.Pixbuf swap_icon;
 		private Gdk.Pixbuf reset_icon;
 		private Palette palette;
-		
+
+        enum OrientationEnum
+        {
+            Horizontal,
+            Vertical
+        }
+
 		public ColorPaletteWidget ()
 		{
 			// Insert initialization code here.
@@ -59,7 +71,6 @@ namespace Pinta.Gui.Widgets
 			HasTooltip = true;
 			QueryTooltip += HandleQueryTooltip;
 		}
-
 
 		public void Initialize ()
 		{
@@ -160,6 +171,8 @@ namespace Pinta.Gui.Widgets
 			
 			using (Context g = Gdk.CairoHelper.Create (GdkWindow)) {
 				
+                // Draw Primary / Secondary Area
+
 				g.FillRectangle (secondary_rect, PintaCore.Palette.SecondaryColor);
 			
 				g.DrawRectangle (new Rectangle (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
@@ -171,34 +184,28 @@ namespace Pinta.Gui.Widgets
 	
 				g.DrawPixbuf (swap_icon, swap_rect.Location ());
 				g.DrawPixbuf (reset_icon, reset_rect.Location ());
-				
-				// Draw swatches
-                int noOfCols;
-                int swatch_start_y;
-                int swatch_start_x;
 
-                if (Allocation.Height > Allocation.Width)
+                // Draw color swatches
+
+                int startI = primarySecondaryAreaSize;
+                int startJ = swatchAreaMargin;
+
+                int paletteIndex = 0;
+                for (int jRow = 0; jRow < jRows; jRow++)
                 {
-                    noOfCols = Math.Max((this.Allocation.Width - 2 * swatch_area_margin) / swatch_width, 3);
-                    swatch_start_x = swatch_area_margin;
-                    swatch_start_y = 60;
-                }
-                else
-                {
-                    noOfCols = (Allocation.Width - 60 - swatch_area_margin) / swatch_width;
-                    swatch_start_x = 60;
-                    swatch_start_y = swatch_area_margin;
-                }
+                    for (int iRow = 0; iRow < iRows; iRow++)
+                    {
+                        if (paletteIndex >= palette.Count)
+                            break;
 
-                int roundedCount = (palette.Count % noOfCols == 0) ?
-                   palette.Count : palette.Count + noOfCols - (palette.Count % noOfCols);
+                        int x = (orientation == OrientationEnum.Horizontal) ? startI + iRow * swatchSize : startJ + jRow * swatchSize;
+                        int y = (orientation == OrientationEnum.Horizontal) ? startJ + jRow * swatchSize : startI + iRow * swatchSize;
 
-				for (int i = 0; i < palette.Count; i++) {
-					int x = swatch_start_x + swatch_width * (i / (roundedCount / noOfCols));
-					int y = swatch_start_y + swatch_height * (i % (roundedCount / noOfCols));
-					
-					g.FillRectangle (new Rectangle (x, y, 15, 15), palette[i]);
-				}
+                        g.FillRectangle(new Rectangle(x, y, swatchSize, swatchSize), palette[paletteIndex]);
+
+                        paletteIndex++;
+                    }
+                }
 			}
 			
 			return true;
@@ -207,32 +214,90 @@ namespace Pinta.Gui.Widgets
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
 			// Calculate desired size here.
-			requisition.Height = 60;
-			requisition.Width = 60;
+            requisition.Height = requisition.Width = primarySecondaryAreaSize;
 		}
+
+        protected override void OnSizeAllocated(Gdk.Rectangle allocation)
+        {
+            base.OnSizeAllocated(allocation);
+
+            int iSpaceAvailable, jSpaceAvailable;
+
+            // The orientation is horizontal when the widget is wider than it is tall
+            // The direction of 'i' is the horizontal (left-to-right) when
+            // widget orientation is horizontal,
+            // and vertical (top-to-bottom) when widget orientation is vertical.
+            // 'j' is in the other direction.
+            if (Allocation.Width > Allocation.Height)
+            {
+                orientation = OrientationEnum.Horizontal;
+                iSpaceAvailable = Allocation.Width;
+                jSpaceAvailable = Allocation.Height;
+            }
+            else
+            {
+                orientation = OrientationEnum.Vertical;
+                iSpaceAvailable = Allocation.Height;
+                jSpaceAvailable = Allocation.Width;
+            }
+
+            iSpaceAvailable -= primarySecondaryAreaSize + swatchAreaMargin;
+            jSpaceAvailable -= 2 * swatchAreaMargin;
+
+            // Determine max number of rows that can be displayed in available area
+            int maxPossibleIRows = Math.Max(1, iSpaceAvailable / swatchSize);
+            int maxPossibleJRows = Math.Max(1, jSpaceAvailable / swatchSize);
+
+            int iRowsWithDefaultNumOfJRows = (int)Math.Ceiling((double)palette.Count / defaultNumOfJRows);
+
+            // Display palette in default configuration if space is available
+            // (it looks better)
+            if ((maxPossibleJRows >= defaultNumOfJRows) && (maxPossibleIRows >= iRowsWithDefaultNumOfJRows))
+            {
+                iRows = iRowsWithDefaultNumOfJRows;
+                jRows = defaultNumOfJRows;
+            }
+            else // Compress palette to fit within available space
+            {
+                iRows = (int)Math.Ceiling((double)palette.Count / maxPossibleJRows);
+                jRows = (int)Math.Ceiling((double)palette.Count / iRows);
+            }
+        }
 		
 		private int PointToPalette (int x, int y)
 		{
-			int col = -1;
-			int row = 0;
-			int roundedCount = (palette.Count % 3 == 0) ?
-					palette.Count : palette.Count + 3 - (palette.Count % 3);
-			
-			if (x >= 7 && x < 22)
-				col = 0;
-			else if (x >= 22 && x < 38)
-				col = roundedCount / 3;
-			else if (x >= 38 && x < 54)
-				col = (roundedCount / 3) * 2;
-			else
-				return -1;
-			
-			if (y < 60 || y > 60 + ((roundedCount / 3) * 15))
-				return -1;
-			
-			row = (y - 60) / 15;
-			
-			return (col + row >= palette.Count) ? -1 : col + row;
+            int i, j;
+
+            if (orientation == OrientationEnum.Horizontal)
+            {
+                i = x;
+                j = y;
+            }
+            else
+            {
+                i = y;
+                j = x;
+            }
+
+            i -= primarySecondaryAreaSize;
+            j -= swatchAreaMargin;
+
+            // Determine the swatch position under the mouse pointer.
+            int iRow = i / swatchSize;
+            int jRow = j / swatchSize;
+
+            if ((i < 0) || (iRow >= iRows) || (j < 0) || (jRow >= jRows))
+            { // Mouse pointer is outside of swatch area
+                return -1;
+            }
+            else if ((jRow * iRows + iRow) >= palette.Count)
+            { // Mouse pointer is within swatch area, but not on valid color
+                return -1;
+            }
+            else
+            { // Return the palette color number under the mouse pointer
+                return jRow * iRows + iRow;
+            }
 		}
 
 		/// <summary>
