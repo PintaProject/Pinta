@@ -1110,8 +1110,11 @@ namespace Pinta.Tools
 					//Now that the text has been finalized, change its state.
 					CurrentTextEngine.textMode = TextMode.Unchanged;
 
-					selection.DisposeSelection ();
-					selection = null;
+                    if (selection != null)
+                    {
+                        selection.DisposeSelection();
+                        selection = null;
+                    }
 				}
 			}
 		}
