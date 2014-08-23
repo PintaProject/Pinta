@@ -86,13 +86,16 @@ namespace Pinta.Tools
 		{
 			Color tool_color;
 		
-            if (mouse_button == 1) {
+            if (mouse_button == 1)
+            {
                 tool_color = PintaCore.Palette.PrimaryColor;
             }
             else if (mouse_button == 3)
             {
                 tool_color = PintaCore.Palette.SecondaryColor;
-            } else {
+            }
+            else
+            {
                 last_point = point_empty;
 				return;
 			}
