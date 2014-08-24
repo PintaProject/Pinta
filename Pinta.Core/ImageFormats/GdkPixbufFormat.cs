@@ -116,7 +116,7 @@ namespace Pinta.Core
 	/// </summary>
 	internal static class PixbufExtensions
 	{
-		[DllImport ("libgdk_pixbuf-2.0-0.dll")]
+		[DllImport ("libgdk_pixbuf-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gdk_pixbuf_save_utf8 (IntPtr raw, IntPtr filename, IntPtr type, out IntPtr error, IntPtr dummy);
 
 		public static bool SaveUtf8 (this Pixbuf pb, string filename, string type)
@@ -137,7 +137,7 @@ namespace Pinta.Core
 			}
 		}
 
-		[DllImport ("libgdk_pixbuf-2.0-0.dll")]
+        [DllImport("libgdk_pixbuf-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gdk_pixbuf_savev_utf8 (IntPtr raw, IntPtr filename, IntPtr type, IntPtr[] option_keys, IntPtr[] option_values, out IntPtr error);
 
 		public static bool SavevUtf8 (this Pixbuf pb, string filename, string type, string[] option_keys, string[] option_values)
