@@ -38,6 +38,7 @@ namespace Pinta.Tools
 		
 		private ImageSurface undo_surface;
 		private bool surface_modified;
+        protected uint mouse_button;
 
 		public PencilTool ()
 		{
@@ -55,21 +56,28 @@ namespace Pinta.Tools
 		#region Mouse Handlers
 		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
-			if (surface_modified)
-				return;
+            // If we are already drawing, ignore any additional mouse down events
+            if (mouse_button > 0)
+                return;
 
 			surface_modified = false;
 			undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone ();
+            mouse_button = args.Event.Button;
 			Color tool_color;
 
-			if (args.Event.Button == 1) // left
-				tool_color = PintaCore.Palette.PrimaryColor;
-			else if (args.Event.Button == 3) // right
-				tool_color = PintaCore.Palette.SecondaryColor;
-			else {
-				last_point = point_empty;
-				return;
-			}
+            if (mouse_button == 1)
+            {
+                tool_color = PintaCore.Palette.PrimaryColor;
+            }
+            else if (mouse_button == 3)
+            {
+                tool_color = PintaCore.Palette.SecondaryColor;
+            }
+            else
+            {
+                last_point = point_empty;
+                return;
+            }
 
 			Draw (canvas, tool_color, point, true);
 		}
@@ -78,12 +86,17 @@ namespace Pinta.Tools
 		{
 			Color tool_color;
 		
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) != 0)
-				tool_color = PintaCore.Palette.PrimaryColor;
-			else if ((args.Event.State & Gdk.ModifierType.Button3Mask) != 0)
-				tool_color = PintaCore.Palette.SecondaryColor;
-			else {
-				last_point = point_empty;
+            if (mouse_button == 1)
+            {
+                tool_color = PintaCore.Palette.PrimaryColor;
+            }
+            else if (mouse_button == 3)
+            {
+                tool_color = PintaCore.Palette.SecondaryColor;
+            }
+            else
+            {
+                last_point = point_empty;
 				return;
 			}
 			
@@ -150,12 +163,17 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if (surface_modified)
-				doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
-			else if (undo_surface != null)
-				(undo_surface as IDisposable).Dispose ();
+            if (undo_surface != null)
+            {
+                if (surface_modified)
+                    doc.History.PushNewItem(new SimpleHistoryItem(Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+                else if (undo_surface != null)
+                    (undo_surface as IDisposable).Dispose();
+            }
 
 			surface_modified = false;
+            undo_surface = null;
+            mouse_button = 0;
 		}
 		#endregion
 
