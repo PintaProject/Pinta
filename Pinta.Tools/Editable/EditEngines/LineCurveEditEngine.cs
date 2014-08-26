@@ -1,10 +1,10 @@
 ﻿// 
-// ControlPoint.cs
+// LineCurveEditEngine.cs
 //  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
 // 
-// Copyright (c) 2013 Andrew Davis, GSoC 2013
+// Copyright (c) 2014 Andrew Davis, GSoC 2014
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,33 +25,51 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
+using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Cairo;
+using Mono.Unix;
 
 namespace Pinta.Tools
 {
-	public class ControlPoint
+    public class LineCurveEditEngine: ArrowedEditEngine
 	{
-		//Note: not using get/set because this is used in time-critical code that is sped up without it.
-		public PointD Position;
-		public double Tension;
-
-		/// <summary>
-		/// A wrapper class for a PointD with its own tension value.
-		/// </summary>
-		/// <param name="passedPosition">The position of the PointD on the Canvas.</param>
-		/// <param name="passedTension">The tension of the ControlPoint on the curve.</param>
-		public ControlPoint(PointD passedPosition, double passedTension)
+		protected override string shapeString
 		{
-			Position = passedPosition;
-			Tension = passedTension;
+			get
+			{
+				return Catalog.GetString("Open Curve Shape");
+			}
 		}
 
-		public ControlPoint Clone()
+        public LineCurveEditEngine(ShapeTool passedOwner): base(passedOwner)
+        {
+
+        }
+
+		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
-			return new ControlPoint(Position, Tension);
+			Document doc = PintaCore.Workspace.ActiveDocument;
+
+			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
+
+			addLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+
+			//Set the new shape's DashPattern option.
+			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+
+			//Set the new arrow's settings to be the same as what's in the toolbar settings.
+			setNewArrowSettings(newEngine);
+
+			return newEngine;
 		}
-	}
+
+        protected override void movePoint(List<ControlPoint> controlPoints)
+        {
+			base.movePoint(controlPoints);
+        }
+    }
 }

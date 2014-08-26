@@ -61,7 +61,7 @@ namespace Pinta.Tools
 		/// Draws the arrow.
 		/// </summary>
 		/// <param name="g">The drawing context.</param>
-		/// <param name="endPoint">The end point of a line/curve.</param>
+		/// <param name="endPoint">The end point of a shape.</param>
 		/// <param name="almostEndPoint">The point right before the end point.</param>
 		public Rectangle? Draw(Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
 		{
@@ -88,7 +88,7 @@ namespace Pinta.Tools
 				}
 			}
 
-			//Calculate the points of the arrow, 2 of which are just the endPoint.
+			//Calculate the points of the arrow.
 			PointD[] arrowPoints =
 							{
 								endPoint,
@@ -100,17 +100,19 @@ namespace Pinta.Tools
 									endPoint.Y + Math.Sin((endingAngle + 180) * radiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
 								new PointD(
 									endPoint.X + Math.Cos((endingAngle + 90 - AngleOffset) * radiansToDegrees) * ArrowSize,
-									endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * radiansToDegrees) * ArrowSize * -1d),
-								endPoint
+									endPoint.Y + Math.Sin((endingAngle + 90 - AngleOffset) * radiansToDegrees) * ArrowSize * -1d)
 							};
 
 			//Draw the arrow.
 			g.FillPolygonal(arrowPoints, outlineColor);
 
+
+            //Calculate the minimum bounding rectangle for the arrowhead and return it so
+            //that it can be unioned with the existing invalidation rectangle.
+
 			double minX = Math.Min(Math.Min(arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X);
 			double minY = Math.Min(Math.Min(arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y);
 
-			//Calculate the minimum bounding rectangle for the arrowhead and union it with the existing invalidation rectangle.
 			return new Rectangle(minX, minY,
 				Math.Max(Math.Max(arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X) - minX,
 				Math.Max(Math.Max(arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y) - minY);

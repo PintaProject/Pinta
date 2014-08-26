@@ -150,9 +150,9 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnDeactivated ()
+		protected override void OnDeactivated(BaseTool newTool)
 		{
-			base.OnDeactivated ();
+			base.OnDeactivated (newTool);
 
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				PintaCore.Workspace.ActiveDocument.FinishSelection ();

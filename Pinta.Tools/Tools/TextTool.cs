@@ -497,9 +497,9 @@ namespace Pinta.Tools
 			StopEditing(false);
 		}
 
-		protected override void OnDeactivated ()
+		protected override void OnDeactivated(BaseTool newTool)
 		{
-			base.OnDeactivated ();
+			base.OnDeactivated (newTool);
 
 			// Stop listening for color change events
 			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;

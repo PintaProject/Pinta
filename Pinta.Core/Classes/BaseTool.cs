@@ -40,7 +40,7 @@ namespace Pinta.Core
 	[TypeExtensionPoint]
 	public abstract class BaseTool
 	{
-		protected const int DEFAULT_BRUSH_WIDTH = 2;
+		public const int DEFAULT_BRUSH_WIDTH = 2;
 	    
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
 
@@ -80,11 +80,21 @@ namespace Pinta.Core
 		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 
+		//Whether or not the tool is an editable ShapeTool.
+		public bool IsEditableShapeTool = false;
+
 		public virtual bool UseAntialiasing
 		{
 			get
 			{
-				return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag;
+				if (antialiasing_button == null)
+				{
+					return false;
+				}
+				else
+				{
+					return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag;
+				}
 			}
 
 			set
@@ -149,14 +159,19 @@ namespace Pinta.Core
 			OnCommit ();
 		}
 
+		public void DoAfterSave()
+		{
+			AfterSave();
+		}
+
 		public void DoActivated ()
 		{
 			OnActivated ();
 		}
 		
-		public void DoDeactivated ()
+		public void DoDeactivated (BaseTool newTool)
 		{
-			OnDeactivated ();
+			OnDeactivated(newTool);
 		}		
 		
 		// Return true if the key was consumed.
@@ -279,14 +294,19 @@ namespace Pinta.Core
 		{
 		}
 
+		protected virtual void AfterSave()
+		{
+
+		}
+
 		protected virtual void OnActivated ()
 		{
 			PintaCore.Workspace.CanvasSizeChanged += new EventHandler(Workspace_CanvasSizeChanged);
 
 			SetCursor (DefaultCursor);
 		}
-		
-		protected virtual void OnDeactivated ()
+
+		protected virtual void OnDeactivated(BaseTool newTool)
 		{
 			PintaCore.Workspace.CanvasSizeChanged -= new EventHandler(Workspace_CanvasSizeChanged);
 

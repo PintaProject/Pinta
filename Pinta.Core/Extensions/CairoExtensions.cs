@@ -993,6 +993,11 @@ namespace Pinta.Core
 			return new Gdk.Rectangle (x, y, w, h);
 		}
 
+		public static Color Clone(this Color color)
+		{
+			return new Color(color.R, color.G, color.B, color.A);
+		}
+
 		public static Gdk.Color ToGdkColor (this Cairo.Color color)
 		{
 			Gdk.Color c = new Gdk.Color ();

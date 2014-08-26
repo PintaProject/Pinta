@@ -33,7 +33,7 @@ using ClipperLibrary;
 
 namespace Pinta.Tools
 {
-	public abstract class SelectTool : ShapeTool
+	public abstract class SelectTool : SelectShapeTool
 	{
 		private PointD reset_origin;
 		private PointD shape_end;
@@ -53,7 +53,7 @@ namespace Pinta.Tools
 			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
 		}
 
-		#region ToolBar
+        #region ToolBar
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Toolbar tb)
 		{
@@ -135,9 +135,9 @@ namespace Pinta.Tools
 			isResizing = false;
 		}
 
-		protected override void OnDeactivated ()
+		protected override void OnDeactivated(BaseTool newTool)
 		{
-			base.OnDeactivated ();
+			base.OnDeactivated (newTool);
 			handler_active = false;
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				Document doc = PintaCore.Workspace.ActiveDocument;

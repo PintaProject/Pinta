@@ -40,7 +40,20 @@ namespace Pinta.Tools
 			get { return "Tools.Ellipse.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw an ellipse (right click for secondary color). Hold Shift to constrain to a circle."); }
+			get { return Catalog.GetString("Left click to draw a shape with the primary color." +
+				  "\nLeft click on a shape to add a control point." +
+				  "\nLeft click on a control point and drag to move it." +
+				  "\nRight click on a control point and drag to change its tension." +
+				  "\nHold Shift to snap to angles." +
+				  "\nUse arrow keys to move the selected control point." +
+				  "\nPress Ctrl + left/right arrows to select control points by order." +
+				  "\nPress Delete to delete the selected control point." +
+				  "\nPress Space to add a new control point at the mouse position." +
+				  "\nHold Ctrl while pressing Space to create the control point at the exact same position." +
+				  "\nHold Ctrl while left clicking on a control point to create a new shape at the exact same position." +
+				  "\nHold Ctrl while clicking outside of the image bounds to create a new shape starting at the edge." +
+				  "\nPress Enter to finalize the shape.");
+			}
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Ellipse.png"), 9, 18); }
@@ -49,55 +62,19 @@ namespace Pinta.Tools
 			get { return 45; }
 		}
 
-		private DashPatternBox dashPBox = new DashPatternBox();
-
-		private string dashPattern = "-";
+		public override BaseEditEngine.ShapeTypes ShapeType
+		{
+			get
+			{
+				return BaseEditEngine.ShapeTypes.Ellipse;
+			}
+		}
 
 		public EllipseTool ()
 		{
-		}
-		
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			EditEngine = new EllipseEditEngine(this);
 
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				
-				dirty = rect;
-
-				g.SetDash(DashPatternBox.GenerateDashArray(dashPattern, BrushWidth), 0.0);
-				
-				if (FillShape && StrokeShape)
-					dirty = g.FillStrokedEllipse (rect, fill_color, outline_color, BrushWidth);
-				else if (FillShape)
-					dirty = g.FillStrokedEllipse(rect, outline_color, outline_color, BrushWidth);
-				else
-					dirty = g.DrawEllipse (rect, outline_color, BrushWidth);
-			}
-			
-			return dirty;
-		}
-
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
-		{
-			base.OnBuildToolBar(tb);
-
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
-
-			if (dpbBox != null)
-			{
-				dpbBox.Changed += (o, e) =>
-				{
-					dashPattern = dpbBox.ActiveText;
-				};
-			}
+			BaseEditEngine.CorrespondingTools.Add(ShapeType, this);
 		}
 	}
 }

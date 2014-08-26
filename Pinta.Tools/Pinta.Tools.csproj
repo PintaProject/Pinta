@@ -72,15 +72,24 @@
   <ItemGroup>
     <Compile Include="CoreToolsExtension.cs" />
     <Compile Include="Dashes\DashPatternBox.cs" />
-    <Compile Include="LinesCurves\ControlPoint.cs" />
-    <Compile Include="LinesCurves\Arrow.cs" />
-    <Compile Include="LinesCurves\OrganizedPointCollection.cs" />
-    <Compile Include="LinesCurves\CurveEngineCollection.cs" />
-    <Compile Include="HistoryItems\CurveModifyHistoryItem.cs" />
-    <Compile Include="HistoryItems\CurvesHistoryItem.cs" />
+    <Compile Include="Editable\EditEngines\ArrowedEditEngine.cs" />
+    <Compile Include="Editable\EditEngines\RoundedLineEditEngine.cs" />
+    <Compile Include="Editable\EditEngines\EllipseEditEngine.cs" />
+    <Compile Include="Editable\EditEngines\RectangleEditEngine.cs" />
+    <Compile Include="Editable\Shapes\GeneratedPoint.cs" />
+    <Compile Include="Editable\Shapes\ControlPoint.cs" />
+    <Compile Include="Editable\Shapes\Arrow.cs" />
+    <Compile Include="Editable\Shapes\RoundedLineEngine.cs" />
+    <Compile Include="Editable\Shapes\LineCurveSeriesEngine.cs" />
+    <Compile Include="Editable\Shapes\OrganizedPointCollection.cs" />
+    <Compile Include="Editable\Shapes\EllipseEngine.cs" />
+    <Compile Include="Editable\Shapes\ShapeEngineCollection.cs" />
+    <Compile Include="HistoryItems\ShapesModifyHistoryItem.cs" />
+    <Compile Include="HistoryItems\ShapesHistoryItem.cs" />
     <Compile Include="Tools\BaseBrushTool.cs" />
     <Compile Include="Brushes\SplatterBrush.cs" />
     <Compile Include="Tools\ColorPickerTool.cs" />
+    <Compile Include="Editable\EditEngines\BaseEditEngine.cs" />
     <Compile Include="Tools\EllipseSelectTool.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
     <Compile Include="Tools\EraserTool.cs" />
@@ -88,6 +97,7 @@
     <Compile Include="Tools\FreeformShapeTool.cs" />
     <Compile Include="Tools\GradientTool.cs" />
     <Compile Include="Tools\LassoSelectTool.cs" />
+    <Compile Include="Editable\EditEngines\LineCurveEditEngine.cs" />
     <Compile Include="Tools\LineCurveTool.cs" />
     <Compile Include="Tools\MagicWandTool.cs" />
     <Compile Include="Tools\MoveSelectedTool.cs" />
@@ -101,6 +111,7 @@
     <Compile Include="Tools\RectangleSelectTool.cs" />
     <Compile Include="Tools\RectangleTool.cs" />
     <Compile Include="Tools\RoundedRectangleTool.cs" />
+    <Compile Include="Tools\SelectShapeTool.cs" />
     <Compile Include="Tools\SelectTool.cs" />
     <Compile Include="Tools\ShapeTool.cs" />
     <Compile Include="Tools\TextTool.cs" />
