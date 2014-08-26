@@ -40,7 +40,20 @@ namespace Pinta.Tools
 			get { return "Tools.Rectangle.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw a rectangle (right click for secondary color). Hold Shift to constrain to a square."); }
+			get { return Catalog.GetString("Left click to draw a shape with the primary color." +
+				  "\nLeft click on a shape to add a control point." +
+				  "\nLeft click on a control point and drag to move it." +
+				  "\nRight click on a control point and drag to change its tension." +
+				  "\nHold Shift to snap to angles." +
+				  "\nUse arrow keys to move the selected control point." +
+				  "\nPress Ctrl + left/right arrows to select control points by order." +
+				  "\nPress Delete to delete the selected control point." +
+				  "\nPress Space to add a new control point at the mouse position." +
+				  "\nHold Ctrl while pressing Space to create the control point at the exact same position." +
+				  "\nHold Ctrl while left clicking on a control point to create a new shape at the exact same position." +
+				  "\nHold Ctrl while clicking outside of the image bounds to create a new shape starting at the edge." +
+				  "\nPress Enter to finalize the shape.");
+			}
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18); }
@@ -49,66 +62,19 @@ namespace Pinta.Tools
 			get { return 41; }
 		}
 
-		private DashPatternBox dashPBox = new DashPatternBox();
-
-		private string dashPattern = "-";
-
-		protected override Rectangle DrawShape (Rectangle rect, Layer l)
+		public override BaseEditEngine.ShapeTypes ShapeType
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			Rectangle dirty;
-			
-			using (Context g = new Context (l.Surface)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
-				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-
-				double[] dashes = DashPatternBox.GenerateDashArray(dashPattern, BrushWidth);
-				g.SetDash(dashes, 0.0);
-
-				if (dashes.Length == 2 && dashes[1] == 0.0)
-				{
-					//No dash pattern (solid line), so draw rectangle normally (glitch free).
-
-					if (FillShape && StrokeShape)
-						dirty = g.FillStrokedRectangle(rect, fill_color, outline_color, BrushWidth);
-					else if (FillShape)
-						dirty = g.FillStrokedRectangle(rect, outline_color, outline_color, BrushWidth);
-					else
-						dirty = g.DrawRectangle(rect, outline_color, BrushWidth);
-				}
-				else
-				{
-					//Dash pattern, so draw rectangle as best as possible for dashes (but with possible corner glitches for some rectangle sizes).
-
-					if (FillShape && StrokeShape)
-						dirty = g.FillStrokedFullRectangle(rect, fill_color, outline_color, BrushWidth);
-					else if (FillShape)
-						dirty = g.FillStrokedFullRectangle(rect, outline_color, outline_color, BrushWidth);
-					else
-						dirty = g.DrawFullRectangle(rect, outline_color, BrushWidth);
-				}
+			get
+			{
+				return BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
 			}
-			
-			return dirty;
 		}
 
-		protected override void OnBuildToolBar(Gtk.Toolbar tb)
+		public RectangleTool()
 		{
-			base.OnBuildToolBar(tb);
+			EditEngine = new RectangleEditEngine(this);
 
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
-
-			if (dpbBox != null)
-			{
-				dpbBox.Changed += (o, e) =>
-				{
-					dashPattern = dpbBox.ActiveText;
-				};
-			}
+			BaseEditEngine.CorrespondingTools.Add(ShapeType, this);
 		}
 	}
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-26 20:07-0400\n"
+"POT-Creation-Date: 2014-08-25 23:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -385,27 +385,27 @@ msgstr ""
 msgid "Close All"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:236
+#: ../Pinta.Core/Classes/BaseTool.cs:251
 msgid "Tool"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:307
+#: ../Pinta.Core/Classes/BaseTool.cs:327
 msgid "Shortcut key"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:416
+#: ../Pinta.Core/Classes/BaseTool.cs:436
 msgid "Normal Blending"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:417
+#: ../Pinta.Core/Classes/BaseTool.cs:437
 msgid "Overwrite"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:431
+#: ../Pinta.Core/Classes/BaseTool.cs:451
 msgid "Antialiasing On"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:432
+#: ../Pinta.Core/Classes/BaseTool.cs:452
 msgid "Antialiasing Off"
 msgstr ""
 
@@ -893,48 +893,6 @@ msgstr ""
 msgid "Linked"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:91
-msgid "Choose Primary Color"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
-msgid "Choose Secondary Color"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
-msgid "Choose Palette Color"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
-msgid "Click to switch between primary and secondary color."
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
-msgid "Click to reset primary and secondary color."
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
-msgid "Click to select primary color."
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
-msgid "Click to select secondary color."
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
-msgid ""
-"Left click to set primary color. Right click to set secondary color. Middle "
-"click to choose palette color."
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
-msgid "Layer Shown"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
-msgid "Layer Hidden"
-msgstr ""
-
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
@@ -951,6 +909,48 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
+msgid "Choose Primary Color"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
+msgid "Choose Secondary Color"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
+msgid "Choose Palette Color"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
+msgid "Click to switch between primary and secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+msgid "Click to select primary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+msgid "Click to select secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Shown"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Hidden"
 msgstr ""
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
@@ -973,19 +973,172 @@ msgstr ""
 msgid "Dash"
 msgstr ""
 
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
+msgid "Arrow"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
+msgid "Size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
+msgid "Decrease arrow size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
+msgid "Increase arrow size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
+#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
+#: EdgeDetectData EmbossEffect ReliefData TwistEffect
+msgid "Angle"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
+msgid "Decrease angle offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
+msgid "Increase angle offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
+msgid "Length"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
+msgid "Decrease length offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
+msgid "Increase length offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:52
+msgid "Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
-#: ../Pinta.Tools/Tools/ShapeTool.cs:99
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
 msgstr ""
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
-#: ../Pinta.Tools/Tools/ShapeTool.cs:104
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
 msgstr ""
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:345
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
-#: ../Pinta.Tools/Tools/ShapeTool.cs:118
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:360
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
+msgid "Fill Style"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
+msgid "Outline Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:369
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
+msgid "Fill Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:383
+msgid "Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:391
+msgid "Open Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:392
+msgid "Closed Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:393
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
+#: ../Pinta.Tools/Tools/EllipseTool.cs:37
+msgid "Ellipse"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:394
+msgid "Rounded Line Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:408
+msgid "Changed Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:547
+msgid "Point Deleted"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:564
+msgid "Deleted"
+msgstr ""
+
+#. Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:613
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:909
+msgid "Point Added"
+msgstr ""
+
+#. Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:949
+msgid "Added"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1039
+msgid "Modified"
+msgstr ""
+
+#. Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
+#. Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1705
+msgid "Finalized"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
+msgid "Open Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
+msgid "Closed Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
+msgid "Rounded Line Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
+msgid "Radius"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
+msgid "Decrease shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
+msgid "Increase shape's corner radius"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
@@ -1063,14 +1216,27 @@ msgid ""
 "circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EllipseTool.cs:37
-msgid "Ellipse"
-msgstr ""
-
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:46
+#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"Shift to constrain to a circle."
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press Ctrl + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold Ctrl while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold Ctrl while left clicking on a control point to create a new shape at "
+"the exact same position.\n"
+"Hold Ctrl while clicking outside of the image bounds to create a new shape "
+"starting at the edge.\n"
+"Press Enter to finalize the shape."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:52
@@ -1107,26 +1273,6 @@ msgstr ""
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
-#: ../Pinta.Tools/Tools/ShapeTool.cs:131
-msgid "Fill Style"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
-#: ../Pinta.Tools/Tools/ShapeTool.cs:138
-msgid "Outline Shape"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
-#: ../Pinta.Tools/Tools/ShapeTool.cs:139
-msgid "Fill Shape"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
-#: ../Pinta.Tools/Tools/ShapeTool.cs:140
-msgid "Fill and Outline Shape"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
@@ -1168,100 +1314,15 @@ msgstr ""
 msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:175
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:181
-msgid ""
-"Left click to draw a line with primary color.\n"
-"Left click on a line to add curve control points.\n"
-"Left click on a control point and drag to move it.\n"
-"Right click on a control point and drag to change tension.\n"
-"Hold Shift to snap to angles.\n"
-"Use arrow keys to move selected control point.\n"
-"Press Ctrl + left/right arrows to navigate through (select) control points "
-"by order.\n"
-"Press Delete to delete selected control point.\n"
-"Press Space to create a new point on the outermost side of the selected "
-"control point at the mouse position.\n"
-"Hold Ctrl while pressing Space to create the point at the exact same "
-"position.\n"
-"Hold Ctrl while left clicking on a control point to create a new line at the "
-"exact same position.\n"
-"Hold Ctrl while clicking outside of the Image bounds to create a new line "
-"starting at the edge.\n"
-"Press Enter to finalize the curve."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:263
-msgid "Arrow"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:397
-msgid "Size"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:402
-msgid "Decrease arrow size"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:467
-msgid "Increase arrow size"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:478 RadialBlurEffect dialog
-#: JuliaFractalEffect MandelbrotFractalEffect EdgeDetectData EmbossEffect
-#: ReliefData TwistEffect
-msgid "Angle"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:483
-msgid "Decrease angle offset"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:544
-msgid "Increase angle offset"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:555
-msgid "Length"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:560
-msgid "Decrease length offset"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:621
-msgid "Increase length offset"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:1017
-msgid "Line/Curve Finalized"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:1224
-msgid "Line/Curve Point Deleted"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:1275
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:1560
-msgid "Line/Curve Point Added"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:1607
-msgid "Line/Curve Added"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:1686
-msgid "Line/Curve Modified"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:63
 msgid "Magic Wand Select"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:64
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:73
 msgid "Click to select region of similar color."
 msgstr ""
 
@@ -1336,32 +1397,8 @@ msgstr ""
 msgid "Rectangle"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"Shift to constrain to a square."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold Shift to constrain to a square."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:91
-msgid "Radius"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:96
-msgid "Decrease rectangle's corner radius"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:110
-msgid "Increase rectangle's corner radius"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:81
@@ -1494,12 +1531,12 @@ msgstr ""
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -1575,24 +1612,24 @@ msgstr ""
 msgid "Version Info"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:41
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "License"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:57
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:57
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "by Pinta contributors"
 msgstr ""
 
@@ -1652,8 +1689,70 @@ msgstr ""
 msgid "Dock"
 msgstr ""
 
-#: ../Pinta/Main.cs:70
+#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
+msgid "New Image Size          "
+msgstr ""
+
+#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
+#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+msgid "pixels"
+msgstr ""
+
+#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+msgid "Width:"
+msgstr ""
+
+#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+msgid "Height:"
+msgstr ""
+
+#. Container child hbox1.Gtk.Box+BoxChild
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr ""
+
+#. Container child hbox2.Gtk.Box+BoxChild
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr ""
+
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr ""
+
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr ""
+
+#: ../Pinta/Main.cs:72
+msgid "Show this message and exit."
+msgstr ""
+
+#: ../Pinta/Main.cs:73
+msgid "Display the application version."
+msgstr ""
+
+#: ../Pinta/Main.cs:74
 msgid "number of threads to use for rendering"
+msgstr ""
+
+#: ../Pinta/Main.cs:123
+msgid "Usage: pinta [files]"
+msgstr ""
+
+#: ../Pinta/Main.cs:125
+msgid "Options: "
 msgstr ""
 
 #: ../Pinta/MainWindow.cs:184
@@ -1722,52 +1821,6 @@ msgstr ""
 
 #: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:48
 msgid "Tools"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
-msgid "New Image Size          "
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-msgid "pixels"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-msgid "Width:"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-msgid "Height:"
-msgstr ""
-
-#. Container child hbox1.Gtk.Box+BoxChild
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-msgid "By percentage:"
-msgstr ""
-
-#. Container child hbox2.Gtk.Box+BoxChild
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-msgid "By absolute size:"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-msgid "Maintain aspect ratio"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
 msgstr ""
 
 #: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
