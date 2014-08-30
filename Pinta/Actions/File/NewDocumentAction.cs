@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
+using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -65,7 +67,21 @@ namespace Pinta.Actions
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), false);
+                try
+                {
+				    PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), false);
+                }
+                catch (OutOfMemoryException)
+                {
+                    dialog.Destroy();
+
+                    MessageDialog md = new MessageDialog(PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "<b>" + Catalog.GetString("Failed to create document.") + "</b>\n\n" + Catalog.GetString("Insufficient memory available."));
+                    md.Title = Catalog.GetString("Error");
+
+                    md.Run();
+                    md.Destroy();
+                    return;
+                }
 
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);

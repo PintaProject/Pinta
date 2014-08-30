@@ -329,6 +329,11 @@ namespace Pinta.Core
 		public UserLayer CreateLayer(string name, int width, int height)
 		{
 			Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
+            if (surface.Status == Cairo.Status.NoMemory)
+            {
+                throw new OutOfMemoryException();
+            }
+
 			UserLayer layer = new UserLayer(surface) { Name = name };
 
 			return layer;

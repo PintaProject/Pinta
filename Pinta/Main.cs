@@ -145,7 +145,19 @@ namespace Pinta
 			else
 			{
 				// Create a blank document
-				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), false);
+                try
+                {
+    				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), false);
+                }
+                catch (OutOfMemoryException)
+                {
+                    MessageDialog md = new MessageDialog(PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString("Failed to create document.\n\nInsufficient memory available."));
+                    md.Title = Catalog.GetString("Error");
+
+                    md.Run();
+                    md.Destroy();
+                    return;
+                }
 			}
 		}
 

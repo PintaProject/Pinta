@@ -54,7 +54,20 @@ namespace Pinta.Actions
 					if (image != null) {
 						Gdk.Size size = new Gdk.Size (image.Width, image.Height);
 
-						PintaCore.Workspace.NewDocument (size, true);
+                        try
+                        {
+                            PintaCore.Workspace.NewDocument(size, true);
+                        }
+                        catch (OutOfMemoryException)
+                        {
+                            MessageDialog md = new MessageDialog(PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "<b>" + Catalog.GetString("Failed to create document.") + "</b>\n\n" + Catalog.GetString("Insufficient memory available."));
+                            md.Title = Catalog.GetString("Error");
+
+                            md.Run();
+                            md.Destroy();
+                            return;
+                        }
+                        
 						PintaCore.Actions.Edit.Paste.Activate ();
 						PintaCore.Actions.Edit.Deselect.Activate ();
 						return;
