@@ -107,7 +107,7 @@ namespace Pinta.Core
 					}
 
 					int new_x = Math.Max ((int)(document.ImageSize.Width * value), 1);
-					int new_y = Math.Max ((int)((new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
+					int new_y = Math.Max ((int)(((long)new_x * document.ImageSize.Height) / document.ImageSize.Width), 1);
 
 					CanvasSize = new Gdk.Size (new_x, new_y);
 					Invalidate ();
