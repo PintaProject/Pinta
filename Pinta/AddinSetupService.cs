@@ -46,11 +46,11 @@ namespace Pinta
 		public void RegisterRepositories (bool enable)
 		{
 			RegisterRepository (GetPlatformRepositoryUrl (),
-			                    Catalog.GetString ("Pinta Platform Dependent Add-in Repository"),
+			                    Catalog.GetString ("Pinta Community Addins - Cross-Platform"),
 			                    enable);
 
 			RegisterRepository (GetAllRepositoryUrl (),
-			                    Catalog.GetString ("Pinta Platform Independent Add-in Repository"),
+			                    Catalog.GetString ("Pinta Community Addins - Platform specific"),
 			                    enable);
 		}
 
@@ -65,24 +65,23 @@ namespace Pinta
 			}
 		}
 		
-		private string GetPlatformRepositoryUrl ()
+		private static string GetPlatformRepositoryUrl ()
 		{
 			string platform;
 			if (SystemManager.GetOperatingSystem () == OS.Windows)
 				platform = "Windows";
-			else if (SystemManager.GetOperatingSystem () == OS.Mac)
-				platform = "Mac";
 			else
-				platform = "Linux";
-			
-			//TODO: Need to change version number here
-			return "http://178.79.177.109:8080/Stable/" + platform + "/" + PintaCore.ApplicationVersion + "/main.mrep";
+				if (SystemManager.GetOperatingSystem () == OS.Mac)
+					platform = "Mac";
+				else
+					platform = "Linux";
+
+			return "http://pintaproject.github.io/Pinta-Community-Addins/repository/" + platform + "/main.mrep";
 		}
 
-		private string GetAllRepositoryUrl ()
+		private static string GetAllRepositoryUrl ()
 		{
-			//TODO: Need to change version number here
-			return "http://178.79.177.109:8080/Stable/All/" + PintaCore.ApplicationVersion + "/main.mrep";
+			return "http://pintaproject.github.io/Pinta-Community-Addins/repository/All/main.mrep";
 		}
 	}
 }
