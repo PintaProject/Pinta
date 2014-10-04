@@ -33,21 +33,24 @@ namespace Pinta
 {
 	public class AddinSetupService: SetupService
 	{
-		static string repositoryUrl = "http://pintaproject.github.io/Pinta-Community-Addins/repository/main.mrep";
-
 		internal AddinSetupService (AddinRegistry r): base (r)
 		{
 		}
 		
 		public bool AreRepositoriesRegistered ()
 		{
-			return Repositories.ContainsRepository (repositoryUrl);
+			string url = GetPlatformRepositoryUrl ();
+			return Repositories.ContainsRepository (url);
 		}
 		
 		public void RegisterRepositories (bool enable)
 		{
-			RegisterRepository (repositoryUrl,
-			                    Catalog.GetString ("Pinta Community Add-ins"),
+			RegisterRepository (GetPlatformRepositoryUrl (),
+			                    Catalog.GetString ("Pinta Platform Dependent Add-in Repository"),
+			                    enable);
+
+			RegisterRepository (GetAllRepositoryUrl (),
+			                    Catalog.GetString ("Pinta Platform Independent Add-in Repository"),
 			                    enable);
 		}
 
@@ -60,6 +63,26 @@ namespace Pinta
 				// that the repository name from the previous line ends up being saved to disk.
 				Repositories.SetRepositoryEnabled (url, enable);
 			}
+		}
+		
+		private string GetPlatformRepositoryUrl ()
+		{
+			string platform;
+			if (SystemManager.GetOperatingSystem () == OS.Windows)
+				platform = "Windows";
+			else if (SystemManager.GetOperatingSystem () == OS.Mac)
+				platform = "Mac";
+			else
+				platform = "Linux";
+			
+			//TODO: Need to change version number here
+			return "http://178.79.177.109:8080/Stable/" + platform + "/" + PintaCore.ApplicationVersion + "/main.mrep";
+		}
+
+		private string GetAllRepositoryUrl ()
+		{
+			//TODO: Need to change version number here
+			return "http://178.79.177.109:8080/Stable/All/" + PintaCore.ApplicationVersion + "/main.mrep";
 		}
 	}
 }
