@@ -1,10 +1,11 @@
 // 
 // OraFormat.cs
-//  
+//
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
 // 
 // Copyright (c) 2010 Maia Kozheva <sikon@ubuntu.com>
+// Copyright (C) 2014 Alan Horkan <horkana@maths.tcd.ie>
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +25,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+// OpenRaster (.ora)
+// OpenRaster is an open exchange format for layered raster based graphics documents.
+// http://freedesktop.org/wiki/Specifications/OpenRaster/
+// OpenDocument Format including Draw (.odg)
+// http://www.oasis-open.org/committees/office/
+
 using System;
 using System.IO;
 using System.Xml;
@@ -35,23 +42,29 @@ using Cairo;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Collections.Generic;
 
-namespace Pinta.Core
+namespace Pinta.Core 
 {
+	
 	public class OraFormat: IImageImporter, IImageExporter
 	{
 		private const int ThumbMaxSize = 256;
 
 		#region IImageImporter implementation
 		
-		public void Import (string fileName, Gtk.Window parent) {
+		// const string MimeType = "image/openraster";
+		const string MimeType = "application/vnd.oasis.opendocument.graphics";
+		
+		public void Import (string fileName, Gtk.Window parent)
+		{
 			ZipFile file = new ZipFile (fileName);
 			XmlDocument stackXml = new XmlDocument ();
+			// must have stack.xml to be a valid OpenRaster
 			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
 			
 			XmlElement imageElement = stackXml.DocumentElement;
 			int width = int.Parse (imageElement.GetAttribute ("w"));
 			int height = int.Parse (imageElement.GetAttribute ("h"));
-
+			int c = 0; // store layer index
 			Size imagesize = new Size (width, height);
 
 			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
@@ -66,23 +79,27 @@ namespace Pinta.Core
 			doc.ImageSize = imagesize;
 			doc.Workspace.CanvasSize = imagesize;
 
-			for (int i = 0; i < layerElements.Count; i++) {
+			for (int i = 0; i < layerElements.Count; i++)
+			{
 				XmlElement layerElement = (XmlElement) layerElements[i];
 				int x = int.Parse (GetAttribute (layerElement, "x", "0"));
 				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
 				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));
 				
-				try {
+				try 
+				{
 					// Write the file to a temporary file first
-					// Fixes a bug when running on .Net
+					// Fixes exception on .Net when image too big. bug #594677 
 					ZipEntry zf = file.GetEntry (layerElement.GetAttribute ("src"));
 					Stream s = file.GetInputStream (zf);
 					string tmp_file = System.IO.Path.GetTempFileName ();
 					
-					using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) {
+					using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) 
+					{
 						byte[] buffer = new byte[2048];
 						
-						while (true) {
+						while (true) 
+						{
 							int len = s.Read (buffer, 0, buffer.Length);
 							
 							if (len > 0)
@@ -96,37 +113,59 @@ namespace Pinta.Core
 					doc.Insert (layer, 0);
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
+					if ( GetAttribute (layerElement, "visibility", "1") == "hidden") 
+					{ 
+						layer.Hidden = true; 
+					} 
 					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
-
+					// Note: it is possible that more than one layer may be selected 
+					// programs may decide what to do in that case					
+					if ( GetAttribute (layerElement, "selected", "1") == "true") 
+					{ 
+						c = (layerElements.Count -1) -i;
+						// out of range error if you try to set now
+						// must wait until later						
+						// doc.SetCurrentUserLayer (c); 
+					}
+					if ( GetAttribute (layerElement, "edit-locked", "1") == "true") 
+					{
+						// TODO Pinta doesn't allow layer locking yet. 
+					}
+					
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
-						using (Pixbuf pb = new Pixbuf (fs)) {
-							using (Context g = new Context (layer.Surface)) {
+						using (Pixbuf pb = new Pixbuf (fs)) 
+						{
+							using (Context g = new Context (layer.Surface)) 
+							{
 								CairoHelper.SetSourcePixbuf (g, pb, x, y);
 								g.Paint ();
 							}
 						}
 
-					try {
+					try 
+					{
 						File.Delete (tmp_file);
 					} catch { }
-				} catch {
-					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
+				} catch 
+				{
+					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
 					md.Title = "Error";
 				
 					md.Run ();
 					md.Destroy ();
 				}
 			}
+			doc.SetCurrentUserLayer (c); // select a layer
 			
 			file.Close ();
 		}
 
-		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
+		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent) 
 		{
 			ZipFile file = new ZipFile (filename);
 			ZipEntry ze = file.GetEntry ("Thumbnails/thumbnail.png");
 
-			// The ORA specification requires that all files will have a
+			// The ORA specification requires that all files have a
 			// thumbnail that is less than 256x256 pixels, so don't bother
 			// with scaling the preview.
 			Pixbuf p = new Pixbuf (file.GetInputStream (ze));
@@ -136,16 +175,20 @@ namespace Pinta.Core
 
 		#endregion
 		
-		private static IFormatProvider GetFormat () {
+		private static IFormatProvider GetFormat () 
+		{
 			return System.Globalization.CultureInfo.CreateSpecificCulture ("en");
 		}
 
-		private static string GetAttribute (XmlElement element, string attribute, string defValue) {
+		private static string GetAttribute (XmlElement element, string attribute, string defValue) 
+		{
 			string ret = element.GetAttribute (attribute);
 			return string.IsNullOrEmpty (ret) ? defValue : ret;
 		}
 
-		private Size GetThumbDimensions (int width, int height) {
+		// Preview Thumbnail 256 pixels
+		private Size GetThumbDimensions (int width, int height) 
+		{
 			if (width <= ThumbMaxSize && height <= ThumbMaxSize)
 				return new Size (width, height);
 
@@ -155,27 +198,63 @@ namespace Pinta.Core
 				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData(List<UserLayer> layers)
+		// stack.xml required by OpenRaster
+		private byte[] GetStackXmlData (List<UserLayer> layers) 
 		{
-			MemoryStream ms = new MemoryStream ();
-			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
-			writer.Formatting = Formatting.Indented;
-
+			MemoryStream stream = new MemoryStream ();
+			XmlWriterSettings settings = new XmlWriterSettings ();
+			settings.Indent = true;
+			settings.OmitXmlDeclaration = false;
+			settings.ConformanceLevel = ConformanceLevel.Document;
+			settings.CloseOutput = false;
+			XmlWriter writer = XmlWriter.Create (stream, settings);
+			
 			writer.WriteStartElement ("image");
 			writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
 			writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
 
 			writer.WriteStartElement ("stack");
-			writer.WriteAttributeString ("opacity", "1");
+			// writer.WriteAttributeString ("opacity", "1");
 			writer.WriteAttributeString ("name", "root");
 
 			// ORA stores layers top to bottom
-			for (int i = layers.Count - 1; i >= 0; i--) {
+			for (int i = layers.Count - 1; i >= 0; i--) 
+			{
 				writer.WriteStartElement ("layer");
-				writer.WriteAttributeString ("opacity", layers[i].Hidden ? "0" : string.Format (GetFormat (), "{0:0.00}", layers[i].Opacity));
+				writer.WriteAttributeString (
+					"opacity", 
+					string.Format (GetFormat (), "{0:0.00}", layers[i].Opacity)
+				);
 				writer.WriteAttributeString ("name", layers[i].Name);
-				writer.WriteAttributeString ("composite-op", BlendModeToStandard (layers[i].BlendMode));
-				writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
+				writer.WriteAttributeString (
+					"composite-op", 
+					BlendModeToStandard (layers[i].BlendMode)
+				);
+				writer.WriteAttributeString (
+					"src", 
+					"data/layer" + i.ToString () + ".png"
+				);
+				// visible by default, only write tag if hidden
+				if (layers[i].Hidden) 
+				{
+					writer.WriteAttributeString (
+						"visibility", 
+						"hidden"
+					);
+				}
+				// HACK: ugly but it seems to work
+				// mark the currently selected layer 
+				if (layers[i] == PintaCore.Workspace.ActiveDocument.CurrentUserLayer) 
+				{
+						writer.WriteAttributeString ("selected", "true");
+				}
+				// TODO lock the layer to prevent editing. Not yet supported in Pinta 
+				// http://freedesktop.org/wiki/Specifications/OpenRaster/Draft/LayerEditLockingStatus/
+				if (false) 
+				{
+					writer.WriteAttributeString ("edit-locked", "true");
+				}
+
 				writer.WriteEndElement ();
 			}
 
@@ -183,20 +262,21 @@ namespace Pinta.Core
 			writer.WriteEndElement (); // image
 
 			writer.Close ();
-			return ms.ToArray ();
+			return stream.ToArray ();
 		}
 
-		public void Export (Document document, string fileName, Gtk.Window parent)
+		public void Export (Document document, string fileName, Gtk.Window parent) 
 		{
 			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create));
 			ZipEntry mimetype = new ZipEntry ("mimetype");
 			mimetype.CompressionMethod = CompressionMethod.Stored;
 			stream.PutNextEntry (mimetype);
 
-			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
+			byte[] databytes = System.Text.Encoding.ASCII.GetBytes (MimeType);
 			stream.Write (databytes, 0, databytes.Length);
 
-			for (int i = 0; i < document.UserLayers.Count; i++) {
+			for (int i = 0; i < document.UserLayers.Count; i++) 
+			{
 				Pixbuf pb = document.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 				(pb as IDisposable).Dispose ();
@@ -205,12 +285,39 @@ namespace Pinta.Core
 				stream.Write (buf, 0, buf.Length);
 			}
 
+			// OpenDocument MUST include manifest and content 
+			stream.PutNextEntry (new ZipEntry ("META-INF/manifest.xml"));
+			databytes = GetManifestXmlData (document.UserLayers);			
+			stream.Write (databytes, 0, databytes.Length);
+			stream.PutNextEntry (new ZipEntry ("content.xml"));
+			databytes = GetContentXmlData (document.UserLayers);			
+			stream.Write (databytes, 0, databytes.Length);
+
+/*			// OpenDocument MAY include meta, settings, styles
+			// optional in theory, needed in practice to avoid unwanted errors 
+			stream.PutNextEntry (new ZipEntry ("styles.xml"));
+			databytes = GetStylesXmlData ();
+			stream.Write (databytes, 0, databytes.Length);
+			
+			stream.PutNextEntry (new ZipEntry ("settings.xml"));
+			databytes = GetSettingsXmlData ();
+			stream.Write (databytes, 0, databytes.Length);
+*/			
+			stream.PutNextEntry (new ZipEntry ("meta.xml"));
+			databytes = GetMetaXmlData ();
+			stream.Write (databytes, 0, databytes.Length);
+			
 			stream.PutNextEntry (new ZipEntry ("stack.xml"));
-			databytes = GetLayerXmlData (document.UserLayers);
+			databytes = GetStackXmlData (document.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
 			ImageSurface flattened = document.GetFlattenedImage ();
 			Pixbuf flattenedPb = flattened.ToPixbuf ();
+			// mergedimage.png preview image required from OpenRaster 0.2.0 
+			stream.PutNextEntry (new ZipEntry ("mergedimage.png"));
+			databytes = flattenedPb.SaveToBuffer ("png");
+			stream.Write (databytes, 0, databytes.Length);
+			
 			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
 			Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear);
 
@@ -225,7 +332,7 @@ namespace Pinta.Core
 			stream.Close ();
 		}
 
-		private string BlendModeToStandard (BlendMode mode)
+		private string BlendModeToStandard (BlendMode mode) 
 		{
 			switch (mode) {
 				case BlendMode.Normal:
@@ -260,7 +367,7 @@ namespace Pinta.Core
 			}
 		}
 
-		private BlendMode StandardToBlendMode (string mode)
+		private BlendMode StandardToBlendMode (string mode)	
 		{
 			switch (mode) {				
 				case "svg:src-over":				
@@ -296,5 +403,226 @@ namespace Pinta.Core
 					return BlendMode.Normal;
 			}
 		}
+
+		// HACK: naive conversion of pixels to cm, 
+		// strictly it also depends on display DPI
+		// not sure why OpenOffice fails to understand pixels
+		private string ConvertPixels (double pixels) 
+		{
+			// 1 pixel = 0.02645833333333 centimeter
+			double factor = 0.02645833334;
+			// round to 3 significant figures
+			string cm = Math.Round(pixels * factor, 3).ToString(); 
+			return cm; 
+		}
+
+		// content.xml required by OpenDocument
+		private byte[] GetContentXmlData (List<UserLayer> layers) 
+		{
+			const string units = "cm";
+			string layerW;
+			string layerH;
+			// xmlns:office
+			const string nsoffice = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
+			// xmlns:draw
+			const string nsdraw = "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0";
+			// xmlns:xlink
+			const string nsxlink = "http://www.w3.org/1999/xlink";
+			// xmlns:svg
+			const string nssvg ="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" ;
+			
+			MemoryStream stream = new MemoryStream ();
+			// be strict with output, and tidy too
+			XmlWriterSettings settings = new XmlWriterSettings();
+			settings.Indent = true;
+			settings.NewLineOnAttributes = false;
+			settings.OmitXmlDeclaration = false;
+			settings.ConformanceLevel = ConformanceLevel.Document; 
+			settings.CloseOutput = false;
+			XmlWriter writer = XmlWriter.Create (stream, settings);
+		
+			writer.WriteStartElement ("office", "document-content", nsoffice); 
+			// declare the namespace that are going to be usedcur
+			writer.WriteAttributeString("xmlns", "office", null, nsoffice);
+			writer.WriteAttributeString("xmlns", "draw", null, nsdraw);
+			writer.WriteAttributeString("xmlns", "xlink", null, nsxlink);
+			writer.WriteAttributeString("xmlns", "svg", null, nssvg);
+			writer.WriteStartElement ("body", nsoffice);
+			writer.WriteStartElement ("drawing", nsoffice);
+
+			writer.WriteStartElement ("page", nsdraw);
+			writer.WriteAttributeString("draw", "name", nsdraw, "page1"); // optional 
+			writer.WriteAttributeString("draw", "master-page-name", nsdraw, "Default");
+						
+			/* 
+			* Design note: 
+			* To keep the markup relatively simple, only one OpenDocument layer named "Layout" 
+			* is used, and multiple xlinked image objects are used instead.  
+			*/ 
+			// z-order from bottom to top
+			for (int i = 0; i < layers.Count; i++) 
+			{
+				// NOTE: deliberately checking every layer
+				// layers might have different sizes in future
+				layerW = ConvertPixels( layers[i].Surface.Width );
+				layerH = ConvertPixels( layers[i].Surface.Width );
+				
+				writer.WriteStartElement ("draw", "frame", nsdraw);
+				writer.WriteAttributeString ("draw", "layer", nsdraw, "Layout"); 
+				writer.WriteAttributeString ("svg", "width", nssvg, layerW + units);
+				writer.WriteAttributeString ("svg", "height", nssvg, layerH + units);
+ 				writer.WriteAttributeString ("svg", "x", nssvg, "0" + units);
+ 				writer.WriteAttributeString ("svg", "y", nssvg, "0" + units);
+				
+ 				writer.WriteStartElement ("image", nsdraw);
+				writer.WriteAttributeString ("xlink", "href", nsxlink, "data/layer" + i.ToString () + ".png"); 
+				writer.WriteAttributeString ("xlink", "type", nsxlink, "simple");
+				writer.WriteAttributeString ("xlink", "show", nsxlink, "embed");
+				writer.WriteAttributeString ("xlink", "actuate", nsxlink, "onload");
+
+				writer.WriteEndElement (); // draw:image
+				writer.WriteEndElement (); // draw:frame
+			}
+
+			writer.WriteEndElement (); // page 
+			writer.WriteEndElement (); // drawing
+			writer.WriteEndElement (); // body
+			writer.WriteEndElement (); // document-content
+
+			writer.Close ();
+			return stream.ToArray ();
+		}
+			
+		// manifest.xml required by OpenDocument
+		// a manifest listing all the contents of the Zip archive
+		private byte[] GetManifestXmlData (List<UserLayer> layers) 
+		{
+			const string ns = "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0";
+			const string prefix = "manifest";
+			MemoryStream stream = new MemoryStream ();
+			XmlWriterSettings settings = new XmlWriterSettings();
+			settings.Indent = true;
+			settings.OmitXmlDeclaration = false;
+			settings.ConformanceLevel = ConformanceLevel.Document;
+			settings.CloseOutput = false;
+			XmlWriter writer = XmlWriter.Create (stream, settings);
+			
+			writer.WriteStartElement ("manifest", "manifest", ns);
+			writer.WriteAttributeString("xmlns", prefix, null, ns);
+			// mimetype
+			writer.WriteStartElement ("file-entry", ns);
+			// you might think path should be "/mimetype" 
+			// but OpenOffice uses "/"
+			writer.WriteAttributeString ("full-path", ns, "/");
+			writer.WriteAttributeString ("media-type", ns, MimeType);
+			writer.WriteEndElement ();
+			
+			// thumbnail
+			writer.WriteStartElement ("file-entry", ns);
+			writer.WriteAttributeString ("full-path", ns, "Thumbnails/thumbnail.png");
+			writer.WriteAttributeString ("media-type", ns, "image/png");			
+			writer.WriteEndElement ();
+						
+			// content.xml
+			writer.WriteStartElement ("file-entry", ns);
+			writer.WriteAttributeString ("full-path", ns, "content.xml");
+			writer.WriteAttributeString ("media-type", ns, "image/png");			
+			writer.WriteEndElement ();
+			
+			// stack.xml 
+			writer.WriteStartElement ("file-entry", ns);
+			writer.WriteAttributeString ("full-path", ns, "stack.xml");
+			writer.WriteAttributeString ("media-type", ns, "image/png");
+			writer.WriteEndElement ();
+			
+			// OpenRaster keeps images in data/ 
+			// OpenDocument keeps images in Pictures/ but using data/ also works
+			for (int i = layers.Count - 1; i >= 0; i--) 
+			{
+				writer.WriteStartElement ("file-entry", ns);
+				writer.WriteAttributeString ("full-path", ns, "data/layer" + i.ToString () + ".png");
+				writer.WriteAttributeString ("media-type", ns, "image/png");		
+				writer.WriteEndElement ();
+			}
+
+			writer.WriteEndElement (); // manifest
+
+			writer.Close ();
+			return stream.ToArray ();
+		}
+
+		// meta.xml OpenDocument optional in theory
+		// in practice required to avoid unwanted error messages
+		private byte[] GetMetaXmlData ()
+		{
+			string AppName = "Pinta"; // HACK: no PintaCore.ApplicationName yet
+			string OperatingSystem = Environment.OSVersion.ToString();
+			const string prefix = "meta";
+			// xml namespaces
+			const string nsmeta = "urn:oasis:names:tc:opendocument:xmlns:meta:1.0";
+			const string nsoffice = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
+			const string nsdc = "http://purl.org/dc/elements/1.1/";
+			string useragent = AppName + "/" + PintaCore.ApplicationVersion + "$" + OperatingSystem;
+			
+			MemoryStream stream = new MemoryStream ();
+			XmlWriterSettings settings = new XmlWriterSettings();
+			settings.Indent = true;
+			settings.OmitXmlDeclaration = false;
+			settings.ConformanceLevel = ConformanceLevel.Document;
+			settings.CloseOutput = false;
+			XmlWriter writer = XmlWriter.Create (stream, settings);
+			
+			settings.NewLineOnAttributes = true; // turn on extra line breaks
+			writer.WriteStartElement ("office", "document-meta", nsoffice);
+			writer.WriteAttributeString("xmlns", "office", null, nsoffice);
+			writer.WriteAttributeString("xmlns", prefix, null, nsmeta);
+			writer.WriteAttributeString("xmlns", "dc", null, nsdc);
+			writer.WriteStartElement ("office", "meta", nsoffice);
+			settings.NewLineOnAttributes = false; // turn off extra line breaks
+			
+			// meta generator
+			writer.WriteStartElement (prefix, "generator", nsmeta);
+			writer.WriteString( useragent );
+			writer.WriteEndElement ();
+			// date // creation date // other dates // don't care yet
+			// Author/Creator dc:creator
+			writer.WriteStartElement ("dc", "creator", nsdc);
+			writer.WriteString( "" );
+			writer.WriteEndElement ();
+			// Subject
+			writer.WriteStartElement ("dc", "subject", nsdc);
+			writer.WriteString( "" );
+			writer.WriteEndElement ();
+			// Title
+			writer.WriteStartElement ("dc", "title", nsdc);
+			writer.WriteString( "" );
+			writer.WriteEndElement ();
+			// Publisher
+			writer.WriteStartElement ("dc", "publisher", nsdc);
+			writer.WriteString( "" );
+			writer.WriteEndElement ();
+			// Comments/Description
+			writer.WriteStartElement ("dc", "description", nsdc);
+			writer.WriteString( "" );
+			writer.WriteEndElement ();
+			// keywords, multiple tags
+			writer.WriteStartElement ("meta", "keyword", nsmeta);
+			writer.WriteString( "" );
+			writer.WriteEndElement ();
+			
+			// User defined: Name Value pairs
+			writer.WriteStartElement ("meta", "user-defined", nsmeta);
+			string userdefname = "";
+			string userdefvalue = "";
+			writer.WriteAttributeString("meta", "name", nsmeta, userdefname);
+			writer.WriteString( userdefvalue );
+			writer.WriteEndElement ();
+			
+			writer.WriteEndElement (); // meta
+			writer.WriteEndElement (); // document-meta
+			writer.Close ();
+			return stream.ToArray ();
+		}
+
 	}
 }
