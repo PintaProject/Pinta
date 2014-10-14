@@ -109,26 +109,27 @@ namespace Pinta.Tools
 			int tolerance = 0;
 			if (Math.Abs (reset_origin.X - args.Event.X) <= tolerance && Math.Abs (reset_origin.Y - args.Event.Y) <= tolerance) {
 				PintaCore.Actions.Edit.Deselect.Activate ();
-				hist.Dispose ();
-				hist = null;
-				handler_active = false;
-
+                if (hist != null)
+                {
+                    hist.Dispose();
+                    hist = null;
+                }
+                handler_active = false;
 				doc.ToolLayer.Clear ();
 			} else {
 				ReDraw(args.Event.State);
-
 				if (doc.Selection != null)
 				{
 					doc.selHandler.PerformSelectionMode(DocumentSelection.ConvertToPolygonSet(doc.Selection.SelectionPolygons));
 					PintaCore.Workspace.Invalidate();
 				}
-
-				if (hist != null)
-					doc.History.PushNewItem (hist);
-
+                if (hist != null)
+                {
+                    doc.History.PushNewItem(hist);
+                    hist.Dispose();
+                    hist = null;
+                }
 				handler_active = true;
-				hist.Dispose();
-				hist = null;
 			}
 
 			is_drawing = false;
