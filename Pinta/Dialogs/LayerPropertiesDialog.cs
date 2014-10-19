@@ -107,7 +107,6 @@ namespace Pinta
 			}
 		}
 		
-		#region Private Methods
 		private void OnLayerNameChanged (object sender, EventArgs e)
 		{
 			name = layerNameEntry.Text;
@@ -207,7 +206,6 @@ namespace Pinta
 			AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 			DefaultResponse = ResponseType.Ok;
 		}
-		#endregion
 	}
 }
 

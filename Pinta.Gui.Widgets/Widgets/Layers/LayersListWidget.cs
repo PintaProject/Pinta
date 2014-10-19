@@ -192,7 +192,7 @@ namespace Pinta.Gui.Widgets
 		private void HandleRowActivated(object o, RowActivatedArgs args)
 		{
 			// The double click to activate will have already selected the layer.
-			PintaCore.Actions.Layers.Properties.Activate ();
+			PintaCore.Actions.Layers.LayerProperties.Activate ();
 		}
 		
 		public void Reset ()

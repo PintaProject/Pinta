@@ -44,7 +44,8 @@ namespace Pinta
 			action_handlers.Add (new OpenRecentAction ());
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
-			action_handlers.Add (new PrintDocumentAction ());
+			action_handlers.Add (new PropertiesAction ());
+			action_handlers.Add (new PrintDocumentAction ());			
 			action_handlers.Add (new CloseDocumentAction ());
 			action_handlers.Add (new ExitProgramAction ());
 			action_handlers.Add (new ModifyCompressionAction ());
@@ -106,6 +107,7 @@ namespace Pinta
 			PintaCore.Actions.File.Close.Sensitive = enable;
 			PintaCore.Actions.File.Save.Sensitive = enable;
 			PintaCore.Actions.File.SaveAs.Sensitive = enable;
+			PintaCore.Actions.File.Properties.Sensitive = enable;
 			PintaCore.Actions.File.Print.Sensitive = enable;
 			PintaCore.Actions.Edit.Copy.Sensitive = enable;
 			PintaCore.Actions.Edit.CopyMerged.Sensitive = enable;
@@ -139,7 +141,7 @@ namespace Pinta
 			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = enable;
 			PintaCore.Actions.Layers.FlipVertical.Sensitive = enable;
 			PintaCore.Actions.Layers.ImportFromFile.Sensitive = enable;
-			PintaCore.Actions.Layers.Properties.Sensitive = enable;
+			PintaCore.Actions.Layers.LayerProperties.Sensitive = enable;
 			PintaCore.Actions.Layers.RotateZoom.Sensitive = enable;
 
 			PintaCore.Actions.Adjustments.ToggleActionsSensitive (enable);

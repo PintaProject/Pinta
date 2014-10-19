@@ -44,7 +44,7 @@ namespace Pinta.Core
 		public Gtk.Action RotateZoom { get; private set; }
 		public Gtk.Action MoveLayerUp { get; private set; }
 		public Gtk.Action MoveLayerDown { get; private set; }
-		public Gtk.Action Properties { get; private set; }
+		public Gtk.Action LayerProperties { get; private set; }
 		
 		public LayerActions ()
 		{
@@ -72,7 +72,7 @@ namespace Pinta.Core
 			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
 			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Catalog.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
 			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Catalog.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
-			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
+			LayerProperties = new Gtk.Action ("LayerProperties", Catalog.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
 
 			RotateZoom.Sensitive = false;
 		}
@@ -90,7 +90,7 @@ namespace Pinta.Core
 			menu.Append (FlipVertical.CreateMenuItem ());
 			menu.Append (RotateZoom.CreateMenuItem ());
 			menu.AppendSeparator ();
-			menu.Append (Properties.CreateAcceleratedMenuItem (Gdk.Key.F4, Gdk.ModifierType.None));
+			menu.Append (LayerProperties.CreateAcceleratedMenuItem (Gdk.Key.F4, Gdk.ModifierType.None));
 		}
 
 		public void CreateLayerWindowToolBar (Gtk.Toolbar toolbar)
@@ -101,7 +101,7 @@ namespace Pinta.Core
 			toolbar.AppendItem (MergeLayerDown.CreateToolBarItem ());
 			toolbar.AppendItem (MoveLayerUp.CreateToolBarItem ());
 			toolbar.AppendItem (MoveLayerDown.CreateToolBarItem ());
-			toolbar.AppendItem (Properties.CreateToolBarItem ());
+			toolbar.AppendItem (LayerProperties.CreateToolBarItem ());
 		}
 		
 		public void RegisterHandlers ()

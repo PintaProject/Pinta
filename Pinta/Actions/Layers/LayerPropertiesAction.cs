@@ -36,12 +36,12 @@ namespace Pinta.Actions
 		#region IActionHandler Members
 		public void Initialize ()
 		{
-			PintaCore.Actions.Layers.Properties.Activated += Activated;
+			PintaCore.Actions.Layers.LayerProperties.Activated += Activated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.Layers.Properties.Activated -= Activated;
+			PintaCore.Actions.Layers.LayerProperties.Activated -= Activated;
 		}
 		#endregion
 
