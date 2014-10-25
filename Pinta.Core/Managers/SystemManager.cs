@@ -76,7 +76,12 @@ namespace Pinta.Core
 		#region Public Properties
 		public string LastDialogDirectory {
 			get { return last_dialog_directory; }
-			set { last_dialog_directory = value; }
+			set {
+				// The file chooser dialog may return null for the current folder in certain cases,
+				// such as the Recently Used pane in the Gnome file chooser.
+				if (value != null)
+					last_dialog_directory = value;
+			}
 		}
 
 		public string DefaultDialogDirectory {
