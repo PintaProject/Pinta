@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Actions\WindowActions.cs" />
     <Compile Include="Actions\EffectsActions.cs" />
+    <Compile Include="Classes\DocumentProperties.cs" />
     <Compile Include="Classes\Re-editable\ReEditableLayer.cs" />
     <Compile Include="Classes\SurfaceDiff.cs" />
     <Compile Include="Classes\DocumentSelection.cs" />

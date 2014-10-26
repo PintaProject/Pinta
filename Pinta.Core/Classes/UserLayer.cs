@@ -50,7 +50,7 @@ namespace Pinta.Core
 		}
 
 		//Call the base class constructor and setup the engines.
-		public UserLayer(ImageSurface surface, bool hidden, double opacity, string name) : base(surface, hidden, opacity, name)
+		public UserLayer(ImageSurface surface, bool hidden, bool locked, double opacity, string name) : base(surface, hidden, locked, opacity, name)
 		{
 			setupUserLayer();
 		}
