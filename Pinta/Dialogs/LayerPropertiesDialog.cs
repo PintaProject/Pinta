@@ -1,6 +1,6 @@
 // 
 // LayerPropertiesDialog.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
@@ -33,16 +33,18 @@ using Pinta.Core;
 namespace Pinta
 {
 	public class LayerPropertiesDialog : Dialog
-	{		
+	{
 		private LayerProperties initial_properties;
 
 		private double opacity;
 		private bool hidden;
+		private bool locked;
 		private string name;
 		private BlendMode blendmode;
 
 		private Entry layerNameEntry;
 		private CheckButton visibilityCheckbox;
+		private CheckButton lockedCheckbox;
 		private SpinButton opacitySpinner;
 		private HScale opacitySlider;
 		private ComboBox blendComboBox;
@@ -55,17 +57,20 @@ namespace Pinta
 			
 			name = PintaCore.Layers.CurrentLayer.Name;
 			hidden = PintaCore.Layers.CurrentLayer.Hidden;
+			locked = PintaCore.Layers.CurrentLayer.Locked;
 			opacity = PintaCore.Layers.CurrentLayer.Opacity;
 			blendmode = PintaCore.Layers.CurrentLayer.BlendMode;
 
 			initial_properties = new LayerProperties(
-				name,				
+				name,
 				hidden,
+				locked,
 				opacity,
 				blendmode);
 			
 			layerNameEntry.Text = initial_properties.Name;
 			visibilityCheckbox.Active = !initial_properties.Hidden;
+			lockedCheckbox.Active = initial_properties.Locked;
 			opacitySpinner.Value = (int)(initial_properties.Opacity * 100);
 			opacitySlider.Value = (int)(initial_properties.Opacity * 100);
 
@@ -75,6 +80,7 @@ namespace Pinta
 
 			layerNameEntry.Changed += OnLayerNameChanged;
 			visibilityCheckbox.Toggled += OnVisibilityToggled;
+			lockedCheckbox.Toggled += OnLockedToggled;
 			opacitySpinner.ValueChanged += new EventHandler (OnOpacitySpinnerChanged);
 			opacitySlider.ValueChanged += new EventHandler (OnOpacitySliderChanged);
 			blendComboBox.Changed += OnBlendModeChanged;
@@ -90,20 +96,21 @@ namespace Pinta
 			get {
 				return initial_properties.Opacity != opacity
 					|| initial_properties.Hidden != hidden
+					|| initial_properties.Locked != locked
 					|| initial_properties.Name != name
 					|| initial_properties.BlendMode != blendmode;
 			}
 		}
 		
-		public LayerProperties InitialLayerProperties { 
+		public LayerProperties InitialLayerProperties {
 			get {
 				return initial_properties;
 			}
-		}		
+		}
 		
-		public LayerProperties UpdatedLayerProperties { 
+		public LayerProperties UpdatedLayerProperties {
 			get {
-				return new LayerProperties (name, hidden, opacity, blendmode);
+				return new LayerProperties (name, hidden, locked, opacity, blendmode);
 			}
 		}
 		
@@ -117,6 +124,12 @@ namespace Pinta
 		{
 			hidden = !visibilityCheckbox.Active;
 			PintaCore.Layers.CurrentLayer.Hidden = hidden;
+		}
+		
+		private void OnLockedToggled (object sender, EventArgs e)
+		{
+			locked = !lockedCheckbox.Active;
+			PintaCore.Layers.CurrentLayer.Locked = locked;
 		}
 		
 		private void OnOpacitySliderChanged (object sender, EventArgs e)
@@ -167,6 +180,10 @@ namespace Pinta
 
 			VBox.PackStart (visibilityCheckbox, false, false, 0);
 
+			lockedCheckbox = new CheckButton (Mono.Unix.Catalog.GetString ("Locked"));
+
+			VBox.PackStart (lockedCheckbox, false, false, 0);
+
 			// Horizontal separator
 			VBox.PackStart (new HSeparator (), false, false, 0);
 
@@ -208,4 +225,3 @@ namespace Pinta
 		}
 	}
 }
-

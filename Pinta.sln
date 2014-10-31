@@ -1,5 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+# SharpDevelop 4.4
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta", "Pinta\Pinta.csproj", "{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{71A1C3E0-7343-48FE-BD9A-508929136E92} = {71A1C3E0-7343-48FE-BD9A-508929136E92}

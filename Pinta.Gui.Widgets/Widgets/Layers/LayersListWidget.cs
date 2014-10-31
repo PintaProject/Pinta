@@ -236,8 +236,8 @@ namespace Pinta.Gui.Widgets
 			if (layer != null)
 				layer.Hidden = !visibility;
 			
-			var initial = new LayerProperties(layer.Name, visibility, layer.Opacity, layer.BlendMode);
-			var updated = new LayerProperties(layer.Name, !visibility, layer.Opacity, layer.BlendMode);
+			var initial = new LayerProperties(layer.Name, visibility, layer.Locked, layer.Opacity, layer.BlendMode);
+			var updated = new LayerProperties(layer.Name, !visibility, layer.Locked, layer.Opacity, layer.BlendMode);
 
 			var historyItem = new UpdateLayerPropertiesHistoryItem (
 				"Menu.Layers.LayerProperties.png",

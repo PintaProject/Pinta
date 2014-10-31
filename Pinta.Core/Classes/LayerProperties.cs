@@ -1,6 +1,6 @@
 // 
 // LayerProperties.cs
-//  
+//
 // Author:
 //       Greg Lowe <greg.lowe@gmail.com>
 // 
@@ -32,16 +32,18 @@ namespace Pinta.Core
 	public class LayerProperties
 	{
 		
-		public LayerProperties (string name, bool hidden, double opacity, BlendMode blendmode)
+		public LayerProperties (string name, bool hidden, bool locked, double opacity, BlendMode blendmode)
 		{
-			this.Opacity = opacity;			
+			this.Opacity = opacity;
 			this.Hidden = hidden;
+			this.Locked = locked;
 			this.Name = name;
 			this.BlendMode = blendmode;
 		}
-				
-		public string Name { get; private set; }				
-		public bool Hidden { get; private set; }				
+		
+		public string Name { get; private set; }
+		public bool Hidden { get; private set; }
+		public bool Locked { get; private set; }
 		public double Opacity { get; private set; }
 		public BlendMode BlendMode { get; private set; }
 
@@ -50,6 +52,7 @@ namespace Pinta.Core
 			layer.Name = Name;
 			layer.Opacity = Opacity;
 			layer.Hidden = Hidden;
+			layer.Locked = Locked;
 			layer.BlendMode = BlendMode;
 		}
 	}

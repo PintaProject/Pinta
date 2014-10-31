@@ -130,6 +130,7 @@ namespace Pinta.Core
 					if ( GetAttribute (layerElement, "edit-locked", "1") == "true") 
 					{
 						// TODO Pinta doesn't allow layer locking yet. 
+ 						// layer.Locked = true; 
 					}
 					
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
@@ -242,17 +243,19 @@ namespace Pinta.Core
 						"hidden"
 					);
 				}
+				if (layers[i].Locked)
+				{
+					writer.WriteAttributeString (
+						"edit-locked", 
+						"true"
+					);
+				}
+
 				// HACK: ugly but it seems to work
 				// mark the currently selected layer 
 				if (layers[i] == PintaCore.Workspace.ActiveDocument.CurrentUserLayer) 
 				{
 						writer.WriteAttributeString ("selected", "true");
-				}
-				// TODO lock the layer to prevent editing. Not yet supported in Pinta 
-				// http://freedesktop.org/wiki/Specifications/OpenRaster/Draft/LayerEditLockingStatus/
-				if (false) 
-				{
-					writer.WriteAttributeString ("edit-locked", "true");
 				}
 
 				writer.WriteEndElement ();

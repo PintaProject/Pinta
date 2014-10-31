@@ -4,10 +4,10 @@ using System;
 namespace Pinta.Core
 {
 
-	public class Properties
+	public class DocumentProperties
 	{
 		
-		public Properties (string author, string title, string subject, string keywords, string comments)
+		public DocumentProperties (string author, string title, string subject, string keywords, string comments)
 		{
 			this.Author = author;			
 			this.Title = title;
@@ -24,10 +24,11 @@ namespace Pinta.Core
 
 /*		public void SetProperties (Layer layer)
 		{
-			layer.Name = Name;
-			layer.Opacity = Opacity;
-			layer.Hidden = Hidden;
-			layer.BlendMode = BlendMode;
+			layer.Author = Author;
+			layer.Title = Title;
+			layer.Subject = Subject;
+			layer.Keywords = Keywords;
+			layer.Comments = Comments;
 		}
 */	}
 }

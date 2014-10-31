@@ -1,6 +1,6 @@
 // 
 // Layer.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
@@ -33,9 +33,10 @@ using Gdk;
 namespace Pinta.Core
 {
 	public class Layer : ObservableObject
-	{	
+	{
 		private double opacity;
 		private bool hidden;
+		private bool locked;
 		private string name;
 		private BlendMode blend_mode;
 		private Matrix transform = new Matrix();
@@ -44,27 +45,29 @@ namespace Pinta.Core
 		{
 		}
 		
-		public Layer (ImageSurface surface) : this (surface, false, 1f, "")
+		public Layer (ImageSurface surface) : this (surface, false, false, 1f, "")
 		{
 		}
 		
-		public Layer (ImageSurface surface, bool hidden, double opacity, string name)
+		public Layer (ImageSurface surface, bool hidden, bool locked, double opacity, string name)
 		{
 			Surface = surface;
 
 			this.hidden = hidden;
+			this.locked = locked;
 			this.opacity = opacity;
-			this.name = name;			
+			this.name = name;
 			this.blend_mode = BlendMode.Normal;
 		}
 		
 		public ImageSurface Surface { get; set; }
-		public bool Tiled { get; set; }	
+		public bool Tiled { get; set; }
 		public Matrix Transform { get { return transform; } }
 		
 		public static readonly string OpacityProperty = "Opacity";
 		public static readonly string HiddenProperty = "Hidden";
-		public static readonly string NameProperty = "Name";		
+		public static readonly string LockedProperty = "Locked";
+		public static readonly string NameProperty = "Name";
 		public static readonly string BlendModeProperty = "BlendMode";
 
 		public double Opacity {
@@ -77,15 +80,20 @@ namespace Pinta.Core
 			set { if (hidden != value) SetValue (HiddenProperty, ref hidden, value); }
 		}
 		
+		public bool Locked {
+			get { return locked; }
+			set { if (locked != value) SetValue (LockedProperty, ref locked, value); }
+		}
+		
 		public string Name {
 			get { return name; }
 			set { if (name != value) SetValue (NameProperty, ref name, value); }
-		}				
-			
+		}
+		
 		public BlendMode BlendMode {
 			get { return blend_mode; }
 			set { if (blend_mode != value) SetValue (BlendModeProperty, ref blend_mode, value); }
-		}				
+		}
 		
 		public void Clear ()
 		{
@@ -189,7 +197,7 @@ namespace Pinta.Core
 			int len = Surface.Data.Length / 4;
 			
 			// map the range [0,100] -> [0,100] and the range [101,200] -> [103,400]
-			if (satDelta > 100) 
+			if (satDelta > 100)
 				satDelta = ((satDelta - 100) * 3) + 100;
 			
 			UnaryPixelOp op;
