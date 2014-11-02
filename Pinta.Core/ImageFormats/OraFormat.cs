@@ -297,7 +297,7 @@ namespace Pinta.Core
 			stream.Write (databytes, 0, databytes.Length);
 
 /*			// OpenDocument MAY include meta, settings, styles
-			// optional in theory, needed in practice to avoid unwanted errors 
+			// optional in theory, needed in practice to avoid unwanted errors/warnings 
 			stream.PutNextEntry (new ZipEntry ("styles.xml"));
 			databytes = GetStylesXmlData ();
 			stream.Write (databytes, 0, databytes.Length);
@@ -559,7 +559,7 @@ namespace Pinta.Core
 		private byte[] GetMetaXmlData ()
 		{
 			string AppName = "Pinta"; // HACK: no PintaCore.ApplicationName yet
-			string OperatingSystem = Environment.OSVersion.ToString();
+			string OperatingSystem = Environment.OSVersion.ToString ();
 			const string prefix = "meta";
 			// xml namespaces
 			const string nsmeta = "urn:oasis:names:tc:opendocument:xmlns:meta:1.0";
@@ -568,7 +568,7 @@ namespace Pinta.Core
 			string useragent = AppName + "/" + PintaCore.ApplicationVersion + "$" + OperatingSystem;
 			
 			MemoryStream stream = new MemoryStream ();
-			XmlWriterSettings settings = new XmlWriterSettings();
+			XmlWriterSettings settings = new XmlWriterSettings ();
 			settings.Indent = true;
 			settings.OmitXmlDeclaration = false;
 			settings.ConformanceLevel = ConformanceLevel.Document;
@@ -577,48 +577,48 @@ namespace Pinta.Core
 			
 			settings.NewLineOnAttributes = true; // turn on extra line breaks
 			writer.WriteStartElement ("office", "document-meta", nsoffice);
-			writer.WriteAttributeString("xmlns", "office", null, nsoffice);
-			writer.WriteAttributeString("xmlns", prefix, null, nsmeta);
-			writer.WriteAttributeString("xmlns", "dc", null, nsdc);
+			writer.WriteAttributeString ("xmlns", "office", null, nsoffice);
+			writer.WriteAttributeString ("xmlns", prefix, null, nsmeta);
+			writer.WriteAttributeString ("xmlns", "dc", null, nsdc);
 			writer.WriteStartElement ("office", "meta", nsoffice);
 			settings.NewLineOnAttributes = false; // turn off extra line breaks
-			
+
 			// meta generator
 			writer.WriteStartElement (prefix, "generator", nsmeta);
-			writer.WriteString( useragent );
+			writer.WriteString (useragent);
 			writer.WriteEndElement ();
-			// date // creation date // other dates // don't care yet
+			// TODO date / creation date / other dates // vlow priority 
 			// Author/Creator dc:creator
 			writer.WriteStartElement ("dc", "creator", nsdc);
-			writer.WriteString( "" );
-			writer.WriteEndElement ();
-			// Subject
-			writer.WriteStartElement ("dc", "subject", nsdc);
-			writer.WriteString( "" );
+			writer.WriteString (PintaCore.Workspace.ActiveDocument.Author);
 			writer.WriteEndElement ();
 			// Title
 			writer.WriteStartElement ("dc", "title", nsdc);
-			writer.WriteString( "" );
+			writer.WriteString (PintaCore.Workspace.ActiveDocument.Title);
+			writer.WriteEndElement ();
+			// Subject
+			writer.WriteStartElement ("dc", "subject", nsdc);
+			writer.WriteString (PintaCore.Workspace.ActiveDocument.Subject);
 			writer.WriteEndElement ();
 			// Publisher
 			writer.WriteStartElement ("dc", "publisher", nsdc);
-			writer.WriteString( "" );
+			writer.WriteString ( "" );
 			writer.WriteEndElement ();
 			// Comments/Description
 			writer.WriteStartElement ("dc", "description", nsdc);
-			writer.WriteString( "" );
+			writer.WriteString(PintaCore.Workspace.ActiveDocument.Comments);
 			writer.WriteEndElement ();
 			// keywords, multiple tags
 			writer.WriteStartElement ("meta", "keyword", nsmeta);
-			writer.WriteString( "" );
+			writer.WriteString (PintaCore.Workspace.ActiveDocument.Keywords);
 			writer.WriteEndElement ();
 			
 			// User defined: Name Value pairs
 			writer.WriteStartElement ("meta", "user-defined", nsmeta);
 			string userdefname = "";
 			string userdefvalue = "";
-			writer.WriteAttributeString("meta", "name", nsmeta, userdefname);
-			writer.WriteString( userdefvalue );
+			writer.WriteAttributeString ("meta", "name", nsmeta, userdefname);
+			writer.WriteString ( userdefvalue );
 			writer.WriteEndElement ();
 			
 			writer.WriteEndElement (); // meta
