@@ -128,7 +128,7 @@ namespace Pinta
 		
 		private void OnLockedToggled (object sender, EventArgs e)
 		{
-			locked = !lockedCheckbox.Active;
+			locked = lockedCheckbox.Active;
 			PintaCore.Layers.CurrentLayer.Locked = locked;
 		}
 		

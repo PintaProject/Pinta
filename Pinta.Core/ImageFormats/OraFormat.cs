@@ -129,8 +129,7 @@ namespace Pinta.Core
 					}
 					if ( GetAttribute (layerElement, "edit-locked", "1") == "true") 
 					{
-						// TODO Pinta doesn't allow layer locking yet. 
- 						// layer.Locked = true; 
+						layer.Locked = true; 
 					}
 					
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
@@ -558,14 +557,13 @@ namespace Pinta.Core
 		// in practice required to avoid unwanted error messages
 		private byte[] GetMetaXmlData ()
 		{
-			string AppName = "Pinta"; // HACK: no PintaCore.ApplicationName yet
-			string OperatingSystem = Environment.OSVersion.ToString ();
+			string useragent = PintaCore.ApplicationName + "/" + PintaCore.ApplicationVersion + "$" + Environment.OSVersion.ToString ();
+
 			const string prefix = "meta";
 			// xml namespaces
 			const string nsmeta = "urn:oasis:names:tc:opendocument:xmlns:meta:1.0";
 			const string nsoffice = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
 			const string nsdc = "http://purl.org/dc/elements/1.1/";
-			string useragent = AppName + "/" + PintaCore.ApplicationVersion + "$" + OperatingSystem;
 			
 			MemoryStream stream = new MemoryStream ();
 			XmlWriterSettings settings = new XmlWriterSettings ();

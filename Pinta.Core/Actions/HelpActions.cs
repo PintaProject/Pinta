@@ -47,7 +47,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
 			fact.AddDefault ();
 
-			Website = new Gtk.Action ("Website", Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
+			Website = new Gtk.Action ("Website", string.Format("{0} {1}", PintaCore.ApplicationName, Catalog.GetString ("Website")), null, "Menu.Help.Website.png");
 			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
 			Translate = new Gtk.Action ("Translate", Catalog.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
 			About = new Gtk.Action ("About", Catalog.GetString ("About"), null, Stock.About);

@@ -274,7 +274,7 @@ namespace Pinta
 
 		public AboutDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
-			Title = Catalog.GetString ("About Pinta");
+			Title = string.Format ("{0} {1}", Catalog.GetString ("About"), PintaCore.ApplicationName);
 			//TransientFor = IdeApp.Workbench.RootWindow;
 			AllowGrow = false;
 			HasSeparator = false;
@@ -292,7 +292,7 @@ namespace Pinta
 			Notebook notebook = new Notebook ();
 			notebook.BorderWidth = 6;
 			notebook.AppendPage (new AboutPintaTabPage (), new Label (Title));
-			notebook.AppendPage (new VersionInformationTabPage (), new Label (Catalog.GetString ("Version Info")));
+			notebook.AppendPage (new VersionInformationTabPage (), new Label (Catalog.GetString ("Version Information")));
 			
 			VBox.PackStart (notebook, true, true, 4);
 

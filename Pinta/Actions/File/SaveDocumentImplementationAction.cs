@@ -183,7 +183,7 @@ namespace Pinta.Actions
 				format = PintaCore.System.ImageFormats.GetFormatByFile (file);
 
 			if (format == null || format.IsReadOnly ()) {
-				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
+				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("File format not supported."), file);
 				md.Title = Catalog.GetString ("Error");
 
 				md.Run ();

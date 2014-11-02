@@ -164,7 +164,7 @@ namespace Pinta
 			var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
 			var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
 
-			window_shell = new WindowShell ("Pinta.GenericWindow", "Pinta", width, height, maximize);
+			window_shell = new WindowShell ("Pinta.GenericWindow", PintaCore.ApplicationName, width, height, maximize);
 
 			CreateMainMenu (window_shell);
 			CreateMainToolBar (window_shell);
