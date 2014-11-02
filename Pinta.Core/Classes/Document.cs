@@ -40,12 +40,19 @@ namespace Pinta.Core
 	// somewhat arbitrary.  In general:
 	// Document - Data about the image itself
 	// Workspace - Data about Pinta's state for the image
-	public class Document
+	public class Document : ObservableObject
 	{
 		private string filename;
 		private bool is_dirty;
 		private int layer_name_int = 2;
 		private int current_layer = -1;
+
+        // metadata
+        private string author;
+        private string title;
+        private string subject;
+        private string keywords;
+        private string comments;
 
 		// The layer for tools to use until their output is committed
 		private Layer tool_layer;
@@ -58,6 +65,13 @@ namespace Pinta.Core
 		public SelectionModeHandler selHandler;
 
 		private DocumentSelection actualSelection = new DocumentSelection();
+		
+        public static readonly string AuthorProperty = "Author";
+        public static readonly string TitleProperty = "Title";
+        public static readonly string SubjectProperty = "Subject";
+        public static readonly string KeywordsProperty = "Keywords";
+        public static readonly string CommentsProperty = "Comments";	
+	
 		public DocumentSelection Selection
 		{
 			get
@@ -132,7 +146,33 @@ namespace Pinta.Core
 				}
 			}
 		}
-		
+
+		// metadata
+        public string Author {
+            get { return author; }
+            set { if (author != value) SetValue (AuthorProperty, ref author, value); }
+        }
+
+        public string Title {
+            get { return title; }
+            set { if (title != value) SetValue (TitleProperty, ref title, value); }
+        }
+
+        public string Subject {
+            get { return subject; }
+            set { if (subject != value) SetValue (SubjectProperty, ref subject, value); }
+        }
+
+        public string Keywords {
+            get { return keywords; }
+            set { if (keywords != value) SetValue (KeywordsProperty, ref keywords, value); }
+        }
+
+        public string Comments {
+            get { return comments; }
+            set { if (comments != value) SetValue (CommentsProperty, ref comments, value); }
+        }
+
 		public Guid Guid { get; private set; }
 		
 		public bool HasFile { get; set; }

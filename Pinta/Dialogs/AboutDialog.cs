@@ -1,4 +1,4 @@
-//  AboutDialog.cs
+﻿//  AboutDialog.cs
 //
 // Author:
 //   Todd Berman  <tberman@sevenl.net>
@@ -278,7 +278,7 @@ namespace Pinta
 			//TransientFor = IdeApp.Workbench.RootWindow;
 			AllowGrow = false;
 			HasSeparator = false;
-			Icon = PintaCore.Resources.GetIcon ("Pinta.png");
+			Icon = PintaCore.Resources.GetIcon (Stock.About, 16);
 
 			VBox.BorderWidth = 0;
 

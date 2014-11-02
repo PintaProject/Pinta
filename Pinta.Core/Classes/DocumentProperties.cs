@@ -22,13 +22,13 @@ namespace Pinta.Core
 		public string Keywords { get; private set; }				
 		public string Comments { get; private set; }				
 
-/*		public void SetProperties (Layer layer)
+		public void SetProperties (Document document)
 		{
-			layer.Author = Author;
-			layer.Title = Title;
-			layer.Subject = Subject;
-			layer.Keywords = Keywords;
-			layer.Comments = Comments;
+			document.Author = Author;
+			document.Title = Title;
+			document.Subject = Subject;
+			document.Keywords = Keywords;
+			document.Comments = Comments;
 		}
-*/	}
+	}
 }
