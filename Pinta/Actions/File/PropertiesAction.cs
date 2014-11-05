@@ -29,14 +29,15 @@ namespace Pinta.Actions
 
             int response = dialog.Run ();
 
-            /*            if (response == (int)Gtk.ResponseType.Ok
-                && dialog.AreLayerPropertiesUpdated) {
+            if (response == (int)Gtk.ResponseType.Ok
+                && dialog.AreDocumentPropertiesUpdated) {
 
-                var historyMessage = GetLayerPropertyUpdateMessage (
-                        dialog.InitialLayerProperties,
-                        dialog.UpdatedLayerProperties);
+                var historyMessage = GetDocumentPropertyUpdateMessage (
+                        dialog.InitialDocumentProperties,
+                        dialog.UpdatedDocumentProperties);
 
-                var historyItem = new UpdateLayerPropertiesHistoryItem (
+// TODO fix icon to use stock Properties icon
+/*                var historyItem = new UpdateDocumentPropertiesHistoryItem (
                     "Menu.Layers.LayerProperties.png",
                     historyMessage,
                     PintaCore.Layers.CurrentLayerIndex,
@@ -44,47 +45,57 @@ namespace Pinta.Actions
                     dialog.UpdatedLayerProperties);
 
                 PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (historyItem);
-
+*/
                 PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 
             } else {
 
-                var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
+/*                var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
                 var initial = dialog.InitialLayerProperties;
                 initial.SetProperties (layer);
 
                 if (layer.Opacity != initial.Opacity)
                     PintaCore.Workspace.ActiveWorkspace.Invalidate ();
-            }
-             */
+*/            }
+
             dialog.Destroy ();
         }
 
-        /*        private string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
+        private string GetDocumentPropertyUpdateMessage (DocumentProperties initial, DocumentProperties updated)
         {
 
             string ret = null;
             int count = 0;
 
-            if (updated.Opacity != initial.Opacity) {
-                ret = Catalog.GetString ("Layer Opacity");
+            if (updated.Author != initial.Author) {
+                ret = Catalog.GetString ("Document Author");
                 count++;
             }
 
-            if (updated.Name != initial.Name) {
-                ret = Catalog.GetString ("Rename Layer");
+            if (updated.Title != initial.Title) {
+                ret = Catalog.GetString ("Document Title");
                 count++;
             }
 
-            if (updated.Hidden != initial.Hidden) {
-                ret = (updated.Hidden) ? Catalog.GetString ("Hide Layer") : Catalog.GetString ("Show Layer");
+            if (updated.Subject != initial.Subject) {
+                ret = Catalog.GetString ("Document Subject");
+                count++;
+            }
+
+            if (updated.Keywords != initial.Keywords) {
+                ret = Catalog.GetString ("Document Keywords");
+                count++;
+            }
+
+            if (updated.Comments != initial.Comments) {
+                ret = Catalog.GetString ("Document Comments");
                 count++;
             }
 
             if (ret == null || count > 1)
-                ret = Catalog.GetString ("Layer Properties");
+                ret = Catalog.GetString ("Document Properties");
 
             return ret;
-        } */
+        } 
     }
 }

@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
+using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta
@@ -49,7 +50,7 @@ namespace Pinta
 		private HScale opacitySlider;
 		private ComboBox blendComboBox;
 
-		public LayerPropertiesDialog () : base (Mono.Unix.Catalog.GetString ("Layer Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
+		public LayerPropertiesDialog () : base (Catalog.GetString ("Layer Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
 		{
 			Build ();
 
@@ -168,19 +169,21 @@ namespace Pinta
 			var box1 = new HBox ();
 
 			box1.Spacing = 6;
-			box1.PackStart (new Label (Mono.Unix.Catalog.GetString ("Name:")), false, false, 0);
+			Label nameLabel = new Label (Catalog.GetString ("_Name:"));
+			box1.PackStart (nameLabel, false, false, 0);
 
 			layerNameEntry = new Entry ();
+			nameLabel.MnemonicWidget = layerNameEntry;
 			box1.PackStart (layerNameEntry);
 
 			VBox.PackStart (box1, false, false, 0);
 
 			// Visible checkbox
-			visibilityCheckbox = new CheckButton (Mono.Unix.Catalog.GetString ("Visible"));
+			visibilityCheckbox = new CheckButton (Catalog.GetString ("_Visible"));
 
 			VBox.PackStart (visibilityCheckbox, false, false, 0);
 
-			lockedCheckbox = new CheckButton (Mono.Unix.Catalog.GetString ("Locked"));
+			lockedCheckbox = new CheckButton (Catalog.GetString ("_Locked"));
 
 			VBox.PackStart (lockedCheckbox, false, false, 0);
 
@@ -191,7 +194,7 @@ namespace Pinta
 			var box2 = new HBox ();
 
 			box2.Spacing = 6;
-			box2.PackStart (new Label (Mono.Unix.Catalog.GetString ("Blend Mode") + ":"), false, false, 0);
+			box2.PackStart (new Label (Catalog.GetString ("Blend Mode") + ":"), false, false, 0);
 
 			blendComboBox = new ComboBox (UserBlendOps.GetAllBlendModeNames ().ToArray ());
 			box2.PackStart (blendComboBox);
@@ -202,7 +205,7 @@ namespace Pinta
 			var box3 = new HBox ();
 
 			box3.Spacing = 6;
-			box3.PackStart (new Label (Mono.Unix.Catalog.GetString ("Opacity:")), false, false, 0);
+			box3.PackStart (new Label (Catalog.GetString ("Opacity:")), false, false, 0);
 
 			opacitySpinner = new SpinButton (0, 100, 1);
 			opacitySpinner.Adjustment.PageIncrement = 10;

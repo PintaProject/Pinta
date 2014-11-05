@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
+using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta
@@ -27,7 +28,7 @@ namespace Pinta
 		private TextView commentsTextView; // TODO: 3 lines instead of single line 
 		// private TextBuffer buffer;
 		
-        public DocumentPropertiesDialog () : base (Mono.Unix.Catalog.GetString ("Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
+        public DocumentPropertiesDialog () : base (Catalog.GetString ("Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
         {
             Build ();
 
@@ -124,52 +125,78 @@ namespace Pinta
             DefaultWidth = 400;
             DefaultHeight = 300;
             BorderWidth = 6;
-            VBox.Spacing = 10;
-            
-            var box1 = new HBox ();
 
-            box1.PackStart (new Label (Mono.Unix.Catalog.GetString ("Author:")), false, false, 0);
+            VBox nBox = new VBox ();// HACK handwriting GUI code sucks
+            nBox.Spacing = 10;
+            
+            Notebook notebook = new Notebook ();
+            notebook.BorderWidth = 6;
+            // General Page
+//            notebook.AppendPage (new Button ("1"), new Label ("General"));
+            // Description Page
+            notebook.AppendPage (nBox, new Label (Catalog.GetString ("Description")));
+//            notebook.AppendPage (new Button ("3"), new Label ("Custom"));            
+                                 
+            VBox.Spacing = 10;
+			VBox.PackStart (notebook, true, true, 0);
+
+			// TODO: probably want to rewrite this entirely using Gtk Table
+            // so that text entries are all the same width
+            var box1 = new HBox ();
+            
+            Label authorLabel = new Label (Catalog.GetString ("_Author:"));
+            box1.PackStart (authorLabel, false, false, 0);
 
             authorEntry = new Entry ();
+            authorLabel.MnemonicWidget = authorEntry;
             box1.PackStart (authorEntry);
 
-            VBox.PackStart (box1, false, false, 0);
+            nBox.PackStart (box1, false, false, 0);
 
             var box2 = new HBox ();
 
-            box2.PackStart (new Label (Mono.Unix.Catalog.GetString ("Title:")), false, false, 0);
+            Label titleLabel = new Label (Catalog.GetString ("_Title:"));
+            box2.PackStart (titleLabel, false, false, 0);
 
             titleEntry = new Entry ();
+            titleLabel.MnemonicWidget = titleEntry;
             box2.PackStart (titleEntry);
 
-            VBox.PackStart (box2, false, false, 0);
+            nBox.PackStart (box2, false, false, 0);
 
             var box3 = new HBox ();
 
-            box3.PackStart (new Label (Mono.Unix.Catalog.GetString ("Subject:")), false, false, 0);
+            Label subjectLabel = new Label (Catalog.GetString ("_Subject:"));
+            box3.PackStart (subjectLabel, false, false, 0);
 
             subjectEntry = new Entry ();
+            subjectLabel.MnemonicWidget = subjectEntry;
             box3.PackStart (subjectEntry);
 
-            VBox.PackStart (box3, false, false, 0);
+            nBox.PackStart (box3, false, false, 0);
 
             var box4 = new HBox ();
 
-            box4.PackStart (new Label (Mono.Unix.Catalog.GetString ("Keywords:")), false, false, 0);
+            Label keywordsLabel = new Label (Catalog.GetString ("_Keywords:"));
+            box4.PackStart (keywordsLabel, false, false, 0);
 
             keywordsEntry = new Entry ();
+            keywordsLabel.MnemonicWidget = keywordsEntry;
             box4.PackStart (keywordsEntry);
 
-            VBox.PackStart (box4, false, false, 0);
+            nBox.PackStart (box4, false, false, 0);
 
             var box5 = new HBox ();
 
-            box5.PackStart (new Label (Mono.Unix.Catalog.GetString ("Comments:")), false, false, 0);
+            Label commentsLabel = new Label (Catalog.GetString ("Co_mments:")); 
+            box5.PackStart (commentsLabel, false, false, 0);
 
             commentsTextView = new TextView ();
+            commentsLabel.MnemonicWidget = commentsTextView;
             box5.PackStart (commentsTextView);
 
-            VBox.PackStart (box5, false, false, 0);
+            nBox.PackStart (box5, false, false, 0);
+            nBox.ShowAll ();
 
             // Finish up
             VBox.ShowAll ();

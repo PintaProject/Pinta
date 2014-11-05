@@ -64,18 +64,18 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
 			fact.AddDefault ();
 			
-			Undo = new Gtk.Action ("Undo", Catalog.GetString ("Undo"), null, Stock.Undo);
-			Redo = new Gtk.Action ("Redo", Catalog.GetString ("Redo"), null, Stock.Redo);
-			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cut"), null, Stock.Cut);
-			Copy = new Gtk.Action ("Copy", Catalog.GetString ("Copy"), null, Stock.Copy);
+			Undo = new Gtk.Action ("Undo", Catalog.GetString ("_Undo"), null, Stock.Undo);
+			Redo = new Gtk.Action ("Redo", Catalog.GetString ("_Redo"), null, Stock.Redo);
+			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cu_t"), null, Stock.Cut);
+			Copy = new Gtk.Action ("Copy", Catalog.GetString ("_Copy"), null, Stock.Copy);
 			CopyMerged = new Gtk.Action ("CopyMerged", Catalog.GetString ("Copy Merged"), null, Stock.Copy);
-			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
+			Paste = new Gtk.Action ("Paste", Catalog.GetString ("_Paste"), null, Stock.Paste);
 			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
 			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
 			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Delete Selection"), null, "Menu.Edit.EraseSelection.png");
 			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
 			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
+			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select _All"), null, Stock.SelectAll);
 			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
 			
 			LoadPalette = new Gtk.Action ("LoadPalette", Catalog.GetString ("Open..."), null, Stock.Open);
