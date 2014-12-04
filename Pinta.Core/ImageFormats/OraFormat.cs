@@ -155,6 +155,8 @@ namespace Pinta.Core
 					md.Destroy ();
 				}
 			}
+			LoadMeta (fileName);
+			
 			doc.SetCurrentUserLayer (c); // select a layer
 			
 			file.Close ();
@@ -173,6 +175,38 @@ namespace Pinta.Core
 			return p;
 		}
 
+		// known ugly. error handling badly needed
+		public void LoadMeta (string filename) 
+		{
+			ZipFile file = new ZipFile (filename);
+            XmlDocument metaXml = new XmlDocument ();
+            // TODO meta.xml might not exist
+            metaXml.Load (file.GetInputStream (file.GetEntry ("meta.xml")));
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(metaXml.NameTable);
+            nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
+            
+            // author/creator
+            XmlNode authorElement = metaXml.SelectSingleNode("//dc:creator", nsmgr);
+            PintaCore.Workspace.ActiveDocument.Author = authorElement.InnerText;            
+            // subject
+            XmlNode subjectElement = metaXml.SelectSingleNode("//dc:subject", nsmgr);
+            PintaCore.Workspace.ActiveDocument.Subject = subjectElement.InnerText;            
+            // title
+            XmlNode titleElement = metaXml.SelectSingleNode("//dc:title", nsmgr);
+            PintaCore.Workspace.ActiveDocument.Title = titleElement.InnerText;            
+            // publisher
+            // comment/description
+            XmlNode commentElement = metaXml.SelectSingleNode("//dc:description", nsmgr);
+            PintaCore.Workspace.ActiveDocument.Comments = commentElement.InnerText;                    
+            // keywords
+            // TODO empty node causes NullReferenceException
+            XmlNode keywordsElement = metaXml.SelectSingleNode("//dc:keyword", nsmgr);
+            PintaCore.Workspace.ActiveDocument.Keywords =  keywordsElementeywordsElement.InnerText;                    
+            // user defined
+            
+			file.Close ();
+		}
+		
 		#endregion
 		
 		private static IFormatProvider GetFormat () 
