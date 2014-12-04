@@ -175,7 +175,7 @@ namespace Pinta.Core
 			return p;
 		}
 
-		// known ugly. error handling badly needed
+		// HACK: known ugly. error handling badly needed
 		public void LoadMeta (string filename)
 		{
 			ZipFile file = new ZipFile (filename);
