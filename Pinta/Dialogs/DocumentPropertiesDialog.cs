@@ -126,77 +126,69 @@ namespace Pinta
             DefaultHeight = 300;
             BorderWidth = 6;
 
-            VBox nBox = new VBox ();// HACK handwriting GUI code sucks
-            nBox.Spacing = 10;
+            VBox tBox = new VBox ();// HACK handwriting GUI code sucks
+            tBox.Spacing = 10;
             
             Notebook notebook = new Notebook ();
             notebook.BorderWidth = 6;
             // General Page
 //            notebook.AppendPage (new Button ("1"), new Label ("General"));
             // Description Page
-            notebook.AppendPage (nBox, new Label (Catalog.GetString ("Description")));
+            notebook.AppendPage (tBox, new Label (Catalog.GetString ("Description")));
 //            notebook.AppendPage (new Button ("3"), new Label ("Custom"));            
                                  
             VBox.Spacing = 10;
 			VBox.PackStart (notebook, true, true, 0);
 
-			// TODO: probably want to rewrite this entirely using Gtk Table
-            // so that text entries are all the same width
-            var box1 = new HBox ();
+			// handwriting any GUI code is so ugly, GTK especially so
+			Table table = new Table (5, 2, false);
+            tBox.Add (table);
             
-            Label authorLabel = new Label (Catalog.GetString ("_Author:"));
-            box1.PackStart (authorLabel, false, false, 0);
-
+            Label authorLabel = new Label (Mono.Unix.Catalog.GetString ("_Author:"));
+            table.Attach(authorLabel, 0, 1, 0, 1);
+            
             authorEntry = new Entry ();
             authorLabel.MnemonicWidget = authorEntry;
-            box1.PackStart (authorEntry);
+            table.Attach(authorEntry, 1, 2, 0, 1);
 
-            nBox.PackStart (box1, false, false, 0);
-
-            var box2 = new HBox ();
-
-            Label titleLabel = new Label (Catalog.GetString ("_Title:"));
-            box2.PackStart (titleLabel, false, false, 0);
+            Label titleLabel = new Label (Mono.Unix.Catalog.GetString ("_Title:"));
+            table.Attach(titleLabel, 0, 1, 1, 2);
+            titleLabel.Show ();
 
             titleEntry = new Entry ();
             titleLabel.MnemonicWidget = titleEntry;
-            box2.PackStart (titleEntry);
-
-            nBox.PackStart (box2, false, false, 0);
+            table.Attach(titleEntry, 1, 2, 1, 2);
+            titleEntry.Show ();
 
             var box3 = new HBox ();
 
-            Label subjectLabel = new Label (Catalog.GetString ("_Subject:"));
-            box3.PackStart (subjectLabel, false, false, 0);
+            Label subjectLabel = new Label (Mono.Unix.Catalog.GetString ("_Subject:"));
+            table.Attach(subjectLabel, 0, 1, 2, 3);            
 
             subjectEntry = new Entry ();
             subjectLabel.MnemonicWidget = subjectEntry;
-            box3.PackStart (subjectEntry);
+            table.Attach(subjectEntry, 1, 2, 2, 3);
+            subjectEntry.Show ();            
 
-            nBox.PackStart (box3, false, false, 0);
-
-            var box4 = new HBox ();
-
-            Label keywordsLabel = new Label (Catalog.GetString ("_Keywords:"));
-            box4.PackStart (keywordsLabel, false, false, 0);
+            Label keywordsLabel = new Label (Mono.Unix.Catalog.GetString ("_Keywords:"));
+            table.Attach(keywordsLabel, 0, 1, 3, 4);                       
 
             keywordsEntry = new Entry ();
             keywordsLabel.MnemonicWidget = keywordsEntry;
-            box4.PackStart (keywordsEntry);
+            table.Attach(keywordsEntry, 1, 2, 3, 4);
+            keywordsEntry.Show ();               
 
-            nBox.PackStart (box4, false, false, 0);
-
-            var box5 = new HBox ();
-
-            Label commentsLabel = new Label (Catalog.GetString ("Co_mments:")); 
-            box5.PackStart (commentsLabel, false, false, 0);
+            Label commentsLabel = new Label (Mono.Unix.Catalog.GetString ("Co_mments:"));
+            table.Attach(commentsLabel, 0, 1, 4, 5);            
 
             commentsTextView = new TextView ();
             commentsLabel.MnemonicWidget = commentsTextView;
-            box5.PackStart (commentsTextView);
+            table.Attach(commentsTextView, 1, 2, 4, 5);
+            commentsTextView.Show ();               
 
-            nBox.PackStart (box5, false, false, 0);
-            nBox.ShowAll ();
+            table.Show ();
+            // table.ShowAll ();
+            tBox.ShowAll ();
 
             // Finish up
             VBox.ShowAll ();
@@ -204,5 +196,6 @@ namespace Pinta
             AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
             DefaultResponse = ResponseType.Ok;
         }
+        
     }
 }
