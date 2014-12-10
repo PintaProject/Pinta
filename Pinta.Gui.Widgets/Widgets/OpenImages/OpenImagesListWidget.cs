@@ -142,6 +142,9 @@ namespace Pinta.Gui.Widgets
 				TreePath path;
 				tree.GetPathAtPos ((int)click_x, (int)click_y, out path);
 
+				if (path == null)
+					return;
+
 				PintaCore.Workspace.SetActiveDocument (path.Indices[0]);
 				PintaCore.Actions.File.Close.Activate ();
 				UpdateSelectedDocument ();

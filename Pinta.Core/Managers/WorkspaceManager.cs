@@ -37,6 +37,7 @@ namespace Pinta.Core
 	{
 		private int active_document_index = -1;
 		private int new_file_name = 1;
+		private bool has_open_pending_documents = false; // If there is an ongoing open document operation
 
 		public event EventHandler SelectionChanged;
 		
@@ -95,6 +96,11 @@ namespace Pinta.Core
 		
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
+
+		public bool HasOpenPendingDocuments {
+			get { return this.has_open_pending_documents; }
+			set { this.has_open_pending_documents = value; }
+		}
 		
 		public Document CreateAndActivateDocument (string filename, Gdk.Size size)
 		{

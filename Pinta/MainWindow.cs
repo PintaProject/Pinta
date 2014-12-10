@@ -399,11 +399,36 @@ namespace Pinta
 
 			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
 
-			foreach (string individualFile in fullData.Split ('\n')) {
-				string file = individualFile.Trim ();
+			try {
+				PintaCore.Workspace.HasOpenPendingDocuments = true;
 
-				if (file.StartsWith ("file://"))
-					PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+				foreach (string individualFile in fullData.Split ('\n')) {
+					string file = individualFile.Trim ();
+					Console.WriteLine (file);
+
+					if (file.StartsWith ("http")) {
+						System.Net.WebClient client = new System.Net.WebClient ();
+						string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName(file);
+
+						Console.WriteLine (">>File downloaded; " + file + "; " + tempFilePath);
+
+						try {
+							client.DownloadFile (file, @tempFilePath);
+						} finally {
+							client.Dispose ();
+						}
+
+						if (System.IO.File.Exists (tempFilePath))
+							file = "file://" + tempFilePath;
+						else
+							Console.WriteLine ("Unable to download target file: " + tempFilePath);
+					}
+
+					if (file.StartsWith ("file://"))
+						PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+				}
+			} finally {
+				PintaCore.Workspace.HasOpenPendingDocuments = false;
 			}
 		}
 

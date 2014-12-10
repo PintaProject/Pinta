@@ -194,6 +194,9 @@ namespace Pinta.Core
 		/// </param>
 		public Cairo.PointD WindowPointToCanvas (double x, double y)
 		{
+			if (PintaCore.Workspace.HasOpenPendingDocuments)
+				return new Cairo.PointD();
+
 			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
 			                                  PintaCore.Workspace.CanvasSize.Width);
 			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD (x - Offset.X, y - Offset.Y));
