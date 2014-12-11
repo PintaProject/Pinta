@@ -55,7 +55,7 @@ namespace Pinta.Core
 			New = new Gtk.Action ("New", Catalog.GetString ("_New..."), null, Stock.New);
 			NewScreenshot = new Gtk.Action ("NewScreenshot", Catalog.GetString ("New Screenshot..."), null, Stock.Fullscreen);
 			Open = new Gtk.Action ("Open", Catalog.GetString ("_Open..."), null, Stock.Open);
-			OpenRecent = new RecentAction ("OpenRecent", Catalog.GetString ("Open Recent"), null, Stock.Open, RecentManager.Default);
+			OpenRecent = new RecentAction ("OpenRecent", Catalog.GetString ("Open _Recent"), null, Stock.Open, RecentManager.Default);
 			
 			RecentFilter recentFilter = new RecentFilter ();
 			recentFilter.AddApplication ("Pinta");
@@ -65,7 +65,7 @@ namespace Pinta.Core
 			Close = new Gtk.Action ("Close", Catalog.GetString ("_Close"), null, Stock.Close);
 			Save = new Gtk.Action ("Save", Catalog.GetString ("_Save"), null, Stock.Save);
 			SaveAs = new Gtk.Action ("SaveAs", Catalog.GetString ("Save _As..."), null, Stock.SaveAs);
-			Properties = new Gtk.Action ("Propert_ies", Catalog.GetString ("Properties..."), null, Stock.Properties);
+			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Propert_ies..."), null, Stock.Properties);
 			Print = new Gtk.Action ("Print", Catalog.GetString ("_Print"), null, Stock.Print);
 			Exit = new Gtk.Action ("Exit", Catalog.GetString ("_Quit"), null, Stock.Quit);
 
