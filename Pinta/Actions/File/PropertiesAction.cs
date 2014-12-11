@@ -33,24 +33,24 @@ namespace Pinta.Actions
                 && dialog.AreDocumentPropertiesUpdated) {
 
                 var historyMessage = GetDocumentPropertyUpdateMessage (
-                        dialog.InitialDocumentProperties,
-                        dialog.UpdatedDocumentProperties);
+                    dialog.InitialDocumentProperties,
+                    dialog.UpdatedDocumentProperties);
 
-// TODO fix icon to use stock Properties icon
-/*                var historyItem = new UpdateDocumentPropertiesHistoryItem (
-                    "Menu.Layers.LayerProperties.png",
+// TODO fix history item
+/*               var historyItem = new UpdateDocumentPropertiesHistoryItem (
+                    Stock.Properties,
                     historyMessage,
                     PintaCore.Layers.CurrentLayerIndex,
-                    dialog.InitialLayerProperties,
-                    dialog.UpdatedLayerProperties);
+                    dialog.InitialDocumentProperties,
+                    dialog.UpdatedDocumentProperties);
 
                 PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (historyItem);
-*/
+                 */
                 PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 
             } else {
 
-/*                var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
+                /*                var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
                 var initial = dialog.InitialLayerProperties;
                 initial.SetProperties (layer);
 
@@ -96,6 +96,6 @@ namespace Pinta.Actions
                 ret = Catalog.GetString ("Document Properties");
 
             return ret;
-        } 
+        }
     }
 }
