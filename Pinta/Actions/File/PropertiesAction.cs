@@ -42,10 +42,17 @@ namespace Pinta.Actions
                     historyMessage,
                     PintaCore.Layers.CurrentLayerIndex,
                     dialog.InitialDocumentProperties,
-                    dialog.UpdatedDocumentProperties);
-
+                    dialog.UpdatedDocumentProperties
+                 );
+*/              // TODO check that this is working as it should 
+				// seems okay
+                var historyItem = new SimpleHistoryItem (
+                    Stock.Properties,
+                    historyMessage
+                );
+                
                 PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (historyItem);
-                 */
+
                 PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 
             } else {
