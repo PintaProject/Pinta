@@ -53,8 +53,12 @@ namespace Pinta.Core
         
         private const string oraMimeType = "image/openraster";
         private const string odgMimeType = "application/vnd.oasis.opendocument.graphics";
-        
         public string MimeType = oraMimeType;
+
+        // xml namespaces   
+        private string nsmeta = "urn:oasis:names:tc:opendocument:xmlns:meta:1.0";
+        private string nsoffice = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
+        private string nsdc = "http://purl.org/dc/elements/1.1/";
         
         public void Import (string fileName, Gtk.Window parent)
         {
@@ -157,7 +161,13 @@ namespace Pinta.Core
                     md.Destroy ();
                 }
             }
-            LoadMeta (fileName);
+
+            XmlDocument metaXml = new XmlDocument ();
+            // meta.xml is optional and might not exist
+            try {
+                metaXml.Load (file.GetInputStream (file.GetEntry ("meta.xml")));
+                ReadMeta (metaXml);
+            } catch { }        
             
             doc.SetCurrentUserLayer (c); // select a layer
             
@@ -178,36 +188,30 @@ namespace Pinta.Core
         }
 
         // HACK: known ugly. error handling badly needed
-        public void LoadMeta (string filename)
+        public void ReadMeta (XmlDocument metaXml)
         {
-            ZipFile file = new ZipFile (filename);
-            XmlDocument metaXml = new XmlDocument ();
-            // TODO meta.xml might not exist
-            metaXml.Load (file.GetInputStream (file.GetEntry ("meta.xml")));
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(metaXml.NameTable);
-            nsmgr.AddNamespace ("dc", "http://purl.org/dc/elements/1.1/");
-
-            // TODO error checking any and all of these might be empty
+            nsmgr.AddNamespace ("dc", nsdc);
+            nsmgr.AddNamespace ("meta", nsmeta);
+            
             // author/creator
             XmlNode authorElement = metaXml.SelectSingleNode ("//dc:creator", nsmgr);
             PintaCore.Workspace.ActiveDocument.Author = authorElement.InnerText;
-            // subject
-            XmlNode subjectElement = metaXml.SelectSingleNode ("//dc:subject", nsmgr);
-            PintaCore.Workspace.ActiveDocument.Subject = subjectElement.InnerText;
             // title
             XmlNode titleElement = metaXml.SelectSingleNode ("//dc:title", nsmgr);
             PintaCore.Workspace.ActiveDocument.Title = titleElement.InnerText;
+            // subject
+            XmlNode subjectElement = metaXml.SelectSingleNode ("//dc:subject", nsmgr);
+            PintaCore.Workspace.ActiveDocument.Subject = subjectElement.InnerText;
             // publisher
             // comment/description
             XmlNode commentElement = metaXml.SelectSingleNode ("//dc:description", nsmgr);
             PintaCore.Workspace.ActiveDocument.Comments = commentElement.InnerText;
             // keywords
-            // TODO empty node causes NullReferenceException
-            XmlNode keywordsElement = metaXml.SelectSingleNode ("//dc:keyword", nsmgr);
-            PintaCore.Workspace.ActiveDocument.Keywords = keywordsElement.InnerText;
+            XmlNode keywordsElement = metaXml.SelectSingleNode ("//meta:keyword", nsmgr);
+           	PintaCore.Workspace.ActiveDocument.Keywords = keywordsElement.InnerText;
             // user defined
-            
-            file.Close ();
+
         }
         
         #endregion
@@ -609,10 +613,6 @@ namespace Pinta.Core
             string useragent = PintaCore.ApplicationName + "/" + PintaCore.ApplicationVersion + "$" + Environment.OSVersion.ToString ();
 
             const string prefix = "meta";
-            // xml namespaces
-            const string nsmeta = "urn:oasis:names:tc:opendocument:xmlns:meta:1.0";
-            const string nsoffice = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
-            const string nsdc = "http://purl.org/dc/elements/1.1/";
             
             MemoryStream stream = new MemoryStream ();
             XmlWriterSettings settings = new XmlWriterSettings ();
