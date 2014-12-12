@@ -555,7 +555,13 @@ namespace Pinta.Core
             writer.WriteAttributeString ("full-path", ns, "/");
             writer.WriteAttributeString ("media-type", ns, MimeType);
             writer.WriteEndElement ();
-            
+
+            // merged imaged
+            writer.WriteStartElement ("file-entry", ns);
+            writer.WriteAttributeString ("full-path", ns, "mergedimage.png");
+            writer.WriteAttributeString ("media-type", ns, "image/png");
+            writer.WriteEndElement ();            
+
             // thumbnail
             writer.WriteStartElement ("file-entry", ns);
             writer.WriteAttributeString ("full-path", ns, "Thumbnails/thumbnail.png");
@@ -565,13 +571,19 @@ namespace Pinta.Core
             // content.xml
             writer.WriteStartElement ("file-entry", ns);
             writer.WriteAttributeString ("full-path", ns, "content.xml");
-            writer.WriteAttributeString ("media-type", ns, "image/png");
+            writer.WriteAttributeString ("media-type", ns, "text/xml");
             writer.WriteEndElement ();
+
+            // meta.xml
+            writer.WriteStartElement ("file-entry", ns);
+            writer.WriteAttributeString ("full-path", ns, "meta.xml");
+            writer.WriteAttributeString ("media-type", ns, "text/xml");
+            writer.WriteEndElement ();            
             
             // stack.xml
             writer.WriteStartElement ("file-entry", ns);
             writer.WriteAttributeString ("full-path", ns, "stack.xml");
-            writer.WriteAttributeString ("media-type", ns, "image/png");
+            writer.WriteAttributeString ("media-type", ns, "text/xml");
             writer.WriteEndElement ();
             
             // OpenRaster keeps images in data/
