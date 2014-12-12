@@ -32,20 +32,17 @@ namespace Pinta.Actions
             if (response == (int)Gtk.ResponseType.Ok
                 && dialog.AreDocumentPropertiesUpdated) {
 
+            	PintaCore.Workspace.ActiveDocument.Author = dialog.author;
+            	PintaCore.Workspace.ActiveDocument.Title = dialog.title;
+            	PintaCore.Workspace.ActiveDocument.Subject = dialog.subject;
+                PintaCore.Workspace.ActiveDocument.Keywords = dialog.keywords;
+                PintaCore.Workspace.ActiveDocument.Comments = dialog.comments; 
+                
                 var historyMessage = GetDocumentPropertyUpdateMessage (
                     dialog.InitialDocumentProperties,
-                    dialog.UpdatedDocumentProperties);
-
-// TODO fix history item
-/*               var historyItem = new UpdateDocumentPropertiesHistoryItem (
-                    Stock.Properties,
-                    historyMessage,
-                    PintaCore.Layers.CurrentLayerIndex,
-                    dialog.InitialDocumentProperties,
                     dialog.UpdatedDocumentProperties
-                 );
-*/              // TODO check that this is working as it should 
-				// seems okay
+                );
+
                 var historyItem = new SimpleHistoryItem (
                     Stock.Properties,
                     historyMessage
@@ -56,14 +53,10 @@ namespace Pinta.Actions
                 PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 
             } else {
-
-                /*                var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
-                var initial = dialog.InitialLayerProperties;
-                initial.SetProperties (layer);
-
-                if (layer.Opacity != initial.Opacity)
-                    PintaCore.Workspace.ActiveWorkspace.Invalidate ();
-*/            }
+				// Cancel was pressed, reset dialog to initial properties
+                var initial = dialog.InitialDocumentProperties;
+                dialog.UpdatedDocumentProperties = initial;          
+            }
 
             dialog.Destroy ();
         }

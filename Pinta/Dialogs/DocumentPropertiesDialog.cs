@@ -15,11 +15,11 @@ namespace Pinta
     {
         private DocumentProperties initial_properties;
 
-        private string author;
-        private string title;
-        private string subject;
-        private string keywords;
-        private string comments;
+        public string author;
+        public string title;
+        public string subject;
+        public string keywords;
+        public string comments;
 
 		private Entry authorEntry;
 		private Entry titleEntry;
@@ -88,36 +88,38 @@ namespace Pinta
             get {
                 return new DocumentProperties (author, title, subject, keywords, comments);
             }
+        	set {
+		        authorEntry.Text = author;
+		        titleEntry.Text = title;
+		        subjectEntry.Text = subject;
+		        keywordsEntry.Text = keywords;
+		        commentsTextView.Buffer.Text = comments;
+        	}
         }
         
         private void OnAuthorChanged (object sender, EventArgs e)
         {
             author = authorEntry.Text;
-            PintaCore.Workspace.ActiveDocument.Author = author; 
         }
 
         private void OnTitleChanged (object sender, EventArgs e)
         {
             title = titleEntry.Text;
-            PintaCore.Workspace.ActiveDocument.Title = title; 
         }
 
         private void OnSubjectChanged (object sender, EventArgs e)
         {
             subject = subjectEntry.Text;
-            PintaCore.Workspace.ActiveDocument.Subject = subject; 
         }
 
         private void OnKeywordsChanged (object sender, EventArgs e)
         {
             keywords = keywordsEntry.Text;
-            PintaCore.Workspace.ActiveDocument.Keywords = keywords; 
         }
 
         private void OnCommentsChanged (object sender, EventArgs e)
         {
             comments = commentsTextView.Buffer.Text;
-            PintaCore.Workspace.ActiveDocument.Comments = comments; 
         }
         
         private void Build ()
