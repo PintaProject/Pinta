@@ -1275,7 +1275,7 @@ msgstr "If you don't save, all changes will be permanently lost."
 
 #: Pinta/Actions/File/CloseDocumentAction.cs:69
 msgid "Close without saving"
-msgstr "Close without saving"
+msgstr "Close _without saving"
 
 #: Pinta/MainWindow.cs:123
 msgid "_File"
