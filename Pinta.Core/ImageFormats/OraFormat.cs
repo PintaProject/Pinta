@@ -51,8 +51,8 @@ namespace Pinta.Core
 
         #region IImageImporter implementation
         
-        private string oraMimeType = "image/openraster";
-        private string odgMimeType = "application/vnd.oasis.opendocument.graphics";
+        private const string oraMimeType = "image/openraster";
+        private const string odgMimeType = "application/vnd.oasis.opendocument.graphics";
         public string MimeType = oraMimeType;
 
         // xml namespaces   
@@ -62,10 +62,25 @@ namespace Pinta.Core
         
         public void Import (string fileName, Gtk.Window parent)
         {
-            ZipFile file = new ZipFile (fileName);
-            XmlDocument stackXml = new XmlDocument ();
-            // must have stack.xml to be a valid OpenRaster
-            stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
+            ZipFile zfile = new ZipFile (fileName);       
+            
+            // warn if mimetype incorrect
+            try {
+                StreamReader reader = new StreamReader ((zfile.GetInputStream (zfile.GetEntry ("mimetype"))));
+                string line = reader.ReadLine();
+                    if (line != MimeType) 
+                    {
+                        MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Warning, ButtonsType.Ok, "Unexpected mimetype in {0}", fileName);
+                        md.Title = "Warning";
+                   
+                        md.Run ();
+                        md.Destroy ();                        
+                    }
+
+            } catch { }   
+
+            XmlDocument stackXml = new XmlDocument ();            
+            stackXml.Load (zfile.GetInputStream (zfile.GetEntry ("stack.xml")));
             
             XmlElement imageElement = stackXml.DocumentElement;
             int width = int.Parse (imageElement.GetAttribute ("w"));
@@ -96,8 +111,8 @@ namespace Pinta.Core
                 {
                     // Write the file to a temporary file first
                     // Fixes exception on .Net when image too big. bug #594677
-                    ZipEntry zf = file.GetEntry (layerElement.GetAttribute ("src"));
-                    Stream s = file.GetInputStream (zf);
+                    ZipEntry zf = zfile.GetEntry (layerElement.GetAttribute ("src"));
+                    Stream s = zfile.GetInputStream (zf);
                     string tmp_file = System.IO.Path.GetTempFileName ();
                     
                     using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate))
@@ -154,7 +169,7 @@ namespace Pinta.Core
                     } catch { }
                 } catch
                 {
-                    MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, file);
+                    MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, zfile);
                     md.Title = "Error";
                     
                     md.Run ();
@@ -165,29 +180,39 @@ namespace Pinta.Core
             XmlDocument metaXml = new XmlDocument ();
             // meta.xml is optional and might not exist
             try {
-                metaXml.Load (file.GetInputStream (file.GetEntry ("meta.xml")));
+                metaXml.Load (zfile.GetInputStream (zfile.GetEntry ("meta.xml")));
                 ReadMeta (metaXml);
             } catch { }        
             
             doc.SetCurrentUserLayer (c); // select a layer
             
-            file.Close ();
+            zfile.Close ();
         }
 
         public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
         {
-            ZipFile file = new ZipFile (filename);
-            ZipEntry ze = file.GetEntry ("Thumbnails/thumbnail.png");
+            ZipFile zf = new ZipFile (filename);
+            ZipEntry ze = zf.GetEntry ("Thumbnails/thumbnail.png");
 
             // The ORA specification requires that all files have a
             // thumbnail that is less than 256x256 pixels, so don't bother
             // with scaling the preview.
-            Pixbuf p = new Pixbuf (file.GetInputStream (ze));
-            file.Close ();
+            Pixbuf p = new Pixbuf (zf.GetInputStream (ze));
+            zf.Close ();
             return p;
         }
 
-        public void ReadMeta (XmlDocument metaXml)
+        private void ReadMimeType (string filename)
+        {
+            // read file and if mimetype != MimeType
+        }        
+        
+        private void ReadStack ()
+        {
+            
+        }
+        
+        private void ReadMeta (XmlDocument metaXml)
         {
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(metaXml.NameTable);
             nsmgr.AddNamespace ("dc", nsdc);
@@ -209,7 +234,7 @@ namespace Pinta.Core
             // keywords
             XmlNode keywordsElement = metaXml.SelectSingleNode ("//meta:keyword", nsmgr);
            	PintaCore.Workspace.ActiveDocument.Keywords = keywordsElement.InnerText;
-            // user defined
+            // user defined ...
 
         }
         
@@ -257,10 +282,11 @@ namespace Pinta.Core
 //          writer.WriteAttributeString ("yres", "600"); 
             
             writer.WriteStartElement ("stack");
-            // must be ommitted from root stack 
-            // writer.WriteAttributeString ("opacity", "1"); 
             writer.WriteAttributeString ("name", "root");
-
+            // must be ommitted from root stack
+//            writer.WriteAttributeString ("opacity", "1");
+//            writer.WriteAttributeString ("visibility", "hidden");
+            
             // ORA stores layers top to bottom
             for (int i = layers.Count - 1; i >= 0; i--)
             {
