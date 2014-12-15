@@ -51,8 +51,8 @@ namespace Pinta.Core
 
         #region IImageImporter implementation
         
-        private const string oraMimeType = "image/openraster";
-        private const string odgMimeType = "application/vnd.oasis.opendocument.graphics";
+        private string oraMimeType = "image/openraster";
+        private string odgMimeType = "application/vnd.oasis.opendocument.graphics";
         public string MimeType = oraMimeType;
 
         // xml namespaces   
@@ -187,7 +187,6 @@ namespace Pinta.Core
             return p;
         }
 
-        // HACK: known ugly. error handling badly needed
         public void ReadMeta (XmlDocument metaXml)
         {
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(metaXml.NameTable);
@@ -251,11 +250,15 @@ namespace Pinta.Core
             XmlWriter writer = XmlWriter.Create (stream, settings);
             
             writer.WriteStartElement ("image");
+//          writer.WriteAttributeString ("version", "0.0.1"); // mandatory
             writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
             writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
-
+//          writer.WriteAttributeString ("xres", "600"); // optional
+//          writer.WriteAttributeString ("yres", "600"); 
+            
             writer.WriteStartElement ("stack");
-            // writer.WriteAttributeString ("opacity", "1");
+            // must be ommitted from root stack 
+            // writer.WriteAttributeString ("opacity", "1"); 
             writer.WriteAttributeString ("name", "root");
 
             // ORA stores layers top to bottom
@@ -450,6 +453,7 @@ namespace Pinta.Core
         // HACK: naive conversion of pixels to cm,
         // strictly it also depends on display DPI
         // not sure why OpenOffice fails to understand pixels
+        // TODO include the correct xres & yres in stack.xml image tag  
         private string ConvertPixels (double pixels)
         {
             // 1 pixel = 0.02645833333333 centimeter
