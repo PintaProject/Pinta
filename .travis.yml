@@ -1,7 +1,13 @@
+# Travis CI, Continous Integration testing http://travis-ci.org/
+
+# set c as language, c# not officially supported
 language: c
+
 install:
+  # add universe repository for precompiled gendarme packages
+  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
   - sudo apt-get update -yqq
-  - sudo apt-get install mono-devel mono-xbuild mono-tools libgtk2.0-cil-dev intltool -yqq
+  - sudo apt-get install mono-devel mono-xbuild gendarme libgtk2.0-cil-dev intltool -yqq
 script:
   - ./autogen.sh && make
 after_script:
