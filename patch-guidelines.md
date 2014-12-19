@@ -15,18 +15,18 @@ comment saying that you are working on it.
 
 ####Creating a GitHub Fork of Pinta
 
-First you need  to make yourself an account with GitHub if you haven't
+First you need to make yourself an account with GitHub if you haven't
 already got one. It is recommended that you use your full name, because
 we need something to put in the credits! Then you fork the [PintaProject
 Repository](https://github.com/PintaProject/Pinta) , and pull the code
-down to your local machine. (All explained [here]
+down to your local machine. (All explained in the [github documentation]
 (http://help.github.com/fork-a-repo/))
 
 ####Writing, Compiling, and Testing Code
 
 This is where the magic happens! Make whatever changes are necessary to
 the source code, but please do not attempt to clean up existing code. We
-are only interested in seeing functional changes to the code, if they
+are interested in seeing functional changes to the code, if they
 are mixed with cosmetic changes it becomes very difficult to see what
 has actually changed. Build your code according to the [building
 instructions](https://github.com/PintaProject/Pinta/blob/master/readme.md),
@@ -45,7 +45,7 @@ step.
 
 ####Sending a GitHub Pull Request
 
-Pull requests are thoroughly explained [here](http://help.github.com/send-pull-requests/). You will want to send a
+Pull requests are thoroughly explained in the [github documentation](http://help.github.com/send-pull-requests/). You will want to send a
 pull request to the Pinta repository from your fork. When the developers
 see your request, they will test your solution and if it is good they
 will merge it into the Pinta source code. They will then close the bug
