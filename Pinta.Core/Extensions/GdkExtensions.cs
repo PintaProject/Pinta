@@ -120,5 +120,53 @@ namespace Pinta.Core
 		{
 			return r.X + r.Width - 1;
 		}
-	}
+
+        public static Cairo.Surface ToSurface (this Pixbuf pixbuf)
+        {
+            var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
+
+            using (var g = new Cairo.Context (surface)) {
+                Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, 0, 0);
+                g.Paint ();
+            }
+
+            return surface;
+        }
+
+        public static Pixbuf CreateColorSwatch (int size, Color color)
+        {
+            using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
+            using (var gc = new Gdk.GC (pmap)) {
+                gc.RgbFgColor = color;
+                pmap.DrawRectangle (gc, true, 0, 0, size, size);
+
+                gc.RgbFgColor = new Color (0, 0, 0);
+                pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+
+                return Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
+            }
+        }
+
+        public static Pixbuf CreateTransparentColorSwatch (bool drawBorder)
+        {
+            var size = 16;
+
+            using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
+            using (var gc = new Gdk.GC (pmap)) {
+                gc.RgbFgColor = new Color (255, 255, 255);
+                pmap.DrawRectangle (gc, true, 0, 0, size, size);
+
+                gc.RgbFgColor = new Color (200, 200, 200);
+                pmap.DrawRectangle (gc, true, 0, 0, (size / 2), (size / 2));
+                pmap.DrawRectangle (gc, true, size / 2, size / 2, (size / 2), (size / 2));
+
+                if (drawBorder) {
+                    gc.RgbFgColor = new Color (0, 0, 0);
+                    pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+                }
+
+                return Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
+            }
+        }
+    }
 }

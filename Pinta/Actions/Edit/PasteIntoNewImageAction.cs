@@ -54,7 +54,7 @@ namespace Pinta.Actions
 					if (image != null) {
 						Gdk.Size size = new Gdk.Size (image.Width, image.Height);
 
-						PintaCore.Workspace.NewDocument (size, true);
+						PintaCore.Workspace.NewDocument (size, new Cairo.Color (0, 0, 0, 0));
 						PintaCore.Actions.Edit.Paste.Activate ();
 						PintaCore.Actions.Edit.Deselect.Activate ();
 						return;

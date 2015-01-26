@@ -154,7 +154,7 @@ namespace Pinta.Core
 			ActiveWorkspace.Invalidate (rect);
 		}
 
-		public Document NewDocument (Gdk.Size imageSize, bool transparent)
+		public Document NewDocument (Gdk.Size imageSize, Color backgroundColor)
 		{
 			Document doc = CreateAndActivateDocument (null, imageSize);
 			doc.Workspace.CanvasSize = imageSize;
@@ -162,9 +162,9 @@ namespace Pinta.Core
 			// Start with an empty white layer
 			Layer background = doc.AddNewLayer (Catalog.GetString ("Background"));
 
-			if (!transparent) {
+			if (backgroundColor.A != 0) {
 				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
-					g.SetSourceRGB (1, 1, 1);
+					g.SetSourceColor (backgroundColor);
 					g.Paint ();
 				}
 			}

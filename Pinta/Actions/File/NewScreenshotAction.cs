@@ -60,7 +60,7 @@ namespace Pinta.Actions
 
 				GLib.Timeout.Add ((uint)delay * 1000, () => {
 					Screen screen = Screen.Default;
-					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), false);
+					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), new Cairo.Color (1, 1, 1));
 
 					using (Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height)) {
 						using (Cairo.Context g = new Cairo.Context (doc.UserLayers[0].Surface)) {

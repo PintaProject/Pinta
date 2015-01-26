@@ -145,7 +145,7 @@ namespace Pinta
 			else
 			{
 				// Create a blank document
-				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), false);
+				PintaCore.Workspace.NewDocument (new Gdk.Size (800, 600), new Cairo.Color (1, 1, 1));
 			}
 		}
 
