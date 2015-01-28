@@ -39,8 +39,9 @@ namespace Pinta
 		/// <summary>
 		/// Configures and builds a NewImageDialog object.
 		/// </summary>
-		/// <param name="imgWidth">Initial value of the width spin control.</param>
-		/// <param name="imgHeight">nitial value of the height spin control.</param>
+		/// <param name="imgWidth">Initial value of the width entry.</param>
+        /// <param name="imgHeight">Initial value of the height entry.</param>
+        /// <param name="isClipboardSize">Indicates if there is an image on the clipboard (and the size parameters represent the clipboard image size).</param>
         private bool allow_background_color;
         private bool has_clipboard;
         private bool suppress_events;
@@ -71,10 +72,7 @@ namespace Pinta
             allow_background_color = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
             BorderWidth = 4;
-            VBox.Spacing = 0;
-
-            HeightRequest = allow_background_color ? 290 : 270;
-            WidthRequest = 400;
+            VBox.Spacing = 4;
 
             Resizable = false;
             DefaultResponse = ResponseType.Ok;
@@ -394,6 +392,11 @@ namespace Pinta
             private Cairo.Color color;
 
             private int max_size = 175;
+
+            public PreviewArea ()
+            {
+                WidthRequest = 225;
+            }
 
             public void Update (Gdk.Size size)
             {
