@@ -95,6 +95,7 @@ namespace Pinta
             WireUpEvents ();
 
             UpdateOrientation ();
+            UpdatePresetSelection ();
             preview.Update (NewImageSize, NewImageBackground);
         }
 
@@ -136,7 +137,7 @@ namespace Pinta
                 var width = int.Parse (text_parts[0]);
                 var height = int.Parse (text_parts[2]);
 
-                return new Gdk.Size (portrait_radio.Active ? Math.Min (width, height) : Math.Max (width, height), portrait_radio.Active ? Math.Max (width, height) : Math.Min (width, height));
+                return new Gdk.Size (width, height);
             }
         }
 
@@ -327,6 +328,7 @@ namespace Pinta
                     preset_combo.Active = has_clipboard ? 1 : 0;
 
                 UpdateOrientation ();
+                UpdatePresetSelection ();
                 preview.Update (NewImageSize);
             };
 
@@ -343,12 +345,13 @@ namespace Pinta
                     preset_combo.Active = has_clipboard ? 1 : 0;
 
                 UpdateOrientation ();
+                UpdatePresetSelection ();
                 preview.Update (NewImageSize);
             };
 
             // Handle orientation changes
             portrait_radio.Toggled += (o, e) => {
-                if (portrait_radio.Active  && IsValidSize && NewImageWidth > NewImageHeight) {
+                if (portrait_radio.Active && IsValidSize && NewImageWidth > NewImageHeight) {
                     var temp = NewImageWidth;
                     width_entry.Text = height_entry.Text;
                     height_entry.Text = temp.ToString ();
@@ -377,6 +380,22 @@ namespace Pinta
                 portrait_radio.Activate ();
             else if (NewImageWidth > NewImageHeight && !landscape_radio.Active)
                 landscape_radio.Activate ();
+
+            for (var i = 1; i < preset_combo.GetItemCount (); i++) {
+                var text = preset_combo.GetValueAt<string> (i);
+
+                if (text == Catalog.GetString ("Clipboard") || text == Catalog.GetString ("Catalog"))
+                    continue;
+
+                var text_parts = text.Split ('x');
+                var width = int.Parse (text_parts[0].Trim ());
+                var height = int.Parse (text_parts[1].Trim ());
+
+                var new_size = new Gdk.Size (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
+                var new_text = string.Format ("{0} x {1}", new_size.Width, new_size.Height);
+
+                preset_combo.SetValueAt (i, new_text);
+            }
         }
 
         private void UpdateOkButton ()
@@ -384,6 +403,18 @@ namespace Pinta
             foreach (Widget widget in ActionArea.Children)
                 if (widget is Button && (widget as Button).Label == "gtk-ok")
                     widget.Sensitive = IsValidSize;
+        }
+
+        private void UpdatePresetSelection ()
+        {
+            if (!IsValidSize)
+                return;
+
+            var text = string.Format ("{0} x {1}", NewImageWidth, NewImageHeight);
+            var index = preset_combo.FindValue (text);
+
+            if (index >= 0 && preset_combo.Active != index)
+                preset_combo.Active = index;                
         }
 
         private class PreviewArea : DrawingArea
