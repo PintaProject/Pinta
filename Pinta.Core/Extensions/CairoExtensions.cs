@@ -1636,5 +1636,13 @@ namespace Pinta.Core
 					Math.Max(r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - minY);
 			}
 		}
+
+        public static Pattern ToTiledPattern (this Surface surface)
+        {
+            var pattern = new Cairo.SurfacePattern (surface);
+            pattern.Extend = Extend.Repeat;
+
+            return pattern;
+        }
 	}
 }

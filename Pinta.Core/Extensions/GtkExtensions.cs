@@ -196,5 +196,41 @@ namespace Pinta.Core
 				dialog.PreviewWidgetActive = false;
 			}
 		}
+
+        public static int GetItemCount (this ComboBox combo)
+        {
+            return (combo.Model as ListStore).IterNChildren ();
+        }
+
+        public static int FindValue<T> (this ComboBox combo, T value)
+        {
+            for (var i = 0; i < combo.GetItemCount (); i++)
+                if (combo.GetValueAt<T> (i).Equals (value))
+                    return i;
+
+            return -1;
+        }
+
+        public static T GetValueAt<T> (this ComboBox combo, int index)
+        {
+            TreeIter iter;
+            
+            // Set the tree iter to the correct row
+            (combo.Model as ListStore).IterNthChild (out iter, index);
+
+            // Retrieve the value of the first column at that row
+            return (T)combo.Model.GetValue (iter, 0);
+        }
+
+        public static void SetValueAt (this ComboBox combo, int index, object value)
+        {
+            TreeIter iter;
+
+            // Set the tree iter to the correct row
+            (combo.Model as ListStore).IterNthChild (out iter, index);
+
+            // Set the value of the first column at that row
+            combo.Model.SetValue (iter, 0, value);
+        }
 	}
 }

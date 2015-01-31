@@ -47,6 +47,7 @@ namespace Pinta.Actions
 		{
 			int imgWidth = 0;
 			int imgHeight = 0;
+            var using_clipboard = true;
 			
 			// Try to get the dimensions of an image on the clipboard
 			// for the initial width and height values on the NewImageDialog
@@ -56,16 +57,15 @@ namespace Pinta.Actions
 				// so use saved dimensions from settings
 				imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
 				imgHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
-			}
+                using_clipboard = false;
+            }
 
-			NewImageDialog dialog = new NewImageDialog (imgWidth, imgHeight);
-
-			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
+			var dialog = new NewImageDialog (imgWidth, imgHeight, using_clipboard);
 
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok) {
-				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), false);
+				PintaCore.Workspace.NewDocument (new Gdk.Size (dialog.NewImageWidth, dialog.NewImageHeight), dialog.NewImageBackground);
 
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);

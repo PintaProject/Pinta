@@ -176,7 +176,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.NewImageDialog.cs" />
     <Compile Include="DialogHandlers.cs" />
     <Compile Include="Dialogs\LayerPropertiesDialog.cs" />
     <Compile Include="Dialogs\ResizeImageDialog.cs" />
