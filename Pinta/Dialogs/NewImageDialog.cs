@@ -384,7 +384,7 @@ namespace Pinta
             for (var i = 1; i < preset_combo.GetItemCount (); i++) {
                 var text = preset_combo.GetValueAt<string> (i);
 
-                if (text == Catalog.GetString ("Clipboard") || text == Catalog.GetString ("Catalog"))
+                if (text == Catalog.GetString ("Clipboard") || text == Catalog.GetString ("Custom"))
                     continue;
 
                 var text_parts = text.Split ('x');
