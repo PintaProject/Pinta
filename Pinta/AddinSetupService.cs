@@ -46,7 +46,7 @@ namespace Pinta
 		public void RegisterRepositories (bool enable)
 		{
 			RegisterRepository (GetPlatformRepositoryUrl (),
-			                    Catalog.GetString ("Pinta Community Addins - Platform specific"),
+			                    Catalog.GetString ("Pinta Community Addins - Platform-Specific"),
 			                    enable);
 
 			RegisterRepository (GetAllRepositoryUrl (),

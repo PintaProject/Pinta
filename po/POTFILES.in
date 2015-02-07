@@ -123,12 +123,12 @@ Pinta/Dialogs/AboutDialog.cs
 Pinta/Dialogs/AboutPintaTabPage.cs
 Pinta/Dialogs/JpegCompressionDialog.cs
 Pinta/Dialogs/LayerPropertiesDialog.cs
+Pinta/Dialogs/NewImageDialog.cs
 Pinta/Dialogs/ResizeCanvasDialog.cs
 Pinta/Dialogs/ResizeImageDialog.cs
 Pinta/Dialogs/VersionInformationTabPage.cs
 Pinta/DockLibrary/DockItem.cs
 Pinta/DockLibrary/DockItemContainer.cs
-Pinta/gtk-gui/Pinta.NewImageDialog.cs
 Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs
 Pinta/gtk-gui/Pinta.ResizeImageDialog.cs
 Pinta/Main.cs

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-25 23:48-0400\n"
+"POT-Creation-Date: 2015-02-07 16:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -598,7 +598,7 @@ msgid "Background"
 msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:172
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:27
+#: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
 msgstr ""
 
@@ -1202,7 +1202,7 @@ msgid "Switch to Pencil tool"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
-#: ../Pinta.Tools/Tools/PencilTool.cs:47
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
 msgstr ""
 
@@ -1369,7 +1369,7 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:49
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
@@ -1496,7 +1496,7 @@ msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
-msgid "Close without saving"
+msgid "Close _without saving"
 msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
@@ -1569,11 +1569,11 @@ msgid "Rotate / Zoom Layer"
 msgstr ""
 
 #: ../Pinta/AddinSetupService.cs:49
-msgid "Pinta Platform Dependent Add-in Repository"
+msgid "Pinta Community Addins - Platform-Specific"
 msgstr ""
 
 #: ../Pinta/AddinSetupService.cs:53
-msgid "Pinta Platform Independent Add-in Repository"
+msgid "Pinta Community Addins - Cross-Platform"
 msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:123
@@ -1658,6 +1658,78 @@ msgstr ""
 msgid "Opacity:"
 msgstr ""
 
+#: ../Pinta/Dialogs/NewImageDialog.cs:133
+#: ../Pinta/Dialogs/NewImageDialog.cs:170
+#: ../Pinta/Dialogs/NewImageDialog.cs:298
+#: ../Pinta/Dialogs/NewImageDialog.cs:387
+msgid "Clipboard"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:133
+#: ../Pinta/Dialogs/NewImageDialog.cs:172
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:387
+msgid "Custom"
+msgstr ""
+
+#. Preset Combo
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+msgid "Preset:"
+msgstr ""
+
+#. Width Entry
+#: ../Pinta/Dialogs/NewImageDialog.cs:182
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+msgid "Width:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:189
+#: ../Pinta/Dialogs/NewImageDialog.cs:206
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+msgid "pixels"
+msgstr ""
+
+#. Height Entry
+#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+msgid "Height:"
+msgstr ""
+
+#. Orientation Radio options
+#: ../Pinta/Dialogs/NewImageDialog.cs:216
+msgid "Orientation:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:219
+msgid "Portrait"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:227
+msgid "Landscape"
+msgstr ""
+
+#. Background Color options
+#: ../Pinta/Dialogs/NewImageDialog.cs:236
+msgid "Background:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:239
+msgid "White"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:247
+msgid "Background Color"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:255
+msgid "Transparent"
+msgstr ""
+
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
 msgstr ""
@@ -1687,31 +1759,6 @@ msgstr ""
 
 #: ../Pinta/DockLibrary/DockItemContainer.cs:192
 msgid "Dock"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
-msgid "New Image Size          "
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
-msgid "pixels"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
-msgid "Width:"
-msgstr ""
-
-#: ../Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
-msgid "Height:"
 msgstr ""
 
 #. Container child hbox1.Gtk.Box+BoxChild

@@ -69,11 +69,11 @@ namespace Pinta.Actions
 			// Use the standard button order for each OS.
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				md.AddButton (Stock.Save, ResponseType.Yes);
-				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
+				md.AddButton (Catalog.GetString ("Close _without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			}
 			else {
-				md.AddButton (Catalog.GetString ("Close without saving"), ResponseType.No);
+				md.AddButton (Catalog.GetString ("Close _without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 			}
