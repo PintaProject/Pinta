@@ -29,7 +29,7 @@ namespace Pinta.Effects
 			get { return true; }
 		}
 
-		public PolarInversionData Data {
+		public new PolarInversionData Data {
 			get { return EffectData as PolarInversionData; }
 		}
 

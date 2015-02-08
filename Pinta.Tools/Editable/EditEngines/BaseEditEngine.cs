@@ -2020,7 +2020,6 @@ namespace Pinta.Tools
 				}
 
 
-				ControlPoint selectedPoint = controlPoints.ElementAt(SelectedPointIndex);
 				ControlPoint previousPoint = controlPoints.ElementAt(previousPointIndex);
 				ControlPoint oppositePoint = controlPoints.ElementAt(oppositePointIndex);
 				ControlPoint nextPoint = controlPoints.ElementAt(nextPointIndex);
