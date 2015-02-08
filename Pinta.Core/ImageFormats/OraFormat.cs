@@ -79,6 +79,7 @@ namespace Pinta.Core
 
             } catch { }   
 
+            // must have stack.xml to be a valid OpenRaster
             XmlDocument stackXml = new XmlDocument ();            
             stackXml.Load (zfile.GetInputStream (zfile.GetEntry ("stack.xml")));
             
@@ -218,13 +219,13 @@ namespace Pinta.Core
             nsmgr.AddNamespace ("dc", nsdc);
             nsmgr.AddNamespace ("meta", nsmeta);
             
-            // author/creator
+            // author/creator 
             XmlNode authorElement = metaXml.SelectSingleNode ("//dc:creator", nsmgr);
             PintaCore.Workspace.ActiveDocument.Author = authorElement.InnerText;
-            // title
+            // title 
             XmlNode titleElement = metaXml.SelectSingleNode ("//dc:title", nsmgr);
             PintaCore.Workspace.ActiveDocument.Title = titleElement.InnerText;
-            // subject
+            // subject 
             XmlNode subjectElement = metaXml.SelectSingleNode ("//dc:subject", nsmgr);
             PintaCore.Workspace.ActiveDocument.Subject = subjectElement.InnerText;
             // publisher
@@ -275,7 +276,7 @@ namespace Pinta.Core
             XmlWriter writer = XmlWriter.Create (stream, settings);
             
             writer.WriteStartElement ("image");
-//          writer.WriteAttributeString ("version", "0.0.1"); // mandatory
+            writer.WriteAttributeString ("version", "0.0.3"); // mandatory
             writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
             writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
 //          writer.WriteAttributeString ("xres", "600"); // optional
@@ -376,7 +377,7 @@ namespace Pinta.Core
             stream.Write (databytes, 0, databytes.Length);
              */
             stream.PutNextEntry (new ZipEntry ("meta.xml"));
-            databytes = GetMetaXmlData ();
+            databytes = GetMetaXmlData (document);
             stream.Write (databytes, 0, databytes.Length);
             
             stream.PutNextEntry (new ZipEntry ("stack.xml"));
@@ -638,7 +639,7 @@ namespace Pinta.Core
 
         // meta.xml OpenDocument optional in theory
         // in practice required to avoid unwanted error messages
-        private byte[] GetMetaXmlData ()
+        private byte[] GetMetaXmlData (Document document)
         {
             string useragent = PintaCore.ApplicationName + "/" + PintaCore.ApplicationVersion + "$" + Environment.OSVersion.ToString ();
 
@@ -667,15 +668,15 @@ namespace Pinta.Core
             // TODO date / creation date / other dates // vlow priority
             // Author/Creator dc:creator
             writer.WriteStartElement ("dc", "creator", nsdc);
-            writer.WriteString (PintaCore.Workspace.ActiveDocument.Author);
+            writer.WriteString (document.Author);
             writer.WriteEndElement ();
             // Title
             writer.WriteStartElement ("dc", "title", nsdc);
-            writer.WriteString (PintaCore.Workspace.ActiveDocument.Title);
+            writer.WriteString (document.Title);
             writer.WriteEndElement ();
             // Subject
             writer.WriteStartElement ("dc", "subject", nsdc);
-            writer.WriteString (PintaCore.Workspace.ActiveDocument.Subject);
+            writer.WriteString (document.Subject);
             writer.WriteEndElement ();
             // Publisher
             writer.WriteStartElement ("dc", "publisher", nsdc);
@@ -683,11 +684,11 @@ namespace Pinta.Core
             writer.WriteEndElement ();
             // Comments/Description
             writer.WriteStartElement ("dc", "description", nsdc);
-            writer.WriteString(PintaCore.Workspace.ActiveDocument.Comments);
+            writer.WriteString(document.Comments);
             writer.WriteEndElement ();
             // keywords, multiple tags
             writer.WriteStartElement ("meta", "keyword", nsmeta);
-            writer.WriteString (PintaCore.Workspace.ActiveDocument.Keywords);
+            writer.WriteString (document.Keywords);
             writer.WriteEndElement ();
             
             // User defined: Name Value pairs
