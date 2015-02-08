@@ -91,6 +91,9 @@ namespace Pinta.Core
 			// Make sure these are the same group so only one will be selected at a time
 			Inches.Group = Pixels.Group;
 			Centimeters.Group = Pixels.Group;
+
+            // The toolbar is shown by default.
+            ToolBar.Active = true;
 		}
 
 		#region Initialization
