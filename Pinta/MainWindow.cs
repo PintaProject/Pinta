@@ -43,8 +43,6 @@ namespace Pinta
 
 		CanvasPad canvas_pad;
 
-		ActionHandlers dialog_handlers;
-		
 		public MainWindow ()
 		{
 			// Build our window
@@ -52,7 +50,7 @@ namespace Pinta
 
 			// Initialize interface things
 			window_shell.AddAccelGroup (PintaCore.Actions.AccelGroup);
-			dialog_handlers = new ActionHandlers ();
+			new ActionHandlers ();
 
 			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
 			PintaCore.Chrome.InitializeErrorDialogHandler ((parent, message, details) => {

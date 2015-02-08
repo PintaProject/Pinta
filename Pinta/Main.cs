@@ -103,8 +103,7 @@ namespace Pinta
 			}
 			
 			Application.Init ();
-			MainWindow win = new MainWindow ();
-			//win.Show ();
+			new MainWindow ();
 			
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
