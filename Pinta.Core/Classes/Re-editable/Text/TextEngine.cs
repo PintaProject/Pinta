@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Text;
 using Gdk;
 using Pinta.Core;
-using System.Security;
 using System.Reflection;
 using System.Linq;
 
@@ -21,33 +20,23 @@ namespace Pinta.Core
 {
 	public class TextEngine
 	{
-		private Point origin;
-		private Pango.Layout layout;
-
 		private List<string> lines;
 
         private TextPosition currentPos;
 		// Relative coordinate of selection.
 		private int selectionOffset = 0;
 
-		bool underline;
-		Gtk.IMMulticontext imContext;
+        public TextAlignment Alignment { get; set; }
+        public string FontFace { get; private set; }
+        public int FontSize { get; private set; }
+        public bool Bold { get; private set; }
+        public bool Italic { get; private set; }
+        public bool Underline { get; private set; }
 
-		public TextEngine()
-		{
-			lines = new List<string> ();
-			lines.Add(string.Empty);
-			textMode = TextMode.Unchanged;
-
-			layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
-			imContext = new Gtk.IMMulticontext ();
-			imContext.Commit += OnCommit;
-		}
-
-		#region Public Properties
-		public TextPosition CurrentPosition {
-            get { return currentPos; }
-		}
+		public TextPosition CurrentPosition { get { return currentPos; } }
+		public int LineCount { get { return lines.Count; } }
+		public TextMode textMode;
+        public Point Origin { get; set; }
 
 		public EditingMode EditMode {
 			get
@@ -66,52 +55,14 @@ namespace Pinta.Core
 			}
 		}
 
-		public int FontHeight { get { return GetCursorLocation ().Height; } }
-		public Pango.Layout Layout { get { return layout; } }
-		public int LineCount { get { return lines.Count; } }
-		public TextMode textMode;
+        public event EventHandler Modified;
 
-		//The position to draw the text at.
-		public Point Origin {
-			get { return origin; }
-			set { origin = value; }
-		}
-
-		public Rectangle[] SelectionRectangles
+		public TextEngine()
 		{
-			get {
-				List<Rectangle> rects = new List<Rectangle> ();
-				Point p1, p2;
-
-				if (selectionOffset > 0) {
-					p1 = TextPositionToPoint (currentPos);
-
-					ForeachLine (currentPos, selectionOffset, (currentLinePos, strpos, endpos) =>
-						{
-					        p2 = TextPositionToPoint (new TextPosition (currentLinePos , endpos));
-							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
-							if (currentLinePos + 1 < lines.Count)
-								p1 = TextPositionToPoint (new TextPosition (currentLinePos + 1, 0));
-					             });
-					return rects.ToArray ();
-
-				} else if (selectionOffset < 0) {
-					TextPosition mypos = IndexToPosition (PositionToIndex (currentPos) + selectionOffset);
-					p1 = TextPositionToPoint (mypos);
-					ForeachLine (mypos, -selectionOffset, (currentLinePos, strpos, endpos) =>
-						{
-					        p2 = TextPositionToPoint (new TextPosition (currentLinePos , endpos));
-							rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
-							if (currentLinePos + 1 < lines.Count)
-								p1 = TextPositionToPoint (new TextPosition (currentLinePos + 1, 0));
-					             });
-					return rects.ToArray ();
-				}
-				return new Rectangle[] {};
-			}
+			lines = new List<string> ();
+			lines.Add(string.Empty);
+			textMode = TextMode.Unchanged;
 		}
-
-		#endregion
 
 		#region Public Methods
 		public void Clear ()
@@ -122,10 +73,10 @@ namespace Pinta.Core
 
             currentPos = new TextPosition (0, 0);
 
-			origin = Point.Zero;
+			Origin = Point.Zero;
 			selectionOffset = 0;
 
-			Recalculate ();
+            OnModified ();
 		}
 
 		/// <summary>
@@ -136,12 +87,16 @@ namespace Pinta.Core
 		{
 			TextEngine clonedTE = new TextEngine();
 
-			clonedTE.layout = layout.Copy();
 			clonedTE.lines = lines.ToList();
 			clonedTE.textMode = textMode;
             clonedTE.currentPos = currentPos;
 			clonedTE.selectionOffset = selectionOffset;
-			clonedTE.underline = underline;
+            clonedTE.FontFace = FontFace;
+            clonedTE.FontSize = FontSize;
+            clonedTE.Bold = Bold;
+            clonedTE.Italic = Italic;
+            clonedTE.Underline = Underline;
+            clonedTE.Alignment = Alignment;
 			clonedTE.Origin = new Point(Origin.X, Origin.Y);
 
 			//The rest of the variables are calculated on the spot.
@@ -149,48 +104,9 @@ namespace Pinta.Core
 			return clonedTE;
 		}
 
-		public Rectangle GetCursorLocation ()
-		{
-			Pango.Rectangle weak, strong;
-
-			int index = PositionToIndex (CurrentPosition);
-
-			layout.GetCursorPos (index, out strong, out weak);
-
-			int x = Pango.Units.ToPixels (strong.X) + origin.X;
-			int y = Pango.Units.ToPixels (strong.Y) + origin.Y;
-			int w = Pango.Units.ToPixels (strong.Width);
-			int h = Pango.Units.ToPixels (strong.Height);
-
-			return new Rectangle (x, y, w, h);
-		}
-
-		public Rectangle GetLayoutBounds ()
-		{
-			Pango.Rectangle ink, logical;
-			layout.GetPixelExtents (out ink, out logical);
-			var cursor = GetCursorLocation ();
-
-			// GetPixelExtents() doesn't really return a very sensible height.
-			// Instead of doing some hacky arithmetic to correct it, the height will just
-			// be the cursor's height times the number of lines.
-			return new Rectangle (origin.X, origin.Y, ink.Width, cursor.Height * LineCount);
-		}
-
 		public bool IsEmpty()
 		{
 			return (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty));
-		}
-
-		public TextPosition PointToTextPosition (Point point)
-		{
-			int index, trailing;
-			int x = Pango.Units.FromPixels (point.X - origin.X);
-			int y = Pango.Units.FromPixels (point.Y - origin.Y);
-
-			layout.XyToIndex (x, y, out index, out trailing);
-
-			return IndexToPosition (index + trailing);
 		}
 
 		public override string ToString ()
@@ -203,18 +119,38 @@ namespace Pinta.Core
 			return sb.ToString ();
 		}
 
-		public void SetAlignment (TextAlignment alignment)
+		public Tuple<TextPosition, TextPosition>[] SelectionRegions
 		{
-			switch (alignment) {
-				case TextAlignment.Right:
-					layout.Alignment = Pango.Alignment.Right;
-					break;
-				case TextAlignment.Center:
-					layout.Alignment = Pango.Alignment.Center;
-					break;
-				case TextAlignment.Left:
-					layout.Alignment = Pango.Alignment.Left;
-					break;
+			get {
+                var regions = new List<Tuple<TextPosition, TextPosition>> ();
+                TextPosition p1, p2;
+
+                if (selectionOffset > 0)
+                {
+                    p1 = currentPos;
+
+                    ForeachLine (currentPos, selectionOffset, (currentLinePos, strpos, endpos) =>
+                        {
+                            p2 = new TextPosition (currentLinePos, endpos);
+                            regions.Add (Tuple.Create (p1, p2));
+                            if (currentLinePos + 1 < lines.Count)
+                                p1 = new TextPosition (currentLinePos + 1, 0);
+                        });
+                }
+                else if (selectionOffset < 0)
+                {
+                    TextPosition mypos = IndexToPosition (PositionToIndex (currentPos) + selectionOffset);
+                    p1 = mypos;
+                    ForeachLine (mypos, -selectionOffset, (currentLinePos, strpos, endpos) =>
+                        {
+                            p2 = new TextPosition (currentLinePos, endpos);
+                            regions.Add (Tuple.Create(p1, p2));
+                            if (currentLinePos + 1 < lines.Count)
+                                p1 = new TextPosition (currentLinePos + 1, 0);
+                        });
+                }
+
+                return regions.ToArray ();
 			}
 		}
 
@@ -228,64 +164,28 @@ namespace Pinta.Core
 
 		public void SetFont (string face, int size, bool bold, bool italic, bool underline)
 		{
-			var font = Pango.FontDescription.FromString (string.Format ("{0} {1}", face, size));
-
-			// Forces font variants to be rendered properly
-			// (e.g. this will use "Ubuntu Condensed" instead of "Ubuntu").
-			font.Family = face;
-
-			font.Weight = bold ? Pango.Weight.Bold : Pango.Weight.Normal;
-			font.Style = italic ? Pango.Style.Italic : Pango.Style.Normal;
-
-			layout.FontDescription = font;
-
-			this.underline = underline;
-			Recalculate ();
-		}
-
-		public Point TextPositionToPoint (TextPosition p)
-		{
-			int index = PositionToIndex (p);
-
-			var rect = layout.IndexToPos (index);
-
-			int x = Pango.Units.ToPixels (rect.X) + origin.X;
-			int y = Pango.Units.ToPixels (rect.Y) + origin.Y;
-
-			return new Point (x, y);
+            FontFace = face;
+            FontSize = size;
+            Bold = bold;
+            Italic = italic;
+            Underline = underline;
+			OnModified ();
 		}
 
 		#endregion
 
 		#region Key Handlers
-		public bool HandleKeyPress (Gdk.EventKey evt)
-		{
-			return imContext.FilterKeypress (evt);
-		}
+        public void InsertText (string str)
+        {
+            if (selectionOffset != 0)
+                DeleteSelection ();
 
-		void OnCommit (object sender, Gtk.CommitArgs ca)
-		{
-			try {
-				if (selectionOffset != 0)
-					DeleteSelection ();
-				for (int i = 0; i < ca.Str.Length; i++) {
-					char utf32Char;
-					if (char.IsHighSurrogate (ca.Str, i)) {
-						utf32Char = (char)char.ConvertToUtf32 (ca.Str, i);
-						i++;
-					} else {
-						utf32Char = ca.Str[i];
-					}
-					lines[currentPos.Line] = lines[currentPos.Line].Insert (currentPos.Offset, utf32Char.ToString ());
-					textMode = TextMode.Uncommitted;
-					currentPos.Offset += utf32Char.ToString ().Length;
-				}
+            lines[currentPos.Line] = lines[currentPos.Line].Insert (currentPos.Offset, str);
+            textMode = TextMode.Uncommitted;
+            currentPos.Offset += str.Length;
 
-				Recalculate ();
-			} finally {
-				imContext.Reset ();
-			}
-		}
+            OnModified ();
+        }
 
 		public void PerformEnter ()
 		{
@@ -306,7 +206,7 @@ namespace Pinta.Core
 
 			currentPos.Line++;
 			currentPos.Offset = 0;
-			Recalculate ();
+			OnModified ();
 		}
 
 		public void PerformBackspace ()
@@ -325,7 +225,7 @@ namespace Pinta.Core
 				lines.RemoveAt (currentPos.Line);
 				currentPos.Line--;
 				currentPos.Offset = ntp;
-				Recalculate ();
+				OnModified ();
 			} else if (currentPos.Offset > 0) {
 				// We're in the middle of a line, delete the previous character
 				string ln = lines[currentPos.Line];
@@ -337,7 +237,7 @@ namespace Pinta.Core
 					lines[currentPos.Line] = ln.Substring (0, currentPos.Offset - 1) + ln.Substring (currentPos.Offset);
 
 				currentPos.Offset--;
-				Recalculate ();
+				OnModified ();
 			}
 
 			textMode = TextMode.Uncommitted;
@@ -365,7 +265,7 @@ namespace Pinta.Core
 
 			textMode = TextMode.Uncommitted;
 
-			Recalculate ();
+			OnModified ();
 		}
 
 		public void PerformLeft (bool control, bool shift)
@@ -522,40 +422,26 @@ namespace Pinta.Core
 
 		public void PerformUp (bool shift)
 		{
-			// Move to the letter above this one
-			Point point = TextPositionToPoint (CurrentPosition);
-
-			point.Y -= FontHeight;
-
-			TextPosition pos = PointToTextPosition (point);
-
-			if (shift)
-				selectionOffset += PositionToIndex (currentPos) - PositionToIndex (pos);
-			else
-				selectionOffset = 0;
-
-			SetCursorPosition (pos, false);
+            if (currentPos.Line > 0)
+            {
+                currentPos.Line--;
+                int offset = currentPos.Offset;
+                currentPos.Offset = Math.Min (currentPos.Offset,
+                                              lines[currentPos.Line].Length);
+                selectionOffset += offset + (Math.Max (0, lines[currentPos.Line].Length - offset));
+            }
 		}
 
 		public void PerformDown (bool shift)
 		{
-			if (CurrentPosition.Line == LineCount - 1) {
-				// Last line -> don't do squat
-			} else {
-				// Move to the letter below this one
-				Point point = TextPositionToPoint (CurrentPosition);
-
-				point.Y += FontHeight;
-
-				TextPosition pos = PointToTextPosition (point);
-
-				if (shift)
-					selectionOffset -= PositionToIndex (pos) - PositionToIndex (currentPos);
-				else
-					selectionOffset = 0;
-
-				SetCursorPosition (pos, false);
-			}
+            if (currentPos.Line < LineCount - 1)
+            {
+                TextPosition oldpos = currentPos;
+                currentPos.Line++;
+                currentPos.Offset = Math.Min (currentPos.Offset,
+                                              lines[currentPos.Line].Length);
+                selectionOffset -= (lines[oldpos.Line].Length - oldpos.Offset) + currentPos.Offset;
+            }
 		}
 
 		public void PerformCopy (Gtk.Clipboard clipboard)
@@ -608,7 +494,7 @@ namespace Pinta.Core
 
 			textMode = TextMode.Uncommitted;
 
-			Recalculate ();
+			OnModified ();
 			return true;
 		}
 		#endregion
@@ -632,7 +518,7 @@ namespace Pinta.Core
 			action (currentLinePos, strTextPos, strTextPos + TextPosLenght);
 		}
 
-		private TextPosition IndexToPosition (int index)
+		public TextPosition IndexToPosition (int index)
 		{
 			int current = 0;
 			int line = 0;
@@ -656,7 +542,7 @@ namespace Pinta.Core
 			return new TextPosition (lines.Count - 1, lines[lines.Count - 1].Length);
 		}
 
-		private int PositionToIndex (TextPosition p)
+		public int PositionToIndex (TextPosition p)
 		{
 			int index = 0;
 
@@ -683,15 +569,12 @@ namespace Pinta.Core
     			return i;
 		}
 		
-		private void Recalculate ()
-		{
-			string markup = SecurityElement.Escape (ToString ());
-
-			if (underline)
-				markup = string.Format ("<u>{0}</u>", markup);
-
-			layout.SetMarkup (markup);
-		}
+        private void OnModified ()
+        {
+            EventHandler handler = Modified;
+            if (handler != null)
+                handler (this, EventArgs.Empty);
+        }
 
 		private string GetText (TextPosition startPos, int len)
 		{
@@ -748,8 +631,7 @@ namespace Pinta.Core
 
 			textMode = TextMode.Uncommitted;
 
-			Recalculate ();
-
+            OnModified ();
 		}
 
 		//TODO video inverse for selected text

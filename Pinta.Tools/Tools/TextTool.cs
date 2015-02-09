@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Gdk;
 using Gtk;
 using Mono.Unix;
@@ -36,6 +37,9 @@ namespace Pinta.Tools
 		// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
 		// if the selection changes before the text is finalized.
 		private DocumentSelection selection;
+
+        private Gtk.IMMulticontext imContext;
+        private TextLayout layout;
 
 		private Rectangle CurrentTextBounds
 		{
@@ -65,6 +69,15 @@ namespace Pinta.Tools
 				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine = value;
 			}
 		}
+
+        private TextLayout TextLayout
+        {
+            get {
+                if (layout.Engine != CurrentTextEngine)
+                    layout.Engine = CurrentTextEngine;
+                return layout;
+            }
+        }
 
 		//While this is true, text will not be finalized upon Surface.Clone calls.
 		private bool ignoreCloneFinalizations = false;
@@ -101,6 +114,9 @@ namespace Pinta.Tools
 		public TextTool ()
 		{
 			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
+            imContext = new Gtk.IMMulticontext ();
+            imContext.Commit += OnIMCommit;
+            layout = new TextLayout ();
 		}
 
 		static TextTool ()
@@ -436,7 +452,7 @@ namespace Pinta.Tools
 		private void UpdateFont ()
 		{
 			if (CurrentTextEngine != null) {
-				CurrentTextEngine.SetAlignment (Alignment);
+                CurrentTextEngine.Alignment = Alignment;
 				CurrentTextEngine.SetFont (Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
 			}
 
@@ -554,7 +570,7 @@ namespace Pinta.Tools
 					StartEditing();
 
 					//Change the position of the cursor to where the mouse clicked.
-					TextPosition p = CurrentTextEngine.PointToTextPosition(pt);
+					TextPosition p = TextLayout.PointToTextPosition(pt);
 					CurrentTextEngine.SetCursorPosition(p, true);
 
 					//Redraw the text with the new cursor position.
@@ -596,7 +612,7 @@ namespace Pinta.Tools
 							is_editing = true;
 
 							//Set the cursor in the editable text where the mouse was clicked.
-							TextPosition p = CurrentTextEngine.PointToTextPosition(pt);
+							TextPosition p = TextLayout.PointToTextPosition(pt);
 							CurrentTextEngine.SetCursorPosition(p, true);
 
 							//Redraw the editable text with the cursor.
@@ -620,7 +636,7 @@ namespace Pinta.Tools
 						// Start editing at the cursor location
 						clickPoint = pt;
 						CurrentTextEngine.Clear();
-						clickPoint.Offset (0, -CurrentTextEngine.FontHeight/2);
+						clickPoint.Offset (0, -TextLayout.FontHeight/2);
 						CurrentTextEngine.Origin = clickPoint;
 						StartEditing();
 						RedrawText(true, true);
@@ -859,13 +875,36 @@ namespace Pinta.Tools
 		private bool TryHandleChar(EventKey eventKey)
 		{
 			// Try to handle it as a character
-			if (CurrentTextEngine.HandleKeyPress (eventKey)) {
+			if (imContext.FilterKeypress (eventKey)) {
 				return true;
 			}
 
 			// We didn't handle the key
 			return false;
 		}
+
+        private void OnIMCommit (object o, CommitArgs args)
+        {
+			try {
+                var str = new StringBuilder ();
+
+				for (int i = 0; i < args.Str.Length; i++) {
+					char utf32Char;
+					if (char.IsHighSurrogate (args.Str, i)) {
+						utf32Char = (char)char.ConvertToUtf32 (args.Str, i);
+						i++;
+					} else {
+						utf32Char = args.Str[i];
+					}
+
+                    str.Append (utf32Char.ToString ());
+				}
+
+                CurrentTextEngine.InsertText (str.ToString ());
+			} finally {
+				imContext.Reset ();
+			}
+        }
 		#endregion
 
 		#region Start/Stop Editing
@@ -951,7 +990,7 @@ namespace Pinta.Tools
 		/// <param name="useTextLayer">Whether or not to use the TextLayer (as opposed to the Userlayer).</param>
 		private void RedrawText (bool showCursor, bool useTextLayer)
 		{
-			Rectangle r = CurrentTextEngine.GetLayoutBounds();
+			Rectangle r = TextLayout.GetLayoutBounds();
 			r.Inflate(10 + OutlineWidth, 10 + OutlineWidth);
 			InflateAndInvalidate(r);
 			CurrentTextBounds = r;
@@ -980,7 +1019,7 @@ namespace Pinta.Tools
 				if (useTextLayer) {
 					// Selected Text
 					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
-					foreach (Rectangle rect in CurrentTextEngine.SelectionRectangles)
+					foreach (Rectangle rect in TextLayout.SelectionRectangles)
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
 
@@ -997,30 +1036,30 @@ namespace Pinta.Tools
 				//Fill in background
 				if (BackgroundFill) {
 					using (var g2 = new Cairo.Context (surf)) {
-						g2.FillRectangle(CurrentTextEngine.GetLayoutBounds().ToCairoRectangle(), PintaCore.Palette.SecondaryColor);
+						g2.FillRectangle(TextLayout.GetLayoutBounds().ToCairoRectangle(), PintaCore.Palette.SecondaryColor);
 					}
 				}
 
 				// Draw the text
 				if (FillText)
-					Pango.CairoHelper.ShowLayout (g, CurrentTextEngine.Layout);
+					Pango.CairoHelper.ShowLayout (g, TextLayout.Layout);
 
 				if (FillText && StrokeText) {
 					g.SetSourceColor (PintaCore.Palette.SecondaryColor);
 					g.LineWidth = OutlineWidth;
 
-					Pango.CairoHelper.LayoutPath (g, CurrentTextEngine.Layout);
+					Pango.CairoHelper.LayoutPath (g, TextLayout.Layout);
 					g.Stroke ();
 				} else if (StrokeText) {
 					g.SetSourceColor (PintaCore.Palette.PrimaryColor);
 					g.LineWidth = OutlineWidth;
 
-					Pango.CairoHelper.LayoutPath (g, CurrentTextEngine.Layout);
+					Pango.CairoHelper.LayoutPath (g, TextLayout.Layout);
 					g.Stroke ();
 				}
 
 				if (showCursor) {
-					var loc = CurrentTextEngine.GetCursorLocation ();
+					var loc = TextLayout.GetCursorLocation ();
 
 					g.Antialias = Cairo.Antialias.None;
 					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
