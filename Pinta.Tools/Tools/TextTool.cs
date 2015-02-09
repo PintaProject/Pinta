@@ -70,7 +70,7 @@ namespace Pinta.Tools
 			}
 		}
 
-        private TextLayout TextLayout
+        private TextLayout CurrentTextLayout
         {
             get {
                 if (layout.Engine != CurrentTextEngine)
@@ -570,7 +570,7 @@ namespace Pinta.Tools
 					StartEditing();
 
 					//Change the position of the cursor to where the mouse clicked.
-					TextPosition p = TextLayout.PointToTextPosition(pt);
+					TextPosition p = CurrentTextLayout.PointToTextPosition(pt);
 					CurrentTextEngine.SetCursorPosition(p, true);
 
 					//Redraw the text with the new cursor position.
@@ -612,7 +612,7 @@ namespace Pinta.Tools
 							is_editing = true;
 
 							//Set the cursor in the editable text where the mouse was clicked.
-							TextPosition p = TextLayout.PointToTextPosition(pt);
+							TextPosition p = CurrentTextLayout.PointToTextPosition(pt);
 							CurrentTextEngine.SetCursorPosition(p, true);
 
 							//Redraw the editable text with the cursor.
@@ -636,7 +636,7 @@ namespace Pinta.Tools
 						// Start editing at the cursor location
 						clickPoint = pt;
 						CurrentTextEngine.Clear();
-						clickPoint.Offset (0, -TextLayout.FontHeight/2);
+						clickPoint.Offset (0, -CurrentTextLayout.FontHeight/2);
 						CurrentTextEngine.Origin = clickPoint;
 						StartEditing();
 						RedrawText(true, true);
@@ -990,7 +990,7 @@ namespace Pinta.Tools
 		/// <param name="useTextLayer">Whether or not to use the TextLayer (as opposed to the Userlayer).</param>
 		private void RedrawText (bool showCursor, bool useTextLayer)
 		{
-			Rectangle r = TextLayout.GetLayoutBounds();
+			Rectangle r = CurrentTextLayout.GetLayoutBounds();
 			r.Inflate(10 + OutlineWidth, 10 + OutlineWidth);
 			InflateAndInvalidate(r);
 			CurrentTextBounds = r;
@@ -1019,7 +1019,7 @@ namespace Pinta.Tools
 				if (useTextLayer) {
 					// Selected Text
 					Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
-					foreach (Rectangle rect in TextLayout.SelectionRectangles)
+					foreach (Rectangle rect in CurrentTextLayout.SelectionRectangles)
 						g.FillRectangle (rect.ToCairoRectangle (), c);
 				}
 
@@ -1036,30 +1036,30 @@ namespace Pinta.Tools
 				//Fill in background
 				if (BackgroundFill) {
 					using (var g2 = new Cairo.Context (surf)) {
-						g2.FillRectangle(TextLayout.GetLayoutBounds().ToCairoRectangle(), PintaCore.Palette.SecondaryColor);
+						g2.FillRectangle(CurrentTextLayout.GetLayoutBounds().ToCairoRectangle(), PintaCore.Palette.SecondaryColor);
 					}
 				}
 
 				// Draw the text
 				if (FillText)
-					Pango.CairoHelper.ShowLayout (g, TextLayout.Layout);
+					Pango.CairoHelper.ShowLayout (g, CurrentTextLayout.Layout);
 
 				if (FillText && StrokeText) {
 					g.SetSourceColor (PintaCore.Palette.SecondaryColor);
 					g.LineWidth = OutlineWidth;
 
-					Pango.CairoHelper.LayoutPath (g, TextLayout.Layout);
+					Pango.CairoHelper.LayoutPath (g, CurrentTextLayout.Layout);
 					g.Stroke ();
 				} else if (StrokeText) {
 					g.SetSourceColor (PintaCore.Palette.PrimaryColor);
 					g.LineWidth = OutlineWidth;
 
-					Pango.CairoHelper.LayoutPath (g, TextLayout.Layout);
+					Pango.CairoHelper.LayoutPath (g, CurrentTextLayout.Layout);
 					g.Stroke ();
 				}
 
 				if (showCursor) {
-					var loc = TextLayout.GetCursorLocation ();
+					var loc = CurrentTextLayout.GetCursorLocation ();
 
 					g.Antialias = Cairo.Antialias.None;
 					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
