@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DocumentPropertiesDialog.cs
 //
 
@@ -21,13 +21,13 @@ namespace Pinta
         public string keywords;
         public string comments;
 
-		private Entry authorEntry;
-		private Entry titleEntry;
-		private Entry subjectEntry;
-		private Entry keywordsEntry;
-		private TextView commentsTextView; // TODO: 3 lines instead of single line 
-		// private TextBuffer buffer;
-		
+        private Entry authorEntry;
+        private Entry titleEntry;
+        private Entry subjectEntry;
+        private Entry keywordsEntry;
+        private TextView commentsTextView; // TODO: 3 lines instead of single line
+        // private TextBuffer buffer;
+        
         public DocumentPropertiesDialog () : base (Catalog.GetString ("Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
         {
             Build ();
@@ -88,13 +88,13 @@ namespace Pinta
             get {
                 return new DocumentProperties (author, title, subject, keywords, comments);
             }
-        	set {
-		        authorEntry.Text = author;
-		        titleEntry.Text = title;
-		        subjectEntry.Text = subject;
-		        keywordsEntry.Text = keywords;
-		        commentsTextView.Buffer.Text = comments;
-        	}
+            set {
+                authorEntry.Text = author;
+                titleEntry.Text = title;
+                subjectEntry.Text = subject;
+                keywordsEntry.Text = keywords;
+                commentsTextView.Buffer.Text = comments;
+            }
         }
         
         private void OnAuthorChanged (object sender, EventArgs e)
@@ -130,63 +130,71 @@ namespace Pinta
 
             VBox tBox = new VBox ();// HACK handwriting GUI code sucks
             tBox.Spacing = 10;
-            
+
             Notebook notebook = new Notebook ();
             notebook.BorderWidth = 6;
             // General Page
-//            notebook.AppendPage (new Button ("1"), new Label ("General"));
+////            notebook.AppendPage (new Button ("1"), new Label ("General"));
             // Description Page
             notebook.AppendPage (tBox, new Label (Catalog.GetString ("Description")));
-//            notebook.AppendPage (new Button ("3"), new Label ("Custom"));            
-                                 
-            VBox.Spacing = 10;
-			VBox.PackStart (notebook, true, true, 0);
+////            notebook.AppendPage (new Button ("3"), new Label ("Custom"));            
+////            notebook.AppendPage (new Button ("4"), new Label ("Advanced"));
 
-			// handwriting any GUI code is so ugly, GTK especially so
-			Table table = new Table (5, 2, false);
+            VBox.Spacing = 10;
+            VBox.PackStart (notebook, true, true, 0);
+
+            // handwriting any GUI code is ugly, GTK especially so
+            Table table = new Table (5, 2, false);
             tBox.Add (table);
+            uint xPad = 6;
+            uint yPad = 6;
             
+////    table1.Attach (Widget, leftAttach, rightAttach, topAttach, bottomAttach,
+////    xOptions, yOptions, xPadding, yPadding );
             Label authorLabel = new Label (Mono.Unix.Catalog.GetString ("_Author:"));
-            table.Attach(authorLabel, 0, 1, 0, 1);
+            table.Attach(authorLabel, 0, 1, 0, 1, AttachOptions.Fill, 0, xPad, yPad);
             
             authorEntry = new Entry ();
             authorLabel.MnemonicWidget = authorEntry;
-            table.Attach(authorEntry, 1, 2, 0, 1);
+            table.Attach(authorEntry, 1, 2, 0, 1, AttachOptions.Fill, 0, xPad, yPad);
 
             Label titleLabel = new Label (Mono.Unix.Catalog.GetString ("_Title:"));
-            table.Attach(titleLabel, 0, 1, 1, 2);
-            titleLabel.Show ();
+            table.Attach(titleLabel, 0, 1, 1, 2, AttachOptions.Fill, 0, xPad, yPad);
 
             titleEntry = new Entry ();
             titleLabel.MnemonicWidget = titleEntry;
-            table.Attach(titleEntry, 1, 2, 1, 2);
-            titleEntry.Show ();
+            table.Attach(titleEntry, 1, 2, 1, 2, AttachOptions.Fill, 0, xPad, yPad);
 
             var box3 = new HBox ();
 
             Label subjectLabel = new Label (Mono.Unix.Catalog.GetString ("_Subject:"));
-            table.Attach(subjectLabel, 0, 1, 2, 3);            
-
+            table.Attach(subjectLabel, 0, 1, 2, 3, AttachOptions.Fill, 0, xPad, yPad);
+            
             subjectEntry = new Entry ();
             subjectLabel.MnemonicWidget = subjectEntry;
-            table.Attach(subjectEntry, 1, 2, 2, 3);
+            table.Attach(subjectEntry, 1, 2, 2, 3, AttachOptions.Fill, 0, xPad, yPad);
             subjectEntry.Show ();            
 
             Label keywordsLabel = new Label (Mono.Unix.Catalog.GetString ("_Keywords:"));
-            table.Attach(keywordsLabel, 0, 1, 3, 4);                       
-
+            table.Attach(keywordsLabel, 0, 1, 3, 4, AttachOptions.Fill, 0, xPad, yPad);
+            
             keywordsEntry = new Entry ();
             keywordsLabel.MnemonicWidget = keywordsEntry;
-            table.Attach(keywordsEntry, 1, 2, 3, 4);
+            table.Attach(keywordsEntry, 1, 2, 3, 4, AttachOptions.Fill, 0, xPad, yPad);
             keywordsEntry.Show ();               
 
             Label commentsLabel = new Label (Mono.Unix.Catalog.GetString ("Co_mments:"));
-            table.Attach(commentsLabel, 0, 1, 4, 5);            
-
+            table.Attach(commentsLabel, 0, 1, 4, 5, AttachOptions.Fill, 0, xPad, yPad);
+            
+// TODO scrolled box
             commentsTextView = new TextView ();
             commentsLabel.MnemonicWidget = commentsTextView;
             table.Attach(commentsTextView, 1, 2, 4, 5);
-            commentsTextView.Show ();               
+////            table.Attach(commentsTextView, 1, 2, 4, 5, 
+////                         AttachOptions.Expand, AttachOptions.Expand, xPad, yPad);
+////            VScrollbar vscrollbar = new VScrollbar(commentsTextView.);
+            // commentsTextView.SetScrollAdjustments(
+            commentsTextView.Show ();
 
             table.Show ();
             // table.ShowAll ();
