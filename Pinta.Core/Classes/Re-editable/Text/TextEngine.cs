@@ -119,10 +119,10 @@ namespace Pinta.Core
 			return sb.ToString ();
 		}
 
-		public Tuple<TextPosition, TextPosition>[] SelectionRegions
+		public KeyValuePair<TextPosition, TextPosition>[] SelectionRegions
 		{
 			get {
-                var regions = new List<Tuple<TextPosition, TextPosition>> ();
+                var regions = new List<KeyValuePair<TextPosition, TextPosition>> ();
                 TextPosition p1, p2;
 
                 if (selectionOffset > 0)
@@ -132,7 +132,7 @@ namespace Pinta.Core
                     ForeachLine (currentPos, selectionOffset, (currentLinePos, strpos, endpos) =>
                         {
                             p2 = new TextPosition (currentLinePos, endpos);
-                            regions.Add (Tuple.Create (p1, p2));
+                            regions.Add (new KeyValuePair<TextPosition, TextPosition> (p1, p2));
                             if (currentLinePos + 1 < lines.Count)
                                 p1 = new TextPosition (currentLinePos + 1, 0);
                         });
@@ -144,7 +144,7 @@ namespace Pinta.Core
                     ForeachLine (mypos, -selectionOffset, (currentLinePos, strpos, endpos) =>
                         {
                             p2 = new TextPosition (currentLinePos, endpos);
-                            regions.Add (Tuple.Create(p1, p2));
+                            regions.Add (new KeyValuePair<TextPosition, TextPosition> (p1, p2));
                             if (currentLinePos + 1 < lines.Count)
                                 p1 = new TextPosition (currentLinePos + 1, 0);
                         });

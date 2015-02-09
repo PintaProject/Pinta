@@ -64,8 +64,8 @@ namespace Pinta.Core
 
                 foreach (var region in regions)
                 {
-                    Point p1 = TextPositionToPoint (region.Item1);
-                    Point p2 = TextPositionToPoint (region.Item2);
+                    Point p1 = TextPositionToPoint (region.Key);
+                    Point p2 = TextPositionToPoint (region.Value);
                     rects.Add (new Rectangle (p1, new Size (p2.X - p1.X, FontHeight)));
                 }
 
