@@ -63,21 +63,8 @@ namespace Pinta.Core
         public void Import (string fileName, Gtk.Window parent)
         {
             ZipFile zfile = new ZipFile (fileName);       
-            
-            // warn if mimetype incorrect
-            try {
-                StreamReader reader = new StreamReader ((zfile.GetInputStream (zfile.GetEntry ("mimetype"))));
-                string line = reader.ReadLine();
-                    if (line != MimeType) 
-                    {
-                        MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Warning, ButtonsType.Ok, "Unexpected mimetype in {0}", fileName);
-                        md.Title = "Warning";
-                   
-                        md.Run ();
-                        md.Destroy ();                        
-                    }
 
-            } catch { }   
+            ReadMimeType (zfile, MimeType);            
 
             // must have stack.xml to be a valid OpenRaster
             XmlDocument stackXml = new XmlDocument ();            
@@ -170,7 +157,15 @@ namespace Pinta.Core
                     } catch { }
                 } catch
                 {
-                    MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Could not import layer \"{0}\" from {0}", name, zfile);
+                    MessageDialog md = new MessageDialog (
+                        PintaCore.Chrome.MainWindow, 
+                        DialogFlags.Modal, 
+                        MessageType.Error, 
+                        ButtonsType.Ok, 
+                        "Could not import layer \"{0}\" from {0}", 
+                        name, 
+                        zfile
+                    );
                     md.Title = "Error";
                     
                     md.Run ();
@@ -203,15 +198,29 @@ namespace Pinta.Core
             return p;
         }
 
-        private void ReadMimeType (string filename)
+        // read and check mimetype, show warning dialog if not correct
+        private void ReadMimeType (ZipFile zipfile, string mimetype)
         {
-            // read file and if mimetype != MimeType
+            try {
+                StreamReader reader = new StreamReader ((zipfile.GetInputStream (zipfile.GetEntry ("mimetype"))));
+                string line = reader.ReadLine();
+                    if (line != mimetype) 
+                    {
+                        MessageDialog md = new MessageDialog (
+                            PintaCore.Chrome.MainWindow, 
+                            DialogFlags.Modal, 
+                            MessageType.Warning, 
+                            ButtonsType.Ok, 
+                            "Unexpected mimetype"
+                        );
+                        md.Title = "Warning";
+                   
+                        md.Run ();
+                        md.Destroy ();                        
+                    }
+            } catch { 
+            }
         }        
-        
-        private void ReadStack ()
-        {
-            
-        }
         
         private void ReadMeta (XmlDocument metaXml)
         {
@@ -234,7 +243,7 @@ namespace Pinta.Core
             PintaCore.Workspace.ActiveDocument.Comments = commentElement.InnerText;
             // keywords
             XmlNode keywordsElement = metaXml.SelectSingleNode ("//meta:keyword", nsmgr);
-           	PintaCore.Workspace.ActiveDocument.Keywords = keywordsElement.InnerText;
+            PintaCore.Workspace.ActiveDocument.Keywords = keywordsElement.InnerText;
             // user defined ...
 
         }
@@ -279,7 +288,8 @@ namespace Pinta.Core
             writer.WriteAttributeString ("version", "0.0.3"); // mandatory
             writer.WriteAttributeString ("w", layers[0].Surface.Width.ToString ());
             writer.WriteAttributeString ("h", layers[0].Surface.Height.ToString ());
-//          writer.WriteAttributeString ("xres", "600"); // optional
+            // optional, but both most be included or not
+//          writer.WriteAttributeString ("xres", "600"); 
 //          writer.WriteAttributeString ("yres", "600"); 
             
             writer.WriteStartElement ("stack");
@@ -321,8 +331,7 @@ namespace Pinta.Core
                     );
                 }
 
-                // HACK: ugly but it seems to work
-                // mark the currently selected layer
+                // mark the currently selected layer, set it later
                 if (layers[i] == PintaCore.Workspace.ActiveDocument.CurrentUserLayer)
                 {
                     writer.WriteAttributeString ("selected", "true");
@@ -480,14 +489,19 @@ namespace Pinta.Core
         // HACK: naive conversion of pixels to cm,
         // strictly it also depends on display DPI
         // not sure why OpenOffice fails to understand pixels
-        // TODO include the correct xres & yres in stack.xml image tag  
         private string ConvertPixels (double pixels)
         {
+            int dpi = 72; // fallback to 72 dpi
+// centimeters = pixels * 2.54 / 96
+// where 96 is dpi
+// if gdk_screen_get_resolution == -1 (not set) use dpi = 72
+// else use gdk_screen_get_resolution
             // 1 pixel = 0.02645833333333 centimeter
             double factor = 0.02645833334;
             // round to 3 significant figures
-            string cm = Math.Round(pixels * factor, 3).ToString();
-            return cm;
+            double cm = (pixels * 2.54)/dpi;
+            string cmstring = Math.Round(cm, 3).ToString();
+            return cmstring;
         }
 
         // content.xml required by OpenDocument
