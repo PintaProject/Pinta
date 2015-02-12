@@ -25,8 +25,7 @@ namespace Pinta
         private Entry titleEntry;
         private Entry subjectEntry;
         private Entry keywordsEntry;
-        private TextView commentsTextView; // TODO: 3 lines instead of single line
-        // private TextBuffer buffer;
+        private TextView commentsTextView; 
         
         public DocumentPropertiesDialog () : base (Catalog.GetString ("Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
         {
@@ -34,11 +33,10 @@ namespace Pinta
 
             this.Icon = PintaCore.Resources.GetIcon (Stock.Properties, 16);
             
-            // TODO suggest helpful default text but don't force it 
             // suggest current user as author name
 ////            author = Environment.UserName;
             // suggest filename as document title
-////			title = PintaCore.Workspace.ActiveDocument.Filename;
+////            title = PintaCore.Workspace.ActiveDocument.Filename;
             author = PintaCore.Workspace.ActiveDocument.Author; 
             title = PintaCore.Workspace.ActiveDocument.Title;
             subject = PintaCore.Workspace.ActiveDocument.Subject;
@@ -173,7 +171,6 @@ namespace Pinta
             subjectEntry = new Entry ();
             subjectLabel.MnemonicWidget = subjectEntry;
             table.Attach(subjectEntry, 1, 2, 2, 3, AttachOptions.Fill, 0, xPad, yPad);
-            subjectEntry.Show ();            
 
             Label keywordsLabel = new Label (Mono.Unix.Catalog.GetString ("_Keywords:"));
             table.Attach(keywordsLabel, 0, 1, 3, 4, AttachOptions.Fill, 0, xPad, yPad);
@@ -181,20 +178,14 @@ namespace Pinta
             keywordsEntry = new Entry ();
             keywordsLabel.MnemonicWidget = keywordsEntry;
             table.Attach(keywordsEntry, 1, 2, 3, 4, AttachOptions.Fill, 0, xPad, yPad);
-            keywordsEntry.Show ();               
 
             Label commentsLabel = new Label (Mono.Unix.Catalog.GetString ("Co_mments:"));
             table.Attach(commentsLabel, 0, 1, 4, 5, AttachOptions.Fill, 0, xPad, yPad);
             
-// TODO scrolled box
+            // TODO ideally this would be a scrolled box
             commentsTextView = new TextView ();
             commentsLabel.MnemonicWidget = commentsTextView;
             table.Attach(commentsTextView, 1, 2, 4, 5);
-////            table.Attach(commentsTextView, 1, 2, 4, 5, 
-////                         AttachOptions.Expand, AttachOptions.Expand, xPad, yPad);
-////            VScrollbar vscrollbar = new VScrollbar(commentsTextView.);
-            // commentsTextView.SetScrollAdjustments(
-            commentsTextView.Show ();
 
             table.Show ();
             // table.ShowAll ();
