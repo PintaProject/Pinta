@@ -486,18 +486,13 @@ namespace Pinta.Core
             }
         }
 
-        // HACK: naive conversion of pixels to cm,
-        // strictly it also depends on display DPI
-        // not sure why OpenOffice fails to understand pixels
+        // convert pixels to cm. 1 inch = 2.54 cm
+        // centimeters = pixels * 2.54 / dpi
         private string ConvertPixels (double pixels)
         {
             int dpi = 72; // fallback to 72 dpi
-// centimeters = pixels * 2.54 / 96
-// where 96 is dpi
 // if gdk_screen_get_resolution == -1 (not set) use dpi = 72
 // else use gdk_screen_get_resolution
-            // 1 pixel = 0.02645833333333 centimeter
-            double factor = 0.02645833334;
             // round to 3 significant figures
             double cm = (pixels * 2.54)/dpi;
             string cmstring = Math.Round(cm, 3).ToString();
@@ -679,7 +674,6 @@ namespace Pinta.Core
             writer.WriteStartElement (prefix, "generator", nsmeta);
             writer.WriteString (useragent);
             writer.WriteEndElement ();
-            // TODO date / creation date / other dates // vlow priority
             // Author/Creator dc:creator
             writer.WriteStartElement ("dc", "creator", nsdc);
             writer.WriteString (document.Author);
