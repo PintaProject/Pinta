@@ -597,7 +597,7 @@ namespace Pinta.Core
             // you might think path should be "/mimetype"
             // but OpenOffice uses "/"
             writer.WriteAttributeString ("full-path", ns, "/");
-            writer.WriteAttributeString ("media-type", ns, MimeType);
+            writer.WriteAttributeString ("media-type", ns, oraMimeType);
             writer.WriteEndElement ();
 
             // merged imaged
