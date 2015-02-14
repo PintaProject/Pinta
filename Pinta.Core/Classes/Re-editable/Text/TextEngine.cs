@@ -468,6 +468,9 @@ namespace Pinta.Core
 			if (String.IsNullOrEmpty (txt))
 				return false;
 
+            if (HasSelection ())
+                DeleteSelection ();
+
 			string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
 			string endline = lines [currentPos.Line].Substring (currentPos.Offset);
 			lines [currentPos.Line] = lines [currentPos.Line].Substring (0, currentPos.Offset);
@@ -485,6 +488,7 @@ namespace Pinta.Core
 			}
 			lines [currentPos.Line] += endline;
 
+            selectionStart = currentPos;
 			textMode = TextMode.Uncommitted;
 
 			OnModified ();
