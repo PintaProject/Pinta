@@ -73,10 +73,6 @@ namespace Pinta.Tools
 				return;
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			doc.Selection.selOrigin = shape_origin;
-			doc.Selection.selEnd = shape_end;
-
 			hist = new SelectionHistoryItem(Icon, Name);
 			hist.TakeSnapshot();
 
@@ -86,13 +82,13 @@ namespace Pinta.Tools
 			{
 				doc.selHandler.DetermineCombineMode(args);
 
-				initial_selection = doc.Selection.Clone();
-				doc.Selection.SelectionPolygons.Clear();
-
 				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
 				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
-
 				shape_origin = new PointD(x, y);
+                doc.Selection.selOrigin = shape_origin;
+
+				initial_selection = doc.Selection.Clone();
+				doc.Selection.SelectionPolygons.Clear();
 
 				is_drawing = true;
 			}
@@ -126,6 +122,7 @@ namespace Pinta.Tools
                     initial_selection.Dispose ();
                     initial_selection = null;
 
+                    doc.Selection.selEnd = shape_end;
 					PintaCore.Workspace.Invalidate();
 				}
                 if (hist != null)
