@@ -1804,7 +1804,7 @@ namespace Pinta.Tools
 			//Verify that the corresponding tool is valid and that it doesn't match the currently active tool.
 			if (correspondingTool != null && PintaCore.Tools.CurrentTool != correspondingTool)
 			{
-				ShapeTool oldTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+				ShapeTool oldTool = PintaCore.Tools.CurrentTool as ShapeTool;
 
 				//The active tool needs to be switched to the corresponding tool.
 				PintaCore.Tools.SetCurrentTool(correspondingTool);
@@ -1812,7 +1812,7 @@ namespace Pinta.Tools
 				ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
 
 				//What happens next depends on whether the old tool was an editable ShapeTool.
-				if (oldTool.IsEditableShapeTool)
+				if (oldTool != null && oldTool.IsEditableShapeTool)
 				{
 					if (permanentSwitch)
 					{
