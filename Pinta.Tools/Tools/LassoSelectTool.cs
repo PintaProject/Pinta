@@ -92,8 +92,6 @@ namespace Pinta.Tools
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 
-				doc.Selection.DisposeSelectionPreserve();
-
 				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
@@ -115,8 +113,6 @@ namespace Pinta.Tools
 
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
-
-				doc.Selection.DisposeSelectionPreserve();
 
 				doc.Selection.SelectionPath = g.CopyPath ();
 			}

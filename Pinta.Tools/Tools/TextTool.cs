@@ -541,7 +541,7 @@ namespace Pinta.Tools
 			PintaCore.Chrome.Canvas.GrabFocus();
 
 			if (selection != null)
-				selection.DisposeSelection ();
+                selection.Dispose ();
 			selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
 
 			// A right click allows you to move the text around
@@ -1151,7 +1151,7 @@ namespace Pinta.Tools
 
                     if (selection != null)
                     {
-                        selection.DisposeSelection();
+                        selection.Dispose ();
                         selection = null;
                     }
 				}

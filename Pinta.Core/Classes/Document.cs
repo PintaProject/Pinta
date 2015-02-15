@@ -56,21 +56,7 @@ namespace Pinta.Core
 		private bool show_selection;
 
 		public SelectionModeHandler selHandler;
-
-		private DocumentSelection actualSelection = new DocumentSelection();
-		public DocumentSelection Selection
-		{
-			get
-			{
-				return actualSelection;
-			}
-
-			set
-			{
-				actualSelection.DisposeSelection();
-				actualSelection = value;
-			}
-		}
+        public DocumentSelection Selection = new DocumentSelection ();
 
 		public Document (Gdk.Size size)
 		{
@@ -261,7 +247,7 @@ namespace Pinta.Core
 			if (selection_layer != null)
 				(selection_layer.Surface as IDisposable).Dispose ();
 
-			Selection.DisposeSelection();
+            Selection.Dispose ();
 
 			Workspace.History.Clear ();
 		}
@@ -626,7 +612,6 @@ namespace Pinta.Core
 		
 		public void ResetSelectionPaths()
 		{
-			Selection.DisposeSelectionPreserve();
 			Selection.ResetSelection(selection_layer.Surface, ImageSize);
 
 			ShowSelection = false;

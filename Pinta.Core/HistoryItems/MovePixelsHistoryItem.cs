@@ -61,7 +61,7 @@ namespace Pinta.Core
 
 		public override void Dispose ()
 		{
-			old_selection.DisposeSelection();
+            old_selection.Dispose ();
 
 			if (old_surface != null)
 				(old_surface as IDisposable).Dispose ();

@@ -144,6 +144,7 @@ namespace Pinta.Core
 			//Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
 			List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons(polygonSet);
 
+            doc.Selection.Dispose ();
 			doc.Selection = initial_selection.Clone();
 
 			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))

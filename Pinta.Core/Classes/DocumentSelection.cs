@@ -50,7 +50,8 @@ namespace Pinta.Core
 				if (selection_path == value)
 					return;
 
-				DisposeSelection ();
+                if (selection_path != null)
+                    selection_path.Dispose ();
 
 				selection_path = value;
 			}
@@ -376,32 +377,6 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Disposes of the old Selection without any intention of reusing it.
-		/// </summary>
-		public void DisposeSelection()
-		{
-			if (selection_path != null)
-			{
-				(selection_path as IDisposable).Dispose();
-			}
-		}
-
-		/// <summary>
-		/// Disposes of the old Selection, but allows for reusability.
-		/// </summary>
-		public void DisposeSelectionPreserve()
-		{
-			Path old = SelectionPath;
-
-			SelectionPath = null;
-
-			if (old != null)
-			{
-				(old as IDisposable).Dispose();
-			}
-		}
-
-		/// <summary>
 		/// Reset (clear) the Selection.
 		/// </summary>
 		/// <param name="selectionSurface"></param>
@@ -441,7 +416,8 @@ namespace Pinta.Core
 
         public void Dispose ()
         {
-            DisposeSelection ();
+            if (selection_path != null)
+                selection_path.Dispose ();
         }
     }
 }

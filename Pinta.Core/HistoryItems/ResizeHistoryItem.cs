@@ -64,7 +64,7 @@ namespace Pinta.Core
 				PintaCore.Workspace.ActiveDocument.Selection = RestoreSelection.Clone();
 
 				if (old != null) {
-					old.DisposeSelection ();
+					old.Dispose ();
 				}
 
 				PintaCore.Layers.ShowSelection = true;
@@ -102,7 +102,7 @@ namespace Pinta.Core
 			base.Dispose ();
 
 			if (RestoreSelection != null) {
-				RestoreSelection.DisposeSelection ();
+				RestoreSelection.Dispose ();
 			}
 		}
 	}

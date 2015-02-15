@@ -131,7 +131,6 @@ namespace Pinta.Tools
                 if (hist != null)
                 {
                     doc.History.PushNewItem(hist);
-                    hist.Dispose();
                     hist = null;
                 }
 				handler_active = true;

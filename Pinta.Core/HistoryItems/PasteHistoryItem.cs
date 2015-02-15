@@ -81,7 +81,7 @@ namespace Pinta.Core
 				(paste_image as IDisposable).Dispose ();
 
 			if (old_selection != null)
-				old_selection.DisposeSelection ();
+				old_selection.Dispose ();
 		}
 
 		private void Swap ()
