@@ -65,6 +65,13 @@ namespace Pinta.Core
 		{
 		}
 
+        protected void Swap<T> (ref T x, ref T y)
+        {
+            T temp = x;
+            x = y;
+            y = temp;
+        }
+
 		#region IDisposable Members
 		public virtual void Dispose ()
 		{

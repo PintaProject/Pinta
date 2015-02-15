@@ -116,16 +116,7 @@ namespace Pinta.Tools
 				PintaCore.Workspace.Invalidate();
 			}
 
-
-			//Store the old shape data temporarily.
-			ShapeEngineCollection oldSEngines = sEngines;
-
-			//Swap half of the data.
-			sEngines = BaseEditEngine.SEngines;
-
-			//Swap the other half.
-			BaseEditEngine.SEngines = oldSEngines;
-
+            Swap (ref sEngines, ref BaseEditEngine.SEngines);
 
 			//Ensure that all of the shapes that should no longer be drawn have their ReEditableLayer removed from the drawing loop.
 			foreach (ShapeEngine se in sEngines)
@@ -138,7 +129,6 @@ namespace Pinta.Tools
 				}
 			}
 
-
 			//Ensure that all of the shapes that should now be drawn have their ReEditableLayer in the drawing loop.
 			foreach (ShapeEngine se in BaseEditEngine.SEngines)
 			{
@@ -149,17 +139,8 @@ namespace Pinta.Tools
 				}
 			}
 
-
-			//Swap the selected point data.
-			int temp = selectedPointIndex;
-            selectedPointIndex = ee.SelectedPointIndex;
-            ee.SelectedPointIndex = temp;
-
-			//Swap the selected shape data.
-			temp = selectedShapeIndex;
-            selectedShapeIndex = ee.SelectedShapeIndex;
-			ee.SelectedShapeIndex = temp;
-
+            Swap (ref selectedPointIndex, ref ee.SelectedPointIndex);
+            Swap (ref selectedShapeIndex, ref ee.SelectedShapeIndex);
 
 			//Determine if the currently active tool matches the shape's corresponding tool, and if not, switch to it.
 			if (BaseEditEngine.ActivateCorrespondingTool(ee.SelectedShapeIndex, true) != null)
