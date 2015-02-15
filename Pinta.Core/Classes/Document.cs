@@ -72,21 +72,6 @@ namespace Pinta.Core
 			}
 		}
 
-		private DocumentSelection actualPreviousSelection = new DocumentSelection();
-		public DocumentSelection PreviousSelection
-		{
-			get
-			{
-				return actualPreviousSelection;
-			}
-
-			set
-			{
-				actualPreviousSelection.DisposeSelection();
-				actualPreviousSelection = value;
-			}
-		}
-
 		public Document (Gdk.Size size)
 		{
 			Guid = Guid.NewGuid ();
@@ -643,9 +628,6 @@ namespace Pinta.Core
 		{
 			Selection.DisposeSelectionPreserve();
 			Selection.ResetSelection(selection_layer.Surface, ImageSize);
-
-			PreviousSelection.DisposeSelectionPreserve();
-			PreviousSelection.ResetSelection(selection_layer.Surface, ImageSize);
 
 			ShowSelection = false;
 		}

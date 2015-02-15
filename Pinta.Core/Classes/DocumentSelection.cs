@@ -32,7 +32,7 @@ using ClipperLibrary;
 
 namespace Pinta.Core
 {
-	public class DocumentSelection
+	public class DocumentSelection : IDisposable
 	{
 		private Path selection_path;
 
@@ -438,5 +438,10 @@ namespace Pinta.Core
 
 			return newPolygon;
 		}
-	}
+
+        public void Dispose ()
+        {
+            DisposeSelection ();
+        }
+    }
 }

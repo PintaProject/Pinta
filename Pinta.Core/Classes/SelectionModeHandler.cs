@@ -137,14 +137,14 @@ namespace Pinta.Core
 			}
 		}
 
-		public void PerformSelectionMode(Point[][] polygonSet)
+		public void PerformSelectionMode(DocumentSelection initial_selection, Point[][] polygonSet)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			//Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
 			List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons(polygonSet);
 
-			doc.Selection = doc.PreviousSelection.Clone();
+			doc.Selection = initial_selection.Clone();
 
 			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
 			{
