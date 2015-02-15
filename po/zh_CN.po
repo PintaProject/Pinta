@@ -7,701 +7,141 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2014-03-16 15:29+0000\n"
-"Last-Translator: qinghao <qinghao1@foxmail.com>\n"
+"POT-Creation-Date: 2015-02-07 16:32-0500\n"
+"PO-Revision-Date: 2014-08-14 19:29+0000\n"
+"Last-Translator: colindemian <dengmengpc@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
-"X-Generator: Launchpad (build 17017)\n"
+"X-Launchpad-Export-Date: 2015-02-15 18:12+0000\n"
+"X-Generator: Launchpad (build 17341)\n"
 
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
-msgid "Layer Shown"
-msgstr "显示图层"
+#: ../xdg/pinta.desktop.in.h:1
+msgid "Pinta"
+msgstr "Pinta"
 
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
-msgid "Layer Hidden"
-msgstr "隐藏图层"
+#: ../xdg/pinta.desktop.in.h:2
+msgid "Easily create and edit images"
+msgstr "轻松创建和编辑图像"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
-msgid "Choose Primary Color"
-msgstr "选取主颜色"
+#: ../xdg/pinta.desktop.in.h:3
+msgid "Image Editor"
+msgstr "图片编辑器"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:99
-msgid "Choose Secondary Color"
-msgstr "选取副颜色"
+#: ../xdg/pinta.desktop.in.h:4
+msgid "Pinta Image Editor"
+msgstr "Pinta 图片编辑器"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
-msgid "Choose Palette Color"
-msgstr "选取调色板颜色"
+#: ../Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager"
+msgstr "插件管理器"
 
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
-msgid "Click to switch between primary and secondary color."
-msgstr "点击切换主副颜色"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
-msgid "Click to reset primary and secondary color."
-msgstr ""
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
-msgid "Click to select primary color."
-msgstr "点击选择主颜色"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
-msgid "Click to select secondary color."
-msgstr "点击选择副颜色"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
-msgid ""
-"Left click to set primary color. Right click to set secondary color. Middle "
-"click to choose palette color."
-msgstr "左键点击选择主颜色，右键点击选择副颜色，中键点击选择调色板颜色"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-msgid "label1"
-msgstr "标签1"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "随机杂色"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr "变换"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-msgid "label"
-msgstr "标签"
-
-#: Pinta.Tools/Brushes/CircleBrush.cs:37
-msgid "Circles"
-msgstr "圆圈"
-
-#: Pinta.Tools/Brushes/PlainBrush.cs:37
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:181
-#: Pinta.Core/Effects/UserBlendOps.cs:52
-msgid "Normal"
-msgstr "一般"
-
-#: Pinta.Tools/Brushes/GridBrush.cs:37
-msgid "Grid"
-msgstr "网格"
-
-#: Pinta.Tools/Brushes/SquaresBrush.cs:39
-msgid "Squares"
-msgstr "方格"
-
-#: Pinta.Tools/Brushes/SplatterBrush.cs:37
-msgid "Splatter"
-msgstr "泼洒"
-
-#: Pinta.Tools/Tools/CloneStampTool.cs:42
-msgid "Clone Stamp"
-msgstr "仿制图章"
-
-#: Pinta.Tools/Tools/CloneStampTool.cs:47
-msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "按住 Ctrl 键点击设置源点，然后点击进行涂抹。"
-
-#: Pinta.Tools/Tools/PencilTool.cs:47 Pinta.Tools/Tools/ColorPickerTool.cs:209
-msgid "Pencil"
-msgstr "铅笔"
-
-#: Pinta.Tools/Tools/PencilTool.cs:49
-msgid ""
-"Left click to draw freeform one-pixel wide lines with the primary color. "
-"Right click to use the secondary color."
-msgstr "左键点击用主颜色绘制 1 像素宽的线。右键使用副助色。"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:52
-msgid "Freeform Shape"
-msgstr "自由形狀"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:54
-#: Pinta.Tools/Tools/PaintBrushTool.cs:42
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr "左击使用主颜色绘制，右击使用副颜色绘制。"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:71
-#: Pinta.Tools/Tools/ShapeTool.cs:131
-msgid "Fill Style"
-msgstr "填充形式"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:78
-#: Pinta.Tools/Tools/ShapeTool.cs:138
-msgid "Outline Shape"
-msgstr "边框"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:79
-#: Pinta.Tools/Tools/ShapeTool.cs:139
-msgid "Fill Shape"
-msgstr "填充"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:80
-#: Pinta.Tools/Tools/ShapeTool.cs:140
-msgid "Fill and Outline Shape"
-msgstr "填充和边框"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Tools/ShapeTool.cs:99
-msgid "Brush width"
-msgstr "笔刷宽度"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Tools/ShapeTool.cs:104
-msgid "Decrease brush size"
-msgstr "减小笔刷尺寸"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Tools/ShapeTool.cs:118
-msgid "Increase brush size"
-msgstr "增大笔刷尺寸"
-
-#: Pinta.Tools/Tools/PaintBrushTool.cs:40 Pinta/MainWindow.cs:65
-msgid "Paintbrush"
-msgstr "画笔"
-
-#: Pinta.Tools/Tools/PaintBrushTool.cs:78
-msgid "Type"
-msgstr "类型"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:63
-msgid "Color Picker"
-msgstr "颜色拾取器"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:69
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "左击设置主颜色，右击设置副颜色。"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:113
-msgid "Sampling"
-msgstr "取样"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:123
-msgid "Single Pixel"
-msgstr "单个像素"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:124
-msgid "3 x 3 Region"
-msgstr "3 x 3 区域"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:125
-msgid "5 x 5 Region"
-msgstr "5 x 5 区域"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:126
-msgid "7 x 7 Region"
-msgstr "7 x 7 区域"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:127
-msgid "9 x 9 Region"
-msgstr "9 x 9 区域"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
-msgid "Layer"
-msgstr "图层"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:136
-msgid "Image"
-msgstr "图像"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:147
-msgid "After select"
-msgstr "选择后"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:154
-msgid "Do not switch tool"
-msgstr "不要切换工具"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:155
-msgid "Switch to previous tool"
-msgstr "切换到上一个工具"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:156
-msgid "Switch to Pencil tool"
-msgstr "切换到铅笔工具"
-
-#: Pinta.Tools/Tools/RectangleTool.cs:37
-msgid "Rectangle"
-msgstr "矩形"
-
-#: Pinta.Tools/Tools/RectangleTool.cs:43
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"Shift to constrain to a square."
-msgstr "点击并拖动绘制矩形（右键使用副颜色绘制）。按住 Shift 强制绘制正方形。"
-
-#: Pinta.Tools/Tools/EraserTool.cs:52
-msgid "Eraser"
-msgstr "橡皮擦"
-
-#: Pinta.Tools/Tools/EraserTool.cs:54
-msgid ""
-"Left click to erase to transparent, right click to erase to secondary color. "
-msgstr "左键点击擦除为透明色，右键点击擦除为副颜色 "
-
-#: Pinta.Tools/Tools/ZoomTool.cs:48
-msgid "Zoom"
-msgstr "缩放"
-
-#: Pinta.Tools/Tools/ZoomTool.cs:54
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr "左击放大，右击缩小。点击并拖动以缩放选区。"
-
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "移动选区"
-
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:48
-msgid ""
-"Left click and drag the selection to move selection outline. Right click and "
-"drag the selection to rotate selection outline."
-msgstr "左键点击并拖动选择移动选中区域的轮廓。右键点击并拖动选择及旋转选中区域的轮廓。"
-
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:43
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
-#: Pinta/Actions/Edit/PasteAction.cs:108
-msgid "Move Selected Pixels"
-msgstr "移动选择的像素"
-
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:49
-msgid ""
-"Left click and drag the selection to move selected content. Right click and "
-"drag the selection to rotate selected content."
-msgstr "左键点击并拖动选择移动选中区域的内容。右键点击并拖动选择及旋转选中区域的内容。"
-
-#: Pinta.Tools/Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "油漆桶"
-
-#: Pinta.Tools/Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr "左击用主颜色填充一个区域，右击使用副颜色填充。"
-
-#: Pinta.Tools/Tools/LassoSelectTool.cs:48
-msgid "Lasso Select"
-msgstr "套索选择"
-
-#: Pinta.Tools/Tools/LassoSelectTool.cs:50
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "点击拖动以绘制选取的轮廓"
-
-#: Pinta.Tools/Tools/RecolorTool.cs:58
-msgid "Recolor"
-msgstr "重新着色"
-
-#: Pinta.Tools/Tools/RecolorTool.cs:60
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "左击用主颜色取代副颜色。"
-
-#: Pinta.Tools/Tools/RecolorTool.cs:73 Pinta.Tools/Tools/FloodTool.cs:93
-msgid "Tolerance"
-msgstr "允许偏差量"
-
-#: Pinta.Tools/Tools/EllipseTool.cs:37
-msgid "Ellipse"
-msgstr "椭圆"
-
-#: Pinta.Tools/Tools/EllipseTool.cs:43
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"Shift to constrain to a circle."
-msgstr "点击并拖动绘制椭圆（右键使用副颜色绘制）。按住 Shift 强制绘制圆。"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "圆角矩形。"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold Shift to constrain to a square."
-msgstr "点击并拖动绘制圆角矩形（右键使用副颜色绘制）。按住 Shift 强制绘制正方形的。"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
-msgid "Radius"
-msgstr "半径"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:92
-msgid "Decrease rectangle's corner radius"
-msgstr "减小矩形的圆角半径"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:106
-msgid "Increase rectangle's corner radius"
-msgstr "增大矩形的圆角半径"
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:37
-msgid "Line"
-msgstr "线条"
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:43
-msgid ""
-"Left click to draw with primary color, right click for secondary color. Hold "
-"Shift key to snap to angles."
-msgstr "左键点击为用主颜色绘制，右键点击为用副颜色绘制，按住 Shift 键可以锁定直接方向。"
-
-#: Pinta.Tools/Tools/FloodTool.cs:74
-msgid "Flood Mode"
-msgstr "填充模式"
-
-#: Pinta.Tools/Tools/FloodTool.cs:81
-msgid "Contiguous"
-msgstr "区域"
-
-#: Pinta.Tools/Tools/FloodTool.cs:82
-msgid "Global"
-msgstr "整个区域"
-
-#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:165
-msgid "Gradient"
-msgstr "渐变"
-
-#: Pinta.Tools/Tools/GradientTool.cs:63
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr "点击拖动以绘制一个从主颜色到副颜色的渐变。右击逆转颜色。"
-
-#: Pinta.Tools/Tools/GradientTool.cs:172
-msgid "Linear Gradient"
-msgstr "线性渐变"
-
-#: Pinta.Tools/Tools/GradientTool.cs:173
-msgid "Linear Reflected Gradient"
-msgstr "双线性渐变"
-
-#: Pinta.Tools/Tools/GradientTool.cs:174
-msgid "Linear Diamond Gradient"
-msgstr "菱形渐变"
-
-#: Pinta.Tools/Tools/GradientTool.cs:175
-msgid "Radial Gradient"
-msgstr "辐射渐变"
-
-#: Pinta.Tools/Tools/GradientTool.cs:176
-msgid "Conical Gradient"
-msgstr "锥形渐变"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:35
-msgid "Text"
-msgstr "文字"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:41
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr "左击放置光标，然后键入所需的文本。文本颜色为主颜色。"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:89
-msgid "Font"
-msgstr "字体"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:124
-msgid "Bold"
-msgstr "粗体"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:131
-msgid "Italic"
-msgstr "斜体"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:138
-msgid "Underline"
-msgstr "下划线"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:147
-msgid "Left Align"
-msgstr "左对齐"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:155
-msgid "Center Align"
-msgstr "居中对齐"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:162
-msgid "Right Align"
-msgstr "右对齐"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:174
-msgid "Text Style"
-msgstr "文本样式"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:182
-msgid "Normal and Outline"
-msgstr "正常与大纲"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:183
-#: Pinta.Effects/Effects/OutlineEffect.cs:28
-msgid "Outline"
-msgstr "轮廓"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:184
-msgid "Fill Background"
-msgstr "填充背景"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:192
-msgid "Outline width"
-msgstr "描边宽度"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:197
-msgid "Decrease outline size"
-msgstr "减少描边宽度"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:214
-msgid "Increase outline size"
-msgstr "增加描边宽度"
-
-#: Pinta.Tools/Tools/EllipseSelectTool.cs:37
-msgid "Ellipse Select"
-msgstr "椭圆形选择"
-
-#: Pinta.Tools/Tools/EllipseSelectTool.cs:43
-msgid ""
-"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-"circle."
-msgstr "点击并拖动绘制椭圆选区。按住 Shift 强制画圆形区域。"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:53
-msgid "Replace"
-msgstr "替换"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:54
-msgid "Union (+) (Ctrl + Left Click)"
-msgstr "合并 (+) (Ctrl + 左键)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:55
-msgid "Exclude (-) (Right Click)"
-msgstr "排除 (-) (右键)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:56
-msgid "Xor (Ctrl + Right Click)"
-msgstr "异或 (Ctrl +右键)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:57
-msgid "Intersect (Shift + Left Click)"
-msgstr "交错 (Shift + 左键)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:70
-msgid " Selection Mode: "
-msgstr " 选取模式: "
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:102
-msgid "Magic Wand Select"
-msgstr "魔术棒选择"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:112
-msgid "Click to select region of similar color."
-msgstr "点击选取相似颜色的区域。"
-
-#: Pinta.Tools/Tools/RectangleSelectTool.cs:37
-msgid "Rectangle Select"
-msgstr "矩形选择"
-
-#: Pinta.Tools/Tools/RectangleSelectTool.cs:43
-msgid ""
-"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-"square."
-msgstr "单击并拖动绘制矩形选区。按住 Shift 键强制为正方形。"
-
-#: Pinta.Tools/Tools/PanTool.cs:37
-msgid "Pan"
-msgstr "移动"
-
-#: Pinta.Tools/Tools/PanTool.cs:43
-msgid "Click and drag to navigate image."
-msgstr "点击拖动以操纵图像。"
-
-#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "{0} 图像 ({1})"
-
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
-#: Pinta/Dialogs/ResizeImageDialog.cs:38
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-msgid "Resize Image"
-msgstr "改变图像大小"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-#: Pinta.Core/Actions/ImageActions.cs:67
-msgid "Rotate 180°"
-msgstr "旋转180°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "水平翻转图像"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "垂直翻转图像"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-#: Pinta.Core/Actions/ImageActions.cs:65
-msgid "Rotate 90° Clockwise"
-msgstr "顺时针旋转90°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "逆时针旋转90°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "水平翻转图层"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "垂直翻转图层"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "完成像素"
-
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
-#: Pinta.Core/Actions/EditActions.cs:72 Pinta/Actions/Edit/PasteAction.cs:79
-msgid "Paste"
-msgstr "粘贴"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:97
-#, csharp-format
-msgid "Unsaved Image {0}"
-msgstr "未保存的图像 {0}"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:156
-msgid "Background"
-msgstr "背景"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:165
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:27
-msgid "New Image"
-msgstr "新建图像"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:184
-msgid "Open Image"
-msgstr "打开图像"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
-msgid "Permission denied"
-msgstr ""
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:311
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "无法打开文件：{0}"
-
-#: Pinta.Core/Managers/ToolManager.cs:234
-#: Pinta.Core/Managers/ToolManager.cs:236
-msgid "No tool selected."
-msgstr "没有选择工具。"
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:217
-msgid "Rendering Effect"
-msgstr "渲染效果"
-
-#: Pinta.Core/Managers/EffectsManager.cs:63
-#: Pinta.Core/Managers/EffectsManager.cs:98
-msgid "..."
-msgstr "..."
-
-#: Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
 msgstr "撤销"
 
-#: Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
 msgstr "重做"
 
-#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
 msgstr "剪切"
 
-#: Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
 msgstr "复制"
 
-#: Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "合并复制"
 
-#: Pinta.Core/Actions/EditActions.cs:73
-#: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Classes/Document.cs:801
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+msgid "Paste"
+msgstr "粘贴"
+
+#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Classes/Document.cs:797
 msgid "Paste Into New Layer"
 msgstr "粘贴到新图层"
 
-#: Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
 msgstr "粘贴为新图像"
 
-#: Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Delete Selection"
 msgstr "删除选区"
 
-#: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:178
+#: ../Pinta.Core/Actions/EditActions.cs:76
+#: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
 msgstr "填充选区"
 
-#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:401
+#: ../Pinta.Core/Actions/EditActions.cs:77
+#: ../Pinta.Core/Actions/EditActions.cs:418
 msgid "Invert Selection"
 msgstr "反向选择"
 
-#: Pinta.Core/Actions/EditActions.cs:78 Pinta.Core/Actions/EditActions.cs:187
+#: ../Pinta.Core/Actions/EditActions.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
 msgstr "全选"
 
-#: Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
 msgstr "全部不选"
 
-#: Pinta.Core/Actions/EditActions.cs:81 Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
 msgstr "打开..."
 
-#: Pinta.Core/Actions/EditActions.cs:82 Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/EditActions.cs:82
+#: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
 msgstr "另存为..."
 
-#: Pinta.Core/Actions/EditActions.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
 msgstr "重置到默认"
 
-#: Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
 msgstr "设置颜色数量"
 
-#: Pinta.Core/Actions/EditActions.cs:125 Pinta/Pads/ColorPalettePad.cs:42
-#: Pinta/Pads/ColorPalettePad.cs:49
+#: ../Pinta.Core/Actions/EditActions.cs:125
+#: ../Pinta/Pads/ColorPalettePad.cs:42 ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
 msgstr "调色板"
 
-#: Pinta.Core/Actions/EditActions.cs:218
+#: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
 msgstr "擦除选区"
 
-#: Pinta.Core/Actions/EditActions.cs:227
+#: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
 msgstr "取消选择"
 
-#: Pinta.Core/Actions/EditActions.cs:319
+#: ../Pinta.Core/Actions/EditActions.cs:327
 msgid "Open Palette File"
 msgstr "打开调色板文件"
 
-#: Pinta.Core/Actions/EditActions.cs:326
+#: ../Pinta.Core/Actions/EditActions.cs:334
 msgid "Palette files (*.txt, *.gpl)"
 msgstr "调色板文件 (*.txt, *.gpl)"
 
-#: Pinta.Core/Actions/EditActions.cs:330
-#: Pinta/Actions/File/OpenDocumentAction.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:338
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "全部文件"
 
-#: Pinta.Core/Actions/EditActions.cs:346
+#: ../Pinta.Core/Actions/EditActions.cs:354
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
@@ -710,359 +150,1444 @@ msgstr ""
 "无法打开调色板文件：{0}。\n"
 "请确定您在尝试打开一个合法的 GIMP 或 Paint.NET 调色板。"
 
-#: Pinta.Core/Actions/EditActions.cs:347
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
 msgid "Error"
 msgstr "错误"
 
-#: Pinta.Core/Actions/EditActions.cs:359
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Save Palette File"
 msgstr "保存调色板文件"
 
-#: Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:373
 msgid "Paint.NET palette (*.txt)"
 msgstr "Paint.NET 调色板 (*.txt)"
 
-#: Pinta.Core/Actions/EditActions.cs:370
+#: ../Pinta.Core/Actions/EditActions.cs:378
 msgid "GIMP palette (*.gpl)"
 msgstr "GIMP 调色板 (*.gpl)"
 
-#: Pinta.Core/Actions/ImageActions.cs:59
-#: Pinta.Core/Actions/ImageActions.cs:277
-msgid "Crop to Selection"
-msgstr "裁剪到选择部分"
-
-#: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Auto Crop"
-msgstr "自动裁剪"
-
-#: Pinta.Core/Actions/ImageActions.cs:61
-msgid "Resize Image..."
-msgstr "改变图像大小..."
-
-#: Pinta.Core/Actions/ImageActions.cs:62
-msgid "Resize Canvas..."
-msgstr "改变画布大小..."
-
-#: Pinta.Core/Actions/ImageActions.cs:63 Pinta.Core/Actions/LayerActions.cs:70
-msgid "Flip Horizontal"
-msgstr "水平翻转"
-
-#: Pinta.Core/Actions/ImageActions.cs:64 Pinta.Core/Actions/LayerActions.cs:71
-msgid "Flip Vertical"
-msgstr "垂直翻转"
-
-#: Pinta.Core/Actions/ImageActions.cs:68
-#: Pinta.Core/Actions/ImageActions.cs:137
-msgid "Flatten"
-msgstr "平面化"
-
-#: Pinta.Core/Actions/WindowActions.cs:45
-msgid "Save All"
-msgstr "保存全部"
-
-#: Pinta.Core/Actions/WindowActions.cs:46
-msgid "Close All"
-msgstr "关闭全部"
-
-#: Pinta.Core/Actions/ViewActions.cs:75
-msgid "Zoom In"
-msgstr "放大"
-
-#: Pinta.Core/Actions/ViewActions.cs:76
-msgid "Zoom Out"
-msgstr "缩小"
-
-#: Pinta.Core/Actions/ViewActions.cs:77
-msgid "Best Fit"
-msgstr "最适大小"
-
-#: Pinta.Core/Actions/ViewActions.cs:78
-msgid "Zoom to Selection"
-msgstr "缩放至选择部分"
-
-#: Pinta.Core/Actions/ViewActions.cs:79
-msgid "Normal Size"
-msgstr "普通大小"
-
-#: Pinta.Core/Actions/ViewActions.cs:80
-msgid "Toolbar"
-msgstr "工具栏"
-
-#: Pinta.Core/Actions/ViewActions.cs:81
-msgid "Pixel Grid"
-msgstr "像素网格"
-
-#: Pinta.Core/Actions/ViewActions.cs:82
-msgid "Rulers"
-msgstr "标尺"
-
-#: Pinta.Core/Actions/ViewActions.cs:83
-msgid "Pixels"
-msgstr "像素"
-
-#: Pinta.Core/Actions/ViewActions.cs:84
-msgid "Inches"
-msgstr "英寸"
-
-#: Pinta.Core/Actions/ViewActions.cs:85
-msgid "Centimeters"
-msgstr "厘米"
-
-#: Pinta.Core/Actions/ViewActions.cs:86
-msgid "Fullscreen"
-msgstr "全屏"
-
-#: Pinta.Core/Actions/ViewActions.cs:88 Pinta.Core/Actions/ViewActions.cs:216
-#: Pinta.Core/Classes/DocumentWorkspace.cs:244
-#: Pinta.Core/Classes/DocumentWorkspace.cs:252
-msgid "Window"
-msgstr "窗口"
-
-#: Pinta.Core/Actions/ViewActions.cs:126
-msgid "Ruler Units"
-msgstr "尺度单位"
-
-#: Pinta.Core/Actions/AddinActions.cs:40
-msgid "Add-in Manager"
-msgstr "插件管理器"
-
-#: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:292
-msgid "Add New Layer"
-msgstr "添加新图层"
-
-#: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:275
-msgid "Delete Layer"
-msgstr "删除图层"
-
-#: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:266
-msgid "Duplicate Layer"
-msgstr "复制图层"
-
-#: Pinta.Core/Actions/LayerActions.cs:68
-#: Pinta.Core/Actions/LayerActions.cs:244
-msgid "Merge Layer Down"
-msgstr "向下合并图层"
-
-#: Pinta.Core/Actions/LayerActions.cs:69
-msgid "Import from File..."
-msgstr "从文件导入..."
-
-#: Pinta.Core/Actions/LayerActions.cs:72
-msgid "Rotate / Zoom Layer..."
-msgstr "旋转 / 缩放层"
-
-#: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:219
-msgid "Move Layer Up"
-msgstr "升高图层"
-
-#: Pinta.Core/Actions/LayerActions.cs:74
-#: Pinta.Core/Actions/LayerActions.cs:230
-msgid "Move Layer Down"
-msgstr "降低图层"
-
-#: Pinta.Core/Actions/LayerActions.cs:75
-msgid "Layer Properties..."
-msgstr "图层属性..."
-
-#: Pinta.Core/Actions/LayerActions.cs:157
-#: Pinta/Actions/File/OpenDocumentAction.cs:50
-msgid "Open Image File"
-msgstr "打开图像文件"
-
-#: Pinta.Core/Actions/LayerActions.cs:185
-msgid "Import From File"
-msgstr "从文件导入"
-
-#: Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
 msgstr "新建..."
 
-#: Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
 msgstr "新截图..."
 
-#: Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
 msgstr "打开最近的"
 
-#: Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
 msgstr "关闭"
 
-#: Pinta.Core/Actions/FileActions.cs:65
+#: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
 msgstr "保存"
 
-#: Pinta.Core/Actions/FileActions.cs:67
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
 msgstr "打印"
 
-#: Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
 msgstr "退出"
 
-#: Pinta.Core/Actions/FileActions.cs:70
+#: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
 msgstr "新建"
 
-#: Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
 msgstr "打开"
 
-#: Pinta.Core/Actions/HelpActions.cs:50
+#: ../Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
 msgstr "Pinta 网站"
 
-#: Pinta.Core/Actions/HelpActions.cs:51
+#: ../Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
 msgstr "报告一个错误"
 
-#: Pinta.Core/Actions/HelpActions.cs:52
+#: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
 msgstr "翻译这个应用程序"
 
-#: Pinta.Core/Actions/HelpActions.cs:53 Pinta/MainWindow.cs:161
+#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:222
 msgid "About"
 msgstr "关于"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:53
-msgid "Multiply"
-msgstr "正片叠加"
+#: ../Pinta.Core/Actions/ImageActions.cs:59
+#: ../Pinta.Core/Actions/ImageActions.cs:279
+msgid "Crop to Selection"
+msgstr "裁剪到选择部分"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:54
-msgid "Additive"
-msgstr ""
+#: ../Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "自动裁剪"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:55
-msgid "Color Burn"
-msgstr "颜色加深"
+#: ../Pinta.Core/Actions/ImageActions.cs:61
+msgid "Resize Image..."
+msgstr "改变图像大小..."
 
-#: Pinta.Core/Effects/UserBlendOps.cs:56
-msgid "Color Dodge"
-msgstr "颜色减淡"
+#: ../Pinta.Core/Actions/ImageActions.cs:62
+msgid "Resize Canvas..."
+msgstr "改变画布大小..."
 
-#: Pinta.Core/Effects/UserBlendOps.cs:57
-msgid "Reflect"
-msgstr "反射"
+#: ../Pinta.Core/Actions/ImageActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:70
+msgid "Flip Horizontal"
+msgstr "水平翻转"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:58
-#: Pinta.Effects/Effects/GlowEffect.cs:30
-msgid "Glow"
-msgstr "发光"
+#: ../Pinta.Core/Actions/ImageActions.cs:64
+#: ../Pinta.Core/Actions/LayerActions.cs:71
+msgid "Flip Vertical"
+msgstr "垂直翻转"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:59
-msgid "Overlay"
-msgstr "重叠"
+#: ../Pinta.Core/Actions/ImageActions.cs:65
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+msgid "Rotate 90° Clockwise"
+msgstr "顺时针旋转90°"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:60
-msgid "Difference"
-msgstr ""
+#: ../Pinta.Core/Actions/ImageActions.cs:66
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "逆时针旋转90°"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:61
-msgid "Negation"
-msgstr "负片"
+#: ../Pinta.Core/Actions/ImageActions.cs:67
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+msgid "Rotate 180°"
+msgstr "旋转180°"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:62
-msgid "Lighten"
-msgstr "加亮"
+#: ../Pinta.Core/Actions/ImageActions.cs:68
+#: ../Pinta.Core/Actions/ImageActions.cs:137
+msgid "Flatten"
+msgstr "平面化"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:63
-msgid "Darken"
-msgstr "减暗"
+#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/LayerActions.cs:292
+#: ../Pinta.Core/Classes/Document.cs:859
+msgid "Add New Layer"
+msgstr "添加新图层"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:64
-msgid "Screen"
-msgstr ""
+#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:275
+msgid "Delete Layer"
+msgstr "删除图层"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:65
-msgid "Xor"
-msgstr "异或"
+#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:266
+msgid "Duplicate Layer"
+msgstr "复制图层"
 
-#: Pinta.Core/Classes/BaseTool.cs:192
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:244
+msgid "Merge Layer Down"
+msgstr "向下合并图层"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:69
+msgid "Import from File..."
+msgstr "从文件导入..."
+
+#: ../Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "旋转 / 缩放层"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:73
+#: ../Pinta.Core/Actions/LayerActions.cs:219
+msgid "Move Layer Up"
+msgstr "升高图层"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:74
+#: ../Pinta.Core/Actions/LayerActions.cs:230
+msgid "Move Layer Down"
+msgstr "降低图层"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+msgid "Layer Properties..."
+msgstr "图层属性..."
+
+#: ../Pinta.Core/Actions/LayerActions.cs:157
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+msgid "Open Image File"
+msgstr "打开图像文件"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:185
+msgid "Import From File"
+msgstr "从文件导入"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:75
+msgid "Zoom In"
+msgstr "放大"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:76
+msgid "Zoom Out"
+msgstr "缩小"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:77
+msgid "Best Fit"
+msgstr "最适大小"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:78
+msgid "Zoom to Selection"
+msgstr "缩放至选择部分"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:79
+msgid "Normal Size"
+msgstr "普通大小"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:80
+msgid "Toolbar"
+msgstr "工具栏"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:81
+msgid "Pixel Grid"
+msgstr "像素网格"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:82
+msgid "Rulers"
+msgstr "标尺"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:83
+msgid "Pixels"
+msgstr "像素"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:84
+msgid "Inches"
+msgstr "英寸"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:85
+msgid "Centimeters"
+msgstr "厘米"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:86
+msgid "Fullscreen"
+msgstr "全屏"
+
+#. stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
+#. image was rotated or cropped) and "Zoom to Window" mode is active
+#: ../Pinta.Core/Actions/ViewActions.cs:88
+#: ../Pinta.Core/Actions/ViewActions.cs:216
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:295
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:303
+msgid "Window"
+msgstr "窗口"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:126
+msgid "Ruler Units"
+msgstr "尺度单位"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "保存全部"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "关闭全部"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:251
 msgid "Tool"
 msgstr "工具"
 
-#: Pinta.Core/Classes/BaseTool.cs:263
+#: ../Pinta.Core/Classes/BaseTool.cs:327
 msgid "Shortcut key"
 msgstr "快捷键"
 
-#: Pinta.Core/Classes/BaseTool.cs:418
+#: ../Pinta.Core/Classes/BaseTool.cs:436
 msgid "Normal Blending"
-msgstr ""
+msgstr "一般混合"
 
-#: Pinta.Core/Classes/BaseTool.cs:419
+#: ../Pinta.Core/Classes/BaseTool.cs:437
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: Pinta.Core/Classes/BaseTool.cs:433
+#: ../Pinta.Core/Classes/BaseTool.cs:451
 msgid "Antialiasing On"
 msgstr "开启抗锯齿"
 
-#: Pinta.Core/Classes/BaseTool.cs:434
+#: ../Pinta.Core/Classes/BaseTool.cs:452
 msgid "Antialiasing Off"
 msgstr "关闭抗锯齿"
 
-#: Pinta.Core/Classes/Document.cs:350
+#: ../Pinta.Core/Classes/Document.cs:316 ../Pinta.Core/Classes/Document.cs:321
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
+msgid "Layer"
+msgstr "图层"
+
+#: ../Pinta.Core/Classes/Document.cs:403
 msgid "copy"
 msgstr "复制"
 
-#: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: ../Pinta.Core/Classes/Document.cs:674
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr "改变画布大小"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "版本"
+#: ../Pinta.Core/Classes/Document.cs:875
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
+msgid "Move Selected Pixels"
+msgstr "移动选择的像素"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "许可"
+#: ../Pinta.Core/Classes/Document.cs:893
+msgid "Image larger than canvas"
+msgstr "图像比画布大"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "以 MIT X11 许可证发行"
+#: ../Pinta.Core/Classes/Document.cs:894
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr "被粘贴的图片大于画布大小，您希望怎么做？"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "版权"
+#: ../Pinta.Core/Classes/Document.cs:898
+msgid "Expand canvas"
+msgstr "扩大画布"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "由 Pinta 贡献者"
+#: ../Pinta.Core/Classes/Document.cs:899
+msgid "Don't change canvas size"
+msgstr "不要扩大画布"
 
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+#: ../Pinta.Core/Classes/Document.cs:912
 msgid "Image cannot be pasted"
 msgstr "不能粘贴图像"
 
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+#: ../Pinta.Core/Classes/Document.cs:913
 msgid "The clipboard does not contain an image."
 msgstr "剪切板中没有图像"
 
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "标题"
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+msgid "Replace"
+msgstr "替换"
 
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "路径"
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr "合并 (+) (Ctrl + 左键)"
 
-#: Pinta/Dialogs/AboutDialog.cs:120
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+msgid "Exclude (-) (Right Click)"
+msgstr "排除 (-) (右键)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:51
+msgid "Xor (Ctrl + Right Click)"
+msgstr "异或 (Ctrl +右键)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+msgid "Intersect (Shift + Left Click)"
+msgstr "交错 (Shift + 左键)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+msgid " Selection Mode: "
+msgstr " 选取模式: "
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:52
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:37
+#: ../Pinta.Tools/Tools/TextTool.cs:233
+msgid "Normal"
+msgstr "一般"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:53
+msgid "Multiply"
+msgstr "正片叠加"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:54
+msgid "Additive"
+msgstr "附加项"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:55
+msgid "Color Burn"
+msgstr "颜色加深"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:56
+msgid "Color Dodge"
+msgstr "颜色减淡"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:57
+msgid "Reflect"
+msgstr "反射"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:58
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+msgid "Glow"
+msgstr "发光"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:59
+msgid "Overlay"
+msgstr "重叠"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:60
+msgid "Difference"
+msgstr "差别"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:61
+msgid "Negation"
+msgstr "负片"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:62
+msgid "Lighten"
+msgstr "加亮"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:63
+msgid "Darken"
+msgstr "减暗"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:64
+msgid "Screen"
+msgstr "屏幕"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:65
+msgid "Xor"
+msgstr "异或"
+
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "完成像素"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "水平翻转图像"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "垂直翻转图像"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "水平翻转图层"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "垂直翻转图层"
+
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:38
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+msgid "Resize Image"
+msgstr "改变图像大小"
+
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} 图像 ({1})"
+
+#. Create a gtk action for each adjustment
+#. Create a gtk action and menu item for each effect
+#: ../Pinta.Core/Managers/EffectsManager.cs:63
+#: ../Pinta.Core/Managers/EffectsManager.cs:98
+msgid "..."
+msgstr "..."
+
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:221
+msgid "Rendering Effect"
+msgstr "渲染效果"
+
+#: ../Pinta.Core/Managers/ToolManager.cs:234
+#: ../Pinta.Core/Managers/ToolManager.cs:236
+msgid "No tool selected."
+msgstr "没有选择工具。"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:104
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "未保存的图像 {0}"
+
+#. Start with an empty white layer
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:163
+msgid "Background"
+msgstr "背景"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:172
+#: ../Pinta/Dialogs/NewImageDialog.cs:68
+msgid "New Image"
+msgstr "新建图像"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:194
+msgid "Open Image"
+msgstr "打开图像"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:202
+msgid "Permission denied"
+msgstr "权限不够"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:343
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "无法打开文件：{0}"
+
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+msgid "Auto Level"
+msgstr "自动调整色阶"
+
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+msgid "Black and White"
+msgstr "黑白"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+msgid "Brightness / Contrast"
+msgstr "亮度 / 对比度"
+
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
+msgid "Curves"
+msgstr "曲线"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+msgid "Hue / Saturation"
+msgstr "色相 / 饱和度"
+
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+msgid "Invert Colors"
+msgstr "反色"
+
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "色阶"
+
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:20
+msgid "Posterize"
+msgstr "海报效果"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
+msgid "Sepia"
+msgstr "复古褐色"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
+msgid "Levels Adjustment"
+msgstr "色阶调整"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+msgid "Add Noise"
+msgstr "添加噪声"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
+#: ../Pinta.Effects/Effects/MedianEffect.cs:36
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
+msgid "Noise"
+msgstr "噪声"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:25
+msgid "Bulge"
+msgstr "凸起"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:33
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:37
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:38
+#: ../Pinta.Effects/Effects/TileEffect.cs:33
+#: ../Pinta.Effects/Effects/TwistEffect.cs:33
+msgid "Distort"
+msgstr "扭曲"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+msgid "Clouds"
+msgstr "云团"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+msgid "Render"
+msgstr "渲染"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
+msgid "Edge Detect"
+msgstr "边缘探测"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:36
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:32
+msgid "Stylize"
+msgstr "风格化"
+
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:25
+msgid "Emboss"
+msgstr "浮雕"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:25
+msgid "Fragment"
+msgstr "碎片"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
+msgid "Blurs"
+msgstr "模糊"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
+msgid "Frosted Glass"
+msgstr "磨砂玻璃"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
+msgid "Gaussian Blur"
+msgstr "高斯模糊"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:38
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:33
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
+msgid "Photo"
+msgstr "照片"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
+msgid "Ink Sketch"
+msgstr "水墨素描"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
+msgid "Artistic"
+msgstr "艺术效果"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
+msgid "Julia Fractal"
+msgstr "朱莉娅分形"
+
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
+msgid "Mandelbrot Fractal"
+msgstr "曼德勃罗分形"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:28
+msgid "Median"
+msgstr "中值"
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
+msgid "Motion Blur"
+msgstr "运动模糊"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
+msgid "Oil Painting"
+msgstr "油画"
+
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:28
+#: ../Pinta.Tools/Tools/TextTool.cs:235
+msgid "Outline"
+msgstr "轮廓"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
+msgid "Pencil Sketch"
+msgstr "铅笔画"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:25
+msgid "Pixelate"
+msgstr "像素化"
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
+msgid "Polar Inversion"
+msgstr "极性反转"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
+msgid "Radial Blur"
+msgstr "辐射模糊"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+msgid "Red Eye Removal"
+msgstr "去除红眼"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
+msgid "Reduce Noise"
+msgstr "减少噪声"
+
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:44
+msgid "Relief"
+msgstr "醒目"
+
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:25
+msgid "Sharpen"
+msgstr "锐化"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+msgid "Soften Portrait"
+msgstr "软化肖像"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:25
+msgid "Tile Reflection"
+msgstr "瓷砖效果"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:25
+msgid "Twist"
+msgstr "扭曲"
+
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
+msgid "Unfocus"
+msgstr "失去焦点"
+
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
+msgid "Zoom Blur"
+msgstr "缩放模糊"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Transfer Map"
+msgstr "转换图"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
+msgid "RGB"
+msgstr "RGB"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
+msgid "Luminosity"
+msgstr "发光度"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
+msgid "(256, 256)"
+msgstr "Copy text   \t (256, 256)"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
+msgid "Red  "
+msgstr "红色  "
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
+msgid "Green"
+msgstr "绿色"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
+msgid "Blue "
+msgstr "蓝色 "
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
+msgid "Reset"
+msgstr "重置"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
+msgid "Tip: Right-click to remove control points."
+msgstr "提示：右击以移除控制点。"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
+msgid "Input Histogram"
+msgstr "输入直方图"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
+msgid "Input"
+msgstr "Input"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
+msgid "Output"
+msgstr "输入或输出"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
+msgid "Output Histogram"
+msgstr "输出直方图"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
+msgid "Auto"
+msgstr "自动"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
+msgid "Red"
+msgstr "红色"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
+msgid "Blue"
+msgstr "蓝色"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:89
+msgid "Linked"
+msgstr "已链接"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+msgid "label1"
+msgstr "标签1"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "标签"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "随机杂色"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr "变换"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
+msgid "Choose Primary Color"
+msgstr "选取主颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
+msgid "Choose Secondary Color"
+msgstr "选取副颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
+msgid "Choose Palette Color"
+msgstr "选取调色板颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
+msgid "Click to switch between primary and secondary color."
+msgstr "点击切换主副颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to reset primary and secondary color."
+msgstr "点击重置主副颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+msgid "Click to select primary color."
+msgstr "点击选择主颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+msgid "Click to select secondary color."
+msgstr "点击选择副颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr "左键点击选择主颜色，右键点击选择副颜色，中键点击选择调色板颜色"
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Shown"
+msgstr "显示图层"
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Hidden"
+msgstr "隐藏图层"
+
+#: ../Pinta.Tools/Brushes/CircleBrush.cs:37
+msgid "Circles"
+msgstr "圆圈"
+
+#: ../Pinta.Tools/Brushes/GridBrush.cs:37
+msgid "Grid"
+msgstr "网格"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "泼洒"
+
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
+msgid "Squares"
+msgstr "方格"
+
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
+msgid "Dash"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
+msgid "Arrow"
+msgstr "箭头"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
+msgid "Size"
+msgstr "尺寸"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
+msgid "Decrease arrow size"
+msgstr "减小箭头尺寸"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
+msgid "Increase arrow size"
+msgstr "增大箭头尺寸"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
+#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
+#: EdgeDetectData EmbossEffect ReliefData TwistEffect
+msgid "Angle"
+msgstr "角度"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
+msgid "Decrease angle offset"
+msgstr "减小角度偏移"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
+msgid "Increase angle offset"
+msgstr "增大角度偏移"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
+msgid "Length"
+msgstr "长度"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
+msgid "Decrease length offset"
+msgstr "减小长度偏移"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
+msgid "Increase length offset"
+msgstr "增大长度偏移"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:52
+msgid "Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
+msgid "Brush width"
+msgstr "笔刷宽度"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
+msgid "Decrease brush size"
+msgstr "减小笔刷尺寸"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:345
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
+msgid "Increase brush size"
+msgstr "增大笔刷尺寸"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:360
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
+msgid "Fill Style"
+msgstr "填充形式"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
+msgid "Outline Shape"
+msgstr "边框"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:369
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
+msgid "Fill Shape"
+msgstr "填充"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr "填充和边框"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:383
+msgid "Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:391
+msgid "Open Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:392
+msgid "Closed Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:393
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
+#: ../Pinta.Tools/Tools/EllipseTool.cs:37
+msgid "Ellipse"
+msgstr "椭圆"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:394
+msgid "Rounded Line Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:408
+msgid "Changed Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:547
+msgid "Point Deleted"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:564
+msgid "Deleted"
+msgstr ""
+
+#. Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:613
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:909
+msgid "Point Added"
+msgstr ""
+
+#. Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:949
+msgid "Added"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1039
+msgid "Modified"
+msgstr ""
+
+#. Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
+#. Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1705
+msgid "Finalized"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
+msgid "Open Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
+msgid "Closed Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
+msgid "Rounded Line Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
+msgid "Radius"
+msgstr "半径"
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
+msgid "Decrease shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
+msgid "Increase shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:42
+msgid "Clone Stamp"
+msgstr "仿制图章"
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr "按住 Ctrl 键点击设置源点，然后点击进行涂抹。"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
+msgid "Color Picker"
+msgstr "颜色拾取器"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr "左击设置主颜色，右击设置副颜色。"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
+msgid "Sampling"
+msgstr "取样"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
+msgid "Single Pixel"
+msgstr "单个像素"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
+msgid "3 x 3 Region"
+msgstr "3 x 3 区域"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
+msgid "5 x 5 Region"
+msgstr "5 x 5 区域"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
+msgid "7 x 7 Region"
+msgstr "7 x 7 区域"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
+msgid "9 x 9 Region"
+msgstr "9 x 9 区域"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
+msgid "Image"
+msgstr "图像"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
+msgid "After select"
+msgstr "选择后"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
+msgid "Do not switch tool"
+msgstr "不要切换工具"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
+msgid "Switch to previous tool"
+msgstr "切换到上一个工具"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
+msgid "Switch to Pencil tool"
+msgstr "切换到铅笔工具"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
+msgid "Pencil"
+msgstr "铅笔"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
+msgid "Ellipse Select"
+msgstr "椭圆形选择"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
+msgid ""
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
+"circle."
+msgstr "点击并拖动绘制椭圆选区。按住 Shift 强制画圆形区域。"
+
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:46
+#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
+msgid ""
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press Ctrl + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold Ctrl while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold Ctrl while left clicking on a control point to create a new shape at "
+"the exact same position.\n"
+"Hold Ctrl while clicking outside of the image bounds to create a new shape "
+"starting at the edge.\n"
+"Press Enter to finalize the shape."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:52
+msgid "Eraser"
+msgstr "橡皮擦"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:54
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr "左键点击擦除为透明色，右键点击擦除为副颜色 "
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:72
+msgid "Flood Mode"
+msgstr "填充模式"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:79
+msgid "Contiguous"
+msgstr "区域"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:80
+msgid "Global"
+msgstr "整个区域"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:75
+msgid "Tolerance"
+msgstr "允许偏差量"
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
+msgid "Freeform Shape"
+msgstr "自由形狀"
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr "左击使用主颜色绘制，右击使用副颜色绘制。"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:55
+#: ../Pinta.Tools/Tools/GradientTool.cs:169
+msgid "Gradient"
+msgstr "渐变"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:63
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr "点击拖动以绘制一个从主颜色到副颜色的渐变。右击逆转颜色。"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:176
+msgid "Linear Gradient"
+msgstr "线性渐变"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:177
+msgid "Linear Reflected Gradient"
+msgstr "双线性渐变"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
+msgid "Linear Diamond Gradient"
+msgstr "菱形渐变"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:179
+msgid "Radial Gradient"
+msgstr "辐射渐变"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:180
+msgid "Conical Gradient"
+msgstr "锥形渐变"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:48
+msgid "Lasso Select"
+msgstr "套索选择"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:50
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "点击拖动以绘制选取的轮廓"
+
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:40
+msgid "Line/Curve"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:63
+msgid "Magic Wand Select"
+msgstr "魔术棒选择"
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:73
+msgid "Click to select region of similar color."
+msgstr "点击选取相似颜色的区域。"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
+msgid ""
+"Left click and drag the selection to move selected content. Right click and "
+"drag the selection to rotate selected content."
+msgstr "左键点击并拖动选择移动选中区域的内容。右键点击并拖动选择及旋转选中区域的内容。"
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "移动选区"
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
+msgid ""
+"Left click and drag the selection to move selection outline. Right click and "
+"drag the selection to rotate selection outline."
+msgstr "左键点击并拖动选择移动选中区域的轮廓。右键点击并拖动选择及旋转选中区域的轮廓。"
+
+#. Try to set the default tool to the PaintBrush
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:84
+msgid "Paintbrush"
+msgstr "画笔"
+
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:96
+msgid "Type"
+msgstr "类型"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "油漆桶"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr "左击用主颜色填充一个区域，右击使用副颜色填充。"
+
+#: ../Pinta.Tools/Tools/PanTool.cs:37
+msgid "Pan"
+msgstr "移动"
+
+#: ../Pinta.Tools/Tools/PanTool.cs:43
+msgid "Click and drag to navigate image."
+msgstr "点击拖动以操纵图像。"
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Right click to use the secondary color."
+msgstr "左键点击用主颜色绘制 1 像素宽的线。右键使用副助色。"
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:58
+msgid "Recolor"
+msgstr "重新着色"
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
+msgid "Left click to replace the secondary color with the primary color."
+msgstr "左击用主颜色取代副颜色。"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
+msgid "Rectangle Select"
+msgstr "矩形选择"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
+msgid ""
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
+"square."
+msgstr "单击并拖动绘制矩形选区。按住 Shift 键强制为正方形。"
+
+#: ../Pinta.Tools/Tools/RectangleTool.cs:37
+msgid "Rectangle"
+msgstr "矩形"
+
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
+msgid "Rounded Rectangle"
+msgstr "圆角矩形。"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:81
+msgid "Text"
+msgstr "文字"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:82
+msgid "Text - Finalize"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:88
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr "左击放置光标，然后键入所需的文本。文本颜色为主颜色。"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:141
+msgid "Font"
+msgstr "字体"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:176
+msgid "Bold"
+msgstr "粗体"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:183
+msgid "Italic"
+msgstr "斜体"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:190
+msgid "Underline"
+msgstr "下划线"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:199
+msgid "Left Align"
+msgstr "左对齐"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:207
+msgid "Center Align"
+msgstr "居中对齐"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:214
+msgid "Right Align"
+msgstr "右对齐"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Text Style"
+msgstr "文本样式"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:234
+msgid "Normal and Outline"
+msgstr "正常与大纲"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:236
+msgid "Fill Background"
+msgstr "填充背景"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+msgid "Outline width"
+msgstr "描边宽度"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:251
+msgid "Decrease outline size"
+msgstr "减少描边宽度"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:268
+msgid "Increase outline size"
+msgstr "增加描边宽度"
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:48
+msgid "Zoom"
+msgstr "缩放"
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:54
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr "左击放大，右击缩小。点击并拖动以缩放选区。"
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
+msgid "Resize Palette"
+msgstr "改变调色板大小"
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
+msgid "New palette size:"
+msgstr "调色板大小："
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "关闭前保存对图像“{0}”的修改？"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:62
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "如果您不保存，所有修改 将会永久丢失。"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:76
+msgid "Close _without saving"
+msgstr ""
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+msgid "Take Screenshot"
+msgstr "屏幕截图"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:53
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "截图前延迟(秒)："
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:63
+msgid "Image files"
+msgstr "图像文件"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
+msgid "Save Image File"
+msgstr "保存图像文件"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta 不支持保存图像为这种格式。"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
+msgid "Cannot save read only file."
+msgstr "不能保存只读文件"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
+msgid "Image too large"
+msgstr "图像太大"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "ICO 不能大于 255 x 255 像素。"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "名为“{0}”的文件已经存在。您想要覆盖吗？"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr "文件在“{1}”中已存在。替换将会覆盖它的内容。"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:92
+msgid "Layer Opacity"
+msgstr "图层透明度"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:97
+msgid "Rename Layer"
+msgstr "重命名图层"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Hide Layer"
+msgstr "隐藏图层"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Show Layer"
+msgstr "显示图层"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
+msgid "Layer Properties"
+msgstr "图层属性"
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:76
+msgid "Rotate / Zoom Layer"
+msgstr "旋转 / 缩放层"
+
+#: ../Pinta/AddinSetupService.cs:49
+msgid "Pinta Community Addins - Platform-Specific"
+msgstr ""
+
+#: ../Pinta/AddinSetupService.cs:53
+msgid "Pinta Community Addins - Cross-Platform"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:123
 msgid "Contributors to this release:"
 msgstr "这一版本的贡献者："
 
-#: Pinta/Dialogs/AboutDialog.cs:132
+#: ../Pinta/Dialogs/AboutDialog.cs:135
 msgid "Previous contributors:"
 msgstr "以前的贡献者："
 
-#: Pinta/Dialogs/AboutDialog.cs:143
+#: ../Pinta/Dialogs/AboutDialog.cs:146
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1071,584 +1596,296 @@ msgstr ""
 "  Wylmer Wang https://launchpad.net/~wantinghard\n"
 "  Xhacker Liu https://launchpad.net/~xhacker\n"
 "  ZhengJianhui https://launchpad.net/~zheng1733\n"
+"  colindemian https://launchpad.net/~dengmengpc\n"
 "  qinghao https://launchpad.net/~qinghao1\n"
 "  邵开来 https://launchpad.net/~kailai.shao"
 
-#: Pinta/Dialogs/AboutDialog.cs:146
+#: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "Translated by:"
 msgstr "翻译者："
 
-#: Pinta/Dialogs/AboutDialog.cs:152
+#: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Based on the work of Paint.NET:"
 msgstr "基于 Paint.NET 的工作："
 
-#: Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:162
 msgid "Using some icons from:"
-msgstr "使用了一些图标："
+msgstr "从此位置使用了一些图标："
 
-#: Pinta/Dialogs/AboutDialog.cs:167
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "Powered by Mono:"
 msgstr "基于 Mono 构建："
 
-#: Pinta/Dialogs/AboutDialog.cs:274
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "About Pinta"
 msgstr "关于 Pinta"
 
-#: Pinta/Dialogs/AboutDialog.cs:292
+#: ../Pinta/Dialogs/AboutDialog.cs:295
 msgid "Version Info"
 msgstr "版本信息"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:50
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:107
-msgid "Layer Properties"
-msgstr "图层属性"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "版本"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:159
-msgid "Name:"
-msgstr "名称："
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+msgid "License"
+msgstr "许可"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:167
-msgid "Visible"
-msgstr "可见"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+msgid "Released under the MIT X11 License."
+msgstr "以 MIT X11 许可证发行"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
-msgid "Blend Mode"
-msgstr "混合模式"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+msgid "Copyright"
+msgstr "版权"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:189
-msgid "Opacity:"
-msgstr "透明度："
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+msgid "by Pinta contributors"
+msgstr "由 Pinta 贡献者"
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "JPEG 质量"
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:49
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
 msgstr "质量： "
 
-#: Pinta/Main.cs:68
-msgid "number of threads to use for rendering"
-msgstr "渲染使用的线程数"
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:159
+msgid "Name:"
+msgstr "名称："
 
-#: Pinta/Options.cs:486
-msgid "OptionName"
-msgstr "选项名"
+#. Visible checkbox
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:167
+msgid "Visible"
+msgstr "可见"
 
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
-msgid "Rotate / Zoom Layer"
-msgstr "旋转 / 缩放层"
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
+msgid "Blend Mode"
+msgstr "混合模式"
 
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
-msgid "Layer Opacity"
-msgstr "图层透明度"
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:189
+msgid "Opacity:"
+msgstr "透明度："
 
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:97
-msgid "Rename Layer"
-msgstr "重命名图层"
+#: ../Pinta/Dialogs/NewImageDialog.cs:133
+#: ../Pinta/Dialogs/NewImageDialog.cs:170
+#: ../Pinta/Dialogs/NewImageDialog.cs:298
+#: ../Pinta/Dialogs/NewImageDialog.cs:387
+msgid "Clipboard"
+msgstr ""
 
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
-msgid "Hide Layer"
-msgstr "隐藏图层"
+#: ../Pinta/Dialogs/NewImageDialog.cs:133
+#: ../Pinta/Dialogs/NewImageDialog.cs:172
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:387
+msgid "Custom"
+msgstr ""
 
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
-msgid "Show Layer"
-msgstr "显示图层"
+#. Preset Combo
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+msgid "Preset:"
+msgstr ""
 
-#: Pinta/Actions/Edit/ResizePaletteAction.cs:50
-msgid "Resize Palette"
-msgstr "改变调色板大小"
-
-#: Pinta/Actions/Edit/ResizePaletteAction.cs:51
-msgid "New palette size:"
-msgstr "调色板大小："
-
-#: Pinta/Actions/Edit/PasteAction.cs:125
-msgid "Image larger than canvas"
-msgstr "图像比画布大"
-
-#: Pinta/Actions/Edit/PasteAction.cs:126
-msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
-msgstr "被粘贴的图片大于画布大小，您希望怎么做？"
-
-#: Pinta/Actions/Edit/PasteAction.cs:130
-msgid "Expand canvas"
-msgstr "扩大画布"
-
-#: Pinta/Actions/Edit/PasteAction.cs:131
-msgid "Don't change canvas size"
-msgstr "不要扩大画布"
-
-#: Pinta/Actions/File/OpenDocumentAction.cs:64
-msgid "Image files"
-msgstr "图像文件"
-
-#: Pinta/Actions/File/NewScreenshotAction.cs:52
-msgid "Take Screenshot"
-msgstr "屏幕截图"
-
-#: Pinta/Actions/File/NewScreenshotAction.cs:53
-msgid "Delay before taking a screenshot (seconds):"
-msgstr "截图前延迟(秒)："
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-msgid "Save Image File"
-msgstr "保存图像文件"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
-msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta 不支持保存图像为这种格式。"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
-msgid "Cannot save read only file."
-msgstr "不能保存只读文件"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
-msgid "Image too large"
-msgstr "图像太大"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
-msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "ICO 不能大于 255 x 255 像素。"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "名为“{0}”的文件已经存在。您想要覆盖吗？"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "文件在“{1}”中已存在。替换将会覆盖它的内容。"
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:61
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "关闭前保存对图像“{0}”的修改？"
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:62
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "如果您不保存，所有修改 将会永久丢失。"
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:69
-msgid "Close without saving"
-msgstr "不保存关闭"
-
-#: Pinta/MainWindow.cs:123
-msgid "_File"
-msgstr "文件(_F)"
-
-#: Pinta/MainWindow.cs:124
-msgid "_Edit"
-msgstr "编辑(_E)"
-
-#: Pinta/MainWindow.cs:126
-msgid "_View"
-msgstr "视图(_V)"
-
-#: Pinta/MainWindow.cs:129
-msgid "_Image"
-msgstr "图像(_I)"
-
-#: Pinta/MainWindow.cs:130
-msgid "_Layers"
-msgstr "图层(_L)"
-
-#: Pinta/MainWindow.cs:131
-msgid "_Adjustments"
-msgstr "调整(_A)"
-
-#: Pinta/MainWindow.cs:132
-msgid "Effe_cts"
-msgstr "效果(_C)"
-
-#: Pinta/MainWindow.cs:133
-msgid "A_dd-ins"
-msgstr "插件(_D)"
-
-#: Pinta/MainWindow.cs:135
-msgid "_Window"
-msgstr "窗口(_W)"
-
-#: Pinta/MainWindow.cs:139
-msgid "Tool Windows"
-msgstr "工具窗口"
-
-#: Pinta/MainWindow.cs:143
-msgid "_Help"
-msgstr "帮助(_H)"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-msgid "By percentage:"
-msgstr "按百分比："
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-msgid "By absolute size:"
-msgstr "按绝对尺寸："
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#. Width Entry
+#: ../Pinta/Dialogs/NewImageDialog.cs:182
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
 msgstr "宽度："
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: ../Pinta/Dialogs/NewImageDialog.cs:189
+#: ../Pinta/Dialogs/NewImageDialog.cs:206
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
 msgstr "像素"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#. Height Entry
+#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
 msgstr "高度："
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-msgid "Maintain aspect ratio"
-msgstr "保持宽高比"
+#. Orientation Radio options
+#: ../Pinta/Dialogs/NewImageDialog.cs:216
+msgid "Orientation:"
+msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "锚点："
+#: ../Pinta/Dialogs/NewImageDialog.cs:219
+msgid "Portrait"
+msgstr ""
 
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
-msgid "New Image Size          "
-msgstr "新图像大小          "
+#: ../Pinta/Dialogs/NewImageDialog.cs:227
+msgid "Landscape"
+msgstr ""
 
-#: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
-msgid "Layers"
-msgstr "图层"
+#. Background Color options
+#: ../Pinta/Dialogs/NewImageDialog.cs:236
+msgid "Background:"
+msgstr ""
 
-#: Pinta/Pads/CanvasPad.cs:75
-msgid "Canvas"
-msgstr "画布"
+#: ../Pinta/Dialogs/NewImageDialog.cs:239
+msgid "White"
+msgstr ""
 
-#: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
-msgid "History"
-msgstr "历史"
+#: ../Pinta/Dialogs/NewImageDialog.cs:247
+msgid "Background Color"
+msgstr ""
 
-#: Pinta/Pads/ToolBoxPad.cs:42 Pinta/Pads/ToolBoxPad.cs:48
-msgid "Tools"
-msgstr "工具"
+#: ../Pinta/Dialogs/NewImageDialog.cs:255
+msgid "Transparent"
+msgstr ""
 
-#: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
-msgid "Images"
-msgstr "图像"
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "标题"
 
-#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:91
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "路径"
+
+#: ../Pinta/DockLibrary/DockItem.cs:477
+#: ../Pinta/DockLibrary/DockItemContainer.cs:92
 msgid "Hide"
 msgstr "隐藏"
 
-#: Pinta/DockLibrary/DockItem.cs:485
+#. Dockable menuitem
+#: ../Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
 msgstr "可停靠"
 
-#: Pinta/DockLibrary/DockItem.cs:493
+#: ../Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
 msgstr "浮动"
 
-#: Pinta/DockLibrary/DockItem.cs:502
-#: Pinta/DockLibrary/DockItemContainer.cs:195
+#: ../Pinta/DockLibrary/DockItem.cs:502
+#: ../Pinta/DockLibrary/DockItemContainer.cs:196
 msgid "Auto Hide"
 msgstr "自动隐藏"
 
-#: Pinta/DockLibrary/DockItemContainer.cs:191
+#: ../Pinta/DockLibrary/DockItemContainer.cs:192
 msgid "Dock"
 msgstr "停靠"
 
-#: Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "曲线"
+#. Container child hbox1.Gtk.Box+BoxChild
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "按百分比："
 
-#: Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
-msgid "Levels Adjustment"
-msgstr "色阶调整"
+#. Container child hbox2.Gtk.Box+BoxChild
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "按绝对尺寸："
 
-#: Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
-msgid "Posterize"
-msgstr "海报效果"
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "保持宽高比"
 
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "亮度 / 对比度"
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "锚点："
 
-#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
-msgid "Auto Level"
-msgstr "自动调整色阶"
+#: ../Pinta/Main.cs:72
+msgid "Show this message and exit."
+msgstr ""
 
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:26
-msgid "Sepia"
-msgstr "复古褐色"
+#: ../Pinta/Main.cs:73
+msgid "Display the application version."
+msgstr ""
 
-#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
-msgid "Black and White"
-msgstr "黑白"
+#: ../Pinta/Main.cs:74
+msgid "number of threads to use for rendering"
+msgstr "渲染使用的线程数"
 
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:23
-msgid "Levels"
-msgstr "色阶"
+#: ../Pinta/Main.cs:123
+msgid "Usage: pinta [files]"
+msgstr ""
 
-#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-msgid "Invert Colors"
-msgstr "反色"
+#: ../Pinta/Main.cs:125
+msgid "Options: "
+msgstr ""
 
-#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
-msgid "Hue / Saturation"
-msgstr "色相 / 饱和度"
+#: ../Pinta/MainWindow.cs:184
+msgid "_File"
+msgstr "文件(_F)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
-msgid "Linked"
-msgstr "已链接"
+#: ../Pinta/MainWindow.cs:185
+msgid "_Edit"
+msgstr "编辑(_E)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
-msgid "Input Histogram"
-msgstr "输入直方图"
+#: ../Pinta/MainWindow.cs:187
+msgid "_View"
+msgstr "视图(_V)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
-msgid "Input"
-msgstr "Input"
+#: ../Pinta/MainWindow.cs:190
+msgid "_Image"
+msgstr "图像(_I)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
-msgid "Output"
-msgstr "输入或输出"
+#: ../Pinta/MainWindow.cs:191
+msgid "_Layers"
+msgstr "图层(_L)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
-msgid "Output Histogram"
-msgstr "输出直方图"
+#: ../Pinta/MainWindow.cs:192
+msgid "_Adjustments"
+msgstr "调整(_A)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
-msgid "Auto"
-msgstr "自动"
+#: ../Pinta/MainWindow.cs:193
+msgid "Effe_cts"
+msgstr "效果(_C)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
-msgid "Reset"
-msgstr "重置"
+#: ../Pinta/MainWindow.cs:194
+msgid "A_dd-ins"
+msgstr "插件(_D)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
-msgid "Red"
-msgstr "红色"
+#: ../Pinta/MainWindow.cs:196
+msgid "_Window"
+msgstr "窗口(_W)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
-msgid "Green"
-msgstr "绿色"
+#: ../Pinta/MainWindow.cs:200
+msgid "Tool Windows"
+msgstr "工具窗口"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
-msgid "Blue"
-msgstr "蓝色"
+#: ../Pinta/MainWindow.cs:204
+msgid "_Help"
+msgstr "帮助(_H)"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
-msgid "Transfer Map"
-msgstr "转换图"
+#: ../Pinta/Options.cs:486
+msgid "OptionName"
+msgstr "选项名"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
-msgid "RGB"
-msgstr "RGB"
+#: ../Pinta/Pads/CanvasPad.cs:75
+msgid "Canvas"
+msgstr "画布"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
-msgid "Luminosity"
-msgstr "发光度"
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:50
+msgid "History"
+msgstr "历史"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
-msgid "(256, 256)"
-msgstr "Copy text   \t (256, 256)"
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:54
+msgid "Layers"
+msgstr "图层"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
-msgid "Red  "
-msgstr "红色  "
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:45
+msgid "Images"
+msgstr "图像"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
-msgid "Blue "
-msgstr "蓝色 "
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip: Right-click to remove control points."
-msgstr "提示：右击以移除控制点。"
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:36
-#: Pinta.Effects/Effects/EmbossEffect.cs:33
-#: Pinta.Effects/Effects/ReliefEffect.cs:32
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:36
-msgid "Stylize"
-msgstr "风格化"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:25
-msgid "Oil Painting"
-msgstr "油画"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:33
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:40
-#: Pinta.Effects/Effects/InkSketchEffect.cs:41
-msgid "Artistic"
-msgstr "艺术效果"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:25
-msgid "Bulge"
-msgstr "凸起"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:33
-#: Pinta.Effects/Effects/TwistEffect.cs:33
-#: Pinta.Effects/Effects/PixelateEffect.cs:37
-#: Pinta.Effects/Effects/TileEffect.cs:33
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:33
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:38
-msgid "Distort"
-msgstr "扭曲"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:27
-msgid "Unfocus"
-msgstr "失去焦点"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:35
-#: Pinta.Effects/Effects/FragmentEffect.cs:33
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:33
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:33
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:33
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:33
-msgid "Blurs"
-msgstr "模糊"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:25
-msgid "Julia Fractal"
-msgstr "朱莉娅分形"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: Pinta.Effects/Effects/CloudsEffect.cs:37
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
-msgid "Render"
-msgstr "渲染"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:25
-msgid "Emboss"
-msgstr "浮雕"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:25
-msgid "Fragment"
-msgstr "碎片"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:44
-msgid "Relief"
-msgstr "醒目"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
-msgid "Red Eye Removal"
-msgstr "去除红眼"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
-#: Pinta.Effects/Effects/GlowEffect.cs:38
-#: Pinta.Effects/Effects/SharpenEffect.cs:33
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
-msgid "Photo"
-msgstr "照片"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:25
-msgid "Twist"
-msgstr "扭曲"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:32
-msgid "Pencil Sketch"
-msgstr "铅笔画"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:25
-msgid "Pixelate"
-msgstr "像素化"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:33
-msgid "Ink Sketch"
-msgstr "水墨素描"
-
-#: Pinta.Effects/Effects/TileEffect.cs:25
-msgid "Tile Reflection"
-msgstr "瓷砖效果"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:25
-msgid "Sharpen"
-msgstr "锐化"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:25
-msgid "Frosted Glass"
-msgstr "磨砂玻璃"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:28
-msgid "Median"
-msgstr "中值"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:36
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:37
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
-msgid "Noise"
-msgstr "噪声"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:25
-msgid "Radial Blur"
-msgstr "辐射模糊"
-
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:25
-msgid "Zoom Blur"
-msgstr "缩放模糊"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:25
-msgid "Motion Blur"
-msgstr "运动模糊"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:29
-msgid "Add Noise"
-msgstr "添加噪声"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:28
-msgid "Edge Detect"
-msgstr "边缘探测"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:25
-msgid "Gaussian Blur"
-msgstr "高斯模糊"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:29
-msgid "Clouds"
-msgstr "云团"
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
-msgid "Reduce Noise"
-msgstr "减少噪声"
-
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
-msgid "Mandelbrot Fractal"
-msgstr "曼德勃罗分形"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-msgid "Soften Portrait"
-msgstr "软化肖像"
-
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:25
-msgid "Polar Inversion"
-msgstr "极性反转"
+#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:48
+msgid "Tools"
+msgstr "工具"
 
 #: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
 #: SharpenData MotionBlurEffect
 msgid "Amount"
 msgstr "数量"
-
-#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
-#: EdgeDetectData EmbossEffect ReliefData TwistEffect
-msgid "Angle"
-msgstr "角度"
 
 #: CloudsEffect dialog
 msgid "Antialias"
@@ -1880,7 +2117,7 @@ msgstr "更新"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "插件库"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
@@ -1894,8 +2131,7 @@ msgstr "管理插件库"
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} 个更新可用"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
@@ -1947,7 +2183,7 @@ msgstr "下列软件包将被安装："
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (在用户目录中)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
@@ -2088,7 +2324,3 @@ msgstr "进度"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(由 {0} 提供)"
-
-#: Pinta.Tools/Tools/TextTool.cs:75
-msgid "Text - Finalize"
-msgstr ""

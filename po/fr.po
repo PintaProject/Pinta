@@ -7,742 +7,143 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-05 23:09-0500\n"
-"PO-Revision-Date: 2013-05-19 20:17+0000\n"
-"Last-Translator: Olivier Dufour <olivier.duff@gmail.com>\n"
+"POT-Creation-Date: 2015-02-07 16:32-0500\n"
+"PO-Revision-Date: 2014-12-14 23:25+0000\n"
+"Last-Translator: Manuel Berrocal <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-05-24 15:44+0000\n"
-"X-Generator: Launchpad (build 17017)\n"
+"X-Launchpad-Export-Date: 2015-02-15 18:12+0000\n"
+"X-Generator: Launchpad (build 17341)\n"
 "Language: fr_FR\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
-msgid "Layer Shown"
-msgstr "Calque visible"
-
-#: Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:216
-msgid "Layer Hidden"
-msgstr "Calque caché"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:84
-msgid "Choose Primary Color"
-msgstr "Choisir la couleur primaire"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:99
-msgid "Choose Secondary Color"
-msgstr "Choisir la couleur secondaire"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:130
-msgid "Choose Palette Color"
-msgstr "Choisir la palette de couleurs"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:227
-msgid "Click to switch between primary and secondary color."
-msgstr "Cliquer pour passer de la couleur primaire à la couleur secondaire"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:229
-msgid "Click to reset primary and secondary color."
-msgstr "Cliquez ici pour réinitialiser les couleurs primaires et secondaires"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:231
-msgid "Click to select primary color."
-msgstr "Cliquer pour sélectionner la couleur primaire"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:233
-msgid "Click to select secondary color."
-msgstr "Cliquer pour sélectionner la couleur secondaire"
-
-#: Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:235
-msgid ""
-"Left click to set primary color. Right click to set secondary color. Middle "
-"click to choose palette color."
-msgstr ""
-"Choix de couleur primaire : clic gauche. Choix de couleur secondaire : clic "
-"droit. Palette de couleur : clic molette."
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-msgid "label1"
-msgstr "étiquette1"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "Bruit aléatoire"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr "Regénérer"
-
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-#: Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-msgid "label"
-msgstr "Étiquette"
-
-#: Pinta.Tools/Brushes/CircleBrush.cs:37
-msgid "Circles"
-msgstr "Cercles"
-
-#: Pinta.Tools/Brushes/PlainBrush.cs:37
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:181
-#: Pinta.Core/Effects/UserBlendOps.cs:52
-msgid "Normal"
-msgstr "Normal"
-
-#: Pinta.Tools/Brushes/GridBrush.cs:37
-msgid "Grid"
-msgstr "Grille"
-
-#: Pinta.Tools/Brushes/SquaresBrush.cs:39
-msgid "Squares"
-msgstr "Carrés"
-
-#: Pinta.Tools/Brushes/SplatterBrush.cs:37
-msgid "Splatter"
-msgstr "Éclaboussure"
-
-#: Pinta.Tools/Tools/CloneStampTool.cs:42
-msgid "Clone Stamp"
-msgstr "Tampon duplicateur"
-
-#: Pinta.Tools/Tools/CloneStampTool.cs:47
-msgid "Ctrl-left click to set origin, left click to paint."
-msgstr ""
-"Cliquez sur Ctrl-gauche pour définir l'origine, clic gauche pour peindre."
-
-#: Pinta.Tools/Tools/PencilTool.cs:47 Pinta.Tools/Tools/ColorPickerTool.cs:209
-msgid "Pencil"
-msgstr "Crayon"
-
-#: Pinta.Tools/Tools/PencilTool.cs:49
-msgid ""
-"Left click to draw freeform one-pixel wide lines with the primary color. "
-"Right click to use the secondary color."
-msgstr ""
-"bouton gauche pour dessiner à main levée des lignes d'un pixel de large en "
-"couleur primaire. Bouton droit pour utiliser la couleur secondaire."
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:52
-msgid "Freeform Shape"
-msgstr "Forme Libre"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:54
-#: Pinta.Tools/Tools/PaintBrushTool.cs:42
-msgid ""
-"Left click to draw with primary color, right click to draw with secondary "
-"color."
-msgstr ""
-"Clic gauche pour dessiner avec la couleur primaire, clic droit pour la "
-"couleur secondaire."
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:71
-#: Pinta.Tools/Tools/ShapeTool.cs:131
-msgid "Fill Style"
-msgstr "Style de remplissage"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:78
-#: Pinta.Tools/Tools/ShapeTool.cs:138
-msgid "Outline Shape"
-msgstr "Forme extérieure"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:79
-#: Pinta.Tools/Tools/ShapeTool.cs:139
-msgid "Fill Shape"
-msgstr "Forme de remplissage"
-
-#: Pinta.Tools/Tools/FreeformShapeTool.cs:80
-#: Pinta.Tools/Tools/ShapeTool.cs:140
-msgid "Fill and Outline Shape"
-msgstr "Forme de remplissage et extérieure"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:76 Pinta.Tools/Tools/ShapeTool.cs:99
-msgid "Brush width"
-msgstr "Largeur du pinceau"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:81 Pinta.Tools/Tools/ShapeTool.cs:104
-msgid "Decrease brush size"
-msgstr "Diminuer la taille du pinceau"
-
-#: Pinta.Tools/Tools/BaseBrushTool.cs:95 Pinta.Tools/Tools/ShapeTool.cs:118
-msgid "Increase brush size"
-msgstr "Augmenter la taille du pinceau"
-
-#: Pinta.Tools/Tools/PaintBrushTool.cs:40 Pinta/MainWindow.cs:65
-msgid "Paintbrush"
-msgstr "Pinceau"
-
-#: Pinta.Tools/Tools/PaintBrushTool.cs:78
-msgid "Type"
-msgstr "Type"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:63
-msgid "Color Picker"
-msgstr "Pipette"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:69
-msgid "Left click to set primary color. Right click to set secondary color."
-msgstr ""
-"Clic gauche pour définir la couleur primaire. Clic droit pour définir la "
-"couleur secondaire."
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:113
-msgid "Sampling"
-msgstr "Échantillonage"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:123
-msgid "Single Pixel"
-msgstr "Pixel Unique"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:124
-msgid "3 x 3 Region"
-msgstr "Région 3 x 3"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:125
-msgid "5 x 5 Region"
-msgstr "Région 5 x 5"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:126
-msgid "7 x 7 Region"
-msgstr "Région 7 x 7"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:127
-msgid "9 x 9 Region"
-msgstr "Région 9 x 9"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:135 Pinta.Core/Classes/Document.cs:278
-msgid "Layer"
-msgstr "Calque"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:136
-msgid "Image"
-msgstr "Image"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:147
-msgid "After select"
-msgstr "Après la sélection"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:154
-msgid "Do not switch tool"
-msgstr "Ne pas changer d'outil"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:155
-msgid "Switch to previous tool"
-msgstr "Changer pour l'outil précédent"
-
-#: Pinta.Tools/Tools/ColorPickerTool.cs:156
-msgid "Switch to Pencil tool"
-msgstr "Changer pour l'outil Crayon"
-
-#: Pinta.Tools/Tools/RectangleTool.cs:37
-msgid "Rectangle"
-msgstr "Rectangle"
-
-#: Pinta.Tools/Tools/RectangleTool.cs:43
-msgid ""
-"Click and drag to draw a rectangle (right click for secondary color). Hold "
-"Shift to constrain to a square."
-msgstr ""
-"Cliquez et faites glisser pour dessiner un rectangle (clic droit pour la "
-"couleur secondaire). Maintenez la touche Maj pour contraindre un carré."
-
-#: Pinta.Tools/Tools/EraserTool.cs:52
-msgid "Eraser"
-msgstr "Gomme"
-
-#: Pinta.Tools/Tools/EraserTool.cs:54
-msgid ""
-"Left click to erase to transparent, right click to erase to secondary color. "
-msgstr ""
-"Clic gauche pour effacer et rendre transparent, clic droit pour remplir de "
-"la couleur secondaire. "
-
-#: Pinta.Tools/Tools/ZoomTool.cs:48
-msgid "Zoom"
-msgstr "Zoom"
-
-#: Pinta.Tools/Tools/ZoomTool.cs:54
-msgid ""
-"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
-"selection."
-msgstr ""
-"Clic gauche pour agrandir. Clic droit pour réduire. Cliquer et déposer pour "
-"agrandir la sélection."
-
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:42
-msgid "Move Selection"
-msgstr "Déplacer la Sélection"
-
-#: Pinta.Tools/Tools/MoveSelectionTool.cs:48
-msgid ""
-"Left click and drag the selection to move selection outline. Right click and "
-"drag the selection to rotate selection outline."
-msgstr ""
-"Clic gauche et faites glisser la sélection pour déplacer le contour de la "
-"sélection. Faites un clic droit et faites glisser la sélection à tourner le "
-"contour de la sélection."
-
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:43
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
-#: Pinta/Actions/Edit/PasteAction.cs:108
-msgid "Move Selected Pixels"
-msgstr "Déplacer les pixels sélectionnés"
-
-#: Pinta.Tools/Tools/MoveSelectedTool.cs:49
-msgid ""
-"Left click and drag the selection to move selected content. Right click and "
-"drag the selection to rotate selected content."
-msgstr ""
-"Clic gauche et faites glisser la sélection pour déplacer le contenu "
-"sélectionné. Faites un clic droit et faites glisser la sélection pour faire "
-"pivoter le contenu sélectionné."
-
-#: Pinta.Tools/Tools/PaintBucketTool.cs:40
-msgid "Paint Bucket"
-msgstr "Pot de peinture"
-
-#: Pinta.Tools/Tools/PaintBucketTool.cs:46
-msgid ""
-"Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
-msgstr ""
-"Clic gauche pour remplir la région avec la couleur principale, clic droit "
-"pour remplir avec la couleur secondaire"
-
-#: Pinta.Tools/Tools/LassoSelectTool.cs:48
-msgid "Lasso Select"
-msgstr "Sélection lasso"
-
-#: Pinta.Tools/Tools/LassoSelectTool.cs:50
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "Cliquer et tirer pour tracer le contour d'une zone de selection."
-
-#: Pinta.Tools/Tools/RecolorTool.cs:58
-msgid "Recolor"
-msgstr "Recolorisation"
-
-#: Pinta.Tools/Tools/RecolorTool.cs:60
-msgid "Left click to replace the secondary color with the primary color."
-msgstr ""
-"Clic gauche pour remplacer la couleur secondaire par la couleur primaire."
-
-#: Pinta.Tools/Tools/RecolorTool.cs:73 Pinta.Tools/Tools/FloodTool.cs:93
-msgid "Tolerance"
-msgstr "Tolérance"
-
-#: Pinta.Tools/Tools/EllipseTool.cs:37
-msgid "Ellipse"
-msgstr "Ellipse"
-
-#: Pinta.Tools/Tools/EllipseTool.cs:43
-msgid ""
-"Click and drag to draw an ellipse (right click for secondary color). Hold "
-"Shift to constrain to a circle."
-msgstr ""
-"Cliquez et faites glisser pour dessiner une ellipse (clic droit pour la "
-"couleur secondaire). Maintenez la touche Maj pour contraindre un cercle."
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:43
-msgid "Rounded Rectangle"
-msgstr "Rectangle aux coins arrondis"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:49
-msgid ""
-"Click and drag to draw a rounded rectangle (right click for secondary "
-"color). Hold Shift to constrain to a square."
-msgstr ""
-"Cliquez et faites glisser pour dessiner un rectangle arrondi (clic droit "
-"pour la couleur secondaire). Maintenez la touche Maj pour contraindre un "
-"carré."
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:87
-msgid "Radius"
-msgstr "Rayon"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:92
-msgid "Decrease rectangle's corner radius"
-msgstr "Réduire le rayon du coin du rectangle"
-
-#: Pinta.Tools/Tools/RoundedRectangleTool.cs:106
-msgid "Increase rectangle's corner radius"
-msgstr "Augmenter le rayon du coin du rectangle"
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:37
-msgid "Line"
-msgstr "Ligne"
-
-#: Pinta.Tools/Tools/LineCurveTool.cs:43
-msgid ""
-"Left click to draw with primary color, right click for secondary color. Hold "
-"Shift key to snap to angles."
-msgstr ""
-"Clic gauche pour dessiner avec des couleurs primaires, faites un clic droit "
-"pour la couleur secondaire. Tenez la touche Maj d'aligner les angles."
-
-#: Pinta.Tools/Tools/FloodTool.cs:74
-msgid "Flood Mode"
-msgstr "Mode de remplissage"
-
-#: Pinta.Tools/Tools/FloodTool.cs:81
-msgid "Contiguous"
-msgstr "Contigu"
-
-#: Pinta.Tools/Tools/FloodTool.cs:82
-msgid "Global"
-msgstr "Global"
-
-#: Pinta.Tools/Tools/GradientTool.cs:55 Pinta.Tools/Tools/GradientTool.cs:165
-msgid "Gradient"
-msgstr "Dégradé"
-
-#: Pinta.Tools/Tools/GradientTool.cs:63
-msgid ""
-"Click and drag to draw gradient from primary to secondary color.  Right "
-"click to reverse."
-msgstr ""
-"Cliquer et glisser pour dessiner un dégradé de la couleur primaire vers la "
-"couleur secondaire. Clic droit pour l'inverser."
-
-#: Pinta.Tools/Tools/GradientTool.cs:172
-msgid "Linear Gradient"
-msgstr "Dégradé linéaire"
-
-#: Pinta.Tools/Tools/GradientTool.cs:173
-msgid "Linear Reflected Gradient"
-msgstr "Dégradé linéaire réfléchi"
-
-#: Pinta.Tools/Tools/GradientTool.cs:174
-msgid "Linear Diamond Gradient"
-msgstr "Dégradé linéaire en diamant"
-
-#: Pinta.Tools/Tools/GradientTool.cs:175
-msgid "Radial Gradient"
-msgstr "Dégradé radial"
-
-#: Pinta.Tools/Tools/GradientTool.cs:176
-msgid "Conical Gradient"
-msgstr "Dégradé conique"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:35
-msgid "Text"
-msgstr "Texte"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:41
-msgid ""
-"Left click to place cursor, then type desired text. Text color is primary "
-"color."
-msgstr ""
-"Clic gauche pour placer le curseur, puis taper le texte désiré. La couleur "
-"du texte est la couleur principale."
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:89
-msgid "Font"
-msgstr "Police"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:124
-msgid "Bold"
-msgstr "Gras"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:131
-msgid "Italic"
-msgstr "Italique"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:138
-msgid "Underline"
-msgstr "Souligné"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:147
-msgid "Left Align"
-msgstr "Aligné à gauche"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:155
-msgid "Center Align"
-msgstr "Aligné au centre"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:162
-msgid "Right Align"
-msgstr "Aligné à droite"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:174
-msgid "Text Style"
-msgstr "Style du texte"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:182
-msgid "Normal and Outline"
-msgstr "Normal avec contours"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:183
-#: Pinta.Effects/Effects/OutlineEffect.cs:28
-msgid "Outline"
-msgstr "Sélection des contours"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:184
-msgid "Fill Background"
-msgstr "Remplir le fond"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:192
-msgid "Outline width"
-msgstr "Largeur du contour"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:197
-msgid "Decrease outline size"
-msgstr "Diminuer la taille du contour"
-
-#: Pinta.Tools/Tools/TextTool/TextTool.cs:214
-msgid "Increase outline size"
-msgstr "Augmenter la taille du contour"
-
-#: Pinta.Tools/Tools/EllipseSelectTool.cs:37
-msgid "Ellipse Select"
-msgstr "Sélection elliptique"
-
-#: Pinta.Tools/Tools/EllipseSelectTool.cs:43
-msgid ""
-"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
-"circle."
-msgstr ""
-"Cliquez et faites glisser pour dessiner une sélection elliptique. Maintenez "
-"la touche Maj pour contraindre un cercle."
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:53
-msgid "Replace"
-msgstr "Remplacer"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:54
-msgid "Union (+) (Ctrl + Left Click)"
-msgstr "Union (+) (Ctrl + Clic gauche)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:55
-msgid "Exclude (-) (Right Click)"
-msgstr "Exclusion (-) (Clic droit)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:56
-msgid "Xor (Ctrl + Right Click)"
-msgstr "Xor (Ctrl + Clic droit)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:57
-msgid "Intersect (Shift + Left Click)"
-msgstr "Intersection (Shift + Clic gauche)"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:70
-msgid " Selection Mode: "
-msgstr " Mode de sélection : "
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:102
-msgid "Magic Wand Select"
-msgstr "Sélection baguette magique"
-
-#: Pinta.Tools/Tools/MagicWandTool.cs:112
-msgid "Click to select region of similar color."
-msgstr "Cliquer pour sélectionner une région de couleur similaire"
-
-#: Pinta.Tools/Tools/RectangleSelectTool.cs:37
-msgid "Rectangle Select"
-msgstr "Sélection rectangulaire"
-
-#: Pinta.Tools/Tools/RectangleSelectTool.cs:43
-msgid ""
-"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
-"square."
-msgstr ""
-"Cliquez et faites glisser pour tracer une sélection rectangulaire. Maintenez "
-"la touche Maj pour contraindre un carré."
-
-#: Pinta.Tools/Tools/PanTool.cs:37
-msgid "Pan"
-msgstr "Déplacement"
-
-#: Pinta.Tools/Tools/PanTool.cs:43
-msgid "Click and drag to navigate image."
-msgstr "Cliquer et déplacer pour naviguer dans l'image."
-
-#: Pinta.Core/ImageFormats/FormatDescriptor.cs:67
-#, csharp-format
-msgid "{0} image ({1})"
-msgstr "Image {0} ({1})"
-
-#: Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
-#: Pinta/Dialogs/ResizeImageDialog.cs:38
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
-msgid "Resize Image"
-msgstr "Redimensionner l'image"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-#: Pinta.Core/Actions/ImageActions.cs:67
-msgid "Rotate 180°"
-msgstr "Rotation de 180°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
-msgid "Flip Image Horizontal"
-msgstr "Retourner l'image horizontalement"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
-msgid "Flip Image Vertical"
-msgstr "Retourner l'image verticalement"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-#: Pinta.Core/Actions/ImageActions.cs:65
-msgid "Rotate 90° Clockwise"
-msgstr "Rotation horaire de 90°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-#: Pinta.Core/Actions/ImageActions.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr "Rotation anti-horaire de 90°"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
-msgid "Flip Layer Horizontal"
-msgstr "Retourner le calque horizontalement"
-
-#: Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
-msgid "Flip Layer Vertical"
-msgstr "Retourner le calque verticalement"
-
-#: Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
-msgid "Finish Pixels"
-msgstr "Dernière retouche sur les pixels"
-
-#: Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
-#: Pinta.Core/Actions/EditActions.cs:72 Pinta/Actions/Edit/PasteAction.cs:79
-msgid "Paste"
-msgstr "Coller"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:97
-#, csharp-format
-msgid "Unsaved Image {0}"
-msgstr "Image non enregistrée {0}"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:156
-msgid "Background"
-msgstr "Arrière-plan"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:165
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:27
-msgid "New Image"
-msgstr "Nouvelle image"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:184
-msgid "Open Image"
-msgstr "Ouvrir une image"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:192
-msgid "Permission denied"
-msgstr "Permission refusée"
-
-#: Pinta.Core/Managers/WorkspaceManager.cs:311
-#, csharp-format
-msgid "Could not open file: {0}"
-msgstr "Impossible d'ouvrir le fichier : {0}"
-
-#: Pinta.Core/Managers/ToolManager.cs:234
-#: Pinta.Core/Managers/ToolManager.cs:236
-msgid "No tool selected."
-msgstr "Aucun outil sélectionné"
-
-#: Pinta.Core/Managers/LivePreviewManager.cs:217
-msgid "Rendering Effect"
-msgstr "Effet de rendu"
-
-#: Pinta.Core/Managers/EffectsManager.cs:63
-#: Pinta.Core/Managers/EffectsManager.cs:98
-msgid "..."
-msgstr "..."
-
-#: Pinta.Core/Actions/EditActions.cs:67
+#: ../xdg/pinta.desktop.in.h:1
+msgid "Pinta"
+msgstr "Pinta"
+
+#: ../xdg/pinta.desktop.in.h:2
+msgid "Easily create and edit images"
+msgstr "Créer et modifier facilement des images"
+
+#: ../xdg/pinta.desktop.in.h:3
+msgid "Image Editor"
+msgstr "Éditeur d'images"
+
+#: ../xdg/pinta.desktop.in.h:4
+msgid "Pinta Image Editor"
+msgstr "Éditeur d'image Pinta"
+
+#: ../Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager"
+msgstr "Gestionnaire d’extensions"
+
+#: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
 msgstr "Défaire"
 
-#: Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
 msgstr "Rétablir"
 
-#: Pinta.Core/Actions/EditActions.cs:69 Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
 msgstr "Couper"
 
-#: Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
 msgstr "Copier"
 
-#: Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
 msgstr "Copie fusionnée"
 
-#: Pinta.Core/Actions/EditActions.cs:73
-#: Pinta/Actions/Edit/PasteIntoNewLayerAction.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Classes/Document.cs:801
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+msgid "Paste"
+msgstr "Coller"
+
+#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Classes/Document.cs:797
 msgid "Paste Into New Layer"
 msgstr "Coller dans un nouveau calque"
 
-#: Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
 msgstr "Coller dans une nouvelle image"
 
-#: Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Delete Selection"
 msgstr "Supprimer la sélection"
 
-#: Pinta.Core/Actions/EditActions.cs:76 Pinta.Core/Actions/EditActions.cs:178
+#: ../Pinta.Core/Actions/EditActions.cs:76
+#: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
 msgstr "Remplir la sélection"
 
-#: Pinta.Core/Actions/EditActions.cs:77 Pinta.Core/Actions/EditActions.cs:401
+#: ../Pinta.Core/Actions/EditActions.cs:77
+#: ../Pinta.Core/Actions/EditActions.cs:418
 msgid "Invert Selection"
 msgstr "Inverser la sélection"
 
-#: Pinta.Core/Actions/EditActions.cs:78 Pinta.Core/Actions/EditActions.cs:187
+#: ../Pinta.Core/Actions/EditActions.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
 msgstr "Tout sélectionner"
 
-#: Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
 msgstr "Tout désélectionner"
 
-#: Pinta.Core/Actions/EditActions.cs:81 Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
 msgstr "Ouvrir..."
 
-#: Pinta.Core/Actions/EditActions.cs:82 Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/EditActions.cs:82
+#: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
 msgstr "Enregistrer sous..."
 
-#: Pinta.Core/Actions/EditActions.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
 msgstr "Réinitialiser"
 
-#: Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
 msgstr "Définir le nombre de couleurs"
 
-#: Pinta.Core/Actions/EditActions.cs:125 Pinta/Pads/ColorPalettePad.cs:42
-#: Pinta/Pads/ColorPalettePad.cs:49
+#: ../Pinta.Core/Actions/EditActions.cs:125
+#: ../Pinta/Pads/ColorPalettePad.cs:42 ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
 msgstr "Palette"
 
-#: Pinta.Core/Actions/EditActions.cs:218
+#: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
 msgstr "Effacer la sélection"
 
-#: Pinta.Core/Actions/EditActions.cs:227
+#: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
 msgstr "Désélectionner"
 
-#: Pinta.Core/Actions/EditActions.cs:319
+#: ../Pinta.Core/Actions/EditActions.cs:327
 msgid "Open Palette File"
 msgstr "Ouvrir le fichier de palette"
 
-#: Pinta.Core/Actions/EditActions.cs:326
+#: ../Pinta.Core/Actions/EditActions.cs:334
 msgid "Palette files (*.txt, *.gpl)"
 msgstr "Fichiers palette (*.txt, *.gpl)"
 
-#: Pinta.Core/Actions/EditActions.cs:330
-#: Pinta/Actions/File/OpenDocumentAction.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:338
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "Tous les fichiers"
 
-#: Pinta.Core/Actions/EditActions.cs:346
+#: ../Pinta.Core/Actions/EditActions.cs:354
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
@@ -752,359 +153,1480 @@ msgstr ""
 "Veuillez vérifier que vous essayez d'ouvrir une palette GIMP ou Paint.NET "
 "valide"
 
-#: Pinta.Core/Actions/EditActions.cs:347
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
 msgid "Error"
 msgstr "Erreur"
 
-#: Pinta.Core/Actions/EditActions.cs:359
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Save Palette File"
 msgstr "Enregistrer le fichier de palette"
 
-#: Pinta.Core/Actions/EditActions.cs:365
+#: ../Pinta.Core/Actions/EditActions.cs:373
 msgid "Paint.NET palette (*.txt)"
 msgstr "Palette Paint.NET (*.txt)"
 
-#: Pinta.Core/Actions/EditActions.cs:370
+#: ../Pinta.Core/Actions/EditActions.cs:378
 msgid "GIMP palette (*.gpl)"
 msgstr "Palette GIMP (*.gpl)"
 
-#: Pinta.Core/Actions/ImageActions.cs:59
-#: Pinta.Core/Actions/ImageActions.cs:277
-msgid "Crop to Selection"
-msgstr "Rogner"
-
-#: Pinta.Core/Actions/ImageActions.cs:60
-msgid "Auto Crop"
-msgstr "Rognage automatique"
-
-#: Pinta.Core/Actions/ImageActions.cs:61
-msgid "Resize Image..."
-msgstr "Redimensionner l'image..."
-
-#: Pinta.Core/Actions/ImageActions.cs:62
-msgid "Resize Canvas..."
-msgstr "Redimensionner la toile ..."
-
-#: Pinta.Core/Actions/ImageActions.cs:63 Pinta.Core/Actions/LayerActions.cs:70
-msgid "Flip Horizontal"
-msgstr "Retourner horizontalement"
-
-#: Pinta.Core/Actions/ImageActions.cs:64 Pinta.Core/Actions/LayerActions.cs:71
-msgid "Flip Vertical"
-msgstr "Retourner verticalement"
-
-#: Pinta.Core/Actions/ImageActions.cs:68
-#: Pinta.Core/Actions/ImageActions.cs:137
-msgid "Flatten"
-msgstr "Aplatir"
-
-#: Pinta.Core/Actions/WindowActions.cs:45
-msgid "Save All"
-msgstr "Enregistrer tout"
-
-#: Pinta.Core/Actions/WindowActions.cs:46
-msgid "Close All"
-msgstr "Fermer tout"
-
-#: Pinta.Core/Actions/ViewActions.cs:75
-msgid "Zoom In"
-msgstr "Zoom avant"
-
-#: Pinta.Core/Actions/ViewActions.cs:76
-msgid "Zoom Out"
-msgstr "Zoom arrière"
-
-#: Pinta.Core/Actions/ViewActions.cs:77
-msgid "Best Fit"
-msgstr "Meilleur ajustement"
-
-#: Pinta.Core/Actions/ViewActions.cs:78
-msgid "Zoom to Selection"
-msgstr "Adapter l'échelle à la sélection"
-
-#: Pinta.Core/Actions/ViewActions.cs:79
-msgid "Normal Size"
-msgstr "Taille normale"
-
-#: Pinta.Core/Actions/ViewActions.cs:80
-msgid "Toolbar"
-msgstr "Barre d'outils"
-
-#: Pinta.Core/Actions/ViewActions.cs:81
-msgid "Pixel Grid"
-msgstr "Grille des pixels"
-
-#: Pinta.Core/Actions/ViewActions.cs:82
-msgid "Rulers"
-msgstr "Règles"
-
-#: Pinta.Core/Actions/ViewActions.cs:83
-msgid "Pixels"
-msgstr "Pixels"
-
-#: Pinta.Core/Actions/ViewActions.cs:84
-msgid "Inches"
-msgstr "Pouces"
-
-#: Pinta.Core/Actions/ViewActions.cs:85
-msgid "Centimeters"
-msgstr "Centimètres"
-
-#: Pinta.Core/Actions/ViewActions.cs:86
-msgid "Fullscreen"
-msgstr "Plein écran"
-
-#: Pinta.Core/Actions/ViewActions.cs:88 Pinta.Core/Actions/ViewActions.cs:216
-#: Pinta.Core/Classes/DocumentWorkspace.cs:244
-#: Pinta.Core/Classes/DocumentWorkspace.cs:252
-msgid "Window"
-msgstr "Fenêtre"
-
-#: Pinta.Core/Actions/ViewActions.cs:126
-msgid "Ruler Units"
-msgstr "Unités des règles"
-
-#: Pinta.Core/Actions/AddinActions.cs:40
-msgid "Add-in Manager"
-msgstr "Gestionnaire d’extensions"
-
-#: Pinta.Core/Actions/LayerActions.cs:65
-#: Pinta.Core/Actions/LayerActions.cs:292
-msgid "Add New Layer"
-msgstr "Ajouter un nouveau calque"
-
-#: Pinta.Core/Actions/LayerActions.cs:66
-#: Pinta.Core/Actions/LayerActions.cs:275
-msgid "Delete Layer"
-msgstr "Supprimer le calque"
-
-#: Pinta.Core/Actions/LayerActions.cs:67
-#: Pinta.Core/Actions/LayerActions.cs:266
-msgid "Duplicate Layer"
-msgstr "Dupliquer le calque"
-
-#: Pinta.Core/Actions/LayerActions.cs:68
-#: Pinta.Core/Actions/LayerActions.cs:244
-msgid "Merge Layer Down"
-msgstr "Fusionner avec le calque inférieur"
-
-#: Pinta.Core/Actions/LayerActions.cs:69
-msgid "Import from File..."
-msgstr "Importer depuis un fichier..."
-
-#: Pinta.Core/Actions/LayerActions.cs:72
-msgid "Rotate / Zoom Layer..."
-msgstr "Calque Zoom / Rotation..."
-
-#: Pinta.Core/Actions/LayerActions.cs:73
-#: Pinta.Core/Actions/LayerActions.cs:219
-msgid "Move Layer Up"
-msgstr "Déplacer le calque vers le haut"
-
-#: Pinta.Core/Actions/LayerActions.cs:74
-#: Pinta.Core/Actions/LayerActions.cs:230
-msgid "Move Layer Down"
-msgstr "Déplacer le calque vers le bas"
-
-#: Pinta.Core/Actions/LayerActions.cs:75
-msgid "Layer Properties..."
-msgstr "Propriétés du calque"
-
-#: Pinta.Core/Actions/LayerActions.cs:157
-#: Pinta/Actions/File/OpenDocumentAction.cs:50
-msgid "Open Image File"
-msgstr "Ouvrir un fichier image"
-
-#: Pinta.Core/Actions/LayerActions.cs:185
-msgid "Import From File"
-msgstr "Importer depuis un fichier"
-
-#: Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
 msgstr "Nouveau..."
 
-#: Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
 msgstr "Nouvelle capture d'écran..."
 
-#: Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
 msgstr "Ouvert récemment"
 
-#: Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
 msgstr "Fermer"
 
-#: Pinta.Core/Actions/FileActions.cs:65
+#: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
 msgstr "Enregistrer"
 
-#: Pinta.Core/Actions/FileActions.cs:67
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
 msgstr "Imprimer"
 
-#: Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
 msgstr "Quitter"
 
-#: Pinta.Core/Actions/FileActions.cs:70
+#: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
 msgstr "Nouveau"
 
-#: Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
 msgstr "Ouvrir"
 
-#: Pinta.Core/Actions/HelpActions.cs:50
+#: ../Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
 msgstr "Site Web de Pinta"
 
-#: Pinta.Core/Actions/HelpActions.cs:51
+#: ../Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
 msgstr "Rapporter un dysfonctionnement"
 
-#: Pinta.Core/Actions/HelpActions.cs:52
+#: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
 msgstr "Traduire ce logiciel"
 
-#: Pinta.Core/Actions/HelpActions.cs:53 Pinta/MainWindow.cs:161
+#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:222
 msgid "About"
 msgstr "À propos"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:53
-msgid "Multiply"
-msgstr "Multiplier"
+#: ../Pinta.Core/Actions/ImageActions.cs:59
+#: ../Pinta.Core/Actions/ImageActions.cs:279
+msgid "Crop to Selection"
+msgstr "Rogner"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:54
-msgid "Additive"
-msgstr "Additif"
+#: ../Pinta.Core/Actions/ImageActions.cs:60
+msgid "Auto Crop"
+msgstr "Rognage automatique"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:55
-msgid "Color Burn"
-msgstr "Densité couleur +"
+#: ../Pinta.Core/Actions/ImageActions.cs:61
+msgid "Resize Image..."
+msgstr "Redimensionner l'image..."
 
-#: Pinta.Core/Effects/UserBlendOps.cs:56
-msgid "Color Dodge"
-msgstr "Densité couleur -"
+#: ../Pinta.Core/Actions/ImageActions.cs:62
+msgid "Resize Canvas..."
+msgstr "Redimensionner la toile ..."
 
-#: Pinta.Core/Effects/UserBlendOps.cs:57
-msgid "Reflect"
-msgstr "Reflet"
+#: ../Pinta.Core/Actions/ImageActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:70
+msgid "Flip Horizontal"
+msgstr "Retourner horizontalement"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:58
-#: Pinta.Effects/Effects/GlowEffect.cs:30
-msgid "Glow"
-msgstr "Halo"
+#: ../Pinta.Core/Actions/ImageActions.cs:64
+#: ../Pinta.Core/Actions/LayerActions.cs:71
+msgid "Flip Vertical"
+msgstr "Retourner verticalement"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:59
-msgid "Overlay"
-msgstr "Recouvrement"
+#: ../Pinta.Core/Actions/ImageActions.cs:65
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+msgid "Rotate 90° Clockwise"
+msgstr "Rotation horaire de 90°"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:60
-msgid "Difference"
-msgstr "Différence"
+#: ../Pinta.Core/Actions/ImageActions.cs:66
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Rotation anti-horaire de 90°"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:61
-msgid "Negation"
-msgstr "Négation"
+#: ../Pinta.Core/Actions/ImageActions.cs:67
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+msgid "Rotate 180°"
+msgstr "Rotation de 180°"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:62
-msgid "Lighten"
-msgstr "Éclaircir"
+#: ../Pinta.Core/Actions/ImageActions.cs:68
+#: ../Pinta.Core/Actions/ImageActions.cs:137
+msgid "Flatten"
+msgstr "Aplatir"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:63
-msgid "Darken"
-msgstr "Assombrir"
+#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/LayerActions.cs:292
+#: ../Pinta.Core/Classes/Document.cs:859
+msgid "Add New Layer"
+msgstr "Ajouter un nouveau calque"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:64
-msgid "Screen"
-msgstr "Ecran"
+#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:275
+msgid "Delete Layer"
+msgstr "Supprimer le calque"
 
-#: Pinta.Core/Effects/UserBlendOps.cs:65
-msgid "Xor"
-msgstr "Xor"
+#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:266
+msgid "Duplicate Layer"
+msgstr "Dupliquer le calque"
 
-#: Pinta.Core/Classes/BaseTool.cs:192
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:244
+msgid "Merge Layer Down"
+msgstr "Fusionner avec le calque inférieur"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:69
+msgid "Import from File..."
+msgstr "Importer depuis un fichier..."
+
+#: ../Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr "Calque Zoom / Rotation..."
+
+#: ../Pinta.Core/Actions/LayerActions.cs:73
+#: ../Pinta.Core/Actions/LayerActions.cs:219
+msgid "Move Layer Up"
+msgstr "Déplacer le calque vers le haut"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:74
+#: ../Pinta.Core/Actions/LayerActions.cs:230
+msgid "Move Layer Down"
+msgstr "Déplacer le calque vers le bas"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+msgid "Layer Properties..."
+msgstr "Propriétés du calque"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:157
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+msgid "Open Image File"
+msgstr "Ouvrir un fichier image"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:185
+msgid "Import From File"
+msgstr "Importer depuis un fichier"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:75
+msgid "Zoom In"
+msgstr "Zoom avant"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:76
+msgid "Zoom Out"
+msgstr "Zoom arrière"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:77
+msgid "Best Fit"
+msgstr "Meilleur ajustement"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:78
+msgid "Zoom to Selection"
+msgstr "Adapter l'échelle à la sélection"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:79
+msgid "Normal Size"
+msgstr "Taille normale"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:80
+msgid "Toolbar"
+msgstr "Barre d'outils"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:81
+msgid "Pixel Grid"
+msgstr "Grille des pixels"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:82
+msgid "Rulers"
+msgstr "Règles"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:83
+msgid "Pixels"
+msgstr "Pixels"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:84
+msgid "Inches"
+msgstr "Pouces"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:85
+msgid "Centimeters"
+msgstr "Centimètres"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:86
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+#. stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
+#. image was rotated or cropped) and "Zoom to Window" mode is active
+#: ../Pinta.Core/Actions/ViewActions.cs:88
+#: ../Pinta.Core/Actions/ViewActions.cs:216
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:295
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:303
+msgid "Window"
+msgstr "Fenêtre"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:126
+msgid "Ruler Units"
+msgstr "Unités des règles"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr "Enregistrer tout"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr "Fermer tout"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:251
 msgid "Tool"
 msgstr "Outil"
 
-#: Pinta.Core/Classes/BaseTool.cs:263
+#: ../Pinta.Core/Classes/BaseTool.cs:327
 msgid "Shortcut key"
 msgstr "Raccourcis clavier"
 
-#: Pinta.Core/Classes/BaseTool.cs:418
+#: ../Pinta.Core/Classes/BaseTool.cs:436
 msgid "Normal Blending"
 msgstr "Composition normale"
 
-#: Pinta.Core/Classes/BaseTool.cs:419
+#: ../Pinta.Core/Classes/BaseTool.cs:437
 msgid "Overwrite"
 msgstr "Écraser"
 
-#: Pinta.Core/Classes/BaseTool.cs:433
+#: ../Pinta.Core/Classes/BaseTool.cs:451
 msgid "Antialiasing On"
 msgstr "Lissage activé"
 
-#: Pinta.Core/Classes/BaseTool.cs:434
+#: ../Pinta.Core/Classes/BaseTool.cs:452
 msgid "Antialiasing Off"
 msgstr "Lissage desactivé"
 
-#: Pinta.Core/Classes/Document.cs:350
+#: ../Pinta.Core/Classes/Document.cs:316 ../Pinta.Core/Classes/Document.cs:321
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
+msgid "Layer"
+msgstr "Calque"
+
+#: ../Pinta.Core/Classes/Document.cs:403
 msgid "copy"
 msgstr "copier"
 
-#: Pinta.Core/Classes/Document.cs:604 Pinta/Dialogs/ResizeCanvasDialog.cs:39
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: ../Pinta.Core/Classes/Document.cs:674
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:41
-#: Pinta/Dialogs/VersionInformationTabPage.cs:50
-msgid "Version"
-msgstr "Version"
+#: ../Pinta.Core/Classes/Document.cs:875
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
+msgid "Move Selected Pixels"
+msgstr "Déplacer les pixels sélectionnés"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "License"
-msgstr "Licence"
+#: ../Pinta.Core/Classes/Document.cs:893
+msgid "Image larger than canvas"
+msgstr "Agrandir l'image plus que le canevas"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:50
-msgid "Released under the MIT X11 License."
-msgstr "Mis à disposition sous licence MIT X11"
+#: ../Pinta.Core/Classes/Document.cs:894
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+"L'image étant collé est plus grande que la taille de la toile. Que souhaitez-"
+"vous faire ?"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "Copyright"
-msgstr "Droits d’auteur"
+#: ../Pinta.Core/Classes/Document.cs:898
+msgid "Expand canvas"
+msgstr "Elargir la toile"
 
-#: Pinta/Dialogs/AboutPintaTabPage.cs:57
-msgid "by Pinta contributors"
-msgstr "par les contributeurs de Pinta"
+#: ../Pinta.Core/Classes/Document.cs:899
+msgid "Don't change canvas size"
+msgstr "Ne pas changer la taille de la toile"
 
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:36
+#: ../Pinta.Core/Classes/Document.cs:912
 msgid "Image cannot be pasted"
 msgstr "L'image ne peut pas être collée"
 
-#: Pinta/Dialogs/ClipboardEmptyDialog.cs:37
+#: ../Pinta.Core/Classes/Document.cs:913
 msgid "The clipboard does not contain an image."
 msgstr "Le presse-papier ne contient pas d'image"
 
-#: Pinta/Dialogs/VersionInformationTabPage.cs:44
-msgid "Title"
-msgstr "Titre"
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+msgid "Replace"
+msgstr "Remplacer"
 
-#: Pinta/Dialogs/VersionInformationTabPage.cs:53
-msgid "Path"
-msgstr "Emplacement"
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr "Union (+) (Ctrl + Clic gauche)"
 
-#: Pinta/Dialogs/AboutDialog.cs:120
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+msgid "Exclude (-) (Right Click)"
+msgstr "Exclusion (-) (Clic droit)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:51
+msgid "Xor (Ctrl + Right Click)"
+msgstr "Xor (Ctrl + Clic droit)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+msgid "Intersect (Shift + Left Click)"
+msgstr "Intersection (Shift + Clic gauche)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+msgid " Selection Mode: "
+msgstr " Mode de sélection : "
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:52
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:37
+#: ../Pinta.Tools/Tools/TextTool.cs:233
+msgid "Normal"
+msgstr "Normal"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:53
+msgid "Multiply"
+msgstr "Multiplier"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:54
+msgid "Additive"
+msgstr "Additif"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:55
+msgid "Color Burn"
+msgstr "Densité couleur +"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:56
+msgid "Color Dodge"
+msgstr "Densité couleur -"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:57
+msgid "Reflect"
+msgstr "Reflet"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:58
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+msgid "Glow"
+msgstr "Halo"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:59
+msgid "Overlay"
+msgstr "Recouvrement"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:60
+msgid "Difference"
+msgstr "Différence"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:61
+msgid "Negation"
+msgstr "Négation"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:62
+msgid "Lighten"
+msgstr "Éclaircir"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:63
+msgid "Darken"
+msgstr "Assombrir"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:64
+msgid "Screen"
+msgstr "Ecran"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:65
+msgid "Xor"
+msgstr "Xor"
+
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr "Dernière retouche sur les pixels"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr "Retourner l'image horizontalement"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr "Retourner l'image verticalement"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr "Retourner le calque horizontalement"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr "Retourner le calque verticalement"
+
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:38
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+msgid "Resize Image"
+msgstr "Redimensionner l'image"
+
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "Image {0} ({1})"
+
+#. Create a gtk action for each adjustment
+#. Create a gtk action and menu item for each effect
+#: ../Pinta.Core/Managers/EffectsManager.cs:63
+#: ../Pinta.Core/Managers/EffectsManager.cs:98
+msgid "..."
+msgstr "..."
+
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:221
+msgid "Rendering Effect"
+msgstr "Effet de rendu"
+
+#: ../Pinta.Core/Managers/ToolManager.cs:234
+#: ../Pinta.Core/Managers/ToolManager.cs:236
+msgid "No tool selected."
+msgstr "Aucun outil sélectionné"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:104
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Image non enregistrée {0}"
+
+#. Start with an empty white layer
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:163
+msgid "Background"
+msgstr "Arrière-plan"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:172
+#: ../Pinta/Dialogs/NewImageDialog.cs:68
+msgid "New Image"
+msgstr "Nouvelle image"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:194
+msgid "Open Image"
+msgstr "Ouvrir une image"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:202
+msgid "Permission denied"
+msgstr "Permission refusée"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:343
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Impossible d'ouvrir le fichier : {0}"
+
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+msgid "Auto Level"
+msgstr "Niveau automatique"
+
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+msgid "Black and White"
+msgstr "Noir et Blanc"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+msgid "Brightness / Contrast"
+msgstr "Luminosité / Contraste"
+
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
+msgid "Curves"
+msgstr "Courbes"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+msgid "Hue / Saturation"
+msgstr "Teinte / Saturation"
+
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+msgid "Invert Colors"
+msgstr "Inverser les couleurs"
+
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "Niveaux"
+
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:20
+msgid "Posterize"
+msgstr "Postériser"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
+msgid "Sepia"
+msgstr "Sépia"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
+msgid "Levels Adjustment"
+msgstr "Ajustement des niveaux"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+msgid "Add Noise"
+msgstr "Ajouter du bruit"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
+#: ../Pinta.Effects/Effects/MedianEffect.cs:36
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
+msgid "Noise"
+msgstr "Bruit"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:25
+msgid "Bulge"
+msgstr "Bomber"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:33
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:37
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:38
+#: ../Pinta.Effects/Effects/TileEffect.cs:33
+#: ../Pinta.Effects/Effects/TwistEffect.cs:33
+msgid "Distort"
+msgstr "Distortion"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+msgid "Clouds"
+msgstr "Nuages"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+msgid "Render"
+msgstr "Effectuer le rendu"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
+msgid "Edge Detect"
+msgstr "Détecter les contours"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:36
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:32
+msgid "Stylize"
+msgstr "Styliser"
+
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:25
+msgid "Emboss"
+msgstr "Gaufrer"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:25
+msgid "Fragment"
+msgstr "Fragmentation"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
+msgid "Blurs"
+msgstr "Floutage"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
+msgid "Frosted Glass"
+msgstr "Verre dépoli"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
+msgid "Gaussian Blur"
+msgstr "Flou gaussien"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:38
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:33
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
+msgid "Photo"
+msgstr "Photo"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
+msgid "Ink Sketch"
+msgstr "Croquis à l'encre"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
+msgid "Artistic"
+msgstr "Artistique"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
+msgid "Julia Fractal"
+msgstr "Fractale de Julia"
+
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
+msgid "Mandelbrot Fractal"
+msgstr "Fractale de Mandelbrot"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:28
+msgid "Median"
+msgstr "Médian"
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
+msgid "Motion Blur"
+msgstr "Flou de mouvement"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
+msgid "Oil Painting"
+msgstr "Peinture à l'huile"
+
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:28
+#: ../Pinta.Tools/Tools/TextTool.cs:235
+msgid "Outline"
+msgstr "Sélection des contours"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
+msgid "Pencil Sketch"
+msgstr "Croquis au crayon"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:25
+msgid "Pixelate"
+msgstr "Pixeliser"
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
+msgid "Polar Inversion"
+msgstr "Transformation Symétrique"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
+msgid "Radial Blur"
+msgstr "Flou radial"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+msgid "Red Eye Removal"
+msgstr "Suppression des yeux rouges"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
+msgid "Reduce Noise"
+msgstr "Réduire le bruit"
+
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:44
+msgid "Relief"
+msgstr "Relief"
+
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:25
+msgid "Sharpen"
+msgstr "Augmenter la netteté"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+msgid "Soften Portrait"
+msgstr "Adoucir le portrait"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:25
+msgid "Tile Reflection"
+msgstr "Réflexion mosaïque"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:25
+msgid "Twist"
+msgstr "Tordre"
+
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
+msgid "Unfocus"
+msgstr "Défocaliser"
+
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
+msgid "Zoom Blur"
+msgstr "Flou d'arrière plan"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
+msgid "Transfer Map"
+msgstr "Carte de transfert"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
+msgid "RGB"
+msgstr "RVB"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
+msgid "Luminosity"
+msgstr "Luminosité"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
+msgid "(256, 256)"
+msgstr "(256, 256)"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
+msgid "Red  "
+msgstr "Rouge  "
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
+msgid "Green"
+msgstr "Vert"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
+msgid "Blue "
+msgstr "Bleu "
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
+msgid "Tip: Right-click to remove control points."
+msgstr "Astuce : clic droit pour supprimer les points de contrôle."
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
+msgid "Input Histogram"
+msgstr "Histogramme d'entrée"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
+msgid "Input"
+msgstr "Entrée"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
+msgid "Output"
+msgstr "Sortie"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
+msgid "Output Histogram"
+msgstr "Histogramme de sortie"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
+msgid "Auto"
+msgstr "Auto"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
+msgid "Red"
+msgstr "Rouge"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
+msgid "Blue"
+msgstr "Bleu"
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:89
+msgid "Linked"
+msgstr "Lié"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
+msgid "label1"
+msgstr "étiquette1"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
+msgid "label"
+msgstr "Étiquette"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
+msgid "Random Noise"
+msgstr "Bruit aléatoire"
+
+#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
+msgid "Reseed"
+msgstr "Regénérer"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
+msgid "Choose Primary Color"
+msgstr "Choisir la couleur primaire"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
+msgid "Choose Secondary Color"
+msgstr "Choisir la couleur secondaire"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
+msgid "Choose Palette Color"
+msgstr "Choisir la palette de couleurs"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
+msgid "Click to switch between primary and secondary color."
+msgstr "Cliquer pour passer de la couleur primaire à la couleur secondaire"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to reset primary and secondary color."
+msgstr "Cliquez ici pour réinitialiser les couleurs primaires et secondaires"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+msgid "Click to select primary color."
+msgstr "Cliquer pour sélectionner la couleur primaire"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+msgid "Click to select secondary color."
+msgstr "Cliquer pour sélectionner la couleur secondaire"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr ""
+"Choix de couleur primaire : clic gauche. Choix de couleur secondaire : clic "
+"droit. Palette de couleur : clic molette."
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Shown"
+msgstr "Calque visible"
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Hidden"
+msgstr "Calque caché"
+
+#: ../Pinta.Tools/Brushes/CircleBrush.cs:37
+msgid "Circles"
+msgstr "Cercles"
+
+#: ../Pinta.Tools/Brushes/GridBrush.cs:37
+msgid "Grid"
+msgstr "Grille"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "Éclaboussure"
+
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
+msgid "Squares"
+msgstr "Carrés"
+
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
+msgid "Dash"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
+msgid "Arrow"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
+msgid "Size"
+msgstr "Taille"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
+msgid "Decrease arrow size"
+msgstr "Diminuer la taille de la flèche"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
+msgid "Increase arrow size"
+msgstr "Augmenter la taille de la flèche"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
+#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
+#: EdgeDetectData EmbossEffect ReliefData TwistEffect
+msgid "Angle"
+msgstr "Angle"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
+msgid "Decrease angle offset"
+msgstr "Diminuer l'arrondissement de l'angle"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
+msgid "Increase angle offset"
+msgstr "Augmenter l'arrondissement de l'angle"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
+msgid "Length"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
+msgid "Decrease length offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
+msgid "Increase length offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:52
+msgid "Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
+msgid "Brush width"
+msgstr "Largeur du pinceau"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
+msgid "Decrease brush size"
+msgstr "Diminuer la taille du pinceau"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:345
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
+msgid "Increase brush size"
+msgstr "Augmenter la taille du pinceau"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:360
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
+msgid "Fill Style"
+msgstr "Style de remplissage"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
+msgid "Outline Shape"
+msgstr "Forme extérieure"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:369
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
+msgid "Fill Shape"
+msgstr "Forme de remplissage"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr "Forme de remplissage et extérieure"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:383
+msgid "Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:391
+msgid "Open Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:392
+msgid "Closed Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:393
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
+#: ../Pinta.Tools/Tools/EllipseTool.cs:37
+msgid "Ellipse"
+msgstr "Ellipse"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:394
+msgid "Rounded Line Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:408
+msgid "Changed Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:547
+msgid "Point Deleted"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:564
+msgid "Deleted"
+msgstr ""
+
+#. Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:613
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:909
+msgid "Point Added"
+msgstr ""
+
+#. Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:949
+msgid "Added"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1039
+msgid "Modified"
+msgstr ""
+
+#. Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
+#. Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1705
+msgid "Finalized"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
+msgid "Open Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
+msgid "Closed Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
+msgid "Rounded Line Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
+msgid "Radius"
+msgstr "Rayon"
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
+msgid "Decrease shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
+msgid "Increase shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:42
+msgid "Clone Stamp"
+msgstr "Tampon duplicateur"
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr ""
+"Cliquez sur Ctrl-gauche pour définir l'origine, clic gauche pour peindre."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
+msgid "Color Picker"
+msgstr "Pipette"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"Clic gauche pour définir la couleur primaire. Clic droit pour définir la "
+"couleur secondaire."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
+msgid "Sampling"
+msgstr "Échantillonage"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
+msgid "Single Pixel"
+msgstr "Pixel Unique"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
+msgid "3 x 3 Region"
+msgstr "Région 3 x 3"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
+msgid "5 x 5 Region"
+msgstr "Région 5 x 5"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
+msgid "7 x 7 Region"
+msgstr "Région 7 x 7"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
+msgid "9 x 9 Region"
+msgstr "Région 9 x 9"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
+msgid "Image"
+msgstr "Image"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
+msgid "After select"
+msgstr "Après la sélection"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
+msgid "Do not switch tool"
+msgstr "Ne pas changer d'outil"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
+msgid "Switch to previous tool"
+msgstr "Changer pour l'outil précédent"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
+msgid "Switch to Pencil tool"
+msgstr "Changer pour l'outil Crayon"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
+msgid "Pencil"
+msgstr "Crayon"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
+msgid "Ellipse Select"
+msgstr "Sélection elliptique"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
+msgid ""
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
+"circle."
+msgstr ""
+"Cliquez et faites glisser pour dessiner une sélection elliptique. Maintenez "
+"la touche Maj pour contraindre un cercle."
+
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:46
+#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
+msgid ""
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press Ctrl + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold Ctrl while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold Ctrl while left clicking on a control point to create a new shape at "
+"the exact same position.\n"
+"Hold Ctrl while clicking outside of the image bounds to create a new shape "
+"starting at the edge.\n"
+"Press Enter to finalize the shape."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:52
+msgid "Eraser"
+msgstr "Gomme"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:54
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+"Clic gauche pour effacer et rendre transparent, clic droit pour remplir de "
+"la couleur secondaire. "
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:72
+msgid "Flood Mode"
+msgstr "Mode de remplissage"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:79
+msgid "Contiguous"
+msgstr "Contigu"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:80
+msgid "Global"
+msgstr "Global"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:75
+msgid "Tolerance"
+msgstr "Tolérance"
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
+msgid "Freeform Shape"
+msgstr "Forme Libre"
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Clic gauche pour dessiner avec la couleur primaire, clic droit pour la "
+"couleur secondaire."
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:55
+#: ../Pinta.Tools/Tools/GradientTool.cs:169
+msgid "Gradient"
+msgstr "Dégradé"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:63
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+"Cliquer et glisser pour dessiner un dégradé de la couleur primaire vers la "
+"couleur secondaire. Clic droit pour l'inverser."
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:176
+msgid "Linear Gradient"
+msgstr "Dégradé linéaire"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:177
+msgid "Linear Reflected Gradient"
+msgstr "Dégradé linéaire réfléchi"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
+msgid "Linear Diamond Gradient"
+msgstr "Dégradé linéaire en diamant"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:179
+msgid "Radial Gradient"
+msgstr "Dégradé radial"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:180
+msgid "Conical Gradient"
+msgstr "Dégradé conique"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:48
+msgid "Lasso Select"
+msgstr "Sélection lasso"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:50
+msgid "Click and drag to draw the outline for a selection area."
+msgstr "Cliquer et tirer pour tracer le contour d'une zone de selection."
+
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:40
+msgid "Line/Curve"
+msgstr "Ligne/Courbe"
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:63
+msgid "Magic Wand Select"
+msgstr "Sélection baguette magique"
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:73
+msgid "Click to select region of similar color."
+msgstr "Cliquer pour sélectionner une région de couleur similaire"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
+msgid ""
+"Left click and drag the selection to move selected content. Right click and "
+"drag the selection to rotate selected content."
+msgstr ""
+"Clic gauche et faites glisser la sélection pour déplacer le contenu "
+"sélectionné. Faites un clic droit et faites glisser la sélection pour faire "
+"pivoter le contenu sélectionné."
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr "Déplacer la Sélection"
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
+msgid ""
+"Left click and drag the selection to move selection outline. Right click and "
+"drag the selection to rotate selection outline."
+msgstr ""
+"Clic gauche et faites glisser la sélection pour déplacer le contour de la "
+"sélection. Faites un clic droit et faites glisser la sélection à tourner le "
+"contour de la sélection."
+
+#. Try to set the default tool to the PaintBrush
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:84
+msgid "Paintbrush"
+msgstr "Pinceau"
+
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:96
+msgid "Type"
+msgstr "Type"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr "Pot de peinture"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Clic gauche pour remplir la région avec la couleur principale, clic droit "
+"pour remplir avec la couleur secondaire"
+
+#: ../Pinta.Tools/Tools/PanTool.cs:37
+msgid "Pan"
+msgstr "Déplacement"
+
+#: ../Pinta.Tools/Tools/PanTool.cs:43
+msgid "Click and drag to navigate image."
+msgstr "Cliquer et déplacer pour naviguer dans l'image."
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Right click to use the secondary color."
+msgstr ""
+"bouton gauche pour dessiner à main levée des lignes d'un pixel de large en "
+"couleur primaire. Bouton droit pour utiliser la couleur secondaire."
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:58
+msgid "Recolor"
+msgstr "Recolorisation"
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:60
+msgid "Left click to replace the secondary color with the primary color."
+msgstr ""
+"Clic gauche pour remplacer la couleur secondaire par la couleur primaire."
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
+msgid "Rectangle Select"
+msgstr "Sélection rectangulaire"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
+msgid ""
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
+"square."
+msgstr ""
+"Cliquez et faites glisser pour tracer une sélection rectangulaire. Maintenez "
+"la touche Maj pour contraindre un carré."
+
+#: ../Pinta.Tools/Tools/RectangleTool.cs:37
+msgid "Rectangle"
+msgstr "Rectangle"
+
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
+msgid "Rounded Rectangle"
+msgstr "Rectangle aux coins arrondis"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:81
+msgid "Text"
+msgstr "Texte"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:82
+msgid "Text - Finalize"
+msgstr "Texte - Finaliser"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:88
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Clic gauche pour placer le curseur, puis taper le texte désiré. La couleur "
+"du texte est la couleur principale."
+
+#: ../Pinta.Tools/Tools/TextTool.cs:141
+msgid "Font"
+msgstr "Police"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:176
+msgid "Bold"
+msgstr "Gras"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:183
+msgid "Italic"
+msgstr "Italique"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:190
+msgid "Underline"
+msgstr "Souligné"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:199
+msgid "Left Align"
+msgstr "Aligné à gauche"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:207
+msgid "Center Align"
+msgstr "Aligné au centre"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:214
+msgid "Right Align"
+msgstr "Aligné à droite"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Text Style"
+msgstr "Style du texte"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:234
+msgid "Normal and Outline"
+msgstr "Normal avec contours"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:236
+msgid "Fill Background"
+msgstr "Remplir le fond"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+msgid "Outline width"
+msgstr "Largeur du contour"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:251
+msgid "Decrease outline size"
+msgstr "Diminuer la taille du contour"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:268
+msgid "Increase outline size"
+msgstr "Augmenter la taille du contour"
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:48
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:54
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+"Clic gauche pour agrandir. Clic droit pour réduire. Cliquer et déposer pour "
+"agrandir la sélection."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
+msgid "Resize Palette"
+msgstr "Redimensionner Palette"
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
+msgid "New palette size:"
+msgstr "Nouvelle taille de la palette :"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr "Enregistrer les changements de l'image « {0} » avant de fermer ?"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:62
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Si vous n'enregistrez pas, toutes les modifications seront perdues."
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:76
+msgid "Close _without saving"
+msgstr ""
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+msgid "Take Screenshot"
+msgstr "Prendre une capture d'écran"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:53
+msgid "Delay before taking a screenshot (seconds):"
+msgstr "Délai avant de prendre une capture d'écran (en secondes) :"
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:63
+msgid "Image files"
+msgstr "Fichiers image"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
+msgid "Save Image File"
+msgstr "Enregistrer le fichier image"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+msgid "Pinta does not support saving images in this file format."
+msgstr ""
+"Pinta ne prend pas en charge l'enregistrement des images dans ce format de "
+"fichier."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
+msgid "Cannot save read only file."
+msgstr "Impossible d'enregistrer un fichier en lecture seule."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
+msgid "Image too large"
+msgstr "Image trop grande"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "Les fichiers ICO ne peuvent dépasser 255 x 255 pixels."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr "Un fichier nommé « {0} » existe déjà. Souhaitez vous le remplacer ?"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
+"Le fichier existe déjà dans « {1} ». Le remplacer écrasera son contenu "
+"actuel."
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:92
+msgid "Layer Opacity"
+msgstr "Opacité du calque"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:97
+msgid "Rename Layer"
+msgstr "Renommer le calque"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Hide Layer"
+msgstr "Cacher le calque"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+msgid "Show Layer"
+msgstr "Afficher le calque"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
+msgid "Layer Properties"
+msgstr "Propriétés du calque"
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:76
+msgid "Rotate / Zoom Layer"
+msgstr "Tourner / Zoomer le calque"
+
+#: ../Pinta/AddinSetupService.cs:49
+msgid "Pinta Community Addins - Platform-Specific"
+msgstr ""
+
+#: ../Pinta/AddinSetupService.cs:53
+msgid "Pinta Community Addins - Cross-Platform"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:123
 msgid "Contributors to this release:"
 msgstr "Ont contribué à cette version :"
 
-#: Pinta/Dialogs/AboutDialog.cs:132
+#: ../Pinta/Dialogs/AboutDialog.cs:135
 msgid "Previous contributors:"
 msgstr "Contributeurs précédents :"
 
-#: Pinta/Dialogs/AboutDialog.cs:143
+#: ../Pinta/Dialogs/AboutDialog.cs:146
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1113,11 +1635,13 @@ msgstr ""
 "  Ersplus https://launchpad.net/~ersplus-free\n"
 "  Jean-François Huck https://launchpad.net/~huckjf-aquitania\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Manuel Berrocal https://launchpad.net/~manu-berrocal\n"
 "  Marting https://launchpad.net/~marting\n"
 "  Nicolas https://launchpad.net/~nicolas-pecqueux\n"
 "  Olivier Dufour https://launchpad.net/~olivier-duff\n"
 "  Philippe AUCOIN https://launchpad.net/~philippe-aucoin\n"
 "  Quentin Pagès https://launchpad.net/~kwentin\n"
+"  RM https://launchpad.net/~l4rt1st-1nc0nnu\n"
 "  RedGuff https://launchpad.net/~domsau2\n"
 "  SarahSlean https://launchpad.net/~yoda4\n"
 "  Simon https://launchpad.net/~nowis74\n"
@@ -1127,587 +1651,292 @@ msgstr ""
 "  jc1 https://launchpad.net/~jc1-quebecos\n"
 "  satbadkd https://launchpad.net/~satbadkd"
 
-#: Pinta/Dialogs/AboutDialog.cs:146
+#: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "Translated by:"
 msgstr "Traduit par :"
 
-#: Pinta/Dialogs/AboutDialog.cs:152
+#: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Based on the work of Paint.NET:"
 msgstr "Basé sur le travail de Paint.NET :"
 
-#: Pinta/Dialogs/AboutDialog.cs:159
+#: ../Pinta/Dialogs/AboutDialog.cs:162
 msgid "Using some icons from:"
 msgstr "Utilisation d'icônes provenant de :"
 
-#: Pinta/Dialogs/AboutDialog.cs:167
+#: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "Powered by Mono:"
 msgstr "Réalisé avec Mono :"
 
-#: Pinta/Dialogs/AboutDialog.cs:274
+#: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "About Pinta"
 msgstr "À propos de Pinta"
 
-#: Pinta/Dialogs/AboutDialog.cs:292
+#: ../Pinta/Dialogs/AboutDialog.cs:295
 msgid "Version Info"
 msgstr "Information de version"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:50
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:107
-msgid "Layer Properties"
-msgstr "Propriétés du calque"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr "Version"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:159
-msgid "Name:"
-msgstr "Nom :"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+msgid "License"
+msgstr "Licence"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:167
-msgid "Visible"
-msgstr "Visible"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+msgid "Released under the MIT X11 License."
+msgstr "Mis à disposition sous licence MIT X11"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
-msgid "Blend Mode"
-msgstr "Mode de mélange"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+msgid "Copyright"
+msgstr "Droits d’auteur"
 
-#: Pinta/Dialogs/LayerPropertiesDialog.cs:189
-msgid "Opacity:"
-msgstr "Opacité :"
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+msgid "by Pinta contributors"
+msgstr "par les contributeurs de Pinta"
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:38
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "Qualité JPEG"
 
-#: Pinta/Dialogs/JpegCompressionDialog.cs:49
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
 msgstr "Qualité : "
 
-#: Pinta/Main.cs:68
-msgid "number of threads to use for rendering"
-msgstr "nombre de fils d'exécution à utiliser pour le rendu"
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:159
+msgid "Name:"
+msgstr "Nom :"
 
-#: Pinta/Options.cs:486
-msgid "OptionName"
-msgstr "Nom de l'option"
+#. Visible checkbox
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:167
+msgid "Visible"
+msgstr "Visible"
 
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
-#: Pinta/Actions/Layers/RotateZoomLayerAction.cs:75
-msgid "Rotate / Zoom Layer"
-msgstr "Tourner / Zoomer le calque"
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
+msgid "Blend Mode"
+msgstr "Mode de mélange"
 
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:92
-msgid "Layer Opacity"
-msgstr "Opacité du calque"
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:189
+msgid "Opacity:"
+msgstr "Opacité :"
 
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:97
-msgid "Rename Layer"
-msgstr "Renommer le calque"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
-msgid "Hide Layer"
-msgstr "Cacher le calque"
-
-#: Pinta/Actions/Layers/LayerPropertiesAction.cs:102
-msgid "Show Layer"
-msgstr "Afficher le calque"
-
-#: Pinta/Actions/Edit/ResizePaletteAction.cs:50
-msgid "Resize Palette"
-msgstr "Redimensionner Palette"
-
-#: Pinta/Actions/Edit/ResizePaletteAction.cs:51
-msgid "New palette size:"
-msgstr "Nouvelle taille de la palette :"
-
-#: Pinta/Actions/Edit/PasteAction.cs:125
-msgid "Image larger than canvas"
-msgstr "Agrandir l'image plus que le canevas"
-
-#: Pinta/Actions/Edit/PasteAction.cs:126
-msgid ""
-"The image being pasted is larger than the canvas size. What would you like "
-"to do?"
+#: ../Pinta/Dialogs/NewImageDialog.cs:133
+#: ../Pinta/Dialogs/NewImageDialog.cs:170
+#: ../Pinta/Dialogs/NewImageDialog.cs:298
+#: ../Pinta/Dialogs/NewImageDialog.cs:387
+msgid "Clipboard"
 msgstr ""
-"L'image étant collé est plus grande que la taille de la toile. Que souhaitez-"
-"vous faire ?"
 
-#: Pinta/Actions/Edit/PasteAction.cs:130
-msgid "Expand canvas"
-msgstr "Elargir la toile"
-
-#: Pinta/Actions/Edit/PasteAction.cs:131
-msgid "Don't change canvas size"
-msgstr "Ne pas changer la taille de la toile"
-
-#: Pinta/Actions/File/OpenDocumentAction.cs:64
-msgid "Image files"
-msgstr "Fichiers image"
-
-#: Pinta/Actions/File/NewScreenshotAction.cs:52
-msgid "Take Screenshot"
-msgstr "Prendre une capture d'écran"
-
-#: Pinta/Actions/File/NewScreenshotAction.cs:53
-msgid "Delay before taking a screenshot (seconds):"
-msgstr "Délai avant de prendre une capture d'écran (en secondes) :"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
-msgid "Save Image File"
-msgstr "Enregistrer le fichier image"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
-msgid "Pinta does not support saving images in this file format."
+#: ../Pinta/Dialogs/NewImageDialog.cs:133
+#: ../Pinta/Dialogs/NewImageDialog.cs:172
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:387
+msgid "Custom"
 msgstr ""
-"Pinta ne prend pas en charge l'enregistrement des images dans ce format de "
-"fichier."
 
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
-msgid "Cannot save read only file."
-msgstr "Impossible d'enregistrer un fichier en lecture seule."
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
-msgid "Image too large"
-msgstr "Image trop grande"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
-msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Les fichiers ICO ne peuvent dépasser 255 x 255 pixels."
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
-#, csharp-format
-msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Un fichier nommé « {0} » existe déjà. Souhaitez vous le remplacer ?"
-
-#: Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
-#, csharp-format
-msgid ""
-"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+#. Preset Combo
+#: ../Pinta/Dialogs/NewImageDialog.cs:164
+msgid "Preset:"
 msgstr ""
-"Le fichier existe déjà dans « {1} ». Le remplacer écrasera son contenu "
-"actuel."
 
-#: Pinta/Actions/File/CloseDocumentAction.cs:61
-#, csharp-format
-msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Enregistrer les changements de l'image « {0} » avant de fermer ?"
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:62
-msgid "If you don't save, all changes will be permanently lost."
-msgstr "Si vous n'enregistrez pas, toutes les modifications seront perdues."
-
-#: Pinta/Actions/File/CloseDocumentAction.cs:69
-msgid "Close without saving"
-msgstr "Fermer sans enregistrer"
-
-#: Pinta/MainWindow.cs:123
-msgid "_File"
-msgstr "_Fichier"
-
-#: Pinta/MainWindow.cs:124
-msgid "_Edit"
-msgstr "_Édition"
-
-#: Pinta/MainWindow.cs:126
-msgid "_View"
-msgstr "_Affichage"
-
-#: Pinta/MainWindow.cs:129
-msgid "_Image"
-msgstr "_Image"
-
-#: Pinta/MainWindow.cs:130
-msgid "_Layers"
-msgstr "_Calques"
-
-#: Pinta/MainWindow.cs:131
-msgid "_Adjustments"
-msgstr "_Réglages"
-
-#: Pinta/MainWindow.cs:132
-msgid "Effe_cts"
-msgstr "Effet_s"
-
-#: Pinta/MainWindow.cs:133
-msgid "A_dd-ins"
-msgstr "Extensions"
-
-#: Pinta/MainWindow.cs:135
-msgid "_Window"
-msgstr "_Fenêtre"
-
-#: Pinta/MainWindow.cs:139
-msgid "Tool Windows"
-msgstr "Boites à outils"
-
-#: Pinta/MainWindow.cs:143
-msgid "_Help"
-msgstr "_Aide"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-msgid "By percentage:"
-msgstr "En pourcentage :"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-msgid "By absolute size:"
-msgstr "En taille absolue :"
-
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:127
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#. Width Entry
+#: ../Pinta/Dialogs/NewImageDialog.cs:182
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
 msgstr "Largeur :"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:102
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:114
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: ../Pinta/Dialogs/NewImageDialog.cs:189
+#: ../Pinta/Dialogs/NewImageDialog.cs:206
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
 msgstr "pixels"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:140
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#. Height Entry
+#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
 msgstr "Hauteur :"
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-#: Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-msgid "Maintain aspect ratio"
-msgstr "Conserver les proportions"
+#. Orientation Radio options
+#: ../Pinta/Dialogs/NewImageDialog.cs:216
+msgid "Orientation:"
+msgstr ""
 
-#: Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Ancre :"
+#: ../Pinta/Dialogs/NewImageDialog.cs:219
+msgid "Portrait"
+msgstr ""
 
-#: Pinta/gtk-gui/Pinta.NewImageDialog.cs:37
-msgid "New Image Size          "
-msgstr "Taille de la nouvelle image          "
+#: ../Pinta/Dialogs/NewImageDialog.cs:227
+msgid "Landscape"
+msgstr ""
 
-#: Pinta/Pads/LayersPad.cs:43 Pinta/Pads/LayersPad.cs:54
-msgid "Layers"
-msgstr "Calques"
+#. Background Color options
+#: ../Pinta/Dialogs/NewImageDialog.cs:236
+msgid "Background:"
+msgstr ""
 
-#: Pinta/Pads/CanvasPad.cs:75
-msgid "Canvas"
-msgstr "Zone de travail"
+#: ../Pinta/Dialogs/NewImageDialog.cs:239
+msgid "White"
+msgstr ""
 
-#: Pinta/Pads/HistoryPad.cs:43 Pinta/Pads/HistoryPad.cs:50
-msgid "History"
-msgstr "Historique"
+#: ../Pinta/Dialogs/NewImageDialog.cs:247
+msgid "Background Color"
+msgstr ""
 
-#: Pinta/Pads/ToolBoxPad.cs:42 Pinta/Pads/ToolBoxPad.cs:48
-msgid "Tools"
-msgstr "Outils"
+#: ../Pinta/Dialogs/NewImageDialog.cs:255
+msgid "Transparent"
+msgstr ""
 
-#: Pinta/Pads/OpenImagesPad.cs:41 Pinta/Pads/OpenImagesPad.cs:45
-msgid "Images"
-msgstr "Images"
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr "Titre"
 
-#: Pinta/DockLibrary/DockItem.cs:477 Pinta/DockLibrary/DockItemContainer.cs:91
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr "Emplacement"
+
+#: ../Pinta/DockLibrary/DockItem.cs:477
+#: ../Pinta/DockLibrary/DockItemContainer.cs:92
 msgid "Hide"
 msgstr "Masquer"
 
-#: Pinta/DockLibrary/DockItem.cs:485
+#. Dockable menuitem
+#: ../Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
 msgstr "Ancrable"
 
-#: Pinta/DockLibrary/DockItem.cs:493
+#: ../Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
 msgstr "Flottant"
 
-#: Pinta/DockLibrary/DockItem.cs:502
-#: Pinta/DockLibrary/DockItemContainer.cs:195
+#: ../Pinta/DockLibrary/DockItem.cs:502
+#: ../Pinta/DockLibrary/DockItemContainer.cs:196
 msgid "Auto Hide"
 msgstr "Cacher automatiquement"
 
-#: Pinta/DockLibrary/DockItemContainer.cs:191
+#: ../Pinta/DockLibrary/DockItemContainer.cs:192
 msgid "Dock"
 msgstr "Dock"
 
-#: Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
-#: Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Curves"
-msgstr "Courbes"
+#. Container child hbox1.Gtk.Box+BoxChild
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
+msgid "By percentage:"
+msgstr "En pourcentage :"
 
-#: Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:103
-msgid "Levels Adjustment"
-msgstr "Ajustement des niveaux"
+#. Container child hbox2.Gtk.Box+BoxChild
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
+msgid "By absolute size:"
+msgstr "En taille absolue :"
 
-#: Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
-#: Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:26
-msgid "Posterize"
-msgstr "Postériser"
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
+#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
+msgid "Maintain aspect ratio"
+msgstr "Conserver les proportions"
 
-#: Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
-msgstr "Luminosité / Contraste"
+#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
+msgid "Anchor:"
+msgstr "Ancre :"
 
-#: Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
-msgid "Auto Level"
-msgstr "Niveau automatique"
+#: ../Pinta/Main.cs:72
+msgid "Show this message and exit."
+msgstr ""
 
-#: Pinta.Effects/Adjustments/SepiaEffect.cs:26
-msgid "Sepia"
-msgstr "Sépia"
+#: ../Pinta/Main.cs:73
+msgid "Display the application version."
+msgstr ""
 
-#: Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
-msgid "Black and White"
-msgstr "Noir et Blanc"
+#: ../Pinta/Main.cs:74
+msgid "number of threads to use for rendering"
+msgstr "nombre de fils d'exécution à utiliser pour le rendu"
 
-#: Pinta.Effects/Adjustments/LevelsEffect.cs:23
-msgid "Levels"
-msgstr "Niveaux"
+#: ../Pinta/Main.cs:123
+msgid "Usage: pinta [files]"
+msgstr ""
 
-#: Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-msgid "Invert Colors"
-msgstr "Inverser les couleurs"
+#: ../Pinta/Main.cs:125
+msgid "Options: "
+msgstr ""
 
-#: Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
-msgid "Hue / Saturation"
-msgstr "Teinte / Saturation"
+#: ../Pinta/MainWindow.cs:184
+msgid "_File"
+msgstr "_Fichier"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:93
-msgid "Linked"
-msgstr "Lié"
+#: ../Pinta/MainWindow.cs:185
+msgid "_Edit"
+msgstr "_Édition"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:130
-msgid "Input Histogram"
-msgstr "Histogramme d'entrée"
+#: ../Pinta/MainWindow.cs:187
+msgid "_View"
+msgstr "_Affichage"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:172
-msgid "Input"
-msgstr "Entrée"
+#: ../Pinta/MainWindow.cs:190
+msgid "_Image"
+msgstr "_Image"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:285
-msgid "Output"
-msgstr "Sortie"
+#: ../Pinta/MainWindow.cs:191
+msgid "_Layers"
+msgstr "_Calques"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:413
-msgid "Output Histogram"
-msgstr "Histogramme de sortie"
+#: ../Pinta/MainWindow.cs:192
+msgid "_Adjustments"
+msgstr "_Réglages"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:456
-msgid "Auto"
-msgstr "Auto"
+#: ../Pinta/MainWindow.cs:193
+msgid "Effe_cts"
+msgstr "Effet_s"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:468
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:173
-msgid "Reset"
-msgstr "Réinitialiser"
+#: ../Pinta/MainWindow.cs:194
+msgid "A_dd-ins"
+msgstr "Extensions"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:478
-msgid "Red"
-msgstr "Rouge"
+#: ../Pinta/MainWindow.cs:196
+msgid "_Window"
+msgstr "_Fenêtre"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:489
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:142
-msgid "Green"
-msgstr "Vert"
+#: ../Pinta/MainWindow.cs:200
+msgid "Tool Windows"
+msgstr "Boites à outils"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:528
-msgid "Blue"
-msgstr "Bleu"
+#: ../Pinta/MainWindow.cs:204
+msgid "_Help"
+msgstr "_Aide"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:62
-msgid "Transfer Map"
-msgstr "Carte de transfert"
+#: ../Pinta/Options.cs:486
+msgid "OptionName"
+msgstr "Nom de l'option"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:85
-msgid "RGB"
-msgstr "RVB"
+#: ../Pinta/Pads/CanvasPad.cs:75
+msgid "Canvas"
+msgstr "Zone de travail"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:86
-msgid "Luminosity"
-msgstr "Luminosité"
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:50
+msgid "History"
+msgstr "Historique"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:100
-msgid "(256, 256)"
-msgstr "(256, 256)"
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:54
+msgid "Layers"
+msgstr "Calques"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:131
-msgid "Red  "
-msgstr "Rouge  "
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:45
+msgid "Images"
+msgstr "Images"
 
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:153
-msgid "Blue "
-msgstr "Bleu "
-
-#: Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:187
-msgid "Tip: Right-click to remove control points."
-msgstr "Astuce : clic droit pour supprimer les points de contrôle."
-
-#: Pinta.Effects/Effects/OutlineEffect.cs:36
-#: Pinta.Effects/Effects/EmbossEffect.cs:33
-#: Pinta.Effects/Effects/ReliefEffect.cs:32
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:36
-msgid "Stylize"
-msgstr "Styliser"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:25
-msgid "Oil Painting"
-msgstr "Peinture à l'huile"
-
-#: Pinta.Effects/Effects/OilPaintingEffect.cs:33
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:40
-#: Pinta.Effects/Effects/InkSketchEffect.cs:41
-msgid "Artistic"
-msgstr "Artistique"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:25
-msgid "Bulge"
-msgstr "Bomber"
-
-#: Pinta.Effects/Effects/BulgeEffect.cs:33
-#: Pinta.Effects/Effects/TwistEffect.cs:33
-#: Pinta.Effects/Effects/PixelateEffect.cs:37
-#: Pinta.Effects/Effects/TileEffect.cs:33
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:33
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:38
-msgid "Distort"
-msgstr "Distortion"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:27
-msgid "Unfocus"
-msgstr "Défocaliser"
-
-#: Pinta.Effects/Effects/UnfocusEffect.cs:35
-#: Pinta.Effects/Effects/FragmentEffect.cs:33
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:33
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:33
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:33
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:33
-msgid "Blurs"
-msgstr "Floutage"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:25
-msgid "Julia Fractal"
-msgstr "Fractale de Julia"
-
-#: Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: Pinta.Effects/Effects/CloudsEffect.cs:37
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
-msgid "Render"
-msgstr "Effectuer le rendu"
-
-#: Pinta.Effects/Effects/EmbossEffect.cs:25
-msgid "Emboss"
-msgstr "Gaufrer"
-
-#: Pinta.Effects/Effects/FragmentEffect.cs:25
-msgid "Fragment"
-msgstr "Fragmentation"
-
-#: Pinta.Effects/Effects/ReliefEffect.cs:44
-msgid "Relief"
-msgstr "Relief"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
-msgid "Red Eye Removal"
-msgstr "Suppression des yeux rouges"
-
-#: Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
-#: Pinta.Effects/Effects/GlowEffect.cs:38
-#: Pinta.Effects/Effects/SharpenEffect.cs:33
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
-msgid "Photo"
-msgstr "Photo"
-
-#: Pinta.Effects/Effects/TwistEffect.cs:25
-msgid "Twist"
-msgstr "Tordre"
-
-#: Pinta.Effects/Effects/PencilSketchEffect.cs:32
-msgid "Pencil Sketch"
-msgstr "Croquis au crayon"
-
-#: Pinta.Effects/Effects/PixelateEffect.cs:25
-msgid "Pixelate"
-msgstr "Pixeliser"
-
-#: Pinta.Effects/Effects/InkSketchEffect.cs:33
-msgid "Ink Sketch"
-msgstr "Croquis à l'encre"
-
-#: Pinta.Effects/Effects/TileEffect.cs:25
-msgid "Tile Reflection"
-msgstr "Réflexion mosaïque"
-
-#: Pinta.Effects/Effects/SharpenEffect.cs:25
-msgid "Sharpen"
-msgstr "Augmenter la netteté"
-
-#: Pinta.Effects/Effects/FrostedGlassEffect.cs:25
-msgid "Frosted Glass"
-msgstr "Verre dépoli"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:28
-msgid "Median"
-msgstr "Médian"
-
-#: Pinta.Effects/Effects/MedianEffect.cs:36
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:37
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
-msgid "Noise"
-msgstr "Bruit"
-
-#: Pinta.Effects/Effects/RadialBlurEffect.cs:25
-msgid "Radial Blur"
-msgstr "Flou radial"
-
-#: Pinta.Effects/Effects/ZoomBlurEffect.cs:25
-msgid "Zoom Blur"
-msgstr "Flou d'arrière plan"
-
-#: Pinta.Effects/Effects/MotionBlurEffect.cs:25
-msgid "Motion Blur"
-msgstr "Flou de mouvement"
-
-#: Pinta.Effects/Effects/AddNoiseEffect.cs:29
-msgid "Add Noise"
-msgstr "Ajouter du bruit"
-
-#: Pinta.Effects/Effects/EdgeDetectEffect.cs:28
-msgid "Edge Detect"
-msgstr "Détecter les contours"
-
-#: Pinta.Effects/Effects/GaussianBlurEffect.cs:25
-msgid "Gaussian Blur"
-msgstr "Flou gaussien"
-
-#: Pinta.Effects/Effects/CloudsEffect.cs:29
-msgid "Clouds"
-msgstr "Nuages"
-
-#: Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
-msgid "Reduce Noise"
-msgstr "Réduire le bruit"
-
-#: Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
-msgid "Mandelbrot Fractal"
-msgstr "Fractale de Mandelbrot"
-
-#: Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-msgid "Soften Portrait"
-msgstr "Adoucir le portrait"
-
-#: Pinta.Effects/Effects/PolarInversionEffect.cs:25
-msgid "Polar Inversion"
-msgstr "Transformation Symétrique"
+#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:48
+msgid "Tools"
+msgstr "Outils"
 
 #: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
 #: SharpenData MotionBlurEffect
 msgid "Amount"
 msgstr "Valeur"
-
-#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
-#: EdgeDetectData EmbossEffect ReliefData TwistEffect
-msgid "Angle"
-msgstr "Angle"
 
 #: CloudsEffect dialog
 msgid "Antialias"
@@ -2160,7 +2389,3 @@ msgstr "En cours"
 #, csharp-format
 msgid "(provided by {0})"
 msgstr "(fourni par {0})"
-
-#: Pinta.Tools/Tools/TextTool.cs:75
-msgid "Text - Finalize"
-msgstr "Texte - Finaliser"

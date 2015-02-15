@@ -1,26 +1,27 @@
-# Esperanto translation for pinta
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# Belarusian translation for pinta
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-02-07 16:32-0500\n"
-"PO-Revision-Date: 2015-02-09 03:32+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
-"Language-Team: Esperanto <eo@li.org>\n"
+"PO-Revision-Date: 2015-02-11 20:03+0000\n"
+"Last-Translator: Launchpad Translations Administrators <Unknown>\n"
+"Language-Team: Belarusian <be@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Launchpad-Export-Date: 2015-02-15 18:12+0000\n"
 "X-Generator: Launchpad (build 17341)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr "Pinta"
+msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
@@ -28,7 +29,7 @@ msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "Bildredaktilo"
+msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
@@ -36,24 +37,24 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr "Administrilo de aldonaĵoj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
-msgstr "Malfari"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "Refari"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
-msgstr "Eltondi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
-msgstr "Kopii"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
@@ -63,83 +64,83 @@ msgstr ""
 #: ../Pinta.Core/Classes/Document.cs:801
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr "Alglui"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Classes/Document.cs:797
 msgid "Paste Into New Layer"
-msgstr "Alglui en nova tavolo"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr "Glui en nova bildo"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Delete Selection"
-msgstr "Forigi zonon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr "Plenigi zonon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:418
 msgid "Invert Selection"
-msgstr "Inversigi zonon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr "Elekti ĉion"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr "Malelekti ĉion"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
-msgstr "Malfermi..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:82
 #: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
-msgstr "Konservi kiel..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr "Reŝargi defaŭltan"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr "Agordi numeron de koloroj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:125
 #: ../Pinta/Pads/ColorPalettePad.cs:42 ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
-msgstr "Paletro"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
-msgstr "Viŝi zonon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr "Malelekti"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:327
 msgid "Open Palette File"
-msgstr "Malfermi paletrodosieron"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:334
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "Paletrodosieron (*.txt, *.gpl)"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:338
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr "Ĉiuj dosieroj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:354
 #, csharp-format
@@ -147,84 +148,81 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"Paletrodosieron ne malfermebla: {0}.\n"
-"Bonvolu kontroli ke vi provas malfermi validan GIMP-a aŭ Paint.NET-a "
-"paletron."
 
 #: ../Pinta.Core/Actions/EditActions.cs:355
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
 msgid "Error"
-msgstr "Eraro"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Save Palette File"
-msgstr "Konservi paletrodosieron"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:373
 msgid "Paint.NET palette (*.txt)"
-msgstr "Paint.NET-a paletro (*.txt)"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:378
 msgid "GIMP palette (*.gpl)"
-msgstr "GIMP-a paletro (*.gpl)"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "Nova..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "Nova ekrankopio..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Malfermi lastajn"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Close"
-msgstr "Fermi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "Konservi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "Printi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "Ĉesi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "Nova"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "Malfermi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:50
 msgid "Pinta Website"
-msgstr "Pinta retejo"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:51
 msgid "File a Bug"
-msgstr "Enarkivigi cimon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Translate This Application"
-msgstr "Traduki tiun aplikaĵon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:222
 msgid "About"
-msgstr "Pri"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:59
 #: ../Pinta.Core/Actions/ImageActions.cs:279
 msgid "Crop to Selection"
-msgstr "Stuci al zono"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
 msgid "Auto Crop"
@@ -241,57 +239,57 @@ msgstr ""
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
-msgstr "Renversi horizontale"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:71
 msgid "Flip Vertical"
-msgstr "Renversi vertikale"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr "Turni 90° dekstrume"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "Turni 90° maldekstrume"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr "Turni 180°"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
 #: ../Pinta.Core/Actions/ImageActions.cs:137
 msgid "Flatten"
-msgstr "Unutavoligi bildon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
 #: ../Pinta.Core/Classes/Document.cs:859
 msgid "Add New Layer"
-msgstr "Alkonstrui novan tavolon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
 msgid "Delete Layer"
-msgstr "Forigi tavolon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "Duobligi tavolon"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr "Kunfandi tavolon malsupre"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr "Importi de dosiero..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
@@ -300,73 +298,73 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
-msgstr "Movi tavolon supre"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
 #: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
-msgstr "Movi tavolon malsupre"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr "Tavolaj atributoj..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "Malfermi bildodosieron"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr "Importi de dosiero"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Zoom In"
-msgstr "Enzomi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Zoom Out"
-msgstr "Elzomi"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Best Fit"
-msgstr "Plej bona adapto"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom to Selection"
-msgstr "Zomi al zono"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Normal Size"
-msgstr "Normala grando"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Toolbar"
-msgstr "Ilobreto"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Pixel Grid"
-msgstr "Bilderkrado"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Rulers"
-msgstr "Mezuriloj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Pixels"
-msgstr "Bilderoj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Inches"
-msgstr "Coloj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Centimeters"
-msgstr "Centimetroj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Fullscreen"
-msgstr "Tutekrane"
+msgstr ""
 
 #. stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
 #. image was rotated or cropped) and "Zoom to Window" mode is active
@@ -375,65 +373,65 @@ msgstr "Tutekrane"
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:295
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:303
 msgid "Window"
-msgstr "Fenestro"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:126
 msgid "Ruler Units"
-msgstr "Mezurila unuoj"
+msgstr ""
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "Konservi ĉion"
+msgstr ""
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "Fermi ĉiujn"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:251
 msgid "Tool"
-msgstr "Ilo"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:327
 msgid "Shortcut key"
-msgstr "Fulmoklavo"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:436
 msgid "Normal Blending"
-msgstr "Normala miksiĝado"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:437
 msgid "Overwrite"
-msgstr "Anstataŭigi"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:451
 msgid "Antialiasing On"
-msgstr "Uzi glatigo"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:452
 msgid "Antialiasing Off"
-msgstr "Ne uzi glatigo"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:316 ../Pinta.Core/Classes/Document.cs:321
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
-msgstr "Tavolo"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:403
 msgid "copy"
-msgstr "kopio"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:674
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "Regrandigi areaĵon"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:875
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr "Movi elektitan bilderojn"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:893
 msgid "Image larger than canvas"
@@ -463,7 +461,7 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Replace"
-msgstr "Anstataŭigi"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Union (+) (Ctrl + Left Click)"
@@ -489,11 +487,11 @@ msgstr ""
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
 #: ../Pinta.Tools/Tools/TextTool.cs:233
 msgid "Normal"
-msgstr "Normala"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:53
 msgid "Multiply"
-msgstr "Multipliki"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:54
 msgid "Additive"
@@ -514,15 +512,15 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:58
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 msgid "Glow"
-msgstr "Lumbrilo"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:59
 msgid "Overlay"
-msgstr "Kovro"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:60
 msgid "Difference"
-msgstr "Diferenco"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:61
 msgid "Negation"
@@ -530,15 +528,15 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:62
 msgid "Lighten"
-msgstr "Heligi"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:63
 msgid "Darken"
-msgstr "Malheligi"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:64
 msgid "Screen"
-msgstr "Ekrano"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:65
 msgid "Xor"
@@ -546,45 +544,45 @@ msgstr ""
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "Fini bilderojn"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Renversi bildon horizontale"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "Renversi bildon vertikale"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Renversi tavolon horizontale"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "Renversi tavolon vertikale"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:38
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "Regrandigi bildon"
+msgstr ""
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} bildo ({1})"
+msgstr ""
 
 #. Create a gtk action for each adjustment
 #. Create a gtk action and menu item for each effect
 #: ../Pinta.Core/Managers/EffectsManager.cs:63
 #: ../Pinta.Core/Managers/EffectsManager.cs:98
 msgid "..."
-msgstr "..."
+msgstr ""
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:221
 msgid "Rendering Effect"
-msgstr "Bildiga efekto"
+msgstr ""
 
 #: ../Pinta.Core/Managers/ToolManager.cs:234
 #: ../Pinta.Core/Managers/ToolManager.cs:236
@@ -594,89 +592,89 @@ msgstr ""
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:104
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "Malkonservita bildo {0}"
+msgstr ""
 
 #. Start with an empty white layer
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:163
 msgid "Background"
-msgstr "Fono"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:172
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
-msgstr "Nova bildo"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:194
 msgid "Open Image"
-msgstr "Malfermi bildon"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:202
 msgid "Permission denied"
-msgstr "Permeso rifuzita"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:343
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "Dosiero ne malfermebla: {0}"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "Aŭtomata Nivelo"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
 msgid "Black and White"
-msgstr "Nigra kaj blanka"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "Brileco / Kontrasto"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
 msgid "Curves"
-msgstr "Kurboj"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "Koloro / Satureco"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 msgid "Invert Colors"
-msgstr "Inversigi la kolorojn"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr "Niveloj"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:20
 msgid "Posterize"
-msgstr "Afiŝigi"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
-msgstr "Sepiaĵo"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
-msgstr "Ĝustigo de kolorniveloj"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
-msgstr "Aldonu Perturbon"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
 #: ../Pinta.Effects/Effects/MedianEffect.cs:36
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
 msgid "Noise"
-msgstr "Perturbo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr "Tuberi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
@@ -685,36 +683,36 @@ msgstr "Tuberi"
 #: ../Pinta.Effects/Effects/TileEffect.cs:33
 #: ../Pinta.Effects/Effects/TwistEffect.cs:33
 msgid "Distort"
-msgstr "Distordi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:29
 msgid "Clouds"
-msgstr "Nuboj"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:37
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
-msgstr "Bildigi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "Eltrovi Randojn"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
-msgstr "Stili"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
-msgstr "Reliefigi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
-msgstr "Fragmento"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
@@ -723,209 +721,209 @@ msgstr "Fragmento"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
 msgid "Blurs"
-msgstr "Malfokusoj"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
-msgstr "Malpolurita vitro"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr "Gaŭsa Malfokuso"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:33
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
 msgid "Photo"
-msgstr "Foto"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "Inkskizo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
 msgid "Artistic"
-msgstr "Artisma"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
-msgstr "Julia fraktalo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
 msgid "Mandelbrot Fractal"
-msgstr "Mandelbrot-fraktalo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
 msgid "Median"
-msgstr "Mediano"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
-msgstr "Moviĝo malklarigi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr "Petrola pentraĵo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
 #: ../Pinta.Tools/Tools/TextTool.cs:235
 msgid "Outline"
-msgstr "Konturo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
-msgstr "Krajonskizo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr "Bilderigi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
-msgstr "Polusa Inversigo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
 msgid "Radial Blur"
-msgstr "Radia Malfokusigi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr "Ruĝokula forigilo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
-msgstr "Malpliigi perturbon"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
-msgstr "Trankviliĝo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:25
 msgid "Sharpen"
-msgstr "Netita"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Soften Portrait"
-msgstr "Moligi portreton"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
-msgstr "Kahela konsidero"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "Tvisti"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "Malfokusi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
-msgstr "Zoma-malfokusigi"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Transfer Map"
-msgstr "Transloka Mapo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
 msgid "RGB"
-msgstr "RVB"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
 msgid "Luminosity"
-msgstr "Heleco"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
 msgid "(256, 256)"
-msgstr "(256, 256)"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
 msgid "Red  "
-msgstr "Ruĝo  "
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
 msgid "Green"
-msgstr "Verdo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
-msgstr "Bluo "
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
 msgid "Reset"
-msgstr "Reagordi"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
 msgid "Tip: Right-click to remove control points."
-msgstr "Konsileto: dekstre alklaku forigi regajn punktojn."
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
 msgid "Input Histogram"
-msgstr "Eniga Histogramo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
 msgid "Input"
-msgstr "Enigo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
 msgid "Output"
-msgstr "Eligo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
 msgid "Output Histogram"
-msgstr "Eliga Histogramo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
-msgstr "Aŭtomata"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
-msgstr "Ruĝo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
 msgid "Blue"
-msgstr "Bluo"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:89
 msgid "Linked"
-msgstr "Kunligita"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
 msgid "label1"
-msgstr "etikedo1"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
 msgid "label"
-msgstr "etikedo"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
 msgid "Random Noise"
-msgstr "Hazarda Perturbo"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
 msgid "Reseed"
-msgstr "Resemi"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
 msgid "Choose Primary Color"
-msgstr "Elekti primaran koloron"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
 msgid "Choose Secondary Color"
-msgstr "Elekti duarangan koloron"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
 msgid "Choose Palette Color"
-msgstr "Elekti paletron koloron"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
 msgid "Click to switch between primary and secondary color."
@@ -959,19 +957,19 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr "Cirkloj"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
-msgstr "Krado"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "Ŝprucetigi"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
-msgstr "Kvadratoj"
+msgstr ""
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
@@ -979,11 +977,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
-msgstr "Sago"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
 msgid "Size"
-msgstr "Grandeco"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
@@ -997,7 +995,7 @@ msgstr ""
 #: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
 #: EdgeDetectData EmbossEffect ReliefData TwistEffect
 msgid "Angle"
-msgstr "Angulo"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
@@ -1021,49 +1019,49 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:52
 msgid "Shape"
-msgstr "Formo"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
-msgstr "Brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Malkreski peniklarĝon"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:345
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Kreski peniklarĝon"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:360
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
-msgstr "Pleniga stilo"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
-msgstr "Konturformo"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:369
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
-msgstr "Pleniga formo"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
-msgstr "Pleniga kaj Kontura Formo"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:383
 msgid "Shape Type"
@@ -1081,7 +1079,7 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
-msgstr "Elipso"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:394
 msgid "Rounded Line Series"
@@ -1135,7 +1133,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
 msgid "Radius"
-msgstr "Radiuso"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
@@ -1147,23 +1145,19 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "Kloni poŝtmarkon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
 msgstr ""
-"Tenu stirklavon kaj klaku maldekstran musbutonon fiksi devenon, tiam farbi, "
-"klaku maldekstran musbutonon."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
-msgstr "Kolorelektilo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Maldekstre alklaku agordi primaran koloron. Dekstre alklaku agordi duaranga "
-"koloron."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
@@ -1195,28 +1189,28 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
-msgstr "Postelekto"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
 msgid "Do not switch tool"
-msgstr "Ne ŝalti ilon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
 msgid "Switch to previous tool"
-msgstr "Alŝalti al antaŭa ilo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
-msgstr "Alŝalti al krajonilo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr "Krajono"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
-msgstr "Elipsa elekto"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
@@ -1249,34 +1243,32 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
-msgstr "Skrapgumo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Maldekstre alklaku viŝi kaj fari travideblata, dekstre alklaku viŝi al "
-"duarangan koloron. "
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:72
 msgid "Flood Mode"
-msgstr "Diluva modalo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:79
 msgid "Contiguous"
-msgstr "Samlima"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:80
 msgid "Global"
-msgstr "Malloka"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:75
 msgid "Tolerance"
-msgstr "Tolereco"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
 msgid "Freeform Shape"
-msgstr "Libermana formo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
@@ -1284,49 +1276,45 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Klaku maldekstran musbutonon konturi kun la primara koloro, klaku dekstran "
-"musbutonon konturi kun la duaranga koloro."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
 #: ../Pinta.Tools/Tools/GradientTool.cs:169
 msgid "Gradient"
-msgstr "Kolortransiro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Klaku kaj tiru konturi kolortransiron de primara al duaranga koloro. Klaku "
-"dekstran musbutonon retroirigi."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Linear Gradient"
-msgstr "Linia kolortransiro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Linear Reflected Gradient"
-msgstr "Linia reflektita kolortransiro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Linear Diamond Gradient"
-msgstr "Linia karoo kolortransiro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:179
 msgid "Radial Gradient"
-msgstr "Radiusa kolortransiro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:180
 msgid "Conical Gradient"
-msgstr "Konusa kolortransiro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:48
 msgid "Lasso Select"
-msgstr "Kaptoŝnuro"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:50
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Alklaku kaj tiru desegni konturon por elektazono."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
@@ -1334,11 +1322,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:63
 msgid "Magic Wand Select"
-msgstr "Sorĉbastona elekto"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:73
 msgid "Click to select region of similar color."
-msgstr "Klak elekti regionon de simila koloro."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
@@ -1348,7 +1336,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "Movi elekton"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 msgid ""
@@ -1359,31 +1347,29 @@ msgstr ""
 #. Try to set the default tool to the PaintBrush
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:84
 msgid "Paintbrush"
-msgstr "Peniko"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:96
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "Farbujo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Maldekstre alklaku pleni region kun la primara koloro, dekstre alklaku pleni "
-"kun la duaranga koloro."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
 msgid "Pan"
-msgstr "Balai"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
-msgstr "Alklaku kaj tiru navigi bildon."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
@@ -1393,16 +1379,15 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid "Recolor"
-msgstr "Rekolori"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid "Left click to replace the secondary color with the primary color."
 msgstr ""
-"Maldekstre alklaku anstataŭigi duaranga koloro kun la primara koloro."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
-msgstr "Rektangula elekto"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
@@ -1412,15 +1397,15 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr "Rektangulo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
-msgstr "Ronda rektangulo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:81
 msgid "Text"
-msgstr "Teksto"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:82
 msgid "Text - Finalize"
@@ -1431,44 +1416,42 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Maldekstre alklaku meti kursoro, tiam tajpu tekston. Tekstkoloro estas "
-"primara koloro."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:141
 msgid "Font"
-msgstr "Tiparo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:176
 msgid "Bold"
-msgstr "Grase"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:183
 msgid "Italic"
-msgstr "Kursive"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Underline"
-msgstr "Substrekite"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Left Align"
-msgstr "Maldekstra ĝisrandigo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:207
 msgid "Center Align"
-msgstr "Horizontala centrigi"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Right Align"
-msgstr "Ĝisrandigi dekstren"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Text Style"
-msgstr "Teksta stilo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Normal and Outline"
-msgstr "Normala kaj kontura"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:236
 msgid "Fill Background"
@@ -1476,44 +1459,42 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 msgid "Outline width"
-msgstr "Kontura larĝo"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Decrease outline size"
-msgstr "Malkreski konturan grandon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Increase outline size"
-msgstr "Kreski konturan grandon"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:48
 msgid "Zoom"
-msgstr "Zomi"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Maldekstre alklaku enzomi. Dekstra alklaku elzomi. Alklaku kaj tiru enzomi "
-"zonon."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "Resize Palette"
-msgstr "Regrandigi paletron"
+msgstr ""
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
-msgstr "Grando de nova paletro:"
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Ĉu vi volas konservi ŝanĝoj de bildo \"{0}\" antaŭ fermado?"
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "Se vi ne konservas, ĉiuj ŝanĝoj foriĝos konstante eterne."
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
@@ -1522,27 +1503,27 @@ msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr "Krei ekrankopion"
+msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Prokrasto en sekundoj antaŭ ekrankopiado:"
+msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:63
 msgid "Image files"
-msgstr "Bildodosieroj"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr "Konservi bildodosieron"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta ne subtenas konservadon de bildoj en tiu dosierformo."
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
 msgid "Cannot save read only file."
-msgstr "Ne povas konservi nurlegan dosieron."
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
 msgid "Image too large"
@@ -1555,35 +1536,34 @@ msgstr ""
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Dosiero nomita \"{0}\" ekzistas jam. Ĉu vi volas anstataŭigas ĝin?"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
-"Dosiero ekzistas jam en \"{1}\". Daŭrigado anstataŭigos ĝiajn enhavojn."
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:92
 msgid "Layer Opacity"
-msgstr "Tavola opakeco"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:97
 msgid "Rename Layer"
-msgstr "Renomi tavolon"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
 msgid "Hide Layer"
-msgstr "Kaŝi tavolon"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
 msgid "Show Layer"
-msgstr "Malkaŝi tavolon"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
 msgid "Layer Properties"
-msgstr "Tavolaj atributoj"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:76
@@ -1609,23 +1589,18 @@ msgstr ""
 #: ../Pinta/Dialogs/AboutDialog.cs:146
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Adolfo Jayme https://launchpad.net/~fitojb\n"
-"  Colin Dean https://launchpad.net/~colindean\n"
-"  Michael Moroni https://launchpad.net/~airon90\n"
-"  RedGuff https://launchpad.net/~domsau2"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "Translated by:"
-msgstr "Tradukita de:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:155
 msgid "Based on the work of Paint.NET:"
-msgstr "Devenita de verko de Paint.NET:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:162
 msgid "Using some icons from:"
-msgstr "Uzas iuj bildsimboloj de:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:170
 msgid "Powered by Mono:"
@@ -1633,57 +1608,57 @@ msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:277
 msgid "About Pinta"
-msgstr "Pri Pinta"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:295
 msgid "Version Info"
-msgstr "Versiainformoj"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
-msgstr "Versio"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "License"
-msgstr "Permesilo"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
-msgstr "Aldonita sub la MIT X11 Permesilo"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
-msgstr "Kopirajto"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "by Pinta contributors"
-msgstr "de la kontribuantoj al Pinta"
+msgstr ""
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "Nivelo de JPEG-a kvalito"
+msgstr ""
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
-msgstr "Kvalito: "
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:159
 msgid "Name:"
-msgstr "Nomo:"
+msgstr ""
 
 #. Visible checkbox
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:167
 msgid "Visible"
-msgstr "Videbla"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
 msgid "Blend Mode"
-msgstr "Miksiĝada modo"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:189
 msgid "Opacity:"
-msgstr "Opakeco:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:133
 #: ../Pinta/Dialogs/NewImageDialog.cs:170
@@ -1709,7 +1684,7 @@ msgstr ""
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
-msgstr "Larĝo:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:189
 #: ../Pinta/Dialogs/NewImageDialog.cs:206
@@ -1718,14 +1693,14 @@ msgstr "Larĝo:"
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
-msgstr "bilderoj"
+msgstr ""
 
 #. Height Entry
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
-msgstr "Alto:"
+msgstr ""
 
 #. Orientation Radio options
 #: ../Pinta/Dialogs/NewImageDialog.cs:216
@@ -1759,55 +1734,55 @@ msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "Titolo"
+msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "Vojo"
+msgstr ""
 
 #: ../Pinta/DockLibrary/DockItem.cs:477
 #: ../Pinta/DockLibrary/DockItemContainer.cs:92
 msgid "Hide"
-msgstr "Kaŝi"
+msgstr ""
 
 #. Dockable menuitem
 #: ../Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
-msgstr "Endokigeble"
+msgstr ""
 
 #: ../Pinta/DockLibrary/DockItem.cs:493
 msgid "Floating"
-msgstr "Glita"
+msgstr ""
 
 #: ../Pinta/DockLibrary/DockItem.cs:502
 #: ../Pinta/DockLibrary/DockItemContainer.cs:196
 msgid "Auto Hide"
-msgstr "Aŭtomate kaŝi"
+msgstr ""
 
 #: ../Pinta/DockLibrary/DockItemContainer.cs:192
 msgid "Dock"
-msgstr "Doki"
+msgstr ""
 
 #. Container child hbox1.Gtk.Box+BoxChild
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "De elcento:"
+msgstr ""
 
 #. Container child hbox2.Gtk.Box+BoxChild
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "De absoluta elcento:"
+msgstr ""
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "Prizorgi proporcio"
+msgstr ""
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "Ankro:"
+msgstr ""
 
 #: ../Pinta/Main.cs:72
 msgid "Show this message and exit."
@@ -1819,7 +1794,7 @@ msgstr ""
 
 #: ../Pinta/Main.cs:74
 msgid "number of threads to use for rendering"
-msgstr "numero de fadenoj uzi por bildigo"
+msgstr ""
 
 #: ../Pinta/Main.cs:123
 msgid "Usage: pinta [files]"
@@ -1831,31 +1806,31 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:184
 msgid "_File"
-msgstr "_Dosiero"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:185
 msgid "_Edit"
-msgstr "R_edakti"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:187
 msgid "_View"
-msgstr "_Vidi"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:190
 msgid "_Image"
-msgstr "B_ildo"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:191
 msgid "_Layers"
-msgstr "Tavo_loj"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:192
 msgid "_Adjustments"
-msgstr "Ĝustigo"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:193
 msgid "Effe_cts"
-msgstr "Efekto_j"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:194
 msgid "A_dd-ins"
@@ -1863,19 +1838,19 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:196
 msgid "_Window"
-msgstr "_Fenestro"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:200
 msgid "Tool Windows"
-msgstr "Ilaj fenestroj"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:204
 msgid "_Help"
-msgstr "_Helpo"
+msgstr ""
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
-msgstr "Agordnomo"
+msgstr ""
 
 #: ../Pinta/Pads/CanvasPad.cs:75
 msgid "Canvas"
@@ -1883,171 +1858,167 @@ msgstr ""
 
 #: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
-msgstr "Ŝanĝohistorio"
+msgstr ""
 
 #: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:54
 msgid "Layers"
-msgstr "Tavoloj"
+msgstr ""
 
 #: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:45
 msgid "Images"
-msgstr "Bildoj"
+msgstr ""
 
 #: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:48
 msgid "Tools"
-msgstr "Iloj"
+msgstr ""
 
 #: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
 #: SharpenData MotionBlurEffect
 msgid "Amount"
-msgstr "Kvanto"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Antialias"
-msgstr "Glatigo"
+msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Brightness"
-msgstr "Heleco"
+msgstr ""
 
 #: PixelateData dialog
 msgid "Brush Size"
-msgstr "Penika grado"
+msgstr ""
 
 #: PolarInversionEffect dialog
 msgid "Cell Size"
-msgstr "Ĉela grado"
+msgstr ""
 
 #: MotionBlurEffect dialog
 msgid "Center Offset"
-msgstr "Centradeŝovo"
+msgstr ""
 
 #: OilPaintingEffect dialog
 msgid "Centered"
-msgstr "Centrigita"
+msgstr ""
 
 #: PencilSketchEffect dialog
 msgid "Coarseness"
-msgstr "Malglateco"
+msgstr ""
 
 #: AddNoiseEffect dialog
 msgid "Color Range"
-msgstr "Koloramplekso"
+msgstr ""
 
 #: InkSketchEffect dialog
 msgid "Color Saturation"
-msgstr "Kolorsatureco"
+msgstr ""
 
 #: GlowEffect dialog
 msgid "Coloring"
-msgstr "Kolorsatureco"
+msgstr ""
 
 #: AddNoiseEffect dialog
 msgid "Contrast"
-msgstr "Kontrasto"
+msgstr ""
 
 #: FragmentEffect dialog
 msgid "Coverage"
-msgstr "Vasteco"
+msgstr ""
 
 #: MotionBlurEffect dialog PolarInversionEffect
 msgid "Distance"
-msgstr "Distanco"
+msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Edge Behavior"
-msgstr "Randa agmaniero"
+msgstr ""
 
 #: MandelbrotFractalEffect dialog FragmentEffect
 msgid "Factor"
-msgstr "Faktoro"
+msgstr ""
 
 #: InkSketchEffect dialog
 msgid "Fragments"
-msgstr "Fragmentoj"
+msgstr ""
 
 #: TileEffect dialog
 msgid "Ink Outline"
-msgstr "inkokonturo"
+msgstr ""
 
 #: AddNoiseEffect dialog OutlineEffect MandelbrotFractalEffect
 msgid "Intensity"
-msgstr "Intenseco"
+msgstr ""
 
 #: RadialBlurEffect dialog
 msgid "Lighting"
-msgstr "Lumigo"
+msgstr ""
 
 #: ZoomBlurEffect dialog BulgeEffect PencilSketchEffect
 msgid "Offset"
-msgstr "Deŝovo"
+msgstr ""
 
 #: MedianEffect dialog
 msgid "Pencil Tip Size"
-msgstr "Krajonekstremaĵa grando"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Percentile"
-msgstr "Elcentero"
+msgstr ""
 
 #: RadialBlurEffect dialog
 msgid "Power"
-msgstr "Energio"
+msgstr ""
 
 #: PolarInversionEffect dialog JuliaFractalEffect MandelbrotFractalEffect
 #: GaussianBlurEffect
 msgid "Quality"
-msgstr "Kvalito"
+msgstr ""
 
 #: TileEffect dialog RedEyeRemoveData
 msgid "Rotation"
-msgstr "Rotacio"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Saturation percentage"
-msgstr "Satureca elcento"
+msgstr ""
 
 #: CloudsEffect dialog
 msgid "Scale"
-msgstr "Skalo"
+msgstr ""
 
 #: SoftenPortraitData dialog
 msgid "Seed"
-msgstr "Semo"
+msgstr ""
 
 #: ReduceNoiseEffect dialog
 msgid "Softness"
-msgstr "Moleco"
+msgstr ""
 
 #: OutlineEffect dialog
 msgid "Strength"
-msgstr "Forto"
+msgstr ""
 
 #: TileEffect dialog
 msgid "Thickness"
-msgstr "Dikeco"
+msgstr ""
 
 #: RedEyeRemoveData dialog
 msgid "Tile Size"
-msgstr "Kahela grado"
+msgstr ""
 
 #: JuliaFractalEffect dialog
 msgid "Warmth"
-msgstr "Varmeco"
+msgstr ""
 
 #: RadialBlurEffect dialog
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Uzu malaltan kvaliton por aspektoj de la kreotaj bildoj, malgrandaj bildoj, "
-"kaj malgrandaj anguloj. Uzu altan kvaliton por fina kvalito, grandaj bildoj, "
-"kaj grandaj anguloj."
 
 #: RedEyeRemoveEffect dialog
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Konsileto: Por plej bona rezultoj, unue uzu elektilojn elekti ĉiun okulon."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
