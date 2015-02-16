@@ -188,6 +188,7 @@ namespace Pinta.Tools
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
+            doc.ToolLayer.Clear ();
 			doc.ToolLayer.Hidden = true;
 
 			ImageSurface surf = doc.CurrentUserLayer.Surface;
