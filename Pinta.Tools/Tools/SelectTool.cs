@@ -341,11 +341,12 @@ namespace Pinta.Tools
 			base.AfterUndo();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			shape_origin = doc.Selection.selOrigin;
 			shape_end = doc.Selection.selEnd;
-
 			updateHandler();
+
+            if (PintaCore.Tools.CurrentTool == this)
+                ReDraw (Gdk.ModifierType.None);
 		}
 
 		public override void AfterRedo()
@@ -356,8 +357,10 @@ namespace Pinta.Tools
 
 			shape_origin = doc.Selection.selOrigin;
 			shape_end = doc.Selection.selEnd;
-
 			updateHandler();
+
+            if (PintaCore.Tools.CurrentTool == this)
+                ReDraw (Gdk.ModifierType.None);
 		}
 
 		/// <summary>
