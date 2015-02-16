@@ -34,25 +34,8 @@ namespace Pinta.Core
 
 		public TextPosition CurrentPosition { get { return currentPos; } }
 		public int LineCount { get { return lines.Count; } }
-		public TextMode textMode;
+		public TextMode State;
         public Point Origin { get; set; }
-
-		public EditingMode EditMode {
-			get
-			{
-				if (textMode == TextMode.Unchanged)
-				{
-					return EditingMode.NoChangeEditing;
-				}
-
-				if (IsEmpty())
-				{
-					return EditingMode.EmptyEdit;
-				}
-
-				return EditingMode.Editing;
-			}
-		}
 
         public event EventHandler Modified;
 
@@ -64,7 +47,7 @@ namespace Pinta.Core
 		public TextEngine(List<string> lines)
 		{
             this.lines = lines;
-			textMode = TextMode.Unchanged;
+			State = TextMode.Unchanged;
 		}
 
 		#region Public Methods
@@ -72,7 +55,7 @@ namespace Pinta.Core
 		{
 			lines.Clear();
 			lines.Add(string.Empty);
-			textMode = TextMode.Unchanged;
+			State = TextMode.Unchanged;
 
             currentPos = new TextPosition (0, 0);
             ClearSelection ();
@@ -91,7 +74,7 @@ namespace Pinta.Core
 			TextEngine clonedTE = new TextEngine();
 
 			clonedTE.lines = lines.ToList();
-			clonedTE.textMode = textMode;
+			clonedTE.State = State;
             clonedTE.currentPos = currentPos;
 			clonedTE.selectionStart = selectionStart;
             clonedTE.FontFace = FontFace;
@@ -171,7 +154,7 @@ namespace Pinta.Core
                 DeleteSelection ();
 
             lines[currentPos.Line] = lines[currentPos.Line].Insert (currentPos.Offset, str);
-            textMode = TextMode.Uncommitted;
+            State = TextMode.Uncommitted;
             currentPos.Offset += str.Length;
             selectionStart = currentPos;
 
@@ -193,7 +176,7 @@ namespace Pinta.Core
 				lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset);
 			}
 
-			textMode = TextMode.Uncommitted;
+			State = TextMode.Uncommitted;
 
 			currentPos.Line++;
 			currentPos.Offset = 0;
@@ -231,7 +214,7 @@ namespace Pinta.Core
 			}
 
             selectionStart = currentPos;
-			textMode = TextMode.Uncommitted;
+			State = TextMode.Uncommitted;
             OnModified ();
 		}
 
@@ -255,7 +238,7 @@ namespace Pinta.Core
 				lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset) + (lines[currentPos.Line]).Substring (currentPos.Offset + 1);
 			}
 
-			textMode = TextMode.Uncommitted;
+			State = TextMode.Uncommitted;
 
 			OnModified ();
 		}
@@ -489,7 +472,7 @@ namespace Pinta.Core
 			lines [currentPos.Line] += endline;
 
             selectionStart = currentPos;
-			textMode = TextMode.Uncommitted;
+			State = TextMode.Uncommitted;
 
 			OnModified ();
 			return true;
@@ -611,7 +594,7 @@ namespace Pinta.Core
             // including the end line.
             lines.RemoveRange (start.Line + 1, end.Line - start.Line);
 
-			textMode = TextMode.Uncommitted;
+			State = TextMode.Uncommitted;
             OnModified ();
 		}
 

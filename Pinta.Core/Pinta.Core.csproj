@@ -90,7 +90,6 @@
     <Compile Include="Classes\SurfaceDiff.cs" />
     <Compile Include="Classes\DocumentSelection.cs" />
     <Compile Include="Enumerations\TextMode.cs" />
-    <Compile Include="Enumerations\EditingMode.cs" />
     <Compile Include="Enumerations\TextAlignment.cs" />
     <Compile Include="Classes\Re-editable\Text\TextEngine.cs" />
     <Compile Include="Classes\UserLayer.cs" />

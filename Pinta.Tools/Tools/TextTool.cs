@@ -581,16 +581,16 @@ namespace Pinta.Tools
 
 				// We're already editing and the user clicked outside the text,
 				// commit the user's work, and start a new edit
-				switch (CurrentTextEngine.EditMode)
+				switch (CurrentTextEngine.State)
 				{
 					// We were editing, save and stop
-					case EditingMode.Editing:
+					case TextMode.Uncommitted:
 						StopEditing(true);
 						break;
 
 					// We were editing, but nothing had been
 					// keyed. Stop editing.
-					case EditingMode.EmptyEdit:
+					case TextMode.Unchanged:
 						StopEditing(false);
 						break;
 				}
@@ -625,7 +625,7 @@ namespace Pinta.Tools
 				}
 				else
 				{
-					if (CurrentTextEngine.textMode == TextMode.NotFinalized)
+					if (CurrentTextEngine.State == TextMode.NotFinalized)
 					{
 						//The user is making a new text and the old text hasn't been finalized yet.
 						FinalizeText();
@@ -940,7 +940,7 @@ namespace Pinta.Tools
 			is_editing = false;
 
 			//Make sure that neither undo surface is null, the user is editing, and there are uncommitted changes.
-			if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.EditMode == EditingMode.Editing && CurrentTextEngine.textMode == TextMode.Uncommitted)
+			if (text_undo_surface != null && user_undo_surface != null && CurrentTextEngine.State == TextMode.Uncommitted)
 			{
 				Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -958,7 +958,7 @@ namespace Pinta.Tools
 				ignoreCloneFinalizations = false;
 
 				//Now that the text has been committed, change its state.
-				CurrentTextEngine.textMode = TextMode.NotFinalized;
+				CurrentTextEngine.State = TextMode.NotFinalized;
 			}
 
 			RedrawText(false, true);
@@ -1114,7 +1114,7 @@ namespace Pinta.Tools
 			if (!ignoreCloneFinalizations)
 			{
 				//Only bother finalizing text if editing.
-				if (CurrentTextEngine.EditMode == EditingMode.Editing)
+				if (CurrentTextEngine.State != TextMode.Unchanged)
 				{
 					//Start ignoring any Surface.Clone calls from this point on (so that it doesn't start to loop).
 					ignoreCloneFinalizations = true;
@@ -1147,7 +1147,7 @@ namespace Pinta.Tools
 					ignoreCloneFinalizations = false;
 
 					//Now that the text has been finalized, change its state.
-					CurrentTextEngine.textMode = TextMode.Unchanged;
+					CurrentTextEngine.State = TextMode.Unchanged;
 
                     if (selection != null)
                     {
@@ -1171,7 +1171,7 @@ namespace Pinta.Tools
 
 		public override bool TryHandleUndo ()
 		{
-			if (CurrentTextEngine.EditMode != EditingMode.NotEditing)
+			if (is_editing)
 			{
 				// commit a history item to let the undo action undo text history item
 				StopEditing(false);
@@ -1183,7 +1183,7 @@ namespace Pinta.Tools
 		public override bool TryHandleRedo()
 		{
 			//Rather than redoing something, if the text has been edited then simply commit and do not redo.
-			if (CurrentTextEngine.EditMode != EditingMode.NotEditing && CurrentTextEngine.textMode == TextMode.Uncommitted)
+			if (is_editing && CurrentTextEngine.State == TextMode.Uncommitted)
 			{
 				//Commit a new TextHistoryItem.
 				StopEditing(false);
@@ -1199,7 +1199,7 @@ namespace Pinta.Tools
 
 		public override bool TryHandlePaste (Clipboard cb)
 		{
-			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
+			if (!is_editing) {
 				return false;
 			}
 
@@ -1212,7 +1212,7 @@ namespace Pinta.Tools
 
 		public override bool TryHandleCopy (Clipboard cb)
 		{
-			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
+			if (!is_editing) {
 				return false;
 			}
 			CurrentTextEngine.PerformCopy (cb);
@@ -1221,7 +1221,7 @@ namespace Pinta.Tools
 
 		public override bool TryHandleCut (Clipboard cb)
 		{
-			if (CurrentTextEngine.EditMode == EditingMode.NotEditing) {
+			if (!is_editing) {
 				return false;
 			}
 			CurrentTextEngine.PerformCut (cb);
