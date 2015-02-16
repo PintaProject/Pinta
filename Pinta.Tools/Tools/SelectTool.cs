@@ -38,14 +38,12 @@ namespace Pinta.Tools
 		private PointD reset_origin;
 		private PointD shape_end;
 		private ToolControl [] controls = new ToolControl [8];
+        private int? active_control;
 		private SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
-		bool handler_active = false;
 		private Gdk.Cursor cursor_hand;
 		bool is_hand_cursor = false;
-
-		private bool isResizing = false;
 
 		public SelectTool ()
 		{
@@ -77,7 +75,8 @@ namespace Pinta.Tools
 
 			reset_origin = args.Event.GetPoint();
 
-			if (!handler_active || !HandleResize(point.X, point.Y))
+            active_control = HandleResize (point);
+			if (!active_control.HasValue)
 			{
 				doc.selHandler.DetermineCombineMode(args);
 
@@ -90,12 +89,11 @@ namespace Pinta.Tools
 				doc.PreviousSelection = doc.Selection.Clone();
 				doc.Selection.SelectionPolygons.Clear();
 
-				is_drawing = true;
+                // The bottom right corner should be selected.
+                active_control = 3;
 			}
-			else
-			{
-				isResizing = true;
-			}
+
+            is_drawing = true;
 		}
 		
 		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -111,7 +109,6 @@ namespace Pinta.Tools
                     hist.Dispose();
                     hist = null;
                 }
-                handler_active = false;
 				doc.ToolLayer.Clear ();
 			} else {
 				ReDraw(args.Event.State);
@@ -127,17 +124,15 @@ namespace Pinta.Tools
                     doc.History.PushNewItem(hist);
                     hist = null;
                 }
-				handler_active = true;
 			}
 
 			is_drawing = false;
-			isResizing = false;
+            active_control = null;
 		}
 
 		protected override void OnDeactivated(BaseTool newTool)
 		{
 			base.OnDeactivated (newTool);
-			handler_active = false;
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				Document doc = PintaCore.Workspace.ActiveDocument;
 				doc.ToolLayer.Clear ();
@@ -147,7 +142,6 @@ namespace Pinta.Tools
 		protected override void OnCommit ()
 		{
 			base.OnCommit ();
-			handler_active = false;
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				Document doc = PintaCore.Workspace.ActiveDocument;
 				doc.ToolLayer.Clear ();
@@ -160,22 +154,15 @@ namespace Pinta.Tools
 
 			if (!is_drawing)
 			{
-				CheckHandlerCursor(point.X, point.Y);
-
-				if (!isResizing)
-				{
-					return;
-				}
+                CheckHandlerCursor (point);
+                return;
 			}
-			else
-			{
-				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
-				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
 
-				shape_end = new PointD(x, y);
+            double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
+            double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
+            controls[active_control.Value].HandleMouseMove (x, y, args.Event.State);
 
-				ReDraw(args.Event.State);
-			}
+            ReDraw(args.Event.State);
 			
 			if (doc.Selection != null)
 			{
@@ -310,15 +297,15 @@ namespace Pinta.Tools
 			});
 		}
 
-		public bool HandleResize (double x, double y)
+		public int? HandleResize (PointD point)
 		{
-			foreach (ToolControl ct in controls) {
-				if (ct.Handle (this, new PointD (x, y ))) {
-					return true;
-				}
-			}
+            for (int i = 0; i < controls.Length; ++i)
+            {
+                if (controls[i].IsInside (point))
+                    return i;
+            }
 
-			return false;
+			return null;
 		}
 
 		public void DrawHandler (Layer layer)
@@ -329,10 +316,10 @@ namespace Pinta.Tools
 				ct.Render (layer);
 		}
 
-		public void CheckHandlerCursor (double x, double y)
+		public void CheckHandlerCursor (PointD point)
 		{
 			foreach (ToolControl ct in controls) {
-				if (ct.IsInside (x, y)) {
+				if (ct.IsInside (point)) {
 					if (!is_hand_cursor) {
 						SetCursor (cursor_hand);
 						is_hand_cursor = true;

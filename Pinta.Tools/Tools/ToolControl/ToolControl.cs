@@ -45,21 +45,15 @@ namespace Pinta.Tools
 
 		public PointD Position {get; set;}
 
-		public bool Handle (BaseTool tool, Cairo.PointD point)
+		public bool IsInside (PointD point)
 		{
-			if (IsInside (point.X, point.Y)) {
-				tool.MouseMoved += action;
-				tool.MouseReleased += (x, y, s) => {tool.MouseMoved -= action;};
-				//TODO unregister mouse release
-				return true;
-			}
-			return false;
+			return (Math.Abs (point.X - Position.X) <= Tolerance) && (Math.Abs (point.Y - Position.Y) <= Tolerance);
 		}
 
-		public bool IsInside (double x, double y)
-		{
-			return (Math.Abs (x - Position.X) <= Tolerance) && (Math.Abs (y - Position.Y) <= Tolerance);
-		}
+        public void HandleMouseMove (double x, double y, Gdk.ModifierType state)
+        {
+            action (x, y, state);
+        }
 
 		public void Render (Layer layer)
 		{
