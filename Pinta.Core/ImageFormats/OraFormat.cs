@@ -561,7 +561,7 @@ namespace Pinta.Core
                 writer.WriteAttributeString ("xlink", "href", nsxlink, "data/layer" + i.ToString () + ".png");
                 writer.WriteAttributeString ("xlink", "type", nsxlink, "simple");
                 writer.WriteAttributeString ("xlink", "show", nsxlink, "embed");
-                writer.WriteAttributeString ("xlink", "actuate", nsxlink, "onload");
+                writer.WriteAttributeString ("xlink", "actuate", nsxlink, "onLoad");
 
                 writer.WriteEndElement (); // draw:image
                 writer.WriteEndElement (); // draw:frame
