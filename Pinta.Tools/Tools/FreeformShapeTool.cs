@@ -188,17 +188,9 @@ namespace Pinta.Tools
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			doc.ToolLayer.Hidden = true;
 
-			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
-			else if (undo_surface != null)
-				(undo_surface as IDisposable).Dispose ();
-
-			surface_modified = false;
 			ImageSurface surf = doc.CurrentUserLayer.Surface;
-
 			using (Context g = new Context (surf)) {
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
@@ -233,6 +225,13 @@ namespace Pinta.Tools
 					g.Stroke ();
 				}
 			}
+
+			if (surface_modified)
+				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+			else if (undo_surface != null)
+				(undo_surface as IDisposable).Dispose ();
+
+			surface_modified = false;
 
 			doc.Workspace.Invalidate ();
 		}
