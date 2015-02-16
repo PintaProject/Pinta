@@ -57,6 +57,7 @@ namespace Pinta.Core
 
 		public SelectionModeHandler selHandler;
         public DocumentSelection Selection = new DocumentSelection ();
+        public DocumentSelection PreviousSelection = new DocumentSelection ();
 
 		public Document (Gdk.Size size)
 		{
@@ -248,6 +249,7 @@ namespace Pinta.Core
 				(selection_layer.Surface as IDisposable).Dispose ();
 
             Selection.Dispose ();
+            PreviousSelection.Dispose ();
 
 			Workspace.History.Clear ();
 		}
@@ -613,6 +615,7 @@ namespace Pinta.Core
 		public void ResetSelectionPaths()
 		{
 			Selection.ResetSelection(selection_layer.Surface, ImageSize);
+			PreviousSelection.ResetSelection(selection_layer.Surface, ImageSize);
 
 			ShowSelection = false;
 		}

@@ -32,6 +32,7 @@ namespace Pinta.Core
 	public class SelectionHistoryItem : BaseHistoryItem
 	{
 		private DocumentSelection old_selection;
+		private DocumentSelection old_previous_selection;
 
 		private bool show_selection;
 		private bool hide_tool_layer;
@@ -55,6 +56,7 @@ namespace Pinta.Core
 		public override void Dispose ()
 		{
             old_selection.Dispose ();
+            old_previous_selection.Dispose ();
 		}
 
 		private void Swap ()
@@ -72,6 +74,10 @@ namespace Pinta.Core
 			show_selection = swap_show;
 			hide_tool_layer = swap_hide_tool_layer;
 
+            swap_selection = old_previous_selection;
+            old_previous_selection = doc.PreviousSelection;
+            doc.PreviousSelection = swap_selection;
+
 			PintaCore.Workspace.CallSelectionChanged(this, EventArgs.Empty);
 			PintaCore.Workspace.Invalidate ();
 		}
@@ -80,6 +86,7 @@ namespace Pinta.Core
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 			old_selection = doc.Selection.Clone ();
+            old_previous_selection = doc.PreviousSelection.Clone ();
 			show_selection = PintaCore.Layers.ShowSelection;
 			hide_tool_layer = doc.ToolLayer.Hidden;
 		}

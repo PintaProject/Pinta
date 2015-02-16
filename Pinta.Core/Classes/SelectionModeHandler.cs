@@ -137,7 +137,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public void PerformSelectionMode(DocumentSelection initial_selection, Point[][] polygonSet)
+		public void PerformSelectionMode(Point[][] polygonSet)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -145,7 +145,7 @@ namespace Pinta.Core
 			List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons(polygonSet);
 
             doc.Selection.Dispose ();
-			doc.Selection = initial_selection.Clone();
+			doc.Selection = doc.PreviousSelection.Clone();
 
 			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
 			{

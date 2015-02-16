@@ -229,6 +229,7 @@ namespace Pinta.Core
 
 			doc.ResetSelectionPaths ();
 			doc.Selection.SelectionPolygons.Clear();
+            doc.PreviousSelection.SelectionPolygons.Clear ();
 			doc.Selection.selOrigin = new PointD();
 			doc.Selection.selEnd = new PointD();
 

@@ -38,7 +38,6 @@ namespace Pinta.Tools
 		private PointD reset_origin;
 		private PointD shape_end;
 		private ToolControl [] controls = new ToolControl [8];
-        private DocumentSelection initial_selection;
 		private SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
@@ -87,7 +86,8 @@ namespace Pinta.Tools
 				shape_origin = new PointD(x, y);
                 doc.Selection.selOrigin = shape_origin;
 
-				initial_selection = doc.Selection.Clone();
+                doc.PreviousSelection.Dispose ();
+				doc.PreviousSelection = doc.Selection.Clone();
 				doc.Selection.SelectionPolygons.Clear();
 
 				is_drawing = true;
@@ -117,10 +117,7 @@ namespace Pinta.Tools
 				ReDraw(args.Event.State);
 				if (doc.Selection != null)
 				{
-                    doc.selHandler.PerformSelectionMode (initial_selection,
-                        DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
-                    initial_selection.Dispose ();
-                    initial_selection = null;
+                    doc.selHandler.PerformSelectionMode (DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
 
                     doc.Selection.selEnd = shape_end;
 					PintaCore.Workspace.Invalidate();
@@ -182,7 +179,7 @@ namespace Pinta.Tools
 			
 			if (doc.Selection != null)
 			{
-                doc.selHandler.PerformSelectionMode (initial_selection, DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+                doc.selHandler.PerformSelectionMode (DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
 				PintaCore.Workspace.Invalidate();
 			}
 		}

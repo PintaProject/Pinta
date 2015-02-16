@@ -99,11 +99,11 @@ namespace Pinta.Tools
 			SelectionHistoryItem undoAction = new SelectionHistoryItem(this.Icon, this.Name);
 			undoAction.TakeSnapshot();
 
-			using (var initial_selection = doc.Selection.Clone())
-            {
-                doc.Selection.SelectionPolygons.Clear ();
-                doc.selHandler.PerformSelectionMode (initial_selection, polygonSet);
-            }
+            doc.PreviousSelection.Dispose ();
+            doc.PreviousSelection = doc.Selection.Clone ();
+
+            doc.Selection.SelectionPolygons.Clear ();
+            doc.selHandler.PerformSelectionMode (polygonSet);
 
 			doc.History.PushNewItem(undoAction);
 			doc.Workspace.Invalidate();
