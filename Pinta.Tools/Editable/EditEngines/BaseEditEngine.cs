@@ -1711,6 +1711,9 @@ namespace Pinta.Tools
 				invalidateAfterDraw(dirty.Value);
 			}
 
+            // Ensure the ToolLayer gets hidden now that we're done with it
+            doc.ToolLayer.Hidden = true;
+
 			//Clear out all of the data.
 			resetShapes();
 		}
