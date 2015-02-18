@@ -54,18 +54,15 @@ namespace Pinta.Tools
 
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
 		public override int Priority { get { return 25; } }
-
-		public Color StrokeColor { get; private set; }
-		public Color FillColor { get; private set; }
-		public Point LastPoint { get; private set; }
-		public Cairo.Context Drawable { get; private set; }
-		public ImageSurface Surface { get; private set; }
 		#endregion
 
 		private BasePaintBrush default_brush;
 		private BasePaintBrush active_brush;
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
+		private Color stroke_color;
+        private Color fill_color;
+        private Point last_point;
 
 		protected override void OnActivated ()
 		{
@@ -156,25 +153,25 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			if (mouse_button == 1) {
-				StrokeColor = PintaCore.Palette.PrimaryColor;
-				FillColor = PintaCore.Palette.SecondaryColor;
+				stroke_color = PintaCore.Palette.PrimaryColor;
+				fill_color = PintaCore.Palette.SecondaryColor;
 			} else if (mouse_button == 3) {
-				StrokeColor = PintaCore.Palette.SecondaryColor;
-				FillColor = PintaCore.Palette.PrimaryColor;
+				stroke_color = PintaCore.Palette.SecondaryColor;
+				fill_color = PintaCore.Palette.PrimaryColor;
 			} else {
-				LastPoint = point_empty;
+				last_point = point_empty;
 				return;
 			}
 
 			// TODO: also multiply by pressure
-			StrokeColor = new Color (StrokeColor.R, StrokeColor.G, StrokeColor.B,
-				StrokeColor.A * active_brush.StrokeAlphaMultiplier);
+			stroke_color = new Color (stroke_color.R, stroke_color.G, stroke_color.B,
+				stroke_color.A * active_brush.StrokeAlphaMultiplier);
 
 			int x = (int)point.X;
 			int y = (int)point.Y;
 
-			if (LastPoint.Equals (point_empty))
-				LastPoint = new Point (x, y);
+			if (last_point.Equals (point_empty))
+				last_point = new Point (x, y);
 
 			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
@@ -183,25 +180,20 @@ namespace Pinta.Tools
 			var invalidate_rect = Gdk.Rectangle.Zero;
 			var brush_width = BrushWidth;
 
-			Surface = surf;
+			using (var g = new Context (surf)) {
+				g.AppendPath (doc.Selection.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
 
-			using (Drawable = new Context (surf)) {
-				Drawable.AppendPath (doc.Selection.SelectionPath);
-				Drawable.FillRule = FillRule.EvenOdd;
-				Drawable.Clip ();
+				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
+				g.LineWidth = brush_width;
+				g.LineJoin = LineJoin.Round;
+				g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
+				g.SetSourceColor (stroke_color);
 
-				Drawable.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				Drawable.LineWidth = brush_width;
-				Drawable.LineJoin = LineJoin.Round;
-				Drawable.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
-				Drawable.SetSourceColor (StrokeColor);
-
-				invalidate_rect = active_brush.DoMouseMove (Drawable, StrokeColor, Surface,
-				                                            x, y, LastPoint.X, LastPoint.Y);
+                invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf,
+				                                            x, y, last_point.X, last_point.Y);
 			}
-
-			Surface = null;
-			Drawable = null;
 
 			// If we draw partially offscreen, Cairo gives us a bogus
 			// dirty rectangle, so redraw everything.
@@ -211,7 +203,7 @@ namespace Pinta.Tools
 				doc.Workspace.Invalidate (doc.ClampToImageSize (invalidate_rect));
 			}
 
-			LastPoint = new Point (x, y);
+			last_point = new Point (x, y);
 		}
 		#endregion
 	}
