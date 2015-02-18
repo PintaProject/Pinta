@@ -246,8 +246,6 @@ namespace Pinta.Tools
         //Stores the editable shape data.
 		public static ShapeEngineCollection SEngines = new ShapeEngineCollection();
 
-		protected static bool usedToolLayer = false;
-
 
         #region ToolbarEventHandlers
 
@@ -1213,12 +1211,7 @@ namespace Pinta.Tools
 		private void beforeDraw()
 		{
 			//Clear the ToolLayer if it was used previously (e.g. for hover points when there was no active shape).
-			if (usedToolLayer)
-			{
-				PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
-
-				usedToolLayer = false;
-			}
+			PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
 
 			//Invalidate the old hover point bounds, if any.
 			if (lastHover != null)
@@ -1256,8 +1249,6 @@ namespace Pinta.Tools
 
 				//Draw the hover point. Note: the hover point has its own invalidation.
 				drawHoverPoint(g);
-
-				usedToolLayer = true;
 			}
 
 			doc.ToolLayer.Hidden = false;
