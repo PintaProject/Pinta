@@ -105,14 +105,14 @@ namespace Pinta
 
 			hbox.Add (vbox);
 			this.VBox.Add (hbox);
+			
+			bug_report_button = new Button (Catalog.GetString ("Report Bug...."));
+			bug_report_button.CanFocus = false;
+			ActionArea.Add (bug_report_button);
 
 			var ok_button = new Button (Gtk.Stock.Ok);
 			ok_button.CanDefault = true;
 			AddActionWidget (ok_button, ResponseType.Ok);
-
-			bug_report_button = new Button (Catalog.GetString ("Report Bug...."));
-			bug_report_button.CanFocus = false;
-			ActionArea.Add (bug_report_button);
 
 			DefaultWidth = 600;
 			DefaultHeight = 142;
