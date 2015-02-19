@@ -23,6 +23,9 @@
     <Translation Include="po/az.po">
       <Code>az</Code>
     </Translation>
+    <Translation Include="po/be.po">
+      <Code>be</Code>
+    </Translation>
     <Translation Include="po/bg.po">
       <Code>bg</Code>
     </Translation>

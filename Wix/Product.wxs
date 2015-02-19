@@ -69,6 +69,13 @@
                 </Component>
               </Directory>
             </Directory>
+            <Directory Id="be" Name="be">
+              <Directory Id="LC_MESSAGES_BE" Name='LC_MESSAGES'>
+                <Component Id="BeTranslation" Guid="A43DA05E-D0ED-455B-B156-3A5B4056D039">
+                  <File Id="pinta_be" Name="pinta.mo" Source="$(var.BuildRoot)\locale\be\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
             <Directory Id="bg" Name="bg">
               <Directory Id="LC_MESSAGES_BG" Name='LC_MESSAGES'>
                 <Component Id="BgTranslation" Guid="DBAE7788-2C6B-443D-ADE1-1AABA1F9719D">
