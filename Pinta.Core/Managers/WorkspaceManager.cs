@@ -188,6 +188,9 @@ namespace Pinta.Core
 			try {
 				// Open the image and add it to the layers
 				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
+				if (importer == null)
+					throw new FormatException( Catalog.GetString ("Unsupported file format"));
+
 				importer.Import (file, parent);
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
