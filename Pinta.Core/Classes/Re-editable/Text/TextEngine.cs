@@ -387,7 +387,6 @@ namespace Pinta.Core
             if (currentPos.Line > 0)
             {
                 currentPos.Line--;
-                int offset = currentPos.Offset;
                 currentPos.Offset = Math.Min (currentPos.Offset,
                                               lines[currentPos.Line].Length);
 
@@ -400,7 +399,6 @@ namespace Pinta.Core
 		{
             if (currentPos.Line < LineCount - 1)
             {
-                TextPosition oldpos = currentPos;
                 currentPos.Line++;
                 currentPos.Offset = Math.Min (currentPos.Offset,
                                               lines[currentPos.Line].Length);

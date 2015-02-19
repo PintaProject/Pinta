@@ -61,7 +61,6 @@ namespace Pinta.Tools
 		private ToolBarLabel brush_label;
 		private ToolBarComboBox brush_combo_box;
 		private Color stroke_color;
-        private Color fill_color;
         private Point last_point;
 
 		protected override void OnActivated ()
@@ -154,10 +153,8 @@ namespace Pinta.Tools
 
 			if (mouse_button == 1) {
 				stroke_color = PintaCore.Palette.PrimaryColor;
-				fill_color = PintaCore.Palette.SecondaryColor;
 			} else if (mouse_button == 3) {
 				stroke_color = PintaCore.Palette.SecondaryColor;
-				fill_color = PintaCore.Palette.PrimaryColor;
 			} else {
 				last_point = point_empty;
 				return;
