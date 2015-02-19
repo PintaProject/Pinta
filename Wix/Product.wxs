@@ -469,6 +469,7 @@
       <ComponentRef Id="AfTranslation" />
       <ComponentRef Id="ArTranslation" />
       <ComponentRef Id="AzTranslation" />
+      <ComponentRef Id="BeTranslation" />
       <ComponentRef Id="BgTranslation" />
       <ComponentRef Id="BrTranslation" />
       <ComponentRef Id="BsTranslation" />
