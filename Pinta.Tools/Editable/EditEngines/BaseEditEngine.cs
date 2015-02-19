@@ -1486,7 +1486,8 @@ namespace Pinta.Tools
 						{
 							PointD[] actualPoints = activeEngine.GetActualPoints(true);
 
-							dirty = dirty.UnionRectangles(g.FillPolygonal(actualPoints, activeEngine.FillColor));
+                            Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
+                            dirty = dirty.UnionRectangles (g.FillPolygonal (actualPoints, fill_color));
 						}
 
 						if (StrokeShape)
