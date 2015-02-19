@@ -57,7 +57,12 @@ namespace Pinta.Tools
 		#region Properties
 		public override string Name { get { return Catalog.GetString ("Recolor"); } }
 		public override string Icon { get { return "Tools.Recolor.png"; } }
-		public override string StatusBarText { get { return Catalog.GetString ("Left click to replace the secondary color with the primary color."); } }
+		public override string StatusBarText {
+			get {
+				return Catalog.GetString ("Left click to replace the secondary color with the primary color. " +
+				                          "Right click to reverse.");
+			}
+		}
 		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Recolor.png"), 9, 18); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.R; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
