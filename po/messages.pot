@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-07 16:32-0500\n"
+"POT-Creation-Date: 2015-02-18 21:34-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,13 +59,13 @@ msgid "Copy Merged"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
-#: ../Pinta.Core/Classes/Document.cs:801
+#: ../Pinta.Core/Classes/Document.cs:771
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
-#: ../Pinta.Core/Classes/Document.cs:797
+#: ../Pinta.Core/Classes/Document.cs:767
 msgid "Paste Into New Layer"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgstr ""
 msgid "Translate This Application"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:222
+#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:220
 msgid "About"
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:859
+#: ../Pinta.Core/Classes/Document.cs:829
 msgid "Add New Layer"
 msgstr ""
 
@@ -367,13 +367,13 @@ msgstr ""
 #. stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
 #. image was rotated or cropped) and "Zoom to Window" mode is active
 #: ../Pinta.Core/Actions/ViewActions.cs:88
-#: ../Pinta.Core/Actions/ViewActions.cs:216
+#: ../Pinta.Core/Actions/ViewActions.cs:219
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:295
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:303
 msgid "Window"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:126
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Ruler Units"
 msgstr ""
 
@@ -409,51 +409,51 @@ msgstr ""
 msgid "Antialiasing Off"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:316 ../Pinta.Core/Classes/Document.cs:321
+#: ../Pinta.Core/Classes/Document.cs:289 ../Pinta.Core/Classes/Document.cs:294
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:403
+#: ../Pinta.Core/Classes/Document.cs:376
 msgid "copy"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:674
+#: ../Pinta.Core/Classes/Document.cs:644
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:875
+#: ../Pinta.Core/Classes/Document.cs:845
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:893
+#: ../Pinta.Core/Classes/Document.cs:863
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:894
+#: ../Pinta.Core/Classes/Document.cs:864
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:898
+#: ../Pinta.Core/Classes/Document.cs:868
 msgid "Expand canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:899
+#: ../Pinta.Core/Classes/Document.cs:869
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:912
+#: ../Pinta.Core/Classes/Document.cs:882
 msgid "Image cannot be pasted"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:913
+#: ../Pinta.Core/Classes/Document.cs:883
 msgid "The clipboard does not contain an image."
 msgstr ""
 
@@ -483,7 +483,7 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:52
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/TextTool.cs:233
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr ""
 
@@ -767,7 +767,7 @@ msgid "Oil Painting"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
-#: ../Pinta.Tools/Tools/TextTool.cs:235
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Outline"
 msgstr ""
 
@@ -1019,101 +1019,101 @@ msgstr ""
 msgid "Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:313
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:345
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:343
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:360
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:358
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:366
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:369
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:367
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:383
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:381
 msgid "Shape Type"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:391
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:389
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:392
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:390
 msgid "Closed Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:393
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:391
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:394
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:392
 msgid "Rounded Line Series"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:408
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:406
 msgid "Changed Shape Type"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:547
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:545
 msgid "Point Deleted"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:564
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:562
 msgid "Deleted"
 msgstr ""
 
 #. Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:613
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:909
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:611
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:907
 msgid "Point Added"
 msgstr ""
 
 #. Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:949
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:947
 msgid "Added"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1039
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1037
 msgid "Modified"
 msgstr ""
 
 #. Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
 #. Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1705
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1289
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1697
 msgid "Finalized"
 msgstr ""
 
@@ -1343,11 +1343,11 @@ msgid ""
 msgstr ""
 
 #. Try to set the default tool to the PaintBrush
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:84
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:82
 msgid "Paintbrush"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:96
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
 msgid "Type"
 msgstr ""
 
@@ -1401,69 +1401,69 @@ msgstr ""
 msgid "Rounded Rectangle"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:81
+#: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:88
+#: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:141
+#: ../Pinta.Tools/Tools/TextTool.cs:157
 msgid "Font"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:192
 msgid "Bold"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:183
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Italic"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:190
+#: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "Underline"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:215
 msgid "Left Align"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:207
+#: ../Pinta.Tools/Tools/TextTool.cs:223
 msgid "Center Align"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:214
+#: ../Pinta.Tools/Tools/TextTool.cs:230
 msgid "Right Align"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Text Style"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:234
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Normal and Outline"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:236
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Outline width"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Decrease outline size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Increase outline size"
 msgstr ""
 
@@ -1633,6 +1633,16 @@ msgstr ""
 msgid "by Pinta contributors"
 msgstr ""
 
+#: ../Pinta/Dialogs/ErrorDialog.cs:99
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+msgid "Details"
+msgstr ""
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:114
+msgid "Report Bug...."
+msgstr ""
+
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr ""
@@ -1794,55 +1804,55 @@ msgstr ""
 msgid "number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta/Main.cs:123
+#: ../Pinta/Main.cs:122
 msgid "Usage: pinta [files]"
 msgstr ""
 
-#: ../Pinta/Main.cs:125
+#: ../Pinta/Main.cs:124
 msgid "Options: "
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:184
+#: ../Pinta/MainWindow.cs:182
 msgid "_File"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:185
+#: ../Pinta/MainWindow.cs:183
 msgid "_Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:187
+#: ../Pinta/MainWindow.cs:185
 msgid "_View"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:190
+#: ../Pinta/MainWindow.cs:188
 msgid "_Image"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:191
+#: ../Pinta/MainWindow.cs:189
 msgid "_Layers"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:192
+#: ../Pinta/MainWindow.cs:190
 msgid "_Adjustments"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:193
+#: ../Pinta/MainWindow.cs:191
 msgid "Effe_cts"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:194
+#: ../Pinta/MainWindow.cs:192
 msgid "A_dd-ins"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:196
+#: ../Pinta/MainWindow.cs:194
 msgid "_Window"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:200
+#: ../Pinta/MainWindow.cs:198
 msgid "Tool Windows"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:204
+#: ../Pinta/MainWindow.cs:202
 msgid "_Help"
 msgstr ""
 
@@ -2260,11 +2270,6 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
-msgid "Details"
 msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126

@@ -121,6 +121,7 @@ Pinta/Actions/Layers/RotateZoomLayerAction.cs
 Pinta/AddinSetupService.cs
 Pinta/Dialogs/AboutDialog.cs
 Pinta/Dialogs/AboutPintaTabPage.cs
+Pinta/Dialogs/ErrorDialog.cs
 Pinta/Dialogs/JpegCompressionDialog.cs
 Pinta/Dialogs/LayerPropertiesDialog.cs
 Pinta/Dialogs/NewImageDialog.cs
