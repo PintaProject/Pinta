@@ -188,10 +188,10 @@ namespace Pinta.Effects
 			[Skip]
 			public override bool IsDefault { get { return Power == 0; } }
 
-			[MinimumValue (2), MaximumValue (1000)]
+			[Caption ("Scale"), MinimumValue (2), MaximumValue (1000)]
 			public int Scale = 250;
 
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Power"), MinimumValue (0), MaximumValue (100)]
 			public int Power = 50;
 			
 			[Skip]
@@ -216,7 +216,7 @@ namespace Pinta.Effects
 			[StaticList ("BlendOps")]
 			public string BlendMode = defaultBlendOp;
 			
-			[MinimumValue (0), MaximumValue (255)]
+			[Caption ("Seed"), MinimumValue (0), MaximumValue (255)]
 			public int Seed = 0;
 
 		}

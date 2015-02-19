@@ -91,10 +91,10 @@ namespace Pinta.Effects
 
 		public class ReduceNoiseData : EffectData
 		{
-			[MinimumValue (1), MaximumValue (200)]
+			[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
 			public int Radius = 6;
 
-			[MinimumValue (0), IncrementValue (0.01), DigitsValue (2), MaximumValue (1)]
+			[Caption ("Strength"), MinimumValue (0), IncrementValue (0.01), DigitsValue (2), MaximumValue (1)]
 			public double Strength = 0.4;
 		}
 	}

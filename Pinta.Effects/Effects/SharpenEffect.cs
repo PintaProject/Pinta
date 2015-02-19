@@ -60,7 +60,7 @@ namespace Pinta.Effects
 	
 	public class SharpenData : EffectData
 	{
-		[MinimumValue (1), MaximumValue (20)]
+		[Caption ("Amount"), MinimumValue (1), MaximumValue (20)]
 		public int Amount = 2;
 	}
 }

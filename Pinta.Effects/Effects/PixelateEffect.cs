@@ -116,7 +116,7 @@ namespace Pinta.Effects
 
 	public class PixelateData : EffectData
 	{
-		[MinimumValue(1), MaximumValue(100)]
+		[Caption ("Cell Size"), MinimumValue(1), MaximumValue(100)]
 		public int CellSize = 2;
 	}
 }

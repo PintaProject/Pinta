@@ -155,11 +155,13 @@ namespace Pinta.Effects
 
 		public class RadialBlurData : EffectData
 		{
+			[Caption ("Angle")]
 			public Double Angle = 2;
-			
+
+			[Caption ("Offset")]
 			public PointD Offset = new PointD (0, 0);
 
-			[MinimumValue (1), MaximumValue (5)]
+			[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 			[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
 			public int Quality = 2;
 			

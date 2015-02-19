@@ -67,10 +67,10 @@ namespace Pinta.Effects
 
 		public class MedianData : EffectData
 		{
-			[MinimumValue (1), MaximumValue (200)]
+			[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
 			public int Radius = 10;
 
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Percentile"), MinimumValue (0), MaximumValue (100)]
 			public int Percentile = 50;
 
 			[Skip]

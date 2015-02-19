@@ -62,6 +62,7 @@ Pinta.Effects/Effects/SoftenPortraitEffect.cs
 Pinta.Effects/Effects/TileEffect.cs
 Pinta.Effects/Effects/TwistEffect.cs
 Pinta.Effects/Effects/UnfocusEffect.cs
+Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs
 Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs

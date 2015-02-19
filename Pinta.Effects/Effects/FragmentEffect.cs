@@ -108,12 +108,13 @@ namespace Pinta.Effects
 
 		public class FragmentData : EffectData
 		{
-			[MinimumValue (2), MaximumValue (50)]
+			[Caption ("Fragments"), MinimumValue (2), MaximumValue (50)]
 			public int Fragments = 4;
 
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Distance"), MinimumValue (0), MaximumValue (100)]
 			public int Distance = 8;
 
+			[Caption ("Rotation")]
 			public double Rotation = 0;
 		}
 	}

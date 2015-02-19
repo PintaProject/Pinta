@@ -165,7 +165,7 @@ namespace Pinta.Effects
 			[Caption ("Ink Outline"), MinimumValue (0), MaximumValue (99)]
 			public int InkOutline = 50;
 			
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Coloring"), MinimumValue (0), MaximumValue (100)]
 			public int Coloring = 50;
 		}
 	}

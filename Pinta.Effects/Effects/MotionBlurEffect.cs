@@ -108,11 +108,13 @@ namespace Pinta.Effects
 			[Skip]
 			public override bool IsDefault { get { return Distance == 0; } }
 
+			[Caption ("Angle")]
 			public double Angle = 25;
 
-			[MinimumValue (1), MaximumValue (200)]
+			[Caption ("Distance"), MinimumValue (1), MaximumValue (200)]
 			public int Distance = 10;
 
+			[Caption ("Centered")]
 			public bool Centered = true;
 		}
 	}

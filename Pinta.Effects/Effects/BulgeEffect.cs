@@ -98,9 +98,10 @@ namespace Pinta.Effects
 
 		public class BulgeData : EffectData
 		{
-			[MinimumValue(-200), MaximumValue(100)]
+			[Caption ("Amount"), MinimumValue(-200), MaximumValue(100)]
 			public int Amount = 45;
 
+			[Caption ("Offset")]
 			public Cairo.PointD Offset = new Cairo.PointD (0.0, 0.0);
 
 			[Skip]

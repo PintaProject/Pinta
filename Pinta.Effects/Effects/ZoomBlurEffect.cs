@@ -128,9 +128,10 @@ namespace Pinta.Effects
 
 		public class ZoomBlurData : EffectData
 		{
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Amount"), MinimumValue (0), MaximumValue (100)]
 			public int Amount = 10;
 
+			[Caption ("Offset")]
 			public Gdk.Point Offset = new Gdk.Point (0, 0);
 
 			[Skip]

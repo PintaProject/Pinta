@@ -95,7 +95,7 @@ namespace Pinta.Effects
 
 		public class UnfocusData : EffectData
 		{
-			[MinimumValue (1), MaximumValue (200)]
+			[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
 			public int Radius = 4;
 
 			[Skip]

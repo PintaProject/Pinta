@@ -135,11 +135,11 @@ namespace Pinta.Effects
 
 		public class TileData : EffectData
 		{
-			[MinimumValue(-45), MaximumValue(45)]
+			[Caption ("Rotation"), MinimumValue(-45), MaximumValue(45)]
 			public double Rotation = 30;
-			[MinimumValue(2), MaximumValue(200)]
+			[Caption ("Tile Size"), MinimumValue(2), MaximumValue(200)]
 			public int TileSize = 40;
-			[MinimumValue(-20), MaximumValue(20)]
+			[Caption ("Intensity"), MinimumValue(-20), MaximumValue(20)]
 			public int Intensity = 8;
 		}
 	}

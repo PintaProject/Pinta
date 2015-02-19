@@ -176,7 +176,7 @@ namespace Pinta.Effects
 			[Caption ("Brush Size"), MinimumValue (1), MaximumValue (8)]
 			public int BrushSize = 3;
 
-			[MinimumValue (3), MaximumValue (255)]
+			[Caption ("Coarseness"), MinimumValue (3), MaximumValue (255)]
 			public int Coarseness = 50;
 		}
 	}

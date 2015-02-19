@@ -178,9 +178,10 @@ namespace Pinta.Effects
 		#endregion
 		public class WarpData : EffectData
 		{
-			[MinimumValue(1), MaximumValue(5)]
+			[Caption ("Quality"), MinimumValue(1), MaximumValue(5)]
 			public int Quality = 2;
-			
+
+			[Caption ("Center Offset")]
 			public Cairo.PointD CenterOffset;
 			
 			public WarpEdgeBehavior EdgeBehavior = WarpEdgeBehavior.Wrap;

@@ -166,13 +166,13 @@ namespace Pinta.Effects
 
 		public class NoiseData : EffectData
 		{
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
 			public int Intensity = 64;
 
-			[MinimumValue (0), MaximumValue (400)]
+			[Caption ("Color Saturation"), MinimumValue (0), MaximumValue (400)]
 			public int ColorSaturation = 100;
 
-			[MinimumValue (0), DigitsValue (2), MaximumValue (100)]
+			[Caption ("Coverage"), MinimumValue (0), DigitsValue (2), MaximumValue (100)]
 			public double Coverage = 100.0;
 		}
 	}

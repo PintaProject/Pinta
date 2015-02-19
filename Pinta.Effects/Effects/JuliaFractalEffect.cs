@@ -128,15 +128,16 @@ namespace Pinta.Effects
 
 		public class JuliaFractalData : EffectData
 		{
-			[MinimumValue(1), MaximumValue(10)]
+			[Caption ("Factor"), MinimumValue(1), MaximumValue(10)]
 			public int Factor = 4;
 
-			[MinimumValue(1), MaximumValue(5)]
+			[Caption ("Quality"), MinimumValue(1), MaximumValue(5)]
 			public int Quality = 2;
 
-			[MinimumValue(0), MaximumValue(50)]
+			[Caption ("Zoom"), MinimumValue(0), MaximumValue(50)]
 			public int Zoom = 1;
 
+			[Caption ("Angle")]
 			public double Angle = 0;
 		}
 	}

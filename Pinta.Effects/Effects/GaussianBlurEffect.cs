@@ -257,7 +257,7 @@ namespace Pinta.Effects
 
 		public class GaussianBlurData : EffectData
 		{
-			[MinimumValue (0), MaximumValue (200)]
+			[Caption ("Radius"), MinimumValue (0), MaximumValue (200)]
 			public int Radius = 2;
 			
 			[Skip]

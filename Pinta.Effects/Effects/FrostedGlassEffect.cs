@@ -158,7 +158,7 @@ namespace Pinta.Effects
 
 		public class FrostedGlassData : EffectData
 		{
-			[MinimumValue(1), MaximumValue(10)]
+			[Caption ("Amount"), MinimumValue(1), MaximumValue(10)]
 			public int Amount = 1;
 		}
 	}

@@ -77,11 +77,11 @@ namespace Pinta.Effects
 
 		public class GlowData : EffectData
 		{
-			[MinimumValue (1), MaximumValue (20)]
+			[Caption ("Radius"), MinimumValue (1), MaximumValue (20)]
 			public int Radius = 6;
-			[MinimumValue (-100), MaximumValue (100)]
+			[Caption ("Brightness"), MinimumValue (-100), MaximumValue (100)]
 			public int Brightness = 10;
-			[MinimumValue (-100), MaximumValue (100)]
+			[Caption ("Contrast"), MinimumValue (-100), MaximumValue (100)]
 			public int Contrast = 10;
 		}
 	}

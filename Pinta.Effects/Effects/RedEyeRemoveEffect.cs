@@ -71,11 +71,11 @@ namespace Pinta.Effects
 	
 	public class RedEyeRemoveData : EffectData
 	{
-		[MinimumValue (0), MaximumValue (100)]
+		[Caption ("Tolerance"), MinimumValue (0), MaximumValue (100)]
 		public int Tolerance = 70;
 		
 		[MinimumValue (0), MaximumValue (100)]
-		[Caption ("Saturation percentage")]
+		[Caption ("Saturation Percentage")]
 		[Hint ("Hint: For best results, first use selection tools to select each eye.")]
 		public int Saturation = 90;
 	}

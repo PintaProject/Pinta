@@ -149,6 +149,7 @@ namespace Pinta.Effects
 			private int brightness = 0;
 			private int contrast = 0;
 
+			[Caption ("Brightness")]
 			public int Brightness {
 				get { return brightness; }
 				set {
@@ -159,6 +160,7 @@ namespace Pinta.Effects
 				}
 			}
 
+			[Caption ("Contrast")]
 			public int Contrast {
 				get { return contrast; }
 				set {

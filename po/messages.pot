@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 21:54-0500\n"
+"POT-Creation-Date: 2015-02-19 00:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -631,6 +631,16 @@ msgstr ""
 msgid "Brightness / Contrast"
 msgstr ""
 
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Effects/GlowEffect.cs:82
+msgid "Brightness"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+msgid "Contrast"
+msgstr ""
+
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
@@ -641,7 +651,20 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr ""
 
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Hue"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+msgid "Saturation"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
+msgid "Lightness"
+msgstr ""
+
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
 msgstr ""
 
@@ -674,6 +697,20 @@ msgstr ""
 msgid "Noise"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:145
+#: ../Pinta.Effects/Effects/TileEffect.cs:142
+msgid "Intensity"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
+msgid "Color Saturation"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
+msgid "Coverage"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
 msgstr ""
@@ -687,6 +724,20 @@ msgstr ""
 msgid "Distort"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:101
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:63
+#: ../Pinta.Effects/Effects/TwistEffect.cs:131
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
+msgid "Amount"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:104
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
+msgid "Offset"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:29
 msgid "Clouds"
 msgstr ""
@@ -695,6 +746,18 @@ msgstr ""
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:191
+msgid "Scale"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:194
+msgid "Power"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:219
+msgid "Seed"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
@@ -706,6 +769,18 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:143
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:140
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:158
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:83
+msgid "Angle"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
@@ -725,12 +800,35 @@ msgstr ""
 msgid "Blurs"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+msgid "Fragments"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
+msgid "Distance"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/TileEffect.cs:138
+msgid "Rotation"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:260
+#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Effects/MedianEffect.cs:70
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
+msgid "Radius"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
@@ -750,8 +848,35 @@ msgstr ""
 msgid "Artistic"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
+msgid "Ink Outline"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
+msgid "Coloring"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
+msgid "Factor"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/WarpEffect.cs:181
+msgid "Quality"
+msgstr ""
+
+#. TODO double
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Tools/Tools/ZoomTool.cs:48
+msgid "Zoom"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
@@ -762,12 +887,28 @@ msgstr ""
 msgid "Median"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/MedianEffect.cs:73
+msgid "Percentile"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
+msgid "Centered"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
+msgid "Brush Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
+msgid "Coarseness"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
@@ -775,12 +916,28 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
+msgid "Thickness"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
+msgid "Pencil Tip Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
+msgid "Color Range"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:119
+msgid "Cell Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
@@ -791,12 +948,35 @@ msgstr ""
 msgid "Radial Blur"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
+#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
+msgid "Tolerance"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
+msgid "Saturation Percentage"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
+msgid "Strength"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
@@ -811,16 +991,40 @@ msgstr ""
 msgid "Soften Portrait"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
+msgid "Softness"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
+msgid "Lighting"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
+msgid "Warmth"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:140
+msgid "Tile Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/TwistEffect.cs:133
+msgid "Antialias"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:184
+msgid "Center Offset"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
@@ -993,12 +1197,6 @@ msgstr ""
 msgid "Increase arrow size"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
-#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
-#: EdgeDetectData EmbossEffect ReliefData TwistEffect
-msgid "Angle"
-msgstr ""
-
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
 msgstr ""
@@ -1133,10 +1331,6 @@ msgstr ""
 msgid "Rounded Line Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
-msgid "Radius"
-msgstr ""
-
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
 msgstr ""
@@ -1262,10 +1456,6 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:80
 msgid "Global"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
-msgid "Tolerance"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
@@ -1473,10 +1663,6 @@ msgstr ""
 msgid "Increase outline size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ZoomTool.cs:48
-msgid "Zoom"
-msgstr ""
-
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
@@ -1666,7 +1852,7 @@ msgstr ""
 msgid "Visible"
 msgstr ""
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178
 msgid "Blend Mode"
 msgstr ""
 
@@ -1886,152 +2072,8 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
-#: SharpenData MotionBlurEffect
-msgid "Amount"
-msgstr ""
-
-#: CloudsEffect dialog
-msgid "Antialias"
-msgstr ""
-
-#: OilPaintingEffect dialog
-msgid "Brightness"
-msgstr ""
-
-#: PixelateData dialog
-msgid "Brush Size"
-msgstr ""
-
-#: PolarInversionEffect dialog
-msgid "Cell Size"
-msgstr ""
-
-#: MotionBlurEffect dialog
-msgid "Center Offset"
-msgstr ""
-
-#: OilPaintingEffect dialog
-msgid "Centered"
-msgstr ""
-
-#: PencilSketchEffect dialog
-msgid "Coarseness"
-msgstr ""
-
-#: AddNoiseEffect dialog
-msgid "Color Range"
-msgstr ""
-
-#: InkSketchEffect dialog
-msgid "Color Saturation"
-msgstr ""
-
-#: GlowEffect dialog
-msgid "Coloring"
-msgstr ""
-
-#: AddNoiseEffect dialog
-msgid "Contrast"
-msgstr ""
-
-#: FragmentEffect dialog
-msgid "Coverage"
-msgstr ""
-
-#: MotionBlurEffect dialog PolarInversionEffect
-msgid "Distance"
-msgstr ""
-
-#: JuliaFractalEffect dialog
+#: Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr ""
-
-#: MandelbrotFractalEffect dialog FragmentEffect
-msgid "Factor"
-msgstr ""
-
-#: InkSketchEffect dialog
-msgid "Fragments"
-msgstr ""
-
-#: TileEffect dialog
-msgid "Ink Outline"
-msgstr ""
-
-#: AddNoiseEffect dialog OutlineEffect MandelbrotFractalEffect
-msgid "Intensity"
-msgstr ""
-
-#: RadialBlurEffect dialog
-msgid "Lighting"
-msgstr ""
-
-#: ZoomBlurEffect dialog BulgeEffect PencilSketchEffect
-msgid "Offset"
-msgstr ""
-
-#: MedianEffect dialog
-msgid "Pencil Tip Size"
-msgstr ""
-
-#: CloudsEffect dialog
-msgid "Percentile"
-msgstr ""
-
-#: RadialBlurEffect dialog
-msgid "Power"
-msgstr ""
-
-#: PolarInversionEffect dialog JuliaFractalEffect MandelbrotFractalEffect
-#: GaussianBlurEffect
-msgid "Quality"
-msgstr ""
-
-#: TileEffect dialog RedEyeRemoveData
-msgid "Rotation"
-msgstr ""
-
-#: CloudsEffect dialog
-msgid "Saturation percentage"
-msgstr ""
-
-#: CloudsEffect dialog
-msgid "Scale"
-msgstr ""
-
-#: SoftenPortraitData dialog
-msgid "Seed"
-msgstr ""
-
-#: ReduceNoiseEffect dialog
-msgid "Softness"
-msgstr ""
-
-#: OutlineEffect dialog
-msgid "Strength"
-msgstr ""
-
-#: TileEffect dialog
-msgid "Thickness"
-msgstr ""
-
-#: RedEyeRemoveData dialog
-msgid "Tile Size"
-msgstr ""
-
-#: JuliaFractalEffect dialog
-msgid "Warmth"
-msgstr ""
-
-#: RadialBlurEffect dialog
-msgid ""
-"Use low quality for previews, small images, and small angles.  Use high "
-"quality for final quality, large images, and large angles."
-msgstr ""
-
-#: RedEyeRemoveEffect dialog
-msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123

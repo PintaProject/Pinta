@@ -80,6 +80,7 @@ namespace Pinta.Actions
 
 		private class RotateZoomData : EffectData
 		{
+			[Caption ("Angle")]
 			public double Angle = 0;
 
 			public override bool IsDefault {

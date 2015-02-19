@@ -140,6 +140,7 @@ namespace Pinta.Effects
 
 		public class EmbossData : EffectData
 		{
+			[Caption ("Angle")]
 			public double Angle = 0;
 		}
 	}

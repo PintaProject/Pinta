@@ -116,13 +116,13 @@ namespace Pinta.Effects
 	
 	public class SoftenPortraitData : EffectData
 	{
-		[MinimumValue (0), MaximumValue (10)]
+		[Caption ("Softness"), MinimumValue (0), MaximumValue (10)]
 		public int Softness = 5;
 		
-		[MinimumValue (-20), MaximumValue (20)]
+		[Caption ("Lighting"), MinimumValue (-20), MaximumValue (20)]
 		public int Lighting = 0;
 		
-		[MinimumValue (0), MaximumValue (20)]
+		[Caption ("Warmth"), MinimumValue (0), MaximumValue (20)]
 		public int Warmth = 10;
 	}
 }

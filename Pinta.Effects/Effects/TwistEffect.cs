@@ -128,9 +128,9 @@ namespace Pinta.Effects
 
 		public class TwistData : EffectData
 		{
-			[MinimumValue (-100), MaximumValue (100)]
+			[Caption ("Amount"), MinimumValue (-100), MaximumValue (100)]
 			public int Amount = 45;
-			[MinimumValue (0), MaximumValue (5)]
+			[Caption ("Antialias"), MinimumValue (0), MaximumValue (5)]
 			public int Antialias = 2;
 		}
 	}

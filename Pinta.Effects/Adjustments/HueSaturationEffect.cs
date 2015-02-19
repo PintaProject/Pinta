@@ -64,12 +64,13 @@ namespace Pinta.Effects
 		
 		private class HueSaturationData : EffectData
 		{
-			[MinimumValue (-180), MaximumValue (180)]
+			[Caption ("Hue"), MinimumValue (-180), MaximumValue (180)]
 			public int Hue = 0;
 			
-			[MinimumValue (0), MaximumValue (200)]
+			[Caption ("Saturation"), MinimumValue (0), MaximumValue (200)]
 			public int Saturation = 100;
 
+			[Caption ("Lightness")]
 			public int Lightness = 0;
 			
 			[Skip]

@@ -99,7 +99,7 @@ namespace Pinta.Effects
 			[Caption ("Pencil Tip Size"), MinimumValue (1), MaximumValue (20)]
 			public int PencilTipSize = 2;
 			
-			[MinimumValue (-20), MaximumValue (20)]
+			[Caption ("Color Range"), MinimumValue (-20), MaximumValue (20)]
 			public int ColorRange = 0;
 		}
 	}

@@ -85,6 +85,7 @@ namespace Pinta.Effects
 	
 	public class EdgeDetectData : EffectData
 	{
+		[Caption ("Angle")]
 		public double Angle = 45;
 	}
 }

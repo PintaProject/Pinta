@@ -151,18 +151,20 @@ namespace Pinta.Effects
 
 		public class MandelbrotFractalData : EffectData
 		{
-			[MinimumValue(1), MaximumValue(10)]
+			[Caption ("Factor"), MinimumValue(1), MaximumValue(10)]
 			public int Factor = 1;
 
-			[MinimumValue(1), MaximumValue(5)]
+			[Caption ("Quality"), MinimumValue(1), MaximumValue(5)]
 			public int Quality = 2;
 
 			//TODO double
-			[MinimumValue(0), MaximumValue(100)]
+			[Caption ("Zoom"), MinimumValue(0), MaximumValue(100)]
 			public int Zoom = 10;
 
+			[Caption ("Angle")]
 			public double Angle = 0;
 
+			[Caption ("Invert Colors")]
 			public bool InvertColors = false;
 			
 		}

@@ -139,10 +139,10 @@ namespace Pinta.Effects
 
 		public class OutlineData : EffectData
 		{
-			[MinimumValue (1), MaximumValue (200)]
+			[Caption ("Thickness"), MinimumValue (1), MaximumValue (200)]
 			public int Thickness = 3;
 
-			[MinimumValue (0), MaximumValue (100)]
+			[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
 			public int Intensity = 50;
 
 			[Skip]
