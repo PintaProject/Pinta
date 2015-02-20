@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-19 00:41-0500\n"
+"POT-Creation-Date: 2015-02-19 21:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -673,8 +673,7 @@ msgid "Levels"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:20
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
 msgid "Posterize"
 msgstr ""
 
@@ -685,6 +684,26 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
+msgid "Red"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
+msgid "Green"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
+msgid "Blue"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
+msgid "Linked"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
@@ -1051,11 +1070,6 @@ msgstr ""
 msgid "Red  "
 msgstr ""
 
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
-msgid "Green"
-msgstr ""
-
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
 msgstr ""
@@ -1087,18 +1101,6 @@ msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
-msgstr ""
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
-msgid "Red"
-msgstr ""
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
-msgid "Blue"
-msgstr ""
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:89
-msgid "Linked"
 msgstr ""
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52

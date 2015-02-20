@@ -115,7 +115,6 @@
     <Compile Include="Effects\WarpEffect.cs" />
     <Compile Include="Effects\ZoomBlurEffect.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.Effects.PosterizeDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EffectHelper.cs" />
     <Compile Include="gtk-gui\Pinta.Effects.CurvesDialog.cs" />
