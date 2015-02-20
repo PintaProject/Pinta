@@ -174,8 +174,7 @@ namespace Pinta.Effects
 		{
 			RenderClouds(dst, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), 
 				Data.Power/100.0, PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
-			Type blendOpType = (Type)CloudsData.BlendOps[Data.BlendMode];
-			var blendOp = UserBlendOps.CreateBlendOp(blendOpType);
+			var blendOp = UserBlendOps.GetBlendOp ((BlendMode)CloudsData.BlendOps [Data.BlendMode], 1.0);
 			if (blendOp != null)
 			{
 				blendOp.Apply (dst, roi.Location, src, roi.Location, dst, roi.Location, roi.Size);
@@ -202,15 +201,13 @@ namespace Pinta.Effects
 			
 			static CloudsData ()
 			{
-				Type[] blendOpTypes = UserBlendOps.GetBlendOps ();
 				BlendOps = new Dictionary<string, object> ();
 
-				foreach (Type myType in blendOpTypes)
+				foreach (string name in UserBlendOps.GetAllBlendModeNames ())
 				{
-					string blendOpDisplayName = UserBlendOps.GetBlendOpFriendlyName (myType);
-					BlendOps.Add (blendOpDisplayName, myType);
+					BlendOps.Add (name, UserBlendOps.GetBlendModeByName (name));
 				}
-	            defaultBlendOp = UserBlendOps.GetBlendOpFriendlyName (UserBlendOps.GetDefaultBlendOp ());
+	            defaultBlendOp = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
 			}
 			
 			[StaticList ("BlendOps")]
