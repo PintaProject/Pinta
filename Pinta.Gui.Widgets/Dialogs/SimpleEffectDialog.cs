@@ -142,16 +142,35 @@ namespace Pinta.Gui.Widgets
 		private ComboBoxWidget CreateEnumComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
 		{
 			Type myType = GetTypeForMember (member);
-			string[] entries = Enum.GetNames (myType);
 
-			ComboBoxWidget widget = new ComboBoxWidget (entries);
+			string[] member_names = Enum.GetNames (myType);
+			var labels = new List<string> ();
+			var label_to_member = new Dictionary<string, string> ();
+
+			foreach (var member_name in member_names)
+			{
+				var members = myType.GetMember (member_name);
+
+				// Look for a Caption attribute that provides a (translated) description.
+				string label;
+				var attrs = members [0].GetCustomAttributes (typeof(CaptionAttribute), false);
+				if (attrs.Length > 0)
+					label = Catalog.GetString (((CaptionAttribute)attrs [0]).Caption);
+				else
+					label = Catalog.GetString (member_name);
+
+				label_to_member [label] = member_name;
+				labels.Add (label);
+			}
+
+			ComboBoxWidget widget = new ComboBoxWidget (labels.ToArray ());
 
 			widget.Label = caption;
 			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
-			widget.Active = ((IList)entries).IndexOf (GetValue (member, o).ToString ());
+			widget.Active = ((IList)member_names).IndexOf (GetValue (member, o).ToString ());
 
 			widget.Changed += delegate (object sender, EventArgs e) {
-				SetValue (member, o, Enum.Parse (myType, widget.ActiveText));
+				SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
 			};
 
 			return widget;

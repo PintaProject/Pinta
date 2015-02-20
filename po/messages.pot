@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-19 21:14-0500\n"
+"POT-Creation-Date: 2015-02-19 22:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -504,6 +504,7 @@ msgid "Color Dodge"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:57
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
 msgstr ""
 
@@ -767,15 +768,15 @@ msgstr ""
 msgid "Render"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:191
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:190
 msgid "Scale"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:194
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:193
 msgid "Power"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:219
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:216
 msgid "Seed"
 msgstr ""
 
@@ -887,7 +888,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
-#: ../Pinta.Effects/Effects/WarpEffect.cs:181
+#: ../Pinta.Effects/Effects/WarpEffect.cs:188
 msgid "Quality"
 msgstr ""
 
@@ -1042,7 +1043,32 @@ msgstr ""
 msgid "Unfocus"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:184
+#: ../Pinta.Effects/Effects/WarpEffect.cs:19
+msgid "Clamp"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:21
+msgid "Wrap"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:25
+msgid "Primary"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:27
+msgid "Secondary"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+#: ../Pinta/Dialogs/NewImageDialog.cs:255
+msgid "Transparent"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:31
+msgid "Original"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
 msgstr ""
 
@@ -1928,10 +1954,6 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:247
 msgid "Background Color"
-msgstr ""
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:255
-msgid "Transparent"
 msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
