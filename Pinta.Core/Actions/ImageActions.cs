@@ -292,7 +292,7 @@ namespace Pinta.Core
 				PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates();
 
 				foreach (var layer in doc.UserLayers)
-					layer.Crop(rect, doc.Selection.SelectionPath);
+					layer.Crop(rect);
 
 				hist.FinishSnapshotOfImage();
 

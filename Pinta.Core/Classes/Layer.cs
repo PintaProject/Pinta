@@ -275,7 +275,7 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public virtual void Crop (Gdk.Rectangle rect, Path path)
+		public virtual void Crop (Gdk.Rectangle rect)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
@@ -283,11 +283,6 @@ namespace Pinta.Core
 				// Move the selected content to the upper left
 				g.Translate (-rect.X, -rect.Y);
 				g.Antialias = Antialias.None;
-
-				// Respect the selected path
-				g.AppendPath (path);
-				g.FillRule = Cairo.FillRule.EvenOdd;
-				g.Clip ();
 
 				g.SetSource (Surface);
 				g.Paint ();
