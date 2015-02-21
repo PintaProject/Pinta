@@ -46,6 +46,7 @@ namespace Pinta.Gui.Widgets
 			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
 
 			tree = new TreeView ();
+			tree.CanFocus = false;
 
 			tree.HeadersVisible = false;
 			tree.EnableGridLines = TreeViewGridLines.None;

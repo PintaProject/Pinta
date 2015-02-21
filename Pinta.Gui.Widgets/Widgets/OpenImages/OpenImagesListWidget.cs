@@ -61,6 +61,7 @@ namespace Pinta.Gui.Widgets
 			canvas_renderer = new CanvasRenderer (false);
 
 			tree = new TreeView ();
+			tree.CanFocus = false;
 			tree.HeadersVisible = false;
 			tree.EnableGridLines = TreeViewGridLines.None;
 			tree.Selection.Mode = SelectionMode.Single;
