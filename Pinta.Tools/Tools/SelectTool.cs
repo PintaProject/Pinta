@@ -127,6 +127,9 @@ namespace Pinta.Tools
 
 			is_drawing = false;
             active_control = null;
+
+            // Update the mouse cursor.
+            CheckHandlerCursor (point);
 		}
 
 		protected override void OnDeactivated(BaseTool newTool)
