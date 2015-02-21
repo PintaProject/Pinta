@@ -155,11 +155,15 @@ namespace Pinta.Actions
 
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
 
+				// If saving the file failed or was cancelled, let the user select
+				// a different file type.
+				if (!SaveFile (document, file, format, fcd))
+					continue;
+
 				//The user is saving the Document to a new file, so technically it
 				//hasn't been saved to its associated file in this session.
 				document.HasBeenSavedInSession = false;
 
-				SaveFile (document, file, format, fcd);
 				RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 				PintaCore.System.ImageFormats.SetDefaultFormat (Path.GetExtension (file));
 
@@ -223,6 +227,8 @@ namespace Pinta.Actions
 				} else {
 					throw e; // Only catch exceptions we know the reason for
 				}
+			} catch (OperationCanceledException) {
+				return false;
 			}
 
 			document.Filename = Path.GetFileName (file);

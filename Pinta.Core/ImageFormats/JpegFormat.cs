@@ -57,16 +57,16 @@ namespace Pinta.Core
 				//Show the user the JPG export compression quality dialog, with the default
 				//value being the one loaded in (or the default value if it was not saved).
 				level = PintaCore.Actions.File.RaiseModifyCompression(level, parent);
+
+				if (level == -1)
+					throw new OperationCanceledException ();
 			}
 
-			if (level != -1)
-			{
-				//Store the "previous" JPG compression quality value (before saving with it).
-				PintaCore.Settings.PutSetting(JpgCompressionQualitySetting, level);
+			//Store the "previous" JPG compression quality value (before saving with it).
+			PintaCore.Settings.PutSetting(JpgCompressionQualitySetting, level);
 
-				//Save the file.
-				pb.SavevUtf8(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
-			}
+			//Save the file.
+			pb.SavevUtf8(fileName, fileType, new string[] { "quality", null }, new string[] { level.ToString(), null });
 		}
 	}
 }
