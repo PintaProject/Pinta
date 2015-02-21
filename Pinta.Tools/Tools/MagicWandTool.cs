@@ -36,6 +36,7 @@ namespace Pinta.Tools
 	public class MagicWandTool : FloodTool
 	{
 		private Gtk.ToolItem selection_sep;
+        private CombineMode combine_mode;
 
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 
@@ -48,14 +49,12 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar(tb);
 
-
 			if (selection_sep == null)
 				selection_sep = new Gtk.SeparatorToolItem();
 
 			tb.AppendItem(selection_sep);
 
-
-			PintaCore.Workspace.ActiveDocument.selHandler.BuildToolbar(tb);
+			PintaCore.Workspace.SelectionHandler.BuildToolbar(tb);
 		}
 
 		public override string Name
@@ -82,13 +81,9 @@ namespace Pinta.Tools
 		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			//SetCursor (Cursors.WaitCursor);
-
-			doc.selHandler.DetermineCombineMode(args);
+            combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (args);
 
 			base.OnMouseDown(canvas, args, point);
-
 			doc.ShowSelection = true;
 		}
 
@@ -103,7 +98,7 @@ namespace Pinta.Tools
             doc.PreviousSelection = doc.Selection.Clone ();
 
             doc.Selection.SelectionPolygons.Clear ();
-            doc.selHandler.PerformSelectionMode (polygonSet);
+            SelectionModeHandler.PerformSelectionMode (combine_mode, polygonSet);
 
 			doc.History.PushNewItem(undoAction);
 			doc.Workspace.Invalidate();

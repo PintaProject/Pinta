@@ -38,7 +38,6 @@ namespace Pinta.Core
         private ToolBarComboBox selection_combo_box;
 
         private CombineMode selected_mode;
-        private CombineMode current_mode;
         private Dictionary<CombineMode, string> combine_modes;
 
         public SelectionModeHandler ()
@@ -83,27 +82,29 @@ namespace Pinta.Core
         /// Determine the current combine mode - various combinations of left/right click
         /// and Ctrl/Shift can override the selected mode from the toolbar.
         /// </summary>
-        public void DetermineCombineMode (Gtk.ButtonPressEventArgs args)
+        public CombineMode DetermineCombineMode (Gtk.ButtonPressEventArgs args)
         {
-            current_mode = selected_mode;
+            CombineMode mode = selected_mode;
 
             if (args.Event.Button == GtkExtensions.MouseLeftButton)
             {
                 if (args.Event.IsControlPressed ())
-                    current_mode = CombineMode.Union;
+                    mode = CombineMode.Union;
                 else if (args.Event.IsShiftPressed ())
-                    current_mode = CombineMode.Intersect;
+                    mode = CombineMode.Intersect;
             }
             else if (args.Event.Button == GtkExtensions.MouseRightButton)
             {
                 if (args.Event.IsControlPressed ())
-                    current_mode = CombineMode.Xor;
+                    mode = CombineMode.Xor;
                 else
-                    current_mode = CombineMode.Exclude;
+                    mode = CombineMode.Exclude;
             }
+
+            return mode;
         }
 
-        public void PerformSelectionMode (Point[][] polygonSet)
+        public static void PerformSelectionMode (CombineMode mode, Point[][] polygonSet)
         {
             Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -116,7 +117,7 @@ namespace Pinta.Core
             using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
             {
                 //Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
-                if (current_mode == CombineMode.Replace)
+                if (mode == CombineMode.Replace)
                 {
                     //Clear any previously stored Polygons.
                     doc.Selection.SelectionPolygons.Clear ();
@@ -134,7 +135,7 @@ namespace Pinta.Core
                     doc.Selection.SelectionClipper.AddPolygons (doc.Selection.SelectionPolygons, PolyType.ptSubject);
                     doc.Selection.SelectionClipper.AddPolygons (newPolygons, PolyType.ptClip);
 
-                    switch (current_mode)
+                    switch (mode)
                     {
                         case CombineMode.Xor:
                             //Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
@@ -167,7 +168,7 @@ namespace Pinta.Core
                 }
             }
 
-            PintaCore.Workspace.CallSelectionChanged (this, EventArgs.Empty);
+            PintaCore.Workspace.CallSelectionChanged (null, EventArgs.Empty);
         }
     }
 

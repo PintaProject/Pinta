@@ -43,6 +43,7 @@ namespace Pinta.Core
 		public WorkspaceManager ()
 		{
 			OpenDocuments = new List<Document> ();
+            SelectionHandler = new SelectionModeHandler ();
 		}
 
 		public void CallSelectionChanged(object sender, EventArgs e)
@@ -64,6 +65,8 @@ namespace Pinta.Core
 				throw new InvalidOperationException ("Tried to get WorkspaceManager.ActiveDocument when there are no open Documents.  Check HasOpenDocuments first.");
 			}
 		}
+
+        public SelectionModeHandler SelectionHandler { get; private set; }
 
 		public DocumentWorkspace ActiveWorkspace {
 			get {

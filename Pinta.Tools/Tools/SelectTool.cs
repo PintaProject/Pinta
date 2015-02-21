@@ -44,6 +44,7 @@ namespace Pinta.Tools
 		protected override bool ShowAntialiasingButton { get { return false; } }
 		private Gdk.Cursor cursor_hand;
 		bool is_hand_cursor = false;
+        private CombineMode combine_mode;
 
 		public SelectTool ()
 		{
@@ -55,10 +56,7 @@ namespace Pinta.Tools
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Toolbar tb)
 		{
-			if (PintaCore.Workspace.HasOpenDocuments)
-			{
-				PintaCore.Workspace.ActiveDocument.selHandler.BuildToolbar(tb);
-			}
+            PintaCore.Workspace.SelectionHandler.BuildToolbar (tb);
 		}
 		#endregion
 		
@@ -78,7 +76,7 @@ namespace Pinta.Tools
             active_control = HandleResize (point);
 			if (!active_control.HasValue)
 			{
-				doc.selHandler.DetermineCombineMode(args);
+				combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode(args);
 
 				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
 				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
@@ -114,7 +112,8 @@ namespace Pinta.Tools
 				ReDraw(args.Event.State);
 				if (doc.Selection != null)
 				{
-                    doc.selHandler.PerformSelectionMode (DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+                    SelectionModeHandler.PerformSelectionMode (combine_mode,
+                        DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
 
                     doc.Selection.selEnd = shape_end;
 					PintaCore.Workspace.Invalidate();
@@ -166,7 +165,8 @@ namespace Pinta.Tools
 			
 			if (doc.Selection != null)
 			{
-                doc.selHandler.PerformSelectionMode (DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+                SelectionModeHandler.PerformSelectionMode (combine_mode,
+                    DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
 				PintaCore.Workspace.Invalidate();
 			}
 		}

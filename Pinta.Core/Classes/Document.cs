@@ -55,7 +55,6 @@ namespace Pinta.Core
 
 		private bool show_selection;
 
-		public SelectionModeHandler selHandler;
         public DocumentSelection Selection = new DocumentSelection ();
         public DocumentSelection PreviousSelection = new DocumentSelection ();
 
@@ -78,8 +77,6 @@ namespace Pinta.Core
 			selection_layer.Hidden = true;
 
 			ResetSelectionPaths ();
-
-			selHandler = new SelectionModeHandler();
 		}
 
 		#region Public Properties
