@@ -62,7 +62,7 @@ namespace Pinta
         private RadioButton secondary_bg_radio;
         private RadioButton trans_bg_radio;
 
-        public NewImageDialog (int initialWidth, int initialHeight, bool isClipboardSize)
+        public NewImageDialog (int initialWidth, int initialHeight, BackgroundType initial_bg_type, bool isClipboardSize)
             : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
         {
             Title = Catalog.GetString ("New Image");
@@ -86,6 +86,13 @@ namespace Pinta
             InitializePresets ();
             BuildDialog ();
 
+            if (initial_bg_type == BackgroundType.SecondaryColor && allow_background_color)
+                secondary_bg_radio.Active = true;
+            else if (initial_bg_type == BackgroundType.Transparent)
+                trans_bg_radio.Active = true;
+            else
+                white_bg_radio.Active = true;
+
             width_entry.Text = initialWidth.ToString ();
             height_entry.Text = initialHeight.ToString ();
 
@@ -102,17 +109,39 @@ namespace Pinta
         public int NewImageWidth { get { return int.Parse (width_entry.Text); } }
         public int NewImageHeight { get { return int.Parse (height_entry.Text); } }
         public Gdk.Size NewImageSize { get { return new Gdk.Size (NewImageWidth, NewImageHeight); } }
+		
+        public enum BackgroundType
+        {
+            White,
+            Transparent,
+            SecondaryColor
+        }
+
+        public BackgroundType NewImageBackgroundType {
+            get {
+                if (white_bg_radio.Active)
+                    return BackgroundType.White;
+                else if (trans_bg_radio.Active)
+                    return BackgroundType.Transparent;
+                else
+                    return BackgroundType.SecondaryColor;
+            }
+        }
 
         public Cairo.Color NewImageBackground {
             get {
-                if (white_bg_radio.Active)
-                    return new Cairo.Color (1, 1, 1);
-                else if (trans_bg_radio.Active)
-                    return new Cairo.Color (1, 1, 1, 0);
-                else
-                    return PintaCore.Palette.SecondaryColor;
+                switch (NewImageBackgroundType) {
+                    case BackgroundType.White:
+                        return new Cairo.Color (1, 1, 1);
+                    case BackgroundType.Transparent:
+                        return new Cairo.Color (1, 1, 1, 0);
+                    case BackgroundType.SecondaryColor:
+                    default:
+                        return PintaCore.Palette.SecondaryColor;
+                }
             }
         }
+
 
         private bool IsValidSize {
             get {

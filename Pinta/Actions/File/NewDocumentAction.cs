@@ -47,6 +47,7 @@ namespace Pinta.Actions
 		{
 			int imgWidth = 0;
 			int imgHeight = 0;
+			var bg_type = NewImageDialog.BackgroundType.White;
             var using_clipboard = true;
 			
 			// Try to get the dimensions of an image on the clipboard
@@ -57,10 +58,12 @@ namespace Pinta.Actions
 				// so use saved dimensions from settings
 				imgWidth = PintaCore.Settings.GetSetting<int> ("new-image-width", 800);
 				imgHeight = PintaCore.Settings.GetSetting<int> ("new-image-height", 600);
+				bg_type = PintaCore.Settings.GetSetting<NewImageDialog.BackgroundType> (
+					"new-image-bg", NewImageDialog.BackgroundType.White);
                 using_clipboard = false;
             }
 
-			var dialog = new NewImageDialog (imgWidth, imgHeight, using_clipboard);
+			var dialog = new NewImageDialog (imgWidth, imgHeight, bg_type, using_clipboard);
 
 			int response = dialog.Run ();
 
@@ -69,6 +72,7 @@ namespace Pinta.Actions
 
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
 				PintaCore.Settings.SaveSettings ();
 			}
 
