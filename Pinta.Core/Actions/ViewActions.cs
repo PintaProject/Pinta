@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Globalization;
 using Mono.Unix;
 using Gtk;
 
@@ -85,8 +86,33 @@ namespace Pinta.Core
 			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
 			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
 
-			ZoomCollection = new string[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "175%", "150%", "125%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%", Catalog.GetString ("Window") };
-			ZoomComboBox = new ToolBarComboBox (75, DefaultZoomIndex(), true, ZoomCollection);
+			ZoomCollection = new string[] {
+				ToPercent (36),
+				ToPercent (24),
+				ToPercent (16),
+				ToPercent (12),
+				ToPercent (8),
+				ToPercent (7),
+				ToPercent (6),
+				ToPercent (5),
+				ToPercent (4),
+				ToPercent (3),
+				ToPercent (2),
+				ToPercent (1.75),
+				ToPercent (1.5),
+				ToPercent (1.25),
+				ToPercent (1),
+				ToPercent (0.66),
+				ToPercent (0.5),
+				ToPercent (0.33),
+				ToPercent (0.25),
+				ToPercent (0.16),
+				ToPercent (0.12),
+				ToPercent (0.08),
+				ToPercent (0.05),
+				Catalog.GetString ("Window")
+			};
+			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex(), true, ZoomCollection);
 
 			// Make sure these are the same group so only one will be selected at a time
 			Inches.Group = Pixels.Group;
@@ -197,7 +223,31 @@ namespace Pinta.Core
 		/// </summary>
 		public static bool TryParsePercent (string text, out double percent)
 		{
-			return double.TryParse (text.Trim ('%'), out percent);
+			var culture = CultureInfo.CurrentCulture;
+			var format = culture.NumberFormat;
+
+			// In order to use double.TryParse, we must:
+			// - replace the decimal separator for percents with the regular separator.
+			// - remove the percent sign.
+			// - remove the group separators, since they might be different from the regular
+			//   group separator, and the group sizes could also be different.
+			text = text.Replace (format.PercentGroupSeparator, string.Empty);
+			text = text.Replace (format.PercentSymbol, string.Empty);
+			text = text.Replace (format.PercentDecimalSeparator, format.NumberDecimalSeparator);
+
+			return double.TryParse (text,
+			                        NumberStyles.AllowDecimalPoint |
+			                        NumberStyles.AllowLeadingWhite |
+			                        NumberStyles.AllowTrailingWhite,
+			                        culture, out percent);
+		}
+
+		/// <summary>
+		/// Convert the given number to a percentage string using the current locale.
+		/// </summary>
+		public static string ToPercent (double n)
+		{
+			return n.ToString ("P0", CultureInfo.CurrentCulture);
 		}
 
 		public void SuspendZoomUpdate ()
@@ -273,7 +323,7 @@ namespace Pinta.Core
 		/// </summary>
 		private int DefaultZoomIndex()
 		{
-			return Array.IndexOf(ZoomCollection, "100%");
+			return Array.IndexOf (ZoomCollection, ToPercent (1));
 		}
 	}
 }

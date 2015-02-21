@@ -251,7 +251,7 @@ namespace Pinta.Core
 			else
 				ratio = document.ImageSize.Height / rect.Height;
 			
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = ViewActions.ToPercent (ratio);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
@@ -290,9 +290,13 @@ namespace Pinta.Core
 				
 				Predicate<string> UpdateZoomLevel = zoomInList =>
 				{
+					double zoom_level;
+					if (!ViewActions.TryParsePercent (zoomInList, out zoom_level))
+						return false;
+
 					switch (zoomType) {
 					case ZoomType.ZoomIn:
-						if (zoomInList == Catalog.GetString ("Window") || int.Parse (zoomInList.Trim ('%')) <= zoom) {
+						if (zoomInList == Catalog.GetString ("Window") || zoom_level <= zoom) {
 							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 							return true;
 						}
@@ -303,7 +307,7 @@ namespace Pinta.Core
 						if (zoomInList == Catalog.GetString ("Window"))
 							return true;
 						
-						if (int.Parse (zoomInList.Trim ('%')) < zoom) {
+						if (zoom_level < zoom) {
 							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i;
 							return true;
 						}
