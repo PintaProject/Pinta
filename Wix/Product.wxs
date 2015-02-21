@@ -153,6 +153,13 @@
                 </Component>
               </Directory>
             </Directory>
+            <Directory Id="eo" Name='eo'>
+              <Directory Id="LC_MESSAGES_EO" Name='LC_MESSAGES'>
+                <Component Id="EoTranslation" Guid="17A57B5E-6300-47B7-8CDF-D16A7CE3A234">
+                  <File Id="pinta_eo" Name="pinta.mo" Source="$(var.BuildRoot)\locale\eo\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
             <Directory Id="es" Name='es'>
               <Directory Id="LC_MESSAGES_ES" Name='LC_MESSAGES'>
                 <Component Id="EsTranslation" Guid="E5C85E52-046F-41EF-8DFF-576FE9DCF8A9">
@@ -481,6 +488,7 @@
       <ComponentRef Id="EnAuTranslation" />
       <ComponentRef Id="EnCaTranslation" />
       <ComponentRef Id="EnGbTranslation" />
+      <ComponentRef Id="EoTranslation" />
       <ComponentRef Id="EsTranslation" />
       <ComponentRef Id="EtTranslation" />
       <ComponentRef Id="EuTranslation" />

@@ -59,6 +59,9 @@
     <Translation Include="po/en_GB.po">
       <Code>en_GB</Code>
     </Translation>
+    <Translation Include="po/eo.po">
+      <Code>eo</Code>
+    </Translation>
     <Translation Include="po/es.po">
       <Code>es</Code>
     </Translation>
