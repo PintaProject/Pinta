@@ -32,185 +32,151 @@ using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	public class SelectionModeHandler
-	{
-		private ToolBarLabel selection_label;
-		private ToolBarComboBox selection_combo_box;
+    public class SelectionModeHandler
+    {
+        private ToolBarLabel selection_label;
+        private ToolBarComboBox selection_combo_box;
 
-		private int SelectionMode = 0;
+        private CombineMode selected_mode;
+        private CombineMode current_mode;
+        private Dictionary<CombineMode, string> combine_modes;
 
-		private CombineMode combineMode;
+        public SelectionModeHandler ()
+        {
+            combine_modes = new Dictionary<CombineMode, string> () {
+                { CombineMode.Replace, Catalog.GetString ("Replace") },
+                { CombineMode.Union, Catalog.GetString ("Union (+) (Ctrl + Left Click)") },
+                { CombineMode.Exclude, Catalog.GetString ("Exclude (-) (Right Click)") },
+                { CombineMode.Xor, Catalog.GetString ("Xor (Ctrl + Right Click)") },
+                { CombineMode.Intersect, Catalog.GetString ("Intersect (Shift + Left Click") },
+            };
+        }
 
-		private Dictionary<int, string> selectionCombinations = new Dictionary<int, string>();
+        public void BuildToolbar (Gtk.Toolbar tb)
+        {
+            if (selection_label == null)
+                selection_label = new ToolBarLabel (Catalog.GetString (" Selection Mode: "));
 
-		public SelectionModeHandler()
-		{
-			selectionCombinations.Add(0, Catalog.GetString("Replace"));
-			selectionCombinations.Add(1, Catalog.GetString("Union (+) (Ctrl + Left Click)"));
-			selectionCombinations.Add(2, Catalog.GetString("Exclude (-) (Right Click)"));
-			selectionCombinations.Add(3, Catalog.GetString("Xor (Ctrl + Right Click)"));
-			selectionCombinations.Add(4, Catalog.GetString("Intersect (Shift + Left Click)"));
-		}
+            tb.AppendItem (selection_label);
 
-		public void BuildToolbar(Gtk.Toolbar tb)
-		{
-			if (selection_label == null)
-				selection_label = new ToolBarLabel(Catalog.GetString(" Selection Mode: "));
+            if (selection_combo_box == null)
+            {
+                selection_combo_box = new ToolBarComboBox (170, 0, false);
 
-			tb.AppendItem(selection_label);
+                selection_combo_box.ComboBox.Changed += (o, e) =>
+                {
+                    Gtk.TreeIter iter;
+                    if (selection_combo_box.ComboBox.GetActiveIter (out iter))
+                        selected_mode = (CombineMode)selection_combo_box.Model.GetValue (iter, 1);
+                };
 
+                foreach (var mode in combine_modes)
+                    selection_combo_box.Model.AppendValues (mode.Value, mode.Key);
 
-			if (selection_combo_box == null)
-			{
-				selection_combo_box = new ToolBarComboBox(170, 0, false);
+                selection_combo_box.ComboBox.Active = 0;
+            }
 
-				selection_combo_box.ComboBox.Changed += (o, e) =>
-				{
-					Gtk.TreeIter iter;
+            tb.AppendItem (selection_combo_box);
+        }
 
-					if (selection_combo_box.ComboBox.GetActiveIter(out iter))
-					{
-						SelectionMode = ((KeyValuePair<int, string>)selection_combo_box.Model.GetValue(iter, 1)).Key;
-					}
-				};
+        /// <summary>
+        /// Determine the current combine mode - various combinations of left/right click
+        /// and Ctrl/Shift can override the selected mode from the toolbar.
+        /// </summary>
+        public void DetermineCombineMode (Gtk.ButtonPressEventArgs args)
+        {
+            current_mode = selected_mode;
 
-				foreach (KeyValuePair<int, string> sel in selectionCombinations)
-				{
-					selection_combo_box.Model.AppendValues(sel.Value, sel);
-				}
+            if (args.Event.Button == GtkExtensions.MouseLeftButton)
+            {
+                if (args.Event.IsControlPressed ())
+                    current_mode = CombineMode.Union;
+                else if (args.Event.IsShiftPressed ())
+                    current_mode = CombineMode.Intersect;
+            }
+            else if (args.Event.Button == GtkExtensions.MouseRightButton)
+            {
+                if (args.Event.IsControlPressed ())
+                    current_mode = CombineMode.Xor;
+                else
+                    current_mode = CombineMode.Exclude;
+            }
+        }
 
-				selection_combo_box.ComboBox.Active = 0;
-			}
+        public void PerformSelectionMode (Point[][] polygonSet)
+        {
+            Document doc = PintaCore.Workspace.ActiveDocument;
 
-			tb.AppendItem(selection_combo_box);
-		}
-
-		public void DetermineCombineMode(Gtk.ButtonPressEventArgs args)
-		{
-			//The CombineMode for the Magic Wand Tool's selection is determined based on None/Ctrl/Shift + Left/Right Click.
-
-			switch (SelectionMode)
-			{
-				case 1:
-					combineMode = CombineMode.Union;
-					break;
-				case 2:
-					combineMode = CombineMode.Exclude;
-					break;
-				case 3:
-					combineMode = CombineMode.Xor;
-					break;
-				case 4:
-					combineMode = CombineMode.Intersect;
-					break;
-				default:
-					//Left Click (usually) - also the default
-					combineMode = CombineMode.Replace;
-					break;
-			}
-
-			if (args.Event.Button == 1)
-			{
-				if (args.Event.IsControlPressed())
-				{
-					//Control + Left Click
-					combineMode = CombineMode.Union;
-				}
-				else if (args.Event.IsShiftPressed())
-				{
-					//Shift + Left Click
-					combineMode = CombineMode.Intersect;
-				}
-			}
-			else if (args.Event.Button == 3)
-			{
-				if (args.Event.IsControlPressed())
-				{
-					//Control + Right Click
-					combineMode = CombineMode.Xor;
-				}
-				else
-				{
-					//Right Click
-					combineMode = CombineMode.Exclude;
-				}
-			}
-		}
-
-		public void PerformSelectionMode(Point[][] polygonSet)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			//Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
-			List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons(polygonSet);
+            //Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
+            List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons (polygonSet);
 
             doc.Selection.Dispose ();
-			doc.Selection = doc.PreviousSelection.Clone();
+            doc.Selection = doc.PreviousSelection.Clone ();
 
-			using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
-			{
-				//Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
-				if (combineMode == CombineMode.Replace)
-				{
-					//Clear any previously stored Polygons.
-					doc.Selection.SelectionPolygons.Clear();
+            using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
+            {
+                //Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
+                if (current_mode == CombineMode.Replace)
+                {
+                    //Clear any previously stored Polygons.
+                    doc.Selection.SelectionPolygons.Clear ();
 
-					//Set the resulting selection path to the new selection path.
-					doc.Selection.SelectionPolygons = newPolygons;
-					doc.Selection.SelectionPath = g.CreatePolygonPath(polygonSet);
-				}
-				else
-				{
-					List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>>();
+                    //Set the resulting selection path to the new selection path.
+                    doc.Selection.SelectionPolygons = newPolygons;
+                    doc.Selection.SelectionPath = g.CreatePolygonPath (polygonSet);
+                }
+                else
+                {
+                    List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>> ();
 
-					//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
-					//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
-					doc.Selection.SelectionClipper.AddPolygons(doc.Selection.SelectionPolygons, PolyType.ptSubject);
-					doc.Selection.SelectionClipper.AddPolygons(newPolygons, PolyType.ptClip);
+                    //Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
+                    //Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
+                    doc.Selection.SelectionClipper.AddPolygons (doc.Selection.SelectionPolygons, PolyType.ptSubject);
+                    doc.Selection.SelectionClipper.AddPolygons (newPolygons, PolyType.ptClip);
 
-					switch (combineMode)
-					{
-						case CombineMode.Xor:
-							//Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
-							doc.Selection.SelectionClipper.Execute(ClipType.ctXor, resultingPolygons);
-							break;
-						case CombineMode.Exclude:
-							//Exclude == Difference
+                    switch (current_mode)
+                    {
+                        case CombineMode.Xor:
+                            //Xor means "Combine both Polygon sets, but leave out any areas of intersection between the two."
+                            doc.Selection.SelectionClipper.Execute (ClipType.ctXor, resultingPolygons);
+                            break;
+                        case CombineMode.Exclude:
+                            //Exclude == Difference
 
-							//Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
-							doc.Selection.SelectionClipper.Execute(ClipType.ctDifference, resultingPolygons);
-							break;
-						case CombineMode.Intersect:
-							//Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
-							doc.Selection.SelectionClipper.Execute(ClipType.ctIntersection, resultingPolygons);
-							break;
-						default:
-							//Default should only be *CombineMode.Union*, but just in case...
+                            //Exclude/Difference means "Subtract any overlapping areas of the new Polygon set from the old Polygon set."
+                            doc.Selection.SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
+                            break;
+                        case CombineMode.Intersect:
+                            //Intersect means "Leave only the overlapping areas between the new and old Polygon sets."
+                            doc.Selection.SelectionClipper.Execute (ClipType.ctIntersection, resultingPolygons);
+                            break;
+                        default:
+                            //Default should only be *CombineMode.Union*, but just in case...
 
-							//Union means "Combine both Polygon sets, and keep any overlapping areas as well."
-							doc.Selection.SelectionClipper.Execute(ClipType.ctUnion, resultingPolygons);
-							break;
-					}
+                            //Union means "Combine both Polygon sets, and keep any overlapping areas as well."
+                            doc.Selection.SelectionClipper.Execute (ClipType.ctUnion, resultingPolygons);
+                            break;
+                    }
 
-					//After using Clipper, it has to be cleared so there are no conflicts with its next usage.
-					doc.Selection.SelectionClipper.Clear();
+                    //After using Clipper, it has to be cleared so there are no conflicts with its next usage.
+                    doc.Selection.SelectionClipper.Clear ();
 
-					//Set the resulting selection path to the calculated ("clipped") selection path.
-					doc.Selection.SelectionPolygons = resultingPolygons;
-					doc.Selection.SelectionPath = g.CreatePolygonPath(DocumentSelection.ConvertToPolygonSet(resultingPolygons));
-				}
-			}
+                    //Set the resulting selection path to the calculated ("clipped") selection path.
+                    doc.Selection.SelectionPolygons = resultingPolygons;
+                    doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (resultingPolygons));
+                }
+            }
 
-			PintaCore.Workspace.CallSelectionChanged(this, EventArgs.Empty);
-		}
-	}
+            PintaCore.Workspace.CallSelectionChanged (this, EventArgs.Empty);
+        }
+    }
 
-	public enum CombineMode
-	{
-		Union, //Control + Left Click
-		Xor, //Control + Right Click
-		Exclude, //Right Click
-		Replace, //Left Click (and default)
-		Intersect //Shift + Left Click
-	}
+    public enum CombineMode
+    {
+        Union,
+        Xor,
+        Exclude,
+        Replace,
+        Intersect
+    }
 }
