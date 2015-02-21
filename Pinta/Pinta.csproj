@@ -182,7 +182,6 @@
     <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
     <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.ProgressDialog.cs" />
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Pads\OpenImagesPad.cs" />
