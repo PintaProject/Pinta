@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new RoundedLineEngine.
 		/// </summary>
-		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="parent_layer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="passedRadius">The radius of the corners.</param>
 		/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
@@ -66,9 +66,9 @@ namespace Pinta.Tools
 
 		/// <summary>
 		/// Generate each point in a rounded line shape and store the result in GeneratedPoints.
-		/// <param name="brushWidth">The width of the brush that will be used to draw the shape.</param>
+		/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
 		/// </summary>
-		public override void GeneratePoints(int brushWidth)
+        public override void GeneratePoints (int brush_width)
 		{
 			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
 

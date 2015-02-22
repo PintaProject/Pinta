@@ -33,20 +33,22 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
-	public class EllipseEngine: ShapeEngine
+    public class EllipseEngine : ShapeEngine
 	{
 		/// <summary>
 		/// Create a new EllipseEngine.
 		/// </summary>
-		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
+		/// <param name="parent_layer">The parent UserLayer for the re-editable DrawingLayer.</param>
 		/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
 		/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
 		/// <param name="outline_color">The outline color for the shape.</param>
 		/// <param name="fill_color">The fill color for the shape.</param>
 		/// <param name="brush_width">The width of the outline of the shape.</param>
-		public EllipseEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, bool passedAA,
-			Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer, passedDrawingLayer,
-			BaseEditEngine.ShapeTypes.Ellipse, passedAA, true, passedOutlineColor, passedFillColor, passedBrushWidth)
+        public EllipseEngine (UserLayer parent_layer, ReEditableLayer drawing_layer,
+                              bool antialiasing, Color outline_color, Color fill_color,
+                              int brush_width)
+            : base (parent_layer, drawing_layer, BaseEditEngine.ShapeTypes.Ellipse,
+                    antialiasing, true, outline_color, fill_color, brush_width)
 		{
 			
 		}
@@ -63,11 +65,11 @@ namespace Pinta.Tools
 
 		/// <summary>
 		/// Generate each point in an elliptic shape and store the result in GeneratedPoints.
-		/// <param name="brushWidth">The width of the brush that will be used to draw the shape.</param>
+		/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
 		/// </summary>
-		public override void GeneratePoints(int brushWidth)
+        public override void GeneratePoints (int brush_width)
 		{
-			List<GeneratedPoint> generatedPoints = new List<GeneratedPoint>();
+			List<GeneratedPoint> points = new List<GeneratedPoint>();
 
 			ShapeFillPointCount = -1;
 
@@ -176,30 +178,30 @@ namespace Pinta.Tools
 					double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
 					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
-					generatedPoints.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
+					points.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
 
-					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange(calculateCurvePoints(tInterval,
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
 						cx + c1 * rx, cy - ry,
 						cx, cy - ry,
 						3));
 
-					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange(calculateCurvePoints(tInterval,
 						cx, cy - ry,
 						cx - c1 * rx, cy - ry,
 						cx - rx, cy - c1 * ry,
 						cx - rx, cy,
 						0));
 
-					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange(calculateCurvePoints(tInterval,
 						cx - rx, cy,
 						cx - rx, cy + c1 * ry,
 						cx - c1 * rx, cy + ry,
 						cx, cy + ry,
 						1));
 
-					generatedPoints.AddRange(calculateCurvePoints(tInterval,
+					points.AddRange(calculateCurvePoints(tInterval,
 						cx, cy + ry,
 						cx + c1 * rx, cy + ry,
 						cx + rx, cy + c1 * ry,
@@ -209,10 +211,10 @@ namespace Pinta.Tools
 					if (DashPattern == "-")
 					{
 						//Stop filling the shape here.
-						ShapeFillPointCount = generatedPoints.Count();
+						ShapeFillPointCount = points.Count();
 
 						//Overlap to prevent a "gap bug" at the start of the ellipse.
-						generatedPoints.AddRange(calculateCurvePoints(tInterval,
+						points.AddRange(calculateCurvePoints(tInterval,
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
 						cx + c1 * rx, cy - ry,
@@ -222,13 +224,13 @@ namespace Pinta.Tools
 					else
 					{
 						//Don't overlap if there is a dash pattern.
-						generatedPoints.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
+						points.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
 					}
 				}
 			}
 			
 			//Make sure there are now generated points; otherwise, one of the ellipse conditions was not met.
-			if (generatedPoints.Count == 0)
+			if (points.Count == 0)
 			{
 				//Something went wrong. Just copy the control points. Note: it's important that there be many generated points even if
 				//everything is just a linear connection of control points. This is because the generated points are used in the check
@@ -256,12 +258,12 @@ namespace Pinta.Tools
 					//Lerp from the current point to the next point.
 					for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f)
 					{
-						generatedPoints.Add(new GeneratedPoint(Utility.Lerp(currentPoint, nextPoint, lerpPos), currentNum));
+						points.Add(new GeneratedPoint(Utility.Lerp(currentPoint, nextPoint, lerpPos), currentNum));
 					}
 				}
 			}
 
-			GeneratedPoints = generatedPoints.ToArray();
+			GeneratedPoints = points.ToArray();
 		}
 
 		/// <summary>

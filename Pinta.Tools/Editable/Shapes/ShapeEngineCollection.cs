@@ -231,9 +231,9 @@ namespace Pinta.Tools
 
         /// <summary>
         /// Generate the points that make up the entirety of the shape being drawn.
-		/// <param name="brushWidth">The width of the brush that will be used to draw the shape.</param>
+		/// <param name="brush_width">The width of the brush that will be used to draw the shape.</param>
         /// </summary>
-        public abstract void GeneratePoints (int brushWidth);
+        public abstract void GeneratePoints (int brush_width);
 
         public PointD[] GetActualPoints (bool fillShape)
 		{

@@ -102,7 +102,7 @@ namespace Pinta.Tools
 		/// Generates a double[] given a string pattern that consists of any combination of dashes and spaces.
 		/// </summary>
 		/// <param name="dashPattern">The dash pattern string.</param>
-		/// <param name="brushWidth">The width of the brush.</param>
+		/// <param name="brush_width">The width of the brush.</param>
 		/// <returns>The double[] generated.</returns>
 		public static double[] GenerateDashArray(string dashPattern, double brushWidth)
 		{
