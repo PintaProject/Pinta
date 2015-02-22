@@ -56,7 +56,7 @@ namespace Pinta.Tools
 			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
 				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			addLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;

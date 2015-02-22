@@ -102,7 +102,7 @@ namespace Pinta.Tools
 					{
 						((RoundedLineEngine)selEngine).Radius = Radius;
 
-						storePreviousSettings();
+						StorePreviousSettings();
 
 						DrawActiveShape(false, false, true, false, false);
 					}
@@ -184,7 +184,7 @@ namespace Pinta.Tools
 			ShapeEngine newEngine = new RoundedLineEngine(doc.CurrentUserLayer, null, Radius, owner.UseAntialiasing,
 				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
@@ -194,13 +194,13 @@ namespace Pinta.Tools
 
 		protected override void MovePoint(List<ControlPoint> controlPoints)
 		{
-			moveRectangularPoint(controlPoints);
+			MoveRectangularPoint(controlPoints);
 
 			base.MovePoint(controlPoints);
 		}
 
 
-		public override void updateToolbarSettings(ShapeEngine engine)
+		public override void UpdateToolbarSettings(ShapeEngine engine)
 		{
 			if (engine != null && engine.ShapeType == ShapeTypes.RoundedLineSeries)
 			{
@@ -208,22 +208,22 @@ namespace Pinta.Tools
 
 				Radius = rLEngine.Radius;
 
-				base.updateToolbarSettings(engine);
+				base.UpdateToolbarSettings(engine);
 			}
 		}
 
-		protected override void recallPreviousSettings()
+		protected override void RecallPreviousSettings()
 		{
 			Radius = previousRadius;
 
-			base.recallPreviousSettings();
+			base.RecallPreviousSettings();
 		}
 
-		protected override void storePreviousSettings()
+		protected override void StorePreviousSettings()
 		{
 			previousRadius = Radius;
 
-			base.storePreviousSettings();
+			base.StorePreviousSettings();
 		}
     }
 }

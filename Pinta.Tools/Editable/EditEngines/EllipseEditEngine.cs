@@ -50,7 +50,7 @@ namespace Pinta.Tools
 			ShapeEngine newEngine = new EllipseEngine(doc.CurrentUserLayer, null, owner.UseAntialiasing,
 				BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
-			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
+			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
 			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
@@ -60,7 +60,7 @@ namespace Pinta.Tools
 
         protected override void MovePoint (List<ControlPoint> controlPoints)
 		{
-			moveRectangularPoint(controlPoints);
+			MoveRectangularPoint(controlPoints);
 
 			base.MovePoint(controlPoints);
 		}

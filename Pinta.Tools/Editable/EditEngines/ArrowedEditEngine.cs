@@ -272,7 +272,7 @@ namespace Pinta.Tools
 
 					DrawActiveShape(false, false, true, false, false);
 
-					storePreviousSettings();
+					StorePreviousSettings();
 				}
 			};
 
@@ -336,7 +336,7 @@ namespace Pinta.Tools
 
 					DrawActiveShape(false, false, true, false, false);
 
-					storePreviousSettings();
+					StorePreviousSettings();
 				}
 			};
 
@@ -413,7 +413,7 @@ namespace Pinta.Tools
 
 							DrawActiveShape(false, false, true, false, false);
 
-							storePreviousSettings();
+							StorePreviousSettings();
 						}
 					}
 				};
@@ -492,7 +492,7 @@ namespace Pinta.Tools
 
 							DrawActiveShape(false, false, true, false, false);
 
-							storePreviousSettings();
+							StorePreviousSettings();
 						}
 					}
 				};
@@ -571,7 +571,7 @@ namespace Pinta.Tools
 
 							DrawActiveShape(false, false, true, false, false);
 
-							storePreviousSettings();
+							StorePreviousSettings();
 						}
 					}
 				};
@@ -634,7 +634,7 @@ namespace Pinta.Tools
 		}
 
 
-		public override void updateToolbarSettings(ShapeEngine engine)
+		public override void UpdateToolbarSettings(ShapeEngine engine)
 		{
 			if (engine != null && engine.ShapeType == ShapeTypes.OpenLineCurveSeries)
 			{
@@ -653,11 +653,11 @@ namespace Pinta.Tools
 					}
 				}
 
-				base.updateToolbarSettings(engine);
+				base.UpdateToolbarSettings(engine);
 			}
 		}
 
-		protected override void recallPreviousSettings()
+		protected override void RecallPreviousSettings()
 		{
 			if (showArrowOneBox != null)
 			{
@@ -672,10 +672,10 @@ namespace Pinta.Tools
 				}
 			}
 
-			base.recallPreviousSettings();
+			base.RecallPreviousSettings();
 		}
 
-		protected override void storePreviousSettings()
+		protected override void StorePreviousSettings()
 		{
 			if (showArrowOneBox != null)
 			{
@@ -689,11 +689,11 @@ namespace Pinta.Tools
 				//Other Arrow2 settings are unnecessary since they are the same as Arrow1's.
 			}
 
-			base.storePreviousSettings();
+			base.StorePreviousSettings();
 		}
 
 
-		protected override void drawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
+		protected override void DrawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
 		{
             LineCurveSeriesEngine lCSEngine = engine as LineCurveSeriesEngine;
 			if (lCSEngine != null && engine.ControlPoints.Count > 0)
@@ -720,7 +720,7 @@ namespace Pinta.Tools
                 }
 			}
 
-			base.drawExtras(ref dirty, g, engine);
+			base.DrawExtras(ref dirty, g, engine);
 		}
 	}
 }
