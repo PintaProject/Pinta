@@ -59,7 +59,7 @@ namespace Pinta.Tools
 			addRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dashPBox.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
 
 			return newEngine;
 		}
