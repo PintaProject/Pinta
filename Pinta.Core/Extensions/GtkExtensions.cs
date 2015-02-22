@@ -137,6 +137,11 @@ namespace Pinta.Core
 			return item;
 		}
 
+        public static void Toggle (this Gtk.ToggleToolButton button)
+        {
+            button.Active = !button.Active;
+        }
+
 		/// <summary>
 		/// Initialize an image preview widget for the dialog
 		/// </summary>

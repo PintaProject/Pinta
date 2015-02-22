@@ -88,14 +88,24 @@ namespace Pinta.Core
 			return p.X == int.MinValue && p.Y == int.MinValue;
 		}
 
+        public static bool IsShiftPressed (this ModifierType m)
+        {
+            return (m & ModifierType.ShiftMask) == ModifierType.ShiftMask;
+        }
+
+		public static bool IsControlPressed (this ModifierType m)
+		{
+			return (m & ModifierType.ControlMask) == ModifierType.ControlMask;
+		}
+
 		public static bool IsShiftPressed (this EventButton ev)
 		{
-			return (ev.State & ModifierType.ShiftMask) == ModifierType.ShiftMask;
+            return ev.State.IsShiftPressed ();
 		}
 
 		public static bool IsControlPressed (this EventButton ev)
 		{
-			return (ev.State & ModifierType.ControlMask) == ModifierType.ControlMask;
+            return ev.State.IsControlPressed ();
 		}
 
 		public static Cairo.PointD GetPoint (this EventButton ev)

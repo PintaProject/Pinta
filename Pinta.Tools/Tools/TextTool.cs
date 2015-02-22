@@ -806,19 +806,19 @@ namespace Pinta.Tools
 						StopEditing(false);
 						return;
 					case Gdk.Key.Insert:
-						if ((modifier & Gdk.ModifierType.ShiftMask) != 0)
+                        if (modifier.IsShiftPressed ())
 						{
 							Gtk.Clipboard cb = Gtk.Clipboard.Get(Gdk.Atom.Intern("CLIPBOARD", false));
 							CurrentTextEngine.PerformPaste(cb);
 						}
-						else if ((modifier & Gdk.ModifierType.ControlMask) != 0)
+                        else if (modifier.IsControlPressed ())
 						{
 							Gtk.Clipboard cb = Gtk.Clipboard.Get(Gdk.Atom.Intern("CLIPBOARD", false));
 							CurrentTextEngine.PerformCopy(cb);
 						}
 						break;
 					default:
-						if ((modifier & Gdk.ModifierType.ControlMask) != 0)
+                        if (modifier.IsControlPressed ())
 						{
 							if (args.Event.Key == Gdk.Key.z)
 							{
@@ -826,12 +826,31 @@ namespace Pinta.Tools
 								TryHandleUndo();
 
 								if (PintaCore.Workspace.ActiveDocument.History.CanUndo)
-								{
 									PintaCore.Workspace.ActiveDocument.History.Undo();
-								}
 
 								return;
 							}
+                            else if (args.Event.Key == Gdk.Key.i)
+                            {
+                                italic_btn.Toggle ();
+                                UpdateFont ();
+                            }
+                            else if (args.Event.Key == Gdk.Key.b)
+                            {
+                                bold_btn.Toggle ();
+                                UpdateFont ();
+                            }
+                            else if (args.Event.Key == Gdk.Key.u)
+                            {
+                                underscore_btn.Toggle ();
+                                UpdateFont ();
+                            }
+                            else if (args.Event.Key == Gdk.Key.a)
+                            {
+                                // Select all of the text.
+                                CurrentTextEngine.PerformHome (false, false);
+                                CurrentTextEngine.PerformEnd (true, true);
+                            }
 							else
 							{
 								//Ignore command shortcut.
