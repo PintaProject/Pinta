@@ -39,6 +39,16 @@ namespace Pinta.Tools
     //a protected instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
     public abstract class BaseEditEngine
     {
+		static BaseEditEngine ()
+		{
+			Gtk.IconFactory fact = new Gtk.IconFactory ();
+			fact.Add ("Tools.Line.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Line.png")));
+			fact.Add ("Tools.Rectangle.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Rectangle.png")));
+			fact.Add ("Tools.Ellipse.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Ellipse.png")));
+			fact.Add ("Tools.RoundedRectangle.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.RoundedRectangle.png")));
+			fact.AddDefault ();
+		}
+
 		public enum ShapeTypes
 		{
 			OpenLineCurveSeries,
