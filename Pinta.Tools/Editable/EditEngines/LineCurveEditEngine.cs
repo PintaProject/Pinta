@@ -36,7 +36,7 @@ namespace Pinta.Tools
 {
     public class LineCurveEditEngine: ArrowedEditEngine
 	{
-		protected override string shapeString
+		protected override string ShapeName
 		{
 			get
 			{
@@ -49,7 +49,7 @@ namespace Pinta.Tools
 
         }
 
-		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+		protected override ShapeEngine CreateShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -67,9 +67,9 @@ namespace Pinta.Tools
 			return newEngine;
 		}
 
-        protected override void movePoint(List<ControlPoint> controlPoints)
+        protected override void MovePoint(List<ControlPoint> controlPoints)
         {
-			base.movePoint(controlPoints);
+			base.MovePoint(controlPoints);
         }
     }
 }

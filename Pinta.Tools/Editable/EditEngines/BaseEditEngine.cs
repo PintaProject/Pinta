@@ -49,7 +49,7 @@ namespace Pinta.Tools
 
 		public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools = new Dictionary<ShapeTypes, ShapeTool>();
 
-		protected virtual string shapeString { get { return Catalog.GetString("Shape"); } }
+        protected abstract string ShapeName { get; }
 
         protected readonly ShapeTool owner;
 
@@ -542,7 +542,7 @@ namespace Pinta.Tools
                     {
 						//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
 						PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Deleted")));
+							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Deleted")));
 
 						//Delete the selected point from the shape.
 						controlPoints.RemoveAt(SelectedPointIndex);
@@ -559,7 +559,7 @@ namespace Pinta.Tools
 
 						//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
 						doc.History.PushNewItem(
-							new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Deleted"),
+							new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Deleted"),
 								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 
@@ -608,7 +608,7 @@ namespace Pinta.Tools
 
                     //Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Added")));
+						new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Added")));
 
 
                     bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
@@ -904,7 +904,7 @@ namespace Pinta.Tools
 					if (!ctrlKey)
 					{
 						//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Point Added")));
+						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(currentPoint.X, currentPoint.Y), DefaultMidPointTension));
@@ -944,11 +944,11 @@ namespace Pinta.Tools
 					}
 
 					//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Added"),
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Added"),
 						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 					//Create the shape, add its starting points, and add it to SEngines.
-					SEngines.Add(createShape(ctrlKey, clickedOnControlPoint, prevSelPoint));
+					SEngines.Add(CreateShape(ctrlKey, clickedOnControlPoint, prevSelPoint));
 
 					//Select the new shape.
 					SelectedShapeIndex = SEngines.Count - 1;
@@ -1034,7 +1034,7 @@ namespace Pinta.Tools
                     {
                         //Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Modified")));
+							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Modified")));
 
                         clickedWithoutModifying = false;
                     }
@@ -1048,7 +1048,7 @@ namespace Pinta.Tools
                         //Make sure the control point was moved.
 						if (currentPoint.X != selPoint.Position.X || currentPoint.Y != selPoint.Position.Y)
                         {
-                            movePoint(controlPoints);
+                            MovePoint(controlPoints);
                         }
                     }
                     else
@@ -1286,7 +1286,7 @@ namespace Pinta.Tools
 				if (undoSurface != null)
 				{
 					//Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, shapeString + " " + Catalog.GetString("Finalized"),
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Finalized"),
 						undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 				}
 			}
@@ -1917,9 +1917,9 @@ namespace Pinta.Tools
 		/// <param name="ctrlKey"></param>
 		/// <param name="clickedOnControlPoint"></param>
 		/// <param name="prevSelPoint"></param>
-		protected abstract ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint);
+		protected abstract ShapeEngine CreateShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint);
 
-        protected virtual void movePoint(List<ControlPoint> controlPoints)
+        protected virtual void MovePoint(List<ControlPoint> controlPoints)
         {
 			//Update the control point's position.
 			controlPoints.ElementAt(SelectedPointIndex).Position = new PointD(currentPoint.X, currentPoint.Y);

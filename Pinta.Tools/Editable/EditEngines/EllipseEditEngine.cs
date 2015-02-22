@@ -36,20 +36,14 @@ namespace Pinta.Tools
 {
     public class EllipseEditEngine: BaseEditEngine
     {
-		protected override string shapeString
-		{
-			get
-			{
-				return Catalog.GetString("Ellipse");
-			}
-		}
+        protected override string ShapeName { get { return Catalog.GetString ("Ellipse"); } }
 
-		public EllipseEditEngine(ShapeTool passedOwner): base(passedOwner)
+        public EllipseEditEngine (ShapeTool owner)
+            : base (owner)
         {
-
         }
 
-		protected override ShapeEngine createShape(bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
+        protected override ShapeEngine CreateShape (bool ctrlKey, bool clickedOnControlPoint, PointD prevSelPoint)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -64,11 +58,11 @@ namespace Pinta.Tools
 			return newEngine;
 		}
 
-		protected override void movePoint(List<ControlPoint> controlPoints)
+        protected override void MovePoint (List<ControlPoint> controlPoints)
 		{
 			moveRectangularPoint(controlPoints);
 
-			base.movePoint(controlPoints);
+			base.MovePoint(controlPoints);
 		}
     }
 }
