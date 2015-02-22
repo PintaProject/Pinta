@@ -110,7 +110,7 @@ namespace Pinta
 		{
             // Give the widget that has focus a first shot at handling the event.
             // Otherwise, key presses may be intercepted by shortcuts for menu items.
-            if (!SendToFocusWidget (e, e.Event))
+            if (SendToFocusWidget (e, e.Event))
                 return;
 
 			// Give the Canvas (and by extension the tools)
@@ -125,7 +125,7 @@ namespace Pinta
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
-            if (!SendToFocusWidget (e, e.Event))
+            if (SendToFocusWidget (e, e.Event))
                 return;
 
 			// Give the Canvas (and by extension the tools)
