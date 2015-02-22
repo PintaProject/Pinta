@@ -41,13 +41,13 @@ namespace Pinta.Tools
 		/// Create a new LineCurveSeriesEngine.
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
-		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
-		/// <param name="passedShapeType">The owner EditEngine.</param>
-		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
-		/// <param name="passedOutlineColor">The outline color for the shape.</param>
-		/// <param name="passedFillColor">The fill color for the shape.</param>
-		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
+		/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+		/// <param name="shape_type">The owner EditEngine.</param>
+		/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
+		/// <param name="closed">Whether or not the shape is closed (first and last points are connected).</param>
+		/// <param name="outline_color">The outline color for the shape.</param>
+		/// <param name="fill_color">The fill color for the shape.</param>
+		/// <param name="brush_width">The width of the outline of the shape.</param>
 		public LineCurveSeriesEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, BaseEditEngine.ShapeTypes passedShapeType,
 			bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer,
 			passedDrawingLayer, passedShapeType, passedAA, passedClosed, passedOutlineColor, passedFillColor, passedBrushWidth)
@@ -55,15 +55,16 @@ namespace Pinta.Tools
 			
 		}
 
-		protected override ShapeEngine cloneSpecific()
+        private LineCurveSeriesEngine (LineCurveSeriesEngine src)
+            : base (src)
+        {
+            Arrow1 = src.Arrow1.Clone ();
+            Arrow2 = src.Arrow2.Clone ();
+        }
+
+        public override ShapeEngine Clone ()
 		{
-			LineCurveSeriesEngine clonedCE = new LineCurveSeriesEngine(parentLayer, DrawingLayer, ShapeType, AntiAliasing, Closed,
-				OutlineColor, FillColor, BrushWidth);
-
-			clonedCE.Arrow1 = Arrow1.Clone();
-			clonedCE.Arrow2 = Arrow2.Clone();
-
-			return clonedCE;
+            return new LineCurveSeriesEngine (this);
 		}
 		
 		/// <summary>

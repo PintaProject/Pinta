@@ -392,7 +392,7 @@ namespace Pinta.Tools
 								this, owner.Icon, Catalog.GetString("Changed Shape Type")));
 
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
-							selEngine = selEngine.GenericClone(newShapeType, SelectedShapeIndex);
+							selEngine = selEngine.Convert(newShapeType, SelectedShapeIndex);
 
 							int previousSSI = SelectedShapeIndex;
 

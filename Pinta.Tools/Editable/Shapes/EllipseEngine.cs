@@ -39,11 +39,11 @@ namespace Pinta.Tools
 		/// Create a new EllipseEngine.
 		/// </summary>
 		/// <param name="parentLayer">The parent UserLayer for the re-editable DrawingLayer.</param>
-		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
-		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		/// <param name="passedOutlineColor">The outline color for the shape.</param>
-		/// <param name="passedFillColor">The fill color for the shape.</param>
-		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
+		/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+		/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
+		/// <param name="outline_color">The outline color for the shape.</param>
+		/// <param name="fill_color">The fill color for the shape.</param>
+		/// <param name="brush_width">The width of the outline of the shape.</param>
 		public EllipseEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, bool passedAA,
 			Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer, passedDrawingLayer,
 			BaseEditEngine.ShapeTypes.Ellipse, passedAA, true, passedOutlineColor, passedFillColor, passedBrushWidth)
@@ -51,9 +51,14 @@ namespace Pinta.Tools
 			
 		}
 
-		protected override ShapeEngine cloneSpecific()
+        private EllipseEngine (EllipseEngine src)
+            : base (src)
+        {
+        }
+
+        public override ShapeEngine Clone ()
 		{
-			return new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
+            return new EllipseEngine (this);
 		}
 
 		/// <summary>

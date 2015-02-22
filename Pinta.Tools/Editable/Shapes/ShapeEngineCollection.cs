@@ -50,7 +50,7 @@ namespace Pinta.Tools
 		{
 			for (int n = 0; n < passedCEC.Count; ++n)
 			{
-				Add(passedCEC[n].PartialClone());
+                Add (passedCEC[n].Clone ());
 			}
 		}
         
@@ -118,6 +118,7 @@ namespace Pinta.Tools
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
 
+        private UserLayer parent_layer;
 		public ReEditableLayer DrawingLayer;
 
 		public bool AntiAliasing;
@@ -133,120 +134,108 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Create a new ShapeEngine.
 		/// </summary>
-		/// <param name="passedParentLayer">The parent UserLayer for the ReEditable DrawingLayer.</param>
-		/// <param name="passedDrawingLayer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
-		/// <param name="passedShapeType">The type of shape to create.</param>
-		/// <param name="passedAA">Whether or not antialiasing is enabled.</param>
-		/// <param name="passedClosed">Whether or not the shape is closed (first and last points are connected).</param>
-		/// <param name="passedOutlineColor">The outline color for the shape.</param>
-		/// <param name="passedFillColor">The fill color for the shape.</param>
-		/// <param name="passedBrushWidth">The width of the outline of the shape.</param>
-		public ShapeEngine(UserLayer passedParentLayer, ReEditableLayer passedDrawingLayer, BaseEditEngine.ShapeTypes passedShapeType,
-			bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor, int passedBrushWidth)
+		/// <param name="parent_layer">The parent UserLayer for the ReEditable DrawingLayer.</param>
+		/// <param name="drawing_layer">An existing ReEditableLayer to reuse. This is for cloning only. If not cloning, pass in null.</param>
+		/// <param name="shape_type">The type of shape to create.</param>
+		/// <param name="antialiasing">Whether or not antialiasing is enabled.</param>
+		/// <param name="closed">Whether or not the shape is closed (first and last points are connected).</param>
+		/// <param name="outline_color">The outline color for the shape.</param>
+		/// <param name="fill_color">The fill color for the shape.</param>
+		/// <param name="brush_width">The width of the outline of the shape.</param>
+        public ShapeEngine (UserLayer parent_layer, ReEditableLayer drawing_layer,
+                            BaseEditEngine.ShapeTypes shape_type, bool antialiasing,
+                            bool closed, Color outline_color, Color fill_color,
+                            int brush_width)
 		{
-			parentLayer = passedParentLayer;
+            this.parent_layer = parent_layer;
 
-			if (passedDrawingLayer == null)
-			{
-				DrawingLayer = new ReEditableLayer(parentLayer);
-			}
+			if (drawing_layer == null)
+                DrawingLayer = new ReEditableLayer (parent_layer);
 			else
-			{
-				DrawingLayer = passedDrawingLayer;
-			}
+				DrawingLayer = drawing_layer;
 
-			ShapeType = passedShapeType;
-			AntiAliasing = passedAA;
-			Closed = passedClosed;
-			OutlineColor = passedOutlineColor.Clone();
-			FillColor = passedFillColor.Clone();
-			BrushWidth = passedBrushWidth;
+			ShapeType = shape_type;
+			AntiAliasing = antialiasing;
+			Closed = closed;
+			OutlineColor = outline_color.Clone();
+			FillColor = fill_color.Clone();
+			BrushWidth = brush_width;
 		}
 
-		/// <summary>
-		/// Create a ShapeEngine clone with all of the common and added extra data (that depends on the ShapeEngine child type).
-		/// </summary>
-		/// <returns>The partially cloned shape data.</returns>
-		public ShapeEngine PartialClone()
-		{
-			//The actual type of ShapeEngine child created for the clone must be done in an overridden method.
-			ShapeEngine clonedCE = cloneSpecific();
+        protected ShapeEngine (ShapeEngine src)
+        {
+            DrawingLayer = src.DrawingLayer;
+            ShapeType = src.ShapeType;
+            AntiAliasing = src.AntiAliasing;
+            Closed = src.Closed;
+            OutlineColor = src.OutlineColor.Clone ();
+            FillColor = src.OutlineColor.Clone ();
+            BrushWidth = src.BrushWidth;
 
-			clonedCE.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
+			// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
+            ControlPoints = src.ControlPoints.Select (i => i.Clone ()).ToList ();
+            DashPattern = src.DashPattern;
+        }
 
-			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-
-			clonedCE.DashPattern = DashPattern;
-
-			clonedCE.BrushWidth = BrushWidth;
-
-			return clonedCE;
-		}
+        public abstract ShapeEngine Clone ();
 
 		/// <summary>
-		/// Create a ShapeEngine clone with added extra data (besides the common data) to the clone that depends on the ShapeEngine child type.
-		/// Note: do not add the common data when overriding this method! That is done in PartialClone.
-		/// </summary>
-		/// <returns></returns>
-		protected abstract ShapeEngine cloneSpecific();
-
-		/// <summary>
-		/// Converts the ShapeEngine instance into a new instance of a different ShapeEngine (child) type, copying the common data.
+		/// Converts the ShapeEngine instance into a new instance of a different
+        /// ShapeEngine (child) type, copying the common data.
 		/// </summary>
 		/// <param name="newShapeType">The new ShapeEngine type to create.</param>
 		/// <param name="shapeIndex">The index to insert the ShapeEngine clone into SEngines at.
 		/// This ensures that the clone is as transparent as possible.</param>
 		/// <returns>A new ShapeEngine instance of the specified type with the common data copied over.</returns>
-		public ShapeEngine GenericClone(BaseEditEngine.ShapeTypes newShapeType, int shapeIndex)
+        public ShapeEngine Convert (BaseEditEngine.ShapeTypes newShapeType, int shapeIndex)
 		{
-			//Remove the old ShapeEngine instance.
-			BaseEditEngine.SEngines.Remove(this);
+            //Remove the old ShapeEngine instance.
+            BaseEditEngine.SEngines.Remove (this);
 
-			ShapeEngine clonedEngine;
+            ShapeEngine clone;
 
-			switch (newShapeType)
-			{
-				case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
-					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, true,
-						OutlineColor, FillColor, BrushWidth);
+            switch (newShapeType)
+            {
+                case BaseEditEngine.ShapeTypes.ClosedLineCurveSeries:
+                    clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, true,
+                        OutlineColor, FillColor, BrushWidth);
 
-					break;
-				case BaseEditEngine.ShapeTypes.Ellipse:
-					clonedEngine = new EllipseEngine(parentLayer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
+                    break;
+                case BaseEditEngine.ShapeTypes.Ellipse:
+                    clone = new EllipseEngine (parent_layer, DrawingLayer, AntiAliasing, OutlineColor, FillColor, BrushWidth);
 
-					break;
-				case BaseEditEngine.ShapeTypes.RoundedLineSeries:
-					clonedEngine = new RoundedLineEngine(parentLayer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
-						AntiAliasing, OutlineColor, FillColor, BrushWidth);
+                    break;
+                case BaseEditEngine.ShapeTypes.RoundedLineSeries:
+                    clone = new RoundedLineEngine (parent_layer, DrawingLayer, RoundedLineEditEngine.DefaultRadius,
+                        AntiAliasing, OutlineColor, FillColor, BrushWidth);
 
-					break;
-				default:
-					//Defaults to OpenLineCurveSeries.
-					clonedEngine = new LineCurveSeriesEngine(parentLayer, DrawingLayer, newShapeType, AntiAliasing, false,
-						OutlineColor, FillColor, BrushWidth);
+                    break;
+                default:
+                    //Defaults to OpenLineCurveSeries.
+                    clone = new LineCurveSeriesEngine (parent_layer, DrawingLayer, newShapeType, AntiAliasing, false,
+                        OutlineColor, FillColor, BrushWidth);
 
-					break;
-			}
+                    break;
+            }
 
-			clonedEngine.ControlPoints = ControlPoints.Select(i => i.Clone()).ToList();
+            // Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
+            clone.ControlPoints = ControlPoints.Select (i => i.Clone ()).ToList ();
+            clone.DashPattern = DashPattern;
 
-			//Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
-			
-			clonedEngine.DashPattern = DashPattern;
+            // Add the new ShapeEngine instance at the specified index to
+            // ensure as transparent of a cloning as possible.
+            BaseEditEngine.SEngines.Insert (shapeIndex, clone);
 
-			//Add the new ShapeEngine instance at the specified index to ensure as transparent of a cloning as possible.
-			BaseEditEngine.SEngines.Insert(shapeIndex, clonedEngine);
-
-			return clonedEngine;
-		}
+            return clone;
+        }
 
         /// <summary>
         /// Generate the points that make up the entirety of the shape being drawn.
 		/// <param name="brushWidth">The width of the brush that will be used to draw the shape.</param>
         /// </summary>
-        public abstract void GeneratePoints(int brushWidth);
+        public abstract void GeneratePoints (int brushWidth);
 
-		public PointD[] GetActualPoints(bool fillShape)
+        public PointD[] GetActualPoints (bool fillShape)
 		{
 			int numberOfPoints;
 			
@@ -270,8 +259,5 @@ namespace Pinta.Tools
 
 			return actualPoints;
 		}
-
-
-		protected UserLayer parentLayer;
 	}
 }
