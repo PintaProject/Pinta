@@ -695,34 +695,29 @@ namespace Pinta.Tools
 
 		protected override void drawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
 		{
-			if (engine.ControlPoints.Count > 0)
+            LineCurveSeriesEngine lCSEngine = engine as LineCurveSeriesEngine;
+			if (lCSEngine != null && engine.ControlPoints.Count > 0)
 			{
-				//Draw the arrows for the currently active shape.
-
+				// Draw the arrows for the currently active shape.
 				GeneratedPoint[] genPoints = engine.GeneratedPoints;
 
-				for (int i = 0; i < engine.ControlPoints.Count; ++i)
-				{
-					LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine)engine;
+                if (lCSEngine.Arrow1.Show)
+                {
+                    if (genPoints.Length > 1)
+                    {
+                        dirty = dirty.UnionRectangles(lCSEngine.Arrow1.Draw(g, lCSEngine.OutlineColor,
+                            genPoints[0].Position, genPoints[1].Position));
+                    }
+                }
 
-					if (lCSEngine.Arrow1.Show)
-					{
-						if (genPoints.Length > 1)
-						{
-							dirty = dirty.UnionRectangles(lCSEngine.Arrow1.Draw(g, lCSEngine.OutlineColor,
-								genPoints[0].Position, genPoints[1].Position));
-						}
-					}
-
-					if (lCSEngine.Arrow2.Show)
-					{
-						if (genPoints.Length > 1)
-						{
-							dirty = dirty.UnionRectangles(lCSEngine.Arrow2.Draw(g, lCSEngine.OutlineColor,
-								genPoints[genPoints.Length - 1].Position, genPoints[genPoints.Length - 2].Position));
-						}
-					}
-				}
+                if (lCSEngine.Arrow2.Show)
+                {
+                    if (genPoints.Length > 1)
+                    {
+                        dirty = dirty.UnionRectangles(lCSEngine.Arrow2.Draw(g, lCSEngine.OutlineColor,
+                            genPoints[genPoints.Length - 1].Position, genPoints[genPoints.Length - 2].Position));
+                    }
+                }
 			}
 
 			base.drawExtras(ref dirty, g, engine);
