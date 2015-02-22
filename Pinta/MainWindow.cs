@@ -393,6 +393,8 @@ namespace Pinta
 
 		private void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
 		{
+			// TODO: Generate random name for the picture being downloaded
+
 			// Only handle URIs
 			if (args.Info != 100)
 				return;
@@ -406,22 +408,34 @@ namespace Pinta
 					string file = individualFile.Trim ();
 					Console.WriteLine (file);
 
-					if (file.StartsWith ("http")) {
+					if (file.StartsWith ("http") || file.StartsWith("ftp")) {
 						System.Net.WebClient client = new System.Net.WebClient ();
 						string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName(file);
 
-						Console.WriteLine (">>File downloaded; " + file + "; " + tempFilePath);
+						var progressDialog = PintaCore.Chrome.ProgressDialog;
 
 						try {
+							progressDialog.Show ();
+							progressDialog.Title = "Downloading file";
+							progressDialog.Text = "File " + file + " is being downloaded to " 
+								+ tempFilePath;
+							
 							client.DownloadFile (file, @tempFilePath);
+							client.DownloadProgressChanged += (sender, e) => 
+							{
+								progressDialog.Progress = e.ProgressPercentage;
+							};
 						} finally {
 							client.Dispose ();
+							progressDialog.Hide();
 						}
 
 						if (System.IO.File.Exists (tempFilePath))
 							file = "file://" + tempFilePath;
 						else
-							Console.WriteLine ("Unable to download target file: " + tempFilePath);
+							PintaCore.Chrome.ShowErrorDialog(PintaCore.Chrome.MainWindow, 
+								"Download failed",
+								"Unable to download target file: " + tempFilePath);
 					}
 
 					if (file.StartsWith ("file://"))
