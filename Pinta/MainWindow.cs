@@ -106,8 +106,13 @@ namespace Pinta
 		}
 
 		[GLib.ConnectBefore]
-		void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
+		private void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
 		{
+            // Give the widget that has focus a first shot at handling the event.
+            // Otherwise, key presses may be intercepted by shortcuts for menu items.
+            if (!SendToFocusWidget (e, e.Event))
+                return;
+
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
 			// the mouse pointer is on the canvas
@@ -118,8 +123,11 @@ namespace Pinta
 		}
 
 		[GLib.ConnectBefore]
-		void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
+		private void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
+            if (!SendToFocusWidget (e, e.Event))
+                return;
+
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
 			// the mouse pointer is on the canvas
@@ -128,6 +136,18 @@ namespace Pinta
 				canvas_pad.Canvas.DoKeyReleaseEvent (o, e);
 			}
 		}
+
+        private bool SendToFocusWidget (GLib.SignalArgs args, Gdk.EventKey e)
+        {
+            var widget = window_shell.Focus;
+            if (widget != null && widget.ProcessEvent (e))
+            {
+                args.RetVal = true;
+                return true;
+            }
+
+            return false;
+        }
 
 		// Check if the mouse pointer is on the canvas
 		private bool IsMouseOnCanvas()
