@@ -247,7 +247,10 @@ namespace Pinta.Core
 		/// </summary>
 		public static string ToPercent (double n)
 		{
-			return n.ToString ("P0", CultureInfo.CurrentCulture);
+			var percent = (n * 100).ToString ("N0", CultureInfo.CurrentCulture);
+			// Translators: This specifies the format of the zoom percentage choices
+			// in the toolbar.
+			return string.Format (Catalog.GetString ("{0}%"), percent);
 		}
 
 		public void SuspendZoomUpdate ()
