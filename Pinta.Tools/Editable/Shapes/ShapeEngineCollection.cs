@@ -110,11 +110,6 @@ namespace Pinta.Tools
 		//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
 		public GeneratedPoint[] GeneratedPoints = new GeneratedPoint[0];
 
-		//This is used to indicate to the drawing code at what generated point to stop when filling the shape. Some solid shapes require an overlap
-		//to be drawn in order to prevent a "gap bug" at the end/beginning of the shape. This variable ensures that the overlap does not intrude
-		//with the drawing of the filled part of the shape (otherwise, the overlap would cause a "fill cancelization" to occur).
-		public int ShapeFillPointCount = -1;
-
 		//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 		public OrganizedPointCollection OrganizedPoints = new OrganizedPointCollection();
 
@@ -235,29 +230,15 @@ namespace Pinta.Tools
         /// </summary>
         public abstract void GeneratePoints (int brush_width);
 
-        public PointD[] GetActualPoints (bool fillShape)
+        public PointD[] GetActualPoints ()
 		{
-			int numberOfPoints;
-			
-			//See ShapeFillPointCount declaration comment.
-			if (fillShape && ShapeFillPointCount > -1)
-			{
-				numberOfPoints = ShapeFillPointCount;
-			}
-			else
-			{
-				numberOfPoints = GeneratedPoints.Count();
-			}
+            int n = GeneratedPoints.Length;
+            PointD[] points = new PointD[n];
 
+			for (int i = 0; i < n; ++i)
+				points[i] = GeneratedPoints[i].Position;
 
-			PointD[] actualPoints = new PointD[numberOfPoints];
-
-			for (int pointNum = 0; pointNum < numberOfPoints; ++pointNum)
-			{
-				actualPoints[pointNum] = GeneratedPoints[pointNum].Position;
-			}
-
-			return actualPoints;
+			return points;
 		}
 	}
 }

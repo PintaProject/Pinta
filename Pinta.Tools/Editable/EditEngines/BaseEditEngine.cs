@@ -1464,21 +1464,19 @@ namespace Pinta.Tools
 						//Generate the points that make up the shape.
 						activeEngine.GeneratePoints(activeEngine.BrushWidth);
 
+                        PointD[] points = activeEngine.GetActualPoints ();
+
 						//Expand the invalidation rectangle as necessary.
 
 						if (FillShape)
 						{
-							PointD[] actualPoints = activeEngine.GetActualPoints(true);
-
                             Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
-                            dirty = dirty.UnionRectangles (g.FillPolygonal (actualPoints, fill_color));
+                            dirty = dirty.UnionRectangles (g.FillPolygonal (points, fill_color));
 						}
 
 						if (StrokeShape)
 						{
-							PointD[] actualPoints = activeEngine.GetActualPoints(false);
-
-							dirty = dirty.UnionRectangles(g.DrawPolygonal(actualPoints, activeEngine.OutlineColor));
+							dirty = dirty.UnionRectangles(g.DrawPolygonal(points, activeEngine.OutlineColor));
 						}
 					}
 

@@ -71,8 +71,6 @@ namespace Pinta.Tools
 		{
 			List<GeneratedPoint> points = new List<GeneratedPoint>();
 
-			ShapeFillPointCount = -1;
-
 			//An ellipse requires exactly 4 control points in order to draw anything.
 			if (ControlPoints.Count == 4)
 			{
@@ -178,8 +176,6 @@ namespace Pinta.Tools
 					double cy = topLeft.Y + ry; //The middle of the bounding Rectangle, vertically speaking.
 					double c1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
-					points.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
-
 					points.AddRange(calculateCurvePoints(tInterval,
 						cx + rx, cy,
 						cx + rx, cy - c1 * ry,
@@ -208,24 +204,8 @@ namespace Pinta.Tools
 						cx + rx, cy,
 						2));
 
-					if (DashPattern == "-")
-					{
-						//Stop filling the shape here.
-						ShapeFillPointCount = points.Count();
-
-						//Overlap to prevent a "gap bug" at the start of the ellipse.
-						points.AddRange(calculateCurvePoints(tInterval,
-						cx + rx, cy,
-						cx + rx, cy - c1 * ry,
-						cx + c1 * rx, cy - ry,
-						cx, cy - ry,
-						3));
-					}
-					else
-					{
-						//Don't overlap if there is a dash pattern.
-						points.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
-					}
+                    // Close the curve.
+					points.Add(new GeneratedPoint(new PointD(cx + rx, cy), 3));
 				}
 			}
 			
@@ -297,12 +277,7 @@ namespace Pinta.Tools
 			double oneMinusTSquaredTimesTTimesThree;
 			double oneMinusTTimesTSquaredTimesThree;
 
-			//t will go from tInterval to 1d at the interval of tInterval. t starts
-			//at tInterval instead of 0d because the first Point in the curve is
-			//skipped. This is needed because multiple curves will be placed
-			//sequentially after each other and we don't want to have the same
-			//Point be added to the Polygon twice.
-			for (double t = tInterval; t < 1d; t += tInterval)
+			for (double t = 0; t < 1d; t += tInterval)
 			{
 				//There are 3 "layers" in a cubic Bezier curve's calculation. These "layers"
 				//must be calculated for each intermediate Point (for each value of t from
