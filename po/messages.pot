@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-22 21:40-0500\n"
+"POT-Creation-Date: 2015-02-22 23:02-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -479,7 +479,7 @@ msgid "Xor (Ctrl + Right Click)"
 msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
-msgid "Intersect (Shift + Left Click"
+msgid "Intersect (Shift + Left Click)"
 msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57

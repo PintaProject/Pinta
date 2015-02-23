@@ -47,7 +47,7 @@ namespace Pinta.Core
                 { CombineMode.Union, Catalog.GetString ("Union (+) (Ctrl + Left Click)") },
                 { CombineMode.Exclude, Catalog.GetString ("Exclude (-) (Right Click)") },
                 { CombineMode.Xor, Catalog.GetString ("Xor (Ctrl + Right Click)") },
-                { CombineMode.Intersect, Catalog.GetString ("Intersect (Shift + Left Click") },
+                { CombineMode.Intersect, Catalog.GetString ("Intersect (Shift + Left Click)") },
             };
         }
 
