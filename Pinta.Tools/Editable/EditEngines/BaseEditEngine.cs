@@ -317,11 +317,9 @@ namespace Pinta.Tools
 					if (selEngine != null)
 					{
 						selEngine.BrushWidth = BrushWidth;
+                        StorePreviousSettings ();
+                        DrawActiveShape (false, false, true, false, false);
 					}
-
-					StorePreviousSettings();
-
-					DrawActiveShape(false, false, true, false, false);
 				};
 			}
 
@@ -421,12 +419,9 @@ namespace Pinta.Tools
 					if (selEngine != null)
 					{
 						selEngine.DashPattern = dpbBox.ActiveText;
+                        StorePreviousSettings ();
+                        DrawActiveShape (false, false, true, false, false);
 					}
-
-					StorePreviousSettings();
-
-                    //Update the shape.
-					DrawActiveShape(false, false, true, false, false);
                 };
             }
         }
@@ -444,12 +439,10 @@ namespace Pinta.Tools
 			SelectedPointIndex = -1;
 			SelectedShapeIndex = -1;
 
-			ShapeEngine activeEngine = ActiveShapeEngine;
-
 			StorePreviousSettings();
 
 			//Determine if the tool being switched to will be another editable tool.
-			if (!newTool.IsEditableShapeTool)
+			if (PintaCore.Workspace.HasOpenDocuments && !newTool.IsEditableShapeTool)
 			{
 				//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
 				FinalizeAllShapes();
