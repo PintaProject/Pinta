@@ -291,7 +291,6 @@ namespace Pinta
 
             // Put all the options together
             var options_vbox = new VBox ();
-            options_vbox.WidthRequest = 165;
 
             options_vbox.PackStart (layout_table, false, false, 3);
             options_vbox.PackStart (orientation_label, false, false, 4);
