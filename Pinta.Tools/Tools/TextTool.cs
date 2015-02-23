@@ -1079,9 +1079,12 @@ namespace Pinta.Tools
 
 				if (showCursor) {
 					var loc = CurrentTextLayout.GetCursorLocation ();
+                    var color = PintaCore.Palette.PrimaryColor;
 
 					g.Antialias = Cairo.Antialias.None;
-					g.DrawLine (new Cairo.PointD (loc.X, loc.Y), new Cairo.PointD (loc.X, loc.Y + loc.Height), new Cairo.Color (0, 0, 0, 1), 1);
+					g.DrawLine (new Cairo.PointD (loc.X, loc.Y),
+                                new Cairo.PointD (loc.X, loc.Y + loc.Height),
+                                color, 1);
 					
 					cursorBounds = Rectangle.Inflate (loc, 2, 10);
 				}
