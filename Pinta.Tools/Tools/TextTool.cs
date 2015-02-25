@@ -180,8 +180,6 @@ namespace Pinta.Tools
 				size_combo = new ToolBarComboBox (65, 0, true);
 
 				size_combo.ComboBox.Changed += HandleSizeChanged;
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
 			}
 
 			tb.AppendItem (size_combo);
@@ -300,29 +298,6 @@ namespace Pinta.Tools
 
 		string temp_size;
 
-		private void HandleFontSizeFocusIn (object o, FocusInEventArgs args)
-		{
-			size_combo.ComboBox.Changed -= HandleSizeChanged;
-			temp_size = size_combo.ComboBox.ActiveText;
-		}
-
-		private void HandleFontSizeFocusOut (object o, FocusOutEventArgs args)
-		{
-			string text = size_combo.ComboBox.ActiveText;
-			int size;
-
-			if (!int.TryParse (text, out size)) {
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_size;
-				return;
-			}
-			
-			PintaCore.Chrome.Canvas.GrabFocus ();
-
-			UpdateFont ();
-
-			size_combo.ComboBox.Changed += HandleSizeChanged;
-		}
-
 		private void HandleFontChanged (object sender, EventArgs e)
 		{
 			PintaCore.Chrome.Canvas.GrabFocus ();
@@ -358,19 +333,16 @@ namespace Pinta.Tools
 
 		private void HandleSizeChanged (object sender, EventArgs e)
 		{
-			PintaCore.Chrome.Canvas.GrabFocus ();
-
-			UpdateFont ();
+			string text = size_combo.ComboBox.ActiveText;
+			if (int.TryParse (text, out FontSize))
+                UpdateFont ();
 		}
 
 		private Pango.FontFamily FontFamily {
 			get { return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.ActiveText); }
 		}
 
-
-		private int FontSize {
-			get { return int.Parse (size_combo.ComboBox.ActiveText); }
-		}
+		private int FontSize;
 
 		private TextAlignment Alignment {
 			get {
