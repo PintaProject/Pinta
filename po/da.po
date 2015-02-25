@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 16:32-0500\n"
-"PO-Revision-Date: 2014-09-22 12:51+0000\n"
+"POT-Creation-Date: 2015-02-22 23:02-0500\n"
+"PO-Revision-Date: 2015-02-23 19:35+0000\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-15 18:12+0000\n"
-"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-25 01:20+0000\n"
+"X-Generator: Launchpad (build 17355)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -60,13 +60,13 @@ msgid "Copy Merged"
 msgstr "Kopiér forenet"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
-#: ../Pinta.Core/Classes/Document.cs:801
+#: ../Pinta.Core/Classes/Document.cs:768
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
 msgstr "Indsæt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
-#: ../Pinta.Core/Classes/Document.cs:797
+#: ../Pinta.Core/Classes/Document.cs:764
 msgid "Paste Into New Layer"
 msgstr "Indsæt i nyt lag"
 
@@ -152,8 +152,8 @@ msgstr ""
 "palet."
 
 #: ../Pinta.Core/Actions/EditActions.cs:355
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:187
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:199
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
 msgstr "Fejl"
 
@@ -217,7 +217,7 @@ msgstr "Rapportér en fejl"
 msgid "Translate This Application"
 msgstr "Oversæt dette program"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:222
+#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:240
 msgid "About"
 msgstr "Om"
 
@@ -270,7 +270,7 @@ msgstr "Udjævn"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:859
+#: ../Pinta.Core/Classes/Document.cs:826
 msgid "Add New Layer"
 msgstr "Tilføj nyt lag"
 
@@ -320,66 +320,71 @@ msgstr "Åbn billedfil"
 msgid "Import From File"
 msgstr "Importér fra fil"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Zoom In"
 msgstr "Zoom ind"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "Zoom ud"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Best Fit"
 msgstr "Bedste tilpasning"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom to Selection"
 msgstr "Zoom til markering"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Normal Size"
 msgstr "Normal størrelse"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Toolbar"
 msgstr "Værktøjslinje"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:81
+#: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Pixel Grid"
 msgstr "Billedpunktsgitter"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:82
+#: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Rulers"
 msgstr "Linealer"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:83
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixels"
 msgstr "Billedpunkter"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:84
+#: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Inches"
 msgstr "Tommer"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:85
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Centimeters"
 msgstr "Centimeter"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:87
 msgid "Fullscreen"
 msgstr "Fuldskærm"
 
-#. stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the
-#. image was rotated or cropped) and "Zoom to Window" mode is active
-#: ../Pinta.Core/Actions/ViewActions.cs:88
-#: ../Pinta.Core/Actions/ViewActions.cs:216
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:295
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:303
+#: ../Pinta.Core/Actions/ViewActions.cs:113
+#: ../Pinta.Core/Actions/ViewActions.cs:272
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:299
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:307
 msgid "Window"
 msgstr "Vindue"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:126
+#: ../Pinta.Core/Actions/ViewActions.cs:155
 msgid "Ruler Units"
 msgstr "Enheder på lineal"
+
+#. Translators: This specifies the format of the zoom percentage choices
+#. in the toolbar.
+#: ../Pinta.Core/Actions/ViewActions.cs:253
+#, csharp-format
+msgid "{0}%"
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -413,82 +418,82 @@ msgstr "Kantudjævning til"
 msgid "Antialiasing Off"
 msgstr "Kantudjævning fra"
 
-#: ../Pinta.Core/Classes/Document.cs:316 ../Pinta.Core/Classes/Document.cs:321
+#: ../Pinta.Core/Classes/Document.cs:286 ../Pinta.Core/Classes/Document.cs:291
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Lag"
 
-#: ../Pinta.Core/Classes/Document.cs:403
+#: ../Pinta.Core/Classes/Document.cs:373
 msgid "copy"
 msgstr "kopiér"
 
-#: ../Pinta.Core/Classes/Document.cs:674
+#: ../Pinta.Core/Classes/Document.cs:641
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr "Ændr størrelse på lærred"
 
-#: ../Pinta.Core/Classes/Document.cs:875
+#: ../Pinta.Core/Classes/Document.cs:842
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr "Flyt markerede billedpunkter"
 
-#: ../Pinta.Core/Classes/Document.cs:893
+#: ../Pinta.Core/Classes/Document.cs:860
 msgid "Image larger than canvas"
 msgstr "Billede større end lærred"
 
-#: ../Pinta.Core/Classes/Document.cs:894
+#: ../Pinta.Core/Classes/Document.cs:861
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 "Billedet, der indsættes, er større end lærredet. Hvad vil du gerne gøre?"
 
-#: ../Pinta.Core/Classes/Document.cs:898
+#: ../Pinta.Core/Classes/Document.cs:865
 msgid "Expand canvas"
 msgstr "Udvid lærredet"
 
-#: ../Pinta.Core/Classes/Document.cs:899
+#: ../Pinta.Core/Classes/Document.cs:866
 msgid "Don't change canvas size"
 msgstr "Ændr ikke lærredets størrelse"
 
-#: ../Pinta.Core/Classes/Document.cs:912
+#: ../Pinta.Core/Classes/Document.cs:879
 msgid "Image cannot be pasted"
 msgstr "Billede kan ikke sættes ind"
 
-#: ../Pinta.Core/Classes/Document.cs:913
+#: ../Pinta.Core/Classes/Document.cs:880
 msgid "The clipboard does not contain an image."
 msgstr "Der er ikke et billede i udklipsholderen."
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
 msgstr "Erstat"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
 msgstr "Sammenslut (+) (Ctrl + Venstreklik)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
 msgstr "Udeluk (-) (Højreklik)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:51
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Xor (Ctrl + Right Click)"
 msgstr "Xor (⊻) (Ctrl + Højreklik)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
 msgstr "Gennemskær (Skift + Venstreklik)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
 msgstr " Markeringstilstand: "
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:52
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/TextTool.cs:233
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal"
 msgstr "Normal"
 
@@ -509,6 +514,7 @@ msgid "Color Dodge"
 msgstr "Farveundvigelse"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:57
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
 msgstr "Reflektér"
 
@@ -576,8 +582,6 @@ msgstr "Ændring af billedstørrelse"
 msgid "{0} image ({1})"
 msgstr "{0} billede ({1})"
 
-#. Create a gtk action for each adjustment
-#. Create a gtk action and menu item for each effect
 #: ../Pinta.Core/Managers/EffectsManager.cs:63
 #: ../Pinta.Core/Managers/EffectsManager.cs:98
 msgid "..."
@@ -592,30 +596,33 @@ msgstr "Optegne-effekt"
 msgid "No tool selected."
 msgstr "Intet værktøj valgt."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:104
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:107
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Ikke gemt billede {0}"
 
-#. Start with an empty white layer
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:163
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:166
 msgid "Background"
 msgstr "Baggrund"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:172
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
 msgstr "Nyt billede"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:194
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
+msgid "Unsupported file format"
+msgstr "Filformat ikke understøttet"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:200
 msgid "Open Image"
 msgstr "Åbn billede"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:202
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:208
 msgid "Permission denied"
 msgstr "Adgang nægtet"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:343
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:349
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Kunne ikke åbne fil: {0}"
@@ -632,6 +639,16 @@ msgstr "Sort og hvid"
 msgid "Brightness / Contrast"
 msgstr "Lysstyrke / Kontrast"
 
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Effects/GlowEffect.cs:82
+msgid "Brightness"
+msgstr "Lysstyrke"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+msgid "Contrast"
+msgstr "Kontrast"
+
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
@@ -642,7 +659,20 @@ msgstr "Kurver"
 msgid "Hue / Saturation"
 msgstr "Nuance / Mætning"
 
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Hue"
+msgstr "Nuance"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+msgid "Saturation"
+msgstr "Farvemætning"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
+msgid "Lightness"
+msgstr "Lysstyrke"
+
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
 msgstr "Invertér farver"
 
@@ -651,8 +681,7 @@ msgid "Levels"
 msgstr "Niveauer"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:49
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:20
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
 msgid "Posterize"
 msgstr "Posterisér"
 
@@ -665,6 +694,26 @@ msgstr "Sepia"
 msgid "Levels Adjustment"
 msgstr "Niveaujustering"
 
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
+msgid "Red"
+msgstr "Rød"
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
+msgid "Green"
+msgstr "Grøn"
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
+msgid "Blue"
+msgstr "Blå"
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
+msgid "Linked"
+msgstr "Sammenkædet"
+
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
 msgstr "Tilføj støj"
@@ -674,6 +723,20 @@ msgstr "Tilføj støj"
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
 msgid "Noise"
 msgstr "Støj"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:145
+#: ../Pinta.Effects/Effects/TileEffect.cs:142
+msgid "Intensity"
+msgstr "Intensitet"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
+msgid "Color Saturation"
+msgstr "Farvemætning"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
+msgid "Coverage"
+msgstr "Dækning"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
@@ -688,6 +751,20 @@ msgstr "Bule"
 msgid "Distort"
 msgstr "Forvræng"
 
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:101
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:63
+#: ../Pinta.Effects/Effects/TwistEffect.cs:131
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
+msgid "Amount"
+msgstr "Værdi"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:104
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
+msgid "Offset"
+msgstr "Forskydning"
+
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:29
 msgid "Clouds"
 msgstr "Skyer"
@@ -697,6 +774,18 @@ msgstr "Skyer"
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
 msgstr "Optegne"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:190
+msgid "Scale"
+msgstr "Skala"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:193
+msgid "Power"
+msgstr "Kraft"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:216
+msgid "Seed"
+msgstr "Startværdi"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
@@ -708,6 +797,18 @@ msgstr "Kantdetektion"
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
 msgstr "Stilistisk"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:143
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:140
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:158
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:83
+msgid "Angle"
+msgstr "Vinkel"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
@@ -726,6 +827,20 @@ msgstr "Fragment"
 msgid "Blurs"
 msgstr "Sløringer"
 
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+msgid "Fragments"
+msgstr "Fragmenter"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
+msgid "Distance"
+msgstr "Afstand"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/TileEffect.cs:138
+msgid "Rotation"
+msgstr "Rotation"
+
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
 msgstr "Frostet glas"
@@ -733,6 +848,15 @@ msgstr "Frostet glas"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
 msgstr "Gaussisk sløring"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:260
+#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Effects/MedianEffect.cs:70
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
+msgid "Radius"
+msgstr "Radius"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
@@ -751,9 +875,35 @@ msgstr "Blækskitse"
 msgid "Artistic"
 msgstr "Kunstnerisk"
 
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
+msgid "Ink Outline"
+msgstr "Blækomrids"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
+msgid "Coloring"
+msgstr "Farvelæg"
+
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
 msgstr "Julia fraktal"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
+msgid "Factor"
+msgstr "Faktor"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/WarpEffect.cs:188
+msgid "Quality"
+msgstr "Kvalitet"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Tools/Tools/ZoomTool.cs:48
+msgid "Zoom"
+msgstr "Zoom"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
 msgid "Mandelbrot Fractal"
@@ -763,26 +913,58 @@ msgstr "Mandelbrot Fraktal"
 msgid "Median"
 msgstr "Median"
 
+#: ../Pinta.Effects/Effects/MedianEffect.cs:73
+msgid "Percentile"
+msgstr "Percentil"
+
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
 msgstr "Bevægelsessløring"
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
+msgid "Centered"
+msgstr "Centreret"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
 msgstr "Oliemaleri"
 
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
+msgid "Brush Size"
+msgstr "Penselstørrelse"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
+msgid "Coarseness"
+msgstr "Grovhed"
+
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
-#: ../Pinta.Tools/Tools/TextTool.cs:235
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Outline"
 msgstr "Omrids"
+
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
+msgid "Thickness"
+msgstr "Tykkelse"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
 msgstr "Blyantsskitse"
 
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
+msgid "Pencil Tip Size"
+msgstr "Blyantspidsstørrelse"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
+msgid "Color Range"
+msgstr "Farveområde"
+
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
 msgstr "Pixelér"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:119
+msgid "Cell Size"
+msgstr "Cellestørrelse"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
@@ -792,13 +974,40 @@ msgstr "Polinvertering"
 msgid "Radial Blur"
 msgstr "Radial sløring"
 
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+"Brug lav kvalitet til forhåndsvisning, små billeder og små vinkler. Brug høj "
+"kvalitet for afsluttende kvalitet, store billeder og store vinkler."
+
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
 msgstr "Fjern røde øjne"
 
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
+#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
+msgid "Tolerance"
+msgstr "Tolerance"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
+msgid "Saturation Percentage"
+msgstr "Farvemætningsprocent"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+"Tip: Markér hvert øje med markeringsværktøjet for at opnå det bedste "
+"resultat."
+
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
 msgstr "Reducér støj"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
+msgid "Strength"
+msgstr "Styrke"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
@@ -812,17 +1021,66 @@ msgstr "Gør skarpere"
 msgid "Soften Portrait"
 msgstr "Blødgør portræt"
 
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
+msgid "Softness"
+msgstr "Blødhed"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
+msgid "Lighting"
+msgstr "Belysning"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
+msgid "Warmth"
+msgstr "Varme"
+
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
 msgstr "Glasfliser"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:140
+msgid "Tile Size"
+msgstr "Flisestørrelse"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
 msgstr "Drej"
 
+#: ../Pinta.Effects/Effects/TwistEffect.cs:133
+msgid "Antialias"
+msgstr "Udjævning"
+
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
 msgstr "Ufokuseret"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:19
+msgid "Clamp"
+msgstr "Fastgør"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:21
+msgid "Wrap"
+msgstr "Ombryd"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:25
+msgid "Primary"
+msgstr "Primær"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:27
+msgid "Secondary"
+msgstr "Sekundær"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+#: ../Pinta/Dialogs/NewImageDialog.cs:284
+msgid "Transparent"
+msgstr "Gennemsigtig"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:31
+msgid "Original"
+msgstr "Original"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:191
+msgid "Center Offset"
+msgstr "Centerforskydning"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
@@ -847,11 +1105,6 @@ msgstr "(256, 256)"
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
 msgid "Red  "
 msgstr "Rød  "
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
-msgid "Green"
-msgstr "Grøn"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
@@ -885,18 +1138,6 @@ msgstr "Outputhistogram"
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
 msgstr "Auto"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
-msgid "Red"
-msgstr "Rød"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
-msgid "Blue"
-msgstr "Blå"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.PosterizeDialog.cs:89
-msgid "Linked"
-msgstr "Sammenkædet"
 
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
 #: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
@@ -996,12 +1237,6 @@ msgstr "Formindsk pilstørrelse"
 msgid "Increase arrow size"
 msgstr "Øg pilstørrelse"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
-#: RadialBlurEffect dialog JuliaFractalEffect MandelbrotFractalEffect
-#: EdgeDetectData EmbossEffect ReliefData TwistEffect
-msgid "Angle"
-msgstr "Vinkel"
-
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
 msgstr "Formindsk vinkelforskydning"
@@ -1022,105 +1257,97 @@ msgstr "Formindsk længdeforskydning"
 msgid "Increase length offset"
 msgstr "Øg længdeforskydning"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:52
-msgid "Shape"
-msgstr "Figur"
-
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
 msgstr "Penselbredde"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:315
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
 msgstr "Formindsk penselstørrelse"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:345
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
 msgstr "Forøg penselstørrelse"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:360
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
 msgstr "Fyldestil"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:368
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
 msgstr "Kun omrids"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:369
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
 msgstr "Kun fyld"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
 msgstr "Fyld og omrids"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:383
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
 msgstr "Figurtype"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:391
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
 msgstr "Åbne linje/kurve-serier"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:392
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
 msgstr "Lukkede linje/kurve-serier"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:393
-#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:43
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
 msgstr "Ellipse"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:394
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
 msgstr "Afrundede linjeserier"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:408
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
 msgstr "Ændret figurtype"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:547
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
 msgstr "Punkt slettet"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:564
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
 msgstr "Slettet"
 
-#. Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:613
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:909
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
 msgid "Point Added"
 msgstr "Punkt tilføjet"
 
-#. Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:949
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
 msgstr "Tilføjet"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1039
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
 msgstr "Ændret"
 
-#. Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
-#. Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1298
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1705
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1672
 msgid "Finalized"
 msgstr "Færdiggjort"
 
@@ -1135,10 +1362,6 @@ msgstr "Lukket kurveform"
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
 msgstr "Afrundet linjeform"
-
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
-msgid "Radius"
-msgstr "Radius"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
@@ -1289,10 +1512,6 @@ msgstr "Sammenhængende"
 msgid "Global"
 msgstr "Global"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:75
-msgid "Tolerance"
-msgstr "Tolerance"
-
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
 msgid "Freeform Shape"
 msgstr "Frihåndsfigur"
@@ -1351,11 +1570,11 @@ msgstr "Klik og træk for at tegne omrids for valgt område."
 msgid "Line/Curve"
 msgstr "Linje/kurve"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:63
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:62
 msgid "Magic Wand Select"
 msgstr "Tryllestavsmarkering"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:73
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:72
 msgid "Click to select region of similar color."
 msgstr "Klik for at vælge område med tilsvarende farve."
 
@@ -1379,12 +1598,11 @@ msgstr ""
 "Venstreklik og træk i markeringen for at flytte markeringsomridset. "
 "Højreklik og træk i markeringen for at rotere markeringsomridset."
 
-#. Try to set the default tool to the PaintBrush
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:84
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:82
 msgid "Paintbrush"
 msgstr "Malerpensel"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:96
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
 msgid "Type"
 msgstr "Type"
 
@@ -1420,9 +1638,13 @@ msgstr ""
 msgid "Recolor"
 msgstr "Omfarv"
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:60
-msgid "Left click to replace the secondary color with the primary color."
-msgstr "Venstreklik for at erstatte sekundær farve med primær farve."
+#: ../Pinta.Tools/Tools/RecolorTool.cs:62
+msgid ""
+"Left click to replace the secondary color with the primary color. Right "
+"click to reverse."
+msgstr ""
+"Venstreklik for at erstatte den sekundære farve med den primære farve. "
+"Højreklik for omvendt."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
@@ -1444,15 +1666,15 @@ msgstr "Rektangel"
 msgid "Rounded Rectangle"
 msgstr "Afrundet rektangel"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:81
+#: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
 msgstr "Tekst"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:82
+#: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
 msgstr "Text - Færdiggør"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:88
+#: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1460,61 +1682,57 @@ msgstr ""
 "Venstreklik for at placere markøren, indtast dernæst den ønskede tekst. "
 "Tekstfarve er primær farve."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:141
+#: ../Pinta.Tools/Tools/TextTool.cs:157
 msgid "Font"
 msgstr "Skrifttype"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:192
 msgid "Bold"
 msgstr "Fed"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:183
+#: ../Pinta.Tools/Tools/TextTool.cs:199
 msgid "Italic"
 msgstr "Kursiv"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:190
+#: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "Underline"
 msgstr "Understreg"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:215
 msgid "Left Align"
 msgstr "Venstrejusteret"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:207
+#: ../Pinta.Tools/Tools/TextTool.cs:223
 msgid "Center Align"
 msgstr "Centreret"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:214
+#: ../Pinta.Tools/Tools/TextTool.cs:230
 msgid "Right Align"
 msgstr "Højrejusteret"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:242
 msgid "Text Style"
 msgstr "Typografi"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:234
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Normal and Outline"
 msgstr "Normal og omrids"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:236
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Fill Background"
 msgstr "Fyldt baggrund"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Outline width"
 msgstr "Bredde af omrids"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Decrease outline size"
 msgstr "Formindsk størrelsen af omridset"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Increase outline size"
 msgstr "Forøg størrelsen af omridset"
-
-#: ../Pinta.Tools/Tools/ZoomTool.cs:48
-msgid "Zoom"
-msgstr "Zoom"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
@@ -1544,7 +1762,7 @@ msgstr "Hvis du ikke gemmer, vil ændringer være tabt."
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr ""
+msgstr "Luk _uden at gemme"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
@@ -1562,28 +1780,28 @@ msgstr "Billedfiler"
 msgid "Save Image File"
 msgstr "Gem billedfil"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:186
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta understøtter ikke at gemme billeder i dette filformat."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:198
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
 msgid "Cannot save read only file."
 msgstr "Kan ikke gemme skrivebeskyttet fil."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:213
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
 msgid "Image too large"
 msgstr "Billede for stort"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:214
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO filer kan ikke være større end 255 x 255 billedpunkter."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr "En file kaldet \"{0}\" eksisterer allerede. Vil du overskrive den?"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -1619,11 +1837,11 @@ msgstr "Rotér / Zoom Lag"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Pinta Community Addins - Platformsafhængig"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "Pinta Community Addins - Platformsuafhængig"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:123
 msgid "Contributors to this release:"
@@ -1690,6 +1908,16 @@ msgstr "Ophavsret"
 msgid "by Pinta contributors"
 msgstr "af Pinta bidragyder"
 
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+msgid "Details"
+msgstr "Detaljer"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
+msgid "Report Bug...."
+msgstr "Rapportér fejl..."
+
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
 msgstr "JPEG-kvalitet"
@@ -1702,12 +1930,11 @@ msgstr "Kvalitet: "
 msgid "Name:"
 msgstr "Navn:"
 
-#. Visible checkbox
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:167
 msgid "Visible"
 msgstr "Synlig"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178 GlowEffect dialog
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178
 msgid "Blend Mode"
 msgstr "Blandetilstand"
 
@@ -1715,34 +1942,32 @@ msgstr "Blandetilstand"
 msgid "Opacity:"
 msgstr "Uigennemsigtighed:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:133
-#: ../Pinta/Dialogs/NewImageDialog.cs:170
-#: ../Pinta/Dialogs/NewImageDialog.cs:298
-#: ../Pinta/Dialogs/NewImageDialog.cs:387
+#: ../Pinta/Dialogs/NewImageDialog.cs:162
+#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/Dialogs/NewImageDialog.cs:327
+#: ../Pinta/Dialogs/NewImageDialog.cs:416
 msgid "Clipboard"
-msgstr ""
+msgstr "Udklipsholder"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:133
-#: ../Pinta/Dialogs/NewImageDialog.cs:172
-#: ../Pinta/Dialogs/NewImageDialog.cs:300
-#: ../Pinta/Dialogs/NewImageDialog.cs:387
+#: ../Pinta/Dialogs/NewImageDialog.cs:162
+#: ../Pinta/Dialogs/NewImageDialog.cs:201
+#: ../Pinta/Dialogs/NewImageDialog.cs:329
+#: ../Pinta/Dialogs/NewImageDialog.cs:416
 msgid "Custom"
-msgstr ""
+msgstr "Brugerdefineret"
 
-#. Preset Combo
-#: ../Pinta/Dialogs/NewImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Forudindstilling:"
 
-#. Width Entry
-#: ../Pinta/Dialogs/NewImageDialog.cs:182
+#: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
 msgstr "Bredde:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:189
-#: ../Pinta/Dialogs/NewImageDialog.cs:206
+#: ../Pinta/Dialogs/NewImageDialog.cs:218
+#: ../Pinta/Dialogs/NewImageDialog.cs:235
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
@@ -1750,42 +1975,35 @@ msgstr "Bredde:"
 msgid "pixels"
 msgstr "billedpunkter"
 
-#. Height Entry
-#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/Dialogs/NewImageDialog.cs:228
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
 msgstr "Højde:"
 
-#. Orientation Radio options
-#: ../Pinta/Dialogs/NewImageDialog.cs:216
+#: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientering:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:219
+#: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "Stående"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:227
+#: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "Liggende"
 
-#. Background Color options
-#: ../Pinta/Dialogs/NewImageDialog.cs:236
+#: ../Pinta/Dialogs/NewImageDialog.cs:265
 msgid "Background:"
-msgstr ""
+msgstr "Baggrund:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:239
+#: ../Pinta/Dialogs/NewImageDialog.cs:268
 msgid "White"
-msgstr ""
+msgstr "Hvid"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:247
+#: ../Pinta/Dialogs/NewImageDialog.cs:276
 msgid "Background Color"
-msgstr ""
-
-#: ../Pinta/Dialogs/NewImageDialog.cs:255
-msgid "Transparent"
-msgstr ""
+msgstr "Baggrundsfarve"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -1800,7 +2018,6 @@ msgstr "Sti"
 msgid "Hide"
 msgstr "Skjul"
 
-#. Dockable menuitem
 #: ../Pinta/DockLibrary/DockItem.cs:485
 msgid "Dockable"
 msgstr "Dokbar"
@@ -1818,13 +2035,11 @@ msgstr "Skjul automatisk"
 msgid "Dock"
 msgstr "Dok"
 
-#. Container child hbox1.Gtk.Box+BoxChild
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
 msgstr "Procent:"
 
-#. Container child hbox2.Gtk.Box+BoxChild
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
@@ -1851,55 +2066,55 @@ msgstr "Vis programmets version."
 msgid "number of threads to use for rendering"
 msgstr "antal tråde ved rendering"
 
-#: ../Pinta/Main.cs:123
+#: ../Pinta/Main.cs:122
 msgid "Usage: pinta [files]"
 msgstr "Anvendelse: pinta [filer]"
 
-#: ../Pinta/Main.cs:125
+#: ../Pinta/Main.cs:124
 msgid "Options: "
 msgstr "Indstillinger: "
 
-#: ../Pinta/MainWindow.cs:184
+#: ../Pinta/MainWindow.cs:202
 msgid "_File"
 msgstr "_Fil"
 
-#: ../Pinta/MainWindow.cs:185
+#: ../Pinta/MainWindow.cs:203
 msgid "_Edit"
 msgstr "_Redigér"
 
-#: ../Pinta/MainWindow.cs:187
+#: ../Pinta/MainWindow.cs:205
 msgid "_View"
 msgstr "_Vis"
 
-#: ../Pinta/MainWindow.cs:190
+#: ../Pinta/MainWindow.cs:208
 msgid "_Image"
 msgstr "_Billede"
 
-#: ../Pinta/MainWindow.cs:191
+#: ../Pinta/MainWindow.cs:209
 msgid "_Layers"
 msgstr "_Lag"
 
-#: ../Pinta/MainWindow.cs:192
+#: ../Pinta/MainWindow.cs:210
 msgid "_Adjustments"
 msgstr "_Justeringer"
 
-#: ../Pinta/MainWindow.cs:193
+#: ../Pinta/MainWindow.cs:211
 msgid "Effe_cts"
 msgstr "_Effekter"
 
-#: ../Pinta/MainWindow.cs:194
+#: ../Pinta/MainWindow.cs:212
 msgid "A_dd-ins"
 msgstr "_Udvidelsesmoduler"
 
-#: ../Pinta/MainWindow.cs:196
+#: ../Pinta/MainWindow.cs:214
 msgid "_Window"
 msgstr "_Vindue"
 
-#: ../Pinta/MainWindow.cs:200
+#: ../Pinta/MainWindow.cs:218
 msgid "Tool Windows"
 msgstr "Værktøjsvinduer"
 
-#: ../Pinta/MainWindow.cs:204
+#: ../Pinta/MainWindow.cs:222
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -1927,157 +2142,9 @@ msgstr "Billeder"
 msgid "Tools"
 msgstr "Værktøjer"
 
-#: BulgeEffect dialog FrostedGlassEffect PolarInversionEffect TwistEffect
-#: SharpenData MotionBlurEffect
-msgid "Amount"
-msgstr "Værdi"
-
-#: CloudsEffect dialog
-msgid "Antialias"
-msgstr "Udjævning"
-
-#: OilPaintingEffect dialog
-msgid "Brightness"
-msgstr "Lysstyrke"
-
-#: PixelateData dialog
-msgid "Brush Size"
-msgstr "Penselstørrelse"
-
-#: PolarInversionEffect dialog
-msgid "Cell Size"
-msgstr "Cellestørrelse"
-
-#: MotionBlurEffect dialog
-msgid "Center Offset"
-msgstr "Centerforskydning"
-
-#: OilPaintingEffect dialog
-msgid "Centered"
-msgstr "Centreret"
-
-#: PencilSketchEffect dialog
-msgid "Coarseness"
-msgstr "Grovhed"
-
-#: AddNoiseEffect dialog
-msgid "Color Range"
-msgstr "Farveområde"
-
-#: InkSketchEffect dialog
-msgid "Color Saturation"
-msgstr "Farvemætning"
-
-#: GlowEffect dialog
-msgid "Coloring"
-msgstr "Farvelæg"
-
-#: AddNoiseEffect dialog
-msgid "Contrast"
-msgstr "Kontrast"
-
-#: FragmentEffect dialog
-msgid "Coverage"
-msgstr "Dækning"
-
-#: MotionBlurEffect dialog PolarInversionEffect
-msgid "Distance"
-msgstr "Afstand"
-
-#: JuliaFractalEffect dialog
+#: Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Kantopførsel"
-
-#: MandelbrotFractalEffect dialog FragmentEffect
-msgid "Factor"
-msgstr "Faktor"
-
-#: InkSketchEffect dialog
-msgid "Fragments"
-msgstr "Fragmenter"
-
-#: TileEffect dialog
-msgid "Ink Outline"
-msgstr "Blækomrids"
-
-#: AddNoiseEffect dialog OutlineEffect MandelbrotFractalEffect
-msgid "Intensity"
-msgstr "Intensitet"
-
-#: RadialBlurEffect dialog
-msgid "Lighting"
-msgstr "Belysning"
-
-#: ZoomBlurEffect dialog BulgeEffect PencilSketchEffect
-msgid "Offset"
-msgstr "Forskydning"
-
-#: MedianEffect dialog
-msgid "Pencil Tip Size"
-msgstr "Blyantspidsstørrelse"
-
-#: CloudsEffect dialog
-msgid "Percentile"
-msgstr "Percentil"
-
-#: RadialBlurEffect dialog
-msgid "Power"
-msgstr "Kraft"
-
-#: PolarInversionEffect dialog JuliaFractalEffect MandelbrotFractalEffect
-#: GaussianBlurEffect
-msgid "Quality"
-msgstr "Kvalitet"
-
-#: TileEffect dialog RedEyeRemoveData
-msgid "Rotation"
-msgstr "Rotation"
-
-#: CloudsEffect dialog
-msgid "Saturation percentage"
-msgstr "Mætningsprocent"
-
-#: CloudsEffect dialog
-msgid "Scale"
-msgstr "Skala"
-
-#: SoftenPortraitData dialog
-msgid "Seed"
-msgstr "Startværdi"
-
-#: ReduceNoiseEffect dialog
-msgid "Softness"
-msgstr "Blødhed"
-
-#: OutlineEffect dialog
-msgid "Strength"
-msgstr "Styrke"
-
-#: TileEffect dialog
-msgid "Thickness"
-msgstr "Tykkelse"
-
-#: RedEyeRemoveData dialog
-msgid "Tile Size"
-msgstr "Flisestørrelse"
-
-#: JuliaFractalEffect dialog
-msgid "Warmth"
-msgstr "Varme"
-
-#: RadialBlurEffect dialog
-msgid ""
-"Use low quality for previews, small images, and small angles.  Use high "
-"quality for final quality, large images, and large angles."
-msgstr ""
-"Brug lav kvalitet til forhåndsvisning, små billeder og små vinkler. Brug høj "
-"kvalitet for afsluttende kvalitet, store billeder og store vinkler."
-
-#: RedEyeRemoveEffect dialog
-msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr ""
-"Tip: Markér hvert øje med markeringsværktøjet for at opnå det bedste "
-"resultat."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
@@ -2331,11 +2398,6 @@ msgstr "Arkiv:"
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
 msgstr "Installér fra fil..."
-
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
-#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
-msgid "Details"
-msgstr "Detaljer"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
