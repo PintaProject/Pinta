@@ -191,7 +191,7 @@ namespace Pinta
 
             // Preset Combo
             var size_label = new Label (Catalog.GetString ("Preset:"));
-            size_label.SetAlignment (0f, .5f);
+            size_label.SetAlignment (1f, .5f);
 
             var preset_entries = new List<string> ();
 
@@ -204,12 +204,12 @@ namespace Pinta
             preset_combo = new ComboBox (preset_entries.ToArray ());
             preset_combo.Active = 0;
 
-            layout_table.Attach (size_label, 0, 1, 0, 1, AttachOptions.Shrink, AttachOptions.Fill, 0, 0);
+            layout_table.Attach (size_label, 0, 1, 0, 1, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
             layout_table.Attach (preset_combo, 1, 2, 0, 1, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
             
             // Width Entry
             var width_label = new Label (Catalog.GetString ("Width:"));
-            width_label.SetAlignment (0f, .5f);
+            width_label.SetAlignment (1f, .5f);
 
             width_entry = new Entry ();
             width_entry.WidthRequest = 50;
@@ -221,12 +221,12 @@ namespace Pinta
             width_hbox.PackStart (width_entry, false, false, 0);
             width_hbox.PackStart (width_units, false, false, 5);
 
-            layout_table.Attach (width_label, 0, 1, 1, 2, AttachOptions.Shrink, AttachOptions.Fill, 0, 0);
+            layout_table.Attach (width_label, 0, 1, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
             layout_table.Attach (width_hbox, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
 
             // Height Entry
             var height_label = new Label (Catalog.GetString ("Height:"));
-            height_label.SetAlignment (0f, .5f);
+            height_label.SetAlignment (1f, .5f);
 
             height_entry = new Entry ();
             height_entry.WidthRequest = 50;
@@ -237,8 +237,8 @@ namespace Pinta
             var height_hbox = new HBox ();
             height_hbox.PackStart (height_entry, false, false, 0);
             height_hbox.PackStart (height_units, false, false, 5);
-            
-            layout_table.Attach (height_label, 0, 1, 2, 3, AttachOptions.Shrink, AttachOptions.Fill, 0, 0);
+
+            layout_table.Attach (height_label, 0, 1, 2, 3, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
             layout_table.Attach (height_hbox, 1, 2, 2, 3, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
 
             // Orientation Radio options
@@ -291,7 +291,6 @@ namespace Pinta
 
             // Put all the options together
             var options_vbox = new VBox ();
-            options_vbox.WidthRequest = 165;
 
             options_vbox.PackStart (layout_table, false, false, 3);
             options_vbox.PackStart (orientation_label, false, false, 4);
