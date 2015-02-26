@@ -81,7 +81,6 @@ namespace Pinta.Tools
 				double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
 				double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
 				shape_origin = new PointD(x, y);
-                doc.Selection.selOrigin = shape_origin;
 
                 doc.PreviousSelection.Dispose ();
 				doc.PreviousSelection = doc.Selection.Clone();
@@ -115,6 +114,7 @@ namespace Pinta.Tools
                     SelectionModeHandler.PerformSelectionMode (combine_mode,
                         DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
 
+                    doc.Selection.selOrigin = shape_origin;
                     doc.Selection.selEnd = shape_end;
 					PintaCore.Workspace.Invalidate();
 				}
@@ -344,12 +344,13 @@ namespace Pinta.Tools
 			base.AfterUndo();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
+
+            if (PintaCore.Tools.CurrentTool == this)
+                doc.ToolLayer.Hidden = false;
+
 			shape_origin = doc.Selection.selOrigin;
 			shape_end = doc.Selection.selEnd;
 			updateHandler();
-
-            if (PintaCore.Tools.CurrentTool == this)
-                ReDraw (Gdk.ModifierType.None);
 		}
 
 		public override void AfterRedo()
@@ -358,12 +359,12 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
+            if (PintaCore.Tools.CurrentTool == this)
+                doc.ToolLayer.Hidden = false;
+
 			shape_origin = doc.Selection.selOrigin;
 			shape_end = doc.Selection.selEnd;
 			updateHandler();
-
-            if (PintaCore.Tools.CurrentTool == this)
-                ReDraw (Gdk.ModifierType.None);
 		}
 
 		/// <summary>
