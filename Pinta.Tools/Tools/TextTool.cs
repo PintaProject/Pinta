@@ -296,8 +296,6 @@ namespace Pinta.Tools
 			}
 		}
 
-		string temp_size;
-
 		private void HandleFontChanged (object sender, EventArgs e)
 		{
 			PintaCore.Chrome.Canvas.GrabFocus ();
