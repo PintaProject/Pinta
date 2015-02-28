@@ -61,12 +61,11 @@ namespace Pinta
 		string[] authors = new string[] {
 			"Andrew Davis",
 			"Cameron White",
-			"David Nabraczky",
 			"Don McComb",
-			"Elvis Alistar",
+			"Jonathan Bergknoff",
 			"Jonathan Pobst",
-			"Robert Nordan",
-			"Tom Kadwill"
+            "Marius Ungureanu",
+			"Robert Nordan"
 		};
 
 		string[] oldAuthors = new string[] {
@@ -79,6 +78,9 @@ namespace Pinta
 			"Balló György",
 			"Cameron White",
 			"Ciprian Mustiata",
+			"David Nabraczky",
+			"Don McComb",
+			"Elvis Alistar",
 			"Felix Schmutz",
 			"Greg Lowe",
 			"Hanh Pham",
@@ -100,7 +102,8 @@ namespace Pinta
 			"Obinou Conseil",
 			"Olivier Dufour",
 			"Richard Cohn",
-			"Robert Nordan"
+			"Robert Nordan",
+			"Tom Kadwill"
 		};
 
 		public ScrollBox ()
