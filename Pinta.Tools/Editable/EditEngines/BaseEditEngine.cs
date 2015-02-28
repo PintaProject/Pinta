@@ -1632,6 +1632,9 @@ namespace Pinta.Tools
 		/// </summary>
 		protected void FinalizeAllShapes()
 		{
+            if (SEngines.Count == 0)
+                return;
+
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			ImageSurface undoSurface = doc.CurrentUserLayer.Surface.Clone();
