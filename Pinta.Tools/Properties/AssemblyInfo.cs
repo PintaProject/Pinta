@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Mono.Addins;
+using Pinta.Core;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -33,10 +34,10 @@ using Mono.Addins;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ("1.6.0.0")]
-[assembly: AssemblyFileVersion ("1.6.0.0")]
+[assembly: AssemblyVersion (PintaCore.ApplicationVersion)]
+[assembly: AssemblyFileVersion (PintaCore.ApplicationVersion)]
 
-[assembly: Addin ("DefaultTools", "1.6", Category = "Core")]
+[assembly: Addin ("DefaultTools", PintaCore.ApplicationVersion, Category = "Core")]
 [assembly: AddinName ("Default Tools")]
 [assembly: AddinDescription ("The default tools and brushes that ship with Pinta")]
-[assembly: AddinDependency ("Pinta", "1.6")]
+[assembly: AddinDependency ("Pinta", PintaCore.ApplicationVersion)]

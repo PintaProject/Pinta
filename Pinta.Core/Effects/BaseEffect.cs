@@ -28,8 +28,9 @@ using System;
 using Cairo;
 using Mono.Unix;
 using Mono.Addins;
+using Pinta.Core;
 
-[assembly: AddinRoot ("Pinta", "1.6")]
+[assembly: AddinRoot ("Pinta", PintaCore.ApplicationVersion)]
 
 namespace Pinta.Core
 {
