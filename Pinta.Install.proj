@@ -20,6 +20,9 @@
     <Translation Include="po/ar.po">
       <Code>ar</Code>
     </Translation>
+    <Translation Include="po/ast.po">
+      <Code>ast</Code>
+    </Translation>
     <Translation Include="po/az.po">
       <Code>az</Code>
     </Translation>

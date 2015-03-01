@@ -62,6 +62,13 @@
                 </Component>
               </Directory>
             </Directory>
+            <Directory Id="ast" Name="ast">
+              <Directory Id="LC_MESSAGES_AST" Name='LC_MESSAGES'>
+                <Component Id="AstTranslation" Guid="49844F9D-629F-49FA-9E2C-FC5DBEA1D336">
+                  <File Id="pinta_ast" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ast\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
             <Directory Id="az" Name="az">
               <Directory Id="LC_MESSAGES_AZ" Name='LC_MESSAGES'>
                 <Component Id="AzTranslation" Guid="D7B2100A-E9E1-42FB-90F1-504EDE35FDAC">
@@ -475,6 +482,7 @@
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="AfTranslation" />
       <ComponentRef Id="ArTranslation" />
+      <ComponentRef Id="AstTranslation" />
       <ComponentRef Id="AzTranslation" />
       <ComponentRef Id="BeTranslation" />
       <ComponentRef Id="BgTranslation" />
