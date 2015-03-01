@@ -1,4 +1,4 @@
-- BuildVersion: 1.6.0.{BuildCounter}
+- BuildVersion: 1.7.0.{BuildCounter}
 
 ## Configuration: Windows
 
