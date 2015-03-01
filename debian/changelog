@@ -1,3 +1,9 @@
+pinta (1.5-0ppa3~trusty1) trusty; urgency=medium
+
+  * New upstream release with numerous bug fixes and new features.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Sat, 24 May 2014 15:20:20 -0400
+
 pinta (1.4-0ppa1~saucy1) saucy; urgency=low
 
   * New upstream release with numerous bug fixes and new features.
