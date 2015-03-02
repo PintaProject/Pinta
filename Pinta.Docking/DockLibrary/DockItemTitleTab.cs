@@ -53,9 +53,9 @@ namespace MonoDevelop.Components.Docking
 
 		static Gdk.Cursor fleurCursor = new Gdk.Cursor (Gdk.CursorType.Fleur);
 
-		static Xwt.Drawing.Image pixClose;
-		static Xwt.Drawing.Image pixAutoHide;
-		static Xwt.Drawing.Image pixDock;
+		static Gdk.Pixbuf pixClose;
+        static Gdk.Pixbuf pixAutoHide;
+        static Gdk.Pixbuf pixDock;
 
         static double PixelScale = GtkWorkarounds.GetPixelScale ();
 
@@ -68,9 +68,9 @@ namespace MonoDevelop.Components.Docking
 
 		static DockItemTitleTab ()
 		{
-			pixClose = Xwt.Drawing.Image.FromResource ("pad-close-9.png");
-			pixAutoHide = Xwt.Drawing.Image.FromResource ("pad-minimize-9.png");
-			pixDock = Xwt.Drawing.Image.FromResource ("pad-dock-9.png");
+            pixClose = GdkExtensions.FromResource ("pad-close-9.png");
+            pixAutoHide = GdkExtensions.FromResource ("pad-minimize-9.png");
+            pixDock = GdkExtensions.FromResource ("pad-dock-9.png");
 		}
 		
 		public DockItemTitleTab (DockItem item, DockFrame frame)
@@ -128,7 +128,7 @@ namespace MonoDevelop.Components.Docking
 				HeightRequest = visualStyle.PadTitleHeight != null ? (int)(visualStyle.PadTitleHeight.Value * PixelScale) : -1;
 		}
 
-		public void SetLabel (Gtk.Widget page, Xwt.Drawing.Image icon, string label)
+        public void SetLabel (Gtk.Widget page, Gdk.Pixbuf icon, string label)
 		{
 			this.label = label;
 			this.page = page;
@@ -142,7 +142,7 @@ namespace MonoDevelop.Components.Docking
 			box.Spacing = 2;
 			
 			if (icon != null) {
-				tabIcon = new Xwt.ImageView (icon).ToGtkWidget ();
+				tabIcon = new ImageView (icon);
 				tabIcon.Show ();
 				box.PackStart (tabIcon, false, false, 0);
 			} else

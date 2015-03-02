@@ -74,7 +74,7 @@ namespace Pinta
 			documentDockItem.DrawFrame = false;
 			documentDockItem.Label = Catalog.GetString ("Canvas");
 			documentDockItem.Content = mainTable;
-			documentDockItem.Icon = Xwt.Drawing.Image.FromStream (PintaCore.Resources.GetResourceIconStream ("Menu.Effects.Artistic.OilPainting.png"));
+			documentDockItem.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png");
 
 			//rulers
 			hruler = new HRuler ();

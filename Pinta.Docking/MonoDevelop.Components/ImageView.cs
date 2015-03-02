@@ -29,21 +29,21 @@ using MonoDevelop.Components.Docking;
 
 namespace MonoDevelop.Components
 {
-	public class ImageView: Gtk.DrawingArea
+	class ImageView: Gtk.DrawingArea
 	{
-		Xwt.Drawing.Image image;
+        Gdk.Pixbuf image;
 
 		public ImageView ()
 		{
 			WidgetFlags |= Gtk.WidgetFlags.AppPaintable | Gtk.WidgetFlags.NoWindow;
 		}
 
-		public ImageView (Xwt.Drawing.Image image): this ()
+		public ImageView (Gdk.Pixbuf image): this ()
 		{
 			this.image = image;
 		}
 
-		public Xwt.Drawing.Image Image {
+		public Gdk.Pixbuf Image {
 			get { return image; }
 			set {
 				image = value;

@@ -33,7 +33,7 @@ using Gtk;
 
 namespace MonoDevelop.Components.Docking
 {
-	public static class GtkWorkarounds
+	static class GtkWorkarounds
 	{
 		const string LIBOBJC ="/usr/lib/libobjc.dylib";
 		const string USER32DLL = "User32.dll";

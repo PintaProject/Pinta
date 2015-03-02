@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 
 namespace MonoDevelop.Components.Docking
 {
-	public static class PangoUtil
+	static class PangoUtil
 	{
 		internal const string LIBGTK          = "libgtk-win32-2.0-0.dll";
 		internal const string LIBATK          = "libatk-1.0-0.dll";

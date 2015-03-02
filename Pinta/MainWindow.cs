@@ -45,8 +45,6 @@ namespace Pinta
 
 		public MainWindow ()
 		{
-            Xwt.Application.InitializeAsGuest (Xwt.ToolkitType.Gtk);
-            
             // Build our window
 			CreateWindow ();
 

@@ -179,8 +179,8 @@ namespace MonoDevelop.Components.Docking
 
 			HBox box = new HBox (false, 3);
 			if (draggedItem.Icon != null) {
-				var img = new Xwt.ImageView (draggedItem.Icon);
-				box.PackStart (img.ToGtkWidget (), false, false, 0);
+				var img = new ImageView (draggedItem.Icon);
+				box.PackStart (img, false, false, 0);
 			}
 			Gtk.Label la = new Label ();
 			la.Markup = draggedItem.Label;

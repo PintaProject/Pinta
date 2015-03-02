@@ -31,8 +31,22 @@ using System.Runtime.InteropServices;
 
 namespace MonoDevelop.Components.Docking
 {
-	internal static class CairoExtensions
+	static class CairoExtensions
 	{
+        public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, double x, double y)
+        {
+            g.Save ();
+
+            Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, x, y);
+            g.Paint ();
+            g.Restore ();
+        }
+
+        public static void DrawImage (this Cairo.Context s, Gtk.Widget widget, Gdk.Pixbuf image, double x, double y)
+        {
+            s.DrawPixbuf (image, x, y);
+        }
+
         // The Color property is deprecated, so use this extension method until SetSourceColor is officially available everywhere.
         public static void SetSourceColor (this Context g, Color c)
         {

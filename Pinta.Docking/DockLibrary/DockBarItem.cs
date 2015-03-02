@@ -41,19 +41,19 @@ namespace MonoDevelop.Components.Docking
 	{
 		// This class should be subclassed from Gtk.Misc, but there is no reasonable way to do that due to there being no bindings to gtk_widget_set_has_window
 
-		Xwt.Drawing.Image primary, secondary;
+        Gdk.Pixbuf primary, secondary;
 
 		double secondaryOpacity;
 
-		public CrossfadeIcon (Xwt.Drawing.Image primary, Xwt.Drawing.Image secondary)
+        public CrossfadeIcon (Gdk.Pixbuf primary, Gdk.Pixbuf secondary)
 		{
 			if (primary == null)
 				throw new ArgumentNullException ("primary");
 			if (secondary == null)
 				throw new ArgumentNullException ("secondary");
 
-			this.primary = primary;
-			this.secondary = secondary;
+			this.primary = (Gdk.Pixbuf)primary.Clone ();
+            this.secondary = (Gdk.Pixbuf)secondary.Clone ();
 		}
 
 		void IAnimatable.BatchBegin () { }
@@ -98,7 +98,7 @@ namespace MonoDevelop.Components.Docking
 			return false;
 		}
 
-		void RenderIcon (Cairo.Context context, Xwt.Drawing.Image surface, double opacity)
+        void RenderIcon (Cairo.Context context, Gdk.Pixbuf surface, double opacity)
 		{
 			context.DrawImage (this, surface.WithAlpha (opacity),
 			                          Allocation.X + (Allocation.Width - surface.Width) / 2,

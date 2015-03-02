@@ -34,7 +34,7 @@ using Gtk;
 
 namespace MonoDevelop.Components.Docking
 {
-    internal static class GtkExtensions
+    static class GtkExtensions
 	{
         internal const string LIBGTK = "libgtk-win32-2.0-0.dll";
         internal const string LIBATK = "libatk-1.0-0.dll";
@@ -44,8 +44,6 @@ namespace MonoDevelop.Components.Docking
 
         static bool oldMacKeyHacks = false;
         static bool supportsHiResIcons = true;
-
-        static readonly Xwt.Toolkit gtkToolkit = Xwt.Toolkit.Load (Xwt.ToolkitType.Gtk);
 
         public static Gdk.Point GetScreenCoordinates (this Gtk.Widget w, Gdk.Point p)
         {
@@ -67,16 +65,6 @@ namespace MonoDevelop.Components.Docking
         public static IDisposable SubscribeLeaveEvent (this Gtk.Widget w, System.Action leaveHandler)
         {
             return new LeaveEventData (w, leaveHandler);
-        }
-
-        public static Gtk.Widget ToGtkWidget (this Xwt.Widget widget)
-        {
-            return (Gtk.Widget)gtkToolkit.GetNativeWidget (widget);
-        }
-
-        public static void DrawImage (this Cairo.Context s, Gtk.Widget widget, Xwt.Drawing.Image image, double x, double y)
-        {
-            gtkToolkit.RenderImage (widget, s, image, x, y);
         }
 
         public static Gdk.Color ToGdkColor (this Xwt.Drawing.Color color)

@@ -41,7 +41,7 @@ namespace Pinta
 
 			toolbox_item.Label = Catalog.GetString ("Tools");
 			toolbox_item.Content = toolbox;
-			toolbox_item.Icon = Xwt.Drawing.Image.FromStream (PintaCore.Resources.GetResourceIconStream ("Tools.Pencil.png"));
+			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
 			toolbox_item.DefaultWidth = 65;
             

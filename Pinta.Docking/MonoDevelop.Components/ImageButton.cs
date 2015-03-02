@@ -24,13 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using MonoDevelop.Components.Docking;
 
 namespace MonoDevelop.Components
 {
-	public class ImageButton: Gtk.EventBox
+	class ImageButton: Gtk.EventBox
 	{
-		Xwt.Drawing.Image image;
-		Xwt.Drawing.Image inactiveImage;
+        Gdk.Pixbuf image;
+        Gdk.Pixbuf inactiveImage;
 		ImageView imageWidget;
 		bool hasInactiveImage;
 		bool hover;
@@ -45,11 +46,11 @@ namespace MonoDevelop.Components
 			Add (imageWidget);
 		}
 
-		public Xwt.Drawing.Image Image {
+		public Gdk.Pixbuf Image {
 			get { return image; }
 			set {
 				image = value;
-				Xwt.Drawing.Image oldInactive = null;
+                Gdk.Pixbuf oldInactive = null;
 				if (!hasInactiveImage) {
 					oldInactive = inactiveImage;
 					inactiveImage = image != null ? image.WithAlpha (0.5) : null;
@@ -60,7 +61,7 @@ namespace MonoDevelop.Components
 			}
 		}
 
-		public Xwt.Drawing.Image InactiveImage {
+		public Gdk.Pixbuf InactiveImage {
 			get { return hasInactiveImage ? inactiveImage : null; }
 			set {
 				if (!hasInactiveImage && inactiveImage != null)
