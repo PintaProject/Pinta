@@ -56,36 +56,28 @@
     <Compile Include="DockLibrary\DockItemBehavior.cs" />
     <Compile Include="DockLibrary\DockItemContainer.cs" />
     <Compile Include="DockLibrary\DockItemStatus.cs" />
+    <Compile Include="DockLibrary\DockItemTitleTab.cs" />
     <Compile Include="DockLibrary\DockItemToolbar.cs" />
     <Compile Include="DockLibrary\DockLayout.cs" />
     <Compile Include="DockLibrary\DockObject.cs" />
     <Compile Include="DockLibrary\DockPosition.cs" />
-    <Compile Include="DockLibrary\HslColor.cs" />
+    <Compile Include="DockLibrary\DockVisualStyle.cs" />
     <Compile Include="DockLibrary\PlaceholderWindow.cs" />
-    <Compile Include="DockLibrary\ShadedContainer.cs" />
     <Compile Include="DockLibrary\TabStrip.cs" />
     <Compile Include="Extensions\CairoExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
-      <LogicalName>stock-auto-hide.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-close-12.png">
-      <LogicalName>stock-close-12.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-dock.png">
-      <LogicalName>stock-dock.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-menu-left-12.png">
-      <LogicalName>stock-menu-left-12.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-menu-right-12.png">
-      <LogicalName>stock-menu-right-12.png</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-close-9%402x.png" />
+    <EmbeddedResource Include="DockLibrary\icons\pad-close-9.png" />
+    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9%402x.png" />
+    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9.png" />
+    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9%402x.png" />
+    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png" />
+    <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="readme.txt" />
+    <Folder Include="Classes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -32,19 +32,27 @@
 
 using System;
 using Gtk;
+using MonoDevelop.Ide;
 
 namespace MonoDevelop.Components.Docking
 {
 	class DockFrameTopLevel: EventBox
 	{
 		int x, y;
+		int width, height;
+		bool repositionRequested;
+		DockFrame frame;
+
+		public DockFrameTopLevel (DockFrame frame)
+		{
+			this.frame = frame;
+		}
 		
 		public int X {
 			get { return x; }
 			set {
 				x = value;
-				if (Parent != null)
-					Parent.QueueResize ();
+				UpdateWindowPos ();
 			}
 		}
 		
@@ -52,10 +60,85 @@ namespace MonoDevelop.Components.Docking
 			get { return y; }
 			set {
 				y = value;
-				if (Parent != null)
-					Parent.QueueResize ();
+				UpdateWindowPos ();
 			}
 		}
+
+		public Gdk.Size Size {
+			get {
+				if (ContainerWindow != null) {
+					int w, h;
+					ContainerWindow.GetSize (out w, out h);
+					return new Gdk.Size (w, h);
+				} else {
+					return new Gdk.Size (WidthRequest, HeightRequest);
+				}
+			}
+			set {
+				width = value.Width;
+				height = value.Height;
+				if (ContainerWindow != null)
+					UpdateWindowPos ();
+				else {
+					WidthRequest = value.Width;
+					HeightRequest = value.Height;
+				}
+			}
+		}
+
+		public int Width {
+			get {
+				if (ContainerWindow != null) {
+					int w, h;
+					ContainerWindow.GetSize (out w, out h);
+					return w;
+				} else
+					return WidthRequest;
+			}
+			set {
+				width = value;
+				if (ContainerWindow != null)
+					UpdateWindowPos ();
+				else
+					WidthRequest = value;
+			}
+		}
+
+		public int Height {
+			get {
+				if (ContainerWindow != null) {
+					int w, h;
+					ContainerWindow.GetSize (out w, out h);
+					return h;
+				} else
+					return HeightRequest;
+			}
+			set {
+				height = value;
+				if (ContainerWindow != null)
+					UpdateWindowPos ();
+				else
+					HeightRequest = value;
+			}
+		}
+
+
+		void UpdateWindowPos ()
+		{
+			if (ContainerWindow != null) {
+				if (!repositionRequested && width != 0 && height != 0) {
+					repositionRequested = true;
+					Application.Invoke (delegate {
+						var pos = frame.GetScreenCoordinates (new Gdk.Point (x, y));
+						DesktopService.PlaceWindow (ContainerWindow, pos.X, pos.Y, width, height);
+						repositionRequested = false;
+					});
+				}
+			} else if (Parent != null)
+				Parent.QueueResize ();
+		}
+
+		internal Gtk.Window ContainerWindow { get; set; }
 	}
 
 }

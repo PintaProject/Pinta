@@ -31,33 +31,34 @@
 using Gtk; 
 
 using System;
+using MonoDevelop.Ide.Gui;
+using System.Linq;
+using MonoDevelop.Core;
+using MonoDevelop.Ide;
 
 namespace MonoDevelop.Components.Docking
 {
-	class TabStrip: Notebook
+	class TabStrip: Gtk.EventBox
 	{
 		int currentTab = -1;
-		bool ellipsized = true;
 		HBox box = new HBox ();
-		DockFrame frame;
 		Label bottomFiller = new Label ();
-		
+		DockVisualStyle visualStyle;
+
 		public TabStrip (DockFrame frame)
 		{
-			this.frame = frame;
-			frame.ShadedContainer.Add (this);
 			VBox vbox = new VBox ();
-			box = new HBox ();
+			box = new TabStripBox () { TabStrip = this };
 			vbox.PackStart (box, false, false, 0);
-			vbox.PackStart (bottomFiller, false, false, 0);
-			AppendPage (vbox, null);
-			ShowBorder = false;
-			ShowTabs = false;
+		//	vbox.PackStart (bottomFiller, false, false, 0);
+			Add (vbox);
 			ShowAll ();
 			bottomFiller.Hide ();
 			BottomPadding = 3;
+			WidthRequest = 0;
+			box.Removed += HandleRemoved;
 		}
-		
+
 		public int BottomPadding {
 			get { return bottomFiller.HeightRequest; }
 			set {
@@ -65,26 +66,44 @@ namespace MonoDevelop.Components.Docking
 				bottomFiller.Visible = value > 0;
 			}
 		}
+
+		public DockVisualStyle VisualStyle {
+			get { return visualStyle; }
+			set {
+				visualStyle = value;
+				box.QueueDraw ();
+			}
+		}
 		
-		public void AddTab (Gtk.Widget page, Gdk.Pixbuf icon, string label)
+		public void AddTab (DockItemTitleTab tab)
 		{
-			Tab tab = new Tab ();
-			tab.SetLabel (page, icon, label);
-			tab.ShowAll ();
-			box.PackStart (tab, true, true, 0);
+			if (tab.Parent != null)
+				((Gtk.Container)tab.Parent).Remove (tab);
+
+			//box.PackStart (tab, true, true, 0);
+			box.PackStart (tab, false, false, 0);
+			tab.WidthRequest = tab.LabelWidth;
 			if (currentTab == -1)
 				CurrentTab = box.Children.Length - 1;
 			else {
 				tab.Active = false;
-				page.Hide ();
+				tab.Page.Hide ();
 			}
 			
 			tab.ButtonPressEvent += OnTabPress;
 		}
-		
-		public void SetTabLabel (Gtk.Widget page, Gdk.Pixbuf icon, string label)
+
+		void HandleRemoved (object o, RemovedArgs args)
 		{
-			foreach (Tab tab in box.Children) {
+			Gtk.Widget w = args.Widget;
+			w.ButtonPressEvent -= OnTabPress;
+			if (currentTab >= box.Children.Length)
+				currentTab = box.Children.Length - 1;
+		}
+
+		public void SetTabLabel (Gtk.Widget page, Xwt.Drawing.Image icon, string label)
+		{
+			foreach (DockItemTitleTab tab in box.Children) {
 				if (tab.Page == page) {
 					tab.SetLabel (page, icon, label);
 					UpdateEllipsize (Allocation);
@@ -93,6 +112,11 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
+		public void UpdateStyle (DockItem item)
+		{
+			QueueResize ();
+		}
+
 		public int TabCount {
 			get { return box.Children.Length; }
 		}
@@ -103,13 +127,13 @@ namespace MonoDevelop.Components.Docking
 				if (currentTab == value)
 					return;
 				if (currentTab != -1) {
-					Tab t = (Tab) box.Children [currentTab];
+					DockItemTitleTab t = (DockItemTitleTab) box.Children [currentTab];
 					t.Page.Hide ();
 					t.Active = false;
 				}
 				currentTab = value;
 				if (currentTab != -1) {
-					Tab t = (Tab) box.Children [currentTab];
+					DockItemTitleTab t = (DockItemTitleTab) box.Children [currentTab];
 					t.Active = true;
 					t.Page.Show ();
 				}
@@ -119,7 +143,7 @@ namespace MonoDevelop.Components.Docking
 		new public Gtk.Widget CurrentPage {
 			get {
 				if (currentTab != -1) {
-					Tab t = (Tab) box.Children [currentTab];
+					DockItemTitleTab t = (DockItemTitleTab) box.Children [currentTab];
 					return t.Page;
 				} else
 					return null;
@@ -128,7 +152,7 @@ namespace MonoDevelop.Components.Docking
 				if (value != null) {
 					Gtk.Widget[] tabs = box.Children;
 					for (int n = 0; n < tabs.Length; n++) {
-						Tab tab = (Tab) tabs [n];
+						DockItemTitleTab tab = (DockItemTitleTab) tabs [n];
 						if (tab.Page == value) {
 							CurrentTab = n;
 							return;
@@ -141,20 +165,18 @@ namespace MonoDevelop.Components.Docking
 		
 		public void Clear ()
 		{
-			ellipsized = true;
 			currentTab = -1;
-			foreach (Widget w in box.Children) {
+			foreach (DockItemTitleTab w in box.Children)
 				box.Remove (w);
-				w.Destroy ();
-			}
 		}
 		
 		void OnTabPress (object s, Gtk.ButtonPressEventArgs args)
 		{
 			CurrentTab = Array.IndexOf (box.Children, s);
-			Tab t = (Tab) s;
+			DockItemTitleTab t = (DockItemTitleTab) s;
 			DockItem.SetFocus (t.Page);
 			QueueDraw ();
+			args.RetVal = true;
 		}
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
@@ -165,243 +187,111 @@ namespace MonoDevelop.Components.Docking
 		
 		void UpdateEllipsize (Gdk.Rectangle allocation)
 		{
-			int tsize = 0;
-			foreach (Tab tab in box.Children)
-				tsize += tab.LabelWidth;
+			int tabsSize = 0;
+			var children = box.Children;
 
-			bool ellipsize = tsize > allocation.Width;
-			if (ellipsize != ellipsized) {
-				foreach (Tab tab in box.Children) {
-					tab.SetEllipsize (ellipsize);
-					Gtk.Box.BoxChild bc = (Gtk.Box.BoxChild) box [tab];
-					bc.Expand = bc.Fill = ellipsize;
-				}
-				ellipsized = ellipsize;
-			}
-		}
+			foreach (DockItemTitleTab tab in children)
+				tabsSize += tab.LabelWidth;
 
-		public Gdk.Rectangle GetTabArea (int ntab)
-		{
-			Gtk.Widget[] tabs = box.Children;
-			Tab tab = (Tab) tabs[ntab];
-			Gdk.Rectangle rect = GetTabArea (tab, ntab);
-			int x, y;
-			tab.GdkWindow.GetRootOrigin (out x, out y);
-			rect.X += x;
-			rect.Y += y;
-			return rect;
-		}
-		
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			frame.ShadedContainer.DrawBackground (this);
+			var totalWidth = allocation.Width;
 
-			Gtk.Widget[] tabs = box.Children;
-			for (int n=tabs.Length - 1; n>=0; n--) {
-				Tab tab = (Tab) tabs [n];
-				if (n != currentTab)
-					DrawTab (evnt, tab, n);
-			}
-			if (currentTab != -1) {
-				Tab ctab = (Tab) tabs [currentTab];
-//				GdkWindow.DrawLine (Style.DarkGC (Gtk.StateType.Normal), Allocation.X, Allocation.Y, Allocation.Right, Allocation.Y);
-				DrawTab (evnt, ctab, currentTab);
-			}
-			return base.OnExposeEvent (evnt);
-		}
+			int[] sizes = new int[children.Length];
+			double ratio = (double) allocation.Width / (double) tabsSize;
 
-		public Gdk.Rectangle GetTabArea (Tab tab, int pos)
-		{
-			Gdk.Rectangle rect = tab.Allocation;
+			if (ratio > 1 && visualStyle.ExpandedTabs.Value) {
+				// The tabs have to fill all the available space. To get started, assume that all tabs with have the same size 
+				var tsize = totalWidth / children.Length;
+				// Maybe the assigned size is too small for some tabs. If it happens the extra space it requires has to be taken
+				// from tabs which have surplus of space. To calculate it, first get the difference beteen the assigned space
+				// and the required space.
+				for (int n=0; n<children.Length; n++)
+					sizes[n] = tsize - ((DockItemTitleTab)children[n]).LabelWidth;
 
-			int xdif = 0;
-			if (pos > 0)
-				xdif = 2;
-
-			int reqh;
-//			StateType st;
-
-			if (tab.Active) {
-//				st = StateType.Normal;
-				reqh = tab.Allocation.Height;
-			}
-			else {
-				reqh = tab.Allocation.Height - 3;
-//				st = StateType.Active;
-			}
-
-			if (DockFrame.IsWindows) {
-				rect.Height = reqh - 1;
-				rect.Width--;
-				if (pos > 0) {
-					rect.X--;
-					rect.Width++;
-				}
-				return rect;
-			}
-			else {
-				rect.X -= xdif;
-				rect.Width += xdif;
-				rect.Height = reqh;
-				return rect;
-			}
-		}
-
-		void DrawTab (Gdk.EventExpose evnt, Tab tab, int pos)
-		{
-			Gdk.Rectangle rect = GetTabArea (tab, pos);
-			StateType st;
-			if (tab.Active)
-				st = StateType.Normal;
-			else
-				st = StateType.Active;
-
-			if (DockFrame.IsWindows) {
-				GdkWindow.DrawRectangle (Style.DarkGC (Gtk.StateType.Normal), false, rect);
-				rect.X++;
-				rect.Width--;
-				if (tab.Active) {
-					GdkWindow.DrawRectangle (Style.LightGC (Gtk.StateType.Normal), true, rect);
-				}
-				else {
-					using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-						cr.NewPath ();
-						cr.MoveTo (rect.X, rect.Y);
-						cr.RelLineTo (rect.Width, 0);
-						cr.RelLineTo (0, rect.Height);
-						cr.RelLineTo (-rect.Width, 0);
-						cr.RelLineTo (0, -rect.Height);
-						cr.ClosePath ();
-						Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
-						Cairo.Color color1 = DockFrame.ToCairoColor (Style.Mid (Gtk.StateType.Normal));
-						pat.AddColorStop (0, color1);
-						color1.R *= 1.2;
-						color1.G *= 1.2;
-						color1.B *= 1.2;
-						pat.AddColorStop (1, color1);
-						cr.SetSource (pat);
-						cr.FillPreserve ();
+				// If all is positive, nothing is left to do (all tabs have enough space). If there is any negative, it means
+				// that space has to be reassigned. The negative space has to be turned into positive by reducing space from other tabs
+				for (int n=0; n<sizes.Length; n++) {
+					if (sizes[n] < 0) {
+						ReduceSizes (sizes, -sizes[n]);
+						sizes[n] = 0;
 					}
 				}
+				// Now calculate the final space assignment of each tab
+				for (int n=0; n<children.Length; n++) {
+					sizes[n] += ((DockItemTitleTab)children[n]).LabelWidth;
+					totalWidth -= sizes[n];
+				}
+			} else {
+				if (ratio > 1)
+					ratio = 1;
+				for (int n=0; n<children.Length; n++) {
+					var s = (int)((double)((DockItemTitleTab)children[n]).LabelWidth * ratio);
+					sizes[n] = s;
+					totalWidth -= s;
+				}
 			}
-			else
-				Gtk.Style.PaintExtension (Style, GdkWindow, st, ShadowType.Out, evnt.Area, this, "tab", rect.X, rect.Y, rect.Width, rect.Height, Gtk.PositionType.Top); 
+
+			// There may be some remaining space due to rounding. Spread it
+			for (int n=0; n<children.Length && totalWidth > 0; n++) {
+				sizes[n]++;
+				totalWidth--;
+			}
+			// Assign the sizes
+			for (int n=0; n<children.Length; n++)
+				children[n].WidthRequest = sizes[n];
 		}
+
+		void ReduceSizes (int[] sizes, int amout)
+		{
+			// Homogeneously removes 'amount' pixels from the array of sizes, making sure
+			// no size goes below 0.
+			while (amout > 0) {
+				int part;
+				int candidates = sizes.Count (s => s > 0);
+				if (candidates == 0)
+					return;
+				part = Math.Max (amout / candidates, 1);
+
+				for (int n=0; n<sizes.Length && amout > 0; n++) {
+					var s = sizes [n];
+					if (s <= 0) continue;
+					if (s > part) {
+						s -= part;
+						amout -= part;
+					} else {
+						amout -= s;
+						s = 0;
+					}
+					sizes[n] = s;
+				}
+			}
+		}
+
+		internal class TabStripBox: HBox
+		{
+			public TabStrip TabStrip;
+
+			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+			{
+				if (TabStrip.VisualStyle.TabStyle == DockTabStyle.Normal) {
+					var alloc = Allocation;
+					Gdk.GC gc = new Gdk.GC (GdkWindow);
+					gc.RgbFgColor = TabStrip.VisualStyle.InactivePadBackgroundColor.Value;
+					evnt.Window.DrawRectangle (gc, true, alloc);
+					gc.Dispose ();
+		
+					Gdk.GC bgc = new Gdk.GC (GdkWindow);
+					var c = TabStrip.VisualStyle.PadBackgroundColor.Value.ToXwtColor ();
+					c.Light *= 0.7;
+					bgc.RgbFgColor = c.ToGdkColor ();
+					evnt.Window.DrawLine (bgc, alloc.X, alloc.Y + alloc.Height - 1, alloc.X + alloc.Width - 1, alloc.Y + alloc.Height - 1);
+					bgc.Dispose ();
+				}	
+				return base.OnExposeEvent (evnt);
+			}
+		}
+		
 	}
 	
-	class Tab: Gtk.EventBox
-	{
-		bool active;
-		Gtk.Widget page;
-		Gtk.Label labelWidget;
-		int labelWidth;
-		
-		const int TopPadding = 2;
-		const int BottomPadding = 4;
-		const int TopPaddingActive = 3;
-		const int BottomPaddingActive = 5;
-		const int HorzPadding = 5;
-		
-		public Tab ()
-		{
-			this.VisibleWindow = false;
-		}
-		
-		public void SetLabel (Gtk.Widget page, Gdk.Pixbuf icon, string label)
-		{
-			Pango.EllipsizeMode oldMode = Pango.EllipsizeMode.End;
-			
-			this.page = page;
-			if (Child != null) {
-				if (labelWidget != null)
-					oldMode = labelWidget.Ellipsize;
-				Gtk.Widget oc = Child;
-				Remove (oc);
-				oc.Destroy ();
-			}
-			
-			Gtk.HBox box = new HBox ();
-			box.Spacing = 2;
-			
-			if (icon != null)
-				box.PackStart (new Gtk.Image (icon), false, false, 0);
-
-			if (!string.IsNullOrEmpty (label)) {
-				labelWidget = new Gtk.Label (label);
-				labelWidget.UseMarkup = true;
-				box.PackStart (labelWidget, true, true, 0);
-			} else {
-				labelWidget = null;
-			}
-			
-			Add (box);
-			
-			// Get the required size before setting the ellipsize property, since ellipsized labels
-			// have a width request of 0
-			ShowAll ();
-			labelWidth = SizeRequest ().Width;
-			
-			if (labelWidget != null)
-				labelWidget.Ellipsize = oldMode;
-		}
-		
-		public void SetEllipsize (bool elipsize)
-		{
-			if (labelWidget != null) {
-				if (elipsize)
-					labelWidget.Ellipsize = Pango.EllipsizeMode.End;
-				else
-					labelWidget.Ellipsize = Pango.EllipsizeMode.None;
-			}
-		}
-		
-		public int LabelWidth {
-			get { return labelWidth; }
-		}
-		
-		public bool Active {
-			get {
-				return active;
-			}
-			set {
-				active = value;
-				this.QueueResize ();
-				QueueDraw ();
-			}
-		}
-
-		public Widget Page {
-			get {
-				return page;
-			}
-		}
-		
-		protected override void OnSizeRequested (ref Gtk.Requisition req)
-		{
-			req = Child.SizeRequest ();
-			req.Width += HorzPadding * 2;
-			if (active)
-				req.Height += TopPaddingActive + BottomPaddingActive;
-			else
-				req.Height += TopPadding + BottomPadding;
-		}
-					
-		protected override void OnSizeAllocated (Gdk.Rectangle rect)
-		{
-			base.OnSizeAllocated (rect);
-			
-			rect.X += HorzPadding;
-			rect.Width -= HorzPadding * 2;
-			
-			if (active) {
-				rect.Y += TopPaddingActive;
-				rect.Height = Child.SizeRequest ().Height;
-			}
-			else {
-				rect.Y += TopPadding;
-				rect.Height = Child.SizeRequest ().Height;
-			}
-			Child.SizeAllocate (rect);
-		}
-	}
 }
+
+

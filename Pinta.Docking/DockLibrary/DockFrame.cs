@@ -30,14 +30,17 @@
 
 using System;
 using System.Xml;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Gtk;
 using Gdk;
+using Xwt.Motion;
+using MonoDevelop.Core;
 
 namespace MonoDevelop.Components.Docking
 {
-	public class DockFrame: HBox
+	public class DockFrame: HBox, IAnimatable
 	{
 		internal const double ItemDockCenterArea = 0.4;
 		internal const int GroupDockSeparatorSize = 40;
@@ -46,10 +49,10 @@ namespace MonoDevelop.Components.Docking
 		
 		DockContainer container;
 		
-		int handleSize = IsWindows ? 4 : 6;
+		int handleSize = 1;
 		int handlePadding = 0;
-		int defaultItemWidth = 130;
-		int defaultItemHeight = 130;
+		int defaultItemWidth = 300;
+		int defaultItemHeight = 250;
 		uint autoShowDelay = 400;
 		uint autoHideDelay = 500;
 		
@@ -60,12 +63,13 @@ namespace MonoDevelop.Components.Docking
 		
 		DockBar dockBarTop, dockBarBottom, dockBarLeft, dockBarRight;
 		VBox mainBox;
-		ShadedContainer shadedContainer;
-		
+		DockVisualStyle defaultStyle;
+		Gtk.Widget overlayWidget;
+
 		public DockFrame ()
 		{
-			shadedContainer = new ShadedContainer ();
-			
+			Mono.TextEditor.GtkWorkarounds.FixContainerLeak (this);
+
 			dockBarTop = new DockBar (this, Gtk.PositionType.Top);
 			dockBarBottom = new DockBar (this, Gtk.PositionType.Bottom);
 			dockBarLeft = new DockBar (this, Gtk.PositionType.Left);
@@ -84,10 +88,19 @@ namespace MonoDevelop.Components.Docking
 			mainBox.ShowAll ();
 			mainBox.NoShowAll = true;
 			CompactGuiLevel = 2;
-			dockBarTop.UpdateVisibility ();
-			dockBarBottom.UpdateVisibility ();
-			dockBarLeft.UpdateVisibility ();
-			dockBarRight.UpdateVisibility ();
+			UpdateDockbarsVisibility ();
+
+			DefaultVisualStyle = new DockVisualStyle ();
+		}
+
+		public bool DockbarsVisible {
+			get {
+				return !OverlayWidgetVisible;
+			}
+		}
+
+		internal bool UseWindowsForTopLevelFrames {
+			get { return Platform.IsMac; }
 		}
 		
 		/// <summary>
@@ -97,20 +110,306 @@ namespace MonoDevelop.Components.Docking
 			get { return compactGuiLevel; }
 			set {
 				compactGuiLevel = value;
-				switch (compactGuiLevel) {
+/*				switch (compactGuiLevel) {
 					case 1: handleSize = 6; break;
 					case 2: 
 					case 3: handleSize = IsWindows ? 4 : 6; break;
 					case 4:
 					case 5: handleSize = 3; break;
 				}
-				handlePadding = 0;
+*/				handlePadding = 0;
 				dockBarTop.OnCompactLevelChanged ();
 				dockBarBottom.OnCompactLevelChanged ();
 				dockBarLeft.OnCompactLevelChanged ();
 				dockBarRight.OnCompactLevelChanged ();
 				container.RelayoutWidgets ();
 			}
+		}
+
+		internal bool OverlayWidgetVisible { get; set; }
+
+		public void AddOverlayWidget (Widget widget, bool animate = false)
+		{
+			RemoveOverlayWidget (false);
+
+			this.overlayWidget = widget;
+			widget.Parent = this;
+			OverlayWidgetVisible = true;
+			MinimizeAllAutohidden ();
+			if (animate) {
+				currentOverlayPosition = Math.Max (0, Allocation.Y + Allocation.Height);
+				this.Animate (
+					"ShowOverlayWidget", 
+					ShowOverlayWidgetAnimation,
+					easing: Easing.CubicOut);
+			} else {
+				currentOverlayPosition = Math.Max (0, Allocation.Y);
+				QueueResize ();
+			}
+
+			UpdateDockbarsVisibility ();
+		}
+
+		public void RemoveOverlayWidget (bool animate = false)
+		{
+			this.AbortAnimation ("ShowOverlayWidget");
+			this.AbortAnimation ("HideOverlayWidget");
+			OverlayWidgetVisible = false;
+
+			if (overlayWidget != null) {
+				if (animate) {
+					currentOverlayPosition = Allocation.Y;
+					this.Animate (
+						"HideOverlayWidget", 
+						HideOverlayWidgetAnimation,
+						finished: (a,b) => { 
+							if (overlayWidget != null) {
+								overlayWidget.Unparent ();
+								overlayWidget = null;
+							}
+						},
+						easing: Easing.SinOut);
+				} else {
+					overlayWidget.Unparent ();
+					overlayWidget = null;
+					QueueResize ();
+				}
+			}
+
+			UpdateDockbarsVisibility ();
+		}
+
+		int currentOverlayPosition;
+
+		void UpdateDockbarsVisibility ()
+		{
+			dockBarTop.UpdateVisibility ();
+			dockBarBottom.UpdateVisibility ();
+			dockBarLeft.UpdateVisibility ();
+			dockBarRight.UpdateVisibility ();
+		}
+
+		void ShowOverlayWidgetAnimation (double value)
+		{
+			currentOverlayPosition = Allocation.Y + (int)((double)Allocation.Height * (1f - value));
+			overlayWidget.SizeAllocate (new Rectangle (Allocation.X, currentOverlayPosition, Allocation.Width, Allocation.Height));
+		}
+
+		void HideOverlayWidgetAnimation (double value)
+		{
+			currentOverlayPosition = Allocation.Y + (int)((double)Allocation.Height * value);
+			overlayWidget.SizeAllocate (new Rectangle (Allocation.X, currentOverlayPosition, Allocation.Width, Allocation.Height));
+		}
+
+		void IAnimatable.BatchBegin ()
+		{
+		}
+
+		void IAnimatable.BatchCommit ()
+		{
+		}
+
+		// Registered region styles. We are using a list instead of a dictionary because
+		// the registering order is important
+		List<Tuple<string,DockVisualStyle>> regionStyles = new List<Tuple<string, DockVisualStyle>> ();
+
+		// Styles specific to items
+		Dictionary<string,DockVisualStyle> stylesById = new Dictionary<string, DockVisualStyle> ();
+
+		public DockVisualStyle DefaultVisualStyle {
+			get {
+				return defaultStyle;
+			}
+			set {
+				defaultStyle = DockVisualStyle.CreateDefaultStyle ();
+				defaultStyle.CopyValuesFrom (value);
+			}
+		}
+
+		/// <summary>
+		/// Sets the style for a region of the dock frame
+		/// </summary>
+		/// <param name='regionPosition'>
+		/// A region is a collection with the format: "ItemId1/Position1;ItemId2/Position2..."
+		/// ItemId is the id of a dock item. Position is one of the values of the DockPosition enumeration
+		/// </param>
+		/// <param name='style'>
+		/// Style.
+		/// </param>
+		public void SetRegionStyle (string regionPosition, DockVisualStyle style)
+		{
+			// Remove any old region style and add it
+			regionStyles.RemoveAll (s => s.Item1 == regionPosition);
+			if (style != null)
+				regionStyles.Add (new Tuple<string,DockVisualStyle> (regionPosition, style));
+		}
+
+		public void SetDockItemStyle (string itemId, DockVisualStyle style)
+		{
+			if (style != null)
+				stylesById [itemId] = style;
+			else
+				stylesById.Remove (itemId);
+		}
+
+		internal void UpdateRegionStyle (DockObject obj)
+		{
+			obj.VisualStyle = GetRegionStyleForObject (obj);
+		}
+
+		/// <summary>
+		/// Gets the style for a dock object, which will inherit values from all region/style definitions
+		/// </summary>
+		internal DockVisualStyle GetRegionStyleForObject (DockObject obj)
+		{
+			DockVisualStyle mergedStyle = null;
+			if (obj is DockGroupItem) {
+				DockVisualStyle s;
+				if (stylesById.TryGetValue (((DockGroupItem)obj).Id, out s)) {
+					mergedStyle = DefaultVisualStyle.Clone ();
+					mergedStyle.CopyValuesFrom (s);
+				}
+			}
+			foreach (var e in regionStyles) {
+				if (InRegion (e.Item1, obj)) {
+					if (mergedStyle == null)
+						mergedStyle = DefaultVisualStyle.Clone ();
+					mergedStyle.CopyValuesFrom (e.Item2);
+				}
+			}
+			return mergedStyle ?? DefaultVisualStyle;
+		}
+
+		internal DockVisualStyle GetRegionStyleForItem (DockItem item)
+		{
+			DockVisualStyle s;
+			if (stylesById.TryGetValue (item.Id, out s)) {
+				var ds = DefaultVisualStyle.Clone ();
+				ds.CopyValuesFrom (s);
+				return ds;
+			}
+			return DefaultVisualStyle;
+		}
+
+		/// <summary>
+		/// Gets the style assigned to a specific position of the layout
+		/// </summary>
+		/// <returns>
+		/// The region style for position.
+		/// </returns>
+		/// <param name='parentGroup'>
+		/// Group which contains the position
+		/// </param>
+		/// <param name='childIndex'>
+		/// Index of the position inside the group
+		/// </param>
+		/// <param name='insertingPosition'>
+		/// If true, the position will be inserted (meaning that the objects in childIndex will be shifted 1 position)
+		/// </param>
+		internal DockVisualStyle GetRegionStyleForPosition (DockGroup parentGroup, int childIndex, bool insertingPosition)
+		{
+			DockVisualStyle mergedStyle = null;
+			foreach (var e in regionStyles) {
+				if (InRegion (e.Item1, parentGroup, childIndex, insertingPosition)) {
+					if (mergedStyle == null)
+						mergedStyle = DefaultVisualStyle.Clone ();
+					mergedStyle.CopyValuesFrom (e.Item2);
+				}
+			}
+			return mergedStyle ?? DefaultVisualStyle;
+		}
+
+		internal bool InRegion (string location, DockObject obj)
+		{
+			if (obj.ParentGroup == null)
+				return false;
+			return InRegion (location, obj.ParentGroup, obj.ParentGroup.GetObjectIndex (obj), false);
+		}
+
+		internal bool InRegion (string location, DockGroup objToFindParent, int objToFindIndex, bool insertingPosition)
+		{
+			// Checks if the object is in the specified region.
+			// A region is a collection with the format: "ItemId1/Position1;ItemId2/Position2..."
+			string[] positions = location.Split (';');
+			foreach (string pos in positions) {
+				// We individually check each entry in the region specification
+				int i = pos.IndexOf ('/');
+				if (i == -1) continue;
+				string id = pos.Substring (0,i).Trim ();
+				DockGroup g = container.Layout.FindGroupContaining (id);
+				if (g != null) {
+					DockPosition dpos;
+					try {
+						dpos = (DockPosition) Enum.Parse (typeof(DockPosition), pos.Substring(i+1).Trim(), true);
+					}
+					catch {
+						continue;
+					}
+
+					var refItem = g.FindDockGroupItem (id);
+					if (InRegion (g, dpos, refItem, objToFindParent, objToFindIndex, insertingPosition))
+						return true;
+				}
+			}
+			return false;
+		}
+
+		bool InRegion (DockGroup grp, DockPosition pos, DockObject refObject, DockGroup objToFindParent, int objToFindIndex, bool insertingPosition)
+		{
+			if (grp == null)
+				return false;
+
+			if (grp.Type == DockGroupType.Tabbed) {
+				if (pos != DockPosition.Center &&  pos != DockPosition.CenterBefore)
+					return InRegion (grp.ParentGroup, pos, grp, objToFindParent, objToFindIndex, insertingPosition);
+			}
+			if (grp.Type == DockGroupType.Horizontal) {
+				if (pos != DockPosition.Left && pos != DockPosition.Right)
+					return InRegion (grp.ParentGroup, pos, grp, objToFindParent, objToFindIndex, insertingPosition);
+			}
+			if (grp.Type == DockGroupType.Vertical) {
+				if (pos != DockPosition.Top && pos != DockPosition.Bottom)
+					return InRegion (grp.ParentGroup, pos, grp, objToFindParent, objToFindIndex, insertingPosition);
+			}
+
+			bool foundAtLeftSide = true;
+			bool findingLeft = pos == DockPosition.Left || pos == DockPosition.Top || pos == DockPosition.CenterBefore;
+
+			if (objToFindParent == grp) {
+				// Check positions beyond the current range of items
+				if (objToFindIndex < 0 && findingLeft)
+					return true;
+				if (objToFindIndex >= grp.Objects.Count && !findingLeft)
+					return true;
+			}
+
+			for (int n=0; n<grp.Objects.Count; n++) {
+				var ob = grp.Objects[n];
+
+				bool foundRefObject = ob == refObject;
+				bool foundTargetObject = objToFindParent == grp && objToFindIndex == n;
+
+				if (foundRefObject) {
+					// Found the reference object, but if insertingPosition=true it is in the position that the new item will have,
+					// so this position still has to be considered to be at the left side
+					if (foundTargetObject && insertingPosition)
+						return foundAtLeftSide == findingLeft;
+					foundAtLeftSide = false;
+				}
+				else if (foundTargetObject)
+					return foundAtLeftSide == findingLeft;
+				else if (ob is DockGroup) {
+					DockGroup gob = (DockGroup)ob;
+					if (gob == objToFindParent || ObjectHasAncestor (objToFindParent, gob))
+						return foundAtLeftSide == findingLeft;
+				}
+			}
+			return InRegion (grp.ParentGroup, pos, grp, objToFindParent, objToFindIndex, insertingPosition);
+		}
+
+		bool ObjectHasAncestor (DockObject obj, DockGroup ancestorToFind)
+		{
+			return obj != null && (obj.ParentGroup == ancestorToFind || ObjectHasAncestor (obj.ParentGroup, ancestorToFind));
 		}
 		
 		public DockBar ExtractDockBar (PositionType pos)
@@ -139,11 +438,7 @@ namespace MonoDevelop.Components.Docking
 		internal DockContainer Container {
 			get { return container; }
 		}
-		
-		public ShadedContainer ShadedContainer {
-			get { return this.shadedContainer; }
-		}
-		
+
 		public int HandleSize {
 			get {
 				return handleSize;
@@ -182,6 +477,10 @@ namespace MonoDevelop.Components.Docking
 		
 		internal int TotalHandleSize {
 			get { return handleSize + handlePadding*2; }
+		}
+
+		internal int TotalSensitiveHandleSize {
+			get { return 6; }
 		}
 		
 		public DockItem AddItem (string id)
@@ -233,11 +532,31 @@ namespace MonoDevelop.Components.Docking
 			DockLayout dl;
 			if (!layouts.TryGetValue (layoutName, out dl))
 				return false;
-			
+
+			var focus = GetActiveWidget ();
+
 			container.LoadLayout (dl);
+
+			// Keep the currently focused widget when switching layouts
+			if (focus != null && focus.IsRealized && focus.Visible)
+				DockItem.SetFocus (focus);
+
 			return true;
 		}
-		
+
+		Gtk.Widget GetActiveWidget ()
+		{
+			Gtk.Widget widget = this;
+			while (widget is Gtk.Container) {
+				Gtk.Widget child = ((Gtk.Container)widget).FocusChild;
+				if (child != null)
+					widget = child;
+				else
+					break;
+			}
+			return widget;
+		}
+
 		public void CreateLayout (string name)
 		{
 			CreateLayout (name, false);
@@ -369,6 +688,19 @@ namespace MonoDevelop.Components.Docking
 			dockBarBottom.UpdateTitle (item);
 			dockBarLeft.UpdateTitle (item);
 			dockBarRight.UpdateTitle (item);
+		}
+		
+		internal void UpdateStyle (DockItem item)
+		{
+			DockGroupItem gitem = container.FindDockGroupItem (item.Id);
+			if (gitem == null)
+				return;
+			
+			gitem.ParentGroup.UpdateStyle (item);
+			dockBarTop.UpdateStyle (item);
+			dockBarBottom.UpdateStyle (item);
+			dockBarLeft.UpdateStyle (item);
+			dockBarRight.UpdateStyle (item);
 		}
 		
 		internal void Present (DockItem item, bool giveFocus)
@@ -523,14 +855,45 @@ namespace MonoDevelop.Components.Docking
 			return null;
 		}
 		
-		internal void AddTopLevel (DockFrameTopLevel w, int x, int y)
+		internal void AddTopLevel (DockFrameTopLevel w, int x, int y, int width, int height)
 		{
-			w.Parent = this;
 			w.X = x;
 			w.Y = y;
-			Requisition r = w.SizeRequest ();
-			w.Allocation = new Gdk.Rectangle (Allocation.X + x, Allocation.Y + y, r.Width, r.Height);
-			topLevels.Add (w);
+
+			if (UseWindowsForTopLevelFrames) {
+				var win = new Gtk.Window (Gtk.WindowType.Toplevel);
+				win.AcceptFocus = false;
+				win.SkipTaskbarHint = true;
+				win.Decorated = false;
+				win.TypeHint = Gdk.WindowTypeHint.Toolbar;
+				w.ContainerWindow = win;
+				w.Size = new Size (width, height);
+				win.Add (w);
+				w.Show ();
+				var p = this.GetScreenCoordinates (new Gdk.Point (x, y));
+				win.Opacity = 0.0;
+				win.Move (p.X, p.Y);
+				win.Resize (width, height);
+				win.Show ();
+				Ide.DesktopService.AddChildWindow ((Gtk.Window)Toplevel, win);
+				win.AcceptFocus = true;
+				win.Opacity = 1.0;
+
+				/* When we use real windows for frames, it's possible for pads to be over other
+				 * windows. For some reason simply presenting or raising those dialogs doesn't
+				 * seem to work, so we hide/show them in order to force them above the pad. */
+				var toplevels = Gtk.Window.ListToplevels ().Where (t => t.IsRealized && t.TypeHint == WindowTypeHint.Dialog); // && t.TransientFor != null);
+				foreach (var t in toplevels) {
+					t.Hide ();
+					t.Show ();
+				}
+			} else {
+				w.Parent = this;
+				w.Size = new Size (width, height);
+				Requisition r = w.SizeRequest ();
+				w.Allocation = new Gdk.Rectangle (Allocation.X + x, Allocation.Y + y, r.Width, r.Height);
+				topLevels.Add (w);
+			}
 		}
 		
 		internal void RemoveTopLevel (DockFrameTopLevel w)
@@ -552,9 +915,9 @@ namespace MonoDevelop.Components.Docking
 			return rect;
 		}
 		
-		internal void ShowPlaceholder ()
+		internal void ShowPlaceholder (DockItem draggedItem)
 		{
-			container.ShowPlaceholder ();
+			container.ShowPlaceholder (draggedItem);
 		}
 		
 		internal void DockInPlaceholder (DockItem item)
@@ -584,27 +947,29 @@ namespace MonoDevelop.Components.Docking
 			Gdk.Size sBot = GetBarFrameSize (dockBarBottom);
 			Gdk.Size sLeft = GetBarFrameSize (dockBarLeft);
 			Gdk.Size sRgt = GetBarFrameSize (dockBarRight);
-			
-			int x,y;
+
+			int x,y,w,h;
 			if (bar == dockBarLeft || bar == dockBarRight) {
-				aframe.HeightRequest = Allocation.Height - sTop.Height - sBot.Height;
-				aframe.WidthRequest = size;
+				h = Allocation.Height - sTop.Height - sBot.Height;
+				w = size;
 				y = sTop.Height;
 				if (bar == dockBarLeft)
 					x = sLeft.Width;
 				else
 					x = Allocation.Width - size - sRgt.Width;
 			} else {
-				aframe.WidthRequest = Allocation.Width - sLeft.Width - sRgt.Width;
-				aframe.HeightRequest = size;
+				w = Allocation.Width - sLeft.Width - sRgt.Width;
+				h = size;
 				x = sLeft.Width;
 				if (bar == dockBarTop)
 					y = sTop.Height;
 				else
 					y = Allocation.Height - size - sBot.Height;
 			}
-			AddTopLevel (aframe, x, y);
+
+			AddTopLevel (aframe, x, y, w, h);
 			aframe.AnimateShow ();
+
 			return aframe;
 		}
 		
@@ -646,12 +1011,41 @@ namespace MonoDevelop.Components.Docking
 				widget.AnimateHide ();
 			}
 			else {
+				// The widget may already be removed from the parent
+				// so 'parent' can be null
 				Gtk.Container parent = (Gtk.Container) item.Widget.Parent;
-				parent.Remove (item.Widget);
-				RemoveTopLevel (widget);
+				if (parent != null) {
+					//removing the widget from its parent causes it to unrealize without unmapping
+					//so make sure it's unmapped
+					if (item.Widget.IsMapped) {
+						item.Widget.Unmap ();
+					}
+					parent.Remove (item.Widget);
+				}
+				parent = (Gtk.Container) item.TitleTab.Parent;
+				if (parent != null) {
+					//removing the widget from its parent causes it to unrealize without unmapping
+					//so make sure it's unmapped
+					if (item.TitleTab.IsMapped) {
+						item.TitleTab.Unmap ();
+					}
+					parent.Remove (item.TitleTab);
+				}
+				if (widget.ContainerWindow != null) {
+					widget.ContainerWindow.Destroy ();
+				} else
+					RemoveTopLevel (widget);
+
 				widget.Disposed = true;
 				widget.Destroy ();
 			}
+		}
+
+		protected override void OnSizeRequested (ref Requisition requisition)
+		{
+			if (overlayWidget != null)
+				overlayWidget.SizeRequest ();
+			base.OnSizeRequested (ref requisition);
 		}
 		
 		protected override void OnSizeAllocated (Rectangle allocation)
@@ -662,6 +1056,8 @@ namespace MonoDevelop.Components.Docking
 				Requisition r = tl.SizeRequest ();
 				tl.SizeAllocate (new Gdk.Rectangle (allocation.X + tl.X, allocation.Y + tl.Y, r.Width, r.Height));
 			}
+			if (overlayWidget != null)
+				overlayWidget.SizeAllocate (new Rectangle (Allocation.X, currentOverlayPosition, allocation.Width, allocation.Height));
 		}
 		
 		protected override void ForAll (bool include_internals, Callback callback)
@@ -670,19 +1066,23 @@ namespace MonoDevelop.Components.Docking
 			List<DockFrameTopLevel> clone = new List<DockFrameTopLevel> (topLevels);
 			foreach (DockFrameTopLevel child in clone)
 				callback (child);
+			if (overlayWidget != null)
+				callback (overlayWidget);
 		}
 		
-		protected override void OnRealized ()
+		protected override bool OnButtonPressEvent (EventButton evnt)
 		{
-			base.OnRealized ();
-			HslColor cLight = new HslColor (Style.Background (Gtk.StateType.Normal));
-			HslColor cDark = cLight;
-			cLight.L *= 0.9;
-			cDark.L *= 0.8;
-			shadedContainer.LightColor = cLight;
-			shadedContainer.DarkColor = cDark;
+			MinimizeAllAutohidden ();
+			return base.OnButtonPressEvent (evnt);
 		}
 
+		void MinimizeAllAutohidden ()
+		{
+			foreach (var it in GetItems ()) {
+				if (it.Visible && it.Status == DockItemStatus.AutoHide)
+					it.Minimize ();
+			}
+		}
 
 		static internal bool IsWindows {
 			get { return System.IO.Path.DirectorySeparatorChar == '\\'; }
@@ -692,6 +1092,12 @@ namespace MonoDevelop.Components.Docking
 		{
 			return new Cairo.Color (color.Red / (double) ushort.MaxValue, color.Green / (double) ushort.MaxValue, color.Blue / (double) ushort.MaxValue);
 		}
+	}
+
+	public class DockStyle
+	{
+		public const string Default = "Default";
+		public const string Browser = "Browser";
 	}
 	
 	

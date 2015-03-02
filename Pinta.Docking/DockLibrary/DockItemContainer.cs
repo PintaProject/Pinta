@@ -31,102 +31,32 @@
 using System;
 using Gtk;
 using Mono.Unix;
+using Mono.TextEditor;
+using MonoDevelop.Ide.Gui;
 
 namespace MonoDevelop.Components.Docking
 {
-	class DockItemContainer: VBox
+	class DockItemContainer: EventBox
 	{
-		static Gdk.Pixbuf pixClose;
-		static Gdk.Pixbuf pixAutoHide;
-		static Gdk.Pixbuf pixDock;
-		
-		Gtk.Label title;
-		Gtk.Button btnClose;
-		Gtk.Button btnDock;
-		string txt;
-		Gtk.EventBox header;
-		Gtk.Alignment headerAlign;
-		DockFrame frame;
 		DockItem item;
 		Widget widget;
 		Container borderFrame;
-		bool allowPlaceholderDocking;
-		bool pointerHover;
 		Box contentBox;
-		
-		static Gdk.Cursor fleurCursor = new Gdk.Cursor (Gdk.CursorType.Fleur);
-		static Gdk.Cursor handCursor = new Gdk.Cursor (Gdk.CursorType.Hand2);
-		
-		static DockItemContainer ()
-		{
-			try {
-				pixClose = Gdk.Pixbuf.LoadFromResource ("stock-close-12.png");
-				pixAutoHide = Gdk.Pixbuf.LoadFromResource ("stock-auto-hide.png");
-				pixDock = Gdk.Pixbuf.LoadFromResource ("stock-dock.png");
-			} catch (Exception) {
-			}
-		}
-		
+		VBox mainBox;
+
 		public DockItemContainer (DockFrame frame, DockItem item)
 		{
-			this.frame = frame;
 			this.item = item;
+
+			mainBox = new VBox ();
+			Add (mainBox);
+
+			mainBox.ResizeMode = Gtk.ResizeMode.Queue;
+			mainBox.Spacing = 0;
 			
-			ResizeMode = Gtk.ResizeMode.Queue;
-			Spacing = 0;
-			
-			title = new Gtk.Label ();
-			title.Xalign = 0;
-			title.Xpad = 3;
-			title.UseMarkup = true;
-			title.Ellipsize = Pango.EllipsizeMode.End;
-			
-			btnDock = new Button (new Gtk.Image (pixAutoHide));
-			btnDock.Relief = ReliefStyle.None;
-			btnDock.CanFocus = false;
-			btnDock.WidthRequest = btnDock.HeightRequest = 17;
-			btnDock.Clicked += OnClickDock;
-			
-			btnClose = new Button (new Gtk.Image (pixClose));
-			btnClose.TooltipText = Catalog.GetString ("Hide");
-			btnClose.Relief = ReliefStyle.None;
-			btnClose.CanFocus = false;
-			btnClose.WidthRequest = btnClose.HeightRequest = 17;
-			btnClose.Clicked += delegate {
-				item.Visible = false;
-			};
-			
-			HBox box = new HBox (false, 0);
-			box.PackStart (title, true, true, 0);
-			box.PackEnd (btnClose, false, false, 0);
-			box.PackEnd (btnDock, false, false, 0);
-			
-			headerAlign = new Alignment (0.0f, 0.0f, 1.0f, 1.0f);
-			headerAlign.TopPadding = headerAlign.BottomPadding = headerAlign.RightPadding = headerAlign.LeftPadding = 1;
-			headerAlign.Add (box);
-			
-			header = new EventBox ();
-			header.Events |= Gdk.EventMask.KeyPressMask | Gdk.EventMask.KeyReleaseMask;
-			header.ButtonPressEvent += HeaderButtonPress;
-			header.ButtonReleaseEvent += HeaderButtonRelease;
-			header.MotionNotifyEvent += HeaderMotion;
-			header.KeyPressEvent += HeaderKeyPress;
-			header.KeyReleaseEvent += HeaderKeyRelease;
-			header.Add (headerAlign);
-			header.ExposeEvent += HeaderExpose;
-			header.Realized += delegate {
-				header.GdkWindow.Cursor = handCursor;
-			};
-			
-			foreach (Widget w in new Widget [] { header, btnDock, btnClose }) {
-				w.EnterNotifyEvent += HeaderEnterNotify;
-				w.LeaveNotifyEvent += HeaderLeaveNotify;
-			}
-			
-			PackStart (header, false, false, 0);
 			ShowAll ();
 			
-			PackStart (item.GetToolbar (PositionType.Top).Container, false, false, 0);
+			mainBox.PackStart (item.GetToolbar (PositionType.Top).Container, false, false, 0);
 			
 			HBox hbox = new HBox ();
 			hbox.Show ();
@@ -138,13 +68,18 @@ namespace MonoDevelop.Components.Docking
 			
 			hbox.PackStart (item.GetToolbar (PositionType.Right).Container, false, false, 0);
 			
-			PackStart (hbox, true, true, 0);
+			mainBox.PackStart (hbox, true, true, 0);
 			
-			PackStart (item.GetToolbar (PositionType.Bottom).Container, false, false, 0);
-			
-			UpdateBehavior ();
+			mainBox.PackStart (item.GetToolbar (PositionType.Bottom).Container, false, false, 0);
 		}
-		
+
+		DockVisualStyle visualStyle;
+
+		public DockVisualStyle VisualStyle {
+			get { return visualStyle; }
+			set { visualStyle = value; UpdateVisualStyle (); }
+		}
+
 		void OnClickDock (object s, EventArgs a)
 		{
 			if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating)
@@ -152,13 +87,13 @@ namespace MonoDevelop.Components.Docking
 			else
 				item.Status = DockItemStatus.AutoHide;
 		}
-		
+
 		public void UpdateContent ()
 		{
 			if (widget != null)
 				((Gtk.Container)widget.Parent).Remove (widget);
 			widget = item.Content;
-			
+
 			if (item.DrawFrame) {
 				if (borderFrame == null) {
 					borderFrame = new CustomFrame (1, 1, 1, 1);
@@ -178,126 +113,60 @@ namespace MonoDevelop.Components.Docking
 				contentBox.Add (widget);
 				widget.Show ();
 			}
+			UpdateVisualStyle ();
 		}
-		
-		public void UpdateBehavior ()
+
+		void UpdateVisualStyle ()
 		{
-			btnClose.Visible = (item.Behavior & DockItemBehavior.CantClose) == 0;
-			header.Visible = (item.Behavior & DockItemBehavior.Locked) == 0;
-			btnDock.Visible = (item.Behavior & DockItemBehavior.CantAutoHide) == 0;
-			
-			if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating) {
-				btnDock.Image = new Gtk.Image (pixDock);
-				btnDock.TooltipText = Catalog.GetString ("Dock");
+			if (VisualStyle != null) {
+				if (widget != null)
+					SetTreeStyle (widget);
+
+				item.GetToolbar (PositionType.Top).SetStyle (VisualStyle);
+				item.GetToolbar (PositionType.Left).SetStyle (VisualStyle);
+				item.GetToolbar (PositionType.Right).SetStyle (VisualStyle);
+				item.GetToolbar (PositionType.Bottom).SetStyle (VisualStyle);
+			}
+		}
+
+		void SetTreeStyle (Gtk.Widget w)
+		{
+			if (w is Gtk.TreeView) {
+				if (w.IsRealized)
+					OnTreeRealized (w, null);
+				else
+					w.Realized += OnTreeRealized;
 			}
 			else {
-				btnDock.Image = new Gtk.Image (pixAutoHide);
-				btnDock.TooltipText = Catalog.GetString ("Auto Hide");
+				var c = w as Gtk.Container;
+				if (c != null) {
+					foreach (var cw in c.Children)
+						SetTreeStyle (cw);
+				}
+			}
+		}
+
+		void OnTreeRealized (object sender, EventArgs e)
+		{
+			var w = (Gtk.TreeView)sender;
+			if (VisualStyle.TreeBackgroundColor != null) {
+				w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value);
+				w.ModifyBase (StateType.Insensitive, VisualStyle.TreeBackgroundColor.Value);
+			} else {
+				w.ModifyBase (StateType.Normal, Parent.Style.Base (StateType.Normal));
+				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
 			}
 		}
 		
-		void HeaderButtonPress (object ob, Gtk.ButtonPressEventArgs args)
+		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
-			if (args.Event.Button == 1) {
-				frame.ShowPlaceholder ();
-				header.GdkWindow.Cursor = fleurCursor;
-				frame.Toplevel.KeyPressEvent += HeaderKeyPress;
-				frame.Toplevel.KeyReleaseEvent += HeaderKeyRelease;
-				allowPlaceholderDocking = true;
+			if (VisualStyle.TabStyle == DockTabStyle.Normal) {
+				Gdk.GC gc = new Gdk.GC (GdkWindow);
+				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value;
+				evnt.Window.DrawRectangle (gc, true, Allocation);
+				gc.Dispose ();
 			}
-			else if (args.Event.Button == 3) {
-				item.ShowDockPopupMenu (args.Event.Time);
-			}
-		}
-		
-		void HeaderButtonRelease (object ob, Gtk.ButtonReleaseEventArgs args)
-		{
-			if (args.Event.Button == 1) {
-				frame.DockInPlaceholder (item);
-				frame.HidePlaceholder ();
-				if (header.GdkWindow != null)
-					header.GdkWindow.Cursor = handCursor;
-				frame.Toplevel.KeyPressEvent -= HeaderKeyPress;
-				frame.Toplevel.KeyReleaseEvent -= HeaderKeyRelease;
-			}
-		}
-		
-		void HeaderMotion (object ob, Gtk.MotionNotifyEventArgs args)
-		{
-			frame.UpdatePlaceholder (item, Allocation.Size, allowPlaceholderDocking);
-		}
-		
-		[GLib.ConnectBeforeAttribute]
-		void HeaderKeyPress (object ob, Gtk.KeyPressEventArgs a)
-		{
-			if (a.Event.Key == Gdk.Key.Control_L || a.Event.Key == Gdk.Key.Control_R) {
-				allowPlaceholderDocking = false;
-				frame.UpdatePlaceholder (item, Allocation.Size, false);
-			}
-			if (a.Event.Key == Gdk.Key.Escape) {
-				frame.HidePlaceholder ();
-				frame.Toplevel.KeyPressEvent -= HeaderKeyPress;
-				frame.Toplevel.KeyReleaseEvent -= HeaderKeyRelease;
-				Gdk.Pointer.Ungrab (0);
-			}
-		}
-				
-		[GLib.ConnectBeforeAttribute]
-		void HeaderKeyRelease (object ob, Gtk.KeyReleaseEventArgs a)
-		{
-			if (a.Event.Key == Gdk.Key.Control_L || a.Event.Key == Gdk.Key.Control_R) {
-				allowPlaceholderDocking = true;
-				frame.UpdatePlaceholder (item, Allocation.Size, true);
-			}
-		}
-		
-		private void HeaderExpose (object ob, Gtk.ExposeEventArgs a)
-		{
-			Gdk.Rectangle rect = new Gdk.Rectangle (0, 0, header.Allocation.Width - 1, header.Allocation.Height);
-			HslColor gcol = frame.Style.Background (Gtk.StateType.Normal);
-			
-			if (pointerHover)
-				gcol.L *= 1.05;
-			gcol.L = Math.Min (1, gcol.L);
-				
-			using (Cairo.Context cr = Gdk.CairoHelper.Create (a.Event.Window)) {
-				cr.NewPath ();
-				cr.MoveTo (0, 0);
-				cr.RelLineTo (rect.Width, 0);
-				cr.RelLineTo (0, rect.Height);
-				cr.RelLineTo (-rect.Width, 0);
-				cr.RelLineTo (0, -rect.Height);
-				cr.ClosePath ();
-				Cairo.SolidPattern solidPattern = new Cairo.SolidPattern (gcol);
-				cr.SetSource (solidPattern);
-				cr.FillPreserve ();
-				solidPattern.Dispose ();
-			}
-			
-			header.GdkWindow.DrawRectangle (frame.Style.DarkGC (Gtk.StateType.Normal), false, rect);
-			
-			foreach (Widget child in header.Children)
-				header.PropagateExpose (child, a.Event);
-		}
-		
-		private void HeaderLeaveNotify (object ob, EventArgs a)
-		{
-			pointerHover = false;
-			header.QueueDraw ();
-		}
-		
-		private void HeaderEnterNotify (object ob, EventArgs a)
-		{
-			pointerHover = true;
-			header.QueueDraw ();
-		}
-				
-		public string Label {
-			get { return txt; }
-			set {
-				title.Markup = "<small>" + value + "</small>";
-				txt = value;
-			}
+			return base.OnExposeEvent (evnt);
 		}
 	}
 
@@ -313,6 +182,9 @@ namespace MonoDevelop.Components.Docking
 		int bottomPadding;
 		int leftPadding;
 		int rightPadding;
+
+		Gdk.Color backgroundColor;
+		bool backgroundColorSet;
 		
 		public CustomFrame ()
 		{
@@ -341,10 +213,21 @@ namespace MonoDevelop.Components.Docking
 		
 		public bool GradientBackround { get; set; }
 
+		public Gdk.Color BackgroundColor {
+			get { return backgroundColor; }
+			set { backgroundColor = value; backgroundColorSet = true; }
+		}
+
 		protected override void OnAdded (Widget widget)
 		{
 			base.OnAdded (widget);
 			child = widget;
+		}
+		
+		protected override void OnRemoved (Widget widget)
+		{
+			base.OnRemoved (widget);
+			child = null;
 		}
 
 		protected override void OnSizeRequested (ref Requisition requisition)
@@ -376,13 +259,15 @@ namespace MonoDevelop.Components.Docking
 
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
-			Gdk.Rectangle rect;
+			Gdk.Rectangle rect = Allocation;
 			
-			if (GradientBackround) {
-				rect = new Gdk.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-				HslColor gcol = Style.Background (Gtk.StateType.Normal);
-				
-				using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+			//Gdk.Rectangle.Right and Bottom are inconsistent
+			int right = rect.X + rect.Width, bottom = rect.Y + rect.Height;
+
+			var bcolor = backgroundColorSet ? BackgroundColor : Style.Background (Gtk.StateType.Normal);
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+			
+				if (GradientBackround) {
 					cr.NewPath ();
 					cr.MoveTo (rect.X, rect.Y);
 					cr.RelLineTo (rect.Width, 0);
@@ -390,37 +275,53 @@ namespace MonoDevelop.Components.Docking
 					cr.RelLineTo (-rect.Width, 0);
 					cr.RelLineTo (0, -rect.Height);
 					cr.ClosePath ();
-					using (var pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, rect.Bottom)) {
-						Cairo.Color color1 = gcol;
-						pat.AddColorStop (0, color1);
-						gcol.L -= 0.1;
-						if (gcol.L < 0)
-							gcol.L = 0;
-						pat.AddColorStop (1, gcol);
+					using (Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, bottom)) {
+						pat.AddColorStop (0, bcolor.ToCairoColor ());
+						Xwt.Drawing.Color gcol = bcolor.ToXwtColor ();
+						gcol.Light -= 0.1;
+						if (gcol.Light < 0)
+							gcol.Light = 0;
+						pat.AddColorStop (1, gcol.ToCairoColor ());
 						cr.SetSource (pat);
-						cr.FillPreserve ();
+						cr.Fill ();
+					}
+				} else {
+					if (backgroundColorSet) {
+						Gdk.GC gc = new Gdk.GC (GdkWindow);
+						gc.RgbFgColor = bcolor;
+						evnt.Window.DrawRectangle (gc, true, rect.X, rect.Y, rect.Width, rect.Height);
+						gc.Dispose ();
 					}
 				}
+			
 			}
-			
-			bool res = base.OnExposeEvent (evnt);
-			
-			Gdk.GC borderColor = Style.DarkGC (Gtk.StateType.Normal);
-			
-			rect = Allocation;
-			for (int n=0; n<topMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.X, rect.Y + n, rect.Right - 1, rect.Y + n);
-			
-			for (int n=0; n<bottomMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.X, rect.Bottom - n - 1, rect.Right - 1, rect.Bottom - n - 1);
-			
-			for (int n=0; n<leftMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.X + n, rect.Y, rect.X + n, rect.Bottom - 1);
-			
-			for (int n=0; n<rightMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.Right - n - 1, rect.Y, rect.Right - n - 1, rect.Bottom - 1);
-			
-			return res;
+			base.OnExposeEvent (evnt);
+
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				cr.SetSourceColor (Style.Dark (Gtk.StateType.Normal).ToCairoColor ());
+				
+				double y = rect.Y + topMargin / 2d;
+				cr.LineWidth = topMargin;
+				cr.Line (rect.X, y, right, y);
+				cr.Stroke ();
+				
+				y = bottom - bottomMargin / 2d;
+				cr.LineWidth = bottomMargin;
+				cr.Line (rect.X, y, right, y);
+				cr.Stroke ();
+				
+				double x = rect.X + leftMargin / 2d;
+				cr.LineWidth = leftMargin;
+				cr.Line (x, rect.Y, x, bottom);
+				cr.Stroke ();
+				
+				x = right - rightMargin / 2d;
+				cr.LineWidth = rightMargin;
+				cr.Line (x, rect.Y, x, bottom);
+				cr.Stroke ();
+
+				return false;
+			}
 		}
 	}
 }

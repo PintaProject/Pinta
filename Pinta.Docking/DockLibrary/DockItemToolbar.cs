@@ -32,16 +32,20 @@ namespace MonoDevelop.Components.Docking
 	public class DockItemToolbar
 	{
 		DockItem parentItem;
-		CustomFrame frame;
+		Gtk.Widget frame;
 		Box box;
 		PositionType position;
 		bool empty = true;
+		CustomFrame topFrame;
 		
 		internal DockItemToolbar (DockItem parentItem, PositionType position)
 		{
 			this.parentItem = parentItem;
-			frame = new CustomFrame ();
-			switch (position) {
+
+			topFrame = new CustomFrame ();
+			topFrame.SetPadding (3,3,3,3);
+
+/*			switch (position) {
 				case PositionType.Top:
 					frame.SetMargins (0, 0, 1, 1); 
 					frame.SetPadding (0, 2, 2, 0); 
@@ -58,17 +62,26 @@ namespace MonoDevelop.Components.Docking
 					frame.SetMargins (0, 1, 0, 1);
 					frame.SetPadding (0, 0, 2, 2); 
 					break;
-			}
+			}*/
+
 			this.position = position;
 			if (position == PositionType.Top || position == PositionType.Bottom)
 				box = new HBox (false, 3);
 			else
 				box = new VBox (false, 3);
 			box.Show ();
-			frame.Add (box);
-			frame.GradientBackround = true;
+//			frame = box;
+			frame = topFrame;
+			topFrame.Add (box);
+
+//			topFrame.GradientBackround = true;
 		}
-		
+
+		internal void SetStyle (DockVisualStyle style)
+		{
+			topFrame.BackgroundColor = style.PadBackgroundColor.Value;
+		}
+
 		public DockItem DockItem {
 			get { return parentItem; }
 		}

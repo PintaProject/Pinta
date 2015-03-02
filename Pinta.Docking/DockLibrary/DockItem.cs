@@ -32,6 +32,7 @@ using System;
 using System.Xml;
 using Gtk;
 using Mono.Unix;
+using Mono.TextEditor;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -47,9 +48,8 @@ namespace MonoDevelop.Components.Docking
 		int defaultWidth = -1;
 		int defaultHeight = -1;
 		string label;
-		Gdk.Pixbuf icon;
+		Xwt.Drawing.Image icon;
 		bool expand;
-		bool drawFrame = true;
 		DockItemBehavior behavior;
 		Gtk.Window floatingWindow;
 		DockBarItem dockBarItem;
@@ -63,7 +63,13 @@ namespace MonoDevelop.Components.Docking
 		DockItemToolbar toolbarBottom;
 		DockItemToolbar toolbarLeft;
 		DockItemToolbar toolbarRight;
-		
+
+		DockItemTitleTab titleTab;
+
+		DockVisualStyle regionStyle;
+		DockVisualStyle itemStyle;
+		DockVisualStyle currentVisualStyle;
+
 		public event EventHandler VisibleChanged;
 		public event EventHandler ContentVisibleChanged;
 		public event EventHandler ContentRequired;
@@ -72,15 +78,14 @@ namespace MonoDevelop.Components.Docking
 		{
 			this.frame = frame;
 			this.id = id;
+			currentVisualStyle = regionStyle = frame.GetRegionStyleForItem (this);
 		}
 		
-		internal DockItem (DockFrame frame, Widget w, string id)
+		internal DockItem (DockFrame frame, Widget w, string id): this (frame, id)
 		{
-			this.frame = frame;
-			this.id = id;
 			content = w;
 		}
-		
+
 		public string Id {
 			get { return id; }
 		}
@@ -94,8 +99,8 @@ namespace MonoDevelop.Components.Docking
 			get { return label ?? string.Empty; }
 			set {
 				label = value; 
-				if (widget != null)
-					widget.Label = label;
+				if (titleTab != null)
+					titleTab.SetLabel (widget, icon, label);
 				frame.UpdateTitle (this);
 				if (floatingWindow != null)
 					floatingWindow.Title = GetWindowTitle ();
@@ -118,6 +123,18 @@ namespace MonoDevelop.Components.Docking
 			return frame.GetVisible (this, layout); 
 		}
 		
+		internal DockItemTitleTab TitleTab {
+			get {
+				if (titleTab == null) {
+					titleTab = new DockItemTitleTab (this, frame);
+					titleTab.VisualStyle = currentVisualStyle;
+					titleTab.SetLabel (Widget, icon, label);
+					titleTab.ShowAll ();
+				}
+				return titleTab;
+			}
+		}
+
 		public DockItemStatus Status {
 			get {
 				return frame.GetStatus (this); 
@@ -136,11 +153,35 @@ namespace MonoDevelop.Components.Docking
 			get {
 				if (widget == null) {
 					widget = new DockItemContainer (frame, this);
+					widget.VisualStyle = currentVisualStyle;
 					widget.Visible = false; // Required to ensure that the Shown event is fired
-					widget.Label = label;
 					widget.Shown += SetupContent;
 				}
 				return widget;
+			}
+		}
+
+		public DockVisualStyle VisualStyle {
+			get { return itemStyle; }
+			set { itemStyle = value; UpdateStyle (); }
+		}
+
+		internal void SetRegionStyle (DockVisualStyle style)
+		{
+			regionStyle = style;
+			UpdateStyle ();
+		}
+
+		void UpdateStyle ()
+		{
+			var s = itemStyle != null ? itemStyle : regionStyle;
+			if (s != currentVisualStyle) {
+				currentVisualStyle = s;
+				if (titleTab != null)
+					titleTab.VisualStyle = s;
+				if (widget != null)
+					widget.VisualStyle = s;
+				frame.UpdateStyle (this);
 			}
 		}
 		
@@ -241,12 +282,15 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 
-		public Gdk.Pixbuf Icon {
+		public Xwt.Drawing.Image Icon {
 			get {
 				return icon;
 			}
 			set {
 				icon = value;
+				if (titleTab != null)
+					titleTab.SetLabel (widget, icon, label);
+				frame.UpdateTitle (this);
 			}
 		}
 
@@ -256,8 +300,8 @@ namespace MonoDevelop.Components.Docking
 			}
 			set {
 				behavior = value;
-				if (widget != null)
-					widget.UpdateBehavior ();
+				if (titleTab != null)
+					titleTab.UpdateBehavior ();
 			}
 		}
 
@@ -272,10 +316,10 @@ namespace MonoDevelop.Components.Docking
 
 		public bool DrawFrame {
 			get {
-				return drawFrame;
+				return false;
+//				return drawFrame;
 			}
 			set {
-				drawFrame = value;
 			}
 		}
 		
@@ -363,14 +407,17 @@ namespace MonoDevelop.Components.Docking
 		
 		internal void SetFloatMode (Gdk.Rectangle rect)
 		{
-			ResetBarUndockMode ();
 			if (floatingWindow == null) {
-				if (Widget.Parent != null)
-					Widget.Unparent ();
-				floatingWindow = new Window (GetWindowTitle ());
-				floatingWindow.TransientFor = frame.Toplevel as Gtk.Window;
-				floatingWindow.TypeHint = Gdk.WindowTypeHint.Utility;
-				floatingWindow.Add (Widget);
+				ResetMode ();
+				SetRegionStyle (frame.GetRegionStyleForItem (this));
+
+				floatingWindow = new DockFloatingWindow ((Window)frame.Toplevel, GetWindowTitle ());
+
+				VBox box = new VBox ();
+				box.Show ();
+				box.PackStart (TitleTab, false, false, 0);
+				box.PackStart (Widget, true, true, 0);
+				floatingWindow.Add (box);
 				floatingWindow.DeleteEvent += delegate (object o, DeleteEventArgs a) {
 					if (behavior == DockItemBehavior.CantClose)
 						Status = DockItemStatus.Dockable;
@@ -382,17 +429,19 @@ namespace MonoDevelop.Components.Docking
 			floatingWindow.Move (rect.X, rect.Y);
 			floatingWindow.Resize (rect.Width, rect.Height);
 			floatingWindow.Show ();
-			Widget.UpdateBehavior ();
+			if (titleTab != null)
+				titleTab.UpdateBehavior ();
 			Widget.Show ();
 		}
 		
-		internal void ResetFloatMode ()
+		void ResetFloatMode ()
 		{
 			if (floatingWindow != null) {
-				floatingWindow.Remove (Widget);
+				// The widgets have already been removed from the window in ResetMode
 				floatingWindow.Destroy ();
 				floatingWindow = null;
-				widget.UpdateBehavior ();
+				if (titleTab != null)
+					titleTab.UpdateBehavior ();
 			}
 		}
 		
@@ -411,6 +460,11 @@ namespace MonoDevelop.Components.Docking
 		
 		internal void ResetMode ()
 		{
+			if (Widget.Parent != null)
+				((Gtk.Container) Widget.Parent).Remove (Widget);
+			if (TitleTab.Parent != null)
+				((Gtk.Container) TitleTab.Parent).Remove (TitleTab);
+
 			ResetFloatMode ();
 			ResetBarUndockMode ();
 		}
@@ -420,11 +474,15 @@ namespace MonoDevelop.Components.Docking
 			ResetMode ();
 			if (widget != null) {
 				widget.Hide (); // Avoids size allocation warning
-				widget.Unparent ();
+				if (widget.Parent != null) {
+					((Gtk.Container)widget.Parent).Remove (widget);
+				}
 			}
 			dockBarItem = frame.BarDock (pos, this, size);
-			if (widget != null)
-				widget.UpdateBehavior ();
+			if (titleTab != null)
+				titleTab.UpdateBehavior ();
+
+			SetRegionStyle (frame.GetRegionStyleForItem (this));
 		}
 		
 		void ResetBarUndockMode ()
@@ -432,8 +490,8 @@ namespace MonoDevelop.Components.Docking
 			if (dockBarItem != null) {
 				dockBarItem.Close ();
 				dockBarItem = null;
-				if (widget != null)
-					widget.UpdateBehavior ();
+				if (titleTab != null)
+					titleTab.UpdateBehavior ();
 			}
 		}
 		
@@ -444,6 +502,11 @@ namespace MonoDevelop.Components.Docking
 				else
 					return -1;
 			}
+		}
+
+		internal void Minimize ()
+		{
+			dockBarItem.Minimize ();
 		}
 
 		internal bool IsPositionMarker {
@@ -467,6 +530,8 @@ namespace MonoDevelop.Components.Docking
 				return label;
 			}
 		}
+
+		internal bool ShowingContextMemu { get ; set; }
 		
 		internal void ShowDockPopupMenu (uint time)
 		{
@@ -479,36 +544,60 @@ namespace MonoDevelop.Components.Docking
 				menu.Append (mitem);
 			}
 
-			CheckMenuItem citem;
-			
-			// Dockable menuitem
-			citem = new CheckMenuItem (Catalog.GetString("Dockable"));
-			citem.Active = Status == DockItemStatus.Dockable;
-			citem.DrawAsRadio = true;
-			citem.Toggled += delegate { Status = DockItemStatus.Dockable; };
-			menu.Append (citem);
-
-			// Floating menuitem
-			if ((Behavior & DockItemBehavior.NeverFloating) == 0) {
-				citem = new CheckMenuItem (Catalog.GetString("Floating"));
-				citem.Active = Status == DockItemStatus.Floating;
-				citem.DrawAsRadio = true;
-				citem.Toggled += delegate { Status = DockItemStatus.Floating; };
-				menu.Append (citem);
-			}
+			MenuItem citem;
 
 			// Auto Hide menuitem
-			if ((Behavior & DockItemBehavior.CantAutoHide) == 0) {
-				citem = new CheckMenuItem (Catalog.GetString("Auto Hide"));
-				citem.Active = Status == DockItemStatus.AutoHide;
-				citem.DrawAsRadio = true;
-				citem.Toggled += delegate { Status = DockItemStatus.AutoHide; };
+			if ((Behavior & DockItemBehavior.CantAutoHide) == 0 && Status != DockItemStatus.AutoHide) {
+				citem = new MenuItem (Catalog.GetString("Minimize"));
+				citem.Activated += delegate { Status = DockItemStatus.AutoHide; };
 				menu.Append (citem);
 			}
 
+			if (Status != DockItemStatus.Dockable) {
+				// Dockable menuitem
+				citem = new MenuItem (Catalog.GetString("Dock"));
+				citem.Activated += delegate { Status = DockItemStatus.Dockable; };
+				menu.Append (citem);
+			}
+
+			// Floating menuitem
+			if ((Behavior & DockItemBehavior.NeverFloating) == 0 && Status != DockItemStatus.Floating) {
+				citem = new MenuItem (Catalog.GetString("Undock"));
+				citem.Activated += delegate { Status = DockItemStatus.Floating; };
+				menu.Append (citem);
+			}
+
+			if (menu.Children.Length == 0) {
+				menu.Destroy ();
+				return;
+			}
+
+			ShowingContextMemu = true;
+
 			menu.ShowAll ();
+			menu.Hidden += (o,e) => {
+				ShowingContextMemu = false;
+			};
 			menu.Popup (null, null, null, 3, time);
 		}
+	}
+
+	// NOTE: Apparently GTK+ utility windows are not supposed to be "transient" to a parent, and things
+	// break pretty badly on MacOS, so for now we don't make it transient to the "parent". Maybe in future
+	// we should re-evaluate whether they're even Utility windows.
+	//
+	// See BXC9883 - Xamarin Studio hides when there is a nonmodal floating window and it loses focus
+	// https://bugzilla.xamarin.com/show_bug.cgi?id=9883
+	//
+	class DockFloatingWindow : Window
+	{
+		public DockFloatingWindow (Window dockParent, string title) : base (title)
+		{
+			TypeHint = Gdk.WindowTypeHint.Utility;
+			this.DockParent = dockParent;
+		}
+
+		public Window DockParent { get; private set; }
 	}
 	
 	public interface IDockItemLabelProvider

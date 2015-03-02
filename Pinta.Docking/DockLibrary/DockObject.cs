@@ -41,7 +41,7 @@ namespace MonoDevelop.Components.Docking
 		DockGroup parentGroup;
 		DockFrame frame;
 		Gdk.Rectangle rect;
-		
+
 		// The current size in pixels of this item
 		double size = -1;
 
@@ -109,6 +109,8 @@ namespace MonoDevelop.Components.Docking
 				}
 			}
 		}
+
+		public DockVisualStyle VisualStyle { get; set; }
 		
 		internal void ResetDefaultSize ()
 		{
