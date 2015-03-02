@@ -524,12 +524,17 @@ namespace Pinta.Core
             settings.CloseOutput = false;
             XmlWriter writer = XmlWriter.Create (stream, settings);
             
+            // Flat ODG (.fodg) replaces "document-cotent" with "document" 
             writer.WriteStartElement ("office", "document-content", nsoffice);
             // declare the namespace that are going to be used 
             writer.WriteAttributeString ("xmlns", "office", null, nsoffice);
             writer.WriteAttributeString ("xmlns", "draw", null, nsdraw);
             writer.WriteAttributeString ("xmlns", "xlink", null, nsxlink);
             writer.WriteAttributeString ("xmlns", "svg", null, nssvg);
+//            writer.WriteAttributeString ("office", "version", null, "1.0");
+            // Flat ODG (.fodg) includes the mimetype inline 
+//            writer.WriteAttributeString ("office", "mimetype", null, oraMimeType);
+            
             writer.WriteStartElement ("body", nsoffice);
             writer.WriteStartElement ("drawing", nsoffice);
 
