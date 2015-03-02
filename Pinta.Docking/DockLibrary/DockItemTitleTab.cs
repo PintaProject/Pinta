@@ -28,12 +28,9 @@
 using Gtk; 
 
 using System;
-using MonoDevelop.Ide.Gui;
 using System.Linq;
-using MonoDevelop.Core;
-using MonoDevelop.Ide;
-using Mono.TextEditor;
 using MonoDevelop.Components;
+using Mono.Unix;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -60,7 +57,7 @@ namespace MonoDevelop.Components.Docking
 		static Xwt.Drawing.Image pixAutoHide;
 		static Xwt.Drawing.Image pixDock;
 
-		static double PixelScale = GtkWorkarounds.GetPixelScale ();
+        static double PixelScale = GtkWorkarounds.GetPixelScale ();
 
 		const int TopPadding = 5;
 		const int BottomPadding = 7;
@@ -162,7 +159,7 @@ namespace MonoDevelop.Components.Docking
 
 			btnDock = new ImageButton ();
 			btnDock.Image = pixAutoHide;
-			btnDock.TooltipText = GettextCatalog.GetString ("Auto Hide");
+			btnDock.TooltipText = Catalog.GetString ("Auto Hide");
 			btnDock.CanFocus = false;
 //			btnDock.WidthRequest = btnDock.HeightRequest = 17;
 			btnDock.Clicked += OnClickDock;
@@ -171,7 +168,7 @@ namespace MonoDevelop.Components.Docking
 
 			btnClose = new ImageButton ();
 			btnClose.Image = pixClose;
-			btnClose.TooltipText = GettextCatalog.GetString ("Close");
+			btnClose.TooltipText = Catalog.GetString ("Close");
 			btnClose.CanFocus = false;
 //			btnClose.WidthRequest = btnClose.HeightRequest = 17;
 			btnClose.WidthRequest = btnDock.SizeRequest ().Width;
@@ -245,10 +242,10 @@ namespace MonoDevelop.Components.Docking
 					btnClose.Image = pixClose;
 				if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating) {
 					btnDock.Image = pixDock;
-					btnDock.TooltipText = GettextCatalog.GetString ("Dock");
+					btnDock.TooltipText = Catalog.GetString ("Dock");
 				} else {
 					btnDock.Image = pixAutoHide;
-					btnDock.TooltipText = GettextCatalog.GetString ("Auto Hide");
+					btnDock.TooltipText = Catalog.GetString ("Auto Hide");
 				}
 			} else {
 				btnDock.Image = null;

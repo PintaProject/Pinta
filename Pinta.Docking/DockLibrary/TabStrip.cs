@@ -31,10 +31,7 @@
 using Gtk; 
 
 using System;
-using MonoDevelop.Ide.Gui;
 using System.Linq;
-using MonoDevelop.Core;
-using MonoDevelop.Ide;
 
 namespace MonoDevelop.Components.Docking
 {

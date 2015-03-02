@@ -31,8 +31,6 @@
 
 using System;
 using Gtk;
-using Mono.TextEditor;
-using MonoDevelop.Ide.Gui;
 using MonoDevelop.Components;
 using Xwt.Motion;
 using Animations = Xwt.Motion.AnimationExtensions;

@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 using Gdk;
 
 namespace Pinta.Resources
@@ -58,6 +59,13 @@ namespace Pinta.Resources
 				return CreateMissingImage (size);
 			}
 		}
+
+        public static Stream GetResourceIconStream (string name)
+        {
+            var ass = typeof (Pinta.Resources.ResourceLoader).Assembly;
+
+            return ass.GetManifestResourceStream (name);
+        }
 
 		// From MonoDevelop:
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs

@@ -45,7 +45,9 @@ namespace Pinta
 
 		public MainWindow ()
 		{
-			// Build our window
+            Xwt.Application.InitializeAsGuest (Xwt.ToolkitType.Gtk);
+            
+            // Build our window
 			CreateWindow ();
 
 			// Initialize interface things
@@ -295,6 +297,14 @@ namespace Pinta
 			// Dock widget
 			dock = new DockFrame ();
 			dock.CompactGuiLevel = 5;
+
+            var style = new DockVisualStyle ();
+            style.PadTitleLabelColor = Styles.PadLabelColor;
+            style.PadBackgroundColor = Styles.PadBackground;
+            style.InactivePadBackgroundColor = Styles.InactivePadBackground;
+            style.TabStyle = DockTabStyle.Normal;
+            style.ShowPadTitleIcon = false;
+            dock.DefaultVisualStyle = style;
 
 			// Toolbox pad
 			var toolboxpad = new ToolBoxPad ();

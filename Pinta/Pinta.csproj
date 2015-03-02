@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -105,6 +105,15 @@
     </Reference>
     <Reference Include="Mono.Addins.Setup, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <HintPath>..\lib\Mono.Addins.Setup.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt">
+      <HintPath>..\..\monodevelop\main\external\xwt\Xwt\bin\Debug\Xwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.Gtk">
+      <HintPath>..\..\monodevelop\main\external\xwt\Xwt.Gtk\bin\Debug\Xwt.Gtk.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.Gtk.Windows">
+      <HintPath>..\..\monodevelop\main\external\xwt\Xwt.Gtk.Windows\bin\Debug\Xwt.Gtk.Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

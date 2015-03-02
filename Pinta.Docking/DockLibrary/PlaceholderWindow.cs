@@ -110,7 +110,7 @@ namespace MonoDevelop.Components.Docking
 		
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{
-			Gdk.Rectangle geometry = Mono.TextEditor.GtkWorkarounds.GetUsableMonitorGeometry (Screen, Screen.GetMonitorAtPoint (x, y));
+			Gdk.Rectangle geometry = GtkWorkarounds.GetUsableMonitorGeometry (Screen, Screen.GetMonitorAtPoint (x, y));
 			if (x < geometry.X)
 				x = geometry.X;
 			if (x + w > geometry.Right)

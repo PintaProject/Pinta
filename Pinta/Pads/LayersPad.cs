@@ -42,7 +42,7 @@ namespace Pinta
 
 			layers_item.Label = Catalog.GetString ("Layers");
 			layers_item.Content = layers;
-			layers_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.MergeLayerDown.png");
+			layers_item.Icon = Xwt.Drawing.Image.FromStream (PintaCore.Resources.GetResourceIconStream ("Menu.Layers.MergeLayerDown.png"));
 
 			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());

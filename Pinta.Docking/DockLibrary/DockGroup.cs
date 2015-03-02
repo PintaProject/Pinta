@@ -32,7 +32,6 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 using Gtk;
-using MonoDevelop.Ide.Gui;
 
 namespace MonoDevelop.Components.Docking
 {

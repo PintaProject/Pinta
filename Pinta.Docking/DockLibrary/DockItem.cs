@@ -32,7 +32,6 @@ using System;
 using System.Xml;
 using Gtk;
 using Mono.Unix;
-using Mono.TextEditor;
 
 namespace MonoDevelop.Components.Docking
 {

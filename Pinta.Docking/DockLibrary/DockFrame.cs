@@ -36,7 +36,6 @@ using System.Collections.Generic;
 using Gtk;
 using Gdk;
 using Xwt.Motion;
-using MonoDevelop.Core;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -68,7 +67,7 @@ namespace MonoDevelop.Components.Docking
 
 		public DockFrame ()
 		{
-			Mono.TextEditor.GtkWorkarounds.FixContainerLeak (this);
+            GtkWorkarounds.FixContainerLeak (this);
 
 			dockBarTop = new DockBar (this, Gtk.PositionType.Top);
 			dockBarBottom = new DockBar (this, Gtk.PositionType.Bottom);
@@ -875,7 +874,8 @@ namespace MonoDevelop.Components.Docking
 				win.Move (p.X, p.Y);
 				win.Resize (width, height);
 				win.Show ();
-				Ide.DesktopService.AddChildWindow ((Gtk.Window)Toplevel, win);
+                // Pinta TODO: May be needed on Mac?
+				//Ide.DesktopService.AddChildWindow ((Gtk.Window)Toplevel, win);
 				win.AcceptFocus = true;
 				win.Opacity = 1.0;
 
