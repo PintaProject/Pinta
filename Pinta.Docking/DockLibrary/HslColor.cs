@@ -26,9 +26,8 @@
 
 using System;
 using Gdk;
-using Pinta.Core;
 
-namespace MonoDevelop.Components
+namespace MonoDevelop.Components.Docking
 {
 	public struct HslColor
 	{

@@ -28,7 +28,6 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 using MonoDevelop.Components;
-using Pinta.Core;
 
 namespace MonoDevelop.Components.Docking
 {
