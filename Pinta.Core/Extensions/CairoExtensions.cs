@@ -971,27 +971,29 @@ namespace Pinta.Core
 			}
 		}
 
-		public static Gdk.Rectangle GetBounds (this Path path)
-		{
-			Rectangle rect;
+        [DllImport(CairoLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void cairo_path_extents(IntPtr cr, out double x1, out double y1, out double x2, out double y2);
 
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
-				g.AppendPath (path);
+        public static Gdk.Rectangle GetBounds(this Path path)
+        {
+            Rectangle rect;
 
-				// We don't want the bounding box to include a stroke width 
-				// of 1, but setting it to 0 returns an empty rectangle.  Set
-				// it to a sufficiently small width and rounding takes care of it
-				g.LineWidth = .01;
-				rect = g.FixedStrokeExtents ();
-			}
+            using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
+            {
+                g.AppendPath(path);
 
-			int x = (int)Math.Round (rect.X);
-			int y = (int)Math.Round (rect.Y);
-			int w = (int)Math.Round (rect.Width);
-			int h = (int)Math.Round (rect.Height);
+                double x1, y1, x2, y2;
+                cairo_path_extents(g.Handle, out x1, out y1, out x2, out y2);
+                rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+            }
 
-			return new Gdk.Rectangle (x, y, w, h);
-		}
+            int x = (int)Math.Round(rect.X);
+            int y = (int)Math.Round(rect.Y);
+            int w = (int)Math.Round(rect.Width);
+            int h = (int)Math.Round(rect.Height);
+
+            return new Gdk.Rectangle(x, y, w, h);
+        }
 
 		public static Color Clone(this Color color)
 		{
