@@ -133,9 +133,12 @@ namespace Pinta
 			PintaCore.Actions.Image.Rotate180.Sensitive = enable;
 			PintaCore.Actions.Image.RotateCCW.Sensitive = enable;
 			PintaCore.Actions.Image.RotateCW.Sensitive = enable;
+		    PintaCore.Actions.Image.Flatten.Sensitive = enable;
 
 			PintaCore.Actions.Layers.AddNewLayer.Sensitive = enable;
+			PintaCore.Actions.Layers.DeleteLayer.Sensitive = enable;
 			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = enable;
+			PintaCore.Actions.Layers.MergeLayerDown.Sensitive = enable;
 			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = enable;
 			PintaCore.Actions.Layers.FlipVertical.Sensitive = enable;
 			PintaCore.Actions.Layers.ImportFromFile.Sensitive = enable;
