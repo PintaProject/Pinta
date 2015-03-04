@@ -43,6 +43,10 @@ build: Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
 
+test: build
+	$(XBUILD) tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj
+	nunit-console bin/Pinta.Core.Tests.dll
+
 # target: list - List source files.
 list:
 	if ! git status > /dev/null 2> /dev/null ;\
