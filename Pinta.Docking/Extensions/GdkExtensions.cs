@@ -35,14 +35,16 @@ namespace MonoDevelop.Components.Docking
 {
     static class GdkExtensions
 	{
-        public static Gdk.Image WithAlpha (this Gdk.Image image, double opacity)
-        {
-            return image;
-        }
-
         public static Gdk.Pixbuf WithAlpha (this Gdk.Pixbuf image, double opacity)
         {
-            return (Gdk.Pixbuf)image.Clone ();
+            using (var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, image.Width, image.Height)) {
+                using (var g = new Cairo.Context (surf)) {
+                    CairoHelper.SetSourcePixbuf (g, image, 0, 0);
+                    g.PaintWithAlpha (opacity);
+                }
+
+                return new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
+            }
         }
 
         public static Gdk.Pixbuf FromResource (string name)
