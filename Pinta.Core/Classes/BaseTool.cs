@@ -87,29 +87,17 @@ namespace Pinta.Core
 		{
 			get
 			{
-				if (antialiasing_button == null)
-				{
-					return false;
-				}
-				else
-				{
-					return ShowAntialiasingButton && (bool)antialiasing_button.SelectedItem.Tag;
-				}
+                return (antialiasing_button != null) &&
+                        ShowAntialiasingButton &&
+                        (bool)antialiasing_button.SelectedItem.Tag;
 			}
 
 			set
 			{
-				if (ShowAntialiasingButton && antialiasing_button != null)
-				{
-					if (value)
-					{
-						antialiasing_button.SelectedItem = aaOn;
-					}
-					else
-					{
-						antialiasing_button.SelectedItem = aaOff;
-					}
-				}
+			    if (!ShowAntialiasingButton || antialiasing_button == null)
+                    return;
+
+			    antialiasing_button.SelectedItem = value ? aaOn : aaOff;
 			}
 		}
 
