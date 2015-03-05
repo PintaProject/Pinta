@@ -24,6 +24,7 @@
 
             <!-- Additional Assemblies -->
             <File Name="Pinta.Core.dll" Source="$(var.BuildRoot)\Pinta.Core.dll" />
+            <File Name="Pinta.Docking.dll" Source="$(var.BuildRoot)\Pinta.Docking.dll" />
             <File Name="Pinta.Gui.Widgets.dll" Source="$(var.BuildRoot)\Pinta.Gui.Widgets.dll" />
             <File Name="Pinta.Resources.dll" Source="$(var.BuildRoot)\Pinta.Resources.dll" />
             <File Name="ICSharpCode.SharpZipLib.dll" Source="$(var.BuildRoot)\ICSharpCode.SharpZipLib.dll" />
@@ -34,6 +35,7 @@
             <!-- Debug Symbols -->
             <File Name="Pinta.pdb" Source="$(var.BuildRoot)\Pinta.pdb" />
             <File Name="Pinta.Core.pdb" Source="$(var.BuildRoot)\Pinta.Core.pdb" />
+            <File Name="Pinta.Docking.pdb" Source="$(var.BuildRoot)\Pinta.Docking.pdb" />
             <File Name="Pinta.Gui.Widgets.pdb" Source="$(var.BuildRoot)\Pinta.Gui.Widgets.pdb" />
             <File Name="Pinta.Resources.pdb" Source="$(var.BuildRoot)\Pinta.Resources.pdb" />
 

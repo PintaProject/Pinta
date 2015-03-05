@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -142,27 +142,6 @@
     <Compile Include="Dialogs\JpegCompressionDialog.cs" />
     <Compile Include="Dialogs\SpinButtonEntryDialog.cs" />
     <Compile Include="Dialogs\VersionInformationTabPage.cs" />
-    <Compile Include="DockLibrary\AutoHideBox.cs" />
-    <Compile Include="DockLibrary\DockBar.cs" />
-    <Compile Include="DockLibrary\DockBarItem.cs" />
-    <Compile Include="DockLibrary\DockContainer.cs" />
-    <Compile Include="DockLibrary\DockFrame.cs" />
-    <Compile Include="DockLibrary\DockFrameTopLevel.cs" />
-    <Compile Include="DockLibrary\DockGroup.cs" />
-    <Compile Include="DockLibrary\DockGroupItem.cs" />
-    <Compile Include="DockLibrary\DockGroupType.cs" />
-    <Compile Include="DockLibrary\DockItem.cs" />
-    <Compile Include="DockLibrary\DockItemBehavior.cs" />
-    <Compile Include="DockLibrary\DockItemContainer.cs" />
-    <Compile Include="DockLibrary\DockItemStatus.cs" />
-    <Compile Include="DockLibrary\DockItemToolbar.cs" />
-    <Compile Include="DockLibrary\DockLayout.cs" />
-    <Compile Include="DockLibrary\DockObject.cs" />
-    <Compile Include="DockLibrary\DockPosition.cs" />
-    <Compile Include="DockLibrary\HslColor.cs" />
-    <Compile Include="DockLibrary\PlaceholderWindow.cs" />
-    <Compile Include="DockLibrary\ShadedContainer.cs" />
-    <Compile Include="DockLibrary\TabStrip.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
     <Compile Include="Pads\ColorPalettePad.cs" />
     <Compile Include="Pads\CanvasPad.cs" />
@@ -194,28 +173,15 @@
     <Compile Include="MacInterop\IgeMacMenu.cs" />
     <Compile Include="AddinSetupService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="DockLibrary\stock-auto-hide.png">
-      <LogicalName>stock-auto-hide.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-close-12.png">
-      <LogicalName>stock-close-12.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-dock.png">
-      <LogicalName>stock-dock.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-menu-left-12.png">
-      <LogicalName>stock-menu-left-12.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\stock-menu-right-12.png">
-      <LogicalName>stock-menu-right-12.png</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
       <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
       <Name>Pinta.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj">
+      <Project>{8467329a-1bdc-4f21-8349-3e484c185d14}</Project>
+      <Name>Pinta.Docking</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj">
       <Project>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</Project>
@@ -226,7 +192,5 @@
     <Content Include="Pinta.ico" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Actions\Addins\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8467329A-1BDC-4F21-8349-3E484C185D14}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pinta.Docking</RootNamespace>
+    <AssemblyName>Pinta.Docking</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\MouseTracker.cs" />
+    <Compile Include="Classes\Platform.cs" />
+    <Compile Include="Classes\Styles.cs" />
+    <Compile Include="DockLibrary\AutoHideBox.cs" />
+    <Compile Include="DockLibrary\DockBar.cs" />
+    <Compile Include="DockLibrary\DockBarItem.cs" />
+    <Compile Include="DockLibrary\DockContainer.cs" />
+    <Compile Include="DockLibrary\DockFrame.cs" />
+    <Compile Include="DockLibrary\DockFrameTopLevel.cs" />
+    <Compile Include="DockLibrary\DockGroup.cs" />
+    <Compile Include="DockLibrary\DockGroupItem.cs" />
+    <Compile Include="DockLibrary\DockGroupType.cs" />
+    <Compile Include="DockLibrary\DockItem.cs" />
+    <Compile Include="DockLibrary\DockItemBehavior.cs" />
+    <Compile Include="DockLibrary\DockItemContainer.cs" />
+    <Compile Include="DockLibrary\DockItemStatus.cs" />
+    <Compile Include="DockLibrary\DockItemTitleTab.cs" />
+    <Compile Include="DockLibrary\DockItemToolbar.cs" />
+    <Compile Include="DockLibrary\DockLayout.cs" />
+    <Compile Include="DockLibrary\DockObject.cs" />
+    <Compile Include="DockLibrary\DockPosition.cs" />
+    <Compile Include="DockLibrary\DockVisualStyle.cs" />
+    <Compile Include="DockLibrary\PlaceholderWindow.cs" />
+    <Compile Include="DockLibrary\TabStrip.cs" />
+    <Compile Include="Extensions\GdkExtensions.cs" />
+    <Compile Include="Extensions\GtkExtensions.cs" />
+    <Compile Include="Extensions\CairoExtensions.cs" />
+    <Compile Include="Extensions\GtkWorkarounds.cs" />
+    <Compile Include="Extensions\PangoUtil.cs" />
+    <Compile Include="MonoDevelop.Components\ExtendedLabel.cs" />
+    <Compile Include="MonoDevelop.Components\ImageButton.cs" />
+    <Compile Include="MonoDevelop.Components\ImageView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xwt.Drawing\Color.cs" />
+    <Compile Include="Xwt.Drawing\HslColor.cs" />
+    <Compile Include="Xwt.Motion\Animation.cs" />
+    <Compile Include="Xwt.Motion\AnimationExtensions.cs" />
+    <Compile Include="Xwt.Motion\Easing.cs" />
+    <Compile Include="Xwt.Motion\IAnimatable.cs" />
+    <Compile Include="Xwt.Motion\Tweener.cs" />
+    <Compile Include="Xwt\Point.cs" />
+    <Compile Include="Xwt\Rectangle.cs" />
+    <Compile Include="Xwt\Size.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DockLibrary\icons\pad-close-9%402x.png">
+      <LogicalName>pad-close-9%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-close-9.png">
+      <LogicalName>pad-close-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9%402x.png">
+      <LogicalName>pad-dock-9%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9.png">
+      <LogicalName>pad-dock-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9%402x.png">
+      <LogicalName>pad-minimize-9%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png">
+      <LogicalName>pad-minimize-9.png</LogicalName>
+    </EmbeddedResource>
+    <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pinta.Docking.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
