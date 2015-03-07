@@ -227,7 +227,6 @@ namespace Pinta.Tools
 					else
 						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
 				}
-				ReDraw (s);
 			});
 			controls[1] = new ToolControl ((x, y, s) => {
 				shape_origin.X = x;
@@ -238,7 +237,6 @@ namespace Pinta.Tools
 					else
 						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
 				}
-				ReDraw (s);
 			});
 			controls[2] = new ToolControl ((x, y, s) => {
 				shape_end.X = x;
@@ -249,7 +247,6 @@ namespace Pinta.Tools
 					else
 						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
 				}
-				ReDraw (s);
 			});
 			controls[3] = new ToolControl ((x, y, s) => {
 				shape_end.X = x;
@@ -260,7 +257,6 @@ namespace Pinta.Tools
 					else
 						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
 				}
-				ReDraw (s);
 			});
 			controls[4] = new ToolControl ((x, y, s) => {
 				shape_origin.X = x;
@@ -269,7 +265,6 @@ namespace Pinta.Tools
 					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
 					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
 				}
-				ReDraw (s);
 			});
 			controls[5] = new ToolControl ((x, y, s) => {
 				shape_origin.Y = y;
@@ -278,7 +273,6 @@ namespace Pinta.Tools
 					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
 					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
 				}
-				ReDraw (s);
 			});
 			controls[6] = new ToolControl ((x, y, s) => {
 				shape_end.X = x;
@@ -287,7 +281,6 @@ namespace Pinta.Tools
 					shape_origin.Y = (shape_origin.Y + shape_end.Y - d) / 2;
 					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
 				}
-				ReDraw (s);
 			});
 			controls[7] = new ToolControl ((x, y, s) => {
 				shape_end.Y = y;
@@ -296,7 +289,6 @@ namespace Pinta.Tools
 					shape_origin.X = (shape_origin.X + shape_end.X - d) / 2;
 					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
 				}
-				ReDraw (s);
 			});
 		}
 
@@ -314,9 +306,12 @@ namespace Pinta.Tools
 		public void DrawHandler (Layer layer)
 		{
 			layer.Clear ();
-			
-			foreach (ToolControl ct in controls)
-				ct.Render (layer);
+
+		    using (var g = new Context(layer.Surface))
+		    {
+		        foreach (var tool_control in controls)
+                    tool_control.Render (g);
+		    }
 		}
 
 		public void CheckHandlerCursor (PointD point)

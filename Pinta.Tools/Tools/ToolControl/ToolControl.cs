@@ -56,16 +56,14 @@ namespace Pinta.Tools
             action (x, y, state);
         }
 
-		public void Render (Layer layer)
-		{
+        public void Render (Context g)
+        {
 			double scale_factor = (1.0 / PintaCore.Workspace.ActiveWorkspace.Scale);
-			using (Context g = new Context (layer.Surface)) {
-                var rect = new Cairo.Rectangle (Position.X - scale_factor * Size / 2,
-                                                Position.Y - scale_factor * Size / 2,
-                                                scale_factor * Size, scale_factor * Size);
-				g.FillStrokedRectangle (rect, FillColor, StrokeColor, 1);
-			}
-		}
-	}
+            var rect = new Cairo.Rectangle (Position.X - scale_factor * Size / 2,
+                                            Position.Y - scale_factor * Size / 2,
+                                            scale_factor * Size, scale_factor * Size);
+            g.FillStrokedRectangle (rect, FillColor, StrokeColor, 1);
+        }
+    }
 }
 
