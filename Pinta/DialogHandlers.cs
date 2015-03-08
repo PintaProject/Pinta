@@ -139,11 +139,13 @@ namespace Pinta
 			PintaCore.Actions.Layers.DeleteLayer.Sensitive = enable;
 			PintaCore.Actions.Layers.DuplicateLayer.Sensitive = enable;
 			PintaCore.Actions.Layers.MergeLayerDown.Sensitive = enable;
+			PintaCore.Actions.Layers.ImportFromFile.Sensitive = enable;
 			PintaCore.Actions.Layers.FlipHorizontal.Sensitive = enable;
 			PintaCore.Actions.Layers.FlipVertical.Sensitive = enable;
-			PintaCore.Actions.Layers.ImportFromFile.Sensitive = enable;
-			PintaCore.Actions.Layers.Properties.Sensitive = enable;
 			PintaCore.Actions.Layers.RotateZoom.Sensitive = enable;
+		    PintaCore.Actions.Layers.MoveLayerUp.Sensitive = enable;
+		    PintaCore.Actions.Layers.MoveLayerDown.Sensitive = enable;
+			PintaCore.Actions.Layers.Properties.Sensitive = enable;
 
 			PintaCore.Actions.Adjustments.ToggleActionsSensitive (enable);
 			PintaCore.Actions.Effects.ToggleActionsSensitive (enable);
