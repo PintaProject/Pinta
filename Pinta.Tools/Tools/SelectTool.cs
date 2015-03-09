@@ -111,8 +111,7 @@ namespace Pinta.Tools
 				ReDraw(args.Event.State);
 				if (doc.Selection != null)
 				{
-                    SelectionModeHandler.PerformSelectionMode (combine_mode,
-                        DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+                    SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
 
                     doc.Selection.selOrigin = shape_origin;
                     doc.Selection.selEnd = shape_end;
@@ -168,8 +167,7 @@ namespace Pinta.Tools
 			
 			if (doc.Selection != null)
 			{
-                SelectionModeHandler.PerformSelectionMode (combine_mode,
-                    DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+			    SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
 				PintaCore.Workspace.Invalidate();
 			}
 		}

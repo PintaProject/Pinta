@@ -104,13 +104,9 @@ namespace Pinta.Core
             return mode;
         }
 
-        public static void PerformSelectionMode (CombineMode mode, Point[][] polygonSet)
+        public static void PerformSelectionMode (CombineMode mode,  List<List<IntPoint>> polygons)
         {
-            Document doc = PintaCore.Workspace.ActiveDocument;
-
-            //Convert Pinta's passed in Polygon Set to a Clipper Polygon collection.
-            List<List<IntPoint>> newPolygons = DocumentSelection.ConvertToPolygons (polygonSet);
-
+            var doc = PintaCore.Workspace.ActiveDocument;
             doc.Selection.Dispose ();
             doc.Selection = doc.PreviousSelection.Clone ();
 
@@ -123,17 +119,17 @@ namespace Pinta.Core
                     doc.Selection.SelectionPolygons.Clear ();
 
                     //Set the resulting selection path to the new selection path.
-                    doc.Selection.SelectionPolygons = newPolygons;
-                    doc.Selection.SelectionPath = g.CreatePolygonPath (polygonSet);
+                    doc.Selection.SelectionPolygons = polygons;
+                    doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet(polygons));
                 }
                 else
                 {
-                    List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>> ();
+                    var resultingPolygons = new List<List<IntPoint>> ();
 
                     //Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
                     //Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
                     doc.Selection.SelectionClipper.AddPolygons (doc.Selection.SelectionPolygons, PolyType.ptSubject);
-                    doc.Selection.SelectionClipper.AddPolygons (newPolygons, PolyType.ptClip);
+                    doc.Selection.SelectionClipper.AddPolygons (polygons, PolyType.ptClip);
 
                     switch (mode)
                     {

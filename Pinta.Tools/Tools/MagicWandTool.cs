@@ -98,7 +98,7 @@ namespace Pinta.Tools
             doc.PreviousSelection = doc.Selection.Clone ();
 
             doc.Selection.SelectionPolygons.Clear ();
-            SelectionModeHandler.PerformSelectionMode (combine_mode, polygonSet);
+            SelectionModeHandler.PerformSelectionMode (combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
 
 			doc.History.PushNewItem(undoAction);
 			doc.Workspace.Invalidate();

@@ -117,8 +117,7 @@ namespace Pinta.Tools
 
 			doc.Selection.SelectionPolygons.Clear ();
 			doc.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
-			SelectionModeHandler.PerformSelectionMode (combine_mode,
-			                                           DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+		    SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
 			doc.Workspace.Invalidate ();
 		}
 
@@ -143,8 +142,7 @@ namespace Pinta.Tools
 
 			doc.Selection.SelectionPolygons.Clear ();
 			doc.Selection.SelectionPolygons.Add(lasso_polygon.ToList());
-			SelectionModeHandler.PerformSelectionMode (combine_mode,
-			                                           DocumentSelection.ConvertToPolygonSet (doc.Selection.SelectionPolygons));
+		    SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
 			doc.Workspace.Invalidate ();
 
 			if (hist != null)
