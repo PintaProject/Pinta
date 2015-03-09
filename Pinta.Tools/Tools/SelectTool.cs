@@ -113,8 +113,8 @@ namespace Pinta.Tools
 				{
                     SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
 
-                    doc.Selection.selOrigin = shape_origin;
-                    doc.Selection.selEnd = shape_end;
+                    doc.Selection.Origin = shape_origin;
+                    doc.Selection.End = shape_end;
 					PintaCore.Workspace.Invalidate();
 				}
                 if (hist != null)
@@ -341,8 +341,8 @@ namespace Pinta.Tools
             if (PintaCore.Tools.CurrentTool == this)
                 doc.ToolLayer.Hidden = false;
 
-			shape_origin = doc.Selection.selOrigin;
-			shape_end = doc.Selection.selEnd;
+			shape_origin = doc.Selection.Origin;
+			shape_end = doc.Selection.End;
 			updateHandler();
 		}
 
@@ -355,8 +355,8 @@ namespace Pinta.Tools
             if (PintaCore.Tools.CurrentTool == this)
                 doc.ToolLayer.Hidden = false;
 
-			shape_origin = doc.Selection.selOrigin;
-			shape_end = doc.Selection.selEnd;
+			shape_origin = doc.Selection.Origin;
+			shape_end = doc.Selection.End;
 			updateHandler();
 		}
 

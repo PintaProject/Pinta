@@ -230,8 +230,8 @@ namespace Pinta.Core
 			doc.ResetSelectionPaths ();
 			doc.Selection.SelectionPolygons.Clear();
             doc.PreviousSelection.SelectionPolygons.Clear ();
-			doc.Selection.selOrigin = new PointD();
-			doc.Selection.selEnd = new PointD();
+			doc.Selection.Origin = new PointD();
+			doc.Selection.End = new PointD();
 
 			doc.History.PushNewItem (hist);
 			doc.Workspace.Invalidate ();

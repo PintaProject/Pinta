@@ -39,8 +39,8 @@ namespace Pinta.Core
 		public List<List<IntPoint>> SelectionPolygons = new List<List<IntPoint>>();
 		public Clipper SelectionClipper = new Clipper();
 
-		public PointD selOrigin;
-		public PointD selEnd;
+		public PointD Origin;
+		public PointD End;
 
 		public Path SelectionPath
 		{
@@ -59,7 +59,7 @@ namespace Pinta.Core
 
 		public void Clip (Context g)
 		{
-			g.AppendPath (selection_path);
+			g.AppendPath (SelectionPath);
 			g.FillRule = FillRule.EvenOdd;
 			g.Clip ();
 		}
@@ -70,7 +70,7 @@ namespace Pinta.Core
 			g.Translate (0.5, 0.5);
 			g.Scale (scale, scale);
 			
-			g.AppendPath (selection_path);
+			g.AppendPath (SelectionPath);
 			
 			if (fillSelection)
 			{
@@ -101,16 +101,11 @@ namespace Pinta.Core
 		{
 			DocumentSelection clonedSelection = new DocumentSelection();
 
-			if (selection_path != null)
-			{
-				clonedSelection.selection_path = selection_path.Clone();
-			}
-
 			clonedSelection.SelectionPolygons = SelectionPolygons.ToList();
 			clonedSelection.SelectionClipper = new Clipper();
 
-			clonedSelection.selOrigin = new PointD(selOrigin.X, selOrigin.Y);
-			clonedSelection.selEnd = new PointD(selEnd.X, selEnd.Y);
+			clonedSelection.Origin = new PointD(Origin.X, Origin.Y);
+			clonedSelection.End = new PointD(End.X, End.Y);
 
 			return clonedSelection;
 		}
