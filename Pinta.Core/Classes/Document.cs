@@ -611,8 +611,9 @@ namespace Pinta.Core
 		
 		public void ResetSelectionPaths()
 		{
-			Selection.ResetSelection(selection_layer.Surface, ImageSize);
-			PreviousSelection.ResetSelection(selection_layer.Surface, ImageSize);
+		    var rect = new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height);
+            Selection.CreateRectangleSelection (rect);
+            PreviousSelection.CreateRectangleSelection (rect);
 
 			ShowSelection = false;
 		}
@@ -844,8 +845,7 @@ namespace Pinta.Core
 			DocumentSelection old_selection = Selection.Clone();
 			bool old_show_selection = ShowSelection;
 
-			Selection.CreateRectangleSelection (SelectionLayer.Surface,
-			                                    new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
+			Selection.CreateRectangleSelection (new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
 			ShowSelection = true;
 
 			Workspace.Invalidate ();

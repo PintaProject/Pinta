@@ -49,7 +49,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.Selection.CreateRectangleSelection(l.Surface, r);
+			doc.Selection.CreateRectangleSelection(r);
 			
 			// Add some padding for invalidation
 			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);

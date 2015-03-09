@@ -70,8 +70,8 @@ namespace Pinta.Tools
 
 			// If there is no selection, select the whole image.
 			if (doc.Selection.SelectionPolygons.Count == 0) {
-				doc.Selection.CreateRectangleSelection (
-					doc.SelectionLayer.Surface, new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
+                doc.Selection.CreateRectangleSelection (
+                    new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
 			}
 
 			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
@@ -115,11 +115,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.Selection.SelectionClipper.Clear ();
 			doc.Selection.SelectionPolygons = newSelectionPolygons;
-			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
-				doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (newSelectionPolygons));
-				g.FillRule = FillRule.EvenOdd;
-				g.AppendPath (doc.Selection.SelectionPath);
-			}
+            doc.Selection.MarkDirty ();
 
 			doc.ShowSelection = true;
 			doc.SelectionLayer.Transform.InitMatrix (original_transform);

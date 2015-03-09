@@ -49,7 +49,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.Selection.CreateEllipseSelection(l.Surface, r);
+			doc.Selection.CreateEllipseSelection(r);
 			
 			return r;
 		}

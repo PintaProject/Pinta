@@ -120,7 +120,6 @@ namespace Pinta.Core
 
                     //Set the resulting selection path to the new selection path.
                     doc.Selection.SelectionPolygons = polygons;
-                    doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet(polygons));
                 }
                 else
                 {
@@ -160,8 +159,9 @@ namespace Pinta.Core
 
                     //Set the resulting selection path to the calculated ("clipped") selection path.
                     doc.Selection.SelectionPolygons = resultingPolygons;
-                    doc.Selection.SelectionPath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (resultingPolygons));
                 }
+
+                doc.Selection.MarkDirty ();
             }
 
             PintaCore.Workspace.CallSelectionChanged (null, EventArgs.Empty);

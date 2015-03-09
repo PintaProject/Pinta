@@ -44,18 +44,29 @@ namespace Pinta.Core
 
 		public Path SelectionPath
 		{
-			get { return selection_path; }
-			set
-			{
-				if (selection_path == value)
-					return;
+		    get
+		    {
+		        if (selection_path == null)
+		        {
+		            using (var g = new Context (PintaCore.Layers.CurrentLayer.Surface))
+		                selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
+		        }
 
-                if (selection_path != null)
-                    selection_path.Dispose ();
-
-				selection_path = value;
-			}
+                return selection_path;
+		    }
 		}
+
+        /// <summary>
+        /// Indicate that the selection has changed.
+        /// </summary>
+        public void MarkDirty()
+        {
+            if (selection_path != null)
+            {
+                selection_path.Dispose ();
+                selection_path = null;
+            }
+        }
 
 		public void Clip (Context g)
 		{
@@ -94,20 +105,17 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Make a complete copy of the Selection.
+		/// Makes a copy of the Selection.
 		/// </summary>
-		/// <returns>A copy of this Selection (as a DocumentSelection object).</returns>
 		public DocumentSelection Clone()
 		{
-			DocumentSelection clonedSelection = new DocumentSelection();
-
-			clonedSelection.SelectionPolygons = SelectionPolygons.ToList();
-			clonedSelection.SelectionClipper = new Clipper();
-
-			clonedSelection.Origin = new PointD(Origin.X, Origin.Y);
-			clonedSelection.End = new PointD(End.X, End.Y);
-
-			return clonedSelection;
+		    return new DocumentSelection
+		    {
+		        SelectionPolygons = SelectionPolygons.ToList (),
+		        SelectionClipper = new Clipper (),
+		        Origin = new PointD (Origin.X, Origin.Y),
+		        End = new PointD (End.X, End.Y)
+		    };
 		}
 
 		/// <summary>
@@ -187,16 +195,9 @@ namespace Pinta.Core
 		/// <summary>
 		/// Create an elliptical Selection from a bounding Rectangle.
 		/// </summary>
-		/// <param name="selectionSurface">The selection surface to use for calculating the elliptical Path.</param>
 		/// <param name="r">The bounding Rectangle surrounding the ellipse.</param>
-		public void CreateEllipseSelection(Surface selectionSurface, Rectangle r)
+		public void CreateEllipseSelection(Rectangle r)
 		{
-			using (Context g = new Context(selectionSurface))
-			{
-				SelectionPath = g.CreateEllipsePath(r);
-			}
-
-
 			//These values were calculated in the static CreateEllipsePath method
 			//in Pinta.Core.CairoExtensions, so they were used here as well.
 			double rx = r.Width / 2; //1/2 of the bounding Rectangle Width.
@@ -257,6 +258,7 @@ namespace Pinta.Core
 
 			//Add the newly calculated elliptical Polygon.
 			SelectionPolygons.Add(newPolygon);
+            MarkDirty ();
 		}
 
 		/// <summary>
@@ -327,19 +329,12 @@ namespace Pinta.Core
 		/// <summary>
 		/// Create a rectangular Selection from a Rectangle.
 		/// </summary>
-		/// <param name="selectionSurface">The selection surface to use for calculating the rectangular Path.</param>
 		/// <param name="r">The Rectangle.</param>
-		public void CreateRectangleSelection(Surface selectionSurface, Rectangle r)
+		public void CreateRectangleSelection(Rectangle r)
 		{
-			using (Context g = new Context(selectionSurface))
-			{
-				SelectionPath = g.CreateRectanglePath(r);
-			}
-
-			//Clear the Selection Polygons collection to start from a clean slate.
 			SelectionPolygons.Clear();
-
 			SelectionPolygons.Add (CreateRectanglePolygon (r));
+            MarkDirty ();
 		}
 
 		/// <summary>
@@ -366,24 +361,7 @@ namespace Pinta.Core
 			SelectionClipper.Clear ();
 
 			SelectionPolygons = resultingPolygons;
-			using (Context g = new Context (surface)) {
-				SelectionPath = g.CreatePolygonPath (ConvertToPolygonSet (resultingPolygons));
-			}
-		}
-
-		/// <summary>
-		/// Reset (clear) the Selection.
-		/// </summary>
-		/// <param name="selectionSurface"></param>
-		/// <param name="imageSize"></param>
-		public void ResetSelection(Surface selectionSurface, Gdk.Size imageSize)
-		{
-			using (Cairo.Context g = new Cairo.Context(selectionSurface))
-			{
-				SelectionPath = g.CreateRectanglePath(new Rectangle(0, 0, imageSize.Width, imageSize.Height));
-			}
-
-			SelectionPolygons.Clear();
+            MarkDirty ();
 		}
 
 		private List<IntPoint> CreateRectanglePolygon (Rectangle r)
@@ -413,6 +391,17 @@ namespace Pinta.Core
         {
             if (selection_path != null)
                 selection_path.Dispose ();
+        }
+
+        /// <summary>
+        /// Resets the selection.
+        /// </summary>
+        public void Clear ()
+        {
+            SelectionPolygons.Clear ();
+            Origin = new PointD(0, 0);
+            End = new PointD(0, 0);
+            MarkDirty ();
         }
     }
 }

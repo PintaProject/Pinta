@@ -111,8 +111,6 @@ namespace Pinta.Tools
 				
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
-
-				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
 			doc.Selection.SelectionPolygons.Clear ();
@@ -136,8 +134,6 @@ namespace Pinta.Tools
 
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
-
-				doc.Selection.SelectionPath = g.CopyPath ();
 			}
 
 			doc.Selection.SelectionPolygons.Clear ();
