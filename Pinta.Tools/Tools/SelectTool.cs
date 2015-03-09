@@ -108,6 +108,7 @@ namespace Pinta.Tools
                 }
 				doc.ToolLayer.Clear ();
 			} else {
+                ClearHandles (doc.ToolLayer);
 				ReDraw(args.Event.State);
 				if (doc.Selection != null)
 				{
@@ -163,7 +164,9 @@ namespace Pinta.Tools
             double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
             controls[active_control.Value].HandleMouseMove (x, y, args.Event.State);
 
-            ReDraw(args.Event.State);
+            ClearHandles (doc.ToolLayer);
+            RefreshHandler ();
+            ReDraw (args.Event.State);
 			
 			if (doc.Selection != null)
 			{
@@ -209,7 +212,7 @@ namespace Pinta.Tools
 			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
 			Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
 
-			updateHandler();
+            DrawHandler (doc.ToolLayer);
 
 			last_dirty = dirty;
 		}
@@ -303,8 +306,6 @@ namespace Pinta.Tools
 
 		public void DrawHandler (Layer layer)
 		{
-			layer.Clear ();
-
 		    using (var g = new Context(layer.Surface))
 		    {
 		        foreach (var tool_control in controls)
@@ -343,7 +344,7 @@ namespace Pinta.Tools
 
 			shape_origin = doc.Selection.Origin;
 			shape_end = doc.Selection.End;
-			updateHandler();
+			UpdateHandler();
 		}
 
 		public override void AfterRedo()
@@ -357,19 +358,32 @@ namespace Pinta.Tools
 
 			shape_origin = doc.Selection.Origin;
 			shape_end = doc.Selection.End;
-			updateHandler();
+			UpdateHandler();
 		}
 
 		/// <summary>
-		/// Update the selection handler positioning and drawing.
+		/// Update the selection handles' positions, and redraw them.
 		/// </summary>
-		private void updateHandler()
+        private void UpdateHandler ()
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			var doc = PintaCore.Workspace.ActiveDocument;
 
+		    ClearHandles (doc.ToolLayer);
 			RefreshHandler();
-			DrawHandler(doc.ToolLayer);
+            DrawHandler (doc.ToolLayer);
 			PintaCore.Workspace.Invalidate();
 		}
+
+        /// <summary>
+        /// Erase previously-drawn handles.
+        /// </summary>
+	    private void ClearHandles (Layer layer)
+	    {
+            using (var g = new Context (layer.Surface))
+		    {
+		        foreach (var tool_control in controls)
+                    tool_control.Clear (g);
+		    }
+	    }
 	}
 }

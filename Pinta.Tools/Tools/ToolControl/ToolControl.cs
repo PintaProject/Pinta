@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 using System;
 using Cairo;
-using Gdk;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -40,9 +39,9 @@ namespace Pinta.Tools
 
         private const int Size = 6;
 		private const int Tolerance = 10;
-		public static readonly Cairo.Color FillColor = new Cairo.Color (0, 0, 1, 0.5);
-		public static readonly Cairo.Color StrokeColor = new Cairo.Color (0, 0, 1, 0.7);
-		private MouseHandler action;
+		public static readonly Color FillColor = new Color (0, 0, 1, 0.5);
+		public static readonly Color StrokeColor = new Color (0, 0, 1, 0.7);
+		private readonly MouseHandler action;
 
 		public PointD Position {get; set;}
 
@@ -58,12 +57,32 @@ namespace Pinta.Tools
 
         public void Render (Context g)
         {
-			double scale_factor = (1.0 / PintaCore.Workspace.ActiveWorkspace.Scale);
-            var rect = new Cairo.Rectangle (Position.X - scale_factor * Size / 2,
-                                            Position.Y - scale_factor * Size / 2,
-                                            scale_factor * Size, scale_factor * Size);
+            var rect = GetHandleRect ();
             g.FillStrokedRectangle (rect, FillColor, StrokeColor, 1);
         }
-    }
+
+        /// <summary>
+        /// Erase the handle that was drawn in a previous call to Render ().
+        /// </summary>
+        public void Clear (Context g)
+        {
+            g.Save ();
+
+            var rect = GetHandleRect ().Inflate (2, 2);
+            g.AppendPath (g.CreateRectanglePath (rect));
+            g.Operator = Operator.Clear;
+            g.Fill ();
+
+            g.Restore ();
+        }
+
+	    private Rectangle GetHandleRect ()
+	    {
+	        var scale_factor = (1.0/PintaCore.Workspace.ActiveWorkspace.Scale);
+	        return new Cairo.Rectangle (Position.X - scale_factor*Size/2,
+	            Position.Y - scale_factor*Size/2,
+	            scale_factor*Size, scale_factor*Size);
+	    }
+	}
 }
 
