@@ -84,9 +84,6 @@ namespace Pinta
 			// Load the user's previous settings
 			LoadUserSettings ();
 
-			// Give the canvas focus
-			PintaCore.Chrome.Canvas.GrabFocus ();
-
 			// We support drag and drop for URIs
 			window_shell.AddDragDropSupport (new Gtk.TargetEntry ("text/uri-list", 0, 100));
 			
