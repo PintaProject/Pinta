@@ -75,7 +75,7 @@ namespace Pinta.Tools
 				var icon = CreateIconWithShape ("Cursor.ColorPicker.png",
 				                                CursorShape.Rectangle, SampleSize, 7, 27,
 				                                out iconOffsetX, out iconOffsetY);
-				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
+                return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
 		}
 		public override bool CursorChangesOnZoom { get { return true; } }

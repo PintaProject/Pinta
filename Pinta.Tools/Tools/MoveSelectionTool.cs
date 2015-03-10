@@ -48,7 +48,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Right click and drag the selection to rotate selection outline."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }
+            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
 		public override int Priority { get { return 11; } }

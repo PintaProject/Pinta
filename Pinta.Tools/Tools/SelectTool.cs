@@ -49,7 +49,7 @@ namespace Pinta.Tools
 		public SelectTool ()
 		{
 			CreateHandler ();
-			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+            cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
 		}
 
         #region ToolBar

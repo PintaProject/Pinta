@@ -43,7 +43,7 @@ namespace Pinta.Core
 
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
-		public DrawingArea Canvas { get { return drawing_area; } }
+		internal DrawingArea Canvas { get { return drawing_area; } }
 		public Window MainWindow { get { return main_window; } }
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public MenuBar MainMenu { get { return main_menu; } }

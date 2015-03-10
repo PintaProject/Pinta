@@ -63,7 +63,7 @@ namespace Pinta.Tools
 				                          "Right click to reverse.");
 			}
 		}
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Recolor.png"), 9, 18); } }
+        public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Recolor.png"), 9, 18); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.R; } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
 		public override int Priority { get { return 35; } }

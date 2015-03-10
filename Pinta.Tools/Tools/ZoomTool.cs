@@ -63,10 +63,10 @@ namespace Pinta.Tools
 		{
 			this.mouseDown = 0;
 
-			cursorZoomIn = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Menu.View.ZoomIn.png"), 0, 0);
-			cursorZoomOut = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Menu.View.ZoomOut.png"), 0, 0);
-			cursorZoom = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Zoom.png"), 0, 0);
-			cursorZoomPan = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+            cursorZoomIn = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.View.ZoomIn.png"), 0, 0);
+            cursorZoomOut = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.View.ZoomOut.png"), 0, 0);
+            cursorZoom = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Zoom.png"), 0, 0);
+            cursorZoomPan = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
 		}
 
 		protected void UpdateRectangle (PointD point)

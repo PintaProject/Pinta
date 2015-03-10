@@ -103,17 +103,17 @@ namespace Pinta.Tools
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
-				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display,
+                return new Gdk.Cursor (Gdk.Display.Default,
 				                       PintaCore.Resources.GetIcon ("Cursor.Text.png"),
 				                       16, 16);
 			}
 		}
-		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 0); } }
+        public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.Edit.EraseSelection.png"), 8, 0); } }
 
 		#region Constructor
 		public TextTool ()
 		{
-			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
+            cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
             imContext = new Gtk.IMMulticontext ();
             imContext.Commit += OnIMCommit;
             layout = new TextLayout ();
@@ -298,7 +298,8 @@ namespace Pinta.Tools
 
 		private void HandleFontChanged (object sender, EventArgs e)
 		{
-			PintaCore.Chrome.Canvas.GrabFocus ();
+            if (PintaCore.Workspace.HasOpenDocuments)
+                PintaCore.Workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
 
 			UpdateFontSizes ();
 			UpdateFont ();
@@ -508,7 +509,7 @@ namespace Pinta.Tools
 			Point pt = point.ToGdkPoint();
 
 			// Grab focus so we can get keystrokes
-			PintaCore.Chrome.Canvas.GrabFocus();
+			canvas.GrabFocus ();
 
 			if (selection != null)
                 selection.Dispose ();

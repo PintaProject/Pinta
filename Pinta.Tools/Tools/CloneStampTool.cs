@@ -52,7 +52,7 @@ namespace Pinta.Tools
 				var icon = CreateIconWithShape ("Cursor.CloneStamp.png",
 				                                CursorShape.Ellipse, BrushWidth, 16, 26,
 				                                out iconOffsetX, out iconOffsetY);
-				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
+                return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
 		}
 		public override bool CursorChangesOnZoom { get { return true; } }
@@ -159,7 +159,7 @@ namespace Pinta.Tools
 			//note that this WONT work if user presses control key and THEN selects the tool!
 			if (args.Event.Key == Key.Control_L || args.Event.Key == Key.Control_R) {
 				Gdk.Pixbuf icon = PintaCore.Resources.GetIcon ("Cursor.CloneStampSetSource.png");
-				Gdk.Cursor setSourceCursor = new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, icon, 16, 26);
+				Gdk.Cursor setSourceCursor = new Gdk.Cursor (Gdk.Display.Default, icon, 16, 26);
 				SetCursor(setSourceCursor);
 			}
 		}

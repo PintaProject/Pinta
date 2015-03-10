@@ -59,7 +59,7 @@ namespace Pinta.Tools
 				var icon = CreateIconWithShape ("Cursor.Eraser.png",
 				                                CursorShape.Ellipse, BrushWidth, 8, 22,
 				                                out iconOffsetX, out iconOffsetY);
-				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, icon, iconOffsetX, iconOffsetY);
+                return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
 		}
 		public override bool CursorChangesOnZoom { get { return true; } }
