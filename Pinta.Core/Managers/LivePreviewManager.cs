@@ -383,7 +383,7 @@ namespace Pinta.Core
 			int height = (int)Math.Ceiling (y2) - y;
 
 			// Tell GTK to expose the drawing area.			
-			PintaCore.Chrome.Canvas.QueueDrawArea (x, y, width, height);
+            PintaCore.Workspace.ActiveWorkspace.Canvas.QueueDrawArea (x, y, width, height);
 		}	
 	}
 }

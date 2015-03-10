@@ -280,7 +280,7 @@ namespace Pinta.Core
 				hist.StartSnapshotOfImage();
 				hist.RestoreSelection = doc.Selection.Clone();
 
-				PintaCore.Chrome.Canvas.GdkWindow.FreezeUpdates();
+				doc.Workspace.Canvas.GdkWindow.FreezeUpdates();
 
 				double original_scale = doc.Workspace.Scale;
 				doc.ImageSize = rect.Size;
@@ -289,7 +289,7 @@ namespace Pinta.Core
 
 				PintaCore.Actions.View.UpdateCanvasScale();
 
-				PintaCore.Chrome.Canvas.GdkWindow.ThawUpdates();
+				doc.Workspace.Canvas.GdkWindow.ThawUpdates();
 
 				foreach (var layer in doc.UserLayers)
 					layer.Crop(rect);

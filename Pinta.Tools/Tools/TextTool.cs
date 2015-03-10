@@ -298,7 +298,8 @@ namespace Pinta.Tools
 
 		private void HandleFontChanged (object sender, EventArgs e)
 		{
-			PintaCore.Chrome.Canvas.GrabFocus ();
+            if (PintaCore.Workspace.HasOpenDocuments)
+                PintaCore.Workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
 
 			UpdateFontSizes ();
 			UpdateFont ();
@@ -508,7 +509,7 @@ namespace Pinta.Tools
 			Point pt = point.ToGdkPoint();
 
 			// Grab focus so we can get keystrokes
-			PintaCore.Chrome.Canvas.GrabFocus();
+			canvas.GrabFocus ();
 
 			if (selection != null)
                 selection.Dispose ();

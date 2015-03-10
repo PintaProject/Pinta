@@ -321,8 +321,8 @@ namespace Pinta.Core
 		
 		public void SetCursor (Gdk.Cursor cursor)
 		{
-            if (PintaCore.Chrome.Canvas != null && PintaCore.Chrome.Canvas.GdkWindow != null)
-			    PintaCore.Chrome.Canvas.GdkWindow.Cursor = cursor;
+            if (PintaCore.Workspace.HasOpenDocuments)
+			    PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow.Cursor = cursor;
 		}
 
 		/// <summary>
