@@ -56,7 +56,7 @@ namespace Pinta.Tools
 			}
 		}
 		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18); }
+            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18); }
 		}
 		public override int Priority{
 			get { return 41; }

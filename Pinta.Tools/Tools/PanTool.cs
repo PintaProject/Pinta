@@ -43,7 +43,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Click and drag to navigate image."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8); }
+            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.H; } }
 		public override int Priority { get { return 19; } }

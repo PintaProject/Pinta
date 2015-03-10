@@ -103,17 +103,17 @@ namespace Pinta.Tools
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
-				return new Gdk.Cursor (PintaCore.Chrome.Canvas.Display,
+                return new Gdk.Cursor (Gdk.Display.Default,
 				                       PintaCore.Resources.GetIcon ("Cursor.Text.png"),
 				                       16, 16);
 			}
 		}
-		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor(PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon("Menu.Edit.EraseSelection.png"), 8, 0); } }
+        public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.Edit.EraseSelection.png"), 8, 0); } }
 
 		#region Constructor
 		public TextTool ()
 		{
-			cursor_hand = new Gdk.Cursor (PintaCore.Chrome.Canvas.Display, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
+            cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
             imContext = new Gtk.IMMulticontext ();
             imContext.Commit += OnIMCommit;
             layout = new TextLayout ();
