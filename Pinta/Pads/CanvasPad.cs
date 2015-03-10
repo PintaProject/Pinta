@@ -24,106 +24,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Gtk;
 using Mono.Unix;
 using MonoDevelop.Components.Docking;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
-using System;
 
 namespace Pinta
 {
 	public class CanvasPad : IDockPad
 	{
-		private ScrolledWindow sw;
-		private PintaCanvas canvas;
-		private HRuler hruler;
-		private VRuler vruler;
+        public CanvasWindow CanvasWindow { get; private set; }
 
-		public ScrolledWindow ScrolledWindow { get { return sw; } }
-		public PintaCanvas Canvas { get { return canvas; } }
-		public HRuler HorizontalRuler { get { return hruler; } }
-		public VRuler VerticalRuler { get { return vruler; } }
-
+		public ScrolledWindow ScrolledWindow { get { return CanvasWindow.ScrolledWindow; } }
+		public PintaCanvas Canvas { get { return CanvasWindow.Canvas; } }
+        
 		public void Initialize (DockFrame workspace, Menu padMenu)
 		{
 			// Create canvas
-			Table mainTable = new Table (2, 2, false);
+            CanvasWindow = new CanvasWindow ();
 
-			sw = new ScrolledWindow () {
-				Name = "sw",
-				ShadowType = ShadowType.EtchedOut
-			};
+            // Add canvas to the dock
+            var dock_item = workspace.AddItem ("Canvas");
+            dock_item.Behavior = DockItemBehavior.Locked;
+            dock_item.Expand = true;
 
-			Viewport vp = new Viewport () {
-				ShadowType = ShadowType.None
-			};
+            dock_item.DrawFrame = false;
+            dock_item.Label = Catalog.GetString ("Canvas");
+            dock_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png");
+            dock_item.Content = CanvasWindow;
 
-			canvas = new PintaCanvas () {
-				Name = "canvas",
-				CanDefault = true,
-				CanFocus = true,
-				Events = (Gdk.EventMask)16134
-			};
-
-			// Canvas pad
-			DockItem documentDockItem = workspace.AddItem ("Canvas");
-			documentDockItem.Behavior = DockItemBehavior.Locked;
-			documentDockItem.Expand = true;
-
-			documentDockItem.DrawFrame = false;
-			documentDockItem.Label = Catalog.GetString ("Canvas");
-			documentDockItem.Content = mainTable;
-			documentDockItem.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png");
-
-			//rulers
-			hruler = new HRuler ();
-			hruler.Metric = MetricType.Pixels;
-			mainTable.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-
-			vruler = new VRuler ();
-			vruler.Metric = MetricType.Pixels;
-			mainTable.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
-
-			sw.Hadjustment.ValueChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			sw.Vadjustment.ValueChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			PintaCore.Workspace.CanvasSizeChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			canvas.MotionNotifyEvent += delegate (object o, MotionNotifyEventArgs args) {
-				if (!PintaCore.Workspace.HasOpenDocuments)
-					return;
-
-				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
-
-				hruler.Position = point.X;
-				vruler.Position = point.Y;
-
-			};
-
-			mainTable.Attach (sw, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
-
-			sw.Add (vp);
-			vp.Add (canvas);
-
-			mainTable.ShowAll ();
-			canvas.Show ();
-			vp.Show ();
-
-			hruler.Visible = false;
-			vruler.Visible = false;
-
-
-			PintaCore.Chrome.InitializeCanvas (canvas);
-
-			canvas.SizeAllocated += delegate { UpdateRulerRange (); };
+            PintaCore.Chrome.InitializeCanvas (Canvas);
 
 			PintaCore.Actions.View.Rulers.Toggled += HandleRulersToggled;
 			PintaCore.Actions.View.Pixels.Activated += (o, e) => { SetRulersUnit (MetricType.Pixels); };
@@ -135,42 +67,12 @@ namespace Pinta
 		{
 			var visible = ((ToggleAction)sender).Active;
 
-			hruler.Visible = visible;
-			vruler.Visible = visible;
-		}
-
-		public void UpdateRulerRange ()
-		{
-			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
-
-			Cairo.PointD lower = new Cairo.PointD (0, 0);
-			Cairo.PointD upper = new Cairo.PointD (0, 0);
-
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				if (PintaCore.Workspace.Offset.X > 0) {
-					lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-					upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
-				} else {
-					lower.X = sw.Hadjustment.Value / PintaCore.Workspace.Scale;
-					upper.X = (sw.Hadjustment.Value + sw.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
-				}
-				if (PintaCore.Workspace.Offset.Y > 0) {
-					lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-					upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
-				} else {
-					lower.Y = sw.Vadjustment.Value / PintaCore.Workspace.Scale;
-					upper.Y = (sw.Vadjustment.Value + sw.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
-				}
-			}
-
-			hruler.SetRange (lower.X, upper.X, 0, upper.X);
-			vruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
+            CanvasWindow.RulersVisible = visible;
 		}
 
 		private void SetRulersUnit (Gtk.MetricType metric)
 		{
-			hruler.Metric = metric;
-			vruler.Metric = metric;
+            CanvasWindow.RulerMetric = metric;
 		}
 	}
 }
