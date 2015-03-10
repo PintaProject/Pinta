@@ -53,7 +53,7 @@ namespace Pinta.Core
 
         public TextLayout ()
         {
-            Layout = new Pango.Layout (PintaCore.Chrome.Canvas.PangoContext);
+            Layout = new Pango.Layout (PintaCore.Chrome.MainWindow.PangoContext);
         }
 
 		public Rectangle[] SelectionRectangles
