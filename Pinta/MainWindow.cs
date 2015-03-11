@@ -29,6 +29,8 @@ using Gtk;
 using Mono.Addins;
 using Mono.Unix;
 using Pinta.Docking;
+using Pinta.Docking.DockNotebook;
+using Pinta.Docking.Gui;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using Pinta.MacInterop;
@@ -37,9 +39,10 @@ namespace Pinta
 {
 	public class MainWindow
 	{
-		WindowShell window_shell;
+		public WindowShell window_shell;
 		DockFrame dock;
 		Menu show_pad;
+        DockNotebookContainer dock_container;
 
 		CanvasPad canvas_pad;
 
@@ -100,7 +103,94 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
 			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
-		}
+
+            PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
+            PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+            DockNotebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
+            DockNotebook.TabClosed += DockNotebook_TabClosed;
+            DockNotebook.NotebookDragDataReceived += MainWindow_DragDataReceived;
+        }
+
+        private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
+        {
+            dock_container.CloseTabWithWidget (e.Document.Workspace.Canvas.Parent.Parent.Parent.Parent.Parent);
+        }
+
+        private void DockNotebook_TabClosed (object sender, TabEventArgs e)
+        {
+            if (e.Tab == null || e.Tab.Content == null)
+                return;
+
+            var content = (SdiWorkspaceWindow)e.Tab.Content;
+            var view = (DocumentViewContent)content.ViewContent;
+
+            if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1) {
+                PintaCore.Workspace.SetActiveDocument (view.Document);
+                PintaCore.Actions.File.Close.Activate ();
+            }
+        }
+
+        private void DockNotebook_ActiveTabChanged (object sender, EventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            var tab = (DockNotebookTab)sender;
+
+            if (tab.Content == null)
+                return;
+
+            var content = (SdiWorkspaceWindow)tab.Content;
+            var view = (DocumentViewContent)content.ViewContent;
+
+            PintaCore.Workspace.SetActiveDocument (view.Document);
+
+            ((CanvasWindow)view.Control).Canvas.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
+        }
+
+        private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
+        {
+            var doc = e.Document;
+
+            // Create a new tab
+            var tab = dock_container.TabControl.AddTab ();
+
+            var canvas = new CanvasWindow (doc) {
+                RulersVisible = PintaCore.Actions.View.Rulers.Active,
+                RulerMetric = GetCurrentRulerMetric ()
+            };
+
+            var my_content = new DocumentViewContent (doc, canvas);
+            var my_tab = new SdiWorkspaceWindow (my_content, dock_container.TabControl, tab);
+
+            tab.Content = my_tab;
+            tab.Content.Show ();
+
+            doc.Workspace.Canvas = canvas.Canvas;
+
+            // Zoom to window only on first show (if we do it always, it will be called on every resize)
+            canvas.SizeAllocated += (o, e2) => {
+                if (!canvas.HasBeenShown)
+                    ZoomToWindow_Activated (o, e);
+
+                canvas.HasBeenShown = true;
+            };
+
+            PintaCore.Actions.View.Rulers.Toggled += (o, e2) => { canvas.RulersVisible = ((ToggleAction)o).Active; };
+            PintaCore.Actions.View.Pixels.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Pixels; };
+            PintaCore.Actions.View.Inches.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Inches; };
+            PintaCore.Actions.View.Centimeters.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Centimeters; };
+        }
+
+        private MetricType GetCurrentRulerMetric ()
+        {
+            if (PintaCore.Actions.View.Inches.Active)
+                return MetricType.Inches;
+            else if (PintaCore.Actions.View.Centimeters.Active)
+                return MetricType.Centimeters;
+
+            return MetricType.Pixels;
+        }
 
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
@@ -305,6 +395,8 @@ namespace Pinta
 			canvas_pad = new CanvasPad ();
 			canvas_pad.Initialize (dock, show_pad);
 
+            dock_container = canvas_pad.NotebookContainer;
+
 			// Layer pad
 			var layers_pad = new LayersPad ();
 			layers_pad.Initialize (dock, show_pad);
@@ -319,7 +411,7 @@ namespace Pinta
 
 			container.PackStart (dock, true, true, 0);
 			
-			string layout_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
+			string layout_file = PintaCore.Settings.LayoutFilePath;
 
             if (System.IO.File.Exists(layout_file))
             {
@@ -330,7 +422,7 @@ namespace Pinta
                 // If parsing layouts.xml fails for some reason, proceed to create the default layout.
                 catch (Exception e)
                 {
-                    System.Console.Error.WriteLine ("Error reading layouts.xml: " + e.ToString());
+                    System.Console.Error.WriteLine ("Error reading " + PintaCore.Settings.LayoutFile + ": " + e.ToString());
                 }
             }
 			
@@ -369,7 +461,7 @@ namespace Pinta
 
 		private void SaveUserSettings ()
 		{
-			dock.SaveLayouts (System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
+			dock.SaveLayouts (PintaCore.Settings.LayoutFilePath);
 
 			// Don't store the maximized height if the window is maximized
 			if ((window_shell.GdkWindow.State & Gdk.WindowState.Maximized) == 0) {
@@ -470,10 +562,10 @@ namespace Pinta
 				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 
-				PintaCore.Workspace.OnCanvasSizeChanged ();
+                var doc = PintaCore.Workspace.ActiveDocument;
+                dock_container.ActivateTabWithWidget (doc.Workspace.Canvas.Parent.Parent.Parent.Parent.Parent);
+                doc.Workspace.Canvas.GrabFocus ();
 			}
-			
-			PintaCore.Workspace.Invalidate ();
 		}
 		#endregion
 	}

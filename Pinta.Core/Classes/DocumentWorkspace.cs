@@ -47,10 +47,13 @@ namespace Pinta.Core
 			History = new DocumentWorkspaceHistory (document);
 		}
 
+        #region Public Events
+        public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
+        public event EventHandler CanvasSizeChanged;
+        #endregion
+
 		#region Public Properties
-        public Gtk.DrawingArea Canvas {
-            get { return PintaCore.Chrome.Canvas; }
-        }
+        public Gtk.DrawingArea Canvas { get; set; }
 
 		public bool CanvasFitsInWindow {
 			get {
@@ -71,7 +74,7 @@ namespace Pinta.Core
 			set {
 				if (canvas_size.Width != value.Width || canvas_size.Height != value.Height) {
 					canvas_size = value;
-					PintaCore.Workspace.OnCanvasSizeChanged ();
+					OnCanvasSizeChanged ();
 				}
 			}
 		}
@@ -130,7 +133,7 @@ namespace Pinta.Core
 		#region Public Methods
 		public void Invalidate ()
 		{
-			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
+			OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
 		}
 
 		/// <summary>
@@ -149,7 +152,7 @@ namespace Pinta.Core
 
 			Gdk.Rectangle winRect = Utility.PointsToRectangle(winTopLeft, winBtmRight, false).ToGdkRectangle();
 
-			PintaCore.Workspace.OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
+			OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
 		}
 
 		/// <summary>
@@ -262,7 +265,19 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
+        protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
+        {
+            if (CanvasInvalidated != null)
+                CanvasInvalidated (this, e);
+        }
+
+        public void OnCanvasSizeChanged ()
+        {
+            if (CanvasSizeChanged != null)
+                CanvasSizeChanged (this, EventArgs.Empty);
+        }
+
+        private void ZoomAndRecenterView (ZoomType zoomType, Cairo.PointD point)
 		{
 			if (zoomType == ZoomType.ZoomOut && (CanvasSize.Width == 1 || CanvasSize.Height ==1))
 				return; //Can't zoom in past a 1x1 px canvas

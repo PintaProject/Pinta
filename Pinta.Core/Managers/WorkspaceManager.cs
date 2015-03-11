@@ -148,8 +148,6 @@ namespace Pinta.Core
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				ActiveWorkspace.Invalidate ();
-			else
-				OnCanvasInvalidated (new CanvasInvalidatedEventArgs ());
 		}
 		
 		public void Invalidate (Gdk.Rectangle rect)
@@ -311,18 +309,6 @@ namespace Pinta.Core
 				
 			ResetTitle ();
 		}
-		
-		protected internal void OnCanvasInvalidated (CanvasInvalidatedEventArgs e)
-		{
-			if (CanvasInvalidated != null)
-				CanvasInvalidated (this, e);
-		}
-
-		public void OnCanvasSizeChanged ()
-		{
-			if (CanvasSizeChanged != null)
-				CanvasSizeChanged (this, EventArgs.Empty);
-		}
 
 		protected internal void OnDocumentCreated (DocumentEventArgs e)
 		{
@@ -353,8 +339,6 @@ namespace Pinta.Core
 
 		#region Public Events
 		public event EventHandler ActiveDocumentChanged;
-		public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
-		public event EventHandler CanvasSizeChanged;
 		public event EventHandler<DocumentEventArgs> DocumentCreated;
 		public event EventHandler<DocumentEventArgs> DocumentOpened;
 		public event EventHandler<DocumentEventArgs> DocumentClosed;

@@ -37,7 +37,10 @@ namespace Pinta.Core
 	public class SettingsManager
 	{
 		private Dictionary<string, object> settings;
-		
+
+        public string LayoutFile { get { return "layouts.xml"; } }
+        public string LayoutFilePath { get { return Path.Combine (GetUserSettingsDirectory (), LayoutFile); } }
+
 		public SettingsManager ()
 		{
 			LoadSettings ();

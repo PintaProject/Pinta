@@ -38,8 +38,9 @@ namespace Pinta
         private ScrolledWindow scrolled_window;
         
         public PintaCanvas Canvas { get; set; }
+        public bool HasBeenShown { get; set; }
 
-        public CanvasWindow () : base (2, 2, false)
+        public CanvasWindow (Document document) : base (2, 2, false)
         {
             scrolled_window = new ScrolledWindow ();
 
@@ -47,7 +48,7 @@ namespace Pinta
                 ShadowType = ShadowType.None
             };
 
-            Canvas = new PintaCanvas (this) {
+            Canvas = new PintaCanvas (this, document) {
                 Name = "canvas",
                 CanDefault = true,
                 CanFocus = true,
@@ -71,7 +72,7 @@ namespace Pinta
                 UpdateRulerRange ();
             };
 
-            PintaCore.Workspace.CanvasSizeChanged += delegate {
+            document.Workspace.CanvasSizeChanged += delegate {
                 UpdateRulerRange ();
             };
 

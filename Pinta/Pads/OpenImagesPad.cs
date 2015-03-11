@@ -41,6 +41,7 @@ namespace Pinta
 			open_images_item.Label = Catalog.GetString ("Images");
 			open_images_item.Content = new OpenImagesListWidget ();
 			open_images_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Default.png");
+            open_images_item.DefaultVisible = false;
 
 			ToggleAction show_open_images = padMenu.AppendToggleAction ("Images", Catalog.GetString ("Images"), null, null);
 
@@ -51,8 +52,6 @@ namespace Pinta
 			open_images_item.VisibleChanged += delegate {
 				show_open_images.Active = open_images_item.Visible;
 			};
-
-			show_open_images.Active = open_images_item.Visible;
 		}
 	}
 }

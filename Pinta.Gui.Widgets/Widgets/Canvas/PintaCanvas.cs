@@ -39,19 +39,23 @@ namespace Pinta.Gui.Widgets
 
         public CanvasWindow CanvasWindow { get; private set; }
 
-		public PintaCanvas (CanvasWindow window)
+		public PintaCanvas (CanvasWindow window, Document document)
 		{
             CanvasWindow = window;
 
 			cr = new CanvasRenderer (true);
 			
 			// Keep the widget the same size as the canvas
-			PintaCore.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
+            document.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
 				SetRequisition (PintaCore.Workspace.CanvasSize);
 			};
 
 			// Update the canvas when the image changes
-			PintaCore.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
+            document.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
+                // If GTK+ hasn't created the canvas window yet, no need to invalidate it
+                if (GdkWindow == null)
+                    return;
+
 				if (e.EntireSurface)
 					GdkWindow.Invalidate ();
 				else
