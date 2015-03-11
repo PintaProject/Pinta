@@ -37,8 +37,12 @@ namespace Pinta.Gui.Widgets
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
 
-		public PintaCanvas ()
+        public CanvasWindow CanvasWindow { get; private set; }
+
+		public PintaCanvas (CanvasWindow window)
 		{
+            CanvasWindow = window;
+
 			cr = new CanvasRenderer (true);
 			
 			// Keep the widget the same size as the canvas
@@ -183,11 +187,6 @@ namespace Pinta.Gui.Widgets
 		{
 			// Give the current tool a chance to handle the key press
 			PintaCore.Tools.CurrentTool.DoKeyPress (this, e);
-
-			// If the tool didn't consume it, see if its a toolbox shortcut
-			if (e.RetVal == null || !(bool)e.RetVal)
-				if (FilterModifierKeys (e.Event.State) == ModifierType.None)
-					PintaCore.Tools.SetCurrentTool (e.Event.Key);
 		}
 
 		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)

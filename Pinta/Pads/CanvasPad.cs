@@ -36,8 +36,6 @@ namespace Pinta
 	public class CanvasPad : IDockPad
 	{
         public CanvasWindow CanvasWindow { get; private set; }
-
-		public ScrolledWindow ScrolledWindow { get { return CanvasWindow.ScrolledWindow; } }
 		public PintaCanvas Canvas { get { return CanvasWindow.Canvas; } }
         
 		public void Initialize (DockFrame workspace, Menu padMenu)

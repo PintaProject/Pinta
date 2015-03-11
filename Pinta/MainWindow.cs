@@ -30,6 +30,7 @@ using Mono.Addins;
 using Mono.Unix;
 using MonoDevelop.Components.Docking;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 using Pinta.MacInterop;
 
 namespace Pinta
@@ -37,7 +38,6 @@ namespace Pinta
 	public class MainWindow
 	{
 		WindowShell window_shell;
-		ScrolledWindow sw;
 		DockFrame dock;
 		Menu show_pad;
 
@@ -113,25 +113,47 @@ namespace Pinta
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
 			// the mouse pointer is on the canvas
-			if (IsMouseOnCanvas() || canvas_pad.Canvas.HasFocus)
-			{
-				canvas_pad.Canvas.DoKeyPressEvent (o, e);
-			}
+            if (PintaCore.Workspace.HasOpenDocuments) {
+                var canvas_window = ((PintaCanvas)PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
+
+                if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
+                    canvas_window.Canvas.DoKeyPressEvent (o, e);
+            }
+
+            // If the canvas/tool didn't consume it, see if its a toolbox shortcut
+            if (e.RetVal == null || !(bool)e.RetVal)
+                if (FilterModifierKeys (e.Event.State) == Gdk.ModifierType.None)
+                    PintaCore.Tools.SetCurrentTool (e.Event.Key);
 		}
+
+        /// <summary>
+        /// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
+        /// from appearing as active modifier keys.
+        /// </summary>
+        private Gdk.ModifierType FilterModifierKeys (Gdk.ModifierType current_state)
+        {
+            var state = Gdk.ModifierType.None;
+
+            state |= (current_state & Gdk.ModifierType.ControlMask);
+            state |= (current_state & Gdk.ModifierType.ShiftMask);
+            state |= (current_state & Gdk.ModifierType.Mod1Mask);
+
+            return state;
+        }
 
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
-            if (SendToFocusWidget (e, e.Event))
+            if (SendToFocusWidget (e, e.Event) || !PintaCore.Workspace.HasOpenDocuments)
                 return;
 
 			// Give the Canvas (and by extension the tools)
 			// first shot at handling the event if
 			// the mouse pointer is on the canvas
-			if (IsMouseOnCanvas() || canvas_pad.Canvas.HasFocus)
-			{
-				canvas_pad.Canvas.DoKeyReleaseEvent (o, e);
-			}
+            var canvas_window = ((PintaCanvas)PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
+
+            if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
+                canvas_window.Canvas.DoKeyReleaseEvent (o, e);
 		}
 
         private bool SendToFocusWidget (GLib.SignalArgs args, Gdk.EventKey e)
@@ -145,21 +167,6 @@ namespace Pinta
 
             return false;
         }
-
-		// Check if the mouse pointer is on the canvas
-		private bool IsMouseOnCanvas()
-		{
-			int x = 0;
-			int y = 0;
-
-			// Get the position of the mouse pointer relative
-			// to canvas scrolled window top-left corner
-			sw.GetPointer (out x, out y);
-
-			// Check if the pointer is on the canvas
-			return (x > 0) && (x < sw.Allocation.Width) &&
-			    (y > 0) && (y < sw.Allocation.Height);
-		}
 
 		// Called when an extension node is added or removed
 		private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
@@ -313,8 +320,6 @@ namespace Pinta
 			canvas_pad = new CanvasPad ();
 			canvas_pad.Initialize (dock, show_pad);
 
-			sw = canvas_pad.ScrolledWindow;
-
 			// Layer pad
 			var layers_pad = new LayersPad ();
 			layers_pad.Initialize (dock, show_pad);
@@ -447,8 +452,10 @@ namespace Pinta
 				int image_x = PintaCore.Workspace.ImageSize.Width;
 				int image_y = PintaCore.Workspace.ImageSize.Height;
 
-				int window_x = sw.Children[0].Allocation.Width;
-				int window_y = sw.Children[0].Allocation.Height;
+                var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent;
+
+                var window_x = canvas_window.Allocation.Width;
+                var window_y = canvas_window.Allocation.Height;
 
 				double ratio;
 
