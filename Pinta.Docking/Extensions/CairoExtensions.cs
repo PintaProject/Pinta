@@ -33,6 +33,11 @@ namespace Pinta.Docking
 {
 	static class CairoExtensions
 	{
+        private const string CairoLib = "libcairo-2.dll";
+
+        [DllImport (CairoLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void cairo_set_source (IntPtr cr, IntPtr pattern);
+
         public static void DrawPixbuf (this Context g, Gdk.Pixbuf pixbuf, double x, double y)
         {
             g.Save ();
@@ -51,6 +56,20 @@ namespace Pinta.Docking
         public static void SetSourceColor (this Context g, Color c)
         {
             g.SetSourceRGBA (c.R, c.G, c.B, c.A);
+        }
+
+        /// <summary>
+        /// The Pattern property is now deprecated in favour of the SetSource (pattern) method,
+        /// but that method doesn't exist in older versions of Mono.Cairo. This extension method
+        /// provides an implementation of that functionality.
+        ///
+        /// This can be removed once we port to GTK3.
+        /// </summary>
+        public static void SetSource (this Context g, Pattern source)
+        {
+#pragma warning disable 612
+            cairo_set_source (g.Handle, source.Pointer);
+#pragma warning restore 612
         }
 
         public static Cairo.Color ToCairoColor (this Gdk.Color color)
