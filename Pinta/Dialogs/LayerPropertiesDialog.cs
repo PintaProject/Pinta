@@ -185,7 +185,9 @@ namespace Pinta
 
 			lockedCheckbox = new CheckButton (Catalog.GetString ("_Locked"));
 
-			VBox.PackStart (lockedCheckbox, false, false, 0);
+// TODO: unhide. Pinta doesn't actually "lock" anything yet,
+// the Locked checkbox flag/stub passess through the setting but nothing else
+//			VBox.PackStart (lockedCheckbox, false, false, 0);
 
 			// Horizontal separator
 			VBox.PackStart (new HSeparator (), false, false, 0);
