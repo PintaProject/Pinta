@@ -335,6 +335,7 @@ namespace Pinta
                 height_entry.Text = new_size.Height.ToString ();
                 suppress_events = false;
 
+                UpdateOkButton ();
                 if (!IsValidSize)
                     return;
 
