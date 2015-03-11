@@ -122,24 +122,9 @@ namespace Pinta
 
             // If the canvas/tool didn't consume it, see if its a toolbox shortcut
             if (e.RetVal == null || !(bool)e.RetVal)
-                if (FilterModifierKeys (e.Event.State) == Gdk.ModifierType.None)
+                if (e.Event.State.FilterModifierKeys () == Gdk.ModifierType.None)
                     PintaCore.Tools.SetCurrentTool (e.Event.Key);
 		}
-
-        /// <summary>
-        /// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
-        /// from appearing as active modifier keys.
-        /// </summary>
-        private Gdk.ModifierType FilterModifierKeys (Gdk.ModifierType current_state)
-        {
-            var state = Gdk.ModifierType.None;
-
-            state |= (current_state & Gdk.ModifierType.ControlMask);
-            state |= (current_state & Gdk.ModifierType.ShiftMask);
-            state |= (current_state & Gdk.ModifierType.Mod1Mask);
-
-            return state;
-        }
 
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyReleaseEvent (object o, KeyReleaseEventArgs e)
