@@ -274,7 +274,8 @@ namespace Pinta
 
 		public AboutDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
-			Title = string.Format ("{0} {1}", Catalog.GetString ("About"), PintaCore.ApplicationName);
+		    // Translators: About + Appname
+		    Title = string.Format (Catalog.GetString ("{0} {1}"), Catalog.GetString ("About"), PintaCore.ApplicationName);
 			//TransientFor = IdeApp.Workbench.RootWindow;
 			AllowGrow = false;
 			HasSeparator = false;

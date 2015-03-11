@@ -48,7 +48,7 @@ namespace Pinta.Core
 			fact.AddDefault ();
 
 			// Translators: "Application name" (Pinta) + "Website"
-			Website = new Gtk.Action ("Website", string.Format("{0} {1}", PintaCore.ApplicationName, Catalog.GetString ("_Website")), null, "Menu.Help.Website.png");
+			Website = new Gtk.Action ("Website", string.Format(Catalog.GetString ("{0} {1}"), PintaCore.ApplicationName, Catalog.GetString ("_Website")), null, "Menu.Help.Website.png");
 			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a _Bug"), null, "Menu.Help.Bug.png");
 			Translate = new Gtk.Action ("Translate", Catalog.GetString ("_Translate This Application"), null, "Menu.Help.Translate.png");
 			About = new Gtk.Action ("About", Catalog.GetString ("_About"), null, Stock.About);
