@@ -31,7 +31,7 @@ using System.Reflection.Emit;
 using System.Reflection;
 using Gdk;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
     static class GdkExtensions
 	{
@@ -45,6 +45,11 @@ namespace MonoDevelop.Components.Docking
 
                 return new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
             }
+        }
+
+        public static Gdk.Pixbuf WithBoxSize (this Gdk.Pixbuf image, int size)
+        {
+            return image.ScaleSimple (size, size, InterpType.Bilinear);
         }
 
         public static Gdk.Pixbuf FromResource (string name)

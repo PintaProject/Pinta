@@ -30,7 +30,7 @@
 
 using System;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	[Flags]
 	public enum DockItemBehavior

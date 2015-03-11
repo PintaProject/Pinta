@@ -33,7 +33,7 @@ using System;
 using Gtk;
 using System.Collections.Generic;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	public class DockBar: Gtk.EventBox
 	{

@@ -28,7 +28,7 @@ using System;
 using Gtk;
 using Mono.Addins;
 using Mono.Unix;
-using MonoDevelop.Components.Docking;
+using Pinta.Docking;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using Pinta.MacInterop;

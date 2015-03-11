@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using MonoDevelop.Components.Docking;
+using Pinta.Docking;
 using Mono.Unix;
 using Gtk;
 using Pinta.Core;

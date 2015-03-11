@@ -34,7 +34,7 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	class DockLayout: DockGroup
 	{

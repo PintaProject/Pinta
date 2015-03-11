@@ -32,7 +32,7 @@ using System.Reflection.Emit;
 using System.Reflection;
 using Gtk;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
     static class GtkExtensions
 	{

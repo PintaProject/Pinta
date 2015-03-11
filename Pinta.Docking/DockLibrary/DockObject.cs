@@ -34,7 +34,7 @@ using System.Xml;
 using Gtk;
 using System.Globalization;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	internal abstract class DockObject
 	{
@@ -157,7 +157,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		public MonoDevelop.Components.Docking.DockFrame Frame {
+		public Pinta.Docking.DockFrame Frame {
 			get {
 				return frame;
 			}

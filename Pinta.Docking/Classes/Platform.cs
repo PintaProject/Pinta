@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Gdk;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	static class Platform
 	{

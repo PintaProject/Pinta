@@ -28,7 +28,7 @@ using System;
 using Gtk;
 using System.Runtime.InteropServices;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	static class PangoUtil
 	{

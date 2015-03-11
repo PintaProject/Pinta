@@ -32,7 +32,7 @@ using System.Linq;
 using MonoDevelop.Components;
 using Mono.Unix;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	
 	class DockItemTitleTab: Gtk.EventBox
@@ -159,7 +159,8 @@ namespace MonoDevelop.Components.Docking
 
 			btnDock = new ImageButton ();
 			btnDock.Image = pixAutoHide;
-			btnDock.TooltipText = Catalog.GetString ("Auto Hide");
+            btnDock.InactiveImage = pixAutoHide.WithAlpha (.5);
+            btnDock.TooltipText = Catalog.GetString ("Auto Hide");
 			btnDock.CanFocus = false;
 //			btnDock.WidthRequest = btnDock.HeightRequest = 17;
 			btnDock.Clicked += OnClickDock;
@@ -168,6 +169,7 @@ namespace MonoDevelop.Components.Docking
 
 			btnClose = new ImageButton ();
 			btnClose.Image = pixClose;
+            btnClose.InactiveImage = pixClose.WithAlpha (.5);
 			btnClose.TooltipText = Catalog.GetString ("Close");
 			btnClose.CanFocus = false;
 //			btnClose.WidthRequest = btnClose.HeightRequest = 17;
@@ -242,10 +244,12 @@ namespace MonoDevelop.Components.Docking
 					btnClose.Image = pixClose;
 				if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating) {
 					btnDock.Image = pixDock;
-					btnDock.TooltipText = Catalog.GetString ("Dock");
+                    btnDock.InactiveImage = pixDock.WithAlpha (.5);
+                    btnDock.TooltipText = Catalog.GetString ("Dock");
 				} else {
 					btnDock.Image = pixAutoHide;
-					btnDock.TooltipText = Catalog.GetString ("Auto Hide");
+                    btnDock.InactiveImage = pixAutoHide.WithAlpha (.5);
+                    btnDock.TooltipText = Catalog.GetString ("Auto Hide");
 				}
 			} else {
 				btnDock.Image = null;

@@ -35,7 +35,7 @@ using MonoDevelop.Components;
 using Xwt.Motion;
 using Animations = Xwt.Motion.AnimationExtensions;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {	
 	class CrossfadeIcon: Gtk.Image, IAnimatable
 	{
@@ -251,7 +251,7 @@ namespace MonoDevelop.Components.Docking
 			QueueDraw ();
 		}
 		
-		public MonoDevelop.Components.Docking.DockItem DockItem {
+		public Pinta.Docking.DockItem DockItem {
 			get {
 				return it;
 			}

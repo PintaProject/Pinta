@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 using System;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	public sealed class DockVisualStyle
 	{
