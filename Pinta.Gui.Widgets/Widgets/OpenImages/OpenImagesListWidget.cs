@@ -141,11 +141,12 @@ namespace Pinta.Gui.Widgets
 			if (start_pos <= click_x && start_pos + width > click_x)
 			{
 				TreePath path;
-				tree.GetPathAtPos ((int)click_x, (int)click_y, out path);
-
-				PintaCore.Workspace.SetActiveDocument (path.Indices[0]);
-				PintaCore.Actions.File.Close.Activate ();
-				UpdateSelectedDocument ();
+				if (tree.GetPathAtPos ((int)click_x, (int)click_y, out path))
+                {
+                    PintaCore.Workspace.SetActiveDocument (path.Indices[0]);
+                    PintaCore.Actions.File.Close.Activate ();
+                    UpdateSelectedDocument ();
+                }
 			}
 		}
 
