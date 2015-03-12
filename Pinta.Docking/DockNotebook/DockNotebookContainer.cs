@@ -133,6 +133,12 @@ namespace Pinta.Docking.DockNotebook
 			}
 		}
 
+        public void ActivateTab (DockNotebookTab tab)
+        {
+            DockNotebook.ActiveNotebook = tab.Notebook;
+            tab.Notebook.CurrentTab = tab;
+        }
+
         public void ActivateTabWithWidget (Widget widget)
         {
             foreach (var notebook in GetNotebooks ())
@@ -144,6 +150,14 @@ namespace Pinta.Docking.DockNotebook
                     return;
                 }
             }
+        }
+
+        public void CloseTab (DockNotebookTab tab)
+        {
+            var notebook = tab.Notebook;
+            var index = notebook.Tabs.IndexOf (tab);
+
+            notebook.RemoveTab (index, true);
         }
 
         public void CloseTabWithWidget (Widget widget)
