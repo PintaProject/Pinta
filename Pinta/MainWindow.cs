@@ -39,7 +39,7 @@ namespace Pinta
 {
 	public class MainWindow
 	{
-		public WindowShell window_shell;
+		WindowShell window_shell;
 		DockFrame dock;
 		Menu show_pad;
         DockNotebookContainer dock_container;
@@ -113,7 +113,10 @@ namespace Pinta
 
         private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
         {
-            dock_container.CloseTabWithWidget (e.Document.Workspace.Canvas.Parent.Parent.Parent.Parent.Parent);
+            var tab = FindTabWithCanvas ((PintaCanvas)e.Document.Workspace.Canvas);
+
+            if (tab != null)
+                dock_container.CloseTab (tab);
         }
 
         private void DockNotebook_TabClosed (object sender, TabEventArgs e)
@@ -563,10 +566,28 @@ namespace Pinta
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 
                 var doc = PintaCore.Workspace.ActiveDocument;
-                dock_container.ActivateTabWithWidget (doc.Workspace.Canvas.Parent.Parent.Parent.Parent.Parent);
+                var tab = FindTabWithCanvas ((PintaCanvas)doc.Workspace.Canvas);
+
+                if (tab != null)
+                    dock_container.ActivateTab (tab);
+
                 doc.Workspace.Canvas.GrabFocus ();
 			}
 		}
+
+        private DockNotebookTab FindTabWithCanvas (PintaCanvas canvas)
+        {
+            foreach (var notebook in dock_container.GetNotebooks ())
+            foreach (var tab in notebook.Tabs) {
+                var window = (SdiWorkspaceWindow)tab.Content;
+                var doc_content = (DocumentViewContent)window.ActiveViewContent;
+
+                if (((CanvasWindow)doc_content.Control).Canvas == canvas)
+                    return tab;
+            }
+
+            return null;
+        }
 		#endregion
 	}
 }
