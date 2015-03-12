@@ -27,52 +27,32 @@
 using System;
 using Gtk;
 using Mono.Unix;
-using MonoDevelop.Components.Docking;
-using Pinta.Core;
-using Pinta.Gui.Widgets;
+using Pinta.Docking;
+using Pinta.Docking.DockNotebook;
 
 namespace Pinta
 {
 	public class CanvasPad : IDockPad
 	{
-        public CanvasWindow CanvasWindow { get; private set; }
+        public DockNotebookContainer NotebookContainer { get; private set; }
 
-		public ScrolledWindow ScrolledWindow { get { return CanvasWindow.ScrolledWindow; } }
-		public PintaCanvas Canvas { get { return CanvasWindow.Canvas; } }
-        
 		public void Initialize (DockFrame workspace, Menu padMenu)
 		{
-			// Create canvas
-            CanvasWindow = new CanvasWindow ();
+            var tab = new DockNotebook () {
+                NavigationButtonsVisible = false
+            };
 
-            // Add canvas to the dock
-            var dock_item = workspace.AddItem ("Canvas");
-            dock_item.Behavior = DockItemBehavior.Locked;
-            dock_item.Expand = true;
+            NotebookContainer = new DockNotebookContainer (tab, true);
 
-            dock_item.DrawFrame = false;
-            dock_item.Label = Catalog.GetString ("Canvas");
-            dock_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png");
-            dock_item.Content = CanvasWindow;
+            tab.InitSize ();
 
-            PintaCore.Chrome.InitializeCanvas (Canvas);
+            var canvas_dock = workspace.AddItem ("Canvas");
+            canvas_dock.Behavior = DockItemBehavior.Locked;
+            canvas_dock.Expand = true;
 
-			PintaCore.Actions.View.Rulers.Toggled += HandleRulersToggled;
-			PintaCore.Actions.View.Pixels.Activated += (o, e) => { SetRulersUnit (MetricType.Pixels); };
-			PintaCore.Actions.View.Inches.Activated += (o, e) => { SetRulersUnit (MetricType.Inches); };
-			PintaCore.Actions.View.Centimeters.Activated += (o, e) => { SetRulersUnit (MetricType.Centimeters); };
-		}
-
-		private void HandleRulersToggled (object sender, EventArgs e)
-		{
-			var visible = ((ToggleAction)sender).Active;
-
-            CanvasWindow.RulersVisible = visible;
-		}
-
-		private void SetRulersUnit (Gtk.MetricType metric)
-		{
-            CanvasWindow.RulerMetric = metric;
-		}
+            canvas_dock.DrawFrame = false;
+            canvas_dock.Label = Catalog.GetString ("Canvas");
+            canvas_dock.Content = NotebookContainer;
+        }
 	}
 }

@@ -26,7 +26,7 @@
 using System;
 using MonoDevelop.Components;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	public static class Styles
 	{

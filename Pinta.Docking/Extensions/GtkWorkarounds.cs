@@ -31,7 +31,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using Gtk;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	static class GtkWorkarounds
 	{

@@ -31,8 +31,9 @@
 using System;
 using Gdk;
 using Gtk;
+using MonoDevelop.Components;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	internal class PlaceholderWindow: Gtk.Window
 	{

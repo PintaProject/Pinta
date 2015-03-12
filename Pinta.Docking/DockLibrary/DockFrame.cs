@@ -37,7 +37,7 @@ using Gtk;
 using Gdk;
 using Xwt.Motion;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	public class DockFrame: HBox, IAnimatable
 	{

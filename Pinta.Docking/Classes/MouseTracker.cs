@@ -26,7 +26,7 @@
 using System;
 using Gtk;
 
-namespace MonoDevelop.Components
+namespace Pinta.Docking
 {
 	class MouseTracker
 	{

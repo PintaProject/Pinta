@@ -34,7 +34,7 @@ using System;
 using Gtk;
 using Gdk;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	class AutoHideBox: DockFrameTopLevel
 	{

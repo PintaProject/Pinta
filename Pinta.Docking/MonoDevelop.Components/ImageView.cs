@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 using System;
 using Gdk;
-using MonoDevelop.Components.Docking;
+using Pinta.Docking;
 
 namespace MonoDevelop.Components
 {

@@ -69,14 +69,47 @@
     <Compile Include="DockLibrary\DockVisualStyle.cs" />
     <Compile Include="DockLibrary\PlaceholderWindow.cs" />
     <Compile Include="DockLibrary\TabStrip.cs" />
+    <Compile Include="DockNotebook\DockNotebook.cs" />
+    <Compile Include="DockNotebook\DockNotebookContainer.cs" />
+    <Compile Include="DockNotebook\DockNotebookTab.cs" />
+    <Compile Include="DockNotebook\DockWindow.cs" />
+    <Compile Include="DockNotebook\PlaceholderWindow.cs" />
+    <Compile Include="DockNotebook\TabEventArgs.cs" />
+    <Compile Include="DockNotebook\TabStrip.cs" />
+    <Compile Include="DockToolbars\ArrowWindow.cs" />
+    <Compile Include="DockToolbars\DockedPosition.cs" />
+    <Compile Include="DockToolbars\DockGrip.cs" />
+    <Compile Include="DockToolbars\DockToolbar.cs" />
+    <Compile Include="DockToolbars\DockToolbarFrame.cs" />
+    <Compile Include="DockToolbars\DockToolbarFrameLayout.cs" />
+    <Compile Include="DockToolbars\DockToolbarFrameStatus.cs" />
+    <Compile Include="DockToolbars\DockToolbarPanel.cs" />
+    <Compile Include="DockToolbars\DockToolbarPosition.cs" />
+    <Compile Include="DockToolbars\DockToolbarStatus.cs" />
+    <Compile Include="DockToolbars\FixedPanel.cs" />
+    <Compile Include="DockToolbars\FloatingDock.cs" />
+    <Compile Include="DockToolbars\FloatingPosition.cs" />
+    <Compile Include="DockToolbars\IDockBar.cs" />
+    <Compile Include="DockToolbars\PlaceholderWindow.cs" />
     <Compile Include="Extensions\GdkExtensions.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
     <Compile Include="Extensions\CairoExtensions.cs" />
     <Compile Include="Extensions\GtkWorkarounds.cs" />
     <Compile Include="Extensions\PangoUtil.cs" />
     <Compile Include="MonoDevelop.Components\ExtendedLabel.cs" />
+    <Compile Include="MonoDevelop.Components\HPanedThin.cs" />
     <Compile Include="MonoDevelop.Components\ImageButton.cs" />
     <Compile Include="MonoDevelop.Components\ImageView.cs" />
+    <Compile Include="MonoDevelop.Components\MenuButton.cs" />
+    <Compile Include="MonoDevelop.Components\PathBar.cs" />
+    <Compile Include="MonoDevelop.Components\Tabstrip.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DocumentToolbar.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IAttachableViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IBaseViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IWorkbenchWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\SdiWorkspaceWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\WorkbenchWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Xwt.Drawing\Color.cs" />
     <Compile Include="Xwt.Drawing\HslColor.cs" />
@@ -107,6 +140,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png">
       <LogicalName>pad-minimize-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12%402x.png">
+      <LogicalName>tabbar-next-12%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12.png">
+      <LogicalName>tabbar-next-12.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12%402x.png">
+      <LogicalName>tabbar-prev-12%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12.png">
+      <LogicalName>tabbar-prev-12.png</LogicalName>
     </EmbeddedResource>
     <Content Include="readme.txt" />
   </ItemGroup>

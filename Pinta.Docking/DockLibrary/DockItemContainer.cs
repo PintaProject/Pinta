@@ -32,7 +32,7 @@ using System;
 using Gtk;
 using Mono.Unix;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	class DockItemContainer: EventBox
 	{

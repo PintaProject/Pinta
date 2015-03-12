@@ -33,7 +33,7 @@ using Gtk;
 using System;
 using System.Linq;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	class TabStrip: Gtk.EventBox
 	{

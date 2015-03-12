@@ -33,7 +33,7 @@ using System.Xml;
 using Gtk;
 using Mono.Unix;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	public class DockItem
 	{

@@ -37,17 +37,25 @@ namespace Pinta.Gui.Widgets
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
 
-		public PintaCanvas ()
+        public CanvasWindow CanvasWindow { get; private set; }
+
+		public PintaCanvas (CanvasWindow window, Document document)
 		{
+            CanvasWindow = window;
+
 			cr = new CanvasRenderer (true);
 			
 			// Keep the widget the same size as the canvas
-			PintaCore.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
+            document.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
 				SetRequisition (PintaCore.Workspace.CanvasSize);
 			};
 
 			// Update the canvas when the image changes
-			PintaCore.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
+            document.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
+                // If GTK+ hasn't created the canvas window yet, no need to invalidate it
+                if (GdkWindow == null)
+                    return;
+
 				if (e.EntireSurface)
 					GdkWindow.Invalidate ();
 				else
@@ -151,7 +159,7 @@ namespace Pinta.Gui.Widgets
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
 			// Allow the user to zoom in/out with Ctrl-Mousewheel
-			if (FilterModifierKeys(evnt.State) == ModifierType.ControlMask) {
+            if (evnt.State.FilterModifierKeys () == ModifierType.ControlMask) {
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
@@ -183,31 +191,11 @@ namespace Pinta.Gui.Widgets
 		{
 			// Give the current tool a chance to handle the key press
 			PintaCore.Tools.CurrentTool.DoKeyPress (this, e);
-
-			// If the tool didn't consume it, see if its a toolbox shortcut
-			if (e.RetVal == null || !(bool)e.RetVal)
-				if (FilterModifierKeys (e.Event.State) == ModifierType.None)
-					PintaCore.Tools.SetCurrentTool (e.Event.Key);
 		}
 
 		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
-		}
-
-		/// <summary>
-		/// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
-		/// from appearing as active modifier keys.
-		/// </summary>
-		private ModifierType FilterModifierKeys (Gdk.ModifierType current_state)
-		{
-			ModifierType state = ModifierType.None;
-
-			state |= (current_state & ModifierType.ControlMask);
-			state |= (current_state & ModifierType.ShiftMask);
-			state |= (current_state & ModifierType.Mod1Mask);
-
-			return state;
 		}
 		#endregion
 	}

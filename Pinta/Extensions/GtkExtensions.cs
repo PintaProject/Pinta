@@ -26,7 +26,7 @@
 
 using System;
 using Gtk;
-using MonoDevelop.Components.Docking;
+using Pinta.Docking;
 
 namespace Pinta
 {

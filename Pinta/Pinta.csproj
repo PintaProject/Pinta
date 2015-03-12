@@ -142,6 +142,7 @@
     <Compile Include="Dialogs\JpegCompressionDialog.cs" />
     <Compile Include="Dialogs\SpinButtonEntryDialog.cs" />
     <Compile Include="Dialogs\VersionInformationTabPage.cs" />
+    <Compile Include="DocumentViewContent.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
     <Compile Include="Pads\ColorPalettePad.cs" />
     <Compile Include="Pads\CanvasPad.cs" />

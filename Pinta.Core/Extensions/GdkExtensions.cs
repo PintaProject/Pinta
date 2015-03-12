@@ -108,6 +108,21 @@ namespace Pinta.Core
             return ev.State.IsControlPressed ();
 		}
 
+        /// <summary>
+        /// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
+        /// from appearing as active modifier keys.
+        /// </summary>
+        public static ModifierType FilterModifierKeys (this ModifierType current_state)
+        {
+            var state = Gdk.ModifierType.None;
+
+            state |= (current_state & Gdk.ModifierType.ControlMask);
+            state |= (current_state & Gdk.ModifierType.ShiftMask);
+            state |= (current_state & Gdk.ModifierType.Mod1Mask);
+
+            return state;
+        }
+
 		public static Cairo.PointD GetPoint (this EventButton ev)
 		{
 			return new Cairo.PointD (ev.X, ev.Y);

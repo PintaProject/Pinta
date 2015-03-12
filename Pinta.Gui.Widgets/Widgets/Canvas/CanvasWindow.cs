@@ -35,18 +35,20 @@ namespace Pinta
     {
         private HRuler horizontal_ruler;
         private VRuler vertical_ruler;
+        private ScrolledWindow scrolled_window;
         
-        public ScrolledWindow ScrolledWindow { get; set; }
         public PintaCanvas Canvas { get; set; }
-        public CanvasWindow () : base (2, 2, false)
+        public bool HasBeenShown { get; set; }
+
+        public CanvasWindow (Document document) : base (2, 2, false)
         {
-            ScrolledWindow = new ScrolledWindow ();
+            scrolled_window = new ScrolledWindow ();
 
             var vp = new Viewport () {
                 ShadowType = ShadowType.None
             };
 
-            Canvas = new PintaCanvas () {
+            Canvas = new PintaCanvas (this, document) {
                 Name = "canvas",
                 CanDefault = true,
                 CanFocus = true,
@@ -62,15 +64,15 @@ namespace Pinta
             vertical_ruler.Metric = MetricType.Pixels;
             Attach (vertical_ruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
-            ScrolledWindow.Hadjustment.ValueChanged += delegate {
+            scrolled_window.Hadjustment.ValueChanged += delegate {
                 UpdateRulerRange ();
             };
 
-            ScrolledWindow.Vadjustment.ValueChanged += delegate {
+            scrolled_window.Vadjustment.ValueChanged += delegate {
                 UpdateRulerRange ();
             };
 
-            PintaCore.Workspace.CanvasSizeChanged += delegate {
+            document.Workspace.CanvasSizeChanged += delegate {
                 UpdateRulerRange ();
             };
 
@@ -84,9 +86,9 @@ namespace Pinta
                 vertical_ruler.Position = point.Y;
             };
 
-            Attach (ScrolledWindow, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
+            Attach (scrolled_window, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
 
-            ScrolledWindow.Add (vp);
+            scrolled_window.Add (vp);
             vp.Add (Canvas);
 
             ShowAll ();
@@ -97,6 +99,21 @@ namespace Pinta
             vertical_ruler.Visible = false;
 
             Canvas.SizeAllocated += delegate { UpdateRulerRange (); };
+        }
+
+        public bool IsMouseOnCanvas {
+            get {
+                var x = 0;
+                var y = 0;
+
+                // Get the position of the mouse pointer relative
+                // to canvas scrolled window top-left corner
+                scrolled_window.GetPointer (out x, out y);
+
+                // Check if the pointer is on the canvas
+                return (x > 0) && (x < scrolled_window.Allocation.Width) &&
+                    (y > 0) && (y < scrolled_window.Allocation.Height);
+            }
         }
 
         public bool RulersVisible {
@@ -126,7 +143,7 @@ namespace Pinta
             var lower = new Cairo.PointD (0, 0);
             var upper = new Cairo.PointD (0, 0);
 
-            if (ScrolledWindow.Hadjustment == null || ScrolledWindow.Vadjustment == null)
+            if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
                 return;
 
             if (PintaCore.Workspace.HasOpenDocuments) {
@@ -134,15 +151,15 @@ namespace Pinta
                     lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
                     upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
                 } else {
-                    lower.X = ScrolledWindow.Hadjustment.Value / PintaCore.Workspace.Scale;
-                    upper.X = (ScrolledWindow.Hadjustment.Value + ScrolledWindow.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
+                    lower.X = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale;
+                    upper.X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
                 }
                 if (PintaCore.Workspace.Offset.Y > 0) {
                     lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
                     upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
                 } else {
-                    lower.Y = ScrolledWindow.Vadjustment.Value / PintaCore.Workspace.Scale;
-                    upper.Y = (ScrolledWindow.Vadjustment.Value + ScrolledWindow.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+                    lower.Y = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale;
+                    upper.Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
                 }
             }
 

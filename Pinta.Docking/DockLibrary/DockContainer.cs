@@ -36,7 +36,7 @@ using Gtk;
 using Gdk;
 using System.Linq;
 
-namespace MonoDevelop.Components.Docking
+namespace Pinta.Docking
 {
 	class DockContainer: Container
 	{

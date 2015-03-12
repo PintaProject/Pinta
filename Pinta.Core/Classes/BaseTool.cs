@@ -56,8 +56,13 @@ namespace Pinta.Core
 		public event MouseHandler MousePressed;
 		public event MouseHandler MouseReleased;
 
+        public Cursor CurrentCursor { get; private set; }
+
 		protected BaseTool ()
 		{
+            CurrentCursor = DefaultCursor;
+
+            PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
 		}
 
 		static BaseTool ()
@@ -289,15 +294,11 @@ namespace Pinta.Core
 
 		protected virtual void OnActivated ()
 		{
-			PintaCore.Workspace.CanvasSizeChanged += new EventHandler(Workspace_CanvasSizeChanged);
-
 			SetCursor (DefaultCursor);
 		}
 
 		protected virtual void OnDeactivated(BaseTool newTool)
 		{
-			PintaCore.Workspace.CanvasSizeChanged -= new EventHandler(Workspace_CanvasSizeChanged);
-
 			SetCursor (null);
 		}
 
@@ -321,7 +322,9 @@ namespace Pinta.Core
 		
 		public void SetCursor (Gdk.Cursor cursor)
 		{
-            if (PintaCore.Workspace.HasOpenDocuments)
+            CurrentCursor = cursor;
+
+            if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow != null)
 			    PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow.Cursor = cursor;
 		}
 
@@ -443,9 +446,10 @@ namespace Pinta.Core
 			tb.AppendItem (antialiasing_button);
 		}
 
-		private void Workspace_CanvasSizeChanged(object sender, EventArgs e)
+		private void Workspace_ActiveDocumentChanged (object sender, EventArgs e)
 		{
-			SetCursor (DefaultCursor);
+            if (PintaCore.Tools.CurrentTool == this)
+			    SetCursor (DefaultCursor);
 		}
 		#endregion
 	}
