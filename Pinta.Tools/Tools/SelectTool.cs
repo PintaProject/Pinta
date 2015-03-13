@@ -28,8 +28,8 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using System.Collections.Generic;
-using ClipperLibrary;
+using System.Linq;
+using Gdk;
 
 namespace Pinta.Tools
 {
@@ -42,14 +42,12 @@ namespace Pinta.Tools
 		private SelectionHistoryItem hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
-		private Gdk.Cursor cursor_hand;
-		bool is_hand_cursor = false;
+	    private CursorType? active_cursor;
         private CombineMode combine_mode;
 
 		public SelectTool ()
 		{
 			CreateHandler ();
-            cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
 		}
 
         #region ToolBar
@@ -129,7 +127,7 @@ namespace Pinta.Tools
             active_control = null;
 
             // Update the mouse cursor.
-            CheckHandlerCursor (point);
+            UpdateCursor (point);
 		}
 
 		protected override void OnDeactivated(BaseTool newTool)
@@ -156,7 +154,7 @@ namespace Pinta.Tools
 
 			if (!is_drawing)
 			{
-                CheckHandlerCursor (point);
+                UpdateCursor (point);
                 return;
 			}
 
@@ -210,7 +208,7 @@ namespace Pinta.Tools
 			}
 
 			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
-			Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
+			Cairo.Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
 
             DrawHandler (doc.ToolLayer);
 
@@ -219,7 +217,7 @@ namespace Pinta.Tools
 
 		protected void CreateHandler ()
 		{
-			controls[0] = new ToolControl ((x, y, s) => {
+			controls[0] = new ToolControl (CursorType.TopLeftCorner, (x, y, s) => {
 				shape_origin.X = x;
 				shape_origin.Y = y;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
@@ -229,7 +227,7 @@ namespace Pinta.Tools
 						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
 				}
 			});
-			controls[1] = new ToolControl ((x, y, s) => {
+			controls[1] = new ToolControl (CursorType.BottomLeftCorner, (x, y, s) => {
 				shape_origin.X = x;
 				shape_end.Y = y;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
@@ -239,7 +237,7 @@ namespace Pinta.Tools
 						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
 				}
 			});
-			controls[2] = new ToolControl ((x, y, s) => {
+			controls[2] = new ToolControl (CursorType.TopRightCorner, (x, y, s) => {
 				shape_end.X = x;
 				shape_origin.Y = y;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
@@ -249,7 +247,7 @@ namespace Pinta.Tools
 						shape_origin.Y = shape_end.Y - shape_end.X + shape_origin.X;
 				}
 			});
-			controls[3] = new ToolControl ((x, y, s) => {
+			controls[3] = new ToolControl (CursorType.BottomRightCorner, (x, y, s) => {
 				shape_end.X = x;
 				shape_end.Y = y;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
@@ -259,7 +257,7 @@ namespace Pinta.Tools
 						shape_end.Y = shape_origin.Y + shape_end.X - shape_origin.X;
 				}
 			});
-			controls[4] = new ToolControl ((x, y, s) => {
+			controls[4] = new ToolControl (CursorType.LeftSide, (x, y, s) => {
 				shape_origin.X = x;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
 					double d = shape_end.X - shape_origin.X;
@@ -267,7 +265,7 @@ namespace Pinta.Tools
 					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
 				}
 			});
-			controls[5] = new ToolControl ((x, y, s) => {
+			controls[5] = new ToolControl (CursorType.TopSide, (x, y, s) => {
 				shape_origin.Y = y;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
 					double d = shape_end.Y - shape_origin.Y;
@@ -275,7 +273,7 @@ namespace Pinta.Tools
 					shape_end.X = (shape_origin.X + shape_end.X + d) / 2;
 				}
 			});
-			controls[6] = new ToolControl ((x, y, s) => {
+			controls[6] = new ToolControl (CursorType.RightSide, (x, y, s) => {
 				shape_end.X = x;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
 					double d = shape_end.X - shape_origin.X;
@@ -283,7 +281,7 @@ namespace Pinta.Tools
 					shape_end.Y = (shape_origin.Y + shape_end.Y + d) / 2;
 				}
 			});
-			controls[7] = new ToolControl ((x, y, s) => {
+			controls[7] = new ToolControl (CursorType.BottomSide, (x, y, s) => {
 				shape_end.Y = y;
 				if ((s & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
 					double d = shape_end.Y - shape_origin.Y;
@@ -313,25 +311,26 @@ namespace Pinta.Tools
 		    }
 		}
 
-		public void CheckHandlerCursor (PointD point)
+		public void UpdateCursor (PointD point)
 		{
-			foreach (ToolControl ct in controls) {
-				if (ct.IsInside (point)) {
-					if (!is_hand_cursor) {
-						SetCursor (cursor_hand);
-						is_hand_cursor = true;
-					}
-					return;
-				}
-			}
+		    foreach (ToolControl ct in controls.Where (ct => ct.IsInside (point)))
+		    {
+		        if (active_cursor != ct.Cursor)
+                {
+		            SetCursor (new Cursor(ct.Cursor));
+		            active_cursor = ct.Cursor;
+		        }
+		        return;
+		    }
 
-			if (is_hand_cursor) {
+		    if (active_cursor.HasValue)
+            {
 				SetCursor (DefaultCursor);
-				is_hand_cursor = false;
-			}
+                active_cursor = null;
+            }
 		}
 
-		#endregion
+	    #endregion
 
 		public override void AfterUndo()
 		{

@@ -31,10 +31,11 @@ namespace Pinta.Tools
 {
 	public class ToolControl
 	{
-		public ToolControl (MouseHandler moveAction)
+		public ToolControl (Gdk.CursorType cursor, MouseHandler moveAction)
 		{
 			this.action = moveAction;
 			Position = new PointD (-5, -5);
+		    Cursor = cursor;
 		}
 
         private const int Size = 6;
@@ -44,6 +45,7 @@ namespace Pinta.Tools
 		private readonly MouseHandler action;
 
 		public PointD Position {get; set;}
+        public Gdk.CursorType Cursor { get; private set; }
 
 		public bool IsInside (PointD point)
 		{
@@ -83,6 +85,6 @@ namespace Pinta.Tools
 	            Position.Y - scale_factor*Size/2,
 	            scale_factor*Size, scale_factor*Size);
 	    }
-	}
+    }
 }
 
