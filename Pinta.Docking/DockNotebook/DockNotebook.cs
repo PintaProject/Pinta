@@ -49,10 +49,12 @@ namespace Pinta.Docking.DockNotebook
 
 		static DockNotebook activeNotebook;
 		static List<DockNotebook> allNotebooks = new List<DockNotebook> ();
+        static bool tab_strip_visible = true;
 
 		public static event EventHandler ActiveNotebookChanged;
         public static event EventHandler ActiveTabChanged;
         public static event EventHandler<DragDataReceivedArgs> NotebookDragDataReceived;
+        public static event EventHandler TabStripVisibleChanged;
 
 		enum TargetList {
 			UriList = 100
@@ -75,6 +77,9 @@ namespace Pinta.Docking.DockNotebook
 			PackStart (contentBox, true, true, 0);
 
 			ShowAll ();
+
+            tabStrip.Visible = TabStripVisible;
+            TabStripVisibleChanged += (o, e) => tabStrip.Visible = TabStripVisible;
 
 			contentBox.NoShowAll = true;
 
@@ -132,6 +137,18 @@ namespace Pinta.Docking.DockNotebook
 		public static IEnumerable<DockNotebook> AllNotebooks {
 			get { return allNotebooks; }
 		}
+
+        public static bool TabStripVisible {
+            get { return tab_strip_visible; }
+            set {
+                if (tab_strip_visible != value) {
+                    tab_strip_visible = value;
+
+                    if (TabStripVisibleChanged != null)
+                        TabStripVisibleChanged (null, EventArgs.Empty);
+                }
+            }
+        }
 
 		Cursor fleurCursor = new Cursor (CursorType.Fleur);
 

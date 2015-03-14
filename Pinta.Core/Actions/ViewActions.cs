@@ -38,8 +38,9 @@ namespace Pinta.Core
 		public Gtk.Action ZoomToWindow { get; private set; }
 		public Gtk.Action ZoomToSelection { get; private set; }
 		public Gtk.Action ActualSize { get; private set; }
-		public Gtk.ToggleAction ToolBar { get; private set; }
-		public Gtk.ToggleAction PixelGrid { get; private set; }
+        public Gtk.ToggleAction ToolBar { get; private set; }
+        public Gtk.ToggleAction ImageTabs { get; private set; }
+        public Gtk.ToggleAction PixelGrid { get; private set; }
 		public Gtk.ToggleAction Rulers { get; private set; }
 		public Gtk.RadioAction Pixels { get; private set; }
 		public Gtk.RadioAction Inches { get; private set; }
@@ -78,8 +79,9 @@ namespace Pinta.Core
 			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Best Fit"), null, Stock.ZoomFit);
 			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
 			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Normal Size"), null, Stock.Zoom100);
-			ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("Toolbar"), null, null);
-			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
+            ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("Toolbar"), null, null);
+            ImageTabs = new Gtk.ToggleAction ("ImageTabs", Catalog.GetString ("Image Tabs"), null, null);
+            PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
 			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
 			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("Pixels"), null, null, 0);
 			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("Inches"), null, null, 1);
@@ -120,6 +122,7 @@ namespace Pinta.Core
 
             // The toolbar is shown by default.
             ToolBar.Active = true;
+            ImageTabs.Active = true;
 		}
 
 		#region Initialization
@@ -130,8 +133,9 @@ namespace Pinta.Core
 			
 			menu.Append (ToolBar.CreateMenuItem ());
 			menu.Append (PixelGrid.CreateMenuItem ());
-			menu.Append (Rulers.CreateMenuItem ());
-			menu.AppendSeparator ();
+            menu.Append (Rulers.CreateMenuItem ());
+            menu.Append (ImageTabs.CreateMenuItem ());
+            menu.AppendSeparator ();
 
 			ImageMenuItem zoomin = ZoomIn.CreateAcceleratedMenuItem (Gdk.Key.plus, Gdk.ModifierType.ControlMask);
 			zoomin.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.equal, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
