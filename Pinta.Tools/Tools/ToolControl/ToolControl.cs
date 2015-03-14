@@ -71,7 +71,8 @@ namespace Pinta.Tools
             g.Save ();
 
             var rect = GetHandleRect ().Inflate (2, 2);
-            g.AppendPath (g.CreateRectanglePath (rect));
+            using (var path = g.CreateRectanglePath (rect))
+                g.AppendPath (path);
             g.Operator = Operator.Clear;
             g.Fill ();
 
