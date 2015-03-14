@@ -22,6 +22,8 @@ Pinta.Core/Managers/EffectsManager.cs
 Pinta.Core/Managers/LivePreviewManager.cs
 Pinta.Core/Managers/ToolManager.cs
 Pinta.Core/Managers/WorkspaceManager.cs
+Pinta.Docking/DockLibrary/DockItem.cs
+Pinta.Docking/DockLibrary/DockItemTitleTab.cs
 Pinta.Effects/Adjustments/AutoLevelEffect.cs
 Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs
 Pinta.Effects/Adjustments/BrightnessContrastEffect.cs
@@ -128,8 +130,6 @@ Pinta/Dialogs/NewImageDialog.cs
 Pinta/Dialogs/ResizeCanvasDialog.cs
 Pinta/Dialogs/ResizeImageDialog.cs
 Pinta/Dialogs/VersionInformationTabPage.cs
-Pinta/DockLibrary/DockItem.cs
-Pinta/DockLibrary/DockItemContainer.cs
 Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs
 Pinta/gtk-gui/Pinta.ResizeImageDialog.cs
 Pinta/Main.cs
