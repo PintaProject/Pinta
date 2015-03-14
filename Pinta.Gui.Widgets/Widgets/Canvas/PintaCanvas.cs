@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gdk;
 using Gtk;
 using Pinta.Core;
@@ -37,17 +38,20 @@ namespace Pinta.Gui.Widgets
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
 
+        private Document document;
+
         public CanvasWindow CanvasWindow { get; private set; }
 
 		public PintaCanvas (CanvasWindow window, Document document)
 		{
             CanvasWindow = window;
+            this.document = document;
 
 			cr = new CanvasRenderer (true);
 			
 			// Keep the widget the same size as the canvas
             document.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
-				SetRequisition (PintaCore.Workspace.CanvasSize);
+                SetRequisition (document.Workspace.CanvasSize);
 			};
 
 			// Update the canvas when the image changes
@@ -64,28 +68,30 @@ namespace Pinta.Gui.Widgets
 
 			// Give mouse press events to the current tool
 			ButtonPressEvent += delegate (object sender, ButtonPressEventArgs e) {
-				if (PintaCore.Workspace.HasOpenDocuments)
-					PintaCore.Tools.CurrentTool.DoMouseDown (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+                // The canvas gets the button press before the tab system, so
+                // if this click is on a canvas that isn't currently the ActiveDocument yet, 
+                // we need to go ahead and make it the active document for the tools
+                // to use it, even though right after this the tab system would have switched it
+                if (PintaCore.Workspace.ActiveDocument != document)
+                    PintaCore.Workspace.SetActiveDocument (document);
+
+                PintaCore.Tools.CurrentTool.DoMouseDown (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
 			};
 
 			// Give mouse release events to the current tool
 			ButtonReleaseEvent += delegate (object sender, ButtonReleaseEventArgs e) {
-				if (PintaCore.Workspace.HasOpenDocuments)
-					PintaCore.Tools.CurrentTool.DoMouseUp (this, e, PintaCore.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+                PintaCore.Tools.CurrentTool.DoMouseUp (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
 			};
 
 			// Give mouse move events to the current tool
 			MotionNotifyEvent += delegate (object sender, MotionNotifyEventArgs e) {
-				if (!PintaCore.Workspace.HasOpenDocuments)
-					return;
-					
-				Cairo.PointD point = PintaCore.Workspace.ActiveWorkspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
+                var point = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
 
-				if (PintaCore.Workspace.ActiveWorkspace.PointInCanvas (point))
+                if (document.Workspace.PointInCanvas (point))
 					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
 
 				if (PintaCore.Tools.CurrentTool != null)
-					PintaCore.Tools.CurrentTool.DoMouseMove (sender, e, point);
+					PintaCore.Tools.CurrentTool.DoMouseMove ((DrawingArea)sender, e, point);
 			};
 		}
 
@@ -93,17 +99,14 @@ namespace Pinta.Gui.Widgets
 		protected override bool OnExposeEvent (EventExpose e)
 		{
 			base.OnExposeEvent (e);
-
-			if (!PintaCore.Workspace.HasOpenDocuments)
-				return true;
 				
-			double scale = PintaCore.Workspace.Scale;
+			var scale = document.Workspace.Scale;
 
-			int x = (int)PintaCore.Workspace.Offset.X;
-			int y = (int)PintaCore.Workspace.Offset.Y;
+            var x = (int)document.Workspace.Offset.X;
+            var y = (int)document.Workspace.Offset.Y;
 
 			// Translate our expose area for the whole drawingarea to just our canvas
-			Rectangle canvas_bounds = new Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height);
+            var canvas_bounds = new Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
 			canvas_bounds.Intersect (e.Area);
 
 			if (canvas_bounds.IsEmpty)
@@ -120,25 +123,26 @@ namespace Pinta.Gui.Widgets
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
-			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
+            cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);
 
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
+			using (var g = CairoHelper.Create (GdkWindow)) {
 				// Draw our canvas drop shadow
-				g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 2, PintaCore.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-				g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 4, PintaCore.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-				g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, PintaCore.Workspace.CanvasSize.Width + 6, PintaCore.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+                g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+                g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+                g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
 				// Set up our clip rectangle
-				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height));
+                g.Rectangle (new Cairo.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
 				g.Clip ();
 
 				g.Translate (x, y);
 
 				// Render all the layers to a surface
-				var layers = PintaCore.Layers.GetLayersToPaint ();
-				if (layers.Count == 0) {
+                var layers = document.GetLayersToPaint ();
+
+				if (layers.Count == 0)
 					canvas.Clear ();
-				}
+
 				cr.Render (layers, canvas, canvas_bounds.Location);
 
 				// Paint the surface to our canvas
@@ -146,10 +150,10 @@ namespace Pinta.Gui.Widgets
 				g.Paint ();
 
 				// Selection outline
-				if (PintaCore.Layers.ShowSelection) {
+                if (document.ShowSelection) {
 	                                bool fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") &&
 						!PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
-					PintaCore.Workspace.ActiveDocument.Selection.Draw (g, scale, fillSelection);
+                                    document.Selection.Draw (g, scale, fillSelection);
 				}
 			}
 
@@ -163,11 +167,11 @@ namespace Pinta.Gui.Widgets
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
-						PintaCore.Workspace.ActiveWorkspace.ZoomOutFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
+                        document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
 						return true;
 					case ScrollDirection.Left:
 					case ScrollDirection.Up:
-						PintaCore.Workspace.ActiveWorkspace.ZoomInFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
+                        document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
 						return true;
 				}
 			}

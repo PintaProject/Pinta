@@ -135,7 +135,7 @@ namespace Pinta.Docking.DockNotebook
 
 		Cursor fleurCursor = new Cursor (CursorType.Fleur);
 
-		public static event EventHandler<TabEventArgs> TabClosed;
+        public static event EventHandler<TabClosedEventArgs> TabClosed;
 		public event EventHandler<TabEventArgs> TabActivated;
 
 		public event EventHandler PageAdded;
@@ -361,10 +361,15 @@ namespace Pinta.Docking.DockNotebook
 			tabStrip.Update ();
 		}
 
-		internal void OnCloseTab (DockNotebookTab tab)
+        // Returns true if the tab was successfully closed
+		internal bool OnCloseTab (DockNotebookTab tab)
 		{
+            var e = new TabClosedEventArgs () { Tab = tab };
+
 			if (TabClosed != null)
-				TabClosed (this, new TabEventArgs () { Tab = tab });
+                TabClosed (this, e);
+
+            return !e.Cancel;
 		}
 
 		internal void OnActivateTab (DockNotebookTab tab)

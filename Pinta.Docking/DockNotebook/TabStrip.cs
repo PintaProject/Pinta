@@ -357,10 +357,8 @@ namespace Pinta.Docking.DockNotebook
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
-            // Pinta - TODO: Enable this to allow tabs to be docked side-by-side and pulled
-            // off into new windows
-            //if (draggingTab && placeholderWindow == null && !mouseHasLeft)
-            //    mouseHasLeft = true;
+            if (draggingTab && placeholderWindow == null && !mouseHasLeft)
+                mouseHasLeft = true;
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 
