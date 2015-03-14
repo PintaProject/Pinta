@@ -23,3 +23,9 @@ po/Makefile.in.in
 po/POTFILES
 po/stamp-it
 xdg/pinta.desktop
+
+# Help
+help/*/*.mo
+help/*/*.page
+!help/C/*.page
+help/*/*.stamp
