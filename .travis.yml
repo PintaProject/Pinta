@@ -5,3 +5,4 @@ install:
 script:
   - ./autogen.sh && make
   - make test
+  - make check
