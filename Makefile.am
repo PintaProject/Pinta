@@ -1,5 +1,5 @@
-SUBDIRS = xdg
-DIST_SUBDIRS = xdg
+SUBDIRS = help xdg
+DIST_SUBDIRS = help xdg
 
 BINDIR = $(srcdir)/bin
 
@@ -82,6 +82,7 @@ install: pinta $(BINFILES)
 		/property:BinDir=$(DESTDIR)$(bindir) /property:LibDir=$(DESTDIR)$(libdir) \
 		/property:DataRootDir=$(DESTDIR)$(datarootdir) /property:ManDir=$(DESTDIR)$(mandir) \
 		/property:LocaleDir=$(DESTDIR)$(localedir) Pinta.Install.proj
+	cd help && $(MAKE) install
 	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
@@ -126,6 +127,7 @@ DISTCLEANFILES = po/.intltool-merge-cache \
 		 po/Makefile
 
 MAINTAINERCLEANFILES = po/Makefile.in.in \
+		       help/Makefile.in \
 		       Makefile.in \
 		       install-sh \
 		       configure \
