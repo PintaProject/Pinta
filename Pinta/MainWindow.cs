@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Gtk;
 using Mono.Addins;
 using Mono.Unix;
@@ -106,6 +108,7 @@ namespace Pinta
 
             PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
             PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+            DockNotebook.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
             DockNotebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
             DockNotebook.TabClosed += DockNotebook_TabClosed;
             DockNotebook.NotebookDragDataReceived += MainWindow_DragDataReceived;
@@ -119,7 +122,7 @@ namespace Pinta
                 dock_container.CloseTab (tab);
         }
 
-        private void DockNotebook_TabClosed (object sender, TabEventArgs e)
+        private void DockNotebook_TabClosed (object sender, TabClosedEventArgs e)
         {
             if (e.Tab == null || e.Tab.Content == null)
                 return;
@@ -130,7 +133,31 @@ namespace Pinta
             if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1) {
                 PintaCore.Workspace.SetActiveDocument (view.Document);
                 PintaCore.Actions.File.Close.Activate ();
+
+                // User must have canceled the close
+                if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1)
+                    e.Cancel = true;
             }
+        }
+
+        private void DockNotebook_ActiveNotebookChanged (object sender, EventArgs e)
+        {
+            var notebook = DockNotebook.ActiveNotebook;
+
+            if (notebook == null)
+                return;
+
+            var tab = notebook.CurrentTab;
+
+            if (tab == null || tab.Content == null)
+                return;
+
+            var content = (SdiWorkspaceWindow)tab.Content;
+            var view = (DocumentViewContent)content.ViewContent;
+
+            PintaCore.Workspace.SetActiveDocument (view.Document);
+
+            ((CanvasWindow)view.Control).Canvas.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
         }
 
         private void DockNotebook_ActiveTabChanged (object sender, EventArgs e)
@@ -442,8 +469,9 @@ namespace Pinta
 		private void LoadUserSettings ()
 		{
 			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-shown", false);
-			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
-			PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
+            PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+            PintaCore.Actions.View.ImageTabs.Active = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
+            PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
 			                                                                      PintaCore.System.DefaultDialogDirectory);
 
@@ -481,8 +509,9 @@ namespace Pinta
 
 			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
 			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
-			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
-			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
+            PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
+            PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Active);
+            PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
 
@@ -577,7 +606,8 @@ namespace Pinta
 
         private DockNotebookTab FindTabWithCanvas (PintaCanvas canvas)
         {
-            foreach (var notebook in dock_container.GetNotebooks ())
+            foreach (var container in GetAllNotebookContainers ())
+            foreach (var notebook in container.GetNotebooks ())
             foreach (var tab in notebook.Tabs) {
                 var window = (SdiWorkspaceWindow)tab.Content;
                 var doc_content = (DocumentViewContent)window.ActiveViewContent;
@@ -587,6 +617,11 @@ namespace Pinta
             }
 
             return null;
+        }
+
+        private IEnumerable<DockNotebookContainer> GetAllNotebookContainers ()
+        {
+            return new [] { dock_container }.Concat (DockWindow.GetAllWindows ().Select (p => p.Container));
         }
 		#endregion
 	}

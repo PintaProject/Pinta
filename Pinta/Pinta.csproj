@@ -133,6 +133,7 @@
     <Compile Include="Actions\Image\ResizeImageAction.cs" />
     <Compile Include="Actions\Layers\LayerPropertiesAction.cs" />
     <Compile Include="Actions\Layers\RotateZoomLayerAction.cs" />
+    <Compile Include="Actions\View\ImageTabsToggledAction.cs" />
     <Compile Include="Actions\View\ToolBarToggledAction.cs" />
     <Compile Include="Actions\Window\CloseAllDocumentsAction.cs" />
     <Compile Include="Actions\Window\SaveAllDocumentsAction.cs" />

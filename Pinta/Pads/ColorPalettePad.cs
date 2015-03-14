@@ -44,7 +44,7 @@ namespace Pinta
 			palette_item.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 			palette_item.DefaultLocation = "Toolbox/Bottom";
 			palette_item.Behavior |= DockItemBehavior.CantClose;
-			palette_item.DefaultWidth = 65;
+			palette_item.DefaultWidth = 35;
 
 			Gtk.ToggleAction show_palette = padMenu.AppendToggleAction ("Palette", Catalog.GetString ("Palette"), null, "Pinta.png");
 			show_palette.Activated += delegate { palette_item.Visible = show_palette.Active; };

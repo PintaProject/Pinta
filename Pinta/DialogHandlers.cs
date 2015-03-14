@@ -66,7 +66,8 @@ namespace Pinta
 			action_handlers.Add (new RotateZoomLayerAction ());
 
 			// View
-			action_handlers.Add (new ToolBarToggledAction ());
+            action_handlers.Add (new ToolBarToggledAction ());
+            action_handlers.Add (new ImageTabsToggledAction ());
 
 			// Window
 			action_handlers.Add (new CloseAllDocumentsAction ());

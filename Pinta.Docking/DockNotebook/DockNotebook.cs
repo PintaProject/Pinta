@@ -49,10 +49,12 @@ namespace Pinta.Docking.DockNotebook
 
 		static DockNotebook activeNotebook;
 		static List<DockNotebook> allNotebooks = new List<DockNotebook> ();
+        static bool tab_strip_visible = true;
 
 		public static event EventHandler ActiveNotebookChanged;
         public static event EventHandler ActiveTabChanged;
         public static event EventHandler<DragDataReceivedArgs> NotebookDragDataReceived;
+        public static event EventHandler TabStripVisibleChanged;
 
 		enum TargetList {
 			UriList = 100
@@ -75,6 +77,9 @@ namespace Pinta.Docking.DockNotebook
 			PackStart (contentBox, true, true, 0);
 
 			ShowAll ();
+
+            tabStrip.Visible = TabStripVisible;
+            TabStripVisibleChanged += (o, e) => tabStrip.Visible = TabStripVisible;
 
 			contentBox.NoShowAll = true;
 
@@ -133,9 +138,21 @@ namespace Pinta.Docking.DockNotebook
 			get { return allNotebooks; }
 		}
 
+        public static bool TabStripVisible {
+            get { return tab_strip_visible; }
+            set {
+                if (tab_strip_visible != value) {
+                    tab_strip_visible = value;
+
+                    if (TabStripVisibleChanged != null)
+                        TabStripVisibleChanged (null, EventArgs.Empty);
+                }
+            }
+        }
+
 		Cursor fleurCursor = new Cursor (CursorType.Fleur);
 
-		public static event EventHandler<TabEventArgs> TabClosed;
+        public static event EventHandler<TabClosedEventArgs> TabClosed;
 		public event EventHandler<TabEventArgs> TabActivated;
 
 		public event EventHandler PageAdded;
@@ -361,10 +378,15 @@ namespace Pinta.Docking.DockNotebook
 			tabStrip.Update ();
 		}
 
-		internal void OnCloseTab (DockNotebookTab tab)
+        // Returns true if the tab was successfully closed
+		internal bool OnCloseTab (DockNotebookTab tab)
 		{
+            var e = new TabClosedEventArgs () { Tab = tab };
+
 			if (TabClosed != null)
-				TabClosed (this, new TabEventArgs () { Tab = tab });
+                TabClosed (this, e);
+
+            return !e.Cancel;
 		}
 
 		internal void OnActivateTab (DockNotebookTab tab)

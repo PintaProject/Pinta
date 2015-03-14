@@ -43,7 +43,7 @@ namespace Pinta
 			toolbox_item.Content = toolbox;
 			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
-			toolbox_item.DefaultWidth = 65;
+			toolbox_item.DefaultWidth = 35;
             
 
 			Gtk.ToggleAction show_toolbox = padMenu.AppendToggleAction ("Tools", Catalog.GetString ("Tools"), null, "Tools.Pencil.png");
