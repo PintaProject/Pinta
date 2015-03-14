@@ -42,6 +42,7 @@ help:
 build: Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
+	cd $(srcdir)/help && make HELP_DIR=../bin/help install
 
 test: build
 	$(XBUILD) tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj
@@ -77,12 +78,11 @@ cleanobj:
 	find $(srcdir)/ -type d -name obj | xargs rm -rvf
 	
 # target: install - Installs Pinta. 
-install: pinta $(BINFILES)
+install-exec-local: pinta $(BINFILES)
 	cd $(srcdir) && $(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) \
 		/property:BinDir=$(DESTDIR)$(bindir) /property:LibDir=$(DESTDIR)$(libdir) \
 		/property:DataRootDir=$(DESTDIR)$(datarootdir) /property:ManDir=$(DESTDIR)$(mandir) \
 		/property:LocaleDir=$(DESTDIR)$(localedir) Pinta.Install.proj
-	cd help && $(MAKE) install
 	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
