@@ -45,7 +45,7 @@ Be sure to install [Gtk# for Windows](http://download.mono-project.com/gtk-sharp
 
 Building Pinta requires the following software:
 
-`mono mono-xbuild automake autoconf libmono-cairo2.0-cil gtk-sharp2`
+`mono mono-xbuild automake autoconf libmono-cairo2.0-cil gtk-sharp2 yelp-tools`
 
 Pinta only supports version 2.8 or higher of Mono.
 
