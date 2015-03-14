@@ -26,6 +26,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using Gtk;
 using Mono.Unix;
@@ -34,6 +35,7 @@ namespace Pinta.Core
 {
 	public class HelpActions
 	{
+		public Gtk.Action Contents { get; private set; }
 		public Gtk.Action Website { get; private set; }
 		public Gtk.Action Bugs { get; private set; }
 		public Gtk.Action Translate { get; private set; }
@@ -47,6 +49,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
 			fact.AddDefault ();
 
+			Contents = new Gtk.Action ("Contents", Catalog.GetString ("Contents"), null, Stock.Help);
 			Website = new Gtk.Action ("Website", Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
 			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
 			Translate = new Gtk.Action ("Translate", Catalog.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
@@ -56,6 +59,7 @@ namespace Pinta.Core
 		#region Initialization
 		public void CreateMainMenu (Gtk.Menu menu)
 		{
+			menu.Append (Contents.CreateAcceleratedMenuItem (Gdk.Key.F1, Gdk.ModifierType.None));
 			menu.Append (Website.CreateMenuItem ());
 			menu.Append (Bugs.CreateMenuItem ());
 			menu.Append (Translate.CreateMenuItem ());
@@ -65,6 +69,7 @@ namespace Pinta.Core
 		
 		public void RegisterHandlers ()
 		{
+			Contents.Activated += DisplayHelp;
 			Website.Activated += new EventHandler (Website_Activated);
 			Bugs.Activated += new EventHandler (Bugs_Activated);
 			Translate.Activated += Translate_Activated;
@@ -73,6 +78,30 @@ namespace Pinta.Core
 		private void Bugs_Activated (object sender, EventArgs e)
 		{
 			Process.Start ("https://bugs.launchpad.net/pinta");
+		}
+
+		private void DisplayHelp (object sender, EventArgs e)
+		{
+			if (SystemManager.GetOperatingSystem() == OS.X11)
+			{
+				// Search for help files in the user's preferred language.
+				var help_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "help");
+				var langs = PintaCore.System.GetLanguageNames ();
+
+				foreach (var lang in langs)
+				{
+					string path = Path.Combine (Path.Combine (help_dir, lang), "pinta");
+					if (Directory.Exists (path))
+					{
+						Process.Start (string.Format ("ghelp://{0}", path));
+						return;
+					}
+				}
+			}
+
+			// TODO - update this link if we make HTML documentation available
+			// online, or install it with Pinta.
+			Process.Start ("http://pinta-project.com/howto");
 		}
 
 		private void Translate_Activated (object sender, EventArgs e)

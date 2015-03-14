@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-14 12:22-0400\n"
+"POT-Creation-Date: 2015-03-14 19:09-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,19 +202,23 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:50
+#: ../Pinta.Core/Actions/HelpActions.cs:52
+msgid "Contents"
+msgstr ""
+
+#: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:51
+#: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:52
+#: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:322
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:349
 msgid "About"
 msgstr ""
 
@@ -317,68 +321,72 @@ msgstr ""
 msgid "Import From File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom In"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom Out"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:81
+#: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:82
-msgid "Pixel Grid"
-msgstr ""
-
 #: ../Pinta.Core/Actions/ViewActions.cs:83
-msgid "Rulers"
+msgid "Image Tabs"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
-msgid "Pixels"
+msgid "Pixel Grid"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
-msgid "Inches"
+msgid "Rulers"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
-msgid "Centimeters"
+msgid "Pixels"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
+msgid "Inches"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:88
+msgid "Centimeters"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:113
-#: ../Pinta.Core/Actions/ViewActions.cs:272
+#: ../Pinta.Core/Actions/ViewActions.cs:115
+#: ../Pinta.Core/Actions/ViewActions.cs:276
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:318
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:326
 msgid "Window"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:155
+#: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
 msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
 msgstr ""
@@ -1580,7 +1588,7 @@ msgid ""
 "drag the selection to rotate selection outline."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:85
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:87
 msgid "Paintbrush"
 msgstr ""
 
@@ -1992,67 +2000,67 @@ msgstr ""
 msgid "Anchor:"
 msgstr ""
 
-#: ../Pinta/Main.cs:72
+#: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
 msgstr ""
 
-#: ../Pinta/Main.cs:73
+#: ../Pinta/Main.cs:58
 msgid "Display the application version."
 msgstr ""
 
-#: ../Pinta/Main.cs:74
+#: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta/Main.cs:122
+#: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
 msgstr ""
 
-#: ../Pinta/Main.cs:124
+#: ../Pinta/Main.cs:109
 msgid "Options: "
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:284
+#: ../Pinta/MainWindow.cs:311
 msgid "_File"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:285
+#: ../Pinta/MainWindow.cs:312
 msgid "_Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:287
+#: ../Pinta/MainWindow.cs:314
 msgid "_View"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:290
+#: ../Pinta/MainWindow.cs:317
 msgid "_Image"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:291
+#: ../Pinta/MainWindow.cs:318
 msgid "_Layers"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:292
+#: ../Pinta/MainWindow.cs:319
 msgid "_Adjustments"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:293
+#: ../Pinta/MainWindow.cs:320
 msgid "Effe_cts"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:294
+#: ../Pinta/MainWindow.cs:321
 msgid "A_dd-ins"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:296
+#: ../Pinta/MainWindow.cs:323
 msgid "_Window"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:300
+#: ../Pinta/MainWindow.cs:327
 msgid "Tool Windows"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:304
+#: ../Pinta/MainWindow.cs:331
 msgid "_Help"
 msgstr ""
 
@@ -2064,15 +2072,15 @@ msgstr ""
 msgid "Canvas"
 msgstr ""
 
-#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:50
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
 msgstr ""
 
-#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:54
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
 msgid "Layers"
 msgstr ""
 
-#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:46
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
 msgid "Images"
 msgstr ""
 

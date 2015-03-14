@@ -41,22 +41,7 @@ namespace Pinta
 		[STAThread]
 		public static void Main (string[] args)
 		{
-			string app_dir = Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location);
-			string locale_dir;
-			bool devel_mode = File.Exists (Path.Combine (Path.Combine (app_dir, ".."), "Pinta.sln"));
-			
-			if (SystemManager.GetOperatingSystem () != OS.X11 || devel_mode)
-				locale_dir = Path.Combine (app_dir, "locale");
-			else {
-				// From MonoDevelop:
-				// Pinta is located at $prefix/lib/pinta
-				// adding "../.." should give us $prefix
-				string prefix = Path.Combine (Path.Combine (app_dir, ".."), "..");
-				//normalise it
-				prefix = Path.GetFullPath (prefix);
-				//catalog is installed to "$prefix/share/locale" by default
-				locale_dir = Path.Combine (Path.Combine (prefix, "share"), "locale");
-			}
+			string locale_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
 
 			try {
 				Catalog.Init ("pinta", locale_dir);

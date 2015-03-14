@@ -100,12 +100,38 @@ namespace Pinta.Core
             return Directory.Exists (LastDialogDirectory) ? LastDialogDirectory : DefaultDialogDirectory;
         }
 
-		public string GetExecutablePathName ()
+		public static string GetExecutablePathName ()
 		{
 			string executablePathName = System.Environment.GetCommandLineArgs ()[0];
 			executablePathName = System.IO.Path.GetFullPath (executablePathName);
 
 			return executablePathName;
+		}
+
+		public static string GetExecutableDirectory ()
+		{
+			return Path.GetDirectoryName (GetExecutablePathName ());
+		}
+
+		/// <summary>
+		/// Return the root directory to search under for translations, documentation, etc.
+		/// </summary>
+		public static string GetDataRootDirectory ()
+		{
+			string app_dir = SystemManager.GetExecutableDirectory ();
+			bool devel_mode = File.Exists (Path.Combine (Path.Combine (app_dir, ".."), "Pinta.sln"));
+
+			if (GetOperatingSystem () != OS.X11 || devel_mode)
+				return app_dir;
+			else {
+				// From MonoDevelop:
+				// Pinta is located at $prefix/lib/pinta
+				// adding "../.." should give us $prefix
+				string prefix = Path.Combine (Path.Combine (app_dir, ".."), "..");
+				//normalise it
+				prefix = Path.GetFullPath (prefix);
+				return Path.Combine (prefix, "share");
+			}
 		}
 
 		public static OS GetOperatingSystem ()
@@ -117,6 +143,17 @@ namespace Pinta.Core
 		{
 			return AddinManager.GetExtensionObjects<T> ();
 		}
+
+		/// <summary>
+		/// Return a list of applicable locale names, ordered from most desirable to least desirable.
+		/// </summary>
+		public string[] GetLanguageNames ()
+		{
+			return GLib.Marshaller.NullTermPtrToStringArray (g_get_language_names (), false);
+		}
+
+		[DllImport ("glib-2.0.dll", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr g_get_language_names ();
 
 		//From Managed.Windows.Forms/XplatUI
 		[DllImport ("libc")]
