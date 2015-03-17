@@ -71,6 +71,7 @@
     <Compile Include="DockLibrary\TabStrip.cs" />
     <Compile Include="DockNotebook\DockNotebook.cs" />
     <Compile Include="DockNotebook\DockNotebookContainer.cs" />
+    <Compile Include="DockNotebook\DockNotebookManager.cs" />
     <Compile Include="DockNotebook\DockNotebookTab.cs" />
     <Compile Include="DockNotebook\DockWindow.cs" />
     <Compile Include="DockNotebook\PlaceholderWindow.cs" />
