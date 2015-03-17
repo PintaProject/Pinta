@@ -65,6 +65,8 @@ namespace Pinta.Docking.DockNotebook
 			this.tabControl = tabControl;
 			Child = tabControl;
 			
+            DockNotebookManager.AddContainer (this);
+
 			if (!isMasterTab)
 				tabControl.PageRemoved += HandlePageRemoved;
 		}
@@ -357,6 +359,13 @@ namespace Pinta.Docking.DockNotebook
 			while (paned != null);
 			return null;
 		}
+
+        protected override void OnDestroyed ()
+        {
+            DockNotebookManager.RemoveContainer (this);
+
+            base.OnDestroyed ();
+        }
 	}
 }
 

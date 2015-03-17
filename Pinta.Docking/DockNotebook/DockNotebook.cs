@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Pinta.Docking;
+using Pinta.Docking.Gui;
 
 namespace Pinta.Docking.DockNotebook
 {
@@ -49,12 +50,6 @@ namespace Pinta.Docking.DockNotebook
 
 		static DockNotebook activeNotebook;
 		static List<DockNotebook> allNotebooks = new List<DockNotebook> ();
-        static bool tab_strip_visible = true;
-
-		public static event EventHandler ActiveNotebookChanged;
-        public static event EventHandler ActiveTabChanged;
-        public static event EventHandler<DragDataReceivedArgs> NotebookDragDataReceived;
-        public static event EventHandler TabStripVisibleChanged;
 
 		enum TargetList {
 			UriList = 100
@@ -78,8 +73,8 @@ namespace Pinta.Docking.DockNotebook
 
 			ShowAll ();
 
-            tabStrip.Visible = TabStripVisible;
-            TabStripVisibleChanged += (o, e) => tabStrip.Visible = TabStripVisible;
+            tabStrip.Visible = DockNotebookManager.TabStripVisible;
+            DockNotebookManager.TabStripVisibleChanged += (o, e) => tabStrip.Visible = DockNotebookManager.TabStripVisible;
 
 			contentBox.NoShowAll = true;
 
@@ -119,7 +114,7 @@ namespace Pinta.Docking.DockNotebook
 			allNotebooks.Add (this);
 		}
 
-		public static DockNotebook ActiveNotebook {
+		internal static DockNotebook ActiveNotebook {
 			get { return activeNotebook; }
 			set {
 				if (activeNotebook != value) {
@@ -128,31 +123,18 @@ namespace Pinta.Docking.DockNotebook
 					activeNotebook = value;
 					if (activeNotebook != null)
 						activeNotebook.tabStrip.IsActiveNotebook = true;
-					if (ActiveNotebookChanged != null)
-						ActiveNotebookChanged (null, EventArgs.Empty);
+
+                    DockNotebookManager.OnActiveNotebookChanged ();
 				}
 			}
 		}
 
-		public static IEnumerable<DockNotebook> AllNotebooks {
+		internal static IEnumerable<DockNotebook> AllNotebooks {
 			get { return allNotebooks; }
 		}
 
-        public static bool TabStripVisible {
-            get { return tab_strip_visible; }
-            set {
-                if (tab_strip_visible != value) {
-                    tab_strip_visible = value;
-
-                    if (TabStripVisibleChanged != null)
-                        TabStripVisibleChanged (null, EventArgs.Empty);
-                }
-            }
-        }
-
 		Cursor fleurCursor = new Cursor (CursorType.Fleur);
 
-        public static event EventHandler<TabClosedEventArgs> TabClosed;
 		public event EventHandler<TabEventArgs> TabActivated;
 
 		public event EventHandler PageAdded;
@@ -212,8 +194,7 @@ namespace Pinta.Docking.DockNotebook
 					if (SwitchPage != null)
 						SwitchPage (this, EventArgs.Empty);
 
-                    if (ActiveTabChanged != null)
-                        ActiveTabChanged (currentTab, EventArgs.Empty);
+                    DockNotebookManager.OnActiveTabChanged ();
 				}
 			}
 		}
@@ -263,8 +244,7 @@ namespace Pinta.Docking.DockNotebook
 
 		void OnDragDataReceived (object o, Gtk.DragDataReceivedArgs args)
 		{
-            if (NotebookDragDataReceived != null)
-                NotebookDragDataReceived (o, args);
+            DockNotebookManager.OnDragDataReceived (o, args);
         }
 
 		public DockNotebookContainer Container {
@@ -299,6 +279,20 @@ namespace Pinta.Docking.DockNotebook
 				t.Content = content;
 			return t;
 		}
+
+        public DockNotebookTab InsertTab (IViewContent content, int index)
+        {
+            // Create the new tab
+            var tab = InsertTab (index);
+
+            // Create a content window and add it to the tab
+            var window = new SdiWorkspaceWindow (content, this, tab);
+            tab.Content = window;
+
+            tab.Content.Show ();
+
+            return tab;
+        }
 
 		public DockNotebookTab InsertTab (int index)
 		{
@@ -383,8 +377,7 @@ namespace Pinta.Docking.DockNotebook
 		{
             var e = new TabClosedEventArgs () { Tab = tab };
 
-			if (TabClosed != null)
-                TabClosed (this, e);
+			DockNotebookManager.OnTabClosed (this, e);
 
             return !e.Cancel;
 		}

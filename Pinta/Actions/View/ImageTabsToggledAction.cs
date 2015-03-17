@@ -46,7 +46,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			Pinta.Docking.DockNotebook.DockNotebook.TabStripVisible = ((ToggleAction)sender).Active;
+			Pinta.Docking.DockNotebook.DockNotebookManager.TabStripVisible = ((ToggleAction)sender).Active;
 		}
 	}
 }

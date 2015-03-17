@@ -108,10 +108,11 @@ namespace Pinta
 
             PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
             PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
-            DockNotebook.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
-            DockNotebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
-            DockNotebook.TabClosed += DockNotebook_TabClosed;
-            DockNotebook.NotebookDragDataReceived += MainWindow_DragDataReceived;
+
+            DockNotebookManager.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
+            DockNotebookManager.ActiveTabChanged += DockNotebook_ActiveTabChanged;
+            DockNotebookManager.TabClosed += DockNotebook_TabClosed;
+            DockNotebookManager.NotebookDragDataReceived += MainWindow_DragDataReceived;
         }
 
         private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
@@ -142,12 +143,7 @@ namespace Pinta
 
         private void DockNotebook_ActiveNotebookChanged (object sender, EventArgs e)
         {
-            var notebook = DockNotebook.ActiveNotebook;
-
-            if (notebook == null)
-                return;
-
-            var tab = notebook.CurrentTab;
+            var tab = DockNotebookManager.ActiveTab;
 
             if (tab == null || tab.Content == null)
                 return;
@@ -182,8 +178,9 @@ namespace Pinta
         {
             var doc = e.Document;
 
-            // Create a new tab
-            var tab = dock_container.TabControl.AddTab ();
+            // Find the currently active container for our new tab
+            var container = DockNotebookManager.ActiveNotebookContainer ?? dock_container;
+            var selected_index = container.TabControl.CurrentTabIndex;
 
             var canvas = new CanvasWindow (doc) {
                 RulersVisible = PintaCore.Actions.View.Rulers.Active,
@@ -191,10 +188,9 @@ namespace Pinta
             };
 
             var my_content = new DocumentViewContent (doc, canvas);
-            var my_tab = new SdiWorkspaceWindow (my_content, dock_container.TabControl, tab);
 
-            tab.Content = my_tab;
-            tab.Content.Show ();
+            // Insert our tab to the left of the currently selected tab
+            var tab = container.TabControl.InsertTab (my_content, selected_index + 1);
 
             doc.Workspace.Canvas = canvas.Canvas;
 
@@ -606,9 +602,7 @@ namespace Pinta
 
         private DockNotebookTab FindTabWithCanvas (PintaCanvas canvas)
         {
-            foreach (var container in GetAllNotebookContainers ())
-            foreach (var notebook in container.GetNotebooks ())
-            foreach (var tab in notebook.Tabs) {
+            foreach (var tab in DockNotebookManager.AllTabs) {
                 var window = (SdiWorkspaceWindow)tab.Content;
                 var doc_content = (DocumentViewContent)window.ActiveViewContent;
 
@@ -617,11 +611,6 @@ namespace Pinta
             }
 
             return null;
-        }
-
-        private IEnumerable<DockNotebookContainer> GetAllNotebookContainers ()
-        {
-            return new [] { dock_container }.Concat (DockWindow.GetAllWindows ().Select (p => p.Container));
         }
 		#endregion
 	}
