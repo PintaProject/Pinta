@@ -62,7 +62,7 @@ namespace Pinta.Docking.DockNotebook
 
         public static DockNotebookContainer ActiveNotebookContainer {
             get {
-                return DockNotebook.ActiveNotebook == null ? null : DockNotebook.ActiveNotebook.Parent as DockNotebookContainer;
+                return ActiveNotebook == null ? null : ActiveNotebook.Parent as DockNotebookContainer;
             }
         }
 
