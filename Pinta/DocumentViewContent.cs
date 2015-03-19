@@ -42,6 +42,7 @@ namespace Pinta
             this.canvas_window = canvasWindow;
 
             document.IsDirtyChanged += (o, e) => IsDirty = document.IsDirty;
+            document.Renamed += (o, e) => { if (ContentNameChanged != null) ContentNameChanged (this, EventArgs.Empty); };
         }
 
         #region IViewContent Members
