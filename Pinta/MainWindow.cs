@@ -48,7 +48,9 @@ namespace Pinta
 
 		CanvasPad canvas_pad;
 
-		public MainWindow ()
+        bool suppress_active_notebook_change = false;
+
+        public MainWindow ()
 		{
             // Build our window
 			CreateWindow ();
@@ -143,6 +145,9 @@ namespace Pinta
 
         private void DockNotebook_ActiveNotebookChanged (object sender, EventArgs e)
         {
+            if (suppress_active_notebook_change)
+                return;
+
             var tab = DockNotebookManager.ActiveTab;
 
             if (tab == null || tab.Content == null)
@@ -158,12 +163,9 @@ namespace Pinta
 
         private void DockNotebook_ActiveTabChanged (object sender, EventArgs e)
         {
-            if (sender == null)
-                return;
+            var tab = DockNotebookManager.ActiveTab;
 
-            var tab = (DockNotebookTab)sender;
-
-            if (tab.Content == null)
+            if (tab == null || tab.Content == null)
                 return;
 
             var content = (SdiWorkspaceWindow)tab.Content;
@@ -593,8 +595,14 @@ namespace Pinta
                 var doc = PintaCore.Workspace.ActiveDocument;
                 var tab = FindTabWithCanvas ((PintaCanvas)doc.Workspace.Canvas);
 
-                if (tab != null)
+                if (tab != null) {
+                    // We need to suppress because ActivateTab changes both the notebook
+                    // and the tab, and we handle both events, so when it fires the notebook
+                    // changed event, the tab has not been changed yet.
+                    suppress_active_notebook_change = true;
                     dock_container.ActivateTab (tab);
+                    suppress_active_notebook_change = false;
+                }
 
                 doc.Workspace.Canvas.GrabFocus ();
 			}
