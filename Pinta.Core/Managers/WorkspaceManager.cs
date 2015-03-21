@@ -198,8 +198,13 @@ namespace Pinta.Core
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.IsDirty = false;
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
-				PintaCore.Actions.View.ZoomToWindow.Activate ();
-				PintaCore.Workspace.Invalidate ();
+
+                // This ensures these are called after the window is done being created and sized.
+                // Without it, we sometimes try to zoom when the window has a size of (0, 0).
+                Gtk.Application.Invoke (delegate {
+				    PintaCore.Actions.View.ZoomToWindow.Activate ();
+				    PintaCore.Workspace.Invalidate ();
+                });
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException e) {
