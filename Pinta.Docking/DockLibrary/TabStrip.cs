@@ -137,7 +137,7 @@ namespace Pinta.Docking
 			}
 		}
 		
-		new public Gtk.Widget CurrentPage {
+		public Gtk.Widget CurrentPage {
 			get {
 				if (currentTab != -1) {
 					DockItemTitleTab t = (DockItemTitleTab) box.Children [currentTab];

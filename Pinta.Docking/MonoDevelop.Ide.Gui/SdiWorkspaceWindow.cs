@@ -363,7 +363,6 @@ namespace Pinta.Docking.Gui
 			if (content.ContentName == null) {
 				if (myUntitledTitle == null) {
 					string baseName  = System.IO.Path.GetFileNameWithoutExtension(content.UntitledName);
-					int number = 1;
 					myUntitledTitle = baseName + System.IO.Path.GetExtension (content.UntitledName);
 				}
 				newTitle = myUntitledTitle;

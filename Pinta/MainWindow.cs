@@ -192,7 +192,7 @@ namespace Pinta
             var my_content = new DocumentViewContent (doc, canvas);
 
             // Insert our tab to the right of the currently selected tab
-            var tab = container.TabControl.InsertTab (my_content, selected_index + 1);
+            container.TabControl.InsertTab (my_content, selected_index + 1);
 
             doc.Workspace.Canvas = canvas.Canvas;
 
