@@ -42,7 +42,7 @@ help:
 build: Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
-	cd $(srcdir)/help && make HELP_DIR=../bin/help install
+	cd $(srcdir)/help && make copyhelp
 
 test: build
 	$(XBUILD) tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj
