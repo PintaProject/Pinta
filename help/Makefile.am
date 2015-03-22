@@ -14,7 +14,7 @@ HELP_MEDIA = \
 # Use relative paths for the symlinks for non-localized images.
 LN_S += -r
 
-HELP_LINGUAS = en_CA
+HELP_LINGUAS = br ca en_CA es ms sl
 
 HTML_DIR = $(builddir)/html
 
