@@ -1,7 +1,19 @@
 @YELP_HELP_RULES@
 HELP_ID = pinta
-HELP_FILES = index.page
-HELP_MEDIA =
+
+HELP_FILES = \
+	     edit-crop.page \
+	     index.page
+
+HELP_MEDIA = \
+	     figures/autocrop_after.png \
+	     figures/autocrop_before.png \
+	     figures/croptoselection_after.png \
+	     figures/croptoselection_before.png
+
+# Use relative paths for the symlinks for non-localized images.
+LN_S += -r
+
 HELP_LINGUAS = en_CA
 
 HTML_DIR = $(builddir)/html

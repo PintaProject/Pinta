@@ -1,4 +1,13 @@
 <page xmlns="http://projectmallard.org/1.0/" type="guide" id="index">
+    <info>
+        <credit type="author">
+            <name>Cameron White</name>
+        </credit>
+    </info>
     <title>Pinta: Painting Made Simple</title>
+
+    <section id="edit">
+        <title>Editing Images</title>
+    </section>
 </page>
 
