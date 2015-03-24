@@ -153,6 +153,27 @@ namespace Pinta.Core
 			return dirty;
 		}
 
+        public static Rectangle FillRectangle (this Context g, Rectangle r, Pattern pattern, PointD patternOffset)
+        {
+            g.Save ();
+
+            g.MoveTo (r.X, r.Y);
+            g.LineTo (r.X + r.Width, r.Y);
+            g.LineTo (r.X + r.Width, r.Y + r.Height);
+            g.LineTo (r.X, r.Y + r.Height);
+            g.LineTo (r.X, r.Y);
+
+            pattern.Matrix.Translate (-patternOffset.X, -patternOffset.Y);
+            g.SetSource (pattern);
+
+            Rectangle dirty = g.FixedStrokeExtents ();
+            g.Fill ();
+
+            g.Restore ();
+
+            return dirty;
+        }
+
 		public static Rectangle DrawPolygonal (this Context g, PointD[] points, Color color)
 		{
 			g.Save ();
@@ -1645,6 +1666,91 @@ namespace Pinta.Core
             pattern.Extend = Extend.Repeat;
 
             return pattern;
+        }
+
+        public static void SetBlendMode (this Context g, BlendMode mode)
+        {
+            switch (mode) {
+                case BlendMode.Normal:
+                    g.Operator = Operator.Over;
+                    break;
+                case BlendMode.Multiply:
+                    g.Operator = (Operator)ExtendedOperators.Multiply;
+                    break;
+                case BlendMode.Additive:
+                    g.Operator = Operator.Add;
+                    break;
+                case BlendMode.ColorBurn:
+                    g.Operator = (Operator)ExtendedOperators.ColorBurn;
+                    break;
+                case BlendMode.ColorDodge:
+                    g.Operator = (Operator)ExtendedOperators.ColorDodge;
+                    break;
+                //case BlendMode.Reflect:
+                //    g.Operator = (Operator)ExtendedOperators.HardLight;
+                //    break;
+                //case BlendMode.Glow:
+                //    g.Operator = (Operator)ExtendedOperators.SoftLight;
+                //    break;
+                case BlendMode.Overlay:
+                    g.Operator = (Operator)ExtendedOperators.Overlay;
+                    break;
+                case BlendMode.Difference:
+                    g.Operator = (Operator)ExtendedOperators.Difference;
+                    break;
+                //case BlendMode.Negation:
+                //    g.Operator = (Operator)21;
+                //    break;
+                case BlendMode.Lighten:
+                    g.Operator = (Operator)ExtendedOperators.Lighten;
+                    break;
+                case BlendMode.Darken:
+                    g.Operator = (Operator)ExtendedOperators.Darken;
+                    break;
+                case BlendMode.Screen:
+                    g.Operator = (Operator)ExtendedOperators.Screen;
+                    break;
+                case BlendMode.Xor:
+                    g.Operator = Operator.Xor;
+                    break;
+            }
+        }
+
+        public enum ExtendedOperators
+        {
+            Clear = 0,
+
+            Source = 1,
+            SourceOver = 2,
+            SourceIn = 3,
+            SourceOut = 4,
+            SourceAtop = 5,
+
+            Destination = 6,
+            DestinationOver = 7,
+            DestinationIn = 8,
+            DestinationOut = 9,
+            DestinationAtop = 10,
+
+            Xor = 11,
+            Add = 12,
+            Saturate = 13,
+
+            Multiply = 14,
+            Screen = 15,
+            Overlay = 16,
+            Darken = 17,
+            Lighten = 18,
+            ColorDodge = 19,
+            ColorBurn = 20,
+            HardLight = 21,
+            SoftLight = 22,
+            Difference = 23,
+            Exclusion = 24,
+            HslHue = 25,
+            HslSaturation = 26,
+            HslColor = 27,
+            HslLuminosity = 28
         }
 	}
 }
