@@ -194,78 +194,80 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface image = doc.CurrentUserLayer.Surface;
-			Gdk.Rectangle rect = image.GetBounds ();
+            using (var image = doc.GetFlattenedImage ())
+            {
+                Gdk.Rectangle rect = image.GetBounds ();
 
-			Cairo.Color borderColor = image.GetPixel (0, 0);
-			bool cropSide = true;
-			int depth = -1;
+                Cairo.Color borderColor = image.GetPixel (0, 0);
+                bool cropSide = true;
+                int depth = -1;
 
-			//From the top down
-			while (cropSide) {
-				depth++;
-				for (int i = 0; i < image.Width; i++) {
-					if (!borderColor.Equals(image.GetPixel (i, depth))) {
-						cropSide = false;
-						break;
-					}
-				}
-				//Check if the image is blank/mono-coloured, only need to do it on this scan
-				if (depth == image.Height)
-					return;
-			}
+                //From the top down
+                while (cropSide) {
+                    depth++;
+                    for (int i = 0; i < image.Width; i++) {
+                        if (!borderColor.Equals(image.GetPixel (i, depth))) {
+                            cropSide = false;
+                            break;
+                        }
+                    }
+                    //Check if the image is blank/mono-coloured, only need to do it on this scan
+                    if (depth == image.Height)
+                        return;
+                }
 
-			rect = new Gdk.Rectangle (rect.X, rect.Y + depth, rect.Width, rect.Height - depth);
+                rect = new Gdk.Rectangle (rect.X, rect.Y + depth, rect.Width, rect.Height - depth);
 
-			depth = image.Height;
-			cropSide = true;
-			//From the bottom up
-			while (cropSide) {
-				depth--;
-				for (int i = 0; i < image.Width; i++) {
-					if (!borderColor.Equals(image.GetPixel (i, depth))) {
-						cropSide = false;
-						break;
-					}
-				}
+                depth = image.Height;
+                cropSide = true;
+                //From the bottom up
+                while (cropSide) {
+                    depth--;
+                    for (int i = 0; i < image.Width; i++) {
+                        if (!borderColor.Equals(image.GetPixel (i, depth))) {
+                            cropSide = false;
+                            break;
+                        }
+                    }
 
-			}
+                }
 
-			rect = new Gdk.Rectangle (rect.X, rect.Y, rect.Width, depth - rect.Y);
+                rect = new Gdk.Rectangle (rect.X, rect.Y, rect.Width, depth - rect.Y);
 
-			depth = 0;
-			cropSide = true;
-			//From left to right
-			while (cropSide) {
-				depth++;
-				for (int i = 0; i < image.Height; i++) {
-					if (!borderColor.Equals(image.GetPixel (depth, i))) {
-						cropSide = false;
-						break;
-					}
-				}
+                depth = 0;
+                cropSide = true;
+                //From left to right
+                while (cropSide) {
+                    depth++;
+                    for (int i = 0; i < image.Height; i++) {
+                        if (!borderColor.Equals(image.GetPixel (depth, i))) {
+                            cropSide = false;
+                            break;
+                        }
+                    }
 
-			}
+                }
 
-			rect = new Gdk.Rectangle (rect.X + depth, rect.Y, rect.Width - depth, rect.Height);
+                rect = new Gdk.Rectangle (rect.X + depth, rect.Y, rect.Width - depth, rect.Height);
 
-			depth = image.Width;
-			cropSide = true;
-			//From right to left
-			while (cropSide) {
-				depth--;
-				for (int i = 0; i < image.Height; i++) {
-					if (!borderColor.Equals(image.GetPixel (depth, i))) {
-						cropSide = false;
-						break;
-					}
-				}
+                depth = image.Width;
+                cropSide = true;
+                //From right to left
+                while (cropSide) {
+                    depth--;
+                    for (int i = 0; i < image.Height; i++) {
+                        if (!borderColor.Equals(image.GetPixel (depth, i))) {
+                            cropSide = false;
+                            break;
+                        }
+                    }
 
-			}
+                }
 
-			rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
+                rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
 
-			CropImageToRectangle (doc, rect);
+                CropImageToRectangle (doc, rect);
+            }
 		}
 		#endregion
 
