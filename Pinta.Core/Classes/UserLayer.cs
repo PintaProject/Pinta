@@ -69,15 +69,15 @@ namespace Pinta.Core
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
 
-		public override void Rotate(double angle)
+        public override void Rotate (double angle, bool in_place)
 		{
-			base.Rotate (angle);
+			base.Rotate (angle, in_place);
 
 			foreach (ReEditableLayer rel in ReEditableLayers)
 			{
 				if (rel.IsLayerSetup)
 				{
-					rel.Layer.Rotate(angle);
+					rel.Layer.Rotate(angle, in_place);
 				}
 			}
 		}
