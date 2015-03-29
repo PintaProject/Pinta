@@ -698,12 +698,12 @@ namespace Pinta.Core
 
 		public void RotateImageCW ()
 		{
-			RotateImage (-90);
+			RotateImage (90);
 		}
 
 		public void RotateImageCCW ()
 		{
-			RotateImage (90);
+			RotateImage (-90);
 		}
 
 		/// <summary>
@@ -711,11 +711,12 @@ namespace Pinta.Core
 		/// </summary>
 		private void RotateImage (double angle)
 		{
+		    var new_size = Layer.RotateDimensions (ImageSize, angle);
 			foreach (var layer in UserLayers)
-				layer.Rotate (angle, false);
+				layer.Rotate (angle, new_size);
 
-			ImageSize = Layer.RotateDimensions (ImageSize, angle);
-			Workspace.CanvasSize = Layer.RotateDimensions (Workspace.CanvasSize, angle);
+		    ImageSize = new_size;
+			Workspace.CanvasSize = new_size;
 
 			PintaCore.Actions.View.UpdateCanvasScale ();
 			Workspace.Invalidate ();

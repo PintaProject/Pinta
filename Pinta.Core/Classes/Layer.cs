@@ -143,19 +143,15 @@ namespace Pinta.Core
 		}
 		
 		/// <summary>
-		/// Rotates layer counter-clockwise by the specified angle (in degrees).
+		/// Rotates layer clockwise by the specified angle (in degrees).
 		/// </summary>
 		/// <param name='angle'>Angle (in degrees)</param>
-		/// <param name='in_place'>Specifies whether or not to also adjust the layer's dimensions.</param>
-		public virtual void Rotate (double angle, bool in_place)
+		/// <param name='new_size'>Specifies the desired new size of the layer.</param>
+		public virtual void Rotate (double angle, Size new_size)
 		{
 			double radians = (angle / 180d) * Math.PI;
 
 		    var old_size = PintaCore.Workspace.ImageSize;
-		    var new_size = PintaCore.Workspace.ImageSize;
-		    if (!in_place)
-		        new_size = RotateDimensions (new_size, angle);
-
 		    var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
 			using (var g = new Context (dest))
 			{

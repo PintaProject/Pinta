@@ -69,7 +69,7 @@ namespace Pinta.Actions
 
 			var oldSurface = doc.CurrentUserLayer.Surface.Clone ();
 
-			doc.CurrentUserLayer.Rotate (rotateZoomData.Angle, true);
+			doc.CurrentUserLayer.Rotate (-rotateZoomData.Angle, PintaCore.Workspace.ImageSize);
 			doc.Workspace.Invalidate ();
 
 			var historyItem = new SimpleHistoryItem ("Menu.Layers.RotateZoom.png", Catalog.GetString ("Rotate / Zoom Layer"), oldSurface, doc.CurrentUserLayerIndex);
