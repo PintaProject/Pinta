@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 using Mono.Unix;
 
 namespace Pinta.Core
@@ -185,7 +186,7 @@ namespace Pinta.Core
 
 			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 
-			CropImageToRectangle (doc, rect);
+			CropImageToRectangle (doc, rect, doc.Selection.SelectionPath);
 		}
 
 		private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
@@ -266,12 +267,13 @@ namespace Pinta.Core
 
                 rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
 
-                CropImageToRectangle (doc, rect);
+                // Ignore the current selection when auto-cropping.
+                CropImageToRectangle (doc, rect, /*selection*/ null);
             }
 		}
 		#endregion
 
-		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect)
+		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path selection)
 		{
 			if (rect.Width > 0 && rect.Height > 0)
 			{
@@ -294,7 +296,7 @@ namespace Pinta.Core
 				doc.Workspace.Canvas.GdkWindow.ThawUpdates();
 
 				foreach (var layer in doc.UserLayers)
-					layer.Crop(rect);
+                    layer.Crop (rect, selection);
 
 				hist.FinishSnapshotOfImage();
 
