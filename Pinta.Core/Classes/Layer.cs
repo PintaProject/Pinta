@@ -142,25 +142,13 @@ namespace Pinta.Core
 			ctx.Restore ();
 		}
 		
-		/// <summary>
-		/// Rotates layer clockwise by the specified angle (in degrees).
-		/// </summary>
-		/// <param name='angle'>Angle (in degrees)</param>
-		/// <param name='new_size'>Specifies the desired new size of the layer.</param>
-		public virtual void Rotate (double angle, Size new_size)
+		public virtual void ApplyTransform (Matrix xform, Size new_size)
 		{
-			double radians = (angle / 180d) * Math.PI;
-
 		    var old_size = PintaCore.Workspace.ImageSize;
 		    var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
 			using (var g = new Context (dest))
 			{
-			    var xform = new Matrix ();
-                xform.Translate (new_size.Width / 2.0, new_size.Height / 2.0);
-                xform.Rotate (radians);
-                xform.Translate (-old_size.Width / 2.0, -old_size.Height / 2.0);
                 g.Transform (xform);
-
 			    g.SetSource (Surface);
 				g.Paint ();
 			}
