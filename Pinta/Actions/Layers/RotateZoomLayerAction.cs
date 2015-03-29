@@ -119,7 +119,10 @@ namespace Pinta.Actions
             public double Zoom = 1.0;
 
 			public override bool IsDefault {
-				get { return Angle == 0; }
+                get
+                {
+                    return Angle == 0 && Pan.X == 0.0 && Pan.Y == 0.0 && Zoom == 1.0;
+                }
 			}
 		}
 	}
