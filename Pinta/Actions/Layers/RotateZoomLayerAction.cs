@@ -52,7 +52,6 @@ namespace Pinta.Actions
 			var dialog = new SimpleEffectDialog (Catalog.GetString ("Rotate / Zoom Layer"),
 				PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png"), rotateZoomData,
 			                                     new PintaLocalizer ());
-
 			int response = dialog.Run ();
 
 			if (response == (int)Gtk.ResponseType.Ok && !rotateZoomData.IsDefault)
@@ -70,7 +69,7 @@ namespace Pinta.Actions
 
 			var oldSurface = doc.CurrentUserLayer.Surface.Clone ();
 
-			doc.CurrentUserLayer.Rotate (rotateZoomData.Angle);
+			doc.CurrentUserLayer.Rotate (rotateZoomData.Angle, true);
 			doc.Workspace.Invalidate ();
 
 			var historyItem = new SimpleHistoryItem ("Menu.Layers.RotateZoom.png", Catalog.GetString ("Rotate / Zoom Layer"), oldSurface, doc.CurrentUserLayerIndex);

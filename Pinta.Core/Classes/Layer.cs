@@ -139,35 +139,35 @@ namespace Pinta.Core
 		}
 		
 		/// <summary>
-		/// Rotates layer by the specified angle (in degrees).
+		/// Rotates layer counter-clockwise by the specified angle (in degrees).
 		/// </summary>
-		/// <param name='angle'>
-		/// Angle (in degrees).
-		/// </param>
-		public virtual void Rotate (double angle)
+		/// <param name='angle'>Angle (in degrees)</param>
+		/// <param name='in_place'>Specifies whether or not to also adjust the layer's dimensions.</param>
+		public virtual void Rotate (double angle, bool in_place)
 		{
-			int w = PintaCore.Workspace.ImageSize.Width;
-			int h = PintaCore.Workspace.ImageSize.Height;
-
 			double radians = (angle / 180d) * Math.PI;
-			double cos = Math.Cos (radians);
-			double sin = Math.Sin (radians);
 
-			var newSize = RotateDimensions (PintaCore.Workspace.ImageSize, angle);
+		    var old_size = PintaCore.Workspace.ImageSize;
+		    var new_size = PintaCore.Workspace.ImageSize;
+		    if (!in_place)
+		        new_size = RotateDimensions (new_size, angle);
 
-			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, newSize.Width, newSize.Height);
+		    var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+			using (var g = new Context (dest))
+			{
+			    var xform = new Matrix ();
+                xform.Translate (new_size.Width / 2.0, new_size.Height / 2.0);
+                xform.Rotate (radians);
+                xform.Translate (-old_size.Width / 2.0, -old_size.Height / 2.0);
+                g.Transform (xform);
 
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Matrix = new Matrix (cos, sin, -sin, cos, newSize.Width / 2.0, newSize.Height / 2.0);
-				g.Translate (-w / 2.0, -h / 2.0);
-				g.SetSource (Surface);
-
+			    g.SetSource (Surface);
 				g.Paint ();
 			}
 			
 			Surface old = Surface;
-			Surface = dest.Surface;
-			(old as IDisposable).Dispose ();
+		    Surface = dest;
+			old.Dispose ();
 		}
 
 		public static Gdk.Size RotateDimensions (Gdk.Size originalSize, double angle)
