@@ -82,16 +82,14 @@ namespace Pinta.Core
 			}
 		}
 
-		public override void Crop(Gdk.Rectangle rect)
+        public override void Crop (Gdk.Rectangle rect, Path selection)
 		{
-			base.Crop (rect);
+			base.Crop (rect, selection);
 
 			foreach (ReEditableLayer rel in ReEditableLayers)
 			{
 				if (rel.IsLayerSetup)
-				{
-					rel.Layer.Crop(rect);
-				}
+                    rel.Layer.Crop (rect, selection);
 			}
 		}
 
