@@ -86,6 +86,7 @@ namespace Pinta.Actions
 
 	        xform.Translate (x, y);
             xform.Rotate ((-data.Angle / 180d) * Math.PI);
+            xform.Scale (data.Zoom, data.Zoom);
 	        xform.Translate (-x, -y);
 
 	        return xform;
@@ -110,6 +111,9 @@ namespace Pinta.Actions
 		{
 			[Caption ("Angle")]
 			public double Angle = 0;
+
+            [Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
+            public double Zoom = 1.0;
 
 			public override bool IsDefault {
 				get { return Angle == 0; }
