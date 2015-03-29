@@ -81,13 +81,13 @@ namespace Pinta.Actions
 	    {
 	        var xform = new Matrix ();
 	        var image_size = PintaCore.Workspace.ImageSize;
-            var x = image_size.Width / 2.0;
-            var y = image_size.Height / 2.0;
+            var center_x = image_size.Width / 2.0;
+            var center_y = image_size.Height / 2.0;
 
-	        xform.Translate (x, y);
+            xform.Translate ((1 + data.Pan.X) * center_x, (1 + data.Pan.Y) * center_y);
             xform.Rotate ((-data.Angle / 180d) * Math.PI);
             xform.Scale (data.Zoom, data.Zoom);
-	        xform.Translate (-x, -y);
+	        xform.Translate (-center_x, -center_y);
 
 	        return xform;
 	    }
@@ -111,6 +111,9 @@ namespace Pinta.Actions
 		{
 			[Caption ("Angle")]
 			public double Angle = 0;
+
+            [Caption ("Pan")]
+		    public PointD Pan;
 
             [Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
             public double Zoom = 1.0;
