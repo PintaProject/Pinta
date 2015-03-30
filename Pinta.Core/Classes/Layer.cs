@@ -136,9 +136,8 @@ namespace Pinta.Core
             if (transform)
 			    ctx.Transform (Transform);
 
-            ctx.SetBlendMode (BlendMode);
-			ctx.SetSourceSurface (surface, 0, 0);
-			ctx.PaintWithAlpha (opacity);
+            ctx.BlendSurface (surface, BlendMode, opacity);
+
 			ctx.Restore ();
 		}
 		

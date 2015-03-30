@@ -475,15 +475,21 @@ namespace Pinta.Core
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			var pixel = ColorBgra.Zero;
+            using (var dst = new ImageSurface (Format.Argb32, 1, 1)) {
+                using (var g = new Context (dst)) {
+			        foreach (var layer in GetLayersToPaint ()) {
+                        var color = layer.Surface.GetColorBgraUnchecked (x, y).ToCairoColor ();
 
-			foreach (var layer in GetLayersToPaint ()) {
-				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
+                        g.SetBlendMode (layer.BlendMode);
+                        g.SetSourceColor (color);
 
-				pixel = blend_op.Apply (pixel, layer.Surface.GetColorBgraUnchecked (x, y));
-			}
+                        g.Rectangle (dst.GetBounds ().ToCairoRectangle ());
+                        g.PaintWithAlpha (layer.Opacity);
+                    }
+                }
 
-			return pixel;
+                return dst.GetPixel (0, 0).ToColorBgra ();
+            }
 		}
 
 		public ImageSurface GetFlattenedImage ()
@@ -493,8 +499,8 @@ namespace Pinta.Core
 
 			// Blend each visible layer onto our surface
 			foreach (var layer in GetLayersToPaint ()) {
-				var blendop = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
-				blendop.Apply (surf, layer.Surface);
+                using (var g = new Context (surf))
+                    layer.Draw (g);
 			}
 
 			surf.MarkDirty ();
@@ -573,8 +579,8 @@ namespace Pinta.Core
 			var dest = UserLayers[current_layer - 1];
 
 			// Blend the layers
-			var blendop = UserBlendOps.GetBlendOp (source.BlendMode, source.Opacity);
-			blendop.Apply (dest.Surface, source.Surface);
+            using (var g = new Context (dest.Surface))
+                source.Draw (g);
 
 			DeleteCurrentLayer ();
 		}

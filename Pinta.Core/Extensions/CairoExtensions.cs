@@ -992,6 +992,16 @@ namespace Pinta.Core
 			}
 		}
 
+        public static void Clear (this Context g, Rectangle roi)
+        {
+            g.Save ();
+            g.Rectangle (roi.X, roi.Y, roi.Width, roi.Height);
+            g.Clip ();
+            g.Operator = Operator.Clear;
+            g.Paint ();
+            g.Restore ();
+        }
+
         [DllImport(CairoLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern void cairo_path_extents(IntPtr cr, out double x1, out double y1, out double x2, out double y2);
 
@@ -1668,6 +1678,36 @@ namespace Pinta.Core
             return pattern;
         }
 
+        public static void BlendSurface (this Context g, Surface src, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+        {
+            g.Save ();
+            g.SetBlendMode (mode);
+            g.SetSourceSurface (src, 0, 0);
+            g.PaintWithAlpha (opacity);
+            g.Restore ();
+        }
+
+        public static void BlendSurface (this Context g, Surface src, Rectangle roi, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+        {
+            g.Save ();
+            g.Rectangle (roi);
+            g.Clip ();
+            g.SetBlendMode (mode);
+            g.SetSourceSurface (src, 0, 0);
+            g.PaintWithAlpha (opacity);
+            g.Restore ();
+        }
+
+        public static void BlendSurface (this Context g, Surface src, Point offset, BlendMode mode = BlendMode.Normal, double opacity = 1.0)
+        {
+            g.Save ();
+            g.Translate (offset.X, offset.Y);
+            g.SetBlendMode (mode);
+            g.SetSourceSurface (src, 0, 0);
+            g.PaintWithAlpha (opacity);
+            g.Restore ();
+        }
+
         public static void SetBlendMode (this Context g, BlendMode mode)
         {
             switch (mode) {
@@ -1677,30 +1717,36 @@ namespace Pinta.Core
                 case BlendMode.Multiply:
                     g.Operator = (Operator)ExtendedOperators.Multiply;
                     break;
-                case BlendMode.Additive:
-                    g.Operator = Operator.Add;
-                    break;
                 case BlendMode.ColorBurn:
                     g.Operator = (Operator)ExtendedOperators.ColorBurn;
                     break;
                 case BlendMode.ColorDodge:
                     g.Operator = (Operator)ExtendedOperators.ColorDodge;
                     break;
-                //case BlendMode.Reflect:
-                //    g.Operator = (Operator)ExtendedOperators.HardLight;
-                //    break;
-                //case BlendMode.Glow:
-                //    g.Operator = (Operator)ExtendedOperators.SoftLight;
-                //    break;
+                case BlendMode.HardLight:
+                    g.Operator = (Operator)ExtendedOperators.HardLight;
+                    break;
+                case BlendMode.SoftLight:
+                    g.Operator = (Operator)ExtendedOperators.SoftLight;
+                    break;
                 case BlendMode.Overlay:
                     g.Operator = (Operator)ExtendedOperators.Overlay;
                     break;
                 case BlendMode.Difference:
                     g.Operator = (Operator)ExtendedOperators.Difference;
                     break;
-                //case BlendMode.Negation:
-                //    g.Operator = (Operator)21;
-                //    break;
+                case BlendMode.Color:
+                    g.Operator = (Operator)ExtendedOperators.HslColor;
+                    break;
+                case BlendMode.Luminosity:
+                    g.Operator = (Operator)ExtendedOperators.HslLuminosity;
+                    break;
+                case BlendMode.Hue:
+                    g.Operator = (Operator)ExtendedOperators.HslHue;
+                    break;
+                case BlendMode.Saturation:
+                    g.Operator = (Operator)ExtendedOperators.HslSaturation;
+                    break;
                 case BlendMode.Lighten:
                     g.Operator = (Operator)ExtendedOperators.Lighten;
                     break;

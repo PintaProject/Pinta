@@ -19,7 +19,8 @@ namespace Pinta.Effects
 	public class CloudsEffect : BaseEffect
 	{
         // This is so that repetition of the effect with CTRL+F actually shows up differently.
-        private byte instanceSeed = unchecked((byte)DateTime.Now.Ticks); 
+        private byte instanceSeed = unchecked((byte)DateTime.Now.Ticks);
+        private static object render_lock = new object ();		
 
 		public override string Icon {
 			get { return "Menu.Effects.Render.Clouds.png"; }
@@ -131,7 +132,7 @@ namespace Pinta.Effects
 
             for (int y = rect.Top; y <= rect.GetBottom (); ++y)
             {
-                ColorBgra* ptr = surface.GetPointAddressUnchecked(rect.Left, y);
+                ColorBgra* ptr = surface.GetPointAddressUnchecked(0, y - rect.Top);
                 int dy = 2 * y - h;
 
                 for (int x = rect.Left; x <= rect.GetRight (); ++x)
@@ -169,16 +170,30 @@ namespace Pinta.Effects
                 }
             }
         }
-		
+
 		protected override void Render (ImageSurface src, ImageSurface dst, Gdk.Rectangle roi)
 		{
-			RenderClouds(dst, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), 
-				Data.Power/100.0, PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
-			var blendOp = UserBlendOps.GetBlendOp ((BlendMode)CloudsData.BlendOps [Data.BlendMode], 1.0);
-			if (blendOp != null)
-			{
-				blendOp.Apply (dst, roi.Location, src, roi.Location, dst, roi.Location, roi.Size);
-			}
+            var r = roi.ToCairoRectangle ();
+
+            using (var temp = new ImageSurface (Format.Argb32, roi.Width, roi.Height)) {
+
+                RenderClouds (temp, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), Data.Power / 100.0, 
+                              PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
+                
+                temp.MarkDirty ();
+
+                // Have to lock because effect renderer is multithreaded
+                lock (render_lock) {
+                    using (var g = new Context (dst)) {
+                        // - Clear any previous render from the destination
+                        // - Copy the source to the destination
+                        // - Blend the clouds over the source
+                        g.Clear (r);
+                        g.BlendSurface (src, r);
+                        g.BlendSurface (temp, r.Location (), (BlendMode)CloudsData.BlendOps[Data.BlendMode]);
+                    }
+                }
+            }
 		}
 		#endregion
 
