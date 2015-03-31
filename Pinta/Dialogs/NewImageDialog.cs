@@ -307,10 +307,17 @@ namespace Pinta
             // Layout the preview + the options
             preview = new PreviewArea ();
 
+            var preview_label = new Label (Catalog.GetString ("Preview"));
+
+            var preview_vbox = new VBox ();
+            preview_vbox.PackStart (preview_label, false, false, 0);
+            preview_vbox.PackStart (preview, true, true, 0);
+
+
             var main_hbox = new HBox (false, 10);
 
-            main_hbox.PackStart (preview, true, true, 0);
             main_hbox.PackStart (options_vbox, false, false, 0);
+            main_hbox.PackStart (preview_vbox, true, true, 0);
 
             VBox.Add (main_hbox);
 
@@ -451,11 +458,11 @@ namespace Pinta
             private Gdk.Size size;
             private Cairo.Color color;
 
-            private int max_size = 175;
+            private int max_size = 250;
 
             public PreviewArea ()
             {
-                WidthRequest = 225;
+                WidthRequest = 300;
             }
 
             public void Update (Gdk.Size size)
