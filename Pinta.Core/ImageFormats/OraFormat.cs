@@ -233,22 +233,14 @@ namespace Pinta.Core
 					return "svg:src-over";
 				case BlendMode.Multiply:
 					return "svg:multiply";
-				case BlendMode.Additive:
-					return "svg:plus";
 				case BlendMode.ColorBurn:
 					return "svg:color-burn";
 				case BlendMode.ColorDodge:
 					return "svg:color-dodge";
-				case BlendMode.Reflect:
-					return "pinta-reflect";
-				case BlendMode.Glow:
-					return "pinta-glow";
 				case BlendMode.Overlay:
 					return "svg:overlay";
 				case BlendMode.Difference:
 					return "svg:difference";
-				case BlendMode.Negation:
-					return "pinta-negation";
 				case BlendMode.Lighten:
 					return "svg:lighten";
 				case BlendMode.Darken:
@@ -257,6 +249,18 @@ namespace Pinta.Core
 					return "svg:screen";
 				case BlendMode.Xor:
 					return "svg:xor";
+                case BlendMode.HardLight:
+                    return "svg:hard-light";
+                case BlendMode.SoftLight:
+                    return "svg:soft-light";
+                case BlendMode.Color:
+                    return "svg:color";
+                case BlendMode.Luminosity:
+                    return "svg:luminosity";
+                case BlendMode.Hue:
+                    return "svg:hue";
+                case BlendMode.Saturation:
+                    return "svg:saturation";
 			}
 		}
 
@@ -267,22 +271,14 @@ namespace Pinta.Core
 					return BlendMode.Normal;
 				case "svg:multiply":
 					return BlendMode.Multiply;
-				case "svg:plus":
-					return BlendMode.Additive;
 				case "svg:color-burn":
 					return BlendMode.ColorBurn;
 				case "svg:color-dodge":
 					return BlendMode.ColorDodge;
-				case "pinta-reflect":
-					return BlendMode.Reflect;
-				case "pinta-glow":
-					return BlendMode.Glow;
 				case "svg:overlay":
 					return BlendMode.Overlay;
 				case "svg:difference":
 					return BlendMode.Difference;
-				case "pinta-negation":
-					return BlendMode.Negation;
 				case "svg:lighten":
 					return BlendMode.Lighten;
 				case "svg:darken":
@@ -291,6 +287,18 @@ namespace Pinta.Core
 					return BlendMode.Screen;
 				case "svg:xor":
 					return BlendMode.Xor;
+                case "svg:hard-light":
+                    return BlendMode.HardLight;
+                case "svg:soft-light":
+                    return BlendMode.SoftLight;
+                case "svg:color":
+                    return BlendMode.Color;
+                case "svg:luminosity":
+                    return BlendMode.Luminosity;
+                case "svg:hue":
+                    return BlendMode.Hue;
+                case "svg:saturation":
+                    return BlendMode.Saturation;
 				default:
 					Console.WriteLine ("Unrecognized composite-op: {0}, using Normal.", mode);
 					return BlendMode.Normal;

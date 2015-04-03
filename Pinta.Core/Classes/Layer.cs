@@ -129,13 +129,16 @@ namespace Pinta.Core
 			Draw(ctx, Surface, Opacity);
 		}
 
-		public void Draw(Context ctx, ImageSurface surface, double opacity)
+		public void Draw (Context ctx, ImageSurface surface, double opacity, bool transform = true)
 		{
-			ctx.Save();
-			ctx.Transform(Transform);
-			ctx.SetSourceSurface(surface, 0, 0);
-			ctx.PaintWithAlpha(opacity);
-			ctx.Restore();
+			ctx.Save ();
+
+            if (transform)
+			    ctx.Transform (Transform);
+
+            ctx.BlendSurface (surface, BlendMode, opacity);
+
+			ctx.Restore ();
 		}
 		
 		public virtual void ApplyTransform (Matrix xform, Size new_size)
