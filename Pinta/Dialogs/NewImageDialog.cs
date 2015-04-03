@@ -260,6 +260,12 @@ namespace Pinta
 
             landscape_hbox.PackStart (landscape_image, false, false, 7);
             landscape_hbox.PackStart (landscape_radio, false, false, 0);
+
+            // Orientation VBox
+            var orientation_vbox = new VBox ();
+            orientation_vbox.PackStart (orientation_label, false, false, 4);
+            orientation_vbox.PackStart (portrait_hbox, false, false, 0);
+            orientation_vbox.PackStart (landscape_hbox, false, false, 0);
             
             // Background Color options
             var background_label = new Label (Catalog.GetString ("Background:"));
@@ -289,28 +295,38 @@ namespace Pinta
             hbox_trans.PackStart (image_trans, false, false, 7);
             hbox_trans.PackStart (trans_bg_radio, false, false, 0);
 
-            // Put all the options together
-            var options_vbox = new VBox ();
-
-            options_vbox.PackStart (layout_table, false, false, 3);
-            options_vbox.PackStart (orientation_label, false, false, 4);
-            options_vbox.PackStart (portrait_hbox, false, false, 0);
-            options_vbox.PackStart (landscape_hbox, false, false, 0);
-            options_vbox.PackStart (background_label, false, false, 4);
-            options_vbox.PackStart (hbox_white, false, false, 0);
+            // Background VBox
+            var background_vbox = new VBox ();
+            background_vbox.PackStart (background_label, false, false, 4);
+            background_vbox.PackStart (hbox_white, false, false, 0);
 
             if (allow_background_color)
-                options_vbox.PackStart (hbox_bg, false, false, 0);
+                background_vbox.PackStart (hbox_bg, false, false, 0);
 
-            options_vbox.PackStart (hbox_trans, false, false, 0);
+            background_vbox.PackStart (hbox_trans, false, false, 0);
+
+            // Put all the options together
+            var options_vbox = new VBox ();
+            options_vbox.Spacing = 10;
+
+            options_vbox.PackStart (layout_table, false, false, 3);
+            options_vbox.PackStart (orientation_vbox, false, false, 0);
+            options_vbox.PackStart (background_vbox, false, false, 4);
 
             // Layout the preview + the options
             preview = new PreviewArea ();
 
+            var preview_label = new Label (Catalog.GetString ("Preview"));
+
+            var preview_vbox = new VBox ();
+            preview_vbox.PackStart (preview_label, false, false, 0);
+            preview_vbox.PackStart (preview, true, true, 0);
+
+
             var main_hbox = new HBox (false, 10);
 
-            main_hbox.PackStart (preview, true, true, 0);
             main_hbox.PackStart (options_vbox, false, false, 0);
+            main_hbox.PackStart (preview_vbox, true, true, 0);
 
             VBox.Add (main_hbox);
 
@@ -451,11 +467,11 @@ namespace Pinta
             private Gdk.Size size;
             private Cairo.Color color;
 
-            private int max_size = 175;
+            private int max_size = 250;
 
             public PreviewArea ()
             {
-                WidthRequest = 225;
+                WidthRequest = 300;
             }
 
             public void Update (Gdk.Size size)
