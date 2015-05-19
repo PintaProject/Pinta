@@ -3,7 +3,7 @@ mono: 3.12.0
 
 install:
   - sudo apt-get update -yqq
-  - sudo apt-get install intltool nunit-console yelp-tools -yqq
+  - sudo apt-get install libglib2.0-cil-dev intltool nunit-console yelp-tools -yqq
 script:
   - ./autogen.sh && make
   - make test
