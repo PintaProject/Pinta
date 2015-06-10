@@ -222,6 +222,7 @@ namespace Pinta.Core
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
+            PintaCore.Tools.CurrentTool.OnDeselected ();
 			PintaCore.Tools.Commit ();
 
 			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));

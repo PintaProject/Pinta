@@ -104,11 +104,6 @@ namespace Pinta.Tools
                     hist.Dispose();
                     hist = null;
                 }
-                // reset tool controls to its original values
-                foreach (ToolControl tc in controls)
-                {
-                    tc.Reset ();
-                }
 				doc.ToolLayer.Clear ();
 			} else {
                 ClearHandles (doc.ToolLayer);
@@ -364,6 +359,17 @@ namespace Pinta.Tools
 			shape_end = doc.Selection.End;
 			UpdateHandler();
 		}
+
+        public override void OnDeselected ()
+        {
+            base.OnDeselected ();
+
+            // reset tool controls to its original values
+            foreach (var tc in controls)
+            {
+                tc.Reset ();
+            }
+        }
 
 		/// <summary>
 		/// Update the selection handles' positions, and redraw them.

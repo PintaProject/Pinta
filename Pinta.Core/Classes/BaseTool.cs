@@ -277,6 +277,14 @@ namespace Pinta.Core
 		protected virtual void OnKeyUp (DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
 		{
 		}
+
+        /// <summary>
+        /// This is called when the "Deselect all" menu option is called,
+        /// so that tools such as the SelectTool can reset its tool handles.
+        /// </summary>
+        public virtual void OnDeselected()
+        {
+        }
 		
 		/// <summary>
 		/// This is called whenever a menu option is called, for
