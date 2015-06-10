@@ -57,6 +57,11 @@ namespace Pinta.Tools
             action (x, y, state);
         }
 
+        public void Reset()
+        {
+            Position = new PointD (-5, -5);
+        }
+
         public void Render (Context g)
         {
             var rect = GetHandleRect ();

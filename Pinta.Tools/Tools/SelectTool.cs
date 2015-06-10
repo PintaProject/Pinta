@@ -104,6 +104,11 @@ namespace Pinta.Tools
                     hist.Dispose();
                     hist = null;
                 }
+                // reset tool controls to its original values
+                foreach (ToolControl tc in controls)
+                {
+                    tc.Reset ();
+                }
 				doc.ToolLayer.Clear ();
 			} else {
                 ClearHandles (doc.ToolLayer);
