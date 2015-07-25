@@ -498,7 +498,7 @@ namespace Pinta.Core
 			var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
 			// Blend each visible layer onto our surface
-			foreach (var layer in GetLayersToPaint ()) {
+			foreach (var layer in GetLayersToPaint (include_tool_layer: false)) {
                 using (var g = new Context (surf))
                     layer.Draw (g);
 			}
@@ -507,7 +507,7 @@ namespace Pinta.Core
 			return surf;
 		}
 
-		public List<Layer> GetLayersToPaint ()
+		public List<Layer> GetLayersToPaint (bool include_tool_layer = true)
 		{
 			List<Layer> paint = new List<Layer> ();
 
@@ -516,7 +516,7 @@ namespace Pinta.Core
 					paint.Add (layer);
 
 				if (layer == CurrentUserLayer) {
-					if (!ToolLayer.Hidden)
+					if (!ToolLayer.Hidden && include_tool_layer)
 						paint.Add (ToolLayer);
 
 					if (ShowSelectionLayer)

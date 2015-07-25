@@ -139,15 +139,6 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnCommit ()
-		{
-			base.OnCommit ();
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				Document doc = PintaCore.Workspace.ActiveDocument;
-				doc.ToolLayer.Clear ();
-			}
-		}
-
 		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;

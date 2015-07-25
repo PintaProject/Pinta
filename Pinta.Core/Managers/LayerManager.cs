@@ -202,11 +202,6 @@ namespace Pinta.Core
 			PintaCore.Workspace.ActiveDocument.ResetSelectionPaths ();
 		}
 
-		public ImageSurface GetFlattenedImage ()
-		{
-			return PintaCore.Workspace.ActiveDocument.GetFlattenedImage ();
-		}
-		
 		public ImageSurface GetClippedLayer (int index)
 		{
 			return PintaCore.Workspace.ActiveDocument.GetClippedLayer (index);
