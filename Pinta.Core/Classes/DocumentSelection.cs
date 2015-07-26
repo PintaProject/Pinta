@@ -339,6 +339,10 @@ namespace Pinta.Core
 		{
 			SelectionPolygons.Clear();
 			SelectionPolygons.Add (CreateRectanglePolygon (r));
+
+		    Origin = new PointD (r.X, r.Y);
+		    End = new PointD (r.GetRight (), r.GetBottom ());
+
             MarkDirty ();
 		}
 

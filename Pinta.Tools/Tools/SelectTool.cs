@@ -48,9 +48,11 @@ namespace Pinta.Tools
 		public SelectTool ()
 		{
 			CreateHandler ();
+
+		    PintaCore.Workspace.SelectionChanged += AfterSelectionChange;
 		}
 
-        #region ToolBar
+	    #region ToolBar
 		// We don't want the ShapeTool's toolbar
 		protected override void BuildToolBar (Toolbar tb)
 		{
@@ -351,9 +353,22 @@ namespace Pinta.Tools
 			UpdateHandler();
 		}
 
-		/// <summary>
-		/// Update the selection handles' positions, and redraw them.
-		/// </summary>
+	    private void AfterSelectionChange (object sender, EventArgs event_args)
+	    {
+	        if (is_drawing || !PintaCore.Workspace.HasOpenDocuments)
+	            return;
+
+	        var selection = PintaCore.Workspace.ActiveDocument.Selection;
+	        shape_origin = selection.Origin;
+	        shape_end = selection.End;
+
+            if (PintaCore.Tools.CurrentTool == this)
+                UpdateHandler();
+        }
+
+        /// <summary>
+        /// Update the selection handles' positions, and redraw them.
+        /// </summary>
         private void UpdateHandler ()
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
