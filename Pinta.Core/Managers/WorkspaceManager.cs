@@ -37,18 +37,11 @@ namespace Pinta.Core
 	{
 		private int active_document_index = -1;
 		private int new_file_name = 1;
-
-		public event EventHandler SelectionChanged;
 		
 		public WorkspaceManager ()
 		{
 			OpenDocuments = new List<Document> ();
             SelectionHandler = new SelectionModeHandler ();
-		}
-
-		public void CallSelectionChanged(object sender, EventArgs e)
-		{
-			SelectionChanged(sender, e);
 		}
 
 		public int ActiveDocumentIndex {
@@ -311,12 +304,18 @@ namespace Pinta.Core
 		{
 			if (ActiveDocumentChanged != null)
 				ActiveDocumentChanged (this, EventArgs.Empty);
+
+            OnSelectionChanged ();
 				
 			ResetTitle ();
 		}
 
 		protected internal void OnDocumentCreated (DocumentEventArgs e)
 		{
+            e.Document.SelectionChanged += (sender, args) => {
+		        OnSelectionChanged ();
+		    };
+
 			if (DocumentCreated != null)
 				DocumentCreated (this, e);
 		}
@@ -332,7 +331,12 @@ namespace Pinta.Core
 			if (DocumentClosed != null)
 				DocumentClosed (this, e);
 		}
-		#endregion
+
+		private void OnSelectionChanged ()
+		{
+            SelectionChanged?.Invoke (this, EventArgs.Empty);
+		}
+#endregion
 
 		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
@@ -342,12 +346,13 @@ namespace Pinta.Core
 			PintaCore.Chrome.ShowErrorDialog(parent, message, details);
 		}
 
-		#region Public Events
+#region Public Events
 		public event EventHandler ActiveDocumentChanged;
 		public event EventHandler<DocumentEventArgs> DocumentCreated;
 		public event EventHandler<DocumentEventArgs> DocumentOpened;
 		public event EventHandler<DocumentEventArgs> DocumentClosed;
-		#endregion
+		public event EventHandler SelectionChanged;
+#endregion
 		
 	}
 }

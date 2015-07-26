@@ -167,6 +167,12 @@ namespace Pinta.Core
 
 			PintaCore.Workspace.SelectionChanged += delegate
 			{
+			    if (!PintaCore.Workspace.HasOpenDocuments)
+			    {
+			        SelectionSize.Text = "  0, 0";
+                    return;
+			    }
+
 				double minX = double.MaxValue;
 				double minY = double.MaxValue;
 				double maxX = double.MinValue;

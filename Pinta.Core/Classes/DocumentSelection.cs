@@ -56,6 +56,8 @@ namespace Pinta.Core
 		    }
 		}
 
+	    public event EventHandler SelectionModified;
+
         /// <summary>
         /// Indicate that the selection has changed.
         /// </summary>
@@ -66,6 +68,9 @@ namespace Pinta.Core
                 selection_path.Dispose ();
                 selection_path = null;
             }
+
+            // Notify any listeners.
+            SelectionModified?.Invoke (this, EventArgs.Empty);
         }
 
 		public void Clip (Context g)
@@ -274,7 +279,7 @@ namespace Pinta.Core
 		/// <param name="x3">Ending point X (included in the returned Point(s)).</param>
 		/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
 		/// <returns></returns>
-		List<IntPoint> CalculateCurvePoints(double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
+		private static List<IntPoint> CalculateCurvePoints(double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
 		{
 			//Create a new partial Polygon to store the calculated Points.
 			List<IntPoint> calculatedPoints = new List<IntPoint>((int)(1d / tInterval));
@@ -364,7 +369,7 @@ namespace Pinta.Core
             MarkDirty ();
 		}
 
-		private List<IntPoint> CreateRectanglePolygon (Rectangle r)
+		private static List<IntPoint> CreateRectanglePolygon (Rectangle r)
 		{
 			// The 4 corners of the Rectangle.
 			int corner1X = (int)Math.Round(r.X);

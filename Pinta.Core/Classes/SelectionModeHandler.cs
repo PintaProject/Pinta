@@ -163,8 +163,6 @@ namespace Pinta.Core
 
                 doc.Selection.MarkDirty ();
             }
-
-            PintaCore.Workspace.CallSelectionChanged (null, EventArgs.Empty);
         }
     }
 

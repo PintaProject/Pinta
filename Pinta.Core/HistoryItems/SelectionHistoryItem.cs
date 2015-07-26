@@ -78,7 +78,6 @@ namespace Pinta.Core
             old_previous_selection = doc.PreviousSelection;
             doc.PreviousSelection = swap_selection;
 
-			PintaCore.Workspace.CallSelectionChanged(this, EventArgs.Empty);
 			PintaCore.Workspace.Invalidate ();
 		}
 		

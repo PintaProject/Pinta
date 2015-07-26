@@ -55,11 +55,30 @@ namespace Pinta.Core
 
 		private bool show_selection;
 
-        public DocumentSelection Selection = new DocumentSelection ();
+	    private DocumentSelection selection;
+        public DocumentSelection Selection
+        {
+            get { return selection; }
+            set
+            {
+                selection = value;
+
+                // Listen for any changes to this selection.
+                selection.SelectionModified += (sender, args) => {
+                    OnSelectionChanged ();
+                };
+
+                // Notify listeners that our selection has been modified.
+                OnSelectionChanged();
+            }
+        }
+
         public DocumentSelection PreviousSelection = new DocumentSelection ();
 
 		public Document (Gdk.Size size)
 		{
+		    Selection = new DocumentSelection ();
+
 			Guid = Guid.NewGuid ();
 			
 			Workspace = new DocumentWorkspace (this);
@@ -927,12 +946,19 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
 		}
+
+	    private void OnSelectionChanged ()
+	    {
+	        SelectionChanged?.Invoke (this, EventArgs.Empty);
+	    }
 		#endregion
 
 		#region Public Events
 		public event EventHandler IsDirtyChanged;
 		public event EventHandler Renamed;
 		public event LayerCloneEvent LayerCloned;
-		#endregion
+	    public event EventHandler SelectionChanged;
+
+	    #endregion
 	}
 }
