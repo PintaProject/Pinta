@@ -70,10 +70,11 @@ namespace Pinta.Core
             }
 
             // Notify any listeners.
-            SelectionModified?.Invoke (this, EventArgs.Empty);
+            if (SelectionModified != null)
+                SelectionModified.Invoke(this, EventArgs.Empty);
         }
 
-		public void Clip (Context g)
+        public void Clip (Context g)
 		{
 			g.AppendPath (SelectionPath);
 			g.FillRule = FillRule.EvenOdd;

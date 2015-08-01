@@ -171,9 +171,9 @@ namespace Pinta.Core
 			    {
 			        SelectionSize.Text = "  0, 0";
                     return;
-			    }
+                }
 
-				double minX = double.MaxValue;
+                double minX = double.MaxValue;
 				double minY = double.MaxValue;
 				double maxX = double.MinValue;
 				double maxY = double.MinValue;

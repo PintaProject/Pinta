@@ -949,12 +949,13 @@ namespace Pinta.Core
 
 	    private void OnSelectionChanged ()
 	    {
-	        SelectionChanged?.Invoke (this, EventArgs.Empty);
-	    }
-		#endregion
+            if (SelectionChanged != null)
+                SelectionChanged.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
 
-		#region Public Events
-		public event EventHandler IsDirtyChanged;
+        #region Public Events
+        public event EventHandler IsDirtyChanged;
 		public event EventHandler Renamed;
 		public event LayerCloneEvent LayerCloned;
 	    public event EventHandler SelectionChanged;

@@ -334,11 +334,12 @@ namespace Pinta.Core
 
 		private void OnSelectionChanged ()
 		{
-            SelectionChanged?.Invoke (this, EventArgs.Empty);
-		}
+            if (SelectionChanged != null)
+                SelectionChanged.Invoke(this, EventArgs.Empty);
+        }
 #endregion
 
-		private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
+        private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 			string secondaryText = string.Format (Catalog.GetString ("Could not open file: {0}"), filename);
