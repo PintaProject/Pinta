@@ -59,7 +59,6 @@
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Core">
@@ -73,15 +72,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="DialogAttributes.cs" />
-    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Widgets\FilledAreaBin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorPanelWidget.cs" />
     <Compile Include="Widgets\Canvas\CanvasRenderer.cs" />
     <Compile Include="Widgets\Canvas\CanvasWindow.cs" />
     <Compile Include="Widgets\ColorPaletteWidget.cs" />
@@ -92,21 +85,14 @@
     <Compile Include="Dialogs\SimpleEffectDialog.cs" />
     <Compile Include="Widgets\AnglePickerGraphic.cs" />
     <Compile Include="Widgets\AnglePickerWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.AnglePickerWidget.cs" />
     <Compile Include="Widgets\Canvas\PintaCanvas.cs" />
     <Compile Include="Widgets\Layers\CellRendererSurface.cs" />
     <Compile Include="Widgets\Layers\LayersListWidget.cs" />
     <Compile Include="Widgets\PointPickerGraphic.cs" />
     <Compile Include="Widgets\PointPickerWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.PointPickerWidget.cs" />
     <Compile Include="Widgets\ComboBoxWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ComboBoxWidget.cs" />
     <Compile Include="Widgets\ReseedButtonWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ReseedButtonWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.ColorGradientWidget.cs" />
     <Compile Include="Widgets\ColorGradientWidget.cs" />
-    <Compile Include="gtk-gui\Pinta.Gui.Widgets.HistogramWidget.cs" />
     <Compile Include="Widgets\HistogramWidget.cs" />
     <Compile Include="Widgets\ToolBoxWidget.cs" />
     <Compile Include="Widgets\OpenImages\OpenImagesListWidget.cs" />

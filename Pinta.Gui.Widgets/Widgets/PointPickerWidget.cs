@@ -26,14 +26,22 @@
 
 using System;
 using System.ComponentModel;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class PointPickerWidget : Gtk.Bin
+	public class PointPickerWidget : FilledAreaBin
 	{
-		bool active = true; 
+        private Label label;
+        private PointPickerGraphic pointpickergraphic1;
+        private Button button1;
+        private Button button2;
+        private SpinButton spinX;
+        private SpinButton spinY;
+
+        bool active = true; 
 			
 		[Category("Custom Properties")]
 		public string Label {
@@ -70,7 +78,8 @@ namespace Pinta.Gui.Widgets
 
 		public PointPickerWidget ()
 		{
-			this.Build ();
+			Build ();
+
 			spinX.Adjustment.Upper = PintaCore.Workspace.ImageSize.Width;
 			spinY.Adjustment.Upper = PintaCore.Workspace.ImageSize.Height;
 			spinX.Adjustment.Lower = 0;
@@ -141,7 +150,96 @@ namespace Pinta.Gui.Widgets
 
 		#region Public Events
 		public event EventHandler PointPicked;
-		#endregion
-		
-	}
+        #endregion
+
+        private void Build ()
+        {
+            // Section label + line
+            var hbox1 = new HBox (false, 6);
+
+            label = new Label ();
+            hbox1.PackStart (label, false, false, 0);
+            hbox1.PackStart (new HSeparator (), true, true, 0);
+
+            // PointPickerGraphic
+            var hbox2 = new HBox (false, 6);
+
+            pointpickergraphic1 = new PointPickerGraphic ();
+            hbox2.PackStart (pointpickergraphic1, true, false, 0);
+
+            // X spinner
+            var label2 = new Label ();
+            label2.LabelProp = "X:";
+
+            spinX = new SpinButton (0, 100, 1);
+            spinX.CanFocus = true;
+            spinX.Adjustment.PageIncrement = 10;
+            spinX.ClimbRate = 1;
+            spinX.Numeric = true;
+
+            button1 = new Button ();
+            button1.WidthRequest = 28;
+            button1.HeightRequest = 24;
+            button1.CanFocus = true;
+            button1.UseUnderline = true;
+
+            var button_image = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
+            button1.Add (button_image);
+
+            var alignment1 = new Alignment (0.5F, 0.5F, 1F, 0F);
+            alignment1.Add (button1);
+
+            var x_hbox = new HBox (false, 6);
+
+            x_hbox.PackStart (label2, false, false, 0);
+            x_hbox.PackStart (spinX, false, false, 0);
+            x_hbox.PackStart (alignment1, false, false, 0);
+
+            // Y spinner
+            var label3 = new Label ();
+            label3.LabelProp = "Y:";
+
+            spinY = new SpinButton (0, 100, 1);
+            spinY.CanFocus = true;
+            spinY.Adjustment.PageIncrement = 10;
+            spinY.ClimbRate = 1;
+            spinY.Numeric = true;
+
+            button2 = new Button ();
+            button2.WidthRequest = 28;
+            button2.HeightRequest = 24;
+            button2.CanFocus = true;
+            button2.UseUnderline = true;
+
+            var button_image2 = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
+            button2.Add (button_image2);
+
+            var alignment2 = new Alignment (0.5F, 0.5F, 1F, 0F);
+            alignment2.Add (button2);
+
+            var y_hbox = new HBox (false, 6);
+
+            y_hbox.PackStart (label3, false, false, 0);
+            y_hbox.PackStart (spinY, false, false, 0);
+            y_hbox.PackStart (alignment2, false, false, 0);
+
+            // Vbox for spinners
+            var spin_vbox = new VBox ();
+
+            spin_vbox.Add (x_hbox);
+            spin_vbox.Add (y_hbox);
+
+            hbox2.PackStart (spin_vbox, false, false, 0);
+
+            // Main layout
+            var vbox = new VBox (false, 6);
+
+            vbox.Add (hbox1);
+            vbox.Add (hbox2);
+
+            Add (vbox);
+
+            vbox.ShowAll ();
+        }
+    }
 }

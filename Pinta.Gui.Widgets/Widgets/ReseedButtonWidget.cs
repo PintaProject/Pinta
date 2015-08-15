@@ -25,15 +25,18 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
 
 namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class ReseedButtonWidget : Gtk.Bin
+	public class ReseedButtonWidget : FilledAreaBin
 	{
+        private Button button1;
+
 		public ReseedButtonWidget ()
 		{
-			this.Build ();
+			Build ();
 			
 			button1.Clicked += delegate (object sender, EventArgs e) {
 				OnClicked ();
@@ -50,7 +53,39 @@ namespace Pinta.Gui.Widgets
 
 		#region Public Events
 		public event EventHandler Clicked;
-		#endregion
-	}
+        #endregion
+
+        private void Build ()
+        {
+            // Section label + line
+            var hbox1 = new HBox (false, 6);
+
+            var label = new Label ();
+            label.LabelProp = Mono.Unix.Catalog.GetString ("Random Noise");
+
+            hbox1.PackStart (label, false, false, 0);
+            hbox1.PackStart (new HSeparator (), true, true, 0);
+
+            // Reseed button
+            button1 = new Button ();
+            button1.WidthRequest = 88;
+            button1.CanFocus = true;
+            button1.UseUnderline = true;
+            button1.Label = Mono.Unix.Catalog.GetString ("Reseed");
+
+            var hbox2 = new HBox (false, 6);
+            hbox2.PackStart (button1, false, false, 0);
+
+            // Main layout
+            var vbox = new VBox (false, 6);
+
+            vbox.Add (hbox1);
+            vbox.Add (hbox2);
+
+            Add (vbox);
+
+            vbox.ShowAll ();
+        }
+    }
 }
 
