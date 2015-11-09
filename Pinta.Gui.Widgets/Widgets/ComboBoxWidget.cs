@@ -25,14 +25,17 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
 
 namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class ComboBoxWidget : Gtk.Bin
+	public class ComboBoxWidget : FilledAreaBin
 	{
+        private Label label;
+        private ComboBox combobox;
 
-		public string Label {
+        public string Label {
 			get { return label.Text; }
 			set { label.Text = value; }
 		}
@@ -68,5 +71,28 @@ namespace Pinta.Gui.Widgets
 		#region Public Events
 		public event EventHandler Changed;
 		#endregion
-	}
+
+        private void Build ()
+        {
+            // Section label + line
+            var hbox1 = new HBox (false, 6);
+
+            label = new Label ();
+            hbox1.PackStart (label, false, false, 0);
+            hbox1.PackStart (new HSeparator (), true, true, 0);
+
+            // Combobox
+            combobox = ComboBox.NewText ();
+
+            // Main layout
+            var vbox = new VBox (false, 6);
+
+            vbox.Add (hbox1);
+            vbox.Add (combobox);
+
+            Add (vbox);
+
+            vbox.ShowAll ();
+        }
+    }
 }

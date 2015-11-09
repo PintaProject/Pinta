@@ -69,29 +69,38 @@ namespace Pinta.Core
 		public Gdk.Rectangle textBounds = Gdk.Rectangle.Zero;
 		public Gdk.Rectangle previousTextBounds = Gdk.Rectangle.Zero;
 
-		public override void Rotate(double angle)
+        public override void ApplyTransform (Matrix xform, Size new_size)
 		{
-			base.Rotate (angle);
+			base.ApplyTransform (xform, new_size);
 
 			foreach (ReEditableLayer rel in ReEditableLayers)
 			{
 				if (rel.IsLayerSetup)
-				{
-					rel.Layer.Rotate(angle);
-				}
+                    rel.Layer.ApplyTransform (xform, new_size);
 			}
 		}
 
-		public override void Crop(Gdk.Rectangle rect)
+        public void Rotate (double angle, Size new_size)
+        {
+			double radians = (angle / 180d) * Math.PI;
+		    var old_size = PintaCore.Workspace.ImageSize;
+
+            var xform = new Matrix ();
+            xform.Translate (new_size.Width / 2.0, new_size.Height / 2.0);
+            xform.Rotate (radians);
+            xform.Translate (-old_size.Width / 2.0, -old_size.Height / 2.0);
+
+            ApplyTransform (xform, new_size);
+        }
+
+        public override void Crop (Gdk.Rectangle rect, Path selection)
 		{
-			base.Crop (rect);
+			base.Crop (rect, selection);
 
 			foreach (ReEditableLayer rel in ReEditableLayers)
 			{
 				if (rel.IsLayerSetup)
-				{
-					rel.Layer.Crop(rect);
-				}
+                    rel.Layer.Crop (rect, selection);
 			}
 		}
 

@@ -129,45 +129,32 @@ namespace Pinta.Core
 			Draw(ctx, Surface, Opacity);
 		}
 
-		public void Draw(Context ctx, ImageSurface surface, double opacity)
+		public void Draw (Context ctx, ImageSurface surface, double opacity, bool transform = true)
 		{
-			ctx.Save();
-			ctx.Transform(Transform);
-			ctx.SetSourceSurface(surface, 0, 0);
-			ctx.PaintWithAlpha(opacity);
-			ctx.Restore();
+			ctx.Save ();
+
+            if (transform)
+			    ctx.Transform (Transform);
+
+            ctx.BlendSurface (surface, BlendMode, opacity);
+
+			ctx.Restore ();
 		}
 		
-		/// <summary>
-		/// Rotates layer by the specified angle (in degrees).
-		/// </summary>
-		/// <param name='angle'>
-		/// Angle (in degrees).
-		/// </param>
-		public virtual void Rotate (double angle)
+		public virtual void ApplyTransform (Matrix xform, Size new_size)
 		{
-			int w = PintaCore.Workspace.ImageSize.Width;
-			int h = PintaCore.Workspace.ImageSize.Height;
-
-			double radians = (angle / 180d) * Math.PI;
-			double cos = Math.Cos (radians);
-			double sin = Math.Sin (radians);
-
-			var newSize = RotateDimensions (PintaCore.Workspace.ImageSize, angle);
-
-			Layer dest = PintaCore.Layers.CreateLayer (string.Empty, newSize.Width, newSize.Height);
-
-			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
-				g.Matrix = new Matrix (cos, sin, -sin, cos, newSize.Width / 2.0, newSize.Height / 2.0);
-				g.Translate (-w / 2.0, -h / 2.0);
-				g.SetSource (Surface);
-
+		    var old_size = PintaCore.Workspace.ImageSize;
+		    var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+			using (var g = new Context (dest))
+			{
+                g.Transform (xform);
+			    g.SetSource (Surface);
 				g.Paint ();
 			}
 			
 			Surface old = Surface;
-			Surface = dest.Surface;
-			(old as IDisposable).Dispose ();
+		    Surface = dest;
+			old.Dispose ();
 		}
 
 		public static Gdk.Size RotateDimensions (Gdk.Size originalSize, double angle)
@@ -275,7 +262,7 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public virtual void Crop (Gdk.Rectangle rect)
+		public virtual void Crop (Gdk.Rectangle rect, Path selection)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 
@@ -283,6 +270,14 @@ namespace Pinta.Core
 				// Move the selected content to the upper left
 				g.Translate (-rect.X, -rect.Y);
 				g.Antialias = Antialias.None;
+
+                // Optionally, respect the given path.
+                if (selection != null)
+                {
+                    g.AppendPath (selection);
+                    g.FillRule = Cairo.FillRule.EvenOdd;
+                    g.Clip ();
+                }
 
 				g.SetSource (Surface);
 				g.Paint ();

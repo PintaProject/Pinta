@@ -32,17 +32,19 @@ namespace Pinta.Core
 	{
 		Normal,
 		Multiply,
-		Additive,
 		ColorBurn,
 		ColorDodge,
-		Reflect,
-		Glow,
 		Overlay,
 		Difference,
-		Negation,
 		Lighten,
 		Darken,
 		Screen,
-		Xor
+		Xor,
+        HardLight,
+        SoftLight,
+        Color,
+        Luminosity,
+        Hue,
+        Saturation
 	}
 }

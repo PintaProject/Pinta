@@ -93,6 +93,8 @@ if test "$DIE" -eq 1; then
         exit 1
 fi
 
+unset GREP_OPTIONS
+
 xbuild_version=`xbuild /version | grep '^XBuild' | egrep -o '([0-9]+\.?){2,}'`
 check_version "$xbuild_version" "2.4" 2> /dev/null
 if test $? -eq 9; then

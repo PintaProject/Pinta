@@ -28,16 +28,18 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using Cairo;
-
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem(true)]
-	public partial class ColorGradientWidget : Gtk.Bin
+	[ToolboxItem(true)]
+	public class ColorGradientWidget : FilledAreaBin
 	{
-		//gradient horizontal padding
-		private const double xpad = 0.15;
+        private EventBox eventbox;
+
+        //gradient horizontal padding
+        private const double xpad = 0.15;
 		//gradient vertical padding
 		private const double ypad = 0.03;
 		
@@ -78,7 +80,7 @@ namespace Pinta.Gui.Widgets
 
 		public ColorGradientWidget ()
 		{
-			this.Build ();
+			Build ();
 			ValueIndex = -1;
 			
 			eventbox.MotionNotifyEvent += HandleMotionNotifyEvent;
@@ -289,5 +291,16 @@ namespace Pinta.Gui.Widgets
 		#region Public Events
 		public event IndexEventHandler ValueChanged;
 		#endregion
-	}
+
+        private void Build ()
+        {
+            CanFocus = true;
+            Events = (Gdk.EventMask)1534;
+
+            eventbox = new EventBox ();
+            eventbox.Events = (Gdk.EventMask)790;
+            eventbox.VisibleWindow = false;
+            Add (eventbox);
+        }
+    }
 }

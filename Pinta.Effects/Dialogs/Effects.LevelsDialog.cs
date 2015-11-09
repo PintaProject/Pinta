@@ -63,15 +63,11 @@ namespace Pinta.Effects
 			VBox.Remove (hboxBottom);
 			foreach (Widget widget in hboxBottom)
 			{
-				hboxBottom.Remove (widget);
+                hboxBottom.Remove (widget);
 				if (widget == buttonOk)
-				{
 					AddActionWidget (widget, ResponseType.Ok);
-				}
 				else
-				{
-					AddActionWidget (widget, ResponseType.None);
-				}
+                    ActionArea.PackEnd (widget);
 			}
 
 			UpdateInputHistogram ();

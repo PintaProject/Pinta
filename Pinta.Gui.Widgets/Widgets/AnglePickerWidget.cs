@@ -8,16 +8,22 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.ComponentModel;
+using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem (true)]
-	public partial class AnglePickerWidget : Gtk.Bin
-	{
+	public class AnglePickerWidget : FilledAreaBin
+    {
+        private AnglePickerGraphic anglepickergraphic1;
+        private SpinButton spin;
+        private Button button;
+        private Label label;
+
 		public AnglePickerWidget ()
 		{
-			this.Build ();
+            Build ();
 
 			anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
 			spin.ValueChanged += HandleSpinValueChanged;
@@ -86,5 +92,56 @@ namespace Pinta.Gui.Widgets
 		#region Public Events
 		public event EventHandler ValueChanged;
 		#endregion
-	}
+
+        private void Build ()
+        {
+            // Section label + line
+            var hbox1 = new HBox (false, 6);
+
+            label = new Label ();
+            hbox1.PackStart (label, false, false, 0);
+            hbox1.PackStart (new HSeparator (), true, true, 0);
+
+            // Angle graphic + spinner + reset button
+            var hbox2 = new HBox (false, 6);
+
+            anglepickergraphic1 = new AnglePickerGraphic ();
+            hbox2.PackStart (anglepickergraphic1, true, false, 0);
+
+            spin = new SpinButton (0, 360, 1);
+            spin.CanFocus = true;
+            spin.Adjustment.PageIncrement = 10;
+            spin.ClimbRate = 1;
+            spin.Numeric = true;
+
+            var alignment = new Alignment (0.5F, 0F, 1F, 0F);
+            alignment.Add (spin);
+            hbox2.PackStart (alignment, false, false, 0);
+
+            // Reset button
+            button = new Button ();
+            button.WidthRequest = 28;
+            button.HeightRequest = 24;
+            button.CanFocus = true;
+            button.UseUnderline = true;
+
+            var button_image = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
+            button.Add (button_image);
+
+            var alignment2 = new Alignment (0.5F, 0F, 1F, 0F);
+            alignment2.Add (button);
+
+            hbox2.PackStart (alignment2, false, false, 0);
+
+            // Main layout
+            var vbox = new VBox (false, 6);
+
+            vbox.Add (hbox1);
+            vbox.Add (hbox2);
+
+            Add (vbox);
+
+            vbox.ShowAll ();
+        }
+    }
 }

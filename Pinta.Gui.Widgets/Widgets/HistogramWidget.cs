@@ -36,7 +36,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Threading;
 using Cairo;
 
 using Pinta.Core;
@@ -44,7 +43,7 @@ using Pinta.Core;
 namespace Pinta.Gui.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class HistogramWidget : Gtk.Bin
+	public class HistogramWidget : FilledAreaBin
 	{
 		private bool[] selected;
 
@@ -59,8 +58,6 @@ namespace Pinta.Gui.Widgets
 		
 		public HistogramWidget ()
 		{
-			this.Build ();
-			
 			Histogram = new HistogramRgb ();
 			selected = new bool[] {true, true, true};
 			

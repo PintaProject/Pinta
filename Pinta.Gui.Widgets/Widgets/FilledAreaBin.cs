@@ -1,11 +1,10 @@
-// 
-// ColorPanelWidget.cs
+﻿// 
+// FilledAreaBin.cs
 //  
 // Author:
-//      Krzysztof Marecki <marecki.krzysztof@gmail.com>
+//       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Krzysztof Marecki
-//
+// Copyright (c) 2015 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,51 +25,41 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
+using Gdk;
 using Gtk;
-using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-    [System.ComponentModel.ToolboxItem(true)]
-	public class ColorPanelWidget : FilledAreaBin
-	{
-        private EventBox eventbox;
+    public class FilledAreaBin : Bin
+    {
+        private Widget child;
 
-		public Color CairoColor { get; private set; }
-
-		public ColorPanelWidget ()
-		{
-			Build ();
-			
-			ExposeEvent += HandleExposeEvent;
-		}
-		
-		public void SetCairoColor (Color color)
-		{
-			CairoColor = color;
-		}
-
-		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
-		{
-			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
-				
-				int rad = 4;
-				Rectangle rect = Allocation.ToCairoRectangle ();
-				
-				g.FillRoundedRectangle (rect, rad, CairoColor);
-			}
-		}
-
-        private void Build ()
+        protected override void OnAdded (Widget widget)
         {
-            HeightRequest = 24;
+            base.OnAdded (widget);
+            child = widget;
+        }
 
-            eventbox = new EventBox ();
-            eventbox.Events = (Gdk.EventMask)256;
-            eventbox.VisibleWindow = false;
+        protected override void OnRemoved (Widget widget)
+        {
+            base.OnRemoved (widget);
+            child = null;
+        }
 
-            Add (eventbox);
+        protected override void OnSizeRequested (ref Requisition requisition)
+        {
+            if (child != null)
+                requisition = child.SizeRequest ();
+            else
+                base.OnSizeRequested (ref requisition);
+        }
+
+        protected override void OnSizeAllocated (Rectangle allocation)
+        {
+            base.OnSizeAllocated (allocation);
+
+            if (child != null)
+                child.Allocation = allocation;
         }
     }
 }

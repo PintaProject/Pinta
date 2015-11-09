@@ -160,7 +160,7 @@ namespace Pinta.Core
 					}
 				} else {
 					var mainrect = rect;
-					Parallel.ForEach(Enumerable.Range (rect.Top, rect.GetBottom () + 1),
+					Parallel.ForEach(Enumerable.Range (rect.Top, rect.Height),
 						(y) => ProcessGradientLine(startAlpha, endAlpha, y, mainrect, surface, src_data_ptr, src_width));
 				}
 			}

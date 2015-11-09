@@ -55,11 +55,30 @@ namespace Pinta.Core
 
 		private bool show_selection;
 
-        public DocumentSelection Selection = new DocumentSelection ();
+	    private DocumentSelection selection;
+        public DocumentSelection Selection
+        {
+            get { return selection; }
+            set
+            {
+                selection = value;
+
+                // Listen for any changes to this selection.
+                selection.SelectionModified += (sender, args) => {
+                    OnSelectionChanged ();
+                };
+
+                // Notify listeners that our selection has been modified.
+                OnSelectionChanged();
+            }
+        }
+
         public DocumentSelection PreviousSelection = new DocumentSelection ();
 
 		public Document (Gdk.Size size)
 		{
+		    Selection = new DocumentSelection ();
+
 			Guid = Guid.NewGuid ();
 			
 			Workspace = new DocumentWorkspace (this);
@@ -475,15 +494,21 @@ namespace Pinta.Core
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			var pixel = ColorBgra.Zero;
+            using (var dst = new ImageSurface (Format.Argb32, 1, 1)) {
+                using (var g = new Context (dst)) {
+			        foreach (var layer in GetLayersToPaint ()) {
+                        var color = layer.Surface.GetColorBgraUnchecked (x, y).ToCairoColor ();
 
-			foreach (var layer in GetLayersToPaint ()) {
-				var blend_op = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
+                        g.SetBlendMode (layer.BlendMode);
+                        g.SetSourceColor (color);
 
-				pixel = blend_op.Apply (pixel, layer.Surface.GetColorBgraUnchecked (x, y));
-			}
+                        g.Rectangle (dst.GetBounds ().ToCairoRectangle ());
+                        g.PaintWithAlpha (layer.Opacity);
+                    }
+                }
 
-			return pixel;
+                return dst.GetPixel (0, 0).ToColorBgra ();
+            }
 		}
 
 		public ImageSurface GetFlattenedImage ()
@@ -492,16 +517,16 @@ namespace Pinta.Core
 			var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
 			// Blend each visible layer onto our surface
-			foreach (var layer in GetLayersToPaint ()) {
-				var blendop = UserBlendOps.GetBlendOp (layer.BlendMode, layer.Opacity);
-				blendop.Apply (surf, layer.Surface);
+			foreach (var layer in GetLayersToPaint (include_tool_layer: false)) {
+                using (var g = new Context (surf))
+                    layer.Draw (g);
 			}
 
 			surf.MarkDirty ();
 			return surf;
 		}
 
-		public List<Layer> GetLayersToPaint ()
+		public List<Layer> GetLayersToPaint (bool include_tool_layer = true)
 		{
 			List<Layer> paint = new List<Layer> ();
 
@@ -510,7 +535,7 @@ namespace Pinta.Core
 					paint.Add (layer);
 
 				if (layer == CurrentUserLayer) {
-					if (!ToolLayer.Hidden)
+					if (!ToolLayer.Hidden && include_tool_layer)
 						paint.Add (ToolLayer);
 
 					if (ShowSelectionLayer)
@@ -573,8 +598,8 @@ namespace Pinta.Core
 			var dest = UserLayers[current_layer - 1];
 
 			// Blend the layers
-			var blendop = UserBlendOps.GetBlendOp (source.BlendMode, source.Opacity);
-			blendop.Apply (dest.Surface, source.Surface);
+            using (var g = new Context (dest.Surface))
+                source.Draw (g);
 
 			DeleteCurrentLayer ();
 		}
@@ -711,13 +736,12 @@ namespace Pinta.Core
 		/// </summary>
 		private void RotateImage (double angle)
 		{
+		    var new_size = Layer.RotateDimensions (ImageSize, angle);
 			foreach (var layer in UserLayers)
-			{
-				layer.Rotate (angle);
-			}
+				layer.Rotate (angle, new_size);
 
-			ImageSize = Layer.RotateDimensions (ImageSize, angle);
-			Workspace.CanvasSize = Layer.RotateDimensions (Workspace.CanvasSize, angle);
+		    ImageSize = new_size;
+			Workspace.CanvasSize = new_size;
 
 			PintaCore.Actions.View.UpdateCanvasScale ();
 			Workspace.Invalidate ();
@@ -922,12 +946,20 @@ namespace Pinta.Core
 		{
 			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
 		}
-		#endregion
 
-		#region Public Events
-		public event EventHandler IsDirtyChanged;
+	    private void OnSelectionChanged ()
+	    {
+            if (SelectionChanged != null)
+                SelectionChanged.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
+
+        #region Public Events
+        public event EventHandler IsDirtyChanged;
 		public event EventHandler Renamed;
 		public event LayerCloneEvent LayerCloned;
-		#endregion
+	    public event EventHandler SelectionChanged;
+
+	    #endregion
 	}
 }
