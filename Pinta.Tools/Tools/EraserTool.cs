@@ -34,21 +34,21 @@ namespace Pinta.Tools
 {
     public class EraserTool : BaseBrushTool
     {       
-        private enum EraserType
+        protected enum EraserType
         {
             Normal = 0,
             Smooth = 1,
         }
 
-        private Point last_point = point_empty;
-        private EraserType eraser_type = EraserType.Normal; 
+        protected Point last_point = point_empty;
+        protected EraserType eraser_type = EraserType.Normal; 
 
-        private const int LUT_Resolution = 256;
-        private byte[,] lut_factor = null;
-        private ImageSurface tmp_surface = null;
+        protected const int LUT_Resolution = 256;
+        protected byte[][] lut_factor = null;
+        protected ImageSurface tmp_surface = null;
 
-        private ToolBarLabel label_type = null;
-        private ToolBarComboBox comboBox_type = null;
+        protected ToolBarLabel label_type = null;
+        protected ToolBarComboBox comboBox_type = null;
 
         public EraserTool ()
         {
@@ -57,15 +57,16 @@ namespace Pinta.Tools
         protected void initLookupTable()
         {
             if (lut_factor == null) {
-                lut_factor = new byte[LUT_Resolution + 1, LUT_Resolution + 1];
+                lut_factor = new byte[LUT_Resolution + 1][];
 
                 for (int dy = 0; dy < LUT_Resolution+1; dy++) {
+                    lut_factor [dy] = new byte[LUT_Resolution + 1];
                     for (int dx = 0; dx < LUT_Resolution+1; dx++) {
                         double d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
                         if (d > 1.0)
-                            lut_factor [dx, dy] = 255;
+                            lut_factor [dy][dx] = 255;
                         else
-                            lut_factor [dx, dy] = (byte)(255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
+                            lut_factor [dy][dx] = (byte)(255.0 - Math.Cos (Math.Sqrt (d) * Math.PI / 2.0) * 255.0);
                     }
                 }
             }
@@ -152,16 +153,18 @@ namespace Pinta.Tools
 
                     for (int iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
                         ColorBgra* srcRowPtr = tmp_surface.GetRowAddressUnchecked (iy - dest_rect.Top);
+                        int dy = ((iy - y) * LUT_Resolution) / rad;
+                        if (dy < 0)
+                            dy = -dy;      
+                        byte[] lut_factor_row = lut_factor [dy];
+
                         for (int ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
                             ColorBgra col = *srcRowPtr;
                             int dx = ((ix - x) * LUT_Resolution) / rad;
                             if (dx < 0)
                                 dx = -dx;
-                            int dy = ((iy - y) * LUT_Resolution) / rad;
-                            if (dy < 0)
-                                dy = -dy;
-
-                            int force = lut_factor [dx, dy]; 
+       
+                            int force = lut_factor_row [dx]; 
                             //Note: premultiplied alpha is used!
                             if (mouse_button == 3) {
                                 col.A = (byte)((col.A * force + bk_col_a * (255 - force)) / 255);         
