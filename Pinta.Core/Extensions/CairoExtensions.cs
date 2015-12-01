@@ -801,7 +801,7 @@ namespace Pinta.Core
 
 				for (int i = 0; i < len; i++) {
 					if (dstPtr->A != 0)
-						*dstPtr = (ColorBgra.FromBgra (dstPtr->R, dstPtr->G, dstPtr->B, dstPtr->A));
+						*dstPtr = (ColorBgra.FromBgra ((byte)(dstPtr->R * 255 / dstPtr->A), (byte)(dstPtr->G * 255 / dstPtr->A), (byte)(dstPtr->B * 255 / dstPtr->A), dstPtr->A));
 					dstPtr++;
 				}
 
