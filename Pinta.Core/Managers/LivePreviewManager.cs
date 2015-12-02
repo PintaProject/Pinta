@@ -242,8 +242,13 @@ namespace Pinta.Core
 				PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 			
 				ctx.Operator = Cairo.Operator.Source;
-				
+		                //Set layer.BlendMode to an invalid value, because otherwise ctx.Operator is overwritten and BlendMode.Source is not supported.
+		                //This prevents BlendSurface(), which is called by layer.Draw() to change ctx.Operator.
+		                //TODO: replace this dirity fix (use of invalid BlendMode) by something better
+		                BlendMode oldBlendMode = layer.BlendMode;
+		                layer.BlendMode = (BlendMode)9999;
 				layer.Draw(ctx, live_preview_surface, 1);
+		                layer.BlendMode = oldBlendMode;
 				ctx.Restore ();
 			}
 			
