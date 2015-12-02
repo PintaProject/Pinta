@@ -34,27 +34,26 @@ namespace Pinta.Tools
 {
     public class EraserTool : BaseBrushTool
     {       
-        protected enum EraserType
+        private enum EraserType
         {
             Normal = 0,
             Smooth = 1,
         }
 
-        protected Point last_point = point_empty;
-        protected EraserType eraser_type = EraserType.Normal; 
+        private Point last_point = point_empty;
+        private EraserType eraser_type = EraserType.Normal; 
 
-        protected const int LUT_Resolution = 256;
-        protected byte[][] lut_factor = null;
-        protected ImageSurface tmp_surface = null;
+        private const int LUT_Resolution = 256;
+        private byte[][] lut_factor = null;
 
-        protected ToolBarLabel label_type = null;
-        protected ToolBarComboBox comboBox_type = null;
+        private ToolBarLabel label_type = null;
+        private ToolBarComboBox comboBox_type = null;
 
         public EraserTool ()
         {
         }
 
-        protected void initLookupTable()
+        private void initLookupTable()
         {
             if (lut_factor == null) {
                 lut_factor = new byte[LUT_Resolution + 1][];
@@ -72,17 +71,9 @@ namespace Pinta.Tools
             }
         }
 
-        protected void copySurfacePart(ImageSurface surf, Gdk.Rectangle dest_rect)
+        private ImageSurface copySurfacePart(ImageSurface surf, Gdk.Rectangle dest_rect)
         {
-            bool create = false;
-            if (tmp_surface == null)
-                create = true;
-            else
-                if ((dest_rect.Width != tmp_surface.Width) ||  (dest_rect.Height != tmp_surface.Height))
-                    create = true;
-
-            if (create)
-                tmp_surface = new ImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
+            ImageSurface tmp_surface = new ImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
             using (Context g = new Context (tmp_surface)) {
                 g.Operator = Operator.Source;
@@ -92,9 +83,10 @@ namespace Pinta.Tools
             }
             //Flush to make sure all drawing operations are finished
             tmp_surface.Flush ();
+            return tmp_surface;
         }
 
-        protected void pasteSurfacePart(Context g, Gdk.Rectangle dest_rect)
+        private void pasteSurfacePart(Context g,ImageSurface tmp_surface, Gdk.Rectangle dest_rect)
         {       
             g.Operator = Operator.Source;
             g.SetSourceSurface (tmp_surface, dest_rect.Left, dest_rect.Top);
@@ -102,7 +94,7 @@ namespace Pinta.Tools
             g.Fill ();
         }
 
-        protected void eraseNormal(Context g, PointD start, PointD end)
+        private void eraseNormal(Context g, PointD start, PointD end)
         {
             g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
@@ -149,40 +141,41 @@ namespace Pinta.Tools
 
                 if ((dest_rect.Width > 0) && (dest_rect.Height > 0)) {
                     //Allow Clipping through a temporary surface
-                    copySurfacePart (surf, dest_rect); 
+                    using (ImageSurface tmp_surface = copySurfacePart (surf, dest_rect)) {
 
-                    for (int iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
-                        ColorBgra* srcRowPtr = tmp_surface.GetRowAddressUnchecked (iy - dest_rect.Top);
-                        int dy = ((iy - y) * LUT_Resolution) / rad;
-                        if (dy < 0)
-                            dy = -dy;      
-                        byte[] lut_factor_row = lut_factor [dy];
+                        for (int iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
+                            ColorBgra* srcRowPtr = tmp_surface.GetRowAddressUnchecked (iy - dest_rect.Top);
+                            int dy = ((iy - y) * LUT_Resolution) / rad;
+                            if (dy < 0)
+                                dy = -dy;      
+                            byte[] lut_factor_row = lut_factor [dy];
 
-                        for (int ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
-                            ColorBgra col = *srcRowPtr;
-                            int dx = ((ix - x) * LUT_Resolution) / rad;
-                            if (dx < 0)
-                                dx = -dx;
-       
-                            int force = lut_factor_row [dx]; 
-                            //Note: premultiplied alpha is used!
-                            if (mouse_button == 3) {
-                                col.A = (byte)((col.A * force + bk_col_a * (255 - force)) / 255);         
-                                col.R = (byte)((col.R * force + bk_col_r * (255 - force)) / 255);
-                                col.G = (byte)((col.G * force + bk_col_g * (255 - force)) / 255);
-                                col.B = (byte)((col.B * force + bk_col_b * (255 - force)) / 255);
-                            } else {
-                                col.A = (byte)(col.A * force / 255);
-                                col.R = (byte)(col.R * force / 255);
-                                col.G = (byte)(col.G * force / 255);
-                                col.B = (byte)(col.B * force / 255);
+                            for (int ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
+                                ColorBgra col = *srcRowPtr;
+                                int dx = ((ix - x) * LUT_Resolution) / rad;
+                                if (dx < 0)
+                                    dx = -dx;
+
+                                int force = lut_factor_row [dx]; 
+                                //Note: premultiplied alpha is used!
+                                if (mouse_button == 3) {
+                                    col.A = (byte)((col.A * force + bk_col_a * (255 - force)) / 255);         
+                                    col.R = (byte)((col.R * force + bk_col_r * (255 - force)) / 255);
+                                    col.G = (byte)((col.G * force + bk_col_g * (255 - force)) / 255);
+                                    col.B = (byte)((col.B * force + bk_col_b * (255 - force)) / 255);
+                                } else {
+                                    col.A = (byte)(col.A * force / 255);
+                                    col.R = (byte)(col.R * force / 255);
+                                    col.G = (byte)(col.G * force / 255);
+                                    col.B = (byte)(col.B * force / 255);
+                                }
+                                *srcRowPtr = col;
+                                srcRowPtr++;
                             }
-                            *srcRowPtr = col;
-                            srcRowPtr++;
                         }
+                        //Draw the final result on the surface
+                        pasteSurfacePart (g, tmp_surface, dest_rect);
                     }
-                    //Draw the final result on the surface
-                    pasteSurfacePart (g, dest_rect);
                 }
             }
         }
