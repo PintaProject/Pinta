@@ -161,7 +161,7 @@ namespace Pinta.Effects
 							int green = (int)(gSum / wcSum);
 							int red = (int)(rSum / wcSum);
 
-							dstPtr->Bgra = ColorBgra.BgraToUInt32 (blue, green, red, alpha);
+                            dstPtr->Bgra = ColorBgra.BgraToUInt32 (blue*alpha/255, green*alpha/255, red*alpha/255, alpha);
 						}
 
 						++dstPtr;
@@ -244,7 +244,7 @@ namespace Pinta.Effects
 								int green = (int)(gSum / wcSum);
 								int red = (int)(rSum / wcSum);
 
-								dstPtr->Bgra = ColorBgra.BgraToUInt32 (blue, green, red, alpha);
+                                dstPtr->Bgra = ColorBgra.BgraToUInt32 (blue*alpha/255, green*alpha/255, red*alpha/255, alpha);
 							}
 
 							++dstPtr;
