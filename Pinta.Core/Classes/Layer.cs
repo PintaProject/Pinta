@@ -140,6 +140,21 @@ namespace Pinta.Core
 
 			ctx.Restore ();
 		}
+
+        public void DrawWithOperator (Context ctx, ImageSurface surface, Operator op, double opacity = 1.0, bool transform = true)
+        {
+            ctx.Save ();
+
+            if (transform)
+                ctx.Transform (Transform);
+            ctx.Operator = op;
+            ctx.SetSourceSurface (surface, 0, 0);
+            if (opacity >= 1.0)
+                ctx.Paint ();
+            else 
+                ctx.PaintWithAlpha (opacity);
+            ctx.Restore ();
+        }
 		
 		public virtual void ApplyTransform (Matrix xform, Size new_size)
 		{
