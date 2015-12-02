@@ -206,7 +206,7 @@ namespace Pinta.Tools
 			double currentOffsetRatio;
 
 			//Prevent a divide by 0 error.
-			if (currentDistance < 0d)
+			if (currentDistance <= 0d)
 			{
 				currentOffsetRatio = 0d;
 			}
@@ -225,7 +225,7 @@ namespace Pinta.Tools
 			double nextOffsetRatio;
 
 			//Prevent a divide by 0 error.
-			if (nextDistance < 0d)
+			if (nextDistance <= 0d)
 			{
 				nextOffsetRatio = 0d;
 			}
