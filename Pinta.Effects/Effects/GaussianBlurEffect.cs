@@ -134,10 +134,12 @@ namespace Pinta.Effects
 										wcSums[wx] += wp;
 										wp >>= 8;
 
-										aSums[wx] += wp * c.A;
-										bSums[wx] += wp * c.B;
-										gSums[wx] += wp * c.G;
-										rSums[wx] += wp * c.R;
+                                        if (c.A > 0) {
+                                            aSums[wx] += wp * c.A;
+                                            bSums [wx] += wp * c.B * 255 / c.A;
+                                            gSums [wx] += wp * c.G * 255 / c.A;
+                                            rSums [wx] += wp * c.R * 255 / c.A;
+                                        }
 									}
 								}
 
@@ -218,10 +220,12 @@ namespace Pinta.Effects
 										wcSums[wx] += wp;
 										wp >>= 8;
 
-										aSums[wx] += wp * (long)c.A;
-										bSums[wx] += wp * (long)c.B;
-										gSums[wx] += wp * (long)c.G;
-										rSums[wx] += wp * (long)c.R;
+                                        if (c.A > 0) {
+                                            aSums [wx] += wp * (long)c.A;
+                                            bSums [wx] += wp * (long)c.B * 255 / c.A;
+                                            gSums [wx] += wp * (long)c.G * 255 / c.A;
+                                            rSums [wx] += wp * (long)c.R * 255 / c.A;
+                                        }
 									}
 								}
 
