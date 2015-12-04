@@ -250,7 +250,10 @@ namespace Pinta.Core
         {
             public override ColorBgra Apply(ColorBgra color)
             {
-                return ColorBgra.FromBgra((byte)(255 - color.B), (byte)(255 - color.G), (byte)(255 - color.R), color.A);
+                //Note: Cairo images use premultiplied alpha values
+                //The formula for changing B would be: (255 - B * 255 / A) * A / 255
+                //This can be simplified to: A - B
+                return ColorBgra.FromBgra((byte)(color.A - color.B), (byte)(color.A - color.G), (byte)(color.A - color.R), color.A);
             }
         }
 
