@@ -652,6 +652,38 @@ namespace Pinta.Core
             return ColorBgra.FromUInt32(uint32);
         }
 
+        /// <summary>
+        /// Brings the color channels from straight alpha in premultiplied alpha form.
+        /// This is required for direct memory manipulation when writing on Cairo surfaces
+        /// as it internally uses the premultiplied alpha form.
+        /// See:
+        /// https://en.wikipedia.org/wiki/Alpha_compositing
+        /// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
+        /// </summary>
+        /// <returns>A ColorBgra value in premultiplied alpha form</returns> 
+        public ColorBgra ToPremultipliedAlpha()
+        {
+            return ColorBgra.FromBgra((byte)(B * A / 255), (byte)(G * A / 255), (byte)(R * A / 255), A);
+        }
+
+        /// <summary>
+        /// Brings the color channels from premultiplied alpha in straight alpha form.
+        /// This is required for direct memory manipulation when reading from Cairo surfaces
+        /// as it internally uses the premultiplied alpha form.
+        /// Note: It is expected that the R,G,B-values are less or equal to the A-values (as it is always the case in premultiplied alpha form)
+        /// See:
+        /// https://en.wikipedia.org/wiki/Alpha_compositing
+        /// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
+        /// </summary>
+        /// <returns>A ColorBgra value in straight alpha form</returns> 
+        public ColorBgra ToStraightAlpha()
+        {
+            if (this.A > 0)
+                return ColorBgra.FromBgra((byte)(B * 255 / A), (byte)(G * 255 / A), (byte)(R * 255 / A), A);
+            else
+                return ColorBgra.Zero;
+        }
+
 	//// Colors: copied from System.Drawing.Color's list (don't worry I didn't type it in 
 	//// manually, I used a code generator w/ reflection ...)
 
