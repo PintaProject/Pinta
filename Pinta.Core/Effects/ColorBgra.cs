@@ -613,6 +613,48 @@ namespace Pinta.Core
             return ColorBgra.FromBgra(b, g, r, a);
         }
 
+        /// <summary>
+        /// Smoothly blends the given colors together, assuming equal weighting for each one.
+        /// It is assumed that pre-multiplied alpha is used.
+        /// </summary>
+        public static unsafe ColorBgra BlendPremultiplied(ColorBgra* colors, int count)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count", "must be 0 or greater");
+
+            if (count == 0)
+                return ColorBgra.Transparent;
+
+            ulong a_sum = 0;
+            for (var i = 0; i < count; ++i)
+                a_sum += (ulong)colors[i].A;
+
+            byte b = 0;
+            byte g = 0;
+            byte r = 0;
+            byte a = (byte)(a_sum / (ulong)count);
+
+            if (a_sum != 0)
+            {
+                ulong b_sum = 0;
+                ulong g_sum = 0;
+                ulong r_sum = 0;
+
+                for (var i = 0; i < count; ++i)
+                {
+                    b_sum += (ulong)(colors[i].B);
+                    g_sum += (ulong)(colors[i].G);
+                    r_sum += (ulong)(colors[i].R);
+                }
+
+                b = (byte)(b_sum / (ulong)count);
+                g = (byte)(g_sum / (ulong)count);
+                r = (byte)(r_sum / (ulong)count);
+            }
+
+            return ColorBgra.FromBgra(b, g, r, a);
+        }
+
         public override string ToString()
         {
             return "B: " + B + ", G: " + G + ", R: " + R + ", A: " + A;

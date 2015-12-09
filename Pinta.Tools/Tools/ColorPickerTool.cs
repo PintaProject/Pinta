@@ -215,8 +215,11 @@ namespace Pinta.Tools
 		{
 			var pixels = GetPixelsFromPoint (point);
 
-			fixed (ColorBgra* ptr = pixels)
-				return ColorBgra.Blend (ptr, pixels.Length).ToCairoColor ();
+		    fixed (ColorBgra* ptr = pixels)
+		    {
+		        var color = ColorBgra.BlendPremultiplied (ptr, pixels.Length);
+		        return color.ToStraightAlpha ().ToCairoColor ();
+		    }
 		}
 
 		private ColorBgra[] GetPixelsFromPoint (PointD point)

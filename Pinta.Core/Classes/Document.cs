@@ -497,7 +497,7 @@ namespace Pinta.Core
             using (var dst = new ImageSurface (Format.Argb32, 1, 1)) {
                 using (var g = new Context (dst)) {
 			        foreach (var layer in GetLayersToPaint ()) {
-                        var color = layer.Surface.GetColorBgraUnchecked (x, y).ToCairoColor ();
+                        var color = layer.Surface.GetColorBgraUnchecked (x, y).ToStraightAlpha ().ToCairoColor ();
 
                         g.SetBlendMode (layer.BlendMode);
                         g.SetSourceColor (color);
@@ -507,7 +507,7 @@ namespace Pinta.Core
                     }
                 }
 
-                return dst.GetPixel (0, 0).ToColorBgra ();
+                return dst.GetColorBgraUnchecked (0, 0);
             }
 		}
 
