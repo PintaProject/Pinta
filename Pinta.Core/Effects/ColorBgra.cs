@@ -200,24 +200,6 @@ namespace Pinta.Core
         /// <summary>
         /// Creates a new ColorBgra instance with the given color and alpha values.
         /// </summary>
-        [Obsolete ("Use FromBgra() instead (make sure to swap the order of your b and r parameters)")]
-        public static ColorBgra FromRgba(byte r, byte g, byte b, byte a)
-        {
-            return FromBgra(b, g, r, a);
-        }
-
-        /// <summary>
-        /// Creates a new ColorBgra instance with the given color values, and 255 for alpha.
-        /// </summary>
-        [Obsolete ("Use FromBgr() instead (make sure to swap the order of your b and r parameters)")]
-        public static ColorBgra FromRgb(byte r, byte g, byte b)
-        {
-            return FromBgr(b, g, r);
-        }
-
-        /// <summary>
-        /// Creates a new ColorBgra instance with the given color and alpha values.
-        /// </summary>
         public static ColorBgra FromBgra(byte b, byte g, byte r, byte a)
         {
             ColorBgra color = new ColorBgra();
@@ -249,7 +231,7 @@ namespace Pinta.Core
                 ClampToByte(a));
         }
 
-		        public static byte ClampToByte(float x) 
+        public static byte ClampToByte(float x)
         {
             if (x > 255)
             {
@@ -298,7 +280,7 @@ namespace Pinta.Core
             return color;
         }
 
-		        public static byte ClampToByte(int x) 
+        public static byte ClampToByte(int x)
         {
             if (x > 255)
             {
@@ -364,7 +346,7 @@ namespace Pinta.Core
 
             return ret;
         }
-		        public static float Lerp(float from, float to, float frac) 
+        public static float Lerp(float from, float to, float frac)
         {
             return (from + frac * (to - from));
         }
@@ -394,7 +376,7 @@ namespace Pinta.Core
 
             return ret;
         }
-		        public static byte ClampToByte(double x) 
+        public static byte ClampToByte(double x)
         {
             if (x > 255)
             {
