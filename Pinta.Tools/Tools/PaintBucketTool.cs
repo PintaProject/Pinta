@@ -76,7 +76,7 @@ namespace Pinta.Tools
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
 			hist.TakeSnapshotOfLayer (doc.CurrentUserLayer);
 
-			ColorBgra color = fill_color.ToColorBgra ();
+			ColorBgra color = fill_color.ToColorBgra ().ToPremultipliedAlpha ();
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
 			int width = surf.Width;
 
