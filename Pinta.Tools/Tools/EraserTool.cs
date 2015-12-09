@@ -118,10 +118,9 @@ namespace Pinta.Tools
             g.Stroke ();
         }
 
-        protected unsafe void eraseSmooth(Context g, PointD start, PointD end)
+        protected unsafe void eraseSmooth(ImageSurface surf, Context g, PointD start, PointD end)
         {
             int rad = (int)(BrushWidth / 2.0) + 1;
-            ImageSurface surf = (ImageSurface)g.GetTarget();
             //Premultiply with alpha value
             byte bk_col_a = (byte)(PintaCore.Palette.SecondaryColor.A * 255.0);
             byte bk_col_r = (byte)(PintaCore.Palette.SecondaryColor.R * bk_col_a);
@@ -238,7 +237,8 @@ namespace Pinta.Tools
             if (doc.Workspace.PointInCanvas (new_pointd))
                 surface_modified = true;
 
-            using (Context g = new Context (doc.CurrentUserLayer.Surface)) {
+            var surf = doc.CurrentUserLayer.Surface;
+            using (Context g = new Context (surf)) {
 
                 g.AppendPath (doc.Selection.SelectionPath);
                 g.FillRule = FillRule.EvenOdd;
@@ -249,7 +249,7 @@ namespace Pinta.Tools
                     eraseNormal (g, last_pointd, new_pointd);
                 }
                 else if (eraser_type == EraserType.Smooth) {
-                    eraseSmooth(g, last_pointd, new_pointd);
+                    eraseSmooth(surf, g, last_pointd, new_pointd);
                 }
             }
 
