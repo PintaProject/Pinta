@@ -241,9 +241,7 @@ namespace Pinta.Core
 				ctx.Save ();
 				PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 			
-				ctx.Operator = Cairo.Operator.Source;
-				
-				layer.Draw(ctx, live_preview_surface, 1);
+                layer.DrawWithOperator(ctx, live_preview_surface, Cairo.Operator.Source);
 				ctx.Restore ();
 			}
 			

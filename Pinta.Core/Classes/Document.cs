@@ -421,7 +421,9 @@ namespace Pinta.Core
 			Layer layer = SelectionLayer;
 
 			using (Cairo.Context g = new Cairo.Context (CurrentUserLayer.Surface)) {
-				layer.Draw(g);
+				//layer.Draw(g);
+                selection.Clip (g);
+                layer.DrawWithOperator(g, layer.Surface, Operator.Source, 1.0f, true);
 			}
 
 			DestroySelectionLayer ();
@@ -538,7 +540,7 @@ namespace Pinta.Core
 					if (!ToolLayer.Hidden && include_tool_layer)
 						paint.Add (ToolLayer);
 
-					if (ShowSelectionLayer)
+					if (ShowSelectionLayer && (!SelectionLayer.Hidden))
 						paint.Add (SelectionLayer);
 				}
 

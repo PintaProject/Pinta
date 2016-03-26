@@ -72,10 +72,13 @@ namespace Pinta.Actions
 			} else {
 
 				var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
+                var selectionLayer = PintaCore.Workspace.ActiveDocument.SelectionLayer;
 				var initial = dialog.InitialLayerProperties;
 				initial.SetProperties (layer);
+                if (selectionLayer != null)
+                    initial.SetProperties (selectionLayer);
 
-				if (layer.Opacity != initial.Opacity)
+				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden)) 
 					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 			}
 

@@ -84,6 +84,10 @@ namespace Pinta.Tools
 				// Copy the selection to the temp layer
 				doc.CreateSelectionLayer ();
 				doc.ShowSelectionLayer = true;
+				//Use same BlendMode, Opacity and Visibility for SelectionLayer
+				doc.SelectionLayer.BlendMode = doc.CurrentUserLayer.BlendMode;
+				doc.SelectionLayer.Opacity = doc.CurrentUserLayer.Opacity;
+				doc.SelectionLayer.Hidden = doc.CurrentUserLayer.Hidden;					
 
 				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
 					g.AppendPath (doc.Selection.SelectionPath);
