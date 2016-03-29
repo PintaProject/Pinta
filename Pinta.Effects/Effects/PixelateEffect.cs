@@ -56,9 +56,9 @@ namespace Pinta.Effects
 			int top = cell.Top;
 			
 			ColorBgra colorTopLeft = src.GetColorBgraUnchecked (left, top).ToStraightAlpha();
-            ColorBgra colorTopRight = src.GetColorBgraUnchecked (right, top).ToStraightAlpha();
-            ColorBgra colorBottomLeft = src.GetColorBgraUnchecked (left, bottom).ToStraightAlpha();
-            ColorBgra colorBottomRight = src.GetColorBgraUnchecked (right, bottom).ToStraightAlpha();
+			ColorBgra colorTopRight = src.GetColorBgraUnchecked (right, top).ToStraightAlpha();
+			ColorBgra colorBottomLeft = src.GetColorBgraUnchecked (left, bottom).ToStraightAlpha();
+			ColorBgra colorBottomRight = src.GetColorBgraUnchecked (right, bottom).ToStraightAlpha();
 			
 			ColorBgra c = ColorBgra.BlendColors4W16IP (colorTopLeft, 16384, colorTopRight, 16384, colorBottomLeft, 16384, colorBottomRight, 16384);
 			
