@@ -27,45 +27,80 @@
 using System;
 using System.IO;
 using Gdk;
+using System.Reflection;
 
 namespace Pinta.Resources
 {
 	public static class ResourceLoader
 	{
+
+		private static bool HasResource(Assembly asm, string name)
+		{
+			string[] resources = asm.GetManifestResourceNames ();
+
+			if (Array.IndexOf (resources, name) > -1)
+				return true;
+			else
+				return false;
+		}
+
 		public static Pixbuf GetIcon (string name, int size)
 		{
+			Gdk.Pixbuf result = null;
 			try {
 				// First see if it's a built-in gtk icon, like gtk-new.
 				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
 				using (var icon_set = Gtk.Widget.DefaultStyle.LookupIconSet (name)) {
 					if (icon_set != null) {
-						return icon_set.RenderIcon (Gtk.Widget.DefaultStyle, Gtk.Widget.DefaultDirection,
+						result = icon_set.RenderIcon (Gtk.Widget.DefaultStyle, Gtk.Widget.DefaultDirection,
 							Gtk.StateType.Normal, GetIconSize (size), null, null);
 					}
 				}
-
 				// Otherwise, get it from our embedded resources.
-				return Gdk.Pixbuf.LoadFromResource (name);
+				if (result == null) {
+
+					if (HasResource(Assembly.GetExecutingAssembly(), name)) //Assembly.GetCallingAssembly() is wrong here!
+						result = Gdk.Pixbuf.LoadFromResource (name);
+				}
+
+				//Maybe we can find the icon in the resource of a different assembly (e.g. Plugin)
+				if (result == null) {
+					foreach (System.Reflection.Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+					{
+						if (HasResource(asm, name))
+							result = new Pixbuf(asm, name);
+					}
+				}
 			}
 			catch (Exception ex) {
-				// Ensure that we don't crash if an icon is missing for some reason.
 				System.Console.Error.WriteLine (ex.Message);
-
-				// Try to return gtk's default missing image
-				if (name != Gtk.Stock.MissingImage)
-					return GetIcon (Gtk.Stock.MissingImage, size);
-
-				// If gtk is missing it's "missing image", we'll create one on the fly
-				return CreateMissingImage (size);
 			}
+
+			// Ensure that we don't crash if an icon is missing for some reason.
+			if (result == null) {
+				try
+				{
+					// Try to return gtk's default missing image
+					if (name != Gtk.Stock.MissingImage) {
+						result = GetIcon (Gtk.Stock.MissingImage, size);
+					} else {
+						// If gtk is missing it's "missing image", we'll create one on the fly
+						result = CreateMissingImage (size);
+					}
+				}
+				catch (Exception ex) {
+					System.Console.Error.WriteLine (ex.Message);
+				}
+			}
+			return result;
 		}
 
-        public static Stream GetResourceIconStream (string name)
-        {
-            var ass = typeof (Pinta.Resources.ResourceLoader).Assembly;
+		public static Stream GetResourceIconStream (string name)
+		{
+			var ass = typeof (Pinta.Resources.ResourceLoader).Assembly;
 
-            return ass.GetManifestResourceStream (name);
-        }
+			return ass.GetManifestResourceStream (name);
+		}
 
 		// From MonoDevelop:
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
