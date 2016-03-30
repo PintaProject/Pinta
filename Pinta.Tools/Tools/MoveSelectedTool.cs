@@ -49,7 +49,7 @@ namespace Pinta.Tools
 			get { return Catalog.GetString ("Left click and drag the selection to move selected content. Right click and drag the selection to rotate selected content."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
-            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }
+			get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
 		public override int Priority { get { return 7; } }
@@ -70,8 +70,8 @@ namespace Pinta.Tools
 
 			// If there is no selection, select the whole image.
 			if (doc.Selection.SelectionPolygons.Count == 0) {
-                doc.Selection.CreateRectangleSelection (
-                    new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
+				doc.Selection.CreateRectangleSelection (
+					new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
 			}
 
 			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
@@ -119,7 +119,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.Selection.SelectionClipper.Clear ();
 			doc.Selection.SelectionPolygons = newSelectionPolygons;
-            doc.Selection.MarkDirty ();
+			doc.Selection.MarkDirty ();
 
 			doc.ShowSelection = true;
 			doc.SelectionLayer.Transform.InitMatrix (original_transform);
