@@ -118,11 +118,11 @@ namespace Pinta
 		{
 			hidden = !visibilityCheckbox.Active;
 			PintaCore.Layers.CurrentLayer.Hidden = hidden;
-            if (PintaCore.Layers.SelectionLayer != null) {
-				//Update Visiblity for SelectionLayer and force redraw            
-                PintaCore.Layers.SelectionLayer.Hidden = PintaCore.Layers.CurrentLayer.Hidden;
-            }
-            PintaCore.Workspace.Invalidate ();
+			if (PintaCore.Layers.SelectionLayer != null) {
+				//Update Visiblity for SelectionLayer and force redraw			
+				PintaCore.Layers.SelectionLayer.Hidden = PintaCore.Layers.CurrentLayer.Hidden;
+			}
+			PintaCore.Workspace.Invalidate ();
 		}
 		
 		private void OnOpacitySliderChanged (object sender, EventArgs e)
@@ -142,22 +142,22 @@ namespace Pinta
 			//TODO check redraws are being throttled.
 			opacity = opacitySpinner.Value / 100d;
 			PintaCore.Layers.CurrentLayer.Opacity = opacity;
-            if (PintaCore.Layers.SelectionLayer != null) {
-				//Update Opacity for SelectionLayer and force redraw            
-                PintaCore.Layers.SelectionLayer.Opacity = PintaCore.Layers.CurrentLayer.Opacity;
-            }
-            PintaCore.Workspace.Invalidate ();		
+			if (PintaCore.Layers.SelectionLayer != null) {
+				//Update Opacity for SelectionLayer and force redraw			
+				PintaCore.Layers.SelectionLayer.Opacity = PintaCore.Layers.CurrentLayer.Opacity;
+			}
+			PintaCore.Workspace.Invalidate ();		
 		}
 
 		private void OnBlendModeChanged (object sender, EventArgs e)
 		{
 			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.ActiveText);
 			PintaCore.Layers.CurrentLayer.BlendMode = blendmode;
-            if (PintaCore.Layers.SelectionLayer != null) {
+			if (PintaCore.Layers.SelectionLayer != null) {
 				//Update BlendMode for SelectionLayer and force redraw
-                PintaCore.Layers.SelectionLayer.BlendMode = PintaCore.Layers.CurrentLayer.BlendMode;     
-            }
-            PintaCore.Workspace.Invalidate ();		
+				PintaCore.Layers.SelectionLayer.BlendMode = PintaCore.Layers.CurrentLayer.BlendMode;	 
+			}
+			PintaCore.Workspace.Invalidate ();		
 		}
 
 		private void Build ()
