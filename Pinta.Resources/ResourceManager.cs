@@ -28,6 +28,7 @@ using System;
 using System.IO;
 using Gdk;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Pinta.Resources
 {
@@ -44,6 +45,7 @@ namespace Pinta.Resources
 				return false;
 		}
 
+		[MethodImpl(MethodImplOptions.NoInlining)]
 		public static Pixbuf GetIcon (string name, int size)
 		{
 			Gdk.Pixbuf result = null;
