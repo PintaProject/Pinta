@@ -89,6 +89,7 @@
     <Compile Include="Classes\Re-editable\Text\TextPosition.cs" />
     <Compile Include="Classes\SurfaceDiff.cs" />
     <Compile Include="Classes\DocumentSelection.cs" />
+    <Compile Include="Clipper\ClipperBase.cs" />
     <Compile Include="Enumerations\TextMode.cs" />
     <Compile Include="Enumerations\TextAlignment.cs" />
     <Compile Include="Classes\Re-editable\Text\TextEngine.cs" />
