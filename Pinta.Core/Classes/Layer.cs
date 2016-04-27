@@ -133,27 +133,42 @@ namespace Pinta.Core
 		{
 			ctx.Save ();
 
-            if (transform)
-			    ctx.Transform (Transform);
+			if (transform)
+				ctx.Transform (Transform);
 
-            ctx.BlendSurface (surface, BlendMode, opacity);
+			ctx.BlendSurface (surface, BlendMode, opacity);
 
+			ctx.Restore ();
+		}
+
+		public void DrawWithOperator (Context ctx, ImageSurface surface, Operator op, double opacity = 1.0, bool transform = true)
+		{
+			ctx.Save ();
+
+			if (transform)
+				ctx.Transform (Transform);
+			ctx.Operator = op;
+			ctx.SetSourceSurface (surface, 0, 0);
+			if (opacity >= 1.0)
+				ctx.Paint ();
+			else 
+				ctx.PaintWithAlpha (opacity);
 			ctx.Restore ();
 		}
 		
 		public virtual void ApplyTransform (Matrix xform, Size new_size)
 		{
-		    var old_size = PintaCore.Workspace.ImageSize;
-		    var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+			var old_size = PintaCore.Workspace.ImageSize;
+			var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
 			using (var g = new Context (dest))
 			{
-                g.Transform (xform);
-			    g.SetSource (Surface);
+				g.Transform (xform);
+				g.SetSource (Surface);
 				g.Paint ();
 			}
 			
 			Surface old = Surface;
-		    Surface = dest;
+			Surface = dest;
 			old.Dispose ();
 		}
 
@@ -271,13 +286,13 @@ namespace Pinta.Core
 				g.Translate (-rect.X, -rect.Y);
 				g.Antialias = Antialias.None;
 
-                // Optionally, respect the given path.
-                if (selection != null)
-                {
-                    g.AppendPath (selection);
-                    g.FillRule = Cairo.FillRule.EvenOdd;
-                    g.Clip ();
-                }
+				// Optionally, respect the given path.
+				if (selection != null)
+				{
+					g.AppendPath (selection);
+					g.FillRule = Cairo.FillRule.EvenOdd;
+					g.Clip ();
+				}
 
 				g.SetSource (Surface);
 				g.Paint ();

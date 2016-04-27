@@ -87,8 +87,8 @@ namespace Pinta.Core
 
 			//TODO Use the current tool layer instead.
 			live_preview_surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
-			                                  PintaCore.Workspace.ImageSize.Width,
-			                                  PintaCore.Workspace.ImageSize.Height);
+											  PintaCore.Workspace.ImageSize.Width,
+											  PintaCore.Workspace.ImageSize.Height);
 
 			// Handle selection path.
 			PintaCore.Tools.Commit ();
@@ -241,9 +241,7 @@ namespace Pinta.Core
 				ctx.Save ();
 				PintaCore.Workspace.ActiveDocument.Selection.Clip (ctx);
 			
-				ctx.Operator = Cairo.Operator.Source;
-				
-				layer.Draw(ctx, live_preview_surface, 1);
+				layer.DrawWithOperator(ctx, live_preview_surface, Cairo.Operator.Source);
 				ctx.Restore ();
 			}
 			
@@ -383,7 +381,7 @@ namespace Pinta.Core
 			int height = (int)Math.Ceiling (y2) - y;
 
 			// Tell GTK to expose the drawing area.			
-            PintaCore.Workspace.ActiveWorkspace.Canvas.QueueDrawArea (x, y, width, height);
+			PintaCore.Workspace.ActiveWorkspace.Canvas.QueueDrawArea (x, y, width, height);
 		}	
 	}
 }
