@@ -912,6 +912,8 @@ namespace Pinta.Tools
 		{
 			is_editing = true;
 
+            imContext.ClientWindow = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+
 			if (selection == null)
 				selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
 
@@ -931,6 +933,8 @@ namespace Pinta.Tools
 
 		private void StopEditing(bool finalize)
 		{
+            imContext.ClientWindow = null;
+
 			if (!PintaCore.Workspace.HasOpenDocuments)
 				return;
 
