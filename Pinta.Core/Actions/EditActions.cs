@@ -72,7 +72,7 @@ namespace Pinta.Core
 			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
 			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
 			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
-			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Delete Selection"), null, "Menu.Edit.EraseSelection.png");
+			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
 			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
 			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
 			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
