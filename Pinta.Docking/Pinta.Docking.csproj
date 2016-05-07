@@ -1,49 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!-- Common configuration -->
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8467329A-1BDC-4F21-8349-3E484C185D14}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pinta.Docking</RootNamespace>
     <AssemblyName>Pinta.Docking</AssemblyName>
+    <RootNamespace>Pinta.Docking</RootNamespace>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ErrorReport>prompt</ErrorReport>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <NoWarn>1591</NoWarn>
+    <OutputPath>..\bin</OutputPath>
+    <Platform>AnyCPU</Platform>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
+  <!-- Debug configuration -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
+    <DefineConstants>DEBUG</DefineConstants>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <!-- Release configuration -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <!-- References -->
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
+    <Reference Condition=" '$(PINTA_MONO_POSIX_2)' == '' " Include="Mono.Posix" />
+    <Reference Condition=" '$(PINTA_MONO_POSIX_2)' != '' " Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
+
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Cairo" />
-    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
+
+  <!-- Source files -->
   <ItemGroup>
     <Compile Include="Classes\MouseTracker.cs" />
     <Compile Include="Classes\Platform.cs" />
@@ -92,9 +98,9 @@
     <Compile Include="DockToolbars\FloatingPosition.cs" />
     <Compile Include="DockToolbars\IDockBar.cs" />
     <Compile Include="DockToolbars\PlaceholderWindow.cs" />
+    <Compile Include="Extensions\CairoExtensions.cs" />
     <Compile Include="Extensions\GdkExtensions.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
-    <Compile Include="Extensions\CairoExtensions.cs" />
     <Compile Include="Extensions\GtkWorkarounds.cs" />
     <Compile Include="Extensions\PangoUtil.cs" />
     <Compile Include="MonoDevelop.Components\ExtendedLabel.cs" />
@@ -123,6 +129,8 @@
     <Compile Include="Xwt\Rectangle.cs" />
     <Compile Include="Xwt\Size.cs" />
   </ItemGroup>
+
+  <!-- Resources -->
   <ItemGroup>
     <EmbeddedResource Include="DockLibrary\icons\pad-close-9%402x.png">
       <LogicalName>pad-close-9%402x.png</LogicalName>
@@ -161,12 +169,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
