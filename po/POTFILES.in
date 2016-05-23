@@ -68,12 +68,8 @@ Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs
 Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs
-Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs
-Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs
-Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs
-Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs
-Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs
 Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs
+Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs
 Pinta.Tools/Brushes/CircleBrush.cs
 Pinta.Tools/Brushes/GridBrush.cs
