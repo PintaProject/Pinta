@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-22 23:02-0500\n"
-"PO-Revision-Date: 2014-07-17 21:21+0000\n"
+"POT-Creation-Date: 2016-05-23 18:07-0500\n"
+"PO-Revision-Date: 2015-03-16 08:36+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2015-03-01 22:08+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2016-06-04 22:53+0000\n"
+"X-Generator: Launchpad (build 18086)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -60,13 +60,13 @@ msgid "Copy Merged"
 msgstr "Eilad toueziet"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
-#: ../Pinta.Core/Classes/Document.cs:768
+#: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
 msgstr "Pegañ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
-#: ../Pinta.Core/Classes/Document.cs:764
+#: ../Pinta.Core/Classes/Document.cs:790
 msgid "Paste Into New Layer"
 msgstr "Pegañ war un dreuzfollenn nevez"
 
@@ -75,8 +75,9 @@ msgid "Paste Into New Image"
 msgstr "Pegañ war ur skeudenn nevez"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-msgid "Delete Selection"
-msgstr "Dilemel an diuzad"
+#: ../Pinta.Core/Actions/EditActions.cs:218
+msgid "Erase Selection"
+msgstr "Diverkañ an diuzad"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
@@ -84,7 +85,7 @@ msgid "Fill Selection"
 msgstr "Leuniañ an diuzad"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:418
+#: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Invert Selection"
 msgstr "Tuginañ an diuzad"
 
@@ -115,33 +116,29 @@ msgstr "Adderaouekaat"
 msgid "Set Number of Colors"
 msgstr "Arventennañ niver al livioù"
 
-#: ../Pinta.Core/Actions/EditActions.cs:125
-#: ../Pinta/Pads/ColorPalettePad.cs:42 ../Pinta/Pads/ColorPalettePad.cs:49
+#: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
+#: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
 msgstr "Livaoueg"
-
-#: ../Pinta.Core/Actions/EditActions.cs:218
-msgid "Erase Selection"
-msgstr "Diverkañ an diuzad"
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
 msgstr "Diziuzañ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:327
+#: ../Pinta.Core/Actions/EditActions.cs:323
 msgid "Open Palette File"
 msgstr "Digeriñ ur restr livaoueg"
 
-#: ../Pinta.Core/Actions/EditActions.cs:334
+#: ../Pinta.Core/Actions/EditActions.cs:330
 msgid "Palette files (*.txt, *.gpl)"
 msgstr "Restroù livaouegoù (*.txt, *.gpl)"
 
-#: ../Pinta.Core/Actions/EditActions.cs:338
+#: ../Pinta.Core/Actions/EditActions.cs:334
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "An holl restroù"
 
-#: ../Pinta.Core/Actions/EditActions.cs:354
+#: ../Pinta.Core/Actions/EditActions.cs:350
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
@@ -150,21 +147,21 @@ msgstr ""
 "N'hall ket digeriñ ar restr livaoueg : {0}.\n"
 "Gwiriit emaoc'h o klask digeriñ ul livaoueg talvoudek mod GIMP pe Paint.NET."
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
 msgstr "Fazi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Save Palette File"
 msgstr "Enrollañ ar restr livaoueg"
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Paint.NET palette (*.txt)"
 msgstr "Livaoueg mod Paint.NET (*.txt)"
 
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "GIMP palette (*.gpl)"
 msgstr "Livaoueg mod GIMP (*.gpl)"
 
@@ -181,6 +178,7 @@ msgid "Open Recent"
 msgstr "Digeriñ ur restr krouet nevez zo"
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
 msgid "Close"
 msgstr "Serriñ"
 
@@ -204,72 +202,76 @@ msgstr "Nevez"
 msgid "Open"
 msgstr "Digeriñ"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:50
+#: ../Pinta.Core/Actions/HelpActions.cs:52
+msgid "Contents"
+msgstr "Endalc'hadoù"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
 msgstr "Lec'hienn Pinta"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:51
+#: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
 msgstr "Kas un danevell a-zivout ur beug"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:52
+#: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
 msgstr "Treiñ an arload-mañ"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:240
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
 msgid "About"
 msgstr "Diwar-benn"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/ImageActions.cs:279
+#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:283
 msgid "Crop to Selection"
 msgstr "Didroc'hañ ouzh an diuzad"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:61
 msgid "Auto Crop"
 msgstr "Didroc'hañ emgefreek"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:61
+#: ../Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Image..."
 msgstr "Adventañ ar skeudenn..."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:62
+#: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
 msgstr "Adventañ ar steuenn..."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:63
+#: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
 msgstr "Gwintañ a-blaen"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:64
+#: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:71
 msgid "Flip Vertical"
 msgstr "Gwintañ a-serzh"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:65
+#: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
 msgstr "C'hwelañ dre 90° gant roud ar bizied"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:66
+#: ../Pinta.Core/Actions/ImageActions.cs:67
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "C'hwelañ dre 90° gant roud gin ar bizied"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:67
+#: ../Pinta.Core/Actions/ImageActions.cs:68
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
 msgstr "C'hwelañ  dre 180°"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:68
-#: ../Pinta.Core/Actions/ImageActions.cs:137
+#: ../Pinta.Core/Actions/ImageActions.cs:69
+#: ../Pinta.Core/Actions/ImageActions.cs:138
 msgid "Flatten"
 msgstr "Plataat"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:826
+#: ../Pinta.Core/Classes/Document.cs:852
 msgid "Add New Layer"
 msgstr "Ouzhpennañ un dreuzfollenn nevez"
 
@@ -319,71 +321,75 @@ msgstr "Digeriñ ur restr skeudenn"
 msgid "Import From File"
 msgstr "Enporzhiañ diouzh ur restr"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom In"
 msgstr "Zoum brasaat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom Out"
 msgstr "Zoum bihanaat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
 msgstr "Ment peurvat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
 msgstr "Zoumañ da framm an diuzad"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
 msgstr "Ment reizh"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:81
+#: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
 msgstr "Barrenn ostilhoù"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:82
+#: ../Pinta.Core/Actions/ViewActions.cs:83
+msgid "Image Tabs"
+msgstr "Ivinelloù skeudennoù"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
 msgstr "Kael ar pikselioù"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:83
+#: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Rulers"
 msgstr "Reolennoù"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:84
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Pixels"
 msgstr "Pikselioù"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:85
+#: ../Pinta.Core/Actions/ViewActions.cs:87
 msgid "Inches"
 msgstr "Meutadoù"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:88
 msgid "Centimeters"
 msgstr "Kentimetroù"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:87
+#: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
 msgstr "Skrammad a-bezh"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:113
-#: ../Pinta.Core/Actions/ViewActions.cs:272
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:299
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:307
+#: ../Pinta.Core/Actions/ViewActions.cs:115
+#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
 msgstr "Prenestr"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:155
+#: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
 msgstr "Unanennoù ar reolenn"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -393,57 +399,57 @@ msgstr "Enrollañ an holl anezho"
 msgid "Close All"
 msgstr "Serriñ an holl anezho"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:251
+#: ../Pinta.Core/Classes/BaseTool.cs:244
 msgid "Tool"
 msgstr "Benveg"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:327
+#: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
 msgstr "Berradenn glavier"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:436
+#: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
 msgstr "Meskadur reizh"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:437
+#: ../Pinta.Core/Classes/BaseTool.cs:429
 msgid "Overwrite"
 msgstr "Flastrañ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:451
+#: ../Pinta.Core/Classes/BaseTool.cs:443
 msgid "Antialiasing On"
 msgstr "Gweredekaat al lufrañ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:452
+#: ../Pinta.Core/Classes/BaseTool.cs:444
 msgid "Antialiasing Off"
 msgstr "Diweredekaat al lufrañ"
 
-#: ../Pinta.Core/Classes/Document.cs:286 ../Pinta.Core/Classes/Document.cs:291
+#: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Treuzfollenn"
 
-#: ../Pinta.Core/Classes/Document.cs:373
+#: ../Pinta.Core/Classes/Document.cs:392
 msgid "copy"
 msgstr "eilañ"
 
-#: ../Pinta.Core/Classes/Document.cs:641
+#: ../Pinta.Core/Classes/Document.cs:668
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr "Adventañ ar steuenn"
 
-#: ../Pinta.Core/Classes/Document.cs:842
+#: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr "Dilec'hiañ ar pikselioù bet diuzet"
 
-#: ../Pinta.Core/Classes/Document.cs:860
+#: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
 msgstr "Brasoc'h eo ar skeudenn eget ar steuenn"
 
-#: ../Pinta.Core/Classes/Document.cs:861
+#: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
@@ -451,19 +457,19 @@ msgstr ""
 "Brasoc'h eo ar skeudenn bet peget eget ment ar steuenn. Petra a fell deoc'h "
 "ober ?"
 
-#: ../Pinta.Core/Classes/Document.cs:865
+#: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
 msgstr "Astenn ar steuenn"
 
-#: ../Pinta.Core/Classes/Document.cs:866
+#: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
 msgstr "Arabat kemm ment ar steuenn"
 
-#: ../Pinta.Core/Classes/Document.cs:879
+#: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
 msgstr "N'haller ket pegañ ar skeudenn"
 
-#: ../Pinta.Core/Classes/Document.cs:880
+#: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
 msgstr "N'eus skeudenn ebet e-barzh ar golver."
 
@@ -491,65 +497,74 @@ msgstr "Kenskejañ (Pennlizh. + klik a-gleiz)"
 msgid " Selection Mode: "
 msgstr " Rizh diuzañ : "
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:52
+#: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
 msgstr "Reizh"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:53
+#: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
 msgstr "Liesaat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:54
-msgid "Additive"
-msgstr "Azdodat"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:55
+#: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
 msgstr "Teñvalaat al livioù"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:56
+#: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
 msgstr "Sklaeraat al livioù"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:57
-#: ../Pinta.Effects/Effects/WarpEffect.cs:23
-msgid "Reflect"
-msgstr "Damouezh"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:58
-#: ../Pinta.Effects/Effects/GlowEffect.cs:30
-msgid "Glow"
-msgstr "Skleur"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:59
+#: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Overlay"
 msgstr "Gourloañ"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:60
+#: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Difference"
 msgstr "Diforc'h"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:61
-msgid "Negation"
-msgstr "Nac'hañ"
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:62
+#: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Lighten"
 msgstr "Sklaeraat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:63
+#: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Darken"
 msgstr "Teñvalaat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:64
+#: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Screen"
 msgstr "Skramm"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:65
+#: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Xor"
 msgstr "Xor"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+msgid "Hard Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+msgid "Soft Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+msgid "Color"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:47
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
+msgid "Luminosity"
+msgstr "Lintr"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:48
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Hue"
+msgstr "Arliv"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:49
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+msgid "Saturation"
+msgstr "Peurvec'hiañ"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -596,36 +611,58 @@ msgstr "Efed gant an deouez"
 msgid "No tool selected."
 msgstr "Benveg ebet bet diuzet."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:107
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Skeudenn dienroll {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:166
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:157
 msgid "Background"
 msgstr "Drekva"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:166
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
 msgstr "Skeudenn nevez"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr ""
+msgstr "N'eo ket skoret ar mentrezh restr"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:200
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
 msgstr "Digeriñ ur skeudenn"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:208
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
 msgid "Permission denied"
 msgstr "Nac'het eo bet an aotre"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:349
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "N'hall ket digeriñ ar restr : {0}"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:541
+msgid "Hide"
+msgstr "Kuzhañ"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:550
+msgid "Minimize"
+msgstr "Bihanaat"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:557
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
+msgid "Dock"
+msgstr "Kae"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:564
+msgid "Undock"
+msgstr "Distagañ diouzh ar c'hae"
+
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
+msgid "Auto Hide"
+msgstr "Kuzhañ emgefreek"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
@@ -659,17 +696,9 @@ msgstr "Krommennoù"
 msgid "Hue / Saturation"
 msgstr "Arliv/Peurvec'hiañ"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
-msgid "Hue"
-msgstr ""
-
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
-msgid "Saturation"
-msgstr ""
-
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr ""
+msgstr "Lintr"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
@@ -765,25 +794,25 @@ msgstr "Kementad"
 msgid "Offset"
 msgstr "Linkañ"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
 msgstr "Koumoul"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
 msgstr "Deouez"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:190
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
 msgstr "Skeulaat"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:193
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
 msgstr "Galloud"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:216
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:231
 msgid "Seed"
 msgstr "Hadañ"
 
@@ -806,9 +835,9 @@ msgstr "Stilaat"
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:158
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:83
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
 msgid "Angle"
-msgstr "Kornad"
+msgstr "Korn"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
@@ -849,7 +878,7 @@ msgstr "Gwerenn dilufr"
 msgid "Gaussian Blur"
 msgstr "Ruzed mod Gausse"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:260
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
 #: ../Pinta.Effects/Effects/MedianEffect.cs:70
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
@@ -857,6 +886,10 @@ msgstr "Ruzed mod Gausse"
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
 msgid "Radius"
 msgstr "Skin"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+msgid "Glow"
+msgstr "Skleur"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
@@ -902,6 +935,7 @@ msgstr "Perzhded"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
 #: ../Pinta.Tools/Tools/ZoomTool.cs:48
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Zoom"
 msgstr "Zoum"
 
@@ -938,7 +972,7 @@ msgid "Coarseness"
 msgstr "Diguñvder"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
 msgstr "Trolinenn"
 
@@ -979,9 +1013,9 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Arverañ ur berzhded izel evit an alberzioù, skeudennoù bihan ha kornadoù "
+"Arverañ ur berzhded izel evit an alberzioù, skeudennoù bihan ha kornioù "
 "bihan. Arverañ ur berzhded uhel evit an disoc'h diwezhel, skeudennoù bras ha "
-"kornadoù bras."
+"kornioù bras."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
@@ -994,7 +1028,7 @@ msgstr "Aotrevarz"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "Dregantad ar peurvec'hiañ"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
@@ -1056,28 +1090,32 @@ msgstr "Distiañ"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "Golv"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Ambakañ"
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+msgid "Reflect"
+msgstr "Damouezh"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
-msgstr ""
+msgstr "Kentidik"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Secondary"
-msgstr ""
+msgstr "Eilvedel"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
-#: ../Pinta/Dialogs/NewImageDialog.cs:284
+#: ../Pinta/Dialogs/NewImageDialog.cs:290
 msgid "Transparent"
-msgstr ""
+msgstr "Boull"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr ""
+msgstr "Orinel"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
@@ -1094,10 +1132,6 @@ msgstr "Kartenn dreuzkas"
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
 msgid "RGB"
 msgstr "RGG"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
-msgid "Luminosity"
-msgstr "Lintr"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
 msgid "(256, 256)"
@@ -1140,24 +1174,6 @@ msgstr "Tellun ec'hankañ"
 msgid "Auto"
 msgstr "Emgefreek"
 
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr "skritell1"
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-msgid "label"
-msgstr "skritell"
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr "Trouz dargouezhek"
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr "Hadañ en-dro"
-
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
 msgid "Choose Primary Color"
 msgstr "Dibab al liv kentael"
@@ -1194,6 +1210,14 @@ msgstr ""
 "Klik kleiz da arventennañ al liv kentael. Klik dehou da arventennañ al liv "
 "eilvedel. Klik kreiz da zibab ul liv diwar al livaoueg."
 
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
+msgid "Random Noise"
+msgstr "Trouz dargouezhek"
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
+msgid "Reseed"
+msgstr "Hadañ en-dro"
+
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Shown"
 msgstr "Treuzfollenn diskouezet"
@@ -1220,7 +1244,7 @@ msgstr "Karrezioù"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr ""
+msgstr "Gourzhel"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
@@ -1232,7 +1256,7 @@ msgstr "Ment"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr ""
+msgstr "Digerskiñ ment ar bir"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
@@ -1302,15 +1326,15 @@ msgstr "Lun leuniañ ha lun an drolinenn"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
-msgstr ""
+msgstr "Rizh lunioù"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
-msgstr ""
+msgstr "Spletadoù Linenn/Krommenn digor"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr ""
+msgstr "Spletadoù Linenn/Krommenn serr"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
@@ -1320,57 +1344,57 @@ msgstr "Elipsenn"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "Spletad linennoù rontaet"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "Kemmet eo bet ar rizh lunioù"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
-msgstr ""
+msgstr "Dilamet eo bet ar poent"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
-msgstr ""
+msgstr "Dilamet"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
 msgid "Point Added"
-msgstr ""
+msgstr "Poent ouzhpennet"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
-msgstr ""
+msgstr "Ouzhpennet"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr ""
+msgstr "Daskemmet"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1672
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
-msgstr ""
+msgstr "Peurlipet"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "Lun dre grommennoù digor"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
 msgid "Closed Curve Shape"
-msgstr ""
+msgstr "Lun dre grommennoù serr"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
-msgstr ""
+msgstr "Lunioù dre linennoù rontaet"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "Digreskiñ skin korn al lun"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "Kreskiñ skin korn al lun"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1474,12 +1498,38 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Klikañ a-gleiz da dresañ ul lun gant al liv kentael.\n"
+"Klikañ a-gleiz war ul lun da ouzhpennañ ur poent reoliñ.\n"
+"Klikañ a-gleiz war ur poent reoliñ ha riklañ d'e zilec'hiañ.\n"
+"Klikañ a-zehou war ur poent reoliñ ha riklañ da gemm e dennder.\n"
+"Derc'hel Pennlizh. da zesteudañ ouzh ar c'hornadoù.\n"
+"Arverañ stokelloù ar biroù da zilec'hiañ ar poent reoliñ bet diuzet.\n"
+"Pouezañ war Ctrl +biroù kleiz/dehou da ziuzañ poentoù reoliñ hervez o urzh.\n"
+"Pouezañ war Dilemel da zilemel ar poent reoliñ bet diuzet.\n"
+"Pouezañ Esaouiñ da ouzhpennañ ur poent reoliñ nevez war lec'hiadur al "
+"logodenn.\n"
+"Derc'hel Ctrl en ur bouezañ war Esaouiñ da grouiñ ar poent reoliñ war an "
+"hevelep lec'hiadur rik.\n"
+"Derc'hel Ctrl en ur glikañ a-gleiz war ur poent reoliñ da grouiñ ul lun "
+"nevez war an hevelep lec'hiadur rik.\n"
+"Derc'hel Ctrl en ur glikañ er-maez eus bevennoù ar skeudenn da grouiñ ul lun "
+"nevez a grog war ar riblenn.\n"
+"Poezañ war Enankañ da beurechuiñ al lun."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:52
+#: ../Pinta.Tools/Tools/EraserTool.cs:187
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
+msgid "Type"
+msgstr "Rizh"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:189
+msgid "Smooth"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
 msgstr "Gomenn"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:54
+#: ../Pinta.Tools/Tools/EraserTool.cs:205
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1544,17 +1594,17 @@ msgstr "Ilrezenn skinek"
 msgid "Conical Gradient"
 msgstr "Ilrezenn kernennek"
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:48
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
 msgid "Lasso Select"
 msgstr "Diuzañ gant al las-bann"
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:50
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "Klikañ ha riklañ a-benn tresañ un drolinenn evit maez un diuzad."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
-msgstr ""
+msgstr "Linenn/Krommenn"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:62
 msgid "Magic Wand Select"
@@ -1584,13 +1634,9 @@ msgstr ""
 "Klikañ a-gleiz ha riklañ an diuzad evit dilec'hiañ trolinenn an diuzad. "
 "Klikañ a-zehou ha riklañ an diuzad evit c'hwelañ trolinenn an diuzad."
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:82
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
 msgstr "Broust livañ"
-
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
-msgid "Type"
-msgstr "Rizh"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
@@ -1605,6 +1651,7 @@ msgstr ""
 "gant al liv eilvedel."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Pan"
 msgstr "Dilec'hiañ"
 
@@ -1629,6 +1676,8 @@ msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
 msgstr ""
+"Klikañ a-gleiz da amsaviñ al liv eilvedel gant al liv kentael. Klikañ a-"
+"zehou da duginañ."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
@@ -1666,55 +1715,55 @@ msgstr ""
 "Klikit kleiz da lakaat ar reti, biziatait neuze an destenn a fell deoc'h. "
 "Liv an destenn a vo al liv kentael."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:157
+#: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
 msgstr "Nodrezh"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:192
+#: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Bold"
 msgstr "Tev"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:198
 msgid "Italic"
 msgstr "Stouet"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:206
+#: ../Pinta.Tools/Tools/TextTool.cs:205
 msgid "Underline"
 msgstr "Islinennet"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:215
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Left Align"
 msgstr "Marzekaat war an tu kleiz"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:223
+#: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Center Align"
 msgstr "Marzekaat e-kreiz"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:230
+#: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Right Align"
 msgstr "Marzekaat war an tu dehou"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Text Style"
 msgstr "Stil an destenn"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
 msgstr "Reizh ha trolinenn"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:252
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
 msgstr "Leuniañ an drekleur"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
 msgstr "Tevder an drolinenn"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
 msgstr "Moanaat tevder an drolinenn"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:284
+#: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
 msgstr "Tevaat tevder an drolinenn"
 
@@ -1746,7 +1795,7 @@ msgstr "Ma ne enrollot ket e vo kollet an holl gemmoù da vat."
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr ""
+msgstr "Serriñ _hep enrollañ"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
@@ -1796,49 +1845,49 @@ msgstr ""
 "Ar restr ez eus anezhi e \"{1}\". Mar bez amsavet e vo flastret hec'h "
 "endalc'had."
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:92
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
 msgid "Layer Opacity"
 msgstr "Demerez an dreuzfollenn"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:97
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
 msgid "Rename Layer"
 msgstr "Adenvel an dreuzfollenn"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Hide Layer"
 msgstr "Kuzhañ an dreuzfollenn"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Show Layer"
 msgstr "Diskouez an dreuzfollenn"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
 msgid "Layer Properties"
 msgstr "Perzhioù an dreuzfollenn"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:76
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
 msgstr "C'hwelañ/Zoumaat ouzh an drezufollenn"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Askouezhioù kumuniezh Pinta - Arbennik evit pep savenn"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "Askouezhioù kumuniezh Pinta - Arveret gant meur a savenn"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:123
+#: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
 msgstr "Tud o deus kemeret perzh en handelv-mañ :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:135
+#: ../Pinta/Dialogs/AboutDialog.cs:138
 msgid "Previous contributors:"
 msgstr "Tud o deus kemeret perzh a-raok :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:146
+#: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1847,27 +1896,27 @@ msgstr ""
 "  Philippe AUCOIN https://launchpad.net/~philippe-aucoin\n"
 "  Skolajidi Diwan https://launchpad.net/~gireg-konan"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:149
+#: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
 msgstr "Troet gant :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:155
+#: ../Pinta/Dialogs/AboutDialog.cs:158
 msgid "Based on the work of Paint.NET:"
 msgstr "Diazezet war al labour graet evit Paint.NET :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:162
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "Using some icons from:"
 msgstr "Arver arlunioù zo digant :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
 msgstr "Enlusket gant Mono :"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:277
+#: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
 msgstr "A-zivout Pinta"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:295
+#: ../Pinta/Dialogs/AboutDialog.cs:298
 msgid "Version Info"
 msgstr "Titouroù an handelv"
 
@@ -1900,7 +1949,7 @@ msgstr "Munudoù"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr ""
+msgstr "Kas un danevell a-fet beug..."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
@@ -1910,39 +1959,39 @@ msgstr "Perzhded JPEG"
 msgid "Quality: "
 msgstr "Perzhded : "
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:159
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
 msgid "Name:"
 msgstr "Anv :"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:167
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
 msgstr "Hewelus"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
 msgstr "Mod kemmeskañ"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:189
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
 msgid "Opacity:"
 msgstr "Demerez :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
-#: ../Pinta/Dialogs/NewImageDialog.cs:327
-#: ../Pinta/Dialogs/NewImageDialog.cs:416
+#: ../Pinta/Dialogs/NewImageDialog.cs:342
+#: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr ""
+msgstr "Golver"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
-#: ../Pinta/Dialogs/NewImageDialog.cs:329
-#: ../Pinta/Dialogs/NewImageDialog.cs:416
+#: ../Pinta/Dialogs/NewImageDialog.cs:344
+#: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Custom"
-msgstr ""
+msgstr "Personelaat"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Ragarventenn :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
@@ -1967,26 +2016,30 @@ msgstr "Sav :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr ""
+msgstr "Reteradur :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "Poltred"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "Gweledva"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:265
+#: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "Drekleur :"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:268
+#: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "Gwenn"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:276
+#: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
+msgstr "Liv an drekleur"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:319
+msgid "Preview"
 msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
@@ -1996,28 +2049,6 @@ msgstr "Titl"
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
 msgstr "Treug"
-
-#: ../Pinta/DockLibrary/DockItem.cs:477
-#: ../Pinta/DockLibrary/DockItemContainer.cs:92
-msgid "Hide"
-msgstr "Kuzhañ"
-
-#: ../Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr "Kaeadus"
-
-#: ../Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr "War neuñv"
-
-#: ../Pinta/DockLibrary/DockItem.cs:502
-#: ../Pinta/DockLibrary/DockItemContainer.cs:196
-msgid "Auto Hide"
-msgstr "Kuzhañ emgefreek"
-
-#: ../Pinta/DockLibrary/DockItemContainer.cs:192
-msgid "Dock"
-msgstr "Kae"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
@@ -2038,67 +2069,67 @@ msgstr "Mirout kenfeur an neuz"
 msgid "Anchor:"
 msgstr "Eor :"
 
-#: ../Pinta/Main.cs:72
+#: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
-msgstr ""
+msgstr "Diskouez ar gemennadenn-mañ ha mont kuit."
 
-#: ../Pinta/Main.cs:73
+#: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr ""
+msgstr "Skrammañ handelv an arload."
 
-#: ../Pinta/Main.cs:74
+#: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
 msgstr "niver a neudennoù da arverañ evit an deouez"
 
-#: ../Pinta/Main.cs:122
+#: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr ""
+msgstr "Arver : [files] pinta"
 
-#: ../Pinta/Main.cs:124
+#: ../Pinta/Main.cs:109
 msgid "Options: "
-msgstr ""
+msgstr "Dibarzhioù : "
 
-#: ../Pinta/MainWindow.cs:202
+#: ../Pinta/MainWindow.cs:309
 msgid "_File"
 msgstr "_Restr"
 
-#: ../Pinta/MainWindow.cs:203
+#: ../Pinta/MainWindow.cs:310
 msgid "_Edit"
 msgstr "_Embann"
 
-#: ../Pinta/MainWindow.cs:205
+#: ../Pinta/MainWindow.cs:312
 msgid "_View"
 msgstr "_Gwelout"
 
-#: ../Pinta/MainWindow.cs:208
+#: ../Pinta/MainWindow.cs:315
 msgid "_Image"
 msgstr "_Skeudenn"
 
-#: ../Pinta/MainWindow.cs:209
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
 msgstr "_Treuzfollenn"
 
-#: ../Pinta/MainWindow.cs:210
+#: ../Pinta/MainWindow.cs:317
 msgid "_Adjustments"
 msgstr "_Kengeidadurioù"
 
-#: ../Pinta/MainWindow.cs:211
+#: ../Pinta/MainWindow.cs:318
 msgid "Effe_cts"
 msgstr "Efe_doù"
 
-#: ../Pinta/MainWindow.cs:212
+#: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
 msgstr "Ouzhpena_dennoù"
 
-#: ../Pinta/MainWindow.cs:214
+#: ../Pinta/MainWindow.cs:321
 msgid "_Window"
 msgstr "_Prenestr"
 
-#: ../Pinta/MainWindow.cs:218
+#: ../Pinta/MainWindow.cs:325
 msgid "Tool Windows"
 msgstr "Prenestr an ostilhoù"
 
-#: ../Pinta/MainWindow.cs:222
+#: ../Pinta/MainWindow.cs:329
 msgid "_Help"
 msgstr "_Skoazell"
 
@@ -2106,23 +2137,23 @@ msgstr "_Skoazell"
 msgid "OptionName"
 msgstr "Anv an dibarzh"
 
-#: ../Pinta/Pads/CanvasPad.cs:75
+#: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
 msgstr "Steuenn"
 
-#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:50
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
 msgstr "Roll istor"
 
-#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:54
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
 msgid "Layers"
 msgstr "Treuzfollennoù"
 
-#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:45
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
 msgid "Images"
 msgstr "Skeudennoù"
 
-#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:48
+#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
 msgid "Tools"
 msgstr "Binvioù"
 

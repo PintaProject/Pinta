@@ -1,472 +1,481 @@
 # Belarusian translation for pinta
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# Mikalai Udodau <crom-a@tut.by>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-22 23:02-0500\n"
-"PO-Revision-Date: 2015-02-11 20:03+0000\n"
-"Last-Translator: Launchpad Translations Administrators <Unknown>\n"
-"Language-Team: Belarusian <be@li.org>\n"
+"Report-Msgid-Bugs-To: Mikalai Udodau <crom-a@tut.by>\n"
+"POT-Creation-Date: 2016-05-23 18:07-0500\n"
+"PO-Revision-Date: 2016-03-22 16:20+0000\n"
+"Last-Translator: Mikalai Udodau <Unknown>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Launchpad-Export-Date: 2015-03-01 22:08+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
+"X-Generator: Launchpad (build 18086)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr ""
+msgstr "Стварайце і рэдагуйце відарысы"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr ""
+msgstr "Рэдактар відарысаў"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr ""
+msgstr "Рэдактар відарысаў Pinta"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "Распараднік прыставак"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
-msgstr ""
+msgstr "Адкаціць"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr ""
+msgstr "Паўтарыць"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
-msgstr ""
+msgstr "Выразаць"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
-msgstr ""
+msgstr "Капіяваць"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Капіяваць злучыўшы"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
-#: ../Pinta.Core/Classes/Document.cs:768
+#: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr ""
+msgstr "Уставіць"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
-#: ../Pinta.Core/Classes/Document.cs:764
+#: ../Pinta.Core/Classes/Document.cs:790
 msgid "Paste Into New Layer"
-msgstr ""
+msgstr "Уставіць у новы пласт"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr ""
+msgstr "Уставіць у новы відарыс"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-msgid "Delete Selection"
-msgstr ""
+#: ../Pinta.Core/Actions/EditActions.cs:218
+msgid "Erase Selection"
+msgstr "Сцерці вылучэнне"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr ""
+msgstr "Запоўніць вылучэнне"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:418
+#: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Invert Selection"
-msgstr ""
+msgstr "Інвертаваць вылучэнне"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr ""
+msgstr "Выбраць ўсё"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr ""
+msgstr "Зняць вылучэнне"
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
-msgstr ""
+msgstr "Адкрыць..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:82
 #: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
-msgstr ""
+msgstr "Запісаць як..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr ""
+msgstr "Узнавіць прадвызначэнні"
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr ""
+msgstr "Устанавіць колькасць колераў"
 
-#: ../Pinta.Core/Actions/EditActions.cs:125
-#: ../Pinta/Pads/ColorPalettePad.cs:42 ../Pinta/Pads/ColorPalettePad.cs:49
+#: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
+#: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
-msgstr ""
-
-#: ../Pinta.Core/Actions/EditActions.cs:218
-msgid "Erase Selection"
-msgstr ""
+msgstr "Палітра"
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr ""
+msgstr "Зняць вылучэнне"
 
-#: ../Pinta.Core/Actions/EditActions.cs:327
+#: ../Pinta.Core/Actions/EditActions.cs:323
 msgid "Open Palette File"
-msgstr ""
+msgstr "Адкрыць файл палітры"
+
+#: ../Pinta.Core/Actions/EditActions.cs:330
+msgid "Palette files (*.txt, *.gpl)"
+msgstr "Файлы палітры (*.txt, *.gpl)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:334
-msgid "Palette files (*.txt, *.gpl)"
-msgstr ""
-
-#: ../Pinta.Core/Actions/EditActions.cs:338
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr ""
+msgstr "Усе файлы"
 
-#: ../Pinta.Core/Actions/EditActions.cs:354
+#: ../Pinta.Core/Actions/EditActions.cs:350
 #, csharp-format
 msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
+"Немагчыма адкрыць файл палітры: {0}.\n"
+"Калі ласка, упэўніцеся, што вы спрабуеце адкрыць спраўны файл паліры GIMP ці "
+"Paint.NET."
 
-#: ../Pinta.Core/Actions/EditActions.cs:355
+#: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
-msgstr ""
+msgstr "Памылка"
 
-#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Save Palette File"
-msgstr ""
+msgstr "Запісаць файл палітры"
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "Палітра Paint.NET (*.txt)"
 
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "Палітра GIMP (*.gpl)"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr ""
+msgstr "Новы..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr ""
+msgstr "Новы здымак экрана..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr ""
+msgstr "Адкрыць нядаўні"
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
 msgid "Close"
-msgstr ""
+msgstr "Закрыць"
 
 #: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr ""
+msgstr "Запісаць"
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr ""
+msgstr "Друкаваць"
 
 #: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr ""
+msgstr "Выйсці"
 
 #: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr ""
+msgstr "Новы"
 
 #: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr ""
-
-#: ../Pinta.Core/Actions/HelpActions.cs:50
-msgid "Pinta Website"
-msgstr ""
-
-#: ../Pinta.Core/Actions/HelpActions.cs:51
-msgid "File a Bug"
-msgstr ""
+msgstr "Адкрыць"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
+msgid "Contents"
+msgstr "Змест"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:53
+msgid "Pinta Website"
+msgstr "Вэб-пляцоўка Pinta"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:54
+msgid "File a Bug"
+msgstr "Паведаміць пра памылку"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
-msgstr ""
+msgstr "Перакласці гэту праграму"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:53 ../Pinta/MainWindow.cs:240
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
 msgid "About"
-msgstr ""
-
-#: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/ImageActions.cs:279
-msgid "Crop to Selection"
-msgstr ""
+msgstr "Пра праграму"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-msgid "Auto Crop"
-msgstr ""
+#: ../Pinta.Core/Actions/ImageActions.cs:283
+msgid "Crop to Selection"
+msgstr "Абрэзаць да памераў вылучэння"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
-msgid "Resize Image..."
-msgstr ""
+msgid "Auto Crop"
+msgstr "Аўтаматычная абрэзка"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
+msgid "Resize Image..."
+msgstr "Змяніць памер відарыса..."
+
+#: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ImageActions.cs:63
+#: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
-msgstr ""
-
-#: ../Pinta.Core/Actions/ImageActions.cs:64
-#: ../Pinta.Core/Actions/LayerActions.cs:71
-msgid "Flip Vertical"
-msgstr ""
+msgstr "Адлюстраваць гарызантальна"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
-msgstr ""
+#: ../Pinta.Core/Actions/LayerActions.cs:71
+msgid "Flip Vertical"
+msgstr "Адлюстраваць вертыкальна"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
-msgstr ""
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+msgid "Rotate 90° Clockwise"
+msgstr "Павярнуць на 90° за стрэлкай"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
-msgstr ""
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Павярнуць на 90° супраць стрэлкі"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
-#: ../Pinta.Core/Actions/ImageActions.cs:137
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+msgid "Rotate 180°"
+msgstr "Павярнуць на 180°"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:69
+#: ../Pinta.Core/Actions/ImageActions.cs:138
 msgid "Flatten"
-msgstr ""
+msgstr "Сплюшчыць"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:826
+#: ../Pinta.Core/Classes/Document.cs:852
 msgid "Add New Layer"
-msgstr ""
+msgstr "Дадаць новы пласт"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
 msgid "Delete Layer"
-msgstr ""
+msgstr "Сцерці пласт"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr ""
+msgstr "Дубляваць пласт"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr ""
+msgstr "Аб'яднаць пласты"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr ""
+msgstr "Імпартаваць з файла..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr ""
+msgstr "Павярнуць / маштабаваць пласт..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
-msgstr ""
+msgstr "Перанесці пласт вышэй"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
 #: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
-msgstr ""
+msgstr "Перанесці пласт ніжэй"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr ""
+msgstr "Уласцівасці пласта..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr ""
+msgstr "Адкрыць файл відарыса"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr ""
-
-#: ../Pinta.Core/Actions/ViewActions.cs:76
-msgid "Zoom In"
-msgstr ""
+msgstr "Імпартаваць з файла"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
-msgid "Zoom Out"
-msgstr ""
+msgid "Zoom In"
+msgstr "Павялічыць"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
-msgid "Best Fit"
-msgstr ""
+msgid "Zoom Out"
+msgstr "Паменшыць"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
-msgid "Zoom to Selection"
-msgstr ""
+msgid "Best Fit"
+msgstr "Дапасаваць"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
-msgid "Normal Size"
-msgstr ""
+msgid "Zoom to Selection"
+msgstr "Маштабаваць да вылучэння"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
-msgid "Toolbar"
-msgstr ""
+msgid "Normal Size"
+msgstr "Звычайны памер"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
-msgid "Pixel Grid"
-msgstr ""
+msgid "Toolbar"
+msgstr "Стужка прылад"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
-msgid "Rulers"
-msgstr ""
+msgid "Image Tabs"
+msgstr "Карткі відарысаў"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
-msgid "Pixels"
-msgstr ""
+msgid "Pixel Grid"
+msgstr "Сетка пікселаў"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
-msgid "Inches"
-msgstr ""
+msgid "Rulers"
+msgstr "Лінейкі"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
-msgid "Centimeters"
-msgstr ""
+msgid "Pixels"
+msgstr "Пікселы"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
+msgid "Inches"
+msgstr "Цалі"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:88
+msgid "Centimeters"
+msgstr "Сантыметры"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
-msgstr ""
+msgstr "Поўны экран"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:113
-#: ../Pinta.Core/Actions/ViewActions.cs:272
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:299
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:307
+#: ../Pinta.Core/Actions/ViewActions.cs:115
+#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
-msgstr ""
+msgstr "Акно"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:155
+#: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
-msgstr ""
+msgstr "Адзінкі на лінейцы"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr ""
+msgstr "Запісаць усе"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr ""
+msgstr "Закрыць усе"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:251
+#: ../Pinta.Core/Classes/BaseTool.cs:244
 msgid "Tool"
-msgstr ""
+msgstr "Прылада"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:327
+#: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
-msgstr ""
+msgstr "Хуткая клавіша"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:436
+#: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:437
+#: ../Pinta.Core/Classes/BaseTool.cs:429
 msgid "Overwrite"
-msgstr ""
+msgstr "Перазапіс"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:451
+#: ../Pinta.Core/Classes/BaseTool.cs:443
 msgid "Antialiasing On"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:452
+#: ../Pinta.Core/Classes/BaseTool.cs:444
 msgid "Antialiasing Off"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:286 ../Pinta.Core/Classes/Document.cs:291
+#: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
-msgstr ""
+msgstr "Пласт"
 
-#: ../Pinta.Core/Classes/Document.cs:373
+#: ../Pinta.Core/Classes/Document.cs:392
 msgid "copy"
-msgstr ""
+msgstr "капіяваць"
 
-#: ../Pinta.Core/Classes/Document.cs:641
+#: ../Pinta.Core/Classes/Document.cs:668
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:842
+#: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:860
+#: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:861
+#: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:865
+#: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:866
+#: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:879
+#: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "Нельга ўставіць відарыс"
 
-#: ../Pinta.Core/Classes/Document.cs:880
+#: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "Няма відарыса ў буферы абмену"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
-msgstr ""
+msgstr "Замяніць"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
@@ -486,67 +495,76 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Рэжым вылучэння: "
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:52
+#: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
-#: ../Pinta.Tools/Tools/TextTool.cs:249
+#: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
-msgstr ""
+msgstr "Звычайны"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:53
+#: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
-msgstr ""
+msgstr "Множанне"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:54
-msgid "Additive"
-msgstr ""
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:55
+#: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:56
+#: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:57
-#: ../Pinta.Effects/Effects/WarpEffect.cs:23
-msgid "Reflect"
-msgstr ""
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:58
-#: ../Pinta.Effects/Effects/GlowEffect.cs:30
-msgid "Glow"
-msgstr ""
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:59
+#: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Overlay"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:60
+#: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Difference"
-msgstr ""
+msgstr "Адрозненне"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:61
-msgid "Negation"
-msgstr ""
-
-#: ../Pinta.Core/Effects/UserBlendOps.cs:62
+#: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Lighten"
-msgstr ""
+msgstr "Асвятліць"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:63
+#: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Darken"
-msgstr ""
+msgstr "Зацямніць"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:64
+#: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Screen"
-msgstr ""
+msgstr "Экран"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:65
+#: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Xor"
 msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+msgid "Hard Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+msgid "Soft Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+msgid "Color"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:47
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
+msgid "Luminosity"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:48
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Hue"
+msgstr "Тон"
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:49
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+msgid "Saturation"
+msgstr "Насычанасць"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -554,35 +572,35 @@ msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr ""
+msgstr "Адлюстраваць відарыс гарызантальна"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr ""
+msgstr "Адлюстраваць відарыс вертыкальна"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr ""
+msgstr "Адлюстраваць пласт гарызантальна"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr ""
+msgstr "Адлюстраваць пласт вертыкальна"
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:38
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr ""
+msgstr "Змяніць памер відарыса"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr ""
+msgstr "Відарыс {0} ({1})"
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:63
 #: ../Pinta.Core/Managers/EffectsManager.cs:98
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:221
 msgid "Rendering Effect"
@@ -591,91 +609,105 @@ msgstr ""
 #: ../Pinta.Core/Managers/ToolManager.cs:234
 #: ../Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr ""
+msgstr "Прылада не выбрана."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:107
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr ""
+msgstr "Незапісаны відарыс {0}"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:157
+msgid "Background"
+msgstr "Фон"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:166
-msgid "Background"
-msgstr ""
-
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:175
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
-msgstr ""
+msgstr "Новы відарыс"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:195
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr ""
+msgstr "Фармат файла не падтрымліваецца"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:200
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
-msgstr ""
+msgstr "Адкрыць выяву"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:208
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
 msgid "Permission denied"
-msgstr ""
+msgstr "Доступ забаронены"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:349
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 #, csharp-format
 msgid "Could not open file: {0}"
+msgstr "Нельга прачытаць файл: {0}"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:541
+msgid "Hide"
+msgstr "Схаваць"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:550
+msgid "Minimize"
+msgstr "Мінімізаваць"
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:557
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
+msgid "Dock"
 msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:564
+msgid "Undock"
+msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
+msgid "Auto Hide"
+msgstr "Аўтаматычна хаваць"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr ""
+msgstr "Аўтаматычны ўзровень"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
 msgid "Black and White"
-msgstr ""
+msgstr "Чорна-белы"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Яркасць / Кантраст"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Brightness"
-msgstr ""
+msgstr "Яркасць"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
-msgstr ""
+msgstr "Кантраст"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
 msgid "Curves"
-msgstr ""
+msgstr "Крывыя"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
-msgid "Hue"
-msgstr ""
-
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
-msgid "Saturation"
-msgstr ""
-
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr ""
+msgstr "Светласць"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
-msgstr ""
+msgstr "Інвертаваць колеры"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr ""
+msgstr "Узроўні"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
@@ -684,7 +716,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
-msgstr ""
+msgstr "Сэпія"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
@@ -694,38 +726,38 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
-msgstr ""
+msgstr "Чырвоны"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
 msgid "Green"
-msgstr ""
+msgstr "Зялёны"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
 msgid "Blue"
-msgstr ""
+msgstr "Сіні"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
 msgid "Linked"
-msgstr ""
+msgstr "Злучаны"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
-msgstr ""
+msgstr "Дадаць шум"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
 #: ../Pinta.Effects/Effects/MedianEffect.cs:36
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
 msgid "Noise"
-msgstr ""
+msgstr "Шум"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:145
 #: ../Pinta.Effects/Effects/TileEffect.cs:142
 msgid "Intensity"
-msgstr ""
+msgstr "Інтэнсіўнасць"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
@@ -737,7 +769,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr ""
+msgstr "Пукатасць"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
@@ -746,7 +778,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/TileEffect.cs:33
 #: ../Pinta.Effects/Effects/TwistEffect.cs:33
 msgid "Distort"
-msgstr ""
+msgstr "Скажэнне"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:101
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
@@ -762,25 +794,25 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:29
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr ""
+msgstr "Воблакі"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:190
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:193
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
-msgstr ""
+msgstr "Моц"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:216
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:231
 msgid "Seed"
 msgstr ""
 
@@ -793,7 +825,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
-msgstr ""
+msgstr "Стылізацыя"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:143
@@ -803,17 +835,17 @@ msgstr ""
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:158
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:83
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
 msgid "Angle"
-msgstr ""
+msgstr "Вугал"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
-msgstr ""
+msgstr "Рэльеф"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
-msgstr ""
+msgstr "Фрагмент"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
@@ -822,55 +854,59 @@ msgstr ""
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
 msgid "Blurs"
-msgstr ""
+msgstr "Размыццё"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:111
 msgid "Fragments"
-msgstr ""
+msgstr "Фрагменты"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Distance"
-msgstr ""
+msgstr "Дыстанцыя"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
 #: ../Pinta.Effects/Effects/TileEffect.cs:138
 msgid "Rotation"
-msgstr ""
+msgstr "Паварот"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
-msgstr ""
+msgstr "Марознае шкло"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Гаусаўскае размыццё"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:260
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
 #: ../Pinta.Effects/Effects/MedianEffect.cs:70
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
 msgid "Radius"
-msgstr ""
+msgstr "Радыюс"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+msgid "Glow"
+msgstr "Свячэнне"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:33
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
 msgid "Photo"
-msgstr ""
+msgstr "Фота"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr ""
+msgstr "Накід чарніламі"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
 msgid "Artistic"
-msgstr ""
+msgstr "Мастацкія"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
 msgid "Ink Outline"
@@ -882,33 +918,34 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
-msgstr ""
+msgstr "Фрактал Джулія"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
 msgid "Factor"
-msgstr ""
+msgstr "Множнік"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
 #: ../Pinta.Effects/Effects/WarpEffect.cs:188
 msgid "Quality"
-msgstr ""
+msgstr "Якасць"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
 #: ../Pinta.Tools/Tools/ZoomTool.cs:48
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Zoom"
-msgstr ""
+msgstr "Маштаб"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
 msgid "Mandelbrot Fractal"
-msgstr ""
+msgstr "Фрактал Мандэльброт"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
 msgid "Median"
-msgstr ""
+msgstr "Медыяна"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:73
 msgid "Percentile"
@@ -916,7 +953,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
-msgstr ""
+msgstr "Размыццё руху"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
 msgid "Centered"
@@ -924,18 +961,18 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr ""
+msgstr "Алейны жывапіс"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
 msgid "Brush Size"
-msgstr ""
+msgstr "Памер пэндзля"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
 msgid "Coarseness"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
-#: ../Pinta.Tools/Tools/TextTool.cs:251
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
 msgstr ""
 
@@ -945,7 +982,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
-msgstr ""
+msgstr "Накід алоўкам"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
 msgid "Pencil Tip Size"
@@ -953,15 +990,15 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
 msgid "Color Range"
-msgstr ""
+msgstr "Дыяпазон колераў"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr ""
+msgstr "Пікселізацыя"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:119
 msgid "Cell Size"
-msgstr ""
+msgstr "Памер клеткі"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
@@ -979,7 +1016,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr ""
+msgstr "Выдаленне чырвоных вачэй"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
 #: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
@@ -996,7 +1033,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
-msgstr ""
+msgstr "Паніжэнне шуму"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
 msgid "Strength"
@@ -1020,7 +1057,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
 msgid "Lighting"
-msgstr ""
+msgstr "Асвятленне"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Warmth"
@@ -1054,6 +1091,10 @@ msgstr ""
 msgid "Wrap"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+msgid "Reflect"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
 msgstr ""
@@ -1063,9 +1104,9 @@ msgid "Secondary"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
-#: ../Pinta/Dialogs/NewImageDialog.cs:284
+#: ../Pinta/Dialogs/NewImageDialog.cs:290
 msgid "Transparent"
-msgstr ""
+msgstr "Празрысты"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
@@ -1085,11 +1126,7 @@ msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
 msgid "RGB"
-msgstr ""
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
-msgid "Luminosity"
-msgstr ""
+msgstr "ЧЗС"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
 msgid "(256, 256)"
@@ -1097,16 +1134,16 @@ msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
 msgid "Red  "
-msgstr ""
+msgstr "Чырвоны  "
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
-msgstr ""
+msgstr "Сіні "
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
 msgid "Reset"
-msgstr ""
+msgstr "Скінуць"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
 msgid "Tip: Right-click to remove control points."
@@ -1118,11 +1155,11 @@ msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
 msgid "Input"
-msgstr ""
+msgstr "Увод"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
 msgid "Output"
-msgstr ""
+msgstr "Вывад"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
 msgid "Output Histogram"
@@ -1130,25 +1167,7 @@ msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.AnglePickerWidget.cs:52
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.HScaleSpinButtonWidget.cs:48
-msgid "label1"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ComboBoxWidget.cs:42
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.PointPickerWidget.cs:58
-msgid "label"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:38
-msgid "Random Noise"
-msgstr ""
-
-#: ../Pinta.Gui.Widgets/gtk-gui/Pinta.Gui.Widgets.ReseedButtonWidget.cs:65
-msgid "Reseed"
-msgstr ""
+msgstr "Аўтаматычна"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
 msgid "Choose Primary Color"
@@ -1184,21 +1203,29 @@ msgid ""
 "click to choose palette color."
 msgstr ""
 
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
+msgid "Random Noise"
+msgstr "Выпадковы шум"
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
+msgid "Reseed"
+msgstr ""
+
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Shown"
-msgstr ""
+msgstr "Пласт паказаны"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Hidden"
-msgstr ""
+msgstr "Пласт схаваны"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr ""
+msgstr "Кругі"
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
-msgstr ""
+msgstr "Сетка"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
@@ -1206,27 +1233,27 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
-msgstr ""
+msgstr "Квадраты"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr ""
+msgstr "Рыска"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
-msgstr ""
+msgstr "Стрэлка"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
 msgid "Size"
-msgstr ""
+msgstr "Памер"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr ""
+msgstr "Паменшыць памер стрэлкі"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr ""
+msgstr "Павялічыць памер стрэлкі"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
@@ -1238,7 +1265,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
-msgstr ""
+msgstr "Даўжыня"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
@@ -1252,25 +1279,25 @@ msgstr ""
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
-msgstr ""
+msgstr "Шырыня пэндзля"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr ""
+msgstr "Паменшыць памер пэндзля"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr ""
+msgstr "Павялічыць памер пэндзля"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
-msgstr ""
+msgstr "Стыль запаўнення"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
@@ -1282,7 +1309,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
-msgstr ""
+msgstr "Форма запаўнення"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
@@ -1306,7 +1333,7 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
-msgstr ""
+msgstr "Эліпс"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
@@ -1331,14 +1358,14 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
-msgstr ""
+msgstr "Дададзена"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr ""
+msgstr "Зменена"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1672
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
 msgstr ""
 
@@ -1372,7 +1399,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
-msgstr ""
+msgstr "Піпетка"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1404,7 +1431,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr ""
+msgstr "Відарыс"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
@@ -1425,7 +1452,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "Аловак"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
@@ -1460,11 +1487,20 @@ msgid ""
 "Press Enter to finalize the shape."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:52
-msgid "Eraser"
+#: ../Pinta.Tools/Tools/EraserTool.cs:187
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
+msgid "Type"
+msgstr "Тып"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:189
+msgid "Smooth"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:54
+#: ../Pinta.Tools/Tools/EraserTool.cs:203
+msgid "Eraser"
+msgstr "Сцірка"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:205
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1495,7 +1531,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
 #: ../Pinta.Tools/Tools/GradientTool.cs:169
 msgid "Gradient"
-msgstr ""
+msgstr "Градыент"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
@@ -1505,7 +1541,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Linear Gradient"
-msgstr ""
+msgstr "Лінейны градыент"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Linear Reflected Gradient"
@@ -1517,17 +1553,17 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:179
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Радыяльны градыент"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:180
 msgid "Conical Gradient"
-msgstr ""
+msgstr "Канічны градыент"
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:48
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
 msgid "Lasso Select"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:50
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
@@ -1551,7 +1587,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr ""
+msgstr "Перасунуць вылучэнне"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 msgid ""
@@ -1559,17 +1595,13 @@ msgid ""
 "drag the selection to rotate selection outline."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:82
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
-msgstr ""
-
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
-msgid "Type"
-msgstr ""
+msgstr "Пэндзаль"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Заліўка"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
@@ -1578,6 +1610,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Pan"
 msgstr ""
 
@@ -1603,7 +1636,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
-msgstr ""
+msgstr "Прамавугольнае вылучэнне"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
@@ -1613,7 +1646,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr ""
+msgstr "Прамавугольнік"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
@@ -1621,7 +1654,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
-msgstr ""
+msgstr "Тэкст"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
@@ -1633,55 +1666,55 @@ msgid ""
 "color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:157
+#: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
-msgstr ""
+msgstr "Шрыфт"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:192
+#: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Bold"
-msgstr ""
+msgstr "Цёмны"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:199
+#: ../Pinta.Tools/Tools/TextTool.cs:198
 msgid "Italic"
-msgstr ""
+msgstr "Курсіў"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:206
+#: ../Pinta.Tools/Tools/TextTool.cs:205
 msgid "Underline"
-msgstr ""
+msgstr "Падкрэслены"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:215
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Left Align"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:223
+#: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Center Align"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:230
+#: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Right Align"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:242
+#: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Text Style"
-msgstr ""
+msgstr "Стыль тэксту"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:252
+#: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:284
+#: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
 msgstr ""
 
@@ -1711,11 +1744,11 @@ msgstr ""
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr ""
+msgstr "Закры_ць без запісу"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Зрабіць здымак экрана"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
@@ -1723,23 +1756,23 @@ msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:63
 msgid "Image files"
-msgstr ""
+msgstr "Файлы відарысаў"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr ""
+msgstr "Запісаць файл відарыса"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
-msgstr ""
+msgstr "Pinta не падтрымлівае запісанне ў гэтым фармаце файла."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
 msgid "Cannot save read only file."
-msgstr ""
+msgstr "Немагчыма запісаць файл \"толькі для чытання\"."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
 msgid "Image too large"
-msgstr ""
+msgstr "Выява занадта вялікая"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
 msgid "ICO files can not be larger than 255 x 255 pixels."
@@ -1748,39 +1781,39 @@ msgstr ""
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr ""
+msgstr "Файл з назвай \"{0}\" ужо існуе. Замяніць яго?"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr ""
+msgstr "Такі файл ужо ёсць у \"{1}\". Замена перапіша ўвесь яго змест."
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:92
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
 msgid "Layer Opacity"
-msgstr ""
+msgstr "Непразрыстасць пласта"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:97
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
 msgid "Rename Layer"
-msgstr ""
+msgstr "Перайменаваць пласт"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Hide Layer"
-msgstr ""
+msgstr "Схаваць пласт"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:102
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Show Layer"
-msgstr ""
+msgstr "Паказаць пласт"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
 msgid "Layer Properties"
-msgstr ""
+msgstr "Уласцівасці пласта"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:52
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:76
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
-msgstr ""
+msgstr "Павярнуць / маштабаваць пласт"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
@@ -1790,58 +1823,60 @@ msgstr ""
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:123
+#: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
-msgstr ""
+msgstr "Унёскадаўцы гэтага выпуску:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:135
+#: ../Pinta/Dialogs/AboutDialog.cs:138
 msgid "Previous contributors:"
-msgstr ""
-
-#: ../Pinta/Dialogs/AboutDialog.cs:146
-msgid "translator-credits"
-msgstr ""
+msgstr "Папярэднія ўкладальнікі:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:149
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Mikalai Udodau https://launchpad.net/~crom-a"
+
+#: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
-msgstr ""
+msgstr "Пераклад:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:155
+#: ../Pinta/Dialogs/AboutDialog.cs:158
 msgid "Based on the work of Paint.NET:"
-msgstr ""
+msgstr "Заснаваны на працы стваральнікаў Paint.NET:"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:162
+#: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "Using some icons from:"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:170
+#: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutDialog.cs:277
+#: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
-msgstr ""
+msgstr "Пра Pinta"
 
-#: ../Pinta/Dialogs/AboutDialog.cs:295
+#: ../Pinta/Dialogs/AboutDialog.cs:298
 msgid "Version Info"
-msgstr ""
+msgstr "Звесткі пра версію"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
-msgstr ""
+msgstr "Версія"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "License"
-msgstr ""
+msgstr "Ліцэнзія"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "Выпушчаны пад ліцэнзіяй MIT X11 License."
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
-msgstr ""
+msgstr "Аўтарскае права"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "by Pinta contributors"
@@ -1851,59 +1886,59 @@ msgstr ""
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Дэталі"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr ""
+msgstr "Паведаміць пра памылку...."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr ""
+msgstr "Якасць JPEG"
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
-msgstr ""
+msgstr "Якасць: "
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:159
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
 msgid "Name:"
-msgstr ""
+msgstr "Назва:"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:167
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
-msgstr ""
+msgstr "Бачны"
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:178
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
 msgstr ""
 
-#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:189
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
 msgid "Opacity:"
-msgstr ""
+msgstr "Непразрыстасць:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
-#: ../Pinta/Dialogs/NewImageDialog.cs:327
-#: ../Pinta/Dialogs/NewImageDialog.cs:416
+#: ../Pinta/Dialogs/NewImageDialog.cs:342
+#: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr ""
+msgstr "Буфер абмену"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
-#: ../Pinta/Dialogs/NewImageDialog.cs:329
-#: ../Pinta/Dialogs/NewImageDialog.cs:416
+#: ../Pinta/Dialogs/NewImageDialog.cs:344
+#: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Custom"
-msgstr ""
+msgstr "Адмысловы"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Прэсет:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
-msgstr ""
+msgstr "Шырыня:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
@@ -1912,67 +1947,49 @@ msgstr ""
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
-msgstr ""
+msgstr "пікселаў"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
-msgstr ""
+msgstr "Вышыня:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr ""
+msgstr "Арыентацыя:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "Партрэт"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "Ландшафт"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:265
+#: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "Фон:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:268
+#: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "Белы"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:276
+#: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
+msgstr "Колер фону"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:319
+msgid "Preview"
 msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr ""
+msgstr "Назва"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr ""
-
-#: ../Pinta/DockLibrary/DockItem.cs:477
-#: ../Pinta/DockLibrary/DockItemContainer.cs:92
-msgid "Hide"
-msgstr ""
-
-#: ../Pinta/DockLibrary/DockItem.cs:485
-msgid "Dockable"
-msgstr ""
-
-#: ../Pinta/DockLibrary/DockItem.cs:493
-msgid "Floating"
-msgstr ""
-
-#: ../Pinta/DockLibrary/DockItem.cs:502
-#: ../Pinta/DockLibrary/DockItemContainer.cs:196
-msgid "Auto Hide"
-msgstr ""
-
-#: ../Pinta/DockLibrary/DockItemContainer.cs:192
-msgid "Dock"
-msgstr ""
+msgstr "Шлях"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
@@ -1987,103 +2004,103 @@ msgstr ""
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr ""
+msgstr "Захоўваць суадносіны бакоў"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr ""
+msgstr "Якар:"
 
-#: ../Pinta/Main.cs:72
+#: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
-msgstr ""
+msgstr "Паказаць гэта паведамленне і выйсці."
 
-#: ../Pinta/Main.cs:73
+#: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr ""
+msgstr "Паказаць версію праграмы."
 
-#: ../Pinta/Main.cs:74
+#: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta/Main.cs:122
+#: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr ""
+msgstr "Выкарыстанне: pinta [файлы]"
 
-#: ../Pinta/Main.cs:124
+#: ../Pinta/Main.cs:109
 msgid "Options: "
-msgstr ""
+msgstr "Настройкі: "
 
-#: ../Pinta/MainWindow.cs:202
+#: ../Pinta/MainWindow.cs:309
 msgid "_File"
-msgstr ""
+msgstr "Ф_айл"
 
-#: ../Pinta/MainWindow.cs:203
+#: ../Pinta/MainWindow.cs:310
 msgid "_Edit"
-msgstr ""
+msgstr "_Праца"
 
-#: ../Pinta/MainWindow.cs:205
+#: ../Pinta/MainWindow.cs:312
 msgid "_View"
-msgstr ""
+msgstr "_Від"
 
-#: ../Pinta/MainWindow.cs:208
+#: ../Pinta/MainWindow.cs:315
 msgid "_Image"
-msgstr ""
+msgstr "Ві_дарыс"
 
-#: ../Pinta/MainWindow.cs:209
+#: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
-msgstr ""
+msgstr "П_ласты"
 
-#: ../Pinta/MainWindow.cs:210
+#: ../Pinta/MainWindow.cs:317
 msgid "_Adjustments"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:211
+#: ../Pinta/MainWindow.cs:318
 msgid "Effe_cts"
-msgstr ""
+msgstr "_Эфекты"
 
-#: ../Pinta/MainWindow.cs:212
+#: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
-msgstr ""
+msgstr "Пр_ыстаўкі"
 
-#: ../Pinta/MainWindow.cs:214
+#: ../Pinta/MainWindow.cs:321
 msgid "_Window"
-msgstr ""
+msgstr "А_кно"
 
-#: ../Pinta/MainWindow.cs:218
+#: ../Pinta/MainWindow.cs:325
 msgid "Tool Windows"
-msgstr ""
+msgstr "Вокны прылад"
 
-#: ../Pinta/MainWindow.cs:222
+#: ../Pinta/MainWindow.cs:329
 msgid "_Help"
-msgstr ""
+msgstr "_Даведка"
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
 msgstr ""
 
-#: ../Pinta/Pads/CanvasPad.cs:75
+#: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
 msgstr ""
 
-#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:50
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
-msgstr ""
+msgstr "Гісторыя"
 
-#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:54
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
 msgid "Layers"
-msgstr ""
+msgstr "Пласты"
 
-#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:45
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
 msgid "Images"
-msgstr ""
+msgstr "Відарысы"
 
-#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:48
+#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
 msgid "Tools"
-msgstr ""
+msgstr "Прылады"
 
 #: Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "Паводзіны краю"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
@@ -2093,24 +2110,24 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr ""
+msgstr "Уключыць"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr ""
+msgstr "Адключыць"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Нічога не выбрана"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Даступны ў сховішчы:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Даступна абнаўленне"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
@@ -2128,15 +2145,15 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr ""
+msgstr "Устаноўленая версія"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Версія ў сховішчы"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr ""
+msgstr "Памер сцягвання"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
@@ -2144,7 +2161,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr ""
+msgstr "Устанаўленне скасавана"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
@@ -2152,29 +2169,29 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr ""
+msgstr "Устанаўленне схібіла"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr ""
+msgstr "Устаноўленыя"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Абнаўленні"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Галерэя"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Усе сховішчы"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
@@ -2184,8 +2201,9 @@ msgstr ""
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} абнаўленне даступна"
+msgstr[1] "{0} абнаўленні даступны"
+msgstr[2] "{0} абнаўленняў даступна"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
@@ -2201,7 +2219,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Прыстаўкі не знойдзены"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
@@ -2209,15 +2227,15 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Іншае"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Выдаліць"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr ""
+msgstr "Наступныя пакункі будуць выдалены:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
@@ -2233,15 +2251,15 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Наступныя пакункі будуць устаноўлены:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (у каталогу карыстальніка)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Наступныя пакункі трэба выдаліць:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
@@ -2277,7 +2295,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Рэгіструецца сховішча"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
@@ -2287,15 +2305,15 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr ""
+msgstr "Больш звестак"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Устанавіць..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Абнаўленне"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
@@ -2303,7 +2321,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "Неабходны дадатковыя прыстаўкі, каб выканаць гэту аперацыю."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
@@ -2311,27 +2329,27 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Абнаўленні не знойдзены"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr ""
+msgstr "Перачытаць"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr ""
+msgstr "Абнавіць усе"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Сховішча:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr ""
+msgstr "Устанавіць з файла..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr ""
+msgstr "Устанавіць"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
@@ -2339,7 +2357,7 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr ""
+msgstr "Дадаць новае сховішча"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
@@ -2347,29 +2365,29 @@ msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr ""
+msgstr "Зарэгістраваць сеціўнае сховішча"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "URL:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Зарэгістраваць лакальнае сховішча"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr ""
+msgstr "Шлях:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr ""
+msgstr "Аглядаць..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr ""
+msgstr "Прагрэс"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(прадстаўлена: {0})"

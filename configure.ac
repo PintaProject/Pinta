@@ -35,7 +35,7 @@ GETTEXT_PACKAGE=pinta
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
 
-ALL_LINGUAS="af ar ast az be bg br bs ca cs da de el en_AU en_CA en_GB eo es et eu fi fil fo fr ga gl he hi hr hu hy id it ja ka ko la lt lv ms nb nl nn oc pl pt pt_BR ro ru sk sl sq sr sv th tr uk vi zh_CN zh_TW"
+ALL_LINGUAS="af ar ast az be bg bn br bs ca cs da de dv el en_AU en_CA en_GB eo es et eu fi fil fo fr ga gl he hi hr hu hy id it ja ka ko la lt lv ms my nb nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv th tr uk vi zh_CN zh_HK zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 pintalocaledir='${prefix}/${DATADIRNAME}/locale'

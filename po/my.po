@@ -1,142 +1,142 @@
-# Catalan translation for pinta
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Burmese translation for pinta
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-07-19 10:26+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"PO-Revision-Date: 2015-07-25 11:32+0000\n"
+"Last-Translator: Rockworld <sumoisrock@gmail.com>\n"
+"Language-Team: Burmese <my@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
 "X-Generator: Launchpad (build 18086)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr "Pinta"
+msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr "Creeu i editeu imatges de forma senzilla"
+msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "Editor d’imatges"
+msgstr "Image Editor"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr "Editor d’imatges Pinta"
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr "Gestor de connectors"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
-msgstr "Desfés"
+msgstr "နောက်ပြန်လုပ်ဆောင်မည်"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "Refés"
+msgstr "ပြန်ပြင်ပါ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
-msgstr "Retalla"
+msgstr "ဖြတ်"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
-msgstr "Copia"
+msgstr "မိတ္တူ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr "Copia visible"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 #: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr "Enganxa"
+msgstr "ပွားယူ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Classes/Document.cs:790
 msgid "Paste Into New Layer"
-msgstr "Enganxa en una capa nova"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr "Enganxa en una imatge nova"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
-msgstr "Esborra la selecció"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr "Omple la selecció"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Invert Selection"
-msgstr "Inverteix la selecció"
+msgstr "Invert Selection"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr "Selecciona-ho tot"
+msgstr "အားလုံးကို ရွေးချယ်ပါ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr "No seleccionis res"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
-msgstr "Obre…"
+msgstr "Open..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:82
 #: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
-msgstr "Anomena i desa..."
+msgstr "Save As..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr "Restaura els valors per defecte"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr "Estableix el nombre de colors"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
 #: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
-msgstr "Paleta"
+msgstr "Palette"
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr "Desselecciona"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:323
 msgid "Open Palette File"
-msgstr "Obre el fitxer de paleta"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:330
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "Fitxers de paleta (*.txt, *.gpl)"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:334
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr "Tots els fitxers"
+msgstr "ဖိုင်များအားလုံး"
 
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #, csharp-format
@@ -144,400 +144,396 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"No s'ha pogut obrir el fitxer de paleta: {0}.\n"
-"Comproveu que esteu intentant obrir una paleta GIMP o Paint.NET vàlida."
 
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
-msgstr "Hi ha hagut un error"
+msgstr "ချို့ယွင်းချက်"
 
 #: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Save Palette File"
-msgstr "Desa el fitxer de paleta"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Paint.NET palette (*.txt)"
-msgstr "Paleta de Paint.NET (*.txt)"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "GIMP palette (*.gpl)"
-msgstr "Paleta de GIMP (*.gpl)"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "Nou…"
+msgstr "အသစ်..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "Captura de pantalla nova…"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "Obre recents"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
 msgid "Close"
-msgstr "Tanca"
+msgstr "ပိတ်ရန်"
 
 #: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "Desa"
+msgstr "Save ကို"
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "Imprimeix"
+msgstr "ပရင့္"
 
 #: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "Surt"
+msgstr "ထွက်"
 
 #: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "Nou"
+msgstr "အသစ်"
 
 #: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "Obre"
+msgstr "ဖွင့်"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr "Contingut"
+msgstr "မာတိကာ"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr "Lloc web de Pinta"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
-msgstr "Informa d'un error"
+msgstr "Bug file ပြုလုပ်ပါ"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
-msgstr "Traduïu aquesta aplicació"
+msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
 msgid "About"
-msgstr "Quant a"
+msgstr "နှင့်ပတ်သက်သော"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
 #: ../Pinta.Core/Actions/ImageActions.cs:283
 msgid "Crop to Selection"
-msgstr "Escapça la selecció"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
 msgid "Auto Crop"
-msgstr "Escapça automàticament"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Image..."
-msgstr "Redimensiona la imatge..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
-msgstr "Redimensiona el llenç..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
-msgstr "Inversió horitzontal"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:71
 msgid "Flip Vertical"
-msgstr "Inversió vertical"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr "Gira a la dreta 90º"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "Gira a l'esquerra 90º"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr "Gira 180º"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:69
 #: ../Pinta.Core/Actions/ImageActions.cs:138
 msgid "Flatten"
-msgstr "Aplana"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
 #: ../Pinta.Core/Classes/Document.cs:852
 msgid "Add New Layer"
-msgstr "Afegeix una capa nova"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
 msgid "Delete Layer"
-msgstr "Elimina la capa"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "Capa duplicada"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr "Fusiona amb la capa inferior"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr "Importa des del fitxer..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr "Gira la capa"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
-msgstr "Puja la capa"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
 #: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
-msgstr "Baixa la capa"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr "Propietats de la capa..."
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "Obre un fitxer d’imatge"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr "Importa des d'un fitxer"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom In"
-msgstr "Amplia"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom Out"
-msgstr "Redueix"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
-msgstr "Millor ajust"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
-msgstr "Ajusta a l'amplada de la selecció"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
-msgstr "Mida normal"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
-msgstr "Barra d'eines"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr "Pestanyes d’imatges"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
-msgstr "Graella de píxels"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Rulers"
-msgstr "Regles"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Pixels"
-msgstr "Píxels"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
 msgid "Inches"
-msgstr "Polzades"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:88
 msgid "Centimeters"
-msgstr "Centímetres"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
-msgstr "Pantalla completa"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
 #: ../Pinta.Core/Actions/ViewActions.cs:276
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
-msgstr "Finestra"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
-msgstr "Unitats del regle"
+msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr "{0} %"
+msgstr ""
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "Desa-ho tot"
+msgstr ""
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "Tanca-ho tot"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:244
 msgid "Tool"
-msgstr "Eina"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
-msgstr "Drecera de teclat"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
-msgstr "Barreja normal"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:429
 msgid "Overwrite"
-msgstr "Sobreescriu"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:443
 msgid "Antialiasing On"
-msgstr "Antialiàsing activat"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:444
 msgid "Antialiasing Off"
-msgstr "Antialiàsing desactivat"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
-msgstr "Capa"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:392
 msgid "copy"
-msgstr "copia"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:668
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "Redimensiona el llenç"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr "Desplaça els píxels seleccionats"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
-msgstr "La imatge és més gran que el llenç"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
-"La imatge que voleu enganxar és més gran que la mida del llenç. Què voleu "
-"fer?"
 
 #: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
-msgstr "Expandeix el llenç"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
-msgstr "No canviïs la mida del llenç"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
-msgstr "No s’ha pogut enganxar la imatge"
+msgstr ""
 
 #: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
-msgstr "El porta-retalls no conté cap imatge."
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
-msgstr "Substitueix"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr "Unió (+) (Ctrl + Clic esquerre)"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
-msgstr "Exclou (-) (Clic dret)"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Xor (Ctrl + Right Click)"
-msgstr "Xor (Ctrl + Clic dret)"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
-msgstr "Intersecció (Maj + Clic esquerre)"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr " Mode de selecció: "
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
 #: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
-msgstr "Multiplica"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
-msgstr "Subexposa el color"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
-msgstr "Sobreexposa el color"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Overlay"
-msgstr "Sobreposa"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Difference"
-msgstr "Diferència"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Lighten"
-msgstr "Il·lumina"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Darken"
-msgstr "Enfosqueix"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Screen"
-msgstr "Pantalla"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Xor"
-msgstr "Xor"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
@@ -554,222 +550,222 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
 msgid "Luminosity"
-msgstr "Lluminositat"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr "Matís"
+msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
-msgstr "Saturació"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "Finalitza píxels"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "Inversió horitzontal"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "Inversió vertical"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "Inversió horitzontal de la capa"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "Inversió vertical de la capa"
+msgstr ""
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:38
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "Redimensiona la imatge"
+msgstr ""
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "Imatge {0} ({1})"
+msgstr ""
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:63
 #: ../Pinta.Core/Managers/EffectsManager.cs:98
 msgid "..."
-msgstr "…"
+msgstr ""
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:221
 msgid "Rendering Effect"
-msgstr "Efecte de renderització"
+msgstr ""
 
 #: ../Pinta.Core/Managers/ToolManager.cs:234
 #: ../Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr "No s’ha seleccionat cap eina."
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "Imatge sense desar {0}"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:157
 msgid "Background"
-msgstr "Fons"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:166
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
-msgstr "Imatge nova"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr "El format del fitxer no és compatible"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
-msgstr "Obre una imatge"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:204
 msgid "Permission denied"
-msgstr "S’ha denegat el permís"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "No s'ha pogut obrir el fitxer: {0}"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
-msgstr "Amaga"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr "Minimitza"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
 msgid "Dock"
-msgstr "Acobla"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr "Desancora"
+msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
 msgid "Auto Hide"
-msgstr "Oculta automàticament"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "Nivell automàtic"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
 msgid "Black and White"
-msgstr "Blanc i negre"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "Brillantor / Contrast"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Brightness"
-msgstr "Brillantor"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
-msgstr "Contrast"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
 msgid "Curves"
-msgstr "Corbes"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "To / Saturació"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr "Lluminositat"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
-msgstr "Inverteix els colors"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr "Nivells"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
 msgid "Posterize"
-msgstr "Redueix el nombre de colors"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
-msgstr "Sèpia"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
-msgstr "Ajustament dels nivells"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
-msgstr "Vermell"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
 msgid "Green"
-msgstr "Verd"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
 msgid "Blue"
-msgstr "Blau"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
 msgid "Linked"
-msgstr "Enllaçat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
-msgstr "Afegeix soroll"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
 #: ../Pinta.Effects/Effects/MedianEffect.cs:36
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
 msgid "Noise"
-msgstr "Soroll"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:145
 #: ../Pinta.Effects/Effects/TileEffect.cs:142
 msgid "Intensity"
-msgstr "Intensitat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
-msgstr "Saturació del color"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
-msgstr "Cobertura"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr "Abonyega"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
@@ -778,7 +774,7 @@ msgstr "Abonyega"
 #: ../Pinta.Effects/Effects/TileEffect.cs:33
 #: ../Pinta.Effects/Effects/TwistEffect.cs:33
 msgid "Distort"
-msgstr "Distorsiona"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:101
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
@@ -786,46 +782,46 @@ msgstr "Distorsiona"
 #: ../Pinta.Effects/Effects/TwistEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
 msgid "Amount"
-msgstr "Quantitat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:104
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
 msgid "Offset"
-msgstr "Desplaçament"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr "Núvols"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
-msgstr "Renderitza"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
-msgstr "Escala"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
-msgstr "Força"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:231
 msgid "Seed"
-msgstr "Llavor"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "Detecció de vores"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
-msgstr "Estilitza"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:143
@@ -837,15 +833,15 @@ msgstr "Estilitza"
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
 msgid "Angle"
-msgstr "Angle"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
-msgstr "Esculpeix"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
-msgstr "Fragment"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
@@ -854,29 +850,29 @@ msgstr "Fragment"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
 msgid "Blurs"
-msgstr "Difuminats"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:111
 msgid "Fragments"
-msgstr "Fragments"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Distance"
-msgstr "Distància"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
 #: ../Pinta.Effects/Effects/TileEffect.cs:138
 msgid "Rotation"
-msgstr "Rotació"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
-msgstr "Vidre gebrat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr "Difuminat gaussià"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -885,207 +881,203 @@ msgstr "Difuminat gaussià"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
 msgid "Radius"
-msgstr "Radi"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 msgid "Glow"
-msgstr "Lluentor"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:33
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
 msgid "Photo"
-msgstr "Foto"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "Esbós en tinta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
 msgid "Artistic"
-msgstr "Artístic"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
 msgid "Ink Outline"
-msgstr "Contorn a tinta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
 msgid "Coloring"
-msgstr "Colorejat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
-msgstr "Fractal Julia"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
 msgid "Factor"
-msgstr "Factor"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
 #: ../Pinta.Effects/Effects/WarpEffect.cs:188
 msgid "Quality"
-msgstr "Qualitat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
 #: ../Pinta.Tools/Tools/ZoomTool.cs:48
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Zoom"
-msgstr "Zoom"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
 msgid "Mandelbrot Fractal"
-msgstr "Fractal de Mandelbrot"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
 msgid "Median"
-msgstr "Mediana"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:73
 msgid "Percentile"
-msgstr "Percentil"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
-msgstr "Difuminació per moviment"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
 msgid "Centered"
-msgstr "Centrat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr "Pintura a l'oli"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
 msgid "Brush Size"
-msgstr "Mida del pinzell"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
 msgid "Coarseness"
-msgstr "Tosquedat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
 #: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
-msgstr "Contorn"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:142
 msgid "Thickness"
-msgstr "Gruix"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
-msgstr "Esbós en llapis"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
 msgid "Pencil Tip Size"
-msgstr "Mida de la punta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
 msgid "Color Range"
-msgstr "Interval de color"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr "Pixela"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:119
 msgid "Cell Size"
-msgstr "Mida de la cel·la"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
-msgstr "Inversió polar"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
 msgid "Radial Blur"
-msgstr "Desenfocament radial"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Feu servir la baixa qualitat per a previsualitzacions, imatges petites i "
-"angles petits. Feu servir l'alta qualitat per a imatges grans i angles grans."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr "Elimina els ulls vermells"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
 #: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
 msgid "Tolerance"
-msgstr "Tolerància"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr "Percentatge de saturació"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Consell: Per obtenir el millor resultat, abans feu servir eines de selecció "
-"per seleccionar cada ull."
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
-msgstr "Redueix el soroll"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
 msgid "Strength"
-msgstr "Força"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
-msgstr "Relleu"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:25
 msgid "Sharpen"
-msgstr "Nítid"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Soften Portrait"
-msgstr "Suavitza el retrat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
 msgid "Softness"
-msgstr "Suavitat"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
 msgid "Lighting"
-msgstr "Il·luminació"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Warmth"
-msgstr "Caliu"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
-msgstr "Mosaic"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:140
 msgid "Tile Size"
-msgstr "Mida del mosaic"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "Espiral"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:133
 msgid "Antialias"
-msgstr "Antialiàsing"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "Desenfoca"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
@@ -1093,174 +1085,171 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr "Ajusta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
-msgstr "Reflexió"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
-msgstr "Primari"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Secondary"
-msgstr "Secundari"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 #: ../Pinta/Dialogs/NewImageDialog.cs:290
 msgid "Transparent"
-msgstr "Transparent"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr "Original"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
-msgstr "Desplaçament des del centre"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
-msgstr "Desenfocament per zoom"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Transfer Map"
-msgstr "Transfereix el mapa"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
 msgid "RGB"
-msgstr "RGB"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
 msgid "(256, 256)"
-msgstr "(256, 256)"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
 msgid "Red  "
-msgstr "Vermell  "
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
-msgstr "Blau "
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
 msgid "Reset"
-msgstr "Restableix"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
 msgid "Tip: Right-click to remove control points."
-msgstr "Consell: Feu clic amb el botó dret per eliminar punts de control."
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
 msgid "Input Histogram"
-msgstr "Histograma d'entrada"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
 msgid "Input"
-msgstr "Entrada"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
 msgid "Output"
-msgstr "Sortida"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
 msgid "Output Histogram"
-msgstr "Histograma de sortida"
+msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
-msgstr "Automàtic"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
 msgid "Choose Primary Color"
-msgstr "Tria el color primari"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
 msgid "Choose Secondary Color"
-msgstr "Tria el color secundari"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
 msgid "Choose Palette Color"
-msgstr "Tria la paleta de colors"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
 msgid "Click to switch between primary and secondary color."
-msgstr "Feu clic per canviar entre el color primari i el secundari"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
 msgid "Click to reset primary and secondary color."
-msgstr "Feu clic per reinicialitzar els colors primari i secundari."
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
 msgid "Click to select primary color."
-msgstr "Feu clic per seleccionar el color primari."
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
 msgid "Click to select secondary color."
-msgstr "Feu clic per seleccionar el color secundari."
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Feu clic amb el botó esquerre per triar el color primari. Feu clic amb el "
-"botó dret per triar el color secundari. Feu clic amb la rodeta per triar el "
-"color de la paleta."
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
 msgid "Random Noise"
-msgstr "Soroll aleatori"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
 msgid "Reseed"
-msgstr "Reinicia"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Shown"
-msgstr "Capa actual"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Hidden"
-msgstr "Capa oculta"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr "Cercles"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
-msgstr "Graella"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "Aerògraf"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
-msgstr "Quadrats"
+msgstr ""
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr "Guió"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
-msgstr "Fletxa"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
 msgid "Size"
-msgstr "Mida"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr "Disminueix la mida de la fletxa"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr "Augmenta la mida de la fletxa"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
@@ -1272,7 +1261,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
-msgstr "Longitud"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
@@ -1286,61 +1275,61 @@ msgstr ""
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
-msgstr "Amplada del pinzell"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "Redueix la mida del pinzell"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Augmenta la mida del pinzell"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
-msgstr "Estil de farciment"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
-msgstr "Perfila la forma"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
-msgstr "Omple la forma"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
-msgstr "Omple i perfila la forma"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
-msgstr "Tipus de la forma"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
-msgstr "Sèrie de línia/corba oberta"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr "Sèrie de línia/corba tancada"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
-msgstr "El·lipse"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
@@ -1356,25 +1345,25 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
-msgstr "Suprimit"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
 msgid "Point Added"
-msgstr "Punt afegit"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
-msgstr "Afegit"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr "Modificat"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
-msgstr "Finalitzat"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
@@ -1398,83 +1387,78 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "Tampó de clonar"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
 msgstr ""
-"Ctrl-clic esquerre per determinar l'origen, clic esquerre per pintar."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
-msgstr "Capturador de color"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Feu clic amb el botó esquerre per establir el color primari. Feu clic amb el "
-"botó dret per establir el color secundari."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr "Mostreig"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr "Un únic píxel"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr "Regió de 3 × 3"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr "Regió de 5 × 5"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr "Regió de 7 × 7"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr "Regió de 9 × 9"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr "Imatge"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
-msgstr "Després de seleccionar"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
 msgid "Do not switch tool"
-msgstr "No canviïs d'eina"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
 msgid "Switch to previous tool"
-msgstr "Canvia a l’eina anterior"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
-msgstr "Canvia a l’eina Llapis"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr "Llapis"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
-msgstr "Selecció el·líptica"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
-"Feu clic i arrossegueu per dibuixar una selecció el·líptica. Manteniu "
-"premuda Maj per restringir a un cercle."
 
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:46
@@ -1502,7 +1486,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
 msgid "Type"
-msgstr "Tipus"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
@@ -1510,30 +1494,28 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
-msgstr "Goma d'esborrar"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:205
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Feu clic amb el botó esquerre per esborrar com a transparència, feu clic amb "
-"el botó dret per esborrar amb el color secundari. "
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:72
 msgid "Flood Mode"
-msgstr "Mode Inundació"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:79
 msgid "Contiguous"
-msgstr "Contigu"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:80
 msgid "Global"
-msgstr "Global"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
 msgid "Freeform Shape"
-msgstr "Forma lliure"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
@@ -1541,441 +1523,408 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Feu clic esquerre per dibuixar amb el color primari, feu clic dret per "
-"dibuixar amb el secundari."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
 #: ../Pinta.Tools/Tools/GradientTool.cs:169
 msgid "Gradient"
-msgstr "Degradat"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
 msgstr ""
-"Feu clic i arrossegueu per dibuixar un degradat del color primari al "
-"secundari. Feu clic dret per fer-ho al revés."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Linear Gradient"
-msgstr "Degradat lineal"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Linear Reflected Gradient"
-msgstr "Degradat reflectit lineal"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Linear Diamond Gradient"
-msgstr "Degradat de diamant lineal"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:179
 msgid "Radial Gradient"
-msgstr "Degradat radial"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:180
 msgid "Conical Gradient"
-msgstr "Degradat cònic"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
 msgid "Lasso Select"
-msgstr "Selecció de llaç"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
-"Feu clic i arrossegueu per dibuixar el contorn d’una àrea de selecció."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
-msgstr "Línia/corba"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:62
 msgid "Magic Wand Select"
-msgstr "Vareta màgica"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:72
 msgid "Click to select region of similar color."
-msgstr "Feu clic per triar una regió de color similar"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
-"Feu clic esquerre i arrossegueu la selecció per moure el contingut "
-"seleccionat. Feu clic dret i arrossegueu la selecció per rotar el contingut "
-"seleccionat."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "Mou la selecció"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
-"Feu clic esquerre i arrossegueu la selecció per moure el perfil de la "
-"selecció. Feu clic dret i arrossegueu la selecció per rotar el perfil de la "
-"selecció."
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
-msgstr "Pinzell"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "Cubell de pintura"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Feu clic esquerre per omplir una regió amb el color primari, feu clic dret "
-"per omplir-la amb el color secundari."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Pan"
-msgstr "Desplaça"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
-msgstr "Feu clic i arrossegueu per navegar per la imatge."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
-"Feu clic esquerre per dibuixar línies de forma lliure d'un píxel d'amplada "
-"amb el color primari. Feu clic dret per fer servir el color secundari."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid "Recolor"
-msgstr "Reacoloreix"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:62
 msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
 msgstr ""
-"Feu clic per reemplaçar el color secundari amb el primari. Feu clic amb el "
-"botó dret per fer-ho a l’inrevès."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
-msgstr "Selecció rectangular"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
-"Feu clic i arrossegueu per dibuixar una selecció rectangular. Manteniu "
-"premuda Maj per restringir a un quadrat."
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr "Rectangle"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
-msgstr "Rectangle arrodonit"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
-msgstr "Text - Finalitza"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Feu clic esquerre per situar el cursor i escriviu el text que vulgueu. El "
-"color del text és el color primari."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
-msgstr "Tipus de lletra"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Bold"
-msgstr "Negreta"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:198
 msgid "Italic"
-msgstr "Cursiva"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:205
 msgid "Underline"
-msgstr "Subratllat"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Left Align"
-msgstr "Alineat a l'esquerra"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Center Align"
-msgstr "Alineat al centre"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Right Align"
-msgstr "Alineat a la dreta"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Text Style"
-msgstr "Estil del text"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
-msgstr "Normal i contorn"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
-msgstr "Omple el fons"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
-msgstr "Amplada del contorn"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "Redueix la mida del contorn"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "Augmenta la mida del contorn"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
 msgstr ""
-"Feu clic esquerre per ampliar la vista. Feu clic dret per reduir la vista. "
-"Feu clic i arrossegueu per ampliar la selecció."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "Resize Palette"
-msgstr "Redimensiona la paleta"
+msgstr ""
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
-msgstr "Nova mida de paleta:"
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Voleu desar els canvis a la imatge \"{0}\" abans de tancar?"
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "Si no deseu, es perdran definitivament tots els canvis."
+msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr "Tanca _sense desar"
+msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr "Fes una captura de pantalla"
+msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "Retard abans de fer una captura de pantalla (segons):"
+msgstr ""
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:63
 msgid "Image files"
-msgstr "Fitxers d'imatge"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr "Desa el fitxer d’imatge"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
-msgstr "El Pinta no permet desar imatges en aquest format."
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
 msgid "Cannot save read only file."
-msgstr "No es pot guardar un fitxer només de lectura."
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
 msgid "Image too large"
-msgstr "La imatge és massa gran"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Els fitxers ICO no poden excedir 255 × 255 píxels."
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Ja existeix un fitxer anomenat «{0}». Voleu reemplaçar-lo?"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
 msgstr ""
-"El fitxer ja existeix a \"{1}\". Si el substituïu sobreescriureu el seu "
-"contingut."
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
 msgid "Layer Opacity"
-msgstr "Opacitat de la capa"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
 msgid "Rename Layer"
-msgstr "Canvia el nom de la capa"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Hide Layer"
-msgstr "Amaga la capa"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Show Layer"
-msgstr "Mostra la capa"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
 msgid "Layer Properties"
-msgstr "Propietats de la capa"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
-msgstr "Gira la capa"
+msgstr ""
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr "Connectors de la comunitat de Pinta: específics d’una plataforma"
+msgstr ""
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr "Connectors de la comunitat de Pinta: multiplataforma"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
-msgstr "Col·laboradors d’aquesta versió:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:138
 msgid "Previous contributors:"
-msgstr "Col·laboradors anteriors:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  ASeques https://launchpad.net/~sacoo2\n"
-"  Adolfo Jayme https://launchpad.net/~fitojb\n"
-"  Berna https://launchpad.net/~bern-ab\n"
-"  Joan https://launchpad.net/~jcompte\n"
-"  Maria Plana https://launchpad.net/~tfs-msimangu\n"
-"  Pau Iranzo https://launchpad.net/~paugnu\n"
-"  lespedretes https://launchpad.net/~lespedretes-b\n"
-"  thor9216 https://launchpad.net/~thor9216\n"
-"  tot3lmon https://launchpad.net/~tot3lmon"
+"  Rockworld https://launchpad.net/~rockrock2222222"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
-msgstr "Traduït per:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:158
 msgid "Based on the work of Paint.NET:"
-msgstr "Basat en el treball de Paint.NET:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "Using some icons from:"
-msgstr "S'han utilitzat algunes icones de:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
-msgstr "Impulsat per Mono:"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
-msgstr "Quant al Pinta"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutDialog.cs:298
 msgid "Version Info"
-msgstr "Informació de la versió"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
-msgstr "Versió"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "License"
-msgstr "Llicència"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
-msgstr "Publicat sota la llicència MIT X11"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
-msgstr "Copyright"
+msgstr ""
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "by Pinta contributors"
-msgstr "per contribuents del Pinta"
+msgstr ""
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr "Detalls"
+msgstr ""
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr "Informeu d’un error…"
+msgstr ""
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "Qualitat de JPEG"
+msgstr ""
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
-msgstr "Qualitat: "
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
 msgid "Name:"
-msgstr "Nom:"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
-msgstr "Visible"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
-msgstr "Mode"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
 msgid "Opacity:"
-msgstr "Opacitat:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
 #: ../Pinta/Dialogs/NewImageDialog.cs:342
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr "Porta-retalls"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
 #: ../Pinta/Dialogs/NewImageDialog.cs:344
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Custom"
-msgstr "Personalitzat"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
@@ -1985,7 +1934,7 @@ msgstr ""
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
-msgstr "Amplada:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
@@ -1994,37 +1943,37 @@ msgstr "Amplada:"
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
-msgstr "píxels"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
-msgstr "Alçada:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr "Orientació:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr "Vertical"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr "Horitzontal"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr "Fons:"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr "Blanc"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
-msgstr "Color del fons"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
@@ -2032,417 +1981,408 @@ msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "Títol"
+msgstr ""
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "Ruta"
+msgstr ""
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "Per percentage:"
+msgstr ""
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "Per mida absoluta:"
+msgstr ""
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "Mantingues la relació d'aspecte"
+msgstr ""
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "Àncora:"
+msgstr ""
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
-msgstr "Mostra aquest missatge i surt."
+msgstr ""
 
 #: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr "Mostra la versió de la aplicació."
+msgstr ""
 
 #: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
-msgstr "nombre de fils a usar per a la renderització"
+msgstr ""
 
 #: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr "Ús: pinta [fitxers]"
+msgstr ""
 
 #: ../Pinta/Main.cs:109
 msgid "Options: "
-msgstr "Opcions: "
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:309
 msgid "_File"
-msgstr "_Fitxer"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:310
 msgid "_Edit"
-msgstr "_Edita"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:312
 msgid "_View"
-msgstr "_Mostra"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:315
 msgid "_Image"
-msgstr "_Imatge"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
-msgstr "_Capes"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:317
 msgid "_Adjustments"
-msgstr "_Ajustaments"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:318
 msgid "Effe_cts"
-msgstr "Efec_tes"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
-msgstr "_Complements"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:321
 msgid "_Window"
-msgstr "Fi_nestra"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:325
 msgid "Tool Windows"
-msgstr "Finestres d'eines"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:329
 msgid "_Help"
-msgstr "A_juda"
+msgstr ""
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
-msgstr "Nom de l'opció"
+msgstr ""
 
 #: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
-msgstr "Llenç"
+msgstr ""
 
 #: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
-msgstr "Historial"
+msgstr ""
 
 #: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
 msgid "Layers"
-msgstr "Capes"
+msgstr ""
 
 #: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
 msgid "Images"
-msgstr "Imatges"
+msgstr ""
 
 #: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
 msgid "Tools"
-msgstr "Eines"
+msgstr ""
 
 #: Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr "Comportament de les vores"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
-"Selecció múltiple:\n"
-"\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr "Habilita"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr "Deshabilita"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr "Sense selecció"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr "Disponibles en el dipòsit:"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr "Hi ha una actualització disponible"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr "No s’ha pogut carregar aquest complement perquè falten dependències"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr "Requerits: {0} v{1}, s’han trobat v{2}"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr "Falten: {0} v{1}"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr "Versió instal·lada"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr "Versió del dipòsit"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr "Mida de la baixada"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
-"Les següents dependències requerides per aquest complement no estan "
-"disponibles:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr "S'ha cancel·lat la instal·lació"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr "No s'han trobat alguns dels complements necessaris"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr "La instal·lació ha fallat"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr "Instal·lades"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr "Actualitzacions"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr "Galeria"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr "Tots els dipòsits"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr "Gestiona els dipòsits…"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] "{0} actualització disponible"
-msgstr[1] "{0} actualitzacions disponibles"
+msgstr[0] ""
+msgstr[1] ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr "S’està actualitzant el dipòsit"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr "Instal·la un paquet d'extensió"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr "Paquets de complements"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr "No s’ha trobat cap complement"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr "Complement"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr "Altres"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr "Desinstal·la"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr "Es desintal·laran els paquets següents:"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
-"Hi ha altres complements que depenen dels anteriors que també es "
-"desinstal·laran:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
-"Els complements seleccionats no es poden instal·lar perquè hi ha conflictes "
-"de dependències."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr "S'instal·laran els paquets següents:"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr " (al directori de l'usuari)"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr "S'han de desinstal·lar els paquets següents:"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr "No s'han pogut resoldre les dependències següents:"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr "Esteu segur que voleu cancel·lar la instal·lació?"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr "S’estan instal·lant els complements"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr "La instal·lació ha fallat"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr "La instal·lació s'ha completat amb avisos."
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr "S’estan desinstal·lant els complements"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr "La desinstal·lació ha fallat"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr "La desinstal·lació s'ha completat amb avisos."
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr "S’està registrant el dipòsit"
+msgstr ""
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr "S'ha produït l'excepció: {0}"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr "Més informació"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr "Instal·la…"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr "Actualitza"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr "_Desinstal·la…"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
 msgstr ""
-"Calen alguns complements addicionals per a realitzar aquesta operació."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr "S’instal·laran els complements següents:"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr "No s’han trobat actualitzacions"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr "Actualitza"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr "Actualitza-ho tot"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr "Dipòsit:"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr "Instal·la des d’un fitxer…"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr "Instal·la"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr "Gestió dels dipòsits de complements"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr "Afegeix un dipòsit nou"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr "Seleccioneu la ubicació del dipòsit que voleu registrar:"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr "Registra un dipòsit en línia"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr "URL:"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr "Registra un dipòsit local"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr "Ruta:"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr "Navega…"
+msgstr ""
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr "Progrés"
+msgstr ""
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr "(proporcionat per {0})"
+msgstr ""

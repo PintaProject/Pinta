@@ -92,6 +92,13 @@
                 </Component>
               </Directory>
             </Directory>
+            <Directory Id="bn" Name="bn">
+              <Directory Id="LC_MESSAGES_BN" Name='LC_MESSAGES'>
+                  <Component Id="BnTranslation" Guid="DD78B179-5952-4744-9D9D-CDEAE1648885">
+                  <File Id="pinta_bn" Name="pinta.mo" Source="$(var.BuildRoot)\locale\bn\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
             <Directory Id="br" Name="br">
               <Directory Id="LC_MESSAGES_BR" Name='LC_MESSAGES'>
                 <Component Id="BrTranslation" Guid="196B021E-309C-4A2E-94DA-AA17512A709B">
@@ -131,6 +138,13 @@
               <Directory Id="LC_MESSAGES_DE" Name='LC_MESSAGES'>
                 <Component Id="DeTranslation" Guid="F98414D7-8AE0-461B-B9EB-219DCE5284C4">
                   <File Id="pinta_de" Name="pinta.mo" Source="$(var.BuildRoot)\locale\de\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="dv" Name='dv'>
+              <Directory Id="LC_MESSAGES_DV" Name='LC_MESSAGES'>
+                  <Component Id="DvTranslation" Guid="A49BF518-B0E7-43AA-9601-00D71157CEC3">
+                  <File Id="pinta_dv" Name="pinta.mo" Source="$(var.BuildRoot)\locale\dv\LC_MESSAGES\pinta.mo" />
                 </Component>
               </Directory>
             </Directory>
@@ -330,6 +344,13 @@
                 </Component>
               </Directory>
             </Directory>
+            <Directory Id="my" Name='my'>
+              <Directory Id="LC_MESSAGES_MY" Name='LC_MESSAGES'>
+                  <Component Id="MyTranslation" Guid="8D4BE203-B637-47CB-B7F0-713A2182844D">
+                  <File Id="pinta_my" Name="pinta.mo" Source="$(var.BuildRoot)\locale\my\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
             <Directory Id="nb" Name='nb'>
               <Directory Id="LC_MESSAGES_NB" Name='LC_MESSAGES'>
                 <Component Id="NbTranslation" Guid="38C6EEB1-88CB-4ECA-BBDF-7F07C9114091">
@@ -390,6 +411,13 @@
               <Directory Id="LC_MESSAGES_RU" Name='LC_MESSAGES'>
                 <Component Id="RuTranslation" Guid="BF208BE8-3987-4132-875C-EE097416D675">
                   <File Id="pinta_ru" Name="pinta.mo" Source="$(var.BuildRoot)\locale\ru\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="si" Name='si'>
+              <Directory Id="LC_MESSAGES_SI" Name='LC_MESSAGES'>
+                  <Component Id="SiTranslation" Guid="F02D0592-0B7A-429D-B61C-B48472894C96">
+                  <File Id="pinta_si" Name="pinta.mo" Source="$(var.BuildRoot)\locale\si\LC_MESSAGES\pinta.mo" />
                 </Component>
               </Directory>
             </Directory>
@@ -460,6 +488,13 @@
               <Directory Id="LC_MESSAGES_ZhCn" Name='LC_MESSAGES'>
                 <Component Id="ZhCnTranslation" Guid="C96196DA-C971-4C59-B924-A0354AC71C6A">
                   <File Id="pinta_zhcn" Name="pinta.mo" Source="$(var.BuildRoot)\locale\zh_CN\LC_MESSAGES\pinta.mo" />
+                </Component>
+              </Directory>
+            </Directory>
+            <Directory Id="zh_HK" Name='zh_HK'>
+              <Directory Id="LC_MESSAGES_ZhHk" Name='LC_MESSAGES'>
+                  <Component Id="ZhHkTranslation" Guid="D54A7862-B080-464A-8750-0AF7FE03E7CA">
+                  <File Id="pinta_zhhk" Name="pinta.mo" Source="$(var.BuildRoot)\locale\zh_HK\LC_MESSAGES\pinta.mo" />
                 </Component>
               </Directory>
             </Directory>

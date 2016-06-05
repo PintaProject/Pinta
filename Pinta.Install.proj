@@ -32,6 +32,9 @@
     <Translation Include="po/bg.po">
       <Code>bg</Code>
     </Translation>
+    <Translation Include="po/bn.po">
+      <Code>bn</Code>
+    </Translation>
     <Translation Include="po/br.po">
       <Code>br</Code>
     </Translation>
@@ -49,6 +52,9 @@
     </Translation>
     <Translation Include="po/de.po">
       <Code>de</Code>
+    </Translation>
+    <Translation Include="po/dv.po">
+      <Code>dv</Code>
     </Translation>
     <Translation Include="po/el.po">
       <Code>el</Code>
@@ -134,6 +140,9 @@
     <Translation Include="po/ms.po">
       <Code>ms</Code>
     </Translation>
+    <Translation Include="po/my.po">
+      <Code>my</Code>
+    </Translation>
     <Translation Include="po/nb.po">
       <Code>nb</Code>
     </Translation>
@@ -160,6 +169,9 @@
     </Translation>
     <Translation Include="po/ru.po">
       <Code>ru</Code>
+    </Translation>
+    <Translation Include="po/si.po">
+      <Code>si</Code>
     </Translation>
     <Translation Include="po/sk.po">
       <Code>sk</Code>
@@ -190,6 +202,9 @@
     </Translation>
     <Translation Include="po/zh_CN.po">
       <Code>zh_CN</Code>
+    </Translation>
+    <Translation Include="po/zh_HK.po">
+      <Code>zh_HK</Code>
     </Translation>
     <Translation Include="po/zh_TW.po">
       <Code>zh_TW</Code>
