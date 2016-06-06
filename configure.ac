@@ -7,10 +7,7 @@ YELP_HELP_INIT
 AC_PROG_INSTALL
 
 dnl pkg-config
-AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-if test "x$PKG_CONFIG" = "xno"; then
-        AC_MSG_ERROR([You need to install pkg-config])
-fi
+PKG_PROG_PKG_CONFIG([0.20])
 
 AC_PATH_PROG(XBUILD, xbuild, no)
 AC_PATH_PROG(MONO, mono, no)
