@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <id type="desktop">pinta.desktop</id>
+  <license>MIT</license>
+  <metadata_license>CC0-1.0</metadata_license>
+  <summary>Edit images and paint digitally</summary>
+  <description>
+    <_p>
+      Pinta is a image editing, drawing and painting application with a simple
+      yet powerful interface.
+      Pinta has a wide range of drawing tools, including: freehand, rectangles,
+      circles and lines.
+      It also has over 35 effects to apply to your images, and also has the
+      ability to create unlimited layers to help organize your creativity.
+    </_p>
+  </description>
+  <screenshots>
+      <screenshot type="default">https://pinta-project.com/pintaproject/pinta/theme/images/ss1.jpg</screenshot>
+  </screenshots>
+  <url type="homepage">https://pinta-project.com</url>
+  <translation type="gettext">pinta</translation>
+</application>

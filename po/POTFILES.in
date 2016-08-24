@@ -1,4 +1,5 @@
 xdg/pinta.desktop.in
+xdg/pinta.appdata.xml.in
 
 Pinta.Core/Actions/AddinActions.cs
 Pinta.Core/Actions/EditActions.cs
