@@ -6,17 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2016-05-06 12:14+0000\n"
-"Last-Translator: Marck <Unknown>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-10 15:52+0200\n"
+"PO-Revision-Date: 2016-09-10 15:52+0200\n"
+"Last-Translator: Matthias Mailänder\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -33,6 +34,21 @@ msgstr "Bildbearbeitung"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta-Bildbearbeitung"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+"Pinta ist ein Bildbearbeitungs-, Zeichen- und Malprogramm mit einer "
+"einfachen aber mächtigen Oberfläche. Pinta hat zahlreiche Zeichenwerkzeuge, "
+"unter anderem: Freihand, Rechteck, Kreis und Linien. Es unterstützt über 35 "
+"Effekte, die zu den Bildern hinzugefügt werden können und besitzt die "
+"Fähigkeit unbegrenzt Ebenen einzufügen um die eigene Kreativität zu "
+"organisieren."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -542,15 +558,15 @@ msgstr "XOR"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Hartes Licht"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Weiches Licht"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Farbe"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -1529,7 +1545,7 @@ msgstr "Typ"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Weich"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -2070,7 +2086,7 @@ msgstr "Hintergrundfarbe"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -2459,8 +2475,7 @@ msgstr "Neue Paketquelle hinzufügen"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
-"Bitte den Ort der Paketquelle auswählen, die Sie registrieren wollen:"
+msgstr "Bitte den Ort der Paketquelle auswählen, die Sie registrieren wollen:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
