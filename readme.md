@@ -1,4 +1,4 @@
-#Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
+# Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
 
 [![Build Status](https://travis-ci.org/PintaProject/Pinta.svg)](https://travis-ci.org/PintaProject/Pinta)
 
@@ -15,7 +15,7 @@ original headers on source files.
 See `license-pdn.txt` for Paint.Net's original license.
 
 
-##Icons are from:
+## Icons are from:
 
 - [Paint.Net 3.0](http://www.getpaint.net/)
 Used under [MIT License](http://www.opensource.org/licenses/mit-license.php)
@@ -26,7 +26,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 - [Fugue icon set](http://pinvoke.com/)
 Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
-##Getting help/contributing:
+## Getting help/contributing:
 
 - You can get technical help on the [Pinta Google Group](http://groups.google.com/group/pinta)
 - You can report bugs on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
@@ -37,11 +37,11 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 - For details on patching, take a look at `patch-guidelines.md` in the repo.
 
 
-##Windows Build and Installation Instructions:
+## Windows Build and Installation Instructions:
 
 Be sure to install [Gtk# for Windows](http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.22.msi) when building in Visual Studio.
 
-##Linux Build and Installation Instructions:
+## Linux Build and Installation Instructions:
 
 Building Pinta requires the following software:
 
