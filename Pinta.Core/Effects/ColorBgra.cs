@@ -509,7 +509,7 @@ namespace Pinta.Core
         /// the total summation of the weight values.
         /// </returns>
         /// <remarks>
-        /// "WAIP" stands for "weights, floating-point"</remarks>
+        /// "WFP" stands for "weights, floating-point"</remarks>
         public static ColorBgra BlendColorsWFP(ColorBgra[] c, double[] w)
         {
             if (c.Length != w.Length)
