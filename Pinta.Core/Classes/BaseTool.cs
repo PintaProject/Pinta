@@ -52,6 +52,7 @@ namespace Pinta.Core
 		protected ToolBarDropDownButton antialiasing_button;
 		private ToolBarItem aaOn, aaOff;
 		protected ToolBarDropDownButton alphablending_button;
+		private ToolBarItem abOn, abOff;
 		public event MouseHandler MouseMoved;
 		public event MouseHandler MousePressed;
 		public event MouseHandler MouseReleased;
@@ -106,7 +107,23 @@ namespace Pinta.Core
 			}
 		}
 
-		public virtual bool UseAlphaBlending { get { return ShowAlphaBlendingButton && (bool)alphablending_button.SelectedItem.Tag; } }
+		public virtual bool UseAlphaBlending
+		{
+			get
+			{
+				return alphablending_button != null &&
+					   ShowAlphaBlendingButton &&
+					   (bool)alphablending_button.SelectedItem.Tag;
+			}
+			set
+			{
+				if (!ShowAlphaBlendingButton || alphablending_button == null)
+					return;
+
+				alphablending_button.SelectedItem = value ? abOn : abOff;
+			}
+		}
+
 		public virtual int Priority { get { return 75; } }
 
 		public virtual bool CursorChangesOnZoom { get { return false; } }
@@ -425,8 +442,8 @@ namespace Pinta.Core
 
 			alphablending_button = new ToolBarDropDownButton ();
 
-			alphablending_button.AddItem (Catalog.GetString ("Normal Blending"), "Toolbar.BlendingEnabledIcon.png", true);
-			alphablending_button.AddItem (Catalog.GetString ("Overwrite"), "Toolbar.BlendingOverwriteIcon.png", false);
+			abOn = alphablending_button.AddItem (Catalog.GetString ("Normal Blending"), "Toolbar.BlendingEnabledIcon.png", true);
+			abOff = alphablending_button.AddItem (Catalog.GetString ("Overwrite"), "Toolbar.BlendingOverwriteIcon.png", false);
 
 			tb.AppendItem (alphablending_button);
 		}
