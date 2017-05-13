@@ -51,7 +51,7 @@ namespace Pinta.Tools.Brushes
 
 				ColorBgra source = surface.GetColorBgraUnchecked (x, y);
 				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, strokeColor.ToColorBgra ());
-				surface.SetColorBgra (source, x, y);
+				surface.SetColorBgra (source.ToPremultipliedAlpha (), x, y);
 				surface.MarkDirty ();
 
 				return new Gdk.Rectangle (x - 1, y - 1, 3, 3);
