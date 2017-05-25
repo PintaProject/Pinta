@@ -448,6 +448,9 @@ namespace Pinta.Tools
 				FinalizeAllShapes();
 			}
 
+            if (PintaCore.Workspace.HasOpenDocuments)
+                PintaCore.Workspace.ActiveDocument.ToolLayer.Hidden = true;
+
             PintaCore.Palette.PrimaryColorChanged -= Palette_PrimaryColorChanged;
             PintaCore.Palette.SecondaryColorChanged -= Palette_SecondaryColorChanged;
         }
