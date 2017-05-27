@@ -42,6 +42,9 @@ namespace Pinta.Core
 
 			GimpPalette gimpHandler = new GimpPalette ();
 			formats.Add (new PaletteDescriptor ("GIMP", new string[] { "gpl", "GPL" }, gimpHandler, gimpHandler));
+
+			PaintShopProPalette pspHandler = new PaintShopProPalette ();
+			formats.Add (new PaletteDescriptor ("PaintShop Pro", new string[] { "pal", "PAL" }, pspHandler, pspHandler));
 		}
 
 		public IEnumerable<PaletteDescriptor> Formats { get { return formats; } }

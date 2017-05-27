@@ -190,6 +190,7 @@
     <Compile Include="PaletteFormats\PaintDotNetPalette.cs" />
     <Compile Include="PaletteFormats\GimpPalette.cs" />
     <Compile Include="PaletteFormats\PaletteFormats.cs" />
+    <Compile Include="PaletteFormats\PaintShopProPalette.cs" />
   </ItemGroup>
 
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
