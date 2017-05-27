@@ -35,7 +35,6 @@ namespace Pinta.Core
 {
 	public sealed class Palette
 	{
-		public enum FileFormat { PDN, GIMP }
 		public event EventHandler PaletteChanged;
 	
 		private List<Color> colors;
@@ -157,80 +156,18 @@ namespace Pinta.Core
 			colors.TrimExcess ();
 			OnPaletteChanged ();
 		}
-		
+
 		public void Load (string fileName)
 		{
-			List<Color> tmpColors = new List<Color> ();
-			StreamReader reader = new StreamReader (fileName);
-			
-			try {
-				string line = reader.ReadLine ();
-				
-				if (line.IndexOf ("GIMP") != 0) {
-					// Assume PDN palette
-					do {
-						if (line.IndexOf (';') == 0)
-							continue;
-						
-						uint color = uint.Parse (line.Substring (0, 8), NumberStyles.HexNumber);
-						double b = (color & 0xff) / 255f;
-						double g = ((color >> 8) & 0xff) / 255f;
-						double r = ((color >> 16) & 0xff) / 255f;
-						double a = (color >> 24)  / 255f;
-						tmpColors.Add (new Color (r, g, b, a));
-					} while ((line = reader.ReadLine ()) != null);
-				} else {
-					// GIMP palette: skip everything until the first color
-					while (!char.IsDigit(line[0]))
-						line = reader.ReadLine ();
-
-					// then read the palette
-					do {
-						if (line.IndexOf ('#') == 0)
-							continue;
-						
-						string[] split = line.Split ((char[]) null, StringSplitOptions.RemoveEmptyEntries);
-						double r = int.Parse (split[0]) / 255f;
-						double g = int.Parse (split[1]) / 255f;
-						double b = int.Parse (split[2]) / 255f;
-						tmpColors.Add (new Color (r, g, b));
-					} while ((line = reader.ReadLine ()) != null);
-				}
-			
-				colors = tmpColors;
-				colors.TrimExcess ();
-				OnPaletteChanged ();
-			} finally {
-				reader.Close ();
-			}
+			var loader = PintaCore.System.PaletteFormats.GetLoaderByFilename (fileName);
+			colors = loader.Load (fileName);
+			colors.TrimExcess ();
+			OnPaletteChanged ();
 		}
 		
-		public void Save (string fileName, FileFormat format)
+		public void Save (string fileName, IPaletteSaver saver)
 		{
-			StreamWriter writer = new StreamWriter (fileName);
-		
-			if (format == FileFormat.PDN) {
-				writer.WriteLine ("; Hexadecimal format: aarrggbb");
-			
-				foreach (Color color in colors) {
-					byte a = (byte) (color.A * 255);
-					byte r = (byte) (color.R * 255);
-					byte g = (byte) (color.G * 255);
-					byte b = (byte) (color.B * 255);
-					writer.WriteLine ("{0:X}", (a << 24) | (r << 16) | (g << 8) | b);
-				}
-			} else {
-				// GIMP
-				writer.WriteLine ("GIMP Palette");
-				writer.WriteLine ("Name: Pinta Created {0}", DateTime.Now.ToString (DateTimeFormatInfo.InvariantInfo.RFC1123Pattern));
-				writer.WriteLine ("#");
-				
-				foreach (Color color in colors) {
-					writer.WriteLine ("{0,3} {1,3} {2,3} Untitled", (int) (color.R * 255), (int) (color.G * 255), (int) (color.B * 255));
-				}
-			}
-			
-			writer.Close ();
+			saver.Save (colors, fileName);
 		}
 	}
 }

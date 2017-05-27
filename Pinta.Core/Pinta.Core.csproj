@@ -184,6 +184,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Widgets\MenuButton.cs" />
     <Compile Include="Widgets\ToolBarDropDownButton.cs" />
+    <Compile Include="PaletteFormats\PaletteDescriptor.cs" />
+    <Compile Include="PaletteFormats\IPaletteLoader.cs" />
+    <Compile Include="PaletteFormats\IPaletteSaver.cs" />
+    <Compile Include="PaletteFormats\PaintDotNetPalette.cs" />
+    <Compile Include="PaletteFormats\GimpPalette.cs" />
+    <Compile Include="PaletteFormats\PaletteFormats.cs" />
   </ItemGroup>
 
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

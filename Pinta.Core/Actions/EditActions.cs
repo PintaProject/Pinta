@@ -25,9 +25,11 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 using Gtk;
 using Cairo;
 using Mono.Unix;
+using System.Linq;
 
 namespace Pinta.Core
 {
@@ -321,20 +323,25 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
 			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Palette File"), PintaCore.Chrome.MainWindow,
-													FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-													Gtk.Stock.Open, Gtk.ResponseType.Ok);
+				FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
+				Gtk.Stock.Open, Gtk.ResponseType.Ok);
 
 			FileFilter ff = new FileFilter ();
-			ff.AddPattern ("*.txt");
-			ff.AddPattern ("*.gpl");
-			ff.Name = Catalog.GetString ("Palette files (*.txt, *.gpl)");
+			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
+				if (!format.IsWriteOnly ()) {
+					foreach (var ext in format.Extensions)
+						ff.AddPattern (string.Format("*.{0}", ext));
+				}
+			}
+
+			ff.Name = Catalog.GetString ("Palette files");
 			fcd.AddFilter (ff);
-			
+
 			FileFilter ff2 = new FileFilter ();
 			ff2.Name = Catalog.GetString ("All files");
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
-			
+
 			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 
 			if (lastPaletteDir != null)
@@ -343,16 +350,8 @@ namespace Pinta.Core
 			int response = fcd.Run ();
 		
 			if (response == (int) Gtk.ResponseType.Ok) {
-				try {
-					lastPaletteDir = fcd.CurrentFolder;
-					PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
-				} catch {
-					MessageDialog md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Could not open palette file: {0}.\nPlease verify that you are trying to open a valid GIMP or Paint.NET palette."), fcd.Filename);
-					md.Title = Catalog.GetString ("Error");
-					
-					md.Run ();
-					md.Destroy ();
-				}
+				lastPaletteDir = fcd.CurrentFolder;
+				PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
 			}
 
 			fcd.Destroy ();
@@ -361,36 +360,33 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
 			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Save Palette File"), PintaCore.Chrome.MainWindow,
-													FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-													Gtk.Stock.Save, Gtk.ResponseType.Ok);
+				FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
+				Gtk.Stock.Save, Gtk.ResponseType.Ok);
 
-			FileFilter ffPDN = new FileFilter ();
-			ffPDN.AddPattern ("*.txt");
-			ffPDN.Name = Catalog.GetString ("Paint.NET palette (*.txt)");
-			fcd.AddFilter (ffPDN);
-			
-			FileFilter ffGIMP = new FileFilter ();
-			ffGIMP.AddPattern ("*.gpl");
-			ffGIMP.Name = Catalog.GetString ("GIMP palette (*.gpl)");
-			fcd.AddFilter (ffGIMP);
-			
+			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
+				if (!format.IsReadOnly ()) {
+					FileFilter fileFilter = format.Filter;
+					fcd.AddFilter (fileFilter);
+				}
+			}
+
 			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 
 			if (lastPaletteDir != null)
 				fcd.SetCurrentFolder (lastPaletteDir);
-			
+
 			int response = fcd.Run ();
-		
+
 			if (response == (int) Gtk.ResponseType.Ok) {
-				Palette.FileFormat format = (fcd.Filter == ffPDN) ? Palette.FileFormat.PDN : Palette.FileFormat.GIMP;
+				var format = PintaCore.System.PaletteFormats.Formats.FirstOrDefault (f => f.Filter == fcd.Filter);
 
-				string fileExtension = (fcd.Filter == ffPDN) ? ".txt" : ".gpl";
 				string finalFileName = fcd.Filename;
-				bool fileNameHasExtension = finalFileName.EndsWith(".txt") || finalFileName.EndsWith(".gpl");
-				if (!fileNameHasExtension)
-					finalFileName += fileExtension;
 
-				PintaCore.Palette.CurrentPalette.Save (finalFileName, format);
+				string extension = System.IO.Path.GetExtension (fcd.Filename);
+				if (string.IsNullOrEmpty(extension))
+					finalFileName += "." + format.Extensions.First ();
+
+				PintaCore.Palette.CurrentPalette.Save(finalFileName, format.Saver);
 			}
 
 			fcd.Destroy ();
