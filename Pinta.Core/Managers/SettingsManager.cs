@@ -149,7 +149,8 @@ namespace Pinta.Core
 			Serialize (settings_file, settings);
 			
 			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
-			PintaCore.Palette.CurrentPalette.Save (palette_file, Palette.FileFormat.PDN);
+			PintaCore.Palette.CurrentPalette.Save (palette_file,
+				PintaCore.System.PaletteFormats.Formats.First(p => p.Extensions.Contains("txt")).Saver);
 		}
 	}
 }

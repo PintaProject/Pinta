@@ -43,6 +43,7 @@ namespace Pinta.Core
 		private RecentData recent_data;
 
 		public ImageConverterManager ImageFormats { get; private set; }
+		public PaletteFormats PaletteFormats { get; private set; }
 		public FontManager Fonts { get; private set; }
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
@@ -50,6 +51,7 @@ namespace Pinta.Core
 		public SystemManager ()
 		{
 			ImageFormats = new ImageConverterManager ();
+			PaletteFormats = new PaletteFormats ();
 			RenderThreads = Environment.ProcessorCount;
 			Fonts = new FontManager ();
 
