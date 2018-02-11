@@ -204,7 +204,7 @@ namespace Pinta.Core
 			ScaleFactor sf = new ScaleFactor (PintaCore.Workspace.ImageSize.Width,
 			                                  PintaCore.Workspace.CanvasSize.Width);
 			Cairo.PointD pt = sf.ScalePoint (new Cairo.PointD (x - Offset.X, y - Offset.Y));
-			return new Cairo.PointD((int)pt.X, (int)pt.Y);
+			return new Cairo.PointD(pt.X, pt.Y);
 		}
 
 		/// <summary>
