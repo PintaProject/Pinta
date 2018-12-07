@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <id type="desktop">pinta.desktop</id>
-  <license>MIT</license>
+<component type="desktop">
+  <id>pinta.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Pinta</name>
   <summary>Edit images and paint digitally</summary>
   <description>
     <_p>
@@ -14,9 +15,45 @@
       ability to create unlimited layers to help organize your creativity.
     </_p>
   </description>
+  <launchable type="desktop-id">pinta.desktop</launchable>
+  <categories>
+    <category>Graphics</category>
+    <category>2DGraphics</category>
+    <category>RasterGraphics</category>
+    <category>GTK</category>
+  </categories>
+  <keywords>
+    <keyword>draw</keyword>
+    <keyword>drawing</keyword>
+    <keyword>paint</keyword>
+    <keyword>painting</keyword>
+    <keyword>graphics</keyword>
+    <keyword>raster</keyword>
+    <keyword>2d</keyword>
+  </keywords>
+  <kudos>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>HighContrast</kudo>
+    <kudo>UserDocs</kudo>
+  </kudos>
   <screenshots>
-      <screenshot type="default">https://pinta-project.com/pintaproject/pinta/theme/images/ss1.jpg</screenshot>
+    <screenshot type="default">
+      <caption>Main window</caption>
+      <image>https://pinta-project.com/pintaproject/pinta/theme/images/ss1.jpg</image>
+    </screenshot>
   </screenshots>
+  <developer_name>Jonathan Pobst</developer_name>
+  <url type="bugtracker">https://bugs.launchpad.net/pinta</url>
+  <url type="faq">https://communiroo.com/pintaproject/pinta/questions</url>
+  <url type="help">https://pinta-project.com/pintaproject/pinta/howto</url>
   <url type="homepage">https://pinta-project.com</url>
+  <url type="translate">https://translations.launchpad.net/pinta</url>
+  <content_rating type="oars-1.0" />
   <translation type="gettext">pinta</translation>
-</application>
+  <provides>
+    <binary>pinta</binary>
+  </provides>
+  <releases>
+    <release version="1.6" date="2015-03-01"/>
+  </releases>
+</component>
