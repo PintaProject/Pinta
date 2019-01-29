@@ -238,6 +238,7 @@ namespace Pinta.Core
 			text = text.Replace (format.PercentGroupSeparator, string.Empty);
 			text = text.Replace (format.PercentSymbol, string.Empty);
 			text = text.Replace (format.PercentDecimalSeparator, format.NumberDecimalSeparator);
+			text = text.Trim();
 
 			return double.TryParse (text,
 			                        NumberStyles.AllowDecimalPoint |
