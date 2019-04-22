@@ -31,19 +31,21 @@ namespace Pinta.Tools
 {
 	public abstract class BaseTransformTool : BaseTool
 	{
-		#region Members
-		private readonly Matrix transform = new Matrix();
+        #region Members
+        private readonly int rotate_steps = 32;
+        private readonly Matrix transform = new Matrix();
 		private Rectangle source_rect;
 		private PointD original_point;
 		private bool is_dragging = false;
 		private bool is_rotating = false;
-		#endregion
+        private bool rotateBySteps = false;
+        #endregion
 
-		#region Constructor
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Pinta.Tools.BaseTransformTool"/> class.
-		/// </summary>
-		public BaseTransformTool ()
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pinta.Tools.BaseTransformTool"/> class.
+        /// </summary>
+        public BaseTransformTool ()
 		{
 		}
 		#endregion
@@ -115,7 +117,10 @@ namespace Pinta.Tools
 
 			if (is_rotating)
 			{
-				transform.Translate(center.X, center.Y);
+                if (rotateBySteps)
+                    angle = Utility.GetNearestStepAngle (angle, rotate_steps);
+
+                transform.Translate(center.X, center.Y);
 				transform.Rotate(-angle);
 				transform.Translate(-center.X, -center.Y);
 			}
@@ -134,7 +139,17 @@ namespace Pinta.Tools
 
 			OnFinishTransform();
 		}
-		#endregion
-	}
+
+        protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
+        {
+            rotateBySteps = (args.Event.Key == Gdk.Key.Shift_L);
+        }
+
+        protected override void OnKeyUp (Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
+        {
+            rotateBySteps = false;
+        }
+        #endregion
+    }
 }
 
