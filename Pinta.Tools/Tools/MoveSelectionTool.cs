@@ -45,7 +45,7 @@ namespace Pinta.Tools
 			get { return "Tools.MoveSelection.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Right click and drag the selection to rotate selection outline."); }
+			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
             get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }
