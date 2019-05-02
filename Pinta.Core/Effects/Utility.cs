@@ -639,5 +639,26 @@ namespace Pinta.Core
             0x80808081, 0x00000000, 39  // 255
         };
 
-	}
+         /// <summary>
+         /// Gets the nearest step angle in radians.
+         /// </summary>
+         /// <returns>The nearest step angle in radians.</returns>
+         /// <param name="angle">Angle in radians.</param>
+         /// <param name="steps">Number of steps to divide the circle.</param>
+        public static double GetNearestStepAngle (double angle, int steps)
+        {
+            double fullTurn = 2 * Math.PI;
+            double stepAngle = fullTurn / steps;
+            double normalizedAngle = angle % fullTurn;
+            int sector = Convert.ToInt32 (Math.Truncate ((normalizedAngle % fullTurn) / stepAngle));
+
+            var leftStepAngle = sector * stepAngle;
+            var rightStepAngle = (sector + 1) * stepAngle;
+
+            if ((angle - leftStepAngle) < (rightStepAngle - angle))
+                return leftStepAngle;
+            else
+                return rightStepAngle;
+        }
+    }
 }

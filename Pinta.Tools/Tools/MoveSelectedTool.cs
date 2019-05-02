@@ -46,7 +46,7 @@ namespace Pinta.Tools
 			get { return "Tools.Move.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selected content. Right click and drag the selection to rotate selected content."); }
+			get { return Catalog.GetString ("Left click and drag the selection to move selected content. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }
