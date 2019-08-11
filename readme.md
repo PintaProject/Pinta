@@ -47,7 +47,9 @@ Building Pinta requires the following software:
 
 `mono mono-xbuild automake autoconf libmono-cairo2.0-cil gtk-sharp2 yelp-tools intltool`
 
-For Ubuntu 16.04 and above, install `mono-reference-assemblies-4.0`.
+For Ubuntu 16.04 and above, install just `mono-reference-assemblies-4.0`:
+
+`sudo apt install mono-reference-assemblies-4.0 automake autoconf gtk-sharp2 yelp-tools intltool`.
 
 Pinta only supports version 2.8 or higher of Mono.
 
