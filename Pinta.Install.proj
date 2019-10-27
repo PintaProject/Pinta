@@ -234,6 +234,7 @@
     <MakeDir Directories="$(BinDir)" />
     <Copy SourceFiles="$(OutputPath)/locale/%(Translation.Code)/LC_MESSAGES/pinta.mo" DestinationFolder="$(LocaleDir)/%(Translation.Code)/LC_MESSAGES" />
     <Copy SourceFiles="xdg/pinta.1" DestinationFolder="$(ManDir)/man1" />
+    <Copy SourceFiles="xdg/pinta.appdata.xml" DestinationFolder="$(DataRootDir)/metainfo" />
     <Copy SourceFiles="xdg/pinta.desktop" DestinationFolder="$(DataRootDir)/applications" />
     <Copy SourceFiles="xdg/pinta.xpm" DestinationFolder="$(DataRootDir)/pixmaps" />
     <Copy SourceFiles="xdg/16x16/pinta.png" DestinationFolder="$(DataRootDir)/icons/hicolor/16x16/apps" />
@@ -252,6 +253,7 @@
     <Delete Files="$(LocaleDir)/%(Translation.Code)/LC_MESSAGES/pinta.mo" />
     <Delete Files="$(ManDir)/man1/pinta.1" />
     <Delete Files="$(ManDir)/man1/pinta.1.gz" />
+    <Delete Files="$(DataRootDir)/metainfo/pinta.appdata.xml" />
     <Delete Files="$(DataRootDir)/applications/pinta.desktop" />
     <Delete Files="$(DataRootDir)/pixmaps/pinta.xpm" />
     <Delete Files="$(DataRootDir)/icons/hicolor/16x16/apps/pinta.png" />
