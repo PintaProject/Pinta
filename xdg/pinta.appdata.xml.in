@@ -16,25 +16,9 @@
     </_p>
   </description>
   <launchable type="desktop-id">pinta.desktop</launchable>
-  <categories>
-    <category>Graphics</category>
-    <category>2DGraphics</category>
-    <category>RasterGraphics</category>
-    <category>GTK</category>
-  </categories>
-  <keywords>
-    <keyword>draw</keyword>
-    <keyword>drawing</keyword>
-    <keyword>paint</keyword>
-    <keyword>painting</keyword>
-    <keyword>graphics</keyword>
-    <keyword>raster</keyword>
-    <keyword>2d</keyword>
-  </keywords>
   <kudos>
     <kudo>HiDpiIcon</kudo>
     <kudo>HighContrast</kudo>
-    <kudo>UserDocs</kudo>
   </kudos>
   <screenshots>
     <screenshot type="default">
