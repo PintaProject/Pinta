@@ -39,6 +39,7 @@ namespace Pinta.Tools
 		private bool is_dragging = false;
 		private bool is_rotating = false;
         private bool rotateBySteps = false;
+        private bool is_scaling = false;
         #endregion
 
         #region Constructor
@@ -115,12 +116,18 @@ namespace Pinta.Tools
 
 			transform.InitIdentity ();
 
-			if (is_rotating)
+			if (is_scaling)
 			{
-                if (rotateBySteps)
-                    angle = Utility.GetNearestStepAngle (angle, rotate_steps);
+				transform.Translate(center.X, center.Y);
+				transform.Scale( (cx1 + dx) / cx1, (cy1 + dy) / cy1 );
+				transform.Translate(-center.X, -center.Y);
+			}
+			else if (is_rotating)
+			{
+				if (rotateBySteps)
+					angle = Utility.GetNearestStepAngle (angle, rotate_steps);
 
-                transform.Translate(center.X, center.Y);
+				transform.Translate(center.X, center.Y);
 				transform.Rotate(-angle);
 				transform.Translate(-center.X, -center.Y);
 			}
@@ -143,11 +150,13 @@ namespace Pinta.Tools
         protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
         {
             rotateBySteps = (args.Event.Key == Gdk.Key.Shift_L);
+            is_scaling = (args.Event.Key == Gdk.Key.Control_L);
         }
 
         protected override void OnKeyUp (Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
         {
             rotateBySteps = false;
+            is_scaling = false;
         }
         #endregion
     }
