@@ -149,8 +149,8 @@ namespace Pinta.Tools
 
         protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
         {
-            rotateBySteps = (args.Event.Key == Gdk.Key.Shift_L);
-            is_scaling = (args.Event.Key == Gdk.Key.Control_L);
+            rotateBySteps = (args.Event.Key == Gdk.Key.Shift_L || args.Event.Key == Gdk.Key.Shift_R);
+            is_scaling = (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R);
         }
 
         protected override void OnKeyUp (Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
