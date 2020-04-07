@@ -40,8 +40,8 @@ help:
 
 # target: build - Build Pinta.
 build: Pinta.sln
-	cd $(srcdir) && $(XBUILD) Pinta.sln
-	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
+	cd $(srcdir) && $(XBUILD) /p:NoCompilerStandardLib=false Pinta.sln
+	cd $(srcdir) && $(XBUILD) /p:NoCompilerStandardLib=false Pinta.Install.proj /target:CompileTranslations
 	cd $(srcdir)/help && make copyhelp
 
 test: build
