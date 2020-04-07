@@ -37,7 +37,6 @@
 using System;
 using System.Threading.Tasks;
 using Cairo;
-using System.Collections.Generic;
 using Pinta.Core;
 using Mono.Unix;
 

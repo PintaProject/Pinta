@@ -12,6 +12,7 @@
     <OutputPath>..\..\bin</OutputPath>
     <Platform>AnyCPU</Platform>
     <WarningLevel>4</WarningLevel>
+    <NoStdLib>false</NoStdLib>
   </PropertyGroup>
 
   <!-- Debug configuration -->
