@@ -193,7 +193,7 @@ namespace Pinta.Tools
 				stencil.Set (rect, true);
 			}
 
-			Queue<Point> queue = new Queue<Point> (16);
+			var queue = new System.Collections.Generic.Queue<Point> (16);
 			queue.Enqueue (start);
 
 			while (queue.Count > 0) {
