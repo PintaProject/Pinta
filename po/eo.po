@@ -390,7 +390,7 @@ msgstr "Mezurila unuoj"
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr "{0} %"
+msgstr "{0} %"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
