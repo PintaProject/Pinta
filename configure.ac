@@ -21,7 +21,7 @@ if test "x$MONO" = "xno"; then
 fi
 
 # Check Mono version
-MONO_MINIMUM_VERSION=2.8
+MONO_MINIMUM_VERSION=4.0
 PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
 
 AC_SUBST(XBUILD)

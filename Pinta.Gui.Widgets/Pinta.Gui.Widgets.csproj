@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
   <!-- Common configuration -->
   <PropertyGroup>
     <ProjectGuid>{83F0C0AD-D587-457C-B72A-1A184D6D76B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Pinta.Gui.Widgets</AssemblyName>
     <RootNamespace>Pinta.Gui.Widgets</RootNamespace>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ErrorReport>prompt</ErrorReport>
