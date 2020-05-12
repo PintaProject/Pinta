@@ -43,13 +43,9 @@ Be sure to install [Gtk# for Windows](http://download.xamarin.com/GTKforWindows/
 
 ## Linux Build and Installation Instructions:
 
-Building Pinta requires the following software:
+Building Pinta requires the following software (instructions are for Ubuntu 20.04, but should be similar for other distributions):
 
-`mono mono-xbuild automake autoconf libmono-cairo2.0-cil gtk-sharp2 yelp-tools intltool`
-
-For Ubuntu 16.04 and above, install just `mono-reference-assemblies-4.0`:
-
-`sudo apt install mono-reference-assemblies-4.0 automake autoconf gtk-sharp2 yelp-tools intltool`.
+`sudo apt install make automake autoconf mono-devel gtk-sharp2 yelp-tools intltool`
 
 Pinta only supports version 2.8 or higher of Mono.
 
