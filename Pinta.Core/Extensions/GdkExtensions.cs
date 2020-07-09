@@ -165,29 +165,29 @@ namespace Pinta.Core
 
 		public static Pixbuf CreateTransparentColorSwatch(bool drawBorder)
 		{
-			// TODO-GTK3
-#if false
 			var size = 16;
 
-            using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
-            using (var gc = new Gdk.GC (pmap)) {
-                gc.RgbFgColor = new Color (255, 255, 255);
-                pmap.DrawRectangle (gc, true, 0, 0, size, size);
+            using (var surface = new Cairo.ImageSurface(Cairo.Format.Argb32, size, size))
+            using (var g = new Cairo.Context(surface))
+            {
+				// TODO-GTK3
+#if false
+				gc.RgbFgColor = new Color(255, 255, 255);
+				pmap.DrawRectangle(gc, true, 0, 0, size, size);
 
-                gc.RgbFgColor = new Color (200, 200, 200);
-                pmap.DrawRectangle (gc, true, 0, 0, (size / 2), (size / 2));
-                pmap.DrawRectangle (gc, true, size / 2, size / 2, (size / 2), (size / 2));
+				gc.RgbFgColor = new Color(200, 200, 200);
+				pmap.DrawRectangle(gc, true, 0, 0, (size / 2), (size / 2));
+				pmap.DrawRectangle(gc, true, size / 2, size / 2, (size / 2), (size / 2));
 
-                if (drawBorder) {
-                    gc.RgbFgColor = new Color (0, 0, 0);
-                    pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
-                }
-
-                return Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
-            }
-#else
-			throw new NotImplementedException();
+				if (drawBorder)
+				{
+					gc.RgbFgColor = new Color(0, 0, 0);
+					pmap.DrawRectangle(gc, false, 0, 0, (size - 1), (size - 1));
+				}
 #endif
+
+				return surface.ToPixbuf();
+            }
 		}
 	}
 }

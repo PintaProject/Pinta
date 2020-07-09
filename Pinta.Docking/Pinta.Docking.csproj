@@ -11,6 +11,38 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DockLibrary\icons\pad-close-9%402x.png">
+      <LogicalName>pad-close-9%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-close-9.png">
+      <LogicalName>pad-close-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9%402x.png">
+      <LogicalName>pad-dock-9%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9.png">
+      <LogicalName>pad-dock-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9%402x.png">
+      <LogicalName>pad-minimize-9%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png">
+      <LogicalName>pad-minimize-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12%402x.png">
+      <LogicalName>tabbar-next-12%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12.png">
+      <LogicalName>tabbar-next-12.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12%402x.png">
+      <LogicalName>tabbar-prev-12%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12.png">
+      <LogicalName>tabbar-prev-12.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.98" />
   </ItemGroup>
   <ItemGroup>

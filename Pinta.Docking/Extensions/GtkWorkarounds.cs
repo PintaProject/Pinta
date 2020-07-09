@@ -854,6 +854,8 @@ namespace Pinta.Docking
 
 		static void FixContainerLeak (Type t)
 		{
+			// TODO-GTK3
+#if false
 			if (containerLeakFixed) {
 				return;
 			}
@@ -882,6 +884,7 @@ namespace Pinta.Docking
 				gtksharp_container_override_forall (gt.Val, cb);
 				t = t.BaseType;
 			} while (fixedContainerTypes.Add (t) && t.Assembly != typeof (Gtk.Container).Assembly);
+#endif
 		}
 
 		static ForallDelegate CreateForallCallback (IntPtr gtype)

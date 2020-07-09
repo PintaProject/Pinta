@@ -49,6 +49,8 @@ namespace Pinta.Resources
 		public static Pixbuf GetIcon (string name, int size)
 		{
 			Gdk.Pixbuf result = null;
+			// TODO-GTK3
+#if false
 			try {
                 // First see if it's a built-in gtk icon, like gtk-new.
                 // This will also load any icons added by Gtk.IconFactory.AddDefault() . 
@@ -92,6 +94,7 @@ namespace Pinta.Resources
 					System.Console.Error.WriteLine (ex.Message);
 				}
 			}
+#endif
 			return result;
 		}
 
