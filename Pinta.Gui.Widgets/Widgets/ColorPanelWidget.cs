@@ -42,8 +42,11 @@ namespace Pinta.Gui.Widgets
 		public ColorPanelWidget ()
 		{
 			Build ();
-			
+
+			// TODO-GTK3
+#if false
 			ExposeEvent += HandleExposeEvent;
+#endif
 		}
 		
 		public void SetCairoColor (Color color)
@@ -51,6 +54,8 @@ namespace Pinta.Gui.Widgets
 			CairoColor = color;
 		}
 
+		// TODO-GTK3
+#if false
 		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
@@ -61,6 +66,7 @@ namespace Pinta.Gui.Widgets
 				g.FillRoundedRectangle (rect, rad, CairoColor);
 			}
 		}
+#endif
 
         private void Build ()
         {

@@ -87,8 +87,11 @@ namespace Pinta.Gui.Widgets
 			eventbox.LeaveNotifyEvent += HandleLeaveNotifyEvent;
 			eventbox.ButtonPressEvent += HandleButtonPressEvent;
 			eventbox.ButtonReleaseEvent += HandleButtonReleaseEvent;
-			
+
+			// TODO-GTK3
+#if false
 			ExposeEvent += HandleExposeEvent;
+#endif
 		}
 
 		public int GetValue (int i)
@@ -269,7 +272,9 @@ namespace Pinta.Gui.Widgets
 				g.FillPolygonal (points2, color);
 			}
 		}
-		
+
+		// TODO-GTK3
+#if false
 		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
@@ -278,19 +283,20 @@ namespace Pinta.Gui.Widgets
 				DrawTriangles (g);
 			}
 		}
+#endif
 		
-		#region Protected Methods
+#region Protected Methods
 		protected void OnValueChanged(int index) 
 		{
             if (ValueChanged != null) {
                 ValueChanged(this, new IndexEventArgs (index));
             }
         }
-		#endregion
+#endregion
 		
-		#region Public Events
+#region Public Events
 		public event IndexEventHandler ValueChanged;
-		#endregion
+#endregion
 
         private void Build ()
         {

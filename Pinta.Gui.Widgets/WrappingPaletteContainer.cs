@@ -50,7 +50,7 @@ namespace Pinta.Gui.Widgets
 		/// <summary>Default constructor.</summary>
         public WrappingPaletteContainer(int iconSize)
 		{
-			this.SetFlag (WidgetFlags.NoWindow);
+			HasWindow = false;
 
 			this.AddEvents ((int)(Gdk.EventMask.ButtonPressMask | Gdk.EventMask.ButtonReleaseMask | Gdk.EventMask.PointerMotionMask));
 

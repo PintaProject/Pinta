@@ -164,10 +164,13 @@ namespace Pinta.Gui.Widgets
             }
         }
 
+		// TODO-GTK3
+#if false
 		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) 
 				DrawHistogram (g);
 		}
+#endif
 	}
 }

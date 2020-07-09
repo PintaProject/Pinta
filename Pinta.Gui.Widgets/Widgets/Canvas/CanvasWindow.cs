@@ -59,6 +59,8 @@ namespace Pinta
             };
 
             // Rulers
+            // TODO-GTK3
+#if false
             horizontal_ruler = new HRuler ();
             horizontal_ruler.Metric = MetricType.Pixels;
             Attach (horizontal_ruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
@@ -88,6 +90,7 @@ namespace Pinta
                 horizontal_ruler.Position = point.X;
                 vertical_ruler.Position = point.Y;
             };
+#endif
 
             Attach (scrolled_window, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
 
@@ -98,10 +101,13 @@ namespace Pinta
             Canvas.Show ();
             vp.Show ();
 
+            // TODO-GTK3
+#if false
             horizontal_ruler.Visible = false;
             vertical_ruler.Visible = false;
 
             Canvas.SizeAllocated += delegate { UpdateRulerRange (); };
+#endif
         }
 
         public bool IsMouseOnCanvas {
