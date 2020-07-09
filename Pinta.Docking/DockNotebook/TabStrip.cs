@@ -65,7 +65,7 @@ namespace Pinta.Docking.DockNotebook
 
 		public Button PreviousButton;
 		public Button NextButton;
-		public MenuButton DropDownButton;
+		public MonoDevelop.Components.MenuButton DropDownButton;
 
 		static readonly double PixelScale = GtkWorkarounds.GetPixelScale ();
 		static readonly int TopBarPadding = (int)(3 * PixelScale);
@@ -134,7 +134,7 @@ namespace Pinta.Docking.DockNotebook
 			GtkWorkarounds.FixContainerLeak (this);
 
 			this.notebook = notebook;
-			WidgetFlags |= Gtk.WidgetFlags.AppPaintable;
+			AppPaintable = true;
 			Events |= EventMask.PointerMotionMask | EventMask.LeaveNotifyMask | EventMask.ButtonPressMask;
 
 			var arr = new ImageView (tabbarPrevImage);
@@ -149,7 +149,7 @@ namespace Pinta.Docking.DockNotebook
 			NextButton.Relief = ReliefStyle.None;
 			NextButton.CanDefault = NextButton.CanFocus = false;
 
-			DropDownButton = new MenuButton ();
+			DropDownButton = new MonoDevelop.Components.MenuButton ();
 			DropDownButton.Relief = ReliefStyle.None;
 			DropDownButton.CanDefault = DropDownButton.CanFocus = false;
 
@@ -565,7 +565,7 @@ namespace Pinta.Docking.DockNotebook
 		DockNotebookTab FindTab (int x, int y)
 		{
 			// we will not actually draw anything, just do bounds checking
-			using (var context = CairoHelper.Create (GdkWindow)) {
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
 				var current = notebook.CurrentTab as DockNotebookTab;
 				if (current != null) {
 					LayoutTabBorder (context, Allocation, current.Allocation.Width, current.Allocation.X, 0, false);

@@ -95,7 +95,7 @@ namespace Pinta.Docking.Gui
 			// The previous WorkbenchWindow property assignement may end with a call to AttachViewContent,
 			// which will add the content control to the subview notebook. In that case, we don't need to add it to box
 			if (subViewNotebook == null)
-				box.PackStart (content.Control);
+				box.PackStart (content.Control, true, true, 0);
 			
 			content.ContentNameChanged += new EventHandler(SetTitleEvent);
 			content.DirtyChanged       += HandleDirtyChanged;

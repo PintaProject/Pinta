@@ -145,6 +145,8 @@ namespace Pinta.Docking
 
 		void OnTreeRealized (object sender, EventArgs e)
 		{
+			// TODO-GTK3
+#if false
 			var w = (Gtk.TreeView)sender;
 			if (VisualStyle.TreeBackgroundColor != null) {
 				w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value);
@@ -153,6 +155,7 @@ namespace Pinta.Docking
 				w.ModifyBase (StateType.Normal, Parent.Style.Base (StateType.Normal));
 				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
 			}
+#endif
 		}
 
 		// TODO-GTK3

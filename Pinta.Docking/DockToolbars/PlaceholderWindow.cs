@@ -31,7 +31,9 @@ namespace Pinta.Docking.DockToolbars
 {
 	internal class PlaceholderWindow: Gtk.Window
 	{
+#if false
 		Gdk.GC redgc;
+#endif
 		
 		public PlaceholderWindow (DockToolbarFrame frame): base (Gtk.WindowType.Toplevel)
 		{
@@ -39,8 +41,11 @@ namespace Pinta.Docking.DockToolbars
 			Decorated = false;
 			TransientFor = frame.TopWindow;
 			Realize ();
+			// TODO-GTK3
+#if false
 			redgc = new Gdk.GC (GdkWindow);
 	   		redgc.RgbFgColor = new Gdk.Color (255, 0, 0);
+#endif
 		}
 
 		// TODO-GTK3

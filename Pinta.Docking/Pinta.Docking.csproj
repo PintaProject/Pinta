@@ -13,4 +13,7 @@
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.98" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
+  </ItemGroup>
 </Project>

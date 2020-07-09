@@ -391,7 +391,10 @@ namespace MonoDevelop.Components
 			ctx.LineTo (x + arrowSize, y + size / 2);
 			ctx.LineTo (x, y + size);
 			ctx.ClosePath ();
+			// TODO-GTK3
+#if false
 			ctx.SetSourceColor (CairoExtensions.ColorShade (Style.Dark (State).ToCairoColor (), 0.6));
+#endif
 			ctx.Fill ();
 		}
 
@@ -560,8 +563,8 @@ namespace MonoDevelop.Components
 			y += rect.Height;
 			x += GetHoverXPosition (out w);
 			//if the menu would be off the bottom of the screen, "drop" it upwards
-			if (y + mn.Requisition.Height > this.Screen.Height) {
-				y -= mn.Requisition.Height;
+			if (y + mn.HeightRequest > this.Screen.Height) {
+				y -= mn.HeightRequest;
 				y -= rect.Height;
 			}
 			

@@ -853,9 +853,12 @@ namespace Pinta.Docking
 		{
 			DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, oper, true, areasList);
 		}
+
 		
 		void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
 		{
+			// TODO-GTK3
+#if false
 			if (type == DockGroupType.Tabbed || VisibleObjects.Count == 0)
 				return;
 			
@@ -909,6 +912,7 @@ namespace Pinta.Docking
 			}
 			if (hgc != null)
 				hgc.Dispose ();
+#endif
 		}
 		
 		public void ResizeItem (int index, int newSize)

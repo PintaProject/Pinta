@@ -136,8 +136,11 @@ namespace Pinta.Docking
 				frame.Show ();
 			}
 			if (index != -1) {
+				// TODO-GTK3
+#if false
 				Box.BoxChild bc = (Box.BoxChild) box [widget];
 				bc.Position = index;
+#endif
 			}
 		}
 		

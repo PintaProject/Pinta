@@ -61,7 +61,7 @@ namespace Pinta.Docking
 			filler = new Label ();
 			filler.WidthRequest = 4;
 			filler.HeightRequest = 4;
-			box.PackEnd (filler);
+			box.PackEnd (filler, true, true, 0);
 			
 			ShowAll ();
 			UpdateVisibility ();

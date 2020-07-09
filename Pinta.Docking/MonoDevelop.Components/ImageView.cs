@@ -35,7 +35,8 @@ namespace MonoDevelop.Components
 
 		public ImageView ()
 		{
-			WidgetFlags |= Gtk.WidgetFlags.AppPaintable | Gtk.WidgetFlags.NoWindow;
+			AppPaintable = true;
+			HasWindow = false;
 		}
 
 		public ImageView (Gdk.Pixbuf image): this ()

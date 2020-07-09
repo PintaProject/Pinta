@@ -37,7 +37,9 @@ namespace Pinta.Docking
 {
 	internal class PlaceholderWindow: Gtk.Window
 	{
+#if false
 		Gdk.GC redgc;
+#endif
 		uint anim;
 		int rx, ry, rw, rh;
 		bool allowDocking;
@@ -61,8 +63,11 @@ namespace Pinta.Docking
 			// Create the mask for the arrow
 			
 			Realize ();
+			// TODO-GTK3
+#if false
 			redgc = new Gdk.GC (GdkWindow);
 	   		redgc.RgbFgColor = frame.Style.Background (StateType.Selected);
+#endif
 		}
 
 		protected override void OnRealized ()
@@ -78,7 +83,9 @@ namespace Pinta.Docking
 			black.Pixel = 1;
 			white = new Gdk.Color (255, 255, 255);
 			white.Pixel = 0;
-			
+
+			// TODO-GTK3
+#if false
 			Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1);
 			Gdk.GC gc = new Gdk.GC (pm);
 			gc.Background = white;
@@ -90,6 +97,7 @@ namespace Pinta.Docking
 			pm.DrawRectangle (gc, false, 1, 1, width - 3, height - 3);
 			
 			this.ShapeCombineMask (pm, 0, 0);
+#endif
 		}
 		
 		protected override void OnSizeAllocated (Rectangle allocation)

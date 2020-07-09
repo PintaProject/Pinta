@@ -87,7 +87,10 @@ namespace MonoDevelop.Components
 					menu.Hidden += delegate {
 						this.Relief = oldRelief ;
 						isOpen = false;
+						// TODO-GTK3
+#if false
 						this.State = StateType.Normal;
+#endif
 						
 						//FIXME: for some reason the menu's children don't get activated if we destroy 
 						//directly here, so use a timeout to delay it
@@ -105,10 +108,13 @@ namespace MonoDevelop.Components
 		protected override void OnStateChanged(StateType previous_state)
 		{
 			base.OnStateChanged (previous_state);
-			
+
+			// TODO-GTK3
+#if false
 			//while the menu's open, make sure the button looks depressed
 			if (isOpen && this.State != StateType.Active)
 				this.State = StateType.Active;
+#endif
 		}
 		
 		void PositionFunc (Menu mn, out int x, out int y, out bool push_in)
@@ -119,8 +125,8 @@ namespace MonoDevelop.Components
 			y += rect.Y + rect.Height;
 			
 			//if the menu would be off the bottom of the screen, "drop" it upwards
-			if (y + mn.Requisition.Height > this.Screen.Height) {
-				y -= mn.Requisition.Height;
+			if (y + mn.HeightRequest > this.Screen.Height) {
+				y -= mn.HeightRequest;
 				y -= rect.Height;
 			}
 			

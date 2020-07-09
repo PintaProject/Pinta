@@ -101,15 +101,21 @@ namespace Pinta.Docking.Gui
 				frame.Show ();
 			}
 			if (index != -1) {
+				// TODO-GTK3
+#if false
 				Box.BoxChild bc = (Box.BoxChild) box [widget];
 				bc.Position = index;
+#endif
 			}
 		}
 
 		void ChangeColor (Gtk.Widget w)
 		{
 			w.Realized += delegate {
+				// TODO-GTK3
+#if false
 				w.ModifyText (StateType.Normal, Styles.BreadcrumbTextColor);
+#endif
 				w.ModifyFg (StateType.Normal, Styles.BreadcrumbTextColor);
 			};
 			if (w is Gtk.Container) {

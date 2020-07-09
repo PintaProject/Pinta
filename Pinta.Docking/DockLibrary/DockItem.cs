@@ -537,7 +537,7 @@ namespace Pinta.Docking
 			
 			// Hide menuitem
 			if ((Behavior & DockItemBehavior.CantClose) == 0) {
-				MenuItem mitem = new MenuItem (Catalog.GetString("Hide"));
+				MenuItem mitem = new MenuItem (Pinta.Core.Translations.GetString("Hide"));
 				mitem.Activated += delegate { Visible = false; };
 				menu.Append (mitem);
 			}
@@ -546,21 +546,21 @@ namespace Pinta.Docking
 
 			// Auto Hide menuitem
 			if ((Behavior & DockItemBehavior.CantAutoHide) == 0 && Status != DockItemStatus.AutoHide) {
-				citem = new MenuItem (Catalog.GetString("Minimize"));
+				citem = new MenuItem (Pinta.Core.Translations.GetString("Minimize"));
 				citem.Activated += delegate { Status = DockItemStatus.AutoHide; };
 				menu.Append (citem);
 			}
 
 			if (Status != DockItemStatus.Dockable) {
 				// Dockable menuitem
-				citem = new MenuItem (Catalog.GetString("Dock"));
+				citem = new MenuItem (Pinta.Core.Translations.GetString("Dock"));
 				citem.Activated += delegate { Status = DockItemStatus.Dockable; };
 				menu.Append (citem);
 			}
 
 			// Floating menuitem
 			if ((Behavior & DockItemBehavior.NeverFloating) == 0 && Status != DockItemStatus.Floating) {
-				citem = new MenuItem (Catalog.GetString("Undock"));
+				citem = new MenuItem (Pinta.Core.Translations.GetString("Undock"));
 				citem.Activated += delegate { Status = DockItemStatus.Floating; };
 				menu.Append (citem);
 			}

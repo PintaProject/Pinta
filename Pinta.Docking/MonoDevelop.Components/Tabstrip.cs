@@ -304,7 +304,10 @@ namespace MonoDevelop.Components
 				cr.MoveTo (x, rectangle.Y + 0.5 + 2);
 				cr.RelLineTo (0, rectangle.Height - 1 - 4);
 				cr.ClosePath ();
+				// TODO-GTK3
+#if false
 				cr.SetSourceColor (parent.Style.Dark (StateType.Normal).ToCairoColor ());
+#endif
 				cr.LineWidth = 1;
 				cr.Stroke ();
 				return;
@@ -337,11 +340,14 @@ namespace MonoDevelop.Components
 					cr.Fill ();
 				}
 			}
-			
+
+			// TODO-GTK3
+#if false
 			if (Active)
 				cr.SetSourceRGB (1, 1, 1);
 			else
 				cr.SetSourceColor (parent.Style.Text (StateType.Normal).ToCairoColor ());
+#endif
 
 			cr.MoveTo (rectangle.X + (rectangle.Width - w) / 2, (rectangle.Height - h) / 2);
 			Pango.CairoHelper.ShowLayout (cr, layout);

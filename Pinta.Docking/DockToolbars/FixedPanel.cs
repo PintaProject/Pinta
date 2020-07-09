@@ -47,8 +47,7 @@ namespace Pinta.Docking.DockToolbars
 		public FixedPanel ()
 		{
 			GtkWorkarounds.FixContainerLeak (this);
-			
-			WidgetFlags |= WidgetFlags.NoWindow;
+			HasWindow = false;
 		}
 		
 		public Placement Placement {

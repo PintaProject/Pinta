@@ -42,8 +42,10 @@ namespace Pinta.Docking.DockToolbars
 		Direction direction;
 		Point[] arrow;
 		int width, height;
-		
+
+#if false
 		Gdk.GC redgc;
+#endif
 		
 		// Where does the arrow point to
 		public new enum Direction {
@@ -73,7 +75,9 @@ namespace Pinta.Docking.DockToolbars
 			black.Pixel = 1;
 			white = new Gdk.Color (255, 255, 255);
 			white.Pixel = 0;
-			
+
+			// TODO-GTK3
+#if false
 			Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1);
 			Gdk.GC gc = new Gdk.GC (pm);
 			gc.Background = white;
@@ -87,11 +91,12 @@ namespace Pinta.Docking.DockToolbars
 			this.ShapeCombineMask (pm, 0, 0);
 			
 			Realize ();
-			
+
 			redgc = new Gdk.GC (GdkWindow);
 	   		redgc.RgbFgColor = new Gdk.Color (255, 0, 0);
-			
-			Resize (width, height);
+#endif
+
+			Resize(width, height);
 		}
 		
 		public int Width {

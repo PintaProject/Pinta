@@ -886,6 +886,8 @@ namespace Pinta.Docking
 
 		static ForallDelegate CreateForallCallback (IntPtr gtype)
 		{
+			// TODO-GTK3
+#if false
 			var dm = new DynamicMethod (
 				"ContainerForallCallback",
 				typeof(void),
@@ -977,6 +979,9 @@ namespace Pinta.Docking
 			il.Emit (OpCodes.Ret);
 			
 			return (ForallDelegate) dm.CreateDelegate (typeof (ForallDelegate));
+#else
+			return null;
+#endif
 		}
 		
 		[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
@@ -1023,8 +1028,11 @@ namespace Pinta.Docking
 
 			public void ConnectTo (Gtk.Label label)
 			{
+				// TODO-GTK3
+#if false
 				var signal = GLib.Signal.Lookup (label, "activate-link", typeof(ActivateLinkEventArgs));
 				signal.AddDelegate (new EventHandler<ActivateLinkEventArgs> (HandleLink));
+#endif
 			}
 
 			class ActivateLinkEventArgs : GLib.SignalArgs
@@ -1075,7 +1083,7 @@ namespace Pinta.Docking
 
 		//the GTK# version of this has 'out' instead of 'ref', preventing passing the x,y values in
 		public static bool GetTooltipContext (this TreeView tree, ref int x, ref int y, bool keyboardTip,
-			 out TreeModel model, out TreePath path, out Gtk.TreeIter iter)
+			 out ITreeModel model, out TreePath path, out Gtk.TreeIter iter)
 		{
 			IntPtr intPtr = Marshal.AllocHGlobal (Marshal.SizeOf (typeof(TreeIter)));
 			IntPtr handle;

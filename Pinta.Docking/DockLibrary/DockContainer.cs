@@ -337,6 +337,8 @@ namespace Pinta.Docking
 		
 		protected override void OnRealized ()
 		{
+			// TODO-GTK3
+#if false
 			WidgetFlags |= WidgetFlags.Realized;
 			
 			Gdk.WindowAttr attributes = new Gdk.WindowAttr ();
@@ -364,11 +366,12 @@ namespace Pinta.Docking
 
 			Style = Style.Attach (GdkWindow);
 			Style.SetBackground (GdkWindow, State);
-			this.WidgetFlags &= ~WidgetFlags.NoWindow;
+			HasWindow = false;
 			
 			//GdkWindow.SetBackPixmap (null, true);
 
 			ModifyBase (StateType.Normal, Styles.DockFrameBackground);
+#endif
 		}
 		
 		protected override void OnUnrealized ()
@@ -376,7 +379,7 @@ namespace Pinta.Docking
 			if (this.GdkWindow != null) {
 				this.GdkWindow.UserData = IntPtr.Zero;
 				this.GdkWindow.Destroy ();
-				this.WidgetFlags |= WidgetFlags.NoWindow;
+				HasWindow = false;
 			}
 			base.OnUnrealized ();
 		}
@@ -502,7 +505,10 @@ namespace Pinta.Docking
 
 				// For testing purposes. Not being shown while VisibleWindow = false
 				ModifyBg (StateType.Normal, new Gdk.Color (255,0,0));
+				// TODO-GTK3
+#if false
 				ModifyBase (StateType.Normal, new Gdk.Color (255,0,0));
+#endif
 				ModifyFg (StateType.Normal, new Gdk.Color (255,0,0));
 			}
 

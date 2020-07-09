@@ -134,7 +134,10 @@ namespace Pinta.Docking
 			sepBox.ButtonPressEvent += OnSizeButtonPress;
 			sepBox.ButtonReleaseEvent += OnSizeButtonRelease;
 			sepBox.MotionNotifyEvent += OnSizeMotion;
+			// TODO-GTK3
+#if false
 			sepBox.ExposeEvent += OnGripExpose;
+#endif
 			sepBox.EnterNotifyEvent += delegate { insideGrip = true; sepBox.QueueDraw (); };
 			sepBox.LeaveNotifyEvent += delegate { insideGrip = false; sepBox.QueueDraw (); };
 		}

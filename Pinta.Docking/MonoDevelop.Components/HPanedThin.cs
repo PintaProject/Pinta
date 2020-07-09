@@ -111,9 +111,12 @@ namespace MonoDevelop.Components
 			GrabAreaSize = HandleGrabWidth;
 			Events |= Gdk.EventMask.EnterNotifyMask | Gdk.EventMask.LeaveNotifyMask | Gdk.EventMask.PointerMotionMask | Gdk.EventMask.ButtonPressMask | Gdk.EventMask.ButtonReleaseMask;
 
+			// TODO-GTK3
+#if false
 			parent.SizeRequested += delegate {
 				SizeRequest ();
 			};
+#endif
 			parent.SizeAllocated += HandleSizeAllocated;
 			HandleWidget = null;
 		}

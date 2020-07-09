@@ -159,7 +159,7 @@ namespace Pinta.Docking
 			btnDock = new ImageButton ();
 			btnDock.Image = pixAutoHide;
             btnDock.InactiveImage = pixAutoHide.WithAlpha (.5);
-            btnDock.TooltipText = Catalog.GetString ("Auto Hide");
+            btnDock.TooltipText = Pinta.Core.Translations.GetString ("Auto Hide");
 			btnDock.CanFocus = false;
 //			btnDock.WidthRequest = btnDock.HeightRequest = 17;
 			btnDock.Clicked += OnClickDock;
@@ -169,7 +169,7 @@ namespace Pinta.Docking
 			btnClose = new ImageButton ();
 			btnClose.Image = pixClose;
             btnClose.InactiveImage = pixClose.WithAlpha (.5);
-			btnClose.TooltipText = Catalog.GetString ("Close");
+			btnClose.TooltipText = Pinta.Core.Translations.GetString ("Close");
 			btnClose.CanFocus = false;
 //			btnClose.WidthRequest = btnClose.HeightRequest = 17;
 			btnClose.WidthRequest = btnDock.SizeRequest ().Width;
@@ -244,11 +244,11 @@ namespace Pinta.Docking
 				if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating) {
 					btnDock.Image = pixDock;
                     btnDock.InactiveImage = pixDock.WithAlpha (.5);
-                    btnDock.TooltipText = Catalog.GetString ("Dock");
+                    btnDock.TooltipText = Pinta.Core.Translations.GetString ("Dock");
 				} else {
 					btnDock.Image = pixAutoHide;
                     btnDock.InactiveImage = pixAutoHide.WithAlpha (.5);
-                    btnDock.TooltipText = Catalog.GetString ("Auto Hide");
+                    btnDock.TooltipText = Pinta.Core.Translations.GetString ("Auto Hide");
 				}
 			} else {
 				btnDock.Image = null;
@@ -417,6 +417,8 @@ namespace Pinta.Docking
 		{
 			var alloc = Allocation;
 
+			// TODO-GTK3
+#if false
 			Gdk.GC bgc = new Gdk.GC (GdkWindow);
 			var c = VisualStyle.PadBackgroundColor.Value.ToXwtColor ();
 			c.Light *= 0.7;
@@ -431,7 +433,6 @@ namespace Pinta.Docking
 				last = cts[cts.Length - 1] == this;
 				tabStrip = tsb.TabStrip;
 			}
-
 			if (Active || (first && last)) {
 				Gdk.GC gc = new Gdk.GC (GdkWindow);
 				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value;
@@ -450,6 +451,8 @@ namespace Pinta.Docking
 				evnt.Window.DrawLine (bgc, alloc.X, alloc.Y + alloc.Height - 1, alloc.X + alloc.Width - 1, alloc.Y + alloc.Height - 1);
 			}
 			bgc.Dispose ();
+#endif
+
 		}
 
 		void DrawNormal (Gdk.EventExpose evnt)

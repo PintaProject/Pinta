@@ -461,9 +461,12 @@ namespace Pinta.Docking.DockNotebook
         {
             Gdk.Window win = w.GdkWindow;
 
-            if (win != null && win.IsViewable)
+			// TODO-GTK3
+#if false
+			if (win != null && win.IsViewable)
                 return Gdk.Pixbuf.FromDrawable (win, Colormap.System, w.Allocation.X, w.Allocation.Y, 0, 0, w.Allocation.Width, w.Allocation.Height);
             else
+#endif
                 return null;
         }
 

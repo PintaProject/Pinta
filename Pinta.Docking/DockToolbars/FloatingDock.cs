@@ -48,7 +48,7 @@ namespace Pinta.Docking.DockToolbars
 			this.bar = bar;
 			bar.FloatingDock = this;
 			Frame f = new Frame ();
-			f.Shadow = ShadowType.Out;
+			f.ShadowType = ShadowType.Out;
 			f.Add (bar);
 			Add (f);
 			f.Show ();
