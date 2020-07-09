@@ -54,8 +54,8 @@ namespace Hyena.Widgets
 		}
 
 		protected void Construct (Widget buttonWidget, Menu menu, bool showArrow, bool showLabel = false)
-		{
-			WidgetFlags |= WidgetFlags.NoWindow;
+		{			
+			HasWindow = false;
 
 			button_widget = buttonWidget;
 

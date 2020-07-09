@@ -142,7 +142,12 @@ namespace Pinta.Core
 
 		public T[] GetExtensions<T> ()
 		{
+			// TODO-GTK3
+#if false
 			return AddinManager.GetExtensionObjects<T> ();
+#else
+			return new T[0];
+#endif
 		}
 
 		/// <summary>

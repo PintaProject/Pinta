@@ -98,7 +98,7 @@ namespace Pinta.Core
 			OpenWindows.Remove (act);
             		act.Dispose ();
 
-			window_menu.HideAll ();
+			window_menu.Hide ();
 
 			// Remove all the menu items from the menu
 			foreach (var item in action_menu_items.Values) {
