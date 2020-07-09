@@ -155,7 +155,7 @@ namespace Pinta.Core
 
 			menu.AppendSeparator ();
 
-			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Mono.Unix.Translations.GetString ("Ruler Units"), null, null);
+			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Translations.GetString ("Ruler Units"), null, null);
 			Menu unit_menu = (Menu)menu.AppendItem (unit_action.CreateSubMenuItem ()).Submenu;
 			unit_menu.Append (Pixels.CreateMenuItem ());
 			unit_menu.Append (Inches.CreateMenuItem ());

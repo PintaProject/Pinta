@@ -123,7 +123,7 @@ namespace Pinta.Core
 			menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
 			
 			menu.AppendSeparator ();
-			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Translations.GetString ("Palette"), null, null);
+			Gtk.Action menu_action = new Gtk.Action ("Palette", Translations.GetString ("Palette"), null, null);
 			Menu palette_menu = (Menu) menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
 			palette_menu.Append (LoadPalette.CreateMenuItem ());
 			palette_menu.Append (SavePalette.CreateMenuItem ());
