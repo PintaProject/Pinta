@@ -495,6 +495,8 @@ namespace Pinta
                 this.QueueDraw ();
             }
 
+            // TODO-GTK3
+#if false
             protected override bool OnExposeEvent (Gdk.EventExpose evnt)
             {
                 base.OnExposeEvent (evnt);
@@ -535,6 +537,7 @@ namespace Pinta
 
                 return true;
             }
+#endif
         }
     }
 }

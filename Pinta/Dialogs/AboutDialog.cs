@@ -227,6 +227,8 @@ namespace Pinta
 				scroll = scrollStart;
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			int w, h;
@@ -238,6 +240,7 @@ namespace Pinta
 			
 			return false;
 		}
+#endif
 
 		protected void OnRealized (object o, EventArgs args)
 		{
