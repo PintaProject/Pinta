@@ -33,7 +33,7 @@ namespace Pinta.Gui.Widgets
 	public class ComboBoxWidget : FilledAreaBin
 	{
         private Label label;
-        private ComboBox combobox;
+        private ComboBoxText combobox;
 
         public string Label {
 			get { return label.Text; }
@@ -81,8 +81,8 @@ namespace Pinta.Gui.Widgets
             hbox1.PackStart (label, false, false, 0);
             hbox1.PackStart (new HSeparator (), true, true, 0);
 
-            // Combobox
-            combobox = ComboBox.NewText ();
+			// Combobox
+			combobox = new ComboBoxText();
 
             // Main layout
             var vbox = new VBox (false, 6);

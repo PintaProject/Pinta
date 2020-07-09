@@ -229,7 +229,7 @@ namespace Pinta.Gui.Widgets
 		{
 			Rectangle rect = GradientRectangle;
 				
-			Gradient pat = new LinearGradient(rect.X, rect.Y, rect.X, 
+			Cairo.Gradient pat = new LinearGradient(rect.X, rect.Y, rect.X, 
 			                                  rect.Y + rect.Height);
 			pat.AddColorStop (0, MaxColor);
 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0));

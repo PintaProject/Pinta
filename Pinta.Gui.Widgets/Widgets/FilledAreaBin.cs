@@ -67,7 +67,7 @@ namespace Pinta.Gui.Widgets
             base.OnSizeAllocated (allocation);
 
             if (child != null)
-                child.Allocation = allocation;
+                child.SetAllocation(allocation);
         }
     }
 }

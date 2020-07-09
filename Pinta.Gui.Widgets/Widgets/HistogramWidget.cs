@@ -60,8 +60,11 @@ namespace Pinta.Gui.Widgets
 		{
 			Histogram = new HistogramRgb ();
 			selected = new bool[] {true, true, true};
-			
+
+			// TODO-GTK3
+#if false
 			ExposeEvent += HandleExposeEvent;
+#endif
 		}
 		
 		public void ResetHistogram ()

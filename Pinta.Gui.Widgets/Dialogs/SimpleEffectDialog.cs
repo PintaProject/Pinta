@@ -56,7 +56,7 @@ namespace Pinta.Gui.Widgets
 			EffectData = effectData;
 
 			BorderWidth = 6;
-			VBox.Spacing = 12;
+			ContentArea.Spacing = 12;
 			WidthRequest = 400;
 			Resizable = false;
 			DefaultResponse = Gtk.ResponseType.Ok;
@@ -132,7 +132,7 @@ namespace Pinta.Gui.Widgets
 		private void AddWidget (Gtk.Widget widget)
 		{
 			widget.Show ();
-			this.VBox.Add (widget);
+			this.ContentArea.Add (widget);
 		}
 		#endregion
 

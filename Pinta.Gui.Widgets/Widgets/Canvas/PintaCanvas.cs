@@ -186,10 +186,8 @@ namespace Pinta.Gui.Widgets
 #region Private Methods
 		private void SetRequisition (Size size)
 		{
-			Requisition req = new Requisition ();
-			req.Width = size.Width;
-			req.Height = size.Height;
-			Requisition = req;
+			WidthRequest = size.Width;
+			HeightRequest = size.Height;
 
 			QueueResize ();
 		}
