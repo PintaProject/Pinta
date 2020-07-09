@@ -40,6 +40,9 @@ using Pango;
 using System.IO;
 using Pinta.Core;
 
+// TODO-GTK3
+#if false
+
 namespace Pinta
 {
 	internal class ScrollBox : DrawingArea
@@ -330,3 +333,4 @@ namespace Pinta
 		}
 	}
 }
+#endif

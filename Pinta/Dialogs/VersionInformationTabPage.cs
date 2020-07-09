@@ -28,6 +28,7 @@
 using System;
 using Gtk;
 using System.Reflection;
+using Pinta.Core;
 
 namespace Pinta
 {
@@ -77,11 +78,6 @@ namespace Pinta
 
 		protected override void OnDestroyed ()
 		{
-			if (cellRenderer != null) {
-				cellRenderer.Destroy ();
-				cellRenderer = null;
-			}
-
 			if (data != null) {
 				data.Dispose ();
 				data = null;

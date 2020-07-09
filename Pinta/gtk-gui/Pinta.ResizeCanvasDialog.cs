@@ -80,10 +80,12 @@ namespace Pinta {
         private Gtk.Button buttonOk;
         
         protected virtual void Build() {
+            // TODO-GTK3
+#if false
             Stetic.Gui.Initialize(this);
             // Widget Pinta.ResizeCanvasDialog
             this.Name = "Pinta.ResizeCanvasDialog";
-            this.Title = Mono.Unix.Translations.GetString("Resize Canvas");
+            this.Title = Translations.GetString("Resize Canvas");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
             this.Modal = true;
             this.DefaultWidth = 300;
@@ -102,7 +104,7 @@ namespace Pinta {
             this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 6;
             // Container child hbox1.Gtk.Box+BoxChild
-            this.percentageRadio = new Gtk.RadioButton(Mono.Unix.Translations.GetString("By percentage:"));
+            this.percentageRadio = new Gtk.RadioButton(Translations.GetString("By percentage:"));
             this.percentageRadio.CanFocus = true;
             this.percentageRadio.Name = "percentageRadio";
             this.percentageRadio.DrawIndicator = true;
@@ -143,7 +145,7 @@ namespace Pinta {
             this.hbox2.Name = "hbox2";
             this.hbox2.Spacing = 6;
             // Container child hbox2.Gtk.Box+BoxChild
-            this.absoluteRadio = new Gtk.RadioButton(Mono.Unix.Translations.GetString("By absolute size:"));
+            this.absoluteRadio = new Gtk.RadioButton(Translations.GetString("By absolute size:"));
             this.absoluteRadio.CanFocus = true;
             this.absoluteRadio.Name = "absoluteRadio";
             this.absoluteRadio.DrawIndicator = true;
@@ -164,7 +166,7 @@ namespace Pinta {
             // Container child hbox3.Gtk.Box+BoxChild
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
-            this.label2.LabelProp = Mono.Unix.Translations.GetString("Width:");
+            this.label2.LabelProp = Translations.GetString("Width:");
             this.hbox3.Add(this.label2);
             Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.hbox3[this.label2]));
             w8.Position = 0;
@@ -186,7 +188,7 @@ namespace Pinta {
             // Container child hbox3.Gtk.Box+BoxChild
             this.label4 = new Gtk.Label();
             this.label4.Name = "label4";
-            this.label4.LabelProp = Mono.Unix.Translations.GetString("pixels");
+            this.label4.LabelProp = Translations.GetString("pixels");
             this.hbox3.Add(this.label4);
             Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.hbox3[this.label4]));
             w10.Position = 2;
@@ -204,7 +206,7 @@ namespace Pinta {
             // Container child hbox4.Gtk.Box+BoxChild
             this.label3 = new Gtk.Label();
             this.label3.Name = "label3";
-            this.label3.LabelProp = Mono.Unix.Translations.GetString("Height:");
+            this.label3.LabelProp = Translations.GetString("Height:");
             this.hbox4.Add(this.label3);
             Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.hbox4[this.label3]));
             w12.Position = 0;
@@ -226,7 +228,7 @@ namespace Pinta {
             // Container child hbox4.Gtk.Box+BoxChild
             this.label5 = new Gtk.Label();
             this.label5.Name = "label5";
-            this.label5.LabelProp = Mono.Unix.Translations.GetString("pixels");
+            this.label5.LabelProp = Translations.GetString("pixels");
             this.hbox4.Add(this.label5);
             Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox4[this.label5]));
             w14.Position = 2;
@@ -242,7 +244,7 @@ namespace Pinta {
             this.aspectCheckbox.Sensitive = false;
             this.aspectCheckbox.CanFocus = true;
             this.aspectCheckbox.Name = "aspectCheckbox";
-            this.aspectCheckbox.Label = Mono.Unix.Translations.GetString("Maintain aspect ratio");
+            this.aspectCheckbox.Label = Translations.GetString("Maintain aspect ratio");
             this.aspectCheckbox.Active = true;
             this.aspectCheckbox.DrawIndicator = true;
             this.aspectCheckbox.UseUnderline = true;
@@ -527,7 +529,7 @@ namespace Pinta {
             this.label6 = new Gtk.Label();
             this.label6.Name = "label6";
             this.label6.Xalign = 0F;
-            this.label6.LabelProp = Mono.Unix.Translations.GetString("Anchor:");
+            this.label6.LabelProp = Translations.GetString("Anchor:");
             this.vbox2.Add(this.label6);
             Gtk.Box.BoxChild w102 = ((Gtk.Box.BoxChild)(this.vbox2[this.label6]));
             w102.PackType = ((Gtk.PackType)(1));
@@ -583,6 +585,7 @@ namespace Pinta {
                 this.Child.ShowAll();
             }
             this.Show();
+#endif
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Pinta
 			DefaultHeight = height;
 
 			WindowPosition = WindowPosition.Center;
-			AllowShrink = true;
+			Resizable = true;
 
 			if (maximize)
 				Maximize ();
@@ -88,7 +88,7 @@ namespace Pinta
 			workspace_layout = new HBox ();
 			workspace_layout.Name = "workspace_layout";
 
-			shell_layout.PackStart (workspace_layout);
+			shell_layout.PackStart (workspace_layout, true, true, 0);
 			workspace_layout.ShowAll ();
 
 			return workspace_layout;

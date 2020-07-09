@@ -30,21 +30,27 @@ namespace Stetic {
         
         public static BinContainer Attach(Gtk.Bin bin) {
             BinContainer bc = new BinContainer();
+            // TODO-GTK3
+#if false
             bin.SizeRequested += new Gtk.SizeRequestedHandler(bc.OnSizeRequested);
+#endif
             bin.SizeAllocated += new Gtk.SizeAllocatedHandler(bc.OnSizeAllocated);
             bin.Added += new Gtk.AddedHandler(bc.OnAdded);
             return bc;
         }
-        
+
+        // TODO-GTK3
+#if false
         private void OnSizeRequested(object sender, Gtk.SizeRequestedArgs args) {
             if ((this.child != null)) {
                 args.Requisition = this.child.SizeRequest();
             }
         }
+#endif
         
         private void OnSizeAllocated(object sender, Gtk.SizeAllocatedArgs args) {
             if ((this.child != null)) {
-                this.child.Allocation = args.Allocation;
+                this.child.SetAllocation (args.Allocation);
             }
         }
         
@@ -85,6 +91,8 @@ namespace Stetic {
                         return Stetic.IconLoader.LoadIcon(widget, "gtk-missing-image", size, sz);
                     }
                     else {
+                        // TODO-GTK3
+#if false
                         Gdk.Pixmap pmap = new Gdk.Pixmap(Gdk.Screen.Default.RootWindow, sz, sz);
                         Gdk.GC gc = new Gdk.GC(pmap);
                         gc.RgbFgColor = new Gdk.Color(255, 255, 255);
@@ -96,6 +104,9 @@ namespace Stetic {
                         pmap.DrawLine(gc, (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)), ((sz - 1) - (sz / 4)));
                         pmap.DrawLine(gc, ((sz - 1) - (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)));
                         return Gdk.Pixbuf.FromDrawable(pmap, pmap.Colormap, 0, 0, 0, 0, sz, sz);
+#else
+                        return null;
+#endif
                     }
                 }
             }

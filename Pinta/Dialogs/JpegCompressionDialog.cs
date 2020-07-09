@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using Gtk;
+using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta
@@ -38,7 +39,7 @@ namespace Pinta
 				Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
 		{
 			this.BorderWidth = 6;
-			this.VBox.Spacing = 3;
+			this.ContentArea.Spacing = 3;
 			VBox content = new VBox ();
 			content.Spacing = 5;
 
@@ -53,7 +54,7 @@ namespace Pinta
 			content.PackStart (compressionLevel, false, false, 0);
 
 			content.ShowAll ();
-			this.VBox.Add (content);
+			this.ContentArea.Add (content);
 			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 		}
 		

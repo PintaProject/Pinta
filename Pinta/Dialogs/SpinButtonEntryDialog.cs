@@ -36,20 +36,20 @@ namespace Pinta
 			: base (title, parent, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
 		{
 			BorderWidth = 6;
-			VBox.Spacing = 3;
+			ContentArea.Spacing = 3;
 			HBox hbox = new HBox ();
 			hbox.Spacing = 6;
 			
 			Label lbl = new Label (label);
 			lbl.Xalign = 0;
-			hbox.PackStart (lbl);
+			hbox.PackStart (lbl, true, true, 0);
 			
 			spinButton = new SpinButton (min, max, 1);
 			spinButton.Value = current;
-			hbox.PackStart (spinButton);
+			hbox.PackStart (spinButton, true, true, 0);
 			
 			hbox.ShowAll ();
-			VBox.Add (hbox);
+			ContentArea.Add (hbox);
 
 			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 			DefaultResponse = ResponseType.Ok;

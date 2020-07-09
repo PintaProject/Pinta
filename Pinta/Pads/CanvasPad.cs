@@ -28,6 +28,7 @@ using System;
 using Gtk;
 using Pinta.Docking;
 using Pinta.Docking.DockNotebook;
+using Pinta.Core;
 
 namespace Pinta
 {

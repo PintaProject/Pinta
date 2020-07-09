@@ -186,6 +186,8 @@ namespace Pinta
 		/// </summary>
 		private static void SetWindowsGtkPath ()
 		{
+			// TODO-GTK3
+#if false
 			string location = null;
 			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
 				if (key != null) {
@@ -208,6 +210,7 @@ namespace Pinta
 			}
 
 			System.Console.Error.WriteLine ("Unable to set GTK# dll directory");
+#endif
 		}
 	}
 }

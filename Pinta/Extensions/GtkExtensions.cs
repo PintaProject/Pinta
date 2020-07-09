@@ -35,7 +35,10 @@ namespace Pinta
 		public static DockToolButton CreateDockToolBarItem (this Gtk.Action action)
 		{
 			DockToolButton item = new DockToolButton (action.StockId);
+			// TODO-GTK3
+#if false
 			action.ConnectProxy (item);
+#endif
 			
 			item.Show ();
 			item.TooltipText = action.Label;

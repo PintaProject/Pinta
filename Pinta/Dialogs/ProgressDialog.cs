@@ -84,14 +84,14 @@ namespace Pinta
 
         private void Build ()
         {
-            VBox.BorderWidth = 2;
-            VBox.Spacing = 6;
+            ContentArea.BorderWidth = 2;
+            ContentArea.Spacing = 6;
 
             label = new Label ();
-            VBox.Add (label);
+            ContentArea.Add (label);
 
             progress_bar = new ProgressBar ();
-            VBox.Add (progress_bar);
+            ContentArea.Add (progress_bar);
 
             AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
 

@@ -185,12 +185,16 @@ namespace Pinta
             var container = DockNotebookManager.ActiveNotebookContainer ?? dock_container;
             var selected_index = container.TabControl.CurrentTabIndex;
 
-            var canvas = new CanvasWindow (doc) {
+			
+			var canvas = new CanvasWindow (doc) {
+				// TODO-GTK3
+#if false
                 RulersVisible = PintaCore.Actions.View.Rulers.Active,
                 RulerMetric = GetCurrentRulerMetric ()
+#endif
             };
 
-            var my_content = new DocumentViewContent (doc, canvas);
+			var my_content = new DocumentViewContent (doc, canvas);
 
             // Insert our tab to the right of the currently selected tab
             container.TabControl.InsertTab (my_content, selected_index + 1);
@@ -205,13 +209,18 @@ namespace Pinta
                 canvas.HasBeenShown = true;
             };
 
-            PintaCore.Actions.View.Rulers.Toggled += (o, e2) => { canvas.RulersVisible = ((ToggleAction)o).Active; };
+			// TODO-GTK3
+#if false
+			PintaCore.Actions.View.Rulers.Toggled += (o, e2) => { canvas.RulersVisible = ((ToggleAction)o).Active; };
             PintaCore.Actions.View.Pixels.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Pixels; };
             PintaCore.Actions.View.Inches.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Inches; };
             PintaCore.Actions.View.Centimeters.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Centimeters; };
+#endif
         }
 
-        private MetricType GetCurrentRulerMetric ()
+		// TODO-GTK3
+#if false
+		private MetricType GetCurrentRulerMetric ()
         {
             if (PintaCore.Actions.View.Inches.Active)
                 return MetricType.Inches;
@@ -220,6 +229,7 @@ namespace Pinta
 
             return MetricType.Pixels;
         }
+#endif
 
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
@@ -273,6 +283,8 @@ namespace Pinta
         }
 
 		// Called when an extension node is added or removed
+		// TODO-GTK3
+#if false
 		private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
 		{
 			IExtension extension = (IExtension) args.ExtensionObject;
@@ -281,6 +293,7 @@ namespace Pinta
 			else
 				extension.Uninitialize ();
 		}
+#endif
 
 #region GUI Construction
 		private void CreateWindow ()
@@ -323,7 +336,7 @@ namespace Pinta
 			window_menu.Submenu = new Menu ();
 			main_menu.Append (window_menu);
 
-			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Translations.GetString ("Tool Windows"), null, null);
+			Gtk.Action pads = new Gtk.Action ("pads", Translations.GetString ("Tool Windows"), null, null);
 			view_menu.Submenu = new Menu ();
 			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 
@@ -474,6 +487,8 @@ namespace Pinta
 			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
 			                                                                      PintaCore.System.DefaultDialogDirectory);
 
+			// TODO-GTK3
+#if false
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 
 			switch (ruler_metric) {
@@ -487,6 +502,7 @@ namespace Pinta
 					PintaCore.Actions.View.Inches.Activate ();
 					break;
 			}
+#endif
 		}
 
 		private void SaveUserSettings ()
@@ -499,6 +515,8 @@ namespace Pinta
 				PintaCore.Settings.PutSetting ("window-size-height", window_shell.GdkWindow.GetSize ().Height);
 			}
 
+			// TODO-GTK3
+#if flase
 			var ruler_metric = MetricType.Pixels;
 
 			if (PintaCore.Actions.View.Inches.Active)
@@ -507,6 +525,7 @@ namespace Pinta
 				ruler_metric = MetricType.Centimeters;
 
 			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
+#endif
 			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
             PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
             PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Active);
@@ -579,7 +598,7 @@ namespace Pinta
 
 				PintaCore.Workspace.Scale = ratio;
 				PintaCore.Actions.View.SuspendZoomUpdate ();
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
 
@@ -590,7 +609,7 @@ namespace Pinta
 		{
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				PintaCore.Actions.View.SuspendZoomUpdate ();
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = ViewActions.ToPercent (PintaCore.Workspace.Scale);
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 
                 var doc = PintaCore.Workspace.ActiveDocument;

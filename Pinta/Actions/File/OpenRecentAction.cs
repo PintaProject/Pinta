@@ -35,14 +35,20 @@ namespace Pinta.Actions
 		#region IActionHandler Members
 		public void Initialize ()
 		{
+			// TODO-GTK3
+#if false
 			PintaCore.Actions.File.OpenRecent.ItemActivated += Activated;
+#endif
 		}
 
 		public void Uninitialize ()
 		{
+			// TODO-GTK3
+#if false
 			PintaCore.Actions.File.OpenRecent.ItemActivated -= Activated;
+#endif
 		}
-		#endregion
+#endregion
 
 		private void Activated (object sender, EventArgs e)
 		{

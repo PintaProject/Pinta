@@ -28,9 +28,14 @@ using NGettext;
 
 namespace Pinta.Core
 {
-    public class Translations
+    public static class Translations
     {
-        private static readonly ICatalog catalog = new Catalog("pinta", "locale");
+        private static ICatalog catalog;
+
+        public static void Init(string domain, string locale_dir)
+        {
+            catalog = new Catalog(domain, locale_dir);
+        }
 
         public static string GetString(string text)
         {

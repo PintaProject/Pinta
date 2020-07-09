@@ -103,7 +103,7 @@ namespace Pinta
 			vbox.Add (expander);
 
 			hbox.Add (vbox);
-			this.VBox.Add (hbox);
+			this.ContentArea.Add (hbox);
 			
 			bug_report_button = new Button (Translations.GetString ("Report Bug...."));
 			bug_report_button.CanFocus = false;

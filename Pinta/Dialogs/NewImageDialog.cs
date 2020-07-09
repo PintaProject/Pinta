@@ -50,7 +50,7 @@ namespace Pinta
         private List<Gdk.Size> preset_sizes;
         private PreviewArea preview;
 
-        private ComboBox preset_combo;
+        private ComboBoxText preset_combo;
         private Entry width_entry;
         private Entry height_entry;
 
@@ -71,7 +71,7 @@ namespace Pinta
             allow_background_color = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
             BorderWidth = 4;
-            VBox.Spacing = 4;
+            ContentArea.Spacing = 4;
 
             Resizable = false;
             DefaultResponse = ResponseType.Ok;
@@ -200,7 +200,10 @@ namespace Pinta
             preset_entries.Add (Translations.GetString ("Custom"));            
             preset_entries.AddRange (preset_sizes.Select (p => string.Format ("{0} x {1}", p.Width, p.Height)));
 
-            preset_combo = new ComboBox (preset_entries.ToArray ());
+            preset_combo = new ComboBoxText();
+            foreach (string entry in preset_entries)
+                preset_combo.AppendText(entry);
+
             preset_combo.Active = 0;
 
             layout_table.Attach (size_label, 0, 1, 0, 1, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
@@ -327,7 +330,7 @@ namespace Pinta
             main_hbox.PackStart (options_vbox, false, false, 0);
             main_hbox.PackStart (preview_vbox, true, true, 0);
 
-            VBox.Add (main_hbox);
+            ContentArea.Add (main_hbox);
 
             ShowAll ();
         }

@@ -71,7 +71,7 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			var fcd = new FileChooserDialog (Mono.Unix.Translations.GetString ("Save Image File"),
+			var fcd = new FileChooserDialog (Translations.GetString ("Save Image File"),
 									       PintaCore.Chrome.MainWindow,
 									       FileChooserAction.Save,
 									       Gtk.Stock.Cancel,
