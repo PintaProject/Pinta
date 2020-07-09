@@ -35,7 +35,7 @@ namespace Pinta
 	{
 		private bool value_changing;
 		
-		public ResizeImageDialog () : base (Catalog.GetString ("Resize Image"), PintaCore.Chrome.MainWindow,
+		public ResizeImageDialog () : base (Translations.GetString ("Resize Image"), PintaCore.Chrome.MainWindow,
 		                                    DialogFlags.Modal)
 		{
 			this.Build ();

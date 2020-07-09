@@ -47,8 +47,8 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Catalog.GetString ("Resize Palette"),
-					PintaCore.Chrome.MainWindow, Catalog.GetString ("New palette size:"), 1, 96,
+			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Translations.GetString ("Resize Palette"),
+					PintaCore.Chrome.MainWindow, Translations.GetString ("New palette size:"), 1, 96,
 					PintaCore.Palette.CurrentPalette.Count);
 
 			if (dialog.Run () == (int)ResponseType.Ok) {

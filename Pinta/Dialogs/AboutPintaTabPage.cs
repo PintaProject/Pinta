@@ -39,7 +39,7 @@ namespace Pinta
 			Label label = new Label ();
 			label.Markup = String.Format (
 			    "<b>{0}</b>\n    {1}",
-			    Catalog.GetString ("Version"),
+			    Translations.GetString ("Version"),
                             PintaCore.ApplicationVersion);
 			    
 			HBox hBoxVersion = new HBox ();
@@ -48,14 +48,14 @@ namespace Pinta
 
 			label = null;
 			label = new Label ();
-			label.Markup = string.Format ("<b>{0}</b>\n    {1}", Catalog.GetString ("License"), Catalog.GetString ("Released under the MIT X11 License."));
+			label.Markup = string.Format ("<b>{0}</b>\n    {1}", Translations.GetString ("License"), Translations.GetString ("Released under the MIT X11 License."));
 			HBox hBoxLicense = new HBox ();
 			hBoxLicense.PackStart (label, false, false, 5);
 			this.PackStart (hBoxLicense, false, true, 5);
 
 			label = null;
 			label = new Label ();
-			label.Markup = string.Format ("<b>{0}</b>\n    (c) 2010-2019 {1}", Catalog.GetString ("Copyright"), Catalog.GetString ("by Pinta contributors"));
+			label.Markup = string.Format ("<b>{0}</b>\n    (c) 2010-2019 {1}", Translations.GetString ("Copyright"), Translations.GetString ("by Pinta contributors"));
 			HBox hBoxCopyright = new HBox ();
 			hBoxCopyright.PackStart (label, false, false, 5);
 			this.PackStart (hBoxCopyright, false, true, 5);

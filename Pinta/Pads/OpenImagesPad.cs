@@ -38,13 +38,13 @@ namespace Pinta
 		{
 			DockItem open_images_item = workspace.AddItem ("Images");
 			open_images_item.DefaultLocation = "Layers/Bottom";
-			open_images_item.Label = Catalog.GetString ("Images");
+			open_images_item.Label = Translations.GetString ("Images");
 			open_images_item.Content = new OpenImagesListWidget ();
 			open_images_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Default.png");
             open_images_item.DefaultVisible = false;
             open_images_item.DefaultWidth = 100;
 
-			ToggleAction show_open_images = padMenu.AppendToggleAction ("Images", Catalog.GetString ("Images"), null, null);
+			ToggleAction show_open_images = padMenu.AppendToggleAction ("Images", Translations.GetString ("Images"), null, null);
 
 			show_open_images.Activated += delegate {
 				open_images_item.Visible = show_open_images.Active;

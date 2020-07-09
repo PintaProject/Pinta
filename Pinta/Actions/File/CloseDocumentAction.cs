@@ -58,8 +58,8 @@ namespace Pinta.Actions
 				return;
 			}
 
-			var primary = Catalog.GetString ("Save the changes to image \"{0}\" before closing?");
-			var secondary = Catalog.GetString ("If you don't save, all changes will be permanently lost.");
+			var primary = Translations.GetString ("Save the changes to image \"{0}\" before closing?");
+			var secondary = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 			var message = string.Format (markup, primary, secondary);
 
 			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
@@ -69,11 +69,11 @@ namespace Pinta.Actions
 			// Use the standard button order for each OS.
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				md.AddButton (Stock.Save, ResponseType.Yes);
-				md.AddButton (Catalog.GetString ("Close _without saving"), ResponseType.No);
+				md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			}
 			else {
-				md.AddButton (Catalog.GetString ("Close _without saving"), ResponseType.No);
+				md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 			}

@@ -51,7 +51,7 @@ namespace Pinta
             canvas_dock.Expand = true;
 
             canvas_dock.DrawFrame = false;
-            canvas_dock.Label = Catalog.GetString ("Canvas");
+            canvas_dock.Label = Translations.GetString ("Canvas");
             canvas_dock.Content = NotebookContainer;
         }
 	}

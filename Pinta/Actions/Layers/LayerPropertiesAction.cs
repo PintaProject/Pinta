@@ -92,22 +92,22 @@ namespace Pinta.Actions
 			int count = 0;
 
 			if (updated.Opacity != initial.Opacity) {
-				ret = Catalog.GetString ("Layer Opacity");
+				ret = Translations.GetString ("Layer Opacity");
 				count++;
 			}
 
 			if (updated.Name != initial.Name) {
-				ret = Catalog.GetString ("Rename Layer");
+				ret = Translations.GetString ("Rename Layer");
 				count++;
 			}
 
 			if (updated.Hidden != initial.Hidden) {
-				ret = (updated.Hidden) ? Catalog.GetString ("Hide Layer") : Catalog.GetString ("Show Layer");
+				ret = (updated.Hidden) ? Translations.GetString ("Hide Layer") : Translations.GetString ("Show Layer");
 				count++;
 			}
 
 			if (ret == null || count > 1)
-				ret = Catalog.GetString ("Layer Properties");
+				ret = Translations.GetString ("Layer Properties");
 
 			return ret;
 		}

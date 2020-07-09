@@ -36,7 +36,7 @@ namespace Pinta
 		private bool value_changing;
 		private Anchor anchor;
 		
-		public ResizeCanvasDialog () : base (Catalog.GetString ("Resize Canvas"), PintaCore.Chrome.MainWindow,
+		public ResizeCanvasDialog () : base (Translations.GetString ("Resize Canvas"), PintaCore.Chrome.MainWindow,
 		                                     DialogFlags.Modal)
 		{
 			this.Build ();

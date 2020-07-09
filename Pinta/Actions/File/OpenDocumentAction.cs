@@ -47,7 +47,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
+			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
 							    FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
 							    Gtk.Stock.Open, Gtk.ResponseType.Ok);
 
@@ -60,11 +60,11 @@ namespace Pinta.Actions
 				}
             }
 
-			ff.Name = Catalog.GetString ("Image files");
+			ff.Name = Translations.GetString ("Image files");
 			fcd.AddFilter (ff);
 
 			FileFilter ff2 = new FileFilter ();
-			ff2.Name = Catalog.GetString ("All files");
+			ff2.Name = Translations.GetString ("All files");
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 

@@ -50,7 +50,7 @@ namespace Pinta.Actions
 			// TODO - allow the layer to be zoomed in or out
 			
 			var data = new RotateZoomData ();
-			var dialog = new SimpleEffectDialog (Catalog.GetString ("Rotate / Zoom Layer"),
+			var dialog = new SimpleEffectDialog (Translations.GetString ("Rotate / Zoom Layer"),
 				PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png"), data,
 			                                     new PintaLocalizer ());
 
@@ -104,7 +104,7 @@ namespace Pinta.Actions
 			doc.Workspace.Invalidate ();
 
 	        doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Layers.RotateZoom.png",
-	            Catalog.GetString ("Rotate / Zoom Layer"), old_surf, doc.CurrentUserLayerIndex));
+	            Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.CurrentUserLayerIndex));
 		}
 
 		private class RotateZoomData : EffectData

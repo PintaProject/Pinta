@@ -35,7 +35,7 @@ namespace Pinta
 		private HScale compressionLevel;
 	
 		public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
-			: base (Catalog.GetString ("JPEG Quality"), parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+			: base (Translations.GetString ("JPEG Quality"), parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
 				Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
 		{
 			this.BorderWidth = 6;
@@ -45,7 +45,7 @@ namespace Pinta
 
 			DefaultResponse = ResponseType.Ok;
 			
-			Label label = new Label (Catalog.GetString ("Quality: "));
+			Label label = new Label (Translations.GetString ("Quality: "));
 			label.Xalign = 0;
 			content.PackStart (label, false, false, 0);
 			

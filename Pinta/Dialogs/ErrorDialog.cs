@@ -95,7 +95,7 @@ namespace Pinta
 			description_label.Xalign = 0;
 			vbox.PackStart (description_label, false, false, 0);
 
-			expander = new Expander (Catalog.GetString ("Details"));
+			expander = new Expander (Translations.GetString ("Details"));
 			details_text = new TextView ();
 			var scroll = new ScrolledWindow ();
 			scroll.Add (details_text);
@@ -106,7 +106,7 @@ namespace Pinta
 			hbox.Add (vbox);
 			this.VBox.Add (hbox);
 			
-			bug_report_button = new Button (Catalog.GetString ("Report Bug...."));
+			bug_report_button = new Button (Translations.GetString ("Report Bug...."));
 			bug_report_button.CanFocus = false;
 			ActionArea.Add (bug_report_button);
 

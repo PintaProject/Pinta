@@ -86,7 +86,7 @@ namespace Pinta
 			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
 
 			// Try to set the default tool to the PaintBrush
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Paintbrush"));
+			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Paintbrush"));
 
 			// Load the user's previous settings
 			LoadUserSettings ();
@@ -306,27 +306,27 @@ namespace Pinta
 		{
 			var main_menu = window_shell.CreateMainMenu ("main_menu");
 
-			main_menu.Append (new Gtk.Action ("file", Catalog.GetString ("_File")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("edit", Catalog.GetString ("_Edit")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("file", Translations.GetString ("_File")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("edit", Translations.GetString ("_Edit")).CreateMenuItem ());
 
-			MenuItem view_menu = (MenuItem)new Gtk.Action ("view", Catalog.GetString ("_View")).CreateMenuItem ();
+			MenuItem view_menu = (MenuItem)new Gtk.Action ("view", Translations.GetString ("_View")).CreateMenuItem ();
 			main_menu.Append (view_menu);
 			
-			main_menu.Append (new Gtk.Action ("image", Catalog.GetString ("_Image")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("layers", Catalog.GetString ("_Layers")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("adjustments", Catalog.GetString ("_Adjustments")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("effects", Catalog.GetString ("Effe_cts")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("addins", Catalog.GetString ("A_dd-ins")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("image", Translations.GetString ("_Image")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("layers", Translations.GetString ("_Layers")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("adjustments", Translations.GetString ("_Adjustments")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("effects", Translations.GetString ("Effe_cts")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("addins", Translations.GetString ("A_dd-ins")).CreateMenuItem ());
 
-			MenuItem window_menu = (MenuItem)new Gtk.Action ("window", Catalog.GetString ("_Window")).CreateMenuItem ();
+			MenuItem window_menu = (MenuItem)new Gtk.Action ("window", Translations.GetString ("_Window")).CreateMenuItem ();
 			window_menu.Submenu = new Menu ();
 			main_menu.Append (window_menu);
 
-			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Tool Windows"), null, null);
+			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Translations.GetString ("Tool Windows"), null, null);
 			view_menu.Submenu = new Menu ();
 			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 
-			main_menu.Append (new Gtk.Action ("help", Catalog.GetString ("_Help")).CreateMenuItem ());
+			main_menu.Append (new Gtk.Action ("help", Translations.GetString ("_Help")).CreateMenuItem ());
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
 
@@ -344,7 +344,7 @@ namespace Pinta
 					//add a new group to the app menu, and add some items to it
 					var appGroup = IgeMacMenu.AddAppMenuGroup ();
 					MenuItem aboutItem = (MenuItem)PintaCore.Actions.Help.About.CreateMenuItem ();
-					appGroup.AddMenuItem (aboutItem, Catalog.GetString ("About"));
+					appGroup.AddMenuItem (aboutItem, Translations.GetString ("About"));
 
 					main_menu.Hide ();
 				} catch {

@@ -44,7 +44,7 @@ namespace Pinta
 			string locale_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
 
 			try {
-				Catalog.Init ("pinta", locale_dir);
+				Translations.Init ("pinta", locale_dir);
 			} catch (Exception ex) {
 				Console.WriteLine (ex);
 			}
@@ -54,9 +54,9 @@ namespace Pinta
                         bool show_version = false;
 			
 			var p = new OptionSet () {
-                                { "h|help", Catalog.GetString("Show this message and exit."), v => show_help = v != null },
-                                { "v|version", Catalog.GetString("Display the application version."), v => show_version = v != null },
-				{ "rt|render-threads=", Catalog.GetString ("number of threads to use for rendering"), (int v) => threads = v }
+                                { "h|help", Translations.GetString("Show this message and exit."), v => show_help = v != null },
+                                { "v|version", Translations.GetString("Display the application version."), v => show_version = v != null },
+				{ "rt|render-threads=", Translations.GetString ("number of threads to use for rendering"), (int v) => threads = v }
 			};
 
 			List<string> extra;
@@ -104,9 +104,9 @@ namespace Pinta
 
                 private static void ShowHelp (OptionSet p)
                 {
-                    Console.WriteLine (Catalog.GetString ("Usage: pinta [files]"));
+                    Console.WriteLine (Translations.GetString ("Usage: pinta [files]"));
                     Console.WriteLine ();
-                    Console.WriteLine (Catalog.GetString ("Options: "));
+                    Console.WriteLine (Translations.GetString ("Options: "));
                     p.WriteOptionDescriptions (Console.Out);
                 }
 

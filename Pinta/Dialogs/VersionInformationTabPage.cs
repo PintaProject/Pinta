@@ -41,16 +41,16 @@ namespace Pinta
 		{
 			TreeView treeView = new TreeView ();
 
-			TreeViewColumn treeViewColumnTitle = new TreeViewColumn (Catalog.GetString ("Title"), cellRenderer, "text", 0);
+			TreeViewColumn treeViewColumnTitle = new TreeViewColumn (Translations.GetString ("Title"), cellRenderer, "text", 0);
 			treeViewColumnTitle.FixedWidth = 200;
 			treeViewColumnTitle.Sizing = TreeViewColumnSizing.Fixed;
 			treeViewColumnTitle.Resizable = true;
 			treeView.AppendColumn (treeViewColumnTitle);
 
-			TreeViewColumn treeViewColumnVersion = new TreeViewColumn (Catalog.GetString ("Version"), cellRenderer, "text", 1);
+			TreeViewColumn treeViewColumnVersion = new TreeViewColumn (Translations.GetString ("Version"), cellRenderer, "text", 1);
 			treeView.AppendColumn (treeViewColumnVersion);
 
-			TreeViewColumn treeViewColumnPath = new TreeViewColumn (Catalog.GetString ("Path"), cellRenderer, "text", 2);
+			TreeViewColumn treeViewColumnPath = new TreeViewColumn (Translations.GetString ("Path"), cellRenderer, "text", 2);
 			treeView.AppendColumn (treeViewColumnPath);
 
 			treeView.RulesHint = true;

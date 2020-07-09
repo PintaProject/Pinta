@@ -123,7 +123,7 @@ namespace Pinta
 		string CreditText {
 			get {
 				StringBuilder sb = new StringBuilder ();
-				sb.AppendFormat ("<b>{0}</b>\n\n", Catalog.GetString ("Contributors to this release:"));
+				sb.AppendFormat ("<b>{0}</b>\n\n", Translations.GetString ("Contributors to this release:"));
 
 				for (int n = 0; n < authors.Length; n++) {
 					sb.Append (authors[n]);
@@ -135,7 +135,7 @@ namespace Pinta
 
 				sb.AppendLine ();
 
-				sb.Append ("\n\n<b>" + Catalog.GetString ("Previous contributors:") + "</b>\n\n");
+				sb.Append ("\n\n<b>" + Translations.GetString ("Previous contributors:") + "</b>\n\n");
 				for (int n = 0; n < oldAuthors.Length; n++) {
 					sb.Append (oldAuthors[n]);
 					if (n % 2 == 1)
@@ -146,23 +146,23 @@ namespace Pinta
 
 				sb.AppendLine ();
 
-				string trans = Catalog.GetString ("translator-credits");
+				string trans = Translations.GetString ("translator-credits");
 
 				if (trans != "translator-credits") {
-					sb.AppendFormat ("\n\n<b>{0}</b>\n\n", Catalog.GetString ("Translated by:"));
+					sb.AppendFormat ("\n\n<b>{0}</b>\n\n", Translations.GetString ("Translated by:"));
 					sb.Append (trans);
 				}
 
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Based on the work of Paint.NET:"));
+				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Based on the work of Paint.NET:"));
 				sb.AppendLine ();
 				sb.Append ("http://www.getpaint.net/");
 
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Using some icons from:"));
+				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Using some icons from:"));
 				sb.AppendLine ();
 				sb.AppendLine ("Silk - http://www.famfamfam.com/lab/icons/silk");
 				sb.Append ("Fugue - http://pinvoke.com/");
@@ -170,7 +170,7 @@ namespace Pinta
 				sb.AppendLine ();
 				sb.AppendLine ();
 				sb.AppendLine ();
-				sb.AppendFormat ("<b>{0}</b>\n", Catalog.GetString ("Powered by Mono:"));
+				sb.AppendFormat ("<b>{0}</b>\n", Translations.GetString ("Powered by Mono:"));
 
 				return sb.ToString ();
 			}
@@ -277,7 +277,7 @@ namespace Pinta
 
 		public AboutDialog () : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{
-			Title = Catalog.GetString ("About Pinta");
+			Title = Translations.GetString ("About Pinta");
 			//TransientFor = IdeApp.Workbench.RootWindow;
 			AllowGrow = false;
 			HasSeparator = false;
@@ -295,7 +295,7 @@ namespace Pinta
 			Notebook notebook = new Notebook ();
 			notebook.BorderWidth = 6;
 			notebook.AppendPage (new AboutPintaTabPage (), new Label (Title));
-			notebook.AppendPage (new VersionInformationTabPage (), new Label (Catalog.GetString ("Version Info")));
+			notebook.AppendPage (new VersionInformationTabPage (), new Label (Translations.GetString ("Version Info")));
 			
 			VBox.PackStart (notebook, true, true, 4);
 

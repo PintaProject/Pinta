@@ -72,7 +72,7 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			var fcd = new FileChooserDialog (Mono.Unix.Catalog.GetString ("Save Image File"),
+			var fcd = new FileChooserDialog (Mono.Unix.Translations.GetString ("Save Image File"),
 									       PintaCore.Chrome.MainWindow,
 									       FileChooserAction.Save,
 									       Gtk.Stock.Cancel,
@@ -187,8 +187,8 @@ namespace Pinta.Actions
 				format = PintaCore.System.ImageFormats.GetFormatByFile (file);
 
 			if (format == null || format.IsReadOnly ()) {
-				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Catalog.GetString ("Pinta does not support saving images in this file format."), file);
-				md.Title = Catalog.GetString ("Error");
+				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Translations.GetString ("Pinta does not support saving images in this file format."), file);
+				md.Title = Translations.GetString ("Error");
 
 				md.Run ();
 				md.Destroy ();
@@ -199,8 +199,8 @@ namespace Pinta.Actions
 			FileInfo file_info = new FileInfo (file);
 			if (file_info.Exists && file_info.IsReadOnly) {
 				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
-					ButtonsType.Ok, Catalog.GetString ("Cannot save read only file."));
-				md.Title = Catalog.GetString ("Error");
+					ButtonsType.Ok, Translations.GetString ("Cannot save read only file."));
+				md.Title = Translations.GetString ("Error");
 
 				md.Run ();
 				md.Destroy ();
@@ -214,8 +214,8 @@ namespace Pinta.Actions
 				format.Exporter.Export (document, file, parent);
 			} catch (GLib.GException e) { // Errors from GDK
 				if (e.Message == "Image too large to be saved as ICO") {
-					string primary = Catalog.GetString ("Image too large");
-					string secondary = Catalog.GetString ("ICO files can not be larger than 255 x 255 pixels.");
+					string primary = Translations.GetString ("Image too large");
+					string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 					string message = string.Format (markup, primary, secondary);
 
 					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
@@ -244,8 +244,8 @@ namespace Pinta.Actions
 
 		private bool ConfirmOverwrite (FileChooserDialog fcd, string file)
 		{
-			string primary = Catalog.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
-			string secondary = Catalog.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
+			string primary = Translations.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
+			string secondary = Translations.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
 			string message = string.Format (markup, primary, secondary);
 
 			MessageDialog md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,

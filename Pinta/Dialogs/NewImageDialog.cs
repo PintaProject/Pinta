@@ -65,7 +65,7 @@ namespace Pinta
         public NewImageDialog (int initialWidth, int initialHeight, BackgroundType initial_bg_type, bool isClipboardSize)
             : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
         {
-            Title = Catalog.GetString ("New Image");
+            Title = Translations.GetString ("New Image");
             WindowPosition = Gtk.WindowPosition.CenterOnParent;
 
             // We don't show the background color option if it's the same as "White"
@@ -159,7 +159,7 @@ namespace Pinta
 
         private Gdk.Size SelectedPresetSize {
             get {
-                if (preset_combo.ActiveText == Catalog.GetString ("Clipboard") || preset_combo.ActiveText == Catalog.GetString ("Custom"))
+                if (preset_combo.ActiveText == Translations.GetString ("Clipboard") || preset_combo.ActiveText == Translations.GetString ("Custom"))
                     return Gdk.Size.Empty;
 
                 var text_parts = preset_combo.ActiveText.Split (' ');
@@ -190,15 +190,15 @@ namespace Pinta
             layout_table.ColumnSpacing = 6;
 
             // Preset Combo
-            var size_label = new Label (Catalog.GetString ("Preset:"));
+            var size_label = new Label (Translations.GetString ("Preset:"));
             size_label.SetAlignment (1f, .5f);
 
             var preset_entries = new List<string> ();
 
             if (has_clipboard)
-                preset_entries.Add (Catalog.GetString ("Clipboard"));
+                preset_entries.Add (Translations.GetString ("Clipboard"));
 
-            preset_entries.Add (Catalog.GetString ("Custom"));            
+            preset_entries.Add (Translations.GetString ("Custom"));            
             preset_entries.AddRange (preset_sizes.Select (p => string.Format ("{0} x {1}", p.Width, p.Height)));
 
             preset_combo = new ComboBox (preset_entries.ToArray ());
@@ -208,14 +208,14 @@ namespace Pinta
             layout_table.Attach (preset_combo, 1, 2, 0, 1, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
             
             // Width Entry
-            var width_label = new Label (Catalog.GetString ("Width:"));
+            var width_label = new Label (Translations.GetString ("Width:"));
             width_label.SetAlignment (1f, .5f);
 
             width_entry = new Entry ();
             width_entry.WidthRequest = 50;
             width_entry.ActivatesDefault = true;
 
-            var width_units = new Label (Catalog.GetString ("pixels"));
+            var width_units = new Label (Translations.GetString ("pixels"));
 
             var width_hbox = new HBox ();
             width_hbox.PackStart (width_entry, false, false, 0);
@@ -225,14 +225,14 @@ namespace Pinta
             layout_table.Attach (width_hbox, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
 
             // Height Entry
-            var height_label = new Label (Catalog.GetString ("Height:"));
+            var height_label = new Label (Translations.GetString ("Height:"));
             height_label.SetAlignment (1f, .5f);
 
             height_entry = new Entry ();
             height_entry.WidthRequest = 50;
             height_entry.ActivatesDefault = true;
 
-            var height_units = new Label (Catalog.GetString ("pixels"));
+            var height_units = new Label (Translations.GetString ("pixels"));
 
             var height_hbox = new HBox ();
             height_hbox.PackStart (height_entry, false, false, 0);
@@ -242,10 +242,10 @@ namespace Pinta
             layout_table.Attach (height_hbox, 1, 2, 2, 3, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
 
             // Orientation Radio options
-            var orientation_label = new Label (Catalog.GetString ("Orientation:"));
+            var orientation_label = new Label (Translations.GetString ("Orientation:"));
             orientation_label.SetAlignment (0f, .5f);
 
-            portrait_radio = new RadioButton (Catalog.GetString ("Portrait"));
+            portrait_radio = new RadioButton (Translations.GetString ("Portrait"));
             var portrait_image = new Image (PintaCore.Resources.GetIcon (Stock.OrientationPortrait, 16));
             
             var portrait_hbox = new HBox ();
@@ -253,7 +253,7 @@ namespace Pinta
             portrait_hbox.PackStart (portrait_image, false, false, 7);
             portrait_hbox.PackStart (portrait_radio, false, false, 0);
             
-            landscape_radio = new RadioButton (portrait_radio, Catalog.GetString ("Landscape"));
+            landscape_radio = new RadioButton (portrait_radio, Translations.GetString ("Landscape"));
             var landscape_image = new Image (PintaCore.Resources.GetIcon (Stock.OrientationLandscape, 16));
             
             var landscape_hbox = new HBox ();
@@ -268,10 +268,10 @@ namespace Pinta
             orientation_vbox.PackStart (landscape_hbox, false, false, 0);
             
             // Background Color options
-            var background_label = new Label (Catalog.GetString ("Background:"));
+            var background_label = new Label (Translations.GetString ("Background:"));
             background_label.SetAlignment (0f, .5f);
 
-            white_bg_radio = new RadioButton (Catalog.GetString ("White"));
+            white_bg_radio = new RadioButton (Translations.GetString ("White"));
             var image_white = new Image (GdkExtensions.CreateColorSwatch (16, new Gdk.Color (255, 255, 255)));
             
             var hbox_white = new HBox ();
@@ -279,7 +279,7 @@ namespace Pinta
             hbox_white.PackStart (image_white, false, false, 7);
             hbox_white.PackStart (white_bg_radio, false, false, 0);
 
-            secondary_bg_radio = new RadioButton (white_bg_radio, Catalog.GetString ("Background Color"));
+            secondary_bg_radio = new RadioButton (white_bg_radio, Translations.GetString ("Background Color"));
             var image_bg = new Image (GdkExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor.ToGdkColor ()));
 
             var hbox_bg = new HBox ();
@@ -287,7 +287,7 @@ namespace Pinta
             hbox_bg.PackStart (image_bg, false, false, 7);
             hbox_bg.PackStart (secondary_bg_radio, false, false, 0);
 
-            trans_bg_radio = new RadioButton (secondary_bg_radio, Catalog.GetString ("Transparent"));
+            trans_bg_radio = new RadioButton (secondary_bg_radio, Translations.GetString ("Transparent"));
             var image_trans = new Image (GdkExtensions.CreateTransparentColorSwatch (true));
 
             var hbox_trans = new HBox ();
@@ -316,7 +316,7 @@ namespace Pinta
             // Layout the preview + the options
             preview = new PreviewArea ();
 
-            var preview_label = new Label (Catalog.GetString ("Preview"));
+            var preview_label = new Label (Translations.GetString ("Preview"));
 
             var preview_vbox = new VBox ();
             preview_vbox.PackStart (preview_label, false, false, 0);
@@ -339,9 +339,9 @@ namespace Pinta
             preset_combo.Changed += (o, e) => {
                 var new_size = IsValidSize ? NewImageSize : Gdk.Size.Empty;
 
-                if (has_clipboard && preset_combo.ActiveText == Catalog.GetString ("Clipboard"))
+                if (has_clipboard && preset_combo.ActiveText == Translations.GetString ("Clipboard"))
                     new_size = clipboard_size;
-                else if (preset_combo.ActiveText == Catalog.GetString ("Custom"))
+                else if (preset_combo.ActiveText == Translations.GetString ("Custom"))
                     return;
                 else
                     new_size = SelectedPresetSize;
@@ -429,7 +429,7 @@ namespace Pinta
             for (var i = 1; i < preset_combo.GetItemCount (); i++) {
                 var text = preset_combo.GetValueAt<string> (i);
 
-                if (text == Catalog.GetString ("Clipboard") || text == Catalog.GetString ("Custom"))
+                if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
                     continue;
 
                 var text_parts = text.Split ('x');
