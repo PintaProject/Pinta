@@ -301,12 +301,12 @@ namespace Pinta.Core
 
 		public UserLayer CreateLayer ()
 		{
-			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++));
+			return CreateLayer (string.Format ("{0} {1}", Translations.GetString ("Layer"), layer_name_int++));
 		}
 
 		public UserLayer CreateLayer (int width, int height)
 		{
-			return CreateLayer (string.Format ("{0} {1}", Catalog.GetString ("Layer"), layer_name_int++), width, height);
+			return CreateLayer (string.Format ("{0} {1}", Translations.GetString ("Layer"), layer_name_int++), width, height);
 		}
 
 		public UserLayer CreateLayer (string name)
@@ -388,7 +388,7 @@ namespace Pinta.Core
 		public UserLayer DuplicateCurrentLayer()
 		{
 			UserLayer source = CurrentUserLayer;
-			UserLayer layer = CreateLayer(string.Format("{0} {1}", source.Name, Catalog.GetString("copy")));
+			UserLayer layer = CreateLayer(string.Format("{0} {1}", source.Name, Translations.GetString("copy")));
 
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				g.SetSource (source.Surface);
@@ -664,7 +664,7 @@ namespace Pinta.Core
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
 			hist.Icon = "Menu.Image.CanvasSize.png";
-			hist.Text = Catalog.GetString ("Resize Canvas");
+			hist.Text = Translations.GetString ("Resize Canvas");
 			hist.StartSnapshotOfImage ();
 
 			scale = Workspace.Scale;
@@ -786,11 +786,11 @@ namespace Pinta.Core
 			CompoundHistoryItem paste_action;
 			if (toNewLayer)
 			{
-				paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste Into New Layer"));
+				paste_action = new CompoundHistoryItem (Stock.Paste, Translations.GetString ("Paste Into New Layer"));
 			}
 			else
 			{
-				paste_action = new CompoundHistoryItem (Stock.Paste, Catalog.GetString ("Paste"));
+				paste_action = new CompoundHistoryItem (Stock.Paste, Translations.GetString ("Paste"));
 			}
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
@@ -848,7 +848,7 @@ namespace Pinta.Core
 			{
 				UserLayer l = AddNewLayer (string.Empty);
 				SetCurrentUserLayer (l);
-				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), UserLayers.IndexOf (l)));
+				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Translations.GetString ("Add New Layer"), UserLayers.IndexOf (l)));
 			}
 
 			// Copy the paste to the temp layer, which should be at least the size of this document.
@@ -864,7 +864,7 @@ namespace Pinta.Core
 			SelectionLayer.Transform.InitIdentity();
 			SelectionLayer.Transform.Translate (x, y);
 
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Move Selected Pixels"));
 			
 			DocumentSelection old_selection = Selection.Clone();
 			bool old_show_selection = ShowSelection;
@@ -881,13 +881,13 @@ namespace Pinta.Core
 		private ResponseType ShowExpandCanvasDialog ()
 		{
 			const string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string primary = Catalog.GetString ("Image larger than canvas");
-			string secondary = Catalog.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
+			string primary = Translations.GetString ("Image larger than canvas");
+			string secondary = Translations.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
 			string message = string.Format (markup, primary, secondary);
 
 			var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
-			enlarge_dialog.AddButton (Catalog.GetString ("Expand canvas"), ResponseType.Accept);
-			enlarge_dialog.AddButton (Catalog.GetString ("Don't change canvas size"), ResponseType.Reject);
+			enlarge_dialog.AddButton (Translations.GetString ("Expand canvas"), ResponseType.Accept);
+			enlarge_dialog.AddButton (Translations.GetString ("Don't change canvas size"), ResponseType.Reject);
 			enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
 			enlarge_dialog.DefaultResponse = ResponseType.Accept;
 
@@ -900,8 +900,8 @@ namespace Pinta.Core
 
 		public static void ShowClipboardEmptyDialog()
 		{
-			var primary = Catalog.GetString ("Image cannot be pasted");
-			var secondary = Catalog.GetString ("The clipboard does not contain an image.");
+			var primary = Translations.GetString ("Image cannot be pasted");
+			var secondary = Translations.GetString ("The clipboard does not contain an image.");
 			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
 			markup = string.Format (markup, primary, secondary);
 

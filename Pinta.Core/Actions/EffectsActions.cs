@@ -54,7 +54,7 @@ namespace Pinta.Core
 		public void AddEffect (string category, Gtk.Action action)
 		{
 			if (!Menus.ContainsKey (category)) {
-				Gtk.Action menu_action = new Gtk.Action (category, Mono.Unix.Catalog.GetString (category), null, null);
+				Gtk.Action menu_action = new Gtk.Action (category, Mono.Unix.Translations.GetString (category), null, null);
 				Menu category_menu = (Menu)effects_menu.AppendMenuItemSorted ((MenuItem)(menu_action.CreateSubMenuItem ())).Submenu;
 				
 				Menus.Add (category, category_menu);

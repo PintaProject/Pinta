@@ -231,9 +231,9 @@ namespace Pinta.Core
 	// throw a zillion exceptions due to missing overrides
 	public class DummyTool : BaseTool
 	{
-		public override string Name { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+		public override string Name { get { return Mono.Unix.Translations.GetString ("No tool selected."); } }
 		public override string Icon { get { return Gtk.Stock.MissingImage; } }
-		public override string StatusBarText { get { return Mono.Unix.Catalog.GetString ("No tool selected."); } }
+		public override string StatusBarText { get { return Mono.Unix.Translations.GetString ("No tool selected."); } }
 
 		protected override void OnBuildToolBar (Toolbar tb)
 		{

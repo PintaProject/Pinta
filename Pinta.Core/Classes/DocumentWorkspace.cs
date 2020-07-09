@@ -316,7 +316,7 @@ namespace Pinta.Core
 
 					switch (zoomType) {
 					case ZoomType.ZoomIn:
-						if (zoomInList == Catalog.GetString ("Window") || zoom_level <= zoom) {
+						if (zoomInList == Translations.GetString ("Window") || zoom_level <= zoom) {
 							PintaCore.Actions.View.ZoomComboBox.ComboBox.Active = i - 1;
 							return true;
 						}
@@ -324,7 +324,7 @@ namespace Pinta.Core
 						break;
 					
 					case ZoomType.ZoomOut:
-						if (zoomInList == Catalog.GetString ("Window"))
+						if (zoomInList == Translations.GetString ("Window"))
 							return true;
 						
 						if (zoom_level < zoom) {

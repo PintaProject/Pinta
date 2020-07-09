@@ -73,19 +73,19 @@ namespace Pinta.Core
 			fact.Add ("Menu.View.ZoomToWindow.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomToWindow.png")));
 			fact.AddDefault ();
 			
-			ZoomIn = new Gtk.Action ("ZoomIn", Catalog.GetString ("Zoom In"), null, Stock.ZoomIn);
-			ZoomOut = new Gtk.Action ("ZoomOut", Catalog.GetString ("Zoom Out"), null, Stock.ZoomOut);
-			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Catalog.GetString ("Best Fit"), null, Stock.ZoomFit);
-			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Catalog.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
-			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Normal Size"), null, Stock.Zoom100);
-            ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("Toolbar"), null, null);
-            ImageTabs = new Gtk.ToggleAction ("ImageTabs", Catalog.GetString ("Image Tabs"), null, null);
-            PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
-			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
-			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("Pixels"), null, null, 0);
-			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("Inches"), null, null, 1);
-			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
-			Fullscreen = new Gtk.Action ("Fullscreen", Catalog.GetString ("Fullscreen"), null, Stock.Fullscreen);
+			ZoomIn = new Gtk.Action ("ZoomIn", Translations.GetString ("Zoom In"), null, Stock.ZoomIn);
+			ZoomOut = new Gtk.Action ("ZoomOut", Translations.GetString ("Zoom Out"), null, Stock.ZoomOut);
+			ZoomToWindow = new Gtk.Action ("ZoomToWindow", Translations.GetString ("Best Fit"), null, Stock.ZoomFit);
+			ZoomToSelection = new Gtk.Action ("ZoomToSelection", Translations.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
+			ActualSize = new Gtk.Action ("ActualSize", Translations.GetString ("Normal Size"), null, Stock.Zoom100);
+            ToolBar = new Gtk.ToggleAction ("Toolbar", Translations.GetString ("Toolbar"), null, null);
+            ImageTabs = new Gtk.ToggleAction ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
+            PixelGrid = new Gtk.ToggleAction ("PixelGrid", Translations.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
+			Rulers = new Gtk.ToggleAction ("Rulers", Translations.GetString ("Rulers"), null, "Menu.View.Rulers.png");
+			Pixels = new Gtk.RadioAction ("Pixels", Translations.GetString ("Pixels"), null, null, 0);
+			Inches = new Gtk.RadioAction ("Inches", Translations.GetString ("Inches"), null, null, 1);
+			Centimeters = new Gtk.RadioAction ("Centimeters", Translations.GetString ("Centimeters"), null, null, 2);
+			Fullscreen = new Gtk.Action ("Fullscreen", Translations.GetString ("Fullscreen"), null, Stock.Fullscreen);
 
 			ZoomCollection = new string[] {
 				ToPercent (36),
@@ -111,7 +111,7 @@ namespace Pinta.Core
 				ToPercent (0.12),
 				ToPercent (0.08),
 				ToPercent (0.05),
-				Catalog.GetString ("Window")
+				Translations.GetString ("Window")
 			};
 			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex(), true, ZoomCollection);
 
@@ -155,7 +155,7 @@ namespace Pinta.Core
 
 			menu.AppendSeparator ();
 
-			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Mono.Unix.Catalog.GetString ("Ruler Units"), null, null);
+			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Mono.Unix.Translations.GetString ("Ruler Units"), null, null);
 			Menu unit_menu = (Menu)menu.AppendItem (unit_action.CreateSubMenuItem ()).Submenu;
 			unit_menu.Append (Pixels.CreateMenuItem ());
 			unit_menu.Append (Inches.CreateMenuItem ());
@@ -254,7 +254,7 @@ namespace Pinta.Core
 			var percent = (n * 100).ToString ("N0", CultureInfo.CurrentCulture);
 			// Translators: This specifies the format of the zoom percentage choices
 			// in the toolbar.
-			return string.Format (Catalog.GetString ("{0}%"), percent);
+			return string.Format (Translations.GetString ("{0}%"), percent);
 		}
 
 		public void SuspendZoomUpdate ()
@@ -273,7 +273,7 @@ namespace Pinta.Core
 
 			// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the 
 			// image was rotated or cropped) and "Zoom to Window" mode is active
-			if (text == Catalog.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text))
+			if (text == Translations.GetString ("Window") || (ZoomToWindowActivated && old_zoom_text == text))
 			{
 				PintaCore.Actions.View.ZoomToWindow.Activate ();
 				ZoomToWindowActivated = true;

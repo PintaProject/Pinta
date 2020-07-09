@@ -48,11 +48,11 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
 			fact.AddDefault ();
 
-			Contents = new Gtk.Action ("Contents", Catalog.GetString ("Contents"), null, Stock.Help);
-			Website = new Gtk.Action ("Website", Catalog.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
-			Bugs = new Gtk.Action ("Bugs", Catalog.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
-			Translate = new Gtk.Action ("Translate", Catalog.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
-			About = new Gtk.Action ("About", Catalog.GetString ("About"), null, Stock.About);
+			Contents = new Gtk.Action ("Contents", Translations.GetString ("Contents"), null, Stock.Help);
+			Website = new Gtk.Action ("Website", Translations.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
+			Bugs = new Gtk.Action ("Bugs", Translations.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
+			Translate = new Gtk.Action ("Translate", Translations.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
+			About = new Gtk.Action ("About", Translations.GetString ("About"), null, Stock.About);
 		}
 
 		#region Initialization

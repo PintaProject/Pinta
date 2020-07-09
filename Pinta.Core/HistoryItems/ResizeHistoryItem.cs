@@ -39,7 +39,7 @@ namespace Pinta.Core
 			old_size = oldSize;
 
 			Icon = "Menu.Image.Resize.png";
-			Text = Catalog.GetString ("Resize Image");
+			Text = Translations.GetString ("Resize Image");
 		}
 
 		public DocumentSelection RestoreSelection;

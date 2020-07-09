@@ -39,7 +39,7 @@ namespace Pinta.Core
 		
 		public FinishPixelsHistoryItem ()
 		{
-			Text = Catalog.GetString ("Finish Pixels");
+			Text = Translations.GetString ("Finish Pixels");
 			Icon = "Tools.Move.png";
 		}
 
@@ -61,7 +61,7 @@ namespace Pinta.Core
 			old_selection_layer = swap_sel;
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Move Selected Pixels"));
 		}
 
 		public override void Redo ()

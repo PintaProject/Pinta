@@ -42,27 +42,27 @@ namespace Pinta.Core
 			switch (type) {
 				// Invert is disabled because it creates a new history item
 				//case InvertType.InvertColors:
-				//        Text = Mono.Unix.Catalog.GetString ("Invert Colors");
+				//        Text = Mono.Unix.Translations.GetString ("Invert Colors");
 				//        Icon = "Menu.Adjustments.InvertColors.png";
 				//        break;
 				case InvertType.Rotate180:
-					Text = Catalog.GetString ("Rotate 180°");
+					Text = Translations.GetString ("Rotate 180°");
 					Icon = "Menu.Image.Rotate180CW.png";
 					break;
 				case InvertType.FlipHorizontal:
-					Text = Catalog.GetString ("Flip Image Horizontal");
+					Text = Translations.GetString ("Flip Image Horizontal");
 					Icon = "Menu.Image.FlipHorizontal.png";
 					break;
 				case InvertType.FlipVertical:
-					Text = Catalog.GetString ("Flip Image Vertical");
+					Text = Translations.GetString ("Flip Image Vertical");
 					Icon = "Menu.Image.FlipVertical.png";
 					break;
 				case InvertType.Rotate90CW:
-					Text = Catalog.GetString ("Rotate 90° Clockwise");
+					Text = Translations.GetString ("Rotate 90° Clockwise");
 					Icon = "Menu.Image.Rotate90CW.png";
 					break;
 				case InvertType.Rotate90CCW:
-					Text = Catalog.GetString ("Rotate 90° Counter-Clockwise");
+					Text = Translations.GetString ("Rotate 90° Counter-Clockwise");
 					Icon = "Menu.Image.Rotate90CCW.png";
 					break;
 			}
@@ -75,11 +75,11 @@ namespace Pinta.Core
 
 			switch (type) {
 				case InvertType.FlipLayerHorizontal:
-					Text = Catalog.GetString ("Flip Layer Horizontal");
+					Text = Translations.GetString ("Flip Layer Horizontal");
 					Icon = "Menu.Image.FlipHorizontal.png";
 					break;
 				case InvertType.FlipLayerVertical:
-					Text = Catalog.GetString ("Flip Layer Vertical");
+					Text = Translations.GetString ("Flip Layer Vertical");
 					Icon = "Menu.Image.FlipVertical.png";
 					break;
 			}

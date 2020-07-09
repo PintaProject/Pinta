@@ -65,24 +65,24 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
 			fact.AddDefault ();
 			
-			Undo = new Gtk.Action ("Undo", Catalog.GetString ("Undo"), null, Stock.Undo);
-			Redo = new Gtk.Action ("Redo", Catalog.GetString ("Redo"), null, Stock.Redo);
-			Cut = new Gtk.Action ("Cut", Catalog.GetString ("Cut"), null, Stock.Cut);
-			Copy = new Gtk.Action ("Copy", Catalog.GetString ("Copy"), null, Stock.Copy);
-			CopyMerged = new Gtk.Action ("CopyMerged", Catalog.GetString ("Copy Merged"), null, Stock.Copy);
-			Paste = new Gtk.Action ("Paste", Catalog.GetString ("Paste"), null, Stock.Paste);
-			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Catalog.GetString ("Paste Into New Layer"), null, Stock.Paste);
-			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Catalog.GetString ("Paste Into New Image"), null, Stock.Paste);
-			EraseSelection = new Gtk.Action ("EraseSelection", Catalog.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
-			FillSelection = new Gtk.Action ("FillSelection", Catalog.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
-			InvertSelection = new Gtk.Action ("InvertSelection", Catalog.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Gtk.Action ("SelectAll", Catalog.GetString ("Select All"), null, Stock.SelectAll);
-			Deselect = new Gtk.Action ("Deselect", Catalog.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
+			Undo = new Gtk.Action ("Undo", Translations.GetString ("Undo"), null, Stock.Undo);
+			Redo = new Gtk.Action ("Redo", Translations.GetString ("Redo"), null, Stock.Redo);
+			Cut = new Gtk.Action ("Cut", Translations.GetString ("Cut"), null, Stock.Cut);
+			Copy = new Gtk.Action ("Copy", Translations.GetString ("Copy"), null, Stock.Copy);
+			CopyMerged = new Gtk.Action ("CopyMerged", Translations.GetString ("Copy Merged"), null, Stock.Copy);
+			Paste = new Gtk.Action ("Paste", Translations.GetString ("Paste"), null, Stock.Paste);
+			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Translations.GetString ("Paste Into New Layer"), null, Stock.Paste);
+			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Translations.GetString ("Paste Into New Image"), null, Stock.Paste);
+			EraseSelection = new Gtk.Action ("EraseSelection", Translations.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
+			FillSelection = new Gtk.Action ("FillSelection", Translations.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
+			InvertSelection = new Gtk.Action ("InvertSelection", Translations.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
+			SelectAll = new Gtk.Action ("SelectAll", Translations.GetString ("Select All"), null, Stock.SelectAll);
+			Deselect = new Gtk.Action ("Deselect", Translations.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
 			
-			LoadPalette = new Gtk.Action ("LoadPalette", Catalog.GetString ("Open..."), null, Stock.Open);
-			SavePalette = new Gtk.Action ("SavePalette", Catalog.GetString ("Save As..."), null, Stock.Save);
-			ResetPalette = new Gtk.Action ("ResetPalette", Catalog.GetString ("Reset to Default"), null, Stock.RevertToSaved);
-			ResizePalette = new Gtk.Action ("ResizePalette", Catalog.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+			LoadPalette = new Gtk.Action ("LoadPalette", Translations.GetString ("Open..."), null, Stock.Open);
+			SavePalette = new Gtk.Action ("SavePalette", Translations.GetString ("Save As..."), null, Stock.Save);
+			ResetPalette = new Gtk.Action ("ResetPalette", Translations.GetString ("Reset to Default"), null, Stock.RevertToSaved);
+			ResizePalette = new Gtk.Action ("ResizePalette", Translations.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
 
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
@@ -123,7 +123,7 @@ namespace Pinta.Core
 			menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
 			
 			menu.AppendSeparator ();
-			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Catalog.GetString ("Palette"), null, null);
+			Gtk.Action menu_action = new Gtk.Action ("Palette", Mono.Unix.Translations.GetString ("Palette"), null, null);
 			Menu palette_menu = (Menu) menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
 			palette_menu.Append (LoadPalette.CreateMenuItem ());
 			palette_menu.Append (SavePalette.CreateMenuItem ());
@@ -176,7 +176,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Catalog.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Translations.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -185,7 +185,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Catalog.GetString ("Select All"));
+			SelectionHistoryItem hist = new SelectionHistoryItem (Stock.SelectAll, Translations.GetString ("Select All"));
 			hist.TakeSnapshot ();
 
 			doc.ResetSelectionPaths ();
@@ -214,9 +214,9 @@ namespace Pinta.Core
 			doc.Workspace.Invalidate ();
 
 			if (sender is string && (sender as string) == "Cut")
-				doc.History.PushNewItem (new SimpleHistoryItem (Stock.Cut, Catalog.GetString ("Cut"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Stock.Cut, Translations.GetString ("Cut"), old, doc.CurrentUserLayerIndex));
 			else
-				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Catalog.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Translations.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -225,7 +225,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Catalog.GetString ("Deselect"));
+			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Translations.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 
             doc.ResetSelectionPaths ();
@@ -321,7 +321,7 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Palette File"), PintaCore.Chrome.MainWindow,
+			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Palette File"), PintaCore.Chrome.MainWindow,
 				FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
 				Gtk.Stock.Open, Gtk.ResponseType.Ok);
 
@@ -333,11 +333,11 @@ namespace Pinta.Core
 				}
 			}
 
-			ff.Name = Catalog.GetString ("Palette files");
+			ff.Name = Translations.GetString ("Palette files");
 			fcd.AddFilter (ff);
 
 			FileFilter ff2 = new FileFilter ();
-			ff2.Name = Catalog.GetString ("All files");
+			ff2.Name = Translations.GetString ("All files");
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 
@@ -358,7 +358,7 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Save Palette File"), PintaCore.Chrome.MainWindow,
+			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Save Palette File"), PintaCore.Chrome.MainWindow,
 				FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
 				Gtk.Stock.Save, Gtk.ResponseType.Ok);
 
@@ -406,7 +406,7 @@ namespace Pinta.Core
 			doc.ToolLayer.Clear ();
 
 			SelectionHistoryItem historyItem = new SelectionHistoryItem ("Menu.Edit.InvertSelection.png",
-			                                                             Catalog.GetString ("Invert Selection"));
+			                                                             Translations.GetString ("Invert Selection"));
 			historyItem.TakeSnapshot ();
 
 			doc.Selection.Invert (doc.SelectionLayer.Surface, doc.ImageSize);

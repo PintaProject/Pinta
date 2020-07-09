@@ -42,18 +42,18 @@ namespace Pinta.Core
         public SelectionModeHandler ()
         {
             combine_modes = new Dictionary<CombineMode, string> () {
-                { CombineMode.Replace, Catalog.GetString ("Replace") },
-                { CombineMode.Union, Catalog.GetString ("Union (+) (Ctrl + Left Click)") },
-                { CombineMode.Exclude, Catalog.GetString ("Exclude (-) (Right Click)") },
-                { CombineMode.Xor, Catalog.GetString ("Xor (Ctrl + Right Click)") },
-                { CombineMode.Intersect, Catalog.GetString ("Intersect (Shift + Left Click)") },
+                { CombineMode.Replace, Translations.GetString ("Replace") },
+                { CombineMode.Union, Translations.GetString ("Union (+) (Ctrl + Left Click)") },
+                { CombineMode.Exclude, Translations.GetString ("Exclude (-) (Right Click)") },
+                { CombineMode.Xor, Translations.GetString ("Xor (Ctrl + Right Click)") },
+                { CombineMode.Intersect, Translations.GetString ("Intersect (Shift + Left Click)") },
             };
         }
 
         public void BuildToolbar (Gtk.Toolbar tb)
         {
             if (selection_label == null)
-                selection_label = new ToolBarLabel (Catalog.GetString (" Selection Mode: "));
+                selection_label = new ToolBarLabel (Translations.GetString (" Selection Mode: "));
 
             tb.AppendItem (selection_label);
 

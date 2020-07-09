@@ -62,7 +62,7 @@ namespace Pinta.Core
 				formatNames.Append (wildcard);
 			}
 
-			ff.Name = string.Format (Catalog.GetString ("{0} palette ({1})"), displayPrefix, formatNames);
+			ff.Name = string.Format (Translations.GetString ("{0} palette ({1})"), displayPrefix, formatNames);
 			this.Filter = ff;
 		}
 

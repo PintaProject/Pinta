@@ -217,7 +217,7 @@ namespace Pinta.Core
 				HandleApply ();
 			} else  {
 				var dialog = PintaCore.Chrome.ProgressDialog;
-				dialog.Title = Catalog.GetString ("Rendering Effect");
+				dialog.Title = Translations.GetString ("Rendering Effect");
 				dialog.Text = effect.Name;
 				dialog.Progress = renderer.Progress;
 				dialog.Canceled += HandleProgressDialogCancel;

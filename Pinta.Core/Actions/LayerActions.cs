@@ -61,17 +61,17 @@ namespace Pinta.Core
 			fact.Add ("Menu.Layers.RotateZoom.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png")));
 			fact.AddDefault ();
 			
-			AddNewLayer = new Gtk.Action ("AddNewLayer", Catalog.GetString ("Add New Layer"), null, "Menu.Layers.AddNewLayer.png");
-			DeleteLayer = new Gtk.Action ("DeleteLayer", Catalog.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
-			DuplicateLayer = new Gtk.Action ("DuplicateLayer", Catalog.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
-			MergeLayerDown = new Gtk.Action ("MergeLayerDown", Catalog.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
-			ImportFromFile = new Gtk.Action ("ImportFromFile", Catalog.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
-			RotateZoom = new Gtk.Action ("RotateZoom", Catalog.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
-			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Catalog.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
-			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Catalog.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
-			Properties = new Gtk.Action ("Properties", Catalog.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
+			AddNewLayer = new Gtk.Action ("AddNewLayer", Translations.GetString ("Add New Layer"), null, "Menu.Layers.AddNewLayer.png");
+			DeleteLayer = new Gtk.Action ("DeleteLayer", Translations.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
+			DuplicateLayer = new Gtk.Action ("DuplicateLayer", Translations.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
+			MergeLayerDown = new Gtk.Action ("MergeLayerDown", Translations.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
+			ImportFromFile = new Gtk.Action ("ImportFromFile", Translations.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
+			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
+			FlipVertical = new Gtk.Action ("FlipVertical", Translations.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
+			RotateZoom = new Gtk.Action ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
+			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Translations.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
+			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Translations.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
+			Properties = new Gtk.Action ("Properties", Translations.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
 
 			RotateZoom.Sensitive = false;
 		}
@@ -153,7 +153,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			var fcd = new Gtk.FileChooserDialog (Catalog.GetString ("Open Image File"),PintaCore.Chrome.MainWindow,
+			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Image File"),PintaCore.Chrome.MainWindow,
 			                                     FileChooserAction.Open, Stock.Cancel, ResponseType.Cancel,
 			                                     Stock.Open, ResponseType.Ok);
 
@@ -181,7 +181,7 @@ namespace Pinta.Core
 
 				doc.SetCurrentUserLayer (layer);
 
-				AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.ImportFromFile.png", Catalog.GetString ("Import From File"), doc.UserLayers.IndexOf (layer));
+				AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.ImportFromFile.png", Translations.GetString ("Import From File"), doc.UserLayers.IndexOf (layer));
 				doc.History.PushNewItem (hist);
 
 				doc.Workspace.Invalidate ();
@@ -215,7 +215,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Catalog.GetString ("Move Layer Up"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex + 1);
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Translations.GetString ("Move Layer Up"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex + 1);
 
 			doc.MoveCurrentLayerUp ();
 			doc.History.PushNewItem (hist);
@@ -226,7 +226,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Catalog.GetString ("Move Layer Down"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex - 1);
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Translations.GetString ("Move Layer Down"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex - 1);
 
 			doc.MoveCurrentLayerDown ();
 			doc.History.PushNewItem (hist);
@@ -240,7 +240,7 @@ namespace Pinta.Core
 			int bottomLayerIndex = doc.CurrentUserLayerIndex - 1;
 			var oldBottomSurface = doc.UserLayers[bottomLayerIndex].Surface.Clone ();
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Catalog.GetString ("Merge Layer Down"));
+			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Translations.GetString ("Merge Layer Down"));
 			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.CurrentUserLayer, doc.CurrentUserLayerIndex);
 
 			doc.MergeCurrentLayerDown ();
@@ -262,7 +262,7 @@ namespace Pinta.Core
 			// Make new layer the current layer
 			doc.SetCurrentUserLayer (l);
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.DuplicateLayer.png", Catalog.GetString ("Duplicate Layer"), doc.UserLayers.IndexOf (l));
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.DuplicateLayer.png", Translations.GetString ("Duplicate Layer"), doc.UserLayers.IndexOf (l));
 			doc.History.PushNewItem (hist);
 		}
 
@@ -271,7 +271,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Catalog.GetString ("Delete Layer"), doc.CurrentUserLayer, doc.CurrentUserLayerIndex);
+			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Translations.GetString ("Delete Layer"), doc.CurrentUserLayer, doc.CurrentUserLayerIndex);
 
 			doc.DeleteLayer (doc.CurrentUserLayerIndex, false);
 
@@ -288,7 +288,7 @@ namespace Pinta.Core
 			// Make new layer the current layer
 			doc.SetCurrentUserLayer (l);
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Catalog.GetString ("Add New Layer"), doc.UserLayers.IndexOf (l));
+			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Translations.GetString ("Add New Layer"), doc.UserLayers.IndexOf (l));
 			doc.History.PushNewItem (hist);
 		}
 		#endregion

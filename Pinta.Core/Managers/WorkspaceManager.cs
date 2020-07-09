@@ -96,7 +96,7 @@ namespace Pinta.Core
 			Document doc = new Document (size);
 			
 			if (string.IsNullOrEmpty (filename))
-				doc.Filename = string.Format (Catalog.GetString ("Unsaved Image {0}"), new_file_name++);
+				doc.Filename = string.Format (Translations.GetString ("Unsaved Image {0}"), new_file_name++);
 			else
 				doc.PathAndFileName = filename;
 			
@@ -153,7 +153,7 @@ namespace Pinta.Core
 			doc.Workspace.CanvasSize = imageSize;
 
 			// Start with an empty white layer
-			Layer background = doc.AddNewLayer (Catalog.GetString ("Background"));
+			Layer background = doc.AddNewLayer (Translations.GetString ("Background"));
 
 			if (backgroundColor.A != 0) {
 				using (Cairo.Context g = new Cairo.Context (background.Surface)) {
@@ -162,7 +162,7 @@ namespace Pinta.Core
 				}
 			}
 
-			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
+			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Translations.GetString ("New Image")));
 			doc.IsDirty = false;
 
 			PintaCore.Actions.View.ZoomToWindow.Activate ();
@@ -182,12 +182,12 @@ namespace Pinta.Core
 				// Open the image and add it to the layers
 				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
 				if (importer == null)
-					throw new FormatException( Catalog.GetString ("Unsupported file format"));
+					throw new FormatException( Translations.GetString ("Unsupported file format"));
 
 				importer.Import (file, parent);
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
-				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
+				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.IsDirty = false;
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
 
@@ -200,7 +200,7 @@ namespace Pinta.Core
 
 				fileOpened = true;
 			} catch (UnauthorizedAccessException e) {
-				ShowOpenFileErrorDialog (parent, file, Catalog.GetString ("Permission denied"), e.ToString ());
+				ShowOpenFileErrorDialog (parent, file, Translations.GetString ("Permission denied"), e.ToString ());
 			} catch (Exception e) {
 				ShowOpenFileErrorDialog (parent, file, e.Message, e.ToString ());
 			}
@@ -341,7 +341,7 @@ namespace Pinta.Core
         private void ShowOpenFileErrorDialog (Window parent, string filename, string primaryText, string details)
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
-			string secondaryText = string.Format (Catalog.GetString ("Could not open file: {0}"), filename);
+			string secondaryText = string.Format (Translations.GetString ("Could not open file: {0}"), filename);
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowErrorDialog(parent, message, details);
 		}

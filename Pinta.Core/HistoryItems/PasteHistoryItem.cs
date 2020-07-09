@@ -40,7 +40,7 @@ namespace Pinta.Core
 
 		public PasteHistoryItem (Gdk.Pixbuf pasteImage, DocumentSelection oldSelection, bool oldShowSelection)
 		{
-			Text = Catalog.GetString ("Paste");
+			Text = Translations.GetString ("Paste");
 			Icon = Stock.Paste;
 
 			paste_image = pasteImage;
@@ -63,7 +63,7 @@ namespace Pinta.Core
 			Swap ();
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
+			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Move Selected Pixels"));
 		}
 
 		public override void Undo ()
