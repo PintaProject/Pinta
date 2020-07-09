@@ -33,8 +33,11 @@ namespace Pinta
 {
     public class CanvasWindow : Table
     {
+        // TODO-GTK3
+#if false
         private HRuler horizontal_ruler;
         private VRuler vertical_ruler;
+#endif
         private ScrolledWindow scrolled_window;
         
         public PintaCanvas Canvas { get; set; }
@@ -116,6 +119,8 @@ namespace Pinta
             }
         }
 
+        // TODO-GTK3
+#if false
         public bool RulersVisible {
             get { return horizontal_ruler.Visible; }
             set {
@@ -166,5 +171,6 @@ namespace Pinta
             horizontal_ruler.SetRange (lower.X, upper.X, 0, upper.X);
             vertical_ruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
         }
+#endif
     }
 }
