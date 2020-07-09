@@ -37,9 +37,10 @@ namespace Pinta.Core
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
 			if (allowEntry)
-				ComboBox = new ComboBoxText();
-			else
 				ComboBox = ComboBoxText.NewWithEntry();
+			else
+				ComboBox = new ComboBoxText();
+
 
 			foreach (string entry in contents)
 				ComboBox.AppendText(entry);
