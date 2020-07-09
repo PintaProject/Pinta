@@ -240,14 +240,6 @@ namespace Pinta.Core
 			return inflated;
 		}
 		
-		public static Gdk.Region RectanglesToRegion(Gdk.Rectangle[] rects)
-        {
-            Gdk.Region reg = Gdk.Region.Rectangle(Gdk.Rectangle.Zero);
-            foreach (Gdk.Rectangle r in rects)
-                reg.UnionWithRect(r);
-            return reg;
-        }
-		
 		public static string GetStaticName (Type type)
 		{
 			PropertyInfo pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);

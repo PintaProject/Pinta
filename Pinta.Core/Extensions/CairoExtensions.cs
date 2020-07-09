@@ -35,7 +35,6 @@
 
 using System;
 using Cairo;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace Pinta.Core
@@ -452,28 +451,6 @@ namespace Pinta.Core
 			g.Restore ();
 
 			return dirty;
-		}
-
-		public static void FillRegion (this Context g, Gdk.Region region, Color color)
-		{
-			g.Save ();
-
-			g.SetSourceColor (color);
-
-			foreach (Gdk.Rectangle r in region.GetRectangles ()) {
-				g.MoveTo (r.X, r.Y);
-				g.LineTo (r.X + r.Width, r.Y);
-				g.LineTo (r.X + r.Width, r.Y + r.Height);
-				g.LineTo (r.X, r.Y + r.Height);
-				g.LineTo (r.X, r.Y);
-
-				g.SetSourceColor (color);
-
-				g.FixedStrokeExtents ();
-				g.Fill ();
-			}
-
-			g.Restore ();
 		}
 
 		public static Rectangle DrawRoundedRectangle (this Context g, Rectangle r, double radius, Color stroke, int lineWidth)
