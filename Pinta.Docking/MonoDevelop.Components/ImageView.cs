@@ -74,6 +74,8 @@ namespace MonoDevelop.Components
             get { return GtkWorkarounds.GetPixelScale (); }
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
 			if (image != null) {
@@ -96,6 +98,7 @@ namespace MonoDevelop.Components
 			}
 			return true;
 		}
+#endif
 	}
 }
 

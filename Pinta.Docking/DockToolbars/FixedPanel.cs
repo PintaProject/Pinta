@@ -202,7 +202,9 @@ namespace Pinta.Docking.DockToolbars
 					return n;
 			return -1;
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition req)
 		{
 			req.Width = req.Height = 0;
@@ -225,7 +227,7 @@ namespace Pinta.Docking.DockToolbars
 			else
 				req.Height = 0;
 		}
-
+#endif
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
 			base.OnSizeAllocated (rect);

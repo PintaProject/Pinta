@@ -42,7 +42,9 @@ namespace Pinta.Docking.DockToolbars
 			redgc = new Gdk.GC (GdkWindow);
 	   		redgc.RgbFgColor = new Gdk.Color (255, 0, 0);
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose args)
 		{
 			base.OnExposeEvent (args);
@@ -51,5 +53,6 @@ namespace Pinta.Docking.DockToolbars
 			this.GdkWindow.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
 	  		return true;
 		}
+#endif
 	}
 }

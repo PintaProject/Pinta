@@ -268,7 +268,9 @@ namespace Pinta.Docking.DockToolbars
 			}
 			return base.OnButtonReleaseEvent (e);
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			//HACK: the WIMP theme engine's rendering is a bit off, need to force it to render wider
@@ -286,6 +288,7 @@ namespace Pinta.Docking.DockToolbars
 			
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 		
 		bool firstRealized;
 		protected override void OnRealized ()

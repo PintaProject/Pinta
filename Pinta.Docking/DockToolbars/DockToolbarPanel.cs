@@ -874,7 +874,9 @@ namespace Pinta.Docking.DockToolbars
 			enableAnimations = enable;
 			return r;
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			//leave this plain unless there are horizontal children, so that the panel matches the toolbars
@@ -906,6 +908,7 @@ namespace Pinta.Docking.DockToolbars
 				this.PropagateExpose (bar, evnt);
 			return true;
 		}
+#endif
 		
 		//ensures that all widgets in each row have consistent allocation
 		public override Requisition GetChildRequisition (Widget w)

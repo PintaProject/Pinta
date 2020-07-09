@@ -30,7 +30,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 
 namespace Pinta.Docking
 {
@@ -155,7 +154,9 @@ namespace Pinta.Docking
 				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
 			}
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (VisualStyle.TabStyle == DockTabStyle.Normal) {
@@ -166,6 +167,7 @@ namespace Pinta.Docking
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 	}
 
 	class CustomFrame: Bin
@@ -228,6 +230,8 @@ namespace Pinta.Docking
 			child = null;
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			if (child != null) {
@@ -239,6 +243,7 @@ namespace Pinta.Docking
 				requisition.Height = 0;
 			}
 		}
+#endif
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
@@ -254,7 +259,8 @@ namespace Pinta.Docking
 			if (child != null)
 				child.SizeAllocate (allocation);
 		}
-
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			Gdk.Rectangle rect = Allocation;
@@ -321,5 +327,6 @@ namespace Pinta.Docking
 				return false;
 			}
 		}
+#endif
 	}
 }

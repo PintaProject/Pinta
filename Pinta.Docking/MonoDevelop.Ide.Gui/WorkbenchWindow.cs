@@ -101,7 +101,9 @@ namespace Pinta.Docking.Gui
 			rect.Y = py - Allocation.Y;
 			return rect;
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
@@ -110,6 +112,7 @@ namespace Pinta.Docking.Gui
 			foreach (TopLevelChild tchild in topLevels)
 				tchild.Child.SizeRequest ();
 		}
+#endif
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{

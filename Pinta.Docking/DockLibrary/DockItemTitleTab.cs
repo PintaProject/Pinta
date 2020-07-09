@@ -30,7 +30,6 @@ using Gtk;
 using System;
 using System.Linq;
 using MonoDevelop.Components;
-using Mono.Unix;
 
 namespace Pinta.Docking
 {
@@ -356,7 +355,9 @@ namespace Pinta.Docking
 			base.OnRealized ();
 			UpdateVisualStyle ();
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Gtk.Requisition req)
 		{
 			if (Child != null) {
@@ -368,6 +369,7 @@ namespace Pinta.Docking
 					req.Height += TopPadding + BottomPadding;
 			}
 		}
+#endif
 					
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
@@ -399,6 +401,8 @@ namespace Pinta.Docking
 			}
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (VisualStyle.TabStyle == DockTabStyle.Normal)
@@ -407,6 +411,7 @@ namespace Pinta.Docking
 				DrawNormal (evnt);
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 
 		void DrawAsBrowser (Gdk.EventExpose evnt)
 		{

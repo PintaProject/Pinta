@@ -170,7 +170,9 @@ namespace MonoDevelop.Components
 			}
 			return base.OnLeaveNotifyEvent (evnt);
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			requisition.Height = (int)Math.Ceiling (tabSizes.Max (p => p.Y));
@@ -206,6 +208,7 @@ namespace MonoDevelop.Components
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 	}
 
 	enum TabPosition {

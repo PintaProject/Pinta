@@ -122,7 +122,9 @@ namespace Pinta.Docking
 			if (layout != null)
 				layout.StoreAllocation ();
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition req)
 		{
 			if (layout != null) {
@@ -130,6 +132,7 @@ namespace Pinta.Docking
 				req = layout.SizeRequest ();
 			}
 		}
+#endif
 		
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
@@ -186,7 +189,9 @@ namespace Pinta.Docking
 			foreach (Widget w in widgets)
 				callback (w);
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			bool res = base.OnExposeEvent (evnt);
@@ -196,6 +201,7 @@ namespace Pinta.Docking
 			}
 			return res;
 		}
+#endif
 
 		protected override void OnAdded (Widget widget)
 		{

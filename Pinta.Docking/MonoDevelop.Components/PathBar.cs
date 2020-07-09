@@ -219,13 +219,16 @@ namespace MonoDevelop.Components
 				QueueResize ();
 			}
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			EnsureWidths ();
 			requisition.Width = Math.Max (WidthRequest, 0);
 			requisition.Height = height + topPadding + bottomPadding;
 		}
+#endif
 
 		int[] GetCurrentWidths (out bool widthReduced)
 		{
@@ -241,7 +244,8 @@ namespace MonoDevelop.Components
 			}
 			return currentWidths;
 		}
-		
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
@@ -379,6 +383,7 @@ namespace MonoDevelop.Components
 
 			return true;
 		}
+#endif
 
 		void DrawPathSeparator (Cairo.Context ctx, double x, double y, double size)
 		{

@@ -157,6 +157,8 @@ namespace Pinta.Docking.Gui
 			{
 			}
 
+			// TODO-GTK3
+#if false
 			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 			{
 				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
@@ -176,6 +178,7 @@ namespace Pinta.Docking.Gui
 				}
 				return base.OnExposeEvent (evnt);
 			}
+#endif
 		}
 	}
 

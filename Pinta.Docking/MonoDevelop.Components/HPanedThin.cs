@@ -73,6 +73,8 @@ namespace MonoDevelop.Components
 				callback (handle);
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			base.OnExposeEvent (evnt);
@@ -87,6 +89,7 @@ namespace MonoDevelop.Components
 
 			return true;
 		}
+#endif
 	}
 
 	class CustomPanedHandle: Gtk.EventBox

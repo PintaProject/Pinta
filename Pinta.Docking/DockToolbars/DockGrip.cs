@@ -42,7 +42,9 @@ namespace Pinta.Docking.DockToolbars
 		public DockGrip ()
 		{
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition req)
 		{
 			if (Orientation == Orientation.Horizontal) {
@@ -69,5 +71,6 @@ namespace Pinta.Docking.DockToolbars
 			Gtk.Style.PaintHandle (this.Style, this.ParentWindow, this.State, Gtk.ShadowType.None, args.Area, this, "grip", rect.X, rect.Y, rect.Width, rect.Height, or);
 			return true;
 		}
+#endif
 	}
 }

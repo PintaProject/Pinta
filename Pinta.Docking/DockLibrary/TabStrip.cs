@@ -267,6 +267,8 @@ namespace Pinta.Docking
 		{
 			public TabStrip TabStrip;
 
+			// TODO-GTK3
+#if false
 			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 			{
 				if (TabStrip.VisualStyle.TabStyle == DockTabStyle.Normal) {
@@ -285,6 +287,7 @@ namespace Pinta.Docking
 				}	
 				return base.OnExposeEvent (evnt);
 			}
+#endif
 		}
 		
 	}

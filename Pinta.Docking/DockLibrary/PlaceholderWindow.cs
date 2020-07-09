@@ -98,7 +98,8 @@ namespace Pinta.Docking
 			CreateShape (allocation.Width, allocation.Height);
 		}
 
-		
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose args)
 		{
 			//base.OnExposeEvent (args);
@@ -108,6 +109,7 @@ namespace Pinta.Docking
 			this.GdkWindow.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
 	  		return true;
 		}
+#endif
 		
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{

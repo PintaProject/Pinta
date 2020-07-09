@@ -125,12 +125,14 @@ namespace Pinta.Docking.DockToolbars
 				default: return new Point (y, (PointerLength + LineLength) - x);
 			}
 		}
-		
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose args)
 		{
 			GdkWindow.DrawPolygon (redgc, false, arrow);
 			GdkWindow.DrawPolygon (redgc, true, arrow);
 			return true;
 		}
+#endif
 	}
 }

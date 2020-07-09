@@ -181,6 +181,8 @@ namespace Pinta.Docking
 		{
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
@@ -193,6 +195,7 @@ namespace Pinta.Docking
 					requisition.Height++;
 			}
 		}
+#endif
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
@@ -208,6 +211,8 @@ namespace Pinta.Docking
 			}
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			var alloc = Allocation;
@@ -258,6 +263,7 @@ namespace Pinta.Docking
 			}
 			return true;
 		}
+#endif
 	}
 }
 

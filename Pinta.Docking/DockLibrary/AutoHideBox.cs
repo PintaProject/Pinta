@@ -346,7 +346,9 @@ namespace Pinta.Docking
 				frame.QueueResize ();
 			}
 		}
-		
+
+		// TODO-GTK3
+#if false
 		void OnGripExpose (object sender, Gtk.ExposeEventArgs args)
 		{
 			var w = (EventBox) sender;
@@ -357,6 +359,7 @@ namespace Pinta.Docking
 				ctx.Paint ();
 			}
 		}
+#endif
 	}
 	
 	class ScrollableContainer: EventBox
@@ -381,7 +384,9 @@ namespace Pinta.Docking
 			this.targetSize = targetSize;
 			QueueResize ();
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition req)
 		{
 			base.OnSizeRequested (ref req);
@@ -392,6 +397,7 @@ namespace Pinta.Docking
 			else
 				req = Child.SizeRequest ();
 		}
+#endif
 
 		protected override void OnSizeAllocated (Rectangle alloc)
 		{

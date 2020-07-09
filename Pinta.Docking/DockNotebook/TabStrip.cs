@@ -272,12 +272,15 @@ namespace Pinta.Docking.DockNotebook
 
 		int totalHeight;
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
 			requisition.Height = totalHeight;
 			requisition.Width = 0;
 		}
+#endif
 
 		internal void InitSize ()
 		{
@@ -754,6 +757,8 @@ namespace Pinta.Docking.DockNotebook
 			drawActive (ctx);
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			using (var context = CairoHelper.Create (evnt.Window)) {
@@ -761,6 +766,7 @@ namespace Pinta.Docking.DockNotebook
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 
 		static void DrawCloseButton (Context context, Gdk.Point center, bool hovered, double opacity, double animationProgress)
 		{

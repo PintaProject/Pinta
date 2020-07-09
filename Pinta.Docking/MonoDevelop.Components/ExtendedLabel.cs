@@ -46,7 +46,9 @@ namespace MonoDevelop.Components
 				QueueDraw ();
 			}
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (!dropShadowVisible)
@@ -69,6 +71,7 @@ namespace MonoDevelop.Components
 			la.Dispose ();
 			return true;
 		}
+#endif
 	}
 }
 
