@@ -38,7 +38,7 @@ namespace Pinta.Core
 		{
 		}
 
-		protected override ComboBox CreateComboBox ()
+		protected ComboBox CreateComboBox ()
 		{
 			var box = new ComboBox ();
 

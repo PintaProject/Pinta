@@ -101,7 +101,7 @@ namespace Pinta.Core
 					using (var fs = new FileStream (tmp_file, FileMode.Open))
 						using (Pixbuf pb = new Pixbuf (fs)) {
 							using (Context g = new Context (layer.Surface)) {
-								CairoHelper.SetSourcePixbuf (g, pb, x, y);
+								Gdk.CairoHelper.SetSourcePixbuf (g, pb, x, y);
 								g.Paint ();
 							}
 						}

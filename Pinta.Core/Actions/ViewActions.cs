@@ -178,8 +178,8 @@ namespace Pinta.Core
 			ZoomIn.Activated += HandlePintaCoreActionsViewZoomInActivated;
 			ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
 			ZoomComboBox.ComboBox.Changed += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
-			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
-			(ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
+			ZoomComboBox.ComboBox.Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (ComboBox_FocusOutEvent);
+			ZoomComboBox.ComboBox.Entry.FocusInEvent += new Gtk.FocusInEventHandler (Entry_FocusInEvent);
 			ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
 
 			PixelGrid.Toggled += delegate (object sender, EventArgs e) {
@@ -212,7 +212,7 @@ namespace Pinta.Core
 			double percent;
 
 			if (!TryParsePercent (text, out percent)) {
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_zoom;
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.Entry.Text = temp_zoom;
 				return;
 			}
 			
