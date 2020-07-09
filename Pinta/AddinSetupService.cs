@@ -24,6 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#if false
+// TODO - GTK3
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
@@ -84,3 +86,4 @@ namespace Pinta
 		}
 	}
 }
+#endif

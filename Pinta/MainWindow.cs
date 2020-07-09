@@ -28,7 +28,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
-using Mono.Addins;
 using Pinta.Docking;
 using Pinta.Docking.DockNotebook;
 using Pinta.Docking.Gui;
@@ -75,6 +74,8 @@ namespace Pinta
 			PintaCore.Initialize ();
 
 			// Initialize extensions
+			// TODO-GTK3
+#if false
 			AddinManager.Initialize ();
 			AddinManager.Registry.Update ();
 			AddinSetupService setupService = new AddinSetupService (AddinManager.Registry);
@@ -83,6 +84,7 @@ namespace Pinta
 
 			//Look out for any changes in extensions
 			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
+#endif
 
 			// Try to set the default tool to the PaintBrush
 			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Paintbrush"));
@@ -280,7 +282,7 @@ namespace Pinta
 				extension.Uninitialize ();
 		}
 
-		#region GUI Construction
+#region GUI Construction
 		private void CreateWindow ()
 		{
 			// Check for stored window settings
@@ -458,9 +460,9 @@ namespace Pinta
 				
 			dock.CurrentLayout = "Default";
 		}
-		#endregion
+#endregion
 
-		#region User Settings
+#region User Settings
 		private const string LastDialogDirSettingKey = "last-dialog-directory";
 
 		private void LoadUserSettings ()
@@ -514,9 +516,9 @@ namespace Pinta
 
 			PintaCore.Settings.SaveSettings ();
 		}
-		#endregion
+#endregion
 
-		#region Action Handlers
+#region Action Handlers
 		private void MainWindow_DeleteEvent (object o, DeleteEventArgs args)
 		{
 			// leave window open so user can cancel quitting
@@ -619,6 +621,6 @@ namespace Pinta
 
             return null;
         }
-		#endregion
+#endregion
 	}
 }

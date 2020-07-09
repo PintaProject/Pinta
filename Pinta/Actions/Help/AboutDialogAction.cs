@@ -27,7 +27,6 @@
 using System;
 using Gtk;
 using Pinta.Core;
-using Mono.Addins.Gui;
 
 namespace Pinta.Actions
 {
