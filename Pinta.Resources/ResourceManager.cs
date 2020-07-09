@@ -50,16 +50,14 @@ namespace Pinta.Resources
 		{
 			Gdk.Pixbuf result = null;
 			try {
-				// First see if it's a built-in gtk icon, like gtk-new.
-				// This will also load any icons added by Gtk.IconFactory.AddDefault() . 
-				using (var icon_set = Gtk.Widget.DefaultStyle.LookupIconSet (name)) {
-					if (icon_set != null) {
-						result = icon_set.RenderIcon (Gtk.Widget.DefaultStyle, Gtk.Widget.DefaultDirection,
-							Gtk.StateType.Normal, GetIconSize (size), null, null);
-					}
-				}
-				// Otherwise, get it from our embedded resources.
-				if (result == null) {
+                // First see if it's a built-in gtk icon, like gtk-new.
+                // This will also load any icons added by Gtk.IconFactory.AddDefault() . 
+                using (var icon = Gtk.IconTheme.Default.LookupIcon(name, size, Gtk.IconLookupFlags.ForceSize))
+                {
+                    result = icon.LoadIcon();
+                }
+                // Otherwise, get it from our embedded resources.
+                if (result == null) {
 
 					if (HasResource(Assembly.GetExecutingAssembly(), name)) //Assembly.GetCallingAssembly() is wrong here!
 						result = Gdk.Pixbuf.LoadFromResource (name);
@@ -108,6 +106,9 @@ namespace Pinta.Resources
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
 		private static Pixbuf CreateMissingImage (int size)
 		{
+			// TODO-GTK3 implement this. This will probably need to use Cairo:
+			// https://developer.gnome.org/gtk3/stable/ch26s02.html#id-1.6.3.4.5
+#if false
 			var pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, size, size);
 			var gc = new Gdk.GC (pmap);
 
@@ -122,6 +123,9 @@ namespace Pinta.Resources
 			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
 
 			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
+#else
+			throw new NotImplementedException();
+#endif
 		}
 
 		private static Gtk.IconSize GetIconSize(int size)
