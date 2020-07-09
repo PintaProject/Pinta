@@ -29,7 +29,6 @@ using System.Collections.Generic;
 using System.IO;
 using Gdk;
 using Gtk;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

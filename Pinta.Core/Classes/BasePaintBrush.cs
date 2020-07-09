@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
 using Cairo;
 
 namespace Pinta.Core
@@ -33,7 +32,8 @@ namespace Pinta.Core
 	/// <summary>
 	/// The base class for all brushes.
 	/// </summary>
-	[TypeExtensionPoint]
+	// TODO-GTK3 - Support Mono.Addins.
+	// [TypeExtensionPoint]
 	public abstract class BasePaintBrush
 	{
 		private static Random random = new Random ();

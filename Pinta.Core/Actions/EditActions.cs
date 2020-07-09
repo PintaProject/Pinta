@@ -28,7 +28,6 @@ using System;
 using System.IO;
 using Gtk;
 using Cairo;
-using Mono.Unix;
 using System.Linq;
 
 namespace Pinta.Core

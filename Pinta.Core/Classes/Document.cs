@@ -26,7 +26,6 @@
 
 using System;
 using System.Linq;
-using Mono.Unix;
 using Gdk;
 using Gtk;
 using System.Collections.Generic;

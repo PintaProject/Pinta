@@ -26,7 +26,6 @@
 
 using System;
 using Cairo;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

@@ -30,7 +30,6 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Cairo;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

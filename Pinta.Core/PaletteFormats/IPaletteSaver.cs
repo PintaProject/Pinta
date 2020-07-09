@@ -25,13 +25,13 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
 using System.Collections.Generic;
 using Cairo;
 
 namespace Pinta.Core
 {
-	[TypeExtensionPoint]
+	// TODO-GTK3 - Support Mono.Addins.
+	// [TypeExtensionPoint]
 	public interface IPaletteSaver
 	{
 		void Save (List<Color> colors, string fileName);

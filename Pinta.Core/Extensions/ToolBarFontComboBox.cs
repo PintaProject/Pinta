@@ -51,7 +51,7 @@ namespace Pinta.Core
 			return box;
 		}
 
-		private void RenderFont (CellLayout layout, CellRenderer renderer, TreeModel model, TreeIter iter)
+		private void RenderFont (ICellLayout layout, CellRenderer renderer, ITreeModel model, TreeIter iter)
 		{
 			string fontName = (string)model.GetValue (iter, 0);
 

@@ -33,7 +33,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.ComponentModel;
 using Debug = System.Diagnostics.Debug;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

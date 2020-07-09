@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

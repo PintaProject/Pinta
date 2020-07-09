@@ -7,7 +7,7 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolBarDropDownButton : MenuButton
+	public class ToolBarDropDownButton : Gtk.MenuButton
 	{
 		private Menu dropdown;
 		private Image image;

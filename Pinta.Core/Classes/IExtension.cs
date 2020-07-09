@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Addins;
 
 namespace Pinta.Core
 {
-	[TypeExtensionPoint]
+	// TODO-GTK3 - Support Mono.Addins.
+	// [TypeExtensionPoint]
 	public interface IExtension
 	{
 		void Initialize ();

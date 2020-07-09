@@ -29,7 +29,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Gtk;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

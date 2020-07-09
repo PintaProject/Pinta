@@ -25,13 +25,13 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
 using Cairo;
 using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	[TypeExtensionPoint]
+	// TODO-GTK3 - Support Mono.Addins.
+	// [TypeExtensionPoint]
 	public interface IPaletteLoader
 	{
 		List<Color> Load (string fileName);

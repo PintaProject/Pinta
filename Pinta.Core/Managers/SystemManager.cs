@@ -30,7 +30,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
-using Mono.Addins;
 using Gtk;
 
 namespace Pinta.Core

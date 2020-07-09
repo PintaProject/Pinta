@@ -26,18 +26,18 @@
 
 using System;
 using Cairo;
-using Mono.Unix;
-using Mono.Addins;
 using Pinta.Core;
 
-[assembly: AddinRoot ("Pinta", PintaCore.ApplicationVersion)]
+// TODO-GTK3 - Support Mono.Addins.
+// [assembly: AddinRoot ("Pinta", PintaCore.ApplicationVersion)]
 
 namespace Pinta.Core
 {
 	/// <summary>
 	/// The base class for all effects and adjustments.
 	/// </summary>
-	[TypeExtensionPoint]
+	// TODO-GTK3 - Support Mono.Addins.
+	// [TypeExtensionPoint]
 	public abstract class BaseEffect
 	{
 		/// <summary>

@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 using System;
 using Gtk;
-using Mono.Unix;
 
 namespace Pinta.Core
 {

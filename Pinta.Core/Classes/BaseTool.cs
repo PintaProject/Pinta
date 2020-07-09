@@ -29,15 +29,14 @@ using Cairo;
 using Gtk;
 using Gdk;
 using System.IO;
-using Mono.Unix;
-using Mono.Addins;
 using System.Collections.Generic;
 
 namespace Pinta.Core
 {
 	public delegate void MouseHandler (double x, double y, Gdk.ModifierType state);
 
-	[TypeExtensionPoint]
+	// TODO-GTK3 - Support Mono.Addins.
+	// [TypeExtensionPoint]
 	public abstract class BaseTool
 	{
 		public const int DEFAULT_BRUSH_WIDTH = 2;
