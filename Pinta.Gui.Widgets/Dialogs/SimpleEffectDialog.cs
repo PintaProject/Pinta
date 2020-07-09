@@ -153,9 +153,9 @@ namespace Pinta.Gui.Widgets
 				string label;
 				var attrs = members [0].GetCustomAttributes (typeof(CaptionAttribute), false);
 				if (attrs.Length > 0)
-					label = Translations.GetString (((CaptionAttribute)attrs [0]).Caption);
+					label = Pinta.Core.Translations.GetString (((CaptionAttribute)attrs [0]).Caption);
 				else
-					label = Translations.GetString (member_name);
+					label = Pinta.Core.Translations.GetString (member_name);
 
 				label_to_member [label] = member_name;
 				labels.Add (label);
@@ -447,6 +447,13 @@ namespace Pinta.Gui.Widgets
 		#endregion
 	}
 
+	// TODO-GTK3
+	/// This is a temporary replacement for IAddinLocalizer from Mono.Addins.
+	public interface IAddinLocalizer
+    {
+		string GetString(string msgid);
+    }
+
 	/// <summary>
 	/// Wrapper around Pinta's translation template.
 	/// </summary>
@@ -454,7 +461,7 @@ namespace Pinta.Gui.Widgets
 	{
 		public string GetString (string msgid)
 		{
-			return Mono.Unix.Translations.GetString (msgid);
+			return Pinta.Core.Translations.GetString (msgid);
 		}
 	};
 }
