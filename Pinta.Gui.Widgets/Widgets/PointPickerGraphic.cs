@@ -114,7 +114,9 @@ namespace Pinta.Gui.Widgets
 		}
 		#endregion
 
-		#region Drawing Code
+#region Drawing Code
+// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
 		{
 			base.OnExposeEvent (ev);
@@ -153,9 +155,10 @@ namespace Pinta.Gui.Widgets
 			requisition.Width = (imagesize.Width * requisition.Height) / imagesize.Height;
 			thumbnail = null;
 		}
-		#endregion
+#endif
+#endregion
 
-		#region Public Events
+#region Public Events
 		public event EventHandler PositionChanged;
 
 		protected virtual void OnPositionChange ()
@@ -164,9 +167,9 @@ namespace Pinta.Gui.Widgets
 				PositionChanged (this, EventArgs.Empty);
 			}
 		}
-		#endregion
+#endregion
 
-		#region private methods
+#region private methods
 		private Point MousePtToPosition (Cairo.PointD clientMousePt)
 		{
 			int posX = (int)(clientMousePt.X * (PintaCore.Workspace.ImageSize.Width / Allocation.Width));
@@ -185,6 +188,6 @@ namespace Pinta.Gui.Widgets
 			
 			return new Cairo.PointD (ptX, ptY);
 		}
-		#endregion
+#endregion
 	}
 }

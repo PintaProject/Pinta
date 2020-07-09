@@ -64,6 +64,8 @@ namespace Pinta.Gui.Widgets
 			set { surface = value; }
 		}
 
+		// TODO-GTK3
+#if false
 		public override void GetSize (Widget widget, ref Gdk.Rectangle cellArea, out int x, out int y, out int width, out int height)
 		{
 			// TODO: Respect cell padding (Xpad and Ypad).
@@ -86,7 +88,7 @@ namespace Pinta.Gui.Widgets
 				g.Restore ();
 			}
 		}
-
+#endif
 		private void RenderCell (Context g, int width, int height)
 		{
 			// Add some padding

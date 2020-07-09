@@ -96,6 +96,8 @@ namespace Pinta.Gui.Widgets
 		}
 
 		#region Protected Methods
+// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose e)
 		{
 			base.OnExposeEvent (e);
@@ -159,6 +161,7 @@ namespace Pinta.Gui.Widgets
 
 			return true;
 		}
+#endif
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
@@ -178,9 +181,9 @@ namespace Pinta.Gui.Widgets
 			
 			return base.OnScrollEvent (evnt);
 		}
-		#endregion
+#endregion
 
-		#region Private Methods
+#region Private Methods
 		private void SetRequisition (Size size)
 		{
 			Requisition req = new Requisition ();
@@ -201,6 +204,6 @@ namespace Pinta.Gui.Widgets
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
 		}
-		#endregion
+#endregion
 	}
 }

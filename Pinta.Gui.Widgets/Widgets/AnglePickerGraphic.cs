@@ -119,7 +119,9 @@ namespace Pinta.Gui.Widgets
 		}
 		#endregion
 
-		#region Drawing Code
+#region Drawing Code
+// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
 		{
 			base.OnExposeEvent (ev);
@@ -156,16 +158,20 @@ namespace Pinta.Gui.Widgets
 			
 			return true;
 		}
+#endif
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
 		{
 			// Calculate desired size here.
 			requisition.Height = 50;
 			requisition.Width = 50;
 		}
-		#endregion
+#endif
+#endregion
 		
-		#region Public Events
+#region Public Events
 		public event EventHandler ValueChanged;
 		
 		protected virtual void OnValueChanged ()
@@ -174,6 +180,6 @@ namespace Pinta.Gui.Widgets
 				ValueChanged (this, EventArgs.Empty);
 			}
 		}
-		#endregion
+#endregion
 	}
 }

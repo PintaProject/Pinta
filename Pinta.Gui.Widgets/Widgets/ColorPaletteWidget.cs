@@ -164,6 +164,8 @@ namespace Pinta.Gui.Widgets
 			return base.OnButtonPressEvent (ev);
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
 		{
 			base.OnExposeEvent (ev);
@@ -215,6 +217,7 @@ namespace Pinta.Gui.Widgets
 			// Calculate desired size here.
             requisition.Height = requisition.Width = primarySecondaryAreaSize;
 		}
+#endif
 
         protected override void OnSizeAllocated(Gdk.Rectangle allocation)
         {
