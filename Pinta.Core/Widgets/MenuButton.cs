@@ -136,12 +136,17 @@ namespace Hyena.Widgets
 			set { alignment.Visible = value; }
 		}
 
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
-			requisition = size_widget.SizeRequest ();
-		}
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+            size_widget.GetPreferredHeight(out minimum_height, out natural_height);
+        }
 
-		protected override void OnSizeAllocated (Rectangle allocation)
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+            size_widget.GetPreferredWidth(out minimum_width, out natural_width);
+        }
+
+        protected override void OnSizeAllocated (Rectangle allocation)
 		{
 			box.SizeAllocate (allocation);
 			toggle_button.SizeAllocate (allocation);

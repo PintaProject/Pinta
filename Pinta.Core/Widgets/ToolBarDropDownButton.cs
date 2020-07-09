@@ -7,7 +7,7 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolBarDropDownButton : Gtk.MenuButton
+	public class ToolBarDropDownButton : Hyena.Widgets.MenuButton
 	{
 		private Menu dropdown;
 		private Image image;
