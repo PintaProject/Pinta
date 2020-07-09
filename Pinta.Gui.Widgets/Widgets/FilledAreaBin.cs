@@ -46,12 +46,20 @@ namespace Pinta.Gui.Widgets
             child = null;
         }
 
-        protected override void OnSizeRequested (ref Requisition requisition)
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
         {
             if (child != null)
-                requisition = child.SizeRequest ();
+                child.GetPreferredHeight(out minimum_height, out natural_height);
             else
-                base.OnSizeRequested (ref requisition);
+                base.OnGetPreferredHeight(out minimum_height, out natural_height);
+        }
+
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+            if (child != null)
+                child.GetPreferredWidth(out minimum_width, out natural_width);
+            else
+                base.OnGetPreferredWidth(out minimum_width, out natural_width);
         }
 
         protected override void OnSizeAllocated (Rectangle allocation)
