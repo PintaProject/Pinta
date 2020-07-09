@@ -41,5 +41,10 @@ namespace Pinta.Core
         {
             return catalog.GetString(text);
         }
+
+        public static string GetString(string text, params object[] args)
+        {
+            return catalog.GetString(text, args);
+        }
     }
 }

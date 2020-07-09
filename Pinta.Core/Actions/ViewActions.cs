@@ -254,7 +254,7 @@ namespace Pinta.Core
 			var percent = (n * 100).ToString ("N0", CultureInfo.CurrentCulture);
 			// Translators: This specifies the format of the zoom percentage choices
 			// in the toolbar.
-			return string.Format (Translations.GetString ("{0}%"), percent);
+			return Translations.GetString("{0}%", percent);
 		}
 
 		public void SuspendZoomUpdate ()
