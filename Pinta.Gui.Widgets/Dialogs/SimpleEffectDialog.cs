@@ -33,8 +33,6 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
-using Mono.Addins.Localization;
-using Mono.Unix;
 
 namespace Pinta.Gui.Widgets
 {
@@ -155,9 +153,9 @@ namespace Pinta.Gui.Widgets
 				string label;
 				var attrs = members [0].GetCustomAttributes (typeof(CaptionAttribute), false);
 				if (attrs.Length > 0)
-					label = Catalog.GetString (((CaptionAttribute)attrs [0]).Caption);
+					label = Translations.GetString (((CaptionAttribute)attrs [0]).Caption);
 				else
-					label = Catalog.GetString (member_name);
+					label = Translations.GetString (member_name);
 
 				label_to_member [label] = member_name;
 				labels.Add (label);
@@ -456,7 +454,7 @@ namespace Pinta.Gui.Widgets
 	{
 		public string GetString (string msgid)
 		{
-			return Mono.Unix.Catalog.GetString (msgid);
+			return Mono.Unix.Translations.GetString (msgid);
 		}
 	};
 }

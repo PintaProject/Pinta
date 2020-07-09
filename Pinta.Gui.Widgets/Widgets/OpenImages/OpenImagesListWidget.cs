@@ -223,7 +223,7 @@ namespace Pinta.Gui.Widgets
 		/// <summary>
 		/// Sets the active document as selected by the user
 		/// </summary>
-		private bool HandleDocumentSelected (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
+		private bool HandleDocumentSelected (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
 		{
 			int index = path.Indices[0];
 

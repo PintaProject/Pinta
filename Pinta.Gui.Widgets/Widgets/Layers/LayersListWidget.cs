@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
@@ -241,7 +240,7 @@ namespace Pinta.Gui.Widgets
 
 			var historyItem = new UpdateLayerPropertiesHistoryItem (
 				"Menu.Layers.LayerProperties.png",
-				(visibility) ? Catalog.GetString ("Layer Shown") : Catalog.GetString ("Layer Hidden"),
+				(visibility) ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
 				PintaCore.Layers.IndexOf (layer),
 				initial,
 				updated);

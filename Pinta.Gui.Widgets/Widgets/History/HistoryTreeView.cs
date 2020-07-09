@@ -89,7 +89,7 @@ namespace Pinta.Gui.Widgets
 		}
 
 		#region History
-		public bool HistoryItemSelected (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
+		public bool HistoryItemSelected (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
 		{
 			int current = path.Indices[0];
 			if (!path_currently_selected) {
@@ -103,7 +103,7 @@ namespace Pinta.Gui.Widgets
 			return true;
 		}
 
-		private void HistoryRenderText (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		private void HistoryRenderText (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
 			if (item.State == HistoryItemState.Undo) {
@@ -117,7 +117,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HistoryRenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		private void HistoryRenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
 			var pixbuf_cell = cell as Gtk.CellRendererPixbuf;

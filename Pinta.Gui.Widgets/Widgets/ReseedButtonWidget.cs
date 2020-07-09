@@ -61,7 +61,7 @@ namespace Pinta.Gui.Widgets
             var hbox1 = new HBox (false, 6);
 
             var label = new Label ();
-            label.LabelProp = Mono.Unix.Catalog.GetString ("Random Noise");
+            label.LabelProp = Mono.Unix.Translations.GetString ("Random Noise");
 
             hbox1.PackStart (label, false, false, 0);
             hbox1.PackStart (new HSeparator (), true, true, 0);
@@ -71,7 +71,7 @@ namespace Pinta.Gui.Widgets
             button1.WidthRequest = 88;
             button1.CanFocus = true;
             button1.UseUnderline = true;
-            button1.Label = Mono.Unix.Catalog.GetString ("Reseed");
+            button1.Label = Mono.Unix.Translations.GetString ("Reseed");
 
             var hbox2 = new HBox (false, 6);
             hbox2.PackStart (button1, false, false, 0);

@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Gui.Widgets
 {
@@ -103,7 +102,7 @@ namespace Pinta.Gui.Widgets
 			}
 
 			if (primary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Primary Color"));
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Translations.GetString ("Choose Primary Color"));
 				csd.TransientFor = PintaCore.Chrome.MainWindow;
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
@@ -118,7 +117,7 @@ namespace Pinta.Gui.Widgets
 
 				csd.Destroy ();
 			} else if (secondary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Secondary Color"));
+				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Translations.GetString ("Choose Secondary Color"));
 				csd.TransientFor = PintaCore.Chrome.MainWindow;
 				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
 				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
@@ -142,7 +141,7 @@ namespace Pinta.Gui.Widgets
 				else if (ev.Button == 1)
 					PintaCore.Palette.PrimaryColor = palette[pal];
 				else {
-					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Catalog.GetString ("Choose Palette Color"));
+					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Translations.GetString ("Choose Palette Color"));
 					csd.TransientFor = PintaCore.Chrome.MainWindow;
 					csd.ColorSelection.PreviousColor = palette[pal].ToGdkColor ();
 					csd.ColorSelection.CurrentColor = palette[pal].ToGdkColor ();
@@ -310,15 +309,15 @@ namespace Pinta.Gui.Widgets
 			string text = null;
 
 			if (swap_rect.ContainsPoint (x, y)) {
-				text = Catalog.GetString ("Click to switch between primary and secondary color.");
+				text = Translations.GetString ("Click to switch between primary and secondary color.");
 			} else if (reset_rect.ContainsPoint (x, y)) {
-				text = Catalog.GetString ("Click to reset primary and secondary color.");
+				text = Translations.GetString ("Click to reset primary and secondary color.");
 			} else if (primary_rect.ContainsPoint (x, y)) {
-				text = Catalog.GetString ("Click to select primary color.");
+				text = Translations.GetString ("Click to select primary color.");
 			} else if (secondary_rect.ContainsPoint (x, y)) {
-				text = Catalog.GetString ("Click to select secondary color.");
+				text = Translations.GetString ("Click to select secondary color.");
 			} else if (PointToPalette (x, y) >= 0) {
-				text = Catalog.GetString ("Left click to set primary color. Right click to set secondary color. Middle click to choose palette color.");
+				text = Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click to choose palette color.");
 			}
 
 			args.Tooltip.Text = text;
