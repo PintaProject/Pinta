@@ -32,100 +32,85 @@ namespace Pinta.Core
 	public static class GdkExtensions
 	{
 		// Invalidate the whole thing
-		public static void Invalidate (this Window w)
+		public static void Invalidate(this Window w)
 		{
-			int width;
-			int height;
-			
-			w.GetSize (out width, out height);
-			
-			w.InvalidateRect (new Rectangle (0, 0, width, height), true);
-		}
-		
-		public static Rectangle GetBounds (this Window w)
-		{
-			int width;
-			int height;
-			
-			w.GetSize (out width, out height);
-			
-			return new Rectangle (0, 0, width, height);
+			w.InvalidateRect(new Rectangle(0, 0, w.Width, w.Height), true);
 		}
 
-		public static Size GetSize (this Window w)
+		public static Rectangle GetBounds(this Window w)
 		{
-			int width;
-			int height;
+			return new Rectangle(0, 0, w.Width, w.Height);
+		}
 
-			w.GetSize (out width, out height);
+		public static Size GetSize(this Window w)
+		{
+			return new Size(w.Width, w.Height);
+		}
 
-			return new Size (width, height);
-		}
-		
-		public static Cairo.Color ToCairoColor (this Gdk.Color color)
+		public static Cairo.Color ToCairoColor(this Gdk.Color color)
 		{
-			return new Cairo.Color ((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);
+			return new Cairo.Color((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);
 		}
-		
-		public static Cairo.Color GetCairoColor (this Gtk.ColorSelection selection) 
+
+		public static Cairo.Color GetCairoColor(this Gtk.ColorSelection selection)
 		{
-			Cairo.Color cairo_color = selection.CurrentColor.ToCairoColor ();
-			return new Cairo.Color (cairo_color.R, cairo_color.G, cairo_color.B, (double)selection.CurrentAlpha / ushort.MaxValue);
+			Cairo.Color cairo_color = selection.CurrentColor.ToCairoColor();
+			return new Cairo.Color(cairo_color.R, cairo_color.G, cairo_color.B, (double)selection.CurrentAlpha / ushort.MaxValue);
 		}
-		
-		public static Gdk.Point Center (this Gdk.Rectangle rect)
+
+		public static Gdk.Point Center(this Gdk.Rectangle rect)
 		{
 			return new Gdk.Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
 
-		public static ColorBgra ToBgraColor (this Gdk.Color color)
+		public static ColorBgra ToBgraColor(this Gdk.Color color)
 		{
-			return ColorBgra.FromBgr ((byte)(color.Blue * 255 / ushort.MaxValue),  (byte)(color.Green * 255 / ushort.MaxValue), (byte)(color.Red * 255 / ushort.MaxValue));
+			return ColorBgra.FromBgr((byte)(color.Blue * 255 / ushort.MaxValue), (byte)(color.Green * 255 / ushort.MaxValue), (byte)(color.Red * 255 / ushort.MaxValue));
 		}
-		
-		public static bool IsNotSet (this Point p)
+
+		public static bool IsNotSet(this Point p)
 		{
 			return p.X == int.MinValue && p.Y == int.MinValue;
 		}
 
-        public static bool IsShiftPressed (this ModifierType m)
-        {
-            return (m & ModifierType.ShiftMask) == ModifierType.ShiftMask;
-        }
+		public static bool IsShiftPressed(this ModifierType m)
+		{
+			return (m & ModifierType.ShiftMask) == ModifierType.ShiftMask;
+		}
 
-		public static bool IsControlPressed (this ModifierType m)
+		public static bool IsControlPressed(this ModifierType m)
 		{
 			return (m & ModifierType.ControlMask) == ModifierType.ControlMask;
 		}
 
-		public static bool IsShiftPressed (this EventButton ev)
+		public static bool IsShiftPressed(this EventButton ev)
 		{
-            return ev.State.IsShiftPressed ();
+			return ev.State.IsShiftPressed();
 		}
 
-		public static bool IsControlPressed (this EventButton ev)
+		public static bool IsControlPressed(this EventButton ev)
 		{
-            return ev.State.IsControlPressed ();
+			return ev.State.IsControlPressed();
 		}
 
-        /// <summary>
-        /// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
-        /// from appearing as active modifier keys.
-        /// </summary>
-        public static ModifierType FilterModifierKeys (this ModifierType current_state)
-        {
-            var state = Gdk.ModifierType.None;
-
-            state |= (current_state & Gdk.ModifierType.ControlMask);
-            state |= (current_state & Gdk.ModifierType.ShiftMask);
-            state |= (current_state & Gdk.ModifierType.Mod1Mask);
-
-            return state;
-        }
-
-		public static Cairo.PointD GetPoint (this EventButton ev)
+		/// <summary>
+		/// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
+		/// from appearing as active modifier keys.
+		/// </summary>
+		public static ModifierType FilterModifierKeys(this ModifierType current_state)
 		{
-			return new Cairo.PointD (ev.X, ev.Y);
+			var state = Gdk.ModifierType.None;
+
+			state |= (current_state & Gdk.ModifierType.ControlMask);
+			state |= (current_state & Gdk.ModifierType.ShiftMask);
+			state |= (current_state & Gdk.ModifierType.Mod1Mask);
+
+			return state;
+		}
+
+		public static Cairo.PointD GetPoint(this EventButton ev)
+		{
+			return new Cairo.PointD(ev.X, ev.Y);
 		}
 
 		/// <summary>
@@ -146,21 +131,24 @@ namespace Pinta.Core
 			return r.X + r.Width - 1;
 		}
 
-        public static Cairo.Surface ToSurface (this Pixbuf pixbuf)
-        {
-            var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
+		public static Cairo.Surface ToSurface(this Pixbuf pixbuf)
+		{
+			var surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
 
-            using (var g = new Cairo.Context (surface)) {
-                Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, 0, 0);
-                g.Paint ();
-            }
+			using (var g = new Cairo.Context(surface))
+			{
+				Gdk.CairoHelper.SetSourcePixbuf(g, pixbuf, 0, 0);
+				g.Paint();
+			}
 
-            return surface;
-        }
+			return surface;
+		}
 
-        public static Pixbuf CreateColorSwatch (int size, Color color)
-        {
-            using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
+		public static Pixbuf CreateColorSwatch(int size, Color color)
+		{
+			// TODO-GTK3
+#if false
+			using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
             using (var gc = new Gdk.GC (pmap)) {
                 gc.RgbFgColor = color;
                 pmap.DrawRectangle (gc, true, 0, 0, size, size);
@@ -170,11 +158,16 @@ namespace Pinta.Core
 
                 return Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
             }
-        }
+#else
+			throw new NotImplementedException();
+#endif
+		}
 
-        public static Pixbuf CreateTransparentColorSwatch (bool drawBorder)
-        {
-            var size = 16;
+		public static Pixbuf CreateTransparentColorSwatch(bool drawBorder)
+		{
+			// TODO-GTK3
+#if false
+			var size = 16;
 
             using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
             using (var gc = new Gdk.GC (pmap)) {
@@ -192,6 +185,9 @@ namespace Pinta.Core
 
                 return Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
             }
-        }
-    }
+#else
+			throw new NotImplementedException();
+#endif
+		}
+	}
 }
