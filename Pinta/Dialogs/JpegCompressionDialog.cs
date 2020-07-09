@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using Gtk;
-using Mono.Unix;
 using Pinta.Gui.Widgets;
 
 namespace Pinta

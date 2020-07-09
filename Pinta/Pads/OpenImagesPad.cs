@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using Pinta.Docking;
-using Mono.Unix;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;

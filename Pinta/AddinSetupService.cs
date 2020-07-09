@@ -27,7 +27,6 @@
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta
 {

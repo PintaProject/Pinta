@@ -27,7 +27,6 @@
 using System;
 using System.Linq;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 using System.IO;
 using System.Collections.Generic;

@@ -38,7 +38,6 @@ using Gtk;
 using GLib;
 using Pango;
 using System.IO;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta

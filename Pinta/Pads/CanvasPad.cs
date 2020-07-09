@@ -26,7 +26,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Pinta.Docking;
 using Pinta.Docking.DockNotebook;
 

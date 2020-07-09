@@ -29,7 +29,6 @@ using System.ComponentModel;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
-using Mono.Unix;
 
 namespace Pinta.Actions
 {

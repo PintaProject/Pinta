@@ -29,7 +29,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 using Mono.Addins;
-using Mono.Unix;
 using Pinta.Docking;
 using Pinta.Docking.DockNotebook;
 using Pinta.Docking.Gui;

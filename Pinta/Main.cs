@@ -29,7 +29,6 @@ using Gtk;
 using Mono.Options;
 using System.Collections.Generic;
 using Pinta.Core;
-using Mono.Unix;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;

@@ -28,7 +28,6 @@
 using System;
 using Gtk;
 using System.Reflection;
-using Mono.Unix;
 
 namespace Pinta
 {

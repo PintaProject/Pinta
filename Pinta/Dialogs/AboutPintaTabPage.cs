@@ -27,7 +27,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta
