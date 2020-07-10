@@ -33,6 +33,7 @@
 using Gtk;
 using Gdk;
 using Pinta.Core;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {

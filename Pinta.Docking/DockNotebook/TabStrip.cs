@@ -34,6 +34,8 @@ using MonoDevelop.Components;
 using Xwt.Motion;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using Pinta.Docking.AtkCocoaHelper;
+using Pinta.Core;
 
 namespace Pinta.Docking.DockNotebook
 {
@@ -150,8 +152,8 @@ namespace Pinta.Docking.DockNotebook
 				throw new ArgumentNullException ("notebook");
 
 			Accessible.SetCommonAttributes ("Document.Tabstrip",
-			                                Core.GettextCatalog.GetString ("Document Navigation Bar"),
-			                                Core.GettextCatalog.GetString ("Contains controls to select which document is being edited"));
+			                                Translations.GetString ("Document Navigation Bar"),
+			                                Translations.GetString ("Contains controls to select which document is being edited"));
 			Accessible.SetRole (AtkCocoa.Roles.AXTabGroup);
 
 			// Handle focus for the tabs.
@@ -176,13 +178,13 @@ namespace Pinta.Docking.DockNotebook
 			var alignment = new Alignment (0.5f, 0.5f, 0.0f, 0.0f);
 			alignment.Add (arr.ToGtkWidget ());
 			PreviousButton = new Button (alignment);
-			PreviousButton.TooltipText = Core.GettextCatalog.GetString ("Switch to previous document");
+			PreviousButton.TooltipText = Translations.GetString ("Switch to previous document");
 			PreviousButton.Relief = ReliefStyle.None;
 			PreviousButton.CanDefault = false;
 			PreviousButton.CanFocus = true;
 			PreviousButton.Accessible.Name = "DockNotebook.Tabstrip.PreviousButton";
-			PreviousButton.Accessible.SetTitle (Core.GettextCatalog.GetString ("Previous document"));
-			PreviousButton.Accessible.Description = Core.GettextCatalog.GetString ("Switch to previous document");
+			PreviousButton.Accessible.SetTitle (Translations.GetString ("Previous document"));
+			PreviousButton.Accessible.Description = Translations.GetString ("Switch to previous document");
 
 			arr = new Xwt.ImageView (tabbarNextImage);
 			arr.HeightRequest = arr.WidthRequest = 10;
@@ -190,22 +192,22 @@ namespace Pinta.Docking.DockNotebook
 			alignment = new Alignment (0.5f, 0.5f, 0.0f, 0.0f);
 			alignment.Add (arr.ToGtkWidget ());
 			NextButton = new Button (alignment);
-			NextButton.TooltipText = Core.GettextCatalog.GetString ("Switch to next document");
+			NextButton.TooltipText = Translations.GetString ("Switch to next document");
 			NextButton.Relief = ReliefStyle.None;
 			NextButton.CanDefault = false;
 			NextButton.CanFocus = true;
 			NextButton.Accessible.Name = "DockNotebook.Tabstrip.NextButton";
-			NextButton.Accessible.SetTitle (Core.GettextCatalog.GetString ("Next document"));
-			NextButton.Accessible.Description = Core.GettextCatalog.GetString ("Switch to next document");
+			NextButton.Accessible.SetTitle (Translations.GetString ("Next document"));
+			NextButton.Accessible.Description = Translations.GetString ("Switch to next document");
 
 			DropDownButton = new MenuButton ();
-			DropDownButton.TooltipText = Core.GettextCatalog.GetString ("Document List");
+			DropDownButton.TooltipText = Translations.GetString ("Document List");
 			DropDownButton.Relief = ReliefStyle.None;
 			DropDownButton.CanDefault = false;
 			DropDownButton.CanFocus = true;
 			DropDownButton.Accessible.Name = "DockNotebook.Tabstrip.DocumentListButton";
-			DropDownButton.Accessible.SetTitle (Core.GettextCatalog.GetString ("Document list"));
-			DropDownButton.Accessible.Description = Core.GettextCatalog.GetString ("Display the document list menu");
+			DropDownButton.Accessible.SetTitle (Translations.GetString ("Document list"));
+			DropDownButton.Accessible.Description = Translations.GetString ("Display the document list menu");
 
 			PreviousButton.ShowAll ();
 			PreviousButton.NoShowAll = true;

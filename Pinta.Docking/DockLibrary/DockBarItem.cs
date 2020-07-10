@@ -33,6 +33,7 @@ using System;
 using Gtk;
 using Xwt.Motion;
 using Gdk;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {	

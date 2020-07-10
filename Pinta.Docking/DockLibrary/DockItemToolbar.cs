@@ -26,7 +26,7 @@
 
 using System;
 using Gtk;
-
+using Pinta.Core;
 using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
@@ -89,19 +89,19 @@ namespace Pinta.Docking
 			string name = "";
 			switch (position) {
 			case DockPositionType.Bottom:
-				name = Core.GettextCatalog.GetString ("Bottom {0} pad toolbar", parentItem.Label);
+				name = Translations.GetString ("Bottom {0} pad toolbar", parentItem.Label);
 				break;
 
 			case DockPositionType.Left:
-				name = Core.GettextCatalog.GetString ("Left {0} pad toolbar", parentItem.Label);
+				name = Translations.GetString ("Left {0} pad toolbar", parentItem.Label);
 				break;
 
 			case DockPositionType.Right:
-				name = Core.GettextCatalog.GetString ("Right {0} pad toolbar", parentItem.Label);
+				name = Translations.GetString ("Right {0} pad toolbar", parentItem.Label);
 				break;
 
 			case DockPositionType.Top:
-				name = Core.GettextCatalog.GetString ("Top {0} pad toolbar", parentItem.Label);
+				name = Translations.GetString ("Top {0} pad toolbar", parentItem.Label);
 				break;
 			}
 

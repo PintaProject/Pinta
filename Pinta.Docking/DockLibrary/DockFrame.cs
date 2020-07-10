@@ -36,6 +36,7 @@ using System.Collections.Generic;
 using Gtk;
 using Gdk;
 using Xwt.Motion;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {

@@ -29,6 +29,7 @@ using Gtk;
 using Xwt.Motion;
 
 using Pinta.Docking.AtkCocoaHelper;
+using Pinta.Core;
 
 namespace Pinta.Docking.DockNotebook
 {
@@ -147,7 +148,7 @@ namespace Pinta.Docking.DockNotebook
 				string accTitle;
 
 				if (dirty) {
-					accTitle = string.Format (Core.GettextCatalog.GetString ("{0}. (dirty)"), Text ?? Markup);
+					accTitle = string.Format (Translations.GetString ("{0}. (dirty)"), Text ?? Markup);
 				} else {
 					accTitle = Text ?? Markup;
 				}
@@ -170,7 +171,7 @@ namespace Pinta.Docking.DockNotebook
 					string accTitle;
 
 					if (dirty) {
-						accTitle = string.Format (Core.GettextCatalog.GetString ("{0}. (dirty)"), value);
+						accTitle = string.Format (Translations.GetString ("{0}. (dirty)"), value);
 					} else {
 						accTitle = value;
 					}
@@ -179,7 +180,7 @@ namespace Pinta.Docking.DockNotebook
 				}
 
 				if (CloseButtonAccessible != null) {
-					CloseButtonAccessible.Title = string.Format (Core.GettextCatalog.GetString ("Close {0}"), value);
+					CloseButtonAccessible.Title = string.Format (Translations.GetString ("Close {0}"), value);
 				}
 
 				strip.Update ();
@@ -198,7 +199,7 @@ namespace Pinta.Docking.DockNotebook
 					// FIXME: Strip markup
 					string accTitle;
 					if (dirty) {
-						accTitle = string.Format (Core.GettextCatalog.GetString ("{0}. (dirty)"), value);
+						accTitle = string.Format (Translations.GetString ("{0}. (dirty)"), value);
 					} else {
 						accTitle = value;
 					}
@@ -207,7 +208,7 @@ namespace Pinta.Docking.DockNotebook
 				}
 
 				if (CloseButtonAccessible != null) {
-					CloseButtonAccessible.Title = string.Format (Core.GettextCatalog.GetString ("Close {0}"), value);
+					CloseButtonAccessible.Title = string.Format (Translations.GetString ("Close {0}"), value);
 				}
 
 				strip.Update ();
@@ -241,7 +242,7 @@ namespace Pinta.Docking.DockNotebook
 			set {
 				tooltip = value;
 				if (Accessible != null) {
-					Accessible.Help = string.Format (Core.GettextCatalog.GetString ("Switch to {0}"), value);
+					Accessible.Help = string.Format (Translations.GetString ("Switch to {0}"), value);
 				}
 			}
 		}
@@ -262,7 +263,7 @@ namespace Pinta.Docking.DockNotebook
 				CloseButtonAccessible.SetRole (AtkCocoa.Roles.AXButton);
 				CloseButtonAccessible.GtkParent = strip;
 				CloseButtonAccessible.PerformShowMenu += OnCloseButtonShowMenu;
-				CloseButtonAccessible.Title = Core.GettextCatalog.GetString ("Close document");
+				CloseButtonAccessible.Title = Translations.GetString ("Close document");
 				CloseButtonAccessible.Identifier = "DockNotebook.Tab.CloseButton";
 			}
 

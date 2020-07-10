@@ -30,6 +30,7 @@
 
 using System;
 using Gtk;
+using Pinta.Core;
 using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
@@ -78,7 +79,7 @@ namespace Pinta.Docking
 
 		void UpdateAccessibilityLabel (object sender, EventArgs args)
 		{
-			mainBox.Accessible.SetTitle (Core.GettextCatalog.GetString ("{0} Pad", item.Label));
+			mainBox.Accessible.SetTitle (Translations.GetString ("{0} Pad", item.Label));
 		}
 
 		DockVisualStyle visualStyle;

@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using Gtk;
 using Gdk;
 using System.Linq;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {

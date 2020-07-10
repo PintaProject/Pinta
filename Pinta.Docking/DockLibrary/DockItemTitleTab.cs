@@ -31,6 +31,7 @@ using System;
 using System.Reflection;
 using MonoDevelop.Components;
 using Pinta.Docking.AtkCocoaHelper;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -320,19 +321,19 @@ namespace Pinta.Docking
 
 			if (string.IsNullOrEmpty (label)) {
 				if (dockable) {
-					realLabel = GettextCatalog.GetString ("Dock pad");
-					realHelp = GettextCatalog.GetString ("Dock the pad into the UI so it will not hide automatically");
+					realLabel = Translations.GetString ("Dock pad");
+					realHelp = Translations.GetString ("Dock the pad into the UI so it will not hide automatically");
 				} else {
-					realLabel = GettextCatalog.GetString ("Autohide pad");
-					realHelp = GettextCatalog.GetString ("Automatically hide the pad when it loses focus");
+					realLabel = Translations.GetString ("Autohide pad");
+					realHelp = Translations.GetString ("Automatically hide the pad when it loses focus");
 				}
 			} else {
 				if (dockable) {
-					realLabel = GettextCatalog.GetString ("Dock {0}", label);
-					realHelp = GettextCatalog.GetString ("Dock the {0} pad into the UI so it will not hide automatically", label);
+					realLabel = Translations.GetString ("Dock {0}", label);
+					realHelp = Translations.GetString ("Dock the {0} pad into the UI so it will not hide automatically", label);
 				} else {
-					realLabel = GettextCatalog.GetString ("Autohide {0}", label);
-					realHelp = GettextCatalog.GetString ("Automatically hide the {0} pad when it loses focus", label);
+					realLabel = Translations.GetString ("Autohide {0}", label);
+					realHelp = Translations.GetString ("Automatically hide the {0} pad when it loses focus", label);
 				}
 			}
 			btnDock.Accessible.SetLabel (realLabel);
