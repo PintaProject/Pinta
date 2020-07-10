@@ -32,6 +32,7 @@
 
 using Gtk;
 using Gdk;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -90,8 +91,8 @@ namespace Pinta.Docking
 			EventBox sepBox = new EventBox ();
 
 			// FIXME How to actually resize this?
-			sepBox.Accessible.SetRole (AtkCocoa.Roles.AXSplitter, GettextCatalog.GetString ("Pad resize handle"));
-			sepBox.Accessible.SetLabel (GettextCatalog.GetString ("Pad resize handle"));
+			sepBox.Accessible.SetRole (AtkCocoa.Roles.AXSplitter, Translations.GetString ("Pad resize handle"));
+			sepBox.Accessible.SetLabel (Translations.GetString ("Pad resize handle"));
 
 			cframe.Add (sepBox);
 			

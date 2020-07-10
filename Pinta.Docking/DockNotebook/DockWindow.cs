@@ -26,19 +26,13 @@
 
 using Gdk;
 using Gtk;
-using MonoDevelop.Components.Docking;
-using MonoDevelop.Ide;
 using System.Collections.Generic;
-using MonoDevelop.Ide.Gui;
-using MonoDevelop.Ide.Gui.Dialogs;
-using System;
 using System.Linq;
-using MonoDevelop.Ide.Gui.Shell;
 using System.Threading.Tasks;
 
-namespace Pinta.Docking
+namespace Pinta.Docking.DockNotebook
 {
-	class DockWindow : IdeWindow
+	public class DockWindow : Gtk.Window
 	{
 		static List<DockWindow> allWindows = new List<DockWindow> ();
 

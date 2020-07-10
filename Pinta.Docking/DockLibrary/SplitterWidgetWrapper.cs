@@ -1,5 +1,4 @@
-//
-// DockItemBehavior.cs
+﻿//
 //
 // Author:
 //   Lluis Sanchez Gual
@@ -28,21 +27,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
+using Gdk;
+using Gtk;
 
 namespace Pinta.Docking
 {
-	[Flags]
-	public enum DockItemBehavior
+	interface ISplitterWidget
 	{
-		Normal,
-		NeverFloating = 1 << 0,
-		NeverVertical = 1 << 1,
-		NeverHorizontal = 1 << 2,
-		CantClose = 1 << 3,
-		CantAutoHide = 1 << 4,
-		NoGrip = 1 << 5,
-		Sticky = 1 << 6,  // Visibility is the same for al layouts
-		Locked = NoGrip | NeverFloating | CantClose | CantAutoHide,
+		Gtk.Widget Parent { get; }
+		void Init (DockGroup grp, int index);
+		void SizeAllocate (Gdk.Rectangle rect);
+		bool Visible { get; set; }
+		void Hide ();
+		void Show ();
+		Gtk.Widget Widget { get; }
+	}
+
+	class SplitterWidgetWrapper : ISplitterWidget
+	{
+		public Gtk.Widget Parent => nativeWidget.Parent;
+		public Gtk.Widget Widget => nativeWidget.Widget;
+
+		public bool Visible {
+			get => nativeWidget.Visible;
+			set => nativeWidget.Visible = value;
+		}
+
+		ISplitterWidget nativeWidget;
+
+		public SplitterWidgetWrapper (ISplitterWidget splitterWidget)
+		{
+			nativeWidget = splitterWidget;
+		}
+
+		public void Init (DockGroup grp, int index) => nativeWidget.Init (grp, index);
+
+		public void SizeAllocate (Rectangle rect) => nativeWidget.SizeAllocate (rect);
+
+		public void Show () => nativeWidget.Show ();
+		public void Hide () => nativeWidget.Hide ();
 	}
 }

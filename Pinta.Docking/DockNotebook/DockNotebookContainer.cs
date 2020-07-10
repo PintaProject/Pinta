@@ -27,14 +27,12 @@
 using System;
 using System.Collections.Generic;
 using Gtk;
-using MonoDevelop.Ide.Gui;
-using MonoDevelop.Ide;
+using Pinta.Docking.Gui;
 using System.Linq;
-using MonoDevelop.Ide.Gui.Shell;
 
-namespace Pinta.Docking
+namespace Pinta.Docking.DockNotebook
 {
-	class DockNotebookContainer : EventBox
+	public class DockNotebookContainer : EventBox
 	{
 		bool isMasterTab;
 		bool splitsInitialized;

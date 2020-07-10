@@ -30,15 +30,14 @@
 
 using System;
 using System.Xml;
-using Mono.Unix;
-
-using MonoDevelop.Components.AtkCocoaHelper;
+using Pinta.Core;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
 	public class DockItem
 	{
-		Control content;
+		Gtk.Widget content;
 		Gtk.Widget gtkContent;
 		DockItemContainer widget;
 		string defaultLocation;
@@ -49,7 +48,7 @@ namespace Pinta.Docking
 		int defaultWidth = -1;
 		int defaultHeight = -1;
 		string label;
-		Xwt.Drawing.Image icon;
+		Gdk.Pixbuf icon;
 		bool expand;
 		DockItemBehavior behavior;
 		Gtk.Window floatingWindow;
@@ -217,7 +216,7 @@ namespace Pinta.Docking
 			UpdateContentVisibleStatus ();
 		}
 		
-		public Control Content {
+		public Gtk.Widget Content {
 			get {
 				return content;
 			}
@@ -289,7 +288,7 @@ namespace Pinta.Docking
 			}
 		}
 
-		public Xwt.Drawing.Image Icon {
+		public Gdk.Pixbuf Icon {
 			get {
 				return icon;
 			}
@@ -572,28 +571,28 @@ namespace Pinta.Docking
 
 			// Hide menuitem
 			if ((Behavior & DockItemBehavior.CantClose) == 0) {
-				citem = new ContextMenuItem (Catalog.GetString ("Hide"));
+				citem = new ContextMenuItem (Translations.GetString ("Hide"));
 				citem.Clicked += delegate { Visible = false; };
 				menu.Add (citem);
 			}
 
 			// Auto Hide menuitem
 			if ((Behavior & DockItemBehavior.CantAutoHide) == 0 && Status != DockItemStatus.AutoHide) {
-				citem = new ContextMenuItem (Catalog.GetString ("Minimize"));
+				citem = new ContextMenuItem (Translations.GetString ("Minimize"));
 				citem.Clicked += delegate { Status = DockItemStatus.AutoHide; };
 				menu.Add (citem);
 			}
 
 			if (Status != DockItemStatus.Dockable) {
 				// Dockable menuitem
-				citem = new ContextMenuItem (Catalog.GetString ("Dock"));
+				citem = new ContextMenuItem (Translations.GetString ("Dock"));
 				citem.Clicked += delegate { Status = DockItemStatus.Dockable; };
 				menu.Add (citem);
 			}
 
 			// Floating menuitem
 			if ((Behavior & DockItemBehavior.NeverFloating) == 0 && Status != DockItemStatus.Floating) {
-				citem = new ContextMenuItem (Catalog.GetString ("Undock"));
+				citem = new ContextMenuItem (Translations.GetString ("Undock"));
 				citem.Clicked += delegate { Status = DockItemStatus.Floating; };
 				menu.Add (citem);
 			}

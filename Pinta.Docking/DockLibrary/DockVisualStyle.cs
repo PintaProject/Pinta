@@ -29,15 +29,15 @@ namespace Pinta.Docking
 {
 	public sealed class DockVisualStyle
 	{
-		public Xwt.Drawing.Color? PadBackgroundColor { get; set; }
-		public Xwt.Drawing.Color? PadTitleLabelColor { get; set; }
-		public Xwt.Drawing.Color? InactivePadTitleLabelColor { get; set; }
+		public Gdk.Color? PadBackgroundColor { get; set; }
+		public Gdk.Color? PadTitleLabelColor { get; set; }
+		public Gdk.Color? InactivePadTitleLabelColor { get; set; }
 		public DockTabStyle? TabStyle { get; set; }
-		public Xwt.Drawing.Color? TreeBackgroundColor { get; set; }
+		public Gdk.Color? TreeBackgroundColor { get; set; }
 		public bool? ShowPadTitleIcon { get; set; }
 		public bool? UppercaseTitles { get; set; }
 		public bool? ExpandedTabs { get; set; }
-		public Xwt.Drawing.Color? InactivePadBackgroundColor { get; set; }
+		public Gdk.Color? InactivePadBackgroundColor { get; set; }
 		public int? PadTitleHeight { get; set; }
 
 		// When set, pads in a region with this style can't be stacked horizontally

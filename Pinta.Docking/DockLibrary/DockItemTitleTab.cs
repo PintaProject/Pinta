@@ -28,21 +28,17 @@
 using Gtk;
 
 using System;
-using MonoDevelop.Ide.Gui;
-using System.Linq;
-using MonoDevelop.Core;
-using MonoDevelop.Ide;
+using System.Reflection;
 using MonoDevelop.Components;
-using MonoDevelop.Components.AtkCocoaHelper;
-using MonoDevelop.Ide.Fonts;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
 
 	class DockItemTitleTab : Gtk.EventBox
 	{
-		static Xwt.Drawing.Image dockTabActiveBackImage = Xwt.Drawing.Image.FromResource ("padbar-active.9.png");
-		static Xwt.Drawing.Image dockTabBackImage = Xwt.Drawing.Image.FromResource ("padbar-inactive.9.png");
+		static Gdk.Pixbuf dockTabActiveBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "padbar-active.9.png");
+		static Gdk.Pixbuf dockTabBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "padbar-inactive.9.png");
 
 		bool active;
 		Gtk.Widget page;
@@ -66,9 +62,9 @@ namespace Pinta.Docking
 
 		static Gdk.Cursor fleurCursor = new Gdk.Cursor (Gdk.CursorType.Fleur);
 
-		static Xwt.Drawing.Image pixClose;
-		static Xwt.Drawing.Image pixAutoHide;
-		static Xwt.Drawing.Image pixDock;
+		static Gdk.Pixbuf pixClose;
+		static Gdk.Pixbuf pixAutoHide;
+		static Gdk.Pixbuf pixDock;
 
 		static readonly Xwt.WidgetSpacing TabPadding;
 		static readonly Xwt.WidgetSpacing TabActivePadding;
@@ -77,9 +73,9 @@ namespace Pinta.Docking
 
 		static DockItemTitleTab ()
 		{
-			pixClose = Xwt.Drawing.Image.FromResource ("pad-close-9.png");
-			pixAutoHide = Xwt.Drawing.Image.FromResource ("pad-minimize-9.png");
-			pixDock = Xwt.Drawing.Image.FromResource ("pad-dock-9.png");
+			pixClose = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "pad-close-9.png");
+			pixAutoHide = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "pad-minimize-9.png");
+			pixDock = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "pad-dock-9.png");
 
 			Xwt.Drawing.NinePatchImage tabBackImage9;
 			if (dockTabBackImage is Xwt.Drawing.ThemedImage) {
@@ -210,7 +206,7 @@ namespace Pinta.Docking
 				HeightRequest = visualStyle.PadTitleHeight != null ? (int)(visualStyle.PadTitleHeight.Value) : -1;
 		}
 
-		public void SetLabel (Gtk.Widget page, Xwt.Drawing.Image icon, string label)
+		public void SetLabel (Gtk.Widget page, Gdk.Pixbuf icon, string label)
 		{
 			string labelNoSpaces = label != null ? label.Replace (' ', '-') : null;
 			this.label = label;

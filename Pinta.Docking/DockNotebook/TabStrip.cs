@@ -31,29 +31,25 @@ using System;
 using System.Collections.Generic;
 using Cairo;
 using MonoDevelop.Components;
-using MonoDevelop.Components.AtkCocoaHelper;
 using Xwt.Motion;
-using MonoDevelop.Components.Docking;
-using MonoDevelop.Ide.Gui;
-using MonoDevelop.Ide;
 using System.Runtime.InteropServices;
-using MonoDevelop.Ide.Editor;
+using System.Reflection;
 
-namespace Pinta.Docking
+namespace Pinta.Docking.DockNotebook
 {
 	class TabStrip: EventBox, IAnimatable
 	{
-		static Xwt.Drawing.Image tabbarPrevImage = Xwt.Drawing.Image.FromResource ("tabbar-prev-12.png");
-		static Xwt.Drawing.Image tabbarNextImage = Xwt.Drawing.Image.FromResource ("tabbar-next-12.png");
-		static Xwt.Drawing.Image tabActiveBackImage = Xwt.Drawing.Image.FromResource ("tabbar-active.9.png");
-		static Xwt.Drawing.Image tabBackImage = Xwt.Drawing.Image.FromResource ("tabbar-inactive.9.png");
-		static Xwt.Drawing.Image tabbarBackImage = Xwt.Drawing.Image.FromResource ("tabbar-back.9.png");
-		static Xwt.Drawing.Image tabCloseImage = Xwt.Drawing.Image.FromResource ("tab-close-9.png");
-		static Xwt.Drawing.Image tabDirtyImage = Xwt.Drawing.Image.FromResource ("tab-dirty-9.png");
-		static Xwt.Drawing.Image tabPinnedImage = Xwt.Drawing.Image.FromResource ("tab-pinned-9.png");
-		static Xwt.Drawing.Image tabUnPinnedImage = Xwt.Drawing.Image.FromResource ("tab-unpinned-9.png");
+        static Gdk.Pixbuf tabbarPrevImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-prev-12.png");
+        static Gdk.Pixbuf tabbarNextImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-next-12.png");
+        static Gdk.Pixbuf tabActiveBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-active.9.png");
+        static Gdk.Pixbuf tabBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-inactive.9.png");
+        static Gdk.Pixbuf tabbarBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-back.9.png");
+        static Gdk.Pixbuf tabCloseImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-close-9.png");
+        static Gdk.Pixbuf tabDirtyImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-dirty-9.png");
+        static Gdk.Pixbuf tabPinnedImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-pinned-9.png");
+        static Gdk.Pixbuf tabUnPinnedImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-unpinned-9.png");
 
-		HBox innerBox;
+        HBox innerBox;
 
 		readonly DockNotebook notebook;
 		DockNotebookTab highlightedTab;
@@ -77,7 +73,7 @@ namespace Pinta.Docking
 
 		public Button PreviousButton;
 		public Button NextButton;
-		public MenuButton DropDownButton;
+		public MonoDevelop.Components.MenuButton DropDownButton;
 
 		static readonly int TotalHeight = 32;
 		static readonly Xwt.WidgetSpacing TabPadding;

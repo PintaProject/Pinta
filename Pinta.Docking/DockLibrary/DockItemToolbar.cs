@@ -25,10 +25,9 @@
 // THE SOFTWARE.
 
 using System;
-using System.Linq;
 using Gtk;
 
-using MonoDevelop.Components.AtkCocoaHelper;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
@@ -132,22 +131,22 @@ namespace Pinta.Docking
 			get { return this.position; }
 		}
 		
-		public void Add (Control widget)
+		public void Add (Widget widget)
 		{
 			Add (widget, false);
 		}
 		
-		public void Add (Control widget, bool fill)
+		public void Add (Widget widget, bool fill)
 		{
 			Add (widget, fill, -1);
 		}
 		
-		public void Add (Control widget, bool fill, int padding)
+		public void Add (Widget widget, bool fill, int padding)
 		{
 			Add (widget, fill, padding, -1);
 		}
 		
-		void Add (Control control, bool fill, int padding, int index)
+		void Add (Widget control, bool fill, int padding, int index)
 		{
 			int defaultPadding = 3;
 
@@ -180,12 +179,12 @@ namespace Pinta.Docking
 			}
 		}
 		
-		public void Insert (Control w, int index)
+		public void Insert (Widget w, int index)
 		{
 			Add (w, false, 0, index);
 		}
 		
-		public void Remove (Control widget)
+		public void Remove (Widget widget)
 		{
 			box.Remove (widget);
 		}
@@ -209,12 +208,12 @@ namespace Pinta.Docking
 			frame.ShowAll ();
 		}
 		
-		public Control[] Children {
-			get { return box.Children.Select (child => (Control)child).ToArray (); }
+		public Widget[] Children {
+			get { return box.Children; }
 		}
 	}
 	
-	public class DockToolButton : Control
+	public class DockToolButton : Gtk.Button
 	{
 		public ImageView Image {
 			get { return (ImageView)button.Image; }
@@ -265,7 +264,7 @@ namespace Pinta.Docking
 			}
 		}
 
-		public class DockToolButtonImage : Control
+		public class DockToolButtonImage : Gtk.Button
 		{
 			ImageView image;
 			internal DockToolButtonImage (ImageView image)

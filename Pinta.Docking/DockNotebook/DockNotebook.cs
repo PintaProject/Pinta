@@ -32,17 +32,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
-using MonoDevelop.Ide;
-using MonoDevelop.Components.AtkCocoaHelper;
-using MonoDevelop.Core;
-using MonoDevelop.Ide.Gui.Shell;
-using System.Linq;
 
-namespace Pinta.Docking
+namespace Pinta.Docking.DockNotebook
 {
-	delegate void TabsReorderedHandler (DockNotebookTab tab, int oldPlacement, int newPlacement);
+	public delegate void TabsReorderedHandler (DockNotebookTab tab, int oldPlacement, int newPlacement);
 
-	class DockNotebook : Gtk.VBox, IShellNotebook
+	public class DockNotebook : Gtk.VBox
 	{
 		List<DockNotebookTab> pages = new List<DockNotebookTab> ();
 		List<DockNotebookTab> pagesHistory = new List<DockNotebookTab> ();

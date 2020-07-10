@@ -31,11 +31,9 @@
 using Gtk; 
 
 using System;
-using MonoDevelop.Ide.Gui;
+using System.Reflection;
 using System.Linq;
-using MonoDevelop.Components.AtkCocoaHelper;
-using MonoDevelop.Core;
-using MonoDevelop.Ide;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
@@ -115,7 +113,7 @@ namespace Pinta.Docking
 			UpdateAccessibilityTabs ();
 		}
 
-		public void SetTabLabel (Gtk.Widget page, Xwt.Drawing.Image icon, string label)
+		public void SetTabLabel (Gtk.Widget page, Gdk.Pixbuf icon, string label)
 		{
 			foreach (DockItemTitleTab tab in box.Children) {
 				if (tab.Page == page) {
@@ -318,7 +316,7 @@ namespace Pinta.Docking
 		internal class TabStripBox: HBox
 		{
 			public TabStrip TabStrip;
-			static Xwt.Drawing.Image tabbarBackImage = Xwt.Drawing.Image.FromResource ("tabbar-back.9.png");
+			static Gdk.Pixbuf tabbarBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-back.9.png");
 
 			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 			{

@@ -28,12 +28,11 @@ using System;
 using Gtk;
 using Xwt.Motion;
 
-using MonoDevelop.Components;
-using MonoDevelop.Components.AtkCocoaHelper;
+using Pinta.Docking.AtkCocoaHelper;
 
-namespace Pinta.Docking
+namespace Pinta.Docking.DockNotebook
 {
-	class DockNotebookTab: IAnimatable, IDisposable
+	public class DockNotebookTab: IAnimatable, IDisposable
 	{
 		public System.Action<DockNotebookTab, bool> OnChangingPinned;
 		public System.Action<DockNotebookTab, bool> OnChangedPinned;
@@ -47,7 +46,7 @@ namespace Pinta.Docking
 		string text;
 		string markup;
 		string tooltip;
-		Xwt.Drawing.Image icon;
+		Gdk.Pixbuf icon;
 		Widget content;
 
 		internal Cairo.Rectangle PinButtonActiveArea;
@@ -215,7 +214,7 @@ namespace Pinta.Docking
 			}
 		}
 
-		public Xwt.Drawing.Image Icon {
+		public Gdk.Pixbuf Icon {
 			get {
 				return icon;
 			}

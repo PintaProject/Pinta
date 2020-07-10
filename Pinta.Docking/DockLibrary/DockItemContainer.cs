@@ -30,9 +30,7 @@
 
 using System;
 using Gtk;
-
-using MonoDevelop.Components;
-using MonoDevelop.Components.AtkCocoaHelper;
+using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {

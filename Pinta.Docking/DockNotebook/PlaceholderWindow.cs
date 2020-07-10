@@ -26,15 +26,11 @@
 
 using Gdk;
 using Gtk;
-using MonoDevelop.Components.Docking;
-using MonoDevelop.Ide;
 using System.Collections.Generic;
-using MonoDevelop.Ide.Gui;
 using System;
 using System.Linq;
-using MonoDevelop.Ide.Gui.Shell;
 
-namespace Pinta.Docking
+namespace Pinta.Docking.DockNotebook
 {
 
 	class PlaceholderWindow: Gtk.Window
@@ -409,7 +405,7 @@ namespace Pinta.Docking
 			Child.ShowAll ();
 		}
 
-		static Xwt.Drawing.Image RenderWidget (Widget w)
+		static Gdk.Pixbuf RenderWidget (Widget w)
 		{
 			Gdk.Window win = w.GdkWindow;
 			if (win == null || !win.IsViewable) {

@@ -40,11 +40,11 @@ namespace Pinta.Docking
 	{
 		// This class should be subclassed from Gtk.Misc, but there is no reasonable way to do that due to there being no bindings to gtk_widget_set_has_window
 
-		Xwt.Drawing.Image primary, secondary;
+		Pixbuf primary, secondary;
 
 		double secondaryOpacity;
 
-		public CrossfadeIcon (Xwt.Drawing.Image primary, Xwt.Drawing.Image secondary)
+		public CrossfadeIcon (Pixbuf primary, Pixbuf secondary)
 		{
 			if (primary == null)
 				throw new ArgumentNullException ("primary");
@@ -103,7 +103,7 @@ namespace Pinta.Docking
 			return false;
 		}
 
-		void RenderIcon (Cairo.Context context, Xwt.Drawing.Image surface, double opacity)
+		void RenderIcon (Cairo.Context context, Pixbuf surface, double opacity)
 		{
 			context.DrawImage (this, surface.WithAlpha (opacity),
 			                          Allocation.X + (Allocation.Width - surface.Width) / 2,

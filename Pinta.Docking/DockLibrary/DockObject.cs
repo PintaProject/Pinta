@@ -160,7 +160,7 @@ namespace Pinta.Docking
 			}
 		}
 		
-		public MonoDevelop.Components.Docking.DockFrame Frame {
+		public Pinta.Docking.DockFrame Frame {
 			get {
 				return frame;
 			}
