@@ -144,7 +144,10 @@ namespace Pinta.Docking
 			sepBox.ButtonPressEvent += OnSizeButtonPress;
 			sepBox.ButtonReleaseEvent += OnSizeButtonRelease;
 			sepBox.MotionNotifyEvent += OnSizeMotion;
+			// TODO-GTK3
+#if false
 			sepBox.ExposeEvent += OnGripExpose;
+#endif
 			sepBox.EnterNotifyEvent += delegate { insideGrip = true; sepBox.QueueDraw (); };
 			sepBox.LeaveNotifyEvent += delegate { insideGrip = false; sepBox.QueueDraw (); };
 		}
@@ -355,7 +358,9 @@ namespace Pinta.Docking
 				frame.QueueResize ();
 			}
 		}
-		
+
+		// TODO-GTK3
+#if false
 		void OnGripExpose (object sender, Gtk.ExposeEventArgs args)
 		{
 			var w = (EventBox) sender;
@@ -366,6 +371,7 @@ namespace Pinta.Docking
 				ctx.Paint ();
 			}
 		}
+#endif
 	}
 	
 	class ScrollableContainer: EventBox
@@ -390,7 +396,9 @@ namespace Pinta.Docking
 			this.targetSize = targetSize;
 			QueueResize ();
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition req)
 		{
 			base.OnSizeRequested (ref req);
@@ -401,6 +409,7 @@ namespace Pinta.Docking
 			else
 				req = Child.SizeRequest ();
 		}
+#endif
 
 		protected override void OnSizeAllocated (Rectangle alloc)
 		{

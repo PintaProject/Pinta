@@ -217,6 +217,8 @@ namespace Pinta.Docking
 			base.OnSizeAllocated (allocation);
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
@@ -227,6 +229,7 @@ namespace Pinta.Docking
 
 			requisition.Width = minWidth;
 		}
+#endif
 		
 		void UpdateEllipsize (Gdk.Rectangle allocation)
 		{
@@ -318,6 +321,8 @@ namespace Pinta.Docking
 			public TabStrip TabStrip;
 			static Gdk.Pixbuf tabbarBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-back.9.png");
 
+			// TODO-GTK3
+#if false
 			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 			{
 				if (TabStrip.VisualStyle.TabStyle == DockTabStyle.Normal) {
@@ -327,6 +332,7 @@ namespace Pinta.Docking
 				}	
 				return base.OnExposeEvent (evnt);
 			}
+#endif
 		}
 		
 	}

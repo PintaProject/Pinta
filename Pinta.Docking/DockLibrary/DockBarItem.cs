@@ -82,6 +82,8 @@ namespace Pinta.Docking
 			base.OnDestroyed ();
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
@@ -102,6 +104,7 @@ namespace Pinta.Docking
 
 			return false;
 		}
+#endif
 
 		void RenderIcon (Cairo.Context context, Pixbuf surface, double opacity)
 		{
@@ -525,6 +528,8 @@ namespace Pinta.Docking
 			return true;
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
@@ -563,6 +568,7 @@ namespace Pinta.Docking
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 
 		protected override bool OnFocusInEvent (Gdk.EventFocus evnt)
 		{

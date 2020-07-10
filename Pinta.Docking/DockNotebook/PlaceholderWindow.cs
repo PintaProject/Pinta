@@ -244,6 +244,8 @@ namespace Pinta.Docking.DockNotebook
 			base.OnRealized ();
 			GdkWindow.Opacity = 0.4;
 		}
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			int w, h;
@@ -256,6 +258,7 @@ namespace Pinta.Docking.DockNotebook
 			}
 			return true;
 		}
+#endif
 
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{

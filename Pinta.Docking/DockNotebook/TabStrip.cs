@@ -354,12 +354,15 @@ namespace Pinta.Docking.DockNotebook
 			Update ();
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
 			requisition.Height = TotalHeight;
 			requisition.Width = 0;
 		}
+#endif
 
 		internal void InitSize ()
 		{
@@ -1143,6 +1146,8 @@ namespace Pinta.Docking.DockNotebook
 			}
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			using (var context = CairoHelper.Create (evnt.Window)) {
@@ -1150,6 +1155,7 @@ namespace Pinta.Docking.DockNotebook
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 
 		void DrawTab (Context ctx, DockNotebookTab tab, Gdk.Rectangle allocation, Gdk.Rectangle tabBounds, bool highlight, bool active, bool dragging, Pango.Layout la, bool focused)
 		{

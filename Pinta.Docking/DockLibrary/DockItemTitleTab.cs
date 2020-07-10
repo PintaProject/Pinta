@@ -687,7 +687,9 @@ namespace Pinta.Docking
 			base.OnRealized ();
 			UpdateVisualStyle ();
 		}
-		
+
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Gtk.Requisition req)
 		{
 			if (Child != null) {
@@ -699,6 +701,7 @@ namespace Pinta.Docking
 					req.Height += (int)(TabPadding.Top + TabPadding.Bottom);
 			}
 		}
+#endif
 					
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
@@ -724,6 +727,8 @@ namespace Pinta.Docking
 			}
 		}
 
+		// TODO-GTK#
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (VisualStyle.TabStyle == DockTabStyle.Normal)
@@ -738,6 +743,7 @@ namespace Pinta.Docking
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 
 		void DrawAsBrowser (Gdk.EventExpose evnt)
 		{

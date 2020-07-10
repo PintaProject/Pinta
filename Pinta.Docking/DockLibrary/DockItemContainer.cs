@@ -165,6 +165,8 @@ namespace Pinta.Docking
 			}
 		}
 
+		// TODO-GTK3
+#if false
 		void OnTreeRealized (object sender, EventArgs e)
 		{
 			var w = (Gtk.TreeView)sender;
@@ -187,6 +189,7 @@ namespace Pinta.Docking
 			}
 			return base.OnExposeEvent (evnt);
 		}
+#endif
 	}
 
 	class CustomFrame: Bin
@@ -262,6 +265,8 @@ namespace Pinta.Docking
 			child = null;
 		}
 
+		// TODO-GTK3
+#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			if (child != null) {
@@ -273,6 +278,7 @@ namespace Pinta.Docking
 				requisition.Height = 0;
 			}
 		}
+#endif
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
@@ -289,6 +295,8 @@ namespace Pinta.Docking
 				child.SizeAllocate (allocation);
 		}
 
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			Gdk.Rectangle rect = Allocation;
@@ -357,5 +365,6 @@ namespace Pinta.Docking
 				return false;
 			}
 		}
+#endif
 	}
 }
