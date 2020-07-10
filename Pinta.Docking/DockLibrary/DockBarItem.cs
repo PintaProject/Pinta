@@ -1,4 +1,4 @@
-//
+﻿//
 // DockBarItem.cs
 //
 // Author:
@@ -31,9 +31,8 @@
 
 using System;
 using Gtk;
-using MonoDevelop.Components;
 using Xwt.Motion;
-using Animations = Xwt.Motion.AnimationExtensions;
+using Gdk;
 
 namespace Pinta.Docking
 {	
@@ -41,19 +40,19 @@ namespace Pinta.Docking
 	{
 		// This class should be subclassed from Gtk.Misc, but there is no reasonable way to do that due to there being no bindings to gtk_widget_set_has_window
 
-        Gdk.Pixbuf primary, secondary;
+		Xwt.Drawing.Image primary, secondary;
 
 		double secondaryOpacity;
 
-        public CrossfadeIcon (Gdk.Pixbuf primary, Gdk.Pixbuf secondary)
+		public CrossfadeIcon (Xwt.Drawing.Image primary, Xwt.Drawing.Image secondary)
 		{
 			if (primary == null)
 				throw new ArgumentNullException ("primary");
 			if (secondary == null)
 				throw new ArgumentNullException ("secondary");
 
-			this.primary = (Gdk.Pixbuf)primary.Clone ();
-            this.secondary = (Gdk.Pixbuf)secondary.Clone ();
+			this.primary = primary;
+			this.secondary = secondary;
 		}
 
 		void IAnimatable.BatchBegin () { }
@@ -77,8 +76,12 @@ namespace Pinta.Docking
 			              toSecondary ? 1.0f : 0.0f);
 		}
 
-		// TODO-GTK3
-#if false
+		protected override void OnDestroyed ()
+		{
+			this.AbortAnimation ("CrossfadeIconSwap");
+			base.OnDestroyed ();
+		}
+
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			base.OnSizeRequested (ref requisition);
@@ -99,9 +102,8 @@ namespace Pinta.Docking
 
 			return false;
 		}
-#endif
 
-        void RenderIcon (Cairo.Context context, Gdk.Pixbuf surface, double opacity)
+		void RenderIcon (Cairo.Context context, Xwt.Drawing.Image surface, double opacity)
 		{
 			context.DrawImage (this, surface.WithAlpha (opacity),
 			                          Allocation.X + (Allocation.Width - surface.Width) / 2,
@@ -128,10 +130,14 @@ namespace Pinta.Docking
 
 		public DockBarItem (DockBar bar, DockItem it, int size)
 		{
+			var actionHandler = new ActionDelegate (this);
+			actionHandler.PerformPress += OnPerformPress;
+
 			Events = Events | Gdk.EventMask.EnterNotifyMask | Gdk.EventMask.LeaveNotifyMask;
 			this.size = size;
 			this.bar = bar;
 			this.it = it;
+			CanFocus = true;
 			VisibleWindow = false;
 			UpdateTab ();
 			lastFrameSize = bar.Frame.Allocation.Size;
@@ -150,6 +156,11 @@ namespace Pinta.Docking
 				else
 					crossfade.ShowPrimary ();
 			};
+
+			Styles.Changed += UpdateStyle;
+
+			Accessible.Name = "DockbarItem";
+			Accessible.Role = Atk.Role.PushButton;
 		}
 
 		void IAnimatable.BatchBegin () { }
@@ -178,8 +189,10 @@ namespace Pinta.Docking
 		
 		protected override void OnDestroyed ()
 		{
+			this.AbortAnimation ("Hover");
 			base.OnDestroyed ();
 			bar.Frame.SizeAllocated -= HandleBarFrameSizeAllocated;
+			Ide.Gui.Styles.Changed -= UpdateStyle;
 		}
 		
 		
@@ -206,52 +219,72 @@ namespace Pinta.Docking
 			}
 			
 			mainBox = new Alignment (0,0,1,1);
+			mainBox.Accessible.SetShouldIgnore (true);
 			if (bar.Orientation == Gtk.Orientation.Horizontal) {
 				box = new HBox ();
 				if (bar.AlignToEnd)
-					mainBox.SetPadding (3, 3, 11, 9);
+					mainBox.SetPadding (5, 5, 11, 9);
 				else
-					mainBox.SetPadding (3, 3, 9, 11);
+					mainBox.SetPadding (5, 5, 9, 11);
 			}
 			else {
 				box = new VBox ();
 				if (bar.AlignToEnd)
-					mainBox.SetPadding (11, 9, 3, 3);
+					mainBox.SetPadding (11, 9, 5, 5);
 				else
-					mainBox.SetPadding (9, 11, 3, 3);
+					mainBox.SetPadding (9, 11, 5, 5);
 			}
-			
-			Gtk.Widget customLabel = null;
-			if (it.DockLabelProvider != null)
-				customLabel = it.DockLabelProvider.CreateLabel (bar.Orientation);
-			
-			if (customLabel != null) {
-				customLabel.ShowAll ();
-				box.PackStart (customLabel, true, true, 0);
+			box.Accessible.SetShouldIgnore (true);
+
+			if (it.Icon != null) {
+				var desat = it.Icon.WithAlpha (0.5);
+				crossfade = new CrossfadeIcon (desat, it.Icon);
+				crossfade.Accessible.SetShouldIgnore (true);
+				box.PackStart (crossfade, false, false, 0);
+				desat.Dispose ();
 			}
-			else {
-				if (it.Icon != null) {
-					var desat = it.Icon.WithAlpha (0.5);
-					crossfade = new CrossfadeIcon (desat, it.Icon);
-					box.PackStart (crossfade, false, false, 0);
-					desat.Dispose ();
+				
+			if (!string.IsNullOrEmpty (it.Label)) {
+				label = new Label (it.Label);
+				label.Accessible.SetShouldIgnore (true);
+				label.UseMarkup = true;
+				label.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11));
+
+				if (bar.Orientation == Orientation.Vertical)
+					label.Angle = 270;
+
+				// fine-tune label alignment issues
+				if (Platform.IsMac) {
+					if (bar.Orientation == Orientation.Horizontal)
+						label.SetAlignment (0, 0.5f);
+					else
+						label.SetAlignment (0.6f, 0);
+				} else {
+					if (bar.Orientation == Orientation.Vertical)
+						label.SetAlignment (1, 0);
 				}
-					
-				if (!string.IsNullOrEmpty (it.Label)) {
-					label = new Gtk.Label (it.Label);
-					label.UseMarkup = true;
-					if (bar.Orientation == Gtk.Orientation.Vertical)
-						label.Angle = 270;
-					box.PackStart (label, true, true, 0);
-				} else
-					label = null;
-			}
+				// TODO: VV: Test Linux
+
+				box.PackStart (label, true, true, 0);
+
+				Accessible.SetLabel (it.Label);
+				Accessible.SetTitle (it.Label);
+				Accessible.Description = GettextCatalog.GetString ("Show the {0} pad", it.Label);
+			} else
+				label = null;
 
 			box.Spacing = 2;
 			mainBox.Add (box);
 			mainBox.ShowAll ();
 			Add (mainBox);
+			UpdateStyle (this, null); 
 			QueueDraw ();
+		}
+
+		void UpdateStyle (object sender, EventArgs e)
+		{
+			if (label != null)
+				label.ModifyFg (StateType.Normal, Styles.DockBarLabelColor.ToGdkColor ());
 		}
 		
 		public Pinta.Docking.DockItem DockItem {
@@ -296,6 +329,9 @@ namespace Pinta.Docking
 				if (hiddenFrame != null)
 					bar.Frame.AutoHide (it, hiddenFrame, false);
 				autoShowFrame = bar.Frame.AutoShow (it, bar, size);
+				if (!string.IsNullOrEmpty (it.Label)) {
+					autoShowFrame.Title = it.Label;
+				}
 				autoShowFrame.EnterNotifyEvent += OnFrameEnter;
 				autoShowFrame.LeaveNotifyEvent += OnFrameLeave;
 				autoShowFrame.KeyPressEvent += OnFrameKeyPress;
@@ -327,6 +363,12 @@ namespace Pinta.Docking
 			if (autoShowTimeout == uint.MaxValue) {
 				autoShowTimeout = GLib.Timeout.Add (bar.Frame.AutoShowDelay, delegate {
 					autoShowTimeout = uint.MaxValue;
+
+					// Check is mouse over - it may be that the LeaveEvent wasn't fired becaues of a gtk bug. So we double check as a work around.
+					GetPointer (out int x, out int y);
+					bool isMouseOver = x >= 0 && y >= 0 && x <= Allocation.Width && y <= Allocation.Height;
+					if (!isMouseOver)
+						return false;
 					AutoShow ();
 					return false;
 				});
@@ -347,16 +389,31 @@ namespace Pinta.Docking
 			if (autoHideTimeout == uint.MaxValue) {
 				autoHideTimeout = GLib.Timeout.Add (force ? 0 : bar.Frame.AutoHideDelay, delegate {
 					// Don't hide if the context menu for the item is being shown.
-					if (it.ShowingContextMemu)
+					if (it.ShowingContextMenu)
 						return true;
-					// Don't hide the item if it has the focus. Try again later.
-					if (it.Widget.FocusChild != null && !force && autoShowFrame != null && ((Gtk.Window)autoShowFrame.Toplevel).HasToplevelFocus)
-						return true;
-					// Don't hide the item if the mouse pointer is still inside the window. Try again later.
-					int px, py;
-					it.Widget.GetPointer (out px, out py);
-					if (it.Widget.Visible && it.Widget.IsRealized && it.Widget.Allocation.Contains (px + it.Widget.Allocation.X, py + it.Widget.Allocation.Y) && !force)
-						return true;
+					if (!force) {
+						// Don't hide the item if it has the focus. Try again later.
+#if MAC
+						bool hasTopLevel = it.Widget.FocusChild != null && autoShowFrame != null &&
+						autoShowFrame.Toplevel is IdeWindow ideWindow && (
+						ideWindow.HasToplevelFocus || Mac.GtkMacInterop.GetGtkWindow (AppKit.NSApplication.SharedApplication.KeyWindow) == ideWindow);
+
+						if (hasTopLevel)
+							return true;
+#else
+						if (it.Widget.FocusChild != null && autoShowFrame != null && ((Gtk.Window)autoShowFrame.Toplevel).HasToplevelFocus)
+							return true;
+#endif
+						// Don't hide the item if the mouse pointer is still inside the window. Try again later.
+						int px, py;
+						it.Widget.GetPointer (out px, out py);
+						if (it.Widget.Visible && it.Widget.IsRealized && it.Widget.Allocation.Contains (px + it.Widget.Allocation.X, py + it.Widget.Allocation.Y))
+							return true;
+						// Don't hide if the mouse pointer is still inside the DockBar item
+						GetPointer (out px, out py);
+						if (Allocation.Contains (px + Allocation.X, py + Allocation.Y))
+							return true;
+					}
 					autoHideTimeout = uint.MaxValue;
 					AutoHide (true);
 					return false;
@@ -382,11 +439,32 @@ namespace Pinta.Docking
 		
 		protected override bool OnEnterNotifyEvent (Gdk.EventCrossing evnt)
 		{
+			ScheduleAutoShowOnHover();
+			return base.OnEnterNotifyEvent (evnt);
+		}
+
+		protected override bool OnMotionNotifyEvent (EventMotion evnt)
+		{
+			ScheduleAutoHide (true);
+			ScheduleAutoShowOnHover ();
+			return base.OnMotionNotifyEvent (evnt);
+		}
+
+		void ScheduleAutoShowOnHover ()
+		{
 			if (bar.HoverActivationEnabled && autoShowFrame == null) {
 				ScheduleAutoShow ();
 				QueueDraw ();
 			}
-			return base.OnEnterNotifyEvent (evnt);
+		}
+
+		void OnPerformPress (object sender, EventArgs args)
+		{
+			if (autoShowFrame == null) {
+				AutoShow ();
+			} else {
+				AutoHide (false);
+			}
 		}
 		
 		protected override bool OnLeaveNotifyEvent (Gdk.EventCrossing evnt)
@@ -422,7 +500,7 @@ namespace Pinta.Docking
 			if (bar.Frame.OverlayWidgetVisible)
 				return false;
 			if (evnt.TriggersContextMenu ()) {
-				it.ShowDockPopupMenu (evnt.Time);
+				it.ShowDockPopupMenu (this, evnt);
 			} else if (evnt.Button == 1) {
 				if (evnt.Type == Gdk.EventType.TwoButtonPress) {
 					// Instead of changing the state of the pad here, do it when the button is released.
@@ -447,12 +525,12 @@ namespace Pinta.Docking
 			return true;
 		}
 
-		// TODO-GTK3
-#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
 				var alloc = Allocation;
+
+				// TODO: VV: Remove preflight gradient features and replace with a flat color
 
 				Cairo.LinearGradient lg;
 
@@ -463,7 +541,7 @@ namespace Pinta.Docking
 				}
 
 				using (lg) {
-					Cairo.Color primaryColor = Styles.DockBarPrelightColor;
+					Cairo.Color primaryColor = Styles.DockBarPrelightColor.ToCairoColor ();
 					primaryColor.A = hoverProgress;
 
 					Cairo.Color transparent = primaryColor;
@@ -479,8 +557,28 @@ namespace Pinta.Docking
 				}
 				context.Fill ();
 			}
+
+			if (HasFocus) {
+				Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "button", Allocation.X + 2, Allocation.Y + 2, Allocation.Width - 4, Allocation.Height - 4);
+			}
 			return base.OnExposeEvent (evnt);
 		}
-#endif
+
+		protected override bool OnFocusInEvent (Gdk.EventFocus evnt)
+		{
+			QueueDraw ();
+			return base.OnFocusInEvent (evnt);
+		}
+
+		protected override bool OnFocusOutEvent (Gdk.EventFocus evnt)
+		{
+			QueueDraw ();
+			return base.OnFocusOutEvent (evnt);
+		}
+
+		protected override void OnActivate ()
+		{
+			AutoShow ();
+		}
 	}
 }

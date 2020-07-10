@@ -25,7 +25,10 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gtk;
+
+using MonoDevelop.Components.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
@@ -34,11 +37,11 @@ namespace Pinta.Docking
 		DockItem parentItem;
 		Gtk.Widget frame;
 		Box box;
-		PositionType position;
+		DockPositionType position;
 		bool empty = true;
 		CustomFrame topFrame;
 		
-		internal DockItemToolbar (DockItem parentItem, PositionType position)
+		internal DockItemToolbar (DockItem parentItem, DockPositionType position)
 		{
 			this.parentItem = parentItem;
 
@@ -65,7 +68,7 @@ namespace Pinta.Docking
 			}*/
 
 			this.position = position;
-			if (position == PositionType.Top || position == PositionType.Bottom)
+			if (position == DockPositionType.Top || position == DockPositionType.Bottom)
 				box = new HBox (false, 3);
 			else
 				box = new VBox (false, 3);
@@ -75,11 +78,46 @@ namespace Pinta.Docking
 			topFrame.Add (box);
 
 //			topFrame.GradientBackround = true;
+
+			box.Accessible.SetShouldIgnore (false);
+			box.Accessible.Role = Atk.Role.ToolBar;
+
+			UpdateAccessibilityLabel ();
+		}
+
+		internal void UpdateAccessibilityLabel ()
+		{
+			string name = "";
+			switch (position) {
+			case DockPositionType.Bottom:
+				name = Core.GettextCatalog.GetString ("Bottom {0} pad toolbar", parentItem.Label);
+				break;
+
+			case DockPositionType.Left:
+				name = Core.GettextCatalog.GetString ("Left {0} pad toolbar", parentItem.Label);
+				break;
+
+			case DockPositionType.Right:
+				name = Core.GettextCatalog.GetString ("Right {0} pad toolbar", parentItem.Label);
+				break;
+
+			case DockPositionType.Top:
+				name = Core.GettextCatalog.GetString ("Top {0} pad toolbar", parentItem.Label);
+				break;
+			}
+
+			box.Accessible.SetCommonAttributes ("padtoolbar", name, "");
 		}
 
 		internal void SetStyle (DockVisualStyle style)
 		{
-			topFrame.BackgroundColor = style.PadBackgroundColor.Value;
+			topFrame.BackgroundColor = style.PadBackgroundColor.Value.ToGdkColor ();
+		}
+
+		internal Atk.Object Accessible {
+			get {
+				return box.Accessible;
+			}
 		}
 
 		public DockItem DockItem {
@@ -90,29 +128,30 @@ namespace Pinta.Docking
 			get { return frame; }
 		}
 		
-		public PositionType Position {
+		public DockPositionType Position {
 			get { return this.position; }
 		}
 		
-		public void Add (Widget widget)
+		public void Add (Control widget)
 		{
 			Add (widget, false);
 		}
 		
-		public void Add (Widget widget, bool fill)
+		public void Add (Control widget, bool fill)
 		{
 			Add (widget, fill, -1);
 		}
 		
-		public void Add (Widget widget, bool fill, int padding)
+		public void Add (Control widget, bool fill, int padding)
 		{
 			Add (widget, fill, padding, -1);
 		}
 		
-		void Add (Widget widget, bool fill, int padding, int index)
+		void Add (Control control, bool fill, int padding, int index)
 		{
 			int defaultPadding = 3;
-			
+
+			Widget widget = control;
 			if (widget is Button) {
 				((Button)widget).Relief = ReliefStyle.None;
 				((Button)widget).FocusOnClick = false;
@@ -136,20 +175,17 @@ namespace Pinta.Docking
 				frame.Show ();
 			}
 			if (index != -1) {
-				// TODO-GTK3
-#if false
 				Box.BoxChild bc = (Box.BoxChild) box [widget];
 				bc.Position = index;
-#endif
 			}
 		}
 		
-		public void Insert (Widget w, int index)
+		public void Insert (Control w, int index)
 		{
 			Add (w, false, 0, index);
 		}
 		
-		public void Remove (Widget widget)
+		public void Remove (Control widget)
 		{
 			box.Remove (widget);
 		}
@@ -173,24 +209,84 @@ namespace Pinta.Docking
 			frame.ShowAll ();
 		}
 		
-		public Widget[] Children {
-			get { return box.Children; }
+		public Control[] Children {
+			get { return box.Children.Select (child => (Control)child).ToArray (); }
 		}
 	}
 	
-	public class DockToolButton: Gtk.Button
+	public class DockToolButton : Control
 	{
-		public DockToolButton (string stockId)
+		public ImageView Image {
+			get { return (ImageView)button.Image; }
+			set { button.Image = value; }
+		}
+
+		public string TooltipText {
+			get { return button.TooltipText; }
+			set { button.TooltipText = value; }
+		}
+
+		public string Label {
+			get { return button.Label; }
+			set { button.Label = value; }
+		}
+
+		public bool Sensitive {
+			get { return button.Sensitive; }
+			set { button.Sensitive = value; }
+		}
+
+		Gtk.Button button;
+
+		public DockToolButton (string stockId) : this (stockId, null)
 		{
-			Image = new Gtk.Image (stockId, IconSize.Menu);
-			Image.Show ();
 		}
 		
 		public DockToolButton (string stockId, string label)
 		{
+			button = new Button ();
 			Label = label;
-			Image = new Gtk.Image (stockId, IconSize.Menu);
+
+			Image = new ImageView (stockId, IconSize.Menu);
 			Image.Show ();
+		}
+
+		protected override object CreateNativeWidget<T> ()
+		{
+			return button;
+		}
+
+		public event EventHandler Clicked {
+			add {
+				button.Clicked += value;
+			}
+			remove {
+				button.Clicked -= value;
+			}
+		}
+
+		public class DockToolButtonImage : Control
+		{
+			ImageView image;
+			internal DockToolButtonImage (ImageView image)
+			{
+				this.image = image;
+			}
+
+			protected override object CreateNativeWidget<T> ()
+			{
+				return image;
+			}
+
+			public static implicit operator Gtk.Widget (DockToolButtonImage d)
+			{
+				return d.GetNativeWidget<Gtk.Widget> ();
+			}
+
+			public static implicit operator DockToolButtonImage (ImageView d)
+			{
+				return new DockToolButtonImage (d);
+			}
 		}
 	}
 }

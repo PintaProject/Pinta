@@ -1,10 +1,10 @@
-//
-// TabEventArgs.cs
+﻿//
+// DockPositionType.cs
 //
 // Author:
-//       Mike Krüger <mkrueger@xamarin.com>
+//       Lluis Sanchez Gual <lluis@xamarin.com>
 //
-// Copyright (c) 2014 Xamarin Inc. (http://xamarin.com)
+// Copyright (c) 2015 Xamarin, Inc (http://www.xamarin.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,12 @@ using System;
 
 namespace Pinta.Docking
 {
-	class TabEventArgs : EventArgs
+	public enum DockPositionType
 	{
-		public DockNotebookTab Tab { get; set; }
+		Left,
+		Right,
+		Top,
+		Bottom
 	}
 }
+

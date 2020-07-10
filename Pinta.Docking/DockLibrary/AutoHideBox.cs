@@ -30,7 +30,6 @@
 
 //#define ANIMATE_DOCKING
 
-using System;
 using Gtk;
 using Gdk;
 
@@ -52,8 +51,6 @@ namespace Pinta.Docking
 		DockFrame frame;
 		bool animating;
 		int targetSize;
-		int targetPos;
-		ScrollableContainer scrollable;
 		Gtk.PositionType position;
 		bool disposed;
 		bool insideGrip;
@@ -71,6 +68,8 @@ namespace Pinta.Docking
 			
 			Box fr;
 			CustomFrame cframe = new CustomFrame ();
+			cframe.Accessible.SetShouldIgnore (true);
+
 			switch (pos) {
 			case PositionType.Left: cframe.SetMargins (0, 0, 1, 1); break;
 			case PositionType.Right: cframe.SetMargins (0, 0, 1, 1); break;
@@ -89,6 +88,11 @@ namespace Pinta.Docking
 			}
 
 			EventBox sepBox = new EventBox ();
+
+			// FIXME How to actually resize this?
+			sepBox.Accessible.SetRole (AtkCocoa.Roles.AXSplitter, GettextCatalog.GetString ("Pad resize handle"));
+			sepBox.Accessible.SetLabel (GettextCatalog.GetString ("Pad resize handle"));
+
 			cframe.Add (sepBox);
 			
 			if (horiz) {
@@ -100,7 +104,8 @@ namespace Pinta.Docking
 				sepBox.Realized += delegate { sepBox.GdkWindow.Cursor = resizeCursorH; };
 				sepBox.HeightRequest = gripSize;
 			}
-			
+			fr.Accessible.SetShouldIgnore (true);
+
 			sepBox.Events = EventMask.AllEventsMask;
 			
 			if (pos == PositionType.Left || pos == PositionType.Top)
@@ -118,9 +123,13 @@ namespace Pinta.Docking
 			scrollable.Show ();
 #endif
 			VBox itemBox = new VBox ();
+			itemBox.Accessible.SetShouldIgnore (true);
+
 			itemBox.Show ();
 			item.TitleTab.Active = true;
 			itemBox.PackStart (item.TitleTab, false, false, 0);
+
+			item.Widget.Accessible.SetShouldIgnore (true);
 			itemBox.PackStart (item.Widget, true, true, 0);
 
 			item.Widget.Show ();
@@ -134,10 +143,7 @@ namespace Pinta.Docking
 			sepBox.ButtonPressEvent += OnSizeButtonPress;
 			sepBox.ButtonReleaseEvent += OnSizeButtonRelease;
 			sepBox.MotionNotifyEvent += OnSizeMotion;
-			// TODO-GTK3
-#if false
 			sepBox.ExposeEvent += OnGripExpose;
-#endif
 			sepBox.EnterNotifyEvent += delegate { insideGrip = true; sepBox.QueueDraw (); };
 			sepBox.LeaveNotifyEvent += delegate { insideGrip = false; sepBox.QueueDraw (); };
 		}
@@ -202,7 +208,7 @@ namespace Pinta.Docking
 				break;
 			case PositionType.Right:
 				Width += 1 + (targetSize - Width) / 3;
-				X = targetPos - Width;
+				X = - Width;
 				if (Width < targetSize)
 					return true;
 				break;
@@ -213,13 +219,12 @@ namespace Pinta.Docking
 				break;
 			case PositionType.Bottom:
 				Height += 1 + (targetSize - Height) / 3;
-				Y = targetPos - Height;
+				Y = - Height;
 				if (Height < targetSize)
 					return true;
 				break;
 			}
-			
-			scrollable.ScrollMode = false;
+
 			if (horiz)
 				Width = targetSize;
 			else
@@ -246,7 +251,7 @@ namespace Pinta.Docking
 				int ns = Width - 1 - Width / 3;
 				if (ns > 0) {
 					Width = ns;
-					X = targetPos - ns;
+					X = - ns;
 					return true;
 				}
 				break;
@@ -263,7 +268,7 @@ namespace Pinta.Docking
 				int ns = Height - 1 - Height / 3;
 				if (ns > 0) {
 					Height = ns;
-					Y = targetPos - ns;
+					Y = - ns;
 					return true;
 				}
 				break;
@@ -349,9 +354,7 @@ namespace Pinta.Docking
 				frame.QueueResize ();
 			}
 		}
-
-		// TODO-GTK3
-#if false
+		
 		void OnGripExpose (object sender, Gtk.ExposeEventArgs args)
 		{
 			var w = (EventBox) sender;
@@ -362,7 +365,6 @@ namespace Pinta.Docking
 				ctx.Paint ();
 			}
 		}
-#endif
 	}
 	
 	class ScrollableContainer: EventBox
@@ -387,9 +389,7 @@ namespace Pinta.Docking
 			this.targetSize = targetSize;
 			QueueResize ();
 		}
-
-		// TODO-GTK3
-#if false
+		
 		protected override void OnSizeRequested (ref Requisition req)
 		{
 			base.OnSizeRequested (ref req);
@@ -400,7 +400,6 @@ namespace Pinta.Docking
 			else
 				req = Child.SizeRequest ();
 		}
-#endif
 
 		protected override void OnSizeAllocated (Rectangle alloc)
 		{

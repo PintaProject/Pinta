@@ -26,14 +26,15 @@
 
 using Gdk;
 using Gtk;
-using Pinta.Docking;
+using MonoDevelop.Components.Docking;
+using MonoDevelop.Ide;
 using System.Collections.Generic;
+using MonoDevelop.Ide.Gui;
 using System;
 using System.Linq;
-using Pinta.Docking.Gui;
-using MonoDevelop.Components;
+using MonoDevelop.Ide.Gui.Shell;
 
-namespace Pinta.Docking.DockNotebook
+namespace Pinta.Docking
 {
 
 	class PlaceholderWindow: Gtk.Window
@@ -47,16 +48,17 @@ namespace Pinta.Docking.DockNotebook
 
 		static PlaceholderWindow ()
 		{
-            //IdeApp.Workbench.ActiveDocumentChanged += delegate {
-            //    var doc = IdeApp.Workbench.ActiveDocument;
-            //    if (doc == null)
-            //        return;
-            //    var rootWindow = doc.Window.ActiveViewContent.Control.Toplevel as DockWindow;
-            //    if (rootWindow == null)
-            //        return;
+			IdeApp.Workbench.ActiveDocumentChanged += delegate {
+				var doc = IdeApp.Workbench.ActiveDocument;
+				if (doc == null)
+					return;
+				var workspaceWindow = doc.Window as SdiWorkspaceWindow;
+				var rootWindow = workspaceWindow?.Toplevel as DockWindow;
+				if (rootWindow == null)
+					return;
 				
-            //    rootWindow.Title = DefaultWorkbench.GetTitle (doc.Window);
-            //};
+				rootWindow.Title = DefaultWorkbench.GetTitle (workspaceWindow);
+			};
 		}
 
 		DockNotebookTab frame;
@@ -68,7 +70,7 @@ namespace Pinta.Docking.DockNotebook
 			Decorated = false;
 			TypeHint = WindowTypeHint.Utility;
 			titleWindow = new DocumentTitleWindow (this, tab);
-            //IdeApp.Workbench.LockActiveWindowChangeEvent ();
+			IdeApp.Workbench.LockActiveWindowChangeEvent ();
 
 			titleWindow.FocusInEvent += delegate {
 				if (timeout != 0) {
@@ -79,20 +81,21 @@ namespace Pinta.Docking.DockNotebook
 
 			titleWindow.FocusOutEvent += delegate {
 				timeout = GLib.Timeout.Add (100, () => {
+					timeout = 0;
 					titleWindow.Close ();
 					return false;
 				});
 			};
 
-            //var windowStack = IdeApp.CommandService.TopLevelWindowStack.ToArray ();
-            allNotebooks = DockNotebook.AllNotebooks.ToList ();
-            //allNotebooks.Sort (delegate(DockNotebook x, DockNotebook y) {
-            //    var ix = Array.IndexOf (windowStack, (Gtk.Window) x.Toplevel);
-            //    var iy = Array.IndexOf (windowStack, (Gtk.Window) y.Toplevel);
-            //    if (ix == -1) ix = int.MaxValue;
-            //    if (iy == -1) iy = int.MaxValue;
-            //    return ix.CompareTo (iy);
-            //});
+			var windowStack = IdeApp.CommandService.TopLevelWindowStack.ToArray ();
+			allNotebooks = DockNotebook.AllNotebooks.ToList ();
+			allNotebooks.Sort (delegate(DockNotebook x, DockNotebook y) {
+				var ix = Array.IndexOf (windowStack, (Gtk.Window) x.Toplevel);
+				var iy = Array.IndexOf (windowStack, (Gtk.Window) y.Toplevel);
+				if (ix == -1) ix = int.MaxValue;
+				if (iy == -1) iy = int.MaxValue;
+				return ix.CompareTo (iy);
+			});
 		}
 
 		DockNotebook hoverNotebook;
@@ -105,10 +108,10 @@ namespace Pinta.Docking.DockNotebook
 		protected override void OnDestroyed ()
 		{
 			base.OnDestroyed ();
-			Gtk.Application.Invoke (delegate {
+			Gtk.Application.Invoke ((o, args) => {
 				titleWindow.Destroy ();
 			});
-            //IdeApp.Workbench.UnlockActiveWindowChangeEvent ();
+			IdeApp.Workbench.UnlockActiveWindowChangeEvent ();
 		}
 
 		int curX, curY;
@@ -232,6 +235,7 @@ namespace Pinta.Docking.DockNotebook
 		protected override bool OnFocusOutEvent (EventFocus evt)
 		{
 			timeout = GLib.Timeout.Add (100, () => {
+				timeout = 0;
 				titleWindow.Close ();
 				return false;
 			});
@@ -244,9 +248,6 @@ namespace Pinta.Docking.DockNotebook
 			base.OnRealized ();
 			GdkWindow.Opacity = 0.4;
 		}
-
-		// TODO-GTK3
-#if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			int w, h;
@@ -259,7 +260,6 @@ namespace Pinta.Docking.DockNotebook
 			}
 			return true;
 		}
-#endif
 
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{
@@ -320,8 +320,7 @@ namespace Pinta.Docking.DockNotebook
 
 			var workspaceWindow = (SdiWorkspaceWindow)tab.Content;
 			newTab.Content = workspaceWindow;
-			// JONTODO
-            //newWindow.Title = DefaultWorkbench.GetTitle (workspaceWindow);
+			newWindow.Title = DefaultWorkbench.GetTitle (workspaceWindow);
 
 			workspaceWindow.SetDockNotebook (newNotebook, newTab);
 			newWindow.Move (ox - w / 2, oy - h / 2);
@@ -346,7 +345,7 @@ namespace Pinta.Docking.DockNotebook
 		public void PlaceWindow (DockNotebook notebook)
 		{
 			try {
-                //IdeApp.Workbench.LockActiveWindowChangeEvent ();
+				IdeApp.Workbench.LockActiveWindowChangeEvent ();
 				var allocation = Allocation;
 				Destroy ();
 
@@ -358,7 +357,7 @@ namespace Pinta.Docking.DockNotebook
 					((SdiWorkspaceWindow)frame.Content).SelectWindow ();
 				}
 			} finally {
-                //IdeApp.Workbench.UnlockActiveWindowChangeEvent ();
+				IdeApp.Workbench.UnlockActiveWindowChangeEvent ();
 			}
 		}
 	}
@@ -385,8 +384,8 @@ namespace Pinta.Docking.DockNotebook
 
 			titleBox = new HBox (false, 3);
 			if (draggedItem.Icon != null) {
-				var img = new ImageView (draggedItem.Icon);
-				titleBox.PackStart (img, false, false, 0);
+				var img = new Xwt.ImageView (draggedItem.Icon);
+				titleBox.PackStart (img.ToGtkWidget (), false, false, 0);
 			}
 			Gtk.Label la = new Label ();
 			la.Markup = draggedItem.Text;
@@ -394,11 +393,11 @@ namespace Pinta.Docking.DockNotebook
 
 			mainBox.PackStart (titleBox, false, false, 0);
 
-            var wi = RenderWidget (draggedItem.Content);
-            if (wi != null) {
-                wi = wi.WithBoxSize (200);
-                mainBox.PackStart (new ImageView (wi), false, false, 0);
-            }
+			var wi = RenderWidget (draggedItem.Content);
+			if (wi != null) {
+				wi = wi.WithBoxSize (200);
+				mainBox.PackStart (new ImageView (wi), false, false, 0);
+			}
 
 			CustomFrame f = new CustomFrame ();
 			f.SetPadding (2, 2, 2, 2);
@@ -408,6 +407,21 @@ namespace Pinta.Docking.DockNotebook
 			Add (f);
 			mainBox.CanFocus = true;
 			Child.ShowAll ();
+		}
+
+		static Xwt.Drawing.Image RenderWidget (Widget w)
+		{
+			Gdk.Window win = w.GdkWindow;
+			if (win == null || !win.IsViewable) {
+				return null;
+			}
+
+#if MAC
+			//WORKAROUND: Pixbuf.FromDrawable (and by extension XWT's RenderWidget) is broken on Mac
+			return Xwt.Toolkit.NativeEngine.WrapImage (Mac.GtkMacInterop.RenderGtkWidget (w));
+#else
+			return Xwt.Toolkit.CurrentEngine.RenderWidget (Xwt.Toolkit.CurrentEngine.WrapWidget (w));
+#endif
 		}
 
 		public void SetDectorated (bool decorated)
@@ -457,22 +471,9 @@ namespace Pinta.Docking.DockNotebook
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 
-        Gdk.Pixbuf RenderWidget (Widget w)
-        {
-            Gdk.Window win = w.GdkWindow;
-
-			// TODO-GTK3
-#if false
-			if (win != null && win.IsViewable)
-                return Gdk.Pixbuf.FromDrawable (win, Colormap.System, w.Allocation.X, w.Allocation.Y, 0, 0, w.Allocation.Width, w.Allocation.Height);
-            else
-#endif
-                return null;
-        }
-
 		public void Close ()
 		{
-			Application.Invoke (delegate {
+			Application.Invoke ((o, args) => {
 				placeholder.Destroy ();
 			});
 		}

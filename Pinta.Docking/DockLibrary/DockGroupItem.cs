@@ -82,6 +82,7 @@ namespace Pinta.Docking
 			if (ParentGroup.Type != DockGroupType.Tabbed || ParentGroup.VisibleObjects.Count == 1) {
 				var tr = item.TitleTab.SizeRequest ();
 				req.Height += tr.Height;
+				req.Width = Math.Max (req.Width, tr.Width);
 				return req;
 			} else
 				return req;
@@ -260,7 +261,7 @@ namespace Pinta.Docking
 					if (floatRect.Equals (Gdk.Rectangle.Zero)) {
 						int x, y;
 						item.Widget.TranslateCoordinates (item.Widget.Toplevel, 0, 0, out x, out y);
-						Gtk.Window win = Frame.Toplevel as Window;
+						Gtk.Window win = Frame.Toplevel as Gtk.Window;
 						if (win != null) {
 							int wx, wy;
 							win.GetPosition (out wx, out wy);

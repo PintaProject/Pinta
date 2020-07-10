@@ -139,11 +139,10 @@ namespace Pinta.Docking
 			gitem.ParentGroup = this;
 			return gitem;
 		}
-		
+
 		DockGroupItem Split (DockGroupType newType, bool addFirst, DockItem obj, int npos)
 		{
 			DockGroupItem item = new DockGroupItem (Frame, obj);
-			
 			if (npos == -1 || type == DockGroupType.Tabbed) {
 				if (ParentGroup != null && ParentGroup.Type == newType) {
 					// No need to split. Just add the new item as a sibling of this one.
@@ -188,7 +187,7 @@ namespace Pinta.Docking
 			}
 			return item;
 		}
-		
+
 		internal DockGroup FindGroupContaining (string id)
 		{
 			DockGroupItem it = FindDockGroupItem (id);
@@ -217,7 +216,7 @@ namespace Pinta.Docking
 		DockGroup Copy ()
 		{
 			DockGroup grp = new DockGroup (Frame, type);
-			grp.dockObjects = new List<Pinta.Docking.DockObject> (dockObjects);
+			grp.dockObjects = new List<MonoDevelop.Components.Docking.DockObject> (dockObjects);
 			foreach (DockObject obj in grp.dockObjects)
 				obj.ParentGroup = grp;
 			
@@ -453,7 +452,8 @@ namespace Pinta.Docking
 			for (int n=0; n<VisibleObjects.Count; n++) {
 				DockObject ob = VisibleObjects [n];
 
-				int ins = (int) Math.Truncate (ob.Size);
+				double obSize = double.IsNaN (ob.Size) ? 10.0 : ob.Size;
+				int ins = (int) Math.Truncate (obSize);
 				
 				if (n == VisibleObjects.Count - 1)
 					ins = realSize - ts;
@@ -812,6 +812,11 @@ namespace Pinta.Docking
 					if (dh > height)
 						height = dh;
 				}
+				if (boundTabStrip != null) {
+					var tr = boundTabStrip.SizeRequest ();
+					if (width < tr.Width)
+						width = tr.Width;
+				}
 			}
 			else if (type == DockGroupType.Vertical) {
 				height = VisibleObjects.Count > 1 ? (VisibleObjects.Count - 1) * Frame.TotalHandleSize : 0;
@@ -853,12 +858,9 @@ namespace Pinta.Docking
 		{
 			DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, oper, true, areasList);
 		}
-
 		
 		void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
 		{
-			// TODO-GTK3
-#if false
 			if (type == DockGroupType.Tabbed || VisibleObjects.Count == 0)
 				return;
 			
@@ -874,7 +876,7 @@ namespace Pinta.Docking
 
 			if (areasList == null && oper == DrawSeparatorOperation.Draw) {
 				hgc = new Gdk.GC (Frame.Container.GdkWindow);
-				hgc.RgbFgColor = Styles.DockFrameBackground;
+				hgc.RgbFgColor = Styles.DockFrameBackground.ToGdkColor ();
 			}
 
 			for (int n=0; n<VisibleObjects.Count; n++) {
@@ -912,7 +914,6 @@ namespace Pinta.Docking
 			}
 			if (hgc != null)
 				hgc.Dispose ();
-#endif
 		}
 		
 		public void ResizeItem (int index, int newSize)

@@ -31,6 +31,9 @@
 using System;
 using Gtk;
 
+using MonoDevelop.Components;
+using MonoDevelop.Components.AtkCocoaHelper;
+
 namespace Pinta.Docking
 {
 	class DockItemContainer: EventBox
@@ -44,30 +47,40 @@ namespace Pinta.Docking
 		public DockItemContainer (DockFrame frame, DockItem item)
 		{
 			this.item = item;
+			item.LabelChanged += UpdateAccessibilityLabel;
 
 			mainBox = new VBox ();
+			mainBox.Accessible.SetShouldIgnore (false);
+			UpdateAccessibilityLabel (null, null);
 			Add (mainBox);
 
 			mainBox.ResizeMode = Gtk.ResizeMode.Queue;
 			mainBox.Spacing = 0;
 			
 			ShowAll ();
-			
-			mainBox.PackStart (item.GetToolbar (PositionType.Top).Container, false, false, 0);
+
+			mainBox.PackStart (item.GetToolbar (DockPositionType.Top).Container, false, false, 0);
 			
 			HBox hbox = new HBox ();
+			hbox.Accessible.SetTitle ("Hbox");
 			hbox.Show ();
-			hbox.PackStart (item.GetToolbar (PositionType.Left).Container, false, false, 0);
+			hbox.PackStart (item.GetToolbar (DockPositionType.Left).Container, false, false, 0);
 			
 			contentBox = new HBox ();
+			hbox.Accessible.SetTitle ("Content");
 			contentBox.Show ();
 			hbox.PackStart (contentBox, true, true, 0);
 			
-			hbox.PackStart (item.GetToolbar (PositionType.Right).Container, false, false, 0);
+			hbox.PackStart (item.GetToolbar (DockPositionType.Right).Container, false, false, 0);
 			
 			mainBox.PackStart (hbox, true, true, 0);
 			
-			mainBox.PackStart (item.GetToolbar (PositionType.Bottom).Container, false, false, 0);
+			mainBox.PackStart (item.GetToolbar (DockPositionType.Bottom).Container, false, false, 0);
+		}
+
+		void UpdateAccessibilityLabel (object sender, EventArgs args)
+		{
+			mainBox.Accessible.SetTitle (Core.GettextCatalog.GetString ("{0} Pad", item.Label));
 		}
 
 		DockVisualStyle visualStyle;
@@ -85,7 +98,13 @@ namespace Pinta.Docking
 				item.Status = DockItemStatus.AutoHide;
 		}
 
-		public void UpdateContent ()
+        protected override void OnDestroyed()
+        {
+			item.LabelChanged -= UpdateAccessibilityLabel;
+			base.OnDestroyed();
+        }
+
+        public void UpdateContent ()
 		{
 			if (widget != null)
 				((Gtk.Container)widget.Parent).Remove (widget);
@@ -119,10 +138,15 @@ namespace Pinta.Docking
 				if (widget != null)
 					SetTreeStyle (widget);
 
-				item.GetToolbar (PositionType.Top).SetStyle (VisualStyle);
-				item.GetToolbar (PositionType.Left).SetStyle (VisualStyle);
-				item.GetToolbar (PositionType.Right).SetStyle (VisualStyle);
-				item.GetToolbar (PositionType.Bottom).SetStyle (VisualStyle);
+				item.GetToolbar (DockPositionType.Top).SetStyle (VisualStyle);
+				item.GetToolbar (DockPositionType.Left).SetStyle (VisualStyle);
+				item.GetToolbar (DockPositionType.Right).SetStyle (VisualStyle);
+				item.GetToolbar (DockPositionType.Bottom).SetStyle (VisualStyle);
+
+				if (VisualStyle.TabStyle == DockTabStyle.Normal)
+					ModifyBg (StateType.Normal, VisualStyle.PadBackgroundColor.Value.ToGdkColor ());
+				else 
+					ModifyBg (StateType.Normal, Style.Background(StateType.Normal));
 			}
 		}
 
@@ -145,32 +169,26 @@ namespace Pinta.Docking
 
 		void OnTreeRealized (object sender, EventArgs e)
 		{
-			// TODO-GTK3
-#if false
 			var w = (Gtk.TreeView)sender;
 			if (VisualStyle.TreeBackgroundColor != null) {
-				w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value);
-				w.ModifyBase (StateType.Insensitive, VisualStyle.TreeBackgroundColor.Value);
+				w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
+				w.ModifyBase (StateType.Insensitive, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
 			} else {
 				w.ModifyBase (StateType.Normal, Parent.Style.Base (StateType.Normal));
 				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
 			}
-#endif
 		}
-
-		// TODO-GTK3
-#if false
+		
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (VisualStyle.TabStyle == DockTabStyle.Normal) {
 				Gdk.GC gc = new Gdk.GC (GdkWindow);
-				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value;
+				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value.ToGdkColor ();
 				evnt.Window.DrawRectangle (gc, true, Allocation);
 				gc.Dispose ();
 			}
 			return base.OnExposeEvent (evnt);
 		}
-#endif
 	}
 
 	class CustomFrame: Bin
@@ -187,7 +205,8 @@ namespace Pinta.Docking
 		int rightPadding;
 
 		Gdk.Color backgroundColor;
-		bool backgroundColorSet;
+		Gdk.Color borderColor;
+		bool backgroundColorSet, borderColorSet;
 		
 		public CustomFrame ()
 		{
@@ -196,6 +215,13 @@ namespace Pinta.Docking
 		public CustomFrame (int topMargin, int bottomMargin, int leftMargin, int rightMargin)
 		{
 			SetMargins (topMargin, bottomMargin, leftMargin, rightMargin);
+		}
+
+		protected override void OnStyleSet (Style previous_style)
+		{
+			base.OnStyleSet (previous_style);
+			if (!borderColorSet)
+				borderColor = Style.Dark (Gtk.StateType.Normal);
 		}
 		
 		public void SetMargins (int topMargin, int bottomMargin, int leftMargin, int rightMargin)
@@ -221,6 +247,11 @@ namespace Pinta.Docking
 			set { backgroundColor = value; backgroundColorSet = true; }
 		}
 
+		public Gdk.Color BorderColor {
+			get { return borderColor; }
+			set { borderColor = value; borderColorSet = true; }
+		}
+
 		protected override void OnAdded (Widget widget)
 		{
 			base.OnAdded (widget);
@@ -233,8 +264,6 @@ namespace Pinta.Docking
 			child = null;
 		}
 
-		// TODO-GTK3
-#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			if (child != null) {
@@ -246,7 +275,6 @@ namespace Pinta.Docking
 				requisition.Height = 0;
 			}
 		}
-#endif
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
@@ -262,8 +290,7 @@ namespace Pinta.Docking
 			if (child != null)
 				child.SizeAllocate (allocation);
 		}
-		// TODO-GTK3
-#if false
+
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			Gdk.Rectangle rect = Allocation;
@@ -282,6 +309,8 @@ namespace Pinta.Docking
 					cr.RelLineTo (-rect.Width, 0);
 					cr.RelLineTo (0, -rect.Height);
 					cr.ClosePath ();
+
+					// FIXME: VV: Remove gradient features
 					using (Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, bottom)) {
 						pat.AddColorStop (0, bcolor.ToCairoColor ());
 						Xwt.Drawing.Color gcol = bcolor.ToXwtColor ();
@@ -305,7 +334,7 @@ namespace Pinta.Docking
 			base.OnExposeEvent (evnt);
 
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-				cr.SetSourceColor (Style.Dark (Gtk.StateType.Normal).ToCairoColor ());
+				cr.SetSourceColor (BorderColor.ToCairoColor ());
 				
 				double y = rect.Y + topMargin / 2d;
 				cr.LineWidth = topMargin;
@@ -330,6 +359,5 @@ namespace Pinta.Docking
 				return false;
 			}
 		}
-#endif
 	}
 }

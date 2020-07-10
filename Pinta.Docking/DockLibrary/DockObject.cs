@@ -38,6 +38,8 @@ namespace Pinta.Docking
 {
 	internal abstract class DockObject
 	{
+		public event EventHandler<EventArgs> AllocationChanged;
+
 		DockGroup parentGroup;
 		DockFrame frame;
 		Gdk.Rectangle rect;
@@ -144,7 +146,7 @@ namespace Pinta.Docking
 				return rect;
 			}
 			set {
-				rect = value; 
+				rect = value;
 			}
 		}
 
@@ -154,10 +156,11 @@ namespace Pinta.Docking
 			}
 			set {
 				allocSize = value;
+				OnAllocationChanged ();
 			}
 		}
 		
-		public Pinta.Docking.DockFrame Frame {
+		public MonoDevelop.Components.Docking.DockFrame Frame {
 			get {
 				return frame;
 			}
@@ -281,6 +284,15 @@ namespace Pinta.Docking
 			if (!ParentGroup.IsNextToMargin (margin, visibleOnly))
 				return false;
 			return ParentGroup.IsChildNextToMargin (margin, this, visibleOnly);
+		}
+
+		protected void OnAllocationChanged ()
+		{
+			if (ParentGroup != null) {
+				ParentGroup.OnAllocationChanged ();
+			} else {
+				AllocationChanged?.Invoke (this, EventArgs.Empty);
+			}
 		}
 	}
 }

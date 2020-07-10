@@ -1,4 +1,4 @@
-//
+﻿//
 // DockItem.cs
 //
 // Author:
@@ -30,13 +30,16 @@
 
 using System;
 using System.Xml;
-using Gtk;
+using Mono.Unix;
+
+using MonoDevelop.Components.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
 	public class DockItem
 	{
-		Widget content;
+		Control content;
+		Gtk.Widget gtkContent;
 		DockItemContainer widget;
 		string defaultLocation;
 		bool defaultVisible = true;
@@ -46,7 +49,7 @@ namespace Pinta.Docking
 		int defaultWidth = -1;
 		int defaultHeight = -1;
 		string label;
-        Gdk.Pixbuf icon;
+		Xwt.Drawing.Image icon;
 		bool expand;
 		DockItemBehavior behavior;
 		Gtk.Window floatingWindow;
@@ -56,7 +59,6 @@ namespace Pinta.Docking
 		bool gettingContent;
 		bool isPositionMarker;
 		bool stickyVisible;
-		IDockItemLabelProvider dockLabelProvider;
 		DockItemToolbar toolbarTop;
 		DockItemToolbar toolbarBottom;
 		DockItemToolbar toolbarLeft;
@@ -68,7 +70,7 @@ namespace Pinta.Docking
 		DockVisualStyle itemStyle;
 		DockVisualStyle currentVisualStyle;
 
-		public event EventHandler VisibleChanged;
+		public event EventHandler<VisibilityChangeEventArgs> VisibleChanged;
 		public event EventHandler ContentVisibleChanged;
 		public event EventHandler ContentRequired;
 		
@@ -79,11 +81,6 @@ namespace Pinta.Docking
 			currentVisualStyle = regionStyle = frame.GetRegionStyleForItem (this);
 		}
 		
-		internal DockItem (DockFrame frame, Widget w, string id): this (frame, id)
-		{
-			content = w;
-		}
-
 		public string Id {
 			get { return id; }
 		}
@@ -92,7 +89,8 @@ namespace Pinta.Docking
 			get { return stickyVisible; }
 			set { stickyVisible = value; }
 		}
-		
+
+		internal event EventHandler LabelChanged;
 		public string Label {
 			get { return label ?? string.Empty; }
 			set {
@@ -102,6 +100,13 @@ namespace Pinta.Docking
 				frame.UpdateTitle (this);
 				if (floatingWindow != null)
 					floatingWindow.Title = GetWindowTitle ();
+
+				toolbarTop?.UpdateAccessibilityLabel ();
+				toolbarLeft?.UpdateAccessibilityLabel ();
+				toolbarRight?.UpdateAccessibilityLabel ();
+				toolbarBottom?.UpdateAccessibilityLabel ();
+
+				LabelChanged?.Invoke (this, EventArgs.Empty);
 			}
 		}
 
@@ -128,6 +133,10 @@ namespace Pinta.Docking
 					titleTab.VisualStyle = currentVisualStyle;
 					titleTab.SetLabel (Widget, icon, label);
 					titleTab.ShowAll ();
+
+					if (widget != null) {
+						titleTab.Accessible.AddLinkedUIElement (widget.Accessible);
+					}
 				}
 				return titleTab;
 			}
@@ -142,11 +151,6 @@ namespace Pinta.Docking
 			}
 		}
 		
-		public IDockItemLabelProvider DockLabelProvider {
-			get { return this.dockLabelProvider; }
-			set { this.dockLabelProvider = value; }
-		}
-		
 		internal DockItemContainer Widget {
 			get {
 				if (widget == null) {
@@ -154,6 +158,10 @@ namespace Pinta.Docking
 					widget.VisualStyle = currentVisualStyle;
 					widget.Visible = false; // Required to ensure that the Shown event is fired
 					widget.Shown += SetupContent;
+
+					if (titleTab != null) {
+						titleTab.Accessible.AddLinkedUIElement (titleTab.Accessible);
+					}
 				}
 				return widget;
 			}
@@ -209,35 +217,36 @@ namespace Pinta.Docking
 			UpdateContentVisibleStatus ();
 		}
 		
-		public Widget Content {
+		public Control Content {
 			get {
 				return content;
 			}
 			set {
 				content = value;
+				gtkContent = content.GetNativeWidget<Gtk.Widget> ();
 				if (!gettingContent && widget != null)
 					widget.UpdateContent ();
 			}
 		}
 		
-		public DockItemToolbar GetToolbar (PositionType position)
+		public DockItemToolbar GetToolbar (DockPositionType position)
 		{
 			switch (position) {
-				case PositionType.Top:
+				case DockPositionType.Top:
 					if (toolbarTop == null)
-						toolbarTop = new DockItemToolbar (this, PositionType.Top);
+						toolbarTop = new DockItemToolbar (this, DockPositionType.Top);
 					return toolbarTop;
-				case PositionType.Bottom:
+				case DockPositionType.Bottom:
 					if (toolbarBottom == null)
-						toolbarBottom = new DockItemToolbar (this, PositionType.Bottom);
+						toolbarBottom = new DockItemToolbar (this, DockPositionType.Bottom);
 					return toolbarBottom;
-				case PositionType.Left:
+				case DockPositionType.Left:
 					if (toolbarLeft == null)
-						toolbarLeft = new DockItemToolbar (this, PositionType.Left);
+						toolbarLeft = new DockItemToolbar (this, DockPositionType.Left);
 					return toolbarLeft;
-				case PositionType.Right:
+				case DockPositionType.Right:
 					if (toolbarRight == null)
-						toolbarRight = new DockItemToolbar (this, PositionType.Right);
+						toolbarRight = new DockItemToolbar (this, DockPositionType.Right);
 					return toolbarRight;
 				default: throw new ArgumentException ();
 			}
@@ -280,7 +289,7 @@ namespace Pinta.Docking
 			}
 		}
 
-		public Gdk.Pixbuf Icon {
+		public Xwt.Drawing.Image Icon {
 			get {
 				return icon;
 			}
@@ -325,7 +334,12 @@ namespace Pinta.Docking
 		{
 			if (dockBarItem != null)
 				dockBarItem.Present (Status == DockItemStatus.AutoHide || giveFocus);
-			else
+			else if (floatingWindow != null) {
+				if (giveFocus)
+					floatingWindow.Present ();
+				else
+					floatingWindow.Show ();
+			} else
 				frame.Present (this, Status == DockItemStatus.AutoHide || giveFocus);
 		}
 
@@ -342,22 +356,37 @@ namespace Pinta.Docking
 			frame.SetDockLocation (this, location);
 		}
 
+		internal bool HasFocus {
+			get {
+				if (gtkContent.HasFocus || widget.HasFocus)
+					return true;
+				
+				Gtk.Window win = gtkContent.Toplevel as Gtk.Window;
+				if (win != null) {
+					if (Status == DockItemStatus.AutoHide)
+						return win.HasToplevelFocus;
+					return (win.HasToplevelFocus && win.Focus?.IsChildOf (widget) == true);
+				}
+				return false;
+			}
+		}
+
 		internal void SetFocus ()
 		{
-			SetFocus (Content);
+			SetFocus (gtkContent);
 		}
 		
-		internal static void SetFocus (Widget w)
+		internal static void SetFocus (Gtk.Widget w)
 		{
-			w.ChildFocus (DirectionType.Down);
+			w.ChildFocus (Gtk.DirectionType.Down);
 
-			Window win = w.Toplevel as Gtk.Window;
+			Gtk.Window win = w.Toplevel as Gtk.Window;
 			if (win == null)
 				return;
 
 			// Make sure focus is not given to internal children
 			if (win.Focus != null) {
-				Container c = win.Focus.Parent as Container;
+				Gtk.Container c = win.Focus.Parent as Gtk.Container;
 				if (c.Children.Length == 0)
 					win.Focus = c;
 			}
@@ -369,7 +398,7 @@ namespace Pinta.Docking
 			if (vis != lastVisibleStatus) {
 				lastVisibleStatus = vis;
 				if (VisibleChanged != null)
-					VisibleChanged (this, EventArgs.Empty);
+					VisibleChanged (this, new VisibilityChangeEventArgs { SwitchingLayout = frame.Container.IsSwitchingLayout});
 			}
 			UpdateContentVisibleStatus ();
 		}
@@ -409,14 +438,15 @@ namespace Pinta.Docking
 				ResetMode ();
 				SetRegionStyle (frame.GetRegionStyleForItem (this));
 
-				floatingWindow = new DockFloatingWindow ((Window)frame.Toplevel, GetWindowTitle ());
+				floatingWindow = new DockFloatingWindow ((Gtk.Window)frame.Toplevel, GetWindowTitle ());
+				Ide.IdeApp.CommandService.RegisterTopWindow (floatingWindow);
 
-				VBox box = new VBox ();
+				Gtk.VBox box = new Gtk.VBox ();
 				box.Show ();
 				box.PackStart (TitleTab, false, false, 0);
 				box.PackStart (Widget, true, true, 0);
 				floatingWindow.Add (box);
-				floatingWindow.DeleteEvent += delegate (object o, DeleteEventArgs a) {
+				floatingWindow.DeleteEvent += delegate (object o, Gtk.DeleteEventArgs a) {
 					if (behavior == DockItemBehavior.CantClose)
 						Status = DockItemStatus.Dockable;
 					else
@@ -424,9 +454,8 @@ namespace Pinta.Docking
 					a.RetVal = true;
 				};
 			}
-			floatingWindow.Move (rect.X, rect.Y);
-			floatingWindow.Resize (rect.Width, rect.Height);
 			floatingWindow.Show ();
+			Ide.IdeServices.DesktopService.PlaceWindow (floatingWindow, rect.X, rect.Y, rect.Width, rect.Height);
 			if (titleTab != null)
 				titleTab.UpdateBehavior ();
 			Widget.Show ();
@@ -529,54 +558,52 @@ namespace Pinta.Docking
 			}
 		}
 
-		internal bool ShowingContextMemu { get ; set; }
-		
-		internal void ShowDockPopupMenu (uint time)
+		internal bool ShowingContextMenu { get ; set; }
+
+		internal void ShowDockPopupMenu (Gtk.Widget parent, Gdk.EventButton evt)
 		{
-			Menu menu = new Menu ();
-			
+			ShowDockPopupMenu (parent, evt.X, evt.Y);
+		}
+
+		internal void ShowDockPopupMenu (Gtk.Widget parent, double x, double y)
+		{
+			var menu = new ContextMenu ();
+			ContextMenuItem citem;
+
 			// Hide menuitem
 			if ((Behavior & DockItemBehavior.CantClose) == 0) {
-				MenuItem mitem = new MenuItem (Pinta.Core.Translations.GetString("Hide"));
-				mitem.Activated += delegate { Visible = false; };
-				menu.Append (mitem);
+				citem = new ContextMenuItem (Catalog.GetString ("Hide"));
+				citem.Clicked += delegate { Visible = false; };
+				menu.Add (citem);
 			}
-
-			MenuItem citem;
 
 			// Auto Hide menuitem
 			if ((Behavior & DockItemBehavior.CantAutoHide) == 0 && Status != DockItemStatus.AutoHide) {
-				citem = new MenuItem (Pinta.Core.Translations.GetString("Minimize"));
-				citem.Activated += delegate { Status = DockItemStatus.AutoHide; };
-				menu.Append (citem);
+				citem = new ContextMenuItem (Catalog.GetString ("Minimize"));
+				citem.Clicked += delegate { Status = DockItemStatus.AutoHide; };
+				menu.Add (citem);
 			}
 
 			if (Status != DockItemStatus.Dockable) {
 				// Dockable menuitem
-				citem = new MenuItem (Pinta.Core.Translations.GetString("Dock"));
-				citem.Activated += delegate { Status = DockItemStatus.Dockable; };
-				menu.Append (citem);
+				citem = new ContextMenuItem (Catalog.GetString ("Dock"));
+				citem.Clicked += delegate { Status = DockItemStatus.Dockable; };
+				menu.Add (citem);
 			}
 
 			// Floating menuitem
 			if ((Behavior & DockItemBehavior.NeverFloating) == 0 && Status != DockItemStatus.Floating) {
-				citem = new MenuItem (Pinta.Core.Translations.GetString("Undock"));
-				citem.Activated += delegate { Status = DockItemStatus.Floating; };
-				menu.Append (citem);
+				citem = new ContextMenuItem (Catalog.GetString ("Undock"));
+				citem.Clicked += delegate { Status = DockItemStatus.Floating; };
+				menu.Add (citem);
 			}
 
-			if (menu.Children.Length == 0) {
-				menu.Destroy ();
+			if (menu.Items.Count == 0) {
 				return;
 			}
 
-			ShowingContextMemu = true;
-
-			menu.ShowAll ();
-			menu.Hidden += (o,e) => {
-				ShowingContextMemu = false;
-			};
-			menu.Popup (null, null, null, 3, time);
+			ShowingContextMenu = true;
+			menu.Show (parent, (int)x,  (int)y, () => { ShowingContextMenu = true; });
 		}
 	}
 
@@ -587,19 +614,19 @@ namespace Pinta.Docking
 	// See BXC9883 - Xamarin Studio hides when there is a nonmodal floating window and it loses focus
 	// https://bugzilla.xamarin.com/show_bug.cgi?id=9883
 	//
-	class DockFloatingWindow : Window
+	class DockFloatingWindow : Gtk.Window
 	{
-		public DockFloatingWindow (Window dockParent, string title) : base (title)
+		public DockFloatingWindow (Gtk.Window dockParent, string title) : base (title)
 		{
-			TypeHint = Gdk.WindowTypeHint.Utility;
+			this.ApplyTheme ();
 			this.DockParent = dockParent;
 		}
 
-		public Window DockParent { get; private set; }
+		public Gtk.Window DockParent { get; private set; }
 	}
-	
-	public interface IDockItemLabelProvider
+
+	public class VisibilityChangeEventArgs: EventArgs
 	{
-		Gtk.Widget CreateLabel (Orientation orientation);
+		public bool SwitchingLayout { get; set; }
 	}
 }

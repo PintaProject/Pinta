@@ -1,4 +1,4 @@
-//
+﻿//
 // DockItemTitleTab.cs
 //
 // Author:
@@ -25,55 +25,89 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk; 
+using Gtk;
 
 using System;
+using MonoDevelop.Ide.Gui;
 using System.Linq;
+using MonoDevelop.Core;
+using MonoDevelop.Ide;
 using MonoDevelop.Components;
+using MonoDevelop.Components.AtkCocoaHelper;
+using MonoDevelop.Ide.Fonts;
 
 namespace Pinta.Docking
 {
-	
-	class DockItemTitleTab: Gtk.EventBox
+
+	class DockItemTitleTab : Gtk.EventBox
 	{
+		static Xwt.Drawing.Image dockTabActiveBackImage = Xwt.Drawing.Image.FromResource ("padbar-active.9.png");
+		static Xwt.Drawing.Image dockTabBackImage = Xwt.Drawing.Image.FromResource ("padbar-inactive.9.png");
+
 		bool active;
 		Gtk.Widget page;
 		ExtendedLabel labelWidget;
 		int labelWidth;
+		int minWidth;
 		DockVisualStyle visualStyle;
-		Gtk.Widget tabIcon;
+		ImageView tabIcon;
+		Gtk.HBox box;
 		DockFrame frame;
 		string label;
 		ImageButton btnDock;
 		ImageButton btnClose;
+		Gtk.Alignment al;
 		DockItem item;
 		bool allowPlaceholderDocking;
 		bool mouseOver;
+		Widget currentFocus = null; // Currently focused child
+
+		IDisposable subscribedLeaveEvent;
 
 		static Gdk.Cursor fleurCursor = new Gdk.Cursor (Gdk.CursorType.Fleur);
 
-		static Gdk.Pixbuf pixClose;
-        static Gdk.Pixbuf pixAutoHide;
-        static Gdk.Pixbuf pixDock;
+		static Xwt.Drawing.Image pixClose;
+		static Xwt.Drawing.Image pixAutoHide;
+		static Xwt.Drawing.Image pixDock;
 
-        static double PixelScale = GtkWorkarounds.GetPixelScale ();
+		static readonly Xwt.WidgetSpacing TabPadding;
+		static readonly Xwt.WidgetSpacing TabActivePadding;
 
-		const int TopPadding = 5;
-		const int BottomPadding = 7;
-		const int TopPaddingActive = 5;
-		const int BottomPaddingActive = 7;
-		const int LeftPadding = 11;
-		const int RightPadding = 9;
+		internal event EventHandler<EventArgs> TabPressed;
 
 		static DockItemTitleTab ()
 		{
-            pixClose = GdkExtensions.FromResource ("pad-close-9.png");
-            pixAutoHide = GdkExtensions.FromResource ("pad-minimize-9.png");
-            pixDock = GdkExtensions.FromResource ("pad-dock-9.png");
+			pixClose = Xwt.Drawing.Image.FromResource ("pad-close-9.png");
+			pixAutoHide = Xwt.Drawing.Image.FromResource ("pad-minimize-9.png");
+			pixDock = Xwt.Drawing.Image.FromResource ("pad-dock-9.png");
+
+			Xwt.Drawing.NinePatchImage tabBackImage9;
+			if (dockTabBackImage is Xwt.Drawing.ThemedImage) {
+				var img = ((Xwt.Drawing.ThemedImage)dockTabBackImage).GetImage (Xwt.Drawing.Context.GlobalStyles);
+				tabBackImage9 = img as Xwt.Drawing.NinePatchImage;
+			} else
+				tabBackImage9 = dockTabBackImage as Xwt.Drawing.NinePatchImage;
+			TabPadding = tabBackImage9.Padding;
+
+
+			Xwt.Drawing.NinePatchImage tabActiveBackImage9;
+			if (dockTabActiveBackImage is Xwt.Drawing.ThemedImage) {
+				var img = ((Xwt.Drawing.ThemedImage)dockTabActiveBackImage).GetImage (Xwt.Drawing.Context.GlobalStyles);
+				tabActiveBackImage9 = img as Xwt.Drawing.NinePatchImage;
+			} else
+				tabActiveBackImage9 = dockTabActiveBackImage as Xwt.Drawing.NinePatchImage;
+			TabActivePadding = tabActiveBackImage9.Padding;
 		}
-		
+
 		public DockItemTitleTab (DockItem item, DockFrame frame)
 		{
+			var actionHandler = new ActionDelegate (this);
+			actionHandler.PerformPress += HandlePress;
+			actionHandler.PerformShowMenu += HandleShowMenu;
+
+			UpdateRole (false, null);
+
+			CanFocus = true;
 			this.item = item;
 			this.frame = frame;
 			this.VisibleWindow = false;
@@ -85,7 +119,37 @@ namespace Pinta.Docking
 			KeyPressEvent += HeaderKeyPress;
 			KeyReleaseEvent += HeaderKeyRelease;
 
-			this.SubscribeLeaveEvent (OnLeave);
+			subscribedLeaveEvent = this.SubscribeLeaveEvent (OnLeave);
+		}
+
+		internal void UpdateRole (bool isTab, TabStrip strip)
+		{
+			Atk.Object fromAccessible = null, toAccessible = null;
+
+			if (!isTab) {
+				Accessible.SetRole (AtkCocoa.Roles.AXGroup, "pad header");
+				Accessible.SetSubRole ("XAPadHeader");
+
+				// Take the button accessibles back from the strip
+				if (strip != null) {
+					fromAccessible = strip.Accessible;
+					toAccessible = Accessible;
+				}
+			} else {
+				Accessible.SetRole (AtkCocoa.Roles.AXRadioButton, "tab");
+				Accessible.SetSubRole ("");
+
+				// Give the button accessibles to the strip
+				if (strip != null) {
+					fromAccessible = Accessible;
+					toAccessible = strip.Accessible;
+				}
+			}
+
+			if (fromAccessible != null && toAccessible != null) {
+				fromAccessible.TransferAccessibleChild (toAccessible, btnDock.Accessible);
+				fromAccessible.TransferAccessibleChild (toAccessible, btnClose.Accessible);
+			}
 		}
 
 		public DockVisualStyle VisualStyle {
@@ -97,9 +161,22 @@ namespace Pinta.Docking
 			}
 		}
 
+		protected override void OnDestroyed ()
+		{
+			subscribedLeaveEvent.Dispose ();
+			base.OnDestroyed ();
+		}
+
 		void UpdateVisualStyle ()
 		{
-			if (labelWidget != null && label != null) {
+			double inactiveIconAlpha;
+
+			if (IdeApp.Preferences == null || IdeApp.Preferences.UserInterfaceTheme == Theme.Light)
+				inactiveIconAlpha = 0.8;
+			else
+				inactiveIconAlpha = 0.6;
+
+			if (labelWidget?.Visible == true && label != null) {
 				if (visualStyle.UppercaseTitles.Value)
 					labelWidget.Text = label.ToUpper ();
 				else
@@ -112,92 +189,154 @@ namespace Pinta.Docking
 					labelWidget.Xalign = 0;
 			}
 
-			if (tabIcon != null)
+			if (tabIcon != null) {
+				tabIcon.Image = tabIcon.Image.WithAlpha (active ? 1.0 : inactiveIconAlpha);
 				tabIcon.Visible = visualStyle.ShowPadTitleIcon.Value;
-			if (IsRealized) {
-				if (labelWidget != null)
-					labelWidget.ModifyFg (StateType.Normal, visualStyle.PadTitleLabelColor.Value);
 			}
+
+			if (IsRealized && labelWidget?.Visible == true) {
+				var font = IdeServices.FontService.SansFont.CopyModified (null, Pango.Weight.Bold);
+				font.AbsoluteSize = Pango.Units.FromPixels (11);
+				labelWidget.ModifyFont (font);
+				labelWidget.ModifyText (StateType.Normal, (active ? visualStyle.PadTitleLabelColor.Value : visualStyle.InactivePadTitleLabelColor.Value).ToGdkColor ());
+			}
+
 			var r = WidthRequest;
 			WidthRequest = -1;
 			labelWidth = SizeRequest ().Width + 1;
 			WidthRequest = r;
 
 			if (visualStyle != null)
-				HeightRequest = visualStyle.PadTitleHeight != null ? (int)(visualStyle.PadTitleHeight.Value * PixelScale) : -1;
+				HeightRequest = visualStyle.PadTitleHeight != null ? (int)(visualStyle.PadTitleHeight.Value) : -1;
 		}
 
-        public void SetLabel (Gtk.Widget page, Gdk.Pixbuf icon, string label)
+		public void SetLabel (Gtk.Widget page, Xwt.Drawing.Image icon, string label)
 		{
+			string labelNoSpaces = label != null ? label.Replace (' ', '-') : null;
 			this.label = label;
 			this.page = page;
-			if (Child != null) {
-				Gtk.Widget oc = Child;
-				Remove (oc);
-				oc.Destroy ();
-			}
-			
-			Gtk.HBox box = new HBox ();
-			box.Spacing = 2;
-			
-			if (icon != null) {
-				tabIcon = new ImageView (icon);
+
+			if (icon == null)
+				icon = ImageService.GetIcon ("md-empty");
+
+			if (box == null) {
+				box = new HBox ();
+				box.Accessible.SetShouldIgnore (true);
+				box.Spacing = -2;
+
+				tabIcon = new ImageView ();
+				tabIcon.Accessible.SetShouldIgnore (true);
 				tabIcon.Show ();
-				box.PackStart (tabIcon, false, false, 0);
-			} else
-				tabIcon = null;
+				box.PackStart (tabIcon, false, false, 3);
 
-			if (!string.IsNullOrEmpty (label)) {
 				labelWidget = new ExtendedLabel (label);
-				labelWidget.DropShadowVisible = true;
+				// Ignore the label because the title tab already contains its name
+				labelWidget.Accessible.SetShouldIgnore (true);
 				labelWidget.UseMarkup = true;
-				box.PackStart (labelWidget, true, true, 0);
-			} else {
-				labelWidget = null;
+				var alignLabel = new Alignment (0.0f, 0.5f, 1, 1);
+				alignLabel.Accessible.SetShouldIgnore (true);
+				alignLabel.BottomPadding = 0;
+				alignLabel.RightPadding = 15;
+				alignLabel.Add (labelWidget);
+				box.PackStart (alignLabel, false, false, 0);
+
+				btnDock = new ImageButton ();
+				btnDock.Image = pixAutoHide;
+				btnDock.TooltipText = GettextCatalog.GetString ("Auto Hide");
+				btnDock.CanFocus = true;
+				//			btnDock.WidthRequest = btnDock.HeightRequest = 17;
+				btnDock.Clicked += OnClickDock;
+				btnDock.ButtonPressEvent += (o, args) => args.RetVal = true;
+				btnDock.WidthRequest = btnDock.SizeRequest ().Width;
+				UpdateDockButtonAccessibilityLabels ();
+
+				btnClose = new ImageButton ();
+				btnClose.Image = pixClose;
+				btnClose.TooltipText = GettextCatalog.GetString ("Close");
+				btnClose.CanFocus = true;
+				//			btnClose.WidthRequest = btnClose.HeightRequest = 17;
+				btnClose.WidthRequest = btnDock.SizeRequest ().Width;
+				btnClose.Clicked += delegate {
+					item.Visible = false;
+				};
+				btnClose.ButtonPressEvent += (o, args) => args.RetVal = true;
+
+				al = new Alignment (0, 0.5f, 1, 1);
+				al.Accessible.SetShouldIgnore (true);
+				HBox btnBox = new HBox (false, 0);
+				btnBox.Accessible.SetShouldIgnore (true);
+				btnBox.PackStart (btnDock, false, false, 3);
+				btnBox.PackStart (btnClose, false, false, 1);
+				al.Add (btnBox);
+				box.PackEnd (al, false, false, 3);
+
+				Add (box);
 			}
 
-			btnDock = new ImageButton ();
-			btnDock.Image = pixAutoHide;
-            btnDock.InactiveImage = pixAutoHide.WithAlpha (.5);
-            btnDock.TooltipText = Pinta.Core.Translations.GetString ("Auto Hide");
-			btnDock.CanFocus = false;
-//			btnDock.WidthRequest = btnDock.HeightRequest = 17;
-			btnDock.Clicked += OnClickDock;
-			btnDock.ButtonPressEvent += (o, args) => args.RetVal = true;
-			btnDock.WidthRequest = btnDock.SizeRequest ().Width;
+			tabIcon.Image = icon;
 
-			btnClose = new ImageButton ();
-			btnClose.Image = pixClose;
-            btnClose.InactiveImage = pixClose.WithAlpha (.5);
-			btnClose.TooltipText = Pinta.Core.Translations.GetString ("Close");
-			btnClose.CanFocus = false;
-//			btnClose.WidthRequest = btnClose.HeightRequest = 17;
-			btnClose.WidthRequest = btnDock.SizeRequest ().Width;
-			btnClose.Clicked += delegate {
-				item.Visible = false;
-			};
-			btnClose.ButtonPressEvent += (o, args) => args.RetVal = true;
+			string realLabel, realHelp;
+			if (!string.IsNullOrEmpty (label)) {
+				labelWidget.Parent.Show ();
+				labelWidget.Name = label;
+				btnDock.Name = string.Format ("btnDock_{0}", labelNoSpaces ?? string.Empty);
+				btnClose.Name = string.Format ("btnClose_{0}", labelNoSpaces ?? string.Empty);
+				realLabel = GettextCatalog.GetString ("Close {0}", label);
+				realHelp = GettextCatalog.GetString ("Close the {0} pad", label);
+			} else {
+				labelWidget.Parent.Hide ();
+				realLabel = GettextCatalog.GetString ("Close pad");
+				realHelp = GettextCatalog.GetString ("Close the pad");
+			}
 
-			Gtk.Alignment al = new Alignment (0, 0, 1, 1);
-			HBox btnBox = new HBox (false, 3);
-			btnBox.PackStart (btnDock, false, false, 0);
-			btnBox.PackStart (btnClose, false, false, 0);
-			al.Add (btnBox);
-			al.LeftPadding = 3;
-			al.TopPadding = 1;
-			box.PackEnd (al, false, false, 0);
+			btnClose.Accessible.SetLabel (realLabel);
+			btnClose.Accessible.Description = realHelp;
 
-			Add (box);
-			
+			if (label != null) {
+				Accessible.Name = $"DockTab.{labelNoSpaces}";
+				Accessible.Description = GettextCatalog.GetString ("Switch to the {0} tab", label);
+				Accessible.SetTitle (label);
+				Accessible.SetLabel (label);
+			}
+
 			// Get the required size before setting the ellipsize property, since ellipsized labels
 			// have a width request of 0
 			box.ShowAll ();
 			Show ();
 
+			minWidth = tabIcon.SizeRequest ().Width + al.SizeRequest ().Width + 10;
+
 			UpdateBehavior ();
 			UpdateVisualStyle ();
 		}
-		
+
+		void UpdateDockButtonAccessibilityLabels ()
+		{
+			string realLabel;
+			string realHelp;
+			bool dockable = item.Status != DockItemStatus.Dockable;
+
+			if (string.IsNullOrEmpty (label)) {
+				if (dockable) {
+					realLabel = GettextCatalog.GetString ("Dock pad");
+					realHelp = GettextCatalog.GetString ("Dock the pad into the UI so it will not hide automatically");
+				} else {
+					realLabel = GettextCatalog.GetString ("Autohide pad");
+					realHelp = GettextCatalog.GetString ("Automatically hide the pad when it loses focus");
+				}
+			} else {
+				if (dockable) {
+					realLabel = GettextCatalog.GetString ("Dock {0}", label);
+					realHelp = GettextCatalog.GetString ("Dock the {0} pad into the UI so it will not hide automatically", label);
+				} else {
+					realLabel = GettextCatalog.GetString ("Autohide {0}", label);
+					realHelp = GettextCatalog.GetString ("Automatically hide the {0} pad when it loses focus", label);
+				}
+			}
+			btnDock.Accessible.SetLabel (realLabel);
+			btnDock.Accessible.Description = realHelp;
+		}
+
 		void OnClickDock (object s, EventArgs a)
 		{
 			if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating)
@@ -209,7 +348,11 @@ namespace Pinta.Docking
 		public int LabelWidth {
 			get { return labelWidth; }
 		}
-		
+
+		public int MinWidth {
+			get { return minWidth; }
+		}
+
 		public bool Active {
 			get {
 				return active;
@@ -217,7 +360,8 @@ namespace Pinta.Docking
 			set {
 				if (active != value) {
 					active = value;
-					this.QueueResize ();
+					UpdateVisualStyle ();
+					QueueResize ();
 					QueueDraw ();
 					UpdateBehavior ();
 				}
@@ -229,7 +373,7 @@ namespace Pinta.Docking
 				return page;
 			}
 		}
-		
+
 		public void UpdateBehavior ()
 		{
 			if (btnClose == null)
@@ -237,38 +381,46 @@ namespace Pinta.Docking
 
 			btnClose.Visible = (item.Behavior & DockItemBehavior.CantClose) == 0;
 			btnDock.Visible = (item.Behavior & DockItemBehavior.CantAutoHide) == 0;
-			
+
 			if (active || mouseOver) {
 				if (btnClose.Image == null)
 					btnClose.Image = pixClose;
 				if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating) {
 					btnDock.Image = pixDock;
-                    btnDock.InactiveImage = pixDock.WithAlpha (.5);
-                    btnDock.TooltipText = Pinta.Core.Translations.GetString ("Dock");
+					btnDock.TooltipText = GettextCatalog.GetString ("Dock");
 				} else {
 					btnDock.Image = pixAutoHide;
-                    btnDock.InactiveImage = pixAutoHide.WithAlpha (.5);
-                    btnDock.TooltipText = Pinta.Core.Translations.GetString ("Auto Hide");
+					btnDock.TooltipText = GettextCatalog.GetString ("Auto Hide");
 				}
 			} else {
 				btnDock.Image = null;
 				btnClose.Image = null;
 			}
+
+			UpdateDockButtonAccessibilityLabels ();
 		}
 
 		bool tabPressed, tabActivated;
 		double pressX, pressY;
 
+		protected override void OnActivate ()
+		{
+			TabPressed?.Invoke (this, EventArgs.Empty);
+
+			base.OnActivate ();
+		}
+
 		protected override bool OnButtonPressEvent (Gdk.EventButton evnt)
 		{
 			if (evnt.TriggersContextMenu ()) {
-				item.ShowDockPopupMenu (evnt.Time);
+				item.ShowDockPopupMenu (this, evnt);
 				return false;
 			} else if (evnt.Button == 1) {
 				if (evnt.Type == Gdk.EventType.ButtonPress) {
 					tabPressed = true;
 					pressX = evnt.X;
 					pressY = evnt.Y;
+					TabPressed?.Invoke (this, EventArgs.Empty);
 				} else if (evnt.Type == Gdk.EventType.TwoButtonPress) {
 					tabActivated = true;
 				}
@@ -286,8 +438,7 @@ namespace Pinta.Docking
 					else
 						item.Status = DockItemStatus.AutoHide;
 				}
-			}
-			else if (!evnt.TriggersContextMenu () && evnt.Button == 1) {
+			} else if (!evnt.TriggersContextMenu () && evnt.Button == 1) {
 				frame.DockInPlaceholder (item);
 				frame.HidePlaceholder ();
 				if (GdkWindow != null)
@@ -297,6 +448,33 @@ namespace Pinta.Docking
 			}
 			tabPressed = false;
 			return base.OnButtonReleaseEvent (evnt);
+		}
+
+		protected override bool OnFocusInEvent (Gdk.EventFocus evnt)
+		{
+			mouseOver = true;
+			UpdateBehavior ();
+			return base.OnFocusInEvent (evnt);
+		}
+
+		protected override bool OnFocusOutEvent (Gdk.EventFocus evnt)
+		{
+			if (currentFocus == null) {
+				mouseOver = false;
+				UpdateBehavior ();
+			}
+			return base.OnFocusOutEvent (evnt);
+		}
+
+		void HandlePress (object sender, EventArgs args)
+		{
+			TabPressed?.Invoke (this, EventArgs.Empty);
+		}
+
+		void HandleShowMenu (object sender, EventArgs args)
+		{
+			// Show the menu at the middle of the widget
+			item.ShowDockPopupMenu (this, Allocation.Width / 2, Allocation.Height / 2);
 		}
 
 		protected override bool OnMotionNotifyEvent (Gdk.EventMotion evnt)
@@ -324,6 +502,164 @@ namespace Pinta.Docking
 		{
 			mouseOver = false;
 			UpdateBehavior ();
+		}
+
+		enum FocusWidget
+		{
+			None,
+			Widget,
+			DockButton,
+			CloseButton
+		};
+
+		bool FocusCurrentWidget (DirectionType direction)
+		{
+			if (currentFocus == null) {
+				return false;
+			}
+
+			return currentFocus.ChildFocus (direction);
+		}
+
+		bool MoveFocusToWidget (FocusWidget widget, DirectionType direction)
+		{
+			switch (widget) {
+			case FocusWidget.Widget:
+				GrabFocus ();
+				currentFocus = null;
+				return true;
+
+			case FocusWidget.DockButton:
+				currentFocus = btnDock;
+				return btnDock.ChildFocus (direction);
+
+			case FocusWidget.CloseButton:
+				currentFocus = btnClose;
+				return btnClose.ChildFocus (direction);
+
+			case FocusWidget.None:
+				break;
+			}
+
+			return false;
+		}
+
+		FocusWidget GetNextWidgetToFocus (FocusWidget widget, DirectionType direction)
+		{
+			FocusWidget nextSite;
+
+			switch (widget) {
+			case FocusWidget.CloseButton:
+				switch (direction) {
+				case DirectionType.TabForward:
+				case DirectionType.Right:
+				case DirectionType.Down:
+					return FocusWidget.None;
+
+				case DirectionType.TabBackward:
+				case DirectionType.Left:
+				case DirectionType.Up:
+					if (btnDock.Image != null) {
+						nextSite = FocusWidget.DockButton;
+					} else {
+						nextSite = FocusWidget.Widget;
+					}
+					return nextSite;
+				}
+
+				break;
+
+			case FocusWidget.DockButton:
+				switch (direction) {
+				case DirectionType.TabForward:
+				case DirectionType.Right:
+				case DirectionType.Down:
+					return btnClose.Image == null ? FocusWidget.None : FocusWidget.CloseButton;
+
+				case DirectionType.TabBackward:
+				case DirectionType.Left:
+				case DirectionType.Up:
+					return FocusWidget.Widget;
+				}
+
+				break;
+
+			case FocusWidget.Widget:
+				switch (direction) {
+				case DirectionType.TabForward:
+				case DirectionType.Right:
+				case DirectionType.Down:
+					if (btnDock.Image != null) {
+						nextSite = FocusWidget.DockButton;
+					} else if (btnClose.Image != null) {
+						nextSite = FocusWidget.CloseButton;
+					} else {
+						nextSite = FocusWidget.None;
+					}
+					return nextSite;
+
+				case DirectionType.TabBackward:
+				case DirectionType.Left:
+				case DirectionType.Up:
+					return FocusWidget.None;
+				}
+
+				break;
+			case FocusWidget.None:
+				switch (direction) {
+				case DirectionType.TabForward:
+				case DirectionType.Right:
+				case DirectionType.Down:
+					return FocusWidget.Widget;
+
+				case DirectionType.TabBackward:
+				case DirectionType.Left:
+				case DirectionType.Up:
+					if (btnClose.Image != null) {
+						nextSite = FocusWidget.CloseButton;
+					} else if (btnDock.Image != null) {
+						nextSite = FocusWidget.DockButton;
+					} else {
+						nextSite = FocusWidget.Widget;
+					}
+					return nextSite;
+				}
+
+				break;
+			}
+
+			return FocusWidget.None;
+		}
+
+		protected override bool OnFocused (DirectionType direction)
+		{
+			if (!FocusCurrentWidget (direction)) {
+				FocusWidget focus = FocusWidget.None;
+
+				if (currentFocus == btnClose) {
+					focus = FocusWidget.CloseButton;
+				} else if (currentFocus == btnDock) {
+					focus = FocusWidget.DockButton;
+				} else if (IsFocus) {
+					focus = FocusWidget.Widget;
+				}
+
+				while ((focus = GetNextWidgetToFocus (focus, direction)) != FocusWidget.None) {
+					if (MoveFocusToWidget (focus, direction)) {
+						return true;
+					}
+				}
+
+				// Clean up the icons because OnFocusOutEvent has already been called
+				// so we need the icons to hide again
+				mouseOver = false;
+				UpdateBehavior ();
+
+				currentFocus = null;
+				return false;
+			}
+
+			return true;
 		}
 
 		[GLib.ConnectBeforeAttribute]
@@ -355,104 +691,82 @@ namespace Pinta.Docking
 			base.OnRealized ();
 			UpdateVisualStyle ();
 		}
-
-		// TODO-GTK3
-#if false
+		
 		protected override void OnSizeRequested (ref Gtk.Requisition req)
 		{
 			if (Child != null) {
 				req = Child.SizeRequest ();
-				req.Width += LeftPadding + RightPadding;
+				req.Width += (int)(TabPadding.Left + TabPadding.Right);
 				if (active)
-					req.Height += TopPaddingActive + BottomPaddingActive;
+					req.Height += (int)(TabActivePadding.Top + TabActivePadding.Bottom);
 				else
-					req.Height += TopPadding + BottomPadding;
+					req.Height += (int)(TabPadding.Top + TabPadding.Bottom);
 			}
 		}
-#endif
 					
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
 			base.OnSizeAllocated (rect);
 
-			int leftPadding = LeftPadding;
-			int rightPadding = RightPadding;
-			if (rect.Width < labelWidth) {
-				int red = (labelWidth - rect.Width) / 2;
-				leftPadding -= red;
-				rightPadding -= red;
-				if (leftPadding < 2) leftPadding = 2;
-				if (rightPadding < 2) rightPadding = 2;
-			}
+			int leftPadding = (int)TabPadding.Left;
+			int rightPadding = (int)TabPadding.Right;
 			
 			rect.X += leftPadding;
 			rect.Width -= leftPadding + rightPadding;
+			if (rect.Width < 1) {
+				rect.Width = 1;
+			}
 
 			if (Child != null) {
-				if (active) {
-					rect.Y += TopPaddingActive;
-					rect.Height = Child.SizeRequest ().Height;
-				}
-				else {
-					rect.Y += TopPadding;
-					rect.Height = Child.SizeRequest ().Height;
-				}
+				var bottomPadding = active ? (int)TabActivePadding.Bottom : (int)TabPadding.Bottom;
+				var topPadding = active ? (int)TabActivePadding.Top : (int)TabPadding.Top;
+				int centerY = topPadding + ((rect.Height - bottomPadding - topPadding) / 2);
+				var height = Child.SizeRequest ().Height;
+				rect.Y += centerY - (height / 2);
+				rect.Height = height;
 				Child.SizeAllocate (rect);
 			}
 		}
 
-		// TODO-GTK3
-#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (VisualStyle.TabStyle == DockTabStyle.Normal)
 				DrawAsBrowser (evnt);
 			else
 				DrawNormal (evnt);
+
+			if (HasFocus) {
+				var alloc = labelWidget.Allocation;
+				Gtk.Style.PaintFocus (Style, GdkWindow, State, alloc, this, "label",
+				                      alloc.X, alloc.Y, alloc.Width, alloc.Height);
+			}
 			return base.OnExposeEvent (evnt);
 		}
-#endif
 
 		void DrawAsBrowser (Gdk.EventExpose evnt)
 		{
-			var alloc = Allocation;
-
-			// TODO-GTK3
-#if false
-			Gdk.GC bgc = new Gdk.GC (GdkWindow);
-			var c = VisualStyle.PadBackgroundColor.Value.ToXwtColor ();
-			c.Light *= 0.7;
-			bgc.RgbFgColor = c.ToGdkColor ();
 			bool first = true;
 			bool last = true;
-			TabStrip tabStrip = null;
+
 			if (Parent is TabStrip.TabStripBox) {
 				var tsb = (TabStrip.TabStripBox) Parent;
 				var cts = tsb.Children;
 				first = cts[0] == this;
 				last = cts[cts.Length - 1] == this;
-				tabStrip = tsb.TabStrip;
 			}
-			if (Active || (first && last)) {
-				Gdk.GC gc = new Gdk.GC (GdkWindow);
-				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value;
-				evnt.Window.DrawRectangle (gc, true, alloc);
-				if (!first)
-					evnt.Window.DrawLine (bgc, alloc.X, alloc.Y, alloc.X, alloc.Y + alloc.Height - 1);
-				if (!(last && first) && !(tabStrip != null && tabStrip.VisualStyle.ExpandedTabs.Value && last))
-					evnt.Window.DrawLine (bgc, alloc.X + alloc.Width - 1, alloc.Y, alloc.X + alloc.Width - 1, alloc.Y + alloc.Height - 1);
-				gc.Dispose ();
 
-			} else {
-				Gdk.GC gc = new Gdk.GC (GdkWindow);
-				gc.RgbFgColor = tabStrip != null ? tabStrip.VisualStyle.InactivePadBackgroundColor.Value : frame.DefaultVisualStyle.InactivePadBackgroundColor.Value;
-				evnt.Window.DrawRectangle (gc, true, alloc);
-				gc.Dispose ();
-				evnt.Window.DrawLine (bgc, alloc.X, alloc.Y + alloc.Height - 1, alloc.X + alloc.Width - 1, alloc.Y + alloc.Height - 1);
+			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+				if (first && last) {
+					ctx.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+					ctx.SetSourceColor (VisualStyle.PadBackgroundColor.Value.ToCairoColor ());
+					ctx.Fill ();
+				} else {
+					var image = Active ? dockTabActiveBackImage : dockTabBackImage;
+					image = image.WithSize (Allocation.Width, Allocation.Height);
+
+					ctx.DrawImage (this, image, Allocation.X, Allocation.Y);
+				}
 			}
-			bgc.Dispose ();
-#endif
-
 		}
 
 		void DrawNormal (Gdk.EventExpose evnt)
@@ -462,30 +776,12 @@ namespace Pinta.Docking
 				var y = Allocation.Y;
 
 				ctx.Rectangle (x, y + 1, Allocation.Width, Allocation.Height - 1);
-				using (var g = new Cairo.LinearGradient (x, y + 1, x, y + Allocation.Height - 1)) {
-					g.AddColorStop (0, Styles.DockTabBarGradientStart);
-					g.AddColorStop (1, Styles.DockTabBarGradientEnd);
-					ctx.SetSource (g);
-					ctx.Fill ();
-				}
+				ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
+				ctx.Fill ();
 
-				ctx.MoveTo (x + 0.5, y + 0.5);
-				ctx.LineTo (x + Allocation.Width - 0.5d, y + 0.5);
-				ctx.SetSourceColor (Styles.DockTabBarGradientTop);
-				ctx.Stroke ();
-
+				/*
 				if (active) {
-
-					ctx.Rectangle (x, y + 1, Allocation.Width, Allocation.Height - 1);
-					using (var g = new Cairo.LinearGradient (x, y + 1, x, y + Allocation.Height - 1)) {
-						g.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.01));
-						g.AddColorStop (0.5, new Cairo.Color (0, 0, 0, 0.08));
-						g.AddColorStop (1, new Cairo.Color (0, 0, 0, 0.01));
-						ctx.SetSource (g);
-						ctx.Fill ();
-					}
-
-/*					double offset = Allocation.Height * 0.25;
+					double offset = Allocation.Height * 0.25;
 					var rect = new Cairo.Rectangle (x - Allocation.Height + offset, y, Allocation.Height, Allocation.Height);
 					var cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
 					cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
@@ -500,8 +796,9 @@ namespace Pinta.Docking
 					cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
 					ctx.Pattern = cg;
 					ctx.Rectangle (rect);
-					ctx.Fill ();*/
+					ctx.Fill ();
 				}
+				*/
 			}
 		}
 	}

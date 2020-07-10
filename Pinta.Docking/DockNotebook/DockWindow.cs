@@ -24,23 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using Gdk;
+using Gtk;
+using MonoDevelop.Components.Docking;
+using MonoDevelop.Ide;
+using System.Collections.Generic;
+using MonoDevelop.Ide.Gui;
+using MonoDevelop.Ide.Gui.Dialogs;
 using System;
 using System.Linq;
-using System.Collections.Generic;
-using Gdk;
+using MonoDevelop.Ide.Gui.Shell;
+using System.Threading.Tasks;
 
-namespace Pinta.Docking.DockNotebook
+namespace Pinta.Docking
 {
-	public class DockWindow : Gtk.Window
+	class DockWindow : IdeWindow
 	{
 		static List<DockWindow> allWindows = new List<DockWindow> ();
-        private DockNotebook notebook;
 
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
+			IdeApp.CommandService.RegisterTopWindow (this);
+			AddAccelGroup (IdeApp.CommandService.AccelGroup);
+
 			allWindows.Add (this);
 
-			notebook = new DockNotebook ();
+			var notebook = new SdiDragNotebook ((DefaultWorkbench)IdeApp.Workbench.RootWindow);
 			notebook.NavigationButtonsVisible = false;
 			Child = new DockNotebookContainer (notebook);
 			notebook.InitSize ();
@@ -57,20 +66,85 @@ namespace Pinta.Docking.DockNotebook
 			}
 		}
 
+		bool IsChildOfMe (Document d)
+		{
+			Widget control = ((SdiWorkspaceWindow)d.Window).TabControl;
+			while (control.Parent != null)
+				control = control.Parent;
+			return control == this;
+		}
+
 		protected override bool OnDeleteEvent (Event evnt)
 		{
-            foreach (var notebook in Container.GetNotebooks ().ToList ())
-            foreach (var tab in notebook.Tabs.ToList ())
-                if (!notebook.OnCloseTab (tab))
-                    return true;
+			var documents = IdeApp.Workbench.Documents.Where (IsChildOfMe).ToList ();
 
+			int howManyDirtyFiles = documents.Count (doc => doc.IsDirty);
+			if (howManyDirtyFiles > 1) {
+				using (var dlg = new DirtyFilesDialog (documents, closeWorkspace: false, groupByProject: false)) {
+					dlg.Modal = true;
+					if (MessageService.ShowCustomDialog (dlg) != (int)Gtk.ResponseType.Ok)
+						return true;
+				}
+			} else if (howManyDirtyFiles == 1) {
+				// Ensure dirty file is closed first. This prevents saved files being closed
+				// if the save is cancelled.
+				documents.Sort (DirtyFilesFirst);
+			}
+
+			if (howManyDirtyFiles > 1) {
+				foreach (var d in documents)
+					d.Close (true).Ignore ();
+			} else if (documents.Count > 0) {
+				// Document.Close() could leave the UI synchronization context, letting the Gtk signal handler pass
+				// and Gtk would destroy the window immediately. Since we need to preserve the window
+				// state until the async document.Close () has finished, we interrupt the signal (return true)
+				// and destoy the window in a continuation task after the document has been closed.
+				CloseDocumentsAsync (documents).Ignore ();
+				return true;
+			}
 			return base.OnDeleteEvent (evnt);
+		}
+
+		async Task CloseDocumentsAsync (List<Document> documents)
+		{
+			foreach (var d in documents) {
+				if (!await d.Close ())
+					return;
+			}
+			Destroy ();
+		}
+
+		static int DirtyFilesFirst (Document x, Document y)
+		{
+			if (x.IsDirty == y.IsDirty)
+				return 0;
+			else if (x.IsDirty)
+				return -1;
+			else
+				return 1;
+		}
+
+		protected override bool OnConfigureEvent (EventConfigure evnt)
+		{
+			((DefaultWorkbench)IdeApp.Workbench.RootWindow).SetActiveWidget (Focus);
+			return base.OnConfigureEvent (evnt);
+		}
+
+		protected override bool OnFocusInEvent (EventFocus evnt)
+		{
+			((DefaultWorkbench)IdeApp.Workbench.RootWindow).SetActiveWidget (Focus);
+			return base.OnFocusInEvent (evnt);
+		}
+
+		protected override bool OnKeyPressEvent (EventKey evnt)
+		{
+			return ((DefaultWorkbench)IdeApp.Workbench.RootWindow).FilterWindowKeypress (evnt) || base.OnKeyPressEvent (evnt);
 		}
 
 		protected override void OnDestroyed ()
 		{
 			allWindows.Remove (this);
-
+			RemoveAccelGroup (IdeApp.CommandService.AccelGroup);
 			base.OnDestroyed ();
 		}
 

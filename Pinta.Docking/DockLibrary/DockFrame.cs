@@ -1,4 +1,4 @@
-//
+﻿//
 // MonoDevelop.Components.Docking.cs
 //
 // Author:
@@ -39,8 +39,10 @@ using Xwt.Motion;
 
 namespace Pinta.Docking
 {
-	public class DockFrame: HBox, IAnimatable
+	class DockFrame: HBox, IAnimatable
 	{
+		public event EventHandler<EventArgs> LayoutChanged;
+
 		internal const double ItemDockCenterArea = 0.4;
 		internal const int GroupDockSeparatorSize = 40;
 		
@@ -67,19 +69,34 @@ namespace Pinta.Docking
 
 		public DockFrame ()
 		{
-            GtkWorkarounds.FixContainerLeak (this);
+			GtkWorkarounds.FixContainerLeak (this);
+
+			Accessible.Name = "DockFrame";
 
 			dockBarTop = new DockBar (this, Gtk.PositionType.Top);
+			dockBarTop.Accessible.Name = "DockFrame.TopBar";
+
 			dockBarBottom = new DockBar (this, Gtk.PositionType.Bottom);
+			dockBarBottom.Accessible.Name = "DockFrame.BottomBar";
+
 			dockBarLeft = new DockBar (this, Gtk.PositionType.Left);
+			dockBarLeft.Accessible.Name = "DockFrame.LeftBar";
+
 			dockBarRight = new DockBar (this, Gtk.PositionType.Right);
-			
+			dockBarRight.Accessible.Name = "DockFrame.RightBar";
+
 			container = new DockContainer (this);
+			container.Accessible.Name = "DockFrame.Main";
+
 			HBox hbox = new HBox ();
+			hbox.Accessible.SetShouldIgnore (true);
+
 			hbox.PackStart (dockBarLeft, false, false, 0);
 			hbox.PackStart (container, true, true, 0);
 			hbox.PackStart (dockBarRight, false, false, 0);
 			mainBox = new VBox ();
+			mainBox.Accessible.SetShouldIgnore (true);
+
 			mainBox.PackStart (dockBarTop, false, false, 0);
 			mainBox.PackStart (hbox, true, true, 0);
 			mainBox.PackStart (dockBarBottom, false, false, 0);
@@ -127,12 +144,24 @@ namespace Pinta.Docking
 
 		internal bool OverlayWidgetVisible { get; set; }
 
+		protected override void OnDestroyed ()
+		{
+			this.AbortAnimation ("ShowOverlayWidget");
+			this.AbortAnimation ("HideOverlayWidget");
+			base.OnDestroyed ();
+		}
+
 		public void AddOverlayWidget (Widget widget, bool animate = false)
 		{
 			RemoveOverlayWidget (false);
 
 			this.overlayWidget = widget;
 			widget.Parent = this;
+
+			// Emit the add signal so that the A11y system will pick up that a widget has been added to the box
+			// but the box won't handle it because widget.Parent has already been set.
+			GtkWorkarounds.EmitAddSignal(this, widget);
+
 			OverlayWidgetVisible = true;
 			MinimizeAllAutohidden ();
 			if (animate) {
@@ -140,9 +169,13 @@ namespace Pinta.Docking
 				this.Animate (
 					"ShowOverlayWidget", 
 					ShowOverlayWidgetAnimation,
+					finished: (a, b) => {
+						mainBox.Hide ();
+					},
 					easing: Easing.CubicOut);
 			} else {
 				currentOverlayPosition = Math.Max (0, Allocation.Y);
+				mainBox.Hide ();
 				QueueResize ();
 			}
 
@@ -155,21 +188,29 @@ namespace Pinta.Docking
 			this.AbortAnimation ("HideOverlayWidget");
 			OverlayWidgetVisible = false;
 
+			mainBox.Show ();
+
 			if (overlayWidget != null) {
 				if (animate) {
 					currentOverlayPosition = Allocation.Y;
 					this.Animate (
 						"HideOverlayWidget", 
 						HideOverlayWidgetAnimation,
-						finished: (a,b) => { 
+						finished: (a,b) => {
 							if (overlayWidget != null) {
 								overlayWidget.Unparent ();
+
+								// After we've unparented the widget, we call remove so the A11y system can clean up as well.
+								GLib.Signal.Emit (this, "remove", overlayWidget);
 								overlayWidget = null;
 							}
 						},
 						easing: Easing.SinOut);
 				} else {
 					overlayWidget.Unparent ();
+					// After we've unparented the widget, we call remove so the A11y system can clean up as well.
+					GtkWorkarounds.EmitRemoveSignal(this, overlayWidget);
+
 					overlayWidget = null;
 					QueueResize ();
 				}
@@ -666,6 +707,7 @@ namespace Pinta.Docking
 			while (reader.NodeType != XmlNodeType.EndElement) {
 				if (reader.NodeType == XmlNodeType.Element) {
 					DockLayout layout = DockLayout.Read (this, reader);
+					layout.AllocationChanged += LayoutAllocationChanged;
 					layouts.Add (layout.Name, layout);
 				}
 				else
@@ -674,6 +716,11 @@ namespace Pinta.Docking
 			}
 			reader.ReadEndElement ();
 			container.RelayoutWidgets ();
+		}
+
+		void LayoutAllocationChanged (object sender, EventArgs e)
+		{
+			LayoutChanged?.Invoke (this, EventArgs.Empty);
 		}
 
 		internal void UpdateTitle (DockItem item)
@@ -689,6 +736,11 @@ namespace Pinta.Docking
 			dockBarRight.UpdateTitle (item);
 		}
 		
+		internal void UpdateStyles ()
+		{
+			container.ReloadStyles ();
+		}
+
 		internal void UpdateStyle (DockItem item)
 		{
 			DockGroupItem gitem = container.FindDockGroupItem (item.Id);
@@ -856,12 +908,13 @@ namespace Pinta.Docking
 		
 		internal void AddTopLevel (DockFrameTopLevel w, int x, int y, int width, int height)
 		{
+			ValidateWindowBounds (ref x, ref y, ref width, ref height);
+
 			w.X = x;
 			w.Y = y;
 
 			if (UseWindowsForTopLevelFrames) {
-				var win = new Gtk.Window (Gtk.WindowType.Toplevel);
-				win.AcceptFocus = false;
+				var win = new IdeWindow (Gtk.WindowType.Toplevel);
 				win.SkipTaskbarHint = true;
 				win.Decorated = false;
 				win.TypeHint = Gdk.WindowTypeHint.Toolbar;
@@ -874,28 +927,37 @@ namespace Pinta.Docking
 				win.Move (p.X, p.Y);
 				win.Resize (width, height);
 				win.Show ();
-                // Pinta TODO: May be needed on Mac?
-				//Ide.DesktopService.AddChildWindow ((Gtk.Window)Toplevel, win);
+				Ide.IdeServices.DesktopService.AddChildWindow ((Gtk.Window)Toplevel, win);
 				win.AcceptFocus = true;
 				win.Opacity = 1.0;
 
 				/* When we use real windows for frames, it's possible for pads to be over other
 				 * windows. For some reason simply presenting or raising those dialogs doesn't
 				 * seem to work, so we hide/show them in order to force them above the pad. */
-				var toplevels = Gtk.Window.ListToplevels ().Where (t => t.IsRealized && t.TypeHint == WindowTypeHint.Dialog); // && t.TransientFor != null);
+				var toplevels = Gtk.Window.ListToplevels ().Where (t => t.IsRealized && t.Visible && t.TypeHint == WindowTypeHint.Dialog); // && t.TransientFor != null);
 				foreach (var t in toplevels) {
 					t.Hide ();
 					t.Show ();
 				}
+
+				MonoDevelop.Ide.IdeApp.CommandService.RegisterTopWindow (win);
 			} else {
 				w.Parent = this;
 				w.Size = new Size (width, height);
 				Requisition r = w.SizeRequest ();
-				w.SetAllocation(new Gdk.Rectangle (Allocation.X + x, Allocation.Y + y, r.Width, r.Height));
+				w.Allocation = new Gdk.Rectangle (Allocation.X + x, Allocation.Y + y, r.Width, r.Height);
 				topLevels.Add (w);
 			}
 		}
-		
+
+		void ValidateWindowBounds (ref int x, ref int y, ref int w, ref int h)
+		{
+			x = Math.Max (0, x);
+			y = Math.Max (0, y);
+			w = Math.Min (mainBox.Allocation.Width - x, w);
+			h = Math.Min (mainBox.Allocation.Height - y, h);
+		}
+
 		internal void RemoveTopLevel (DockFrameTopLevel w)
 		{
 			w.Unparent ();
@@ -1041,15 +1103,12 @@ namespace Pinta.Docking
 			}
 		}
 
-		// TODO-GTK3
-#if false
 		protected override void OnSizeRequested (ref Requisition requisition)
 		{
 			if (overlayWidget != null)
 				overlayWidget.SizeRequest ();
 			base.OnSizeRequested (ref requisition);
 		}
-#endif
 		
 		protected override void OnSizeAllocated (Rectangle allocation)
 		{
@@ -1079,7 +1138,7 @@ namespace Pinta.Docking
 			return base.OnButtonPressEvent (evnt);
 		}
 
-		void MinimizeAllAutohidden ()
+		internal void MinimizeAllAutohidden ()
 		{
 			foreach (var it in GetItems ()) {
 				if (it.Visible && it.Status == DockItemStatus.AutoHide)
@@ -1094,6 +1153,17 @@ namespace Pinta.Docking
 		internal static Cairo.Color ToCairoColor (Gdk.Color color)
 		{
 			return new Cairo.Color (color.Red / (double) ushort.MaxValue, color.Green / (double) ushort.MaxValue, color.Blue / (double) ushort.MaxValue);
+		}
+
+		protected override bool OnFocused (DirectionType direction)
+		{
+			// If there's an overlay widget, that's all we can focus
+			if (overlayWidget != null && overlayWidget.Visible) {
+				overlayWidget.ChildFocus (direction);
+				return true;
+			}
+
+			return base.OnFocused (direction);
 		}
 	}
 

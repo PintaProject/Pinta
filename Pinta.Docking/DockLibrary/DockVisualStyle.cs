@@ -29,14 +29,15 @@ namespace Pinta.Docking
 {
 	public sealed class DockVisualStyle
 	{
-		public Gdk.Color? PadBackgroundColor { get; set; }
-		public Gdk.Color? PadTitleLabelColor { get; set; }
+		public Xwt.Drawing.Color? PadBackgroundColor { get; set; }
+		public Xwt.Drawing.Color? PadTitleLabelColor { get; set; }
+		public Xwt.Drawing.Color? InactivePadTitleLabelColor { get; set; }
 		public DockTabStyle? TabStyle { get; set; }
-		public Gdk.Color? TreeBackgroundColor { get; set; }
+		public Xwt.Drawing.Color? TreeBackgroundColor { get; set; }
 		public bool? ShowPadTitleIcon { get; set; }
 		public bool? UppercaseTitles { get; set; }
 		public bool? ExpandedTabs { get; set; }
-		public Gdk.Color? InactivePadBackgroundColor { get; set; }
+		public Xwt.Drawing.Color? InactivePadBackgroundColor { get; set; }
 		public int? PadTitleHeight { get; set; }
 
 		// When set, pads in a region with this style can't be stacked horizontally
@@ -60,6 +61,8 @@ namespace Pinta.Docking
 				PadBackgroundColor = style.PadBackgroundColor;
 			if (style.PadTitleLabelColor != null)
 				PadTitleLabelColor = style.PadTitleLabelColor;
+			if (style.InactivePadTitleLabelColor != null)
+				InactivePadTitleLabelColor = style.InactivePadTitleLabelColor;
 			if (style.TabStyle != null)
 				TabStyle = style.TabStyle;
 			if (style.TreeBackgroundColor != null)
@@ -83,14 +86,15 @@ namespace Pinta.Docking
 		public static DockVisualStyle CreateDefaultStyle ()
 		{
 			DockVisualStyle s = new DockVisualStyle ();
-			s.PadBackgroundColor = new Gdk.Color (0,0,0);
-			s.PadTitleLabelColor = new Gdk.Color (0,0,0);
+			s.PadBackgroundColor = new Xwt.Drawing.Color (0,0,0);
+			s.PadTitleLabelColor = new Xwt.Drawing.Color (0,0,0);
+			s.InactivePadTitleLabelColor = new Xwt.Drawing.Color (0,0,0);
 			s.TabStyle = DockTabStyle.Normal;
 			s.TreeBackgroundColor = null;
 			s.ShowPadTitleIcon = true;
 			s.UppercaseTitles = false;
 			s.ExpandedTabs = false;
-			s.InactivePadBackgroundColor = new Gdk.Color (0,0,0);
+			s.InactivePadBackgroundColor = new Xwt.Drawing.Color (0,0,0);
 			s.PadTitleHeight = -1;
 			s.SingleRowMode = false;
 			s.SingleColumnMode = false;

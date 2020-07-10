@@ -30,14 +30,19 @@ using Gtk;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Pinta.Docking;
-using Pinta.Docking.Gui;
+using System.Linq;
+using System.IO;
+using MonoDevelop.Ide;
+using MonoDevelop.Components.AtkCocoaHelper;
+using MonoDevelop.Core;
+using MonoDevelop.Ide.Gui.Shell;
+using System.Linq;
 
-namespace Pinta.Docking.DockNotebook
+namespace Pinta.Docking
 {
-	public delegate void TabsReorderedHandler (Widget widget, int oldPlacement, int newPlacement);
+	delegate void TabsReorderedHandler (DockNotebookTab tab, int oldPlacement, int newPlacement);
 
-	public class DockNotebook : Gtk.VBox
+	class DockNotebook : Gtk.VBox, IShellNotebook
 	{
 		List<DockNotebookTab> pages = new List<DockNotebookTab> ();
 		List<DockNotebookTab> pagesHistory = new List<DockNotebookTab> ();
@@ -50,6 +55,9 @@ namespace Pinta.Docking.DockNotebook
 
 		static DockNotebook activeNotebook;
 		static List<DockNotebook> allNotebooks = new List<DockNotebook> ();
+
+		public static event EventHandler ActiveNotebookChanged;
+		public static event EventHandler NotebookChanged;
 
 		enum TargetList {
 			UriList = 100
@@ -69,33 +77,25 @@ namespace Pinta.Docking.DockNotebook
 			PackStart (tabStrip, false, false, 0);
 
 			contentBox = new EventBox ();
+			contentBox.Accessible.SetShouldIgnore (true);
 			PackStart (contentBox, true, true, 0);
 
 			ShowAll ();
-
-            tabStrip.Visible = DockNotebookManager.TabStripVisible;
-            DockNotebookManager.TabStripVisibleChanged += (o, e) => tabStrip.Visible = DockNotebookManager.TabStripVisible;
 
 			contentBox.NoShowAll = true;
 
 			tabStrip.DropDownButton.Sensitive = false;
 
-			tabStrip.DropDownButton.MenuCreator = delegate {
-				Gtk.Menu menu = new Menu ();
+			tabStrip.DropDownButton.ContextMenuRequested = delegate {
+				ContextMenu menu = new ContextMenu ();
 				foreach (var tab in pages) {
-					var mi = new Gtk.ImageMenuItem ("");
-					menu.Insert (mi, -1);
-					var label = (Gtk.AccelLabel) mi.Child;
-					if (tab.Markup != null)
-						label.Markup = tab.Markup;
-					else
-						label.Text = tab.Text;
+					var item = new ContextMenuItem (tab.Markup ?? tab.Text);
 					var locTab = tab;
-					mi.Activated += delegate {
+					item.Clicked += (object sender, ContextMenuItemClickedEventArgs e) => {
 						CurrentTab = locTab;
 					};
+					menu.Items.Add (item);
 				}
-				menu.ShowAll ();
 				return menu;
 			};
 
@@ -114,7 +114,7 @@ namespace Pinta.Docking.DockNotebook
 			allNotebooks.Add (this);
 		}
 
-		internal static DockNotebook ActiveNotebook {
+		public static DockNotebook ActiveNotebook {
 			get { return activeNotebook; }
 			set {
 				if (activeNotebook != value) {
@@ -123,22 +123,25 @@ namespace Pinta.Docking.DockNotebook
 					activeNotebook = value;
 					if (activeNotebook != null)
 						activeNotebook.tabStrip.IsActiveNotebook = true;
-
-                    DockNotebookManager.OnActiveNotebookChanged ();
+					if (ActiveNotebookChanged != null)
+						ActiveNotebookChanged (null, EventArgs.Empty);
 				}
 			}
 		}
 
-		internal static IEnumerable<DockNotebook> AllNotebooks {
+		public static IEnumerable<DockNotebook> AllNotebooks {
 			get { return allNotebooks; }
 		}
 
 		Cursor fleurCursor = new Cursor (CursorType.Fleur);
 
+		public event TabsReorderedHandler TabsReordered;
+		public event EventHandler<TabEventArgs> TabClosed;
+		public event EventHandler<TabEventArgs> TabPinned;
 		public event EventHandler<TabEventArgs> TabActivated;
 
-		public event EventHandler PageAdded;
-		public event EventHandler PageRemoved;
+		public event EventHandler<TabEventArgs> PageAdded;
+		public event EventHandler<TabEventArgs> PageRemoved;
 		public event EventHandler SwitchPage;
 
 		public event EventHandler PreviousButtonClicked {
@@ -181,7 +184,8 @@ namespace Pinta.Docking.DockNotebook
 					if (currentTab != null) {
 						if (currentTab.Content != null) {
 							contentBox.Add (currentTab.Content);
-							contentBox.ChildFocus (DirectionType.Down);
+							// Focus the last child, as some editors like the JSON one have a dropdown at the top.
+							contentBox.ChildFocus (DirectionType.Up);
 						}
 						pagesHistory.Remove (currentTab);
 						pagesHistory.Insert (0, currentTab);
@@ -193,8 +197,6 @@ namespace Pinta.Docking.DockNotebook
 
 					if (SwitchPage != null)
 						SwitchPage (this, EventArgs.Empty);
-
-                    DockNotebookManager.OnActiveTabChanged ();
 				}
 			}
 		}
@@ -237,15 +239,61 @@ namespace Pinta.Docking.DockNotebook
 			get { return tabStrip.BarHeight; }
 		}
 
-		public void InitSize ()
+		internal void InitSize ()
 		{
 			tabStrip.InitSize ();
 		}
 
-		void OnDragDataReceived (object o, Gtk.DragDataReceivedArgs args)
+		async void OnDragDataReceived (object o, Gtk.DragDataReceivedArgs args)
 		{
-            DockNotebookManager.OnDragDataReceived (o, args);
-        }
+			if (args.Info != (uint) TargetList.UriList)
+				return;
+			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
+
+			var loadWorkspaceItems = !IsInsideTabStrip (args.X, args.Y);
+			var files = new List<Ide.Gui.FileOpenInformation> ();
+
+			foreach (string individualFile in fullData.Split ('\n')) {
+				string file = individualFile.Trim ();
+				if (file.StartsWith ("file://")) {
+					var filePath = new FilePath (file);
+					if (filePath.IsDirectory) {
+						if (!loadWorkspaceItems) // skip directories when not loading solutions
+							continue;
+						filePath = Directory.EnumerateFiles (filePath).FirstOrDefault (p => Services.ProjectService.IsWorkspaceItemFile (p));
+					}
+					if (!filePath.IsNullOrEmpty) // skip empty paths
+						files.Add (new Ide.Gui.FileOpenInformation (filePath, null, 0, 0, Ide.Gui.OpenDocumentOptions.DefaultInternal) { DockNotebook = this });
+				}
+			}
+
+			if (files.Count > 0) {
+				if (loadWorkspaceItems) {
+					try {
+						IdeApp.OpenFiles (files);
+					} catch (Exception e) {
+						LoggingService.LogError ($"Failed to open dropped files", e);
+					}
+				} else { // open workspace items as files
+					foreach (var file in files) {
+						try {
+							await IdeApp.Workbench.OpenDocument (file).ConfigureAwait (false);
+						} catch (Exception e) {
+							LoggingService.LogError ($"unable to open file {file}", e);
+						}
+					}
+				}
+			}
+		}
+
+		bool IsInsideTabStrip (int pointerX, int pointerY)
+		{
+			if (tabStrip?.IsRealized != true)
+				return false;
+			int tabX, tabY;
+			TranslateCoordinates (tabStrip, pointerX, pointerY, out tabX, out tabY);
+			return tabStrip.Allocation.Contains (new Point (tabX, tabY));
+		}
 
 		public DockNotebookContainer Container {
 			get {
@@ -280,20 +328,6 @@ namespace Pinta.Docking.DockNotebook
 			return t;
 		}
 
-        public DockNotebookTab InsertTab (IViewContent content, int index)
-        {
-            // Create the new tab
-            var tab = InsertTab (index);
-
-            // Create a content window and add it to the tab
-            var window = new SdiWorkspaceWindow (content, this, tab);
-            tab.Content = window;
-
-            tab.Content.Show ();
-
-            return tab;
-        }
-
 		public DockNotebookTab InsertTab (int index)
 		{
 			var tab = new DockNotebookTab (this, tabStrip);
@@ -315,8 +349,11 @@ namespace Pinta.Docking.DockNotebook
 			tabStrip.Update ();
 			tabStrip.DropDownButton.Sensitive = pages.Count > 0;
 
-			if (PageAdded != null)
-				PageAdded (this, EventArgs.Empty);
+			PageAdded?.Invoke (this, new TabEventArgs { Tab = tab, });
+
+			tab.OnChangingPinned = OnTabPinned;
+
+			NotebookChanged?.Invoke (this, EventArgs.Empty);
 
 			return tab;
 		}
@@ -325,6 +362,24 @@ namespace Pinta.Docking.DockNotebook
 		{
 			for (int n=startIndex; n < pages.Count; n++)
 				((DockNotebookTab)pages [n]).Index = n;
+		}
+
+		void OnTabPinned (DockNotebookTab sender, bool value)
+		{
+			if (pages.Count == 1)
+				return;
+
+			var stickedPages = pages.Where (p => p.IsPinned);
+			var normalPages = pages.Where (p => !p.IsPinned);
+
+			if (value) {
+				if (stickedPages.Any ()) 
+					ReorderTab (sender, normalPages.MinValueOrDefault (s => s.Index) ?? stickedPages.MaxValueOrDefault (s => s.Index), false);
+				 else 
+					ReorderTab (sender, pages.FirstOrDefault (), false);
+			} else {
+				ReorderTab (sender, stickedPages.MaxValueOrDefault (s => s.Index) ?? normalPages.MinValueOrDefault (s => s.Index), false);
+			}
 		}
 
 		public DockNotebookTab GetTab (int n)
@@ -350,12 +405,16 @@ namespace Pinta.Docking.DockNotebook
 			tabStrip.Update ();
 			tabStrip.DropDownButton.Sensitive = pages.Count > 0;
 
-			if (PageRemoved != null)
-				PageRemoved (this, EventArgs.Empty);
+			PageRemoved?.Invoke (this, new TabEventArgs { Tab = tab });
+
+			NotebookChanged?.Invoke (this, EventArgs.Empty);
 		}
 
-		internal void ReorderTab (DockNotebookTab tab, DockNotebookTab targetTab)
+		internal void ReorderTab (DockNotebookTab tab, DockNotebookTab targetTab, bool pinCheck = true)
 		{
+			if (pinCheck && tab.IsPinned != targetTab.IsPinned)
+				return;
+			
 			if (tab == targetTab)
 				return;
 			int targetPos = targetTab.Index;
@@ -366,20 +425,22 @@ namespace Pinta.Docking.DockNotebook
 				pages.Insert (targetPos + 1, tab);
 				pages.RemoveAt (tab.Index);
 			}
-            // JONTODO
-			//IdeApp.Workbench.ReorderDocuments (tab.Index, targetPos);
+			if (TabsReordered != null)
+				TabsReordered (tab, tab.Index, targetPos);
 			UpdateIndexes (Math.Min (tab.Index, targetPos));
 			tabStrip.Update ();
 		}
 
-        // Returns true if the tab was successfully closed
-		internal bool OnCloseTab (DockNotebookTab tab)
+		internal void OnCloseTab (DockNotebookTab tab)
 		{
-            var e = new TabClosedEventArgs () { Tab = tab };
+			if (TabClosed != null)
+				TabClosed (this, new TabEventArgs () { Tab = tab });
+		}
 
-			DockNotebookManager.OnTabClosed (this, e);
-
-            return !e.Cancel;
+		internal void OnPinTab (DockNotebookTab tab)
+		{
+			if (TabPinned != null)
+				TabPinned (this, new TabEventArgs () { Tab = tab });
 		}
 
 		internal void OnActivateTab (DockNotebookTab tab)
@@ -403,6 +464,7 @@ namespace Pinta.Docking.DockNotebook
 		protected override void OnDestroyed ()
 		{
 			allNotebooks.Remove (this);
+
 			if (ActiveNotebook == this)
 				ActiveNotebook = null;
 			if (fleurCursor != null) {
@@ -410,6 +472,15 @@ namespace Pinta.Docking.DockNotebook
 				fleurCursor = null;
 			}
 			base.OnDestroyed ();
+		}
+	}
+
+	class DockNotebookChangedArgs : EventArgs
+	{
+		public DockNotebook Notebook { get; private set; }
+		public DockNotebookChangedArgs (DockNotebook notebook)
+		{
+			Notebook = notebook;
 		}
 	}
 }

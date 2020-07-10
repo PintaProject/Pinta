@@ -31,15 +31,12 @@
 using System;
 using Gdk;
 using Gtk;
-using MonoDevelop.Components;
 
 namespace Pinta.Docking
 {
 	internal class PlaceholderWindow: Gtk.Window
 	{
-#if false
 		Gdk.GC redgc;
-#endif
 		uint anim;
 		int rx, ry, rw, rh;
 		bool allowDocking;
@@ -63,11 +60,17 @@ namespace Pinta.Docking
 			// Create the mask for the arrow
 			
 			Realize ();
-			// TODO-GTK3
-#if false
 			redgc = new Gdk.GC (GdkWindow);
 	   		redgc.RgbFgColor = frame.Style.Background (StateType.Selected);
-#endif
+		}
+
+		protected override void OnDestroyed ()
+		{
+			if (redgc != null) {
+				redgc.Dispose ();
+				redgc = null;
+			}
+			base.OnDestroyed ();
 		}
 
 		protected override void OnRealized ()
@@ -84,20 +87,18 @@ namespace Pinta.Docking
 			white = new Gdk.Color (255, 255, 255);
 			white.Pixel = 0;
 
-			// TODO-GTK3
-#if false
-			Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1);
-			Gdk.GC gc = new Gdk.GC (pm);
-			gc.Background = white;
-			gc.Foreground = white;
-			pm.DrawRectangle (gc, true, 0, 0, width, height);
-			
-			gc.Foreground = black;
-			pm.DrawRectangle (gc, false, 0, 0, width - 1, height - 1);
-			pm.DrawRectangle (gc, false, 1, 1, width - 3, height - 3);
-			
-			this.ShapeCombineMask (pm, 0, 0);
-#endif
+			using (Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1)) {
+				using (Gdk.GC gc = new Gdk.GC (pm)) {
+					gc.Background = white;
+					gc.Foreground = white;
+					pm.DrawRectangle (gc, true, 0, 0, width, height);
+
+					gc.Foreground = black;
+					pm.DrawRectangle (gc, false, 0, 0, width - 1, height - 1);
+					pm.DrawRectangle (gc, false, 1, 1, width - 3, height - 3);
+				}
+				this.ShapeCombineMask (pm, 0, 0);
+			}
 		}
 		
 		protected override void OnSizeAllocated (Rectangle allocation)
@@ -106,8 +107,7 @@ namespace Pinta.Docking
 			CreateShape (allocation.Width, allocation.Height);
 		}
 
-		// TODO-GTK3
-#if false
+		
 		protected override bool OnExposeEvent (Gdk.EventExpose args)
 		{
 			//base.OnExposeEvent (args);
@@ -117,7 +117,6 @@ namespace Pinta.Docking
 			this.GdkWindow.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
 	  		return true;
 		}
-#endif
 		
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{
@@ -190,8 +189,8 @@ namespace Pinta.Docking
 
 			HBox box = new HBox (false, 3);
 			if (draggedItem.Icon != null) {
-				var img = new ImageView (draggedItem.Icon);
-				box.PackStart (img, false, false, 0);
+				var img = new Xwt.ImageView (draggedItem.Icon);
+				box.PackStart (img.ToGtkWidget (), false, false, 0);
 			}
 			Gtk.Label la = new Label ();
 			la.Markup = draggedItem.Label;
