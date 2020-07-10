@@ -76,8 +76,10 @@ namespace Pinta.Docking.DockNotebook
 		public MonoDevelop.Components.MenuButton DropDownButton;
 
 		static readonly int TotalHeight = 32;
+#if false
 		static readonly Xwt.WidgetSpacing TabPadding;
 		static readonly Xwt.WidgetSpacing TabActivePadding;
+#endif
 		static readonly int LeftBarPadding = 44;
 		static readonly int RightBarPadding = 22;
 		static readonly int VerticalTextSize = 11;
@@ -122,6 +124,7 @@ namespace Pinta.Docking.DockNotebook
 
 		static TabStrip ()
 		{
+#if false
 			Xwt.Drawing.NinePatchImage tabBackImage9;
 			if (tabBackImage is Xwt.Drawing.ThemedImage) {
 				var img = ((Xwt.Drawing.ThemedImage)tabBackImage).GetImage (Xwt.Drawing.Context.GlobalStyles);
@@ -138,6 +141,7 @@ namespace Pinta.Docking.DockNotebook
 			} else
 				tabActiveBackImage9 = tabActiveBackImage as Xwt.Drawing.NinePatchImage;
 			TabActivePadding = tabActiveBackImage9.Padding;
+#endif
 		}
 
 		public TabStrip (DockNotebook notebook)

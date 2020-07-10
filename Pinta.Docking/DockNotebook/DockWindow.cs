@@ -60,6 +60,7 @@ namespace Pinta.Docking.DockNotebook
 			}
 		}
 
+#if false
 		bool IsChildOfMe (Document d)
 		{
 			Widget control = ((SdiWorkspaceWindow)d.Window).TabControl;
@@ -117,6 +118,7 @@ namespace Pinta.Docking.DockNotebook
 			else
 				return 1;
 		}
+#endif
 
 		protected override bool OnConfigureEvent (EventConfigure evnt)
 		{

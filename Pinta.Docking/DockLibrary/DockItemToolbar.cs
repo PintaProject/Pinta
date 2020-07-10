@@ -215,10 +215,12 @@ namespace Pinta.Docking
 	
 	public class DockToolButton : Gtk.Button
 	{
+#if false
 		public ImageView Image {
 			get { return (ImageView)button.Image; }
 			set { button.Image = value; }
 		}
+#endif
 
 		public string TooltipText {
 			get { return button.TooltipText; }
@@ -250,10 +252,12 @@ namespace Pinta.Docking
 			Image.Show ();
 		}
 
+#if false
 		protected override object CreateNativeWidget<T> ()
 		{
 			return button;
 		}
+#endif
 
 		public event EventHandler Clicked {
 			add {
@@ -264,6 +268,7 @@ namespace Pinta.Docking
 			}
 		}
 
+#if false
 		public class DockToolButtonImage : Gtk.Button
 		{
 			ImageView image;
@@ -287,6 +292,7 @@ namespace Pinta.Docking
 				return new DockToolButtonImage (d);
 			}
 		}
+#endif
 	}
 }
 

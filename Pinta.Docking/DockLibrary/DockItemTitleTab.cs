@@ -66,17 +66,22 @@ namespace Pinta.Docking
 		static Gdk.Pixbuf pixAutoHide;
 		static Gdk.Pixbuf pixDock;
 
-		static readonly Xwt.WidgetSpacing TabPadding;
-		static readonly Xwt.WidgetSpacing TabActivePadding;
+		const int TopPadding = 5;
+		const int BottomPadding = 7;
+		const int TopPaddingActive = 5;
+		const int BottomPaddingActive = 7;
+		const int LeftPadding = 11;
+		const int RightPadding = 9;
 
 		internal event EventHandler<EventArgs> TabPressed;
 
 		static DockItemTitleTab ()
 		{
-			pixClose = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "pad-close-9.png");
-			pixAutoHide = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "pad-minimize-9.png");
-			pixDock = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "pad-dock-9.png");
+			pixClose = GdkExtensions.FromResource("pad-close-9.png");
+			pixAutoHide = GdkExtensions.FromResource("pad-minimize-9.png");
+			pixDock = GdkExtensions.FromResource("pad-dock-9.png");
 
+#if false
 			Xwt.Drawing.NinePatchImage tabBackImage9;
 			if (dockTabBackImage is Xwt.Drawing.ThemedImage) {
 				var img = ((Xwt.Drawing.ThemedImage)dockTabBackImage).GetImage (Xwt.Drawing.Context.GlobalStyles);
@@ -93,6 +98,7 @@ namespace Pinta.Docking
 			} else
 				tabActiveBackImage9 = dockTabActiveBackImage as Xwt.Drawing.NinePatchImage;
 			TabActivePadding = tabActiveBackImage9.Padding;
+#endif
 		}
 
 		public DockItemTitleTab (DockItem item, DockFrame frame)
