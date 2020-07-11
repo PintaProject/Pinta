@@ -928,8 +928,11 @@ namespace Pinta.Docking
 				win.Move (p.X, p.Y);
 				win.Resize (width, height);
 				win.Show ();
+                // Pinta TODO: May be needed on Mac?
+#if false
 				Ide.IdeServices.DesktopService.AddChildWindow ((Gtk.Window)Toplevel, win);
-				win.AcceptFocus = true;
+#endif
+                win.AcceptFocus = true;
 				win.Opacity = 1.0;
 
 				/* When we use real windows for frames, it's possible for pads to be over other

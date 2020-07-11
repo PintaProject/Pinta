@@ -166,6 +166,8 @@ namespace Pinta.Docking.AtkCocoaHelper
 
 		void HandleSignalAttachment (Action<GLib.Signal, EventHandler<GLib.SignalArgs>> action)
 		{
+			// TODO-GTK3
+#if false
 			var signal = GLib.Signal.Lookup (owner, "request-actions", typeof (GLib.SignalArgs));
 			action (signal, new EventHandler<GLib.SignalArgs> (RequestActionsHandler));
 
@@ -191,6 +193,7 @@ namespace Pinta.Docking.AtkCocoaHelper
 			action (signal, new EventHandler<GLib.SignalArgs> (PerformShowDefaultUIHandler));
 			signal = GLib.Signal.Lookup (owner, "perform-show-menu", typeof (GLib.SignalArgs));
 			action (signal, new EventHandler<GLib.SignalArgs> (PerformShowMenuHandler));
+#endif
 		}
 
 		public ActionDelegate (Gtk.Widget widget)

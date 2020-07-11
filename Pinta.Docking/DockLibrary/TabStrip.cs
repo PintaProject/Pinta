@@ -34,6 +34,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 using Pinta.Docking.AtkCocoaHelper;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -48,8 +49,8 @@ namespace Pinta.Docking
 		{
 			Accessible.SetRole (AtkCocoa.Roles.AXTabGroup);
 			Accessible.SetCommonAttributes ("Docking.TabStrip",
-			                                GettextCatalog.GetString ("Pad Tab Bar"),
-			                                GettextCatalog.GetString ("The different pads in this dock position"));
+			                                Translations.GetString ("Pad Tab Bar"),
+			                                Translations.GetString ("The different pads in this dock position"));
 
 			VBox vbox = new VBox ();
 			vbox.Accessible.SetShouldIgnore (true);

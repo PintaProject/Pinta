@@ -242,6 +242,7 @@ namespace Pinta.Docking.DockNotebook
 
 		async void OnDragDataReceived (object o, Gtk.DragDataReceivedArgs args)
 		{
+#if false
 			if (args.Info != (uint) TargetList.UriList)
 				return;
 			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
@@ -280,6 +281,9 @@ namespace Pinta.Docking.DockNotebook
 					}
 				}
 			}
+#else
+			DockNotebookManager.OnDragDataReceived(0, args);
+#endif
 		}
 
 		bool IsInsideTabStrip (int pointerX, int pointerY)

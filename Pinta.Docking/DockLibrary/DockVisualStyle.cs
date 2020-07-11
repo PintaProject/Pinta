@@ -86,15 +86,15 @@ namespace Pinta.Docking
 		public static DockVisualStyle CreateDefaultStyle ()
 		{
 			DockVisualStyle s = new DockVisualStyle ();
-			s.PadBackgroundColor = new Xwt.Drawing.Color (0,0,0);
-			s.PadTitleLabelColor = new Xwt.Drawing.Color (0,0,0);
-			s.InactivePadTitleLabelColor = new Xwt.Drawing.Color (0,0,0);
+			s.PadBackgroundColor = new Gdk.Color (0,0,0);
+			s.PadTitleLabelColor = new Gdk.Color (0,0,0);
+			s.InactivePadTitleLabelColor = new Gdk.Color (0,0,0);
 			s.TabStyle = DockTabStyle.Normal;
 			s.TreeBackgroundColor = null;
 			s.ShowPadTitleIcon = true;
 			s.UppercaseTitles = false;
 			s.ExpandedTabs = false;
-			s.InactivePadBackgroundColor = new Xwt.Drawing.Color (0,0,0);
+			s.InactivePadBackgroundColor = new Gdk.Color (0,0,0);
 			s.PadTitleHeight = -1;
 			s.SingleRowMode = false;
 			s.SingleColumnMode = false;

@@ -438,7 +438,9 @@ namespace Pinta.Docking
 				SetRegionStyle (frame.GetRegionStyleForItem (this));
 
 				floatingWindow = new DockFloatingWindow ((Gtk.Window)frame.Toplevel, GetWindowTitle ());
+#if false
 				Ide.IdeApp.CommandService.RegisterTopWindow (floatingWindow);
+#endif
 
 				Gtk.VBox box = new Gtk.VBox ();
 				box.Show ();
@@ -454,7 +456,12 @@ namespace Pinta.Docking
 				};
 			}
 			floatingWindow.Show ();
+#if true
+			floatingWindow.Move(rect.X, rect.Y);
+			floatingWindow.Resize(rect.Width, rect.Height);
+#else
 			Ide.IdeServices.DesktopService.PlaceWindow (floatingWindow, rect.X, rect.Y, rect.Width, rect.Height);
+#endif
 			if (titleTab != null)
 				titleTab.UpdateBehavior ();
 			Widget.Show ();

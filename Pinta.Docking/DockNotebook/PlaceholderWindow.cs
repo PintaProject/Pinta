@@ -29,6 +29,7 @@ using Gtk;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Pinta.Docking.Gui;
 
 namespace Pinta.Docking.DockNotebook
 {
@@ -44,6 +45,7 @@ namespace Pinta.Docking.DockNotebook
 
 		static PlaceholderWindow ()
 		{
+#if false
 			IdeApp.Workbench.ActiveDocumentChanged += delegate {
 				var doc = IdeApp.Workbench.ActiveDocument;
 				if (doc == null)
@@ -55,6 +57,7 @@ namespace Pinta.Docking.DockNotebook
 				
 				rootWindow.Title = DefaultWorkbench.GetTitle (workspaceWindow);
 			};
+#endif
 		}
 
 		DockNotebookTab frame;
@@ -66,7 +69,9 @@ namespace Pinta.Docking.DockNotebook
 			Decorated = false;
 			TypeHint = WindowTypeHint.Utility;
 			titleWindow = new DocumentTitleWindow (this, tab);
+#if false
 			IdeApp.Workbench.LockActiveWindowChangeEvent ();
+#endif
 
 			titleWindow.FocusInEvent += delegate {
 				if (timeout != 0) {
@@ -83,8 +88,11 @@ namespace Pinta.Docking.DockNotebook
 				});
 			};
 
+#if false
 			var windowStack = IdeApp.CommandService.TopLevelWindowStack.ToArray ();
+#endif
 			allNotebooks = DockNotebook.AllNotebooks.ToList ();
+#if false
 			allNotebooks.Sort (delegate(DockNotebook x, DockNotebook y) {
 				var ix = Array.IndexOf (windowStack, (Gtk.Window) x.Toplevel);
 				var iy = Array.IndexOf (windowStack, (Gtk.Window) y.Toplevel);
@@ -92,6 +100,7 @@ namespace Pinta.Docking.DockNotebook
 				if (iy == -1) iy = int.MaxValue;
 				return ix.CompareTo (iy);
 			});
+#endif
 		}
 
 		DockNotebook hoverNotebook;
@@ -107,7 +116,9 @@ namespace Pinta.Docking.DockNotebook
 			Gtk.Application.Invoke ((o, args) => {
 				titleWindow.Destroy ();
 			});
+#if false
 			IdeApp.Workbench.UnlockActiveWindowChangeEvent ();
+#endif
 		}
 
 		int curX, curY;
@@ -344,7 +355,9 @@ namespace Pinta.Docking.DockNotebook
 		public void PlaceWindow (DockNotebook notebook)
 		{
 			try {
+#if false
 				IdeApp.Workbench.LockActiveWindowChangeEvent ();
+#endif
 				var allocation = Allocation;
 				Destroy ();
 
@@ -356,7 +369,9 @@ namespace Pinta.Docking.DockNotebook
 					((SdiWorkspaceWindow)frame.Content).SelectWindow ();
 				}
 			} finally {
+#if false
 				IdeApp.Workbench.UnlockActiveWindowChangeEvent ();
+#endif
 			}
 		}
 	}

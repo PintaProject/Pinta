@@ -38,12 +38,18 @@ namespace Pinta.Docking.DockNotebook
 
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
+#if false
 			IdeApp.CommandService.RegisterTopWindow (this);
 			AddAccelGroup (IdeApp.CommandService.AccelGroup);
+#endif
 
 			allWindows.Add (this);
 
+#if false
 			var notebook = new SdiDragNotebook ((DefaultWorkbench)IdeApp.Workbench.RootWindow);
+#else
+			var notebook = new DockNotebook();
+#endif
 			notebook.NavigationButtonsVisible = false;
 			Child = new DockNotebookContainer (notebook);
 			notebook.InitSize ();
@@ -120,6 +126,7 @@ namespace Pinta.Docking.DockNotebook
 		}
 #endif
 
+#if false
 		protected override bool OnConfigureEvent (EventConfigure evnt)
 		{
 			((DefaultWorkbench)IdeApp.Workbench.RootWindow).SetActiveWidget (Focus);
@@ -136,11 +143,14 @@ namespace Pinta.Docking.DockNotebook
 		{
 			return ((DefaultWorkbench)IdeApp.Workbench.RootWindow).FilterWindowKeypress (evnt) || base.OnKeyPressEvent (evnt);
 		}
+#endif
 
 		protected override void OnDestroyed ()
 		{
 			allWindows.Remove (this);
+#if false
 			RemoveAccelGroup (IdeApp.CommandService.AccelGroup);
+#endif
 			base.OnDestroyed ();
 		}
 

@@ -389,7 +389,7 @@ namespace Pinta.Docking
 
 			Style = Style.Attach (GdkWindow);
 			Style.SetBackground (GdkWindow, State);
-			this.WidgetFlags &= ~WidgetFlags.NoWindow;
+			HasWindow = false;
 			
 			//GdkWindow.SetBackPixmap (null, true);
 
@@ -401,7 +401,7 @@ namespace Pinta.Docking
 			if (this.GdkWindow != null) {
 				this.GdkWindow.UserData = IntPtr.Zero;
 				this.GdkWindow.Destroy ();
-				this.WidgetFlags |= WidgetFlags.NoWindow;
+				HasWindow = false;
 			}
 			base.OnUnrealized ();
 		}

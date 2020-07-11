@@ -174,10 +174,14 @@ namespace Pinta.Docking
 		{
 			double inactiveIconAlpha;
 
+#if false
 			if (IdeApp.Preferences == null || IdeApp.Preferences.UserInterfaceTheme == Theme.Light)
 				inactiveIconAlpha = 0.8;
 			else
 				inactiveIconAlpha = 0.6;
+#else
+			inactiveIconAlpha = 0.8;
+#endif
 
 			if (labelWidget?.Visible == true && label != null) {
 				if (visualStyle.UppercaseTitles.Value)
@@ -245,7 +249,7 @@ namespace Pinta.Docking
 
 				btnDock = new ImageButton ();
 				btnDock.Image = pixAutoHide;
-				btnDock.TooltipText = GettextCatalog.GetString ("Auto Hide");
+				btnDock.TooltipText = Translations.GetString ("Auto Hide");
 				btnDock.CanFocus = true;
 				//			btnDock.WidthRequest = btnDock.HeightRequest = 17;
 				btnDock.Clicked += OnClickDock;
@@ -255,7 +259,7 @@ namespace Pinta.Docking
 
 				btnClose = new ImageButton ();
 				btnClose.Image = pixClose;
-				btnClose.TooltipText = GettextCatalog.GetString ("Close");
+				btnClose.TooltipText = Translations.GetString ("Close");
 				btnClose.CanFocus = true;
 				//			btnClose.WidthRequest = btnClose.HeightRequest = 17;
 				btnClose.WidthRequest = btnDock.SizeRequest ().Width;
@@ -284,12 +288,12 @@ namespace Pinta.Docking
 				labelWidget.Name = label;
 				btnDock.Name = string.Format ("btnDock_{0}", labelNoSpaces ?? string.Empty);
 				btnClose.Name = string.Format ("btnClose_{0}", labelNoSpaces ?? string.Empty);
-				realLabel = GettextCatalog.GetString ("Close {0}", label);
-				realHelp = GettextCatalog.GetString ("Close the {0} pad", label);
+				realLabel = Translations.GetString ("Close {0}", label);
+				realHelp = Translations.GetString ("Close the {0} pad", label);
 			} else {
 				labelWidget.Parent.Hide ();
-				realLabel = GettextCatalog.GetString ("Close pad");
-				realHelp = GettextCatalog.GetString ("Close the pad");
+				realLabel = Translations.GetString ("Close pad");
+				realHelp = Translations.GetString ("Close the pad");
 			}
 
 			btnClose.Accessible.SetLabel (realLabel);
@@ -297,7 +301,7 @@ namespace Pinta.Docking
 
 			if (label != null) {
 				Accessible.Name = $"DockTab.{labelNoSpaces}";
-				Accessible.Description = GettextCatalog.GetString ("Switch to the {0} tab", label);
+				Accessible.Description = Translations.GetString ("Switch to the {0} tab", label);
 				Accessible.SetTitle (label);
 				Accessible.SetLabel (label);
 			}
@@ -390,10 +394,10 @@ namespace Pinta.Docking
 					btnClose.Image = pixClose;
 				if (item.Status == DockItemStatus.AutoHide || item.Status == DockItemStatus.Floating) {
 					btnDock.Image = pixDock;
-					btnDock.TooltipText = GettextCatalog.GetString ("Dock");
+					btnDock.TooltipText = Translations.GetString ("Dock");
 				} else {
 					btnDock.Image = pixAutoHide;
-					btnDock.TooltipText = GettextCatalog.GetString ("Auto Hide");
+					btnDock.TooltipText = Translations.GetString ("Auto Hide");
 				}
 			} else {
 				btnDock.Image = null;

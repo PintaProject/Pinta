@@ -34,6 +34,7 @@ using Gtk;
 using Xwt.Motion;
 using Gdk;
 using Pinta.Docking.AtkCocoaHelper;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {	
@@ -196,7 +197,9 @@ namespace Pinta.Docking
 			this.AbortAnimation ("Hover");
 			base.OnDestroyed ();
 			bar.Frame.SizeAllocated -= HandleBarFrameSizeAllocated;
+#if false
 			Ide.Gui.Styles.Changed -= UpdateStyle;
+#endif
 		}
 		
 		
@@ -273,7 +276,7 @@ namespace Pinta.Docking
 
 				Accessible.SetLabel (it.Label);
 				Accessible.SetTitle (it.Label);
-				Accessible.Description = GettextCatalog.GetString ("Show the {0} pad", it.Label);
+				Accessible.Description = Translations.GetString ("Show the {0} pad", it.Label);
 			} else
 				label = null;
 

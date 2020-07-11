@@ -185,9 +185,11 @@ namespace Pinta.Docking.DockNotebook
 				otherContainer.Remove (newChild);
 				
 				motherContainer.tabControl = otherContainer.tabControl;
+#if false
 				if (motherContainer.isMasterTab) {
 					((DefaultWorkbench)IdeApp.Workbench.RootWindow).TabControl = (SdiDragNotebook)motherContainer.tabControl;
 				}
+#endif
 				motherContainer.isMasterTab |= otherContainer.isMasterTab;
 				motherContainer.Remove (paned);
 				motherContainer.Child = newChild;
@@ -202,7 +204,11 @@ namespace Pinta.Docking.DockNotebook
 
 		DockNotebook Insert (SdiWorkspaceWindow window, Action<DockNotebookContainer> callback)
 		{
+#if false
 			var newNotebook = new SdiDragNotebook ((DefaultWorkbench)IdeApp.Workbench.RootWindow);
+#else
+			var newNotebook = new DockNotebook();
+#endif
 
 			newNotebook.NavigationButtonsVisible = false;
 			newNotebook.InitSize ();
