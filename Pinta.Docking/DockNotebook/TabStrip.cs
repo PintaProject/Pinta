@@ -41,15 +41,15 @@ namespace Pinta.Docking.DockNotebook
 {
 	class TabStrip: EventBox, IAnimatable
 	{
-        static Gdk.Pixbuf tabbarPrevImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-prev-12.png");
-        static Gdk.Pixbuf tabbarNextImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-next-12.png");
-        static Gdk.Pixbuf tabActiveBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-active.9.png");
-        static Gdk.Pixbuf tabBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-inactive.9.png");
-        static Gdk.Pixbuf tabbarBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-back.9.png");
-        static Gdk.Pixbuf tabCloseImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-close-9.png");
-        static Gdk.Pixbuf tabDirtyImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-dirty-9.png");
-        static Gdk.Pixbuf tabPinnedImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-pinned-9.png");
-        static Gdk.Pixbuf tabUnPinnedImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tab-unpinned-9.png");
+        static Gdk.Pixbuf tabbarPrevImage = GdkExtensions.FromResource( "tabbar-prev-12.png");
+        static Gdk.Pixbuf tabbarNextImage = GdkExtensions.FromResource( "tabbar-next-12.png");
+        static Gdk.Pixbuf tabActiveBackImage = GdkExtensions.FromResource( "tabbar-active.9.png");
+        static Gdk.Pixbuf tabBackImage = GdkExtensions.FromResource( "tabbar-inactive.9.png");
+        static Gdk.Pixbuf tabbarBackImage = GdkExtensions.FromResource( "tabbar-back.9.png");
+        static Gdk.Pixbuf tabCloseImage = GdkExtensions.FromResource( "tab-close-9.png");
+        static Gdk.Pixbuf tabDirtyImage = GdkExtensions.FromResource( "tab-dirty-9.png");
+        static Gdk.Pixbuf tabPinnedImage = GdkExtensions.FromResource( "tab-pinned-9.png");
+        static Gdk.Pixbuf tabUnPinnedImage = GdkExtensions.FromResource( "tab-unpinned-9.png");
 
         HBox innerBox;
 

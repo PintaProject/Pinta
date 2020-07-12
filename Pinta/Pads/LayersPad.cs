@@ -37,7 +37,7 @@ namespace Pinta
 		{
 			var layers = new LayersListWidget ();
 			DockItem layers_item = workspace.AddItem ("Layers");
-			DockItemToolbar layers_tb = layers_item.GetToolbar (PositionType.Bottom);
+			DockItemToolbar layers_tb = layers_item.GetToolbar (DockPositionType.Bottom);
 
 			layers_item.Label = Translations.GetString ("Layers");
 			layers_item.Content = layers;

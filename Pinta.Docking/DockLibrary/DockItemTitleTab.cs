@@ -38,8 +38,8 @@ namespace Pinta.Docking
 
 	class DockItemTitleTab : Gtk.EventBox
 	{
-		static Gdk.Pixbuf dockTabActiveBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "padbar-active.9.png");
-		static Gdk.Pixbuf dockTabBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "padbar-inactive.9.png");
+		static Gdk.Pixbuf dockTabActiveBackImage = GdkExtensions.FromResource( "padbar-active.9.png");
+		static Gdk.Pixbuf dockTabBackImage = GdkExtensions.FromResource( "padbar-inactive.9.png");
 
 		bool active;
 		Gtk.Widget page;

@@ -142,6 +142,22 @@ namespace Pinta.Docking.DockNotebook
 			}
 		}
 
+		// Pinta extension.
+        public void ActivateTab(DockNotebookTab tab)
+        {
+            DockNotebook.ActiveNotebook = tab.Notebook;
+            tab.Notebook.CurrentTab = tab;
+        }
+
+		// Pinta extension.
+        public void CloseTab(DockNotebookTab tab)
+        {
+            var notebook = tab.Notebook;
+            var index = notebook.Tabs.IndexOf (tab);
+
+            notebook.RemoveTab (index, true);
+        }
+
 		public static DockWindow MoveToFloatingWindow (SdiWorkspaceWindow workspaceWindow)
 		{
 			return MoveToFloatingWindow (workspaceWindow, 0, 0, 640, 480);

@@ -37,7 +37,7 @@ namespace Pinta
 		{
 			var history = new HistoryTreeView ();
 			DockItem history_item = workspace.AddItem ("History");
-			DockItemToolbar history_tb = history_item.GetToolbar (PositionType.Bottom);
+			DockItemToolbar history_tb = history_item.GetToolbar (DockPositionType.Bottom);
 
 			history_item.Label = Translations.GetString ("History");
 			history_item.DefaultLocation = "Images/Bottom";

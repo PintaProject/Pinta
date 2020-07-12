@@ -33,6 +33,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using Pinta.Docking.AtkCocoaHelper;
+using Pinta.Docking.Gui;
 
 namespace Pinta.Docking.DockNotebook
 {
@@ -238,7 +239,7 @@ namespace Pinta.Docking.DockNotebook
 			get { return tabStrip.BarHeight; }
 		}
 
-		internal void InitSize ()
+		public void InitSize ()
 		{
 			tabStrip.InitSize ();
 		}
@@ -330,6 +331,21 @@ namespace Pinta.Docking.DockNotebook
 				t.Content = content;
 			return t;
 		}
+
+		// Pinta extension
+		public DockNotebookTab InsertTab (IViewContent content, int index)
+        {
+            // Create the new tab
+            var tab = InsertTab (index);
+
+            // Create a content window and add it to the tab
+            var window = new SdiWorkspaceWindow (content, this, tab);
+            tab.Content = window;
+
+            tab.Content.Show ();
+
+            return tab;
+        }
 
 		public DockNotebookTab InsertTab (int index)
 		{

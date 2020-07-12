@@ -34,7 +34,7 @@ using Gtk;
 
 namespace Pinta.Docking
 {
-	class DockBar: Gtk.EventBox
+	public class DockBar: Gtk.EventBox
 	{
 		Gtk.PositionType position;
 		Box box;

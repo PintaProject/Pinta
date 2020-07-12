@@ -320,7 +320,7 @@ namespace Pinta.Docking
 		internal class TabStripBox: HBox
 		{
 			public TabStrip TabStrip;
-			static Gdk.Pixbuf tabbarBackImage = new Gdk.Pixbuf(Assembly.GetExecutingAssembly(), "tabbar-back.9.png");
+			static Gdk.Pixbuf tabbarBackImage = GdkExtensions.FromResource( "tabbar-back.9.png");
 
 			// TODO-GTK3
 #if false

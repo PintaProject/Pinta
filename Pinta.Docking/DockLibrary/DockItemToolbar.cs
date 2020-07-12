@@ -252,13 +252,9 @@ namespace Pinta.Docking
 			button = new Button ();
 			Label = label;
 
-			// Pinta TODO
-#if false
-			Image = new ImageView (stockId, IconSize.Menu);
+
+			Image = new Gtk.Image(stockId, IconSize.Menu);
 			Image.Show ();
-#else
-			throw new NotImplementedException();
-#endif
 		}
 
 #if false

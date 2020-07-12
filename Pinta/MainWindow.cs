@@ -418,9 +418,9 @@ namespace Pinta
 			dock.CompactGuiLevel = 5;
 
             var style = new DockVisualStyle ();
-            style.PadTitleLabelColor = Styles.PadLabelColor;
-            style.PadBackgroundColor = Styles.PadBackground;
-            style.InactivePadBackgroundColor = Styles.InactivePadBackground;
+            style.PadTitleLabelColor = Styles.PadLabelColor.ToGdkColor();
+            style.PadBackgroundColor = Styles.PadBackground.ToGdkColor();
+            style.InactivePadBackgroundColor = Styles.InactivePadBackground.ToGdkColor();
             style.TabStyle = DockTabStyle.Normal;
             style.ShowPadTitleIcon = false;
             dock.DefaultVisualStyle = style;

@@ -29,17 +29,32 @@
     <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png">
       <LogicalName>pad-minimize-9.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12%402x.png">
-      <LogicalName>tabbar-next-12%402x.png</LogicalName>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12.png">
+      <LogicalName>tabbar-prev-12.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12.png">
       <LogicalName>tabbar-next-12.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12%402x.png">
-      <LogicalName>tabbar-prev-12%402x.png</LogicalName>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-active.9.png">
+      <LogicalName>tabbar-active.9.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12.png">
-      <LogicalName>tabbar-prev-12.png</LogicalName>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-inactive.9.png">
+      <LogicalName>tabbar-inactive.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tabbar-back.9.png">
+      <LogicalName>tabbar-back.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tab-close-9.png">
+      <LogicalName>tab-close-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tab-dirty-9.png">
+      <LogicalName>tab-dirty-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tab-pinned-9.png">
+      <LogicalName>tab-pinned-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockNotebook\icons\tab-unpinned-9.png">
+      <LogicalName>tab-unpinned-9.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

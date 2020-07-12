@@ -40,7 +40,7 @@ using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
 {
-	class DockFrame: HBox, IAnimatable
+	public class DockFrame: HBox, IAnimatable
 	{
 		public event EventHandler<EventArgs> LayoutChanged;
 
