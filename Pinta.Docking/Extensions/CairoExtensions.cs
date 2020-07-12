@@ -88,6 +88,15 @@ namespace Pinta.Docking
             double b = ((double)int.Parse (s.Substring (4, 2), System.Globalization.NumberStyles.HexNumber)) / 255;
             return new Cairo.Color (r, g, b, alpha);
         }
+        public static Cairo.Color WithAlpha (this Cairo.Color color, double alpha)
+        {
+            return new Color(color.R, color.G, color.B, alpha);
+        }
+        // This is just for compatibility with Xwt.Color
+        public static Cairo.Color ToCairoColor (this Cairo.Color color)
+        {
+            return color;
+        }
 
         public static Gdk.Color ToGdkColor (this Cairo.Color color)
         {
@@ -236,6 +245,20 @@ namespace Pinta.Docking
             color.A = @base.A;
             return color;
         }
+		public static bool Contains (this Cairo.Rectangle r, int x, int y)
+		{
+			if (x < r.X || x >= r.X + r.Width)
+				return false;
+
+			if (y < r.Y || y >= r.Y + r.Height)
+				return false;
+
+			return true;
+		}
+		public static bool Contains (this Cairo.Rectangle r, Gdk.Point point)
+		{
+            return r.Contains(point.X, point.Y);
+		}
 
 	}
 }

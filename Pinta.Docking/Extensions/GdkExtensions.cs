@@ -35,6 +35,12 @@ namespace Pinta.Docking
 {
     static class GdkExtensions
 	{
+        // For compability with Xwt.Color
+        public static Gdk.Color ToGdkColor (this Gdk.Color color)
+        {
+            return color;
+        }
+
         public static Gdk.Pixbuf WithAlpha (this Gdk.Pixbuf image, double opacity)
         {
             using (var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, image.Width, image.Height)) {
