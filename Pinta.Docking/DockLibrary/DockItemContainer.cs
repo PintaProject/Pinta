@@ -31,6 +31,7 @@
 using System;
 using Gtk;
 using Pinta.Core;
+using Pinta.Docking;
 using Pinta.Docking.AtkCocoaHelper;
 
 namespace Pinta.Docking
@@ -166,10 +167,10 @@ namespace Pinta.Docking
 			}
 		}
 
-		// TODO-GTK3
-#if false
 		void OnTreeRealized (object sender, EventArgs e)
 		{
+		// TODO-GTK3
+#if false
 			var w = (Gtk.TreeView)sender;
 			if (VisualStyle.TreeBackgroundColor != null) {
 				w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
@@ -178,8 +179,11 @@ namespace Pinta.Docking
 				w.ModifyBase (StateType.Normal, Parent.Style.Base (StateType.Normal));
 				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
 			}
+#endif
 		}
 		
+		// TODO-GTK3
+#if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			if (VisualStyle.TabStyle == DockTabStyle.Normal) {

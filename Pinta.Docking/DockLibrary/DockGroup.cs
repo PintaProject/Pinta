@@ -216,7 +216,7 @@ namespace Pinta.Docking
 		DockGroup Copy ()
 		{
 			DockGroup grp = new DockGroup (Frame, type);
-			grp.dockObjects = new List<MonoDevelop.Components.Docking.DockObject> (dockObjects);
+			grp.dockObjects = new List<Pinta.Docking.DockObject> (dockObjects);
 			foreach (DockObject obj in grp.dockObjects)
 				obj.ParentGroup = grp;
 			

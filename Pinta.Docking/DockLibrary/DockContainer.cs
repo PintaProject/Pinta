@@ -362,7 +362,7 @@ namespace Pinta.Docking
 		
 		protected override void OnRealized ()
 		{
-			WidgetFlags |= WidgetFlags.Realized;
+			IsRealized = true;
 			
 			Gdk.WindowAttr attributes = new Gdk.WindowAttr ();
 			attributes.X = Allocation.X;
@@ -370,9 +370,11 @@ namespace Pinta.Docking
 			attributes.Height = Allocation.Height;
 			attributes.Width = Allocation.Width;
 			attributes.WindowType = Gdk.WindowType.Child;
-			attributes.Wclass = Gdk.WindowClass.InputOutput;
+			attributes.Wclass = Gdk.WindowWindowClass.InputOutput;
 			attributes.Visual = Visual;
+#if false
 			attributes.Colormap = Colormap;
+#endif
 			attributes.EventMask = (int)(Events |
 				Gdk.EventMask.ExposureMask |
 				Gdk.EventMask.Button1MotionMask |
@@ -382,7 +384,9 @@ namespace Pinta.Docking
 			Gdk.WindowAttributesType attributes_mask =
 				Gdk.WindowAttributesType.X |
 				Gdk.WindowAttributesType.Y |
+#if false
 				Gdk.WindowAttributesType.Colormap |
+#endif
 				Gdk.WindowAttributesType.Visual;
 			GdkWindow = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
 			GdkWindow.UserData = Handle;

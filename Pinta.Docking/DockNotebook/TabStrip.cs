@@ -169,7 +169,7 @@ namespace Pinta.Docking.DockNotebook
 			Add (innerBox);
 
 			this.notebook = notebook;
-			WidgetFlags |= Gtk.WidgetFlags.AppPaintable;
+			AppPaintable = true;
 			Events |= EventMask.PointerMotionMask | EventMask.LeaveNotifyMask | EventMask.ButtonPressMask;
 
 			var arr = new Xwt.ImageView (tabbarPrevImage);
@@ -200,7 +200,7 @@ namespace Pinta.Docking.DockNotebook
 			NextButton.Accessible.SetTitle (Translations.GetString ("Next document"));
 			NextButton.Accessible.Description = Translations.GetString ("Switch to next document");
 
-			DropDownButton = new MenuButton ();
+			DropDownButton = new MonoDevelop.Components.MenuButton ();
 			DropDownButton.TooltipText = Translations.GetString ("Document List");
 			DropDownButton.Relief = ReliefStyle.None;
 			DropDownButton.CanDefault = false;
@@ -1147,9 +1147,12 @@ namespace Pinta.Docking.DockNotebook
 			// Redraw the dragging tab here to be sure its on top. We drew it before to get the sizing correct, this should be fixed.
 			drawActive?.Invoke (ctx);
 
+			// Pinta TODO
+#if false
 			if (HasFocus) {
 				Gtk.Style.PaintFocus (Style, GdkWindow, State, focusRect, this, "tab", focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
 			}
+#endif
 		}
 
 		// TODO-GTK3
@@ -1170,11 +1173,14 @@ namespace Pinta.Docking.DockNotebook
 				tabBounds.X = (int)(tabBounds.X + (dragX - tabBounds.X) * dragXProgress);
 				tabBounds.X = Clamp (tabBounds.X, tabStartX, tabEndX - tabBounds.Width);
 			}
+			// TODO-GTK3
+#if false
 			double rightPadding = (active ? TabActivePadding.Right : TabPadding.Right) - (LeanWidth / 2);
 			rightPadding = (rightPadding * Math.Min (1.0, Math.Max (0.5, (tabBounds.Width - 30) / 70.0)));
 			double leftPadding = (active ? TabActivePadding.Left : TabPadding.Left) - (LeanWidth / 2);
 			leftPadding = (leftPadding * Math.Min (1.0, Math.Max (0.5, (tabBounds.Width - 30) / 70.0)));
 			double bottomPadding = active ? TabActivePadding.Bottom : TabPadding.Bottom;
+#endif
 
 			DrawTabBackground (this, ctx, allocation, tabBounds.Width, tabBounds.X, active, tab.IsPinned);
 
@@ -1226,7 +1232,7 @@ namespace Pinta.Docking.DockNotebook
 			double ty = tabBounds.Height - bottomPadding - baseline;
 
 			ctx.MoveTo (tx, ty);
-			if (!MonoDevelop.Core.Platform.IsMac && !MonoDevelop.Core.Platform.IsWindows) {
+			if (!Platform.IsMac && !Platform.IsWindows) {
 				// This is a work around for a linux specific problem.
 				// A bug in the proprietary ATI driver caused TAB text not to draw.
 				// If that bug get's fixed remove this HACK asap.
@@ -1272,9 +1278,13 @@ namespace Pinta.Docking.DockNotebook
 		Pango.Layout CreateSizedLayout (bool active)
 		{
 			var la = new Pango.Layout (PangoContext);
+#if false
 			la.FontDescription = IdeServices.FontService.SansFont.Copy ();
 			if (!Core.Platform.IsWindows)
 				la.FontDescription.Weight = Pango.Weight.Bold;
+#else
+			la.FontDescription = Pango.FontDescription.FromString("normal");
+#endif
 			la.FontDescription.AbsoluteSize = Pango.Units.FromPixels (VerticalTextSize);
 
 			return la;

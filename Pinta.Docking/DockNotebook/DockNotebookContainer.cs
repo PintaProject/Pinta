@@ -153,7 +153,10 @@ namespace Pinta.Docking.DockNotebook
 			var tab = notebook.AddTab ();
 			tab.Content = workspaceWindow;
 
+			// Pinta TODO
+#if false
 			window.Title = DefaultWorkbench.GetTitle (workspaceWindow);
+#endif
 
 			workspaceWindow.SetDockNotebook (notebook, tab);
 

@@ -718,6 +718,8 @@ namespace Pinta.Docking
 		{
 			base.OnSizeAllocated (rect);
 
+			// TODO-GTK3
+#if false
 			int leftPadding = (int)TabPadding.Left;
 			int rightPadding = (int)TabPadding.Right;
 			
@@ -736,9 +738,10 @@ namespace Pinta.Docking
 				rect.Height = height;
 				Child.SizeAllocate (rect);
 			}
+#endif
 		}
 
-		// TODO-GTK#
+		// TODO-GTK3
 #if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{

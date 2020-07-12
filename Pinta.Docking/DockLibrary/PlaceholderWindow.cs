@@ -75,7 +75,7 @@ namespace Pinta.Docking
 			white = new Gdk.Color (255, 255, 255);
 			white.Pixel = 0;
 
-			using (Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1)) {
+			using (Gdk.Pixmap pm = new Gdk.Pixmap (this.GdkWindow, width, height, 1)) {
 				using (Gdk.GC gc = new Gdk.GC (pm)) {
 					gc.Background = white;
 					gc.Foreground = white;

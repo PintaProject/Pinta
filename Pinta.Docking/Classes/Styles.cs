@@ -329,7 +329,7 @@ namespace Pinta.Docking
 
 		static Styles ()
 		{
-			if (Core.Platform.IsWindows)
+			if (Platform.IsWindows)
 				TooltipInfoSpacing = 0;
 			else
 				TooltipInfoSpacing = -4;
@@ -338,12 +338,14 @@ namespace Pinta.Docking
 
 		internal static void LoadStyle ()
 		{
+			// Pinta TODO
+#if false
 			Gtk.Style defaultStyle;
 			Gtk.Widget styledWidget;
 			if (IdeApp.Workbench == null || IdeApp.Workbench.RootWindow == null) {
 				styledWidget = new Gtk.Label (String.Empty);
 				defaultStyle = styledWidget.Style;
-			} else {
+            } else {
 				styledWidget = IdeApp.Workbench.RootWindow;
 				defaultStyle = Gtk.Rc.GetStyle (styledWidget);
 			}
@@ -360,11 +362,16 @@ namespace Pinta.Docking
 
 			DefaultFont = defaultStyle.FontDescription.Copy ();
 			DefaultFontName = DefaultFont.ToString ();
+#endif
 
+#if false
 			if (IdeApp.Preferences == null || IdeApp.Preferences.UserInterfaceTheme == Theme.Light)
 				LoadLightStyle ();
 			else
 				LoadDarkStyle ();
+#else
+			LoadLightStyle();
+#endif
 
 			// Shared colors
 

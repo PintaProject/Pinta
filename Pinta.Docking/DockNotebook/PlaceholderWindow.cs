@@ -330,7 +330,10 @@ namespace Pinta.Docking.DockNotebook
 
 			var workspaceWindow = (SdiWorkspaceWindow)tab.Content;
 			newTab.Content = workspaceWindow;
+			// Pinta TODO
+#if false
 			newWindow.Title = DefaultWorkbench.GetTitle (workspaceWindow);
+#endif
 
 			workspaceWindow.SetDockNotebook (newNotebook, newTab);
 			newWindow.Move (ox - w / 2, oy - h / 2);
@@ -434,7 +437,11 @@ namespace Pinta.Docking.DockNotebook
 			//WORKAROUND: Pixbuf.FromDrawable (and by extension XWT's RenderWidget) is broken on Mac
 			return Xwt.Toolkit.NativeEngine.WrapImage (Mac.GtkMacInterop.RenderGtkWidget (w));
 #else
+#if false
 			return Xwt.Toolkit.CurrentEngine.RenderWidget (Xwt.Toolkit.CurrentEngine.WrapWidget (w));
+#else
+			return Gdk.Pixbuf.FromDrawable (win, Colormap.System, w.Allocation.X, w.Allocation.Y, 0, 0, w.Allocation.Width, w.Allocation.Height);
+#endif
 #endif
 		}
 
