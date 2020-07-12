@@ -255,7 +255,10 @@ namespace Pinta.Docking
 				label = new Label (it.Label);
 				label.Accessible.SetShouldIgnore (true);
 				label.UseMarkup = true;
+				// Pinta TODO
+#if false
 				label.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11));
+#endif
 
 				if (bar.Orientation == Orientation.Vertical)
 					label.Angle = 270;

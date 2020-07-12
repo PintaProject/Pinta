@@ -28,6 +28,7 @@ using System;
 using Gtk;
 using Pinta.Core;
 using Pinta.Docking.AtkCocoaHelper;
+using MonoDevelop.Components;
 
 namespace Pinta.Docking
 {
@@ -174,8 +175,11 @@ namespace Pinta.Docking
 				frame.Show ();
 			}
 			if (index != -1) {
+				// TODO-GTK3
+#if false
 				Box.BoxChild bc = (Box.BoxChild) box [widget];
 				bc.Position = index;
+#endif
 			}
 		}
 		
@@ -248,8 +252,13 @@ namespace Pinta.Docking
 			button = new Button ();
 			Label = label;
 
+			// Pinta TODO
+#if false
 			Image = new ImageView (stockId, IconSize.Menu);
 			Image.Show ();
+#else
+			throw new NotImplementedException();
+#endif
 		}
 
 #if false

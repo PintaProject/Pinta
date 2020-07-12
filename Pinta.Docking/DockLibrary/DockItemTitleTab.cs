@@ -201,12 +201,15 @@ namespace Pinta.Docking
 				tabIcon.Visible = visualStyle.ShowPadTitleIcon.Value;
 			}
 
+			// TODO-GTK3
+#if false
 			if (IsRealized && labelWidget?.Visible == true) {
 				var font = IdeServices.FontService.SansFont.CopyModified (null, Pango.Weight.Bold);
 				font.AbsoluteSize = Pango.Units.FromPixels (11);
 				labelWidget.ModifyFont (font);
 				labelWidget.ModifyText (StateType.Normal, (active ? visualStyle.PadTitleLabelColor.Value : visualStyle.InactivePadTitleLabelColor.Value).ToGdkColor ());
 			}
+#endif
 
 			var r = WidthRequest;
 			WidthRequest = -1;
@@ -223,8 +226,11 @@ namespace Pinta.Docking
 			this.label = label;
 			this.page = page;
 
+			// Pinta TODO
+#if false
 			if (icon == null)
 				icon = ImageService.GetIcon ("md-empty");
+#endif
 
 			if (box == null) {
 				box = new HBox ();

@@ -915,7 +915,11 @@ namespace Pinta.Docking
 			w.Y = y;
 
 			if (UseWindowsForTopLevelFrames) {
+#if false
 				var win = new IdeWindow (Gtk.WindowType.Toplevel);
+#else
+				var win = new Gtk.Window (Gtk.WindowType.Toplevel);
+#endif
 				win.SkipTaskbarHint = true;
 				win.Decorated = false;
 				win.TypeHint = Gdk.WindowTypeHint.Toolbar;

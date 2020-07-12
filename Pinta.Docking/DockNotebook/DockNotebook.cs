@@ -82,6 +82,8 @@ namespace Pinta.Docking.DockNotebook
 
 			tabStrip.DropDownButton.Sensitive = false;
 
+			// Pinta TODO
+#if false
 			tabStrip.DropDownButton.ContextMenuRequested = delegate {
 				ContextMenu menu = new ContextMenu ();
 				foreach (var tab in pages) {
@@ -94,6 +96,7 @@ namespace Pinta.Docking.DockNotebook
 				}
 				return menu;
 			};
+#endif
 
 			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, targetEntryTypes, Gdk.DragAction.Copy);
 			DragDataReceived += new Gtk.DragDataReceivedHandler (OnDragDataReceived);

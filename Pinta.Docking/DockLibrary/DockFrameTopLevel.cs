@@ -129,7 +129,12 @@ namespace Pinta.Docking
 					repositionRequested = true;
 					Application.Invoke ((o, args) => {
 						var pos = frame.GetScreenCoordinates (new Gdk.Point (x, y));
+#if false
 						IdeServices.DesktopService.PlaceWindow (ContainerWindow, pos.X, pos.Y, width, height);
+#else
+						ContainerWindow.Move(pos.X, pos.Y);
+						ContainerWindow.Resize(width, height);
+#endif
 						repositionRequested = false;
 					});
 				}

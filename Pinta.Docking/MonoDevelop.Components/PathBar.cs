@@ -408,11 +408,6 @@ namespace MonoDevelop.Components
 			ctx.Rectangle (x, y, width, height);
 			ctx.SetSourceColor (Styles.BreadcrumbButtonFillColor);
 			ctx.Fill ();
-
-			ctx.Rectangle (x + 0.5, y + 0.5, width - 1, height - 1);
-			ctx.SetSourceColor (Styles.BreadcrumbButtonBorderColor);
-			ctx.LineWidth = 1;
-			ctx.Stroke ();
 		}
 
 		int[] ReduceWidths (int overflow)

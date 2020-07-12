@@ -57,6 +57,10 @@ namespace Pinta.Docking
         {
             return image.ScaleSimple (size, size, InterpType.Bilinear);
         }
+        public static Gdk.Pixbuf WithSize (this Gdk.Pixbuf image, int w, int h)
+        {
+            return image.ScaleSimple (w, h, InterpType.Bilinear);
+        }
 
         public static Gdk.Pixbuf FromResource (string name)
         {

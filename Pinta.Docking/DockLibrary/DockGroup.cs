@@ -872,6 +872,8 @@ namespace Pinta.Docking
 			int hw = horiz ? Frame.HandleSize : Allocation.Width;
 			int hh = horiz ? Allocation.Height : Frame.HandleSize;
 
+			// TODO-GTK3
+#if false
 			Gdk.GC hgc = null;
 
 			if (areasList == null && oper == DrawSeparatorOperation.Draw) {
@@ -914,6 +916,7 @@ namespace Pinta.Docking
 			}
 			if (hgc != null)
 				hgc.Dispose ();
+#endif
 		}
 		
 		public void ResizeItem (int index, int newSize)

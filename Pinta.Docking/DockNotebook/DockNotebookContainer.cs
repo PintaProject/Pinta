@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using Gtk;
 using Pinta.Docking.Gui;
 using System.Linq;
+using MonoDevelop.Components;
 
 namespace Pinta.Docking.DockNotebook
 {

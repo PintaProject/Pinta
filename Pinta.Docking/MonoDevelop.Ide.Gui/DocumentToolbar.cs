@@ -116,7 +116,7 @@ namespace Pinta.Docking.Gui
 #if false
 				w.ModifyText (StateType.Normal, Styles.BreadcrumbTextColor);
 #endif
-				w.ModifyFg (StateType.Normal, Styles.BreadcrumbTextColor);
+				w.ModifyFg (StateType.Normal, Styles.BreadcrumbTextColor.ToGdkColor());
 			};
 			if (w is Gtk.Container) {
 				foreach (var c in ((Gtk.Container)w).Children)

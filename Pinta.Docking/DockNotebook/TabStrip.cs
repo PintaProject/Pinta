@@ -172,11 +172,19 @@ namespace Pinta.Docking.DockNotebook
 			AppPaintable = true;
 			Events |= EventMask.PointerMotionMask | EventMask.LeaveNotifyMask | EventMask.ButtonPressMask;
 
+#if false
 			var arr = new Xwt.ImageView (tabbarPrevImage);
+#else
+			var arr = new MonoDevelop.Components.ImageView (tabbarPrevImage);
+#endif
 			arr.HeightRequest = arr.WidthRequest = 10;
 
 			var alignment = new Alignment (0.5f, 0.5f, 0.0f, 0.0f);
+#if false
 			alignment.Add (arr.ToGtkWidget ());
+#else
+			alignment.Add(arr);
+#endif
 			PreviousButton = new Button (alignment);
 			PreviousButton.TooltipText = Translations.GetString ("Switch to previous document");
 			PreviousButton.Relief = ReliefStyle.None;
@@ -186,11 +194,19 @@ namespace Pinta.Docking.DockNotebook
 			PreviousButton.Accessible.SetTitle (Translations.GetString ("Previous document"));
 			PreviousButton.Accessible.Description = Translations.GetString ("Switch to previous document");
 
+#if false
 			arr = new Xwt.ImageView (tabbarNextImage);
+#else
+			arr = new MonoDevelop.Components.ImageView (tabbarNextImage);
+#endif
 			arr.HeightRequest = arr.WidthRequest = 10;
 
 			alignment = new Alignment (0.5f, 0.5f, 0.0f, 0.0f);
+#if false
 			alignment.Add (arr.ToGtkWidget ());
+#else
+			alignment.Add(arr);
+#endif
 			NextButton = new Button (alignment);
 			NextButton.TooltipText = Translations.GetString ("Switch to next document");
 			NextButton.Relief = ReliefStyle.None;
@@ -418,8 +434,13 @@ namespace Pinta.Docking.DockNotebook
 
 				var box = new HBox (false, 3);
 				if (draggedItem.Icon != null) {
+#if false
 					var img = new Xwt.ImageView (draggedItem.Icon);
 					box.PackStart (img.ToGtkWidget (), false, false, 0);
+#else
+					var img = new MonoDevelop.Components.ImageView (draggedItem.Icon);
+					box.PackStart (img, false, false, 0);
+#endif
 				}
 				var la = new Label ();
 				la.Markup = draggedItem.Label;
@@ -528,7 +549,11 @@ namespace Pinta.Docking.DockNotebook
 				dragX = (int)evnt.X - dragOffset;
 				QueueDraw ();
 
+#if false
 				var t = FindTab ((int)evnt.X, (int)TabPadding.Top + 3);
+#else
+				var t = FindTab ((int)evnt.X, (int)TabSpacing + 3);
+#endif
 				if (t == null) {
 					var last = (DockNotebookTab)notebook.Tabs.Last ();
 					if (dragX > last.Allocation.Right)
@@ -673,6 +698,8 @@ namespace Pinta.Docking.DockNotebook
 
 			// Fake an event, but all we need is the x and y.
 			// Ugly but the only way without messing up the public API.
+			// Pinta TODO
+#if false
 			var nativeEvent = new NativeEventButtonStruct {
 				x = x,
 				y = y,
@@ -685,6 +712,7 @@ namespace Pinta.Docking.DockNotebook
 			} finally {
 				Marshal.FreeHGlobal (ptr);
 			}
+#endif
 		}
 
 		Widget currentFocus = null;
@@ -1168,19 +1196,18 @@ namespace Pinta.Docking.DockNotebook
 
 		void DrawTab (Context ctx, DockNotebookTab tab, Gdk.Rectangle allocation, Gdk.Rectangle tabBounds, bool highlight, bool active, bool dragging, Pango.Layout la, bool focused)
 		{
+			// TODO-GTK3
+#if false
 			// This logic is stupid to have here, should be in the caller!
 			if (dragging) {
 				tabBounds.X = (int)(tabBounds.X + (dragX - tabBounds.X) * dragXProgress);
 				tabBounds.X = Clamp (tabBounds.X, tabStartX, tabEndX - tabBounds.Width);
 			}
-			// TODO-GTK3
-#if false
 			double rightPadding = (active ? TabActivePadding.Right : TabPadding.Right) - (LeanWidth / 2);
 			rightPadding = (rightPadding * Math.Min (1.0, Math.Max (0.5, (tabBounds.Width - 30) / 70.0)));
 			double leftPadding = (active ? TabActivePadding.Left : TabPadding.Left) - (LeanWidth / 2);
 			leftPadding = (leftPadding * Math.Min (1.0, Math.Max (0.5, (tabBounds.Width - 30) / 70.0)));
 			double bottomPadding = active ? TabActivePadding.Bottom : TabPadding.Bottom;
-#endif
 
 			DrawTabBackground (this, ctx, allocation, tabBounds.Width, tabBounds.X, active, tab.IsPinned);
 
@@ -1254,6 +1281,7 @@ namespace Pinta.Docking.DockNotebook
 				}
 			}
             la.Dispose ();
+#endif
 		}
 
 		const double DefaultGradientWidth = 10;
@@ -1270,7 +1298,7 @@ namespace Pinta.Docking.DockNotebook
 			double width = contentWidth - (TabSpacing * 2) + lean;
 
 			var image = active ? tabActiveBackImage : tabBackImage;
-			image = image.WithSize (width, height);
+			image = image.WithSize ((int)width, (int)height);
 
 			ctx.DrawImage (widget, image, x, y);
 		}

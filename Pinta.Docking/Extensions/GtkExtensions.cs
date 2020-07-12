@@ -71,6 +71,17 @@ namespace Pinta.Docking
         {
             return new Gdk.Color ((byte)(color.Red * 255d), (byte)(color.Green * 255d), (byte)(color.Blue * 255d));
         }
+
+        public static bool IsChildOf (this Gtk.Widget child, Gtk.Widget widget)
+		{
+			var parent = child.Parent;
+			while (parent != null) {
+				if (parent == widget)
+					return true;
+				parent = parent.Parent;
+			};
+			return false;
+		}
     }
 
     class LeaveEventData : IDisposable

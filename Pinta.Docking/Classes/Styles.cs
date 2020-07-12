@@ -552,7 +552,11 @@ namespace Pinta.Docking
 			PopoverWindow.DefaultBackgroundColor = CairoExtensions.ParseColor ("#f2f2f2"); // gtkrc @tooltip_bg_color
 			PopoverWindow.DefaultTextColor = CairoExtensions.ParseColor ("#555555");
 			PopoverWindow.ShadowColor = CairoExtensions.ParseColor ("#000000").WithAlpha (.05);
+#if false
 			PopoverWindow.BorderColor = Colors.Transparent; // disable border drawing
+#else
+			PopoverWindow.BorderColor = new Color(0, 0, 0, 0);
+#endif
 
 			PopoverWindow.ParamaterWindows.GradientStartColor = CairoExtensions.ParseColor ("#fffee6");
 			PopoverWindow.ParamaterWindows.GradientEndColor = CairoExtensions.ParseColor ("#fffcd1");
@@ -674,7 +678,11 @@ namespace Pinta.Docking
 			PopoverWindow.DefaultBackgroundColor = CairoExtensions.ParseColor ("#5e5e5e");
 			PopoverWindow.DefaultTextColor = CairoExtensions.ParseColor ("#bdc1c1");
 			PopoverWindow.ShadowColor = CairoExtensions.ParseColor ("#000000").WithAlpha (0); // transparent since dark theme doesn't need shadows
+#if false
 			PopoverWindow.BorderColor = Colors.Transparent; // disable border drawing
+#else
+			PopoverWindow.BorderColor = new Color(0, 0, 0, 0);
+#endif
 
 			PopoverWindow.ParamaterWindows.GradientStartColor = CairoExtensions.ParseColor ("#fffee6");
 			PopoverWindow.ParamaterWindows.GradientEndColor = CairoExtensions.ParseColor ("#fffcd1");

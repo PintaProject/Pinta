@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Pinta.Docking.Gui;
+using MonoDevelop.Components;
 
 namespace Pinta.Docking.DockNotebook
 {
@@ -401,8 +402,13 @@ namespace Pinta.Docking.DockNotebook
 
 			titleBox = new HBox (false, 3);
 			if (draggedItem.Icon != null) {
+#if false
 				var img = new Xwt.ImageView (draggedItem.Icon);
 				titleBox.PackStart (img.ToGtkWidget (), false, false, 0);
+#else
+				var img = new MonoDevelop.Components.ImageView (draggedItem.Icon);
+				titleBox.PackStart (img, false, false, 0);
+#endif
 			}
 			Gtk.Label la = new Label ();
 			la.Markup = draggedItem.Text;
@@ -437,10 +443,11 @@ namespace Pinta.Docking.DockNotebook
 			//WORKAROUND: Pixbuf.FromDrawable (and by extension XWT's RenderWidget) is broken on Mac
 			return Xwt.Toolkit.NativeEngine.WrapImage (Mac.GtkMacInterop.RenderGtkWidget (w));
 #else
+			// TODO-GTK3
 #if false
 			return Xwt.Toolkit.CurrentEngine.RenderWidget (Xwt.Toolkit.CurrentEngine.WrapWidget (w));
 #else
-			return Gdk.Pixbuf.FromDrawable (win, Colormap.System, w.Allocation.X, w.Allocation.Y, 0, 0, w.Allocation.Width, w.Allocation.Height);
+			throw new NotImplementedException();
 #endif
 #endif
 		}

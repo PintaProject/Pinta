@@ -31,6 +31,7 @@
 using System;
 using Gdk;
 using Gtk;
+using MonoDevelop.Components;
 
 namespace Pinta.Docking
 {
@@ -75,6 +76,8 @@ namespace Pinta.Docking
 			white = new Gdk.Color (255, 255, 255);
 			white.Pixel = 0;
 
+			// TODO-GTK3
+#if false
 			using (Gdk.Pixmap pm = new Gdk.Pixmap (this.GdkWindow, width, height, 1)) {
 				using (Gdk.GC gc = new Gdk.GC (pm)) {
 					gc.Background = white;
@@ -87,6 +90,7 @@ namespace Pinta.Docking
 				}
 				this.ShapeCombineMask (pm, 0, 0);
 			}
+#endif
 		}
 		
 		protected override void OnSizeAllocated (Rectangle allocation)
@@ -180,8 +184,13 @@ namespace Pinta.Docking
 
 			HBox box = new HBox (false, 3);
 			if (draggedItem.Icon != null) {
+#if false
 				var img = new Xwt.ImageView (draggedItem.Icon);
 				box.PackStart (img.ToGtkWidget (), false, false, 0);
+#else
+				var img = new ImageView(draggedItem.Icon);
+				box.PackStart (img, false, false, 0);
+#endif
 			}
 			Gtk.Label la = new Label ();
 			la.Markup = draggedItem.Label;

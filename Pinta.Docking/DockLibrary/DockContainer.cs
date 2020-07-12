@@ -394,13 +394,16 @@ namespace Pinta.Docking
 			Style = Style.Attach (GdkWindow);
 			Style.SetBackground (GdkWindow, State);
 			HasWindow = false;
-			
-			//GdkWindow.SetBackPixmap (null, true);
 
+            //GdkWindow.SetBackPixmap (null, true);
+
+            // TODO-GTK3
+#if false
 			ModifyBase (StateType.Normal, Styles.DockFrameBackground.ToGdkColor ());
-		}
-		
-		protected override void OnUnrealized ()
+#endif
+        }
+
+        protected override void OnUnrealized ()
 		{
 			if (this.GdkWindow != null) {
 				this.GdkWindow.UserData = IntPtr.Zero;
@@ -419,7 +422,9 @@ namespace Pinta.Docking
 		internal bool UpdatePlaceholder (DockItem item, Gdk.Size size, bool allowDocking)
 		{
 			try {
+#if false
 				Runtime.AssertMainThread ();
+#endif
 
 				var placeholderWindow = this.placeholderWindow;
 				var padTitleWindow = this.padTitleWindow;
@@ -462,7 +467,9 @@ namespace Pinta.Docking
 					placeholderWindow.AllowDocking = false;
 				}
 			} catch (Exception ex) {
+#if false
 				LoggingService.LogInternalError ("Updating the dock container placeholder failed", ex);
+#endif
 			}
 
 			return false;
@@ -493,7 +500,9 @@ namespace Pinta.Docking
 					item.Status = DockItemStatus.Floating;
 				}
 			} catch (Exception ex) {
+#if false
 				LoggingService.LogInternalError ("Updating the dock container placeholder failed", ex);
+#endif
 			}
 		}
 		
@@ -548,9 +557,12 @@ namespace Pinta.Docking
 				base.OnRealized ();
 
 				// For testing purposes. Not being shown while VisibleWindow = false
+				// TODO-GTK3
+#if false
 				ModifyBg (StateType.Normal, new Gdk.Color (255,0,0));
 				ModifyBase (StateType.Normal, new Gdk.Color (255,0,0));
 				ModifyFg (StateType.Normal, new Gdk.Color (255,0,0));
+#endif
 			}
 
 			protected override bool OnEnterNotifyEvent (EventCrossing evnt)

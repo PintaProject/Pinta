@@ -143,10 +143,13 @@ namespace Pinta.Docking
 				item.GetToolbar (DockPositionType.Right).SetStyle (VisualStyle);
 				item.GetToolbar (DockPositionType.Bottom).SetStyle (VisualStyle);
 
+				// Pinta TODO
+#if false
 				if (VisualStyle.TabStyle == DockTabStyle.Normal)
 					ModifyBg (StateType.Normal, VisualStyle.PadBackgroundColor.Value.ToGdkColor ());
 				else 
 					ModifyBg (StateType.Normal, Style.Background(StateType.Normal));
+#endif
 			}
 		}
 
@@ -226,8 +229,11 @@ namespace Pinta.Docking
 		protected override void OnStyleSet (Style previous_style)
 		{
 			base.OnStyleSet (previous_style);
+			// Pinta TODO
+#if false
 			if (!borderColorSet)
 				borderColor = Style.Dark (Gtk.StateType.Normal);
+#endif
 		}
 		
 		public void SetMargins (int topMargin, int bottomMargin, int leftMargin, int rightMargin)

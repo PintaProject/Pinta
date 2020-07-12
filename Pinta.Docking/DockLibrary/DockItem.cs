@@ -222,7 +222,11 @@ namespace Pinta.Docking
 			}
 			set {
 				content = value;
+#if false
 				gtkContent = content.GetNativeWidget<Gtk.Widget> ();
+#else
+				gtkContent = content;
+#endif
 				if (!gettingContent && widget != null)
 					widget.UpdateContent ();
 			}
@@ -573,6 +577,8 @@ namespace Pinta.Docking
 
 		internal void ShowDockPopupMenu (Gtk.Widget parent, double x, double y)
 		{
+			// Pinta TODO
+#if false
 			var menu = new ContextMenu ();
 			ContextMenuItem citem;
 
@@ -610,6 +616,9 @@ namespace Pinta.Docking
 
 			ShowingContextMenu = true;
 			menu.Show (parent, (int)x,  (int)y, () => { ShowingContextMenu = true; });
+#else
+			throw new NotImplementedException();
+#endif
 		}
 	}
 
@@ -624,7 +633,10 @@ namespace Pinta.Docking
 	{
 		public DockFloatingWindow (Gtk.Window dockParent, string title) : base (title)
 		{
+			// Pinta TODO
+#if false
 			this.ApplyTheme ();
+#endif
 			this.DockParent = dockParent;
 		}
 
