@@ -38,7 +38,6 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -68,15 +67,15 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (mode_label == null)
-				mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Flood Mode")));
+				mode_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Flood Mode")));
 
 			tb.AppendItem (mode_label);
 
 			if (mode_button == null) {
 				mode_button = new ToolBarDropDownButton ();
 
-				mode_button.AddItem (Catalog.GetString ("Contiguous"), "Tools.FreeformShape.png", true);
-				mode_button.AddItem (Catalog.GetString ("Global"), "Menu.Help.Website.png", false);
+				mode_button.AddItem (Translations.GetString ("Contiguous"), "Tools.FreeformShape.png", true);
+				mode_button.AddItem (Translations.GetString ("Global"), "Menu.Help.Website.png", false);
 			}
 
 			tb.AppendItem (mode_button);
@@ -87,7 +86,7 @@ namespace Pinta.Tools
 			tb.AppendItem (mode_sep);
 					
 			if (tolerance_label == null)
-				tolerance_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Tolerance")));
+				tolerance_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Tolerance")));
 
 			tb.AppendItem (tolerance_label);
 
@@ -113,33 +112,33 @@ namespace Pinta.Tools
 				
 			base.OnMouseDown (canvas, args, point);
 
-			Gdk.Region currentRegion = Gdk.Region.Rectangle (doc.GetSelectedBounds (true));
+			using (var currentRegion = new Region(doc.GetSelectedBounds(true).ToCairoRectangleInt()))
+			{
+				// See if the mouse click is valid
+				if (!currentRegion.ContainsPoint(pos.X, pos.Y) && limitToSelection)
+					return;
 
-			// See if the mouse click is valid
-			if (!currentRegion.PointIn (pos.X, pos.Y) && limitToSelection) {
-				currentRegion.Dispose ();
-				currentRegion = null;
-				return;
-			}
+				ImageSurface surface = doc.CurrentUserLayer.Surface;
+				using (var stencil_surface = new ImageSurface(Format.Argb32, (int)surface.Width, (int)surface.Height))
+				{
+					IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter(stencil_surface);
+					int tol = (int)(Tolerance * Tolerance * 256);
+					Rectangle boundingBox;
 
-			ImageSurface surface = doc.CurrentUserLayer.Surface;
-			using (var stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height)) {
-				IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter (stencil_surface);
-				int tol = (int)(Tolerance * Tolerance * 256);
-				Rectangle boundingBox;
+					if (IsContinguousMode)
+						FillStencilFromPoint(surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
+					else
+						FillStencilByColor(surface, stencilBuffer, surface.GetColorBgraUnchecked(pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
 
-				if (IsContinguousMode)
-					FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
-				else
-					FillStencilByColor (surface, stencilBuffer, surface.GetColorBgraUnchecked (pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
+					OnFillRegionComputed(stencilBuffer);
 
-				OnFillRegionComputed (stencilBuffer);
-
-				// If a derived tool is only going to use the stencil,
-				// don't waste time building the polygon set
-				if (CalculatePolygonSet) {
-					Point[][] polygonSet = stencilBuffer.CreatePolygonSet (boundingBox, 0, 0);
-					OnFillRegionComputed (polygonSet);
+					// If a derived tool is only going to use the stencil,
+					// don't waste time building the polygon set
+					if (CalculatePolygonSet)
+					{
+						Point[][] polygonSet = stencilBuffer.CreatePolygonSet(boundingBox, 0, 0);
+						OnFillRegionComputed(polygonSet);
+					}
 				}
 			}
 		}
@@ -168,28 +167,30 @@ namespace Pinta.Tools
 		}
 
 		public unsafe static void FillStencilFromPoint (ImageSurface surface, IBitVector2D stencil, Point start, int tolerance, 
-		                                                out Rectangle boundingBox, Gdk.Region limitRegion, bool limitToSelection)
+		                                                out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Gdk.Rectangle[] scans;
+			Cairo.RectangleInt[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle (0, 0, stencil.Width, stencil.Height))) {
+				using (Cairo.Region excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
 					excluded.Xor (limitRegion);
-					scans = excluded.GetRectangles ();
+					scans = new Cairo.RectangleInt[excluded.NumRectangles];
+                    for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
+						scans[i] = excluded.GetRectangle(i);
 				}
 			} else {
-				scans = new Gdk.Rectangle[0];
+				scans = new Cairo.RectangleInt[0];
 			}
 
-			foreach (Gdk.Rectangle rect in scans) {
-				stencil.Set (rect, true);
+			foreach (var rect in scans) {
+				stencil.Set (rect.ToGdkRectangle(), true);
 			}
 
 			var queue = new System.Collections.Generic.Queue<Point> (16);
@@ -270,34 +271,36 @@ namespace Pinta.Tools
 				}
 			}
 
-			foreach (Gdk.Rectangle rect in scans)
-				stencil.Set (rect, false);
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle(), false);
 			
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
 
 		public unsafe static void FillStencilByColor (ImageSurface surface, IBitVector2D stencil, ColorBgra cmp, int tolerance, 
-		                                              out Rectangle boundingBox, Gdk.Region limitRegion, bool limitToSelection)
+		                                              out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Gdk.Rectangle[] scans;
+			Cairo.RectangleInt[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle (0, 0, stencil.Width, stencil.Height))) {
+				using (var excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
 					excluded.Xor (limitRegion);
-					scans = excluded.GetRectangles ();
+					scans = new Cairo.RectangleInt[excluded.NumRectangles];
+                    for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
+						scans[i] = excluded.GetRectangle(i);
 				}
 			} else {
-				scans = new Gdk.Rectangle[0];
+				scans = new Cairo.RectangleInt[0];
 			}
 
-			foreach (Gdk.Rectangle rect in scans)
-				stencil.Set (rect, true);
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle(), true);
 
             Parallel.For(0, surface.Height, y =>
             {
@@ -341,8 +344,8 @@ namespace Pinta.Tools
                 }
             });
 
-			foreach (Gdk.Rectangle rect in scans)
-				stencil.Set (rect, false);
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle(), false);
 
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}

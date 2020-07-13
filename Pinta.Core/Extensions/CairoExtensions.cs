@@ -721,6 +721,11 @@ namespace Pinta.Core
 			return new Cairo.Rectangle (r.X, r.Y, r.Width, r.Height);
 		}
 
+		public static RectangleInt ToCairoRectangleInt(this Gdk.Rectangle r)
+        {
+			return CreateRectangleInt(r.X, r.Y, r.Width, r.Height);
+        }
+
 		public static Cairo.Point Location (this Cairo.Rectangle r)
 		{
 			return new Cairo.Point ((int)r.X, (int)r.Y);
@@ -1047,6 +1052,16 @@ namespace Pinta.Core
 		{
 			return new Rectangle(rect.X - dx, rect.Y - dy, rect.Width + 2 * dx, rect.Height + 2 * dy);
 		}
+
+		public static RectangleInt CreateRectangleInt(int x,int y, int w, int h)
+        {
+			return new RectangleInt() { X = x, Y = y, Width = w, Height = h };
+        }
+
+		public static Gdk.Rectangle ToGdkRectangle(this RectangleInt r)
+        {
+			return new Gdk.Rectangle(r.X, r.Y, r.Width, r.Height);
+        }
 
 		/// <summary>
 		/// Determines if the requested pixel coordinate is within bounds.
