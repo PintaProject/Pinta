@@ -115,7 +115,7 @@ namespace Pinta.Tools
 			cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
 			imContext = new Gtk.IMMulticontext ();
 			imContext.Commit += OnIMCommit;
-			layout = new TextLayout ();
+			layout = new Pinta.Core.TextLayout ();
 		}
 
 		static TextTool ()

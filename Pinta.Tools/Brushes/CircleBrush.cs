@@ -34,7 +34,7 @@ namespace Pinta.Tools.Brushes
 	public class CircleBrush : BasePaintBrush
 	{
 		public override string Name {
-			get { return Mono.Unix.Translations.GetString ("Circles"); }
+			get { return Translations.GetString ("Circles"); }
 		}
 
 		public override double StrokeAlphaMultiplier {

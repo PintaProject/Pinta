@@ -34,7 +34,7 @@ namespace Pinta.Tools.Brushes
 	public class GridBrush : BasePaintBrush
 	{
 		public override string Name {
-			get { return Mono.Unix.Translations.GetString ("Grid"); }
+			get { return Translations.GetString ("Grid"); }
 		}
 
 		public override double StrokeAlphaMultiplier {
