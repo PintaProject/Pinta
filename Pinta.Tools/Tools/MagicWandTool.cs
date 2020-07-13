@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 using ClipperLibrary;
 using System.Collections.Generic;
 
@@ -59,7 +58,7 @@ namespace Pinta.Tools
 
 		public override string Name
 		{
-			get { return Catalog.GetString("Magic Wand Select"); }
+			get { return Translations.GetString("Magic Wand Select"); }
 		}
 
 		public override string Icon
@@ -69,7 +68,7 @@ namespace Pinta.Tools
 
 		public override string StatusBarText
 		{
-			get { return Catalog.GetString("Click to select region of similar color."); }
+			get { return Translations.GetString("Click to select region of similar color."); }
 		}
 
 		public override Gdk.Cursor DefaultCursor

@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -40,7 +39,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Closed Curve Shape");
+				return Translations.GetString("Closed Curve Shape");
 			}
 		}
 

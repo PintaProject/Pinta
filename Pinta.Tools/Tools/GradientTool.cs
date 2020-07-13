@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -52,7 +51,7 @@ namespace Pinta.Tools
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Gradient"); }
+			get { return Translations.GetString ("Gradient"); }
 		}
 
 		public override string Icon {
@@ -60,7 +59,7 @@ namespace Pinta.Tools
 		}
 
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse."); }
+			get { return Translations.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse."); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.G; } }
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Gradient.png"), 9, 18); } }
@@ -166,18 +165,18 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (gradient_label == null)
-				gradient_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Gradient")));
+				gradient_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Gradient")));
 
 			tb.AppendItem (gradient_label);
 
 			if (gradient_button == null) {
 				gradient_button = new ToolBarDropDownButton ();
 
-				gradient_button.AddItem (Catalog.GetString ("Linear Gradient"), "Toolbar.LinearGradient.png", GradientType.Linear);
-				gradient_button.AddItem (Catalog.GetString ("Linear Reflected Gradient"), "Toolbar.LinearReflectedGradient.png", GradientType.LinearReflected);
-				gradient_button.AddItem (Catalog.GetString ("Linear Diamond Gradient"), "Toolbar.DiamondGradient.png", GradientType.Diamond);
-				gradient_button.AddItem (Catalog.GetString ("Radial Gradient"), "Toolbar.RadialGradient.png", GradientType.Radial);
-				gradient_button.AddItem (Catalog.GetString ("Conical Gradient"), "Toolbar.ConicalGradient.png", GradientType.Conical);
+				gradient_button.AddItem (Translations.GetString ("Linear Gradient"), "Toolbar.LinearGradient.png", GradientType.Linear);
+				gradient_button.AddItem (Translations.GetString ("Linear Reflected Gradient"), "Toolbar.LinearReflectedGradient.png", GradientType.LinearReflected);
+				gradient_button.AddItem (Translations.GetString ("Linear Diamond Gradient"), "Toolbar.DiamondGradient.png", GradientType.Diamond);
+				gradient_button.AddItem (Translations.GetString ("Radial Gradient"), "Toolbar.RadialGradient.png", GradientType.Radial);
+				gradient_button.AddItem (Translations.GetString ("Conical Gradient"), "Toolbar.ConicalGradient.png", GradientType.Conical);
 			}
 
 			tb.AppendItem (gradient_button);
@@ -188,15 +187,15 @@ namespace Pinta.Tools
 			//tb.AppendItem (new Gtk.SeparatorToolItem ());
 
 			//if (mode_label == null)
-			//        mode_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Mode")));
+			//        mode_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Mode")));
 
 			//tb.AppendItem (mode_label);
 
 			//if (mode_button == null) {
 			//        mode_button = new ToolBarDropDownButton ();
 
-			//        mode_button.AddItem (Catalog.GetString ("Color Mode"), "Toolbar.ColorMode.png", GradientColorMode.Color);
-			//        mode_button.AddItem (Catalog.GetString ("Transparency Mode"), "Toolbar.TransparentMode.png", GradientColorMode.Transparency);
+			//        mode_button.AddItem (Translations.GetString ("Color Mode"), "Toolbar.ColorMode.png", GradientColorMode.Color);
+			//        mode_button.AddItem (Translations.GetString ("Transparency Mode"), "Toolbar.TransparentMode.png", GradientColorMode.Transparency);
 			//}
 
 			//tb.AppendItem (mode_button);

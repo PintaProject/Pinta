@@ -28,7 +28,6 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 using Pinta.Tools.Brushes;
 
@@ -37,9 +36,9 @@ namespace Pinta.Tools
 	public class PaintBrushTool : BaseBrushTool
 	{
 		#region Properties
-		public override string Name { get { return Catalog.GetString ("Paintbrush"); } }
+		public override string Name { get { return Translations.GetString ("Paintbrush"); } }
 		public override string Icon { get { return "Tools.Paintbrush.png"; } }
-		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
+		public override string StatusBarText { get { return Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
@@ -89,7 +88,7 @@ namespace Pinta.Tools
 			tb.AppendItem (new Gtk.SeparatorToolItem ());
 
 			if (brush_label == null)
-				brush_label = new ToolBarLabel (string.Format (" {0}:  ", Catalog.GetString ("Type")));
+				brush_label = new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Type")));
 
 			if (brush_combo_box == null) {
 				brush_combo_box = new ToolBarComboBox (100, 0, false);

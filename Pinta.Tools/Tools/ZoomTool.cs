@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -45,13 +44,13 @@ namespace Pinta.Tools
 		private static readonly int tolerance = 10;
 
 		public override string Name {
-			get { return Catalog.GetString ("Zoom"); }
+			get { return Translations.GetString ("Zoom"); }
 		}
 		public override string Icon {
 			get { return "Tools.Zoom.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click to zoom in. Right click to zoom out. Click and drag to zoom in selection."); }
+			get { return Translations.GetString ("Left click to zoom in. Right click to zoom out. Click and drag to zoom in selection."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return cursorZoom; }

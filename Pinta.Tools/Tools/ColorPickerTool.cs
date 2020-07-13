@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using Cairo;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -60,13 +59,13 @@ namespace Pinta.Tools
 
 		#region Properties
 		public override string Name {
-			get { return Catalog.GetString ("Color Picker"); }
+			get { return Translations.GetString ("Color Picker"); }
 		}
 		public override string Icon {
 			get { return "Tools.ColorPicker.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click to set primary color. Right click to set secondary color."); }
+			get { return Translations.GetString ("Left click to set primary color. Right click to set secondary color."); }
 		}
 
 		public override Gdk.Cursor DefaultCursor {
@@ -110,7 +109,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (sampling_label == null)
-				sampling_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Sampling")));
+				sampling_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Sampling")));
 
 			tb.AppendItem (sampling_label);
 
@@ -120,11 +119,11 @@ namespace Pinta.Tools
 				// Change the cursor when the SampleSize is changed.
 				sample_size.SelectedItemChanged += (sender, e) => SetCursor (DefaultCursor);
 
-				sample_size.AddItem (Catalog.GetString ("Single Pixel"), "Toolbar.Sampling.1x1.png", 1);
-				sample_size.AddItem (Catalog.GetString ("3 x 3 Region"), "Toolbar.Sampling.3x3.png", 3);
-				sample_size.AddItem (Catalog.GetString ("5 x 5 Region"), "Toolbar.Sampling.5x5.png", 5);
-				sample_size.AddItem (Catalog.GetString ("7 x 7 Region"), "Toolbar.Sampling.7x7.png", 7);
-				sample_size.AddItem (Catalog.GetString ("9 x 9 Region"), "Toolbar.Sampling.9x9.png", 9);
+				sample_size.AddItem (Translations.GetString ("Single Pixel"), "Toolbar.Sampling.1x1.png", 1);
+				sample_size.AddItem (Translations.GetString ("3 x 3 Region"), "Toolbar.Sampling.3x3.png", 3);
+				sample_size.AddItem (Translations.GetString ("5 x 5 Region"), "Toolbar.Sampling.5x5.png", 5);
+				sample_size.AddItem (Translations.GetString ("7 x 7 Region"), "Toolbar.Sampling.7x7.png", 7);
+				sample_size.AddItem (Translations.GetString ("9 x 9 Region"), "Toolbar.Sampling.9x9.png", 9);
 			}
 
 			tb.AppendItem (sample_size);
@@ -132,8 +131,8 @@ namespace Pinta.Tools
 			if (sample_type == null) {
 				sample_type = new ToolBarDropDownButton (true);
 
-				sample_type.AddItem (Catalog.GetString ("Layer"), "Menu.Layers.MergeLayerDown.png", true);
-				sample_type.AddItem (Catalog.GetString ("Image"), "ResizeCanvas.Image.png", false);
+				sample_type.AddItem (Translations.GetString ("Layer"), "Menu.Layers.MergeLayerDown.png", true);
+				sample_type.AddItem (Translations.GetString ("Image"), "ResizeCanvas.Image.png", false);
 			}
 
 			tb.AppendItem (sample_type);
@@ -144,16 +143,16 @@ namespace Pinta.Tools
 			tb.AppendItem (sample_sep);
 
 			if (tool_select_label == null)
-				tool_select_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("After select")));
+				tool_select_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("After select")));
 
 			tb.AppendItem (tool_select_label);
 
 			if (tool_select == null) {
 				tool_select = new ToolBarDropDownButton (true);
 
-				tool_select.AddItem (Catalog.GetString ("Do not switch tool"), "Tools.ColorPicker.png", 0);
-				tool_select.AddItem (Catalog.GetString ("Switch to previous tool"), "Tools.ColorPicker.PreviousTool.png", 1);
-				tool_select.AddItem (Catalog.GetString ("Switch to Pencil tool"), "Tools.Pencil.png", 2);
+				tool_select.AddItem (Translations.GetString ("Do not switch tool"), "Tools.ColorPicker.png", 0);
+				tool_select.AddItem (Translations.GetString ("Switch to previous tool"), "Tools.ColorPicker.PreviousTool.png", 1);
+				tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), "Tools.Pencil.png", 2);
 			}
 
 			tb.AppendItem (tool_select);
@@ -206,7 +205,7 @@ namespace Pinta.Tools
 			if ((int)tool_select.SelectedItem.Tag == 1)
 				PintaCore.Tools.SetCurrentTool(PintaCore.Tools.PreviousTool);
 			else if ((int)tool_select.SelectedItem.Tag == 2)
-				PintaCore.Tools.SetCurrentTool(Catalog.GetString("Pencil"));
+				PintaCore.Tools.SetCurrentTool(Translations.GetString("Pencil"));
 		}
 		#endregion
 

@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -40,7 +39,7 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return Catalog.GetString("Rounded Line Shape");
+				return Translations.GetString("Rounded Line Shape");
 			}
 		}
 
@@ -122,13 +121,13 @@ namespace Pinta.Tools
 			tb.AppendItem(radius_sep);
 
 			if (radius_label == null)
-				radius_label = new ToolBarLabel(string.Format("  {0}: ", Catalog.GetString("Radius")));
+				radius_label = new ToolBarLabel(string.Format("  {0}: ", Translations.GetString("Radius")));
 
 			tb.AppendItem(radius_label);
 
 			if (radius_minus == null)
 			{
-				radius_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease shape's corner radius"));
+				radius_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease shape's corner radius"));
 				radius_minus.Clicked += RadiusMinusButtonClickedEvent;
 			}
 
@@ -151,7 +150,7 @@ namespace Pinta.Tools
 
 			if (radius_plus == null)
 			{
-				radius_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase shape's corner radius"));
+				radius_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase shape's corner radius"));
 				radius_plus.Clicked += RadiusPlusButtonClickedEvent;
 			}
 

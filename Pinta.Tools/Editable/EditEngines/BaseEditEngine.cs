@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -293,13 +292,13 @@ namespace Pinta.Tools
         public virtual void HandleBuildToolBar(Gtk.Toolbar tb)
         {
             if (brush_width_label == null)
-                brush_width_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Brush width")));
+                brush_width_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Brush width")));
 
             tb.AppendItem(brush_width_label);
 
             if (brush_width_minus == null)
             {
-                brush_width_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease brush size"));
+                brush_width_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease brush size"));
                 brush_width_minus.Clicked += BrushMinusButtonClickedEvent;
             }
 
@@ -327,7 +326,7 @@ namespace Pinta.Tools
 
             if (brush_width_plus == null)
             {
-                brush_width_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase brush size"));
+                brush_width_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase brush size"));
                 brush_width_plus.Clicked += BrushPlusButtonClickedEvent;
             }
 
@@ -339,7 +338,7 @@ namespace Pinta.Tools
             tb.AppendItem(fill_sep);
 
             if (fill_label == null)
-                fill_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Fill Style")));
+                fill_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Fill Style")));
 
             tb.AppendItem(fill_label);
 
@@ -347,9 +346,9 @@ namespace Pinta.Tools
             {
                 fill_button = new ToolBarDropDownButton();
 
-                fill_button.AddItem(Catalog.GetString("Outline Shape"), "ShapeTool.Outline.png", 0);
-                fill_button.AddItem(Catalog.GetString("Fill Shape"), "ShapeTool.Fill.png", 1);
-                fill_button.AddItem(Catalog.GetString("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
+                fill_button.AddItem(Translations.GetString("Outline Shape"), "ShapeTool.Outline.png", 0);
+                fill_button.AddItem(Translations.GetString("Fill Shape"), "ShapeTool.Fill.png", 1);
+                fill_button.AddItem(Translations.GetString("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
             }
 
             tb.AppendItem(fill_button);
@@ -360,7 +359,7 @@ namespace Pinta.Tools
 			tb.AppendItem(shape_type_sep);
 
 			if (shape_type_label == null)
-				shape_type_label = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Shape Type")));
+				shape_type_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Shape Type")));
 
 			tb.AppendItem(shape_type_label);
 
@@ -368,10 +367,10 @@ namespace Pinta.Tools
 			{
 				shape_type_button = new ToolBarDropDownButton();
 
-				shape_type_button.AddItem(Catalog.GetString("Open Line/Curve Series"), "Tools.Line.png", 0);
-				shape_type_button.AddItem(Catalog.GetString("Closed Line/Curve Series"), "Tools.Rectangle.png", 1);
-				shape_type_button.AddItem(Catalog.GetString("Ellipse"), "Tools.Ellipse.png", 2);
-				shape_type_button.AddItem(Catalog.GetString("Rounded Line Series"), "Tools.RoundedRectangle.png", 3);
+				shape_type_button.AddItem(Translations.GetString("Open Line/Curve Series"), "Tools.Line.png", 0);
+				shape_type_button.AddItem(Translations.GetString("Closed Line/Curve Series"), "Tools.Rectangle.png", 1);
+				shape_type_button.AddItem(Translations.GetString("Ellipse"), "Tools.Ellipse.png", 2);
+				shape_type_button.AddItem(Translations.GetString("Rounded Line Series"), "Tools.RoundedRectangle.png", 3);
 
 				shape_type_button.SelectedItemChanged += (o, e) =>
 				{
@@ -385,7 +384,7 @@ namespace Pinta.Tools
 						{
 							//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
 							PintaCore.Workspace.ActiveDocument.History.PushNewItem(new ShapesModifyHistoryItem(
-								this, owner.Icon, Catalog.GetString("Changed Shape Type")));
+								this, owner.Icon, Translations.GetString("Changed Shape Type")));
 
 							//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 							selEngine = selEngine.Convert(newShapeType, SelectedShapeIndex);
@@ -519,7 +518,7 @@ namespace Pinta.Tools
                     {
 						//Create a new ShapesModifyHistoryItem so that the deletion of a control point can be undone.
 						PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Deleted")));
+							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Deleted")));
 
 						//Delete the selected point from the shape.
 						controlPoints.RemoveAt(SelectedPointIndex);
@@ -536,7 +535,7 @@ namespace Pinta.Tools
 
 						//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
 						doc.History.PushNewItem(
-							new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Deleted"),
+							new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Deleted"),
 								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 
@@ -585,7 +584,7 @@ namespace Pinta.Tools
 
                     //Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
                     PintaCore.Workspace.ActiveDocument.History.PushNewItem(
-						new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Added")));
+						new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
 
 
                     bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
@@ -881,7 +880,7 @@ namespace Pinta.Tools
 					if (!ctrlKey)
 					{
 						//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Point Added")));
+						doc.History.PushNewItem(new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
 
 						controlPoints.Insert(closestPointIndex,
 							new ControlPoint(new PointD(current_point.X, current_point.Y), DefaultMidPointTension));
@@ -921,7 +920,7 @@ namespace Pinta.Tools
 					}
 
 					//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Added"),
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Added"),
 						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 					//Create the shape, add its starting points, and add it to SEngines.
@@ -1011,7 +1010,7 @@ namespace Pinta.Tools
                     {
                         //Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
                         doc.History.PushNewItem(
-							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Modified")));
+							new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Modified")));
 
                         clicked_without_modifying = false;
                     }
@@ -1263,7 +1262,7 @@ namespace Pinta.Tools
 				if (undoSurface != null)
 				{
 					//Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
-					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Catalog.GetString("Finalized"),
+					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Finalized"),
 						undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 				}
 			}
@@ -1672,7 +1671,7 @@ namespace Pinta.Tools
 			if (undoSurface != null)
 			{
 				//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-				doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Catalog.GetString("Finalized"),
+				doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Translations.GetString("Finalized"),
 					undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
 			}
 

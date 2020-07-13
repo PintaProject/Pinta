@@ -28,7 +28,6 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -53,9 +52,9 @@ namespace Pinta.Tools
 		}
 
 		#region Properties
-		public override string Name { get { return Catalog.GetString ("Freeform Shape"); } }
+		public override string Name { get { return Translations.GetString ("Freeform Shape"); } }
 		public override string Icon { get { return "Tools.FreeformShape.png"; } }
-		public override string StatusBarText { get { return Catalog.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
+		public override string StatusBarText { get { return Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
 		public override int Priority { get { return 47; } }
@@ -73,16 +72,16 @@ namespace Pinta.Tools
 			tb.AppendItem (fill_sep);
 
 			if (fill_label == null)
-				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Fill Style")));
+				fill_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Fill Style")));
 
 			tb.AppendItem (fill_label);
 
 			if (fill_button == null) {
 				fill_button = new ToolBarDropDownButton ();
 
-				fill_button.AddItem (Catalog.GetString ("Outline Shape"), "ShapeTool.Outline.png", 0);
-				fill_button.AddItem (Catalog.GetString ("Fill Shape"), "ShapeTool.Fill.png", 1);
-				fill_button.AddItem (Catalog.GetString ("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
+				fill_button.AddItem (Translations.GetString ("Outline Shape"), "ShapeTool.Outline.png", 0);
+				fill_button.AddItem (Translations.GetString ("Fill Shape"), "ShapeTool.Fill.png", 1);
+				fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
 			}
 
 			tb.AppendItem (fill_button);

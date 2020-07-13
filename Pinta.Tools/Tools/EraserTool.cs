@@ -28,7 +28,6 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -184,9 +183,9 @@ namespace Pinta.Tools
             base.OnBuildToolBar(tb);
 
             if (label_type == null)
-                label_type = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Type")));
+                label_type = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Type")));
             if (comboBox_type == null) {
-                comboBox_type = new ToolBarComboBox (100, 0, false, Catalog.GetString ("Normal"), Catalog.GetString ("Smooth"));
+                comboBox_type = new ToolBarComboBox (100, 0, false, Translations.GetString ("Normal"), Translations.GetString ("Smooth"));
 
                 comboBox_type.ComboBox.Changed += (o, e) =>
                 {
@@ -200,9 +199,9 @@ namespace Pinta.Tools
         }
 
         #region Properties
-        public override string Name { get { return Catalog.GetString ("Eraser"); } }
+        public override string Name { get { return Translations.GetString ("Eraser"); } }
         public override string Icon { get { return "Tools.Eraser.png"; } }
-        public override string StatusBarText { get { return Catalog.GetString ("Left click to erase to transparent, right click to erase to secondary color. "); } }
+        public override string StatusBarText { get { return Translations.GetString ("Left click to erase to transparent, right click to erase to secondary color. "); } }
 
         public override Gdk.Cursor DefaultCursor {
             get {

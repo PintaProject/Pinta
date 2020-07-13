@@ -27,20 +27,19 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
 	public class EllipseSelectTool : SelectTool
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Ellipse Select"); }
+			get { return Translations.GetString ("Ellipse Select"); }
 		}
 		public override string Icon {
 			get { return "Tools.EllipseSelect.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle."); }
+			get { return Translations.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle."); }
 		}
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18); } }
 		public override int Priority { get { return 13; } }

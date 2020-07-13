@@ -34,7 +34,7 @@ namespace Pinta.Tools.Brushes
 	public class SplatterBrush : BasePaintBrush
 	{
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Splatter"); }
+			get { return Mono.Unix.Translations.GetString ("Splatter"); }
 		}
 
 		public override double StrokeAlphaMultiplier {

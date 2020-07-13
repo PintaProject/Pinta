@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 using System.Collections.Generic;
 
 namespace Pinta.Tools

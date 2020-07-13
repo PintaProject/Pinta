@@ -28,7 +28,6 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -73,12 +72,12 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 			
 			if (brush_width_label == null)
-				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Brush width")));
+				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Brush width")));
 			
 			tb.AppendItem (brush_width_label);
 	
 			if (brush_width_minus == null) {
-				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease brush size"));
+				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Translations.GetString ("Decrease brush size"));
 				brush_width_minus.Clicked += MinusButtonClickedEvent;
 			}
 			
@@ -92,7 +91,7 @@ namespace Pinta.Tools
 			tb.AppendItem (brush_width);
 			
 			if (brush_width_plus == null) {
-				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase brush size"));
+				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Translations.GetString ("Increase brush size"));
 				brush_width_plus.Clicked += PlusButtonClickedEvent;
 			}
 			

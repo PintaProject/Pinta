@@ -34,7 +34,7 @@ namespace Pinta.Tools.Brushes
 	public class PlainBrush : BasePaintBrush
 	{
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Normal"); }
+			get { return Mono.Unix.Translations.GetString ("Normal"); }
 		}
 
 		public override int Priority {

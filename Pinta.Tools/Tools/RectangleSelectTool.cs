@@ -27,20 +27,19 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
 	public class RectangleSelectTool : SelectTool
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Rectangle Select"); }
+			get { return Translations.GetString ("Rectangle Select"); }
 		}
 		public override string Icon {
 			get { return "Tools.RectangleSelect.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square."); }
+			get { return Translations.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square."); }
 		}
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18); } }
 		public override int Priority { get { return 5; } }

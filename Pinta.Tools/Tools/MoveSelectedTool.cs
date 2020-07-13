@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 using ClipperLibrary;
 using System.Collections.Generic;
 
@@ -40,13 +39,13 @@ namespace Pinta.Tools
 		private readonly Matrix original_transform = new Matrix ();
 
 		public override string Name {
-			get { return Catalog.GetString ("Move Selected Pixels"); }
+			get { return Translations.GetString ("Move Selected Pixels"); }
 		}
 		public override string Icon {
 			get { return "Tools.Move.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps."); }
+			get { return Translations.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }

@@ -26,7 +26,6 @@
 
 using System;
 using Pinta.Core;
-using Mono.Unix;
 using Gdk;
 
 namespace Pinta.Tools
@@ -39,12 +38,12 @@ namespace Pinta.Tools
 		private Point last_point = new Point (int.MinValue, int.MinValue);
 
 		public override string Name {
-			get { return Catalog.GetString ("Clone Stamp"); }
+			get { return Translations.GetString ("Clone Stamp"); }
 		}
 		public override string Icon {
 			get { return "Tools.CloneStamp.png"; }
 		}
-		public override string StatusBarText { get { return Catalog.GetString ("Ctrl-left click to set origin, left click to paint."); } }
+		public override string StatusBarText { get { return Translations.GetString ("Ctrl-left click to set origin, left click to paint."); } }
 
 		public override Gdk.Cursor DefaultCursor {
 			get {

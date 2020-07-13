@@ -30,7 +30,6 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -209,7 +208,7 @@ namespace Pinta.Tools
 
 			if (arrowLabel == null)
 			{
-				arrowLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Arrow")));
+				arrowLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Arrow")));
 			}
 
 			tb.AppendItem(arrowLabel);
@@ -349,12 +348,12 @@ namespace Pinta.Tools
 
 			if (arrowSizeLabel == null)
 			{
-				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Size")));
+				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Size")));
 			}
 
 			if (arrowSizeMinus == null)
 			{
-				arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease arrow size"));
+				arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease arrow size"));
 				arrowSizeMinus.Clicked += new EventHandler(arrowSizeMinus_Clicked);
 			}
 
@@ -421,7 +420,7 @@ namespace Pinta.Tools
 
 			if (arrowSizePlus == null)
 			{
-				arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase arrow size"));
+				arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase arrow size"));
 				arrowSizePlus.Clicked += new EventHandler(arrowSizePlus_Clicked);
 			}
 
@@ -432,12 +431,12 @@ namespace Pinta.Tools
 
 			if (arrowAngleOffsetLabel == null)
 			{
-				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Angle")));
+				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Angle")));
 			}
 
 			if (arrowAngleOffsetMinus == null)
 			{
-				arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease angle offset"));
+				arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease angle offset"));
 				arrowAngleOffsetMinus.Clicked += new EventHandler(arrowAngleOffsetMinus_Clicked);
 			}
 
@@ -500,7 +499,7 @@ namespace Pinta.Tools
 
 			if (arrowAngleOffsetPlus == null)
 			{
-				arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase angle offset"));
+				arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase angle offset"));
 				arrowAngleOffsetPlus.Clicked += new EventHandler(arrowAngleOffsetPlus_Clicked);
 			}
 
@@ -511,12 +510,12 @@ namespace Pinta.Tools
 
 			if (arrowLengthOffsetLabel == null)
 			{
-				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Length")));
+				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Length")));
 			}
 
 			if (arrowLengthOffsetMinus == null)
 			{
-				arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Catalog.GetString("Decrease length offset"));
+				arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease length offset"));
 				arrowLengthOffsetMinus.Clicked += new EventHandler(arrowLengthOffsetMinus_Clicked);
 			}
 
@@ -579,7 +578,7 @@ namespace Pinta.Tools
 
 			if (arrowLengthOffsetPlus == null)
 			{
-				arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Catalog.GetString("Increase length offset"));
+				arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase length offset"));
 				arrowLengthOffsetPlus.Clicked += new EventHandler(arrowLengthOffsetPlus_Clicked);
 			}
 

@@ -30,13 +30,12 @@ using Pinta.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
     public class EllipseEditEngine: BaseEditEngine
     {
-        protected override string ShapeName { get { return Catalog.GetString ("Ellipse"); } }
+        protected override string ShapeName { get { return Translations.GetString ("Ellipse"); } }
 
         public EllipseEditEngine (ShapeTool owner)
             : base (owner)

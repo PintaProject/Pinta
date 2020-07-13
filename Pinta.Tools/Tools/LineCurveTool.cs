@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,13 +36,13 @@ namespace Pinta.Tools
 	{
 		public override string Name
 		{
-			get { return Catalog.GetString("Line/Curve"); }
+			get { return Translations.GetString("Line/Curve"); }
 		}
 		public override string Icon {
 			get { return "Tools.Line.png"; }
 		}
 		public override string StatusBarText {
-			get	{ return Catalog.GetString ("Left click to draw a shape with the primary color." +
+			get	{ return Translations.GetString ("Left click to draw a shape with the primary color." +
 					"\nLeft click on a shape to add a control point." +
 					"\nLeft click on a control point and drag to move it." +
 					"\nRight click on a control point and drag to change its tension." +

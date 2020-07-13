@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 using ClipperLibrary;
 using System.Collections.Generic;
 
@@ -39,13 +38,13 @@ namespace Pinta.Tools
 		private List<List<IntPoint>> original_selection;
 		
 		public override string Name {
-			get { return Catalog.GetString ("Move Selection"); }
+			get { return Translations.GetString ("Move Selection"); }
 		}
 		public override string Icon {
 			get { return "Tools.MoveSelection.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps."); }
+			get { return Translations.GetString ("Left click and drag the selection to move selection outline. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
             get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }

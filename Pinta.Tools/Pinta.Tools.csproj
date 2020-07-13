@@ -1,121 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Common configuration -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{526152F2-2829-4AA6-B2F2-232579858A77}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Pinta.Tools</AssemblyName>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Pinta.Tools</RootNamespace>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-
+    <AssemblyName>Pinta.Tools</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ErrorReport>prompt</ErrorReport>
-    <GenerateDocumentation>true</GenerateDocumentation>
-    <NoWarn>1591</NoWarn>
-    <OutputPath>..\bin</OutputPath>
-    <Platform>AnyCPU</Platform>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>false</NoStdLib>
+
+    <Version>1.7.0.0</Version>
+    <Authors>PintaProject</Authors>
+    <Company />
+    <Product />
   </PropertyGroup>
-
-  <!-- Debug configuration -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <DefineConstants>DEBUG</DefineConstants>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
-
-  <!-- Release configuration -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-
-  <!-- References -->
   <ItemGroup>
-    <Reference Condition=" '$(PINTA_MONO_POSIX_2)' == '' " Include="Mono.Posix" />
-    <Reference Condition=" '$(PINTA_MONO_POSIX_2)' != '' " Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
-
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Addins, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <HintPath>..\lib\Mono.Addins.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cairo" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="GtkSharp" Version="3.22.25.98" />
   </ItemGroup>
-
-  <!-- Source files -->
   <ItemGroup>
-    <Compile Include="Brushes\CircleBrush.cs" />
-    <Compile Include="Brushes\GridBrush.cs" />
-    <Compile Include="Brushes\PlainBrush.cs" />
-    <Compile Include="Brushes\SplatterBrush.cs" />
-    <Compile Include="Brushes\SquaresBrush.cs" />
-    <Compile Include="CoreToolsExtension.cs" />
-    <Compile Include="Dashes\DashPatternBox.cs" />
-    <Compile Include="Editable\EditEngines\ArrowedEditEngine.cs" />
-    <Compile Include="Editable\EditEngines\BaseEditEngine.cs" />
-    <Compile Include="Editable\EditEngines\EllipseEditEngine.cs" />
-    <Compile Include="Editable\EditEngines\LineCurveEditEngine.cs" />
-    <Compile Include="Editable\EditEngines\RectangleEditEngine.cs" />
-    <Compile Include="Editable\EditEngines\RoundedLineEditEngine.cs" />
-    <Compile Include="Editable\Shapes\Arrow.cs" />
-    <Compile Include="Editable\Shapes\ControlPoint.cs" />
-    <Compile Include="Editable\Shapes\EllipseEngine.cs" />
-    <Compile Include="Editable\Shapes\GeneratedPoint.cs" />
-    <Compile Include="Editable\Shapes\LineCurveSeriesEngine.cs" />
-    <Compile Include="Editable\Shapes\OrganizedPointCollection.cs" />
-    <Compile Include="Editable\Shapes\RoundedLineEngine.cs" />
-    <Compile Include="Editable\Shapes\ShapeEngineCollection.cs" />
-    <Compile Include="HistoryItems\ShapesHistoryItem.cs" />
-    <Compile Include="HistoryItems\ShapesModifyHistoryItem.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\BaseBrushTool.cs" />
-    <Compile Include="Tools\BaseTransformTool.cs" />
-    <Compile Include="Tools\CloneStampTool.cs" />
-    <Compile Include="Tools\ColorPickerTool.cs" />
-    <Compile Include="Tools\EllipseSelectTool.cs" />
-    <Compile Include="Tools\EllipseTool.cs" />
-    <Compile Include="Tools\EraserTool.cs" />
-    <Compile Include="Tools\FloodTool.cs" />
-    <Compile Include="Tools\FreeformShapeTool.cs" />
-    <Compile Include="Tools\GradientTool.cs" />
-    <Compile Include="Tools\LassoSelectTool.cs" />
-    <Compile Include="Tools\LineCurveTool.cs" />
-    <Compile Include="Tools\MagicWandTool.cs" />
-    <Compile Include="Tools\MoveSelectedTool.cs" />
-    <Compile Include="Tools\MoveSelectionTool.cs" />
-    <Compile Include="Tools\PaintBrushTool.cs" />
-    <Compile Include="Tools\PaintBucketTool.cs" />
-    <Compile Include="Tools\PanTool.cs" />
-    <Compile Include="Tools\PencilTool.cs" />
-    <Compile Include="Tools\RecolorTool.cs" />
-    <Compile Include="Tools\RectangleSelectTool.cs" />
-    <Compile Include="Tools\RectangleTool.cs" />
-    <Compile Include="Tools\RoundedRectangleTool.cs" />
-    <Compile Include="Tools\SelectShapeTool.cs" />
-    <Compile Include="Tools\SelectTool.cs" />
-    <Compile Include="Tools\ShapeTool.cs" />
-    <Compile Include="Tools\TextTool.cs" />
-    <Compile Include="Tools\ToolControl\ToolControl.cs" />
-    <Compile Include="Tools\ZoomTool.cs" />
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
-
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-
-  <ItemGroup>
-    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
-      <Project>{30091528-6EC1-40F8-B4BF-8EB41CBE8A8B}</Project>
-      <Name>Pinta.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-
 </Project>

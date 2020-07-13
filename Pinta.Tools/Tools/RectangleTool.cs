@@ -27,20 +27,19 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
 	public class RectangleTool : ShapeTool
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Rectangle"); }
+			get { return Translations.GetString ("Rectangle"); }
 		}
 		public override string Icon {
 			get { return "Tools.Rectangle.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString("Left click to draw a shape with the primary color." +
+			get { return Translations.GetString("Left click to draw a shape with the primary color." +
 				  "\nLeft click on a shape to add a control point." +
 				  "\nLeft click on a control point and drag to move it." +
 				  "\nRight click on a control point and drag to change its tension." +

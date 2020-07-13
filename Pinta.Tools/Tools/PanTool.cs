@@ -27,20 +27,19 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
 	public class PanTool : BaseTool
 	{
 		public override string Name {
-			get { return Catalog.GetString ("Pan"); }
+			get { return Translations.GetString ("Pan"); }
 		}
 		public override string Icon {
 			get { return "Tools.Pan.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Click and drag to navigate image."); }
+			get { return Translations.GetString ("Click and drag to navigate image."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
             get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8); }

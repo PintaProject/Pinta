@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Text;
 using Gdk;
 using Gtk;
-using Mono.Unix;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -39,7 +38,7 @@ namespace Pinta.Tools
 		private DocumentSelection selection;
 
 		private Gtk.IMMulticontext imContext;
-		private TextLayout layout;
+		private Pinta.Core.TextLayout layout;
 
 		private Rectangle CurrentTextBounds
 		{
@@ -70,7 +69,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private TextLayout CurrentTextLayout
+		private Pinta.Core.TextLayout CurrentTextLayout
 		{
 			get {
 				if (layout.Engine != CurrentTextEngine)
@@ -91,14 +90,14 @@ namespace Pinta.Tools
 		//Whether or not the previous TextTool mouse cursor shown was the normal one.
 		private bool previousMouseCursorNormal = true;
 
-		public override string Name { get { return Catalog.GetString ("Text"); } }
-		private string FinalizeName { get { return Catalog.GetString("Text - Finalize"); } }
+		public override string Name { get { return Translations.GetString ("Text"); } }
+		private string FinalizeName { get { return Translations.GetString("Text - Finalize"); } }
 		public override string Icon { get { return "Tools.Text.png"; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
 
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
+			get { return Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
 		}
 
 		public override Gdk.Cursor DefaultCursor {
@@ -155,7 +154,7 @@ namespace Pinta.Tools
 			base.OnBuildToolBar (tb);
 
 			if (font_label == null)
-				font_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Font")));
+				font_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Font")));
 
 			tb.AppendItem (font_label);
 
@@ -188,21 +187,21 @@ namespace Pinta.Tools
 			tb.AppendItem (new SeparatorToolItem ());
 
 			if (bold_btn == null) {
-				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Catalog.GetString ("Bold"), Catalog.GetString ("Bold"));
+				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Translations.GetString ("Bold"), Translations.GetString ("Bold"));
 				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
 
 			tb.AppendItem (bold_btn);
 
 			if (italic_btn == null) {
-				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Catalog.GetString ("Italic"), Catalog.GetString ("Italic"));
+				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Translations.GetString ("Italic"), Translations.GetString ("Italic"));
 				italic_btn.Toggled += HandleItalicButtonToggled;
 			}
 
 			tb.AppendItem (italic_btn);
 
 			if (underscore_btn == null) {
-				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Catalog.GetString ("Underline"), Catalog.GetString ("Underline"));
+				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Translations.GetString ("Underline"), Translations.GetString ("Underline"));
 				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
 
@@ -211,7 +210,7 @@ namespace Pinta.Tools
 			tb.AppendItem (new SeparatorToolItem ());
 
 			if (left_alignment_btn == null) {
-				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Catalog.GetString ("Left Align"), Catalog.GetString ("Left Align"));
+				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Translations.GetString ("Left Align"), Translations.GetString ("Left Align"));
 				left_alignment_btn.Active = true;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
 			}
@@ -219,14 +218,14 @@ namespace Pinta.Tools
 			tb.AppendItem (left_alignment_btn);
 
 			if (center_alignment_btn == null) {
-				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Catalog.GetString ("Center Align"), Catalog.GetString ("Center Align"));
+				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Translations.GetString ("Center Align"), Translations.GetString ("Center Align"));
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
 			}
 
 			tb.AppendItem (center_alignment_btn);
 
 			if (Right_alignment_btn == null) {
-				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Catalog.GetString ("Right Align"), Catalog.GetString ("Right Align"));
+				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Translations.GetString ("Right Align"), Translations.GetString ("Right Align"));
 				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
 			}
 
@@ -238,17 +237,17 @@ namespace Pinta.Tools
 			tb.AppendItem (fill_sep);
 
 			if (fill_label == null)
-				fill_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Text Style")));
+				fill_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Text Style")));
 
 			tb.AppendItem (fill_label);
 
 			if (fill_button == null) {
 				fill_button = new ToolBarDropDownButton ();
 
-				fill_button.AddItem (Catalog.GetString ("Normal"), "ShapeTool.Fill.png", 0);
-				fill_button.AddItem (Catalog.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
-				fill_button.AddItem (Catalog.GetString ("Outline"), "ShapeTool.Outline.png", 2);
-				fill_button.AddItem (Catalog.GetString ("Fill Background"), "TextTool.FillBackground.png", 3);
+				fill_button.AddItem (Translations.GetString ("Normal"), "ShapeTool.Fill.png", 0);
+				fill_button.AddItem (Translations.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
+				fill_button.AddItem (Translations.GetString ("Outline"), "ShapeTool.Outline.png", 2);
+				fill_button.AddItem (Translations.GetString ("Fill Background"), "TextTool.FillBackground.png", 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}
@@ -261,12 +260,12 @@ namespace Pinta.Tools
 			tb.AppendItem (outline_sep);
 
 			if (outline_width_label == null)
-				outline_width_label = new ToolBarLabel (string.Format (" {0}: ", Catalog.GetString ("Outline width")));
+				outline_width_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Outline width")));
 
 			tb.AppendItem (outline_width_label);
 
 			if (outline_width_minus == null) {
-				outline_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Catalog.GetString ("Decrease outline size"));
+				outline_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Translations.GetString ("Decrease outline size"));
 				outline_width_minus.Clicked += MinusButtonClickedEvent;
 			}
 
@@ -283,7 +282,7 @@ namespace Pinta.Tools
 			tb.AppendItem (outline_width);
 
 			if (outline_width_plus == null) {
-				outline_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Catalog.GetString ("Increase outline size"));
+				outline_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Translations.GetString ("Increase outline size"));
 				outline_width_plus.Clicked += PlusButtonClickedEvent;
 			}
 

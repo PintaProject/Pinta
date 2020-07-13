@@ -30,7 +30,6 @@ using System.Linq;
 using System.Text;
 using Gtk;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Tools
 {
@@ -71,7 +70,7 @@ namespace Pinta.Tools
 
 			if (dashPatternLabel == null)
 			{
-				dashPatternLabel = new ToolBarLabel(string.Format(" {0}: ", Catalog.GetString("Dash")));
+				dashPatternLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Dash")));
 			}
 
 			tb.AppendItem(dashPatternLabel);
