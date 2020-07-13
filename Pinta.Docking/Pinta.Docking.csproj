@@ -11,23 +11,23 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DockLibrary\icons\pad-close-9%402x.png">
-      <LogicalName>pad-close-9%402x.png</LogicalName>
+    <EmbeddedResource Include="DockLibrary\icons\empty-16.png">
+      <LogicalName>empty-16.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="DockLibrary\icons\pad-close-9.png">
       <LogicalName>pad-close-9.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9%402x.png">
-      <LogicalName>pad-dock-9%402x.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="DockLibrary\icons\pad-dock-9.png">
       <LogicalName>pad-dock-9.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9%402x.png">
-      <LogicalName>pad-minimize-9%402x.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png">
       <LogicalName>pad-minimize-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\padbar-active.9.png">
+      <LogicalName>padbar-active.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockLibrary\icons\padbar-inactive.9.png">
+      <LogicalName>padbar-inactive.9.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12.png">
       <LogicalName>tabbar-prev-12.png</LogicalName>

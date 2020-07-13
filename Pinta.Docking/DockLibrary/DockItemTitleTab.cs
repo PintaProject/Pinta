@@ -226,10 +226,12 @@ namespace Pinta.Docking
 			this.label = label;
 			this.page = page;
 
-			// Pinta TODO
 #if false
 			if (icon == null)
 				icon = ImageService.GetIcon ("md-empty");
+#else
+			if (icon == null)
+				icon = GdkExtensions.FromResource("empty-16.png");
 #endif
 
 			if (box == null) {
