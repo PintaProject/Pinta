@@ -164,60 +164,58 @@ namespace Pinta.Gui.Widgets
 			return base.OnButtonPressEvent (ev);
 		}
 
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
-		{
-			base.OnExposeEvent (ev);
+        protected override bool OnDrawn(Context g)
+        {
+			base.OnDrawn (g);
 			
-			using (Context g = Gdk.CairoHelper.Create (GdkWindow)) {
-				
-                // Draw Primary / Secondary Area
+            // Draw Primary / Secondary Area
 
-				g.FillRectangle (secondary_rect, PintaCore.Palette.SecondaryColor);
-			
-				g.DrawRectangle (new Rectangle (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
-				g.DrawRectangle (secondary_rect, new Color (0, 0, 0), 1);
-	
-				g.FillRectangle (primary_rect, PintaCore.Palette.PrimaryColor);
-				g.DrawRectangle (new Rectangle (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
-				g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
-	
-				g.DrawPixbuf (swap_icon, swap_rect.Location ());
-				g.DrawPixbuf (reset_icon, reset_rect.Location ());
+            g.FillRectangle (secondary_rect, PintaCore.Palette.SecondaryColor);
+        
+            g.DrawRectangle (new Rectangle (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
+            g.DrawRectangle (secondary_rect, new Color (0, 0, 0), 1);
 
-                // Draw color swatches
+            g.FillRectangle (primary_rect, PintaCore.Palette.PrimaryColor);
+            g.DrawRectangle (new Rectangle (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
+            g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
 
-                int startI = primarySecondaryAreaSize;
-                int startJ = swatchAreaMargin;
+            g.DrawPixbuf (swap_icon, swap_rect.Location ());
+            g.DrawPixbuf (reset_icon, reset_rect.Location ());
 
-                int paletteIndex = 0;
-                for (int jRow = 0; jRow < jRows; jRow++)
+            // Draw color swatches
+
+            int startI = primarySecondaryAreaSize;
+            int startJ = swatchAreaMargin;
+
+            int paletteIndex = 0;
+            for (int jRow = 0; jRow < jRows; jRow++)
+            {
+                for (int iRow = 0; iRow < iRows; iRow++)
                 {
-                    for (int iRow = 0; iRow < iRows; iRow++)
-                    {
-                        if (paletteIndex >= palette.Count)
-                            break;
+                    if (paletteIndex >= palette.Count)
+                        break;
 
-                        int x = (orientation == OrientationEnum.Horizontal) ? startI + iRow * swatchSize : startJ + jRow * swatchSize;
-                        int y = (orientation == OrientationEnum.Horizontal) ? startJ + jRow * swatchSize : startI + iRow * swatchSize;
+                    int x = (orientation == OrientationEnum.Horizontal) ? startI + iRow * swatchSize : startJ + jRow * swatchSize;
+                    int y = (orientation == OrientationEnum.Horizontal) ? startJ + jRow * swatchSize : startI + iRow * swatchSize;
 
-                        g.FillRectangle(new Rectangle(x, y, swatchSize, swatchSize), palette[paletteIndex]);
+                    g.FillRectangle(new Rectangle(x, y, swatchSize, swatchSize), palette[paletteIndex]);
 
-                        paletteIndex++;
-                    }
+                    paletteIndex++;
                 }
-			}
+            }
 			
 			return true;
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			// Calculate desired size here.
-            requisition.Height = requisition.Width = primarySecondaryAreaSize;
-		}
-#endif
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			minimum_width = natural_width = primarySecondaryAreaSize;
+        }
+
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			minimum_height = natural_height = primarySecondaryAreaSize;
+        }
 
         protected override void OnSizeAllocated(Gdk.Rectangle allocation)
         {
