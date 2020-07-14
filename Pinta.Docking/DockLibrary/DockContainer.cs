@@ -398,7 +398,7 @@ namespace Pinta.Docking
 
 			Style = Style.Attach (GdkWindow);
 			Style.SetBackground (GdkWindow, State);
-			HasWindow = false;
+			HasWindow = true;
 
             //GdkWindow.SetBackPixmap (null, true);
 
