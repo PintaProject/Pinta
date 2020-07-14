@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Posterize"); }
+			get { return Translations.GetString ("Posterize"); }
 		}
 
 		public override bool IsConfigurable {

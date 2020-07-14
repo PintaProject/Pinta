@@ -26,7 +26,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using System.Collections.Generic;
 using Cairo;
 
@@ -39,7 +38,7 @@ namespace Pinta.Effects
 	{
 		private class ControlPointDrawingInfo 
 		{
-			public Color Color { get; set; }
+			public Cairo.Color Color { get; set; }
 			public bool IsActive { get; set; }
 		}
 		
@@ -79,7 +78,7 @@ namespace Pinta.Effects
 
 		public CurvesData EffectData { get; private set; }
 		
-		public CurvesDialog (CurvesData effectData) : base (Catalog.GetString ("Curves"), PintaCore.Chrome.MainWindow,
+		public CurvesDialog (CurvesData effectData) : base (Translations.GetString ("Curves"), PintaCore.Chrome.MainWindow,
 		                                                    DialogFlags.Modal)
 		{
 			this.Build ();
@@ -93,7 +92,7 @@ namespace Pinta.Effects
 			checkRed.Toggled += HandleCheckToggled;
 			checkGreen.Toggled += HandleCheckToggled;
 			checkBlue.Toggled += HandleCheckToggled;
-			drawing.ExposeEvent += HandleDrawingExposeEvent;
+			drawing.Drawn += HandleDrawingDrawnEvent;
 			drawing.MotionNotifyEvent += HandleDrawingMotionNotifyEvent;
 			drawing.LeaveNotifyEvent += HandleDrawingLeaveNotifyEvent;
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
@@ -396,16 +395,14 @@ namespace Pinta.Effects
 			}
 		}
 		
-		private void HandleDrawingExposeEvent (object o, Gtk.ExposeEventArgs args)
-		{	
-			using (Context g = Gdk.CairoHelper.Create (drawing.GdkWindow)) {
-				
-				DrawBorder (g);
-				DrawPointerCross (g);
-				DrawSpline (g);
-				DrawGrid (g);
-				DrawControlPoints (g);
-			}
-		}
-	}
+		private void HandleDrawingDrawnEvent (object o, Gtk.DrawnArgs args)
+		{
+            Context g = args.Cr;
+            DrawBorder(g);
+            DrawPointerCross(g);
+            DrawSpline(g);
+            DrawGrid(g);
+            DrawControlPoints(g);
+        }
+    }
 }

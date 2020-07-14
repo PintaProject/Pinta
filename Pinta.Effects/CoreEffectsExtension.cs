@@ -32,10 +32,15 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
+	// TODO-GTK3
+#if false
 	[Mono.Addins.Extension]
 	class CoreEffectsExtension : IExtension
+#else
+	public class CoreEffectsExtension : IExtension
+#endif
 	{
-		#region IExtension Members
+#region IExtension Members
 		public void Initialize ()
 		{
 			// Add the adjustments
@@ -125,6 +130,6 @@ namespace Pinta.Effects
 			PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
 			PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
 		}
-		#endregion
+#endregion
 	}
 }

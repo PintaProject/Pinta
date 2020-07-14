@@ -11,7 +11,6 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -25,7 +24,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Outline"); }
+			get { return Translations.GetString ("Outline"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,7 +32,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Stylize"); }
+			get { return Translations.GetString ("Stylize"); }
 		}
 
 		public OutlineData Data { get { return EffectData as OutlineData; } }

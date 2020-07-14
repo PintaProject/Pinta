@@ -12,7 +12,6 @@ using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Effects;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -29,7 +28,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Pencil Sketch"); }
+			get { return Translations.GetString ("Pencil Sketch"); }
 		}
 
 		public override bool IsConfigurable {
@@ -37,7 +36,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Artistic"); }
+			get { return Translations.GetString ("Artistic"); }
 		}
 
 		public PencilSketchData Data { get { return EffectData as PencilSketchData; } }

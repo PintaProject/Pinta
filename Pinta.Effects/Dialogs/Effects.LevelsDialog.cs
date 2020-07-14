@@ -36,7 +36,6 @@
 
 using System;
 using Gtk;
-using Mono.Unix;
 using Cairo;
 
 using Pinta.Core;
@@ -50,7 +49,7 @@ namespace Pinta.Effects
 		
 		public LevelsData EffectData { get; private set; }
 		
-		public LevelsDialog (LevelsData effectData) : base (Catalog.GetString ("Levels Adjustment"),
+		public LevelsDialog (LevelsData effectData) : base (Translations.GetString ("Levels Adjustment"),
 		                                                    PintaCore.Chrome.MainWindow, DialogFlags.Modal)
 		{			
 			this.Build ();
@@ -58,16 +57,15 @@ namespace Pinta.Effects
 			EffectData = effectData;			
 			mask = new bool[] {true, true, true};
 
-			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
-			VBox.Remove (hboxBottom);
+			ContentArea.Remove (hboxBottom);
 			foreach (Widget widget in hboxBottom)
 			{
                 hboxBottom.Remove (widget);
 				if (widget == buttonOk)
 					AddActionWidget (widget, ResponseType.Ok);
 				else
-                    ActionArea.PackEnd (widget);
+                    ActionArea.PackEnd (widget, true, true, 0);
 			}
 
 			UpdateInputHistogram ();

@@ -87,6 +87,8 @@ namespace Pinta
 #else
 			var tools = new Pinta.Tools.CoreToolsExtension();
 			tools.Initialize();
+			var effects = new Pinta.Effects.CoreEffectsExtension();
+			effects.Initialize();
 #endif
 
 			// Try to set the default tool to the PaintBrush

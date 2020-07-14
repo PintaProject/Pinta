@@ -26,7 +26,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Brightness / Contrast"); }
+			get { return Translations.GetString ("Brightness / Contrast"); }
 		}
 
 		public override bool IsConfigurable {

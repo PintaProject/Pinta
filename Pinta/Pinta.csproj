@@ -22,5 +22,7 @@
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
     <!-- TODO-GTK3 remove once addins are supported -->
     <ProjectReference Include="..\Pinta.Tools\Pinta.Tools.csproj" />
+    <!-- TODO-GTK3 remove once addins are supported -->
+    <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj" />
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Curves"); }
+			get { return Translations.GetString ("Curves"); }
 		}
 
 		public override bool IsConfigurable {

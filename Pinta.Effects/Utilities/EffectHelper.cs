@@ -25,8 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins;
-using Mono.Addins.Localization;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using System.ComponentModel;
@@ -36,22 +34,25 @@ namespace Pinta
 
 	public static class EffectHelper
 	{
-		/// <summary>
-		/// Launchs an effect dialog.
-		/// </summary>
-		/// <param name="localizer">
-		/// The localizer for the effect add-in. This is used to fetch translations for the
-		/// strings in the dialog.
-		/// </param>
+        /// <summary>
+        /// Launchs an effect dialog.
+        /// </summary>
+        /// <param name="localizer">
+        /// The localizer for the effect add-in. This is used to fetch translations for the
+        /// strings in the dialog.
+        /// </param>
+        // TODO-GTK3
+#if false
 		public static bool LaunchSimpleEffectDialog (BaseEffect effect, AddinLocalizer localizer)
 		{
 			return LaunchSimpleEffectDialog (effect, new AddinLocalizerWrapper (localizer));
 		}
+#endif
 
-		/// <summary>
-		/// Launchs an effect dialog using Pinta's translation template.
-		/// </summary>
-		internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
+        /// <summary>
+        /// Launchs an effect dialog using Pinta's translation template.
+        /// </summary>
+        internal static bool LaunchSimpleEffectDialog (BaseEffect effect)
 		{
 			return LaunchSimpleEffectDialog (effect, new PintaLocalizer ());
 		}
@@ -92,6 +93,8 @@ namespace Pinta
 		/// <summary>
 		/// Wrapper around the AddinLocalizer of an add-in.
 		/// </summary>
+		// TODO-GTK3
+#if false
 		private class AddinLocalizerWrapper : IAddinLocalizer
 		{
 			private AddinLocalizer localizer;
@@ -106,5 +109,6 @@ namespace Pinta
 				return localizer.GetString (msgid);
 			}
 		};
+#endif
 	}
 }

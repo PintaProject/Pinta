@@ -12,7 +12,6 @@ using Cairo;
 
 using Pinta.Gui.Widgets;
 using Pinta.Core;
-using Mono.Unix;
 
 namespace Pinta.Effects
 {
@@ -25,7 +24,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Red Eye Removal"); }
+			get { return Translations.GetString ("Red Eye Removal"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,7 +32,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Translations.GetString ("Photo"); }
 		}
 
 		public RedEyeRemoveData Data { get { return EffectData as RedEyeRemoveData; } }

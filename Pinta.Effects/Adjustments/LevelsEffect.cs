@@ -20,7 +20,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Levels"); }
+			get { return Translations.GetString ("Levels"); }
 		}
 
 		public override bool IsConfigurable {
