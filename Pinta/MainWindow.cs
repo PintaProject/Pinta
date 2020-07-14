@@ -84,6 +84,9 @@ namespace Pinta
 
 			//Look out for any changes in extensions
 			AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
+#else
+			var tools = new Pinta.Tools.CoreToolsExtension();
+			tools.Initialize();
 #endif
 
 			// Try to set the default tool to the PaintBrush

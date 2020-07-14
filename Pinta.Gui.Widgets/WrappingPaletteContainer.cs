@@ -109,11 +109,9 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+            base.OnGetPreferredHeight(out minimum_height, out natural_height);
 
 			int n = children.Count, nVisible = 0;
 			childReqs = new Requisition[n];
@@ -126,12 +124,15 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 
-            requisition.Width = iconSize;
-            requisition.Height = iconSize;
-		}
-#endif
+			minimum_height = natural_height = iconSize;
+        }
 
-		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			minimum_width = natural_width = iconSize;
+        }
+
+        protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 

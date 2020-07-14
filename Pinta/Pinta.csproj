@@ -20,5 +20,7 @@
     <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj" />
     <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj" />
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
+    <!-- TODO-GTK3 remove once addins are supported -->
+    <ProjectReference Include="..\Pinta.Tools\Pinta.Tools.csproj" />
   </ItemGroup>
 </Project>

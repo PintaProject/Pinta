@@ -32,10 +32,15 @@ using Pinta.Core;
 
 namespace Pinta.Tools
 {
+	// TODO-GTK3
+#if false
 	[Mono.Addins.Extension]
 	class CoreToolsExtension : IExtension
+#else
+	public class CoreToolsExtension : IExtension
+#endif
 	{
-		#region IExtension Members
+#region IExtension Members
 		public void Initialize ()
 		{
 			PintaCore.PaintBrushes.AddPaintBrush (new Brushes.CircleBrush ());
@@ -99,6 +104,6 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool (typeof (EllipseTool));
 			PintaCore.Tools.RemoveInstanceOfTool (typeof (FreeformShapeTool));
 		}
-		#endregion
+#endregion
 	}
 }
