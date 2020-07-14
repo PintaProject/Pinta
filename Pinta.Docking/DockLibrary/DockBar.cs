@@ -185,23 +185,35 @@ namespace Pinta.Docking
 		{
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+            base.OnGetPreferredHeight(out minimum_height, out natural_height);
+			if (ShowBorder)
+            {
+				// Add space for separator.
+				if (Orientation != Orientation.Vertical)
+                {
+					minimum_height++;
+					natural_height++;
+                }
+            }
+        }
 
-			if (ShowBorder) {
-				// Add space for the separator
-				if (Orientation == Gtk.Orientation.Vertical)
-					requisition.Width++;
-				else
-					requisition.Height++;
-			}
-		}
-#endif
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+            base.OnGetPreferredWidth(out minimum_width, out natural_width);
+			if (ShowBorder)
+            {
+				// Add space for separator.
+				if (Orientation == Orientation.Vertical)
+                {
+					minimum_width++;
+					natural_width++;
+                }
+            }
+        }
 
-		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
+        protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 			if (ShowBorder && Child != null) {

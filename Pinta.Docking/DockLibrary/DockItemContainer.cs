@@ -29,6 +29,7 @@
 //
 
 using System;
+using Cairo;
 using Gtk;
 using Pinta.Core;
 using Pinta.Docking;
@@ -184,21 +185,17 @@ namespace Pinta.Docking
 			}
 #endif
 		}
-		
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
+
+        protected override bool OnDrawn(Context cr)
+        {
 			if (VisualStyle.TabStyle == DockTabStyle.Normal) {
-				Gdk.GC gc = new Gdk.GC (GdkWindow);
-				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value.ToGdkColor ();
-				evnt.Window.DrawRectangle (gc, true, Allocation);
-				gc.Dispose ();
+				cr.SetSourceColor(VisualStyle.PadBackgroundColor.Value.ToCairoColor());
+				cr.Rectangle(0, 0, AllocatedWidth, AllocatedHeight);
+				cr.Fill();
 			}
-			return base.OnExposeEvent (evnt);
-		}
-#endif
-	}
+            return base.OnDrawn(cr);
+        }
+    }
 
 	class CustomFrame: Bin
 	{
@@ -276,22 +273,35 @@ namespace Pinta.Docking
 			child = null;
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
-			if (child != null) {
-				requisition = child.SizeRequest ();
-				requisition.Width += leftMargin + rightMargin + leftPadding + rightPadding;
-				requisition.Height += topMargin + bottomMargin + topPadding + bottomPadding;
-			} else {
-				requisition.Width = 0;
-				requisition.Height = 0;
-			}
-		}
-#endif
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+            if (child != null)
+            {
+                child.GetPreferredHeight(out minimum_height, out natural_height);
+                minimum_height += topMargin + bottomMargin + topPadding + bottomPadding;
+                natural_height = minimum_height;
+            }
+            else
+            {
+                natural_height = minimum_height = 0;
+            }
+        }
 
-		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+            if (child != null)
+            {
+                child.GetPreferredWidth(out minimum_width, out natural_width);
+				minimum_width += leftMargin + rightMargin + leftPadding + rightPadding;
+                natural_width = minimum_width;
+            }
+            else
+            {
+                natural_width = minimum_width = 0;
+            }
+        }
+
+        protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 			if (allocation.Width > leftMargin + rightMargin + leftPadding + rightPadding) {
@@ -306,7 +316,7 @@ namespace Pinta.Docking
 				child.SizeAllocate (allocation);
 		}
 
-		// TODO-GTK3
+        // TODO-GTK3
 #if false
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
@@ -377,5 +387,5 @@ namespace Pinta.Docking
 			}
 		}
 #endif
-	}
+    }
 }

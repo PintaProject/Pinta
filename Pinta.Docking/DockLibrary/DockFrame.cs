@@ -1113,17 +1113,21 @@ namespace Pinta.Docking
 			}
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
 			if (overlayWidget != null)
 				overlayWidget.SizeRequest ();
-			base.OnSizeRequested (ref requisition);
-		}
-#endif
-		
-		protected override void OnSizeAllocated (Rectangle allocation)
+            base.OnGetPreferredWidth(out minimum_width, out natural_width);
+        }
+
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			if (overlayWidget != null)
+				overlayWidget.SizeRequest ();
+            base.OnGetPreferredHeight(out minimum_height, out natural_height);
+        }
+
+        protected override void OnSizeAllocated (Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 			
