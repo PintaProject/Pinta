@@ -37,16 +37,16 @@ namespace Pinta.Core
         private ToolBarComboBox selection_combo_box;
 
         private CombineMode selected_mode;
-        private Dictionary<CombineMode, string> combine_modes;
+        private Dictionary<string, CombineMode> combine_modes;
 
         public SelectionModeHandler ()
         {
-            combine_modes = new Dictionary<CombineMode, string> () {
-                { CombineMode.Replace, Translations.GetString ("Replace") },
-                { CombineMode.Union, Translations.GetString ("Union (+) (Ctrl + Left Click)") },
-                { CombineMode.Exclude, Translations.GetString ("Exclude (-) (Right Click)") },
-                { CombineMode.Xor, Translations.GetString ("Xor (Ctrl + Right Click)") },
-                { CombineMode.Intersect, Translations.GetString ("Intersect (Shift + Left Click)") },
+            combine_modes = new Dictionary<string, CombineMode>() {
+                { Translations.GetString ("Replace"), CombineMode.Replace},
+                { Translations.GetString ("Union (+) (Ctrl + Left Click)"), CombineMode.Union},
+                { Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
+                { Translations.GetString ("Xor (Ctrl + Right Click)"), CombineMode.Xor},
+                { Translations.GetString ("Intersect (Shift + Left Click)"), CombineMode.Intersect},
             };
         }
 
@@ -63,13 +63,11 @@ namespace Pinta.Core
 
                 selection_combo_box.ComboBox.Changed += (o, e) =>
                 {
-                    Gtk.TreeIter iter;
-                    if (selection_combo_box.ComboBox.GetActiveIter (out iter))
-                        selected_mode = (CombineMode)selection_combo_box.Model.GetValue (iter, 1);
+                    selected_mode = combine_modes[selection_combo_box.ComboBox.ActiveText];
                 };
 
                 foreach (var mode in combine_modes)
-                    selection_combo_box.Model.AppendValues (mode.Value, mode.Key);
+                    selection_combo_box.ComboBox.AppendText(mode.Key);
 
                 selection_combo_box.ComboBox.Active = 0;
             }

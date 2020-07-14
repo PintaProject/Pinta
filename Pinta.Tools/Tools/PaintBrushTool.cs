@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -93,12 +94,8 @@ namespace Pinta.Tools
 			if (brush_combo_box == null) {
 				brush_combo_box = new ToolBarComboBox (100, 0, false);
 				brush_combo_box.ComboBox.Changed += (o, e) => {
-					Gtk.TreeIter iter;
-					if (brush_combo_box.ComboBox.GetActiveIter (out iter)) {
-						active_brush = (BasePaintBrush)brush_combo_box.Model.GetValue (iter, 1);
-					} else {
-						active_brush = default_brush;
-					}
+					var brush_name = brush_combo_box.ComboBox.ActiveText;
+					active_brush = PintaCore.PaintBrushes.SingleOrDefault(brush => brush.Name == brush_name) ?? default_brush;
 				};
 
 				RebuildBrushComboBox ();
@@ -121,13 +118,13 @@ namespace Pinta.Tools
 		/// </summary>
 		private void RebuildBrushComboBox ()
 		{
-			brush_combo_box.Model.Clear ();
+			brush_combo_box.ComboBox.RemoveAll();
 			default_brush = null;
 
 			foreach (var brush in PintaCore.PaintBrushes) {
 				if (default_brush == null)
 					default_brush = (BasePaintBrush)brush;
-				brush_combo_box.Model.AppendValues (brush.Name, brush);
+				brush_combo_box.ComboBox.AppendText(brush.Name);
 			}
 
 			brush_combo_box.ComboBox.Active = 0;
