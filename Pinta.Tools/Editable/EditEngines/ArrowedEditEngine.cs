@@ -76,7 +76,7 @@ namespace Pinta.Tools
 				newSize = 10d;
 			}
 
-			(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+			arrowSize.ComboBox.Entry.Text = newSize.ToString();
 		}
 
 		void arrowSizePlus_Clicked(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace Pinta.Tools
 				newSize = 10d;
 			}
 
-			(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+			arrowSize.ComboBox.Entry.Text = newSize.ToString();
 		}
 
 		void arrowAngleOffsetMinus_Clicked(object sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace Pinta.Tools
 				newAngle = 0d;
 			}
 
-			(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+			arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
 		}
 
 		void arrowAngleOffsetPlus_Clicked(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace Pinta.Tools
 				newAngle = 0d;
 			}
 
-			(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+			arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
 		}
 
 		void arrowLengthOffsetMinus_Clicked(object sender, EventArgs e)
@@ -160,7 +160,7 @@ namespace Pinta.Tools
 				newLength = 10d;
 			}
 
-			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
+			arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
 		}
 
 		void arrowLengthOffsetPlus_Clicked(object sender, EventArgs e)
@@ -181,7 +181,7 @@ namespace Pinta.Tools
 				newLength = 10d;
 			}
 
-			(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
+			arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
 		}
 
 		#endregion ToolbarEventHandlers
@@ -401,7 +401,7 @@ namespace Pinta.Tools
 							}
 						}
 
-						(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newSize.ToString();
+						arrowSize.ComboBox.Entry.Text = newSize.ToString();
 
 						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
@@ -480,7 +480,7 @@ namespace Pinta.Tools
 							return;
 						}
 
-						(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newAngle.ToString();
+						arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
 
 						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
@@ -559,7 +559,7 @@ namespace Pinta.Tools
 							return;
 						}
 
-						(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = newLength.ToString();
+						arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
 
 						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
 
@@ -619,9 +619,9 @@ namespace Pinta.Tools
 				newEngine.Arrow1.Show = showArrowOneBox.Active;
 				newEngine.Arrow2.Show = showArrowTwoBox.Active;
 
-				Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.ArrowSize);
-				Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.AngleOffset);
-				Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out newEngine.Arrow1.LengthOffset);
+				Double.TryParse(arrowSize.ComboBox.Entry.Text, out newEngine.Arrow1.ArrowSize);
+				Double.TryParse(arrowAngleOffset.ComboBox.Entry.Text, out newEngine.Arrow1.AngleOffset);
+				Double.TryParse(arrowLengthOffset.ComboBox.Entry.Text, out newEngine.Arrow1.LengthOffset);
 
 				newEngine.Arrow1.ArrowSize = Utility.Clamp(newEngine.Arrow1.ArrowSize, 1d, 100d);
 				newEngine.Arrow2.ArrowSize = newEngine.Arrow1.ArrowSize;
@@ -646,9 +646,9 @@ namespace Pinta.Tools
 					
 					if (showOtherArrowOptions)
 					{
-						(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = lCSEngine.Arrow1.ArrowSize.ToString();
-						(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = lCSEngine.Arrow1.AngleOffset.ToString();
-						(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = lCSEngine.Arrow1.LengthOffset.ToString();
+						arrowSize.ComboBox.Entry.Text = lCSEngine.Arrow1.ArrowSize.ToString();
+						arrowAngleOffset.ComboBox.Entry.Text = lCSEngine.Arrow1.AngleOffset.ToString();
+						arrowLengthOffset.ComboBox.Entry.Text = lCSEngine.Arrow1.LengthOffset.ToString();
 					}
 				}
 
@@ -665,9 +665,9 @@ namespace Pinta.Tools
 
 				if (showOtherArrowOptions)
 				{
-					(arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.ArrowSize.ToString();
-					(arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.AngleOffset.ToString();
-					(arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text = previousSettings1.LengthOffset.ToString();
+					arrowSize.ComboBox.Entry.Text = previousSettings1.ArrowSize.ToString();
+					arrowAngleOffset.ComboBox.Entry.Text = previousSettings1.AngleOffset.ToString();
+					arrowLengthOffset.ComboBox.Entry.Text = previousSettings1.LengthOffset.ToString();
 				}
 			}
 
@@ -681,9 +681,9 @@ namespace Pinta.Tools
 				previousSettings1.Show = showArrowOneBox.Active;
 				previousSettings2.Show = showArrowTwoBox.Active;
 
-				Double.TryParse((arrowSize.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out previousSettings1.ArrowSize);
-				Double.TryParse((arrowAngleOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out previousSettings1.AngleOffset);
-				Double.TryParse((arrowLengthOffset.ComboBox as Gtk.ComboBoxEntry).Entry.Text, out previousSettings1.LengthOffset);
+				Double.TryParse(arrowSize.ComboBox.Entry.Text, out previousSettings1.ArrowSize);
+				Double.TryParse(arrowAngleOffset.ComboBox.Entry.Text, out previousSettings1.AngleOffset);
+				Double.TryParse(arrowLengthOffset.ComboBox.Entry.Text, out previousSettings1.LengthOffset);
 
 				//Other Arrow2 settings are unnecessary since they are the same as Arrow1's.
 			}

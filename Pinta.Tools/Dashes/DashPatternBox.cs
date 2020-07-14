@@ -59,7 +59,7 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
 		/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
-		public Gtk.ComboBox SetupToolbar(Toolbar tb)
+		public Gtk.ComboBoxText SetupToolbar(Toolbar tb)
 		{
 			if (dashPatternSep == null)
 			{

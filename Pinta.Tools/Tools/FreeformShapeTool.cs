@@ -87,7 +87,7 @@ namespace Pinta.Tools
 			tb.AppendItem (fill_button);
 
 
-			Gtk.ComboBox dpbBox = dashPBox.SetupToolbar(tb);
+			Gtk.ComboBoxText dpbBox = dashPBox.SetupToolbar(tb);
 
 			if (dpbBox != null)
 			{

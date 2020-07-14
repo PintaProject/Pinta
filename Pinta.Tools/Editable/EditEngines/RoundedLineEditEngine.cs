@@ -65,20 +65,20 @@ namespace Pinta.Tools
 					{
 						if (rad >= 0)
 						{
-							(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = rad.ToString();
+							radius.ComboBox.Entry.Text = rad.ToString();
 
 							return rad;
 						}
 						else
 						{
-							(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString();
+							radius.ComboBox.Entry.Text = BrushWidth.ToString();
 
 							return BrushWidth;
 						}
 					}
 					else
 					{
-						(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString();
+						radius.ComboBox.Entry.Text = BrushWidth.ToString();
 
 						return BrushWidth;
 					}
@@ -93,7 +93,7 @@ namespace Pinta.Tools
 			{
 				if (radius != null)
 				{
-					(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+					radius.ComboBox.Entry.Text = value.ToString();
 
 					ShapeEngine selEngine = SelectedShapeEngine;
 

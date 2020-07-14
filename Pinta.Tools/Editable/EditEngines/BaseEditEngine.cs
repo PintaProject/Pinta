@@ -113,13 +113,13 @@ namespace Pinta.Tools
 					{
 						if (width > 0)
 						{
-							(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString();
+							brush_width.ComboBox.Entry.Text = width.ToString();
 
 							return width;
 						}
 					}
 
-					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BaseTool.DEFAULT_BRUSH_WIDTH.ToString();
+					brush_width.ComboBox.Entry.Text = BaseTool.DEFAULT_BRUSH_WIDTH.ToString();
 				}
 
                 return BaseTool.DEFAULT_BRUSH_WIDTH;
@@ -129,7 +129,7 @@ namespace Pinta.Tools
 			{
 				if (brush_width != null)
 				{
-					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString();
+					brush_width.ComboBox.Entry.Text = value.ToString();
 				}
 			}
         }
@@ -407,7 +407,7 @@ namespace Pinta.Tools
 			tb.AppendItem(shape_type_button);
 
 
-            Gtk.ComboBox dpbBox = dash_pattern_box.SetupToolbar(tb);
+            Gtk.ComboBoxText dpbBox = dash_pattern_box.SetupToolbar(tb);
 
             if (dpbBox != null)
             {
@@ -1848,7 +1848,7 @@ namespace Pinta.Tools
 				owner.UseAntialiasing = engine.AntiAliasing;
 
 				//Update the DashPatternBox to represent the current shape's DashPattern.
-				(dash_pattern_box.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = engine.DashPattern;
+				dash_pattern_box.comboBox.ComboBox.Entry.Text = engine.DashPattern;
 
 				OutlineColor = engine.OutlineColor.Clone();
 				FillColor = engine.FillColor.Clone();
@@ -1866,7 +1866,7 @@ namespace Pinta.Tools
 		{
 			if (dash_pattern_box.comboBox != null)
 			{
-				(dash_pattern_box.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = prev_dash_pattern;
+				dash_pattern_box.comboBox.ComboBox.Entry.Text = prev_dash_pattern;
 			}
 
 			owner.UseAntialiasing = prev_antialiasing;
@@ -1880,7 +1880,7 @@ namespace Pinta.Tools
 		{
 			if (dash_pattern_box.comboBox != null)
 			{
-				prev_dash_pattern = (dash_pattern_box.comboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text;
+				prev_dash_pattern = dash_pattern_box.comboBox.ComboBox.Entry.Text;
 			}
 
 			prev_antialiasing = owner.UseAntialiasing;

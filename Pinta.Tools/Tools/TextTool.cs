@@ -276,7 +276,7 @@ namespace Pinta.Tools
 						"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 						"40", "45", "50", "55");
 
-				(outline_width.Child as ComboBoxEntry).Changed += HandleSizeChanged;
+				outline_width.ComboBox.Changed += HandleSizeChanged;
 			}
 
 			tb.AppendItem (outline_width);
@@ -456,14 +456,14 @@ namespace Pinta.Tools
 				int width;
 				if (Int32.TryParse (outline_width.ComboBox.ActiveText, out width)) {
 					if (width > 0) {
-						(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString ();
+						outline_width.ComboBox.Entry.Text = width.ToString ();
 						return width;
 					}
 				}
-				(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "2";
+				outline_width.ComboBox.Entry.Text = "2";
 				return 2;
 			}
-			set { (outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
+			set { outline_width.ComboBox.Entry.Text = value.ToString (); }
 		}
 
 		protected bool StrokeText { get { return ((int)fill_button.SelectedItem.Tag >= 1 && (int)fill_button.SelectedItem.Tag != 3); } }
