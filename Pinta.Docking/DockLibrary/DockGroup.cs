@@ -32,6 +32,7 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 using Gtk;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -842,24 +843,24 @@ namespace Pinta.Docking
 			}
 		}
 		
-		public void Draw (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex)
+		public void Draw (Cairo.Context cr, DockGroup currentHandleGrp, int currentHandleIndex)
 		{
 			if (type != DockGroupType.Tabbed) {
-				DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, DrawSeparatorOperation.Draw, false, null);
+				DrawSeparators (cr, currentHandleGrp, currentHandleIndex, DrawSeparatorOperation.Draw, false, null);
 				foreach (DockObject it in VisibleObjects) {
 					DockGroup grp = it as DockGroup;
 					if (grp != null)
-						grp.Draw (exposedArea, currentHandleGrp, currentHandleIndex);
+						grp.Draw (cr, currentHandleGrp, currentHandleIndex);
 				}
 			}
 		}
 		
-		public void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, List<Gdk.Rectangle> areasList)
+		public void DrawSeparators (Cairo.Context cr, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, List<Gdk.Rectangle> areasList)
 		{
-			DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, oper, true, areasList);
+			DrawSeparators (cr, currentHandleGrp, currentHandleIndex, oper, true, areasList);
 		}
 		
-		void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
+		void DrawSeparators (Cairo.Context cr, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
 		{
 			if (type == DockGroupType.Tabbed || VisibleObjects.Count == 0)
 				return;
@@ -872,20 +873,15 @@ namespace Pinta.Docking
 			int hw = horiz ? Frame.HandleSize : Allocation.Width;
 			int hh = horiz ? Allocation.Height : Frame.HandleSize;
 
-			// TODO-GTK3
-#if false
-			Gdk.GC hgc = null;
-
 			if (areasList == null && oper == DrawSeparatorOperation.Draw) {
-				hgc = new Gdk.GC (Frame.Container.GdkWindow);
-				hgc.RgbFgColor = Styles.DockFrameBackground.ToGdkColor ();
+				cr.SetSourceColor(Styles.DockFrameBackground);
 			}
 
 			for (int n=0; n<VisibleObjects.Count; n++) {
 				DockObject ob = VisibleObjects [n];
 				DockGroup grp = ob as DockGroup;
 				if (grp != null && drawChildrenSep)
-					grp.DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, oper, areasList);
+					grp.DrawSeparators (cr, currentHandleGrp, currentHandleIndex, oper, areasList);
 				if (ob != last) {
 					if (horiz)
 						x += ob.Allocation.Width + Frame.HandlePadding;
@@ -901,8 +897,11 @@ namespace Pinta.Docking
 						Frame.Container.QueueDrawArea (x, y, hw, hh);
 						break;
 					case DrawSeparatorOperation.Draw:
-						Frame.Container.GdkWindow.DrawRectangle (hgc, true, x, y, hw, hh);
-						break;
+						// TODO-GTK3 - the separators aren't quite drawn at the correct place.
+						// Might be an issue with layout calculations elsewhere, though.
+                        cr.Rectangle(x, y, hw, hh);
+                        cr.Fill();
+                        break;
 					case DrawSeparatorOperation.Allocate:
 						Frame.Container.AllocateSplitter (this, n, new Gdk.Rectangle (x, y, hw, hh));
 						break;
@@ -914,9 +913,6 @@ namespace Pinta.Docking
 						y += Frame.HandleSize + Frame.HandlePadding;
 				}
 			}
-			if (hgc != null)
-				hgc.Dispose ();
-#endif
 		}
 		
 		public void ResizeItem (int index, int newSize)

@@ -33,6 +33,8 @@ using Gtk;
 using Gdk;
 using System.Linq;
 using Pinta.Docking.AtkCocoaHelper;
+using Cairo;
+using Pinta.Core;
 
 namespace Pinta.Docking
 {
@@ -128,18 +130,25 @@ namespace Pinta.Docking
 				layout.StoreAllocation ();
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition req)
-		{
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+            base.OnGetPreferredWidth(out minimum_width, out natural_width);
 			if (layout != null) {
 				LayoutWidgets ();
-				req = layout.SizeRequest ();
+                minimum_width = natural_width = layout.SizeRequest().Width;
+            }
+        }
+
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+            base.OnGetPreferredHeight(out minimum_height, out natural_height);
+			if (layout != null) {
+				LayoutWidgets ();
+				minimum_height = natural_height = layout.SizeRequest().Height;
 			}
-		}
-#endif
-		
-		protected override void OnSizeAllocated (Gdk.Rectangle rect)
+        }
+
+        protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
 			base.OnSizeAllocated (rect);
 			if (layout == null)
@@ -156,7 +165,7 @@ namespace Pinta.Docking
 			layout.SizeAllocate (rect);
 
 			usedSplitters = 0;
-			layout.DrawSeparators (Gdk.Rectangle.Zero, null, 0, DrawSeparatorOperation.Allocate, null);
+			layout.DrawSeparators (null, null, 0, DrawSeparatorOperation.Allocate, null);
 		}
 
 		int usedSplitters;
@@ -194,20 +203,16 @@ namespace Pinta.Docking
 					callback (s.Widget);
 		}
 
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			bool res = base.OnExposeEvent (evnt);
-			
-			if (layout != null) {
-				layout.Draw (evnt.Area, null, 0);
-			}
-			return res;
-		}
-#endif
+        protected override bool OnDrawn(Context cr)
+        {
+            bool res = base.OnDrawn(cr);
+			if (layout != null)
+				layout.Draw(cr, null, 0);
 
-		protected override void OnAdded (Widget widget)
+			return res;
+        }
+
+        protected override void OnAdded (Widget widget)
 		{
 			// Break the add signal cycle
 			if (widget.Parent == this) {
@@ -496,7 +501,7 @@ namespace Pinta.Docking
 					int pw, ph;
 					placeholderWindow.GetPosition (out px, out py);
 					placeholderWindow.GetSize (out pw, out ph);
-					gi.FloatRect = new Rectangle (px, py, pw, ph);
+					gi.FloatRect = new Gdk.Rectangle (px, py, pw, ph);
 					item.Status = DockItemStatus.Floating;
 				}
 			} catch (Exception ex) {
@@ -546,7 +551,7 @@ namespace Pinta.Docking
 				dockIndex = index;
 			}
 
-			protected override void OnSizeAllocated (Rectangle allocation)
+			protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 			{
 				Accessible.SetOrientation (allocation.Height > allocation.Width ? Orientation.Vertical : Orientation.Horizontal);
 				base.OnSizeAllocated (allocation);
