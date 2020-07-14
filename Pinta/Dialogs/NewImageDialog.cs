@@ -27,7 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Cairo;
 using Gtk;
 using Pinta.Core;
 
@@ -498,17 +498,15 @@ namespace Pinta
                 this.QueueDraw ();
             }
 
-            // TODO-GTK3
-#if false
-            protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+            protected override bool OnDrawn(Context cr)
             {
-                base.OnExposeEvent (evnt);
+                base.OnDrawn(cr);
 
                 if (size == Gdk.Size.Empty)
                     return true;
 
                 var preview_size = Gdk.Size.Empty;
-                var widget_size = GdkWindow.GetBounds ();
+                var widget_size = Window.GetBounds ();
 
                 // Figure out the dimensions of the preview to draw
                 if (size.Width <= max_size && size.Height <= max_size)
@@ -518,29 +516,26 @@ namespace Pinta
                 else
                     preview_size = new Gdk.Size ((int)(max_size / ((float)size.Height / (float)size.Width)), max_size);
 
-                using (var g = Gdk.CairoHelper.Create (GdkWindow)) {
-                    var r = new Cairo.Rectangle ((widget_size.Width - preview_size.Width) / 2, (widget_size.Height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
+                var r = new Cairo.Rectangle ((widget_size.Width - preview_size.Width) / 2, (widget_size.Height - preview_size.Height) / 2, preview_size.Width, preview_size.Height);
 
-                    if (color.A == 0) {
-                        // Fill with transparent checkerboard pattern
-                        using (var grid = GdkExtensions.CreateTransparentColorSwatch (false))
-                        using (var surf = grid.ToSurface ())
-                        using (var pattern = surf.ToTiledPattern ())
-                            g.FillRectangle (r, pattern);
-                    } else {
-                        // Fill with selected color
-                        g.FillRectangle (r, color);
-                    }
-
-                    // Draw our canvas drop shadow
-                    g.DrawRectangle (new Cairo.Rectangle (r.X - 1, r.Y - 1, r.Width + 2, r.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-                    g.DrawRectangle (new Cairo.Rectangle (r.X - 2, r.Y - 2, r.Width + 4, r.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-                    g.DrawRectangle (new Cairo.Rectangle (r.X - 3, r.Y - 3, r.Width + 6, r.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+                if (color.A == 0) {
+                    // Fill with transparent checkerboard pattern
+                    using (var grid = GdkExtensions.CreateTransparentColorSwatch (false))
+                    using (var surf = grid.ToSurface ())
+                    using (var pattern = surf.ToTiledPattern ())
+                        cr.FillRectangle (r, pattern);
+                } else {
+                    // Fill with selected color
+                    cr.FillRectangle (r, color);
                 }
+
+                // Draw our canvas drop shadow
+                cr.DrawRectangle (new Cairo.Rectangle (r.X - 1, r.Y - 1, r.Width + 2, r.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+                cr.DrawRectangle (new Cairo.Rectangle (r.X - 2, r.Y - 2, r.Width + 4, r.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+                cr.DrawRectangle (new Cairo.Rectangle (r.X - 3, r.Y - 3, r.Width + 6, r.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
                 return true;
             }
-#endif
         }
     }
 }
