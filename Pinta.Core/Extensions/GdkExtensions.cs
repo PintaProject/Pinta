@@ -146,21 +146,13 @@ namespace Pinta.Core
 
 		public static Pixbuf CreateColorSwatch(int size, Color color)
 		{
-			// TODO-GTK3
-#if false
-			using (var pmap = new Pixmap (Screen.Default.RootWindow, size, size))
-            using (var gc = new Gdk.GC (pmap)) {
-                gc.RgbFgColor = color;
-                pmap.DrawRectangle (gc, true, 0, 0, size, size);
-
-                gc.RgbFgColor = new Color (0, 0, 0);
-                pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
-
-                return Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
-            }
-#else
-			throw new NotImplementedException();
-#endif
+			using (var surf = new Cairo.ImageSurface(Cairo.Format.Argb32, size, size))
+			using (var g = new Cairo.Context(surf))
+			{
+				g.FillRectangle(new Cairo.Rectangle(0, 0, size, size), color.ToCairoColor());
+				g.DrawRectangle(new Cairo.Rectangle(0, 0, size - 1, size - 1), new Cairo.Color(0, 0, 0), 1);
+				return surf.ToPixbuf();
+			}
 		}
 
 		public static Pixbuf CreateTransparentColorSwatch(bool drawBorder)
@@ -170,23 +162,16 @@ namespace Pinta.Core
             using (var surface = new Cairo.ImageSurface(Cairo.Format.Argb32, size, size))
             using (var g = new Cairo.Context(surface))
             {
-				// TODO-GTK3
-#if false
-				gc.RgbFgColor = new Color(255, 255, 255);
-				pmap.DrawRectangle(gc, true, 0, 0, size, size);
-
-				gc.RgbFgColor = new Color(200, 200, 200);
-				pmap.DrawRectangle(gc, true, 0, 0, (size / 2), (size / 2));
-				pmap.DrawRectangle(gc, true, size / 2, size / 2, (size / 2), (size / 2));
+				g.FillRectangle(new Cairo.Rectangle(0, 0, size, size), new Cairo.Color(1, 1, 1));
+                var color = new Cairo.Color(0.78, 0.78, 0.78);
+                var half_size = size / 2;
+				g.FillRectangle(new Cairo.Rectangle(0, 0, half_size, half_size), color);
+                g.FillRectangle(new Cairo.Rectangle(half_size, half_size, half_size, half_size), color);
 
 				if (drawBorder)
-				{
-					gc.RgbFgColor = new Color(0, 0, 0);
-					pmap.DrawRectangle(gc, false, 0, 0, (size - 1), (size - 1));
-				}
-#endif
+                    g.DrawRectangle(new Cairo.Rectangle(0, 0, size - 1, size - 1), new Cairo.Color(0, 0, 0), 1);
 
-				return surface.ToPixbuf();
+                return surface.ToPixbuf();
             }
 		}
 	}
