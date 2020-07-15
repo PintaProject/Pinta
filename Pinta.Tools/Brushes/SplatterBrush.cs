@@ -76,7 +76,7 @@ namespace Pinta.Tools.Brushes
 
 			g.ClosePath ();
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents ();
 
 			g.Fill ();
 			g.Restore ();

@@ -55,7 +55,7 @@ namespace Pinta.Tools.Brushes
 
 			g.StrokePreserve ();
 
-			return g.FixedStrokeExtents ().ToGdkRectangle ();
+			return g.StrokeExtents ().ToGdkRectangle ();
 		}
 	}
 }

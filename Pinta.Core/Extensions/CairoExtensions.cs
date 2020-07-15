@@ -63,7 +63,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents ();
 			g.Stroke ();
 
 			g.Restore ();
@@ -88,7 +88,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents();
+			Rectangle dirty = g.StrokeExtents();
 			g.Stroke();
 
 			g.Restore();
@@ -124,7 +124,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Fill ();
 			g.Restore ();
@@ -144,7 +144,7 @@ namespace Pinta.Core
 
 			g.SetSource (pattern);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Fill ();
 
 			g.Restore ();
@@ -165,7 +165,7 @@ namespace Pinta.Core
             pattern.Matrix.Translate (-patternOffset.X, -patternOffset.Y);
             g.SetSource (pattern);
 
-            Rectangle dirty = g.FixedStrokeExtents ();
+            Rectangle dirty = g.StrokeExtents();
             g.Fill ();
 
             g.Restore ();
@@ -183,7 +183,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Stroke ();
 
 			g.Restore ();
@@ -201,7 +201,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Fill ();
 
 			g.Restore ();
@@ -235,7 +235,7 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -269,7 +269,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke();
 			g.Restore();
@@ -299,7 +299,7 @@ namespace Pinta.Core
 			g.SetSourceColor (color);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -328,7 +328,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (color);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Fill ();
 			g.Restore ();
@@ -387,7 +387,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -418,7 +418,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -445,7 +445,7 @@ namespace Pinta.Core
 
 			g.SetSourceColor (fill);
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Fill ();
 			g.Restore ();
@@ -464,7 +464,7 @@ namespace Pinta.Core
 			g.SetSourceColor (stroke);
 			g.LineWidth = lineWidth;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 
 			g.Stroke ();
 			g.Restore ();
@@ -525,59 +525,13 @@ namespace Pinta.Core
 			g.LineWidth = lineWidth;
 			g.LineCap = LineCap.Square;
 
-			Rectangle dirty = g.FixedStrokeExtents ();
+			Rectangle dirty = g.StrokeExtents();
 			g.Stroke ();
 
 			g.Restore ();
 
 			return dirty;
 		}
-
-		/// <summary>
-		/// Computes a bounding box in user coordinates covering the
-		/// area that would be affected by a call to Context.Stroke()
-		/// using the current stroke parameters.
-		/// 
-		/// The rectangle returned by Cairo.Context.StrokeExtents()
-		/// incorrectly specifies the X and Y coordinates of the
-		/// bottom-right corner of the Rectangle in the width and
-		/// height members. This method corrects the rectangle to
-		/// contain the width and height in the width and height members.
-		/// 
-		/// This can be removed once we port to GTK3.
-		/// </summary>
-		/// <returns>
-		/// The rectangle describing the area that would be
-		/// affected.
-		/// </returns>
-		public static Rectangle FixedStrokeExtents (this Context g)
-		{
-			double x1, y1, x2, y2;
-			cairo_stroke_extents (g.Handle, out x1, out y1, out x2, out y2);
-			return new Rectangle (x1, y1, x2 - x1, y2 - y1);
-		}
-
-		/// <summary>
-		/// The Pattern property is now deprecated in favour of the SetSource (pattern) method,
-		/// but that method doesn't exist in older versions of Mono.Cairo. This extension method
-		/// provides an implementation of that functionality.
-		/// 
-		/// This can be removed once we port to GTK3.
-		/// </summary>
-		public static void SetSource (this Context g, Pattern source)
-		{
-#pragma warning disable 612
-			cairo_set_source (g.Handle, source.Pointer);
-#pragma warning restore 612
-		}
-
-		private const string CairoLib = "libcairo-2.dll";
-
-		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
-		private static extern void cairo_stroke_extents (IntPtr cr, out double x1, out double y1, out double x2, out double y2);
-
-		[DllImport (CairoLib, CallingConvention=CallingConvention.Cdecl)]
-		private static extern void cairo_set_source (IntPtr cr, IntPtr pattern);
 
 		private static Pango.Style CairoToPangoSlant (FontSlant slant)
 		{
@@ -984,9 +938,6 @@ namespace Pinta.Core
             g.Restore ();
         }
 
-        [DllImport(CairoLib, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void cairo_path_extents(IntPtr cr, out double x1, out double y1, out double x2, out double y2);
-
         public static Gdk.Rectangle GetBounds(this Path path)
         {
             Rectangle rect;
@@ -995,10 +946,15 @@ namespace Pinta.Core
             {
                 g.AppendPath(path);
 
-                double x1, y1, x2, y2;
+				// TODO-GTK3 (https://github.com/GtkSharp/GtkSharp/pull/175)
+#if false
+				double x1, y1, x2, y2;
                 cairo_path_extents(g.Handle, out x1, out y1, out x2, out y2);
                 rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
-            }
+#else
+				throw new NotImplementedException();
+#endif
+			}
 
             int x = (int)Math.Round(rect.X);
             int y = (int)Math.Round(rect.Y);
