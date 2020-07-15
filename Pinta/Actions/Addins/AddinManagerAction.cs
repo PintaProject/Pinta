@@ -45,7 +45,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			// TODO-GTK3
+			// TODO-GTK3 (addins)
 #if false
 			AddinManagerWindow.AllowInstall = true;
 

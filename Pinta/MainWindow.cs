@@ -74,7 +74,7 @@ namespace Pinta
 			PintaCore.Initialize ();
 
 			// Initialize extensions
-			// TODO-GTK3
+			// TODO-GTK3 (addins)
 #if false
 			AddinManager.Initialize ();
 			AddinManager.Registry.Update ();
@@ -192,7 +192,7 @@ namespace Pinta
 
 			
 			var canvas = new CanvasWindow (doc) {
-				// TODO-GTK3
+				// TODO-GTK3 (rulers)
 #if false
                 RulersVisible = PintaCore.Actions.View.Rulers.Active,
                 RulerMetric = GetCurrentRulerMetric ()
@@ -214,7 +214,7 @@ namespace Pinta
                 canvas.HasBeenShown = true;
             };
 
-			// TODO-GTK3
+			// TODO-GTK3 (rulers)
 #if false
 			PintaCore.Actions.View.Rulers.Toggled += (o, e2) => { canvas.RulersVisible = ((ToggleAction)o).Active; };
             PintaCore.Actions.View.Pixels.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Pixels; };
@@ -223,7 +223,7 @@ namespace Pinta
 #endif
         }
 
-		// TODO-GTK3
+		// TODO-GTK3 (rulers)
 #if false
 		private MetricType GetCurrentRulerMetric ()
         {
@@ -288,7 +288,7 @@ namespace Pinta
         }
 
 		// Called when an extension node is added or removed
-		// TODO-GTK3
+		// TODO-GTK3 (addins)
 #if false
 		private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
 		{
@@ -492,7 +492,7 @@ namespace Pinta
 			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
 			                                                                      PintaCore.System.DefaultDialogDirectory);
 
-			// TODO-GTK3
+			// TODO-GTK3 (rulers)
 #if false
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 
@@ -520,7 +520,7 @@ namespace Pinta
 				PintaCore.Settings.PutSetting ("window-size-height", window_shell.GdkWindow.GetSize ().Height);
 			}
 
-			// TODO-GTK3
+			// TODO-GTK3 (rulers)
 #if flase
 			var ruler_metric = MetricType.Pixels;
 
