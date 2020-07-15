@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using Cairo;
 using Gdk;
 using Pinta.Core;
 
@@ -17,7 +18,7 @@ namespace Pinta.Gui.Widgets
 	public class AnglePickerGraphic : Gtk.DrawingArea
 	{
 		private bool tracking = false;
-		private Point lastMouseXY;
+		private Gdk.Point lastMouseXY;
 		private double angleValue;
 
 		public AnglePickerGraphic ()
@@ -37,7 +38,7 @@ namespace Pinta.Gui.Widgets
 				if (angleValue != v) {
 					angleValue = v;
 					OnValueChanged ();
-					this.GdkWindow.Invalidate ();
+					this.Window.Invalidate ();
 				}
 			}
 		}
@@ -50,8 +51,8 @@ namespace Pinta.Gui.Widgets
 					angleValue = value;
 					OnValueChanged ();
 
-					if (GdkWindow != null)
-						GdkWindow.Invalidate ();
+					if (Window != null)
+						Window.Invalidate ();
 				}
 			}
 		}
@@ -60,7 +61,7 @@ namespace Pinta.Gui.Widgets
 		#region Mouse Handlers
 		private void HandleHandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
 		{
-			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
+			ProcessMouseEvent (new Gdk.Point ((int)args.Event.X, (int)args.Event.Y), (args.Event.State & ModifierType.ShiftMask) == ModifierType.ShiftMask);
 		}
 
 		private void HandleHandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
@@ -72,17 +73,17 @@ namespace Pinta.Gui.Widgets
 		{
 			tracking = true;
 
-			ProcessMouseEvent (new Point ((int)args.Event.X, (int)args.Event.Y), args.Event.IsShiftPressed ());
+			ProcessMouseEvent (new Gdk.Point ((int)args.Event.X, (int)args.Event.Y), args.Event.IsShiftPressed ());
 		}
 		
-		private void ProcessMouseEvent (Point pt, bool constrainAngle)
+		private void ProcessMouseEvent (Gdk.Point pt, bool constrainAngle)
 		{
 			lastMouseXY = pt;
 
 			if (tracking) {
-				Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -2, -2);
+                Gdk.Rectangle ourRect = Gdk.Rectangle.Inflate (Window.GetBounds (), -2, -2);
 				int diameter = Math.Min (ourRect.Width, ourRect.Height);
-				Point center = new Point (ourRect.X + (diameter / 2), ourRect.Y + (diameter / 2));
+                Gdk.Point center = new Gdk.Point (ourRect.X + (diameter / 2), ourRect.Y + (diameter / 2));
 
 				int dx = lastMouseXY.X - center.X;
 				int dy = lastMouseXY.Y - center.Y;
@@ -114,65 +115,61 @@ namespace Pinta.Gui.Widgets
 
 				this.ValueDouble = newAngle;
 
-				GdkWindow.Invalidate ();
+				Window.Invalidate ();
 			}
 		}
-		#endregion
+        #endregion
 
-#region Drawing Code
-// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
-		{
-			base.OnExposeEvent (ev);
+        #region Drawing Code
+        protected override bool OnDrawn(Context g)
+        {
+            base.OnDrawn(g);
 
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				Cairo.Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -1, -1).ToCairoRectangle ();
-				double diameter = Math.Min (ourRect.Width, ourRect.Height);
+            Cairo.Rectangle ourRect = Gdk.Rectangle.Inflate(Window.GetBounds(), -1, -1).ToCairoRectangle();
+            double diameter = Math.Min(ourRect.Width, ourRect.Height);
 
-				double radius = (diameter / 2.0);
+            double radius = (diameter / 2.0);
 
-				Cairo.PointD center = new Cairo.PointD (
-				    (float)(ourRect.X + radius),
-				    (float)(ourRect.Y + radius));
+            Cairo.PointD center = new Cairo.PointD(
+                (float)(ourRect.X + radius),
+                (float)(ourRect.Y + radius));
 
-				double theta = (this.angleValue * 2.0 * Math.PI) / 360.0;
+            double theta = (this.angleValue * 2.0 * Math.PI) / 360.0;
 
-				Cairo.Rectangle ellipseRect = new Cairo.Rectangle (ourRect.Location (), diameter, diameter);
-				Cairo.Rectangle ellipseOutlineRect = ellipseRect;
+            Cairo.Rectangle ellipseRect = new Cairo.Rectangle(ourRect.Location(), diameter, diameter);
+            Cairo.Rectangle ellipseOutlineRect = ellipseRect;
 
-				g.DrawEllipse (ellipseOutlineRect, new Cairo.Color (.1, .1, .1), 1);
+            g.DrawEllipse(ellipseOutlineRect, new Cairo.Color(.1, .1, .1), 1);
 
-				double endPointRadius = radius - 2;
-				
-				Cairo.PointD endPoint = new Cairo.PointD (
-				    (float)(center.X + (endPointRadius * Math.Cos (theta))),
-				    (float)(center.Y - (endPointRadius * Math.Sin (theta))));
+            double endPointRadius = radius - 2;
 
-				float gripSize = 2.5f;
-				Cairo.Rectangle gripEllipseRect = new Cairo.Rectangle (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2);
-				
-				g.FillEllipse (gripEllipseRect, new Cairo.Color (.1, .1, .1));
-				g.DrawLine (center, endPoint, new Cairo.Color (.1, .1, .1), 1);
-			}
-			
-			return true;
+            Cairo.PointD endPoint = new Cairo.PointD(
+                (float)(center.X + (endPointRadius * Math.Cos(theta))),
+                (float)(center.Y - (endPointRadius * Math.Sin(theta))));
+
+            float gripSize = 2.5f;
+            Cairo.Rectangle gripEllipseRect = new Cairo.Rectangle(center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2);
+
+            g.FillEllipse(gripEllipseRect, new Cairo.Color(.1, .1, .1));
+            g.DrawLine(center, endPoint, new Cairo.Color(.1, .1, .1), 1);
+
+
+            return true;
+        }
+
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			minimum_height = natural_height = 50;
 		}
-#endif
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			// Calculate desired size here.
-			requisition.Height = 50;
-			requisition.Width = 50;
-		}
-#endif
-#endregion
-		
-#region Public Events
-		public event EventHandler ValueChanged;
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			minimum_width = natural_width = 50;
+        }
+        #endregion
+
+        #region Public Events
+        public event EventHandler ValueChanged;
 		
 		protected virtual void OnValueChanged ()
 		{
