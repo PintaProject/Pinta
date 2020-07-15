@@ -42,16 +42,15 @@ namespace Pinta.Effects
 
 		public override bool LaunchConfiguration ()
 		{
-			var dialog = new PosterizeDialog ();
-			dialog.Title = Name;
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-			dialog.EffectData = Data;
-			
-			int response = dialog.Run ();
-			
-			dialog.Destroy ();
+			using (var dialog = new PosterizeDialog())
+			{
+				dialog.Title = Name;
+				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
+				dialog.EffectData = Data;
 
-			return (response == (int)Gtk.ResponseType.Ok);
+				int response = dialog.Run();
+				return (response == (int)Gtk.ResponseType.Ok);
+			}
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

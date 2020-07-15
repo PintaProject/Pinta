@@ -46,7 +46,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			var dialog = new LayerPropertiesDialog ();
+			using var dialog = new LayerPropertiesDialog ();
 
 			int response = dialog.Run ();
 
@@ -80,8 +80,6 @@ namespace Pinta.Actions
 				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden)) 
 					PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 			}
-
-			dialog.Destroy ();
 		}
 
 		private string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)

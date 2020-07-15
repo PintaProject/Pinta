@@ -46,7 +46,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
+			using var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
 							    FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
 							    Gtk.Stock.Open, Gtk.ResponseType.Ok);
 
@@ -82,8 +82,6 @@ namespace Pinta.Actions
 					if (PintaCore.Workspace.OpenFile (file, fcd))
 						RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
 			}
-
-			fcd.Destroy ();
 		}
 	}
 }

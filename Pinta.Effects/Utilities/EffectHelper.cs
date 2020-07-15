@@ -61,33 +61,33 @@ namespace Pinta
 		/// Helper function for the above methods. The IAddinLocalizer provides a generic way to
 		/// get translated strings both for Pinta's effects and for effect add-ins.
 		/// </summary>
-		private static bool LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+		private static bool LaunchSimpleEffectDialog(BaseEffect effect, IAddinLocalizer localizer)
 		{
 			if (effect == null)
-				throw new ArgumentNullException ("effect");
-			
+				throw new ArgumentNullException("effect");
+
 			if (effect.EffectData == null)
-				throw new ArgumentException ("effect.EffectData is null.");
-			
-			var dialog = new SimpleEffectDialog (effect.Name,
-			                                     PintaCore.Resources.GetIcon (effect.Icon),
-			                                     effect.EffectData, localizer);
-			
-			// Hookup event handling for live preview.
-			dialog.EffectDataChanged += (o, e) => {
-				if (effect.EffectData != null)
-					effect.EffectData.FirePropertyChanged (e.PropertyName);
-			};
-			
-			int response = dialog.Run ();
+				throw new ArgumentException("effect.EffectData is null.");
 
-			bool ret = false;
-			if (response == (int)Gtk.ResponseType.Ok && effect.EffectData != null)
-				ret = !effect.EffectData.IsDefault;
+			using (var dialog = new SimpleEffectDialog(effect.Name,
+												 PintaCore.Resources.GetIcon(effect.Icon),
+												 effect.EffectData, localizer))
+			{
+				// Hookup event handling for live preview.
+				dialog.EffectDataChanged += (o, e) =>
+				{
+					if (effect.EffectData != null)
+						effect.EffectData.FirePropertyChanged(e.PropertyName);
+				};
 
-			dialog.Destroy ();
+				int response = dialog.Run();
 
-			return ret;
+				bool ret = false;
+				if (response == (int)Gtk.ResponseType.Ok && effect.EffectData != null)
+					ret = !effect.EffectData.IsDefault;
+
+				return ret;
+			}
 		}
 
 		/// <summary>

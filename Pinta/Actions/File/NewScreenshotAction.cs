@@ -48,7 +48,7 @@ namespace Pinta.Actions
 		{
 			int delay = PintaCore.Settings.GetSetting<int> ("screenshot-delay", 0);
 
-			SpinButtonEntryDialog dialog = new SpinButtonEntryDialog (Translations.GetString ("Take Screenshot"),
+			using var dialog = new SpinButtonEntryDialog (Translations.GetString ("Take Screenshot"),
 					PintaCore.Chrome.MainWindow, Translations.GetString ("Delay before taking a screenshot (seconds):"), 0, 300, delay);
 
 			if (dialog.Run () == (int)Gtk.ResponseType.Ok) {
@@ -83,8 +83,6 @@ namespace Pinta.Actions
 					return false;
 				});
 			}
-
-			dialog.Destroy ();
 		}
 	}
 }

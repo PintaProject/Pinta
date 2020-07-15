@@ -44,15 +44,15 @@ namespace Pinta.Effects
 		
 		public override bool LaunchConfiguration ()
 		{
-			var dialog = new CurvesDialog (Data);
-			dialog.Title = Name;
-			dialog.Icon = PintaCore.Resources.GetIcon (Icon);
-			
-			int response = dialog.Run ();
-			
-			dialog.Destroy ();
-			
-			return (response == (int)Gtk.ResponseType.Ok);
+			using (var dialog = new CurvesDialog(Data))
+			{
+				dialog.Title = Name;
+				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
+
+				int response = dialog.Run();
+
+				return (response == (int)Gtk.ResponseType.Ok);
+			}
 		}
 		
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

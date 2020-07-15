@@ -46,13 +46,8 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			AboutDialog dlg = new AboutDialog ();
-
-			try {
-				dlg.Run ();
-			} finally {
-				dlg.Destroy ();
-			}
+			using var dlg = new AboutDialog ();
+			dlg.Run();
 		}
 	}
 }

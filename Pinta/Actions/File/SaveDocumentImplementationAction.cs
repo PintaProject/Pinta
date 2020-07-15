@@ -71,7 +71,7 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			var fcd = new FileChooserDialog (Translations.GetString ("Save Image File"),
+			using var fcd = new FileChooserDialog (Translations.GetString ("Save Image File"),
 									       PintaCore.Chrome.MainWindow,
 									       FileChooserAction.Save,
 									       Gtk.Stock.Cancel,
@@ -168,12 +168,9 @@ namespace Pinta.Actions
 
 				document.HasFile = true;
 				document.PathAndFileName = file;
-
-				fcd.Destroy ();
 				return true;
 			}
 
-			fcd.Destroy ();
 			return false;
 		}
 
@@ -186,23 +183,21 @@ namespace Pinta.Actions
 				format = PintaCore.System.ImageFormats.GetFormatByFile (file);
 
 			if (format == null || format.IsReadOnly ()) {
-				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Translations.GetString ("Pinta does not support saving images in this file format."), file);
+				using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, Translations.GetString ("Pinta does not support saving images in this file format."), file);
 				md.Title = Translations.GetString ("Error");
 
 				md.Run ();
-				md.Destroy ();
 				return false;
 			}
 
 			// If the user tries to save over a read only file, give a more informative error message than "Unhandled Exception"
 			FileInfo file_info = new FileInfo (file);
 			if (file_info.Exists && file_info.IsReadOnly) {
-				MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
+				using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
 					ButtonsType.Ok, Translations.GetString ("Cannot save read only file."));
 				md.Title = Translations.GetString ("Error");
 
 				md.Run ();
-				md.Destroy ();
 				return false;
 			}
 
@@ -217,11 +212,10 @@ namespace Pinta.Actions
 					string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 					string message = string.Format (markup, primary, secondary);
 
-					MessageDialog md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
+					using var md = new MessageDialog (parent, DialogFlags.Modal, MessageType.Error,
 					ButtonsType.Ok, message);
 
 					md.Run ();
-					md.Destroy ();
 					return false;
 				} else {
 					throw e; // Only catch exceptions we know the reason for
@@ -247,7 +241,7 @@ namespace Pinta.Actions
 			string secondary = Translations.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
 			string message = string.Format (markup, primary, secondary);
 
-			MessageDialog md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+			using var md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,
 				MessageType.Question, ButtonsType.None,
 				true, message, System.IO.Path.GetFileName (file), fcd.CurrentFolder);
 
@@ -257,7 +251,6 @@ namespace Pinta.Actions
 			md.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 			int response = md.Run ();
-			md.Destroy ();
 
 			return response == (int)ResponseType.Ok;
 		}

@@ -45,17 +45,12 @@ namespace Pinta.Actions
 		#endregion
 
 		private void Activated (object sender, ModifyCompressionEventArgs e)
-		{
-			JpegCompressionDialog dlg = new JpegCompressionDialog (e.Quality, e.ParentWindow);
-
-			try {
-				if (dlg.Run () == (int)Gtk.ResponseType.Ok)
-					e.Quality = dlg.GetCompressionLevel ();
-				else
-					e.Cancel = true;
-			} finally {
-				dlg.Destroy ();
-			}
-		}
+        {
+            using var dlg = new JpegCompressionDialog(e.Quality, e.ParentWindow);
+            if (dlg.Run() == (int)Gtk.ResponseType.Ok)
+                e.Quality = dlg.GetCompressionLevel();
+            else
+                e.Cancel = true;
+        }
 	}
 }

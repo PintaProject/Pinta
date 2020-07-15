@@ -885,17 +885,15 @@ namespace Pinta.Core
 			string secondary = Translations.GetString ("The image being pasted is larger than the canvas size. What would you like to do?");
 			string message = string.Format (markup, primary, secondary);
 
-			var enlarge_dialog = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message);
-			enlarge_dialog.AddButton (Translations.GetString ("Expand canvas"), ResponseType.Accept);
-			enlarge_dialog.AddButton (Translations.GetString ("Don't change canvas size"), ResponseType.Reject);
-			enlarge_dialog.AddButton (Stock.Cancel, ResponseType.Cancel);
-			enlarge_dialog.DefaultResponse = ResponseType.Accept;
+			using (var enlarge_dialog = new MessageDialog(PintaCore.Chrome.MainWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.None, message))
+			{
+				enlarge_dialog.AddButton(Translations.GetString("Expand canvas"), ResponseType.Accept);
+				enlarge_dialog.AddButton(Translations.GetString("Don't change canvas size"), ResponseType.Reject);
+				enlarge_dialog.AddButton(Stock.Cancel, ResponseType.Cancel);
+				enlarge_dialog.DefaultResponse = ResponseType.Accept;
 
-			ResponseType response = (ResponseType)enlarge_dialog.Run ();
-
-			enlarge_dialog.Destroy ();
-
-			return response;
+				return (ResponseType)enlarge_dialog.Run();
+			}	
 		}
 
 		public static void ShowClipboardEmptyDialog()
@@ -905,14 +903,13 @@ namespace Pinta.Core
 			var markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}\n";
 			markup = string.Format (markup, primary, secondary);
 
-			var md = new MessageDialog (Pinta.Core.PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+			using (var md = new MessageDialog(Pinta.Core.PintaCore.Chrome.MainWindow, DialogFlags.Modal,
 							MessageType.Error, ButtonsType.None, true,
-							markup);
-
-			md.AddButton (Stock.Ok, ResponseType.Yes);
-
-			md.Run ();
-			md.Destroy ();
+							markup))
+            {
+				md.AddButton(Stock.Ok, ResponseType.Yes);
+				md.Run();
+			}
 		}
 
 		/// <summary>

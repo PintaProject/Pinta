@@ -43,26 +43,27 @@ namespace Pinta.Effects
 		}
 		
 		public override bool LaunchConfiguration ()
-		{
-			SimpleEffectDialog dialog = new SimpleEffectDialog (Name, PintaCore.Resources.GetIcon (Icon), Data,
-			                                                    new PintaLocalizer ());
+        {
+            using (var dialog = new SimpleEffectDialog(Name, PintaCore.Resources.GetIcon(Icon), Data, new PintaLocalizer()))
+            {
+                // Hookup event handling for live preview.
+                dialog.EffectDataChanged += (o, e) =>
+                {
+                    if (EffectData != null)
+                    {
+                        op = new UnaryPixelOps.RedEyeRemove(Data.Tolerance, Data.Saturation);
+                        EffectData.FirePropertyChanged(e.PropertyName);
+                    }
+                };
 
-			// Hookup event handling for live preview.
-			dialog.EffectDataChanged += (o, e) => {
-				if (EffectData != null) {
-					op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-					EffectData.FirePropertyChanged (e.PropertyName);
-				}
-			};
-			
-			int response = dialog.Run ();
-			bool ret = (response == (int)Gtk.ResponseType.Ok);
-			dialog.Destroy ();
-			
-			return ret;
-		}
-		
-		public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
+                int response = dialog.Run();
+                bool ret = (response == (int)Gtk.ResponseType.Ok);
+
+                return ret;
+            }
+        }
+
+        public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
 			op.Apply (dest, src, rois);
 		}

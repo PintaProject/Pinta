@@ -321,74 +321,78 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Palette File"), PintaCore.Chrome.MainWindow,
+			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Palette File"), PintaCore.Chrome.MainWindow,
 				FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-				Gtk.Stock.Open, Gtk.ResponseType.Ok);
+				Gtk.Stock.Open, Gtk.ResponseType.Ok))
+			{
+				FileFilter ff = new FileFilter();
+				foreach (var format in PintaCore.System.PaletteFormats.Formats)
+				{
+					if (!format.IsWriteOnly())
+					{
+						foreach (var ext in format.Extensions)
+							ff.AddPattern(string.Format("*.{0}", ext));
+					}
+				}
 
-			FileFilter ff = new FileFilter ();
-			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
-				if (!format.IsWriteOnly ()) {
-					foreach (var ext in format.Extensions)
-						ff.AddPattern (string.Format("*.{0}", ext));
+				ff.Name = Translations.GetString("Palette files");
+				fcd.AddFilter(ff);
+
+				FileFilter ff2 = new FileFilter();
+				ff2.Name = Translations.GetString("All files");
+				ff2.AddPattern("*.*");
+				fcd.AddFilter(ff2);
+
+				fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
+
+				if (lastPaletteDir != null)
+					fcd.SetCurrentFolder(lastPaletteDir);
+
+				int response = fcd.Run();
+
+				if (response == (int)Gtk.ResponseType.Ok)
+				{
+					lastPaletteDir = fcd.CurrentFolder;
+					PintaCore.Palette.CurrentPalette.Load(fcd.Filename);
 				}
 			}
-
-			ff.Name = Translations.GetString ("Palette files");
-			fcd.AddFilter (ff);
-
-			FileFilter ff2 = new FileFilter ();
-			ff2.Name = Translations.GetString ("All files");
-			ff2.AddPattern ("*.*");
-			fcd.AddFilter (ff2);
-
-			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-
-			if (lastPaletteDir != null)
-				fcd.SetCurrentFolder (lastPaletteDir);
-			
-			int response = fcd.Run ();
-		
-			if (response == (int) Gtk.ResponseType.Ok) {
-				lastPaletteDir = fcd.CurrentFolder;
-				PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
-			}
-
-			fcd.Destroy ();
 		}
 
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
-			var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Save Palette File"), PintaCore.Chrome.MainWindow,
+			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Save Palette File"), PintaCore.Chrome.MainWindow,
 				FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-				Gtk.Stock.Save, Gtk.ResponseType.Ok);
+				Gtk.Stock.Save, Gtk.ResponseType.Ok))
+			{
+				foreach (var format in PintaCore.System.PaletteFormats.Formats)
+				{
+					if (!format.IsReadOnly())
+					{
+						FileFilter fileFilter = format.Filter;
+						fcd.AddFilter(fileFilter);
+					}
+				}
 
-			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
-				if (!format.IsReadOnly ()) {
-					FileFilter fileFilter = format.Filter;
-					fcd.AddFilter (fileFilter);
+				fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
+
+				if (lastPaletteDir != null)
+					fcd.SetCurrentFolder(lastPaletteDir);
+
+				int response = fcd.Run();
+
+				if (response == (int)Gtk.ResponseType.Ok)
+				{
+					var format = PintaCore.System.PaletteFormats.Formats.FirstOrDefault(f => f.Filter == fcd.Filter);
+
+					string finalFileName = fcd.Filename;
+
+					string extension = System.IO.Path.GetExtension(fcd.Filename);
+					if (string.IsNullOrEmpty(extension))
+						finalFileName += "." + format.Extensions.First();
+
+					PintaCore.Palette.CurrentPalette.Save(finalFileName, format.Saver);
 				}
 			}
-
-			fcd.AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
-
-			if (lastPaletteDir != null)
-				fcd.SetCurrentFolder (lastPaletteDir);
-
-			int response = fcd.Run ();
-
-			if (response == (int) Gtk.ResponseType.Ok) {
-				var format = PintaCore.System.PaletteFormats.Formats.FirstOrDefault (f => f.Filter == fcd.Filter);
-
-				string finalFileName = fcd.Filename;
-
-				string extension = System.IO.Path.GetExtension (fcd.Filename);
-				if (string.IsNullOrEmpty(extension))
-					finalFileName += "." + format.Extensions.First ();
-
-				PintaCore.Palette.CurrentPalette.Save(finalFileName, format.Saver);
-			}
-
-			fcd.Destroy ();
 		}
 
 		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)

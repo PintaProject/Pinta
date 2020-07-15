@@ -60,15 +60,11 @@ namespace Pinta
 			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
 			PintaCore.Chrome.InitializeErrorDialogHandler ((parent, message, details) => {
 				System.Console.Error.WriteLine ("Pinta: {0}", details);
-				ErrorDialog errorDialog = new ErrorDialog (parent);				
-				try {
-					errorDialog.SetMessage (message);
-					errorDialog.AddDetails (details);
-					errorDialog.Run ();
-				} finally {
-					errorDialog.Destroy ();
-				}
-			}
+                using var errorDialog = new ErrorDialog(parent);
+                errorDialog.SetMessage(message);
+                errorDialog.AddDetails(details);
+                errorDialog.Run();
+            }
 			);
 
 			PintaCore.Initialize ();

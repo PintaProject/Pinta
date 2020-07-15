@@ -61,7 +61,7 @@ namespace Pinta.Actions
 			var secondary = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 			var message = string.Format (markup, primary, secondary);
 
-			var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
 						    MessageType.Warning, ButtonsType.None, true,
 						    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
 
@@ -81,7 +81,6 @@ namespace Pinta.Actions
 			md.DefaultResponse = ResponseType.Cancel;
 
 			ResponseType response = (ResponseType)md.Run ();
-			md.Destroy ();
 
 			if (response == ResponseType.Yes) {
 				PintaCore.Workspace.ActiveDocument.Save (false);

@@ -46,7 +46,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			ResizeImageDialog dialog = new ResizeImageDialog ();
+			using var dialog = new ResizeImageDialog ();
 
 			dialog.WindowPosition = Gtk.WindowPosition.CenterOnParent;
 
@@ -54,8 +54,6 @@ namespace Pinta.Actions
 
 			if (response == (int)Gtk.ResponseType.Ok)
 				dialog.SaveChanges ();
-
-			dialog.Destroy ();
 		}
 	}
 }
