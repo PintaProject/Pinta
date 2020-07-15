@@ -134,8 +134,10 @@ namespace Pinta.Docking
 					break;
 				}
 			}
-			
+
 			//opt into the fixes on GTK+ >= 2.24.8
+			// Doesn't seem to exist in GTK3?
+#if false
 			if (Platform.IsMac) {
 				try {
 					gdk_quartz_set_fix_modifiers (true);
@@ -143,6 +145,7 @@ namespace Pinta.Docking
 					oldMacKeyHacks = true;
 				}
 			}
+#endif
 			
 			keymap.KeysChanged += delegate {
 				mappedKeys.Clear ();
