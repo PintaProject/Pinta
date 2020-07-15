@@ -84,7 +84,7 @@ namespace Pinta.Gui.Widgets
 			// so we only call Invalidate() if the widget is shown.
 			if (IsRealized)
 			{
-				GdkWindow.Invalidate ();
+				Window.Invalidate ();
 			}
 		}
 
@@ -94,11 +94,11 @@ namespace Pinta.Gui.Widgets
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
-				GdkWindow.Invalidate ();
+				Window.Invalidate ();
 			} else if (reset_rect.ContainsPoint (ev.X, ev.Y)) {
 				PintaCore.Palette.PrimaryColor = new Color (0, 0, 0);
 				PintaCore.Palette.SecondaryColor = new Color (1, 1, 1);
-				GdkWindow.Invalidate ();
+				Window.Invalidate ();
 			}
 
 			if (primary_rect.ContainsPoint (ev.X, ev.Y)) {

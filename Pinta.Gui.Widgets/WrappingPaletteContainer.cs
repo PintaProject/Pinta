@@ -119,7 +119,8 @@ namespace Pinta.Gui.Widgets
 			{
 				if(children[i].Visible)
 				{
-					childReqs[i] = children[i].SizeRequest ();
+					Gtk.Requisition min_size;
+					children[i].GetPreferredSize(out min_size, out childReqs[i]);
 					++nVisible;
 				}
 			}
