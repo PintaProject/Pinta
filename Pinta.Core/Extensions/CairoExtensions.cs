@@ -979,10 +979,10 @@ namespace Pinta.Core
 			return c;
 		}
 
-		public static ushort GdkColorAlpha (this Cairo.Color color)
-		{
-			return (ushort)(color.A * ushort.MaxValue);
-		}
+		public static Gdk.RGBA ToGdkRGBA(this Cairo.Color color)
+        {
+			return new Gdk.RGBA() { Red = color.R, Green = color.G, Blue = color.B, Alpha = color.A };
+        }
 
 		public static double GetBottom (this Rectangle rect)
 		{

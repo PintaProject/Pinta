@@ -475,46 +475,51 @@ namespace Pinta.Effects
 		{
 			if (args.Event.Type != Gdk.EventType.TwoButtonPress)
 				return;
-			
-			Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog ("Choose Color");
-            
-           		ColorPanelWidget panel = (ColorPanelWidget)sender;
-			csd.ColorSelection.PreviousColor = panel.CairoColor.ToGdkColor ();
-			csd.ColorSelection.CurrentColor = panel.CairoColor.ToGdkColor ();
-			csd.ColorSelection.CurrentAlpha = panel.CairoColor.GdkColorAlpha ();	
-                   
-			int response = csd.Run ();
 
-			if (response == (int)Gtk.ResponseType.Ok) {
-                    
-                ColorBgra col = csd.ColorSelection.CurrentColor.ToBgraColor ();
+			ColorPanelWidget panel = (ColorPanelWidget)sender;
+			using (var ccd = new Gtk.ColorChooserDialog(Translations.GetString("Choose Color"), PintaCore.Chrome.MainWindow))
+			{
+				ccd.UseAlpha = true;
+				ccd.Rgba = panel.CairoColor.ToGdkRGBA();
 
-                if (panel == colorpanelInLow)	{
-                    Levels.ColorInLow = col;
-                } else if (panel == colorpanelInHigh) {
-                    Levels.ColorInHigh = col;
-                } else if (panel == colorpanelOutLow) {
-                    Levels.ColorOutLow = col;
-//                } else if (panel == colorpanelOutMid) {
-//                    ColorBgra lo = Levels.ColorInLow;
-//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
-//                    ColorBgra hi = Levels.ColorInHigh;
-//                    ColorBgra out_lo = Levels.ColorOutLow;
-//                    ColorBgra out_hi = Levels.ColorOutHigh;
-//
-//                    for (int i = 0; i < 3; i++) {
-//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
-//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
-//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
-//
-//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
-//                    }
-                } else if (panel == colorpanelOutHigh) {
-                    Levels.ColorOutHigh = col;
-                } 
-            }
-			
-			csd.Destroy ();
+				var response = (Gtk.ResponseType)ccd.Run();
+				if (response == Gtk.ResponseType.Ok)
+				{
+					ColorBgra col = ccd.Rgba.ToCairoColor().ToGdkColor().ToBgraColor();
+
+					if (panel == colorpanelInLow)
+					{
+						Levels.ColorInLow = col;
+					}
+					else if (panel == colorpanelInHigh)
+					{
+						Levels.ColorInHigh = col;
+					}
+					else if (panel == colorpanelOutLow)
+					{
+						Levels.ColorOutLow = col;
+						//                } else if (panel == colorpanelOutMid) {
+						//                    ColorBgra lo = Levels.ColorInLow;
+						//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
+						//                    ColorBgra hi = Levels.ColorInHigh;
+						//                    ColorBgra out_lo = Levels.ColorOutLow;
+						//                    ColorBgra out_hi = Levels.ColorOutHigh;
+						//
+						//                    for (int i = 0; i < 3; i++) {
+						//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
+						//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
+						//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
+						//
+						//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
+						//                    }
+					}
+					else if (panel == colorpanelOutHigh)
+					{
+						Levels.ColorOutHigh = col;
+					}
+				}
+			}
+
 			UpdateFromLevelsOp ();
 			UpdateLevels ();
 		}

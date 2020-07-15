@@ -102,35 +102,25 @@ namespace Pinta.Gui.Widgets
 			}
 
 			if (primary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Translations.GetString ("Choose Primary Color"));
-				csd.TransientFor = PintaCore.Chrome.MainWindow;
-				csd.ColorSelection.PreviousColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
-				csd.ColorSelection.CurrentColor = PintaCore.Palette.PrimaryColor.ToGdkColor ();
-				csd.ColorSelection.CurrentAlpha = PintaCore.Palette.PrimaryColor.GdkColorAlpha ();
-				csd.ColorSelection.HasOpacityControl = true;
+                using (var ccd = new Gtk.ColorChooserDialog(Translations.GetString("Choose Primary Color"), PintaCore.Chrome.MainWindow))
+                {
+					ccd.UseAlpha = true;
+					ccd.Rgba = PintaCore.Palette.PrimaryColor.ToGdkRGBA();
 
-				int response = csd.Run ();
-
-				if (response == (int)Gtk.ResponseType.Ok) {
-					PintaCore.Palette.PrimaryColor = csd.ColorSelection.GetCairoColor ();
+					var response = (Gtk.ResponseType)ccd.Run();
+					if (response == Gtk.ResponseType.Ok)
+						PintaCore.Palette.PrimaryColor = ccd.Rgba.ToCairoColor();
 				}
-
-				csd.Destroy ();
 			} else if (secondary_rect.ContainsPoint (ev.X, ev.Y)) {
-				Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Translations.GetString ("Choose Secondary Color"));
-				csd.TransientFor = PintaCore.Chrome.MainWindow;
-				csd.ColorSelection.PreviousColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
-				csd.ColorSelection.CurrentColor = PintaCore.Palette.SecondaryColor.ToGdkColor ();
-				csd.ColorSelection.CurrentAlpha = PintaCore.Palette.SecondaryColor.GdkColorAlpha ();
-				csd.ColorSelection.HasOpacityControl = true;
+				using (var ccd = new Gtk.ColorChooserDialog(Translations.GetString("Choose Secondary Color"), PintaCore.Chrome.MainWindow))
+				{
+					ccd.UseAlpha = true;
+					ccd.Rgba = PintaCore.Palette.SecondaryColor.ToGdkRGBA();
 
-				int response = csd.Run ();
-
-				if (response == (int)Gtk.ResponseType.Ok) {
-					PintaCore.Palette.SecondaryColor = csd.ColorSelection.GetCairoColor ();
+					var response = (Gtk.ResponseType)ccd.Run();
+					if (response == Gtk.ResponseType.Ok)
+						PintaCore.Palette.SecondaryColor = ccd.Rgba.ToCairoColor();
 				}
-
-				csd.Destroy ();
 			}
 			
 			int pal = PointToPalette ((int)ev.X, (int)ev.Y);
@@ -141,23 +131,18 @@ namespace Pinta.Gui.Widgets
 				else if (ev.Button == 1)
 					PintaCore.Palette.PrimaryColor = palette[pal];
 				else {
-					Gtk.ColorSelectionDialog csd = new Gtk.ColorSelectionDialog (Translations.GetString ("Choose Palette Color"));
-					csd.TransientFor = PintaCore.Chrome.MainWindow;
-					csd.ColorSelection.PreviousColor = palette[pal].ToGdkColor ();
-					csd.ColorSelection.CurrentColor = palette[pal].ToGdkColor ();
-					csd.ColorSelection.CurrentAlpha = palette[pal].GdkColorAlpha ();
-					csd.ColorSelection.HasOpacityControl = true;
+					using (var ccd = new Gtk.ColorChooserDialog(Translations.GetString("Choose Palette Color"), PintaCore.Chrome.MainWindow))
+					{
+						ccd.UseAlpha = true;
+						ccd.Rgba = palette[pal].ToGdkRGBA();
 
-					int response = csd.Run ();
-
-					if (response == (int)Gtk.ResponseType.Ok) {
-						palette[pal] = csd.ColorSelection.GetCairoColor ();
+						var response = (Gtk.ResponseType)ccd.Run();
+						if (response == Gtk.ResponseType.Ok)
+							palette[pal] = ccd.Rgba.ToCairoColor();
 					}
-					
-					csd.Destroy ();
 				}
 				
-				GdkWindow.Invalidate ();	
+				Window.Invalidate ();	
 			}
 				
 			// Insert button press handling code here.

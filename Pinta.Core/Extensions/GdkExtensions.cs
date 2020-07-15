@@ -52,12 +52,6 @@ namespace Pinta.Core
 			return new Cairo.Color((double)color.Red / ushort.MaxValue, (double)color.Green / ushort.MaxValue, (double)color.Blue / ushort.MaxValue);
 		}
 
-		public static Cairo.Color GetCairoColor(this Gtk.ColorSelection selection)
-		{
-			Cairo.Color cairo_color = selection.CurrentColor.ToCairoColor();
-			return new Cairo.Color(cairo_color.R, cairo_color.G, cairo_color.B, (double)selection.CurrentAlpha / ushort.MaxValue);
-		}
-
 		public static Gdk.Point Center(this Gdk.Rectangle rect)
 		{
 			return new Gdk.Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
@@ -143,6 +137,11 @@ namespace Pinta.Core
 
 			return surface;
 		}
+
+		public static Cairo.Color ToCairoColor(this Gdk.RGBA color)
+        {
+			return new Cairo.Color(color.Red, color.Green, color.Blue, color.Alpha);
+        }
 
 		public static Pixbuf CreateColorSwatch(int size, Color color)
 		{
