@@ -35,7 +35,7 @@ namespace Pinta.Core
 {
 	public delegate void MouseHandler (double x, double y, Gdk.ModifierType state);
 
-	// TODO-GTK3 - Support Mono.Addins.
+	// TODO-GTK3 (addins)
 	// [TypeExtensionPoint]
 	public abstract class BaseTool
 	{

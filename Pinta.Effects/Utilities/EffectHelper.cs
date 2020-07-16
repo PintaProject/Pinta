@@ -93,7 +93,7 @@ namespace Pinta
 		/// <summary>
 		/// Wrapper around the AddinLocalizer of an add-in.
 		/// </summary>
-		// TODO-GTK3
+		// TODO-GTK3 (addins)
 #if false
 		private class AddinLocalizerWrapper : IAddinLocalizer
 		{

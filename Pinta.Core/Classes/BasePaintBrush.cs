@@ -32,7 +32,7 @@ namespace Pinta.Core
 	/// <summary>
 	/// The base class for all brushes.
 	/// </summary>
-	// TODO-GTK3 - Support Mono.Addins.
+	// TODO-GTK3 (addins)
 	// [TypeExtensionPoint]
 	public abstract class BasePaintBrush
 	{

@@ -186,7 +186,7 @@ namespace Pinta
 		/// </summary>
 		private static void SetWindowsGtkPath ()
 		{
-			// TODO-GTK3
+			// TODO-GTK3 - might not be needed since we aren't using the same GTK# installer as for GTK2.
 #if false
 			string location = null;
 			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
