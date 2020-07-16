@@ -149,7 +149,7 @@ namespace Pinta.Docking.DockNotebook
 			// TODO: Handle z-ordering of floating windows.
 			int ox = 0, oy = 0;
 			foreach (var notebook in allNotebooks) {
-				if (notebook.GdkWindow == null)
+				if (notebook.Window == null)
 					continue;
 
 				int ox2, oy2;
@@ -254,7 +254,7 @@ namespace Pinta.Docking.DockNotebook
 		protected override void OnRealized ()
 		{
 			base.OnRealized ();
-			GdkWindow.Opacity = 0.4;
+			Window.Opacity = 0.4;
 		}
 		// TODO-GTK3
 #if false
@@ -434,7 +434,7 @@ namespace Pinta.Docking.DockNotebook
 
 		static Gdk.Pixbuf RenderWidget (Widget w)
 		{
-			Gdk.Window win = w.GdkWindow;
+			Gdk.Window win = w.Window;
 			if (win == null || !win.IsViewable) {
 				return null;
 			}

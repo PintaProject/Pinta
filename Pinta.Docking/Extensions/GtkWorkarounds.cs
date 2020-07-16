@@ -472,7 +472,7 @@ namespace Pinta.Docking
 						menu.Detach ();
 				};
 				posFunc = delegate (Gtk.Menu m, out int x, out int y, out bool pushIn) {
-					Gdk.Window window = evt != null? evt.Window : parent.GdkWindow;
+					Gdk.Window window = evt != null? evt.Window : parent.Window;
 					window.GetOrigin (out x, out y);
 					var alloc = parent.Allocation;
 					if (evt != null) {
@@ -822,7 +822,7 @@ namespace Pinta.Docking
 		public static void ShowNativeShadow (Gtk.Window window, bool show)
 		{
 			if (Platform.IsMac) {
-				var ptr = gdk_quartz_window_get_nswindow (window.GdkWindow.Handle);
+				var ptr = gdk_quartz_window_get_nswindow (window.Window.Handle);
 				objc_msgSend_void_bool (ptr, sel_setHasShadow, show);
 			}
 		}
@@ -832,7 +832,7 @@ namespace Pinta.Docking
 			if (!Platform.IsMac)
 				return;
 
-			var ptr = gdk_quartz_window_get_nswindow (window.GdkWindow.Handle);
+			var ptr = gdk_quartz_window_get_nswindow (window.Window.Handle);
 			objc_msgSend_IntPtr (ptr, sel_invalidateShadow);
 		}
 

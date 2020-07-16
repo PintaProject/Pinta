@@ -208,7 +208,7 @@ namespace Pinta.Docking.DockToolbars
 			}
 			
 			int sx, sy;
-			this.GdkWindow.GetOrigin (out sx, out sy);
+			this.Window.GetOrigin (out sx, out sy);
 			sx += x;
 			sy += y;
 			
@@ -518,7 +518,7 @@ namespace Pinta.Docking.DockToolbars
 			int wx,wy,w,h;
 			PanelToWindow (x, y, GetChildWidth (bar), bar.DefaultHeight, out x, out y, out w, out h);
 				
-			this.GdkWindow.GetOrigin (out wx, out wy);
+			this.Window.GetOrigin (out wx, out wy);
 			RemoveBar (bar);
 			parentFrame.FloatBar (bar, orientation, wx + x, wy + y);
 		}

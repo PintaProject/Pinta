@@ -571,7 +571,7 @@ namespace Pinta.Docking
 			}
 
 			if (HasFocus) {
-				Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "button", Allocation.X + 2, Allocation.Y + 2, Allocation.Width - 4, Allocation.Height - 4);
+				Gtk.Style.PaintFocus (Style, Window, State, Allocation, this, "button", Allocation.X + 2, Allocation.Y + 2, Allocation.Width - 4, Allocation.Height - 4);
 			}
 			return base.OnExposeEvent (evnt);
 		}

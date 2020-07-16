@@ -1178,7 +1178,7 @@ namespace Pinta.Docking.DockNotebook
 			// Pinta TODO
 #if false
 			if (HasFocus) {
-				Gtk.Style.PaintFocus (Style, GdkWindow, State, focusRect, this, "tab", focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
+				Gtk.Style.PaintFocus (Style, Window, State, focusRect, this, "tab", focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
 			}
 #endif
 		}

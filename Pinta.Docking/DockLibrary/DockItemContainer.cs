@@ -350,7 +350,7 @@ namespace Pinta.Docking
 					}
 				} else {
 					if (backgroundColorSet) {
-						Gdk.GC gc = new Gdk.GC (GdkWindow);
+						Gdk.GC gc = new Gdk.GC (Window);
 						gc.RgbFgColor = bcolor;
 						evnt.Window.DrawRectangle (gc, true, rect.X, rect.Y, rect.Width, rect.Height);
 						gc.Dispose ();

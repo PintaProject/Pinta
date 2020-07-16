@@ -175,15 +175,15 @@ namespace MonoDevelop.Components
 		protected override bool OnEnterNotifyEvent (Gdk.EventCrossing evnt)
 		{
 			if (horizontal)
-				GdkWindow.Cursor = resizeCursorW;
+				Window.Cursor = resizeCursorW;
 			else
-				GdkWindow.Cursor = resizeCursorH;
+				Window.Cursor = resizeCursorH;
 			return base.OnEnterNotifyEvent (evnt);
 		}
 
 		protected override bool OnLeaveNotifyEvent (Gdk.EventCrossing evnt)
 		{
-			GdkWindow.Cursor = null;
+			Window.Cursor = null;
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 

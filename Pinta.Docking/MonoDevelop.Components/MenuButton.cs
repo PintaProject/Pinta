@@ -119,7 +119,7 @@ namespace MonoDevelop.Components
 		
 		void PositionFunc (Menu mn, out int x, out int y, out bool push_in)
 		{
-			this.GdkWindow.GetOrigin (out x, out y);
+			this.Window.GetOrigin (out x, out y);
 			Gdk.Rectangle rect = this.Allocation;
 			x += rect.X;
 			y += rect.Y + rect.Height;

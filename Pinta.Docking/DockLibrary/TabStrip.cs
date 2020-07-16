@@ -327,7 +327,7 @@ namespace Pinta.Docking
 			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 			{
 				if (TabStrip.VisualStyle.TabStyle == DockTabStyle.Normal) {
-					using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+					using (var ctx = Gdk.CairoHelper.Create (Window)) {
 						ctx.DrawImage (this, tabbarBackImage.WithSize (Allocation.Width, Allocation.Height), 0, 0);
 					}
 				}	

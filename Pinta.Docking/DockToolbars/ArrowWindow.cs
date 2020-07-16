@@ -78,7 +78,7 @@ namespace Pinta.Docking.DockToolbars
 
 			// TODO-GTK3
 #if false
-			Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1);
+			Gdk.Pixmap pm = new Pixmap (this.Window, width, height, 1);
 			Gdk.GC gc = new Gdk.GC (pm);
 			gc.Background = white;
 			gc.Foreground = white;
@@ -92,7 +92,7 @@ namespace Pinta.Docking.DockToolbars
 			
 			Realize ();
 
-			redgc = new Gdk.GC (GdkWindow);
+			redgc = new Gdk.GC (Window);
 	   		redgc.RgbFgColor = new Gdk.Color (255, 0, 0);
 #endif
 
@@ -134,8 +134,8 @@ namespace Pinta.Docking.DockToolbars
 #if false
 		protected override bool OnExposeEvent (Gdk.EventExpose args)
 		{
-			GdkWindow.DrawPolygon (redgc, false, arrow);
-			GdkWindow.DrawPolygon (redgc, true, arrow);
+			Window.DrawPolygon (redgc, false, arrow);
+			Window.DrawPolygon (redgc, true, arrow);
 			return true;
 		}
 #endif

@@ -362,7 +362,7 @@ namespace Pinta.Effects
 			} else
 				skip_counter++;
 				
-			GdkWindow.Invalidate ();
+			Window.Invalidate ();
 			disable_updating = false;
 			
 			UpdateLivePreview ();
@@ -440,7 +440,7 @@ namespace Pinta.Effects
                 	histogramOutput.SetSelected (i, mask[i]);
             }
 			
-			GdkWindow.Invalidate ();
+			Window.Invalidate ();
 		}
 		
 		private void HandleCheckRedToggled (object sender, EventArgs e)

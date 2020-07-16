@@ -310,7 +310,7 @@ namespace Pinta.Docking.DockToolbars
 		{
 			if (dragBar != null) {
 				int sx,sy;
-				this.GdkWindow.GetOrigin (out sx, out sy);
+				this.Window.GetOrigin (out sx, out sy);
 				int rx = (int)e.XRoot - sx;
 				int ry = (int)e.YRoot - sy;
 				
@@ -343,7 +343,7 @@ namespace Pinta.Docking.DockToolbars
 			dragBar = bar;
 			xDragDif = -x;
 			yDragDif = -y;
-			Pointer.Grab (this.GdkWindow, false, EventMask.ButtonPressMask | EventMask.ButtonReleaseMask | EventMask.PointerMotionMask, null, handCursor, time);
+			Pointer.Grab (this.Window, false, EventMask.ButtonPressMask | EventMask.ButtonReleaseMask | EventMask.PointerMotionMask, null, handCursor, time);
 			if (!bar.Floating) {
 				DockToolbarPanel panel = (DockToolbarPanel) dragBar.Parent;
 				panel.StartDragBar (bar);
@@ -372,7 +372,7 @@ namespace Pinta.Docking.DockToolbars
 		{
 			if (e.TriggersContextMenu ()) {
 				int sx,sy;
-				this.GdkWindow.GetOrigin (out sx, out sy);
+				this.Window.GetOrigin (out sx, out sy);
 				int rx = (int)e.XRoot - sx;
 				int ry = (int)e.YRoot - sy;
 				

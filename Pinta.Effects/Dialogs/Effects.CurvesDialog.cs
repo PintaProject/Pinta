@@ -153,7 +153,7 @@ namespace Pinta.Effects
 		private void InvalidateDrawing ()
 		{
 			//to invalidate whole drawing area
-			drawing.GdkWindow.Invalidate();		
+			drawing.Window.Invalidate();		
 		}
 		
 		private void HandleDrawingLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
@@ -192,7 +192,7 @@ namespace Pinta.Effects
 		{	
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			drawing.Window.GetPointer (out x, out y, out mask); 
 			
 			
 			if (x < 0 || x >= size || y < 0 || y >=size)
@@ -217,7 +217,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			drawing.Window.GetPointer (out x, out y, out mask); 
 			
 			if (args.Event.Button == 1) {
 				AddControlPoint (x, y);
@@ -258,7 +258,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			drawing.Window.GetPointer (out x, out y, out mask); 
 			
 			if (x >= 0 && x < size && y >= 0 && y < size) {
 				g.LineWidth = 0.5;
@@ -323,7 +323,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.GdkWindow.GetPointer (out x, out y, out mask); 
+			drawing.Window.GetPointer (out x, out y, out mask); 
 			
 			var infos = GetDrawingInfos ();
 			

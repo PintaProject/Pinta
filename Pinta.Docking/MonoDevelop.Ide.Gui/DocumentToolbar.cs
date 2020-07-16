@@ -167,7 +167,7 @@ namespace Pinta.Docking.Gui
 #if false
 			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 			{
-				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+				using (var ctx = Gdk.CairoHelper.Create (Window)) {
 					ctx.Rectangle (0, 0, Allocation.Width, Allocation.Height);
 					using (Cairo.LinearGradient g = new Cairo.LinearGradient (0, 0, 0, Allocation.Height)) {
 						g.AddColorStop (0, Styles.BreadcrumbBackgroundColor);

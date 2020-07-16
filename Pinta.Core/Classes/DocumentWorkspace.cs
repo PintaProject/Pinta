@@ -288,8 +288,8 @@ namespace Pinta.Core
 			
 			zoom = Math.Min (zoom, 3600);
 			
-            if (Canvas.GdkWindow != null)
-			    Canvas.GdkWindow.FreezeUpdates ();
+            if (Canvas.Window != null)
+			    Canvas.Window.FreezeUpdates ();
 
 			PintaCore.Actions.View.SuspendZoomUpdate ();
 			
@@ -356,8 +356,8 @@ namespace Pinta.Core
 			RecenterView (center_x, center_y);
 			
 			PintaCore.Actions.View.ResumeZoomUpdate ();
-            if (Canvas.GdkWindow != null)
-                Canvas.GdkWindow.ThawUpdates ();
+            if (Canvas.Window != null)
+                Canvas.Window.ThawUpdates ();
 		}
 		#endregion
 	}

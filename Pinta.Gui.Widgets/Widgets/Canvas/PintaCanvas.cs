@@ -58,13 +58,13 @@ namespace Pinta.Gui.Widgets
 			// Update the canvas when the image changes
             document.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
                 // If GTK+ hasn't created the canvas window yet, no need to invalidate it
-                if (GdkWindow == null)
+                if (Window == null)
                     return;
 
 				if (e.EntireSurface)
-					GdkWindow.Invalidate ();
+					Window.Invalidate ();
 				else
-					GdkWindow.InvalidateRect (e.Rectangle, false);
+					Window.InvalidateRect (e.Rectangle, false);
 			};
 
 			// Give mouse press events to the current tool

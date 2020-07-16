@@ -67,9 +67,9 @@ namespace Pinta.Core
 				main_window_busy = value;
 				
 				if (main_window_busy)
-					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
+					main_window.Window.Cursor = new Gdk.Cursor(Gdk.CursorType.Watch);
 				else
-					main_window.GdkWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Arrow);
+					main_window.Window.Cursor = new Gdk.Cursor(Gdk.CursorType.Arrow);
 			}
 		}
 		#endregion

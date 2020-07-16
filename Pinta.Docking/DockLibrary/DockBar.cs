@@ -232,7 +232,7 @@ namespace Pinta.Docking
 		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 		{
 			var alloc = Allocation;
-			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+			using (var ctx = Gdk.CairoHelper.Create (Window)) {
 				ctx.Rectangle (alloc.X, alloc.Y, alloc.X + alloc.Width, alloc.Y + alloc.Height);
 				ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
 				ctx.Fill ();
@@ -242,7 +242,7 @@ namespace Pinta.Docking
 				PropagateExpose (Child, evnt);
 
 			if (ShowBorder) {
-				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+				using (var ctx = Gdk.CairoHelper.Create (Window)) {
 					ctx.LineWidth = 1;
 
 					// Dark separator

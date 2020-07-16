@@ -160,7 +160,7 @@ namespace Pinta
 
             PintaCore.Workspace.SetActiveDocument (view.Document);
 
-            ((CanvasWindow)view.Control).Canvas.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
+            ((CanvasWindow)view.Control).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
         }
 
         private void DockNotebook_ActiveTabChanged (object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace Pinta
 
             PintaCore.Workspace.SetActiveDocument (view.Document);
 
-            ((CanvasWindow)view.Control).Canvas.GdkWindow.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
+            ((CanvasWindow)view.Control).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
         }
 
         private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
@@ -511,9 +511,9 @@ namespace Pinta
 			dock.SaveLayouts (PintaCore.Settings.LayoutFilePath);
 
 			// Don't store the maximized height if the window is maximized
-			if ((window_shell.GdkWindow.State & Gdk.WindowState.Maximized) == 0) {
-				PintaCore.Settings.PutSetting ("window-size-width", window_shell.GdkWindow.GetSize ().Width);
-				PintaCore.Settings.PutSetting ("window-size-height", window_shell.GdkWindow.GetSize ().Height);
+			if ((window_shell.Window.State & Gdk.WindowState.Maximized) == 0) {
+				PintaCore.Settings.PutSetting ("window-size-width", window_shell.Window.GetSize ().Width);
+				PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetSize ().Height);
 			}
 
 			// TODO-GTK3 (rulers)
@@ -527,7 +527,7 @@ namespace Pinta
 
 			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
 #endif
-			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
+			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.Window.State & Gdk.WindowState.Maximized) != 0);
             PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
             PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Active);
             PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);

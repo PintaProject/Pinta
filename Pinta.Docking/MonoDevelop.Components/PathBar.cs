@@ -248,7 +248,7 @@ namespace MonoDevelop.Components
 #if false
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
-			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+			using (var ctx = Gdk.CairoHelper.Create (Window)) {
 
 				ctx.Rectangle (0, 0, Allocation.Width, Allocation.Height);
 				using (var g = new Cairo.LinearGradient (0, 0, 0, Allocation.Height)) {
@@ -317,7 +317,7 @@ namespace MonoDevelop.Components
 					if (!last) {
 						xpos += arrowLeftPadding;
 						if (leftPath [i].IsPathEnd) {
-							Style.PaintVline (Style, GdkWindow, State, evnt.Area, this, "", ypos, ypos + height, xpos - arrowSize / 2);
+							Style.PaintVline (Style, Window, State, evnt.Area, this, "", ypos, ypos + height, xpos - arrowSize / 2);
 						} else {
 							int arrowH = Math.Min (height, arrowSize);
 							int arrowY = ypos + (height - arrowH) / 2;
@@ -552,7 +552,7 @@ namespace MonoDevelop.Components
 		
 		void PositionFunc (Menu mn, out int x, out int y, out bool push_in)
 		{
-			this.GdkWindow.GetOrigin (out x, out y);
+			this.Window.GetOrigin (out x, out y);
 			int w;
 			var rect = this.Allocation;
 			y += rect.Height;

@@ -65,7 +65,7 @@ namespace Pinta.Docking
 		protected override void OnRealized ()
 		{
 			base.OnRealized ();
-			GdkWindow.Opacity = 0.6;
+			Window.Opacity = 0.6;
 		}
 		
 		void CreateShape (int width, int height)
@@ -78,7 +78,7 @@ namespace Pinta.Docking
 
 			// TODO-GTK3
 #if false
-			using (Gdk.Pixmap pm = new Gdk.Pixmap (this.GdkWindow, width, height, 1)) {
+			using (Gdk.Pixmap pm = new Gdk.Pixmap (this.Window, width, height, 1)) {
 				using (Gdk.GC gc = new Gdk.GC (pm)) {
 					gc.Background = white;
 					gc.Foreground = white;
@@ -107,8 +107,8 @@ namespace Pinta.Docking
 			//base.OnExposeEvent (args);
 			int w, h;
 			this.GetSize (out w, out h);
-			this.GdkWindow.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
-			this.GdkWindow.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
+			this.Window.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
+			this.Window.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
 	  		return true;
 		}
 #endif
@@ -199,7 +199,7 @@ namespace Pinta.Docking
 			mainBox.PackStart (box, false, false, 0);
 
 /*			if (draggedItem.Widget.IsRealized) {
-				var win = draggedItem.Widget.GdkWindow;
+				var win = draggedItem.Widget.Window;
 				var alloc = draggedItem.Widget.Allocation;
 				Gdk.Pixbuf img = Gdk.Pixbuf.FromDrawable (win, win.Colormap, alloc.X, alloc.Y, 0, 0, alloc.Width, alloc.Height);
 

@@ -154,8 +154,8 @@ namespace Pinta.Docking
 			if (layout == null)
 				return;
 			
-			if (this.GdkWindow != null)
-				this.GdkWindow.MoveResize (rect);
+			if (this.Window != null)
+				this.Window.MoveResize (rect);
 			
 			// This container has its own window, so allocation of children
 			// is relative to 0,0
@@ -393,14 +393,14 @@ namespace Pinta.Docking
 				Gdk.WindowAttributesType.Colormap |
 #endif
 				Gdk.WindowAttributesType.Visual;
-			GdkWindow = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
-			GdkWindow.UserData = Handle;
+			Window = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
+			Window.UserData = Handle;
 
-			Style = Style.Attach (GdkWindow);
-			Style.SetBackground (GdkWindow, State);
+			Style = Style.Attach (Window);
+			Style.SetBackground (Window, State);
 			HasWindow = true;
 
-            //GdkWindow.SetBackPixmap (null, true);
+            //Window.SetBackPixmap (null, true);
 
             // TODO-GTK3
 #if false
@@ -410,9 +410,9 @@ namespace Pinta.Docking
 
         protected override void OnUnrealized ()
 		{
-			if (this.GdkWindow != null) {
-				this.GdkWindow.UserData = IntPtr.Zero;
-				this.GdkWindow.Destroy ();
+			if (this.Window != null) {
+				this.Window.UserData = IntPtr.Zero;
+				this.Window.Destroy ();
 				HasWindow = false;
 			}
 			base.OnUnrealized ();
@@ -443,12 +443,12 @@ namespace Pinta.Docking
 				placeholderWindow.AllowDocking = allowDocking;
 
 				int ox, oy;
-				GdkWindow.GetOrigin (out ox, out oy);
+				Window.GetOrigin (out ox, out oy);
 
 				int tw, th;
 				padTitleWindow.GetSize (out tw, out th);
 				padTitleWindow.Move (ox + px - tw / 2, oy + py - th / 2);
-				padTitleWindow.GdkWindow.KeepAbove = true;
+				padTitleWindow.Window.KeepAbove = true;
 
 				DockDelegate dockDelegate;
 				Gdk.Rectangle rect;
@@ -573,15 +573,15 @@ namespace Pinta.Docking
 			protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 			{
 				if (Allocation.Height > Allocation.Width)
-					GdkWindow.Cursor = hresizeCursor;
+					Window.Cursor = hresizeCursor;
 				else
-					GdkWindow.Cursor = vresizeCursor;
+					Window.Cursor = vresizeCursor;
 				return base.OnEnterNotifyEvent (evnt);
 			}
 
 			protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 			{
-				GdkWindow.Cursor = null;
+				Window.Cursor = null;
 				return base.OnLeaveNotifyEvent (evnt);
 			}
 

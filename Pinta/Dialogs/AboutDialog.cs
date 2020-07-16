@@ -186,7 +186,7 @@ namespace Pinta
 			//} else
 				++scroll;
 			int w, h;
-			this.GdkWindow.GetSize (out w, out h);
+			this.Window.GetSize (out w, out h);
 			this.QueueDrawArea (0, 0, w, image.Height);
 			return true;
 		}
@@ -195,8 +195,8 @@ namespace Pinta
 		{
 			if (image != null) {
 				int w, h;
-				this.GdkWindow.GetSize (out w, out h);
-				this.GdkWindow.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
+				this.Window.GetSize (out w, out h);
+				this.Window.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
 				0);
 			}
 		}
@@ -205,8 +205,8 @@ namespace Pinta
 		{
 			if (image_top != null) {
 				int w, h;
-				this.GdkWindow.GetSize (out w, out h);
-				this.GdkWindow.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
+				this.Window.GetSize (out w, out h);
+				this.Window.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
 				0);
 			}
 		}
@@ -214,13 +214,13 @@ namespace Pinta
 		private void DrawText ()
 		{
 			int width, height;
-			GdkWindow.GetSize (out width, out height);
+			Window.GetSize (out width, out height);
 
 			int widthPixel, heightPixel;
 			layout.GetPixelSize (out widthPixel, out heightPixel);
 
-			GdkWindow.DrawLayout (Style.WhiteGC, 0, textTop - scroll, layout);
-			GdkWindow.DrawPixbuf (backGc, monoPowered, 0, 0, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing, -1, -1, RgbDither.Normal, 0, 0);
+			Window.DrawLayout (Style.WhiteGC, 0, textTop - scroll, layout);
+			Window.DrawPixbuf (backGc, monoPowered, 0, 0, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing, -1, -1, RgbDither.Normal, 0, 0);
 
 			heightPixel = heightPixel - 80 + image.Height;
 
@@ -236,7 +236,7 @@ namespace Pinta
 		{
 			int w, h;
 
-			this.GdkWindow.GetSize (out w, out h);
+			this.Window.GetSize (out w, out h);
 			this.DrawImage ();
 			this.DrawText ();
 			this.DrawImageTop ();
@@ -249,8 +249,8 @@ namespace Pinta
 		{
 			int x, y;
 			int w, h;
-			GdkWindow.GetOrigin (out x, out y);
-			GdkWindow.GetSize (out w, out h);
+			Window.GetOrigin (out x, out y);
+			Window.GetSize (out w, out h);
 
 			textTop = y + image.Height - 30;
 			scrollStart = -(image.Height - textTop);
@@ -263,7 +263,7 @@ namespace Pinta
 			layout.Alignment = Pango.Alignment.Center;
 			layout.SetMarkup (CreditText);
 
-			backGc = new Gdk.GC (GdkWindow);
+			backGc = new Gdk.GC (Window);
 			backGc.RgbBgColor = new Gdk.Color (49, 49, 74);
 		}
 

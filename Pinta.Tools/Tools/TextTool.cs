@@ -911,7 +911,7 @@ namespace Pinta.Tools
 		{
 			is_editing = true;
 
-            imContext.ClientWindow = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+            imContext.ClientWindow = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 
 			if (selection == null)
 				selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();

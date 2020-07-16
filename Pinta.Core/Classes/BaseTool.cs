@@ -340,8 +340,8 @@ namespace Pinta.Core
 		{
             CurrentCursor = cursor;
 
-            if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow != null)
-			    PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow.Cursor = cursor;
+            if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveWorkspace.Canvas.Window != null)
+			    PintaCore.Workspace.ActiveWorkspace.Canvas.Window.Cursor = cursor;
 		}
 
 		/// <summary>

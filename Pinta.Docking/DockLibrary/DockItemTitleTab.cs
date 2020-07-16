@@ -456,8 +456,8 @@ namespace Pinta.Docking
 			} else if (!evnt.TriggersContextMenu () && evnt.Button == 1) {
 				frame.DockInPlaceholder (item);
 				frame.HidePlaceholder ();
-				if (GdkWindow != null)
-					GdkWindow.Cursor = null;
+				if (Window != null)
+					Window.Cursor = null;
 				frame.Toplevel.KeyPressEvent -= HeaderKeyPress;
 				frame.Toplevel.KeyReleaseEvent -= HeaderKeyRelease;
 			}
@@ -496,7 +496,7 @@ namespace Pinta.Docking
 		{
 			if (tabPressed && !item.Behavior.HasFlag (DockItemBehavior.NoGrip) && Math.Abs (evnt.X - pressX) > 3 && Math.Abs (evnt.Y - pressY) > 3) {
 				frame.ShowPlaceholder (item);
-				GdkWindow.Cursor = fleurCursor;
+				Window.Cursor = fleurCursor;
 				frame.Toplevel.KeyPressEvent += HeaderKeyPress;
 				frame.Toplevel.KeyReleaseEvent += HeaderKeyRelease;
 				allowPlaceholderDocking = true;
@@ -760,7 +760,7 @@ namespace Pinta.Docking
 
 			if (HasFocus) {
 				var alloc = labelWidget.Allocation;
-				Gtk.Style.PaintFocus (Style, GdkWindow, State, alloc, this, "label",
+				Gtk.Style.PaintFocus (Style, Window, State, alloc, this, "label",
 				                      alloc.X, alloc.Y, alloc.Width, alloc.Height);
 			}
 			return base.OnExposeEvent (evnt);
@@ -779,7 +779,7 @@ namespace Pinta.Docking
 				last = cts[cts.Length - 1] == this;
 			}
 
-			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+			using (var ctx = Gdk.CairoHelper.Create (Window)) {
 				if (first && last) {
 					ctx.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
 					ctx.SetSourceColor (VisualStyle.PadBackgroundColor.Value.ToCairoColor ());
@@ -795,7 +795,7 @@ namespace Pinta.Docking
 
 		void DrawNormal (Gdk.EventExpose evnt)
 		{
-			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+			using (var ctx = Gdk.CairoHelper.Create (Window)) {
 				var x = Allocation.X;
 				var y = Allocation.Y;
 

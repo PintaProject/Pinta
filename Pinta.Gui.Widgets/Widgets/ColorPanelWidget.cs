@@ -58,7 +58,7 @@ namespace Pinta.Gui.Widgets
 #if false
 		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
-			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
+			using (Context g = Gdk.CairoHelper.Create (this.Window)) {
 				
 				int rad = 4;
 				Rectangle rect = Allocation.ToCairoRectangle ();

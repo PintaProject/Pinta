@@ -180,7 +180,7 @@ namespace Pinta.Gui.Widgets
 		{
 			int px, py;
 			Gdk.ModifierType mask;
-			GdkWindow.GetPointer (out px, out py, out mask); 
+			Window.GetPointer (out px, out py, out mask); 
 			
 			int index = FindValueIndex (py);
 			py = (int)NormalizeY (index, py);
@@ -196,7 +196,7 @@ namespace Pinta.Gui.Widgets
 			
 			//to avoid unnessesary costly redrawing
 			if (index != -1)
-				GdkWindow.Invalidate ();
+				Window.Invalidate ();
 		}
 		
 		private void HandleLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
@@ -204,7 +204,7 @@ namespace Pinta.Gui.Widgets
 			if (args.Event.State != Gdk.ModifierType.Button1Mask)
 				ValueIndex = -1;
 			
-			GdkWindow.Invalidate ();
+			Window.Invalidate ();
 		}
 		
 	
@@ -212,7 +212,7 @@ namespace Pinta.Gui.Widgets
 		{
 			int px, py;
 			Gdk.ModifierType mask;
-			GdkWindow.GetPointer (out px, out py, out mask); 
+			Window.GetPointer (out px, out py, out mask); 
 			
 			int index = FindValueIndex ((int)py);
 			
@@ -243,7 +243,7 @@ namespace Pinta.Gui.Widgets
 		{
 			int px, py;
 			Gdk.ModifierType mask;
-			GdkWindow.GetPointer (out px, out py, out mask); 
+			Window.GetPointer (out px, out py, out mask); 
 			
 			Rectangle rect = GradientRectangle;
 			Rectangle all = Allocation.ToCairoRectangle();
@@ -277,7 +277,7 @@ namespace Pinta.Gui.Widgets
 #if false
 		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
 		{
-			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
+			using (Context g = Gdk.CairoHelper.Create (this.Window)) {
 				
 				DrawGradient (g);
 				DrawTriangles (g);

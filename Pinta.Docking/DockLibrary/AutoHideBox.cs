@@ -99,11 +99,11 @@ namespace Pinta.Docking
 			
 			if (horiz) {
 				fr = new HBox ();
-				sepBox.Realized += delegate { sepBox.GdkWindow.Cursor = resizeCursorW; };
+				sepBox.Realized += delegate { sepBox.Window.Cursor = resizeCursorW; };
 				sepBox.WidthRequest = gripSize;
 			} else {
 				fr = new VBox ();
-				sepBox.Realized += delegate { sepBox.GdkWindow.Cursor = resizeCursorH; };
+				sepBox.Realized += delegate { sepBox.Window.Cursor = resizeCursorH; };
 				sepBox.HeightRequest = gripSize;
 			}
 			fr.Accessible.SetShouldIgnore (true);
