@@ -64,9 +64,8 @@ namespace Pinta.Gui.Widgets
 			set { surface = value; }
 		}
 
-		// TODO-GTK3
-#if false
-		public override void GetSize (Widget widget, ref Gdk.Rectangle cellArea, out int x, out int y, out int width, out int height)
+		
+		protected override void OnGetSize (Widget widget, ref Gdk.Rectangle cellArea, out int x, out int y, out int width, out int height)
 		{
 			// TODO: Respect cell padding (Xpad and Ypad).
 			x = cellArea.Left;
@@ -75,21 +74,19 @@ namespace Pinta.Gui.Widgets
 			height = (int)cellArea.Height;
 		}
 
-		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle backgroundArea, Gdk.Rectangle cellArea, Gdk.Rectangle exposeArea, CellRendererState flags)
-		{
+        protected override void OnRender(Context g, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, CellRendererState flags)
+        {
 			int x, y, width, height;
-			
-			GetSize (widget, ref cellArea, out x, out y, out width, out height);
 
-			using (var g = Gdk.CairoHelper.Create (window)) {
-				g.Save ();
-				g.Translate (x, y);
-				RenderCell (g, width, height);
-				g.Restore ();
-			}
-		}
-#endif
-		private void RenderCell (Context g, int width, int height)
+			OnGetSize(widget, ref cell_area, out x, out y, out width, out height);
+
+            g.Save();
+            g.Translate(x, y);
+            RenderCell(g, width, height);
+			g.Restore();
+        }
+
+        private void RenderCell (Context g, int width, int height)
 		{
 			// Add some padding
 			width -= 2;

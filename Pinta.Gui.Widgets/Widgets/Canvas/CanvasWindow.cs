@@ -33,7 +33,7 @@ namespace Pinta
 {
     public class CanvasWindow : Table
     {
-        // TODO-GTK3
+        // TODO-GTK3 (rulers)
 #if false
         private HRuler horizontal_ruler;
         private VRuler vertical_ruler;
@@ -59,7 +59,7 @@ namespace Pinta
             };
 
             // Rulers
-            // TODO-GTK3
+            // TODO-GTK3 (rulers)
 #if false
             horizontal_ruler = new HRuler ();
             horizontal_ruler.Metric = MetricType.Pixels;
@@ -101,7 +101,7 @@ namespace Pinta
             Canvas.Show ();
             vp.Show ();
 
-            // TODO-GTK3
+            // TODO-GTK3 (rulers)
 #if false
             horizontal_ruler.Visible = false;
             vertical_ruler.Visible = false;
@@ -125,7 +125,7 @@ namespace Pinta
             }
         }
 
-        // TODO-GTK3
+        // TODO-GTK3 (rulers)
 #if false
         public bool RulersVisible {
             get { return horizontal_ruler.Visible; }
