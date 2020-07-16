@@ -25,7 +25,9 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 using Gdk;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
@@ -60,27 +62,27 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		protected override void OnSizeAllocated (Rectangle allocation)
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 			UpdateThumbnail ();
 		}
 
-		public void Init(Point position)
+		public void Init(Gdk.Point position)
 		{
 			this.position = position;
 		}
 
 		#region Public Properties
-		private Point position;
+		private Gdk.Point position;
 
-		public Point Position {
+		public Gdk.Point Position {
 			get { return position; }
 			set {
 				if (position != value) {
 					position = value;
 					OnPositionChange ();
-					GdkWindow.Invalidate ();
+                    Window.Invalidate ();
 				}
 			}
 		}
@@ -112,54 +114,59 @@ namespace Pinta.Gui.Widgets
 				tracking = true;
 			}
 		}
-		#endregion
+        #endregion
 
-#region Drawing Code
-// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
-		{
-			base.OnExposeEvent (ev);
+        #region Drawing Code
+        protected override bool OnDrawn(Context g)
+        {
+			base.OnDrawn(g);
 			
 			if (thumbnail == null)
 				UpdateThumbnail ();
 			
-			Rectangle rect = GdkWindow.GetBounds ();
+			Gdk.Rectangle rect = Window.GetBounds ();
 			Cairo.PointD pos = PositionToClientPt (Position);
 			Cairo.Color black = new Cairo.Color (0, 0, 0);
-			
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				//background
-				g.SetSource (thumbnail, 0.0, 0.0);
-				g.Paint ();
 
-				g.DrawRectangle (new Cairo.Rectangle (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1), new Cairo.Color (.75, .75, .75), 1);
-				g.DrawRectangle (new Cairo.Rectangle (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3), black, 1);
-				
-				//cursor
-				g.DrawLine (new Cairo.PointD (pos.X + 1, rect.Top + 2), new Cairo.PointD (pos.X + 1, rect.Bottom - 2), black, 1);
-				g.DrawLine (new Cairo.PointD (rect.Left + 2, pos.Y + 1), new Cairo.PointD (rect.Right - 2, pos.Y + 1), black, 1);
-				
-				//point
-				g.DrawEllipse (new Cairo.Rectangle (pos.X - 1, pos.Y - 1, 3, 3), black, 2);
-			}
-			return true;
+            //background
+            g.SetSource(thumbnail, 0.0, 0.0);
+            g.Paint();
+
+            g.DrawRectangle(new Cairo.Rectangle(rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1), new Cairo.Color(.75, .75, .75), 1);
+            g.DrawRectangle(new Cairo.Rectangle(rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3), black, 1);
+
+            //cursor
+            g.DrawLine(new Cairo.PointD(pos.X + 1, rect.Top + 2), new Cairo.PointD(pos.X + 1, rect.Bottom - 2), black, 1);
+            g.DrawLine(new Cairo.PointD(rect.Left + 2, pos.Y + 1), new Cairo.PointD(rect.Right - 2, pos.Y + 1), black, 1);
+
+            //point
+            g.DrawEllipse(new Cairo.Rectangle(pos.X - 1, pos.Y - 1, 3, 3), black, 2);
+
+            return true;
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			minimum_height = natural_height = 65;
+			thumbnail = null;
+        }
+
+        protected override void OnGetPreferredWidthForHeight(int height, out int minimum_width, out int natural_width)
+        {
 			// Always be X pixels tall, but maintain aspect ratio
 			Size imagesize = PintaCore.Workspace.ImageSize;
-			
-			requisition.Height = 65;
-			requisition.Width = (imagesize.Width * requisition.Height) / imagesize.Height;
+			minimum_width = natural_width = (imagesize.Width * height) / imagesize.Height;
 			thumbnail = null;
-		}
-#endif
-#endregion
+        }
 
-#region Public Events
-		public event EventHandler PositionChanged;
+        protected override SizeRequestMode OnGetRequestMode()
+        {
+			return SizeRequestMode.WidthForHeight;
+        }
+        #endregion
+
+        #region Public Events
+        public event EventHandler PositionChanged;
 
 		protected virtual void OnPositionChange ()
 		{
@@ -170,15 +177,15 @@ namespace Pinta.Gui.Widgets
 #endregion
 
 #region private methods
-		private Point MousePtToPosition (Cairo.PointD clientMousePt)
+		private Gdk.Point MousePtToPosition (Cairo.PointD clientMousePt)
 		{
 			int posX = (int)(clientMousePt.X * (PintaCore.Workspace.ImageSize.Width / Allocation.Width));
 			int posY = (int)(clientMousePt.Y * (PintaCore.Workspace.ImageSize.Height / Allocation.Height));
 			
-			return new Point (posX, posY);
+			return new Gdk.Point (posX, posY);
 		}
 
-		private Cairo.PointD PositionToClientPt (Point pos)
+		private Cairo.PointD PositionToClientPt (Gdk.Point pos)
 		{
 			double halfWidth = PintaCore.Workspace.ImageSize.Width / Allocation.Width;
 			double halfHeight = PintaCore.Workspace.ImageSize.Height / Allocation.Height;

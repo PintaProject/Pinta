@@ -447,8 +447,8 @@ namespace Pinta.Gui.Widgets
 		#endregion
 	}
 
-	// TODO-GTK3
-	/// This is a temporary replacement for IAddinLocalizer from Mono.Addins.
+	// TODO-GTK3 (addins)
+	// This is a temporary replacement for IAddinLocalizer from Mono.Addins.
 	public interface IAddinLocalizer
     {
 		string GetString(string msgid);
