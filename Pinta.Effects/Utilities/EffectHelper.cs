@@ -41,7 +41,7 @@ namespace Pinta
         /// The localizer for the effect add-in. This is used to fetch translations for the
         /// strings in the dialog.
         /// </param>
-        // TODO-GTK3
+        // TODO-GTK3 (addins)
 #if false
 		public static bool LaunchSimpleEffectDialog (BaseEffect effect, AddinLocalizer localizer)
 		{

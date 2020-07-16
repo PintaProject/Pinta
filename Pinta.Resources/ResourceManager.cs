@@ -108,26 +108,29 @@ namespace Pinta.Resources
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
 		private static Pixbuf CreateMissingImage (int size)
 		{
-			// TODO-GTK3 implement this. This will probably need to use Cairo:
-			// https://developer.gnome.org/gtk3/stable/ch26s02.html#id-1.6.3.4.5
-#if false
-			var pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, size, size);
-			var gc = new Gdk.GC (pmap);
+			using (var surf = new Cairo.ImageSurface(Cairo.Format.Argb32, size, size))
+			using (var g = new Cairo.Context(surf))
+            {
+				g.SetSourceColor(new Cairo.Color(1, 1, 1));
+				g.Rectangle(0, 0, size, size);
+				g.Fill();
 
-			gc.RgbFgColor = new Gdk.Color (255, 255, 255);
-			pmap.DrawRectangle (gc, true, 0, 0, size, size);
-			gc.RgbFgColor = new Gdk.Color (0, 0, 0);
-			pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+				g.SetSourceColor(new Cairo.Color(0, 0, 0));
+				g.Rectangle(0, 0, size - 1, size - 1);
+				g.Fill();
 
-			gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
-			gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-			pmap.DrawLine (gc, (size / 4), (size / 4), ((size - 1) - (size / 4)), ((size - 1) - (size / 4)));
-			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
+				g.LineWidth = 3;
+				g.LineCap = Cairo.LineCap.Round;
+				g.LineJoin = Cairo.LineJoin.Round;
+				g.SetSourceColor(new Cairo.Color(1, 0, 0));
+				g.MoveTo(size / 4, size / 4);
+				g.LineTo((size - 1) - (size / 4), (size - 1) - (size / 4));
+				g.MoveTo((size - 1) - (size / 4), size / 4);
+				g.LineTo(size / 4, (size - 1) - (size / 4));
 
-			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
-#else
-			throw new NotImplementedException();
-#endif
+				// TODO-GTK3 use Gdk.Pixbuf.GetFromSurface once available (https://github.com/GtkSharp/GtkSharp/issues/174)
+				return new Gdk.Pixbuf(surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
+			}
 		}
 
 		private static Gtk.IconSize GetIconSize(int size)

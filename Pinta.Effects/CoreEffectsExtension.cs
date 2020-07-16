@@ -32,7 +32,7 @@ using Pinta.Core;
 
 namespace Pinta.Effects
 {
-	// TODO-GTK3
+	// TODO-GTK3 (addins)
 #if false
 	[Mono.Addins.Extension]
 	class CoreEffectsExtension : IExtension

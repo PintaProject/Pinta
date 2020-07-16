@@ -729,6 +729,7 @@ namespace Pinta.Core
 
 		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
 		{
+			// TODO-GTK3 use Gdk.Pixbuf.GetFromSurface once available (https://github.com/GtkSharp/GtkSharp/issues/174)
 			using (Cairo.ImageSurface surf = surfSource.Clone ()) {
 				surf.Flush ();
 
