@@ -54,7 +54,7 @@ Thanks to the following contributors who worked on this release:
 - Corrected display problems in the Move Selected Tool and live previews for effects (#115).
 - Add-ins can now load icons correctly (#116).
 - Fixed strange behaviour when the width or height of a drawn rounded rectangle is 0 (#112).
-- Fixed issues with the text tool on OSX ([#1425749[(https://bugs.launchpad.net/pinta/+bug/1425749)).
+- Fixed issues with the text tool on OSX ([#1425749](https://bugs.launchpad.net/pinta/+bug/1425749)).
 - Fixed inconsistent labels in the UI ([#1579033](https://bugs.launchpad.net/pinta/+bug/1579033)).
 - Fixed issues with the zoom tool under certain locales (#139, #133, [#1464855](https://bugs.launchpad.net/pinta/+bug/1464855)).
 - Fixed issues when drawing on very zoomed-in images (#129, #133).
