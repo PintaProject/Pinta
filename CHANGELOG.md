@@ -1,0 +1,62 @@
+# Change Log
+All notable changes to this project (beginning with version 1.6) will be documented in this file.
+
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/1.6...HEAD)
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+- @jpobst
+- @don-mccomb
+- @miguelfazenda
+- @skkestrel
+- @codeprof
+- @hasufell
+- @Mailaender
+- @averissimo
+- @tdaffin
+- @Shuunen
+- @jkells
+- @scx
+- @albfan
+- @rajter
+- @dandv
+- @jaburns
+
+### Added
+- Added a tab view to switch between images. The tabs can also be docked side-by-side or pulled into new windows. (#94).
+- The Rotate / Zoom dialog now supports zooming and panning ([#1252756](https://bugs.launchpad.net/pinta/+bug/1252756)).
+- Added a Smooth Erase tool, which is enabled using the Type menu on the Erase tool's toolbar (#110).
+- The Pencil tool can switch between different blend modes (#124, [#1688743](https://bugs.launchpad.net/pinta/+bug/1688743)).
+- Added support for JASC PaintShop Pro palette files (#126).
+- The transform tools can now rotate in fixed increments by holding Shift (#134).
+- The Move Selected tool can now scale by holding Ctrl (#138).
+- Performance improvements when interacting with selections, particularly for large images ([#1428740](https://bugs.launchpad.net/pinta/+bug/1428740)).
+- The Rectangle Select tool now shows different arrow cursors at each corner of the selection ([#1188143](https://bugs.launchpad.net/pinta/+bug/1188143)).
+- Added an AppData file for integration with some Linux app stores (#121).
+
+### Changed
+- .NET 4.5 / Mono 4.0 are now required.
+- UI improvements to the New Image dialog (#99, [[1424547](https://bugs.launchpad.net/pinta/+bug/1424547)).
+- The Rotate / Zoom dialog now rotates in-place instead of changing the layer's size.
+- Cairo blend operations are now used instead of PDN's managed blend modes (#98, [#1248933](https://bugs.launchpad.net/pinta/+bug/1248933), [#1091910](https://bugs.launchpad.net/pinta/+bug/1091910)).
+
+### Fixed
+- Fixed a bug where Auto Crop used the current layer instead of the entire image when deciding what to crop, and takes the selection into account ([#1434928](https://bugs.launchpad.net/pinta/+bug/1434928), [#1434906](https://bugs.launchpad.net/pinta/+bug/1434906)).
+- Fixed potential crashes when switching tools without any open documents ([#1425612](https://bugs.launchpad.net/pinta/+bug/1425612)).
+- Fixed a potential bug where the OK button in the New Image dialog could be incorrectly disabled ([#1430203](https://bugs.launchpad.net/pinta/+bug/1430203)).
+- Fixed a crash when clicking on the Open Images pad after closing all images ([#1430789](https://bugs.launchpad.net/pinta/+bug/1430789)).
+- Fixed a bug where the Levels dialog closed unexpectedly when clicking on one of the color checkboxes ([#1435045](https://bugs.launchpad.net/pinta/+bug/1435045)).
+- The outline width settings on the Text Tool's toolbar now only show up if they are relevant to the stroke style being used ([#1426663](https://bugs.launchpad.net/pinta/+bug/1426663)).
+- Fixed a potential crash creating gradients ([#1446217](https://bugs.launchpad.net/pinta/+bug/1446217)).
+- Fixed issues where the selection handles disappeared after pressing Delete ([#1424629](https://bugs.launchpad.net/pinta/+bug/1424629)).
+- Fixed issues where selection changes were not detected correctly ([#1438022](https://bugs.launchpad.net/pinta/+bug/1438022)).
+- Fixed several transparency-related issues with premultiplied alpha (#109, #113, #114, #117, #125).
+- Corrected display problems in the Move Selected Tool and live previews for effects (#115).
+- Add-ins can now load icons correctly (#116).
+- Fixed strange behaviour when the width or height of a drawn rounded rectangle is 0 (#112).
+- Fixed issues with the text tool on OSX ([#1425749[(https://bugs.launchpad.net/pinta/+bug/1425749)).
+- Fixed inconsistent labels in the UI ([#1579033](https://bugs.launchpad.net/pinta/+bug/1579033)).
+- Fixed issues with the zoom tool under certain locales (#139, #133, [#1464855](https://bugs.launchpad.net/pinta/+bug/1464855)).
+- Fixed issues when drawing on very zoomed-in images (#129, #133).
+- Fixed issues where brushes could draw outside the selection ([#1775709](https://bugs.launchpad.net/pinta/+bug/1775709)).
+- Fixed issues with the docking library ([#832395](https://bugs.launchpad.net/pinta/+bug/832395)).
