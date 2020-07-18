@@ -61,10 +61,15 @@ namespace Pinta.Core
 
 		public List<int> GetSizes (FontFamily family)
 		{
-			return GetSizes (family.Faces[0]);
+			var face = family.Faces[0];
+			// It seems possible for this to be null if there were issues loading the font.
+			if (face == null)
+				return default_font_sizes;
+			else
+				return GetSizes (face);
 		}
 
-		unsafe public List<int> GetSizes (FontFace fontFace)
+		unsafe private List<int> GetSizes (FontFace fontFace)
 		{
 			int sizes;
 			int nsizes;
