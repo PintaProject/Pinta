@@ -41,6 +41,7 @@ Thanks to the following contributors who worked on this release:
 - Cairo blend operations are now used instead of PDN's managed blend modes (#98, [#1248933](https://bugs.launchpad.net/pinta/+bug/1248933), [#1091910](https://bugs.launchpad.net/pinta/+bug/1091910)).
 
 ### Fixed
+- The option to expand the canvas when pasting an image now only changes the canvas size in the dimension where the pasted image is larger ([#1883623](https://bugs.launchpad.net/pinta/+bug/1883623)).
 - Fixed a bug where Auto Crop used the current layer instead of the entire image when deciding what to crop, and takes the selection into account ([#1434928](https://bugs.launchpad.net/pinta/+bug/1434928), [#1434906](https://bugs.launchpad.net/pinta/+bug/1434906)).
 - Fixed potential crashes when switching tools without any open documents ([#1425612](https://bugs.launchpad.net/pinta/+bug/1425612)).
 - Fixed a potential bug where the OK button in the New Image dialog could be incorrectly disabled ([#1430203](https://bugs.launchpad.net/pinta/+bug/1430203)).

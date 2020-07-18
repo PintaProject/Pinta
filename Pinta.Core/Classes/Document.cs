@@ -828,9 +828,10 @@ namespace Pinta.Core
 			
 				if (response == ResponseType.Accept)
 				{
-					PintaCore.Workspace.ResizeCanvas (cbImage.Width, cbImage.Height,
-					Pinta.Core.Anchor.Center, paste_action);
-					PintaCore.Actions.View.UpdateCanvasScale ();
+					var new_width = Math.Max(canvas_size.Width, cbImage.Width);
+					var new_height = Math.Max(canvas_size.Height, cbImage.Height);
+                    PintaCore.Workspace.ResizeCanvas(new_width, new_height, Pinta.Core.Anchor.Center, paste_action);
+                    PintaCore.Actions.View.UpdateCanvasScale ();
 				}
 				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
 				{
