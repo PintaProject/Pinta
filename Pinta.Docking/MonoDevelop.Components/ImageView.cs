@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using Cairo;
 using Gdk;
 using Pinta.Docking;
 
@@ -75,31 +76,36 @@ namespace MonoDevelop.Components
             get { return GtkWorkarounds.GetPixelScale (); }
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			if (image != null) {
-				requisition.Width = (int)(image.Width * IconScale);
-				requisition.Height = (int)(image.Height * IconScale);
-			}
-		}
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			if (image != null)
+				minimum_width = natural_width = (int)(image.Width * IconScale);
+			else
+				base.OnGetPreferredWidth(out minimum_width, out natural_width);
+        }
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			if (image != null) {
-				using (var ctx = CairoHelper.Create (evnt.Window)) {
-					var x = Math.Round (Allocation.X + (Allocation.Width - image.Width * IconScale) * Xalign);
-					var y = Math.Round (Allocation.Y + (Allocation.Height - image.Height * IconScale) * Yalign);
-					ctx.Save ();
-					ctx.Scale (IconScale, IconScale);
-					ctx.DrawImage (this, image, x / IconScale, y / IconScale);
-					ctx.Restore ();
-				}
-			}
-			return true;
-		}
-#endif
-	}
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			if (image != null)
+				minimum_height = natural_height = (int)(image.Height * IconScale);
+			else
+				base.OnGetPreferredHeight(out minimum_height, out natural_height);
+        }
+
+        protected override bool OnDrawn(Context ctx)
+        {
+			base.OnDrawn(ctx);
+            if (image != null)
+            {
+                var x = Math.Round((Allocation.Width - image.Width * IconScale) * Xalign);
+                var y = Math.Round((Allocation.Height - image.Height * IconScale) * Yalign);
+                ctx.Save();
+                ctx.Scale(IconScale, IconScale);
+                ctx.DrawImage(this, image, x / IconScale, y / IconScale);
+                ctx.Restore();
+            }
+            return true;
+        }
+    }
 }
 

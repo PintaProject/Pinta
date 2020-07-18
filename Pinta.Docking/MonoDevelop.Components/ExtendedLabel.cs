@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using Cairo;
 
 namespace MonoDevelop.Components
 {
@@ -47,31 +48,30 @@ namespace MonoDevelop.Components
 			}
 		}
 
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
+        protected override bool OnDrawn(Context cr)
+        {
 			if (!dropShadowVisible)
-				return base.OnExposeEvent (evnt);
+				return base.OnDrawn(cr);
 
-			Pango.Layout la = new Pango.Layout (PangoContext);
-			int w, h;
-			if (UseMarkup)
-				la.SetMarkup (Text);
-			else
-				la.SetText (Text);
+			using (var la = new Pango.Layout(PangoContext))
+			{
+				int w, h;
+				if (UseMarkup)
+					la.SetMarkup(Text);
+				else
+					la.SetText(Text);
 
-			la.GetPixelSize (out w, out h);
+				la.GetPixelSize(out w, out h);
 
-			int tx = Allocation.X + (int) Xpad + (int) ((float)(Allocation.Width - (int)(Xpad*2) - w) * Xalign);
-			int ty = Allocation.Y + (int) Ypad + (int) ((float)(Allocation.Height - (int)(Ypad*2) - h) * Yalign);
-			
-			Window.DrawLayout (Style.TextGC (State), tx, ty, la);
-			
-			la.Dispose ();
+				int tx = Allocation.X + (int)Xpad + (int)((float)(Allocation.Width - (int)(Xpad * 2) - w) * Xalign);
+				int ty = Allocation.Y + (int)Ypad + (int)((float)(Allocation.Height - (int)(Ypad * 2) - h) * Yalign);
+
+				cr.MoveTo(tx, ty);
+				Pango.CairoHelper.ShowLayout(cr, la);
+			}
+
 			return true;
 		}
-#endif
-	}
+    }
 }
 
