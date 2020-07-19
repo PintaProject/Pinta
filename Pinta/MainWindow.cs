@@ -528,17 +528,56 @@ namespace Pinta
 
 		private void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
 		{
+			// TODO: Generate random name for the picture being downloaded
+
 			// Only handle URIs
 			if (args.Info != 100)
 				return;
 
 			string fullData = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
 
-			foreach (string individualFile in fullData.Split ('\n')) {
-				string file = individualFile.Trim ();
+			try {
+				PintaCore.Workspace.HasOpenPendingDocuments = true;
 
-				if (file.StartsWith ("file://"))
-					PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+				foreach (string individualFile in fullData.Split ('\n')) {
+					string file = individualFile.Trim ();
+					Console.WriteLine (file);
+
+					if (file.StartsWith ("http") || file.StartsWith("ftp")) {
+						System.Net.WebClient client = new System.Net.WebClient ();
+						string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName(file);
+
+						var progressDialog = PintaCore.Chrome.ProgressDialog;
+
+						try {
+							progressDialog.Show ();
+							progressDialog.Title = "Downloading file";
+							progressDialog.Text = "File " + file + " is being downloaded to " 
+								+ tempFilePath;
+							
+							client.DownloadFile (file, @tempFilePath);
+							client.DownloadProgressChanged += (sender, e) => 
+							{
+								progressDialog.Progress = e.ProgressPercentage;
+							};
+						} finally {
+							client.Dispose ();
+							progressDialog.Hide();
+						}
+
+						if (System.IO.File.Exists (tempFilePath))
+							file = "file://" + tempFilePath;
+						else
+							PintaCore.Chrome.ShowErrorDialog(PintaCore.Chrome.MainWindow, 
+								"Download failed",
+								"Unable to download target file: " + tempFilePath);
+					}
+
+					if (file.StartsWith ("file://"))
+						PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+				}
+			} finally {
+				PintaCore.Workspace.HasOpenPendingDocuments = false;
 			}
 		}
 
