@@ -61,3 +61,4 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues when drawing on very zoomed-in images (#129, #133).
 - Fixed issues where brushes could draw outside the selection ([#1775709](https://bugs.launchpad.net/pinta/+bug/1775709)).
 - Fixed issues with the docking library ([#832395](https://bugs.launchpad.net/pinta/+bug/832395)).
+- Fixed a bug where undoing a history item could set the background palette color to the foreground color ([#1888131](https://bugs.launchpad.net/pinta/+bug/1888131)).
