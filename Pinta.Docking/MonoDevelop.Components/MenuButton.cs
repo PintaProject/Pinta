@@ -87,10 +87,7 @@ namespace MonoDevelop.Components
 					menu.Hidden += delegate {
 						this.Relief = oldRelief ;
 						isOpen = false;
-						// TODO-GTK3
-#if false
-						this.State = StateType.Normal;
-#endif
+						this.SetStateFlags(StateFlags.Normal, true);
 						
 						//FIXME: for some reason the menu's children don't get activated if we destroy 
 						//directly here, so use a timeout to delay it
@@ -109,12 +106,9 @@ namespace MonoDevelop.Components
 		{
 			base.OnStateChanged (previous_state);
 
-			// TODO-GTK3
-#if false
 			//while the menu's open, make sure the button looks depressed
-			if (isOpen && this.State != StateType.Active)
-				this.State = StateType.Active;
-#endif
+			if (isOpen && !this.StateFlags.HasFlag(StateFlags.Active))
+				this.SetStateFlags(StateFlags.Active, true);
 		}
 		
 		void PositionFunc (Menu mn, out int x, out int y, out bool push_in)
