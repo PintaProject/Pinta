@@ -21,6 +21,7 @@ Thanks to the following contributors who worked on this release:
 - @rajter
 - @dandv
 - @jaburns
+- @aivel
 
 ### Added
 - Added a tab view to switch between images. The tabs can also be docked side-by-side or pulled into new windows. (#94).
@@ -30,6 +31,7 @@ Thanks to the following contributors who worked on this release:
 - Added support for JASC PaintShop Pro palette files (#126).
 - The transform tools can now rotate in fixed increments by holding Shift (#134).
 - The Move Selected tool can now scale by holding Ctrl (#138).
+- Dragging and dropping a URL (e.g. image from a web browser) to download and open the image is now supported (#80, [#644123](https://bugs.launchpad.net/pinta/+bug/644123)). 
 - Performance improvements when interacting with selections, particularly for large images ([#1428740](https://bugs.launchpad.net/pinta/+bug/1428740)).
 - The Rectangle Select tool now shows different arrow cursors at each corner of the selection ([#1188143](https://bugs.launchpad.net/pinta/+bug/1188143)).
 - Added an AppData file for integration with some Linux app stores (#121).
