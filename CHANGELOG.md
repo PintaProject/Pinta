@@ -43,6 +43,7 @@ Thanks to the following contributors who worked on this release:
 - Cairo blend operations are now used instead of PDN's managed blend modes (#98, [#1248933](https://bugs.launchpad.net/pinta/+bug/1248933), [#1091910](https://bugs.launchpad.net/pinta/+bug/1091910)).
 
 ### Fixed
+- Fixed many issues where selection changes did not update correctly ([#1438022](https://bugs.launchpad.net/pinta/+bug/1438022), [#1188924](https://bugs.launchpad.net/pinta/+bug/1188924), [#1429830](https://bugs.launchpad.net/pinta/+bug/1429830), [#1098137](https://bugs.launchpad.net/pinta/+bug/1098137), #105).
 - The option to expand the canvas when pasting an image now only changes the canvas size in the dimension where the pasted image is larger ([#1883623](https://bugs.launchpad.net/pinta/+bug/1883623)).
 - Fixed a bug where Auto Crop used the current layer instead of the entire image when deciding what to crop, and takes the selection into account ([#1434928](https://bugs.launchpad.net/pinta/+bug/1434928), [#1434906](https://bugs.launchpad.net/pinta/+bug/1434906)).
 - Fixed potential crashes when switching tools without any open documents ([#1425612](https://bugs.launchpad.net/pinta/+bug/1425612)).
@@ -52,7 +53,6 @@ Thanks to the following contributors who worked on this release:
 - The outline width settings on the Text Tool's toolbar now only show up if they are relevant to the stroke style being used ([#1426663](https://bugs.launchpad.net/pinta/+bug/1426663)).
 - Fixed a potential crash creating gradients ([#1446217](https://bugs.launchpad.net/pinta/+bug/1446217)).
 - Fixed issues where the selection handles disappeared after pressing Delete ([#1424629](https://bugs.launchpad.net/pinta/+bug/1424629)).
-- Fixed issues where selection changes were not detected correctly ([#1438022](https://bugs.launchpad.net/pinta/+bug/1438022)).
 - Fixed several transparency-related issues with premultiplied alpha (#109, #113, #114, #117, #125).
 - Corrected display problems in the Move Selected Tool and live previews for effects (#115).
 - Add-ins can now load icons correctly (#116).
