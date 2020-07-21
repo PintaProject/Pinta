@@ -569,7 +569,7 @@ namespace Pinta
 					try {
 						PintaCore.Chrome.MainWindowBusy = true;
 
-						progressDialog.Title = Catalog.GetString ("Downloading Image");
+						progressDialog.Title = Translations.GetString ("Downloading Image");
 						progressDialog.Text = "";
 						progressDialog.Show ();
 
@@ -587,8 +587,8 @@ namespace Pinta
 					} catch (Exception e) {
 						progressDialog.Hide ();
 						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
-							Catalog.GetString ("Download failed"),
-							string.Format (Catalog.GetString ("Unable to download image from {0}.\nDetails: {1}"), file, e.Message));
+							Translations.GetString ("Download failed"),
+							string.Format (Translations.GetString ("Unable to download image from {0}.\nDetails: {1}"), file, e.Message));
 					} finally {
 						client.Dispose ();
 						progressDialog.Hide ();
