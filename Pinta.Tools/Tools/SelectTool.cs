@@ -100,13 +100,16 @@ namespace Pinta.Tools
 			// If the user didn't move the mouse, they want to deselect
 			int tolerance = 0;
 			if (Math.Abs (reset_origin.X - args.Event.X) <= tolerance && Math.Abs (reset_origin.Y - args.Event.Y) <= tolerance) {
+				// Mark as being done interactive drawing before invoking the deselect action.
+				// This will allow AfterSelectionChanged() to clear the selection.
+				is_drawing = false;
+
 				PintaCore.Actions.Edit.Deselect.Activate ();
                 if (hist != null)
                 {
                     hist.Dispose();
                     hist = null;
                 }
-				doc.ToolLayer.Clear ();
 			} else {
                 ClearHandles (doc.ToolLayer);
 				ReDraw(args.Event.State);
@@ -132,7 +135,22 @@ namespace Pinta.Tools
             UpdateCursor (point);
 		}
 
-		protected override void OnDeactivated(BaseTool newTool)
+        protected override void OnActivated()
+        {
+            base.OnActivated();
+
+			// When entering the tool, update the selection handles from the
+			// document's current selection.
+			if (PintaCore.Workspace.HasOpenDocuments)
+            {
+				var doc = PintaCore.Workspace.ActiveDocument;
+				shape_origin = doc.Selection.Origin;
+				shape_end = doc.Selection.End;
+				UpdateHandler();
+			}
+        }
+
+        protected override void OnDeactivated(BaseTool newTool)
 		{
 			base.OnDeactivated (newTool);
 			if (PintaCore.Workspace.HasOpenDocuments) {
@@ -182,7 +200,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 			doc.ToolLayer.Hidden = false;
 			bool constraint = (state & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 			if (constraint) {
@@ -297,6 +315,9 @@ namespace Pinta.Tools
 
 		public void DrawHandler (Layer layer)
 		{
+			if (!PintaCore.Workspace.ActiveDocument.Selection.Visible)
+				return;
+
 		    using (var g = new Context(layer.Surface))
 		    {
 		        foreach (var tool_control in controls)
@@ -306,15 +327,18 @@ namespace Pinta.Tools
 
 		public void UpdateCursor (PointD point)
 		{
-		    foreach (ToolControl ct in controls.Where (ct => ct.IsInside (point)))
-		    {
-		        if (active_cursor != ct.Cursor)
-                {
-		            SetCursor (new Cursor(ct.Cursor));
-		            active_cursor = ct.Cursor;
-		        }
-		        return;
-		    }
+			if (PintaCore.Workspace.ActiveDocument.Selection.Visible)
+            {
+				foreach (ToolControl ct in controls.Where(ct => ct.IsInside(point)))
+				{
+					if (active_cursor != ct.Cursor)
+					{
+						SetCursor(new Cursor(ct.Cursor));
+						active_cursor = ct.Cursor;
+					}
+					return;
+				}
+			}
 
 		    if (active_cursor.HasValue)
             {

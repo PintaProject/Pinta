@@ -121,7 +121,7 @@ namespace Pinta.Tools
 			doc.Selection.SelectionPolygons = newSelectionPolygons;
 			doc.Selection.MarkDirty ();
 
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 			doc.SelectionLayer.Transform.InitMatrix (original_transform);
 			doc.SelectionLayer.Transform.Multiply (transform);
 

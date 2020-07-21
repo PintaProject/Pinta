@@ -109,6 +109,7 @@ namespace Pinta.Core
             var doc = PintaCore.Workspace.ActiveDocument;
             doc.Selection.Dispose ();
             doc.Selection = doc.PreviousSelection.Clone ();
+            doc.Selection.Visible = true;
 
             using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
             {

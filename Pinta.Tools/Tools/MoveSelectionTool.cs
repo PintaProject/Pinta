@@ -83,7 +83,7 @@ namespace Pinta.Tools
 			doc.Selection.SelectionPolygons = newSelectionPolygons;
             doc.Selection.MarkDirty ();
 
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 
 			PintaCore.Workspace.Invalidate ();
 		}

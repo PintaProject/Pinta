@@ -190,7 +190,7 @@ namespace Pinta.Core
 			hist.TakeSnapshot ();
 
 			doc.ResetSelectionPaths ();
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 
 			doc.History.PushNewItem (hist);
 			doc.Workspace.Invalidate ();
