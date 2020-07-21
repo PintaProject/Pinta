@@ -1,6 +1,6 @@
 # Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
 
-[![Build Status](https://travis-ci.org/PintaProject/Pinta.svg)](https://travis-ci.org/PintaProject/Pinta)
+[![Build Status](https://github.com/PintaProject/Pinta/workflows/Build/badge.svg)](https://github.com/PintaProject/Pinta/actions)
 
 Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
 
