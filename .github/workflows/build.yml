@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  # Build on new commits or pull requests.
+  push:
+  pull_request:
+  schedule:
+    # Run every week just to make sure the CI environment still works.
+    - cron: '0 0 * * 0'
+
+jobs:
+  build-ubuntu:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Apt Dependencies
+      run: |
+        sudo apt update
+        sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool nunit-console yelp-tools
+    - name: Build
+      run: |
+        ./autogen.sh
+        make
+    - name: Test
+      run: make test && make check
