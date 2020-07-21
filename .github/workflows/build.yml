@@ -21,7 +21,6 @@ jobs:
         sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool libnunit-cil-dev nunit-console yelp-tools
     - name: Build
       run: |
-        cd ${{runner.workspace}}
         ./autogen.sh
         make
         make test
@@ -31,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "pinta-1.7.ubuntu1804.zip"
-        path: ${{runner.workspace}}/pinta-1.7.zip
+        path: pinta-1.7.zip
