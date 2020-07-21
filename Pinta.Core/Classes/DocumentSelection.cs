@@ -45,11 +45,13 @@ namespace Pinta.Core
 		private bool _visible = true;
 		public bool Visible
 		{
-			get => _visible;
+			get { return _visible; }
 			set
 			{
 				_visible = value;
 
+				// TODO - these menu items should be updated by a listener
+				// to the SelectionModified event.
 				PintaCore.Actions.Edit.Deselect.Sensitive = _visible;
 				PintaCore.Actions.Edit.EraseSelection.Sensitive = _visible;
 				PintaCore.Actions.Edit.FillSelection.Sensitive = _visible;
