@@ -21,12 +21,12 @@ jobs:
         sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool libnunit-cil-dev nunit-console yelp-tools
     - name: Build
       run: |
+        cd ${{runner.workspace}}
         ./autogen.sh
         make
-    - name: Test
-      run: make test && make check
-    - name: Package
-      run: make releasezip
+        make test
+        make check
+        make releasezip
     - name: Upload Package
       uses: actions/upload-artifact@v2
       with:
