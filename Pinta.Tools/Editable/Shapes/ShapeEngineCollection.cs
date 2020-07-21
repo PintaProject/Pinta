@@ -164,7 +164,7 @@ namespace Pinta.Tools
             AntiAliasing = src.AntiAliasing;
             Closed = src.Closed;
             OutlineColor = src.OutlineColor.Clone ();
-            FillColor = src.OutlineColor.Clone ();
+            FillColor = src.FillColor.Clone ();
             BrushWidth = src.BrushWidth;
 
 			// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.

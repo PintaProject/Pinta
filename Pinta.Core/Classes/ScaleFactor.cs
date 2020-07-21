@@ -362,11 +362,11 @@ namespace Pinta.Core
 		public ScaleFactor (int numerator, int denominator)
 		{
 			if (denominator <= 0) {
-				throw new ArgumentOutOfRangeException ("denominator", "must be greater than 0");
+				throw new ArgumentOutOfRangeException ("denominator", "must be greater than 0(denominator = " + denominator + ")");
 			}
 
 			if (numerator < 0) {
-				throw new ArgumentOutOfRangeException ("numerator", "must be greater than 0");
+				throw new ArgumentOutOfRangeException ("numerator", "must be greater than 0(numerator = " + numerator + ")");
 			}
 
 			this.numerator = numerator;

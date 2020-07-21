@@ -42,6 +42,28 @@ namespace Pinta.Core
 		public PointD Origin;
 		public PointD End;
 
+		private bool _visible = true;
+		public bool Visible
+		{
+			get { return _visible; }
+			set
+			{
+				_visible = value;
+
+				// TODO - these menu items should be updated by a listener
+				// to the SelectionModified event.
+				PintaCore.Actions.Edit.Deselect.Sensitive = _visible;
+				PintaCore.Actions.Edit.EraseSelection.Sensitive = _visible;
+				PintaCore.Actions.Edit.FillSelection.Sensitive = _visible;
+				PintaCore.Actions.Image.CropToSelection.Sensitive = _visible;
+				PintaCore.Actions.Edit.InvertSelection.Sensitive = _visible;
+
+				// Notify any listeners.
+				if (SelectionModified != null)
+					SelectionModified.Invoke(this, EventArgs.Empty);
+			}
+		}
+
 		public Path SelectionPath
 		{
 		    get
@@ -120,7 +142,8 @@ namespace Pinta.Core
 		        SelectionPolygons = SelectionPolygons.ToList (),
 		        SelectionClipper = new Clipper (),
 		        Origin = new PointD (Origin.X, Origin.Y),
-		        End = new PointD (End.X, End.Y)
+		        End = new PointD (End.X, End.Y),
+				_visible = this._visible
 		    };
 		}
 

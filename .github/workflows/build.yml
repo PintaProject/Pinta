@@ -1,6 +1,12 @@
 name: Build
 
-on: [push, pull_request]
+on:
+  # Build on new commits or pull requests.
+  push:
+  pull_request:
+  schedule:
+    # Run every week just to make sure the CI environment still works.
+    - cron: '0 0 * * 0'
 
 jobs:
   build-ubuntu:
@@ -8,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    # TODO - upload an artifact with the build results (see master branch)
     - name: Build
       run: dotnet build Pinta.sln
     - name: Test

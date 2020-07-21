@@ -61,11 +61,6 @@ namespace Pinta.Core
 		public int CurrentLayerIndex {
 			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex; }
 		}
-
-		public bool ShowSelection {
-			get { return PintaCore.Workspace.ActiveDocument.ShowSelection; }
-			set { PintaCore.Workspace.ActiveDocument.ShowSelection = value; }
-		}
 		
 		public bool ShowSelectionLayer {
 			get { return PintaCore.Workspace.ActiveDocument.ShowSelectionLayer; }

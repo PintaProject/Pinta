@@ -91,7 +91,8 @@ namespace Pinta.Core
 
 			// Handle selection path.
 			PintaCore.Tools.Commit ();
-			selection_path = (PintaCore.Layers.ShowSelection) ? PintaCore.Workspace.ActiveDocument.Selection.SelectionPath : null;
+			var selection = PintaCore.Workspace.ActiveDocument.Selection;
+			selection_path = (selection.Visible) ? selection.SelectionPath : null;
 			render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);	
 

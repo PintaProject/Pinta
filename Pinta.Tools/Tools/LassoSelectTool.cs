@@ -89,7 +89,7 @@ namespace Pinta.Tools
 			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
 			double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
 
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 
 			ImageSurface surf = doc.SelectionLayer.Surface;
 

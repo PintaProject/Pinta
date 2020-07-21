@@ -65,8 +65,6 @@ namespace Pinta.Core
 				if (old != null) {
 					old.Dispose ();
 				}
-
-				PintaCore.Layers.ShowSelection = true;
 			} else {
 				PintaCore.Layers.ResetSelectionPath ();
 			}

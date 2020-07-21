@@ -23,6 +23,7 @@ Pinta.Core/Managers/EffectsManager.cs
 Pinta.Core/Managers/LivePreviewManager.cs
 Pinta.Core/Managers/ToolManager.cs
 Pinta.Core/Managers/WorkspaceManager.cs
+Pinta.Core/PaletteFormats/PaletteDescriptor.cs
 Pinta.Docking/DockLibrary/DockItem.cs
 Pinta.Docking/DockLibrary/DockItemTitleTab.cs
 Pinta.Effects/Adjustments/AutoLevelEffect.cs
