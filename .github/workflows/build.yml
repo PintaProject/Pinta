@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  # Build on new commits or pull requests.
+  push:
+  pull_request:
+  schedule:
+    # Run every week just to make sure the CI environment still works.
+    - cron: '0 0 * * 0'
+
+jobs:
+  build-ubuntu:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Apt Dependencies
+      run: |
+        sudo apt update
+        sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool libnunit-cil-dev nunit-console yelp-tools
+    - name: Build
+      run: |
+        ./autogen.sh
+        make
+        make test
+        make check
+        make releasezip
+    - name: Upload Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: "pinta-1.7.ubuntu1804.zip"
+        path: pinta-1.7.zip
