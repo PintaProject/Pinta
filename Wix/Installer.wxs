@@ -16,14 +16,14 @@
     <Variable Name="LaunchTarget" Value="[InstallFolder]\Pinta.exe"/>
 
     <Chain>
-      <!-- Ensure .Net 4.0 is installed. -->
-      <PackageGroupRef Id="NetFx40ClientRedist"/>
+      <!-- Ensure .Net 4.5 is installed. -->
+      <PackageGroupRef Id="NetFx452Redist"/>
       <!-- Ensure GTK# is installed, or download it if necessary. -->
       <!-- Wix needs a local copy of the msi when building, but setting Compressed to No ensures that it's not bundled with the installer. -->
       <!-- Set Permanent=Yes to prevent GTK# from being uninstalled when Pinta is uninstalled. -->
-      <MsiPackage Id="GtkSharpSetup" SourceFile="gtk-sharp-2.12.22.msi" Compressed="no" ForcePerMachine="yes" Visible="yes" Vital="yes" Cache="yes"
-                  InstallCondition="NOT(GTKSHARPVERSION &gt;= &quot;2.12.22&quot;)" Permanent="yes" DisplayInternalUI="yes"
-                  DownloadUrl="http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.22.msi" />
+      <MsiPackage Id="GtkSharpSetup" SourceFile="gtk-sharp-2.12.45.msi" Compressed="no" ForcePerMachine="yes" Visible="yes" Vital="yes" Cache="yes"
+                  InstallCondition="NOT(GTKSHARPVERSION &gt;= &quot;2.12.45&quot;)" Permanent="yes" DisplayInternalUI="yes"
+                  DownloadUrl="https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi" />
       <!-- Install the Pinta msi. -->
       <MsiPackage SourceFile="$(var.PintaWix.TargetPath)" Id="PintaSetup" Vital="yes" ForcePerMachine="yes">
         <MsiProperty Name="INSTALLLOCATION" Value="[InstallFolder]" />
