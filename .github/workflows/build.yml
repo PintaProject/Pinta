@@ -36,10 +36,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: |
-        brew update
-        brew install mono
     - name: Build
       run: |
         msbuild Pinta.sln
