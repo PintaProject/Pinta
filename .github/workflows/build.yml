@@ -39,6 +39,10 @@ jobs:
     - uses: actions/checkout@v2
     - uses: microsoft/setup-msbuild@v1.0.0
 
+    - name: Install Dependencies
+      run: |
+        choco --yes install gtksharp
+
     - name: Build
       run: |
         msbuild Pinta.sln
