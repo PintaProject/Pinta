@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-07-19 10:26+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2018-05-20 16:52+0000\n"
+"Last-Translator: Toni Estevez <toni.estevez@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -33,6 +33,15 @@ msgstr "Editor d’imatges"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Editor d’imatges Pinta"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -541,15 +550,15 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Llum forta"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Llum suau"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Color"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -1089,7 +1098,7 @@ msgstr "Desenfoca"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "Fixa"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
@@ -1264,11 +1273,11 @@ msgstr "Augmenta la mida de la fletxa"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr ""
+msgstr "Disminueix el desplaçament de l'angle"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr ""
+msgstr "Augmenta el desplaçament de l'angle"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
@@ -1276,11 +1285,11 @@ msgstr "Longitud"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr ""
+msgstr "Disminueix el desplaçament de la longitud"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr ""
+msgstr "Augmenta el desplaçament de la longitud"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1344,15 +1353,15 @@ msgstr "El·lipse"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "Sèrie de línies arrodonides"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "Tipus de forma canviada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
-msgstr ""
+msgstr "Punt suprimit"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
@@ -1378,23 +1387,23 @@ msgstr "Finalitzat"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "Forma de corba oberta"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
 msgid "Closed Curve Shape"
-msgstr ""
+msgstr "Forma de corba tancada"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
-msgstr ""
+msgstr "Forma de línia arrodonida"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "Disminueix el radi de la cantonada de la forma"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "Augmenta el radi de la cantonada de la forma"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1498,6 +1507,27 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Feu clic amb el botó esquerre per dibuixar una forma amb el color primari.\n"
+"Feu clic amb el botó esquerre sobre una forma per afegir un punt de "
+"control.\n"
+"Feu clic amb el botó esquerre sobre un punt de control i arrossegueu-lo per "
+"moure'l.\n"
+"Feu clic dret sobre un punt de control i arrossegueu-lo per canviar-ne la "
+"tensió.\n"
+"Mantingueu premuda la tecla Maj per girar.\n"
+"Utilitzeu les tecles del cursor per moure el punt de control seleccionat.\n"
+"Premeu Ctrl + fletxa esquerra/dreta per seleccionar els punts de control per "
+"ordre.\n"
+"Premeu Supr per suprimir el punt de control seleccionat.\n"
+"Premeu la barra espaiadora per afegir un punt de control nou a la posició "
+"del punter.\n"
+"Mantingueu premuda la tecla Ctrl mentre premeu la barra espaiadora per crear "
+"un punt de control en aquesta posició exacta.\n"
+"Mantingueu premuda la tecla Ctrl mentre feu clic amb el botó esquerre en un "
+"punt de control per crear una forma nova en aquesta posició exacta.\n"
+"Mantingueu premuda la tecla Ctrl mentre feu clic a l'exterior dels límits de "
+"la imatge per crear una forma nova a partir de la vora.\n"
+"Premeu Intro per finalitzar la forma."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
@@ -1506,7 +1536,7 @@ msgstr "Tipus"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Suavitza"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1880,6 +1910,7 @@ msgstr ""
 "  Joan https://launchpad.net/~jcompte\n"
 "  Maria Plana https://launchpad.net/~tfs-msimangu\n"
 "  Pau Iranzo https://launchpad.net/~paugnu\n"
+"  Toni Estevez https://launchpad.net/~toni-estevez\n"
 "  lespedretes https://launchpad.net/~lespedretes-b\n"
 "  thor9216 https://launchpad.net/~thor9216\n"
 "  tot3lmon https://launchpad.net/~tot3lmon"
@@ -1979,7 +2010,7 @@ msgstr "Personalitzat"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Valors predefinits:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
@@ -2028,7 +2059,7 @@ msgstr "Color del fons"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Vista prèvia"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"

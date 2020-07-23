@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2016-03-11 15:23+0000\n"
-"Last-Translator: Robson Cordeiro <robson.cordeiro777@hotmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2020-07-22 14:16+0000\n"
+"Last-Translator: rwsilva32 <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
@@ -39,6 +39,20 @@ msgstr "Editor de imagem"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Editor de imagem Pinta"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+"Pinta é um aplicativo de edição, desenho e pintura de imagens com uma "
+"interface simples e poderosa. Possui uma ampla variedade de ferramentas de "
+"desenho, incluindo: mão livre, retângulos, círculos e linhas. Ele também tem "
+"mais de 35 efeitos para aplicar às suas imagens e também pode criar camadas "
+"ilimitadas para ajudar a organizar sua criatividade."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -548,15 +562,15 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Luz dura"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Luz Suave"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -1526,7 +1540,7 @@ msgstr "Tipo"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Suavizar"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1912,11 +1926,12 @@ msgstr ""
 "  Neliton Pereira Jr. https://launchpad.net/~nelitonpjr\n"
 "  Paulo N. Júnior https://launchpad.net/~naves-junior\n"
 "  Rafael Neri https://launchpad.net/~rafepel\n"
-"  Robson Cordeiro https://launchpad.net/~robson-cordeiro777\n"
+"  Robson Cassiano https://launchpad.net/~randintn\n"
 "  Rockworld https://launchpad.net/~rockrock2222222\n"
 "  Victor Westmann https://launchpad.net/~victor.westmann\n"
 "  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves\n"
-"  lucca https://launchpad.net/~lbpprado"
+"  lucca https://launchpad.net/~lbpprado\n"
+"  rwsilva32 https://launchpad.net/~rwsilva32"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
@@ -2062,7 +2077,7 @@ msgstr "Cor de Fundo"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Pré-Visualizar"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"

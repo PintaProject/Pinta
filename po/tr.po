@@ -7,32 +7,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2014-05-25 05:29+0000\n"
-"Last-Translator: Hasan Yılmaz <iletisim@hasanyilmaz.net>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2020-05-31 19:46+0000\n"
+"Last-Translator: Butterfly <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr "Görüntüleri kolayca oluşturun ve düzenleyin"
+msgstr "Resimleri kolayca oluşturun ve düzenleyin"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "Resim Düzenleyici"
+msgstr "Görüntü Düzenleyici"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Resim Düzenleyici"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+"Pinta, basit ama güçlü bir arayüze sahip bir resim düzenleme, çizim ve "
+"boyama uygulamasıdır. Pinta, serbest çizim, dikdörtgenler, daireler ve "
+"çizgiler dahil olmak üzere çok çeşitli çizim araçlarına sahiptir. Ayrıca, "
+"resimlerinize uygulanacak 35'in üzerinde efekt ve üretkenliğinizi "
+"düzenlemenize yardımcı olacak sınırsız katmanlar oluşturma yeteneğine de "
+"sahiptir."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -204,7 +219,7 @@ msgstr "Aç"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr "içindekiler"
+msgstr "İçerik"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
@@ -292,7 +307,7 @@ msgstr "Katmanı Birleştir"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr "Dosyadan Aktar"
+msgstr "Dosyadan Aktar..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
@@ -347,7 +362,7 @@ msgstr "Araç Çubuğu"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr "Resim Sekmesi"
+msgstr "Görüntü Sekmesi"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
@@ -389,7 +404,7 @@ msgstr "Cetvel Birimi"
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -478,23 +493,23 @@ msgstr "Değiştir"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr "Birlik (+) (Ctrl + Sol Tık)"
+msgstr "Birleşim (+) (Ctrl + Sol Tıklama)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
-msgstr "Hariç Tut (-) (Sağ Tık)"
+msgstr "Hariç Tutma (-) (Sağ Tıklama)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Xor (Ctrl + Right Click)"
-msgstr "Xor (Ctrl + Sağ Tık)"
+msgstr "Veya (Ctrl + Sağ Tıklama)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
-msgstr "Kesiştir (Shift + Sol Tık)"
+msgstr "Kesiştir (Shift + Sol Tıklama)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr " Seçim Modu: "
+msgstr " Seçim Kipi: "
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
@@ -540,11 +555,11 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Şiddetli Işık"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr "Sert ışık"
+msgstr "Yumuşak Işık"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
@@ -558,7 +573,7 @@ msgstr "Parlaklık"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr "Renk"
+msgstr "Ton"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
@@ -608,7 +623,7 @@ msgstr "Render Efekti"
 #: ../Pinta.Core/Managers/ToolManager.cs:234
 #: ../Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr "Hiçbir araç seçilmedi."
+msgstr "Araç seçilmedi."
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
@@ -626,7 +641,7 @@ msgstr "Yeni Görüntü"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr "Desteklenmeyen dosya formatı"
+msgstr "Desteklenmeyen dosya biçimi"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
@@ -634,7 +649,7 @@ msgstr "Görüntüyü Aç"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:204
 msgid "Permission denied"
-msgstr "İzin reddedildi"
+msgstr "Erişim engellendi"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 #, csharp-format
@@ -656,7 +671,7 @@ msgstr "Rıhtım"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr ""
+msgstr "Ayır"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
@@ -697,7 +712,7 @@ msgstr "Ton / Doygunluk"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr "Hafiflik"
+msgstr "Aydınlık"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
@@ -1026,7 +1041,7 @@ msgstr "Tolerans"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "Doygunluk Yüzdesi"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
@@ -1088,11 +1103,11 @@ msgstr "Odağı Kaldır"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr "Kıskaç"
+msgstr "Kelepçe"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr "Sargı"
+msgstr "Sar"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
@@ -1113,7 +1128,7 @@ msgstr "Şeffaf"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr "Orijinal"
+msgstr "Özgün"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
@@ -1194,7 +1209,7 @@ msgstr "Birincil ve ikincil rengi sıfırlamak için tıklayın."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
 msgid "Click to select primary color."
-msgstr "Ana rengi seçmek için tıklayın."
+msgstr "Birincil renk seçmek için tıklayın."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
 msgid "Click to select secondary color."
@@ -1204,7 +1219,9 @@ msgstr "İkincil renk seçmek için tıklayın."
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
-msgstr "Ana rengi ayarlamak için sol tıklayın. İkincil rengi ayarlamak için sağ tıklayın. Palet rengini seçmek için orta tıklayın."
+msgstr ""
+"Birincil rengi ayarlamak için sol tıklayın. İkincil rengi ayarlamak için sağ "
+"tıklayın. Palet rengini seçmek için orta tıklayın."
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
 msgid "Random Noise"
@@ -1240,7 +1257,7 @@ msgstr "Kareler"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr "Tire"
+msgstr "Seçke"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
@@ -1252,19 +1269,19 @@ msgstr "Boyut"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr "Ok boyutunu küçült"
+msgstr "Ok boyutunu azalt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr "Ok boyutunu büyült"
+msgstr "Ok boyutunu artır"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr "Açı ofsetini azalt"
+msgstr "Açı yerleşimini azalt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr "Açı ofsetini artır"
+msgstr "Açı yerleşimini artır"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
@@ -1272,11 +1289,11 @@ msgstr "Uzunluk"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr "Uzunluk ofsetini azalt"
+msgstr "Uzunluk yerleşimini azalt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr "Uzunluk ofsetini artır"
+msgstr "Uzunluk yerleşimini artır"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1294,7 +1311,7 @@ msgstr "Fırça boyutunu azalt"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "Fırça boyutunu artır"
+msgstr "Fırça boyutunu arttır"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
@@ -1326,11 +1343,11 @@ msgstr "Şekil Türü"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
-msgstr "Açık Çizgi/Eğri Serisi"
+msgstr "Açık Çizgi/Eğri Serileri"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr "Kapalı Çizgi/Eğri Serisi"
+msgstr "Kapalı Çizgi/Eğri Serileri"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
@@ -1340,7 +1357,7 @@ msgstr "Elips"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr "Yuvarlak Hat Serisi"
+msgstr "Yuvarlanmış Çizgi Serileri"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
@@ -1365,12 +1382,12 @@ msgstr "Eklendi"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr "Modifiye Edildi"
+msgstr "Değiştirildi"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
-msgstr "Kesinleşmiş"
+msgstr "Sonlandırıldı"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
@@ -1382,7 +1399,7 @@ msgstr "Kapalı Eğri Şekli"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
-msgstr "Yuvarlak Çizgi Şekli"
+msgstr "Yuvarlatılmış Çizgi Şekli"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
@@ -1470,6 +1487,8 @@ msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Oval bir seçim çizmek için tıklayıp sürükleyin. Bir daireyle sınırlamak için "
+"Shift tuşuna basılı tutun."
 
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:46
@@ -1493,6 +1512,23 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Birincil renkle bir şekil çizmek için sol tıklayın.\n"
+"Bir kontrol noktası eklemek için bir şekle sol tıklayın.\n"
+"Bir kontrol noktasına sol tıklayın ve taşımak için sürükleyin.\n"
+"Bir kontrol noktasına sağ tıklayın ve gerginliğini değiştirmek için "
+"sürükleyin.\n"
+"Açılara yaslamak için Shift tuşuna basılı tutun.\n"
+"Seçilen kontrol noktasını taşımak için ok tuşlarını kullanın.\n"
+"Kontrol noktalarını sırayla seçmek için Ctrl + sol/sağ ok tuşlarına basın.\n"
+"Seçilen kontrol noktasını silmek için Delete tuşuna basın.\n"
+"Fare konumuna yeni bir kontrol noktası eklemek için Boşluk tuşuna basın.\n"
+"Kontrol noktasını aynı konumda oluşturmak için Space tuşuna basarken Ctrl "
+"tuşuna basılı tutun.\n"
+"Aynı konumda yeni bir şekil oluşturmak için bir kontrol noktasını sol "
+"tıklatırken Ctrl tuşuna basılı tutun.\n"
+"Kenardan başlayarak yeni bir şekil oluşturmak için görüntü sınırlarının "
+"dışını tıklatırken Ctrl tuşuna basılı tutun.\n"
+"Şekli sonlandırmak için Enter tuşuna basın."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
@@ -1528,7 +1564,7 @@ msgstr "Genel"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
 msgid "Freeform Shape"
-msgstr "Serbest Biçim"
+msgstr "Serbest Biçimli Şekil"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
@@ -1577,7 +1613,7 @@ msgstr "Kement Seçim"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Seçim alanının anahatlarını çizmek için tıklayın ve sürükleyin."
+msgstr "Bir seçim alanının anahattını çizmek için tıklayıp sürükleyin."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
@@ -1595,7 +1631,9 @@ msgstr "Benzer renkli bir bölge seçmek için tıklayın."
 msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
-msgstr "Seçilen içeriği taşımak için seçimi sol tıklayın ve sürükleyin. Seçilen içeriği döndürmek için seçimi sağ tıklayın ve sürükleyin."
+msgstr ""
+"Seçilen içeriği taşımak için seçime sol tıklayıp sürükleyin. Seçili içeriği "
+"döndürmek için seçime sağ tıklayıp sürükleyin."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1605,7 +1643,9 @@ msgstr "Seçimi Taşı"
 msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
-msgstr "Seçim anahattını taşımak için seçimi sol tıklayın ve sürükleyin. Seçim anahattını döndürmek için seçimi sağ tıklayın ve sürükleyin."
+msgstr ""
+"Seçim anahattını taşımak için seçime sol tıklayıp sürükleyin. Seçim "
+"anahattını döndürmek için seçime sağ tıklayıp sürükleyin."
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
@@ -1636,7 +1676,9 @@ msgstr "Görüntüyü hareket ettirmek için tıklayın ve sürükleyin."
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
-msgstr "Ana renkle serbest biçimli bir piksel genişliğinde çizgiler çizmek için sol tıklayın. İkincil rengi kullanmak için sağ tıklayın."
+msgstr ""
+"Birincil renk ile serbest biçimli tek piksel genişliğinde çizgi çizmek için "
+"sol tıklayın. İkincil rengi kullanmak için sağ tıklayın."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid "Recolor"
@@ -1646,7 +1688,9 @@ msgstr "Tekrar renklendir"
 msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
-msgstr "İkincil rengi birincil renkle değiştirmek için sol tıklayın. Tersine çevirmek için sağ tıklayın."
+msgstr ""
+"İkincil rengi birincil renk ile yer değiştirmek için sol tıklayın. Tersine "
+"çevirmek için sağ tıklayın."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
@@ -1656,7 +1700,9 @@ msgstr "Dikdörtgen Seçim"
 msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
-msgstr "Dikdörtgen bir seçim çizmek için tıklayın ve sürükleyin. Bir kareyle sınırlamak için Shift tuşunu basılı tutun."
+msgstr ""
+"Dikdörtgen bir seçim çizmek için tıklayıp sürükleyin. Bir kareye sınırlamak "
+"için Shift tuşunu basılı tutun."
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
@@ -1748,7 +1794,7 @@ msgstr "Paleti Yeniden Boyutlandır"
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
-msgstr "Yeni palet büyüklüğü"
+msgstr "Yeni palet büyüklüğü:"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
@@ -1763,7 +1809,7 @@ msgstr "Kaydetmezseniz tüm değişiklikler kalıcı olarak kaybolacak."
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr "Kaydetmeden kapat"
+msgstr "_Kaydetmeden kapat"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
@@ -1838,7 +1884,7 @@ msgstr "Tabakayı Döndür / Yakınlaştır"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr "Pinta Topluluğu Eklentileri - Platforma Özgü"
+msgstr "Pinta Topluluk Eklentileri - Platform Özel"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
@@ -1850,20 +1896,21 @@ msgstr "Bu sürüme katkıda bulunanlar:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:138
 msgid "Previous contributors:"
-msgstr "Önceki katılımcılar:"
+msgstr "Önceki katkıda bulunanlar:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "translator-credits"
-msgstr "çevirmen-kredisi"
+msgstr ""
 "Launchpad Contributions:\n"
 "  Ahmet Vurgun https://launchpad.net/~ahmetvurgun\n"
+"  Butterfly https://launchpad.net/~kelebek333\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Hasan Yılmaz https://launchpad.net/~hasanyilmaz\n"
-"  Cihan Alkan https://launchpad.net/~cihanalkan\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Mehmet Gülmen https://launchpad.net/~memetgulmen\n"
 "  Okan Akıncı https://launchpad.net/~okanakinci86\n"
 "  Omer GOK https://launchpad.net/~mechulkalan\n"
+"  Sabri Ünal https://launchpad.net/~libreajans\n"
 "  Yalçın Can https://launchpad.net/~yalcin.can\n"
 "  Yusuf ÜLKÜ https://launchpad.net/~yusufulku\n"
 "  rosencreuz https://launchpad.net/~rosencreuz"
@@ -1882,7 +1929,7 @@ msgstr "Bazı simgeler şuradan alınmıştır:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
-msgstr "Mono tarafından desteklenmektedir:"
+msgstr "Mono tarafından güçlendirilmiştir:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
@@ -1903,7 +1950,7 @@ msgstr "Lisans"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
-msgstr "MIT X11 Lisansı altında dağıtılmaktadır"
+msgstr "MIT X11 Lisansı altında dağıtılmaktadır."
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
@@ -1921,7 +1968,7 @@ msgstr "Ayrıntılar"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr "Hata Bildir..."
+msgstr "Hata Raporla..."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
@@ -1963,7 +2010,7 @@ msgstr "Özel"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr "Ön Ayar:"
+msgstr "Öndeğer:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
@@ -1988,15 +2035,15 @@ msgstr "Yükseklik:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr "Oryantasyon:"
+msgstr "Yönelim:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr "Portre"
+msgstr "Dikey"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr "Manzara"
+msgstr "Yatay"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
@@ -2047,7 +2094,7 @@ msgstr "Bu mesajı göster ve çık."
 
 #: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr "Uygulama sürümünü görüntüleyin."
+msgstr "Uygulama sürümünü göster."
 
 #: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
@@ -2055,7 +2102,7 @@ msgstr "oluşturulma için için kullanılan işlem parçacıkları"
 
 #: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr "Kullanım: pinta [dosya]"
+msgstr "Kullanım: pinta [dosyalar]"
 
 #: ../Pinta/Main.cs:109
 msgid "Options: "
@@ -2091,7 +2138,7 @@ msgstr "_Efektler"
 
 #: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
-msgstr "Eklentiler"
+msgstr "_Eklentiler"
 
 #: ../Pinta/MainWindow.cs:321
 msgid "_Window"
@@ -2235,6 +2282,7 @@ msgstr "Depoları Yönet..."
 msgid "{0} update available"
 msgid_plural "{0} updates available"
 msgstr[0] "{0} güncelleme var"
+msgstr[1] "{0} güncelleme var"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"

@@ -1,38 +1,39 @@
-# Korean translation for pinta
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Kabyle translation for pinta
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-09-10 15:49+0200\n"
-"PO-Revision-Date: 2018-08-29 14:56+0000\n"
-"Last-Translator: Jongwon Kim <nanpa777@hanmail.net>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2017-02-16 01:51+0000\n"
+"Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
+"Language-Team: Kabyle <kab@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
 "X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
+"Language: kab\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr "쉽게 이미지를 생성하고 편집하세요."
+msgstr "Snulfu-d u ẓreg tugniwin s sshala"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "이미지 편집기"
+msgstr "Amaẓrag n tugna"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr ""
+msgstr "Amaẓrag n tugna n Pinta"
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -45,107 +46,107 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr "추가 기능 관리자"
+msgstr "Asefrak n isiɣzifen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
-msgstr "실행취소"
+msgstr "Semmet"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "재실행"
+msgstr "Err-d"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
-msgstr "오려두기"
+msgstr "Gzem"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
-msgstr "복사"
+msgstr "Nɣel"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Tunɣilt tettwazdi"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 #: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr "붙여넣기"
+msgstr "Senṭeḍ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Classes/Document.cs:790
 msgid "Paste Into New Layer"
-msgstr "새 레이어로 붙여넣기"
+msgstr "Senteḍ deg ukalku amaynut"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr "새 이미지로 붙여넣기"
+msgstr "Senteḍ di tugna tamaynutt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
-msgstr "선택 영역 지우기"
+msgstr "Kkes tafrayt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr "선택 영역 채우기"
+msgstr "Ačar tafrayt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Invert Selection"
-msgstr "선택 영역 반전"
+msgstr "Tti tafrayt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr "전체 선택"
+msgstr "Fren kulec"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr "전체 선택해제"
+msgstr "Kkes tafrayt merra"
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
-msgstr "열기"
+msgstr "Ldi..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:82
 #: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
-msgstr "다른 이름으로 저장..."
+msgstr "Sekles ddaw..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr "기본값으로 재설정"
+msgstr "Ales awennez ɣer lexṣas"
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr "색상 수 설정"
+msgstr "Sbadu amḍan n yiniten"
 
 #: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
 #: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
-msgstr "팔렛트"
+msgstr "Tapaliḍt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr "선택해제"
+msgstr "Kkes tafrayt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:323
 msgid "Open Palette File"
-msgstr "팔렛트 파일 열기"
+msgstr "Ldi afaylu n tapaliḍt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:330
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "팔렛트 파일(*.txt, *.gpl)"
+msgstr "Tapaliḍt n ifuyla (*.txt, *.gpl)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:334
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr "모든 파일"
+msgstr "Akkw ifuyla"
 
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #, csharp-format
@@ -153,456 +154,456 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"{0} 팔렛트 파일을 열 수 없습니다.\n"
-"유효한 GIMP 나 Paint.NET 팔렛트인지 확인해 주세요."
+"Ulamek tulya n ufaylu n tpaliḍt: {0}.\n"
+"Ttxil-k selken belli tebɣiḍ ad teldiḍ tapaliḍt tameɣtut n GIMP neɣ Paint.NET."
 
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
-msgstr "오류"
+msgstr "Anezri"
 
 #: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Save Palette File"
-msgstr "팔렛트 파일 저장"
+msgstr "Sekles afaylu n tpaliḍt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Paint.NET palette (*.txt)"
-msgstr "Paint.NET 팔렛트(*.txt)"
+msgstr "Tapaliḍti Paint.NET (*.txt)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "GIMP palette (*.gpl)"
-msgstr "GIMP 팔렛트 (*.gpl)"
+msgstr "Tapaliḍt GIMP (*.gpl)"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "새로 만듦..."
+msgstr "Amaynut..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "새로운 스크린샷..."
+msgstr "Tuṭṭfa tamaynutt n ugdil..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "최근 파일 열기"
+msgstr "Yeldi melmi kan"
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
 msgid "Close"
-msgstr "닫기"
+msgstr "Mdel"
 
 #: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "저장"
+msgstr "Sekles"
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "출력"
+msgstr "Siggez"
 
 #: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "종료"
+msgstr "Ffeɣ"
 
 #: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "새 파일"
+msgstr "Amaynut"
 
 #: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "열기"
+msgstr "Ldi"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr "내용"
+msgstr "Igburen"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr "Pinta 웹사이트"
+msgstr "Asmel n web n Pinta"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
-msgstr "버그 정보 파일"
+msgstr "Signaler un bogue"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
-msgstr "현재 어플리케이션 번역하기"
+msgstr "Suqqel asnas-agi"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
 msgid "About"
-msgstr "소개"
+msgstr "Awal ɣef"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
 #: ../Pinta.Core/Actions/ImageActions.cs:283
 msgid "Crop to Selection"
-msgstr "선택영역 잘라내기"
+msgstr "Nǧer tafrayt"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
 msgid "Auto Crop"
-msgstr "자동으로 잘라내기"
+msgstr "Anǧar awurman"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Image..."
-msgstr "이미지 크기조정..."
+msgstr "Beddel tiddi n tugna..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
-msgstr "캔버스 크기조정..."
+msgstr "Beddel tiddi n temnaḍt n wunuɣ..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
-msgstr "수평 뒤집기"
+msgstr "Tuttya taglawant"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:71
 msgid "Flip Vertical"
-msgstr "수직 뒤집기"
+msgstr "Tuttya taratakt"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr "시계방향으로  90° 회전"
+msgstr "Tuzzya tasragant 90°"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "반시계 방향으로   90° 회전"
+msgstr "Tuzzya mgal asrag 90°"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr "180° 회전"
+msgstr "Tuzzya s 180°"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:69
 #: ../Pinta.Core/Actions/ImageActions.cs:138
 msgid "Flatten"
-msgstr "편평하게"
+msgstr "Lebbeḍ"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
 #: ../Pinta.Core/Classes/Document.cs:852
 msgid "Add New Layer"
-msgstr "신규 레이어 추가"
+msgstr "Rnu akalku amaynut"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
 msgid "Delete Layer"
-msgstr "레이어 삭제"
+msgstr "Kkes akalku"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "레이어 복제"
+msgstr "Sisleg akalku"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr "레이어 합치기"
+msgstr "Smezdi aked ukalku n wadda"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr "파일에서 가져오기..."
+msgstr "Kter seg ufaylu..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr "레이어 회전/줌..."
+msgstr "Tuzzya / asemɣer n ukalku..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
-msgstr "레이어 위로 보내기"
+msgstr "Smutti akalku d asawen"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
 #: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
-msgstr "레이어 아래로 보내기"
+msgstr "Smutti akalku d aksar"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr "레이어 속성.."
+msgstr "Iraten n ukalku"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "이미지 파일 열기"
+msgstr "Ldi afaylu n tugna"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr "파일에서 가져오기"
+msgstr "Kter seg ufaylu"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom In"
-msgstr "확대"
+msgstr "Ssemɣer"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom Out"
-msgstr "축소"
+msgstr "Ssemẓi"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
-msgstr "최적 맞춤"
+msgstr "Aswati amenyaf"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
-msgstr "선택영역 확대"
+msgstr "Ssezg tiddi ɣer tefrayt"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
-msgstr ""
+msgstr "Tiddi tamagnutt"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
-msgstr "도구 모음"
+msgstr "Tafeggagt n ifecka"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr "이미지 탭"
+msgstr "Iccaren n tugna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
-msgstr "픽셀 안내선"
+msgstr "Aferrug n ipiksilen"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Rulers"
-msgstr "눈금자"
+msgstr "Taɣdiwin"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Pixels"
-msgstr "픽셀(Pixel)"
+msgstr "Ipiksilen"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
 msgid "Inches"
-msgstr "인치"
+msgstr "Pouces"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:88
 msgid "Centimeters"
-msgstr "센티미터"
+msgstr "Isantimitren"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
-msgstr "전체화면"
+msgstr "Agdil ačuran"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
 #: ../Pinta.Core/Actions/ViewActions.cs:276
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
-msgstr "창"
+msgstr "Tazewwut"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
-msgstr "눈금 단위"
+msgstr "Tiggtin n teɣda"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr "{0}%"
+msgstr "{0} %"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "모두 저장"
+msgstr "Sekles kulec"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "모두 닫기"
+msgstr "Mdel kulec"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:244
 msgid "Tool"
-msgstr "도구"
+msgstr "Afecku"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
-msgstr "단축키"
+msgstr "Inegzumen n unasiw"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
-msgstr "평균 혼합"
+msgstr "Tasuddest  tamagnut"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:429
 msgid "Overwrite"
-msgstr "덮어쓰기"
+msgstr "Sefsex"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:443
 msgid "Antialiasing On"
-msgstr "안티알리아싱 설정"
+msgstr "Amzay yermed"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:444
 msgid "Antialiasing Off"
-msgstr "안티알리아싱 해제"
+msgstr "Amzay yexsi"
 
 #: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
-msgstr "레이어"
+msgstr "Akalku"
 
 #: ../Pinta.Core/Classes/Document.cs:392
 msgid "copy"
-msgstr "복사"
+msgstr "Nɣel"
 
 #: ../Pinta.Core/Classes/Document.cs:668
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "캔버스 크기 변경"
+msgstr "Beddel tiddi n temnaḍt n wunuɣ"
 
 #: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr "선택 영역 이동"
+msgstr "Smutti ipixilen yettwafernen"
 
 #: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
-msgstr "캔버스보다 큰 이미지"
+msgstr "Tugna tugar taɣzut n wunuɣ"
 
 #: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
-msgstr "붙여넣기 이미지가 캔버스 사이즈보다 큽니다. 어떻게 하시겠습니까?"
+msgstr "Tugna tettwasenteḍ yerna tugar taɣzut n wunuɣ. Acu tebɣiḍ ad tgeḍ ?"
 
 #: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
-msgstr "캔버스 늘리기"
+msgstr "Sihriw tamnaḍt n wunuɣ"
 
 #: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
-msgstr "캔버스 크기를 변경하지 않음."
+msgstr "Ur ttbeddil ara tiddi n temnaḍt n wunuɣ"
 
 #: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
-msgstr "이미지를 붙여넣을 수 없음"
+msgstr "Tugna ulamek ara tettwasenteḍ"
 
 #: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
-msgstr "클립보드에 이미지가 없습니다."
+msgstr "Le presse-papier ne contient pas d'image"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
-msgstr ""
+msgstr "Semselsi"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr "더하기(+) (Ctrl + 왼쪽 클릭)"
+msgstr "Union (+) (Ctrl + Clic gauche)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
-msgstr "빼기(-) (오른쪽 클릭)"
+msgstr "Exclusion (-) (Clic droit)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Xor (Ctrl + Right Click)"
-msgstr "반전 (Ctrl + 오른쪽 클릭)"
+msgstr "Xor (Ctrl + Clic droit)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
-msgstr "교차 (Shift + 왼쪽 클릭)"
+msgstr "Intersection (Shift + Clic gauche)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr " 선택 모드 "
+msgstr " Askar n tefrayt : "
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
 #: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
-msgstr "보통"
+msgstr "Amagnu"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
-msgstr "곱하기"
+msgstr "Ssugget"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
-msgstr ""
+msgstr "Taneẓẓi n yini +"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
-msgstr ""
+msgstr "Taneẓẓi n yini -"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Overlay"
-msgstr ""
+msgstr "Recouvrement"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Difference"
-msgstr ""
+msgstr "Amgirred"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Lighten"
-msgstr ""
+msgstr "Ssfaw"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Darken"
-msgstr ""
+msgstr "Ssibrik"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Screen"
-msgstr ""
+msgstr "Agdil"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Xor"
-msgstr ""
+msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Tafat iǧehdden"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Tafat taxfifant"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Ini"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
 msgid "Luminosity"
-msgstr "밝기"
+msgstr "Tifawit"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr ""
+msgstr "Ini"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
-msgstr ""
+msgstr "Tawant"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr ""
+msgstr "Fakk ipixilen"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "수평 뒤집기"
+msgstr "Tuttya taglawant n tugna"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "수직 뒤집기"
+msgstr "Tuttya taratakt n tugna"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "레이어 수평 뒤집기"
+msgstr "Tuttya taglawant n ukalku"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "레이어 수직 뒤집기"
+msgstr "Tuttya taratakt n ukalku"
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:38
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "그림 크기 조정"
+msgstr "Beddel tiddi n tugna"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} 이미지 ({1})"
+msgstr "Tugna {0} ({1})"
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:63
 #: ../Pinta.Core/Managers/EffectsManager.cs:98
@@ -611,172 +612,172 @@ msgstr "..."
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:221
 msgid "Rendering Effect"
-msgstr ""
+msgstr "Asemdu n tririt"
 
 #: ../Pinta.Core/Managers/ToolManager.cs:234
 #: ../Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr "선택된 도구가 없습니다."
+msgstr "Ulac afecku yettwafernen"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "저장되지 않은 이미지 {0}"
+msgstr "Tugna ur tettwakles ara {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:157
 msgid "Background"
-msgstr "배경색"
+msgstr "Agilal"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:166
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
-msgstr "새 그림"
+msgstr "Tugna tamaynutt"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr "지원하지 않는 파일 형식"
+msgstr "Amasal n ufaylu ur yettwadhel ara"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
-msgstr "이미지 열기"
+msgstr "Ldi tugna"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:204
 msgid "Permission denied"
-msgstr "권한이 거부되었습니다"
+msgstr "Turigin ur ttwaqeblent ara"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "열 수 없는 파일 : {0}"
+msgstr "Ulamek tulya n ufaylu : {0}"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
-msgstr "숨기기"
+msgstr "Ffer"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr "최소화"
+msgstr "Ssemẓi"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
 msgid "Dock"
-msgstr "고정"
+msgstr "Dock"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr "해제"
+msgstr "Undock"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
 msgid "Auto Hide"
-msgstr "자동 숨기기"
+msgstr "Tuffra taymanit"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "자동 색보정"
+msgstr "Aswir aymani"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
 msgid "Black and White"
-msgstr "흑백변환"
+msgstr "Aberkan aked umlal"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "밝기 / 대비"
+msgstr "Tifawit/ Amyeẓli"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Brightness"
-msgstr "밝기"
+msgstr "Tifawit"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
-msgstr "대비"
+msgstr "Amyeẓli"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
 msgid "Curves"
-msgstr "커브"
+msgstr "Izligen"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "색조 / 채도"
+msgstr "Ini / Tawant"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr "명도"
+msgstr "Tefses"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
-msgstr "색 반전"
+msgstr "Tti initen"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr "레벨"
+msgstr "Iswiren"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
 msgid "Posterize"
-msgstr "포스터화"
+msgstr "Postériser"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
-msgstr "세피아"
+msgstr "Sépia"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
-msgstr "색보정"
+msgstr "Aswati n iswiren"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
-msgstr "빨강"
+msgstr "Azeggaɣ"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
 msgid "Green"
-msgstr "녹색"
+msgstr "Azegzaw"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
 msgid "Blue"
-msgstr "파랑"
+msgstr "Anili"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
 msgid "Linked"
-msgstr "연결됨"
+msgstr "Yurez"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
-msgstr "잡티 섞기"
+msgstr "Rnu asxerxec"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
 #: ../Pinta.Effects/Effects/MedianEffect.cs:36
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
 msgid "Noise"
-msgstr "노이즈"
+msgstr "Asxerxec"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:145
 #: ../Pinta.Effects/Effects/TileEffect.cs:142
 msgid "Intensity"
-msgstr ""
+msgstr "Teqseḥ"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
-msgstr "채도"
+msgstr "Tawant n yiniten"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
-msgstr ""
+msgstr "Taduli"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr "부풀리기"
+msgstr "Bomber"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
@@ -785,7 +786,7 @@ msgstr "부풀리기"
 #: ../Pinta.Effects/Effects/TileEffect.cs:33
 #: ../Pinta.Effects/Effects/TwistEffect.cs:33
 msgid "Distort"
-msgstr "뒤틀어놓기"
+msgstr "Azlag"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:101
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
@@ -793,46 +794,46 @@ msgstr "뒤틀어놓기"
 #: ../Pinta.Effects/Effects/TwistEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
 msgid "Amount"
-msgstr "총계"
+msgstr "Azal"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:104
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
 msgid "Offset"
-msgstr ""
+msgstr "Asekḥer"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr "구름"
+msgstr "Asigna"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
-msgstr "덧씌우기"
+msgstr "Eg tiririt"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
-msgstr ""
+msgstr "Taskala"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
-msgstr ""
+msgstr "Tazmert"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:231
 msgid "Seed"
-msgstr ""
+msgstr "Aɛeqqa"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "테두리만 강조"
+msgstr "Tifin n yiran"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
-msgstr "테두리 효과"
+msgstr "Seɣneb"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:143
@@ -844,15 +845,15 @@ msgstr "테두리 효과"
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
 msgid "Angle"
-msgstr ""
+msgstr "Tiɣmert"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
-msgstr "돋을새김"
+msgstr "Gaufrer"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
-msgstr "조각흔들기"
+msgstr "Aseftutes"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
@@ -861,29 +862,29 @@ msgstr "조각흔들기"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
 msgid "Blurs"
-msgstr "흐릿하게 만들기"
+msgstr "Floutage"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:111
 msgid "Fragments"
-msgstr "조각화"
+msgstr "Iceqfan"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Distance"
-msgstr "거리"
+msgstr "Ameccaq"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
 #: ../Pinta.Effects/Effects/TileEffect.cs:138
 msgid "Rotation"
-msgstr "회전"
+msgstr "Tuzzya"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
-msgstr "젖빛 유리 씌우기"
+msgstr "Verre dépoli"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr "가우스 곡선식 흐리기"
+msgstr "Flou gaussien"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -892,248 +893,253 @@ msgstr "가우스 곡선식 흐리기"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
 msgid "Radius"
-msgstr "둥글림 정도"
+msgstr "Aqar"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 msgid "Glow"
-msgstr "발광 효과"
+msgstr "Halo"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:33
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
 msgid "Photo"
-msgstr "사진"
+msgstr "Tugna"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "먹으로 밑그림 그린 효과"
+msgstr "Croquis à l'encre"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
 msgid "Artistic"
-msgstr "미술품 흉내내기"
+msgstr "Anaẓuran"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
 msgid "Ink Outline"
-msgstr "잉크 외곽선"
+msgstr "Contours à l'encre"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
 msgid "Coloring"
-msgstr ""
+msgstr "Coloration"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
-msgstr "줄리아 프랙탈"
+msgstr "Fractale de Julia"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
 msgid "Factor"
-msgstr ""
+msgstr "Amgi"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
 #: ../Pinta.Effects/Effects/WarpEffect.cs:188
 msgid "Quality"
-msgstr ""
+msgstr "Taɣara"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
 #: ../Pinta.Tools/Tools/ZoomTool.cs:48
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Zoom"
-msgstr "확대"
+msgstr "Zoom"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
 msgid "Mandelbrot Fractal"
-msgstr "만델브로트의 프랙탈"
+msgstr "Fractale de Mandelbrot"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
 msgid "Median"
-msgstr "뭉개기"
+msgstr "Anamas"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:73
 msgid "Percentile"
-msgstr ""
+msgstr "Afmiḍi"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
-msgstr "움직임 효과"
+msgstr "Flou de mouvement"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
 msgid "Centered"
-msgstr ""
+msgstr "Di telmast"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr "유화효과"
+msgstr "Taklut s zzit"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
 msgid "Brush Size"
-msgstr "붓 크기"
+msgstr "Tiddi n umfezzu"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
 msgid "Coarseness"
-msgstr ""
+msgstr "Rugosité"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
 #: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
-msgstr "윤곽선"
+msgstr "Tafrayt n yiran"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:142
 msgid "Thickness"
-msgstr ""
+msgstr "Tuzert"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
-msgstr "연필 밑그림 효과"
+msgstr "Croquis au crayon"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
 msgid "Pencil Tip Size"
-msgstr "연필심 크기"
+msgstr "Taille de la mine du crayon"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
 msgid "Color Range"
-msgstr "색 범위"
+msgstr "Tagrumma n yiniten"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr "그림낱 강조"
+msgstr "Eg ipiksilen"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:119
 msgid "Cell Size"
-msgstr "셀 크기"
+msgstr "Tiddi n texxamt"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
-msgstr "구의 꼭지점 향해 객체 반복해서 넣기"
+msgstr "Transformation Symétrique"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
 msgid "Radial Blur"
-msgstr "방사형 흐리기"
+msgstr "Flou radial"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"Utilisez une faible qualité pour les aperçus, les petites images et les "
+"angles faibles. Utilisez une grande qualité pour les visualisations finales, "
+"les grandes images, et les grands angles."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr "적목현상 제거"
+msgstr "Kkes tezweɣ n tiḍt"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
 #: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
 msgid "Tolerance"
-msgstr "오차"
+msgstr "Tolérance"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "Pourcentage de saturation"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"Conseil : Pour un meilleur résultat, utilisez d'abord les outils de "
+"sélection pour sélectionner chaque œil."
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
-msgstr "노이즈 감소"
+msgstr "Ssemẓi asxerxec"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
 msgid "Strength"
-msgstr ""
+msgstr "Force"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
-msgstr "돋을새김"
+msgstr "Relief"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:25
 msgid "Sharpen"
-msgstr "선명하게"
+msgstr "Augmenter la netteté"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Soften Portrait"
-msgstr "보드랍게 만들기"
+msgstr "Adoucir le portrait"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
 msgid "Softness"
-msgstr "부드러움"
+msgstr "Douceur"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
 msgid "Lighting"
-msgstr ""
+msgstr "Asfaw"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Warmth"
-msgstr "따뜻함"
+msgstr "Tazɣelt"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
-msgstr "매끄러운 타일에 반사효과"
+msgstr "Réflexion mosaïque"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:140
 msgid "Tile Size"
-msgstr ""
+msgstr "Tiddi n temkuẓin"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "비틀기"
+msgstr "Zleg"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:133
 msgid "Antialias"
-msgstr ""
+msgstr "Amzay"
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "초점 없애기"
+msgstr "Défocaliser"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "Cudd"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Ttel"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
-msgstr ""
+msgstr "Reflet"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
-msgstr ""
+msgstr "Azwaran"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Secondary"
-msgstr ""
+msgstr "Asnay"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 #: ../Pinta/Dialogs/NewImageDialog.cs:290
 msgid "Transparent"
-msgstr ""
+msgstr "Amseɣseɣ"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr ""
+msgstr "Amadray"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
-msgstr "중앙 오프셋"
+msgstr "Excentration"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
-msgstr "확대해 흐리기"
+msgstr "Flou d'arrière plan"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Transfer Map"
-msgstr "보정대상 기준"
+msgstr "Takarḍa n usiweḍ"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
 msgid "RGB"
-msgstr "적녹청"
+msgstr "RVB"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
 msgid "(256, 256)"
@@ -1141,336 +1147,341 @@ msgstr "(256, 256)"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
 msgid "Red  "
-msgstr "빨강  "
+msgstr "Azeggaɣ  "
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
-msgstr "파랑 "
+msgstr "Anili "
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
 msgid "Reset"
-msgstr "초기화"
+msgstr "Ales awennez"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
 msgid "Tip: Right-click to remove control points."
-msgstr "도움말: 오른쪽 딸깍으로 조정점을 지울 수 있습니다."
+msgstr "Tixidest : tussda tayfust iwakken ad tekkseḍ tinqiḍin n usenqed."
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
 msgid "Input Histogram"
-msgstr "입력 히스토그램"
+msgstr "Histogramme d'entrée"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
 msgid "Input"
-msgstr "입력"
+msgstr "Anekcum"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
 msgid "Output"
-msgstr "출력"
+msgstr "Tuffɣa"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
 msgid "Output Histogram"
-msgstr "출력 히스토그램"
+msgstr "Histogramme de sortie"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
-msgstr "자동"
+msgstr "Awurman"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
 msgid "Choose Primary Color"
-msgstr "기본색 선택"
+msgstr "Fren ini azwaran"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
 msgid "Choose Secondary Color"
-msgstr "보조색 선택"
+msgstr "Fren ini asnay"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
 msgid "Choose Palette Color"
-msgstr "색깔판 색깔 선택"
+msgstr "Fren tapaliḍt n yiniten"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
 msgid "Click to switch between primary and secondary color."
-msgstr "기본색과 보조색을 교환하려면 클릭"
+msgstr "Ssed iwakken ad tɛeddiḍ seg yini azwaran ɣer yini asnay"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Ssed iwakken ad talseḍ awennez n yini azwaran aked yini asnay"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
 msgid "Click to select primary color."
-msgstr "기본색을 선택하려면 클릭"
+msgstr "Ssed iwakken ad tferneḍ ini azwaran"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
 msgid "Click to select secondary color."
-msgstr "보조색을 선택하려면 클릭"
+msgstr "Ssed iwakken ad tferneḍ ini asnay"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"기본색을 설정하려면 왼쪽 클릭을 하세요. 보조색을 설정하려면 오른쪽 클릭을 하세요. 팔레트 색상을 선택하려면 중간 클릭을 하세요."
+"Afran n yini azwaran : tusda tazelmaḍt. Afran n yini asnay : tusda tayfust. "
+"Tapaliḍt n yiniten : tusda ɣef tanast talmast."
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
 msgid "Random Noise"
-msgstr "잡티 마구섞기"
+msgstr "Asxerxec agacuran"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
 msgid "Reseed"
-msgstr ""
+msgstr "Regénérer"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Shown"
-msgstr "보이는 레이어"
+msgstr "Akalku ibanen"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Hidden"
-msgstr "숨긴 레이어"
+msgstr "Akalku iffren"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr "동그라미"
+msgstr "Tiwinas"
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
-msgstr "모눈"
+msgstr "Taracca"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "흩뿌리기"
+msgstr "Éclaboussure"
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
-msgstr "사각형"
+msgstr "Imkuẓen"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr ""
+msgstr "Tafelwit n tedbelt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
-msgstr ""
+msgstr "Taneccabt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
 msgid "Size"
-msgstr ""
+msgstr "Tiddi"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr ""
+msgstr "Ssemẓi tiddi n teneccabt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr ""
+msgstr "Ssemɣer tiddi n teneccabt"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr ""
+msgstr "Ssemẓi adewwer n teɣmert"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr ""
+msgstr "Ssemɣer adewwer n teɣmert"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
-msgstr ""
+msgstr "Teɣzi"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr ""
+msgstr "Ssemẓi teɣzi"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr ""
+msgstr "Ssemɣer teɣzi"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
-msgstr "브러시 너비"
+msgstr "Tehri n umfezzu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "브러시 크기 축소"
+msgstr "Ssemẓi tiddi n umfezzu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "브러시 크기 확대"
+msgstr "Ssemɣer tiddi n umfezzu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
-msgstr "채움 방식"
+msgstr "Aɣanib n taččart"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
-msgstr "윤곽 모양"
+msgstr "Talɣa tuffiɣt"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
-msgstr "채움 모양"
+msgstr "Talɣa n taččart"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
-msgstr "채움과 외곽선 모양"
+msgstr "Talɣa n taččart aked talɣa tuffiɣt"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
-msgstr ""
+msgstr "Annaw n talɣa"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
-msgstr ""
+msgstr "Ineḍfuren n izirigen/izligen yeldin"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr ""
+msgstr "Ineḍfuren n izirigen/izligen imedlen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
-msgstr "타원"
+msgstr "Taglayt"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "Ineḍfuren n izirigen imdewren"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "Annaw n talɣa ibeddel"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
-msgstr ""
+msgstr "Tanqiḍt tettwakkes"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
-msgstr ""
+msgstr "Yettwakkes"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
 msgid "Point Added"
-msgstr ""
+msgstr "Tanqiḍt tettwarenna"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
-msgstr ""
+msgstr "Yettwarenna"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr ""
+msgstr "Yettwabeddel"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
-msgstr ""
+msgstr "Ifukk"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "Talɣa n uzlig yeldin"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
 msgid "Closed Curve Shape"
-msgstr ""
+msgstr "Talɣa n uzlig imedlen"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
-msgstr ""
+msgstr "Talɣa n uzlig imdewwer"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "Ssemẓi aqar n talɣa"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "Ssemɣer aqar n talɣa"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "따라그리기"
+msgstr "Asekbab n usisleg"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "Ctrl글쇠를 누르고 왼쪽 딸깍  원본이 지정되고,  왼쪽 딸깍하면 따라서 그려집니다."
+msgstr ""
+"Cliquez sur Ctrl-gauche pour définir l'origine, clic gauche pour peindre."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
-msgstr "색 고르기"
+msgstr "Aleqqaḍ n yini"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "기본색 설정은 왼쪽 클릭. 보조색 설정은 오른쪽 클릭."
+msgstr ""
+"Tussda tazelmaḍ i wefran n yini azwaran. Tusda tayfust i wefran n yini asnay."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "Alemmec"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr "단일 픽셀"
+msgstr "Apixil asuf"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr "3 x 3 영역"
+msgstr "Tamnaḍt 3 x 3"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr "5 x 5 영역"
+msgstr "Tamnaḍt 5 x 5"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr "7 x 7 영역"
+msgstr "Tamnaḍt 7 x 7"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr "9 x 9 영역"
+msgstr "Tamnaḍt 9 x 9"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr "이미지"
+msgstr "Tugna"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
-msgstr "색 고른 후"
+msgstr "Mbaɛd tafrayt"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
 msgid "Do not switch tool"
-msgstr "계속 색 고르기"
+msgstr "Ur tbeddil ara afecku"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
 msgid "Switch to previous tool"
-msgstr "이전 도구로 전환"
+msgstr "Uɣal ɣer ufecku uzwir"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
-msgstr "연필 도구로 전환"
+msgstr "Beddel ɣer ufecku akeryun"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr "연필"
+msgstr "Akeryun"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
-msgstr "타원 선택"
+msgstr "Tafrayt taglayt"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"Ssed u selḥu iwakken ad tsunɣeḍ tafrayt taglayt. Ssed tanast Maj iwakken ad "
+"d-tsuffɣeḍ tawinest."
 
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:46
@@ -1494,468 +1505,499 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Clic gauche pour dessiner avec une couleur primaire.\n"
+"Clic droit pour dessiner avec une couleur secondaire.\n"
+"Clic gauche sur un point de contrôle et glisser pour le bouger.\n"
+"Clic droit sur un point de contrôle et glisser pour  changer sa tension.\n"
+"Maintien de la touche Maj (Shift) pour pivoter.\n"
+"Touches flèches pour bouger le point de contrôle.\n"
+"Ctrl + flèche gauche/droite pour changer de point de contrôle.\n"
+"Suppr (Delete) pour supprimer le point de contrôle sélectionné.\n"
+"Barre espace pour créer un point de contrôle au positionnement de la "
+"souris.\n"
+"Barre espace en maintenant de la touche Ctrl pour créer un point de contrôle "
+"à l'exact même position.\n"
+"Clic gauche en maintenant de la touche Ctrl sur un point de contrôle pour "
+"créer une nouvelle forme à l'exact même position.\n"
+"Maintien de la touche Ctrl en cliquant en dehors des limites de l'image pour "
+"créer une nouvelle forme à partir du bord.\n"
+"Touche Entrée pour finir la forme."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
 msgid "Type"
-msgstr "형식"
+msgstr "Anaw"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Alewwaɣ"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
-msgstr "지우개"
+msgstr "Taseffaḍt"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:205
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
-msgstr "배경색을 투명한 배경으로 하려면 왼쪽 클릭, 보조색으로 하려면 오른쪽 클릭하세요. "
+msgstr ""
+"Tusda tazelmaḍt i wesfaḍ aked umseɣseɣ, tusda tayfust i tačart s yini asnay. "
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:72
 msgid "Flood Mode"
-msgstr "홍수 모드"
+msgstr "Anaw n tačart"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:79
 msgid "Contiguous"
-msgstr "내부"
+msgstr "Anarag"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:80
 msgid "Global"
-msgstr "전체"
+msgstr "Amatu"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
 msgid "Freeform Shape"
-msgstr "자유도형 그리기"
+msgstr "Talɣa tilellit"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr "왼쪽 클릭은 기본색으로 칠합니다. 오른쪽 클릭은 보조색으로 칠합니다."
+msgstr ""
+"Tussda tazelmaḍt iwakken ad tsunɣeḍ s yini azwaran, tussda tayefust i yini "
+"asnay."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
 #: ../Pinta.Tools/Tools/GradientTool.cs:169
 msgid "Gradient"
-msgstr "그라디언트"
+msgstr "Dégradé"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
-msgstr "기본색에서 보조색으로 채우려면 클릭한 후 끌어서 놓으세요. 반대로 채우려면 오른쪽 클릭을 하세요."
+msgstr ""
+"Cliquer et glisser pour dessiner un dégradé de la couleur primaire vers la "
+"couleur secondaire. Clic droit pour l'inverser."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Linear Gradient"
-msgstr "선형 그라데이션"
+msgstr "Dégradé linéaire"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Linear Reflected Gradient"
-msgstr "반사된 선형 그라데이션"
+msgstr "Dégradé linéaire réfléchi"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Linear Diamond Gradient"
-msgstr "다이아몬드형 그라데이션"
+msgstr "Dégradé linéaire en diamant"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:179
 msgid "Radial Gradient"
-msgstr ""
+msgstr "Dégradé radial"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:180
 msgid "Conical Gradient"
-msgstr "원추형 그라데이션"
+msgstr "Dégradé conique"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
 msgid "Lasso Select"
-msgstr "올가미 선택"
+msgstr "Sélection lasso"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "선택 영역의 외곽선을 그리려면 클릭한 후 끌어서 놓으세요."
+msgstr "Ssed u zzuɣer iwakken ad tsunɣeḍ iri n teɣzut n tefrayt."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
-msgstr ""
+msgstr "Izirig/Azlig"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:62
 msgid "Magic Wand Select"
-msgstr "요술봉 선택"
+msgstr "Tafrayt s tɛekkazt tasḥart"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:72
 msgid "Click to select region of similar color."
-msgstr "비슷한 색상 영역을 선택하려면 클릭하세요."
+msgstr "Ssed iwakken ad tferneḍ tamnaḍt s yini"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
-"선택된 영역의 내용을 이동하려면 왼쪽 클릭을 하고 끌어서 놓으세요. 선택 영역의 내용을 회전하려면 오른쪽 클릭을 하고 끌어서 놓으세요."
+"Tussda tazelmaḍt sakin zzuɣer tafrayt iwakken ad tesmuttiḍ agbur "
+"yettwafernen. Tussda tayefust sakin zzuɣer tafrayt iwakken ad tezziḍ agbur "
+"yettwafernen."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "선택한 부분 옮기기"
+msgstr "Semwwiwel tafrayt"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
-"선택한 외곽선 영역을 이동하려면 왼쪽 클릭하여 끌어서 놓으세요. 선택 외곽선 영역을 회전하려면 오른쪽 클릭하여 끌어서 놓으세요."
+"Tussda tazelmaḍt sakin zzuɣer tafrayt iwakken ad tesmuttiḍ iri n tefrayt. "
+"Tussda tayefust sakin zzuɣer tafrayt iwakken ad tezziḍ iri n tefrayt."
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
-msgstr "붓"
+msgstr "Amfezwi"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "색칠"
+msgstr "Aqbuc n teklut"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
-msgstr "기본색으로 채우려면 왼쪽 클릭. 보조색으로 채우려면 오른쪽 클릭을 하세요."
+msgstr ""
+"Tussa tazelmaḍt iwakken ad tačareḍ tamnaḍt s yini agejdan, tussda tayefust "
+"iwakken ad tačareḍ tamnaḍt s yini asnay."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Pan"
-msgstr "잡기"
+msgstr "Amwwiwel"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
-msgstr "이미지를 조정하려면 클릭한 후 끌어서 놓으세요."
+msgstr "Ssed u selḥu iwakken ad tinigeḍ di tugna."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
-msgstr "기본색으로 1픽셀 너비의  선으로 자유도형을 그리려면 왼쪽 클릭. 보조색으로 그리려면 오른쪽 클릭."
+msgstr ""
+"Tanast tazelmaḍt iwakken ad tsuneɣeḍ s ufus ilelli izirigen s tehri yiwen n "
+"upixal s yini agejdan. Tanast tayefust iwakken ad tesqedceḍ ini ayefus."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid "Recolor"
-msgstr "색바꾸기"
+msgstr "Ales aseɣmu"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:62
 msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
 msgstr ""
+"Tussda tazelmaḍt iwakken ad tbeddeleḍ ini asnay s yini azwaran. Tussda "
+"tayefust iwakken ad tettiḍ."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
-msgstr "사각형 선택"
+msgstr "Tafrayt s usrem"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"Ssed u zzuɣer iwakken ad tgeḍ tafrayt s usrem. Ssed tanast Maj iwakken ad "
+"tgeḍ tafrayt tamkuẓt."
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr "사각형"
+msgstr "Asrem"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
-msgstr "둥근 사각형"
+msgstr "Asrem bu teɣmar timdewrin"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
-msgstr "글자"
+msgstr "Aḍris"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Aḍris - Fakk"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
-msgstr "텍스트 커서를 위치시키려면 왼쪽 클릭한 후 글자를 입력하세요. 글자색은 기본색으로 적용됩니다."
+msgstr ""
+"Tussda tazelmaḍt iwakken ad tserseḍ taḥnaccaḍt, sakin sekcem aḍris i tebɣiɣ. "
+"Ini n uḍris d ini agejdan."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
-msgstr "글꼴"
+msgstr "Tasefsit"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Bold"
-msgstr "굵게"
+msgstr "Azuran"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:198
 msgid "Italic"
-msgstr "기울임"
+msgstr "Tira yeknan"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:205
 msgid "Underline"
-msgstr "밑줄"
+msgstr "Iderrer"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Left Align"
-msgstr "왼쪽 정렬"
+msgstr "Tarigla ɣer zelmaḍ"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Center Align"
-msgstr "가운데 정렬"
+msgstr "Tarigla di telmast"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Right Align"
-msgstr "오른쪽 정렬"
+msgstr "Tarigla ɣer yefus"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Text Style"
-msgstr "글꼴처리"
+msgstr "Aɣanib n uḍris"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
-msgstr "보통 과 외곽선"
+msgstr "D amagnu s yiran"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
-msgstr "배경 채우기"
+msgstr "Ačar agilal"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
-msgstr "외곽선 너비"
+msgstr "Tehri n yiri"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "외곽선 크기 감소"
+msgstr "Simcṭuḥ tiddi n yiri"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "외곽선 크기 확대"
+msgstr "Simɣur tiddi n yiri"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr "확대하려면 왼쪽 클릭. 축소하려면 오른쪽 클릭. 선택 부분 확대는 클릭하여 끌어서 놓으세요."
+msgstr ""
+"Tussda tazelmaḍt i wesemɣer. Tussda tayefust i wesmecṭeḥ. Ssed u selḥu "
+"iwakken ad tsimɣureḍ tafrayt."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "Resize Palette"
-msgstr "팔렛트 크기 조정"
+msgstr "Ales tisekta n tpaliḍt"
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
-msgstr "새 팔렛트 크기:"
+msgstr "Tiddi tamaynutt n tpaliḍt:"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "\"{0}\" 이미지를 닫기 전에 저장하시겠습니까?"
+msgstr "Ad teskelseḍ ibeddilen n tugna « {0} » send ad tmedleḍ ?"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "저장하지 않으면, 모든 변경 사항을 잃어버립니다"
+msgstr "Ma yella ur teskelseḍ ara, ibeddilen akk ad ṛuḥen."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr ""
+msgstr "Mdel war asekles"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr "스크린샷 찍기"
+msgstr "Eg tuṭṭfa n ugdil"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "스크린샷 찍기 전 지연시간(초):"
+msgstr "Amenḍar send tuṭṭfa n ugdil (s tasinin) :"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:63
 msgid "Image files"
-msgstr "이미지 파일"
+msgstr "Afaylu n tugna"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr "이미지 파일 저장"
+msgstr "Sekles afaylu n tugna"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta는 해당 형식의 이미지 파일을 지원하지 않습니다."
+msgstr "Pinta ur yedhil ara asekles n tugniwin deg umasal-agi n ufaylu."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
 msgid "Cannot save read only file."
-msgstr "읽기 전용 파일을 저장할 수 없습니다."
+msgstr "Ulamek asekles n ufaylu s tɣuri kan."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
 msgid "Image too large"
-msgstr "너무 큰 이미지"
+msgstr "Tugna bezzaf meqret"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "ICO 파일은 255 x 255 픽셀보다 클 수 없습니다."
+msgstr "Ifuyla ICO ur zmiren ara ad ɛeddin 255 x 255 n ipiksilen."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "\"{0}\"(이)라는 이름의 파일이 이미 있습니다. 덮어 쓰시겠습니까?"
+msgstr "Yella yakan ufaylu s yisem « {0} ». Tebɣiḍ ad t-tesemselsiḍ ?"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "자료가 이미 \"{1}\" 에 존재합니다. 저장하면 현재 내용으로 바뀝니다."
+msgstr "Afaylu yella yakan di « {1} ». Asemselsi-ines ad isefsex agbur-ines."
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
 msgid "Layer Opacity"
-msgstr "레이어 투명도"
+msgstr "Opacité du calque"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
 msgid "Rename Layer"
-msgstr "레이어 이름변경"
+msgstr "Beddel isem n ukalku"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Hide Layer"
-msgstr "레이어 숨기기"
+msgstr "Beqqeḍ akalku"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Show Layer"
-msgstr "레이어 보이기"
+msgstr "Beqqeḍ akalku"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
 msgid "Layer Properties"
-msgstr "레이어 속성"
+msgstr "Iraten n ukalku"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
-msgstr "레이어 회전/줌"
+msgstr "Zzi / Zoom akalku"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Tamɣiwent n isiɣzaf Pinta - Tiɣerɣert tulmist"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "Tamɣiwent n isiɣzaf Pinta - Tiɣerɣert tusgitt"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
-msgstr "현재 릴리즈에 대한 기여자 :"
+msgstr "Fkan-d afus di lqem-agi :"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:138
 msgid "Previous contributors:"
-msgstr "이전 기여자 :"
+msgstr "Contributeurs précédents :"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Choi gyu ho https://launchpad.net/~cgh48\n"
-"  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim\n"
-"  Jongwon Kim https://launchpad.net/~nanpa777-y\n"
-"  Litty https://launchpad.net/~litty\n"
-"  Mike Sierra https://launchpad.net/~ubuntuda\n"
-"  SCRS https://launchpad.net/~secondroms\n"
-"  Softblow https://launchpad.net/~sftblw"
+"  Yacine Bouklif https://launchpad.net/~yacine-bouklif\n"
+"  Yacine Bouklif https://launchpad.net/~yacine2953-tansa3"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
-msgstr "번역자:"
+msgstr "Yettwasuqqel sɣur :"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:158
 msgid "Based on the work of Paint.NET:"
-msgstr "이 무른모는 Paint.NET을 기반으로 합니다."
+msgstr "Yebna ɣef leqdic n Paint.NET :"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "Using some icons from:"
-msgstr "일부 아이콘의 출처 :"
+msgstr "Aseqdec n tikunin si :"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "Réalisé avec Mono :"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
-msgstr "Pinta에 대하여"
+msgstr "Awal ɣef Pinta"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:298
 msgid "Version Info"
-msgstr "판 정보"
+msgstr "Isalen n lqem"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
-msgstr "판 번호:"
+msgstr "Lqem"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "License"
-msgstr "사용권"
+msgstr "Turagt"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
-msgstr "MIT X11 사용허가 하에 배포됐습니다."
+msgstr "Mis à disposition sous licence MIT X11"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
-msgstr "저작권"
+msgstr "Izerfan n umeskar"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "by Pinta contributors"
-msgstr "Pinta 기여자"
+msgstr "par les contributeurs de Pinta"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Ifatusen"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr ""
+msgstr "Signaler un bogue..."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "JPEG 화질"
+msgstr "Qualité JPEG"
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
-msgstr "화질: "
+msgstr "Qualité : "
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
 msgid "Name:"
-msgstr "이름:"
+msgstr "Isem :"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
-msgstr "표시"
+msgstr "Visible"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
-msgstr ""
+msgstr "Mode de mélange"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
 msgid "Opacity:"
-msgstr "투명도:"
+msgstr "Opacité :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
 #: ../Pinta/Dialogs/NewImageDialog.cs:342
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr ""
+msgstr "Presse-papier"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
 #: ../Pinta/Dialogs/NewImageDialog.cs:344
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Custom"
-msgstr ""
+msgstr "Yugen"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Préconfiguration :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
-msgstr "너비:"
+msgstr "Tehri :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
@@ -1964,447 +2006,450 @@ msgstr "너비:"
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
-msgstr "픽셀"
+msgstr "ipiksilen"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
-msgstr "높이:"
+msgstr "Teɣzi :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr ""
+msgstr "Taɣda :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "Portrait"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "Paysage"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "Agilal :"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "Amlal"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
-msgstr ""
+msgstr "Ini n ugilal"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Azarskan"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "제목"
+msgstr "Azwel"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "파일 경로"
+msgstr "Abrid"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "백분율 기준:"
+msgstr "S ufmiḍi :"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "절대 크기 기준:"
+msgstr "S tiddi tamagdezt :"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "비율 유지"
+msgstr "Eǧǧ assaɣ n tmeẓri"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "저자:"
+msgstr "Tamdeyt:"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
-msgstr ""
+msgstr "Beqqeḍ izen-agi u ffeɣ"
 
 #: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr ""
+msgstr "Beqqeḍ lqem n usnas."
 
 #: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
-msgstr "렌더링을 위한 쓰레드 수"
+msgstr "nombre de fils d'exécution à utiliser pour le rendu"
 
 #: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr ""
+msgstr "Aseqdec: pinta [ifuyla]"
 
 #: ../Pinta/Main.cs:109
 msgid "Options: "
-msgstr ""
+msgstr "Tixtiṛiyin: "
 
 #: ../Pinta/MainWindow.cs:309
 msgid "_File"
-msgstr "자료 (_F)"
+msgstr "Afaylu"
 
 #: ../Pinta/MainWindow.cs:310
 msgid "_Edit"
-msgstr "편집(_E)"
+msgstr "Taẓrigt"
 
 #: ../Pinta/MainWindow.cs:312
 msgid "_View"
-msgstr "보기(_V)"
+msgstr "Abeqqeḍ"
 
 #: ../Pinta/MainWindow.cs:315
 msgid "_Image"
-msgstr "이미지(_I)"
+msgstr "Tugna"
 
 #: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
-msgstr "레이어(_L)"
+msgstr "Ikalkuten"
 
 #: ../Pinta/MainWindow.cs:317
 msgid "_Adjustments"
-msgstr "조정(_A)"
+msgstr "Iswatiyen"
 
 #: ../Pinta/MainWindow.cs:318
 msgid "Effe_cts"
-msgstr "효과(_C)"
+msgstr "Isemda"
 
 #: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
-msgstr ""
+msgstr "Isiɣzaf"
 
 #: ../Pinta/MainWindow.cs:321
 msgid "_Window"
-msgstr "창(_W)"
+msgstr "Asfaylu"
 
 #: ../Pinta/MainWindow.cs:325
 msgid "Tool Windows"
-msgstr "도구 창"
+msgstr "Tanaka n ifecka"
 
 #: ../Pinta/MainWindow.cs:329
 msgid "_Help"
-msgstr "도움말(_H)"
+msgstr "Tallalt"
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
-msgstr "선택사항명"
+msgstr "Isem n textiṛit"
 
 #: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
-msgstr ""
+msgstr "Taɣzut n usuneɣ"
 
 #: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
-msgstr "작업 기록"
+msgstr "Amazray"
 
 #: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
 msgid "Layers"
-msgstr "레이어"
+msgstr "Ikalkuten"
 
 #: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
 msgid "Images"
-msgstr "이미지"
+msgstr "Tugniwin"
 
 #: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
 msgid "Tools"
-msgstr "도구"
+msgstr "Ifecka"
 
 #: Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr "경계선 처리"
+msgstr "Comportement du bord"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
-"다중 선택:\n"
+"Tafrayt tusgitt :\n"
 "\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr "활성화"
+msgstr "Sermed"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr "비활성화"
+msgstr "Sexsi"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "Ulac tafrayt"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr "사용가능한 저장소:"
+msgstr "Yewjed deg usersay :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "Amucceḍ yewjed"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr "이 추가기능은"
+msgstr "Asiɣzef-agi ulamek ara yettwaɛebbi acku xuṣent temkarḍiwin"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr "요구됨 : {0} v{1}, 찾음 v{2}"
+msgstr "Requis : {0} v{1}, trouvé v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "Manquant : {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr "설치된 버전"
+msgstr "Lqem ittusbedden"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr "저장소 버전"
+msgstr "version du référentiel"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr "다운로드 크기"
+msgstr "Tiddi n wezdam"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
+msgstr "Timkarḍiwin-agi laqent i wesiɣzef-agi, maca ulac-itent :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr "취소된 설치 내역"
+msgstr "Asbeddi yettusemmet"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "Kra n isiɣzifen ilaqen ur ten-id-nufi ara"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr "실패한 설치 내역"
+msgstr "Asbeddi yenezri"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr "설치된 항목"
+msgstr "Yettusbedd"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "Amucceḍ"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "Tagnarit"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "Isersayen akk"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "Sefrek isersayen..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] "{0}개 업데이트 사용가능"
+msgstr[0] "{0} n umucceḍ yewjed"
+msgstr[1] "{0} n imucceḍen wejden"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr "저장소 업데이트 중"
+msgstr "Amucceḍ n usersay"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr "추가기능 패키지 설치"
+msgstr "Sbedd ikmuens n isiɣzifen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "Ikmuens n isiɣzifen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "Ur d-nufi ula d yiwen n usiɣzef"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "Isiɣzifen"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "Wiyaḍ"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "Kkes"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr "다음 패키지가 제거됩니다 :"
+msgstr "Ikemusen-agi ad ttwakksen :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
-msgstr ""
+msgstr "Llan isiɣzaf urzen ɣer isiɣzaf uzwiren, ad ttwakksen daɣen :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
-msgstr "의존성 제한으로 인하여 선택된 추가기능을 설치할 수 없었습니다."
+msgstr ""
+"Isiɣzaf yettwafernen ulamek ara ttusbedden acku ur mṣadan ara aked wiyiḍ."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr "다음 패키지들이 설치됩니다:"
+msgstr "Ikemusen-agi ad ttwasbedden :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (deg ukaram n useqdac)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr "다음 패키지가 제거되어야 합니다:"
+msgstr "Isiɣzifen-agi ilaq ad ttwakksen :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Imyagiyen-agi ilaq ad frun :"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr "정말로 설치를 취소하시겠습니까?"
+msgstr "D tidett tebɣiḍ ad temmeteḍ asbeddi ?"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr "추가 기능 설치 중"
+msgstr "Asbeddi n isiɣzaf"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr "설치가 실패하였습니다!"
+msgstr "Asbeddi yenezri."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "L'installation s'est déroulée avec des avertissements."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr "추가기능 제거 중"
+msgstr "Tukksa n isiɣzaf"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr "제거를 실패하였습니다!"
+msgstr "Tukksa tenezri !"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "La désinstallation s'est déroulée avec des avertissements."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr "저장소 등록 중"
+msgstr "Asekles n usersay"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr "예외 발생: {0}"
+msgstr "Une exception a été levée : {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr "상세 정보"
+msgstr "Isalen imernan"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "Sbedd..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "Amucceḍ"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr "_설치 제거"
+msgstr "Kkes..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "Iwakken ad tgeḍ tamhelt-agi llaqen isiɣzaf-nniḍen."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "Isiɣzaf-agi ad tusbedden :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "Ur d-nufi ula d yien n umucceḍ"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr "새로 고침"
+msgstr "Mucceḍ"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr "모두 업데이트 실시"
+msgstr "Mucceḍ kulec"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "Référentiel :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr "파일에서 설치..."
+msgstr "Sbedd seg ufaylu..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr "설치"
+msgstr "Asbeddi"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "Asefrak n isersay n isɣzaf"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr "새 저장소 추가"
+msgstr "Ajouter un nouveau référentiel"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
 msgstr ""
+"Sélectionnez l'emplacement du référentiel que vous voulez enregistrer :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr "온라인 저장소 등록"
+msgstr "Enregistrer un référentiel en ligne"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "URL :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "Enregistrer un référentiel local"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr "경로:"
+msgstr "Abrid :"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr "찾아보기..."
+msgstr "Ḍum…"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr "진행중"
+msgstr "En cours"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(fourni par {0})"

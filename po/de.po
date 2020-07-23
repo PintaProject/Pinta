@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 15:52+0200\n"
-"PO-Revision-Date: 2016-09-10 15:52+0200\n"
-"Last-Translator: Matthias Mailänder\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2020-04-08 00:12+0000\n"
+"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
+"Language: de\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -558,11 +558,11 @@ msgstr "XOR"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr "Hartes Licht"
+msgstr "Grelles Licht"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr "Weiches Licht"
+msgstr "Gedämpftes Licht"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
@@ -1919,13 +1919,14 @@ msgstr ""
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Christian Rupp https://launchpad.net/~grissi\n"
 "  Christian Schulz https://launchpad.net/~make-panic\n"
-"  Daniel Winzen https://launchpad.net/~q-d\n"
+"  Daniel Winzen https://launchpad.net/~q-d-deactivatedaccount\n"
 "  Dennis Baudys https://launchpad.net/~thecondordb\n"
 "  Ettore Atalan https://launchpad.net/~atalanttore\n"
+"  Florian Schwarz https://launchpad.net/~f.schwarz\n"
 "  Francisco Camenforte Torres https://launchpad.net/~fct\n"
 "  Gerd M Hofmann https://launchpad.net/~gmhofmann\n"
 "  Ghenrik https://launchpad.net/~ghenrik-deactivatedaccount\n"
-"  Gregor Santner https://launchpad.net/~gdev\n"
+"  Gregor Santner https://launchpad.net/~gsantner\n"
 "  Hanh Pham https://launchpad.net/~joel-nohnn\n"
 "  Hendrik Knackstedt https://launchpad.net/~hennekn\n"
 "  Jannis Christ https://launchpad.net/~fliegenfalle\n"
@@ -1940,6 +1941,7 @@ msgstr ""
 "  Phillip Sz https://launchpad.net/~phillip-sz\n"
 "  Richard Liebig https://launchpad.net/~systheron-deactivatedaccount\n"
 "  Tobias Bannert https://launchpad.net/~toba\n"
+"  Torsten Franz https://launchpad.net/~torsten.franz\n"
 "  ziggystar https://launchpad.net/~ziggystar-gmx"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
@@ -2475,7 +2477,8 @@ msgstr "Neue Paketquelle hinzufügen"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr "Bitte den Ort der Paketquelle auswählen, die Sie registrieren wollen:"
+msgstr ""
+"Bitte den Ort der Paketquelle auswählen, die Sie registrieren wollen:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
