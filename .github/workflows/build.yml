@@ -10,7 +10,6 @@ on:
 
 jobs:
   build-ubuntu:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +30,20 @@ jobs:
       with:
         name: "pinta-1.7.ubuntu1804.zip"
         path: pinta-1.7.zip
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: |
+        brew update
+        brew install mono-mdk
+    - name: Build
+      run: |
+        msbuild Pinta.sln
+        msbuild Pinta.Install.proj /target:CompileTranslations
 
   build-windows:
     runs-on: windows-latest
