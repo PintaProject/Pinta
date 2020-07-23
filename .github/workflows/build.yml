@@ -47,12 +47,11 @@ jobs:
         cd osx
         ./build_installer.sh
 
-    # The upload-artifact action should zip up the .app folder for us.
     - name: Upload Installer
       uses: actions/upload-artifact@v2
       with:
-        name: "Pinta.app"
-        path: osx/Pinta.app
+        name: "Pinta.app.zip"
+        path: osx/Pinta.app.zip
 
   build-windows:
     runs-on: windows-latest
