@@ -31,3 +31,14 @@ jobs:
       with:
         name: "pinta-1.7.ubuntu1804.zip"
         path: pinta-1.7.zip
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1.0.0
+
+    - name: Build
+      run: |
+        msbuild Pinta.sln
