@@ -46,3 +46,7 @@ jobs:
     - name: Build
       run: |
         msbuild Pinta.sln
+
+    - name: Compile Translations
+      run: |
+        msbuild Pinta.Install.proj /target:CompileTranslations
