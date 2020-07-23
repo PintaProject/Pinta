@@ -28,7 +28,7 @@ jobs:
     - name: Upload Package
       uses: actions/upload-artifact@v2
       with:
-        name: "pinta-1.7.ubuntu1804.zip"
+        name: "Pinta-ubuntu1804.zip"
         path: pinta-1.7.zip
 
   build-macos:
@@ -36,10 +36,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    # Mono and gettext are already available on the CI environment.
     - name: Build
       run: |
         msbuild Pinta.sln
         msbuild Pinta.Install.proj /target:CompileTranslations
+
+    - name: Build Installer
+      run: |
+        cd osx
+        ./build_installer.sh
+
+    # The upload-artifact action should zip up the .app folder for us.
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Pinta.app"
+        path: osx/Pinta.app
 
   build-windows:
     runs-on: windows-latest
@@ -69,5 +82,5 @@ jobs:
     - name: Upload Installer
       uses: actions/upload-artifact@v2
       with:
-        name: "pinta-1.7.exe"
+        name: "Pinta.exe"
         path: Wix/bin/Release/Pinta.exe
