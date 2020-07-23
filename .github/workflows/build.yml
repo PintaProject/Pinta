@@ -41,7 +41,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        choco --yes install gtksharp
+        choco install gtksharp -y -f -v
 
     - name: Build
       run: |
