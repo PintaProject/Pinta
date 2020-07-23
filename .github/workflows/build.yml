@@ -39,8 +39,8 @@ jobs:
     # Mono and gettext are already available on the CI environment.
     - name: Build
       run: |
-        msbuild Pinta.sln
-        msbuild Pinta.Install.proj /target:CompileTranslations
+        msbuild Pinta.sln -p:Configuration=Release
+        msbuild Pinta.Install.proj -target:CompileTranslations
 
     - name: Build Installer
       run: |
@@ -66,11 +66,11 @@ jobs:
         choco install gtksharp -y -f -v
 
     - name: Build
-      run: msbuild Pinta.sln
+      run: msbuild Pinta.sln -p:Configuration=Release
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Compile Translations
-      run: msbuild Pinta.Install.proj /target:CompileTranslations
+      run: msbuild Pinta.Install.proj -target:CompileTranslations
 
     # Reuse the gtk-sharp msi that choco already downloaded!
     - name: Build Installer
