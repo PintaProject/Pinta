@@ -1223,12 +1223,17 @@ namespace Pinta.Docking
 			return GetScaleFactor (Gdk.Screen.Default, 0);
 		}
 
-		public static double GetPixelScale ()
+		public static double GetPixelScale()
 		{
+			// TODO-GTK3
+#if false
 			if (Platform.IsWindows)
 				return GetScaleFactor ();
 			else
 				return 1d;
+#else
+			return 1d;
+#endif
 		}
 		
 		public static Gdk.Pixbuf RenderIcon (this Gtk.IconSet iconset, Gtk.Style style, Gtk.TextDirection direction, Gtk.StateType state, Gtk.IconSize size, Gtk.Widget widget, string detail, double scale)
