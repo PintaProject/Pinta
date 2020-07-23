@@ -44,13 +44,11 @@ jobs:
         choco install gtksharp -y -f -v
 
     - name: Build
-      run: |
-        msbuild Pinta.sln
+      run: msbuild Pinta.sln
 
+    # Note that msgfmt is already available from the Git for Windows installation!
     - name: Compile Translations
-      run: |
-        get-command msgfmt
-        msbuild Pinta.Install.proj /target:CompileTranslations
+      run: msbuild Pinta.Install.proj /target:CompileTranslations
 
     # Reuse the gtk-sharp msi that choco already downloaded!
     - name: Build Installer
