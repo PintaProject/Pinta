@@ -119,7 +119,10 @@ namespace Pinta.Core
 			toolbar.AppendItem (File.New.CreateToolBarItem ());
 			toolbar.AppendItem (File.Open.CreateToolBarItem ());
 			toolbar.AppendItem (File.Save.CreateToolBarItem ());
+			// Printing is disabled for now until it is fully functional.
+#if false
 			toolbar.AppendItem (File.Print.CreateToolBarItem ());
+#endif
 			toolbar.AppendItem (new SeparatorToolItem ());
 
 			// Cut/Copy/Paste comes before Undo/Redo on Windows
