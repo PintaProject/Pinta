@@ -49,4 +49,12 @@ jobs:
 
     - name: Compile Translations
       run: |
+        get-command msgfmt
         msbuild Pinta.Install.proj /target:CompileTranslations
+
+    # Reuse the gtk-sharp msi that choco already downloaded!
+    - name: Build Installer
+      run: |
+        cd Wix
+        cp C:\Users\runneradmin\AppData\Local\Temp\chocolatey\gtksharp\2.12.45\gtk-sharp-2.12.45.msi .
+        msbuild PintaWix.sln -p:Configuration=Release
