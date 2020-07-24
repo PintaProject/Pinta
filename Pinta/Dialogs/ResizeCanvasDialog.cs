@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta
 {
-	public partial class ResizeCanvasDialog : Dialog
+	public class ResizeCanvasDialog : Dialog
 	{
 		private RadioButton percentageRadio;
 		private RadioButton absoluteRadio;
