@@ -36,7 +36,7 @@ namespace Pinta.Effects
 
 	public class CurvesDialog : Gtk.Dialog
 	{
-		private ComboBox comboMap;
+		private ComboBoxText comboMap;
 		private Label labelPoint;
 		private DrawingArea drawing;
 		private CheckButton checkRed;
@@ -420,18 +420,17 @@ namespace Pinta.Effects
         {
 			WindowPosition = WindowPosition.CenterOnParent;
 			Resizable = false;
-			AllowGrow = false;
 
 			const int spacing = 6;
 			var hbox1 = new HBox () { Spacing = spacing };
-			hbox1.PackStart (new Label (Catalog.GetString ("Transfer Map")), false, false, 0);
+			hbox1.PackStart (new Label (Translations.GetString ("Transfer Map")), false, false, 0);
 			hbox1.PackStart (new HSeparator (), true, true, 0);
-			VBox.PackStart (hbox1, false, false, 0);
+			ContentArea.PackStart (hbox1, false, false, 0);
 
 			var hbox2 = new HBox () { Spacing = spacing };
-			comboMap = ComboBox.NewText ();
-			comboMap.AppendText (Catalog.GetString ("RGB"));
-			comboMap.AppendText (Catalog.GetString ("Luminosity"));
+			comboMap = new ComboBoxText();
+			comboMap.AppendText (Translations.GetString ("RGB"));
+			comboMap.AppendText (Translations.GetString ("Luminosity"));
 			comboMap.Active = 1;
 			hbox2.PackStart (comboMap, false, false, 0);
 
@@ -439,7 +438,7 @@ namespace Pinta.Effects
 			var labelAlign = new Alignment (1, 0.5f, 1, 0);
 			labelAlign.Add (labelPoint);
 			hbox2.PackEnd (labelAlign, false, false, 0);
-			VBox.PackStart (hbox2, false, false, 0);
+			ContentArea.PackStart (hbox2, false, false, 0);
 
 			drawing = new DrawingArea () {
 				WidthRequest = 256,
@@ -447,12 +446,12 @@ namespace Pinta.Effects
 				Events = (Gdk.EventMask)795646,
 				CanFocus = true
 			};
-			VBox.PackStart (drawing, false, false, 8);
+			ContentArea.PackStart (drawing, false, false, 8);
 
 			var hbox3 = new HBox ();
-			checkRed = new CheckButton (Catalog.GetString ("Red  ")) { Active = true };
-			checkGreen = new CheckButton (Catalog.GetString ("Green")) { Active = true };
-			checkBlue = new CheckButton (Catalog.GetString ("Blue ")) { Active = true };
+			checkRed = new CheckButton (Translations.GetString ("Red  ")) { Active = true };
+			checkGreen = new CheckButton (Translations.GetString ("Green")) { Active = true };
+			checkBlue = new CheckButton (Translations.GetString ("Blue ")) { Active = true };
 			hbox3.PackStart (checkRed, false, false, 0);
 			hbox3.PackStart (checkGreen, false, false, 0);
 			hbox3.PackStart (checkBlue, false, false, 0);
@@ -460,15 +459,15 @@ namespace Pinta.Effects
 			buttonReset = new Button () {
 				WidthRequest = 81,
 				HeightRequest = 30,
-				Label = Catalog.GetString ("Reset")
+				Label = Translations.GetString ("Reset")
 			};
 			hbox3.PackEnd (buttonReset, false, false, 0);
-			VBox.PackStart (hbox3, false, false, 0);
+			ContentArea.PackStart (hbox3, false, false, 0);
 
-			labelTip = new Label (Catalog.GetString ("Tip: Right-click to remove control points."));
-			VBox.PackStart (labelTip, false, false, 0);
+			labelTip = new Label (Translations.GetString ("Tip: Right-click to remove control points."));
+			ContentArea.PackStart (labelTip, false, false, 0);
 
-			VBox.ShowAll ();
+			ContentArea.ShowAll ();
 			checkRed.Hide ();
 			checkGreen.Hide ();
 			checkBlue.Hide ();

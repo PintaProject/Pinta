@@ -309,14 +309,14 @@ namespace Pinta
 			DefaultWidth = 300;
 			DefaultHeight = 200;
 
-			percentageRadio = new RadioButton (Catalog.GetString ("By percentage:"));
-			absoluteRadio = new RadioButton (percentageRadio, Catalog.GetString ("By absolute size:"));
+			percentageRadio = new RadioButton (Translations.GetString ("By percentage:"));
+			absoluteRadio = new RadioButton (percentageRadio, Translations.GetString ("By absolute size:"));
 
 			percentageSpinner = new SpinButton (1, 1000, 1);
 			widthSpinner = new SpinButton (1, 10000, 1);
 			heightSpinner = new SpinButton (1, 10000, 1);
 
-			aspectCheckbox = new CheckButton (Catalog.GetString ("Maintain aspect ratio"));
+			aspectCheckbox = new CheckButton (Translations.GetString ("Maintain aspect ratio"));
 
 			const int spacing = 6;
 			var main_vbox = new VBox () { Spacing = spacing, BorderWidth = 12 };
@@ -330,21 +330,21 @@ namespace Pinta
 			main_vbox.PackStart (absoluteRadio, false, false, 0);
 
 			var hbox_width = new HBox () { Spacing = spacing };
-			hbox_width.PackStart (new Label (Catalog.GetString ("Width:")), false, false, 0);
+			hbox_width.PackStart (new Label (Translations.GetString ("Width:")), false, false, 0);
 			hbox_width.PackStart (widthSpinner, false, false, 0);
-			hbox_width.PackStart (new Label (Catalog.GetString ("pixels")), false, false, 0);
+			hbox_width.PackStart (new Label (Translations.GetString ("pixels")), false, false, 0);
 			main_vbox.PackStart (hbox_width, false, false, 0);
 
 			var hbox_height = new HBox () { Spacing = spacing };
-			hbox_height.PackStart (new Label (Catalog.GetString ("Height:")), false, false, 0);
+			hbox_height.PackStart (new Label (Translations.GetString ("Height:")), false, false, 0);
 			hbox_height.PackStart (heightSpinner, false, false, 0);
-			hbox_height.PackStart (new Label (Catalog.GetString ("pixels")), false, false, 0);
+			hbox_height.PackStart (new Label (Translations.GetString ("pixels")), false, false, 0);
 			main_vbox.PackStart (hbox_height, false, false, 0);
 
 			main_vbox.PackStart (aspectCheckbox, false, false, 0);
 			main_vbox.PackStart (new HSeparator (), false, false, 0);
 
-			var align_label = new Label (Catalog.GetString ("Anchor:")) { Xalign = 0 };
+			var align_label = new Label (Translations.GetString ("Anchor:")) { Xalign = 0 };
 			main_vbox.PackStart (align_label, false, false, 0);
 
 			NWButton = CreateAnchorButton ();
@@ -373,8 +373,8 @@ namespace Pinta
 
 			main_vbox.PackStart (grid_align, false, false, 0);
 
-			VBox.BorderWidth = 2;
-			VBox.Add (main_vbox);
+			ContentArea.BorderWidth = 2;
+			ContentArea.Add (main_vbox);
 
 			ShowAll ();
 		}
