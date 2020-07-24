@@ -5,23 +5,24 @@ namespace Stetic
 	internal class Gui
 	{
 		private static bool initialized;
-		
-		internal static void Initialize (Gtk.Widget iconRenderer)
+
+		internal static void Initialize(Gtk.Widget iconRenderer)
 		{
-			if ((Stetic.Gui.initialized == false)) {
+			if ((Stetic.Gui.initialized == false))
+			{
 				Stetic.Gui.initialized = true;
 			}
 		}
 	}
-	
+
 	internal class ActionGroups
 	{
-		public static Gtk.ActionGroup GetActionGroup (System.Type type)
+		public static Gtk.ActionGroup GetActionGroup(System.Type type)
 		{
-			return Stetic.ActionGroups.GetActionGroup (type.FullName);
+			return Stetic.ActionGroups.GetActionGroup(type.FullName);
 		}
-		
-		public static Gtk.ActionGroup GetActionGroup (string name)
+
+		public static Gtk.ActionGroup GetActionGroup(string name)
 		{
 			return null;
 		}
