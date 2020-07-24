@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-02-16 09:03+0000\n"
-"Last-Translator: Chris Taklis (aka Kailor) <ctaklis@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2018-11-18 16:21+0000\n"
+"Last-Translator: Lampros Zouloumis <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -33,6 +33,15 @@ msgstr "Επεξεργασία εικόνας"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Επεξεργασία εικόνας Pinta"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -205,7 +214,7 @@ msgstr "Άνοιγμα"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr ""
+msgstr "Περιεχόμενα"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
@@ -390,7 +399,7 @@ msgstr "Μονάδες χάρακα"
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -542,15 +551,15 @@ msgstr "Αποκλειστικό ή"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Έντονο φως"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Απαλό φως"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Χρώμα"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -560,12 +569,12 @@ msgstr "Φωτεινότητα"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr ""
+msgstr "Απόχρωση"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
-msgstr ""
+msgstr "Κορεσμός"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -628,7 +637,7 @@ msgstr "Νέα εικόνα"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr ""
+msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
@@ -658,7 +667,7 @@ msgstr "Προσάρτηση"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr ""
+msgstr "Αποπροσάρτηση"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
@@ -699,7 +708,7 @@ msgstr "Απόχρωση / κορεσμός"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr ""
+msgstr "Σχετική φωτεινότητα"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
@@ -1095,7 +1104,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Αναδίπλωση"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
@@ -1884,6 +1893,7 @@ msgstr ""
 "  Chris Taklis (aka Kailor) https://launchpad.net/~ctaklis\n"
 "  Dimitris Giouroukis https://launchpad.net/~digitalbckp\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Lampros Zouloumis https://launchpad.net/~digitalpoeter\n"
 "  Petros Kyladitis https://launchpad.net/~multipetros\n"
 "  Psychorat https://launchpad.net/~dougy-giro1\n"
 "  Simos Xenitellis  https://launchpad.net/~simosx\n"
@@ -1975,7 +1985,7 @@ msgstr "Αδιαφάνεια:"
 #: ../Pinta/Dialogs/NewImageDialog.cs:342
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr ""
+msgstr "Πρόχειρο"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
@@ -2015,23 +2025,23 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "Προσωπογραφία"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "Τοπίο"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "Φόντο:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "Άσπρο"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
-msgstr ""
+msgstr "Χρώμα Φόντου"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"

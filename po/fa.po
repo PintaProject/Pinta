@@ -1,16 +1,16 @@
-# Korean translation for pinta
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Persian translation for pinta
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-09-10 15:49+0200\n"
-"PO-Revision-Date: 2018-08-29 14:56+0000\n"
-"Last-Translator: Jongwon Kim <nanpa777@hanmail.net>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2016-08-25 13:39+0000\n"
+"Last-Translator: Hashem Zavvari <hashemzawary@gmail.com>\n"
+"Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,19 +20,19 @@ msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr ""
+msgstr "پینتا"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr "쉽게 이미지를 생성하고 편집하세요."
+msgstr "ایجاد و ویرایش تصاویر به آسانی"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "이미지 편집기"
+msgstr "ویرایشگر تصویر"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr ""
+msgstr "ویرایشگر تصویری پینتا"
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -45,107 +45,107 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr "추가 기능 관리자"
+msgstr "مدیریت افزونه‌ها"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
-msgstr "실행취소"
+msgstr "بازگردانی"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "재실행"
+msgstr "انجام دوبارهٔ کنش"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Cut"
-msgstr "오려두기"
+msgstr "بریدن"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Copy"
-msgstr "복사"
+msgstr "کپی"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "کپی با ادغام"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 #: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr "붙여넣기"
+msgstr "چسباندن (Paste)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Classes/Document.cs:790
 msgid "Paste Into New Layer"
-msgstr "새 레이어로 붙여넣기"
+msgstr "چسباندن در لایه‌ی جدید"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr "새 이미지로 붙여넣기"
+msgstr "چسباندن در سند جدید"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
-msgstr "선택 영역 지우기"
+msgstr "پاک کردن انتخاب"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr "선택 영역 채우기"
+msgstr "پرکردن انتخاب"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Invert Selection"
-msgstr "선택 영역 반전"
+msgstr "گزینش معکوس"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr "전체 선택"
+msgstr "انتخاب همه"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr "전체 선택해제"
+msgstr "خارج کردن همه از انتخاب"
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
-msgstr "열기"
+msgstr "...باز کردن"
 
 #: ../Pinta.Core/Actions/EditActions.cs:82
 #: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
-msgstr "다른 이름으로 저장..."
+msgstr "...ذخیره به عنوان"
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr "기본값으로 재설정"
+msgstr "بازنشانی موارد پیش‌فرض"
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr "색상 수 설정"
+msgstr "تعیین تعداد رنگ جعبه"
 
 #: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
 #: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
-msgstr "팔렛트"
+msgstr "جعبه‌رنگ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr "선택해제"
+msgstr "عدم گزینش"
 
 #: ../Pinta.Core/Actions/EditActions.cs:323
 msgid "Open Palette File"
-msgstr "팔렛트 파일 열기"
+msgstr "بازکردن پرونده جعبه‌رنگ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:330
 msgid "Palette files (*.txt, *.gpl)"
-msgstr "팔렛트 파일(*.txt, *.gpl)"
+msgstr "پرونده‌های جعبه‌رنگ (txt, gpl)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:334
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr "모든 파일"
+msgstr "همهٔ پرونده‌ها"
 
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #, csharp-format
@@ -153,245 +153,246 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
-"{0} 팔렛트 파일을 열 수 없습니다.\n"
-"유효한 GIMP 나 Paint.NET 팔렛트인지 확인해 주세요."
+"پرونده‌ی جعبه‌رنگ باز نمی‌شود: {0}\n"
+"لطفا بازبینی کرده و مجدد برای بازکردن یک جعبه‌رنگ GIMP یا Paint.NET اقدام "
+"کنید."
 
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
-msgstr "오류"
+msgstr "بروز خطا"
 
 #: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Save Palette File"
-msgstr "팔렛트 파일 저장"
+msgstr "ذخیره‌ی پرونده‌ی جعبه‌رنگ"
 
 #: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Paint.NET palette (*.txt)"
-msgstr "Paint.NET 팔렛트(*.txt)"
+msgstr "جعبه رنگ Paint.NET-*.txt"
 
 #: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "GIMP palette (*.gpl)"
-msgstr "GIMP 팔렛트 (*.gpl)"
+msgstr "جعبه‌رنگ GIMP-*.gpl"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
-msgstr "새로 만듦..."
+msgstr "جدید..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr "새로운 스크린샷..."
+msgstr "تصویر جدید از صفحه نمایش..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "최근 파일 열기"
+msgstr "باز کردن موارد اخیر"
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
 msgid "Close"
-msgstr "닫기"
+msgstr "بستن"
 
 #: ../Pinta.Core/Actions/FileActions.cs:65
 msgid "Save"
-msgstr "저장"
+msgstr "ذخیره کردن"
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "Print"
-msgstr "출력"
+msgstr "چاپ"
 
 #: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Quit"
-msgstr "종료"
+msgstr "خروج"
 
 #: ../Pinta.Core/Actions/FileActions.cs:70
 msgid "New"
-msgstr "새 파일"
+msgstr "سند جدید"
 
 #: ../Pinta.Core/Actions/FileActions.cs:71
 msgid "Open"
-msgstr "열기"
+msgstr "بازکردن"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr "내용"
+msgstr "فهرست"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr "Pinta 웹사이트"
+msgstr "نشانی اینترنتی پینتا"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
-msgstr "버그 정보 파일"
+msgstr "پرونده‌ی اشکالات"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
-msgstr "현재 어플리케이션 번역하기"
+msgstr "ترجمه کردن این برنامه"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
 msgid "About"
-msgstr "소개"
+msgstr "درباره"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
 #: ../Pinta.Core/Actions/ImageActions.cs:283
 msgid "Crop to Selection"
-msgstr "선택영역 잘라내기"
+msgstr "برش‌زدن ناحیه‌ی منتخب"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
 msgid "Auto Crop"
-msgstr "자동으로 잘라내기"
+msgstr "برش‌زدن خودکار"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Image..."
-msgstr "이미지 크기조정..."
+msgstr "تغییر اندازه‌ی تصویر..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
-msgstr "캔버스 크기조정..."
+msgstr "تغییر اندازه‌ی بوم..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
-msgstr "수평 뒤집기"
+msgstr "قرینه‌سازی افقی"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:71
 msgid "Flip Vertical"
-msgstr "수직 뒤집기"
+msgstr "قرینه‌سازی عمودی"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
 msgid "Rotate 90° Clockwise"
-msgstr "시계방향으로  90° 회전"
+msgstr "چرخش 90 درجه در جهت ساعت"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "반시계 방향으로   90° 회전"
+msgstr "چرخش 90 درجه در جهت عکس ساعت"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
 msgid "Rotate 180°"
-msgstr "180° 회전"
+msgstr "چرخش 180 درجه"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:69
 #: ../Pinta.Core/Actions/ImageActions.cs:138
 msgid "Flatten"
-msgstr "편평하게"
+msgstr "هم‌سطح‌سازی"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
 #: ../Pinta.Core/Classes/Document.cs:852
 msgid "Add New Layer"
-msgstr "신규 레이어 추가"
+msgstr "افزودن لایه‌ی جدید"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
 msgid "Delete Layer"
-msgstr "레이어 삭제"
+msgstr "حذف لایه"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "레이어 복제"
+msgstr "نسخه برداری از لایه"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr "레이어 합치기"
+msgstr "ترکیب با لایه‌ی زیرین"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr "파일에서 가져오기..."
+msgstr "وارد کردن از فایل..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr "레이어 회전/줌..."
+msgstr "چرخش / میزان بزرگنمایی لایه..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
-msgstr "레이어 위로 보내기"
+msgstr "حرکت لایه به بالا"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
 #: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
-msgstr "레이어 아래로 보내기"
+msgstr "حرکت لایه به پایین"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr "레이어 속성.."
+msgstr "خصوصیات لایه..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "이미지 파일 열기"
+msgstr "بازکردن فایل تصویری"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr "파일에서 가져오기"
+msgstr "وارد کردن از فایل"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom In"
-msgstr "확대"
+msgstr "بزرگنمایی"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom Out"
-msgstr "축소"
+msgstr "کوچک نمایی"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
-msgstr "최적 맞춤"
+msgstr "بهترین اندازه"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
-msgstr "선택영역 확대"
+msgstr "بزرگنمایی ناحیه‌ی منتخب"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
-msgstr ""
+msgstr "اندازه‌ی عادی"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
-msgstr "도구 모음"
+msgstr "نوار ابزار"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr "이미지 탭"
+msgstr "برگه‌های تصویر"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
-msgstr "픽셀 안내선"
+msgstr "شبکه‌ی پیکسلی"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Rulers"
-msgstr "눈금자"
+msgstr "خط کش"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Pixels"
-msgstr "픽셀(Pixel)"
+msgstr "پیکسل"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
 msgid "Inches"
-msgstr "인치"
+msgstr "اینچ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:88
 msgid "Centimeters"
-msgstr "센티미터"
+msgstr "سانتی‌متر"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
-msgstr "전체화면"
+msgstr "تمام‌صفحه"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
 #: ../Pinta.Core/Actions/ViewActions.cs:276
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
-msgstr "창"
+msgstr "پنجره"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
-msgstr "눈금 단위"
+msgstr "مقیاس خط کش"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
@@ -402,207 +403,209 @@ msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr "모두 저장"
+msgstr "ذخیره کردن همه"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr "모두 닫기"
+msgstr "بستن همه‌"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:244
 msgid "Tool"
-msgstr "도구"
+msgstr "ابزار"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
-msgstr "단축키"
+msgstr "کلید میانبر"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
-msgstr "평균 혼합"
+msgstr "ترکیب کردن عادی"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:429
 msgid "Overwrite"
-msgstr "덮어쓰기"
+msgstr "رونویسی"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:443
 msgid "Antialiasing On"
-msgstr "안티알리아싱 설정"
+msgstr "هموارسازی فعال"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:444
 msgid "Antialiasing Off"
-msgstr "안티알리아싱 해제"
+msgstr "هموارسازی غیرفعال"
 
 #: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
-msgstr "레이어"
+msgstr "لایه"
 
 #: ../Pinta.Core/Classes/Document.cs:392
 msgid "copy"
-msgstr "복사"
+msgstr "کپی"
 
 #: ../Pinta.Core/Classes/Document.cs:668
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "캔버스 크기 변경"
+msgstr "تغییر اندازه‌ی بوم"
 
 #: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr "선택 영역 이동"
+msgstr "حرکت دادن پیکسل‌های منتخب"
 
 #: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
-msgstr "캔버스보다 큰 이미지"
+msgstr "تصویر بزرگ‌تر از بوم"
 
 #: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
-msgstr "붙여넣기 이미지가 캔버스 사이즈보다 큽니다. 어떻게 하시겠습니까?"
+msgstr ""
+"تصویر بازنشانی شده از اندازه‌ی بوم بزرگ‌تر است. تمایل دارید چه کاری انجام "
+"دهید؟"
 
 #: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
-msgstr "캔버스 늘리기"
+msgstr "گسترش بوم"
 
 #: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
-msgstr "캔버스 크기를 변경하지 않음."
+msgstr "اندازه‌ی بوم تغییر نکند"
 
 #: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
-msgstr "이미지를 붙여넣을 수 없음"
+msgstr "تصویر بازنشانی نمی‌شود"
 
 #: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
-msgstr "클립보드에 이미지가 없습니다."
+msgstr "تصویری در حافظه‌ی سیستم نیست."
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
-msgstr ""
+msgstr "جایگزینی"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr "더하기(+) (Ctrl + 왼쪽 클릭)"
+msgstr "اجتماع"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
-msgstr "빼기(-) (오른쪽 클릭)"
+msgstr "تفریق"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Xor (Ctrl + Right Click)"
-msgstr "반전 (Ctrl + 오른쪽 클릭)"
+msgstr "انحصار"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
-msgstr "교차 (Shift + 왼쪽 클릭)"
+msgstr "اشتراک"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr " 선택 모드 "
+msgstr " نحوه‌ی انتخاب "
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
 #: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
-msgstr "보통"
+msgstr "عادی"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
-msgstr "곱하기"
+msgstr "ضرب"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
-msgstr ""
+msgstr "سوختگی رنگ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
-msgstr ""
+msgstr "گریز رنگی"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Overlay"
-msgstr ""
+msgstr "هم‌پوشانی"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Difference"
-msgstr ""
+msgstr "تفاضل"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Lighten"
-msgstr ""
+msgstr "روشن"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Darken"
-msgstr ""
+msgstr "تاریک"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Screen"
-msgstr ""
+msgstr "پرده"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 msgid "Xor"
-msgstr ""
+msgstr "یای انحصار"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "روشنایی سخت"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "روشنایی نرم"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "رنگی"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
 msgid "Luminosity"
-msgstr "밝기"
+msgstr "درخشندگی"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr ""
+msgstr "تن رنگ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
-msgstr ""
+msgstr "اشباع رنگ"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr ""
+msgstr "تکمیل پیکسل‌ها"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
-msgstr "수평 뒤집기"
+msgstr "وارون افقی تصویر"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
-msgstr "수직 뒤집기"
+msgstr "وارون عمودی تصویر"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
 msgid "Flip Layer Horizontal"
-msgstr "레이어 수평 뒤집기"
+msgstr "وارون افقی لایه"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
 msgid "Flip Layer Vertical"
-msgstr "레이어 수직 뒤집기"
+msgstr "وارون عمودی لایه"
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:38
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
 msgid "Resize Image"
-msgstr "그림 크기 조정"
+msgstr "تغییر اندازهٔ تصویر"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr "{0} 이미지 ({1})"
+msgstr "{0} تصویر ({1})"
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:63
 #: ../Pinta.Core/Managers/EffectsManager.cs:98
@@ -611,172 +614,172 @@ msgstr "..."
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:221
 msgid "Rendering Effect"
-msgstr ""
+msgstr "پرداخت کردن جلوه"
 
 #: ../Pinta.Core/Managers/ToolManager.cs:234
 #: ../Pinta.Core/Managers/ToolManager.cs:236
 msgid "No tool selected."
-msgstr "선택된 도구가 없습니다."
+msgstr "ابزرای انتخاب نشده است."
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:100
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "저장되지 않은 이미지 {0}"
+msgstr "تصویر ذخیره نشده {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:157
 msgid "Background"
-msgstr "배경색"
+msgstr "پس‌زمینه"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:166
 #: ../Pinta/Dialogs/NewImageDialog.cs:68
 msgid "New Image"
-msgstr "새 그림"
+msgstr "تصویر جدید"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr "지원하지 않는 파일 형식"
+msgstr "قالب تصویری پشتیبانی نشده"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
-msgstr "이미지 열기"
+msgstr "بازکردن تصویر"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:204
 msgid "Permission denied"
-msgstr "권한이 거부되었습니다"
+msgstr "اجازه داده نشد"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "열 수 없는 파일 : {0}"
+msgstr "فایل نمی‌تواند باز شود: {0}"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
-msgstr "숨기기"
+msgstr "پنهان‌سازی"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr "최소화"
+msgstr "کمینه‌سازی"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
 msgid "Dock"
-msgstr "고정"
+msgstr "پهلو گرفتن"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr "해제"
+msgstr "جدا کردن"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
 msgid "Auto Hide"
-msgstr "자동 숨기기"
+msgstr "پنهان‌سازی خودکار"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
-msgstr "자동 색보정"
+msgstr "تسطیح خودکار"
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
 msgid "Black and White"
-msgstr "흑백변환"
+msgstr "سیاه و سفید"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "밝기 / 대비"
+msgstr "روشنایی / تضاد"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Brightness"
-msgstr "밝기"
+msgstr "روشنایی"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
-msgstr "대비"
+msgstr "تضاد"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
 msgid "Curves"
-msgstr "커브"
+msgstr "منحنی‌ها"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "색조 / 채도"
+msgstr "تن رنگ / اشباع رنگ"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr "명도"
+msgstr "روشنی"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
 msgid "Invert Colors"
-msgstr "색 반전"
+msgstr "وارونه کردن رنگها"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr "레벨"
+msgstr "سطوح"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
 msgid "Posterize"
-msgstr "포스터화"
+msgstr "پوسترسازی"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
-msgstr "세피아"
+msgstr "سپیا"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
-msgstr "색보정"
+msgstr "تنظیم سطوح"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
-msgstr "빨강"
+msgstr "قرمز"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
 msgid "Green"
-msgstr "녹색"
+msgstr "سبز"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
 msgid "Blue"
-msgstr "파랑"
+msgstr "آبی"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
 msgid "Linked"
-msgstr "연결됨"
+msgstr "پیوند داده شده"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 msgid "Add Noise"
-msgstr "잡티 섞기"
+msgstr "افزودن پارازیت"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
 #: ../Pinta.Effects/Effects/MedianEffect.cs:36
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
 msgid "Noise"
-msgstr "노이즈"
+msgstr "پارازیت"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:145
 #: ../Pinta.Effects/Effects/TileEffect.cs:142
 msgid "Intensity"
-msgstr ""
+msgstr "شدت"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
-msgstr "채도"
+msgstr "اشباع رنگ"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
-msgstr ""
+msgstr "پوشش"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr "부풀리기"
+msgstr "متورم"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
@@ -785,7 +788,7 @@ msgstr "부풀리기"
 #: ../Pinta.Effects/Effects/TileEffect.cs:33
 #: ../Pinta.Effects/Effects/TwistEffect.cs:33
 msgid "Distort"
-msgstr "뒤틀어놓기"
+msgstr "اعوجاج"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:101
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
@@ -793,46 +796,46 @@ msgstr "뒤틀어놓기"
 #: ../Pinta.Effects/Effects/TwistEffect.cs:131
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
 msgid "Amount"
-msgstr "총계"
+msgstr "مقدار"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:104
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
 msgid "Offset"
-msgstr ""
+msgstr "آفست"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:30
 msgid "Clouds"
-msgstr "구름"
+msgstr "طرح ابری"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 msgid "Render"
-msgstr "덧씌우기"
+msgstr "پرداخت"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:205
 msgid "Scale"
-msgstr ""
+msgstr "مقیاس"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:208
 msgid "Power"
-msgstr ""
+msgstr "انرژی"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:231
 msgid "Seed"
-msgstr ""
+msgstr "بذر"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "테두리만 강조"
+msgstr "لبه یابی"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
 msgid "Stylize"
-msgstr "테두리 효과"
+msgstr "قلم‌زنی"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:143
@@ -844,15 +847,15 @@ msgstr "테두리 효과"
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
 msgid "Angle"
-msgstr ""
+msgstr "زاویه"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
-msgstr "돋을새김"
+msgstr "برجسته‌کاری"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
-msgstr "조각흔들기"
+msgstr "خرد کردن"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
@@ -861,29 +864,29 @@ msgstr "조각흔들기"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
 msgid "Blurs"
-msgstr "흐릿하게 만들기"
+msgstr "تار کردن"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:111
 msgid "Fragments"
-msgstr "조각화"
+msgstr "تکه‌ها"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:114
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
 msgid "Distance"
-msgstr "거리"
+msgstr "فاصله"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:117
 #: ../Pinta.Effects/Effects/TileEffect.cs:138
 msgid "Rotation"
-msgstr "회전"
+msgstr "دوران"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
 msgid "Frosted Glass"
-msgstr "젖빛 유리 씌우기"
+msgstr "شیشه برفکی"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr "가우스 곡선식 흐리기"
+msgstr "تار کردن گاوسی"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -892,585 +895,592 @@ msgstr "가우스 곡선식 흐리기"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
 msgid "Radius"
-msgstr "둥글림 정도"
+msgstr "شعاع"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 msgid "Glow"
-msgstr "발광 효과"
+msgstr "درخشش"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:33
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
 msgid "Photo"
-msgstr "사진"
+msgstr "نگاره"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "먹으로 밑그림 그린 효과"
+msgstr "طرح جوهری"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
 msgid "Artistic"
-msgstr "미술품 흉내내기"
+msgstr "طرح هنری"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
 msgid "Ink Outline"
-msgstr "잉크 외곽선"
+msgstr "جوهر بیرونی"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
 msgid "Coloring"
-msgstr ""
+msgstr "رنگینگی"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
 msgid "Julia Fractal"
-msgstr "줄리아 프랙탈"
+msgstr "جولیا فراکتال"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
 msgid "Factor"
-msgstr ""
+msgstr "عامل"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
 #: ../Pinta.Effects/Effects/WarpEffect.cs:188
 msgid "Quality"
-msgstr ""
+msgstr "کیفیت"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
 #: ../Pinta.Tools/Tools/ZoomTool.cs:48
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
 msgid "Zoom"
-msgstr "확대"
+msgstr "ذره بین"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
 msgid "Mandelbrot Fractal"
-msgstr "만델브로트의 프랙탈"
+msgstr "مندل‌بروت فراکتال"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
 msgid "Median"
-msgstr "뭉개기"
+msgstr "میانه"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:73
 msgid "Percentile"
-msgstr ""
+msgstr "درصدی"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
 msgid "Motion Blur"
-msgstr "움직임 효과"
+msgstr "حرکت تار شده"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
 msgid "Centered"
-msgstr ""
+msgstr "وسط‌چین"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
 msgid "Oil Painting"
-msgstr "유화효과"
+msgstr "رنگ روغنی"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
 msgid "Brush Size"
-msgstr "붓 크기"
+msgstr "اندازه‌ی قلم"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
 msgid "Coarseness"
-msgstr ""
+msgstr "زبری"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
 #: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Outline"
-msgstr "윤곽선"
+msgstr "طرح ریزی"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:142
 msgid "Thickness"
-msgstr ""
+msgstr "ضخامت"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
 msgid "Pencil Sketch"
-msgstr "연필 밑그림 효과"
+msgstr "طرح مدادی"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
 msgid "Pencil Tip Size"
-msgstr "연필심 크기"
+msgstr "اندازه‌ی نوک مداد"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
 msgid "Color Range"
-msgstr "색 범위"
+msgstr "گسترۀ رنگ"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr "그림낱 강조"
+msgstr "طرح پیکسلی"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:119
 msgid "Cell Size"
-msgstr "셀 크기"
+msgstr "اندازۀ سلول"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
 msgid "Polar Inversion"
-msgstr "구의 꼭지점 향해 객체 반복해서 넣기"
+msgstr "معکوس قطبی"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
 msgid "Radial Blur"
-msgstr "방사형 흐리기"
+msgstr "تار شدگی دایروی"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
+"برای پیش‌نمایش، تصاویر و زوایای کوچک از کیفیت پایین استفاده شود. برای پردازش "
+"نهایی، تصاویر و زوایای بزرگ‌تر از کیفیت بالا استفاده شود."
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
 msgid "Red Eye Removal"
-msgstr "적목현상 제거"
+msgstr "حذف قرمزی چشم"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
 #: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
 msgid "Tolerance"
-msgstr "오차"
+msgstr "درجه‌ی اعتنا"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "درصد اشباع رنگ"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
+"نکته: برای بهترین نتایج، ابتدا از ابزار انتخاب برای هر چشم استفاده شود."
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
-msgstr "노이즈 감소"
+msgstr "کاهش پارازیت"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
 msgid "Strength"
-msgstr ""
+msgstr "قدرت"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
-msgstr "돋을새김"
+msgstr "نقش برجسته"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:25
 msgid "Sharpen"
-msgstr "선명하게"
+msgstr "وضوح"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Soften Portrait"
-msgstr "보드랍게 만들기"
+msgstr "شفاف کردن عکس"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
 msgid "Softness"
-msgstr "부드러움"
+msgstr "لطافت"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
 msgid "Lighting"
-msgstr ""
+msgstr "روشنایی"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Warmth"
-msgstr "따뜻함"
+msgstr "حرارت"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
-msgstr "매끄러운 타일에 반사효과"
+msgstr "انعکاس مشبک"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:140
 msgid "Tile Size"
-msgstr ""
+msgstr "اندازۀ کاشی"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "비틀기"
+msgstr "پیچانیدن"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:133
 msgid "Antialias"
-msgstr ""
+msgstr "حذف ناصافی لبه‌ها"
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "초점 없애기"
+msgstr "کاهش تمرکز"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "گیره زدن"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "پیچیدن"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
-msgstr ""
+msgstr "انعکاس"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
-msgstr ""
+msgstr "اولیه"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Secondary"
-msgstr ""
+msgstr "ثانویه"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 #: ../Pinta/Dialogs/NewImageDialog.cs:290
 msgid "Transparent"
-msgstr ""
+msgstr "شفاف"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr ""
+msgstr "اصلی"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
-msgstr "중앙 오프셋"
+msgstr "نقطه‌ی مرکزی"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
-msgstr "확대해 흐리기"
+msgstr "تار کردن با زوم"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
 msgid "Transfer Map"
-msgstr "보정대상 기준"
+msgstr "انتقال نقشه"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
 msgid "RGB"
-msgstr "적녹청"
+msgstr "قرمز- سبز- آبی"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
 msgid "(256, 256)"
-msgstr "(256, 256)"
+msgstr "(256، 256)"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
 msgid "Red  "
-msgstr "빨강  "
+msgstr "قرمز  "
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
 msgid "Blue "
-msgstr "파랑 "
+msgstr "آبی "
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
 msgid "Reset"
-msgstr "초기화"
+msgstr "تنظیم‌مجدد"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
 msgid "Tip: Right-click to remove control points."
-msgstr "도움말: 오른쪽 딸깍으로 조정점을 지울 수 있습니다."
+msgstr "نکته: برای حذف نقاط کنترلی راست-کلیک کنید."
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
 msgid "Input Histogram"
-msgstr "입력 히스토그램"
+msgstr "هیستوگرام ورودی"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
 msgid "Input"
-msgstr "입력"
+msgstr "ورودی"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
 msgid "Output"
-msgstr "출력"
+msgstr "خروجی"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
 msgid "Output Histogram"
-msgstr "출력 히스토그램"
+msgstr "هیستوگرام خروجی"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
 msgid "Auto"
-msgstr "자동"
+msgstr "خود‌کار"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
 msgid "Choose Primary Color"
-msgstr "기본색 선택"
+msgstr "انتخاب رنگ اولیه"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
 msgid "Choose Secondary Color"
-msgstr "보조색 선택"
+msgstr "انتخاب رنگ ثانویه"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
 msgid "Choose Palette Color"
-msgstr "색깔판 색깔 선택"
+msgstr "انتخاب رنگ جعبه‌رنگ"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
 msgid "Click to switch between primary and secondary color."
-msgstr "기본색과 보조색을 교환하려면 클릭"
+msgstr "برای تعویض رنگ بین اولیه و ثانویه کلیک کنید."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "برای تنظیم رنگ اولیه و ثانویه به پیش‌فرض کلیک کنید."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
 msgid "Click to select primary color."
-msgstr "기본색을 선택하려면 클릭"
+msgstr "برای انتخاب رنگ اولیه کلیک کنید."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
 msgid "Click to select secondary color."
-msgstr "보조색을 선택하려면 클릭"
+msgstr "برای انتخاب رنگ ثانویه کلیک کنید."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"기본색을 설정하려면 왼쪽 클릭을 하세요. 보조색을 설정하려면 오른쪽 클릭을 하세요. 팔레트 색상을 선택하려면 중간 클릭을 하세요."
+"برای تنظیم رنگ اولیه چپ-کلیک کنید. برای تنظیم رنگ ثانویه راست-کلیک کنید. "
+"برای انتخاب رنگ جعبه‌رنگ میان-کلیک کنید."
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
 msgid "Random Noise"
-msgstr "잡티 마구섞기"
+msgstr "ایجاد پارازیت تصادفی"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
 msgid "Reseed"
-msgstr ""
+msgstr "بذر دهی مجدد"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Shown"
-msgstr "보이는 레이어"
+msgstr "آشکار شدن لایه"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
 msgid "Layer Hidden"
-msgstr "숨긴 레이어"
+msgstr "مخفی شدن لایه"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:37
 msgid "Circles"
-msgstr "동그라미"
+msgstr "دایروی"
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:37
 msgid "Grid"
-msgstr "모눈"
+msgstr "شبکه‌ای"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "흩뿌리기"
+msgstr "لکه‌ای"
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
 msgid "Squares"
-msgstr "사각형"
+msgstr "مربعی"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr ""
+msgstr "خط چین"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
-msgstr ""
+msgstr "فلش"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
 msgid "Size"
-msgstr ""
+msgstr "اندازه‌"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr ""
+msgstr "کاهش اندازه‌ی فلش"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr ""
+msgstr "افزایش اندازه‌ی فلش"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr ""
+msgstr "کاهش زاویه‌ی مبدا"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr ""
+msgstr "افزایش زاویه‌ی مبدا"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
-msgstr ""
+msgstr "طول"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr ""
+msgstr "کاهش طول مبدا"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr ""
+msgstr "افزایش طول مبدا"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
 msgid "Brush width"
-msgstr "브러시 너비"
+msgstr "پهنای قلم"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
 msgid "Decrease brush size"
-msgstr "브러시 크기 축소"
+msgstr "کاهش اندازه‌ی قلم"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
 msgid "Increase brush size"
-msgstr "브러시 크기 확대"
+msgstr "افزایش اندازه‌ی قلم"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
-msgstr "채움 방식"
+msgstr "شیوه‌ی پرکردن"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
 msgid "Outline Shape"
-msgstr "윤곽 모양"
+msgstr "لبه‌گیری شکل"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
 msgid "Fill Shape"
-msgstr "채움 모양"
+msgstr "پرکردن شکل"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
 msgid "Fill and Outline Shape"
-msgstr "채움과 외곽선 모양"
+msgstr "لبه‌گیری و پرکردن شکل"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
-msgstr ""
+msgstr "نوع شکل"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
-msgstr ""
+msgstr "دنباله‌های خط / منحنی باز"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr ""
+msgstr "دنباله‌های خط / منحنی بسته"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
 #: ../Pinta.Tools/Tools/EllipseTool.cs:37
 msgid "Ellipse"
-msgstr "타원"
+msgstr "بیضی"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "دنباله‌های خطی سرگرد"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "تغییر نوع شکل"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
-msgstr ""
+msgstr "نقطه حذف‌شده"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
-msgstr ""
+msgstr "حذف‌شده"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
 msgid "Point Added"
-msgstr ""
+msgstr "نقطه‌ی اضافه‌شده"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
-msgstr ""
+msgstr "اضافه‌شده"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr ""
+msgstr "تغییریافته"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
-msgstr ""
+msgstr "بسته‌شده"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "شکل منحنی باز"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
 msgid "Closed Curve Shape"
-msgstr ""
+msgstr "شکل منحنی بسته"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
-msgstr ""
+msgstr "شکل خطی سرگرد"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "کاهش شعاع گوشه‌ی شکل"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "افزایش شعاع گوشه‌ی شکل"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
-msgstr "따라그리기"
+msgstr "مهر تکثیر"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:47
 msgid "Ctrl-left click to set origin, left click to paint."
-msgstr "Ctrl글쇠를 누르고 왼쪽 딸깍  원본이 지정되고,  왼쪽 딸깍하면 따라서 그려집니다."
+msgstr "کلید کنترل + چپ-کلیک برای تنظیم مبدا، سپس رنگ‌آمیزی با چپ-کلیک."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
 msgid "Color Picker"
-msgstr "색 고르기"
+msgstr "رنگ بردار"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "기본색 설정은 왼쪽 클릭. 보조색 설정은 오른쪽 클릭."
+msgstr ""
+"برای تنظیم رنگ اولیه کلیک چپ کنید. برای تنظیم رنگ ثانویه کلیک راست کنید."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "نمونه‌برداری"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr "단일 픽셀"
+msgstr "تک نقطه"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr "3 x 3 영역"
+msgstr "محدوده‌ی 3 در 3"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr "5 x 5 영역"
+msgstr "محدوده‌ی 5 در 5"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr "7 x 7 영역"
+msgstr "محدوده‌ی 7 در 7"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr "9 x 9 영역"
+msgstr "محدوده‌ی 9 در 9"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
-msgstr "이미지"
+msgstr "تصاویر"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
-msgstr "색 고른 후"
+msgstr "پس از انتخاب"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
 msgid "Do not switch tool"
-msgstr "계속 색 고르기"
+msgstr "ابزار را عوض نکنید"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
 msgid "Switch to previous tool"
-msgstr "이전 도구로 전환"
+msgstr "تعویض با ابزار قبلی"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
 msgid "Switch to Pencil tool"
-msgstr "연필 도구로 전환"
+msgstr "تعویض با ابزار مداد"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr "연필"
+msgstr "مداد"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
 msgid "Ellipse Select"
-msgstr "타원 선택"
+msgstr "انتخاب بیضوی"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
 msgstr ""
+"برای یک انتخاب بیضوی کلیک کرده و بکشید. برای انتخاب دایروی کلید Shift را نگه "
+"دارید."
 
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:46
@@ -1494,468 +1504,498 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"برای رسم یک شکل با رنگ اولیه کلیک چپ کنید.\n"
+"برای افزودن گیره‌ی کنترلی روی شکل کلیک چپ کنید.\n"
+"برای حرکت دادن گیره‌ی کنترلی روی آن کلیک چپ کرده و بکشید.\n"
+"برای میزان کشیدگی گیره‌ی کنترلی روی آن کلیک راست کرده و بکشید.\n"
+"برای چسبندگی به زوایا کلید Shift را نگه دارید.\n"
+"برای جابجا کردن نقطه‌ی کنترلی انتخاب شده از کلیدهای جهت‌نما استفاده شود.\n"
+"برای پیمایش و انتخاب نقاط کنترلی، کلید Ctrl + کلیدهای جهتی چپ و راست را "
+"بزنید.\n"
+"برای حذف نقطه‌ی کنترلی منتخب، کلید Delete را بزنید.\n"
+"برای افزودن یک نقطه‌ی کنترلی جدید در محل اشاره‌گر ماوس، کلید Space را "
+"بفشارید.\n"
+"برای ایجاد نقطه‌ی کنترلی دقیقا در همان محل، کلید Ctrl را نگه داشته و کلید "
+"Space را بزنید.\n"
+"برای ایجاد یک شکل جدید دقیقا در همان محل، کلید Ctrl را نگه داشته و روی یک "
+"نقطه‌ی کنترلی کلیک چپ کنید.\n"
+"برای ایجاد یک شکل جدید با شروع از لبه، کلید Ctrl را نگه داشته و خارج از "
+"محدوده‌ی تصویر کلیک کنید.\n"
+"برای بسته شدن شکل کلید Enter را بزنید."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
 msgid "Type"
-msgstr "형식"
+msgstr "نوع"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "صاف"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
-msgstr "지우개"
+msgstr "پاک‌کن"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:205
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
-msgstr "배경색을 투명한 배경으로 하려면 왼쪽 클릭, 보조색으로 하려면 오른쪽 클릭하세요. "
+msgstr ""
+"کلیک چپ برای پاک کردن با لایه برداری، کلیک راست برای پاک کردن با رنگ ثانویه. "
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:72
 msgid "Flood Mode"
-msgstr "홍수 모드"
+msgstr "حالت پرکردن"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:79
 msgid "Contiguous"
-msgstr "내부"
+msgstr "پیوسته"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:80
 msgid "Global"
-msgstr "전체"
+msgstr "فراگیر"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
 msgid "Freeform Shape"
-msgstr "자유도형 그리기"
+msgstr "اشکال بدون فرم"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
-msgstr "왼쪽 클릭은 기본색으로 칠합니다. 오른쪽 클릭은 보조색으로 칠합니다."
+msgstr "کلیک چپ برای کشیدن با رنگ اولیه، کلیک راست برای کشیدن با رنگ ثانویه."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
 #: ../Pinta.Tools/Tools/GradientTool.cs:169
 msgid "Gradient"
-msgstr "그라디언트"
+msgstr "طیف"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.  Right "
 "click to reverse."
-msgstr "기본색에서 보조색으로 채우려면 클릭한 후 끌어서 놓으세요. 반대로 채우려면 오른쪽 클릭을 하세요."
+msgstr ""
+"برای ترسیم طیف از رنگ اولیه به رنگ ثانویه کلیک کرده و بکشید. کلیک راست برعکس "
+"این مطلب."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:176
 msgid "Linear Gradient"
-msgstr "선형 그라데이션"
+msgstr "طیف خطی"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:177
 msgid "Linear Reflected Gradient"
-msgstr "반사된 선형 그라데이션"
+msgstr "طیف منعکس شده‌ی خطی"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Linear Diamond Gradient"
-msgstr "다이아몬드형 그라데이션"
+msgstr "طیف لوزوی خطی"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:179
 msgid "Radial Gradient"
-msgstr ""
+msgstr "طیف دایروی"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:180
 msgid "Conical Gradient"
-msgstr "원추형 그라데이션"
+msgstr "طیف مخروطی"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
 msgid "Lasso Select"
-msgstr "올가미 선택"
+msgstr "انتخاب آزاد"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "선택 영역의 외곽선을 그리려면 클릭한 후 끌어서 놓으세요."
+msgstr "برای انتخاب یک محدوده کلیک کرده، بکشید و سپس رها کنید."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
-msgstr ""
+msgstr "خط / منحنی"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:62
 msgid "Magic Wand Select"
-msgstr "요술봉 선택"
+msgstr "انتخاب جادویی"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:72
 msgid "Click to select region of similar color."
-msgstr "비슷한 색상 영역을 선택하려면 클릭하세요."
+msgstr "برای انتخاب نواحی مشابه کلیک کنید."
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
-"선택된 영역의 내용을 이동하려면 왼쪽 클릭을 하고 끌어서 놓으세요. 선택 영역의 내용을 회전하려면 오른쪽 클릭을 하고 끌어서 놓으세요."
+"برای انتقال محتوای منتخب، روی آن کلیک چپ کرده و جابجا کنید. برای دوران "
+"محتوای منتخب، کلیک راست کرده و بچرخانید."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
-msgstr "선택한 부분 옮기기"
+msgstr "جابه‌جایی انتخاب"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
-"선택한 외곽선 영역을 이동하려면 왼쪽 클릭하여 끌어서 놓으세요. 선택 외곽선 영역을 회전하려면 오른쪽 클릭하여 끌어서 놓으세요."
+"برای انتقال ناحیه‌ی منتخب، روی آن کلیک چپ کرده و جابجا کنید. برای دوران "
+"ناحیه‌ی منتخب، کلیک راست کرده و بچرخانید."
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
-msgstr "붓"
+msgstr "قلم‌مو"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
 msgid "Paint Bucket"
-msgstr "색칠"
+msgstr "سطل رنگ"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
-msgstr "기본색으로 채우려면 왼쪽 클릭. 보조색으로 채우려면 오른쪽 클릭을 하세요."
+msgstr ""
+"برای رنگ‌آمیزی نواحی با رنگ اولیه کلیک چپ، برای رنگ‌آمیزی با رنگ ثانویه کلیک "
+"راست."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
 msgid "Pan"
-msgstr "잡기"
+msgstr "پیمایش بوم"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:43
 msgid "Click and drag to navigate image."
-msgstr "이미지를 조정하려면 클릭한 후 끌어서 놓으세요."
+msgstr "برای پیمایش بوم کلیک کرده و بکشید."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
-msgstr "기본색으로 1픽셀 너비의  선으로 자유도형을 그리려면 왼쪽 클릭. 보조색으로 그리려면 오른쪽 클릭."
+msgstr ""
+"برای رسم کردن آزادانه‌ی خطوطی به پهنای یک پیکسل با رنگ اولیه، کلیک چپ کرده و "
+"بکشید. کلیک راست هم برای استفاده از رنگ ثانویه."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid "Recolor"
-msgstr "색바꾸기"
+msgstr "تغییر رنگ"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:62
 msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
 msgstr ""
+"برای جایگزینی رنگ ثانویه با رنگ اولیه کلیک چپ کنید. کلیک راست برای معکوس "
+"کردن."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
-msgstr "사각형 선택"
+msgstr "انتخاب مربع مستطیل"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
 msgid ""
 "Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
 "square."
 msgstr ""
+"برای انتخاب مستطیلی کلیک کرده و بکشید. نگه داشتن کلید Shift برای انتخاب "
+"مربعی."
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:37
 msgid "Rectangle"
-msgstr "사각형"
+msgstr "مستطیل"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
 msgid "Rounded Rectangle"
-msgstr "둥근 사각형"
+msgstr "مستطیل گرد‌شده"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:94
 msgid "Text"
-msgstr "글자"
+msgstr "متن‌"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
-msgstr ""
+msgstr "متن - تمام‌شده"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
-msgstr "텍스트 커서를 위치시키려면 왼쪽 클릭한 후 글자를 입력하세요. 글자색은 기본색으로 적용됩니다."
+msgstr ""
+"کلیک چپ کنید تا مکان‌نما گذاشته شود، سپس متن دلخواه را وارد کنید. رنگ متن "
+"همان رنگ اولیه است."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:158
 msgid "Font"
-msgstr "글꼴"
+msgstr "نوع قلم متن"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Bold"
-msgstr "굵게"
+msgstr "پر رنگ"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:198
 msgid "Italic"
-msgstr "기울임"
+msgstr "کج"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:205
 msgid "Underline"
-msgstr "밑줄"
+msgstr "زیرخط دار"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Left Align"
-msgstr "왼쪽 정렬"
+msgstr "هم‌ترازی چپ"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:222
 msgid "Center Align"
-msgstr "가운데 정렬"
+msgstr "تنظیم در وسط"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Right Align"
-msgstr "오른쪽 정렬"
+msgstr "هم‌ترازی راست"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Text Style"
-msgstr "글꼴처리"
+msgstr "اسلوب متن"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
-msgstr "보통 과 외곽선"
+msgstr "معمولی و دورگیری شده"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
-msgstr "배경 채우기"
+msgstr "پرکردن پس‌زمینه"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Outline width"
-msgstr "외곽선 너비"
+msgstr "پهنای دورگیری"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Decrease outline size"
-msgstr "외곽선 크기 감소"
+msgstr "کاهش اندازه‌ی دورگیری"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:286
 msgid "Increase outline size"
-msgstr "외곽선 크기 확대"
+msgstr "افزایش اندازه‌ی دورگیری"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:54
 msgid ""
 "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
 "selection."
-msgstr "확대하려면 왼쪽 클릭. 축소하려면 오른쪽 클릭. 선택 부분 확대는 클릭하여 끌어서 놓으세요."
+msgstr ""
+"کلیک چپ برای بزرگنمایی. کلیک راست برای کوچک نمایی. برای بزرگنمایی ناحیه‌ی "
+"منتخب، کلیک کرده و بکشید."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
 msgid "Resize Palette"
-msgstr "팔렛트 크기 조정"
+msgstr "تغییر اندازه‌ی جعبه‌رنگ"
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
 msgid "New palette size:"
-msgstr "새 팔렛트 크기:"
+msgstr "اندازه‌ی جدید جعبه‌رنگ:"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "\"{0}\" 이미지를 닫기 전에 저장하시겠습니까?"
+msgstr "قبل از بستن، تغییرات تصویر \"{0}\" را ذخیره می‌کنید؟"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "저장하지 않으면, 모든 변경 사항을 잃어버립니다"
+msgstr "تمام تغییرات از دست خواهند رفت، اگر ذخیره‌سازی انجام نشود."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr ""
+msgstr "بستن _بدون ذخیره‌سازی"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr "스크린샷 찍기"
+msgstr "گرفتن عکس صفحه"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
-msgstr "스크린샷 찍기 전 지연시간(초):"
+msgstr "گرفتن تصویر صفحه‌نمایش با زمانبندی (ثانیه):"
 
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:63
 msgid "Image files"
-msgstr "이미지 파일"
+msgstr "فایل های تصویری"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
 msgid "Save Image File"
-msgstr "이미지 파일 저장"
+msgstr "ذخیره‌سازی فایل تصویر"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta는 해당 형식의 이미지 파일을 지원하지 않습니다."
+msgstr "پینتا از این قالب تصویری پشتیبانی نمی‌کند."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
 msgid "Cannot save read only file."
-msgstr "읽기 전용 파일을 저장할 수 없습니다."
+msgstr "ذخیره‌سازی به‌صورت فایل فقط خواندنی انجام نمی‌شود."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
 msgid "Image too large"
-msgstr "너무 큰 이미지"
+msgstr "تصویر خیلی حجیم است."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "ICO 파일은 255 x 255 픽셀보다 클 수 없습니다."
+msgstr "فایل‌های ICO نمی‌توانند بیش از 255 در 255 پیکسل باشند."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "\"{0}\"(이)라는 이름의 파일이 이미 있습니다. 덮어 쓰시겠습니까?"
+msgstr "فایلی به نام \"{0}\" موجود است. تمایل به جایگزینی با آن را دارید؟"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
-msgstr "자료가 이미 \"{1}\" 에 존재합니다. 저장하면 현재 내용으로 바뀝니다."
+msgstr ""
+"فایلی در مسیر \"{1}\" موجود است. جایگزینی با آن، محتوای آن را بازنویسی خواهد "
+"کرد."
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
 msgid "Layer Opacity"
-msgstr "레이어 투명도"
+msgstr "شفافیت لایه"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
 msgid "Rename Layer"
-msgstr "레이어 이름변경"
+msgstr "تغییر نام لایه"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Hide Layer"
-msgstr "레이어 숨기기"
+msgstr "مخفی شدن لایه"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
 msgid "Show Layer"
-msgstr "레이어 보이기"
+msgstr "نمایان شدن لایه"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
 msgid "Layer Properties"
-msgstr "레이어 속성"
+msgstr "ویژگیهای لایه"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
-msgstr "레이어 회전/줌"
+msgstr "چرخش / بزرگنمایی لایه"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "انجمن افزونه‌های خاص-سکویی پینتا"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "انجمن افزونه‌های چند-سکویی پینتا"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
-msgstr "현재 릴리즈에 대한 기여자 :"
+msgstr "مشارکت کنندگان در این نسخه:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:138
 msgid "Previous contributors:"
-msgstr "이전 기여자 :"
+msgstr "مشارکت‌کنندگان قبلی:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:149
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Choi gyu ho https://launchpad.net/~cgh48\n"
-"  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim\n"
-"  Jongwon Kim https://launchpad.net/~nanpa777-y\n"
-"  Litty https://launchpad.net/~litty\n"
-"  Mike Sierra https://launchpad.net/~ubuntuda\n"
-"  SCRS https://launchpad.net/~secondroms\n"
-"  Softblow https://launchpad.net/~sftblw"
+"  Hashem Zavvari https://launchpad.net/~hashemzawary"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
-msgstr "번역자:"
+msgstr "مترجم:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:158
 msgid "Based on the work of Paint.NET:"
-msgstr "이 무른모는 Paint.NET을 기반으로 합니다."
+msgstr "مبتنی بر اثر Paint.NET:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:165
 msgid "Using some icons from:"
-msgstr "일부 아이콘의 출처 :"
+msgstr "آیکون‌های استفاده شده از:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "نیرو گرفته از Mono:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
-msgstr "Pinta에 대하여"
+msgstr "درباره‌ی پینتا"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:298
 msgid "Version Info"
-msgstr "판 정보"
+msgstr "اطلاعات نسخه"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
 msgid "Version"
-msgstr "판 번호:"
+msgstr "نسخه‌"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "License"
-msgstr "사용권"
+msgstr "مجوز"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
 msgid "Released under the MIT X11 License."
-msgstr "MIT X11 사용허가 하에 배포됐습니다."
+msgstr "منتشر شده تحت مجوز MIT X11."
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "Copyright"
-msgstr "저작권"
+msgstr "حق نشر"
 
 #: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
 msgid "by Pinta contributors"
-msgstr "Pinta 기여자"
+msgstr "توسط مشارکت‌کنندگان پینتا"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:98
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "جزئیات‌"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr ""
+msgstr "گزارش اشکال..."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
-msgstr "JPEG 화질"
+msgstr "کیفیت JPEG"
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
 msgid "Quality: "
-msgstr "화질: "
+msgstr "کیفیت: "
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
 msgid "Name:"
-msgstr "이름:"
+msgstr "نام:"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
-msgstr "표시"
+msgstr "قابل روئیت"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
-msgstr ""
+msgstr "حالت ترکیب"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
 msgid "Opacity:"
-msgstr "투명도:"
+msgstr "شفافیت:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:199
 #: ../Pinta/Dialogs/NewImageDialog.cs:342
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr ""
+msgstr "حافظه‌ی سیستم"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
 #: ../Pinta/Dialogs/NewImageDialog.cs:344
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Custom"
-msgstr ""
+msgstr "دلخواه"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "پیش‌تنظیم:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
 msgid "Width:"
-msgstr "너비:"
+msgstr "عرض:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
@@ -1964,447 +2004,448 @@ msgstr "너비:"
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
 msgid "pixels"
-msgstr "픽셀"
+msgstr "پیکسل"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
 msgid "Height:"
-msgstr "높이:"
+msgstr "ارتفاع:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr ""
+msgstr "جهت:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "پرتره‌ای"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "منظره‌ای"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "پس‌زمینه:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "سفید"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
-msgstr ""
+msgstr "رنگ پس زمینه"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "پیش‌نمایش"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
-msgstr "제목"
+msgstr "عنوان"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
-msgstr "파일 경로"
+msgstr "مسیر"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "백분율 기준:"
+msgstr "با درصد:"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "절대 크기 기준:"
+msgstr "با اندازه‌ی مطلق:"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "비율 유지"
+msgstr "حفظ ضریب نسبت"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
-msgstr "저자:"
+msgstr "لنگر:"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
-msgstr ""
+msgstr "نمایش این پیغام و خروج."
 
 #: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr ""
+msgstr "نمایش نسخه‌ی برنامه."
 
 #: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
-msgstr "렌더링을 위한 쓰레드 수"
+msgstr "تعداد رشته‌های پردازشی برای پرداخت"
 
 #: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr ""
+msgstr "طریقه‌ی استفاده: پینتا [فایل‌ها]"
 
 #: ../Pinta/Main.cs:109
 msgid "Options: "
-msgstr ""
+msgstr "گزینه‌ها: "
 
 #: ../Pinta/MainWindow.cs:309
 msgid "_File"
-msgstr "자료 (_F)"
+msgstr "_فايل"
 
 #: ../Pinta/MainWindow.cs:310
 msgid "_Edit"
-msgstr "편집(_E)"
+msgstr "_ويرايش"
 
 #: ../Pinta/MainWindow.cs:312
 msgid "_View"
-msgstr "보기(_V)"
+msgstr "_نما"
 
 #: ../Pinta/MainWindow.cs:315
 msgid "_Image"
-msgstr "이미지(_I)"
+msgstr "_تصویر"
 
 #: ../Pinta/MainWindow.cs:316
 msgid "_Layers"
-msgstr "레이어(_L)"
+msgstr "_لایه‌ها"
 
 #: ../Pinta/MainWindow.cs:317
 msgid "_Adjustments"
-msgstr "조정(_A)"
+msgstr "تنظ_یمات"
 
 #: ../Pinta/MainWindow.cs:318
 msgid "Effe_cts"
-msgstr "효과(_C)"
+msgstr "_جلوه‌ها"
 
 #: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
-msgstr ""
+msgstr "_افزونه‌ها"
 
 #: ../Pinta/MainWindow.cs:321
 msgid "_Window"
-msgstr "창(_W)"
+msgstr "_پنجره"
 
 #: ../Pinta/MainWindow.cs:325
 msgid "Tool Windows"
-msgstr "도구 창"
+msgstr "ابزار پنجره‌ها"
 
 #: ../Pinta/MainWindow.cs:329
 msgid "_Help"
-msgstr "도움말(_H)"
+msgstr "_راهنما"
 
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
-msgstr "선택사항명"
+msgstr "نام گزینه"
 
 #: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
-msgstr ""
+msgstr "بوم"
 
 #: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
-msgstr "작업 기록"
+msgstr "تاریخچه"
 
 #: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
 msgid "Layers"
-msgstr "레이어"
+msgstr "لایه‌ها"
 
 #: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
 msgid "Images"
-msgstr "이미지"
+msgstr "تصویرها"
 
 #: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
 msgid "Tools"
-msgstr "도구"
+msgstr "ابزار‌ها"
 
 #: Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr "경계선 처리"
+msgstr "وضع لبه‌ها"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
 msgid ""
 "Multiple selection:\n"
 "\n"
 msgstr ""
-"다중 선택:\n"
+"انتخاب چندگانه:\n"
 "\n"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
 msgid "Enable"
-msgstr "활성화"
+msgstr "فعال سازی‌"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
 msgid "Disable"
-msgstr "비활성화"
+msgstr "غیرفعال"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
 msgid "No selection"
-msgstr ""
+msgstr "بدون گزینش"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr "사용가능한 저장소:"
+msgstr "قابل‌دسترس در مخزن:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
-msgstr ""
+msgstr "آپدیت جدید موجود است"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr "이 추가기능은"
+msgstr "این افزونه به نبود وابستگی‌های لازم، بارگذاری نمی‌شود"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr "요구됨 : {0} v{1}, 찾음 v{2}"
+msgstr "ملزومات: {0} v{1}, found v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
 msgid "Missing: {0} v{1}"
-msgstr ""
+msgstr "فقدان: {0} v{1}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
 msgid "Installed version"
-msgstr "설치된 버전"
+msgstr "نسخه‌ی نصب شده"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr "저장소 버전"
+msgstr "نسخه‌ی مخزن"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
-msgstr "다운로드 크기"
+msgstr "حجم دانلود"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
-msgstr ""
+msgstr "وابستگی‌های مورد نیاز برای این افزونه که در دسترس نیست:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
-msgstr "취소된 설치 내역"
+msgstr "عملیات نصب لغو شد"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
 msgid "Some of the required add-ins were not found"
-msgstr ""
+msgstr "بعضی از افزونه‌های لازم پیدا نشدند"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
 msgid "Installation failed"
-msgstr "실패한 설치 내역"
+msgstr "عملیات نصب ناموفق بود"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr "설치된 항목"
+msgstr "نصب‌شده"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
 msgid "Updates"
-msgstr ""
+msgstr "به‌روزرسانی‌ها"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
 msgid "Gallery"
-msgstr ""
+msgstr "گالری"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
 msgid "All repositories"
-msgstr ""
+msgstr "همه‌ی مخازن"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
 msgid "Manage Repositories..."
-msgstr ""
+msgstr "مدیریت مخازن..."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
 #, csharp-format
 msgid "{0} update available"
 msgid_plural "{0} updates available"
-msgstr[0] "{0}개 업데이트 사용가능"
+msgstr[0] "{0} به‌روزرسانی‌های دردسترس"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
 msgid "Updating repository"
-msgstr "저장소 업데이트 중"
+msgstr "به‌روزرسانی مخازن"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
 msgid "Install Add-in Package"
-msgstr "추가기능 패키지 설치"
+msgstr "نصب بسته‌ی افزونه"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
 msgid "Add-in packages"
-msgstr ""
+msgstr "بسته‌های افزونه"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
 msgid "No add-ins found"
-msgstr ""
+msgstr "افزونه‌ای پیدا نشد"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
 msgid "Add-in"
-msgstr ""
+msgstr "افزونه"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
 msgid "Other"
-msgstr ""
+msgstr "موارد دیگر"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
 msgid "Uninstall"
-msgstr ""
+msgstr "حذف"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
 msgid "The following packages will be uninstalled:"
-msgstr "다음 패키지가 제거됩니다 :"
+msgstr "این بسته‌ها حذف خواهند شد:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
 msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
-msgstr ""
+msgstr "نسخه‌‌های قبلی مرتبط با این افزونه‌ها، حذف خواهند شد:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
-msgstr "의존성 제한으로 인하여 선택된 추가기능을 설치할 수 없었습니다."
+msgstr ""
+"افزونه‌های انتخاب شده به علت وجود وابستگی‌های ناسازگار، قابل نصب نیستند."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
-msgstr "다음 패키지들이 설치됩니다:"
+msgstr "این بسته ها نصب خواهند شد:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr ""
+msgstr " (در فولدر کاربر)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr "다음 패키지가 제거되어야 합니다:"
+msgstr "این بسته‌ها نیاز به حذف دارند:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "این وابستگی‌ها قابل حل نیستند:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
-msgstr "정말로 설치를 취소하시겠습니까?"
+msgstr "از لغو عملیات نصب، مطمئن هستید؟"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
 msgid "Installing Add-ins"
-msgstr "추가 기능 설치 중"
+msgstr "نصب افزونه"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
 msgid "The installation failed!"
-msgstr "설치가 실패하였습니다!"
+msgstr "عملیات نصب موفقیت‌آمیز نبود!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "عملیات نصب با هشدارهایی کامل شد."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
-msgstr "추가기능 제거 중"
+msgstr "حذف افزونه"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
 msgid "The uninstallation failed!"
-msgstr "제거를 실패하였습니다!"
+msgstr "عملیات حذف موفقیت‌آمیز نبود!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr ""
+msgstr "عملیات حذف با هشدارهایی کامل شد."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr "저장소 등록 중"
+msgstr "ثبت مخزن"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
 #, csharp-format
 msgid "Exception occurred: {0}"
-msgstr "예외 발생: {0}"
+msgstr "استثنا رخ داده است: {0}"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
 msgid "More information"
-msgstr "상세 정보"
+msgstr "اطلاعات بیشتر"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
 msgid "Install..."
-msgstr ""
+msgstr "نصب..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
 msgid "Update"
-msgstr ""
+msgstr "بروزرسانی"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
 msgid "_Uninstall..."
-msgstr "_설치 제거"
+msgstr "_حذف"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
 msgid "Additional extensions are required to perform this operation."
-msgstr ""
+msgstr "برای انجام این عملیات به افزونه‌های بیشتری نیاز است."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
 msgid "The following add-ins will be installed:"
-msgstr ""
+msgstr "این افزونه‌ها نصب خواهند شد:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
 msgid "No updates found"
-msgstr ""
+msgstr "بروزرسانی‌ها پیدا نشد"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
 msgid "Refresh"
-msgstr "새로 고침"
+msgstr "تازه کردن"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
 msgid "Update All"
-msgstr "모두 업데이트 실시"
+msgstr "بروزرسانی همه"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
 msgid "Repository:"
-msgstr ""
+msgstr "مخزن:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
 msgid "Install from file..."
-msgstr "파일에서 설치..."
+msgstr "نصب از طریق فایل..."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
 msgid "Install"
-msgstr "설치"
+msgstr "نصب کردن"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
 msgid "Add-in Repository Management"
-msgstr ""
+msgstr "مدیریت مخزن افزونه‌ها"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
 msgid "Add New Repository"
-msgstr "새 저장소 추가"
+msgstr "افزودن مخزن جدید"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr ""
+msgstr "مسیر مخزنی که به ثبت نیاز دارد را مشخص کنید."
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
-msgstr "온라인 저장소 등록"
+msgstr "ثبت یک مخزن آنلاین"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
 msgid "Url:"
-msgstr ""
+msgstr "آدرس:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
 msgid "Register a local repository"
-msgstr ""
+msgstr "ثبت یک مخزن محلی"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
 msgid "Path:"
-msgstr "경로:"
+msgstr "مسیر:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
 msgid "Browse..."
-msgstr "찾아보기..."
+msgstr "مرور…"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
 msgid "Progress"
-msgstr "진행중"
+msgstr "پیشرفت"
 
 #: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
 #, csharp-format
 msgid "(provided by {0})"
-msgstr ""
+msgstr "(تهیه شده توسط {0})"

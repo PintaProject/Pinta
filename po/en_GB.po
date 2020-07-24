@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 15:53+0200\n"
-"PO-Revision-Date: 2016-09-10 15:53+0200\n"
-"Last-Translator: Matthias Mailänder\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2020-04-08 00:12+0000\n"
+"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
-"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:53+0000\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
+"Language: en_GB\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -1046,7 +1046,8 @@ msgstr "Saturation Percentage"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+"Hint: For best results, first use selection tools to select each eye."
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Reduce Noise"
@@ -1422,7 +1423,8 @@ msgstr "Colour Picker"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "Left click to set primary colour. Right click to set secondary colour."
+msgstr ""
+"Left click to set primary colour. Right click to set secondary colour."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
@@ -1896,7 +1898,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Andi Chandler https://launchpad.net/~bing\n"
-"  Anthony Harrington https://launchpad.net/~untaintableangel\n"
+"  Anthony Harrington https://launchpad.net/~linuxchemist\n"
 "  Anthony Scarth https://launchpad.net/~maroubal2\n"
 "  Biffaboy https://launchpad.net/~curtisbull\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"

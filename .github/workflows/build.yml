@@ -8,9 +8,9 @@ on:
     # Run every week just to make sure the CI environment still works.
     - cron: '0 0 * * 0'
 
+# TODO - add Windows / Mac CI builds with the installers being built (see master branch).
 jobs:
   build-ubuntu:
-
     runs-on: ubuntu-latest
 
     steps:

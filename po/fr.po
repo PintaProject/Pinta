@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2016-02-20 21:29+0000\n"
-"Last-Translator: Jean-Marc <Unknown>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2017-05-30 07:46+0000\n"
+"Last-Translator: Benoit Duffez <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 "Language: fr_FR\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -35,6 +35,15 @@ msgstr "Éditeur d'images"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Éditeur d'images Pinta"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -544,15 +553,15 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Lumière dure"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Lumière douce"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Couleur"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -1526,7 +1535,7 @@ msgstr "Type"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Lisse"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1896,7 +1905,8 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Achille Fouilleul https://launchpad.net/~achille-fouilleul\n"
-"  Anne https://launchpad.net/~anneonyme017\n"
+"  Anne017 https://launchpad.net/~anneonyme017\n"
+"  Benoit Duffez https://launchpad.net/~bduffez\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Ersplus https://launchpad.net/~ersplus-free\n"
 "  Jacky https://launchpad.net/~kiky270281\n"
@@ -1908,7 +1918,7 @@ msgstr ""
 "  Nicolas https://launchpad.net/~nicolas-pecqueux\n"
 "  Olivier Dufour https://launchpad.net/~olivier-duff\n"
 "  Philippe AUCOIN https://launchpad.net/~philippe-aucoin\n"
-"  Quentin Pagès https://launchpad.net/~kwentin\n"
+"  Quentin PAGÈS https://launchpad.net/~kwentin\n"
 "  RM https://launchpad.net/~l4rt1st-1nc0nnu\n"
 "  RedGuff https://launchpad.net/~domsau2\n"
 "  SarahSlean https://launchpad.net/~yoda4\n"
@@ -2063,7 +2073,7 @@ msgstr "Couleur d’arrière-plan"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Prévisualiser"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"

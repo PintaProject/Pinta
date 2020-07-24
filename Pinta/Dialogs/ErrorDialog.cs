@@ -30,7 +30,7 @@ using Pinta.Core;
 
 namespace Pinta
 {
-	public partial class ErrorDialog : Gtk.Dialog
+	public class ErrorDialog : Gtk.Dialog
 	{
 		private Label description_label;
 		private Expander expander;

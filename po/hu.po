@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-02-16 09:02+0000\n"
-"Last-Translator: Tömő Norbert <tomo.norbert@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2020-04-27 09:04+0000\n"
+"Last-Translator: El Koulali András <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:53+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -34,6 +34,15 @@ msgstr "Képszerkesztő"
 msgid "Pinta Image Editor"
 msgstr "Pinta képszerkesztő"
 
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
 msgstr "Kiegészítők kezelése"
@@ -44,7 +53,7 @@ msgstr "Visszavonás"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "Újra"
+msgstr "Mégis"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
@@ -390,7 +399,7 @@ msgstr "Vonalzó mértékegysége"
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -1857,8 +1866,10 @@ msgstr "Előzetes hozzájárulók:"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  El Koulali András https://launchpad.net/~codercharmander\n"
 "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Kláben Szabolcs Bence https://launchpad.net/~tudi20-deactivatedaccount\n"
 "  Mechanick https://launchpad.net/~info-mechanick\n"
 "  Nagy Ákos https://launchpad.net/~e-contact-pecska-ro\n"
 "  Richard Somlói https://launchpad.net/~ricsipontaz\n"

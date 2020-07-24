@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-02-25 14:53+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2020-05-24 09:38+0000\n"
+"Last-Translator: gorkaazk <gorkaazkarate@gmail.com>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:53+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -24,19 +24,34 @@ msgstr "Pinta"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr "Sortu eta editatu irudiak modu errazean"
+msgstr "Easily create and edit images"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "Irudi-editorea"
+msgstr "Image Editor"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr "Pinta irudi-editorea"
+msgstr "Pinta Image Editor"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+"Pinta aplikazio bat da irudiak editatzeko, marrazteko eta margotzeko. "
+"Interfaze sinple eta ahaltsua eskaintzen du. Pintak marrazteko eta "
+"margotzeko tresna asko eskaintzen ditu, esku hutsez marrazteko edo "
+"prestatutako formak: lauki zuzenak, zirkuluak, geziak-eta. 35 efektutik gora "
+"eskaintzen ditu irudiak eraldatzeko. Gainera nahi beste geruzatan antolatu "
+"daitezke irudiak sorkuntzari laguntzeko."
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr "Gehigarrien kudeatzailea"
+msgstr "Add-in Manager"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
@@ -57,7 +72,7 @@ msgstr "Kopiatu"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr "Kopiatu batutakoa"
+msgstr "Copy Merged"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 #: ../Pinta.Core/Classes/Document.cs:794
@@ -205,7 +220,7 @@ msgstr "Ireki"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr ""
+msgstr "Edukia"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
@@ -348,7 +363,7 @@ msgstr "Tresna-barra"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr ""
+msgstr "Irudi-fitxak"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
@@ -542,15 +557,15 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Argi distiratsua"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Argi motela"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Kolorea"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -560,12 +575,12 @@ msgstr "Argitasuna"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr ""
+msgstr "Ñabardura"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
-msgstr ""
+msgstr "Saturazioa"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
@@ -649,7 +664,7 @@ msgstr "Ezkutatu"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr ""
+msgstr "Minimizatu"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
@@ -658,7 +673,7 @@ msgstr "Atrakea"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr ""
+msgstr "Desamarratu"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
@@ -1029,7 +1044,7 @@ msgstr "Tolerantzia"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "Saturarizio ehunekoa"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
@@ -1091,11 +1106,11 @@ msgstr "Desenfokatu"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "Brida"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Itzulbiratu"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
@@ -1103,11 +1118,11 @@ msgstr "Islatu"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
-msgstr ""
+msgstr "Nagusia"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Secondary"
-msgstr ""
+msgstr "Bigarren mailakoa"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 #: ../Pinta/Dialogs/NewImageDialog.cs:290
@@ -1116,7 +1131,7 @@ msgstr "Gardena"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr ""
+msgstr "Jatorrizkoa"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
@@ -1393,11 +1408,11 @@ msgstr "Lerro-forma borobildua"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "Txikiagotu formaren bazterraren erradioa"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "Handiagotu formaren bazterraren erradioa"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1500,6 +1515,25 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Egin ezkerreko klik ,forma bat marrazteko kolore nagusi batekin, lehen "
+"mailako kolore batekin.\n"
+"Egin ezkerreko klik, forma batean kontrol puntu bat gehitzeko.\n"
+"Egin ezkerreko klik, kontrol puntu batean eta arrastatu mugitzeko.\n"
+"Egin eskuineko klik, kontrol puntu batean eta arrastatu aldatzeko puntuaren "
+"tentsioa.\n"
+"Eutsi MAIUS teklari (SHIFT giltzari), angeluetara doitzeko.\n"
+"Erabili gezien teklak, hautatutako kontrol puntua mugitzeko.\n"
+"Sakatu Ctrl + ezker/eskuin geziak, kontrol puntuak hurrenkeran hautatzeko.\n"
+"Sakatu 'Del' ('Supr') tekla, hautatutako kontrol puntua ezabatzeko.\n"
+"Sakatu Espazio-barra, saguaren kokapenari kontrol puntu berri bat "
+"gehitzeko.\n"
+"Eutsi Ctrl teklari Espazio-barra sakatu bitartean, kontrol puntua kokapen "
+"zehatz jakin horretan sortzeko.\n"
+"Eutsi Ctrl teklari ezkerreko klik egin bitartean, kontrol puntu batean "
+"sortzeko forma berri bat  kokapen zehatz jakin horretan.\n"
+"Eutsi Ctrl teklari, irudiaren mugetatik kanpo klik egin bitartean sortzeko "
+"bazterretan edo ertzetan hasiko den forma berri bat.\n"
+"Sakatu Enter, formaren deseinua amaitutzat jotzeko."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
@@ -1508,7 +1542,7 @@ msgstr "Mota"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Leuna"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1662,6 +1696,8 @@ msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
 msgstr ""
+"Ezkerreko klik bigarren mailako kolorea ordezkatzeko kolore nagusiarekin. "
+"Eskuineko klik atzera lehen bezala uzteko."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
@@ -1856,11 +1892,11 @@ msgstr "Biratu / Zoom geruzara"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Pinta komunitatearen gehigarriak - Plataformako-Berariazkoak"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "Pinta komunitatearen gehigarriak - Plataformako-Zeharkakoak"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
@@ -1879,7 +1915,8 @@ msgstr ""
 "  Asier Sarasua Garmendia https://launchpad.net/~asarasuagarmendia\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Ibai Oihanguren Sala https://launchpad.net/~ibai-oihanguren\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst"
+"  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  gorkaazk https://launchpad.net/~gorkaazkarate"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
@@ -1934,7 +1971,7 @@ msgstr "Xehetasunak"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr ""
+msgstr "Bidali aurkitutako errorearen berri..."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
@@ -2013,19 +2050,19 @@ msgstr "Horizontala"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "Atzeko planoa:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "Zuria"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
-msgstr ""
+msgstr "Atzeko planoaren kolorea"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Aurrebista"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"

@@ -7,36 +7,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2012-09-09 08:02+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2017-10-19 10:20+0000\n"
+"Last-Translator: Pongsathorn Sra-uthai (Touch) <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr ""
+msgstr "พินทา"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr ""
+msgstr "สร้างและแก้ไขได้โดยง่าย"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr ""
+msgstr "เครื่องมือแก้ไขภาพ"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
+msgstr "เครื่องมือแก้ไขภาพพินทา"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
 msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
-msgstr ""
+msgstr "จัดการโปรแกรมเสริม"
 
 #: ../Pinta.Core/Actions/EditActions.cs:67
 msgid "Undo"
@@ -57,46 +66,46 @@ msgstr "คัดลอก"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "คัดลอกรวมกัน"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 #: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr "แปะ"
+msgstr "วาง"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Classes/Document.cs:790
 msgid "Paste Into New Layer"
-msgstr "แปะในชั้นงานใหม่"
+msgstr "วางในชั้นงานใหม่"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 msgid "Paste Into New Image"
-msgstr "แปะในรูปภาพใหม่"
+msgstr "วางในภาพใหม่"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 #: ../Pinta.Core/Actions/EditActions.cs:218
 msgid "Erase Selection"
-msgstr ""
+msgstr "ลบส่วนที่เลือก"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:178
 msgid "Fill Selection"
-msgstr ""
+msgstr "ราดส่วนที่เลือก"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:414
 msgid "Invert Selection"
-msgstr ""
+msgstr "กลับการเลือก"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr ""
+msgstr "เลือกทั้งหมด"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
-msgstr ""
+msgstr "ไม่เลือกทั้งหมด"
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 #: ../Pinta.Core/Actions/FileActions.cs:56
@@ -110,33 +119,33 @@ msgstr "บันทึกเป็น..."
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 msgid "Reset to Default"
-msgstr ""
+msgstr "คืนค่าเริ่มต้น"
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 msgid "Set Number of Colors"
-msgstr ""
+msgstr "ตั้งจำนวนสี"
 
 #: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
 #: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
-msgstr ""
+msgstr "จานสี"
 
 #: ../Pinta.Core/Actions/EditActions.cs:227
 msgid "Deselect"
-msgstr ""
+msgstr "ไม่เลือก"
 
 #: ../Pinta.Core/Actions/EditActions.cs:323
 msgid "Open Palette File"
-msgstr ""
+msgstr "เปิดไฟล์จานสี"
 
 #: ../Pinta.Core/Actions/EditActions.cs:330
 msgid "Palette files (*.txt, *.gpl)"
-msgstr ""
+msgstr "ไฟล์จานสี (*.txt, *.gpl)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:334
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
-msgstr ""
+msgstr "ไฟล์ทั้งหมด"
 
 #: ../Pinta.Core/Actions/EditActions.cs:350
 #, csharp-format
@@ -144,24 +153,26 @@ msgid ""
 "Could not open palette file: {0}.\n"
 "Please verify that you are trying to open a valid GIMP or Paint.NET palette."
 msgstr ""
+"ไม่สามารถเปิดไฟล์จานสีได้: {0}\n"
+"โปรดตรวจสอบไฟล์ที่คุณพยายามเปิดว่าใช่ไฟล์จานสีของ GIMP หรือ Paint.NET หรือไม่"
 
 #: ../Pinta.Core/Actions/EditActions.cs:351
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
 msgid "Error"
-msgstr ""
+msgstr "ผิดพลาด"
 
 #: ../Pinta.Core/Actions/EditActions.cs:363
 msgid "Save Palette File"
-msgstr ""
+msgstr "บันทึกไฟล์จานสี"
 
 #: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Paint.NET palette (*.txt)"
-msgstr ""
+msgstr "จานสี Paint.NET (*.txt)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "GIMP palette (*.gpl)"
-msgstr ""
+msgstr "จานสี GIMP (*.gpl)"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -169,11 +180,11 @@ msgstr "ใหม่..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
 msgid "New Screenshot..."
-msgstr ""
+msgstr "จับภาพหน้าจอใหม่..."
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Open Recent"
-msgstr "แฟ้มล่าสุด"
+msgstr "เปิดไฟล์ล่าสุด"
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
@@ -202,19 +213,19 @@ msgstr "เปิด"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr ""
+msgstr "เนื้อหา"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr ""
+msgstr "เว็บ Pinta"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:54
 msgid "File a Bug"
-msgstr ""
+msgstr "แจ้งข้อผิดพลาด"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:55
 msgid "Translate This Application"
-msgstr ""
+msgstr "แปลโปรแกรมนี้"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
 msgid "About"
@@ -223,29 +234,29 @@ msgstr "เกี่ยวกับ"
 #: ../Pinta.Core/Actions/ImageActions.cs:60
 #: ../Pinta.Core/Actions/ImageActions.cs:283
 msgid "Crop to Selection"
-msgstr ""
+msgstr "ครอบตัดส่วนที่เลือก"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
 msgid "Auto Crop"
-msgstr ""
+msgstr "ครอบตัดอัตโนมัติ"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
 msgid "Resize Image..."
-msgstr ""
+msgstr "ปรับขนาดภาพ..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "ปรับขนาดพื้นภาพ..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "พลิกแนวนอน"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:71
 msgid "Flip Vertical"
-msgstr ""
+msgstr "พลิกแนวตั้ง"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
@@ -265,13 +276,13 @@ msgstr "หมุน 180°"
 #: ../Pinta.Core/Actions/ImageActions.cs:69
 #: ../Pinta.Core/Actions/ImageActions.cs:138
 msgid "Flatten"
-msgstr ""
+msgstr "ยุบรวมชั้นงาน"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
 #: ../Pinta.Core/Classes/Document.cs:852
 msgid "Add New Layer"
-msgstr ""
+msgstr "เพิ่มชั้นงานใหม่"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
 #: ../Pinta.Core/Actions/LayerActions.cs:275
@@ -281,43 +292,43 @@ msgstr "ลบชั้นงาน"
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr ""
+msgstr "ทำสำเนาชั้นงาน"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
 msgid "Merge Layer Down"
-msgstr ""
+msgstr "รวมชั้นงานลงล่าง"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Import from File..."
-msgstr ""
+msgstr "นำเข้าจากไฟล์..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr ""
+msgstr "หมุน/ขยายชั้นงาน..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
 msgid "Move Layer Up"
-msgstr ""
+msgstr "เลื่อนชั้นงานขึ้น"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
 #: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Move Layer Down"
-msgstr ""
+msgstr "เลื่อนชั้นงานลง"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 msgid "Layer Properties..."
-msgstr ""
+msgstr "คุณสมบัติชั้นงาน..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:50
 msgid "Open Image File"
-msgstr "เปิดแฟ้มรูปภาพ"
+msgstr "เปิดไฟล์ภาพ"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:185
 msgid "Import From File"
-msgstr ""
+msgstr "นำเข้าจากไฟล์"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom In"
@@ -329,43 +340,43 @@ msgstr "ย่อ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Best Fit"
-msgstr ""
+msgstr "ปรับให้พอดี"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Zoom to Selection"
-msgstr ""
+msgstr "ขยายไปที่ส่วนที่เลือก"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Normal Size"
-msgstr ""
+msgstr "ขนาดปกติ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
 msgid "Toolbar"
-msgstr ""
+msgstr "แถบเครื่องมือ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr ""
+msgstr "แท็บรูปภาพ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
-msgstr ""
+msgstr "เส้นตารางจุดภาพ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Rulers"
-msgstr ""
+msgstr "ไม้บรรทัด"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Pixels"
-msgstr ""
+msgstr "จุดภาพ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
 msgid "Inches"
-msgstr ""
+msgstr "นิ้ว"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:88
 msgid "Centimeters"
-msgstr ""
+msgstr "เซ็นติเมตร"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:89
 msgid "Fullscreen"
@@ -376,50 +387,50 @@ msgstr "เต็มจอ"
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
-msgstr ""
+msgstr "หน้าจอ"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Ruler Units"
-msgstr ""
+msgstr "หน่วยวัด"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr ""
+msgstr "บันทึกทั้งหมด"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr ""
+msgstr "ปิดทั้งหมด"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:244
 msgid "Tool"
-msgstr ""
+msgstr "เครื่องมือ"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
-msgstr ""
+msgstr "แป้นลัด"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
-msgstr ""
+msgstr "กลืนสีปกติ"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:429
 msgid "Overwrite"
-msgstr ""
+msgstr "แทนที่"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:443
 msgid "Antialiasing On"
-msgstr ""
+msgstr "เปิดใช้การลบขอบหยัก"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:444
 msgid "Antialiasing Off"
-msgstr ""
+msgstr "ปิดการลบขอบหยัก"
 
 #: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
@@ -434,78 +445,78 @@ msgstr "คัดลอก"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "ปรับขนาดหน้ากระดาษ"
+msgstr "ปรับขนาดพื้นภาพ"
 
 #: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "ย้ายพิคเซลส่วนที่เลือก"
 
 #: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "ภาพใหญ่กว่าพื้นภาพ"
 
 #: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
-msgstr ""
+msgstr "ภาพที่นำมาวางใหญ่กว่าขนาดของพื้นภาพ คุณอยากจะทำอย่างไร?"
 
 #: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
-msgstr ""
+msgstr "ขยายพื้นภาพ"
 
 #: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
-msgstr ""
+msgstr "ไม่เปลี่ยนขนาดพื้นภาพ"
 
 #: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "ภาพไม่อาจวางลงได้"
 
 #: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "คลิปบอร์ดไม่มีเนื้อของภาพอยู่"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
-msgstr ""
+msgstr "แทนที่"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "เข้ากลุ่ม (+) (Ctrl + คลิกซ้าย)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
-msgstr ""
+msgstr "ออกกลุ่ม (-) (คลิกขวา)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
 msgid "Xor (Ctrl + Right Click)"
-msgstr ""
+msgstr "ตรงข้าม (Ctrl + คลิกขวา)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "แยก (Shift + คลิกซ้าย)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr ""
+msgstr " รูปแบบการเลือก: "
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
 #: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
-msgstr ""
+msgstr "ปกติ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
-msgstr ""
+msgstr "คูณ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
-msgstr ""
+msgstr "เผาสี"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
@@ -1833,6 +1844,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
+"  Pongsathorn Sra-uthai (Touch) https://launchpad.net/~pongsathorns-gmail\n"
 "  Saruch Srisawadpong https://launchpad.net/~schemer-of-darkness\n"
 "  SiraNokyoongtong https://launchpad.net/~gumara\n"
 "  Srun Werakool https://launchpad.net/~panx0008"

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-04-02 07:05+0000\n"
-"Last-Translator: Anthony Harrington <untaintableangel@ubuntu.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2017-01-16 13:36+0000\n"
+"Last-Translator: Lucien <Unknown>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -33,6 +33,15 @@ msgstr "Image Editor"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Image Editor"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -63,7 +72,7 @@ msgstr "Copy Merged"
 #: ../Pinta.Core/Classes/Document.cs:794
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
 msgid "Paste"
-msgstr "Paste"
+msgstr "english"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/Classes/Document.cs:790
@@ -1882,10 +1891,11 @@ msgstr "Previous contributors:"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Anthony Harrington https://launchpad.net/~untaintableangel\n"
+"  Anthony Harrington https://launchpad.net/~linuxchemist\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Jackson Doak https://launchpad.net/~noskcaj\n"
 "  Jared Norris https://launchpad.net/~jarednorris\n"
+"  Lucien https://launchpad.net/~lchemaly\n"
 "  Rafael Neri https://launchpad.net/~rafepel"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152

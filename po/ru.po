@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2015-02-28 17:44+0000\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2019-09-24 20:05+0000\n"
 "Last-Translator: Oleg Koptev <koptev.oleg@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -34,6 +34,15 @@ msgstr "Графический редактор"
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Редактор изображений Pinta"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
@@ -206,7 +215,7 @@ msgstr "Открыть"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr ""
+msgstr "Содержимое"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
@@ -349,7 +358,7 @@ msgstr "Стандартная панель"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr ""
+msgstr "Вкладки"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
@@ -542,15 +551,15 @@ msgstr "Искл. ИЛИ"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Направленный свет"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Рассеянный свет"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Управление цветом"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -649,7 +658,7 @@ msgstr "Скрыть"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr ""
+msgstr "Свернуть"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
@@ -658,7 +667,7 @@ msgstr "Прикрепить"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr ""
+msgstr "Отделить"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
@@ -1091,11 +1100,11 @@ msgstr "Расфокусировка"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "Зажим"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Заворачивать"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
@@ -1248,7 +1257,7 @@ msgstr "Квадраты"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr ""
+msgstr "Штрихи"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
@@ -1338,7 +1347,7 @@ msgstr "Группа открытых геометрических фигур/к
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr ""
+msgstr "Закрыть линию/Закончить серию кривых"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
@@ -1348,7 +1357,7 @@ msgstr "Эллипс"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "Группа скругленных линий"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
@@ -1525,7 +1534,7 @@ msgstr "Тип"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Сглаженный"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1871,7 +1880,7 @@ msgstr "Повернуть / Увеличить слой"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Дополнения сообщества Pinta — зависящие от операционной системы"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
@@ -1894,20 +1903,21 @@ msgstr ""
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Chubakur https://launchpad.net/~chubakur\n"
 "  Drovosekov Anton https://launchpad.net/~corningster\n"
-"  Eugene Marshal https://launchpad.net/~lowrider\n"
+"  Eugene Roskin https://launchpad.net/~lowrider\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  Maia Everett https://launchpad.net/~lucidfox\n"
+"  Leonid Gnezdilov https://launchpad.net/~comdir-u\n"
+"  Maia Everett https://launchpad.net/~linneris\n"
 "  Mairon https://launchpad.net/~an9227\n"
 "  ManDrive https://launchpad.net/~roman-romul\n"
 "  Nightingale https://launchpad.net/~solosn\n"
 "  Nikita Putko https://launchpad.net/~ktototam98\n"
 "  Nkolay Parukhin https://launchpad.net/~parukhin\n"
 "  Oleg Koptev https://launchpad.net/~koptev-oleg\n"
+"  Phoenix Pro https://launchpad.net/~phoenixpro-deactivatedaccount\n"
 "  PocketSam https://launchpad.net/~pocketsam\n"
 "  Polivoda Roman https://launchpad.net/~rom-polivoda\n"
 "  Stepan Kislan https://launchpad.net/~stepa87\n"
-"  Strahov Nikita https://launchpad.net/~newerty\n"
 "  Vyacheslav Sharmanov https://launchpad.net/~vsharmanov\n"
 "  Yogar https://launchpad.net/~me-yogar\n"
 "  dadatamada https://launchpad.net/~stas-stv\n"
@@ -2014,7 +2024,7 @@ msgstr "Пользовательский"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Предустановка:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
@@ -2063,7 +2073,7 @@ msgstr "Цвет фона"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Предварительный просмотр"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"

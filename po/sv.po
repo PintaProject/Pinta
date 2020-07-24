@@ -7,31 +7,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
-"PO-Revision-Date: 2014-05-25 05:29+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"POT-Creation-Date: 2016-09-10 15:49+0200\n"
+"PO-Revision-Date: 2017-04-29 13:36+0000\n"
+"Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-07-23 01:24+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
+"Language: sv\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: ../xdg/pinta.desktop.in.h:2
 msgid "Easily create and edit images"
-msgstr ""
+msgstr "Skapa och redigera bilder enkelt"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr ""
+msgstr "Bildredigerare"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
+msgstr "Pinta Bildredigerare"
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
 msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
@@ -44,7 +54,7 @@ msgstr "Ångra"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Redo"
-msgstr "Gör om"
+msgstr "Upprepa"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 #: ../Pinta.Core/Actions/EditActions.cs:216
@@ -57,7 +67,7 @@ msgstr "Kopiera"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy Merged"
-msgstr ""
+msgstr "Kopiera sammanfogat"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 #: ../Pinta.Core/Classes/Document.cs:794
@@ -92,7 +102,7 @@ msgstr "Invertera markering"
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Select All"
-msgstr "Markera allt"
+msgstr "Markera alla"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Deselect All"
@@ -204,7 +214,7 @@ msgstr "Öppna"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
 msgid "Contents"
-msgstr ""
+msgstr "Innehåll"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
@@ -237,7 +247,7 @@ msgstr "Ändra storlek på bilden..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Resize Canvas..."
-msgstr "Ändra storlek på rityta..."
+msgstr "Ändra storlek på arbetsytan..."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
@@ -283,7 +293,7 @@ msgstr "Radera lager"
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:266
 msgid "Duplicate Layer"
-msgstr "Duplicera lager"
+msgstr "Klona lager"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:244
@@ -296,7 +306,7 @@ msgstr "Importera från fil..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
 msgid "Rotate / Zoom Layer..."
-msgstr "Rotera / Zooma in lager"
+msgstr "Rotera / Zooma lager..."
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
 #: ../Pinta.Core/Actions/LayerActions.cs:219
@@ -347,7 +357,7 @@ msgstr "Verktygsrad"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Image Tabs"
-msgstr ""
+msgstr "Bildflikar"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Pixel Grid"
@@ -389,7 +399,7 @@ msgstr "Linjalenheter"
 #: ../Pinta.Core/Actions/ViewActions.cs:257
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
@@ -405,7 +415,7 @@ msgstr "Verktyg"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:316
 msgid "Shortcut key"
-msgstr "Genvägstangent"
+msgstr "Snabbtangent"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:428
 msgid "Normal Blending"
@@ -436,7 +446,7 @@ msgstr "kopiera"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
 msgid "Resize Canvas"
-msgstr "Ändra storlek på rityta"
+msgstr "Ändra storlek på arbetsytan"
 
 #: ../Pinta.Core/Classes/Document.cs:868
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
@@ -447,30 +457,29 @@ msgstr "Flytta markerade bildpunkter"
 
 #: ../Pinta.Core/Classes/Document.cs:885
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Bilden är större än arbetsytan"
 
 #: ../Pinta.Core/Classes/Document.cs:886
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
-msgstr ""
-"Bilden som klistras in är större än storleken på ritytan. Vad vill du göra?"
+msgstr "Inklistrad bild är större än arbetsytan. Vad vill du göra?"
 
 #: ../Pinta.Core/Classes/Document.cs:890
 msgid "Expand canvas"
-msgstr "Förstora ritytan"
+msgstr "Utöka arbetsytan"
 
 #: ../Pinta.Core/Classes/Document.cs:891
 msgid "Don't change canvas size"
-msgstr "Ändra inte storleken på ritytan"
+msgstr "Ändra inte arbetsytans storlek"
 
 #: ../Pinta.Core/Classes/Document.cs:904
 msgid "Image cannot be pasted"
-msgstr "Bild kan inte klistras in"
+msgstr "Bilden kan inte klistras in"
 
 #: ../Pinta.Core/Classes/Document.cs:905
 msgid "The clipboard does not contain an image."
-msgstr "Urklipp innehåller inte en bild."
+msgstr "Urklipp innehåller ingen bild."
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Replace"
@@ -478,7 +487,7 @@ msgstr "Ersätt"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 msgid "Union (+) (Ctrl + Left Click)"
-msgstr ""
+msgstr "Union (+) (Ctrl + Vänsterklick)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -490,17 +499,17 @@ msgstr "Xor (Ctrl + Högerklick)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 msgid "Intersect (Shift + Left Click)"
-msgstr ""
+msgstr "Korsa (Shift + Vänsterklick)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Markeringsläge: "
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:37
 #: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normalt"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Multiply"
@@ -508,11 +517,11 @@ msgstr "Multiplicera"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Color Burn"
-msgstr ""
+msgstr "Efterbelys färg"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Color Dodge"
-msgstr ""
+msgstr "Färgskugga"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Overlay"
@@ -540,15 +549,15 @@ msgstr "Xor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 msgid "Hard Light"
-msgstr ""
+msgstr "Skarpt ljus"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 msgid "Soft Light"
-msgstr ""
+msgstr "Mjukt ljus"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 msgid "Color"
-msgstr ""
+msgstr "Färg"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
@@ -558,16 +567,16 @@ msgstr "Luminositet"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:48
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Hue"
-msgstr ""
+msgstr "Nyans"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:49
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
 msgid "Saturation"
-msgstr ""
+msgstr "Mättnad"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
 msgid "Finish Pixels"
-msgstr "Avsluta bildpunkter"
+msgstr "Slutför bildpunkter"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
@@ -626,7 +635,7 @@ msgstr "Ny bild"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:186
 msgid "Unsupported file format"
-msgstr ""
+msgstr "Filformatet saknar stöd"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:191
 msgid "Open Image"
@@ -647,7 +656,7 @@ msgstr "Dölj"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:550
 msgid "Minimize"
-msgstr ""
+msgstr "Minimera"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
@@ -656,12 +665,12 @@ msgstr "Docka"
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:564
 msgid "Undock"
-msgstr ""
+msgstr "Koppla loss"
 
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
 #: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
 msgid "Auto Hide"
-msgstr "Autodölj"
+msgstr "Dölj atomatiskt"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
 msgid "Auto Level"
@@ -673,12 +682,12 @@ msgstr "Svartvitt"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "Ljusstyrka / kontrast"
+msgstr "Ljus / Kontrast"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:82
 msgid "Brightness"
-msgstr "Ljusstyrka"
+msgstr "Ljus"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
@@ -693,11 +702,11 @@ msgstr "Kurvor"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
 msgid "Hue / Saturation"
-msgstr "Nyans / mättnad"
+msgstr "Nyans / Mättnad"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
 msgid "Lightness"
-msgstr ""
+msgstr "Ljus"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
@@ -711,7 +720,7 @@ msgstr "Nivåer"
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
 msgid "Posterize"
-msgstr "Posterisera"
+msgstr "Färgreduktion"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
 msgid "Sepia"
@@ -768,7 +777,7 @@ msgstr "Täckning"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
 msgid "Bulge"
-msgstr "Bukta"
+msgstr "Utbuktning"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
@@ -817,7 +826,7 @@ msgstr "Seeda"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
 msgid "Edge Detect"
-msgstr "Kantupptäckt"
+msgstr "Kantidentifiering"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -840,7 +849,7 @@ msgstr "Vinkel"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
 msgid "Emboss"
-msgstr "Ciselera"
+msgstr "Lättnad"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
 msgid "Fragment"
@@ -968,7 +977,7 @@ msgstr "Penselstorlek"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
 msgid "Coarseness"
-msgstr "Grovhet"
+msgstr "Kornighet"
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
 #: ../Pinta.Tools/Tools/TextTool.cs:250
@@ -993,7 +1002,7 @@ msgstr "Färgområde"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
 msgid "Pixelate"
-msgstr "Pixelera"
+msgstr "Pixelisera"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:119
 msgid "Cell Size"
@@ -1026,7 +1035,7 @@ msgstr "Tolerans"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "Mättnadsprocent"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
 msgid "Hint: For best results, first use selection tools to select each eye."
@@ -1044,11 +1053,11 @@ msgstr "Styrka"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
 msgid "Relief"
-msgstr "Gör relief"
+msgstr "Lättnad"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:25
 msgid "Sharpen"
-msgstr "Gör skarpare"
+msgstr "Skärpa"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 msgid "Soften Portrait"
@@ -1072,7 +1081,7 @@ msgstr "Kakelreflektion"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:140
 msgid "Tile Size"
-msgstr "Kakelstorlek"
+msgstr "kakelstorlek"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
@@ -1084,15 +1093,15 @@ msgstr "Kantutjämning"
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 msgid "Unfocus"
-msgstr "Ofokusera"
+msgstr "Avfokusera"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
 msgid "Clamp"
-msgstr ""
+msgstr "Sammanfoga"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Wrap"
-msgstr ""
+msgstr "Omslut"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:23
 msgid "Reflect"
@@ -1100,24 +1109,24 @@ msgstr "Spegla"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:25
 msgid "Primary"
-msgstr ""
+msgstr "Primär"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Secondary"
-msgstr ""
+msgstr "Sekundär"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:29
 #: ../Pinta/Dialogs/NewImageDialog.cs:290
 msgid "Transparent"
-msgstr ""
+msgstr "Transparent"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:31
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:191
 msgid "Center Offset"
-msgstr "Centrera kompensation"
+msgstr "Centrera positionen"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
@@ -1154,11 +1163,11 @@ msgstr "Tips: Högerklicka för att ta bort kontrollpunkter."
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
 msgid "Input Histogram"
-msgstr "Inmatningshistogram"
+msgstr "Indatahistogram"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
 msgid "Input"
-msgstr "Inmatning"
+msgstr "Indata"
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
 msgid "Output"
@@ -1190,7 +1199,7 @@ msgstr "Klicka för att byta mellan primär och sekundär färg."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Klicka för att återställa primär och sekundär färg."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
 msgid "Click to select primary color."
@@ -1242,43 +1251,43 @@ msgstr "Rutor"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
 msgid "Dash"
-msgstr ""
+msgstr "Streck"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
 msgid "Arrow"
-msgstr ""
+msgstr "Pil"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
 msgid "Size"
-msgstr ""
+msgstr "Storlek"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
 msgid "Decrease arrow size"
-msgstr ""
+msgstr "Minska pilstorlek"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
 msgid "Increase arrow size"
-msgstr ""
+msgstr "Öka pilstorlek"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
 msgid "Decrease angle offset"
-msgstr ""
+msgstr "Minska vinkelförskjutning"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
 msgid "Increase angle offset"
-msgstr ""
+msgstr "Öka vinkelförskjutning"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
 msgid "Length"
-msgstr ""
+msgstr "Längd"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
 msgid "Decrease length offset"
-msgstr ""
+msgstr "Minska längdförskjutning"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
 msgid "Increase length offset"
-msgstr ""
+msgstr "Öka längdförskjutning"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
@@ -1302,7 +1311,7 @@ msgstr "Öka penselstorlek"
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
 #: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
 msgid "Fill Style"
-msgstr "Fyllningsstil"
+msgstr "Fyllnadsstil"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
@@ -1324,15 +1333,15 @@ msgstr "Fyll och konturera form"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
 msgid "Shape Type"
-msgstr ""
+msgstr "Figurtyp"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 msgid "Open Line/Curve Series"
-msgstr ""
+msgstr "Öppen linje-/kurvserie"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 msgid "Closed Line/Curve Series"
-msgstr ""
+msgstr "Stängd linje-/kurvserie"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
@@ -1342,57 +1351,57 @@ msgstr "Ellips"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "Rundad linjeserie"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "Ändrad figurtyp"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
 msgid "Point Deleted"
-msgstr ""
+msgstr "Punkt borttagen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
 msgid "Deleted"
-msgstr ""
+msgstr "Borttagen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
 msgid "Point Added"
-msgstr ""
+msgstr "Punkt tillagd"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
 msgid "Added"
-msgstr ""
+msgstr "Tillagd"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
 msgid "Modified"
-msgstr ""
+msgstr "Ändrad"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
 msgid "Finalized"
-msgstr ""
+msgstr "Slutförd"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "Öppen kurvfigur"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
 msgid "Closed Curve Shape"
-msgstr ""
+msgstr "Stängd kurvfigur"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
 msgid "Rounded Line Shape"
-msgstr ""
+msgstr "Rundad linjefigur"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
 msgid "Decrease shape's corner radius"
-msgstr ""
+msgstr "Minska figurens hörnradie"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
 msgid "Increase shape's corner radius"
-msgstr ""
+msgstr "Öka figurens hörnradie"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:42
 msgid "Clone Stamp"
@@ -1415,27 +1424,27 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
 msgid "Sampling"
-msgstr ""
+msgstr "Provtagning"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
 msgid "Single Pixel"
-msgstr ""
+msgstr "Enkel bildpunkt"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "3 x 3-område"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "5 x 5-område"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "7 x 7-område"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "9 x 9-område"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
 msgid "Image"
@@ -1443,7 +1452,7 @@ msgstr "Bild"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
 msgid "After select"
-msgstr "Efter val"
+msgstr "Efter markering"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
 msgid "Do not switch tool"
@@ -1470,7 +1479,7 @@ msgstr "Ellipsmarkering"
 msgid ""
 "Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
 "circle."
-msgstr ""
+msgstr "Klicka och dra upp en elliptisk figur. Håll ner Shift för en cirkel."
 
 #: ../Pinta.Tools/Tools/EllipseTool.cs:43
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:46
@@ -1494,6 +1503,24 @@ msgid ""
 "starting at the edge.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Vänsterklicka för att rita en figur med primär färg.\n"
+"Vänsterklicka på en figur för att lägga till en kontrollpunkt.\n"
+"Vänsterklicka på en kontrollpunkt och dra, för att flytta den.\n"
+"Högerklicka på en kontrollpunkt och dra, för att ändra dess spänning.\n"
+"Håll ner SHIFT för att fästa vid vinklar.\n"
+"Använd piltangenterna för att flytta markerad kontrollpunkt.\n"
+"Tryck Ctrl+vänster-/högerpilar för att markera kontrollpunkter i "
+"ordningsföljd.\n"
+"Tryck Delete för att ta bort markerad kontrollpunkt.\n"
+"Tryck Blanksteg för att lägga till en ny kontrollpunkt vid muspekarens "
+"position.\n"
+"Håll ner Ctrl och tryck Blanksteg för att skapa kontrollpunkten vid exakt "
+"samma position.\n"
+"Håll ner Ctrl och klicka på en kontrollpunkt för att skapa en ny figur vid "
+"exakt samma position.\n"
+"Håll ner Ctrl och klicka utanför bildgränsen för att skapa en ny figur som "
+"börjar vid kanten.\n"
+"Tryck Retur för att slutföra figuren."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:187
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
@@ -1502,7 +1529,7 @@ msgstr "Typ"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:189
 msgid "Smooth"
-msgstr ""
+msgstr "Utjämnad"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:203
 msgid "Eraser"
@@ -1537,13 +1564,13 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Vänsterklicka för att rita med den primära färgen. Högerklicka för att rita "
+"Vänsterklicka för att rita med den primära färgen, högerklicka för att rita "
 "med sekundär färg."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:55
 #: ../Pinta.Tools/Tools/GradientTool.cs:169
 msgid "Gradient"
-msgstr "Gradient"
+msgstr "Tonad"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:63
 msgid ""
@@ -1583,7 +1610,7 @@ msgstr "Klicka och dra för att rita konturen för ett markeringsområde."
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:40
 msgid "Line/Curve"
-msgstr ""
+msgstr "Linje/Kurva"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:62
 msgid "Magic Wand Select"
@@ -1598,6 +1625,8 @@ msgid ""
 "Left click and drag the selection to move selected content. Right click and "
 "drag the selection to rotate selected content."
 msgstr ""
+"Vänsterklicka och dra i markeringen för att flytta markerat innehåll. "
+"Högerklicka och dra, för att rotera markerat innehåll."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
 msgid "Move Selection"
@@ -1608,6 +1637,8 @@ msgid ""
 "Left click and drag the selection to move selection outline. Right click and "
 "drag the selection to rotate selection outline."
 msgstr ""
+"Vänsterklicka och dra i markeringen för att flytta markeringsramen. "
+"Högerklicka och dra, för att rotera markeringsramen."
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
 msgid "Paintbrush"
@@ -1622,7 +1653,7 @@ msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Vänsterklicka för att fylla ett område med den primära färgen. Högerklicka "
+"Vänsterklicka för att fylla ett område med den primära färgen, högerklicka "
 "för att fylla med sekundär färg."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:37
@@ -1639,6 +1670,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
 msgstr ""
+"Vänsterklicka för att rita en bildpunktsbred frihandslinje med primär färg. "
+"Högerklicka för sekundär färg."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid "Recolor"
@@ -1649,6 +1682,8 @@ msgid ""
 "Left click to replace the secondary color with the primary color. Right "
 "click to reverse."
 msgstr ""
+"Vänsterklicka för att ersätta sekundärfärgen med primärfärgen. Högerklicka "
+"för att återställa."
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
 msgid "Rectangle Select"
@@ -1676,7 +1711,7 @@ msgstr "Text"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Text - Slutför"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:101
 msgid ""
@@ -1716,11 +1751,11 @@ msgstr "Högerjustera"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Text Style"
-msgstr "Text stil"
+msgstr "Textstil"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:249
 msgid "Normal and Outline"
-msgstr "Normal och Konturlinje"
+msgstr "Normalt och Konturlinje"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
@@ -1757,7 +1792,7 @@ msgstr "Ny palettstorlek:"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:61
 #, csharp-format
 msgid "Save the changes to image \"{0}\" before closing?"
-msgstr "Spara ändringarna i bilden \"{0}\" innan du avslutar?"
+msgstr "Vill du spara ändringar i bilden \"{0}\" innan du stänger?"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:62
 msgid "If you don't save, all changes will be permanently lost."
@@ -1766,11 +1801,11 @@ msgstr "Om du inte sparar kommer alla ändringar att gå förlorade."
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
 msgid "Close _without saving"
-msgstr ""
+msgstr "Stäng _utan att spara"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:52
 msgid "Take Screenshot"
-msgstr "Ta en skärmbild"
+msgstr "Ta ett skärmklipp"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:53
 msgid "Delay before taking a screenshot (seconds):"
@@ -1794,7 +1829,7 @@ msgstr "Kan inte spara skrivskyddad fil."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
 msgid "Image too large"
-msgstr "Bild är för stor"
+msgstr "Bilden är för stor"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
 msgid "ICO files can not be larger than 255 x 255 pixels."
@@ -1803,7 +1838,7 @@ msgstr "ICO-filer kan inte vara större än 255 x 255 pixlar."
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
-msgstr "Ett fil med namnet \"{0}\" finns redan. Vill du ersätta den?"
+msgstr "En fil med namnet \"{0}\" finns redan. Vill du ersätta den?"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
 #, csharp-format
@@ -1836,15 +1871,15 @@ msgstr "Lageregenskaper"
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
 msgid "Rotate / Zoom Layer"
-msgstr "Rotera / zooma lager"
+msgstr "Rotera / Zooma lager"
 
 #: ../Pinta/AddinSetupService.cs:49
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Pinta Community-tillägg - Plattformsspecifik"
 
 #: ../Pinta/AddinSetupService.cs:53
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "Pinta Community-tillägg - Plattformsöverkridande"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:126
 msgid "Contributors to this release:"
@@ -1861,10 +1896,12 @@ msgstr ""
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Daniel Nylander https://launchpad.net/~yeager\n"
 "  Jakob Gezelius https://launchpad.net/~jakob-knugen\n"
+"  Jonatan Nyberg https://launchpad.net/~jony0008\n"
 "  Jonathan Pobst https://launchpad.net/~jpobst\n"
 "  Phoenix https://launchpad.net/~thephoenix\n"
 "  Tom Mannerhagen https://launchpad.net/~tom-mannerhagen-gmail\n"
-"  jstfaking https://launchpad.net/~jstfaking"
+"  jstfaking https://launchpad.net/~jstfaking\n"
+"  Åke Engelbrektson https://launchpad.net/~eson"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:152
 msgid "Translated by:"
@@ -1880,7 +1917,7 @@ msgstr "Använder en del ikoner från:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:173
 msgid "Powered by Mono:"
-msgstr ""
+msgstr "Drivs av Mono:"
 
 #: ../Pinta/Dialogs/AboutDialog.cs:280
 msgid "About Pinta"
@@ -1919,7 +1956,7 @@ msgstr "Detaljer"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:109
 msgid "Report Bug...."
-msgstr ""
+msgstr "Rapportera fel..."
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
 msgid "JPEG Quality"
@@ -1935,7 +1972,7 @@ msgstr "Namn:"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
 msgid "Visible"
-msgstr "Synlig"
+msgstr "Synligt"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
 msgid "Blend Mode"
@@ -1950,18 +1987,18 @@ msgstr "Opacitet:"
 #: ../Pinta/Dialogs/NewImageDialog.cs:342
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Clipboard"
-msgstr ""
+msgstr "Urklipp"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:162
 #: ../Pinta/Dialogs/NewImageDialog.cs:201
 #: ../Pinta/Dialogs/NewImageDialog.cs:344
 #: ../Pinta/Dialogs/NewImageDialog.cs:432
 msgid "Custom"
-msgstr ""
+msgstr "Anpassa"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:193
 msgid "Preset:"
-msgstr ""
+msgstr "Förinställning:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
@@ -1986,31 +2023,31 @@ msgstr "Höjd:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:245
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientering:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:248
 msgid "Portrait"
-msgstr ""
+msgstr "Stående"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:256
 msgid "Landscape"
-msgstr ""
+msgstr "Liggande"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:271
 msgid "Background:"
-msgstr ""
+msgstr "Bakgrund:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:274
 msgid "White"
-msgstr ""
+msgstr "Vit"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:282
 msgid "Background Color"
-msgstr ""
+msgstr "Bakgrundsfärg"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:319
 msgid "Preview"
-msgstr ""
+msgstr "Förhandsgranska"
 
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
@@ -2023,17 +2060,17 @@ msgstr "Sökväg"
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
 msgid "By percentage:"
-msgstr "I procent:"
+msgstr "Efter procent:"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
 msgid "By absolute size:"
-msgstr "Med absolut storlek:"
+msgstr "Efter absolut storlek:"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
 #: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
 msgid "Maintain aspect ratio"
-msgstr "Behåll bildförhållande"
+msgstr "Bevara proportioner"
 
 #: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
 msgid "Anchor:"
@@ -2041,11 +2078,11 @@ msgstr "Ankare:"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
-msgstr ""
+msgstr "Visa det här meddelandet och avsluta."
 
 #: ../Pinta/Main.cs:58
 msgid "Display the application version."
-msgstr ""
+msgstr "Visa programversion."
 
 #: ../Pinta/Main.cs:59
 msgid "number of threads to use for rendering"
@@ -2053,11 +2090,11 @@ msgstr "antal trådar att använda för rendering"
 
 #: ../Pinta/Main.cs:107
 msgid "Usage: pinta [files]"
-msgstr ""
+msgstr "Användning: pinta [filer]"
 
 #: ../Pinta/Main.cs:109
 msgid "Options: "
-msgstr ""
+msgstr "Alternativ: "
 
 #: ../Pinta/MainWindow.cs:309
 msgid "_File"
@@ -2089,7 +2126,7 @@ msgstr "_Effekter"
 
 #: ../Pinta/MainWindow.cs:319
 msgid "A_dd-ins"
-msgstr ""
+msgstr "T_illägg"
 
 #: ../Pinta/MainWindow.cs:321
 msgid "_Window"
@@ -2109,7 +2146,7 @@ msgstr "Alternativnamn"
 
 #: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
-msgstr ""
+msgstr "Arbetsyta"
 
 #: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
 msgid "History"
@@ -2154,7 +2191,7 @@ msgstr "Ingen markering"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
 msgid "Available in repository:"
-msgstr ""
+msgstr "Tillgängligt i förrådet:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
 msgid "Update available"
@@ -2162,12 +2199,12 @@ msgstr "Uppdatering tillgänglig"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
 msgid "This add-in can't be loaded due to missing dependencies"
-msgstr ""
+msgstr "Detta tillägg kan inte läsas in, på grund av saknade beroenden"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
 #, csharp-format
 msgid "Required: {0} v{1}, found v{2}"
-msgstr "Krävs: {0} v{1}, found v{2}"
+msgstr "Krävs: {0} v{1}, hittade v{2}"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
 #, csharp-format
@@ -2180,7 +2217,7 @@ msgstr "Installerad version"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
 msgid "Repository version"
-msgstr ""
+msgstr "Förrådsversion"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
 msgid "Download size"
@@ -2189,6 +2226,7 @@ msgstr "Nedladdningsstorlek"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
 msgid "The following depedencies required by this add-in are not available:"
 msgstr ""
+"Följande beroenden som krävs av detta tillägg, finns inte tillgängligt:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
 msgid "Installation cancelled"
@@ -2206,7 +2244,7 @@ msgstr "Installationen misslyckades"
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
 msgid "Installed"
-msgstr "Installerad"
+msgstr "Installerade"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
 #: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
@@ -2272,12 +2310,16 @@ msgid ""
 "There are other add-ins that depend on the previous ones which will also be "
 "uninstalled:"
 msgstr ""
+"Det finns fler tillägg som är beroende av de förra, som också kommer att "
+"avinstalleras:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
 msgid ""
 "The selected add-ins can't be installed because there are dependency "
 "conflicts."
 msgstr ""
+"Det valda tillägget kan inte installeras, eftersom det finns en "
+"beroendekonflikt."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
 msgid "The following packages will be installed:"
@@ -2285,15 +2327,15 @@ msgstr "Följande paket kommer att installeras:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
 msgid " (in user directory)"
-msgstr " (i användarkatalog)"
+msgstr " (i användarkatalogen)"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
 msgid "The following packages need to be uninstalled:"
-msgstr ""
+msgstr "Följande paket behöver avinstalleras:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
 msgid "The following dependencies could not be resolved:"
-msgstr ""
+msgstr "Följande beroenden kunde inte lösas:"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
 msgid "Are you sure you want to cancel the installation?"
@@ -2309,7 +2351,7 @@ msgstr "Installationen misslyckades!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
 msgid "The installation has completed with warnings."
-msgstr "Installationen färdigställdes med varningar."
+msgstr "Installationen slutfördes med varningar."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
 msgid "Uninstalling Add-ins"
@@ -2321,11 +2363,11 @@ msgstr "Avinstallationen misslyckades!"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
 msgid "The uninstallation has completed with warnings."
-msgstr "Avinstallationen färdigställdes med varningar."
+msgstr "Avinstallationen slutfördes med varningar."
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
 msgid "Registering repository"
-msgstr ""
+msgstr "Registrerar förråd"
 
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
 #: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
@@ -2391,7 +2433,7 @@ msgstr "Lägg till nytt förråd"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
 msgid "Select the location of the repository you want to register:"
-msgstr "Välj platsen för förrådet som du vill registrera:"
+msgstr "Välj plats för förrådet som du vill registrera:"
 
 #: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
 msgid "Register an on-line repository"
