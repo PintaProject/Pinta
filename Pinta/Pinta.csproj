@@ -66,12 +66,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="Actions\Addins\AddinManagerAction.cs" />
     <Compile Include="Actions\Edit\PasteAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
@@ -113,8 +107,6 @@
     <Compile Include="Dialogs\VersionInformationTabPage.cs" />
     <Compile Include="DocumentViewContent.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
     <Compile Include="MacInterop\AppleEvent.cs" />
     <Compile Include="MacInterop\ApplicationEvents.cs" />
     <Compile Include="MacInterop\Carbon.cs" />
