@@ -39,7 +39,7 @@ namespace Pinta.Docking
 	{
 		bool active;
 		Gtk.Widget page;
-		ExtendedLabel labelWidget;
+		Label labelWidget;
 		int labelWidth;
 		DockVisualStyle visualStyle;
 		Gtk.Widget tabIcon;
@@ -116,8 +116,10 @@ namespace Pinta.Docking
 			if (tabIcon != null)
 				tabIcon.Visible = visualStyle.ShowPadTitleIcon.Value;
 			if (IsRealized) {
+#if false
 				if (labelWidget != null)
 					labelWidget.ModifyFg (StateType.Normal, visualStyle.PadTitleLabelColor.Value);
+#endif
 			}
 			var r = WidthRequest;
 			WidthRequest = -1;
@@ -149,8 +151,8 @@ namespace Pinta.Docking
 				tabIcon = null;
 
 			if (!string.IsNullOrEmpty (label)) {
-				labelWidget = new ExtendedLabel (label);
-				labelWidget.DropShadowVisible = true;
+				labelWidget = new Label (label);
+				//labelWidget.DropShadowVisible = true;
 				labelWidget.UseMarkup = true;
 				box.PackStart (labelWidget, true, true, 0);
 			} else {
