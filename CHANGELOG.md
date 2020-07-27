@@ -41,6 +41,7 @@ Thanks to the following contributors who worked on this release:
 - UI improvements to the New Image dialog (#99, [[1424547](https://bugs.launchpad.net/pinta/+bug/1424547)).
 - The Rotate / Zoom dialog now rotates in-place instead of changing the layer's size.
 - Cairo blend operations are now used instead of PDN's managed blend modes (#98, [#1248933](https://bugs.launchpad.net/pinta/+bug/1248933), [#1091910](https://bugs.launchpad.net/pinta/+bug/1091910)).
+- The tool windows can now only be closed with the View -> Tool Windows menu, as it was easy to accidentally close them without knowing how to recover them ([#1428720](https://bugs.launchpad.net/pinta/+bug/1428720)).
 
 ### Fixed
 - Fixed many issues where selection changes did not update correctly ([#1438022](https://bugs.launchpad.net/pinta/+bug/1438022), [#1188924](https://bugs.launchpad.net/pinta/+bug/1188924), [#1429830](https://bugs.launchpad.net/pinta/+bug/1429830), [#1098137](https://bugs.launchpad.net/pinta/+bug/1098137), #105).
