@@ -32,14 +32,17 @@ using System.Reflection;
 using MonoDevelop.Components;
 using Pinta.Docking.AtkCocoaHelper;
 using Pinta.Core;
+using Cairo;
 
 namespace Pinta.Docking
 {
 
 	class DockItemTitleTab : Gtk.EventBox
 	{
-		static Gdk.Pixbuf dockTabActiveBackImage = GdkExtensions.FromResource( "padbar-active.9.png");
-		static Gdk.Pixbuf dockTabBackImage = GdkExtensions.FromResource( "padbar-inactive.9.png");
+#if false
+		static Xwt.Drawing.Image dockTabActiveBackImage = Xwt.Drawing.Image.FromResource("padbar-active.9.png");
+		static Xwt.Drawing.Image dockTabBackImage = Xwt.Drawing.Image.FromResource("padbar-inactive.9.png");
+#endif
 
 		bool active;
 		Gtk.Widget page;
@@ -67,12 +70,12 @@ namespace Pinta.Docking
 		static Gdk.Pixbuf pixAutoHide;
 		static Gdk.Pixbuf pixDock;
 
-		const int TopPadding = 5;
+		const int TopPadding = 9;
 		const int BottomPadding = 7;
-		const int TopPaddingActive = 5;
-		const int BottomPaddingActive = 7;
-		const int LeftPadding = 11;
-		const int RightPadding = 9;
+		const int TopPaddingActive = 8;
+		const int BottomPaddingActive = 8;
+		const int LeftPadding = 8;
+		const int RightPadding = 8;
 
 		internal event EventHandler<EventArgs> TabPressed;
 
@@ -707,29 +710,45 @@ namespace Pinta.Docking
 			UpdateVisualStyle ();
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Gtk.Requisition req)
-		{
-			if (Child != null) {
-				req = Child.SizeRequest ();
-				req.Width += (int)(TabPadding.Left + TabPadding.Right);
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			if (Child != null)
+            {
+				Child.GetPreferredHeight(out minimum_height, out natural_height);
+
+				int padding;
 				if (active)
-					req.Height += (int)(TabActivePadding.Top + TabActivePadding.Bottom);
+					padding = TopPaddingActive + BottomPaddingActive;
 				else
-					req.Height += (int)(TabPadding.Top + TabPadding.Bottom);
-			}
-		}
-#endif
-					
-		protected override void OnSizeAllocated (Gdk.Rectangle rect)
+					padding = TopPadding + BottomPadding;
+
+				minimum_height += padding;
+				natural_height += padding;
+            }
+			else
+				base.OnGetPreferredHeight(out minimum_height, out natural_height);
+        }
+
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			if (Child != null)
+            {
+				Child.GetPreferredWidth(out minimum_width, out natural_width);
+
+				int padding = LeftPadding + RightPadding;
+				minimum_width += padding;
+				natural_width += padding;
+            }
+			else
+				base.OnGetPreferredWidth(out minimum_width, out natural_width);
+        }
+
+        protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
 			base.OnSizeAllocated (rect);
 
-			// TODO-GTK3
-#if false
-			int leftPadding = (int)TabPadding.Left;
-			int rightPadding = (int)TabPadding.Right;
+			int leftPadding = LeftPadding;
+			int rightPadding = RightPadding;
 			
 			rect.X += leftPadding;
 			rect.Width -= leftPadding + rightPadding;
@@ -738,36 +757,35 @@ namespace Pinta.Docking
 			}
 
 			if (Child != null) {
-				var bottomPadding = active ? (int)TabActivePadding.Bottom : (int)TabPadding.Bottom;
-				var topPadding = active ? (int)TabActivePadding.Top : (int)TabPadding.Top;
+				var bottomPadding = active ? BottomPaddingActive : BottomPadding;
+				var topPadding = active ? TopPaddingActive : TopPadding;
 				int centerY = topPadding + ((rect.Height - bottomPadding - topPadding) / 2);
 				var height = Child.SizeRequest ().Height;
 				rect.Y += centerY - (height / 2);
 				rect.Height = height;
 				Child.SizeAllocate (rect);
 			}
-#endif
 		}
 
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
+        protected override bool OnDrawn(Context ctx)
+        {
 			if (VisualStyle.TabStyle == DockTabStyle.Normal)
-				DrawAsBrowser (evnt);
+				DrawAsBrowser(ctx);
 			else
-				DrawNormal (evnt);
+				DrawNormal(ctx);
 
-			if (HasFocus) {
+#if false
+			if (HasFocus)
+			{
 				var alloc = labelWidget.Allocation;
-				Gtk.Style.PaintFocus (Style, Window, State, alloc, this, "label",
-				                      alloc.X, alloc.Y, alloc.Width, alloc.Height);
+				Gtk.Style.PaintFocus(Style, Window, State, alloc, this, "label",
+									  alloc.X, alloc.Y, alloc.Width, alloc.Height);
 			}
-			return base.OnExposeEvent (evnt);
-		}
 #endif
+			return base.OnDrawn(ctx);
+        }
 
-		void DrawAsBrowser (Gdk.EventExpose evnt)
+        void DrawAsBrowser (Context ctx)
 		{
 			bool first = true;
 			bool last = true;
@@ -779,51 +797,60 @@ namespace Pinta.Docking
 				last = cts[cts.Length - 1] == this;
 			}
 
-			using (var ctx = Gdk.CairoHelper.Create (Window)) {
+			{
+				int radius = 3;
+
 				if (first && last) {
-					ctx.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+					ctx.Rectangle (0, 0, AllocatedWidth, AllocatedHeight);
 					ctx.SetSourceColor (VisualStyle.PadBackgroundColor.Value.ToCairoColor ());
 					ctx.Fill ();
-				} else {
-					var image = Active ? dockTabActiveBackImage : dockTabBackImage;
-					image = image.WithSize (Allocation.Width, Allocation.Height);
-
-					ctx.DrawImage (this, image, Allocation.X, Allocation.Y);
+				} else if (Active) {
+					var x = Allocation.X;
+					var y = Allocation.Y + TopPadding - 6;
+					ctx.RoundedRectangle(x, y, Allocation.Width - 1, Allocation.Height - y, radius, CairoCorners.TopLeft | CairoCorners.TopRight);
+					ctx.SetSourceColor(VisualStyle.PadBackgroundColor.Value.ToCairoColor());
+					ctx.Fill();
+				}
+				else {
+					var x = Allocation.X;
+					var y = Allocation.Y + TopPadding - 4;
+					ctx.RoundedRectangle(x, y, Allocation.Width - 1, Allocation.Height - y - 1, radius, CairoCorners.TopLeft | CairoCorners.TopRight);
+					ctx.SetSourceColor(VisualStyle.InactivePadBackgroundColor.Value.ToCairoColor());
+					ctx.Fill();
 				}
 			}
 		}
 
-		void DrawNormal (Gdk.EventExpose evnt)
-		{
-			using (var ctx = Gdk.CairoHelper.Create (Window)) {
-				var x = Allocation.X;
-				var y = Allocation.Y;
+		void DrawNormal (Context ctx)
+        {
+            var x = Allocation.X;
+            var y = Allocation.Y;
 
-				ctx.Rectangle (x, y + 1, Allocation.Width, Allocation.Height - 1);
-				ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
-				ctx.Fill ();
+            ctx.Rectangle(x, y + 1, Allocation.Width, Allocation.Height - 1);
+            ctx.SetSourceColor(Styles.DockBarBackground.ToCairoColor());
+            ctx.Fill();
 
-				/*
-				if (active) {
-					double offset = Allocation.Height * 0.25;
-					var rect = new Cairo.Rectangle (x - Allocation.Height + offset, y, Allocation.Height, Allocation.Height);
-					var cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
-					cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
-					cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
-					ctx.Pattern = cg;
-					ctx.Rectangle (rect);
-					ctx.Fill ();
+            /*
+            if (active) {
+                double offset = Allocation.Height * 0.25;
+                var rect = new Cairo.Rectangle (x - Allocation.Height + offset, y, Allocation.Height, Allocation.Height);
+                var cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
+                cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
+                cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
+                ctx.Pattern = cg;
+                ctx.Rectangle (rect);
+                ctx.Fill ();
 
-					rect = new Cairo.Rectangle (x + Allocation.Width - offset, y, Allocation.Height, Allocation.Height);
-					cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
-					cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
-					cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
-					ctx.Pattern = cg;
-					ctx.Rectangle (rect);
-					ctx.Fill ();
-				}
-				*/
-			}
-		}
-	}
+                rect = new Cairo.Rectangle (x + Allocation.Width - offset, y, Allocation.Height, Allocation.Height);
+                cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
+                cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
+                cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
+                ctx.Pattern = cg;
+                ctx.Rectangle (rect);
+                ctx.Fill ();
+            }
+            */
+
+        }
+    }
 }
