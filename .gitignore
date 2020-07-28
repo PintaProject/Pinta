@@ -2,6 +2,7 @@
 *.suo
 *.swp
 *.userprefs
+.DS_Store
 aclocal.m4
 autom4te.cache
 bin
