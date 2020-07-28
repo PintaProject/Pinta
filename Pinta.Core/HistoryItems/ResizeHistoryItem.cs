@@ -51,6 +51,9 @@ namespace Pinta.Core
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
+			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+			window.FreezeUpdates ();
+
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
 			
@@ -72,6 +75,9 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;
+			PintaCore.Actions.View.UpdateCanvasScale ();
+
+			window.ThawUpdates ();
 		}
 
 		public override void Redo ()
@@ -80,6 +86,9 @@ namespace Pinta.Core
 			double scale = PintaCore.Workspace.Scale;
 
 			Size swap = PintaCore.Workspace.ImageSize;
+
+			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+			window.FreezeUpdates ();
 
 			PintaCore.Workspace.ImageSize = old_size;
 			PintaCore.Workspace.CanvasSize = old_size;
@@ -92,6 +101,9 @@ namespace Pinta.Core
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;
+			PintaCore.Actions.View.UpdateCanvasScale ();
+
+			window.ThawUpdates ();
 		}
 
 		public override void Dispose ()

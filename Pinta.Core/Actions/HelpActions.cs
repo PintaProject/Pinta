@@ -76,7 +76,7 @@ namespace Pinta.Core
 
 		private void Bugs_Activated (object sender, EventArgs e)
 		{
-			Process.Start ("https://bugs.launchpad.net/pinta");
+			OpenUrl ("https://bugs.launchpad.net/pinta");
 		}
 
 		private void DisplayHelp (object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace Pinta.Core
 					string path = Path.Combine (Path.Combine (help_dir, lang), "pinta");
 					if (Directory.Exists (path))
 					{
-						Process.Start (string.Format ("ghelp://{0}", path));
+						OpenUrl (string.Format ("ghelp://{0}", path));
 						return;
 					}
 				}
@@ -100,18 +100,34 @@ namespace Pinta.Core
 
 			// TODO - update this link if we make HTML documentation available
 			// online, or install it with Pinta.
-			Process.Start ("http://pinta-project.com/howto");
+			OpenUrl ("https://pinta-project.com/howto");
 		}
 
 		private void Translate_Activated (object sender, EventArgs e)
 		{
-			Process.Start ("https://translations.launchpad.net/pinta");
+			OpenUrl ("https://translations.launchpad.net/pinta");
 		}
 
 		private void Website_Activated (object sender, EventArgs e)
 		{
-			Process.Start ("http://www.pinta-project.com");
+			OpenUrl ("https://www.pinta-project.com");
 		}
+
+		private void OpenUrl(string url)
+        {
+			try {
+				Process.Start (url);
+            } catch (System.ComponentModel.Win32Exception) {
+				// See bug #1888883. Newer mono versions (e.g. 6.10) throw an
+				// error instead of opening the default browser, so explicitly
+				// try opening via xdg-open if the simple approach fails.
+				if (PintaCore.System.OperatingSystem == OS.X11) {
+					Process.Start ("xdg-open", url);
+				} else {
+					throw;
+                }
+            }
+        }
 		#endregion
 	}
 }

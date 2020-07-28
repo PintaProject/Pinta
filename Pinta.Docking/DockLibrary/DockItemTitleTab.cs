@@ -43,7 +43,7 @@ namespace Pinta.Docking
 
 		bool active;
 		Gtk.Widget page;
-		ExtendedLabel labelWidget;
+		Label labelWidget;
 		int labelWidth;
 		int minWidth;
 		DockVisualStyle visualStyle;

@@ -50,14 +50,6 @@ namespace Pinta.Core
 			{
 				_visible = value;
 
-				// TODO - these menu items should be updated by a listener
-				// to the SelectionModified event.
-				PintaCore.Actions.Edit.Deselect.Sensitive = _visible;
-				PintaCore.Actions.Edit.EraseSelection.Sensitive = _visible;
-				PintaCore.Actions.Edit.FillSelection.Sensitive = _visible;
-				PintaCore.Actions.Image.CropToSelection.Sensitive = _visible;
-				PintaCore.Actions.Edit.InvertSelection.Sensitive = _visible;
-
 				// Notify any listeners.
 				if (SelectionModified != null)
 					SelectionModified.Invoke(this, EventArgs.Empty);

@@ -46,7 +46,7 @@ namespace Pinta.Core
                 { Translations.GetString ("Union (+) (Ctrl + Left Click)"), CombineMode.Union},
                 { Translations.GetString ("Exclude (-) (Right Click)"), CombineMode.Exclude},
                 { Translations.GetString ("Xor (Ctrl + Right Click)"), CombineMode.Xor},
-                { Translations.GetString ("Intersect (Shift + Left Click)"), CombineMode.Intersect},
+                { Translations.GetString ("Intersect (Alt + Left Click)"), CombineMode.Intersect},
             };
         }
 
@@ -87,7 +87,7 @@ namespace Pinta.Core
             {
                 if (args.Event.IsControlPressed ())
                     mode = CombineMode.Union;
-                else if (args.Event.IsShiftPressed ())
+                else if (args.Event.IsAltPressed ())
                     mode = CombineMode.Intersect;
             }
             else if (args.Event.Button == GtkExtensions.MouseRightButton)

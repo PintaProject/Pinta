@@ -98,6 +98,14 @@ namespace Pinta.Core
 			RotateCCW.Activated += HandlePintaCoreActionsImageRotateCCWActivated;
 			CropToSelection.Activated += HandlePintaCoreActionsImageCropToSelectionActivated;
 			AutoCrop.Activated += HandlePintaCoreActionsImageAutoCropActivated;
+
+			PintaCore.Workspace.SelectionChanged += (o, _) => {
+				var visible = false;
+				if (PintaCore.Workspace.HasOpenDocuments)
+					visible = PintaCore.Workspace.ActiveDocument.Selection.Visible;
+
+				CropToSelection.Sensitive = visible;
+			};
 		}
 		#endregion
 
