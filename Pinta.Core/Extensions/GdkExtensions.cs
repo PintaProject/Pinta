@@ -98,6 +98,11 @@ namespace Pinta.Core
 			return (m & ModifierType.ControlMask) == ModifierType.ControlMask;
 		}
 
+		public static bool IsAltPressed (this ModifierType m)
+		{
+			return (m & ModifierType.Mod1Mask) == ModifierType.Mod1Mask;
+		}
+
 		public static bool IsShiftPressed (this EventButton ev)
 		{
             return ev.State.IsShiftPressed ();
@@ -108,11 +113,16 @@ namespace Pinta.Core
             return ev.State.IsControlPressed ();
 		}
 
-        /// <summary>
-        /// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
-        /// from appearing as active modifier keys.
-        /// </summary>
-        public static ModifierType FilterModifierKeys (this ModifierType current_state)
+		public static bool IsAltPressed (this EventButton ev)
+		{
+			return ev.State.IsAltPressed ();
+		}
+
+		/// <summary>
+		/// Filters out all modifier keys except Ctrl/Shift/Alt. This prevents Caps Lock, Num Lock, etc
+		/// from appearing as active modifier keys.
+		/// </summary>
+		public static ModifierType FilterModifierKeys (this ModifierType current_state)
         {
             var state = Gdk.ModifierType.None;
 
