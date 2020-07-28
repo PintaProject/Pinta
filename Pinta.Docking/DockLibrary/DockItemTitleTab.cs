@@ -247,7 +247,7 @@ namespace Pinta.Docking
 				tabIcon.Show ();
 				box.PackStart (tabIcon, false, false, 3);
 
-				labelWidget = new ExtendedLabel (label);
+				labelWidget = new Label (label);
 				// Ignore the label because the title tab already contains its name
 				labelWidget.Accessible.SetShouldIgnore (true);
 				labelWidget.UseMarkup = true;
