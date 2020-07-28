@@ -66,3 +66,4 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues with the docking library ([#832395](https://bugs.launchpad.net/pinta/+bug/832395)).
 - Fixed a bug where undoing a history item could set the background palette color to the foreground color ([#1888131](https://bugs.launchpad.net/pinta/+bug/1888131)).
 - Fixed issues where the zoom level was not maintained when undoing a Crop to Selection ([#1888885](https://bugs.launchpad.net/pinta/+bug/1888885)).
+- Fixed an error on newer Mono versions when opening URLs via the menu items under the Help menu ([#1888883](https://bugs.launchpad.net/pinta/+bug/1888883)).
