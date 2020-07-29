@@ -50,6 +50,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 - Fixed many issues where selection changes did not update correctly ([#1438022](https://bugs.launchpad.net/pinta/+bug/1438022), [#1188924](https://bugs.launchpad.net/pinta/+bug/1188924), [#1429830](https://bugs.launchpad.net/pinta/+bug/1429830), [#1098137](https://bugs.launchpad.net/pinta/+bug/1098137), #105).
+- Fixed incorrect behaviour when using the Shift key to constrain to a square or circle in the Rectangle and Ellipse tools ([#1452607](https://bugs.launchpad.net/pinta/+bug/1452607)).
 - The option to expand the canvas when pasting an image now only changes the canvas size in the dimension where the pasted image is larger ([#1883623](https://bugs.launchpad.net/pinta/+bug/1883623)).
 - Fixed a bug where Auto Crop used the current layer instead of the entire image when deciding what to crop, and takes the selection into account ([#1434928](https://bugs.launchpad.net/pinta/+bug/1434928), [#1434906](https://bugs.launchpad.net/pinta/+bug/1434906)).
 - Fixed potential crashes when switching tools without any open documents ([#1425612](https://bugs.launchpad.net/pinta/+bug/1425612)).
