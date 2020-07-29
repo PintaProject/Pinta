@@ -17,13 +17,12 @@ jobs:
     - name: Install Apt Dependencies
       run: |
         sudo apt update
-        sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool libnunit-cil-dev nunit-console yelp-tools
+        sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool libnunit-cil-dev nunit-console
     - name: Build
       run: |
         ./autogen.sh
         make
         make test
-        make check
         make releasezip
     - name: Upload Package
       uses: actions/upload-artifact@v2

@@ -1,5 +1,5 @@
-SUBDIRS = help xdg
-DIST_SUBDIRS = help xdg
+SUBDIRS = xdg
+DIST_SUBDIRS = xdg
 
 BINDIR = $(srcdir)/bin
 
@@ -42,7 +42,6 @@ help:
 build: Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
-	cd $(srcdir)/help && make copyhelp
 
 test: build
 	$(XBUILD) tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj
@@ -127,7 +126,6 @@ DISTCLEANFILES = po/.intltool-merge-cache \
 		 po/Makefile
 
 MAINTAINERCLEANFILES = po/Makefile.in.in \
-		       help/Makefile.in \
 		       Makefile.in \
 		       install-sh \
 		       configure \
