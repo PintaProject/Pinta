@@ -7,6 +7,9 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @jpobst
 - @don-mccomb
+- @jeneira94
+- @akaro2424
+- @anadvu
 - @miguelfazenda
 - @skkestrel
 - @codeprof
@@ -24,6 +27,7 @@ Thanks to the following contributors who worked on this release:
 - @aivel
 
 ### Added
+- A new [user guide](https://pinta-project.com/user-guide/) has been written for the Pinta website! Thanks to @jeneira94, @akaro2424, and @anadvu for their contributions!
 - Added a tab view to switch between images. The tabs can also be docked side-by-side or pulled into new windows. (#94).
 - The Rotate / Zoom dialog now supports zooming and panning ([#1252756](https://bugs.launchpad.net/pinta/+bug/1252756)).
 - Added a Smooth Erase tool, which is enabled using the Type menu on the Erase tool's toolbar (#110).
