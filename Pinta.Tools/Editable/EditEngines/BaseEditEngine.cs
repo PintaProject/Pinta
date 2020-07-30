@@ -1688,8 +1688,8 @@ namespace Pinta.Tools
 		}
 
 		/// <summary>
-		/// Calculate the modified position of currentPoint such that the angle between the adjacent point
-		/// (if any) and currentPoint is snapped to the closest angle out of a certain number of angles.
+		/// Constrain the current point to snap to fixed angles from the previous point, or to
+        /// produce a square / circle when drawing those shape types.
 		/// </summary>
 		protected void CalculateModifiedCurrentPoint()
 		{
@@ -1698,30 +1698,39 @@ namespace Pinta.Tools
 			//Don't bother calculating a modified point if there is no selected shape.
 			if (selEngine != null)
 			{
-				ControlPoint adjacentPoint;
+				if (ShapeType != ShapeTypes.OpenLineCurveSeries && selEngine.ControlPoints.Count == 4) {
+					// Constrain to a square / circle.
+					var origin = selEngine.ControlPoints [(SelectedPointIndex + 2) % 4].Position;
 
-				if (SelectedPointIndex > 0)
-				{
-					//Previous point.
-					adjacentPoint = selEngine.ControlPoints[SelectedPointIndex - 1];
-				}
-				else if (selEngine.ControlPoints.Count > 1)
-				{
-					//Previous point (looping around to the end) if there is more than 1 point.
-					adjacentPoint = selEngine.ControlPoints[selEngine.ControlPoints.Count - 1];
-				}
-				else
-				{
-					//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
-					return;
-				}
+					var dx = current_point.X - origin.X;
+					var dy = current_point.Y - origin.Y;
+					var length = Math.Max (Math.Abs (dx), Math.Abs (dy));
+					dx = length * Math.Sign (dx);
+					dy = length * Math.Sign (dy);
+					current_point = new PointD (origin.X + dx, origin.Y + dy);
+                } else {
+					// Calculate the modified position of currentPoint such that the angle between the adjacent point
+					// (if any) and currentPoint is snapped to the closest angle out of a certain number of angles.
+					ControlPoint adjacentPoint;
 
-				PointD dir = new PointD(current_point.X - adjacentPoint.Position.X, current_point.Y - adjacentPoint.Position.Y);
-				double theta = Math.Atan2(dir.Y, dir.X);
-				double len = Math.Sqrt(dir.X * dir.X + dir.Y * dir.Y);
+					if (SelectedPointIndex > 0) {
+						//Previous point.
+						adjacentPoint = selEngine.ControlPoints [SelectedPointIndex - 1];
+					} else if (selEngine.ControlPoints.Count > 1) {
+						//Previous point (looping around to the end) if there is more than 1 point.
+						adjacentPoint = selEngine.ControlPoints [selEngine.ControlPoints.Count - 1];
+					} else {
+						//Don't bother calculating a modified point because there is no reference point to align it with (there is only 1 point).
+						return;
+					}
 
-				theta = Math.Round(12 * theta / Math.PI) * Math.PI / 12;
-				current_point = new PointD((adjacentPoint.Position.X + len * Math.Cos(theta)), (adjacentPoint.Position.Y + len * Math.Sin(theta)));
+					PointD dir = new PointD (current_point.X - adjacentPoint.Position.X, current_point.Y - adjacentPoint.Position.Y);
+					double theta = Math.Atan2 (dir.Y, dir.X);
+					double len = Math.Sqrt (dir.X * dir.X + dir.Y * dir.Y);
+
+					theta = Math.Round (12 * theta / Math.PI) * Math.PI / 12;
+					current_point = new PointD ((adjacentPoint.Position.X + len * Math.Cos (theta)), (adjacentPoint.Position.Y + len * Math.Sin (theta)));
+				}
 			}
 		}
 

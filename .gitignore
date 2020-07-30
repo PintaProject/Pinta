@@ -26,9 +26,3 @@ po/POTFILES
 po/stamp-it
 xdg/pinta.desktop
 .vs
-
-# Help
-help/*/*.mo
-help/*/*.page
-!help/C/*.page
-help/*/*.stamp

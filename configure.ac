@@ -2,8 +2,6 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([pinta], [1.7])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
 
-YELP_HELP_INIT
-
 AC_PROG_INSTALL
 
 dnl pkg-config
@@ -46,7 +44,6 @@ AC_CONFIG_FILES([
 Makefile
 pinta
 pinta.pc
-help/Makefile
 po/Makefile.in
 xdg/Makefile
 ])

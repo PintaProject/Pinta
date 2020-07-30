@@ -61,13 +61,28 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-			"Andrew Davis",
-			"Cameron White",
-			"Don McComb",
-			"Jonathan Bergknoff",
-			"Jonathan Pobst",
-            "Marius Ungureanu",
-			"Robert Nordan"
+            "Cameron White (@cameronwhite)",
+            "Jonathan Pobst (@jpobst)",
+            "Robert Nordan (@robpvn)",
+            "A. Karon @akaro2424",
+            "Alberto Fanjul (@albfan)",
+            "Andrija Rajter (@rajter)",
+            "André Veríssimo (@averissimo)",
+            "Dan Dascalescu (@dandv)",
+            "Don McComb (@don-mccomb)",
+            "Jared Kells (@jkells)",
+            "Jennifer Nguyen (@jeneira94)",
+            "Jeremy Burns (@jaburns)",
+            "Julian Ospald (@hasufell)",
+            "Matthias Mailänder (@Mailaender)",
+            "Miguel Fazenda (@miguelfazenda)",
+            "Romain Racamier (@Shuunen)",
+            "Stefan Moebius (@codeprof)",
+            "@aivel",
+            "@anadvu",
+            "@scx",
+            "@skkestrel",
+            "@tdaffin"
 		};
 
 		string[] oldAuthors = new string[] {
@@ -78,10 +93,10 @@ namespace Pinta
 			"Andrew Davis",
 			"Anirudh Sanjeev",
 			"Balló György",
-			"Cameron White",
+			"Cameron White (@cameronwhite)",
 			"Ciprian Mustiata",
 			"David Nabraczky",
-			"Don McComb",
+			"Don McComb (@don-mccomb)",
 			"Elvis Alistar",
 			"Felix Schmutz",
 			"Greg Lowe",
@@ -91,20 +106,22 @@ namespace Pinta
 			"Joe Hillenbrand",
 			"John Burak",
 			"Jon Rimmer",
-			"Jonathan Pobst",
+			"Jonathan Bergknoff",
+			"Jonathan Pobst (@jpobst)",
 			"Juergen Obernolte",
 			"Khairuddin Ni'am",
 			"Krzysztof Marecki",
 			"Maia Kozheva",
 			"Manish Sinha",
 			"Marco Rolappe",
+            "Marius Ungureanu",
 			"Martin Geier",
 			"Mathias Fussenegger",
 			"Mikhail Makarov",
 			"Obinou Conseil",
 			"Olivier Dufour",
 			"Richard Cohn",
-			"Robert Nordan",
+			"Robert Nordan (@robpvn)",
 			"Tom Kadwill"
 		};
 

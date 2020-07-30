@@ -81,26 +81,7 @@ namespace Pinta.Core
 
 		private void DisplayHelp (object sender, EventArgs e)
 		{
-			if (SystemManager.GetOperatingSystem() == OS.X11)
-			{
-				// Search for help files in the user's preferred language.
-				var help_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "help");
-				var langs = PintaCore.System.GetLanguageNames ();
-
-				foreach (var lang in langs)
-				{
-					string path = Path.Combine (Path.Combine (help_dir, lang), "pinta");
-					if (Directory.Exists (path))
-					{
-						OpenUrl (string.Format ("ghelp://{0}", path));
-						return;
-					}
-				}
-			}
-
-			// TODO - update this link if we make HTML documentation available
-			// online, or install it with Pinta.
-			OpenUrl ("https://pinta-project.com/howto");
+			OpenUrl ("https://pinta-project.com/user-guide");
 		}
 
 		private void Translate_Activated (object sender, EventArgs e)

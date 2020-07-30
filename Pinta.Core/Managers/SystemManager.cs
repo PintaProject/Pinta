@@ -150,17 +150,6 @@ namespace Pinta.Core
 #endif
 		}
 
-		/// <summary>
-		/// Return a list of applicable locale names, ordered from most desirable to least desirable.
-		/// </summary>
-		public string[] GetLanguageNames ()
-		{
-			return GLib.Marshaller.NullTermPtrToStringArray (g_get_language_names (), false);
-		}
-
-		[DllImport ("glib-2.0.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr g_get_language_names ();
-
 		//From Managed.Windows.Forms/XplatUI
 		[DllImport ("libc")]
 		static extern int uname (IntPtr buf);
