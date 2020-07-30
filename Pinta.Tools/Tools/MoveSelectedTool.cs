@@ -36,7 +36,7 @@ namespace Pinta.Tools
 	public class MoveSelectedTool : BaseTransformTool
 	{
 		private MovePixelsHistoryItem hist;
-		private List<List<IntPoint>> original_selection;
+		private DocumentSelection original_selection;
 		private readonly Matrix original_transform = new Matrix ();
 
 		public override string Name {
@@ -74,7 +74,7 @@ namespace Pinta.Tools
 					new Cairo.Rectangle (0, 0, doc.ImageSize.Width, doc.ImageSize.Height));
 			}
 
-			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
+			original_selection = doc.Selection.Clone ();
 			original_transform.InitMatrix (doc.SelectionLayer.Transform);
 
 			hist = new MovePixelsHistoryItem (Icon, Name, doc);
@@ -114,14 +114,11 @@ namespace Pinta.Tools
 		{
 			base.OnUpdateTransform (transform);
 
-			List<List<IntPoint>> newSelectionPolygons = DocumentSelection.Transform (original_selection, transform);
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.Selection.SelectionClipper.Clear ();
-			doc.Selection.SelectionPolygons = newSelectionPolygons;
-			doc.Selection.MarkDirty ();
-
+			doc.Selection.Dispose ();
+			doc.Selection = original_selection.Transform (transform);
 			doc.Selection.Visible = true;
+
 			doc.SelectionLayer.Transform.InitMatrix (original_transform);
 			doc.SelectionLayer.Transform.Multiply (transform);
 
@@ -136,6 +133,7 @@ namespace Pinta.Tools
 				PintaCore.History.PushNewItem (hist);
 
 			hist = null;
+			original_selection.Dispose ();
 			original_selection = null;
 			original_transform.InitIdentity ();
 		}

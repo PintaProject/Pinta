@@ -36,7 +36,7 @@ namespace Pinta.Tools
 	public class MoveSelectionTool : BaseTransformTool
 	{
 		private SelectionHistoryItem hist;
-		private List<List<IntPoint>> original_selection;
+		private DocumentSelection original_selection;
 		
 		public override string Name {
 			get { return Catalog.GetString ("Move Selection"); }
@@ -66,7 +66,7 @@ namespace Pinta.Tools
 			base.OnStartTransform ();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
+			original_selection = doc.Selection.Clone ();
 
 			hist = new SelectionHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
@@ -76,13 +76,9 @@ namespace Pinta.Tools
 		{
 			base.OnUpdateTransform (transform);
 
-			List<List<IntPoint>> newSelectionPolygons = DocumentSelection.Transform (original_selection, transform);
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.Selection.SelectionClipper.Clear ();
-			doc.Selection.SelectionPolygons = newSelectionPolygons;
-            doc.Selection.MarkDirty ();
-
+			doc.Selection.Dispose ();
+			doc.Selection = original_selection.Transform (transform);
 			doc.Selection.Visible = true;
 
 			PintaCore.Workspace.Invalidate ();
@@ -96,6 +92,8 @@ namespace Pinta.Tools
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
 
 			hist = null;
+
+			original_selection.Dispose ();
 			original_selection = null;
 		}
 		#endregion
