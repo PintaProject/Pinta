@@ -6,6 +6,8 @@
     <AssemblyName>Pinta</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon>Pinta.ico</ApplicationIcon>
+    <OutputPath>..\bin</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
     <Version>1.7.0.0</Version>
     <Authors>PintaProject</Authors>
