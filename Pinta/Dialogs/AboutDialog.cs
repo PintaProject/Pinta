@@ -40,9 +40,6 @@ using Pango;
 using System.IO;
 using Pinta.Core;
 
-// TODO-GTK3
-#if false
-
 namespace Pinta
 {
 	internal class ScrollBox : DrawingArea
@@ -56,7 +53,6 @@ namespace Pinta
 		int textTop;
 		int scrollPause;
 		int scrollStart;
-		Gdk.GC backGc;
 
 		internal uint TimerHandle;
 
@@ -202,42 +198,42 @@ namespace Pinta
 			//                ++scroll;
 			//} else
 				++scroll;
-			int w, h;
-			this.Window.GetSize (out w, out h);
-			this.QueueDrawArea (0, 0, w, image.Height);
+			
+			this.QueueDrawArea (0, 0, Window.FrameExtents.Width, image.Height);
 			return true;
 		}
 
-		private void DrawImage ()
+		private void DrawImage (Cairo.Context ctx)
 		{
 			if (image != null) {
-				int w, h;
-				this.Window.GetSize (out w, out h);
-				this.Window.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
-				0);
+				Gdk.CairoHelper.SetSourcePixbuf(ctx, image, 0, 0);
+				ctx.Paint();
 			}
 		}
 
-		private void DrawImageTop ()
+		private void DrawImageTop (Cairo.Context ctx)
 		{
-			if (image_top != null) {
-				int w, h;
-				this.Window.GetSize (out w, out h);
-				this.Window.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
-				0);
+			if (image != null)
+			{
+				Gdk.CairoHelper.SetSourcePixbuf(ctx, image_top, 0, 0);
+				ctx.Paint();
 			}
 		}
 
-		private void DrawText ()
+		private void DrawText (Cairo.Context ctx)
 		{
-			int width, height;
-			Window.GetSize (out width, out height);
+			int width = Window.FrameExtents.Width;
+			int height = Window.FrameExtents.Height;
 
 			int widthPixel, heightPixel;
-			layout.GetPixelSize (out widthPixel, out heightPixel);
+			layout.GetPixelSize(out widthPixel, out heightPixel);
 
-			Window.DrawLayout (Style.WhiteGC, 0, textTop - scroll, layout);
-			Window.DrawPixbuf (backGc, monoPowered, 0, 0, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing, -1, -1, RgbDither.Normal, 0, 0);
+			ctx.SetSourceColor(new Cairo.Color(1, 1, 1));
+			ctx.MoveTo(0, textTop - scroll);
+			Pango.CairoHelper.ShowLayout(ctx, layout);
+
+			Gdk.CairoHelper.SetSourcePixbuf(ctx, monoPowered, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing);
+			ctx.Paint();
 
 			heightPixel = heightPixel - 80 + image.Height;
 
@@ -247,27 +243,22 @@ namespace Pinta
 				scroll = scrollStart;
 		}
 
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn(Cairo.Context ctx)
 		{
-			int w, h;
-
-			this.Window.GetSize (out w, out h);
-			this.DrawImage ();
-			this.DrawText ();
-			this.DrawImageTop ();
+			this.DrawImage (ctx);
+			this.DrawText (ctx);
+			this.DrawImageTop (ctx);
 			
 			return false;
 		}
-#endif
 
 		protected void OnRealized (object o, EventArgs args)
 		{
 			int x, y;
 			int w, h;
 			Window.GetOrigin (out x, out y);
-			Window.GetSize (out w, out h);
+			w = Window.FrameExtents.Width;
+			h = Window.FrameExtents.Height;
 
 			textTop = y + image.Height - 30;
 			scrollStart = -(image.Height - textTop);
@@ -279,15 +270,6 @@ namespace Pinta
 			layout.Wrap = Pango.WrapMode.Word;
 			layout.Alignment = Pango.Alignment.Center;
 			layout.SetMarkup (CreditText);
-
-			backGc = new Gdk.GC (Window);
-			backGc.RgbBgColor = new Gdk.Color (49, 49, 74);
-		}
-
-		protected override void OnDestroyed ()
-		{
-			base.OnDestroyed ();
-			backGc.Dispose ();
 		}
 
 	}
@@ -301,45 +283,28 @@ namespace Pinta
 		{
 			Title = Translations.GetString ("About Pinta");
 			//TransientFor = IdeApp.Workbench.RootWindow;
-			AllowGrow = false;
-			HasSeparator = false;
+			Resizable = false;
 			Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 
-			VBox.BorderWidth = 0;
+			ContentArea.BorderWidth = 0;
 
 			aboutPictureScrollBox = new ScrollBox ();
 
-			VBox.PackStart (aboutPictureScrollBox, false, false, 0);
+			ContentArea.PackStart (aboutPictureScrollBox, false, false, 0);
 			imageSep = PintaCore.Resources.GetIcon ("About.ImageSep.png");
 
-			VBox.PackStart (new Gtk.Image (imageSep), false, false, 0);
+			ContentArea.PackStart (new Gtk.Image (imageSep), false, false, 0);
 
 			Notebook notebook = new Notebook ();
 			notebook.BorderWidth = 6;
 			notebook.AppendPage (new AboutPintaTabPage (), new Label (Title));
 			notebook.AppendPage (new VersionInformationTabPage (), new Label (Translations.GetString ("Version Info")));
-			
-			VBox.PackStart (notebook, true, true, 4);
+
+			ContentArea.PackStart (notebook, true, true, 4);
 
 			AddButton (Gtk.Stock.Close, (int)ResponseType.Close);
 
 			ShowAll ();
-		}
-
-		void ChangeColor (Gtk.Widget w)
-		{
-			w.ModifyBg (Gtk.StateType.Normal, new Gdk.Color (69, 69, 94));
-			w.ModifyBg (Gtk.StateType.Active, new Gdk.Color (69, 69, 94));
-			w.ModifyFg (Gtk.StateType.Normal, new Gdk.Color (255, 255, 255));
-			w.ModifyFg (Gtk.StateType.Active, new Gdk.Color (255, 255, 255));
-			w.ModifyFg (Gtk.StateType.Prelight, new Gdk.Color (255, 255, 255));
-
-			Gtk.Container c = w as Gtk.Container;
-
-			if (c != null) {
-				foreach (Widget cw in c.Children)
-					ChangeColor (cw);
-			}
 		}
 
 		public new int Run ()
@@ -350,4 +315,3 @@ namespace Pinta
 		}
 	}
 }
-#endif

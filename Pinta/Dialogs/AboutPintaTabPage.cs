@@ -43,7 +43,7 @@ namespace Pinta
 			    
 			HBox hBoxVersion = new HBox ();
 			hBoxVersion.PackStart (label, false, false, 5);
-			this.PackStart (hBoxVersion, false, true, 0);
+			this.PackStart (hBoxVersion, false, true, 5);
 
 			label = null;
 			label = new Label ();
