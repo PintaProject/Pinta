@@ -84,9 +84,14 @@ namespace Pinta.Tools
 			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnFinishTransform ()
+		protected override void OnFinishTransform (Matrix transform)
 		{
-			base.OnFinishTransform ();
+			base.OnFinishTransform (transform);
+
+			// Also transform the base selection used for the various select modes.
+			var doc = PintaCore.Workspace.ActiveDocument;
+			using (var prev_selection = doc.PreviousSelection)
+				doc.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
