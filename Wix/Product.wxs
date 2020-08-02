@@ -13,15 +13,7 @@
       <UpgradeVersion Minimum="0.0.0" Maximum="$(var.ProductVersion)" IncludeMinimum="yes" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
     </Upgrade>
 
-    <!-- GTK# 2.12.45 requires the VS2013 32-bit redistributable -->
-    <Feature Id="VCRedist" Title="Visual C++ 2013 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
-        <MergeRef Id="VCRedist"/>
-    </Feature>
-
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <!-- Install the VS runtime -->
-      <Merge Id="VCRedist" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC120_CRT_x86.msm" DiskId="1" Language="0"/>
-
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLLOCATION" Name="Pinta">
           <Component Id="ProductComponent" Guid="7D5ABDF1-2CCE-4A74-8AFE-A06237D783AB">

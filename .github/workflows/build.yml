@@ -70,6 +70,19 @@ jobs:
     - name: Compile Translations
       run: msbuild Pinta.Install.proj -target:CompileTranslations
 
+    - name: Cache VC redist
+      id: cache-redist
+      uses: actions/cache@v2
+      with:
+        path: Wix/vcredist_x86.exe
+        key: ${{ runner.os }}-redist-v1
+
+    - name: Fetch VC redist
+      if: steps.cache-redist.outputs.cache-hit != 'true'
+      run: |
+        cd Wix
+        Invoke-WebRequest https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe -OutFile vcredist_x86.exe
+
     # Reuse the gtk-sharp msi that choco already downloaded!
     - name: Build Installer
       run: |

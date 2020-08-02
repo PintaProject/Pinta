@@ -9,13 +9,29 @@
     </BootstrapperApplicationRef>
 
     <util:RegistrySearch Variable="GTKSHARPVERSION" Id="gsversion" Root="HKLM" Key="SOFTWARE\Xamarin\GtkSharp\Version" Result="value" Format="raw" />
-    
+
+    <!-- Check for the VS2013 redistributable. -->
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\x86" Value="Installed" Variable="VC2013_INSTALLED" />
+
     <Variable Name="InstallFolder" Type="string" Value="[ProgramFilesFolder]Pinta" />
-    
+
     <!-- Allows Pinta to be launched after installation completes. -->
     <Variable Name="LaunchTarget" Value="[InstallFolder]\Pinta.exe"/>
 
     <Chain>
+      <!-- VS2013 x86 redistributable is needed by GTK#. -->
+      <ExePackage Id="vcredist"
+          DisplayName="Microsoft Visual C++ 2013 Redistributable (x86)"
+          Cache="no"
+          Compressed="no"
+          PerMachine="yes"
+          Permanent="yes"
+          Vital="yes"
+          SourceFile="vcredist_x86.exe"
+          DownloadUrl="https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe"
+          InstallCommand="/quiet /norestart"
+          DetectCondition="VC2013_INSTALLED != 1">
+      </ExePackage>
       <!-- Ensure .Net 4.5 is installed. -->
       <PackageGroupRef Id="NetFx452Redist"/>
       <!-- Ensure GTK# is installed, or download it if necessary. -->
