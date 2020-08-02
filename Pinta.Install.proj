@@ -5,11 +5,11 @@
   <PropertyGroup>
     <OutputPath>bin</OutputPath>
     <InstallPrefix>/usr/local</InstallPrefix>
-    <BinDir>/usr/local/bin</BinDir>
-    <LibDir>/usr/local/lib</LibDir>
-    <DataRootDir>/usr/local/share</DataRootDir>
-    <ManDir>/usr/local/share/man</ManDir>
-    <LocaleDir>/usr/local/share/locale</LocaleDir>
+    <BinDir>$(InstallPrefix)/bin</BinDir>
+    <LibDir>$(InstallPrefix)/lib</LibDir>
+    <DataRootDir>$(InstallPrefix)/share</DataRootDir>
+    <ManDir>$(DataRootDir)/man</ManDir>
+    <LocaleDir>$(DataRootDir)/locale</LocaleDir>
   </PropertyGroup>
 
   <!-- All of our translation files (po) -->

@@ -75,3 +75,4 @@ Thanks to the following contributors who worked on this release:
 - Fixed an error on newer Mono versions when opening URLs via the menu items under the Help menu ([#1888883](https://bugs.launchpad.net/pinta/+bug/1888883)).
 - Fixed some occasional crashes on dragging and dropping or pasting into a new image ([#1838620](https://bugs.launchpad.net/pinta/+bug/1838620), [#1508777](https://bugs.launchpad.net/pinta/+bug/1508777)).
 - Fixed issues where using the Rectangle Select tool after the Move Selection or Move Selected Pixels tools did not update correctly ([#1889647](https://bugs.launchpad.net/pinta/+bug/1889647), [#1473430](https://bugs.launchpad.net/pinta/+bug/1473430), [#1889774](https://bugs.launchpad.net/pinta/+bug/1889774)).
+- Adjusted `Pinta.Install.proj` to simplify installing to a custom prefix ([#781836](https://bugs.launchpad.net/pinta/+bug/781836)).
