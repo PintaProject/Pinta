@@ -30,7 +30,7 @@
           SourceFile="vcredist_x86.exe"
           DownloadUrl="https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe"
           InstallCommand="/quiet /norestart"
-          DetectCondition="VC2013_INSTALLED != 1">
+          DetectCondition="NOT(VC2013_INSTALLED = &quot;1&quot;)">
       </ExePackage>
       <!-- Ensure .Net 4.5 is installed. -->
       <PackageGroupRef Id="NetFx452Redist"/>
