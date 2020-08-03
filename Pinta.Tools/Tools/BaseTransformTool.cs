@@ -141,6 +141,9 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			if (!is_dragging && !is_rotating)
+				return;
+
 			is_dragging = false;
 			is_rotating = false;
 
