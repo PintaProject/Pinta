@@ -29,6 +29,7 @@ jobs:
       with:
         name: "Pinta-ubuntu1804.zip"
         path: pinta-1.7.zip
+        if-no-files-found: error
 
   build-macos:
     runs-on: macos-latest
@@ -51,6 +52,7 @@ jobs:
       with:
         name: "Pinta.app.zip"
         path: osx/Pinta.app.zip
+        if-no-files-found: error
 
   build-windows:
     runs-on: windows-latest
@@ -95,3 +97,4 @@ jobs:
       with:
         name: "Pinta.exe"
         path: Wix/bin/Release/Pinta.exe
+        if-no-files-found: error
