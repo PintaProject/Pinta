@@ -11,7 +11,7 @@
     <util:RegistrySearch Variable="GTKSHARPVERSION" Id="gsversion" Root="HKLM" Key="SOFTWARE\Xamarin\GtkSharp\Version" Result="value" Format="raw" />
 
     <!-- Check for the VS2013 redistributable. -->
-    <util:RegistrySearch Variable="VC2013_INSTALLED" Root="HKLM" Key="SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\x86" Value="Installed" Format="raw" />
+    <util:RegistrySearch Variable="VC2013_INSTALLED" Root="HKLM" Key="SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\x86" Value="Installed" Result="exists" />
 
     <Variable Name="InstallFolder" Type="string" Value="[ProgramFilesFolder]Pinta" />
 
