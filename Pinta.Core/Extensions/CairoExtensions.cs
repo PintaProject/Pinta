@@ -946,15 +946,7 @@ namespace Pinta.Core
             using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
             {
                 g.AppendPath(path);
-
-				// TODO-GTK3 (https://github.com/GtkSharp/GtkSharp/pull/175)
-#if false
-				double x1, y1, x2, y2;
-                cairo_path_extents(g.Handle, out x1, out y1, out x2, out y2);
-                rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
-#else
-				throw new NotImplementedException();
-#endif
+				rect = g.PathExtents();
 			}
 
             int x = (int)Math.Round(rect.X);

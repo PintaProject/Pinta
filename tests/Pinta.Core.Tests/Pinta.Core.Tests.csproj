@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.22.25.98" />
+    <PackageReference Include="GtkSharp" Version="3.22.25.118" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />

@@ -11,8 +11,8 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.22.25.98" />
-    <PackageReference Include="NGettext" Version="0.6.5" />
+    <PackageReference Include="GtkSharp" Version="3.22.25.118" />
+    <PackageReference Include="NGettext" Version="0.6.6" />
     <PackageReference Include="SharpZipLib" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>

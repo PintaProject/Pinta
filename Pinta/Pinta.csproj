@@ -15,7 +15,7 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.22.25.98" />
+    <PackageReference Include="GtkSharp" Version="3.22.25.118" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
