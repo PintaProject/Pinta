@@ -65,7 +65,7 @@ namespace Pinta.Tools
 		{
 		}
 
-		protected virtual void OnFinishTransform()
+		protected virtual void OnFinishTransform(Matrix transform)
 		{
 		}
 
@@ -141,10 +141,13 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
+			if (!is_dragging && !is_rotating)
+				return;
+
 			is_dragging = false;
 			is_rotating = false;
 
-			OnFinishTransform();
+			OnFinishTransform(transform);
 		}
 
         protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)

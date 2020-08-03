@@ -193,31 +193,45 @@ namespace Pinta.Core
 			return resultingPolygonSet;
 		}
 
-		public static List<List<IntPoint>> Transform (List<List<IntPoint>> selection, Matrix transform)
-		{
-			List<List<IntPoint>> newPolygons = new List<List<IntPoint>> ();
-			
-			foreach (List<IntPoint> ipL in selection) {
-				List<IntPoint> newPolygon = new List<IntPoint> ();
-				
-				foreach (IntPoint ip in ipL) {
-					double x = ip.X;
-					double y = ip.Y;
-					transform.TransformPoint (ref x, ref y);
-					newPolygon.Add (new IntPoint ((long)x, (long)y));
-				}
-				
-				newPolygons.Add (newPolygon);
-			}
-
-			return newPolygons;
-		}
-
 		/// <summary>
-		/// Create an elliptical Selection from a bounding Rectangle.
-		/// </summary>
-		/// <param name="r">The bounding Rectangle surrounding the ellipse.</param>
-		public void CreateEllipseSelection(Rectangle r)
+        /// Return a transformed copy of the selection.
+        /// </summary>
+        public DocumentSelection Transform (Matrix transform)
+        {
+            var newPolygons = new List<List<IntPoint>> ();
+
+            foreach (List<IntPoint> ipL in SelectionPolygons) {
+                List<IntPoint> newPolygon = new List<IntPoint> ();
+
+                foreach (IntPoint ip in ipL) {
+                    double x = ip.X;
+                    double y = ip.Y;
+                    transform.TransformPoint (ref x, ref y);
+                    newPolygon.Add (new IntPoint ((long)x, (long)y));
+                }
+
+                newPolygons.Add (newPolygon);
+            }
+
+            var origin = Origin;
+            var end = End;
+            transform.TransformPoint (ref origin);
+            transform.TransformPoint (ref end);
+
+            return new DocumentSelection {
+                SelectionPolygons = newPolygons,
+                SelectionClipper = new Clipper (),
+                Origin = origin,
+                End = end,
+                _visible = this._visible
+            };
+        }
+
+        /// <summary>
+        /// Create an elliptical Selection from a bounding Rectangle.
+        /// </summary>
+        /// <param name="r">The bounding Rectangle surrounding the ellipse.</param>
+        public void CreateEllipseSelection(Rectangle r)
 		{
 			//These values were calculated in the static CreateEllipsePath method
 			//in Pinta.Core.CairoExtensions, so they were used here as well.

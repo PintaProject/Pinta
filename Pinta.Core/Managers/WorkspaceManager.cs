@@ -165,7 +165,11 @@ namespace Pinta.Core
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Translations.GetString ("New Image")));
 			doc.IsDirty = false;
 
-			PintaCore.Actions.View.ZoomToWindow.Activate ();
+			// This ensures these are called after the window is done being created and sized.
+			// Without it, we sometimes try to zoom when the window has a size of (0, 0).
+			Gtk.Application.Invoke (delegate {
+				PintaCore.Actions.View.ZoomToWindow.Activate ();
+			});
 
 			return doc;
 		}
