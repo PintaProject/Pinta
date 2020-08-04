@@ -1,3 +1,9 @@
+pinta (1.7-0ppa1~focal1) focal; urgency=medium
+
+  * New upstream release.
+
+ -- Cameron White <cameronwhite91@gmail.com>  Tue, 04 Aug 2020 19:05:42 -0400
+
 pinta (1.5-0ppa3~trusty1) trusty; urgency=medium
 
   * New upstream release with numerous bug fixes and new features.
