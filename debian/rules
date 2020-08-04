@@ -21,9 +21,6 @@ override_dh_clideps:
 	    --exclude-moduleref=libglib-2.0-0.dll \
 	    --exclude-moduleref=glib-2.0.dll
 
-override_dh_auto_configure:
-	./autogen.sh && dh_auto_configure
-
 override_dh_auto_clean:
 	# Do nothing.
 
