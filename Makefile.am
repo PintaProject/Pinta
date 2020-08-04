@@ -8,6 +8,7 @@ PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
 BINFILES = \
 	$(BINDIR)/Pinta.exe \
 	$(BINDIR)/Pinta.Core.dll \
+	$(BINDIR)/Pinta.Docking.dll \
 	$(BINDIR)/Pinta.Gui.Widgets.dll \
 	$(BINDIR)/Pinta.Resources.dll \
 	$(BINDIR)/Pinta.Effects.dll \
@@ -109,7 +110,7 @@ releaseosx: build $(BINFILES)
 	zip -r9uq $(MAC_APP_DIR).zip $(MAC_APP_DIR)
 	rm -rf $(MAC_APP_DIR)
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg license-mit.txt \
+EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in
 
