@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "Pinta-ubuntu1804.zip"
-        path: pinta-1.7.zip
+        path: pinta-1.8.zip
         if-no-files-found: error
 
   build-macos:
