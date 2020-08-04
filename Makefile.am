@@ -110,7 +110,7 @@ releaseosx: build $(BINFILES)
 	zip -r9uq $(MAC_APP_DIR).zip $(MAC_APP_DIR)
 	rm -rf $(MAC_APP_DIR)
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg license-mit.txt \
+EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in
 
