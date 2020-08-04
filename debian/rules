@@ -2,9 +2,6 @@
 
 include /usr/share/cli-common/cli.make
 
-override_dh_auto_clean:
-	$(MAKE) distclean
-
 override_dh_clideps:
 	dh_clideps --exclude-moduleref=libigemacintegration.dylib \
 	    --exclude-moduleref=/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon \
@@ -21,7 +18,7 @@ override_dh_clideps:
 	    --exclude-moduleref=libglib-2.0-0.dll \
 	    --exclude-moduleref=glib-2.0.dll
 
-override_dh_auto_clean:
+override_dh_auto_test:
 	# Do nothing.
 
 %:
