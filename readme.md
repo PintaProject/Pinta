@@ -28,7 +28,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 
 ## Getting help/contributing:
 
-- You can get technical help on the [Pinta Google Group](http://groups.google.com/group/pinta)
+- You can get technical help on the [Pinta Google Group](https://groups.google.com/group/pinta-project)
 - You can report bugs on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
 - You can make suggestions at [Communiroo](https://communiroo.com/pintaproject/pinta/suggestions)
 - You can help translate Pinta to your native language on [Launchpad translations](https://translations.launchpad.net/pinta)
@@ -39,7 +39,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 
 ## Windows Build and Installation Instructions:
 
-Be sure to install [Gtk# for Windows](http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.22.msi) when building in Visual Studio.
+Be sure to install [Gtk# for Windows](https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi) when building in Visual Studio.
 
 ## Linux Build and Installation Instructions:
 
