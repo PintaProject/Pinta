@@ -3,7 +3,7 @@ Section: graphics
 Priority: optional
 Maintainer: Cameron White <cameronwhite91@gmail.com>
 Build-Depends: debhelper (>= 8.0.0),
-               cli-common-dev (>= 0.5.7~)
+               cli-common-dev (>= 0.5.7~), autotools-dev, gettext, intltool, nunit-console
 Build-Depends-Indep: intltool,
                      mono-devel (>= 2.8),
                      mono-xbuild (>= 2.8),

@@ -1,14 +1,31 @@
 #!/usr/bin/make -f
 
-overrid_dh_auto_clean:
-	$(MAKE) cleanall
+include /usr/share/cli-common/cli.make
+
+override_dh_auto_clean:
+	$(MAKE) distclean
 
 override_dh_clideps:
 	dh_clideps --exclude-moduleref=libigemacintegration.dylib \
 	    --exclude-moduleref=/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon \
 	    --exclude-moduleref=/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation \
 	    --exclude-moduleref=/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices \
-	    --exclude-moduleref=libgdk_pixbuf-2.0-0.dll
+	    --exclude-moduleref=libgdk_pixbuf-2.0-0.dll \
+	    --exclude-moduleref=/usr/lib/libobjc.dylib \
+	    --exclude-moduleref=libgtk-quartz-2.0.dylib \
+	    --exclude-moduleref=libgtk-win32-2.0-0.dll \
+	    --exclude-moduleref=libgdk-win32-2.0-0.dll \
+	    --exclude-moduleref=gtksharpglue-2 \
+	    --exclude-moduleref=libgobject-2.0-0.dll \
+	    --exclude-moduleref=libpango-1.0-0.dll \
+	    --exclude-moduleref=libglib-2.0-0.dll \
+	    --exclude-moduleref=glib-2.0.dll
+
+override_dh_auto_configure:
+	./autogen.sh && dh_auto_configure
+
+override_dh_auto_clean:
+	# Do nothing.
 
 %:
-	dh $@ --with=cli
+	dh $@
