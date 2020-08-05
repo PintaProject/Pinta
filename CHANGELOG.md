@@ -1,7 +1,18 @@
 # Change Log
-All notable changes to this project (beginning with version 1.6) will be documented in this file.
+All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/1.6...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/1.7...HEAD)
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Added
+
+### Changed
+
+### Fixed
+
+## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -42,6 +53,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Changed
 - .NET 4.5 / Mono 4.0 are now required.
+- Mono 6.x is strongly recommended for [Mac](https://www.mono-project.com/download/stable/#download-mac) and [Linux](https://bugs.launchpad.net/pinta/+bug/1877235) users.
 - UI improvements to the New Image dialog (#99, [[1424547](https://bugs.launchpad.net/pinta/+bug/1424547)).
 - The Rotate / Zoom dialog now rotates in-place instead of changing the layer's size.
 - Cairo blend operations are now used instead of PDN's managed blend modes (#98, [#1248933](https://bugs.launchpad.net/pinta/+bug/1248933), [#1091910](https://bugs.launchpad.net/pinta/+bug/1091910)).
