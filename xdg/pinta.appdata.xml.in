@@ -23,14 +23,14 @@
   <screenshots>
     <screenshot type="default">
       <caption>Main window</caption>
-      <image>https://pinta-project.com/pintaproject/pinta/theme/images/ss1.jpg</image>
+      <image>https://www.pinta-project.com/theme/images/ss1.jpg</image>
     </screenshot>
   </screenshots>
   <developer_name>Jonathan Pobst</developer_name>
   <url type="bugtracker">https://bugs.launchpad.net/pinta</url>
   <url type="faq">https://communiroo.com/pintaproject/pinta/questions</url>
-  <url type="help">https://pinta-project.com/pintaproject/pinta/howto</url>
-  <url type="homepage">https://pinta-project.com</url>
+  <url type="help">https://www.pinta-project.com/howto</url>
+  <url type="homepage">https://www.pinta-project.com</url>
   <url type="translate">https://translations.launchpad.net/pinta</url>
   <content_rating type="oars-1.0" />
   <translation type="gettext">pinta</translation>
