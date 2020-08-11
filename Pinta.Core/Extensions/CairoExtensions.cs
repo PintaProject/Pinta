@@ -729,22 +729,7 @@ namespace Pinta.Core
 
 		public unsafe static Gdk.Pixbuf ToPixbuf (this Cairo.ImageSurface surfSource)
 		{
-			// TODO-GTK3 use Gdk.Pixbuf.GetFromSurface once available (https://github.com/GtkSharp/GtkSharp/issues/174)
-			using (Cairo.ImageSurface surf = surfSource.Clone ()) {
-				surf.Flush ();
-
-				ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
-				int len = surf.Data.Length / 4;
-
-				for (int i = 0; i < len; i++) {
-					if (dstPtr->A != 0)
-						*dstPtr = (ColorBgra.FromBgra ((byte)(dstPtr->R * 255 / dstPtr->A), (byte)(dstPtr->G * 255 / dstPtr->A), (byte)(dstPtr->B * 255 / dstPtr->A), dstPtr->A));
-					dstPtr++;
-				}
-
-				Gdk.Pixbuf pb = new Gdk.Pixbuf (surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
-				return pb;
-			}
+			return new Gdk.Pixbuf(surfSource, 0, 0, surfSource.Width, surfSource.Height);
 		}
 
 		public unsafe static Color GetPixel (this Cairo.ImageSurface surf, int x, int y)

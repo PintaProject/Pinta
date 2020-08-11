@@ -128,8 +128,7 @@ namespace Pinta.Resources
 				g.MoveTo((size - 1) - (size / 4), size / 4);
 				g.LineTo(size / 4, (size - 1) - (size / 4));
 
-				// TODO-GTK3 use Gdk.Pixbuf.GetFromSurface once available (https://github.com/GtkSharp/GtkSharp/issues/174)
-				return new Gdk.Pixbuf(surf.Data, true, 8, surf.Width, surf.Height, surf.Stride);
+				return new Gdk.Pixbuf(surf, 0, 0, surf.Width, surf.Height);
 			}
 		}
 

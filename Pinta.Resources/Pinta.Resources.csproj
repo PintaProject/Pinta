@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.22.25.118" />
+    <PackageReference Include="GtkSharp" Version="3.22.25.125" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Tools.CloneStamp.png">
