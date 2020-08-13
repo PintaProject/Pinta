@@ -28,7 +28,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Cairo;
-using ClipperLibrary;
+using ClipperLib;
 
 namespace Pinta.Core
 {
@@ -393,8 +393,8 @@ namespace Pinta.Core
 
 			// Create a rectangle that is the size of the entire image,
 			// and subtract all of the polygons in the current selection from it.
-			SelectionClipper.AddPolygon (documentPolygon, PolyType.ptSubject);
-			SelectionClipper.AddPolygons (SelectionPolygons, PolyType.ptClip);
+			SelectionClipper.AddPath (documentPolygon, PolyType.ptSubject, true);
+			SelectionClipper.AddPaths (SelectionPolygons, PolyType.ptClip, true);
 			SelectionClipper.Execute (ClipType.ctDifference, resultingPolygons);
 			
 			SelectionClipper.Clear ();

@@ -26,7 +26,7 @@
 
 using System;
 using Cairo;
-using ClipperLibrary;
+using ClipperLib;
 using System.Collections.Generic;
 
 namespace Pinta.Core
@@ -125,8 +125,8 @@ namespace Pinta.Core
 
                     //Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
                     //Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
-                    doc.Selection.SelectionClipper.AddPolygons (doc.Selection.SelectionPolygons, PolyType.ptSubject);
-                    doc.Selection.SelectionClipper.AddPolygons (polygons, PolyType.ptClip);
+                    doc.Selection.SelectionClipper.AddPaths (doc.Selection.SelectionPolygons, PolyType.ptSubject, true);
+                    doc.Selection.SelectionClipper.AddPaths (polygons, PolyType.ptClip, true);
 
                     switch (mode)
                     {

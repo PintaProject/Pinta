@@ -27,7 +27,7 @@
 using System;
 using Gtk;
 using System.Collections.Generic;
-using ClipperLibrary;
+using ClipperLib;
 
 namespace Pinta.Core
 {

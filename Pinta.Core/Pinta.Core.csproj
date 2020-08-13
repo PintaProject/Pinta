@@ -14,6 +14,7 @@
     <PackageReference Include="GtkSharp" Version="3.22.25.125" />
     <PackageReference Include="NGettext" Version="0.6.6" />
     <PackageReference Include="SharpZipLib" Version="1.2.0" />
+    <PackageReference Include="ParagonClipper" Version="6.4.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />

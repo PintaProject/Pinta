@@ -28,7 +28,7 @@ using System;
 using Cairo;
 using Gtk;
 using Pinta.Core;
-using ClipperLibrary;
+using ClipperLib;
 using System.Collections.Generic;
 using System.Linq;
 

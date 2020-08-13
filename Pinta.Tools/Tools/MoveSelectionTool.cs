@@ -27,7 +27,6 @@
 using System;
 using Cairo;
 using Pinta.Core;
-using ClipperLibrary;
 using System.Collections.Generic;
 
 namespace Pinta.Tools
