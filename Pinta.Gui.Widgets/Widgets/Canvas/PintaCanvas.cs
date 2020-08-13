@@ -38,6 +38,7 @@ namespace Pinta.Gui.Widgets
 		CanvasRenderer cr;
 
 		private Document document;
+		private int hScrollAmount = 92;
 
 		public CanvasWindow CanvasWindow { get; private set; }
 
@@ -174,7 +175,21 @@ namespace Pinta.Gui.Widgets
 						return true;
 				}
 			}
-			
+
+			// Allow the user to scroll left/right with Shift-Mousewheel
+			if (evnt.State.FilterModifierKeys () == ModifierType.ShiftMask) {
+				switch (evnt.Direction) {
+					case ScrollDirection.Down:
+					case ScrollDirection.Right:
+						document.Workspace.ScrollCanvas (hScrollAmount, 0);
+						return true;
+					case ScrollDirection.Up:
+					case ScrollDirection.Left:
+						document.Workspace.ScrollCanvas (-hScrollAmount, 0);
+						return true;
+				}
+			}
+
 			return base.OnScrollEvent (evnt);
 		}
 		#endregion
