@@ -81,20 +81,22 @@ namespace Pinta
                         }
 
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
-			
+
 			Application.Init ();
-			new MainWindow ();
-			
+			var app = new MainWindow();
+
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
 
+			// TODO-GTK3 - switch to the GTK command line parsing once GtkSharp supports it, and open a default document otherwise.
+#if false
 			if (SystemManager.GetOperatingSystem () == OS.Mac) {
 				RegisterForAppleEvents ();
 			}
 
 			OpenFilesFromCommandLine (extra);
-			
-			Application.Run ();
+#endif
+			app.Run("pinta", args);
 		}
 
                 private static void ShowHelp (OptionSet p)
@@ -143,7 +145,7 @@ namespace Pinta
 		{
 			MacInterop.ApplicationEvents.Quit += (sender, e) => {
 				GLib.Timeout.Add (10, delegate {
-					PintaCore.Actions.File.Exit.Activate ();
+					PintaCore.Actions.App.Exit.Activate();
 					return false;
 				});
 				e.Handled = true;

@@ -7,6 +7,11 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 
 ### Added
+- Ported to GTK3
+  - Improved support for high-DPI displays.
+  - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
+  - On macOS, the menu now appears in the global menu bar instead of the application window.
+  - On macOS, keyboard shortcuts now use Command instead of Ctrl.
 
 ### Changed
 

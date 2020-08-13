@@ -34,11 +34,10 @@ namespace Pinta.Core
 {
 	public class HelpActions
 	{
-		public Gtk.Action Contents { get; private set; }
-		public Gtk.Action Website { get; private set; }
-		public Gtk.Action Bugs { get; private set; }
-		public Gtk.Action Translate { get; private set; }
-		public Gtk.Action About { get; private set; }
+		public Command Contents { get; private set; }
+		public Command Website { get; private set; }
+		public Command Bugs { get; private set; }
+		public Command Translate { get; private set; }
 
 		public HelpActions ()
 		{
@@ -48,29 +47,34 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
 			fact.AddDefault ();
 
-			Contents = new Gtk.Action ("Contents", Translations.GetString ("Contents"), null, Stock.Help);
-			Website = new Gtk.Action ("Website", Translations.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
-			Bugs = new Gtk.Action ("Bugs", Translations.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
-			Translate = new Gtk.Action ("Translate", Translations.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
-			About = new Gtk.Action ("About", Translations.GetString ("About"), null, Stock.About);
+			Contents = new Command ("contents", Translations.GetString ("Contents"), null, Stock.Help);
+			Website = new Command ("website", Translations.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
+			Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
+			Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
-		{
-			menu.Append (Contents.CreateAcceleratedMenuItem (Gdk.Key.F1, Gdk.ModifierType.None));
-			menu.Append (Website.CreateMenuItem ());
-			menu.Append (Bugs.CreateMenuItem ());
-			menu.Append (Translate.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (About.CreateMenuItem ());
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+        {
+			// TODO-GTK3 (add a more conventional key combo for OSX)
+			app.AddAccelAction(Contents, "F1");
+			menu.AppendItem(Contents.CreateMenuItem());
+
+			app.AddAction(Website);
+			menu.AppendItem(Website.CreateMenuItem());
+
+			app.AddAction(Bugs);
+			menu.AppendItem(Bugs.CreateMenuItem());
+
+			app.AddAction(Translate);
+			menu.AppendItem(Translate.CreateMenuItem());
 		}
 		
 		public void RegisterHandlers ()
 		{
 			Contents.Activated += DisplayHelp;
-			Website.Activated += new EventHandler (Website_Activated);
-			Bugs.Activated += new EventHandler (Bugs_Activated);
+			Website.Activated += Website_Activated;
+			Bugs.Activated += Bugs_Activated;
 			Translate.Activated += Translate_Activated;
 		}
 

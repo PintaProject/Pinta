@@ -33,17 +33,17 @@ namespace Pinta.Core
 {
 	public class LayerActions
 	{
-		public Gtk.Action AddNewLayer { get; private set; }
-		public Gtk.Action DeleteLayer { get; private set; }
-		public Gtk.Action DuplicateLayer { get; private set; }
-		public Gtk.Action MergeLayerDown { get; private set; }
-		public Gtk.Action ImportFromFile { get; private set; }
-		public Gtk.Action FlipHorizontal { get; private set; }
-		public Gtk.Action FlipVertical { get; private set; }
-		public Gtk.Action RotateZoom { get; private set; }
-		public Gtk.Action MoveLayerUp { get; private set; }
-		public Gtk.Action MoveLayerDown { get; private set; }
-		public Gtk.Action Properties { get; private set; }
+		public Command AddNewLayer { get; private set; }
+		public Command DeleteLayer { get; private set; }
+		public Command DuplicateLayer { get; private set; }
+		public Command MergeLayerDown { get; private set; }
+		public Command ImportFromFile { get; private set; }
+		public Command FlipHorizontal { get; private set; }
+		public Command FlipVertical { get; private set; }
+		public Command RotateZoom { get; private set; }
+		public Command MoveLayerUp { get; private set; }
+		public Command MoveLayerDown { get; private set; }
+		public Command Properties { get; private set; }
 		
 		public LayerActions ()
 		{
@@ -61,35 +61,55 @@ namespace Pinta.Core
 			fact.Add ("Menu.Layers.RotateZoom.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png")));
 			fact.AddDefault ();
 			
-			AddNewLayer = new Gtk.Action ("AddNewLayer", Translations.GetString ("Add New Layer"), null, "Menu.Layers.AddNewLayer.png");
-			DeleteLayer = new Gtk.Action ("DeleteLayer", Translations.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
-			DuplicateLayer = new Gtk.Action ("DuplicateLayer", Translations.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
-			MergeLayerDown = new Gtk.Action ("MergeLayerDown", Translations.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
-			ImportFromFile = new Gtk.Action ("ImportFromFile", Translations.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Translations.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
-			RotateZoom = new Gtk.Action ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
-			MoveLayerUp = new Gtk.Action ("MoveLayerUp", Translations.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
-			MoveLayerDown = new Gtk.Action ("MoveLayerDown", Translations.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
-			Properties = new Gtk.Action ("Properties", Translations.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
-
-			RotateZoom.Sensitive = false;
+			AddNewLayer = new Command ("addnewlayer", Translations.GetString ("Add New Layer"), null, "Menu.Layers.AddNewLayer.png");
+			DeleteLayer = new Command ("deletelayer", Translations.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
+			DuplicateLayer = new Command ("duplicatelayer", Translations.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
+			MergeLayerDown = new Command ("mergelayerdown", Translations.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
+			ImportFromFile = new Command ("importfromfile", Translations.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
+			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
+            FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
+            RotateZoom = new Command ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
+            MoveLayerUp = new Command ("movelayerup", Translations.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
+			MoveLayerDown = new Command ("movelayerdown", Translations.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
+			Properties = new Command ("properties", Translations.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
 		{
-			menu.Append (AddNewLayer.CreateAcceleratedMenuItem (Gdk.Key.N, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (DeleteLayer.CreateAcceleratedMenuItem (Gdk.Key.Delete, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (DuplicateLayer.CreateAcceleratedMenuItem (Gdk.Key.D, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (MergeLayerDown.CreateAcceleratedMenuItem (Gdk.Key.M, Gdk.ModifierType.ControlMask));
-			menu.Append (ImportFromFile.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (FlipHorizontal.CreateMenuItem ());
-			menu.Append (FlipVertical.CreateMenuItem ());
-			menu.Append (RotateZoom.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (Properties.CreateAcceleratedMenuItem (Gdk.Key.F4, Gdk.ModifierType.None));
+			app.AddAccelAction(AddNewLayer, "<Primary><Shift>N");
+			menu.AppendItem(AddNewLayer.CreateMenuItem());
+
+			app.AddAccelAction(DeleteLayer, "<Primary><Shift>Delete");
+			menu.AppendItem(DeleteLayer.CreateMenuItem());
+
+			app.AddAccelAction(DuplicateLayer, "<Primary><Shift>D");
+			menu.AppendItem(DuplicateLayer.CreateMenuItem());
+
+			app.AddAccelAction(MergeLayerDown, "<Primary>M");
+			menu.AppendItem(MergeLayerDown.CreateMenuItem());
+
+			app.AddAction(ImportFromFile);
+			menu.AppendItem(ImportFromFile.CreateMenuItem());
+
+			var flip_section = new GLib.Menu();
+			menu.AppendSection(null, flip_section);
+
+			app.AddAction(FlipHorizontal);
+			flip_section.AppendItem(FlipHorizontal.CreateMenuItem());
+
+			app.AddAction(FlipVertical);
+			flip_section.AppendItem(FlipVertical.CreateMenuItem());
+
+			app.AddAction(RotateZoom);
+			flip_section.AppendItem(RotateZoom.CreateMenuItem());
+
+			var prop_section = new GLib.Menu();
+			menu.AppendSection(null, prop_section);
+
+			// TODO-GTK3 (better shortcut for OSX?)
+			app.AddAccelAction(Properties, "F4");
+			prop_section.AppendItem(Properties.CreateMenuItem());
 		}
 
 		public void CreateLayerWindowToolBar (Gtk.Toolbar toolbar)

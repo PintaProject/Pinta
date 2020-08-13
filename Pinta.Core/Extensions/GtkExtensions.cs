@@ -100,6 +100,18 @@ namespace Pinta.Core
 			return string.Empty;
 		}
 
+		public static Gtk.ToolItem CreateToolBarItem (this Command action)
+        {
+			var item = new ToolButton(action.StockId)
+			{
+				ActionName = action.FullName,
+				Label = action.ShortLabel ?? action.Label,
+				TooltipText = action.Tooltip ?? action.Label,
+				IsImportant = action.IsImportant,
+			};
+            return item;
+        }
+
 		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
 		{
 			Gtk.ToolItem item = (Gtk.ToolItem)action.CreateToolItem ();
@@ -137,7 +149,18 @@ namespace Pinta.Core
 			return item;
 		}
 
-        public static void Toggle (this Gtk.ToggleToolButton button)
+		public static void AddAction(this Gtk.Application app, Command action)
+		{
+			app.AddAction(action.Action);
+		}
+
+		public static void AddAccelAction(this Gtk.Application app, Command action, string accel)
+        {
+			app.AddAction(action);
+			app.SetAccelsForAction(action.FullName, new string[] { accel });
+		}
+
+		public static void Toggle (this Gtk.ToggleToolButton button)
         {
             button.Active = !button.Active;
         }

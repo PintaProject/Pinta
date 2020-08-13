@@ -29,7 +29,7 @@ using Gtk;
 
 namespace Pinta
 {
-	public class WindowShell : Window
+	public class WindowShell : ApplicationWindow
 	{
 		private VBox shell_layout;
 		private VBox menu_layout;
@@ -38,7 +38,7 @@ namespace Pinta
 		private MenuBar main_menu;
 		private Toolbar main_toolbar;
 
-		public WindowShell (string name, string title, int width, int height, bool maximize) : base (WindowType.Toplevel)
+		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base(app)
 		{
 			Name = name;
 			Title = title;

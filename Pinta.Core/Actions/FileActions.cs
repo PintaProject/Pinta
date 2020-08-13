@@ -34,79 +34,74 @@ namespace Pinta.Core
 {
 	public class FileActions
 	{
-		public Gtk.Action New { get; private set; }
-		public Gtk.Action NewScreenshot { get; private set; }
-		public Gtk.Action Open { get; private set; }
-		public Gtk.RecentAction OpenRecent { get; private set; }
-		public Gtk.Action Close { get; private set; }
-		public Gtk.Action Save { get; private set; }
-		public Gtk.Action SaveAs { get; private set; }
-		public Gtk.Action Print { get; private set; }
-		public Gtk.Action Exit { get; private set; }
+		public Command New { get; private set; }
+		public Command NewScreenshot { get; private set; }
+		public Command Open { get; private set; }
+		public Command Close { get; private set; }
+		public Command Save { get; private set; }
+		public Command SaveAs { get; private set; }
+		public Command Print { get; private set; }
 		
-		public event EventHandler BeforeQuit;
 		public event EventHandler<ModifyCompressionEventArgs> ModifyCompression;
 		public event EventHandler<DocumentCancelEventArgs> SaveDocument;
 		
 		public FileActions ()
 		{
-			New = new Gtk.Action ("New", Translations.GetString ("New..."), null, Stock.New);
-			NewScreenshot = new Gtk.Action ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Stock.Fullscreen);
-			Open = new Gtk.Action ("Open", Translations.GetString ("Open..."), null, Stock.Open);
-			OpenRecent = new RecentAction ("OpenRecent", Translations.GetString ("Open Recent"), null, Stock.Open, RecentManager.Default);
+			New = new Command("new", Translations.GetString("New..."), null, Stock.New);
+			NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Stock.Fullscreen);
+			Open = new Command ("open", Translations.GetString ("Open..."), null, Stock.Open);
 			
-			RecentFilter recentFilter = new RecentFilter ();
-			recentFilter.AddApplication ("Pinta");
-			
-			(OpenRecent as RecentAction).AddFilter (recentFilter);
-			
-			Close = new Gtk.Action ("Close", Translations.GetString ("Close"), null, Stock.Close);
-			Save = new Gtk.Action ("Save", Translations.GetString ("Save"), null, Stock.Save);
-			SaveAs = new Gtk.Action ("SaveAs", Translations.GetString ("Save As..."), null, Stock.SaveAs);
-			Print = new Gtk.Action ("Print", Translations.GetString ("Print"), null, Stock.Print);
-			Exit = new Gtk.Action ("Exit", Translations.GetString ("Quit"), null, Stock.Quit);
+			Close = new Command ("close", Translations.GetString ("Close"), null, Stock.Close);
+			Save = new Command ("save", Translations.GetString ("Save"), null, Stock.Save);
+			SaveAs = new Command ("saveAs", Translations.GetString ("Save As..."), null, Stock.SaveAs);
+			Print = new Command ("print", Translations.GetString ("Print"), null, Stock.Print);
 
 			New.ShortLabel = Translations.GetString ("New");
 			Open.ShortLabel = Translations.GetString ("Open");
 			Open.IsImportant = true;
 			Save.IsImportant = true;
-			
-			Close.Sensitive = false;
-			Print.Sensitive = false;
 		}
 
-		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
-		{
-			menu.Append (New.CreateAcceleratedMenuItem (Gdk.Key.N, Gdk.ModifierType.ControlMask));
-			menu.Append (NewScreenshot.CreateMenuItem ());
-			menu.Append (Open.CreateAcceleratedMenuItem (Gdk.Key.O, Gdk.ModifierType.ControlMask));
-			menu.Append (OpenRecent.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (Save.CreateAcceleratedMenuItem (Gdk.Key.S, Gdk.ModifierType.ControlMask));
-			menu.Append (SaveAs.CreateAcceleratedMenuItem (Gdk.Key.S, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.AppendSeparator ();
+#region Initialization
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+        {
+			app.AddAccelAction(New, "<Primary>N");
+			menu.AppendItem(New.CreateMenuItem());
+
+			app.AddAction(NewScreenshot);
+			menu.AppendItem(NewScreenshot.CreateMenuItem());
+
+			app.AddAccelAction(Open, "<Primary>O");
+			menu.AppendItem(Open.CreateMenuItem());
+
+			var save_section = new GLib.Menu();
+			menu.AppendSection(null, save_section);
+
+			app.AddAccelAction(Save, "<Primary>S");
+			save_section.AppendItem(Save.CreateMenuItem());
+
+			app.AddAccelAction(SaveAs, "<Primary><Shift>S");
+			save_section.AppendItem(SaveAs.CreateMenuItem());
+
+			var close_section = new GLib.Menu();
+			menu.AppendSection(null, close_section);
+
+			app.AddAccelAction(Close, "<Primary>W");
+			close_section.AppendItem(Close.CreateMenuItem());
+
 			// Printing is disabled for now until it is fully functional.
 #if false
 			menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 			menu.AppendSeparator ();
 #endif
-			menu.Append (Close.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask));
-			menu.Append (Exit.CreateAcceleratedMenuItem (Gdk.Key.Q, Gdk.ModifierType.ControlMask));
 		}
-		
+
 		public void RegisterHandlers ()
 		{
 		}
 #endregion
 
 #region Event Invokers
-		public void RaiseBeforeQuit ()
-		{
-			if (BeforeQuit != null)
-				BeforeQuit (this, EventArgs.Empty);
-		}
-
 		internal bool RaiseSaveDocument (Document document, bool saveAs)
 		{
 			DocumentCancelEventArgs e = new DocumentCancelEventArgs (document, saveAs);

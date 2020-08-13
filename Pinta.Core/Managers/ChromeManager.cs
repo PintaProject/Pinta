@@ -40,6 +40,7 @@ namespace Pinta.Core
 		private Toolbar main_toolbar;
 		private ErrorDialogHandler error_dialog_handler;
 
+		public Application Application { get; private set; }
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Window MainWindow { get { return main_window; } }
@@ -75,6 +76,11 @@ namespace Pinta.Core
 		#endregion
 
 		#region Public Methods
+		public void InitializeApplication (Gtk.Application application)
+        {
+			Application = application;
+        }
+
 		public void InitializeToolToolBar (Toolbar toolToolBar)
 		{
 			tool_toolbar = toolToolBar;

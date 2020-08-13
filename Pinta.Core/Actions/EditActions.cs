@@ -34,23 +34,23 @@ namespace Pinta.Core
 {
 	public class EditActions
 	{
-		public Gtk.Action Undo { get; private set; }
-		public Gtk.Action Redo { get; private set; }
-		public Gtk.Action Cut { get; private set; }
-		public Gtk.Action Copy { get; private set; }
-		public Gtk.Action CopyMerged { get; private set; }
-		public Gtk.Action Paste { get; private set; }
-		public Gtk.Action PasteIntoNewLayer { get; private set; }
-		public Gtk.Action PasteIntoNewImage { get; private set; }
-		public Gtk.Action EraseSelection { get; private set; }
-		public Gtk.Action FillSelection { get; private set; }
-		public Gtk.Action InvertSelection { get; private set; }
-		public Gtk.Action SelectAll { get; private set; }
-		public Gtk.Action Deselect { get; private set; }
-		public Gtk.Action LoadPalette { get; private set; }
-		public Gtk.Action SavePalette { get; private set; }
-		public Gtk.Action ResetPalette { get; private set; }
-		public Gtk.Action ResizePalette { get; private set; }
+		public Command Undo { get; private set; }
+		public Command Redo { get; private set; }
+		public Command Cut { get; private set; }
+		public Command Copy { get; private set; }
+		public Command CopyMerged { get; private set; }
+		public Command Paste { get; private set; }
+		public Command PasteIntoNewLayer { get; private set; }
+		public Command PasteIntoNewImage { get; private set; }
+		public Command EraseSelection { get; private set; }
+		public Command FillSelection { get; private set; }
+		public Command InvertSelection { get; private set; }
+		public Command SelectAll { get; private set; }
+		public Command Deselect { get; private set; }
+		public Command LoadPalette { get; private set; }
+		public Command SavePalette { get; private set; }
+		public Command ResetPalette { get; private set; }
+		public Command ResizePalette { get; private set; }
 		
 		private string lastPaletteDir = null;
 		
@@ -65,70 +65,100 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
 			fact.AddDefault ();
 			
-			Undo = new Gtk.Action ("Undo", Translations.GetString ("Undo"), null, Stock.Undo);
-			Redo = new Gtk.Action ("Redo", Translations.GetString ("Redo"), null, Stock.Redo);
-			Cut = new Gtk.Action ("Cut", Translations.GetString ("Cut"), null, Stock.Cut);
-			Copy = new Gtk.Action ("Copy", Translations.GetString ("Copy"), null, Stock.Copy);
-			CopyMerged = new Gtk.Action ("CopyMerged", Translations.GetString ("Copy Merged"), null, Stock.Copy);
-			Paste = new Gtk.Action ("Paste", Translations.GetString ("Paste"), null, Stock.Paste);
-			PasteIntoNewLayer = new Gtk.Action ("PasteIntoNewLayer", Translations.GetString ("Paste Into New Layer"), null, Stock.Paste);
-			PasteIntoNewImage = new Gtk.Action ("PasteIntoNewImage", Translations.GetString ("Paste Into New Image"), null, Stock.Paste);
-			EraseSelection = new Gtk.Action ("EraseSelection", Translations.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
-			FillSelection = new Gtk.Action ("FillSelection", Translations.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
-			InvertSelection = new Gtk.Action ("InvertSelection", Translations.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Gtk.Action ("SelectAll", Translations.GetString ("Select All"), null, Stock.SelectAll);
-			Deselect = new Gtk.Action ("Deselect", Translations.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
+			Undo = new Command ("undo", Translations.GetString ("Undo"), null, Stock.Undo);
+			Redo = new Command ("redo", Translations.GetString ("Redo"), null, Stock.Redo);
+			Cut = new Command ("cut", Translations.GetString ("Cut"), null, Stock.Cut);
+			Copy = new Command ("copy", Translations.GetString ("Copy"), null, Stock.Copy);
+			CopyMerged = new Command ("copymerged", Translations.GetString ("Copy Merged"), null, Stock.Copy);
+			Paste = new Command ("paste", Translations.GetString ("Paste"), null, Stock.Paste);
+			PasteIntoNewLayer = new Command ("pasteintonewlayer", Translations.GetString ("Paste Into New Layer"), null, Stock.Paste);
+			PasteIntoNewImage = new Command ("pasteintonewimage", Translations.GetString ("Paste Into New Image"), null, Stock.Paste);
+			EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
+			FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
+			InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
+			SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Stock.SelectAll);
+			Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
 			
-			LoadPalette = new Gtk.Action ("LoadPalette", Translations.GetString ("Open..."), null, Stock.Open);
-			SavePalette = new Gtk.Action ("SavePalette", Translations.GetString ("Save As..."), null, Stock.Save);
-			ResetPalette = new Gtk.Action ("ResetPalette", Translations.GetString ("Reset to Default"), null, Stock.RevertToSaved);
-			ResizePalette = new Gtk.Action ("ResizePalette", Translations.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, Stock.Open);
+			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, Stock.Save);
+			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, Stock.RevertToSaved);
+			ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
 
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
 			Redo.Sensitive = false;
-			InvertSelection.Sensitive = false;
-			Deselect.Sensitive = false;
-			EraseSelection.Sensitive = false;
-			FillSelection.Sensitive = false;
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
 		{
-			menu.Append (Undo.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask));
+			app.AddAccelAction(Undo, "<Primary>Z");
+			menu.AppendItem(Undo.CreateMenuItem());
 
-			ImageMenuItem redo = Redo.CreateAcceleratedMenuItem (Gdk.Key.Z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask);
-			redo.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.Y, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
-			menu.Append (redo);
+			// TODO-GTK3 (also add Ctrl+Y from the GTK2 build for Windows?)
+			app.AddAccelAction(Redo, "<Primary><Shift>Z");
+			menu.AppendItem(Redo.CreateMenuItem());
 
-			menu.AppendSeparator ();
-			menu.Append (Cut.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask));
-			menu.Append (Copy.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask));
-			menu.Append (CopyMerged.CreateAcceleratedMenuItem (Gdk.Key.C, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (Paste.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ControlMask));
-			menu.Append (PasteIntoNewLayer.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.ShiftMask | Gdk.ModifierType.ControlMask));
-			menu.Append (PasteIntoNewImage.CreateAcceleratedMenuItem (Gdk.Key.V, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
-			
-			menu.AppendSeparator ();
-			menu.Append (SelectAll.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask));
+			var paste_section = new GLib.Menu();
+			menu.AppendSection(null, paste_section);
 
-			ImageMenuItem deslect = Deselect.CreateAcceleratedMenuItem (Gdk.Key.A, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask);
-			deslect.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (Gdk.Key.D, Gdk.ModifierType.ControlMask, AccelFlags.Visible));
-			menu.Append (deslect);
+			app.AddAccelAction(Cut, "<Primary>X");
+			paste_section.AppendItem(Cut.CreateMenuItem());
 
-			menu.AppendSeparator ();
-			menu.Append (EraseSelection.CreateAcceleratedMenuItem (Gdk.Key.Delete, Gdk.ModifierType.None));
-			menu.Append (FillSelection.CreateAcceleratedMenuItem (Gdk.Key.BackSpace, Gdk.ModifierType.None));
-			menu.Append (InvertSelection.CreateAcceleratedMenuItem (Gdk.Key.I, Gdk.ModifierType.ControlMask));
-			
-			menu.AppendSeparator ();
-			Gtk.Action menu_action = new Gtk.Action ("Palette", Translations.GetString ("Palette"), null, null);
-			Menu palette_menu = (Menu) menu.AppendItem (menu_action.CreateSubMenuItem ()).Submenu;
-			palette_menu.Append (LoadPalette.CreateMenuItem ());
-			palette_menu.Append (SavePalette.CreateMenuItem ());
-			palette_menu.Append (ResetPalette.CreateMenuItem ());
-			palette_menu.Append (ResizePalette.CreateMenuItem ());
+			app.AddAccelAction(Copy, "<Primary>C");
+			paste_section.AppendItem(Copy.CreateMenuItem());
+
+			app.AddAccelAction(CopyMerged, "<Primary><Shift>C");
+			paste_section.AppendItem(CopyMerged.CreateMenuItem());
+
+			app.AddAccelAction(Paste, "<Primary>V");
+			paste_section.AppendItem(Paste.CreateMenuItem());
+
+			app.AddAccelAction(PasteIntoNewLayer, "<Primary><Shift>V");
+			paste_section.AppendItem(PasteIntoNewLayer.CreateMenuItem());
+
+			app.AddAccelAction(PasteIntoNewImage, "<Primary><Alt>V");
+			paste_section.AppendItem(Cut.CreateMenuItem());
+
+			var sel_section = new GLib.Menu();
+			menu.AppendSection(null, sel_section);
+
+			app.AddAccelAction(SelectAll, "<Primary>A");
+			sel_section.AppendItem(SelectAll.CreateMenuItem());
+
+			// TODO-GTK3 (also add old Ctrl+D from the GTK2 build?)
+			app.AddAccelAction(Deselect, "<Primary><Shift>A");
+			sel_section.AppendItem(Deselect.CreateMenuItem());
+
+			var edit_sel_section = new GLib.Menu();
+			menu.AppendSection(null, edit_sel_section);
+
+			app.AddAccelAction(EraseSelection, "Delete");
+			edit_sel_section.AppendItem(EraseSelection.CreateMenuItem());
+
+			app.AddAccelAction(FillSelection, "BackSpace");
+			edit_sel_section.AppendItem(FillSelection.CreateMenuItem());
+
+			app.AddAccelAction(InvertSelection, "<Primary>I");
+			edit_sel_section.AppendItem(InvertSelection.CreateMenuItem());
+
+			var palette_section = new GLib.Menu();
+			menu.AppendSection(null, palette_section);
+
+			var palette_menu = new GLib.Menu();
+			menu.AppendSubmenu(Translations.GetString("Palette"), palette_menu);
+
+			app.AddAction(LoadPalette);
+			palette_menu.AppendItem(LoadPalette.CreateMenuItem());
+
+			app.AddAction(SavePalette);
+			palette_menu.AppendItem(SavePalette.CreateMenuItem());
+
+			app.AddAction(ResetPalette);
+			palette_menu.AppendItem(ResetPalette.CreateMenuItem());
+
+			app.AddAction(ResizePalette);
+			palette_menu.AppendItem(ResizePalette.CreateMenuItem());
 		}
 
 		public void CreateHistoryWindowToolBar (Gtk.Toolbar toolbar)

@@ -48,6 +48,20 @@ namespace Pinta
 			return item;
 		}
 
+		public static DockToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
+		{
+			DockToolButton item = new DockToolButton(action.StockId)
+			{
+				ActionName = action.FullName,
+				TooltipText = action.Tooltip ?? action.Label
+			};
+
+			item.Show();
+			item.Image.Show();
+
+			return item;
+		}
+
 		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
 		{
 			Gtk.ToolItem item = (Gtk.ToolItem)action.CreateToolItem ();

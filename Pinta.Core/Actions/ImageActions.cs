@@ -31,16 +31,16 @@ namespace Pinta.Core
 {
 	public class ImageActions
 	{
-		public Gtk.Action CropToSelection { get; private set; }
-		public Gtk.Action AutoCrop { get; private set; }
-		public Gtk.Action Resize { get; private set; }
-		public Gtk.Action CanvasSize { get; private set; }
-		public Gtk.Action FlipHorizontal { get; private set; }
-		public Gtk.Action FlipVertical { get; private set; }
-		public Gtk.Action RotateCW { get; private set; }
-		public Gtk.Action RotateCCW { get; private set; }
-		public Gtk.Action Rotate180 { get; private set; }
-		public Gtk.Action Flatten { get; private set; }
+		public Command CropToSelection { get; private set; }
+		public Command AutoCrop { get; private set; }
+		public Command Resize { get; private set; }
+		public Command CanvasSize { get; private set; }
+		public Command FlipHorizontal { get; private set; }
+		public Command FlipVertical { get; private set; }
+		public Command RotateCW { get; private set; }
+		public Command RotateCCW { get; private set; }
+		public Command Rotate180 { get; private set; }
+		public Command Flatten { get; private set; }
 
 		public ImageActions ()
 		{
@@ -56,36 +56,59 @@ namespace Pinta.Core
 			fact.Add ("Menu.Image.Rotate90CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CW.png")));
 			fact.AddDefault ();
 			
-			CropToSelection = new Gtk.Action ("CropToSelection", Translations.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			AutoCrop = new Gtk.Action ("AutoCrop", Translations.GetString ("Auto Crop"), null, "Menu.Image.Crop.png");
-			Resize = new Gtk.Action ("Resize", Translations.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
-			CanvasSize = new Gtk.Action ("CanvasSize", Translations.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
-			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
-			FlipVertical = new Gtk.Action ("FlipVertical", Translations.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
-			RotateCW = new Gtk.Action ("RotateCW", Translations.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
-			RotateCCW = new Gtk.Action ("RotateCCW", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
-			Rotate180 = new Gtk.Action ("Rotate180", Translations.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
-			Flatten = new Gtk.Action ("Flatten", Translations.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
-			
-			CropToSelection.Sensitive = false;
+			CropToSelection = new Command ("croptoselection", Translations.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
+			AutoCrop = new Command ("autocrop", Translations.GetString ("Auto Crop"), null, "Menu.Image.Crop.png");
+			Resize = new Command ("resize", Translations.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
+			CanvasSize = new Command ("canvassize", Translations.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
+			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
+			FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
+			RotateCW = new Command ("rotatecw", Translations.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
+			RotateCCW = new Command ("rotateccw", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
+			Rotate180 = new Command ("rotate180", Translations.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
+			Flatten = new Command ("flatten", Translations.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
 		}
 
 		#region Initialization
-		public void CreateMainMenu (Gtk.Menu menu)
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
 		{
-			menu.Append (CropToSelection.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.Append (AutoCrop.CreateAcceleratedMenuItem (Gdk.Key.X, Gdk.ModifierType.Mod1Mask | Gdk.ModifierType.ControlMask));
-			menu.Append (Resize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask));
-			menu.Append (CanvasSize.CreateAcceleratedMenuItem (Gdk.Key.R, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
-			menu.AppendSeparator ();
-			menu.Append (FlipHorizontal.CreateMenuItem ());
-			menu.Append (FlipVertical.CreateMenuItem ());
-			menu.AppendSeparator ();
-			menu.Append (RotateCW.CreateAcceleratedMenuItem (Gdk.Key.H, Gdk.ModifierType.ControlMask));
-			menu.Append (RotateCCW.CreateAcceleratedMenuItem (Gdk.Key.G, Gdk.ModifierType.ControlMask));
-			menu.Append (Rotate180.CreateAcceleratedMenuItem (Gdk.Key.J, Gdk.ModifierType.ControlMask));
-			menu.AppendSeparator ();
-			menu.Append (Flatten.CreateAcceleratedMenuItem (Gdk.Key.F, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
+			app.AddAccelAction(CropToSelection, "<Primary><Shift>X");
+			menu.AppendItem(CropToSelection.CreateMenuItem());
+
+			app.AddAccelAction(AutoCrop, "<Ctrl><Alt>X");
+			menu.AppendItem(AutoCrop.CreateMenuItem());
+
+			app.AddAccelAction(Resize, "<Primary>R");
+			menu.AppendItem(Resize.CreateMenuItem());
+
+			app.AddAccelAction(CanvasSize, "<Primary><Shift>R");
+			menu.AppendItem(CanvasSize.CreateMenuItem());
+
+			var flip_section = new GLib.Menu();
+			menu.AppendSection(null, flip_section);
+
+			app.AddAction(FlipHorizontal);
+			flip_section.AppendItem(FlipHorizontal.CreateMenuItem());
+
+			app.AddAction(FlipVertical);
+			flip_section.AppendItem(FlipVertical.CreateMenuItem());
+
+			var rotate_section = new GLib.Menu();
+			menu.AppendSection(null, rotate_section);
+
+			app.AddAccelAction(RotateCW, "<Primary>H");
+			rotate_section.AppendItem(RotateCW.CreateMenuItem());
+
+			app.AddAccelAction(RotateCCW, "<Primary>G");
+			rotate_section.AppendItem(RotateCCW.CreateMenuItem());
+
+			app.AddAccelAction(Rotate180, "<Primary>J");
+			rotate_section.AppendItem(Rotate180.CreateMenuItem());
+
+			var flatten_section = new GLib.Menu();
+			menu.AppendSection(null, flatten_section);
+
+			app.AddAccelAction(Flatten, "<Primary><Shift>F");
+			flatten_section.AppendItem(Flatten.CreateMenuItem());
 		}
 				
 		public void RegisterHandlers ()

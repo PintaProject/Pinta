@@ -37,7 +37,7 @@ using Pinta.MacInterop;
 
 namespace Pinta
 {
-	public class MainWindow
+	public class MainWindow : Gtk.Application
 	{
 		WindowShell window_shell;
 		DockFrame dock;
@@ -48,26 +48,33 @@ namespace Pinta
 
         bool suppress_active_notebook_change = false;
 
-        public MainWindow ()
+        public MainWindow () : base("com.github.PintaProject.Pinta", GLib.ApplicationFlags.None)
 		{
-            // Build our window
-			CreateWindow ();
+			Register(GLib.Cancellable.Current);
+        }
+
+        protected override void OnActivated()
+        {
+            base.OnActivated();
+
+			// Build our window
+			CreateWindow();
 
 			// Initialize interface things
-			window_shell.AddAccelGroup (PintaCore.Actions.AccelGroup);
-			new ActionHandlers ();
+			window_shell.AddAccelGroup(PintaCore.Actions.AccelGroup);
+			new ActionHandlers();
 
-			PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog ());
-			PintaCore.Chrome.InitializeErrorDialogHandler ((parent, message, details) => {
-				System.Console.Error.WriteLine ("Pinta: {0}", details);
-                using var errorDialog = new ErrorDialog(parent);
-                errorDialog.SetMessage(message);
-                errorDialog.AddDetails(details);
-                errorDialog.Run();
-            }
+			PintaCore.Chrome.InitializeProgessDialog(new ProgressDialog());
+			PintaCore.Chrome.InitializeErrorDialogHandler((parent, message, details) => {
+				System.Console.Error.WriteLine("Pinta: {0}", details);
+				using var errorDialog = new ErrorDialog(parent);
+				errorDialog.SetMessage(message);
+				errorDialog.AddDetails(details);
+				errorDialog.Run();
+			}
 			);
 
-			PintaCore.Initialize ();
+			PintaCore.Initialize();
 
 			// Initialize extensions
 			// TODO-GTK3 (addins)
@@ -88,16 +95,16 @@ namespace Pinta
 #endif
 
 			// Try to set the default tool to the PaintBrush
-			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Paintbrush"));
+			PintaCore.Tools.SetCurrentTool(Translations.GetString("Paintbrush"));
 
 			// Load the user's previous settings
-			LoadUserSettings ();
+			LoadUserSettings();
 
 			// We support drag and drop for URIs
-			window_shell.AddDragDropSupport (new Gtk.TargetEntry ("text/uri-list", 0, 100));
-			
+			window_shell.AddDragDropSupport(new Gtk.TargetEntry("text/uri-list", 0, 100));
+
 			// Handle a few main window specific actions
-			PintaCore.Actions.File.BeforeQuit += delegate { SaveUserSettings (); };
+			PintaCore.Actions.App.BeforeQuit += delegate { SaveUserSettings(); };
 
 			window_shell.DeleteEvent += MainWindow_DeleteEvent;
 			window_shell.DragDataReceived += MainWindow_DragDataReceived;
@@ -106,18 +113,18 @@ namespace Pinta
 			window_shell.KeyReleaseEvent += MainWindow_KeyReleaseEvent;
 
 			// TODO: These need to be [re]moved when we redo zoom support
-			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler (ZoomToWindow_Activated);
-			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler (ZoomToSelection_Activated);
+			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler(ZoomToWindow_Activated);
+			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler(ZoomToSelection_Activated);
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
-            PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
-            PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
+			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
-            DockNotebookManager.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
-            DockNotebookManager.ActiveTabChanged += DockNotebook_ActiveTabChanged;
-            DockNotebookManager.TabClosed += DockNotebook_TabClosed;
-            DockNotebookManager.NotebookDragDataReceived += MainWindow_DragDataReceived;
-        }
+			DockNotebookManager.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
+			DockNotebookManager.ActiveTabChanged += DockNotebook_ActiveTabChanged;
+			DockNotebookManager.TabClosed += DockNotebook_TabClosed;
+			DockNotebookManager.NotebookDragDataReceived += MainWindow_DragDataReceived;
+		}
 
         private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
         {
@@ -304,7 +311,7 @@ namespace Pinta
 			var height = PintaCore.Settings.GetSetting<int> ("window-size-height", 750);
 			var maximize = PintaCore.Settings.GetSetting<bool> ("window-maximized", false);
 
-			window_shell = new WindowShell ("Pinta.GenericWindow", "Pinta", width, height, maximize);
+			window_shell = new WindowShell (this, "Pinta.GenericWindow", "Pinta", width, height, maximize);
 
 			CreateMainMenu (window_shell);
 			CreateMainToolBar (window_shell);
@@ -312,23 +319,47 @@ namespace Pinta
 
 			CreatePanels (window_shell);
 
+			AddWindow(window_shell);
 			window_shell.ShowAll ();
 
+			PintaCore.Chrome.InitializeApplication(this);
 			PintaCore.Chrome.InitializeWindowShell (window_shell);
 		}
 
 		private void CreateMainMenu (WindowShell shell)
 		{
-			var main_menu = window_shell.CreateMainMenu ("main_menu");
+			var app_menu = new GLib.Menu();
+			PintaCore.Actions.App.RegisterActions(this, app_menu);
+			AppMenu = app_menu;
 
-			main_menu.Append (new Gtk.Action ("file", Translations.GetString ("_File")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("edit", Translations.GetString ("_Edit")).CreateMenuItem ());
+			var menu_bar = new GLib.Menu();
+			Menubar = menu_bar;
+
+			var file_menu = new GLib.Menu();
+			PintaCore.Actions.File.RegisterActions(this, file_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("_File"), file_menu);
+
+			var edit_menu = new GLib.Menu();
+			PintaCore.Actions.Edit.RegisterActions(this, edit_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("_Edit"), edit_menu);
+
+			var image_menu = new GLib.Menu();
+			PintaCore.Actions.Image.RegisterActions(this, image_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("_Image"), image_menu);
+
+			var layers_menu = new GLib.Menu();
+			PintaCore.Actions.Layers.RegisterActions(this, layers_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("_Layers"), layers_menu);
+
+			var help_menu = new GLib.Menu();
+			PintaCore.Actions.Help.RegisterActions(this, help_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("_Help"), help_menu);
+
+			var main_menu = window_shell.CreateMainMenu ("main_menu");
 
 			MenuItem view_menu = (MenuItem)new Gtk.Action ("view", Translations.GetString ("_View")).CreateMenuItem ();
 			main_menu.Append (view_menu);
 			
-			main_menu.Append (new Gtk.Action ("image", Translations.GetString ("_Image")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("layers", Translations.GetString ("_Layers")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("adjustments", Translations.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Translations.GetString ("Effe_cts")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("addins", Translations.GetString ("A_dd-ins")).CreateMenuItem ());
@@ -341,33 +372,7 @@ namespace Pinta
 			view_menu.Submenu = new Menu ();
 			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 
-			main_menu.Append (new Gtk.Action ("help", Translations.GetString ("_Help")).CreateMenuItem ());
-
 			PintaCore.Actions.CreateMainMenu (main_menu);
-
-			if (PintaCore.System.OperatingSystem == OS.Mac) {
-				try {
-					//enable the global key handler for keyboard shortcuts
-					IgeMacMenu.GlobalKeyHandlerEnabled = true;
-
-					//Tell the IGE library to use your GTK menu as the Mac main menu
-					IgeMacMenu.MenuBar = main_menu;
-
-					//tell IGE which menu item should be used for the app menu's quit item
-					IgeMacMenu.QuitMenuItem = (MenuItem)PintaCore.Actions.File.Exit.CreateMenuItem ();
-
-					//add a new group to the app menu, and add some items to it
-					var appGroup = IgeMacMenu.AddAppMenuGroup ();
-					MenuItem aboutItem = (MenuItem)PintaCore.Actions.Help.About.CreateMenuItem ();
-					appGroup.AddMenuItem (aboutItem, Translations.GetString ("About"));
-
-					main_menu.Hide ();
-				} catch {
-					// If things don't work out, just use a normal menu.
-				}
-			}
-
-			PintaCore.Chrome.InitializeMainMenu (main_menu);
 		}
 
 		private void CreateMainToolBar (WindowShell shell)
@@ -544,7 +549,7 @@ namespace Pinta
 			// leave window open so user can cancel quitting
 			args.RetVal = true;
 
-			PintaCore.Actions.File.Exit.Activate ();
+			PintaCore.Actions.App.Exit.Activate();
 		}
 
 		private void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)

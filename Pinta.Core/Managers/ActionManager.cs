@@ -34,7 +34,8 @@ namespace Pinta.Core
 	public class ActionManager
 	{
 		public AccelGroup AccelGroup { get; private set; }
-		
+
+		public AppActions App { get; private set; }
 		public FileActions File { get; private set; }
 		public EditActions Edit { get; private set; }
 		public ViewActions View { get; private set; }
@@ -49,7 +50,8 @@ namespace Pinta.Core
 		public ActionManager ()
 		{
 			AccelGroup = new AccelGroup ();
-			
+
+			App = new AppActions();
 			File = new FileActions ();
 			Edit = new EditActions ();
 			View = new ViewActions ();
@@ -63,55 +65,30 @@ namespace Pinta.Core
 		}
 		
 		public void CreateMainMenu (Gtk.MenuBar menu)
-		{
-			// File menu
-			ImageMenuItem file = (ImageMenuItem)menu.Children[0];
-			file.Submenu = new Menu ();
-			File.CreateMainMenu ((Menu)file.Submenu);
-			
-			//Edit menu
-			ImageMenuItem edit = (ImageMenuItem)menu.Children[1];
-			edit.Submenu = new Menu ();
-			Edit.CreateMainMenu ((Menu)edit.Submenu);
-			
+		{	
 			// View menu
-			ImageMenuItem view = (ImageMenuItem)menu.Children[2];
+			ImageMenuItem view = (ImageMenuItem)menu.Children[0];
 			View.CreateMainMenu ((Menu)view.Submenu);
 			
-			// Image menu
-			ImageMenuItem image = (ImageMenuItem)menu.Children[3];
-			image.Submenu = new Menu ();
-			Image.CreateMainMenu ((Menu)image.Submenu);
-			
-			//Layers menu
-			ImageMenuItem layer = (ImageMenuItem)menu.Children[4];
-			layer.Submenu = new Menu ();
-			Layers.CreateMainMenu ((Menu)layer.Submenu);
-			
 			//Adjustments menu
-			ImageMenuItem adj = (ImageMenuItem)menu.Children[5];
+			ImageMenuItem adj = (ImageMenuItem)menu.Children[1];
 			adj.Submenu = new Menu ();
 			Adjustments.CreateMainMenu ((Menu)adj.Submenu);
 
 			// Effects menu
-			ImageMenuItem eff = (ImageMenuItem)menu.Children[6];
+			ImageMenuItem eff = (ImageMenuItem)menu.Children[2];
 			eff.Submenu = new Menu ();
 			Effects.CreateMainMenu ((Menu)eff.Submenu);
 
 			// Add-ins menu
-			ImageMenuItem addins = (ImageMenuItem)menu.Children[7];
+			ImageMenuItem addins = (ImageMenuItem)menu.Children[3];
 			addins.Submenu = new Menu ();
 			Addins.CreateMainMenu ((Menu)addins.Submenu);
 
 			// Window menu
-			ImageMenuItem window = (ImageMenuItem)menu.Children[8];
+			ImageMenuItem window = (ImageMenuItem)menu.Children[4];
 			window.Submenu = new Menu ();
 			Window.CreateMainMenu ((Menu)window.Submenu);
-			
-			//Help menu
-			ImageMenuItem help = (ImageMenuItem)menu.Children[9];
-			help.Submenu = new Menu ();
-			Help.CreateMainMenu ((Menu)help.Submenu);
 		}
 		
 		public void CreateToolBar (Gtk.Toolbar toolbar)

@@ -84,6 +84,9 @@ namespace Pinta
 			// when there isn't an open document
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
+
+			// Initially, no documents are open.
+			ToggleActions(false);
 		}
 
 		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)

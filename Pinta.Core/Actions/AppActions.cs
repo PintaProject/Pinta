@@ -1,5 +1,5 @@
-﻿// 
-// ExitProgramAction.cs
+// 
+// AppActions.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -25,42 +25,47 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using Gdk;
 using Gtk;
-using Pinta.Core;
 
-namespace Pinta.Actions
+namespace Pinta.Core
 {
-	class ExitProgramAction : IActionHandler
+	public class AppActions
 	{
-		#region IActionHandler Members
-		public void Initialize ()
+		public Command About { get; private set; }
+		public Command Exit { get; private set; }
+		
+		public event EventHandler BeforeQuit;
+		
+		public AppActions ()
 		{
-			PintaCore.Actions.App.Exit.Activated += Activated;
+			About = new Command("about", Translations.GetString("About"), null, Stock.About);
+			Exit = new Command("quit", Translations.GetString("Quit"), null, Stock.Quit);
 		}
 
-		public void Uninitialize ()
-		{
-			PintaCore.Actions.App.Exit.Activated -= Activated;
+#region Initialization
+		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
+        {
+			app.AddAction(About);
+			menu.AppendItem(About.CreateMenuItem());
+
+			app.AddAccelAction(Exit, "<Primary>Q");
+			menu.AppendItem(Exit.CreateMenuItem());
 		}
-		#endregion
 
-		private void Activated (object sender, EventArgs e)
+		public void RegisterHandlers ()
 		{
-			while (PintaCore.Workspace.HasOpenDocuments) {
-				int count = PintaCore.Workspace.OpenDocuments.Count;
-
-				PintaCore.Actions.File.Close.Activate ();
-
-				// If we still have the same number of open documents,
-				// the user cancelled on a Save prompt.
-				if (count == PintaCore.Workspace.OpenDocuments.Count)
-					return;
-			}
-
-			// Let everyone know we are quitting
-			PintaCore.Actions.App.RaiseBeforeQuit ();
-
-			(PintaCore.Chrome.Application as GLib.Application).Quit ();
 		}
+#endregion
+
+#region Event Invokers
+		public void RaiseBeforeQuit ()
+		{
+			if (BeforeQuit != null)
+				BeforeQuit (this, EventArgs.Empty);
+		}
+#endregion
 	}
 }

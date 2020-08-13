@@ -35,12 +35,12 @@ namespace Pinta.Actions
 		#region IActionHandler Members
 		public void Initialize ()
 		{
-			PintaCore.Actions.Help.About.Activated += Activated;
+			PintaCore.Actions.App.About.Activated += Activated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.Help.About.Activated -= Activated;
+			PintaCore.Actions.App.About.Activated -= Activated;
 		}
 		#endregion
 
