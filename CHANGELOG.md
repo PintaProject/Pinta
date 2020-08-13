@@ -5,12 +5,16 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @darkdragon-001
+- @JamiKettunen
 
 ### Added
+- The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
 
 ### Changed
 
 ### Fixed
+- Fixed invalid URLs in `pinta.appdata.xml` (#140)
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
