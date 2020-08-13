@@ -38,6 +38,114 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="1.7" date="2020-08-04">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/1.7</url>
+      <description>
+        <p>New Features / Improvements</p>
+        <ul>
+          <li>Added a tab view to switch between images. The tabs can
+          also be docked side-by-side or pulled into new
+          windows. (#94).</li>
+          <li>The Rotate / Zoom dialog now supports zooming and
+          panning (#1252756).</li>
+          <li>Added a Smooth Erase tool, which is enabled using the
+          Type menu on the Erase tool's toolbar (#110).</li>
+          <li>The Pencil tool can switch between different blend modes
+          (#124, #1688743).</li>
+          <li>Added support for JASC PaintShop Pro palette files
+          (#126).</li>
+          <li>The transform tools can now rotate in fixed increments
+          by holding Shift (#134).</li>
+          <li>The Move Selected tool can now scale by holding Ctrl
+          (#138).</li>
+          <li>Dragging and dropping a URL (e.g. image from a web
+          browser) to download and open the image is now supported
+          (#80, #644123).</li>
+          <li>Performance improvements when interacting with
+          selections, particularly for large images (#1428740).</li>
+          <li>The Rectangle Select tool now shows different arrow
+          cursors at each corner of the selection (#1188143).</li>
+          <li>A new user guide has been written for the Pinta website!
+          Thanks to @jeneira94, @akaro2424, and @anadvu for their
+          contributions!</li>
+        </ul>
+        <p>Changes</p>
+        <ul>
+          <li>UI improvements to the New Image dialog (#99,
+          [1424547).</li>
+          <li>The Rotate / Zoom dialog now rotates in-place instead of
+          changing the layer's size.</li>
+          <li>Cairo blend operations are now used instead of PDN's
+          managed blend modes (#98, #1248933, #1091910).</li>
+          <li>The tool windows can now only be closed with the View ->
+          Tool Windows menu, as it was easy to accidentally close them
+          without knowing how to recover them (#1428720).</li>
+          <li>The shortcut for the Intersect selection mode is now Alt
+          + Left Click instead of using Shift, which had caused
+          conflicts with holding Shift to constrain the selection to a
+          square (#1426660).</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed many issues where selection changes did not update
+          correctly (#1438022, #1188924, #1429830, #1098137,
+          #105).</li>
+          <li>Fixed incorrect behaviour when using the Shift key to
+          constrain to a square or circle in the Rectangle and Ellipse
+          tools (#1452607).</li>
+          <li>The option to expand the canvas when pasting an image
+          now only changes the canvas size in the dimension where the
+          pasted image is larger (#1883623).</li>
+          <li>Fixed a bug where Auto Crop used the current layer
+          instead of the entire image when deciding what to crop, and
+          takes the selection into account (#1434928, #1434906).</li>
+          <li>Fixed potential crashes when switching tools without any
+          open documents (#1425612).</li>
+          <li>Fixed a potential bug where the OK button in the New
+          Image dialog could be incorrectly disabled (#1430203).</li>
+          <li>Fixed a crash when clicking on the Open Images pad after
+          closing all images (#1430789).</li>
+          <li>Fixed a bug where the Levels dialog closed unexpectedly
+          when clicking on one of the color checkboxes
+          (#1435045).</li>
+          <li>The outline width settings on the Text Tool''s toolbar
+          now only show up if they are relevant to the stroke style
+          being used (#1426663).</li>
+          <li>Fixed a potential crash creating gradients
+          (#1446217).</li>
+          <li>Fixed issues where the selection handles disappeared
+          after pressing Delete (#1424629).</li>
+          <li>Fixed several transparency-related issues with
+          premultiplied alpha (#109, #113, #114, #117, #125).</li>
+          <li>Corrected display problems in the Move Selected Tool and
+          live previews for effects (#115).</li>
+          <li>Add-ins can now load icons correctly (#116).</li>
+          <li>Fixed strange behaviour when the width or height of a
+          drawn rounded rectangle is 0 (#112).</li>
+          <li>Fixed issues with the text tool on OSX (#1425749).</li>
+          <li>Fixed inconsistent labels in the UI (#1579033).</li>
+          <li>Fixed issues with the zoom tool under certain locales
+          (#139, #133, #1464855).</li>
+          <li>Fixed issues when drawing on very zoomed-in images
+          (#129, #133).</li>
+          <li>Fixed issues where brushes could draw outside the
+          selection (#1775709).</li>
+          <li>Fixed issues with the docking library (#832395).</li>
+          <li>Fixed a bug where undoing a history item could set the
+          background palette color to the foreground color
+          (#1888131).</li>
+          <li>Fixed issues where the zoom level was not maintained
+          when undoing a Crop to Selection (#1888885).</li>
+          <li>Fixed an error on newer Mono versions when opening URLs
+          via the menu items under the Help menu (#1888883).</li>
+          <li>Fixed some occasional crashes on dragging and dropping
+          or pasting into a new image (#1838620, #1508777).</li>
+          <li>Fixed issues where using the Rectangle Select tool after
+          the Move Selection or Move Selected Pixels tools did not
+          update correctly (#1889647, #1473430, #1889774).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.6" date="2015-03-01"/>
   </releases>
 </component>
