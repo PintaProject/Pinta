@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class LayersPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
 		{
 			var layers = new LayersListWidget ();
 			DockItem layers_item = workspace.AddItem ("Layers");
@@ -52,11 +52,14 @@ namespace Pinta
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
-			Gtk.ToggleAction show_layers = padMenu.AppendToggleAction ("Layers", Translations.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
-			show_layers.Activated += delegate { layers_item.Visible = show_layers.Active; };
-			layers_item.VisibleChanged += delegate { show_layers.Active = layers_item.Visible; };
+			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
+			app.AddAction(show_layers);
+			padMenu.AppendItem(show_layers.CreateMenuItem());
 
-			show_layers.Active = layers_item.Visible;
+			show_layers.Toggled += (val) => { layers_item.Visible = val; };
+			layers_item.VisibleChanged += (o, args) => { show_layers.Value = layers_item.Visible; };
+
+			show_layers.Value = layers_item.Visible;
 
 			PintaCore.Workspace.ActiveDocumentChanged += delegate { layers.Reset (); };
 		}

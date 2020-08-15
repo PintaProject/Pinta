@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class OpenImagesPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
 		{
 			DockItem open_images_item = workspace.AddItem ("Images");
 			open_images_item.DefaultLocation = "Layers/Bottom";
@@ -44,14 +44,16 @@ namespace Pinta
             open_images_item.DefaultWidth = 100;
 			open_images_item.Behavior |= DockItemBehavior.CantClose;
 
-			ToggleAction show_open_images = padMenu.AppendToggleAction ("Images", Translations.GetString ("Images"), null, null);
+			var show_open_images = new ToggleCommand ("images", Translations.GetString ("Images"), null, null);
+			app.AddAction(show_open_images);
+			padMenu.AppendItem(show_open_images.CreateMenuItem());
 
-			show_open_images.Activated += delegate {
-				open_images_item.Visible = show_open_images.Active;
+			show_open_images.Toggled += (val) => {
+				open_images_item.Visible = val;
 			};
 
-			open_images_item.VisibleChanged += delegate {
-				show_open_images.Active = open_images_item.Visible;
+			open_images_item.VisibleChanged += (o, args) => {
+				show_open_images.Value = open_images_item.Visible;
 			};
 		}
 	}

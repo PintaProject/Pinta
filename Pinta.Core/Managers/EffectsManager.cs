@@ -73,7 +73,7 @@ namespace Pinta.Core
 			else
 				menu_item = act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers);
 
-			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[1]).Submenu).AppendMenuItemSorted (menu_item);
+			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[0]).Submenu).AppendMenuItemSorted (menu_item);
 
 			adjustments.Add (adjustment, act);
 			adjustment_menuitems.Add (adjustment, menu_item);
@@ -136,7 +136,7 @@ namespace Pinta.Core
 					adjustments.Remove (adjustment);
 					PintaCore.Actions.Adjustments.Actions.Remove (action);
 
-					((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[2]).Submenu).Remove (menu_item);
+					((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[1]).Submenu).Remove (menu_item);
 					return;
 				}
 			}

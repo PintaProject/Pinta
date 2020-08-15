@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class ToolBoxPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
 		{
 			DockItem toolbox_item = workspace.AddItem ("Toolbox");
 			ToolBoxWidget toolbox = new ToolBoxWidget () { Name = "toolbox" };
@@ -43,13 +43,15 @@ namespace Pinta
 			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
 			toolbox_item.DefaultWidth = 35;
-            
 
-			Gtk.ToggleAction show_toolbox = padMenu.AppendToggleAction ("Tools", Translations.GetString ("Tools"), null, "Tools.Pencil.png");
-			show_toolbox.Activated += delegate { toolbox_item.Visible = show_toolbox.Active; };
-			toolbox_item.VisibleChanged += delegate { show_toolbox.Active = toolbox_item.Visible; };
+			var show_toolbox = new ToggleCommand ("Tools", Translations.GetString ("Tools"), null, "Tools.Pencil.png");
+			app.AddAction(show_toolbox);
+			padMenu.AppendItem(show_toolbox.CreateMenuItem());
 
-			show_toolbox.Active = toolbox_item.Visible;
+			show_toolbox.Toggled += (val) => { toolbox_item.Visible = val; };
+			toolbox_item.VisibleChanged += (o, args) => { show_toolbox.Value = toolbox_item.Visible; };
+
+			show_toolbox.Value = toolbox_item.Visible;
 		}
 	}
 }

@@ -44,9 +44,9 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, EventArgs e)
+		private void Activated (bool value)
 		{
-			PintaCore.Chrome.MainToolBar.Visible = ((ToggleAction)sender).Active;
+			PintaCore.Chrome.MainToolBar.Visible = value;
 		}
 	}
 }

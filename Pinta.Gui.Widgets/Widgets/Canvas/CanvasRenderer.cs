@@ -94,7 +94,7 @@ namespace Pinta.Gui.Widgets
             }
 
             // If we are at least 200% and grid is requested, draw it
-            if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Active && scale_factor.Ratio <= 0.5d)
+            if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Value && scale_factor.Ratio <= 0.5d)
                 RenderPixelGrid (dst, offset);
 			
 			dst.MarkDirty ();

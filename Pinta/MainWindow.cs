@@ -41,7 +41,7 @@ namespace Pinta
 	{
 		WindowShell window_shell;
 		DockFrame dock;
-		Menu show_pad;
+		GLib.Menu show_pad;
         DockNotebookContainer dock_container;
 
 		CanvasPad canvas_pad;
@@ -113,8 +113,8 @@ namespace Pinta
 			window_shell.KeyReleaseEvent += MainWindow_KeyReleaseEvent;
 
 			// TODO: These need to be [re]moved when we redo zoom support
-			PintaCore.Actions.View.ZoomToWindow.Activated += new EventHandler(ZoomToWindow_Activated);
-			PintaCore.Actions.View.ZoomToSelection.Activated += new EventHandler(ZoomToSelection_Activated);
+			PintaCore.Actions.View.ZoomToWindow.Activated += ZoomToWindow_Activated;
+			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
@@ -343,6 +343,10 @@ namespace Pinta
 			PintaCore.Actions.Edit.RegisterActions(this, edit_menu);
 			menu_bar.AppendSubmenu(Translations.GetString("_Edit"), edit_menu);
 
+			var view_menu = new GLib.Menu();
+			PintaCore.Actions.View.RegisterActions(this, view_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("_View"), view_menu);
+
 			var image_menu = new GLib.Menu();
 			PintaCore.Actions.Image.RegisterActions(this, image_menu);
 			menu_bar.AppendSubmenu(Translations.GetString("_Image"), image_menu);
@@ -360,9 +364,6 @@ namespace Pinta
 			menu_bar.AppendSubmenu(Translations.GetString("_Help"), help_menu);
 
 			var main_menu = window_shell.CreateMainMenu ("main_menu");
-
-			MenuItem view_menu = (MenuItem)new Gtk.Action ("view", Translations.GetString ("_View")).CreateMenuItem ();
-			main_menu.Append (view_menu);
 			
 			main_menu.Append (new Gtk.Action ("adjustments", Translations.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Translations.GetString ("Effe_cts")).CreateMenuItem ());
@@ -371,9 +372,11 @@ namespace Pinta
 			window_menu.Submenu = new Menu ();
 			main_menu.Append (window_menu);
 
-			Gtk.Action pads = new Gtk.Action ("pads", Translations.GetString ("Tool Windows"), null, null);
-			view_menu.Submenu = new Menu ();
-			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
+			var pad_section = new GLib.Menu();
+			view_menu.AppendSection(null, pad_section);
+
+			show_pad = new GLib.Menu();
+			pad_section.AppendSubmenu(Translations.GetString("Tool Windows"), show_pad);
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
 			PintaCore.Chrome.InitializeMainMenu(main_menu);
@@ -437,29 +440,29 @@ namespace Pinta
 
 			// Toolbox pad
 			var toolboxpad = new ToolBoxPad ();
-			toolboxpad.Initialize (dock, show_pad);
+			toolboxpad.Initialize (dock, this, show_pad);
 		
 			// Palette pad
 			var palettepad = new ColorPalettePad ();
-			palettepad.Initialize (dock, show_pad);
+			palettepad.Initialize (dock, this, show_pad);
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();
-			canvas_pad.Initialize (dock, show_pad);
+			canvas_pad.Initialize (dock);
 
             dock_container = canvas_pad.NotebookContainer;
 
 			// Layer pad
 			var layers_pad = new LayersPad ();
-			layers_pad.Initialize (dock, show_pad);
+			layers_pad.Initialize (dock, this, show_pad);
 
 			// Open Images pad
 			var open_images_pad = new OpenImagesPad ();
-			open_images_pad.Initialize (dock, show_pad);
+			open_images_pad.Initialize (dock, this, show_pad);
 
 			// History pad
 			var history_pad = new HistoryPad ();
-			history_pad.Initialize (dock, show_pad);
+			history_pad.Initialize (dock, this, show_pad);
 
 			container.PackStart (dock, true, true, 0);
 			
@@ -490,10 +493,10 @@ namespace Pinta
 
 		private void LoadUserSettings ()
 		{
-			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-shown", false);
-            PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
-            PintaCore.Actions.View.ImageTabs.Active = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
-            PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
+			PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting ("ruler-shown", false);
+            PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+            PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
+            PintaCore.Actions.View.PixelGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
 			                                                                      PintaCore.System.DefaultDialogDirectory);
 
@@ -537,10 +540,10 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
 #endif
 			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.Window.State & Gdk.WindowState.Maximized) != 0);
-            PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
-            PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Active);
-            PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
-			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
+            PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
+            PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
+            PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
+			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
 
 			PintaCore.Settings.SaveSettings ();

@@ -36,7 +36,7 @@ namespace Pinta
 	{
         public DockNotebookContainer NotebookContainer { get; private set; }
 
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (DockFrame workspace)
 		{
             var tab = new DockNotebook () {
                 NavigationButtonsVisible = false

@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class ColorPalettePad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Menu padMenu)
+		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
 		{
 			DockItem palette_item = workspace.AddItem ("Palette");
 			ColorPaletteWidget palette = new ColorPaletteWidget () { Name = "palette" };
@@ -45,12 +45,20 @@ namespace Pinta
 			palette_item.Behavior |= DockItemBehavior.CantClose;
 			palette_item.DefaultWidth = 35;
 
-			Gtk.ToggleAction show_palette = padMenu.AppendToggleAction ("Palette", Translations.GetString ("Palette"), null, "Pinta.png");
-			show_palette.Activated += delegate { palette_item.Visible = show_palette.Active; };
-			palette_item.VisibleChanged += delegate { show_palette.Active = palette_item.Visible; };
+			var show_palette = new ToggleCommand ("palette", Translations.GetString ("Palette"), null, "Pinta.png");
+			app.AddAction(show_palette);
+			padMenu.AppendItem(show_palette.CreateMenuItem());
+
+			show_palette.Toggled += (val) => {
+				palette_item.Visible = val;
+			};
+
+			palette_item.VisibleChanged += (o, args) => {
+				show_palette.Value = palette_item.Visible;
+			};
 
 			palette.Initialize ();
-			show_palette.Active = palette_item.Visible;
+			show_palette.Value = palette_item.Visible;
 		}
-	}
+    }
 }

@@ -54,9 +54,9 @@ namespace Pinta.Core
 
         public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
 
-        public Command(string name, string label, string tooltip, string stock_id)
+        public Command(string name, string label, string tooltip, string stock_id, GLib.Variant state = null)
         {
-            Action = new SimpleAction(name, null);
+            Action = new SimpleAction(name, null, state);
             Action.Activated += (o, args) =>
             {
                 Activated?.Invoke(o, args);
@@ -71,5 +71,28 @@ namespace Pinta.Core
         {
             return new GLib.MenuItem(Label, FullName);
         }
+    }
+
+    public class ToggleCommand : Command
+    {
+        public ToggleCommand(string name, string label, string tooltip, string stock_id)
+            : base(name, label, tooltip, stock_id, new GLib.Variant(false))
+        {
+            Activated += (o, args) =>
+            {
+                var active = !(bool)Action.State;
+                Toggled?.Invoke(active);
+                Action.ChangeState(new GLib.Variant(active));
+            };
+        }
+
+        public bool Value
+        {
+            get { return (bool)Action.State; }
+            set { Action.ChangeState(new Variant(value)); }
+        }
+
+        public delegate void ToggledHandler(bool value);
+        public ToggledHandler Toggled;
     }
 }
