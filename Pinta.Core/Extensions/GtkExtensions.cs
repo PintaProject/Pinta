@@ -179,21 +179,21 @@ namespace Pinta.Core
 			}
 		}
 
-		public static void AppendMenuItemSorted(this GLib.Menu menu, Command action)
+		public static void AppendMenuItemSorted(this GLib.Menu menu, GLib.MenuItem item)
 		{
-			var new_label = action.Label;
+			var new_label = (string)item.GetAttributeValue("label", GLib.VariantType.String);
 
 			for (int i = 0; i < menu.NItems; i++)
 			{
 				var label = (string)menu.GetItemAttributeValue(i, "label", GLib.VariantType.String);
 				if (string.Compare(label, new_label) > 0)
 				{
-					menu.InsertItem(i, action.CreateMenuItem());
+					menu.InsertItem(i, item);
 					return;
 				}
 			}
 
-			menu.AppendItem(action.CreateMenuItem());
+			menu.AppendItem(item);
 		}
 
 		public static void Toggle (this Gtk.ToggleToolButton button)

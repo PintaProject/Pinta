@@ -66,13 +66,8 @@ namespace Pinta.Core
 		
 		public void CreateMainMenu (Gtk.MenuBar menu)
 		{
-			// Effects menu
-			ImageMenuItem eff = (ImageMenuItem)menu.Children[0];
-			eff.Submenu = new Menu ();
-			Effects.CreateMainMenu ((Menu)eff.Submenu);
-
 			// Window menu
-			ImageMenuItem window = (ImageMenuItem)menu.Children[1];
+			ImageMenuItem window = (ImageMenuItem)menu.Children[0];
 			window.Submenu = new Menu ();
 			Window.CreateMainMenu ((Menu)window.Submenu);
 		}

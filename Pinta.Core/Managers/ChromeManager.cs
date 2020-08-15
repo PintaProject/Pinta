@@ -36,7 +36,6 @@ namespace Pinta.Core
 		private IProgressDialog progress_dialog;
 		private bool main_window_busy;
 		private Gdk.Point last_canvas_cursor_point;
-		private MenuBar main_menu;
 		private Toolbar main_toolbar;
 		private ErrorDialogHandler error_dialog_handler;
 
@@ -45,9 +44,9 @@ namespace Pinta.Core
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Window MainWindow { get { return main_window; } }
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
-		public MenuBar MainMenu { get { return main_menu; } }
 		public GLib.Menu AdjustmentsMenu { get; private set; }
-		
+		public GLib.Menu EffectsMenu { get; private set; }
+
 		public ChromeManager ()
 		{
 		}
@@ -97,10 +96,10 @@ namespace Pinta.Core
 			main_window = shell;
 		}
 
-		public void InitializeMainMenu (MenuBar menu, GLib.Menu adj_menu)
+		public void InitializeMainMenu (GLib.Menu adj_menu, GLib.Menu effects_menu)
 		{
-			main_menu = menu;
 			AdjustmentsMenu = adj_menu;
+			EffectsMenu = effects_menu;
 		}
 
 		public void InitializeProgessDialog (IProgressDialog progressDialog)

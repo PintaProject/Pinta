@@ -36,12 +36,12 @@ namespace Pinta.Core
 	public class EffectsManager
 	{
 		private Dictionary<BaseEffect, Command> adjustments;
-		private Dictionary<BaseEffect, Gtk.Action> effects;
+		private Dictionary<BaseEffect, Command> effects;
 
 		internal EffectsManager ()
 		{
 			adjustments = new Dictionary<BaseEffect, Command> ();
-			effects = new Dictionary<BaseEffect, Gtk.Action> ();
+			effects = new Dictionary<BaseEffect, Command> ();
 		}
 
 		/// <summary>
@@ -70,7 +70,7 @@ namespace Pinta.Core
 				PintaCore.Chrome.Application.AddAccelAction(act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
 			}
 
-			PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted(act);
+			PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted(act.CreateMenuItem());
 
 			adjustments.Add (adjustment, act);
 		}
@@ -80,7 +80,7 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="effect">The effect to register</param>
 		/// <returns>The action created for this effect</returns>
-		public Gtk.Action RegisterEffect (BaseEffect effect)
+		public void RegisterEffect (BaseEffect effect)
 		{
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
@@ -88,14 +88,13 @@ namespace Pinta.Core
 			fact.AddDefault ();
 
 			// Create a gtk action and menu item for each effect
-			Gtk.Action act = new Gtk.Action (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
-			act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (effect); };
+			var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
+			PintaCore.Chrome.Application.AddAction(act);
+			act.Activated += (o, args) => { PintaCore.LivePreview.Start (effect); };
 			
 			PintaCore.Actions.Effects.AddEffect (effect.EffectMenuCategory, act);
 			
 			effects.Add (effect, act);
-
-			return act;
 		}
 
 		/// <summary>
