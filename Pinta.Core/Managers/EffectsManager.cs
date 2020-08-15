@@ -35,14 +35,12 @@ namespace Pinta.Core
 	/// </summary>
 	public class EffectsManager
 	{
-		private Dictionary<BaseEffect, Gtk.Action> adjustments;
-		private Dictionary<BaseEffect, MenuItem> adjustment_menuitems;
+		private Dictionary<BaseEffect, Command> adjustments;
 		private Dictionary<BaseEffect, Gtk.Action> effects;
 
 		internal EffectsManager ()
 		{
-			adjustments = new Dictionary<BaseEffect, Gtk.Action> ();
-			adjustment_menuitems = new Dictionary<BaseEffect,MenuItem> ();
+			adjustments = new Dictionary<BaseEffect, Command> ();
 			effects = new Dictionary<BaseEffect, Gtk.Action> ();
 		}
 
@@ -51,7 +49,7 @@ namespace Pinta.Core
 		/// </summary>
 		/// <param name="adjustment">The adjustment to register</param>
 		/// <returns>The action created for this adjustment</returns>
-		public Gtk.Action RegisterAdjustment (BaseEffect adjustment)
+		public void RegisterAdjustment (BaseEffect adjustment)
 		{
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
@@ -59,26 +57,22 @@ namespace Pinta.Core
 			fact.AddDefault ();
 
 			// Create a gtk action for each adjustment
-			Gtk.Action act = new Gtk.Action (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
-			act.Activated += delegate (object sender, EventArgs e) { PintaCore.LivePreview.Start (adjustment); };
+			var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
+			act.Activated += (o, args) => { PintaCore.LivePreview.Start (adjustment); };
 			
 			PintaCore.Actions.Adjustments.Actions.Add (act);
 
-			// Create a menu item for each adjustment
-			MenuItem menu_item;
-			
 			// If no key is specified, don't use an accelerated menu item
-			if (adjustment.AdjustmentMenuKey == (Gdk.Key)0)
-				menu_item = (MenuItem)act.CreateMenuItem ();
+			if (adjustment.AdjustmentMenuKey is null)
+				PintaCore.Chrome.Application.AddAction(act);
 			else
-				menu_item = act.CreateAcceleratedMenuItem (adjustment.AdjustmentMenuKey, adjustment.AdjustmentMenuKeyModifiers);
+			{
+				PintaCore.Chrome.Application.AddAccelAction(act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
+			}
 
-			((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[0]).Submenu).AppendMenuItemSorted (menu_item);
+			PintaCore.Chrome.AdjustmentsMenu.AppendMenuItemSorted(act);
 
 			adjustments.Add (adjustment, act);
-			adjustment_menuitems.Add (adjustment, menu_item);
-
-			return act;
 		}
 
 		/// <summary>
@@ -131,12 +125,11 @@ namespace Pinta.Core
 				if (adjustment.GetType () == adjustment_type) {
 
 					var action = adjustments[adjustment];
-					var menu_item = adjustment_menuitems[adjustment];
 
 					adjustments.Remove (adjustment);
 					PintaCore.Actions.Adjustments.Actions.Remove (action);
+					PintaCore.Chrome.AdjustmentsMenu.Remove(action);
 
-					((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[1]).Submenu).Remove (menu_item);
 					return;
 				}
 			}

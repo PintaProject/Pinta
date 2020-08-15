@@ -46,6 +46,7 @@ namespace Pinta.Core
 		public Window MainWindow { get { return main_window; } }
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public MenuBar MainMenu { get { return main_menu; } }
+		public GLib.Menu AdjustmentsMenu { get; private set; }
 		
 		public ChromeManager ()
 		{
@@ -96,9 +97,10 @@ namespace Pinta.Core
 			main_window = shell;
 		}
 
-		public void InitializeMainMenu (MenuBar menu)
+		public void InitializeMainMenu (MenuBar menu, GLib.Menu adj_menu)
 		{
 			main_menu = menu;
+			AdjustmentsMenu = adj_menu;
 		}
 
 		public void InitializeProgessDialog (IProgressDialog progressDialog)

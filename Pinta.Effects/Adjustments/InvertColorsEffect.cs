@@ -25,8 +25,8 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Invert Colors"); }
 		}
 		
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.I; }
+		public override string AdjustmentMenuKey {
+			get { return "I"; }
 		}
 		
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)

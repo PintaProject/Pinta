@@ -166,6 +166,36 @@ namespace Pinta.Core
 			app.SetAccelsForAction(action.FullName, accels);
 		}
 
+		public static void Remove(this GLib.Menu menu, Command action)
+        {
+			for (int i = 0; i < menu.NItems; ++i)
+			{
+				var name_attr = (string)menu.GetItemAttributeValue(i, "action", GLib.VariantType.String);
+				if (name_attr == action.FullName)
+				{
+					menu.Remove(i);
+					return;
+				}
+			}
+		}
+
+		public static void AppendMenuItemSorted(this GLib.Menu menu, Command action)
+		{
+			var new_label = action.Label;
+
+			for (int i = 0; i < menu.NItems; i++)
+			{
+				var label = (string)menu.GetItemAttributeValue(i, "label", GLib.VariantType.String);
+				if (string.Compare(label, new_label) > 0)
+				{
+					menu.InsertItem(i, action.CreateMenuItem());
+					return;
+				}
+			}
+
+			menu.AppendItem(action.CreateMenuItem());
+		}
+
 		public static void Toggle (this Gtk.ToggleToolButton button)
         {
             button.Active = !button.Active;

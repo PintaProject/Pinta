@@ -30,8 +30,8 @@ namespace Pinta.Effects
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.U; }
+		public override string AdjustmentMenuKey {
+			get { return "U"; }
 		}
 
 		public HueSaturationEffect ()

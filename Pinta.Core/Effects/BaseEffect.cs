@@ -58,12 +58,12 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns the keyboard shortcut for this adjustment. Only affects adjustments, not effects. Default is no shortcut.
 		/// </summary>
-		public virtual Gdk.Key AdjustmentMenuKey { get { return (Gdk.Key)0; } }
+		public virtual string AdjustmentMenuKey { get { return null; } }
 
 		/// <summary>
-		/// Returns the modifier(s) to the keyboard shortcut. Only affects adjustments, not effects. Default is Ctrl+Shift.
+		/// Returns the modifier(s) to the keyboard shortcut. Only affects adjustments, not effects. Default is Primary+Shift.
 		/// </summary>
-		public virtual Gdk.ModifierType AdjustmentMenuKeyModifiers { get { return Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask; } }
+		public virtual string AdjustmentMenuKeyModifiers { get { return "<Primary><Shift>"; } }
 
 		/// <summary>
 		/// Returns the menu category for an effect. Only affects effects, not adjustments. Default is "General".

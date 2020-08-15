@@ -31,8 +31,8 @@ namespace Pinta.Effects
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.M; }
+		public override string AdjustmentMenuKey {
+			get { return "M"; }
 		}
 
 		public CurvesData Data { get { return EffectData as CurvesData; } }

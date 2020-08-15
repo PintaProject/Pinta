@@ -29,8 +29,8 @@ namespace Pinta.Effects
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.P; }
+		public override string AdjustmentMenuKey {
+			get { return "P"; }
 		}
 
 		public PosterizeData Data { get { return EffectData as PosterizeData; } }

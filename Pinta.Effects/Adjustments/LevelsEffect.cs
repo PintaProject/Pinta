@@ -27,12 +27,12 @@ namespace Pinta.Effects
 			get { return true; }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.L; }
+		public override string AdjustmentMenuKey {
+			get { return "L"; }
 		}
 
-		public override Gdk.ModifierType AdjustmentMenuKeyModifiers {
-			get { return Gdk.ModifierType.ControlMask; }
+		public override string AdjustmentMenuKeyModifiers {
+			get { return "<Primary>"; }
 		}
 		
 		public LevelsData Data { get { return EffectData as LevelsData; } }

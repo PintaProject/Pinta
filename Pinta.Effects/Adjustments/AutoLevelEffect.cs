@@ -25,8 +25,8 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Auto Level"); }
 		}
 
-		public override Gdk.Key AdjustmentMenuKey {
-			get { return Gdk.Key.L; }
+		public override string AdjustmentMenuKey {
+			get { return "L"; }
 		}
 
 		public override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
