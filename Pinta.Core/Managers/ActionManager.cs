@@ -80,13 +80,8 @@ namespace Pinta.Core
 			eff.Submenu = new Menu ();
 			Effects.CreateMainMenu ((Menu)eff.Submenu);
 
-			// Add-ins menu
-			ImageMenuItem addins = (ImageMenuItem)menu.Children[3];
-			addins.Submenu = new Menu ();
-			Addins.CreateMainMenu ((Menu)addins.Submenu);
-
 			// Window menu
-			ImageMenuItem window = (ImageMenuItem)menu.Children[4];
+			ImageMenuItem window = (ImageMenuItem)menu.Children[3];
 			window.Submenu = new Menu ();
 			Window.CreateMainMenu ((Menu)window.Submenu);
 		}

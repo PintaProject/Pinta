@@ -136,7 +136,7 @@ namespace Pinta.Core
 					adjustments.Remove (adjustment);
 					PintaCore.Actions.Adjustments.Actions.Remove (action);
 
-					((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[5]).Submenu).Remove (menu_item);
+					((Menu)((ImageMenuItem)PintaCore.Chrome.MainMenu.Children[2]).Submenu).Remove (menu_item);
 					return;
 				}
 			}

@@ -351,6 +351,10 @@ namespace Pinta
 			PintaCore.Actions.Layers.RegisterActions(this, layers_menu);
 			menu_bar.AppendSubmenu(Translations.GetString("_Layers"), layers_menu);
 
+			var addins_menu = new GLib.Menu();
+			PintaCore.Actions.Addins.RegisterActions(this, addins_menu);
+			menu_bar.AppendSubmenu(Translations.GetString("A_dd-ins"), addins_menu);
+
 			var help_menu = new GLib.Menu();
 			PintaCore.Actions.Help.RegisterActions(this, help_menu);
 			menu_bar.AppendSubmenu(Translations.GetString("_Help"), help_menu);
@@ -362,7 +366,6 @@ namespace Pinta
 			
 			main_menu.Append (new Gtk.Action ("adjustments", Translations.GetString ("_Adjustments")).CreateMenuItem ());
 			main_menu.Append (new Gtk.Action ("effects", Translations.GetString ("Effe_cts")).CreateMenuItem ());
-			main_menu.Append (new Gtk.Action ("addins", Translations.GetString ("A_dd-ins")).CreateMenuItem ());
 
 			MenuItem window_menu = (MenuItem)new Gtk.Action ("window", Translations.GetString ("_Window")).CreateMenuItem ();
 			window_menu.Submenu = new Menu ();
@@ -373,6 +376,7 @@ namespace Pinta
 			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 
 			PintaCore.Actions.CreateMainMenu (main_menu);
+			PintaCore.Chrome.InitializeMainMenu(main_menu);
 		}
 
 		private void CreateMainToolBar (WindowShell shell)
