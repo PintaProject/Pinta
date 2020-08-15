@@ -142,16 +142,13 @@ namespace Pinta.Core
 			var zoom_section = new GLib.Menu();
 			menu.AppendSection(null, zoom_section);
 
-			// TODO-GTK3 - add alternate accels for Gdk.Key.equal and Gdk.Key.KP_Add (see GTK2)
-			app.AddAccelAction(ZoomIn, "<Primary>+");
+			app.AddAccelAction(ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "<Primary>KP_Add" });
 			zoom_section.AppendItem(ZoomIn.CreateMenuItem());
 
-			// TODO-GTK3 - add alternate accels for Gdk.Key.underscore and Gdk.Key.KP_Subtract (see GTK2)
-			app.AddAccelAction(ZoomOut, "<Primary>-");
+			app.AddAccelAction(ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "<Primary>KP_Subtract" });
 			zoom_section.AppendItem(ZoomOut.CreateMenuItem());
 
-			// TODO-GTK3 - add alternate accels for Ctrl+Shift+A (see GTK2)
-			app.AddAccelAction(ActualSize, "<Primary>0");
+			app.AddAccelAction(ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
 			zoom_section.AppendItem(ActualSize.CreateMenuItem());
 
 			app.AddAccelAction(ZoomToWindow, "<Primary>B");

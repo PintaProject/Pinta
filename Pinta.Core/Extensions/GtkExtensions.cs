@@ -160,6 +160,12 @@ namespace Pinta.Core
 			app.SetAccelsForAction(action.FullName, new string[] { accel });
 		}
 
+		public static void AddAccelAction(this Gtk.Application app, Command action, string[] accels)
+		{
+			app.AddAction(action);
+			app.SetAccelsForAction(action.FullName, accels);
+		}
+
 		public static void Toggle (this Gtk.ToggleToolButton button)
         {
             button.Active = !button.Active;
