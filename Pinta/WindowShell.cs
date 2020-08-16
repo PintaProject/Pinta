@@ -61,17 +61,6 @@ namespace Pinta
 			shell_layout.ShowAll ();
 		}
 
-		public MenuBar CreateMainMenu (string name)
-		{
-			main_menu = new MenuBar ();
-			main_menu.Name = name;
-
-			menu_layout.PackStart (main_menu, false, false, 0);
-			main_menu.Show ();
-
-			return main_menu;
-		}
-
 		public Toolbar CreateToolBar (string name)
 		{
 			main_toolbar = new Toolbar ();

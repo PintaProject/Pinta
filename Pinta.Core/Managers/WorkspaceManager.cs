@@ -281,12 +281,7 @@ namespace Pinta.Core
 		
 		public void SetActiveDocument (Document document)
 		{
-			RadioAction action = PintaCore.Actions.Window.OpenWindows.Where (p => p.Name == document.Guid.ToString ()).FirstOrDefault ();
-
-			if (action == null)
-				throw new ArgumentOutOfRangeException ("Tried to WorkspaceManager.SetActiveDocument.  Could not find document.");
-
-			action.Activate ();
+			PintaCore.Actions.Window.SetActiveDocument(document);
 		}
 
 		internal void SetActiveDocumentInternal (Document document)

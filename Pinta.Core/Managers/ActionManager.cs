@@ -64,14 +64,6 @@ namespace Pinta.Core
 			Help = new HelpActions ();
 		}
 		
-		public void CreateMainMenu (Gtk.MenuBar menu)
-		{
-			// Window menu
-			ImageMenuItem window = (ImageMenuItem)menu.Children[0];
-			window.Submenu = new Menu ();
-			Window.CreateMainMenu ((Menu)window.Submenu);
-		}
-		
 		public void CreateToolBar (Gtk.Toolbar toolbar)
 		{
 			toolbar.AppendItem (File.New.CreateToolBarItem ());
