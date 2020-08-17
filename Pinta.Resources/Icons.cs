@@ -32,6 +32,37 @@ using System.Runtime.CompilerServices;
 
 namespace Pinta.Resources
 {
+	public static class StandardIcons
+    {
+		public const string ApplicationExit = "application-exit";
+
+		public const string DocumentNew = "document-new";
+		public const string DocumentOpen = "document-open";
+		public const string DocumentPrint = "document-print";
+		public const string DocumentRevert = "document-revert";
+		public const string DocumentSave = "document-save";
+		public const string DocumentSaveAs = "document-save-as";
+
+		public const string EditCopy = "edit-copy";
+		public const string EditCut = "edit-cut";
+		public const string EditPaste = "edit-paste";
+		public const string EditRedo = "edit-redo";
+		public const string EditSelectAll = "edit-select-all";
+		public const string EditUndo = "edit-undo";
+
+		public const string HelpAbout = "help-about";
+		public const string HelpBrowser = "help-browser";
+
+		public const string ViewFullscreen = "view-fullscreen";
+
+		public const string WindowClose = "window-close";
+
+		public const string ZoomFitBest = "zoom-fit-best";
+		public const string ZoomIn = "zoom-in";
+		public const string ZoomOut = "zoom-out";
+		public const string ZoomOriginal = "zoom-original";
+	}
+
 	public static class Icons
 	{
 		public const string ImageCrop = "image-crop";

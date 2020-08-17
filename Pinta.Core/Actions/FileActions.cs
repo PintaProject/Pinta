@@ -47,14 +47,14 @@ namespace Pinta.Core
 		
 		public FileActions ()
 		{
-			New = new Command("new", Translations.GetString("New..."), null, "document-new");
-			NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, "view-fullscreen");
-			Open = new Command ("open", Translations.GetString ("Open..."), null, "document-open");
+			New = new Command("new", Translations.GetString("New..."), null, Resources.StandardIcons.DocumentNew);
+			NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Resources.StandardIcons.ViewFullscreen);
+			Open = new Command ("open", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
 
-			Close = new Command ("close", Translations.GetString ("Close"), null, "window-close");
-			Save = new Command ("save", Translations.GetString ("Save"), null, "document-save");
-			SaveAs = new Command ("saveAs", Translations.GetString ("Save As..."), null, "document-save-as");
-			Print = new Command ("print", Translations.GetString ("Print"), null, "document-print");
+			Close = new Command ("close", Translations.GetString ("Close"), null, Resources.StandardIcons.WindowClose);
+			Save = new Command ("save", Translations.GetString ("Save"), null, Resources.StandardIcons.DocumentSave);
+			SaveAs = new Command ("saveAs", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSaveAs);
+			Print = new Command ("print", Translations.GetString ("Print"), null, Resources.StandardIcons.DocumentPrint);
 
 			New.ShortLabel = Translations.GetString ("New");
 			Open.ShortLabel = Translations.GetString ("Open");

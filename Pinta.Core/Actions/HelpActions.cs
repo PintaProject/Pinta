@@ -47,7 +47,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
 			fact.AddDefault ();
 
-			Contents = new Command ("contents", Translations.GetString ("Contents"), null, "help-browser");
+			Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
 			Website = new Command ("website", Translations.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
 			Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
 			Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");

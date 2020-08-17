@@ -162,7 +162,7 @@ namespace Pinta.Core
 				}
 			}
 
-			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Translations.GetString ("New Image")));
+			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
 			doc.IsDirty = false;
 
 			// This ensures these are called after the window is done being created and sized.
@@ -191,7 +191,7 @@ namespace Pinta.Core
 				importer.Import (file, parent);
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
-				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Translations.GetString ("Open Image")));
+				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
 				PintaCore.Workspace.ActiveDocument.IsDirty = false;
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
 

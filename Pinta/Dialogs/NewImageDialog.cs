@@ -76,7 +76,7 @@ namespace Pinta
             Resizable = false;
             DefaultResponse = ResponseType.Ok;
 
-            Icon = PintaCore.Resources.GetIcon (Stock.New, 16);
+            IconName = Resources.StandardIcons.DocumentNew;
             AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
             
             has_clipboard = isClipboardSize;

@@ -40,7 +40,7 @@ namespace Pinta.Core
 		public PasteHistoryItem (Gdk.Pixbuf pasteImage, DocumentSelection oldSelection)
 		{
 			Text = Translations.GetString ("Paste");
-			Icon = Stock.Paste;
+			Icon = Resources.StandardIcons.EditPaste;
 
 			paste_image = pasteImage;
 			old_selection = oldSelection;

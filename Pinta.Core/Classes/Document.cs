@@ -772,11 +772,11 @@ namespace Pinta.Core
 			CompoundHistoryItem paste_action;
 			if (toNewLayer)
 			{
-				paste_action = new CompoundHistoryItem (Stock.Paste, Translations.GetString ("Paste Into New Layer"));
+				paste_action = new CompoundHistoryItem (Resources.StandardIcons.EditPaste, Translations.GetString ("Paste Into New Layer"));
 			}
 			else
 			{
-				paste_action = new CompoundHistoryItem (Stock.Paste, Translations.GetString ("Paste"));
+				paste_action = new CompoundHistoryItem (Resources.StandardIcons.EditPaste, Translations.GetString ("Paste"));
 			}
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));

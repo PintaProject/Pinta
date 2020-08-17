@@ -50,7 +50,7 @@ namespace Pinta.Gui.Widgets
 		private const int FileNameColumnIndex = 1;
 		private const int FileCloseColumnIndex = 2;
 
-		private Gdk.Pixbuf close_icon = PintaCore.Resources.GetIcon (Stock.Close);
+		private Gdk.Pixbuf close_icon = Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.WindowClose, 16);
 
 		public OpenImagesListWidget ()
 		{

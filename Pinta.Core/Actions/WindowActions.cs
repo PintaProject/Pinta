@@ -42,8 +42,8 @@ namespace Pinta.Core
 
 		public WindowActions ()
 		{
-			SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, "document-save");
-			CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, "window-close");
+			SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
+			CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
 
 			active_doc_action = new GLib.SimpleAction(doc_action_id, GLib.VariantType.Int32, new GLib.Variant(-1));
 

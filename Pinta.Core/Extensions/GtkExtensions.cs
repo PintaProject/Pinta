@@ -296,5 +296,11 @@ namespace Pinta.Core
             // Set the value of the first column at that row
             combo.Model.SetValue (iter, 0, value);
         }
+
+		public static Gdk.Pixbuf LoadIcon(this Gtk.IconTheme theme, string icon_name, int size)
+        {
+			// Simple wrapper to avoid the verbose IconLookupFlags parameter.
+			return theme.LoadIcon(icon_name, size, Gtk.IconLookupFlags.ForceSize);
+		}
 	}
 }
