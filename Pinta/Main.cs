@@ -83,6 +83,12 @@ namespace Pinta
 			GLib.ExceptionManager.UnhandledException += new GLib.UnhandledExceptionHandler (ExceptionManager_UnhandledException);
 
 			Application.Init ();
+
+			// Add the "icons" subdirectory to the icon search path.
+			// This is primarily used for Windows / macOS, along with development builds.
+			// TODO-GTK3 - On Linux, these should be installed under /usr/share/...
+			Gtk.IconTheme.Default.AppendSearchPath(Pinta.Core.SystemManager.GetDataRootDirectory() + "/icons");
+
 			var app = new MainWindow();
 
 			if (threads != -1)

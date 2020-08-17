@@ -14,6 +14,11 @@
     <PackageReference Include="GtkSharp" Version="3.22.25.125" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icons/hicolor/16x16/actions/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Tools.CloneStamp.png">
       <LogicalName>Tools.CloneStamp.png</LogicalName>
     </EmbeddedResource>
@@ -227,33 +232,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.View.ZoomToWindow.png">
       <LogicalName>Menu.View.ZoomToWindow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.CanvasSize.png">
-      <LogicalName>Menu.Image.CanvasSize.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.Crop.png">
-      <LogicalName>Menu.Image.Crop.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.Flatten.png">
-      <LogicalName>Menu.Image.Flatten.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.FlipHorizontal.png">
-      <LogicalName>Menu.Image.FlipHorizontal.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.FlipVertical.png">
-      <LogicalName>Menu.Image.FlipVertical.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.Resize.png">
-      <LogicalName>Menu.Image.Resize.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.Rotate180CW.png">
-      <LogicalName>Menu.Image.Rotate180CW.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.Rotate90CCW.png">
-      <LogicalName>Menu.Image.Rotate90CCW.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Image.Rotate90CW.png">
-      <LogicalName>Menu.Image.Rotate90CW.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Layers.LayerProperties.png">
       <LogicalName>Menu.Layers.LayerProperties.png</LogicalName>

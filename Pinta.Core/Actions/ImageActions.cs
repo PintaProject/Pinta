@@ -44,28 +44,16 @@ namespace Pinta.Core
 
 		public ImageActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Image.CanvasSize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png")));
-			fact.Add ("Menu.Image.Crop.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Crop.png")));
-			fact.Add ("Menu.Image.Flatten.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Flatten.png")));
-			fact.Add ("Menu.Image.FlipHorizontal.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipHorizontal.png")));
-			fact.Add ("Menu.Image.FlipVertical.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipVertical.png")));
-			fact.Add ("Menu.Image.Resize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Resize.png")));
-			fact.Add ("Menu.Image.Rotate180CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate180CW.png")));
-			fact.Add ("Menu.Image.Rotate90CCW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CCW.png")));
-			fact.Add ("Menu.Image.Rotate90CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CW.png")));
-			fact.AddDefault ();
-			
-			CropToSelection = new Command ("croptoselection", Translations.GetString ("Crop to Selection"), null, "Menu.Image.Crop.png");
-			AutoCrop = new Command ("autocrop", Translations.GetString ("Auto Crop"), null, "Menu.Image.Crop.png");
-			Resize = new Command ("resize", Translations.GetString ("Resize Image..."), null, "Menu.Image.Resize.png");
-			CanvasSize = new Command ("canvassize", Translations.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
-			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
-			FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
-			RotateCW = new Command ("rotatecw", Translations.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
-			RotateCCW = new Command ("rotateccw", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
-			Rotate180 = new Command ("rotate180", Translations.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
-			Flatten = new Command ("flatten", Translations.GetString ("Flatten"), null, "Menu.Image.Flatten.png");
+			CropToSelection = new Command ("croptoselection", Translations.GetString ("Crop to Selection"), null, Resources.Icons.ImageCrop);
+			AutoCrop = new Command ("autocrop", Translations.GetString ("Auto Crop"), null, Resources.Icons.ImageCrop);
+			Resize = new Command ("resize", Translations.GetString ("Resize Image..."), null, Resources.Icons.ImageResize);
+			CanvasSize = new Command ("canvassize", Translations.GetString ("Resize Canvas..."), null, Resources.Icons.ImageResizeCanvas);
+			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, Resources.Icons.ImageFlipHorizontal);
+			FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.ImageFlipVertical);
+			RotateCW = new Command ("rotatecw", Translations.GetString ("Rotate 90° Clockwise"), null, Resources.Icons.ImageRotate90CW);
+			RotateCCW = new Command ("rotateccw", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, Resources.Icons.ImageRotate90CCW);
+			Rotate180 = new Command ("rotate180", Translations.GetString ("Rotate 180°"), null, Resources.Icons.ImageRotate180);
+			Flatten = new Command ("flatten", Translations.GetString ("Flatten"), null, Resources.Icons.ImageFlatten);
 		}
 
 		#region Initialization
@@ -165,7 +153,7 @@ namespace Pinta.Core
 
 			var oldBottomSurface = doc.UserLayers[0].Surface.Clone ();
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Image.Flatten.png", Translations.GetString ("Flatten"));
+			CompoundHistoryItem hist = new CompoundHistoryItem (Resources.Icons.ImageFlatten, Translations.GetString ("Flatten"));
 
 			for (int i = doc.UserLayers.Count - 1; i >= 1; i--)
 				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.UserLayers[i], i));
@@ -309,7 +297,7 @@ namespace Pinta.Core
 			{
 				ResizeHistoryItem hist = new ResizeHistoryItem(doc.ImageSize);
 
-				hist.Icon = "Menu.Image.Crop.png";
+				hist.Icon = Resources.Icons.ImageCrop;
 				hist.Text = Translations.GetString("Crop to Selection");
 				hist.StartSnapshotOfImage();
 				hist.RestoreSelection = doc.Selection.Clone();

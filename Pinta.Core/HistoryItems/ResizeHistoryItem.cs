@@ -38,7 +38,7 @@ namespace Pinta.Core
 		{
 			old_size = oldSize;
 
-			Icon = "Menu.Image.Resize.png";
+			Icon = Resources.Icons.ImageResize;
 			Text = Translations.GetString ("Resize Image");
 		}
 

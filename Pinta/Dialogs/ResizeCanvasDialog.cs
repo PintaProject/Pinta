@@ -58,8 +58,6 @@ namespace Pinta
 											 Gtk.Stock.Ok, Gtk.ResponseType.Ok)
 		{
 			Build ();
-			
-			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
 
 			aspectCheckbox.Active = true;
 			
@@ -302,7 +300,7 @@ namespace Pinta
 
 		private void Build()
         {
-			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
+			IconName = Resources.Icons.ImageResizeCanvas;
 
 			WindowPosition = WindowPosition.CenterOnParent;
 

@@ -47,23 +47,23 @@ namespace Pinta.Core
 				//        break;
 				case InvertType.Rotate180:
 					Text = Translations.GetString ("Rotate 180°");
-					Icon = "Menu.Image.Rotate180CW.png";
+					Icon = Resources.Icons.ImageRotate180;
 					break;
 				case InvertType.FlipHorizontal:
 					Text = Translations.GetString ("Flip Image Horizontal");
-					Icon = "Menu.Image.FlipHorizontal.png";
+					Icon = Resources.Icons.ImageFlipHorizontal;
 					break;
 				case InvertType.FlipVertical:
 					Text = Translations.GetString ("Flip Image Vertical");
-					Icon = "Menu.Image.FlipVertical.png";
+					Icon = Resources.Icons.ImageFlipVertical;
 					break;
 				case InvertType.Rotate90CW:
 					Text = Translations.GetString ("Rotate 90° Clockwise");
-					Icon = "Menu.Image.Rotate90CW.png";
+					Icon = Resources.Icons.ImageRotate90CW;
 					break;
 				case InvertType.Rotate90CCW:
 					Text = Translations.GetString ("Rotate 90° Counter-Clockwise");
-					Icon = "Menu.Image.Rotate90CCW.png";
+					Icon = Resources.Icons.ImageRotate90CCW;
 					break;
 			}
 		}
@@ -76,11 +76,11 @@ namespace Pinta.Core
 			switch (type) {
 				case InvertType.FlipLayerHorizontal:
 					Text = Translations.GetString ("Flip Layer Horizontal");
-					Icon = "Menu.Image.FlipHorizontal.png";
+					Icon = Resources.Icons.ImageFlipHorizontal;
 					break;
 				case InvertType.FlipLayerVertical:
 					Text = Translations.GetString ("Flip Layer Vertical");
-					Icon = "Menu.Image.FlipVertical.png";
+					Icon = Resources.Icons.ImageFlipVertical;
 					break;
 			}
 		}

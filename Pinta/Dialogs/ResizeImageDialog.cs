@@ -139,7 +139,7 @@ namespace Pinta
 
 		private void Build()
 		{
-			Icon = PintaCore.Resources.GetIcon ("Menu.Image.Resize.png");
+			IconName = Resources.Icons.ImageResize;
 			WindowPosition = WindowPosition.CenterOnParent;
 
 			DefaultWidth = 300;

@@ -649,7 +649,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			ResizeHistoryItem hist = new ResizeHistoryItem (ImageSize);
-			hist.Icon = "Menu.Image.CanvasSize.png";
+			hist.Icon = Resources.Icons.ImageResizeCanvas;
 			hist.Text = Translations.GetString ("Resize Canvas");
 			hist.StartSnapshotOfImage ();
 

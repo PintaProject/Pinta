@@ -82,7 +82,7 @@ namespace Pinta.Core
 			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, "document-open");
 			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, "document-save");
 			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, "document-revert");
-			ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
+			ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, Resources.Icons.ImageResize);
 
 			Undo.IsImportant = true;
 			Undo.Sensitive = false;
