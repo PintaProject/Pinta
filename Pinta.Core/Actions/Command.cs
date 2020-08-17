@@ -48,13 +48,13 @@ namespace Pinta.Core
         public string Label { get; private set; }
         public string ShortLabel { get; set; }
         public string Tooltip { get; private set; }
-        public string StockId { get; private set; }
+        public string IconName { get; private set; }
         public string FullName { get { return string.Format("app.{0}", Name); } }
         public bool IsImportant { get; set; } = false;
 
         public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
 
-        public Command(string name, string label, string tooltip, string stock_id, GLib.Variant state = null)
+        public Command(string name, string label, string tooltip, string icon_name, GLib.Variant state = null)
         {
             Action = new SimpleAction(name, null, state);
             Action.Activated += (o, args) =>
@@ -64,7 +64,7 @@ namespace Pinta.Core
 
             Label = label;
             Tooltip = tooltip;
-            StockId = stock_id;
+            IconName = icon_name;
         }
 
         public GLib.MenuItem CreateMenuItem()

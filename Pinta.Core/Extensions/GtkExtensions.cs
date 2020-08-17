@@ -102,12 +102,12 @@ namespace Pinta.Core
 
 		public static Gtk.ToolItem CreateToolBarItem (this Command action)
         {
-			var item = new ToolButton(action.StockId)
+			var item = new ToolButton(null, action.ShortLabel ?? action.Label)
 			{
 				ActionName = action.FullName,
-				Label = action.ShortLabel ?? action.Label,
 				TooltipText = action.Tooltip ?? action.Label,
 				IsImportant = action.IsImportant,
+				IconName = action.IconName
 			};
             return item;
         }

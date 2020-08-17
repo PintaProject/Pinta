@@ -41,8 +41,8 @@ namespace Pinta.Core
 		
 		public AppActions ()
 		{
-			About = new Command("about", Translations.GetString("About"), null, Stock.About);
-			Exit = new Command("quit", Translations.GetString("Quit"), null, Stock.Quit);
+			About = new Command("about", Translations.GetString("About"), null, "help-about");
+			Exit = new Command("quit", Translations.GetString("Quit"), null, "application-exit");
 		}
 
 #region Initialization

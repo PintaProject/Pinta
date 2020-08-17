@@ -243,17 +243,17 @@ namespace Pinta.Docking
 
 		Gtk.Button button;
 
-		public DockToolButton (string stockId) : this (stockId, null)
+		public DockToolButton (string icon_name) : this (icon_name, null)
 		{
 		}
 		
-		public DockToolButton (string stockId, string label)
+		public DockToolButton (string icon_name, string label)
 		{
 			button = new Button ();
 			Label = label;
 
 
-			Image = new Gtk.Image(stockId, IconSize.Menu);
+			Image = new Gtk.Image(icon_name, IconSize.Menu);
 			Image.Show ();
 		}
 

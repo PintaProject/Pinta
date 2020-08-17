@@ -32,28 +32,12 @@ namespace Pinta
 {
 	public static class GtkExtensions
 	{
-		public static DockToolButton CreateDockToolBarItem (this Gtk.Action action)
-		{
-			DockToolButton item = new DockToolButton (action.StockId);
-			// TODO-GTK3
-#if false
-			action.ConnectProxy (item);
-#endif
-			
-			item.Show ();
-			item.TooltipText = action.Label;
-			item.Label = string.Empty;
-			item.Image.Show ();
-			
-			return item;
-		}
-
 		public static DockToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
 		{
-			DockToolButton item = new DockToolButton(action.StockId)
+			DockToolButton item = new DockToolButton(action.IconName, null)
 			{
 				ActionName = action.FullName,
-				TooltipText = action.Tooltip ?? action.Label
+				TooltipText = action.Tooltip ?? action.Label,
 			};
 
 			item.Show();

@@ -73,11 +73,11 @@ namespace Pinta.Core
 			fact.Add ("Menu.View.ZoomToWindow.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomToWindow.png")));
 			fact.AddDefault ();
 			
-			ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Stock.ZoomIn);
-			ZoomOut = new Command ("ZoomOut", Translations.GetString ("Zoom Out"), null, Stock.ZoomOut);
-			ZoomToWindow = new Command ("ZoomToWindow", Translations.GetString ("Best Fit"), null, Stock.ZoomFit);
+			ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, "zoom-in");
+			ZoomOut = new Command ("ZoomOut", Translations.GetString ("Zoom Out"), null, "zoom-out");
+			ZoomToWindow = new Command ("ZoomToWindow", Translations.GetString ("Best Fit"), null, "zoom-fit-best");
 			ZoomToSelection = new Command ("ZoomToSelection", Translations.GetString ("Zoom to Selection"), null, "Menu.View.ZoomToSelection.png");
-			ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Stock.Zoom100);
+			ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, "zoom-original");
             ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
             ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
             PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
@@ -85,7 +85,7 @@ namespace Pinta.Core
 			Pixels = new Gtk.RadioAction ("Pixels", Translations.GetString ("Pixels"), null, null, 0);
 			Inches = new Gtk.RadioAction ("Inches", Translations.GetString ("Inches"), null, null, 1);
 			Centimeters = new Gtk.RadioAction ("Centimeters", Translations.GetString ("Centimeters"), null, null, 2);
-			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Stock.Fullscreen);
+			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, "view-fullscreen");
 
 			ZoomCollection = new string[] {
 				ToPercent (36),

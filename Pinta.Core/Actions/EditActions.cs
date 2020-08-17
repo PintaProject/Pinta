@@ -65,23 +65,23 @@ namespace Pinta.Core
 			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
 			fact.AddDefault ();
 			
-			Undo = new Command ("undo", Translations.GetString ("Undo"), null, Stock.Undo);
-			Redo = new Command ("redo", Translations.GetString ("Redo"), null, Stock.Redo);
-			Cut = new Command ("cut", Translations.GetString ("Cut"), null, Stock.Cut);
-			Copy = new Command ("copy", Translations.GetString ("Copy"), null, Stock.Copy);
-			CopyMerged = new Command ("copymerged", Translations.GetString ("Copy Merged"), null, Stock.Copy);
-			Paste = new Command ("paste", Translations.GetString ("Paste"), null, Stock.Paste);
-			PasteIntoNewLayer = new Command ("pasteintonewlayer", Translations.GetString ("Paste Into New Layer"), null, Stock.Paste);
-			PasteIntoNewImage = new Command ("pasteintonewimage", Translations.GetString ("Paste Into New Image"), null, Stock.Paste);
+			Undo = new Command ("undo", Translations.GetString ("Undo"), null, "edit-undo");
+			Redo = new Command ("redo", Translations.GetString ("Redo"), null, "edit-redo");
+			Cut = new Command ("cut", Translations.GetString ("Cut"), null, "edit-cut");
+			Copy = new Command ("copy", Translations.GetString ("Copy"), null, "edit-copy");
+			CopyMerged = new Command ("copymerged", Translations.GetString ("Copy Merged"), null, "edit-copy");
+			Paste = new Command ("paste", Translations.GetString ("Paste"), null, "edit-paste");
+			PasteIntoNewLayer = new Command ("pasteintonewlayer", Translations.GetString ("Paste Into New Layer"), null, "edit-paste");
+			PasteIntoNewImage = new Command ("pasteintonewimage", Translations.GetString ("Paste Into New Image"), null, "edit-paste");
 			EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
 			FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
 			InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
-			SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Stock.SelectAll);
+			SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, "edit-select-all");
 			Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
 			
-			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, Stock.Open);
-			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, Stock.Save);
-			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, Stock.RevertToSaved);
+			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, "document-open");
+			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, "document-save");
+			ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, "document-revert");
 			ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, "Menu.Image.Resize.png");
 
 			Undo.IsImportant = true;
