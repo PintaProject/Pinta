@@ -183,7 +183,7 @@ namespace Pinta.Gui.Widgets
             button1.CanFocus = true;
             button1.UseUnderline = true;
 
-            var button_image = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
+			var button_image = new Image(Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.GoPrevious, 16));
             button1.Add (button_image);
 
             var alignment1 = new Alignment (0.5F, 0.5F, 1F, 0F);
@@ -211,7 +211,7 @@ namespace Pinta.Gui.Widgets
             button2.CanFocus = true;
             button2.UseUnderline = true;
 
-            var button_image2 = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
+            var button_image2 = new Image (Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.GoPrevious, 16));
             button2.Add (button_image2);
 
             var alignment2 = new Alignment (0.5F, 0.5F, 1F, 0F);

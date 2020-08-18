@@ -125,7 +125,7 @@ namespace Pinta.Gui.Widgets
             button.CanFocus = true;
             button.UseUnderline = true;
 
-            var button_image = new Image (PintaCore.Resources.GetIcon (Stock.GoBack, 16));
+            var button_image = new Image (Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.GoPrevious, 16));
             button.Add (button_image);
 
             var alignment2 = new Alignment (0.5F, 0F, 1F, 0F);

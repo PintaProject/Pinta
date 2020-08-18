@@ -52,6 +52,8 @@ namespace Pinta.Resources
 		public const string EditSelectAll = "edit-select-all";
 		public const string EditUndo = "edit-undo";
 
+		public const string GoPrevious = "go-previous";
+
 		public const string HelpAbout = "help-about";
 		public const string HelpBrowser = "help-browser";
 

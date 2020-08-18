@@ -252,8 +252,7 @@ namespace Pinta.Docking
 			button = new Button ();
 			Label = label;
 
-
-			Image = new Gtk.Image(icon_name, IconSize.Menu);
+			Image = Gtk.Image.NewFromIconName(icon_name, IconSize.Menu);
 			Image.Show ();
 		}
 
