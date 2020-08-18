@@ -36,6 +36,8 @@ namespace Pinta.Resources
     {
 		public const string ApplicationExit = "application-exit";
 
+		public const string DialogError = "dialog-error";
+
 		public const string DocumentNew = "document-new";
 		public const string DocumentOpen = "document-open";
 		public const string DocumentPrint = "document-print";
