@@ -194,12 +194,6 @@
     <EmbeddedResource Include="Resources\Menu.Adjustments.Sepia.png">
       <LogicalName>Menu.Adjustments.Sepia.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Help.Bug.png">
-      <LogicalName>Menu.Help.Bug.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Help.Website.png">
-      <LogicalName>Menu.Help.Website.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResizeCanvas.Image.png">
       <LogicalName>ResizeCanvas.Image.png</LogicalName>
     </EmbeddedResource>
@@ -382,9 +376,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\About.ImageTop.png">
       <LogicalName>About.ImageTop.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Help.Translate.png">
-      <LogicalName>Menu.Help.Translate.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Toolbar.ColorMode.png">
       <LogicalName>Toolbar.ColorMode.png</LogicalName>

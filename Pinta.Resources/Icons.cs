@@ -73,6 +73,10 @@ namespace Pinta.Resources
 	{
 		public const string CursorPosition = "cursor-position";
 
+		public const string HelpBug = "help-bug";
+		public const string HelpTranslate = "help-translate";
+		public const string HelpWebsite = "help-website";
+
 		public const string ImageCrop = "image-crop";
 		public const string ImageResize = "image-resize";
 		public const string ImageResizeCanvas = "image-resize-canvas";

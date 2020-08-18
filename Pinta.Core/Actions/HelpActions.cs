@@ -41,16 +41,10 @@ namespace Pinta.Core
 
 		public HelpActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Help.Bug.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Bug.png")));
-			fact.Add ("Menu.Help.Website.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Website.png")));
-			fact.Add ("Menu.Help.Translate.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Help.Translate.png")));
-			fact.AddDefault ();
-
 			Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
-			Website = new Command ("website", Translations.GetString ("Pinta Website"), null, "Menu.Help.Website.png");
-			Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, "Menu.Help.Bug.png");
-			Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, "Menu.Help.Translate.png");
+			Website = new Command ("website", Translations.GetString ("Pinta Website"), null, Resources.Icons.HelpWebsite);
+			Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
+			Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
 		}
 
 		#region Initialization
