@@ -72,7 +72,6 @@ namespace Pinta.Core
 			fact.Add ("Toolbar.AntiAliasingDisabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png")));
 			fact.Add ("Toolbar.BlendingEnabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png")));
 			fact.Add ("Toolbar.BlendingOverwriteIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png")));
-			fact.Add ("Tools.FreeformShape.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.FreeformShape.png")));
 			fact.AddDefault ();
 		}
 
@@ -320,7 +319,7 @@ namespace Pinta.Core
 
 		protected virtual ToggleToolButton CreateToolButton ()
 		{
-			Gtk.Image i2 = new Gtk.Image (PintaCore.Resources.GetIcon (Icon));
+			Gtk.Image i2 = Gtk.Image.NewFromIconName(Icon, IconSize.Button);
 			i2.Show ();
 			
 			ToggleToolButton tool_item = new ToggleToolButton ();

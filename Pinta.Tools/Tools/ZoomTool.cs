@@ -47,7 +47,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Zoom"); }
 		}
 		public override string Icon {
-			get { return "Tools.Zoom.png"; }
+			get { return Resources.Icons.ToolZoom; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Left click to zoom in. Right click to zoom out. Click and drag to zoom in selection."); }
@@ -64,8 +64,8 @@ namespace Pinta.Tools
 
             cursorZoomIn = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.View.ZoomIn.png"), 0, 0);
             cursorZoomOut = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.View.ZoomOut.png"), 0, 0);
-            cursorZoom = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Zoom.png"), 0, 0);
-            cursorZoomPan = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Pan.png"), 0, 0);
+            cursorZoom = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolZoom, 16), 0, 0);
+            cursorZoomPan = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolPan, 16), 0, 0);
 		}
 
 		protected void UpdateRectangle (PointD point)

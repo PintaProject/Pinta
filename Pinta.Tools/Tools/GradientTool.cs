@@ -55,7 +55,7 @@ namespace Pinta.Tools
 		}
 
 		public override string Icon {
-			get { return "Tools.Gradient.png"; }
+			get { return Resources.Icons.ToolGradient; }
 		}
 
 		public override string StatusBarText {

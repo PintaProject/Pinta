@@ -99,7 +99,7 @@ namespace Pinta.Core
 
 
 			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (new ToolBarImage ("StatusBar.CursorXY.png"));
+			toolbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
 
 			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
 
@@ -112,7 +112,7 @@ namespace Pinta.Core
 
 
 			toolbar.AppendItem(new SeparatorToolItem());
-			toolbar.AppendItem(new ToolBarImage("Tools.RectangleSelect.png"));
+			toolbar.AppendItem(new ToolBarImage(Resources.Icons.ToolSelectRectangle));
 
 			ToolBarLabel SelectionSize = new ToolBarLabel("  0, 0");
 

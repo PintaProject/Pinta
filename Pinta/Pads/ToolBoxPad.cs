@@ -40,11 +40,11 @@ namespace Pinta
 
 			toolbox_item.Label = Translations.GetString ("Tools");
 			toolbox_item.Content = toolbox;
-			toolbox_item.Icon = PintaCore.Resources.GetIcon ("Tools.Pencil.png");
+			toolbox_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolPencil, 16);
 			toolbox_item.Behavior |= DockItemBehavior.CantClose;
 			toolbox_item.DefaultWidth = 35;
 
-			var show_toolbox = new ToggleCommand ("Tools", Translations.GetString ("Tools"), null, "Tools.Pencil.png");
+			var show_toolbox = new ToggleCommand("Tools", Translations.GetString("Tools"), null, Resources.Icons.ToolPencil);
 			app.AddAction(show_toolbox);
 			padMenu.AppendItem(show_toolbox.CreateMenuItem());
 

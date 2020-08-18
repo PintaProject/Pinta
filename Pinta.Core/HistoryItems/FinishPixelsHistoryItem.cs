@@ -40,7 +40,7 @@ namespace Pinta.Core
 		public FinishPixelsHistoryItem ()
 		{
 			Text = Translations.GetString ("Finish Pixels");
-			Icon = "Tools.Move.png";
+			Icon = Resources.Icons.ToolMove; ;
 		}
 
 		public override void Undo ()

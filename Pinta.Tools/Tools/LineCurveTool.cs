@@ -39,7 +39,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString("Line/Curve"); }
 		}
 		public override string Icon {
-			get { return "Tools.Line.png"; }
+			get { return Resources.Icons.ToolLine; }
 		}
 		public override string StatusBarText {
 			get	{ return Translations.GetString ("Left click to draw a shape with the primary color." +

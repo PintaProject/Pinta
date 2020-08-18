@@ -31,9 +31,9 @@ namespace Pinta.Core
 {
 	public class ToolBarImage : ToolItem
 	{
-		public ToolBarImage (string image)
+		public ToolBarImage (string icon_name)
 		{
-			Image i = new Image (PintaCore.Resources.GetIcon (image));
+			var i = Image.NewFromIconName(icon_name, IconSize.Button);
 			i.Show ();
 			
 			Add (i);

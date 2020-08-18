@@ -41,13 +41,13 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Move Selected Pixels"); }
 		}
 		public override string Icon {
-			get { return "Tools.Move.png"; }
+			get { return Resources.Icons.ToolMove; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
-			get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.Move.png"), 0, 0); }
+			get { return new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolMove, 16), 0, 0); }
 		}
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.M; } }
 		public override int Priority { get { return 7; } }

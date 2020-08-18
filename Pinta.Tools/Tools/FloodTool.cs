@@ -74,7 +74,7 @@ namespace Pinta.Tools
 			if (mode_button == null) {
 				mode_button = new ToolBarDropDownButton ();
 
-				mode_button.AddItem (Translations.GetString ("Contiguous"), "Tools.FreeformShape.png", true);
+				mode_button.AddItem (Translations.GetString ("Contiguous"), Resources.Icons.ToolFreeformShape, true);
 				mode_button.AddItem (Translations.GetString ("Global"), "Menu.Help.Website.png", false);
 			}
 

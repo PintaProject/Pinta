@@ -39,7 +39,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Paint Bucket"); }
 		}
 		public override string Icon {
-			get { return "Tools.PaintBucket.png"; }
+			get { return Resources.Icons.ToolPaintBucket; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color."); }

@@ -422,7 +422,6 @@ namespace Pinta
 		private void CreateDockAndPads (HBox container)
 		{
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Tools.Pencil.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Pencil.png")));
 			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
 			fact.AddDefault ();
 

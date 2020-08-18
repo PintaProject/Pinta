@@ -200,7 +200,7 @@ namespace Pinta.Tools
 
         #region Properties
         public override string Name { get { return Translations.GetString ("Eraser"); } }
-        public override string Icon { get { return "Tools.Eraser.png"; } }
+        public override string Icon { get { return Resources.Icons.ToolEraser; } }
         public override string StatusBarText { get { return Translations.GetString ("Left click to erase to transparent, right click to erase to secondary color. "); } }
 
         public override Gdk.Cursor DefaultCursor {

@@ -41,7 +41,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Clone Stamp"); }
 		}
 		public override string Icon {
-			get { return "Tools.CloneStamp.png"; }
+			get { return Resources.Icons.ToolCloneStamp; }
 		}
 		public override string StatusBarText { get { return Translations.GetString ("Ctrl-left click to set origin, left click to paint."); } }
 

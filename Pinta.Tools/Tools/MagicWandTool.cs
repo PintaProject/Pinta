@@ -63,7 +63,7 @@ namespace Pinta.Tools
 
 		public override string Icon
 		{
-			get { return "Tools.MagicWand.png"; }
+			get { return Resources.Icons.ToolSelectMagicWand; }
 		}
 
 		public override string StatusBarText

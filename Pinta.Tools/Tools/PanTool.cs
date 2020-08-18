@@ -36,7 +36,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Pan"); }
 		}
 		public override string Icon {
-			get { return "Tools.Pan.png"; }
+			get { return Resources.Icons.ToolPan; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Click and drag to navigate image."); }

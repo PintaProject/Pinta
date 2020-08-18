@@ -36,7 +36,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Rectangle Select"); }
 		}
 		public override string Icon {
-			get { return "Tools.RectangleSelect.png"; }
+			get { return Resources.Icons.ToolSelectRectangle; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square."); }

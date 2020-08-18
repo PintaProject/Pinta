@@ -38,16 +38,6 @@ namespace Pinta.Tools
     //a protected instance of the EditEngine inside the class and then utilize it in a similar fashion to any of the editable tools.
     public abstract class BaseEditEngine
     {
-		static BaseEditEngine ()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Tools.Line.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Line.png")));
-			fact.Add ("Tools.Rectangle.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Rectangle.png")));
-			fact.Add ("Tools.Ellipse.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Ellipse.png")));
-			fact.Add ("Tools.RoundedRectangle.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.RoundedRectangle.png")));
-			fact.AddDefault ();
-		}
-
 		public enum ShapeTypes
 		{
 			OpenLineCurveSeries,
@@ -367,10 +357,10 @@ namespace Pinta.Tools
 			{
 				shape_type_button = new ToolBarDropDownButton();
 
-				shape_type_button.AddItem(Translations.GetString("Open Line/Curve Series"), "Tools.Line.png", 0);
-				shape_type_button.AddItem(Translations.GetString("Closed Line/Curve Series"), "Tools.Rectangle.png", 1);
-				shape_type_button.AddItem(Translations.GetString("Ellipse"), "Tools.Ellipse.png", 2);
-				shape_type_button.AddItem(Translations.GetString("Rounded Line Series"), "Tools.RoundedRectangle.png", 3);
+				shape_type_button.AddItem(Translations.GetString("Open Line/Curve Series"), Resources.Icons.ToolLine, 0);
+				shape_type_button.AddItem(Translations.GetString("Closed Line/Curve Series"), Resources.Icons.ToolRectangle, 1);
+				shape_type_button.AddItem(Translations.GetString("Ellipse"), Resources.Icons.ToolEllipse, 2);
+				shape_type_button.AddItem(Translations.GetString("Rounded Line Series"), Resources.Icons.ToolRectangleRounded, 3);
 
 				shape_type_button.SelectedItemChanged += (o, e) =>
 				{

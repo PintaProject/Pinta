@@ -53,7 +53,7 @@ namespace Pinta.Tools
 
 		#region Properties
 		public override string Name { get { return Translations.GetString ("Freeform Shape"); } }
-		public override string Icon { get { return "Tools.FreeformShape.png"; } }
+		public override string Icon { get { return Resources.Icons.ToolFreeformShape; } }
 		public override string StatusBarText { get { return Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18); } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }

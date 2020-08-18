@@ -55,7 +55,7 @@ namespace Pinta.Tools
 
 		#region Properties
 		public override string Name { get { return Translations.GetString ("Recolor"); } }
-		public override string Icon { get { return "Tools.Recolor.png"; } }
+		public override string Icon { get { return Resources.Icons.ToolRecolor; } }
 		public override string StatusBarText {
 			get {
 				return Translations.GetString ("Left click to replace the secondary color with the primary color. " +

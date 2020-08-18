@@ -36,7 +36,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Ellipse Select"); }
 		}
 		public override string Icon {
-			get { return "Tools.EllipseSelect.png"; }
+			get { return Resources.Icons.ToolSelectEllipse; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle."); }

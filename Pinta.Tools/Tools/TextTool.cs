@@ -92,7 +92,7 @@ namespace Pinta.Tools
 
 		public override string Name { get { return Translations.GetString ("Text"); } }
 		private string FinalizeName { get { return Translations.GetString("Text - Finalize"); } }
-		public override string Icon { get { return "Tools.Text.png"; } }
+		public override string Icon { get { return Resources.Icons.ToolText; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
 

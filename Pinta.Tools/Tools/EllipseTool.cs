@@ -36,7 +36,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Ellipse"); }
 		}
 		public override string Icon {
-			get { return "Tools.Ellipse.png"; }
+			get { return Resources.Icons.ToolEllipse; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString("Left click to draw a shape with the primary color." +

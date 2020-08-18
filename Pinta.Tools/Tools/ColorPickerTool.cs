@@ -51,9 +51,6 @@ namespace Pinta.Tools
 			fact.Add ("Toolbar.Sampling.7x7.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.7x7.png")));
 			fact.Add ("Toolbar.Sampling.9x9.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.9x9.png")));
 			fact.Add ("ResizeCanvas.Image.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png")));
-			fact.Add ("Tools.ColorPicker.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.ColorPicker.png")));
-			fact.Add ("Tools.ColorPicker.PreviousTool.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.ColorPicker.PreviousTool.png")));
-			fact.Add ("Tools.Pencil.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Tools.Pencil.png")));
 			fact.AddDefault ();
 		}
 
@@ -62,7 +59,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Color Picker"); }
 		}
 		public override string Icon {
-			get { return "Tools.ColorPicker.png"; }
+			get { return Resources.Icons.ToolColorPicker; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString ("Left click to set primary color. Right click to set secondary color."); }
@@ -150,9 +147,9 @@ namespace Pinta.Tools
 			if (tool_select == null) {
 				tool_select = new ToolBarDropDownButton (true);
 
-				tool_select.AddItem (Translations.GetString ("Do not switch tool"), "Tools.ColorPicker.png", 0);
-				tool_select.AddItem (Translations.GetString ("Switch to previous tool"), "Tools.ColorPicker.PreviousTool.png", 1);
-				tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), "Tools.Pencil.png", 2);
+				tool_select.AddItem (Translations.GetString ("Do not switch tool"), Resources.Icons.ToolColorPicker, 0);
+				tool_select.AddItem (Translations.GetString ("Switch to previous tool"), Resources.Icons.ToolColorPickerPreviousTool, 1);
+				tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), Resources.Icons.ToolPencil, 2);
 			}
 
 			tb.AppendItem (tool_select);

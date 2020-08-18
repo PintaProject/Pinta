@@ -38,7 +38,7 @@ namespace Pinta.Tools
 	{
 		#region Properties
 		public override string Name { get { return Translations.GetString ("Paintbrush"); } }
-		public override string Icon { get { return "Tools.Paintbrush.png"; } }
+		public override string Icon { get { return Resources.Icons.ToolPaintBrush; } }
 		public override string StatusBarText { get { return Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
 
 		public override Gdk.Cursor DefaultCursor {

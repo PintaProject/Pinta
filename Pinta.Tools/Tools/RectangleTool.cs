@@ -36,7 +36,7 @@ namespace Pinta.Tools
 			get { return Translations.GetString ("Rectangle"); }
 		}
 		public override string Icon {
-			get { return "Tools.Rectangle.png"; }
+			get { return Resources.Icons.ToolRectangle; }
 		}
 		public override string StatusBarText {
 			get { return Translations.GetString("Left click to draw a shape with the primary color." +
