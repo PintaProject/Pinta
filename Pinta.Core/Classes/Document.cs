@@ -835,7 +835,7 @@ namespace Pinta.Core
 			{
 				UserLayer l = AddNewLayer (string.Empty);
 				SetCurrentUserLayer (l);
-				paste_action.Push (new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Translations.GetString ("Add New Layer"), UserLayers.IndexOf (l)));
+				paste_action.Push (new AddLayerHistoryItem (Resources.Icons.LayerNew, Translations.GetString ("Add New Layer"), UserLayers.IndexOf (l)));
 			}
 
 			// Copy the paste to the temp layer, which should be at least the size of this document.

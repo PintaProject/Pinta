@@ -47,31 +47,17 @@ namespace Pinta.Core
 		
 		public LayerActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Layers.AddNewLayer.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.AddNewLayer.png")));
-			fact.Add ("Menu.Layers.DeleteLayer.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.DeleteLayer.png")));
-			fact.Add ("Menu.Layers.DuplicateLayer.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png")));
-			fact.Add ("Menu.Layers.MergeLayerDown.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.MergeLayerDown.png")));
-			fact.Add ("Menu.Layers.MoveLayerDown.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.MoveLayerDown.png")));
-			fact.Add ("Menu.Layers.MoveLayerUp.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.MoveLayerUp.png")));
-			fact.Add ("Menu.Layers.FlipHorizontal.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.FlipHorizontal.png")));
-			fact.Add ("Menu.Layers.FlipVertical.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.FlipVertical.png")));
-			fact.Add ("Menu.Layers.ImportFromFile.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.ImportFromFile.png")));
-			fact.Add ("Menu.Layers.LayerProperties.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.LayerProperties.png")));
-			fact.Add ("Menu.Layers.RotateZoom.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png")));
-			fact.AddDefault ();
-			
-			AddNewLayer = new Command ("addnewlayer", Translations.GetString ("Add New Layer"), null, "Menu.Layers.AddNewLayer.png");
-			DeleteLayer = new Command ("deletelayer", Translations.GetString ("Delete Layer"), null, "Menu.Layers.DeleteLayer.png");
-			DuplicateLayer = new Command ("duplicatelayer", Translations.GetString ("Duplicate Layer"), null, "Menu.Layers.DuplicateLayer.png");
-			MergeLayerDown = new Command ("mergelayerdown", Translations.GetString ("Merge Layer Down"), null, "Menu.Layers.MergeLayerDown.png");
-			ImportFromFile = new Command ("importfromfile", Translations.GetString ("Import from File..."), null, "Menu.Layers.ImportFromFile.png");
-			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, "Menu.Layers.FlipHorizontal.png");
-            FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, "Menu.Layers.FlipVertical.png");
-            RotateZoom = new Command ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, "Menu.Layers.RotateZoom.png");
-            MoveLayerUp = new Command ("movelayerup", Translations.GetString ("Move Layer Up"), null, "Menu.Layers.MoveLayerUp.png");
-			MoveLayerDown = new Command ("movelayerdown", Translations.GetString ("Move Layer Down"), null, "Menu.Layers.MoveLayerDown.png");
-			Properties = new Command ("properties", Translations.GetString ("Layer Properties..."), null, "Menu.Layers.LayerProperties.png");
+			AddNewLayer = new Command ("addnewlayer", Translations.GetString ("Add New Layer"), null, Resources.Icons.LayerNew);
+			DeleteLayer = new Command ("deletelayer", Translations.GetString ("Delete Layer"), null, Resources.Icons.LayerDelete);
+			DuplicateLayer = new Command ("duplicatelayer", Translations.GetString ("Duplicate Layer"), null, Resources.Icons.LayerDuplicate);
+			MergeLayerDown = new Command ("mergelayerdown", Translations.GetString ("Merge Layer Down"), null, Resources.Icons.LayerMergeDown);
+			ImportFromFile = new Command ("importfromfile", Translations.GetString ("Import from File..."), null, Resources.Icons.LayerImport);
+			FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, Resources.Icons.LayerFlipHorizontal);
+            FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.LayerFlipVertical);
+            RotateZoom = new Command ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, Resources.Icons.LayerRotateZoom);
+            MoveLayerUp = new Command ("movelayerup", Translations.GetString ("Move Layer Up"), null, Resources.Icons.LayerMoveUp);
+			MoveLayerDown = new Command ("movelayerdown", Translations.GetString ("Move Layer Down"), null, Resources.Icons.LayerMoveDown);
+			Properties = new Command ("properties", Translations.GetString ("Layer Properties..."), null, Resources.Icons.LayerProperties);
 		}
 
 		#region Initialization
@@ -204,7 +190,7 @@ namespace Pinta.Core
 
 					doc.SetCurrentUserLayer(layer);
 
-					AddLayerHistoryItem hist = new AddLayerHistoryItem("Menu.Layers.ImportFromFile.png", Translations.GetString("Import From File"), doc.UserLayers.IndexOf(layer));
+					AddLayerHistoryItem hist = new AddLayerHistoryItem(Resources.Icons.LayerImport, Translations.GetString("Import From File"), doc.UserLayers.IndexOf(layer));
 					doc.History.PushNewItem(hist);
 
 					doc.Workspace.Invalidate();
@@ -237,7 +223,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerUp.png", Translations.GetString ("Move Layer Up"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex + 1);
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem (Resources.Icons.LayerMoveUp, Translations.GetString ("Move Layer Up"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex + 1);
 
 			doc.MoveCurrentLayerUp ();
 			doc.History.PushNewItem (hist);
@@ -248,7 +234,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			SwapLayersHistoryItem hist = new SwapLayersHistoryItem ("Menu.Layers.MoveLayerDown.png", Translations.GetString ("Move Layer Down"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex - 1);
+			SwapLayersHistoryItem hist = new SwapLayersHistoryItem (Resources.Icons.LayerMoveDown, Translations.GetString ("Move Layer Down"), doc.CurrentUserLayerIndex, doc.CurrentUserLayerIndex - 1);
 
 			doc.MoveCurrentLayerDown ();
 			doc.History.PushNewItem (hist);
@@ -262,7 +248,7 @@ namespace Pinta.Core
 			int bottomLayerIndex = doc.CurrentUserLayerIndex - 1;
 			var oldBottomSurface = doc.UserLayers[bottomLayerIndex].Surface.Clone ();
 
-			CompoundHistoryItem hist = new CompoundHistoryItem ("Menu.Layers.MergeLayerDown.png", Translations.GetString ("Merge Layer Down"));
+			CompoundHistoryItem hist = new CompoundHistoryItem (Resources.Icons.LayerMergeDown, Translations.GetString ("Merge Layer Down"));
 			DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.CurrentUserLayer, doc.CurrentUserLayerIndex);
 
 			doc.MergeCurrentLayerDown ();
@@ -284,7 +270,7 @@ namespace Pinta.Core
 			// Make new layer the current layer
 			doc.SetCurrentUserLayer (l);
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.DuplicateLayer.png", Translations.GetString ("Duplicate Layer"), doc.UserLayers.IndexOf (l));
+			AddLayerHistoryItem hist = new AddLayerHistoryItem (Resources.Icons.LayerDuplicate, Translations.GetString ("Duplicate Layer"), doc.UserLayers.IndexOf (l));
 			doc.History.PushNewItem (hist);
 		}
 
@@ -293,7 +279,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem ("Menu.Layers.DeleteLayer.png", Translations.GetString ("Delete Layer"), doc.CurrentUserLayer, doc.CurrentUserLayerIndex);
+			DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem (Resources.Icons.LayerDelete, Translations.GetString ("Delete Layer"), doc.CurrentUserLayer, doc.CurrentUserLayerIndex);
 
 			doc.DeleteLayer (doc.CurrentUserLayerIndex, false);
 
@@ -310,7 +296,7 @@ namespace Pinta.Core
 			// Make new layer the current layer
 			doc.SetCurrentUserLayer (l);
 
-			AddLayerHistoryItem hist = new AddLayerHistoryItem ("Menu.Layers.AddNewLayer.png", Translations.GetString ("Add New Layer"), doc.UserLayers.IndexOf (l));
+			AddLayerHistoryItem hist = new AddLayerHistoryItem (Resources.Icons.LayerNew, Translations.GetString ("Add New Layer"), doc.UserLayers.IndexOf (l));
 			doc.History.PushNewItem (hist);
 		}
 		#endregion

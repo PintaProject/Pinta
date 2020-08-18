@@ -97,39 +97,12 @@
 	<EmbeddedResource Include="Resources\ColorPalette.ResetIcon.png">
       <LogicalName>ColorPalette.ResetIcon.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.AddNewLayer.png">
-      <LogicalName>Menu.Layers.AddNewLayer.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.DeleteLayer.png">
-      <LogicalName>Menu.Layers.DeleteLayer.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.DuplicateLayer.png">
-      <LogicalName>Menu.Layers.DuplicateLayer.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.MergeLayerDown.png">
-      <LogicalName>Menu.Layers.MergeLayerDown.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.MoveLayerDown.png">
-      <LogicalName>Menu.Layers.MoveLayerDown.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.MoveLayerUp.png">
-      <LogicalName>Menu.Layers.MoveLayerUp.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Pinta.png">
       <DeployService-UseProjectRelativePath>true</DeployService-UseProjectRelativePath>
       <LogicalName>Pinta.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Edit.Deselect.png">
       <LogicalName>Menu.Edit.Deselect.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.FlipHorizontal.png">
-      <LogicalName>Menu.Layers.FlipHorizontal.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.FlipVertical.png">
-      <LogicalName>Menu.Layers.FlipVertical.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.ImportFromFile.png">
-      <LogicalName>Menu.Layers.ImportFromFile.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Edit.EraseSelection.png">
       <LogicalName>Menu.Edit.EraseSelection.png</LogicalName>
@@ -163,12 +136,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.View.ZoomToWindow.png">
       <LogicalName>Menu.View.ZoomToWindow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.LayerProperties.png">
-      <LogicalName>Menu.Layers.LayerProperties.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Layers.RotateZoom.png">
-      <LogicalName>Menu.Layers.RotateZoom.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
       <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>

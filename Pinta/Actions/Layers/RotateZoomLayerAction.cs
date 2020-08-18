@@ -50,8 +50,9 @@ namespace Pinta.Actions
 			
 			var data = new RotateZoomData ();
 			using var dialog = new SimpleEffectDialog (Translations.GetString ("Rotate / Zoom Layer"),
-				PintaCore.Resources.GetIcon ("Menu.Layers.RotateZoom.png"), data,
-			                                     new PintaLocalizer ());
+				Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerRotateZoom, 16),
+				data,
+				new PintaLocalizer ());
 
             // When parameters are modified, update the display transform of the layer.
 		    dialog.EffectDataChanged += (o, args) =>
@@ -100,7 +101,7 @@ namespace Pinta.Actions
 			doc.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize);
 			doc.Workspace.Invalidate ();
 
-	        doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Layers.RotateZoom.png",
+	        doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.LayerRotateZoom,
 	            Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.CurrentUserLayerIndex));
 		}
 

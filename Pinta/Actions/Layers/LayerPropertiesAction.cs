@@ -58,7 +58,7 @@ namespace Pinta.Actions
 						dialog.UpdatedLayerProperties);
 
 				var historyItem = new UpdateLayerPropertiesHistoryItem (
-					"Menu.Layers.LayerProperties.png",
+					Resources.Icons.LayerProperties,
 					historyMessage,
 					PintaCore.Layers.CurrentLayerIndex,
 					dialog.InitialLayerProperties,

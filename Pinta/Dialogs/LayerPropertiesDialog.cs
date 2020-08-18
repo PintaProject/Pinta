@@ -51,7 +51,7 @@ namespace Pinta
 		{
 			Build ();
 
-			this.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.LayerProperties.png");
+			IconName = Resources.Icons.LayerProperties;
 			
 			name = PintaCore.Layers.CurrentLayer.Name;
 			hidden = PintaCore.Layers.CurrentLayer.Hidden;

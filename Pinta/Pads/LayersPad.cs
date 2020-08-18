@@ -41,8 +41,8 @@ namespace Pinta
 
 			layers_item.Label = Translations.GetString ("Layers");
 			layers_item.Content = layers;
-			layers_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.MergeLayerDown.png");
-            layers_item.DefaultWidth = 100;
+			layers_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerMergeDown, 16);
+			layers_item.DefaultWidth = 100;
 			layers_item.Behavior |= DockItemBehavior.CantClose;
 
 			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
@@ -52,7 +52,7 @@ namespace Pinta
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 
-			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, "Menu.Layers.MergeLayerDown.png");
+			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown);
 			app.AddAction(show_layers);
 			padMenu.AppendItem(show_layers.CreateMenuItem());
 

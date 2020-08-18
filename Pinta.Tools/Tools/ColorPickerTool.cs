@@ -128,7 +128,7 @@ namespace Pinta.Tools
 			if (sample_type == null) {
 				sample_type = new ToolBarDropDownButton (true);
 
-				sample_type.AddItem (Translations.GetString ("Layer"), "Menu.Layers.MergeLayerDown.png", true);
+				sample_type.AddItem (Translations.GetString ("Layer"), Resources.Icons.LayerMergeDown, true);
 				sample_type.AddItem (Translations.GetString ("Image"), "ResizeCanvas.Image.png", false);
 			}
 

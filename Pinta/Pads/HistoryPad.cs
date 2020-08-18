@@ -42,14 +42,14 @@ namespace Pinta
 			history_item.Label = Translations.GetString ("History");
 			history_item.DefaultLocation = "Images/Bottom";
 			history_item.Content = history;
-			history_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png");
-            history_item.DefaultWidth = 100;
+			history_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerDuplicate, 16);
+			history_item.DefaultWidth = 100;
 			history_item.Behavior |= DockItemBehavior.CantClose;
 
 			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
 			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
 
-			var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, "Menu.Layers.DuplicateLayer.png");
+			var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate);
 			app.AddAction(show_history);
 			padMenu.AppendItem(show_history.CreateMenuItem());
 

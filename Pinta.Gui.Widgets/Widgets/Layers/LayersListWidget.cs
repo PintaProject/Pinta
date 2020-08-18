@@ -239,7 +239,7 @@ namespace Pinta.Gui.Widgets
 			var updated = new LayerProperties(layer.Name, !visibility, layer.Opacity, layer.BlendMode);
 
 			var historyItem = new UpdateLayerPropertiesHistoryItem (
-				"Menu.Layers.LayerProperties.png",
+				Resources.Icons.LayerProperties,
 				(visibility) ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
 				PintaCore.Layers.IndexOf (layer),
 				initial,
