@@ -354,8 +354,7 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
 			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Palette File"), PintaCore.Chrome.MainWindow,
-				FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-				Gtk.Stock.Open, Gtk.ResponseType.Ok))
+				FileChooserAction.Open, GtkExtensions.DialogButtonsCancelOpen()))
 			{
 				FileFilter ff = new FileFilter();
 				foreach (var format in PintaCore.System.PaletteFormats.Formats)
@@ -375,8 +374,6 @@ namespace Pinta.Core
 				ff2.AddPattern("*.*");
 				fcd.AddFilter(ff2);
 
-				fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
-
 				if (lastPaletteDir != null)
 					fcd.SetCurrentFolder(lastPaletteDir);
 
@@ -393,8 +390,7 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
 			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Save Palette File"), PintaCore.Chrome.MainWindow,
-				FileChooserAction.Save, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-				Gtk.Stock.Save, Gtk.ResponseType.Ok))
+				FileChooserAction.Save, GtkExtensions.DialogButtonsCancelSave()))
 			{
 				foreach (var format in PintaCore.System.PaletteFormats.Formats)
 				{
@@ -404,8 +400,6 @@ namespace Pinta.Core
 						fcd.AddFilter(fileFilter);
 					}
 				}
-
-				fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 				if (lastPaletteDir != null)
 					fcd.SetCurrentFolder(lastPaletteDir);

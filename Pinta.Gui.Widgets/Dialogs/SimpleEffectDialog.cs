@@ -50,7 +50,7 @@ namespace Pinta.Gui.Widgets
 		public SimpleEffectDialog (string title, Gdk.Pixbuf icon, object effectData,
 		                           IAddinLocalizer localizer)
 			: base (title, Pinta.Core.PintaCore.Chrome.MainWindow, Gtk.DialogFlags.Modal,
-				Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+				Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			Icon = icon;
 			EffectData = effectData;
@@ -60,7 +60,6 @@ namespace Pinta.Gui.Widgets
 			WidthRequest = 400;
 			Resizable = false;
 			DefaultResponse = Gtk.ResponseType.Ok;
-			AlternativeButtonOrder = new int[] { (int)Gtk.ResponseType.Ok, (int)Gtk.ResponseType.Cancel };
 
 			BuildDialog (localizer);
 		}

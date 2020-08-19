@@ -160,12 +160,10 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Image File"), PintaCore.Chrome.MainWindow,
-												 FileChooserAction.Open, Stock.Cancel, ResponseType.Cancel,
-												 Stock.Open, ResponseType.Ok))
+												 FileChooserAction.Open, GtkExtensions.DialogButtonsCancelOpen()))
 
 			{
 				fcd.SetCurrentFolder(PintaCore.System.GetDialogDirectory());
-				fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 				fcd.AddImagePreview();
 

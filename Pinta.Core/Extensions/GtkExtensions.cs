@@ -215,5 +215,83 @@ namespace Pinta.Core
 			// Simple wrapper to avoid the verbose IconLookupFlags parameter.
 			return theme.LoadIcon(icon_name, size, Gtk.IconLookupFlags.ForceSize);
 		}
+
+		/// <summary>
+		/// Returns the Cancel / Open button pair in the correct order for the current platform.
+		/// This can be used with the Gtk.Dialog constructor.
+		/// </summary>
+		public static object[] DialogButtonsCancelOpen()
+		{
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+            {
+				return new object[] {
+                    Gtk.Stock.Open,
+                    Gtk.ResponseType.Ok,
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel
+				};
+            }
+			else
+            {
+				return new object[] {
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel,
+                    Gtk.Stock.Open,
+                    Gtk.ResponseType.Ok
+				};
+            }
+        }
+
+		/// <summary>
+		/// Returns the Cancel / Save button pair in the correct order for the current platform.
+		/// This can be used with the Gtk.Dialog constructor.
+		/// </summary>
+		public static object[] DialogButtonsCancelSave()
+		{
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+            {
+				return new object[] {
+                    Gtk.Stock.Save,
+                    Gtk.ResponseType.Ok,
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel
+				};
+            }
+			else
+            {
+				return new object[] {
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel,
+                    Gtk.Stock.Save,
+                    Gtk.ResponseType.Ok
+				};
+            }
+        }
+
+		/// <summary>
+		/// Returns the Cancel / Ok button pair in the correct order for the current platform.
+		/// This can be used with the Gtk.Dialog constructor.
+		/// </summary>
+		public static object[] DialogButtonsCancelOk()
+		{
+			if (PintaCore.System.OperatingSystem == OS.Windows)
+            {
+				return new object[] {
+                    Gtk.Stock.Ok,
+                    Gtk.ResponseType.Ok,
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel
+				};
+            }
+			else
+            {
+				return new object[] {
+                    Gtk.Stock.Cancel,
+                    Gtk.ResponseType.Cancel,
+                    Gtk.Stock.Ok,
+                    Gtk.ResponseType.Ok
+				};
+            }
+        }
 	}
 }

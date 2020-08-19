@@ -46,9 +46,8 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			using var fcd = new Gtk.FileChooserDialog (Translations.GetString ("Open Image File"), PintaCore.Chrome.MainWindow,
-							    FileChooserAction.Open, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-							    Gtk.Stock.Open, Gtk.ResponseType.Ok);
+			using var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Image File"), PintaCore.Chrome.MainWindow,
+								FileChooserAction.Open, Pinta.Core.GtkExtensions.DialogButtonsCancelOpen());
 
 			// Add image files filter
 			FileFilter ff = new FileFilter ();
@@ -67,7 +66,6 @@ namespace Pinta.Actions
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 
-			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
             fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 			fcd.SelectMultiple = true;
 

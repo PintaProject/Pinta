@@ -43,8 +43,7 @@ namespace Pinta
 		
 		public ResizeImageDialog () : base (Translations.GetString ("Resize Image"), PintaCore.Chrome.MainWindow,
 		                                    DialogFlags.Modal,
-											Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-											Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+											Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
 
@@ -63,7 +62,6 @@ namespace Pinta
 			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
 			heightSpinner.ValueChanged += new EventHandler (heightSpinner_ValueChanged);
 			
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 			DefaultResponse = Gtk.ResponseType.Ok;
 
 			widthSpinner.ActivatesDefault = true;

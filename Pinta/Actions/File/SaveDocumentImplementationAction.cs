@@ -71,16 +71,13 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			using var fcd = new FileChooserDialog (Translations.GetString ("Save Image File"),
-									       PintaCore.Chrome.MainWindow,
-									       FileChooserAction.Save,
-									       Gtk.Stock.Cancel,
-									       Gtk.ResponseType.Cancel,
-									       Gtk.Stock.Save, Gtk.ResponseType.Ok);
+			using var fcd = new FileChooserDialog(Translations.GetString("Save Image File"),
+										   PintaCore.Chrome.MainWindow,
+										   FileChooserAction.Save,
+										   Core.GtkExtensions.DialogButtonsCancelSave());
 
 			fcd.DoOverwriteConfirmation = true;
             fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
-			fcd.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 			bool hasFile = document.HasFile;
 
@@ -245,10 +242,17 @@ namespace Pinta.Actions
 				MessageType.Question, ButtonsType.None,
 				true, message, System.IO.Path.GetFileName (file), fcd.CurrentFolder);
 
-			md.AddButton (Stock.Cancel, ResponseType.Cancel);
-			md.AddButton (Stock.Save, ResponseType.Ok);
+			// Use the standard button order for each OS.
+			if (PintaCore.System.OperatingSystem == OS.Windows) {
+				md.AddButton (Stock.Save, ResponseType.Ok);
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+			}
+			else {
+				md.AddButton (Stock.Cancel, ResponseType.Cancel);
+				md.AddButton (Stock.Save, ResponseType.Ok);
+			}
+
 			md.DefaultResponse = ResponseType.Cancel;
-			md.AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 
 			int response = md.Run ();
 

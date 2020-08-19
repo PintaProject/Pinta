@@ -53,7 +53,8 @@ namespace Pinta.Effects
 		public PosterizeData EffectData { get; set; }
 
 		public PosterizeDialog () : base (Translations.GetString ("Posterize"),
-		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal)
+		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+										  GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
 			
@@ -61,7 +62,6 @@ namespace Pinta.Effects
 			green_spinbox.ValueChanged += HandleValueChanged;
 			blue_spinbox.ValueChanged += HandleValueChanged;
 
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 			DefaultResponse = Gtk.ResponseType.Ok;
 		}
 		
@@ -119,9 +119,6 @@ namespace Pinta.Effects
 			link_button = new CheckButton (Translations.GetString ("Linked"));
 			link_button.Active = true;
 			ContentArea.Add (link_button);
-
-			AddButton (Stock.Cancel, ResponseType.Cancel);
-			AddButton (Stock.Ok, ResponseType.Ok);
 
 			DefaultWidth = 400;
 			DefaultHeight = 300;

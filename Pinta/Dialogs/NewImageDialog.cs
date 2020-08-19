@@ -62,7 +62,7 @@ namespace Pinta
         private RadioButton trans_bg_radio;
 
         public NewImageDialog (int initialWidth, int initialHeight, BackgroundType initial_bg_type, bool isClipboardSize)
-            : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal, Gtk.Stock.Cancel, Gtk.ResponseType.Cancel, Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+            : base (string.Empty, PintaCore.Chrome.MainWindow, DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk())
         {
             Title = Translations.GetString ("New Image");
             WindowPosition = Gtk.WindowPosition.CenterOnParent;
@@ -77,7 +77,6 @@ namespace Pinta
             DefaultResponse = ResponseType.Ok;
 
             IconName = Resources.StandardIcons.DocumentNew;
-            AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
             
             has_clipboard = isClipboardSize;
             clipboard_size = new Gdk.Size (initialWidth, initialHeight);

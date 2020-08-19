@@ -47,9 +47,11 @@ namespace Pinta
 		private HScale opacitySlider;
 		private ComboBoxText blendComboBox;
 
-		public LayerPropertiesDialog () : base (Translations.GetString ("Layer Properties"), PintaCore.Chrome.MainWindow, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
-		{
-			Build ();
+		public LayerPropertiesDialog () : base (Translations.GetString ("Layer Properties"),
+			PintaCore.Chrome.MainWindow, DialogFlags.Modal,
+            Core.GtkExtensions.DialogButtonsCancelOk())
+        {
+            Build ();
 
 			IconName = Resources.Icons.LayerProperties;
 			
@@ -79,7 +81,6 @@ namespace Pinta
 			opacitySlider.ValueChanged += new EventHandler (OnOpacitySliderChanged);
 			blendComboBox.Changed += OnBlendModeChanged;
 
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 			DefaultResponse = Gtk.ResponseType.Ok;
 
 			layerNameEntry.ActivatesDefault = true;
@@ -222,7 +223,6 @@ namespace Pinta
 			// Finish up
 			ContentArea.ShowAll ();
 
-			AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 			DefaultResponse = ResponseType.Ok;
 		}
 		#endregion

@@ -89,8 +89,7 @@ namespace Pinta.Effects
 		
 		public CurvesDialog (CurvesData effectData) : base (Translations.GetString ("Curves"), PintaCore.Chrome.MainWindow,
 		                                                    DialogFlags.Modal,
-															Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-															Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+															GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
 			
@@ -109,7 +108,6 @@ namespace Pinta.Effects
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
 			
 			ResetControlPoints ();
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 		}
 		
 		private void UpdateLivePreview (string propertyName)

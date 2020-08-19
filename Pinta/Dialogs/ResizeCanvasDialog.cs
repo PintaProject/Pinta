@@ -54,8 +54,7 @@ namespace Pinta
 		
 		public ResizeCanvasDialog () : base (Translations.GetString ("Resize Canvas"), PintaCore.Chrome.MainWindow,
 		                                     DialogFlags.Modal,
-											 Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
-											 Gtk.Stock.Ok, Gtk.ResponseType.Ok)
+											 Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
 
@@ -85,7 +84,6 @@ namespace Pinta
 			SEButton.Clicked += HandleSEButtonClicked;
 			
 			SetAnchor (Anchor.Center);
-			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 			DefaultResponse = Gtk.ResponseType.Ok;
 
 			widthSpinner.ActivatesDefault = true;

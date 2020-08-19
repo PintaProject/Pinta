@@ -36,7 +36,7 @@ namespace Pinta
 	
 		public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
 			: base (Translations.GetString ("JPEG Quality"), parent, DialogFlags.Modal | DialogFlags.DestroyWithParent,
-				Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
+				Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			this.BorderWidth = 6;
 			this.ContentArea.Spacing = 3;
@@ -55,7 +55,6 @@ namespace Pinta
 
 			content.ShowAll ();
 			this.ContentArea.Add (content);
-			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 		}
 		
 		public int GetCompressionLevel ()

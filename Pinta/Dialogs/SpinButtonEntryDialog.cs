@@ -33,7 +33,7 @@ namespace Pinta
 		private SpinButton spinButton;
 	
 		public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
-			: base (title, parent, DialogFlags.Modal, Stock.Cancel, ResponseType.Cancel, Stock.Ok, ResponseType.Ok)
+			: base (title, parent, DialogFlags.Modal, Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			BorderWidth = 6;
 			ContentArea.Spacing = 3;
@@ -51,7 +51,6 @@ namespace Pinta
 			hbox.ShowAll ();
 			ContentArea.Add (hbox);
 
-			AlternativeButtonOrder = new int[] { (int) ResponseType.Ok, (int) ResponseType.Cancel };
 			DefaultResponse = ResponseType.Ok;
 			spinButton.ActivatesDefault = true;
 		}
