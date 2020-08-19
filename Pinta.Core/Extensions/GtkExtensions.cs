@@ -49,56 +49,6 @@ namespace Pinta.Core
 			item.Show ();
 			tb.Insert (item, tb.NItems);
 		}
-		
-		public static void AppendSeparator (this Menu menu)
-		{
-			SeparatorMenuItem smi = new SeparatorMenuItem ();
-			smi.Show ();
-			menu.Append (smi);
-		}
-
-		public static MenuItem AppendItem (this Menu menu, MenuItem item)
-		{
-			menu.Append (item);
-			return item;
-		}
-		
-		public static Gtk.Action AppendAction (this Menu menu, string actionName, string actionLabel, string actionTooltip, string actionIcon)
-		{
-			Gtk.Action action = new Gtk.Action (actionName, actionLabel, actionTooltip, actionIcon);
-			menu.AppendItem ((MenuItem)action.CreateMenuItem ());
-			return action;
-		}
-
-		public static Gtk.ToggleAction AppendToggleAction (this Menu menu, string actionName, string actionLabel, string actionTooltip, string actionIcon)
-		{
-			Gtk.ToggleAction action = new Gtk.ToggleAction (actionName, actionLabel, actionTooltip, actionIcon);
-			menu.AppendItem ((MenuItem)action.CreateMenuItem ());
-			return action;
-		}
-
-		public static MenuItem AppendMenuItemSorted (this Menu menu, MenuItem item)
-		{
-			var text = item.GetText ();
-
-			for (int i = 0; i < menu.Children.Length; i++)
-				if (string.Compare (((menu.Children[i]) as MenuItem).GetText (), text) > 0) {
-					menu.Insert (item, i);
-					return item;
-				}
-
-			menu.AppendItem (item);
-			return item;
-		}
-
-		public static string GetText (this MenuItem item)
-		{
-			foreach (var child in item.AllChildren)
-				if (child is Label)
-					return (child as Label).Text;
-
-			return string.Empty;
-		}
 
 		public static Gtk.ToolItem CreateToolBarItem (this Command action)
         {
@@ -111,43 +61,6 @@ namespace Pinta.Core
 			};
             return item;
         }
-
-		public static Gtk.ToolItem CreateToolBarItem (this Gtk.Action action)
-		{
-			Gtk.ToolItem item = (Gtk.ToolItem)action.CreateToolItem ();
-			item.TooltipText = action.Label;
-			return item;
-		}
-		
-		public static Gtk.ImageMenuItem CreateAcceleratedMenuItem (this Gtk.Action action, Gdk.Key key, Gdk.ModifierType mods)
-		{
-			ImageMenuItem item = (ImageMenuItem)action.CreateMenuItem ();
-			
-			(item.Child as AccelLabel).AccelWidget = item;
-			item.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (key, mods, AccelFlags.Visible));
-
-			return item;
-		}
-
-		public static Gtk.CheckMenuItem CreateAcceleratedMenuItem (this Gtk.ToggleAction action, Gdk.Key key, Gdk.ModifierType mods)
-		{
-			CheckMenuItem item = (CheckMenuItem)action.CreateMenuItem ();
-
-			(item.Child as AccelLabel).AccelWidget = item;
-			item.AddAccelerator ("activate", PintaCore.Actions.AccelGroup, new AccelKey (key, mods, AccelFlags.Visible));
-
-			return item;
-		}
-
-		public static Gtk.MenuItem CreateSubMenuItem (this Gtk.Action action)
-		{
-			MenuItem item = (MenuItem)action.CreateMenuItem ();
-			
-			Menu sub_menu = new Menu ();
-			item.Submenu = sub_menu;
-
-			return item;
-		}
 
 		public static void AddAction(this Gtk.Application app, Command action)
 		{
