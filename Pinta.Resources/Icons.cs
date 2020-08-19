@@ -95,6 +95,11 @@ namespace Pinta.Resources
         public const string GradientLinearReflected = "gradient-linear-reflected";
         public const string GradientRadial = "gradient-radial";
 
+        public const string FillStyleBackground = "fillstyle-background";
+        public const string FillStyleFill = "fillstyle-fill";
+        public const string FillStyleOutline = "fillstyle-outline";
+        public const string FillStyleOutlineFill = "fillstyle-outlinefill";
+
         public const string HelpBug = "help-bug";
         public const string HelpTranslate = "help-translate";
         public const string HelpWebsite = "help-website";

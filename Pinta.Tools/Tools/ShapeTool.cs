@@ -38,15 +38,6 @@ namespace Pinta.Tools
 		public ShapeTool()
 		{
 		}
-
-		static ShapeTool()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
-			fact.Add ("ShapeTool.Fill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Fill.png")));
-			fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
-			fact.AddDefault ();
-		}
         
 		#region Properties
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }

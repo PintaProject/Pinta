@@ -117,16 +117,6 @@ namespace Pinta.Tools
 			imContext.Commit += OnIMCommit;
 			layout = new Pinta.Core.TextLayout ();
 		}
-
-		static TextTool ()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("ShapeTool.Outline.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Outline.png")));
-			fact.Add ("ShapeTool.Fill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.Fill.png")));
-			fact.Add ("ShapeTool.OutlineFill.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ShapeTool.OutlineFill.png")));
-			fact.Add ("TextTool.FillBackground.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("TextTool.FillBackground.png")));
-			fact.AddDefault ();
-		}
 #endregion
 
 #region ToolBar
@@ -244,10 +234,10 @@ namespace Pinta.Tools
 			if (fill_button == null) {
 				fill_button = new ToolBarDropDownButton ();
 
-				fill_button.AddItem (Translations.GetString ("Normal"), "ShapeTool.Fill.png", 0);
-				fill_button.AddItem (Translations.GetString ("Normal and Outline"), "ShapeTool.OutlineFill.png", 1);
-				fill_button.AddItem (Translations.GetString ("Outline"), "ShapeTool.Outline.png", 2);
-				fill_button.AddItem (Translations.GetString ("Fill Background"), "TextTool.FillBackground.png", 3);
+				fill_button.AddItem (Translations.GetString ("Normal"), Resources.Icons.FillStyleFill, 0);
+				fill_button.AddItem (Translations.GetString ("Normal and Outline"), Resources.Icons.FillStyleOutlineFill, 1);
+				fill_button.AddItem (Translations.GetString ("Outline"), Resources.Icons.FillStyleOutline, 2);
+				fill_button.AddItem (Translations.GetString ("Fill Background"), Resources.Icons.FillStyleBackground, 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}

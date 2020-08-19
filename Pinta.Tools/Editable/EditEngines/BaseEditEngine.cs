@@ -336,9 +336,9 @@ namespace Pinta.Tools
             {
                 fill_button = new ToolBarDropDownButton();
 
-                fill_button.AddItem(Translations.GetString("Outline Shape"), "ShapeTool.Outline.png", 0);
-                fill_button.AddItem(Translations.GetString("Fill Shape"), "ShapeTool.Fill.png", 1);
-                fill_button.AddItem(Translations.GetString("Fill and Outline Shape"), "ShapeTool.OutlineFill.png", 2);
+                fill_button.AddItem(Translations.GetString("Outline Shape"), Resources.Icons.FillStyleOutline, 0);
+                fill_button.AddItem(Translations.GetString("Fill Shape"), Resources.Icons.FillStyleFill, 1);
+                fill_button.AddItem(Translations.GetString("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
             }
 
             tb.AppendItem(fill_button);
