@@ -71,7 +71,14 @@ namespace Pinta.Resources
 
     public static class Icons
     {
+        public const string AddinsManage = "addins-manage";
+
         public const string CursorPosition = "cursor-position";
+
+        public const string EditSelectionErase = "edit-selection-erase";
+        public const string EditSelectionFill = "edit-selection-fill";
+        public const string EditSelectionInvert = "edit-selection-invert";
+        public const string EditSelectionNone = "edit-selection-none";
 
         public const string HelpBug = "help-bug";
         public const string HelpTranslate = "help-translate";

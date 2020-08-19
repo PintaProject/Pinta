@@ -37,7 +37,7 @@ namespace Pinta.Core
 		public AddinActions ()
 		{
 			AddinManager = new Command ("AddinManager", Translations.GetString ("Add-in Manager"),
-			                               null, "Menu.Edit.Addins.png");
+			                               null, Resources.Icons.AddinsManage);
 		}
 
 		/// <summary>

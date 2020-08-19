@@ -101,21 +101,6 @@
       <DeployService-UseProjectRelativePath>true</DeployService-UseProjectRelativePath>
       <LogicalName>Pinta.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Edit.Deselect.png">
-      <LogicalName>Menu.Edit.Deselect.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Edit.EraseSelection.png">
-      <LogicalName>Menu.Edit.EraseSelection.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Edit.FillSelection.png">
-      <LogicalName>Menu.Edit.FillSelection.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Edit.InvertSelection.png">
-      <LogicalName>Menu.Edit.InvertSelection.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Edit.SelectAll.png">
-      <LogicalName>Menu.Edit.SelectAll.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.View.ActualSize.png">
       <LogicalName>Menu.View.ActualSize.png</LogicalName>
     </EmbeddedResource>
@@ -364,9 +349,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Pinta-32.png">
       <LogicalName>Pinta-32.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.Edit.Addins.png">
-      <LogicalName>Menu.Edit.Addins.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\TextTool.FillBackground.png">
       <LogicalName>TextTool.FillBackground.png</LogicalName>

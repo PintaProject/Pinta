@@ -107,7 +107,7 @@ namespace Pinta.Tools
 						16, 16);
 			}
 		}
-		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.Edit.EraseSelection.png"), 8, 0); } }
+		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, IconTheme.Default.LoadIcon(Resources.Icons.EditSelectionErase, 16), 8, 0); } }
 
 #region Constructor
 		public TextTool ()

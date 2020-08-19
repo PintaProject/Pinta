@@ -56,15 +56,6 @@ namespace Pinta.Core
 		
 		public EditActions ()
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Menu.Edit.Deselect.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Deselect.png")));
-			fact.Add ("Menu.Edit.EraseSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.EraseSelection.png")));
-			fact.Add ("Menu.Edit.FillSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.FillSelection.png")));
-			fact.Add ("Menu.Edit.InvertSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.InvertSelection.png")));
-			fact.Add ("Menu.Edit.SelectAll.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.SelectAll.png")));
-			fact.Add ("Menu.Edit.Addins.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Edit.Addins.png")));
-			fact.AddDefault ();
-			
 			Undo = new Command ("undo", Translations.GetString ("Undo"), null, Resources.StandardIcons.EditUndo);
 			Redo = new Command ("redo", Translations.GetString ("Redo"), null, Resources.StandardIcons.EditRedo);
 			Cut = new Command ("cut", Translations.GetString ("Cut"), null, Resources.StandardIcons.EditCut);
@@ -73,11 +64,11 @@ namespace Pinta.Core
 			Paste = new Command ("paste", Translations.GetString ("Paste"), null, Resources.StandardIcons.EditPaste);
 			PasteIntoNewLayer = new Command ("pasteintonewlayer", Translations.GetString ("Paste Into New Layer"), null, Resources.StandardIcons.EditPaste);
 			PasteIntoNewImage = new Command ("pasteintonewimage", Translations.GetString ("Paste Into New Image"), null, Resources.StandardIcons.EditPaste);
-			EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, "Menu.Edit.EraseSelection.png");
-			FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, "Menu.Edit.FillSelection.png");
-			InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, "Menu.Edit.InvertSelection.png");
+			EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, Resources.Icons.EditSelectionErase);
+			FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, Resources.Icons.EditSelectionFill);
+			InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, Resources.Icons.EditSelectionFill);
 			SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Resources.StandardIcons.EditSelectAll);
-			Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, "Menu.Edit.Deselect.png");
+			Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, Resources.Icons.EditSelectionNone);
 			
 			LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
 			SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSave);
@@ -217,7 +208,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.FillSelection.png", Translations.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -257,7 +248,7 @@ namespace Pinta.Core
 			if (sender is string && (sender as string) == "Cut")
 				doc.History.PushNewItem (new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.CurrentUserLayerIndex));
 			else
-				doc.History.PushNewItem (new SimpleHistoryItem ("Menu.Edit.EraseSelection.png", Translations.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -266,7 +257,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			SelectionHistoryItem hist = new SelectionHistoryItem ("Menu.Edit.Deselect.png", Translations.GetString ("Deselect"));
+			SelectionHistoryItem hist = new SelectionHistoryItem (Resources.Icons.EditSelectionNone, Translations.GetString ("Deselect"));
 			hist.TakeSnapshot ();
 
             doc.ResetSelectionPaths ();
@@ -450,7 +441,7 @@ namespace Pinta.Core
 			// Clear the selection resize handles if necessary.
 			doc.ToolLayer.Clear ();
 
-			SelectionHistoryItem historyItem = new SelectionHistoryItem ("Menu.Edit.InvertSelection.png",
+			SelectionHistoryItem historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionInvert,
 			                                                             Translations.GetString ("Invert Selection"));
 			historyItem.TakeSnapshot ();
 
