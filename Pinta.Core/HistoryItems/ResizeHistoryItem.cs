@@ -51,7 +51,7 @@ namespace Pinta.Core
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
-			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 			window.FreezeUpdates ();
 
 			PintaCore.Workspace.ImageSize = old_size;
@@ -87,7 +87,7 @@ namespace Pinta.Core
 
 			Size swap = PintaCore.Workspace.ImageSize;
 
-			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.GdkWindow;
+			var window = PintaCore.Workspace.ActiveWorkspace.Canvas.Window;
 			window.FreezeUpdates ();
 
 			PintaCore.Workspace.ImageSize = old_size;

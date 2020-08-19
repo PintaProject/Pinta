@@ -447,9 +447,8 @@ namespace Pinta
 
         private void UpdateOkButton ()
         {
-            foreach (Widget widget in ActionArea.Children)
-                if (widget is Button && (widget as Button).Label == "gtk-ok")
-                    widget.Sensitive = IsValidSize;
+            var button = GetWidgetForResponse((int)ResponseType.Ok);
+            button.Sensitive = IsValidSize;
         }
 
         private void UpdatePresetSelection ()
