@@ -239,21 +239,6 @@
     <EmbeddedResource Include="Resources\Menu.Effects.Stylize.Emboss.png">
       <LogicalName>Menu.Effects.Stylize.Emboss.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.ConicalGradient.png">
-      <LogicalName>Toolbar.ConicalGradient.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.DiamondGradient.png">
-      <LogicalName>Toolbar.DiamondGradient.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.LinearGradient.png">
-      <LogicalName>Toolbar.LinearGradient.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.LinearReflectedGradient.png">
-      <LogicalName>Toolbar.LinearReflectedGradient.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.RadialGradient.png">
-      <LogicalName>Toolbar.RadialGradient.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
       <LogicalName>ShapeTool.OutlineFill.png</LogicalName>
     </EmbeddedResource>
@@ -268,12 +253,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\About.ImageTop.png">
       <LogicalName>About.ImageTop.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.ColorMode.png">
-      <LogicalName>Toolbar.ColorMode.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.TransparentMode.png">
-      <LogicalName>Toolbar.TransparentMode.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ShapeTool.Fill.png">
       <LogicalName>ShapeTool.Fill.png</LogicalName>
@@ -292,21 +271,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\TextTool.FillBackground.png">
       <LogicalName>TextTool.FillBackground.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Sampling.1x1.png">
-      <LogicalName>Toolbar.Sampling.1x1.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Sampling.3x3.png">
-      <LogicalName>Toolbar.Sampling.3x3.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Sampling.5x5.png">
-      <LogicalName>Toolbar.Sampling.5x5.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Sampling.7x7.png">
-      <LogicalName>Toolbar.Sampling.7x7.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.Sampling.9x9.png">
-      <LogicalName>Toolbar.Sampling.9x9.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -42,17 +42,6 @@ namespace Pinta.Tools
 		private ToolBarDropDownButton sample_type;
 		private Gtk.ToolItem sample_sep;
 
-		public ColorPickerTool ()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Toolbar.Sampling.1x1.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.1x1.png")));
-			fact.Add ("Toolbar.Sampling.3x3.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.3x3.png")));
-			fact.Add ("Toolbar.Sampling.5x5.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.5x5.png")));
-			fact.Add ("Toolbar.Sampling.7x7.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.7x7.png")));
-			fact.Add ("Toolbar.Sampling.9x9.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.9x9.png")));
-			fact.AddDefault ();
-		}
-
 		#region Properties
 		public override string Name {
 			get { return Translations.GetString ("Color Picker"); }
@@ -115,11 +104,11 @@ namespace Pinta.Tools
 				// Change the cursor when the SampleSize is changed.
 				sample_size.SelectedItemChanged += (sender, e) => SetCursor (DefaultCursor);
 
-				sample_size.AddItem (Translations.GetString ("Single Pixel"), "Toolbar.Sampling.1x1.png", 1);
-				sample_size.AddItem (Translations.GetString ("3 x 3 Region"), "Toolbar.Sampling.3x3.png", 3);
-				sample_size.AddItem (Translations.GetString ("5 x 5 Region"), "Toolbar.Sampling.5x5.png", 5);
-				sample_size.AddItem (Translations.GetString ("7 x 7 Region"), "Toolbar.Sampling.7x7.png", 7);
-				sample_size.AddItem (Translations.GetString ("9 x 9 Region"), "Toolbar.Sampling.9x9.png", 9);
+				sample_size.AddItem (Translations.GetString ("Single Pixel"), Resources.Icons.Sampling1, 1);
+				sample_size.AddItem (Translations.GetString ("3 x 3 Region"), Resources.Icons.Sampling3, 3);
+				sample_size.AddItem (Translations.GetString ("5 x 5 Region"), Resources.Icons.Sampling5, 5);
+				sample_size.AddItem (Translations.GetString ("7 x 7 Region"), Resources.Icons.Sampling7, 7);
+				sample_size.AddItem (Translations.GetString ("9 x 9 Region"), Resources.Icons.Sampling9, 9);
 			}
 
 			tb.AppendItem (sample_size);

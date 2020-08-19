@@ -79,12 +79,21 @@ namespace Pinta.Resources
         public const string BlendingNormal = "blending-normal";
         public const string BlendingOverwrite = "blending-overwrite";
 
+        public const string ColorModeColor = "colormode-color";
+        public const string ColorModeTransparency = "colormode-transparency";
+
         public const string CursorPosition = "cursor-position";
 
         public const string EditSelectionErase = "edit-selection-erase";
         public const string EditSelectionFill = "edit-selection-fill";
         public const string EditSelectionInvert = "edit-selection-invert";
         public const string EditSelectionNone = "edit-selection-none";
+
+        public const string GradientConical = "gradient-conical";
+        public const string GradientDiamond = "gradient-diamond";
+        public const string GradientLinear = "gradient-linear";
+        public const string GradientLinearReflected = "gradient-linear-reflected";
+        public const string GradientRadial = "gradient-radial";
 
         public const string HelpBug = "help-bug";
         public const string HelpTranslate = "help-translate";
@@ -121,6 +130,12 @@ namespace Pinta.Resources
         public const string ResizeCanvasSE = "resize-canvas-se";
         public const string ResizeCanvasSW = "resize-canvas-sw";
         public const string ResizeCanvasUp = "resize-canvas-up";
+
+        public const string Sampling1 = "sampling-1x1";
+        public const string Sampling3 = "sampling-3x3";
+        public const string Sampling5 = "sampling-5x5";
+        public const string Sampling7 = "sampling-7x7";
+        public const string Sampling9 = "sampling-9x9";
 
         public const string ToolCloneStamp = "tool-clonestamp";
         public const string ToolColorPicker = "tool-colorpicker";

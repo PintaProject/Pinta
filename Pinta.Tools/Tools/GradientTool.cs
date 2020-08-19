@@ -37,19 +37,6 @@ namespace Pinta.Tools
 		protected ImageSurface undo_surface;
 		uint button;
 
-		static GradientTool ()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Toolbar.LinearGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.LinearGradient.png")));
-			fact.Add ("Toolbar.LinearReflectedGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.LinearReflectedGradient.png")));
-			fact.Add ("Toolbar.DiamondGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.DiamondGradient.png")));
-			fact.Add ("Toolbar.RadialGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.RadialGradient.png")));
-			fact.Add ("Toolbar.ConicalGradient.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.ConicalGradient.png")));
-			fact.Add ("Toolbar.ColorMode.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.ColorMode.png")));
-			fact.Add ("Toolbar.TransparentMode.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.TransparentMode.png")));
-			fact.AddDefault ();
-		}
-
 		public override string Name {
 			get { return Translations.GetString ("Gradient"); }
 		}
@@ -172,15 +159,15 @@ namespace Pinta.Tools
 			if (gradient_button == null) {
 				gradient_button = new ToolBarDropDownButton ();
 
-				gradient_button.AddItem (Translations.GetString ("Linear Gradient"), "Toolbar.LinearGradient.png", GradientType.Linear);
-				gradient_button.AddItem (Translations.GetString ("Linear Reflected Gradient"), "Toolbar.LinearReflectedGradient.png", GradientType.LinearReflected);
-				gradient_button.AddItem (Translations.GetString ("Linear Diamond Gradient"), "Toolbar.DiamondGradient.png", GradientType.Diamond);
-				gradient_button.AddItem (Translations.GetString ("Radial Gradient"), "Toolbar.RadialGradient.png", GradientType.Radial);
-				gradient_button.AddItem (Translations.GetString ("Conical Gradient"), "Toolbar.ConicalGradient.png", GradientType.Conical);
+				gradient_button.AddItem (Translations.GetString ("Linear Gradient"), Resources.Icons.GradientLinear, GradientType.Linear);
+				gradient_button.AddItem (Translations.GetString ("Linear Reflected Gradient"), Resources.Icons.GradientLinearReflected, GradientType.LinearReflected);
+				gradient_button.AddItem (Translations.GetString ("Linear Diamond Gradient"), Resources.Icons.GradientDiamond, GradientType.Diamond);
+				gradient_button.AddItem (Translations.GetString ("Radial Gradient"), Resources.Icons.GradientRadial, GradientType.Radial);
+				gradient_button.AddItem (Translations.GetString ("Conical Gradient"), Resources.Icons.GradientConical, GradientType.Conical);
 			}
 
 			tb.AppendItem (gradient_button);
-			
+
 			// Hide TransparentMode.  The core issue is we can't just paint it on top of the
 			// current layer because it's transparent.  Will require significant effort to support.
 
@@ -194,13 +181,13 @@ namespace Pinta.Tools
 			//if (mode_button == null) {
 			//        mode_button = new ToolBarDropDownButton ();
 
-			//        mode_button.AddItem (Translations.GetString ("Color Mode"), "Toolbar.ColorMode.png", GradientColorMode.Color);
-			//        mode_button.AddItem (Translations.GetString ("Transparency Mode"), "Toolbar.TransparentMode.png", GradientColorMode.Transparency);
+			//        mode_button.AddItem (Translations.GetString ("Color Mode"), Resources.Icons.ColorModeColor, GradientColorMode.Color);
+			//        mode_button.AddItem (Translations.GetString ("Transparency Mode"), Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
 			//}
 
 			//tb.AppendItem (mode_button);
 		}
-		
+
 		private GradientType SelectedGradientType {
 			get { return (GradientType)gradient_button.SelectedItem.Tag; }
 		}
