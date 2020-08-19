@@ -73,6 +73,12 @@ namespace Pinta.Resources
     {
         public const string AddinsManage = "addins-manage";
 
+        public const string AntiAliasingEnabled = "antialiasing-enabled";
+        public const string AntiAliasingDisabled = "antialiasing-disabled";
+
+        public const string BlendingNormal = "blending-normal";
+        public const string BlendingOverwrite = "blending-overwrite";
+
         public const string CursorPosition = "cursor-position";
 
         public const string EditSelectionErase = "edit-selection-erase";
@@ -105,6 +111,16 @@ namespace Pinta.Resources
         public const string LayerNew = "layer-new";
         public const string LayerProperties = "layer-properties";
         public const string LayerRotateZoom = "layer-rotatezoom";
+
+        public const string ResizeCanvasBase = "resize-canvas-base";
+        public const string ResizeCanvasDown = "resize-canvas-down";
+        public const string ResizeCanvasLeft = "resize-canvas-left";
+        public const string ResizeCanvasNE = "resize-canvas-ne";
+        public const string ResizeCanvasNW = "resize-canvas-nw";
+        public const string ResizeCanvasRight = "resize-canvas-right";
+        public const string ResizeCanvasSE = "resize-canvas-se";
+        public const string ResizeCanvasSW = "resize-canvas-sw";
+        public const string ResizeCanvasUp = "resize-canvas-up";
 
         public const string ToolCloneStamp = "tool-clonestamp";
         public const string ToolColorPicker = "tool-colorpicker";

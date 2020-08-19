@@ -65,16 +65,6 @@ namespace Pinta.Core
             PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
 		}
 
-		static BaseTool ()
-		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Toolbar.AntiAliasingEnabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingEnabledIcon.png")));
-			fact.Add ("Toolbar.AntiAliasingDisabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.AntiAliasingDisabledIcon.png")));
-			fact.Add ("Toolbar.BlendingEnabledIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.BlendingEnabledIcon.png")));
-			fact.Add ("Toolbar.BlendingOverwriteIcon.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.BlendingOverwriteIcon.png")));
-			fact.AddDefault ();
-		}
-
 		public virtual string Name { get { throw new ApplicationException ("Tool didn't override Name"); } }
 		public virtual string Icon { get { throw new ApplicationException ("Tool didn't override Icon"); } }		
 		public virtual string ToolTip { get { throw new ApplicationException ("Tool didn't override ToolTip"); } }
@@ -440,8 +430,8 @@ namespace Pinta.Core
 
 			alphablending_button = new ToolBarDropDownButton ();
 
-			abOn = alphablending_button.AddItem (Translations.GetString ("Normal Blending"), "Toolbar.BlendingEnabledIcon.png", true);
-			abOff = alphablending_button.AddItem (Translations.GetString ("Overwrite"), "Toolbar.BlendingOverwriteIcon.png", false);
+			abOn = alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Resources.Icons.BlendingNormal, true);
+			abOff = alphablending_button.AddItem (Translations.GetString ("Overwrite"), Resources.Icons.BlendingOverwrite, false);
 
 			tb.AppendItem (alphablending_button);
 		}
@@ -455,8 +445,8 @@ namespace Pinta.Core
 
 			antialiasing_button = new ToolBarDropDownButton ();
 
-			aaOn = antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), "Toolbar.AntiAliasingEnabledIcon.png", true);
-			aaOff = antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), "Toolbar.AntiAliasingDisabledIcon.png", false);
+			aaOn = antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Resources.Icons.AntiAliasingEnabled, true);
+			aaOff = antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Resources.Icons.AntiAliasingDisabled, false);
 
 			tb.AppendItem (antialiasing_button);
 		}

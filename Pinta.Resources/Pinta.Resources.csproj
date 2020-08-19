@@ -125,33 +125,6 @@
     <EmbeddedResource Include="Resources\Menu.Adjustments.Sepia.png">
       <LogicalName>Menu.Adjustments.Sepia.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.Image.png">
-      <LogicalName>ResizeCanvas.Image.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.DownArrow.png">
-      <LogicalName>ResizeCanvas.DownArrow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.LeftArrow.png">
-      <LogicalName>ResizeCanvas.LeftArrow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.RightArrow.png">
-      <LogicalName>ResizeCanvas.RightArrow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.UpArrow.png">
-      <LogicalName>ResizeCanvas.UpArrow.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.NorthEast.png">
-      <LogicalName>ResizeCanvas.NorthEast.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.NorthWest.png">
-      <LogicalName>ResizeCanvas.NorthWest.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.SouthEast.png">
-      <LogicalName>ResizeCanvas.SouthEast.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ResizeCanvas.SouthWest.png">
-      <LogicalName>ResizeCanvas.SouthWest.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Adjustments.Posterize.png">
       <LogicalName>Menu.Adjustments.Posterize.png</LogicalName>
     </EmbeddedResource>
@@ -280,18 +253,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Toolbar.RadialGradient.png">
       <LogicalName>Toolbar.RadialGradient.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.AntiAliasingDisabledIcon.png">
-      <LogicalName>Toolbar.AntiAliasingDisabledIcon.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.AntiAliasingEnabledIcon.png">
-      <LogicalName>Toolbar.AntiAliasingEnabledIcon.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.BlendingEnabledIcon.png">
-      <LogicalName>Toolbar.BlendingEnabledIcon.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Toolbar.BlendingOverwriteIcon.png">
-      <LogicalName>Toolbar.BlendingOverwriteIcon.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ShapeTool.OutlineFill.png">
       <LogicalName>ShapeTool.OutlineFill.png</LogicalName>

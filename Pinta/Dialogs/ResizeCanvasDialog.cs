@@ -221,79 +221,79 @@ namespace Pinta
 			switch (anchor) {
 				
 			case Anchor.NW:
-				NWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				NButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.RightArrow.png"));
-				WButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.DownArrow.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthEast.png"));
+				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
+				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
 				break;
 			
 			case Anchor.N:
-				NWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.LeftArrow.png"));
-				NButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				NEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.RightArrow.png"));
-				WButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthWest.png"));
-				EButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthEast.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.DownArrow.png"));
-				break;			
+				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
+				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
+				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
+					break;			
 
 			case Anchor.NE:
-				NEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				NButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.LeftArrow.png"));
-				EButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.DownArrow.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthWest.png"));
+				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
 				break;
 				
 			case Anchor.W:
-				NWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.UpArrow.png"));
-				NButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthEast.png"));
-				SWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.DownArrow.png"));
-				WButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				SButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthEast.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.RightArrow.png"));
+				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
+				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
+				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
+				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
 				break;
 
 			case Anchor.Center:
-				NWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthWest.png"));
-				NButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.UpArrow.png"));
-				NEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthEast.png"));
-				WButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.LeftArrow.png"));
-				EButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.RightArrow.png"));
-				SWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthWest.png"));
-				SButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.DownArrow.png"));
-				SEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthEast.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
+				NWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
+				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
+				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
+				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
+				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
+				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
+				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSE, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
 				break;
 			
 			case Anchor.E:
-				NEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.UpArrow.png"));
-				NButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthWest.png"));
-				SEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.DownArrow.png"));
-				EButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				SButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.SouthWest.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.LeftArrow.png"));
+				NEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
+				NButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
+				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasDown, IconSize.Button);
+				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasSW, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
 				break;
 				
 			case Anchor.SW:
-				SWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				SButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.RightArrow.png"));
-				WButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.UpArrow.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthEast.png"));
+				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
+				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
 				break;
 			
 			case Anchor.S:
-				SWButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.LeftArrow.png"));
-				SButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				SEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.RightArrow.png"));
-				WButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthWest.png"));
-				EButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthEast.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.UpArrow.png"));
+				SWButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasRight, IconSize.Button);
+				WButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
+				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNE, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
 				break;			
 
 			case Anchor.SE:
-				SEButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png"));
-				SButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.LeftArrow.png"));
-				EButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.UpArrow.png"));
-				CenterButton.Image = new Gtk.Image (PintaCore.Resources.GetIcon ("ResizeCanvas.NorthWest.png"));
+				SEButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasBase, IconSize.Button);
+				SButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasLeft, IconSize.Button);
+				EButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasUp, IconSize.Button);
+				CenterButton.Image = Image.NewFromIconName(Resources.Icons.ResizeCanvasNW, IconSize.Button);
 				break;
 			}
 		}

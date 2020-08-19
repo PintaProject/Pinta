@@ -50,7 +50,6 @@ namespace Pinta.Tools
 			fact.Add ("Toolbar.Sampling.5x5.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.5x5.png")));
 			fact.Add ("Toolbar.Sampling.7x7.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.7x7.png")));
 			fact.Add ("Toolbar.Sampling.9x9.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Toolbar.Sampling.9x9.png")));
-			fact.Add ("ResizeCanvas.Image.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("ResizeCanvas.Image.png")));
 			fact.AddDefault ();
 		}
 
@@ -129,7 +128,7 @@ namespace Pinta.Tools
 				sample_type = new ToolBarDropDownButton (true);
 
 				sample_type.AddItem (Translations.GetString ("Layer"), Resources.Icons.LayerMergeDown, true);
-				sample_type.AddItem (Translations.GetString ("Image"), "ResizeCanvas.Image.png", false);
+				sample_type.AddItem (Translations.GetString ("Image"), Resources.Icons.ResizeCanvasBase, false);
 			}
 
 			tb.AppendItem (sample_type);
