@@ -94,19 +94,8 @@ namespace Pinta.Core
 
 		private void OpenUrl(string url)
         {
-			try {
-				Process.Start (url);
-            } catch (System.ComponentModel.Win32Exception) {
-				// See bug #1888883. Newer mono versions (e.g. 6.10) throw an
-				// error instead of opening the default browser, so explicitly
-				// try opening via xdg-open if the simple approach fails.
-				if (PintaCore.System.OperatingSystem == OS.X11) {
-					Process.Start ("xdg-open", url);
-				} else {
-					throw;
-                }
-            }
-        }
-		#endregion
+			Gtk.Global.ShowUriOnWindow(PintaCore.Chrome.MainWindow, url, Gtk.Global.CurrentEventTime);
+		}
+#endregion
 	}
 }
