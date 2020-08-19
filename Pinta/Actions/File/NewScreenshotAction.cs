@@ -59,17 +59,15 @@ namespace Pinta.Actions
 
 				GLib.Timeout.Add ((uint)delay * 1000, () => {
 					Screen screen = Screen.Default;
-					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), new Cairo.Color (1, 1, 1));
+					var root_window = screen.RootWindow;
+					Document doc = PintaCore.Workspace.NewDocument (new Size (root_window.Width, root_window.Height), new Cairo.Color (1, 1, 1));
 
-					// TODO-GTK3 (https://github.com/GtkSharp/GtkSharp/issues/174)
-#if false
-					using (Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height)) {
+					using (var pb = new Pixbuf (screen.RootWindow, 0, 0, root_window.Width, root_window.Height)) {
 						using (Cairo.Context g = new Cairo.Context (doc.UserLayers[0].Surface)) {
 							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
 							g.Paint ();
 						}
 					}
-#endif
 
 					doc.IsDirty = true;
 
