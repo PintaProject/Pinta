@@ -353,16 +353,16 @@ namespace Pinta
 			SButton = CreateAnchorButton ();
 			SEButton = CreateAnchorButton ();
 
-			var grid = new Table (3, 3, false) { RowSpacing = spacing, ColumnSpacing = spacing };
-			grid.Attach (NWButton, 0, 1, 0, 1);
-			grid.Attach (NButton, 1, 2, 0, 1);
-			grid.Attach (NEButton, 2, 3, 0, 1);
-			grid.Attach (WButton, 0, 1, 1, 2);
-			grid.Attach (CenterButton, 1, 2, 1, 2);
-			grid.Attach (EButton, 2, 3, 1, 2);
-			grid.Attach (SWButton, 0, 1, 2, 3);
-			grid.Attach (SButton, 1, 2, 2, 3);
-			grid.Attach (SEButton, 2, 3, 2, 3);
+			var grid = new Grid () { RowSpacing = spacing, ColumnSpacing = spacing };
+			grid.Attach (NWButton, 0, 0, 1, 1);
+			grid.Attach (NButton, 1, 0, 1, 1);
+			grid.Attach (NEButton, 2, 0, 1, 1);
+			grid.Attach (WButton, 0, 1, 1, 1);
+			grid.Attach (CenterButton, 1, 1, 1, 1);
+			grid.Attach (EButton, 2, 1, 1, 1);
+			grid.Attach (SWButton, 0, 2, 1, 1);
+			grid.Attach (SButton, 1, 2, 1, 1);
+			grid.Attach (SEButton, 2, 2, 1, 1);
 
 			var grid_align = new Alignment (0.5f, 0.5f, 0, 0);
 			grid_align.Add (grid);

@@ -182,10 +182,10 @@ namespace Pinta
         private void BuildDialog ()
         {
             // Layout table for preset, width, and height
-            var layout_table = new Table (3, 2, false);
+            var layout_grid = new Grid();
 
-            layout_table.RowSpacing = 5;
-            layout_table.ColumnSpacing = 6;
+            layout_grid.RowSpacing = 5;
+            layout_grid.ColumnSpacing = 6;
 
             // Preset Combo
             var size_label = new Label (Translations.GetString ("Preset:"));
@@ -205,8 +205,8 @@ namespace Pinta
 
             preset_combo.Active = 0;
 
-            layout_table.Attach (size_label, 0, 1, 0, 1, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
-            layout_table.Attach (preset_combo, 1, 2, 0, 1, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
+            layout_grid.Attach(size_label, 0, 0, 1, 1);
+            layout_grid.Attach(preset_combo, 1, 0, 1, 1);
             
             // Width Entry
             var width_label = new Label (Translations.GetString ("Width:"));
@@ -222,8 +222,8 @@ namespace Pinta
             width_hbox.PackStart (width_entry, false, false, 0);
             width_hbox.PackStart (width_units, false, false, 5);
 
-            layout_table.Attach (width_label, 0, 1, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
-            layout_table.Attach (width_hbox, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
+            layout_grid.Attach(width_label, 0, 1, 1, 1);
+            layout_grid.Attach(width_hbox, 1, 1, 1, 1);
 
             // Height Entry
             var height_label = new Label (Translations.GetString ("Height:"));
@@ -239,8 +239,8 @@ namespace Pinta
             height_hbox.PackStart (height_entry, false, false, 0);
             height_hbox.PackStart (height_units, false, false, 5);
 
-            layout_table.Attach (height_label, 0, 1, 2, 3, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
-            layout_table.Attach (height_hbox, 1, 2, 2, 3, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Fill, 0, 0);
+            layout_grid.Attach(height_label, 0, 2, 1, 1);
+            layout_grid.Attach(height_hbox, 1, 2, 1, 1);
 
             // Orientation Radio options
             var orientation_label = new Label (Translations.GetString ("Orientation:"));
@@ -310,7 +310,7 @@ namespace Pinta
             var options_vbox = new VBox ();
             options_vbox.Spacing = 10;
 
-            options_vbox.PackStart (layout_table, false, false, 3);
+            options_vbox.PackStart (layout_grid, false, false, 3);
             options_vbox.PackStart (orientation_vbox, false, false, 0);
             options_vbox.PackStart (background_vbox, false, false, 4);
 
