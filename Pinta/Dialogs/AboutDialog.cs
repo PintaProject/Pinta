@@ -124,7 +124,6 @@ namespace Pinta
 		public ScrollBox ()
 		{
 			this.Realized += new EventHandler (OnRealized);
-			this.ModifyBg (Gtk.StateType.Normal, new Gdk.Color (49, 49, 74));
 
 			image = PintaCore.Resources.GetIcon ("About.Image.png");
 			image_top = PintaCore.Resources.GetIcon ("About.ImageTop.png");
