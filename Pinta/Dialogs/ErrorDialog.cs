@@ -107,7 +107,7 @@ namespace Pinta
 			
 			bug_report_button = new Button (Translations.GetString ("Report Bug...."));
 			bug_report_button.CanFocus = false;
-			ActionArea.Add (bug_report_button);
+			AddActionWidget(bug_report_button, ResponseType.Help);
 
 			var ok_button = new Button (Gtk.Stock.Ok);
 			ok_button.CanDefault = true;

@@ -70,9 +70,15 @@ namespace Pinta
 				using var errorDialog = new ErrorDialog(parent);
 				errorDialog.SetMessage(message);
 				errorDialog.AddDetails(details);
-				errorDialog.Run();
-			}
-			);
+
+				while (true)
+                {
+					var response = (ResponseType)errorDialog.Run();
+					if (response != ResponseType.Help)
+						break;
+                }
+            }
+            );
 
 			PintaCore.Initialize();
 
