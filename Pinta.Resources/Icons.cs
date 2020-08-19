@@ -129,5 +129,13 @@ namespace Pinta.Resources
         public const string ToolSelectRectangle = "tool-select-rectangle";
         public const string ToolText = "tool-text";
         public const string ToolZoom = "tool-zoom";
+
+        public const string ViewGrid = "view-grid";
+        public const string ViewRulers = "view-rulers";
+        public const string ViewZoom100 = "view-zoom-100";
+        public const string ViewZoomIn = "view-zoom-in";
+        public const string ViewZoomOut = "view-zoom-out";
+        public const string ViewZoomSelection = "view-zoom-selection";
+        public const string ViewZoomWindow = "view-zoom-window";
     }
 }

@@ -62,8 +62,8 @@ namespace Pinta.Tools
 		{
 			this.mouseDown = 0;
 
-            cursorZoomIn = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.View.ZoomIn.png"), 0, 0);
-            cursorZoomOut = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Menu.View.ZoomOut.png"), 0, 0);
+            cursorZoomIn = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ViewZoomIn, 16), 0, 0);
+            cursorZoomOut = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ViewZoomOut, 16), 0, 0);
             cursorZoom = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolZoom, 16), 0, 0);
             cursorZoomPan = new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolPan, 16), 0, 0);
 		}

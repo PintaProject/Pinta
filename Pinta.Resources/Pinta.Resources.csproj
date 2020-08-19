@@ -101,27 +101,6 @@
       <DeployService-UseProjectRelativePath>true</DeployService-UseProjectRelativePath>
       <LogicalName>Pinta.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.ActualSize.png">
-      <LogicalName>Menu.View.ActualSize.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.Grid.png">
-      <LogicalName>Menu.View.Grid.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.Rulers.png">
-      <LogicalName>Menu.View.Rulers.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.ZoomIn.png">
-      <LogicalName>Menu.View.ZoomIn.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.ZoomOut.png">
-      <LogicalName>Menu.View.ZoomOut.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.ZoomToSelection.png">
-      <LogicalName>Menu.View.ZoomToSelection.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Menu.View.ZoomToWindow.png">
-      <LogicalName>Menu.View.ZoomToWindow.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.Adjustments.AutoLevel.png">
       <LogicalName>Menu.Adjustments.AutoLevel.png</LogicalName>
     </EmbeddedResource>
