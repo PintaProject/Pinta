@@ -32,7 +32,7 @@ namespace Pinta.Docking.AtkCocoaHelper
 {
 	public static class AtkCocoaExtensions
 	{
-		public static void SetCommonAttributes (this Atk.Object o, string? name, string? label, string? help)
+		public static void SetCommonAttributes (this Atk.Object o, string name, string label, string help)
 		{
 			if (!string.IsNullOrEmpty (name)) {
 				o.Name = name;
@@ -75,13 +75,13 @@ namespace Pinta.Docking.AtkCocoaHelper
 		}
 #endif
 
-		public static void SetCommonAccessibilityAttributes (this Gtk.Widget w, string? name, string? label, string? help)
+		public static void SetCommonAccessibilityAttributes (this Gtk.Widget w, string name, string label, string help)
 		{
 			var accessible = w.Accessible;
 			accessible.SetCommonAttributes (name, label, help);
 		}
 
-		public static void SetCommonAccessibilityAttributes (this Gtk.Widget w, string? name, Gtk.Widget? label, string? help)
+		public static void SetCommonAccessibilityAttributes (this Gtk.Widget w, string name, Gtk.Widget label, string help)
 		{
 			var accessible = w.Accessible;
 			accessible.SetCommonAttributes (name, null, help);
@@ -532,7 +532,7 @@ namespace Pinta.Docking.AtkCocoaHelper
 		void RemoveAccessibleChild (IAccessibilityElementProxy child);
 
 		void SetRole (string role, string? description = null);
-		void SetRole (AtkCocoa.Roles role, string? description = null);
+		void SetRole (AtkCocoa.Roles role, string description = null);
 
 		string Value { get; set; }
 		string Title { get; set; }
