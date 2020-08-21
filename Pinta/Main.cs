@@ -84,6 +84,9 @@ namespace Pinta
 
 			Application.Init ();
 
+			// For testing a dark variant of the theme.
+			//Gtk.Settings.Default.SetProperty("gtk-application-prefer-dark-theme", new GLib.Value(true));
+
 			// Add the "icons" subdirectory to the icon search path.
 			// This is primarily used for Windows / macOS, along with development builds.
 			// TODO-GTK3 - On Linux, these should be installed under /usr/share/...
