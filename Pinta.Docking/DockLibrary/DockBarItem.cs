@@ -35,6 +35,7 @@ using Xwt.Motion;
 using Gdk;
 using Pinta.Docking.AtkCocoaHelper;
 using Pinta.Core;
+using Cairo;
 
 namespace Pinta.Docking
 {	
@@ -84,35 +85,32 @@ namespace Pinta.Docking
 			base.OnDestroyed ();
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			minimum_height = natural_height = primary.Height;
+        }
 
-			requisition.Width = (int) primary.Width;
-			requisition.Height = (int) primary.Height;
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			minimum_width = natural_width = primary.Width;
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			using (Cairo.Context context = Gdk.CairoHelper.Create (evnt.Window)) {
-				if (secondaryOpacity < 1.0f)
-					RenderIcon (context, primary, 1.0f - (float)Math.Pow (secondaryOpacity, 3.0f));
+        protected override bool OnDrawn(Context context)
+        {
+			if (secondaryOpacity < 1.0f)
+				RenderIcon(context, primary, 1.0f - (float)Math.Pow(secondaryOpacity, 3.0f));
 
-				if (secondaryOpacity > 0.0f)
-					RenderIcon (context, secondary, secondaryOpacity);
-			}
+			if (secondaryOpacity > 0.0f)
+				RenderIcon(context, secondary, secondaryOpacity);
 
 			return false;
-		}
-#endif
+        }
 
-		void RenderIcon (Cairo.Context context, Pixbuf surface, double opacity)
+        void RenderIcon (Cairo.Context context, Pixbuf surface, double opacity)
 		{
 			context.DrawImage (this, surface.WithAlpha (opacity),
-			                          Allocation.X + (Allocation.Width - surface.Width) / 2,
-			                          Allocation.Y + (Allocation.Height - surface.Height) / 2);
+			                          (Allocation.Width - surface.Width) / 2,
+			                          (Allocation.Height - surface.Height) / 2);
 		}
 	}
 
@@ -248,7 +246,6 @@ namespace Pinta.Docking
 				crossfade = new CrossfadeIcon (desat, it.Icon);
 				crossfade.Accessible.SetShouldIgnore (true);
 				box.PackStart (crossfade, false, false, 0);
-				desat.Dispose ();
 			}
 				
 			if (!string.IsNullOrEmpty (it.Label)) {
