@@ -145,10 +145,7 @@ namespace Pinta.Docking
 			sepBox.ButtonPressEvent += OnSizeButtonPress;
 			sepBox.ButtonReleaseEvent += OnSizeButtonRelease;
 			sepBox.MotionNotifyEvent += OnSizeMotion;
-			// TODO-GTK3
-#if false
-			sepBox.ExposeEvent += OnGripExpose;
-#endif
+			sepBox.Drawn += OnGripExpose;
 			sepBox.EnterNotifyEvent += delegate { insideGrip = true; sepBox.QueueDraw (); };
 			sepBox.LeaveNotifyEvent += delegate { insideGrip = false; sepBox.QueueDraw (); };
 		}
@@ -360,19 +357,15 @@ namespace Pinta.Docking
 			}
 		}
 
-		// TODO-GTK3
-#if false
-		void OnGripExpose (object sender, Gtk.ExposeEventArgs args)
+		void OnGripExpose (object sender, Gtk.DrawnArgs args)
 		{
 			var w = (EventBox) sender;
-			StateType s = insideGrip ? StateType.Prelight : StateType.Normal;
-			
-			using (var ctx = CairoHelper.Create (args.Event.Window)) {
-				ctx.SetSourceColor (w.Style.Background (s).ToCairoColor ());
-				ctx.Paint ();
-			}
+			StateFlags s = insideGrip ? StateFlags.Prelight : StateFlags.Normal;
+
+			var ctx = args.Cr;
+			ctx.SetSourceColor (w.StyleContext.GetBackgroundColor(s).ToCairoColor ());
+			ctx.Paint ();
 		}
-#endif
 	}
 	
 	class ScrollableContainer: EventBox
@@ -398,21 +391,23 @@ namespace Pinta.Docking
 			QueueResize ();
 		}
 
-		// TODO-GTK3
-#if false
-		protected override void OnSizeRequested (ref Requisition req)
-		{
-			base.OnSizeRequested (ref req);
-			if (scrollMode || Child == null) {
-				req.Width = 0;
-				req.Height = 0;
-			}
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			if (scrollMode || Child == null)
+				minimum_height = natural_height = 0;
 			else
-				req = Child.SizeRequest ();
-		}
-#endif
+				Child.GetPreferredHeight(out minimum_height, out natural_height);
+        }
 
-		protected override void OnSizeAllocated (Rectangle alloc)
+        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			if (scrollMode || Child == null)
+				minimum_width = natural_width = 0;
+			else
+				Child.GetPreferredWidth(out minimum_width, out natural_width);
+        }
+
+        protected override void OnSizeAllocated (Rectangle alloc)
 		{
 			if (scrollMode && Child != null) {
 				switch (expandPos) {

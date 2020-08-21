@@ -532,47 +532,39 @@ namespace Pinta.Docking
 			return true;
 		}
 
-		// TODO-GTK3
-#if false
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-				var alloc = Allocation;
+        protected override bool OnDrawn(Context context)
+        {
+			Cairo.LinearGradient lg;
 
-				// TODO: VV: Remove preflight gradient features and replace with a flat color
-
-				Cairo.LinearGradient lg;
-
-				if (bar.Orientation == Orientation.Horizontal) {
-					lg = new Cairo.LinearGradient (alloc.X, 0, alloc.X + alloc.Width, 0);
-				} else {
-					lg = new Cairo.LinearGradient (0, alloc.Y, 0, alloc.Y + alloc.Height);
-				}
-
-				using (lg) {
-					Cairo.Color primaryColor = Styles.DockBarPrelightColor.ToCairoColor ();
-					primaryColor.A = hoverProgress;
-
-					Cairo.Color transparent = primaryColor;
-					transparent.A = 0;
-
-					lg.AddColorStop (0.0, transparent);
-					lg.AddColorStop (0.35, primaryColor);
-					lg.AddColorStop (0.65, primaryColor);
-					lg.AddColorStop (1.0, transparent);
-
-					context.Rectangle (alloc.ToCairoRect ());
-					context.SetSource (lg);
-				}
-				context.Fill ();
+			if (bar.Orientation == Orientation.Horizontal)
+			{
+				lg = new Cairo.LinearGradient(0, 0, AllocatedWidth, 0);
+			}
+			else
+			{
+				lg = new Cairo.LinearGradient(0, 0, 0, AllocatedHeight);
 			}
 
-			if (HasFocus) {
-				Gtk.Style.PaintFocus (Style, Window, State, Allocation, this, "button", Allocation.X + 2, Allocation.Y + 2, Allocation.Width - 4, Allocation.Height - 4);
+			using (lg)
+			{
+				Cairo.Color primaryColor = Styles.DockBarPrelightColor.ToCairoColor();
+				primaryColor.A = hoverProgress;
+
+				Cairo.Color transparent = primaryColor;
+				transparent.A = 0;
+
+				lg.AddColorStop(0.0, transparent);
+				lg.AddColorStop(0.35, primaryColor);
+				lg.AddColorStop(0.65, primaryColor);
+				lg.AddColorStop(1.0, transparent);
+
+				context.Rectangle(0, 0, AllocatedWidth, AllocatedHeight);
+				context.SetSource(lg);
 			}
-			return base.OnExposeEvent (evnt);
-		}
-#endif
+			context.Fill();
+
+			return base.OnDrawn(context);
+        }
 
 		protected override bool OnFocusInEvent (Gdk.EventFocus evnt)
 		{
