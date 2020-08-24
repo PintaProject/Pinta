@@ -97,6 +97,7 @@
     <Compile Include="Dialogs\AboutDialog.cs" />
     <Compile Include="Dialogs\AboutPintaTabPage.cs" />
     <Compile Include="Dialogs\ErrorDialog.cs" />
+    <Compile Include="Dialogs\FileUnsupportedFormatDialog.cs" />
     <Compile Include="Dialogs\JpegCompressionDialog.cs" />
     <Compile Include="Dialogs\LayerPropertiesDialog.cs" />
     <Compile Include="Dialogs\NewImageDialog.cs" />

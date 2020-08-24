@@ -54,8 +54,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
-
   <!-- Source files -->
   <ItemGroup>
     <Compile Include="Actions\AddinActions.cs" />
