@@ -195,7 +195,7 @@ namespace Pinta.Tools
 			current_point = point;
 			doc.ToolLayer.Hidden = true;
 
-			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentUserLayer, args.Event.IsShiftPressed ());
+			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentUserLayer);
 			
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			
@@ -222,8 +222,7 @@ namespace Pinta.Tools
 
 			doc.ToolLayer.Clear ();
 
-			bool shiftkey_pressed = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), shiftkey_pressed), doc.ToolLayer, shiftkey_pressed);
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.State.IsShiftPressed()), doc.ToolLayer);
 
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (UseAntialiasing) {
@@ -246,14 +245,6 @@ namespace Pinta.Tools
 		protected virtual Rectangle DrawShape (Rectangle r, Layer l)
 		{
 			return r;
-		}
-
-		/// <summary>
-		/// Override this to implement features on shift, like line snapping.
-		/// </summary>
-		protected virtual Rectangle DrawShape (Rectangle r, Layer l, bool shiftkey_pressed)
-		{
-			return DrawShape (r, l);
 		}
 		
 		protected virtual BaseHistoryItem CreateHistoryItem ()

@@ -18,7 +18,7 @@
         <Directory Id="INSTALLLOCATION" Name="Pinta">
           <Component Id="ProductComponent" Guid="7D5ABDF1-2CCE-4A74-8AFE-A06237D783AB">
             <!-- Executable with Start Menu Icon -->
-            <File Name="Pinta.exe" Source="$(var.BuildRoot)\Pinta.exe">
+            <File Name="Pinta.exe" Source="$(var.BuildRoot)\Pinta.exe" KeyPath="yes">
               <Shortcut Id="pinta_shortcut" Directory="ProgramMenuDir" Name="$(var.ProductShortName)" Icon="Pinta.exe" IconIndex="0" Advertise="yes" />
             </File>
 
@@ -523,12 +523,14 @@
       <ComponentRef Id="AzTranslation" />
       <ComponentRef Id="BeTranslation" />
       <ComponentRef Id="BgTranslation" />
+      <ComponentRef Id="BnTranslation" />
       <ComponentRef Id="BrTranslation" />
       <ComponentRef Id="BsTranslation" />
       <ComponentRef Id="CaTranslation" />
       <ComponentRef Id="CsTranslation" />
       <ComponentRef Id="DaTranslation" />
       <ComponentRef Id="DeTranslation" />
+      <ComponentRef Id="DvTranslation" />
       <ComponentRef Id="ElTranslation" />
       <ComponentRef Id="EnAuTranslation" />
       <ComponentRef Id="EnCaTranslation" />
@@ -557,6 +559,7 @@
       <ComponentRef Id="LtTranslation" />
       <ComponentRef Id="LvTranslation" />
       <ComponentRef Id="MsTranslation" />
+      <ComponentRef Id="MyTranslation" />
       <ComponentRef Id="NbTranslation" />
       <ComponentRef Id="NlTranslation" />
       <ComponentRef Id="NnTranslation" />
@@ -566,6 +569,7 @@
       <ComponentRef Id="PtBrTranslation" />
       <ComponentRef Id="RoTranslation" />
       <ComponentRef Id="RuTranslation" />
+      <ComponentRef Id="SiTranslation" />
       <ComponentRef Id="SkTranslation" />
       <ComponentRef Id="SlTranslation" />
       <ComponentRef Id="SqTranslation" />
@@ -576,6 +580,7 @@
       <ComponentRef Id="UkTranslation" />
       <ComponentRef Id="ViTranslation" />
       <ComponentRef Id="ZhCnTranslation" />
+      <ComponentRef Id="ZhHkTranslation" />
       <ComponentRef Id="ZhTwTranslation" />
     </Feature>
 

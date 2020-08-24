@@ -87,8 +87,11 @@ namespace Pinta.Core
 			menu.Append (Save.CreateAcceleratedMenuItem (Gdk.Key.S, Gdk.ModifierType.ControlMask));
 			menu.Append (SaveAs.CreateAcceleratedMenuItem (Gdk.Key.S, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask));
 			menu.AppendSeparator ();
+			// Printing is disabled for now until it is fully functional.
+#if false
 			menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 			menu.AppendSeparator ();
+#endif
 			menu.Append (Close.CreateAcceleratedMenuItem (Gdk.Key.W, Gdk.ModifierType.ControlMask));
 			menu.Append (Exit.CreateAcceleratedMenuItem (Gdk.Key.Q, Gdk.ModifierType.ControlMask));
 		}
@@ -96,9 +99,9 @@ namespace Pinta.Core
 		public void RegisterHandlers ()
 		{
 		}
-		#endregion
+#endregion
 
-		#region Event Invokers
+#region Event Invokers
 		public void RaiseBeforeQuit ()
 		{
 			if (BeforeQuit != null)
@@ -126,6 +129,6 @@ namespace Pinta.Core
 				
 			return e.Cancel ? -1 : e.Quality;
 		}
-		#endregion
+#endregion
 	}
 }

@@ -155,6 +155,17 @@ namespace Pinta.Core
 			InvertSelection.Activated += HandleInvertSelectionActivated;
 
 			PintaCore.Workspace.ActiveDocumentChanged += WorkspaceActiveDocumentChanged;
+
+			PintaCore.Workspace.SelectionChanged += (o, _) => {
+				var visible = false;
+				if (PintaCore.Workspace.HasOpenDocuments)
+					visible = PintaCore.Workspace.ActiveDocument.Selection.Visible;
+
+				Deselect.Sensitive = visible;
+				EraseSelection.Sensitive = visible;
+				FillSelection.Sensitive = visible;
+				InvertSelection.Sensitive = visible;
+			};
 		}
 
 		#endregion
@@ -190,7 +201,7 @@ namespace Pinta.Core
 			hist.TakeSnapshot ();
 
 			doc.ResetSelectionPaths ();
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 
 			doc.History.PushNewItem (hist);
 			doc.Workspace.Invalidate ();

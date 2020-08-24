@@ -1,0 +1,100 @@
+name: Build
+
+on:
+  # Build on new commits or pull requests.
+  push:
+  pull_request:
+  schedule:
+    # Run every week just to make sure the CI environment still works.
+    - cron: '0 0 * * 0'
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Apt Dependencies
+      run: |
+        sudo apt update
+        sudo apt install mono-devel mono-xbuild libgtk2.0-cil-dev autotools-dev gettext intltool libnunit-cil-dev nunit-console
+    - name: Build
+      run: |
+        ./autogen.sh
+        make
+        make test
+        make releasezip
+    - name: Upload Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Pinta-ubuntu1804.zip"
+        path: pinta-1.8.zip
+        if-no-files-found: error
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    # Mono and gettext are already available on the CI environment.
+    - name: Build
+      run: |
+        msbuild Pinta.sln -p:Configuration=Release
+        msbuild Pinta.Install.proj -target:CompileTranslations
+
+    - name: Build Installer
+      run: |
+        cd osx
+        ./build_installer.sh
+
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Pinta.app.zip"
+        path: osx/Pinta.app.zip
+        if-no-files-found: error
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1.0.0
+
+    - name: Install Dependencies
+      run: |
+        choco install gtksharp -y -f -v
+
+    - name: Build
+      run: msbuild Pinta.sln -p:Configuration=Release
+
+    # Note that msgfmt is already available from the Git for Windows installation!
+    - name: Compile Translations
+      run: msbuild Pinta.Install.proj -target:CompileTranslations
+
+    - name: Cache VC redist
+      id: cache-redist
+      uses: actions/cache@v2
+      with:
+        path: Wix/vcredist_x86.exe
+        key: ${{ runner.os }}-redist-v1
+
+    - name: Fetch VC redist
+      if: steps.cache-redist.outputs.cache-hit != 'true'
+      run: |
+        cd Wix
+        Invoke-WebRequest https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe -OutFile vcredist_x86.exe
+
+    # Reuse the gtk-sharp msi that choco already downloaded!
+    - name: Build Installer
+      run: |
+        cd Wix
+        cp C:\Users\runneradmin\AppData\Local\Temp\chocolatey\gtksharp\2.12.45\gtk-sharp-2.12.45.msi .
+        msbuild PintaWix.sln -p:Configuration=Release
+
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Pinta.exe"
+        path: Wix/bin/Release/Pinta.exe
+        if-no-files-found: error

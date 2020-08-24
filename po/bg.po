@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 18:07-0500\n"
+"POT-Creation-Date: 2020-07-27 21:13-0400\n"
 "PO-Revision-Date: 2014-10-04 07:12+0000\n"
 "Last-Translator: Ve4ernik <ve4ernik@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2016-06-04 22:52+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
+"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
 
 #: ../xdg/pinta.desktop.in.h:1
 msgid "Pinta"
@@ -34,134 +34,126 @@ msgstr "Редактор на изображения"
 msgid "Pinta Image Editor"
 msgstr "Редактор на изображения Pinta"
 
+#: ../xdg/pinta.desktop.in.h:5
+msgid "draw;drawing;paint;painting;graphics;raster;2d;"
+msgstr ""
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager"
 msgstr "Мениджър на добавките"
 
-#: ../Pinta.Core/Actions/EditActions.cs:67
+#: ../Pinta.Core/Actions/EditActions.cs:69
 msgid "Undo"
 msgstr "Отмяна"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Redo"
 msgstr "Връщане"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:229
 msgid "Cut"
 msgstr "Отрязване"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
+#: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Copy"
 msgstr "Копиране"
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:73
 msgid "Copy Merged"
 msgstr "Копиране на слятото"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
-#: ../Pinta.Core/Classes/Document.cs:794
-#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:44
+#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Classes/Document.cs:780
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
 msgid "Paste"
 msgstr "Поставяне"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
-#: ../Pinta.Core/Classes/Document.cs:790
+#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Classes/Document.cs:776
 msgid "Paste Into New Layer"
 msgstr "Постави в нов слой"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:76
 msgid "Paste Into New Image"
 msgstr "Постави в ново изображение"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Actions/EditActions.cs:218
+#: ../Pinta.Core/Actions/EditActions.cs:77
+#: ../Pinta.Core/Actions/EditActions.cs:231
 msgid "Erase Selection"
 msgstr "Отрязване на селекцията"
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:178
+#: ../Pinta.Core/Actions/EditActions.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:191
 msgid "Fill Selection"
 msgstr "Запълни селекцията"
 
-#: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:414
+#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:421
 msgid "Invert Selection"
 msgstr "Обръщане на селекцията"
 
-#: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:187
+#: ../Pinta.Core/Actions/EditActions.cs:80
+#: ../Pinta.Core/Actions/EditActions.cs:200
 msgid "Select All"
 msgstr "Избиране на всичко"
 
-#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:81
 msgid "Deselect All"
 msgstr "Отказване от всички избрано"
 
-#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:83
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Open..."
 msgstr "Отваряне..."
 
-#: ../Pinta.Core/Actions/EditActions.cs:82
+#: ../Pinta.Core/Actions/EditActions.cs:84
 #: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Save As..."
 msgstr "Запазване като…"
 
-#: ../Pinta.Core/Actions/EditActions.cs:83
+#: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
 msgstr "Reset to Default"
 
-#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:86
 msgid "Set Number of Colors"
 msgstr "Задай брой на цветове"
 
-#: ../Pinta.Core/Actions/EditActions.cs:125 ../Pinta/Pads/ColorPalettePad.cs:42
+#: ../Pinta.Core/Actions/EditActions.cs:127 ../Pinta/Pads/ColorPalettePad.cs:42
 #: ../Pinta/Pads/ColorPalettePad.cs:49
 msgid "Palette"
 msgstr "Палитра"
 
-#: ../Pinta.Core/Actions/EditActions.cs:227
+#: ../Pinta.Core/Actions/EditActions.cs:240
 msgid "Deselect"
 msgstr "Деселектиране"
 
-#: ../Pinta.Core/Actions/EditActions.cs:323
+#: ../Pinta.Core/Actions/EditActions.cs:336
 msgid "Open Palette File"
 msgstr "Отвори палитра"
 
-#: ../Pinta.Core/Actions/EditActions.cs:330
-msgid "Palette files (*.txt, *.gpl)"
-msgstr "Палитри (*.txt, *.gpl)"
+#: ../Pinta.Core/Actions/EditActions.cs:348
+msgid "Palette files"
+msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:334
+#: ../Pinta.Core/Actions/EditActions.cs:352
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr "Всички файлове"
 
-#: ../Pinta.Core/Actions/EditActions.cs:350
-#, csharp-format
-msgid ""
-"Could not open palette file: {0}.\n"
-"Please verify that you are trying to open a valid GIMP or Paint.NET palette."
-msgstr "Не може да се отвори палитра: {0}."
-
-#: ../Pinta.Core/Actions/EditActions.cs:351
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
-msgid "Error"
-msgstr "Грешка"
-
-#: ../Pinta.Core/Actions/EditActions.cs:363
+#: ../Pinta.Core/Actions/EditActions.cs:373
 msgid "Save Palette File"
 msgstr "Запази палитра"
-
-#: ../Pinta.Core/Actions/EditActions.cs:369
-msgid "Paint.NET palette (*.txt)"
-msgstr "Paint.NET палитри (*.txt)"
-
-#: ../Pinta.Core/Actions/EditActions.cs:374
-msgid "GIMP palette (*.gpl)"
-msgstr "GIMP палитри (*.gpl)"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New..."
@@ -176,7 +168,7 @@ msgid "Open Recent"
 msgstr "Последно използвани"
 
 #: ../Pinta.Core/Actions/FileActions.cs:64
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:173
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
 msgid "Close"
 msgstr "Затваряне"
 
@@ -221,7 +213,7 @@ msgid "About"
 msgstr "За програмата"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:283
+#: ../Pinta.Core/Actions/ImageActions.cs:291
 msgid "Crop to Selection"
 msgstr "Изрязване на селекцията"
 
@@ -263,13 +255,13 @@ msgid "Rotate 180°"
 msgstr "Завърти на 180°"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:69
-#: ../Pinta.Core/Actions/ImageActions.cs:138
+#: ../Pinta.Core/Actions/ImageActions.cs:146
 msgid "Flatten"
 msgstr "Плоскост"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:852
+#: ../Pinta.Core/Classes/Document.cs:839
 msgid "Add New Layer"
 msgstr "Добави нов слой"
 
@@ -372,7 +364,7 @@ msgid "Fullscreen"
 msgstr "Цял екран"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
-#: ../Pinta.Core/Actions/ViewActions.cs:276
+#: ../Pinta.Core/Actions/ViewActions.cs:277
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
 msgid "Window"
@@ -384,7 +376,7 @@ msgstr "Мерни единици"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:257
+#: ../Pinta.Core/Actions/ViewActions.cs:258
 #, csharp-format
 msgid "{0}%"
 msgstr ""
@@ -397,75 +389,74 @@ msgstr "Запази всичко"
 msgid "Close All"
 msgstr "Затваряне на всичко"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:244
+#: ../Pinta.Core/Classes/BaseTool.cs:261
 msgid "Tool"
 msgstr "Инструмент"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:316
+#: ../Pinta.Core/Classes/BaseTool.cs:333
 msgid "Shortcut key"
 msgstr "Пряк път"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:428
+#: ../Pinta.Core/Classes/BaseTool.cs:445
 msgid "Normal Blending"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:429
+#: ../Pinta.Core/Classes/BaseTool.cs:446
 msgid "Overwrite"
 msgstr "Презаписване"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:443
+#: ../Pinta.Core/Classes/BaseTool.cs:460
 msgid "Antialiasing On"
 msgstr "Изглаждане включено"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:444
+#: ../Pinta.Core/Classes/BaseTool.cs:461
 msgid "Antialiasing Off"
 msgstr "Изглаждане изключено"
 
-#: ../Pinta.Core/Classes/Document.cs:305 ../Pinta.Core/Classes/Document.cs:310
+#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr "Слой"
 
-#: ../Pinta.Core/Classes/Document.cs:392
+#: ../Pinta.Core/Classes/Document.cs:378
 msgid "copy"
 msgstr "копиране"
 
-#: ../Pinta.Core/Classes/Document.cs:668
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:39
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:86
+#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
 msgid "Resize Canvas"
 msgstr "Преоразмеряване на платното"
 
-#: ../Pinta.Core/Classes/Document.cs:868
+#: ../Pinta.Core/Classes/Document.cs:855
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
-#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:67
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr "Премести селектираните пиксели"
 
-#: ../Pinta.Core/Classes/Document.cs:885
+#: ../Pinta.Core/Classes/Document.cs:871
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:886
+#: ../Pinta.Core/Classes/Document.cs:872
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:890
+#: ../Pinta.Core/Classes/Document.cs:876
 msgid "Expand canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:891
+#: ../Pinta.Core/Classes/Document.cs:877
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:904
+#: ../Pinta.Core/Classes/Document.cs:890
 msgid "Image cannot be pasted"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:905
+#: ../Pinta.Core/Classes/Document.cs:891
 msgid "The clipboard does not contain an image."
 msgstr ""
 
@@ -486,7 +477,7 @@ msgid "Xor (Ctrl + Right Click)"
 msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
-msgid "Intersect (Shift + Left Click)"
+msgid "Intersect (Alt + Left Click)"
 msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
@@ -548,7 +539,7 @@ msgid "Color"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:47
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:70
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:437
 msgid "Luminosity"
 msgstr "Блясък"
 
@@ -583,8 +574,7 @@ msgid "Flip Layer Vertical"
 msgstr "Обърни вертикално"
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:38
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:56
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:45
 msgid "Resize Image"
 msgstr "Преоразмеряване на изображение"
 
@@ -598,7 +588,7 @@ msgstr "{0} изображение ({1})"
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:221
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:222
 msgid "Rendering Effect"
 msgstr "Ефект при рендиране"
 
@@ -638,6 +628,12 @@ msgstr ""
 msgid "Could not open file: {0}"
 msgstr "Файлът не може да се отвори: {0}"
 
+#. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
+#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
+#, csharp-format
+msgid "{0} palette ({1})"
+msgstr ""
+
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:541
 msgid "Hide"
 msgstr "Скрий"
@@ -647,7 +643,7 @@ msgid "Minimize"
 msgstr ""
 
 #: ../Pinta.Docking/DockLibrary/DockItem.cs:557
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:248
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
 msgid "Dock"
 msgstr "Прикрепяне"
 
@@ -655,8 +651,8 @@ msgstr "Прикрепяне"
 msgid "Undock"
 msgstr ""
 
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:163
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:252
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
 msgid "Auto Hide"
 msgstr "Автоматично скриване"
 
@@ -683,8 +679,7 @@ msgid "Contrast"
 msgstr "Контраст"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:82
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:30
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
 msgid "Curves"
 msgstr "Криви"
 
@@ -714,6 +709,38 @@ msgstr "Намаляване на цветовете (ефект постери�
 msgid "Sepia"
 msgstr "Сепия"
 
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:430
+msgid "Transfer Map"
+msgstr "Трансферна карта"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:436
+msgid "RGB"
+msgstr "ЧЗС"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:456
+msgid "Red  "
+msgstr "Червено  "
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:457
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
+msgid "Green"
+msgstr "Зелено"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:458
+msgid "Blue "
+msgstr "Синьо "
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:466
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
+msgid "Reset"
+msgstr "Изчистване"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:471
+msgid "Tip: Right-click to remove control points."
+msgstr ""
+"Подсказка: Натиснете десен бутон, за да премахнете контролните точки."
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
 msgid "Levels Adjustment"
@@ -723,12 +750,6 @@ msgstr "Настройка на нивата"
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
 msgstr "Червено"
-
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:126
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
-msgid "Green"
-msgstr "Зелено"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
@@ -1017,7 +1038,7 @@ msgid "Red Eye Removal"
 msgstr "Премахване на червени очи"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
-#: ../Pinta.Tools/Tools/FloodTool.cs:91 ../Pinta.Tools/Tools/RecolorTool.cs:80
+#: ../Pinta.Tools/Tools/FloodTool.cs:90 ../Pinta.Tools/Tools/RecolorTool.cs:80
 msgid "Tolerance"
 msgstr "Допустимост"
 
@@ -1119,36 +1140,6 @@ msgstr "Center Offset"
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
 msgid "Zoom Blur"
 msgstr "Мащабно замъгляване"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:46
-msgid "Transfer Map"
-msgstr "Трансферна карта"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:69
-msgid "RGB"
-msgstr "ЧЗС"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:84
-msgid "(256, 256)"
-msgstr "(256, 256)"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:115
-msgid "Red  "
-msgstr "Червено  "
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:137
-msgid "Blue "
-msgstr "Синьо "
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:157
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
-msgid "Reset"
-msgstr "Изчистване"
-
-#: ../Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs:171
-msgid "Tip: Right-click to remove control points."
-msgstr ""
-"Подсказка: Натиснете десен бутон, за да премахнете контролните точки."
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
 msgid "Input Histogram"
@@ -1452,7 +1443,7 @@ msgid "Switch to Pencil tool"
 msgstr "Сменяне с Молив"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
-#: ../Pinta.Tools/Tools/PencilTool.cs:48
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
 msgid "Pencil"
 msgstr "Молив"
 
@@ -1509,15 +1500,15 @@ msgstr ""
 "Ляв бутон за изтриване до прозрачност, десен бутон за изтриване до втория "
 "цвят. "
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:72
+#: ../Pinta.Tools/Tools/FloodTool.cs:71
 msgid "Flood Mode"
 msgstr "Режим"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:79
+#: ../Pinta.Tools/Tools/FloodTool.cs:78
 msgid "Contiguous"
 msgstr "Последователен"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:80
+#: ../Pinta.Tools/Tools/FloodTool.cs:79
 msgid "Global"
 msgstr "Глобален"
 
@@ -1587,8 +1578,9 @@ msgstr "Кликнете за да изберете регион със подо
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 msgid ""
-"Left click and drag the selection to move selected content. Right click and "
-"drag the selection to rotate selected content."
+"Left click and drag the selection to move selected content. Hold Ctrl to "
+"scale instead of move. Right click and drag the selection to rotate selected "
+"content. Hold Shift to rotate in steps."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
@@ -1597,8 +1589,9 @@ msgstr "Преместване на избраното"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 msgid ""
-"Left click and drag the selection to move selection outline. Right click and "
-"drag the selection to rotate selection outline."
+"Left click and drag the selection to move selection outline. Hold Ctrl to "
+"scale instead of move. Right click and drag the selection to rotate "
+"selection outline. Hold Shift to rotate in steps."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
@@ -1626,7 +1619,7 @@ msgstr "Ръка"
 msgid "Click and drag to navigate image."
 msgstr "Ляв бутон и влачете за да преместите изображението."
 
-#: ../Pinta.Tools/Tools/PencilTool.cs:50
+#: ../Pinta.Tools/Tools/PencilTool.cs:52
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color. "
 "Right click to use the secondary color."
@@ -1777,6 +1770,11 @@ msgstr "Запази изображение"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta не поддържа запазването на изображения в този формат."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
+msgid "Error"
+msgstr "Грешка"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
 msgid "Cannot save read only file."
@@ -1951,23 +1949,23 @@ msgid "Preset:"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:167
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:138
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Width:"
 msgstr "Широчина:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:189
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:229
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:160
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:200
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
 msgid "pixels"
 msgstr "пиксели"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:207
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
 msgid "Height:"
 msgstr "Височина:"
 
@@ -1999,6 +1997,25 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:149
+msgid "By percentage:"
+msgstr "По процент"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By absolute size:"
+msgstr "По абсолютен размер"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:156
+msgid "Maintain aspect ratio"
+msgstr "Запазване на съотношението"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+msgid "Anchor:"
+msgstr "Посока"
+
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
 msgid "Title"
 msgstr "Заглавие"
@@ -2006,25 +2023,6 @@ msgstr "Заглавие"
 #: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Path"
 msgstr "Път"
-
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:105
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:75
-msgid "By percentage:"
-msgstr "По процент"
-
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:146
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:117
-msgid "By absolute size:"
-msgstr "По абсолютен размер"
-
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:245
-#: ../Pinta/gtk-gui/Pinta.ResizeImageDialog.cs:216
-msgid "Maintain aspect ratio"
-msgstr "Запазване на съотношението"
-
-#: ../Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs:530
-msgid "Anchor:"
-msgstr "Посока"
 
 #: ../Pinta/Main.cs:57
 msgid "Show this message and exit."
@@ -2090,6 +2088,21 @@ msgstr "Прозорци"
 msgid "_Help"
 msgstr "Помо_щ"
 
+#: ../Pinta/MainWindow.cs:551
+msgid "Downloading Image"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:569
+msgid "Download failed"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:570
+#, csharp-format
+msgid ""
+"Unable to download image from {0}.\n"
+"Details: {1}"
+msgstr ""
+
 #: ../Pinta/Options.cs:486
 msgid "OptionName"
 msgstr ""
@@ -2098,15 +2111,15 @@ msgstr ""
 msgid "Canvas"
 msgstr ""
 
-#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:51
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:52
 msgid "History"
 msgstr "История"
 
-#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:55
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:56
 msgid "Layers"
 msgstr "Слоеве"
 
-#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:47
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:48
 msgid "Images"
 msgstr ""
 

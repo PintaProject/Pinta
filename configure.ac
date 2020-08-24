@@ -1,8 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([pinta], [1.7])
+AC_INIT([pinta], [1.8])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
-
-YELP_HELP_INIT
 
 AC_PROG_INSTALL
 
@@ -21,7 +19,7 @@ if test "x$MONO" = "xno"; then
 fi
 
 # Check Mono version
-MONO_MINIMUM_VERSION=2.8
+MONO_MINIMUM_VERSION=4.0
 PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
 
 AC_SUBST(XBUILD)
@@ -46,7 +44,6 @@ AC_CONFIG_FILES([
 Makefile
 pinta
 pinta.pc
-help/Makefile
 po/Makefile.in
 xdg/Makefile
 ])

@@ -23,6 +23,7 @@ Pinta.Core/Managers/EffectsManager.cs
 Pinta.Core/Managers/LivePreviewManager.cs
 Pinta.Core/Managers/ToolManager.cs
 Pinta.Core/Managers/WorkspaceManager.cs
+Pinta.Core/PaletteFormats/PaletteDescriptor.cs
 Pinta.Docking/DockLibrary/DockItem.cs
 Pinta.Docking/DockLibrary/DockItemTitleTab.cs
 Pinta.Effects/Adjustments/AutoLevelEffect.cs
@@ -67,7 +68,6 @@ Pinta.Effects/Effects/TwistEffect.cs
 Pinta.Effects/Effects/UnfocusEffect.cs
 Pinta.Effects/Effects/WarpEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
-Pinta.Effects/gtk-gui/Pinta.Effects.CurvesDialog.cs
 Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs
 Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs
 Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs
@@ -127,8 +127,6 @@ Pinta/Dialogs/NewImageDialog.cs
 Pinta/Dialogs/ResizeCanvasDialog.cs
 Pinta/Dialogs/ResizeImageDialog.cs
 Pinta/Dialogs/VersionInformationTabPage.cs
-Pinta/gtk-gui/Pinta.ResizeCanvasDialog.cs
-Pinta/gtk-gui/Pinta.ResizeImageDialog.cs
 Pinta/Main.cs
 Pinta/MainWindow.cs
 Pinta/Options.cs

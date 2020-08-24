@@ -63,6 +63,7 @@ namespace Pinta.Core
 				formatNames.Append (wildcard);
 			}
 
+			// Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 			ff.Name = string.Format (Catalog.GetString ("{0} palette ({1})"), displayPrefix, formatNames);
 			this.Filter = ff;
 		}

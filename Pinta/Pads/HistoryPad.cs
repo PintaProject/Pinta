@@ -45,6 +45,7 @@ namespace Pinta
 			history_item.Content = history;
 			history_item.Icon = PintaCore.Resources.GetIcon ("Menu.Layers.DuplicateLayer.png");
             history_item.DefaultWidth = 100;
+			history_item.Behavior |= DockItemBehavior.CantClose;
 
 			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
 			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());

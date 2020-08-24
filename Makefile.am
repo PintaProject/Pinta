@@ -1,5 +1,5 @@
-SUBDIRS = help xdg
-DIST_SUBDIRS = help xdg
+SUBDIRS = xdg
+DIST_SUBDIRS = xdg
 
 BINDIR = $(srcdir)/bin
 
@@ -8,6 +8,7 @@ PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
 BINFILES = \
 	$(BINDIR)/Pinta.exe \
 	$(BINDIR)/Pinta.Core.dll \
+	$(BINDIR)/Pinta.Docking.dll \
 	$(BINDIR)/Pinta.Gui.Widgets.dll \
 	$(BINDIR)/Pinta.Resources.dll \
 	$(BINDIR)/Pinta.Effects.dll \
@@ -42,7 +43,6 @@ help:
 build: Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.sln
 	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
-	cd $(srcdir)/help && make copyhelp
 
 test: build
 	$(XBUILD) tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj
@@ -110,7 +110,7 @@ releaseosx: build $(BINFILES)
 	zip -r9uq $(MAC_APP_DIR).zip $(MAC_APP_DIR)
 	rm -rf $(MAC_APP_DIR)
 
-EXTRA_DIST = Pinta Pinta.Core Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg license-mit.txt \
+EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in
 
@@ -127,7 +127,6 @@ DISTCLEANFILES = po/.intltool-merge-cache \
 		 po/Makefile
 
 MAINTAINERCLEANFILES = po/Makefile.in.in \
-		       help/Makefile.in \
 		       Makefile.in \
 		       install-sh \
 		       configure \

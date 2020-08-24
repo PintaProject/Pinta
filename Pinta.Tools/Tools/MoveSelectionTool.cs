@@ -36,7 +36,7 @@ namespace Pinta.Tools
 	public class MoveSelectionTool : BaseTransformTool
 	{
 		private SelectionHistoryItem hist;
-		private List<List<IntPoint>> original_selection;
+		private DocumentSelection original_selection;
 		
 		public override string Name {
 			get { return Catalog.GetString ("Move Selection"); }
@@ -45,7 +45,7 @@ namespace Pinta.Tools
 			get { return "Tools.MoveSelection.png"; }
 		}
 		public override string StatusBarText {
-			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps."); }
+			get { return Catalog.GetString ("Left click and drag the selection to move selection outline. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
             get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Tools.MoveSelection.png"), 0, 0); }
@@ -66,7 +66,7 @@ namespace Pinta.Tools
 			base.OnStartTransform ();
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			original_selection = new List<List<IntPoint>> (doc.Selection.SelectionPolygons);
+			original_selection = doc.Selection.Clone ();
 
 			hist = new SelectionHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
@@ -76,26 +76,29 @@ namespace Pinta.Tools
 		{
 			base.OnUpdateTransform (transform);
 
-			List<List<IntPoint>> newSelectionPolygons = DocumentSelection.Transform (original_selection, transform);
-
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			doc.Selection.SelectionClipper.Clear ();
-			doc.Selection.SelectionPolygons = newSelectionPolygons;
-            doc.Selection.MarkDirty ();
-
-			doc.ShowSelection = true;
+			doc.Selection.Dispose ();
+			doc.Selection = original_selection.Transform (transform);
+			doc.Selection.Visible = true;
 
 			PintaCore.Workspace.Invalidate ();
 		}
 
-		protected override void OnFinishTransform ()
+		protected override void OnFinishTransform (Matrix transform)
 		{
-			base.OnFinishTransform ();
+			base.OnFinishTransform (transform);
+
+			// Also transform the base selection used for the various select modes.
+			var doc = PintaCore.Workspace.ActiveDocument;
+			using (var prev_selection = doc.PreviousSelection)
+				doc.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
 				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
 
 			hist = null;
+
+			original_selection.Dispose ();
 			original_selection = null;
 		}
 		#endregion

@@ -35,18 +35,16 @@ namespace Pinta.Core
 	{
 		private Gdk.Pixbuf paste_image;
 		private DocumentSelection old_selection;
-		private bool old_show_selection;
 
 		public override bool CausesDirty { get { return true; } }
 
-		public PasteHistoryItem (Gdk.Pixbuf pasteImage, DocumentSelection oldSelection, bool oldShowSelection)
+		public PasteHistoryItem (Gdk.Pixbuf pasteImage, DocumentSelection oldSelection)
 		{
 			Text = Catalog.GetString ("Paste");
 			Icon = Stock.Paste;
 
 			paste_image = pasteImage;
 			old_selection = oldSelection;
-			old_show_selection = oldShowSelection;
 		}
 
 		public override void Redo ()
@@ -91,13 +89,8 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			DocumentSelection swap_selection = doc.Selection;
-			bool swap_show_sel = doc.ShowSelection;
-
 			doc.Selection = old_selection;
-			doc.ShowSelection = old_show_selection;
-
 			old_selection = swap_selection;
-			old_show_selection = swap_show_sel;
 		}
 	}
 }

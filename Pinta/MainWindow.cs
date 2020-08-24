@@ -528,6 +528,8 @@ namespace Pinta
 
 		private void MainWindow_DragDataReceived (object o, DragDataReceivedArgs args)
 		{
+			// TODO: Generate random name for the picture being downloaded
+
 			// Only handle URIs
 			if (args.Info != 100)
 				return;
@@ -537,8 +539,43 @@ namespace Pinta
 			foreach (string individualFile in fullData.Split ('\n')) {
 				string file = individualFile.Trim ();
 
-				if (file.StartsWith ("file://"))
+				if (file.StartsWith ("http") || file.StartsWith ("ftp")) {
+					var client = new System.Net.WebClient ();
+					string tempFilePath = System.IO.Path.GetTempPath () + System.IO.Path.GetFileName (file);
+
+					var progressDialog = PintaCore.Chrome.ProgressDialog;
+
+					try {
+						PintaCore.Chrome.MainWindowBusy = true;
+
+						progressDialog.Title = Catalog.GetString ("Downloading Image");
+						progressDialog.Text = "";
+						progressDialog.Show ();
+
+						client.DownloadProgressChanged += (sender, e) => {
+							progressDialog.Progress = e.ProgressPercentage;
+						};
+
+						client.DownloadFile (file, tempFilePath);
+
+						if (PintaCore.Workspace.OpenFile (tempFilePath)) {
+							// Mark as not having a file, so that the user doesn't unintentionally
+							// save using the temp file.
+							PintaCore.Workspace.ActiveDocument.HasFile = false;
+						}
+					} catch (Exception e) {
+						progressDialog.Hide ();
+						PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+							Catalog.GetString ("Download failed"),
+							string.Format (Catalog.GetString ("Unable to download image from {0}.\nDetails: {1}"), file, e.Message));
+					} finally {
+						client.Dispose ();
+						progressDialog.Hide ();
+						PintaCore.Chrome.MainWindowBusy = false;
+					}
+				} else if (file.StartsWith ("file://")) {
 					PintaCore.Workspace.OpenFile (new Uri (file).LocalPath);
+				}
 			}
 		}
 

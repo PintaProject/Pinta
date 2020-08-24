@@ -37,7 +37,6 @@
 using System;
 using System.Threading.Tasks;
 using Cairo;
-using System.Collections.Generic;
 using Pinta.Core;
 using Mono.Unix;
 
@@ -193,7 +192,7 @@ namespace Pinta.Tools
 				stencil.Set (rect, true);
 			}
 
-			Queue<Point> queue = new Queue<Point> (16);
+			var queue = new System.Collections.Generic.Queue<Point> (16);
 			queue.Enqueue (start);
 
 			while (queue.Count > 0) {

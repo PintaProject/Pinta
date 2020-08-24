@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Common configuration -->
   <PropertyGroup>
     <ProjectGuid>{71A1C3E0-7343-48FE-BD9A-508929136E92}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Pinta.Effects</AssemblyName>
     <RootNamespace>Pinta.Effects</RootNamespace>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ErrorReport>prompt</ErrorReport>
@@ -15,6 +15,7 @@
     <OutputPath>..\bin</OutputPath>
     <Platform>AnyCPU</Platform>
     <WarningLevel>4</WarningLevel>
+    <NoStdLib>false</NoStdLib>
   </PropertyGroup>
 
   <!-- Debug configuration -->
@@ -96,7 +97,6 @@
     <Compile Include="Effects\WarpEffect.cs" />
     <Compile Include="Effects\ZoomBlurEffect.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.Effects.CurvesDialog.cs" />
     <Compile Include="gtk-gui\Pinta.Effects.LevelsDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EffectHelper.cs" />

@@ -47,7 +47,7 @@ namespace Pinta.Core
                 { CombineMode.Union, Catalog.GetString ("Union (+) (Ctrl + Left Click)") },
                 { CombineMode.Exclude, Catalog.GetString ("Exclude (-) (Right Click)") },
                 { CombineMode.Xor, Catalog.GetString ("Xor (Ctrl + Right Click)") },
-                { CombineMode.Intersect, Catalog.GetString ("Intersect (Shift + Left Click)") },
+                { CombineMode.Intersect, Catalog.GetString ("Intersect (Alt + Left Click)") },
             };
         }
 
@@ -90,7 +90,7 @@ namespace Pinta.Core
             {
                 if (args.Event.IsControlPressed ())
                     mode = CombineMode.Union;
-                else if (args.Event.IsShiftPressed ())
+                else if (args.Event.IsAltPressed ())
                     mode = CombineMode.Intersect;
             }
             else if (args.Event.Button == GtkExtensions.MouseRightButton)
@@ -109,6 +109,7 @@ namespace Pinta.Core
             var doc = PintaCore.Workspace.ActiveDocument;
             doc.Selection.Dispose ();
             doc.Selection = doc.PreviousSelection.Clone ();
+            doc.Selection.Visible = true;
 
             using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
             {

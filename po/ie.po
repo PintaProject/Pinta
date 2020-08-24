@@ -1,0 +1,2399 @@
+# Interlingue translation for pinta
+# Copyright (c) 2020 Rosetta Contributors and Canonical Ltd 2020
+# This file is distributed under the same license as the pinta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pinta\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-07-27 21:13-0400\n"
+"PO-Revision-Date: 2020-05-05 05:03+0000\n"
+"Last-Translator: Launchpad Translations Administrators <Unknown>\n"
+"Language-Team: Interlingue <ie@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2020-08-04 20:56+0000\n"
+"X-Generator: Launchpad (build a24057fea7e4c6a98c0220d5f878da0f3c783699)\n"
+
+#: ../xdg/pinta.desktop.in.h:1
+msgid "Pinta"
+msgstr ""
+
+#: ../xdg/pinta.desktop.in.h:2
+msgid "Easily create and edit images"
+msgstr ""
+
+#: ../xdg/pinta.desktop.in.h:3
+msgid "Image Editor"
+msgstr ""
+
+#: ../xdg/pinta.desktop.in.h:4
+msgid "Pinta Image Editor"
+msgstr ""
+
+#: ../xdg/pinta.desktop.in.h:5
+msgid "draw;drawing;paint;painting;graphics;raster;2d;"
+msgstr ""
+
+#: ../xdg/pinta.appdata.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+
+#: ../Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:69
+msgid "Undo"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+msgid "Redo"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:229
+msgid "Cut"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:72
+msgid "Copy"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:73
+msgid "Copy Merged"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Classes/Document.cs:780
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
+msgid "Paste"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Classes/Document.cs:776
+msgid "Paste Into New Layer"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:76
+msgid "Paste Into New Image"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:77
+#: ../Pinta.Core/Actions/EditActions.cs:231
+msgid "Erase Selection"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:191
+msgid "Fill Selection"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:421
+msgid "Invert Selection"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:80
+#: ../Pinta.Core/Actions/EditActions.cs:200
+msgid "Select All"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:81
+msgid "Deselect All"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:83
+#: ../Pinta.Core/Actions/FileActions.cs:56
+msgid "Open..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/FileActions.cs:66
+msgid "Save As..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:85
+msgid "Reset to Default"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:86
+msgid "Set Number of Colors"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:127 ../Pinta/Pads/ColorPalettePad.cs:42
+#: ../Pinta/Pads/ColorPalettePad.cs:49
+msgid "Palette"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:240
+msgid "Deselect"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:336
+msgid "Open Palette File"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:348
+msgid "Palette files"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:67
+msgid "All files"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:373
+msgid "Save Palette File"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:54
+msgid "New..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:55
+msgid "New Screenshot..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:57
+msgid "Open Recent"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
+msgid "Close"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:65
+msgid "Save"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:67
+msgid "Print"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:68
+msgid "Quit"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:70
+msgid "New"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:71
+msgid "Open"
+msgstr ""
+
+#: ../Pinta.Core/Actions/HelpActions.cs:52
+msgid "Contents"
+msgstr ""
+
+#: ../Pinta.Core/Actions/HelpActions.cs:53
+msgid "Pinta Website"
+msgstr ""
+
+#: ../Pinta.Core/Actions/HelpActions.cs:54
+msgid "File a Bug"
+msgstr ""
+
+#: ../Pinta.Core/Actions/HelpActions.cs:55
+msgid "Translate This Application"
+msgstr ""
+
+#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:347
+msgid "About"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:291
+msgid "Crop to Selection"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:61
+msgid "Auto Crop"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:62
+msgid "Resize Image..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:63
+msgid "Resize Canvas..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:64
+#: ../Pinta.Core/Actions/LayerActions.cs:70
+msgid "Flip Horizontal"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:65
+#: ../Pinta.Core/Actions/LayerActions.cs:71
+msgid "Flip Vertical"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:66
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+msgid "Rotate 90° Clockwise"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:67
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+msgid "Rotate 90° Counter-Clockwise"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:68
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+msgid "Rotate 180°"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ImageActions.cs:69
+#: ../Pinta.Core/Actions/ImageActions.cs:146
+msgid "Flatten"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/LayerActions.cs:292
+#: ../Pinta.Core/Classes/Document.cs:839
+msgid "Add New Layer"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:275
+msgid "Delete Layer"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:266
+msgid "Duplicate Layer"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:244
+msgid "Merge Layer Down"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:69
+msgid "Import from File..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:72
+msgid "Rotate / Zoom Layer..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:73
+#: ../Pinta.Core/Actions/LayerActions.cs:219
+msgid "Move Layer Up"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:74
+#: ../Pinta.Core/Actions/LayerActions.cs:230
+msgid "Move Layer Down"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+msgid "Layer Properties..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:157
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:50
+msgid "Open Image File"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:185
+msgid "Import From File"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:77
+msgid "Zoom In"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:78
+msgid "Zoom Out"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:79
+msgid "Best Fit"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:80
+msgid "Zoom to Selection"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:81
+msgid "Normal Size"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:82
+msgid "Toolbar"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:83
+msgid "Image Tabs"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:84
+msgid "Pixel Grid"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:85
+msgid "Rulers"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:86
+msgid "Pixels"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:87
+msgid "Inches"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:88
+msgid "Centimeters"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:89
+msgid "Fullscreen"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:115
+#: ../Pinta.Core/Actions/ViewActions.cs:277
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:320
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:328
+msgid "Window"
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:159
+msgid "Ruler Units"
+msgstr ""
+
+#. Translators: This specifies the format of the zoom percentage choices
+#. in the toolbar.
+#: ../Pinta.Core/Actions/ViewActions.cs:258
+#, csharp-format
+msgid "{0}%"
+msgstr ""
+
+#: ../Pinta.Core/Actions/WindowActions.cs:45
+msgid "Save All"
+msgstr ""
+
+#: ../Pinta.Core/Actions/WindowActions.cs:46
+msgid "Close All"
+msgstr ""
+
+#: ../Pinta.Core/Classes/BaseTool.cs:261
+msgid "Tool"
+msgstr ""
+
+#: ../Pinta.Core/Classes/BaseTool.cs:333
+msgid "Shortcut key"
+msgstr ""
+
+#: ../Pinta.Core/Classes/BaseTool.cs:445
+msgid "Normal Blending"
+msgstr ""
+
+#: ../Pinta.Core/Classes/BaseTool.cs:446
+msgid "Overwrite"
+msgstr ""
+
+#: ../Pinta.Core/Classes/BaseTool.cs:460
+msgid "Antialiasing On"
+msgstr ""
+
+#: ../Pinta.Core/Classes/BaseTool.cs:461
+msgid "Antialiasing Off"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
+msgid "Layer"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:378
+msgid "copy"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
+msgid "Resize Canvas"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:855
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
+msgid "Move Selected Pixels"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:871
+msgid "Image larger than canvas"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:872
+msgid ""
+"The image being pasted is larger than the canvas size. What would you like "
+"to do?"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:876
+msgid "Expand canvas"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:877
+msgid "Don't change canvas size"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:890
+msgid "Image cannot be pasted"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:891
+msgid "The clipboard does not contain an image."
+msgstr ""
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
+msgid "Replace"
+msgstr ""
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+msgid "Union (+) (Ctrl + Left Click)"
+msgstr ""
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+msgid "Exclude (-) (Right Click)"
+msgstr ""
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:49
+msgid "Xor (Ctrl + Right Click)"
+msgstr ""
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+msgid "Intersect (Alt + Left Click)"
+msgstr ""
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:57
+msgid " Selection Mode: "
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:37
+#: ../Pinta.Tools/Tools/EraserTool.cs:189 ../Pinta.Tools/Tools/TextTool.cs:248
+msgid "Normal"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+msgid "Multiply"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+msgid "Color Burn"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+msgid "Color Dodge"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+msgid "Overlay"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+msgid "Difference"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+msgid "Lighten"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+msgid "Darken"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+msgid "Screen"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+msgid "Xor"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+msgid "Hard Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+msgid "Soft Light"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+msgid "Color"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:47
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:437
+msgid "Luminosity"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:48
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Hue"
+msgstr ""
+
+#: ../Pinta.Core/Effects/UserBlendOps.cs:49
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:70
+msgid "Saturation"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:43
+msgid "Finish Pixels"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
+msgid "Flip Image Horizontal"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
+msgid "Flip Image Vertical"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
+msgid "Flip Layer Horizontal"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:83
+msgid "Flip Layer Vertical"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:43
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:45
+msgid "Resize Image"
+msgstr ""
+
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:93
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr ""
+
+#: ../Pinta.Core/Managers/EffectsManager.cs:63
+#: ../Pinta.Core/Managers/EffectsManager.cs:98
+msgid "..."
+msgstr ""
+
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:222
+msgid "Rendering Effect"
+msgstr ""
+
+#: ../Pinta.Core/Managers/ToolManager.cs:234
+#: ../Pinta.Core/Managers/ToolManager.cs:236
+msgid "No tool selected."
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:100
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:157
+msgid "Background"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:166
+#: ../Pinta/Dialogs/NewImageDialog.cs:68
+msgid "New Image"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:186
+msgid "Unsupported file format"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:191
+msgid "Open Image"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:204
+msgid "Permission denied"
+msgstr ""
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr ""
+
+#. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
+#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:67
+#, csharp-format
+msgid "{0} palette ({1})"
+msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:541
+msgid "Hide"
+msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:550
+msgid "Minimize"
+msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:557
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:250
+msgid "Dock"
+msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItem.cs:564
+msgid "Undock"
+msgstr ""
+
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:165
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:254
+msgid "Auto Hide"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
+msgid "Auto Level"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
+msgid "Black and White"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+msgid "Brightness / Contrast"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Effects/GlowEffect.cs:82
+msgid "Brightness"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:163
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+msgid "Contrast"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
+msgid "Curves"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
+msgid "Hue / Saturation"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
+msgid "Lightness"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
+msgid "Invert Colors"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
+msgid "Posterize"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
+msgid "Sepia"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:430
+msgid "Transfer Map"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:436
+msgid "RGB"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:456
+msgid "Red  "
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:457
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:113
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:445
+msgid "Green"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:458
+msgid "Blue "
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:466
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:424
+msgid "Reset"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:471
+msgid "Tip: Right-click to remove control points."
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:53
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:59
+msgid "Levels Adjustment"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
+msgid "Red"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:117
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:484
+msgid "Blue"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:120
+msgid "Linked"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+msgid "Add Noise"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
+#: ../Pinta.Effects/Effects/MedianEffect.cs:36
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
+msgid "Noise"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:145
+#: ../Pinta.Effects/Effects/TileEffect.cs:142
+msgid "Intensity"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
+msgid "Color Saturation"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
+msgid "Coverage"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:25
+msgid "Bulge"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:33
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:33
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:37
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:38
+#: ../Pinta.Effects/Effects/TileEffect.cs:33
+#: ../Pinta.Effects/Effects/TwistEffect.cs:33
+msgid "Distort"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:101
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:161
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:63
+#: ../Pinta.Effects/Effects/TwistEffect.cs:131
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:131
+msgid "Amount"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:104
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:161
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:134
+msgid "Offset"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:30
+msgid "Clouds"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+msgid "Render"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:205
+msgid "Scale"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:208
+msgid "Power"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:231
+msgid "Seed"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
+msgid "Edge Detect"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:36
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:32
+msgid "Stylize"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:143
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:140
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:111
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:158
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:435
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:112
+msgid "Angle"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:25
+msgid "Emboss"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:25
+msgid "Fragment"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
+msgid "Blurs"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:111
+msgid "Fragments"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:114
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:114
+msgid "Distance"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:117
+#: ../Pinta.Effects/Effects/TileEffect.cs:138
+msgid "Rotation"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
+msgid "Frosted Glass"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
+msgid "Gaussian Blur"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
+#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Effects/MedianEffect.cs:70
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:94
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:98
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:125
+msgid "Radius"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+msgid "Glow"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:38
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:33
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
+msgid "Photo"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
+msgid "Ink Sketch"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
+msgid "Artistic"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
+msgid "Ink Outline"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:168
+msgid "Coloring"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
+msgid "Julia Fractal"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:154
+msgid "Factor"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:134
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/WarpEffect.cs:188
+msgid "Quality"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:137
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:161
+#: ../Pinta.Tools/Tools/ZoomTool.cs:48
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:118
+msgid "Zoom"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
+msgid "Mandelbrot Fractal"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:28
+msgid "Median"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:73
+msgid "Percentile"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
+msgid "Motion Blur"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
+msgid "Centered"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
+msgid "Oil Painting"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
+msgid "Brush Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:179
+msgid "Coarseness"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:28
+#: ../Pinta.Tools/Tools/TextTool.cs:250
+msgid "Outline"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OutlineEffect.cs:142
+msgid "Thickness"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
+msgid "Pencil Sketch"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
+msgid "Pencil Tip Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:102
+msgid "Color Range"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:25
+msgid "Pixelate"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:119
+msgid "Cell Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
+msgid "Polar Inversion"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
+msgid "Radial Blur"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+msgid "Red Eye Removal"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
+#: ../Pinta.Tools/Tools/FloodTool.cs:90 ../Pinta.Tools/Tools/RecolorTool.cs:80
+msgid "Tolerance"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:78
+msgid "Saturation Percentage"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:79
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
+msgid "Reduce Noise"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
+msgid "Strength"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:44
+msgid "Relief"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:25
+msgid "Sharpen"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+msgid "Soften Portrait"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
+msgid "Softness"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:122
+msgid "Lighting"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
+msgid "Warmth"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:25
+msgid "Tile Reflection"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:140
+msgid "Tile Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:25
+msgid "Twist"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:133
+msgid "Antialias"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
+msgid "Unfocus"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:19
+msgid "Clamp"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:21
+msgid "Wrap"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+msgid "Reflect"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:25
+msgid "Primary"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:27
+msgid "Secondary"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+#: ../Pinta/Dialogs/NewImageDialog.cs:290
+msgid "Transparent"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:31
+msgid "Original"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/WarpEffect.cs:191
+msgid "Center Offset"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
+msgid "Zoom Blur"
+msgstr ""
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
+msgid "Input Histogram"
+msgstr ""
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:128
+msgid "Input"
+msgstr ""
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:241
+msgid "Output"
+msgstr ""
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:369
+msgid "Output Histogram"
+msgstr ""
+
+#: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:412
+msgid "Auto"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:106
+msgid "Choose Primary Color"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:121
+msgid "Choose Secondary Color"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:145
+msgid "Choose Palette Color"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:313
+msgid "Click to switch between primary and secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:315
+msgid "Click to reset primary and secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:317
+msgid "Click to select primary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:319
+msgid "Click to select secondary color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:321
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:64
+msgid "Random Noise"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:74
+msgid "Reseed"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Shown"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListWidget.cs:244
+msgid "Layer Hidden"
+msgstr ""
+
+#: ../Pinta.Tools/Brushes/CircleBrush.cs:37
+msgid "Circles"
+msgstr ""
+
+#: ../Pinta.Tools/Brushes/GridBrush.cs:37
+msgid "Grid"
+msgstr ""
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr ""
+
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:39
+msgid "Squares"
+msgstr ""
+
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:74
+msgid "Dash"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:212
+msgid "Arrow"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:352
+msgid "Size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:357
+msgid "Decrease arrow size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:424
+msgid "Increase arrow size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:440
+msgid "Decrease angle offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:503
+msgid "Increase angle offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:514
+msgid "Length"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:519
+msgid "Decrease length offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:582
+msgid "Increase length offset"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:296
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:99
+msgid "Brush width"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:81
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:104
+msgid "Decrease brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:330
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:95
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:118
+msgid "Increase brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:342
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:76
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:131
+msgid "Fill Style"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:350
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:83
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:138
+msgid "Outline Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:351
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:84
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:139
+msgid "Fill Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:352
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:85
+#: ../Pinta.Tools/Tools/SelectShapeTool.cs:140
+msgid "Fill and Outline Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:363
+msgid "Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+msgid "Open Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+msgid "Closed Line/Curve Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:39
+#: ../Pinta.Tools/Tools/EllipseTool.cs:37
+msgid "Ellipse"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:374
+msgid "Rounded Line Series"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:388
+msgid "Changed Shape Type"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:522
+msgid "Point Deleted"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:539
+msgid "Deleted"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:588
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:884
+msgid "Point Added"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:924
+msgid "Added"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1014
+msgid "Modified"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1266
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1675
+msgid "Finalized"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:43
+msgid "Open Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:43
+msgid "Closed Curve Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:43
+msgid "Rounded Line Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:131
+msgid "Decrease shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:154
+msgid "Increase shape's corner radius"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:42
+msgid "Clone Stamp"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:47
+msgid "Ctrl-left click to set origin, left click to paint."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:63
+msgid "Color Picker"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:69
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:113
+msgid "Sampling"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:123
+msgid "Single Pixel"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:124
+msgid "3 x 3 Region"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:125
+msgid "5 x 5 Region"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:126
+msgid "7 x 7 Region"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:127
+msgid "9 x 9 Region"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:136
+msgid "Image"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:147
+msgid "After select"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:154
+msgid "Do not switch tool"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:155
+msgid "Switch to previous tool"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:156
+msgid "Switch to Pencil tool"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:209
+#: ../Pinta.Tools/Tools/PencilTool.cs:50
+msgid "Pencil"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:37
+msgid "Ellipse Select"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:43
+msgid ""
+"Click and drag to draw an elliptical selection. Hold Shift to constrain to a "
+"circle."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:46
+#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
+msgid ""
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press Ctrl + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold Ctrl while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold Ctrl while left clicking on a control point to create a new shape at "
+"the exact same position.\n"
+"Hold Ctrl while clicking outside of the image bounds to create a new shape "
+"starting at the edge.\n"
+"Press Enter to finalize the shape."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:187
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:92
+msgid "Type"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:189
+msgid "Smooth"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:203
+msgid "Eraser"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:205
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr ""
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:71
+msgid "Flood Mode"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:78
+msgid "Contiguous"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:79
+msgid "Global"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:56
+msgid "Freeform Shape"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:58
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:42
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:55
+#: ../Pinta.Tools/Tools/GradientTool.cs:169
+msgid "Gradient"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:63
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.  Right "
+"click to reverse."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:176
+msgid "Linear Gradient"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:177
+msgid "Linear Reflected Gradient"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:178
+msgid "Linear Diamond Gradient"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:179
+msgid "Radial Gradient"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:180
+msgid "Conical Gradient"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:52
+msgid "Lasso Select"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:54
+msgid "Click and drag to draw the outline for a selection area."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:40
+msgid "Line/Curve"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:62
+msgid "Magic Wand Select"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:72
+msgid "Click to select region of similar color."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
+msgid ""
+"Left click and drag the selection to move selected content. Hold Ctrl to "
+"scale instead of move. Right click and drag the selection to rotate selected "
+"content. Hold Shift to rotate in steps."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:42
+msgid "Move Selection"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
+msgid ""
+"Left click and drag the selection to move selection outline. Hold Ctrl to "
+"scale instead of move. Right click and drag the selection to rotate "
+"selection outline. Hold Shift to rotate in steps."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:40 ../Pinta/MainWindow.cs:89
+msgid "Paintbrush"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:40
+msgid "Paint Bucket"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PanTool.cs:37
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:115
+msgid "Pan"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PanTool.cs:43
+msgid "Click and drag to navigate image."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:52
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color. "
+"Right click to use the secondary color."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:58
+msgid "Recolor"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:62
+msgid ""
+"Left click to replace the secondary color with the primary color. Right "
+"click to reverse."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:37
+msgid "Rectangle Select"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:43
+msgid ""
+"Click and drag to draw a rectangular selection. Hold Shift to constrain to a "
+"square."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RectangleTool.cs:37
+msgid "Rectangle"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:37
+msgid "Rounded Rectangle"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:94
+msgid "Text"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:95
+msgid "Text - Finalize"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:101
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:158
+msgid "Font"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:191
+msgid "Bold"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:198
+msgid "Italic"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:205
+msgid "Underline"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:214
+msgid "Left Align"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:222
+msgid "Center Align"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:229
+msgid "Right Align"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:241
+msgid "Text Style"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:249
+msgid "Normal and Outline"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:251
+msgid "Fill Background"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:264
+msgid "Outline width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:269
+msgid "Decrease outline size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:286
+msgid "Increase outline size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:54
+msgid ""
+"Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+"selection."
+msgstr ""
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:50
+msgid "Resize Palette"
+msgstr ""
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:51
+msgid "New palette size:"
+msgstr ""
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:61
+#, csharp-format
+msgid "Save the changes to image \"{0}\" before closing?"
+msgstr ""
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:62
+msgid "If you don't save, all changes will be permanently lost."
+msgstr ""
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:76
+msgid "Close _without saving"
+msgstr ""
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:52
+msgid "Take Screenshot"
+msgstr ""
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:53
+msgid "Delay before taking a screenshot (seconds):"
+msgstr ""
+
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:63
+msgid "Image files"
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:75
+msgid "Save Image File"
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:190
+msgid "Pinta does not support saving images in this file format."
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:191
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:203
+msgid "Error"
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:202
+msgid "Cannot save read only file."
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:217
+msgid "Image too large"
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:218
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#, csharp-format
+msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+msgstr ""
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
+#, csharp-format
+msgid ""
+"The file already exists in \"{1}\". Replacing it will overwrite its contents."
+msgstr ""
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:95
+msgid "Layer Opacity"
+msgstr ""
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:100
+msgid "Rename Layer"
+msgstr ""
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
+msgid "Hide Layer"
+msgstr ""
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:105
+msgid "Show Layer"
+msgstr ""
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:110
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:50
+msgid "Layer Properties"
+msgstr ""
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:53
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:107
+msgid "Rotate / Zoom Layer"
+msgstr ""
+
+#: ../Pinta/AddinSetupService.cs:49
+msgid "Pinta Community Addins - Platform-Specific"
+msgstr ""
+
+#: ../Pinta/AddinSetupService.cs:53
+msgid "Pinta Community Addins - Cross-Platform"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:126
+msgid "Contributors to this release:"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:138
+msgid "Previous contributors:"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:149
+msgid "translator-credits"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:152
+msgid "Translated by:"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:158
+msgid "Based on the work of Paint.NET:"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:165
+msgid "Using some icons from:"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:173
+msgid "Powered by Mono:"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:280
+msgid "About Pinta"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutDialog.cs:298
+msgid "Version Info"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+msgid "Version"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+msgid "License"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+msgid "Released under the MIT X11 License."
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+msgid "Copyright"
+msgstr ""
+
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+msgid "by Pinta contributors"
+msgstr ""
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:98
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ErrorDialog.cs:92
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:66
+msgid "Details"
+msgstr ""
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:109
+msgid "Report Bug...."
+msgstr ""
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:38
+msgid "JPEG Quality"
+msgstr ""
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:48
+msgid "Quality: "
+msgstr ""
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:174
+msgid "Name:"
+msgstr ""
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:182
+msgid "Visible"
+msgstr ""
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:193
+msgid "Blend Mode"
+msgstr ""
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:204
+msgid "Opacity:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:162
+#: ../Pinta/Dialogs/NewImageDialog.cs:199
+#: ../Pinta/Dialogs/NewImageDialog.cs:342
+#: ../Pinta/Dialogs/NewImageDialog.cs:432
+msgid "Clipboard"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:162
+#: ../Pinta/Dialogs/NewImageDialog.cs:201
+#: ../Pinta/Dialogs/NewImageDialog.cs:344
+#: ../Pinta/Dialogs/NewImageDialog.cs:432
+msgid "Custom"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:193
+msgid "Preset:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:211
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+msgid "Width:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:218
+#: ../Pinta/Dialogs/NewImageDialog.cs:235
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+msgid "pixels"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:228
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
+msgid "Height:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:245
+msgid "Orientation:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:248
+msgid "Portrait"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:256
+msgid "Landscape"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:271
+msgid "Background:"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:274
+msgid "White"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:282
+msgid "Background Color"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:319
+msgid "Preview"
+msgstr ""
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:149
+msgid "By percentage:"
+msgstr ""
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By absolute size:"
+msgstr ""
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:156
+msgid "Maintain aspect ratio"
+msgstr ""
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+msgid "Anchor:"
+msgstr ""
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+msgid "Title"
+msgstr ""
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+msgid "Path"
+msgstr ""
+
+#: ../Pinta/Main.cs:57
+msgid "Show this message and exit."
+msgstr ""
+
+#: ../Pinta/Main.cs:58
+msgid "Display the application version."
+msgstr ""
+
+#: ../Pinta/Main.cs:59
+msgid "number of threads to use for rendering"
+msgstr ""
+
+#: ../Pinta/Main.cs:107
+msgid "Usage: pinta [files]"
+msgstr ""
+
+#: ../Pinta/Main.cs:109
+msgid "Options: "
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:309
+msgid "_File"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:310
+msgid "_Edit"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:312
+msgid "_View"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:315
+msgid "_Image"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:316
+msgid "_Layers"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:317
+msgid "_Adjustments"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:318
+msgid "Effe_cts"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:319
+msgid "A_dd-ins"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:321
+msgid "_Window"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:325
+msgid "Tool Windows"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:329
+msgid "_Help"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:551
+msgid "Downloading Image"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:569
+msgid "Download failed"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:570
+#, csharp-format
+msgid ""
+"Unable to download image from {0}.\n"
+"Details: {1}"
+msgstr ""
+
+#: ../Pinta/Options.cs:486
+msgid "OptionName"
+msgstr ""
+
+#: ../Pinta/Pads/CanvasPad.cs:54
+msgid "Canvas"
+msgstr ""
+
+#: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:52
+msgid "History"
+msgstr ""
+
+#: ../Pinta/Pads/LayersPad.cs:43 ../Pinta/Pads/LayersPad.cs:56
+msgid "Layers"
+msgstr ""
+
+#: ../Pinta/Pads/OpenImagesPad.cs:41 ../Pinta/Pads/OpenImagesPad.cs:48
+msgid "Images"
+msgstr ""
+
+#: ../Pinta/Pads/ToolBoxPad.cs:42 ../Pinta/Pads/ToolBoxPad.cs:49
+msgid "Tools"
+msgstr ""
+
+#: Polar Inversion dialog
+msgid "Edge Behavior"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:123
+msgid ""
+"Multiple selection:\n"
+"\n"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:160
+msgid "Enable"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:163
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:270
+msgid "Disable"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:178
+msgid "No selection"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:217
+msgid "Available in repository:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:256
+msgid "Update available"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:263
+msgid "This add-in can't be loaded due to missing dependencies"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:270
+#, csharp-format
+msgid "Required: {0} v{1}, found v{2}"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:272
+#, csharp-format
+msgid "Missing: {0} v{1}"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:286
+msgid "Installed version"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:287
+msgid "Repository version"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:293
+msgid "Download size"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInfoView.cs:295
+msgid "The following depedencies required by this add-in are not available:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstaller.cs:16
+msgid "Installation cancelled"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:159
+msgid "Some of the required add-ins were not found"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinInstallerDialog.cs:171
+msgid "Installation failed"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:115
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:250
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:122
+msgid "Installed"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:123
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:364
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:247
+msgid "Updates"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:131
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:325
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:347
+msgid "Gallery"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:261
+msgid "All repositories"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:268
+msgid "Manage Repositories..."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:363
+#, csharp-format
+msgid "{0} update available"
+msgid_plural "{0} updates available"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:419
+msgid "Updating repository"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:513
+msgid "Install Add-in Package"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinManagerDialog.cs:523
+msgid "Add-in packages"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:102
+msgid "No add-ins found"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:120
+msgid "Add-in"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/AddinTreeWidget.cs:213
+msgid "Other"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:77
+msgid "Uninstall"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:82
+msgid "The following packages will be uninstalled:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:89
+msgid ""
+"There are other add-ins that depend on the previous ones which will also be "
+"uninstalled:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:124
+msgid ""
+"The selected add-ins can't be installed because there are dependency "
+"conflicts."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:138
+msgid "The following packages will be installed:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:142
+msgid " (in user directory)"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:148
+msgid "The following packages need to be uninstalled:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:156
+msgid "The following dependencies could not be resolved:"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:190
+msgid "Are you sure you want to cancel the installation?"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:209
+msgid "Installing Add-ins"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:211
+msgid "The installation failed!"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:212
+msgid "The installation has completed with warnings."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:214
+msgid "Uninstalling Add-ins"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:216
+msgid "The uninstallation failed!"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/InstallDialog.cs:217
+msgid "The uninstallation has completed with warnings."
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/ManageSitesDialog.cs:98
+msgid "Registering repository"
+msgstr ""
+
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:64
+#: Mono.Addins.Gui/Mono.Addins.Gui/Services.cs:73
+#, csharp-format
+msgid "Exception occurred: {0}"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:181
+msgid "More information"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:229
+msgid "Install..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:255
+msgid "Update"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInfoView.cs:281
+msgid "_Uninstall..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:38
+msgid "Additional extensions are required to perform this operation."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinInstallerDialog.cs:48
+msgid "The following add-ins will be installed:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:143
+msgid "No updates found"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:166
+msgid "Refresh"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:194
+msgid "Update All"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:268
+msgid "Repository:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.AddinManagerDialog.cs:373
+msgid "Install from file..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.InstallDialog.cs:126
+msgid "Install"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ManageSitesDialog.cs:20
+msgid "Add-in Repository Management"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:29
+msgid "Add New Repository"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:47
+msgid "Select the location of the repository you want to register:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:54
+msgid "Register an on-line repository"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:82
+msgid "Url:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:103
+msgid "Register a local repository"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:130
+msgid "Path:"
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.NewSiteDialog.cs:154
+msgid "Browse..."
+msgstr ""
+
+#: Mono.Addins.Gui/gtk-gui/Mono.Addins.Gui.ProgressDialog.cs:21
+msgid "Progress"
+msgstr ""
+
+#: Mono.Addins/Mono.Addins.Description/AssemblyDependency.cs:103
+#, csharp-format
+msgid "(provided by {0})"
+msgstr ""

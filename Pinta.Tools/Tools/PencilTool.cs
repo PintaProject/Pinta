@@ -124,41 +124,33 @@ namespace Pinta.Tools
 
 			ImageSurface surf = doc.CurrentUserLayer.Surface;
 			
-			if (first_pixel && doc.Workspace.PointInCanvas (point)) {
-				// Does Cairo really not support a single-pixel-long single-pixel-wide line?
-				surf.Flush ();
-				int shiftedX = (int)point.X;
-				int shiftedY = (int)point.Y;
-				ColorBgra source = surf.GetColorBgraUnchecked (shiftedX, shiftedY);
-				if (UseAlphaBlending)
-					source = UserBlendOps.NormalBlendOp.ApplyStatic (source, tool_color.ToColorBgra ());
-				else
-					source = tool_color.ToColorBgra ();
-				surf.SetColorBgra (source.ToPremultipliedAlpha (), shiftedX, shiftedY);
-				surf.MarkDirty ();
-			} else {
-				using (Context g = new Context (surf)) {
-					g.AppendPath (doc.Selection.SelectionPath);
-					g.FillRule = FillRule.EvenOdd;
-					g.Clip ();
+			using (Context g = new Context (surf)) {
+				g.AppendPath (doc.Selection.SelectionPath);
+				g.FillRule = FillRule.EvenOdd;
+				g.Clip ();
 				
-					g.Antialias = Antialias.None;
-				
+				g.Antialias = Antialias.None;
+
+                if (first_pixel) {
+					// Cairo does not support a single-pixel-long single-pixel-wide line
+					g.Rectangle (x, y, 1.0, 1.0);
+					g.Fill ();
+                } else {
 					// Adding 0.5 forces cairo into the correct square:
 					// See https://bugs.launchpad.net/bugs/672232
 					g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
 					g.LineTo (x + 0.5, y + 0.5);
-
-					g.SetSourceColor (tool_color);
-					if (UseAlphaBlending)
-						g.SetBlendMode(BlendMode.Normal);
-					else
-						g.Operator = Operator.Source;
-					g.LineWidth = 1;
-					g.LineCap = LineCap.Square;
-				
-					g.Stroke ();
 				}
+
+				g.SetSourceColor (tool_color);
+				if (UseAlphaBlending)
+					g.SetBlendMode(BlendMode.Normal);
+				else
+					g.Operator = Operator.Source;
+				g.LineWidth = 1;
+				g.LineCap = LineCap.Square;
+				
+				g.Stroke ();
 			}
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));

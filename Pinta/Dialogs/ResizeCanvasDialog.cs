@@ -31,24 +31,47 @@ using Pinta.Core;
 
 namespace Pinta
 {
-	public partial class ResizeCanvasDialog : Dialog
+	public class ResizeCanvasDialog : Dialog
 	{
+		private RadioButton percentageRadio;
+		private RadioButton absoluteRadio;
+		private SpinButton percentageSpinner;
+		private SpinButton widthSpinner;
+		private SpinButton heightSpinner;
+		private CheckButton aspectCheckbox;
+
+        private Button NWButton;
+        private Button NButton;
+        private Button NEButton;
+        private Button WButton;
+        private Button EButton;
+        private Button CenterButton;
+        private Button SWButton;
+        private Button SButton;
+        private Button SEButton;
+
 		private bool value_changing;
 		private Anchor anchor;
 		
 		public ResizeCanvasDialog () : base (Catalog.GetString ("Resize Canvas"), PintaCore.Chrome.MainWindow,
-		                                     DialogFlags.Modal)
+		                                     DialogFlags.Modal,
+											 Gtk.Stock.Cancel, Gtk.ResponseType.Cancel,
+											 Gtk.Stock.Ok, Gtk.ResponseType.Ok)
 		{
-			this.Build ();
+			Build ();
 			
 			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
+
+			aspectCheckbox.Active = true;
 			
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
 
 			percentageRadio.Toggled += new EventHandler (percentageRadio_Toggled);
 			absoluteRadio.Toggled += new EventHandler (absoluteRadio_Toggled);
-			
+			percentageRadio.Toggle ();
+
+			percentageSpinner.Value = 100;
 			percentageSpinner.ValueChanged += new EventHandler (percentageSpinner_ValueChanged);
 
 			widthSpinner.ValueChanged += new EventHandler (widthSpinner_ValueChanged);
@@ -277,6 +300,90 @@ namespace Pinta
 				break;
 			}
 		}
+
+		private void Build()
+        {
+			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
+
+			WindowPosition = WindowPosition.CenterOnParent;
+
+			DefaultWidth = 300;
+			DefaultHeight = 200;
+
+			percentageRadio = new RadioButton (Catalog.GetString ("By percentage:"));
+			absoluteRadio = new RadioButton (percentageRadio, Catalog.GetString ("By absolute size:"));
+
+			percentageSpinner = new SpinButton (1, 1000, 1);
+			widthSpinner = new SpinButton (1, 10000, 1);
+			heightSpinner = new SpinButton (1, 10000, 1);
+
+			aspectCheckbox = new CheckButton (Catalog.GetString ("Maintain aspect ratio"));
+
+			const int spacing = 6;
+			var main_vbox = new VBox () { Spacing = spacing, BorderWidth = 12 };
+
+			var hbox_percent = new HBox () { Spacing = spacing };
+			hbox_percent.PackStart (percentageRadio, true, true, 0);
+			hbox_percent.PackStart (percentageSpinner, false, false, 0);
+			hbox_percent.PackEnd (new Label ("%"), false, false, 0);
+			main_vbox.PackStart (hbox_percent, false, false, 0);
+
+			main_vbox.PackStart (absoluteRadio, false, false, 0);
+
+			var hbox_width = new HBox () { Spacing = spacing };
+			hbox_width.PackStart (new Label (Catalog.GetString ("Width:")), false, false, 0);
+			hbox_width.PackStart (widthSpinner, false, false, 0);
+			hbox_width.PackStart (new Label (Catalog.GetString ("pixels")), false, false, 0);
+			main_vbox.PackStart (hbox_width, false, false, 0);
+
+			var hbox_height = new HBox () { Spacing = spacing };
+			hbox_height.PackStart (new Label (Catalog.GetString ("Height:")), false, false, 0);
+			hbox_height.PackStart (heightSpinner, false, false, 0);
+			hbox_height.PackStart (new Label (Catalog.GetString ("pixels")), false, false, 0);
+			main_vbox.PackStart (hbox_height, false, false, 0);
+
+			main_vbox.PackStart (aspectCheckbox, false, false, 0);
+			main_vbox.PackStart (new HSeparator (), false, false, 0);
+
+			var align_label = new Label (Catalog.GetString ("Anchor:")) { Xalign = 0 };
+			main_vbox.PackStart (align_label, false, false, 0);
+
+			NWButton = CreateAnchorButton ();
+			NButton = CreateAnchorButton ();
+			NEButton = CreateAnchorButton ();
+			WButton = CreateAnchorButton ();
+			EButton = CreateAnchorButton ();
+			CenterButton = CreateAnchorButton ();
+			SWButton = CreateAnchorButton ();
+			SButton = CreateAnchorButton ();
+			SEButton = CreateAnchorButton ();
+
+			var grid = new Table (3, 3, false) { RowSpacing = spacing, ColumnSpacing = spacing };
+			grid.Attach (NWButton, 0, 1, 0, 1);
+			grid.Attach (NButton, 1, 2, 0, 1);
+			grid.Attach (NEButton, 2, 3, 0, 1);
+			grid.Attach (WButton, 0, 1, 1, 2);
+			grid.Attach (CenterButton, 1, 2, 1, 2);
+			grid.Attach (EButton, 2, 3, 1, 2);
+			grid.Attach (SWButton, 0, 1, 2, 3);
+			grid.Attach (SButton, 1, 2, 2, 3);
+			grid.Attach (SEButton, 2, 3, 2, 3);
+
+			var grid_align = new Alignment (0.5f, 0.5f, 0, 0);
+			grid_align.Add (grid);
+
+			main_vbox.PackStart (grid_align, false, false, 0);
+
+			VBox.BorderWidth = 2;
+			VBox.Add (main_vbox);
+
+			ShowAll ();
+		}
+
+		private Button CreateAnchorButton()
+        {
+			return new Button () { WidthRequest = 30, HeightRequest = 30 };
+        }
 		#endregion
 	}
 }

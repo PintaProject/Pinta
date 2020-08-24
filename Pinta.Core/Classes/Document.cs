@@ -53,8 +53,6 @@ namespace Pinta.Core
 		// The layer used for selections
 		private Layer selection_layer;
 
-		private bool show_selection;
-
 		private DocumentSelection selection;
 		public DocumentSelection Selection
 		{
@@ -169,18 +167,6 @@ namespace Pinta.Core
 
 		public Layer SelectionLayer {
 			get { return selection_layer; }
-		}
-
-		public bool ShowSelection {
-			get { return show_selection; }
-			set {
-				show_selection = value;
-				PintaCore.Actions.Edit.Deselect.Sensitive = show_selection;
-				PintaCore.Actions.Edit.EraseSelection.Sensitive = show_selection;
-				PintaCore.Actions.Edit.FillSelection.Sensitive = show_selection;
-				PintaCore.Actions.Image.CropToSelection.Sensitive = show_selection;
-				PintaCore.Actions.Edit.InvertSelection.Sensitive = show_selection;
-			}
 		}
 
 		public bool ShowSelectionLayer { get; set; }
@@ -640,8 +626,8 @@ namespace Pinta.Core
 			var rect = new Cairo.Rectangle (0, 0, ImageSize.Width, ImageSize.Height);
 			Selection.CreateRectangleSelection (rect);
 			PreviousSelection.CreateRectangleSelection (rect);
-
-			ShowSelection = false;
+			Selection.Visible = false;
+			PreviousSelection.Visible = false;
 		}
 
 		/// <summary>
@@ -828,9 +814,10 @@ namespace Pinta.Core
 			
 				if (response == ResponseType.Accept)
 				{
-					PintaCore.Workspace.ResizeCanvas (cbImage.Width, cbImage.Height,
-					Pinta.Core.Anchor.Center, paste_action);
-					PintaCore.Actions.View.UpdateCanvasScale ();
+					var new_width = Math.Max(canvas_size.Width, cbImage.Width);
+					var new_height = Math.Max(canvas_size.Height, cbImage.Height);
+                    PintaCore.Workspace.ResizeCanvas(new_width, new_height, Pinta.Core.Anchor.Center, paste_action);
+                    PintaCore.Actions.View.UpdateCanvasScale ();
 				}
 				else if (response == ResponseType.Cancel || response == ResponseType.DeleteEvent)
 				{
@@ -868,14 +855,13 @@ namespace Pinta.Core
 			PintaCore.Tools.SetCurrentTool (Catalog.GetString ("Move Selected Pixels"));
 			
 			DocumentSelection old_selection = Selection.Clone();
-			bool old_show_selection = ShowSelection;
 
 			Selection.CreateRectangleSelection (new Cairo.Rectangle (x, y, cbImage.Width, cbImage.Height));
-			ShowSelection = true;
+			selection.Visible = true;
 
 			Workspace.Invalidate ();
 
-			paste_action.Push (new PasteHistoryItem (cbImage, old_selection, old_show_selection));
+			paste_action.Push (new PasteHistoryItem (cbImage, old_selection));
 			History.PushNewItem (paste_action);
 		}
 

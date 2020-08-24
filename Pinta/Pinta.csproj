@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
   <!-- Common configuration -->
   <PropertyGroup>
     <ProjectGuid>{E00F5D85-87B7-4A7A-8F0F-39EF763DFFD0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AssemblyName>Pinta</AssemblyName>
     <RootNamespace>Pinta</RootNamespace>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ErrorReport>prompt</ErrorReport>
     <OutputPath>..\bin</OutputPath>
     <Platform>AnyCPU</Platform>
     <WarningLevel>4</WarningLevel>
+    <NoStdLib>false</NoStdLib>
   </PropertyGroup>
 
   <!-- Debug configuration -->
@@ -65,12 +66,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="Actions\Addins\AddinManagerAction.cs" />
     <Compile Include="Actions\Edit\PasteAction.cs" />
     <Compile Include="Actions\Edit\PasteIntoNewImageAction.cs" />
@@ -112,9 +107,6 @@
     <Compile Include="Dialogs\VersionInformationTabPage.cs" />
     <Compile Include="DocumentViewContent.cs" />
     <Compile Include="Extensions\GtkExtensions.cs" />
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.ResizeCanvasDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.ResizeImageDialog.cs" />
     <Compile Include="MacInterop\AppleEvent.cs" />
     <Compile Include="MacInterop\ApplicationEvents.cs" />
     <Compile Include="MacInterop\Carbon.cs" />

@@ -47,19 +47,14 @@ namespace Pinta.Tools.Brushes
 			// Cairo does not support a single-pixel-long single-pixel-wide line
 			if (x == lastX && y == lastY && g.LineWidth == 1 &&
 			    PintaCore.Workspace.ActiveWorkspace.PointInCanvas (new PointD(x,y))) {
-				surface.Flush ();
-
-				ColorBgra source = surface.GetColorBgraUnchecked (x, y);
-				source = UserBlendOps.NormalBlendOp.ApplyStatic (source, strokeColor.ToColorBgra ());
-				surface.SetColorBgra (source.ToPremultipliedAlpha (), x, y);
-				surface.MarkDirty ();
-
-				return new Gdk.Rectangle (x - 1, y - 1, 3, 3);
+				g.Rectangle (x, y, 1.0, 1.0);
+				g.Fill ();
 			}
-
-			g.MoveTo (lastX + 0.5, lastY + 0.5);
-			g.LineTo (x + 0.5, y + 0.5);
-			g.StrokePreserve ();
+            else {
+				g.MoveTo (lastX + 0.5, lastY + 0.5);
+				g.LineTo (x + 0.5, y + 0.5);
+				g.StrokePreserve ();
+			}
 
 			Gdk.Rectangle dirty = g.FixedStrokeExtents ().ToGdkRectangle ();
 

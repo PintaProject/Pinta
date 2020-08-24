@@ -1,6 +1,6 @@
 # Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
 
-[![Build Status](https://travis-ci.org/PintaProject/Pinta.svg)](https://travis-ci.org/PintaProject/Pinta)
+[![Build Status](https://github.com/PintaProject/Pinta/workflows/Build/badge.svg)](https://github.com/PintaProject/Pinta/actions)
 
 Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
 
@@ -28,7 +28,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 
 ## Getting help/contributing:
 
-- You can get technical help on the [Pinta Google Group](http://groups.google.com/group/pinta)
+- You can get technical help on the [Pinta Google Group](https://groups.google.com/group/pinta-project)
 - You can report bugs on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
 - You can make suggestions at [Communiroo](https://communiroo.com/pintaproject/pinta/suggestions)
 - You can help translate Pinta to your native language on [Launchpad translations](https://translations.launchpad.net/pinta)
@@ -39,15 +39,13 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 
 ## Windows Build and Installation Instructions:
 
-Be sure to install [Gtk# for Windows](http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.22.msi) when building in Visual Studio.
+Be sure to install [Gtk# for Windows](https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi) when building in Visual Studio.
 
 ## Linux Build and Installation Instructions:
 
-Building Pinta requires the following software:
+Building Pinta requires the following software (instructions are for Ubuntu 20.04, but should be similar for other distributions):
 
-`mono mono-xbuild automake autoconf libmono-cairo2.0-cil gtk-sharp2 yelp-tools intltool`
-
-For Ubuntu 16.04 and above, install `mono-reference-assemblies-4.0`.
+`sudo apt install make automake autoconf mono-devel gtk-sharp2 intltool`
 
 Pinta only supports version 2.8 or higher of Mono.
 

@@ -84,7 +84,7 @@ namespace Pinta.Tools
             combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (args);
 
 			base.OnMouseDown(canvas, args, point);
-			doc.ShowSelection = true;
+			doc.Selection.Visible = true;
 		}
 
 		protected override void OnFillRegionComputed(Point[][] polygonSet)
