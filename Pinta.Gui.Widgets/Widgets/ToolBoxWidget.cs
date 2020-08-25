@@ -12,6 +12,8 @@ namespace Pinta.Gui.Widgets
 	{
 		public ToolBoxWidget () : base(16)
 		{
+			HeightRequest = 375;
+
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
 			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 

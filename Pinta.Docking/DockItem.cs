@@ -88,7 +88,6 @@ namespace Pinta.Docking
             };
 
             // TODO - support dragging into floating panel?
-            // TODO - dock panel toolbar?
             // TODO - allow an item to be locked (e.g. no titlebar, for the central widget)
         }
 
