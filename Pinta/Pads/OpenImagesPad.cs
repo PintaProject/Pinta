@@ -49,6 +49,7 @@ namespace Pinta
             open_images_item.DefaultWidth = 100;
 			open_images_item.Behavior |= DockItemBehavior.CantClose;
 #endif
+			workspace.AddItem(open_images_item, DockPlacement.Right);
 
 			var show_open_images = new ToggleCommand ("images", Translations.GetString ("Images"), null, null);
 			app.AddAction(show_open_images);
