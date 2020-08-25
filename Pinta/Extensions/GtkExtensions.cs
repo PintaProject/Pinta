@@ -24,29 +24,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Gtk;
-using Pinta.Docking;
+using Pinta.Core;
 
 namespace Pinta
 {
 	public static class GtkExtensions
 	{
-		// TODO-GTK3 (docking)
-#if false
-		public static DockToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
+		public static ToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
 		{
-			DockToolButton item = new DockToolButton(action.IconName, null)
-			{
-				ActionName = action.FullName,
-				TooltipText = action.Tooltip ?? action.Label,
-			};
-
-			item.Show();
-			item.Image.Show();
+			var item = action.CreateToolBarItem();
+			// Don't show the full text for "Undo" and similar buttons.
+			item.IsImportant = false;
 
 			return item;
 		}
-#endif
 	}
 }

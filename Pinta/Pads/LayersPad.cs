@@ -41,22 +41,20 @@ namespace Pinta
 				Label = Translations.GetString("Layers")
 			};
 
+			var layers_tb = layers_item.AddToolBar();
+			layers_tb.Add(PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem());
+			layers_tb.Add(PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem());
+
 			// TODO-GTK3 (docking)
 #if false
-			DockItemToolbar layers_tb = layers_item.GetToolbar (DockPositionType.Bottom);
 
-			layers_item.Label = Translations.GetString ("Layers");
-			layers_item.Content = layers;
 			layers_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerMergeDown, 16);
 			layers_item.DefaultWidth = 100;
 			layers_item.Behavior |= DockItemBehavior.CantClose;
-
-			layers_tb.Add (PintaCore.Actions.Layers.AddNewLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DeleteLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.DuplicateLayer.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
-			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
 #endif
 			workspace.AddItem(layers_item, DockPlacement.Right);
 

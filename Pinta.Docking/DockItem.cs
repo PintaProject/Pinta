@@ -91,5 +91,15 @@ namespace Pinta.Docking
             // TODO - dock panel toolbar?
             // TODO - allow an item to be locked (e.g. no titlebar, for the central widget)
         }
+
+        /// <summary>
+        /// Create a toolbar and add it to the bottom of the dock item.
+        /// </summary>
+        public Toolbar AddToolBar()
+        {
+            var toolbar = new Toolbar();
+            PackStart(toolbar, false, false, 0);
+            return toolbar;
+        }
     }
 }

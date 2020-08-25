@@ -43,16 +43,15 @@ namespace Pinta
 
 			// TODO-GTK3 (docking)
 #if false
-			DockItemToolbar history_tb = history_item.GetToolbar (DockPositionType.Bottom);
 			history_item.DefaultLocation = "Images/Bottom";
-			history_item.Content = history;
 			history_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerDuplicate, 16);
 			history_item.DefaultWidth = 100;
 			history_item.Behavior |= DockItemBehavior.CantClose;
-
-			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem ());
-			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem ());
 #endif
+			var history_tb = history_item.AddToolBar();
+			history_tb.Add (PintaCore.Actions.Edit.Undo.CreateDockToolBarItem());
+			history_tb.Add (PintaCore.Actions.Edit.Redo.CreateDockToolBarItem());
+
 			workspace.AddItem(history_item, DockPlacement.Right);
 
 			var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate);
