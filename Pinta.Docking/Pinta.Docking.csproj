@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+
     <RootNamespace>Pinta.Docking</RootNamespace>
     <AssemblyName>Pinta.Docking</AssemblyName>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <Version>1.8.0.0</Version>
     <Authors>PintaProject</Authors>
@@ -11,50 +12,6 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DockLibrary\icons\empty-16.png">
-      <LogicalName>empty-16.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\icons\pad-close-9.png">
-      <LogicalName>pad-close-9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\icons\pad-dock-9.png">
-      <LogicalName>pad-dock-9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockLibrary\icons\pad-minimize-9.png">
-      <LogicalName>pad-minimize-9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-prev-12.png">
-      <LogicalName>tabbar-prev-12.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-next-12.png">
-      <LogicalName>tabbar-next-12.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-active.9.png">
-      <LogicalName>tabbar-active.9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-inactive.9.png">
-      <LogicalName>tabbar-inactive.9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tabbar-back.9.png">
-      <LogicalName>tabbar-back.9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tab-close-9.png">
-      <LogicalName>tab-close-9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tab-dirty-9.png">
-      <LogicalName>tab-dirty-9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tab-pinned-9.png">
-      <LogicalName>tab-pinned-9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DockNotebook\icons\tab-unpinned-9.png">
-      <LogicalName>tab-unpinned-9.png</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.125" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
 </Project>
