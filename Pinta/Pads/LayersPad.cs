@@ -65,10 +65,7 @@ namespace Pinta
 			padMenu.AppendItem(show_layers.CreateMenuItem());
 
 			show_layers.Toggled += (val) => { layers_item.Visible = val; };
-			// TODO-GTK3 (docking)
-#if false
-			layers_item.VisibleChanged += (o, args) => { show_layers.Value = layers_item.Visible; };
-#endif
+			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
 
 			show_layers.Value = layers_item.Visible;
 

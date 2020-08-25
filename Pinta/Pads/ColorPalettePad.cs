@@ -59,12 +59,9 @@ namespace Pinta
 				palette_item.Visible = val;
 			};
 
-			// TODO-GTK3 (docking)
-#if false
-			palette_item.VisibleChanged += (o, args) => {
+			palette_item.VisibilityNotifyEvent += (o, args) => {
 				show_palette.Value = palette_item.Visible;
 			};
-#endif
 
 			palette.Initialize ();
 			show_palette.Value = palette_item.Visible;

@@ -60,10 +60,7 @@ namespace Pinta
 			padMenu.AppendItem(show_history.CreateMenuItem());
 
 			show_history.Toggled += (val) => { history_item.Visible = val; };
-			// TODO-GTK3 (docking)
-#if false
-			history_item.VisibleChanged += (o, args) => { show_history.Value = history_item.Visible; };
-#endif
+			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };
 
 			show_history.Value = history_item.Visible;
 		}

@@ -56,10 +56,7 @@ namespace Pinta
 			padMenu.AppendItem(show_toolbox.CreateMenuItem());
 
 			show_toolbox.Toggled += (val) => { toolbox_item.Visible = val; };
-			// TODO-GTK3 (docking)
-#if false
-			toolbox_item.VisibleChanged += (o, args) => { show_toolbox.Value = toolbox_item.Visible; };
-#endif
+			toolbox_item.VisibilityNotifyEvent += (o, args) => { show_toolbox.Value = toolbox_item.Visible; };
 
 			show_toolbox.Value = toolbox_item.Visible;
 		}

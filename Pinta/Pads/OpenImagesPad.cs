@@ -58,12 +58,9 @@ namespace Pinta
 				open_images_item.Visible = val;
 			};
 
-			// TODO-GTK3 (docking)
-#if false
-			open_images_item.VisibleChanged += (o, args) => {
+			open_images_item.VisibilityNotifyEvent += (o, args) => {
 				show_open_images.Value = open_images_item.Visible;
 			};
-#endif
 		}
 	}
 }
