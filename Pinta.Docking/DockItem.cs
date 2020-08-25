@@ -73,11 +73,7 @@ namespace Pinta.Docking
             title_layout.PackEnd(button_stack, false, false, 0);
 
             PackStart(title_layout, false, false, 0);
-
-            var scroll = new ScrolledWindow();
-            scroll.Add(child);
-
-            PackStart(scroll, true, true, 0);
+            PackStart(child, true, true, 0);
 
             minimize_button.Clicked += (o, args) =>
             {

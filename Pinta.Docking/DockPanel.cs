@@ -97,7 +97,7 @@ namespace Pinta.Docking
             if (items.Count > 0)
                 items.Last().Pane.Add2(panel_item.Pane);
             else
-                PackStart(panel_item.Pane, true, false, 0);
+                PackStart(panel_item.Pane, true, true, 0);
 
             items.Add(panel_item);
             panel_item.Maximize(dock_bar);
