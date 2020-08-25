@@ -358,7 +358,7 @@ namespace Pinta.Core
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 
 			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
-			secondaryText += $"{Environment.NewLine}{Environment.NewLine}Pinta supports file formats:{Environment.NewLine}";
+			secondaryText += $"{Environment.NewLine}{Environment.NewLine}Pinta supports the following file formats:{Environment.NewLine}";
 			var extensions = from format in PintaCore.System.ImageFormats.Formats
 						  from extension in format.Extensions
 						  where char.IsLower(extension.FirstOrDefault())
