@@ -29,8 +29,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 using Pinta.Docking;
-using Pinta.Docking.DockNotebook;
-using Pinta.Docking.Gui;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 using Pinta.MacInterop;
@@ -40,9 +38,8 @@ namespace Pinta
 	public class MainWindow : Gtk.Application
 	{
 		WindowShell window_shell;
-		DockFrame dock;
+		Dock dock;
 		GLib.Menu show_pad;
-        DockNotebookContainer dock_container;
 
 		CanvasPad canvas_pad;
 
@@ -123,6 +120,8 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
+			// TODO-GTK3 (docking)
+#if false
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
@@ -130,9 +129,12 @@ namespace Pinta
 			DockNotebookManager.ActiveTabChanged += DockNotebook_ActiveTabChanged;
 			DockNotebookManager.TabClosed += DockNotebook_TabClosed;
 			DockNotebookManager.NotebookDragDataReceived += MainWindow_DragDataReceived;
+#endif
 		}
 
-        private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
+		// TODO-GTK3 (docking)
+#if false
+		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
         {
             var tab = FindTabWithCanvas ((PintaCanvas)e.Document.Workspace.Canvas);
 
@@ -231,6 +233,7 @@ namespace Pinta
             PintaCore.Actions.View.Centimeters.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Centimeters; };
 #endif
         }
+#endif
 
 		// TODO-GTK3 (rulers)
 #if false
@@ -432,16 +435,7 @@ namespace Pinta
 			fact.AddDefault ();
 
 			// Dock widget
-			dock = new DockFrame ();
-			dock.CompactGuiLevel = 5;
-
-            var style = new DockVisualStyle ();
-            style.PadTitleLabelColor = Styles.PadLabelColor.ToGdkColor();
-            style.PadBackgroundColor = Styles.PadBackground.ToGdkColor();
-            style.InactivePadBackgroundColor = Styles.InactivePadBackground.ToGdkColor();
-            style.TabStyle = DockTabStyle.Normal;
-            style.ShowPadTitleIcon = false;
-            dock.DefaultVisualStyle = style;
+			dock = new Dock ();
 
 			// Toolbox pad
 			var toolboxpad = new ToolBoxPad ();
@@ -454,8 +448,6 @@ namespace Pinta
 			// Canvas pad
 			canvas_pad = new CanvasPad ();
 			canvas_pad.Initialize (dock);
-
-            dock_container = canvas_pad.NotebookContainer;
 
 			// Layer pad
 			var layers_pad = new LayersPad ();
@@ -470,7 +462,9 @@ namespace Pinta
 			history_pad.Initialize (dock, this, show_pad);
 
 			container.PackStart (dock, true, true, 0);
-			
+
+			// TODO-GTK3 (docking)
+#if false
 			string layout_file = PintaCore.Settings.LayoutFilePath;
 
             if (System.IO.File.Exists(layout_file))
@@ -490,6 +484,7 @@ namespace Pinta
 				dock.CreateLayout ("Default", false);
 				
 			dock.CurrentLayout = "Default";
+#endif
 		}
 #endregion
 
@@ -525,7 +520,10 @@ namespace Pinta
 
 		private void SaveUserSettings ()
 		{
+			// TODO-GTK3 (docking)
+#if false
 			dock.SaveLayouts (PintaCore.Settings.LayoutFilePath);
+#endif
 
 			// Don't store the maximized height if the window is maximized
 			if ((window_shell.Window.State & Gdk.WindowState.Maximized) == 0) {
@@ -675,7 +673,10 @@ namespace Pinta
                     // and the tab, and we handle both events, so when it fires the notebook
                     // changed event, the tab has not been changed yet.
                     suppress_active_notebook_change = true;
-                    dock_container.ActivateTab (tab);
+					// TODO-GTK3 (docking)
+#if false
+					dock_container.ActivateTab (tab);
+#endif
                     suppress_active_notebook_change = false;
                 }
 
@@ -683,15 +684,18 @@ namespace Pinta
 			}
 		}
 
-        private DockNotebookTab FindTabWithCanvas (PintaCanvas canvas)
+        private IDockNotebookItem FindTabWithCanvas (PintaCanvas canvas)
         {
-            foreach (var tab in DockNotebookManager.AllTabs) {
+			// TODO-GTK3 (docking)
+#if false
+			foreach (var tab in DockNotebookManager.AllTabs) {
                 var window = (SdiWorkspaceWindow)tab.Content;
                 var doc_content = (DocumentViewContent)window.ActiveViewContent;
 
                 if (((CanvasWindow)doc_content.Control).Canvas == canvas)
                     return tab;
             }
+#endif
 
             return null;
         }

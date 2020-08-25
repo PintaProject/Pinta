@@ -1,10 +1,8 @@
-// 
-// GtkExtensions.cs
-//  
+﻿//  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Cameron White <cameronwhite91@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2020 Cameron White
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,29 +22,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using Gtk;
-using Pinta.Docking;
-
-namespace Pinta
+namespace Pinta.Docking
 {
-	public static class GtkExtensions
-	{
-		// TODO-GTK3 (docking)
-#if false
-		public static DockToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
-		{
-			DockToolButton item = new DockToolButton(action.IconName, null)
-			{
-				ActionName = action.FullName,
-				TooltipText = action.Tooltip ?? action.Label,
-			};
-
-			item.Show();
-			item.Image.Show();
-
-			return item;
-		}
-#endif
-	}
+    public interface IDockNotebookItem
+    {
+    }
 }

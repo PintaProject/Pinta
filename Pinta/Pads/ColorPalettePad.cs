@@ -33,17 +33,23 @@ namespace Pinta
 {
 	public class ColorPalettePad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
 		{
-			DockItem palette_item = workspace.AddItem ("Palette");
 			ColorPaletteWidget palette = new ColorPaletteWidget () { Name = "palette" };
 
-			palette_item.Label = Translations.GetString ("Palette");
-			palette_item.Content = palette;
+			DockItem palette_item = new DockItem(palette, "Palette")
+			{
+				Label = Translations.GetString("Palette")
+			};
+
+			// TODO-GTK3 (docking)
+#if false
 			palette_item.Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 			palette_item.DefaultLocation = "Toolbox/Bottom";
 			palette_item.Behavior |= DockItemBehavior.CantClose;
 			palette_item.DefaultWidth = 35;
+#endif
+			workspace.AddItem(palette_item, DockPlacement.Left);
 
 			var show_palette = new ToggleCommand ("palette", Translations.GetString ("Palette"), null, "Pinta.png");
 			app.AddAction(show_palette);
@@ -53,9 +59,12 @@ namespace Pinta
 				palette_item.Visible = val;
 			};
 
+			// TODO-GTK3 (docking)
+#if false
 			palette_item.VisibleChanged += (o, args) => {
 				show_palette.Value = palette_item.Visible;
 			};
+#endif
 
 			palette.Initialize ();
 			show_palette.Value = palette_item.Visible;

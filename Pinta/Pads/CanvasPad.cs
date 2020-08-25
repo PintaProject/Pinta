@@ -27,32 +27,43 @@
 using System;
 using Gtk;
 using Pinta.Docking;
-using Pinta.Docking.DockNotebook;
 using Pinta.Core;
 
 namespace Pinta
 {
 	public class CanvasPad : IDockPad
 	{
+        // TODO-GTK3 (docking)
+#if false
         public DockNotebookContainer NotebookContainer { get; private set; }
+#endif
 
-		public void Initialize (DockFrame workspace)
+		public void Initialize (Dock workspace)
 		{
-            var tab = new DockNotebook () {
-                NavigationButtonsVisible = false
-            };
+            var tab = new DockNotebook();
 
+            // TODO-GTK3 (docking)
+#if false
             NotebookContainer = new DockNotebookContainer (tab, true);
 
             tab.InitSize ();
+#endif
 
-            var canvas_dock = workspace.AddItem ("Canvas");
+            var canvas_dock = new DockItem(tab, "Canvas")
+            {
+                Label = Translations.GetString("Canvas")
+            };
+            workspace.AddItem(canvas_dock, DockPlacement.Center);
+
+            // TODO-GTK3 (docking)
+#if false
             canvas_dock.Behavior = DockItemBehavior.Locked;
             canvas_dock.Expand = true;
 
             canvas_dock.DrawFrame = false;
             canvas_dock.Label = Translations.GetString ("Canvas");
             canvas_dock.Content = NotebookContainer;
+#endif
         }
-	}
+    }
 }

@@ -33,16 +33,22 @@ namespace Pinta
 {
 	public class OpenImagesPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
 		{
-			DockItem open_images_item = workspace.AddItem ("Images");
+			DockItem open_images_item = new DockItem(new OpenImagesListWidget(), "Images")
+			{
+				Label = Translations.GetString("Images")
+			};
+
+			// TODO-GTK3 (docking)
+#if false
 			open_images_item.DefaultLocation = "Layers/Bottom";
-			open_images_item.Label = Translations.GetString ("Images");
 			open_images_item.Content = new OpenImagesListWidget ();
 			open_images_item.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Default.png");
             open_images_item.DefaultVisible = false;
             open_images_item.DefaultWidth = 100;
 			open_images_item.Behavior |= DockItemBehavior.CantClose;
+#endif
 
 			var show_open_images = new ToggleCommand ("images", Translations.GetString ("Images"), null, null);
 			app.AddAction(show_open_images);
@@ -52,9 +58,12 @@ namespace Pinta
 				open_images_item.Visible = val;
 			};
 
+			// TODO-GTK3 (docking)
+#if false
 			open_images_item.VisibleChanged += (o, args) => {
 				show_open_images.Value = open_images_item.Visible;
 			};
+#endif
 		}
 	}
 }

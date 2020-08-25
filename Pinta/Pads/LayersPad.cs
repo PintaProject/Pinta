@@ -33,10 +33,16 @@ namespace Pinta
 {
 	public class LayersPad : IDockPad
 	{
-		public void Initialize (DockFrame workspace, Application app, GLib.Menu padMenu)
+		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
 		{
 			var layers = new LayersListWidget ();
-			DockItem layers_item = workspace.AddItem ("Layers");
+			DockItem layers_item = new DockItem(layers, "Layers")
+			{
+				Label = Translations.GetString("Layers")
+			};
+
+			// TODO-GTK3 (docking)
+#if false
 			DockItemToolbar layers_tb = layers_item.GetToolbar (DockPositionType.Bottom);
 
 			layers_item.Label = Translations.GetString ("Layers");
@@ -51,13 +57,18 @@ namespace Pinta
 			layers_tb.Add (PintaCore.Actions.Layers.MergeLayerDown.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerUp.CreateDockToolBarItem ());
 			layers_tb.Add (PintaCore.Actions.Layers.MoveLayerDown.CreateDockToolBarItem ());
+#endif
+			workspace.AddItem(layers_item, DockPlacement.Right);
 
 			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown);
 			app.AddAction(show_layers);
 			padMenu.AppendItem(show_layers.CreateMenuItem());
 
 			show_layers.Toggled += (val) => { layers_item.Visible = val; };
+			// TODO-GTK3 (docking)
+#if false
 			layers_item.VisibleChanged += (o, args) => { show_layers.Value = layers_item.Visible; };
+#endif
 
 			show_layers.Value = layers_item.Visible;
 

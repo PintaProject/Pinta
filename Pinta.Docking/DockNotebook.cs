@@ -1,10 +1,8 @@
-// 
-// GtkExtensions.cs
-//  
+﻿//  
 // Author:
-//       Jonathan Pobst <monkey@jpobst.com>
+//       Cameron White <cameronwhite91@gmail.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2020 Cameron White
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,29 +22,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Gtk;
-using Pinta.Docking;
 
-namespace Pinta
+namespace Pinta.Docking
 {
-	public static class GtkExtensions
-	{
-		// TODO-GTK3 (docking)
-#if false
-		public static DockToolButton CreateDockToolBarItem(this Pinta.Core.Command action)
-		{
-			DockToolButton item = new DockToolButton(action.IconName, null)
-			{
-				ActionName = action.FullName,
-				TooltipText = action.Tooltip ?? action.Label,
-			};
+    public class DockNotebook : Gtk.Notebook
+    {
+        public DockNotebook()
+        {
+            EnablePopup = true;
+        }
 
-			item.Show();
-			item.Image.Show();
+        public void AddTab(Widget child, string label)
+        {
+            // TODO - make label dynamic (e.g. document title).
+            var tab_layout = new HBox();
+            tab_layout.PackStart(new Label(label), false, false, 0);
 
-			return item;
-		}
-#endif
-	}
+            var close_button = new Button("window-close-symbolic", IconSize.SmallToolbar) {
+                Relief = ReliefStyle.None
+            };
+            tab_layout.PackStart(close_button, false, false, 0);
+            tab_layout.ShowAll();
+
+            AppendPage(child, tab_layout);
+            SetTabReorderable(child, true);
+        }
+    }
 }

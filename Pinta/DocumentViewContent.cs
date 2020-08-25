@@ -26,11 +26,11 @@
 
 using System;
 using Pinta.Core;
-using Pinta.Docking.Gui;
+using Pinta.Docking;
 
 namespace Pinta
 {
-    class DocumentViewContent : IViewContent
+    class DocumentViewContent : IDockNotebookItem
     {
         private CanvasWindow canvas_window;
 
@@ -41,11 +41,16 @@ namespace Pinta
             this.Document = document;
             this.canvas_window = canvasWindow;
 
+            // TODO-GTK3
+#if false
             document.IsDirtyChanged += (o, e) => IsDirty = document.IsDirty;
             document.Renamed += (o, e) => { if (ContentNameChanged != null) ContentNameChanged (this, EventArgs.Empty); };
+#endif
         }
 
-        #region IViewContent Members
+        // TODO-GTK3 (docking)
+#if false
+#region IViewContent Members
         public event EventHandler ContentNameChanged;
         public event EventHandler ContentChanged;
         public event EventHandler DirtyChanged;
@@ -107,9 +112,9 @@ namespace Pinta
         public void DiscardChanges ()
         {
         }
-        #endregion
+#endregion
 
-        #region IBaseViewContent Members
+#region IBaseViewContent Members
         public IWorkbenchWindow WorkbenchWindow { get; set; }
 
         public Gtk.Widget Control {
@@ -133,14 +138,15 @@ namespace Pinta
         public void RedrawContent ()
         {
         }
-        #endregion
+#endregion
+#endif
 
-        #region IDisposable Members
+#region IDisposable Members
         public void Dispose ()
         {
             if (canvas_window != null)
                 canvas_window.Dispose ();
         }
-        #endregion
+#endregion
     }
 }
