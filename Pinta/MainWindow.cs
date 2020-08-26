@@ -120,9 +120,9 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToSelection.Activated += ZoomToSelection_Activated;
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
+			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			// TODO-GTK3 (docking)
 #if false
-			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
 			DockNotebookManager.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
@@ -192,14 +192,19 @@ namespace Pinta
 
             ((CanvasWindow)view.Control).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
         }
-
-        private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
+#endif
+		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
         {
             var doc = e.Document;
 
-            // Find the currently active container for our new tab
-            var container = DockNotebookManager.ActiveNotebookContainer ?? dock_container;
-            var selected_index = container.TabControl.CurrentTabIndex;
+			// TODO-GTK3 (docking)
+#if false
+			// Find the currently active container for our new tab
+			var container = DockNotebookManager.ActiveNotebookContainer ?? dock_container;
+#else
+			var notebook = canvas_pad.Notebook;
+#endif
+			var selected_index = notebook.CurrentPage;
 
 			
 			var canvas = new CanvasWindow (doc) {
@@ -213,7 +218,7 @@ namespace Pinta
 			var my_content = new DocumentViewContent (doc, canvas);
 
             // Insert our tab to the right of the currently selected tab
-            container.TabControl.InsertTab (my_content, selected_index + 1);
+            notebook.InsertTab (my_content, selected_index + 1);
 
             doc.Workspace.Canvas = canvas.Canvas;
 
@@ -233,7 +238,6 @@ namespace Pinta
             PintaCore.Actions.View.Centimeters.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Centimeters; };
 #endif
         }
-#endif
 
 		// TODO-GTK3 (rulers)
 #if false

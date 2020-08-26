@@ -33,23 +33,13 @@ namespace Pinta
 {
 	public class CanvasPad : IDockPad
 	{
-        // TODO-GTK3 (docking)
-#if false
-        public DockNotebookContainer NotebookContainer { get; private set; }
-#endif
+        public DockNotebook Notebook { get; private set; }
 
 		public void Initialize (Dock workspace)
 		{
-            var tab = new DockNotebook();
+            Notebook = new DockNotebook();
 
-            // TODO-GTK3 (docking)
-#if false
-            NotebookContainer = new DockNotebookContainer (tab, true);
-
-            tab.InitSize ();
-#endif
-
-            var canvas_dock = new DockItem(tab, "Canvas", locked: true)
+            var canvas_dock = new DockItem(Notebook, "Canvas", locked: true)
             {
                 Label = Translations.GetString("Canvas")
             };

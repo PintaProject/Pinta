@@ -33,20 +33,22 @@ namespace Pinta.Docking
             EnablePopup = true;
         }
 
-        public void AddTab(Widget child, string label)
+        public void InsertTab(IDockNotebookItem item, int position)
         {
-            // TODO - make label dynamic (e.g. document title).
             var tab_layout = new HBox();
-            tab_layout.PackStart(new Label(label), false, false, 0);
+            var label_widget = new Label(item.Label);
+            item.LabelChanged += (o, args) => { label_widget.Text = item.Label; };
 
             var close_button = new Button("window-close-symbolic", IconSize.SmallToolbar) {
                 Relief = ReliefStyle.None
             };
+
+            tab_layout.PackStart(label_widget, false, false, 0);
             tab_layout.PackStart(close_button, false, false, 0);
             tab_layout.ShowAll();
 
-            AppendPage(child, tab_layout);
-            SetTabReorderable(child, true);
+            InsertPage(item.Widget, tab_layout, position);
+            SetTabReorderable(item.Widget, true);
         }
     }
 }

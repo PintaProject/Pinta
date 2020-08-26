@@ -36,7 +36,7 @@ namespace Pinta
 
         public Document Document { get; private set; }
 
-        public DocumentViewContent (Document document, CanvasWindow canvasWindow)
+        public  DocumentViewContent (Document document, CanvasWindow canvasWindow)
         {
             this.Document = document;
             this.canvas_window = canvasWindow;
@@ -44,13 +44,23 @@ namespace Pinta
             // TODO-GTK3
 #if false
             document.IsDirtyChanged += (o, e) => IsDirty = document.IsDirty;
-            document.Renamed += (o, e) => { if (ContentNameChanged != null) ContentNameChanged (this, EventArgs.Empty); };
 #endif
+            document.Renamed += (o, e) => { LabelChanged?.Invoke(this, EventArgs.Empty); };
         }
+
+        public event EventHandler LabelChanged;
+
+        public string Label
+        {
+            get { return Document.Filename; }
+            set { Document.Filename = value; }
+        }
+
+        public Gtk.Widget Widget { get { return canvas_window; } }
 
         // TODO-GTK3 (docking)
 #if false
-#region IViewContent Members
+        #region IViewContent Members
         public event EventHandler ContentNameChanged;
         public event EventHandler ContentChanged;
         public event EventHandler DirtyChanged;
@@ -112,9 +122,9 @@ namespace Pinta
         public void DiscardChanges ()
         {
         }
-#endregion
+        #endregion
 
-#region IBaseViewContent Members
+        #region IBaseViewContent Members
         public IWorkbenchWindow WorkbenchWindow { get; set; }
 
         public Gtk.Widget Control {
@@ -138,10 +148,10 @@ namespace Pinta
         public void RedrawContent ()
         {
         }
-#endregion
+        #endregion
 #endif
 
-#region IDisposable Members
+        #region IDisposable Members
         public void Dispose ()
         {
             if (canvas_window != null)
