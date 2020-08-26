@@ -49,21 +49,11 @@ namespace Pinta
             tab.InitSize ();
 #endif
 
-            var canvas_dock = new DockItem(tab, "Canvas")
+            var canvas_dock = new DockItem(tab, "Canvas", locked: true)
             {
                 Label = Translations.GetString("Canvas")
             };
             workspace.AddItem(canvas_dock, DockPlacement.Center);
-
-            // TODO-GTK3 (docking)
-#if false
-            canvas_dock.Behavior = DockItemBehavior.Locked;
-            canvas_dock.Expand = true;
-
-            canvas_dock.DrawFrame = false;
-            canvas_dock.Label = Translations.GetString ("Canvas");
-            canvas_dock.Content = NotebookContainer;
-#endif
         }
     }
 }

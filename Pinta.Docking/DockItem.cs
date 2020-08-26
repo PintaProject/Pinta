@@ -55,40 +55,43 @@ namespace Pinta.Docking
         /// </summary>
         public EventHandler? Maximized;
 
-        public DockItem(Widget child, string unique_name)
+        public DockItem(Widget child, string unique_name, bool locked = false)
         {
             UniqueName = unique_name;
 
-            const int padding = 8;
-            var title_layout = new HBox();
             label_widget = new Label();
-            title_layout.PackStart(label_widget, false, false, padding);
+            if (!locked)
+            {
+                const int padding = 8;
+                var title_layout = new HBox();
+                title_layout.PackStart(label_widget, false, false, padding);
 
-            var minimize_button = new Button("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
-            var maximize_button = new Button("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+                var minimize_button = new Button("window-minimize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
+                var maximize_button = new Button("window-maximize-symbolic", IconSize.Button) { Relief = ReliefStyle.None };
 
-            var button_stack = new Stack();
-            button_stack.Add(minimize_button);
-            button_stack.Add(maximize_button);
-            title_layout.PackEnd(button_stack, false, false, 0);
+                var button_stack = new Stack();
+                button_stack.Add(minimize_button);
+                button_stack.Add(maximize_button);
+                title_layout.PackEnd(button_stack, false, false, 0);
 
-            PackStart(title_layout, false, false, 0);
+                minimize_button.Clicked += (o, args) =>
+                {
+                    button_stack.VisibleChild = maximize_button;
+                    Minimized?.Invoke(this, new EventArgs());
+                };
+
+                maximize_button.Clicked += (o, args) =>
+                {
+                    button_stack.VisibleChild = minimize_button;
+                    Maximized?.Invoke(this, new EventArgs());
+                };
+
+                PackStart(title_layout, false, false, 0);
+            }
+
             PackStart(child, true, true, 0);
 
-            minimize_button.Clicked += (o, args) =>
-            {
-                button_stack.VisibleChild = maximize_button;
-                Minimized?.Invoke(this, new EventArgs());
-            };
-
-            maximize_button.Clicked += (o, args) =>
-            {
-                button_stack.VisibleChild = minimize_button;
-                Maximized?.Invoke(this, new EventArgs());
-            };
-
             // TODO - support dragging into floating panel?
-            // TODO - allow an item to be locked (e.g. no titlebar, for the central widget)
         }
 
         /// <summary>
