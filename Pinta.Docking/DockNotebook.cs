@@ -23,15 +23,26 @@
 // THE SOFTWARE.
 
 using Gtk;
+using System;
+using System.Collections.Generic;
 
 namespace Pinta.Docking
 {
     public class DockNotebook : Gtk.Notebook
     {
+        private HashSet<IDockNotebookItem> items = new HashSet<IDockNotebookItem>();
+
+        // TODO - add support for dragging tabs into separate notebooks?
+
         public DockNotebook()
         {
             EnablePopup = true;
         }
+
+        /// <summary>
+        /// The items currently in the notebook.
+        /// </summary>
+        public IEnumerable<IDockNotebookItem> Items { get { return items; } }
 
         public void InsertTab(IDockNotebookItem item, int position)
         {
@@ -49,6 +60,19 @@ namespace Pinta.Docking
 
             InsertPage(item.Widget, tab_layout, position);
             SetTabReorderable(item.Widget, true);
+
+            items.Add(item);
+        }
+
+        public void RemoveTab(IDockNotebookItem item)
+        {
+            int idx = PageNum(item.Widget);
+            if (idx < 0)
+                throw new ArgumentException("The item is not in the notebook", nameof(item));
+
+            RemovePage(idx);
+
+            items.Remove(item);
         }
     }
 }

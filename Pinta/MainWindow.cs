@@ -121,10 +121,10 @@ namespace Pinta
 			PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
-			// TODO-GTK3 (docking)
-#if false
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
+			// TODO-GTK3 (docking)
+#if false
 			DockNotebookManager.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
 			DockNotebookManager.ActiveTabChanged += DockNotebook_ActiveTabChanged;
 			DockNotebookManager.TabClosed += DockNotebook_TabClosed;
@@ -132,16 +132,16 @@ namespace Pinta
 #endif
 		}
 
-		// TODO-GTK3 (docking)
-#if false
 		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
         {
             var tab = FindTabWithCanvas ((PintaCanvas)e.Document.Workspace.Canvas);
 
             if (tab != null)
-                dock_container.CloseTab (tab);
+                canvas_pad.Notebook.RemoveTab (tab);
         }
 
+		// TODO-GTK3 (docking)
+#if false
         private void DockNotebook_TabClosed (object sender, TabClosedEventArgs e)
         {
             if (e.Tab == null || e.Tab.Content == null)
@@ -197,13 +197,7 @@ namespace Pinta
         {
             var doc = e.Document;
 
-			// TODO-GTK3 (docking)
-#if false
-			// Find the currently active container for our new tab
-			var container = DockNotebookManager.ActiveNotebookContainer ?? dock_container;
-#else
 			var notebook = canvas_pad.Notebook;
-#endif
 			var selected_index = notebook.CurrentPage;
 
 			
@@ -690,18 +684,9 @@ namespace Pinta
 
         private IDockNotebookItem FindTabWithCanvas (PintaCanvas canvas)
         {
-			// TODO-GTK3 (docking)
-#if false
-			foreach (var tab in DockNotebookManager.AllTabs) {
-                var window = (SdiWorkspaceWindow)tab.Content;
-                var doc_content = (DocumentViewContent)window.ActiveViewContent;
-
-                if (((CanvasWindow)doc_content.Control).Canvas == canvas)
-                    return tab;
-            }
-#endif
-
-            return null;
+			return canvas_pad.Notebook.Items
+				.Where(i => ((CanvasWindow)i.Widget).Canvas == canvas)
+				.FirstOrDefault();
         }
 #endregion
 	}
