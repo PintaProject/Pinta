@@ -25,24 +25,77 @@
 using Gtk;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.ComponentModel;
 
 namespace Pinta.Docking
 {
+    public class TabClosedEventArgs : CancelEventArgs
+    {
+        public TabClosedEventArgs(IDockNotebookItem item) { Item = item; }
+
+        public IDockNotebookItem Item { get; private set; }
+    }
+
+    public class TabEventArgs : EventArgs
+    {
+        public TabEventArgs(IDockNotebookItem item) { Item = item; }
+
+        public IDockNotebookItem Item { get; private set; }
+    }
+
     public class DockNotebook : Gtk.Notebook
     {
         private HashSet<IDockNotebookItem> items = new HashSet<IDockNotebookItem>();
 
-        // TODO - add support for dragging tabs into separate notebooks?
+        // TODO-GTK3 (docking) - add support for dragging tabs into separate notebooks?
 
         public DockNotebook()
         {
             EnablePopup = true;
+
+            // Emit an event when the current tab is changed.
+            SwitchPage += (o, args) =>
+            {
+                var widget = args.Page;
+                IDockNotebookItem item = items.Where(i => i.Widget == widget).FirstOrDefault();
+
+                ActiveTabChanged?.Invoke(this, new TabEventArgs(item));
+            };
         }
+
+        /// <summary>
+        /// Emitted when a tab is closed by the user.
+        /// </summary>
+        public event EventHandler<TabClosedEventArgs>? TabClosed;
+
+        /// <summary>
+        /// Emitted when switching to a different tab.
+        /// </summary>
+        public event EventHandler<TabEventArgs>? ActiveTabChanged;
 
         /// <summary>
         /// The items currently in the notebook.
         /// </summary>
         public IEnumerable<IDockNotebookItem> Items { get { return items; } }
+
+        /// <summary>
+        /// Returns the active notebook item.
+        /// </summary>
+        public IDockNotebookItem? ActiveItem
+        {
+            get
+            {
+                var current = CurrentPageWidget;
+                return items.Where(i => i.Widget == current).FirstOrDefault();
+            }
+            set
+            {
+                var idx = PageNum(value!.Widget);
+                if (idx >= 0)
+                    CurrentPage = idx;
+            }
+        }
 
         public void InsertTab(IDockNotebookItem item, int position)
         {
@@ -52,6 +105,14 @@ namespace Pinta.Docking
 
             var close_button = new Button("window-close-symbolic", IconSize.SmallToolbar) {
                 Relief = ReliefStyle.None
+            };
+            close_button.Clicked += (sender, args) =>
+            {
+                var e = new TabClosedEventArgs(item);
+
+                TabClosed?.Invoke(this, e);
+                if (!e.Cancel && PageNum(item.Widget) >= 0)
+                    RemoveTab(item);
             };
 
             tab_layout.PackStart(label_widget, false, false, 0);

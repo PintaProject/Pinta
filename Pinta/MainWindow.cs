@@ -43,8 +43,6 @@ namespace Pinta
 
 		CanvasPad canvas_pad;
 
-        bool suppress_active_notebook_change = false;
-
         public MainWindow () : base("com.github.PintaProject.Pinta", GLib.ApplicationFlags.None)
 		{
 			Register(GLib.Cancellable.Current);
@@ -123,13 +121,9 @@ namespace Pinta
 			PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
 			PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
-			// TODO-GTK3 (docking)
-#if false
-			DockNotebookManager.ActiveNotebookChanged += DockNotebook_ActiveNotebookChanged;
-			DockNotebookManager.ActiveTabChanged += DockNotebook_ActiveTabChanged;
-			DockNotebookManager.TabClosed += DockNotebook_TabClosed;
-			DockNotebookManager.NotebookDragDataReceived += MainWindow_DragDataReceived;
-#endif
+			var notebook = canvas_pad.Notebook;
+			notebook.TabClosed += DockNotebook_TabClosed;
+			notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
 		}
 
 		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
@@ -140,15 +134,9 @@ namespace Pinta
                 canvas_pad.Notebook.RemoveTab (tab);
         }
 
-		// TODO-GTK3 (docking)
-#if false
         private void DockNotebook_TabClosed (object sender, TabClosedEventArgs e)
         {
-            if (e.Tab == null || e.Tab.Content == null)
-                return;
-
-            var content = (SdiWorkspaceWindow)e.Tab.Content;
-            var view = (DocumentViewContent)content.ViewContent;
+            var view = (DocumentViewContent)e.Item;
 
             if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) > -1) {
                 PintaCore.Workspace.SetActiveDocument (view.Document);
@@ -160,39 +148,20 @@ namespace Pinta
             }
         }
 
-        private void DockNotebook_ActiveNotebookChanged (object sender, EventArgs e)
-        {
-            if (suppress_active_notebook_change)
-                return;
-
-            var tab = DockNotebookManager.ActiveTab;
-
-            if (tab == null || tab.Content == null)
-                return;
-
-            var content = (SdiWorkspaceWindow)tab.Content;
-            var view = (DocumentViewContent)content.ViewContent;
-
-            PintaCore.Workspace.SetActiveDocument (view.Document);
-
-            ((CanvasWindow)view.Control).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
-        }
-
         private void DockNotebook_ActiveTabChanged (object sender, EventArgs e)
         {
-            var tab = DockNotebookManager.ActiveTab;
+            var item = canvas_pad.Notebook.ActiveItem;
 
-            if (tab == null || tab.Content == null)
+            if (item == null)
                 return;
 
-            var content = (SdiWorkspaceWindow)tab.Content;
-            var view = (DocumentViewContent)content.ViewContent;
+			var view = (DocumentViewContent)item;
 
             PintaCore.Workspace.SetActiveDocument (view.Document);
 
-            ((CanvasWindow)view.Control).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
+            ((CanvasWindow)view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
         }
-#endif
+
 		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
         {
             var doc = e.Document;
@@ -667,15 +636,7 @@ namespace Pinta
                 var tab = FindTabWithCanvas ((PintaCanvas)doc.Workspace.Canvas);
 
                 if (tab != null) {
-                    // We need to suppress because ActivateTab changes both the notebook
-                    // and the tab, and we handle both events, so when it fires the notebook
-                    // changed event, the tab has not been changed yet.
-                    suppress_active_notebook_change = true;
-					// TODO-GTK3 (docking)
-#if false
-					dock_container.ActivateTab (tab);
-#endif
-                    suppress_active_notebook_change = false;
+					canvas_pad.Notebook.ActiveItem = tab;
                 }
 
                 doc.Workspace.Canvas.GrabFocus ();

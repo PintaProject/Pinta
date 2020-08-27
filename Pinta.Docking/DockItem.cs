@@ -48,12 +48,12 @@ namespace Pinta.Docking
         /// <summary>
         /// Triggered when the minimize button is pressed.
         /// </summary>
-        public EventHandler? Minimized;
+        public event EventHandler? Minimized;
 
         /// <summary>
         /// Triggered when the maximize button is pressed.
         /// </summary>
-        public EventHandler? Maximized;
+        public event EventHandler? Maximized;
 
         public DockItem(Widget child, string unique_name, bool locked = false)
         {
