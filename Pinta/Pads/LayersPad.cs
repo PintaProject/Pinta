@@ -58,14 +58,15 @@ namespace Pinta
 #endif
 			workspace.AddItem(layers_item, DockPlacement.Right);
 
-			var show_layers = new ToggleCommand ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown);
+			var show_layers = new ToggleCommand("layers", Translations.GetString("Layers"), null, Resources.Icons.LayerMergeDown)
+			{
+				Value = true
+			};
 			app.AddAction(show_layers);
 			padMenu.AppendItem(show_layers.CreateMenuItem());
 
 			show_layers.Toggled += (val) => { layers_item.Visible = val; };
 			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
-
-			show_layers.Value = layers_item.Visible;
 
 			PintaCore.Workspace.ActiveDocumentChanged += delegate { layers.Reset (); };
 		}

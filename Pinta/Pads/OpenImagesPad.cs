@@ -51,7 +51,10 @@ namespace Pinta
 #endif
 			workspace.AddItem(open_images_item, DockPlacement.Right);
 
-			var show_open_images = new ToggleCommand ("images", Translations.GetString ("Images"), null, null);
+			var show_open_images = new ToggleCommand("images", Translations.GetString("Images"), null, null)
+			{
+				Value = true
+			};
 			app.AddAction(show_open_images);
 			padMenu.AppendItem(show_open_images.CreateMenuItem());
 

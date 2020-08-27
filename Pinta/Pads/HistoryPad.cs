@@ -54,14 +54,15 @@ namespace Pinta
 
 			workspace.AddItem(history_item, DockPlacement.Right);
 
-			var show_history = new ToggleCommand ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate);
+			var show_history = new ToggleCommand("history", Translations.GetString("History"), null, Resources.Icons.LayerDuplicate)
+			{
+				Value = true
+			};
 			app.AddAction(show_history);
 			padMenu.AppendItem(show_history.CreateMenuItem());
 
 			show_history.Toggled += (val) => { history_item.Visible = val; };
 			history_item.VisibilityNotifyEvent += (o, args) => { show_history.Value = history_item.Visible; };
-
-			show_history.Value = history_item.Visible;
 		}
 	}
 }

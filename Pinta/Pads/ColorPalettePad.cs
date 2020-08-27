@@ -51,7 +51,10 @@ namespace Pinta
 #endif
 			workspace.AddItem(palette_item, DockPlacement.Left);
 
-			var show_palette = new ToggleCommand ("palette", Translations.GetString ("Palette"), null, "Pinta.png");
+			var show_palette = new ToggleCommand("palette", Translations.GetString("Palette"), null, "Pinta.png")
+			{
+				Value = true
+			};
 			app.AddAction(show_palette);
 			padMenu.AppendItem(show_palette.CreateMenuItem());
 
@@ -64,7 +67,6 @@ namespace Pinta
 			};
 
 			palette.Initialize ();
-			show_palette.Value = palette_item.Visible;
 		}
     }
 }

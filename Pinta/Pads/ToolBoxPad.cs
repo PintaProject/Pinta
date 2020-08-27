@@ -51,14 +51,15 @@ namespace Pinta
 #endif
 			workspace.AddItem(toolbox_item, DockPlacement.Left);
 
-			var show_toolbox = new ToggleCommand("Tools", Translations.GetString("Tools"), null, Resources.Icons.ToolPencil);
+			var show_toolbox = new ToggleCommand("Tools", Translations.GetString("Tools"), null, Resources.Icons.ToolPencil)
+			{
+				Value = true
+			};
 			app.AddAction(show_toolbox);
 			padMenu.AppendItem(show_toolbox.CreateMenuItem());
 
 			show_toolbox.Toggled += (val) => { toolbox_item.Visible = val; };
 			toolbox_item.VisibilityNotifyEvent += (o, args) => { show_toolbox.Value = toolbox_item.Visible; };
-
-			show_toolbox.Value = toolbox_item.Visible;
 		}
 	}
 }
