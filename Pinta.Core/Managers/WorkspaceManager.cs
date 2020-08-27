@@ -360,10 +360,11 @@ namespace Pinta.Core
 			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
 			secondaryText += string.Format(Catalog.GetString($"{Environment.NewLine}{Environment.NewLine}Pinta supports the following file formats:{Environment.NewLine}"));
 			var extensions = from format in PintaCore.System.ImageFormats.Formats
-						  from extension in format.Extensions
-						  where char.IsLower(extension.FirstOrDefault())
-						  orderby extension
-						  select extension;
+							 where format.Exporter != null
+							 from extension in format.Extensions
+							 where char.IsLower(extension.FirstOrDefault())
+							 orderby extension
+							 select extension;
 
 			foreach (var extension in extensions)
 				secondaryText += extension + ", ";
