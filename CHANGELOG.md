@@ -7,9 +7,11 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @darkdragon-001
 - @JamiKettunen
+- @thekolian1996
 
 ### Added
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
+- Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 
 ### Changed
 
