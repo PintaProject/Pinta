@@ -33,11 +33,8 @@ namespace Pinta
 {
     public class CanvasWindow : Table
     {
-        // TODO-GTK3 (rulers)
-#if false
-        private HRuler horizontal_ruler;
-        private VRuler vertical_ruler;
-#endif
+        private Ruler horizontal_ruler;
+        private Ruler vertical_ruler;
         private ScrolledWindow scrolled_window;
         
         public PintaCanvas Canvas { get; set; }
@@ -59,13 +56,11 @@ namespace Pinta
             };
 
             // Rulers
-            // TODO-GTK3 (rulers)
-#if false
-            horizontal_ruler = new HRuler ();
+            horizontal_ruler = new Ruler (Orientation.Horizontal);
             horizontal_ruler.Metric = MetricType.Pixels;
             Attach (horizontal_ruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
-            vertical_ruler = new VRuler ();
+            vertical_ruler = new Ruler (Orientation.Vertical);
             vertical_ruler.Metric = MetricType.Pixels;
             Attach (vertical_ruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
@@ -90,7 +85,6 @@ namespace Pinta
                 horizontal_ruler.Position = point.X;
                 vertical_ruler.Position = point.Y;
             };
-#endif
 
             Attach (scrolled_window, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
 
@@ -101,13 +95,10 @@ namespace Pinta
             Canvas.Show ();
             vp.Show ();
 
-            // TODO-GTK3 (rulers)
-#if false
             horizontal_ruler.Visible = false;
             vertical_ruler.Visible = false;
 
             Canvas.SizeAllocated += delegate { UpdateRulerRange (); };
-#endif
         }
 
         public bool IsMouseOnCanvas {
@@ -125,8 +116,6 @@ namespace Pinta
             }
         }
 
-        // TODO-GTK3 (rulers)
-#if false
         public bool RulersVisible {
             get { return horizontal_ruler.Visible; }
             set {
@@ -177,6 +166,5 @@ namespace Pinta
             horizontal_ruler.SetRange (lower.X, upper.X, 0, upper.X);
             vertical_ruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
         }
-#endif
     }
 }

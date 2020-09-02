@@ -171,11 +171,8 @@ namespace Pinta
 
 			
 			var canvas = new CanvasWindow (doc) {
-				// TODO-GTK3 (rulers)
-#if false
-                RulersVisible = PintaCore.Actions.View.Rulers.Active,
+                RulersVisible = PintaCore.Actions.View.Rulers.Value,
                 RulerMetric = GetCurrentRulerMetric ()
-#endif
             };
 
 			var my_content = new DocumentViewContent (doc, canvas);
@@ -193,27 +190,17 @@ namespace Pinta
                 canvas.HasBeenShown = true;
             };
 
-			// TODO-GTK3 (rulers)
-#if false
-			PintaCore.Actions.View.Rulers.Toggled += (o, e2) => { canvas.RulersVisible = ((ToggleAction)o).Active; };
-            PintaCore.Actions.View.Pixels.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Pixels; };
-            PintaCore.Actions.View.Inches.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Inches; };
-            PintaCore.Actions.View.Centimeters.Activated += (o, e2) => { canvas.RulerMetric = MetricType.Centimeters; };
-#endif
+			PintaCore.Actions.View.Rulers.Toggled += (active) => { canvas.RulersVisible = active; };
+			PintaCore.Actions.View.RulerMetric.Activated += (o, args) => {
+				PintaCore.Actions.View.RulerMetric.ChangeState(args.P0);
+				canvas.RulerMetric = GetCurrentRulerMetric();
+			};
         }
 
-		// TODO-GTK3 (rulers)
-#if false
 		private MetricType GetCurrentRulerMetric ()
         {
-            if (PintaCore.Actions.View.Inches.Active)
-                return MetricType.Inches;
-            else if (PintaCore.Actions.View.Centimeters.Active)
-                return MetricType.Centimeters;
-
-            return MetricType.Pixels;
+			return (MetricType)(int)PintaCore.Actions.View.RulerMetric.State;
         }
-#endif
 
 		[GLib.ConnectBefore]
 		private void MainWindow_KeyPressEvent (object o, KeyPressEventArgs e)
@@ -467,22 +454,8 @@ namespace Pinta
 			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
 			                                                                      PintaCore.System.DefaultDialogDirectory);
 
-			// TODO-GTK3 (rulers)
-#if false
 			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
-
-			switch (ruler_metric) {
-				case MetricType.Pixels:
-					PintaCore.Actions.View.Pixels.Activate ();
-					break;
-				case MetricType.Centimeters:
-					PintaCore.Actions.View.Centimeters.Activate ();
-					break;
-				case MetricType.Inches:
-					PintaCore.Actions.View.Inches.Activate ();
-					break;
-			}
-#endif
+			PintaCore.Actions.View.RulerMetric.Activate(new GLib.Variant((int)ruler_metric));
 		}
 
 		private void SaveUserSettings ()
@@ -498,17 +471,7 @@ namespace Pinta
 				PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetSize ().Height);
 			}
 
-			// TODO-GTK3 (rulers)
-#if flase
-			var ruler_metric = MetricType.Pixels;
-
-			if (PintaCore.Actions.View.Inches.Active)
-				ruler_metric = MetricType.Inches;
-			else if (PintaCore.Actions.View.Centimeters.Active)
-				ruler_metric = MetricType.Centimeters;
-
-			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
-#endif
+			PintaCore.Settings.PutSetting ("ruler-metric", (int)GetCurrentRulerMetric());
 			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.Window.State & Gdk.WindowState.Maximized) != 0);
             PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
             PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);

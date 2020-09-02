@@ -41,9 +41,7 @@ namespace Pinta.Core
         public ToggleCommand ImageTabs { get; private set; }
         public ToggleCommand PixelGrid { get; private set; }
 		public ToggleCommand Rulers { get; private set; }
-		public Gtk.RadioAction Pixels { get; private set; }
-		public Gtk.RadioAction Inches { get; private set; }
-		public Gtk.RadioAction Centimeters { get; private set; }
+		public GLib.SimpleAction RulerMetric { get; private set; }
 		public Command Fullscreen { get; private set; }
 
 		public ToolBarComboBox ZoomComboBox { get; private set; }
@@ -72,9 +70,7 @@ namespace Pinta.Core
             ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
             PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
-			Pixels = new Gtk.RadioAction ("Pixels", Translations.GetString ("Pixels"), null, null, 0);
-			Inches = new Gtk.RadioAction ("Inches", Translations.GetString ("Inches"), null, null, 1);
-			Centimeters = new Gtk.RadioAction ("Centimeters", Translations.GetString ("Centimeters"), null, null, 2);
+			RulerMetric = new GLib.SimpleAction("rulermetric", GLib.VariantType.Int32, new GLib.Variant(0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
 
 			ZoomCollection = new string[] {
@@ -104,10 +100,6 @@ namespace Pinta.Core
 				Translations.GetString ("Window")
 			};
 			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex(), true, ZoomCollection);
-
-			// Make sure these are the same group so only one will be selected at a time
-			Inches.Group = Pixels.Group;
-			Centimeters.Group = Pixels.Group;
 
             // The toolbar is shown by default.
             ToolBar.Value = true;
@@ -147,16 +139,18 @@ namespace Pinta.Core
 			app.AddAccelAction(Fullscreen, "F11");
 			zoom_section.AppendItem(Fullscreen.CreateMenuItem());
 
-			// TODO-GTK3 (rulers)
-#if false
-			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Translations.GetString ("Ruler Units"), null, null);
-			Menu unit_menu = (Menu)menu.AppendItem (unit_action.CreateSubMenuItem ()).Submenu;
-			unit_menu.Append (Pixels.CreateMenuItem ());
-			unit_menu.Append (Inches.CreateMenuItem ());
-			unit_menu.Append (Centimeters.CreateMenuItem ());
-#endif
+			var metric_section = new GLib.Menu();
+			menu.AppendSection(null, metric_section);
+
+			var metric_menu = new GLib.Menu();
+			metric_section.AppendSubmenu(Translations.GetString("Ruler Units"), metric_menu);
+
+			app.AddAction(RulerMetric);
+			metric_menu.Append(Translations.GetString("Pixels"), $"app.{RulerMetric.Name}(0)");
+			metric_menu.Append(Translations.GetString("Inches"), $"app.{RulerMetric.Name}(1)");
+			metric_menu.Append(Translations.GetString("Centimeters"), $"app.{RulerMetric.Name}(2)");
 		}
-		
+
 		public void CreateToolBar (Gtk.Toolbar toolbar)
 		{
 			toolbar.AppendItem (new Gtk.SeparatorToolItem ());
