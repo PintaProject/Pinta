@@ -35,7 +35,6 @@ namespace Pinta
 		private VBox menu_layout;
 		private HBox workspace_layout;
 
-		private MenuBar main_menu;
 		private Toolbar main_toolbar;
 
 		public WindowShell (Application app, string name, string title, int width, int height, bool maximize) : base(app)
