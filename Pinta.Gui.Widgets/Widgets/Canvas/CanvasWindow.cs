@@ -31,7 +31,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta
 {
-    public class CanvasWindow : Table
+    public class CanvasWindow : Grid
     {
         private Ruler horizontal_ruler;
         private Ruler vertical_ruler;
@@ -40,8 +40,11 @@ namespace Pinta
         public PintaCanvas Canvas { get; set; }
         public bool HasBeenShown { get; set; }
 
-        public CanvasWindow (Document document) : base (2, 2, false)
+        public CanvasWindow (Document document)
         {
+            ColumnHomogeneous = false;
+            RowHomogeneous = false;
+
             scrolled_window = new ScrolledWindow ();
 
             var vp = new Viewport () {
@@ -58,11 +61,11 @@ namespace Pinta
             // Rulers
             horizontal_ruler = new Ruler (Orientation.Horizontal);
             horizontal_ruler.Metric = MetricType.Pixels;
-            Attach (horizontal_ruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
+            Attach(horizontal_ruler, 1, 0, 1, 1);
 
             vertical_ruler = new Ruler (Orientation.Vertical);
             vertical_ruler.Metric = MetricType.Pixels;
-            Attach (vertical_ruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
+            Attach(vertical_ruler, 0, 1, 1, 1);
 
             scrolled_window.Hadjustment.ValueChanged += delegate {
                 UpdateRulerRange ();
@@ -86,7 +89,9 @@ namespace Pinta
                 vertical_ruler.Position = point.Y;
             };
 
-            Attach (scrolled_window, 1, 2, 1, 2, AttachOptions.Expand | AttachOptions.Fill, AttachOptions.Expand | AttachOptions.Fill, 0, 0);
+            scrolled_window.Hexpand = true;
+            scrolled_window.Vexpand = true;
+            Attach(scrolled_window, 1, 1, 1, 1);
 
             scrolled_window.Add (vp);
             vp.Add (Canvas);
