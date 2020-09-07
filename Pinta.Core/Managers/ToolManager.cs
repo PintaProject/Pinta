@@ -37,6 +37,7 @@ namespace Pinta.Core
 		int prev_index = -1;
 		
 		private List<BaseTool> Tools;
+		private Dictionary<Gdk.Key, Tuple<List<BaseTool>, int>> groupedTools;
 
 		public event EventHandler<ToolEventArgs> ToolAdded;
 		public event EventHandler<ToolEventArgs> ToolRemoved;
@@ -44,6 +45,7 @@ namespace Pinta.Core
 		public ToolManager ()
 		{
 			Tools = new List<BaseTool> ();
+			groupedTools = new Dictionary<Gdk.Key, Tuple<List<BaseTool>, int>>();
 		}
 
 		public void AddTool (BaseTool tool)
@@ -77,7 +79,18 @@ namespace Pinta.Core
 				}
 			}
 		}
-		
+
+		public void CreateGoupedTools()
+		{
+			foreach (var tool in Tools)
+			{
+				if (!groupedTools.ContainsKey(tool.ShortcutKey))
+					groupedTools.Add(tool.ShortcutKey, new Tuple<List<BaseTool>, int>(new List<BaseTool>(), 0));
+
+				groupedTools[tool.ShortcutKey].Item1.Add(tool);
+			}
+		}
+
 		void HandlePbToolItemClicked (object sender, EventArgs e)
 		{
 			ToggleToolButton tb = (ToggleToolButton)sender;
@@ -172,23 +185,32 @@ namespace Pinta.Core
 			if (tool != null)
 				SetCurrentTool(tool);
 		}
-		
+
 		private BaseTool FindNextTool (Gdk.Key shortcut)
 		{
-			string key = shortcut.ToString ().ToUpperInvariant ();
-			
-			// Begin looking at the tool after the current one
-			for (int i = index + 1; i < Tools.Count; i++) {
-				if (Tools[i].ShortcutKey.ToString ().ToUpperInvariant () == key)
-					return Tools[i];
+			foreach (var group in groupedTools)
+			{
+				if (group.Key.EqualsTo(shortcut))
+				{
+					//begin looking for the tool from the start
+					if (group.Value.Item2 >= group.Value.Item1.Count)
+					{
+						groupedTools[shortcut.ToUpper()] = new Tuple<List<BaseTool>, int>(group.Value.Item1, 1);
+						return group.Value.Item1[0];
+					}
+					//iterating through the group of tools with the same shortcut
+					for (int i = 0; i < group.Value.Item1.Count; i++)
+					{
+						if (i == group.Value.Item2)
+						{
+							groupedTools[shortcut.ToUpper()] = new Tuple<List<BaseTool>, int>(group.Value.Item1, ++i);
+							return group.Value.Item1[group.Value.Item2];
+						}
+
+					}
+				}
 			}
-				
-			// Begin at the beginning and look up to the current tool
-			for (int i = 0; i < index; i++) {
-				if (Tools[i].ShortcutKey.ToString ().ToUpperInvariant () == key)
-					return Tools[i];
-			}
-			
+
 			return null;
 		}
 		
@@ -240,6 +262,20 @@ namespace Pinta.Core
 			tool_label = null;
 			tool_image = null;
 			tool_sep = null;
+		}
+	}
+
+	//Key extensions for more convenient usage of Gdk key enumerator
+	public static class KeyExtensions
+    {
+		public static bool EqualsTo(this Gdk.Key k1, Gdk.Key k2)
+		{
+			return k1.ToString().ToUpperInvariant() == k2.ToString().ToUpperInvariant();
+		}
+
+		public static Gdk.Key ToUpper(this Gdk.Key k1)
+		{
+			return (Gdk.Key)Enum.Parse(typeof(Gdk.Key), k1.ToString().ToUpperInvariant());
 		}
 	}
 }

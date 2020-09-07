@@ -66,6 +66,8 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new RoundedRectangleTool ());
 			PintaCore.Tools.AddTool (new EllipseTool ());
 			PintaCore.Tools.AddTool (new FreeformShapeTool ());
+			
+			PintaCore.Tools.CreateGoupedTools ();
 		}
 
 		public void Uninitialize ()
