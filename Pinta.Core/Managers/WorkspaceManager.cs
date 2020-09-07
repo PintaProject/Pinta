@@ -206,6 +206,8 @@ namespace Pinta.Core
 				fileOpened = true;
 			} catch (UnauthorizedAccessException e) {
 				ShowOpenFileErrorDialog (parent, file, Catalog.GetString ("Permission denied"), e.ToString ());
+			} catch (FormatException e) {
+				ShowUnsupportedFormatDialog (parent, file, e.Message, e.ToString());
 			} catch (Exception e) {
 				ShowOpenFileErrorDialog (parent, file, e.Message, e.ToString ());
 			}
@@ -351,7 +353,28 @@ namespace Pinta.Core
 			PintaCore.Chrome.ShowErrorDialog(parent, message, details);
 		}
 
-#region Public Events
+		private void ShowUnsupportedFormatDialog (Window parent, string filename, string primaryText, string details)
+		{
+			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+
+			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
+			secondaryText += string.Format(Catalog.GetString($"{Environment.NewLine}{Environment.NewLine}Pinta supports the following file formats:{Environment.NewLine}"));
+			var extensions = from format in PintaCore.System.ImageFormats.Formats
+							 where format.Importer != null
+							 from extension in format.Extensions
+							 where char.IsLower(extension.FirstOrDefault())
+							 orderby extension
+							 select extension;
+
+			foreach (var extension in extensions)
+				secondaryText += extension + ", ";
+			secondaryText = secondaryText.Substring(0, secondaryText.Length - 2);
+
+			string message = string.Format (markup, primaryText, secondaryText);
+			PintaCore.Chrome.ShowUnsupportedFormatDialog(parent, message, details);
+		}
+
+		#region Public Events
 		public event EventHandler ActiveDocumentChanged;
 		public event EventHandler<DocumentEventArgs> DocumentCreated;
 		public event EventHandler<DocumentEventArgs> DocumentOpened;
