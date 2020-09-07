@@ -168,8 +168,8 @@ namespace Pinta
                 }
             }
 
-            horizontal_ruler.SetRange (lower.X, upper.X, 0, upper.X);
-            vertical_ruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
+            horizontal_ruler.SetRange (lower.X, upper.X);
+            vertical_ruler.SetRange (lower.Y, upper.Y);
         }
     }
 }
