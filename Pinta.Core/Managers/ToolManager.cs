@@ -60,6 +60,11 @@ namespace Pinta.Core
 
 			if (CurrentTool == null)
 				SetCurrentTool (tool);
+
+			if (!groupedTools.ContainsKey(tool.ShortcutKey))
+				groupedTools.Add(tool.ShortcutKey, new Tuple<List<BaseTool>, int>(new List<BaseTool>(), 0));
+
+			groupedTools[tool.ShortcutKey].Item1.Add(tool);
 		}
 
 		public void RemoveInstanceOfTool (System.Type tool_type)
@@ -75,19 +80,10 @@ namespace Pinta.Core
 
 					SetCurrentTool(new DummyTool());
 					OnToolRemoved (tool);
+
+					groupedTools.Remove(tool.ShortcutKey);
 					return;
 				}
-			}
-		}
-
-		public void CreateGoupedTools()
-		{
-			foreach (var tool in Tools)
-			{
-				if (!groupedTools.ContainsKey(tool.ShortcutKey))
-					groupedTools.Add(tool.ShortcutKey, new Tuple<List<BaseTool>, int>(new List<BaseTool>(), 0));
-
-				groupedTools[tool.ShortcutKey].Item1.Add(tool);
 			}
 		}
 
