@@ -184,30 +184,18 @@ namespace Pinta.Core
 
 		private BaseTool FindNextTool (Gdk.Key shortcut)
 		{
-			foreach (var group in groupedTools)
-			{
-				if (group.Key.EqualsTo(shortcut))
-				{
-					//begin looking for the tool from the start
-					if (group.Value.Item2 >= group.Value.Item1.Count)
-					{
-						groupedTools[shortcut.ToUpper()] = new Tuple<List<BaseTool>, int>(group.Value.Item1, 1);
-						return group.Value.Item1[0];
-					}
-					//iterating through the group of tools with the same shortcut
-					for (int i = 0; i < group.Value.Item1.Count; i++)
-					{
-						if (i == group.Value.Item2)
-						{
-							groupedTools[shortcut.ToUpper()] = new Tuple<List<BaseTool>, int>(group.Value.Item1, ++i);
-							return group.Value.Item1[group.Value.Item2];
-						}
+			shortcut = shortcut.ToUpper();
 
-					}
-				}
-			}
+            for (int i = 0; i < groupedTools[shortcut].Item1.Count; i++)
+            {
+                if (i == groupedTools[shortcut].Item2)
+                {
+                    groupedTools[shortcut] = new Tuple<List<BaseTool>, int>(groupedTools[shortcut].Item1, (i + 1) % groupedTools[shortcut].Item1.Count);
+					return groupedTools[shortcut].Item1[i];
+                }
+            }
 
-			return null;
+            return null;
 		}
 		
 		private void OnToolAdded (BaseTool tool)
@@ -264,11 +252,6 @@ namespace Pinta.Core
 	//Key extensions for more convenient usage of Gdk key enumerator
 	public static class KeyExtensions
     {
-		public static bool EqualsTo(this Gdk.Key k1, Gdk.Key k2)
-		{
-			return k1.ToString().ToUpperInvariant() == k2.ToString().ToUpperInvariant();
-		}
-
 		public static Gdk.Key ToUpper(this Gdk.Key k1)
 		{
 			return (Gdk.Key)Enum.Parse(typeof(Gdk.Key), k1.ToString().ToUpperInvariant());
