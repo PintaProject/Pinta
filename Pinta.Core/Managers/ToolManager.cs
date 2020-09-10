@@ -197,16 +197,18 @@ namespace Pinta.Core
 			{
 				for (int i = 0; i < groupedTools[shortcut].Count; i++)
 				{
-					if (i == (PressedShortcutCounter % groupedTools[shortcut].Count) && LastUsedKey == shortcut)
+					if (LastUsedKey != shortcut)
 					{
-						PressedShortcutCounter = (i + 1) % groupedTools[shortcut].Count;
-						return groupedTools[shortcut][i];
-					}
-                    else if (i == (PressedShortcutCounter % groupedTools[shortcut].Count))
-                    {
-						PressedShortcutCounter = 1;
+						// Return first tool in group.
+						PressedShortcutCounter = (1 % groupedTools[shortcut].Count);
 						LastUsedKey = shortcut;
 						return groupedTools[shortcut][0];
+					}
+					else if(i == PressedShortcutCounter)
+					{
+						var tool = groupedTools[shortcut][PressedShortcutCounter];
+						PressedShortcutCounter = (i + 1) % groupedTools[shortcut].Count;
+						return tool;
 					}
 				}
 			}
