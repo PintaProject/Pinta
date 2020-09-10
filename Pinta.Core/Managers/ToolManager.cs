@@ -37,7 +37,9 @@ namespace Pinta.Core
 		int prev_index = -1;
 		
 		private List<BaseTool> Tools;
-		private Dictionary<Gdk.Key, Tuple<List<BaseTool>, int>> groupedTools;
+		private Dictionary<Gdk.Key, List<BaseTool>> groupedTools;
+		private Gdk.Key LastUsedKey;
+		private int PressedShortcutCounter;
 
 		public event EventHandler<ToolEventArgs> ToolAdded;
 		public event EventHandler<ToolEventArgs> ToolRemoved;
@@ -45,7 +47,8 @@ namespace Pinta.Core
 		public ToolManager ()
 		{
 			Tools = new List<BaseTool> ();
-			groupedTools = new Dictionary<Gdk.Key, Tuple<List<BaseTool>, int>>();
+			groupedTools = new Dictionary<Gdk.Key, List<BaseTool>>();
+			PressedShortcutCounter = 0;
 		}
 
 		public void AddTool (BaseTool tool)
@@ -62,9 +65,9 @@ namespace Pinta.Core
 				SetCurrentTool (tool);
 
 			if (!groupedTools.ContainsKey(tool.ShortcutKey))
-				groupedTools.Add(tool.ShortcutKey, new Tuple<List<BaseTool>, int>(new List<BaseTool>(), 0));
+				groupedTools.Add(tool.ShortcutKey, new List<BaseTool>());
 
-			groupedTools[tool.ShortcutKey].Item1.Add(tool);
+			groupedTools[tool.ShortcutKey].Add(tool);
 		}
 
 		public void RemoveInstanceOfTool (System.Type tool_type)
@@ -81,7 +84,11 @@ namespace Pinta.Core
 					SetCurrentTool(new DummyTool());
 					OnToolRemoved (tool);
 
-					groupedTools.Remove(tool.ShortcutKey);
+					if (groupedTools[tool.ShortcutKey].Count > 1)
+						groupedTools[tool.ShortcutKey].Remove(tool);
+					else
+						groupedTools.Remove(tool.ShortcutKey);
+
 					return;
 				}
 			}
@@ -186,14 +193,23 @@ namespace Pinta.Core
 		{
 			shortcut = shortcut.ToUpper();
 
-            for (int i = 0; i < groupedTools[shortcut].Item1.Count; i++)
-            {
-                if (i == groupedTools[shortcut].Item2)
-                {
-                    groupedTools[shortcut] = new Tuple<List<BaseTool>, int>(groupedTools[shortcut].Item1, (i + 1) % groupedTools[shortcut].Item1.Count);
-					return groupedTools[shortcut].Item1[i];
-                }
-            }
+			if (groupedTools.ContainsKey(shortcut))
+			{
+				for (int i = 0; i < groupedTools[shortcut].Count; i++)
+				{
+					if (i == (PressedShortcutCounter % groupedTools[shortcut].Count) && LastUsedKey == shortcut)
+					{
+						PressedShortcutCounter = (i + 1) % groupedTools[shortcut].Count;
+						return groupedTools[shortcut][i];
+					}
+                    else if (i == (PressedShortcutCounter % groupedTools[shortcut].Count))
+                    {
+						PressedShortcutCounter = 1;
+						LastUsedKey = shortcut;
+						return groupedTools[shortcut][0];
+					}
+				}
+			}
 
             return null;
 		}
@@ -254,7 +270,15 @@ namespace Pinta.Core
     {
 		public static Gdk.Key ToUpper(this Gdk.Key k1)
 		{
-			return (Gdk.Key)Enum.Parse(typeof(Gdk.Key), k1.ToString().ToUpperInvariant());
+            try
+            {
+				return (Gdk.Key)Enum.Parse(typeof(Gdk.Key), k1.ToString().ToUpperInvariant());
+			}
+            catch (ArgumentException)
+            {
+				//there is a need to catch argument exception because some buttons have not its UpperCase variant
+				return k1;
+            }
 		}
 	}
 }
