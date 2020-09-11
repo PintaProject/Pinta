@@ -52,7 +52,8 @@ namespace Pinta.Tools
 		public override string Name { get { return Catalog.GetString ("Lasso Select"); } }
 		public override string Icon { get { return "Tools.LassoSelect.png"; } }
 		public override string StatusBarText { get { return Catalog.GetString ("Click and drag to draw the outline for a selection area."); } }
-        public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18); } }
+		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
+		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18); } }
 		public override int Priority { get { return 9; } }
 		#endregion
 
