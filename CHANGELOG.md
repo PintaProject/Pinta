@@ -14,9 +14,11 @@ Thanks to the following contributors who worked on this release:
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 
 ### Changed
+- Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 
 ### Fixed
-- Fixed invalid URLs in `pinta.appdata.xml` (#140)
+- Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
+- Added missing release notes to `pinta.appdata.xml` (#142)
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
