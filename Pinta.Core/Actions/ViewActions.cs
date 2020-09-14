@@ -232,11 +232,14 @@ namespace Pinta.Core
 
 			// In order to use double.TryParse, we must:
 			// - replace the decimal separator for percents with the regular separator.
-			// - remove the percent sign.
+			// - remove the percent sign. We remove both the locale's percent sign and
+			//   the standard one (U+0025). When running under mono, the 'fr' locale
+			//   uses U+066A but the translation string uses U+0025, so there may be a bug in Mono.
 			// - remove the group separators, since they might be different from the regular
 			//   group separator, and the group sizes could also be different.
 			text = text.Replace (format.PercentGroupSeparator, string.Empty);
 			text = text.Replace (format.PercentSymbol, string.Empty);
+			text = text.Replace ("%", string.Empty);
 			text = text.Replace (format.PercentDecimalSeparator, format.NumberDecimalSeparator);
 			text = text.Trim();
 
