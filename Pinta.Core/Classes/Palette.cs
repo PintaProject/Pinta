@@ -28,8 +28,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-
+using System.Linq;
 using Cairo;
+using Gtk;
+using Mono.Unix;
 
 namespace Pinta.Core
 {
@@ -159,15 +161,44 @@ namespace Pinta.Core
 
 		public void Load (string fileName)
 		{
-			var loader = PintaCore.System.PaletteFormats.GetLoaderByFilename (fileName);
-			colors = loader.Load (fileName);
-			colors.TrimExcess ();
-			OnPaletteChanged ();
+			try
+			{
+				var loader = PintaCore.System.PaletteFormats.GetLoaderByFilename (fileName);
+				colors = loader.Load (fileName);
+				colors.TrimExcess ();
+				OnPaletteChanged ();
+			}
+			catch (NullReferenceException e)
+			{
+				var parent = PintaCore.Chrome.MainWindow;
+				ShowUnsupportedFormatDialog(parent, fileName, "Unsupported palette format", e.ToString());
+			}
 		}
 		
 		public void Save (string fileName, IPaletteSaver saver)
 		{
 			saver.Save (colors, fileName);
+		}
+
+		private void ShowUnsupportedFormatDialog(Window parent, string filename, string primaryText, string details)
+		{
+			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
+
+			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
+			secondaryText += string.Format(Catalog.GetString($"{Environment.NewLine}{Environment.NewLine}Pinta supports the following palette formats:{Environment.NewLine}"));
+			var extensions = from format in PintaCore.System.PaletteFormats.Formats
+							 where format.Loader != null
+							 from extension in format.Extensions
+							 where char.IsLower(extension.FirstOrDefault())
+							 orderby extension
+							 select extension;
+
+			foreach (var extension in extensions)
+				secondaryText += extension + ", ";
+			secondaryText = secondaryText.Substring(0, secondaryText.Length - 2);
+
+			string message = string.Format(markup, primaryText, secondaryText);
+			PintaCore.Chrome.ShowUnsupportedFormatDialog(parent, message, details);
 		}
 	}
 }
