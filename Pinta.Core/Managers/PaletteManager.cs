@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
 using Cairo;
 
 namespace Pinta.Core
@@ -69,6 +70,15 @@ namespace Pinta.Core
 		{
 			PrimaryColor = new Color (0, 0, 0);
 			SecondaryColor = new Color (1, 1, 1);
+		}
+
+		public void DoKeyRelease (object o, KeyReleaseEventArgs e)
+		{
+			if (e.Event.Key == Gdk.Key.X || e.Event.Key == Gdk.Key.x) {
+				Color temp = PintaCore.Palette.PrimaryColor;
+				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
+				PintaCore.Palette.SecondaryColor = temp;
+			}
 		}
 
 		#region Protected Methods

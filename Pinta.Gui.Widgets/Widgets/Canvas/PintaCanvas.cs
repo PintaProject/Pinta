@@ -214,6 +214,7 @@ namespace Pinta.Gui.Widgets
 		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
+			PintaCore.Palette.DoKeyRelease (this, e);
 		}
 		#endregion
 	}
