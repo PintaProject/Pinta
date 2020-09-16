@@ -74,7 +74,7 @@ namespace Pinta.Core
 
 		public void DoKeyRelease (object o, KeyReleaseEventArgs e)
 		{
-			if (e.Event.Key == Gdk.Key.X || e.Event.Key == Gdk.Key.x) {
+			if (e.Event.Key.ToString().ToUpper() == "X") {
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
