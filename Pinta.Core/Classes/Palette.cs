@@ -164,11 +164,15 @@ namespace Pinta.Core
 			try
 			{
 				var loader = PintaCore.System.PaletteFormats.GetLoaderByFilename (fileName);
+
+                if (loader == null)
+					throw new FormatException();
+
 				colors = loader.Load (fileName);
 				colors.TrimExcess ();
 				OnPaletteChanged ();
 			}
-			catch (NullReferenceException e)
+			catch (FormatException e)
 			{
 				var parent = PintaCore.Chrome.MainWindow;
 				ShowUnsupportedFormatDialog(parent, fileName, "Unsupported palette format", e.ToString());
