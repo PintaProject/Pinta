@@ -53,7 +53,7 @@ namespace Pinta.Core
 		{
 			string extension = System.IO.Path.GetExtension (fileName);
 			extension = NormalizeExtension (extension);
-			return formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ().Loader;
+			return formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ()?.Loader;
 		}
 
 		private static string NormalizeExtension (string extension)

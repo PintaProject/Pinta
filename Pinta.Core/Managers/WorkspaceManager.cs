@@ -366,9 +366,7 @@ namespace Pinta.Core
 							 orderby extension
 							 select extension;
 
-			foreach (var extension in extensions)
-				secondaryText += extension + ", ";
-			secondaryText = secondaryText.Substring(0, secondaryText.Length - 2);
+			secondaryText += String.Join(", ", extensions);
 
 			string message = string.Format (markup, primaryText, secondaryText);
 			PintaCore.Chrome.ShowUnsupportedFormatDialog(parent, message, details);
