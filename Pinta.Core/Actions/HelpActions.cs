@@ -62,6 +62,17 @@ namespace Pinta.Core
 
 			app.AddAction(Translate);
 			menu.AppendItem(Translate.CreateMenuItem());
+
+			// This is part of the application menu on macOS.
+			if (PintaCore.System.OperatingSystem != OS.Mac)
+            {
+				var about_section = new GLib.Menu();
+				menu.AppendSection(null, about_section);
+
+				var about = PintaCore.Actions.App.About;
+				app.AddAction(about);
+				about_section.AppendItem(about.CreateMenuItem());
+			}
 		}
 		
 		public void RegisterHandlers ()

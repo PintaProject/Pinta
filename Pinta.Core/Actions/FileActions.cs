@@ -89,6 +89,14 @@ namespace Pinta.Core
 			app.AddAccelAction(Close, "<Primary>W");
 			close_section.AppendItem(Close.CreateMenuItem());
 
+			// This is part of the application menu on macOS.
+			if (PintaCore.System.OperatingSystem != OS.Mac)
+			{
+				var exit = PintaCore.Actions.App.Exit;
+				app.AddAccelAction(exit, "<Primary>Q");
+				close_section.AppendItem(exit.CreateMenuItem());
+			}
+
 			// Printing is disabled for now until it is fully functional.
 #if false
 			menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));

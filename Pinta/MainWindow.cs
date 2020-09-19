@@ -306,9 +306,14 @@ namespace Pinta
 
 		private void CreateMainMenu (WindowShell shell)
 		{
-			var app_menu = new GLib.Menu();
-			PintaCore.Actions.App.RegisterActions(this, app_menu);
-			AppMenu = app_menu;
+			if (PintaCore.System.OperatingSystem == OS.Mac)
+			{
+				// Only use the application on macOS. On other platforms, these
+				// menu items appear under File, Help, etc.
+				var app_menu = new GLib.Menu();
+				PintaCore.Actions.App.RegisterActions(this, app_menu);
+				AppMenu = app_menu;
+			}
 
 			var menu_bar = new GLib.Menu();
 			Menubar = menu_bar;
