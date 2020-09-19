@@ -295,7 +295,12 @@ namespace Pinta.Gui.Widgets
 			string text = null;
 
 			if (swap_rect.ContainsPoint (x, y)) {
-				text = Translations.GetString ("Click to switch between primary and secondary color.");
+				text = string.Format (
+					"{0} {1}: {2}", 
+					Translations.GetString ("Click to switch between primary and secondary color."), 
+					Translations.GetString ("Shortcut key"), 
+					"X"
+				);
 			} else if (reset_rect.ContainsPoint (x, y)) {
 				text = Translations.GetString ("Click to reset primary and secondary color.");
 			} else if (primary_rect.ContainsPoint (x, y)) {

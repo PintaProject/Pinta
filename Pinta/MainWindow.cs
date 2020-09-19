@@ -75,7 +75,22 @@ namespace Pinta
             }
             );
 
-			PintaCore.Initialize();
+			PintaCore.Chrome.InitializeUnsupportedFormatDialog((parent, message, details) => {
+				System.Console.Error.WriteLine("Pinta: {0}", details);
+				FileUnsupportedFormatDialog unsupportedFormDialog = new FileUnsupportedFormatDialog(parent);
+				try
+				{
+					unsupportedFormDialog.SetMessage(message);
+					unsupportedFormDialog.Run();
+				}
+				finally
+				{
+					unsupportedFormDialog.Destroy();
+				}
+			}
+			);
+
+			PintaCore.Initialize ();
 
 			// Initialize extensions
 			// TODO-GTK3 (addins)

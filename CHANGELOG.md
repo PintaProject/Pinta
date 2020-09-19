@@ -5,6 +5,10 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @darkdragon-001
+- @JamiKettunen
+- @thekolian1996
+- @tdgroot
 
 ### Added
 - Ported to GTK3
@@ -12,10 +16,17 @@ Thanks to the following contributors who worked on this release:
   - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
   - On macOS, the menu now appears in the global menu bar instead of the application window.
   - On macOS, keyboard shortcuts now use Command instead of Ctrl.
+- The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
+- The primary and secondary palette colors can now be swapped by pressing X (#147)
+- Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 
 ### Changed
+- Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 
 ### Fixed
+- Fixed issues with the zoom controls when using a French locale ([#1464855](https://bugs.launchpad.net/pinta/+bug/1464855))
+- Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
+- Added missing release notes to `pinta.appdata.xml` (#142)
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 

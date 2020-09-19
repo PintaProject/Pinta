@@ -25,8 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Linq;
-using Cairo;
 using Gdk;
 using Gtk;
 using Pinta.Core;
@@ -39,27 +37,28 @@ namespace Pinta.Gui.Widgets
 		Cairo.ImageSurface canvas;
 		CanvasRenderer cr;
 
-        private Document document;
+		private Document document;
+		private int hScrollAmount = 92;
 
-        public CanvasWindow CanvasWindow { get; private set; }
+		public CanvasWindow CanvasWindow { get; private set; }
 
 		public PintaCanvas (CanvasWindow window, Document document)
 		{
-            CanvasWindow = window;
-            this.document = document;
+			CanvasWindow = window;
+			this.document = document;
 
 			cr = new CanvasRenderer (true);
-			
+
 			// Keep the widget the same size as the canvas
-            document.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
-                SetRequisition (document.Workspace.CanvasSize);
+			document.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
+				SetRequisition (document.Workspace.CanvasSize);
 			};
 
 			// Update the canvas when the image changes
-            document.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
-                // If GTK+ hasn't created the canvas window yet, no need to invalidate it
-                if (Window == null)
-                    return;
+			document.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
+				// If GTK+ hasn't created the canvas window yet, no need to invalidate it
+				if (Window == null)
+					return;
 
 				if (e.EntireSurface)
 					Window.Invalidate ();
@@ -69,26 +68,26 @@ namespace Pinta.Gui.Widgets
 
 			// Give mouse press events to the current tool
 			ButtonPressEvent += delegate (object sender, ButtonPressEventArgs e) {
-                // The canvas gets the button press before the tab system, so
-                // if this click is on a canvas that isn't currently the ActiveDocument yet, 
-                // we need to go ahead and make it the active document for the tools
-                // to use it, even though right after this the tab system would have switched it
-                if (PintaCore.Workspace.ActiveDocument != document)
-                    PintaCore.Workspace.SetActiveDocument (document);
+				// The canvas gets the button press before the tab system, so
+				// if this click is on a canvas that isn't currently the ActiveDocument yet, 
+				// we need to go ahead and make it the active document for the tools
+				// to use it, even though right after this the tab system would have switched it
+				if (PintaCore.Workspace.ActiveDocument != document)
+					PintaCore.Workspace.SetActiveDocument (document);
 
-                PintaCore.Tools.CurrentTool.DoMouseDown (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+				PintaCore.Tools.CurrentTool.DoMouseDown (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
 			};
 
 			// Give mouse release events to the current tool
 			ButtonReleaseEvent += delegate (object sender, ButtonReleaseEventArgs e) {
-                PintaCore.Tools.CurrentTool.DoMouseUp (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+				PintaCore.Tools.CurrentTool.DoMouseUp (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
 			};
 
 			// Give mouse move events to the current tool
 			MotionNotifyEvent += delegate (object sender, MotionNotifyEventArgs e) {
-                var point = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
+				var point = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y);
 
-                if (document.Workspace.PointInCanvas (point))
+				if (document.Workspace.PointInCanvas (point))
 					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
 
 				if (PintaCore.Tools.CurrentTool != null)
@@ -97,14 +96,14 @@ namespace Pinta.Gui.Widgets
 		}
 
         #region Protected Methods
-        protected override bool OnDrawn(Context context)
+        protected override bool OnDrawn(Cairo.Context context)
         {
 			base.OnDrawn(context);
 				
 			var scale = document.Workspace.Scale;
 
-            var x = (int)document.Workspace.Offset.X;
-            var y = (int)document.Workspace.Offset.Y;
+			var x = (int)document.Workspace.Offset.X;
+			var y = (int)document.Workspace.Offset.Y;
 
 			// Translate our expose area for the whole drawingarea to just our canvas
             var canvas_bounds = new Gdk.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
@@ -126,7 +125,7 @@ namespace Pinta.Gui.Widgets
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
-            cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);
+			cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);
 
 			var g = context;
             // Draw our canvas drop shadow
@@ -165,19 +164,33 @@ namespace Pinta.Gui.Widgets
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
 			// Allow the user to zoom in/out with Ctrl-Mousewheel
-            if (evnt.State.FilterModifierKeys () == ModifierType.ControlMask) {
+			if (evnt.State.FilterModifierKeys () == ModifierType.ControlMask) {
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
-                        document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
+						document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
 						return true;
 					case ScrollDirection.Left:
 					case ScrollDirection.Up:
-                        document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
+						document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
 						return true;
 				}
 			}
-			
+
+			// Allow the user to scroll left/right with Shift-Mousewheel
+			if (evnt.State.FilterModifierKeys () == ModifierType.ShiftMask) {
+				switch (evnt.Direction) {
+					case ScrollDirection.Down:
+					case ScrollDirection.Right:
+						document.Workspace.ScrollCanvas (hScrollAmount, 0);
+						return true;
+					case ScrollDirection.Up:
+					case ScrollDirection.Left:
+						document.Workspace.ScrollCanvas (-hScrollAmount, 0);
+						return true;
+				}
+			}
+
 			return base.OnScrollEvent (evnt);
 		}
 #endregion
@@ -200,6 +213,7 @@ namespace Pinta.Gui.Widgets
 		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
 			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
+			PintaCore.Palette.DoKeyRelease (this, e);
 		}
 #endregion
 	}
