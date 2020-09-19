@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Pinta.Core.Tests</RootNamespace>
     <AssemblyName>Pinta.Core.Tests</AssemblyName>
+    <IsPublishable>false</IsPublishable>
 
     <Version>1.8.0.0</Version>
     <Authors>PintaProject</Authors>

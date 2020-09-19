@@ -104,7 +104,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>pinta</string>
+	<string>Pinta</string>
 	<key>CFBundleIconFile</key>
 	<string>pinta.icns</string>
 	<key>CFBundleIdentifier</key>

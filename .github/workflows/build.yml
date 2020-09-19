@@ -20,3 +20,24 @@ jobs:
       run: dotnet build Pinta.sln
     - name: Test
       run: dotnet test Pinta.sln
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    # dotnet and gettext are already available on the CI environment.
+    - name: Build
+      run: dotnet build Pinta.sln
+    - name: Test
+      run: dotnet test Pinta.sln
+    - name: Build Installer
+      run: |
+        cd osx
+        ./build_installer.sh
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Pinta.app.zip"
+        path: osx/Pinta.app.zip
+        if-no-files-found: error
