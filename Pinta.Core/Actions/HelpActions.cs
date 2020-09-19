@@ -50,7 +50,6 @@ namespace Pinta.Core
 		#region Initialization
 		public void RegisterActions(Gtk.Application app, GLib.Menu menu)
         {
-			// TODO-GTK3 (add a more conventional key combo for OSX)
 			app.AddAccelAction(Contents, "F1");
 			menu.AppendItem(Contents.CreateMenuItem());
 

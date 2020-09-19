@@ -93,7 +93,6 @@ namespace Pinta.Core
 			var prop_section = new GLib.Menu();
 			menu.AppendSection(null, prop_section);
 
-			// TODO-GTK3 (better shortcut for OSX?)
 			app.AddAccelAction(Properties, "F4");
 			prop_section.AppendItem(Properties.CreateMenuItem());
 		}

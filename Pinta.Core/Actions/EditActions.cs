@@ -86,8 +86,7 @@ namespace Pinta.Core
 			app.AddAccelAction(Undo, "<Primary>Z");
 			menu.AppendItem(Undo.CreateMenuItem());
 
-			// TODO-GTK3 (also add Ctrl+Y from the GTK2 build for Windows?)
-			app.AddAccelAction(Redo, "<Primary><Shift>Z");
+			app.AddAccelAction(Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
 			menu.AppendItem(Redo.CreateMenuItem());
 
 			var paste_section = new GLib.Menu();
@@ -117,8 +116,7 @@ namespace Pinta.Core
 			app.AddAccelAction(SelectAll, "<Primary>A");
 			sel_section.AppendItem(SelectAll.CreateMenuItem());
 
-			// TODO-GTK3 (also add old Ctrl+D from the GTK2 build?)
-			app.AddAccelAction(Deselect, "<Primary><Shift>A");
+			app.AddAccelAction(Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
 			sel_section.AppendItem(Deselect.CreateMenuItem());
 
 			var edit_sel_section = new GLib.Menu();
