@@ -19,6 +19,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 
 ### Fixed
+- Fixed a bug where drawing a single pixel with the Pencil tool used black instead of the palette color ([#1897245](https://bugs.launchpad.net/pinta/+bug/1897245)).
 - Fixed issues with the zoom controls when using a French locale ([#1464855](https://bugs.launchpad.net/pinta/+bug/1464855))
 - Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
 - Added missing release notes to `pinta.appdata.xml` (#142)
