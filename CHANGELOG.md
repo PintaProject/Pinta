@@ -9,11 +9,13 @@ Thanks to the following contributors who worked on this release:
 - @JamiKettunen
 - @thekolian1996
 - @tdgroot
+- @Nikitayfh
 
 ### Added
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
 - The primary and secondary palette colors can now be swapped by pressing X (#147)
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
+- Zooming in and out can now be done without pressing the Ctrl key (#150).
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
