@@ -102,8 +102,11 @@ namespace Pinta.Tools
 
 			PointD center = source_rect.GetCenter();
 
-			double dx = point.X - original_point.X;
-			double dy = point.Y - original_point.Y;
+			// The cursor position can be a subpixel value. Round to an integer
+			// so that we only translate by entire pixels.
+			// (Otherwise, blurring / anti-aliasing may be introduced)
+			double dx = Math.Floor(point.X - original_point.X);
+			double dy = Math.Floor(point.Y - original_point.Y);
 
 			double cx1 = original_point.X - center.X;
 			double cy1 = original_point.Y - center.Y;

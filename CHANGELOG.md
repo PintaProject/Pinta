@@ -26,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
 - Added missing release notes to `pinta.appdata.xml` (#142)
 - Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
+- Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool ([#1904304](https://bugs.launchpad.net/pinta/+bug/1904304)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
