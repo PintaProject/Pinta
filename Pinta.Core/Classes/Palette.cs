@@ -189,7 +189,7 @@ namespace Pinta.Core
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 
 			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
-			secondaryText += string.Format(Catalog.GetString($"{Environment.NewLine}{Environment.NewLine}Pinta supports the following palette formats:{Environment.NewLine}"));
+			secondaryText += string.Format("\n\n{0}\n", Catalog.GetString("Pinta supports the following palette formats:"));
 			var extensions = from format in PintaCore.System.PaletteFormats.Formats
 							 where format.Loader != null
 							 from extension in format.Extensions
