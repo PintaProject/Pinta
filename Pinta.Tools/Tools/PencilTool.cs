@@ -130,7 +130,15 @@ namespace Pinta.Tools
 				
 				g.Antialias = Antialias.None;
 
-                if (first_pixel) {
+				g.SetSourceColor(tool_color);
+				if (UseAlphaBlending)
+					g.SetBlendMode(BlendMode.Normal);
+				else
+					g.Operator = Operator.Source;
+				g.LineWidth = 1;
+				g.LineCap = LineCap.Square;
+
+				if (first_pixel) {
 					// Cairo does not support a single-pixel-long single-pixel-wide line
 					g.Rectangle (x, y, 1.0, 1.0);
 					g.Fill ();
@@ -139,17 +147,8 @@ namespace Pinta.Tools
 					// See https://bugs.launchpad.net/bugs/672232
 					g.MoveTo (last_point.X + 0.5, last_point.Y + 0.5);
 					g.LineTo (x + 0.5, y + 0.5);
+					g.Stroke();
 				}
-
-				g.SetSourceColor (tool_color);
-				if (UseAlphaBlending)
-					g.SetBlendMode(BlendMode.Normal);
-				else
-					g.Operator = Operator.Source;
-				g.LineWidth = 1;
-				g.LineCap = LineCap.Square;
-				
-				g.Stroke ();
 			}
 			
 			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));

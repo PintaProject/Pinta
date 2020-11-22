@@ -12,6 +12,7 @@ Pinta.Core/Actions/WindowActions.cs
 Pinta.Core/Classes/BaseTool.cs
 Pinta.Core/Classes/Document.cs
 Pinta.Core/Classes/DocumentWorkspace.cs
+Pinta.Core/Classes/Palette.cs
 Pinta.Core/Classes/SelectionModeHandler.cs
 Pinta.Core/Effects/UserBlendOps.cs
 Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs

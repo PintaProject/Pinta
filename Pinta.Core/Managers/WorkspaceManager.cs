@@ -351,8 +351,8 @@ namespace Pinta.Core
 		{
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 
-			string secondaryText = string.Format(Translations.GetString("Could not open file: {0}"), filename);
-			secondaryText += string.Format(Translations.GetString($"{Environment.NewLine}{Environment.NewLine}Pinta supports the following file formats:{Environment.NewLine}"));
+			string secondaryText = Translations.GetString("Could not open file: {0}", filename);
+			secondaryText += string.Format("\n\n{0}\n", Translations.GetString("Pinta supports the following file formats:"));
 			var extensions = from format in PintaCore.System.ImageFormats.Formats
 							 where format.Importer != null
 							 from extension in format.Extensions

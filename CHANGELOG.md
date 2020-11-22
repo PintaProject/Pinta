@@ -9,6 +9,7 @@ Thanks to the following contributors who worked on this release:
 - @JamiKettunen
 - @thekolian1996
 - @tdgroot
+- @Nikitayfh
 
 ### Added
 - Ported to GTK3
@@ -19,14 +20,18 @@ Thanks to the following contributors who worked on this release:
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
 - The primary and secondary palette colors can now be swapped by pressing X (#147)
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
+- Zooming in and out can now be done without pressing the Ctrl key (#150).
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 
 ### Fixed
+- Fixed a bug where drawing a single pixel with the Pencil tool used black instead of the palette color ([#1897245](https://bugs.launchpad.net/pinta/+bug/1897245)).
 - Fixed issues with the zoom controls when using a French locale ([#1464855](https://bugs.launchpad.net/pinta/+bug/1464855))
 - Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
 - Added missing release notes to `pinta.appdata.xml` (#142)
+- Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
+- Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool ([#1904304](https://bugs.launchpad.net/pinta/+bug/1904304)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 

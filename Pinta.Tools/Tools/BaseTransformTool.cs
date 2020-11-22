@@ -38,8 +38,7 @@ namespace Pinta.Tools
 		private PointD original_point;
 		private bool is_dragging = false;
 		private bool is_rotating = false;
-        private bool rotateBySteps = false;
-        private bool is_scaling = false;
+		private bool is_scaling = false;
         #endregion
 
         #region Constructor
@@ -75,21 +74,19 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if(is_dragging || is_rotating)
+			if(is_dragging || is_rotating || is_scaling)
 				return;
 
 			original_point = point;
 			if (!doc.Workspace.PointInCanvas(point))
 				return;
 
-			if(args.Event.Button == GtkExtensions.MouseRightButton)
-			{
+			if (args.Event.Button == GtkExtensions.MouseRightButton)
 				is_rotating = true;
-			}
+			else if (args.Event.State.IsControlPressed ())
+				is_scaling = true;
 			else
-			{
 				is_dragging = true;
-			}
 
 			OnStartTransform();
 		}
@@ -98,13 +95,18 @@ namespace Pinta.Tools
 		                                     Gtk.MotionNotifyEventArgs args,
 		                                     Cairo.PointD point)
 		{
-			if (!is_dragging && !is_rotating)
+			if (!is_dragging && !is_rotating && !is_scaling)
 				return;
+
+			bool constrain = args.Event.State.IsShiftPressed ();
 
 			PointD center = source_rect.GetCenter();
 
-			double dx = point.X - original_point.X;
-			double dy = point.Y - original_point.Y;
+			// The cursor position can be a subpixel value. Round to an integer
+			// so that we only translate by entire pixels.
+			// (Otherwise, blurring / anti-aliasing may be introduced)
+			double dx = Math.Floor(point.X - original_point.X);
+			double dy = Math.Floor(point.Y - original_point.Y);
 
 			double cx1 = original_point.X - center.X;
 			double cy1 = original_point.Y - center.Y;
@@ -118,13 +120,22 @@ namespace Pinta.Tools
 
 			if (is_scaling)
 			{
+				double sx = (cx1 + dx) / cx1;
+				double sy = (cy1 + dy) / cy1;
+				if (constrain)
+				{
+					var max_scale = Math.Max (Math.Abs (sx), Math.Abs (sy));
+					sx = max_scale * Math.Sign (sx);
+					sy = max_scale * Math.Sign (sy);
+				}
+
 				transform.Translate(center.X, center.Y);
-				transform.Scale( (cx1 + dx) / cx1, (cy1 + dy) / cy1 );
+				transform.Scale (sx, sy);
 				transform.Translate(-center.X, -center.Y);
 			}
 			else if (is_rotating)
 			{
-				if (rotateBySteps)
+				if (constrain)
 					angle = Utility.GetNearestStepAngle (angle, rotate_steps);
 
 				transform.Translate(center.X, center.Y);
@@ -141,26 +152,15 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-			if (!is_dragging && !is_rotating)
+			if (!is_dragging && !is_rotating && !is_scaling)
 				return;
 
 			is_dragging = false;
 			is_rotating = false;
+			is_scaling = false;
 
 			OnFinishTransform(transform);
 		}
-
-        protected override void OnKeyDown (Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
-        {
-            rotateBySteps = (args.Event.Key == Gdk.Key.Shift_L || args.Event.Key == Gdk.Key.Shift_R);
-            is_scaling = (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R);
-        }
-
-        protected override void OnKeyUp (Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-        {
-            rotateBySteps = false;
-            is_scaling = false;
-        }
         #endregion
     }
 }

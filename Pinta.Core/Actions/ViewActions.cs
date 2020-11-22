@@ -124,10 +124,10 @@ namespace Pinta.Core
 			var zoom_section = new GLib.Menu();
 			menu.AppendSection(null, zoom_section);
 
-			app.AddAccelAction(ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "<Primary>KP_Add" });
+			app.AddAccelAction(ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
 			zoom_section.AppendItem(ZoomIn.CreateMenuItem());
 
-			app.AddAccelAction(ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "<Primary>KP_Subtract" });
+			app.AddAccelAction(ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
 			zoom_section.AppendItem(ZoomOut.CreateMenuItem());
 
 			app.AddAccelAction(ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
