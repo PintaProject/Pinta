@@ -45,6 +45,7 @@ namespace Pinta.Gui.Widgets
 
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
+		GLib.TimeoutHandler timeout_func;
 
 		/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 		/// fetched from the appropriate place.
@@ -70,6 +71,18 @@ namespace Pinta.Gui.Widgets
 		public object EffectData { get; private set; }
 
 		public event PropertyChangedEventHandler EffectDataChanged;
+
+		public override void Destroy ()
+        {
+            // If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
+            if (event_delay_timeout_id != 0)
+            {
+                GLib.Source.Remove (event_delay_timeout_id);
+                timeout_func.Invoke ();
+            }
+
+            base.Destroy ();
+        }
 
 		#region EffectData Parser
 		private void BuildDialog (IAddinLocalizer localizer)
@@ -153,7 +166,7 @@ namespace Pinta.Gui.Widgets
 
 				// Look for a Caption attribute that provides a (translated) description.
 				string label;
-				var attrs = members [0].GetCustomAttributes (typeof(CaptionAttribute), false);
+				var attrs = members [0].GetCustomAttributes (typeof (CaptionAttribute), false);
 				if (attrs.Length > 0)
 					label = Catalog.GetString (((CaptionAttribute)attrs [0]).Caption);
 				else
@@ -170,13 +183,13 @@ namespace Pinta.Gui.Widgets
 			widget.Active = ((IList)member_names).IndexOf (GetValue (member, o).ToString ());
 
 			widget.Changed += delegate (object sender, EventArgs e) {
-				SetValue (member, o, Enum.Parse (myType, label_to_member[widget.ActiveText]));
+				SetValue (member, o, Enum.Parse (myType, label_to_member [widget.ActiveText]));
 			};
 
 			return widget;
 		}
 
-		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
+		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object [] attributes)
 		{
 			Dictionary<string, object> dict = null;
 
@@ -202,7 +215,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object[] attributes)
+		private HScaleSpinButtonWidget CreateDoubleSlider (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
 
@@ -230,12 +243,7 @@ namespace Pinta.Gui.Widgets
 			widget.DefaultValue = (double)GetValue (member, o);
 
 			widget.ValueChanged += delegate (object sender, EventArgs e) {
-
-				if (event_delay_timeout_id != 0)
-					GLib.Source.Remove (event_delay_timeout_id);
-
-				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
-					event_delay_timeout_id = 0;
+				DelayedUpdate( () => {
 					SetValue (member, o, widget.Value);
 					return false;
 				});
@@ -244,7 +252,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object[] attributes)
+		private HScaleSpinButtonWidget CreateSlider (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			HScaleSpinButtonWidget widget = new HScaleSpinButtonWidget ();
 
@@ -272,12 +280,7 @@ namespace Pinta.Gui.Widgets
 			widget.DefaultValue = (int)GetValue (member, o);
 
 			widget.ValueChanged += delegate (object sender, EventArgs e) {
-
-				if (event_delay_timeout_id != 0)
-					GLib.Source.Remove (event_delay_timeout_id);
-
-				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
-					event_delay_timeout_id = 0;
+				DelayedUpdate( () => {
 					SetValue (member, o, widget.ValueAsInt);
 					return false;
 				});
@@ -286,7 +289,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object[] attributes)
+		private Gtk.CheckButton CreateCheckBox (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			Gtk.CheckButton widget = new Gtk.CheckButton ();
 
@@ -300,7 +303,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object[] attributes)
+		private PointPickerWidget CreateOffsetPicker (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			PointPickerWidget widget = new PointPickerWidget ();
 
@@ -314,7 +317,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object[] attributes)
+		private PointPickerWidget CreatePointPicker (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			PointPickerWidget widget = new PointPickerWidget ();
 
@@ -328,7 +331,7 @@ namespace Pinta.Gui.Widgets
 			return widget;
 		}
 
-		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object[] attributes)
+		private AnglePickerWidget CreateAnglePicker (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			AnglePickerWidget widget = new AnglePickerWidget ();
 
@@ -336,11 +339,7 @@ namespace Pinta.Gui.Widgets
 			widget.DefaultValue = (double)GetValue (member, o);
 
 			widget.ValueChanged += delegate (object sender, EventArgs e) {
-				if (event_delay_timeout_id != 0)
-					GLib.Source.Remove (event_delay_timeout_id);
-
-				event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
-					event_delay_timeout_id = 0;
+				DelayedUpdate( () => {
 					SetValue (member, o, widget.Value);
 					return false;
 				});
@@ -357,7 +356,7 @@ namespace Pinta.Gui.Widgets
 			return label;
 		}
 
-		private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object[] attributes)
+		private ReseedButtonWidget CreateSeed (string caption, object o, MemberInfo member, object [] attributes)
 		{
 			ReseedButtonWidget widget = new ReseedButtonWidget ();
 
@@ -378,7 +377,7 @@ namespace Pinta.Gui.Widgets
 			var pi = mi as PropertyInfo;
 
 			var getMethod = pi.GetGetMethod ();
-			return getMethod.Invoke (o, new object[0]);
+			return getMethod.Invoke (o, new object [0]);
 		}
 
 		private void SetValue (MemberInfo mi, object o, object val)
@@ -392,7 +391,7 @@ namespace Pinta.Gui.Widgets
 				fieldName = fi.Name;
 			} else if (pi != null) {
 				var setMethod = pi.GetSetMethod ();
-				setMethod.Invoke (o, new object[] { val });
+				setMethod.Invoke (o, new object [] { val });
 				fieldName = pi.Name;
 			}
 
@@ -444,10 +443,28 @@ namespace Pinta.Gui.Widgets
 			if (pi == null)
 				return null;
 			var getMethod = pi.GetGetMethod ();
-			return getMethod.Invoke (o, new object[0]);
+			return getMethod.Invoke (o, new object [0]);
 		}
-		#endregion
-	}
+
+        private void DelayedUpdate (GLib.TimeoutHandler handler)
+        {
+            if (event_delay_timeout_id != 0)
+			{
+				GLib.Source.Remove (event_delay_timeout_id);
+				if (handler != timeout_func)
+					timeout_func.Invoke ();
+			}
+
+			timeout_func = handler;
+			event_delay_timeout_id = GLib.Timeout.Add (event_delay_millis, () => {
+				event_delay_timeout_id = 0;
+				timeout_func.Invoke ();
+				timeout_func = null;
+				return false;
+			});
+        }
+        #endregion
+    }
 
 	/// <summary>
 	/// Wrapper around Pinta's translation template.

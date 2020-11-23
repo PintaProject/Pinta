@@ -64,11 +64,11 @@ namespace Pinta.Actions
 		    };
 
 			int response = dialog.Run ();
+			dialog.Destroy ();
+
 		    ClearLivePreview ();
 			if (response == (int)Gtk.ResponseType.Ok && !data.IsDefault)
 				ApplyTransform (data);
-
-			dialog.Destroy ();
 		}
 
 	    private static void ClearLivePreview ()

@@ -27,6 +27,7 @@ Thanks to the following contributors who worked on this release:
 - Added missing release notes to `pinta.appdata.xml` (#142)
 - Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
 - Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool ([#1904304](https://bugs.launchpad.net/pinta/+bug/1904304)).
+- Fixed a bug where the Rotate / Zoom Layer dialog could leave the layer in a state where all future actions were also transformed ([#1905176](https://bugs.launchpad.net/pinta/+bug/1905176)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
