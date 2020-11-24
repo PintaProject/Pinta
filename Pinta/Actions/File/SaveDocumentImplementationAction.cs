@@ -232,7 +232,7 @@ namespace Pinta.Actions
 			}
 
 			document.Filename = Path.GetFileName (file);
-			document.IsDirty = false;
+			document.Workspace.History.SetClean();
 
 			PintaCore.Tools.CurrentTool.DoAfterSave();
 

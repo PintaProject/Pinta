@@ -164,7 +164,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
-			doc.IsDirty = false;
+			doc.Workspace.History.SetClean();
 
 			// This ensures these are called after the window is done being created and sized.
 			// Without it, we sometimes try to zoom when the window has a size of (0, 0).
@@ -193,7 +193,7 @@ namespace Pinta.Core
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
-				PintaCore.Workspace.ActiveDocument.IsDirty = false;
+				PintaCore.Workspace.ActiveDocument.History.SetClean();
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
 
                 // This ensures these are called after the window is done being created and sized.
