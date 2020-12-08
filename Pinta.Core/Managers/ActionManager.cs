@@ -95,28 +95,19 @@ namespace Pinta.Core
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
-			View.CreateToolBar (toolbar);
 
+		}
+		
+        public void CreateStatusBar (Statusbar toolbar)
+        {
+            View.CreateToolBar (toolbar);
 
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
+			//toolbar.AppendItem (new SeparatorToolItem ());
 
-			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
-
-			toolbar.AppendItem (cursor);
-
-			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
-				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
-			};
-
-
-			toolbar.AppendItem(new SeparatorToolItem());
-			toolbar.AppendItem(new ToolBarImage(Resources.Icons.ToolSelectRectangle));
-
-			ToolBarLabel SelectionSize = new ToolBarLabel("  0, 0");
+			ToolBarLabel SelectionSize = new ToolBarLabel ("  0, 0");
 
 			toolbar.AppendItem(SelectionSize);
+			toolbar.AppendItem(new ToolBarImage (Resources.Icons.ToolSelectRectangle));
 
 			PintaCore.Workspace.SelectionChanged += delegate
 			{
@@ -173,9 +164,22 @@ namespace Pinta.Core
 
 				SelectionSize.Text = string.Format("  {0}, {1}", xDiff, yDiff);
 			};
-		}
-		
-		public void RegisterHandlers ()
+
+
+			toolbar.AppendItem(new SeparatorToolItem(), 10);
+
+			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
+
+			toolbar.AppendItem (cursor);
+			toolbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
+
+			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
+				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
+				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
+			};
+        }
+
+        public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();
 			Edit.RegisterHandlers ();

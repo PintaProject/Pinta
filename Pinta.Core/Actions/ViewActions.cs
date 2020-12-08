@@ -99,7 +99,7 @@ namespace Pinta.Core
 				ToPercent (0.05),
 				Translations.GetString ("Window")
 			};
-			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex(), true, ZoomCollection);
+			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection) { Margin = 4 };
 
             // The toolbar is shown by default.
             ToolBar.Value = true;
@@ -151,12 +151,12 @@ namespace Pinta.Core
 			metric_menu.Append(Translations.GetString("Centimeters"), $"app.{RulerMetric.Name}(2)");
 		}
 
-		public void CreateToolBar (Gtk.Toolbar toolbar)
+		public void CreateToolBar (Statusbar toolbar)
 		{
-			toolbar.AppendItem (new Gtk.SeparatorToolItem ());
-			toolbar.AppendItem (ZoomOut.CreateToolBarItem ());
-			toolbar.AppendItem (ZoomComboBox);
 			toolbar.AppendItem (ZoomIn.CreateToolBarItem ());
+			toolbar.AppendItem (ZoomComboBox);
+			toolbar.AppendItem (ZoomOut.CreateToolBarItem ());
+			toolbar.AppendItem (new Gtk.SeparatorToolItem (), 10);
 		}
 		
 		public void RegisterHandlers ()

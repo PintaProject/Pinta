@@ -294,6 +294,7 @@ namespace Pinta
 			CreateMainMenu (window_shell);
 			CreateMainToolBar (window_shell);
 			CreateToolToolBar (window_shell);
+            CreateStatusBar ();
 
 			CreatePanels (window_shell);
 
@@ -373,10 +374,10 @@ namespace Pinta
 				main_toolbar.ToolbarStyle = ToolbarStyle.Icons;
 				main_toolbar.IconSize = IconSize.SmallToolbar;
 			}
-			
-			PintaCore.Actions.CreateToolBar (main_toolbar);
 
-			PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
+            PintaCore.Actions.CreateToolBar (main_toolbar);
+
+            PintaCore.Chrome.InitializeMainToolBar (main_toolbar);
 		}
 		
 		private void CreateToolToolBar (WindowShell shell)
@@ -393,8 +394,56 @@ namespace Pinta
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
-		
-		private void CreatePanels (WindowShell shell)
+
+        private void CreateStatusBar ()
+        {
+            var sb = window_shell.CreateStatusBar ("statusbar");
+
+            var palette = new SlimColorPaletteWidget ();
+            sb.PackStart (palette, true, true, 0);
+
+            PintaCore.Actions.CreateStatusBar (sb);
+
+            //var ws = Services.GetRequiredService<IWorkspaceService> ();
+            //var resources = Services.GetRequiredService<IResourceService> ();
+
+            ////var values = new[] { "3600%", "2400%", "1600%", "1200%", "800%", "700%", "600%", "500%", "400%", "300%", "200%", "175%", "150%", "125%", "100%", "66%", "50%", "33%", "25%", "16%", "12%", "8%", "5%" };
+            //var brush_width = new ToolBarComboBox<string> (14, Workspace.PresetZoomLevels) {
+            //    SuppressEvents = true
+            //};
+
+            //var brush_width_plus = new ToolBarButton (resources.GetIcon ("Toolbar.PlusButton.png"), "", Catalog.GetString ("Increase brush size"));
+            //brush_width_plus.Clicked += (o, e) => ws.ActiveWorkspace?.ZoomIn ();
+            //sb.PackEnd (brush_width_plus, false, false, 0);
+            //brush_width.Show ();
+            //sb.PackEnd (brush_width, false, false, 0);
+
+            //brush_width.SelectedItemChanged += (o, e) => {
+            //    var value = brush_width.GetSelectedValue ();
+            //    var zoom = double.Parse (value.TrimEnd ('%')) / 100;
+
+            //    if (ws.ActiveWorkspace != null)
+            //        ws.ActiveWorkspace.Scale = zoom;
+            //};
+
+            //var brush_width_minus = new ToolBarButton (resources.GetIcon ("Toolbar.MinusButton.png"), "", Catalog.GetString ("Decrease brush size"));
+
+            //brush_width_minus.Clicked += (o, e) => ws.ActiveWorkspace?.ZoomOut ();
+
+            //sb.PackEnd (brush_width_minus, false, false, 0);
+
+            //sb.PackEnd (new ToolBarLabel ($" {Catalog.GetString ("Zoom")}: "), false, false, 0);
+
+            //ws.ZoomChanged += (o, e) => {
+            //    var zoom = (int)((ws.ActiveWorkspace?.Scale ?? 1) * 100) + "%";
+            //    //var index = values.ToList ().IndexOf (zoom);
+
+            //    //if (index >= 0)
+            //    brush_width.SetSelectedValue (zoom);
+            //};
+        }
+
+        private void CreatePanels (WindowShell shell)
 		{
 			HBox panel_container = shell.CreateWorkspace ();
 
@@ -408,16 +457,22 @@ namespace Pinta
 			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
 			fact.AddDefault ();
 
+
+
 			// Dock widget
 			dock = new Dock ();
 
+            var tbp = new ToolBoxWidget ();
+            tbp.WidthRequest = 36;
+            container.PackStart (tbp, false, false, 0);
+
 			// Toolbox pad
-			var toolboxpad = new ToolBoxPad ();
-			toolboxpad.Initialize (dock, this, show_pad);
+			//var toolboxpad = new ToolBoxPad ();
+			//toolboxpad.Initialize (dock, this, show_pad);
 		
 			// Palette pad
-			var palettepad = new ColorPalettePad ();
-			palettepad.Initialize (dock, this, show_pad);
+			//var palettepad = new ColorPalettePad ();
+			//palettepad.Initialize (dock, this, show_pad);
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();

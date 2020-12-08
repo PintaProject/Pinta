@@ -82,7 +82,26 @@ namespace Pinta
 			return workspace_layout;
 		}
 
-		public void AddDragDropSupport (params TargetEntry[] entries)
+        public Statusbar CreateStatusBar (string name)
+        {
+            var statusbar = new Statusbar {
+                Name = name,
+                Padding = 0,
+                Margin = 0
+            };
+
+            //statusbar.Child = null;
+            //statusbar.CenterWidget = null;
+            //statusbar.BaselinePosition = BaselinePosition.Top;
+            //statusbar.PackType = PackType.Start;
+            statusbar.Remove (statusbar.Children[0]);
+            shell_layout.PackEnd (statusbar, false, false, 0);
+            statusbar.Show ();
+
+            return statusbar;
+        }
+
+        public void AddDragDropSupport (params TargetEntry[] entries)
 		{
 			Gtk.Drag.DestSet (this, Gtk.DestDefaults.Motion | Gtk.DestDefaults.Highlight | Gtk.DestDefaults.Drop, entries, Gdk.DragAction.Copy);
 		}
