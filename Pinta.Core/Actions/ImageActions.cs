@@ -197,6 +197,32 @@ namespace Pinta.Core
 			CropImageToRectangle (doc, rect, doc.Selection.SelectionPath);
 		}
 
+		/// <summary>
+        /// Checks if all of the pixels in the row match the specified color.
+        /// </summary>
+        private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, int y)
+        {
+            for (int x = 0; x < surf.Width; ++x) {
+                if (!color.Equals (surf.GetPixel (x, y)))
+                    return false;
+            }
+
+            return true;
+        }
+
+		/// <summary>
+		/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
+		/// </summary>
+		private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, Gdk.Rectangle rect, int x)
+		{
+			for (int y = rect.Top; y < rect.Bottom; ++y) {
+				if (!color.Equals (surf.GetPixel (x, y)))
+					return false;
+			}
+
+			return true;
+		}
+
 		private void HandlePintaCoreActionsImageAutoCropActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
@@ -205,81 +231,48 @@ namespace Pinta.Core
 
             using (var image = doc.GetFlattenedImage ())
             {
-                Gdk.Rectangle rect = image.GetBounds ();
+				Gdk.Rectangle rect = image.GetBounds ();
+                Cairo.Color border_color = image.GetPixel (0, 0);
 
-                Cairo.Color borderColor = image.GetPixel (0, 0);
-                bool cropSide = true;
-                int depth = -1;
+				// Top down.
+                for (int y = 0; y < image.Height; ++y) {
+                    if (!IsConstantRow (image, border_color, y))
+                        break;
 
-                //From the top down
-                while (cropSide) {
-                    depth++;
-                    for (int i = 0; i < image.Width; i++) {
-                        if (!borderColor.Equals(image.GetPixel (i, depth))) {
-                            cropSide = false;
-                            break;
-                        }
-                    }
-                    //Check if the image is blank/mono-coloured, only need to do it on this scan
-                    if (depth == image.Height)
-                        return;
+                    ++rect.Y;
+                    --rect.Height;
                 }
 
-                rect = new Gdk.Rectangle (rect.X, rect.Y + depth, rect.Width, rect.Height - depth);
+				// Bottom up.
+				for (int y = rect.Bottom; y >= rect.Top; --y) {
+					if (!IsConstantRow (image, border_color, y))
+						break;
 
-                depth = image.Height;
-                cropSide = true;
-                //From the bottom up
-                while (cropSide) {
-                    depth--;
-                    for (int i = 0; i < image.Width; i++) {
-                        if (!borderColor.Equals(image.GetPixel (i, depth))) {
-                            cropSide = false;
-                            break;
-                        }
-                    }
+					--rect.Height;
+				}
 
-                }
+				// Left side.
+				for (int x = 0; x < image.Width; ++x) {
+					if (!IsConstantColumn (image, border_color, rect, x))
+						break;
 
-                rect = new Gdk.Rectangle (rect.X, rect.Y, rect.Width, depth - rect.Y);
+					++rect.X;
+					--rect.Width;
+				}
 
-                depth = 0;
-                cropSide = true;
-                //From left to right
-                while (cropSide) {
-                    depth++;
-                    for (int i = 0; i < image.Height; i++) {
-                        if (!borderColor.Equals(image.GetPixel (depth, i))) {
-                            cropSide = false;
-                            break;
-                        }
-                    }
+				// Right side.
+				for (int x = rect.Right; x >= rect.Left; --x) {
+					if (!IsConstantColumn (image, border_color, rect, x))
+						break;
 
-                }
+					--rect.Width;
+				}
 
-                rect = new Gdk.Rectangle (rect.X + depth, rect.Y, rect.Width - depth, rect.Height);
-
-                depth = image.Width;
-                cropSide = true;
-                //From right to left
-                while (cropSide) {
-                    depth--;
-                    for (int i = 0; i < image.Height; i++) {
-                        if (!borderColor.Equals(image.GetPixel (depth, i))) {
-                            cropSide = false;
-                            break;
-                        }
-                    }
-
-                }
-
-                rect = new Gdk.Rectangle (rect.X, rect.Y, depth - rect.X, rect.Height);
-
-                // Ignore the current selection when auto-cropping.
-                CropImageToRectangle (doc, rect, /*selection*/ null);
+				// Ignore the current selection when auto-cropping.
+				CropImageToRectangle (doc, rect, /*selection*/ null);
             }
 		}
-		#endregion
+#endregion
 
 		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path selection)
 		{
