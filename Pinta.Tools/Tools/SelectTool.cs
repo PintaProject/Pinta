@@ -104,12 +104,17 @@ namespace Pinta.Tools
 				// This will allow AfterSelectionChanged() to clear the selection.
 				is_drawing = false;
 
-				PintaCore.Actions.Edit.Deselect.Activate ();
                 if (hist != null)
                 {
+					// Roll back any changes made to the selection, e.g. in OnMouseDown().
+					hist.Undo ();
+
                     hist.Dispose();
                     hist = null;
                 }
+
+				PintaCore.Actions.Edit.Deselect.Activate ();
+
 			} else {
                 ClearHandles (doc.ToolLayer);
 				ReDraw(args.Event.State);

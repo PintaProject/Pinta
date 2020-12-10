@@ -21,17 +21,23 @@ Thanks to the following contributors who worked on this release:
 - The primary and secondary palette colors can now be swapped by pressing X (#147)
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 - Zooming in and out can now be done without pressing the Ctrl key (#150).
+- Arrow keys can be used to move by a single pixel in the Move Selected Pixels and Move Selection tools ([#1906141](https://bugs.launchpad.net/pinta/+bug/1906141)).
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 
 ### Fixed
+- Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. ([#1191390](https://bugs.launchpad.net/pinta/+bug/1191390)).
 - Fixed a bug where drawing a single pixel with the Pencil tool used black instead of the palette color ([#1897245](https://bugs.launchpad.net/pinta/+bug/1897245)).
 - Fixed issues with the zoom controls when using a French locale ([#1464855](https://bugs.launchpad.net/pinta/+bug/1464855))
 - Fixed invalid URLs in `pinta.appdata.xml` (#140, #145)
 - Added missing release notes to `pinta.appdata.xml` (#142)
 - Shift can now be used to constrain to a uniform scale when scaling using the Move Selected Pixels tool (#138).
 - Fixed a regression introduced in Pinta 1.7 that could produce blurred pixels when using the Move Selected Pixels tool ([#1904304](https://bugs.launchpad.net/pinta/+bug/1904304)).
+- Fixed a bug where the Rotate / Zoom Layer dialog could leave the layer in a state where all future actions were also transformed ([#1905176](https://bugs.launchpad.net/pinta/+bug/1905176)).
+- Fixed a bug where the document might not be marked as modified after certain undo / redo actions ([#1905165](https://bugs.launchpad.net/pinta/+bug/1905165)).
+- Fixed a bug where the Move Selected Pixels tool did not handle transparent pixels correctly ([#1905706](https://bugs.launchpad.net/pinta/+bug/1905706)).
+- Fixed a bug where deselecting via a single click in the select tool could cause bugs with undoing earlier history items ([#1905719](https://bugs.launchpad.net/pinta/+bug/1905719)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 

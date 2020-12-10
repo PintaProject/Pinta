@@ -407,7 +407,7 @@ namespace Pinta.Core
 
 			using (Cairo.Context g = new Cairo.Context (CurrentUserLayer.Surface)) {
 				selection.Clip (g);
-				layer.DrawWithOperator(g, layer.Surface, Operator.Source, 1.0f, true);
+				layer.Draw (g);
 			}
 
 			DestroySelectionLayer ();

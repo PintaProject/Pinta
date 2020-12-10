@@ -44,7 +44,7 @@ namespace Pinta.Tools
 			get { return Resources.Icons.ToolMove; }
 		}
 		public override string StatusBarText {
-			get { return Translations.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps."); }
+			get { return Translations.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps. Use arrow keys to move selected content by a single pixel."); }
 		}
 		public override Gdk.Cursor DefaultCursor {
 			get { return new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolMove, 16), 0, 0); }

@@ -35,6 +35,7 @@ namespace Pinta.Core
 		private Document document;
 		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
 		int historyPointer = -1;
+		int cleanPointer = -1;
 
 		internal DocumentWorkspaceHistory (Document document)
 		{
@@ -80,7 +81,6 @@ namespace Pinta.Core
 			newItem.Id = ListStore.AppendValues (newItem);
 			history.Add (newItem);
 			historyPointer = history.Count - 1;
-			
 			if (newItem.CausesDirty)
 				document.IsDirty = true;
 				
@@ -102,13 +102,18 @@ namespace Pinta.Core
 				BaseHistoryItem item = history[historyPointer];
 				item.Undo ();
 				item.State = HistoryItemState.Redo;
+				if (item.CausesDirty)
+					document.IsDirty = true;
+
 				ListStore.SetValue (item.Id, 0, item);
 				history[historyPointer] = item;
 				historyPointer--;
-			}	
-			
-			if (historyPointer == 0) {
+			}
+
+			if (historyPointer == cleanPointer)
 				document.IsDirty = false;
+
+			if (historyPointer == 0) {
 				PintaCore.Actions.Edit.Undo.Sensitive = false;
 				CanUndo = false;
 			}
@@ -134,8 +139,10 @@ namespace Pinta.Core
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
 				CanRedo = false;
 			}
-				
-			if (item.CausesDirty)
+
+			if (historyPointer == cleanPointer)
+				document.IsDirty = false;
+			else if (item.CausesDirty)
 				document.IsDirty = true;
 
 			if (history.Count > 1) {
@@ -145,6 +152,17 @@ namespace Pinta.Core
 
 			PintaCore.History.OnActionRedone ();
 		}
+
+		/// <summary>
+        /// Mark the document as being clean at the current point in the history stack.
+        /// This might be used after e.g. saving the document to disk.
+        /// The document's IsDirty property is also set to false.
+        /// </summary>
+		public void SetClean()
+        {
+			cleanPointer = historyPointer;
+			document.IsDirty = false;
+        }
 		
 		public void Clear ()
 		{
@@ -152,6 +170,7 @@ namespace Pinta.Core
 			history.Clear();	
 			ListStore.Clear ();	
 			historyPointer = -1;
+			cleanPointer = -1;
 
 			document.IsDirty = false;
 			PintaCore.Actions.Edit.Redo.Sensitive = false;

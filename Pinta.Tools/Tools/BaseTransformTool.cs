@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using Cairo;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -39,6 +40,7 @@ namespace Pinta.Tools
 		private bool is_dragging = false;
 		private bool is_rotating = false;
 		private bool is_scaling = false;
+		private bool using_mouse = false;
         #endregion
 
         #region Constructor
@@ -66,6 +68,10 @@ namespace Pinta.Tools
 
 		protected virtual void OnFinishTransform(Matrix transform)
 		{
+			is_dragging = false;
+			is_rotating = false;
+			is_scaling = false;
+			using_mouse = false;
 		}
 
 		protected override void OnMouseDown (Gtk.DrawingArea canvas,
@@ -74,7 +80,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if(is_dragging || is_rotating || is_scaling)
+			if(IsActive)
 				return;
 
 			original_point = point;
@@ -88,6 +94,7 @@ namespace Pinta.Tools
 			else
 				is_dragging = true;
 
+			using_mouse = true;
 			OnStartTransform();
 		}
 
@@ -95,7 +102,7 @@ namespace Pinta.Tools
 		                                     Gtk.MotionNotifyEventArgs args,
 		                                     Cairo.PointD point)
 		{
-			if (!is_dragging && !is_rotating && !is_scaling)
+			if (!IsActive || !using_mouse)
 				return;
 
 			bool constrain = args.Event.State.IsShiftPressed ();
@@ -152,15 +159,63 @@ namespace Pinta.Tools
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
-			if (!is_dragging && !is_rotating && !is_scaling)
+			if (!IsActive || !using_mouse)
 				return;
-
-			is_dragging = false;
-			is_rotating = false;
-			is_scaling = false;
 
 			OnFinishTransform(transform);
 		}
+
+        protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
+        {
+            // Don't handle the arrow keys while already interacting via the mouse.
+            if (using_mouse) {
+                base.OnKeyDown (canvas, args);
+                return;
+            }
+
+            double dx = 0.0;
+            double dy = 0.0;
+
+            switch (args.Event.Key) {
+            case Gdk.Key.Left:
+                dx = -1;
+                break;
+            case Gdk.Key.Right:
+                dx = 1;
+                break;
+            case Gdk.Key.Up:
+                dy = -1;
+                break;
+            case Gdk.Key.Down:
+                dy = 1;
+                break;
+            default:
+                // Otherwise, let the key be handled elsewhere.
+                base.OnKeyDown (canvas, args);
+                return;
+            }
+
+            if (!IsActive) {
+                is_dragging = true;
+                OnStartTransform ();
+            }
+
+            transform.Translate (dx, dy);
+            OnUpdateTransform (transform);
+
+            args.RetVal = true;
+        }
+
+        protected override void OnKeyUp (DrawingArea canvas, KeyReleaseEventArgs args)
+        {
+            if (IsActive && !using_mouse) {
+                OnFinishTransform (transform);
+            }
+
+            base.OnKeyUp (canvas, args);
+        }
+
+        private bool IsActive { get { return is_dragging || is_rotating || is_scaling; } }
         #endregion
     }
 }
