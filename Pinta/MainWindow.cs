@@ -427,10 +427,6 @@ namespace Pinta
 			var layers_pad = new LayersPad ();
 			layers_pad.Initialize (dock, this, show_pad);
 
-			// Open Images pad
-			var open_images_pad = new OpenImagesPad ();
-			open_images_pad.Initialize (dock, this, show_pad);
-
 			// History pad
 			var history_pad = new HistoryPad ();
 			history_pad.Initialize (dock, this, show_pad);
