@@ -5,6 +5,7 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @jpobst
 - @darkdragon-001
 - @JamiKettunen
 - @thekolian1996
@@ -17,6 +18,7 @@ Thanks to the following contributors who worked on this release:
   - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
   - On macOS, the menu now appears in the global menu bar instead of the application window.
   - On macOS, keyboard shortcuts now use Command instead of Ctrl.
+  - Removed the Images pad, which is obsolete now that tabs are used (#153).
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
 - The primary and secondary palette colors can now be swapped by pressing X (#147)
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
