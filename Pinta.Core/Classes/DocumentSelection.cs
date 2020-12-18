@@ -442,5 +442,35 @@ namespace Pinta.Core
             End = new PointD(0, 0);
             MarkDirty ();
         }
-    }
+
+		/// <summary>
+		/// Returns a rectangle that encloses the entire selection.
+		/// </summary>
+		public Rectangle GetBounds ()
+		{
+			var minX = double.MaxValue;
+			var minY = double.MaxValue;
+			var maxX = double.MinValue;
+			var maxY = double.MinValue;
+
+			// Calculate the minimum rectangular bounds that surround the current selection.
+			foreach (var li in PintaCore.Workspace.ActiveDocument.Selection.SelectionPolygons) {
+				foreach (var ip in li) {
+					if (minX > ip.X)
+						minX = ip.X;
+
+					if (minY > ip.Y)
+						minY = ip.Y;
+
+					if (maxX < ip.X)
+						maxX = ip.X;
+
+					if (maxY < ip.Y)
+						maxY = ip.Y;
+				}
+			}
+
+			return new Rectangle (minX, minY, maxX - minX, maxY - minY);
+		}
+	}
 }

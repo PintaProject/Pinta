@@ -296,6 +296,7 @@ namespace Pinta
 			CreateToolToolBar (window_shell);
 
 			CreatePanels (window_shell);
+			CreateStatusBar (window_shell);
 
 			AddWindow(window_shell);
 			window_shell.ShowAll ();
@@ -393,7 +394,16 @@ namespace Pinta
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
-		
+
+		private void CreateStatusBar (WindowShell shell)
+		{
+			var statusbar = shell.CreateStatusBar ("statusbar");
+
+			PintaCore.Actions.CreateStatusBar (statusbar);
+
+			PintaCore.Chrome.InitializeStatusBar (statusbar);
+		}
+
 		private void CreatePanels (WindowShell shell)
 		{
 			HBox panel_container = shell.CreateWorkspace ();

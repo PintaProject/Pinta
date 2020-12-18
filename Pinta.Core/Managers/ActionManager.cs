@@ -95,86 +95,38 @@ namespace Pinta.Core
 			toolbar.AppendItem (new SeparatorToolItem ());
 			toolbar.AppendItem (Image.CropToSelection.CreateToolBarItem ());
 			toolbar.AppendItem (Edit.Deselect.CreateToolBarItem ());
-			View.CreateToolBar (toolbar);
+		}
 
+		public void CreateStatusBar (Statusbar statusbar)
+		{
+			// Document zoom widget
+			View.CreateStatusBar (statusbar);
 
-			toolbar.AppendItem (new SeparatorToolItem ());
-			toolbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
+			// Selection size widget
+			var SelectionSize = new ToolBarLabel ("  0, 0");
 
-			ToolBarLabel cursor = new ToolBarLabel ("  0, 0");
+			statusbar.AppendItem (SelectionSize);
+			statusbar.AppendItem (new ToolBarImage (Resources.Icons.ToolSelectRectangle));
 
-			toolbar.AppendItem (cursor);
+			PintaCore.Workspace.SelectionChanged += delegate {
+				var bounds = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument.Selection.GetBounds () : new Cairo.Rectangle ();
+				SelectionSize.Text = string.Format ("  {0}, {1}", bounds.Width, bounds.Height);
+			};
+
+			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
+
+			// Cursor position widget
+			var cursor = new ToolBarLabel ("  0, 0");
+
+			statusbar.AppendItem (cursor);
+			statusbar.AppendItem (new ToolBarImage (Resources.Icons.CursorPosition));
 
 			PintaCore.Chrome.LastCanvasCursorPointChanged += delegate {
-				Gdk.Point pt = PintaCore.Chrome.LastCanvasCursorPoint;
+				var pt = PintaCore.Chrome.LastCanvasCursorPoint;
 				cursor.Text = string.Format ("  {0}, {1}", pt.X, pt.Y);
 			};
-
-
-			toolbar.AppendItem(new SeparatorToolItem());
-			toolbar.AppendItem(new ToolBarImage(Resources.Icons.ToolSelectRectangle));
-
-			ToolBarLabel SelectionSize = new ToolBarLabel("  0, 0");
-
-			toolbar.AppendItem(SelectionSize);
-
-			PintaCore.Workspace.SelectionChanged += delegate
-			{
-			    if (!PintaCore.Workspace.HasOpenDocuments)
-			    {
-			        SelectionSize.Text = "  0, 0";
-                    return;
-                }
-
-                double minX = double.MaxValue;
-				double minY = double.MaxValue;
-				double maxX = double.MinValue;
-				double maxY = double.MinValue;
-
-				//Calculate the minimum rectangular bounds that surround the current selection.
-				foreach (List<IntPoint> li in PintaCore.Workspace.ActiveDocument.Selection.SelectionPolygons)
-				{
-					foreach (IntPoint ip in li)
-					{
-						if (minX > ip.X)
-						{
-							minX = ip.X;
-						}
-
-						if (minY > ip.Y)
-						{
-							minY = ip.Y;
-						}
-
-						if (maxX < ip.X)
-						{
-							maxX = ip.X;
-						}
-
-						if (maxY < ip.Y)
-						{
-							maxY = ip.Y;
-						}
-					}
-				}
-
-				double xDiff = maxX - minX;
-				double yDiff = maxY - minY;
-
-				if (double.IsNegativeInfinity(xDiff))
-				{
-					xDiff = 0d;
-				}
-
-				if (double.IsNegativeInfinity(yDiff))
-				{
-					yDiff = 0d;
-				}
-
-				SelectionSize.Text = string.Format("  {0}, {1}", xDiff, yDiff);
-			};
 		}
-		
+
 		public void RegisterHandlers ()
 		{
 			File.RegisterHandlers ();
