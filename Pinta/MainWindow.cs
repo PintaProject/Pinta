@@ -426,10 +426,6 @@ namespace Pinta
 			// Toolbox pad
 			var toolboxpad = new ToolBoxPad ();
 			toolboxpad.Initialize (dock, this, show_pad);
-		
-			// Palette pad
-			var palettepad = new ColorPalettePad ();
-			palettepad.Initialize (dock, this, show_pad);
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();
