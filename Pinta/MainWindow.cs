@@ -399,6 +399,8 @@ namespace Pinta
 		{
 			var statusbar = shell.CreateStatusBar ("statusbar");
 
+			statusbar.PackStart (new StatusBarColorPaletteWidget (), true, true, 0);
+
 			PintaCore.Actions.CreateStatusBar (statusbar);
 
 			PintaCore.Chrome.InitializeStatusBar (statusbar);

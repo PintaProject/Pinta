@@ -27,6 +27,7 @@
 using System;
 using Gtk;
 using Cairo;
+using System.Collections.Generic;
 
 namespace Pinta.Core
 {
@@ -36,24 +37,22 @@ namespace Pinta.Core
 		private Color secondary;
 		private Palette palette;
 
+		private const int MAX_RECENT_COLORS = 10;
+		private readonly List<Color> recently_used = new List<Color> (MAX_RECENT_COLORS);
+
 		public Color PrimaryColor {
-			get { return primary; }
-			set {
-				if (!primary.Equals (value)) {
-					primary = value;
-					OnPrimaryColorChanged ();
-				}
-			}
+			get => primary;
+			set => SetColor (true, value, true);
 		}
 
+		public int MaxRecentlyUsedColor => MAX_RECENT_COLORS;
+
+		// Return an IEnumerable to prevent modification of the list
+		public IEnumerable<Color> RecentlyUsedColors => recently_used;
+
 		public Color SecondaryColor {
-			get { return secondary; }
-			set {
-				if (!secondary.Equals (value)) {
-					secondary = value;
-					OnSecondaryColorChanged ();
-				}
-			}
+			get => secondary;
+			set => SetColor (false, value, true);
 		}
 		
 		public Palette CurrentPalette {
@@ -68,8 +67,8 @@ namespace Pinta.Core
 		
 		public PaletteManager ()
 		{
-			PrimaryColor = new Color (0, 0, 0);
-			SecondaryColor = new Color (1, 1, 1);
+			SetColor (true, new Color (0, 0, 0), false);
+			SetColor (false, new Color (1, 1, 1), false);
 		}
 
 		public void DoKeyRelease (object o, KeyReleaseEventArgs e)
@@ -81,12 +80,60 @@ namespace Pinta.Core
 			}
 		}
 
+		// This allows callers to bypass affecting the recently used list
+		public void SetColor (bool setPrimary, Color color, bool addToRecent = true)
+		{
+			if (setPrimary && !primary.Equals (color)) {
+				primary = color;
+
+				if (addToRecent)
+					AddRecentlyUsedColor (color);
+
+				OnPrimaryColorChanged ();
+			} else if (!setPrimary && !secondary.Equals (color)) {
+				secondary = color;
+
+				if (addToRecent)
+					AddRecentlyUsedColor (color);
+
+				OnSecondaryColorChanged ();
+			}
+		}
+
+		// The most recently used color is at index 0.
+		private void AddRecentlyUsedColor (Color color)
+		{
+			// The color is already in the recently used list
+			if (recently_used.Contains (color)) {
+				// If it's already at the back, nothing to do
+				if (recently_used[0].Equals (color))
+					return;
+
+				// Move it to the front
+				recently_used.Remove (color);
+				recently_used.Insert (0, color);
+
+				OnRecentColorsChanged ();
+				return;
+			}
+
+			// Color needs to be added to the list
+			if (recently_used.Count == MAX_RECENT_COLORS)
+				recently_used.RemoveAt (MAX_RECENT_COLORS - 1);
+
+			recently_used.Insert (0, color);
+
+			OnRecentColorsChanged ();
+		}
+
 		#region Protected Methods
 		protected void OnPrimaryColorChanged ()
 		{
 			if (PrimaryColorChanged != null)
 				PrimaryColorChanged.Invoke (this, EventArgs.Empty);
 		}
+
+		protected void OnRecentColorsChanged () => RecentColorsChanged?.Invoke (this, EventArgs.Empty);
 
 		protected void OnSecondaryColorChanged ()
 		{
@@ -98,6 +145,7 @@ namespace Pinta.Core
 		#region Events
 		public event EventHandler PrimaryColorChanged;
 		public event EventHandler SecondaryColorChanged;
+		public event EventHandler RecentColorsChanged;
 		#endregion
 	}
 }
