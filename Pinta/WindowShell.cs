@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Gtk;
 
 namespace Pinta
@@ -69,6 +70,26 @@ namespace Pinta
 			main_toolbar.Show ();
 
 			return main_toolbar;
+		}
+
+		public Statusbar CreateStatusBar (string name)
+		{
+			var statusbar = new Statusbar {
+				Name = name,
+				Padding = 0,
+				Margin = 0
+			};
+
+			// Remove the default text area
+			var child = statusbar.Children.FirstOrDefault ();
+
+			if (child != null)
+				statusbar.Remove (child);
+
+			shell_layout.PackEnd (statusbar, false, false, 0);
+			statusbar.Show ();
+
+			return statusbar;
 		}
 
 		public HBox CreateWorkspace ()

@@ -68,6 +68,7 @@ namespace Pinta
 			// View
             action_handlers.Add (new ToolBarToggledAction ());
             action_handlers.Add (new ImageTabsToggledAction ());
+			action_handlers.Add (new StatusBarToggledAction ());
 
 			// Window
 			action_handlers.Add (new CloseAllDocumentsAction ());

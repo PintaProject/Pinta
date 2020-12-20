@@ -50,6 +50,12 @@ namespace Pinta.Core
 			tb.Insert (item, tb.NItems);
 		}
 
+		public static void AppendItem (this Statusbar tb, ToolItem item, uint padding = 0)
+		{
+			item.Show ();
+			tb.PackEnd (item, false, false, padding);
+		}
+
 		public static Gtk.ToolButton CreateToolBarItem (this Command action)
         {
 			var item = new ToolButton(null, action.ShortLabel ?? action.Label)

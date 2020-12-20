@@ -40,6 +40,7 @@ namespace Pinta.Core
         public ToggleCommand ToolBar { get; private set; }
         public ToggleCommand ImageTabs { get; private set; }
         public ToggleCommand PixelGrid { get; private set; }
+		public ToggleCommand StatusBar { get; private set; }
 		public ToggleCommand Rulers { get; private set; }
 		public GLib.SimpleAction RulerMetric { get; private set; }
 		public Command Fullscreen { get; private set; }
@@ -69,6 +70,7 @@ namespace Pinta.Core
             ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
             ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
             PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
+			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
 			RulerMetric = new GLib.SimpleAction("rulermetric", GLib.VariantType.Int32, new GLib.Variant(0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
@@ -99,11 +101,12 @@ namespace Pinta.Core
 				ToPercent (0.05),
 				Translations.GetString ("Window")
 			};
-			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex(), true, ZoomCollection);
+			ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection) { Margin = 4 };
 
             // The toolbar is shown by default.
             ToolBar.Value = true;
             ImageTabs.Value = true;
+			StatusBar.Value = true;
 		}
 
 		#region Initialization
@@ -111,6 +114,9 @@ namespace Pinta.Core
 		{
 			app.AddAction(ToolBar);
 			menu.AppendItem(ToolBar.CreateMenuItem());
+
+			app.AddAction (StatusBar);
+			menu.AppendItem (StatusBar.CreateMenuItem ());
 
 			app.AddAction(PixelGrid);
 			menu.AppendItem(PixelGrid.CreateMenuItem());
@@ -151,12 +157,12 @@ namespace Pinta.Core
 			metric_menu.Append(Translations.GetString("Centimeters"), $"app.{RulerMetric.Name}(2)");
 		}
 
-		public void CreateToolBar (Gtk.Toolbar toolbar)
+		public void CreateStatusBar (Statusbar statusbar)
 		{
-			toolbar.AppendItem (new Gtk.SeparatorToolItem ());
-			toolbar.AppendItem (ZoomOut.CreateToolBarItem ());
-			toolbar.AppendItem (ZoomComboBox);
-			toolbar.AppendItem (ZoomIn.CreateToolBarItem ());
+			statusbar.AppendItem (ZoomIn.CreateToolBarItem ());
+			statusbar.AppendItem (ZoomComboBox);
+			statusbar.AppendItem (ZoomOut.CreateToolBarItem ());
+			statusbar.AppendItem (new SeparatorToolItem { Margin = 6 }, 6);
 		}
 		
 		public void RegisterHandlers ()

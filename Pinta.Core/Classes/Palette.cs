@@ -104,54 +104,54 @@ namespace Pinta.Core
 			colors.Clear ();
 
 			colors.Add (new Color (255 / 255f, 255 / 255f, 255 / 255f));
-			colors.Add (new Color (128 / 255f, 128 / 255f, 128 / 255f));
-			colors.Add (new Color (127 / 255f, 0 / 255f, 0 / 255f));
-			colors.Add (new Color (127 / 255f, 51 / 255f, 0 / 255f));
-			colors.Add (new Color (127 / 255f, 106 / 255f, 0 / 255f));
-			colors.Add (new Color (91 / 255f, 127 / 255f, 0 / 255f));
-			colors.Add (new Color (38 / 255f, 127 / 255f, 0 / 255f));
-			colors.Add (new Color (0 / 255f, 127 / 255f, 14 / 255f));
-			colors.Add (new Color (0 / 255f, 127 / 255f, 70 / 255f));
-			colors.Add (new Color (0 / 255f, 127 / 255f, 127 / 255f));
-			colors.Add (new Color (0 / 255f, 74 / 255f, 127 / 255f));
-			colors.Add (new Color (0 / 255f, 19 / 255f, 127 / 255f));
-			colors.Add (new Color (33 / 255f, 0 / 255f, 127 / 255f));
-			colors.Add (new Color (87 / 255f, 0 / 255f, 127 / 255f));
-			colors.Add (new Color (127 / 255f, 0 / 255f, 110 / 255f));
-			colors.Add (new Color (127 / 255f, 0 / 255f, 55 / 255f));
-
 			colors.Add (new Color (0 / 255f, 0 / 255f, 0 / 255f));
-			colors.Add (new Color (64 / 255f, 64 / 255f, 64 / 255f));
-			colors.Add (new Color (255 / 255f, 0 / 255f, 0 / 255f));
-			colors.Add (new Color (255 / 255f, 106 / 255f, 0 / 255f));
-			colors.Add (new Color (255 / 255f, 216 / 255f, 0 / 255f));
-			colors.Add (new Color (182 / 255f, 255 / 255f, 0 / 255f));
-			colors.Add (new Color (76 / 255f, 255 / 255f, 0 / 255f));
-			colors.Add (new Color (0 / 255f, 255 / 255f, 33 / 255f));
-			colors.Add (new Color (0 / 255f, 255 / 255f, 144 / 255f));
-			colors.Add (new Color (0 / 255f, 255 / 255f, 255 / 255f));
-			colors.Add (new Color (0 / 255f, 148 / 255f, 255 / 255f));
-			colors.Add (new Color (0 / 255f, 38 / 255f, 255 / 255f));
-			colors.Add (new Color (72 / 255f, 0 / 255f, 255 / 255f));
-			colors.Add (new Color (178 / 255f, 0 / 255f, 255 / 255f));
-			colors.Add (new Color (255 / 255f, 0 / 255f, 220 / 255f));
-			colors.Add (new Color (255 / 255f, 0 / 255f, 110 / 255f));
 
 			colors.Add (new Color (160 / 255f, 160 / 255f, 160 / 255f));
+			colors.Add (new Color (128 / 255f, 128 / 255f, 128 / 255f));
+
+			colors.Add (new Color (64 / 255f, 64 / 255f, 64 / 255f));
 			colors.Add (new Color (48 / 255f, 48 / 255f, 48 / 255f));
+
+			colors.Add (new Color (255 / 255f, 0 / 255f, 0 / 255f));
 			colors.Add (new Color (255 / 255f, 127 / 255f, 127 / 255f));
+
+			colors.Add (new Color (255 / 255f, 106 / 255f, 0 / 255f));
 			colors.Add (new Color (255 / 255f, 178 / 255f, 127 / 255f));
+
+			colors.Add (new Color (255 / 255f, 216 / 255f, 0 / 255f));
 			colors.Add (new Color (255 / 255f, 233 / 255f, 127 / 255f));
+
+			colors.Add (new Color (182 / 255f, 255 / 255f, 0 / 255f));
 			colors.Add (new Color (218 / 255f, 255 / 255f, 127 / 255f));
+
+			colors.Add (new Color (76 / 255f, 255 / 255f, 0 / 255f));
 			colors.Add (new Color (165 / 255f, 255 / 255f, 127 / 255f));
+
+			colors.Add (new Color (0 / 255f, 255 / 255f, 33 / 255f));
 			colors.Add (new Color (127 / 255f, 255 / 255f, 142 / 255f));
+
+			colors.Add (new Color (0 / 255f, 255 / 255f, 144 / 255f));
 			colors.Add (new Color (127 / 255f, 255 / 255f, 197 / 255f));
+
+			colors.Add (new Color (0 / 255f, 255 / 255f, 255 / 255f));
 			colors.Add (new Color (127 / 255f, 255 / 255f, 255 / 255f));
+
+			colors.Add (new Color (0 / 255f, 148 / 255f, 255 / 255f));
 			colors.Add (new Color (127 / 255f, 201 / 255f, 255 / 255f));
+
+			colors.Add (new Color (0 / 255f, 38 / 255f, 255 / 255f));
 			colors.Add (new Color (127 / 255f, 146 / 255f, 255 / 255f));
+
+			colors.Add (new Color (72 / 255f, 0 / 255f, 255 / 255f));
 			colors.Add (new Color (161 / 255f, 127 / 255f, 255 / 255f));
+
+			colors.Add (new Color (178 / 255f, 0 / 255f, 255 / 255f));
 			colors.Add (new Color (214 / 255f, 127 / 255f, 255 / 255f));
+
+			colors.Add (new Color (255 / 255f, 0 / 255f, 220 / 255f));
 			colors.Add (new Color (255 / 255f, 127 / 255f, 237 / 255f));
+
+			colors.Add (new Color (255 / 255f, 0 / 255f, 110 / 255f));
 			colors.Add (new Color (255 / 255f, 127 / 255f, 182 / 255f));
 
 			colors.TrimExcess ();

@@ -44,6 +44,8 @@ namespace Pinta.Core
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Window MainWindow { get { return main_window; } }
+		public Statusbar StatusBar { get; private set; }
+
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
 		public GLib.Menu AdjustmentsMenu { get; private set; }
 		public GLib.Menu EffectsMenu { get; private set; }
@@ -90,6 +92,11 @@ namespace Pinta.Core
 		public void InitializeMainToolBar (Toolbar mainToolBar)
 		{
 			main_toolbar = mainToolBar;
+		}
+
+		public void InitializeStatusBar (Statusbar statusbar)
+		{
+			StatusBar = statusbar;
 		}
 
 		public void InitializeWindowShell (Window shell)

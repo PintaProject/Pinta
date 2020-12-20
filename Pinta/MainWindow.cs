@@ -296,6 +296,7 @@ namespace Pinta
 			CreateToolToolBar (window_shell);
 
 			CreatePanels (window_shell);
+			CreateStatusBar (window_shell);
 
 			AddWindow(window_shell);
 			window_shell.ShowAll ();
@@ -393,7 +394,18 @@ namespace Pinta
 
 			PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
 		}
-		
+
+		private void CreateStatusBar (WindowShell shell)
+		{
+			var statusbar = shell.CreateStatusBar ("statusbar");
+
+			statusbar.PackStart (new StatusBarColorPaletteWidget (), true, true, 0);
+
+			PintaCore.Actions.CreateStatusBar (statusbar);
+
+			PintaCore.Chrome.InitializeStatusBar (statusbar);
+		}
+
 		private void CreatePanels (WindowShell shell)
 		{
 			HBox panel_container = shell.CreateWorkspace ();
@@ -414,10 +426,6 @@ namespace Pinta
 			// Toolbox pad
 			var toolboxpad = new ToolBoxPad ();
 			toolboxpad.Initialize (dock, this, show_pad);
-		
-			// Palette pad
-			var palettepad = new ColorPalettePad ();
-			palettepad.Initialize (dock, this, show_pad);
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();
@@ -494,6 +502,8 @@ namespace Pinta
             PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
+
+			PintaCore.Palette.SaveRecentlyUsedColors ();
 
 			PintaCore.Settings.SaveSettings ();
 		}
