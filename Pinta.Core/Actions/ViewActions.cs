@@ -70,7 +70,7 @@ namespace Pinta.Core
             ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
             ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
             PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
-			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Statusbar"), null, null);
+			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
 			RulerMetric = new GLib.SimpleAction("rulermetric", GLib.VariantType.Int32, new GLib.Variant(0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
