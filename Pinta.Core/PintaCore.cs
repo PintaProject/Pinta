@@ -63,6 +63,9 @@ namespace Pinta.Core
 			Settings = new SettingsManager ();
 			Chrome = new ChromeManager ();
 			Effects = new EffectsManager ();
+
+			// Break a circular dependency between Palette and Settings
+			Palette.Initialize ();
 		}
 		
 		public static void Initialize ()

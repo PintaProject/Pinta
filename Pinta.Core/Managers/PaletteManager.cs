@@ -28,6 +28,7 @@ using System;
 using Gtk;
 using Cairo;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pinta.Core
 {
@@ -69,6 +70,11 @@ namespace Pinta.Core
 		{
 			SetColor (true, new Color (0, 0, 0), false);
 			SetColor (false, new Color (1, 1, 1), false);
+		}
+
+		public void Initialize ()
+		{
+			PopulateRecentlyUsedColors ();
 		}
 
 		public void DoKeyRelease (object o, KeyReleaseEventArgs e)
@@ -124,6 +130,32 @@ namespace Pinta.Core
 			recently_used.Insert (0, color);
 
 			OnRecentColorsChanged ();
+		}
+
+		private void PopulateRecentlyUsedColors ()
+		{
+			var saved_colors = PintaCore.Settings.GetSetting ("recently-used-colors", string.Empty);
+
+			foreach (var hex_color in saved_colors.Split (',')) {
+				try {
+					var color = ColorBgra.ParseHexString (hex_color);
+					recently_used.Add (color.ToCairoColor ());
+				} catch (Exception) {
+					// Ignore
+				}
+			}
+
+			// Fill in with default color if not enough saved
+			var more_colors = MAX_RECENT_COLORS - recently_used.Count;
+
+			if (more_colors > 0)
+				recently_used.AddRange (Enumerable.Repeat (new Color (.9, .9, .9), more_colors));
+		}
+
+		public void SaveRecentlyUsedColors ()
+		{
+			var colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
+			PintaCore.Settings.PutSetting ("recently-used-colors", colors);
 		}
 
 		#region Protected Methods

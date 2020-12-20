@@ -503,6 +503,8 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
 
+			PintaCore.Palette.SaveRecentlyUsedColors ();
+
 			PintaCore.Settings.SaveSettings ();
 		}
 #endregion
