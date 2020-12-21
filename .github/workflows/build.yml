@@ -68,5 +68,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "Pinta.exe"
-        path: windows/installer/Pinta.exe
+        path: installer/windows/Pinta.exe
         if-no-files-found: error
