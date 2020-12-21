@@ -45,3 +45,28 @@ jobs:
         name: "Pinta.app.zip"
         path: osx/Pinta.app.zip
         if-no-files-found: error
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1.0.2
+    - name: Build
+      run: dotnet build Pinta.sln
+    - name: Test
+      run: dotnet test Pinta.sln
+
+    # Note that msgfmt is already available from the Git for Windows installation!
+    - name: Build Installer
+      run: |
+        dotnet publish Pinta.sln -r win-x64
+        msbuild Pinta.Install.proj -target:CompileTranslations -property:OutputPath=bin\win-x64\publish
+        iscc windows/installer/installer.iss
+
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Pinta.exe"
+        path: windows/installer/Pinta.exe
+        if-no-files-found: error
