@@ -62,7 +62,7 @@ jobs:
       run: |
         dotnet publish Pinta.sln -r win-x64
         msbuild Pinta.Install.proj -target:CompileTranslations -property:OutputPath=bin\win-x64\publish
-        iscc windows/installer/installer.iss
+        iscc installer/windows/installer.iss
 
     - name: Upload Installer
       uses: actions/upload-artifact@v2
