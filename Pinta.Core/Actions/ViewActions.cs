@@ -41,6 +41,7 @@ namespace Pinta.Core
         public ToggleCommand ImageTabs { get; private set; }
         public ToggleCommand PixelGrid { get; private set; }
 		public ToggleCommand StatusBar { get; private set; }
+		public ToggleCommand ToolBox { get; private set; }
 		public ToggleCommand Rulers { get; private set; }
 		public GLib.SimpleAction RulerMetric { get; private set; }
 		public Command Fullscreen { get; private set; }
@@ -71,6 +72,7 @@ namespace Pinta.Core
             ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
             PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
 			StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
+			ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 			Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
 			RulerMetric = new GLib.SimpleAction("rulermetric", GLib.VariantType.Int32, new GLib.Variant(0));
 			Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
@@ -107,6 +109,7 @@ namespace Pinta.Core
             ToolBar.Value = true;
             ImageTabs.Value = true;
 			StatusBar.Value = true;
+			ToolBox.Value = true;
 		}
 
 		#region Initialization
@@ -117,6 +120,9 @@ namespace Pinta.Core
 
 			app.AddAction (StatusBar);
 			menu.AppendItem (StatusBar.CreateMenuItem ());
+
+			app.AddAction (ToolBox);
+			menu.AppendItem (ToolBox.CreateMenuItem ());
 
 			app.AddAction(PixelGrid);
 			menu.AppendItem(PixelGrid.CreateMenuItem());

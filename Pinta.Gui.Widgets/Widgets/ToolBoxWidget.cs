@@ -7,29 +7,31 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem (true)]
-	public class ToolBoxWidget : WrappingPaletteContainer
+	public class ToolBoxWidget : Toolbar
 	{
-		public ToolBoxWidget () : base(16)
+		public ToolBoxWidget ()
 		{
 			HeightRequest = 375;
 
 			PintaCore.Tools.ToolAdded += HandleToolAdded;
 			PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
+			Orientation = Orientation.Vertical;
+			ToolbarStyle = ToolbarStyle.Icons;
+
 			ShowAll ();
 		}
-		
+
 		// TODO: This should handle sorting the items
 		public void AddItem (ToolButton item)
 		{
-            Append(item);
+			item.IsImportant = false;
+			Add (item);
 		}
 
 		public void RemoveItem (ToolButton item)
 		{
-			//Run a remove on both tables since it might be in either
-            Remove(item);
+			Remove (item);
 		}
 
 		private void HandleToolAdded (object sender, ToolEventArgs e)
