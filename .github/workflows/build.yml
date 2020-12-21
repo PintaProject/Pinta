@@ -53,14 +53,14 @@ jobs:
     - uses: actions/checkout@v2
     - uses: microsoft/setup-msbuild@v1.0.2
     - name: Build
-      run: dotnet build Pinta.sln
+      run: dotnet build Pinta.sln --configuration Release
     - name: Test
-      run: dotnet test Pinta.sln
+      run: dotnet test Pinta.sln --configuration Release
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
       run: |
-        dotnet publish Pinta.sln -r win-x64
+        dotnet publish Pinta.sln --configuration Release -r win-x64
         msbuild Pinta.Install.proj -target:CompileTranslations -property:OutputPath=bin\win-x64\publish
         iscc installer/windows/installer.iss
 

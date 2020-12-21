@@ -2,7 +2,7 @@
 set -x
 
 msbuild ../Pinta.Install.proj -target:CompileTranslations
-dotnet publish ../Pinta.sln -r osx-x64
+dotnet publish ../Pinta.sln --configuration Release -r osx-x64
 
 MAC_APP_DIR=Pinta.app
 MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
