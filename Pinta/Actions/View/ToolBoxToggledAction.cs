@@ -1,10 +1,10 @@
-﻿// 
-// ToolBoxPad.cs
+// 
+// ToolBoxToggledAction.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2011 Jonathan Pobst
+// Copyright (c) 2020 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,42 +24,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
-using Pinta.Docking;
+using System;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
+using Gtk;
 
-namespace Pinta
+namespace Pinta.Actions
 {
-	public class ToolBoxPad : IDockPad
+	class ToolBoxToggledAction : IActionHandler
 	{
-		public void Initialize (Dock workspace, Application app, GLib.Menu padMenu)
+		#region IActionHandler Members
+		public void Initialize ()
 		{
-			ToolBoxWidget toolbox = new ToolBoxWidget () { Name = "toolbox" };
+			PintaCore.Actions.View.ToolBox.Toggled += Activated;
+		}
 
-			DockItem toolbox_item = new DockItem(toolbox, "Toolbox")
-			{
-				Label = Translations.GetString("Tools")
-			};
+		public void Uninitialize ()
+		{
+			PintaCore.Actions.View.ToolBox.Toggled -= Activated;
+		}
+		#endregion
 
-			// TODO-GTK3 (docking)
-#if false
-			toolbox_item.Content = toolbox;
-			toolbox_item.Icon = Gtk.IconTheme.Default.LoadIcon(Resources.Icons.ToolPencil, 16);
-			toolbox_item.Behavior |= DockItemBehavior.CantClose;
-			toolbox_item.DefaultWidth = 35;
-#endif
-			workspace.AddItem(toolbox_item, DockPlacement.Left);
-
-			var show_toolbox = new ToggleCommand("Tools", Translations.GetString("Tools"), null, Resources.Icons.ToolPencil)
-			{
-				Value = true
-			};
-			app.AddAction(show_toolbox);
-			padMenu.AppendItem(show_toolbox.CreateMenuItem());
-
-			show_toolbox.Toggled += (val) => { toolbox_item.Visible = val; };
-			toolbox_item.VisibilityNotifyEvent += (o, args) => { show_toolbox.Value = toolbox_item.Visible; };
+		private void Activated (bool value)
+		{
+			PintaCore.Chrome.ToolBox.Visible = value;
 		}
 	}
 }

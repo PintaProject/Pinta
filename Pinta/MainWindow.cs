@@ -420,12 +420,12 @@ namespace Pinta
 			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
 			fact.AddDefault ();
 
+			var toolbox = new ToolBoxWidget ();
+			container.PackStart (toolbox, false, false, 0);
+			PintaCore.Chrome.InitializeToolBox (toolbox);
+
 			// Dock widget
 			dock = new Dock ();
-
-			// Toolbox pad
-			var toolboxpad = new ToolBoxPad ();
-			toolboxpad.Initialize (dock, this, show_pad);
 
 			// Canvas pad
 			canvas_pad = new CanvasPad ();
