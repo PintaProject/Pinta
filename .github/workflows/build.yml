@@ -8,6 +8,9 @@ on:
     # Run every week just to make sure the CI environment still works.
     - cron: '0 0 * * 0'
 
+env:
+  DOTNET_VERSION: 5.0.x
+
 # TODO - add Windows / Mac CI builds with the installers being built (see master branch).
 jobs:
   build-ubuntu:
@@ -19,11 +22,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    # TODO - upload an artifact with the build results (see master branch)
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{env.DOTNET_VERSION}}
     - name: Build
-      run: dotnet build Pinta.sln
+      run: dotnet build Pinta.sln --configuration Release
     - name: Test
-      run: dotnet test Pinta.sln
+      run: dotnet test Pinta.sln --configuration Release
+    # TODO - upload an artifact with the build results (see master branch)
 
   build-macos:
     runs-on: macos-latest
@@ -31,10 +38,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     # dotnet and gettext are already available on the CI environment.
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{env.DOTNET_VERSION}}
     - name: Build
-      run: dotnet build Pinta.sln
+      run: dotnet build Pinta.sln --configuration Release
     - name: Test
-      run: dotnet test Pinta.sln
+      run: dotnet test Pinta.sln --configuration Release
     - name: Build Installer
       run: |
         cd osx
@@ -45,3 +56,18 @@ jobs:
         name: "Pinta.app.zip"
         path: osx/Pinta.app.zip
         if-no-files-found: error
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{env.DOTNET_VERSION}}
+    - name: Build
+      run: dotnet build Pinta.sln --configuration Release
+    - name: Test
+      run: dotnet test Pinta.sln --configuration Release
+    # TODO - upload an artifact with the build results (see master branch)
