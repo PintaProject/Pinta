@@ -11,11 +11,11 @@ namespace Pinta.Core
         private const string action_prefix = "tool";
 
         private Gtk.MenuButton menu_button;
-		private Label label_widget;
+		private Label? label_widget;
 		private GLib.Menu dropdown;
 		private GLib.SimpleActionGroup action_group;
 		private Image image;
-		private ToolBarItem selected_item;
+		private ToolBarItem? selected_item;
 
 		public List<ToolBarItem> Items { get; private set; }
 
@@ -58,7 +58,7 @@ namespace Pinta.Core
 			return AddItem (text, imageId, null);
 		}
 
-		public ToolBarItem AddItem (string text, string imageId, object tag)
+		public ToolBarItem AddItem (string text, string imageId, object? tag)
 		{
 			ToolBarItem item = new ToolBarItem (text, imageId, tag);
 			action_group.AddAction(item.Action);
@@ -73,10 +73,11 @@ namespace Pinta.Core
 			return item;
 		}
 
-		public ToolBarItem SelectedItem {
+		public ToolBarItem? SelectedItem {
 			get { return selected_item; }
 			set {
-				if (selected_item != value)
+				// We don't support setting the selected item back to nothing
+				if (value != null && selected_item != value)
 					SetSelectedItem (value);
 			}
 		}
@@ -100,16 +101,11 @@ namespace Pinta.Core
 				SelectedItemChanged (this, EventArgs.Empty);
 		}
 
-		public event EventHandler SelectedItemChanged;
+		public event EventHandler? SelectedItemChanged;
 	}
 
 	public class ToolBarItem
 	{
-		public ToolBarItem ()
-		{
-
-		}
-
 		public ToolBarItem (string text, string imageId)
 		{
 			Text = text;
@@ -119,13 +115,13 @@ namespace Pinta.Core
             Action = new GLib.SimpleAction(action_name, null);
 		}
 
-		public ToolBarItem (string text, string imageId, object tag) : this (text, imageId)
+		public ToolBarItem (string text, string imageId, object? tag) : this (text, imageId)
 		{
 			Tag = tag;
 		}
 
 		public string ImageId { get; set; }
-		public object Tag { get; set; }
+		public object? Tag { get; set; }
 		public string Text { get; set; }
 		public GLib.SimpleAction Action { get; private set; }
 	}

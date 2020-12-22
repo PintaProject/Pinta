@@ -39,10 +39,6 @@ namespace Pinta.Core
 		private string name;
 		private BlendMode blend_mode;
 		private Matrix transform = new Matrix();
-
-		public Layer () : this (null)
-		{
-		}
 		
 		public Layer (ImageSurface surface) : this (surface, false, 1f, "")
 		{
@@ -277,7 +273,7 @@ namespace Pinta.Core
 			Surface = dest;
 		}
 
-		public virtual void Crop (Gdk.Rectangle rect, Path selection)
+		public virtual void Crop (Gdk.Rectangle rect, Path? selection)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
 

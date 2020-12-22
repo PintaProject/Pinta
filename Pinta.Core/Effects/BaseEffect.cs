@@ -58,7 +58,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Returns the keyboard shortcut for this adjustment. Only affects adjustments, not effects. Default is no shortcut.
 		/// </summary>
-		public virtual string AdjustmentMenuKey { get { return null; } }
+		public virtual string? AdjustmentMenuKey { get { return null; } }
 
 		/// <summary>
 		/// Returns the modifier(s) to the keyboard shortcut. Only affects adjustments, not effects. Default is Primary+Shift.
@@ -73,7 +73,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// The user configurable data this effect uses.
 		/// </summary>
-		public EffectData EffectData { get; protected set; }
+		public EffectData? EffectData { get; protected set; }
 
 		/// <summary>
 		/// Launches the configuration dialog for this effect/adjustment.
@@ -161,7 +161,7 @@ namespace Pinta.Core
 			var effect = (BaseEffect) this.MemberwiseClone ();
 
 			if (effect.EffectData != null)
-				effect.EffectData = EffectData.Clone ();
+				effect.EffectData = EffectData?.Clone ();
 
 			return effect;
 		}		

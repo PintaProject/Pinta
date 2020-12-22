@@ -33,7 +33,7 @@ namespace Pinta.Core
         }
 
         #region Operators
-        public override bool Equals (object obj)
+        public override bool Equals (object? obj)
         {
             return obj is TextPosition && this == (TextPosition)obj;
         }

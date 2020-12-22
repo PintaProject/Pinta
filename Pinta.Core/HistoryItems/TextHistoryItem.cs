@@ -33,11 +33,11 @@ namespace Pinta.Core
 	{
 		UserLayer userLayer;
 
-		SurfaceDiff text_surface_diff;
-		ImageSurface textSurface;
+		SurfaceDiff? text_surface_diff;
+		ImageSurface? textSurface;
 
-		SurfaceDiff user_surface_diff;
-		ImageSurface userSurface;
+		SurfaceDiff? user_surface_diff;
+		ImageSurface? userSurface;
 
 		TextEngine tEngine;
 		Gdk.Rectangle textBounds;
@@ -87,10 +87,6 @@ namespace Pinta.Core
 			textBounds = new Gdk.Rectangle(userLayer.textBounds.X, userLayer.textBounds.Y, userLayer.textBounds.Width, userLayer.textBounds.Height);
 		}
 
-		public TextHistoryItem(string icon, string text) : base(icon, text)
-		{
-		}
-
 		public override void Undo()
 		{
 			Swap();
@@ -114,7 +110,7 @@ namespace Pinta.Core
 			else
 			{
 				// Undo to the "old" surface
-				userLayer.TextLayer.Layer.Surface = textSurface;
+				userLayer.TextLayer.Layer.Surface = textSurface!; // NRT - Will be not-null if text_surface_diff is null
 
 				// Store the original surface for Redo
 				textSurface = surf;
@@ -133,7 +129,7 @@ namespace Pinta.Core
 			else
 			{
 				// Undo to the "old" surface
-				userLayer.Surface = userSurface;
+				userLayer.Surface = userSurface!; // NRT - Will be not-null if user_surface_diff is null
 
 				// Store the original surface for Redo
 				userSurface = surf;

@@ -31,25 +31,27 @@ namespace Pinta.Core
 {
 	public class ChromeManager
 	{
-		private Toolbar tool_toolbar;
-		private Window main_window;
-		private IProgressDialog progress_dialog;
+		// NRT - These are all initialized via the Initialize* functions
+		// but it would be nice to rewrite it to provably non-null.
+		private Toolbar tool_toolbar = null!;
+		private Window main_window = null!;
+		private IProgressDialog progress_dialog = null!;
 		private bool main_window_busy;
 		private Gdk.Point last_canvas_cursor_point;
-		private Toolbar main_toolbar;
-		private ErrorDialogHandler error_dialog_handler;
-		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler;
+		private Toolbar main_toolbar = null!;
+		private ErrorDialogHandler error_dialog_handler = null!;
+		private UnsupportedFormatDialogHandler unsupported_format_dialog_handler = null!;
 
-		public Application Application { get; private set; }
+		public Application Application { get; private set; } = null!;
 		public Toolbar ToolToolBar { get { return tool_toolbar; } }
 		public Toolbar MainToolBar { get { return main_toolbar; } }
 		public Window MainWindow { get { return main_window; } }
-		public Statusbar StatusBar { get; private set; }
-		public Toolbar ToolBox { get; private set; }
+		public Statusbar StatusBar { get; private set; } = null!;
+		public Toolbar ToolBox { get; private set; } = null!;
 
 		public IProgressDialog ProgressDialog { get { return progress_dialog; } }
-		public GLib.Menu AdjustmentsMenu { get; private set; }
-		public GLib.Menu EffectsMenu { get; private set; }
+		public GLib.Menu AdjustmentsMenu { get; private set; } = null!;
+		public GLib.Menu EffectsMenu { get; private set; } = null!;
 
 		public ChromeManager ()
 		{
@@ -165,8 +167,8 @@ namespace Pinta.Core
 #endregion
 		
 		#region Public Events
-		public event EventHandler LastCanvasCursorPointChanged;
-		public event EventHandler<TextChangedEventArgs> StatusBarTextChanged;
+		public event EventHandler? LastCanvasCursorPointChanged;
+		public event EventHandler<TextChangedEventArgs>? StatusBarTextChanged;
 		#endregion
 	}
 		

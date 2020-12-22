@@ -31,8 +31,8 @@ namespace Pinta.Core
 {
 	public class FinishPixelsHistoryItem : BaseHistoryItem
 	{
-		private ImageSurface old_selection_layer;
-		private ImageSurface old_surface;
+		private ImageSurface? old_selection_layer;
+		private ImageSurface? old_surface;
 		private readonly Matrix old_transform = new Matrix();
 
 		public override bool CausesDirty { get { return false; } }
@@ -52,9 +52,9 @@ namespace Pinta.Core
 			ImageSurface swap_surf = PintaCore.Layers.CurrentLayer.Surface;
 			ImageSurface swap_sel = PintaCore.Layers.SelectionLayer.Surface;
 
-			PintaCore.Layers.SelectionLayer.Surface = old_selection_layer;
+			PintaCore.Layers.SelectionLayer.Surface = old_selection_layer!; // NRT - Set in TakeSnapshot
 			PintaCore.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
-			PintaCore.Layers.CurrentLayer.Surface = old_surface;
+			PintaCore.Layers.CurrentLayer.Surface = old_surface!;
 
 			old_transform.InitMatrix(swap_transfrom);
 			old_surface = swap_surf;
@@ -71,8 +71,8 @@ namespace Pinta.Core
 			ImageSurface swap_surf = PintaCore.Layers.CurrentLayer.Surface.Clone ();
 			ImageSurface swap_sel = PintaCore.Layers.SelectionLayer.Surface;
 
-			PintaCore.Layers.CurrentLayer.Surface = old_surface;
-			PintaCore.Layers.SelectionLayer.Surface = old_selection_layer;
+			PintaCore.Layers.CurrentLayer.Surface = old_surface!; // NRT - Set in TakeSnapshot
+			PintaCore.Layers.SelectionLayer.Surface = old_selection_layer!;
 			PintaCore.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
 
 			old_surface = swap_surf;

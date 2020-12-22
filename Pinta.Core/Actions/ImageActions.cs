@@ -284,7 +284,7 @@ namespace Pinta.Core
 		}
 #endregion
 
-		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path selection)
+		static void CropImageToRectangle (Document doc, Gdk.Rectangle rect, Path? selection)
 		{
 			if (rect.Width > 0 && rect.Height > 0)
 			{

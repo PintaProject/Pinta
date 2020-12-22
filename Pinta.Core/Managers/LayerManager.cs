@@ -233,7 +233,7 @@ namespace Pinta.Core
 			return PintaCore.Workspace.ActiveDocument.CreateLayer (name, width, height);
 		}
 		
-		internal void RaiseLayerPropertyChangedEvent (object sender, PropertyChangedEventArgs e)
+		internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 		{
 			if (LayerPropertyChanged != null)
 				LayerPropertyChanged (sender, e);
@@ -244,10 +244,10 @@ namespace Pinta.Core
 		#endregion
 
 		#region Events
-		public event EventHandler LayerAdded;
-		public event EventHandler LayerRemoved;
-		public event EventHandler SelectedLayerChanged;
-		public event PropertyChangedEventHandler LayerPropertyChanged;
+		public event EventHandler? LayerAdded;
+		public event EventHandler? LayerRemoved;
+		public event EventHandler? SelectedLayerChanged;
+		public event PropertyChangedEventHandler? LayerPropertyChanged;
 		#endregion
 	}
 }

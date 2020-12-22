@@ -36,7 +36,7 @@ namespace Pinta.Core
 		{
 		}
 				
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 				
 		protected void SetValue<T> (string propertyName, ref T member, T value)
 		{

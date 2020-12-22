@@ -70,11 +70,11 @@ namespace Pinta.Core
 			bg.Dispose ();
 		}
 
-		public Pixbuf LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
+		public Pixbuf? LoadThumbnail (string filename, int maxWidth, int maxHeight, Gtk.Window parent)
 		{
 			int imageWidth;
 			int imageHeight;
-			Pixbuf pixbuf = null;
+			Pixbuf? pixbuf = null;
 
 			var imageInfo = Gdk.Pixbuf.GetFileInfo (filename, out imageWidth, out imageHeight);
 
@@ -140,7 +140,7 @@ namespace Pinta.Core
         [DllImport("libgdk_pixbuf-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gdk_pixbuf_savev_utf8 (IntPtr raw, IntPtr filename, IntPtr type, IntPtr[] option_keys, IntPtr[] option_values, out IntPtr error);
 
-		public static bool SavevUtf8 (this Pixbuf pb, string filename, string type, string[] option_keys, string[] option_values)
+		public static bool SavevUtf8 (this Pixbuf pb, string filename, string type, string?[]? option_keys, string?[]? option_values)
 		{
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				IntPtr native_filename = GLib.Marshaller.StringToPtrGStrdup (filename);
@@ -149,13 +149,13 @@ namespace Pinta.Core
 				int num = (option_keys == null) ? 0 : option_keys.Length;
 				IntPtr[] native_keys = new IntPtr[num];
 				for (int i = 0; i < num; i++) {
-					native_keys[i] = GLib.Marshaller.StringToPtrGStrdup (option_keys[i]);
+					native_keys[i] = GLib.Marshaller.StringToPtrGStrdup (option_keys![i]); // NRT - num is null-checked length of option_keys
 				}
 
 				int num2 = (option_values == null) ? 0 : option_values.Length;
 				IntPtr[] native_values = new IntPtr[num2];
 				for (int j = 0; j < num2; j++) {
-					native_values[j] = GLib.Marshaller.StringToPtrGStrdup (option_values[j]);
+					native_values[j] = GLib.Marshaller.StringToPtrGStrdup (option_values![j]); // NRT - num2 is null-checked length of option_values
 				}
 
 				IntPtr error = IntPtr.Zero;

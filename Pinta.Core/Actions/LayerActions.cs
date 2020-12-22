@@ -129,7 +129,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Action Handlers
-		private void EnableOrDisableLayerActions (object sender, EventArgs e)
+		private void EnableOrDisableLayerActions (object? sender, EventArgs e)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveDocument.UserLayers.Count > 1) {
 				PintaCore.Actions.Layers.DeleteLayer.Sensitive = true;

@@ -91,7 +91,7 @@ namespace Pinta.Core
 		public List<Document> OpenDocuments { get; private set; }
 		public bool HasOpenDocuments { get { return OpenDocuments.Count > 0; } }
 		
-		public Document CreateAndActivateDocument (string filename, Gdk.Size size)
+		public Document CreateAndActivateDocument (string? filename, Gdk.Size size)
 		{
 			Document doc = new Document (size);
 			
@@ -175,7 +175,7 @@ namespace Pinta.Core
 		}
 
 		// TODO: Standardize add to recent files
-		public bool OpenFile (string file, Window parent = null)
+		public bool OpenFile (string file, Window? parent = null)
 		{
 			bool fileOpened = false;
 
@@ -184,7 +184,7 @@ namespace Pinta.Core
 
 			try {
 				// Open the image and add it to the layers
-				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
+				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (file);
 				if (importer == null)
 					throw new FormatException( Translations.GetString ("Unsupported file format"));
 
@@ -367,11 +367,11 @@ namespace Pinta.Core
 		}
 
 		#region Public Events
-		public event EventHandler ActiveDocumentChanged;
-		public event EventHandler<DocumentEventArgs> DocumentCreated;
-		public event EventHandler<DocumentEventArgs> DocumentOpened;
-		public event EventHandler<DocumentEventArgs> DocumentClosed;
-		public event EventHandler SelectionChanged;
+		public event EventHandler? ActiveDocumentChanged;
+		public event EventHandler<DocumentEventArgs>? DocumentCreated;
+		public event EventHandler<DocumentEventArgs>? DocumentOpened;
+		public event EventHandler<DocumentEventArgs>? DocumentClosed;
+		public event EventHandler? SelectionChanged;
 #endregion
 		
 	}

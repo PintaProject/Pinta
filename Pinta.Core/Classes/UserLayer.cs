@@ -44,21 +44,14 @@ namespace Pinta.Core
 		public ReEditableLayer TextLayer;
 
 		//Call the base class constructor and setup the engines.
-		public UserLayer(ImageSurface surface) : base(surface)
+		public UserLayer(ImageSurface surface) : this(surface, false, 1f, "")
 		{
-			setupUserLayer();
 		}
 
 		//Call the base class constructor and setup the engines.
 		public UserLayer(ImageSurface surface, bool hidden, double opacity, string name) : base(surface, hidden, opacity, name)
 		{
-			setupUserLayer();
-		}
-
-		private void setupUserLayer()
-		{
 			tEngine = new TextEngine();
-
 			TextLayer = new ReEditableLayer(this);
 		}
 
@@ -93,7 +86,7 @@ namespace Pinta.Core
             ApplyTransform (xform, new_size);
         }
 
-        public override void Crop (Gdk.Rectangle rect, Path selection)
+        public override void Crop (Gdk.Rectangle rect, Path? selection)
 		{
 			base.Crop (rect, selection);
 

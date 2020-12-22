@@ -111,7 +111,8 @@ namespace Pinta.Core
 
 		public static string GetExecutableDirectory ()
 		{
-			return Path.GetDirectoryName (GetExecutablePathName ());
+			// NRT - We use Path.GetFullPath so it should contain a directory
+			return Path.GetDirectoryName (GetExecutablePathName ())!;
 		}
 
 		/// <summary>
@@ -161,7 +162,7 @@ namespace Pinta.Core
 				buf = Marshal.AllocHGlobal (8192);
 				// This is a hacktastic way of getting sysname from uname ()
 				if (uname (buf) == 0) {
-					string os = Marshal.PtrToStringAnsi (buf);
+					string? os = Marshal.PtrToStringAnsi (buf);
 					if (os == "Darwin")
 						return true;
 				}

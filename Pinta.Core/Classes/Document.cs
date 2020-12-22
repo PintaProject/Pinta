@@ -41,7 +41,7 @@ namespace Pinta.Core
 	// Workspace - Data about Pinta's state for the image
 	public class Document
 	{
-		private string filename;
+		private string filename = string.Empty;
 		private bool is_dirty;
 		private int layer_name_int = 2;
 		private int current_layer = -1;
@@ -52,7 +52,7 @@ namespace Pinta.Core
 		// The layer used for selections
 		private Layer selection_layer;
 
-		private DocumentSelection selection;
+		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
 		public DocumentSelection Selection
 		{
 			get { return selection; }
@@ -104,11 +104,11 @@ namespace Pinta.Core
 		public int CurrentUserLayerIndex {
 			get { return current_layer; }
 		}
-		
+
 		/// <summary>
 		/// Just the file name, like "dog.jpg".
 		/// </summary>
-		public string Filename { 
+		public string Filename {
 			get { return filename; }
 			set {
 				if (filename != value) {
@@ -146,7 +146,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Just the directory name, like "C:\MyPictures".
 		/// </summary>
-		public string Pathname { get; set; }
+		public string Pathname { get; set; } = string.Empty;
 
 		/// <summary>
 		/// Directory and file name, like "C:\MyPictures\dog.jpg".
@@ -158,7 +158,7 @@ namespace Pinta.Core
 					Pathname = string.Empty;
 					Filename = string.Empty;
 				} else {
-					Pathname = System.IO.Path.GetDirectoryName (value);
+					Pathname = System.IO.Path.GetDirectoryName (value) ?? string.Empty;
 					Filename = System.IO.Path.GetFileName (value);
 				}
 			}
@@ -792,7 +792,7 @@ namespace Pinta.Core
 			PintaCore.Tools.Commit ();
 
 			// Don't dispose this, as we're going to give it to the history
-			Gdk.Pixbuf cbImage = null;
+			Gdk.Pixbuf? cbImage = null;
 
 			if (cb.WaitIsImageAvailable ()) {
 				cbImage = cb.WaitForImage ();
@@ -925,7 +925,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		private void RaiseLayerPropertyChangedEvent (object sender, PropertyChangedEventArgs e)
+		private void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 		{
 			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
 		}
@@ -938,10 +938,10 @@ namespace Pinta.Core
 		#endregion
 
 		#region Public Events
-		public event EventHandler IsDirtyChanged;
-		public event EventHandler Renamed;
-		public event LayerCloneEvent LayerCloned;
-		public event EventHandler SelectionChanged;
+		public event EventHandler? IsDirtyChanged;
+		public event EventHandler? Renamed;
+		public event LayerCloneEvent? LayerCloned;
+		public event EventHandler? SelectionChanged;
 
 		#endregion
 	}

@@ -42,7 +42,7 @@ namespace Pinta.Core
 			Text = Translations.GetString ("Resize Image");
 		}
 
-		public DocumentSelection RestoreSelection;
+		public DocumentSelection? RestoreSelection;
 		
 		public override void Undo ()
 		{

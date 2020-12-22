@@ -242,8 +242,12 @@ namespace Pinta.Core
 		
 		public static string GetStaticName (Type type)
 		{
-			PropertyInfo pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
-			return (string)pi.GetValue (null, null);
+			var pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
+			
+			if (pi != null)
+				return (pi.GetValue (null, null) as string) ?? type.Name;
+
+			return type.Name;
 		}
 
 		public static byte FastScaleByteByByte (byte a, byte b)
@@ -255,7 +259,7 @@ namespace Pinta.Core
 
 		public static Gdk.Point[] GetLinePoints(Gdk.Point first, Gdk.Point second)
         {
-            Gdk.Point[] coords = null;
+            Gdk.Point[]? coords = null;
 
             int x1 = first.X;
             int y1 = first.Y;

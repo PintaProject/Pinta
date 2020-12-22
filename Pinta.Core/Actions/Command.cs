@@ -39,22 +39,22 @@ namespace Pinta.Core
         {
             get { return Action.Name; }
         }
-        public ActivatedHandler Activated;
+        public ActivatedHandler? Activated;
         public void Activate()
         {
             Action.Activate(null);
         }
 
         public string Label { get; private set; }
-        public string ShortLabel { get; set; }
-        public string Tooltip { get; private set; }
-        public string IconName { get; private set; }
+        public string? ShortLabel { get; set; }
+        public string? Tooltip { get; private set; }
+        public string? IconName { get; private set; }
         public string FullName { get { return string.Format("app.{0}", Name); } }
         public bool IsImportant { get; set; } = false;
 
         public bool Sensitive { get { return Action.Enabled; } set { Action.Enabled = value; } }
 
-        public Command(string name, string label, string tooltip, string icon_name, GLib.Variant state = null)
+        public Command(string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
         {
             Action = new SimpleAction(name, null, state);
             Action.Activated += (o, args) =>
@@ -75,7 +75,7 @@ namespace Pinta.Core
 
     public class ToggleCommand : Command
     {
-        public ToggleCommand(string name, string label, string tooltip, string stock_id)
+        public ToggleCommand(string name, string label, string? tooltip, string? stock_id)
             : base(name, label, tooltip, stock_id, new GLib.Variant(false))
         {
             Activated += (o, args) =>
@@ -93,6 +93,6 @@ namespace Pinta.Core
         }
 
         public delegate void ToggledHandler(bool value);
-        public ToggledHandler Toggled;
+        public ToggledHandler? Toggled;
     }
 }

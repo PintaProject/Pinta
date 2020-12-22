@@ -26,7 +26,7 @@ namespace Pinta.Core
         private TextPosition selectionStart;
 
         public TextAlignment Alignment { get; set; }
-        public string FontFace { get; private set; }
+        public string FontFace { get; private set; } = null!; // NRT - I don't know if this can be null or not.
         public int FontSize { get; private set; }
         public bool Bold { get; private set; }
         public bool Italic { get; private set; }
@@ -37,7 +37,7 @@ namespace Pinta.Core
 		public TextMode State;
         public Point Origin { get; set; }
 
-        public event EventHandler Modified;
+        public event EventHandler? Modified;
 
         public TextEngine ()
             : this (new List<string> () { string.Empty })
@@ -549,7 +549,7 @@ namespace Pinta.Core
 		
         private void OnModified ()
         {
-            EventHandler handler = Modified;
+            EventHandler? handler = Modified;
             if (handler != null)
                 handler (this, EventArgs.Empty);
         }

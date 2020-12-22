@@ -42,8 +42,8 @@ namespace Pinta.Core
 		public Command SaveAs { get; private set; }
 		public Command Print { get; private set; }
 		
-		public event EventHandler<ModifyCompressionEventArgs> ModifyCompression;
-		public event EventHandler<DocumentCancelEventArgs> SaveDocument;
+		public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
+		public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
 		
 		public FileActions ()
 		{

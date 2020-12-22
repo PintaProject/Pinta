@@ -34,7 +34,7 @@ namespace Pinta.Core
 {
 	public class ReEditableLayer
 	{
-		Layer actualLayer;
+		Layer? actualLayer;
 
 		//Whether or not the actualLayer has already been setup.
 		private bool isLayerSetup = false;
@@ -54,7 +54,7 @@ namespace Pinta.Core
 					SetupLayer();
 				}
 
-				return actualLayer;
+				return actualLayer!; // NRT - Set in SetupLayer
 			}
 
 			set

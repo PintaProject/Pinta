@@ -41,8 +41,8 @@ namespace Pinta.Core
 		}
 
 		public string Text {
-			get { return (Child as Label).Text; }
-			set { (Child as Label).Text = value; }
+			get { return ((Label)Child).Text; }
+			set { ((Label)Child).Text = value; }
 		}
 	}
 }

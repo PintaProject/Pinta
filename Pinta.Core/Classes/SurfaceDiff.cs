@@ -75,7 +75,7 @@ namespace Pinta.Core
 			this.pixels = pixels;
 		}
 
-		public static unsafe SurfaceDiff Create (ImageSurface original, ImageSurface updated_surf, bool force = false)
+		public static unsafe SurfaceDiff? Create (ImageSurface original, ImageSurface updated_surf, bool force = false)
 		{
 			if (original.Width != updated_surf.Width || original.Height != updated_surf.Height) {
 				// If the surface changed size, only throw an error if the user forced the use of a diff.

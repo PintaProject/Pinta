@@ -32,7 +32,7 @@ namespace Pinta.Core
 {
 	public class ToolBarFontComboBox : ToolBarComboBox
 	{
-		private CellRendererText cell_renderer;
+		private CellRendererText? cell_renderer;
 
 		public ToolBarFontComboBox (int width, int activeIndex, params string[] contents) : base (width, activeIndex, false, contents)
 		{
@@ -55,7 +55,7 @@ namespace Pinta.Core
 		{
 			string fontName = (string)model.GetValue (iter, 0);
 
-			CellRendererText cell = renderer as CellRendererText;
+			CellRendererText cell = (CellRendererText)renderer;
 
 			cell.Text = fontName;
 			cell.Font = string.Format ("{0} 10", fontName);

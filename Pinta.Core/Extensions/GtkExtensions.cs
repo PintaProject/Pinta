@@ -135,9 +135,13 @@ namespace Pinta.Core
 		/// <summary>
 		/// Update the image preview widget of a FileChooserDialog
 		/// </summary>
-		private static void OnUpdateImagePreview (object sender, EventArgs e)
+		private static void OnUpdateImagePreview (object? sender, EventArgs e)
 		{
-			FileChooserDialog dialog = (FileChooserDialog)sender;
+			FileChooserDialog? dialog = (FileChooserDialog?)sender;
+
+			if (dialog is null)
+				return;
+
 			Image preview = (Image)dialog.PreviewWidget;
 
 			if (preview.Pixbuf != null) {
@@ -145,10 +149,10 @@ namespace Pinta.Core
 			}
 
 			try {
-				Gdk.Pixbuf pixbuf = null;
+				Gdk.Pixbuf? pixbuf = null;
 				string filename = dialog.PreviewFilename;
 
-				IImageImporter importer = PintaCore.System.ImageFormats.GetImporterByFile (filename);
+				IImageImporter? importer = PintaCore.System.ImageFormats.GetImporterByFile (filename);
 
 				if (importer != null) {
 					pixbuf = importer.LoadThumbnail (filename, MaxPreviewWidth, MaxPreviewHeight, dialog);
@@ -182,13 +186,13 @@ namespace Pinta.Core
 
         public static int GetItemCount (this ComboBox combo)
         {
-            return (combo.Model as ListStore).IterNChildren ();
+            return ((ListStore)combo.Model).IterNChildren ();
         }
 
         public static int FindValue<T> (this ComboBox combo, T value)
         {
             for (var i = 0; i < combo.GetItemCount (); i++)
-                if (combo.GetValueAt<T> (i).Equals (value))
+                if (combo.GetValueAt<T> (i)?.Equals (value) == true)
                     return i;
 
             return -1;
@@ -199,7 +203,7 @@ namespace Pinta.Core
             TreeIter iter;
             
             // Set the tree iter to the correct row
-            (combo.Model as ListStore).IterNthChild (out iter, index);
+            ((ListStore)combo.Model).IterNthChild (out iter, index);
 
             // Retrieve the value of the first column at that row
             return (T)combo.Model.GetValue (iter, 0);
@@ -210,7 +214,7 @@ namespace Pinta.Core
             TreeIter iter;
 
             // Set the tree iter to the correct row
-            (combo.Model as ListStore).IterNthChild (out iter, index);
+            ((ListStore)combo.Model).IterNthChild (out iter, index);
 
             // Set the value of the first column at that row
             combo.Model.SetValue (iter, 0, value);

@@ -49,7 +49,7 @@ namespace Pinta.Core
 			get { return historyPointer; }
 		}
 		
-		public BaseHistoryItem Current {
+		public BaseHistoryItem? Current {
 			get { 
 				if (historyPointer > -1 && historyPointer < history.Count)
 					return history[historyPointer]; 
