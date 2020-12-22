@@ -33,8 +33,8 @@ namespace Pinta.Core
 {
     public class SelectionModeHandler
     {
-        private ToolBarLabel selection_label;
-        private ToolBarComboBox selection_combo_box;
+        private ToolBarLabel? selection_label;
+        private ToolBarComboBox? selection_combo_box;
 
         private CombineMode selected_mode;
         private Dictionary<string, CombineMode> combine_modes;

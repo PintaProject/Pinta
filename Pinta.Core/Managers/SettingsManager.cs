@@ -36,7 +36,7 @@ namespace Pinta.Core
 {
 	public class SettingsManager
 	{
-		private Dictionary<string, object> settings;
+		private Dictionary<string, object> settings = null!; // NRT - Set by LoadSettings in constructor
 
         public string LayoutFile { get { return "layouts.xml"; } }
         public string LayoutFilePath { get { return Path.Combine (GetUserSettingsDirectory (), LayoutFile); } }
@@ -80,9 +80,11 @@ namespace Pinta.Core
 				
 			XmlDocument doc = new XmlDocument ();
 			doc.Load (filename);
-			
+
+			// NRT - Assumes file is formatted valid, should rewrite more defensively.
+
 			// Kinda cheating for now because I know there is only a few things stored in here
-			foreach (XmlElement setting in doc.DocumentElement.ChildNodes) {
+			foreach (XmlElement setting in doc.DocumentElement!.ChildNodes) {
 				switch (setting.GetAttribute ("type")) {
 					case "System.Int32":
 						properties[setting.GetAttribute ("name")] = int.Parse (setting.InnerText);
@@ -102,7 +104,7 @@ namespace Pinta.Core
 
 		private static void Serialize (string filename, Dictionary<string, object> settings)
 		{
-			string path = Path.GetDirectoryName (filename);
+			string path = Path.GetDirectoryName (filename)!; // NRT - We build the filename so we know it has a directory
 
 			if (!Directory.Exists (path))
 				Directory.CreateDirectory (path);

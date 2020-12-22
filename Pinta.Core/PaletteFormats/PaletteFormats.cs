@@ -49,7 +49,7 @@ namespace Pinta.Core
 
 		public IEnumerable<PaletteDescriptor> Formats { get { return formats; } }
 
-		public IPaletteLoader GetLoaderByFilename (string fileName)
+		public IPaletteLoader? GetLoaderByFilename (string fileName)
 		{
 			string extension = System.IO.Path.GetExtension (fileName);
 			extension = NormalizeExtension (extension);

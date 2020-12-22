@@ -33,8 +33,8 @@ namespace Pinta.Core
 	{
 		private List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
 
-		public event EventHandler<BrushEventArgs> BrushAdded;
-		public event EventHandler<BrushEventArgs> BrushRemoved;
+		public event EventHandler<BrushEventArgs>? BrushAdded;
+		public event EventHandler<BrushEventArgs>? BrushRemoved;
 
 		/// <summary>
 		/// Register a new brush.
@@ -91,10 +91,10 @@ namespace Pinta.Core
 
 		class BrushSorter : Comparer<BasePaintBrush>
 		{
-			public override int Compare (BasePaintBrush x, BasePaintBrush y)
+			public override int Compare (BasePaintBrush? x, BasePaintBrush? y)
 			{
-				var xstr = x.Priority == 0 ? x.Name : x.Priority.ToString ();
-				var ystr = y.Priority == 0 ? y.Name : y.Priority.ToString ();
+				var xstr = x is BasePaintBrush x2 && x2.Priority != 0 ? x2.Priority.ToString () : x?.Name;
+				var ystr = y is BasePaintBrush y2 && y2.Priority != 0 ? y2.Priority.ToString () : y?.Name;
 
 				return string.Compare (xstr, ystr);
 			}

@@ -37,9 +37,9 @@ namespace Pinta.Core
 		// - Subsequent moves only move the selection
 		//   around the temporary layer
 		private Document doc;
-		private DocumentSelection old_selection;
+		private DocumentSelection? old_selection;
 		private readonly Matrix old_transform = new Matrix();
-		private ImageSurface old_surface;
+		private ImageSurface? old_surface;
 		private int layer_index;
 		private bool lifted;		// Whether this item has lift
 		private bool is_lifted;		// Track state of undo/redo lift
@@ -61,7 +61,7 @@ namespace Pinta.Core
 
 		public override void Dispose ()
 		{
-            old_selection.Dispose ();
+            old_selection?.Dispose ();
 
 			if (old_surface != null)
 				(old_surface as IDisposable).Dispose ();
@@ -70,7 +70,7 @@ namespace Pinta.Core
 		private void Swap ()
 		{
 			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection;
-			PintaCore.Workspace.ActiveDocument.Selection = old_selection;
+			PintaCore.Workspace.ActiveDocument.Selection = old_selection!; // NRT - Set in TakeSnapshot
 			old_selection = swap_selection;
 
 			Matrix swap_transform = new Matrix();
@@ -83,7 +83,7 @@ namespace Pinta.Core
 				ImageSurface surf = PintaCore.Layers[layer_index].Surface;
 
 				// Undo to the "old" surface
-				PintaCore.Layers[layer_index].Surface = old_surface;
+				PintaCore.Layers[layer_index].Surface = old_surface!; // NRT - Set in TakeSnapshot
 
 				// Store the original surface for Redo
 				old_surface = surf;

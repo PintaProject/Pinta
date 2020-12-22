@@ -36,7 +36,7 @@ namespace Pinta.Core
 {
 	public sealed class Palette
 	{
-		public event EventHandler PaletteChanged;
+		public event EventHandler? PaletteChanged;
 	
 		private List<Color> colors;
 

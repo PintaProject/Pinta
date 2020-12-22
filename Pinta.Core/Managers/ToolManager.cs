@@ -41,8 +41,8 @@ namespace Pinta.Core
 		private Gdk.Key LastUsedKey;
 		private int PressedShortcutCounter;
 
-		public event EventHandler<ToolEventArgs> ToolAdded;
-		public event EventHandler<ToolEventArgs> ToolRemoved;
+		public event EventHandler<ToolEventArgs>? ToolAdded;
+		public event EventHandler<ToolEventArgs>? ToolRemoved;
 
 		public ToolManager ()
 		{
@@ -94,11 +94,17 @@ namespace Pinta.Core
 			}
 		}
 
-		void HandlePbToolItemClicked (object sender, EventArgs e)
+		void HandlePbToolItemClicked (object? sender, EventArgs e)
 		{
-			ToggleToolButton tb = (ToggleToolButton)sender;
+			ToggleToolButton? tb = (ToggleToolButton?)sender;
 
-			BaseTool t = FindTool (tb.Label);
+			if (tb is null)
+				return;
+
+			BaseTool? t = FindTool (tb.Label);
+
+			if (t is null)
+				return;
 
 			// Don't let the user unselect the current tool	
 			if (CurrentTool != null && t.Name == CurrentTool.Name) {
@@ -110,7 +116,7 @@ namespace Pinta.Core
 			SetCurrentTool(t);
 		}
 
-		private BaseTool FindTool (string name)
+		private BaseTool? FindTool (string name)
 		{
 			name = name.ToLowerInvariant ();
 			
@@ -171,7 +177,7 @@ namespace Pinta.Core
 
 		public bool SetCurrentTool (string tool)
 		{
-			BaseTool t = FindTool (tool);
+			BaseTool? t = FindTool (tool);
 			
 			if (t != null) {
 				SetCurrentTool(t);
@@ -183,13 +189,13 @@ namespace Pinta.Core
 		
 		public void SetCurrentTool (Gdk.Key shortcut)
 		{
-			BaseTool tool = FindNextTool (shortcut);
+			BaseTool? tool = FindNextTool (shortcut);
 			
 			if (tool != null)
 				SetCurrentTool(tool);
 		}
 
-		private BaseTool FindNextTool (Gdk.Key shortcut)
+		private BaseTool? FindNextTool (Gdk.Key shortcut)
 		{
 			shortcut = shortcut.ToUpper();
 
@@ -244,9 +250,10 @@ namespace Pinta.Core
 
 		class ToolSorter : Comparer<BaseTool>
 		{
-			public override int Compare (BaseTool x, BaseTool y)
+			public override int Compare (BaseTool? x, BaseTool? y)
 			{
-				return x.Priority - y.Priority;
+
+				return (x?.Priority ?? 0) - (y?.Priority ?? 0);
 			}
 		}
 	}

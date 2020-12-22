@@ -35,7 +35,7 @@ namespace Pinta.Core
 {
     public class TextLayout
     {
-        private TextEngine engine;
+        private TextEngine engine = null!; // NRT - Not sure how this is set, but all callers assume it is not-null
 
         public TextEngine Engine {
             get { return engine; }
@@ -125,9 +125,9 @@ namespace Pinta.Core
 			return new Point (x, y);
 		}
 
-        private void OnEngineModified (object sender, EventArgs e)
+        private void OnEngineModified (object? sender, EventArgs e)
         {
-			string markup = SecurityElement.Escape (engine.ToString ());
+			string? markup = SecurityElement.Escape (engine.ToString ());
 
 			if (engine.Underline)
 				markup = string.Format ("<u>{0}</u>", markup);

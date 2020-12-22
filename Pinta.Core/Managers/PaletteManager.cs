@@ -36,7 +36,7 @@ namespace Pinta.Core
 	{
 		private Color primary;
 		private Color secondary;
-		private Palette palette;
+		private Palette? palette;
 
 		private const int MAX_RECENT_COLORS = 10;
 		private readonly List<Color> recently_used = new List<Color> (MAX_RECENT_COLORS);
@@ -175,9 +175,9 @@ namespace Pinta.Core
 		#endregion
 		
 		#region Events
-		public event EventHandler PrimaryColorChanged;
-		public event EventHandler SecondaryColorChanged;
-		public event EventHandler RecentColorsChanged;
+		public event EventHandler? PrimaryColorChanged;
+		public event EventHandler? SecondaryColorChanged;
+		public event EventHandler? RecentColorsChanged;
 		#endregion
 	}
 }

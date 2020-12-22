@@ -3,6 +3,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Pinta.Resources</RootNamespace>
     <AssemblyName>Pinta.Resources</AssemblyName>
+    <Nullable>enable</Nullable>
 
     <Version>1.8.0.0</Version>
     <Authors>PintaProject</Authors>

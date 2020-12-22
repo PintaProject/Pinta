@@ -164,7 +164,7 @@ namespace Pinta.Core
         /// <summary>
         /// Compares two ColorBgra instance to determine if they are equal.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             
             if (obj != null && obj is ColorBgra && ((ColorBgra)obj).Bgra == this.Bgra)

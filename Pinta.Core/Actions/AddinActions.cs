@@ -30,7 +30,7 @@ namespace Pinta.Core
 {
 	public class AddinActions
 	{
-		private GLib.Menu addins_menu;
+		private GLib.Menu addins_menu = null!; // NRT - Set by RegisterActions
 
 		public Command AddinManager { get; private set; }
 

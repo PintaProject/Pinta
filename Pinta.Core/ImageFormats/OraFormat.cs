@@ -47,8 +47,10 @@ namespace Pinta.Core
 			ZipFile file = new ZipFile (fileName);
 			XmlDocument stackXml = new XmlDocument ();
 			stackXml.Load (file.GetInputStream (file.GetEntry ("stack.xml")));
-			
-			XmlElement imageElement = stackXml.DocumentElement;
+
+			// NRT - This makes a lot of assumptions that the file will be perfectly
+			// valid that we need to guard against.
+			XmlElement imageElement = stackXml.DocumentElement!;
 			int width = int.Parse (imageElement.GetAttribute ("w"));
 			int height = int.Parse (imageElement.GetAttribute ("h"));
 
@@ -57,7 +59,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.CreateAndActivateDocument (fileName, imagesize);
 			doc.HasFile = true;
 			
-			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0];
+			XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 			XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
 			
 			if (layerElements.Count == 0)
@@ -67,7 +69,7 @@ namespace Pinta.Core
 			doc.Workspace.CanvasSize = imagesize;
 
 			for (int i = 0; i < layerElements.Count; i++) {
-				XmlElement layerElement = (XmlElement) layerElements[i];
+				XmlElement layerElement = (XmlElement) layerElements[i]!;
 				int x = int.Parse (GetAttribute (layerElement, "x", "0"));
 				int y = int.Parse (GetAttribute (layerElement, "y", "0"));
 				string name = GetAttribute (layerElement, "name", string.Format ("Layer {0}", i));

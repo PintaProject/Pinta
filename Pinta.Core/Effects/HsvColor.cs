@@ -39,9 +39,9 @@ namespace Pinta.Core
             return !(lhs == rhs);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return this == (HsvColor)obj;
+            return obj is HsvColor hsv && this == hsv;
         }
 
         public override int GetHashCode()

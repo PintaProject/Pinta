@@ -44,19 +44,19 @@ namespace Pinta.Core
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
 
 	    
-		protected ToggleToolButton tool_item;
-		protected ToolItem tool_label;
-		protected ToolItem tool_image;
-		protected ToolItem tool_sep;
-		protected ToolBarDropDownButton antialiasing_button;
-		private ToolBarItem aaOn, aaOff;
-		protected ToolBarDropDownButton alphablending_button;
-		private ToolBarItem abOn, abOff;
-		public event MouseHandler MouseMoved;
-		public event MouseHandler MousePressed;
-		public event MouseHandler MouseReleased;
+		protected ToggleToolButton? tool_item;
+		protected ToolItem? tool_label;
+		protected ToolItem? tool_image;
+		protected ToolItem? tool_sep;
+		protected ToolBarDropDownButton? antialiasing_button;
+		private ToolBarItem? aaOn, aaOff;
+		protected ToolBarDropDownButton? alphablending_button;
+		private ToolBarItem? abOn, abOff;
+		public event MouseHandler? MouseMoved;
+		public event MouseHandler? MousePressed;
+		public event MouseHandler? MouseReleased;
 
-        public Cursor CurrentCursor { get; private set; }
+        public Cursor? CurrentCursor { get; private set; }
 
 		protected BaseTool ()
 		{
@@ -71,7 +71,7 @@ namespace Pinta.Core
 		public virtual string StatusBarText { get { return string.Empty; } }
 		public virtual ToggleToolButton ToolItem { get { if (tool_item == null) tool_item = CreateToolButton (); return tool_item; } }
 		public virtual bool Enabled { get { return true; } }
-		public virtual Gdk.Cursor DefaultCursor { get { return null; } }
+		public virtual Gdk.Cursor? DefaultCursor { get { return null; } }
 		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 
 		//Whether or not the tool is an editable ShapeTool.
@@ -83,7 +83,7 @@ namespace Pinta.Core
 			{
                 return (antialiasing_button != null) &&
                         ShowAntialiasingButton &&
-                        (bool)antialiasing_button.SelectedItem.Tag;
+			antialiasing_button.SelectedItem is ToolBarItem tbi && tbi.Tag is bool toggle && toggle == true;
 			}
 
 			set
@@ -101,7 +101,7 @@ namespace Pinta.Core
 			{
 				return alphablending_button != null &&
 					   ShowAlphaBlendingButton &&
-					   (bool)alphablending_button.SelectedItem.Tag;
+					   alphablending_button.SelectedItem is ToolBarItem tbi && tbi.Tag is bool toggle && toggle == true;
 			}
 			set
 			{
@@ -325,7 +325,7 @@ namespace Pinta.Core
 			return tool_item;
 		}
 		
-		public void SetCursor (Gdk.Cursor cursor)
+		public void SetCursor (Gdk.Cursor? cursor)
 		{
             CurrentCursor = cursor;
 
@@ -451,7 +451,7 @@ namespace Pinta.Core
 			tb.AppendItem (antialiasing_button);
 		}
 
-		private void Workspace_ActiveDocumentChanged (object sender, EventArgs e)
+		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
 		{
             if (PintaCore.Tools.CurrentTool == this)
 			    SetCursor (DefaultCursor);

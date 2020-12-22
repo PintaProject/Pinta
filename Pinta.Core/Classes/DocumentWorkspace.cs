@@ -47,12 +47,12 @@ namespace Pinta.Core
 		}
 
         #region Public Events
-        public event EventHandler<CanvasInvalidatedEventArgs> CanvasInvalidated;
-        public event EventHandler CanvasSizeChanged;
-        #endregion
+        public event EventHandler<CanvasInvalidatedEventArgs>? CanvasInvalidated;
+        public event EventHandler? CanvasSizeChanged;
+		#endregion
 
 		#region Public Properties
-        public Gtk.DrawingArea Canvas { get; set; }
+		public Gtk.DrawingArea Canvas { get; set; } = null!; // NRT - This is set soon after creation
 
 		public bool CanvasFitsInWindow {
 			get {

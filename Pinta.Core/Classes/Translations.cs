@@ -30,7 +30,7 @@ namespace Pinta.Core
 {
     public static class Translations
     {
-        private static ICatalog catalog;
+        private static ICatalog catalog = null!; // NRT - Always set by Init
 
         public static void Init(string domain, string locale_dir)
         {

@@ -34,7 +34,7 @@ namespace Pinta.Core
 {
 	public class DocumentSelection : IDisposable
 	{
-		private Path selection_path;
+		private Path? selection_path;
 
 		public List<List<IntPoint>> SelectionPolygons = new List<List<IntPoint>>();
 		public Clipper SelectionClipper = new Clipper();
@@ -70,7 +70,7 @@ namespace Pinta.Core
 		    }
 		}
 
-	    public event EventHandler SelectionModified;
+	    public event EventHandler? SelectionModified;
 
         /// <summary>
         /// Indicate that the selection has changed.

@@ -46,13 +46,13 @@ namespace Pinta.Core
 		/// The importer for this file format. This may be null if only exporting
 		/// is supported for this format.
 		/// </summary>
-		public IImageImporter Importer { get; private set; }
+		public IImageImporter? Importer { get; private set; }
 
 		/// <summary>
 		/// The exporter for this file format. This may be null if only importing
 		/// is supported for this format.
 		/// </summary>
-		public IImageExporter Exporter { get; private set; }
+		public IImageExporter? Exporter { get; private set; }
 
 		/// <summary>
 		/// A file filter for use in the file dialog.
@@ -67,7 +67,7 @@ namespace Pinta.Core
 		/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 		/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
 		public FormatDescriptor (string displayPrefix, string[] extensions,
-		                         IImageImporter importer, IImageExporter exporter)
+		                         IImageImporter? importer, IImageExporter? exporter)
 		{
 			if (extensions == null || (importer == null && exporter == null)) {
 				throw new ArgumentNullException ("Format descriptor is initialized incorrectly");

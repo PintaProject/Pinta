@@ -52,7 +52,7 @@ namespace Pinta.Core
 		public Command ResetPalette { get; private set; }
 		public Command ResizePalette { get; private set; }
 		
-		private string lastPaletteDir = null;
+		private string? lastPaletteDir = null;
 		
 		public EditActions ()
 		{
@@ -406,7 +406,7 @@ namespace Pinta.Core
 
 				if (response == (int)Gtk.ResponseType.Ok)
 				{
-					var format = PintaCore.System.PaletteFormats.Formats.FirstOrDefault(f => f.Filter == fcd.Filter);
+					var format = PintaCore.System.PaletteFormats.Formats.First(f => f.Filter == fcd.Filter);
 
 					string finalFileName = fcd.Filename;
 
@@ -443,7 +443,7 @@ namespace Pinta.Core
 			doc.Workspace.Invalidate ();
 		}
 
-		private void WorkspaceActiveDocumentChanged (object sender, EventArgs e)
+		private void WorkspaceActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			if (!PintaCore.Workspace.HasOpenDocuments) {
 				Undo.Sensitive = false;

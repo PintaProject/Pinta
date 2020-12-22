@@ -54,7 +54,7 @@ namespace Pinta.Core
 			return families.Select (f => f.Name).ToList ();
 		}
 
-		public FontFamily GetFamily (string fontname)
+		public FontFamily? GetFamily (string fontname)
 		{
 			return families.Find (f => f.Name == fontname);
 		}

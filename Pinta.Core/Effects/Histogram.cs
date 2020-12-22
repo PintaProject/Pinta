@@ -65,7 +65,7 @@ namespace Pinta.Core
             }
         }
 
-        public event EventHandler HistogramChanged;
+        public event EventHandler? HistogramChanged;
         protected void OnHistogramUpdated()
         {
             if (HistogramChanged != null)
@@ -74,7 +74,7 @@ namespace Pinta.Core
             }
         }
 
-        protected ColorBgra[] visualColors;
+        protected ColorBgra[] visualColors = null!; // NRT - Set by constructor of only subclass
         public ColorBgra GetVisualColor(int channel)
         {
             return visualColors[channel];

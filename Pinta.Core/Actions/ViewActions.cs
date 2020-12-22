@@ -196,7 +196,7 @@ namespace Pinta.Core
 			};
 		}
 
-		private string temp_zoom;
+		private string? temp_zoom;
 		private bool suspend_zoom_change;
 		
 		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
@@ -307,7 +307,7 @@ namespace Pinta.Core
 			}
 		}
 
-		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object sender, EventArgs e)
+		private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object? sender, EventArgs e)
 		{
 			if (suspend_zoom_change)
 				return;

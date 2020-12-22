@@ -31,7 +31,7 @@ namespace Pinta.Core
 	public class AddLayerHistoryItem : BaseHistoryItem
 	{
 		private int layer_index;
-		private UserLayer layer;
+		private UserLayer? layer;
 
 		public AddLayerHistoryItem (string icon, string text, int newLayerIndex) : base (icon, text)
 		{
@@ -48,10 +48,10 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
-			PintaCore.Layers.Insert (layer, layer_index);
+			PintaCore.Layers.Insert (layer!, layer_index); // NRT - layer is set by Undo()
 
 			// Make new layer the current layer
-			PintaCore.Layers.SetCurrentLayer (layer);
+			PintaCore.Layers.SetCurrentLayer (layer!);
 
 			layer = null;
 		}

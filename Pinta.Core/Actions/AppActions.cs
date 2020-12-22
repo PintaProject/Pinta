@@ -37,7 +37,7 @@ namespace Pinta.Core
 		public Command About { get; private set; }
 		public Command Exit { get; private set; }
 		
-		public event EventHandler BeforeQuit;
+		public event EventHandler? BeforeQuit;
 		
 		public AppActions ()
 		{

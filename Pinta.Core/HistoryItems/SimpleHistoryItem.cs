@@ -31,8 +31,8 @@ namespace Pinta.Core
 {
 	public class SimpleHistoryItem : BaseHistoryItem
 	{
-		private SurfaceDiff surface_diff;
-		ImageSurface old_surface;
+		private SurfaceDiff? surface_diff;
+		ImageSurface? old_surface;
 		int layer_index;
 
 		public SimpleHistoryItem (string icon, string text, ImageSurface oldSurface, int layerIndex) : base (icon, text)
@@ -71,7 +71,7 @@ namespace Pinta.Core
 				PintaCore.Workspace.Invalidate (surface_diff.GetBounds ());
 			} else {
 				// Undo to the "old" surface
-				PintaCore.Layers[layer_index].Surface = old_surface;
+				PintaCore.Layers[layer_index].Surface = old_surface!; // NRT - Will be not-null if surface_diff is null
 
 				// Store the original surface for Redo
 				old_surface = surf;

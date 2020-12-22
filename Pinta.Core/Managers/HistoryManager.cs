@@ -43,7 +43,7 @@ namespace Pinta.Core
 			get { return PintaCore.Workspace.ActiveWorkspace.History.Pointer; }
 		}
 		
-		public BaseHistoryItem Current {
+		public BaseHistoryItem? Current {
 			get { return PintaCore.Workspace.ActiveWorkspace.History.Current; }
 		}
 		
@@ -94,10 +94,10 @@ namespace Pinta.Core
 		#endregion
 		 
 		#region Events
-		public event EventHandler<HistoryItemAddedEventArgs> HistoryItemAdded;
-		public event EventHandler<HistoryItemRemovedEventArgs> HistoryItemRemoved;
-		public event EventHandler ActionUndone;
-		public event EventHandler ActionRedone;
+		public event EventHandler<HistoryItemAddedEventArgs>? HistoryItemAdded;
+		public event EventHandler<HistoryItemRemovedEventArgs>? HistoryItemRemoved;
+		public event EventHandler? ActionUndone;
+		public event EventHandler? ActionRedone;
 		#endregion
 	}
 }

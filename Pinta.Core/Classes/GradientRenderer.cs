@@ -87,9 +87,6 @@ namespace Pinta.Core
 					endAlpha = this.endColor.A;
 				}
 				
-				this.lerpAlphas = new byte[256];
-				this.lerpColors = new ColorBgra[256];
-				
 				for (int i = 0; i < 256; ++i) {
 					byte a = (byte)i;
 					this.lerpColors[a] = ColorBgra.Blend (this.startColor, this.endColor, a);
@@ -224,6 +221,8 @@ namespace Pinta.Core
 		{
 			this.normalBlendOp = normalBlendOp;
 			this.alphaOnly = alphaOnly;
+			this.lerpAlphas = new byte[256];
+			this.lerpColors = new ColorBgra[256];
 		}
 	}
 }

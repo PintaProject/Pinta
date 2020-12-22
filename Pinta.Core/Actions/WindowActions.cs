@@ -33,7 +33,7 @@ namespace Pinta.Core
 {
 	public class WindowActions
 	{
-		private GLib.Menu doc_section;
+		private GLib.Menu doc_section = null!; // NRT - Set in RegisterActions
 		private static readonly string doc_action_id = "active_document";
 		private GLib.SimpleAction active_doc_action;
 

@@ -42,10 +42,6 @@ namespace Pinta.Core
 
 		public PaletteDescriptor (string displayPrefix, string[] extensions, IPaletteLoader loader, IPaletteSaver saver)
 		{
-			if (extensions == null || (loader == null && saver == null)) {
-				throw new ArgumentNullException ("Palette descriptor is initialized incorrectly");
-			}
-
 			this.Extensions = extensions;
 			this.Loader = loader;
 			this.Saver = saver;
