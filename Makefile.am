@@ -100,16 +100,6 @@ releasetar: $(BINFILES)
 releasezip: $(BINFILES)
 	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
 
-releaseosx: build $(BINFILES)
-	mkdir -p $(MAC_APP_DIR)/Contents/{MacOS,Resources}
-	cp -r $(BINDIR)/locale $(BINFILES) $(DEBUG_FILES) $(BINDIR)/ICSharpCode.SharpZipLib.dll osx/pinta $(MAC_APP_BIN_DIR)
-	chmod +x $(MAC_APP_BIN_DIR)/pinta
-	cp osx/Info.plist $(MAC_APP_DIR)/Contents
-	cp osx/pinta.icns $(MAC_APP_DIR)/Contents/Resources
-	touch $(MAC_APP_DIR)
-	zip -r9uq $(MAC_APP_DIR).zip $(MAC_APP_DIR)
-	rm -rf $(MAC_APP_DIR)
-
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in

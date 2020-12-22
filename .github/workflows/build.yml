@@ -48,13 +48,13 @@ jobs:
       run: dotnet test Pinta.sln --configuration Release
     - name: Build Installer
       run: |
-        cd osx
+        cd installer/macos
         ./build_installer.sh
     - name: Upload Installer
       uses: actions/upload-artifact@v2
       with:
         name: "Pinta.app.zip"
-        path: osx/Pinta.app.zip
+        path: installer/macos/Pinta.app.zip
         if-no-files-found: error
 
   build-windows:
