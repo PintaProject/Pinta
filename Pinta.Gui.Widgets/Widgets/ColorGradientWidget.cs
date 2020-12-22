@@ -26,6 +26,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -42,9 +43,9 @@ namespace Pinta.Gui.Widgets
 		private const double xpad = 0.15;
 		//gradient vertical padding
 		private const double ypad = 0.03;
-
-		private double[] vals;
-
+		
+		private double[] vals = null!; // NRT - Set via Count setter
+		
 		private Rectangle GradientRectangle {
 			get {
 				var rect = new Rectangle (0, 0, AllocatedWidth, AllocatedHeight);
@@ -170,8 +171,13 @@ namespace Pinta.Gui.Widgets
 				return ValueIndex;
 			}
 		}
+<<<<<<< HEAD
 
 		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
+=======
+		
+		private void HandleMotionNotifyEvent (object? o, Gtk.MotionNotifyEventArgs args)
+>>>>>>> Enable NRT for Pinta.Gui.Widgets.
 		{
 			int px, py;
 			Gdk.ModifierType mask;
@@ -193,17 +199,28 @@ namespace Pinta.Gui.Widgets
 			if (index != -1)
 				Window.Invalidate ();
 		}
+<<<<<<< HEAD
 
 		private void HandleLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
+=======
+		
+		private void HandleLeaveNotifyEvent (object? o, Gtk.LeaveNotifyEventArgs args)
+>>>>>>> Enable NRT for Pinta.Gui.Widgets.
 		{
 			if (args.Event.State != Gdk.ModifierType.Button1Mask)
 				ValueIndex = -1;
 
 			Window.Invalidate ();
 		}
+<<<<<<< HEAD
 
 
 		void HandleButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
+=======
+		
+	
+		void HandleButtonPressEvent (object? o, Gtk.ButtonPressEventArgs args)
+>>>>>>> Enable NRT for Pinta.Gui.Widgets.
 		{
 			int px, py;
 			Gdk.ModifierType mask;
@@ -214,8 +231,13 @@ namespace Pinta.Gui.Widgets
 			if (index != -1)
 				ValueIndex = index;
 		}
+<<<<<<< HEAD
 
 		void HandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
+=======
+	
+		void HandleButtonReleaseEvent (object? o, Gtk.ButtonReleaseEventArgs args)
+>>>>>>> Enable NRT for Pinta.Gui.Widgets.
 		{
 			ValueIndex = -1;
 		}
@@ -278,6 +300,7 @@ namespace Pinta.Gui.Widgets
 		#region Protected Methods
 		protected void OnValueChanged (int index)
 		{
+<<<<<<< HEAD
 			if (ValueChanged != null) {
 				ValueChanged (this, new IndexEventArgs (index));
 			}
@@ -299,4 +322,28 @@ namespace Pinta.Gui.Widgets
 			Add (eventbox);
 		}
 	}
+=======
+            if (ValueChanged != null) {
+                ValueChanged(this, new IndexEventArgs (index));
+            }
+        }
+#endregion
+		
+#region Public Events
+		public event IndexEventHandler? ValueChanged;
+#endregion
+
+	[MemberNotNull(nameof(eventbox))]
+        private void Build ()
+        {
+            CanFocus = true;
+            Events = (Gdk.EventMask)1534;
+
+            eventbox = new EventBox ();
+            eventbox.Events = (Gdk.EventMask)790;
+            eventbox.VisibleWindow = false;
+            Add (eventbox);
+        }
+    }
+>>>>>>> Enable NRT for Pinta.Gui.Widgets.
 }

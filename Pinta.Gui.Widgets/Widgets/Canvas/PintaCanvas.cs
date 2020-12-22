@@ -34,7 +34,7 @@ namespace Pinta.Gui.Widgets
 	[System.ComponentModel.ToolboxItem (true)]
 	public class PintaCanvas : DrawingArea
 	{
-		Cairo.ImageSurface canvas;
+		Cairo.ImageSurface? canvas;
 		CanvasRenderer cr;
 
 		private Document document;
@@ -50,12 +50,12 @@ namespace Pinta.Gui.Widgets
 			cr = new CanvasRenderer (true);
 
 			// Keep the widget the same size as the canvas
-			document.Workspace.CanvasSizeChanged += delegate (object sender, EventArgs e) {
+			document.Workspace.CanvasSizeChanged += delegate (object? sender, EventArgs e) {
 				SetRequisition (document.Workspace.CanvasSize);
 			};
 
 			// Update the canvas when the image changes
-			document.Workspace.CanvasInvalidated += delegate (object sender, CanvasInvalidatedEventArgs e) {
+			document.Workspace.CanvasInvalidated += delegate (object? sender, CanvasInvalidatedEventArgs e) {
 				// If GTK+ hasn't created the canvas window yet, no need to invalidate it
 				if (Window == null)
 					return;

@@ -42,7 +42,7 @@ namespace Pinta.Gui.Widgets
 
 		// For the active layer, we also draw the selection layer on top of it,
 		// so we can't directly use that layer's surface.
-		private Cairo.ImageSurface active_layer_surface;
+		private Cairo.ImageSurface? active_layer_surface;
 		private CanvasRenderer canvas_renderer = new CanvasRenderer (false);
 				
 		private const int store_index_thumbnail = 0;
@@ -122,9 +122,9 @@ namespace Pinta.Gui.Widgets
 			ShowAll ();
 		}
 
-		private UserLayer GetSelectedLayerInTreeView()
+		private UserLayer? GetSelectedLayerInTreeView()
 		{
-			UserLayer layer = null;
+			UserLayer? layer = null;
 			TreeIter iter;
 			
 			var paths = tree.Selection.GetSelectedRows ();
@@ -142,14 +142,14 @@ namespace Pinta.Gui.Widgets
 			tree.Selection.SelectPath (path);
 		}
 		
-		private void HandleLayerSelected (object o, EventArgs e)
+		private void HandleLayerSelected (object? o, EventArgs e)
 		{			
 			var layer = GetSelectedLayerInTreeView ();			
-			if (PintaCore.Layers.CurrentLayer != layer)
-				PintaCore.Layers.SetCurrentLayer (GetSelectedLayerInTreeView ());
+			if (PintaCore.Layers.CurrentLayer != layer && layer != null)
+				PintaCore.Layers.SetCurrentLayer (layer);
 		}
 		
-		private void LayerVisibilityToggled (object o, ToggledArgs args)
+		private void LayerVisibilityToggled (object? o, ToggledArgs args)
 		{
 			TreeIter iter;		
 			if (store.GetIter (out iter, new TreePath (args.Path))) {
@@ -161,25 +161,25 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 		
-		private void HandleHistoryItemAdded (object sender, EventArgs e)
+		private void HandleHistoryItemAdded (object? sender, EventArgs e)
 		{	
 			// TODO: Handle this more efficiently.
 			Reset ();
 		}
 		
-		private void HandleSelectedLayerChanged (object sender, EventArgs e)
+		private void HandleSelectedLayerChanged (object? sender, EventArgs e)
 		{
 			// TODO: Handle this more efficiently.
 			Reset ();
 		}		
 
-		void HandlePintaCoreLayersLayerPropertyChanged (object sender, PropertyChangedEventArgs e)
+		void HandlePintaCoreLayersLayerPropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			// TODO: Handle this more efficiently.
 			Reset ();
 		}		
 		
-		private void HandleLayerAddedOrRemoved(object sender, EventArgs e)
+		private void HandleLayerAddedOrRemoved(object? sender, EventArgs e)
 		{
 			// TODO: Handle this more efficiently.
 			Reset ();
@@ -188,7 +188,7 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Workspace.Invalidate ();
 		}
 		
-		private void HandleRowActivated(object o, RowActivatedArgs args)
+		private void HandleRowActivated(object? o, RowActivatedArgs args)
 		{
 			// The double click to activate will have already selected the layer.
 			PintaCore.Actions.Layers.Properties.Activate ();
@@ -232,8 +232,7 @@ namespace Pinta.Gui.Widgets
 
 		private void SetLayerVisibility(UserLayer layer, bool visibility)
 		{
-			if (layer != null)
-				layer.Hidden = !visibility;
+			layer.Hidden = !visibility;
 			
 			var initial = new LayerProperties(layer.Name, visibility, layer.Opacity, layer.BlendMode);
 			var updated = new LayerProperties(layer.Name, !visibility, layer.Opacity, layer.BlendMode);

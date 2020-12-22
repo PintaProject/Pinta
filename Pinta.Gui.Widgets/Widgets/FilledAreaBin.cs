@@ -32,7 +32,7 @@ namespace Pinta.Gui.Widgets
 {
     public class FilledAreaBin : Bin
     {
-        private Widget child;
+        private Widget? child;
 
         protected override void OnAdded (Widget widget)
         {

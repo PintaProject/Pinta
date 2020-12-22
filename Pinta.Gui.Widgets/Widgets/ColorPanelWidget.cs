@@ -26,6 +26,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -56,5 +57,17 @@ namespace Pinta.Gui.Widgets
 			cr.FillRoundedRectangle (new Rectangle(0,0, AllocatedWidth, AllocatedHeight), 4, CairoColor);
 			return true;
 		}
-	}
+
+	[MemberNotNull (nameof(eventbox))]
+        private void Build ()
+        {
+            HeightRequest = 24;
+
+            eventbox = new EventBox ();
+            eventbox.Events = (Gdk.EventMask)256;
+            eventbox.VisibleWindow = false;
+
+            Add (eventbox);
+        }
+    }
 }

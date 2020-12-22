@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -59,7 +60,7 @@ namespace Pinta.Gui.Widgets
 			anglepickergraphic1.ValueDouble = DefaultValue;
 		}
 
-		private void HandleAnglePickerValueChanged (object sender, EventArgs e)
+		private void HandleAnglePickerValueChanged (object? sender, EventArgs e)
 		{
 			if (spin.Value != anglepickergraphic1.ValueDouble) {
 				spin.Value = anglepickergraphic1.ValueDouble;
@@ -67,7 +68,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleSpinValueChanged (object sender, EventArgs e)
+		private void HandleSpinValueChanged (object? sender, EventArgs e)
 		{
 			if (anglepickergraphic1.ValueDouble != spin.Value) {
 				anglepickergraphic1.ValueDouble = spin.Value;
@@ -75,7 +76,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleButtonClicked (object sender, EventArgs e)
+		private void HandleButtonClicked (object? sender, EventArgs e)
 		{
 			Value = DefaultValue;
 		}
@@ -90,9 +91,10 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event EventHandler ValueChanged;
+		public event EventHandler? ValueChanged;
 		#endregion
 
+	[MemberNotNull(nameof(anglepickergraphic1), nameof (spin), nameof (button), nameof (label))]
         private void Build ()
         {
             // Section label + line

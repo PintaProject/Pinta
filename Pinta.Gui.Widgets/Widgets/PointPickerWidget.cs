@@ -26,6 +26,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -89,7 +90,7 @@ namespace Pinta.Gui.Widgets
 			spinY.ActivatesDefault = true;
 		}
 
-		void HandlePointpickergraphic1PositionChanged (object sender, EventArgs e)
+		void HandlePointpickergraphic1PositionChanged (object? sender, EventArgs e)
 		{
 			if (Point != pointpickergraphic1.Position) {
 				active = false;
@@ -100,7 +101,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 		
-		private void HandleSpinXValueChanged (object sender, EventArgs e)
+		private void HandleSpinXValueChanged (object? sender, EventArgs e)
 		{
 			if (active) {
 				pointpickergraphic1.Position = Point; 
@@ -108,7 +109,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 		
-		private void HandleSpinYValueChanged (object sender, EventArgs e)
+		private void HandleSpinYValueChanged (object? sender, EventArgs e)
 		{
 			if (active) {
 				pointpickergraphic1.Position = Point;
@@ -130,12 +131,12 @@ namespace Pinta.Gui.Widgets
 			pointpickergraphic1.Init (DefaultPoint);
 		}
 
-		void HandleButton1Pressed (object sender, EventArgs e)
+		void HandleButton1Pressed (object? sender, EventArgs e)
 		{
 			spinX.Value = DefaultPoint.X;
 		}
 
-		void HandleButton2Pressed (object sender, EventArgs e)
+		void HandleButton2Pressed (object? sender, EventArgs e)
 		{
 			spinY.Value = DefaultPoint.Y;
 		}
@@ -149,9 +150,10 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event EventHandler PointPicked;
+		public event EventHandler? PointPicked;
         #endregion
 
+        [MemberNotNull (nameof (label), nameof (spinX), nameof (spinY), nameof (button1), nameof (button2), nameof (pointpickergraphic1))]
         private void Build ()
         {
             // Section label + line

@@ -43,7 +43,7 @@ namespace Pinta.Gui.Widgets
 
 		const uint event_delay_millis = 100;
 		uint event_delay_timeout_id;
-		GLib.TimeoutHandler timeout_func;
+		GLib.TimeoutHandler? timeout_func;
 
 		/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 		/// fetched from the appropriate place.
@@ -67,15 +67,16 @@ namespace Pinta.Gui.Widgets
 
 		public object EffectData { get; private set; }
 
-		public event PropertyChangedEventHandler EffectDataChanged;
+		public event PropertyChangedEventHandler? EffectDataChanged;
 
-		protected override void Dispose (bool disposing)
-		{
-			// If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
-			if (disposing && event_delay_timeout_id != 0) {
-				GLib.Source.Remove (event_delay_timeout_id);
-				timeout_func.Invoke ();
-			}
+		public override void Destroy ()
+        {
+            // If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
+            if (event_delay_timeout_id != 0)
+            {
+                GLib.Source.Remove (event_delay_timeout_id);
+                timeout_func?.Invoke ();
+            }
 
 			base.Dispose (disposing);
 		}
@@ -86,13 +87,13 @@ namespace Pinta.Gui.Widgets
 			var members = EffectData.GetType ().GetMembers ();
 
 			foreach (var mi in members) {
-				Type mType = GetTypeForMember (mi);
+				Type? mType = GetTypeForMember (mi);
 
 				if (mType == null)
 					continue;
 
-				string caption = null;
-				string hint = null;
+				string? caption = null;
+				string? hint = null;
 				bool skip = false;
 				bool combo = false;
 
@@ -150,7 +151,7 @@ namespace Pinta.Gui.Widgets
 		#region Control Builders
 		private ComboBoxWidget CreateEnumComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object[] attributes)
 		{
-			Type myType = GetTypeForMember (member);
+			Type myType = GetTypeForMember (member)!; // NRT - We're looping through members we got from reflection
 
 			string[] member_names = Enum.GetNames (myType);
 			var labels = new List<string> ();
@@ -176,9 +177,11 @@ namespace Pinta.Gui.Widgets
 
 			widget.Label = caption;
 			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
-			widget.Active = ((IList)member_names).IndexOf (GetValue (member, o).ToString ());
 
-			widget.Changed += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is object obj)
+				widget.Active = ((IList)member_names).IndexOf (obj.ToString ());
+
+			widget.Changed += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, Enum.Parse (myType, label_to_member [widget.ActiveText]));
 			};
 
@@ -187,24 +190,28 @@ namespace Pinta.Gui.Widgets
 
 		private ComboBoxWidget CreateComboBox (string caption, object o, System.Reflection.MemberInfo member, System.Object [] attributes)
 		{
-			Dictionary<string, object> dict = null;
+			Dictionary<string, object>? dict = null;
 
 			foreach (var attr in attributes) {
-				if (attr is StaticListAttribute)
-					dict = (Dictionary<string, object>)GetValue (((StaticListAttribute)attr).dictionaryName, o);
+				if (attr is StaticListAttribute && GetValue (((StaticListAttribute) attr).dictionaryName, o) is Dictionary<string, object> d)
+					dict = d;
 			}
 
 			List<string> entries = new List<string> ();
-			foreach (string str in dict.Keys)
-				entries.Add (str);
+
+			if (dict != null)
+				foreach (string str in dict.Keys)
+					entries.Add (str);
 
 			ComboBoxWidget widget = new ComboBoxWidget (entries.ToArray ());
 
 			widget.Label = caption;
 			widget.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
-			widget.Active = entries.IndexOf ((string)GetValue (member, o));
 
-			widget.Changed += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is string s)
+				widget.Active = entries.IndexOf (s);
+
+			widget.Changed += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.ActiveText);
 			};
 
@@ -236,9 +243,11 @@ namespace Pinta.Gui.Widgets
 			widget.MaximumValue = max_value;
 			widget.IncrementValue = inc_value;
 			widget.DigitsValue = digits_value;
-			widget.DefaultValue = (double)GetValue (member, o);
 
-			widget.ValueChanged += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is double d)
+				widget.DefaultValue = d;
+
+			widget.ValueChanged += delegate (object? sender, EventArgs e) {
 				DelayedUpdate( () => {
 					SetValue (member, o, widget.Value);
 					return false;
@@ -273,9 +282,11 @@ namespace Pinta.Gui.Widgets
 			widget.MaximumValue = max_value;
 			widget.IncrementValue = inc_value;
 			widget.DigitsValue = digits_value;
-			widget.DefaultValue = (int)GetValue (member, o);
 
-			widget.ValueChanged += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is int i)
+				widget.DefaultValue = i;
+
+			widget.ValueChanged += delegate (object? sender, EventArgs e) {
 				DelayedUpdate( () => {
 					SetValue (member, o, widget.ValueAsInt);
 					return false;
@@ -290,9 +301,11 @@ namespace Pinta.Gui.Widgets
 			Gtk.CheckButton widget = new Gtk.CheckButton ();
 
 			widget.Label = caption;
-			widget.Active = (bool)GetValue (member, o);
 
-			widget.Toggled += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is bool b)
+				widget.Active = b;
+
+			widget.Toggled += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.Active);
 			};
 
@@ -304,9 +317,11 @@ namespace Pinta.Gui.Widgets
 			PointPickerWidget widget = new PointPickerWidget ();
 
 			widget.Label = caption;
-			widget.DefaultOffset = (Cairo.PointD)GetValue (member, o);
 
-			widget.PointPicked += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is Cairo.PointD p)
+				widget.DefaultOffset = p;
+
+			widget.PointPicked += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.Offset);
 			};
 
@@ -318,9 +333,11 @@ namespace Pinta.Gui.Widgets
 			PointPickerWidget widget = new PointPickerWidget ();
 
 			widget.Label = caption;
-			widget.DefaultPoint = (Gdk.Point)GetValue (member, o);
 
-			widget.PointPicked += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is Gdk.Point p)
+				widget.DefaultPoint = p;
+
+			widget.PointPicked += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, widget.Point);
 			};
 
@@ -332,9 +349,11 @@ namespace Pinta.Gui.Widgets
 			AnglePickerWidget widget = new AnglePickerWidget ();
 
 			widget.Label = caption;
-			widget.DefaultValue = (double)GetValue (member, o);
 
-			widget.ValueChanged += delegate (object sender, EventArgs e) {
+			if (GetValue (member, o) is double d)
+				widget.DefaultValue = d;
+
+			widget.ValueChanged += delegate (object? sender, EventArgs e) {
 				DelayedUpdate( () => {
 					SetValue (member, o, widget.Value);
 					return false;
@@ -356,7 +375,7 @@ namespace Pinta.Gui.Widgets
 		{
 			ReseedButtonWidget widget = new ReseedButtonWidget ();
 
-			widget.Clicked += delegate (object sender, EventArgs e) {
+			widget.Clicked += delegate (object? sender, EventArgs e) {
 				SetValue (member, o, random.Next ());
 			};
 
@@ -365,29 +384,28 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Static Reflection Methods
-		private static object GetValue (MemberInfo mi, object o)
+		private static object? GetValue (MemberInfo mi, object o)
 		{
 			var fi = mi as FieldInfo;
 			if (fi != null)
 				return fi.GetValue (o);
 			var pi = mi as PropertyInfo;
 
-			var getMethod = pi.GetGetMethod ();
-			return getMethod.Invoke (o, new object [0]);
+			return pi?.GetGetMethod ()?.Invoke (o, new object[0]);
 		}
 
 		private void SetValue (MemberInfo mi, object o, object val)
 		{
 			var fi = mi as FieldInfo;
 			var pi = mi as PropertyInfo;
-			string fieldName = null;
+			string? fieldName = null;
 
 			if (fi != null) {
 				fi.SetValue (o, val);
 				fieldName = fi.Name;
 			} else if (pi != null) {
 				var setMethod = pi.GetSetMethod ();
-				setMethod.Invoke (o, new object [] { val });
+				setMethod?.Invoke (o, new object [] { val });
 				fieldName = pi.Name;
 			}
 
@@ -396,7 +414,7 @@ namespace Pinta.Gui.Widgets
 		}
 
 		// Returns the type for fields and properties and null for everything else
-		private static Type GetTypeForMember (MemberInfo mi)
+		private static Type? GetTypeForMember (MemberInfo mi)
 		{
 			if (mi is FieldInfo)
 				return ((FieldInfo)mi).FieldType;
@@ -430,7 +448,7 @@ namespace Pinta.Gui.Widgets
 			return sb.ToString ();
 		}
 
-		private object GetValue (string name, object o)
+		private object? GetValue (string name, object o)
 		{
 			var fi = o.GetType ().GetField (name);
 			if (fi != null)
@@ -439,7 +457,7 @@ namespace Pinta.Gui.Widgets
 			if (pi == null)
 				return null;
 			var getMethod = pi.GetGetMethod ();
-			return getMethod.Invoke (o, new object [0]);
+			return getMethod?.Invoke (o, new object [0]);
 		}
 
         private void DelayedUpdate (GLib.TimeoutHandler handler)
@@ -448,7 +466,7 @@ namespace Pinta.Gui.Widgets
 			{
 				GLib.Source.Remove (event_delay_timeout_id);
 				if (handler != timeout_func)
-					timeout_func.Invoke ();
+					timeout_func?.Invoke ();
 			}
 
 			timeout_func = handler;
