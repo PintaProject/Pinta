@@ -13,7 +13,7 @@ Thanks to the following contributors who worked on this release:
 - @Nikitayfh
 
 ### Added
-- Ported to GTK3
+- Ported to GTK3 and .NET 5
   - Improved support for high-DPI displays.
   - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
   - On macOS, the menu now appears in the global menu bar instead of the application window.
@@ -30,6 +30,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
+- Performance improvements for the paint bucket and magic wand tools (#159).
 
 ### Fixed
 - Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. ([#1191390](https://bugs.launchpad.net/pinta/+bug/1191390)).
