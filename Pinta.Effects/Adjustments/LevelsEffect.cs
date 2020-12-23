@@ -49,9 +49,12 @@ namespace Pinta.Effects
 				dialog.Title = Name;
 				dialog.Icon = PintaCore.Resources.GetIcon(Icon);
 
-				int response = dialog.Run();
+				var response = Gtk.ResponseType.None;
+				while (response == Gtk.ResponseType.None) {
+					response = (Gtk.ResponseType) dialog.Run ();
+				}
 
-				return (response == (int)Gtk.ResponseType.Ok);
+				return response == Gtk.ResponseType.Ok;
 			}
 		}
 		

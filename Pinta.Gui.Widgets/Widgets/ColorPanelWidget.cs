@@ -32,51 +32,29 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-    [System.ComponentModel.ToolboxItem(true)]
+	[System.ComponentModel.ToolboxItem (true)]
 	public class ColorPanelWidget : FilledAreaBin
 	{
-        private EventBox eventbox;
+		private EventBox eventbox;
 
-		public Color CairoColor { get; private set; }
+		public Color CairoColor { get; set; }
 
 		public ColorPanelWidget ()
 		{
-			Build ();
+			HeightRequest = 24;
 
-			// TODO-GTK3
-#if false
-			ExposeEvent += HandleExposeEvent;
-#endif
+			eventbox = new EventBox {
+				Events = (Gdk.EventMask) 256,
+				VisibleWindow = false
+			};
+
+			Add (eventbox);
 		}
-		
-		public void SetCairoColor (Color color)
+
+		protected override bool OnDrawn (Context cr)
 		{
-			CairoColor = color;
+			cr.FillRoundedRectangle (new Rectangle(0,0, AllocatedWidth, AllocatedHeight), 4, CairoColor);
+			return true;
 		}
-
-		// TODO-GTK3
-#if false
-		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
-		{
-			using (Context g = Gdk.CairoHelper.Create (this.Window)) {
-				
-				int rad = 4;
-				Rectangle rect = Allocation.ToCairoRectangle ();
-				
-				g.FillRoundedRectangle (rect, rad, CairoColor);
-			}
-		}
-#endif
-
-        private void Build ()
-        {
-            HeightRequest = 24;
-
-            eventbox = new EventBox ();
-            eventbox.Events = (Gdk.EventMask)256;
-            eventbox.VisibleWindow = false;
-
-            Add (eventbox);
-        }
-    }
+	}
 }
