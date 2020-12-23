@@ -283,7 +283,7 @@ namespace Pinta
 			Title = Translations.GetString ("About Pinta");
 			//TransientFor = IdeApp.Workbench.RootWindow;
 			Resizable = false;
-			Icon = PintaCore.Resources.GetIcon ("Pinta.png");
+			IconName = Pinta.Resources.Icons.AboutPinta;
 
 			ContentArea.BorderWidth = 0;
 
