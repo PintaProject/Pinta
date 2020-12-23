@@ -215,7 +215,7 @@ namespace Pinta.Actions
 					md.Run ();
 					return false;
 				} else {
-					throw e; // Only catch exceptions we know the reason for
+					throw; // Only catch exceptions we know the reason for
 				}
 			} catch (OperationCanceledException) {
 				return false;
