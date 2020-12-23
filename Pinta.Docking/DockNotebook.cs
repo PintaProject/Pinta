@@ -39,9 +39,9 @@ namespace Pinta.Docking
 
     public class TabEventArgs : EventArgs
     {
-        public TabEventArgs(IDockNotebookItem item) { Item = item; }
+        public TabEventArgs(IDockNotebookItem? item) { Item = item; }
 
-        public IDockNotebookItem Item { get; private set; }
+        public IDockNotebookItem? Item { get; private set; }
     }
 
     public class DockNotebook : Gtk.Notebook
@@ -54,11 +54,11 @@ namespace Pinta.Docking
         {
             EnablePopup = true;
 
-            // Emit an event when the current tab is changed (but not when the last tab is closed).
+            // Emit an event when the current tab is changed.
             SwitchPage += (o, args) =>
             {
                 var widget = args.Page;
-                IDockNotebookItem item = items.Where(i => i.Widget == widget).First();
+                IDockNotebookItem? item = items.Where(i => i.Widget == widget).FirstOrDefault();
                 ActiveTabChanged?.Invoke(this, new TabEventArgs(item));
             };
         }
