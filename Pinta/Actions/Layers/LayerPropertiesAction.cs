@@ -85,7 +85,7 @@ namespace Pinta.Actions
 		private string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
 		{
 
-			string ret = null;
+			string? ret = null;
 			int count = 0;
 
 			if (updated.Opacity != initial.Opacity) {

@@ -33,7 +33,7 @@ namespace Pinta
 {
 	public class CanvasPad : IDockPad
 	{
-        public DockNotebook Notebook { get; private set; }
+		public DockNotebook Notebook { get; private set; } = null!; // NRT - Set in Initialize
 
 		public void Initialize (Dock workspace)
 		{

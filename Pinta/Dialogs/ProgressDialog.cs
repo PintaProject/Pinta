@@ -27,6 +27,7 @@
 using System;
 using Pinta.Core;
 using Gtk;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta
 {
@@ -58,7 +59,7 @@ namespace Pinta
             set { progress_bar.Fraction = value; }
         }
 
-        public event EventHandler<EventArgs> Canceled;
+        public event EventHandler<EventArgs>? Canceled;
 
         void IProgressDialog.Show ()
         {
@@ -82,6 +83,7 @@ namespace Pinta
                 Canceled (this, EventArgs.Empty);
         }
 
+	[MemberNotNull (nameof (label), nameof (progress_bar))]
         private void Build ()
         {
             ContentArea.BorderWidth = 2;

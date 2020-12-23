@@ -67,10 +67,10 @@ namespace Pinta.MacInterop
 		[DllImport ("libigemacintegration.dylib")]
 		static extern IntPtr ige_mac_menu_add_app_menu_group ();
 
-		public static IgeMacMenuGroup AddAppMenuGroup ()
+		public static IgeMacMenuGroup? AddAppMenuGroup ()
 		{
 			IntPtr raw_ret = ige_mac_menu_add_app_menu_group ();
-			IgeMacMenuGroup ret = raw_ret == IntPtr.Zero ? null : (IgeMacMenuGroup)GLib.Opaque.GetOpaque (raw_ret, typeof(IgeMacMenuGroup), false);
+			IgeMacMenuGroup? ret = raw_ret == IntPtr.Zero ? null : (IgeMacMenuGroup)GLib.Opaque.GetOpaque (raw_ret, typeof(IgeMacMenuGroup), false);
 			return ret;
 		}
 	}

@@ -130,7 +130,7 @@ namespace Pinta.MacInterop
 			int len = Marshal.SizeOf (typeof (T));
 			IntPtr bufferPtr = Marshal.AllocHGlobal (len);
 			CheckReturn (GetEventParameter (eventRef, name, desiredType, 0, (uint)len, 0, bufferPtr));
-			T val = (T)Marshal.PtrToStructure (bufferPtr, typeof (T));
+			T val = (T)Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
 			Marshal.FreeHGlobal (bufferPtr);
 			return val;
 		}
@@ -245,7 +245,7 @@ namespace Pinta.MacInterop
 				} catch {
 				}
 				
-				var arr = AppleEvent.GetListFromAEDesc<string,FSRef> (ref list, CoreFoundation.FSRefToString,
+				var arr = AppleEvent.GetListFromAEDesc<string?,FSRef> (ref list, CoreFoundation.FSRefToString,
 					(OSType)(int)CarbonEventParameterType.FSRef);
 				var files = new Dictionary<string,int> ();
 				foreach (var s in arr) {

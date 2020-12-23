@@ -91,7 +91,7 @@ namespace Pinta
 			ToggleActions(false);
 		}
 
-		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
+		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 		{
 			PintaCore.Actions.Window.RemoveDocument (e.Document);
 
@@ -100,7 +100,7 @@ namespace Pinta
 			}
 		}
 
-		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
+		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
 		{
 			PintaCore.Actions.Window.AddDocument (e.Document);
 

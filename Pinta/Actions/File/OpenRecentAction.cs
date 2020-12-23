@@ -52,7 +52,7 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			string fileUri = (sender as RecentAction).CurrentUri;
+			string fileUri = ((RecentAction)sender).CurrentUri;
 
 			PintaCore.Workspace.OpenFile (new Uri (fileUri).LocalPath);
 		}

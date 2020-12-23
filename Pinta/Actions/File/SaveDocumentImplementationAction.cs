@@ -49,7 +49,7 @@ namespace Pinta.Actions
 		}
 		#endregion
 
-		private void Activated (object sender, DocumentCancelEventArgs e)
+		private void Activated (object? sender, DocumentCancelEventArgs e)
 		{
 			// Prompt for a new filename for "Save As", or a document that hasn't been saved before
 			if (e.SaveAs || !e.Document.HasFile)
@@ -100,7 +100,7 @@ namespace Pinta.Actions
 
 			// If we already have a format, set it to the default.
 			// If not, default to jpeg
-			FormatDescriptor format_desc = null;
+			FormatDescriptor? format_desc = null;
 
 			if (hasFile)
 				format_desc = PintaCore.System.ImageFormats.GetFormatByFile (document.Filename);
@@ -171,7 +171,7 @@ namespace Pinta.Actions
 			return false;
 		}
 
-		private bool SaveFile (Document document, string file, FormatDescriptor format, Window parent)
+		private bool SaveFile (Document document, string? file, FormatDescriptor? format, Window parent)
 		{
 			if (string.IsNullOrEmpty (file))
 				file = document.PathAndFileName;

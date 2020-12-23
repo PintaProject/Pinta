@@ -34,7 +34,7 @@ namespace Pinta.MacInterop
 		
 		#region Quit
 		
-		static EventHandler<ApplicationQuitEventArgs> quit;
+		static EventHandler<ApplicationQuitEventArgs>? quit;
 		static IntPtr quitHandlerRef = IntPtr.Zero;
 		
 		public static event EventHandler<ApplicationQuitEventArgs> Quit {
@@ -59,7 +59,7 @@ namespace Pinta.MacInterop
 		static CarbonEventHandlerStatus HandleQuit (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 		{
 			var args = new ApplicationQuitEventArgs ();
-			quit (null, args);
+			quit?.Invoke (null, args);
 			return args.UserCancelled? CarbonEventHandlerStatus.UserCancelled : args.HandledStatus;
 		}
 		
@@ -67,7 +67,7 @@ namespace Pinta.MacInterop
 		
 		#region Reopen
 		
-		static EventHandler<ApplicationEventArgs> reopen;
+		static EventHandler<ApplicationEventArgs>? reopen;
 		static IntPtr reopenHandlerRef = IntPtr.Zero;
 		
 		public static event EventHandler<ApplicationEventArgs> Reopen {
@@ -92,7 +92,7 @@ namespace Pinta.MacInterop
 		static CarbonEventHandlerStatus HandleReopen (IntPtr callRef, IntPtr eventRef, IntPtr user_data)
 		{
 			var args = new ApplicationEventArgs ();
-			reopen (null, args);
+			reopen?.Invoke (null, args);
 			return args.HandledStatus;
 		}
 		
@@ -100,7 +100,7 @@ namespace Pinta.MacInterop
 		
 		#region OpenDocuments
 		
-		static EventHandler<ApplicationDocumentEventArgs> openDocuments;
+		static EventHandler<ApplicationDocumentEventArgs>? openDocuments;
 		static IntPtr openDocumentsHandlerRef = IntPtr.Zero;
 		
 		public static event EventHandler<ApplicationDocumentEventArgs> OpenDocuments {
@@ -127,7 +127,7 @@ namespace Pinta.MacInterop
 			try {
 				var docs = Carbon.GetFileListFromEventRef (eventRef);
 				var args = new ApplicationDocumentEventArgs (docs);
-				openDocuments (null, args);
+				openDocuments?.Invoke (null, args);
 				return args.HandledStatus;
 			} catch (Exception ex) {
 				System.Console.WriteLine (ex);
@@ -139,7 +139,7 @@ namespace Pinta.MacInterop
 		
 		#region OpenUrls
 		
-		static EventHandler<ApplicationUrlEventArgs> openUrls;
+		static EventHandler<ApplicationUrlEventArgs>? openUrls;
 		static IntPtr openUrlsHandlerRef = IntPtr.Zero;
 		
 		public static event EventHandler<ApplicationUrlEventArgs> OpenUrls {
@@ -172,7 +172,7 @@ namespace Pinta.MacInterop
 			try {
 				var urls = Carbon.GetUrlListFromEventRef (eventRef);
 				var args = new ApplicationUrlEventArgs (urls);
-				openUrls (null, args);
+				openUrls?.Invoke (null, args);
 				return args.HandledStatus;
 			} catch (Exception ex) {
 				System.Console.WriteLine (ex);

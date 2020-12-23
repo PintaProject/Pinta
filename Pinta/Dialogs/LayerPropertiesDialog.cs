@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Gtk;
 using Pinta.Core;
@@ -109,13 +110,13 @@ namespace Pinta
 		}
 		
 		#region Private Methods
-		private void OnLayerNameChanged (object sender, EventArgs e)
+		private void OnLayerNameChanged (object? sender, EventArgs e)
 		{
 			name = layerNameEntry.Text;
 			PintaCore.Layers.CurrentLayer.Name = name;
 		}
 		
-		private void OnVisibilityToggled (object sender, EventArgs e)
+		private void OnVisibilityToggled (object? sender, EventArgs e)
 		{
 			hidden = !visibilityCheckbox.Active;
 			PintaCore.Layers.CurrentLayer.Hidden = hidden;
@@ -126,13 +127,13 @@ namespace Pinta
 			PintaCore.Workspace.Invalidate ();
 		}
 		
-		private void OnOpacitySliderChanged (object sender, EventArgs e)
+		private void OnOpacitySliderChanged (object? sender, EventArgs e)
 		{
 			opacitySpinner.Value = opacitySlider.Value;
 			UpdateOpacity ();
 		}
 
-		private void OnOpacitySpinnerChanged (object sender, EventArgs e)
+		private void OnOpacitySpinnerChanged (object? sender, EventArgs e)
 		{
 			opacitySlider.Value = opacitySpinner.Value;
 			UpdateOpacity ();
@@ -150,7 +151,7 @@ namespace Pinta
 			PintaCore.Workspace.Invalidate ();		
 		}
 
-		private void OnBlendModeChanged (object sender, EventArgs e)
+		private void OnBlendModeChanged (object? sender, EventArgs e)
 		{
 			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.ActiveText);
 			PintaCore.Layers.CurrentLayer.BlendMode = blendmode;
@@ -161,6 +162,7 @@ namespace Pinta
 			PintaCore.Workspace.Invalidate ();		
 		}
 
+		[MemberNotNull (nameof (layerNameEntry), nameof (visibilityCheckbox), nameof (blendComboBox), nameof (opacitySpinner), nameof (opacitySlider))]
 		private void Build ()
 		{
 			DefaultWidth = 349;

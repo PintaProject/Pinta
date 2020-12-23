@@ -48,7 +48,7 @@ namespace Pinta
             document.Renamed += (o, e) => { LabelChanged?.Invoke(this, EventArgs.Empty); };
         }
 
-        public event EventHandler LabelChanged;
+        public event EventHandler? LabelChanged;
 
         public string Label
         {

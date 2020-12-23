@@ -48,7 +48,7 @@ namespace Pinta
 		Pixbuf image_top;
 		Pixbuf monoPowered;
 		int scroll;
-		Pango.Layout layout;
+		Pango.Layout layout = null!; // NRT - Set by OnRealized
 		int monoLogoSpacing = 5;
 		int textTop;
 		int scrollPause;
@@ -251,7 +251,7 @@ namespace Pinta
 			return false;
 		}
 
-		protected void OnRealized (object o, EventArgs args)
+		protected void OnRealized (object? o, EventArgs args)
 		{
 			int x, y;
 			int w, h;

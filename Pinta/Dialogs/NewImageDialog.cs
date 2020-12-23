@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -168,6 +169,7 @@ namespace Pinta
             }
         }
 
+	[MemberNotNull (nameof (preset_sizes))]
         private void InitializePresets ()
         {
             // Some arbitrary presets
@@ -179,6 +181,7 @@ namespace Pinta
             preset_sizes.Add (new Gdk.Size (1600, 1200));
         }
 
+	[MemberNotNull (nameof (preset_combo), nameof (portrait_radio), nameof (landscape_radio), nameof (white_bg_radio), nameof (secondary_bg_radio), nameof (trans_bg_radio), nameof (width_entry), nameof (height_entry), nameof (preview))]
         private void BuildDialog ()
         {
             // Layout table for preset, width, and height

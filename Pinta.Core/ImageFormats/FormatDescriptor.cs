@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 using Gtk;
@@ -92,12 +93,14 @@ namespace Pinta.Core
 			ff.Name = string.Format (Translations.GetString ("{0} image ({1})"), displayPrefix, formatNames);
 			this.Filter = ff;
 		}
-		
+
+		[MemberNotNullWhen (returnValue: false, member: nameof (Exporter))]
 		public bool IsReadOnly ()
 		{
 			return Exporter == null;
 		}
 
+		[MemberNotNullWhen (returnValue: false, member: nameof (Importer))]
 		public bool IsWriteOnly ()
 		{
 			return Importer == null;

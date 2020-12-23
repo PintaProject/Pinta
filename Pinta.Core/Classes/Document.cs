@@ -639,7 +639,7 @@ namespace Pinta.Core
 		/// Optionally, the history item for resizing the canvas can be added to
 		/// a CompoundHistoryItem if it is part of a larger action (e.g. pasting an image).
 		/// </param>
-		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem compoundAction)
+		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem? compoundAction)
 		{
 			double scale;
 
