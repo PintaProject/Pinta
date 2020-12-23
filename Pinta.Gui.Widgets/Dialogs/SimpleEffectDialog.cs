@@ -69,17 +69,16 @@ namespace Pinta.Gui.Widgets
 
 		public event PropertyChangedEventHandler EffectDataChanged;
 
-		public override void Destroy ()
-        {
-            // If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
-            if (event_delay_timeout_id != 0)
-            {
-                GLib.Source.Remove (event_delay_timeout_id);
-                timeout_func.Invoke ();
-            }
+		protected override void Dispose (bool disposing)
+		{
+			// If there is a timeout that hasn't been invoked yet, run it before closing the dialog.
+			if (disposing && event_delay_timeout_id != 0) {
+				GLib.Source.Remove (event_delay_timeout_id);
+				timeout_func.Invoke ();
+			}
 
-            base.Destroy ();
-        }
+			base.Dispose (disposing);
+		}
 
 		#region EffectData Parser
 		private void BuildDialog (IAddinLocalizer localizer)

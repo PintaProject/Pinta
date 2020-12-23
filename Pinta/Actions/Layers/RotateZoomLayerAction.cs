@@ -47,31 +47,31 @@ namespace Pinta.Actions
 		private void Activated (object sender, EventArgs e)
 		{
 			// TODO - allow the layer to be zoomed in or out
-			
+
 			var data = new RotateZoomData ();
-			using var dialog = new SimpleEffectDialog (Translations.GetString ("Rotate / Zoom Layer"),
-				Gtk.IconTheme.Default.LoadIcon(Resources.Icons.LayerRotateZoom, 16),
+			Gtk.ResponseType response;
+			using (var dialog = new SimpleEffectDialog (Translations.GetString ("Rotate / Zoom Layer"),
+				Gtk.IconTheme.Default.LoadIcon (Resources.Icons.LayerRotateZoom, 16),
 				data,
-				new PintaLocalizer ());
+				new PintaLocalizer ())) {
 
-            // When parameters are modified, update the display transform of the layer.
-		    dialog.EffectDataChanged += (o, args) =>
-		    {
-		        var xform = ComputeMatrix (data);
-		        var doc = PintaCore.Workspace.ActiveDocument;
-		        doc.CurrentUserLayer.Transform.InitMatrix (xform);
-		        PintaCore.Workspace.Invalidate ();
-		    };
+				// When parameters are modified, update the display transform of the layer.
+				dialog.EffectDataChanged += (o, args) => {
+					var xform = ComputeMatrix (data);
+					var doc = PintaCore.Workspace.ActiveDocument;
+					doc.CurrentUserLayer.Transform.InitMatrix (xform);
+					PintaCore.Workspace.Invalidate ();
+				};
 
-			int response = dialog.Run ();
-			dialog.Destroy ();
+				response = (Gtk.ResponseType)dialog.Run ();
+			}
 
-		    ClearLivePreview ();
-			if (response == (int)Gtk.ResponseType.Ok && !data.IsDefault)
+			ClearLivePreview ();
+			if (response == Gtk.ResponseType.Ok && !data.IsDefault)
 				ApplyTransform (data);
 		}
 
-	    private static void ClearLivePreview ()
+		private static void ClearLivePreview ()
 	    {
             PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Transform.InitIdentity ();
             PintaCore.Workspace.Invalidate ();
