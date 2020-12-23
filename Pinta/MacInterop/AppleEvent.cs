@@ -67,9 +67,6 @@ namespace Pinta.MacInterop
 		[DllImport (AELib)]
 		static extern int AEGetDescDataSize (ref AEDesc desc);
 		
-		[DllImport (AELib)]
-		static extern AEDescStatus AECoerceDesc (ref AEDesc theAEDesc, DescType toType, ref AEDesc result);
-		
 		public static void AECreateDesc (OSType typeCode, byte[] data, out AEDesc result)
 		{
 			CheckReturn (AECreateDesc (typeCode, data, data.Length, out result));
@@ -217,10 +214,5 @@ namespace Pinta.MacInterop
 		DontRecord = 0x00001000,
 		DontExecute = 0x00002000,
 		ProcessNonReplyEvents = 0x00008000,
-	}
-
-	struct DescType
-	{
-		public OSType Value;
 	}
 }
