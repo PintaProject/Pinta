@@ -34,7 +34,8 @@ namespace Pinta.Tools
 {
 	public class MagicWandTool : FloodTool
 	{
-		private Gtk.ToolItem selection_sep;
+		// NRT - Created in OnBuildToolBar
+		private Gtk.ToolItem selection_sep = null!;
         private CombineMode combine_mode;
 
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }

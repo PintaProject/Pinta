@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Gtk;
 using Pinta.Core;
@@ -43,15 +44,16 @@ namespace Pinta.Tools
         private EraserType eraser_type = EraserType.Normal; 
 
         private const int LUT_Resolution = 256;
-        private byte[][] lut_factor = null;
+        private byte[][]? lut_factor = null;
 
-        private ToolBarLabel label_type = null;
-        private ToolBarComboBox comboBox_type = null;
+        private ToolBarLabel? label_type = null;
+        private ToolBarComboBox? comboBox_type = null;
 
         public EraserTool ()
         {
         }
 
+	[MemberNotNull (nameof (lut_factor))]
         private void initLookupTable()
         {
             if (lut_factor == null) {
@@ -219,7 +221,7 @@ namespace Pinta.Tools
         #endregion
 
         #region Mouse Handlers
-        protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD new_pointd)
+        protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD new_pointd)
         {
             Point new_point = new Point ((int)new_pointd.X, (int)new_pointd.Y);
 

@@ -33,8 +33,8 @@ namespace Pinta.Tools
 {
 	public class MoveSelectionTool : BaseTransformTool
 	{
-		private SelectionHistoryItem hist;
-		private DocumentSelection original_selection;
+		private SelectionHistoryItem? hist;
+		private DocumentSelection? original_selection;
 		
 		public override string Name {
 			get { return Translations.GetString ("Move Selection"); }
@@ -76,7 +76,7 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.Selection.Dispose ();
-			doc.Selection = original_selection.Transform (transform);
+			doc.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
 			doc.Selection.Visible = true;
 
 			PintaCore.Workspace.Invalidate ();
@@ -96,7 +96,7 @@ namespace Pinta.Tools
 
 			hist = null;
 
-			original_selection.Dispose ();
+			original_selection?.Dispose ();
 			original_selection = null;
 		}
 		#endregion

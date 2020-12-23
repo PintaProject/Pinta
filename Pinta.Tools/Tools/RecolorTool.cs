@@ -42,11 +42,12 @@ namespace Pinta.Tools
 {
 	public class RecolorTool : BaseBrushTool
 	{
-		protected ToolBarLabel tolerance_label;
-		protected ToolBarSlider tolerance_slider;
+		// NRT - Set in OnBuildToolBar
+		protected ToolBarLabel tolerance_label = null!;
+		protected ToolBarSlider tolerance_slider = null!;
 		
 		private Point last_point = point_empty;
-		private bool[,] stencil;
+		private bool[,] stencil = null!; // NRT - Set in OnMouseDown
 		private int myTolerance;
 
 		public RecolorTool ()
@@ -98,7 +99,7 @@ namespace Pinta.Tools
 			base.OnMouseDown (canvas, args, point);
 		}
 		
-		protected unsafe override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected unsafe override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 

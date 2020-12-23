@@ -35,11 +35,12 @@ namespace Pinta.Tools
 	{
 		private Point last_point = point_empty;
 
-		protected ToolBarLabel fill_label;
-		protected ToolBarDropDownButton fill_button;
-		protected Gtk.SeparatorToolItem fill_sep;
+		// NRT - Created in OnBuildToolBar
+		protected ToolBarLabel fill_label = null!;
+		protected ToolBarDropDownButton fill_button = null!;
+		protected Gtk.SeparatorToolItem fill_sep = null!;
 
-		private Path path;
+		private Path? path;
 		private Color fill_color;
 		private Color outline_color;
 
@@ -87,7 +88,7 @@ namespace Pinta.Tools
 			tb.AppendItem (fill_button);
 
 
-			Gtk.ComboBoxText dpbBox = dashPBox.SetupToolbar(tb);
+			Gtk.ComboBoxText? dpbBox = dashPBox.SetupToolbar(tb);
 
 			if (dpbBox != null)
 			{
@@ -112,14 +113,14 @@ namespace Pinta.Tools
 			doc.ToolLayer.Hidden = false;
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if ((args.Event.State & Gdk.ModifierType.Button1Mask) == Gdk.ModifierType.Button1Mask) {
+			if (args.IsButton1Pressed ()) {
 				outline_color = PintaCore.Palette.PrimaryColor;
 				fill_color = PintaCore.Palette.SecondaryColor;
-			} else if ((args.Event.State & Gdk.ModifierType.Button3Mask) == Gdk.ModifierType.Button3Mask) {
+			} else if (args.IsButton3Pressed ()) {
 				outline_color = PintaCore.Palette.SecondaryColor;
 				fill_color = PintaCore.Palette.PrimaryColor;
 			} else {
@@ -227,7 +228,7 @@ namespace Pinta.Tools
 			}
 
 			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface!, doc.CurrentUserLayerIndex)); // NRT - Guarded by surface_modified
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 
@@ -238,8 +239,8 @@ namespace Pinta.Tools
 		#endregion
 
 		#region Private Methods
-		protected bool StrokeShape { get { return (int)fill_button.SelectedItem.Tag % 2 == 0; } }
-		protected bool FillShape { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
+		protected bool StrokeShape { get { return fill_button.SelectedItem.GetTagOrDefault (0) % 2 == 0; } }
+		protected bool FillShape { get { return fill_button.SelectedItem.GetTagOrDefault (0) >= 1; } }
 		#endregion
 	}
 }

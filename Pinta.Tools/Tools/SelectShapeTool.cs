@@ -38,15 +38,16 @@ namespace Pinta.Tools
 		protected Color outline_color;
 		protected Color fill_color;
 
-		protected ToolBarComboBox brush_width;
-		protected ToolBarLabel brush_width_label;
-		protected ToolBarButton brush_width_minus;
-		protected ToolBarButton brush_width_plus;
-		protected ToolBarLabel fill_label;
-		protected ToolBarDropDownButton fill_button;
-		protected Gtk.SeparatorToolItem fill_sep;
+		// NRT - Created by OnBuildToolBar
+		protected ToolBarComboBox brush_width = null!;
+		protected ToolBarLabel brush_width_label = null!;
+		protected ToolBarButton brush_width_minus = null!;
+		protected ToolBarButton brush_width_plus = null!;
+		protected ToolBarLabel fill_label = null!;
+		protected ToolBarDropDownButton fill_button = null!;
+		protected Gtk.SeparatorToolItem fill_sep = null!;
 		protected Rectangle last_dirty;
-		protected ImageSurface undo_surface;
+		protected ImageSurface? undo_surface;
 		protected bool surface_modified;
 
 		public SelectShapeTool()
@@ -134,13 +135,13 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void MinusButtonClickedEvent (object? o, EventArgs args)
 		{
 			if (BrushWidth > 1)
 				BrushWidth--;
 		}
 
-		protected virtual void PlusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void PlusButtonClickedEvent (object? o, EventArgs args)
 		{
 			BrushWidth++;
 		}
@@ -199,7 +200,7 @@ namespace Pinta.Tools
 			surface_modified = false;
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			if (!is_drawing)
 				return;
@@ -212,7 +213,7 @@ namespace Pinta.Tools
 
 			doc.ToolLayer.Clear ();
 
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.State.IsShiftPressed()), doc.ToolLayer);
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.IsShiftPressed()), doc.ToolLayer);
 
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (UseAntialiasing) {
@@ -239,7 +240,8 @@ namespace Pinta.Tools
 		
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
-			return new SimpleHistoryItem (Icon, Name, undo_surface, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
+			// NRT - Assumed not-null
+			return new SimpleHistoryItem (Icon, Name, undo_surface!, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
 		}
 		#endregion
 
@@ -254,8 +256,8 @@ namespace Pinta.Tools
 			return new Gdk.Rectangle (x, y, w, h);
 		}
 
-		protected bool StrokeShape { get { return (int)fill_button.SelectedItem.Tag % 2 == 0; } }
-		protected bool FillShape { get { return (int)fill_button.SelectedItem.Tag >= 1; } }
+		protected bool StrokeShape { get { return fill_button.SelectedItem.GetTagOrDefault (0) % 2 == 0; } }
+		protected bool FillShape { get { return fill_button.SelectedItem.GetTagOrDefault (0) >= 1; } }
 		protected virtual bool ShowStrokeComboBox { get { return true; } }
 		#endregion
 	}

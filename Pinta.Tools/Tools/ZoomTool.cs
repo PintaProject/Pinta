@@ -119,7 +119,7 @@ namespace Pinta.Tools
 			mouseDown = args.Event.Button;
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			base.OnMouseMove (o, args, point);
 

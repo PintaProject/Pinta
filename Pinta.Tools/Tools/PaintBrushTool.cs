@@ -56,10 +56,11 @@ namespace Pinta.Tools
 		public override int Priority { get { return 25; } }
 		#endregion
 
-		private BasePaintBrush default_brush;
-		private BasePaintBrush active_brush;
-		private ToolBarLabel brush_label;
-		private ToolBarComboBox brush_combo_box;
+		// NRT - Set by OnBuildToolBar
+		private BasePaintBrush default_brush = null!;
+		private BasePaintBrush active_brush = null!;
+		private ToolBarLabel brush_label = null!;
+		private ToolBarComboBox brush_combo_box = null!;
 		private Color stroke_color;
         private Point last_point;
 
@@ -108,7 +109,7 @@ namespace Pinta.Tools
 		/// <summary>
 		/// Rebuild the list of brushes when a brush is added or removed.
 		/// </summary>
-		private void HandleBrushAddedOrRemoved (object sender, BrushEventArgs e)
+		private void HandleBrushAddedOrRemoved (object? sender, BrushEventArgs e)
 		{
 			RebuildBrushComboBox ();
 		}
@@ -119,7 +120,7 @@ namespace Pinta.Tools
 		private void RebuildBrushComboBox ()
 		{
 			brush_combo_box.ComboBox.RemoveAll();
-			default_brush = null;
+			default_brush = null!; // NRT - This gets set below, as long as there is at least one brush..
 
 			foreach (var brush in PintaCore.PaintBrushes) {
 				if (default_brush == null)
@@ -143,7 +144,7 @@ namespace Pinta.Tools
 			active_brush.DoMouseUp ();
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 

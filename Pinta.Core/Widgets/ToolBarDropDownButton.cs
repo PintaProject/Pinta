@@ -73,11 +73,15 @@ namespace Pinta.Core
 			return item;
 		}
 
-		public ToolBarItem? SelectedItem {
-			get { return selected_item; }
+		public ToolBarItem SelectedItem {
+			get {
+				if (selected_item is null)
+					throw new InvalidOperationException ("Attempted to get SelectedItem from a drop down with no items.");
+
+				return selected_item;
+			}
 			set {
-				// We don't support setting the selected item back to nothing
-				if (value != null && selected_item != value)
+				if (selected_item != value)
 					SetSelectedItem (value);
 			}
 		}
@@ -124,5 +128,13 @@ namespace Pinta.Core
 		public object? Tag { get; set; }
 		public string Text { get; set; }
 		public GLib.SimpleAction Action { get; private set; }
+
+		public T GetTagOrDefault<T> (T defaultValue)
+		{
+			if (Tag is T value)
+				return value;
+
+			return defaultValue;
+		}
 	}
 }

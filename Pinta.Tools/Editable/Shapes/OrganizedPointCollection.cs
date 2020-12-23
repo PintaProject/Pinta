@@ -86,8 +86,8 @@ namespace Pinta.Tools
 			int sX = (int)((op.Position.X - op.Position.X % SectionSize) / SectionSize);
 			int sY = (int)((op.Position.Y - op.Position.Y % SectionSize) / SectionSize);
 
-			Dictionary<int, List<OrganizedPoint>> xSection;
-			List<OrganizedPoint> ySection;
+			Dictionary<int, List<OrganizedPoint>>? xSection;
+			List<OrganizedPoint>? ySection;
 
 			//Ensure that the xSection for this particular point exists.
 			if (!collection.TryGetValue(sX, out xSection))
@@ -156,7 +156,7 @@ namespace Pinta.Tools
 				for (int x = xMin; x <= xMax; ++x)
 				{
 					//This must be created each time to ensure that it is fresh for each loop iteration.
-					Dictionary<int, List<OrganizedPoint>> xSection;
+					Dictionary<int, List<OrganizedPoint>>? xSection;
 
 					//If the xSection doesn't exist, move on.
 					if (oP.TryGetValue(x, out xSection))
@@ -165,7 +165,7 @@ namespace Pinta.Tools
 						//the points in the surrounding sections must also be checked.
 						for (int y = yMin; y <= yMax; ++y)
 						{
-							List<OrganizedPoint> ySection;
+							List<OrganizedPoint>? ySection;
 
 							//If the ySection doesn't exist, move on.
 							if (xSection.TryGetValue(y, out ySection))

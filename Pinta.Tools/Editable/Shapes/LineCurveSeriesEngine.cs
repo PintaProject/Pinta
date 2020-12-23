@@ -48,7 +48,7 @@ namespace Pinta.Tools
 		/// <param name="outline_color">The outline color for the shape.</param>
 		/// <param name="fill_color">The fill color for the shape.</param>
 		/// <param name="brush_width">The width of the outline of the shape.</param>
-		public LineCurveSeriesEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, BaseEditEngine.ShapeTypes passedShapeType,
+		public LineCurveSeriesEngine(UserLayer parentLayer, ReEditableLayer? passedDrawingLayer, BaseEditEngine.ShapeTypes passedShapeType,
 			bool passedAA, bool passedClosed, Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer,
 			passedDrawingLayer, passedShapeType, passedAA, passedClosed, passedOutlineColor, passedFillColor, passedBrushWidth)
 		{

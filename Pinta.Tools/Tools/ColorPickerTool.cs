@@ -35,12 +35,13 @@ namespace Pinta.Tools
 	{
 		private int button_down = 0;
 
-		private ToolBarDropDownButton tool_select;
-		private ToolBarLabel tool_select_label;
-		private ToolBarLabel sampling_label;
-		private ToolBarDropDownButton sample_size;
-		private ToolBarDropDownButton sample_type;
-		private Gtk.ToolItem sample_sep;
+		// NRT - Created in OnBuildToolBar
+		private ToolBarDropDownButton tool_select = null!;
+		private ToolBarLabel tool_select_label = null!;
+		private ToolBarLabel sampling_label = null!;
+		private ToolBarDropDownButton sample_size = null!;
+		private ToolBarDropDownButton sample_type = null!;
+		private Gtk.ToolItem sample_sep = null!;
 
 		#region Properties
 		public override string Name {
@@ -75,7 +76,7 @@ namespace Pinta.Tools
 			{
 				if (sample_size != null)
 				{
-					return (int)sample_size.SelectedItem.Tag;
+					return sample_size.SelectedItem.GetTagOrDefault (1);
 				}
 				else
 				{
@@ -84,7 +85,7 @@ namespace Pinta.Tools
 			}
 		}
 		private bool SampleLayerOnly {
-			get { return (bool)sample_type.SelectedItem.Tag; }
+			get { return sample_type.SelectedItem.GetTagOrDefault (false); }
 		}
 		#endregion
 
@@ -165,7 +166,7 @@ namespace Pinta.Tools
 				PintaCore.Palette.SecondaryColor = color;
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -187,9 +188,9 @@ namespace Pinta.Tools
 		{
 			button_down = 0;
 			
-			if ((int)tool_select.SelectedItem.Tag == 1)
+			if (tool_select.SelectedItem.GetTagOrDefault (0) == 1)
 				PintaCore.Tools.SetCurrentTool(PintaCore.Tools.PreviousTool);
-			else if ((int)tool_select.SelectedItem.Tag == 2)
+			else if (tool_select.SelectedItem.GetTagOrDefault (0) == 2)
 				PintaCore.Tools.SetCurrentTool(Translations.GetString("Pencil"));
 		}
 		#endregion

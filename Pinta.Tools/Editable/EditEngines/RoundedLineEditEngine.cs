@@ -47,11 +47,12 @@ namespace Pinta.Tools
 
 		protected double previousRadius = DefaultRadius;
 
-		protected ToolBarComboBox radius;
-		protected ToolBarLabel radius_label;
-		protected ToolBarButton radius_minus;
-		protected ToolBarButton radius_plus;
-		protected Gtk.SeparatorToolItem radius_sep;
+		// NRT - Created in HandleBuildToolBar
+		protected ToolBarComboBox radius = null!;
+		protected ToolBarLabel radius_label = null!;
+		protected ToolBarButton radius_minus = null!;
+		protected ToolBarButton radius_plus = null!;
+		protected Gtk.SeparatorToolItem radius_sep = null!;
 
 		public double Radius
 		{
@@ -95,7 +96,7 @@ namespace Pinta.Tools
 				{
 					radius.ComboBox.Entry.Text = value.ToString();
 
-					ShapeEngine selEngine = SelectedShapeEngine;
+					ShapeEngine? selEngine = SelectedShapeEngine;
 
 					if (selEngine != null && selEngine.ShapeType == ShapeTypes.RoundedLineSeries)
 					{
@@ -157,7 +158,7 @@ namespace Pinta.Tools
 			tb.AppendItem(radius_plus);
 		}
 
-		private void RadiusMinusButtonClickedEvent(object o, EventArgs args)
+		private void RadiusMinusButtonClickedEvent(object? o, EventArgs args)
 		{
 			if (Math.Truncate(Radius) > 0)
 			{
@@ -165,7 +166,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void RadiusPlusButtonClickedEvent(object o, EventArgs args)
+		private void RadiusPlusButtonClickedEvent(object? o, EventArgs args)
 		{
 			Radius = Math.Truncate(Radius) + 1;
 		}
@@ -186,7 +187,7 @@ namespace Pinta.Tools
 			AddRectanglePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);
 
 			//Set the new shape's DashPattern option.
-			newEngine.DashPattern = dash_pattern_box.comboBox.ComboBox.ActiveText;
+			newEngine.DashPattern = dash_pattern_box.comboBox!.ComboBox.ActiveText; // NRT - Code assumes this is not-null
 
 			return newEngine;
 		}

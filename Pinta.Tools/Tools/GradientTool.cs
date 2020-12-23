@@ -34,7 +34,7 @@ namespace Pinta.Tools
 	{
 		Cairo.PointD startpoint;
 		bool tracking;
-		protected ImageSurface undo_surface;
+		protected ImageSurface? undo_surface;
 		uint button;
 
 		public override string Name {
@@ -78,10 +78,12 @@ namespace Pinta.Tools
 				return;
 		
 			tracking = false;
-			doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+
+			if (undo_surface != null)
+				doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -142,8 +144,9 @@ namespace Pinta.Tools
 		#endregion
 
 		#region ToolBar
-		private ToolBarLabel gradient_label;
-		private ToolBarDropDownButton gradient_button;
+		// NRT - Created in OnBuildToolBar
+		private ToolBarLabel gradient_label = null!;
+		private ToolBarDropDownButton gradient_button = null!;
 		//private ToolBarLabel mode_label;
 		//private ToolBarDropDownButton mode_button;
 		
@@ -189,7 +192,7 @@ namespace Pinta.Tools
 		}
 
 		private GradientType SelectedGradientType {
-			get { return (GradientType)gradient_button.SelectedItem.Tag; }
+			get { return gradient_button.SelectedItem.GetTagOrDefault (GradientType.Linear); }
 		}
 
 		private GradientColorMode SelectedGradientColorMode {

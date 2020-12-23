@@ -43,15 +43,16 @@ namespace Pinta.Tools
 {
 	public abstract class FloodTool : BaseTool
 	{
-		protected ToolBarLabel mode_label;
-		protected ToolBarDropDownButton mode_button;
-		protected Gtk.ToolItem mode_sep;
-		protected ToolBarLabel tolerance_label;
-		protected ToolBarSlider tolerance_slider;
+		// NRT - Created in OnBuildToolBar
+		protected ToolBarLabel mode_label = null!;
+		protected ToolBarDropDownButton mode_button = null!;
+		protected Gtk.ToolItem mode_sep = null!;
+		protected ToolBarLabel tolerance_label = null!;
+		protected ToolBarSlider tolerance_slider = null!;
 		private bool limitToSelection = true;
 		
 		#region Protected Properties
-		protected bool IsContinguousMode { get { return (bool)mode_button.SelectedItem.Tag; } }
+		protected bool IsContinguousMode { get { return mode_button.SelectedItem.GetTagOrDefault (true); } }
 		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
 		protected virtual bool CalculatePolygonSet { get { return true; } }
 

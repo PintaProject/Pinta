@@ -30,12 +30,12 @@ namespace Pinta.Tools
 		private Rectangle old_cursor_bounds = Rectangle.Zero;
 
 		//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
-		private Cairo.ImageSurface text_undo_surface;
-		private Cairo.ImageSurface user_undo_surface;
-		private TextEngine undo_engine;
+		private Cairo.ImageSurface? text_undo_surface;
+		private Cairo.ImageSurface? user_undo_surface;
+		private TextEngine? undo_engine;
 		// The selection from when editing started. This ensures that text doesn't suddenly disappear/appear
 		// if the selection changes before the text is finalized.
-		private DocumentSelection selection;
+		private DocumentSelection? selection;
 
 		private Gtk.IMMulticontext imContext;
 		private Pinta.Core.TextLayout layout;
@@ -59,13 +59,10 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return PintaCore.Workspace.HasOpenDocuments ?
-					PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine : null;
-			}
+				if (!PintaCore.Workspace.HasOpenDocuments)
+					throw new InvalidOperationException ("Attempting to get CurrentTextEngine when there are no open documents");
 
-			set
-			{
-				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine = value;
+				return PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine;
 			}
 		}
 
@@ -120,24 +117,25 @@ namespace Pinta.Tools
 #endregion
 
 #region ToolBar
-		private ToolBarLabel font_label;
-		private ToolBarFontComboBox font_combo;
-		private ToolBarComboBox size_combo;
-		private ToolBarToggleButton bold_btn;
-		private ToolBarToggleButton italic_btn;
-		private ToolBarToggleButton underscore_btn;
-		private ToolBarToggleButton left_alignment_btn;
-		private ToolBarToggleButton center_alignment_btn;
-		private ToolBarToggleButton Right_alignment_btn;
-		private ToolBarLabel spacer_label;
-		private ToolBarLabel fill_label;
-		private ToolBarDropDownButton fill_button;
-		private SeparatorToolItem fill_sep;
-		private SeparatorToolItem outline_sep;
-		private ToolBarComboBox outline_width;
-		private ToolBarLabel outline_width_label;
-		private ToolBarButton outline_width_minus;
-		private ToolBarButton outline_width_plus;
+		// NRT - Created by OnBuildToolBar
+		private ToolBarLabel font_label = null!;
+		private ToolBarFontComboBox font_combo = null!;
+		private ToolBarComboBox size_combo = null!;
+		private ToolBarToggleButton bold_btn = null!;
+		private ToolBarToggleButton italic_btn = null!;
+		private ToolBarToggleButton underscore_btn = null!;
+		private ToolBarToggleButton left_alignment_btn = null!;
+		private ToolBarToggleButton center_alignment_btn = null!;
+		private ToolBarToggleButton Right_alignment_btn = null!;
+		private ToolBarLabel spacer_label = null!;
+		private ToolBarLabel fill_label = null!;
+		private ToolBarDropDownButton fill_button = null!;
+		private SeparatorToolItem fill_sep = null!;
+		private SeparatorToolItem outline_sep = null!;
+		private ToolBarComboBox outline_width = null!;
+		private ToolBarLabel outline_width_label = null!;
+		private ToolBarButton outline_width_minus = null!;
+		private ToolBarButton outline_width_plus = null!;
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -292,7 +290,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void HandleFontChanged (object sender, EventArgs e)
+		private void HandleFontChanged (object? sender, EventArgs e)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
@@ -326,7 +324,7 @@ namespace Pinta.Tools
 			size_combo.ComboBox.Active = index;
 		}
 
-		private void HandleSizeChanged (object sender, EventArgs e)
+		private void HandleSizeChanged (object? sender, EventArgs e)
 		{
 			string text = size_combo.ComboBox.ActiveText;
 			if (int.TryParse (text, out FontSize))
@@ -334,7 +332,7 @@ namespace Pinta.Tools
 		}
 
 		private Pango.FontFamily FontFamily {
-			get { return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.ActiveText); }
+			get { return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.ActiveText)!; } // NRT - Code expects this to be not-null
 		}
 
 		private int FontSize;
@@ -354,13 +352,13 @@ namespace Pinta.Tools
 			get { return font_combo.ComboBox.ActiveText; }
 		}
 
-		private void HandlePintaCorePalettePrimaryColorChanged (object sender, EventArgs e)
+		private void HandlePintaCorePalettePrimaryColorChanged (object? sender, EventArgs e)
 		{
 			if (is_editing)
 				RedrawText (true, true);
 		}
 
-		private void HandleLeftAlignmentButtonToggled (object sender, EventArgs e)
+		private void HandleLeftAlignmentButtonToggled (object? sender, EventArgs e)
 		{
 			if (left_alignment_btn.Active) {
 				Right_alignment_btn.Active = false;
@@ -372,7 +370,7 @@ namespace Pinta.Tools
 			UpdateFont ();
 		}
 
-		private void HandleCenterAlignmentButtonToggled (object sender, EventArgs e)
+		private void HandleCenterAlignmentButtonToggled (object? sender, EventArgs e)
 		{
 			if (center_alignment_btn.Active) {
 				Right_alignment_btn.Active = false;
@@ -384,7 +382,7 @@ namespace Pinta.Tools
 			UpdateFont ();
 		}
 
-		private void HandleRightAlignmentButtonToggled (object sender, EventArgs e)
+		private void HandleRightAlignmentButtonToggled (object? sender, EventArgs e)
 		{
 			if (Right_alignment_btn.Active) {
 				center_alignment_btn.Active = false;
@@ -396,17 +394,17 @@ namespace Pinta.Tools
 			UpdateFont ();
 		}
 
-		private void HandleUnderscoreButtonToggled (object sender, EventArgs e)
+		private void HandleUnderscoreButtonToggled (object? sender, EventArgs e)
 		{
 			UpdateFont ();
 		}
 
-		private void HandleItalicButtonToggled (object sender, EventArgs e)
+		private void HandleItalicButtonToggled (object? sender, EventArgs e)
 		{
 			UpdateFont ();
 		}
 
-		private void HandleBoldButtonToggled (object sender, EventArgs e)
+		private void HandleBoldButtonToggled (object? sender, EventArgs e)
 		{
 			outline_width_plus.Visible = outline_width_minus.Visible = outline_width.Visible
 				= outline_width_label.Visible = outline_sep.Visible = StrokeText;
@@ -414,7 +412,7 @@ namespace Pinta.Tools
 			UpdateFont ();
 		}
 
-		private void HandleSelectedLayerChanged(object sender, EventArgs e)
+		private void HandleSelectedLayerChanged(object? sender, EventArgs e)
 		{
 			UpdateFont();
 		}
@@ -430,13 +428,13 @@ namespace Pinta.Tools
 				RedrawText (true, true);
 		}
 
-		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void MinusButtonClickedEvent (object? o, EventArgs args)
 		{
 			if (OutlineWidth > 1)
 				OutlineWidth--;
 		}
 
-		protected virtual void PlusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void PlusButtonClickedEvent (object? o, EventArgs args)
 		{
 			OutlineWidth++;
 		}
@@ -456,9 +454,9 @@ namespace Pinta.Tools
 			set { outline_width.ComboBox.Entry.Text = value.ToString (); }
 		}
 
-		protected bool StrokeText { get { return ((int)fill_button.SelectedItem.Tag >= 1 && (int)fill_button.SelectedItem.Tag != 3); } }
-		protected bool FillText { get { return (int)fill_button.SelectedItem.Tag <= 1 || (int)fill_button.SelectedItem.Tag == 3; } }
-		protected bool BackgroundFill { get { return (int)fill_button.SelectedItem.Tag == 3; } }
+		protected bool StrokeText { get { return (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3); } }
+		protected bool FillText { get { return fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3; } }
+		protected bool BackgroundFill { get { return fill_button.SelectedItem.GetTagOrDefault (0) == 3; } }
 #endregion
 
 #region Activation/Deactivation
@@ -615,9 +613,9 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
-			ctrlKey = (args.Event.State & ModifierType.ControlMask) != 0;
+			ctrlKey = args.IsControlPressed ();
 
 			lastMousePosition = point.ToGdkPoint();
 
@@ -945,7 +943,7 @@ namespace Pinta.Tools
 				//Create a new TextHistoryItem so that the committing of text can be undone.
 				doc.History.PushNewItem(new TextHistoryItem(Icon, Name,
 							text_undo_surface.Clone(), user_undo_surface.Clone(),
-							undo_engine.Clone(), doc.CurrentUserLayer));
+							undo_engine!.Clone(), doc.CurrentUserLayer)); // NRT - Set in StartEditing
 
 				//Stop ignoring any Surface.Clone calls from this point on.
 				ignoreCloneFinalizations = false;

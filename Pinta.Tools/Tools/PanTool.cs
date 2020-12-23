@@ -70,9 +70,9 @@ namespace Pinta.Tools
 			active = false;
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, PointD point)
 		{
-			if (active) {
+			if (active && args != null) {
 				Document doc = PintaCore.Workspace.ActiveDocument;
 
 				doc.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));

@@ -35,22 +35,23 @@ namespace Pinta.Tools
 {
 	public abstract class ArrowedEditEngine : BaseEditEngine
 	{
-		private Gtk.SeparatorToolItem arrowSep;
-		private ToolBarLabel arrowLabel;
-		private Gtk.CheckButton showArrowOneBox, showArrowTwoBox;
+		// NRT - These are all set by HandleBuildToolBar
+		private Gtk.SeparatorToolItem arrowSep = null!;
+		private ToolBarLabel arrowLabel = null!;
+		private Gtk.CheckButton showArrowOneBox = null!, showArrowTwoBox = null!;
 		private bool showOtherArrowOptions;
 
-		private ToolBarComboBox arrowSize;
-		private ToolBarLabel arrowSizeLabel;
-		private ToolBarButton arrowSizeMinus, arrowSizePlus;
+		private ToolBarComboBox arrowSize = null!;
+		private ToolBarLabel arrowSizeLabel = null!;
+		private ToolBarButton arrowSizeMinus = null!, arrowSizePlus = null!;
 
-		private ToolBarComboBox arrowAngleOffset;
-		private ToolBarLabel arrowAngleOffsetLabel;
-		private ToolBarButton arrowAngleOffsetMinus, arrowAngleOffsetPlus;
+		private ToolBarComboBox arrowAngleOffset = null!;
+		private ToolBarLabel arrowAngleOffsetLabel = null!;
+		private ToolBarButton arrowAngleOffsetMinus = null!, arrowAngleOffsetPlus = null!;
 
-		private ToolBarComboBox arrowLengthOffset;
-		private ToolBarLabel arrowLengthOffsetLabel;
-		private ToolBarButton arrowLengthOffsetMinus, arrowLengthOffsetPlus;
+		private ToolBarComboBox arrowLengthOffset = null!;
+		private ToolBarLabel arrowLengthOffsetLabel = null!;
+		private ToolBarButton arrowLengthOffsetMinus = null!, arrowLengthOffsetPlus = null!;
 
 		private Arrow previousSettings1 = new Arrow();
 		private Arrow previousSettings2 = new Arrow();
@@ -58,7 +59,7 @@ namespace Pinta.Tools
 
 		#region ToolbarEventHandlers
 
-		void arrowSizeMinus_Clicked(object sender, EventArgs e)
+		void arrowSizeMinus_Clicked(object? sender, EventArgs e)
 		{
 			double newSize = 10d;
 
@@ -79,7 +80,7 @@ namespace Pinta.Tools
 			arrowSize.ComboBox.Entry.Text = newSize.ToString();
 		}
 
-		void arrowSizePlus_Clicked(object sender, EventArgs e)
+		void arrowSizePlus_Clicked(object? sender, EventArgs e)
 		{
 			double newSize = 10d;
 
@@ -100,7 +101,7 @@ namespace Pinta.Tools
 			arrowSize.ComboBox.Entry.Text = newSize.ToString();
 		}
 
-		void arrowAngleOffsetMinus_Clicked(object sender, EventArgs e)
+		void arrowAngleOffsetMinus_Clicked(object? sender, EventArgs e)
 		{
 			double newAngle = 0d;
 
@@ -121,7 +122,7 @@ namespace Pinta.Tools
 			arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
 		}
 
-		void arrowAngleOffsetPlus_Clicked(object sender, EventArgs e)
+		void arrowAngleOffsetPlus_Clicked(object? sender, EventArgs e)
 		{
 			double newAngle = 0d;
 
@@ -142,7 +143,7 @@ namespace Pinta.Tools
 			arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
 		}
 
-		void arrowLengthOffsetMinus_Clicked(object sender, EventArgs e)
+		void arrowLengthOffsetMinus_Clicked(object? sender, EventArgs e)
 		{
 			double newLength = 10d;
 
@@ -163,7 +164,7 @@ namespace Pinta.Tools
 			arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
 		}
 
-		void arrowLengthOffsetPlus_Clicked(object sender, EventArgs e)
+		void arrowLengthOffsetPlus_Clicked(object? sender, EventArgs e)
 		{
 			double newLength = 10d;
 
@@ -263,7 +264,7 @@ namespace Pinta.Tools
 					}
 				}
 
-				LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
+				LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
 
 				if (activeEngine != null)
 				{
@@ -327,7 +328,7 @@ namespace Pinta.Tools
 					}
 				}
 
-				LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
+				LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
 
 				if (activeEngine != null)
 				{
@@ -403,7 +404,7 @@ namespace Pinta.Tools
 
 						arrowSize.ComboBox.Entry.Text = newSize.ToString();
 
-						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
+						LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
 
 						if (activeEngine != null)
 						{
@@ -482,7 +483,7 @@ namespace Pinta.Tools
 
 						arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
 
-						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
+						LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
 
 						if (activeEngine != null)
 						{
@@ -561,7 +562,7 @@ namespace Pinta.Tools
 
 						arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
 
-						LineCurveSeriesEngine activeEngine = (LineCurveSeriesEngine)ActiveShapeEngine;
+						LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
 
 						if (activeEngine != null)
 						{
@@ -694,7 +695,7 @@ namespace Pinta.Tools
 
 		protected override void DrawExtras(ref Rectangle? dirty, Context g, ShapeEngine engine)
 		{
-            LineCurveSeriesEngine lCSEngine = engine as LineCurveSeriesEngine;
+            LineCurveSeriesEngine? lCSEngine = engine as LineCurveSeriesEngine;
 			if (lCSEngine != null && engine.ControlPoints.Count > 0)
 			{
 				// Draw the arrows for the currently active shape.
