@@ -41,7 +41,6 @@ namespace Pinta
 			action_handlers.Add (new NewDocumentAction ());
 			action_handlers.Add (new NewScreenshotAction ());
 			action_handlers.Add (new OpenDocumentAction ());
-			action_handlers.Add (new OpenRecentAction ());
 			action_handlers.Add (new SaveDocumentAction ());
 			action_handlers.Add (new SaveDocumentAsAction ());
 			action_handlers.Add (new PrintDocumentAction ());
