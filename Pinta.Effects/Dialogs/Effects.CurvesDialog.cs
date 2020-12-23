@@ -95,8 +95,6 @@ namespace Pinta.Effects
 			Build ();
 			
 			EffectData = effectData;
-		
-			drawing.DoubleBuffered = true;
 			
 			comboMap.Changed += HandleComboMapChanged;
 			buttonReset.Clicked += HandleButtonResetClicked;
