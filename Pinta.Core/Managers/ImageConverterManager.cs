@@ -167,7 +167,6 @@ namespace Pinta.Core
 			extension = NormalizeExtension (extension);
 
 			PintaCore.Settings.PutSetting ("default-image-type", extension);
-			PintaCore.Settings.SaveSettings ();
 		}
 
 		/// <summary>

@@ -73,7 +73,6 @@ namespace Pinta.Actions
 				PintaCore.Settings.PutSetting ("new-image-width", dialog.NewImageWidth);
 				PintaCore.Settings.PutSetting ("new-image-height", dialog.NewImageHeight);
 				PintaCore.Settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
-				PintaCore.Settings.SaveSettings ();
 			}
 		}
 

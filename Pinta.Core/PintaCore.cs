@@ -50,7 +50,11 @@ namespace Pinta.Core
 
 		static PintaCore ()
 		{
+			// Resources and Settings are intialized first so later
+			// Managers can access them as needed.
 			Resources = new ResourceManager ();
+			Settings = new SettingsManager ();
+
 			Actions = new ActionManager ();
 			Workspace = new WorkspaceManager ();
 			Layers = new LayerManager ();
@@ -60,12 +64,8 @@ namespace Pinta.Core
 			System = new SystemManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();
-			Settings = new SettingsManager ();
 			Chrome = new ChromeManager ();
 			Effects = new EffectsManager ();
-
-			// Break a circular dependency between Palette and Settings
-			Palette.Initialize ();
 		}
 		
 		public static void Initialize ()

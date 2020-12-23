@@ -29,17 +29,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Pinta.Core
 {
 	public class SettingsManager
 	{
-		private Dictionary<string, object> settings = null!; // NRT - Set by LoadSettings in constructor
+		private const string SETTINGS_FILE = "settings.xml";
 
-        public string LayoutFile { get { return "layouts.xml"; } }
-        public string LayoutFilePath { get { return Path.Combine (GetUserSettingsDirectory (), LayoutFile); } }
+		private readonly Dictionary<string, object> settings = new ();
+
+		/// <summary>
+		/// Handle this event to be given a chance to save settings to disk
+		/// when the user is closing the application.
+		/// </summary>
+		public event EventHandler? SaveSettingsBeforeQuit;
 
 		public SettingsManager ()
 		{
@@ -48,22 +53,21 @@ namespace Pinta.Core
 		
 		public string GetUserSettingsDirectory ()
 		{
-			var settings_dir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "Pinta");
+			var settings_directory = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "Pinta");
 
 			// If someone is getting this, they probably are going to need
 			// the directory created, so just handle that here.
-			if (!Directory.Exists (settings_dir))
-				Directory.CreateDirectory (settings_dir);
+			Directory.CreateDirectory (settings_directory);
 
-			return settings_dir;
+			return settings_directory;
 		}
 		
 		public T GetSetting<T> (string key, T defaultValue)
 		{
-			if (!settings.ContainsKey (key))
-				return defaultValue;
-				
-			return (T)settings[key];
+			if (settings.TryGetValue (key, out var value))
+				return (T) value;
+
+			return defaultValue;
 		}
 		
 		public void PutSetting (string key, object value)
@@ -71,88 +75,81 @@ namespace Pinta.Core
 			settings[key] = value;
 		}
 
-		private static Dictionary<string, object> Deserialize (string filename)
+		public void DoSaveSettingsBeforeQuit ()
 		{
-			Dictionary<string, object> properties = new Dictionary<string,object> ();
+			SaveSettingsBeforeQuit?.Invoke (this, EventArgs.Empty);
 
-			if (!File.Exists (filename))
-				return properties;
-				
-			XmlDocument doc = new XmlDocument ();
-			doc.Load (filename);
-
-			// NRT - Assumes file is formatted valid, should rewrite more defensively.
-
-			// Kinda cheating for now because I know there is only a few things stored in here
-			foreach (XmlElement setting in doc.DocumentElement!.ChildNodes) {
-				switch (setting.GetAttribute ("type")) {
-					case "System.Int32":
-						properties[setting.GetAttribute ("name")] = int.Parse (setting.InnerText);
-						break;
-					case "System.Boolean":
-						properties[setting.GetAttribute ("name")] = bool.Parse (setting.InnerText);
-						break;
-					case "System.String":
-						properties[setting.GetAttribute ("name")] = setting.InnerText;
-						break;
-				}
-			
-			}
-
-			return properties;
+			SaveSettings ();
 		}
 
-		private static void Serialize (string filename, Dictionary<string, object> settings)
-		{
-			string path = Path.GetDirectoryName (filename)!; // NRT - We build the filename so we know it has a directory
-
-			if (!Directory.Exists (path))
-				Directory.CreateDirectory (path);
-
-			using (XmlTextWriter xw = new XmlTextWriter (filename, System.Text.Encoding.UTF8)) {
-				xw.Formatting = Formatting.Indented;
-				xw.WriteStartElement ("settings");
-				
-				foreach (var item in settings) {
-					xw.WriteStartElement ("setting");
-					xw.WriteAttributeString ("name", item.Key);
-					xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
-					xw.WriteValue (item.Value.ToString ());
-					xw.WriteEndElement ();
-				}
-				
-				xw.WriteEndElement ();
-			}
-		}
-		
 		private void LoadSettings ()
 		{
-			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
+			var settings_file = Path.Combine (GetUserSettingsDirectory (), SETTINGS_FILE);
+
+			if (!File.Exists (settings_file))
+				return;
+
+			XDocument document;
 
 			try {
-				settings = Deserialize (settings_file);
-			} catch (Exception) {
-				// Will load with default settings
-				settings = new Dictionary<string,object> ();
+				document = XDocument.Load (settings_file);
+			} catch (Exception ex) {
+				Console.Error.WriteLine (ex);
+				return;
 			}
-			
-			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
-			
-			try {
-				PintaCore.Palette.CurrentPalette.Load (palette_file);
-			} catch (Exception) {
-				// Retain the default palette
+
+			var nodes = document.Element ("settings")?.Elements ("setting") ?? Enumerable.Empty<XElement> (); ;
+
+			foreach (var node in nodes) {
+				if (node.Attribute ("name")?.Value is not string name)
+					continue;
+
+				// Kinda cheating because we know there are only a few types stored in here
+				switch (node.Attribute ("type")?.Value) {
+					case "System.Int32":
+						if (int.TryParse (node.Value, out var i))
+							PutSetting (name, i);
+						break;
+					case "System.Boolean":
+						if (bool.TryParse (node.Value, out var b))
+							PutSetting (name, b);
+						break;
+					case "System.String":
+						if (node.Value is string s)
+							PutSetting (name, s);
+						break;
+				}
 			}
 		}
-		
-		public void SaveSettings ()
+
+		private void SaveSettings ()
 		{
-			string settings_file = Path.Combine (GetUserSettingsDirectory (), "settings.xml");
-			Serialize (settings_file, settings);
-			
-			string palette_file = Path.Combine (GetUserSettingsDirectory (), "palette.txt");
-			PintaCore.Palette.CurrentPalette.Save (palette_file,
-				PintaCore.System.PaletteFormats.Formats.First(p => p.Extensions.Contains("txt")).Saver);
+			try {
+				var settings_dir = GetUserSettingsDirectory ();
+				var settings_file = Path.Combine (settings_dir, SETTINGS_FILE);
+
+				// Just in case the directory got deleted after the application started
+				Directory.CreateDirectory (settings_dir);
+
+				using (var xw = new XmlTextWriter (settings_file, Encoding.UTF8)) {
+					xw.Formatting = Formatting.Indented;
+					xw.WriteStartElement ("settings");
+
+					foreach (var item in settings) {
+						xw.WriteStartElement ("setting");
+						xw.WriteAttributeString ("name", item.Key);
+						xw.WriteAttributeString ("type", item.Value.GetType ().ToString ());
+						xw.WriteValue (item.Value.ToString ());
+						xw.WriteEndElement ();
+					}
+
+					xw.WriteEndElement ();
+				}
+			} catch (Exception ex) {
+				// Not much we can do at this point since the application is exiting,
+				// but I could imagine scenarios where the user doesn't have write permission.
+				Console.Error.WriteLine (ex);
+			}
 		}
 	}
 }
