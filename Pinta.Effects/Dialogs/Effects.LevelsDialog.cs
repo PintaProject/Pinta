@@ -34,14 +34,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#nullable disable
-
 using System;
 using Gtk;
 using Cairo;
 
 using Pinta.Core;
 using Pinta.Gui.Widgets;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
@@ -158,7 +157,7 @@ namespace Pinta.Effects
 			spinOutHigh.Value = 255;
 		}
 
-		private void HandleButtonResetClicked (object sender, EventArgs e)
+		private void HandleButtonResetClicked (object? sender, EventArgs e)
 		{
 			Reset ();
 		}
@@ -181,7 +180,7 @@ namespace Pinta.Effects
 			disable_updating = false;
 		}
 
-		private void HandleButtonAutoClicked (object sender, EventArgs e)
+		private void HandleButtonAutoClicked (object? sender, EventArgs e)
 		{
 			Levels = histogramInput.Histogram.MakeLevelsAuto ();
 
@@ -189,17 +188,17 @@ namespace Pinta.Effects
 			UpdateLevels ();
 		}
 
-		private void HandleSpinInLowValueChanged (object sender, EventArgs e)
+		private void HandleSpinInLowValueChanged (object? sender, EventArgs e)
 		{
 			gradientInput.SetValue (0, spinInLow.ValueAsInt);
 		}
 
-		private void HandleSpinInHighValueChanged (object sender, EventArgs e)
+		private void HandleSpinInHighValueChanged (object? sender, EventArgs e)
 		{
 			gradientInput.SetValue (1, spinInHigh.ValueAsInt);
 		}
 
-		private void HandleSpinOutLowValueChanged (object sender, EventArgs e)
+		private void HandleSpinOutLowValueChanged (object? sender, EventArgs e)
 		{
 			gradientOutput.SetValue (0, spinOutLow.ValueAsInt);
 		}
@@ -213,12 +212,12 @@ namespace Pinta.Effects
 			return med;
 		}
 
-		private void HandleSpinOutGammaValueChanged (object sender, EventArgs e)
+		private void HandleSpinOutGammaValueChanged (object? sender, EventArgs e)
 		{
 			gradientOutput.SetValue (1, FromGammaValue ());
 		}
 
-		private void HandleSpinOutHighValueChanged (object sender, EventArgs e)
+		private void HandleSpinOutHighValueChanged (object? sender, EventArgs e)
 		{
 			gradientOutput.SetValue (2, spinOutHigh.ValueAsInt);
 		}
@@ -446,19 +445,19 @@ namespace Pinta.Effects
 			Window.Invalidate ();
 		}
 
-		private void HandleCheckRedToggled (object sender, EventArgs e)
+		private void HandleCheckRedToggled (object? sender, EventArgs e)
 		{
 			mask[0] = checkRed.Active;
 			MaskChanged ();
 		}
 
-		private void HandleCheckGreenToggled (object sender, EventArgs e)
+		private void HandleCheckGreenToggled (object? sender, EventArgs e)
 		{
 			mask[1] = checkGreen.Active;
 			MaskChanged ();
 		}
 
-		private void HandleCheckBlueToggled (object sender, EventArgs e)
+		private void HandleCheckBlueToggled (object? sender, EventArgs e)
 		{
 			mask[2] = checkBlue.Active;
 			MaskChanged ();
@@ -508,6 +507,9 @@ namespace Pinta.Effects
 			UpdateLevels ();
 		}
 
+		[MemberNotNull (nameof (checkRed), nameof (checkGreen), nameof (checkBlue), nameof (buttonReset), nameof (buttonAuto), nameof (spinInLow), nameof (spinInHigh),
+				nameof (spinOutLow), nameof (spinOutHigh), nameof (spinOutGamma), nameof (gradientInput), nameof (gradientOutput), nameof (colorpanelInHigh),
+				nameof (colorpanelInLow), nameof (colorpanelOutLow), nameof (colorpanelOutMid), nameof (colorpanelOutHigh), nameof (histogramInput), nameof (histogramOutput))]
 		private void Build ()
 		{
 			const int spacing = 6;

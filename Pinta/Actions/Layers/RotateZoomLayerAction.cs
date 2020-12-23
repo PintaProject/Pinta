@@ -63,7 +63,7 @@ namespace Pinta.Actions
 					PintaCore.Workspace.Invalidate ();
 				};
 
-				response = (Gtk.ResponseType)dialog.Run ();
+				response = (Gtk.ResponseType) dialog.Run ();
 			}
 
 			ClearLivePreview ();
@@ -72,39 +72,39 @@ namespace Pinta.Actions
 		}
 
 		private static void ClearLivePreview ()
-	    {
-            PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Transform.InitIdentity ();
-            PintaCore.Workspace.Invalidate ();
-	    }
+		{
+			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Transform.InitIdentity ();
+			PintaCore.Workspace.Invalidate ();
+		}
 
-	    private static Matrix ComputeMatrix (RotateZoomData data)
-	    {
-	        var xform = new Matrix ();
-	        var image_size = PintaCore.Workspace.ImageSize;
-            var center_x = image_size.Width / 2.0;
-            var center_y = image_size.Height / 2.0;
+		private static Matrix ComputeMatrix (RotateZoomData data)
+		{
+			var xform = new Matrix ();
+			var image_size = PintaCore.Workspace.ImageSize;
+			var center_x = image_size.Width / 2.0;
+			var center_y = image_size.Height / 2.0;
 
-            xform.Translate ((1 + data.Pan.X) * center_x, (1 + data.Pan.Y) * center_y);
-            xform.Rotate ((-data.Angle / 180d) * Math.PI);
-            xform.Scale (data.Zoom, data.Zoom);
-	        xform.Translate (-center_x, -center_y);
+			xform.Translate ((1 + data.Pan.X) * center_x, (1 + data.Pan.Y) * center_y);
+			xform.Rotate ((-data.Angle / 180d) * Math.PI);
+			xform.Scale (data.Zoom, data.Zoom);
+			xform.Translate (-center_x, -center_y);
 
-	        return xform;
-	    }
+			return xform;
+		}
 
-	    private void ApplyTransform (RotateZoomData data)
+		private void ApplyTransform (RotateZoomData data)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
 			var old_surf = doc.CurrentUserLayer.Surface.Clone ();
 
-	        var xform = ComputeMatrix (data);
+			var xform = ComputeMatrix (data);
 			doc.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize);
 			doc.Workspace.Invalidate ();
 
-	        doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.LayerRotateZoom,
-	            Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.CurrentUserLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.LayerRotateZoom,
+			    Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.CurrentUserLayerIndex));
 		}
 
 		private class RotateZoomData : EffectData
@@ -112,17 +112,16 @@ namespace Pinta.Actions
 			[Caption ("Angle")]
 			public double Angle = 0;
 
-            [Caption ("Pan")]
-		    public PointD Pan;
+			[Caption ("Pan")]
+			public PointD Pan;
 
-            [Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
-            public double Zoom = 1.0;
+			[Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
+			public double Zoom = 1.0;
 
 			public override bool IsDefault {
-                get
-                {
-                    return Angle == 0 && Pan.X == 0.0 && Pan.Y == 0.0 && Zoom == 1.0;
-                }
+				get {
+					return Angle == 0 && Pan.X == 0.0 && Pan.Y == 0.0 && Zoom == 1.0;
+				}
 			}
 		}
 	}
