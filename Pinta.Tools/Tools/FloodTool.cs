@@ -120,26 +120,23 @@ namespace Pinta.Tools
 					return;
 
 				ImageSurface surface = doc.CurrentUserLayer.Surface;
-				using (var stencil_surface = new ImageSurface(Format.Argb32, (int)surface.Width, (int)surface.Height))
+				var stencilBuffer = new BitMask ((int) surface.Width, (int) surface.Height);
+				int tol = (int)(Tolerance * Tolerance * 256);
+				Rectangle boundingBox;
+
+				if (IsContinguousMode)
+					FillStencilFromPoint(surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
+				else
+					FillStencilByColor(surface, stencilBuffer, surface.GetColorBgraUnchecked(pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
+
+				OnFillRegionComputed(stencilBuffer);
+
+				// If a derived tool is only going to use the stencil,
+				// don't waste time building the polygon set
+				if (CalculatePolygonSet)
 				{
-					IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter(stencil_surface);
-					int tol = (int)(Tolerance * Tolerance * 256);
-					Rectangle boundingBox;
-
-					if (IsContinguousMode)
-						FillStencilFromPoint(surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, limitToSelection);
-					else
-						FillStencilByColor(surface, stencilBuffer, surface.GetColorBgraUnchecked(pos.X, pos.Y), tol, out boundingBox, currentRegion, LimitToSelection);
-
-					OnFillRegionComputed(stencilBuffer);
-
-					// If a derived tool is only going to use the stencil,
-					// don't waste time building the polygon set
-					if (CalculatePolygonSet)
-					{
-						Point[][] polygonSet = stencilBuffer.CreatePolygonSet(boundingBox, 0, 0);
-						OnFillRegionComputed(polygonSet);
-					}
+					Point[][] polygonSet = stencilBuffer.CreatePolygonSet(boundingBox, 0, 0);
+					OnFillRegionComputed(polygonSet);
 				}
 			}
 		}
@@ -167,7 +164,7 @@ namespace Pinta.Tools
 			return (sum <= tolerance * tolerance * 4);
 		}
 
-		public unsafe static void FillStencilFromPoint (ImageSurface surface, IBitVector2D stencil, Point start, int tolerance, 
+		public unsafe static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance, 
 		                                                out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
@@ -205,17 +202,17 @@ namespace Pinta.Tools
 				int localRight = pt.X;
 
 				while (localLeft >= 0 &&
-				       !stencil.GetUnchecked (localLeft, pt.Y) &&
+				       !stencil.Get (localLeft, pt.Y) &&
 				       CheckColor (cmp, rowPtr[localLeft], tolerance)) {
-					stencil.SetUnchecked (localLeft, pt.Y, true);
+					stencil.Set (localLeft, pt.Y, true);
 					--localLeft;
 				}
 
                 int surfaceWidth = surface.Width;
 				while (localRight < surfaceWidth &&
-				       !stencil.GetUnchecked (localRight, pt.Y) &&
+				       !stencil.Get (localRight, pt.Y) &&
 				       CheckColor (cmp, rowPtr[localRight], tolerance)) {
-					stencil.SetUnchecked (localRight, pt.Y, true);
+					stencil.Set (localRight, pt.Y, true);
 					++localRight;
 				}
 
@@ -229,7 +226,7 @@ namespace Pinta.Tools
 					ColorBgra* otherRowPtr = surface.GetRowAddressUnchecked (row);
 
 					for (int sx = localLeft; sx <= localRight; ++sx) {
-						if (!stencil.GetUnchecked (sx, row) &&
+						if (!stencil.Get (sx, row) &&
 						    CheckColor (cmp, otherRowPtr[sx], tolerance)) {
 							++sright;
 						} else {
@@ -278,7 +275,7 @@ namespace Pinta.Tools
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
 
-		public unsafe static void FillStencilByColor (ImageSurface surface, IBitVector2D stencil, ColorBgra cmp, int tolerance, 
+		public unsafe static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance, 
 		                                              out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			int top = int.MaxValue;
@@ -313,7 +310,7 @@ namespace Pinta.Tools
                 {
                     if (CheckColor(cmp, *ptr, tolerance))
                     {
-                        stencil.SetUnchecked(x, y, true);
+                        stencil.Set(x, y, true);
 
                         if (x < left)
                         {
@@ -352,7 +349,7 @@ namespace Pinta.Tools
 		}
 
 		protected virtual void OnFillRegionComputed (Point[][] polygonSet) {}
-		protected virtual void OnFillRegionComputed (IBitVector2D stencil) {}
+		protected virtual void OnFillRegionComputed (BitMask stencil) {}
 		#endregion
 	}
 }

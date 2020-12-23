@@ -15,7 +15,7 @@ namespace Pinta.Core
 {
 	public static class OtherExtensions
 	{
-		public unsafe static Point[][] CreatePolygonSet (this IBitVector2D stencil, Rectangle bounds, int translateX, int translateY)
+		public unsafe static Point[][] CreatePolygonSet (this BitMask stencil, Rectangle bounds, int translateX, int translateY)
 		{
 			List<Point[]> polygons = new List<Point[]> ();
 
