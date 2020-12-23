@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Distort"); }
 		}
 
-		public TwistData Data { get { return EffectData as TwistData; } }
+		public TwistData Data { get { return (TwistData)EffectData!; } } // NRT - Set in constructor
 
 		public TwistEffect ()
 		{

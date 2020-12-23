@@ -34,7 +34,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public UnfocusData Data { get { return EffectData as UnfocusData; } }
+		public UnfocusData Data { get { return (UnfocusData)EffectData!; } } // NRT - Set in constructor
 
 		public UnfocusEffect ()
 		{

@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public TileData Data {
-			get { return EffectData as TileData; }
+			get { return (TileData)EffectData!; } // NRT - Set in constructor
 		}
 
 		public TileEffect () {

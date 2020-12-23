@@ -29,7 +29,7 @@ namespace Pinta.Effects
 		}
 
 		public new PolarInversionData Data {
-			get { return EffectData as PolarInversionData; }
+			get { return (PolarInversionData)EffectData!; } // NRT - Set in constructor
 		}
 
 		public override string EffectMenuCategory

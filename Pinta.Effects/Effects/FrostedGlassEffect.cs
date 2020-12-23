@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public FrostedGlassData Data {
-			get { return EffectData as FrostedGlassData; }
+			get { return (FrostedGlassData)EffectData!; } // NRT - Set in constructor
 		}
 
 		private Random random = new Random ();

@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return "<Primary>"; }
 		}
 		
-		public LevelsData Data { get { return EffectData as LevelsData; } }
+		public LevelsData Data { get { return (LevelsData)EffectData!; } } // NRT - Set in constructor
 		
 		public LevelsEffect ()
 		{

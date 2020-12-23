@@ -20,7 +20,7 @@ namespace Pinta.Effects
 		}
 
 		public ReliefData Data {
-			get { return EffectData as ReliefData; }
+			get { return (ReliefData)EffectData!; } // NRT - Set in constructor
 		}
 
 		public override bool IsConfigurable {

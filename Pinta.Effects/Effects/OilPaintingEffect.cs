@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Artistic"); }
 		}
 
-		public OilPaintingData Data { get { return EffectData as OilPaintingData; } }
+		public OilPaintingData Data { get { return (OilPaintingData)EffectData!; } } // NRT - Set in constructor
 
 		public OilPaintingEffect ()
 		{

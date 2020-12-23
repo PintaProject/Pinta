@@ -44,7 +44,7 @@ namespace Pinta.Core
 			FirePropertyChanged (propertyName);
 		}
 		
-		protected void FirePropertyChanged (string propertyName)
+		protected void FirePropertyChanged (string? propertyName)
 		{
 			if (PropertyChanged != null)
 				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));			

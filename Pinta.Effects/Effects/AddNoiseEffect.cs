@@ -11,6 +11,7 @@ using System;
 using Cairo;
 using Pinta.Gui.Widgets;
 using Pinta.Core;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
@@ -36,7 +37,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Noise"); }
 		}
 
-		public NoiseData Data { get { return EffectData as NoiseData; } }
+		public NoiseData Data { get { return (NoiseData)EffectData!; } } // NRT - Set in constructor
 
 		static AddNoiseEffect ()
 		{
@@ -64,6 +65,7 @@ namespace Pinta.Effects
 			return scale * Math.Exp (-x * x / 2);
 		}
 
+		[MemberNotNull (nameof (lookup))]
 		private static void InitLookup ()
 		{
 			double l = 5;

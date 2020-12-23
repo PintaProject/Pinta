@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Noise"); }
 		}
 
-		public MedianData Data { get { return EffectData as MedianData; } }
+		public MedianData Data { get { return (MedianData)EffectData!; } } // NRT - Set in constructor
 
 		public MedianEffect ()
 		{

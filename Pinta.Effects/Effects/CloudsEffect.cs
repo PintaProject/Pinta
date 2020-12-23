@@ -37,7 +37,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Render"); }
 		}
 
-		public CloudsData Data { get { return EffectData as CloudsData; } }
+		public CloudsData Data { get { return (CloudsData)EffectData!; } } // NRT - Set in constructor
 
 		public CloudsEffect ()
 		{

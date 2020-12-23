@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Render"); }
 		}
 
-		public MandelbrotFractalData Data { get { return EffectData as MandelbrotFractalData; } }
+		public MandelbrotFractalData Data { get { return (MandelbrotFractalData)EffectData!; } } // NRT - Set in constructor
 
 		public MandelbrotFractalEffect ()
 		{

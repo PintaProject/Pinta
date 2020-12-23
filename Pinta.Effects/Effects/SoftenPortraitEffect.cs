@@ -65,7 +65,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public SoftenPortraitData Data { get { return EffectData as SoftenPortraitData; } }
+		public SoftenPortraitData Data { get { return (SoftenPortraitData)EffectData!; } } // NRT - Set in constructor
 		
 		public SoftenPortraitEffect ()
 		{

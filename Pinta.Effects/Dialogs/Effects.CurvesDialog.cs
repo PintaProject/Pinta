@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using Cairo;
 
 using Pinta.Core;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pinta.Effects
 {
@@ -61,9 +62,9 @@ namespace Pinta.Effects
 		private int last_cpx;
 		
 		//control points for luminosity transfer mode
-		private SortedList<int, int>[] luminosity_cps;
+		private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
 		//control points for rg transfer mode
-		private SortedList<int, int>[] rgb_cps;
+		private SortedList<int, int>[] rgb_cps = null!;
 		
 		public SortedList<int, int>[] ControlPoints { 
 			get { 
@@ -119,12 +120,12 @@ namespace Pinta.Effects
 			}
 		}		
 		
-		private void HandleCheckToggled (object o, EventArgs args)
+		private void HandleCheckToggled (object? o, EventArgs args)
 		{
 			InvalidateDrawing ();
 		}
 
-		void HandleButtonResetClicked (object sender, EventArgs e)
+		void HandleButtonResetClicked (object? sender, EventArgs e)
 		{
 			ResetControlPoints ();
 			InvalidateDrawing ();
@@ -146,7 +147,7 @@ namespace Pinta.Effects
 			UpdateLivePreview ("ControlPoints");
 		}
 		
-		private void HandleComboMapChanged (object sender, EventArgs e)
+		private void HandleComboMapChanged (object? sender, EventArgs e)
 		{
 			if (ControlPoints == null)
 				ResetControlPoints ();
@@ -165,7 +166,7 @@ namespace Pinta.Effects
 			drawing.Window.Invalidate();		
 		}
 		
-		private void HandleDrawingLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
+		private void HandleDrawingLeaveNotifyEvent (object? o, Gtk.LeaveNotifyEventArgs args)
 		{
 			InvalidateDrawing ();
 		}
@@ -414,6 +415,7 @@ namespace Pinta.Effects
             DrawControlPoints(g);
         }
 
+		[MemberNotNull (nameof (comboMap), nameof (labelPoint), nameof (labelTip), nameof (checkRed), nameof (checkGreen), nameof (checkBlue), nameof (buttonReset), nameof (drawing))]
 		private void Build ()
         {
 			WindowPosition = WindowPosition.CenterOnParent;

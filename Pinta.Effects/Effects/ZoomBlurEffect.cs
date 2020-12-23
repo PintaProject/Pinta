@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public ZoomBlurData Data { get { return EffectData as ZoomBlurData; } }
+		public ZoomBlurData Data { get { return (ZoomBlurData)EffectData!; } } // NRT - Set in constructor
 
 		public ZoomBlurEffect ()
 		{

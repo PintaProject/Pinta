@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public EmbossData Data {
-			get { return EffectData as EmbossData; }
+			get { return (EmbossData)EffectData!; } // NRT - Set in constructor
 		}
 
 		public EmbossEffect () {
