@@ -53,8 +53,6 @@ namespace Pinta
 			TreeViewColumn treeViewColumnPath = new TreeViewColumn (Translations.GetString ("Path"), cellRenderer, "text", 2);
 			treeView.AppendColumn (treeViewColumnPath);
 
-			treeView.RulesHint = true;
-
 			data = new ListStore (typeof (string), typeof (string), typeof (string));
 			treeView.Model = data;
 
