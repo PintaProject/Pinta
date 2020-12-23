@@ -191,8 +191,7 @@ namespace Pinta
 			layout_grid.ColumnSpacing = 6;
 
 			// Preset Combo
-			var size_label = new Label (Translations.GetString ("Preset:"));
-			size_label.SetAlignment (1f, .5f);
+			var size_label = new Label (Translations.GetString ("Preset:")) { Xalign = 1f, Yalign = .5f };
 
 			var preset_entries = new List<string> ();
 
@@ -212,8 +211,7 @@ namespace Pinta
 			layout_grid.Attach (preset_combo, 1, 0, 1, 1);
 
 			// Width Entry
-			var width_label = new Label (Translations.GetString ("Width:"));
-			width_label.SetAlignment (1f, .5f);
+			var width_label = new Label (Translations.GetString ("Width:")) { Xalign = 1f, Yalign = .5f };
 
 			width_entry = new Entry ();
 			width_entry.WidthRequest = 50;
@@ -229,8 +227,7 @@ namespace Pinta
 			layout_grid.Attach (width_hbox, 1, 1, 1, 1);
 
 			// Height Entry
-			var height_label = new Label (Translations.GetString ("Height:"));
-			height_label.SetAlignment (1f, .5f);
+			var height_label = new Label (Translations.GetString ("Height:")) { Xalign = 1f, Yalign = .5f };
 
 			height_entry = new Entry ();
 			height_entry.WidthRequest = 50;
@@ -246,8 +243,7 @@ namespace Pinta
 			layout_grid.Attach (height_hbox, 1, 2, 1, 1);
 
 			// Orientation Radio options
-			var orientation_label = new Label (Translations.GetString ("Orientation:"));
-			orientation_label.SetAlignment (0f, .5f);
+			var orientation_label = new Label (Translations.GetString ("Orientation:")) { Xalign = 0f, Yalign = .5f };
 
 			portrait_radio = new RadioButton (Translations.GetString ("Portrait"));
 			var portrait_image = new Image (PintaCore.Resources.GetIcon (Stock.OrientationPortrait, 16));
@@ -272,8 +268,7 @@ namespace Pinta
 			orientation_vbox.PackStart (landscape_hbox, false, false, 0);
 
 			// Background Color options
-			var background_label = new Label (Translations.GetString ("Background:"));
-			background_label.SetAlignment (0f, .5f);
+			var background_label = new Label (Translations.GetString ("Background:")) { Xalign = 0f, Yalign = .5f };
 
 			white_bg_radio = new RadioButton (Translations.GetString ("White"));
 			var image_white = new Image (GdkExtensions.CreateColorSwatch (16, new Gdk.Color (255, 255, 255)));
