@@ -39,6 +39,8 @@ namespace Pinta.Core
 		private Palette? palette;
 
 		private const int MAX_RECENT_COLORS = 10;
+		private const string PALETTE_FILE = "palette.txt";
+
 		private readonly List<Color> recently_used = new List<Color> (MAX_RECENT_COLORS);
 
 		public Color PrimaryColor {
@@ -70,11 +72,14 @@ namespace Pinta.Core
 		{
 			SetColor (true, new Color (0, 0, 0), false);
 			SetColor (false, new Color (1, 1, 1), false);
-		}
 
-		public void Initialize ()
-		{
+			PopulateSavedPalette ();
 			PopulateRecentlyUsedColors ();
+
+			PintaCore.Settings.SaveSettingsBeforeQuit += (o, e) => {
+				SaveCurrentPalette ();
+				SaveRecentlyUsedColors ();
+			};
 		}
 
 		public void DoKeyRelease (object o, KeyReleaseEventArgs e)
@@ -132,6 +137,14 @@ namespace Pinta.Core
 			OnRecentColorsChanged ();
 		}
 
+		private void PopulateSavedPalette ()
+		{
+			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
+
+			if (System.IO.File.Exists (palette_file))
+				CurrentPalette.Load (palette_file);
+		}
+
 		private void PopulateRecentlyUsedColors ()
 		{
 			var saved_colors = PintaCore.Settings.GetSetting ("recently-used-colors", string.Empty);
@@ -152,7 +165,16 @@ namespace Pinta.Core
 				recently_used.AddRange (Enumerable.Repeat (new Color (.9, .9, .9), more_colors));
 		}
 
-		public void SaveRecentlyUsedColors ()
+		private void SaveCurrentPalette ()
+		{
+			var palette_file = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), PALETTE_FILE);
+			var palette_saver = PintaCore.System.PaletteFormats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
+
+			if (palette_saver is not null)
+				CurrentPalette.Save (palette_file, palette_saver);
+		}
+
+		private void SaveRecentlyUsedColors ()
 		{
 			var colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
 			PintaCore.Settings.PutSetting ("recently-used-colors", colors);

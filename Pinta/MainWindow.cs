@@ -433,7 +433,7 @@ namespace Pinta
 
 			// TODO-GTK3 (docking)
 #if false
-			string layout_file = PintaCore.Settings.LayoutFilePath;
+			string layout_file = Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml");
 
             if (System.IO.File.Exists(layout_file))
             {
@@ -444,7 +444,7 @@ namespace Pinta
                 // If parsing layouts.xml fails for some reason, proceed to create the default layout.
                 catch (Exception e)
                 {
-                    System.Console.Error.WriteLine ("Error reading " + PintaCore.Settings.LayoutFile + ": " + e.ToString());
+                    System.Console.Error.WriteLine ("Error reading " + layout_file + ": " + e.ToString());
                 }
             }
 			
@@ -476,7 +476,7 @@ namespace Pinta
 		{
 			// TODO-GTK3 (docking)
 #if false
-			dock.SaveLayouts (PintaCore.Settings.LayoutFilePath);
+			dock.SaveLayouts (Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "layouts.xml"));
 #endif
 
 			// Don't store the maximized height if the window is maximized
@@ -493,9 +493,7 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
 
-			PintaCore.Palette.SaveRecentlyUsedColors ();
-
-			PintaCore.Settings.SaveSettings ();
+			PintaCore.Settings.DoSaveSettingsBeforeQuit ();
 		}
 #endregion
 

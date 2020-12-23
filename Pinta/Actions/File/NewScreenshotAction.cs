@@ -55,7 +55,6 @@ namespace Pinta.Actions
 				delay = dialog.GetValue ();
 
 				PintaCore.Settings.PutSetting ("screenshot-delay", delay);
-				PintaCore.Settings.SaveSettings ();
 
 				GLib.Timeout.Add ((uint)delay * 1000, () => {
 					Screen screen = Screen.Default;
