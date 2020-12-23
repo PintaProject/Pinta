@@ -73,7 +73,7 @@ namespace Pinta.Tools
 		/// <param name="closestControlPoint">The closest ControlPoint to currentPoint.</param>
 		/// <param name="closestCPDistance">The closest ControlPoint's distance from currentPoint.</param>
 		public void FindClosestControlPoint(PointD currentPoint,
-			out int closestCPShapeIndex, out int closestCPIndex, out ControlPoint closestControlPoint, out double closestCPDistance)
+			out int closestCPShapeIndex, out int closestCPIndex, out ControlPoint? closestControlPoint, out double closestCPDistance)
 		{
 			closestCPShapeIndex = 0;
 			closestCPIndex = 0;
@@ -137,7 +137,7 @@ namespace Pinta.Tools
 		/// <param name="outline_color">The outline color for the shape.</param>
 		/// <param name="fill_color">The fill color for the shape.</param>
 		/// <param name="brush_width">The width of the outline of the shape.</param>
-        public ShapeEngine (UserLayer parent_layer, ReEditableLayer drawing_layer,
+        public ShapeEngine (UserLayer parent_layer, ReEditableLayer? drawing_layer,
                             BaseEditEngine.ShapeTypes shape_type, bool antialiasing,
                             bool closed, Color outline_color, Color fill_color,
                             int brush_width)
@@ -170,6 +170,7 @@ namespace Pinta.Tools
 			// Don't clone the GeneratedPoints or OrganizedPoints, as they will be calculated.
             ControlPoints = src.ControlPoints.Select (i => i.Clone ()).ToList ();
             DashPattern = src.DashPattern;
+			parent_layer = null!; // NRT - This constructor needs to set parent_layer somehow as code expects it to be not-null
         }
 
         public abstract ShapeEngine Clone ();

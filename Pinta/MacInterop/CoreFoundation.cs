@@ -65,7 +65,7 @@ namespace Pinta.MacInterop
 		[DllImport (CFLib, CharSet=CharSet.Unicode)]
 		extern static IntPtr CFStringGetCharacters (IntPtr handle, CFRange range, IntPtr buffer);
 		
-		public static string FetchString (IntPtr handle)
+		public static string? FetchString (IntPtr handle)
 		{
 			if (handle == IntPtr.Zero)
 				return null;
@@ -91,7 +91,7 @@ namespace Pinta.MacInterop
 			return str;
 		}
 		
-		public static string FSRefToString (ref FSRef fsref)
+		public static string? FSRefToString (ref FSRef fsref)
 		{
 			IntPtr url = IntPtr.Zero;
 			IntPtr str = IntPtr.Zero;
@@ -169,7 +169,7 @@ namespace Pinta.MacInterop
 			}
 		}
 		
-		public static string UrlToPath (IntPtr url)
+		public static string? UrlToPath (IntPtr url)
 		{
 			IntPtr str = IntPtr.Zero;
 			try {
@@ -181,7 +181,7 @@ namespace Pinta.MacInterop
 			}
 		}
 		
-		public static string GetApplicationUrl (string filePath, LSRolesMask roles)
+		public static string? GetApplicationUrl (string filePath, LSRolesMask roles)
 		{
 			IntPtr url = IntPtr.Zero;
 			try {
@@ -196,7 +196,7 @@ namespace Pinta.MacInterop
 			}
 		}
 		
-		public static string[] GetApplicationUrls (string filePath, LSRolesMask roles)
+		public static string?[] GetApplicationUrls (string filePath, LSRolesMask roles)
 		{
 			IntPtr url = IntPtr.Zero;
 			IntPtr arr = IntPtr.Zero;
@@ -206,7 +206,7 @@ namespace Pinta.MacInterop
 				if (arr == IntPtr.Zero)
 					return new string[0];
 				int count = CFArrayGetCount (arr);
-				string[] values = new string [count];
+				string?[] values = new string [count];
 				for (int i = 0; i < values.Length; i++ ) {
 					var u = CFArrayGetValueAtIndex (arr, i);
 					if (u != IntPtr.Zero)

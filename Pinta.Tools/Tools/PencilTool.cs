@@ -35,7 +35,7 @@ namespace Pinta.Tools
 	{		
 		private Point last_point = point_empty;
 		
-		private ImageSurface undo_surface;
+		private ImageSurface? undo_surface;
 		private bool surface_modified;
         protected uint mouse_button;
 
@@ -83,7 +83,7 @@ namespace Pinta.Tools
 			Draw (canvas, tool_color, point, true);
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Color tool_color;
 		

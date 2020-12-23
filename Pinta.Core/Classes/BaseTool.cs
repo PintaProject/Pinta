@@ -91,7 +91,7 @@ namespace Pinta.Core
 			    if (!ShowAntialiasingButton || antialiasing_button == null)
                     return;
 
-			    antialiasing_button.SelectedItem = value ? aaOn : aaOff;
+			    antialiasing_button.SelectedItem = value ? aaOn! : aaOff!; // NRT - Created in BuildAlphaAliasing
 			}
 		}
 
@@ -108,7 +108,7 @@ namespace Pinta.Core
 				if (!ShowAlphaBlendingButton || alphablending_button == null)
 					return;
 
-				alphablending_button.SelectedItem = value ? abOn : abOff;
+				alphablending_button.SelectedItem = value ? abOn! : abOff!; // NRT - Created in BuildAlphaBlending
 			}
 		}
 
@@ -221,7 +221,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Protected Methods
-		protected virtual void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected virtual void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 		}
 

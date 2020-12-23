@@ -34,12 +34,12 @@ namespace Pinta.Gui.Widgets
 			Remove (item);
 		}
 
-		private void HandleToolAdded (object sender, ToolEventArgs e)
+		private void HandleToolAdded (object? sender, ToolEventArgs e)
 		{
 			AddItem (e.Tool.ToolItem);
 		}
 
-		private void HandleToolRemoved (object sender, ToolEventArgs e)
+		private void HandleToolRemoved (object? sender, ToolEventArgs e)
 		{
 			RemoveItem (e.Tool.ToolItem);
 		}

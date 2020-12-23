@@ -99,13 +99,13 @@ namespace Pinta.Tools
 		}
 
 		protected override void OnMouseMove (object o,
-		                                     Gtk.MotionNotifyEventArgs args,
+		                                     Gtk.MotionNotifyEventArgs? args,
 		                                     Cairo.PointD point)
 		{
 			if (!IsActive || !using_mouse)
 				return;
 
-			bool constrain = args.Event.State.IsShiftPressed ();
+			bool constrain = args.IsShiftPressed ();
 
 			PointD center = source_rect.GetCenter();
 

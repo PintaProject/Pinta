@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public MotionBlurData Data { get { return EffectData as MotionBlurData; } }
+		public MotionBlurData Data { get { return (MotionBlurData)EffectData!; } } // NRT - Set in constructor
 
 		public MotionBlurEffect ()
 		{

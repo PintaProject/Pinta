@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 
 namespace Pinta.Gui.Widgets
@@ -69,9 +70,10 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event EventHandler Changed;
+		public event EventHandler? Changed;
 		#endregion
 
+	[MemberNotNull (nameof (label), nameof (combobox))]
         private void Build ()
         {
             // Section label + line

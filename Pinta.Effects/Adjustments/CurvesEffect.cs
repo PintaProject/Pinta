@@ -17,7 +17,7 @@ namespace Pinta.Effects
 {
 	public class CurvesEffect : BaseEffect
 	{
-		UnaryPixelOp op = null;
+		UnaryPixelOp? op = null;
 		
 		public override string Icon {
 			get { return "Menu.Adjustments.Curves.png"; }
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return "M"; }
 		}
 
-		public CurvesData Data { get { return EffectData as CurvesData; } }
+		public CurvesData Data { get { return (CurvesData)EffectData!; } } // NRT - Set in constructor
 		
 		public CurvesEffect ()
 		{
@@ -95,7 +95,7 @@ namespace Pinta.Effects
             int channels = transferCurves.Length;
 
             for (int channel = 0; channel < channels; channel++) {
-                SortedList<int, int> channelControlPoints = Data.ControlPoints[channel];
+                SortedList<int, int> channelControlPoints = Data.ControlPoints![channel]; // NRT - Code expects this to be not-null
                 IList<int> xa = channelControlPoints.Keys;
                 IList<int> ya = channelControlPoints.Values;
                 SplineInterpolator interpolator = new SplineInterpolator();
@@ -116,7 +116,7 @@ namespace Pinta.Effects
 	
 	public class CurvesData : EffectData
 	{
-		public SortedList<int, int>[] ControlPoints { get; set; }
+		public SortedList<int, int>[]? ControlPoints { get; set; }
 		
 		public ColorTransferMode Mode { get; set; }
 		

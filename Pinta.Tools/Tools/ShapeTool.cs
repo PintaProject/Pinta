@@ -33,7 +33,8 @@ namespace Pinta.Tools
 {
 	public class ShapeTool : BaseTool
 	{
-		public BaseEditEngine EditEngine;
+		// NRT - Set by constructors of subclasses
+		public BaseEditEngine EditEngine = null!;
 
 		public ShapeTool()
 		{
@@ -64,9 +65,10 @@ namespace Pinta.Tools
             EditEngine.HandleMouseUp(canvas, args, point);
 		}
 
-		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
-            EditEngine.HandleMouseMove(o, args, point);
+			if (args != null)
+				EditEngine.HandleMouseMove(o, args, point);
 		}
 
         protected override void OnActivated()

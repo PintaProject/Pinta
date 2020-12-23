@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public FragmentData Data { get { return EffectData as FragmentData; } }
+		public FragmentData Data { get { return (FragmentData)EffectData!; } } // NRT - Set in constructor
 
 		public FragmentEffect ()
 		{

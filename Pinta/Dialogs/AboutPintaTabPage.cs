@@ -45,14 +45,12 @@ namespace Pinta
 			hBoxVersion.PackStart (label, false, false, 5);
 			this.PackStart (hBoxVersion, false, true, 5);
 
-			label = null;
 			label = new Label ();
 			label.Markup = string.Format ("<b>{0}</b>\n    {1}", Translations.GetString ("License"), Translations.GetString ("Released under the MIT X11 License."));
 			HBox hBoxLicense = new HBox ();
 			hBoxLicense.PackStart (label, false, false, 5);
 			this.PackStart (hBoxLicense, false, true, 5);
 
-			label = null;
 			label = new Label ();
 			label.Markup = string.Format ("<b>{0}</b>\n    (c) 2010-2020 {1}", Translations.GetString ("Copyright"), Translations.GetString ("by Pinta contributors"));
 			HBox hBoxCopyright = new HBox ();

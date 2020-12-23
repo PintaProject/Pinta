@@ -37,7 +37,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public GlowData Data { get { return EffectData as GlowData; } }
+		public GlowData Data { get { return (GlowData)EffectData!; } } // NRT - Set in constructor
 		
 		public GlowEffect ()
 		{

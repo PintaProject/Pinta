@@ -169,7 +169,7 @@ namespace Pinta.Gui.Widgets
         #endregion
 
         #region Public Events
-        public event EventHandler ValueChanged;
+        public event EventHandler? ValueChanged;
 		
 		protected virtual void OnValueChanged ()
 		{

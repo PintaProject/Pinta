@@ -187,7 +187,7 @@ namespace Pinta.Core
 		/// Fires the PropertyChanged event for this ObservableObject.
 		/// </summary>
 		/// <param name="propertyName">The name of the property that changed.</param>
-		public new void FirePropertyChanged (string propertyName)
+		public new void FirePropertyChanged (string? propertyName)
 		{
 			base.FirePropertyChanged (propertyName);
 		}

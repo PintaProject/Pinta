@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public BulgeData Data {
-			get { return EffectData as BulgeData; }
+			get { return  (BulgeData)EffectData!; } // NRT - Set in constructor
 		}
 
 		public BulgeEffect ()

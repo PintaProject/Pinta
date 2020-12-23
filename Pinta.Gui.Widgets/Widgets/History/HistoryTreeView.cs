@@ -78,7 +78,7 @@ namespace Pinta.Gui.Widgets
 			ShowAll ();
 		}
 
-		private void Workspace_ActiveDocumentChanged (object sender, EventArgs e)
+		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				tree.Model = PintaCore.Workspace.ActiveWorkspace.History.ListStore;
@@ -107,26 +107,28 @@ namespace Pinta.Gui.Widgets
 		{
 			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
 			if (item.State == HistoryItemState.Undo) {
-				(cell as Gtk.CellRendererText).Style = Pango.Style.Normal;
-				(cell as Gtk.CellRendererText).Foreground = "black";
-				(cell as Gtk.CellRendererText).Text = item.Text;
+				((CellRendererText)cell).Style = Pango.Style.Normal;
+				((CellRendererText)cell).Foreground = "black";
+				((CellRendererText)cell).Text = item.Text;
 			} else if (item.State == HistoryItemState.Redo) {
-				(cell as Gtk.CellRendererText).Style = Pango.Style.Oblique;
-				(cell as Gtk.CellRendererText).Foreground = "gray";
-				(cell as Gtk.CellRendererText).Text = item.Text;
+				((CellRendererText)cell).Style = Pango.Style.Oblique;
+				((CellRendererText)cell).Foreground = "gray";
+				((CellRendererText)cell).Text = item.Text;
 			}
 		}
 
 		private void HistoryRenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			BaseHistoryItem item = (BaseHistoryItem)model.GetValue (iter, 0);
-			var pixbuf_cell = cell as Gtk.CellRendererPixbuf;
+			var pixbuf_cell = (Gtk.CellRendererPixbuf)cell;
 			if (pixbuf_cell.Pixbuf != null)
 				pixbuf_cell.Pixbuf.Dispose ();
-			pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
+
+			if (item.Icon != null)
+				pixbuf_cell.Pixbuf = PintaCore.Resources.GetIcon (item.Icon);
 		}
 
-		private void OnHistoryItemsChanged (object o, EventArgs args)
+		private void OnHistoryItemsChanged (object? o, EventArgs args)
 		{
 			if (tree.Model != null && PintaCore.History.Current != null) {
 				tree.Selection.SelectIter (PintaCore.History.Current.Id);

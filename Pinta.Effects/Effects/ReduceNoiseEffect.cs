@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Noise"); }
 		}
 
-		public ReduceNoiseData Data { get { return EffectData as ReduceNoiseData; } }
+		public ReduceNoiseData Data { get { return (ReduceNoiseData)EffectData!; } } // NRT - Set in constructor
 
 		public ReduceNoiseEffect ()
 		{

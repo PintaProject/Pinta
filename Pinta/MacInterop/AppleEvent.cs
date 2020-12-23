@@ -107,7 +107,7 @@ namespace Pinta.MacInterop
 			IntPtr bufferPtr = Marshal.AllocHGlobal (len);
 			try {
 				CheckReturn (AEGetNthPtr (ref descList, index, desiredType, 0, 0, bufferPtr, len, 0));
-				T val = (T)Marshal.PtrToStructure (bufferPtr, typeof (T));
+				T val = (T)Marshal.PtrToStructure (bufferPtr, typeof (T))!; // NRT - Not sure
 				return val;
 			} finally{ 
 				Marshal.FreeHGlobal (bufferPtr);
@@ -122,7 +122,7 @@ namespace Pinta.MacInterop
 		}
 		
 		//FIXME: this might not work in some encodings. need to test more.
-		static string GetUtf8StringFromAEPtr (ref AEDesc descList, int index)
+		static string? GetUtf8StringFromAEPtr (ref AEDesc descList, int index)
 		{
 			int size;
 			var type = (OSType)(int)CarbonEventParameterType.UnicodeText;
@@ -138,7 +138,7 @@ namespace Pinta.MacInterop
 			return null;
 		}
 		
-		public static string GetStringFromAEDesc (ref AEDesc desc)
+		public static string? GetStringFromAEDesc (ref AEDesc desc)
 		{
 			int size = AEGetDescDataSize (ref desc);
 			if (size > 0) {
@@ -158,7 +158,7 @@ namespace Pinta.MacInterop
 			long count = AppleEvent.AECountItems (ref list);
 			var items = new List<string> ();
 			for (int i = 1; i <= count; i++) {
-				string str = AppleEvent.GetUtf8StringFromAEPtr (ref list, i);
+				string? str = AppleEvent.GetUtf8StringFromAEPtr (ref list, i);
 				if (!string.IsNullOrEmpty (str))
 					items.Add (str);
 			}

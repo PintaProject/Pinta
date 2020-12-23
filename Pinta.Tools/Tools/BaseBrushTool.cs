@@ -34,12 +34,13 @@ namespace Pinta.Tools
 	// This is a base class for brush type tools (paintbrush, eraser, etc)
 	public class BaseBrushTool : BaseTool
 	{
-		protected ToolBarComboBox brush_width;
-		protected ToolBarLabel brush_width_label;
-		protected ToolBarButton brush_width_minus;
-		protected ToolBarButton brush_width_plus;
+		// NRT - Created in OnBuildToolBar
+		protected ToolBarComboBox brush_width = null!;
+		protected ToolBarLabel brush_width_label = null!;
+		protected ToolBarButton brush_width_minus = null!;
+		protected ToolBarButton brush_width_plus = null!;
 		
-		protected ImageSurface undo_surface;
+		protected ImageSurface? undo_surface;
 		protected bool surface_modified;
 		protected uint mouse_button;
 
@@ -98,13 +99,13 @@ namespace Pinta.Tools
 			tb.AppendItem (brush_width_plus);
 		}
 		
-		protected virtual void MinusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void MinusButtonClickedEvent (object? o, EventArgs args)
 		{
 			if (BrushWidth > 1)
 				BrushWidth--;
 		}
 		
-		protected virtual void PlusButtonClickedEvent (object o, EventArgs args)
+		protected virtual void PlusButtonClickedEvent (object? o, EventArgs args)
 		{
 			BrushWidth++;
 		}

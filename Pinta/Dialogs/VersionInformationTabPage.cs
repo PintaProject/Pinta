@@ -34,7 +34,7 @@ namespace Pinta
 {
 	internal class VersionInformationTabPage : VBox
 	{
-		private ListStore data = null;
+		private ListStore? data = null;
 		private CellRenderer cellRenderer = new CellRendererText ();
 
 		public VersionInformationTabPage ()
@@ -69,7 +69,7 @@ namespace Pinta
 			foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies ()) {
 				try {
 					AssemblyName assemblyName = assembly.GetName ();
-					data.AppendValues (assemblyName.Name, assemblyName.Version.ToString (), System.IO.Path.GetFullPath (assembly.Location));
+					data.AppendValues (assemblyName.Name, assemblyName.Version?.ToString (), System.IO.Path.GetFullPath (assembly.Location));
 				} catch { }
 			}
 

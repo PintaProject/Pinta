@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -74,7 +75,8 @@ namespace Pinta
 			Resize (w, 1);
 			return false;
 		}
-		
+
+		[MemberNotNull (nameof (expander), nameof (bug_report_button), nameof (description_label), nameof (details_text))]
 		private void Build ()
 		{
 			var hbox = new HBox ();

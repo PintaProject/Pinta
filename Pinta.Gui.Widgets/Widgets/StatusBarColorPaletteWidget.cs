@@ -204,7 +204,7 @@ namespace Pinta.Gui.Widgets
 		/// </summary>
 		private void HandleQueryTooltip (object o, Gtk.QueryTooltipArgs args)
 		{
-			string text = null;
+			string? text = null;
 			var point = new PointD (args.X, args.Y);
 
 			switch (GetElementAtPoint (point)) {
@@ -234,7 +234,7 @@ namespace Pinta.Gui.Widgets
 			args.RetVal = (text != null);
 		}
 
-		private void Palette_ColorChanged (object sender, EventArgs e)
+		private void Palette_ColorChanged (object? sender, EventArgs e)
 		{
 			// Color change events may be received while the widget is minimized,
 			// so we only call Invalidate() if the widget is shown.

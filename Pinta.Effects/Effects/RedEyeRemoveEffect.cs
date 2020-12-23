@@ -17,7 +17,7 @@ namespace Pinta.Effects
 {
 	public class RedEyeRemoveEffect : BaseEffect
 	{
-		private UnaryPixelOp op;
+		private UnaryPixelOp? op;
 		
 		public override string Icon {
 			get { return "Menu.Effects.Photo.RedEyeRemove.png"; }
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public RedEyeRemoveData Data { get { return EffectData as RedEyeRemoveData; } }
+		public RedEyeRemoveData Data { get { return (RedEyeRemoveData)EffectData!; } } // NRT - Set in constructor
 		
 		public RedEyeRemoveEffect ()
 		{
@@ -65,7 +65,7 @@ namespace Pinta.Effects
 
         public unsafe override void Render (ImageSurface src, ImageSurface dest, Gdk.Rectangle[] rois)
 		{
-			op.Apply (dest, src, rois);
+			op?.Apply (dest, src, rois);
 		}
 	}
 	

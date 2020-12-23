@@ -38,9 +38,9 @@ namespace Pinta.Tools
 	{
 		private bool is_drawing = false;
 		private CombineMode combine_mode;
-		private SelectionHistoryItem hist;
+		private SelectionHistoryItem? hist;
 
-		private Path path;
+		private Path? path;
 		private List<IntPoint> lasso_polygon = new List<IntPoint>();
 
 		public LassoSelectTool ()
@@ -80,7 +80,7 @@ namespace Pinta.Tools
 			doc.PreviousSelection = doc.Selection.Clone();
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 

@@ -33,8 +33,8 @@ namespace Pinta.Tools
 {
 	public class MoveSelectedTool : BaseTransformTool
 	{
-		private MovePixelsHistoryItem hist;
-		private DocumentSelection original_selection;
+		private MovePixelsHistoryItem? hist;
+		private DocumentSelection? original_selection;
 		private readonly Matrix original_transform = new Matrix ();
 
 		public override string Name {
@@ -114,7 +114,7 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			doc.Selection.Dispose ();
-			doc.Selection = original_selection.Transform (transform);
+			doc.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
 			doc.Selection.Visible = true;
 
 			doc.SelectionLayer.Transform.InitMatrix (original_transform);
@@ -136,7 +136,7 @@ namespace Pinta.Tools
 				PintaCore.History.PushNewItem (hist);
 
 			hist = null;
-			original_selection.Dispose ();
+			original_selection?.Dispose ();
 			original_selection = null;
 			original_transform.InitIdentity ();
 		}

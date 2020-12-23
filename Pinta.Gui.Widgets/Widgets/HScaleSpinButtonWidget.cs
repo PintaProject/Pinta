@@ -26,6 +26,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -135,7 +136,7 @@ namespace Pinta.Gui.Widgets
 			Value = DefaultValue;
 		}
 
-		private void HandleHscaleValueChanged (object sender, EventArgs e)
+		private void HandleHscaleValueChanged (object? sender, EventArgs e)
 		{
 			if (spin.Value != hscale.Value) {
 				spin.Value = hscale.Value;
@@ -143,7 +144,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleSpinValueChanged (object sender, EventArgs e)
+		private void HandleSpinValueChanged (object? sender, EventArgs e)
 		{
 			if (hscale.Value != spin.Value) {
 				hscale.Value = spin.Value;
@@ -151,7 +152,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleButtonClicked (object sender, EventArgs e)
+		private void HandleButtonClicked (object? sender, EventArgs e)
 		{
 			Value = DefaultValue;
 		}
@@ -165,10 +166,11 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event EventHandler ValueChanged;
+		public event EventHandler? ValueChanged;
         #endregion
 
-        private void Build ()
+        [MemberNotNull (nameof (label), nameof (hscale), nameof (spin), nameof (button))]
+	private void Build ()
         {
             // Section label + line
             var hbox1 = new HBox (false, 6);

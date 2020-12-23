@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Blurs"); }
 		}
 
-		public RadialBlurData Data { get { return EffectData as RadialBlurData; } }
+		public RadialBlurData Data { get { return (RadialBlurData)EffectData!; } } // NRT - Set in constructor
 
 		public RadialBlurEffect ()
 		{

@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 
 namespace Pinta.Gui.Widgets
@@ -38,7 +39,7 @@ namespace Pinta.Gui.Widgets
 		{
 			Build ();
 			
-			button1.Clicked += delegate (object sender, EventArgs e) {
+			button1.Clicked += delegate (object? sender, EventArgs e) {
 				OnClicked ();
 			};
 		}
@@ -52,9 +53,10 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event EventHandler Clicked;
+		public event EventHandler? Clicked;
         #endregion
 
+        [MemberNotNull (nameof (button1))]
         private void Build ()
         {
             // Section label + line

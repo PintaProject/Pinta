@@ -96,7 +96,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 

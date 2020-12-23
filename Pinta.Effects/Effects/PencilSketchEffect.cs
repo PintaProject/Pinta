@@ -39,7 +39,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Artistic"); }
 		}
 
-		public PencilSketchData Data { get { return EffectData as PencilSketchData; } }
+		public PencilSketchData Data { get { return (PencilSketchData)EffectData!; } } // NRT - Set in constructor
 		
 		public PencilSketchEffect ()
 		{

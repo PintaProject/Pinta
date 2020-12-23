@@ -15,7 +15,7 @@ namespace Pinta.Effects
 {
 	public class PosterizeEffect : BaseEffect
 	{
-		UnaryPixelOps.PosterizePixel op = null;
+		UnaryPixelOps.PosterizePixel? op = null;
 		
 		public override string Icon {
 			get { return "Menu.Adjustments.Posterize.png"; }
@@ -33,7 +33,7 @@ namespace Pinta.Effects
 			get { return "P"; }
 		}
 
-		public PosterizeData Data { get { return EffectData as PosterizeData; } }
+		public PosterizeData Data { get { return (PosterizeData)EffectData!; } } // NRT - Set in constructor
 		
 		public PosterizeEffect ()
 		{

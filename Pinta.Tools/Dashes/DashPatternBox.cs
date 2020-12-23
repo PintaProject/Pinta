@@ -41,10 +41,10 @@ namespace Pinta.Tools
 		//This makes it easier to set the standard size of a single dash or space.
 		private static double dashFactor = 1.0;
 
-		private ToolBarLabel dashPatternLabel;
-		private ToolItem dashPatternSep;
+		private ToolBarLabel? dashPatternLabel;
+		private ToolItem? dashPatternSep;
 
-		public ToolBarComboBox comboBox;
+		public ToolBarComboBox? comboBox;
 
 
 
@@ -59,7 +59,7 @@ namespace Pinta.Tools
 		/// </summary>
 		/// <param name="tb">The Toolbar to add the DashPatternBox to.</param>
 		/// <returns>null if the DashPatternBox has already been setup; otherwise, returns the DashPatternBox itself.</returns>
-		public Gtk.ComboBoxText SetupToolbar(Toolbar tb)
+		public Gtk.ComboBoxText? SetupToolbar(Toolbar tb)
 		{
 			if (dashPatternSep == null)
 			{

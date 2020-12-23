@@ -36,7 +36,7 @@ namespace Pinta.Gui.Widgets
 	public class PointPickerGraphic : Gtk.DrawingArea
 	{
 		private bool tracking = false;
-		private Cairo.ImageSurface thumbnail;
+		private Cairo.ImageSurface? thumbnail;
 
 		public PointPickerGraphic ()
 		{
@@ -166,7 +166,7 @@ namespace Pinta.Gui.Widgets
         #endregion
 
         #region Public Events
-        public event EventHandler PositionChanged;
+        public event EventHandler? PositionChanged;
 
 		protected virtual void OnPositionChange ()
 		{

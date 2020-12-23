@@ -33,7 +33,7 @@ namespace Pinta.Gui.Widgets
 {
 	public class CellRendererSurface : CellRenderer
 	{
-		private ImageSurface surface;
+		private ImageSurface? surface;
 		private Surface transparent;
 
 		public CellRendererSurface (int width, int height)
@@ -59,7 +59,7 @@ namespace Pinta.Gui.Widgets
 		}
 
 		[GLib.Property ("surface", "Get/Set Surface", "Set the cairo image surface to display a thumbnail of.")]
-		public ImageSurface Surface {
+		public ImageSurface? Surface {
 			get { return surface; }
 			set { surface = value; }
 		}
@@ -95,7 +95,10 @@ namespace Pinta.Gui.Widgets
 			double scale;
 			int draw_width = width;
 			int draw_height = height;
-			
+
+			if (surface is null)
+				return;
+
 			// The image is more constrained by height than width
 			if ((double)width / (double)surface.Width >= (double)height / (double)surface.Height) {
 				scale = (double)height / (double)(surface.Height);

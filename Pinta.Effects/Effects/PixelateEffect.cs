@@ -29,7 +29,7 @@ namespace Pinta.Effects
 		}
 
 		public PixelateData Data {
-			get { return EffectData as PixelateData; }
+			get { return (PixelateData)EffectData!; } // NRT - Set in constructor
 		}
 
 		public override string EffectMenuCategory {

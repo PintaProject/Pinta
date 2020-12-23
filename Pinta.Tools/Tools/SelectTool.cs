@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		private PointD shape_end;
 		private ToolControl [] controls = new ToolControl [8];
         private int? active_control;
-		private SelectionHistoryItem hist;
+		private SelectionHistoryItem? hist;
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
 		protected override bool ShowAntialiasingButton { get { return false; } }
 	    private CursorType? active_cursor;
@@ -164,11 +164,11 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
+		protected override void OnMouseMove (object o, MotionNotifyEventArgs? args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if (!is_drawing)
+			if (!is_drawing || args is null)
 			{
                 UpdateCursor (point);
                 return;
@@ -176,7 +176,7 @@ namespace Pinta.Tools
 
             double x = Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1);
             double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
-            controls[active_control.Value].HandleMouseMove (x, y, args.Event.State);
+            controls[active_control!.Value].HandleMouseMove (x, y, args.Event.State); // NRT - Set by OnMouseDown
 
             ClearHandles (doc.ToolLayer);
             RefreshHandler ();
@@ -382,7 +382,7 @@ namespace Pinta.Tools
 			UpdateHandler();
 		}
 
-	    private void AfterSelectionChange (object sender, EventArgs event_args)
+	    private void AfterSelectionChange (object? sender, EventArgs event_args)
 	    {
 	        if (is_drawing || !PintaCore.Workspace.HasOpenDocuments)
 	            return;

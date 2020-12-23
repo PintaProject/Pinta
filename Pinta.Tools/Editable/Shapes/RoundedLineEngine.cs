@@ -47,7 +47,7 @@ namespace Pinta.Tools
 		/// <param name="outline_color">The outline color for the shape.</param>
 		/// <param name="fill_color">The fill color for the shape.</param>
 		/// <param name="brush_width">The width of the outline of the shape.</param>
-		public RoundedLineEngine(UserLayer parentLayer, ReEditableLayer passedDrawingLayer, double passedRadius, bool passedAA,
+		public RoundedLineEngine(UserLayer parentLayer, ReEditableLayer? passedDrawingLayer, double passedRadius, bool passedAA,
 			Color passedOutlineColor, Color passedFillColor, int passedBrushWidth) : base(parentLayer, passedDrawingLayer,
 			BaseEditEngine.ShapeTypes.RoundedLineSeries, passedAA, true, passedOutlineColor, passedFillColor, passedBrushWidth)
 		{

@@ -15,7 +15,7 @@ namespace Pinta.Effects
 {
 	public class AutoLevelEffect : BaseEffect
 	{
-		UnaryPixelOps.Level op;
+		UnaryPixelOps.Level? op;
 
 		public override string Icon {
 			get { return "Menu.Adjustments.AutoLevel.png"; }

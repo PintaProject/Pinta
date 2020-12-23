@@ -26,6 +26,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -43,7 +44,7 @@ namespace Pinta.Gui.Widgets
 		//gradient vertical padding
 		private const double ypad = 0.03;
 
-		private double[] vals;
+		private double[] vals = null!; // Set by Count
 
 		private Rectangle GradientRectangle {
 			get {
@@ -285,9 +286,10 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event IndexEventHandler ValueChanged;
+		public event IndexEventHandler? ValueChanged;
 		#endregion
 
+		[MemberNotNull (nameof (eventbox))]
 		private void Build ()
 		{
 			CanFocus = true;

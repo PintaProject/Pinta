@@ -32,7 +32,7 @@ namespace Pinta.Effects
             get { return Translations.GetString ("Blurs"); }
         }
 
-        public GaussianBlurData Data { get { return EffectData as GaussianBlurData; } }
+        public GaussianBlurData Data { get { return (GaussianBlurData)EffectData!; } } // NRT - Set in constructor
 
         public GaussianBlurEffect ()
         {

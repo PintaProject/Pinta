@@ -20,15 +20,15 @@ namespace Pinta.Gui.Widgets
 
 		private Size source_size;
 		private Size destination_size;
-		private Layer offset_layer;
+		private Layer? offset_layer;
 		private bool enable_pixel_grid;
 
 		private ScaleFactor scale_factor;
 		private bool generated;
-		private int[] d2sLookupX;
-		private int[] d2sLookupY;
-		private int[] s2dLookupX;
-		private int[] s2dLookupY;
+		private int[] d2sLookupX = null!; // NRT - Guarded by EnsureLookupTablesCreated
+		private int[] d2sLookupY = null!;
+		private int[] s2dLookupX = null!;
+		private int[] s2dLookupY = null!;
 
 		public CanvasRenderer (bool enable_pixel_grid)
 		{

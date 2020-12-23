@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Photo"); }
 		}
 
-		public SharpenData Data { get { return EffectData as SharpenData; } }
+		public SharpenData Data { get { return (SharpenData)EffectData!; } } // NRT - Set in constructor
 		
 		public SharpenEffect ()
 		{

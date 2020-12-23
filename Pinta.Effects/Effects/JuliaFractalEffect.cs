@@ -32,7 +32,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Render"); }
 		}
 
-		public JuliaFractalData Data { get { return EffectData as JuliaFractalData; } }
+		public JuliaFractalData Data { get { return (JuliaFractalData)EffectData!; } } // NRT - Set in constructor
 
 		public JuliaFractalEffect ()
 		{

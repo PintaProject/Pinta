@@ -219,7 +219,7 @@ namespace Pinta.Core
 			ActiveDocument.ResizeImage (width, height);
 		}
 		
-		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem compoundAction)
+		public void ResizeCanvas (int width, int height, Anchor anchor, CompoundHistoryItem? compoundAction)
 		{
 			ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
 		}

@@ -37,11 +37,12 @@ namespace Pinta
 {
 	public class MainWindow : Gtk.Application
 	{
-		WindowShell window_shell;
-		Dock dock;
-		GLib.Menu show_pad;
+		// NRT - Created in OnActivated
+		WindowShell window_shell = null!;
+		Dock dock = null!;
+		GLib.Menu show_pad = null!;
 
-		CanvasPad canvas_pad;
+		CanvasPad canvas_pad = null!;
 
         public MainWindow () : base("com.github.PintaProject.Pinta", GLib.ApplicationFlags.None)
 		{
@@ -141,7 +142,7 @@ namespace Pinta
 			notebook.ActiveTabChanged += DockNotebook_ActiveTabChanged;
 		}
 
-		private void Workspace_DocumentClosed (object sender, DocumentEventArgs e)
+		private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
         {
             var tab = FindTabWithCanvas ((PintaCanvas)e.Document.Workspace.Canvas);
 
@@ -149,7 +150,7 @@ namespace Pinta
                 canvas_pad.Notebook.RemoveTab (tab);
         }
 
-        private void DockNotebook_TabClosed (object sender, TabClosedEventArgs e)
+        private void DockNotebook_TabClosed (object? sender, TabClosedEventArgs e)
         {
             var view = (DocumentViewContent)e.Item;
 
@@ -163,7 +164,7 @@ namespace Pinta
             }
         }
 
-        private void DockNotebook_ActiveTabChanged (object sender, EventArgs e)
+        private void DockNotebook_ActiveTabChanged (object? sender, EventArgs e)
         {
             var item = canvas_pad.Notebook.ActiveItem;
 
@@ -177,7 +178,7 @@ namespace Pinta
             ((CanvasWindow)view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
         }
 
-		private void Workspace_DocumentCreated (object sender, DocumentEventArgs e)
+		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
         {
             var doc = e.Document;
 
@@ -614,7 +615,7 @@ namespace Pinta
 			PintaCore.Actions.View.ZoomToWindowActivated = true;
 		}
 		
-		private void ActiveDocumentChanged (object sender, EventArgs e)
+		private void ActiveDocumentChanged (object? sender, EventArgs e)
 		{
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				PintaCore.Actions.View.SuspendZoomUpdate ();
@@ -632,7 +633,7 @@ namespace Pinta
 			}
 		}
 
-        private IDockNotebookItem FindTabWithCanvas (PintaCanvas canvas)
+        private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas)
         {
 			return canvas_pad.Notebook.Items
 				.Where(i => ((CanvasWindow)i.Widget).Canvas == canvas)

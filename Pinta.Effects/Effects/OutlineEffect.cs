@@ -35,7 +35,7 @@ namespace Pinta.Effects
 			get { return Translations.GetString ("Stylize"); }
 		}
 
-		public OutlineData Data { get { return EffectData as OutlineData; } }
+		public OutlineData Data { get { return (OutlineData)EffectData!; } } // NRT - Set in constructor
 
 		public OutlineEffect ()
 		{

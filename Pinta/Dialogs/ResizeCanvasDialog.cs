@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -100,7 +101,7 @@ namespace Pinta
 		#endregion
 
 		#region Private Methods
-		private void heightSpinner_ValueChanged (object sender, EventArgs e)
+		private void heightSpinner_ValueChanged (object? sender, EventArgs e)
 		{
 			if (value_changing)
 				return;
@@ -112,7 +113,7 @@ namespace Pinta
 			}
 		}
 
-		private void widthSpinner_ValueChanged (object sender, EventArgs e)
+		private void widthSpinner_ValueChanged (object? sender, EventArgs e)
 		{
 			if (value_changing)
 				return;
@@ -124,18 +125,18 @@ namespace Pinta
 			}
 		}
 
-		private void percentageSpinner_ValueChanged (object sender, EventArgs e)
+		private void percentageSpinner_ValueChanged (object? sender, EventArgs e)
 		{
 			widthSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Width * (percentageSpinner.ValueAsInt / 100f));
 			heightSpinner.Value = (int)(PintaCore.Workspace.ImageSize.Height * (percentageSpinner.ValueAsInt / 100f));
 		}
 
-		private void absoluteRadio_Toggled (object sender, EventArgs e)
+		private void absoluteRadio_Toggled (object? sender, EventArgs e)
 		{
 			RadioToggle ();
 		}
 
-		private void percentageRadio_Toggled (object sender, EventArgs e)
+		private void percentageRadio_Toggled (object? sender, EventArgs e)
 		{
 			RadioToggle ();
 		}
@@ -157,47 +158,47 @@ namespace Pinta
 			}
 		}
 
-		private void HandleSEButtonClicked (object sender, EventArgs e)
+		private void HandleSEButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.SE);
 		}
 
-		private void HandleSButtonClicked (object sender, EventArgs e)
+		private void HandleSButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.S);
 		}
 
-		private void HandleSWButtonClicked (object sender, EventArgs e)
+		private void HandleSWButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.SW);
 		}
 
-		private void HandleEButtonClicked (object sender, EventArgs e)
+		private void HandleEButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.E);
 		}
 
-		private void HandleCenterButtonClicked (object sender, EventArgs e)
+		private void HandleCenterButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.Center);
 		}
 
-		private void HandleWButtonClicked (object sender, EventArgs e)
+		private void HandleWButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.W);
 		}
 
-		private void HandleNEButtonClicked (object sender, EventArgs e)
+		private void HandleNEButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.NE);
 		}
 
-		private void HandleNButtonClicked (object sender, EventArgs e)
+		private void HandleNButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.N);
 		}
 
-		private void HandleNWButtonClicked (object sender, EventArgs e)
+		private void HandleNWButtonClicked (object? sender, EventArgs e)
 		{
 			SetAnchor (Anchor.NW);
 		}
@@ -296,6 +297,9 @@ namespace Pinta
 			}
 		}
 
+		[MemberNotNull (nameof (percentageRadio), nameof (absoluteRadio), nameof (percentageSpinner), nameof (widthSpinner), nameof (heightSpinner),
+				nameof (aspectCheckbox), nameof (NWButton), nameof (NButton), nameof (NEButton), nameof (EButton), nameof (SEButton), 
+				nameof (SButton), nameof (SWButton), nameof (WButton), nameof (CenterButton))]
 		private void Build()
         {
 			IconName = Resources.Icons.ImageResizeCanvas;

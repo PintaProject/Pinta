@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 
@@ -46,6 +47,7 @@ namespace Pinta
 			description_label.Markup = message;
 		}
 
+		[MemberNotNull (nameof (description_label))]
 		private void Build()
 		{
 			var hbox = new HBox();

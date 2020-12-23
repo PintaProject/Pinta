@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -50,7 +51,7 @@ namespace Pinta.Effects
             get { return blue_spinbox.ValueAsInt; }
 		}
 
-		public PosterizeData EffectData { get; set; }
+		public PosterizeData? EffectData { get; set; }
 
 		public PosterizeDialog () : base (Translations.GetString ("Posterize"),
 		                                  PintaCore.Chrome.MainWindow, DialogFlags.Modal,
@@ -65,10 +66,13 @@ namespace Pinta.Effects
 			DefaultResponse = Gtk.ResponseType.Ok;
 		}
 		
-		private void HandleValueChanged (object sender, EventArgs e)
+		private void HandleValueChanged (object? sender, EventArgs e)
 		{
 			var widget = sender as HScaleSpinButtonWidget;
-			
+
+			if (widget is null)
+				return;
+
 			if (link_button.Active)
 				green_spinbox.Value = blue_spinbox.Value = red_spinbox.Value = widget.Value;
 			
@@ -96,6 +100,7 @@ namespace Pinta.Effects
 			ContentArea.Add (spinbox);
 		}
 
+		[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
 		private void Build ()
 		{
 			Resizable = false;
