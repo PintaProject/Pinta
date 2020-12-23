@@ -61,7 +61,7 @@ namespace Pinta.Tools
 			base.OnMouseDown (canvas, args, point);
 		}
 
-		protected unsafe override void OnFillRegionComputed (IBitVector2D stencil)
+		protected unsafe override void OnFillRegionComputed (BitMask stencil)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			ImageSurface surf = doc.ToolLayer.Surface;
@@ -86,7 +86,7 @@ namespace Pinta.Tools
 			{
 				int stencil_width = stencil.Width;
 				for (int x = 0; x < stencil_width; ++x) {
-					if (stencil.GetUnchecked (x, y)) {
+					if (stencil.Get (x, y)) {
 						surf.SetColorBgraUnchecked (dstPtr, width, color, x, y);
 					}
 				}
