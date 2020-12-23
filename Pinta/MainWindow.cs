@@ -410,10 +410,6 @@ namespace Pinta
 		
 		private void CreateDockAndPads (HBox container)
 		{
-			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add ("Pinta.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Pinta.png")));
-			fact.AddDefault ();
-
 			var toolbox = new ToolBoxWidget ();
 			container.PackStart (toolbox, false, false, 0);
 			PintaCore.Chrome.InitializeToolBox (toolbox);
