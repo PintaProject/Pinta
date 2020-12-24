@@ -2,6 +2,7 @@
 *.suo
 *.swp
 *.userprefs
+*.pubxml
 .DS_Store
 aclocal.m4
 autom4te.cache
@@ -18,7 +19,6 @@ Makefile
 Makefile.in
 missing
 obj
-pinta
 pinta.pc
 po/.intltool-merge-cache
 po/Makefile.in.in
