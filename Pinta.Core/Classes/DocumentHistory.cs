@@ -1,5 +1,5 @@
-﻿// 
-// DocumentWorkspace.cs
+// 
+// DocumentHistory.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
@@ -30,157 +30,148 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class DocumentWorkspaceHistory
+	public class DocumentHistory
 	{
-		private Document document;
-		List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
-		int historyPointer = -1;
-		int cleanPointer = -1;
+		private readonly Document document;
+		private readonly List<BaseHistoryItem> history = new List<BaseHistoryItem> ();
+		private int clean_pointer = -1;
 
-		internal DocumentWorkspaceHistory (Document document)
+		public event EventHandler<HistoryItemAddedEventArgs>? HistoryItemAdded;
+		public event EventHandler? ActionUndone;
+		public event EventHandler? ActionRedone;
+
+		internal DocumentHistory (Document document)
 		{
 			this.document = document;
-			ListStore = new ListStore (typeof (BaseHistoryItem));
 		}
 
-		public Gtk.ListStore ListStore { get; private set; }
-		
-		public int Pointer {
-			get { return historyPointer; }
-		}
-		
+		public bool CanRedo => Pointer < history.Count - 1;
+		public bool CanUndo => Pointer >= 0;
+
 		public BaseHistoryItem? Current {
-			get { 
-				if (historyPointer > -1 && historyPointer < history.Count)
-					return history[historyPointer]; 
+			get {
+				if (Pointer > -1 && Pointer < history.Count)
+					return history[Pointer];
 				else
 					return null;
 			}
 		}
-		
+
+		public ListStore ListStore { get; } = new ListStore (typeof (BaseHistoryItem));
+
+		public int Pointer { get; private set; } = -1;
+
 		public void PushNewItem (BaseHistoryItem newItem)
 		{
-			
-			//Remove all old redos starting from the end of the list
-			for (int i = history.Count - 1; i >= 0; i--) {
-			
-				BaseHistoryItem item = history[i];
-				
+			// Remove all old redos starting from the end of the list
+			for (var i = history.Count - 1; i >= 0; i--) {				
+				var item = history[i];
+
 				if (item.State == HistoryItemState.Redo) {
-					history.RemoveAt(i);
-					item.Dispose();
+					history.RemoveAt (i);
+					item.Dispose ();
+
 					//Remove from ListStore
 					ListStore.Remove (ref item.Id);
-					
 				} else if (item.State == HistoryItemState.Undo) {
 					break;
 				}
 			}
-		
+
 			//Add new undo to ListStore
 			newItem.Id = ListStore.AppendValues (newItem);
 			history.Add (newItem);
-			historyPointer = history.Count - 1;
+			Pointer = history.Count - 1;
+
 			if (newItem.CausesDirty)
 				document.IsDirty = true;
-				
-			if (history.Count > 1) {
+
+			if (history.Count > 1)
 				PintaCore.Actions.Edit.Undo.Sensitive = true;
-				CanUndo = true;
-			}
-				
+
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
-			CanRedo = false;
-			PintaCore.History.OnHistoryItemAdded (newItem);
+
+			HistoryItemAdded?.Invoke (this, new HistoryItemAddedEventArgs (newItem));
 		}
-		
+
 		public void Undo ()
 		{
-			if (historyPointer < 0) {
+			if (Pointer < 0) {
 				throw new InvalidOperationException ("Undo stack is empty");
 			} else {
-				BaseHistoryItem item = history[historyPointer];
+				var item = history[Pointer];
 				item.Undo ();
 				item.State = HistoryItemState.Redo;
+
 				if (item.CausesDirty)
 					document.IsDirty = true;
 
 				ListStore.SetValue (item.Id, 0, item);
-				history[historyPointer] = item;
-				historyPointer--;
+				history[Pointer] = item;
+				Pointer--;
 			}
 
-			if (historyPointer == cleanPointer)
+			if (Pointer == clean_pointer)
 				document.IsDirty = false;
 
-			if (historyPointer == 0) {
+			if (Pointer == 0)
 				PintaCore.Actions.Edit.Undo.Sensitive = false;
-				CanUndo = false;
-			}
-			
+
 			PintaCore.Actions.Edit.Redo.Sensitive = true;
-			CanRedo = true;
-			PintaCore.History.OnActionUndone ();
+
+			ActionUndone?.Invoke (this, EventArgs.Empty);
 		}
-		
+
 		public void Redo ()
 		{
-			if (historyPointer >= history.Count - 1)
+			if (Pointer >= history.Count - 1)
 				throw new InvalidOperationException ("Redo stack is empty");
 
-			historyPointer++;
-			BaseHistoryItem item = history[historyPointer];
+			Pointer++;
+
+			var item = history[Pointer];
 			item.Redo ();
 			item.State = HistoryItemState.Undo;
 			ListStore.SetValue (item.Id, 0, item);
-			history[historyPointer] = item;
+			history[Pointer] = item;
 
-			if (historyPointer == history.Count - 1) {
+			if (Pointer == history.Count - 1)
 				PintaCore.Actions.Edit.Redo.Sensitive = false;
-				CanRedo = false;
-			}
 
-			if (historyPointer == cleanPointer)
+			if (Pointer == clean_pointer)
 				document.IsDirty = false;
 			else if (item.CausesDirty)
 				document.IsDirty = true;
 
-			if (history.Count > 1) {
+			if (history.Count > 1)
 				PintaCore.Actions.Edit.Undo.Sensitive = true;
-				CanUndo = true;
-			}
 
-			PintaCore.History.OnActionRedone ();
+			ActionRedone?.Invoke (this, EventArgs.Empty);
 		}
 
 		/// <summary>
-        /// Mark the document as being clean at the current point in the history stack.
-        /// This might be used after e.g. saving the document to disk.
-        /// The document's IsDirty property is also set to false.
-        /// </summary>
-		public void SetClean()
-        {
-			cleanPointer = historyPointer;
+		/// Mark the document as being clean at the current point in the history stack.
+		/// This might be used after e.g. saving the document to disk.
+		/// The document's IsDirty property is also set to false.
+		/// </summary>
+		public void SetClean ()
+		{
+			clean_pointer = Pointer;
 			document.IsDirty = false;
-        }
-		
+		}
+
 		public void Clear ()
 		{
-			history.ForEach (delegate(BaseHistoryItem item) { item.Dispose (); } );
-			history.Clear();	
-			ListStore.Clear ();	
-			historyPointer = -1;
-			cleanPointer = -1;
+			history.ForEach (delegate (BaseHistoryItem item) { item.Dispose (); });
+			history.Clear ();
+			ListStore.Clear ();
+			Pointer = -1;
+			clean_pointer = -1;
 
 			document.IsDirty = false;
+
 			PintaCore.Actions.Edit.Redo.Sensitive = false;
 			PintaCore.Actions.Edit.Undo.Sensitive = false;
-			
-			CanRedo = false;
-			CanUndo = false;
 		}
-		
-		public bool CanRedo { get; private set; }
-		public bool CanUndo { get; private set; }
 	}
 }

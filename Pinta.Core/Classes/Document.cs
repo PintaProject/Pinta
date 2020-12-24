@@ -127,7 +127,7 @@ namespace Pinta.Core
 		//Pinta from a file, or if the user just clicked Save As.
 		public bool HasBeenSavedInSession { get; set; }
 		
-		public DocumentWorkspaceHistory History { get { return Workspace.History; } }
+		public DocumentHistory History { get { return Workspace.History; } }
 
 		public Gdk.Size ImageSize { get; set; }
 		

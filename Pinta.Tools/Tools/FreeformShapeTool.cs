@@ -228,7 +228,7 @@ namespace Pinta.Tools
 			}
 
 			if (surface_modified)
-				PintaCore.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface!, doc.CurrentUserLayerIndex)); // NRT - Guarded by surface_modified
+				PintaCore.Workspace.ActiveDocument.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface!, doc.CurrentUserLayerIndex)); // NRT - Guarded by surface_modified
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 
