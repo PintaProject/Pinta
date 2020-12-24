@@ -12,6 +12,7 @@ config.log
 config.status
 configure
 install-sh
+installer/linux/pinta
 intltool-extract.in
 intltool-merge.in
 intltool-update.in

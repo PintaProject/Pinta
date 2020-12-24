@@ -7,23 +7,21 @@ AC_PROG_INSTALL
 dnl pkg-config
 PKG_PROG_PKG_CONFIG([0.20])
 
-AC_PATH_PROG(XBUILD, xbuild, no)
-AC_PATH_PROG(MONO, mono, no)
+AC_PATH_PROG(DOTNET, dotnet, no)
 
-if test "x$XBUILD" = "xno"; then
-	AC_MSG_ERROR([XBuild not found])
+if test "x$DOTNET" = "xno"; then
+    AC_MSG_ERROR([No dotnet runtime found])
 fi
 
-if test "x$MONO" = "xno"; then
-	AC_MSG_ERROR([No mono runtime found])
-fi
+# Check dotnet version
+DOTNET_MINIMUM_VERSION=5.0
+DOTNET_VERSION=$($DOTNET --version)
+AX_COMPARE_VERSION([$DOTNET_VERSION], [ge], [$DOTNET_MINIMUM_VERSION],
+    AC_MSG_NOTICE([Found dotnet $DOTNET_VERSION]),
+    AC_MSG_ERROR([dotnet $DOTNET_MINIMUM_VERSION or higher is required (found version $DOTNET_VERSION).])
+)
 
-# Check Mono version
-MONO_MINIMUM_VERSION=4.0
-PKG_CHECK_MODULES(MONO, mono >= $MONO_MINIMUM_VERSION)
-
-AC_SUBST(XBUILD)
-AC_SUBST(MONO)
+AC_SUBST(DOTNET)
 
 AC_PROG_INTLTOOL([0.35.0], [no-xml])
 GETTEXT_PACKAGE=pinta
@@ -36,13 +34,11 @@ AM_GLIB_GNU_GETTEXT
 pintalocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(pintalocaledir)
 
-PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
-PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
-PKG_CHECK_MODULES([MONO_CAIRO], [mono-cairo])
+PKG_CHECK_MODULES([GTK_30], [gtk+-3.0])
 
 AC_CONFIG_FILES([
 Makefile
-pinta
+installer/linux/pinta
 pinta.pc
 po/Makefile.in
 xdg/Makefile
@@ -56,9 +52,8 @@ ${PACKAGE}-${VERSION}
 
   Build Environment
     Install Prefix:     	${prefix}
-    XBuild Path:		${XBUILD}
-    Mono Runtime:       	${MONO}
-    Launch Script:		${prefix}/bin/${PACKAGE}
-    Installation Directory: 	${prefix}/lib/${PACKAGE}/
+    .NET Runtime:       	${DOTNET}
+    Launch Script:	        ${prefix}/bin/${PACKAGE}
+    Installation Directory: ${prefix}/lib/${PACKAGE}/
 
 EOF

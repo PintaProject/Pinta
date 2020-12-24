@@ -83,7 +83,7 @@ install-exec-local: pinta $(BINFILES)
 		/property:BinDir=$(DESTDIR)$(bindir) /property:LibDir=$(DESTDIR)$(libdir) \
 		/property:DataRootDir=$(DESTDIR)$(datarootdir) /property:ManDir=$(DESTDIR)$(mandir) \
 		/property:LocaleDir=$(DESTDIR)$(localedir) Pinta.Install.proj
-	$(INSTALL_SCRIPT) pinta $(DESTDIR)$(bindir)/$(PACKAGE)
+	$(INSTALL_SCRIPT) installer/linux/pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
 uninstall: 

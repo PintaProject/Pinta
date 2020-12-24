@@ -25,8 +25,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
+    - name: Install Apt Dependencies
+      run: |
+        sudo apt update
+        sudo apt install autotools-dev gettext intltool
+    # TODO - Run the build via make once more of the autotools scripts are updated for the GTK3 build.
     - name: Build
-      run: dotnet build Pinta.sln --configuration Release
+      run: |
+        ./autogen.sh
+        dotnet build Pinta.sln --configuration Release
     - name: Test
       run: dotnet test Pinta.sln --configuration Release
     # TODO - upload an artifact with the build results (see master branch)
