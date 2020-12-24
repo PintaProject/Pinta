@@ -89,17 +89,6 @@ install-exec-local: pinta $(BINFILES)
 uninstall: 
 	$(XBUILD) /target:Uninstall /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta.Install.proj
 
-# target: release - Default release type: releasetar
-release: releasetar
-
-# target: releasetar - Make a release tarball.
-releasetar: $(BINFILES)
-	cd $(BINDIR) && tar -czf ../$(RELEASE_FILE).tgz --exclude=*mdb *
-
-# target: releasezip - Make a release zip file.
-releasezip: $(BINFILES)
-	cd $(BINDIR) && zip -r ../$(RELEASE_FILE).zip * -x "*.mdb"
-
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
            intltool-merge.in intltool-update.in
@@ -124,4 +113,4 @@ MAINTAINERCLEANFILES = po/Makefile.in.in \
 		       missing \
 		       compile
 
-.PHONY: install uninstall cleanbin cleanobj release releasetar releasezip
+.PHONY: install uninstall cleanbin cleanobj
