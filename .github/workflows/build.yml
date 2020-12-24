@@ -28,7 +28,7 @@ jobs:
     - name: Install Apt Dependencies
       run: |
         sudo apt update
-        sudo apt install autotools-dev autoconf-archive gettext intltool
+        sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev
     # TODO - Run the build via make once more of the autotools scripts are updated for the GTK3 build.
     - name: Build
       run: |
