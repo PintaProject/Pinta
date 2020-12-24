@@ -29,14 +29,21 @@ jobs:
       run: |
         sudo apt update
         sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev
-    # TODO - Run the build via make once more of the autotools scripts are updated for the GTK3 build.
     - name: Build
       run: |
         ./autogen.sh
-        dotnet build Pinta.sln --configuration Release
+        make build
     - name: Test
-      run: dotnet test Pinta.sln --configuration Release
-    # TODO - upload an artifact with the build results (see master branch)
+      run: make test
+    # TODO - test the actual 'make install' step
+    - name: Build Installer
+      run: make releasezip
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: Pinta-${{ matrix.platform }}.zip
+        path: pinta-1.8.zip
+        if-no-files-found: error
 
   build-macos:
     runs-on: macos-latest

@@ -3,6 +3,8 @@ DIST_SUBDIRS = xdg
 
 BINDIR = $(srcdir)/bin
 
+PINTA_BUILD_OPTS = --configuration Release -p:BuildTranslations=true
+
 PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
 
 BINFILES = \
@@ -18,9 +20,6 @@ DEBUG_FILES = $(addsuffix .mdb, $(BINFILES))
 
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
-MAC_APP_DIR = Pinta.app
-MAC_APP_BIN_DIR = "$(MAC_APP_DIR)/Contents/MacOS/"
-
 #magic automake variables
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -32,21 +31,19 @@ pkgconfig_DATA = $(PINTA_ASSEMBLY_PC)
 all: build
 
 # target: run - Launch the uninstalled copy
-run:
-	$(MONO) bin/Pinta.exe
-	
+run: build
+	$(DOTNET) bin/Pinta.dll
+
 # target: help - Display callable targets.
 help:
 	egrep "^# target:" Makefile | sed 's/^# target:/make/'
 
 # target: build - Build Pinta.
 build: Pinta.sln
-	cd $(srcdir) && $(XBUILD) Pinta.sln
-	cd $(srcdir) && $(XBUILD) Pinta.Install.proj /target:CompileTranslations
+	cd $(srcdir) && $(DOTNET) build Pinta.sln $(PINTA_BUILD_OPTS)
 
 test: build
-	$(XBUILD) tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj
-	nunit-console bin/Pinta.Core.Tests.dll
+	$(DOTNET) test Pinta.sln $(PINTA_BUILD_OPTS)
 
 # target: list - List source files.
 list:
@@ -88,6 +85,11 @@ install-exec-local: pinta $(BINFILES)
 # target: uninstall - Uninstalls Pinta.
 uninstall: 
 	$(XBUILD) /target:Uninstall /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta.Install.proj
+
+# target: releasezip - Make a self-contained release zip file.
+releasezip:
+	$(DOTNET) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 -o $(srcdir)/release
+	cd $(srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln Pinta.Install.proj pinta.pc.in readme.md intltool-extract.in \
