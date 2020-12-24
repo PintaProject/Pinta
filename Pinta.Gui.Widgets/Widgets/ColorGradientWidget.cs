@@ -286,7 +286,7 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Public Events
-		public event IndexEventHandler? ValueChanged;
+		public event EventHandler<IndexEventArgs>? ValueChanged;
 		#endregion
 
 		[MemberNotNull (nameof (eventbox))]
