@@ -26,4 +26,5 @@ po/Makefile.in.in
 po/POTFILES
 po/stamp-it
 xdg/pinta.desktop
+xdg/pinta.appdata.xml
 .vs
