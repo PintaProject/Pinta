@@ -133,7 +133,7 @@ namespace Pinta.Tools
 				doc.PreviousSelection = prev_selection.Transform (transform);
 
 			if (hist != null)
-				PintaCore.History.PushNewItem (hist);
+				PintaCore.Workspace.ActiveDocument.History.PushNewItem (hist);
 
 			hist = null;
 			original_selection?.Dispose ();

@@ -36,8 +36,9 @@ namespace Pinta.Gui.Widgets
 {
 	public class HistoryTreeView : ScrolledWindow
 	{
-		private TreeView tree;
-		
+		private readonly TreeView tree;
+		private Document? active_document;
+
 		public HistoryTreeView ()
 		{
 			CanFocus = false;
@@ -69,10 +70,6 @@ namespace Pinta.Gui.Widgets
 			tree.AppendColumn (text_column);
 
 			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
-			
-			PintaCore.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
-			PintaCore.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
-			PintaCore.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
 
 			Add (tree);
 			ShowAll ();
@@ -80,24 +77,43 @@ namespace Pinta.Gui.Widgets
 
 		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
 		{
-			if (PintaCore.Workspace.HasOpenDocuments)
-				tree.Model = PintaCore.Workspace.ActiveWorkspace.History.ListStore;
-			else
-				tree.Model = null;
-				
+			var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
+
+			if (active_document == doc)
+				return;
+
+			if (active_document != null) {
+				active_document.History.HistoryItemAdded -= new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
+				active_document.History.ActionUndone -= new EventHandler (OnHistoryItemsChanged);
+				active_document.History.ActionRedone -= new EventHandler (OnHistoryItemsChanged);
+			}
+
+			tree.Model = doc?.History.ListStore;
+
+			if (doc is not null) {
+				doc.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (OnHistoryItemsChanged);
+				doc.History.ActionUndone += new EventHandler (OnHistoryItemsChanged);
+				doc.History.ActionRedone += new EventHandler (OnHistoryItemsChanged);
+			}
+
+			active_document = doc;
+
 			OnHistoryItemsChanged (this, EventArgs.Empty);
 		}
 
 		#region History
 		public bool HistoryItemSelected (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
 		{
+			if (active_document is null)
+				return true;
+
 			int current = path.Indices[0];
 			if (!path_currently_selected) {
-				while (PintaCore.History.Pointer < current) {
-					PintaCore.History.Redo ();
+				while (active_document.History.Pointer < current) {
+					active_document.History.Redo ();
 				}
-				while (PintaCore.History.Pointer > current) {
-					PintaCore.History.Undo ();
+				while (active_document.History.Pointer > current) {
+					active_document.History.Undo ();
 				}
 			}
 			return true;
@@ -130,9 +146,12 @@ namespace Pinta.Gui.Widgets
 
 		private void OnHistoryItemsChanged (object? o, EventArgs args)
 		{
-			if (tree.Model != null && PintaCore.History.Current != null) {
-				tree.Selection.SelectIter (PintaCore.History.Current.Id);
-				tree.ScrollToCell (tree.Model.GetPath (PintaCore.History.Current.Id), tree.Columns[1], true, (float)0.9, 0);
+			if (active_document is null)
+				return;
+
+			if (tree.Model != null && active_document.History.Current != null) {
+				tree.Selection.SelectIter (active_document.History.Current.Id);
+				tree.ScrollToCell (tree.Model.GetPath (active_document.History.Current.Id), tree.Columns[1], true, (float)0.9, 0);
 			}
 		}
 		#endregion

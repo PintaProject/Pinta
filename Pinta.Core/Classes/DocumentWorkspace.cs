@@ -43,7 +43,7 @@ namespace Pinta.Core
 		internal DocumentWorkspace (Document document)
 		{
 			this.document = document;
-			History = new DocumentWorkspaceHistory (document);
+			History = new DocumentHistory (document);
 		}
 
         #region Public Events
@@ -78,7 +78,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public DocumentWorkspaceHistory History { get; private set; }
+		public DocumentHistory History { get; private set; }
 
 		public bool ImageFitsInWindow {
 			get {

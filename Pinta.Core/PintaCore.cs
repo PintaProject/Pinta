@@ -40,7 +40,6 @@ namespace Pinta.Core
 		public static ResourceManager Resources { get; private set; }
 		public static ActionManager Actions { get; private set; }
 		public static WorkspaceManager Workspace { get; private set; }
-		public static HistoryManager History { get; private set; }
 		public static SystemManager System { get; private set; }
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static SettingsManager Settings { get; private set; }
@@ -60,7 +59,6 @@ namespace Pinta.Core
 			Layers = new LayerManager ();
 			PaintBrushes = new PaintBrushManager ();
 			Tools = new ToolManager ();
-			History = new HistoryManager ();
 			System = new SystemManager ();
 			LivePreview = new LivePreviewManager ();
 			Palette = new PaletteManager ();

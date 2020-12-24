@@ -245,8 +245,8 @@ namespace Pinta.Core
 				layer.DrawWithOperator(ctx, live_preview_surface, Cairo.Operator.Source);
 				ctx.Restore ();
 			}
-			
-			PintaCore.History.PushNewItem (history_item);
+
+			PintaCore.Workspace.ActiveDocument.History.PushNewItem (history_item);
 			history_item = null!;
 			
 			FireLivePreviewEndedEvent(RenderStatus.Completed, null);

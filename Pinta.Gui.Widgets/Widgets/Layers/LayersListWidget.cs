@@ -39,6 +39,7 @@ namespace Pinta.Gui.Widgets
 	{
 		private TreeView tree;
 		private TreeStore store;
+		private Document? active_document;
 
 		// For the active layer, we also draw the selection layer on top of it,
 		// so we can't directly use that layer's surface.
@@ -111,13 +112,10 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Layers.LayerRemoved += HandleLayerAddedOrRemoved;
 			PintaCore.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
 			PintaCore.Layers.LayerPropertyChanged += HandlePintaCoreLayersLayerPropertyChanged;
-			
-			PintaCore.History.HistoryItemAdded += HandleHistoryItemAdded;
-			PintaCore.History.ActionRedone += HandleHistoryItemAdded;
-			PintaCore.History.ActionUndone += HandleHistoryItemAdded;			
-			
-			tree.CursorChanged += HandleLayerSelected;
 
+			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
+
+			tree.CursorChanged += HandleLayerSelected;
 
 			ShowAll ();
 		}
@@ -193,7 +191,29 @@ namespace Pinta.Gui.Widgets
 			// The double click to activate will have already selected the layer.
 			PintaCore.Actions.Layers.Properties.Activate ();
 		}
-		
+
+		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
+		{
+			var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
+
+			if (active_document == doc)
+				return;
+
+			if (active_document != null) {
+				active_document.History.HistoryItemAdded -= new EventHandler<HistoryItemAddedEventArgs> (HandleHistoryItemAdded);
+				active_document.History.ActionUndone -= new EventHandler (HandleHistoryItemAdded);
+				active_document.History.ActionRedone -= new EventHandler (HandleHistoryItemAdded);
+			}
+
+			if (doc is not null) {
+				doc.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (HandleHistoryItemAdded);
+				doc.History.ActionUndone += new EventHandler (HandleHistoryItemAdded);
+				doc.History.ActionRedone += new EventHandler (HandleHistoryItemAdded);
+			}
+
+			active_document = doc;
+		}
+
 		public void Reset ()
 		{
 			store.Clear ();
@@ -244,7 +264,7 @@ namespace Pinta.Gui.Widgets
 				initial,
 				updated);
 			
-			PintaCore.History.PushNewItem (historyItem);
+			PintaCore.Workspace.ActiveDocument.History.PushNewItem (historyItem);
 			
 			//TODO Call this automatically when the layer visibility changes.
 			PintaCore.Workspace.Invalidate ();
