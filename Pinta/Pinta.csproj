@@ -14,6 +14,10 @@
     <Authors>PintaProject</Authors>
     <Company />
     <Product />
+
+    <!-- Disabled by default as it requires gettext to be installed. -->
+    <BuildTranslations>false</BuildTranslations>
+
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.128" />
@@ -28,4 +32,27 @@
     <!-- TODO-GTK3 remove once addins are supported -->
     <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj" />
   </ItemGroup>
+
+  <!-- Run msgfmt on our translation (po) files -->
+  <ItemGroup>
+    <Translation Include="../po/*.po"/>
+  </ItemGroup>
+  <Target Name="CompileTranslations"
+    BeforeTargets="Build"
+    Condition="'$(BuildTranslations)' == 'true'"
+  	Inputs="@(Translation)"
+  	Outputs="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo">
+
+    <MakeDir Directories="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES" />
+    <Exec Command='msgfmt "%(Translation.FullPath)" -o "$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo"' />
+  </Target>
+
+  <!-- Include the compiled translation files when publishing. -->
+  <Target Name="PublishTranslations"
+    AfterTargets="Publish"
+    Condition="'$(BuildTranslations)' == 'true'">
+    <Copy
+        SourceFiles="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo"
+        DestinationFiles="$(PublishDir)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo" />
+  </Target>
 </Project>
