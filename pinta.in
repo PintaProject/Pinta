@@ -1,5 +1,0 @@
-#!/bin/sh 
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-
-exec @MONO@ @libdir@/@PACKAGE@/Pinta.exe "$@"

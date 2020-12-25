@@ -56,8 +56,6 @@ CONFIGURE=configure.ac
 : ${AUTOHEADER=autoheader}
 : ${AUTOMAKE=automake}
 : ${ACLOCAL=aclocal}
-: ${MONO=mono}
-: ${XBUILD=xbuild}
 
 DIE=0
 
@@ -77,15 +75,9 @@ DIE=0
         DIE=1
 }
 
-($MONO --version) < /dev/null > /dev/null 2>&1 || {
+(intltoolize --version) < /dev/null > /dev/null 2>&1 || {
         echo
-        echo "You must have mono runtime installed to compile $PROJECT."
-        DIE=1
-}
-
-($XBUILD /version) < /dev/null > /dev/null 2>&1 || {
-        echo
-        echo "You must have mono-xbuild installed to compile $PROJECT."
+        echo "You must have intltoolize installed to compile $PROJECT."
         DIE=1
 }
 
@@ -93,34 +85,7 @@ if test "$DIE" -eq 1; then
         exit 1
 fi
 
-unset GREP_OPTIONS
-
-xbuild_version=`xbuild /version | grep '^XBuild' | egrep -o '([0-9]+\.?){2,}'`
-check_version "$xbuild_version" "2.4" 2> /dev/null
-if test $? -eq 9; then
-	echo
-	echo "A newer version of XBuild is required to build $PROJECT ( >= 2.4 )"
-	exit 1
-fi
-
-mono_version=`xbuild /version | grep '^Mono' | egrep -o '([0-9]+\.?){2,}'`
-check_version "$xbuild_version" "2.4" 2> /dev/null
-if test $? -eq 9; then
-	echo
-	echo "A newer version of Mono is required to run $PROJECT ( >= 2.4 )"
-	exit 1
-fi
-
-intltoolize_version=`xbuild /version | grep '^Mono' | egrep -o '([0-9]+\.?){2,}'`
-check_version "$intltoolize_version" "0.35" 2> /dev/null
-if test $? -eq 9; then
-       echo
-       echo "A newer version of intltoolize is required to run $PROJECT ( >= 0.35 )"
-       exit 1
-fi
-
-
-#Check directoy 
+# Check directory.
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
@@ -131,7 +96,7 @@ aclocalinclude="-I . $ACLOCAL_FLAGS"
 
 echo "Running intltoolize"
 intltoolize --copy --force --automake
-                                                                         
+
 test $TEST_TYPE $FILE || {
         echo "You must run this script in the top-level $PROJECT directory"
         exit 1

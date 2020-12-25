@@ -25,11 +25,26 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
+    - name: Install Apt Dependencies
+      run: |
+        sudo apt update
+        sudo apt install autotools-dev autoconf-archive gettext intltool libgtk-3-dev
     - name: Build
-      run: dotnet build Pinta.sln --configuration Release
+      run: |
+        ./autogen.sh --prefix ${{ runner.temp }}
+        make build
     - name: Test
-      run: dotnet test Pinta.sln --configuration Release
-    # TODO - upload an artifact with the build results (see master branch)
+      run: make test
+    - name: Test Install
+      run: make install
+    - name: Build Installer
+      run: make releasezip
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: Pinta-${{ matrix.platform }}.zip
+        path: pinta-1.8.zip
+        if-no-files-found: error
 
   build-macos:
     runs-on: macos-latest
