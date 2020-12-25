@@ -5,18 +5,17 @@ BINDIR = $(srcdir)/bin
 
 PINTA_BUILD_OPTS = --configuration Release -p:BuildTranslations=true
 
+PINTA_INSTALL_OPTS = \
+	-p:SourceDir=$(abs_srcdir) \
+	-p:PublishDir=$(abs_srcdir)/publish \
+	-p:InstallPrefix=$(DESTDIR)$(prefix) \
+	-p:InstallBinDir=$(DESTDIR)$(bindir) \
+	-p:InstallLibDir=$(DESTDIR)$(libdir) \
+	-p:InstallDataRootDir=$(DESTDIR)$(datarootdir) \
+	-p:InstallManDir=$(DESTDIR)$(mandir) \
+	-p:InstallLocaleDir=$(DESTDIR)$(localedir)
+
 PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
-
-BINFILES = \
-	$(BINDIR)/Pinta.exe \
-	$(BINDIR)/Pinta.Core.dll \
-	$(BINDIR)/Pinta.Docking.dll \
-	$(BINDIR)/Pinta.Gui.Widgets.dll \
-	$(BINDIR)/Pinta.Resources.dll \
-	$(BINDIR)/Pinta.Effects.dll \
-	$(BINDIR)/Pinta.Tools.dll
-
-DEBUG_FILES = $(addsuffix .mdb, $(BINFILES))
 
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
@@ -73,18 +72,16 @@ cleanbin:
 # target: cleanobj - Removes temporary build files. 
 cleanobj:
 	find $(srcdir)/ -type d -name obj | xargs rm -rvf
-	
-# target: install - Installs Pinta. 
-install-exec-local: pinta $(BINFILES)
-	cd $(srcdir) && $(XBUILD) /target:Install /property:InstallPrefix=$(DESTDIR)$(prefix) \
-		/property:BinDir=$(DESTDIR)$(bindir) /property:LibDir=$(DESTDIR)$(libdir) \
-		/property:DataRootDir=$(DESTDIR)$(datarootdir) /property:ManDir=$(DESTDIR)$(mandir) \
-		/property:LocaleDir=$(DESTDIR)$(localedir) Pinta.Install.proj
+
+# target: install - Installs Pinta.
+install-exec-local: build
+	$(DOTNET) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -o $(srcdir)/publish
+	$(DOTNET) msbuild installer/linux/install.proj -target:Install $(PINTA_INSTALL_OPTS)
 	$(INSTALL_SCRIPT) installer/linux/pinta $(DESTDIR)$(bindir)/$(PACKAGE)
 
 # target: uninstall - Uninstalls Pinta.
-uninstall: 
-	$(XBUILD) /target:Uninstall /property:InstallPrefix=$(DESTDIR)$(prefix) Pinta.Install.proj
+uninstall-hook:
+	$(DOTNET) msbuild installer/linux/install.proj -target:Uninstall $(PINTA_INSTALL_OPTS)
 
 # target: releasezip - Make a self-contained release zip file.
 releasezip:

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
+
+  <!-- Set some paths -->
+  <PropertyGroup>
+    <SourceDir>src</SourceDir>
+    <PublishDir>publish</PublishDir>
+    <InstallPrefix>/usr/local</InstallPrefix>
+    <InstallBinDir>$(InstallPrefix)/bin</InstallBinDir>
+    <InstallLibDir>$(InstallPrefix)/lib</InstallLibDir>
+    <InstallDataRootDir>$(InstallPrefix)/share</InstallDataRootDir>
+    <InstallManDir>$(InstallDataRootDir)/man</InstallManDir>
+    <InstallLocaleDir>$(InstallDataRootDir)/locale</InstallLocaleDir>
+  </PropertyGroup>
+
+  <!-- All of our compiled translation files -->
+  <ItemGroup>
+      <Translation Include="$(PublishDir)/locale/**/pinta.mo"/>
+  </ItemGroup>
+
+  <!-- All of our icons -->
+  <ItemGroup>
+      <Icon Include="$(PublishDir)/icons/**/*.png"/>
+  </ItemGroup>
+
+  <!-- Reference all of our assemblies -->
+  <ItemGroup>
+    <BinFile Include="$(PublishDir)/*.dll" />
+    <BinFile Include="$(PublishDir)/*.json" />
+  </ItemGroup>
+
+  <!-- Install everything for Pinta -->
+  <Target Name="Install">
+    <Copy SourceFiles="@(BinFile)" DestinationFolder="$(InstallLibDir)/pinta" />
+    <MakeDir Directories="$(InstallBinDir)" />
+    <Copy SourceFiles="$(SourceDir)/xdg/pinta.1" DestinationFolder="$(InstallManDir)/man1" />
+    <Exec Command='gzip -f "$(InstallManDir)/man1/pinta.1"' />
+    <Copy SourceFiles="$(SourceDir)/xdg/pinta.appdata.xml" DestinationFolder="$(InstallDataRootDir)/metainfo" />
+    <Copy SourceFiles="$(SourceDir)/xdg/pinta.desktop" DestinationFolder="$(InstallDataRootDir)/applications" />
+    <Copy SourceFiles="$(SourceDir)/xdg/pinta.xpm" DestinationFolder="$(InstallDataRootDir)/pixmaps" />
+    <Copy SourceFiles="$(SourceDir)/xdg/16x16/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/16x16/apps" />
+    <Copy SourceFiles="$(SourceDir)/xdg/22x22/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/22x22/apps" />
+    <Copy SourceFiles="$(SourceDir)/xdg/24x24/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/24x24/apps" />
+    <Copy SourceFiles="$(SourceDir)/xdg/32x32/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/32x32/apps" />
+    <Copy SourceFiles="$(SourceDir)/xdg/96x96/pinta.png" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/96x96/apps" />
+    <Copy SourceFiles="$(SourceDir)/xdg/scalable/pinta.svg" DestinationFolder="$(InstallDataRootDir)/icons/hicolor/scalable/apps" />
+    <Copy SourceFiles="@(Icon)" DestinationFolder="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)" />
+    <Copy SourceFiles="@(Translation)" DestinationFolder="$(InstallLocaleDir)/%(Translation.RecursiveDir)" />
+  </Target>
+
+  <!-- Uninstall everything for Pinta -->
+  <Target Name="Uninstall">
+    <Exec Command='rm -rf "$(InstallLibDir)/pinta"' />
+    <Delete Files="$(InstallBinDir)/pinta" />
+    <Delete Files="$(InstallLocaleDir)/%(Translation.Code)/LC_MESSAGES/pinta.mo" />
+    <Delete Files="$(InstallManDir)/man1/pinta.1" />
+    <Delete Files="$(InstallManDir)/man1/pinta.1.gz" />
+    <Delete Files="$(InstallDataRootDir)/metainfo/pinta.appdata.xml" />
+    <Delete Files="$(InstallDataRootDir)/applications/pinta.desktop" />
+    <Delete Files="$(InstallDataRootDir)/pixmaps/pinta.xpm" />
+    <Delete Files="$(InstallDataRootDir)/icons/hicolor/16x16/apps/pinta.png" />
+    <Delete Files="$(InstallDataRootDir)/icons/hicolor/22x22/apps/pinta.png" />
+    <Delete Files="$(InstallDataRootDir)/icons/hicolor/24x24/apps/pinta.png" />
+    <Delete Files="$(InstallDataRootDir)/icons/hicolor/32x32/apps/pinta.png" />
+    <Delete Files="$(InstallDataRootDir)/icons/hicolor/96x96/apps/pinta.png" />
+    <Delete Files="$(InstallDataRootDir)/icons/hicolor/scalable/apps/pinta.svg" />
+    <Delete Files="$(InstallDataRootDir)/icons/%(Icon.RecursiveDir)/%(Icon.Filename).png" />
+    <Delete Files="$(InstallLocaleDir)/%(Translation.RecursiveDir)/pinta.mo" />
+  </Target>
+</Project>
