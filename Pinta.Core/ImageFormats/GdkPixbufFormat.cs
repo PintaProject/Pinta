@@ -60,7 +60,7 @@ namespace Pinta.Core
 			doc.ImageSize = imagesize;
 			doc.Workspace.CanvasSize = imagesize;
 
-			Layer layer = doc.AddNewLayer (Path.GetFileName (fileName));
+			Layer layer = doc.Layers.AddNewLayer (Path.GetFileName (fileName));
 
 			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
 				CairoHelper.SetSourcePixbuf (g, bg, 0, 0);

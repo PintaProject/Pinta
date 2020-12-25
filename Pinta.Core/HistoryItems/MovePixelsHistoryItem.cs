@@ -89,7 +89,7 @@ namespace Pinta.Core
 				old_surface = surf;
 
 				is_lifted = !is_lifted;
-				doc.ShowSelectionLayer = is_lifted;
+				doc.Layers.ShowSelectionLayer = is_lifted;
 			}
 
 			PintaCore.Workspace.Invalidate ();
@@ -101,8 +101,8 @@ namespace Pinta.Core
 			is_lifted = true;
 
 			if (lift) {
-				layer_index = doc.CurrentUserLayerIndex;
-				old_surface = doc.CurrentUserLayer.Surface.Clone ();
+				layer_index = doc.Layers.CurrentUserLayerIndex;
+				old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			}
 				
 			old_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();

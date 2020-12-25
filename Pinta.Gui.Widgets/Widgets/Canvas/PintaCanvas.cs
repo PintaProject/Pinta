@@ -140,7 +140,7 @@ namespace Pinta.Gui.Widgets
             g.Translate (x, y);
 
             // Render all the layers to a surface
-            var layers = document.GetLayersToPaint ();
+            var layers = document.Layers.GetLayersToPaint ();
 
             if (layers.Count == 0)
                 canvas.Clear ();

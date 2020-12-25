@@ -151,14 +151,14 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			var oldBottomSurface = doc.UserLayers[0].Surface.Clone ();
+			var oldBottomSurface = doc.Layers.UserLayers[0].Surface.Clone ();
 
 			CompoundHistoryItem hist = new CompoundHistoryItem (Resources.Icons.ImageFlatten, Translations.GetString ("Flatten"));
 
-			for (int i = doc.UserLayers.Count - 1; i >= 1; i--)
-				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.UserLayers[i], i));
+			for (int i = doc.Layers.UserLayers.Count - 1; i >= 1; i--)
+				hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers.UserLayers[i], i));
 
-			doc.FlattenImage ();
+			doc.Layers.FlattenLayers ();
 
 			hist.Push (new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, 0));
 			doc.History.PushNewItem (hist);
@@ -306,7 +306,7 @@ namespace Pinta.Core
 
 				doc.Workspace.Canvas.Window.ThawUpdates();
 
-				foreach (var layer in doc.UserLayers)
+				foreach (var layer in doc.Layers.UserLayers)
                     layer.Crop (rect, selection);
 
 				hist.FinishSnapshotOfImage();

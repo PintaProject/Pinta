@@ -118,7 +118,7 @@ namespace Pinta.Tools
 
 			if (undo_surface != null) {
 				if (surface_modified)
-					doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+					doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.Layers.CurrentUserLayerIndex));
 				else if (undo_surface != null)
 					(undo_surface as IDisposable).Dispose ();
 			}
@@ -137,7 +137,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			surface_modified = false;
-			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+			undo_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			mouse_button = args.Event.Button;
 			
 			OnMouseMove (canvas, null, point);

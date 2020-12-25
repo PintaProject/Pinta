@@ -62,10 +62,10 @@ namespace Pinta.Core
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 			DocumentSelection swap_selection = doc.Selection;
-			bool swap_hide_tool_layer = doc.ToolLayer.Hidden;
+			bool swap_hide_tool_layer = doc.Layers.ToolLayer.Hidden;
 
 			doc.Selection = old_selection!; // NRT - Set in TakeSnapshot
-			doc.ToolLayer.Hidden = hide_tool_layer;
+			doc.Layers.ToolLayer.Hidden = hide_tool_layer;
 
 			old_selection = swap_selection;
 			hide_tool_layer = swap_hide_tool_layer;
@@ -82,7 +82,7 @@ namespace Pinta.Core
 			var doc = PintaCore.Workspace.ActiveDocument;
 			old_selection = doc.Selection.Clone ();
             old_previous_selection = doc.PreviousSelection.Clone ();
-			hide_tool_layer = doc.ToolLayer.Hidden;
+			hide_tool_layer = doc.Layers.ToolLayer.Hidden;
 		}
 	}
 }

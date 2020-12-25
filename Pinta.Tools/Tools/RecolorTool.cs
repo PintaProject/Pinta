@@ -93,7 +93,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			doc.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Clear ();
 			stencil = new bool[doc.ImageSize.Width, doc.ImageSize.Height];
 
 			base.OnMouseDown (canvas, args, point);
@@ -126,8 +126,8 @@ namespace Pinta.Tools
 			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = doc.CurrentUserLayer.Surface;
-			ImageSurface tmp_layer = doc.ToolLayer.Surface;
+			ImageSurface surf = doc.Layers.CurrentUserLayer.Surface;
+			ImageSurface tmp_layer = doc.Layers.ToolLayer.Surface;
 
 			Gdk.Rectangle roi = GetRectangleFromPoints (last_point, new Point (x, y));
 

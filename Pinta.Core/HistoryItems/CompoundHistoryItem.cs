@@ -71,7 +71,7 @@ namespace Pinta.Core
 		public void StartSnapshotOfImage ()
 		{
 			snapshots = new List<ImageSurface> ();
-			foreach (UserLayer item in PintaCore.Workspace.ActiveDocument.UserLayers) {
+			foreach (UserLayer item in PintaCore.Workspace.ActiveDocument.Layers.UserLayers) {
 				snapshots.Add (item.Surface.Clone ());
 			}
 		}

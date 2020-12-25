@@ -62,7 +62,7 @@ namespace Pinta.Tools
                 return;
 
 			surface_modified = false;
-			undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone ();
+			undo_surface = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Surface.Clone ();
             mouse_button = args.Event.Button;
 			Color tool_color;
 
@@ -121,7 +121,7 @@ namespace Pinta.Tools
 			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			ImageSurface surf = doc.CurrentUserLayer.Surface;
+			ImageSurface surf = doc.Layers.CurrentUserLayer.Surface;
 			
 			using (Context g = new Context (surf)) {
 				g.AppendPath (doc.Selection.SelectionPath);
@@ -165,7 +165,7 @@ namespace Pinta.Tools
             if (undo_surface != null)
             {
                 if (surface_modified)
-                    doc.History.PushNewItem(new SimpleHistoryItem(Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+                    doc.History.PushNewItem(new SimpleHistoryItem(Icon, Name, undo_surface, doc.Layers.CurrentUserLayerIndex));
                 else if (undo_surface != null)
                     (undo_surface as IDisposable).Dispose();
             }

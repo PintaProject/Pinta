@@ -86,11 +86,11 @@ namespace Pinta.Tools
 				if (offset.IsNotSet ())
 					offset = new Point ((int)point.X - origin.X, (int)point.Y - origin.Y);
 
-				doc.ToolLayer.Clear ();
-				doc.ToolLayer.Hidden = false;
+				doc.Layers.ToolLayer.Clear ();
+				doc.Layers.ToolLayer.Hidden = false;
 
 				surface_modified = false;
-				undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+				undo_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			} else {
 				origin = point.ToGdkPoint ();
 			}
@@ -117,7 +117,7 @@ namespace Pinta.Tools
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
 
-				g.SetSource (doc.CurrentUserLayer.Surface, offset.X, offset.Y);
+				g.SetSource (doc.Layers.CurrentUserLayer.Surface, offset.X, offset.Y);
 				g.LineWidth = BrushWidth;
 				g.LineCap = Cairo.LineCap.Round;
 
@@ -137,8 +137,8 @@ namespace Pinta.Tools
 
 			painting = false;
 
-			using (Cairo.Context g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
-				g.SetSource (doc.ToolLayer.Surface);
+			using (Cairo.Context g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
+				g.SetSource (doc.Layers.ToolLayer.Surface);
 				g.Paint ();
 			}
 			
@@ -147,8 +147,8 @@ namespace Pinta.Tools
 			offset = new Point (int.MinValue, int.MinValue);
 			last_point = new Point (int.MinValue, int.MinValue);
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = true;
+			doc.Layers.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Hidden = true;
 			doc.Workspace.Invalidate ();
 		}
 

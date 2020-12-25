@@ -119,7 +119,7 @@ namespace Pinta.Tools
 				if (!currentRegion.ContainsPoint(pos.X, pos.Y) && limitToSelection)
 					return;
 
-				ImageSurface surface = doc.CurrentUserLayer.Surface;
+				ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
 				var stencilBuffer = new BitMask ((int) surface.Width, (int) surface.Height);
 				int tol = (int)(Tolerance * Tolerance * 256);
 				Rectangle boundingBox;

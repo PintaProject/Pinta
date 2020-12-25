@@ -62,7 +62,7 @@ namespace Pinta.Actions
 					Document doc = PintaCore.Workspace.NewDocument (new Size (root_window.Width, root_window.Height), new Cairo.Color (1, 1, 1));
 
 					using (var pb = new Pixbuf (screen.RootWindow, 0, 0, root_window.Width, root_window.Height)) {
-						using (Cairo.Context g = new Cairo.Context (doc.UserLayers[0].Surface)) {
+						using (Cairo.Context g = new Cairo.Context (doc.Layers.UserLayers[0].Surface)) {
 							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
 							g.Paint ();
 						}

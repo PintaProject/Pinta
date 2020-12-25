@@ -238,7 +238,7 @@ namespace Pinta.Tools
             if (doc.Workspace.PointInCanvas (new_pointd))
                 surface_modified = true;
 
-            var surf = doc.CurrentUserLayer.Surface;
+            var surf = doc.Layers.CurrentUserLayer.Surface;
             using (Context g = new Context (surf)) {
 
                 g.AppendPath (doc.Selection.SelectionPath);

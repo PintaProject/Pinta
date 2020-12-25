@@ -67,7 +67,7 @@ namespace Pinta.Tools
 
 			tracking = true;
 			button = args.Event.Button;
-			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+			undo_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -80,7 +80,7 @@ namespace Pinta.Tools
 			tracking = false;
 
 			if (undo_surface != null)
-				doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.Layers.CurrentUserLayerIndex));
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
@@ -105,7 +105,7 @@ namespace Pinta.Tools
 				gr.BeforeRender ();
 
 				Gdk.Rectangle selection_bounds = doc.GetSelectedBounds (true);
-				ImageSurface scratch_layer = doc.ToolLayer.Surface;
+				ImageSurface scratch_layer = doc.Layers.ToolLayer.Surface;
 
 				gr.Render (scratch_layer, new Gdk.Rectangle[] { selection_bounds });
 
@@ -114,7 +114,7 @@ namespace Pinta.Tools
 					g.Paint ();
 				}
 
-				doc.ToolLayer.Clear ();
+				doc.Layers.ToolLayer.Clear ();
 
 				selection_bounds.Inflate (5, 5);
 				doc.Workspace.Invalidate (selection_bounds);

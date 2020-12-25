@@ -38,55 +38,50 @@ namespace Pinta.Core
 		#region Public Properties
 		public UserLayer this[int index]
 		{
-			get { return PintaCore.Workspace.ActiveDocument.UserLayers[index]; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.UserLayers[index]; }
 		}
 
 		public UserLayer CurrentLayer
 		{
-			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayer; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer; }
 		}
 
 		public int Count {
-			get { return PintaCore.Workspace.ActiveDocument.UserLayers.Count; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.UserLayers.Count; }
 		}
 
 		public Layer ToolLayer {
-			get { return PintaCore.Workspace.ActiveDocument.ToolLayer; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.ToolLayer; }
 		}
 
 		public Layer SelectionLayer {
-			get { return PintaCore.Workspace.ActiveDocument.SelectionLayer; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.SelectionLayer; }
 		}
 
 		public int CurrentLayerIndex {
-			get { return PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayerIndex; }
 		}
 		
 		public bool ShowSelectionLayer {
-			get { return PintaCore.Workspace.ActiveDocument.ShowSelectionLayer; }
-			set { PintaCore.Workspace.ActiveDocument.ShowSelectionLayer = value; }
+			get { return PintaCore.Workspace.ActiveDocument.Layers.ShowSelectionLayer; }
+			set { PintaCore.Workspace.ActiveDocument.Layers.ShowSelectionLayer = value; }
 		}
 		#endregion
 
 		#region Public Methods
-		public void Clear ()
-		{
-			PintaCore.Workspace.ActiveDocument.Clear ();
-		}
-
 		public List<Layer> GetLayersToPaint ()
 		{
-			return PintaCore.Workspace.ActiveDocument.GetLayersToPaint ();
+			return PintaCore.Workspace.ActiveDocument.Layers.GetLayersToPaint ();
 		}
 
 		public void SetCurrentLayer (int i)
 		{
-			PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer (i);
+			PintaCore.Workspace.ActiveDocument.Layers.SetCurrentUserLayer (i);
 		}
 
 		public void SetCurrentLayer(UserLayer layer)
 		{
-			PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer (layer);
+			PintaCore.Workspace.ActiveDocument.Layers.SetCurrentUserLayer (layer);
 		}
 
 		public void FinishSelection ()
@@ -97,54 +92,54 @@ namespace Pinta.Core
 		// Adds a new layer above the current one
 		public UserLayer AddNewLayer(string name)
 		{
-			return PintaCore.Workspace.ActiveDocument.AddNewLayer (name);
+			return PintaCore.Workspace.ActiveDocument.Layers.AddNewLayer (name);
 		}
 		
 		// Adds a new layer above the current one
 		public void Insert(UserLayer layer, int index)
 		{
-			PintaCore.Workspace.ActiveDocument.Insert (layer, index);
+			PintaCore.Workspace.ActiveDocument.Layers.Insert (layer, index);
 		}
 
 		public int IndexOf(UserLayer layer)
 		{
-			return PintaCore.Workspace.ActiveDocument.IndexOf (layer);
+			return PintaCore.Workspace.ActiveDocument.Layers.IndexOf (layer);
 		}
 
 		// Delete the current layer
 		public void DeleteCurrentLayer ()
 		{
-			PintaCore.Workspace.ActiveDocument.DeleteCurrentLayer ();
+			PintaCore.Workspace.ActiveDocument.Layers.DeleteCurrentLayer ();
 		}
 
 		// Delete the layer
 		public void DeleteLayer (int index, bool dispose)
 		{
-			PintaCore.Workspace.ActiveDocument.DeleteLayer (index, dispose);
+			PintaCore.Workspace.ActiveDocument.Layers.DeleteLayer (index, dispose);
 		}
 
 		// Duplicate current layer
 		public Layer DuplicateCurrentLayer ()
 		{
-			return PintaCore.Workspace.ActiveDocument.DuplicateCurrentLayer ();
+			return PintaCore.Workspace.ActiveDocument.Layers.DuplicateCurrentLayer ();
 		}
 
 		// Flatten current layer
 		public void MergeCurrentLayerDown ()
 		{
-			PintaCore.Workspace.ActiveDocument.MergeCurrentLayerDown ();
+			PintaCore.Workspace.ActiveDocument.Layers.MergeCurrentLayerDown ();
 		}
 
 		// Move current layer up
 		public void MoveCurrentLayerUp ()
 		{
-			PintaCore.Workspace.ActiveDocument.MoveCurrentLayerUp ();
+			PintaCore.Workspace.ActiveDocument.Layers.MoveCurrentLayerUp ();
 		}
 
 		// Move current layer down
 		public void MoveCurrentLayerDown ()
 		{
-			PintaCore.Workspace.ActiveDocument.MoveCurrentLayerDown ();
+			PintaCore.Workspace.ActiveDocument.Layers.MoveCurrentLayerDown ();
 		}
 
 		// Flip image horizontally
@@ -178,27 +173,22 @@ namespace Pinta.Core
 		// Flatten image
 		public void FlattenImage ()
 		{
-			PintaCore.Workspace.ActiveDocument.FlattenImage ();
+			PintaCore.Workspace.ActiveDocument.Layers.FlattenLayers ();
 		}
 		
 		public void CreateSelectionLayer ()
 		{
-			PintaCore.Workspace.ActiveDocument.CreateSelectionLayer ();
+			PintaCore.Workspace.ActiveDocument.Layers.CreateSelectionLayer ();
 		}
 		
 		public void DestroySelectionLayer ()
 		{
-			PintaCore.Workspace.ActiveDocument.DestroySelectionLayer ();
+			PintaCore.Workspace.ActiveDocument.Layers.DestroySelectionLayer ();
 		}
 
 		public void ResetSelectionPath ()
 		{
 			PintaCore.Workspace.ActiveDocument.ResetSelectionPaths ();
-		}
-
-		public ImageSurface GetClippedLayer (int index)
-		{
-			return PintaCore.Workspace.ActiveDocument.GetClippedLayer (index);
 		}
 		#endregion
 
@@ -225,12 +215,12 @@ namespace Pinta.Core
 		#region Private Methods
 		public Layer CreateLayer ()
 		{
-			return PintaCore.Workspace.ActiveDocument.CreateLayer ();
+			return PintaCore.Workspace.ActiveDocument.Layers.CreateLayer ();
 		}
 
 		public Layer CreateLayer (string name, int width, int height)
 		{
-			return PintaCore.Workspace.ActiveDocument.CreateLayer (name, width, height);
+			return PintaCore.Workspace.ActiveDocument.Layers.CreateLayer (name, width, height);
 		}
 		
 		internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
