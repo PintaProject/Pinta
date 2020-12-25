@@ -92,7 +92,7 @@ namespace Pinta.Tools
 
 			doc.Selection.Visible = true;
 
-			ImageSurface surf = doc.SelectionLayer.Surface;
+			ImageSurface surf = doc.Layers.SelectionLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				g.Antialias = Antialias.Subpixel;
@@ -123,7 +123,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ImageSurface surf = doc.SelectionLayer.Surface;
+			ImageSurface surf = doc.Layers.SelectionLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				if (path != null) {

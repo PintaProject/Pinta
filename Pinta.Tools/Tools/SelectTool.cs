@@ -116,7 +116,7 @@ namespace Pinta.Tools
 				PintaCore.Actions.Edit.Deselect.Activate ();
 
 			} else {
-                ClearHandles (doc.ToolLayer);
+                ClearHandles (doc.Layers.ToolLayer);
 				ReDraw(args.Event.State);
 				if (doc.Selection != null)
 				{
@@ -160,7 +160,7 @@ namespace Pinta.Tools
 			base.OnDeactivated (newTool);
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				Document doc = PintaCore.Workspace.ActiveDocument;
-				doc.ToolLayer.Clear ();
+				doc.Layers.ToolLayer.Clear ();
 			}
 		}
 
@@ -178,7 +178,7 @@ namespace Pinta.Tools
             double y = Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1);
             controls[active_control!.Value].HandleMouseMove (x, y, args.Event.State); // NRT - Set by OnMouseDown
 
-            ClearHandles (doc.ToolLayer);
+            ClearHandles (doc.Layers.ToolLayer);
             RefreshHandler ();
             ReDraw (args.Event.State);
 			
@@ -206,7 +206,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			doc.Selection.Visible = true;
-			doc.ToolLayer.Hidden = false;
+			doc.Layers.ToolLayer.Hidden = false;
 			bool constraint = (state & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
 			if (constraint) {
 				double dx = Math.Abs (shape_end.X - shape_origin.X);
@@ -224,9 +224,9 @@ namespace Pinta.Tools
 			}
 
 			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
-			Cairo.Rectangle dirty = DrawShape (rect, doc.SelectionLayer);
+			Cairo.Rectangle dirty = DrawShape (rect, doc.Layers.SelectionLayer);
 
-            DrawHandler (doc.ToolLayer);
+            DrawHandler (doc.Layers.ToolLayer);
 
 			last_dirty = dirty;
 		}
@@ -361,7 +361,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
             if (PintaCore.Tools.CurrentTool == this)
-                doc.ToolLayer.Hidden = false;
+                doc.Layers.ToolLayer.Hidden = false;
 
 			shape_origin = doc.Selection.Origin;
 			shape_end = doc.Selection.End;
@@ -375,7 +375,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
             if (PintaCore.Tools.CurrentTool == this)
-                doc.ToolLayer.Hidden = false;
+                doc.Layers.ToolLayer.Hidden = false;
 
 			shape_origin = doc.Selection.Origin;
 			shape_end = doc.Selection.End;
@@ -402,9 +402,9 @@ namespace Pinta.Tools
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
-		    ClearHandles (doc.ToolLayer);
+		    ClearHandles (doc.Layers.ToolLayer);
 			RefreshHandler();
-            DrawHandler (doc.ToolLayer);
+            DrawHandler (doc.Layers.ToolLayer);
 			PintaCore.Workspace.Invalidate();
 		}
 

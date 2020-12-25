@@ -51,10 +51,10 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Copy the paste to the temp layer
-			doc.CreateSelectionLayer ();
-			doc.ShowSelectionLayer = true;
+			doc.Layers.CreateSelectionLayer ();
+			doc.Layers.ShowSelectionLayer = true;
 
-			using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (doc.Layers.SelectionLayer.Surface)) {
 				g.DrawPixbuf (paste_image, new Cairo.Point (0, 0));
 			}
 

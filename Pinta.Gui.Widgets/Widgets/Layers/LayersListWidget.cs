@@ -228,17 +228,17 @@ namespace Pinta.Gui.Widgets
 
 			var doc = PintaCore.Workspace.ActiveDocument;
 				
-			foreach (var layer in (doc.UserLayers as IEnumerable<Layer>).Reverse ()) {
+			foreach (var layer in (doc.Layers.UserLayers as IEnumerable<Layer>).Reverse ()) {
 				var surf = layer.Surface;
 
 				// Draw the selection layer on top of the active layer.
-				if (layer == doc.CurrentUserLayer && doc.ShowSelectionLayer) {
+				if (layer == doc.Layers.CurrentUserLayer && doc.Layers.ShowSelectionLayer) {
 					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width,
 					                                               thumbnail_height);
 					canvas_renderer.Initialize (doc.ImageSize,
 					                            new Gdk.Size (thumbnail_width, thumbnail_height));
 
-					var layers = new List<Layer> { layer, doc.SelectionLayer };
+					var layers = new List<Layer> { layer, doc.Layers.SelectionLayer };
 					canvas_renderer.Render (layers, active_layer_surface, Gdk.Point.Zero);
 
 					surf = active_layer_surface;

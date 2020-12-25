@@ -43,14 +43,6 @@ namespace Pinta.Core
 	{
 		private string filename = string.Empty;
 		private bool is_dirty;
-		private int layer_name_int = 2;
-		private int current_layer = -1;
-
-		// The layer for tools to use until their output is committed
-		private Layer tool_layer;
-
-		// The layer used for selections
-		private Layer selection_layer;
 
 		private DocumentSelection selection = null!; // NRT - Set by constructor via Selection property
 		public DocumentSelection Selection
@@ -77,34 +69,18 @@ namespace Pinta.Core
 			Selection = new DocumentSelection ();
 
 			Guid = Guid.NewGuid ();
-			
+
+			Layers = new DocumentLayers (this);
 			Workspace = new DocumentWorkspace (this);
 			IsDirty = false;
 			HasFile = false;
 			HasBeenSavedInSession = false;
 			ImageSize = size;
 
-			UserLayers = new List<UserLayer>();
-
-			tool_layer = CreateLayer ("Tool Layer");
-			tool_layer.Hidden = true;
-
-			selection_layer = CreateLayer ("Selection Layer");
-			selection_layer.Hidden = true;
-
 			ResetSelectionPaths ();
 		}
 
 		#region Public Properties
-		public UserLayer CurrentUserLayer
-		{
-			get { return UserLayers[current_layer]; }
-		}
-
-		public int CurrentUserLayerIndex {
-			get { return current_layer; }
-		}
-
 		/// <summary>
 		/// Just the file name, like "dog.jpg".
 		/// </summary>
@@ -140,8 +116,8 @@ namespace Pinta.Core
 				}
 			}
 		}
-		
-		public List<UserLayer> UserLayers { get; private set; }
+
+		public DocumentLayers Layers { get; }
 
 		/// <summary>
 		/// Just the directory name, like "C:\MyPictures".
@@ -164,24 +140,6 @@ namespace Pinta.Core
 			}
 		}
 
-		public Layer SelectionLayer {
-			get { return selection_layer; }
-		}
-
-		public bool ShowSelectionLayer { get; set; }
-
-		public Layer ToolLayer {
-			get {
-				if (tool_layer.Surface.Width != ImageSize.Width || tool_layer.Surface.Height != ImageSize.Height) {
-					(tool_layer.Surface as IDisposable).Dispose ();
-					tool_layer = CreateLayer ("Tool Layer");
-					tool_layer.Hidden = true;
-				}
-
-				return tool_layer;
-			}
-		}
-
 		public DocumentWorkspace Workspace { get; private set; }
 
 		public delegate void LayerCloneEvent();
@@ -189,26 +147,6 @@ namespace Pinta.Core
 
 		#region Public Methods
 		// Adds a new layer above the current one
-		public UserLayer AddNewLayer(string name)
-		{
-			UserLayer layer;
-
-			if (string.IsNullOrEmpty (name))
-				layer = CreateLayer ();
-			else
-				layer = CreateLayer (name);
-
-			UserLayers.Insert (current_layer + 1, layer);
-
-			if (UserLayers.Count == 1)
-				current_layer = 0;
-
-			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
-
-			PintaCore.Layers.OnLayerAdded ();
-			return layer;
-		}
-
 		public Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r)
 		{
 			int x = Utility.Clamp (r.X, 0, ImageSize.Width);
@@ -218,36 +156,11 @@ namespace Pinta.Core
 
 			return new Gdk.Rectangle (x, y, width, height);
 		}
-
-		public void Clear ()
-		{
-			while (UserLayers.Count > 0) {
-				Layer l = UserLayers[UserLayers.Count - 1];
-				UserLayers.RemoveAt (UserLayers.Count - 1);
-				(l.Surface as IDisposable).Dispose ();
-			}
-
-			current_layer = -1;
-			PintaCore.Layers.OnLayerRemoved ();
-		}
 		
 		// Clean up any native resources we had
 		public void Close ()
 		{
-			// Dispose all of our layers
-			while (UserLayers.Count > 0) {
-				Layer l = UserLayers[UserLayers.Count - 1];
-				UserLayers.RemoveAt (UserLayers.Count - 1);
-				(l.Surface as IDisposable).Dispose ();
-			}
-
-			current_layer = -1;
-
-			if (tool_layer != null)
-				(tool_layer.Surface as IDisposable).Dispose ();
-
-			if (selection_layer != null)
-				(selection_layer.Surface as IDisposable).Dispose ();
+			Layers.Close ();
 
 			Selection.Dispose ();
 			PreviousSelection.Dispose ();
@@ -257,14 +170,14 @@ namespace Pinta.Core
 
 		public Context CreateClippedContext ()
 		{
-			Context g = new Context (CurrentUserLayer.Surface);
+			Context g = new Context (Layers.CurrentUserLayer.Surface);
 			Selection.Clip (g);
 			return g;
 		}
 
 		public Context CreateClippedContext (bool antialias)
 		{
-			Context g = new Context (CurrentUserLayer.Surface);
+			Context g = new Context (Layers.CurrentUserLayer.Surface);
 			Selection.Clip (g);
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 			return g;
@@ -272,180 +185,45 @@ namespace Pinta.Core
 
 		public Context CreateClippedToolContext ()
 		{
-			Context g = new Context (ToolLayer.Surface);
+			Context g = new Context (Layers.ToolLayer.Surface);
 			Selection.Clip (g);
 			return g;
 		}
 
 		public Context CreateClippedToolContext (bool antialias)
 		{
-			Context g = new Context (ToolLayer.Surface);
+			Context g = new Context (Layers.ToolLayer.Surface);
 			Selection.Clip (g);
 			g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 			return g;
 		}
 
-		public UserLayer CreateLayer ()
-		{
-			return CreateLayer (string.Format ("{0} {1}", Translations.GetString ("Layer"), layer_name_int++));
-		}
-
-		public UserLayer CreateLayer (int width, int height)
-		{
-			return CreateLayer (string.Format ("{0} {1}", Translations.GetString ("Layer"), layer_name_int++), width, height);
-		}
-
-		public UserLayer CreateLayer (string name)
-		{
-			return CreateLayer (name, ImageSize.Width, ImageSize.Height);
-		}
-
-		public UserLayer CreateLayer(string name, int width, int height)
-		{
-			Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
-			UserLayer layer = new UserLayer(surface) { Name = name };
-
-			return layer;
-		}
-
-		public void CreateSelectionLayer ()
-		{
-			Layer old = selection_layer;
-
-			selection_layer = CreateLayer ();
-
-			if (old != null)
-				(old.Surface as IDisposable).Dispose ();
-		}
-
-		public void CreateSelectionLayer (int width, int height)
-		{
-			Layer old = selection_layer;
-
-			selection_layer = CreateLayer (width, height);
-
-			if (old != null)
-				(old.Surface as IDisposable).Dispose ();
-		}
-
-		// Delete the current layer
-		public void DeleteCurrentLayer ()
-		{
-			Layer layer = CurrentUserLayer;
-
-			UserLayers.RemoveAt (current_layer);
-
-			// Only change this if this wasn't already the bottom layer
-			if (current_layer > 0)
-				current_layer--;
-
-			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
-
-			PintaCore.Layers.OnLayerRemoved ();
-		}
-
-		// Delete the layer
-		public void DeleteLayer (int index, bool dispose)
-		{
-			Layer layer = UserLayers[index];
-
-			UserLayers.RemoveAt (index);
-
-			if (dispose)
-				(layer.Surface as IDisposable).Dispose ();
-
-			// Only change this if this wasn't already the bottom layer
-			if (current_layer > 0)
-				current_layer--;
-
-			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
-
-			PintaCore.Layers.OnLayerRemoved ();
-		}
-		
-		public void DestroySelectionLayer ()
-		{
-			ShowSelectionLayer = false;
-			SelectionLayer.Clear ();
-			SelectionLayer.Transform.InitIdentity();
-		}
-
-		// Duplicate current layer
-		public UserLayer DuplicateCurrentLayer()
-		{
-			UserLayer source = CurrentUserLayer;
-			UserLayer layer = CreateLayer(string.Format("{0} {1}", source.Name, Translations.GetString("copy")));
-
-			using (Cairo.Context g = new Cairo.Context (layer.Surface)) {
-				g.SetSource (source.Surface);
-				g.Paint ();
-			}
-
-			layer.Hidden = source.Hidden;
-			layer.Opacity = source.Opacity;
-			layer.Tiled = source.Tiled;
-
-			UserLayers.Insert (++current_layer, layer);
-
-			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
-
-			PintaCore.Layers.OnLayerAdded ();
-
-			return layer;
-		}
-
 		public void FinishSelection ()
 		{
 			// We don't have an uncommitted layer, abort
-			if (!ShowSelectionLayer)
+			if (!Layers.ShowSelectionLayer)
 				return;
 
 			FinishPixelsHistoryItem hist = new FinishPixelsHistoryItem ();
 			hist.TakeSnapshot ();
 
-			Layer layer = SelectionLayer;
+			Layer layer = Layers.SelectionLayer;
 
-			using (Cairo.Context g = new Cairo.Context (CurrentUserLayer.Surface)) {
+			using (Cairo.Context g = new Cairo.Context (Layers.CurrentUserLayer.Surface)) {
 				selection.Clip (g);
 				layer.Draw (g);
 			}
 
-			DestroySelectionLayer ();
+			Layers.DestroySelectionLayer ();
 			Workspace.Invalidate ();
 
 			Workspace.History.PushNewItem (hist);
-		}
-		
-		// Flatten image
-		public void FlattenImage ()
-		{
-			if (UserLayers.Count < 2)
-				throw new InvalidOperationException ("Cannot flatten image because there is only one layer.");
-
-			// Find the "bottom" layer
-			var bottom_layer = UserLayers[0];
-			var old_surf = bottom_layer.Surface;
-
-			// Replace the bottom surface with the flattened image,
-			// and dispose the old surface
-			bottom_layer.Surface = GetFlattenedImage ();
-			(old_surf as IDisposable).Dispose ();
-
-			// Reset our layer pointer to the only remaining layer
-			current_layer = 0;
-
-			// Delete all other layers
-			while (UserLayers.Count > 1)
-				UserLayers.RemoveAt (1);
-
-			PintaCore.Layers.OnLayerRemoved ();
-			Workspace.Invalidate ();
 		}
 
 		// Flip image horizontally
 		public void FlipImageHorizontal ()
 		{
-			foreach (var layer in UserLayers)
+			foreach (var layer in Layers.UserLayers)
 				layer.FlipHorizontal ();
 
 			Workspace.Invalidate ();
@@ -454,25 +232,10 @@ namespace Pinta.Core
 		// Flip image vertically
 		public void FlipImageVertical ()
 		{
-			foreach (var layer in UserLayers)
+			foreach (var layer in Layers.UserLayers)
 				layer.FlipVertical ();
 
 			Workspace.Invalidate ();
-		}
-		
-		public ImageSurface GetClippedLayer (int index)
-		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
-
-			using (Cairo.Context g = new Cairo.Context (surf)) {
-				g.AppendPath(Selection.SelectionPath);
-				g.Clip ();
-
-				g.SetSource (UserLayers[index].Surface);
-				g.Paint ();
-			}
-
-			return surf;
 		}
 
 		/// <summary>
@@ -482,7 +245,7 @@ namespace Pinta.Core
 		{
 			using (var dst = new ImageSurface (Format.Argb32, 1, 1)) {
 				using (var g = new Context (dst)) {
-					foreach (var layer in GetLayersToPaint ()) {
+					foreach (var layer in Layers.GetLayersToPaint ()) {
 						var color = layer.Surface.GetColorBgraUnchecked (x, y).ToStraightAlpha ().ToCairoColor ();
 
 						g.SetBlendMode (layer.BlendMode);
@@ -497,52 +260,7 @@ namespace Pinta.Core
 			}
 		}
 
-		public ImageSurface GetFlattenedImage ()
-		{
-			// Create a new image surface
-			var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
-
-			// Blend each visible layer onto our surface
-			foreach (var layer in GetLayersToPaint (include_tool_layer: false)) {
-				using (var g = new Context (surf))
-					layer.Draw (g);
-			}
-
-			surf.MarkDirty ();
-			return surf;
-		}
-
-		public List<Layer> GetLayersToPaint (bool include_tool_layer = true)
-		{
-			List<Layer> paint = new List<Layer> ();
-
-			foreach (var layer in UserLayers) {
-				if (!layer.Hidden)
-					paint.Add (layer);
-
-				if (layer == CurrentUserLayer) {
-					if (!ToolLayer.Hidden && include_tool_layer)
-						paint.Add (ToolLayer);
-
-					if (ShowSelectionLayer && (!SelectionLayer.Hidden))
-						paint.Add (SelectionLayer);
-				}
-
-				if (!layer.Hidden)
-				{
-					foreach (ReEditableLayer rel in layer.ReEditableLayers)
-					{
-						//Make sure that each UserLayer's ReEditableLayer is in use before adding it to the List of Layers to Paint.
-						if (rel.IsLayerSetup)
-						{
-							paint.Add(rel.Layer);
-						}
-					}
-				}
-			}
-
-			return paint;
-		}
+		public ImageSurface GetFlattenedImage () => Layers.GetFlattenedImage ();
 
 		/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 		public Gdk.Rectangle GetSelectedBounds (bool canvasOnly)
@@ -553,71 +271,6 @@ namespace Pinta.Core
 				bounds = ClampToImageSize (bounds);
 
 			return bounds;
-		}
-
-		public int IndexOf(UserLayer layer)
-		{
-			return UserLayers.IndexOf (layer);
-		}
-
-		// Adds a new layer above the current one
-		public void Insert(UserLayer layer, int index)
-		{
-			UserLayers.Insert (index, layer);
-
-			if (UserLayers.Count == 1)
-				current_layer = 0;
-
-			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
-
-			PintaCore.Layers.OnLayerAdded ();
-		}
-		
-		// Flatten current layer
-		public void MergeCurrentLayerDown ()
-		{
-			if (current_layer == 0)
-				throw new InvalidOperationException ("Cannot flatten layer because current layer is the bottom layer.");
-
-			// Get our source and destination layers
-			var source = CurrentUserLayer;
-			var dest = UserLayers[current_layer - 1];
-
-			// Blend the layers
-			using (var g = new Context (dest.Surface))
-				source.Draw (g);
-
-			DeleteCurrentLayer ();
-		}
-		
-		// Move current layer down
-		public void MoveCurrentLayerDown ()
-		{
-			if (current_layer == 0)
-				throw new InvalidOperationException ("Cannot move layer down because current layer is the bottom layer.");
-
-			UserLayer layer = CurrentUserLayer;
-			UserLayers.RemoveAt (current_layer);
-			UserLayers.Insert (--current_layer, layer);
-
-			PintaCore.Layers.OnSelectedLayerChanged ();
-
-			Workspace.Invalidate ();
-		}
-
-		// Move current layer up
-		public void MoveCurrentLayerUp ()
-		{
-			if (current_layer == UserLayers.Count)
-				throw new InvalidOperationException ("Cannot move layer up because current layer is the top layer.");
-
-			UserLayer layer = CurrentUserLayer;
-			UserLayers.RemoveAt (current_layer);
-			UserLayers.Insert (++current_layer, layer);
-
-			PintaCore.Layers.OnSelectedLayerChanged ();
-
-			Workspace.Invalidate ();
 		}
 		
 		public void ResetSelectionPaths()
@@ -657,7 +310,7 @@ namespace Pinta.Core
 
 			ImageSize = new Gdk.Size (width, height);
 
-			foreach (var layer in UserLayers)
+			foreach (var layer in Layers.UserLayers)
 				layer.ResizeCanvas (width, height, anchor);
 
 			hist.FinishSnapshotOfImage ();
@@ -689,7 +342,7 @@ namespace Pinta.Core
 
 			ImageSize = new Gdk.Size (width, height);
 
-			foreach (var layer in UserLayers)
+			foreach (var layer in Layers.UserLayers)
 				layer.Resize (width, height);
 
 			hist.FinishSnapshotOfImage ();
@@ -723,7 +376,7 @@ namespace Pinta.Core
 		private void RotateImage (double angle)
 		{
 			var new_size = Layer.RotateDimensions (ImageSize, angle);
-			foreach (var layer in UserLayers)
+			foreach (var layer in Layers.UserLayers)
 				layer.Rotate (angle, new_size);
 
 			ImageSize = new_size;
@@ -737,21 +390,6 @@ namespace Pinta.Core
 		public bool Save (bool saveAs)
 		{
 			return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
-		}
-
-		public void SetCurrentUserLayer (int i)
-		{
-			// Ensure that the current tool's modifications are finalized before
-			// switching layers.
-			PintaCore.Tools.CurrentTool.DoCommit ();
-
-			current_layer = i;
-			PintaCore.Layers.OnSelectedLayerChanged ();
-		}
-
-		public void SetCurrentUserLayer(UserLayer layer)
-		{
-			SetCurrentUserLayer (UserLayers.IndexOf (layer));
 		}
 
 		/// <summary>
@@ -833,23 +471,23 @@ namespace Pinta.Core
 			// layer and record it's creation in the history
 			if (toNewLayer)
 			{
-				UserLayer l = AddNewLayer (string.Empty);
-				SetCurrentUserLayer (l);
-				paste_action.Push (new AddLayerHistoryItem (Resources.Icons.LayerNew, Translations.GetString ("Add New Layer"), UserLayers.IndexOf (l)));
+				UserLayer l = Layers.AddNewLayer (string.Empty);
+				Layers.SetCurrentUserLayer (l);
+				paste_action.Push (new AddLayerHistoryItem (Resources.Icons.LayerNew, Translations.GetString ("Add New Layer"), Layers.IndexOf (l)));
 			}
 
 			// Copy the paste to the temp layer, which should be at least the size of this document.
-			CreateSelectionLayer (Math.Max(ImageSize.Width, cbImage.Width),
+			Layers.CreateSelectionLayer (Math.Max(ImageSize.Width, cbImage.Width),
 								  Math.Max(ImageSize.Height, cbImage.Height));
-			ShowSelectionLayer = true;
+			Layers.ShowSelectionLayer = true;
 			
-			using (Cairo.Context g = new Cairo.Context (SelectionLayer.Surface))
+			using (Cairo.Context g = new Cairo.Context (Layers.SelectionLayer.Surface))
 			{
 				g.DrawPixbuf (cbImage, new Cairo.Point (0, 0));
 			}
 
-			SelectionLayer.Transform.InitIdentity();
-			SelectionLayer.Transform.Translate (x, y);
+			Layers.SelectionLayer.Transform.InitIdentity();
+			Layers.SelectionLayer.Transform.Translate (x, y);
 
 			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Move Selected Pixels"));
 			
@@ -925,7 +563,7 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		private void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
+		internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 		{
 			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
 		}

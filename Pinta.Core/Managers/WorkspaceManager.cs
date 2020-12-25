@@ -153,7 +153,7 @@ namespace Pinta.Core
 			doc.Workspace.CanvasSize = imageSize;
 
 			// Start with an empty white layer
-			Layer background = doc.AddNewLayer (Translations.GetString ("Background"));
+			Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
 
 			if (backgroundColor.A != 0) {
 				using (Cairo.Context g = new Cairo.Context (background.Surface)) {

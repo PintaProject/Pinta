@@ -78,10 +78,10 @@ namespace Pinta.Tools
 			Rectangle r = PointsToRectangle (shape_origin, point);
 			Rectangle dirty;
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = false;
+			doc.Layers.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Hidden = false;
 
-			using (Context g = new Context (doc.ToolLayer.Surface)) {
+			using (Context g = new Context (doc.Layers.ToolLayer.Surface)) {
 				g.Antialias = Antialias.Subpixel;
 
 				dirty = g.FillStrokedRectangle (r, new Color (0, 0.4, 0.8, 0.1), new Color (0, 0, 0.9), 1);
@@ -142,7 +142,7 @@ namespace Pinta.Tools
 
 			double x = point.X;
 			double y = point.Y;
-			doc.ToolLayer.Hidden = true;
+			doc.Layers.ToolLayer.Hidden = true;
 			
 			if (mouseDown == 1 || mouseDown == 3) {	//left or right
 				if (args.Event.Button == 1) {	//left

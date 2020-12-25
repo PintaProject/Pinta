@@ -106,11 +106,11 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			surface_modified = false;
-			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+			undo_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			path = null;
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = false;
+			doc.Layers.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Hidden = false;
 		}
 
 		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
@@ -139,8 +139,8 @@ namespace Pinta.Tools
 			if (doc.Workspace.PointInCanvas (point))
 				surface_modified = true;
 
-			doc.ToolLayer.Clear ();
-			ImageSurface surf = doc.ToolLayer.Surface;
+			doc.Layers.ToolLayer.Clear ();
+			ImageSurface surf = doc.Layers.ToolLayer.Surface;
 
 			using (Context g = new Context (surf)) {
 				doc.Selection.Clip(g);
@@ -188,10 +188,10 @@ namespace Pinta.Tools
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-            doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = true;
+            doc.Layers.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Hidden = true;
 
-			ImageSurface surf = doc.CurrentUserLayer.Surface;
+			ImageSurface surf = doc.Layers.CurrentUserLayer.Surface;
 			using (Context g = new Context (surf)) {
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
@@ -228,7 +228,7 @@ namespace Pinta.Tools
 			}
 
 			if (surface_modified)
-				PintaCore.Workspace.ActiveDocument.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface!, doc.CurrentUserLayerIndex)); // NRT - Guarded by surface_modified
+				PintaCore.Workspace.ActiveDocument.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface!, doc.Layers.CurrentUserLayerIndex)); // NRT - Guarded by surface_modified
 			else if (undo_surface != null)
 				(undo_surface as IDisposable).Dispose ();
 

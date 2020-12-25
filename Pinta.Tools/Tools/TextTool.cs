@@ -44,14 +44,14 @@ namespace Pinta.Tools
 		{
 			get
 			{
-				return PintaCore.Workspace.ActiveDocument.CurrentUserLayer.textBounds;
+				return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
 			}
 
 			set
 			{
-				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.textBounds;
+				PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds;
 
-				PintaCore.Workspace.ActiveDocument.CurrentUserLayer.textBounds = value;
+				PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.textBounds = value;
 			}
 		}
 
@@ -62,7 +62,7 @@ namespace Pinta.Tools
 				if (!PintaCore.Workspace.HasOpenDocuments)
 					throw new InvalidOperationException ("Attempting to get CurrentTextEngine when there are no open documents");
 
-				return PintaCore.Workspace.ActiveDocument.CurrentUserLayer.tEngine;
+				return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.tEngine;
 			}
 		}
 
@@ -566,7 +566,7 @@ namespace Pinta.Tools
 				if (ctrlKey)
 				{
 					//Go through every UserLayer.
-					foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers)
+					foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.Layers.UserLayers)
 					{
 						//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
 						if (ul.textBounds.ContainsCorrect(pt))
@@ -574,7 +574,7 @@ namespace Pinta.Tools
 							//The mouse clicked on editable text.
 
 							//Change the current UserLayer to the Layer that contains the text that was clicked on.
-							PintaCore.Workspace.ActiveDocument.SetCurrentUserLayer(ul);
+							PintaCore.Workspace.ActiveDocument.Layers.SetCurrentUserLayer (ul);
 
 							//The user is editing text now.
 							is_editing = true;
@@ -658,7 +658,7 @@ namespace Pinta.Tools
 			if (ctrlKey && PintaCore.Workspace.HasOpenDocuments)
 			{
 				//Go through every UserLayer.
-				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.UserLayers)
+				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.Layers.UserLayers)
 				{
 					//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
 					if (ul.textBounds.ContainsCorrect(lastMousePosition))
@@ -908,8 +908,8 @@ namespace Pinta.Tools
 			ignoreCloneFinalizations = true;
 
 			//Store the previous state of the current UserLayer's and TextLayer's ImageSurfaces.
-			user_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface.Clone();
-			text_undo_surface = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Layer.Surface.Clone();
+			user_undo_surface = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Surface.Clone();
+			text_undo_surface = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone();
 
 			//Store the previous state of the Text Engine.
 			undo_engine = CurrentTextEngine.Clone();
@@ -943,7 +943,7 @@ namespace Pinta.Tools
 				//Create a new TextHistoryItem so that the committing of text can be undone.
 				doc.History.PushNewItem(new TextHistoryItem(Icon, Name,
 							text_undo_surface.Clone(), user_undo_surface.Clone(),
-							undo_engine!.Clone(), doc.CurrentUserLayer)); // NRT - Set in StartEditing
+							undo_engine!.Clone(), doc.Layers.CurrentUserLayer)); // NRT - Set in StartEditing
 
 				//Stop ignoring any Surface.Clone calls from this point on.
 				ignoreCloneFinalizations = false;
@@ -968,10 +968,10 @@ namespace Pinta.Tools
 		private void ClearTextLayer()
 		{
 			//Clear the TextLayer.
-			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Layer.Surface.Clear();
+			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clear();
 
 			//Redraw the previous text boundary.
-			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
+			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds);
 		}
 
 		/// <summary>
@@ -993,12 +993,12 @@ namespace Pinta.Tools
 			if (!useTextLayer)
 			{
 				//Draw text on the current UserLayer's surface as finalized text.
-				surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Surface;
+				surf = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Surface;
 			}
 			else
 			{
 				//Draw text on the current UserLayer's TextLayer's surface as re-editable text.
-				surf = PintaCore.Workspace.ActiveDocument.CurrentUserLayer.TextLayer.Layer.Surface;
+				surf = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextLayer.Layer.Surface;
 
 				ClearTextLayer();
 			}
@@ -1091,7 +1091,7 @@ namespace Pinta.Tools
 				}
 			}
 
-			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.CurrentUserLayer.previousTextBounds);
+			InflateAndInvalidate(PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.previousTextBounds);
 			PintaCore.Workspace.Invalidate(old_cursor_bounds);
 			InflateAndInvalidate (r);
 			PintaCore.Workspace.Invalidate(cursorBounds);
@@ -1115,15 +1115,15 @@ namespace Pinta.Tools
 					Document doc = PintaCore.Workspace.ActiveDocument;
 
 					//Create a backup of everything before redrawing the text and etc.
-					Cairo.ImageSurface oldTextSurface = doc.CurrentUserLayer.TextLayer.Layer.Surface.Clone();
-					Cairo.ImageSurface oldUserSurface = doc.CurrentUserLayer.Surface.Clone();
+					Cairo.ImageSurface oldTextSurface = doc.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone();
+					Cairo.ImageSurface oldUserSurface = doc.Layers.CurrentUserLayer.Surface.Clone();
 					TextEngine oldTextEngine = CurrentTextEngine.Clone();
 
 					//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
 					RedrawText(false, false);
 
 					//Clear the TextLayer.
-					doc.CurrentUserLayer.TextLayer.Layer.Clear();
+					doc.Layers.CurrentUserLayer.TextLayer.Layer.Clear();
 
 					//Clear the text and its boundaries.
 					CurrentTextEngine.Clear();
@@ -1132,7 +1132,7 @@ namespace Pinta.Tools
 					//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
 					//it on the spot so that it is more memory efficient if the changes are small.
 					TextHistoryItem hist = new TextHistoryItem(Icon, FinalizeName, oldTextSurface, oldUserSurface,
-							oldTextEngine, doc.CurrentUserLayer);
+							oldTextEngine, doc.Layers.CurrentUserLayer);
 
 					//Add the new TextHistoryItem.
 					doc.History.PushNewItem(hist);

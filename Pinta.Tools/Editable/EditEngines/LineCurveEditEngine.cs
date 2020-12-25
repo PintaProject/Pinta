@@ -52,7 +52,7 @@ namespace Pinta.Tools
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
+			LineCurveSeriesEngine newEngine = new LineCurveSeriesEngine(doc.Layers.CurrentUserLayer, null, BaseEditEngine.ShapeTypes.OpenLineCurveSeries,
 				owner.UseAntialiasing, false, BaseEditEngine.OutlineColor, BaseEditEngine.FillColor, owner.EditEngine.BrushWidth);
 
 			AddLinePoints(ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);

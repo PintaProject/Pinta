@@ -73,29 +73,29 @@ namespace Pinta.Tools
 			}
 
 			original_selection = doc.Selection.Clone ();
-			original_transform.InitMatrix (doc.SelectionLayer.Transform);
+			original_transform.InitMatrix (doc.Layers.SelectionLayer.Transform);
 
 			hist = new MovePixelsHistoryItem (Icon, Name, doc);
-			hist.TakeSnapshot (!doc.ShowSelectionLayer);
+			hist.TakeSnapshot (!doc.Layers.ShowSelectionLayer);
 
-			if (!doc.ShowSelectionLayer) {
+			if (!doc.Layers.ShowSelectionLayer) {
 				// Copy the selection to the temp layer
-				doc.CreateSelectionLayer ();
-				doc.ShowSelectionLayer = true;
+				doc.Layers.CreateSelectionLayer ();
+				doc.Layers.ShowSelectionLayer = true;
 				//Use same BlendMode, Opacity and Visibility for SelectionLayer
-				doc.SelectionLayer.BlendMode = doc.CurrentUserLayer.BlendMode;
-				doc.SelectionLayer.Opacity = doc.CurrentUserLayer.Opacity;
-				doc.SelectionLayer.Hidden = doc.CurrentUserLayer.Hidden;					
+				doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode;
+				doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity;
+				doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden;					
 
-				using (Cairo.Context g = new Cairo.Context (doc.SelectionLayer.Surface)) {
+				using (Cairo.Context g = new Cairo.Context (doc.Layers.SelectionLayer.Surface)) {
 					g.AppendPath (doc.Selection.SelectionPath);
 					g.FillRule = FillRule.EvenOdd;
-					g.SetSource (doc.CurrentUserLayer.Surface);
+					g.SetSource (doc.Layers.CurrentUserLayer.Surface);
 					g.Clip ();
 					g.Paint ();
 				}
 
-				Cairo.ImageSurface surf = doc.CurrentUserLayer.Surface;
+				Cairo.ImageSurface surf = doc.Layers.CurrentUserLayer.Surface;
 				
 				using (Cairo.Context g = new Cairo.Context (surf)) {
 					g.AppendPath (doc.Selection.SelectionPath);
@@ -117,8 +117,8 @@ namespace Pinta.Tools
 			doc.Selection = original_selection!.Transform (transform); // NRT - Set in OnStartTransform
 			doc.Selection.Visible = true;
 
-			doc.SelectionLayer.Transform.InitMatrix (original_transform);
-			doc.SelectionLayer.Transform.Multiply (transform);
+			doc.Layers.SelectionLayer.Transform.InitMatrix (original_transform);
+			doc.Layers.SelectionLayer.Transform.Multiply (transform);
 
 			PintaCore.Workspace.Invalidate ();
 		}

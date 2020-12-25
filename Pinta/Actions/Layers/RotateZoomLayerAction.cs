@@ -59,7 +59,7 @@ namespace Pinta.Actions
 				dialog.EffectDataChanged += (o, args) => {
 					var xform = ComputeMatrix (data);
 					var doc = PintaCore.Workspace.ActiveDocument;
-					doc.CurrentUserLayer.Transform.InitMatrix (xform);
+					doc.Layers.CurrentUserLayer.Transform.InitMatrix (xform);
 					PintaCore.Workspace.Invalidate ();
 				};
 
@@ -73,7 +73,7 @@ namespace Pinta.Actions
 
 		private static void ClearLivePreview ()
 		{
-			PintaCore.Workspace.ActiveDocument.CurrentUserLayer.Transform.InitIdentity ();
+			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.Transform.InitIdentity ();
 			PintaCore.Workspace.Invalidate ();
 		}
 
@@ -97,14 +97,14 @@ namespace Pinta.Actions
 			var doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			var old_surf = doc.CurrentUserLayer.Surface.Clone ();
+			var old_surf = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
 			var xform = ComputeMatrix (data);
-			doc.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize);
+			doc.Layers.CurrentUserLayer.ApplyTransform (xform, PintaCore.Workspace.ImageSize);
 			doc.Workspace.Invalidate ();
 
 			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.LayerRotateZoom,
-			    Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.CurrentUserLayerIndex));
+			    Translations.GetString ("Rotate / Zoom Layer"), old_surf, doc.Layers.CurrentUserLayerIndex));
 		}
 
 		private class RotateZoomData : EffectData

@@ -195,9 +195,9 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface old = doc.CurrentUserLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
@@ -206,7 +206,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.Invalidate ();
-			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.CurrentUserLayerIndex));
+			doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.Layers.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -231,9 +231,9 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			Cairo.ImageSurface old = doc.CurrentUserLayer.Surface.Clone ();
+			Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-			using (var g = new Cairo.Context (doc.CurrentUserLayer.Surface)) {
+			using (var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface)) {
 				g.AppendPath (doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
 
@@ -244,9 +244,9 @@ namespace Pinta.Core
 			doc.Workspace.Invalidate ();
 
 			if (sender is string && (sender as string) == "Cut")
-				doc.History.PushNewItem (new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.Layers.CurrentUserLayerIndex));
 			else
-				doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.CurrentUserLayerIndex));
+				doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.Layers.CurrentUserLayerIndex));
 		}
 
 		private void HandlePintaCoreActionsEditDeselectActivated (object sender, EventArgs e)
@@ -274,7 +274,7 @@ namespace Pinta.Core
 
 			PintaCore.Tools.Commit ();
 
-			using (ImageSurface src = doc.GetClippedLayer (doc.CurrentUserLayerIndex)) {
+			using (ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex)) {
 
 				Gdk.Rectangle rect = doc.GetSelectedBounds (true);
 				if (rect.Width == 0 || rect.Height == 0)
@@ -431,13 +431,13 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			// Clear the selection resize handles if necessary.
-			doc.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Clear ();
 
 			SelectionHistoryItem historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionInvert,
 			                                                             Translations.GetString ("Invert Selection"));
 			historyItem.TakeSnapshot ();
 
-			doc.Selection.Invert (doc.SelectionLayer.Surface, doc.ImageSize);
+			doc.Selection.Invert (doc.Layers.SelectionLayer.Surface, doc.ImageSize);
 
 			doc.History.PushNewItem (historyItem);
 			doc.Workspace.Invalidate ();

@@ -531,7 +531,7 @@ namespace Pinta.Tools
 						//Create a new ShapesHistoryItem so that the deletion of a shape can be undone.
 						doc.History.PushNewItem(
 							new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Deleted"),
-								doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+								doc.Layers.CurrentUserLayer.Surface.Clone(), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 
 						//Since the shape itself will be deleted, remove its ReEditableLayer from the drawing loop.
@@ -916,7 +916,7 @@ namespace Pinta.Tools
 
 					//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
 					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Added"),
-						doc.CurrentUserLayer.Surface.Clone(), doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+						doc.Layers.CurrentUserLayer.Surface.Clone(), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 
 					//Create the shape, add its starting points, and add it to SEngines.
 					SEngines.Add(CreateShape(ctrlKey, clickedOnControlPoint, prevSelPoint));
@@ -1182,7 +1182,7 @@ namespace Pinta.Tools
 		private void BeforeDraw()
 		{
 			//Clear the ToolLayer if it was used previously (e.g. for hover points when there was no active shape).
-			PintaCore.Workspace.ActiveDocument.ToolLayer.Clear();
+			PintaCore.Workspace.ActiveDocument.Layers.ToolLayer.Clear();
 
 			//Invalidate the old hover point bounds, if any.
 			if (last_hover != null)
@@ -1210,7 +1210,7 @@ namespace Pinta.Tools
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			//Since there is no active ShapeEngine, the ToolLayer's surface will be used to draw the hover point on.
-			using (Context g = new Context(doc.ToolLayer.Surface))
+			using (Context g = new Context(doc.Layers.ToolLayer.Surface))
 			{
 				g.AppendPath(doc.Selection.SelectionPath);
 				g.FillRule = FillRule.EvenOdd;
@@ -1222,7 +1222,7 @@ namespace Pinta.Tools
 				DrawHoverPoint(g);
 			}
 
-			doc.ToolLayer.Hidden = false;
+			doc.Layers.ToolLayer.Hidden = false;
 		}
 
 		/// <summary>
@@ -1244,12 +1244,12 @@ namespace Pinta.Tools
 				//We only need to create a history item if there was a previous shape.
 				if (engine.ControlPoints.Count > 0)
 				{
-					undoSurface = doc.CurrentUserLayer.Surface.Clone();
+					undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone();
 				}
 			}
 
 			//Draw the finalized shape.
-			Rectangle dirty = DrawShape(engine, doc.CurrentUserLayer, false, false);
+			Rectangle dirty = DrawShape(engine, doc.Layers.CurrentUserLayer, false, false);
 
 			if (createHistoryItem)
 			{
@@ -1258,7 +1258,7 @@ namespace Pinta.Tools
 				{
 					//Create a new ShapesHistoryItem so that the finalization of the shape can be undone.
 					doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Finalized"),
-						undoSurface, doc.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+						undoSurface, doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
 				}
 			}
 
@@ -1633,7 +1633,7 @@ namespace Pinta.Tools
 
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			ImageSurface undoSurface = doc.CurrentUserLayer.Surface.Clone();
+			ImageSurface undoSurface = doc.Layers.CurrentUserLayer.Surface.Clone();
 			
 			int previousSelectedPointIndex = SelectedPointIndex;
 
@@ -1669,7 +1669,7 @@ namespace Pinta.Tools
 			{
 				//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
 				doc.History.PushNewItem(new ShapesHistoryItem(this, owner.Icon, Translations.GetString("Finalized"),
-					undoSurface, doc.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
+					undoSurface, doc.Layers.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
 			}
 
 			if (dirty.HasValue)
@@ -1678,7 +1678,7 @@ namespace Pinta.Tools
 			}
 
             // Ensure the ToolLayer gets hidden now that we're done with it
-            doc.ToolLayer.Hidden = true;
+            doc.Layers.ToolLayer.Hidden = true;
 
 			//Clear out all of the data.
 			ResetShapes();

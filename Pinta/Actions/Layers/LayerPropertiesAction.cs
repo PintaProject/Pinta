@@ -70,8 +70,8 @@ namespace Pinta.Actions
 
 			} else {
 
-				var layer = PintaCore.Workspace.ActiveDocument.CurrentUserLayer;
-				var selectionLayer = PintaCore.Workspace.ActiveDocument.SelectionLayer;
+				var layer = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer;
+				var selectionLayer = PintaCore.Workspace.ActiveDocument.Layers.SelectionLayer;
 				var initial = dialog.InitialLayerProperties;
 				initial.SetProperties (layer);
 				if (selectionLayer != null)

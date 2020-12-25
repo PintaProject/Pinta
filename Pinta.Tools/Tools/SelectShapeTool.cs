@@ -169,11 +169,11 @@ namespace Pinta.Tools
 				fill_color = PintaCore.Palette.PrimaryColor;
 			}
 
-			doc.ToolLayer.Clear ();
-			doc.ToolLayer.Hidden = false;
+			doc.Layers.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Hidden = false;
 
 			surface_modified = false;
-			undo_surface = doc.CurrentUserLayer.Surface.Clone ();
+			undo_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 		}
 
 		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -184,9 +184,9 @@ namespace Pinta.Tools
 			double y = point.Y;
 
 			current_point = point;
-			doc.ToolLayer.Hidden = true;
+			doc.Layers.ToolLayer.Hidden = true;
 
-			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.CurrentUserLayer);
+			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.Layers.CurrentUserLayer);
 			
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			
@@ -211,9 +211,9 @@ namespace Pinta.Tools
 			double x = point.X;
 			double y = point.Y;
 
-			doc.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Clear ();
 
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.IsShiftPressed()), doc.ToolLayer);
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.IsShiftPressed()), doc.Layers.ToolLayer);
 
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (UseAntialiasing) {
@@ -241,7 +241,7 @@ namespace Pinta.Tools
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
 			// NRT - Assumed not-null
-			return new SimpleHistoryItem (Icon, Name, undo_surface!, PintaCore.Workspace.ActiveDocument.CurrentUserLayerIndex);
+			return new SimpleHistoryItem (Icon, Name, undo_surface!, PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayerIndex);
 		}
 		#endregion
 

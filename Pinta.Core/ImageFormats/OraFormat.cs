@@ -94,8 +94,8 @@ namespace Pinta.Core
 						}
 					}
 
-					UserLayer layer = doc.CreateLayer(name);
-					doc.Insert (layer, 0);
+					UserLayer layer = doc.Layers.CreateLayer (name);
+					doc.Layers.Insert (layer, 0);
 
 					layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 					layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
@@ -158,7 +158,7 @@ namespace Pinta.Core
 				return new Size ((int) ((double)width / height * ThumbMaxSize), ThumbMaxSize);
 		}
 
-		private byte[] GetLayerXmlData(List<UserLayer> layers)
+		private byte[] GetLayerXmlData(IReadOnlyList<UserLayer> layers)
 		{
 			MemoryStream ms = new MemoryStream ();
 			XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8);
@@ -199,8 +199,8 @@ namespace Pinta.Core
 			byte[] databytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
 			stream.Write (databytes, 0, databytes.Length);
 
-			for (int i = 0; i < document.UserLayers.Count; i++) {
-				Pixbuf pb = document.UserLayers[i].Surface.ToPixbuf ();
+			for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
+				Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 				byte[] buf = pb.SaveToBuffer ("png");
 				(pb as IDisposable).Dispose ();
 
@@ -209,7 +209,7 @@ namespace Pinta.Core
 			}
 
 			stream.PutNextEntry (new ZipEntry ("stack.xml"));
-			databytes = GetLayerXmlData (document.UserLayers);
+			databytes = GetLayerXmlData (document.Layers.UserLayers);
 			stream.Write (databytes, 0, databytes.Length);
 
 			ImageSurface flattened = document.GetFlattenedImage ();

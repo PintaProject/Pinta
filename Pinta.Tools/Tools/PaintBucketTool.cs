@@ -64,16 +64,16 @@ namespace Pinta.Tools
 		protected unsafe override void OnFillRegionComputed (BitMask stencil)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			ImageSurface surf = doc.ToolLayer.Surface;
+			ImageSurface surf = doc.Layers.ToolLayer.Surface;
 
 			using (var g = new Context (surf)) {
 				g.Operator = Operator.Source;
-				g.SetSource (doc.CurrentUserLayer.Surface);
+				g.SetSource (doc.Layers.CurrentUserLayer.Surface);
 				g.Paint ();
 			}
 
 			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-			hist.TakeSnapshotOfLayer (doc.CurrentUserLayer);
+			hist.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayer);
 
 			ColorBgra color = fill_color.ToColorBgra ().ToPremultipliedAlpha ();
 			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
@@ -102,7 +102,7 @@ namespace Pinta.Tools
 				g.Paint ();
 			}
 
-			doc.ToolLayer.Clear ();
+			doc.Layers.ToolLayer.Clear ();
 
 			doc.History.PushNewItem (hist); 
 			doc.Workspace.Invalidate ();
