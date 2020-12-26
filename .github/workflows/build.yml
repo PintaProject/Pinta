@@ -51,11 +51,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    # dotnet and gettext are already available on the CI environment.
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
+    - name: Install Dependencies
+      run: brew install gtk+3 adwaita-icon-theme gettext
     - name: Build
       run: dotnet build Pinta.sln --configuration Release
     - name: Test

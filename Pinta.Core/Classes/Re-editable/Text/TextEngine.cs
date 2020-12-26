@@ -25,7 +25,7 @@ namespace Pinta.Core
         private TextPosition currentPos;
         private TextPosition selectionStart;
 
-		public Pango.FontDescription Font { get; private set; } = null!; // NRT - set via SetFont() before usage.
+		public Pango.FontDescription Font { get; private set; } = new();
 		public TextAlignment Alignment { get; private set; }
 		public bool Underline { get; private set; }
 
