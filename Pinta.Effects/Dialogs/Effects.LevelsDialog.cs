@@ -383,7 +383,7 @@ namespace Pinta.Effects
 				UpdateLevels ();
 		}
 
-		private void HandleGradientInputValueChanged (object sender, IndexEventArgs e)
+		private void HandleGradientInputValueChanged (object? sender, IndexEventArgs e)
 		{
 			int val = gradientInput.GetValue (e.Index);
 
@@ -395,7 +395,7 @@ namespace Pinta.Effects
 			UpdateLevels ();
 		}
 
-		private void HandleGradientOutputValueChanged (object sender, IndexEventArgs e)
+		private void HandleGradientOutputValueChanged (object? sender, IndexEventArgs e)
 		{
 			if (gradientOutput.ValueIndex != -1 && gradientOutput.ValueIndex != e.Index)
 				return;
