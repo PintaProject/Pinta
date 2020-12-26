@@ -49,6 +49,8 @@ namespace Pinta.Gui.Widgets
 
 		private void UpdateThumbnail ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			double scalex = (double)Allocation.Width / (double)PintaCore.Workspace.ImageSize.Width;
 			double scaley = (double)Allocation.Height / (double)PintaCore.Workspace.ImageSize.Height;
 			
@@ -56,7 +58,7 @@ namespace Pinta.Gui.Widgets
 			
 			using (Cairo.Context g = new Cairo.Context (thumbnail)) {
 				g.Scale (scalex, scaley);
-				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {
+				foreach (Layer layer in doc.Layers.GetLayersToPaint ()) {
 					layer.Draw(g);
 				}
 			}

@@ -46,6 +46,8 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			using var dialog = new LayerPropertiesDialog ();
 
 			int response = dialog.Run ();
@@ -60,18 +62,18 @@ namespace Pinta.Actions
 				var historyItem = new UpdateLayerPropertiesHistoryItem (
 					Resources.Icons.LayerProperties,
 					historyMessage,
-					PintaCore.Layers.CurrentLayerIndex,
+					doc.Layers.CurrentUserLayerIndex,
 					dialog.InitialLayerProperties,
 					dialog.UpdatedLayerProperties);
 
-				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (historyItem);
+				doc.History.PushNewItem (historyItem);
 
 				PintaCore.Workspace.ActiveWorkspace.Invalidate ();
 
 			} else {
 
-				var layer = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer;
-				var selectionLayer = PintaCore.Workspace.ActiveDocument.Layers.SelectionLayer;
+				var layer = doc.Layers.CurrentUserLayer;
+				var selectionLayer = doc.Layers.SelectionLayer;
 				var initial = dialog.InitialLayerProperties;
 				initial.SetProperties (layer);
 				if (selectionLayer != null)

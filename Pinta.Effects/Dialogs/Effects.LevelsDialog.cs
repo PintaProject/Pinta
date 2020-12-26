@@ -135,8 +135,10 @@ namespace Pinta.Effects
 
 		private void UpdateInputHistogram ()
 		{
-			ImageSurface surface = PintaCore.Layers.CurrentLayer.Surface;
-			Gdk.Rectangle rect = PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.GetBounds ();
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
+			Gdk.Rectangle rect = doc.Selection.SelectionPath.GetBounds ();
 			histogramInput.Histogram.UpdateHistogram (surface, rect);
 			UpdateOutputHistogram ();
 		}

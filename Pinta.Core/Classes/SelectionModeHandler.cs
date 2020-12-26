@@ -108,7 +108,7 @@ namespace Pinta.Core
             doc.Selection = doc.PreviousSelection.Clone ();
             doc.Selection.Visible = true;
 
-            using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface))
+            using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface))
             {
                 //Make sure time isn't wasted if the CombineMode is Replace - Replace is much simpler than the other 4 selection modes.
                 if (mode == CombineMode.Replace)

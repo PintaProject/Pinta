@@ -66,9 +66,11 @@ namespace Pinta.Core
 
 		public override void Undo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			Swap ();
 
-			PintaCore.Layers.DestroySelectionLayer ();
+			doc.Layers.DestroySelectionLayer ();
 			PintaCore.Workspace.Invalidate ();
 		}
 

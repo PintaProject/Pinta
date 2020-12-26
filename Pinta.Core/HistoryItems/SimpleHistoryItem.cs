@@ -37,8 +37,10 @@ namespace Pinta.Core
 
 		public SimpleHistoryItem (string icon, string text, ImageSurface oldSurface, int layerIndex) : base (icon, text)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			layer_index = layerIndex;
-			surface_diff = SurfaceDiff.Create (oldSurface, PintaCore.Layers[layer_index].Surface);
+			surface_diff = SurfaceDiff.Create (oldSurface, doc.Layers[layer_index].Surface);
 
 			// If the diff was too big, store the original surface, else, dispose it
 			if (surface_diff == null)
@@ -63,15 +65,17 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			// Grab the original surface
-			ImageSurface surf = PintaCore.Layers[layer_index].Surface;
+			ImageSurface surf = doc.Layers[layer_index].Surface;
 
 			if (surface_diff != null) {
 				surface_diff.ApplyAndSwap (surf);
 				PintaCore.Workspace.Invalidate (surface_diff.GetBounds ());
 			} else {
 				// Undo to the "old" surface
-				PintaCore.Layers[layer_index].Surface = old_surface!; // NRT - Will be not-null if surface_diff is null
+				doc.Layers[layer_index].Surface = old_surface!; // NRT - Will be not-null if surface_diff is null
 
 				// Store the original surface for Redo
 				old_surface = surf;
@@ -89,13 +93,17 @@ namespace Pinta.Core
 
 		public void TakeSnapshotOfLayer (int layerIndex)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			layer_index = layerIndex;
-			old_surface = PintaCore.Layers[layerIndex].Surface.Clone ();
+			old_surface = doc.Layers[layerIndex].Surface.Clone ();
 		}
 
 		public void TakeSnapshotOfLayer(UserLayer layer)
 		{
-			layer_index = PintaCore.Layers.IndexOf (layer);
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			layer_index = doc.Layers.IndexOf (layer);
 			old_surface = layer.Surface.Clone ();
 		}
 	}

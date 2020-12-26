@@ -78,11 +78,13 @@ namespace Pinta.Core
 			// Start rendering.
 			// Listen for changes to effectConfiguration object, and restart render if needed.
 
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			live_preview_enabled = true;
 			apply_live_preview_flag = false;
 			cancel_live_preview_flag = false;
 			
-			layer = PintaCore.Layers.CurrentLayer;
+			layer = doc.Layers.CurrentUserLayer;
 			this.effect = effect;
 
 			//TODO Use the current tool layer instead.
@@ -92,13 +94,13 @@ namespace Pinta.Core
 
 			// Handle selection path.
 			PintaCore.Tools.Commit ();
-			var selection = PintaCore.Workspace.ActiveDocument.Selection;
+			var selection = doc.Selection;
 			selection_path = (selection.Visible) ? selection.SelectionPath : null;
 			render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 			render_bounds = PintaCore.Workspace.ClampToImageSize (render_bounds);	
 
 			history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
-			history_item.TakeSnapshotOfLayer (PintaCore.Layers.CurrentLayerIndex);	
+			history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);	
 			
 			// Paint the pre-effect layer surface into into the working surface.
 			using (var ctx = new Cairo.Context (live_preview_surface)) {

@@ -896,9 +896,11 @@ namespace Pinta.Core
 
 		public static Path Clone (this Path path)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			Path newpath;
 
-			using (Context g = new Context (PintaCore.Layers.CurrentLayer.Surface)) {
+			using (Context g = new Context (doc.Layers.CurrentUserLayer.Surface)) {
 				g.AppendPath (path);
 				newpath = g.CopyPath ();
 			}
@@ -927,8 +929,10 @@ namespace Pinta.Core
         public static Gdk.Rectangle GetBounds(this Path path)
         {
             Rectangle rect;
+		var doc = PintaCore.Workspace.ActiveDocument;
 
-            using (Context g = new Context(PintaCore.Layers.CurrentLayer.Surface))
+
+            using (Context g = new Context(doc.Layers.CurrentUserLayer.Surface))
             {
                 g.AppendPath(path);
 				rect = g.PathExtents();

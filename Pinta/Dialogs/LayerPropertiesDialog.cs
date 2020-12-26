@@ -52,14 +52,16 @@ namespace Pinta
 			PintaCore.Chrome.MainWindow, DialogFlags.Modal,
             Core.GtkExtensions.DialogButtonsCancelOk())
         {
-            Build ();
+ 			var doc = PintaCore.Workspace.ActiveDocument;
+
+           Build ();
 
 			IconName = Resources.Icons.LayerProperties;
 			
-			name = PintaCore.Layers.CurrentLayer.Name;
-			hidden = PintaCore.Layers.CurrentLayer.Hidden;
-			opacity = PintaCore.Layers.CurrentLayer.Opacity;
-			blendmode = PintaCore.Layers.CurrentLayer.BlendMode;
+			name = doc.Layers.CurrentUserLayer.Name;
+			hidden = doc.Layers.CurrentUserLayer.Hidden;
+			opacity = doc.Layers.CurrentUserLayer.Opacity;
+			blendmode = doc.Layers.CurrentUserLayer.BlendMode;
 
 			initial_properties = new LayerProperties(
 				name,				
@@ -112,17 +114,21 @@ namespace Pinta
 		#region Private Methods
 		private void OnLayerNameChanged (object? sender, EventArgs e)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			name = layerNameEntry.Text;
-			PintaCore.Layers.CurrentLayer.Name = name;
+			doc.Layers.CurrentUserLayer.Name = name;
 		}
 		
 		private void OnVisibilityToggled (object? sender, EventArgs e)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			hidden = !visibilityCheckbox.Active;
-			PintaCore.Layers.CurrentLayer.Hidden = hidden;
-			if (PintaCore.Layers.SelectionLayer != null) {
+			doc.Layers.CurrentUserLayer.Hidden = hidden;
+			if (doc.Layers.SelectionLayer != null) {
 				//Update Visiblity for SelectionLayer and force redraw			
-				PintaCore.Layers.SelectionLayer.Hidden = PintaCore.Layers.CurrentLayer.Hidden;
+				doc.Layers.SelectionLayer.Hidden = doc.Layers.CurrentUserLayer.Hidden;
 			}
 			PintaCore.Workspace.Invalidate ();
 		}
@@ -141,23 +147,27 @@ namespace Pinta
 		
 		private void UpdateOpacity ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			//TODO check redraws are being throttled.
 			opacity = opacitySpinner.Value / 100d;
-			PintaCore.Layers.CurrentLayer.Opacity = opacity;
-			if (PintaCore.Layers.SelectionLayer != null) {
+			doc.Layers.CurrentUserLayer.Opacity = opacity;
+			if (doc.Layers.SelectionLayer != null) {
 				//Update Opacity for SelectionLayer and force redraw			
-				PintaCore.Layers.SelectionLayer.Opacity = PintaCore.Layers.CurrentLayer.Opacity;
+				doc.Layers.SelectionLayer.Opacity = doc.Layers.CurrentUserLayer.Opacity;
 			}
 			PintaCore.Workspace.Invalidate ();		
 		}
 
 		private void OnBlendModeChanged (object? sender, EventArgs e)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.ActiveText);
-			PintaCore.Layers.CurrentLayer.BlendMode = blendmode;
-			if (PintaCore.Layers.SelectionLayer != null) {
+			doc.Layers.CurrentUserLayer.BlendMode = blendmode;
+			if (doc.Layers.SelectionLayer != null) {
 				//Update BlendMode for SelectionLayer and force redraw
-				PintaCore.Layers.SelectionLayer.BlendMode = PintaCore.Layers.CurrentLayer.BlendMode;	 
+				doc.Layers.SelectionLayer.BlendMode = doc.Layers.CurrentUserLayer.BlendMode;	 
 			}
 			PintaCore.Workspace.Invalidate ();		
 		}

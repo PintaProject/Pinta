@@ -141,10 +141,12 @@ namespace Pinta.Gui.Widgets
 		}
 		
 		private void HandleLayerSelected (object? o, EventArgs e)
-		{			
+		{
+			var doc = PintaCore.Workspace.ActiveDocument;
 			var layer = GetSelectedLayerInTreeView ();			
-			if (PintaCore.Layers.CurrentLayer != layer && layer != null)
-				PintaCore.Layers.SetCurrentLayer (layer);
+
+			if (doc.Layers.CurrentUserLayer != layer && layer != null)
+				doc.Layers.SetCurrentUserLayer (layer);
 		}
 		
 		private void LayerVisibilityToggled (object? o, ToggledArgs args)
@@ -247,11 +249,13 @@ namespace Pinta.Gui.Widgets
 				store.AppendValues (surf, layer.Name, !layer.Hidden, layer);
 			}
 						
-			SelectLayerInTreeView (PintaCore.Layers.Count - PintaCore.Layers.CurrentLayerIndex - 1);
+			SelectLayerInTreeView (doc.Layers.Count () - doc.Layers.CurrentUserLayerIndex - 1);
 		}
 
 		private void SetLayerVisibility(UserLayer layer, bool visibility)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			layer.Hidden = !visibility;
 			
 			var initial = new LayerProperties(layer.Name, visibility, layer.Opacity, layer.BlendMode);
@@ -260,11 +264,11 @@ namespace Pinta.Gui.Widgets
 			var historyItem = new UpdateLayerPropertiesHistoryItem (
 				Resources.Icons.LayerProperties,
 				(visibility) ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
-				PintaCore.Layers.IndexOf (layer),
+				doc.Layers.IndexOf (layer),
 				initial,
 				updated);
 			
-			PintaCore.Workspace.ActiveDocument.History.PushNewItem (historyItem);
+			doc.History.PushNewItem (historyItem);
 			
 			//TODO Call this automatically when the layer visibility changes.
 			PintaCore.Workspace.Invalidate ();
