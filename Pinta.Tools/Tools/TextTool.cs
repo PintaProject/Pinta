@@ -419,7 +419,7 @@ namespace Pinta.Tools
 
 		private void UpdateFont ()
 		{
-			if (CurrentTextEngine != null) {
+			if (PintaCore.Workspace.HasOpenDocuments) {
 				CurrentTextEngine.Alignment = Alignment;
 				CurrentTextEngine.SetFont (Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
 			}
