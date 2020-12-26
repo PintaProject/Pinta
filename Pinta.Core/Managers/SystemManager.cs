@@ -121,19 +121,19 @@ namespace Pinta.Core
 		public static string GetDataRootDirectory ()
 		{
 			string app_dir = SystemManager.GetExecutableDirectory ();
-			bool devel_mode = File.Exists (Path.Combine (Path.Combine (app_dir, ".."), "Pinta.sln"));
 
-			if (GetOperatingSystem () != OS.X11 || devel_mode)
-				return app_dir;
-			else {
-				// From MonoDevelop:
-				// Pinta is located at $prefix/lib/pinta
-				// adding "../.." should give us $prefix
-				string prefix = Path.Combine (Path.Combine (app_dir, ".."), "..");
-				//normalise it
-				prefix = Path.GetFullPath (prefix);
-				return Path.Combine (prefix, "share");
+			// If Pinta is located at $prefix/lib/pinta, we want to use $prefix/share.
+			if (GetOperatingSystem () == OS.X11) {
+				var lib_dir = Directory.GetParent (app_dir);
+				if (lib_dir?.Name == "lib") {
+					var prefix = lib_dir.Parent;
+					if (prefix is not null)
+						return Path.Combine (prefix.FullName, "share");
+				}
 			}
+
+			// Otherwise, translations etc are contained under the executable's folder.
+			return app_dir;
 		}
 
 		public static OS GetOperatingSystem ()
