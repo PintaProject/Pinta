@@ -28,7 +28,8 @@ Name: "{group}\{#ProductName}"; Filename: "{app}\{#ProductName}.exe"
 
 [Files]
 Source: "bin\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "{#GetEnv('LOCALAPPDATA')}\Gtk\3.24.20\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+; Include the GTK distribution (which GtkSharp pulls in), but skip the zip file itself along with the unused gtkmm libraries.
+Source: "{#GetEnv('LOCALAPPDATA')}\Gtk\3.24.20\*"; Excludes: "gtk.zip,*mm*.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Run]
 Filename: "{app}\Pinta.exe"; Flags: nowait postinstall; Description: "{cm:LaunchProgram,{#ProductName}}"
