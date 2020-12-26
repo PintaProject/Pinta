@@ -25,12 +25,9 @@ namespace Pinta.Core
         private TextPosition currentPos;
         private TextPosition selectionStart;
 
-        public TextAlignment Alignment { get; set; }
-        public string FontFace { get; private set; } = null!; // NRT - I don't know if this can be null or not.
-        public int FontSize { get; private set; }
-        public bool Bold { get; private set; }
-        public bool Italic { get; private set; }
-        public bool Underline { get; private set; }
+		public Pango.FontDescription Font { get; private set; } = new ();
+		public TextAlignment Alignment { get; private set; }
+		public bool Underline { get; private set; }
 
 		public TextPosition CurrentPosition { get { return currentPos; } }
 		public int LineCount { get { return lines.Count; } }
@@ -77,12 +74,9 @@ namespace Pinta.Core
 			clonedTE.State = State;
             clonedTE.currentPos = currentPos;
 			clonedTE.selectionStart = selectionStart;
-            clonedTE.FontFace = FontFace;
-            clonedTE.FontSize = FontSize;
-            clonedTE.Bold = Bold;
-            clonedTE.Italic = Italic;
-            clonedTE.Underline = Underline;
-            clonedTE.Alignment = Alignment;
+			clonedTE.Font = Font.Copy ();
+			clonedTE.Alignment = Alignment;
+			clonedTE.Underline = Underline;
 			clonedTE.Origin = new Point(Origin.X, Origin.Y);
 
 			//The rest of the variables are calculated on the spot.
@@ -135,13 +129,11 @@ namespace Pinta.Core
                 ClearSelection ();
 		}
 
-		public void SetFont (string face, int size, bool bold, bool italic, bool underline)
+		public void SetFont (Pango.FontDescription font, TextAlignment alignment, bool underline)
 		{
-            FontFace = face;
-            FontSize = size;
-            Bold = bold;
-            Italic = italic;
-            Underline = underline;
+			Font = font;
+			Alignment = alignment;
+			Underline = underline;
 			OnModified ();
 		}
 

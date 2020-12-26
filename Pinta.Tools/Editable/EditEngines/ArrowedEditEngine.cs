@@ -276,7 +276,7 @@ namespace Pinta.Tools
 				}
 			};
 
-			tb.AddWidgetItem(showArrowOneBox);
+			tb.AppendWidgetItem(showArrowOneBox);
 
 
 			//Show arrow 2.
@@ -340,7 +340,7 @@ namespace Pinta.Tools
 				}
 			};
 
-			tb.AddWidgetItem(showArrowTwoBox);
+			tb.AppendWidgetItem(showArrowTwoBox);
 
 			#endregion Show Arrows
 

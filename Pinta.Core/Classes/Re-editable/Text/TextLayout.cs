@@ -144,14 +144,7 @@ namespace Pinta.Core
 					break;
 			}
 
-			var font = Pango.FontDescription.FromString (
-                string.Format ("{0} {1}", engine.FontFace, engine.FontSize));
-			// Forces font variants to be rendered properly
-			// (e.g. this will use "Ubuntu Condensed" instead of "Ubuntu").
-			font.Family = engine.FontFace;
-			font.Weight = engine.Bold ? Pango.Weight.Bold : Pango.Weight.Normal;
-			font.Style = engine.Italic ? Pango.Style.Italic : Pango.Style.Normal;
-			Layout.FontDescription = font;
+			Layout.FontDescription = engine.Font;
 
 			Layout.SetMarkup (markup);
         }

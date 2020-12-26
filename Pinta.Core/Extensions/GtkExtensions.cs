@@ -35,10 +35,10 @@ namespace Pinta.Core
 		public const int MouseMiddleButton = 2;
 		public const int MouseRightButton = 3;
 
-		public static void AddWidgetItem (this Toolbar tb, Widget w)
+		public static void AppendWidgetItem (this Toolbar tb, Widget w)
 		{
 			w.Show ();
-			ToolItem ti = new ToolItem ();
+			var ti = new ToolItem ();
 			ti.Add (w);
 			ti.Show ();
 			tb.Insert (ti, tb.NItems);

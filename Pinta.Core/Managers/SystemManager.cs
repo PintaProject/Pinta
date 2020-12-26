@@ -43,7 +43,6 @@ namespace Pinta.Core
 
 		public ImageConverterManager ImageFormats { get; private set; }
 		public PaletteFormats PaletteFormats { get; private set; }
-		public FontManager Fonts { get; private set; }
 		public int RenderThreads { get; set; }
 		public OS OperatingSystem { get { return operating_system; } }
 		
@@ -52,7 +51,6 @@ namespace Pinta.Core
 			ImageFormats = new ImageConverterManager ();
 			PaletteFormats = new PaletteFormats ();
 			RenderThreads = Environment.ProcessorCount;
-			Fonts = new FontManager ();
 
 			last_dialog_directory = DefaultDialogDirectory;
 

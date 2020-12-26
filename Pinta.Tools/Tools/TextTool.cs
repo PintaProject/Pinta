@@ -119,15 +119,13 @@ namespace Pinta.Tools
 #region ToolBar
 		// NRT - Created by OnBuildToolBar
 		private ToolBarLabel font_label = null!;
-		private ToolBarFontComboBox font_combo = null!;
-		private ToolBarComboBox size_combo = null!;
+		private FontButton font_button = null!;
 		private ToolBarToggleButton bold_btn = null!;
 		private ToolBarToggleButton italic_btn = null!;
 		private ToolBarToggleButton underscore_btn = null!;
 		private ToolBarToggleButton left_alignment_btn = null!;
 		private ToolBarToggleButton center_alignment_btn = null!;
 		private ToolBarToggleButton Right_alignment_btn = null!;
-		private ToolBarLabel spacer_label = null!;
 		private ToolBarLabel fill_label = null!;
 		private ToolBarDropDownButton fill_button = null!;
 		private SeparatorToolItem fill_sep = null!;
@@ -146,31 +144,15 @@ namespace Pinta.Tools
 
 			tb.AppendItem (font_label);
 
-			if (font_combo == null) {
-				var fonts = PintaCore.System.Fonts.GetInstalledFonts ();
-				fonts.Sort ();
+			if (font_button == null) {
+				font_button = new FontButton () { ShowStyle = true, ShowSize = true, UseFont = true };
+				// Default to Arial if possible.
+				font_button.Font = "Arial 12";
 
-				// Default to Arial or first in list
-				int index = Math.Max (fonts.IndexOf ("Arial"), 0);
-
-				font_combo = new ToolBarFontComboBox (150, index, fonts.ToArray ());
-				font_combo.ComboBox.Changed += HandleFontChanged;
+				font_button.FontSet += HandleFontChanged;
 			}
 
-			tb.AppendItem (font_combo);
-
-			if (spacer_label == null)
-				spacer_label = new ToolBarLabel (" ");
-
-			tb.AppendItem (spacer_label);
-
-			if (size_combo == null) {
-				size_combo = new ToolBarComboBox (65, 0, true);
-
-				size_combo.ComboBox.Changed += HandleSizeChanged;
-			}
-
-			tb.AppendItem (size_combo);
+			tb.AppendWidgetItem (font_button);
 
 			tb.AppendItem (new SeparatorToolItem ());
 
@@ -264,7 +246,7 @@ namespace Pinta.Tools
 						"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 						"40", "45", "50", "55");
 
-				outline_width.ComboBox.Changed += HandleSizeChanged;
+				outline_width.ComboBox.Changed += HandleFontChanged;
 			}
 
 			tb.AppendItem (outline_width);
@@ -279,7 +261,7 @@ namespace Pinta.Tools
 			outline_width_plus.Visible = outline_width_minus.Visible = outline_width.Visible
 				= outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
-			UpdateFontSizes ();
+			UpdateFont ();
 
 			if (PintaCore.Workspace.HasOpenDocuments) {
 				//Make sure the event handler is never added twice.
@@ -295,47 +277,8 @@ namespace Pinta.Tools
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
 
-			UpdateFontSizes ();
 			UpdateFont ();
 		}
-
-		private void UpdateFontSizes ()
-		{
-			string oldval = size_combo.ComboBox.ActiveText;
-
-			ListStore model = (ListStore)size_combo.ComboBox.Model;
-			model.Clear ();
-
-			List<int> sizes = PintaCore.System.Fonts.GetSizes (FontFamily);
-
-			foreach (int i in sizes)
-				size_combo.ComboBox.AppendText (i.ToString ());
-
-			int index;
-
-			if (string.IsNullOrEmpty (oldval))
-				index = sizes.IndexOf (12);
-			else
-				index = sizes.IndexOf (int.Parse (oldval));
-
-			if (index == -1)
-				index = 0;
-
-			size_combo.ComboBox.Active = index;
-		}
-
-		private void HandleSizeChanged (object? sender, EventArgs e)
-		{
-			string text = size_combo.ComboBox.ActiveText;
-			if (int.TryParse (text, out FontSize))
-				UpdateFont ();
-		}
-
-		private Pango.FontFamily FontFamily {
-			get { return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.ActiveText)!; } // NRT - Code expects this to be not-null
-		}
-
-		private int FontSize;
 
 		private TextAlignment Alignment {
 			get {
@@ -346,10 +289,6 @@ namespace Pinta.Tools
 				else
 					return TextAlignment.Left;
 			}
-		}
-
-		private string Font {
-			get { return font_combo.ComboBox.ActiveText; }
 		}
 
 		private void HandlePintaCorePalettePrimaryColorChanged (object? sender, EventArgs e)
@@ -420,8 +359,11 @@ namespace Pinta.Tools
 		private void UpdateFont ()
 		{
 			if (PintaCore.Workspace.HasOpenDocuments) {
-				CurrentTextEngine.Alignment = Alignment;
-				CurrentTextEngine.SetFont (Font, FontSize, bold_btn.Active, italic_btn.Active, underscore_btn.Active);
+				var font = font_button.FontDesc.Copy ();
+				font.Weight = bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal;
+				font.Style = italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal;
+
+				CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
 			}
 
 			if (is_editing)
