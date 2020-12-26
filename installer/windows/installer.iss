@@ -28,7 +28,7 @@ Name: "{group}\{#ProductName}"; Filename: "{app}\{#ProductName}.exe"
 
 [Files]
 Source: "bin\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "{%LOCALAPPDATA}\Gtk\3.24.20\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "{#GetEnv('LOCALAPPDATA')}\Gtk\3.24.20\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Run]
 Filename: "{app}\Pinta.exe"; Flags: nowait postinstall; Description: "{cm:LaunchProgram,{#ProductName}}"
