@@ -62,7 +62,9 @@ namespace Pinta.Core
 		    {
 		        if (selection_path == null)
 		        {
-		            using (var g = new Context (PintaCore.Layers.CurrentLayer.Surface))
+				var doc = PintaCore.Workspace.ActiveDocument;
+
+		            using (var g = new Context (doc.Layers.CurrentUserLayer.Surface))
 		                selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 		        }
 

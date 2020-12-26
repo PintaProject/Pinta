@@ -87,31 +87,33 @@ namespace Pinta.Core
 		
 		public override void Undo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			switch (type) {
 				//case InvertType.InvertColors:
 				//        PintaCore.Actions.Adjustments.InvertColors.Activate ();
 				//        break;
 				case InvertType.Rotate180:
-					PintaCore.Layers.RotateImage180 ();
+					doc.RotateImage180 ();
 					break;
 				case InvertType.FlipHorizontal:
-					PintaCore.Layers.FlipImageHorizontal ();
+					doc.FlipImageHorizontal ();
 					break;
 				case InvertType.FlipVertical:
-					PintaCore.Layers.FlipImageVertical ();
+					doc.FlipImageVertical ();
 					break;
 				case InvertType.Rotate90CW:
-					PintaCore.Layers.RotateImageCCW ();
+					doc.RotateImageCCW ();
 					break;
 				case InvertType.Rotate90CCW:
-					PintaCore.Layers.RotateImageCW ();
+					doc.RotateImageCW ();
 					break;
 				case InvertType.FlipLayerHorizontal:
-					PintaCore.Workspace.ActiveDocument.Layers.UserLayers[layer_index].FlipHorizontal ();
+					doc.Layers[layer_index].FlipHorizontal ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 				case InvertType.FlipLayerVertical:
-					PintaCore.Workspace.ActiveDocument.Layers.UserLayers[layer_index].FlipVertical ();
+					doc.Layers[layer_index].FlipVertical ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 			}
@@ -119,31 +121,33 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			switch (type) {
 				//case InvertType.InvertColors:
 				//        PintaCore.Actions.Adjustments.InvertColors.Activate ();
 				//        break;
 				case InvertType.Rotate180:
-					PintaCore.Layers.RotateImage180 ();
+					doc.RotateImage180 ();
 					break;
 				case InvertType.FlipHorizontal:
-					PintaCore.Layers.FlipImageHorizontal ();
+					doc.FlipImageHorizontal ();
 					break;
 				case InvertType.FlipVertical:
-					PintaCore.Layers.FlipImageVertical ();
+					doc.FlipImageVertical ();
 					break;
 				case InvertType.Rotate90CW:
-					PintaCore.Layers.RotateImageCW ();
+					doc.RotateImageCW ();
 					break;
 				case InvertType.Rotate90CCW:
-					PintaCore.Layers.RotateImageCCW ();
+					doc.RotateImageCCW ();
 					break;
 				case InvertType.FlipLayerHorizontal:
-					PintaCore.Workspace.ActiveDocument.Layers.UserLayers[layer_index].FlipHorizontal ();
+					doc.Layers[layer_index].FlipHorizontal ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 				case InvertType.FlipLayerVertical:
-					PintaCore.Workspace.ActiveDocument.Layers.UserLayers[layer_index].FlipVertical ();
+					doc.Layers[layer_index].FlipVertical ();
 					PintaCore.Workspace.Invalidate ();
 					break;
 			}

@@ -48,8 +48,10 @@ namespace Pinta.Core
 		}
 
 		public override void Undo ()
-		{			
-			var layer = PintaCore.Layers[layer_index];
+		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			var layer = doc.Layers[layer_index];
 			layer.Opacity = initial_properties.Opacity;
 			layer.Hidden = initial_properties.Hidden;
 			layer.Name = initial_properties.Name;
@@ -58,7 +60,9 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
-			var layer = PintaCore.Layers[layer_index];
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			var layer = doc.Layers[layer_index];
 			layer.Opacity = updated_properties.Opacity;
 			layer.Hidden = updated_properties.Hidden;
 			layer.Name = updated_properties.Name;

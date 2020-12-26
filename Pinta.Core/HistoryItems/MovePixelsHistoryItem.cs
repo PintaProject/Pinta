@@ -69,21 +69,23 @@ namespace Pinta.Core
 
 		private void Swap ()
 		{
-			DocumentSelection swap_selection = PintaCore.Workspace.ActiveDocument.Selection;
-			PintaCore.Workspace.ActiveDocument.Selection = old_selection!; // NRT - Set in TakeSnapshot
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			DocumentSelection swap_selection = doc.Selection;
+			doc.Selection = old_selection!; // NRT - Set in TakeSnapshot
 			old_selection = swap_selection;
 
 			Matrix swap_transform = new Matrix();
-			swap_transform.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
-			PintaCore.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
+			swap_transform.InitMatrix(doc.Layers.SelectionLayer.Transform);
+			doc.Layers.SelectionLayer.Transform.InitMatrix(old_transform);
 			old_transform.InitMatrix(swap_transform);
 
 			if (lifted) {
 				// Grab the original surface
-				ImageSurface surf = PintaCore.Layers[layer_index].Surface;
+				ImageSurface surf = doc.Layers[layer_index].Surface;
 
 				// Undo to the "old" surface
-				PintaCore.Layers[layer_index].Surface = old_surface!; // NRT - Set in TakeSnapshot
+				doc.Layers[layer_index].Surface = old_surface!; // NRT - Set in TakeSnapshot
 
 				// Store the original surface for Redo
 				old_surface = surf;
@@ -97,6 +99,8 @@ namespace Pinta.Core
 		
 		public void TakeSnapshot (bool lift)
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			lifted = lift;
 			is_lifted = true;
 
@@ -105,8 +109,8 @@ namespace Pinta.Core
 				old_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 			}
 				
-			old_selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
-			old_transform.InitMatrix(PintaCore.Layers.SelectionLayer.Transform);
+			old_selection = doc.Selection.Clone ();
+			old_transform.InitMatrix(doc.Layers.SelectionLayer.Transform);
 		}
 	}
 }

@@ -115,6 +115,11 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
+		/// Returns the number of user layers.
+		/// </summary>
+		public int Count () => user_layers.Count;
+
+		/// <summary>
 		/// Creates a new layer, but does not add it to the layer collection.
 		/// </summary>
 		public UserLayer CreateLayer (string? name = null, int? width = null, int? height = null)
@@ -426,5 +431,10 @@ namespace Pinta.Core
 		{
 			SetCurrentUserLayer (user_layers.IndexOf (layer));
 		}
+
+		/// <summary>
+		/// Gets the user layer at the specified index.
+		/// </summary>
+		public UserLayer this[int index] => user_layers[index];
 	}
 }

@@ -46,6 +46,8 @@ namespace Pinta.Core
 		
 		public override void Undo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			// maintain the current scaling setting after the operation
 			double scale = PintaCore.Workspace.Scale;
 
@@ -63,13 +65,13 @@ namespace Pinta.Core
 			
 			if (RestoreSelection != null) {
 				DocumentSelection old = PintaCore.Workspace.ActiveDocument.Selection;
-				PintaCore.Workspace.ActiveDocument.Selection = RestoreSelection.Clone();
+				doc.Selection = RestoreSelection.Clone();
 
 				if (old != null) {
 					old.Dispose ();
 				}
 			} else {
-				PintaCore.Layers.ResetSelectionPath ();
+				doc.ResetSelectionPaths ();
 			}
 			
 			PintaCore.Workspace.Invalidate ();
@@ -82,6 +84,8 @@ namespace Pinta.Core
 
 		public override void Redo ()
 		{
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 			// maintain the current scaling setting after the operation
 			double scale = PintaCore.Workspace.Scale;
 
@@ -97,7 +101,7 @@ namespace Pinta.Core
 
 			base.Redo ();
 
-			PintaCore.Layers.ResetSelectionPath ();
+			doc.ResetSelectionPaths ();
 			PintaCore.Workspace.Invalidate ();
 
 			PintaCore.Workspace.Scale = scale;

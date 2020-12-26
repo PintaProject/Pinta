@@ -60,6 +60,8 @@ namespace Pinta.Gui.Widgets
 
             // Our rectangle of interest
             var r = new Gdk.Rectangle (offset, dst.GetBounds ().Size).ToCairoRectangle ();
+			var doc = PintaCore.Workspace.ActiveDocument;
+
 
             using (var g = new Cairo.Context (dst)) {
                 // Create the transparent checkerboard background
@@ -70,7 +72,7 @@ namespace Pinta.Gui.Widgets
                     var layer = layers[i];
 
                     // If we're in LivePreview, substitute current layer with the preview layer
-                    if (layer == PintaCore.Layers.CurrentLayer && PintaCore.LivePreview.IsEnabled)
+                    if (layer == doc.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
                         layer = CreateLivePreviewLayer (layer);
 
                     // If the layer is offset, handle it here

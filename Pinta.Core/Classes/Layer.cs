@@ -90,7 +90,9 @@ namespace Pinta.Core
 		
 		public void FlipHorizontal ()
 		{
-			Layer dest = PintaCore.Layers.CreateLayer ();
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			Layer dest = doc.Layers.CreateLayer ();
 			
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
 				g.Matrix = new Matrix (-1, 0, 0, 1, Surface.Width, 0);
@@ -106,7 +108,9 @@ namespace Pinta.Core
 		
 		public void FlipVertical ()
 		{
-			Layer dest = PintaCore.Layers.CreateLayer ();
+			var doc = PintaCore.Workspace.ActiveDocument;
+
+			Layer dest = doc.Layers.CreateLayer ();
 			
 			using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
 				g.Matrix = new Matrix (1, 0, 0, -1, 0, Surface.Height);
