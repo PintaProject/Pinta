@@ -33,10 +33,13 @@ using Gdk;
 
 namespace Pinta.Tools
 {
-	public abstract class SelectTool : SelectShapeTool
+	public abstract class SelectTool : BaseTool
 	{
+		private bool is_drawing = false;
+		private PointD shape_origin;
 		private PointD reset_origin;
 		private PointD shape_end;
+		private Gdk.Rectangle last_dirty;
 		private ToolControl[] controls = new ToolControl[8];
 		private int? active_control;
 		private SelectionHistoryItem? hist;
@@ -52,10 +55,12 @@ namespace Pinta.Tools
 			PintaCore.Workspace.SelectionChanged += AfterSelectionChange;
 		}
 
+		protected abstract void DrawShape (Cairo.Rectangle r, Layer l);
+
 		#region ToolBar
-		// We don't want the ShapeTool's toolbar
-		protected override void BuildToolBar (Toolbar tb)
+		protected override void OnBuildToolBar (Toolbar tb)
 		{
+			base.OnBuildToolBar (tb);
 			PintaCore.Workspace.SelectionHandler.BuildToolbar (tb);
 		}
 		#endregion
@@ -90,6 +95,7 @@ namespace Pinta.Tools
 			}
 
 			is_drawing = true;
+			last_dirty = new Gdk.Rectangle (0, 0, 0, 0);
 		}
 
 		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -121,7 +127,7 @@ namespace Pinta.Tools
 
 					doc.Selection.Origin = shape_origin;
 					doc.Selection.End = shape_end;
-					PintaCore.Workspace.Invalidate ();
+					PintaCore.Workspace.Invalidate (last_dirty);
 				}
 				if (hist != null) {
 					doc.History.PushNewItem (hist);
@@ -174,12 +180,15 @@ namespace Pinta.Tools
 
 			ClearHandles (doc.Layers.ToolLayer);
 			RefreshHandler ();
-			ReDraw (args.Event.State);
+
+			var dirty = ReDraw (args.Event.State);
 
 			if (doc.Selection != null) {
 				SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
-				PintaCore.Workspace.Invalidate ();
+				PintaCore.Workspace.Invalidate (dirty.Union (last_dirty));
 			}
+
+			last_dirty = dirty;
 		}
 
 		protected void RefreshHandler ()
@@ -194,7 +203,7 @@ namespace Pinta.Tools
 			controls[7].Position = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
 		}
 
-		public void ReDraw (Gdk.ModifierType state)
+		private Gdk.Rectangle ReDraw (Gdk.ModifierType state)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
@@ -217,11 +226,16 @@ namespace Pinta.Tools
 			}
 
 			Cairo.Rectangle rect = Utility.PointsToRectangle (shape_origin, shape_end, constraint);
-			Cairo.Rectangle dirty = DrawShape (rect, doc.Layers.SelectionLayer);
-
+			DrawShape (rect, doc.Layers.SelectionLayer);
 			DrawHandler (doc.Layers.ToolLayer);
 
-			last_dirty = dirty;
+			// Figure out a bounding box for everything that was drawn, and add a bit of padding.
+			var dirty = rect.ToGdkRectangle ();
+			foreach (var tool_control in controls)
+				dirty = dirty.Union (tool_control.GetHandleRect ().ToGdkRectangle ());
+
+			dirty.Inflate (2, 2);
+			return dirty;
 		}
 
 		protected void CreateHandler ()

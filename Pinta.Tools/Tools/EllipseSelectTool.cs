@@ -44,13 +44,11 @@ namespace Pinta.Tools
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18); } }
 		public override int Priority { get { return 13; } }
 
-		protected override Rectangle DrawShape (Rectangle r, Layer l)
+		protected override void DrawShape (Rectangle r, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			doc.Selection.CreateEllipseSelection(r);
-			
-			return r;
 		}
 	}
 }

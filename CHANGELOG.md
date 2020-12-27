@@ -33,6 +33,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
 - Performance improvements for the paint bucket and magic wand tools (#159).
+- Performance improvements for the selection tools when interactively adjusting the selection.
 
 ### Fixed
 - Fixed a bug where Auto Crop could incorrectly remove an additional pixel on the bottom and right side of the image. ([#1191390](https://bugs.launchpad.net/pinta/+bug/1191390)).

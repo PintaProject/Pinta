@@ -44,14 +44,11 @@ namespace Pinta.Tools
         public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18); } }
 		public override int Priority { get { return 5; } }
 
-		protected override Rectangle DrawShape (Rectangle r, Layer l)
+		protected override void DrawShape (Rectangle r, Layer l)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			doc.Selection.CreateRectangleSelection(r);
-			
-			// Add some padding for invalidation
-			return new Rectangle (r.X, r.Y, r.Width + 2, r.Height + 2);
 		}
 	}
 }
