@@ -225,7 +225,7 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
-		/// Gets the value in the specified column in the specified row row in a TreeView.
+		/// Gets the value in the specified column in the specified row in a TreeView.
 		/// </summary>
 		public static T? GetValueAt<T> (this TreeView treeView, string path, int column) where T : class
 		{
