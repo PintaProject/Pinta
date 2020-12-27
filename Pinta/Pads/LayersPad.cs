@@ -67,8 +67,6 @@ namespace Pinta
 
 			show_layers.Toggled += (val) => { layers_item.Visible = val; };
 			layers_item.VisibilityNotifyEvent += (o, args) => { show_layers.Value = layers_item.Visible; };
-
-			PintaCore.Workspace.ActiveDocumentChanged += delegate { layers.Reset (); };
 		}
 	}
 }

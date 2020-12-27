@@ -159,29 +159,22 @@ namespace Pinta.Core
 			using (var g = new Cairo.Context(surf))
 			{
 				g.FillRectangle(new Cairo.Rectangle(0, 0, size, size), color.ToCairoColor());
-				g.DrawRectangle(new Cairo.Rectangle(0, 0, size - 1, size - 1), new Cairo.Color(0, 0, 0), 1);
+				g.DrawRectangle(new Cairo.Rectangle(0, 0, size, size), new Cairo.Color(0, 0, 0), 1);
 				return surf.ToPixbuf();
 			}
 		}
 
-		public static Pixbuf CreateTransparentColorSwatch(bool drawBorder)
+		public static Pixbuf CreateTransparentColorSwatch (bool drawBorder)
 		{
 			var size = 16;
 
-            using (var surface = new Cairo.ImageSurface(Cairo.Format.Argb32, size, size))
-            using (var g = new Cairo.Context(surface))
-            {
-				g.FillRectangle(new Cairo.Rectangle(0, 0, size, size), new Cairo.Color(1, 1, 1));
-                var color = new Cairo.Color(0.78, 0.78, 0.78);
-                var half_size = size / 2;
-				g.FillRectangle(new Cairo.Rectangle(0, 0, half_size, half_size), color);
-                g.FillRectangle(new Cairo.Rectangle(half_size, half_size, half_size, half_size), color);
-
+			using (var surface = CairoExtensions.CreateTransparentBackgroundSurface (size))
+			using (var g = new Cairo.Context (surface)) {
 				if (drawBorder)
-                    g.DrawRectangle(new Cairo.Rectangle(0, 0, size - 1, size - 1), new Cairo.Color(0, 0, 0), 1);
+					g.DrawRectangle (new Cairo.Rectangle (0, 0, size, size), new Cairo.Color (0, 0, 0), 1);
 
-                return surface.ToPixbuf();
-            }
+				return surface.ToPixbuf ();
+			}
 		}
 	}
 }
