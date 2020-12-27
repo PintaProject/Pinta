@@ -108,7 +108,7 @@ namespace Pinta.Core
 			paste_section.AppendItem(PasteIntoNewLayer.CreateMenuItem());
 
 			app.AddAccelAction(PasteIntoNewImage, "<Primary><Alt>V");
-			paste_section.AppendItem(Cut.CreateMenuItem());
+			paste_section.AppendItem(PasteIntoNewImage.CreateMenuItem());
 
 			var sel_section = new GLib.Menu();
 			menu.AppendSection(null, sel_section);
