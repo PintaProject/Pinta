@@ -39,7 +39,6 @@ namespace Pinta.Docking
                 ReopenButton = new Button(new Label(item.Label) { Angle = 270 });
 
                 popover = new Popover(ReopenButton);
-                // TODO - display on correct side depending on which side this panel is on.
                 popover.Position = PositionType.Left;
 
                 ReopenButton.Clicked += (o, args) =>
@@ -86,7 +85,7 @@ namespace Pinta.Docking
 
         public DockPanel()
         {
-            PackStart(dock_bar, false, false, 0);
+            PackEnd(dock_bar, false, false, 0);
         }
 
         public void AddItem(DockItem item)

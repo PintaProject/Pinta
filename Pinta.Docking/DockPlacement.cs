@@ -24,11 +24,9 @@
 
 namespace Pinta.Docking
 {
-    public enum DockPlacement
-    {
-        // TODO - add top / bottom / floating
-        Left,
-        Right,
-        Center
-    }
+	public enum DockPlacement
+	{
+		Center,
+		Right
+	}
 }

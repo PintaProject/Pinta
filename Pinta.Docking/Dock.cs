@@ -26,38 +26,30 @@ using Gtk;
 
 namespace Pinta.Docking
 {
-    /// <summary>
-    /// The root widget, containing all dock items underneath it.
-    /// </summary>
-    public class Dock : HBox
-    {
-        private readonly DockPanel left_panel = new DockPanel();
-        private readonly DockPanel right_panel = new DockPanel();
-        private readonly Paned pane1 = new Paned(Orientation.Horizontal);
-        private readonly Paned pane2 = new Paned(Orientation.Horizontal);
+	/// <summary>
+	/// The root widget, containing all dock items underneath it.
+	/// </summary>
+	public class Dock : HBox
+	{
+		private readonly DockPanel right_panel = new DockPanel ();
+		private readonly Paned pane = new Paned (Orientation.Horizontal);
 
-        public Dock()
-        {
-            pane1.Pack1(left_panel, resize: false, shrink: false);
-            pane1.Add2(pane2);
-            pane2.Pack2(right_panel, resize: false, shrink: false);
-            Add(pane1);
-        }
+		public Dock ()
+		{
+			pane.Pack2 (right_panel, resize: false, shrink: false);
+			Add (pane);
+		}
 
-        public void AddItem(DockItem item, DockPlacement placement)
-        {
-            switch (placement)
-            {
-                case DockPlacement.Left:
-                    left_panel.AddItem(item);
-                    break;
-                case DockPlacement.Center:
-                    pane2.Pack1(item, resize: true, shrink: false);
-                    break;
-                case DockPlacement.Right:
-                    right_panel.AddItem(item);
-                    break;
-            }
-        }
-    }
+		public void AddItem (DockItem item, DockPlacement placement)
+		{
+			switch (placement) {
+				case DockPlacement.Center:
+					pane.Pack1 (item, resize: true, shrink: false);
+					break;
+				case DockPlacement.Right:
+					right_panel.AddItem (item);
+					break;
+			}
+		}
+	}
 }
