@@ -200,8 +200,7 @@ namespace Pinta.Effects
 		{	
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.Window.GetPointer (out x, out y, out mask); 
-			
+			ObsoleteExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 			
 			
 			if (x < 0 || x >= size || y < 0 || y >=size)
 				return;
@@ -225,7 +224,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.Window.GetPointer (out x, out y, out mask); 
+			ObsoleteExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
 			
 			if (args.Event.Button == 1) {
 				AddControlPoint (x, y);
@@ -266,7 +265,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.Window.GetPointer (out x, out y, out mask); 
+			ObsoleteExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
 			
 			if (x >= 0 && x < size && y >= 0 && y < size) {
 				g.LineWidth = 0.5;
@@ -331,7 +330,7 @@ namespace Pinta.Effects
 		{
 			int x, y;
 			Gdk.ModifierType mask;
-			drawing.Window.GetPointer (out x, out y, out mask); 
+			ObsoleteExtensions.GetWindowPointer (drawing.Window, out x, out y, out mask); 
 			
 			var infos = GetDrawingInfos ();
 			
