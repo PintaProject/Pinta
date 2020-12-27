@@ -211,6 +211,39 @@ namespace Pinta.Core
             combo.Model.SetValue (iter, 0, value);
         }
 
+		/// <summary>
+		/// Gets the value in the specified column in the first selected row in a TreeView.
+		/// </summary>
+		public static T? GetSelectedValueAt<T> (this TreeView treeView, int column) where T : class
+		{
+			var paths = treeView.Selection.GetSelectedRows ();
+
+			if (paths != null && paths.Length > 0 && treeView.Model.GetIter (out var iter, paths[0]))
+				return treeView.Model.GetValue (iter, column) as T;
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets the value in the specified column in the specified row in a TreeView.
+		/// </summary>
+		public static T? GetValueAt<T> (this TreeView treeView, string path, int column) where T : class
+		{
+			if (treeView.Model.GetIter (out var iter, new TreePath (path)))
+				return treeView.Model.GetValue (iter, column) as T;
+
+			return null;
+		}
+
+		/// <summary>
+		/// Sets the specified row(s) as selected in a TreeView.
+		/// </summary>
+		public static void SetSelectedRows (this TreeView treeView, params int[] indices)
+		{
+			var path = new TreePath (indices);
+			treeView.Selection.SelectPath (path);
+		}
+
 		public static Gdk.Pixbuf LoadIcon(this Gtk.IconTheme theme, string icon_name, int size)
         {
 			// Simple wrapper to avoid the verbose IconLookupFlags parameter.

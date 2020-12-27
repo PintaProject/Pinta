@@ -28,13 +28,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem (true)]
 	public class LayersListWidget : ScrolledWindow
 	{
 		private TreeView tree;
@@ -45,105 +45,106 @@ namespace Pinta.Gui.Widgets
 		// For the active layer, we also draw the selection layer on top of it,
 		// so we can't directly use that layer's surface.
 		private Cairo.ImageSurface? active_layer_surface;
-		private CanvasRenderer canvas_renderer = new CanvasRenderer (false);
-				
+		private readonly CanvasRenderer canvas_renderer = new CanvasRenderer (false);
+
 		private const int store_index_thumbnail = 0;
 		private const int store_index_name = 1;
-		private const int store_index_visibility = 2;		
+		private const int store_index_visibility = 2;
 		private const int store_index_layer = 3;
-		
+
 		private const int thumbnail_width = 60;
 		private const int thumbnail_height = 40;
 		private const int thumbnail_column_width = 70;
-		
+
 		private const int name_column_min_width = 100;
 		private const int name_column_max_width = 300;
-		
+
 		private const int visibility_column_width = 30;
-		
+
 		public LayersListWidget ()
 		{
-			CanFocus = false;
-			SetSizeRequest (200, 200);
-			
-			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
-			
-			tree = new TreeView ();
-			
-			tree.HeadersVisible = false;
-			tree.FixedHeightMode = true;
-			tree.Reorderable = false;
-			tree.EnableGridLines = TreeViewGridLines.None;
-			tree.EnableTreeLines = false;
-			tree.ShowExpanders = false;
-			tree.CanFocus = false;
-			
-			var crs = new CellRendererSurface (thumbnail_width, thumbnail_height);
-			var col = new TreeViewColumn ("Thumbnail", crs, "surface", store_index_thumbnail);
-			col.Sizing = TreeViewColumnSizing.Fixed;
-			col.FixedWidth = thumbnail_column_width;
-			tree.AppendColumn (col);
-
-			var textCell = new CellRendererText ();
-			textCell.Ellipsize = Pango.EllipsizeMode.End;
-			col = new TreeViewColumn ("Name", textCell, "text", store_index_name);
-			col.Sizing = TreeViewColumnSizing.Fixed;			
-			col.Expand = true;
-			col.MinWidth = name_column_min_width;
-			col.MaxWidth = name_column_max_width;
-			tree.AppendColumn (col);
-			
-			var crt = new CellRendererToggle ();
-			crt.Activatable = true;
-			crt.Toggled += LayerVisibilityToggled;
-			
-			col = new TreeViewColumn ("Visible", crt, "active", store_index_visibility);
-			col.Sizing = TreeViewColumnSizing.Fixed;
-			col.FixedWidth = visibility_column_width;
-			tree.AppendColumn (col);
-			
-			store = new TreeStore (typeof (Cairo.ImageSurface), typeof (string), typeof (bool), typeof (Layer));
-			
-			tree.Model = store;
-			tree.RowActivated += HandleRowActivated;
-			
-			Add (tree);
-			
-			PintaCore.Layers.LayerAdded += HandleLayerAddedOrRemoved;
-			PintaCore.Layers.LayerRemoved += HandleLayerAddedOrRemoved;
-			PintaCore.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
-			PintaCore.Layers.LayerPropertyChanged += HandlePintaCoreLayersLayerPropertyChanged;
+			Build ();
 
 			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
 
 			tree.CursorChanged += HandleLayerSelected;
+		}
+
+		private UserLayer? GetSelectedLayerInTreeView () => tree.GetSelectedValueAt<UserLayer> (store_index_layer);
+
+		private void SelectLayerInTreeView (int layerIndex) => tree.SetSelectedRows (layerIndex);
+
+		[MemberNotNull (nameof (tree), nameof (store))]
+		private void Build ()
+		{
+			CanFocus = false;
+			SetSizeRequest (200, 200);
+
+			SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+
+			// Create tree
+			tree = new TreeView {
+				HeadersVisible = false,
+				FixedHeightMode = true,
+				Reorderable = false,
+				EnableGridLines = TreeViewGridLines.None,
+				EnableTreeLines = false,
+				ShowExpanders = false,
+				CanFocus = false
+			};
+
+			// Create Thumbnail column
+			var crs = new CellRendererSurface (thumbnail_width, thumbnail_height);
+
+			var col = new TreeViewColumn ("Thumbnail", crs, "surface", store_index_thumbnail) {
+				Sizing = TreeViewColumnSizing.Fixed,
+				FixedWidth = thumbnail_column_width
+			};
+
+			tree.AppendColumn (col);
+
+			// Create text column
+			var textCell = new CellRendererText {
+				Ellipsize = Pango.EllipsizeMode.End
+			};
+
+			col = new TreeViewColumn ("Name", textCell, "text", store_index_name) {
+				Sizing = TreeViewColumnSizing.Fixed,
+				Expand = true,
+				MinWidth = name_column_min_width,
+				MaxWidth = name_column_max_width
+			};
+
+			tree.AppendColumn (col);
+
+			// Create visible checkbox toggle
+			var crt = new CellRendererToggle {
+				Activatable = true
+			};
+
+			crt.Toggled += LayerVisibilityToggled;
+
+			col = new TreeViewColumn ("Visible", crt, "active", store_index_visibility) {
+				Sizing = TreeViewColumnSizing.Fixed,
+				FixedWidth = visibility_column_width
+			};
+
+			tree.AppendColumn (col);
+
+			store = new TreeStore (typeof (Cairo.ImageSurface), typeof (string), typeof (bool), typeof (Layer));
+
+			tree.Model = store;
+			tree.RowActivated += HandleRowActivated;
+
+			Add (tree);
 
 			ShowAll ();
 		}
 
-		private UserLayer? GetSelectedLayerInTreeView()
-		{
-			UserLayer? layer = null;
-			TreeIter iter;
-			
-			var paths = tree.Selection.GetSelectedRows ();
-				
-			if (paths != null && paths.Length > 0 && store.GetIter (out iter, paths[0])) {
-				layer = store.GetValue(iter, store_index_layer) as UserLayer;
-			}
-			
-			return layer;
-		}
-		
-		private void SelectLayerInTreeView (int layerIndex)
-		{									
-			var path = new TreePath (new int[] { layerIndex });
-			tree.Selection.SelectPath (path);
-		}
-
 		private void HandleLayerSelected (object? o, EventArgs e)
 		{
-			if (updating_model)
+			// Prevent triggered when closing the app which causes a crash
+			if (updating_model || !PintaCore.Workspace.HasOpenDocuments)
 				return;
 
 			updating_model = true;
@@ -164,45 +165,43 @@ namespace Pinta.Gui.Widgets
 
 			updating_model = true;
 
-			if (store.GetIter (out var iter, new TreePath (args.Path))) {
-				bool b = (bool) store.GetValue (iter, store_index_visibility);
-				store.SetValue (iter, store_index_visibility, !b);
+			var visible = tree.GetValueAt<object> (args.Path, store_index_visibility);
+			var layer = tree.GetValueAt<UserLayer> (args.Path, store_index_layer);
 
-				var layer = (UserLayer) store.GetValue (iter, store_index_layer);
+			if (visible is bool b && layer is not null)
 				SetLayerVisibility (layer, !b);
-			}
 
 			updating_model = false;
 		}
 
 		private void HandleHistoryItemAdded (object? sender, EventArgs e)
-		{	
+		{
 			// TODO: Handle this more efficiently.
 			Reset ();
 		}
-		
+
 		private void HandleSelectedLayerChanged (object? sender, EventArgs e)
 		{
 			// TODO: Handle this more efficiently.
 			Reset ();
-		}		
+		}
 
 		void HandlePintaCoreLayersLayerPropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			// TODO: Handle this more efficiently.
 			Reset ();
-		}		
-		
-		private void HandleLayerAddedOrRemoved(object? sender, EventArgs e)
+		}
+
+		private void HandleLayerAddedOrRemoved (object? sender, EventArgs e)
 		{
 			// TODO: Handle this more efficiently.
 			Reset ();
-			
+
 			// TODO: this should be handled elsewhere
 			PintaCore.Workspace.Invalidate ();
 		}
-		
-		private void HandleRowActivated(object? o, RowActivatedArgs args)
+
+		private void HandleRowActivated (object? o, RowActivatedArgs args)
 		{
 			// The double click to activate will have already selected the layer.
 			PintaCore.Actions.Layers.Properties.Activate ();
@@ -216,21 +215,31 @@ namespace Pinta.Gui.Widgets
 				return;
 
 			if (active_document != null) {
-				active_document.History.HistoryItemAdded -= new EventHandler<HistoryItemAddedEventArgs> (HandleHistoryItemAdded);
-				active_document.History.ActionUndone -= new EventHandler (HandleHistoryItemAdded);
-				active_document.History.ActionRedone -= new EventHandler (HandleHistoryItemAdded);
+				active_document.History.HistoryItemAdded -= HandleHistoryItemAdded;
+				active_document.History.ActionUndone -= HandleHistoryItemAdded;
+				active_document.History.ActionRedone -= HandleHistoryItemAdded;
+				active_document.Layers.LayerAdded -= HandleLayerAddedOrRemoved;
+				active_document.Layers.LayerRemoved -= HandleLayerAddedOrRemoved;
+				active_document.Layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
+				active_document.Layers.LayerPropertyChanged -= HandlePintaCoreLayersLayerPropertyChanged;
 			}
 
 			if (doc is not null) {
-				doc.History.HistoryItemAdded += new EventHandler<HistoryItemAddedEventArgs> (HandleHistoryItemAdded);
-				doc.History.ActionUndone += new EventHandler (HandleHistoryItemAdded);
-				doc.History.ActionRedone += new EventHandler (HandleHistoryItemAdded);
+				doc.History.HistoryItemAdded += HandleHistoryItemAdded;
+				doc.History.ActionUndone += HandleHistoryItemAdded;
+				doc.History.ActionRedone += HandleHistoryItemAdded;
+				doc.Layers.LayerAdded += HandleLayerAddedOrRemoved;
+				doc.Layers.LayerRemoved += HandleLayerAddedOrRemoved;
+				doc.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+				doc.Layers.LayerPropertyChanged += HandlePintaCoreLayersLayerPropertyChanged;
 			}
 
 			active_document = doc;
+
+			Reset ();
 		}
 
-		public void Reset ()
+		private void Reset ()
 		{
 			store.Clear ();
 
@@ -243,16 +252,15 @@ namespace Pinta.Gui.Widgets
 				return;
 
 			var doc = PintaCore.Workspace.ActiveDocument;
-				
-			foreach (var layer in (doc.Layers.UserLayers as IEnumerable<Layer>).Reverse ()) {
+
+			foreach (var layer in doc.Layers.UserLayers.Reverse ()) {
 				var surf = layer.Surface;
 
-				// Draw the selection layer on top of the active layer.
+				// If this is the currently selected layer, we may need to draw the
+				// selection layer over it, like when dragging a selection.
 				if (layer == doc.Layers.CurrentUserLayer && doc.Layers.ShowSelectionLayer) {
-					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width,
-					                                               thumbnail_height);
-					canvas_renderer.Initialize (doc.ImageSize,
-					                            new Gdk.Size (thumbnail_width, thumbnail_height));
+					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width, thumbnail_height);
+					canvas_renderer.Initialize (doc.ImageSize, new Gdk.Size (thumbnail_width, thumbnail_height));
 
 					var layers = new List<Layer> { layer, doc.Layers.SelectionLayer };
 					canvas_renderer.Render (layers, active_layer_surface, Gdk.Point.Zero);
@@ -262,18 +270,18 @@ namespace Pinta.Gui.Widgets
 
 				store.AppendValues (surf, layer.Name, !layer.Hidden, layer);
 			}
-						
+
 			SelectLayerInTreeView (doc.Layers.Count () - doc.Layers.CurrentUserLayerIndex - 1);
 		}
 
-		private void SetLayerVisibility(UserLayer layer, bool visibility)
+		private void SetLayerVisibility (UserLayer layer, bool visibility)
 		{
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			layer.Hidden = !visibility;
-			
-			var initial = new LayerProperties(layer.Name, visibility, layer.Opacity, layer.BlendMode);
-			var updated = new LayerProperties(layer.Name, !visibility, layer.Opacity, layer.BlendMode);
+
+			var initial = new LayerProperties (layer.Name, visibility, layer.Opacity, layer.BlendMode);
+			var updated = new LayerProperties (layer.Name, !visibility, layer.Opacity, layer.BlendMode);
 
 			var historyItem = new UpdateLayerPropertiesHistoryItem (
 				Resources.Icons.LayerProperties,
@@ -281,11 +289,8 @@ namespace Pinta.Gui.Widgets
 				doc.Layers.IndexOf (layer),
 				initial,
 				updated);
-			
+
 			doc.History.PushNewItem (historyItem);
-			
-			//TODO Call this automatically when the layer visibility changes.
-			PintaCore.Workspace.Invalidate ();
 		}
 	}
 }

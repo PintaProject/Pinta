@@ -35,12 +35,10 @@ namespace Pinta.Gui.Widgets
 			this.enable_pixel_grid = enable_pixel_grid;
 		}
 
-        static CanvasRenderer ()
-        {
-            using (var grid = GdkExtensions.CreateTransparentColorSwatch (false))
-            using (var surf = grid.ToSurface ())
-                tranparent_pattern = surf.ToTiledPattern ();
-        }
+		static CanvasRenderer ()
+		{
+			tranparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (16);
+		}
 
 		public void Initialize (Size sourceSize, Size destinationSize)
 		{

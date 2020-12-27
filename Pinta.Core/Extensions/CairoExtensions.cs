@@ -1600,7 +1600,33 @@ namespace Pinta.Core
 			}
 		}
 
-        public static Pattern ToTiledPattern (this Surface surface)
+		public static Pattern CreateTransparentBackgroundPattern (int size)
+		{
+			using (var surface = CreateTransparentBackgroundSurface (size))
+				return surface.ToTiledPattern ();
+		}
+
+		public static ImageSurface CreateTransparentBackgroundSurface (int size)
+		{
+			var surface = new ImageSurface (Format.Argb32, size, size);
+
+			// Draw the checkerboard
+			using (var g = new Context (surface)) {
+				// Fill white
+				g.FillRectangle (new Rectangle (0, 0, size, size), new Color (1, 1, 1));
+
+				var color = new Color (0.78, 0.78, 0.78);
+				var half_size = size / 2;
+
+				// Draw gray squares
+				g.FillRectangle (new Rectangle (0, 0, half_size, half_size), color);
+				g.FillRectangle (new Rectangle (half_size, half_size, half_size, half_size), color);
+			}
+
+			return surface;
+		}
+
+		public static Pattern ToTiledPattern (this Surface surface)
         {
             var pattern = new Cairo.SurfacePattern (surface);
             pattern.Extend = Extend.Repeat;

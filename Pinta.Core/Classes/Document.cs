@@ -563,11 +563,6 @@ namespace Pinta.Core
 		#endregion
 
 		#region Private Methods
-		internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
-		{
-			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
-		}
-
 		private void OnSelectionChanged ()
 		{
 			if (SelectionChanged != null)

@@ -516,9 +516,7 @@ namespace Pinta
 
 				if (color.A == 0) {
 					// Fill with transparent checkerboard pattern
-					using (var grid = GdkExtensions.CreateTransparentColorSwatch (false))
-					using (var surf = grid.ToSurface ())
-					using (var pattern = surf.ToTiledPattern ())
+					using (var pattern = CairoExtensions.CreateTransparentBackgroundPattern (16))
 						cr.FillRectangle (r, pattern);
 				} else {
 					// Fill with selected color

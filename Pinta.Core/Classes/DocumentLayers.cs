@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using Cairo;
 
@@ -22,6 +23,11 @@ namespace Pinta.Core
 		{
 			this.document = document;
 		}
+
+		public event EventHandler? LayerAdded;
+		public event EventHandler? LayerRemoved;
+		public event EventHandler? SelectedLayerChanged;
+		public event PropertyChangedEventHandler? LayerPropertyChanged;
 
 		/// <summary>
 		/// Gets the currently selected user created layer.
@@ -89,8 +95,9 @@ namespace Pinta.Core
 			if (user_layers.Count == 1)
 				CurrentUserLayerIndex = 0;
 
-			layer.PropertyChanged += document.RaiseLayerPropertyChangedEvent;
+			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
+			LayerAdded?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerAdded ();
 			return layer;
 		}
@@ -173,8 +180,9 @@ namespace Pinta.Core
 			if (CurrentUserLayerIndex > 0)
 				CurrentUserLayerIndex--;
 
-			layer.PropertyChanged -= document.RaiseLayerPropertyChangedEvent;
+			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
 
+			LayerRemoved?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerRemoved ();
 		}
 
@@ -197,8 +205,9 @@ namespace Pinta.Core
 			if (CurrentUserLayerIndex > 0)
 				CurrentUserLayerIndex--;
 
-			layer.PropertyChanged -= document.RaiseLayerPropertyChangedEvent;
+			layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
 
+			LayerRemoved?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerRemoved ();
 		}
 
@@ -232,8 +241,9 @@ namespace Pinta.Core
 
 			user_layers.Insert (++CurrentUserLayerIndex, layer);
 
-			layer.PropertyChanged += document.RaiseLayerPropertyChangedEvent;
+			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
+			LayerAdded?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerAdded ();
 
 			return layer;
@@ -263,6 +273,7 @@ namespace Pinta.Core
 			while (user_layers.Count > 1)
 				user_layers.RemoveAt (1);
 
+			LayerRemoved?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerRemoved ();
 			document.Workspace.Invalidate ();
 		}
@@ -353,8 +364,9 @@ namespace Pinta.Core
 			if (user_layers.Count == 1)
 				CurrentUserLayerIndex = 0;
 
-			layer.PropertyChanged += document.RaiseLayerPropertyChangedEvent;
+			layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
+			LayerAdded?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnLayerAdded ();
 		}
 
@@ -389,6 +401,7 @@ namespace Pinta.Core
 			user_layers.RemoveAt (CurrentUserLayerIndex);
 			user_layers.Insert (--CurrentUserLayerIndex, layer);
 
+			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnSelectedLayerChanged ();
 
 			document.Workspace.Invalidate ();
@@ -406,6 +419,7 @@ namespace Pinta.Core
 			user_layers.RemoveAt (CurrentUserLayerIndex);
 			user_layers.Insert (++CurrentUserLayerIndex, layer);
 
+			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnSelectedLayerChanged ();
 
 			document.Workspace.Invalidate ();
@@ -421,6 +435,7 @@ namespace Pinta.Core
 			PintaCore.Tools.CurrentTool.DoCommit ();
 
 			CurrentUserLayerIndex = i;
+			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 			PintaCore.Layers.OnSelectedLayerChanged ();
 		}
 
@@ -436,5 +451,11 @@ namespace Pinta.Core
 		/// Gets the user layer at the specified index.
 		/// </summary>
 		public UserLayer this[int index] => user_layers[index];
+
+		private void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
+		{
+			LayerPropertyChanged?.Invoke (sender, e);
+			PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
+		}
 	}
 }
