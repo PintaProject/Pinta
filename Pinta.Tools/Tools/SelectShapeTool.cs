@@ -50,7 +50,7 @@ namespace Pinta.Tools
 		protected ImageSurface? undo_surface;
 		protected bool surface_modified;
 
-		public SelectShapeTool()
+		public SelectShapeTool ()
 		{
 		}
 
@@ -69,16 +69,16 @@ namespace Pinta.Tools
 			}
 			set { brush_width.ComboBox.Entry.Text = value.ToString (); }
 		}
-		
+
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
 		protected override bool ShowAntialiasingButton { get { return true; } }
 		#endregion
-		
+
 		#region ToolBar
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
-			
+
 			BuildToolBar (tb);
 		}
 
@@ -88,30 +88,30 @@ namespace Pinta.Tools
 		{
 			if (brush_width_label == null)
 				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Brush width")));
-			
+
 			tb.AppendItem (brush_width_label);
-			
+
 			if (brush_width_minus == null) {
 				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Translations.GetString ("Decrease brush size"));
 				brush_width_minus.Clicked += MinusButtonClickedEvent;
 			}
-			
+
 			tb.AppendItem (brush_width_minus);
-			
+
 			if (brush_width == null)
 				brush_width = new ToolBarComboBox (65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
 				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 				"40", "45", "50", "55");
-			
+
 			tb.AppendItem (brush_width);
-			
+
 			if (brush_width_plus == null) {
 				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Translations.GetString ("Increase brush size"));
 				brush_width_plus.Clicked += PlusButtonClickedEvent;
 			}
-			
+
 			tb.AppendItem (brush_width_plus);
-			
+
 			if (ShowStrokeComboBox) {
 				if (fill_sep == null)
 					fill_sep = new Gtk.SeparatorToolItem ();
@@ -158,9 +158,9 @@ namespace Pinta.Tools
 
 			shape_origin = point;
 			current_point = point;
-			
+
 			is_drawing = true;
-			
+
 			if (args.Event.Button == 1) {
 				outline_color = PintaCore.Palette.PrimaryColor;
 				fill_color = PintaCore.Palette.SecondaryColor;
@@ -187,9 +187,9 @@ namespace Pinta.Tools
 			doc.Layers.ToolLayer.Hidden = true;
 
 			DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.Event.IsShiftPressed ()), doc.Layers.CurrentUserLayer);
-			
+
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
-			
+
 			is_drawing = false;
 
 			if (surface_modified)
@@ -213,7 +213,7 @@ namespace Pinta.Tools
 
 			doc.Layers.ToolLayer.Clear ();
 
-			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.IsShiftPressed()), doc.Layers.ToolLayer);
+			Rectangle dirty = DrawShape (Utility.PointsToRectangle (shape_origin, new PointD (x, y), args.IsShiftPressed ()), doc.Layers.ToolLayer);
 
 			// Increase the size of the dirty rect to account for antialiasing.
 			if (UseAntialiasing) {
@@ -224,7 +224,7 @@ namespace Pinta.Tools
 
 			doc.Workspace.Invalidate (last_dirty.ToGdkRectangle ());
 			doc.Workspace.Invalidate (dirty.ToGdkRectangle ());
-			
+
 			last_dirty = dirty;
 
 			if (doc.Workspace.PointInCanvas (point))
@@ -237,7 +237,7 @@ namespace Pinta.Tools
 		{
 			return r;
 		}
-		
+
 		protected virtual BaseHistoryItem CreateHistoryItem ()
 		{
 			// NRT - Assumed not-null
@@ -248,11 +248,11 @@ namespace Pinta.Tools
 		#region Protected Methods
 		protected Gdk.Rectangle GetRectangleFromPoints (PointD a, PointD b)
 		{
-			int x = (int)Math.Min (a.X, b.X) - BrushWidth - 2;
-			int y = (int)Math.Min (a.Y, b.Y) - BrushWidth - 2;
-			int w = (int)Math.Max (a.X, b.X) - x + (BrushWidth * 2) + 4;
-			int h = (int)Math.Max (a.Y, b.Y) - y + (BrushWidth * 2) + 4;
-			
+			int x = (int) Math.Min (a.X, b.X) - BrushWidth - 2;
+			int y = (int) Math.Min (a.Y, b.Y) - BrushWidth - 2;
+			int w = (int) Math.Max (a.X, b.X) - x + (BrushWidth * 2) + 4;
+			int h = (int) Math.Max (a.Y, b.Y) - y + (BrushWidth * 2) + 4;
+
 			return new Gdk.Rectangle (x, y, w, h);
 		}
 
