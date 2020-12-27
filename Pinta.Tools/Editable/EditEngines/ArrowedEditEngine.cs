@@ -41,152 +41,17 @@ namespace Pinta.Tools
 		private ToolBarWidget<Gtk.CheckButton> showArrowOneBox = null!, showArrowTwoBox = null!;
 		private bool showOtherArrowOptions;
 
-		private ToolBarComboBox arrowSize = null!;
+		private ToolBarWidget<Gtk.SpinButton> arrowSize = null!;
 		private ToolBarLabel arrowSizeLabel = null!;
-		private ToolBarButton arrowSizeMinus = null!, arrowSizePlus = null!;
 
-		private ToolBarComboBox arrowAngleOffset = null!;
+		private ToolBarWidget<Gtk.SpinButton> arrowAngleOffset = null!;
 		private ToolBarLabel arrowAngleOffsetLabel = null!;
-		private ToolBarButton arrowAngleOffsetMinus = null!, arrowAngleOffsetPlus = null!;
 
-		private ToolBarComboBox arrowLengthOffset = null!;
+		private ToolBarWidget<Gtk.SpinButton> arrowLengthOffset = null!;
 		private ToolBarLabel arrowLengthOffsetLabel = null!;
-		private ToolBarButton arrowLengthOffsetMinus = null!, arrowLengthOffsetPlus = null!;
 
 		private Arrow previousSettings1 = new Arrow();
 		private Arrow previousSettings2 = new Arrow();
-
-
-		#region ToolbarEventHandlers
-
-		void arrowSizeMinus_Clicked(object? sender, EventArgs e)
-		{
-			double newSize = 10d;
-
-			if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-			{
-				--newSize;
-
-				if (newSize < 1d)
-				{
-					newSize = 1d;
-				}
-			}
-			else
-			{
-				newSize = 10d;
-			}
-
-			arrowSize.ComboBox.Entry.Text = newSize.ToString();
-		}
-
-		void arrowSizePlus_Clicked(object? sender, EventArgs e)
-		{
-			double newSize = 10d;
-
-			if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-			{
-				++newSize;
-
-				if (newSize > 100d)
-				{
-					newSize = 100d;
-				}
-			}
-			else
-			{
-				newSize = 10d;
-			}
-
-			arrowSize.ComboBox.Entry.Text = newSize.ToString();
-		}
-
-		void arrowAngleOffsetMinus_Clicked(object? sender, EventArgs e)
-		{
-			double newAngle = 0d;
-
-			if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-			{
-				--newAngle;
-
-				if (newAngle < -89d)
-				{
-					newAngle = -89d;
-				}
-			}
-			else
-			{
-				newAngle = 0d;
-			}
-
-			arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
-		}
-
-		void arrowAngleOffsetPlus_Clicked(object? sender, EventArgs e)
-		{
-			double newAngle = 0d;
-
-			if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-			{
-				++newAngle;
-
-				if (newAngle > 89d)
-				{
-					newAngle = 89d;
-				}
-			}
-			else
-			{
-				newAngle = 0d;
-			}
-
-			arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
-		}
-
-		void arrowLengthOffsetMinus_Clicked(object? sender, EventArgs e)
-		{
-			double newLength = 10d;
-
-			if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-			{
-				--newLength;
-
-				if (newLength < -100d)
-				{
-					newLength = -100d;
-				}
-			}
-			else
-			{
-				newLength = 10d;
-			}
-
-			arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
-		}
-
-		void arrowLengthOffsetPlus_Clicked(object? sender, EventArgs e)
-		{
-			double newLength = 10d;
-
-			if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-			{
-				++newLength;
-
-				if (newLength > 100d)
-				{
-					newLength = 100d;
-				}
-			}
-			else
-			{
-				newLength = 10d;
-			}
-
-			arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
-		}
-
-		#endregion ToolbarEventHandlers
-
 
 		public override void HandleBuildToolBar(Gtk.Toolbar tb)
 		{
@@ -226,34 +91,22 @@ namespace Pinta.Tools
 					if (!showArrowOneBox.Widget.Active && !showArrowTwoBox.Widget.Active) {
 						if (showOtherArrowOptions) {
 							tb.Remove (arrowSizeLabel);
-							tb.Remove (arrowSizeMinus);
 							tb.Remove (arrowSize);
-							tb.Remove (arrowSizePlus);
 							tb.Remove (arrowAngleOffsetLabel);
-							tb.Remove (arrowAngleOffsetMinus);
 							tb.Remove (arrowAngleOffset);
-							tb.Remove (arrowAngleOffsetPlus);
 							tb.Remove (arrowLengthOffsetLabel);
-							tb.Remove (arrowLengthOffsetMinus);
 							tb.Remove (arrowLengthOffset);
-							tb.Remove (arrowLengthOffsetPlus);
 
 							showOtherArrowOptions = false;
 						}
 					} else {
 						if (!showOtherArrowOptions) {
 							tb.Add (arrowSizeLabel);
-							tb.Add (arrowSizeMinus);
 							tb.Add (arrowSize);
-							tb.Add (arrowSizePlus);
 							tb.Add (arrowAngleOffsetLabel);
-							tb.Add (arrowAngleOffsetMinus);
 							tb.Add (arrowAngleOffset);
-							tb.Add (arrowAngleOffsetPlus);
 							tb.Add (arrowLengthOffsetLabel);
-							tb.Add (arrowLengthOffsetMinus);
 							tb.Add (arrowLengthOffset);
-							tb.Add (arrowLengthOffsetPlus);
 
 							showOtherArrowOptions = true;
 						}
@@ -284,34 +137,22 @@ namespace Pinta.Tools
 					if (!showArrowOneBox.Widget.Active && !showArrowTwoBox.Widget.Active) {
 						if (showOtherArrowOptions) {
 							tb.Remove (arrowSizeLabel);
-							tb.Remove (arrowSizeMinus);
 							tb.Remove (arrowSize);
-							tb.Remove (arrowSizePlus);
 							tb.Remove (arrowAngleOffsetLabel);
-							tb.Remove (arrowAngleOffsetMinus);
 							tb.Remove (arrowAngleOffset);
-							tb.Remove (arrowAngleOffsetPlus);
 							tb.Remove (arrowLengthOffsetLabel);
-							tb.Remove (arrowLengthOffsetMinus);
 							tb.Remove (arrowLengthOffset);
-							tb.Remove (arrowLengthOffsetPlus);
 
 							showOtherArrowOptions = false;
 						}
 					} else {
 						if (!showOtherArrowOptions) {
 							tb.Add (arrowSizeLabel);
-							tb.Add (arrowSizeMinus);
 							tb.Add (arrowSize);
-							tb.Add (arrowSizePlus);
 							tb.Add (arrowAngleOffsetLabel);
-							tb.Add (arrowAngleOffsetMinus);
 							tb.Add (arrowAngleOffset);
-							tb.Add (arrowAngleOffsetPlus);
 							tb.Add (arrowLengthOffsetLabel);
-							tb.Add (arrowLengthOffsetMinus);
 							tb.Add (arrowLengthOffset);
-							tb.Add (arrowLengthOffsetPlus);
 
 							showOtherArrowOptions = true;
 						}
@@ -341,77 +182,22 @@ namespace Pinta.Tools
 				arrowSizeLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Size")));
 			}
 
-			if (arrowSizeMinus == null)
-			{
-				arrowSizeMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease arrow size"));
-				arrowSizeMinus.Clicked += new EventHandler(arrowSizeMinus_Clicked);
-			}
+			if (arrowSize == null) {
+				arrowSize = new (new Gtk.SpinButton (1, 100, 1) { Value = 10 });
 
-			if (arrowSize == null)
-			{
-				arrowSize = new ToolBarComboBox(65, 7, true,
-					"3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "18",
-					"20", "25", "30", "40", "50", "60", "70", "80", "90", "100");
+				arrowSize.Widget.ValueChanged += (o, e) => {
+					var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 
-				arrowSize.ComboBox.Changed += (o, e) =>
-				{
-					if (arrowSize.ComboBox.ActiveText.Length < 1)
-					{
-						//Ignore the change until the user enters something.
-						return;
-					}
-					else
-					{
-						double newSize = 10d;
+					if (activeEngine != null) {
+						var size = arrowSize.Widget.Value;
+						activeEngine.Arrow1.ArrowSize = size;
+						activeEngine.Arrow2.ArrowSize = size;
 
-						if (arrowSize.ComboBox.ActiveText == "-")
-						{
-							//The user is trying to enter a negative value: change it to 1.
-							newSize = 1d;
-						}
-						else
-						{
-							if (Double.TryParse(arrowSize.ComboBox.ActiveText, out newSize))
-							{
-								if (newSize < 1d)
-								{
-									//Less than 1: change it to 1.
-									newSize = 1d;
-								}
-								else if (newSize > 100d)
-								{
-									//Greater than 100: change it to 100.
-									newSize = 100d;
-								}
-							}
-							else
-							{
-								//Not a number: wait until the user enters something.
-								return;
-							}
-						}
+						DrawActiveShape (false, false, true, false, false);
 
-						arrowSize.ComboBox.Entry.Text = newSize.ToString();
-
-						LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
-
-						if (activeEngine != null)
-						{
-							activeEngine.Arrow1.ArrowSize = newSize;
-							activeEngine.Arrow2.ArrowSize = newSize;
-
-							DrawActiveShape(false, false, true, false, false);
-
-							StorePreviousSettings();
-						}
+						StorePreviousSettings ();
 					}
 				};
-			}
-
-			if (arrowSizePlus == null)
-			{
-				arrowSizePlus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase arrow size"));
-				arrowSizePlus.Clicked += new EventHandler(arrowSizePlus_Clicked);
 			}
 
 			#endregion Arrow Size
@@ -424,73 +210,22 @@ namespace Pinta.Tools
 				arrowAngleOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Angle")));
 			}
 
-			if (arrowAngleOffsetMinus == null)
-			{
-				arrowAngleOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease angle offset"));
-				arrowAngleOffsetMinus.Clicked += new EventHandler(arrowAngleOffsetMinus_Clicked);
-			}
+			if (arrowAngleOffset == null) {
+				arrowAngleOffset = new (new Gtk.SpinButton (-89, 89, 1) { Value = 15 });
 
-			if (arrowAngleOffset == null)
-			{
-				arrowAngleOffset = new ToolBarComboBox(65, 9, true,
-					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
+				arrowAngleOffset.Widget.ValueChanged += (o, e) => {
 
-				arrowAngleOffset.ComboBox.Changed += (o, e) =>
-				{
-					if (arrowAngleOffset.ComboBox.ActiveText.Length < 1)
-					{
-						//Ignore the change until the user enters something.
-						return;
-					}
-					else if (arrowAngleOffset.ComboBox.ActiveText == "-")
-					{
-						//The user is trying to enter a negative value: ignore the change until the user enters more.
-						return;
-					}
-					else
-					{
-						double newAngle = 15d;
+					var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+					if (activeEngine != null) {
+						var angle = arrowAngleOffset.Widget.Value;
+						activeEngine.Arrow1.AngleOffset = angle;
+						activeEngine.Arrow2.AngleOffset = angle;
 
-						if (Double.TryParse(arrowAngleOffset.ComboBox.ActiveText, out newAngle))
-						{
-							if (newAngle < -89d)
-							{
-								//Less than -89: change it to -89.
-								newAngle = -89d;
-							}
-							else if (newAngle > 89d)
-							{
-								//Greater than 89: change it to 89.
-								newAngle = 89d;
-							}
-						}
-						else
-						{
-							//Not a number: wait until the user enters something.
-							return;
-						}
+						DrawActiveShape (false, false, true, false, false);
 
-						arrowAngleOffset.ComboBox.Entry.Text = newAngle.ToString();
-
-						LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
-
-						if (activeEngine != null)
-						{
-							activeEngine.Arrow1.AngleOffset = newAngle;
-							activeEngine.Arrow2.AngleOffset = newAngle;
-
-							DrawActiveShape(false, false, true, false, false);
-
-							StorePreviousSettings();
-						}
+						StorePreviousSettings ();
 					}
 				};
-			}
-
-			if (arrowAngleOffsetPlus == null)
-			{
-				arrowAngleOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase angle offset"));
-				arrowAngleOffsetPlus.Clicked += new EventHandler(arrowAngleOffsetPlus_Clicked);
 			}
 
 			#endregion Angle Offset
@@ -503,92 +238,35 @@ namespace Pinta.Tools
 				arrowLengthOffsetLabel = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Length")));
 			}
 
-			if (arrowLengthOffsetMinus == null)
-			{
-				arrowLengthOffsetMinus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease length offset"));
-				arrowLengthOffsetMinus.Clicked += new EventHandler(arrowLengthOffsetMinus_Clicked);
-			}
+			if (arrowLengthOffset == null) {
+				arrowLengthOffset = new (new Gtk.SpinButton (-100, 100, 1) { Value = 10 });
 
-			if (arrowLengthOffset == null)
-			{
-				arrowLengthOffset = new ToolBarComboBox(65, 8, true,
-					"-30", "-25", "-20", "-15", "-10", "-5", "0", "5", "10", "15", "20", "25", "30");
+				arrowLengthOffset.Widget.ValueChanged += (o, e) => {
 
-				arrowLengthOffset.ComboBox.Changed += (o, e) =>
-				{
-					if (arrowLengthOffset.ComboBox.ActiveText.Length < 1)
-					{
-						//Ignore the change until the user enters something.
-						return;
-					}
-					else if (arrowLengthOffset.ComboBox.ActiveText == "-")
-					{
-						//The user is trying to enter a negative value: ignore the change until the user enters more.
-						return;
-					}
-					else
-					{
-						double newLength = 10d;
+					var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+					if (activeEngine != null) {
+						var length = arrowLengthOffset.Widget.Value;
+						activeEngine.Arrow1.LengthOffset = length;
+						activeEngine.Arrow2.LengthOffset = length;
 
-						if (Double.TryParse(arrowLengthOffset.ComboBox.ActiveText, out newLength))
-						{
-							if (newLength < -100d)
-							{
-								//Less than -100: change it to -100.
-								newLength = -100d;
-							}
-							else if (newLength > 100d)
-							{
-								//Greater than 100: change it to 100.
-								newLength = 100d;
-							}
-						}
-						else
-						{
-							//Not a number: wait until the user enters something.
-							return;
-						}
+						DrawActiveShape (false, false, true, false, false);
 
-						arrowLengthOffset.ComboBox.Entry.Text = newLength.ToString();
-
-						LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
-
-						if (activeEngine != null)
-						{
-							activeEngine.Arrow1.LengthOffset = newLength;
-							activeEngine.Arrow2.LengthOffset = newLength;
-
-							DrawActiveShape(false, false, true, false, false);
-
-							StorePreviousSettings();
-						}
+						StorePreviousSettings ();
 					}
 				};
 			}
 
-			if (arrowLengthOffsetPlus == null)
-			{
-				arrowLengthOffsetPlus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase length offset"));
-				arrowLengthOffsetPlus.Clicked += new EventHandler(arrowLengthOffsetPlus_Clicked);
-			}
-
 			#endregion Length Offset
 
-			
+
 			if (showOtherArrowOptions)
 			{
 				tb.Add(arrowSizeLabel);
-				tb.Add(arrowSizeMinus);
 				tb.Add(arrowSize);
-				tb.Add(arrowSizePlus);
 				tb.Add(arrowAngleOffsetLabel);
-				tb.Add(arrowAngleOffsetMinus);
 				tb.Add(arrowAngleOffset);
-				tb.Add(arrowAngleOffsetPlus);
 				tb.Add(arrowLengthOffsetLabel);
-				tb.Add(arrowLengthOffsetMinus);
 				tb.Add(arrowLengthOffset);
-				tb.Add(arrowLengthOffsetPlus);
 			}
 		}
 
@@ -609,15 +287,12 @@ namespace Pinta.Tools
 				newEngine.Arrow1.Show = showArrowOneBox.Widget.Active;
 				newEngine.Arrow2.Show = showArrowTwoBox.Widget.Active;
 
-				Double.TryParse(arrowSize.ComboBox.Entry.Text, out newEngine.Arrow1.ArrowSize);
-				Double.TryParse(arrowAngleOffset.ComboBox.Entry.Text, out newEngine.Arrow1.AngleOffset);
-				Double.TryParse(arrowLengthOffset.ComboBox.Entry.Text, out newEngine.Arrow1.LengthOffset);
+				newEngine.Arrow1.ArrowSize = arrowSize.Widget.Value;
+				newEngine.Arrow1.AngleOffset = arrowAngleOffset.Widget.Value;
+				newEngine.Arrow1.LengthOffset = arrowLengthOffset.Widget.Value;
 
-				newEngine.Arrow1.ArrowSize = Utility.Clamp(newEngine.Arrow1.ArrowSize, 1d, 100d);
 				newEngine.Arrow2.ArrowSize = newEngine.Arrow1.ArrowSize;
-				newEngine.Arrow1.AngleOffset = Utility.Clamp(newEngine.Arrow1.AngleOffset, -89d, 89d);
 				newEngine.Arrow2.AngleOffset = newEngine.Arrow1.AngleOffset;
-				newEngine.Arrow1.LengthOffset = Utility.Clamp(newEngine.Arrow1.LengthOffset, -100d, 100d);
 				newEngine.Arrow2.LengthOffset = newEngine.Arrow1.LengthOffset;
 			}
 		}
@@ -636,9 +311,9 @@ namespace Pinta.Tools
 					
 					if (showOtherArrowOptions)
 					{
-						arrowSize.ComboBox.Entry.Text = lCSEngine.Arrow1.ArrowSize.ToString();
-						arrowAngleOffset.ComboBox.Entry.Text = lCSEngine.Arrow1.AngleOffset.ToString();
-						arrowLengthOffset.ComboBox.Entry.Text = lCSEngine.Arrow1.LengthOffset.ToString();
+						arrowSize.Widget.Value = lCSEngine.Arrow1.ArrowSize;
+						arrowAngleOffset.Widget.Value = lCSEngine.Arrow1.AngleOffset;
+						arrowLengthOffset.Widget.Value = lCSEngine.Arrow1.LengthOffset;
 					}
 				}
 
@@ -655,9 +330,9 @@ namespace Pinta.Tools
 
 				if (showOtherArrowOptions)
 				{
-					arrowSize.ComboBox.Entry.Text = previousSettings1.ArrowSize.ToString();
-					arrowAngleOffset.ComboBox.Entry.Text = previousSettings1.AngleOffset.ToString();
-					arrowLengthOffset.ComboBox.Entry.Text = previousSettings1.LengthOffset.ToString();
+					arrowSize.Widget.Value = previousSettings1.ArrowSize;
+					arrowAngleOffset.Widget.Value = previousSettings1.AngleOffset;
+					arrowLengthOffset.Widget.Value = previousSettings1.LengthOffset;
 				}
 			}
 
@@ -671,9 +346,9 @@ namespace Pinta.Tools
 				previousSettings1.Show = showArrowOneBox.Widget.Active;
 				previousSettings2.Show = showArrowTwoBox.Widget.Active;
 
-				Double.TryParse(arrowSize.ComboBox.Entry.Text, out previousSettings1.ArrowSize);
-				Double.TryParse(arrowAngleOffset.ComboBox.Entry.Text, out previousSettings1.AngleOffset);
-				Double.TryParse(arrowLengthOffset.ComboBox.Entry.Text, out previousSettings1.LengthOffset);
+				previousSettings1.ArrowSize = arrowSize.Widget.Value;
+				previousSettings1.AngleOffset = arrowAngleOffset.Widget.Value;
+				previousSettings1.LengthOffset = arrowLengthOffset.Widget.Value;
 
 				//Other Arrow2 settings are unnecessary since they are the same as Arrow1's.
 			}

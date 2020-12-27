@@ -75,10 +75,8 @@ namespace Pinta.Tools
 		}
 
 	// NRT - Created by HandleBuildToolBar
-        protected ToolBarComboBox brush_width = null!;
+        protected ToolBarWidget<Gtk.SpinButton> brush_width = null!;
         protected ToolBarLabel brush_width_label = null!;
-        protected ToolBarButton brush_width_minus = null!;
-        protected ToolBarButton brush_width_plus = null!;
         protected ToolBarLabel fill_label = null!;
         protected ToolBarDropDownButton fill_button = null!;
         protected Gtk.SeparatorToolItem fill_sep = null!;
@@ -92,38 +90,13 @@ namespace Pinta.Tools
 
 		private bool prev_antialiasing = true;
 
-        public int BrushWidth
-        {
-            get
-            {
-				if (brush_width != null)
-				{
-					int width;
-
-					if (Int32.TryParse(brush_width.ComboBox.ActiveText, out width))
-					{
-						if (width > 0)
-						{
-							brush_width.ComboBox.Entry.Text = width.ToString();
-
-							return width;
-						}
-					}
-
-					brush_width.ComboBox.Entry.Text = BaseTool.DEFAULT_BRUSH_WIDTH.ToString();
-				}
-
-                return BaseTool.DEFAULT_BRUSH_WIDTH;
-            }
-            
-			set
-			{
-				if (brush_width != null)
-				{
-					brush_width.ComboBox.Entry.Text = value.ToString();
-				}
+		public int BrushWidth {
+			get => brush_width?.Widget.ValueAsInt ?? BaseTool.DEFAULT_BRUSH_WIDTH;
+			set {
+				if (brush_width is not null)
+					brush_width.Widget.Value = value;
 			}
-        }
+		}
 
 		private int prev_brush_width = BaseTool.DEFAULT_BRUSH_WIDTH;
 
@@ -291,20 +264,11 @@ namespace Pinta.Tools
 
             tb.AppendItem(brush_width_label);
 
-            if (brush_width_minus == null)
-            {
-                brush_width_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease brush size"));
-                brush_width_minus.Clicked += BrushMinusButtonClickedEvent;
-            }
-
-            tb.AppendItem(brush_width_minus);
-
 			if (brush_width == null)
 			{
-				brush_width = new ToolBarComboBox(65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
-					"10", "11", "12", "13", "14", "15", "20", "25", "30", "35", "40", "45", "50", "55");
+				brush_width = new (new Gtk.SpinButton (1, 1e5, 1) { Value = BaseTool.DEFAULT_BRUSH_WIDTH });
 
-				brush_width.ComboBox.Changed += (o, e) =>
+				brush_width.Widget.ValueChanged += (o, e) =>
 				{
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
@@ -318,14 +282,6 @@ namespace Pinta.Tools
 			}
 
             tb.AppendItem(brush_width);
-
-            if (brush_width_plus == null)
-            {
-                brush_width_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase brush size"));
-                brush_width_plus.Clicked += BrushPlusButtonClickedEvent;
-            }
-
-            tb.AppendItem(brush_width_plus);
 
             if (fill_sep == null)
                 fill_sep = new Gtk.SeparatorToolItem();

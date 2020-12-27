@@ -48,53 +48,25 @@ namespace Pinta.Tools
 		protected double previousRadius = DefaultRadius;
 
 		// NRT - Created in HandleBuildToolBar
-		protected ToolBarComboBox radius = null!;
+		protected ToolBarWidget<Gtk.SpinButton> radius = null!;
 		protected ToolBarLabel radius_label = null!;
-		protected ToolBarButton radius_minus = null!;
-		protected ToolBarButton radius_plus = null!;
 		protected Gtk.SeparatorToolItem radius_sep = null!;
 
 		public double Radius
 		{
 			get
 			{
-				double rad;
-
 				if (radius != null)
-				{
-					if (Double.TryParse(radius.ComboBox.ActiveText, out rad))
-					{
-						if (rad >= 0)
-						{
-							radius.ComboBox.Entry.Text = rad.ToString();
-
-							return rad;
-						}
-						else
-						{
-							radius.ComboBox.Entry.Text = BrushWidth.ToString();
-
-							return BrushWidth;
-						}
-					}
-					else
-					{
-						radius.ComboBox.Entry.Text = BrushWidth.ToString();
-
-						return BrushWidth;
-					}
-				}
+					return radius.Widget.Value;
 				else
-				{
 					return BrushWidth;
-				}
 			}
 
 			set
 			{
 				if (radius != null)
 				{
-					radius.ComboBox.Entry.Text = value.ToString();
+					radius.Widget.Value = value;
 
 					ShapeEngine? selEngine = SelectedShapeEngine;
 
@@ -126,21 +98,11 @@ namespace Pinta.Tools
 
 			tb.AppendItem(radius_label);
 
-			if (radius_minus == null)
-			{
-				radius_minus = new ToolBarButton("Toolbar.MinusButton.png", "", Translations.GetString("Decrease shape's corner radius"));
-				radius_minus.Clicked += RadiusMinusButtonClickedEvent;
-			}
-
-			tb.AppendItem(radius_minus);
-
 			if (radius == null)
 			{
-				radius = new ToolBarComboBox(65, 16, true, "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "11", "12", "13", "14", "15", "20", "25", "30", "40",
-				"50", "60", "70", "80");
+				radius = new (new Gtk.SpinButton (0, 1e5, 1) { Value = 20 });
 
-				radius.ComboBox.Changed += (o, e) =>
+				radius.Widget.ValueChanged += (o, e) =>
 				{
 					//Go through the Get/Set routine.
 					Radius = Radius;
@@ -148,27 +110,6 @@ namespace Pinta.Tools
 			}
 
 			tb.AppendItem(radius);
-
-			if (radius_plus == null)
-			{
-				radius_plus = new ToolBarButton("Toolbar.PlusButton.png", "", Translations.GetString("Increase shape's corner radius"));
-				radius_plus.Clicked += RadiusPlusButtonClickedEvent;
-			}
-
-			tb.AppendItem(radius_plus);
-		}
-
-		private void RadiusMinusButtonClickedEvent(object? o, EventArgs args)
-		{
-			if (Math.Truncate(Radius) > 0)
-			{
-				Radius = Math.Truncate(Radius) - 1;
-			}
-		}
-
-		private void RadiusPlusButtonClickedEvent(object? o, EventArgs args)
-		{
-			Radius = Math.Truncate(Radius) + 1;
 		}
 
 

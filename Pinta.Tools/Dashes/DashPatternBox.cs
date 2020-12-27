@@ -77,7 +77,7 @@ namespace Pinta.Tools
 
 			if (comboBox == null)
 			{
-				comboBox = new ToolBarComboBox(100, 0, true,
+				comboBox = new ToolBarComboBox(50, 0, true,
 					"-", " -", " --", " ---", "  -", "   -", " - --", " - - --------", " - - ---- - ----");
 			}
 
