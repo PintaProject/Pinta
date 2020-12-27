@@ -38,7 +38,7 @@ namespace Pinta.Tools
 		// NRT - These are all set by HandleBuildToolBar
 		private Gtk.SeparatorToolItem arrowSep = null!;
 		private ToolBarLabel arrowLabel = null!;
-		private Gtk.CheckButton showArrowOneBox = null!, showArrowTwoBox = null!;
+		private ToolBarWidget<Gtk.CheckButton> showArrowOneBox = null!, showArrowTwoBox = null!;
 		private bool showOtherArrowOptions;
 
 		private ToolBarComboBox arrowSize = null!;
@@ -217,130 +217,119 @@ namespace Pinta.Tools
 
 			//Show arrow 1.
 
-			showArrowOneBox = new Gtk.CheckButton("1");
-			showArrowOneBox.Active = previousSettings1.Show;
+			if (showArrowOneBox == null) {
+				showArrowOneBox = new (new Gtk.CheckButton ("1"));
+				showArrowOneBox.Widget.Active = previousSettings1.Show;
 
-			showArrowOneBox.Toggled += (o, e) =>
-			{
-				//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
-				if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
-				{
-					if (showOtherArrowOptions)
-					{
-						tb.Remove(arrowSizeLabel);
-						tb.Remove(arrowSizeMinus);
-						tb.Remove(arrowSize);
-						tb.Remove(arrowSizePlus);
-						tb.Remove(arrowAngleOffsetLabel);
-						tb.Remove(arrowAngleOffsetMinus);
-						tb.Remove(arrowAngleOffset);
-						tb.Remove(arrowAngleOffsetPlus);
-						tb.Remove(arrowLengthOffsetLabel);
-						tb.Remove(arrowLengthOffsetMinus);
-						tb.Remove(arrowLengthOffset);
-						tb.Remove(arrowLengthOffsetPlus);
+				showArrowOneBox.Widget.Toggled += (o, e) => {
+					//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
+					if (!showArrowOneBox.Widget.Active && !showArrowTwoBox.Widget.Active) {
+						if (showOtherArrowOptions) {
+							tb.Remove (arrowSizeLabel);
+							tb.Remove (arrowSizeMinus);
+							tb.Remove (arrowSize);
+							tb.Remove (arrowSizePlus);
+							tb.Remove (arrowAngleOffsetLabel);
+							tb.Remove (arrowAngleOffsetMinus);
+							tb.Remove (arrowAngleOffset);
+							tb.Remove (arrowAngleOffsetPlus);
+							tb.Remove (arrowLengthOffsetLabel);
+							tb.Remove (arrowLengthOffsetMinus);
+							tb.Remove (arrowLengthOffset);
+							tb.Remove (arrowLengthOffsetPlus);
 
-						showOtherArrowOptions = false;
+							showOtherArrowOptions = false;
+						}
+					} else {
+						if (!showOtherArrowOptions) {
+							tb.Add (arrowSizeLabel);
+							tb.Add (arrowSizeMinus);
+							tb.Add (arrowSize);
+							tb.Add (arrowSizePlus);
+							tb.Add (arrowAngleOffsetLabel);
+							tb.Add (arrowAngleOffsetMinus);
+							tb.Add (arrowAngleOffset);
+							tb.Add (arrowAngleOffsetPlus);
+							tb.Add (arrowLengthOffsetLabel);
+							tb.Add (arrowLengthOffsetMinus);
+							tb.Add (arrowLengthOffset);
+							tb.Add (arrowLengthOffsetPlus);
+
+							showOtherArrowOptions = true;
+						}
 					}
-				}
-				else
-				{
-					if (!showOtherArrowOptions)
-					{
-						tb.Add(arrowSizeLabel);
-						tb.Add(arrowSizeMinus);
-						tb.Add(arrowSize);
-						tb.Add(arrowSizePlus);
-						tb.Add(arrowAngleOffsetLabel);
-						tb.Add(arrowAngleOffsetMinus);
-						tb.Add(arrowAngleOffset);
-						tb.Add(arrowAngleOffsetPlus);
-						tb.Add(arrowLengthOffsetLabel);
-						tb.Add(arrowLengthOffsetMinus);
-						tb.Add(arrowLengthOffset);
-						tb.Add(arrowLengthOffsetPlus);
 
-						showOtherArrowOptions = true;
+					LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+
+					if (activeEngine != null) {
+						activeEngine.Arrow1.Show = showArrowOneBox.Widget.Active;
+
+						DrawActiveShape (false, false, true, false, false);
+
+						StorePreviousSettings ();
 					}
-				}
+				};
+			}
 
-				LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
-
-				if (activeEngine != null)
-				{
-					activeEngine.Arrow1.Show = showArrowOneBox.Active;
-
-					DrawActiveShape(false, false, true, false, false);
-
-					StorePreviousSettings();
-				}
-			};
-
-			tb.AppendWidgetItem(showArrowOneBox);
+			tb.AppendItem(showArrowOneBox);
 
 
 			//Show arrow 2.
+			if (showArrowTwoBox == null) {
+				showArrowTwoBox = new (new Gtk.CheckButton ("2"));
+				showArrowTwoBox.Widget.Active = previousSettings2.Show;
 
-			showArrowTwoBox = new Gtk.CheckButton("2");
-			showArrowTwoBox.Active = previousSettings2.Show;
+				showArrowTwoBox.Widget.Toggled += (o, e) => {
+					//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
+					if (!showArrowOneBox.Widget.Active && !showArrowTwoBox.Widget.Active) {
+						if (showOtherArrowOptions) {
+							tb.Remove (arrowSizeLabel);
+							tb.Remove (arrowSizeMinus);
+							tb.Remove (arrowSize);
+							tb.Remove (arrowSizePlus);
+							tb.Remove (arrowAngleOffsetLabel);
+							tb.Remove (arrowAngleOffsetMinus);
+							tb.Remove (arrowAngleOffset);
+							tb.Remove (arrowAngleOffsetPlus);
+							tb.Remove (arrowLengthOffsetLabel);
+							tb.Remove (arrowLengthOffsetMinus);
+							tb.Remove (arrowLengthOffset);
+							tb.Remove (arrowLengthOffsetPlus);
 
-			showArrowTwoBox.Toggled += (o, e) =>
-			{
-				//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
-				if (!showArrowOneBox.Active && !showArrowTwoBox.Active)
-				{
-					if (showOtherArrowOptions)
-					{
-						tb.Remove(arrowSizeLabel);
-						tb.Remove(arrowSizeMinus);
-						tb.Remove(arrowSize);
-						tb.Remove(arrowSizePlus);
-						tb.Remove(arrowAngleOffsetLabel);
-						tb.Remove(arrowAngleOffsetMinus);
-						tb.Remove(arrowAngleOffset);
-						tb.Remove(arrowAngleOffsetPlus);
-						tb.Remove(arrowLengthOffsetLabel);
-						tb.Remove(arrowLengthOffsetMinus);
-						tb.Remove(arrowLengthOffset);
-						tb.Remove(arrowLengthOffsetPlus);
+							showOtherArrowOptions = false;
+						}
+					} else {
+						if (!showOtherArrowOptions) {
+							tb.Add (arrowSizeLabel);
+							tb.Add (arrowSizeMinus);
+							tb.Add (arrowSize);
+							tb.Add (arrowSizePlus);
+							tb.Add (arrowAngleOffsetLabel);
+							tb.Add (arrowAngleOffsetMinus);
+							tb.Add (arrowAngleOffset);
+							tb.Add (arrowAngleOffsetPlus);
+							tb.Add (arrowLengthOffsetLabel);
+							tb.Add (arrowLengthOffsetMinus);
+							tb.Add (arrowLengthOffset);
+							tb.Add (arrowLengthOffsetPlus);
 
-						showOtherArrowOptions = false;
+							showOtherArrowOptions = true;
+						}
 					}
-				}
-				else
-				{
-					if (!showOtherArrowOptions)
-					{
-						tb.Add(arrowSizeLabel);
-						tb.Add(arrowSizeMinus);
-						tb.Add(arrowSize);
-						tb.Add(arrowSizePlus);
-						tb.Add(arrowAngleOffsetLabel);
-						tb.Add(arrowAngleOffsetMinus);
-						tb.Add(arrowAngleOffset);
-						tb.Add(arrowAngleOffsetPlus);
-						tb.Add(arrowLengthOffsetLabel);
-						tb.Add(arrowLengthOffsetMinus);
-						tb.Add(arrowLengthOffset);
-						tb.Add(arrowLengthOffsetPlus);
 
-						showOtherArrowOptions = true;
+					LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
+
+					if (activeEngine != null) {
+						activeEngine.Arrow2.Show = showArrowTwoBox.Widget.Active;
+
+						DrawActiveShape (false, false, true, false, false);
+
+						StorePreviousSettings ();
 					}
-				}
+				};
+			}
 
-				LineCurveSeriesEngine? activeEngine = (LineCurveSeriesEngine?)ActiveShapeEngine;
-
-				if (activeEngine != null)
-				{
-					activeEngine.Arrow2.Show = showArrowTwoBox.Active;
-
-					DrawActiveShape(false, false, true, false, false);
-
-					StorePreviousSettings();
-				}
-			};
-
-			tb.AppendWidgetItem(showArrowTwoBox);
+			tb.AppendItem (showArrowTwoBox);
 
 			#endregion Show Arrows
 
@@ -617,8 +606,8 @@ namespace Pinta.Tools
 		{
 			if (showArrowOneBox != null)
 			{
-				newEngine.Arrow1.Show = showArrowOneBox.Active;
-				newEngine.Arrow2.Show = showArrowTwoBox.Active;
+				newEngine.Arrow1.Show = showArrowOneBox.Widget.Active;
+				newEngine.Arrow2.Show = showArrowTwoBox.Widget.Active;
 
 				Double.TryParse(arrowSize.ComboBox.Entry.Text, out newEngine.Arrow1.ArrowSize);
 				Double.TryParse(arrowAngleOffset.ComboBox.Entry.Text, out newEngine.Arrow1.AngleOffset);
@@ -642,8 +631,8 @@ namespace Pinta.Tools
 				{
 					LineCurveSeriesEngine lCSEngine = (LineCurveSeriesEngine)engine;
 
-					showArrowOneBox.Active = lCSEngine.Arrow1.Show;
-					showArrowTwoBox.Active = lCSEngine.Arrow2.Show;
+					showArrowOneBox.Widget.Active = lCSEngine.Arrow1.Show;
+					showArrowTwoBox.Widget.Active = lCSEngine.Arrow2.Show;
 					
 					if (showOtherArrowOptions)
 					{
@@ -661,8 +650,8 @@ namespace Pinta.Tools
 		{
 			if (showArrowOneBox != null)
 			{
-				showArrowOneBox.Active = previousSettings1.Show;
-				showArrowTwoBox.Active = previousSettings2.Show;
+				showArrowOneBox.Widget.Active = previousSettings1.Show;
+				showArrowTwoBox.Widget.Active = previousSettings2.Show;
 
 				if (showOtherArrowOptions)
 				{
@@ -679,8 +668,8 @@ namespace Pinta.Tools
 		{
 			if (showArrowOneBox != null)
 			{
-				previousSettings1.Show = showArrowOneBox.Active;
-				previousSettings2.Show = showArrowTwoBox.Active;
+				previousSettings1.Show = showArrowOneBox.Widget.Active;
+				previousSettings2.Show = showArrowTwoBox.Widget.Active;
 
 				Double.TryParse(arrowSize.ComboBox.Entry.Text, out previousSettings1.ArrowSize);
 				Double.TryParse(arrowAngleOffset.ComboBox.Entry.Text, out previousSettings1.AngleOffset);

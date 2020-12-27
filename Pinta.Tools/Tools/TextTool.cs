@@ -119,7 +119,7 @@ namespace Pinta.Tools
 #region ToolBar
 		// NRT - Created by OnBuildToolBar
 		private ToolBarLabel font_label = null!;
-		private FontButton font_button = null!;
+		private ToolBarWidget<FontButton> font_button = null!;
 		private ToolBarToggleButton bold_btn = null!;
 		private ToolBarToggleButton italic_btn = null!;
 		private ToolBarToggleButton underscore_btn = null!;
@@ -130,10 +130,8 @@ namespace Pinta.Tools
 		private ToolBarDropDownButton fill_button = null!;
 		private SeparatorToolItem fill_sep = null!;
 		private SeparatorToolItem outline_sep = null!;
-		private ToolBarComboBox outline_width = null!;
+		private ToolBarWidget<SpinButton> outline_width = null!;
 		private ToolBarLabel outline_width_label = null!;
-		private ToolBarButton outline_width_minus = null!;
-		private ToolBarButton outline_width_plus = null!;
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -145,14 +143,14 @@ namespace Pinta.Tools
 			tb.AppendItem (font_label);
 
 			if (font_button == null) {
-				font_button = new FontButton () { ShowStyle = true, ShowSize = true, UseFont = true };
+				font_button = new (new FontButton () { ShowStyle = true, ShowSize = true, UseFont = true });
 				// Default to Arial if possible.
-				font_button.Font = "Arial 12";
+				font_button.Widget.Font = "Arial 12";
 
-				font_button.FontSet += HandleFontChanged;
+				font_button.Widget.FontSet += HandleFontChanged;
 			}
 
-			tb.AppendWidgetItem (font_button);
+			tb.AppendItem (font_button);
 
 			tb.AppendItem (new SeparatorToolItem ());
 
@@ -234,32 +232,14 @@ namespace Pinta.Tools
 
 			tb.AppendItem (outline_width_label);
 
-			if (outline_width_minus == null) {
-				outline_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Translations.GetString ("Decrease outline size"));
-				outline_width_minus.Clicked += MinusButtonClickedEvent;
-			}
-
-			tb.AppendItem (outline_width_minus);
-
 			if (outline_width == null) {
-				outline_width = new ToolBarComboBox (65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
-						"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
-						"40", "45", "50", "55");
-
-				outline_width.ComboBox.Changed += HandleFontChanged;
+				outline_width = new (new SpinButton (1, 1e5, 1) { Value = 2 });
+				outline_width.Widget.ValueChanged += HandleFontChanged;
 			}
 
 			tb.AppendItem (outline_width);
 
-			if (outline_width_plus == null) {
-				outline_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Translations.GetString ("Increase outline size"));
-				outline_width_plus.Clicked += PlusButtonClickedEvent;
-			}
-
-			tb.AppendItem (outline_width_plus);
-
-			outline_width_plus.Visible = outline_width_minus.Visible = outline_width.Visible
-				= outline_width_label.Visible = outline_sep.Visible = StrokeText;
+			outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
 			UpdateFont ();
 
@@ -345,8 +325,7 @@ namespace Pinta.Tools
 
 		private void HandleBoldButtonToggled (object? sender, EventArgs e)
 		{
-			outline_width_plus.Visible = outline_width_minus.Visible = outline_width.Visible
-				= outline_width_label.Visible = outline_sep.Visible = StrokeText;
+			outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
 			UpdateFont ();
 		}
@@ -359,7 +338,7 @@ namespace Pinta.Tools
 		private void UpdateFont ()
 		{
 			if (PintaCore.Workspace.HasOpenDocuments) {
-				var font = font_button.FontDesc.Copy ();
+				var font = font_button.Widget.FontDesc.Copy ();
 				font.Weight = bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal;
 				font.Style = italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal;
 
@@ -370,31 +349,7 @@ namespace Pinta.Tools
 				RedrawText (true, true);
 		}
 
-		protected virtual void MinusButtonClickedEvent (object? o, EventArgs args)
-		{
-			if (OutlineWidth > 1)
-				OutlineWidth--;
-		}
-
-		protected virtual void PlusButtonClickedEvent (object? o, EventArgs args)
-		{
-			OutlineWidth++;
-		}
-
-		protected int OutlineWidth {
-			get {
-				int width;
-				if (Int32.TryParse (outline_width.ComboBox.ActiveText, out width)) {
-					if (width > 0) {
-						outline_width.ComboBox.Entry.Text = width.ToString ();
-						return width;
-					}
-				}
-				outline_width.ComboBox.Entry.Text = "2";
-				return 2;
-			}
-			set { outline_width.ComboBox.Entry.Text = value.ToString (); }
-		}
+		private int OutlineWidth => outline_width.Widget.ValueAsInt;
 
 		protected bool StrokeText { get { return (fill_button.SelectedItem.GetTagOrDefault (0) >= 1 && fill_button.SelectedItem.GetTagOrDefault (0) != 3); } }
 		protected bool FillText { get { return fill_button.SelectedItem.GetTagOrDefault (0) <= 1 || fill_button.SelectedItem.GetTagOrDefault (0) == 3; } }

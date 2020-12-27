@@ -35,37 +35,16 @@ namespace Pinta.Tools
 	public class BaseBrushTool : BaseTool
 	{
 		// NRT - Created in OnBuildToolBar
-		protected ToolBarComboBox brush_width = null!;
+		protected ToolBarWidget<SpinButton> brush_width = null!;
 		protected ToolBarLabel brush_width_label = null!;
-		protected ToolBarButton brush_width_minus = null!;
-		protected ToolBarButton brush_width_plus = null!;
 		
 		protected ImageSurface? undo_surface;
 		protected bool surface_modified;
 		protected uint mouse_button;
 
 		protected override bool ShowAntialiasingButton { get { return true; } }
-	    
-		public virtual int BrushWidth { 
-			get { 
-				int width;
-				if (brush_width != null)
-				{
-					if (Int32.TryParse(brush_width.ComboBox.ActiveText, out width))
-					{
-						if (width > 0)
-						{
-							brush_width.ComboBox.Entry.Text = width.ToString();
-							return width;
-						}
-					}
 
-					brush_width.ComboBox.Entry.Text = DEFAULT_BRUSH_WIDTH.ToString();
-				}
-				return DEFAULT_BRUSH_WIDTH;
-			}
-			set { brush_width.ComboBox.Entry.Text = value.ToString (); }
-		}
+		public int BrushWidth => brush_width?.Widget.ValueAsInt ?? DEFAULT_BRUSH_WIDTH;
 		
 		#region ToolBar
 		protected override void OnBuildToolBar (Toolbar tb)
@@ -76,38 +55,12 @@ namespace Pinta.Tools
 				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Brush width")));
 			
 			tb.AppendItem (brush_width_label);
-	
-			if (brush_width_minus == null) {
-				brush_width_minus = new ToolBarButton ("Toolbar.MinusButton.png", "", Translations.GetString ("Decrease brush size"));
-				brush_width_minus.Clicked += MinusButtonClickedEvent;
+
+			if (brush_width == null) {
+				brush_width = new (new SpinButton (1, 1e5, 1) { Value = DEFAULT_BRUSH_WIDTH });
 			}
-			
-			tb.AppendItem (brush_width_minus);
-		
-			if (brush_width == null)
-				brush_width = new ToolBarComboBox (65, 1, true, "1", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
-				"40", "45", "50", "55");
-			
+
 			tb.AppendItem (brush_width);
-			
-			if (brush_width_plus == null) {
-				brush_width_plus = new ToolBarButton ("Toolbar.PlusButton.png", "", Translations.GetString ("Increase brush size"));
-				brush_width_plus.Clicked += PlusButtonClickedEvent;
-			}
-			
-			tb.AppendItem (brush_width_plus);
-		}
-		
-		protected virtual void MinusButtonClickedEvent (object? o, EventArgs args)
-		{
-			if (BrushWidth > 1)
-				BrushWidth--;
-		}
-		
-		protected virtual void PlusButtonClickedEvent (object? o, EventArgs args)
-		{
-			BrushWidth++;
 		}
 		#endregion
 		

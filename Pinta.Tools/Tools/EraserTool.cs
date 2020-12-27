@@ -197,7 +197,7 @@ namespace Pinta.Tools
             tb.AppendItem (label_type);
             tb.AppendItem (comboBox_type);
             // Change the cursor when the BrushWidth is changed.
-            brush_width.ComboBox.Changed += (sender, e) => SetCursor (DefaultCursor);
+            brush_width.Widget.ValueChanged += (sender, e) => SetCursor (DefaultCursor);
         }
 
         #region Properties
