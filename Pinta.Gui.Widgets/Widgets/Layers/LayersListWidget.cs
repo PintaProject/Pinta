@@ -40,6 +40,7 @@ namespace Pinta.Gui.Widgets
 		private TreeView tree;
 		private TreeStore store;
 		private Document? active_document;
+		private bool updating_model;
 
 		// For the active layer, we also draw the selection layer on top of it,
 		// so we can't directly use that layer's surface.
@@ -139,28 +140,41 @@ namespace Pinta.Gui.Widgets
 			var path = new TreePath (new int[] { layerIndex });
 			tree.Selection.SelectPath (path);
 		}
-		
+
 		private void HandleLayerSelected (object? o, EventArgs e)
 		{
+			if (updating_model)
+				return;
+
+			updating_model = true;
+
 			var doc = PintaCore.Workspace.ActiveDocument;
-			var layer = GetSelectedLayerInTreeView ();			
+			var layer = GetSelectedLayerInTreeView ();
 
 			if (doc.Layers.CurrentUserLayer != layer && layer != null)
 				doc.Layers.SetCurrentUserLayer (layer);
+
+			updating_model = false;
 		}
-		
+
 		private void LayerVisibilityToggled (object? o, ToggledArgs args)
 		{
-			TreeIter iter;		
-			if (store.GetIter (out iter, new TreePath (args.Path))) {
-				bool b = (bool) store.GetValue (iter, store_index_visibility);				
-				store.SetValue(iter, store_index_visibility, !b);
+			if (updating_model)
+				return;
 
-				var layer = (UserLayer)store.GetValue(iter, store_index_layer);
+			updating_model = true;
+
+			if (store.GetIter (out var iter, new TreePath (args.Path))) {
+				bool b = (bool) store.GetValue (iter, store_index_visibility);
+				store.SetValue (iter, store_index_visibility, !b);
+
+				var layer = (UserLayer) store.GetValue (iter, store_index_layer);
 				SetLayerVisibility (layer, !b);
 			}
+
+			updating_model = false;
 		}
-		
+
 		private void HandleHistoryItemAdded (object? sender, EventArgs e)
 		{	
 			// TODO: Handle this more efficiently.
