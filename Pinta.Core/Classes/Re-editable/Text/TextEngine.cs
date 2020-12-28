@@ -545,22 +545,6 @@ namespace Pinta.Core
 				handler (this, EventArgs.Empty);
 		}
 
-		private string GetText (TextPosition startPos, int len)
-		{
-			StringBuilder strbld = new StringBuilder ();
-
-			TextPosition start = TextPosition.Min (currentPos, selectionStart);
-			TextPosition end = TextPosition.Max (currentPos, selectionStart);
-			ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
-				if (endpos - strpos > 0)
-					strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
-				else if (endpos == strpos)
-					strbld.AppendLine ();
-			});
-			strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
-			return strbld.ToString ();
-		}
-
 		private void DeleteSelection ()
 		{
 			TextPosition start = TextPosition.Min (currentPos, selectionStart);
