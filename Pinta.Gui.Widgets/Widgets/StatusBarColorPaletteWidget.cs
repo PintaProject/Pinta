@@ -79,8 +79,10 @@ namespace Pinta.Gui.Widgets
 					break;
 				case WidgetElement.SwapColors:
 					var temp = PintaCore.Palette.PrimaryColor;
-					PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
-					PintaCore.Palette.SecondaryColor = temp;
+
+					// Swapping should not trigger adding colors to recently used palette
+					PintaCore.Palette.SetColor (true, PintaCore.Palette.SecondaryColor, false);
+					PintaCore.Palette.SetColor (false, temp, false);
 
 					break;
 				case WidgetElement.ResetColors:
