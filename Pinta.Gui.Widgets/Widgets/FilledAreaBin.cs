@@ -1,4 +1,4 @@
-﻿// 
+// 
 // FilledAreaBin.cs
 //  
 // Author:
@@ -30,44 +30,44 @@ using Gtk;
 
 namespace Pinta.Gui.Widgets
 {
-    public class FilledAreaBin : Bin
-    {
-        private Widget? child;
+	public class FilledAreaBin : Bin
+	{
+		private Widget? child;
 
-        protected override void OnAdded (Widget widget)
-        {
-            base.OnAdded (widget);
-            child = widget;
-        }
+		protected override void OnAdded (Widget widget)
+		{
+			base.OnAdded (widget);
+			child = widget;
+		}
 
-        protected override void OnRemoved (Widget widget)
-        {
-            base.OnRemoved (widget);
-            child = null;
-        }
+		protected override void OnRemoved (Widget widget)
+		{
+			base.OnRemoved (widget);
+			child = null;
+		}
 
-        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
-        {
-            if (child != null)
-                child.GetPreferredHeight(out minimum_height, out natural_height);
-            else
-                base.OnGetPreferredHeight(out minimum_height, out natural_height);
-        }
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			if (child != null)
+				child.GetPreferredHeight (out minimum_height, out natural_height);
+			else
+				base.OnGetPreferredHeight (out minimum_height, out natural_height);
+		}
 
-        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
-        {
-            if (child != null)
-                child.GetPreferredWidth(out minimum_width, out natural_width);
-            else
-                base.OnGetPreferredWidth(out minimum_width, out natural_width);
-        }
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			if (child != null)
+				child.GetPreferredWidth (out minimum_width, out natural_width);
+			else
+				base.OnGetPreferredWidth (out minimum_width, out natural_width);
+		}
 
-        protected override void OnSizeAllocated (Rectangle allocation)
-        {
-            base.OnSizeAllocated (allocation);
+		protected override void OnSizeAllocated (Rectangle allocation)
+		{
+			base.OnSizeAllocated (allocation);
 
-            if (child != null)
-                child.SetAllocation(allocation);
-        }
-    }
+			if (child != null)
+				child.SetAllocation (allocation);
+		}
+	}
 }

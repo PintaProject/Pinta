@@ -14,17 +14,16 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem (true)]
 	public class AnglePickerWidget : FilledAreaBin
-    {
-        private AnglePickerGraphic anglepickergraphic1;
-        private SpinButton spin;
-        private Button button;
-        private Label label;
+	{
+		private AnglePickerGraphic anglepickergraphic1;
+		private SpinButton spin;
+		private Button button;
+		private Label label;
 
 		public AnglePickerWidget ()
 		{
-            Build ();
+			Build ();
 
 			anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
 			spin.ValueChanged += HandleSpinValueChanged;
@@ -33,16 +32,15 @@ namespace Pinta.Gui.Widgets
 			spin.ActivatesDefault = true;
 		}
 
-		#region Public Properties
 		public double DefaultValue { get; set; }
 
 		public string Label {
-			get { return label.Text; }
-			set { label.Text = value; }
+			get => label.Text;
+			set => label.Text = value;
 		}
 
 		public double Value {
-			get { return anglepickergraphic1.ValueDouble; }
+			get => anglepickergraphic1.ValueDouble;
 			set {
 				if (anglepickergraphic1.ValueDouble != value) {
 					anglepickergraphic1.ValueDouble = value;
@@ -50,9 +48,7 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 		}
-		#endregion
 
-		#region Event Handlers
 		protected override void OnShown ()
 		{
 			base.OnShown ();
@@ -80,70 +76,67 @@ namespace Pinta.Gui.Widgets
 		{
 			Value = DefaultValue;
 		}
-		#endregion
 
-		#region Protected Methods
-		protected void OnValueChanged ()
-		{
-			if (ValueChanged != null)
-				ValueChanged (this, EventArgs.Empty);
-		}
-		#endregion
+		protected void OnValueChanged () => ValueChanged?.Invoke (this, EventArgs.Empty);
 
-		#region Public Events
 		public event EventHandler? ValueChanged;
-		#endregion
 
-	[MemberNotNull(nameof(anglepickergraphic1), nameof (spin), nameof (button), nameof (label))]
-        private void Build ()
-        {
-            // Section label + line
-            var hbox1 = new HBox (false, 6);
+		[MemberNotNull (nameof (anglepickergraphic1), nameof (spin), nameof (button), nameof (label))]
+		private void Build ()
+		{
+			// Section label + line
+			var hbox1 = new HBox (false, 6);
 
-            label = new Label ();
-            hbox1.PackStart (label, false, false, 0);
-            hbox1.PackStart (new HSeparator (), true, true, 0);
+			label = new Label ();
+			hbox1.PackStart (label, false, false, 0);
+			hbox1.PackStart (new HSeparator (), true, true, 0);
 
-            // Angle graphic + spinner + reset button
-            var hbox2 = new HBox (false, 6);
+			// Angle graphic + spinner + reset button
+			var hbox2 = new HBox (false, 6);
 
-            anglepickergraphic1 = new AnglePickerGraphic ();
-            hbox2.PackStart (anglepickergraphic1, true, false, 0);
+			anglepickergraphic1 = new AnglePickerGraphic ();
+			hbox2.PackStart (anglepickergraphic1, true, false, 0);
 
-            spin = new SpinButton (0, 360, 1);
-            spin.CanFocus = true;
-            spin.Adjustment.PageIncrement = 10;
-            spin.ClimbRate = 1;
-            spin.Numeric = true;
+			spin = new SpinButton (0, 360, 1) {
+				CanFocus = true,
+				ClimbRate = 1,
+				Numeric = true
+			};
 
-            var alignment = new Alignment (0.5F, 0F, 1F, 0F);
-            alignment.Add (spin);
-            hbox2.PackStart (alignment, false, false, 0);
+			spin.Adjustment.PageIncrement = 10;
 
-            // Reset button
-            button = new Button ();
-            button.WidthRequest = 28;
-            button.HeightRequest = 24;
-            button.CanFocus = true;
-            button.UseUnderline = true;
+			var alignment = new Alignment (0.5F, 0F, 1F, 0F) {
+				spin
+			};
 
-            var button_image = new Image (Gtk.IconTheme.Default.LoadIcon(Resources.StandardIcons.GoPrevious, 16));
-            button.Add (button_image);
+			hbox2.PackStart (alignment, false, false, 0);
 
-            var alignment2 = new Alignment (0.5F, 0F, 1F, 0F);
-            alignment2.Add (button);
+			// Reset button
+			button = new Button {
+				WidthRequest = 28,
+				HeightRequest = 24,
+				CanFocus = true,
+				UseUnderline = true
+			};
 
-            hbox2.PackStart (alignment2, false, false, 0);
+			var button_image = new Image (IconTheme.Default.LoadIcon (Resources.StandardIcons.GoPrevious, 16));
+			button.Add (button_image);
 
-            // Main layout
-            var vbox = new VBox (false, 6);
+			var alignment2 = new Alignment (0.5F, 0F, 1F, 0F) {
+				button
+			};
 
-            vbox.Add (hbox1);
-            vbox.Add (hbox2);
+			hbox2.PackStart (alignment2, false, false, 0);
 
-            Add (vbox);
+			// Main layout
+			var vbox = new VBox (false, 6) {
+				hbox1,
+				hbox2
+			};
 
-            vbox.ShowAll ();
-        }
-    }
+			Add (vbox);
+
+			vbox.ShowAll ();
+		}
+	}
 }

@@ -544,8 +544,8 @@ namespace Pinta.Effects
 			spinOutHigh = new SpinButton (2, 255, 1) { Value = 255 };
 			spinOutGamma = new SpinButton (0, 100, 0.1) { Value = 1 };
 
-			gradientInput = new ColorGradientWidget () { WidthRequest = 40, Count = 2 };
-			gradientOutput = new ColorGradientWidget () { WidthRequest = 40, Count = 3 };
+			gradientInput = new ColorGradientWidget (2) { WidthRequest = 40 };
+			gradientOutput = new ColorGradientWidget (3) { WidthRequest = 40 };
 
 			colorpanelInHigh = new ColorPanelWidget () { HeightRequest = 24 };
 			colorpanelInLow = new ColorPanelWidget () { HeightRequest = 24 };
