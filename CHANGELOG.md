@@ -29,9 +29,11 @@ Thanks to the following contributors who worked on this release:
 - Added a more user-friendly dialog when attempting to open an unsupported file format (#143, [#1856821](https://bugs.launchpad.net/pinta/+bug/1856821))
 - Zooming in and out can now be done without pressing the Ctrl key (#150).
 - Arrow keys can be used to move by a single pixel in the Move Selected Pixels and Move Selection tools ([#1906141](https://bugs.launchpad.net/pinta/+bug/1906141)).
+- The primary and secondary palette colors are now saved in the application settings (#171).
 
 ### Changed
 - Fixed inconsistent behavior when switching between tools that share the same shortcut, such as the selection tools (#144, [#1558767](https://bugs.launchpad.net/pinta/+bug/1558767))
+- The Paste Into New Image action no longer creates several unnecessary history items (#170).
 - Performance improvements for the paint bucket and magic wand tools (#159).
 - Performance improvements for the selection tools when interactively adjusting the selection.
 
