@@ -30,71 +30,59 @@ using Gtk;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem(true)]
 	public class ComboBoxWidget : FilledAreaBin
 	{
-        private Label label;
-        private ComboBoxText combobox;
+		private Label label;
+		private ComboBoxText combobox;
 
-        public string Label {
-			get { return label.Text; }
-			set { label.Text = value; }
-		}
-		
-		public int Active {
-			get { return combobox.Active; }
-			set { combobox.Active = value; }
-		}
-		
-		public string ActiveText {
-			get { return combobox.ActiveText; }
-		}
-		
 		public ComboBoxWidget (string[] entries)
 		{
-			this.Build ();
-			foreach (string s in entries)
+			Build ();
+
+			foreach (var s in entries)
 				combobox.AppendText (s);
-			
+
 			combobox.Changed += delegate {
-				OnChanged ();
+				Changed?.Invoke (this, EventArgs.Empty);
 			};
 		}
-		
-		#region Protected Methods
-		protected void OnChanged ()
-		{
-			if (Changed != null)
-				Changed (this, EventArgs.Empty);
+
+		public string Label {
+			get => label.Text;
+			set => label.Text = value;
 		}
-		#endregion
 
-		#region Public Events
+		public int Active {
+			get => combobox.Active;
+			set => combobox.Active = value;
+		}
+
+		public string ActiveText => combobox.ActiveText;
+
 		public event EventHandler? Changed;
-		#endregion
 
-	[MemberNotNull (nameof (label), nameof (combobox))]
-        private void Build ()
-        {
-            // Section label + line
-            var hbox1 = new HBox (false, 6);
+		[MemberNotNull (nameof (label), nameof (combobox))]
+		private void Build ()
+		{
+			// Section label + line
+			var hbox1 = new HBox (false, 6);
 
-            label = new Label ();
-            hbox1.PackStart (label, false, false, 0);
-            hbox1.PackStart (new HSeparator (), true, true, 0);
+			label = new Label ();
+			hbox1.PackStart (label, false, false, 0);
+			hbox1.PackStart (new HSeparator (), true, true, 0);
 
 			// Combobox
-			combobox = new ComboBoxText();
+			combobox = new ComboBoxText ();
 
-            // Main layout
-            var vbox = new VBox (false, 6);
+			// Main layout
+			var vbox = new VBox (false, 6) {
+				hbox1,
+				combobox
+			};
 
-            vbox.Add (hbox1);
-            vbox.Add (combobox);
+			Add (vbox);
 
-            Add (vbox);
-
-            vbox.ShowAll ();
-        }
-    }
+			vbox.ShowAll ();
+		}
+	}
 }

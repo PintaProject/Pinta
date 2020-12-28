@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
@@ -34,54 +33,20 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[ToolboxItem (true)]
 	public class ColorGradientWidget : FilledAreaBin
 	{
 		private EventBox eventbox;
+		
+		private const double xpad = 0.15;       // gradient horizontal padding							
+		private const double ypad = 0.03;       // gradient vertical padding
 
-		//gradient horizontal padding
-		private const double xpad = 0.15;
-		//gradient vertical padding
-		private const double ypad = 0.03;
+		private double[] vals;
 
-		private double[] vals = null!; // Set by Count
-
-		private Rectangle GradientRectangle {
-			get {
-				var rect = new Rectangle (0, 0, AllocatedWidth, AllocatedHeight);
-				double x = rect.X + xpad * rect.Width;
-				double y = rect.Y + ypad * rect.Height;
-				double width = (1 - 2 * xpad) * rect.Width;
-				double height = (1 - 2 * ypad) * rect.Height;
-
-				return new Rectangle (x, y, width, height);
-			}
-		}
-
-		[Category ("Custom Properties")]
-		public int Count {
-			get { return vals.Length; }
-			set {
-				if (value < 2 || value > 3) {
-					throw new ArgumentOutOfRangeException ("value", value, "Count must be 2 or 3");
-				}
-
-				vals = new double[value];
-				double step = 256 / (value - 1);
-
-				for (int i = 0; i < value; i++) {
-					vals[i] = i * step - ((i != 0) ? 1 : 0);
-				}
-			}
-		}
-
-		public Color MaxColor { get; set; }
-
-		public int ValueIndex { get; private set; }
-
-		public ColorGradientWidget ()
+		public ColorGradientWidget (int count)
 		{
 			Build ();
+			Count = count;
+
 			ValueIndex = -1;
 
 			eventbox.MotionNotifyEvent += HandleMotionNotifyEvent;
@@ -89,6 +54,38 @@ namespace Pinta.Gui.Widgets
 			eventbox.ButtonPressEvent += HandleButtonPressEvent;
 			eventbox.ButtonReleaseEvent += HandleButtonReleaseEvent;
 		}
+
+		private Rectangle GradientRectangle {
+			get {
+				var rect = new Rectangle (0, 0, AllocatedWidth, AllocatedHeight);
+				var x = rect.X + xpad * rect.Width;
+				var y = rect.Y + ypad * rect.Height;
+				var width = (1 - 2 * xpad) * rect.Width;
+				var height = (1 - 2 * ypad) * rect.Height;
+
+				return new Rectangle (x, y, width, height);
+			}
+		}
+
+		public int Count {
+			get => vals.Length;
+			[MemberNotNull (nameof (vals))]
+			set {
+				if (value < 2 || value > 3) 
+					throw new ArgumentOutOfRangeException ("value", value, "Count must be 2 or 3");
+
+				vals = new double[value];
+
+				var step = 256 / (value - 1);
+
+				for (var i = 0; i < value; i++)
+					vals[i] = i * step - ((i != 0) ? 1 : 0);
+			}
+		}
+
+		public Color MaxColor { get; set; }
+
+		public int ValueIndex { get; private set; }
 
 		public int GetValue (int i)
 		{
@@ -105,33 +102,32 @@ namespace Pinta.Gui.Widgets
 
 		private double GetYFromValue (double val)
 		{
-			Rectangle rect = GradientRectangle;
-			Rectangle all = Allocation.ToCairoRectangle ();
+			var rect = GradientRectangle;
+			var all = Allocation.ToCairoRectangle ();
 
 			return all.Y + ypad * all.Height + rect.Height * (255 - val) / 255;
 		}
 
 		private double NormalizeY (int index, double py)
 		{
-			Rectangle rect = GradientRectangle;
+			var rect = GradientRectangle;
 			var yvals = (from val in vals select GetYFromValue (val)).Concat (
 				      new double[] { rect.Y, rect.Y + rect.Height }).OrderByDescending (
 				      v => v).ToArray ();
 			index++;
 
-			if (py >= yvals[index - 1]) {
+			if (py >= yvals[index - 1])
 				py = yvals[index - 1];
-			} else if (py < yvals[index + 1]) {
+			else if (py < yvals[index + 1])
 				py = yvals[index + 1];
-			}
 
 			return py;
 		}
 
 		private int GetValueFromY (double py)
 		{
-			Rectangle rect = GradientRectangle;
-			Rectangle all = Allocation.ToCairoRectangle ();
+			var rect = GradientRectangle;
+			var all = Allocation.ToCairoRectangle ();
 
 			py -= all.Y + ypad * all.Height;
 			return ((int) (255 * (rect.Height - py) / rect.Height));
@@ -141,12 +137,12 @@ namespace Pinta.Gui.Widgets
 		{
 			if (ValueIndex == -1) {
 				var yvals = (from val in vals select GetYFromValue (val)).ToArray ();
-				int count = Count - 1;
+				var count = Count - 1;
 
-				for (int i = 0; i < count; i++) {
-					double y1 = yvals[i];
-					double y2 = yvals[i + 1];
-					double h = (y1 - y2) / 2;
+				for (var i = 0; i < count; i++) {
+					var y1 = yvals[i];
+					var y2 = yvals[i + 1];
+					var h = (y1 - y2) / 2;
 
 					// pointer is below the lowest value triangle
 					if (i == 0 && y1 < y)
@@ -172,30 +168,28 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 
-		private void HandleMotionNotifyEvent (object o, Gtk.MotionNotifyEventArgs args)
+		private void HandleMotionNotifyEvent (object o, MotionNotifyEventArgs args)
 		{
-			int px, py;
-			Gdk.ModifierType mask;
-			ObsoleteExtensions.GetWindowPointer (Window, out px, out py, out mask);
+			ObsoleteExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
 
-			int index = FindValueIndex (py);
+			var index = FindValueIndex (py);
 			py = (int) NormalizeY (index, py);
 
 			if (mask == Gdk.ModifierType.Button1Mask) {
 				if (index != -1) {
-					double y = GetValueFromY (py);
+					var y = GetValueFromY (py);
 
 					vals[index] = y;
 					OnValueChanged (index);
 				}
 			}
 
-			//to avoid unnessesary costly redrawing
+			// to avoid unnessesary costly redrawing
 			if (index != -1)
 				Window.Invalidate ();
 		}
 
-		private void HandleLeaveNotifyEvent (object o, Gtk.LeaveNotifyEventArgs args)
+		private void HandleLeaveNotifyEvent (object o, LeaveNotifyEventArgs args)
 		{
 			if (args.Event.State != Gdk.ModifierType.Button1Mask)
 				ValueIndex = -1;
@@ -203,30 +197,26 @@ namespace Pinta.Gui.Widgets
 			Window.Invalidate ();
 		}
 
-
-		void HandleButtonPressEvent (object o, Gtk.ButtonPressEventArgs args)
+		private void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
 		{
-			int px, py;
-			Gdk.ModifierType mask;
-			ObsoleteExtensions.GetWindowPointer (Window, out px, out py, out mask);
+			ObsoleteExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
 
-			int index = FindValueIndex ((int) py);
+			var index = FindValueIndex ((int) py);
 
 			if (index != -1)
 				ValueIndex = index;
 		}
 
-		void HandleButtonReleaseEvent (object o, Gtk.ButtonReleaseEventArgs args)
+		private void HandleButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
 		{
 			ValueIndex = -1;
 		}
 
 		private void DrawGradient (Context g)
 		{
-			Rectangle rect = GradientRectangle;
+			var rect = GradientRectangle;
 
-			Cairo.Gradient pat = new LinearGradient (rect.X, rect.Y, rect.X,
-							  rect.Y + rect.Height);
+			var pat = new LinearGradient (rect.X, rect.Y, rect.X, rect.Y + rect.Height);
 			pat.AddColorStop (0, MaxColor);
 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0));
 
@@ -237,34 +227,34 @@ namespace Pinta.Gui.Widgets
 
 		private void DrawTriangles (Context g)
 		{
-			int px, py;
-			Gdk.ModifierType mask;
-			ObsoleteExtensions.GetWindowPointer (Window, out px, out py, out mask);
+			ObsoleteExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
 
-			Rectangle rect = GradientRectangle;
-			Rectangle all = Allocation.ToCairoRectangle ();
+			var rect = GradientRectangle;
+			var all = Allocation.ToCairoRectangle ();
 
-			int index = FindValueIndex (py);
+			var index = FindValueIndex (py);
 
-			for (int i = 0; i < Count; i++) {
+			for (var i = 0; i < Count; i++) {
 
-				double val = vals[i];
-				double y = GetYFromValue (val);
-				bool hoover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
-				Color color = hoover ? new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
+				var val = vals[i];
+				var y = GetYFromValue (val);
+				var hoover = ((index == i)) && (all.ContainsPoint (px, py) || ValueIndex != -1);
+				var color = hoover ? new Color (0.1, 0.1, 0.9) : new Color (0.1, 0.1, 0.1);
 
+				// left triangle
+				var points = new PointD[] { new PointD (rect.X, y),
+							    new PointD (rect.X - xpad * rect.Width, y + ypad * rect.Height),
+							    new PointD (rect.X - xpad * rect.Width, y - ypad * rect.Height)};
 
-				//left triangle
-				PointD[] points = new PointD[] { new PointD (rect.X, y),
-												 new PointD (rect.X - xpad * rect.Width, y + ypad * rect.Height),
-												 new PointD (rect.X - xpad * rect.Width, y - ypad * rect.Height) };
 				g.FillPolygonal (points, color);
 
-				double x = rect.X + rect.Width;
-				//right triangle
-				PointD[] points2 = new PointD[] { new PointD (x , y),
-												  new PointD (x + xpad * rect.Width, y + ypad * rect.Height),
-												  new PointD (x + xpad * rect.Width, y - ypad * rect.Height) };
+				var x = rect.X + rect.Width;
+
+				// right triangle
+				var points2 = new PointD[] { new PointD (x , y),
+							     new PointD (x + xpad * rect.Width, y + ypad * rect.Height),
+							     new PointD (x + xpad * rect.Width, y - ypad * rect.Height)};
+
 				g.FillPolygonal (points2, color);
 			}
 		}
@@ -276,18 +266,9 @@ namespace Pinta.Gui.Widgets
 			return true;
 		}
 
-		#region Protected Methods
-		protected void OnValueChanged (int index)
-		{
-			if (ValueChanged != null) {
-				ValueChanged (this, new IndexEventArgs (index));
-			}
-		}
-		#endregion
+		protected void OnValueChanged (int index) => ValueChanged?.Invoke (this, new IndexEventArgs (index));
 
-		#region Public Events
 		public event EventHandler<IndexEventArgs>? ValueChanged;
-		#endregion
 
 		[MemberNotNull (nameof (eventbox))]
 		private void Build ()
@@ -295,9 +276,11 @@ namespace Pinta.Gui.Widgets
 			CanFocus = true;
 			Events = (Gdk.EventMask) 1534;
 
-			eventbox = new EventBox ();
-			eventbox.Events = (Gdk.EventMask) 790;
-			eventbox.VisibleWindow = false;
+			eventbox = new EventBox {
+				Events = (Gdk.EventMask) 790,
+				VisibleWindow = false
+			};
+
 			Add (eventbox);
 		}
 	}

@@ -32,10 +32,9 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem (true)]
 	public class ColorPanelWidget : FilledAreaBin
 	{
-		private EventBox eventbox;
+		private readonly EventBox eventbox;
 
 		public Color CairoColor { get; set; }
 
@@ -53,7 +52,7 @@ namespace Pinta.Gui.Widgets
 
 		protected override bool OnDrawn (Context cr)
 		{
-			cr.FillRoundedRectangle (new Rectangle(0,0, AllocatedWidth, AllocatedHeight), 4, CairoColor);
+			cr.FillRoundedRectangle (new Rectangle (0, 0, AllocatedWidth, AllocatedHeight), 4, CairoColor);
 			return true;
 		}
 	}

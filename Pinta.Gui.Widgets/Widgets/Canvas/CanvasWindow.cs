@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CanvasWindow.cs
 //  
 // Author:
@@ -25,150 +25,150 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta
 {
-    public class CanvasWindow : Grid
-    {
-        private Ruler horizontal_ruler;
-        private Ruler vertical_ruler;
-        private ScrolledWindow scrolled_window;
-        
-        public PintaCanvas Canvas { get; set; }
-        public bool HasBeenShown { get; set; }
+	public class CanvasWindow : Grid
+	{
+		private Ruler horizontal_ruler;
+		private Ruler vertical_ruler;
+		private ScrolledWindow scrolled_window;
 
-        public CanvasWindow (Document document)
-        {
-            ColumnHomogeneous = false;
-            RowHomogeneous = false;
+		public PintaCanvas Canvas { get; set; }
+		public bool HasBeenShown { get; set; }
 
-            scrolled_window = new ScrolledWindow ();
+		public CanvasWindow (Document document)
+		{
+			Build (document);
 
-            var vp = new Viewport () {
-                ShadowType = ShadowType.None
-            };
+			scrolled_window.Hadjustment.ValueChanged += UpdateRulerRange;
+			scrolled_window.Vadjustment.ValueChanged += UpdateRulerRange;
+			document.Workspace.CanvasSizeChanged += UpdateRulerRange;
+			Canvas.SizeAllocated += UpdateRulerRange;
 
-            Canvas = new PintaCanvas (this, document) {
-                Name = "canvas",
-                CanDefault = true,
-                CanFocus = true,
-                Events = (Gdk.EventMask)16134
-            };
+			Canvas.MotionNotifyEvent += delegate (object? o, MotionNotifyEventArgs args) {
+				if (!PintaCore.Workspace.HasOpenDocuments)
+					return;
 
-            // Rulers
-            horizontal_ruler = new Ruler (Orientation.Horizontal);
-            horizontal_ruler.Metric = MetricType.Pixels;
-            Attach(horizontal_ruler, 1, 0, 1, 1);
+				var point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
 
-            vertical_ruler = new Ruler (Orientation.Vertical);
-            vertical_ruler.Metric = MetricType.Pixels;
-            Attach(vertical_ruler, 0, 1, 1, 1);
+				horizontal_ruler.Position = point.X;
+				vertical_ruler.Position = point.Y;
+			};
+		}
 
-            scrolled_window.Hadjustment.ValueChanged += delegate {
-                UpdateRulerRange ();
-            };
+		public bool IsMouseOnCanvas {
+			get {
+				// Get the position of the mouse pointer relative
+				// to canvas scrolled window top-left corner
+				ObsoleteExtensions.GetWidgetPointer (scrolled_window, out var x, out var y);
 
-            scrolled_window.Vadjustment.ValueChanged += delegate {
-                UpdateRulerRange ();
-            };
+				// Check if the pointer is on the canvas
+				return (x > 0) && (x < scrolled_window.Allocation.Width) &&
+				    (y > 0) && (y < scrolled_window.Allocation.Height);
+			}
+		}
 
-            document.Workspace.CanvasSizeChanged += delegate {
-                UpdateRulerRange ();
-            };
+		public bool RulersVisible {
+			get => horizontal_ruler.Visible;
+			set {
+				if (horizontal_ruler.Visible != value) {
+					horizontal_ruler.Visible = value;
+					vertical_ruler.Visible = value;
+				}
+			}
+		}
 
-            Canvas.MotionNotifyEvent += delegate (object o, MotionNotifyEventArgs args) {
-                if (!PintaCore.Workspace.HasOpenDocuments)
-                    return;
+		public MetricType RulerMetric {
+			get => horizontal_ruler.Metric;
+			set {
+				if (horizontal_ruler.Metric != value) {
+					horizontal_ruler.Metric = value;
+					vertical_ruler.Metric = value;
+				}
+			}
+		}
 
-                var point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
+		public void UpdateRulerRange (object? sender, EventArgs e)
+		{
+			Main.Iteration (); //Force update of scrollbar upper before recenter
 
-                horizontal_ruler.Position = point.X;
-                vertical_ruler.Position = point.Y;
-            };
+			var lower = new Cairo.PointD (0, 0);
+			var upper = new Cairo.PointD (0, 0);
 
-            scrolled_window.Hexpand = true;
-            scrolled_window.Vexpand = true;
-            Attach(scrolled_window, 1, 1, 1, 1);
+			if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
+				return;
 
-            scrolled_window.Add (vp);
-            vp.Add (Canvas);
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				if (PintaCore.Workspace.Offset.X > 0) {
+					lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
+					upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
+				} else {
+					lower.X = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale;
+					upper.X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
+				}
+				if (PintaCore.Workspace.Offset.Y > 0) {
+					lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
+					upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
+				} else {
+					lower.Y = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale;
+					upper.Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+				}
+			}
 
-            ShowAll ();
-            Canvas.Show ();
-            vp.Show ();
+			horizontal_ruler.SetRange (lower.X, upper.X);
+			vertical_ruler.SetRange (lower.Y, upper.Y);
+		}
 
-            horizontal_ruler.Visible = false;
-            vertical_ruler.Visible = false;
+		[MemberNotNull (nameof (Canvas), nameof (horizontal_ruler), nameof (vertical_ruler), nameof (scrolled_window))]
+		private void Build (Document document)
+		{
+			ColumnHomogeneous = false;
+			RowHomogeneous = false;
 
-            Canvas.SizeAllocated += delegate { UpdateRulerRange (); };
-        }
+			scrolled_window = new ScrolledWindow ();
 
-        public bool IsMouseOnCanvas {
-            get {
-                var x = 0;
-                var y = 0;
+			var vp = new Viewport () {
+				ShadowType = ShadowType.None
+			};
 
-                // Get the position of the mouse pointer relative
-                // to canvas scrolled window top-left corner
-                ObsoleteExtensions.GetWidgetPointer (scrolled_window, out x, out y);
-                // Check if the pointer is on the canvas
-                return (x > 0) && (x < scrolled_window.Allocation.Width) &&
-                    (y > 0) && (y < scrolled_window.Allocation.Height);
-            }
-        }
+			Canvas = new PintaCanvas (this, document) {
+				Name = "canvas",
+				CanDefault = true,
+				CanFocus = true,
+				Events = (Gdk.EventMask) 16134
+			};
 
-        public bool RulersVisible {
-            get { return horizontal_ruler.Visible; }
-            set {
-                if (horizontal_ruler.Visible != value) {
-                    horizontal_ruler.Visible = value;
-                    vertical_ruler.Visible = value;
-                }
-            }
-        }
+			// Rulers
+			horizontal_ruler = new Ruler (Orientation.Horizontal) {
+				Metric = MetricType.Pixels
+			};
 
-        public MetricType RulerMetric {
-            get { return horizontal_ruler.Metric; }
-            set {
-                if (horizontal_ruler.Metric != value) {
-                    horizontal_ruler.Metric = value;
-                    vertical_ruler.Metric = value;
-                }
-            }
-        }
+			Attach (horizontal_ruler, 1, 0, 1, 1);
 
-        public void UpdateRulerRange ()
-        {
-            Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
+			vertical_ruler = new Ruler (Orientation.Vertical) {
+				Metric = MetricType.Pixels
+			};
 
-            var lower = new Cairo.PointD (0, 0);
-            var upper = new Cairo.PointD (0, 0);
+			Attach (vertical_ruler, 0, 1, 1, 1);
 
-            if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
-                return;
+			scrolled_window.Hexpand = true;
+			scrolled_window.Vexpand = true;
+			Attach (scrolled_window, 1, 1, 1, 1);
 
-            if (PintaCore.Workspace.HasOpenDocuments) {
-                if (PintaCore.Workspace.Offset.X > 0) {
-                    lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-                    upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
-                } else {
-                    lower.X = scrolled_window.Hadjustment.Value / PintaCore.Workspace.Scale;
-                    upper.X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
-                }
-                if (PintaCore.Workspace.Offset.Y > 0) {
-                    lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-                    upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
-                } else {
-                    lower.Y = scrolled_window.Vadjustment.Value / PintaCore.Workspace.Scale;
-                    upper.Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
-                }
-            }
+			scrolled_window.Add (vp);
+			vp.Add (Canvas);
 
-            horizontal_ruler.SetRange (lower.X, upper.X);
-            vertical_ruler.SetRange (lower.Y, upper.Y);
-        }
-    }
+			ShowAll ();
+			Canvas.Show ();
+			vp.Show ();
+
+			horizontal_ruler.Visible = false;
+			vertical_ruler.Visible = false;
+		}
+	}
 }

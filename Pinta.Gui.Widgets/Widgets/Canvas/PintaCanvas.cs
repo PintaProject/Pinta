@@ -1,4 +1,4 @@
-﻿// 
+// 
 // PintaCanvas.cs
 //  
 // Author:
@@ -31,14 +31,13 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {
-	[System.ComponentModel.ToolboxItem (true)]
 	public class PintaCanvas : DrawingArea
 	{
-		Cairo.ImageSurface? canvas;
-		CanvasRenderer cr;
+		private readonly CanvasRenderer cr;
+		private readonly Document document;
 
-		private Document document;
-		private int hScrollAmount = 92;
+		private Cairo.ImageSurface? canvas;
+		private int h_scroll_amount = 92;
 
 		public CanvasWindow CanvasWindow { get; private set; }
 
@@ -91,27 +90,27 @@ namespace Pinta.Gui.Widgets
 					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
 
 				if (PintaCore.Tools.CurrentTool != null)
-					PintaCore.Tools.CurrentTool.DoMouseMove ((DrawingArea)sender, e, point);
+					PintaCore.Tools.CurrentTool.DoMouseMove ((DrawingArea) sender, e, point);
 			};
 		}
 
-        #region Protected Methods
-        protected override bool OnDrawn(Cairo.Context context)
-        {
-			base.OnDrawn(context);
-				
+		protected override bool OnDrawn (Cairo.Context context)
+		{
+			base.OnDrawn (context);
+
 			var scale = document.Workspace.Scale;
 
-			var x = (int)document.Workspace.Offset.X;
-			var y = (int)document.Workspace.Offset.Y;
+			var x = (int) document.Workspace.Offset.X;
+			var y = (int) document.Workspace.Offset.Y;
 
 			// Translate our expose area for the whole drawingarea to just our canvas
-            var canvas_bounds = new Gdk.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
-			Gdk.Rectangle expose_rect;
-			if (Gdk.CairoHelper.GetClipRectangle(context, out expose_rect))
-                canvas_bounds.Intersect(expose_rect);
+			var canvas_bounds = new Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height);
+			Rectangle expose_rect;
 
-            if (canvas_bounds.IsEmpty)
+			if (Gdk.CairoHelper.GetClipRectangle (context, out expose_rect))
+				canvas_bounds.Intersect (expose_rect);
+
+			if (canvas_bounds.IsEmpty)
 				return true;
 
 			canvas_bounds.X -= x;
@@ -119,44 +118,42 @@ namespace Pinta.Gui.Widgets
 
 			// Resize our offscreen surface to a surface the size of our drawing area
 			if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
-				if (canvas != null)
-					(canvas as IDisposable).Dispose ();
-
+				canvas?.Dispose ();
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
 			cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);
 
 			var g = context;
-            // Draw our canvas drop shadow
-            g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-            g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-            g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
-            // Set up our clip rectangle
-            g.Rectangle (new Cairo.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
-            g.Clip ();
+			// Draw our canvas drop shadow
+			g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, document.Workspace.CanvasSize.Width + 2, document.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+			g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, document.Workspace.CanvasSize.Width + 4, document.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+			g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, document.Workspace.CanvasSize.Width + 6, document.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
-            g.Translate (x, y);
+			// Set up our clip rectangle
+			g.Rectangle (new Cairo.Rectangle (x, y, document.Workspace.CanvasSize.Width, document.Workspace.CanvasSize.Height));
+			g.Clip ();
 
-            // Render all the layers to a surface
-            var layers = document.Layers.GetLayersToPaint ();
+			g.Translate (x, y);
 
-            if (layers.Count == 0)
-                canvas.Clear ();
+			// Render all the layers to a surface
+			var layers = document.Layers.GetLayersToPaint ();
 
-            cr.Render (layers, canvas, canvas_bounds.Location);
+			if (layers.Count == 0)
+				canvas.Clear ();
 
-            // Paint the surface to our canvas
-            g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
-            g.Paint ();
+			cr.Render (layers, canvas, canvas_bounds.Location);
 
-            // Selection outline
-            if (document.Selection.Visible) {
-                                bool fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") &&
-                    !PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
-                                document.Selection.Draw (g, scale, fillSelection);
-            }
+			// Paint the surface to our canvas
+			g.SetSourceSurface (canvas, canvas_bounds.X + (int) (0 * scale), canvas_bounds.Y + (int) (0 * scale));
+			g.Paint ();
+
+			// Selection outline
+			if (document.Selection.Visible) {
+				var fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
+				document.Selection.Draw (g, scale, fillSelection);
+			}
 
 			return true;
 		}
@@ -182,20 +179,18 @@ namespace Pinta.Gui.Widgets
 				switch (evnt.Direction) {
 					case ScrollDirection.Down:
 					case ScrollDirection.Right:
-						document.Workspace.ScrollCanvas (hScrollAmount, 0);
+						document.Workspace.ScrollCanvas (h_scroll_amount, 0);
 						return true;
 					case ScrollDirection.Up:
 					case ScrollDirection.Left:
-						document.Workspace.ScrollCanvas (-hScrollAmount, 0);
+						document.Workspace.ScrollCanvas (-h_scroll_amount, 0);
 						return true;
 				}
 			}
 
 			return base.OnScrollEvent (evnt);
 		}
-#endregion
 
-#region Private Methods
 		private void SetRequisition (Size size)
 		{
 			WidthRequest = size.Width;
@@ -215,6 +210,5 @@ namespace Pinta.Gui.Widgets
 			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
 			PintaCore.Palette.DoKeyRelease (this, e);
 		}
-#endregion
 	}
 }
