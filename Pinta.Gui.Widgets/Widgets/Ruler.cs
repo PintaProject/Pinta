@@ -1,4 +1,4 @@
-﻿//
+//
 // Ruler.cs
 //
 // Author:
@@ -23,281 +23,268 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using Cairo;
 using Gtk;
 using Pinta.Core;
 using System;
-using System.Linq;
 
 namespace Pinta.Gui.Widgets
 {
-    public enum MetricType
-    {
-        Pixels,
-        Inches,
-        Centimeters
-    }
+	public enum MetricType
+	{
+		Pixels,
+		Inches,
+		Centimeters
+	}
 
-    /// <summary>
-    /// Replacement for Gtk.Ruler, which was removed in GTK3.
-    /// Based on the original GTK2 widget and Inkscape's ruler widget.
-    /// </summary>
-    public class Ruler : DrawingArea
-    {
-        private double _position = 0;
-        private MetricType _metric = MetricType.Pixels;
+	/// <summary>
+	/// Replacement for Gtk.Ruler, which was removed in GTK3.
+	/// Based on the original GTK2 widget and Inkscape's ruler widget.
+	/// </summary>
+	public class Ruler : DrawingArea
+	{
+		private double _position = 0;
+		private MetricType _metric = MetricType.Pixels;
 
-        /// <summary>
-        /// Whether the ruler is horizontal or vertical.
-        /// </summary>
-        public Orientation Orientation { get; private set; }
+		/// <summary>
+		/// Whether the ruler is horizontal or vertical.
+		/// </summary>
+		public Orientation Orientation { get; private set; }
 
-        /// <summary>
-        /// Metric type used for the ruler.
-        /// </summary>
-        public MetricType Metric
-        {
-            get => _metric;
-            set
-            {
-                _metric = value;
-                QueueDraw();
-            }
-        }
+		/// <summary>
+		/// Metric type used for the ruler.
+		/// </summary>
+		public MetricType Metric {
+			get => _metric;
+			set {
+				_metric = value;
+				QueueDraw ();
+			}
+		}
 
-        /// <summary>
-        /// The position of the mark along the ruler.
-        /// </summary>
-        public double Position
-        {
-            get => _position;
-            set
-            {
-                _position = value;
-                QueueDraw();
-            }
-        }
+		/// <summary>
+		/// The position of the mark along the ruler.
+		/// </summary>
+		public double Position {
+			get => _position;
+			set {
+				_position = value;
+				QueueDraw ();
+			}
+		}
 
-        /// <summary>
-        /// Lower limit of the ruler in pixels.
-        /// </summary>
-        public double Lower { get; private set; } = 0;
+		/// <summary>
+		/// Lower limit of the ruler in pixels.
+		/// </summary>
+		public double Lower { get; private set; } = 0;
 
-        /// <summary>
-        /// Upper limit of the ruler in pixels.
-        /// </summary>
-        public double Upper { get; private set; } = 1;
+		/// <summary>
+		/// Upper limit of the ruler in pixels.
+		/// </summary>
+		public double Upper { get; private set; } = 1;
 
-        public Ruler(Orientation orientation)
-        {
-            Orientation = orientation;
-        }
+		public Ruler (Orientation orientation)
+		{
+			Orientation = orientation;
+		}
 
-        /// <summary>
-        /// Update the ruler's range.
-        /// </summary>
-        public void SetRange(double lower, double upper)
-        {
-            if (lower > upper)
-                throw new ArgumentOutOfRangeException(nameof(lower), "Invalid range");
+		/// <summary>
+		/// Update the ruler's range.
+		/// </summary>
+		public void SetRange (double lower, double upper)
+		{
+			if (lower > upper)
+				throw new ArgumentOutOfRangeException (nameof (lower), "Invalid range");
 
-            Lower = lower;
-            Upper = upper;
+			Lower = lower;
+			Upper = upper;
 
-            QueueDraw();
-        }
+			QueueDraw ();
+		}
 
-        private Requisition GetSizeRequest()
-        {
-            var border = StyleContext.GetBorder(StateFlags);
-            var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
-            int font_size = GetFontSize(font);
+		private Requisition GetSizeRequest ()
+		{
+			var border = StyleContext.GetBorder (StateFlags);
+			var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
+			int font_size = GetFontSize (font);
 
-            int size = 2 + font_size * 2;
+			int size = 2 + font_size * 2;
 
-            int width = border.Left + border.Right;
-            int height = border.Top + border.Bottom;
+			int width = border.Left + border.Right;
+			int height = border.Top + border.Bottom;
 
-            switch (Orientation)
-            {
-                case Orientation.Horizontal:
-                    width += 1;
-                    height += size;
-                    break;
-                case Orientation.Vertical:
-                    width += size;
-                    height += 1;
-                    break;
-            }
+			switch (Orientation) {
+				case Orientation.Horizontal:
+					width += 1;
+					height += size;
+					break;
+				case Orientation.Vertical:
+					width += size;
+					height += 1;
+					break;
+			}
 
-            return new Requisition() { Width = width, Height = height };
-        }
+			return new Requisition () { Width = width, Height = height };
+		}
 
-        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
-        {
-            minimum_height = natural_height = GetSizeRequest().Height;
-        }
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			minimum_height = natural_height = GetSizeRequest ().Height;
+		}
 
-        protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
-        {
-            minimum_width = natural_width = GetSizeRequest().Width;
-        }
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			minimum_width = natural_width = GetSizeRequest ().Width;
+		}
 
-        protected override bool OnDrawn(Context cr)
-        {
-            var awidth = AllocatedWidth;
-            var aheight = AllocatedHeight;
-            StyleContext.RenderBackground(cr, 0, 0, awidth, aheight);
+		protected override bool OnDrawn (Context cr)
+		{
+			var awidth = AllocatedWidth;
+			var aheight = AllocatedHeight;
+			StyleContext.RenderBackground (cr, 0, 0, awidth, aheight);
 
-            cr.LineWidth = 1.0;
-            Gdk.CairoHelper.SetSourceRgba(cr, StyleContext.GetColor(StateFlags));
+			cr.LineWidth = 1.0;
+			Gdk.CairoHelper.SetSourceRgba (cr, StyleContext.GetColor (StateFlags));
 
-            // Determine the ruler's size.
-            var border = StyleContext.GetBorder(StateFlags);
-            int rwidth = awidth - (border.Left + border.Right);
-            int rheight = aheight - (border.Top + border.Bottom);
+			// Determine the ruler's size.
+			var border = StyleContext.GetBorder (StateFlags);
+			int rwidth = awidth - (border.Left + border.Right);
+			int rheight = aheight - (border.Top + border.Bottom);
 
-            // Draw bottom line of the ruler.
-            switch (Orientation)
-            {
-                case Orientation.Horizontal:
-                    cr.Rectangle(0, aheight - border.Bottom - 1, awidth, 1);
-                    break;
-                case Orientation.Vertical:
-                    cr.Rectangle(awidth - border.Left - 1, 0, 1, aheight);
-                    // Swap so that width is the longer dimension (horizontal).
-                    Utility.Swap(ref awidth, ref aheight);
-                    Utility.Swap(ref rwidth, ref rheight);
-                    break;
-            }
-            cr.Fill();
+			// Draw bottom line of the ruler.
+			switch (Orientation) {
+				case Orientation.Horizontal:
+					cr.Rectangle (0, aheight - border.Bottom - 1, awidth, 1);
+					break;
+				case Orientation.Vertical:
+					cr.Rectangle (awidth - border.Left - 1, 0, 1, aheight);
+					// Swap so that width is the longer dimension (horizontal).
+					Utility.Swap (ref awidth, ref aheight);
+					Utility.Swap (ref rwidth, ref rheight);
+					break;
+			}
+			cr.Fill ();
 
-            double[] ruler_scale = null!; // NRT - Set immediately below
-            int[] subdivide = null!;
-            double pixels_per_unit = 1.0;
-            switch (Metric)
-            {
-                case MetricType.Pixels:
-                    ruler_scale = new double[] { 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000 };
-                    subdivide = new int[] { 1, 5, 10, 50, 100 };
-                    pixels_per_unit = 1.0;
-                    break;
-                case MetricType.Inches:
-                    ruler_scale = new double[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
-                    subdivide = new int[] { 1, 2, 4, 8, 16 };
-                    pixels_per_unit = 72;
-                    break;
-                case MetricType.Centimeters:
-                default:
-                    ruler_scale = new double[] { 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000 };
-                    subdivide = new int[] { 1, 5, 10, 50, 100 };
-                    pixels_per_unit = 28.35;
-                    break;
-            }
+			double[]? ruler_scale;
+			int[]? subdivide;
+			double pixels_per_unit = 1.0;
 
-            // Find our scaled range.
-            double scaled_upper = Upper / pixels_per_unit;
-            double scaled_lower = Lower / pixels_per_unit;
-            double max_size = scaled_upper - scaled_lower;
+			switch (Metric) {
+				case MetricType.Pixels:
+					ruler_scale = new double[] { 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000 };
+					subdivide = new int[] { 1, 5, 10, 50, 100 };
+					pixels_per_unit = 1.0;
+					break;
+				case MetricType.Inches:
+					ruler_scale = new double[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
+					subdivide = new int[] { 1, 2, 4, 8, 16 };
+					pixels_per_unit = 72;
+					break;
+				case MetricType.Centimeters:
+				default:
+					ruler_scale = new double[] { 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000 };
+					subdivide = new int[] { 1, 5, 10, 50, 100 };
+					pixels_per_unit = 28.35;
+					break;
+			}
 
-            // There must be enough space between the large ticks for the text labels.
-            var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
-            int font_size = GetFontSize(font);
-            var max_digits = ((int)-Math.Abs(max_size)).ToString().Length;
-            int min_separation = max_digits * font_size * 2;
+			// Find our scaled range.
+			double scaled_upper = Upper / pixels_per_unit;
+			double scaled_lower = Lower / pixels_per_unit;
+			double max_size = scaled_upper - scaled_lower;
 
-            double increment = awidth / max_size;
+			// There must be enough space between the large ticks for the text labels.
+			var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
+			int font_size = GetFontSize (font);
+			var max_digits = ((int) -Math.Abs (max_size)).ToString ().Length;
+			int min_separation = max_digits * font_size * 2;
 
-            // Figure out how to display the ticks.
-            int scale_index;
-            for (scale_index = 0; scale_index < ruler_scale.Length - 1; ++scale_index)
-            {
-                if (ruler_scale[scale_index] * increment > min_separation)
-                    break;
-            }
+			double increment = awidth / max_size;
 
-            int divide_index;
-            for (divide_index = 0; divide_index < subdivide.Length - 1; ++divide_index)
-            {
-                if (ruler_scale[scale_index] * increment < 5 * subdivide[divide_index + 1])
-                    break;
-            }
+			// Figure out how to display the ticks.
+			int scale_index;
+			for (scale_index = 0; scale_index < ruler_scale.Length - 1; ++scale_index) {
+				if (ruler_scale[scale_index] * increment > min_separation)
+					break;
+			}
 
-            double pixels_per_tick = increment * ruler_scale[scale_index] / subdivide[divide_index];
-            double units_per_tick = pixels_per_tick / increment;
-            double ticks_per_unit = 1.0 / units_per_tick;
+			int divide_index;
+			for (divide_index = 0; divide_index < subdivide.Length - 1; ++divide_index) {
+				if (ruler_scale[scale_index] * increment < 5 * subdivide[divide_index + 1])
+					break;
+			}
 
-            int start = (int)Math.Floor(scaled_lower * ticks_per_unit);
-            int end = (int)Math.Ceiling(scaled_upper * ticks_per_unit);
+			double pixels_per_tick = increment * ruler_scale[scale_index] / subdivide[divide_index];
+			double units_per_tick = pixels_per_tick / increment;
+			double ticks_per_unit = 1.0 / units_per_tick;
 
-            for (int i = start; i <= end; ++i)
-            {
-                // Position of tick (add 0.5 to center tick on pixel).
-                double position = Math.Floor(i * pixels_per_tick - scaled_lower * increment) + 0.5;
+			int start = (int) Math.Floor (scaled_lower * ticks_per_unit);
+			int end = (int) Math.Ceiling (scaled_upper * ticks_per_unit);
 
-                // Height of tick
-                int height = rheight;
-                for (int j = divide_index; j > 0; --j)
-                {
-                    if (i % subdivide[j] == 0) break;
-                    height = height / 2 + 1;
-                }
+			for (int i = start; i <= end; ++i) {
+				// Position of tick (add 0.5 to center tick on pixel).
+				double position = Math.Floor (i * pixels_per_tick - scaled_lower * increment) + 0.5;
 
-                // Draw text for major ticks.
-                if (i % subdivide[divide_index] == 0)
-                {
-                    int label_value = (int)Math.Round(i * units_per_tick);
-                    string label = label_value.ToString();
+				// Height of tick
+				int height = rheight;
+				for (int j = divide_index; j > 0; --j) {
+					if (i % subdivide[j] == 0) break;
+					height = height / 2 + 1;
+				}
 
-                    var layout = CreatePangoLayout(label);
-                    layout.FontDescription = font;
+				// Draw text for major ticks.
+				if (i % subdivide[divide_index] == 0) {
+					int label_value = (int) Math.Round (i * units_per_tick);
+					string label = label_value.ToString ();
 
-                    switch (Orientation)
-                    {
-                        case Orientation.Horizontal:
-                            cr.MoveTo(position + 2, border.Top);
-                            Pango.CairoHelper.ShowLayout(cr, layout);
-                            break;
-                        case Orientation.Vertical:
-                            PangoContext.BaseGravity = Pango.Gravity.East;
-                            PangoContext.GravityHint = Pango.GravityHint.Strong;
-                            cr.Save();
-                            cr.MoveTo(border.Left + font_size, position + font_size / 2);
-                            cr.Rotate(0.5 * Math.PI);
-                            Pango.CairoHelper.ShowLayout(cr, layout);
-                            cr.Restore();
-                            break;
-                    }
-                }
+					var layout = CreatePangoLayout (label);
+					layout.FontDescription = font;
 
-                // Draw ticks
-                switch (Orientation)
-                {
-                    case Orientation.Horizontal:
-                        cr.MoveTo(position, rheight + border.Top - height);
-                        cr.LineTo(position, rheight + border.Top);
-                        break;
-                    case Orientation.Vertical:
-                        cr.MoveTo(rheight + border.Left - height, position);
-                        cr.LineTo(rheight + border.Left, position);
-                        break;
-                }
+					switch (Orientation) {
+						case Orientation.Horizontal:
+							cr.MoveTo (position + 2, border.Top);
+							Pango.CairoHelper.ShowLayout (cr, layout);
+							break;
+						case Orientation.Vertical:
+							PangoContext.BaseGravity = Pango.Gravity.East;
+							PangoContext.GravityHint = Pango.GravityHint.Strong;
+							cr.Save ();
+							cr.MoveTo (border.Left + font_size, position + font_size / 2);
+							cr.Rotate (0.5 * Math.PI);
+							Pango.CairoHelper.ShowLayout (cr, layout);
+							cr.Restore ();
+							break;
+					}
+				}
 
-                cr.Stroke();
-            }
+				// Draw ticks
+				switch (Orientation) {
+					case Orientation.Horizontal:
+						cr.MoveTo (position, rheight + border.Top - height);
+						cr.LineTo (position, rheight + border.Top);
+						break;
+					case Orientation.Vertical:
+						cr.MoveTo (rheight + border.Left - height, position);
+						cr.LineTo (rheight + border.Left, position);
+						break;
+				}
 
-            // TODO-GTK3 - cache the ticks, and update the marker's position as the mouse moves.
+				cr.Stroke ();
+			}
 
-            return base.OnDrawn(cr);
-        }
+			// TODO-GTK3 - cache the ticks, and update the marker's position as the mouse moves.
 
-        private static int GetFontSize(Pango.FontDescription font)
-        {
-            int font_size = font.Size;
-            if (!font.SizeIsAbsolute)
-                font_size = (int)(font_size / Pango.Scale.PangoScale);
+			return base.OnDrawn (cr);
+		}
 
-            return font_size;
-        }
-    }
+		private static int GetFontSize (Pango.FontDescription font)
+		{
+			int font_size = font.Size;
+			if (!font.SizeIsAbsolute)
+				font_size = (int) (font_size / Pango.Scale.PangoScale);
+
+			return font_size;
+		}
+	}
 }
