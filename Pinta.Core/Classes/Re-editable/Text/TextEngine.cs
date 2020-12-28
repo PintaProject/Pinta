@@ -185,16 +185,8 @@ namespace Pinta.Core
 				currentPos.Line--;
 				currentPos.Offset = prevLength;
 			} else if (currentPos.Offset > 0) {
-				// We're in the middle of a line, delete the previous character
-				var line = lines[currentPos.Line];
-				var lineInfo = new StringInfo (line);
-
-				FindTextElementIndex (line, currentPos.Offset, out var elements, out var elementIndex);
-				var before = lineInfo.SubstringByTextElements (0, elementIndex - 1);
-				var after = (elementIndex < elements.Length) ? lineInfo.SubstringByTextElements (elementIndex) : string.Empty;
-
-				lines[currentPos.Line] = before + after;
-				currentPos.Offset = before.Length;
+				// We're in the middle of a line, delete the previous text element.
+				RemoveNextTextElement (-1);
 			}
 
 			selectionStart = currentPos;
@@ -209,22 +201,17 @@ namespace Pinta.Core
 				return;
 			}
 
-			// Where are we?!
-			if ((currentPos.Line == lines.Count - 1) && (currentPos.Offset == lines[lines.Count - 1].Length)) {
-				// The cursor is at the end of the text block
-				return;
-			} else if (currentPos.Offset == lines[currentPos.Line].Length) {
-				// End of a line, must merge strings
-				lines[currentPos.Line] = lines[currentPos.Line] + lines[currentPos.Line + 1];
+			var currentLine = lines[currentPos.Line];
+			if (currentPos.Offset < currentLine.Length) {
+				// In the middle of a line - delete the next text element.
+				RemoveNextTextElement (0);
+			} else if (currentPos.Line < lines.Count - 1) {
+				// End of a line - merge strings.
+				lines[currentPos.Line] += lines[currentPos.Line + 1];
 				lines.RemoveAt (currentPos.Line + 1);
-			} else {
-				// Middle of a line somewhere
-				// TODO-unicode - this should delete the entire text element.
-				lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset) + (lines[currentPos.Line]).Substring (currentPos.Offset + 1);
 			}
 
 			State = TextMode.Uncommitted;
-
 			OnModified ();
 		}
 
@@ -595,6 +582,24 @@ namespace Pinta.Core
 				if (elementIndex < 0)
 					throw new InvalidOperationException ("Text position is not at the beginning of a text element");
 			}
+		}
+
+		/// <summary>
+		/// Remove the text element after the current position (plus the specified element offset, e.g. -1 for backspace).
+		/// </summary>
+		/// <param name="elementOffset"></param>
+		private void RemoveNextTextElement (int elementOffset)
+		{
+			var line = lines[currentPos.Line];
+			var lineInfo = new StringInfo (line);
+
+			FindTextElementIndex (line, currentPos.Offset, out var elements, out var elementIndex);
+			elementIndex += elementOffset;
+			var before = lineInfo.SubstringByTextElements (0, elementIndex);
+			var after = (elementIndex  < elements.Length - 1) ? lineInfo.SubstringByTextElements (elementIndex + 1) : string.Empty;
+
+			lines[currentPos.Line] = before + after;
+			currentPos.Offset = before.Length;
 		}
 
 		#endregion

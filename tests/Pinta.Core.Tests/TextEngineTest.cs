@@ -101,6 +101,53 @@ namespace Pinta.Core.Tests
 		}
 
 		[Test]
+		public void DeleteJoinLines ()
+		{
+			var engine = new TextEngine (new () { "foo", "bar" });
+			engine.SetCursorPosition (new TextPosition (0, 3), true);
+			engine.PerformDelete ();
+
+			Assert.AreEqual (1, engine.LineCount);
+			Assert.AreEqual ("foobar", engine.ToString ());
+			Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+
+			// Nothing happens when deleting at the end of the last line.
+			engine.SetCursorPosition (new TextPosition (0, 6), true);
+			engine.PerformDelete ();
+
+			Assert.AreEqual (1, engine.LineCount);
+			Assert.AreEqual ("foobar", engine.ToString ());
+			Assert.AreEqual (new TextPosition (0, 6), engine.CurrentPosition);
+		}
+
+		[Test]
+		public void Delete ()
+		{
+			var engine = new TextEngine (testSnippet);
+
+			// Beginning of a line.
+			engine.SetCursorPosition (new TextPosition (0, 0), true);
+			engine.PerformDelete ();
+
+			Assert.AreEqual ("bc\u0327", engine.Lines[0]);
+			Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
+
+			// Middle of a line.
+			engine.SetCursorPosition (new TextPosition (2, 1), true);
+			engine.PerformDelete ();
+
+			Assert.AreEqual ("ba\u0304\u0308", engine.Lines[2]);
+			Assert.AreEqual (new TextPosition (2, 1), engine.CurrentPosition);
+
+			// End of a line.
+			engine.SetCursorPosition (new TextPosition (1, 3), true);
+			engine.PerformDelete ();
+
+			Assert.AreEqual ("c\u0327b", engine.Lines[1]);
+			Assert.AreEqual (new TextPosition (1, 3), engine.CurrentPosition);
+		}
+
+		[Test]
 		public void PerformLeftRight ()
 		{
 			var engine = new TextEngine (testSnippet);
