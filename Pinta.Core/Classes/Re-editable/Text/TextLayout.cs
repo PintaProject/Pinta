@@ -75,7 +75,7 @@ namespace Pinta.Core
 		{
 			Pango.Rectangle weak, strong;
 
-			int index = engine.PositionToIndex (engine.CurrentPosition);
+			int index = engine.PositionToUTF8Index (engine.CurrentPosition);
 
 			Layout.GetCursorPos (index, out strong, out weak);
 
@@ -108,12 +108,12 @@ namespace Pinta.Core
 
 			Layout.XyToIndex (x, y, out index, out trailing);
 
-			return engine.IndexToPosition (index + trailing);
+			return engine.UTF8IndexToPosition (index + trailing);
 		}
 
 		public Point TextPositionToPoint (TextPosition p)
 		{
-			int index = engine.PositionToIndex (p);
+			int index = engine.PositionToUTF8Index (p);
 
 			var rect = Layout.IndexToPos (index);
 
