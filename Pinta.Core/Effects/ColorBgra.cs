@@ -49,11 +49,17 @@ namespace Pinta.Core
 
         public const int SizeOf = 4;
 
-        public static ColorBgra ParseHexString(string hexString)
-        {
-            uint value = Convert.ToUInt32(hexString, 16);
-            return ColorBgra.FromUInt32(value);
-        }
+		public static bool TryParseHexString (string hexString, out ColorBgra color)
+		{
+			try {
+				var value = Convert.ToUInt32 (hexString, 16);
+				color = FromUInt32 (value);
+				return true;
+			} catch (Exception) {
+				color = Zero;
+				return false;
+			}
+		}
 
         public string ToHexString()
         {

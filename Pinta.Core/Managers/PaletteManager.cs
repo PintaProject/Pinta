@@ -40,6 +40,9 @@ namespace Pinta.Core
 
 		private const int MAX_RECENT_COLORS = 10;
 		private const string PALETTE_FILE = "palette.txt";
+		private const string PRIMARY_COLOR_SETTINGS_KEY = "primary-color";
+		private const string SECONDARY_COLOR_SETTINGS_KEY = "secondary-color";
+		private const string RECENT_COLORS_SETTINGS_KEY = "recently-used-colors";
 
 		private readonly List<Color> recently_used = new List<Color> (MAX_RECENT_COLORS);
 
@@ -70,9 +73,6 @@ namespace Pinta.Core
 		
 		public PaletteManager ()
 		{
-			SetColor (true, new Color (0, 0, 0), false);
-			SetColor (false, new Color (1, 1, 1), false);
-
 			PopulateSavedPalette ();
 			PopulateRecentlyUsedColors ();
 
@@ -147,15 +147,19 @@ namespace Pinta.Core
 
 		private void PopulateRecentlyUsedColors ()
 		{
-			var saved_colors = PintaCore.Settings.GetSetting ("recently-used-colors", string.Empty);
+			// Primary / Secondary colors
+			var primary_color = PintaCore.Settings.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
+			var secondary_color = PintaCore.Settings.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
+
+			SetColor (true, ColorBgra.TryParseHexString (primary_color, out var primary) ? primary.ToCairoColor () : new Color (0, 0, 0), false);
+			SetColor (false, ColorBgra.TryParseHexString (secondary_color, out var secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0), false);
+
+			// Recently used palette
+			var saved_colors = PintaCore.Settings.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
 
 			foreach (var hex_color in saved_colors.Split (',')) {
-				try {
-					var color = ColorBgra.ParseHexString (hex_color);
+				if (ColorBgra.TryParseHexString (hex_color, out var color))
 					recently_used.Add (color.ToCairoColor ());
-				} catch (Exception) {
-					// Ignore
-				}
 			}
 
 			// Fill in with default color if not enough saved
@@ -176,8 +180,13 @@ namespace Pinta.Core
 
 		private void SaveRecentlyUsedColors ()
 		{
+			// Primary / Secondary colors
+			PintaCore.Settings.PutSetting (PRIMARY_COLOR_SETTINGS_KEY, PrimaryColor.ToColorBgra ().ToHexString ());
+			PintaCore.Settings.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
+
+			// Recently used palette
 			var colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
-			PintaCore.Settings.PutSetting ("recently-used-colors", colors);
+			PintaCore.Settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 		}
 
 		#region Protected Methods
