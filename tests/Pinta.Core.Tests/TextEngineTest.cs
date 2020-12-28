@@ -176,5 +176,27 @@ namespace Pinta.Core.Tests
 			engine.PerformRight (false, false);
 			Assert.AreEqual (endPosition, engine.CurrentPosition);
 		}
+
+		[Test]
+		public void PerformControlLeftRight ()
+		{
+			var engine = new TextEngine (new () { string.Join ("  ", testSnippet) });
+
+			engine.SetCursorPosition (new TextPosition (0, 0), true);
+			engine.PerformRight (true, false);
+			Assert.AreEqual (new TextPosition (0, 8), engine.CurrentPosition);
+			engine.SetCursorPosition (new TextPosition (0, 7), true);
+			engine.PerformRight (true, false);
+			Assert.AreEqual (new TextPosition (0, 8), engine.CurrentPosition);
+			engine.PerformRight (true, false);
+			engine.PerformRight (true, false);
+			Assert.AreEqual (new TextPosition (0, 22), engine.CurrentPosition);
+
+			engine.PerformLeft (true, false);
+			engine.PerformLeft (true, false);
+			Assert.AreEqual (new TextPosition (0, 8), engine.CurrentPosition);
+			engine.PerformLeft (true, false);
+			Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
+		}
 	}
 }

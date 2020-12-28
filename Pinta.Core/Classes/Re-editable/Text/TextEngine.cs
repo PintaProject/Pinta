@@ -16,6 +16,7 @@ using Pinta.Core;
 using System.Reflection;
 using System.Linq;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Pinta.Core
 {
@@ -217,16 +218,19 @@ namespace Pinta.Core
 
 		public void PerformLeft (bool control, bool shift)
 		{
-			if (control) {
-				PerformControlLeft (shift);
-				return;
-			}
-
 			// Move caret to the left, or to the previous line
 			if (currentPos.Offset > 0) {
 				var currentLine = lines[currentPos.Line];
-				FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
-				currentPos.Offset = elements[elementIndex - 1];
+				if (control) {
+					// Move to the beginning of the previous word.
+					currentPos.Offset = FindWords (currentLine)
+						.Where (i => i < currentPos.Offset)
+						.DefaultIfEmpty (0)
+						.Last ();
+				} else {
+					FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
+					currentPos.Offset = elements[elementIndex - 1];
+				}
 			} else if (currentPos.Offset == 0 && currentPos.Line > 0) {
 				currentPos.Line--;
 				currentPos.Offset = lines[currentPos.Line].Length;
@@ -236,57 +240,24 @@ namespace Pinta.Core
 				ClearSelection ();
 		}
 
-		public void PerformControlLeft (bool shift)
-		{
-			// Move caret to the left to the beginning of the word/space/etc.
-			// TODO-unicode - this should be done by text elements.
-			if (currentPos.Offset > 0) {
-				int ntp = currentPos.Offset;
-				string currentLine = lines[currentPos.Line];
-
-				if (System.Char.IsLetterOrDigit (currentLine[ntp - 1])) {
-					while (ntp > 0 && (System.Char.IsLetterOrDigit (currentLine[ntp - 1])))
-						ntp--;
-
-				} else if (System.Char.IsWhiteSpace (currentLine[ntp - 1])) {
-					while (ntp > 0 && (System.Char.IsWhiteSpace (currentLine[ntp - 1])))
-						ntp--;
-
-				} else if (ntp > 0 && System.Char.IsPunctuation (currentLine[ntp - 1])) {
-					while (ntp > 0 && System.Char.IsPunctuation (currentLine[ntp - 1]))
-						ntp--;
-
-				} else {
-					ntp--;
-				}
-
-				if (!shift)
-					ClearSelection ();
-
-				currentPos.Offset = ntp;
-			} else if (currentPos.Offset == 0 && currentPos.Line > 0) {
-				currentPos.Line--;
-				currentPos.Offset = lines[currentPos.Line].Length;
-
-				if (!shift)
-					ClearSelection ();
-			}
-		}
-
 		public void PerformRight (bool control, bool shift)
 		{
-			if (control) {
-				PerformControlRight (shift);
-				return;
-			}
-
 			var currentLine = lines[currentPos.Line];
 			if (currentPos.Offset < currentLine.Length) {
-				FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
-				if (elementIndex < elements.Length - 1)
-					currentPos.Offset = elements[elementIndex + 1];
-				else
-					currentPos.Offset = currentLine.Length;
+				if (control) {
+					// Move to the beginning of the next word.
+					currentPos.Offset = FindWords (currentLine)
+						.Where (i => i > currentPos.Offset)
+						.DefaultIfEmpty (currentLine.Length)
+						.First ();
+				} else {
+					// Move to the next text element.
+					FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
+					if (elementIndex < elements.Length - 1)
+						currentPos.Offset = elements[elementIndex + 1];
+					else
+						currentPos.Offset = currentLine.Length;
+				}
 
 			} else if (currentPos.Offset == currentLine.Length && currentPos.Line < lines.Count - 1) {
 				currentPos.Line++;
@@ -296,43 +267,6 @@ namespace Pinta.Core
 
 			if (!shift)
 				ClearSelection ();
-		}
-
-		public void PerformControlRight (bool shift)
-		{
-			// Move caret to the right to the end of the word/space/etc.
-			// TODO-unicode - this should be done by text elements.
-			if (currentPos.Offset < lines[currentPos.Line].Length) {
-				int ntp = currentPos.Offset;
-				string currentLine = lines[currentPos.Line];
-
-				if (System.Char.IsLetterOrDigit (currentLine[ntp])) {
-					while (ntp < currentLine.Length && (System.Char.IsLetterOrDigit (currentLine[ntp])))
-						ntp++;
-
-				} else if (System.Char.IsWhiteSpace (currentLine[ntp])) {
-					while (ntp < currentLine.Length && (System.Char.IsWhiteSpace (currentLine[ntp])))
-						ntp++;
-
-				} else if (ntp > 0 && System.Char.IsPunctuation (currentLine[ntp])) {
-					while (ntp < currentLine.Length && System.Char.IsPunctuation (currentLine[ntp]))
-						ntp++;
-
-				} else {
-					ntp++;
-				}
-
-				currentPos.Offset = ntp;
-
-				if (!shift)
-					ClearSelection ();
-			} else if (currentPos.Offset == lines[currentPos.Line].Length && currentPos.Line < lines.Count - 1) {
-				currentPos.Line++;
-				currentPos.Offset = 0;
-
-				if (!shift)
-					ClearSelection ();
-			}
 		}
 
 		public void PerformHome (bool control, bool shift)
@@ -596,11 +530,16 @@ namespace Pinta.Core
 			FindTextElementIndex (line, currentPos.Offset, out var elements, out var elementIndex);
 			elementIndex += elementOffset;
 			var before = lineInfo.SubstringByTextElements (0, elementIndex);
-			var after = (elementIndex  < elements.Length - 1) ? lineInfo.SubstringByTextElements (elementIndex + 1) : string.Empty;
+			var after = (elementIndex < elements.Length - 1) ? lineInfo.SubstringByTextElements (elementIndex + 1) : string.Empty;
 
 			lines[currentPos.Line] = before + after;
 			currentPos.Offset = before.Length;
 		}
+
+		/// <summary>
+		/// Returns the index of the first character of each word in the line.
+		/// </summary>
+		private static IEnumerable<int> FindWords (string s) => Regex.Matches (s, @"\b\w").Select (m => m.Index);
 
 		#endregion
 	}
