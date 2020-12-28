@@ -11,13 +11,14 @@ namespace Pinta.Core.Tests
 	[TestFixture]
 	class TextEngineTest
 	{
-		private string LinesToString (string[] lines)
-		{
-			var str = new StringBuilder ();
-			foreach (string s in lines)
-				str.AppendLine (s);
-			return str.ToString ();
-		}
+		// The string below contains combining characters, so there are fewer text elements than chars.
+		private readonly List<string> testSnippet = new (){
+			"a\u0304\u0308bc\u0327",
+			"c\u0327ba\u0304\u0308",
+			"bc\u0327a\u0304\u0308"
+		};
+
+		private string LinesToString (string[] lines) => string.Join (Environment.NewLine, lines);
 
 		[Test]
 		public void PerformEnter ()
@@ -61,10 +62,48 @@ namespace Pinta.Core.Tests
 		}
 
 		[Test]
+		public void BackspaceJoinLines ()
+		{
+			var engine = new TextEngine (new () { "foo", "bar" });
+			engine.SetCursorPosition (new TextPosition (1, 0), true);
+			engine.PerformBackspace ();
+
+			Assert.AreEqual (1, engine.LineCount);
+			Assert.AreEqual ("foobar", engine.ToString ());
+			Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+		}
+
+		[Test]
+		public void Backspace ()
+		{
+			var engine = new TextEngine (testSnippet);
+
+			// End of a line.
+			engine.SetCursorPosition (new TextPosition (0, 6), true);
+			engine.PerformBackspace ();
+
+			Assert.AreEqual ("a\u0304\u0308b", engine.Lines[0]);
+			Assert.AreEqual (new TextPosition (0, 4), engine.CurrentPosition);
+
+			// First character of a line.
+			engine.SetCursorPosition (new TextPosition (1, 2), true);
+			engine.PerformBackspace ();
+
+			Assert.AreEqual ("ba\u0304\u0308", engine.Lines[1]);
+			Assert.AreEqual (new TextPosition (1, 0), engine.CurrentPosition);
+
+			// Middle of a line.
+			engine.SetCursorPosition (new TextPosition (2, 3), true);
+			engine.PerformBackspace ();
+
+			Assert.AreEqual ("ba\u0304\u0308", engine.Lines[2]);
+			Assert.AreEqual (new TextPosition (2, 1), engine.CurrentPosition);
+		}
+
+		[Test]
 		public void PerformLeftRight ()
 		{
-			// The string below contains combining characters, so there are fewer text elements than chars.
-			var engine = new TextEngine (new List<string> () { "a\u0304\u0308bc\u0327", "c\u0327ba\u0304\u0308" });
+			var engine = new TextEngine (testSnippet);
 
 			engine.SetCursorPosition (new TextPosition (0, 3), true);
 			engine.PerformRight (false, false);
@@ -85,9 +124,10 @@ namespace Pinta.Core.Tests
 			engine.PerformLeft (false, false);
 			Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
 
-			engine.SetCursorPosition (new TextPosition (1, 6), true);
+			var endPosition = new TextPosition (testSnippet.Count - 1, testSnippet.Last ().Length);
+			engine.SetCursorPosition (endPosition, true);
 			engine.PerformRight (false, false);
-			Assert.AreEqual (new TextPosition (1, 6), engine.CurrentPosition);
+			Assert.AreEqual (endPosition, engine.CurrentPosition);
 		}
 	}
 }

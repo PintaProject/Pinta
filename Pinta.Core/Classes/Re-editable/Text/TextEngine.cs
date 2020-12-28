@@ -44,7 +44,7 @@ namespace Pinta.Core
 
 		public TextEngine (List<string> lines)
 		{
-			this.lines = lines;
+			this.lines = new (lines);
 			State = TextMode.Unchanged;
 		}
 
@@ -90,15 +90,9 @@ namespace Pinta.Core
 			return (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty));
 		}
 
-		public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ();
+		public IReadOnlyList<string> Lines => lines;
 
-			foreach (string s in lines)
-				sb.AppendLine (s);
-
-			return sb.ToString ();
-		}
+		public override string ToString () => string.Join (Environment.NewLine, lines);
 
 		public KeyValuePair<TextPosition, TextPosition>[] SelectionRegions {
 			get {
@@ -182,26 +176,25 @@ namespace Pinta.Core
 				return;
 			}
 
-			// We're at the beginning of a line and there's
-			// a line above us, go to the end of the prior line
 			if (currentPos.Offset == 0 && currentPos.Line > 0) {
-				int ntp = lines[currentPos.Line - 1].Length;
-
-				lines[currentPos.Line - 1] = lines[currentPos.Line - 1] + lines[currentPos.Line];
+				// We're at the beginning of a line and there's
+				// a line above us, go to the end of the prior line
+				int prevLength = lines[currentPos.Line - 1].Length;
+				lines[currentPos.Line - 1] += lines[currentPos.Line];
 				lines.RemoveAt (currentPos.Line);
 				currentPos.Line--;
-				currentPos.Offset = ntp;
+				currentPos.Offset = prevLength;
 			} else if (currentPos.Offset > 0) {
 				// We're in the middle of a line, delete the previous character
-				string ln = lines[currentPos.Line];
+				var line = lines[currentPos.Line];
+				var lineInfo = new StringInfo (line);
 
-				// If we are at the end of a line, we don't need to place a compound string
-				if (currentPos.Offset == ln.Length)
-					lines[currentPos.Line] = ln.Substring (0, ln.Length - 1);
-				else
-					lines[currentPos.Line] = ln.Substring (0, currentPos.Offset - 1) + ln.Substring (currentPos.Offset);
+				FindTextElementIndex (line, currentPos.Offset, out var elements, out var elementIndex);
+				var before = lineInfo.SubstringByTextElements (0, elementIndex - 1);
+				var after = (elementIndex < elements.Length) ? lineInfo.SubstringByTextElements (elementIndex) : string.Empty;
 
-				currentPos.Offset--;
+				lines[currentPos.Line] = before + after;
+				currentPos.Offset = before.Length;
 			}
 
 			selectionStart = currentPos;
@@ -226,6 +219,7 @@ namespace Pinta.Core
 				lines.RemoveAt (currentPos.Line + 1);
 			} else {
 				// Middle of a line somewhere
+				// TODO-unicode - this should delete the entire text element.
 				lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset) + (lines[currentPos.Line]).Substring (currentPos.Offset + 1);
 			}
 
@@ -258,6 +252,7 @@ namespace Pinta.Core
 		public void PerformControlLeft (bool shift)
 		{
 			// Move caret to the left to the beginning of the word/space/etc.
+			// TODO-unicode - this should be done by text elements.
 			if (currentPos.Offset > 0) {
 				int ntp = currentPos.Offset;
 				string currentLine = lines[currentPos.Line];
@@ -319,6 +314,7 @@ namespace Pinta.Core
 		public void PerformControlRight (bool shift)
 		{
 			// Move caret to the right to the end of the word/space/etc.
+			// TODO-unicode - this should be done by text elements.
 			if (currentPos.Offset < lines[currentPos.Line].Length) {
 				int ntp = currentPos.Offset;
 				string currentLine = lines[currentPos.Line];
@@ -383,6 +379,7 @@ namespace Pinta.Core
 		{
 			if (currentPos.Line > 0) {
 				currentPos.Line--;
+				// TODO-unicode - this shold move to the matching text element index, not character index.
 				currentPos.Offset = Math.Min (currentPos.Offset,
 							      lines[currentPos.Line].Length);
 
@@ -395,6 +392,7 @@ namespace Pinta.Core
 		{
 			if (currentPos.Line < LineCount - 1) {
 				currentPos.Line++;
+				// TODO-unicode - this shold move to the matching text element index, not character index.
 				currentPos.Offset = Math.Min (currentPos.Offset,
 							      lines[currentPos.Line].Length);
 
