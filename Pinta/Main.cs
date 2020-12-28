@@ -95,15 +95,15 @@ namespace Pinta
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
 
-			// TODO-GTK3 - switch to the GTK command line parsing once GtkSharp supports it, and open a default document otherwise.
+			// TODO-GTK3 - get apple events working.
 #if false
 			if (SystemManager.GetOperatingSystem () == OS.Mac) {
 				RegisterForAppleEvents ();
 			}
-
-			OpenFilesFromCommandLine (extra);
 #endif
-			app.Run("pinta", args);
+			// TODO-GTK3 - try using the GTK command line parsing once GtkSharp supports it.
+			app.Activated += (_, _) => OpenFilesFromCommandLine (extra);
+			app.Run ("pinta", Array.Empty<string> ());
 		}
 
                 private static void ShowHelp (OptionSet p)
