@@ -176,7 +176,7 @@ namespace Pinta.Gui.Widgets
 		{
 			int px, py;
 			Gdk.ModifierType mask;
-			Window.GetPointer (out px, out py, out mask);
+			ObsoleteExtensions.GetWindowPointer (Window, out px, out py, out mask);
 
 			int index = FindValueIndex (py);
 			py = (int) NormalizeY (index, py);
@@ -208,7 +208,7 @@ namespace Pinta.Gui.Widgets
 		{
 			int px, py;
 			Gdk.ModifierType mask;
-			Window.GetPointer (out px, out py, out mask);
+			ObsoleteExtensions.GetWindowPointer (Window, out px, out py, out mask);
 
 			int index = FindValueIndex ((int) py);
 
@@ -239,7 +239,7 @@ namespace Pinta.Gui.Widgets
 		{
 			int px, py;
 			Gdk.ModifierType mask;
-			Window.GetPointer (out px, out py, out mask);
+			ObsoleteExtensions.GetWindowPointer (Window, out px, out py, out mask);
 
 			Rectangle rect = GradientRectangle;
 			Rectangle all = Allocation.ToCairoRectangle ();

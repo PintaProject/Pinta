@@ -113,8 +113,7 @@ namespace Pinta
 
                 // Get the position of the mouse pointer relative
                 // to canvas scrolled window top-left corner
-                scrolled_window.GetPointer (out x, out y);
-
+                ObsoleteExtensions.GetWidgetPointer (scrolled_window, out x, out y);
                 // Check if the pointer is on the canvas
                 return (x > 0) && (x < scrolled_window.Allocation.Width) &&
                     (y > 0) && (y < scrolled_window.Allocation.Height);

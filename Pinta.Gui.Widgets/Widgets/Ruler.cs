@@ -110,7 +110,7 @@ namespace Pinta.Gui.Widgets
         private Requisition GetSizeRequest()
         {
             var border = StyleContext.GetBorder(StateFlags);
-            var font = StyleContext.GetFont(StateFlags);
+            var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
             int font_size = GetFontSize(font);
 
             int size = 2 + font_size * 2;
@@ -201,7 +201,7 @@ namespace Pinta.Gui.Widgets
             double max_size = scaled_upper - scaled_lower;
 
             // There must be enough space between the large ticks for the text labels.
-            var font = StyleContext.GetFont(StateFlags);
+            var font = ObsoleteExtensions.GetStyleContextFont (StyleContext, StateFlags);
             int font_size = GetFontSize(font);
             var max_digits = ((int)-Math.Abs(max_size)).ToString().Length;
             int min_separation = max_digits * font_size * 2;

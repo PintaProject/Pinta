@@ -53,8 +53,8 @@ namespace Pinta.Core
 		{
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add (adjustment.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (adjustment.Icon)));
-			fact.AddDefault ();
+			ObsoleteExtensions.AddToIconFactory (fact, adjustment.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (adjustment.Icon)));
+			ObsoleteExtensions.AddDefaultToIconFactory (fact);
 
 			// Create a gtk action for each adjustment
 			var act = new Command (adjustment.GetType ().Name, adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, adjustment.Icon);
@@ -84,8 +84,8 @@ namespace Pinta.Core
 		{
 			// Add icon to IconFactory
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
-			fact.Add (effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
-			fact.AddDefault ();
+			ObsoleteExtensions.AddToIconFactory (fact, effect.Icon, new Gtk.IconSet (PintaCore.Resources.GetIcon (effect.Icon)));
+			ObsoleteExtensions.AddDefaultToIconFactory (fact);
 
 			// Create a gtk action and menu item for each effect
 			var act = new Command (effect.GetType ().Name, effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""), string.Empty, effect.Icon);
