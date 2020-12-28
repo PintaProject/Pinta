@@ -22,69 +22,69 @@ namespace Pinta.Core
 	{
 		private List<string> lines;
 
-        private TextPosition currentPos;
-        private TextPosition selectionStart;
+		private TextPosition currentPos;
+		private TextPosition selectionStart;
 
-		public Pango.FontDescription Font { get; private set; } = new();
+		public Pango.FontDescription Font { get; private set; } = new ();
 		public TextAlignment Alignment { get; private set; }
 		public bool Underline { get; private set; }
 
 		public TextPosition CurrentPosition { get { return currentPos; } }
 		public int LineCount { get { return lines.Count; } }
 		public TextMode State;
-        public Point Origin { get; set; }
+		public Point Origin { get; set; }
 
-        public event EventHandler? Modified;
+		public event EventHandler? Modified;
 
-        public TextEngine ()
-            : this (new List<string> () { string.Empty })
-        {
-        }
-
-		public TextEngine(List<string> lines)
+		public TextEngine ()
+		    : this (new List<string> () { string.Empty })
 		{
-            this.lines = lines;
+		}
+
+		public TextEngine (List<string> lines)
+		{
+			this.lines = lines;
 			State = TextMode.Unchanged;
 		}
 
 		#region Public Methods
 		public void Clear ()
 		{
-			lines.Clear();
-			lines.Add(string.Empty);
+			lines.Clear ();
+			lines.Add (string.Empty);
 			State = TextMode.Unchanged;
 
-            currentPos = new TextPosition (0, 0);
-            ClearSelection ();
+			currentPos = new TextPosition (0, 0);
+			ClearSelection ();
 
 			Origin = Point.Zero;
 
-            OnModified ();
+			OnModified ();
 		}
 
 		/// <summary>
 		/// Performs a deep clone of the TextEngine instance and returns the clone.
 		/// </summary>
 		/// <returns>A clone of this TextEngine instance.</returns>
-		public TextEngine Clone()
+		public TextEngine Clone ()
 		{
-			TextEngine clonedTE = new TextEngine();
+			TextEngine clonedTE = new TextEngine ();
 
-			clonedTE.lines = lines.ToList();
+			clonedTE.lines = lines.ToList ();
 			clonedTE.State = State;
-            clonedTE.currentPos = currentPos;
+			clonedTE.currentPos = currentPos;
 			clonedTE.selectionStart = selectionStart;
 			clonedTE.Font = Font.Copy ();
 			clonedTE.Alignment = Alignment;
 			clonedTE.Underline = Underline;
-			clonedTE.Origin = new Point(Origin.X, Origin.Y);
+			clonedTE.Origin = new Point (Origin.X, Origin.Y);
 
 			//The rest of the variables are calculated on the spot.
 
 			return clonedTE;
 		}
 
-		public bool IsEmpty()
+		public bool IsEmpty ()
 		{
 			return (lines.Count == 0 || (lines.Count == 1 && lines[0] == string.Empty));
 		}
@@ -99,34 +99,32 @@ namespace Pinta.Core
 			return sb.ToString ();
 		}
 
-		public KeyValuePair<TextPosition, TextPosition>[] SelectionRegions
-		{
+		public KeyValuePair<TextPosition, TextPosition>[] SelectionRegions {
 			get {
-                var regions = new List<KeyValuePair<TextPosition, TextPosition>> ();
-                TextPosition p1, p2;
+				var regions = new List<KeyValuePair<TextPosition, TextPosition>> ();
+				TextPosition p1, p2;
 
-                TextPosition start = TextPosition.Min (currentPos, selectionStart);
-                TextPosition end = TextPosition.Max (currentPos, selectionStart);
+				TextPosition start = TextPosition.Min (currentPos, selectionStart);
+				TextPosition end = TextPosition.Max (currentPos, selectionStart);
 
-                p1 = start;
-                ForeachLine (start, end, (currentLinePos, strpos, endpos) =>
-                {
-                    p2 = new TextPosition (currentLinePos, endpos);
-                    regions.Add (new KeyValuePair<TextPosition, TextPosition> (p1, p2));
-                    if (currentLinePos + 1 < lines.Count)
-                        p1 = new TextPosition (currentLinePos + 1, 0);
-                });
+				p1 = start;
+				ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
+					p2 = new TextPosition (currentLinePos, endpos);
+					regions.Add (new KeyValuePair<TextPosition, TextPosition> (p1, p2));
+					if (currentLinePos + 1 < lines.Count)
+						p1 = new TextPosition (currentLinePos + 1, 0);
+				});
 
-                return regions.ToArray ();
+				return regions.ToArray ();
 			}
 		}
 
 		public void SetCursorPosition (TextPosition position, bool clearSelection)
 		{
-            currentPos = position;
+			currentPos = position;
 
-            if (clearSelection)
-                ClearSelection ();
+			if (clearSelection)
+				ClearSelection ();
 		}
 
 		public void SetFont (Pango.FontDescription font, TextAlignment alignment, bool underline)
@@ -140,18 +138,18 @@ namespace Pinta.Core
 		#endregion
 
 		#region Key Handlers
-        public void InsertText (string str)
-        {
-            if (HasSelection ())
-                DeleteSelection ();
+		public void InsertText (string str)
+		{
+			if (HasSelection ())
+				DeleteSelection ();
 
-            lines[currentPos.Line] = lines[currentPos.Line].Insert (currentPos.Offset, str);
-            State = TextMode.Uncommitted;
-            currentPos.Offset += str.Length;
-            selectionStart = currentPos;
+			lines[currentPos.Line] = lines[currentPos.Line].Insert (currentPos.Offset, str);
+			State = TextMode.Uncommitted;
+			currentPos.Offset += str.Length;
+			selectionStart = currentPos;
 
-            OnModified ();
-        }
+			OnModified ();
+		}
 
 		public void PerformEnter ()
 		{
@@ -172,7 +170,7 @@ namespace Pinta.Core
 
 			currentPos.Line++;
 			currentPos.Offset = 0;
-            selectionStart = currentPos;
+			selectionStart = currentPos;
 			OnModified ();
 		}
 
@@ -205,9 +203,9 @@ namespace Pinta.Core
 				currentPos.Offset--;
 			}
 
-            selectionStart = currentPos;
+			selectionStart = currentPos;
 			State = TextMode.Uncommitted;
-            OnModified ();
+			OnModified ();
 		}
 
 		public void PerformDelete ()
@@ -252,7 +250,7 @@ namespace Pinta.Core
 				return;
 
 			if (!shift)
-                ClearSelection();
+				ClearSelection ();
 		}
 
 		public void PerformControlLeft (bool shift)
@@ -278,16 +276,16 @@ namespace Pinta.Core
 					ntp--;
 				}
 
-                if (!shift)
-                    ClearSelection ();
+				if (!shift)
+					ClearSelection ();
 
 				currentPos.Offset = ntp;
 			} else if (currentPos.Offset == 0 && currentPos.Line > 0) {
 				currentPos.Line--;
 				currentPos.Offset = lines[currentPos.Line].Length;
 
-                if (!shift)
-                    ClearSelection ();
+				if (!shift)
+					ClearSelection ();
 			}
 		}
 
@@ -307,8 +305,8 @@ namespace Pinta.Core
 			} else
 				return;
 
-            if (!shift)
-                ClearSelection ();
+			if (!shift)
+				ClearSelection ();
 		}
 
 		public void PerformControlRight (bool shift)
@@ -336,14 +334,14 @@ namespace Pinta.Core
 
 				currentPos.Offset = ntp;
 
-                if (!shift)
-                    ClearSelection ();
+				if (!shift)
+					ClearSelection ();
 			} else if (currentPos.Offset == lines[currentPos.Line].Length && currentPos.Line < lines.Count - 1) {
 				currentPos.Line++;
 				currentPos.Offset = 0;
 
-                if (!shift)
-                    ClearSelection ();
+				if (!shift)
+					ClearSelection ();
 			}
 		}
 
@@ -357,8 +355,8 @@ namespace Pinta.Core
 			// Go to the beginning of the line
 			currentPos.Offset = 0;
 
-            if (!shift)
-                ClearSelection ();
+			if (!shift)
+				ClearSelection ();
 		}
 
 		public void PerformEnd (bool control, bool shift)
@@ -370,55 +368,51 @@ namespace Pinta.Core
 			// Go to the end of the line
 			currentPos.Offset = lines[currentPos.Line].Length;
 
-            if (!shift)
-                ClearSelection ();
+			if (!shift)
+				ClearSelection ();
 		}
 
 		public void PerformUp (bool shift)
 		{
-            if (currentPos.Line > 0)
-            {
-                currentPos.Line--;
-                currentPos.Offset = Math.Min (currentPos.Offset,
-                                              lines[currentPos.Line].Length);
+			if (currentPos.Line > 0) {
+				currentPos.Line--;
+				currentPos.Offset = Math.Min (currentPos.Offset,
+							      lines[currentPos.Line].Length);
 
-                if (!shift)
-                    ClearSelection ();
-            }
+				if (!shift)
+					ClearSelection ();
+			}
 		}
 
 		public void PerformDown (bool shift)
 		{
-            if (currentPos.Line < LineCount - 1)
-            {
-                currentPos.Line++;
-                currentPos.Offset = Math.Min (currentPos.Offset,
-                                              lines[currentPos.Line].Length);
+			if (currentPos.Line < LineCount - 1) {
+				currentPos.Line++;
+				currentPos.Offset = Math.Min (currentPos.Offset,
+							      lines[currentPos.Line].Length);
 
-                if (!shift)
-                    ClearSelection ();
-            }
+				if (!shift)
+					ClearSelection ();
+			}
 		}
 
 		public void PerformCopy (Gtk.Clipboard clipboard)
 		{
-            if (HasSelection ())
-            {
-                StringBuilder strbld = new StringBuilder ();
+			if (HasSelection ()) {
+				StringBuilder strbld = new StringBuilder ();
 
-                TextPosition start = TextPosition.Min (currentPos, selectionStart);
-                TextPosition end = TextPosition.Max (currentPos, selectionStart);
-                ForeachLine (start, end, (currentLinePos, strpos, endpos) =>{
-                    if (endpos - strpos > 0)
-                        strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
-                    else if (endpos == strpos)
-                        strbld.AppendLine ();
-                });
-                strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+				TextPosition start = TextPosition.Min (currentPos, selectionStart);
+				TextPosition end = TextPosition.Max (currentPos, selectionStart);
+				ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
+					if (endpos - strpos > 0)
+						strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
+					else if (endpos == strpos)
+						strbld.AppendLine ();
+				});
+				strbld.Remove (strbld.Length - Environment.NewLine.Length, Environment.NewLine.Length);
 
-                clipboard.Text = strbld.ToString ();
-            }
-			else
+				clipboard.Text = strbld.ToString ();
+			} else
 				clipboard.Clear ();
 		}
 
@@ -441,12 +435,12 @@ namespace Pinta.Core
 			if (String.IsNullOrEmpty (txt))
 				return false;
 
-            if (HasSelection ())
-                DeleteSelection ();
+			if (HasSelection ())
+				DeleteSelection ();
 
 			string[] ins_lines = txt.Split (Environment.NewLine.ToCharArray (), StringSplitOptions.RemoveEmptyEntries);
-			string endline = lines [currentPos.Line].Substring (currentPos.Offset);
-			lines [currentPos.Line] = lines [currentPos.Line].Substring (0, currentPos.Offset);
+			string endline = lines[currentPos.Line].Substring (currentPos.Offset);
+			lines[currentPos.Line] = lines[currentPos.Line].Substring (0, currentPos.Offset);
 			bool first = true;
 			foreach (string ins_txt in ins_lines) {
 				if (!first) {
@@ -459,9 +453,9 @@ namespace Pinta.Core
 					currentPos.Offset += ins_txt.Length;
 				}
 			}
-			lines [currentPos.Line] += endline;
+			lines[currentPos.Line] += endline;
 
-            selectionStart = currentPos;
+			selectionStart = currentPos;
 			State = TextMode.Uncommitted;
 
 			OnModified ();
@@ -471,21 +465,20 @@ namespace Pinta.Core
 
 		#region Private Methods
 
-		delegate void Action(int currentLine, int strartPosition, int endPosition);
+		delegate void Action (int currentLine, int strartPosition, int endPosition);
 
 		private void ForeachLine (TextPosition start, TextPosition end, Action action)
 		{
-            if (start.CompareTo(end) > 0)
-                throw new ArgumentException ("Invalid start position", "start");
+			if (start.CompareTo (end) > 0)
+				throw new ArgumentException ("Invalid start position", "start");
 
-            while (start.Line < end.Line)
-            {
-                action (start.Line, start.Offset, lines[start.Line].Length);
-                ++start.Line;
-                start.Offset = 0;
-            }
+			while (start.Line < end.Line) {
+				action (start.Line, start.Offset, lines[start.Line].Length);
+				++start.Line;
+				start.Offset = 0;
+			}
 
-            action (start.Line, start.Offset, end.Offset);
+			action (start.Line, start.Offset, end.Offset);
 		}
 
 		public TextPosition IndexToPosition (int index)
@@ -496,15 +489,15 @@ namespace Pinta.Core
 
 			foreach (string s in lines) {
 				// It's past this line, move along
-				if (current + StringToByteSize(s) < index) {
-					current += StringToByteSize(s) + 1;
+				if (current + StringToByteSize (s) < index) {
+					current += StringToByteSize (s) + 1;
 					line++;
 					continue;
 				}
 
 				// It's in this line
 				offset = index - current;
-				offset = ByteOffsetToCharacterOffset(lines[line], offset);
+				offset = ByteOffsetToCharacterOffset (lines[line], offset);
 				return new TextPosition (line, offset);
 			}
 
@@ -517,42 +510,41 @@ namespace Pinta.Core
 			int index = 0;
 
 			for (int i = 0; i < p.Line; i++)
-				index += StringToByteSize(lines[i]) + 1;
-			
-			index += StringToByteSize(lines[p.Line].Substring(0, p.Offset));
+				index += StringToByteSize (lines[i]) + 1;
+
+			index += StringToByteSize (lines[p.Line].Substring (0, p.Offset));
 			return index;
 		}
-		
-		private int StringToByteSize(string s)
+
+		private int StringToByteSize (string s)
 		{
-			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
-    			return (enc.GetBytes(s)).Length;
+			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding ();
+			return (enc.GetBytes (s)).Length;
 		}
-		
-		private int ByteOffsetToCharacterOffset(string s, int offset)
+
+		private int ByteOffsetToCharacterOffset (string s, int offset)
 		{
 			int i = 0;
-			for(i = 0; i < offset; i++)
-			{
-				if(StringToByteSize(s.Substring(0, i)) >= offset) break;
+			for (i = 0; i < offset; i++) {
+				if (StringToByteSize (s.Substring (0, i)) >= offset) break;
 			}
-    			return i;
+			return i;
 		}
-		
-        private void OnModified ()
-        {
-            EventHandler? handler = Modified;
-            if (handler != null)
-                handler (this, EventArgs.Empty);
-        }
+
+		private void OnModified ()
+		{
+			EventHandler? handler = Modified;
+			if (handler != null)
+				handler (this, EventArgs.Empty);
+		}
 
 		private string GetText (TextPosition startPos, int len)
 		{
 			StringBuilder strbld = new StringBuilder ();
 
-            TextPosition start = TextPosition.Min (currentPos, selectionStart);
-            TextPosition end = TextPosition.Max (currentPos, selectionStart);
-			ForeachLine (start, end, (currentLinePos, strpos, endpos) =>{
+			TextPosition start = TextPosition.Min (currentPos, selectionStart);
+			TextPosition end = TextPosition.Max (currentPos, selectionStart);
+			ForeachLine (start, end, (currentLinePos, strpos, endpos) => {
 				if (endpos - strpos > 0)
 					strbld.AppendLine (lines[currentLinePos].Substring (strpos, endpos - strpos));
 				else if (endpos == strpos)
@@ -564,39 +556,39 @@ namespace Pinta.Core
 
 		private void DeleteSelection ()
 		{
-            TextPosition start = TextPosition.Min (currentPos, selectionStart);
-            TextPosition end = TextPosition.Max (currentPos, selectionStart);
-            DeleteText (start, end);
+			TextPosition start = TextPosition.Min (currentPos, selectionStart);
+			TextPosition end = TextPosition.Max (currentPos, selectionStart);
+			DeleteText (start, end);
 
-            currentPos = start;
-            ClearSelection ();
+			currentPos = start;
+			ClearSelection ();
 		}
 
 		private void DeleteText (TextPosition start, TextPosition end)
 		{
-            if (start.CompareTo(end) >= 0)
-                throw new ArgumentException ("Invalid start position", "start");
+			if (start.CompareTo (end) >= 0)
+				throw new ArgumentException ("Invalid start position", "start");
 
-            lines[start.Line] = lines[start.Line].Substring (0, start.Offset) +
-                                lines[end.Line].Substring (end.Offset);
+			lines[start.Line] = lines[start.Line].Substring (0, start.Offset) +
+					    lines[end.Line].Substring (end.Offset);
 
-            // If this was a multi-line delete, remove all lines in between,
-            // including the end line.
-            lines.RemoveRange (start.Line + 1, end.Line - start.Line);
+			// If this was a multi-line delete, remove all lines in between,
+			// including the end line.
+			lines.RemoveRange (start.Line + 1, end.Line - start.Line);
 
 			State = TextMode.Uncommitted;
-            OnModified ();
+			OnModified ();
 		}
 
-        private bool HasSelection ()
-        {
-            return selectionStart != currentPos;
-        }
+		private bool HasSelection ()
+		{
+			return selectionStart != currentPos;
+		}
 
-        private void ClearSelection ()
-        {
-            selectionStart = currentPos;
-        }
+		private void ClearSelection ()
+		{
+			selectionStart = currentPos;
+		}
 
 		#endregion
 	}
