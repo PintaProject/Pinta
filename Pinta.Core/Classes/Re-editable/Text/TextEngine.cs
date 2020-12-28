@@ -228,7 +228,7 @@ namespace Pinta.Core
 						.DefaultIfEmpty (0)
 						.Last ();
 				} else {
-					FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
+					(var elements, var elementIndex) = FindTextElementIndex (currentLine, currentPos.Offset);
 					currentPos.Offset = elements[elementIndex - 1];
 				}
 			} else if (currentPos.Offset == 0 && currentPos.Line > 0) {
@@ -252,7 +252,7 @@ namespace Pinta.Core
 						.First ();
 				} else {
 					// Move to the next text element.
-					FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
+					(var elements, var elementIndex) = FindTextElementIndex (currentLine, currentPos.Offset);
 					if (elementIndex < elements.Length - 1)
 						currentPos.Offset = elements[elementIndex + 1];
 					else
@@ -298,24 +298,20 @@ namespace Pinta.Core
 
 		public void PerformUp (bool shift)
 		{
-			if (currentPos.Line > 0) {
-				currentPos.Line--;
-				// TODO-unicode - this shold move to the matching text element index, not character index.
-				currentPos.Offset = Math.Min (currentPos.Offset,
-							      lines[currentPos.Line].Length);
+			if (currentPos.Line == 0)
+				return;
 
-				if (!shift)
-					ClearSelection ();
-			}
+			MoveToAdjacentLine (-1);
+
+			if (!shift)
+				ClearSelection ();
+
 		}
 
 		public void PerformDown (bool shift)
 		{
 			if (currentPos.Line < LineCount - 1) {
-				currentPos.Line++;
-				// TODO-unicode - this shold move to the matching text element index, not character index.
-				currentPos.Offset = Math.Min (currentPos.Offset,
-							      lines[currentPos.Line].Length);
+				MoveToAdjacentLine (1);
 
 				if (!shift)
 					ClearSelection ();
@@ -504,11 +500,12 @@ namespace Pinta.Core
 		/// Returns a list of the char indices where each text element begins, along with
 		/// the element index corresponding to the specified character.
 		/// </summary>
-		private static void FindTextElementIndex (string s, int charIndex, out int[] elements, out int elementIndex)
+		private static (int[], int) FindTextElementIndex (string s, int charIndex)
 		{
-			elements = StringInfo.ParseCombiningCharacters (s);
+			var elements = StringInfo.ParseCombiningCharacters (s);
 
 			// It's valid to position the caret after the last character in the line.
+			int elementIndex;
 			if (charIndex == s.Length)
 				elementIndex = elements.Length;
 			else {
@@ -516,6 +513,8 @@ namespace Pinta.Core
 				if (elementIndex < 0)
 					throw new InvalidOperationException ("Text position is not at the beginning of a text element");
 			}
+
+			return (elements, elementIndex);
 		}
 
 		/// <summary>
@@ -527,13 +526,31 @@ namespace Pinta.Core
 			var line = lines[currentPos.Line];
 			var lineInfo = new StringInfo (line);
 
-			FindTextElementIndex (line, currentPos.Offset, out var elements, out var elementIndex);
+			(var elements, var elementIndex) = FindTextElementIndex (line, currentPos.Offset);
 			elementIndex += elementOffset;
 			var before = lineInfo.SubstringByTextElements (0, elementIndex);
 			var after = (elementIndex < elements.Length - 1) ? lineInfo.SubstringByTextElements (elementIndex + 1) : string.Empty;
 
 			lines[currentPos.Line] = before + after;
 			currentPos.Offset = before.Length;
+		}
+
+		private void MoveToAdjacentLine (int lineOffset)
+		{
+			var currentLine = lines[currentPos.Line];
+			var nextLine = lines[currentPos.Line + lineOffset];
+
+			// Remain at the same text element index (if possible) when changing lines.
+			(_, var elementIndex) = FindTextElementIndex (currentLine, currentPos.Offset);
+			var nextLineElements = StringInfo.ParseCombiningCharacters (nextLine);
+
+			if (elementIndex < nextLineElements.Length) {
+				currentPos.Offset = nextLineElements[elementIndex];
+			} else {
+				currentPos.Offset = nextLine.Length;
+			}
+
+			currentPos.Line += lineOffset;
 		}
 
 		/// <summary>

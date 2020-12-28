@@ -198,5 +198,18 @@ namespace Pinta.Core.Tests
 			engine.PerformLeft (true, false);
 			Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
 		}
+
+		[Test]
+		public void PerformUpDown ()
+		{
+			var engine = new TextEngine (testSnippet);
+
+			engine.SetCursorPosition (new TextPosition (1, 2), true);
+			engine.PerformUp (false);
+			Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+
+			engine.PerformDown (false);
+			Assert.AreEqual (new TextPosition (1, 2), engine.CurrentPosition);
+		}
 	}
 }
