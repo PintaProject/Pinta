@@ -174,6 +174,24 @@ namespace Pinta.Core
 			return doc;
 		}
 
+		/// <summary>
+		/// Creates a new Document with a specified image as content.
+		/// Primarily used for Paste Into New Image.
+		/// </summary>
+		public Document NewDocumentFromImage (Gdk.Pixbuf image)
+		{
+			var doc = NewDocument (new Gdk.Size (image.Width, image.Height), new Color (0, 0, 0, 0));
+
+			using (var g = new Context (doc.Layers[0].Surface))
+				g.DrawPixbuf (image, new Point (0, 0));
+
+			// A normal document considers the "New Image" history to not be dirty, as it's just a
+			// blank background. We put an image there, so we should try to save if the user closes it.
+			doc.Workspace.History.SetDirty ();
+
+			return doc;
+		}
+
 		// TODO: Standardize add to recent files
 		public bool OpenFile (string file, Window? parent = null)
 		{

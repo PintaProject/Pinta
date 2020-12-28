@@ -160,6 +160,16 @@ namespace Pinta.Core
 			document.IsDirty = false;
 		}
 
+		/// <summary>
+		/// Mark the document history as being dirty. No matter where we are in the history
+		/// stack the user will be prompted to Save if the document is closed.
+		/// </summary>
+		public void SetDirty ()
+		{
+			clean_pointer = -1;
+			document.IsDirty = true;
+		}
+
 		public void Clear ()
 		{
 			history.ForEach (delegate (BaseHistoryItem item) { item.Dispose (); });
