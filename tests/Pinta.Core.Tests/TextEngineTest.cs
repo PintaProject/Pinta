@@ -61,20 +61,33 @@ namespace Pinta.Core.Tests
 		}
 
 		[Test]
-		public void PerformLeft ()
+		public void PerformLeftRight ()
 		{
-			var engine = new TextEngine (new List<string> () { "foo", "bar" });
+			// The string below contains combining characters, so there are fewer text elements than chars.
+			var engine = new TextEngine (new List<string> () { "a\u0304\u0308bc\u0327", "c\u0327ba\u0304\u0308" });
 
-			engine.SetCursorPosition (new TextPosition (1, 0), true);
+			engine.SetCursorPosition (new TextPosition (0, 3), true);
+			engine.PerformRight (false, false);
+			Assert.AreEqual (new TextPosition (0, 4), engine.CurrentPosition);
+			engine.PerformRight (false, false);
+			Assert.AreEqual (new TextPosition (0, 6), engine.CurrentPosition);
+			engine.PerformRight (false, false);
+			engine.PerformRight (false, false);
+			Assert.AreEqual (new TextPosition (1, 2), engine.CurrentPosition);
+
 			engine.PerformLeft (false, false);
-			Assert.AreEqual (new TextPosition (0, 3), engine.CurrentPosition);
+			Assert.AreEqual (new TextPosition (1, 0), engine.CurrentPosition);
+			engine.PerformLeft (false, false);
+			Assert.AreEqual (new TextPosition (0, 6), engine.CurrentPosition);
 
-			engine.SetCursorPosition (new TextPosition (0, 1), true);
+			// Should stay at the beginning / end when attempting to advance further.
+			engine.SetCursorPosition (new TextPosition (0, 0), true);
 			engine.PerformLeft (false, false);
 			Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
 
-			engine.PerformLeft (false, false);
-			Assert.AreEqual (new TextPosition (0, 0), engine.CurrentPosition);
+			engine.SetCursorPosition (new TextPosition (1, 6), true);
+			engine.PerformRight (false, false);
+			Assert.AreEqual (new TextPosition (1, 6), engine.CurrentPosition);
 		}
 	}
 }

@@ -15,6 +15,7 @@ using Gdk;
 using Pinta.Core;
 using System.Reflection;
 using System.Linq;
+using System.Globalization;
 
 namespace Pinta.Core
 {
@@ -241,13 +242,14 @@ namespace Pinta.Core
 			}
 
 			// Move caret to the left, or to the previous line
-			if (currentPos.Offset > 0)
-				currentPos.Offset--;
-			else if (currentPos.Offset == 0 && currentPos.Line > 0) {
+			if (currentPos.Offset > 0) {
+				var currentLine = lines[currentPos.Line];
+				FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
+				currentPos.Offset = elements[elementIndex - 1];
+			} else if (currentPos.Offset == 0 && currentPos.Line > 0) {
 				currentPos.Line--;
 				currentPos.Offset = lines[currentPos.Line].Length;
-			} else
-				return;
+			}
 
 			if (!shift)
 				ClearSelection ();
@@ -296,14 +298,19 @@ namespace Pinta.Core
 				return;
 			}
 
-			// Move caret to the right, or to the next line
-			if (currentPos.Offset < lines[currentPos.Line].Length) {
-				currentPos.Offset++;
-			} else if (currentPos.Offset == lines[currentPos.Line].Length && currentPos.Line < lines.Count - 1) {
+			var currentLine = lines[currentPos.Line];
+			if (currentPos.Offset < currentLine.Length) {
+				FindTextElementIndex (currentLine, currentPos.Offset, out var elements, out var elementIndex);
+				if (elementIndex < elements.Length - 1)
+					currentPos.Offset = elements[elementIndex + 1];
+				else
+					currentPos.Offset = currentLine.Length;
+
+			} else if (currentPos.Offset == currentLine.Length && currentPos.Line < lines.Count - 1) {
 				currentPos.Line++;
 				currentPos.Offset = 0;
-			} else
-				return;
+
+			}
 
 			if (!shift)
 				ClearSelection ();
@@ -481,7 +488,7 @@ namespace Pinta.Core
 			action (start.Line, start.Offset, end.Offset);
 		}
 
-		public TextPosition IndexToPosition (int index)
+		public TextPosition UTF8IndexToPosition (int index)
 		{
 			int current = 0;
 			int line = 0;
@@ -489,15 +496,15 @@ namespace Pinta.Core
 
 			foreach (string s in lines) {
 				// It's past this line, move along
-				if (current + StringToByteSize (s) < index) {
-					current += StringToByteSize (s) + 1;
+				if (current + StringToUTF8Size (s) < index) {
+					current += StringToUTF8Size (s) + 1;
 					line++;
 					continue;
 				}
 
 				// It's in this line
 				offset = index - current;
-				offset = ByteOffsetToCharacterOffset (lines[line], offset);
+				offset = UTF8OffsetToCharacterOffset (lines[line], offset);
 				return new TextPosition (line, offset);
 			}
 
@@ -505,28 +512,28 @@ namespace Pinta.Core
 			return new TextPosition (lines.Count - 1, lines[lines.Count - 1].Length);
 		}
 
-		public int PositionToIndex (TextPosition p)
+		public int PositionToUTF8Index (TextPosition p)
 		{
 			int index = 0;
 
 			for (int i = 0; i < p.Line; i++)
-				index += StringToByteSize (lines[i]) + 1;
+				index += StringToUTF8Size (lines[i]) + 1;
 
-			index += StringToByteSize (lines[p.Line].Substring (0, p.Offset));
+			index += StringToUTF8Size (lines[p.Line].Substring (0, p.Offset));
 			return index;
 		}
 
-		private int StringToByteSize (string s)
+		private int StringToUTF8Size (string s)
 		{
 			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding ();
 			return (enc.GetBytes (s)).Length;
 		}
 
-		private int ByteOffsetToCharacterOffset (string s, int offset)
+		private int UTF8OffsetToCharacterOffset (string s, int offset)
 		{
 			int i = 0;
 			for (i = 0; i < offset; i++) {
-				if (StringToByteSize (s.Substring (0, i)) >= offset) break;
+				if (StringToUTF8Size (s.Substring (0, i)) >= offset) break;
 			}
 			return i;
 		}
@@ -588,6 +595,24 @@ namespace Pinta.Core
 		private void ClearSelection ()
 		{
 			selectionStart = currentPos;
+		}
+
+		/// <summary>
+		/// Returns a list of the char indices where each text element begins, along with
+		/// the element index corresponding to the specified character.
+		/// </summary>
+		private static void FindTextElementIndex (string s, int charIndex, out int[] elements, out int elementIndex)
+		{
+			elements = StringInfo.ParseCombiningCharacters (s);
+
+			// It's valid to position the caret after the last character in the line.
+			if (charIndex == s.Length)
+				elementIndex = elements.Length;
+			else {
+				elementIndex = Array.FindIndex (elements, i => i == charIndex);
+				if (elementIndex < 0)
+					throw new InvalidOperationException ("Text position is not at the beginning of a text element");
+			}
 		}
 
 		#endregion
