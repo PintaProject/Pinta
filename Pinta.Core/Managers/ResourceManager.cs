@@ -30,7 +30,14 @@ using Pinta.Resources;
 
 namespace Pinta
 {
-	public class ResourceManager
+	public interface IResourceService
+	{
+		Gdk.Pixbuf GetIcon (string name);
+		Gdk.Pixbuf GetIcon (string name, int size);
+		Stream? GetResourceIconStream (string name);
+	}
+
+	public class ResourceManager : IResourceService
 	{
 		public Gdk.Pixbuf GetIcon (string name)
 		{

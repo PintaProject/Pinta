@@ -39,6 +39,8 @@ namespace Pinta.Core
 	// [TypeExtensionPoint]
 	public abstract class BaseTool
 	{
+		protected IResourceService Resources { get; }
+
 		public const int DEFAULT_BRUSH_WIDTH = 2;
 	    
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
@@ -58,8 +60,9 @@ namespace Pinta.Core
 
         public Cursor? CurrentCursor { get; private set; }
 
-		protected BaseTool ()
+		protected BaseTool (IServiceManager services)
 		{
+			Resources = services.GetService<IResourceService> ();
             CurrentCursor = DefaultCursor;
 
             PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
@@ -118,7 +121,19 @@ namespace Pinta.Core
 
 		protected virtual bool ShowAntialiasingButton { get { return false; } }
 		protected virtual bool ShowAlphaBlendingButton { get { return false; } }
-		
+
+		public virtual void OnMouseDown (Document document, ToolMouseEventArgs e)
+		{
+		}
+
+		public virtual void OnMouseMove (Document document, ToolMouseEventArgs e)
+		{
+		}
+
+		public virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+		}
+
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
 		{
@@ -430,8 +445,8 @@ namespace Pinta.Core
 
 			alphablending_button = new ToolBarDropDownButton ();
 
-			abOn = alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Resources.Icons.BlendingNormal, true);
-			abOff = alphablending_button.AddItem (Translations.GetString ("Overwrite"), Resources.Icons.BlendingOverwrite, false);
+			abOn = alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Pinta.Resources.Icons.BlendingNormal, true);
+			abOff = alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
 
 			tb.AppendItem (alphablending_button);
 		}
@@ -445,8 +460,8 @@ namespace Pinta.Core
 
 			antialiasing_button = new ToolBarDropDownButton ();
 
-			aaOn = antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Resources.Icons.AntiAliasingEnabled, true);
-			aaOff = antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Resources.Icons.AntiAliasingDisabled, false);
+			aaOn = antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
+			aaOff = antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
 
 			tb.AppendItem (antialiasing_button);
 		}

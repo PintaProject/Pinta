@@ -12,6 +12,94 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Editable\EditEngines\ArrowedEditEngine.cs" />
+    <Compile Remove="Editable\EditEngines\BaseEditEngine.cs" />
+    <Compile Remove="Editable\EditEngines\EllipseEditEngine.cs" />
+    <Compile Remove="Editable\EditEngines\LineCurveEditEngine.cs" />
+    <Compile Remove="Editable\EditEngines\RectangleEditEngine.cs" />
+    <Compile Remove="Editable\EditEngines\RoundedLineEditEngine.cs" />
+    <Compile Remove="Editable\Shapes\Arrow.cs" />
+    <Compile Remove="Editable\Shapes\ControlPoint.cs" />
+    <Compile Remove="Editable\Shapes\EllipseEngine.cs" />
+    <Compile Remove="Editable\Shapes\GeneratedPoint.cs" />
+    <Compile Remove="Editable\Shapes\LineCurveSeriesEngine.cs" />
+    <Compile Remove="Editable\Shapes\OrganizedPointCollection.cs" />
+    <Compile Remove="Editable\Shapes\RoundedLineEngine.cs" />
+    <Compile Remove="Editable\Shapes\ShapeEngineCollection.cs" />
+    <Compile Remove="HistoryItems\ShapesHistoryItem.cs" />
+    <Compile Remove="HistoryItems\ShapesModifyHistoryItem.cs" />
+    <Compile Remove="Tools\BaseBrushTool.cs" />
+    <Compile Remove="Tools\BaseTransformTool.cs" />
+    <Compile Remove="Tools\CloneStampTool.cs" />
+    <Compile Remove="Tools\ColorPickerTool.cs" />
+    <Compile Remove="Tools\EllipseSelectTool.cs" />
+    <Compile Remove="Tools\EllipseTool.cs" />
+    <Compile Remove="Tools\EraserTool.cs" />
+    <Compile Remove="Tools\FloodTool.cs" />
+    <Compile Remove="Tools\FreeformShapeTool.cs" />
+    <Compile Remove="Tools\GradientTool.cs" />
+    <Compile Remove="Tools\LassoSelectTool.cs" />
+    <Compile Remove="Tools\LineCurveTool.cs" />
+    <Compile Remove="Tools\MagicWandTool.cs" />
+    <Compile Remove="Tools\MoveSelectedTool.cs" />
+    <Compile Remove="Tools\MoveSelectionTool.cs" />
+    <Compile Remove="Tools\PaintBrushTool.cs" />
+    <Compile Remove="Tools\PaintBucketTool.cs" />
+    <Compile Remove="Tools\PanTool.cs" />
+    <Compile Remove="Tools\RecolorTool.cs" />
+    <Compile Remove="Tools\RectangleSelectTool.cs" />
+    <Compile Remove="Tools\RectangleTool.cs" />
+    <Compile Remove="Tools\RoundedRectangleTool.cs" />
+    <Compile Remove="Tools\SelectTool.cs" />
+    <Compile Remove="Tools\ShapeTool.cs" />
+    <Compile Remove="Tools\TextTool.cs" />
+    <Compile Remove="Tools\ZoomTool.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Editable\EditEngines\ArrowedEditEngine.cs" />
+    <None Include="Editable\EditEngines\BaseEditEngine.cs" />
+    <None Include="Editable\EditEngines\EllipseEditEngine.cs" />
+    <None Include="Editable\EditEngines\LineCurveEditEngine.cs" />
+    <None Include="Editable\EditEngines\RectangleEditEngine.cs" />
+    <None Include="Editable\EditEngines\RoundedLineEditEngine.cs" />
+    <None Include="Editable\Shapes\Arrow.cs" />
+    <None Include="Editable\Shapes\ControlPoint.cs" />
+    <None Include="Editable\Shapes\EllipseEngine.cs" />
+    <None Include="Editable\Shapes\GeneratedPoint.cs" />
+    <None Include="Editable\Shapes\LineCurveSeriesEngine.cs" />
+    <None Include="Editable\Shapes\OrganizedPointCollection.cs" />
+    <None Include="Editable\Shapes\RoundedLineEngine.cs" />
+    <None Include="Editable\Shapes\ShapeEngineCollection.cs" />
+    <None Include="HistoryItems\ShapesHistoryItem.cs" />
+    <None Include="HistoryItems\ShapesModifyHistoryItem.cs" />
+    <None Include="Tools\BaseBrushTool.cs" />
+    <None Include="Tools\BaseTransformTool.cs" />
+    <None Include="Tools\CloneStampTool.cs" />
+    <None Include="Tools\ColorPickerTool.cs" />
+    <None Include="Tools\EllipseSelectTool.cs" />
+    <None Include="Tools\EllipseTool.cs" />
+    <None Include="Tools\EraserTool.cs" />
+    <None Include="Tools\FloodTool.cs" />
+    <None Include="Tools\FreeformShapeTool.cs" />
+    <None Include="Tools\GradientTool.cs" />
+    <None Include="Tools\LassoSelectTool.cs" />
+    <None Include="Tools\LineCurveTool.cs" />
+    <None Include="Tools\MagicWandTool.cs" />
+    <None Include="Tools\MoveSelectedTool.cs" />
+    <None Include="Tools\MoveSelectionTool.cs" />
+    <None Include="Tools\PaintBrushTool.cs" />
+    <None Include="Tools\PaintBucketTool.cs" />
+    <None Include="Tools\PanTool.cs" />
+    <None Include="Tools\RecolorTool.cs" />
+    <None Include="Tools\RectangleSelectTool.cs" />
+    <None Include="Tools\RectangleTool.cs" />
+    <None Include="Tools\RoundedRectangleTool.cs" />
+    <None Include="Tools\SelectTool.cs" />
+    <None Include="Tools\ShapeTool.cs" />
+    <None Include="Tools\TextTool.cs" />
+    <None Include="Tools\ZoomTool.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.128" />
   </ItemGroup>
   <ItemGroup>

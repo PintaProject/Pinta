@@ -81,7 +81,7 @@ namespace Pinta.Core
 					Tools.Remove (tool);
 					Tools.Sort (new ToolSorter ());
 
-					SetCurrentTool(new DummyTool());
+					SetCurrentTool(new DummyTool(PintaCore.Services));
 					OnToolRemoved (tool);
 
 					if (groupedTools[tool.ShortcutKey].Count > 1)
@@ -133,7 +133,7 @@ namespace Pinta.Core
 			get { if (index >= 0) {
 					return Tools[index];}
 				else {
-					DummyTool dummy = new DummyTool ();
+					DummyTool dummy = new DummyTool (PintaCore.Services);
 					SetCurrentTool(dummy);
 					return dummy;
 				}
@@ -262,8 +262,12 @@ namespace Pinta.Core
 	// throw a zillion exceptions due to missing overrides
 	public class DummyTool : BaseTool
 	{
+		public DummyTool (IServiceManager services) : base (services)
+		{
+		}
+
 		public override string Name { get { return Translations.GetString ("No tool selected."); } }
-		public override string Icon { get { return Resources.StandardIcons.ImageMissing; } }
+		public override string Icon { get { return Pinta.Resources.StandardIcons.ImageMissing; } }
 		public override string StatusBarText { get { return Translations.GetString ("No tool selected."); } }
 
 		protected override void OnBuildToolBar (Toolbar tb)

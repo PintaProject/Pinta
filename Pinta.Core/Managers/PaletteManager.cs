@@ -32,7 +32,13 @@ using System.Linq;
 
 namespace Pinta.Core
 {
-	public class PaletteManager
+	public interface IPaletteService
+	{
+		Color PrimaryColor { get; set; }
+		Color SecondaryColor { get; set; }
+	}
+
+	public class PaletteManager : IPaletteService
 	{
 		private Color primary;
 		private Color secondary;
