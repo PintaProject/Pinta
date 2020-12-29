@@ -105,11 +105,11 @@ Pinta.Tools/Tools/RecolorTool.cs
 Pinta.Tools/Tools/RectangleSelectTool.cs
 Pinta.Tools/Tools/RectangleTool.cs
 Pinta.Tools/Tools/RoundedRectangleTool.cs
-Pinta.Tools/Tools/SelectShapeTool.cs
 Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
 Pinta.Tools/Tools/ZoomTool.cs
 Pinta/Actions/Edit/ResizePaletteAction.cs
+Pinta/Actions/Edit/PasteAction.cs
 Pinta/Actions/File/CloseDocumentAction.cs
 Pinta/Actions/File/NewScreenshotAction.cs
 Pinta/Actions/File/OpenDocumentAction.cs

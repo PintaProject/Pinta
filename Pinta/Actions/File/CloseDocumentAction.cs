@@ -57,25 +57,30 @@ namespace Pinta.Actions
 				return;
 			}
 
-			var primary = Translations.GetString ("Save the changes to image \"{0}\" before closing?");
+			var primary = Translations.GetString ("Save changes to image \"{0}\" before closing?");
 			var secondary = Translations.GetString ("If you don't save, all changes will be permanently lost.");
 			var message = string.Format (markup, primary, secondary);
 
 			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal,
-						    MessageType.Warning, ButtonsType.None, true,
+						    MessageType.Question, ButtonsType.None, true,
 						    message, System.IO.Path.GetFileName (PintaCore.Workspace.ActiveDocument.Filename));
 
 			// Use the standard button order for each OS.
+			Widget closeButton;
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				md.AddButton (Stock.Save, ResponseType.Yes);
-				md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
+				closeButton = md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			}
 			else {
-				md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
+				closeButton = md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 			}
+
+			// Style the close button as being a destructive action.
+			// (https://developer.gnome.org/hig/stable/buttons.html.en)
+			closeButton.StyleContext.AddClass ("destructive-action");
 
 			// so that user won't accidentally overwrite
 			md.DefaultResponse = ResponseType.Cancel;
