@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Added
 - Ported to GTK3 and .NET 5
+  - Many changes to the appearance of standard GTK widgets and dialogs (e.g. the color picker and file dialogs). GTK3 themes should also now be supported.
   - Improved support for high-DPI displays.
   - The Open Recent menu item was deprecated in GTK3 and has been removed, but similar functionality is available in the file dialog's Recent section.
   - On macOS, the menu now appears in the global menu bar instead of the application window.
