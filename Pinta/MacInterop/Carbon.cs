@@ -207,42 +207,17 @@ namespace Pinta.MacInterop
 		}
 		
 		#endregion
-		
-		#region Internal Mac API for setting process name
-		
-		[DllImport (CarbonLib)]
-		static extern int GetCurrentProcess (out ProcessSerialNumber psn);
-		
-		[DllImport (CarbonLib)]
-		static extern int CPSSetProcessName (ref ProcessSerialNumber psn, string name);
-		
-		public static void SetProcessName (string name)
-		{
-			try {
-				ProcessSerialNumber psn;
-				if (GetCurrentProcess (out psn) == 0)
-					CPSSetProcessName (ref psn, name);
-			} catch {} //EntryPointNotFoundException?
-		}
-		
-		struct ProcessSerialNumber {
-#pragma warning disable 0169
-			ulong highLongOfPSN;
-			ulong lowLongOfPSN;
-#pragma warning restore 0169
-		}
-		
-		#endregion
-		
+
 		public static Dictionary<string,int> GetFileListFromEventRef (IntPtr eventRef)
 		{
 			AEDesc list = GetEventParameter<AEDesc> (eventRef, CarbonEventParameterName.DirectObject, CarbonEventParameterType.AEList);
 			try {
-				int line = 0;
+				int line;
 				try {
 					SelectionRange range = GetEventParameter<SelectionRange> (eventRef, CarbonEventParameterName.AEPosition, CarbonEventParameterType.Char);
 					line = range.lineNum+1;
-				} catch {
+				} catch (Exception) {
+					line = 0;
 				}
 				
 				var arr = AppleEvent.GetListFromAEDesc<string?,FSRef> (ref list, CoreFoundation.FSRefToString,
@@ -309,6 +284,7 @@ namespace Pinta.MacInterop
 		WindowRef = 2003398244, // 'wind'
 		Char = 1413830740, // 'TEXT'
 		UInt32 = 1835100014, // 'magn'
+		UTF8Text = 1970562616, // 'utf8'
 		UnicodeText = 1970567284, // 'utxt'
 		AEList = 1818850164, // 'list'
 		WildCard = 707406378, // '****'
@@ -378,6 +354,7 @@ namespace Pinta.MacInterop
 		RotateWindowsBackward = 1919906914, // 'rotb'
 		RotateFloatingWindowsForward = 1920231031, // 'rtfw'
 		RotateFloatingWindowsBackward = 1920231010, // 'rtfb'
+		QuitAndCloseAllWindows = 1903520631, // 'qukw'
 		
 		//created automatically -- used for inserting before/after the default window list
 		WindowListSeparator = 2003592310, // 'wldv'
@@ -568,7 +545,7 @@ namespace Pinta.MacInterop
 		int value;
 		
 		public int Value {
-			get { return Value; }
+			get { return value; }
 		}
 		
 		public OSType (int value)

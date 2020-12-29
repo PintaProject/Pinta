@@ -95,12 +95,10 @@ namespace Pinta
 			if (threads != -1)
 				Pinta.Core.PintaCore.System.RenderThreads = threads;
 
-			// TODO-GTK3 - get apple events working.
-#if false
 			if (SystemManager.GetOperatingSystem () == OS.Mac) {
 				RegisterForAppleEvents ();
 			}
-#endif
+
 			// TODO-GTK3 - try using the GTK command line parsing once GtkSharp supports it.
 			app.Activated += (_, _) => OpenFilesFromCommandLine (extra);
 			app.Run ("pinta", Array.Empty<string> ());
