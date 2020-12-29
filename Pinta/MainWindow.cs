@@ -229,9 +229,15 @@ namespace Pinta
 			}
 
 			// If the canvas/tool didn't consume it, see if its a toolbox shortcut
-			if (e.RetVal == null || !(bool) e.RetVal)
+			if (e.RetVal is not true) {
 				if (e.Event.State.FilterModifierKeys () == Gdk.ModifierType.None)
 					PintaCore.Tools.SetCurrentTool (e.Event.Key);
+			}
+
+			// Finally, see if the palette widget wants it.
+			if (e.RetVal is not true) {
+				PintaCore.Palette.DoKeyPress (o, e);
+			}
 		}
 
 		[GLib.ConnectBefore]
