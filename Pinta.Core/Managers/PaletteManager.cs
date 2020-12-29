@@ -74,7 +74,7 @@ namespace Pinta.Core
 
 		public void DoKeyPress (object o, KeyPressEventArgs e)
 		{
-			if (e.Event.Key.ToString().ToUpper() == "X") {
+			if (e.Event.State.FilterModifierKeys() == Gdk.ModifierType.None && e.Event.Key.ToUpper() == Gdk.Key.X) {
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;

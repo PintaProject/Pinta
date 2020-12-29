@@ -126,9 +126,10 @@ namespace Pinta.Core
         {
             var state = Gdk.ModifierType.None;
 
-            state |= (current_state & Gdk.ModifierType.ControlMask);
-            state |= (current_state & Gdk.ModifierType.ShiftMask);
-            state |= (current_state & Gdk.ModifierType.Mod1Mask);
+			state |= (current_state & Gdk.ModifierType.ControlMask);
+			state |= (current_state & Gdk.ModifierType.ShiftMask);
+			state |= (current_state & Gdk.ModifierType.Mod1Mask);
+			state |= (current_state & Gdk.ModifierType.MetaMask); // Command key on macOS.
 
             return state;
         }
