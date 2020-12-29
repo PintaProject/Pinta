@@ -72,12 +72,14 @@ namespace Pinta.Core
 			SecondaryColor = new Color (1, 1, 1);
 		}
 
-		public void DoKeyRelease (object o, KeyReleaseEventArgs e)
+		public void DoKeyPress (object o, KeyPressEventArgs e)
 		{
 			if (e.Event.Key.ToString().ToUpper() == "X") {
 				Color temp = PintaCore.Palette.PrimaryColor;
 				PintaCore.Palette.PrimaryColor = PintaCore.Palette.SecondaryColor;
 				PintaCore.Palette.SecondaryColor = temp;
+
+				e.RetVal = true;
 			}
 		}
 
