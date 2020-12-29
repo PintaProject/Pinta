@@ -95,7 +95,6 @@ namespace Pinta.Tools
 			}
 
 			is_drawing = true;
-			last_dirty = new Gdk.Rectangle (0, 0, 0, 0);
 		}
 
 		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
@@ -121,13 +120,14 @@ namespace Pinta.Tools
 
 			} else {
 				ClearHandles (doc.Layers.ToolLayer);
-				ReDraw (args.Event.State);
+				var dirty = ReDraw (args.Event.State);
 				if (doc.Selection != null) {
 					SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
 
 					doc.Selection.Origin = shape_origin;
 					doc.Selection.End = shape_end;
-					PintaCore.Workspace.Invalidate (last_dirty);
+					PintaCore.Workspace.Invalidate (last_dirty.Union (dirty));
+					last_dirty = dirty;
 				}
 				if (hist != null) {
 					doc.History.PushNewItem (hist);
