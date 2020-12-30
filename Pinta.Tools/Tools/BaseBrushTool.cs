@@ -32,93 +32,65 @@ using Pinta.Core;
 namespace Pinta.Tools
 {
 	// This is a base class for brush type tools (paintbrush, eraser, etc)
-	public class BaseBrushTool : BaseTool
+	public abstract class BaseBrushTool : BaseTool
 	{
-		// NRT - Created in OnBuildToolBar
-		protected ToolBarWidget<SpinButton> brush_width = null!;
-		protected ToolBarLabel brush_width_label = null!;
-		
+		protected IPaletteService Palette { get; }
+
 		protected ImageSurface? undo_surface;
 		protected bool surface_modified;
-		protected uint mouse_button;
+		protected MouseButton mouse_button;
 
-		protected override bool ShowAntialiasingButton { get { return true; } }
+		protected BaseBrushTool (IServiceManager services) : base (services)
+		{
+			Palette = services.GetService<IPaletteService> ();
+		}
 
-		public int BrushWidth => brush_width?.Widget.ValueAsInt ?? DEFAULT_BRUSH_WIDTH;
-		
-		#region ToolBar
+		protected override bool ShowAntialiasingButton => true;
+
+		protected int BrushWidth => brush_width?.Widget.ValueAsInt ?? DEFAULT_BRUSH_WIDTH;
+
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
 			
-			if (brush_width_label == null)
-				brush_width_label = new ToolBarLabel (string.Format (" {0}: ", Translations.GetString ("Brush width")));
-			
-			tb.AppendItem (brush_width_label);
+			tb.AppendItem (BrushWidthLabel);
+			tb.AppendItem (BrushWidthSpinButton);
 
-			if (brush_width == null) {
-				brush_width = new (new SpinButton (1, 1e5, 1) { Value = DEFAULT_BRUSH_WIDTH });
-			}
-
-			tb.AppendItem (brush_width);
+			// Change the cursor when the BrushWidth is changed.
+			BrushWidthSpinButton.Widget.ValueChanged += (sender, e) => SetCursor (DefaultCursor);
 		}
-		#endregion
-		
-		#region Mouse Handlers
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
 
-			if (undo_surface != null) {
-				if (surface_modified)
-					doc.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, doc.Layers.CurrentUserLayerIndex));
-				else if (undo_surface != null)
-					(undo_surface as IDisposable).Dispose ();
-			}
-			
-			surface_modified = false;
-			undo_surface = null;
-			mouse_button = 0;
-		}
-		
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already drawing, ignore any additional mouse down events
-			if (mouse_button > 0)
+			if (mouse_button != MouseButton.None)
 				return;
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			surface_modified = false;
+			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+			mouse_button = e.MouseButton;
+
+			OnMouseMove (document, e);
+		}
+
+		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+			if (undo_surface != null) {
+				if (surface_modified)
+					document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
+				else
+					undo_surface.Dispose ();
+			}
 
 			surface_modified = false;
-			undo_surface = doc.Layers.CurrentUserLayer.Surface.Clone ();
-			mouse_button = args.Event.Button;
-			
-			OnMouseMove (canvas, null, point);
-		}
-		#endregion
-		
-		#region Protected Methods
-		protected Gdk.Rectangle GetRectangleFromPoints (Point a, Point b)
-		{
-			int x = Math.Min (a.X, b.X) - BrushWidth - 2;
-			int y = Math.Min (a.Y, b.Y) - BrushWidth - 2;
-			int w = Math.Max (a.X, b.X) - x + (BrushWidth * 2) + 4;
-			int h = Math.Max (a.Y, b.Y) - y + (BrushWidth * 2) + 4;
-			
-			return new Gdk.Rectangle (x, y, w, h);
+			undo_surface = null;
+			mouse_button = MouseButton.None;
 		}
 
-		protected Gdk.Rectangle GetRectangleFromPoints (Gdk.Point a, Gdk.Point b)
-		{
-			int x = Math.Min (a.X, b.X);
-			int y = Math.Min (a.Y, b.Y);
-			int w = Math.Max (a.X, b.X);
-			int h = Math.Max (a.Y, b.Y);
-			
-			var rect = new Gdk.Rectangle (x, y, w, h);
-			rect.Inflate (BrushWidth, BrushWidth);
-			return rect;
-		}
-		#endregion
+		private ToolBarWidget<SpinButton>? brush_width;
+		private ToolBarLabel? brush_width_label;
+
+		protected ToolBarWidget<SpinButton> BrushWidthSpinButton => brush_width ??= new (new SpinButton (1, 1e5, 1) { Value = DEFAULT_BRUSH_WIDTH });
+		protected ToolBarLabel BrushWidthLabel => brush_width_label ??= new ToolBarLabel ($" {Translations.GetString ("Brush width")}: ");
 	}
 }

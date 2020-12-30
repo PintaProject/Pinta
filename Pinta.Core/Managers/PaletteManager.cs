@@ -36,6 +36,7 @@ namespace Pinta.Core
 	{
 		Color PrimaryColor { get; set; }
 		Color SecondaryColor { get; set; }
+		void SetColor (bool setPrimary, Color color, bool addToRecent = true);
 	}
 
 	public class PaletteManager : IPaletteService
@@ -105,18 +106,15 @@ namespace Pinta.Core
 			if (setPrimary && !primary.Equals (color)) {
 				primary = color;
 
-				if (addToRecent)
-					AddRecentlyUsedColor (color);
-
 				OnPrimaryColorChanged ();
 			} else if (!setPrimary && !secondary.Equals (color)) {
 				secondary = color;
 
-				if (addToRecent)
-					AddRecentlyUsedColor (color);
-
 				OnSecondaryColorChanged ();
 			}
+
+			if (addToRecent)
+				AddRecentlyUsedColor (color);
 		}
 
 		// The most recently used color is at index 0.

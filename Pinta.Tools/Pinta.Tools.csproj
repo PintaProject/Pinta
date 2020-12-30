@@ -28,10 +28,8 @@
     <Compile Remove="Editable\Shapes\ShapeEngineCollection.cs" />
     <Compile Remove="HistoryItems\ShapesHistoryItem.cs" />
     <Compile Remove="HistoryItems\ShapesModifyHistoryItem.cs" />
-    <Compile Remove="Tools\BaseBrushTool.cs" />
     <Compile Remove="Tools\BaseTransformTool.cs" />
     <Compile Remove="Tools\CloneStampTool.cs" />
-    <Compile Remove="Tools\ColorPickerTool.cs" />
     <Compile Remove="Tools\EllipseSelectTool.cs" />
     <Compile Remove="Tools\EllipseTool.cs" />
     <Compile Remove="Tools\EraserTool.cs" />
@@ -43,9 +41,7 @@
     <Compile Remove="Tools\MagicWandTool.cs" />
     <Compile Remove="Tools\MoveSelectedTool.cs" />
     <Compile Remove="Tools\MoveSelectionTool.cs" />
-    <Compile Remove="Tools\PaintBrushTool.cs" />
     <Compile Remove="Tools\PaintBucketTool.cs" />
-    <Compile Remove="Tools\PanTool.cs" />
     <Compile Remove="Tools\RecolorTool.cs" />
     <Compile Remove="Tools\RectangleSelectTool.cs" />
     <Compile Remove="Tools\RectangleTool.cs" />
@@ -53,7 +49,6 @@
     <Compile Remove="Tools\SelectTool.cs" />
     <Compile Remove="Tools\ShapeTool.cs" />
     <Compile Remove="Tools\TextTool.cs" />
-    <Compile Remove="Tools\ZoomTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Editable\EditEngines\ArrowedEditEngine.cs" />
@@ -72,10 +67,8 @@
     <None Include="Editable\Shapes\ShapeEngineCollection.cs" />
     <None Include="HistoryItems\ShapesHistoryItem.cs" />
     <None Include="HistoryItems\ShapesModifyHistoryItem.cs" />
-    <None Include="Tools\BaseBrushTool.cs" />
     <None Include="Tools\BaseTransformTool.cs" />
     <None Include="Tools\CloneStampTool.cs" />
-    <None Include="Tools\ColorPickerTool.cs" />
     <None Include="Tools\EllipseSelectTool.cs" />
     <None Include="Tools\EllipseTool.cs" />
     <None Include="Tools\EraserTool.cs" />
@@ -87,9 +80,7 @@
     <None Include="Tools\MagicWandTool.cs" />
     <None Include="Tools\MoveSelectedTool.cs" />
     <None Include="Tools\MoveSelectionTool.cs" />
-    <None Include="Tools\PaintBrushTool.cs" />
     <None Include="Tools\PaintBucketTool.cs" />
-    <None Include="Tools\PanTool.cs" />
     <None Include="Tools\RecolorTool.cs" />
     <None Include="Tools\RectangleSelectTool.cs" />
     <None Include="Tools\RectangleTool.cs" />
@@ -97,7 +88,6 @@
     <None Include="Tools\SelectTool.cs" />
     <None Include="Tools\ShapeTool.cs" />
     <None Include="Tools\TextTool.cs" />
-    <None Include="Tools\ZoomTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.128" />

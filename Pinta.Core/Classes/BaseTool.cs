@@ -58,24 +58,97 @@ namespace Pinta.Core
 		public event MouseHandler? MousePressed;
 		public event MouseHandler? MouseReleased;
 
-        public Cursor? CurrentCursor { get; private set; }
 
 		protected BaseTool (IServiceManager services)
 		{
 			Resources = services.GetService<IResourceService> ();
-            CurrentCursor = DefaultCursor;
+			CurrentCursor = DefaultCursor;
 
-            PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
+			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
 		}
 
-		public virtual string Name { get { throw new ApplicationException ("Tool didn't override Name"); } }
-		public virtual string Icon { get { throw new ApplicationException ("Tool didn't override Icon"); } }		
+		/// <summary>
+		/// The localized name of the tool.
+		/// </summary>
+		public abstract string Name { get; }
+
+		/// <summary>
+		/// The tool's icon which is used in the toolbox.
+		/// </summary>
+		public abstract string Icon { get; }
+
+		/// <summary>
+		/// Localized help text shown to the user on how to use the tool.
+		/// </summary>
+		public virtual string StatusBarText => string.Empty;
+
+		/// <summary>
+		/// The default cursor used by the tool.  Return 'null' for the default pointer.
+		/// </summary>
+		public virtual Cursor? DefaultCursor => null;
+
+		// TODO?
+		public Cursor? CurrentCursor { get; private set; }
+
+		/// <summary>
+		/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.
+		/// </summary>
+		public virtual Gdk.Key ShortcutKey => 0;
+
+		/// <summary>
+		/// Affects the order of the tool in the toolbox.
+		/// </summary>
+		public virtual int Priority => 75;
+
+		/// <summary>
+		/// Specifies if the Antialiasing toolbar button should be used for this tool.
+		/// </summary>
+		protected virtual bool ShowAntialiasingButton => false;
+
+		/// <summary>
+		/// Specifies if the Alpha Blending toolbar button should be used for this tool.
+		/// </summary>
+		protected virtual bool ShowAlphaBlendingButton => false;
+
+
+
+		protected virtual void OnActivated ()
+		{
+			SetCursor (DefaultCursor);
+		}
+
+		protected virtual void OnDeactivated (BaseTool newTool)
+		{
+			SetCursor (null);
+		}
+
+		public virtual void OnMouseDown (Document document, ToolMouseEventArgs e)
+		{
+		}
+
+		public virtual void OnMouseMove (Document document, ToolMouseEventArgs e)
+		{
+		}
+
+		public virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
 		public virtual string ToolTip { get { throw new ApplicationException ("Tool didn't override ToolTip"); } }
-		public virtual string StatusBarText { get { return string.Empty; } }
 		public virtual ToggleToolButton ToolItem { get { if (tool_item == null) tool_item = CreateToolButton (); return tool_item; } }
 		public virtual bool Enabled { get { return true; } }
-		public virtual Gdk.Cursor? DefaultCursor { get { return null; } }
-		public virtual Gdk.Key ShortcutKey { get { return (Gdk.Key)0; } }
 
 		//Whether or not the tool is an editable ShapeTool.
 		public bool IsEditableShapeTool = false;
@@ -115,24 +188,9 @@ namespace Pinta.Core
 			}
 		}
 
-		public virtual int Priority { get { return 75; } }
 
 		public virtual bool CursorChangesOnZoom { get { return false; } }
 
-		protected virtual bool ShowAntialiasingButton { get { return false; } }
-		protected virtual bool ShowAlphaBlendingButton { get { return false; } }
-
-		public virtual void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-		}
-
-		public virtual void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-		}
-
-		public virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
-		{
-		}
 
 		#region Public Methods
 		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
@@ -310,16 +368,6 @@ namespace Pinta.Core
 		protected virtual void AfterSave()
 		{
 
-		}
-
-		protected virtual void OnActivated ()
-		{
-			SetCursor (DefaultCursor);
-		}
-
-		protected virtual void OnDeactivated(BaseTool newTool)
-		{
-			SetCursor (null);
 		}
 
 		protected virtual ToggleToolButton CreateToolButton ()

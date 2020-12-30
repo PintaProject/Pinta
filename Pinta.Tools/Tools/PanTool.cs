@@ -32,52 +32,44 @@ namespace Pinta.Tools
 {
 	public class PanTool : BaseTool
 	{
-		public override string Name {
-			get { return Translations.GetString ("Pan"); }
-		}
-		public override string Icon {
-			get { return Resources.Icons.ToolPan; }
-		}
-		public override string StatusBarText {
-			get { return Translations.GetString ("Click and drag to navigate image."); }
-		}
-		public override Gdk.Cursor DefaultCursor {
-            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8); }
-		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.H; } }
-		public override int Priority { get { return 19; } }
-
 		private bool active;
 		private PointD last_point;
-		
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
+
+		public PanTool (IServiceManager services) : base (services)
+		{
+		}
+
+		public override string Name => Translations.GetString ("Pan");
+		public override string Icon => Pinta.Resources.Icons.ToolPan;
+		public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
+		public override Gdk.Key ShortcutKey => Gdk.Key.H;
+		public override int Priority => 19;
+
+		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already panning, ignore any additional mouse down events
 			if (active)
 				return;
 
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			// Don't scroll if the whole canvas fits (no scrollbars)
-			if (!doc.Workspace.CanvasFitsInWindow)
+			if (!document.Workspace.CanvasFitsInWindow)
 				active = true;
-				
-			last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
+
+			last_point = new PointD (e.Root.X, e.Root.Y);
 		}
-		
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, PointD point)
+
+		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		{
+			if (active) {
+				document.Workspace.ScrollCanvas ((int) (last_point.X - e.Root.X), (int) (last_point.Y - e.Root.Y));
+				last_point = new PointD (e.Root.X, e.Root.Y);
+			}
+		}
+
+		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			active = false;
-		}
-
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, PointD point)
-		{
-			if (active && args != null) {
-				Document doc = PintaCore.Workspace.ActiveDocument;
-
-				doc.Workspace.ScrollCanvas ((int)(last_point.X - args.Event.XRoot), (int)(last_point.Y - args.Event.YRoot));
-				last_point = new PointD (args.Event.XRoot, args.Event.YRoot);
-			}
 		}
 	}
 }

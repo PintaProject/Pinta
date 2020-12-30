@@ -1718,7 +1718,43 @@ namespace Pinta.Core
             }
         }
 
-        public enum ExtendedOperators
+	public static Gdk.Rectangle GetRectangleFromPoints (Point a, Point b, int inflate)
+	{
+		var x = Math.Min (a.X, b.X);
+		var y = Math.Min (a.Y, b.Y);
+		var w = Math.Max (a.X, b.X);
+		var h = Math.Max (a.Y, b.Y);
+
+		var rect = new Gdk.Rectangle (x, y, w, h);
+		rect.Inflate (inflate, inflate);
+
+		return rect;
+	}
+
+	public static Rectangle PointsToRectangle (PointD p1, PointD p2)
+	{
+		double x, y, w, h;
+
+		if (p1.Y <= p2.Y) {
+			y = p1.Y;
+			h = p2.Y - y;
+		} else {
+			y = p2.Y;
+			h = p1.Y - y;
+		}
+
+		if (p1.X <= p2.X) {
+			x = p1.X;
+			w = p2.X - x;
+		} else {
+			x = p2.X;
+			w = p1.X - x;
+		}
+
+		return new Rectangle (x, y, w, h);
+	}
+
+	public enum ExtendedOperators
         {
             Clear = 0,
 

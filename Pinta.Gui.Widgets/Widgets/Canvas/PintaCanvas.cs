@@ -104,7 +104,8 @@ namespace Pinta.Gui.Widgets
 				State = e.Event.State,
 				MouseButton = (MouseButton) e.Event.Button,
 				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = e.Event.GetPoint ()
+				WindowPoint = e.Event.GetPoint (),
+				Root = new Cairo.PointD (e.Event.XRoot, e.Event.YRoot)
 			};
 		}
 
@@ -114,7 +115,8 @@ namespace Pinta.Gui.Widgets
 				State = e.Event.State,
 				MouseButton = (MouseButton) e.Event.Button,
 				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = e.Event.GetPoint ()
+				WindowPoint = e.Event.GetPoint (),
+				Root = new Cairo.PointD (e.Event.XRoot, e.Event.YRoot)
 			};
 		}
 
@@ -124,7 +126,8 @@ namespace Pinta.Gui.Widgets
 				State = e.Event.State,
 				MouseButton = MouseButton.None,
 				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = new Cairo.PointD (e.Event.X, e.Event.Y)
+				WindowPoint = new Cairo.PointD (e.Event.X, e.Event.Y),
+				Root = new Cairo.PointD (e.Event.XRoot, e.Event.YRoot)
 			};
 		}
 

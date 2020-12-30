@@ -31,7 +31,14 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolManager : IEnumerable<BaseTool>
+	public interface IToolService
+	{
+		BaseTool PreviousTool { get; }
+		void SetCurrentTool (BaseTool tool);
+		bool SetCurrentTool (string tool);
+	}
+
+	public class ToolManager : IEnumerable<BaseTool>, IToolService
 	{
 		int index = -1;
 		int prev_index = -1;

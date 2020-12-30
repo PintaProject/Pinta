@@ -73,8 +73,8 @@ namespace Pinta.Core
 			Services.AddService (Actions);
 			Services.AddService (Workspace);
 			Services.AddService (Layers);
-			Services.AddService (PaintBrushes);
-			Services.AddService (Tools);
+			Services.AddService<IPaintBrushService> (PaintBrushes);
+			Services.AddService<IToolService> (Tools);
 			Services.AddService (System);
 			Services.AddService (LivePreview);
 			Services.AddService<IPaletteService> (Palette);

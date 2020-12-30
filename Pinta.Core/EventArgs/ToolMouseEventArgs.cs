@@ -42,6 +42,8 @@ namespace Pinta.Core
 		/// </summary>
 		public PointD PointDouble { get; init; }
 
+		public PointD Root { get; init; }
+
 		/// <summary>
 		/// The cursor location in window coordinates.
 		/// </summary>

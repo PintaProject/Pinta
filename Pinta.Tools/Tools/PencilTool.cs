@@ -26,7 +26,6 @@
 
 using System;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools
@@ -41,23 +40,19 @@ namespace Pinta.Tools
 		private bool surface_modified;
 		private MouseButton mouse_button;
 
-		protected override bool ShowAlphaBlendingButton { get { return true; } }
-
 		public PencilTool (IServiceManager services) : base (services)
 		{
 			palette = services.GetService<IPaletteService> ();
 		}
 
-		#region Properties
-		public override string Name { get { return Translations.GetString ("Pencil"); } }
-		public override string Icon { get { return Pinta.Resources.Icons.ToolPencil; } }
-		public override string StatusBarText { get { return Translations.GetString ("Left click to draw freeform one-pixel wide lines with the primary color. Right click to use the secondary color."); } }
-		public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pencil.png"), 7, 24); } }
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.P; } }
-		public override int Priority { get { return 29; } }
-		#endregion
+		public override string Name => Translations.GetString ("Pencil");
+		public override string Icon => Pinta.Resources.Icons.ToolPencil;
+		public override string StatusBarText => Translations.GetString ("Left click to draw freeform one-pixel wide lines with the primary color. Right click to use the secondary color.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pencil.png"), 7, 24);
+		public override Gdk.Key ShortcutKey => Gdk.Key.P;
+		public override int Priority => 29;
+		protected override bool ShowAlphaBlendingButton => true;
 
-		#region Mouse Handlers
 		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already drawing, ignore any additional mouse down events
@@ -103,8 +98,8 @@ namespace Pinta.Tools
 			if (undo_surface != null) {
 				if (surface_modified)
 					document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-				else if (undo_surface != null)
-					(undo_surface as IDisposable).Dispose ();
+				else 
+					undo_surface.Dispose ();
 			}
 
 			surface_modified = false;
@@ -114,8 +109,8 @@ namespace Pinta.Tools
 
 		private void Draw (Document document, ToolMouseEventArgs e, Color tool_color, bool first_pixel)
 		{
-			int x = e.Point.X;
-			int y = e.Point.Y;
+			var x = e.Point.X;
+			var y = e.Point.Y;
 
 			if (last_point.Equals (point_empty)) {
 				last_point = e.Point;
@@ -127,20 +122,17 @@ namespace Pinta.Tools
 			if (document.Workspace.PointInCanvas (e.PointDouble))
 				surface_modified = true;
 
-			ImageSurface surf = document.Layers.CurrentUserLayer.Surface;
-
-			using (Context g = new Context (surf)) {
-				g.AppendPath (document.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
+			using (var g = document.CreateClippedContext ()) {
 
 				g.Antialias = Antialias.None;
 
 				g.SetSourceColor (tool_color);
+
 				if (UseAlphaBlending)
 					g.SetBlendMode (BlendMode.Normal);
 				else
 					g.Operator = Operator.Source;
+
 				g.LineWidth = 1;
 				g.LineCap = LineCap.Square;
 
@@ -157,24 +149,11 @@ namespace Pinta.Tools
 				}
 			}
 
-			Gdk.Rectangle r = GetRectangleFromPoints (last_point, new Point (x, y));
+			var dirty = CairoExtensions.GetRectangleFromPoints (last_point, new Point (x, y), 4);
 
-			document.Workspace.Invalidate (document.ClampToImageSize (r));
+			document.Workspace.Invalidate (document.ClampToImageSize (dirty));
 
 			last_point = new Point (x, y);
 		}
-		#endregion
-
-		#region Private Methods
-		private Gdk.Rectangle GetRectangleFromPoints (Point a, Point b)
-		{
-			int x = Math.Min (a.X, b.X) - 2 - 2;
-			int y = Math.Min (a.Y, b.Y) - 2 - 2;
-			int w = Math.Max (a.X, b.X) - x + (2 * 2) + 4;
-			int h = Math.Max (a.Y, b.Y) - y + (2 * 2) + 4;
-
-			return new Gdk.Rectangle (x, y, w, h);
-		}
-		#endregion
 	}
 }
