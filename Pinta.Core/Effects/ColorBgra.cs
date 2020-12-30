@@ -696,17 +696,37 @@ namespace Pinta.Core
             return ColorBgra.FromBgra((byte)(B * A / 255), (byte)(G * A / 255), (byte)(R * A / 255), A);
         }
 
-        /// <summary>
-        /// Brings the color channels from premultiplied alpha in straight alpha form.
-        /// This is required for direct memory manipulation when reading from Cairo surfaces
-        /// as it internally uses the premultiplied alpha form.
-        /// Note: It is expected that the R,G,B-values are less or equal to the A-values (as it is always the case in premultiplied alpha form)
-        /// See:
-        /// https://en.wikipedia.org/wiki/Alpha_compositing
-        /// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
-        /// </summary>
-        /// <returns>A ColorBgra value in straight alpha form</returns> 
-        public ColorBgra ToStraightAlpha()
+		public static bool ColorsWithinTolerance (ColorBgra a, ColorBgra b, int tolerance)
+		{
+			var sum = 0;
+			int diff;
+
+			diff = a.R - b.R;
+			sum += (1 + diff * diff) * a.A / 256;
+
+			diff = a.G - b.G;
+			sum += (1 + diff * diff) * a.A / 256;
+
+			diff = a.B - b.B;
+			sum += (1 + diff * diff) * a.A / 256;
+
+			diff = a.A - b.A;
+			sum += diff * diff;
+
+			return (sum <= tolerance * tolerance * 4);
+		}
+
+		/// <summary>
+		/// Brings the color channels from premultiplied alpha in straight alpha form.
+		/// This is required for direct memory manipulation when reading from Cairo surfaces
+		/// as it internally uses the premultiplied alpha form.
+		/// Note: It is expected that the R,G,B-values are less or equal to the A-values (as it is always the case in premultiplied alpha form)
+		/// See:
+		/// https://en.wikipedia.org/wiki/Alpha_compositing
+		/// http://cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
+		/// </summary>
+		/// <returns>A ColorBgra value in straight alpha form</returns> 
+		public ColorBgra ToStraightAlpha()
         {
             if (this.A > 0)
                 return ColorBgra.FromBgra((byte)(B * 255 / A), (byte)(G * 255 / A), (byte)(R * 255 / A), A);

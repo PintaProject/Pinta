@@ -71,7 +71,7 @@ namespace Pinta.Core
 			Services.AddService<IResourceService> (Resources);
 			Services.AddService (Settings);
 			Services.AddService (Actions);
-			Services.AddService (Workspace);
+			Services.AddService<IWorkspaceService> (Workspace);
 			Services.AddService (Layers);
 			Services.AddService<IPaintBrushService> (PaintBrushes);
 			Services.AddService<IToolService> (Tools);

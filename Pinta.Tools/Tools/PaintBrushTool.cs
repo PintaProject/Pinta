@@ -30,8 +30,6 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-using Pinta.Tools.Brushes;
-
 namespace Pinta.Tools
 {
 	public class PaintBrushTool : BaseBrushTool

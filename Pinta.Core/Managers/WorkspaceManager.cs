@@ -32,7 +32,14 @@ using Gtk;
 
 namespace Pinta.Core
 {
-	public class WorkspaceManager
+	public interface IWorkspaceService
+	{
+		Document ActiveDocument { get; }
+		Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r);
+		SelectionModeHandler SelectionHandler { get; }
+	}
+
+	public class WorkspaceManager : IWorkspaceService
 	{
 		private int active_document_index = -1;
 		private int new_file_name = 1;

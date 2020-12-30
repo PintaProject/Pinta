@@ -79,20 +79,20 @@ namespace Pinta.Core
         /// Determine the current combine mode - various combinations of left/right click
         /// and Ctrl/Shift can override the selected mode from the toolbar.
         /// </summary>
-        public CombineMode DetermineCombineMode (Gtk.ButtonPressEventArgs args)
+        public CombineMode DetermineCombineMode (ToolMouseEventArgs args)
         {
             CombineMode mode = selected_mode;
 
-            if (args.Event.Button == GtkExtensions.MouseLeftButton)
+            if (args.MouseButton == MouseButton.Left)
             {
-                if (args.Event.IsControlPressed ())
+                if (args.IsControlPressed)
                     mode = CombineMode.Union;
-                else if (args.Event.IsAltPressed ())
+                else if (args.IsAltPressed)
                     mode = CombineMode.Intersect;
             }
-            else if (args.Event.Button == GtkExtensions.MouseRightButton)
+            else if (args.MouseButton == MouseButton.Right)
             {
-                if (args.Event.IsControlPressed ())
+                if (args.IsControlPressed)
                     mode = CombineMode.Xor;
                 else
                     mode = CombineMode.Exclude;
