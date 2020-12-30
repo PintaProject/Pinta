@@ -69,11 +69,11 @@ namespace Pinta.Actions
 			Widget closeButton;
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
 				md.AddButton (Stock.Save, ResponseType.Yes);
-				closeButton = md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
+				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			}
 			else {
-				closeButton = md.AddButton (Translations.GetString ("Close _without saving"), ResponseType.No);
+				closeButton = md.AddButton (Translations.GetString ("Close _without Saving"), ResponseType.No);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 				md.AddButton (Stock.Save, ResponseType.Yes);
 			}
@@ -82,8 +82,7 @@ namespace Pinta.Actions
 			// (https://developer.gnome.org/hig/stable/buttons.html.en)
 			closeButton.StyleContext.AddClass ("destructive-action");
 
-			// so that user won't accidentally overwrite
-			md.DefaultResponse = ResponseType.Cancel;
+			md.DefaultResponse = ResponseType.Yes;
 
 			ResponseType response = (ResponseType)md.Run ();
 

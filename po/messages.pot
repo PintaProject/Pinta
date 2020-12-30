@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-29 16:07-0500\n"
+"POT-Creation-Date: 2020-12-30 15:48-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1661,7 +1661,7 @@ msgstr ""
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:76
-msgid "Close _without saving"
+msgid "Close _without Saving"
 msgstr ""
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:51
