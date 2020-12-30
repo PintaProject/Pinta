@@ -244,12 +244,12 @@ namespace Pinta.Actions
 
 			// Use the standard button order for each OS.
 			if (PintaCore.System.OperatingSystem == OS.Windows) {
-				md.AddButton (Stock.Save, ResponseType.Ok);
+				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
 			}
 			else {
 				md.AddButton (Stock.Cancel, ResponseType.Cancel);
-				md.AddButton (Stock.Save, ResponseType.Ok);
+				md.AddButton (Translations.GetString ("Replace"), ResponseType.Ok);
 			}
 
 			md.DefaultResponse = ResponseType.Cancel;
