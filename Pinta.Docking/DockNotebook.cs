@@ -52,8 +52,6 @@ namespace Pinta.Docking
 
         public DockNotebook()
         {
-            EnablePopup = true;
-
             // Emit an event when the current tab is changed.
             SwitchPage += (o, args) =>
             {
