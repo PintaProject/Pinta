@@ -232,9 +232,12 @@ namespace Pinta.Actions
 			}
 
 			document.Filename = Path.GetFileName (file);
-			document.Workspace.History.SetClean();
 
 			PintaCore.Tools.CurrentTool.DoAfterSave();
+
+			// Mark the document as clean following the tool's after-save handler, which might
+			// adjust history (e.g. undo changes that were committed before saving).
+			document.Workspace.History.SetClean ();
 
 			//Now the Document has been saved to the file it's associated with in this session.
 			document.HasBeenSavedInSession = true;
