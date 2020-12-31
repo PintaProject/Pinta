@@ -273,13 +273,19 @@ namespace Pinta.Core
 		// Return true if the key was consumed.
 		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
 		{
-			OnKeyDown (PintaCore.Workspace.ActiveDocument, ToolKeyEventArgs.FromKeyPressEventArgs (args));
+			var e = ToolKeyEventArgs.FromKeyPressEventArgs (args);
+			OnKeyDown (PintaCore.Workspace.ActiveDocument, e);
+			args.RetVal = e.Handled;
+
 			OnKeyDown (canvas, args);
 		}
 
 		public void DoKeyRelease (DrawingArea canvas, KeyReleaseEventArgs args)
 		{
-			OnKeyUp (PintaCore.Workspace.ActiveDocument, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
+			var e = ToolKeyEventArgs.FromKeyReleaseEventArgs (args);
+			OnKeyUp (PintaCore.Workspace.ActiveDocument, e);
+			args.RetVal = e.Handled;
+
 			OnKeyUp (canvas, args);
 		}
 

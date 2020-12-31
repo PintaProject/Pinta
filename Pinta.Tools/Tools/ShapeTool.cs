@@ -25,132 +25,117 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 using Pinta.Core;
-using System.Collections.Generic;
 
 namespace Pinta.Tools
 {
-	public class ShapeTool : BaseTool
+	public abstract class ShapeTool : BaseTool
 	{
-		// NRT - Set by constructors of subclasses
-		public BaseEditEngine EditEngine = null!;
+		public BaseEditEngine EditEngine { get; }
 
-		public ShapeTool()
+		public ShapeTool (IServiceManager services) : base (services)
 		{
-		}
-        
-		#region Properties
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.O; } }
-        
-		protected override bool ShowAntialiasingButton { get { return true; } }
-
-		public virtual BaseEditEngine.ShapeTypes ShapeType { get { return BaseEditEngine.ShapeTypes.ClosedLineCurveSeries; } }
-		#endregion
-
-        protected override void OnBuildToolBar(Gtk.Toolbar tb)
-        {
-            base.OnBuildToolBar(tb);
-
-            EditEngine.HandleBuildToolBar(tb);
-        }
-
-		protected override void OnMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-		{
-            EditEngine.HandleMouseDown(canvas, args, point);
+			EditEngine = CreateEditEngine ();
 		}
 
-		protected override void OnMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		public override Gdk.Key ShortcutKey => Gdk.Key.O;
+		protected override bool ShowAntialiasingButton => true;
+		public virtual BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
+
+		protected abstract BaseEditEngine CreateEditEngine ();
+
+		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
-            EditEngine.HandleMouseUp(canvas, args, point);
+			base.OnBuildToolBar (tb);
+
+			EditEngine.HandleBuildToolBar (tb);
 		}
 
-		protected override void OnMouseMove(object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
+		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			if (args != null)
-				EditEngine.HandleMouseMove(o, args, point);
+			EditEngine.HandleMouseDown (document, e);
 		}
 
-        protected override void OnActivated()
-        {
-            EditEngine.HandleActivated();
-
-            base.OnActivated();
-        }
-
-		protected override void OnDeactivated(BaseTool newTool)
-        {
-            EditEngine.HandleDeactivated(newTool);
-
-            base.OnDeactivated(newTool);
-        }
-
-		protected override void AfterSave()
+		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
-			EditEngine.HandleAfterSave();
-
-			base.AfterSave();
+			EditEngine.HandleMouseUp (document, e);
 		}
 
-        protected override void OnCommit()
-        {
-            EditEngine.HandleCommit();
-
-            base.OnCommit();
-        }
-
-        protected override void OnKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
-        {
-            if (!EditEngine.HandleKeyDown(canvas, args))
-            {
-                base.OnKeyDown(canvas, args);
-            }
-        }
-
-        protected override void OnKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-        {
-            if (!EditEngine.HandleKeyUp(canvas, args))
-            {
-                base.OnKeyUp(canvas, args);
-            }
-        }
-
-		public override bool TryHandleUndo()
+		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			if (!EditEngine.HandleBeforeUndo())
-			{
-				return base.TryHandleUndo();
+			EditEngine.HandleMouseMove (document, e);
+		}
+
+		protected override void OnActivated (Document? document)
+		{
+			EditEngine.HandleActivated ();
+
+			base.OnActivated (document);
+		}
+
+		protected override void OnDeactivated (Document? document, BaseTool newTool)
+		{
+			EditEngine.HandleDeactivated (newTool);
+
+			base.OnDeactivated (document, newTool);
+		}
+
+		protected override void AfterSave ()
+		{
+			EditEngine.HandleAfterSave ();
+
+			base.AfterSave ();
+		}
+
+		protected override void OnCommit (Document? document)
+		{
+			EditEngine.HandleCommit ();
+
+			base.OnCommit (document);
+		}
+
+		protected override void OnKeyDown (Document document, ToolKeyEventArgs e)
+		{
+			if (!EditEngine.HandleKeyDown (document, e)) {
+				base.OnKeyDown (document, e);
 			}
+		}
+
+		protected override void OnKeyUp (Document document, ToolKeyEventArgs e)
+		{
+			if (!EditEngine.HandleKeyUp (document, e)) {
+				base.OnKeyUp (document, e);
+			}
+		}
+
+		public override bool TryHandleUndo ()
+		{
+			if (!EditEngine.HandleBeforeUndo ()) 
+				return base.TryHandleUndo ();
 			else
-			{
 				return true;
-			}
 		}
 
-		public override bool TryHandleRedo()
+		public override bool TryHandleRedo ()
 		{
-			if (!EditEngine.HandleBeforeRedo())
-			{
-				return base.TryHandleRedo();
-			}
+			if (!EditEngine.HandleBeforeRedo ())
+				return base.TryHandleRedo ();
 			else
-			{
 				return true;
-			}
 		}
 
-        public override void AfterUndo()
-        {
-            EditEngine.HandleAfterUndo();
+		public override void OnAfterUndo (Document document)
+		{
+			EditEngine.HandleAfterUndo ();
 
-            base.AfterUndo();
-        }
+			base.OnAfterUndo (document);
+		}
 
-        public override void AfterRedo()
-        {
-            EditEngine.HandleAfterRedo();
+		public override void OnAfterRedo (Document document)
+		{
+			EditEngine.HandleAfterRedo ();
 
-            base.AfterRedo();
-        }
+			base.OnAfterRedo (document);
+		}
 	}
 }

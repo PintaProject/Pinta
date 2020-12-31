@@ -89,7 +89,7 @@ namespace Pinta.Tools
 
 		public override string Name { get { return Translations.GetString ("Text"); } }
 		private string FinalizeName { get { return Translations.GetString("Text - Finalize"); } }
-		public override string Icon { get { return Resources.Icons.ToolText; } }
+		public override string Icon { get { return Pinta.Resources.Icons.ToolText; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
 		public override int Priority { get { return 37; } }
 
@@ -104,10 +104,10 @@ namespace Pinta.Tools
 						16, 16);
 			}
 		}
-		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, IconTheme.Default.LoadIcon(Resources.Icons.EditSelectionErase, 16), 8, 0); } }
+		public Gdk.Cursor InvalidEditCursor { get { return new Gdk.Cursor (Gdk.Display.Default, IconTheme.Default.LoadIcon(Pinta.Resources.Icons.EditSelectionErase, 16), 8, 0); } }
 
 #region Constructor
-		public TextTool ()
+		public TextTool (IServiceManager services) : base (services)
 		{
 			cursor_hand = new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
 			imContext = new Gtk.IMMulticontext ();
@@ -212,10 +212,10 @@ namespace Pinta.Tools
 			if (fill_button == null) {
 				fill_button = new ToolBarDropDownButton ();
 
-				fill_button.AddItem (Translations.GetString ("Normal"), Resources.Icons.FillStyleFill, 0);
-				fill_button.AddItem (Translations.GetString ("Normal and Outline"), Resources.Icons.FillStyleOutlineFill, 1);
-				fill_button.AddItem (Translations.GetString ("Outline"), Resources.Icons.FillStyleOutline, 2);
-				fill_button.AddItem (Translations.GetString ("Fill Background"), Resources.Icons.FillStyleBackground, 3);
+				fill_button.AddItem (Translations.GetString ("Normal"), Pinta.Resources.Icons.FillStyleFill, 0);
+				fill_button.AddItem (Translations.GetString ("Normal and Outline"), Pinta.Resources.Icons.FillStyleOutlineFill, 1);
+				fill_button.AddItem (Translations.GetString ("Outline"), Pinta.Resources.Icons.FillStyleOutline, 2);
+				fill_button.AddItem (Translations.GetString ("Fill Background"), Pinta.Resources.Icons.FillStyleBackground, 3);
 
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}
@@ -357,9 +357,9 @@ namespace Pinta.Tools
 #endregion
 
 #region Activation/Deactivation
-		protected override void OnActivated ()
+		protected override void OnActivated (Document? document)
 		{
-			base.OnActivated ();
+			base.OnActivated (document);
 
 			// We may need to redraw our text when the color changes
 			PintaCore.Palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
@@ -373,14 +373,14 @@ namespace Pinta.Tools
 			is_editing = false;
 		}
 
-		protected override void OnCommit ()
+		protected override void OnCommit (Document? document)
 		{
 			StopEditing(false);
 		}
 
-		protected override void OnDeactivated(BaseTool newTool)
+		protected override void OnDeactivated(Document? document, BaseTool newTool)
 		{
-			base.OnDeactivated (newTool);
+			base.OnDeactivated (document, newTool);
 
 			// Stop listening for color change events
 			PintaCore.Palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
@@ -395,28 +395,28 @@ namespace Pinta.Tools
 #endregion
 
 #region Mouse Handlers
-		protected override void OnMouseDown(DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
+		public override void OnMouseDown(Document document, ToolMouseEventArgs e)
 		{
-			ctrlKey = (args.Event.State & ModifierType.ControlMask) != 0;
+			ctrlKey = e.IsControlPressed;
 
 			//Store the mouse position.
-			Point pt = point.ToGdkPoint();
+			Point pt = e.PointDouble.ToGdkPoint();
 
 			// Grab focus so we can get keystrokes
-			canvas.GrabFocus ();
+			document.Workspace.Canvas.GrabFocus ();
 
 			if (selection != null)
 				selection.Dispose ();
-			selection = PintaCore.Workspace.ActiveDocument.Selection.Clone ();
+			selection = document.Selection.Clone ();
 
 			// A right click allows you to move the text around
-			if (args.Event.Button == 3)
+			if (e.MouseButton == MouseButton.Right)
 			{
 				//The user is dragging text with the right mouse button held down, so track the mouse as it moves.
 				tracking = true;
 
 				//Remember the position of the mouse before the text is dragged.
-				startMouseXY = point;
+				startMouseXY = e.PointDouble;
 				startClickPoint = clickPoint;
 
 				//Change the cursor to indicate that the text is being dragged.
@@ -426,7 +426,7 @@ namespace Pinta.Tools
 			}
 
 			// The user clicked the left mouse button			
-			if (args.Event.Button == 1)
+			if (e.MouseButton == MouseButton.Left)
 			{
 				// If the user is [editing or holding down Ctrl] and clicked
 				//within the text, move the cursor to the click location
@@ -463,7 +463,7 @@ namespace Pinta.Tools
 				if (ctrlKey)
 				{
 					//Go through every UserLayer.
-					foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.Layers.UserLayers)
+					foreach (UserLayer ul in document.Layers.UserLayers)
 					{
 						//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
 						if (ul.textBounds.ContainsCorrect(pt))
@@ -471,7 +471,7 @@ namespace Pinta.Tools
 							//The mouse clicked on editable text.
 
 							//Change the current UserLayer to the Layer that contains the text that was clicked on.
-							PintaCore.Workspace.ActiveDocument.Layers.SetCurrentUserLayer (ul);
+							document.Layers.SetCurrentUserLayer (ul);
 
 							//The user is editing text now.
 							is_editing = true;
@@ -510,16 +510,16 @@ namespace Pinta.Tools
 			}
 		}
 
-		protected override void OnMouseMove (object o, MotionNotifyEventArgs? args, Cairo.PointD point)
+		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			ctrlKey = args.IsControlPressed ();
+			ctrlKey = e.IsControlPressed;
 
-			lastMousePosition = point.ToGdkPoint();
+			lastMousePosition = e.PointDouble.ToGdkPoint();
 
 			// If we're dragging the text around, do that
 			if (tracking)
 			{
-				Cairo.PointD delta = new Cairo.PointD(point.X - startMouseXY.X, point.Y - startMouseXY.Y);
+				Cairo.PointD delta = new Cairo.PointD(e.PointDouble.X - startMouseXY.X, e.PointDouble.Y - startMouseXY.Y);
 
 				clickPoint = new Point((int)(startClickPoint.X + delta.X), (int)(startClickPoint.Y + delta.Y));
 				CurrentTextEngine.Origin = clickPoint;
@@ -528,15 +528,15 @@ namespace Pinta.Tools
 			}
 			else
 			{
-				UpdateMouseCursor();
+				UpdateMouseCursor(document);
 			}
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			// If we were dragging the text around, finish that up
 			if (tracking) {
-				Cairo.PointD delta = new Cairo.PointD (point.X - startMouseXY.X, point.Y - startMouseXY.Y);
+				Cairo.PointD delta = new Cairo.PointD (e.PointDouble.X - startMouseXY.X, e.PointDouble.Y - startMouseXY.Y);
 
 				clickPoint = new Point ((int)(startClickPoint.X + delta.X), (int)(startClickPoint.Y + delta.Y));
 				CurrentTextEngine.Origin = clickPoint;
@@ -547,7 +547,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		private void UpdateMouseCursor()
+		private void UpdateMouseCursor(Document document)
 		{
 			//Whether or not to show the normal text cursor.
 			bool showNormalCursor = false;
@@ -555,7 +555,7 @@ namespace Pinta.Tools
 			if (ctrlKey && PintaCore.Workspace.HasOpenDocuments)
 			{
 				//Go through every UserLayer.
-				foreach (UserLayer ul in PintaCore.Workspace.ActiveDocument.Layers.UserLayers)
+				foreach (UserLayer ul in document.Layers.UserLayers)
 				{
 					//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
 					if (ul.textBounds.ContainsCorrect(lastMousePosition))
@@ -598,14 +598,14 @@ namespace Pinta.Tools
 #endregion
 
 #region Keyboard Handlers
-		protected override void OnKeyDown (DrawingArea canvas, KeyPressEventArgs args)
+		protected override void OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
 			if (!PintaCore.Workspace.HasOpenDocuments) {
-				args.RetVal = false;
+				e.Handled = false;
 				return;
 			}
 
-			Gdk.ModifierType modifier = args.Event.State;
+			//Gdk.ModifierType modifier = args.Event.State;
 
 			// If we are dragging the text, we
 			// aren't going to handle key presses
@@ -613,18 +613,18 @@ namespace Pinta.Tools
 				return;
 
 			// Ignore anything with Alt pressed
-			if ((modifier & Gdk.ModifierType.Mod1Mask) != 0)
+			if (e.IsAltPressed)
 				return;
 
-			ctrlKey = (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R);
-			UpdateMouseCursor ();
+			ctrlKey = (e.Key == Gdk.Key.Control_L || e.Key == Gdk.Key.Control_R);
+			UpdateMouseCursor (document);
 
 			// Assume that we are going to handle the key
 			bool keyHandled = true;
 
 			if (is_editing)
 			{
-				switch (args.Event.Key)
+				switch (e.Key)
 				{
 					case Gdk.Key.BackSpace:
 						CurrentTextEngine.PerformBackspace();
@@ -640,27 +640,27 @@ namespace Pinta.Tools
 						break;
 
 					case Gdk.Key.Left:
-						CurrentTextEngine.PerformLeft((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformLeft(e.IsControlPressed, e.IsShiftPressed);
 						break;
 
 					case Gdk.Key.Right:
-						CurrentTextEngine.PerformRight((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformRight(e.IsControlPressed, e.IsShiftPressed);
 						break;
 
 					case Gdk.Key.Up:
-						CurrentTextEngine.PerformUp((modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformUp(e.IsShiftPressed);
 						break;
 
 					case Gdk.Key.Down:
-						CurrentTextEngine.PerformDown((modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformDown(e.IsShiftPressed);
 						break;
 
 					case Gdk.Key.Home:
-						CurrentTextEngine.PerformHome((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformHome(e.IsControlPressed, e.IsShiftPressed);
 						break;
 
 					case Gdk.Key.End:
-						CurrentTextEngine.PerformEnd((modifier & Gdk.ModifierType.ControlMask) != 0, (modifier & Gdk.ModifierType.ShiftMask) != 0);
+						CurrentTextEngine.PerformEnd(e.IsControlPressed, e.IsShiftPressed);
 						break;
 
 					case Gdk.Key.Next:
@@ -671,21 +671,21 @@ namespace Pinta.Tools
 						StopEditing(false);
 						return;
 					case Gdk.Key.Insert:
-						if (modifier.IsShiftPressed ())
+						if (e.IsShiftPressed)
 						{
 							Gtk.Clipboard cb = Gtk.Clipboard.Get(Gdk.Atom.Intern("CLIPBOARD", false));
 							CurrentTextEngine.PerformPaste(cb);
 						}
-						else if (modifier.IsControlPressed ())
+						else if (e.IsControlPressed)
 						{
 							Gtk.Clipboard cb = Gtk.Clipboard.Get(Gdk.Atom.Intern("CLIPBOARD", false));
 							CurrentTextEngine.PerformCopy(cb);
 						}
 						break;
 					default:
-						if (modifier.IsControlPressed ())
+						if (e.IsControlPressed)
 						{
-							if (args.Event.Key == Gdk.Key.z)
+							if (e.Key == Gdk.Key.z)
 							{
 								//Ctrl + Z for undo while editing.
 								TryHandleUndo();
@@ -695,22 +695,22 @@ namespace Pinta.Tools
 
 								return;
 							}
-							else if (args.Event.Key == Gdk.Key.i)
+							else if (e.Key == Gdk.Key.i)
 							{
 								italic_btn.Toggle ();
 								UpdateFont ();
 							}
-							else if (args.Event.Key == Gdk.Key.b)
+							else if (e.Key == Gdk.Key.b)
 							{
 								bold_btn.Toggle ();
 								UpdateFont ();
 							}
-							else if (args.Event.Key == Gdk.Key.u)
+							else if (e.Key == Gdk.Key.u)
 							{
 								underscore_btn.Toggle ();
 								UpdateFont ();
 							}
-							else if (args.Event.Key == Gdk.Key.a)
+							else if (e.Key == Gdk.Key.a)
 							{
 								// Select all of the text.
 								CurrentTextEngine.PerformHome (false, false);
@@ -724,7 +724,8 @@ namespace Pinta.Tools
 						}
 						else
 						{
-							keyHandled = TryHandleChar(args.Event);
+							if (e.Event is not null)
+								keyHandled = TryHandleChar(e.Event);
 						}
 
 						break;
@@ -742,17 +743,17 @@ namespace Pinta.Tools
 				keyHandled = false;
 			}
 
-			args.RetVal = keyHandled;
+			e.Handled = keyHandled;
 		}
 
-		protected override void OnKeyUp(DrawingArea canvas, KeyReleaseEventArgs args)
+		protected override void OnKeyUp(Document document, ToolKeyEventArgs e)
 		{
-			if (args.Event.Key == Gdk.Key.Control_L || args.Event.Key == Gdk.Key.Control_R ||
-					(args.Event.State & ModifierType.ControlMask) != 0)
+			if (e.Key == Gdk.Key.Control_L || e.Key == Gdk.Key.Control_R ||
+					e.IsControlPressed)
 			{
 				ctrlKey = false;
 
-				UpdateMouseCursor();
+				UpdateMouseCursor(document);
 			}
 		}
 

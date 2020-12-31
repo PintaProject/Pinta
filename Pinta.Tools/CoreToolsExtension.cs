@@ -63,11 +63,11 @@ namespace Pinta.Tools
 			PintaCore.Tools.AddTool (new PaintBucketTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new GradientTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new ColorPickerTool (PintaCore.Services));
-			//PintaCore.Tools.AddTool (new TextTool ());
-			//PintaCore.Tools.AddTool (new LineCurveTool ());
-			//PintaCore.Tools.AddTool (new RectangleTool ());
-			//PintaCore.Tools.AddTool (new RoundedRectangleTool ());
-			//PintaCore.Tools.AddTool (new EllipseTool ());
+			PintaCore.Tools.AddTool (new TextTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new LineCurveTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RectangleTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new RoundedRectangleTool (PintaCore.Services));
+			PintaCore.Tools.AddTool (new EllipseTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new FreeformShapeTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new CloneStampTool (PintaCore.Services));
 			PintaCore.Tools.AddTool (new RecolorTool (PintaCore.Services));
@@ -97,11 +97,11 @@ namespace Pinta.Tools
 			PintaCore.Tools.RemoveInstanceOfTool (typeof (ColorPickerTool));
 			PintaCore.Tools.RemoveInstanceOfTool (typeof (CloneStampTool));
 			PintaCore.Tools.RemoveInstanceOfTool (typeof (RecolorTool));
-			//PintaCore.Tools.RemoveInstanceOfTool (typeof (TextTool));
-			//PintaCore.Tools.RemoveInstanceOfTool (typeof (LineCurveTool));
-			//PintaCore.Tools.RemoveInstanceOfTool (typeof (RectangleTool));
-			//PintaCore.Tools.RemoveInstanceOfTool (typeof (RoundedRectangleTool));
-			//PintaCore.Tools.RemoveInstanceOfTool (typeof (EllipseTool));
+			PintaCore.Tools.RemoveInstanceOfTool (typeof (TextTool));
+			PintaCore.Tools.RemoveInstanceOfTool (typeof (LineCurveTool));
+			PintaCore.Tools.RemoveInstanceOfTool (typeof (RectangleTool));
+			PintaCore.Tools.RemoveInstanceOfTool (typeof (RoundedRectangleTool));
+			PintaCore.Tools.RemoveInstanceOfTool (typeof (EllipseTool));
 			PintaCore.Tools.RemoveInstanceOfTool (typeof (FreeformShapeTool));
 		}
 #endregion
