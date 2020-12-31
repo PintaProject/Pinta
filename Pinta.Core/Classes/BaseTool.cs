@@ -112,14 +112,22 @@ namespace Pinta.Core
 
 
 
-		protected virtual void OnActivated ()
+		protected virtual void OnActivated (Document? document)
 		{
 			SetCursor (DefaultCursor);
 		}
 
-		protected virtual void OnDeactivated (BaseTool newTool)
+		protected virtual void OnDeactivated (Document? document, BaseTool newTool)
 		{
 			SetCursor (null);
+		}
+
+		protected virtual void OnKeyDown (Document document, ToolKeyEventArgs e)
+		{
+		}
+
+		protected virtual void OnKeyUp (Document document, ToolKeyEventArgs e)
+		{
 		}
 
 		public virtual void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -131,6 +139,23 @@ namespace Pinta.Core
 		}
 
 		public virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// This is called whenever a menu option is called, for
+		/// tools that are in a temporary state while being used, and
+		/// need to commit their work when another option is selected.
+		/// </summary>
+		protected virtual void OnCommit (Document? document)
+		{
+		}
+
+		public virtual void OnAfterUndo (Document document)
+		{
+		}
+
+		public virtual void OnAfterRedo (Document document)
 		{
 		}
 
@@ -225,9 +250,9 @@ namespace Pinta.Core
 			OnMouseUp (canvas, args, point);
 		}
 
-		public void DoCommit ()
+		public void DoCommit (Document? document)
 		{
-			OnCommit ();
+			OnCommit (document);
 		}
 
 		public void DoAfterSave()
@@ -235,24 +260,26 @@ namespace Pinta.Core
 			AfterSave();
 		}
 
-		public void DoActivated ()
+		public void DoActivated (Document? document)
 		{
-			OnActivated ();
+			OnActivated (document);
 		}
 		
-		public void DoDeactivated (BaseTool newTool)
+		public void DoDeactivated (Document? document, BaseTool newTool)
 		{
-			OnDeactivated(newTool);
+			OnDeactivated(document, newTool);
 		}		
 		
 		// Return true if the key was consumed.
 		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
 		{
+			OnKeyDown (PintaCore.Workspace.ActiveDocument, ToolKeyEventArgs.FromKeyPressEventArgs (args));
 			OnKeyDown (canvas, args);
 		}
 
 		public void DoKeyRelease (DrawingArea canvas, KeyReleaseEventArgs args)
 		{
+			OnKeyUp (PintaCore.Workspace.ActiveDocument, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
 			OnKeyUp (canvas, args);
 		}
 
@@ -279,16 +306,6 @@ namespace Pinta.Core
 		public virtual bool TryHandleRedo ()
 		{
 			return false;
-		}
-
-		public virtual void AfterUndo()
-		{
-
-		}
-
-		public virtual void AfterRedo()
-		{
-
 		}
 
 		#endregion
@@ -353,15 +370,6 @@ namespace Pinta.Core
 		}
 
 		protected virtual void OnKeyUp (DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-		{
-		}
-		
-		/// <summary>
-		/// This is called whenever a menu option is called, for
-		/// tools that are in a temporary state while being used, and
-		/// need to commit their work when another option is selected.
-		/// </summary>
-		protected virtual void OnCommit ()
 		{
 		}
 

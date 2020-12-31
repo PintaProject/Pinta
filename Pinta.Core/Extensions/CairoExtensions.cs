@@ -1932,7 +1932,12 @@ namespace Pinta.Core
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
 
-	public enum ExtendedOperators
+		public static bool IsNotSet (this Point p)
+		{
+			return p.X == int.MinValue && p.Y == int.MinValue;
+		}
+
+		public enum ExtendedOperators
         {
             Clear = 0,
 

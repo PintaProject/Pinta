@@ -28,20 +28,10 @@
     <Compile Remove="Editable\Shapes\ShapeEngineCollection.cs" />
     <Compile Remove="HistoryItems\ShapesHistoryItem.cs" />
     <Compile Remove="HistoryItems\ShapesModifyHistoryItem.cs" />
-    <Compile Remove="Tools\BaseTransformTool.cs" />
-    <Compile Remove="Tools\CloneStampTool.cs" />
-    <Compile Remove="Tools\EllipseSelectTool.cs" />
     <Compile Remove="Tools\EllipseTool.cs" />
-    <Compile Remove="Tools\FreeformShapeTool.cs" />
-    <Compile Remove="Tools\GradientTool.cs" />
-    <Compile Remove="Tools\LassoSelectTool.cs" />
     <Compile Remove="Tools\LineCurveTool.cs" />
-    <Compile Remove="Tools\MoveSelectedTool.cs" />
-    <Compile Remove="Tools\MoveSelectionTool.cs" />
-    <Compile Remove="Tools\RectangleSelectTool.cs" />
     <Compile Remove="Tools\RectangleTool.cs" />
     <Compile Remove="Tools\RoundedRectangleTool.cs" />
-    <Compile Remove="Tools\SelectTool.cs" />
     <Compile Remove="Tools\ShapeTool.cs" />
     <Compile Remove="Tools\TextTool.cs" />
   </ItemGroup>
@@ -62,20 +52,10 @@
     <None Include="Editable\Shapes\ShapeEngineCollection.cs" />
     <None Include="HistoryItems\ShapesHistoryItem.cs" />
     <None Include="HistoryItems\ShapesModifyHistoryItem.cs" />
-    <None Include="Tools\BaseTransformTool.cs" />
-    <None Include="Tools\CloneStampTool.cs" />
-    <None Include="Tools\EllipseSelectTool.cs" />
     <None Include="Tools\EllipseTool.cs" />
-    <None Include="Tools\FreeformShapeTool.cs" />
-    <None Include="Tools\GradientTool.cs" />
-    <None Include="Tools\LassoSelectTool.cs" />
     <None Include="Tools\LineCurveTool.cs" />
-    <None Include="Tools\MoveSelectedTool.cs" />
-    <None Include="Tools\MoveSelectionTool.cs" />
-    <None Include="Tools\RectangleSelectTool.cs" />
     <None Include="Tools\RectangleTool.cs" />
     <None Include="Tools\RoundedRectangleTool.cs" />
-    <None Include="Tools\SelectTool.cs" />
     <None Include="Tools\ShapeTool.cs" />
     <None Include="Tools\TextTool.cs" />
   </ItemGroup>

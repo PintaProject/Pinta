@@ -36,6 +36,7 @@ namespace Pinta.Core
 	{
 		Document ActiveDocument { get; }
 		Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r);
+		event EventHandler? SelectionChanged;
 		SelectionModeHandler SelectionHandler { get; }
 	}
 

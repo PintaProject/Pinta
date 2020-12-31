@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cairo;
 using Gdk;
+using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolMouseEventArgs : EventArgs
+	public class ToolKeyEventArgs : HandledEventArgs
 	{
 		/// <summary>
 		/// Specifies whether the Alt key is currently pressed.
@@ -35,36 +37,27 @@ namespace Pinta.Core
 		/// </summary>
 		public bool IsShiftPressed => State.HasFlag (ModifierType.ShiftMask);
 
+		/// <summary>
+		/// Specifies the key that has been pressed or released.
+		/// </summary>
+		public Gdk.Key Key { get; init; }
+
 		public ModifierType State { get; init; }
 
-		/// <summary>
-		/// The mouse button being pressed or released, when applicable.
-		/// </summary>
-		public MouseButton MouseButton { get; init; }
+		public static ToolKeyEventArgs FromKeyPressEventArgs (KeyPressEventArgs args)
+		{
+			return new ToolKeyEventArgs {
+				Key = args.Event.Key,
+				State = args.Event.State
+			};
+		}
 
-		/// <summary>
-		/// The cursor location in canvas coordinates.
-		/// </summary>
-		public Cairo.Point Point => new Cairo.Point ((int)PointDouble.X, (int)PointDouble.Y);
-
-		/// <summary>
-		/// The cursor location in canvas coordinates.
-		/// </summary>
-		public PointD PointDouble { get; init; }
-
-		public PointD Root { get; init; }
-
-		/// <summary>
-		/// The cursor location in window coordinates.
-		/// </summary>
-		public PointD WindowPoint { get; init; }
-	}
-
-	public enum MouseButton
-	{
-		None,
-		Left,
-		Middle,
-		Right
+		public static ToolKeyEventArgs FromKeyReleaseEventArgs (KeyReleaseEventArgs args)
+		{
+			return new ToolKeyEventArgs {
+				Key = args.Event.Key,
+				State = args.Event.State
+			};
+		}
 	}
 }

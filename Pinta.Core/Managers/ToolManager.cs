@@ -33,6 +33,7 @@ namespace Pinta.Core
 {
 	public interface IToolService
 	{
+		BaseTool CurrentTool { get; }
 		BaseTool PreviousTool { get; }
 		void SetCurrentTool (BaseTool tool);
 		bool SetCurrentTool (string tool);
@@ -154,7 +155,7 @@ namespace Pinta.Core
 		public void Commit ()
 		{
 			if (CurrentTool != null)
-				CurrentTool.DoCommit ();
+				CurrentTool.DoCommit (PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null);
 		}
 
 		public void SetCurrentTool(BaseTool tool)
@@ -168,14 +169,14 @@ namespace Pinta.Core
 			if (index >= 0) {
 				prev_index = index;
 				Tools[index].DoClearToolBar (PintaCore.Chrome.ToolToolBar);
-				Tools[index].DoDeactivated(tool);
+				Tools[index].DoDeactivated(PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null, tool);
 				Tools[index].ToolItem.Active = false;
 			}
 			
 			// Load new tool
 			index = i;
 			tool.ToolItem.Active = true;
-			tool.DoActivated();
+			tool.DoActivated(PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null);
 			tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
 			
 			PintaCore.Workspace.Invalidate ();
