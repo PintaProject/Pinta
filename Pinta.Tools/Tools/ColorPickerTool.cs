@@ -56,7 +56,7 @@ namespace Pinta.Tools
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
-				var icon = CreateIconWithShape ("Cursor.ColorPicker.png",
+				var icon = GdkExtensions.CreateIconWithShape ("Cursor.ColorPicker.png",
 								CursorShape.Rectangle, SampleSize, 7, 27,
 								out var iconOffsetX, out var iconOffsetY);
 				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
@@ -77,7 +77,7 @@ namespace Pinta.Tools
 			tb.AppendItem (ToolSelectionDropDown);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			if (e.MouseButton == MouseButton.Left)
 				button_down = MouseButton.Left;
@@ -95,7 +95,7 @@ namespace Pinta.Tools
 				palette.SetColor (false, color, false);
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (button_down == MouseButton.None)
 				return;
@@ -111,7 +111,7 @@ namespace Pinta.Tools
 				palette.SetColor (false, color, false);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			// Even though we've already set the color, we don't add it to the
 			// recently used while we're moving the mouse around.  We only want

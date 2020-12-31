@@ -61,7 +61,7 @@ namespace Pinta.Tools
 			tb.AppendItem (GradientDropDown);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// Protect against history corruption
 			if (tracking)
@@ -77,7 +77,7 @@ namespace Pinta.Tools
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			if (!tracking || e.MouseButton != button)
 				return;
@@ -88,7 +88,7 @@ namespace Pinta.Tools
 				document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (tracking) {
 				var gr = CreateGradientRenderer ();

@@ -64,7 +64,7 @@ namespace Pinta.Tools
 			workspace.SelectionHandler.BuildToolbar (tb);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			if (is_drawing)
 				return;
@@ -80,7 +80,7 @@ namespace Pinta.Tools
 			document.PreviousSelection = document.Selection.Clone ();
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (!is_drawing)
 				return;
@@ -119,7 +119,7 @@ namespace Pinta.Tools
 			document.Workspace.Invalidate ();
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			var surf = document.Layers.SelectionLayer.Surface;
 

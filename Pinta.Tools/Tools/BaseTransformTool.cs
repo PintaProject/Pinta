@@ -48,7 +48,7 @@ namespace Pinta.Tools
 		{
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			if (IsActive)
 				return;
@@ -70,7 +70,7 @@ namespace Pinta.Tools
 			OnStartTransform (document);
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (!IsActive || !using_mouse)
 				return;
@@ -122,7 +122,7 @@ namespace Pinta.Tools
 			OnUpdateTransform (document, transform);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			if (!IsActive || !using_mouse)
 				return;
@@ -130,13 +130,11 @@ namespace Pinta.Tools
 			OnFinishTransform (document, transform);
 		}
 
-		protected override void OnKeyDown (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
 			// Don't handle the arrow keys while already interacting via the mouse.
-			if (using_mouse) {
-				base.OnKeyDown (document, e);
-				return;
-			}
+			if (using_mouse)
+				return base.OnKeyDown (document, e);
 
 			var dx = 0.0;
 			var dy = 0.0;
@@ -156,8 +154,7 @@ namespace Pinta.Tools
 					break;
 				default:
 					// Otherwise, let the key be handled elsewhere.
-					base.OnKeyDown (document, e);
-					return;
+					return base.OnKeyDown (document, e);
 			}
 
 			if (!IsActive) {
@@ -168,15 +165,15 @@ namespace Pinta.Tools
 			transform.Translate (dx, dy);
 			OnUpdateTransform (document, transform);
 
-			e.Handled = true;
+			return true;
 		}
 
-		protected override void OnKeyUp (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 		{
 			if (IsActive && !using_mouse)
 				OnFinishTransform (document, transform);
 
-			base.OnKeyUp (document, e);
+			return base.OnKeyUp (document, e);
 		}
 
 		protected abstract Rectangle GetSourceRectangle (Document document);

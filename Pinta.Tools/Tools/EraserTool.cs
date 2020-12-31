@@ -59,7 +59,7 @@ namespace Pinta.Tools
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
-				var icon = CreateIconWithShape ("Cursor.Eraser.png",
+				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Eraser.png",
 								CursorShape.Ellipse, BrushWidth, 8, 22,
 								out var iconOffsetX, out var iconOffsetY);
 				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
@@ -74,7 +74,7 @@ namespace Pinta.Tools
 			tb.AppendItem (TypeComboBox);
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			var new_point = e.Point;
 			var new_pointd = e.PointDouble;
@@ -251,7 +251,8 @@ namespace Pinta.Tools
 		private ToolBarComboBox? type_combobox;
 
 		private ToolBarLabel TypeLabel => type_label ??= new ToolBarLabel ($" {Translations.GetString ("Type")}: ");
-		private ToolBarComboBox TypeComboBox { get {
+		private ToolBarComboBox TypeComboBox {
+			get {
 				if (type_combobox is null) {
 					type_combobox = new ToolBarComboBox (100, 0, false, Translations.GetString ("Normal"), Translations.GetString ("Smooth"));
 

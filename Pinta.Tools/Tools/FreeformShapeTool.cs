@@ -73,7 +73,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			surface_modified = false;
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
@@ -83,7 +83,7 @@ namespace Pinta.Tools
 			document.Layers.ToolLayer.Hidden = false;
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (e.IsLeftMousePressed) {
 				outline_color = Palette.PrimaryColor;
@@ -150,7 +150,7 @@ namespace Pinta.Tools
 			last_point = new Point (x, y);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			document.Layers.ToolLayer.Clear ();
 			document.Layers.ToolLayer.Hidden = true;

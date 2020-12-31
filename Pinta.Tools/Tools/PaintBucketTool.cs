@@ -49,13 +49,13 @@ namespace Pinta.Tools
 		public override int Priority => 21;
 		protected override bool CalculatePolygonSet => false;
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			if (e.MouseButton == MouseButton.Left)
 				fill_color = palette.PrimaryColor;
 			else
 				fill_color = palette.SecondaryColor;
-			
+
 			base.OnMouseDown (document, e);
 		}
 
@@ -73,14 +73,13 @@ namespace Pinta.Tools
 			hist.TakeSnapshotOfLayer (document.Layers.CurrentUserLayer);
 
 			var color = fill_color.ToColorBgra ().ToPremultipliedAlpha ();
-			var dstPtr = (ColorBgra*)surf.DataPtr;
+			var dstPtr = (ColorBgra*) surf.DataPtr;
 			var width = surf.Width;
 
 			surf.Flush ();
 
 			// Color in any pixel that the stencil says we need to fill
-			Parallel.For (0, stencil.Height, y =>
-			{
+			Parallel.For (0, stencil.Height, y => {
 				var stencil_width = stencil.Width;
 
 				for (var x = 0; x < stencil_width; ++x) {

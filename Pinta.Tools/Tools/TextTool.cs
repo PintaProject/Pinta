@@ -392,10 +392,10 @@ namespace Pinta.Tools
 
 			StopEditing(false);
 		}
-#endregion
+		#endregion
 
-#region Mouse Handlers
-		public override void OnMouseDown(Document document, ToolMouseEventArgs e)
+		#region Mouse Handlers
+		protected override void OnMouseDown(Document document, ToolMouseEventArgs e)
 		{
 			ctrlKey = e.IsControlPressed;
 
@@ -510,7 +510,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			ctrlKey = e.IsControlPressed;
 
@@ -532,7 +532,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			// If we were dragging the text around, finish that up
 			if (tracking) {
@@ -598,11 +598,10 @@ namespace Pinta.Tools
 #endregion
 
 #region Keyboard Handlers
-		protected override void OnKeyDown (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
 			if (!PintaCore.Workspace.HasOpenDocuments) {
-				e.Handled = false;
-				return;
+				return false;
 			}
 
 			//Gdk.ModifierType modifier = args.Event.State;
@@ -610,11 +609,11 @@ namespace Pinta.Tools
 			// If we are dragging the text, we
 			// aren't going to handle key presses
 			if (tracking)
-				return;
+				return false;
 
 			// Ignore anything with Alt pressed
 			if (e.IsAltPressed)
-				return;
+				return false;
 
 			ctrlKey = (e.Key == Gdk.Key.Control_L || e.Key == Gdk.Key.Control_R);
 			UpdateMouseCursor (document);
@@ -669,7 +668,7 @@ namespace Pinta.Tools
 
 					case Gdk.Key.Escape:
 						StopEditing(false);
-						return;
+						return true;
 					case Gdk.Key.Insert:
 						if (e.IsShiftPressed)
 						{
@@ -688,12 +687,12 @@ namespace Pinta.Tools
 							if (e.Key == Gdk.Key.z)
 							{
 								//Ctrl + Z for undo while editing.
-								TryHandleUndo();
+								OnHandleUndo(document);
 
 								if (PintaCore.Workspace.ActiveDocument.History.CanUndo)
 									PintaCore.Workspace.ActiveDocument.History.Undo();
 
-								return;
+								return true;
 							}
 							else if (e.Key == Gdk.Key.i)
 							{
@@ -719,7 +718,7 @@ namespace Pinta.Tools
 							else
 							{
 								//Ignore command shortcut.
-								return;
+								return false;
 							}
 						}
 						else
@@ -743,10 +742,10 @@ namespace Pinta.Tools
 				keyHandled = false;
 			}
 
-			e.Handled = keyHandled;
+			return keyHandled;
 		}
 
-		protected override void OnKeyUp(Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyUp(Document document, ToolKeyEventArgs e)
 		{
 			if (e.Key == Gdk.Key.Control_L || e.Key == Gdk.Key.Control_R ||
 					e.IsControlPressed)
@@ -755,6 +754,8 @@ namespace Pinta.Tools
 
 				UpdateMouseCursor(document);
 			}
+
+			return false;
 		}
 
 		private bool TryHandleChar(EventKey eventKey)
@@ -1061,7 +1062,7 @@ namespace Pinta.Tools
 #endregion
 #region Undo/Redo
 
-		public override bool TryHandleUndo ()
+		protected override bool OnHandleUndo (Document document)
 		{
 			if (is_editing)
 			{
@@ -1072,7 +1073,7 @@ namespace Pinta.Tools
 			return false;
 		}
 
-		public override bool TryHandleRedo()
+		protected override bool OnHandleRedo(Document document)
 		{
 			//Rather than redoing something, if the text has been edited then simply commit and do not redo.
 			if (is_editing && CurrentTextEngine.State == TextMode.Uncommitted)
@@ -1089,7 +1090,7 @@ namespace Pinta.Tools
 #endregion
 #region Copy/Paste
 
-		public override bool TryHandlePaste (Clipboard cb)
+		protected override bool OnHandlePaste (Document document, Clipboard cb)
 		{
 			if (!is_editing) {
 				return false;
@@ -1102,7 +1103,7 @@ namespace Pinta.Tools
 			return true;
 		}
 
-		public override bool TryHandleCopy (Clipboard cb)
+		protected override bool OnHandleCopy (Document document, Clipboard cb)
 		{
 			if (!is_editing) {
 				return false;
@@ -1111,7 +1112,7 @@ namespace Pinta.Tools
 			return true;
 		}
 
-		public override bool TryHandleCut (Clipboard cb)
+		protected override bool OnHandleCut (Document document, Clipboard cb)
 		{
 			if (!is_editing) {
 				return false;

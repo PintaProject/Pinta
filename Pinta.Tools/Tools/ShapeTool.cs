@@ -41,6 +41,7 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey => Gdk.Key.O;
 		protected override bool ShowAntialiasingButton => true;
 		public virtual BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
+		public override bool IsEditableShapeTool => true;
 
 		protected abstract BaseEditEngine CreateEditEngine ();
 
@@ -51,17 +52,17 @@ namespace Pinta.Tools
 			EditEngine.HandleBuildToolBar (tb);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			EditEngine.HandleMouseDown (document, e);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			EditEngine.HandleMouseUp (document, e);
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			EditEngine.HandleMouseMove (document, e);
 		}
@@ -80,11 +81,11 @@ namespace Pinta.Tools
 			base.OnDeactivated (document, newTool);
 		}
 
-		protected override void AfterSave ()
+		protected override void OnAfterSave (Document document)
 		{
 			EditEngine.HandleAfterSave ();
 
-			base.AfterSave ();
+			base.OnAfterSave (document);
 		}
 
 		protected override void OnCommit (Document? document)
@@ -94,44 +95,46 @@ namespace Pinta.Tools
 			base.OnCommit (document);
 		}
 
-		protected override void OnKeyDown (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
-			if (!EditEngine.HandleKeyDown (document, e)) {
-				base.OnKeyDown (document, e);
-			}
+			if (EditEngine.HandleKeyDown (document, e))
+				return true;
+
+			return base.OnKeyDown (document, e);
 		}
 
-		protected override void OnKeyUp (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 		{
-			if (!EditEngine.HandleKeyUp (document, e)) {
-				base.OnKeyUp (document, e);
-			}
+			if (EditEngine.HandleKeyUp (document, e))
+				return true;
+
+			return base.OnKeyUp (document, e);
 		}
 
-		public override bool TryHandleUndo ()
+		protected override bool OnHandleUndo (Document document)
 		{
-			if (!EditEngine.HandleBeforeUndo ()) 
-				return base.TryHandleUndo ();
+			if (!EditEngine.HandleBeforeUndo ())
+				return base.OnHandleUndo (document);
 			else
 				return true;
 		}
 
-		public override bool TryHandleRedo ()
+		protected override bool OnHandleRedo (Document document)
 		{
 			if (!EditEngine.HandleBeforeRedo ())
-				return base.TryHandleRedo ();
+				return base.OnHandleRedo (document);
 			else
 				return true;
 		}
 
-		public override void OnAfterUndo (Document document)
+		protected override void OnAfterUndo (Document document)
 		{
 			EditEngine.HandleAfterUndo ();
 
 			base.OnAfterUndo (document);
 		}
 
-		public override void OnAfterRedo (Document document)
+		protected override void OnAfterRedo (Document document)
 		{
 			EditEngine.HandleAfterRedo ();
 

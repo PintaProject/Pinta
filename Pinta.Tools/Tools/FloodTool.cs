@@ -69,7 +69,7 @@ namespace Pinta.Tools
 			tb.AppendItem (ToleranceSlider);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			var pos = e.Point;
 

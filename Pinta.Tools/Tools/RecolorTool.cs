@@ -71,15 +71,15 @@ namespace Pinta.Tools
 			tb.AppendItem (ToleranceSlider);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			document.Layers.ToolLayer.Clear ();
 			stencil = new BitMask (document.ImageSize.Width, document.ImageSize.Height);
 
 			base.OnMouseDown (document, e);
 		}
-		
-		public unsafe override void OnMouseMove (Document document, ToolMouseEventArgs e)
+
+		protected unsafe override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			ColorBgra old_color;
 			ColorBgra new_color;
@@ -98,10 +98,10 @@ namespace Pinta.Tools
 				last_point = point_empty;
 				return;
 			}
-				
+
 			var x = e.Point.X;
 			var y = e.Point.Y;
-			
+
 			if (last_point.Equals (point_empty))
 				last_point = new Point (x, y);
 
@@ -114,15 +114,15 @@ namespace Pinta.Tools
 			var roi = CairoExtensions.GetRectangleFromPoints (last_point, new Point (x, y), BrushWidth + 2);
 
 			roi = workspace.ClampToImageSize (roi);
-			var myTolerance = (int)(Tolerance * 256);
-			
+			var myTolerance = (int) (Tolerance * 256);
+
 			tmp_layer.Flush ();
 
-			var tmp_data_ptr = (ColorBgra*)tmp_layer.DataPtr;
+			var tmp_data_ptr = (ColorBgra*) tmp_layer.DataPtr;
 			var tmp_width = tmp_layer.Width;
-			var surf_data_ptr = (ColorBgra*)surf.DataPtr;
+			var surf_data_ptr = (ColorBgra*) surf.DataPtr;
 			var surf_width = surf.Width;
-			
+
 			// The stencil lets us know if we've already checked this
 			// pixel, providing a nice perf boost
 			// Maybe this should be changed to a BitVector2DSurfaceAdapter?
@@ -130,32 +130,32 @@ namespace Pinta.Tools
 				for (var j = roi.Y; j <= roi.GetBottom (); j++) {
 					if (stencil[i, j])
 						continue;
-						
+
 					if (ColorBgra.ColorsWithinTolerance (new_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j), myTolerance))
 						*tmp_layer.GetPointAddressUnchecked (tmp_data_ptr, tmp_width, i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j));
 
 					stencil[i, j] = true;
 				}
-			
+
 			tmp_layer.MarkDirty ();
 
 			using (var g = document.CreateClippedContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				
+
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
 
 				g.LineWidth = BrushWidth;
 				g.LineJoin = LineJoin.Round;
 				g.LineCap = LineCap.Round;
-				
+
 				g.SetSource (tmp_layer);
-				
+
 				g.Stroke ();
 			}
 
 			document.Workspace.Invalidate (roi);
-			
+
 			last_point = new Point (x, y);
 		}
 

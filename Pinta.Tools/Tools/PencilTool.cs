@@ -53,7 +53,7 @@ namespace Pinta.Tools
 		public override int Priority => 29;
 		protected override bool ShowAlphaBlendingButton => true;
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already drawing, ignore any additional mouse down events
 			if (mouse_button != MouseButton.None)
@@ -77,7 +77,7 @@ namespace Pinta.Tools
 			Draw (document, e, tool_color, true);
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			Color tool_color;
 
@@ -93,12 +93,12 @@ namespace Pinta.Tools
 			Draw (document, e, tool_color, false);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			if (undo_surface != null) {
 				if (surface_modified)
 					document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
-				else 
+				else
 					undo_surface.Dispose ();
 			}
 

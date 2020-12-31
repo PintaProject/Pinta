@@ -25,46 +25,38 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
 using Gtk;
 using Gdk;
-using System.IO;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Pinta.Core
 {
-	public delegate void MouseHandler (double x, double y, Gdk.ModifierType state);
-
 	// TODO-GTK3 (addins)
 	// [TypeExtensionPoint]
 	public abstract class BaseTool
 	{
+		private readonly IToolService tools;
+		private readonly IWorkspaceService workspace;
+
 		protected IResourceService Resources { get; }
 
 		public const int DEFAULT_BRUSH_WIDTH = 2;
-	    
+
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
-
-	    
-		protected ToggleToolButton? tool_item;
-		protected ToolItem? tool_label;
-		protected ToolItem? tool_image;
-		protected ToolItem? tool_sep;
-		protected ToolBarDropDownButton? antialiasing_button;
-		private ToolBarItem? aaOn, aaOff;
-		protected ToolBarDropDownButton? alphablending_button;
-		private ToolBarItem? abOn, abOff;
-		public event MouseHandler? MouseMoved;
-		public event MouseHandler? MousePressed;
-		public event MouseHandler? MouseReleased;
-
 
 		protected BaseTool (IServiceManager services)
 		{
 			Resources = services.GetService<IResourceService> ();
+			tools = services.GetService<IToolService> ();
+			workspace = services.GetService<IWorkspaceService> ();
+
 			CurrentCursor = DefaultCursor;
 
-			PintaCore.Workspace.ActiveDocumentChanged += Workspace_ActiveDocumentChanged;
+			// Update cursor when active document changes
+			workspace.ActiveDocumentChanged += (_, _) => {
+				if (tools.CurrentTool == this)
+					SetCursor (DefaultCursor);
+			};
 		}
 
 		/// <summary>
@@ -83,12 +75,25 @@ namespace Pinta.Core
 		public virtual string StatusBarText => string.Empty;
 
 		/// <summary>
-		/// The default cursor used by the tool.  Return 'null' for the default pointer.
+		/// The default cursor used by the tool. Return 'null' for the default pointer.
 		/// </summary>
 		public virtual Cursor? DefaultCursor => null;
 
-		// TODO?
+		/// <summary>
+		/// The current cursor for this tool. Return 'null' for the default pointer.
+		/// </summary>
 		public Cursor? CurrentCursor { get; private set; }
+
+		/// <summary>
+		/// Specifies whether this application needs to update this tool's
+		/// cursor after a zoom operation.
+		/// </summary>
+		public virtual bool CursorChangesOnZoom => false;
+
+		/// <summary>
+		/// Whether or not the tool is an editable ShapeTool.
+		/// </summary>
+		public virtual bool IsEditableShapeTool => false;
 
 		/// <summary>
 		/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.
@@ -96,443 +101,310 @@ namespace Pinta.Core
 		public virtual Gdk.Key ShortcutKey => 0;
 
 		/// <summary>
-		/// Affects the order of the tool in the toolbox.
+		/// Affects the order of the tool in the toolbox. Lower numbers will appear first.
 		/// </summary>
 		public virtual int Priority => 75;
 
 		/// <summary>
-		/// Specifies if the Antialiasing toolbar button should be used for this tool.
+		/// Specifies if the Antialiasing toolbar button should be shown for this tool.
 		/// </summary>
 		protected virtual bool ShowAntialiasingButton => false;
 
 		/// <summary>
-		/// Specifies if the Alpha Blending toolbar button should be used for this tool.
+		/// Specifies if the Alpha Blending toolbar button should be shown for this tool.
 		/// </summary>
 		protected virtual bool ShowAlphaBlendingButton => false;
 
+		/// <summary>
+		/// Specifies if the tool should use anti-aliasing.
+		/// </summary>
+		public virtual bool UseAntialiasing {
+			get => ShowAntialiasingButton && AntialiasingDropDown.SelectedItem.GetTagOrDefault (true);
+			set {
+				if (!ShowAntialiasingButton)
+					return;
 
+				AntialiasingDropDown.SelectedItem = AntialiasingDropDown.Items.First (i => i.Tag is bool b && b == value);
+			}
+		}
 
+		/// <summary>
+		/// Specifies if the tool should use alpha-blending.
+		/// </summary>
+		public virtual bool UseAlphaBlending {
+			get => ShowAlphaBlendingButton && AlphaBlendingDropDown.SelectedItem.GetTagOrDefault (true);
+			set {
+				if (!ShowAlphaBlendingButton)
+					return;
+
+				AlphaBlendingDropDown.SelectedItem = AlphaBlendingDropDown.Items.First (i => i.Tag is bool b && b == value);
+			}
+		}
+
+		/// <summary>
+		/// Called when the tool is selected from the toolbox.
+		/// </summary>
 		protected virtual void OnActivated (Document? document)
-		{
-			SetCursor (DefaultCursor);
-		}
-
-		protected virtual void OnDeactivated (Document? document, BaseTool newTool)
-		{
-			SetCursor (null);
-		}
-
-		protected virtual void OnKeyDown (Document document, ToolKeyEventArgs e)
-		{
-		}
-
-		protected virtual void OnKeyUp (Document document, ToolKeyEventArgs e)
-		{
-		}
-
-		public virtual void OnMouseDown (Document document, ToolMouseEventArgs e)
-		{
-		}
-
-		public virtual void OnMouseMove (Document document, ToolMouseEventArgs e)
-		{
-		}
-
-		public virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 		}
 
 		/// <summary>
-		/// This is called whenever a menu option is called, for
-		/// tools that are in a temporary state while being used, and
-		/// need to commit their work when another option is selected.
+		/// Called after a history item is redone.
+		/// </summary>
+		protected virtual void OnAfterRedo (Document document)
+		{
+		}
+
+		/// <summary>
+		/// Called after the active document is saved.
+		/// </summary>
+		protected virtual void OnAfterSave (Document document)
+		{
+		}
+
+		/// <summary>
+		/// Called after a history item is undone.
+		/// </summary>
+		protected virtual void OnAfterUndo (Document document)
+		{
+		}
+
+		/// <summary>
+		/// Called when the tool needs to add its items to the Tool toolbar.
+		/// </summary>
+		protected virtual void OnBuildToolBar (Toolbar toolbar)
+		{
+		}
+
+		/// <summary>
+		/// Called whenever another component is activated and this tool should
+		/// commit any work that was in a temporary state.
 		/// </summary>
 		protected virtual void OnCommit (Document? document)
 		{
 		}
 
-		public virtual void OnAfterUndo (Document document)
+		/// <summary>
+		/// Called when the tool is deselected from the toolbox.
+		/// </summary>
+		protected virtual void OnDeactivated (Document? document, BaseTool newTool)
 		{
-		}
-
-		public virtual void OnAfterRedo (Document document)
-		{
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-		public virtual string ToolTip { get { throw new ApplicationException ("Tool didn't override ToolTip"); } }
-		public virtual ToggleToolButton ToolItem { get { if (tool_item == null) tool_item = CreateToolButton (); return tool_item; } }
-		public virtual bool Enabled { get { return true; } }
-
-		//Whether or not the tool is an editable ShapeTool.
-		public bool IsEditableShapeTool = false;
-
-		public virtual bool UseAntialiasing
-		{
-			get
-			{
-                return (antialiasing_button != null) &&
-                        ShowAntialiasingButton &&
-			antialiasing_button.SelectedItem is ToolBarItem tbi && tbi.Tag is bool toggle && toggle == true;
-			}
-
-			set
-			{
-			    if (!ShowAntialiasingButton || antialiasing_button == null)
-                    return;
-
-			    antialiasing_button.SelectedItem = value ? aaOn! : aaOff!; // NRT - Created in BuildAlphaAliasing
-			}
-		}
-
-		public virtual bool UseAlphaBlending
-		{
-			get
-			{
-				return alphablending_button != null &&
-					   ShowAlphaBlendingButton &&
-					   alphablending_button.SelectedItem is ToolBarItem tbi && tbi.Tag is bool toggle && toggle == true;
-			}
-			set
-			{
-				if (!ShowAlphaBlendingButton || alphablending_button == null)
-					return;
-
-				alphablending_button.SelectedItem = value ? abOn! : abOff!; // NRT - Created in BuildAlphaBlending
-			}
-		}
-
-
-		public virtual bool CursorChangesOnZoom { get { return false; } }
-
-
-		#region Public Methods
-		public void DoMouseMove (object o, MotionNotifyEventArgs args, Cairo.PointD point)
-		{
-			if (MouseMoved != null)
-				MouseMoved (point.X, point.Y, args.Event.State);
-			OnMouseMove (o, args, point);
-		}
-
-		public void DoBuildToolBar (Toolbar tb)
-		{
-			OnBuildToolBar (tb);
-			BuildRasterizationToolItems (tb);
-		}
-
-		public void DoClearToolBar (Toolbar tb)
-		{
-			OnClearToolBar (tb);
-		}
-
-		public void DoMouseDown (DrawingArea canvas, ButtonPressEventArgs args, Cairo.PointD point)
-		{
-			if (MousePressed != null)
-				MousePressed (point.X, point.Y, args.Event.State);
-			OnMouseDown (canvas, args, point);
-		}
-
-		public void DoMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, Cairo.PointD point)
-		{
-			if (MouseReleased != null)
-				MouseReleased (point.X, point.Y, args.Event.State);
-			OnMouseUp (canvas, args, point);
-		}
-
-		public void DoCommit (Document? document)
-		{
-			OnCommit (document);
-		}
-
-		public void DoAfterSave()
-		{
-			AfterSave();
-		}
-
-		public void DoActivated (Document? document)
-		{
-			OnActivated (document);
-		}
-		
-		public void DoDeactivated (Document? document, BaseTool newTool)
-		{
-			OnDeactivated(document, newTool);
-		}		
-		
-		// Return true if the key was consumed.
-		public void DoKeyPress (DrawingArea canvas, KeyPressEventArgs args)
-		{
-			var e = ToolKeyEventArgs.FromKeyPressEventArgs (args);
-			OnKeyDown (PintaCore.Workspace.ActiveDocument, e);
-			args.RetVal = e.Handled;
-
-			OnKeyDown (canvas, args);
-		}
-
-		public void DoKeyRelease (DrawingArea canvas, KeyReleaseEventArgs args)
-		{
-			var e = ToolKeyEventArgs.FromKeyReleaseEventArgs (args);
-			OnKeyUp (PintaCore.Workspace.ActiveDocument, e);
-			args.RetVal = e.Handled;
-
-			OnKeyUp (canvas, args);
-		}
-
-		public virtual bool TryHandlePaste (Clipboard cb)
-		{
-			return false;
-		}
-
-		public virtual bool TryHandleCut (Clipboard cb)
-		{
-			return false;
-		}
-
-		public virtual bool TryHandleCopy (Clipboard cb)
-		{
-			return false;
-		}
-
-		public virtual bool TryHandleUndo ()
-		{
-			return false;
-		}
-
-		public virtual bool TryHandleRedo ()
-		{
-			return false;
-		}
-
-		#endregion
-
-		#region Protected Methods
-		protected virtual void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
-		{
-		}
-
-		protected virtual void BuildRasterizationToolItems (Toolbar tb)
-		{
-			if (ShowAlphaBlendingButton || ShowAntialiasingButton)
-				tb.AppendItem (new SeparatorToolItem ());
-			
-			if (ShowAntialiasingButton)
-				BuildAntialiasingTool (tb);
-			if (ShowAlphaBlendingButton)
-				BuildAlphaBlending(tb);
-
-			AfterBuildRasterization();
-		}
-
-		protected virtual void AfterBuildRasterization()
-		{
-
-		}
-
-		protected virtual void OnBuildToolBar (Toolbar tb)
-		{
-			if (tool_label == null)
-				tool_label = new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Tool")));
-			
-			tb.AppendItem (tool_label);
-			
-			if (tool_image == null)
-				tool_image = new ToolBarImage (Icon);
-			
-			tb.AppendItem (tool_image);
-			
-			if (tool_sep == null)
-				tool_sep = new SeparatorToolItem ();
-			
-			tb.AppendItem (tool_sep);
-		}
-
-		protected virtual void OnClearToolBar (Toolbar tb)
-		{
-			while (tb.NItems > 0)
-				tb.Remove (tb.Children[tb.NItems - 1]);
-		}
-
-		protected virtual void OnMouseDown (DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
-		{
-		}
-
-		protected virtual void OnMouseUp (DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
-		{
-		}
-		
-		protected virtual void OnKeyDown (DrawingArea canvas, Gtk.KeyPressEventArgs args)
-		{
-		}
-
-		protected virtual void OnKeyUp (DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-		{
-		}
-
-		protected virtual void AfterSave()
-		{
-
-		}
-
-		protected virtual ToggleToolButton CreateToolButton ()
-		{
-			Gtk.Image i2 = Gtk.Image.NewFromIconName(Icon, IconSize.Button);
-			i2.Show ();
-			
-			ToggleToolButton tool_item = new ToggleToolButton ();
-			tool_item.IconWidget = i2;
-			tool_item.Show ();
-			tool_item.Label = Name;
-			
-			if (ShortcutKey != (Gdk.Key)0)
-				tool_item.TooltipText = string.Format ("{0}\n{2}: {1}\n\n{3}", Name, ShortcutKey.ToString ().ToUpperInvariant (), Translations.GetString ("Shortcut key"), StatusBarText);
-			else
-				tool_item.TooltipText = Name;
-			
-			return tool_item;
-		}
-		
-		public void SetCursor (Gdk.Cursor? cursor)
-		{
-            CurrentCursor = cursor;
-
-            if (PintaCore.Workspace.HasOpenDocuments && PintaCore.Workspace.ActiveWorkspace.Canvas.Window != null)
-			    PintaCore.Workspace.ActiveWorkspace.Canvas.Window.Cursor = cursor;
 		}
 
 		/// <summary>
-		/// Create a cursor icon with a shape that visually represents the tool's thickness.
+		/// Called to give the tool an opportunity to consume a Copy clipboard operation.
+		/// Return 'true' if the Copy is handled, or 'false' to allow other
+		/// components to handle it.
 		/// </summary>
-		/// <param name="imgName">A string containing the name of the tool's icon image to use.</param>
-		/// <param name="shape">The shape to draw.</param>
-		/// <param name="shapeWidth">The width of the shape.</param>
-		/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
-		/// <param name="imgToShapeY">The verical distance between the image's top-left corner and the shape center.</param>
-		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
-		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
-		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
-		protected Gdk.Pixbuf CreateIconWithShape(string imgName, CursorShape shape, int shapeWidth,
-		                                          int imgToShapeX, int imgToShapeY,
-		                                          out int shapeX, out int shapeY)
+		protected virtual bool OnHandleCopy (Document document, Clipboard cb)
 		{
-			Gdk.Pixbuf img = PintaCore.Resources.GetIcon(imgName);
+			return false;
+		}
 
-			double zoom = 1d;
-			if (PintaCore.Workspace.HasOpenDocuments)
-			{
-				zoom = Math.Min(30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
-			}
+		/// <summary>
+		/// Called to give the tool an opportunity to consume a Cut clipboard operation.
+		/// Return 'true' if the Cut is handled, or 'false' to allow other
+		/// components to handle it.
+		/// </summary>
+		protected virtual bool OnHandleCut (Document document, Clipboard cb)
+		{
+			return false;
+		}
 
-			shapeWidth = (int)Math.Min(800d, ((double)shapeWidth) * zoom);
-			int halfOfShapeWidth = shapeWidth / 2;
+		/// <summary>
+		/// Called to give the tool an opportunity to consume a Paste clipboard operation.
+		/// Return 'true' if the Cut is handled, or 'false' to allow other
+		/// components to handle it.
+		/// </summary>
+		protected virtual bool OnHandlePaste (Document document, Clipboard cb)
+		{
+			return false;
+		}
 
-			// Calculate bounding boxes around the both image and shape
-			// relative to the image top-left corner.
-			Gdk.Rectangle imgBBox = new Gdk.Rectangle(0, 0, img.Width, img.Height);
-			Gdk.Rectangle shapeBBox = new Gdk.Rectangle(
-				imgToShapeX - halfOfShapeWidth,
-				imgToShapeY - halfOfShapeWidth,
-				shapeWidth,
-				shapeWidth);
+		/// <summary>
+		/// Called to give the tool an opportunity to consume a Redo operation.
+		/// Return 'true' if the Redo is handled, or 'false' to allow other
+		/// components to handle it.
+		/// </summary>
+		protected virtual bool OnHandleRedo (Document document)
+		{
+			return false;
+		}
 
-			// Inflate shape bounding box to allow for anti-aliasing
-			shapeBBox.Inflate(2, 2);
+		/// <summary>
+		/// Called to give the tool an opportunity to consume an Undo operation.
+		/// Return 'true' if the Undo is handled, or 'false' to allow other
+		/// components to handle it.
+		/// </summary>
+		protected virtual bool OnHandleUndo (Document document)
+		{
+			return false;
+		}
 
-			// To determine required size of icon,
-			// find union of the image and shape bounding boxes
-			// (still relative to image top-left corner)
-			Gdk.Rectangle iconBBox = imgBBox.Union (shapeBBox);
+		/// <summary>
+		/// Called when a key is pressed. Return 'true' if the key is handled, or
+		/// 'false' to allow other components to handle it.
+		/// </summary>
+		protected virtual bool OnKeyDown (Document document, ToolKeyEventArgs e)
+		{
+			return false;
+		}
 
-			// Image top-left corner in icon co-ordinates
-			int imgX = imgBBox.Left - iconBBox.Left;
-			int imgY = imgBBox.Top - iconBBox.Top;
+		/// <summary>
+		/// Called when a key is released. Return 'true' if the key is handled, or
+		/// 'false' to allow other components to handle it.
+		/// </summary>
+		protected virtual bool OnKeyUp (Document document, ToolKeyEventArgs e)
+		{
+			return false;
+		}
 
-			// Shape center point in icon co-ordinates
-			shapeX = imgToShapeX - iconBBox.Left;
-			shapeY = imgToShapeY - iconBBox.Top;
+		/// <summary>
+		/// Called when a mouse button is pressed.
+		/// </summary>
+		protected virtual void OnMouseDown (Document document, ToolMouseEventArgs e)
+		{
+		}
 
-			using (ImageSurface i = new ImageSurface (Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
-				using (Context g = new Context (i)) {
-					// Don't show shape if shapeWidth less than 3,
-					if (shapeWidth > 3) {
-						int diam = Math.Max (1, shapeWidth - 2);
-						Cairo.Rectangle shapeRect = new Cairo.Rectangle (shapeX - halfOfShapeWidth,
-												 shapeY - halfOfShapeWidth,
-												 diam,
-												 diam);
+		/// <summary>
+		/// Called when the mouse is moved.
+		/// </summary>
+		protected virtual void OnMouseMove (Document document, ToolMouseEventArgs e)
+		{
+		}
 
-						Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
-						Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
+		/// <summary>
+		/// Called when a mouse button is released.
+		/// </summary>
+		protected virtual void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+		}
 
-						switch (shape) {
-							case CursorShape.Ellipse:
-								g.DrawEllipse (shapeRect, outerColor, 2);
-								shapeRect = shapeRect.Inflate (-1, -1);
-								g.DrawEllipse (shapeRect, innerColor, 1);
-								break;
-							case CursorShape.Rectangle:
-								g.DrawRectangle (shapeRect, outerColor, 1);
-								shapeRect = shapeRect.Inflate (-1, -1);
-								g.DrawRectangle (shapeRect, innerColor, 1);
-								break;
-						}
-					}
+		/// <summary>
+		/// Tool should call this in order to change the application cursor.
+		/// Pass 'null' to reset the cursor back to the default.
+		/// </summary>
+		public void SetCursor (Cursor? cursor)
+		{
+			CurrentCursor = cursor;
 
-					// Draw the image
-					g.DrawPixbuf (img, new Cairo.Point (imgX, imgY));
+			if (workspace.HasOpenDocuments && workspace.ActiveWorkspace.Canvas.Window != null)
+				workspace.ActiveWorkspace.Canvas.Window.Cursor = cursor;
+		}
+
+		#region Toolbar
+		private ToggleToolButton? tool_item;
+		private ToolBarDropDownButton? antialiasing_button;
+		private ToolBarDropDownButton? alphablending_button;
+		private SeparatorToolItem? separator;
+
+		public virtual ToggleToolButton ToolItem => tool_item ??= CreateToolButton ();
+
+		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
+
+		private ToolBarDropDownButton AlphaBlendingDropDown {
+			get {
+				if (alphablending_button is null) {
+					alphablending_button = new ToolBarDropDownButton ();
+
+					alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Pinta.Resources.Icons.BlendingNormal, true);
+					alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
 				}
 
-				return CairoExtensions.ToPixbuf (i);
+				return alphablending_button;
 			}
+		}
+
+		private ToolBarDropDownButton AntialiasingDropDown {
+			get {
+				if (antialiasing_button is null) {
+					antialiasing_button = new ToolBarDropDownButton ();
+
+					antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
+					antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
+				}
+
+				return antialiasing_button;
+			}
+		}
+
+		private ToggleToolButton CreateToolButton ()
+		{
+			var image = Image.NewFromIconName (Icon, IconSize.Button);
+			image.Show ();
+
+			var tool_item = new ToggleToolButton {
+				IconWidget = image,
+				Label = Name
+			};
+
+			tool_item.Show ();
+
+			if (ShortcutKey != 0)
+				tool_item.TooltipText = $"{Name}\n{Translations.GetString ("Shortcut key")}: {ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{StatusBarText}";
+			else
+				tool_item.TooltipText = Name;
+
+			return tool_item;
 		}
 		#endregion
 
-		#region Private Methods
-		private void BuildAlphaBlending (Toolbar tb)
+		#region Event Invokers
+		internal void DoActivated (Document? document)
 		{
-			if (alphablending_button != null) {
-				tb.AppendItem (alphablending_button);
-				return;
-			}
-
-			alphablending_button = new ToolBarDropDownButton ();
-
-			abOn = alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Pinta.Resources.Icons.BlendingNormal, true);
-			abOff = alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
-
-			tb.AppendItem (alphablending_button);
+			SetCursor (DefaultCursor);
+			OnActivated (document);
 		}
 
-		private void BuildAntialiasingTool (Toolbar tb)
+		internal void DoAfterRedo (Document document) => OnAfterRedo (document);
+
+		internal void DoAfterSave (Document document) => OnAfterSave (document);
+
+		internal void DoAfterUndo (Document document) => OnAfterUndo (document);
+
+		internal void DoBuildToolBar (Toolbar toolbar)
 		{
-			if (antialiasing_button != null) {
-				tb.AppendItem (antialiasing_button);
-				return;
-			}
+			OnBuildToolBar (toolbar);
 
-			antialiasing_button = new ToolBarDropDownButton ();
+			// Add alpha-blending and anti-aliasing dropdowns if needed
+			if (ShowAlphaBlendingButton || ShowAntialiasingButton)
+				toolbar.AppendItem (Separator);
 
-			aaOn = antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
-			aaOff = antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
-
-			tb.AppendItem (antialiasing_button);
+			if (ShowAntialiasingButton)
+				toolbar.AppendItem (AntialiasingDropDown);
+			if (ShowAlphaBlendingButton)
+				toolbar.AppendItem (AlphaBlendingDropDown);
 		}
 
-		private void Workspace_ActiveDocumentChanged (object? sender, EventArgs e)
+		internal void DoCommit (Document? document) => OnCommit (document);
+
+		internal void DoDeactivated (Document? document, BaseTool newTool)
 		{
-            if (PintaCore.Tools.CurrentTool == this)
-			    SetCursor (DefaultCursor);
+			SetCursor (null);
+			OnDeactivated (document, newTool);
 		}
+
+		internal bool DoHandleCopy (Document document, Clipboard clipboard) => OnHandleCopy (document, clipboard);
+
+		internal bool DoHandleCut (Document document, Clipboard clipboard) => OnHandleCut (document, clipboard);
+
+		internal bool DoHandlePaste (Document document, Clipboard clipboard) => OnHandlePaste (document, clipboard);
+
+		internal bool DoHandleRedo (Document document) => OnHandleRedo (document);
+
+		internal bool DoHandleUndo (Document document) => OnHandleUndo (document);
+
+		internal void DoKeyDown (Document document, KeyPressEventArgs args) => args.RetVal = OnKeyDown (document, ToolKeyEventArgs.FromKeyPressEventArgs (args));
+
+		internal void DoKeyUp (Document document, KeyReleaseEventArgs args) => args.RetVal = OnKeyUp (document, ToolKeyEventArgs.FromKeyReleaseEventArgs (args));
+
+		internal void DoMouseDown (Document document, ButtonPressEventArgs args) => OnMouseDown (document, ToolMouseEventArgs.FromButtonPressEventArgs (document, args));
+
+		internal void DoMouseDown (Document document, ToolMouseEventArgs e) => OnMouseDown (document, e);
+
+		internal void DoMouseMove (Document document, MotionNotifyEventArgs args) => OnMouseMove (document, ToolMouseEventArgs.FromMotionNotifyEventArgs (document, args));
+
+		internal void DoMouseUp (Document document, ButtonReleaseEventArgs args) => OnMouseUp (document, ToolMouseEventArgs.FromButtonReleaseEventArgs (document, args));
 		#endregion
 	}
 }

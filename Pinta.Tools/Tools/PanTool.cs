@@ -46,7 +46,7 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey => Gdk.Key.H;
 		public override int Priority => 19;
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already panning, ignore any additional mouse down events
 			if (active)
@@ -59,7 +59,7 @@ namespace Pinta.Tools
 			last_point = new PointD (e.Root.X, e.Root.Y);
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (active) {
 				document.Workspace.ScrollCanvas ((int) (last_point.X - e.Root.X), (int) (last_point.Y - e.Root.Y));
@@ -67,7 +67,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			active = false;
 		}

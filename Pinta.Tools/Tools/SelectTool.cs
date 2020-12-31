@@ -70,7 +70,7 @@ namespace Pinta.Tools
 			workspace.SelectionHandler.BuildToolbar (tb);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// Ignore extra button clicks while drawing
 			if (is_drawing)
@@ -100,7 +100,7 @@ namespace Pinta.Tools
 			is_drawing = true;
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (!is_drawing) {
 				UpdateCursor (document, e.PointDouble);
@@ -127,7 +127,7 @@ namespace Pinta.Tools
 			last_dirty = dirty;
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			// If the user didn't move the mouse, they want to deselect
 			var tolerance = 0;
@@ -356,7 +356,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnAfterUndo (Document document)
+		protected override void OnAfterUndo (Document document)
 		{
 			base.OnAfterUndo (document);
 
@@ -368,7 +368,7 @@ namespace Pinta.Tools
 			UpdateHandler (document);
 		}
 
-		public override void OnAfterRedo (Document document)
+		protected override void OnAfterRedo (Document document)
 		{
 			base.OnAfterRedo (document);
 

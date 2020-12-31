@@ -252,8 +252,6 @@ namespace Pinta.Tools
         {
             owner = passedOwner;
 
-			owner.IsEditableShapeTool = true;
-
 			ResetShapes();
         }
 
@@ -515,14 +513,14 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                e.Handled = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Return)
             {
                 //Finalize every editable shape not yet finalized.
 				FinalizeAllShapes();
 
-                e.Handled = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.space)
             {
@@ -578,7 +576,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, shiftKey, false);
                 }
 
-                e.Handled = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Up)
             {
@@ -591,7 +589,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                e.Handled = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Down)
             {
@@ -604,7 +602,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                e.Handled = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Left)
             {
@@ -636,7 +634,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                e.Handled = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Right)
             {
@@ -668,14 +666,12 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                e.Handled = true;
+                return true;
             }
             else
             {
                 return false;
             }
-
-            return true;
         }
 
         public virtual bool HandleKeyUp(Document document, ToolKeyEventArgs e)
@@ -686,8 +682,6 @@ namespace Pinta.Tools
                 || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
                 || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right)
             {
-                e.Handled = true;
-
                 return true;
             }
             else
@@ -821,7 +815,7 @@ namespace Pinta.Tools
 					if (ActivateCorrespondingTool(closestShapeIndex, true) != null)
 					{
 						//Pass on the event and its data to the newly activated tool.
-						PintaCore.Tools.CurrentTool.OnMouseDown(document, e);
+						PintaCore.Tools.DoMouseDown(document, e);
 
 						//Don't do anything else here once the tool is switched and the event is passed on.
 						return;
@@ -900,7 +894,7 @@ namespace Pinta.Tools
 				if (ActivateCorrespondingTool(SelectedShapeIndex, true) != null)
 				{
 					//Pass on the event and its data to the newly activated tool.
-					PintaCore.Tools.CurrentTool.OnMouseDown(document, e);
+					PintaCore.Tools.DoMouseDown(document, e);
 
 					//Don't do anything else here once the tool is switched and the event is passed on.
 					return;

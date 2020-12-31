@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Cairo;
 using Gdk;
+using Gtk;
 
 namespace Pinta.Core
 {
@@ -58,13 +55,39 @@ namespace Pinta.Core
 		/// The cursor location in window coordinates.
 		/// </summary>
 		public PointD WindowPoint { get; init; }
-	}
 
-	public enum MouseButton
-	{
-		None,
-		Left,
-		Middle,
-		Right
+		public static ToolMouseEventArgs FromButtonPressEventArgs (Document document, ButtonPressEventArgs e)
+		{
+			return new ToolMouseEventArgs {
+				State = e.Event.State,
+				MouseButton = (MouseButton) e.Event.Button,
+				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
+				WindowPoint = e.Event.GetPoint (),
+				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
+			};
+		}
+
+		public static ToolMouseEventArgs FromButtonReleaseEventArgs (Document document, ButtonReleaseEventArgs e)
+		{
+			return new ToolMouseEventArgs {
+				State = e.Event.State,
+				MouseButton = (MouseButton) e.Event.Button,
+				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
+				WindowPoint = e.Event.GetPoint (),
+				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
+			};
+		}
+
+		public static ToolMouseEventArgs FromMotionNotifyEventArgs (Document document, MotionNotifyEventArgs e)
+		{
+			return new ToolMouseEventArgs {
+				State = e.Event.State,
+				MouseButton = MouseButton.None,
+				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
+				WindowPoint = new PointD (e.Event.X, e.Event.Y),
+				Root = new PointD (e.Event.XRoot, e.Event.YRoot)
+			};
+		}
+
 	}
 }

@@ -64,7 +64,7 @@ namespace Pinta.Tools
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
-				var icon = CreateIconWithShape ("Cursor.Paintbrush.png",
+				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
 								CursorShape.Ellipse, BrushWidth, 8, 24,
 								out var iconOffsetX, out var iconOffsetY);
 
@@ -82,14 +82,14 @@ namespace Pinta.Tools
 			tb.AppendItem (BrushComboBox);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			base.OnMouseDown (document, e);
 
 			active_brush.DoMouseDown ();
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (mouse_button == MouseButton.Left) {
 				stroke_color = Palette.PrimaryColor;
@@ -137,7 +137,7 @@ namespace Pinta.Tools
 			last_point = e.Point;
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			base.OnMouseUp (document, e);
 

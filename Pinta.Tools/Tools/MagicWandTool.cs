@@ -61,7 +61,7 @@ namespace Pinta.Tools
 		}
 
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
 

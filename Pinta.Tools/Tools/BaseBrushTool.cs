@@ -52,7 +52,7 @@ namespace Pinta.Tools
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
-			
+
 			tb.AppendItem (BrushWidthLabel);
 			tb.AppendItem (BrushWidthSpinButton);
 
@@ -60,7 +60,7 @@ namespace Pinta.Tools
 			BrushWidthSpinButton.Widget.ValueChanged += (sender, e) => SetCursor (DefaultCursor);
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already drawing, ignore any additional mouse down events
 			if (mouse_button != MouseButton.None)
@@ -73,7 +73,7 @@ namespace Pinta.Tools
 			OnMouseMove (document, e);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			if (undo_surface != null) {
 				if (surface_modified)

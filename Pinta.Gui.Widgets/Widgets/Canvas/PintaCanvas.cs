@@ -74,14 +74,12 @@ namespace Pinta.Gui.Widgets
 				if (PintaCore.Workspace.ActiveDocument != document)
 					PintaCore.Workspace.SetActiveDocument (document);
 
-				PintaCore.Tools.CurrentTool.OnMouseDown (document, FromButtonPressEventArgs (document, e));
-				PintaCore.Tools.CurrentTool.DoMouseDown (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+				PintaCore.Tools.DoMouseDown (document, e);
 			};
 
 			// Give mouse release events to the current tool
 			ButtonReleaseEvent += delegate (object sender, ButtonReleaseEventArgs e) {
-				PintaCore.Tools.CurrentTool.OnMouseUp (document, FromButtonReleaseEventArgs (document, e));
-				PintaCore.Tools.CurrentTool.DoMouseUp (this, e, document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y));
+				PintaCore.Tools.DoMouseUp (document, e);
 			};
 
 			// Give mouse move events to the current tool
@@ -91,43 +89,8 @@ namespace Pinta.Gui.Widgets
 				if (document.Workspace.PointInCanvas (point))
 					PintaCore.Chrome.LastCanvasCursorPoint = point.ToGdkPoint ();
 
-				if (PintaCore.Tools.CurrentTool != null) {
-					PintaCore.Tools.CurrentTool.OnMouseMove (document, FromMotionNotifyEventArgs (document, e));
-					PintaCore.Tools.CurrentTool.DoMouseMove ((DrawingArea) sender, e, point);
-				}
-			};
-		}
-
-		private ToolMouseEventArgs FromButtonPressEventArgs (Document document, ButtonPressEventArgs e)
-		{
-			return new ToolMouseEventArgs {
-				State = e.Event.State,
-				MouseButton = (MouseButton) e.Event.Button,
-				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = e.Event.GetPoint (),
-				Root = new Cairo.PointD (e.Event.XRoot, e.Event.YRoot)
-			};
-		}
-
-		private ToolMouseEventArgs FromButtonReleaseEventArgs (Document document, ButtonReleaseEventArgs e)
-		{
-			return new ToolMouseEventArgs {
-				State = e.Event.State,
-				MouseButton = (MouseButton) e.Event.Button,
-				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = e.Event.GetPoint (),
-				Root = new Cairo.PointD (e.Event.XRoot, e.Event.YRoot)
-			};
-		}
-
-		private ToolMouseEventArgs FromMotionNotifyEventArgs (Document document, MotionNotifyEventArgs e)
-		{
-			return new ToolMouseEventArgs {
-				State = e.Event.State,
-				MouseButton = MouseButton.None,
-				PointDouble = document.Workspace.WindowPointToCanvas (e.Event.X, e.Event.Y),
-				WindowPoint = new Cairo.PointD (e.Event.X, e.Event.Y),
-				Root = new Cairo.PointD (e.Event.XRoot, e.Event.YRoot)
+				if (PintaCore.Tools.CurrentTool != null)
+					PintaCore.Tools.DoMouseMove (document, e);
 			};
 		}
 
@@ -239,12 +202,12 @@ namespace Pinta.Gui.Widgets
 		public void DoKeyPressEvent (object o, KeyPressEventArgs e)
 		{
 			// Give the current tool a chance to handle the key press
-			PintaCore.Tools.CurrentTool.DoKeyPress (this, e);
+			PintaCore.Tools.DoKeyDown (document, e);
 		}
 
 		public void DoKeyReleaseEvent (object o, KeyReleaseEventArgs e)
 		{
-			PintaCore.Tools.CurrentTool.DoKeyRelease (this, e);
+			PintaCore.Tools.DoKeyUp (document, e);
 		}
 	}
 }

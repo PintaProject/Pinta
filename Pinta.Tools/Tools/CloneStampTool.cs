@@ -51,14 +51,14 @@ namespace Pinta.Tools
 
 		public override Cursor DefaultCursor {
 			get {
-				var icon = CreateIconWithShape ("Cursor.CloneStamp.png",
+				var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
 								CursorShape.Ellipse, BrushWidth, 16, 26,
 								out var iconOffsetX, out var iconOffsetY);
 				return new Cursor (Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
 		}
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// We only do stuff with the left mouse button
 			if (e.MouseButton != MouseButton.Left)
@@ -84,7 +84,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (!painting || offset.IsNotSet ())
 				return;
@@ -117,7 +117,7 @@ namespace Pinta.Tools
 			document.Workspace.Invalidate (dirty_rect);
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			painting = false;
 
@@ -136,7 +136,7 @@ namespace Pinta.Tools
 			document.Workspace.Invalidate ();
 		}
 
-		protected override void OnKeyDown (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 		{
 			// Note that this WON'T work if user presses control key and THEN selects the tool!
 			if (e.Key == Key.Control_L || e.Key == Key.Control_R) {
@@ -144,12 +144,16 @@ namespace Pinta.Tools
 				var setSourceCursor = new Cursor (Display.Default, icon, 16, 26);
 				SetCursor (setSourceCursor);
 			}
+
+			return false;
 		}
 
-		protected override void OnKeyUp (Document document, ToolKeyEventArgs e)
+		protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 		{
 			if (e.Key == Key.Control_L || e.Key == Key.Control_R)
 				SetCursor (DefaultCursor);
+
+			return false;
 		}
 
 		protected override void OnDeactivated (Document? document, BaseTool newTool)

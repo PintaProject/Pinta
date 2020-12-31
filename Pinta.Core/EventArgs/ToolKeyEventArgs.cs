@@ -1,16 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cairo;
 using Gdk;
 using Gtk;
 
 namespace Pinta.Core
 {
-	public class ToolKeyEventArgs : HandledEventArgs
+	public class ToolKeyEventArgs : EventArgs
 	{
 		public EventKey? Event { get; init; }
 

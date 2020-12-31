@@ -35,7 +35,10 @@ namespace Pinta.Core
 	public interface IWorkspaceService
 	{
 		Document ActiveDocument { get; }
+		DocumentWorkspace ActiveWorkspace { get; }
+		event EventHandler? ActiveDocumentChanged;
 		Gdk.Rectangle ClampToImageSize (Gdk.Rectangle r);
+		bool HasOpenDocuments { get; }
 		event EventHandler? SelectionChanged;
 		SelectionModeHandler SelectionHandler { get; }
 	}

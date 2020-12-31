@@ -60,7 +60,7 @@ namespace Pinta.Tools
 		public override Gdk.Key ShortcutKey => Gdk.Key.Z;
 		public override int Priority => 15;
 
-		public override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			// If we are already tracking, ignore any additional mouse down events
 			if (mouseDown != MouseButton.None)
@@ -85,7 +85,7 @@ namespace Pinta.Tools
 			mouseDown = e.MouseButton;
 		}
 
-		public override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
 			if (mouseDown == MouseButton.Left) {
 				if (Math.Abs (shape_origin.X - e.PointDouble.X) > tolerance || Math.Abs (shape_origin.Y - e.PointDouble.Y) > tolerance)  // if they've moved the mouse more than 10 pixels since they clicked
@@ -98,7 +98,7 @@ namespace Pinta.Tools
 			}
 		}
 
-		public override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
 			var x = e.PointDouble.X;
 			var y = e.PointDouble.Y;
