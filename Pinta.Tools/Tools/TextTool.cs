@@ -604,8 +604,6 @@ namespace Pinta.Tools
 				return false;
 			}
 
-			//Gdk.ModifierType modifier = args.Event.State;
-
 			// If we are dragging the text, we
 			// aren't going to handle key presses
 			if (tracking)
