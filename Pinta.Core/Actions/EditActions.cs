@@ -395,8 +395,10 @@ namespace Pinta.Core
 				Translations.GetString ("Save Palette File"),
 				PintaCore.Chrome.MainWindow,
 				FileChooserAction.Save,
-				Translations.GetString("Save"),
-				Translations.GetString("Cancel"));
+				Translations.GetString ("Save"),
+				Translations.GetString ("Cancel")) {
+				DoOverwriteConfirmation = true
+			};
 
 			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
 				if (!format.IsReadOnly ()) {
@@ -412,11 +414,22 @@ namespace Pinta.Core
 
 			if (response == Gtk.ResponseType.Accept) {
 				string filename = fcd.Filename;
+
+				// Add in the extension if necessary, based on the current selected file filter.
+				// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
+				// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
+				string extension = System.IO.Path.GetExtension (filename);
+				if (string.IsNullOrEmpty(extension)) {
+					var currentFormat = PintaCore.System.PaletteFormats.Formats.First (f => f.Filter == fcd.Filter);
+					filename += "." + currentFormat.Extensions.First ();
+				}
+
 				var format = PintaCore.System.PaletteFormats.GetFormatByFilename (filename);
 				if (format is null)
 					throw new FormatException ();
 
 				PintaCore.Palette.CurrentPalette.Save (filename, format.Saver);
+				lastPaletteDir = fcd.CurrentFolder;
 			}
 
 		}
