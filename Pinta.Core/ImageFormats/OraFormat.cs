@@ -191,7 +191,9 @@ namespace Pinta.Core
 
 		public void Export (Document document, string fileName, Gtk.Window parent)
 		{
-			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create));
+			ZipOutputStream stream = new ZipOutputStream (new FileStream (fileName, FileMode.Create)) {
+				UseZip64 = UseZip64.Off // For backwards compatibility with older versions.
+			};
 			ZipEntry mimetype = new ZipEntry ("mimetype");
 			mimetype.CompressionMethod = CompressionMethod.Stored;
 			stream.PutNextEntry (mimetype);
