@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-30 15:52-0500\n"
+"POT-Creation-Date: 2021-01-01 13:34-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgid "Fill Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-#: ../Pinta.Core/Actions/EditActions.cs:437
+#: ../Pinta.Core/Actions/EditActions.cs:439
 msgid "Invert Selection"
 msgstr ""
 
@@ -144,21 +144,36 @@ msgstr ""
 msgid "Deselect"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:354
+#: ../Pinta.Core/Actions/EditActions.cs:355
 msgid "Open Palette File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:367
+#: ../Pinta.Core/Actions/EditActions.cs:358
+#: ../Pinta.Core/Actions/FileActions.cs:60
+msgid "Open"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:359
+#: ../Pinta.Core/Actions/EditActions.cs:399
+msgid "Cancel"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:362
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:371
+#: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:65
 msgid "All files"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:395
 msgid "Save Palette File"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:398
+#: ../Pinta.Core/Actions/FileActions.cs:55
+msgid "Save"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
@@ -173,20 +188,12 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:55
-msgid "Save"
-msgstr ""
-
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Print"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
-msgstr ""
-
-#: ../Pinta.Core/Actions/FileActions.cs:60
-msgid "Open"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:44
@@ -431,8 +438,8 @@ msgid "Pinta supports the following palette formats:"
 msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:252
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:250
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:255
 msgid "Replace"
 msgstr ""
 
@@ -1703,12 +1710,12 @@ msgstr ""
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:237
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:241
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."

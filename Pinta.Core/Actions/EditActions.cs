@@ -351,72 +351,74 @@ namespace Pinta.Core
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 		{
-			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Palette File"), PintaCore.Chrome.MainWindow,
-				FileChooserAction.Open, GtkExtensions.DialogButtonsCancelOpen()))
-			{
-				FileFilter ff = new FileFilter();
-				foreach (var format in PintaCore.System.PaletteFormats.Formats)
-				{
-					if (!format.IsWriteOnly())
-					{
-						foreach (var ext in format.Extensions)
-							ff.AddPattern(string.Format("*.{0}", ext));
-					}
-				}
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Open Palette File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Open,
+				Translations.GetString ("Open"),
+				Translations.GetString ("Cancel"));
 
-				ff.Name = Translations.GetString("Palette files");
-				fcd.AddFilter(ff);
+			var ff = new FileFilter {
+				Name = Translations.GetString ("Palette files")
+			};
 
-				FileFilter ff2 = new FileFilter();
-				ff2.Name = Translations.GetString("All files");
-				ff2.AddPattern("*.*");
-				fcd.AddFilter(ff2);
-
-				if (lastPaletteDir != null)
-					fcd.SetCurrentFolder(lastPaletteDir);
-
-				int response = fcd.Run();
-
-				if (response == (int)Gtk.ResponseType.Ok)
-				{
-					lastPaletteDir = fcd.CurrentFolder;
-					PintaCore.Palette.CurrentPalette.Load(fcd.Filename);
+			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
+				if (!format.IsWriteOnly ()) {
+					foreach (var ext in format.Extensions)
+						ff.AddPattern (string.Format ("*.{0}", ext));
 				}
 			}
+
+			fcd.AddFilter (ff);
+
+			FileFilter ff2 = new FileFilter {
+				Name = Translations.GetString ("All files")
+			};
+			ff2.AddPattern ("*.*");
+			fcd.AddFilter (ff2);
+
+			if (lastPaletteDir != null)
+				fcd.SetCurrentFolder (lastPaletteDir);
+
+			var response = (ResponseType) fcd.Run ();
+
+			if (response == ResponseType.Accept) {
+				lastPaletteDir = fcd.CurrentFolder;
+				PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
+			}
+
 		}
 
 		private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
 		{
-			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Save Palette File"), PintaCore.Chrome.MainWindow,
-				FileChooserAction.Save, GtkExtensions.DialogButtonsCancelSave()))
-			{
-				foreach (var format in PintaCore.System.PaletteFormats.Formats)
-				{
-					if (!format.IsReadOnly())
-					{
-						FileFilter fileFilter = format.Filter;
-						fcd.AddFilter(fileFilter);
-					}
-				}
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Save Palette File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Save,
+				Translations.GetString("Save"),
+				Translations.GetString("Cancel"));
 
-				if (lastPaletteDir != null)
-					fcd.SetCurrentFolder(lastPaletteDir);
-
-				int response = fcd.Run();
-
-				if (response == (int)Gtk.ResponseType.Ok)
-				{
-					var format = PintaCore.System.PaletteFormats.Formats.First(f => f.Filter == fcd.Filter);
-
-					string finalFileName = fcd.Filename;
-
-					string extension = System.IO.Path.GetExtension(fcd.Filename);
-					if (string.IsNullOrEmpty(extension))
-						finalFileName += "." + format.Extensions.First();
-
-					PintaCore.Palette.CurrentPalette.Save(finalFileName, format.Saver);
+			foreach (var format in PintaCore.System.PaletteFormats.Formats) {
+				if (!format.IsReadOnly ()) {
+					FileFilter fileFilter = format.Filter;
+					fcd.AddFilter (fileFilter);
 				}
 			}
+
+			if (lastPaletteDir != null)
+				fcd.SetCurrentFolder (lastPaletteDir);
+
+			var response = (ResponseType)fcd.Run ();
+
+			if (response == Gtk.ResponseType.Accept) {
+				string filename = fcd.Filename;
+				var format = PintaCore.System.PaletteFormats.GetFormatByFilename (filename);
+				if (format is null)
+					throw new FormatException ();
+
+				PintaCore.Palette.CurrentPalette.Save (filename, format.Saver);
+			}
+
 		}
 
 		private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)
@@ -454,6 +456,6 @@ namespace Pinta.Core
 			Redo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanRedo;
 			Undo.Sensitive = PintaCore.Workspace.ActiveWorkspace.History.CanUndo;
 		}
-		#endregion
+#endregion
 	}
 }

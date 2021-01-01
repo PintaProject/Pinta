@@ -162,7 +162,7 @@ namespace Pinta.Core
 		{
 			try
 			{
-				var loader = PintaCore.System.PaletteFormats.GetLoaderByFilename (fileName);
+				var loader = PintaCore.System.PaletteFormats.GetFormatByFilename (fileName)?.Loader;
 
                 if (loader == null)
 					throw new FormatException();
