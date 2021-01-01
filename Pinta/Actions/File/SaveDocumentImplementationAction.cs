@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SaveDocumentImplmentationAction.cs
 //  
 // Author:
@@ -223,7 +223,7 @@ namespace Pinta.Actions
 
 			document.Filename = Path.GetFileName (file);
 
-			PintaCore.Tools.CurrentTool.DoAfterSave();
+			PintaCore.Tools.DoAfterSave(document);
 
 			// Mark the document as clean following the tool's after-save handler, which might
 			// adjust history (e.g. undo changes that were committed before saving).

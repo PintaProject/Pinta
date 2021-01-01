@@ -1,10 +1,10 @@
 // 
-// EllipseSelectTool.cs
+// MouseButton.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2020 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,27 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using Cairo;
-using Pinta.Core;
-
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	public class EllipseSelectTool : SelectTool
+	public enum MouseButton
 	{
-		public EllipseSelectTool (IServiceManager services) : base (services)
-		{
-		}
-
-		public override string Name => Translations.GetString ("Ellipse Select");
-		public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;
-		public override string StatusBarText => Translations.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle.");
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18);
-		public override int Priority => 13;
-
-		protected override void DrawShape (Document document, Rectangle r, Layer l)
-		{
-			document.Selection.CreateEllipseSelection (r);
-		}
+		None,
+		Left,
+		Middle,
+		Right
 	}
 }

@@ -36,34 +36,35 @@ namespace Pinta.Tools
 {
 	public class LassoSelectTool : BaseTool
 	{
+		private readonly IWorkspaceService workspace;
+
 		private bool is_drawing = false;
 		private CombineMode combine_mode;
 		private SelectionHistoryItem? hist;
 
 		private Path? path;
-		private List<IntPoint> lasso_polygon = new List<IntPoint>();
+		private readonly List<IntPoint> lasso_polygon = new List<IntPoint> ();
 
-		public LassoSelectTool ()
+		public LassoSelectTool (IServiceManager services) : base (services)
 		{
+			workspace = services.GetService<IWorkspaceService> ();
 		}
 
-		#region Properties
-		public override string Name { get { return Translations.GetString ("Lasso Select"); } }
-		public override string Icon { get { return Resources.Icons.ToolSelectLasso; } }
-		public override string StatusBarText { get { return Translations.GetString ("Click and drag to draw the outline for a selection area."); } }
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.S; } }
-        public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18); } }
-		public override int Priority { get { return 9; } }
-		#endregion
+		public override string Name => Translations.GetString ("Lasso Select");
+		public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
+		public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
+		public override Gdk.Key ShortcutKey => Gdk.Key.S;
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18);
+		public override int Priority => 9;
 
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
-			PintaCore.Workspace.SelectionHandler.BuildToolbar (tb);
+
+			workspace.SelectionHandler.BuildToolbar (tb);
 		}
 
-		#region Mouse Handlers
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
 			if (is_drawing)
 				return;
@@ -71,64 +72,61 @@ namespace Pinta.Tools
 			hist = new SelectionHistoryItem (Icon, Name);
 			hist.TakeSnapshot ();
 
-			combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (args);			
+			combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
 			path = null;
 			is_drawing = true;
 
-			var doc = PintaCore.Workspace.ActiveDocument;
-			doc.PreviousSelection.Dispose ();
-			doc.PreviousSelection = doc.Selection.Clone();
+			document.PreviousSelection.Dispose ();
+			document.PreviousSelection = document.Selection.Clone ();
 		}
 
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
 			if (!is_drawing)
 				return;
 
-			double x = Utility.Clamp (point.X, 0, doc.ImageSize.Width - 1);
-			double y = Utility.Clamp (point.Y, 0, doc.ImageSize.Height - 1);
+			var x = Utility.Clamp (e.PointDouble.X, 0, document.ImageSize.Width - 1);
+			var y = Utility.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height - 1);
 
-			doc.Selection.Visible = true;
+			document.Selection.Visible = true;
 
-			ImageSurface surf = doc.Layers.SelectionLayer.Surface;
+			var surf = document.Layers.SelectionLayer.Surface;
 
-			using (Context g = new Context (surf)) {
+			using (var g = new Context (surf)) {
 				g.Antialias = Antialias.Subpixel;
 
 				if (path != null) {
 					g.AppendPath (path);
-					(path as IDisposable).Dispose ();
+					path.Dispose ();
 				} else {
 					g.MoveTo (x, y);
 				}
-					
+
 				g.LineTo (x, y);
-				lasso_polygon.Add(new IntPoint((long)x, (long)y));
+				lasso_polygon.Add (new IntPoint ((long) x, (long) y));
 
 				path = g.CopyPath ();
-				
+
 				g.FillRule = FillRule.EvenOdd;
 				g.ClosePath ();
 			}
 
-			doc.Selection.SelectionPolygons.Clear ();
-			doc.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
-		    SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
-			doc.Workspace.Invalidate ();
+			document.Selection.SelectionPolygons.Clear ();
+			document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
+
+			SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
+
+			document.Workspace.Invalidate ();
 		}
 
-		protected override void OnMouseUp (Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			var surf = document.Layers.SelectionLayer.Surface;
 
-			ImageSurface surf = doc.Layers.SelectionLayer.Surface;
-
-			using (Context g = new Context (surf)) {
+			using (var g = new Context (surf)) {
 				if (path != null) {
 					g.AppendPath (path);
-					(path as IDisposable).Dispose ();
+					path.Dispose ();
 					path = null;
 				}
 
@@ -136,20 +134,18 @@ namespace Pinta.Tools
 				g.ClosePath ();
 			}
 
-			doc.Selection.SelectionPolygons.Clear ();
-			doc.Selection.SelectionPolygons.Add(lasso_polygon.ToList());
-		    SelectionModeHandler.PerformSelectionMode (combine_mode, doc.Selection.SelectionPolygons);
-			doc.Workspace.Invalidate ();
+			document.Selection.SelectionPolygons.Clear ();
+			document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
+			SelectionModeHandler.PerformSelectionMode (combine_mode, document.Selection.SelectionPolygons);
+			document.Workspace.Invalidate ();
 
-			if (hist != null)
-			{
-				doc.History.PushNewItem (hist);
+			if (hist != null) {
+				document.History.PushNewItem (hist);
 				hist = null;
 			}
 
-			lasso_polygon.Clear();
+			lasso_polygon.Clear ();
 			is_drawing = false;
 		}
-		#endregion
 	}
 }

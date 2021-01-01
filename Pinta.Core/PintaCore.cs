@@ -44,6 +44,7 @@ namespace Pinta.Core
 		public static LivePreviewManager LivePreview { get; private set; }
 		public static SettingsManager Settings { get; private set; }
 		public static EffectsManager Effects { get; private set; }
+		public static IServiceManager Services { get; }
 
         public const string ApplicationVersion = "1.8";
 
@@ -64,8 +65,23 @@ namespace Pinta.Core
 			Palette = new PaletteManager ();
 			Chrome = new ChromeManager ();
 			Effects = new EffectsManager ();
+
+			Services = new ServiceManager ();
+
+			Services.AddService<IResourceService> (Resources);
+			Services.AddService (Settings);
+			Services.AddService (Actions);
+			Services.AddService<IWorkspaceService> (Workspace);
+			Services.AddService (Layers);
+			Services.AddService<IPaintBrushService> (PaintBrushes);
+			Services.AddService<IToolService> (Tools);
+			Services.AddService (System);
+			Services.AddService (LivePreview);
+			Services.AddService<IPaletteService> (Palette);
+			Services.AddService (Chrome);
+			Services.AddService (Effects);
 		}
-		
+
 		public static void Initialize ()
 		{
 			Actions.RegisterHandlers ();

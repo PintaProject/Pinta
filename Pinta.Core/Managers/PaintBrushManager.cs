@@ -29,7 +29,13 @@ using System.Collections.Generic;
 
 namespace Pinta.Core
 {
-	public class PaintBrushManager : IEnumerable<BasePaintBrush>
+	public interface IPaintBrushService : IEnumerable<BasePaintBrush>
+	{
+		event EventHandler<BrushEventArgs>? BrushAdded;
+		event EventHandler<BrushEventArgs>? BrushRemoved;
+	}
+
+	public class PaintBrushManager : IPaintBrushService
 	{
 		private List<BasePaintBrush> paint_brushes = new List<BasePaintBrush> ();
 

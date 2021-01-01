@@ -42,173 +42,125 @@ namespace Pinta.Tools
 {
 	public class RecolorTool : BaseBrushTool
 	{
-		// NRT - Set in OnBuildToolBar
-		protected ToolBarLabel tolerance_label = null!;
-		protected ToolBarSlider tolerance_slider = null!;
-		
+		private readonly IWorkspaceService workspace;
+
 		private Point last_point = point_empty;
-		private bool[,] stencil = null!; // NRT - Set in OnMouseDown
-		private int myTolerance;
+		private BitMask? stencil;
 
-		public RecolorTool ()
+		public RecolorTool (IServiceManager services) : base (services)
 		{
+			workspace = services.GetService<IWorkspaceService> ();
 		}
 
-		#region Properties
-		public override string Name { get { return Translations.GetString ("Recolor"); } }
-		public override string Icon { get { return Resources.Icons.ToolRecolor; } }
-		public override string StatusBarText {
-			get {
-				return Translations.GetString ("Left click to replace the secondary color with the primary color. " +
-				                          "Right click to reverse.");
-			}
-		}
-        public override Gdk.Cursor DefaultCursor { get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.Recolor.png"), 9, 18); } }
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.R; } }
-		protected float Tolerance { get { return (float)(tolerance_slider.Slider.Value / 100); } }
-		public override int Priority { get { return 35; } }
-		#endregion
+		public override string Name => Translations.GetString ("Recolor");
+		public override string Icon => Pinta.Resources.Icons.ToolRecolor;
+		public override string StatusBarText => Translations.GetString ("Left click to replace the secondary color with the primary color. " +
+							  "Right click to reverse.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Recolor.png"), 9, 18);
+		public override Gdk.Key ShortcutKey => Gdk.Key.R;
+		protected float Tolerance => (float) (ToleranceSlider.Slider.Value / 100);
+		public override int Priority => 35;
 
-		#region ToolBar
-		protected override void OnBuildToolBar (Gtk.Toolbar tb)
+		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			tb.AppendItem (new Gtk.SeparatorToolItem ());
+			tb.AppendItem (Separator);
 
-			if (tolerance_label == null)
-				tolerance_label = new ToolBarLabel (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
-
-			tb.AppendItem (tolerance_label);
-
-			if (tolerance_slider == null)
-				tolerance_slider = new ToolBarSlider (0, 100, 1, 50);
-
-			tb.AppendItem (tolerance_slider);
+			tb.AppendItem (ToleranceLabel);
+			tb.AppendItem (ToleranceSlider);
 		}
-		#endregion
 
-		#region Mouse Handlers
-		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
+			document.Layers.ToolLayer.Clear ();
+			stencil = new BitMask (document.ImageSize.Width, document.ImageSize.Height);
 
-			doc.Layers.ToolLayer.Clear ();
-			stencil = new bool[doc.ImageSize.Width, doc.ImageSize.Height];
-
-			base.OnMouseDown (canvas, args, point);
+			base.OnMouseDown (document, e);
 		}
-		
-		protected unsafe override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
 
+		protected unsafe override void OnMouseMove (Document document, ToolMouseEventArgs e)
+		{
 			ColorBgra old_color;
 			ColorBgra new_color;
-			
-			if (mouse_button == 1) {
-				old_color = PintaCore.Palette.PrimaryColor.ToColorBgra ();
-				new_color = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-			} else if (mouse_button == 3) {
-				old_color = PintaCore.Palette.SecondaryColor.ToColorBgra ();
-				new_color = PintaCore.Palette.PrimaryColor.ToColorBgra ();
+
+			// This should have been created in OnMouseDown
+			if (stencil is null)
+				return;
+
+			if (mouse_button == MouseButton.Left) {
+				old_color = Palette.PrimaryColor.ToColorBgra ();
+				new_color = Palette.SecondaryColor.ToColorBgra ();
+			} else if (mouse_button == MouseButton.Right) {
+				old_color = Palette.SecondaryColor.ToColorBgra ();
+				new_color = Palette.PrimaryColor.ToColorBgra ();
 			} else {
 				last_point = point_empty;
 				return;
 			}
-				
-			int x = (int)point.X;
-			int y = (int)point.Y;
-			
+
+			var x = e.Point.X;
+			var y = e.Point.Y;
+
 			if (last_point.Equals (point_empty))
 				last_point = new Point (x, y);
 
-			if (doc.Workspace.PointInCanvas (point))
+			if (document.Workspace.PointInCanvas (e.PointDouble))
 				surface_modified = true;
 
-			ImageSurface surf = doc.Layers.CurrentUserLayer.Surface;
-			ImageSurface tmp_layer = doc.Layers.ToolLayer.Surface;
+			var surf = document.Layers.CurrentUserLayer.Surface;
+			var tmp_layer = document.Layers.ToolLayer.Surface;
 
-			Gdk.Rectangle roi = GetRectangleFromPoints (last_point, new Point (x, y));
+			var roi = CairoExtensions.GetRectangleFromPoints (last_point, new Point (x, y), BrushWidth + 2);
 
-			roi = PintaCore.Workspace.ClampToImageSize (roi);
-			myTolerance = (int)(Tolerance * 256);
-			
+			roi = workspace.ClampToImageSize (roi);
+			var myTolerance = (int) (Tolerance * 256);
+
 			tmp_layer.Flush ();
 
-			ColorBgra* tmp_data_ptr = (ColorBgra*)tmp_layer.DataPtr;
-			int tmp_width = tmp_layer.Width;
-			ColorBgra* surf_data_ptr = (ColorBgra*)surf.DataPtr;
-			int surf_width = surf.Width;
-			
+			var tmp_data_ptr = (ColorBgra*) tmp_layer.DataPtr;
+			var tmp_width = tmp_layer.Width;
+			var surf_data_ptr = (ColorBgra*) surf.DataPtr;
+			var surf_width = surf.Width;
+
 			// The stencil lets us know if we've already checked this
 			// pixel, providing a nice perf boost
 			// Maybe this should be changed to a BitVector2DSurfaceAdapter?
-			for (int i = roi.X; i <= roi.GetRight (); i++)
-				for (int j = roi.Y; j <= roi.GetBottom (); j++) {
+			for (var i = roi.X; i <= roi.GetRight (); i++)
+				for (var j = roi.Y; j <= roi.GetBottom (); j++) {
 					if (stencil[i, j])
 						continue;
-						
-					if (IsColorInTolerance (new_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j)))
+
+					if (ColorBgra.ColorsWithinTolerance (new_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j), myTolerance))
 						*tmp_layer.GetPointAddressUnchecked (tmp_data_ptr, tmp_width, i, j) = AdjustColorDifference (new_color, old_color, surf.GetColorBgraUnchecked (surf_data_ptr, surf_width, i, j));
 
 					stencil[i, j] = true;
 				}
-			
+
 			tmp_layer.MarkDirty ();
 
-			using (Context g = new Context (surf)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
+			using (var g = document.CreateClippedContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
-				
+
 				g.MoveTo (last_point.X, last_point.Y);
 				g.LineTo (x, y);
 
 				g.LineWidth = BrushWidth;
 				g.LineJoin = LineJoin.Round;
 				g.LineCap = LineCap.Round;
-				
+
 				g.SetSource (tmp_layer);
-				
+
 				g.Stroke ();
 			}
 
-			doc.Workspace.Invalidate (roi);
-			
+			document.Workspace.Invalidate (roi);
+
 			last_point = new Point (x, y);
 		}
-		#endregion
 
 		#region Private PDN Methods
-		private bool IsColorInTolerance (ColorBgra colorA, ColorBgra colorB)
-		{
-			return Utility.ColorDifference (colorA, colorB) <= myTolerance;
-		}
-
-		private static bool CheckColor (ColorBgra a, ColorBgra b, int tolerance)
-		{
-			int sum = 0;
-			int diff;
-
-			diff = a.R - b.R;
-			sum += (1 + diff * diff) * a.A / 256;
-
-			diff = a.G - b.G;
-			sum += (1 + diff * diff) * a.A / 256;
-
-			diff = a.B - b.B;
-			sum += (1 + diff * diff) * a.A / 256;
-
-			diff = a.A - b.A;
-			sum += diff * diff;
-
-			return (sum <= tolerance * tolerance * 4);
-		}
-
-		private ColorBgra AdjustColorDifference (ColorBgra oldColor, ColorBgra newColor, ColorBgra basisColor)
+		private static ColorBgra AdjustColorDifference (ColorBgra oldColor, ColorBgra newColor, ColorBgra basisColor)
 		{
 			ColorBgra returnColor;
 
@@ -221,7 +173,8 @@ namespace Pinta.Tools
 
 			return returnColor;
 		}
-		private byte AdjustColorByte (byte oldByte, byte newByte, byte basisByte)
+
+		private static byte AdjustColorByte (byte oldByte, byte newByte, byte basisByte)
 		{
 			if (oldByte > newByte)
 				return Utility.ClampToByte (basisByte - (oldByte - newByte));
@@ -229,5 +182,13 @@ namespace Pinta.Tools
 				return Utility.ClampToByte (basisByte + (newByte - oldByte));
 		}
 		#endregion
+
+		private ToolBarLabel? tolerance_label;
+		private ToolBarSlider? tolerance_slider;
+		private SeparatorToolItem? separator;
+
+		private ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel ($"  {Translations.GetString ("Tolerance")}: ");
+		private ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, 50);
+		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
 	}
 }

@@ -36,6 +36,7 @@
 using System;
 using Cairo;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Pinta.Core
 {
@@ -1718,7 +1719,225 @@ namespace Pinta.Core
             }
         }
 
-        public enum ExtendedOperators
+	public static Gdk.Rectangle GetRectangleFromPoints (Point a, Point b, int inflate)
+	{
+		var x = Math.Min (a.X, b.X);
+		var y = Math.Min (a.Y, b.Y);
+		var w = Math.Max (a.X, b.X);
+		var h = Math.Max (a.Y, b.Y);
+
+		var rect = new Gdk.Rectangle (x, y, w, h);
+		rect.Inflate (inflate, inflate);
+
+		return rect;
+	}
+
+	public static Rectangle PointsToRectangle (PointD p1, PointD p2)
+	{
+		double x, y, w, h;
+
+		if (p1.Y <= p2.Y) {
+			y = p1.Y;
+			h = p2.Y - y;
+		} else {
+			y = p2.Y;
+			h = p1.Y - y;
+		}
+
+		if (p1.X <= p2.X) {
+			x = p1.X;
+			w = p2.X - x;
+		} else {
+			x = p2.X;
+			w = p1.X - x;
+		}
+
+		return new Rectangle (x, y, w, h);
+	}
+
+		// Ported from PDN.
+		public unsafe static void FillStencilFromPoint (ImageSurface surface, BitMask stencil, Point start, int tolerance,
+								out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		{
+			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
+			int top = int.MaxValue;
+			int bottom = int.MinValue;
+			int left = int.MaxValue;
+			int right = int.MinValue;
+			Cairo.RectangleInt[] scans;
+
+			stencil.Clear (false);
+
+			if (limitToSelection) {
+				using (Cairo.Region excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
+					excluded.Xor (limitRegion);
+					scans = new Cairo.RectangleInt[excluded.NumRectangles];
+					for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
+						scans[i] = excluded.GetRectangle (i);
+				}
+			} else {
+				scans = new Cairo.RectangleInt[0];
+			}
+
+			foreach (var rect in scans) {
+				stencil.Set (rect.ToGdkRectangle (), true);
+			}
+
+			var queue = new System.Collections.Generic.Queue<Point> (16);
+			queue.Enqueue (start);
+
+			while (queue.Count > 0) {
+				Point pt = queue.Dequeue ();
+
+				ColorBgra* rowPtr = surface.GetRowAddressUnchecked (pt.Y);
+				int localLeft = pt.X - 1;
+				int localRight = pt.X;
+
+				while (localLeft >= 0 &&
+				       !stencil.Get (localLeft, pt.Y) &&
+				       ColorBgra.ColorsWithinTolerance (cmp, rowPtr[localLeft], tolerance)) {
+					stencil.Set (localLeft, pt.Y, true);
+					--localLeft;
+				}
+
+				int surfaceWidth = surface.Width;
+				while (localRight < surfaceWidth &&
+				       !stencil.Get (localRight, pt.Y) &&
+				       ColorBgra.ColorsWithinTolerance (cmp, rowPtr[localRight], tolerance)) {
+					stencil.Set (localRight, pt.Y, true);
+					++localRight;
+				}
+
+				++localLeft;
+				--localRight;
+
+				Action<int> checkRow = (row) => {
+					int sleft = localLeft;
+					int sright = localLeft;
+					ColorBgra* otherRowPtr = surface.GetRowAddressUnchecked (row);
+
+					for (int sx = localLeft; sx <= localRight; ++sx) {
+						if (!stencil.Get (sx, row) &&
+						    ColorBgra.ColorsWithinTolerance (cmp, otherRowPtr[sx], tolerance)) {
+							++sright;
+						} else {
+							if (sright - sleft > 0) {
+								queue.Enqueue (new Point (sleft, row));
+							}
+
+							++sright;
+							sleft = sright;
+						}
+					}
+
+					if (sright - sleft > 0) {
+						queue.Enqueue (new Point (sleft, row));
+					}
+				};
+
+				if (pt.Y > 0) {
+					checkRow (pt.Y - 1);
+				}
+
+				if (pt.Y < surface.Height - 1) {
+					checkRow (pt.Y + 1);
+				}
+
+				if (localLeft < left) {
+					left = localLeft;
+				}
+
+				if (localRight > right) {
+					right = localRight;
+				}
+
+				if (pt.Y < top) {
+					top = pt.Y;
+				}
+
+				if (pt.Y > bottom) {
+					bottom = pt.Y;
+				}
+			}
+
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle (), false);
+
+			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
+		}
+
+		// Ported from PDN
+		public unsafe static void FillStencilByColor (ImageSurface surface, BitMask stencil, ColorBgra cmp, int tolerance,
+							      out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
+		{
+			int top = int.MaxValue;
+			int bottom = int.MinValue;
+			int left = int.MaxValue;
+			int right = int.MinValue;
+			Cairo.RectangleInt[] scans;
+
+			stencil.Clear (false);
+
+			if (limitToSelection) {
+				using (var excluded = new Cairo.Region (CairoExtensions.CreateRectangleInt (0, 0, stencil.Width, stencil.Height))) {
+					excluded.Xor (limitRegion);
+					scans = new Cairo.RectangleInt[excluded.NumRectangles];
+					for (int i = 0, n = excluded.NumRectangles; i < n; ++i)
+						scans[i] = excluded.GetRectangle (i);
+				}
+			} else {
+				scans = new Cairo.RectangleInt[0];
+			}
+
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle (), true);
+
+			Parallel.For (0, surface.Height, y => {
+				bool foundPixelInRow = false;
+				ColorBgra* ptr = surface.GetRowAddressUnchecked (y);
+
+				int surfaceWidth = surface.Width;
+				for (int x = 0; x < surfaceWidth; ++x) {
+					if (ColorBgra.ColorsWithinTolerance (cmp, *ptr, tolerance)) {
+						stencil.Set (x, y, true);
+
+						if (x < left) {
+							left = x;
+						}
+
+						if (x > right) {
+							right = x;
+						}
+
+						foundPixelInRow = true;
+					}
+
+					++ptr;
+				}
+
+				if (foundPixelInRow) {
+					if (y < top) {
+						top = y;
+					}
+
+					if (y >= bottom) {
+						bottom = y;
+					}
+				}
+			});
+
+			foreach (var rect in scans)
+				stencil.Set (rect.ToGdkRectangle (), false);
+
+			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
+		}
+
+		public static bool IsNotSet (this Point p)
+		{
+			return p.X == int.MinValue && p.Y == int.MinValue;
+		}
+
+		public enum ExtendedOperators
         {
             Clear = 0,
 

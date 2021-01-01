@@ -1,10 +1,10 @@
 // 
-// EllipseSelectTool.cs
+// ServiceManager.cs
 //  
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
-// Copyright (c) 2010 Jonathan Pobst
+// Copyright (c) 2020 Jonathan Pobst
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,26 +25,45 @@
 // THE SOFTWARE.
 
 using System;
-using Cairo;
-using Pinta.Core;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Pinta.Tools
+namespace Pinta.Core
 {
-	public class EllipseSelectTool : SelectTool
+	public interface IServiceManager
 	{
-		public EllipseSelectTool (IServiceManager services) : base (services)
+		T AddService<T> (T implementation) where T : class;
+		T GetService<T> () where T : class;
+		T? GetOptionalService<T> () where T : class;
+	}
+
+	public class ServiceManager : IServiceManager
+	{
+		private Dictionary<Type, object> services = new Dictionary<Type, object> ();
+
+		public T AddService<T> (T implementation) where T : class
 		{
+			services.Add (typeof (T), implementation);
+
+			return implementation;
 		}
 
-		public override string Name => Translations.GetString ("Ellipse Select");
-		public override string Icon => Pinta.Resources.Icons.ToolSelectEllipse;
-		public override string StatusBarText => Translations.GetString ("Click and drag to draw an elliptical selection. Hold Shift to constrain to a circle.");
-		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.EllipseSelect.png"), 9, 18);
-		public override int Priority => 13;
-
-		protected override void DrawShape (Document document, Rectangle r, Layer l)
+		public T GetService<T> () where T : class
 		{
-			document.Selection.CreateEllipseSelection (r);
+			if (services.TryGetValue (typeof (T), out var implementation))
+				return (T) implementation;
+
+			throw new ApplicationException ($"Could not resolve service type {typeof (T)}");
+		}
+
+		public T? GetOptionalService<T> () where T : class
+		{
+			if (services.TryGetValue (typeof (T), out var implementation))
+				return (T) implementation;
+
+			return null;
 		}
 	}
 }

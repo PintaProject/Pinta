@@ -1,4 +1,4 @@
-﻿// 
+// 
 // BaseEditEngine.cs
 //  
 // Author:
@@ -252,8 +252,6 @@ namespace Pinta.Tools
         {
             owner = passedOwner;
 
-			owner.IsEditableShapeTool = true;
-
 			ResetShapes();
         }
 
@@ -454,9 +452,9 @@ namespace Pinta.Tools
 			DrawActiveShape(true, false, true, false, false);
         }
 
-        public virtual bool HandleKeyDown(Gtk.DrawingArea canvas, Gtk.KeyPressEventArgs args)
+        public virtual bool HandleKeyDown(Document document, ToolKeyEventArgs e)
         {
-			Gdk.Key keyPressed = args.Event.Key;
+			Gdk.Key keyPressed = e.Key;
 
 			if (keyPressed == Gdk.Key.Delete)
             {
@@ -515,14 +513,14 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Return)
             {
                 //Finalize every editable shape not yet finalized.
 				FinalizeAllShapes();
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.space)
             {
@@ -538,8 +536,8 @@ namespace Pinta.Tools
 						new ShapesModifyHistoryItem(this, owner.Icon, ShapeName + " " + Translations.GetString("Point Added")));
 
 
-                    bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
-                    bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+                    bool shiftKey = e.IsShiftPressed;
+                    bool ctrlKey = e.IsControlPressed;
 
                     PointD newPointPos;
 
@@ -578,7 +576,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, shiftKey, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Up)
             {
@@ -591,7 +589,7 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Down)
             {
@@ -604,14 +602,14 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Left)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
                 {
-                    if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+                    if (e.IsControlPressed)
                     {
                         //Change the selected control point to be the previous one.
 						
@@ -636,14 +634,14 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
+                return true;
             }
             else if (keyPressed == Gdk.Key.Right)
             {
                 //Make sure a control point is selected.
                 if (SelectedPointIndex > -1)
                 {
-                    if ((args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+                    if (e.IsControlPressed)
                     {
 						//Change the selected control point to be the following one.
 
@@ -668,26 +666,6 @@ namespace Pinta.Tools
 					DrawActiveShape(true, false, true, false, false);
                 }
 
-                args.RetVal = true;
-            }
-            else
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public virtual bool HandleKeyUp(Gtk.DrawingArea canvas, Gtk.KeyReleaseEventArgs args)
-        {
-			Gdk.Key keyReleased = args.Event.Key;
-
-            if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.space
-                || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
-                || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right)
-            {
-                args.RetVal = true;
-
                 return true;
             }
             else
@@ -696,8 +674,26 @@ namespace Pinta.Tools
             }
         }
 
-        public virtual void HandleMouseDown(Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, Cairo.PointD point)
+        public virtual bool HandleKeyUp(Document document, ToolKeyEventArgs e)
         {
+			Gdk.Key keyReleased = e.Key;
+
+            if (keyReleased == Gdk.Key.Delete || keyReleased == Gdk.Key.Return || keyReleased == Gdk.Key.space
+                || keyReleased == Gdk.Key.Up || keyReleased == Gdk.Key.Down
+                || keyReleased == Gdk.Key.Left || keyReleased == Gdk.Key.Right)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual void HandleMouseDown(Document document, ToolMouseEventArgs e)
+        {
+			var point = e.PointDouble;
+
             //If we are already drawing, ignore any additional mouse down events.
 			if (is_drawing)
 			{
@@ -712,7 +708,7 @@ namespace Pinta.Tools
             shape_origin = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
             current_point = shape_origin;
 
-            bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+            bool shiftKey = e.IsShiftPressed;
 
             if (shiftKey)
             {
@@ -723,7 +719,7 @@ namespace Pinta.Tools
 
 
             //Right clicking changes tension.
-            if (args.Event.Button == 1)
+            if (e.MouseButton == MouseButton.Left)
             {
                 changing_tension = false;
             }
@@ -733,7 +729,7 @@ namespace Pinta.Tools
             }
 
 
-			bool ctrlKey = (args.Event.State & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask;
+			bool ctrlKey = e.IsControlPressed;
 
 
 			int closestCPIndex, closestCPShapeIndex;
@@ -819,7 +815,7 @@ namespace Pinta.Tools
 					if (ActivateCorrespondingTool(closestShapeIndex, true) != null)
 					{
 						//Pass on the event and its data to the newly activated tool.
-						PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
+						PintaCore.Tools.DoMouseDown(document, e);
 
 						//Don't do anything else here once the tool is switched and the event is passed on.
 						return;
@@ -898,7 +894,7 @@ namespace Pinta.Tools
 				if (ActivateCorrespondingTool(SelectedShapeIndex, true) != null)
 				{
 					//Pass on the event and its data to the newly activated tool.
-					PintaCore.Tools.CurrentTool.DoMouseDown(canvas, args, point);
+					PintaCore.Tools.DoMouseDown(document, e);
 
 					//Don't do anything else here once the tool is switched and the event is passed on.
 					return;
@@ -923,22 +919,23 @@ namespace Pinta.Tools
 			DrawActiveShape(false, false, true, shiftKey, false);
         }
 
-        public virtual void HandleMouseUp(Gtk.DrawingArea canvas, Gtk.ButtonReleaseEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseUp(Document document, ToolMouseEventArgs e)
         {
             is_drawing = false;
 
             changing_tension = false;
 
-			DrawActiveShape(true, false, true, args.Event.IsShiftPressed(), false);
+			DrawActiveShape(true, false, true, e.IsShiftPressed, false);
         }
 
-        public virtual void HandleMouseMove(object o, Gtk.MotionNotifyEventArgs args, Cairo.PointD point)
+        public virtual void HandleMouseMove(Document document, ToolMouseEventArgs e)
         {
-            Document doc = PintaCore.Workspace.ActiveDocument;
+            Document doc = document;
+			var point = e.PointDouble;
 
             current_point = new PointD(Utility.Clamp(point.X, 0, doc.ImageSize.Width - 1), Utility.Clamp(point.Y, 0, doc.ImageSize.Height - 1));
 
-            bool shiftKey = (args.Event.State & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask;
+            bool shiftKey = e.IsShiftPressed;
 
             if (shiftKey)
             {

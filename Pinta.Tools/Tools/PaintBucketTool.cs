@@ -33,62 +33,58 @@ namespace Pinta.Tools
 {
 	public class PaintBucketTool : FloodTool
 	{
+		private readonly IPaletteService palette;
 		private Color fill_color;
-		
-		public override string Name {
-			get { return Translations.GetString ("Paint Bucket"); }
-		}
-		public override string Icon {
-			get { return Resources.Icons.ToolPaintBucket; }
-		}
-		public override string StatusBarText {
-			get { return Translations.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color."); }
-		}
-		public override Gdk.Cursor DefaultCursor {
-            get { return new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 21, 21); }
-		}
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.F; } }
-		public override int Priority { get { return 21; } }
-		protected override bool CalculatePolygonSet { get { return false; } }
 
-		protected override void OnMouseDown (Gtk.DrawingArea canvas, Gtk.ButtonPressEventArgs args, PointD point)
+		public PaintBucketTool (IServiceManager services) : base (services)
 		{
-			if (args.Event.Button == 1)
-				fill_color = PintaCore.Palette.PrimaryColor;
+			palette = services.GetService<IPaletteService> ();
+		}
+
+		public override string Name => Translations.GetString ("Paint Bucket");
+		public override string Icon => Pinta.Resources.Icons.ToolPaintBucket;
+		public override string StatusBarText => Translations.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color.");
+		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 21, 21);
+		public override Gdk.Key ShortcutKey => Gdk.Key.F;
+		public override int Priority => 21;
+		protected override bool CalculatePolygonSet => false;
+
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
+		{
+			if (e.MouseButton == MouseButton.Left)
+				fill_color = palette.PrimaryColor;
 			else
-				fill_color = PintaCore.Palette.SecondaryColor;
-			
-			base.OnMouseDown (canvas, args, point);
+				fill_color = palette.SecondaryColor;
+
+			base.OnMouseDown (document, e);
 		}
 
-		protected unsafe override void OnFillRegionComputed (BitMask stencil)
+		protected unsafe override void OnFillRegionComputed (Document document, BitMask stencil)
 		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-			ImageSurface surf = doc.Layers.ToolLayer.Surface;
+			var surf = document.Layers.ToolLayer.Surface;
 
 			using (var g = new Context (surf)) {
 				g.Operator = Operator.Source;
-				g.SetSource (doc.Layers.CurrentUserLayer.Surface);
+				g.SetSource (document.Layers.CurrentUserLayer.Surface);
 				g.Paint ();
 			}
 
-			SimpleHistoryItem hist = new SimpleHistoryItem (Icon, Name);
-			hist.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayer);
+			var hist = new SimpleHistoryItem (Icon, Name);
+			hist.TakeSnapshotOfLayer (document.Layers.CurrentUserLayer);
 
-			ColorBgra color = fill_color.ToColorBgra ().ToPremultipliedAlpha ();
-			ColorBgra* dstPtr = (ColorBgra*)surf.DataPtr;
-			int width = surf.Width;
+			var color = fill_color.ToColorBgra ().ToPremultipliedAlpha ();
+			var dstPtr = (ColorBgra*) surf.DataPtr;
+			var width = surf.Width;
 
 			surf.Flush ();
 
 			// Color in any pixel that the stencil says we need to fill
-			Parallel.For (0, stencil.Height, y =>
-			{
-				int stencil_width = stencil.Width;
-				for (int x = 0; x < stencil_width; ++x) {
-					if (stencil.Get (x, y)) {
+			Parallel.For (0, stencil.Height, y => {
+				var stencil_width = stencil.Width;
+
+				for (var x = 0; x < stencil_width; ++x) {
+					if (stencil.Get (x, y))
 						surf.SetColorBgraUnchecked (dstPtr, width, color, x, y);
-					}
 				}
 			});
 
@@ -96,16 +92,15 @@ namespace Pinta.Tools
 
 			// Transfer the temp layer to the real one,
 			// respecting any selection area
-			using (var g = doc.CreateClippedContext ()) {
+			using (var g = document.CreateClippedContext ()) {
 				g.Operator = Operator.Source;
 				g.SetSource (surf);
 				g.Paint ();
 			}
 
-			doc.Layers.ToolLayer.Clear ();
-
-			doc.History.PushNewItem (hist); 
-			doc.Workspace.Invalidate ();
+			document.Layers.ToolLayer.Clear ();
+			document.History.PushNewItem (hist);
+			document.Workspace.Invalidate ();
 		}
 	}
 }

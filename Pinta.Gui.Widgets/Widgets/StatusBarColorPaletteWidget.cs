@@ -61,6 +61,7 @@ namespace Pinta.Gui.Widgets
 
 			PintaCore.Palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
 			PintaCore.Palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
+			PintaCore.Palette.RecentColorsChanged += new EventHandler (Palette_ColorChanged);
 			PintaCore.Palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
 
 			HeightRequest = WIDGET_HEIGHT;

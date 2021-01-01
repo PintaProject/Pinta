@@ -30,128 +30,71 @@ using Cairo;
 using Gtk;
 using Pinta.Core;
 
-using Pinta.Tools.Brushes;
-
 namespace Pinta.Tools
 {
 	public class PaintBrushTool : BaseBrushTool
 	{
-		#region Properties
-		public override string Name { get { return Translations.GetString ("Paintbrush"); } }
-		public override string Icon { get { return Resources.Icons.ToolPaintBrush; } }
-		public override string StatusBarText { get { return Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color."); } }
+		private readonly IPaintBrushService brushes;
+
+		private BasePaintBrush default_brush;
+		private BasePaintBrush active_brush;
+		private Color stroke_color;
+		private Point last_point;
+
+		public PaintBrushTool (IServiceManager services) : base (services)
+		{
+			brushes = services.GetService<IPaintBrushService> ();
+
+			if (!brushes.Any ())
+				throw new InvalidOperationException ("There are no registered paint brushes.");
+
+			default_brush = brushes.First ();
+			active_brush = default_brush;
+
+			brushes.BrushAdded += (_, _) => RebuildBrushComboBox ();
+			brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
+		}
+
+		public override string Name => Translations.GetString ("Paintbrush");
+		public override string Icon => Pinta.Resources.Icons.ToolPaintBrush;
+		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
+		public override bool CursorChangesOnZoom => true;
+		public override Gdk.Key ShortcutKey => Gdk.Key.B;
+		public override int Priority => 25;
 
 		public override Gdk.Cursor DefaultCursor {
 			get {
-				int iconOffsetX, iconOffsetY;
-				var icon = CreateIconWithShape ("Cursor.Paintbrush.png",
-				                                CursorShape.Ellipse, BrushWidth, 8, 24,
-				                                out iconOffsetX, out iconOffsetY);
-                return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
+				var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
+								CursorShape.Ellipse, BrushWidth, 8, 24,
+								out var iconOffsetX, out var iconOffsetY);
+
+				return new Gdk.Cursor (Gdk.Display.Default, icon, iconOffsetX, iconOffsetY);
 			}
-		}
-		public override bool CursorChangesOnZoom { get { return true; } }
-
-		public override Gdk.Key ShortcutKey { get { return Gdk.Key.B; } }
-		public override int Priority { get { return 25; } }
-		#endregion
-
-		// NRT - Set by OnBuildToolBar
-		private BasePaintBrush default_brush = null!;
-		private BasePaintBrush active_brush = null!;
-		private ToolBarLabel brush_label = null!;
-		private ToolBarComboBox brush_combo_box = null!;
-		private Color stroke_color;
-        private Point last_point;
-
-		protected override void OnActivated ()
-		{
-			base.OnActivated ();
-
-			PintaCore.PaintBrushes.BrushAdded += HandleBrushAddedOrRemoved;
-			PintaCore.PaintBrushes.BrushRemoved += HandleBrushAddedOrRemoved;
-		}
-
-		protected override void OnDeactivated (BaseTool newTool)
-		{
-			base.OnDeactivated (newTool);
-
-			PintaCore.PaintBrushes.BrushAdded -= HandleBrushAddedOrRemoved;
-			PintaCore.PaintBrushes.BrushRemoved -= HandleBrushAddedOrRemoved;
 		}
 
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
 
-			// Change the cursor when the BrushWidth is changed.
-			brush_width.Widget.ValueChanged += (sender, e) => SetCursor (DefaultCursor);
+			tb.AppendItem (Separator);
 
-			tb.AppendItem (new Gtk.SeparatorToolItem ());
-
-			if (brush_label == null)
-				brush_label = new ToolBarLabel (string.Format (" {0}:  ", Translations.GetString ("Type")));
-
-			if (brush_combo_box == null) {
-				brush_combo_box = new ToolBarComboBox (100, 0, false);
-				brush_combo_box.ComboBox.Changed += (o, e) => {
-					var brush_name = brush_combo_box.ComboBox.ActiveText;
-					active_brush = PintaCore.PaintBrushes.SingleOrDefault(brush => brush.Name == brush_name) ?? default_brush;
-				};
-
-				RebuildBrushComboBox ();
-			}
-
-			tb.AppendItem (brush_label);
-			tb.AppendItem (brush_combo_box);
+			tb.AppendItem (BrushLabel);
+			tb.AppendItem (BrushComboBox);
 		}
 
-		/// <summary>
-		/// Rebuild the list of brushes when a brush is added or removed.
-		/// </summary>
-		private void HandleBrushAddedOrRemoved (object? sender, BrushEventArgs e)
+		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{
-			RebuildBrushComboBox ();
-		}
+			base.OnMouseDown (document, e);
 
-		/// <summary>
-		/// Rebuild the list of brushes.
-		/// </summary>
-		private void RebuildBrushComboBox ()
-		{
-			brush_combo_box.ComboBox.RemoveAll();
-			default_brush = null!; // NRT - This gets set below, as long as there is at least one brush..
-
-			foreach (var brush in PintaCore.PaintBrushes) {
-				if (default_brush == null)
-					default_brush = (BasePaintBrush)brush;
-				brush_combo_box.ComboBox.AppendText(brush.Name);
-			}
-
-			brush_combo_box.ComboBox.Active = 0;
-		}
-
-		#region Mouse Handlers
-		protected override void OnMouseDown (DrawingArea canvas, ButtonPressEventArgs args, PointD point)
-		{
-			base.OnMouseDown (canvas, args, point);
 			active_brush.DoMouseDown ();
 		}
 
-		protected override void OnMouseUp (DrawingArea canvas, ButtonReleaseEventArgs args, PointD point)
+		protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 		{
-			base.OnMouseUp (canvas, args, point);
-			active_brush.DoMouseUp ();
-		}
-
-		protected override void OnMouseMove (object o, Gtk.MotionNotifyEventArgs? args, Cairo.PointD point)
-		{
-			Document doc = PintaCore.Workspace.ActiveDocument;
-
-			if (mouse_button == 1) {
-				stroke_color = PintaCore.Palette.PrimaryColor;
-			} else if (mouse_button == 3) {
-				stroke_color = PintaCore.Palette.SecondaryColor;
+			if (mouse_button == MouseButton.Left) {
+				stroke_color = Palette.PrimaryColor;
+			} else if (mouse_button == MouseButton.Right) {
+				stroke_color = Palette.SecondaryColor;
 			} else {
 				last_point = point_empty;
 				return;
@@ -161,44 +104,85 @@ namespace Pinta.Tools
 			stroke_color = new Color (stroke_color.R, stroke_color.G, stroke_color.B,
 				stroke_color.A * active_brush.StrokeAlphaMultiplier);
 
-			int x = (int)point.X;
-			int y = (int)point.Y;
+			var x = e.Point.X;
+			var y = e.Point.Y;
 
 			if (last_point.Equals (point_empty))
-				last_point = new Point (x, y);
+				last_point = e.Point;
 
-			if (doc.Workspace.PointInCanvas (point))
+			if (document.Workspace.PointInCanvas (e.PointDouble))
 				surface_modified = true;
 
-			var surf = doc.Layers.CurrentUserLayer.Surface;
+			var surf = document.Layers.CurrentUserLayer.Surface;
 			var invalidate_rect = Gdk.Rectangle.Zero;
 			var brush_width = BrushWidth;
 
-			using (var g = new Context (surf)) {
-				g.AppendPath (doc.Selection.SelectionPath);
-				g.FillRule = FillRule.EvenOdd;
-				g.Clip ();
-
+			using (var g = document.CreateClippedContext ()) {
 				g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 				g.LineWidth = brush_width;
 				g.LineJoin = LineJoin.Round;
 				g.LineCap = BrushWidth == 1 ? LineCap.Butt : LineCap.Round;
 				g.SetSourceColor (stroke_color);
 
-                invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf,
-				                                            x, y, last_point.X, last_point.Y);
+				invalidate_rect = active_brush.DoMouseMove (g, stroke_color, surf, x, y, last_point.X, last_point.Y);
 			}
 
 			// If we draw partially offscreen, Cairo gives us a bogus
 			// dirty rectangle, so redraw everything.
-			if (doc.Workspace.IsPartiallyOffscreen (invalidate_rect)) {
-				doc.Workspace.Invalidate ();
-			} else {
-				doc.Workspace.Invalidate (doc.ClampToImageSize (invalidate_rect));
-			}
+			if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
+				document.Workspace.Invalidate ();
+			else
+				document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
 
-			last_point = new Point (x, y);
+			last_point = e.Point;
 		}
-		#endregion
+
+		protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+		{
+			base.OnMouseUp (document, e);
+
+			active_brush.DoMouseUp ();
+		}
+
+		private ToolBarLabel? brush_label;
+		private ToolBarComboBox? brush_combo_box;
+		private SeparatorToolItem? separator;
+
+		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
+		private ToolBarLabel BrushLabel => brush_label ??= new ToolBarLabel ($" {Translations.GetString ("Type")}:  ");
+
+		private ToolBarComboBox BrushComboBox {
+			get {
+				if (brush_combo_box is null) {
+					brush_combo_box = new ToolBarComboBox (100, 0, false);
+					brush_combo_box.ComboBox.Changed += (o, e) => {
+						var brush_name = brush_combo_box.ComboBox.ActiveText;
+						active_brush = brushes.SingleOrDefault (brush => brush.Name == brush_name) ?? default_brush;
+					};
+
+					RebuildBrushComboBox ();
+				}
+
+				return brush_combo_box;
+			}
+		}
+
+		/// <summary>
+		/// Rebuild the list of brushes.
+		/// </summary>
+		private void RebuildBrushComboBox ()
+		{
+			if (!brushes.Any ())
+				throw new InvalidOperationException ("There are no registered paint brushes.");
+
+			default_brush = brushes.First ();
+
+			BrushComboBox.ComboBox.RemoveAll ();
+
+			foreach (var brush in brushes)
+				BrushComboBox.ComboBox.AppendText (brush.Name);
+
+			BrushComboBox.ComboBox.Active = 0;
+		}
 	}
 }

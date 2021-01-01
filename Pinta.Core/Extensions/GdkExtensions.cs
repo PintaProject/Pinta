@@ -177,5 +177,89 @@ namespace Pinta.Core
 				return surface.ToPixbuf ();
 			}
 		}
+		/// <summary>
+		/// Create a cursor icon with a shape that visually represents the tool's thickness.
+		/// </summary>
+		/// <param name="imgName">A string containing the name of the tool's icon image to use.</param>
+		/// <param name="shape">The shape to draw.</param>
+		/// <param name="shapeWidth">The width of the shape.</param>
+		/// <param name="imgToShapeX">The horizontal distance between the image's top-left corner and the shape center.</param>
+		/// <param name="imgToShapeY">The verical distance between the image's top-left corner and the shape center.</param>
+		/// <param name="shapeX">The X position in the returned Pixbuf that will be the center of the shape.</param>
+		/// <param name="shapeY">The Y position in the returned Pixbuf that will be the center of the shape.</param>
+		/// <returns>The new cursor icon with an shape that represents the tool's thickness.</returns>
+		public static Gdk.Pixbuf CreateIconWithShape (string imgName, CursorShape shape, int shapeWidth,
+							  int imgToShapeX, int imgToShapeY,
+							  out int shapeX, out int shapeY)
+		{
+			Gdk.Pixbuf img = PintaCore.Resources.GetIcon (imgName);
+
+			double zoom = 1d;
+			if (PintaCore.Workspace.HasOpenDocuments) {
+				zoom = Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
+			}
+
+			shapeWidth = (int) Math.Min (800d, ((double) shapeWidth) * zoom);
+			int halfOfShapeWidth = shapeWidth / 2;
+
+			// Calculate bounding boxes around the both image and shape
+			// relative to the image top-left corner.
+			Gdk.Rectangle imgBBox = new Gdk.Rectangle (0, 0, img.Width, img.Height);
+			Gdk.Rectangle shapeBBox = new Gdk.Rectangle (
+				imgToShapeX - halfOfShapeWidth,
+				imgToShapeY - halfOfShapeWidth,
+				shapeWidth,
+				shapeWidth);
+
+			// Inflate shape bounding box to allow for anti-aliasing
+			shapeBBox.Inflate (2, 2);
+
+			// To determine required size of icon,
+			// find union of the image and shape bounding boxes
+			// (still relative to image top-left corner)
+			Gdk.Rectangle iconBBox = imgBBox.Union (shapeBBox);
+
+			// Image top-left corner in icon co-ordinates
+			int imgX = imgBBox.Left - iconBBox.Left;
+			int imgY = imgBBox.Top - iconBBox.Top;
+
+			// Shape center point in icon co-ordinates
+			shapeX = imgToShapeX - iconBBox.Left;
+			shapeY = imgToShapeY - iconBBox.Top;
+
+			using (var i = new Cairo.ImageSurface (Cairo.Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
+				using (var g = new Cairo.Context (i)) {
+					// Don't show shape if shapeWidth less than 3,
+					if (shapeWidth > 3) {
+						int diam = Math.Max (1, shapeWidth - 2);
+						Cairo.Rectangle shapeRect = new Cairo.Rectangle (shapeX - halfOfShapeWidth,
+												 shapeY - halfOfShapeWidth,
+												 diam,
+												 diam);
+
+						Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
+						Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
+
+						switch (shape) {
+							case CursorShape.Ellipse:
+								g.DrawEllipse (shapeRect, outerColor, 2);
+								shapeRect = shapeRect.Inflate (-1, -1);
+								g.DrawEllipse (shapeRect, innerColor, 1);
+								break;
+							case CursorShape.Rectangle:
+								g.DrawRectangle (shapeRect, outerColor, 1);
+								shapeRect = shapeRect.Inflate (-1, -1);
+								g.DrawRectangle (shapeRect, innerColor, 1);
+								break;
+						}
+					}
+
+					// Draw the image
+					g.DrawPixbuf (img, new Cairo.Point (imgX, imgY));
+				}
+
+				return CairoExtensions.ToPixbuf (i);
+			}
+		}
 	}
 }
