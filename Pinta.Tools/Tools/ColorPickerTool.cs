@@ -126,7 +126,7 @@ namespace Pinta.Tools
 			if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1)
 				tools.SetCurrentTool (tools.PreviousTool);
 			else if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 2)
-				tools.SetCurrentTool (Translations.GetString ("Pencil"));
+				tools.SetCurrentTool (nameof (PencilTool));
 		}
 
 		private unsafe Color GetColorFromPoint (Document document, Point point)

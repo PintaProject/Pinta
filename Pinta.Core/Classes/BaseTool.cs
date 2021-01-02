@@ -328,25 +328,7 @@ namespace Pinta.Core
 			}
 		}
 
-		private ToggleToolButton CreateToolButton ()
-		{
-			var image = Image.NewFromIconName (Icon, IconSize.Button);
-			image.Show ();
-
-			var tool_item = new ToggleToolButton {
-				IconWidget = image,
-				Label = Name
-			};
-
-			tool_item.Show ();
-
-			if (ShortcutKey != 0)
-				tool_item.TooltipText = $"{Name}\n{Translations.GetString ("Shortcut key")}: {ShortcutKey.ToString ().ToUpperInvariant ()}\n\n{StatusBarText}";
-			else
-				tool_item.TooltipText = Name;
-
-			return tool_item;
-		}
+		private ToggleToolButton CreateToolButton () => new ToolBoxButton (this);
 		#endregion
 
 		#region Event Invokers

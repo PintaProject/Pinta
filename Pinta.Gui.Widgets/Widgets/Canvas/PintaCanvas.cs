@@ -151,7 +151,7 @@ namespace Pinta.Gui.Widgets
 
 			// Selection outline
 			if (document.Selection.Visible) {
-				var fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
+				var fillSelection = PintaCore.Tools.CurrentTool.GetType ().Name.Contains ("Select") && !PintaCore.Tools.CurrentTool.GetType ().Name.Contains ("Selected");
 				document.Selection.Draw (g, scale, fillSelection);
 			}
 
