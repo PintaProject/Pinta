@@ -149,7 +149,7 @@ namespace Pinta.Tools
 
 				if (redraw)
 				{
-					((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine.DrawAllShapes();
+					((ShapeTool?)PintaCore.Tools.CurrentTool)?.EditEngine.DrawAllShapes();
 				}
 			}
 		}

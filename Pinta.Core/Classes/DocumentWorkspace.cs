@@ -118,7 +118,7 @@ namespace Pinta.Core
 					CanvasSize = new Gdk.Size (new_x, new_y);
 					Invalidate ();
 
-					if (PintaCore.Tools.CurrentTool.CursorChangesOnZoom)
+					if (PintaCore.Tools.CurrentTool?.CursorChangesOnZoom == true)
 					{
 						//The current tool's cursor changes when the zoom changes.
 						PintaCore.Tools.CurrentTool.SetCursor(PintaCore.Tools.CurrentTool.DefaultCursor);

@@ -36,7 +36,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Gets the currently selected tool.
 		/// </summary>
-		BaseTool CurrentTool { get; }
+		BaseTool? CurrentTool { get; }
 
 		/// <summary>
 		/// Performs the mouse down event for the currently selected tool.
@@ -46,7 +46,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Gets the previously selected tool.
 		/// </summary>
-		BaseTool PreviousTool { get; }
+		BaseTool? PreviousTool { get; }
 
 		/// <summary>
 		/// Sets the current tool to the specified tool.
@@ -109,7 +109,21 @@ namespace Pinta.Core
 					Tools.Remove (tool);
 					Tools.Sort (new ToolSorter ());
 
-					SetCurrentTool(new DummyTool(PintaCore.Services));
+					// Are we trying to remove the current tool?
+					if (CurrentTool == tool) {
+						// Can we set it back to the previous tool?
+						if (PreviousTool is not null && PreviousTool != CurrentTool)
+							SetCurrentTool (PreviousTool);
+						else if (Tools.Any ())  // Any tool?
+							SetCurrentTool (Tools.First ());
+						else {
+							// There are no tools left.
+							DeactivateTool (tool, null);
+							prev_index = -1;
+							index = -1;
+						}
+					}
+
 					OnToolRemoved (tool);
 
 					if (groupedTools[tool.ShortcutKey].Count > 1)
@@ -144,21 +158,10 @@ namespace Pinta.Core
 		{
 			return Tools.FirstOrDefault (t => string.Compare (name, t.GetType ().Name, true) == 0);
 		}
-		
-		public BaseTool CurrentTool {
-			get { if (index >= 0) {
-					return Tools[index];}
-				else {
-					DummyTool dummy = new DummyTool (PintaCore.Services);
-					SetCurrentTool(dummy);
-					return dummy;
-				}
-			}
-		}
-		
-		public BaseTool PreviousTool {
-			get { return Tools[prev_index]; }
-		}
+
+		public BaseTool? CurrentTool => index >= 0 ? Tools[index] : null;
+
+		public BaseTool? PreviousTool => prev_index >= 0 ? Tools[prev_index] : null;
 
 		public void Commit ()
 		{
@@ -178,13 +181,8 @@ namespace Pinta.Core
 				prev_index = index;
 
 				var prev_tool = Tools[index];
-				var toolbar = PintaCore.Chrome.ToolToolBar;
-				
-				while (toolbar.NItems > 0)
-					toolbar.Remove (toolbar.Children[toolbar.NItems - 1]);
 
-				prev_tool.DoDeactivated(PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null, tool);
-				prev_tool.ToolItem.Active = false;
+				DeactivateTool (prev_tool, tool);
 			}
 			
 			// Load new tool
@@ -251,14 +249,25 @@ namespace Pinta.Core
             return null;
 		}
 
-		public void DoMouseDown (Document document, ToolMouseEventArgs e) => CurrentTool.DoMouseDown (document, e);
-		public void DoMouseDown (Document document, ButtonPressEventArgs args) => CurrentTool.DoMouseDown (document, args);
-		public void DoMouseUp (Document document, ButtonReleaseEventArgs args) => CurrentTool.DoMouseUp (document, args);
-		public void DoMouseMove (Document document, MotionNotifyEventArgs args) => CurrentTool.DoMouseMove (document, args);
-		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool.DoKeyDown (document, args);
-		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool.DoKeyUp (document, args);
-		public void DoAfterSave (Document document) => CurrentTool.DoAfterSave (document);
-		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool.DoHandlePaste (document, clipboard);
+		private void DeactivateTool (BaseTool tool, BaseTool? newTool)
+		{
+			var toolbar = PintaCore.Chrome.ToolToolBar;
+
+			while (toolbar.NItems > 0)
+				toolbar.Remove (toolbar.Children[toolbar.NItems - 1]);
+
+			tool.DoDeactivated (PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null, newTool);
+			tool.ToolItem.Active = false;
+		}
+
+		public void DoMouseDown (Document document, ToolMouseEventArgs e) => CurrentTool?.DoMouseDown (document, e);
+		public void DoMouseDown (Document document, ButtonPressEventArgs args) => CurrentTool?.DoMouseDown (document, args);
+		public void DoMouseUp (Document document, ButtonReleaseEventArgs args) => CurrentTool?.DoMouseUp (document, args);
+		public void DoMouseMove (Document document, MotionNotifyEventArgs args) => CurrentTool?.DoMouseMove (document, args);
+		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool?.DoKeyDown (document, args);
+		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool?.DoKeyUp (document, args);
+		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
+		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? false;
 
 		private void OnToolAdded (BaseTool tool)
 		{
@@ -303,19 +312,6 @@ namespace Pinta.Core
 		private ToolBarImage ToolImage => tool_image ??= new ToolBarImage (string.Empty);
 		private SeparatorToolItem ToolSeparator => tool_sep ??= new SeparatorToolItem ();
 
-	}
-
-	//This tool does nothing, is used when no tools are in toolbox. If used seriously will probably
-	// throw a zillion exceptions due to missing overrides
-	public class DummyTool : BaseTool
-	{
-		public DummyTool (IServiceManager services) : base (services)
-		{
-		}
-
-		public override string Name { get { return Translations.GetString ("No tool selected."); } }
-		public override string Icon { get { return Pinta.Resources.StandardIcons.ImageMissing; } }
-		public override string StatusBarText { get { return Translations.GetString ("No tool selected."); } }
 	}
 
 	//Key extensions for more convenient usage of Gdk key enumerator

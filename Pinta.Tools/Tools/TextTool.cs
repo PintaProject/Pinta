@@ -378,7 +378,7 @@ namespace Pinta.Tools
 			StopEditing(false);
 		}
 
-		protected override void OnDeactivated(Document? document, BaseTool newTool)
+		protected override void OnDeactivated(Document? document, BaseTool? newTool)
 		{
 			base.OnDeactivated (document, newTool);
 

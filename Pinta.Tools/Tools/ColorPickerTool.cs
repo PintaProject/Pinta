@@ -123,7 +123,7 @@ namespace Pinta.Tools
 
 			button_down = MouseButton.None;
 
-			if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1)
+			if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1 && tools.PreviousTool is not null)
 				tools.SetCurrentTool (tools.PreviousTool);
 			else if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 2)
 				tools.SetCurrentTool (nameof (PencilTool));

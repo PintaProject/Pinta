@@ -156,7 +156,7 @@ namespace Pinta.Tools
 			return false;
 		}
 
-		protected override void OnDeactivated (Document? document, BaseTool newTool)
+		protected override void OnDeactivated (Document? document, BaseTool? newTool)
 		{
 			origin = new Cairo.Point (int.MinValue, int.MinValue);
 		}

@@ -432,7 +432,7 @@ namespace Pinta.Core
 		{
 			// Ensure that the current tool's modifications are finalized before
 			// switching layers.
-			PintaCore.Tools.CurrentTool.DoCommit (document);
+			PintaCore.Tools.CurrentTool?.DoCommit (document);
 
 			CurrentUserLayerIndex = i;
 			SelectedLayerChanged?.Invoke (this, EventArgs.Empty);

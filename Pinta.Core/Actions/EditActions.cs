@@ -269,7 +269,7 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (PintaCore.Tools.CurrentTool.DoHandleCopy (doc, cb))
+			if (PintaCore.Tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 				return;
 
 			PintaCore.Tools.Commit ();
@@ -322,7 +322,7 @@ namespace Pinta.Core
 			var doc = PintaCore.Workspace.ActiveDocument;
 
 			Gtk.Clipboard cb = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
-			if (PintaCore.Tools.CurrentTool.DoHandleCut (doc, cb))
+			if (PintaCore.Tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 				return;
 			PintaCore.Tools.Commit ();
 			
@@ -336,19 +336,19 @@ namespace Pinta.Core
 		private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			if (PintaCore.Tools.CurrentTool.DoHandleUndo (doc))
+			if (PintaCore.Tools.CurrentTool?.DoHandleUndo (doc) == true)
 				return;
 			doc.History.Undo ();
-			PintaCore.Tools.CurrentTool.DoAfterUndo(doc);
+			PintaCore.Tools.CurrentTool?.DoAfterUndo(doc);
 		}
 
 		private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			if (PintaCore.Tools.CurrentTool.DoHandleRedo (doc))
+			if (PintaCore.Tools.CurrentTool?.DoHandleRedo (doc) == true)
 				return;
 			doc.History.Redo ();
-			PintaCore.Tools.CurrentTool.DoAfterRedo(doc);
+			PintaCore.Tools.CurrentTool?.DoAfterRedo(doc);
 		}
 
 		private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)

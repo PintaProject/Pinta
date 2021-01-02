@@ -187,7 +187,7 @@ namespace Pinta.Core
 		/// <summary>
 		/// Called when the tool is deselected from the toolbox.
 		/// </summary>
-		protected virtual void OnDeactivated (Document? document, BaseTool newTool)
+		protected virtual void OnDeactivated (Document? document, BaseTool? newTool)
 		{
 		}
 
@@ -360,7 +360,7 @@ namespace Pinta.Core
 
 		internal void DoCommit (Document? document) => OnCommit (document);
 
-		internal void DoDeactivated (Document? document, BaseTool newTool)
+		internal void DoDeactivated (Document? document, BaseTool? newTool)
 		{
 			SetCursor (null);
 			OnDeactivated (document, newTool);
