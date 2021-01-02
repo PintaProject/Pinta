@@ -82,7 +82,7 @@ namespace Pinta.Core
 
 	public class ToolManager : IEnumerable<BaseTool>, IToolService
 	{
-		private readonly SortedSet<BaseTool> tools = new SortedSet<BaseTool> (new ToolSorter ());
+		private readonly SortedSet<BaseTool> tools = new (new ToolSorter ());
 
 		public event EventHandler<ToolEventArgs>? ToolAdded;
 		public event EventHandler<ToolEventArgs>? ToolRemoved;
