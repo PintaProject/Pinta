@@ -46,7 +46,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Ctrl-left click to set origin, left click to paint.");
 		public override bool CursorChangesOnZoom => true;
 		public override Key ShortcutKey { get { return Key.L; } }
-		public override int Priority => 33;
+		public override int Priority => 47;
 		protected override bool ShowAntialiasingButton => true;
 
 		public override Cursor DefaultCursor {

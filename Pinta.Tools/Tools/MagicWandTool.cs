@@ -49,7 +49,7 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
 		public override string StatusBarText => Translations.GetString ("Click to select region of similar color.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10);
-		public override int Priority => 17;
+		public override int Priority => 19;
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{

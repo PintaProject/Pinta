@@ -59,7 +59,7 @@ namespace Pinta.Tools
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Recolor.png"), 9, 18);
 		public override Gdk.Key ShortcutKey => Gdk.Key.R;
 		protected float Tolerance => (float) (ToleranceSlider.Slider.Value / 100);
-		public override int Priority => 35;
+		public override int Priority => 49;
 
 		protected override void OnBuildToolBar (Toolbar tb)
 		{

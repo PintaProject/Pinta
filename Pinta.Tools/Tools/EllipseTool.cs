@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Ellipse");
 		public override string Icon => Pinta.Resources.Icons.ToolEllipse;
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Ellipse.png"), 9, 18);
-		public override int Priority => 45;
+		public override int Priority => 43;
 
 		public override string StatusBarText {
 			get {

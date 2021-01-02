@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pan.png"), 8, 8);
 		public override Gdk.Key ShortcutKey => Gdk.Key.H;
-		public override int Priority => 19;
+		public override int Priority => 11;
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 		{

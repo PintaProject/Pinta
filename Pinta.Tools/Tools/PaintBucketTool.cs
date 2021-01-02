@@ -46,7 +46,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click to fill a region with the primary color, right click to fill with the secondary color.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, PintaCore.Resources.GetIcon ("Cursor.PaintBucket.png"), 21, 21);
 		public override Gdk.Key ShortcutKey => Gdk.Key.F;
-		public override int Priority => 21;
+		public override int Priority => 29;
 		protected override bool CalculatePolygonSet => false;
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)

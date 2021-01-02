@@ -293,12 +293,12 @@ namespace Pinta.Core
 		}
 
 		#region Toolbar
-		private ToggleToolButton? tool_item;
+		private ToolBoxButton? tool_item;
 		private ToolBarDropDownButton? antialiasing_button;
 		private ToolBarDropDownButton? alphablending_button;
 		private SeparatorToolItem? separator;
 
-		public virtual ToggleToolButton ToolItem => tool_item ??= CreateToolButton ();
+		public virtual ToolBoxButton ToolItem => tool_item ??= CreateToolButton ();
 
 		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
 
@@ -328,7 +328,7 @@ namespace Pinta.Core
 			}
 		}
 
-		private ToggleToolButton CreateToolButton () => new ToolBoxButton (this);
+		private ToolBoxButton CreateToolButton () => new ToolBoxButton (this);
 		#endregion
 
 		#region Event Invokers
