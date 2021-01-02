@@ -261,5 +261,13 @@ namespace Pinta.Core
 				return CairoExtensions.ToPixbuf (i);
 			}
 		}
+
+		public static Key ToUpper (this Key k1)
+		{
+			if (Enum.TryParse (k1.ToString ().ToUpperInvariant (), out Key result))
+				return result;
+
+			return k1;
+		}
 	}
 }

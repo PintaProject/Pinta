@@ -34,6 +34,16 @@ namespace Pinta.Core
 	public interface IToolService
 	{
 		/// <summary>
+		/// Adds a new tool to the tool box.
+		/// </summary>
+		void AddTool (BaseTool tool);
+
+		/// <summary>
+		/// Instructs the current tool to commit any work that is in a temporary state.
+		/// </summary>
+		void Commit ();
+
+		/// <summary>
 		/// Gets the currently selected tool.
 		/// </summary>
 		BaseTool? CurrentTool { get; }
@@ -49,6 +59,11 @@ namespace Pinta.Core
 		BaseTool? PreviousTool { get; }
 
 		/// <summary>
+		/// Removes the first found tool of the specified type from tool box.
+		/// </summary>
+		void RemoveInstanceOfTool<T> () where T : BaseTool;
+
+		/// <summary>
 		/// Sets the current tool to the specified tool.
 		/// </summary>
 		void SetCurrentTool (BaseTool tool);
@@ -58,85 +73,68 @@ namespace Pinta.Core
 		/// 'PencilTool'. Returns a value indicating if tool was successfully changed.
 		/// </summary>
 		bool SetCurrentTool (string tool);
+
+		/// <summary>
+		/// Sets the current tool to the next tool with the specified shortcut.
+		/// </summary>
+		void SetCurrentTool (Gdk.Key shortcut);
 	}
 
 	public class ToolManager : IEnumerable<BaseTool>, IToolService
 	{
-		int index = -1;
-		int prev_index = -1;
-		
-		private List<BaseTool> Tools;
-		private Dictionary<Gdk.Key, List<BaseTool>> groupedTools;
-		private Gdk.Key LastUsedKey;
-		private int PressedShortcutCounter;
+		private readonly SortedSet<BaseTool> tools = new SortedSet<BaseTool> (new ToolSorter ());
 
 		public event EventHandler<ToolEventArgs>? ToolAdded;
 		public event EventHandler<ToolEventArgs>? ToolRemoved;
 
-		public ToolManager ()
-		{
-			Tools = new List<BaseTool> ();
-			groupedTools = new Dictionary<Gdk.Key, List<BaseTool>>();
-			PressedShortcutCounter = 0;
-		}
+		public BaseTool? CurrentTool { get; private set; }
+
+		public BaseTool? PreviousTool { get; private set; }
 
 		public void AddTool (BaseTool tool)
 		{
-			tool.ToolItem.Clicked += HandlePbToolItemClicked;
-			
-			Tools.Add (tool);
-			Tools.Sort (new ToolSorter ());
+			tool.ToolItem.Clicked += HandleToolBoxToolItemClicked;
 
-			OnToolAdded (tool);
+			tools.Add (tool);
 
-			if (CurrentTool == null)
+			ToolAdded?.Invoke (this, new ToolEventArgs (tool));
+
+			if (CurrentTool is null)
 				SetCurrentTool (tool);
-
-			if (!groupedTools.ContainsKey(tool.ShortcutKey))
-				groupedTools.Add(tool.ShortcutKey, new List<BaseTool>());
-
-			groupedTools[tool.ShortcutKey].Add(tool);
 		}
 
-		public void RemoveInstanceOfTool (System.Type tool_type)
+		public void RemoveInstanceOfTool<T> () where T : BaseTool
 		{
-			foreach (BaseTool tool in Tools) {
-				if (tool.GetType () == tool_type) {
-					tool.ToolItem.Clicked -= HandlePbToolItemClicked;
-					tool.ToolItem.Active = false;
-					tool.ToolItem.Sensitive = false;
+			var tool = tools.OfType<T> ().FirstOrDefault ();
 
-					Tools.Remove (tool);
-					Tools.Sort (new ToolSorter ());
+			if (tool is null)
+				return;
 
-					// Are we trying to remove the current tool?
-					if (CurrentTool == tool) {
-						// Can we set it back to the previous tool?
-						if (PreviousTool is not null && PreviousTool != CurrentTool)
-							SetCurrentTool (PreviousTool);
-						else if (Tools.Any ())  // Any tool?
-							SetCurrentTool (Tools.First ());
-						else {
-							// There are no tools left.
-							DeactivateTool (tool, null);
-							prev_index = -1;
-							index = -1;
-						}
-					}
+			tool.ToolItem.Clicked -= HandleToolBoxToolItemClicked;
+			tool.ToolItem.Active = false;
+			tool.ToolItem.Sensitive = false;
 
-					OnToolRemoved (tool);
+			tools.Remove (tool);
 
-					if (groupedTools[tool.ShortcutKey].Count > 1)
-						groupedTools[tool.ShortcutKey].Remove(tool);
-					else
-						groupedTools.Remove(tool.ShortcutKey);
-
-					return;
+			// Are we trying to remove the current tool?
+			if (CurrentTool == tool) {
+				// Can we set it back to the previous tool?
+				if (PreviousTool is not null && PreviousTool != CurrentTool)
+					SetCurrentTool (PreviousTool);
+				else if (tools.Any ())  // Any tool?
+					SetCurrentTool (tools.First ());
+				else {
+					// There are no tools left.
+					DeactivateTool (tool, null);
+					PreviousTool = null;
+					CurrentTool = null;
 				}
 			}
+
+			ToolRemoved?.Invoke (this, new ToolEventArgs (tool));
 		}
 
-		void HandlePbToolItemClicked (object? sender, EventArgs e)
+		private void HandleToolBoxToolItemClicked (object? sender, EventArgs e)
 		{
 			if (sender is not ToolBoxButton tb)
 				return;
@@ -145,7 +143,7 @@ namespace Pinta.Core
 
 			// Don't let the user unselect the current tool	
 			if (CurrentTool != null && new_tool.GetType ().Name == CurrentTool.GetType ().Name) {
-				if (prev_index != index)
+				if (PreviousTool != CurrentTool)
 					tb.Active = true;
 
 				return;
@@ -156,39 +154,31 @@ namespace Pinta.Core
 
 		private BaseTool? FindTool (string name)
 		{
-			return Tools.FirstOrDefault (t => string.Compare (name, t.GetType ().Name, true) == 0);
+			return tools.FirstOrDefault (t => string.Compare (name, t.GetType ().Name, true) == 0);
 		}
-
-		public BaseTool? CurrentTool => index >= 0 ? Tools[index] : null;
-
-		public BaseTool? PreviousTool => prev_index >= 0 ? Tools[prev_index] : null;
 
 		public void Commit ()
 		{
-			if (CurrentTool != null)
-				CurrentTool.DoCommit (PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null);
+			CurrentTool?.DoCommit (PintaCore.Workspace.ActiveDocumentOrDefault);
 		}
 
-		public void SetCurrentTool(BaseTool tool)
+		public void SetCurrentTool (BaseTool tool)
 		{
-			int i = Tools.IndexOf (tool);
-			
-			if (index == i)
+			// Bail if this is already the current tool
+			if (CurrentTool == tool)
 				return;
 
 			// Unload previous tool if needed
-			if (index >= 0) {
-				prev_index = index;
-
-				var prev_tool = Tools[index];
-
-				DeactivateTool (prev_tool, tool);
+			if (CurrentTool is not null) {
+				PreviousTool = CurrentTool;
+				DeactivateTool (PreviousTool, tool);
 			}
-			
+
 			// Load new tool
-			index = i;
+			CurrentTool = tool;
+
 			tool.ToolItem.Active = true;
-			tool.DoActivated(PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null);
+			tool.DoActivated (PintaCore.Workspace.ActiveDocumentOrDefault);
 
 			ToolImage.Set (tool.Icon);
 
@@ -197,56 +187,47 @@ namespace Pinta.Core
 			PintaCore.Chrome.ToolToolBar.AppendItem (ToolSeparator);
 
 			tool.DoBuildToolBar (PintaCore.Chrome.ToolToolBar);
-			
+
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Chrome.SetStatusBarText (string.Format (" {0}: {1}", tool.Name, tool.StatusBarText));
+			PintaCore.Chrome.SetStatusBarText ($" {tool.Name}: {tool.StatusBarText}");
 		}
 
 		public bool SetCurrentTool (string tool)
 		{
-			var t = FindTool (tool);
-			
-			if (t != null) {
+			if (FindTool (tool) is BaseTool t) {
 				SetCurrentTool (t);
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		public void SetCurrentTool (Gdk.Key shortcut)
 		{
-			BaseTool? tool = FindNextTool (shortcut);
-			
-			if (tool != null)
-				SetCurrentTool(tool);
+			if (FindNextTool (shortcut) is BaseTool tool)
+				SetCurrentTool (tool);
 		}
 
 		private BaseTool? FindNextTool (Gdk.Key shortcut)
 		{
-			shortcut = shortcut.ToUpper();
+			// Find all tools with this shortcut
+			var shortcut_tools = tools.Where (t => t.ShortcutKey.ToUpper () == shortcut.ToUpper ()).ToList ();
 
-			if (groupedTools.ContainsKey(shortcut))
-			{
-				for (int i = 0; i < groupedTools[shortcut].Count; i++)
-				{
-					if (LastUsedKey != shortcut)
-					{
-						// Return first tool in group.
-						PressedShortcutCounter = (1 % groupedTools[shortcut].Count);
-						LastUsedKey = shortcut;
-						return groupedTools[shortcut][0];
-					}
-					else if(i == PressedShortcutCounter)
-					{
-						var tool = groupedTools[shortcut][PressedShortcutCounter];
-						PressedShortcutCounter = (i + 1) % groupedTools[shortcut].Count;
-						return tool;
-					}
-				}
-			}
+			// No tools with this shortcut, bail
+			if (!shortcut_tools.Any ())
+				return null;
 
-            return null;
+			// Only one option, return it
+			if (shortcut_tools.Count == 1 || CurrentTool is null)
+				return shortcut_tools.First ();
+
+			// Get the tool after the currently selected tool
+			var next_index = shortcut_tools.IndexOf (CurrentTool) + 1;
+
+			// Wrap if we're past the final tool
+			if (next_index >= shortcut_tools.Count)
+				next_index = 0;
+			return shortcut_tools[next_index];
 		}
 
 		private void DeactivateTool (BaseTool tool, BaseTool? newTool)
@@ -256,7 +237,7 @@ namespace Pinta.Core
 			while (toolbar.NItems > 0)
 				toolbar.Remove (toolbar.Children[toolbar.NItems - 1]);
 
-			tool.DoDeactivated (PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null, newTool);
+			tool.DoDeactivated (PintaCore.Workspace.ActiveDocumentOrDefault, newTool);
 			tool.ToolItem.Active = false;
 		}
 
@@ -269,31 +250,9 @@ namespace Pinta.Core
 		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
 		public bool DoHandlePaste (Document document, Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? false;
 
-		private void OnToolAdded (BaseTool tool)
-		{
-			if (ToolAdded != null)
-				ToolAdded (this, new ToolEventArgs (tool));
-		}
+		public IEnumerator<BaseTool> GetEnumerator () => tools.GetEnumerator ();
 
-		private void OnToolRemoved (BaseTool tool)
-		{
-			if (ToolRemoved != null)
-				ToolRemoved (this, new ToolEventArgs (tool));
-		}
-
-		#region IEnumerable<BaseTool> implementation
-		public IEnumerator<BaseTool> GetEnumerator ()
-		{
-			return Tools.GetEnumerator ();
-		}
-		#endregion
-
-		#region IEnumerable implementation
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-		{
-			return Tools.GetEnumerator ();
-		}
-		#endregion
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () => tools.GetEnumerator ();
 
 		class ToolSorter : Comparer<BaseTool>
 		{
@@ -304,30 +263,12 @@ namespace Pinta.Core
 			}
 		}
 
-		protected ToolBarLabel? tool_label;
-		protected ToolBarImage? tool_image;
-		protected SeparatorToolItem? tool_sep;
+		private ToolBarLabel? tool_label;
+		private ToolBarImage? tool_image;
+		private SeparatorToolItem? tool_sep;
 
 		private ToolBarLabel ToolLabel => tool_label ??= new ToolBarLabel ($" {Translations.GetString ("Tool")}:  ");
 		private ToolBarImage ToolImage => tool_image ??= new ToolBarImage (string.Empty);
 		private SeparatorToolItem ToolSeparator => tool_sep ??= new SeparatorToolItem ();
-
-	}
-
-	//Key extensions for more convenient usage of Gdk key enumerator
-	public static class KeyExtensions
-    {
-		public static Gdk.Key ToUpper(this Gdk.Key k1)
-		{
-            try
-            {
-				return (Gdk.Key)Enum.Parse(typeof(Gdk.Key), k1.ToString().ToUpperInvariant());
-			}
-            catch (ArgumentException)
-            {
-				//there is a need to catch argument exception because some buttons have not its UpperCase variant
-				return k1;
-            }
-		}
 	}
 }
