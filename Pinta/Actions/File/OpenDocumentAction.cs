@@ -46,39 +46,50 @@ namespace Pinta.Actions
 
 		private void Activated (object sender, EventArgs e)
 		{
-			using var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Image File"), PintaCore.Chrome.MainWindow,
-								FileChooserAction.Open, Pinta.Core.GtkExtensions.DialogButtonsCancelOpen());
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Open Image File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Open,
+				Translations.GetString ("Open"),
+				Translations.GetString ("Cancel"));
 
 			// Add image files filter
-			FileFilter ff = new FileFilter ();
-            foreach (var format in PintaCore.System.ImageFormats.Formats) {
+			var ff = new FileFilter {
+				Name = Translations.GetString ("Image files")
+			};
+
+			foreach (var format in PintaCore.System.ImageFormats.Formats) {
 				if (!format.IsWriteOnly ()) {
 					foreach (var ext in format.Extensions)
-						ff.AddPattern (string.Format("*.{0}", ext));
+						ff.AddPattern (string.Format ("*.{0}", ext));
 				}
-            }
+			}
 
-			ff.Name = Translations.GetString ("Image files");
 			fcd.AddFilter (ff);
 
-			FileFilter ff2 = new FileFilter ();
-			ff2.Name = Translations.GetString ("All files");
+			var ff2 = new FileFilter {
+				Name = Translations.GetString ("All files")
+			};
 			ff2.AddPattern ("*.*");
 			fcd.AddFilter (ff2);
 
-            fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 			fcd.SelectMultiple = true;
 
-			fcd.AddImagePreview ();
+			var response = (ResponseType) fcd.Run ();
 
-			int response = fcd.Run ();
-
-			if (response == (int)Gtk.ResponseType.Ok) {
+			if (response == ResponseType.Accept) {
 				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
 
-				foreach (var file in fcd.Filenames)
-					if (PintaCore.Workspace.OpenFile (file, fcd))
+				foreach (var file in fcd.Filenames) {
+					if (PintaCore.Workspace.OpenFile (file)) {
 						RecentManager.Default.AddFull (fcd.Uri, PintaCore.System.RecentData);
+
+						var directory = System.IO.Path.GetDirectoryName (file);
+						if (directory is not null)
+							PintaCore.System.LastDialogDirectory = directory;
+					}
+				}
 			}
 		}
 	}
