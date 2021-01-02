@@ -158,41 +158,54 @@ namespace Pinta.Core
 			Document doc = PintaCore.Workspace.ActiveDocument;
 			PintaCore.Tools.Commit ();
 
-			using (var fcd = new Gtk.FileChooserDialog(Translations.GetString("Open Image File"), PintaCore.Chrome.MainWindow,
-												 FileChooserAction.Open, GtkExtensions.DialogButtonsCancelOpen()))
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Open Image File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Open,
+				Translations.GetString ("Open"),
+				Translations.GetString ("Cancel"));
 
-			{
-				fcd.SetCurrentFolder(PintaCore.System.GetDialogDirectory());
+			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 
-				fcd.AddImagePreview();
-
-				int response = fcd.Run();
-
-				if (response == (int)Gtk.ResponseType.Ok)
-				{
-
-					string file = fcd.Filename;
-					PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
-
-					// Open the image and add it to the layers
-					UserLayer layer = doc.Layers.AddNewLayer (System.IO.Path.GetFileName(file));
-
-					using (var fs = new FileStream(file, FileMode.Open))
-					using (Pixbuf bg = new Pixbuf(fs))
-					using (Cairo.Context g = new Cairo.Context(layer.Surface))
-					{
-						Gdk.CairoHelper.SetSourcePixbuf(g, bg, 0, 0);
-						g.Paint();
-					}
-
-					doc.Layers.SetCurrentUserLayer (layer);
-
-					AddLayerHistoryItem hist = new AddLayerHistoryItem(Resources.Icons.LayerImport, Translations.GetString("Import From File"), doc.Layers.IndexOf(layer));
-					doc.History.PushNewItem(hist);
-
-					doc.Workspace.Invalidate();
+			// Add image files filter
+			var ff = new FileFilter ();
+			foreach (var format in PintaCore.System.ImageFormats.Formats) {
+				if (!format.IsWriteOnly ()) {
+					foreach (var ext in format.Extensions)
+						ff.AddPattern (string.Format ("*.{0}", ext));
 				}
 			}
+
+			ff.Name = Translations.GetString ("Image files");
+			fcd.AddFilter (ff);
+
+			var response = (ResponseType) fcd.Run ();
+			if (response == ResponseType.Accept) {
+
+				string file = fcd.Filename;
+
+				string? directory = Path.GetDirectoryName (file);
+				if (directory is not null)
+					PintaCore.System.LastDialogDirectory = directory;
+
+				// Open the image and add it to the layers
+				UserLayer layer = doc.Layers.AddNewLayer (System.IO.Path.GetFileName (file));
+
+				using (var fs = new FileStream (file, FileMode.Open))
+				using (var bg = new Pixbuf (fs))
+				using (var g = new Cairo.Context (layer.Surface)) {
+					Gdk.CairoHelper.SetSourcePixbuf (g, bg, 0, 0);
+					g.Paint ();
+				}
+
+				doc.Layers.SetCurrentUserLayer (layer);
+
+				AddLayerHistoryItem hist = new AddLayerHistoryItem (Resources.Icons.LayerImport, Translations.GetString ("Import From File"), doc.Layers.IndexOf (layer));
+				doc.History.PushNewItem (hist);
+
+				doc.Workspace.Invalidate ();
+			}
+
 		}
 
 		private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
