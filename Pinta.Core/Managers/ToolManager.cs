@@ -33,10 +33,30 @@ namespace Pinta.Core
 {
 	public interface IToolService
 	{
+		/// <summary>
+		/// Gets the currently selected tool.
+		/// </summary>
 		BaseTool CurrentTool { get; }
+
+		/// <summary>
+		/// Performs the mouse down event for the currently selected tool.
+		/// </summary>
 		void DoMouseDown (Document document, ToolMouseEventArgs e);
+
+		/// <summary>
+		/// Gets the previously selected tool.
+		/// </summary>
 		BaseTool PreviousTool { get; }
+
+		/// <summary>
+		/// Sets the current tool to the specified tool.
+		/// </summary>
 		void SetCurrentTool (BaseTool tool);
+
+		/// <summary>
+		/// Sets the current tool to the first tool with the specified tool type name, like
+		/// 'PencilTool'. Returns a value indicating if tool was successfully changed.
+		/// </summary>
 		bool SetCurrentTool (string tool);
 	}
 
@@ -104,37 +124,25 @@ namespace Pinta.Core
 
 		void HandlePbToolItemClicked (object? sender, EventArgs e)
 		{
-			ToggleToolButton? tb = (ToggleToolButton?)sender;
-
-			if (tb is null)
+			if (sender is not ToolBoxButton tb)
 				return;
 
-			BaseTool? t = FindTool (tb.Label);
-
-			if (t is null)
-				return;
+			var new_tool = tb.Tool;
 
 			// Don't let the user unselect the current tool	
-			if (CurrentTool != null && t.Name == CurrentTool.Name) {
+			if (CurrentTool != null && new_tool.GetType ().Name == CurrentTool.GetType ().Name) {
 				if (prev_index != index)
 					tb.Active = true;
+
 				return;
 			}
 
-			SetCurrentTool(t);
+			SetCurrentTool (new_tool);
 		}
 
 		private BaseTool? FindTool (string name)
 		{
-			name = name.ToLowerInvariant ();
-			
-			foreach (BaseTool tool in Tools) {
-				if (tool.Name.ToLowerInvariant () == name) {
-					return tool;
-				}
-			}
-			
-			return null;
+			return Tools.FirstOrDefault (t => string.Compare (name, t.GetType ().Name, true) == 0);
 		}
 		
 		public BaseTool CurrentTool {
@@ -198,10 +206,10 @@ namespace Pinta.Core
 
 		public bool SetCurrentTool (string tool)
 		{
-			BaseTool? t = FindTool (tool);
+			var t = FindTool (tool);
 			
 			if (t != null) {
-				SetCurrentTool(t);
+				SetCurrentTool (t);
 				return true;
 			}
 			

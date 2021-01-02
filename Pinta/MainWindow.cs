@@ -104,7 +104,7 @@ namespace Pinta
 #endif
 
 			// Try to set the default tool to the PaintBrush
-			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Paintbrush"));
+			PintaCore.Tools.SetCurrentTool ("PaintBrushTool");
 
 			// Load the user's previous settings
 			LoadUserSettings ();

@@ -61,7 +61,7 @@ namespace Pinta.Core
 			Swap ();
 
 			PintaCore.Workspace.Invalidate ();
-			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Move Selected Pixels"));
+			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
 		}
 
 		public override void Undo ()

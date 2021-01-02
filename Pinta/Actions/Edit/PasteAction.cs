@@ -141,7 +141,7 @@ namespace Pinta.Actions
 			doc.Layers.SelectionLayer.Transform.InitIdentity ();
 			doc.Layers.SelectionLayer.Transform.Translate (x, y);
 
-			PintaCore.Tools.SetCurrentTool (Translations.GetString ("Move Selected Pixels"));
+			PintaCore.Tools.SetCurrentTool ("MoveSelectedTool");
 
 			var old_selection = doc.Selection.Clone ();
 
