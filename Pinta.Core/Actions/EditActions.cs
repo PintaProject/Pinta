@@ -383,8 +383,9 @@ namespace Pinta.Core
 			var response = (ResponseType) fcd.Run ();
 
 			if (response == ResponseType.Accept) {
-				lastPaletteDir = fcd.CurrentFolder;
-				PintaCore.Palette.CurrentPalette.Load (fcd.Filename);
+				var filename = fcd.Filename;
+				lastPaletteDir = System.IO.Path.GetDirectoryName (filename);
+				PintaCore.Palette.CurrentPalette.Load (filename);
 			}
 
 		}
@@ -429,7 +430,7 @@ namespace Pinta.Core
 					throw new FormatException ();
 
 				PintaCore.Palette.CurrentPalette.Save (filename, format.Saver);
-				lastPaletteDir = fcd.CurrentFolder;
+				lastPaletteDir = System.IO.Path.GetDirectoryName (filename);
 			}
 
 		}
