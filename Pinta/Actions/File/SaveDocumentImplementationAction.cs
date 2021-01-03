@@ -71,20 +71,23 @@ namespace Pinta.Actions
 		// been saved before.  Either way, we need to prompt for a filename.
 		private bool SaveFileAs (Document document)
 		{
-			using var fcd = new FileChooserDialog(Translations.GetString("Save Image File"),
-										   PintaCore.Chrome.MainWindow,
-										   FileChooserAction.Save,
-										   Core.GtkExtensions.DialogButtonsCancelSave());
+			using var fcd = new FileChooserNative (
+				Translations.GetString ("Save Image File"),
+				PintaCore.Chrome.MainWindow,
+				FileChooserAction.Save,
+				Translations.GetString ("Save"),
+				Translations.GetString ("Cancel")) {
+				DoOverwriteConfirmation = true
+			};
 
-			fcd.DoOverwriteConfirmation = true;
-            fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
+			fcd.SetCurrentFolder (PintaCore.System.GetDialogDirectory ());
 
 			bool hasFile = document.HasFile;
 
 			if (hasFile)
 				fcd.SetFilename (document.PathAndFileName);
 
-			Dictionary<FileFilter, FormatDescriptor> filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
+			var filetypes = new Dictionary<FileFilter, FormatDescriptor> ();
 
 			// Add all the formats we support to the save dialog
 			foreach (var format in PintaCore.System.ImageFormats.Formats) {
@@ -116,7 +119,7 @@ namespace Pinta.Actions
 
 			fcd.Filter = format_desc.Filter;
 
-            fcd.AddNotification("filter", this.OnFilterChanged);
+			fcd.AddNotification ("filter", OnFilterChanged);
 
 			// Replace GTK's ConfirmOverwrite with our own, for UI consistency
 			fcd.ConfirmOverwrite += (eventSender, eventArgs) => {
@@ -126,7 +129,7 @@ namespace Pinta.Actions
 					eventArgs.RetVal = FileChooserConfirmation.SelectAgain;
 			};
 
-			while (fcd.Run () == (int)Gtk.ResponseType.Ok) {
+			while ((ResponseType)fcd.Run () == ResponseType.Accept) {
 				FormatDescriptor format = filetypes[fcd.Filter];
 				string file = fcd.Filename;
 
@@ -149,11 +152,13 @@ namespace Pinta.Actions
 				if (format_type != null)
 					format = format_type;
 
-				PintaCore.System.LastDialogDirectory = fcd.CurrentFolder;
+				var directory = System.IO.Path.GetDirectoryName (file);
+				if (directory is not null)
+					PintaCore.System.LastDialogDirectory = directory;
 
 				// If saving the file failed or was cancelled, let the user select
 				// a different file type.
-				if (!SaveFile (document, file, format, fcd))
+				if (!SaveFile (document, file, format, PintaCore.Chrome.MainWindow))
 					continue;
 
 				//The user is saving the Document to a new file, so technically it
@@ -235,13 +240,13 @@ namespace Pinta.Actions
 			return true;
 		}
 
-		private bool ConfirmOverwrite (FileChooserDialog fcd, string file)
+		private bool ConfirmOverwrite (IFileChooser fcd, string file)
 		{
 			string primary = Translations.GetString ("A file named \"{0}\" already exists. Do you want to replace it?");
 			string secondary = Translations.GetString ("The file already exists in \"{1}\". Replacing it will overwrite its contents.");
 			string message = string.Format (markup, primary, secondary);
 
-			using var md = new MessageDialog (fcd, DialogFlags.Modal | DialogFlags.DestroyWithParent,
+			using var md = new MessageDialog (PintaCore.Chrome.MainWindow, DialogFlags.Modal | DialogFlags.DestroyWithParent,
 				MessageType.Question, ButtonsType.None,
 				true, message, System.IO.Path.GetFileName (file), fcd.CurrentFolder);
 
@@ -264,7 +269,7 @@ namespace Pinta.Actions
 
 		private void OnFilterChanged (object o, GLib.NotifyArgs args)
 		{
-			FileChooserDialog fcd = (FileChooserDialog)o;
+			var fcd = (IFileChooser) o;
 
 			// Ensure that the file filter is never blank.
 			if (fcd.Filter == null)
