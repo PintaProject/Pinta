@@ -167,7 +167,7 @@ namespace Pinta
 
 			PintaCore.Workspace.SetActiveDocument (view.Document);
 
-			((CanvasWindow) view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool.CurrentCursor;
+			((CanvasWindow) view.Widget).Canvas.Window.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
 		}
 
 		private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)

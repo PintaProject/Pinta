@@ -52,7 +52,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.FreeformShape.png"), 9, 18);
 		public override Gdk.Key ShortcutKey => Gdk.Key.O;
-		public override int Priority => 47;
+		public override int Priority => 45;
 
 		protected override void OnBuildToolBar (Toolbar tb)
 		{

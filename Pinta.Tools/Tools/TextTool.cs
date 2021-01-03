@@ -91,7 +91,7 @@ namespace Pinta.Tools
 		private string FinalizeName { get { return Translations.GetString("Text - Finalize"); } }
 		public override string Icon { get { return Pinta.Resources.Icons.ToolText; } }
 		public override Gdk.Key ShortcutKey { get { return Gdk.Key.T; } }
-		public override int Priority { get { return 37; } }
+		public override int Priority { get { return 35; } }
 
 		public override string StatusBarText {
 			get { return Translations.GetString ("Left click to place cursor, then type desired text. Text color is primary color."); }
@@ -378,7 +378,7 @@ namespace Pinta.Tools
 			StopEditing(false);
 		}
 
-		protected override void OnDeactivated(Document? document, BaseTool newTool)
+		protected override void OnDeactivated(Document? document, BaseTool? newTool)
 		{
 			base.OnDeactivated (document, newTool);
 

@@ -40,7 +40,7 @@ namespace Pinta.Tools
 		public override string Icon => Pinta.Resources.Icons.ToolSelectRectangle;
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw a rectangular selection. Hold Shift to constrain to a square.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.RectangleSelect.png"), 9, 18);
-		public override int Priority => 5;
+		public override int Priority => 13;
 
 		protected override void DrawShape (Document document, Rectangle r, Layer l)
 		{

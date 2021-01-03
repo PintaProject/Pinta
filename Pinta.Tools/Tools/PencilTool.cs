@@ -50,7 +50,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click to draw freeform one-pixel wide lines with the primary color. Right click to use the secondary color.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Pencil.png"), 7, 24);
 		public override Gdk.Key ShortcutKey => Gdk.Key.P;
-		public override int Priority => 29;
+		public override int Priority => 25;
 		protected override bool ShowAlphaBlendingButton => true;
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)

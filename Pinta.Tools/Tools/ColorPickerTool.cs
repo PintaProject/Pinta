@@ -50,7 +50,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
 		public override bool CursorChangesOnZoom => true;
 		public override Gdk.Key ShortcutKey => Gdk.Key.K;
-		public override int Priority => 31;
+		public override int Priority => 33;
 		private int SampleSize => SampleSizeDropDown.SelectedItem.GetTagOrDefault (1);
 		private bool SampleLayerOnly => SampleTypeDropDown.SelectedItem.GetTagOrDefault (false);
 
@@ -123,7 +123,7 @@ namespace Pinta.Tools
 
 			button_down = MouseButton.None;
 
-			if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1)
+			if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1 && tools.PreviousTool is not null)
 				tools.SetCurrentTool (tools.PreviousTool);
 			else if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 2)
 				tools.SetCurrentTool (nameof (PencilTool));

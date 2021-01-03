@@ -60,7 +60,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
 		public override bool CursorChangesOnZoom => true;
 		public override Gdk.Key ShortcutKey => Gdk.Key.B;
-		public override int Priority => 25;
+		public override int Priority => 21;
 
 		public override Gdk.Cursor DefaultCursor {
 			get {

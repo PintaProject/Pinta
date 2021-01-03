@@ -382,7 +382,7 @@ namespace Pinta.Tools
             PintaCore.Palette.SecondaryColorChanged += new EventHandler(Palette_SecondaryColorChanged);
         }
 
-		public virtual void HandleDeactivated(BaseTool newTool)
+		public virtual void HandleDeactivated(BaseTool? newTool)
 		{
 			SelectedPointIndex = -1;
 			SelectedShapeIndex = -1;
@@ -390,7 +390,7 @@ namespace Pinta.Tools
 			StorePreviousSettings();
 
 			//Determine if the tool being switched to will be another editable tool.
-			if (PintaCore.Workspace.HasOpenDocuments && !newTool.IsEditableShapeTool)
+			if (PintaCore.Workspace.HasOpenDocuments && !(newTool?.IsEditableShapeTool == true))
 			{
 				//The tool being switched to is not editable. Finalize every editable shape not yet finalized.
 				FinalizeAllShapes();
@@ -1076,7 +1076,8 @@ namespace Pinta.Tools
 			if (oldTool != null)
 			{
 				//The tool has switched, so call DrawActiveShape again but inside that tool.
-				((ShapeTool)PintaCore.Tools.CurrentTool).EditEngine.DrawActiveShape(
+				if (PintaCore.Tools.CurrentTool is ShapeTool tool)
+					tool.EditEngine.DrawActiveShape(
 					calculateOrganizedPoints, finalize, drawHoverSelection, shiftKey, preventSwitchBack);
 
 				//Afterwards, switch back to the old tool, unless specified otherwise.
@@ -1740,7 +1741,11 @@ namespace Pinta.Tools
 				//The active tool needs to be switched to the corresponding tool.
 				PintaCore.Tools.SetCurrentTool(correspondingTool);
 
-				ShapeTool newTool = (ShapeTool)PintaCore.Tools.CurrentTool;
+				var newTool = (ShapeTool?)PintaCore.Tools.CurrentTool;
+
+				// This shouldn't be possible, but we need a null check.
+				if (newTool is null)
+					return null;
 
 				//What happens next depends on whether the old tool was an editable ShapeTool.
 				if (oldTool != null && oldTool.IsEditableShapeTool)

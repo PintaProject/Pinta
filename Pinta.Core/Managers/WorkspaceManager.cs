@@ -69,6 +69,8 @@ namespace Pinta.Core
 			}
 		}
 
+		public Document? ActiveDocumentOrDefault => HasOpenDocuments ? OpenDocuments[active_document_index] : null;
+
         public SelectionModeHandler SelectionHandler { get; private set; }
 
 		public DocumentWorkspace ActiveWorkspace {

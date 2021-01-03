@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Line/Curve");
 		public override string Icon => Pinta.Resources.Icons.ToolLine;
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Line.png"), 9, 18);
-		public override int Priority => 39;
+		public override int Priority => 37;
 
 		public override string StatusBarText => Translations.GetString ("Left click to draw a shape with the primary color." +
 				      "\nLeft click on a shape to add a control point." +

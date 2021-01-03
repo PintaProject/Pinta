@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +22,13 @@ namespace Pinta.Gui.Widgets
 			ShowAll ();
 		}
 
-		// TODO: This should handle sorting the items
-		public void AddItem (ToolButton item)
+		public void AddItem (ToolBoxButton item)
 		{
 			item.IsImportant = false;
-			Add (item);
+
+			var index = PintaCore.Tools.ToList ().IndexOf (item.Tool);
+
+			Insert (item.Tool.ToolItem, index);
 		}
 
 		public void RemoveItem (ToolButton item)

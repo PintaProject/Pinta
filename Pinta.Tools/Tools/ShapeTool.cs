@@ -74,7 +74,7 @@ namespace Pinta.Tools
 			base.OnActivated (document);
 		}
 
-		protected override void OnDeactivated (Document? document, BaseTool newTool)
+		protected override void OnDeactivated (Document? document, BaseTool? newTool)
 		{
 			EditEngine.HandleDeactivated (newTool);
 

@@ -45,7 +45,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selected content. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selected content. Hold Shift to rotate in steps. Use arrow keys to move selected content by a single pixel.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMove, 16), 0, 0);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
-		public override int Priority => 7;
+		public override int Priority => 5;
 
 		protected override Rectangle GetSourceRectangle (Document document)
 		{
@@ -134,7 +134,7 @@ namespace Pinta.Tools
 			document?.FinishSelection ();
 		}
 
-		protected override void OnDeactivated (Document? document, BaseTool newTool)
+		protected override void OnDeactivated (Document? document, BaseTool? newTool)
 		{
 			base.OnDeactivated (document, newTool);
 

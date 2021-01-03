@@ -44,7 +44,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Left click and drag the selection to move selection outline. Hold Ctrl to scale instead of move. Right click and drag the selection to rotate selection outline. Hold Shift to rotate in steps. Use arrow keys to move selection outline by a single pixel.");
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Gtk.IconTheme.Default.LoadIcon (Pinta.Resources.Icons.ToolMoveSelection, 16), 0, 0);
 		public override Gdk.Key ShortcutKey => Gdk.Key.M;
-		public override int Priority => 11;
+		public override int Priority => 7;
 
 		protected override Rectangle GetSourceRectangle (Document document)
 		{

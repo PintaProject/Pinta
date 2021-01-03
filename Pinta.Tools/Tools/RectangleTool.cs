@@ -39,7 +39,7 @@ namespace Pinta.Tools
 		public override string Name => Translations.GetString ("Rectangle");
 		public override string Icon => Pinta.Resources.Icons.ToolRectangle;
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Rectangle.png"), 9, 18);
-		public override int Priority => 41;
+		public override int Priority => 39;
 
 		public override string StatusBarText {
 			get {

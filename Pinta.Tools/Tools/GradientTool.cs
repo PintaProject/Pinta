@@ -50,7 +50,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color.  Right click to reverse.");
 		public override Gdk.Key ShortcutKey => Gdk.Key.G;
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.Gradient.png"), 9, 18);
-		public override int Priority => 23;
+		public override int Priority => 31;
 		private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)

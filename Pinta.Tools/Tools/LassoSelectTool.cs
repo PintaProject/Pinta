@@ -55,7 +55,7 @@ namespace Pinta.Tools
 		public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
 		public override Gdk.Key ShortcutKey => Gdk.Key.S;
 		public override Gdk.Cursor DefaultCursor => new Gdk.Cursor (Gdk.Display.Default, Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18);
-		public override int Priority => 9;
+		public override int Priority => 17;
 
 		protected override void OnBuildToolBar (Toolbar tb)
 		{
