@@ -44,7 +44,7 @@ namespace Pinta
 
 		CanvasPad canvas_pad = null!;
 
-		public MainWindow () : base ("com.github.PintaProject.Pinta", GLib.ApplicationFlags.None)
+		public MainWindow () : base ("com.github.PintaProject.Pinta", GLib.ApplicationFlags.NonUnique)
 		{
 			Register (GLib.Cancellable.Current);
 		}
