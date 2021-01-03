@@ -26,7 +26,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Gdk;
 using Gtk;
 
 namespace Pinta.Core
@@ -83,6 +85,9 @@ namespace Pinta.Core
 	public class ToolManager : IEnumerable<BaseTool>, IToolService
 	{
 		private readonly SortedSet<BaseTool> tools = new (new ToolSorter ());
+
+		private bool is_panning;
+		private Cursor? stored_cursor;
 
 		public event EventHandler<ToolEventArgs>? ToolAdded;
 		public event EventHandler<ToolEventArgs>? ToolRemoved;
@@ -241,10 +246,25 @@ namespace Pinta.Core
 			tool.ToolItem.Active = false;
 		}
 
+		public void DoMouseDown (Document document, ButtonPressEventArgs args)
+		{
+			if (!TryMouseDownPanOverride (document, args))
+				CurrentTool?.DoMouseDown (document, args);
+		}
+
+		public void DoMouseMove (Document document, MotionNotifyEventArgs args)
+		{
+			if (!TryMouseMovePanOverride (document, args))
+				CurrentTool?.DoMouseMove (document, args);
+		}
+
+		public void DoMouseUp (Document document, ButtonReleaseEventArgs args)
+		{
+			if (!TryMouseUpPanOverride (document, args))
+				CurrentTool?.DoMouseUp (document, args);
+		}
+
 		public void DoMouseDown (Document document, ToolMouseEventArgs e) => CurrentTool?.DoMouseDown (document, e);
-		public void DoMouseDown (Document document, ButtonPressEventArgs args) => CurrentTool?.DoMouseDown (document, args);
-		public void DoMouseUp (Document document, ButtonReleaseEventArgs args) => CurrentTool?.DoMouseUp (document, args);
-		public void DoMouseMove (Document document, MotionNotifyEventArgs args) => CurrentTool?.DoMouseMove (document, args);
 		public void DoKeyDown (Document document, KeyPressEventArgs args) => CurrentTool?.DoKeyDown (document, args);
 		public void DoKeyUp (Document document, KeyReleaseEventArgs args) => CurrentTool?.DoKeyUp (document, args);
 		public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
@@ -253,6 +273,55 @@ namespace Pinta.Core
 		public IEnumerator<BaseTool> GetEnumerator () => tools.GetEnumerator ();
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () => tools.GetEnumerator ();
+
+		private bool TryMouseDownPanOverride (Document document, ButtonPressEventArgs args)
+		{
+			if (is_panning)
+				return true;
+
+			if (args.Event.Button == GtkExtensions.MouseMiddleButton && TryGetPanTool (out var pan)) {
+				is_panning = true;
+				stored_cursor = document.Workspace.Canvas.Window.Cursor;
+				document.Workspace.Canvas.Window.Cursor = pan.DefaultCursor;
+				pan.DoMouseDown (document, args);
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool TryMouseMovePanOverride (Document document, MotionNotifyEventArgs args)
+		{
+			if (is_panning && TryGetPanTool (out var pan)) {
+				pan.DoMouseMove (document, args);
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool TryMouseUpPanOverride (Document document, ButtonReleaseEventArgs args)
+		{
+			if (is_panning && TryGetPanTool (out var pan)) {
+				// Ignore any mouse button releases that aren't Middle
+				if (args.Event.Button != GtkExtensions.MouseMiddleButton)
+					return true;
+
+				is_panning = false;
+				pan.DoMouseUp (document, args);
+				document.Workspace.Canvas.Window.Cursor = stored_cursor;
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool TryGetPanTool ([NotNullWhen (true)] out BaseTool? tool)
+		{
+			tool = FindTool ("PanTool");
+
+			return tool is not null;
+		}
 
 		class ToolSorter : Comparer<BaseTool>
 		{
