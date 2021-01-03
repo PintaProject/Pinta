@@ -37,7 +37,6 @@ namespace Pinta.Gui.Widgets
 		private readonly Document document;
 
 		private Cairo.ImageSurface? canvas;
-		private int h_scroll_amount = 92;
 
 		public CanvasWindow CanvasWindow { get; private set; }
 
@@ -157,39 +156,6 @@ namespace Pinta.Gui.Widgets
 			}
 
 			return true;
-		}
-
-		protected override bool OnScrollEvent (EventScroll evnt)
-		{
-			// Allow the user to zoom in/out with Ctrl-Mousewheel
-			if (evnt.State.FilterModifierKeys () == ModifierType.ControlMask) {
-				switch (evnt.Direction) {
-					case ScrollDirection.Down:
-					case ScrollDirection.Right:
-						document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
-						return true;
-					case ScrollDirection.Left:
-					case ScrollDirection.Up:
-						document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (evnt.X, evnt.Y));
-						return true;
-				}
-			}
-
-			// Allow the user to scroll left/right with Shift-Mousewheel
-			if (evnt.State.FilterModifierKeys () == ModifierType.ShiftMask) {
-				switch (evnt.Direction) {
-					case ScrollDirection.Down:
-					case ScrollDirection.Right:
-						document.Workspace.ScrollCanvas (h_scroll_amount, 0);
-						return true;
-					case ScrollDirection.Up:
-					case ScrollDirection.Left:
-						document.Workspace.ScrollCanvas (-h_scroll_amount, 0);
-						return true;
-				}
-			}
-
-			return base.OnScrollEvent (evnt);
 		}
 
 		private void SetRequisition (Size size)

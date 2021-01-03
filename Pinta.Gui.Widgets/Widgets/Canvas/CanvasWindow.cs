@@ -26,6 +26,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Gdk;
 using Gtk;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -34,6 +35,7 @@ namespace Pinta
 {
 	public class CanvasWindow : Grid
 	{
+		private Document document;
 		private Ruler horizontal_ruler;
 		private Ruler vertical_ruler;
 		private ScrolledWindow scrolled_window;
@@ -43,6 +45,8 @@ namespace Pinta
 
 		public CanvasWindow (Document document)
 		{
+			this.document = document;
+
 			Build (document);
 
 			scrolled_window.Hadjustment.ValueChanged += UpdateRulerRange;
@@ -136,6 +140,8 @@ namespace Pinta
 				ShadowType = ShadowType.None
 			};
 
+			vp.ScrollEvent += ViewPort_ScrollEvent;
+
 			Canvas = new PintaCanvas (this, document) {
 				Name = "canvas",
 				CanDefault = true,
@@ -169,6 +175,19 @@ namespace Pinta
 
 			horizontal_ruler.Visible = false;
 			vertical_ruler.Visible = false;
+		}
+
+		private void ViewPort_ScrollEvent (object o, ScrollEventArgs args)
+		{
+			// Allow the user to zoom in/out with Ctrl-Mousewheel
+			if (args.Event.State.IsControlPressed () && args.Event.Direction == ScrollDirection.Smooth) {
+				if (args.Event.DeltaX > 0 || args.Event.DeltaY < 0)
+					document.Workspace.ZoomInFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
+				else if (args.Event.DeltaX < 0 || args.Event.DeltaY > 0)
+					document.Workspace.ZoomOutFromMouseScroll (new Cairo.PointD (args.Event.X, args.Event.Y));
+
+				args.RetVal = true;
+			}
 		}
 	}
 }
