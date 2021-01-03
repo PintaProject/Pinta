@@ -59,8 +59,8 @@ namespace Pinta.Core
 				Gtk.Viewport view = (Gtk.Viewport)Canvas.Parent;
 				
 				int window_x = view.Allocation.Width;
-				int window_y = view.Children[0].Allocation.Height;
-				
+				int window_y = view.Allocation.Height;
+
 				if (CanvasSize.Width <= window_x && CanvasSize.Height <= window_y)
 					return true;
 				

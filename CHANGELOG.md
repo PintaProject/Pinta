@@ -55,6 +55,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed several Unicode-related issues in the text tool ([#1422445](https://bugs.launchpad.net/pinta/+bug/1422445)).
 - Fixed issue on macOS where Pinta could launch in the wrong language ([#1900310](https://bugs.launchpad.net/pinta/+bug/1900310)).
 - Improved the UX of the Close and Save As confirmation dialogs ([#1909576](https://bugs.launchpad.net/pinta/+bug/1909576), [#1909688](https://bugs.launchpad.net/pinta/+bug/1909688)).
+- Fixed a bug where the Pan tool did not work if scrolling could only occur in the Y direction ([#1909910](https://bugs.launchpad.net/pinta/+bug/1909910)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
