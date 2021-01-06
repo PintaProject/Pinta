@@ -49,7 +49,7 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar (tb);
 
-			EditEngine.HandleBuildToolBar (tb);
+			EditEngine.HandleBuildToolBar (tb, Settings, GetType ().Name.ToLowerInvariant ());
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -139,6 +139,13 @@ namespace Pinta.Tools
 			EditEngine.HandleAfterRedo ();
 
 			base.OnAfterRedo (document);
+		}
+
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			EditEngine.OnSaveSettings (settings, GetType ().Name.ToLowerInvariant ());
 		}
 	}
 }

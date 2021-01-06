@@ -69,7 +69,7 @@ namespace Pinta.Core
 			Services = new ServiceManager ();
 
 			Services.AddService<IResourceService> (Resources);
-			Services.AddService (Settings);
+			Services.AddService<ISettingsService> (Settings);
 			Services.AddService (Actions);
 			Services.AddService<IWorkspaceService> (Workspace);
 			Services.AddService (Layers);

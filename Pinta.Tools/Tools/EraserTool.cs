@@ -46,6 +46,8 @@ namespace Pinta.Tools
 		private const int LUT_Resolution = 256;
 		private byte[][]? lut_factor;
 
+		private const string ERASER_TYPE_SETTING = "eraser-erase-type";
+
 		public EraserTool (IServiceManager services) : base (services)
 		{
 		}
@@ -107,6 +109,14 @@ namespace Pinta.Tools
 				document.Workspace.Invalidate (document.ClampToImageSize (dirty));
 
 			last_point = new_point;
+		}
+
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (type_combobox is not null)
+				settings.PutSetting (ERASER_TYPE_SETTING, type_combobox.ComboBox.Active);
 		}
 
 		[MemberNotNull (nameof (lut_factor))]
@@ -178,7 +188,7 @@ namespace Pinta.Tools
 			g.Stroke ();
 		}
 
-		protected unsafe void EraseSmooth (ImageSurface surf, Context g, PointD start, PointD end)
+		private unsafe void EraseSmooth (ImageSurface surf, Context g, PointD start, PointD end)
 		{
 			var rad = (int) (BrushWidth / 2.0) + 1;
 
@@ -255,6 +265,8 @@ namespace Pinta.Tools
 			get {
 				if (type_combobox is null) {
 					type_combobox = new ToolBarComboBox (100, 0, false, Translations.GetString ("Normal"), Translations.GetString ("Smooth"));
+
+					type_combobox.ComboBox.Active = Settings.GetSetting (ERASER_TYPE_SETTING, 0);
 
 					type_combobox.ComboBox.Changed += (o, e) => {
 						eraser_type = (EraserType) type_combobox.ComboBox.Active;

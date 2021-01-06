@@ -86,6 +86,19 @@ namespace Pinta.Core
 			}
 		}
 
+		public int SelectedIndex {
+			get => selected_item is null ? -1 : Items.IndexOf (selected_item);
+			set {
+				if (value < 0 || value >= Items.Count)
+					return;
+
+				var item = Items[value];
+
+				if (item != selected_item)
+					SetSelectedItem (item);
+			}
+		}
+
 		protected void SetSelectedItem (ToolBarItem item)
 		{
 			image.Pixbuf = IconTheme.Default.LoadIcon(item.ImageId, 16);

@@ -133,6 +133,14 @@ namespace Pinta.Tools
 		private ToolBarWidget<SpinButton> outline_width = null!;
 		private ToolBarLabel outline_width_label = null!;
 
+		private const string FONT_SETTING = "text-font";
+		private const string BOLD_SETTING = "text-bold";
+		private const string ITALIC_SETTING = "text-italic";
+		private const string UNDERLINE_SETTING = "text-underline";
+		private const string ALIGNMENT_SETTING = "text-alignment";
+		private const string STYLE_SETTING = "text-style";
+		private const string OUTLINE_WIDTH_SETTING = "text-outline-width";
+
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
 			base.OnBuildToolBar (tb);
@@ -145,7 +153,7 @@ namespace Pinta.Tools
 			if (font_button == null) {
 				font_button = new (new FontButton () { ShowStyle = true, ShowSize = true, UseFont = true });
 				// Default to Arial if possible.
-				font_button.Widget.Font = "Arial 12";
+				font_button.Widget.Font = Settings.GetSetting (FONT_SETTING, "Arial 12");
 
 				font_button.Widget.FontSet += HandleFontChanged;
 			}
@@ -156,6 +164,7 @@ namespace Pinta.Tools
 
 			if (bold_btn == null) {
 				bold_btn = new ToolBarToggleButton ("Toolbar.Bold.png", Translations.GetString ("Bold"), Translations.GetString ("Bold"));
+				bold_btn.Active = Settings.GetSetting (BOLD_SETTING, false);
 				bold_btn.Toggled += HandleBoldButtonToggled;
 			}
 
@@ -163,6 +172,7 @@ namespace Pinta.Tools
 
 			if (italic_btn == null) {
 				italic_btn = new ToolBarToggleButton ("Toolbar.Italic.png", Translations.GetString ("Italic"), Translations.GetString ("Italic"));
+				italic_btn.Active = Settings.GetSetting (ITALIC_SETTING, false);
 				italic_btn.Toggled += HandleItalicButtonToggled;
 			}
 
@@ -170,6 +180,7 @@ namespace Pinta.Tools
 
 			if (underscore_btn == null) {
 				underscore_btn = new ToolBarToggleButton ("Toolbar.Underline.png", Translations.GetString ("Underline"), Translations.GetString ("Underline"));
+				underscore_btn.Active = Settings.GetSetting (UNDERLINE_SETTING, false);
 				underscore_btn.Toggled += HandleUnderscoreButtonToggled;
 			}
 
@@ -177,9 +188,11 @@ namespace Pinta.Tools
 
 			tb.AppendItem (new SeparatorToolItem ());
 
+			var alignment = (TextAlignment)Settings.GetSetting (ALIGNMENT_SETTING, (int) TextAlignment.Left);
+
 			if (left_alignment_btn == null) {
 				left_alignment_btn = new ToolBarToggleButton ("Toolbar.LeftAlignment.png", Translations.GetString ("Left Align"), Translations.GetString ("Left Align"));
-				left_alignment_btn.Active = true;
+				left_alignment_btn.Active = alignment == TextAlignment.Left;
 				left_alignment_btn.Toggled += HandleLeftAlignmentButtonToggled;
 			}
 
@@ -187,6 +200,7 @@ namespace Pinta.Tools
 
 			if (center_alignment_btn == null) {
 				center_alignment_btn = new ToolBarToggleButton ("Toolbar.CenterAlignment.png", Translations.GetString ("Center Align"), Translations.GetString ("Center Align"));
+				center_alignment_btn.Active = alignment == TextAlignment.Center;
 				center_alignment_btn.Toggled += HandleCenterAlignmentButtonToggled;
 			}
 
@@ -194,6 +208,7 @@ namespace Pinta.Tools
 
 			if (Right_alignment_btn == null) {
 				Right_alignment_btn = new ToolBarToggleButton ("Toolbar.RightAlignment.png", Translations.GetString ("Right Align"), Translations.GetString ("Right Align"));
+				Right_alignment_btn.Active = alignment == TextAlignment.Right;
 				Right_alignment_btn.Toggled += HandleRightAlignmentButtonToggled;
 			}
 
@@ -217,6 +232,7 @@ namespace Pinta.Tools
 				fill_button.AddItem (Translations.GetString ("Outline"), Pinta.Resources.Icons.FillStyleOutline, 2);
 				fill_button.AddItem (Translations.GetString ("Fill Background"), Pinta.Resources.Icons.FillStyleBackground, 3);
 
+				fill_button.SelectedIndex = Settings.GetSetting (STYLE_SETTING, 0);
 				fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 			}
 
@@ -233,7 +249,7 @@ namespace Pinta.Tools
 			tb.AppendItem (outline_width_label);
 
 			if (outline_width == null) {
-				outline_width = new (new SpinButton (1, 1e5, 1) { Value = 2 });
+				outline_width = new (new SpinButton (1, 1e5, 1) { Value = Settings.GetSetting (OUTLINE_WIDTH_SETTING, 2) });
 				outline_width.Widget.ValueChanged += HandleFontChanged;
 			}
 
@@ -250,6 +266,26 @@ namespace Pinta.Tools
 				//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
 				PintaCore.Workspace.ActiveDocument.LayerCloned += FinalizeText;
 			}
+		}
+
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (font_button is not null)
+				settings.PutSetting (FONT_SETTING, font_button.Widget.Font);
+			if (bold_btn is not null)
+				settings.PutSetting (BOLD_SETTING, bold_btn.Active);
+			if (italic_btn is not null)
+				settings.PutSetting (ITALIC_SETTING, italic_btn.Active);
+			if (underscore_btn is not null)
+				settings.PutSetting (UNDERLINE_SETTING, underscore_btn.Active);
+			if (left_alignment_btn is not null)
+				settings.PutSetting (ALIGNMENT_SETTING, (int) Alignment);
+			if (fill_button is not null)
+				settings.PutSetting (STYLE_SETTING, fill_button.SelectedIndex);
+			if (outline_width is not null)
+				settings.PutSetting (OUTLINE_WIDTH_SETTING, outline_width.Widget.ValueAsInt);
 		}
 
 		private void HandleFontChanged (object? sender, EventArgs e)

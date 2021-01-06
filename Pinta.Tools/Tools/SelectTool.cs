@@ -67,7 +67,7 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar (tb);
 
-			workspace.SelectionHandler.BuildToolbar (tb);
+			workspace.SelectionHandler.BuildToolbar (tb, Settings);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -191,6 +191,13 @@ namespace Pinta.Tools
 			base.OnDeactivated (document, newTool);
 
 			document?.Layers.ToolLayer.Clear ();
+		}
+
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			workspace.SelectionHandler.OnSaveSettings (settings);
 		}
 
 		private void RefreshHandler ()

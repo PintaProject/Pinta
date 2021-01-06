@@ -255,7 +255,24 @@ namespace Pinta.Tools
 			ResetShapes();
         }
 
-        public virtual void HandleBuildToolBar(Gtk.Toolbar tb)
+		private string BRUSH_WIDTH_SETTING (string prefix) => $"{prefix}-brush-width";
+		private string FILL_TYPE_SETTING (string prefix) => $"{prefix}-fill-style";
+		private string SHAPE_TYPE_SETTING (string prefix) => $"{prefix}-shape-type";
+		private string DASH_PATTERN_SETTING (string prefix) => $"{prefix}-dash-pattern";
+
+		public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
+		{
+			if (brush_width is not null)
+				settings.PutSetting (BRUSH_WIDTH_SETTING (toolPrefix), (int)brush_width.Widget.Value);
+			if (fill_button is not null)
+				settings.PutSetting (FILL_TYPE_SETTING (toolPrefix), fill_button.SelectedIndex);
+			if (shape_type_button is not null)
+				settings.PutSetting (SHAPE_TYPE_SETTING (toolPrefix), shape_type_button.SelectedIndex);
+			if (dash_pattern_box?.comboBox is not null)
+				settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.comboBox.ComboBox.ActiveText);
+		}
+
+		public virtual void HandleBuildToolBar(Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
         {
             if (brush_width_label == null)
                 brush_width_label = new ToolBarLabel(string.Format(" {0}: ", Translations.GetString("Brush width")));
@@ -264,7 +281,7 @@ namespace Pinta.Tools
 
 			if (brush_width == null)
 			{
-				brush_width = new (new Gtk.SpinButton (1, 1e5, 1) { Value = BaseTool.DEFAULT_BRUSH_WIDTH });
+				brush_width = new (new Gtk.SpinButton (1, 1e5, 1) { Value = settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH) });
 
 				brush_width.Widget.ValueChanged += (o, e) =>
 				{
@@ -298,6 +315,8 @@ namespace Pinta.Tools
                 fill_button.AddItem(Translations.GetString("Outline Shape"), Resources.Icons.FillStyleOutline, 0);
                 fill_button.AddItem(Translations.GetString("Fill Shape"), Resources.Icons.FillStyleFill, 1);
                 fill_button.AddItem(Translations.GetString("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
+
+				fill_button.SelectedIndex = settings.GetSetting (FILL_TYPE_SETTING (toolPrefix), 0);
             }
 
             tb.AppendItem(fill_button);
@@ -320,6 +339,8 @@ namespace Pinta.Tools
 				shape_type_button.AddItem(Translations.GetString("Closed Line/Curve Series"), Resources.Icons.ToolRectangle, 1);
 				shape_type_button.AddItem(Translations.GetString("Ellipse"), Resources.Icons.ToolEllipse, 2);
 				shape_type_button.AddItem(Translations.GetString("Rounded Line Series"), Resources.Icons.ToolRectangleRounded, 3);
+
+				shape_type_button.SelectedIndex = settings.GetSetting (SHAPE_TYPE_SETTING (toolPrefix), 0);
 
 				shape_type_button.SelectedItemChanged += (o, e) =>
 				{
@@ -360,6 +381,9 @@ namespace Pinta.Tools
 
             if (dpbBox != null)
             {
+				dpbBox.Entry.Text = settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-");
+
+
                 dpbBox.Changed += (o, e) =>
                 {
 					ShapeEngine? selEngine = SelectedShapeEngine;

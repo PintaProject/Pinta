@@ -47,6 +47,8 @@ namespace Pinta.Tools
 		private Point last_point = point_empty;
 		private BitMask? stencil;
 
+		private const string TOLERANCE_SETTING = "recolor-tolerance";
+
 		public RecolorTool (IServiceManager services) : base (services)
 		{
 			workspace = services.GetService<IWorkspaceService> ();
@@ -159,6 +161,14 @@ namespace Pinta.Tools
 			last_point = new Point (x, y);
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (tolerance_slider is not null)
+				settings.PutSetting (TOLERANCE_SETTING, (int)tolerance_slider.Slider.Value);
+		}
+
 		#region Private PDN Methods
 		private static ColorBgra AdjustColorDifference (ColorBgra oldColor, ColorBgra newColor, ColorBgra basisColor)
 		{
@@ -188,7 +198,7 @@ namespace Pinta.Tools
 		private SeparatorToolItem? separator;
 
 		private ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel ($"  {Translations.GetString ("Tolerance")}: ");
-		private ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, 50);
+		private ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
 		private SeparatorToolItem Separator => separator ??= new SeparatorToolItem ();
 	}
 }

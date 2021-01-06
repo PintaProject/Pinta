@@ -40,6 +40,8 @@ namespace Pinta.Tools
 		protected bool surface_modified;
 		protected MouseButton mouse_button;
 
+		private string BRUSH_WIDTH_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-brush-width";
+
 		protected BaseBrushTool (IServiceManager services) : base (services)
 		{
 			Palette = services.GetService<IPaletteService> ();
@@ -87,10 +89,18 @@ namespace Pinta.Tools
 			mouse_button = MouseButton.None;
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (brush_width is not null)
+				settings.PutSetting (BRUSH_WIDTH_SETTING, brush_width.Widget.ValueAsInt);
+		}
+
 		private ToolBarWidget<SpinButton>? brush_width;
 		private ToolBarLabel? brush_width_label;
 
-		protected ToolBarWidget<SpinButton> BrushWidthSpinButton => brush_width ??= new (new SpinButton (1, 1e5, 1) { Value = DEFAULT_BRUSH_WIDTH });
+		protected ToolBarWidget<SpinButton> BrushWidthSpinButton => brush_width ??= new (new SpinButton (1, 1e5, 1) { Value = Settings.GetSetting (BRUSH_WIDTH_SETTING, DEFAULT_BRUSH_WIDTH) });
 		protected ToolBarLabel BrushWidthLabel => brush_width_label ??= new ToolBarLabel ($" {Translations.GetString ("Brush width")}: ");
 	}
 }

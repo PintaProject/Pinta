@@ -39,6 +39,10 @@ namespace Pinta.Tools
 
 		private MouseButton button_down;
 
+		private const string TOOL_SELECTION_SETTING = "color-picker-tool-selection";
+		private const string SAMPLE_SIZE_SETTING = "color-picker-sample-size";
+		private const string SAMPLE_TYPE_SETTING = "color-picker-sample-type";
+
 		public ColorPickerTool (IServiceManager services) : base (services)
 		{
 			palette = services.GetService<IPaletteService> ();
@@ -129,6 +133,18 @@ namespace Pinta.Tools
 				tools.SetCurrentTool (nameof (PencilTool));
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (tool_select is not null)
+				settings.PutSetting (TOOL_SELECTION_SETTING, tool_select.SelectedIndex);
+			if (sample_size is not null)
+				settings.PutSetting (SAMPLE_SIZE_SETTING, sample_size.SelectedIndex);
+			if (sample_type is not null)
+				settings.PutSetting (SAMPLE_TYPE_SETTING, sample_type.SelectedIndex);
+		}
+
 		private unsafe Color GetColorFromPoint (Document document, Point point)
 		{
 			var pixels = GetPixelsFromPoint (document, point);
@@ -190,6 +206,8 @@ namespace Pinta.Tools
 					tool_select.AddItem (Translations.GetString ("Do not switch tool"), Pinta.Resources.Icons.ToolColorPicker, 0);
 					tool_select.AddItem (Translations.GetString ("Switch to previous tool"), Pinta.Resources.Icons.ToolColorPickerPreviousTool, 1);
 					tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), Pinta.Resources.Icons.ToolPencil, 2);
+
+					tool_select.SelectedIndex = Settings.GetSetting (TOOL_SELECTION_SETTING, 0);
 				}
 
 				return tool_select;
@@ -209,6 +227,8 @@ namespace Pinta.Tools
 					sample_size.AddItem (Translations.GetString ("5 x 5 Region"), Pinta.Resources.Icons.Sampling5, 5);
 					sample_size.AddItem (Translations.GetString ("7 x 7 Region"), Pinta.Resources.Icons.Sampling7, 7);
 					sample_size.AddItem (Translations.GetString ("9 x 9 Region"), Pinta.Resources.Icons.Sampling9, 9);
+
+					sample_size.SelectedIndex = Settings.GetSetting (SAMPLE_SIZE_SETTING, 0);
 				}
 
 				return sample_size;
@@ -222,6 +242,8 @@ namespace Pinta.Tools
 
 					sample_type.AddItem (Translations.GetString ("Layer"), Pinta.Resources.Icons.LayerMergeDown, true);
 					sample_type.AddItem (Translations.GetString ("Image"), Pinta.Resources.Icons.ResizeCanvasBase, false);
+
+					sample_type.SelectedIndex = Settings.GetSetting (SAMPLE_TYPE_SETTING, 0);
 				}
 
 				return sample_type;

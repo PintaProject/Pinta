@@ -57,6 +57,8 @@ namespace Pinta.Tools
 		protected float Tolerance => (float) (ToleranceSlider.Slider.Value / 100);
 		protected virtual bool CalculatePolygonSet => true;
 		protected bool LimitToSelection { get; set; } = true;
+		private string FILL_MODE_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-fill-mode";
+		private string FILL_TOLERANCE_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-fill-tolerance";
 
 		protected override void OnBuildToolBar (Gtk.Toolbar tb)
 		{
@@ -108,12 +110,22 @@ namespace Pinta.Tools
 			}
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (mode_button is not null)
+				settings.PutSetting (FILL_MODE_SETTING, mode_button.SelectedIndex);
+			if (tolerance_slider is not null)
+				settings.PutSetting (FILL_TOLERANCE_SETTING, (int)tolerance_slider.Slider.Value);
+		}
+
 		protected virtual void OnFillRegionComputed (Document document, Point[][] polygonSet) { }
 		protected virtual void OnFillRegionComputed (Document document, BitMask stencil) { }
 
 		protected ToolBarLabel ModeLabel => mode_label ??= new ToolBarLabel ($" {Translations.GetString ("Flood Mode")}: ");
 		protected ToolBarLabel ToleranceLabel => tolerance_label ??= new ToolBarLabel ($" {Translations.GetString ("Tolerance")}: ");
-		protected ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, 0);
+		protected ToolBarSlider ToleranceSlider => tolerance_slider ??= new ToolBarSlider (0, 100, 1, Settings.GetSetting (FILL_TOLERANCE_SETTING, 0));
 		protected SeparatorToolItem Separator => mode_sep ??= new SeparatorToolItem ();
 
 		protected ToolBarDropDownButton ModeDropDown {
@@ -123,6 +135,8 @@ namespace Pinta.Tools
 
 					mode_button.AddItem (Translations.GetString ("Contiguous"), Pinta.Resources.Icons.ToolFreeformShape, true);
 					mode_button.AddItem (Translations.GetString ("Global"), Pinta.Resources.Icons.HelpWebsite, false);
+
+					mode_button.SelectedIndex = Settings.GetSetting (FILL_MODE_SETTING, 0);
 				}
 
 				return mode_button;
