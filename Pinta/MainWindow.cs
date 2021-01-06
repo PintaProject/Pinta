@@ -1,4 +1,4 @@
-﻿// 
+// 
 // MainWindow.cs
 //  
 // Author:
@@ -102,9 +102,6 @@ namespace Pinta
 			var effects = new Pinta.Effects.CoreEffectsExtension ();
 			effects.Initialize ();
 #endif
-
-			// Try to set the default tool to the PaintBrush
-			PintaCore.Tools.SetCurrentTool ("PaintBrushTool");
 
 			// Load the user's previous settings
 			LoadUserSettings ();
@@ -461,9 +458,13 @@ namespace Pinta
 
 		#region User Settings
 		private const string LastDialogDirSettingKey = "last-dialog-directory";
+		private const string LastSelectedToolSettingKey = "last-selected-tool";
 
 		private void LoadUserSettings ()
 		{
+			// Set selected tool to last selected or default to the PaintBrush
+			PintaCore.Tools.SetCurrentTool (PintaCore.Settings.GetSetting (LastSelectedToolSettingKey, "PaintBrushTool"));
+
 			PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting ("ruler-shown", false);
 			PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting ("toolbar-shown", true);
 			PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
@@ -495,6 +496,9 @@ namespace Pinta
 			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Value);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);
+
+			if (PintaCore.Tools.CurrentTool is BaseTool tool)
+				PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);
 
 			PintaCore.Settings.DoSaveSettingsBeforeQuit ();
 		}
