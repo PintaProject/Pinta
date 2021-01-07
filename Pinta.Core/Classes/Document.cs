@@ -351,9 +351,12 @@ namespace Pinta.Core
 
 			ResetSelectionPaths ();
 
+			Workspace.Canvas.Window.FreezeUpdates ();
 			Workspace.Scale = scale;
+			PintaCore.Actions.View.UpdateCanvasScale ();
+			Workspace.Canvas.Window.ThawUpdates ();
 		}
-		
+
 		// Rotate image 180 degrees (flip H+V)
 		public void RotateImage180 ()
 		{
