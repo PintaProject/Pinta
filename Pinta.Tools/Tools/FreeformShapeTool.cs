@@ -43,6 +43,9 @@ namespace Pinta.Tools
 
 		private string dash_pattern = "-";
 
+		private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
+		private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
+
 		public FreeformShapeTool (IServiceManager services) : base (services)
 		{
 		}
@@ -67,6 +70,8 @@ namespace Pinta.Tools
 			var dash_pattern_box = dashPBox.SetupToolbar (tb);
 
 			if (dash_pattern_box != null) {
+				dash_pattern_box.Entry.Text = Settings.GetSetting (DASH_PATTERN_SETTING, "-");
+
 				dash_pattern_box.Changed += (o, e) => {
 					dash_pattern = dash_pattern_box.ActiveText;
 				};
@@ -196,6 +201,16 @@ namespace Pinta.Tools
 			document.Workspace.Invalidate ();
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (fill_button is not null)
+				settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
+			if (dashPBox?.comboBox is not null)
+				settings.PutSetting (DASH_PATTERN_SETTING, dashPBox.comboBox.ComboBox.ActiveText);
+		}
+
 		private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;
 		private bool FillShape => FillDropDown.SelectedItem.GetTagOrDefault (0) >= 1;
 
@@ -213,6 +228,8 @@ namespace Pinta.Tools
 					fill_button.AddItem (Translations.GetString ("Outline Shape"), Pinta.Resources.Icons.FillStyleOutline, 0);
 					fill_button.AddItem (Translations.GetString ("Fill Shape"), Pinta.Resources.Icons.FillStyleFill, 1);
 					fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Pinta.Resources.Icons.FillStyleOutlineFill, 2);
+
+					fill_button.SelectedIndex = Settings.GetSetting (FILL_TYPE_SETTING, 0);
 				}
 
 				return fill_button;

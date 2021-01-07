@@ -41,6 +41,8 @@ namespace Pinta.Tools
 		private Color stroke_color;
 		private Point last_point;
 
+		private const string BRUSH_SETTING = "paint-brush-brush";
+
 		public PaintBrushTool (IServiceManager services) : base (services)
 		{
 			brushes = services.GetService<IPaintBrushService> ();
@@ -144,6 +146,14 @@ namespace Pinta.Tools
 			active_brush.DoMouseUp ();
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (brush_combo_box is not null)
+				settings.PutSetting (BRUSH_SETTING, brush_combo_box.ComboBox.Active);
+		}
+
 		private ToolBarLabel? brush_label;
 		private ToolBarComboBox? brush_combo_box;
 		private SeparatorToolItem? separator;
@@ -161,6 +171,11 @@ namespace Pinta.Tools
 					};
 
 					RebuildBrushComboBox ();
+
+					var brush = Settings.GetSetting (BRUSH_SETTING, 0);
+
+					if (brush < brush_combo_box.ComboBox.GetItemCount ())
+						brush_combo_box.ComboBox.Active = brush;
 				}
 
 				return brush_combo_box;

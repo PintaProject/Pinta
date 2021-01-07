@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SelectionModeHandler.cs
 //  
 // Author:
@@ -39,6 +39,8 @@ namespace Pinta.Core
         private CombineMode selected_mode;
         private Dictionary<string, CombineMode> combine_modes;
 
+		private const string COMBINE_MODE_SETTING = "selection-combine-mode";
+
         public SelectionModeHandler ()
         {
             combine_modes = new Dictionary<string, CombineMode>() {
@@ -50,7 +52,7 @@ namespace Pinta.Core
             };
         }
 
-        public void BuildToolbar (Gtk.Toolbar tb)
+	public void BuildToolbar (Gtk.Toolbar tb, ISettingsService settings)
         {
             if (selection_label == null)
                 selection_label = new ToolBarLabel (Translations.GetString (" Selection Mode: "));
@@ -69,7 +71,7 @@ namespace Pinta.Core
                 foreach (var mode in combine_modes)
                     selection_combo_box.ComboBox.AppendText(mode.Key);
 
-                selection_combo_box.ComboBox.Active = 0;
+                selection_combo_box.ComboBox.Active = settings.GetSetting (COMBINE_MODE_SETTING, 0);
             }
 
             tb.AppendItem (selection_combo_box);
@@ -162,6 +164,12 @@ namespace Pinta.Core
                 doc.Selection.MarkDirty ();
             }
         }
+
+		public void OnSaveSettings (ISettingsService settings)
+		{
+			if (selection_combo_box is not null)
+				settings.PutSetting (COMBINE_MODE_SETTING, selection_combo_box.ComboBox.Active);
+		}
     }
 
     public enum CombineMode

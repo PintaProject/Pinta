@@ -1,4 +1,4 @@
-﻿// 
+// 
 // SettingsManager.cs
 //  
 // Author:
@@ -34,7 +34,32 @@ using System.Xml.Linq;
 
 namespace Pinta.Core
 {
-	public class SettingsManager
+	public interface ISettingsService
+	{
+		/// <summary>
+		/// Retrieves stored setting with the specified key. The specified default value is
+		/// returned if the setting cannot be found or contains an invalid value.
+		/// </summary>
+		T GetSetting<T> (string key, T defaultValue);
+
+		/// <summary>
+		/// Returns the user settings directory.
+		/// </summary>
+		string GetUserSettingsDirectory ();
+
+		/// <summary>
+		/// Stores a setting with specified key and value for future application launches.
+		/// </summary>
+		void PutSetting (string key, object value);
+
+		/// <summary>
+		/// An event that is fired when the user quits the application, giving subscribers
+		/// a chance to call PutSetting to store setting.
+		/// </summary>
+		event EventHandler? SaveSettingsBeforeQuit;
+	}
+
+	public class SettingsManager : ISettingsService
 	{
 		private const string SETTINGS_FILE = "settings.xml";
 

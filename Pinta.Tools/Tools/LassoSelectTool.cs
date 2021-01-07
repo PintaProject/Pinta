@@ -61,7 +61,7 @@ namespace Pinta.Tools
 		{
 			base.OnBuildToolBar (tb);
 
-			workspace.SelectionHandler.BuildToolbar (tb);
+			workspace.SelectionHandler.BuildToolbar (tb, Settings);
 		}
 
 		protected override void OnMouseDown (Document document, ToolMouseEventArgs e)

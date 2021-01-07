@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ArrowedEditEngine.cs
 //  
 // Author:
@@ -53,9 +53,31 @@ namespace Pinta.Tools
 		private Arrow previousSettings1 = new Arrow();
 		private Arrow previousSettings2 = new Arrow();
 
-		public override void HandleBuildToolBar(Gtk.Toolbar tb)
+		private string ARROW1_SETTING (string prefix) => $"{prefix}-arrow1";
+		private string ARROW2_SETTING (string prefix) => $"{prefix}-arrow2";
+		private string ARROW_SIZE_SETTING (string prefix) => $"{prefix}-arrow-size";
+		private string ARROW_ANGLE_SETTING (string prefix) => $"{prefix}-arrow-angle";
+		private string ARROW_LENGTH_SETTING (string prefix) => $"{prefix}-arrow-length";
+
+		public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{
-			base.HandleBuildToolBar(tb);
+			base.OnSaveSettings (settings, toolPrefix);
+
+			if (showArrowOneBox is not null)
+				settings.PutSetting (ARROW1_SETTING (toolPrefix), showArrowOneBox.Widget.Active);
+			if (showArrowTwoBox is not null)
+				settings.PutSetting (ARROW2_SETTING (toolPrefix), showArrowTwoBox.Widget.Active);
+			if (arrowSize is not null)
+				settings.PutSetting (ARROW_SIZE_SETTING (toolPrefix), arrowSize.Widget.ValueAsInt);
+			if (arrowAngleOffset is not null)
+				settings.PutSetting (ARROW_ANGLE_SETTING (toolPrefix), arrowAngleOffset.Widget.ValueAsInt);
+			if (arrowLengthOffset is not null)
+				settings.PutSetting (ARROW_LENGTH_SETTING (toolPrefix), arrowLengthOffset.Widget.ValueAsInt);
+		}
+
+		public override void HandleBuildToolBar(Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
+		{
+			base.HandleBuildToolBar(tb, settings, toolPrefix);
 
 
 			#region Show Arrows
@@ -84,7 +106,7 @@ namespace Pinta.Tools
 
 			if (showArrowOneBox == null) {
 				showArrowOneBox = new (new Gtk.CheckButton ("1"));
-				showArrowOneBox.Widget.Active = previousSettings1.Show;
+				showArrowOneBox.Widget.Active = settings.GetSetting (ARROW1_SETTING (toolPrefix), previousSettings1.Show);
 
 				showArrowOneBox.Widget.Toggled += (o, e) => {
 					//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
@@ -130,7 +152,7 @@ namespace Pinta.Tools
 			//Show arrow 2.
 			if (showArrowTwoBox == null) {
 				showArrowTwoBox = new (new Gtk.CheckButton ("2"));
-				showArrowTwoBox.Widget.Active = previousSettings2.Show;
+				showArrowTwoBox.Widget.Active = settings.GetSetting (ARROW2_SETTING (toolPrefix), previousSettings2.Show);
 
 				showArrowTwoBox.Widget.Toggled += (o, e) => {
 					//Determine whether to change the visibility of Arrow options in the toolbar based on the updated Arrow showing/hiding.
@@ -183,7 +205,7 @@ namespace Pinta.Tools
 			}
 
 			if (arrowSize == null) {
-				arrowSize = new (new Gtk.SpinButton (1, 100, 1) { Value = 10 });
+				arrowSize = new (new Gtk.SpinButton (1, 100, 1) { Value = settings.GetSetting (ARROW_SIZE_SETTING (toolPrefix), 10) });
 
 				arrowSize.Widget.ValueChanged += (o, e) => {
 					var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
@@ -211,7 +233,7 @@ namespace Pinta.Tools
 			}
 
 			if (arrowAngleOffset == null) {
-				arrowAngleOffset = new (new Gtk.SpinButton (-89, 89, 1) { Value = 15 });
+				arrowAngleOffset = new (new Gtk.SpinButton (-89, 89, 1) { Value = settings.GetSetting (ARROW_ANGLE_SETTING (toolPrefix), 15) });
 
 				arrowAngleOffset.Widget.ValueChanged += (o, e) => {
 
@@ -239,7 +261,7 @@ namespace Pinta.Tools
 			}
 
 			if (arrowLengthOffset == null) {
-				arrowLengthOffset = new (new Gtk.SpinButton (-100, 100, 1) { Value = 10 });
+				arrowLengthOffset = new (new Gtk.SpinButton (-100, 100, 1) { Value = settings.GetSetting (ARROW_LENGTH_SETTING (toolPrefix), 10) });
 
 				arrowLengthOffset.Widget.ValueChanged += (o, e) => {
 

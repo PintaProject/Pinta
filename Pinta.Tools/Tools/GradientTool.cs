@@ -40,6 +40,8 @@ namespace Pinta.Tools
 		protected ImageSurface? undo_surface;
 		MouseButton button;
 
+		private const string GRADIENT_TYPE_SETTING = "gradient-type";
+
 		public GradientTool (IServiceManager services) : base (services)
 		{
 			palette = services.GetService<IPaletteService> ();
@@ -124,6 +126,14 @@ namespace Pinta.Tools
 			}
 		}
 
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			if (gradient_button is not null)
+				settings.PutSetting (GRADIENT_TYPE_SETTING, gradient_button.SelectedIndex);
+		}
+
 		private GradientRenderer CreateGradientRenderer ()
 		{
 			var op = new UserBlendOps.NormalBlendOp ();
@@ -152,6 +162,8 @@ namespace Pinta.Tools
 					gradient_button.AddItem (Translations.GetString ("Linear Diamond Gradient"), Pinta.Resources.Icons.GradientDiamond, GradientType.Diamond);
 					gradient_button.AddItem (Translations.GetString ("Radial Gradient"), Pinta.Resources.Icons.GradientRadial, GradientType.Radial);
 					gradient_button.AddItem (Translations.GetString ("Conical Gradient"), Pinta.Resources.Icons.GradientConical, GradientType.Conical);
+
+					gradient_button.SelectedIndex = Settings.GetSetting (GRADIENT_TYPE_SETTING, 0);
 				}
 
 				return gradient_button;

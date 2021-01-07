@@ -1,4 +1,4 @@
-﻿// 
+// 
 // RoundedLineEditEngine.cs
 //  
 // Author:
@@ -82,10 +82,19 @@ namespace Pinta.Tools
 			}
 		}
 
+		private string RADIUS_SETTING (string prefix) => $"{prefix}-radius";
 
-		public override void HandleBuildToolBar(Gtk.Toolbar tb)
+		public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 		{
-			base.HandleBuildToolBar(tb);
+			base.OnSaveSettings (settings, toolPrefix);
+
+			if (radius is not null)
+				settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Widget.Value);
+		}
+
+		public override void HandleBuildToolBar(Gtk.Toolbar tb, ISettingsService settings, string toolPrefix)
+		{
+			base.HandleBuildToolBar(tb, settings, toolPrefix);
 
 
 			if (radius_sep == null)
@@ -100,7 +109,7 @@ namespace Pinta.Tools
 
 			if (radius == null)
 			{
-				radius = new (new Gtk.SpinButton (0, 1e5, 1) { Value = 20 });
+				radius = new (new Gtk.SpinButton (0, 1e5, 1) { Value = settings.GetSetting (RADIUS_SETTING (toolPrefix), 20) });
 
 				radius.Widget.ValueChanged += (o, e) =>
 				{

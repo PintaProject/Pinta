@@ -57,7 +57,7 @@ namespace Pinta.Tools
 
 			tb.AppendItem (SelectionSeparator);
 
-			workspace.SelectionHandler.BuildToolbar (tb);
+			workspace.SelectionHandler.BuildToolbar (tb, Settings);
 		}
 
 
@@ -83,6 +83,13 @@ namespace Pinta.Tools
 
 			document.History.PushNewItem (undoAction);
 			document.Workspace.Invalidate ();
+		}
+
+		protected override void OnSaveSettings (ISettingsService settings)
+		{
+			base.OnSaveSettings (settings);
+
+			workspace.SelectionHandler.OnSaveSettings (settings);
 		}
 
 		private SeparatorToolItem? selection_sep;

@@ -39,14 +39,19 @@ namespace Pinta.Core
 		private readonly IWorkspaceService workspace;
 
 		protected IResourceService Resources { get; }
+		protected ISettingsService Settings { get; }
 
 		public const int DEFAULT_BRUSH_WIDTH = 2;
+		private string ANTIALIAS_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-antialias";
+		private string ALPHABLEND_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 
 		protected static Cairo.Point point_empty = new Cairo.Point (-500, -500);
 
 		protected BaseTool (IServiceManager services)
 		{
 			Resources = services.GetService<IResourceService> ();
+			Settings = services.GetService<ISettingsService> ();
+
 			tools = services.GetService<IToolService> ();
 			workspace = services.GetService<IWorkspaceService> ();
 
@@ -57,6 +62,10 @@ namespace Pinta.Core
 				if (tools.CurrentTool == this)
 					SetCursor (DefaultCursor);
 			};
+
+			// Give tools a chance to save their settings on application quit
+			Settings.SaveSettingsBeforeQuit += (_, _)
+				=> OnSaveSettings (Settings);
 		}
 
 		/// <summary>
@@ -281,6 +290,17 @@ namespace Pinta.Core
 		}
 
 		/// <summary>
+		/// Called before the application exist to give tool a chance to save settings.
+		/// </summary>
+		protected virtual void OnSaveSettings (ISettingsService settings)
+		{
+			if (alphablending_button is not null)
+				settings.PutSetting (ALPHABLEND_SETTING, alphablending_button.SelectedIndex);
+			if (antialiasing_button is not null)
+				settings.PutSetting (ANTIALIAS_SETTING, antialiasing_button.SelectedIndex);
+		}
+
+		/// <summary>
 		/// Tool should call this in order to change the application cursor.
 		/// Pass 'null' to reset the cursor back to the default.
 		/// </summary>
@@ -309,6 +329,8 @@ namespace Pinta.Core
 
 					alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Pinta.Resources.Icons.BlendingNormal, true);
 					alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
+
+					alphablending_button.SelectedIndex = Settings.GetSetting (ALPHABLEND_SETTING, 0);
 				}
 
 				return alphablending_button;
@@ -322,6 +344,8 @@ namespace Pinta.Core
 
 					antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
 					antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
+
+					antialiasing_button.SelectedIndex = Settings.GetSetting (ANTIALIAS_SETTING, 0);
 				}
 
 				return antialiasing_button;
