@@ -29,7 +29,7 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 ## Getting help/contributing:
 
 - You can get technical help on the [Pinta Google Group](https://groups.google.com/group/pinta-project)
-- You can report bugs on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
+- You can report bugs/issues on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug)
 - You can make suggestions at [Communiroo](https://communiroo.com/pintaproject/pinta/suggestions)
 - You can help translate Pinta to your native language on [Launchpad translations](https://translations.launchpad.net/pinta)
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta)
