@@ -2,4 +2,4 @@
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 
-exec @DOTNET@ @libdir@/@PACKAGE@/Pinta.dll "$@"
+exec dotnet @libdir@/@PACKAGE@/Pinta.dll "$@"
