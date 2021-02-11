@@ -38,7 +38,7 @@
     <binary>pinta</binary>
   </provides>
   <releases>
-    <release version="1.8" date="2021-xx-xx">
+    <release version="1.8" date="2021-01-01">
       <url>https://github.com/PintaProject/Pinta/releases/tag/1.8</url>
     </release>
   </releases>
