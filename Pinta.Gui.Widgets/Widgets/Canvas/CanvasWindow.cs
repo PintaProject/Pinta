@@ -69,7 +69,7 @@ namespace Pinta
 			get {
 				// Get the position of the mouse pointer relative
 				// to canvas scrolled window top-left corner
-				ObsoleteExtensions.GetWidgetPointer (scrolled_window, out var x, out var y);
+				GdkExtensions.GetWidgetPointer (scrolled_window, out int x, out int y, out var mask);
 
 				// Check if the pointer is on the canvas
 				return (x > 0) && (x < scrolled_window.Allocation.Width) &&

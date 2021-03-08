@@ -22,13 +22,6 @@ namespace Pinta.Core
 		public static void AddDefaultToIconFactory (IconFactory factory)
 			=> factory.AddDefault ();
 
-		// https://github.com/GtkSharp/GtkSharp/issues/131
-		public static Gdk.Window GetWindowPointer (Gdk.Window window, out int x, out int y, out ModifierType mask)
-			=> window.GetPointer (out x, out y, out mask);
-
-		public static void GetWidgetPointer (Widget widget, out int x, out int y)
-			=> widget.GetPointer (out x, out y);
-
 		public static FontDescription GetStyleContextFont (StyleContext context, StateFlags flags)
 			=> context.GetFont (flags);
 	}

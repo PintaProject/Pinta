@@ -12,7 +12,7 @@
     <Product />
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.22.25.128" />
+    <PackageReference Include="GtkSharp" Version="3.24.24.4" />
     <PackageReference Include="NGettext" Version="0.6.6" />
     <PackageReference Include="SharpZipLib" Version="1.3.1" />
     <PackageReference Include="ParagonClipper" Version="6.4.2" />

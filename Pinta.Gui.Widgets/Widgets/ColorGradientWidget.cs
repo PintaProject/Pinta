@@ -170,7 +170,7 @@ namespace Pinta.Gui.Widgets
 
 		private void HandleMotionNotifyEvent (object o, MotionNotifyEventArgs args)
 		{
-			ObsoleteExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
+			GdkExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
 
 			var index = FindValueIndex (py);
 			py = (int) NormalizeY (index, py);
@@ -199,7 +199,7 @@ namespace Pinta.Gui.Widgets
 
 		private void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
 		{
-			ObsoleteExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
+			GdkExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
 
 			var index = FindValueIndex ((int) py);
 
@@ -227,7 +227,7 @@ namespace Pinta.Gui.Widgets
 
 		private void DrawTriangles (Context g)
 		{
-			ObsoleteExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
+			GdkExtensions.GetWindowPointer (Window, out var px, out var py, out var mask);
 
 			var rect = GradientRectangle;
 			var all = Allocation.ToCairoRectangle ();
