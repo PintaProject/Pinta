@@ -62,7 +62,7 @@ namespace Pinta
 			
 			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
 
-			aspectCheckbox.Active = true;
+			//aspectCheckbox.Active = true;
 			
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
@@ -87,7 +87,7 @@ namespace Pinta
 			SButton.Clicked += HandleSButtonClicked;
 			SEButton.Clicked += HandleSEButtonClicked;
 			
-			SetAnchor (Anchor.Center);
+			SetAnchor (Anchor.NW);
 			AlternativeButtonOrder = new int[] { (int) Gtk.ResponseType.Ok, (int) Gtk.ResponseType.Cancel };
 			DefaultResponse = Gtk.ResponseType.Ok;
 
@@ -310,8 +310,8 @@ namespace Pinta
 			DefaultWidth = 300;
 			DefaultHeight = 200;
 
-			percentageRadio = new RadioButton (Catalog.GetString ("By percentage:"));
-			absoluteRadio = new RadioButton (percentageRadio, Catalog.GetString ("By absolute size:"));
+			absoluteRadio = new RadioButton (Catalog.GetString ("By absolute size:"));
+			percentageRadio = new RadioButton (absoluteRadio, Catalog.GetString ("By percentage:"));
 
 			percentageSpinner = new SpinButton (1, 1000, 1);
 			widthSpinner = new SpinButton (1, 10000, 1);
@@ -326,7 +326,6 @@ namespace Pinta
 			hbox_percent.PackStart (percentageRadio, true, true, 0);
 			hbox_percent.PackStart (percentageSpinner, false, false, 0);
 			hbox_percent.PackEnd (new Label ("%"), false, false, 0);
-			main_vbox.PackStart (hbox_percent, false, false, 0);
 
 			main_vbox.PackStart (absoluteRadio, false, false, 0);
 
@@ -373,6 +372,8 @@ namespace Pinta
 			grid_align.Add (grid);
 
 			main_vbox.PackStart (grid_align, false, false, 0);
+			
+			main_vbox.PackStart (hbox_percent, false, false, 0);
 
 			VBox.BorderWidth = 2;
 			VBox.Add (main_vbox);
