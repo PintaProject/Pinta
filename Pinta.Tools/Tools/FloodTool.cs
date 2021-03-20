@@ -92,7 +92,7 @@ namespace Pinta.Tools
 			tb.AppendItem (tolerance_label);
 
 			if (tolerance_slider == null)
-				tolerance_slider = new ToolBarSlider (0, 100, 1, 0);
+				tolerance_slider = new ToolBarSlider (0, 100, 1, 35);
 				
 			tb.AppendItem (tolerance_slider);
 		}
