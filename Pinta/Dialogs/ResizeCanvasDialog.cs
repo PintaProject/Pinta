@@ -58,9 +58,7 @@ namespace Pinta
 											 Core.GtkExtensions.DialogButtonsCancelOk())
 		{
 			Build ();
-
-			aspectCheckbox.Active = true;
-			
+						
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
 
@@ -84,7 +82,7 @@ namespace Pinta
 			SButton.Clicked += HandleSButtonClicked;
 			SEButton.Clicked += HandleSEButtonClicked;
 			
-			SetAnchor (Anchor.Center);
+			SetAnchor (Anchor.NW);
 			DefaultResponse = Gtk.ResponseType.Ok;
 
 			widthSpinner.ActivatesDefault = true;
@@ -309,8 +307,8 @@ namespace Pinta
 			DefaultWidth = 300;
 			DefaultHeight = 200;
 
-			percentageRadio = new RadioButton (Translations.GetString ("By percentage:"));
-			absoluteRadio = new RadioButton (percentageRadio, Translations.GetString ("By absolute size:"));
+			absoluteRadio = new RadioButton (Translations.GetString ("By absolute size:"));
+			percentageRadio = new RadioButton (absoluteRadio, Translations.GetString ("By percentage:"));
 
 			percentageSpinner = new SpinButton (1, 1000, 1);
 			widthSpinner = new SpinButton (1, 10000, 1);
@@ -370,7 +368,7 @@ namespace Pinta
 
 			var grid_align = new Alignment (0.5f, 0.5f, 0, 0);
 			grid_align.Add (grid);
-
+			
 			main_vbox.PackStart (grid_align, false, false, 0);
 
 			ContentArea.BorderWidth = 2;
