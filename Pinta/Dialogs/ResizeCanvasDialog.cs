@@ -61,9 +61,7 @@ namespace Pinta
 			Build ();
 			
 			Icon = PintaCore.Resources.GetIcon ("Menu.Image.CanvasSize.png");
-
-			//aspectCheckbox.Active = true;
-			
+						
 			widthSpinner.Value = PintaCore.Workspace.ImageSize.Width;
 			heightSpinner.Value = PintaCore.Workspace.ImageSize.Height;
 
@@ -343,6 +341,7 @@ namespace Pinta
 
 			main_vbox.PackStart (aspectCheckbox, false, false, 0);
 			main_vbox.PackStart (new HSeparator (), false, false, 0);
+			main_vbox.PackStart (hbox_percent, false, false, 0);
 
 			var align_label = new Label (Catalog.GetString ("Anchor:")) { Xalign = 0 };
 			main_vbox.PackStart (align_label, false, false, 0);
@@ -370,10 +369,8 @@ namespace Pinta
 
 			var grid_align = new Alignment (0.5f, 0.5f, 0, 0);
 			grid_align.Add (grid);
-
-			main_vbox.PackStart (grid_align, false, false, 0);
 			
-			main_vbox.PackStart (hbox_percent, false, false, 0);
+			main_vbox.PackStart (grid_align, false, false, 0);
 
 			VBox.BorderWidth = 2;
 			VBox.Add (main_vbox);
