@@ -576,7 +576,13 @@ namespace Pinta.Docking.Gui
 			tab.Text = Title;
 			tab.Notify = show_notification;
 			tab.Dirty = content.IsDirty;
-			if (content.ContentName != null && content.ContentName != "") {
+
+			if (!string.IsNullOrEmpty(content.FullContentName))
+			{
+				tab.Tooltip = content.FullContentName;
+			}
+			else if (!string.IsNullOrEmpty(content.ContentName))
+			{
 				tab.Tooltip = content.ContentName;
 			}
             // JONTODO ?
