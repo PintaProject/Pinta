@@ -231,7 +231,8 @@ namespace Pinta.Actions
 				return false;
 			}
 
-			document.Filename = Path.GetFileName (file);
+			// Set Pathname and Filename properties which triggers the document.Renamed event
+			document.PathAndFileName = file;
 
 			PintaCore.Tools.CurrentTool.DoAfterSave();
 

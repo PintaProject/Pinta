@@ -55,6 +55,8 @@ namespace Pinta.Core
 			NewScreenshot = new Gtk.Action ("NewScreenshot", Catalog.GetString ("New Screenshot..."), null, Stock.Fullscreen);
 			Open = new Gtk.Action ("Open", Catalog.GetString ("Open..."), null, Stock.Open);
 			OpenRecent = new RecentAction ("OpenRecent", Catalog.GetString ("Open Recent"), null, Stock.Open, RecentManager.Default);
+			// Show tooltip on selected file displaying the full path
+			OpenRecent.ShowTips = true;
 			
 			RecentFilter recentFilter = new RecentFilter ();
 			recentFilter.AddApplication ("Pinta");

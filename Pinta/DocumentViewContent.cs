@@ -56,6 +56,11 @@ namespace Pinta
             set { Document.Filename = value; }
         }
 
+        public string FullContentName {
+            get { return Document.PathAndFileName; }
+            set { Document.PathAndFileName = value; }
+        }
+
         public string UntitledName { get; set; }
 
         // We don't put icons on the tabs

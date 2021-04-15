@@ -153,7 +153,12 @@ namespace Pinta.Core
 		/// Directory and file name, like "C:\MyPictures\dog.jpg".
 		/// </summary>
 		public string PathAndFileName {
-			get { return System.IO.Path.Combine (Pathname, Filename); }
+			get {
+				if (!string.IsNullOrEmpty(Pathname) && !string.IsNullOrEmpty(Filename))
+					return System.IO.Path.Combine (Pathname, Filename);
+
+				return string.Empty;
+			}
 			set {
 				if (string.IsNullOrEmpty (value)) {
 					Pathname = string.Empty;

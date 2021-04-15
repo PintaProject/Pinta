@@ -32,6 +32,7 @@ namespace Pinta.Docking.Gui
     public interface IViewContent : IBaseViewContent
 	{
         string ContentName { get; set; }
+        string FullContentName { get; set; }
         string UntitledName { get; set; }
         string StockIconId { get; }
 
