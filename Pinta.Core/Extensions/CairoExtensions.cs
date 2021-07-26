@@ -183,6 +183,7 @@ namespace Pinta.Core
 			}
 
 			g.SetSourceColor (color);
+			g.LineCap = LineCap.Square;
 
 			Rectangle dirty = g.StrokeExtents();
 			g.Stroke ();
