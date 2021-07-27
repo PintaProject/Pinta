@@ -10,6 +10,7 @@ Thanks to the following contributors who worked on this release:
 - @thekolian1996
 - @tdgroot
 - @Nikitayfh
+- @pikachuiscool2
 
 ### Added
 - The canvas can now be scrolled horizontally by holding Shift while using the mouse wheel (#141)
@@ -33,6 +34,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where the document might not be marked as modified after certain undo / redo actions ([#1905165](https://bugs.launchpad.net/pinta/+bug/1905165)).
 - Fixed a bug where the Move Selected Pixels tool did not handle transparent pixels correctly ([#1905706](https://bugs.launchpad.net/pinta/+bug/1905706)).
 - Fixed a bug where deselecting via a single click in the select tool could cause bugs with undoing earlier history items ([#1905719](https://bugs.launchpad.net/pinta/+bug/1905719)).
+- Fixed a bug where the initial corner of a rectangle shape could be cut off ([#1922470](https://bugs.launchpad.net/pinta/+bug/1922470)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
