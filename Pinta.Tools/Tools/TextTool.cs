@@ -1039,13 +1039,13 @@ namespace Pinta.Tools
 
 				//Fill in background
 				if (BackgroundFill) {
-					if (selection != null) {
-						g2.AppendPath (selection.SelectionPath);
-						g2.FillRule = Cairo.FillRule.EvenOdd;
-						g2.Clip ();
-					}
-					
 					using (var g2 = new Cairo.Context (surf)) {
+						if (selection != null) {
+							g2.AppendPath (selection.SelectionPath);
+							g2.FillRule = Cairo.FillRule.EvenOdd;
+							g2.Clip ();
+						}
+						
 						g2.FillRectangle(CurrentTextLayout.GetLayoutBounds().ToCairoRectangle(), PintaCore.Palette.SecondaryColor);
 					}
 				}
