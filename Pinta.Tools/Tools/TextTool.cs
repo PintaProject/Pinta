@@ -784,7 +784,7 @@ namespace Pinta.Tools
 						break;
 
 					case Gdk.Key.Escape:
-						StopEditing(false);
+						StopEditing(true);
 						return;
 					case Gdk.Key.Insert:
 						if (modifier.IsShiftPressed ())
