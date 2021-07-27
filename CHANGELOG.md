@@ -11,6 +11,7 @@ Thanks to the following contributors who worked on this release:
 - @thekolian1996
 - @tdgroot
 - @Nikitayfh
+- @pikachuiscool2
 
 ### Added
 - Ported to GTK3 and .NET 5
@@ -60,6 +61,7 @@ Thanks to the following contributors who worked on this release:
 - Improved the UX of the Close and Save As confirmation dialogs ([#1909576](https://bugs.launchpad.net/pinta/+bug/1909576), [#1909688](https://bugs.launchpad.net/pinta/+bug/1909688)).
 - Fixed a bug where the Pan tool did not work if scrolling could only occur in the Y direction ([#1909910](https://bugs.launchpad.net/pinta/+bug/1909910)).
 - Fixed issues where the zoom level was not maintained when resizing an image ([#1889673](https://bugs.launchpad.net/pinta/+bug/1889673)).
+- Fixed a bug where the initial corner of a rectangle shape could be cut off ([#1922470](https://bugs.launchpad.net/pinta/+bug/1922470)).
 
 ## [1.7](https://github.com/PintaProject/Pinta/releases/tag/1.7) - 2020/08/04
 
