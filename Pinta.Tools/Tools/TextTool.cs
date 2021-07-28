@@ -506,7 +506,7 @@ namespace Pinta.Tools
 			PintaCore.Layers.LayerRemoved -= HandleSelectedLayerChanged;
 			PintaCore.Layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
 
-			StopEditing(false);
+			StopEditing(true);
 		}
 #endregion
 
