@@ -1028,9 +1028,7 @@ namespace Pinta.Tools
 				}
 
 				if (selection != null) {
-					g.AppendPath (selection.SelectionPath);
-					g.FillRule = Cairo.FillRule.EvenOdd;
-					g.Clip ();
+					selection.Clip(g);
 				}
 
 				g.MoveTo (new Cairo.PointD (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y));
@@ -1041,9 +1039,7 @@ namespace Pinta.Tools
 				if (BackgroundFill) {
 					using (var g2 = new Cairo.Context (surf)) {
 						if (selection != null) {
-							g2.AppendPath (selection.SelectionPath);
-							g2.FillRule = Cairo.FillRule.EvenOdd;
-							g2.Clip ();
+							selection.Clip(g2);
 						}
 						
 						g2.FillRectangle(CurrentTextLayout.GetLayoutBounds().ToCairoRectangle(), PintaCore.Palette.SecondaryColor);
