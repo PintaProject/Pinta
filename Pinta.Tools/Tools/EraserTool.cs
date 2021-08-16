@@ -74,6 +74,7 @@ namespace Pinta.Tools
         private ImageSurface copySurfacePart(ImageSurface surf, Gdk.Rectangle dest_rect)
         {
             ImageSurface tmp_surface = new ImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
+            Pinta.Core.Utilities.CheckHandleImageSurface (tmp_surface);
 
             using (Context g = new Context (tmp_surface)) {
                 g.Operator = Operator.Source;

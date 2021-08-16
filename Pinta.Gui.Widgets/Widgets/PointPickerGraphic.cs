@@ -51,7 +51,8 @@ namespace Pinta.Gui.Widgets
 			double scaley = (double)Allocation.Height / (double)PintaCore.Workspace.ImageSize.Height;
 			
 			thumbnail = new Cairo.ImageSurface (Cairo.Format.Argb32, Allocation.Width, Allocation.Height);
-			
+			Pinta.Core.Utilities.CheckHandleImageSurface (thumbnail);
+
 			using (Cairo.Context g = new Cairo.Context (thumbnail)) {
 				g.Scale (scalex, scaley);
 				foreach (Layer layer in PintaCore.Layers.GetLayersToPaint ()) {

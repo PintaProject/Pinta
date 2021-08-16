@@ -38,6 +38,7 @@ namespace Pinta.Docking
         public static Gdk.Pixbuf WithAlpha (this Gdk.Pixbuf image, double opacity)
         {
             using (var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, image.Width, image.Height)) {
+                Pinta.Core.Utilities.CheckHandleImageSurface (surf);
                 using (var g = new Cairo.Context (surf)) {
                     CairoHelper.SetSourcePixbuf (g, image, 0, 0);
                     g.PaintWithAlpha (opacity);

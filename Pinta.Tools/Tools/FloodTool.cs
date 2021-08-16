@@ -124,6 +124,7 @@ namespace Pinta.Tools
 
 			ImageSurface surface = doc.CurrentUserLayer.Surface;
 			using (var stencil_surface = new ImageSurface (Format.Argb32, (int)surface.Width, (int)surface.Height)) {
+				Pinta.Core.Utilities.CheckHandleImageSurface (stencil_surface);
 				IBitVector2D stencilBuffer = new BitVector2DSurfaceAdapter (stencil_surface);
 				int tol = (int)(Tolerance * Tolerance * 256);
 				Rectangle boundingBox;

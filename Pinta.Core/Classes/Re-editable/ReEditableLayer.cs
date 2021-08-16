@@ -121,7 +121,10 @@ namespace Pinta.Core
 		/// </summary>
 		private void SetupLayer()
 		{
-			actualLayer = new Layer(new Cairo.ImageSurface(parent.Surface.Format, parent.Surface.Width, parent.Surface.Height));
+			var surface = new Cairo.ImageSurface (parent.Surface.Format, parent.Surface.Width, parent.Surface.Height);
+			Pinta.Core.Utilities.CheckHandleImageSurface (surface);
+			actualLayer = new Layer(surface);
+
 
 			isLayerSetup = true;
 		}

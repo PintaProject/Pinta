@@ -32,6 +32,7 @@ using System.IO;
 using Mono.Unix;
 using Mono.Addins;
 using System.Collections.Generic;
+using Pinta;
 
 namespace Pinta.Core
 {
@@ -397,6 +398,7 @@ namespace Pinta.Core
 			shapeY = imgToShapeY - iconBBox.Top;
 
 			using (ImageSurface i = new ImageSurface (Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
+				Pinta.Core.Utilities.CheckHandleImageSurface (i);
 				using (Context g = new Context (i)) {
 					// Don't show shape if shapeWidth less than 3,
 					if (shapeWidth > 3) {

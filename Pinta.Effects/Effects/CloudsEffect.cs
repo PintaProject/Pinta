@@ -177,6 +177,7 @@ namespace Pinta.Effects
 
             using (var temp = new ImageSurface (Format.Argb32, roi.Width, roi.Height)) {
 
+                Pinta.Core.Utilities.CheckHandleImageSurface (temp);
                 RenderClouds (temp, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), Data.Power / 100.0, 
                               PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());
                 

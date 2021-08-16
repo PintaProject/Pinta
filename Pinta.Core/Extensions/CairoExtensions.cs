@@ -938,12 +938,15 @@ namespace Pinta.Core
 			return new Gdk.Size (point.X, point.Y);
 		}
 
-		public static ImageSurface Clone (this ImageSurface surf)
+		public static ImageSurface Clone (this ImageSurface surf) 
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
 
 			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
+			Pinta.Core.Utilities.CheckHandleImageSurface (newsurf);
+
+
 
 			using (Context g = new Context (newsurf)) {
 				g.SetSource (surf);
@@ -958,6 +961,7 @@ namespace Pinta.Core
 			bool ret = false;
 
 			ColorBgra* ptr = (ColorBgra*)surf.DataPtr;
+
 			int width = surf.Width;
 
 			for (int x = 0; x < width; x++)
@@ -1763,7 +1767,7 @@ namespace Pinta.Core
             }
         }
 
-        public enum ExtendedOperators
+public enum ExtendedOperators
         {
             Clear = 0,
 

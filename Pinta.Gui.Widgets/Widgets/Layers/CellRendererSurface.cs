@@ -42,6 +42,7 @@ namespace Pinta.Gui.Widgets
 			SetFixedSize (width, height);
 
 			transparent = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
+			Pinta.Core.Utilities.CheckHandleImageSurface ((Cairo.ImageSurface) transparent);
 			Cairo.Color gray = new Cairo.Color (.75, .75, .75);
 
 			// Create checkerboard background	

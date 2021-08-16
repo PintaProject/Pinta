@@ -121,6 +121,7 @@ namespace Pinta.Gui.Widgets
 					(canvas as IDisposable).Dispose ();
 
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
+				Pinta.Core.Utilities.CheckHandleImageSurface (canvas);
 			}
 
 			cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);

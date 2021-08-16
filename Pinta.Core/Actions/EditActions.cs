@@ -263,6 +263,7 @@ namespace Pinta.Core
 					return;
 			
 				ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
+				Pinta.Core.Utilities.CheckHandleImageSurface (dest);
 
 				using (Context g = new Context (dest)) {
 					g.SetSourceSurface (src, -rect.X, -rect.Y);
@@ -288,6 +289,7 @@ namespace Pinta.Core
 
 				// Copy it to a correctly sized surface 
 				using (var dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height)) {
+					Pinta.Core.Utilities.CheckHandleImageSurface (dest);
 					using (Context g = new Context (dest)) {
 						g.SetSourceSurface (src, -rect.X, -rect.Y);
 						g.Paint ();

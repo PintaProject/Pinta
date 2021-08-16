@@ -59,7 +59,8 @@ namespace Pinta
 		internal uint TimerHandle;
 
 		string[] authors = new string[] {
-            "Cameron White (@cameronwhite)",
+		"Yamin Bismilla (@yaminb)",
+	    "Cameron White (@cameronwhite)",
             "Jonathan Pobst (@jpobst)",
             "Robert Nordan (@robpvn)",
             "A. Karon @akaro2424",

@@ -160,8 +160,9 @@ namespace Pinta.Core
         public static Cairo.Surface ToSurface (this Pixbuf pixbuf)
         {
             var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
+            Pinta.Core.Utilities.CheckHandleImageSurface (surface);
 
-            using (var g = new Cairo.Context (surface)) {
+			using (var g = new Cairo.Context (surface)) {
                 Gdk.CairoHelper.SetSourcePixbuf (g, pixbuf, 0, 0);
                 g.Paint ();
             }

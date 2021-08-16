@@ -216,6 +216,7 @@ namespace Pinta.Gui.Widgets
 				if (layer == doc.CurrentUserLayer && doc.ShowSelectionLayer) {
 					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width,
 					                                               thumbnail_height);
+					Pinta.Core.Utilities.CheckHandleImageSurface (active_layer_surface);
 					canvas_renderer.Initialize (doc.ImageSize,
 					                            new Gdk.Size (thumbnail_width, thumbnail_height));
 

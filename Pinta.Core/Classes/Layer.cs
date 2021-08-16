@@ -160,6 +160,7 @@ namespace Pinta.Core
 		{
 			var old_size = PintaCore.Workspace.ImageSize;
 			var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+			Pinta.Core.Utilities.CheckHandleImageSurface (dest);
 			using (var g = new Context (dest))
 			{
 				g.Transform (xform);
@@ -218,6 +219,7 @@ namespace Pinta.Core
 		public virtual void Resize (int width, int height)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+			Pinta.Core.Utilities.CheckHandleImageSurface (dest);
 			Pixbuf pb = Surface.ToPixbuf();
 			Pixbuf pbScaled = pb.ScaleSimple (width, height, InterpType.Bilinear);
 
@@ -235,6 +237,7 @@ namespace Pinta.Core
 		public virtual void ResizeCanvas (int width, int height, Anchor anchor)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+			Pinta.Core.Utilities.CheckHandleImageSurface (dest);
 
 			int delta_x = Surface.Width - width;
 			int delta_y = Surface.Height - height;
@@ -280,6 +283,8 @@ namespace Pinta.Core
 		public virtual void Crop (Gdk.Rectangle rect, Path selection)
 		{
 			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
+
+			Pinta.Core.Utilities.CheckHandleImageSurface (dest);
 
 			using (Context g = new Context (dest)) {
 				// Move the selected content to the upper left

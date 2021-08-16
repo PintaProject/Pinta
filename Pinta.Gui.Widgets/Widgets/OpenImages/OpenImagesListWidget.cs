@@ -198,6 +198,7 @@ namespace Pinta.Gui.Widgets
 		private Cairo.ImageSurface CreateImagePreview (Document doc)
 		{
 			var surface = new Cairo.ImageSurface (Cairo.Format.Argb32, PreviewWidth, PreviewHeight);
+			Pinta.Core.Utilities.CheckHandleImageSurface (surface);
 			canvas_renderer.Initialize (doc.ImageSize, new Gdk.Size (PreviewWidth, PreviewHeight));
 			canvas_renderer.Render (doc.GetLayersToPaint (), surface, Gdk.Point.Zero);
 			return surface;

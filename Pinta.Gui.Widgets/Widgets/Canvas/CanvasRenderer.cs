@@ -82,6 +82,7 @@ namespace Pinta.Gui.Widgets
                         layer.Draw (g, layer.Surface, layer.Opacity, false);
                     else {
                         using (var scaled = new Cairo.ImageSurface (Cairo.Format.Argb32, dst.Width, dst.Height)) {
+                            Pinta.Core.Utilities.CheckHandleImageSurface (scaled);
                             g.Save ();
                             // Have to undo the translate set above
                             g.Translate (offset.X, offset.Y);
@@ -103,13 +104,18 @@ namespace Pinta.Gui.Widgets
 		private Layer OffsetLayer {
 			get {
 				// Create one if we don't have one
-				if (offset_layer == null)
-					offset_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
+				if (offset_layer == null) {
+					var surf = new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height);
+					Pinta.Core.Utilities.CheckHandleImageSurface (surf);
+					offset_layer = new Layer (surf);
+				}
 
 				// If we have the wrong size one, dispose it and create the correct size
 				if (offset_layer.Surface.Width != source_size.Width || offset_layer.Surface.Height != source_size.Height) {
 					(offset_layer.Surface as IDisposable).Dispose ();
-					offset_layer = new Layer (new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height));
+					var surf = new Cairo.ImageSurface (Cairo.Format.ARGB32, source_size.Width, source_size.Height);
+					Pinta.Core.Utilities.CheckHandleImageSurface (surf);
+					offset_layer = new Layer ();
 				}
 
 				return offset_layer;

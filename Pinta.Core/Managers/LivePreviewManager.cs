@@ -90,6 +90,7 @@ namespace Pinta.Core
 											  PintaCore.Workspace.ImageSize.Width,
 											  PintaCore.Workspace.ImageSize.Height);
 
+			Pinta.Core.Utilities.CheckHandleImageSurface (live_preview_surface);
 			// Handle selection path.
 			PintaCore.Tools.Commit ();
 			var selection = PintaCore.Workspace.ActiveDocument.Selection;
