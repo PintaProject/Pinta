@@ -938,12 +938,12 @@ namespace Pinta.Core
 			return new Gdk.Size (point.X, point.Y);
 		}
 
-		public static ImageSurface Clone (this ImageSurface surf)
+		public static ImageSurface Clone (this ImageSurface surf) 
 		{
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
 
-			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
+			ImageSurface newsurf = CairoExtensions.CreateImageSurface (surf.Format, surf.Width, surf.Height);
 
 			using (Context g = new Context (newsurf)) {
 				g.SetSource (surf);
@@ -958,6 +958,7 @@ namespace Pinta.Core
 			bool ret = false;
 
 			ColorBgra* ptr = (ColorBgra*)surf.DataPtr;
+
 			int width = surf.Width;
 
 			for (int x = 0; x < width; x++)
@@ -1762,6 +1763,24 @@ namespace Pinta.Core
                     break;
             }
         }
+
+
+	/*
+         * CreateImageSurface
+         * Utility function used to create new ImageSurface
+         * The internal creation can fail if the image is too large / not enough memory
+         * This condition is detected and an exception is thrown at the application level
+         */ 
+        public static ImageSurface CreateImageSurface(Cairo.Format format, int width, int height)
+	{
+	    ImageSurface surf = new Cairo.ImageSurface (format, width, height);
+	    if (surf == null || surf.Status == Cairo.Status.NoMemory) 
+	    {
+		throw new OutOfMemoryException ("Unable to allocate memory for Image");
+	    }
+
+            return surf;
+	}
 
         public enum ExtendedOperators
         {

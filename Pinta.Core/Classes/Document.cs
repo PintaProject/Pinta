@@ -308,7 +308,8 @@ namespace Pinta.Core
 
 		public UserLayer CreateLayer(string name, int width, int height)
 		{
-			Cairo.ImageSurface surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
+			Cairo.ImageSurface surface = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, width, height);
+
 			UserLayer layer = new UserLayer(surface) { Name = name };
 
 			return layer;
@@ -468,7 +469,7 @@ namespace Pinta.Core
 		
 		public ImageSurface GetClippedLayer (int index)
 		{
-			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
+			Cairo.ImageSurface surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
 			using (Cairo.Context g = new Cairo.Context (surf)) {
 				g.AppendPath(Selection.SelectionPath);
@@ -486,7 +487,8 @@ namespace Pinta.Core
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			using (var dst = new ImageSurface (Format.Argb32, 1, 1)) {
+			using (var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1)) {
+
 				using (var g = new Context (dst)) {
 					foreach (var layer in GetLayersToPaint ()) {
 						var color = layer.Surface.GetColorBgraUnchecked (x, y).ToStraightAlpha ().ToCairoColor ();
@@ -506,7 +508,7 @@ namespace Pinta.Core
 		public ImageSurface GetFlattenedImage ()
 		{
 			// Create a new image surface
-			var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
+			var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);
 
 			// Blend each visible layer onto our surface
 			foreach (var layer in GetLayersToPaint (include_tool_layer: false)) {

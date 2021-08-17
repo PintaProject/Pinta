@@ -120,7 +120,7 @@ namespace Pinta.Gui.Widgets
 				if (canvas != null)
 					(canvas as IDisposable).Dispose ();
 
-				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
+				canvas = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
 			cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);
