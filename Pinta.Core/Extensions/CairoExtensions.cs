@@ -943,10 +943,7 @@ namespace Pinta.Core
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
 
-			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
-			Pinta.Core.Utilities.CheckHandleImageSurface (newsurf);
-
-
+			ImageSurface newsurf = CairoExtensions.CreateImageSurface (surf.Format, surf.Width, surf.Height);
 
 			using (Context g = new Context (newsurf)) {
 				g.SetSource (surf);
@@ -1767,7 +1764,25 @@ namespace Pinta.Core
             }
         }
 
-public enum ExtendedOperators
+
+	/*
+         * CreateImageSurface
+         * Utility function used to create new ImageSurface
+         * The internal creation can fail if the image is too large / not enough memory
+         * This condition is detected and an exception is thrown at the application level
+         */ 
+        public static ImageSurface CreateImageSurface(Cairo.Format format, int width, int height)
+	{
+	    ImageSurface surf = new Cairo.ImageSurface (format, width, height);
+	    if (surf == null || surf.Status == Cairo.Status.NoMemory) 
+	    {
+		throw new OutOfMemoryException ("Unable to allocate memory for Image");
+	    }
+
+            return surf;
+	}
+
+        public enum ExtendedOperators
         {
             Clear = 0,
 

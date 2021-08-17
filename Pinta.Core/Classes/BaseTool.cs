@@ -397,8 +397,7 @@ namespace Pinta.Core
 			shapeX = imgToShapeX - iconBBox.Left;
 			shapeY = imgToShapeY - iconBBox.Top;
 
-			using (ImageSurface i = new ImageSurface (Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
-				Pinta.Core.Utilities.CheckHandleImageSurface (i);
+			using (ImageSurface i = CairoExtensions.CreateImageSurface (Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
 				using (Context g = new Context (i)) {
 					// Don't show shape if shapeWidth less than 3,
 					if (shapeWidth > 3) {

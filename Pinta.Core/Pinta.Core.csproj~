@@ -204,6 +204,7 @@
     <Compile Include="PaletteFormats\GimpPalette.cs" />
     <Compile Include="PaletteFormats\PaletteFormats.cs" />
     <Compile Include="PaletteFormats\PaintShopProPalette.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
 
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

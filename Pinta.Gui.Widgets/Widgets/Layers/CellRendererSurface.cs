@@ -41,8 +41,7 @@ namespace Pinta.Gui.Widgets
 			// TODO: Respect cell padding (Xpad and Ypad).
 			SetFixedSize (width, height);
 
-			transparent = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
-			Pinta.Core.Utilities.CheckHandleImageSurface ((Cairo.ImageSurface) transparent);
+			transparent = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, width, height);
 			Cairo.Color gray = new Cairo.Color (.75, .75, .75);
 
 			// Create checkerboard background	

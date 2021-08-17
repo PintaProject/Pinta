@@ -214,9 +214,8 @@ namespace Pinta.Gui.Widgets
 
 				// Draw the selection layer on top of the active layer.
 				if (layer == doc.CurrentUserLayer && doc.ShowSelectionLayer) {
-					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width,
+					active_layer_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, thumbnail_width,
 					                                               thumbnail_height);
-					Pinta.Core.Utilities.CheckHandleImageSurface (active_layer_surface);
 					canvas_renderer.Initialize (doc.ImageSize,
 					                            new Gdk.Size (thumbnail_width, thumbnail_height));
 

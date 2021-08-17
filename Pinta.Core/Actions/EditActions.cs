@@ -262,8 +262,7 @@ namespace Pinta.Core
 				if (rect.Width == 0 || rect.Height == 0)
 					return;
 			
-				ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
-				Pinta.Core.Utilities.CheckHandleImageSurface (dest);
+				ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
 				using (Context g = new Context (dest)) {
 					g.SetSourceSurface (src, -rect.X, -rect.Y);
@@ -288,8 +287,8 @@ namespace Pinta.Core
 				var rect = doc.GetSelectedBounds (true);
 
 				// Copy it to a correctly sized surface 
-				using (var dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height)) {
-					Pinta.Core.Utilities.CheckHandleImageSurface (dest);
+				using (var dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height)) {
+
 					using (Context g = new Context (dest)) {
 						g.SetSourceSurface (src, -rect.X, -rect.Y);
 						g.Paint ();
