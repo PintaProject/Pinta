@@ -88,7 +88,7 @@ namespace Pinta.Core
 			this.effect = effect;
 
 			//TODO Use the current tool layer instead.
-			live_preview_surface = new Cairo.ImageSurface (Cairo.Format.Argb32,
+			live_preview_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32,
 											  PintaCore.Workspace.ImageSize.Width,
 											  PintaCore.Workspace.ImageSize.Height);
 

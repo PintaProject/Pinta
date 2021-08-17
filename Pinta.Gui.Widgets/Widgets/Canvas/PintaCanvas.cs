@@ -118,7 +118,7 @@ namespace Pinta.Gui.Widgets
 			// Resize our offscreen surface to a surface the size of our drawing area
 			if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
 				canvas?.Dispose ();
-				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
+				canvas = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
 			}
 
 			cr.Initialize (document.ImageSize, document.Workspace.CanvasSize);

@@ -138,7 +138,7 @@ namespace Pinta.Core
 
 		public static Cairo.Surface ToSurface(this Pixbuf pixbuf)
 		{
-			var surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
+			var surface = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, pixbuf.Width, pixbuf.Height);
 
 			using (var g = new Cairo.Context(surface))
 			{
@@ -156,7 +156,7 @@ namespace Pinta.Core
 
 		public static Pixbuf CreateColorSwatch(int size, Color color)
 		{
-			using (var surf = new Cairo.ImageSurface(Cairo.Format.Argb32, size, size))
+			using (var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, size, size))
 			using (var g = new Cairo.Context(surf))
 			{
 				g.FillRectangle(new Cairo.Rectangle(0, 0, size, size), color.ToCairoColor());
@@ -227,7 +227,7 @@ namespace Pinta.Core
 			shapeX = imgToShapeX - iconBBox.Left;
 			shapeY = imgToShapeY - iconBBox.Top;
 
-			using (var i = new Cairo.ImageSurface (Cairo.Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
+			using (var i = CairoExtensions.CreateImageSurface (Cairo.Format.ARGB32, iconBBox.Width, iconBBox.Height)) {
 				using (var g = new Cairo.Context (i)) {
 					// Don't show shape if shapeWidth less than 3,
 					if (shapeWidth > 3) {

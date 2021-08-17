@@ -54,7 +54,7 @@ namespace Pinta.Gui.Widgets
 			var scalex = (double) Allocation.Width / (double) PintaCore.Workspace.ImageSize.Width;
 			var scaley = (double) Allocation.Height / (double) PintaCore.Workspace.ImageSize.Height;
 
-			thumbnail = new ImageSurface (Format.Argb32, Allocation.Width, Allocation.Height);
+			thumbnail = CairoExtensions.CreateImageSurface (Format.Argb32, Allocation.Width, Allocation.Height);
 
 			using (var g = new Context (thumbnail)) {
 				g.Scale (scalex, scaley);

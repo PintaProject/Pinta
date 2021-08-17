@@ -142,7 +142,7 @@ namespace Pinta.Tools
 
 		private ImageSurface CopySurfacePart (ImageSurface surf, Gdk.Rectangle dest_rect)
 		{
-			var tmp_surface = new ImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
+			var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
 			using (var g = new Context (tmp_surface)) {
 				g.Operator = Operator.Source;

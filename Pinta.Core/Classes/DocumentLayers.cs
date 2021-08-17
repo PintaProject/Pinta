@@ -135,7 +135,7 @@ namespace Pinta.Core
 			width ??= document.ImageSize.Width;
 			height ??= document.ImageSize.Height;
 
-			var surface = new ImageSurface (Format.ARGB32, width.Value, height.Value);
+			var surface = CairoExtensions.CreateImageSurface (Format.ARGB32, width.Value, height.Value);
 			var layer = new UserLayer (surface) { Name = name };
 
 			return layer;
@@ -283,7 +283,7 @@ namespace Pinta.Core
 		/// </summary>
 		public ImageSurface GetClippedLayer (int index)
 		{
-			var surf = new ImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
 			using (var g = new Context (surf)) {
 				g.AppendPath (document.Selection.SelectionPath);
@@ -302,7 +302,7 @@ namespace Pinta.Core
 		internal ImageSurface GetFlattenedImage ()
 		{
 			// Create a new image surface
-			var surf = new ImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
 			// Blend each visible layer onto our surface
 			foreach (var layer in GetLayersToPaint (includeToolLayer: false)) {

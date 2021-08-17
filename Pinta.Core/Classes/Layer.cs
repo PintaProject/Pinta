@@ -159,7 +159,8 @@ namespace Pinta.Core
 		public virtual void ApplyTransform (Matrix xform, Size new_size)
 		{
 			var old_size = PintaCore.Workspace.ImageSize;
-			var dest = new ImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+			var dest = CairoExtensions.CreateImageSurface (Format.ARGB32, new_size.Width, new_size.Height);
+
 			using (var g = new Context (dest))
 			{
 				g.Transform (xform);
@@ -217,7 +218,8 @@ namespace Pinta.Core
 
 		public virtual void Resize (int width, int height)
 		{
-			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
+
 			Pixbuf pb = Surface.ToPixbuf();
 			Pixbuf pbScaled = pb.ScaleSimple (width, height, InterpType.Bilinear);
 
@@ -234,7 +236,7 @@ namespace Pinta.Core
 
 		public virtual void ResizeCanvas (int width, int height, Anchor anchor)
 		{
-			ImageSurface dest = new ImageSurface (Format.Argb32, width, height);
+			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
 
 			int delta_x = Surface.Width - width;
 			int delta_y = Surface.Height - height;
@@ -279,7 +281,9 @@ namespace Pinta.Core
 
 		public virtual void Crop (Gdk.Rectangle rect, Path? selection)
 		{
-			ImageSurface dest = new ImageSurface (Format.Argb32, rect.Width, rect.Height);
+			ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
+
+
 
 			using (Context g = new Context (dest)) {
 				// Move the selected content to the upper left

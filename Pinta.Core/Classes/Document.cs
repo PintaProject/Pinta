@@ -243,7 +243,7 @@ namespace Pinta.Core
 		/// </summary>
 		public ColorBgra GetComputedPixel (int x, int y)
 		{
-			using (var dst = new ImageSurface (Format.Argb32, 1, 1)) {
+			using (var dst = CairoExtensions.CreateImageSurface (Format.Argb32, 1, 1)) {
 				using (var g = new Context (dst)) {
 					foreach (var layer in Layers.GetLayersToPaint ()) {
 						var color = layer.Surface.GetColorBgraUnchecked (x, y).ToStraightAlpha ().ToCairoColor ();

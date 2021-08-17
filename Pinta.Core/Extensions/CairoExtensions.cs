@@ -866,7 +866,7 @@ namespace Pinta.Core
 			if (PintaCore.Workspace.HasOpenDocuments)
 				PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
 
-			ImageSurface newsurf = new ImageSurface (surf.Format, surf.Width, surf.Height);
+			ImageSurface newsurf = CairoExtensions.CreateImageSurface (surf.Format, surf.Width, surf.Height);
 
 			using (Context g = new Context (newsurf)) {
 				g.SetSource (surf);
@@ -1610,7 +1610,7 @@ namespace Pinta.Core
 
 		public static ImageSurface CreateTransparentBackgroundSurface (int size)
 		{
-			var surface = new ImageSurface (Format.Argb32, size, size);
+			var surface = CreateImageSurface (Format.Argb32, size, size);
 
 			// Draw the checkerboard
 			using (var g = new Context (surface)) {
@@ -1936,6 +1936,19 @@ namespace Pinta.Core
 		public static bool IsNotSet (this Point p)
 		{
 			return p.X == int.MinValue && p.Y == int.MinValue;
+		}
+
+		/// <summary>
+		/// Wrapper method to create an ImageSurface and handle allocation failures.
+		/// </summary>
+		public static ImageSurface CreateImageSurface (Cairo.Format format, int width, int height)
+		{
+			ImageSurface surf = new Cairo.ImageSurface (format, width, height);
+			if (surf == null || surf.Status == Cairo.Status.NoMemory) {
+				throw new OutOfMemoryException ("Unable to allocate memory for image");
+			}
+
+			return surf;
 		}
 
 		public enum ExtendedOperators

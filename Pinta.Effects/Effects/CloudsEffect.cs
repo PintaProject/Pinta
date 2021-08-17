@@ -174,7 +174,7 @@ namespace Pinta.Effects
 		{
             var r = roi.ToCairoRectangle ();
 
-            using (var temp = new ImageSurface (Format.Argb32, roi.Width, roi.Height)) {
+            using (var temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height)) {
 
                 RenderClouds (temp, roi, Data.Scale, (byte)(Data.Seed ^ instanceSeed), Data.Power / 100.0, 
                               PintaCore.Palette.PrimaryColor.ToColorBgra (), PintaCore.Palette.SecondaryColor.ToColorBgra ());

@@ -259,7 +259,7 @@ namespace Pinta.Gui.Widgets
 				// If this is the currently selected layer, we may need to draw the
 				// selection layer over it, like when dragging a selection.
 				if (layer == doc.Layers.CurrentUserLayer && doc.Layers.ShowSelectionLayer) {
-					active_layer_surface = new Cairo.ImageSurface (Cairo.Format.Argb32, thumbnail_width, thumbnail_height);
+					active_layer_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, thumbnail_width, thumbnail_height);
 					canvas_renderer.Initialize (doc.ImageSize, new Gdk.Size (thumbnail_width, thumbnail_height));
 
 					var layers = new List<Layer> { layer, doc.Layers.SelectionLayer };
