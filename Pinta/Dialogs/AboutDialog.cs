@@ -318,6 +318,8 @@ namespace Pinta
 
 			AddButton (Gtk.Stock.Close, (int)ResponseType.Close);
 
+			this.Resizable = true;
+
 			ShowAll ();
 		}
 
