@@ -111,7 +111,7 @@ namespace Pinta
 		void CopyButton_Clicked (object sender, EventArgs e)
 		{
 			String delimeter = ",";
-			String linesep = "\n";
+			String linesep = Environment.NewLine;
 
 			StringBuilder vinfo = new StringBuilder ();
 			//copy the version information is 'csv style'
