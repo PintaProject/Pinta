@@ -28,6 +28,7 @@
 using System;
 using Gtk;
 using System.Reflection;
+using System.Text;
 using Pinta.Core;
 
 namespace Pinta
@@ -36,11 +37,10 @@ namespace Pinta
 	{
 		private ListStore? data = null;
 		private CellRenderer cellRenderer = new CellRendererText ();
+		private TreeView treeView = new TreeView ();
 
 		public VersionInformationTabPage ()
 		{
-			TreeView treeView = new TreeView ();
-
 			TreeViewColumn treeViewColumnTitle = new TreeViewColumn (Translations.GetString ("Title"), cellRenderer, "text", 0);
 			treeViewColumnTitle.FixedWidth = 200;
 			treeViewColumnTitle.Sizing = TreeViewColumnSizing.Fixed;
@@ -62,7 +62,19 @@ namespace Pinta
 
 			BorderWidth = 6;
 
-			PackStart (scrolledWindow, true, true, 0);
+
+			var toplayout = new VBox();
+			var copyButton = new Button (Translations.GetString ("Copy Version Info"));
+			copyButton.Clicked += CopyButton_Clicked;
+
+
+			toplayout.Add (copyButton);
+			toplayout.Add (scrolledWindow);
+			toplayout.Homogeneous = false;
+			toplayout.SetChildPacking (copyButton, false, false, 0, PackType.Start);
+			toplayout.SetChildPacking (scrolledWindow, true, true, 0, PackType.End);
+
+			PackStart (toplayout, true, true, 0);
 
 			foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies ()) {
 				try {
@@ -71,8 +83,10 @@ namespace Pinta
 				} catch { }
 			}
 
+
 			data.SetSortColumnId (0, SortType.Ascending);
 		}
+
 
 		protected override void OnDestroyed ()
 		{
@@ -83,5 +97,55 @@ namespace Pinta
 
 			base.OnDestroyed ();
 		}
+
+		void CopyButton_Clicked (object? sender, EventArgs e)
+		{
+			String delimeter = ",";
+			String linesep = Environment.NewLine;
+
+			StringBuilder vinfo = new StringBuilder ();
+			//copy the version information is 'csv style'
+			TreeIter iter;
+
+			if (!treeView.Model.GetIterFirst (out iter)) {
+				return;
+			}
+
+	                //do headers
+			for (int col = 0; col < treeView.Model.NColumns; col++) {
+				if (col != 0) {
+					vinfo.Append (delimeter);
+				}
+
+				vinfo.Append (treeView.GetColumn (col).Title);
+			}
+
+			vinfo.Append (linesep);
+
+
+			do {
+				for (int col = 0; col < treeView.Model.NColumns; col++) {
+
+					String val = (string) treeView.Model.GetValue (iter, col);
+					if (col != 0) {
+						vinfo.Append (delimeter);
+					}
+
+					vinfo.Append (val);
+				}
+
+				vinfo.Append (linesep);
+			} while (treeView.Model.IterNext (ref iter));
+
+
+
+			if (vinfo.Length > 0) {
+				Gtk.Clipboard clipboard = Gtk.Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
+				clipboard.Text = vinfo.ToString ();
+			}
+		
+
+		}
+
 	}
 }

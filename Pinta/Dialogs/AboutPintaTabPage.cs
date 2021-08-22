@@ -36,6 +36,7 @@ namespace Pinta
 		public AboutPintaTabPage ()
 		{
 			Label label = new Label ();
+			label.Selectable = true;
 			label.Markup = String.Format (
 			    "<b>{0}</b>\n    {1}",
 			    Translations.GetString ("Version"),
