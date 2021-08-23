@@ -41,32 +41,14 @@ namespace Pinta
             this.Document = document;
             this.canvas_window = canvasWindow;
 
-            // TODO-GTK3 (docking)
-#if false
-            document.IsDirtyChanged += (o, e) => IsDirty = document.IsDirty;
-#endif
+            document.IsDirtyChanged += (o, e) => LabelChanged?.Invoke (this, EventArgs.Empty);
             document.Renamed += (o, e) => { LabelChanged?.Invoke(this, EventArgs.Empty); };
         }
 
         public event EventHandler? LabelChanged;
 
-        public string Label
-        {
-            get { return Document.Filename; }
-            set { Document.Filename = value; }
-        }
+        public string Label => Document.Filename + (Document.IsDirty ? "*" : string.Empty);
 
         public Gtk.Widget Widget { get { return canvas_window; } }
-
-        // TODO-GTK3 (docking)
-#if false
-        public bool IsDirty {
-            get { return Document.IsDirty; }
-            set {
-                if (DirtyChanged != null)
-                    DirtyChanged (this, EventArgs.Empty);
-            }
-        }
-#endif
     }
 }
