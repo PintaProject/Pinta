@@ -46,7 +46,7 @@ namespace Pinta.Core
 		}
 
 		public bool CanRedo => Pointer < history.Count - 1;
-		public bool CanUndo => Pointer >= 0;
+		public bool CanUndo => Pointer > 0;
 
 		public BaseHistoryItem? Current {
 			get {
