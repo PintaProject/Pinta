@@ -95,6 +95,9 @@ namespace Pinta.Core
 
 			app.AddAccelAction(Properties, "F4");
 			prop_section.AppendItem(Properties.CreateMenuItem());
+
+			app.AddAction (MoveLayerDown);
+			app.AddAction (MoveLayerUp);
 		}
 
 		public void CreateLayerWindowToolBar (Gtk.Toolbar toolbar)
