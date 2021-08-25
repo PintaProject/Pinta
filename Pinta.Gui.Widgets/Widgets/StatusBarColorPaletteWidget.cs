@@ -43,7 +43,7 @@ namespace Pinta.Gui.Widgets
 
 		const int PALETTE_ROWS = 2;
 		const int SWATCH_SIZE = 19;
-		const int WIDGET_HEIGHT = 35;
+		const int WIDGET_HEIGHT = 42;
 		const int PALETTE_MARGIN = 10;
 
 		private readonly Gdk.Pixbuf swap_icon;
