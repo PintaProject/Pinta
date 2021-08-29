@@ -35,7 +35,7 @@ namespace Pinta.Effects
 
 		public override string EffectMenuCategory
 		{
-			get { return Catalog.GetString ("Distort"); }
+			get { return Catalog.GetString ("_Distort"); }
 		}
 
 		public PolarInversionEffect ()

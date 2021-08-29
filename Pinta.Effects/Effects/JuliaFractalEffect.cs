@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Render"); }
+			get { return Catalog.GetString ("_Render"); }
 		}
 
 		public JuliaFractalData Data { get { return EffectData as JuliaFractalData; } }

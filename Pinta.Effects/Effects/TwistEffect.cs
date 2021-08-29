@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Distort"); }
+			get { return Catalog.GetString ("_Distort"); }
 		}
 
 		public TwistData Data { get { return EffectData as TwistData; } }

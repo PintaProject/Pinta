@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Catalog.GetString ("_Photo"); }
 		}
 
 		public RedEyeRemoveData Data { get { return EffectData as RedEyeRemoveData; } }

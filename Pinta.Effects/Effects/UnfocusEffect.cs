@@ -32,7 +32,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Blurs"); }
+			get { return Catalog.GetString ("_Blurs"); }
 		}
 
 		public UnfocusData Data { get { return EffectData as UnfocusData; } }

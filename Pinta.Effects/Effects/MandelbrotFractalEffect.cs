@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Render"); }
+			get { return Catalog.GetString ("_Render"); }
 		}
 
 		public MandelbrotFractalData Data { get { return EffectData as MandelbrotFractalData; } }

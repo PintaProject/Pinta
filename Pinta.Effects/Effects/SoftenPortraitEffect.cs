@@ -63,7 +63,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Catalog.GetString ("_Photo"); }
 		}
 
 		public SoftenPortraitData Data { get { return EffectData as SoftenPortraitData; } }

@@ -37,7 +37,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Artistic"); }
+			get { return Catalog.GetString ("_Artistic"); }
 		}
 
 		public PencilSketchData Data { get { return EffectData as PencilSketchData; } }

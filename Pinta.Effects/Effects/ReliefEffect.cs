@@ -29,7 +29,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Stylize"); }
+			get { return Catalog.GetString ("_Stylize"); }
 		}
 
 		public override bool LaunchConfiguration () {

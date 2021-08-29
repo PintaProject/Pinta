@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Noise"); }
+			get { return Catalog.GetString ("_Noise"); }
 		}
 
 		public MedianData Data { get { return EffectData as MedianData; } }
