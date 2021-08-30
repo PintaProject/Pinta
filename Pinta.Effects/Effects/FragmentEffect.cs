@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Fragment"); }
+			get { return Catalog.GetString ("_Fragment"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Blurs"); }
+			get { return Catalog.GetString ("_Blurs"); }
 		}
 
 		public FragmentData Data { get { return EffectData as FragmentData; } }

@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Radial Blur"); }
+			get { return Catalog.GetString ("_Radial Blur"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Blurs"); }
+			get { return Catalog.GetString ("_Blurs"); }
 		}
 
 		public RadialBlurData Data { get { return EffectData as RadialBlurData; } }

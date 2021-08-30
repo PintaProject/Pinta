@@ -25,7 +25,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Red Eye Removal"); }
+			get { return Catalog.GetString ("_Red Eye Removal"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Catalog.GetString ("_Photo"); }
 		}
 
 		public RedEyeRemoveData Data { get { return EffectData as RedEyeRemoveData; } }

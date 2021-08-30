@@ -343,7 +343,7 @@ namespace Pinta
 			window_menu.Submenu = new Menu ();
 			main_menu.Append (window_menu);
 
-			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Tool Windows"), null, null);
+			Gtk.Action pads = new Gtk.Action ("pads", Mono.Unix.Catalog.GetString ("Tool _Windows"), null, null);
 			view_menu.Submenu = new Menu ();
 			show_pad = (Menu)((Menu)(view_menu.Submenu)).AppendItem (pads.CreateSubMenuItem ()).Submenu;
 

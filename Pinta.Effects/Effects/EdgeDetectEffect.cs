@@ -25,7 +25,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Edge Detect"); }
+			get { return Catalog.GetString ("Ed_ge Detect"); }
 		}
 
 		public override bool IsConfigurable {
@@ -33,7 +33,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Stylize"); }
+			get { return Catalog.GetString ("_Stylize"); }
 		}
 
 		public EdgeDetectData Data { get { return EffectData as EdgeDetectData; } }

@@ -24,7 +24,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Unfocus"); }
+			get { return Catalog.GetString ("_Unfocus"); }
 		}
 
 		public override bool IsConfigurable {
@@ -32,7 +32,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Blurs"); }
+			get { return Catalog.GetString ("_Blurs"); }
 		}
 
 		public UnfocusData Data { get { return EffectData as UnfocusData; } }

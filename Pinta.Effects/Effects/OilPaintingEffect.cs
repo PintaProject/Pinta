@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Oil Painting"); }
+			get { return Catalog.GetString ("_Oil Painting"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Artistic"); }
+			get { return Catalog.GetString ("_Artistic"); }
 		}
 
 		public OilPaintingData Data { get { return EffectData as OilPaintingData; } }

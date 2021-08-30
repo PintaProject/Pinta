@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Mono.Unix.Catalog.GetString ("Auto Level"); }
+			get { return Mono.Unix.Catalog.GetString ("_Auto Level"); }
 		}
 
 		public override Gdk.Key AdjustmentMenuKey {

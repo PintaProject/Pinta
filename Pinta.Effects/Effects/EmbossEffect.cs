@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Emboss"); }
+			get { return Catalog.GetString ("_Emboss"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Stylize"); }
+			get { return Catalog.GetString ("_Stylize"); }
 		}
 
 		public EmbossData Data {

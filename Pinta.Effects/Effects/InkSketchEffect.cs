@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Ink Sketch"); }
+			get { return Catalog.GetString ("_Ink Sketch"); }
 		}
 
 		public override bool IsConfigurable {
@@ -38,7 +38,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Artistic"); }
+			get { return Catalog.GetString ("_Artistic"); }
 		}
 
 		public InkSketchData Data { get { return EffectData as InkSketchData; } }

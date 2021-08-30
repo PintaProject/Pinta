@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-01 18:12-0500\n"
+"POT-Creation-Date: 2021-08-30 21:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,244 +47,255 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
-msgid "Add-in Manager"
+msgid "_Add-in Manager"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
-msgid "Undo"
+msgid "_Undo"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
-msgid "Redo"
+msgid "_Redo"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
-#: ../Pinta.Core/Actions/EditActions.cs:229
-msgid "Cut"
+msgid "C_ut"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
-msgid "Copy"
+msgid "_Copy"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
-msgid "Copy Merged"
+msgid "C_opy Merged"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
-#: ../Pinta.Core/Classes/Document.cs:780
-#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
-msgid "Paste"
+msgid "_Paste"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
-#: ../Pinta.Core/Classes/Document.cs:776
-msgid "Paste Into New Layer"
+msgid "Paste Into New _Layer"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
-msgid "Paste Into New Image"
+msgid "P_aste Into New Image"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:231
-msgid "Erase Selection"
+msgid "_Erase Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:191
-msgid "Fill Selection"
+msgid "_Fill Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta.Core/Actions/EditActions.cs:421
-msgid "Invert Selection"
+msgid "_Invert Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:200
-msgid "Select All"
+msgid "_Select All"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
-msgid "Deselect All"
+msgid "_Deselect All"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:83
 #: ../Pinta.Core/Actions/FileActions.cs:56
-msgid "Open..."
+msgid "_Open..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:66
-msgid "Save As..."
+msgid "_Save As..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
-msgid "Reset to Default"
+msgid "_Reset to Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:86
-msgid "Set Number of Colors"
+msgid "Set _Number of Colors"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:127 ../Pinta/Pads/ColorPalettePad.cs:42
-#: ../Pinta/Pads/ColorPalettePad.cs:49
-msgid "Palette"
+#: ../Pinta.Core/Actions/EditActions.cs:127
+msgid "Pa_lette"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:191
+msgid "Fill Selection"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:200
+msgid "Select All"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:229
+msgid "Cut"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:231
+msgid "Erase Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:240
 msgid "Deselect"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:336
+#: ../Pinta.Core/Actions/EditActions.cs:337
 msgid "Open Palette File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:348
+#: ../Pinta.Core/Actions/EditActions.cs:349
 msgid "Palette files"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:352
+#: ../Pinta.Core/Actions/EditActions.cs:353
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:67
 msgid "All files"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:373
+#: ../Pinta.Core/Actions/EditActions.cs:374
 msgid "Save Palette File"
 msgstr ""
 
+#: ../Pinta.Core/Actions/EditActions.cs:422
+msgid "Invert Selection"
+msgstr ""
+
 #: ../Pinta.Core/Actions/FileActions.cs:54
-msgid "New..."
+msgid "_New..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:55
-msgid "New Screenshot..."
+msgid "New Screensho_t..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
-msgid "Open Recent"
+msgid "Open _Recent"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:64
-#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
-msgid "Close"
-msgstr ""
-
-#: ../Pinta.Core/Actions/FileActions.cs:65
-msgid "Save"
+#: ../Pinta.Core/Actions/FileActions.cs:66
+msgid "_Close"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
-msgid "Print"
+msgid "_Save"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:68
-msgid "Quit"
+msgid "Save _As..."
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:69
+msgid "_Print"
 msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:70
+msgid "_Quit"
+msgstr ""
+
+#: ../Pinta.Core/Actions/FileActions.cs:72
 msgid "New"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:71
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:52
-msgid "Contents"
+msgid "_Contents"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
-msgid "Pinta Website"
+msgid "Pinta _Website"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:54
-msgid "File a Bug"
+msgid "File a _Bug"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:55
-msgid "Translate This Application"
+msgid "_Translate This Application"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:56 ../Pinta/MainWindow.cs:362
-msgid "About"
+#: ../Pinta.Core/Actions/HelpActions.cs:56
+msgid "_About"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
-#: ../Pinta.Core/Actions/ImageActions.cs:291
-msgid "Crop to Selection"
+msgid "_Crop to Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:61
-msgid "Auto Crop"
+msgid "_Auto Crop"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:62
-msgid "Resize Image..."
+msgid "_Resize Image..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
-msgid "Resize Canvas..."
+msgid "Resi_ze Canvas..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:64
 #: ../Pinta.Core/Actions/LayerActions.cs:70
-msgid "Flip Horizontal"
+msgid "Flip _Horizontal"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:65
 #: ../Pinta.Core/Actions/LayerActions.cs:71
-msgid "Flip Vertical"
+msgid "Flip _Vertical"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:66
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
-msgid "Rotate 90° Clockwise"
+msgid "Rotate _90° Clockwise"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:67
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
-msgid "Rotate 90° Counter-Clockwise"
+msgid "Rotate 9_0° Counter-Clockwise"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:68
-#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
-msgid "Rotate 180°"
+msgid "Rotate _180°"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:69
+msgid "_Flatten"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ImageActions.cs:146
 msgid "Flatten"
 msgstr ""
 
+#: ../Pinta.Core/Actions/ImageActions.cs:284
+msgid "Crop to Selection"
+msgstr ""
+
 #: ../Pinta.Core/Actions/LayerActions.cs:65
-#: ../Pinta.Core/Actions/LayerActions.cs:292
-#: ../Pinta.Core/Classes/Document.cs:839
-msgid "Add New Layer"
+msgid "Add _New Layer"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:66
-#: ../Pinta.Core/Actions/LayerActions.cs:275
-msgid "Delete Layer"
+msgid "_Delete Layer"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:266
-msgid "Duplicate Layer"
+msgid "Du_plicate Layer"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:244
-msgid "Merge Layer Down"
+msgid "_Merge Layer Down"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
-msgid "Import from File..."
+msgid "_Import from File..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:72
-msgid "Rotate / Zoom Layer..."
+msgid "_Rotate / Zoom Layer..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:73
@@ -293,12 +304,11 @@ msgid "Move Layer Up"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:74
-#: ../Pinta.Core/Actions/LayerActions.cs:230
-msgid "Move Layer Down"
+msgid "Mo_ve Layer Down"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
-msgid "Layer Properties..."
+msgid "Layer _Properties..."
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:157
@@ -310,56 +320,77 @@ msgstr ""
 msgid "Import From File"
 msgstr ""
 
+#: ../Pinta.Core/Actions/LayerActions.cs:230
+msgid "Move Layer Down"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:244
+msgid "Merge Layer Down"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:266
+msgid "Duplicate Layer"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:275
+msgid "Delete Layer"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:292
+#: ../Pinta.Core/Classes/Document.cs:846
+msgid "Add New Layer"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:77
-msgid "Zoom In"
+msgid "Zoom _In"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
-msgid "Zoom Out"
+msgid "Zoom _Out"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
-msgid "Best Fit"
+msgid "_Best Fit"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
-msgid "Zoom to Selection"
+msgid "_Zoom to Selection"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:81
-msgid "Normal Size"
+msgid "_Normal Size"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:82
-msgid "Toolbar"
+msgid "_Toolbar"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
-msgid "Image Tabs"
+msgid "I_mage Tabs"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:84
-msgid "Pixel Grid"
+msgid "_Pixel Grid"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:85
-msgid "Rulers"
+msgid "_Rulers"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
-msgid "Pixels"
+msgid "_Pixels"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:87
-msgid "Inches"
+msgid "_Inches"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:88
-msgid "Centimeters"
+msgid "_Centimeters"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:89
-msgid "Fullscreen"
+msgid "_Fullscreen"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:115
@@ -370,7 +401,7 @@ msgid "Window"
 msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:163
-msgid "Ruler Units"
+msgid "Ruler _Units"
 msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
@@ -381,82 +412,91 @@ msgid "{0}%"
 msgstr ""
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
-msgid "Save All"
+msgid "_Save All"
 msgstr ""
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
-msgid "Close All"
+msgid "_Close All"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:261
+#: ../Pinta.Core/Classes/BaseTool.cs:262
 msgid "Tool"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:333
+#: ../Pinta.Core/Classes/BaseTool.cs:334
 #: ../Pinta.Gui.Widgets/Widgets/ColorPaletteWidget.cs:316
 msgid "Shortcut key"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:445
+#: ../Pinta.Core/Classes/BaseTool.cs:446
 msgid "Normal Blending"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:446
+#: ../Pinta.Core/Classes/BaseTool.cs:447
 msgid "Overwrite"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:460
+#: ../Pinta.Core/Classes/BaseTool.cs:461
 msgid "Antialiasing On"
 msgstr ""
 
-#: ../Pinta.Core/Classes/BaseTool.cs:461
+#: ../Pinta.Core/Classes/BaseTool.cs:462
 msgid "Antialiasing Off"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:291 ../Pinta.Core/Classes/Document.cs:296
+#: ../Pinta.Core/Classes/Document.cs:296 ../Pinta.Core/Classes/Document.cs:301
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:135
 msgid "Layer"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:378
+#: ../Pinta.Core/Classes/Document.cs:384
 msgid "copy"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:654
+#: ../Pinta.Core/Classes/Document.cs:661
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:56
 msgid "Resize Canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:855
+#: ../Pinta.Core/Classes/Document.cs:783
+msgid "Paste Into New Layer"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:787
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:43
+msgid "Paste"
+msgstr ""
+
+#: ../Pinta.Core/Classes/Document.cs:862
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:65
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:65
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:43
 msgid "Move Selected Pixels"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:871
+#: ../Pinta.Core/Classes/Document.cs:878
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:872
+#: ../Pinta.Core/Classes/Document.cs:879
 msgid ""
 "The image being pasted is larger than the canvas size. What would you like "
 "to do?"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:876
+#: ../Pinta.Core/Classes/Document.cs:883
 msgid "Expand canvas"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:877
+#: ../Pinta.Core/Classes/Document.cs:884
 msgid "Don't change canvas size"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:890
+#: ../Pinta.Core/Classes/Document.cs:897
 msgid "Image cannot be pasted"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:891
+#: ../Pinta.Core/Classes/Document.cs:898
 msgid "The clipboard does not contain an image."
 msgstr ""
 
@@ -568,12 +608,24 @@ msgstr ""
 msgid "Finish Pixels"
 msgstr ""
 
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:50
+msgid "Rotate 180°"
+msgstr ""
+
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:54
 msgid "Flip Image Horizontal"
 msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:58
 msgid "Flip Image Vertical"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:62
+msgid "Rotate 90° Clockwise"
+msgstr ""
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:66
+msgid "Rotate 90° Counter-Clockwise"
 msgstr ""
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:79
@@ -666,16 +718,20 @@ msgstr ""
 msgid "Auto Hide"
 msgstr ""
 
+#: ../Pinta.Docking/DockLibrary/DockItemTitleTab.cs:175
+msgid "Close"
+msgstr ""
+
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:25
-msgid "Auto Level"
+msgid "_Auto Level"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:25
-msgid "Black and White"
+msgid "Black and _White"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
-msgid "Brightness / Contrast"
+msgid "_Brightness / Contrast"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
@@ -689,12 +745,11 @@ msgid "Contrast"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
-msgid "Curves"
+msgid "_Curves"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:26
-msgid "Hue / Saturation"
+msgid "_Hue / Saturation"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:73
@@ -702,21 +757,23 @@ msgid "Lightness"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:25
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
-msgid "Invert Colors"
+msgid "_Invert Colors"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
-msgid "Levels"
+msgid "_Levels"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
-msgid "Posterize"
+msgid "_Posterize"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:26
-msgid "Sepia"
+msgid "_Sepia"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
+msgid "Curves"
 msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:430
@@ -755,6 +812,10 @@ msgstr ""
 msgid "Levels Adjustment"
 msgstr ""
 
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:56
+msgid "Posterize"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:109
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:434
 msgid "Red"
@@ -770,13 +831,13 @@ msgid "Linked"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
-msgid "Add Noise"
+msgid "_Add Noise"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:37
 #: ../Pinta.Effects/Effects/MedianEffect.cs:36
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:36
-msgid "Noise"
+msgid "_Noise"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
@@ -794,7 +855,7 @@ msgid "Coverage"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:25
-msgid "Bulge"
+msgid "_Bulge"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:33
@@ -803,7 +864,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:38
 #: ../Pinta.Effects/Effects/TileEffect.cs:33
 #: ../Pinta.Effects/Effects/TwistEffect.cs:33
-msgid "Distort"
+msgid "_Distort"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:101
@@ -821,13 +882,13 @@ msgid "Offset"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:30
-msgid "Clouds"
+msgid "_Clouds"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
-msgid "Render"
+msgid "_Render"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:205
@@ -843,14 +904,14 @@ msgid "Seed"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:28
-msgid "Edge Detect"
+msgid "Ed_ge Detect"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:36
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:36
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:32
-msgid "Stylize"
+msgid "_Stylize"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:88
@@ -866,11 +927,11 @@ msgid "Angle"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:25
-msgid "Emboss"
+msgid "_Emboss"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:25
-msgid "Fragment"
+msgid "_Fragment"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
@@ -879,7 +940,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:33
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:35
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:33
-msgid "Blurs"
+msgid "_Blurs"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:111
@@ -897,11 +958,11 @@ msgid "Rotation"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:25
-msgid "Frosted Glass"
+msgid "_Frosted Glass"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
-msgid "Gaussian Blur"
+msgid "_Gaussian Blur"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:264
@@ -914,24 +975,24 @@ msgid "Radius"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
-msgid "Glow"
+msgid "_Glow"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:38
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:36
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:33
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:66
-msgid "Photo"
+msgid "_Photo"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
-msgid "Ink Sketch"
+msgid "_Ink Sketch"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:40
-msgid "Artistic"
+msgid "_Artistic"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:165
@@ -943,7 +1004,7 @@ msgid "Coloring"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:25
-msgid "Julia Fractal"
+msgid "_Julia Fractal"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:131
@@ -966,11 +1027,15 @@ msgid "Zoom"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:25
-msgid "Mandelbrot Fractal"
+msgid "_Mandelbrot Fractal"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:167
+msgid "Invert Colors"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
-msgid "Median"
+msgid "_Median"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:73
@@ -978,7 +1043,7 @@ msgid "Percentile"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:25
-msgid "Motion Blur"
+msgid "_Motion Blur"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:117
@@ -986,7 +1051,7 @@ msgid "Centered"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:25
-msgid "Oil Painting"
+msgid "_Oil Painting"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:176
@@ -998,8 +1063,7 @@ msgid "Coarseness"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:28
-#: ../Pinta.Tools/Tools/TextTool.cs:250
-msgid "Outline"
+msgid "_Outline"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEffect.cs:142
@@ -1007,7 +1071,7 @@ msgid "Thickness"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:32
-msgid "Pencil Sketch"
+msgid "_Pencil Sketch"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:99
@@ -1019,7 +1083,7 @@ msgid "Color Range"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:25
-msgid "Pixelate"
+msgid "Pi_xelate"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:119
@@ -1027,11 +1091,11 @@ msgid "Cell Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:25
-msgid "Polar Inversion"
+msgid "_Polar Inversion"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:25
-msgid "Radial Blur"
+msgid "_Radial Blur"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
@@ -1041,7 +1105,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
-msgid "Red Eye Removal"
+msgid "_Red Eye Removal"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:74
@@ -1058,7 +1122,7 @@ msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
-msgid "Reduce Noise"
+msgid "_Reduce Noise"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:97
@@ -1066,15 +1130,15 @@ msgid "Strength"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:44
-msgid "Relief"
+msgid "_Relief"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:25
-msgid "Sharpen"
+msgid "_Sharpen"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-msgid "Soften Portrait"
+msgid "Soften _Portrait"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:119
@@ -1090,7 +1154,7 @@ msgid "Warmth"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:25
-msgid "Tile Reflection"
+msgid "Tile _Reflection"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:140
@@ -1098,7 +1162,7 @@ msgid "Tile Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
-msgid "Twist"
+msgid "_Twist"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:133
@@ -1106,7 +1170,7 @@ msgid "Antialias"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
-msgid "Unfocus"
+msgid "_Unfocus"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:19
@@ -1143,7 +1207,7 @@ msgid "Center Offset"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:25
-msgid "Zoom Blur"
+msgid "_Zoom Blur"
 msgstr ""
 
 #: ../Pinta.Effects/gtk-gui/Pinta.Effects.LevelsDialog.cs:86
@@ -1703,6 +1767,10 @@ msgstr ""
 msgid "Normal and Outline"
 msgstr ""
 
+#: ../Pinta.Tools/Tools/TextTool.cs:250
+msgid "Outline"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/TextTool.cs:251
 msgid "Fill Background"
 msgstr ""
@@ -1784,12 +1852,12 @@ msgstr ""
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:251
 #, csharp-format
 msgid "A file named \"{0}\" already exists. Do you want to replace it?"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:248
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:252
 #, csharp-format
 msgid ""
 "The file already exists in \"{1}\". Replacing it will overwrite its contents."
@@ -1865,24 +1933,24 @@ msgstr ""
 msgid "Version Info"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:42
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:50
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:43
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
 msgid "Version"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "License"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:51
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:52
 msgid "Released under the MIT X11 License."
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "Copyright"
 msgstr ""
 
-#: ../Pinta/Dialogs/AboutPintaTabPage.cs:58
+#: ../Pinta/Dialogs/AboutPintaTabPage.cs:59
 msgid "by Pinta contributors"
 msgstr ""
 
@@ -1939,23 +2007,23 @@ msgid "Preset:"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:211
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:334
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:331
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:169
 msgid "Width:"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:218
 #: ../Pinta/Dialogs/NewImageDialog.cs:235
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:336
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:342
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:172
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:339
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "pixels"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:228
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:340
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:176
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:337
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:175
 msgid "Height:"
 msgstr ""
 
@@ -1987,31 +2055,35 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:313
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:311
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:149
-msgid "By percentage:"
-msgstr ""
-
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:314
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
 msgid "By absolute size:"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:320
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:312
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:150
+msgid "By percentage:"
+msgstr ""
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:318
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:156
 msgid "Maintain aspect ratio"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:348
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:346
 msgid "Anchor:"
 msgstr ""
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:44
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:47
 msgid "Title"
 msgstr ""
 
-#: ../Pinta/Dialogs/VersionInformationTabPage.cs:53
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:56
 msgid "Path"
+msgstr ""
+
+#: ../Pinta/Dialogs/VersionInformationTabPage.cs:72
+msgid "Copy Version Info"
 msgstr ""
 
 #: ../Pinta/Main.cs:57
@@ -2034,59 +2106,63 @@ msgstr ""
 msgid "Options: "
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:324
+#: ../Pinta/MainWindow.cs:330
 msgid "_File"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:325
+#: ../Pinta/MainWindow.cs:331
 msgid "_Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:327
+#: ../Pinta/MainWindow.cs:333
 msgid "_View"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:330
+#: ../Pinta/MainWindow.cs:336
 msgid "_Image"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:331
+#: ../Pinta/MainWindow.cs:337
 msgid "_Layers"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:338
 msgid "_Adjustments"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:333
+#: ../Pinta/MainWindow.cs:339
 msgid "Effe_cts"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:334
+#: ../Pinta/MainWindow.cs:340
 msgid "A_dd-ins"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:342
 msgid "_Window"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:340
-msgid "Tool Windows"
+#: ../Pinta/MainWindow.cs:346
+msgid "Tool _Windows"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:344
+#: ../Pinta/MainWindow.cs:350
 msgid "_Help"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:566
+#: ../Pinta/MainWindow.cs:368
+msgid "About"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:572
 msgid "Downloading Image"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:584
+#: ../Pinta/MainWindow.cs:590
 msgid "Download failed"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:585
+#: ../Pinta/MainWindow.cs:591
 #, csharp-format
 msgid ""
 "Unable to download image from {0}.\n"
@@ -2099,6 +2175,10 @@ msgstr ""
 
 #: ../Pinta/Pads/CanvasPad.cs:54
 msgid "Canvas"
+msgstr ""
+
+#: ../Pinta/Pads/ColorPalettePad.cs:42 ../Pinta/Pads/ColorPalettePad.cs:49
+msgid "Palette"
 msgstr ""
 
 #: ../Pinta/Pads/HistoryPad.cs:43 ../Pinta/Pads/HistoryPad.cs:52

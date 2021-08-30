@@ -55,7 +55,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Soften Portrait"); }
+			get { return Catalog.GetString ("Soften _Portrait"); }
 		}
 
 		public override bool IsConfigurable {
@@ -63,7 +63,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Catalog.GetString ("_Photo"); }
 		}
 
 		public SoftenPortraitData Data { get { return EffectData as SoftenPortraitData; } }

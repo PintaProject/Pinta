@@ -51,10 +51,10 @@ namespace Pinta.Core
 		
 		public FileActions ()
 		{
-			New = new Gtk.Action ("New", Catalog.GetString ("New..."), null, Stock.New);
-			NewScreenshot = new Gtk.Action ("NewScreenshot", Catalog.GetString ("New Screenshot..."), null, Stock.Fullscreen);
-			Open = new Gtk.Action ("Open", Catalog.GetString ("Open..."), null, Stock.Open);
-			OpenRecent = new RecentAction ("OpenRecent", Catalog.GetString ("Open Recent"), null, Stock.Open, RecentManager.Default);
+			New = new Gtk.Action ("New", Catalog.GetString ("_New..."), null, Stock.New);
+			NewScreenshot = new Gtk.Action ("NewScreenshot", Catalog.GetString ("New Screensho_t..."), null, Stock.Fullscreen);
+			Open = new Gtk.Action ("Open", Catalog.GetString ("_Open..."), null, Stock.Open);
+			OpenRecent = new RecentAction ("OpenRecent", Catalog.GetString ("Open _Recent"), null, Stock.Open, RecentManager.Default);
 			// Show tooltip on selected file displaying the full path
 			OpenRecent.ShowTips = true;
 			
@@ -63,11 +63,11 @@ namespace Pinta.Core
 			
 			(OpenRecent as RecentAction).AddFilter (recentFilter);
 			
-			Close = new Gtk.Action ("Close", Catalog.GetString ("Close"), null, Stock.Close);
-			Save = new Gtk.Action ("Save", Catalog.GetString ("Save"), null, Stock.Save);
-			SaveAs = new Gtk.Action ("SaveAs", Catalog.GetString ("Save As..."), null, Stock.SaveAs);
-			Print = new Gtk.Action ("Print", Catalog.GetString ("Print"), null, Stock.Print);
-			Exit = new Gtk.Action ("Exit", Catalog.GetString ("Quit"), null, Stock.Quit);
+			Close = new Gtk.Action ("Close", Catalog.GetString ("_Close"), null, Stock.Close);
+			Save = new Gtk.Action ("Save", Catalog.GetString ("_Save"), null, Stock.Save);
+			SaveAs = new Gtk.Action ("SaveAs", Catalog.GetString ("Save _As..."), null, Stock.SaveAs);
+			Print = new Gtk.Action ("Print", Catalog.GetString ("_Print"), null, Stock.Print);
+			Exit = new Gtk.Action ("Exit", Catalog.GetString ("_Quit"), null, Stock.Quit);
 
 			New.ShortLabel = Catalog.GetString ("New");
 			Open.ShortLabel = Catalog.GetString ("Open");

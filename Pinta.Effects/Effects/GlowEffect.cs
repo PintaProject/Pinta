@@ -27,7 +27,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Glow"); }
+			get { return Catalog.GetString ("_Glow"); }
 		}
 
 		public override bool IsConfigurable {
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Photo"); }
+			get { return Catalog.GetString ("_Photo"); }
 		}
 
 		public GlowData Data { get { return EffectData as GlowData; } }

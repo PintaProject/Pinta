@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Frosted Glass"); }
+			get { return Catalog.GetString ("_Frosted Glass"); }
 		}
 
 		public override bool IsConfigurable {
@@ -30,7 +30,7 @@ namespace Pinta.Effects
 		}
 
 		public override string EffectMenuCategory {
-			get { return Catalog.GetString ("Distort"); }
+			get { return Catalog.GetString ("_Distort"); }
 		}
 
 		public FrostedGlassData Data {

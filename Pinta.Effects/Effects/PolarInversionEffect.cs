@@ -22,7 +22,7 @@ namespace Pinta.Effects
 		}
 
 		public override string Name {
-			get { return Catalog.GetString ("Polar Inversion"); }
+			get { return Catalog.GetString ("_Polar Inversion"); }
 		}
 
 		public override bool IsConfigurable {
@@ -35,7 +35,7 @@ namespace Pinta.Effects
 
 		public override string EffectMenuCategory
 		{
-			get { return Catalog.GetString ("Distort"); }
+			get { return Catalog.GetString ("_Distort"); }
 		}
 
 		public PolarInversionEffect ()
